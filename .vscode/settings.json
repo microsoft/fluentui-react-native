@@ -1,0 +1,22 @@
+{
+  "editor.formatOnSave": true,
+  "editor.trimAutoWhitespace": true,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "files.trimTrailingWhitespace": true,
+  "json.format.enable": false,
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "[handlebars]": {
+    "editor.formatOnSave": false
+  },
+  "files.associations": {
+    "**/package.json.hbs": "json",
+    "**/*.json.hbs": "jsonc",
+    "**/README.md.hbs": "markdown"
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/lib": true
+  }
+}

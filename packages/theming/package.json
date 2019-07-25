@@ -1,0 +1,31 @@
+{
+  "name": "@uifabric/theming",
+  "version": "0.1.1",
+  "description": "Theming Library",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/just"
+  },
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc -w --preserveWatchOutput",
+    "test": "jest",
+    "start-test": "jest --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/es6-collections": "^0.5.29",
+    "@types/es6-promise": "0.0.32",
+    "@types/node": "^10.3.5",
+    "@types/jest": "^19.2.2",
+    "@types/react": "16.8.15",
+    "@types/react-native": "~0.57.51"
+  },
+  "peerDependencies": {
+    "react": "16.8.3"
+  }
+}
