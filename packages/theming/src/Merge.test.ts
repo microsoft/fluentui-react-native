@@ -134,13 +134,16 @@ const singleWithChanges = {
 
 const _colorKey = 'color';
 
-const changeMeHandler = (key: string, options: IMergeOptions, ...objs: (object | undefined)[]) => {
+const changeMeHandler = (_key: string, _options: IMergeOptions, ...objs: (object | undefined)[]) => {
   // written always assuming only one entry
   if (objs.length === 1) {
-    if (objs[0][_colorKey]) {
-      return { ...objs[0], color: 'changed' };
+    const firstObj = objs[0]!;
+
+    if (firstObj[_colorKey]) {
+      return { ...firstObj, color: 'changed' };
     }
-    return objs[0];
+
+    return firstObj;
   }
   return undefined;
 };

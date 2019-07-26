@@ -1,4 +1,4 @@
-import { ITheme, IPartialTheme } from '@office-iss/theming';
+import { ITheme, IPartialTheme } from '@uifabric/theming';
 
 export type INativeTheme = ITheme;
 

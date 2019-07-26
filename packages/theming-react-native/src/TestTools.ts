@@ -1,4 +1,4 @@
-import { getStockWebPalette, createThemeRegistry } from '@office-iss/theming';
+import { getStockWebPalette, createThemeRegistry } from '@uifabric/theming';
 import { setThemeRegistry } from './Global';
 import { INativeThemeDefinition, INativeTheme } from './INativeTheme';
 

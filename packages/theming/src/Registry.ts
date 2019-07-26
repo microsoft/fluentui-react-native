@@ -129,7 +129,7 @@ class ThemeRegistry implements IThemeRegistry {
   private _getTheme(entryName: string): ITheme {
     const entry = this._getEntry(entryName);
     if (!entry.resolved) {
-      const parentTheme = this._getTheme(entry.parentEntryName);
+      const parentTheme = this._getTheme(entry.parentEntryName!);
       const definition = this._getThemeDefinitionObject(parentTheme, entry.definition);
       entry.resolved = resolvePartialTheme(parentTheme, definition);
     }
@@ -147,6 +147,8 @@ class ThemeRegistry implements IThemeRegistry {
       }
       return definition;
     }
+
+    return {};
   }
 
   /**
@@ -160,7 +162,7 @@ class ThemeRegistry implements IThemeRegistry {
         return true;
       }
       const parentEntry = this.entries[parentEntryName];
-      parentEntryName = parentEntry ? parentEntry.parentEntryName : undefined;
+      parentEntryName = parentEntry ? parentEntry.parentEntryName! : '';
     }
     return false;
   }

@@ -1,4 +1,4 @@
-import { IThemeRegistry, createThemeRegistry, ProcessTheme, IThemeEventListener } from '@office-iss/theming';
+import { IThemeRegistry, createThemeRegistry, ProcessTheme, IThemeEventListener } from '@uifabric/theming';
 import { INativeThemeDefinition, INativeTheme } from './INativeTheme';
 import { getBaselinePlatformTheme } from './platform';
 import { initializePlatformModule } from './platform/PlatformModule';

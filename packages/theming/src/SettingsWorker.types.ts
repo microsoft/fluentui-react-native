@@ -21,7 +21,7 @@ export interface ISettingsWorker {
   /**
    * resolve any parent relationships, apply overrides, and finalize values for the target settings object
    */
-  resolveSettings: (theme: ITheme, target: IComponentSettings, overrides?: object) => IComponentSettings;
+  resolveSettings: (theme: ITheme, target: IComponentSettings, overrides?: string[]) => IComponentSettings;
 
   /**
    * run settings through the registered set of finalizers.  This will be called implicitly

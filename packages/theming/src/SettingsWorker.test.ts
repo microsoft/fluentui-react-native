@@ -59,14 +59,14 @@ const _styleKey = 'style';
 
 describe('Style tests', () => {
   test('create style for the base layer', () => {
-    const style = _worker.getSettings(theme, 'base').settings.root[_styleKey];
+    const style = _worker.getSettings(theme, 'base').settings.root![_styleKey];
     expect(style).toEqual({
       backgroundColor: '#ff0000'
     });
   });
 
   test('create style for the Text layer', () => {
-    const style = _worker.getSettings(theme, 'Text').settings.root[_styleKey];
+    const style = _worker.getSettings(theme, 'Text').settings.root![_styleKey];
     expect(style).toEqual({
       backgroundColor: '#ff0000',
       textColor: '#0b1621',
@@ -75,7 +75,7 @@ describe('Style tests', () => {
   });
 
   test('create style for the Text layer with a disabled override', () => {
-    const style = _worker.getSettings(theme, 'Text', { disabled: true }).settings.root[_styleKey];
+    const style = _worker.getSettings(theme, 'Text', { disabled: true }).settings.root![_styleKey];
     expect(style).toEqual({
       backgroundColor: '#ff0000',
       textColor: '#0b1621',

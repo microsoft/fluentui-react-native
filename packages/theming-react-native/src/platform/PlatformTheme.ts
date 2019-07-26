@@ -1,5 +1,5 @@
 import { INativeTheme } from '../INativeTheme';
-import { getStockWebPalette, ITypography } from '@office-iss/theming';
+import { getStockWebPalette, ITypography } from '@uifabric/theming';
 
 function _defaultTypography(): ITypography {
   return {

@@ -8,7 +8,7 @@ import {
   finalizeFontSize,
   finalizeFontWeight,
   finalizeColor
-} from '@office-iss/theming';
+} from '@uifabric/theming';
 import { INativeTheme } from './INativeTheme';
 
 // create a global style worker and add the finalizers for this theming system

@@ -26,7 +26,7 @@ export function createSettingsWorker(finalizers?: IStyleValueFinalizers): ISetti
      * layer is passed in instead of a name this will not cache, it will simply apply the resolution and
      * lookup process to that layer
      */
-    getSettings: (theme: ITheme, target: string | IComponentSettings, overrides?: string[]) => {
+    getSettings: (theme: ITheme, target: string | IComponentSettings, overrides?: object) => {
       return _getSettingsFromTheme(theme, target as string, _finalizers, overrides);
     },
 

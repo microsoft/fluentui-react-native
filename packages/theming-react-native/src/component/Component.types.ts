@@ -1,6 +1,6 @@
 import { INativeTheme } from '../INativeTheme';
 import { ISlotTypes, IResolvedSlotData, IComposable } from '../composable';
-import { IComponentSettings } from '@office-iss/theming';
+import { IComponentSettings } from '@uifabric/theming';
 
 /* tslint:disable no-any */
 

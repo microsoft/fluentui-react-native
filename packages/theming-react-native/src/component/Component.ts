@@ -2,7 +2,7 @@ import { IComponent, IRenderData } from './Component.types';
 import { INativeTheme } from '../INativeTheme';
 import { getThemeSettings, finalizeSettings } from '../Settings';
 import { IProcessResult, IResolvedSlot, IComposable, wrapSlots, renderSlot, IGenericProps, ISlotProps } from '../composable';
-import { mergeSettings } from '@office-iss/theming';
+import { mergeSettings } from '@uifabric/theming';
 
 /**
  * Get the cache for the given component from the theme, creating it if necessary
