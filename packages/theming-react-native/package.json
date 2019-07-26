@@ -28,7 +28,7 @@
     "typescript": "3.3.3"
   },
   "peerDependencies": {
-    "react-native": "0.59.0-microsoft.17",
+    "react-native": "0.59.0",
     "react": "16.8.3"
   }
 }
