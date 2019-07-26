@@ -49,6 +49,7 @@ export function useSlotProcessing(composable: IComposable, info: IProcessResult,
     }
     return slotResults;
   }
+  return undefined;
 }
 
 /**

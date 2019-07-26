@@ -1,15 +1,11 @@
-import { StyleProp } from 'react-native';
-import { ITheme } from './Theme.types';
-import { IPalette } from './Color.types';
-import { ITypography } from './Typography.types';
-import { flattenStyle, mergeAndFinalizeStyles, finalizeColor, finalizeFontFamily } from './Styles';
-import { IStyleValueFinalizers } from './Styles.types';
+import { flattenStyle, mergeAndFinalizeStyles } from './Styles';
+import { IFinalizeStyle, IStyleProp } from './Styles.types';
 
-const theme: ITheme = {
+const theme = {
   palette: {
     bodyBackground: '#ff0000',
     bodyText: '#000000'
-  } as IPalette,
+  },
   typography: {
     families: {
       primary: 'Arial'
@@ -20,14 +16,7 @@ const theme: ITheme = {
     weights: {
       medium: '500'
     }
-  } as ITypography,
-  settings: {}
-};
-
-const finalizers: IStyleValueFinalizers = {
-  backgroundColor: finalizeColor,
-  color: finalizeColor,
-  fontFamily: finalizeFontFamily
+  }
 };
 
 interface IFakeStyle {
@@ -37,7 +26,32 @@ interface IFakeStyle {
   borderWidth?: number;
 }
 
-type IFakeStyleProp = StyleProp<IFakeStyle>;
+const styleFinalizer: IFinalizeStyle = (target: IFakeStyle) => {
+  const newStyle: IFakeStyle = {};
+  if (target.backgroundColor) {
+    const newVal = theme.palette[target.backgroundColor];
+    if (newVal) {
+      newStyle.backgroundColor = newVal;
+    }
+  }
+
+  if (target.color) {
+    const newVal = theme.palette[target.color];
+    if (newVal) {
+      newStyle.color = newVal;
+    }
+  }
+
+  if (target.fontFamily) {
+    const newVal = theme.typography.families[target.fontFamily];
+    if (newVal) {
+      newStyle.fontFamily = newVal;
+    }
+  }
+  return newStyle;
+};
+
+type IFakeStyleProp = IStyleProp<IFakeStyle>;
 
 const s1: IFakeStyleProp = [
   { backgroundColor: 'blue' },
@@ -100,15 +114,15 @@ describe('Style flatten and merge tests', () => {
   });
 
   test('finalize single style', () => {
-    const final = mergeAndFinalizeStyles(theme, finalizers, s1);
+    const final = mergeAndFinalizeStyles(styleFinalizer, s1);
     expect(final).toEqual(s1flattenFinal);
 
-    const final2 = mergeAndFinalizeStyles(theme, finalizers, s2);
+    const final2 = mergeAndFinalizeStyles(styleFinalizer, s2);
     expect(final2).toEqual(s2Final);
   });
 
   test('merge and finalize style', () => {
-    const mergedAndFinal = mergeAndFinalizeStyles(theme, finalizers, s1, s2);
+    const mergedAndFinal = mergeAndFinalizeStyles(styleFinalizer, s1, s2);
     expect(mergedAndFinal).toEqual(sMergedFinal);
   });
 });

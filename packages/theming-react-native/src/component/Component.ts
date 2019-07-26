@@ -2,7 +2,7 @@ import { IComponent, IRenderData } from './Component.types';
 import { INativeTheme } from '../INativeTheme';
 import { getThemeSettings, finalizeSettings } from '../Settings';
 import { IProcessResult, IResolvedSlot, IComposable, wrapSlots, renderSlot, IGenericProps, ISlotProps } from '../composable';
-import { mergeSettings } from '@uifabric/theming';
+import { mergeSettings } from '@uifabric/theme-settings';
 
 /**
  * Get the cache for the given component from the theme, creating it if necessary
@@ -155,10 +155,10 @@ export function standardUsePrepareState(renderData: IRenderData): IRenderData {
 export function useProcessComponent<TComponent extends IComponent>(
   component: TComponent,
   userProps: IGenericProps,
-  theme: INativeTheme
+  theme: object
 ): IProcessResult {
   // set up the initial render data and call any hooks for the component
-  let renderData = standardPrepareRenderData(userProps, theme);
+  let renderData = standardPrepareRenderData(userProps, theme as INativeTheme);
   renderData = component.usePrepareState!(renderData);
 
   // query settings from the theme
@@ -193,7 +193,7 @@ export function renderComponent<TComponent extends IComponent>(component: TCompo
  */
 export function wrapComponent<TComponent extends IComponent>(component: TComponent): IComposable {
   return {
-    useProcessProps: (props: IGenericProps, theme: INativeTheme) => {
+    useProcessProps: (props: IGenericProps, theme: object) => {
       return useProcessComponent(component, props, theme);
     },
     render: (result: IResolvedSlot) => {

@@ -1,7 +1,6 @@
 import { IThemeRegistry, createThemeRegistry, ProcessTheme, IThemeEventListener } from '@uifabric/theming';
 import { INativeThemeDefinition, INativeTheme } from './INativeTheme';
 import { getBaselinePlatformTheme } from './platform';
-import { initializePlatformModule } from './platform/PlatformModule';
 
 let _registry: IThemeRegistry;
 
@@ -12,7 +11,6 @@ let _registry: IThemeRegistry;
 function getThemeRegistry(): IThemeRegistry {
   if (!_registry) {
     _registry = createThemeRegistry(getBaselinePlatformTheme());
-    initializePlatformModule();
   }
   return _registry;
 }

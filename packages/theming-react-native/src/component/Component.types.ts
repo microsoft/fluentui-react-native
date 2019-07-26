@@ -1,6 +1,6 @@
 import { INativeTheme } from '../INativeTheme';
 import { ISlotTypes, IResolvedSlotData, IComposable } from '../composable';
-import { IComponentSettings } from '@uifabric/theming';
+import { IComponentSettings } from '@uifabric/theme-settings';
 
 /* tslint:disable no-any */
 

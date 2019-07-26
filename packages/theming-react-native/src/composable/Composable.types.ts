@@ -9,11 +9,11 @@ export interface IGenericProps {
  */
 export type IProcessResult<TProps extends object = IGenericProps, TSlotProps = ISlotProps, TAdditional = object> = {
   props?: TProps;
-  slotProps?: ISlotProps;
+  slotProps?: TSlotProps;
 } & TAdditional;
 
 export interface IResolvedSlotData {
-  composable: IComposable;
+  composable?: IComposable;
   slots?: IResolvedSlots;
 }
 

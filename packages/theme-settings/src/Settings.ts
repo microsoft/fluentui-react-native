@@ -1,9 +1,7 @@
-import { IMergeOptions, immutableMerge } from './Merge';
-import { IComponentSettingsCollection, IComponentSettings, ISlotProps } from './Settings.types';
-import { StyleProp } from 'react-native';
+import { IMergeOptions, immutableMerge } from '@uifabric/immutable-merge';
+import { IComponentSettingsCollection, IComponentSettings, ISlotProps, IOverrideLookup } from './Settings.types';
 import { mergeAndFinalizeStyles } from './Styles';
-import { IStyleValueFinalizers } from './Styles.types';
-import { ITheme } from './Theme.types';
+import { IFinalizeStyle, IStyleProp } from './Styles.types';
 
 /**
  * helper function to switch to a collection merge pattern when _overrides are encountered
@@ -12,7 +10,7 @@ function _mergeCollection(_key: string, _options: IMergeOptions, ...objs: (objec
   return mergeSettingsCollection(...(objs as IComponentSettingsCollection[]));
 }
 
-function _mergeStyles(_key: string, _options: IMergeOptions, ...objs: (StyleProp<object>)[]): object | undefined {
+function _mergeStyles(_key: string, _options: IMergeOptions, ...objs: (IStyleProp<object>)[]): object | undefined {
   return mergeAndFinalizeStyles(undefined, undefined, ...objs);
 }
 
@@ -71,8 +69,7 @@ export function mergeProps<TProps extends object>(...props: (object | undefined)
  * @param settings - settings to merge, can be only a single entry
  */
 export function mergeAndFinalizeSettings<TSettings extends IComponentSettings = IComponentSettings>(
-  theme: ITheme,
-  finalizers: IStyleValueFinalizers,
+  finalizer: IFinalizeStyle,
   ...settings: (object | undefined)[]
 ): TSettings {
   const mergeOptions: IMergeOptions = {
@@ -80,8 +77,8 @@ export function mergeAndFinalizeSettings<TSettings extends IComponentSettings = 
     processSingles: true,
     recurse: {
       ..._recurseOptions,
-      style: (_key: string, _options: IMergeOptions, ...objs: (StyleProp<object>)[]) => {
-        return mergeAndFinalizeStyles(theme, finalizers, ...objs);
+      style: (_key: string, _options: IMergeOptions, ...objs: (IStyleProp<object>)[]) => {
+        return mergeAndFinalizeStyles(finalizer, ...objs);
       }
     }
   };
@@ -144,7 +141,7 @@ export function getParentSettingsChain(lookup: IComponentSettingsCollection, tar
  * `overrideLookup` is an object where keys will be looked up in the order specified by the precedence array.
  * The values inside this structure can be any type but will cause the override to apply if they are truthy
  */
-export function resolveSettingsOverrides(target: IComponentSettings, overrideLookup?: object): IComponentSettings {
+export function resolveSettingsOverrides(target: IComponentSettings, overrideLookup?: IOverrideLookup): IComponentSettings {
   let result = target;
   const { _overrides, _precedence } = target;
   if (overrideLookup && _overrides && _precedence) {

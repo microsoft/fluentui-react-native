@@ -1,8 +1,7 @@
 import { ITheme } from './Theme.types';
 import { IPalette } from './Color.types';
 import { ITypography } from './Typography.types';
-import { createSettingsWorker } from './SettingsWorker';
-import { finalizeColor, finalizeFontWeight, finalizeFontFamily } from './Styles';
+import { createSettingsWorker, finalizeColor, finalizeFontWeight, finalizeFontFamily } from './SettingsWorker';
 
 const _worker = createSettingsWorker({
   backgroundColor: finalizeColor,

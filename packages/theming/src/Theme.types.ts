@@ -1,6 +1,6 @@
 import { IPalette, IPartialPalette } from './Color.types';
 import { ITypography, IPartialTypography } from './Typography.types';
-import { IComponentSettingsCollection } from './Settings.types';
+import { IComponentSettingsCollection } from '@uifabric/theme-settings';
 
 /**
  * A fully specified theme.

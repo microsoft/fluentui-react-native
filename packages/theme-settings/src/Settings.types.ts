@@ -13,3 +13,12 @@ export type IComponentSettings<TSlotProps extends ISlotProps = ISlotProps> = IPa
 export type IComponentSettingsCollection<TSettings extends IComponentSettings = IComponentSettings> = {
   [key: string]: TSettings;
 };
+
+/**
+ * overrides are looked up using an object where override names are evaluated against the object.  If the values are truthy
+ * the override will be applied.
+ */
+export interface IOverrideLookup {
+  /* tslint:disable-next-line no-any */
+  [key: string]: any;
+}

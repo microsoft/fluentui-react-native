@@ -1,8 +1,14 @@
 import { ITheme } from './Theme.types';
-import { ISettingsWorker, ISettingsWithKey } from './SettingsWorker.types';
-import { IStyleValueFinalizers } from './Styles.types';
-import { IComponentSettings, IComponentSettingsCollection } from './Settings.types';
-import { resolveSettingsOverrides, mergeAndFinalizeSettings, getParentSettingsChain } from './Settings';
+import { ISettingsWorker, ISettingsWithKey, IStyleValueFinalizers } from './SettingsWorker.types';
+import {
+  IComponentSettings,
+  IComponentSettingsCollection,
+  IOverrideLookup,
+  resolveSettingsOverrides,
+  mergeAndFinalizeSettings,
+  getParentSettingsChain
+} from '@uifabric/theme-settings';
+import { IFinalizeStyle } from '@uifabric/theme-settings';
 
 /** key used to store the style cache in the theme */
 const _styleCacheKey = Symbol('__styleCache');
@@ -26,11 +32,11 @@ export function createSettingsWorker(finalizers?: IStyleValueFinalizers): ISetti
      * layer is passed in instead of a name this will not cache, it will simply apply the resolution and
      * lookup process to that layer
      */
-    getSettings: (theme: ITheme, target: string | IComponentSettings, overrides?: object) => {
+    getSettings: (theme: ITheme, target: string | IComponentSettings, overrides?: IOverrideLookup) => {
       return _getSettingsFromTheme(theme, target as string, _finalizers, overrides);
     },
 
-    resolveSettings: (theme: ITheme, target: IComponentSettings, overrides?: object) => {
+    resolveSettings: (theme: ITheme, target: IComponentSettings, overrides?: IOverrideLookup) => {
       return _returnAsSlotProps(_resolveNonThemeSettings(theme, target, _finalizers, overrides));
     },
 
@@ -38,7 +44,7 @@ export function createSettingsWorker(finalizers?: IStyleValueFinalizers): ISetti
      * Finalizes settings
      */
     finalizeSettings: (theme: ITheme, settings: IComponentSettings) => {
-      return mergeAndFinalizeSettings(theme, _finalizers, settings);
+      return mergeAndFinalizeSettings(_finalizeStyle(theme, _finalizers), settings);
     },
 
     /**
@@ -70,9 +76,9 @@ function _resolveNonThemeSettings(
   theme: ITheme,
   target: IComponentSettings,
   finalizers: IStyleValueFinalizers,
-  overrides?: object
+  overrides?: IOverrideLookup
 ): IComponentSettings {
-  const mergedAndFinalized = mergeAndFinalizeSettings(theme, finalizers, ...getParentSettingsChain(theme.settings, target));
+  const mergedAndFinalized = mergeAndFinalizeSettings(_finalizeStyle(theme, finalizers), ...getParentSettingsChain(theme.settings, target));
   return resolveSettingsOverrides(mergedAndFinalized, overrides);
 }
 
@@ -83,7 +89,7 @@ function _resolveNonThemeSettings(
  * @param precedence - ordered precedence of which overrides to apply
  * @param overrides - lookup object for testing whether an override should be applied
  */
-function _getStyleKey(name: string, precedence: string[], overrides: object): string {
+function _getStyleKey(name: string, precedence: string[], overrides: IOverrideLookup): string {
   return [name]
     .concat(precedence || [])
     .filter((val: string) => {
@@ -102,14 +108,14 @@ function _buildCacheableThemeSettings(
   theme: ITheme,
   target: string | IComponentSettings,
   finalizers: IStyleValueFinalizers,
-  overrides?: object
+  overrides?: IOverrideLookup
 ): IComponentSettings {
   if (typeof target === 'string') {
     // this means we are building the base settings with no overrides applied
     const setToMerge = getParentSettingsChain(theme.settings, target);
     // apply the finalizers as part of the merge.  This will recurse to overrides which means that there
     // is no need to finalize again when overrides are applied
-    return mergeAndFinalizeSettings(theme, finalizers, ...setToMerge);
+    return mergeAndFinalizeSettings(_finalizeStyle(theme, finalizers), ...setToMerge);
   }
   // this is just doing override application so do that now
   return resolveSettingsOverrides(target, overrides);
@@ -123,7 +129,7 @@ function _findOrCreateSettings(
   target: string | IComponentSettings,
   styleKey: string,
   finalizers: IStyleValueFinalizers,
-  overrides?: object
+  overrides?: IOverrideLookup
 ): IComponentSettings {
   // get the style cache from the theme, ensuring it exists in the process
   let styleCache: IComponentSettingsCollection = theme[_styleCacheKey];
@@ -143,7 +149,12 @@ function _findOrCreateSettings(
  * try to get settings from the theme, ensuring things are cached and minimizing the amount of
  * recomputing that needs to be done
  */
-function _getSettingsFromTheme(theme: ITheme, name: string, finalizers: IStyleValueFinalizers, overrides?: object): ISettingsWithKey {
+function _getSettingsFromTheme(
+  theme: ITheme,
+  name: string,
+  finalizers: IStyleValueFinalizers,
+  overrides?: IOverrideLookup
+): ISettingsWithKey {
   let settings = _findOrCreateSettings(theme, name, name, finalizers);
   let styleKey = name;
   if (overrides && settings) {
@@ -153,4 +164,60 @@ function _getSettingsFromTheme(theme: ITheme, name: string, finalizers: IStyleVa
     }
   }
   return { settings: _returnAsSlotProps(settings), styleKey };
+}
+
+function _finalizeStyle(theme: ITheme, finalizers: IStyleValueFinalizers): IFinalizeStyle {
+  return (style: object) => {
+    const updated = {};
+    Object.keys(style).forEach((key: string) => {
+      if (finalizers[key]) {
+        finalizers[key](theme, style, key, updated);
+      }
+    });
+    return updated;
+  };
+}
+
+/**
+ * A finalizer that will simply strip a key from a style if it is found
+ */
+export function stripKey(_theme: ITheme, style: object, key: string, target: object): void {
+  if (style.hasOwnProperty(key)) {
+    target[key] = undefined;
+  }
+}
+
+export function finalizeSemanticValue<TContainer>(container: TContainer, style: object, key: string, target: object): void {
+  const value = style[key];
+  if (value && container[value]) {
+    target[key] = container[value];
+  }
+}
+
+/**
+ * Replace a color value with a value from the palette if it resolves
+ */
+export function finalizeColor(theme: ITheme, style: object, key: string, target: object): void {
+  return finalizeSemanticValue(theme.palette, style, key, target);
+}
+
+/**
+ * Update font family with a semantic value if it resolves
+ */
+export function finalizeFontFamily(theme: ITheme, style: object, key: string, target: object): void {
+  return finalizeSemanticValue(theme.typography.families, style, key, target);
+}
+
+/**
+ * Update the font size with a semantic value if it resolves
+ */
+export function finalizeFontSize(theme: ITheme, style: object, key: string, target: object): void {
+  return finalizeSemanticValue(theme.typography.sizes, style, key, target);
+}
+
+/**
+ * Update the font weight with a semantic value if it resolves
+ */
+export function finalizeFontWeight(theme: ITheme, style: object, key: string, target: object): void {
+  return finalizeSemanticValue(theme.typography.weights, style, key, target);
 }

@@ -1,27 +1,27 @@
 import {
   createSettingsWorker,
   ITheme,
-  IStyleValueFinalizers,
   ISettingsWithKey,
-  IComponentSettings,
   finalizeFontFamily,
   finalizeFontSize,
   finalizeFontWeight,
-  finalizeColor
+  finalizeColor,
+  IStyleValueFinalizers
 } from '@uifabric/theming';
+import { IOverrideLookup, IComponentSettings } from '@uifabric/theme-settings';
 import { INativeTheme } from './INativeTheme';
 
 // create a global style worker and add the finalizers for this theming system
 const _worker = createSettingsWorker(_getFinalizers());
 
-export function getThemeSettings(theme: ITheme, target: string, overrides?: object): ISettingsWithKey {
+export function getThemeSettings(theme: ITheme, target: string, overrides?: IOverrideLookup): ISettingsWithKey {
   return _worker.getSettings(theme, target, overrides);
 }
 
 /**
  * resolve any parent relationships, apply overrides, and finalize values for the target settings object
  */
-export function resolveSettings(theme: ITheme, target: IComponentSettings, overrides?: object): IComponentSettings {
+export function resolveSettings(theme: ITheme, target: IComponentSettings, overrides?: IOverrideLookup): IComponentSettings {
   return _worker.resolveSettings(theme, target, overrides);
 }
 

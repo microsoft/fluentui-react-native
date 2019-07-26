@@ -1,11 +1,11 @@
 import { IComponentSettings } from './Settings.types';
 import { mergeSettings } from './Settings';
-import { StyleProp } from 'react-native';
+import { IStyleProp } from './Styles.types';
 
 interface IProps {
   root: {
     prop1: string;
-    style: StyleProp<{
+    style: IStyleProp<{
       fontFamily?: string;
       fontWeight?: 'light' | 'normal' | 'bold';
       fontSize?: number;

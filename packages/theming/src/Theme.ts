@@ -1,7 +1,7 @@
 import { ITheme, IPartialTheme } from './Theme.types';
 import { resolvePartialPalette } from './Color';
 import { resolvePartialTypography } from './Typography';
-import { mergeSettingsCollection } from './Settings';
+import { mergeSettingsCollection } from '@uifabric/theme-settings';
 
 /**
  * Resolve `partialTheme` into a fully specified theme, using `theme` to fill

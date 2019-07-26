@@ -1,6 +1,5 @@
 import { ITheme } from './Theme.types';
-import { IStyleValueFinalizers } from './Styles.types';
-import { IComponentSettings } from './Settings.types';
+import { IComponentSettings, IOverrideLookup } from '@uifabric/theme-settings';
 
 export interface ISettingsWithKey {
   settings: IComponentSettings;
@@ -16,12 +15,12 @@ export interface ISettingsWorker {
    * the layer will be resolved into a settings block with parent lookups and finalization happening as appropriate
    * @param overrides - override states to apply to target once it is retrieved
    */
-  getSettings: (theme: ITheme, target: string, overrides?: object) => ISettingsWithKey;
+  getSettings: (theme: ITheme, target: string, overrides?: IOverrideLookup) => ISettingsWithKey;
 
   /**
    * resolve any parent relationships, apply overrides, and finalize values for the target settings object
    */
-  resolveSettings: (theme: ITheme, target: IComponentSettings, overrides?: string[]) => IComponentSettings;
+  resolveSettings: (theme: ITheme, target: IComponentSettings, overrides?: IOverrideLookup) => IComponentSettings;
 
   /**
    * run settings through the registered set of finalizers.  This will be called implicitly
@@ -36,3 +35,21 @@ export interface ISettingsWorker {
    */
   addValueFinalizers: (finalizers: IStyleValueFinalizers) => void;
 }
+
+/**
+ * function prototype for finalizing a matching key of a style
+ * @param theme - currently active theme, used for lookups of semantic values
+ * @param source - style to finalize values from
+ * @param key - key being processed, this value should exist in the style
+ * @param target - target object to output the modified style to, this might be source but might not
+ */
+export type IStyleValueFinalizer = (theme: ITheme, source: object, key: string, target: object) => void;
+
+export interface IStyleValueFinalizers {
+  [key: string]: IStyleValueFinalizer;
+}
+
+/**
+ * a type for clients to use to register a set of finalizers for a given style fragment
+ */
+export type IStyleSetFinalizers<TStyleFragment> = { [P in keyof TStyleFragment]: IStyleValueFinalizer };
