@@ -6,10 +6,10 @@
     "type": "git",
     "url": "https://github.com/microsoft/ui-fabric-react-native"
   },
-  "main": "lib/index.js",
+  "main": "lib/index.tsx",
   "scripts": {
     "build": "tsc",
-    "start": "tsc -w --preserveWatchOutput",
+    "start": "webpack-dev-server --mode development",
     "test": "jest",
     "start-test": "jest --watch"
   },
@@ -29,6 +29,7 @@
     "babel-loader": "8.0.6",
     "babel-preset-env": "1.7.0",
     "babel-preset-stage-2": "6.24.1",
-    "babel-preset-react": "6.24.1"
+    "babel-preset-react": "6.24.1",
+    "ts-loader": "6.0.4"
   }
 }

@@ -1,16 +1,16 @@
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: ['babel-loader']
+        test: /\.(js|jsx|ts|tsx)$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/
       }
     ]
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['.tsx', '.ts', '.jsx', '.js']
   },
   output: {
     path: __dirname + '/public',
