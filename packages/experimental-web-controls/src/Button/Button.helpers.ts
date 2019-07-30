@@ -1,5 +1,7 @@
 import { IButtonCustomizableProps, IButtonRenderData, IButtonSettings } from './Button.types';
-import { renderSlot, standardThemeSettings, finalizeSettings, IAsResolved } from '@uifabric/theming-react-native';
+import { renderSlot, IAsResolved } from '@uifabric/foundation-composable';
+import { standardThemeSettings } from '@uifabric/foundation-compose';
+import { finalizeSettings } from '@uifabric/theming-react-native';
 import {
   textTokenKeys,
   foregroundColorKeys,

@@ -1,5 +1,5 @@
 import { IComponentSettings, IStyleProp } from '@uifabric/theme-settings';
-import { IComponent, IRenderData } from '@uifabric/theming-react-native';
+import { IComponent, IRenderData } from '@uifabric/foundation-compose';
 import { ICSSStyle } from '../../htmlTypes';
 
 /**

@@ -1,5 +1,5 @@
 import { IButtonComponent } from './Button.types';
-import { compose } from '@uifabric/theming-react-native';
+import { compose } from '@uifabric/foundation-compose';
 // import { Stack } from '../Stack';
 import { Text } from '../Text';
 import { keyProps, processor, finalizer, themeSettings, usePrepareState, view } from './Button.helpers';

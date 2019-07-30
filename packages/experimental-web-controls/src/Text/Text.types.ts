@@ -1,4 +1,4 @@
-import { IComponent, IRenderData } from '@uifabric/theming-react-native';
+import { IComponent, IRenderData } from '@uifabric/foundation-compose';
 import { IComponentSettings, IStyleProp } from '@uifabric/theme-settings';
 import { ITextTokens, IForegroundColorTokens } from '../tokens';
 import { ICSSStyle } from '../htmlTypes';

@@ -1,5 +1,5 @@
 import { ITextComponent, ITextRenderData, ITextProps } from './Text.types';
-import { compose } from '@uifabric/theming-react-native';
+import { compose } from '@uifabric/foundation-compose';
 import { textTokenKeys, foregroundColorKeys, processTextTokens, processForegroundTokens } from '../tokens';
 import { mergeSettings } from '@uifabric/theme-settings';
 import { loadTextSettings } from './Text.settings';

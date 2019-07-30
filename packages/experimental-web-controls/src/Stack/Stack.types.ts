@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ITextTokens, IBackgroundColorTokens, IBorderTokens } from '../tokens';
 import { IComponentSettings } from '@uifabric/theme-settings';
-import { IComponent, IRenderData } from '@uifabric/theming-react-native';
+import { IComponent, IRenderData } from '@uifabric/foundation-compose';
 import { IDivProps } from '../htmlTypes';
 import { IStackItemProps } from './StackItem/StackItem.types';
 

@@ -10,7 +10,7 @@
  */
 'use strict';
 
-import { compose } from '@uifabric/theming-react-native';
+import { compose } from '@uifabric/foundation-compose';
 import { IPressableComponent, IPressableRenderData } from './Pressable.props';
 import { mergeSettings } from '@uifabric/theme-settings';
 import { useWebPressable } from './useAsPressable';

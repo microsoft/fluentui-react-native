@@ -1,5 +1,5 @@
-import { INativeTheme } from '../INativeTheme';
-import { ISlotTypes, IResolvedSlotData, IComposable } from '../composable';
+import { INativeTheme } from '@uifabric/theming-react-native';
+import { ISlotTypes, IResolvedSlotData, IComposable } from '@uifabric/foundation-composable';
 import { IComponentSettings } from '@uifabric/theme-settings';
 
 /* tslint:disable no-any */

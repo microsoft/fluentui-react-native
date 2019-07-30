@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { IComponent, IComponentCustomizations, IComponentReturnType, IReactComponentType, IComponentProps } from './Component.types';
-import { ISlotTypes, useProcessComposableTree, renderSlot, IGenericProps } from '../composable';
+import { ISlotTypes, useProcessComposableTree, renderSlot, IGenericProps } from '@uifabric/foundation-composable';
 import { wrapComponent, mergeTokenKeys, standardUsePrepareState } from './Component';
-import { ThemeContext } from '../ThemeLayer';
-import { getTheme } from '../Global';
+import { ThemeContext, getTheme } from '@uifabric/theming-react-native';
 
 function getComponentOptions<TComponent extends IComponent>(inputComponent: TComponent, base?: React.ReactElement<object>): TComponent {
   const baseComposable = (base && ((base as unknown) as IComponentCustomizations<TComponent>).__options) || undefined;

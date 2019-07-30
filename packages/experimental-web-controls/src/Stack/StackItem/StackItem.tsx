@@ -1,5 +1,5 @@
 import { IStackItemComponent } from './StackItem.types';
-import { compose } from '@uifabric/theming-react-native';
+import { compose } from '@uifabric/foundation-compose';
 import { keyProps, processor } from './StackItem.tokens';
 
 export const StackItem = compose<IStackItemComponent>({

@@ -1,7 +1,14 @@
 import { IComponent, IRenderData } from './Component.types';
-import { INativeTheme } from '../INativeTheme';
-import { getThemeSettings, finalizeSettings } from '../Settings';
-import { IProcessResult, IResolvedSlot, IComposable, wrapSlots, renderSlot, IGenericProps, ISlotProps } from '../composable';
+import { getThemeSettings, finalizeSettings, INativeTheme } from '@uifabric/theming-react-native';
+import {
+  IProcessResult,
+  IResolvedSlot,
+  IComposable,
+  wrapSlots,
+  renderSlot,
+  IGenericProps,
+  ISlotProps
+} from '@uifabric/foundation-composable';
 import { mergeSettings } from '@uifabric/theme-settings';
 
 /**

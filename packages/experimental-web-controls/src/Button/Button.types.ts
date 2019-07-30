@@ -1,4 +1,4 @@
-import { IComponent, IRenderData } from '@uifabric/theming-react-native';
+import { IComponent, IRenderData } from '@uifabric/foundation-compose';
 import { ITextProps } from '../Text';
 import { IPressableState, IPressableProps } from '../Pressable';
 import { IComponentSettings } from '@uifabric/theme-settings';
