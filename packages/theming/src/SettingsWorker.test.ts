@@ -24,6 +24,7 @@ const theme: ITheme = {
       medium: '500'
     }
   } as ITypography,
+  spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
   settings: {
     base: {
       root: {

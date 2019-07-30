@@ -181,9 +181,15 @@ export function useProcessComponent<TComponent extends IComponent>(
  * @param component - component options to use for rendering
  * @param result - the resolved slot data for this component.  This will include the IRenderData
  */
-export function renderComponent<TComponent extends IComponent>(component: TComponent, result: IResolvedSlot): JSX.Element | null {
+export function renderComponent<TComponent extends IComponent>(
+  component: TComponent,
+  result: IResolvedSlot,
+  ...children: React.ReactNode[]
+): JSX.Element | null {
   /* tslint:disable-next-line no-any */
-  return component.view ? component.view(result as any) : (result.slots && result.slots.root && renderSlot(result.slots.root)) || null;
+  return component.view
+    ? component.view(result as any, ...children)
+    : (result.slots && result.slots.root && renderSlot(result.slots.root, ...children)) || null;
 }
 
 /**
@@ -196,8 +202,8 @@ export function wrapComponent<TComponent extends IComponent>(component: TCompone
     useProcessProps: (props: IGenericProps, theme: object) => {
       return useProcessComponent(component, props, theme);
     },
-    render: (result: IResolvedSlot) => {
-      return renderComponent(component, result);
+    render: (result: IResolvedSlot, ...children: React.ReactNode[]) => {
+      return renderComponent(component, result, ...children);
     },
     slots: component.slots ? wrapSlots(component.slots) : undefined
   };

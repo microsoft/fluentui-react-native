@@ -97,7 +97,7 @@ export interface IComponent<
   /**
    * View function, called to do the final render
    */
-  view?: (renderData: IResolvedData<TCustomizeableProps, TSlotProps, TState>) => JSX.Element | null;
+  view?: (renderData: IResolvedData<TCustomizeableProps, TSlotProps, TState>, ...children: React.ReactNode[]) => JSX.Element | null;
 
   /**
    * statics to be added to the component

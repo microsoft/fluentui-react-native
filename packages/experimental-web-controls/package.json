@@ -1,15 +1,17 @@
 {
-  "name": "uifabric-rn-demo",
+  "name": "experimental-web-controls",
   "version": "0.1.1",
-  "description": "Demo app for web code",
+  "description": "Experimental web control implementations",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/ui-fabric-react-native"
   },
-  "main": "lib/index.tsx",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "start": "webpack-dev-server --mode development",
+    "start": "tsc -w --preserveWatchOutput",
     "test": "jest",
     "start-test": "jest --watch"
   },
@@ -17,20 +19,16 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "react": "16.8.3",
-    "react-dom": "16.8.3",
-    "experimental-web-controls": "0.1.1"
+    "@uifabric/theme-settings": "0.1.1",
+    "@uifabric/theming": "0.1.1",
+    "@uifabric/theming-react-native": "0.1.1"
   },
   "devDependencies": {
     "@types/es6-collections": "^0.5.29",
     "@types/es6-promise": "0.0.32",
     "@types/node": "^10.3.5",
     "@types/jest": "^19.2.2",
-    "babel-core": "6.26.3",
-    "babel-loader": "8.0.6",
-    "babel-preset-env": "1.7.0",
-    "babel-preset-stage-2": "6.24.1",
-    "babel-preset-react": "6.24.1",
-    "ts-loader": "6.0.4"
+    "react": "16.8.3",
+    "react-dom": "16.8.3"
   }
 }

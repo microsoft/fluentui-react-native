@@ -23,6 +23,7 @@ const _platformDefaults: ITheme = {
     sizes: {},
     weights: {}
   } as ITypography,
+  spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
   settings: {
     base: {
       root: {
@@ -64,6 +65,7 @@ const _platformDefaultsMergedWithOcean: ITheme = {
     sizes: {},
     weights: {}
   } as ITypography,
+  spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
   settings: {
     base: {
       root: {
@@ -108,6 +110,7 @@ const _platformDefaultsMergedWithProcessor: ITheme = {
     sizes: {},
     weights: {}
   } as ITypography,
+  spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
   settings: {
     base: {
       root: {

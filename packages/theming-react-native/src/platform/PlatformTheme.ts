@@ -1,5 +1,5 @@
 import { INativeTheme } from '../INativeTheme';
-import { getStockWebPalette, ITypography } from '@uifabric/theming';
+import { getStockWebPalette, ITypography, ISpacing } from '@uifabric/theming';
 
 function _defaultTypography(): ITypography {
   return {
@@ -9,10 +9,10 @@ function _defaultTypography(): ITypography {
       xSmall: 10,
       small: 11,
       medium: 12,
-      large: 16,
-      xLarge: 24,
-      xxLarge: 32,
-      xxxLarge: 42
+      large: 14,
+      xLarge: 18,
+      xxLarge: 24,
+      xxxLarge: 32
     },
     weights: {
       light: '200',
@@ -22,7 +22,7 @@ function _defaultTypography(): ITypography {
       bold: '900'
     },
     families: {
-      primary: 'System',
+      primary: 'Segoe UI',
       secondary: 'System',
       cursive: 'System',
       monospace: 'System',
@@ -32,10 +32,15 @@ function _defaultTypography(): ITypography {
   };
 }
 
+export function defaultSpacing(): ISpacing {
+  return { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' };
+}
+
 export function getBaselinePlatformTheme(): INativeTheme {
   return {
     palette: getStockWebPalette(),
     typography: _defaultTypography(),
+    spacing: defaultSpacing(),
     settings: {}
   };
 }

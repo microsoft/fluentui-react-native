@@ -17,7 +17,8 @@ export function resolvePartialTheme(theme: ITheme, partialTheme?: IPartialTheme)
     ...theme,
     palette: resolvePartialPalette(theme.palette, partialTheme.palette),
     typography: resolvePartialTypography(theme.typography, partialTheme.typography),
-    settings: mergeSettingsCollection(theme.settings, partialTheme.settings)
+    settings: mergeSettingsCollection(theme.settings, partialTheme.settings),
+    spacing: partialTheme.spacing ? { ...theme.spacing, ...partialTheme.spacing } : theme.spacing
   };
 
   return merged;

@@ -65,8 +65,11 @@ export function createSettingsWorker(finalizers?: IStyleValueFinalizers): ISetti
 
 /** helper to strip out the component settings specific bits from the returned structure */
 function _returnAsSlotProps(target: IComponentSettings): IComponentSettings {
-  const { _overrides, _parent, _precedence, ...settings } = target;
-  return settings;
+  if (target) {
+    const { _overrides, _parent, _precedence, ...settings } = target;
+    return settings;
+  }
+  return target;
 }
 
 /**
@@ -90,12 +93,8 @@ function _resolveNonThemeSettings(
  * @param overrides - lookup object for testing whether an override should be applied
  */
 function _getStyleKey(name: string, precedence: string[], overrides: IOverrideLookup): string {
-  return [name]
-    .concat(precedence || [])
-    .filter((val: string) => {
-      return overrides[val];
-    })
-    .join('-');
+  const overrideKey = (precedence && precedence.filter(val => overrides[val]).join('-')) || undefined;
+  return overrideKey ? name + '-' + overrideKey : name;
 }
 
 /**
