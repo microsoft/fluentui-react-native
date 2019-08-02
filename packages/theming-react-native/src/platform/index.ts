@@ -1,0 +1,1 @@
+export { getBaselinePlatformTheme } from './PlatformTheme';

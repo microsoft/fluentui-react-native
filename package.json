@@ -1,0 +1,35 @@
+{
+  "name": "uifabric-react-native",
+  "version": "0.1.1",
+  "private": true,
+  "description": "",
+  "keywords": [],
+  "license": "MIT",
+  "author": "Jason Morse <jasonmo@microsoft.com>",
+  "main": "index.js",
+  "scripts": {
+    "build": "lerna run --stream build",
+    "start": "node ./scripts/watch.js",
+    "test": "lerna run test",
+    "lint": "eslint packages --ext .ts,.js",
+    "docz:dev": "lerna run docz:dev"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "eslint": "^6.0.1",
+    "jest": "^24.8.0",
+    "just-scripts": "^0.26.0",
+    "just-task": "^0.13.1",
+    "lerna": "^3.16.4",
+    "typescript": "~3.4.4",
+    "webpack": "~4.29.5",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "3.7.2"
+  },
+  "workspaces": [
+    "documentation",
+    "packages/*"
+  ],
+  "repository": "https://github.com/Microsoft/ui-fabric-react-native.git"
+}

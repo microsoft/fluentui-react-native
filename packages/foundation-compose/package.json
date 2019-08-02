@@ -1,0 +1,30 @@
+{
+  "name": "@uifabric/foundation-compose",
+  "version": "0.1.1",
+  "description": "Compose infrastructure",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/ui-fabric-react-native"
+  },
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc -w --preserveWatchOutput",
+    "test": "jest",
+    "start-test": "jest --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@uifabric/foundation-composable": "0.1.1",
+    "@uifabric/theming-react-native": "0.1.1"
+  },
+  "devDependencies": {
+    "@types/es6-collections": "^0.5.29",
+    "@types/es6-promise": "0.0.32",
+    "@types/node": "^10.3.5",
+    "@types/jest": "^19.2.2"
+  }
+}

@@ -36,6 +36,14 @@ build/Release
 node_modules/
 jspm_packages/
 
+# Build targets
+lib
+lib-commonjs
+lib-amd
+build
+dist
+temp
+
 # TypeScript v1 declaration files
 typings/
 
@@ -59,3 +67,6 @@ typings/
 
 # next.js build output
 .next
+
+# document generation directory
+.docz
