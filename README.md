@@ -1,7 +1,23 @@
+# UI Fabric React Native
 
-# Contributing
+## Getting Started
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+To start developing in the repository you can:
+
+1. `git clone https://github.com/microsoft/ui-fabric-react-native.git`
+1. `cd ui-fabric-react-native`
+1. `yarn`
+1. `yarn build` or `yarn start`
+
+The demo package is currently where controls can be played with. If yarn start doesn't work go into the demo package and run yarn from there.
+
+### Yarn + Lerna
+
+This repo is set up as a monorepo using Lerna + Yarn workspaces. The yarn commands will trigger the lerna commands which will execute yarn commands in each package.
+
+## Contributing
+
+This project welcomes contributions and suggestions. Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
 the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
 
