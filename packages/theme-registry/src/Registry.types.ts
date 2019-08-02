@@ -1,5 +1,3 @@
-import { ITheme, IPartialTheme } from './Theme.types';
-
 /**
  * Function which produces a partial theme using only a parent theme.
  *
@@ -7,7 +5,12 @@ import { ITheme, IPartialTheme } from './Theme.types';
  * For example, creating a monochromatic theme from a colorful theme, or
  * increasing contrast throuhgout a theme.
  */
-export type ProcessTheme = (parentTheme: ITheme) => IPartialTheme;
+export type IProcessTheme<TTheme, TPartialTheme> = (parentTheme: TTheme) => TPartialTheme;
+
+/**
+ * Function which resolves a theme + partial theme into a new theme
+ */
+export type IResolveTheme<TTheme, TPartialTheme> = (parent: TTheme, partial?: TPartialTheme) => TTheme;
 
 /**
  * Events issued from the theme registry.
@@ -29,13 +32,13 @@ export interface IThemeEventListener {
 /**
  * A hierarchical collection of themes.
  */
-export interface IThemeRegistry {
+export interface IThemeRegistry<TTheme, TPartialTheme> {
   /**
    * Get a theme using `name`.
    *
    * When `name` is missing or blank, the default theme is retrieved.
    */
-  getTheme(name?: string): ITheme;
+  getTheme(name?: string): TTheme;
 
   /**
    * Add or update a theme.
@@ -51,7 +54,7 @@ export interface IThemeRegistry {
    * `parent` identifies the parent theme. When missing or blank, the default
    * theme is used.
    */
-  setTheme(definition: IPartialTheme | ProcessTheme, name?: string, parent?: string): void;
+  setTheme(definition: TPartialTheme | IProcessTheme<TTheme, TPartialTheme>, name?: string, parent?: string): void;
 
   /**
    * Listen for theming events.
@@ -69,5 +72,5 @@ export interface IThemeRegistry {
    *
    * **NOTE**: Only the native platform should call this method.
    */
-  updatePlatformDefaults(platformDefaults: IPartialTheme): void;
+  updatePlatformDefaults(platformDefaults: TPartialTheme): void;
 }

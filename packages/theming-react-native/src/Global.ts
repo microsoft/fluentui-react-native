@@ -1,16 +1,19 @@
-import { IThemeRegistry, createThemeRegistry, ProcessTheme, IThemeEventListener } from '@uifabric/theming';
 import { INativeThemeDefinition, INativeTheme } from './INativeTheme';
 import { getBaselinePlatformTheme } from './platform';
+import { resolvePartialTheme } from '@uifabric/theming';
+import { IThemeRegistry, createThemeRegistry, IProcessTheme, IThemeEventListener } from '@uifabric/theme-registry';
 
-let _registry: IThemeRegistry;
+export type INativeThemeRegistry = IThemeRegistry<INativeTheme, INativeThemeDefinition>;
+
+let _registry: INativeThemeRegistry;
 
 /**
  * Ensure that `_registry` is set. If not, create it using a native module to
  * provide platform defaults.
  */
-function getThemeRegistry(): IThemeRegistry {
+function getThemeRegistry(): INativeThemeRegistry {
   if (!_registry) {
-    _registry = createThemeRegistry(getBaselinePlatformTheme());
+    _registry = createThemeRegistry<INativeTheme, INativeThemeDefinition>(getBaselinePlatformTheme(), resolvePartialTheme);
   }
   return _registry;
 }
@@ -25,7 +28,7 @@ function getThemeRegistry(): IThemeRegistry {
  * `_registry`. Changing `_registry` while the app is running will disrupt
  * theming, causing undefined behavior.
  */
-export function setThemeRegistry(registry: IThemeRegistry): void {
+export function setThemeRegistry(registry: INativeThemeRegistry): void {
   _registry = registry;
 }
 
@@ -35,7 +38,11 @@ export function setThemeRegistry(registry: IThemeRegistry): void {
  * @param name - name of the theme, undefined or '' for default
  * @param parent - parent theme to depend on, if unspecified this will pull from the default theme
  */
-export function setTheme(definition: INativeThemeDefinition | ProcessTheme, name?: string, parent?: string): void {
+export function setTheme(
+  definition: INativeThemeDefinition | IProcessTheme<INativeTheme, INativeThemeDefinition>,
+  name?: string,
+  parent?: string
+): void {
   return getThemeRegistry().setTheme(definition, name, parent);
 }
 

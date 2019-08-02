@@ -1,4 +1,5 @@
-import { getStockWebPalette, createThemeRegistry } from '@uifabric/theming';
+import { createThemeRegistry } from '@uifabric/theme-registry';
+import { getStockWebPalette, resolvePartialTheme } from '@uifabric/theming';
 import { setThemeRegistry } from './Global';
 import { INativeThemeDefinition, INativeTheme } from './INativeTheme';
 
@@ -139,5 +140,5 @@ const platformDefaults: INativeThemeDefinition = {
 };
 
 export function initializeTestThemeRegistry(): void {
-  setThemeRegistry(createThemeRegistry(platformDefaults as INativeTheme));
+  setThemeRegistry(createThemeRegistry(platformDefaults as INativeTheme, resolvePartialTheme));
 }

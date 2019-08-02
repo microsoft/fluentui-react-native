@@ -14,6 +14,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@uifabric/theme-registry": "0.1.1",
     "@uifabric/theme-settings": "0.1.1",
     "@uifabric/theming": "0.1.1"
   },
@@ -24,7 +25,8 @@
     "@types/jest": "^19.2.2",
     "@types/react": "16.8.15",
     "react": "16.8.3",
-    "typescript": "3.3.3"
+    "typescript": "3.3.3",
+    "@uifabric/theme-registry": "0.1.1"
   },
   "peerDependencies": {
     "react": "16.8.3"

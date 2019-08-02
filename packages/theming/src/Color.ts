@@ -1,15 +1,4 @@
-import { IPalette, IPartialPalette, IFabricWebPalette } from './Color.types';
-
-/**
- * Resolve `partialPalette` into a fully specified palette using `palette` to
- * fill in any missing values.
- */
-export function resolvePartialPalette(palette: IPalette, partialPalette?: IPartialPalette): IPalette {
-  if (partialPalette) {
-    return Object.assign({}, palette, partialPalette);
-  }
-  return palette;
-}
+import { IPalette, IFabricWebPalette } from './Color.types';
 
 /**
  * Generate a palette from a set of fabric web colors, like those output from the theme designer.

@@ -1,7 +1,6 @@
-import { IPalette } from './Color.types';
-import { ITypography } from './Typography.types';
-import { ITheme, IPartialTheme } from './Theme.types';
 import { createThemeRegistry } from './Registry';
+import { IThemeRegistry } from './Registry.types';
+import { immutableMerge } from '@uifabric/immutable-merge';
 
 interface IFakeStyle {
   textColor?: string;
@@ -10,19 +9,42 @@ interface IFakeStyle {
   fontSize?: string | number;
 }
 
-const _platformDefaults: ITheme = {
+interface IFakeTheme {
+  palette: {
+    bodyBackground?: string;
+    bodyText?: string;
+  };
+  typography: {
+    families?: {
+      primary?: string;
+      monospace?: string;
+    };
+  };
+  spacing: {
+    s2?: string;
+    s1?: string;
+    m?: string;
+    l1?: string;
+    l2?: string;
+  };
+  settings: {
+    [key: string]: {
+      root: IFakeStyle;
+    };
+  };
+}
+
+const _platformDefaults: IFakeTheme = {
   palette: {
     bodyBackground: '#000000',
     bodyText: '#ffffff'
-  } as IPalette,
+  },
   typography: {
     families: {
       primary: 'Platform Font Primary',
       monospace: 'Platform Font Monospace'
-    },
-    sizes: {},
-    weights: {}
-  } as ITypography,
+    }
+  },
   spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
   settings: {
     base: {
@@ -35,7 +57,7 @@ const _platformDefaults: ITheme = {
   }
 };
 
-const _ocean: IPartialTheme = {
+const _ocean: Partial<IFakeTheme> = {
   settings: {
     base: {
       root: {
@@ -44,7 +66,6 @@ const _ocean: IPartialTheme = {
       }
     },
     MyButton: {
-      _parent: 'base',
       root: {
         fontSize: 12
       }
@@ -52,19 +73,17 @@ const _ocean: IPartialTheme = {
   }
 };
 
-const _platformDefaultsMergedWithOcean: ITheme = {
+const _platformDefaultsMergedWithOcean: IFakeTheme = {
   palette: {
     bodyBackground: '#000000',
     bodyText: '#ffffff'
-  } as IPalette,
+  },
   typography: {
     families: {
       primary: 'Platform Font Primary',
       monospace: 'Platform Font Monospace'
-    },
-    sizes: {},
-    weights: {}
-  } as ITypography,
+    }
+  },
   spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
   settings: {
     base: {
@@ -75,7 +94,6 @@ const _platformDefaultsMergedWithOcean: ITheme = {
       }
     },
     MyButton: {
-      _parent: 'base',
       root: {
         fontSize: 12
       }
@@ -83,7 +101,7 @@ const _platformDefaultsMergedWithOcean: ITheme = {
   }
 };
 
-function processor(parent: ITheme): IPartialTheme {
+function processor(parent: IFakeTheme): Partial<IFakeTheme> {
   return {
     settings: {
       base: {
@@ -97,19 +115,17 @@ function processor(parent: ITheme): IPartialTheme {
   };
 }
 
-const _platformDefaultsMergedWithProcessor: ITheme = {
+const _platformDefaultsMergedWithProcessor: IFakeTheme = {
   palette: {
     bodyBackground: '#000000',
     bodyText: '#ffffff'
-  } as IPalette,
+  },
   typography: {
     families: {
       primary: 'Platform Font Primary',
       monospace: 'Platform Font Monospace'
-    },
-    sizes: {},
-    weights: {}
-  } as ITypography,
+    }
+  },
   spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
   settings: {
     base: {
@@ -122,57 +138,69 @@ const _platformDefaultsMergedWithProcessor: ITheme = {
   }
 };
 
+function fakeThemeResolver(parent: IFakeTheme, partial?: Partial<IFakeTheme>): IFakeTheme {
+  let newTheme = immutableMerge({ depth: -1 }, parent, partial) as IFakeTheme;
+  if (newTheme === parent) {
+    newTheme = { ...newTheme };
+  }
+  return newTheme;
+}
+
+function createTestThemeRegistry(platformTheme: IFakeTheme): IThemeRegistry<IFakeTheme, Partial<IFakeTheme>> {
+  return createThemeRegistry<IFakeTheme, Partial<IFakeTheme>>(platformTheme, fakeThemeResolver);
+}
+
 describe('Theme registry tests', () => {
   test('getting the platform theme causes an exception', () => {
-    const registry = createThemeRegistry(_platformDefaults);
+    const registry = createTestThemeRegistry(_platformDefaults);
     expect(() => {
       registry.getTheme('__platform');
     }).toThrow();
   });
 
   test('setting the platform theme causes an exception', () => {
-    const registry = createThemeRegistry(_platformDefaults);
+    const registry = createTestThemeRegistry(_platformDefaults);
     expect(() => {
       registry.setTheme({}, '__platform');
     }).toThrow();
   });
 
   test('default theme matches platform theme', () => {
-    const registry = createThemeRegistry(_platformDefaults);
+    const registry = createTestThemeRegistry(_platformDefaults);
     const theme = registry.getTheme();
     expect(theme).toEqual(_platformDefaults);
   });
 
   test('change the default theme', () => {
-    const registry = createThemeRegistry(_platformDefaults);
+    const registry = createTestThemeRegistry(_platformDefaults);
     registry.setTheme(_ocean);
     const theme = registry.getTheme();
     expect(theme).toEqual(_platformDefaultsMergedWithOcean);
   });
 
   test('create a theme', () => {
-    const registry = createThemeRegistry(_platformDefaults);
+    const registry = createTestThemeRegistry(_platformDefaults);
     registry.setTheme(_ocean, 'ocean');
     const theme = registry.getTheme('ocean');
     expect(theme).toEqual(_platformDefaultsMergedWithOcean);
   });
 
   test('create a theme which uses a processor', () => {
-    const registry = createThemeRegistry(_platformDefaults);
+    const registry = createTestThemeRegistry(_platformDefaults);
     registry.setTheme(processor, 'processed');
     const theme = registry.getTheme('processed');
     expect(theme).toEqual(_platformDefaultsMergedWithProcessor);
   });
 
   test('creating a theme that refers to a non-existent parent causes an exception', () => {
-    const registry = createThemeRegistry(_platformDefaults);
+    const registry = createTestThemeRegistry(_platformDefaults);
     expect(() => {
       registry.setTheme(_ocean, 'ocean', 'does not exist');
     }).toThrow();
   });
 
   test('creating a theme, then updating it to parent to itself causes an exception', () => {
-    const registry = createThemeRegistry(_platformDefaults);
+    const registry = createTestThemeRegistry(_platformDefaults);
     registry.setTheme(_ocean, 'ocean');
     expect(() => {
       registry.setTheme(_ocean, 'ocean', 'ocean');
@@ -180,7 +208,7 @@ describe('Theme registry tests', () => {
   });
 
   test('creating two themes that parent to each other causes an exception', () => {
-    const registry = createThemeRegistry(_platformDefaults);
+    const registry = createTestThemeRegistry(_platformDefaults);
     registry.setTheme(_ocean, 'ocean');
     registry.setTheme(_ocean, 'ocean2', 'ocean');
     expect(() => {
@@ -189,7 +217,7 @@ describe('Theme registry tests', () => {
   });
 
   test('creating three themes that parent to each other causes an exception', () => {
-    const registry = createThemeRegistry(_platformDefaults);
+    const registry = createTestThemeRegistry(_platformDefaults);
     registry.setTheme(_ocean, 'ocean');
     registry.setTheme(_ocean, 'ocean2', 'ocean');
     registry.setTheme(_ocean, 'ocean3', 'ocean2');
@@ -199,7 +227,7 @@ describe('Theme registry tests', () => {
   });
 
   test('updating the platform defaults changes the default theme', () => {
-    const registry = createThemeRegistry(_platformDefaults);
+    const registry = createTestThemeRegistry(_platformDefaults);
     const theme = registry.getTheme();
     registry.updatePlatformDefaults(_platformDefaultsMergedWithOcean);
     const themeUpdated = registry.getTheme();
@@ -208,7 +236,7 @@ describe('Theme registry tests', () => {
   });
 
   test('invalidation event fires for default theme when platform theme changes', () => {
-    const registry = createThemeRegistry(_platformDefaults);
+    const registry = createTestThemeRegistry(_platformDefaults);
     const onInvalidate = jest.fn();
     registry.addEventListener({ onInvalidate });
 
@@ -220,7 +248,7 @@ describe('Theme registry tests', () => {
   });
 
   test('invalidation event fires for child theme when its parent changes', () => {
-    const registry = createThemeRegistry(_platformDefaults);
+    const registry = createTestThemeRegistry(_platformDefaults);
     const onInvalidate = jest.fn();
     registry.addEventListener({ onInvalidate });
 
@@ -234,7 +262,7 @@ describe('Theme registry tests', () => {
   });
 
   test('invalidation event does not fire when listener is removed', () => {
-    const registry = createThemeRegistry(_platformDefaults);
+    const registry = createTestThemeRegistry(_platformDefaults);
     const onInvalidate = jest.fn();
     const listener = { onInvalidate };
     registry.addEventListener(listener);

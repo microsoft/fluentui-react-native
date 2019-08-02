@@ -1,25 +1,26 @@
 import { ITheme, IPartialTheme } from './Theme.types';
-import { resolvePartialPalette } from './Color';
-import { resolvePartialTypography } from './Typography';
 import { mergeSettingsCollection } from '@uifabric/theme-settings';
+import { IMergeOptions, immutableMerge } from '@uifabric/immutable-merge';
+
+function _settingsHandler(_key: string, _options: IMergeOptions, ...objs: (object | undefined)[]): object | undefined {
+  return mergeSettingsCollection(...objs);
+}
+
+const _themeMergeOptions: IMergeOptions = {
+  depth: -1,
+  recurse: {
+    settings: _settingsHandler
+  }
+};
 
 /**
  * Resolve `partialTheme` into a fully specified theme, using `theme` to fill
  * in any missing values.
  */
 export function resolvePartialTheme(theme: ITheme, partialTheme?: IPartialTheme): ITheme {
-  if (!partialTheme) {
-    return { ...theme };
+  let newTheme = immutableMerge(_themeMergeOptions, theme, partialTheme) as ITheme;
+  if (newTheme === theme) {
+    newTheme = { ...newTheme };
   }
-
-  //  start with a copy of the full theme, and merge in the partial theme.
-  const merged: ITheme = {
-    ...theme,
-    palette: resolvePartialPalette(theme.palette, partialTheme.palette),
-    typography: resolvePartialTypography(theme.typography, partialTheme.typography),
-    settings: mergeSettingsCollection(theme.settings, partialTheme.settings),
-    spacing: partialTheme.spacing ? { ...theme.spacing, ...partialTheme.spacing } : theme.spacing
-  };
-
-  return merged;
+  return newTheme;
 }

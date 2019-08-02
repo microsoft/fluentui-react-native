@@ -1,10 +1,10 @@
 {
-  "name": "@uifabric/theming",
+  "name": "@uifabric/theme-registry",
   "version": "0.1.1",
-  "description": "Theming Library",
+  "description": "Implementation of the theme graph",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/just"
+    "url": "https://github.com/microsoft/ui-fabric-react-native"
   },
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -17,19 +17,11 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {
-    "@uifabric/theme-settings": "0.1.1",
-    "@uifabric/immutable-merge": "0.1.1"
-  },
   "devDependencies": {
     "@types/es6-collections": "^0.5.29",
     "@types/es6-promise": "0.0.32",
     "@types/node": "^10.3.5",
     "@types/jest": "^19.2.2",
-    "@types/react": "16.8.15",
-    "react": "16.8.3"
-  },
-  "peerDependencies": {
-    "react": "16.8.3"
+    "@uifabric/immutable-merge": "0.1.1"
   }
 }
