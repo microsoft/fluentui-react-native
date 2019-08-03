@@ -36,8 +36,11 @@ export function createSettingsWorker(finalizers?: IStyleValueFinalizers): ISetti
       return _getSettingsFromTheme(theme, target as string, _finalizers, overrides);
     },
 
+    /**
+     * This resolves overrides if specified, finalizes and flattens styles, then returns the settings as the simpler slotProps type
+     */
     resolveSettings: (theme: ITheme, target: IComponentSettings, overrides?: IOverrideLookup) => {
-      return _returnAsSlotProps(_resolveNonThemeSettings(theme, target, _finalizers, overrides));
+      return returnAsSlotProps(_resolveNonThemeSettings(theme, target, _finalizers, overrides));
     },
 
     /**
@@ -64,7 +67,7 @@ export function createSettingsWorker(finalizers?: IStyleValueFinalizers): ISetti
 }
 
 /** helper to strip out the component settings specific bits from the returned structure */
-function _returnAsSlotProps(target: IComponentSettings): IComponentSettings {
+export function returnAsSlotProps(target: IComponentSettings): IComponentSettings {
   if (target) {
     const { _overrides, _parent, _precedence, ...settings } = target;
     return settings;
@@ -92,7 +95,7 @@ function _resolveNonThemeSettings(
  * @param precedence - ordered precedence of which overrides to apply
  * @param overrides - lookup object for testing whether an override should be applied
  */
-function _getStyleKey(name: string, precedence: string[], overrides: IOverrideLookup): string {
+export function getOverrideKey(name: string, precedence: string[], overrides: IOverrideLookup): string {
   const overrideKey = (precedence && precedence.filter(val => overrides[val]).join('-')) || undefined;
   return overrideKey ? name + '-' + overrideKey : name;
 }
@@ -157,12 +160,12 @@ function _getSettingsFromTheme(
   let settings = _findOrCreateSettings(theme, name, name, finalizers);
   let styleKey = name;
   if (overrides && settings) {
-    styleKey = _getStyleKey(name, settings._precedence || [], overrides);
+    styleKey = getOverrideKey(name, settings._precedence || [], overrides);
     if (styleKey !== name) {
       settings = _findOrCreateSettings(theme, settings, styleKey, finalizers, overrides);
     }
   }
-  return { settings: _returnAsSlotProps(settings), styleKey };
+  return { settings, styleKey };
 }
 
 function _finalizeStyle(theme: ITheme, finalizers: IStyleValueFinalizers): IFinalizeStyle {

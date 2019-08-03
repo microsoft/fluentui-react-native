@@ -1,4 +1,4 @@
-import { IComponent, IRenderData } from './Component.types';
+import { IComponent, IRenderData, IComponentProps } from './Component.types';
 import { getThemeSettings, finalizeSettings, INativeTheme } from '@uifabric/theming-react-native';
 import {
   IProcessResult,
@@ -10,6 +10,9 @@ import {
   ISlotProps
 } from '@uifabric/foundation-composable';
 import { mergeSettings } from '@uifabric/theme-settings';
+import { IWithTheme } from './Customize.types';
+import { getOverrideKey } from '@uifabric/theming/src';
+import { resolveSettings } from '@uifabric/theming-react-native/';
 
 /**
  * Get the cache for the given component from the theme, creating it if necessary
@@ -38,20 +41,45 @@ export function standardPrepareRenderData(props: IGenericProps, theme: INativeTh
   };
 }
 
-/**
- * Look up the entry specified by name from the theme, uses the props as the mask for overrides.  So if
- * there is an override called 'disabled' this will be set if a prop called disabled is truthy.
- *
- * @param name - name of the theme entry to try to look up
- * @param renderData - render data being prepared
- */
-export function standardThemeSettings(name: string, renderData: IRenderData, overrides?: object): IRenderData {
-  const { settings, styleKey } = getThemeSettings(renderData.theme, name, overrides || renderData.props);
-  return {
-    ...renderData,
-    slotProps: settings,
-    settingsKey: styleKey
-  };
+export function standardThemeQueryInputs(name: string, renderData: IRenderData): { name: string; overrides?: object } {
+  return { name, overrides: renderData.props };
+}
+
+export function _processSettings<TComponent extends IComponent>(component: TComponent, data: IRenderData): IRenderData {
+  const { name, overrides } = component.themeQueryInputs(component.className, data);
+  let { settings, styleKey } = getThemeSettings(data.theme, name);
+  const cache = _getComponentCache(component, data.theme);
+
+  // if there are layers of customized settings apply those, caching along the way and building up the cache key as appropriate
+  if (component.customSettings.length > 0) {
+    const propsWithTheme = data.props as IWithTheme<IComponentProps<IComponent>>;
+    propsWithTheme.theme = data.theme;
+    for (const customEntry of component.customSettings) {
+      const customSettings = customEntry.settings;
+      const queryKeys = customSettings ? ['-'] : customEntry.queryKeys(propsWithTheme);
+      styleKey = styleKey + queryKeys.map(k => k || '-').join('-');
+      if (cache[styleKey]) {
+        settings = cache[styleKey];
+      } else {
+        cache[styleKey] = settings = mergeSettings(
+          settings,
+          customEntry.settings ? customEntry.settings : customEntry.getSettings(queryKeys)
+        ) as ISlotProps;
+      }
+    }
+    delete propsWithTheme.theme;
+  }
+
+  // finally get the override key to append to the merged settings
+  styleKey = getOverrideKey(styleKey, settings._precedence || [], overrides);
+  if (cache[styleKey]) {
+    settings = cache[styleKey];
+  } else {
+    cache[styleKey] = settings = resolveSettings(data.theme, settings, overrides) as ISlotProps;
+  }
+
+  data.slotProps = settings;
+  return data;
 }
 
 /**
@@ -168,10 +196,8 @@ export function useProcessComponent<TComponent extends IComponent>(
   let renderData = standardPrepareRenderData(userProps, theme as INativeTheme);
   renderData = component.usePrepareState!(renderData);
 
-  // query settings from the theme
-  renderData = component.themeSettings
-    ? component.themeSettings(component.className, renderData)
-    : standardThemeSettings(component.className, renderData);
+  // process the base settings from the theme and any component customizations
+  renderData = _processSettings(component, renderData);
 
   // process tokens if any are specified
   renderData = _processTokens(component, renderData);

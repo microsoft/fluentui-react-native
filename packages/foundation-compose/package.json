@@ -19,7 +19,8 @@
   "license": "MIT",
   "dependencies": {
     "@uifabric/foundation-composable": "0.1.1",
-    "@uifabric/theming-react-native": "0.1.1"
+    "@uifabric/theming-react-native": "0.1.1",
+    "json5": "2.1.0"
   },
   "devDependencies": {
     "@types/es6-collections": "^0.5.29",

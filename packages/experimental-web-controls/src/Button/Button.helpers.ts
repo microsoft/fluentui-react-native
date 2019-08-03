@@ -1,6 +1,5 @@
 import { IButtonCustomizableProps, IButtonRenderData, IButtonSettings } from './Button.types';
 import { renderSlot, IAsResolved } from '@uifabric/foundation-composable';
-import { standardThemeSettings } from '@uifabric/foundation-compose';
 import { finalizeSettings } from '@uifabric/theming-react-native';
 import {
   textTokenKeys,
@@ -14,6 +13,7 @@ import {
 } from '../tokens';
 import { mergeSettings } from '@uifabric/theme-settings';
 import { useAsPressable } from '../Pressable';
+import { IThemeQueryInputs } from '@uifabric/foundation-compose';
 
 export function usePrepareState(data: IButtonRenderData): IButtonRenderData {
   // create the button state/info once, re-renders happen with pressable state changes so this is storage
@@ -30,8 +30,8 @@ export function usePrepareState(data: IButtonRenderData): IButtonRenderData {
   return data;
 }
 
-export function themeSettings(name: string, renderData: IButtonRenderData): IButtonRenderData {
-  return standardThemeSettings(name, renderData, renderData.state.info);
+export function themeQueryInputs(name: string, renderData: IButtonRenderData): IThemeQueryInputs {
+  return { name, overrides: renderData.state.info };
 }
 
 export const keyProps: (keyof IButtonCustomizableProps)[] = [

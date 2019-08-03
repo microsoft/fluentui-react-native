@@ -1,6 +1,7 @@
 import { INativeTheme } from '@uifabric/theming-react-native';
 import { ISlotTypes, IResolvedSlotData, IComposable } from '@uifabric/foundation-composable';
 import { IComponentSettings } from '@uifabric/theme-settings';
+import { ICustomizedSettings, ICustomizedValueType } from './Customize.types';
 
 /* tslint:disable no-any */
 
@@ -44,6 +45,11 @@ export type IFinalizer<TProps extends object, TSlotProps extends IComponentSetti
   renderData: IRenderData<TProps, TSlotProps, TState>
 ) => IRenderData<TProps, TSlotProps, TState>;
 
+export interface IThemeQueryInputs {
+  name: string;
+  overrides?: object;
+}
+
 export interface IComponent<
   TProps extends object = object,
   TSlotProps extends IComponentSettings = IComponentSettings,
@@ -58,6 +64,7 @@ export interface IComponent<
    * against the component using JSX
    */
   propsType?: TProps;
+  settingsType?: TSlotProps;
 
   /**
    * This routine should return a new render data object with the props, userProps and theme specified.  While a default implementation
@@ -70,13 +77,14 @@ export interface IComponent<
   ) => IRenderData<TCustomizeableProps, TSlotProps, TState>;
 
   /**
-   * Retrieve the settings for this component from the theme and put them into slotProps.  The default processing will retrieve the
-   * settings by class name, using the props as the override lookup object.
+   * This allows dynamically changing the name looked up in settings as well as the object used for overrides
    */
-  themeSettings?: (
-    name: string,
-    renderData: IRenderData<TCustomizeableProps, TSlotProps, TState>
-  ) => IRenderData<TCustomizeableProps, TSlotProps, TState>;
+  themeQueryInputs?: (name: string, renderData: IRenderData<TCustomizeableProps, TSlotProps, TState>) => IThemeQueryInputs;
+
+  /**
+   * Settings to be merged in after the theme settings
+   */
+  customSettings?: ICustomizedSettings<TSlotProps, TCustomizeableProps>[];
 
   /**
    * An array of style processing functions, all entries with cacheableMask set will be applied first, followed by entries without
@@ -120,6 +128,8 @@ export interface IComponent<
  */
 export type IComponentProps<TComponent extends IComponent> = NonNullable<TComponent['propsType']>;
 
+export type IExtractSettingsType<TComponent extends IComponent> = NonNullable<TComponent['settingsType']>;
+
 export type IPropsWithChildren<TProps extends object> = TProps & {
   children?: React.ReactNode;
 };
@@ -130,9 +140,15 @@ export type IPropsWithChildren<TProps extends object> = TProps & {
 export type IComponentCustomizations<TComponent extends IComponent> = {
   __options: TComponent;
   __composable: IComposable;
+  customize: ICustomizeRoutine<TComponent, IComponentProps<TComponent>>;
 };
 
 export type IReactComponentType<TComponent extends IComponent> = React.FunctionComponent<IComponentProps<TComponent>> &
   IComponentCustomizations<TComponent>;
 
 export type IComponentReturnType<TComponent extends IComponent> = IReactComponentType<TComponent> & TComponent['statics'];
+
+export type ICustomizeRoutine<TComponent extends IComponent, TProps extends object> = (
+  literals: TemplateStringsArray,
+  ...keys: ICustomizedValueType<TProps>[]
+) => IComponentReturnType<TComponent>;
