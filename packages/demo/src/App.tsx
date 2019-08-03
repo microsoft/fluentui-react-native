@@ -10,6 +10,29 @@ const _pressableRenderStyle: IPressableProps['renderStyle'] = (state: IPressable
   };
 };
 
+const BlueButton = Button.customize`{
+  root: {
+    borderRadius: 7,
+    backgroundColor: 'blue',
+    color: 'white'
+  },
+  _overrides: {
+    hovered: {
+      root: {
+        backgroundColor: '#8080ff',
+        color: 'black'
+      }
+    }
+  }
+}`;
+
+const DynamicButton = BlueButton.customize`{
+  root: {
+    borderColor: ${p => (p.disabled ? 'pink' : 'purple')}
+    fontSize: ${p => (p.disabled ? 'xLarge' : 'medium')}
+  }
+}`;
+
 export const App: React.FunctionComponent = () => {
   return (
     <div>
@@ -18,6 +41,9 @@ export const App: React.FunctionComponent = () => {
         <Text>Hello again</Text>
       </Pressable>
       <Button content="Test Button" />
+      <BlueButton content="Blue Button" />
+      <DynamicButton content="Not Disabled" />
+      <DynamicButton disabled content="Disabled" />
     </div>
   );
 };

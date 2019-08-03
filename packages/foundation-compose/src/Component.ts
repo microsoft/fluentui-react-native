@@ -51,13 +51,13 @@ export function _processSettings<TComponent extends IComponent>(component: TComp
   const cache = _getComponentCache(component, data.theme);
 
   // if there are layers of customized settings apply those, caching along the way and building up the cache key as appropriate
-  if (component.customSettings.length > 0) {
+  if (component.customSettings && component.customSettings.length > 0) {
     const propsWithTheme = data.props as IWithTheme<IComponentProps<IComponent>>;
     propsWithTheme.theme = data.theme;
     for (const customEntry of component.customSettings) {
       const customSettings = customEntry.settings;
       const queryKeys = customSettings ? ['-'] : customEntry.queryKeys(propsWithTheme);
-      styleKey = styleKey + queryKeys.map(k => k || '-').join('-');
+      styleKey = styleKey + '|' + queryKeys.map(k => k || '-').join('-');
       if (cache[styleKey]) {
         settings = cache[styleKey];
       } else {
@@ -71,14 +71,16 @@ export function _processSettings<TComponent extends IComponent>(component: TComp
   }
 
   // finally get the override key to append to the merged settings
-  styleKey = getOverrideKey(styleKey, settings._precedence || [], overrides);
-  if (cache[styleKey]) {
-    settings = cache[styleKey];
-  } else {
-    cache[styleKey] = settings = resolveSettings(data.theme, settings, overrides) as ISlotProps;
+  if (settings) {
+    styleKey = getOverrideKey(styleKey, settings._precedence || [], overrides);
+    if (cache[styleKey]) {
+      settings = cache[styleKey];
+    } else {
+      cache[styleKey] = settings = resolveSettings(data.theme, settings, overrides) as ISlotProps;
+    }
+    data.settingsKey = styleKey;
+    data.slotProps = settings;
   }
-
-  data.slotProps = settings;
   return data;
 }
 
@@ -125,9 +127,8 @@ function _processTokens(component: IComponent, renderData: IRenderData): IRender
     const rootProps = (renderData.slotProps && renderData.slotProps.root) || {};
     const { collected, delta } = _collectKeys(renderData.props, rootProps, component.tokenKeys);
     let cacheKey = renderData.settingsKey || 'none';
-    if (delta.length > 0) {
-      cacheKey = cacheKey.concat('-', delta.join('-'));
-    }
+
+    cacheKey = delta.length > 0 ? cacheKey.concat('|', delta.join('-')) : cacheKey.concat('|');
 
     if (cache[cacheKey]) {
       renderData.slotProps = cache[cacheKey];

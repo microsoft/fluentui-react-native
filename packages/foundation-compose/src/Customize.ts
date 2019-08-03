@@ -1,6 +1,6 @@
 import { ICustomizedSettings, ICustomizedValueType, IPropFunction, IWithTheme, ICustomizedResult } from './Customize.types';
 import { IComponentSettings } from '@uifabric/theme-settings';
-import { JSON5 } from 'json5';
+const JSON5 = require('json5');
 
 /* tslint:disable:no-any */
 
