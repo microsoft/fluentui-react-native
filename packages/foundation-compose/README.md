@@ -58,3 +58,7 @@ The following diagram shows what this might look like for a base or composed con
 ![Component Layering Diagram](./ComponentLayering.png)
 
 It's also worth mentioning that these steps are optional. If a component has no tokens, then token processors need not be defined. Similarly if there are no settings to obtain the settings may return an empty result.
+
+### ToDo Items
+
+Some ideas for explanation are [here](./Todo.md)
