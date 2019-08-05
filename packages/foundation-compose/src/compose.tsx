@@ -17,10 +17,12 @@ function getComponentOptions<TComponent extends IComponent>(inputComponent: TCom
   const baseComposable = (base && ((base as unknown) as IComponentCustomizations<TComponent>).__options) || undefined;
   const baseRoot = (!baseComposable && base) || undefined;
   if (baseComposable || baseRoot) {
-    const slots: ISlotTypes = {
-      ...((baseComposable && baseComposable.slots) || {}),
-      ...inputComponent.slots
-    } as ISlotTypes;
+    // append custom settings to any pre-existing ones
+    const parent = baseComposable || ({} as TComponent);
+    const slots: ISlotTypes = { ...parent.slots, ...inputComponent.slots };
+    const customSettings = [].concat(parent.customSettings, inputComponent.customSettings).filter(v => v);
+    const tokenProcessors = [].concat(parent.tokenProcessors, inputComponent.tokenProcessors).filter(v => v);
+
     if (baseRoot) {
       /* tslint:disable-next-line no-any */
       slots.root = baseRoot as any;
@@ -28,7 +30,9 @@ function getComponentOptions<TComponent extends IComponent>(inputComponent: TCom
     return {
       ...baseComposable,
       ...inputComponent,
-      slots
+      slots,
+      customSettings,
+      tokenProcessors
     };
   }
   return inputComponent;
