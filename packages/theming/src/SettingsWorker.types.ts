@@ -13,7 +13,6 @@ export interface ISettingsWorker {
    * @param theme - theme to use for lookups
    * @param target - if this is a string it will be looked up (or faulted into) the cache.  If it is a layer then
    * the layer will be resolved into a settings block with parent lookups and finalization happening as appropriate
-   * @param overrides - override states to apply to target once it is retrieved
    */
   getSettings: (theme: ITheme, target: string, overrides?: IOverrideLookup) => ISettingsWithKey;
 
