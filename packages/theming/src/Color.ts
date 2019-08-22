@@ -97,7 +97,9 @@ export function paletteFromFabricColors(p: IFabricWebPalette, isInverted?: boole
     actionLink: p.neutralPrimary,
     actionLinkHovered: p.neutralDark,
     link: p.themePrimary,
-    linkHovered: p.themeDarker
+    linkDisabled: p.themeSecondary,
+    linkHovered: p.themeDarker,
+    linkVisited: p.themeTertiary
   };
 }
 

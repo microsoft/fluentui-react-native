@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Pressable, Button, IPressableState, IPressableProps } from 'experimental-web-controls';
+import { Text, Link, Pressable, Button, IPressableState, IPressableProps } from 'experimental-web-controls';
 
 const _pressableRenderStyle: IPressableProps['renderStyle'] = (state: IPressableState) => {
   return {
@@ -45,6 +45,7 @@ export const App: React.FunctionComponent = () => {
   return (
     <div>
       <h1>Hello, world!!</h1>
+      <Link URL="https://www.bing.com/" content="Click Me!" />
       <Pressable renderStyle={_pressableRenderStyle}>
         <Text>Hello again</Text>
       </Pressable>
