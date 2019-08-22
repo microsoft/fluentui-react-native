@@ -9,10 +9,13 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "start": "tsc -w --preserveWatchOutput",
-    "test": "jest",
-    "start-test": "jest --watch"
+    "build": "just-scripts build",
+    "just": "just-scripts",
+    "clean": "just-scripts clean",
+    "code-style": "just-scripts code-style",
+    "start": "just-scripts dev",
+    "start-test": "just-scripts jest-watch",
+    "update-snapshots": "just-scripts jest -u"
   },
   "keywords": [],
   "author": "",
@@ -27,7 +30,8 @@
     "@types/node": "^10.3.5",
     "@types/jest": "^19.2.2",
     "@types/react": "16.8.15",
-    "react": "16.8.3"
+    "react": "16.8.3",
+    "@uifabric/build-native": "^0.1.1"
   },
   "peerDependencies": {
     "react": "16.8.3"

@@ -8,10 +8,8 @@
   },
   "main": "lib/index.tsx",
   "scripts": {
-    "build": "tsc",
-    "start": "webpack-dev-server --mode development",
-    "test": "jest",
-    "start-test": "jest --watch"
+    "build": "just-scripts build",
+    "start": "just-scripts dev"
   },
   "keywords": [],
   "author": "",
@@ -26,11 +24,7 @@
     "@types/es6-promise": "0.0.32",
     "@types/node": "^10.3.5",
     "@types/jest": "^19.2.2",
-    "babel-core": "6.26.3",
-    "babel-loader": "8.0.6",
-    "babel-preset-env": "1.7.0",
-    "babel-preset-stage-2": "6.24.1",
-    "babel-preset-react": "6.24.1",
-    "ts-loader": "6.0.4"
+    "ts-loader": "6.0.4",
+    "@uifabric/build-native": "^0.1.1"
   }
 }
