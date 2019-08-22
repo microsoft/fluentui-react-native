@@ -1,25 +1,19 @@
-let path = require('path');
-const resources = require('../../scripts/webpack/webpack-resources');
+const { just } = require('@uifabric/build-native');
+const { webpackConfig, webpackMerge, htmlOverlay } = just;
 
 const BUNDLE_NAME = 'demo';
-const IS_PRODUCTION = process.argv.indexOf('--production') > -1;
 
-module.exports = resources.createConfig(BUNDLE_NAME, IS_PRODUCTION, {
-  entry: {
-    [BUNDLE_NAME]: './lib/index.js'
-  },
-
-  output: {
-    libraryTarget: 'var',
-    library: 'Fabric'
-  },
-
-  externals: [
-    {
-      react: 'React'
+module.exports = webpackMerge(
+  webpackConfig,
+  htmlOverlay({
+    template: './index.ejs'
+  }),
+  {
+    entry: {
+      [BUNDLE_NAME]: './lib/index.js'
     },
-    {
-      'react-dom': 'ReactDOM'
+    output: {
+      filename: `${BUNDLE_NAME}.js`
     }
-  ]
-});
+  }
+);

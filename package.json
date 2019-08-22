@@ -42,18 +42,8 @@
     "update-snapshots": "cd packages/office-ui-fabric-react && npm run update-snapshots"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^1.11.0",
-    "@typescript-eslint/parser": "^1.11.0",
     "beachball": "^1.11.7",
-    "eslint": "^6.0.1",
-    "jest": "^24.8.0",
-    "just-scripts": "^0.26.0",
-    "just-task": "^0.13.1",
-    "lerna": "^3.16.4",
-    "typescript": "~3.4.4",
-    "webpack": "~4.29.5",
-    "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "3.7.2"
+    "lerna": "^3.16.4"
   },
   "lint-staged": {
     "linters": {
