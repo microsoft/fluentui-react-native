@@ -1,10 +1,10 @@
 import { IButtonComponent } from './Button.types';
 import { compose } from '@uifabric/foundation-compose';
 // import { Stack } from '../Stack';
-import { Text } from '../Text';
+import { Text } from '../Text/index';
 import { keyProps, processor, finalizer, themeQueryInputs, usePrepareState, view } from './Button.helpers';
 import { loadButtonSettings } from './Button.settings';
-import { Stack } from '../Stack';
+import { Stack } from '../Stack/index';
 
 loadButtonSettings();
 

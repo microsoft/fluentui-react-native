@@ -1,25 +1,25 @@
-const path = require('path');
+let path = require('path');
+const resources = require('../../scripts/webpack/webpack-resources');
 
-module.exports = {
-  entry: './src/index.tsx',
-  module: {
-    rules: [
-      {
-        test: /\.(ts|tsx)$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/
-      }
-    ]
+const BUNDLE_NAME = 'demo';
+const IS_PRODUCTION = process.argv.indexOf('--production') > -1;
+
+module.exports = resources.createConfig(BUNDLE_NAME, IS_PRODUCTION, {
+  entry: {
+    [BUNDLE_NAME]: './lib/index.js'
   },
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
-    alias: {
-      react: path.resolve('./node_modules/react')
-    }
-  },
+
   output: {
-    path: path.resolve(__dirname, '/dist'),
-    publicPath: '/',
-    filename: 'bundle.js'
-  }
-};
+    libraryTarget: 'var',
+    library: 'Fabric'
+  },
+
+  externals: [
+    {
+      react: 'React'
+    },
+    {
+      'react-dom': 'ReactDOM'
+    }
+  ]
+});

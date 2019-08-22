@@ -17,8 +17,7 @@
     "clean-all": "node ./scripts/clean-all.js",
     "vrtest": "cd apps && cd vr-tests && npm run screener",
     "a11ytest": "cd apps && cd a11y-tests && npm run test",
-    "start": "cd apps && cd fabric-website-resources && npm start",
-    "start-exp": "cd packages && cd experiments && npm start",
+    "start": "cd apps && cd demo && npm start",
     "build": "lerna run build --stream -- --production --lint",
     "buildci": "lerna run build --stream -- --lint",
     "builddemo": "node ./scripts/monorepo/buildTo.js fabric-website-resources --min",
@@ -42,13 +41,6 @@
     "update-api": "cd packages/office-ui-fabric-react && npm run update-api",
     "update-snapshots": "cd packages/office-ui-fabric-react && npm run update-snapshots"
   },
-  "scripts": {
-    "build": "lerna run --stream build",
-    "start": "node ./scripts/watch.js",
-    "test": "lerna run test",
-    "lint": "eslint packages --ext .ts,.js",
-    "docz:dev": "lerna run docz:dev"
-  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^1.11.0",
     "@typescript-eslint/parser": "^1.11.0",
@@ -67,7 +59,12 @@
     "linters": {
       "*.{ts,tsx,js,jsx}": [
         "node ./scripts/lint-staged/prettier",
-        "node ./scripts/lint-staged/eslint",
+        "node ./scripts/lint-staged/tslint",
+        "git add"
+      ],
+      "*.{js,jsx,json,scss,html,md}": [
+        "node ./scripts/lint-staged/prettier",
+        "node ./scripts/lint-staged/auto-convert-change-files",
         "git add"
       ]
     },

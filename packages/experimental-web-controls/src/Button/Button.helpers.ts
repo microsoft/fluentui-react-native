@@ -10,9 +10,9 @@ import {
   processForegroundTokens,
   processTextTokens,
   processBorderTokens
-} from '../tokens';
+} from '../tokens/index';
 import { mergeSettings } from '@uifabric/theme-settings';
-import { useAsPressable } from '../Pressable';
+import { useAsPressable } from '../Pressable/index';
 import { IThemeQueryInputs } from '@uifabric/foundation-compose';
 
 export function usePrepareState(data: IButtonRenderData): IButtonRenderData {

@@ -1,5 +1,5 @@
 import { INativeThemeDefinition, INativeTheme } from './INativeTheme';
-import { getBaselinePlatformTheme } from './platform';
+import { getBaselinePlatformTheme } from './platform/index';
 import { resolvePartialTheme } from '@uifabric/theming';
 import { IThemeRegistry, createThemeRegistry, IProcessTheme, IThemeEventListener } from '@uifabric/theme-registry';
 
