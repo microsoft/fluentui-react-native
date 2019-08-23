@@ -8,7 +8,7 @@ import { useAsPressable } from '../Pressable';
 import { foregroundColorKeys, processForegroundTokens, processTextTokens, processTokens, textTokenKeys } from '../tokens';
 import { mergeSettings } from '@uifabric/theme-settings';
 import { finalizeSettings } from '@uifabric/theming-react-native';
-import { IAsResolved, renderSlot } from '@uifabric/foundation-composable';
+import { IAsResolved, IWithComposable, IGenericProps, IProcessResult, renderSlot, wrapStockComponent, INativeSlotType } from '@uifabric/foundation-composable';
 import { IThemeQueryInputs } from '@uifabric/foundation-compose';
 
 export function usePrepareState(data: ILinkRenderData): ILinkRenderData {
@@ -74,3 +74,19 @@ export function view(result: IAsResolved<ILinkRenderData>, ...children: React.Re
 
   return renderSlot(slots.root, renderSlot(slots.content), ...additionalChildren);
 }
+
+export const LinkRoot : IWithComposable = { __composable: {
+  useProcessProps(props: IGenericProps) : IProcessResult
+  {
+    return {props: props}
+  },
+
+  render: (propInfo: IProcessResult, ...children) : JSX.Element | null =>
+  {
+    if (propInfo.props["href"])
+    {
+      return wrapStockComponent('a' as INativeSlotType).render(propInfo, ...children);
+    }
+    return wrapStockComponent('button' as INativeSlotType).render(propInfo, ...children);
+  }
+}};

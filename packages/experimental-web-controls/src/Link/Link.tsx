@@ -7,7 +7,7 @@ import { compose } from '@uifabric/foundation-compose';
 import { ILinkComponent } from './Link.types';
 import { Text } from '../Text';
 import { loadLinkSettings } from './Link.settings';
-import { usePrepareState, processor, keyProps, finalizer, themeQueryInputs, tokenKeys, view } from './Link.helpers';
+import { finalizer, keyProps, LinkRoot, processor, themeQueryInputs, tokenKeys, usePrepareState, view } from './Link.helpers';
 
 loadLinkSettings();
 
@@ -20,7 +20,7 @@ export const Link = compose<ILinkComponent>({
   tokenKeys,
   view,
   slots: {
-    root: true ? 'a' : 'button',
+    root: LinkRoot,
     content: Text
   }
 });
