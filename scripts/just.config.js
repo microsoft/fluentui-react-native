@@ -13,7 +13,6 @@ const { ts } = require('./tasks/ts');
 const { tslint } = require('./tasks/tslint');
 const { webpack, webpackDevServer } = require('./tasks/webpack');
 const { verifyApiExtractor, updateApiExtractor } = require('./tasks/api-extractor');
-const lintImports = require('./tasks/lint-imports');
 const prettier = require('./tasks/prettier');
 const bundleSizeCollect = require('./tasks/bundle-size-collect');
 const checkForModifiedFiles = require('./tasks/check-for-modified-files');
@@ -48,7 +47,6 @@ module.exports = function preset() {
   task('webpack-dev-server', webpackDevServer);
   task('verify-api-extractor', verifyApiExtractor);
   task('update-api-extractor', updateApiExtractor);
-  task('lint-imports', lintImports);
   task('prettier', prettier);
   task('bundle-size-collect', bundleSizeCollect);
   task('check-for-modified-files', checkForModifiedFiles);
@@ -73,10 +71,7 @@ module.exports = function preset() {
       'clean',
       'copy',
       'sass',
-      parallel(
-        condition('validate', () => !argv().min),
-        series('ts', parallel(condition('webpack', () => !argv().min), condition('lint-imports', () => !argv().min)))
-      )
+      parallel(condition('validate', () => !argv().min), series('ts', parallel(condition('webpack', () => !argv().min))))
     )
   ).cached();
 
