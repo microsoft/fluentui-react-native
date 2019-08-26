@@ -54,7 +54,6 @@
       ],
       "*.{js,jsx,json,scss,html,md}": [
         "node ./scripts/lint-staged/prettier",
-        "node ./scripts/lint-staged/auto-convert-change-files",
         "git add"
       ]
     },
