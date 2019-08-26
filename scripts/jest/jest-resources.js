@@ -4,7 +4,6 @@ const resolve = require('resolve');
 const { resolveCwd } = require('just-scripts');
 
 module.exports = {
-  resolveMergeStylesSerializer: () => resolveCwd('@uifabric/jest-serializer-merge-styles'),
   createRawConfig: () => ({
     rootDir: 'lib',
     testRegex: '(/__tests__/.*|\\.(test|spec))\\.js$'
@@ -19,10 +18,11 @@ module.exports = {
         },
 
         transform: {
-          '.(ts|tsx)': resolve.sync('ts-jest/dist')
+          '.(ts|tsx)': resolve.sync('ts-jest/dist'),
+          '^.+\\.js$': 'babel-jest'
         },
 
-        transformIgnorePatterns: ['/node_modules/', '/lib-commonjs/', '\\.js$'],
+        transformIgnorePatterns: ['node_modules/(?!(immutable-merge|theme-settings)/)', '/node_modules/', '/lib-commonjs/', '\\.js$'],
 
         reporters: [path.resolve(__dirname, './jest-reporter.js')],
 

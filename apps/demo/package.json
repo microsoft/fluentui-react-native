@@ -18,8 +18,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "react": "16.8.3",
-    "react-dom": "16.8.3",
     "experimental-web-controls": "0.1.1"
   },
   "devDependencies": {
@@ -27,7 +25,10 @@
     "@types/es6-promise": "0.0.32",
     "@types/node": "^10.3.5",
     "@types/jest": "^19.2.2",
+    "@types/react": "16.8.15",
+    "@types/react-dom": "16.8.3",
     "react": "16.8.3",
+    "react-app-polyfill": "~1.0.1",
     "react-dom": "16.8.3",
     "ts-loader": "6.0.4",
     "@uifabric/build-native": "^0.1.1"
