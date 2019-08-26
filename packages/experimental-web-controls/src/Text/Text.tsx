@@ -1,6 +1,6 @@
 import { ITextComponent, ITextRenderData, ITextProps } from './Text.types';
 import { compose } from '@uifabric/foundation-compose';
-import { textTokenKeys, foregroundColorKeys, processTextTokens, processForegroundTokens } from '../tokens';
+import { textTokenKeys, foregroundColorKeys, processTextTokens, processForegroundTokens } from '../tokens/index';
 import { mergeSettings } from '@uifabric/theme-settings';
 import { loadTextSettings } from './Text.settings';
 

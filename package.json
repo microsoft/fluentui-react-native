@@ -7,29 +7,71 @@
   "license": "MIT",
   "author": "Jason Morse <jasonmo@microsoft.com>",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Microsoft/ui-fabric-react-native.git"
+  },
   "scripts": {
-    "build": "lerna run --stream build",
-    "start": "node ./scripts/watch.js",
-    "test": "lerna run test",
-    "lint": "eslint packages --ext .ts,.js",
-    "docz:dev": "lerna run docz:dev"
+    "preinstall": "node ./scripts/use-yarn-please.js",
+    "postinstall": "node ./scripts/postinstall.js",
+    "clean-all": "node ./scripts/clean-all.js",
+    "vrtest": "cd apps && cd vr-tests && npm run screener",
+    "a11ytest": "cd apps && cd a11y-tests && npm run test",
+    "start": "cd apps && cd demo && npm start",
+    "build": "lerna run build --stream -- --production --lint",
+    "buildci": "lerna run build --stream -- --lint",
+    "builddemo": "node ./scripts/monorepo/buildTo.js fabric-website-resources --min",
+    "buildfast": "lerna run build -- --min",
+    "buildto": "node ./scripts/monorepo/buildTo.js",
+    "bundlesize": "cd scripts && npm run bundlesize",
+    "bundlesizecollect": "cd scripts && just-scripts bundle-size-collect",
+    "rebuild": "node ./scripts/invalidate-just-cache.js && npx lerna build --stream",
+    "change": "beachball change",
+    "check-for-changed-files": "cd scripts && just-scripts check-for-modified-files",
+    "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
+    "code-style": "lerna run code-style --stream",
+    "codepen": "cd packages/office-ui-fabric-react && node ../../scripts/local-codepen.js",
+    "generate-version-files": "cd scripts && just-scripts generate-version-files",
+    "prettier": "node scripts/prettier.js",
+    "publish:beachball": "beachball publish",
+    "update-a11y": "cd apps/a11y-tests && npm run update-snapshots",
+    "update-api": "cd packages/office-ui-fabric-react && npm run update-api",
+    "update-snapshots": "cd packages/office-ui-fabric-react && npm run update-snapshots"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^1.11.0",
-    "@typescript-eslint/parser": "^1.11.0",
-    "eslint": "^6.0.1",
-    "jest": "^24.8.0",
-    "just-scripts": "^0.26.0",
-    "just-task": "^0.13.1",
-    "lerna": "^3.16.4",
-    "typescript": "~3.4.4",
-    "webpack": "~4.29.5",
-    "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "3.7.2"
+    "beachball": "^1.11.7",
+    "lerna": "^3.16.4"
   },
-  "workspaces": [
-    "documentation",
-    "packages/*"
-  ],
-  "repository": "https://github.com/Microsoft/ui-fabric-react-native.git"
+  "lint-staged": {
+    "linters": {
+      "*.{ts,tsx,js,jsx}": [
+        "node ./scripts/lint-staged/prettier",
+        "node ./scripts/lint-staged/tslint",
+        "git add"
+      ],
+      "*.{js,jsx,json,scss,html,md}": [
+        "node ./scripts/lint-staged/prettier",
+        "git add"
+      ]
+    },
+    "ignore": [
+      "common/scripts/*.js",
+      "packages/tslint-rules/tslint.json",
+      "**/CHANGELOG.*",
+      "**/*.api.md",
+      "**/_*.scss"
+    ]
+  },
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*",
+      "scripts"
+    ]
+  },
+  "beachball": {
+    "disallowedChangeTypes": [
+      "major"
+    ]
+  }
 }

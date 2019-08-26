@@ -1,5 +1,5 @@
 import { IComponent, IRenderData, IComponentProps } from './Component.types';
-import { getThemeSettings, finalizeSettings, INativeTheme } from '@uifabric/theming-react-native';
+import { getThemeSettings, finalizeSettings, INativeTheme, resolveSettings } from '@uifabric/theming-react-native';
 import {
   IProcessResult,
   IResolvedSlot,
@@ -11,8 +11,7 @@ import {
 } from '@uifabric/foundation-composable';
 import { mergeSettings } from '@uifabric/theme-settings';
 import { IWithTheme } from './Customize.types';
-import { getOverrideKey } from '@uifabric/theming/src';
-import { resolveSettings } from '@uifabric/theming-react-native/';
+import { getOverrideKey } from '@uifabric/theming';
 
 /**
  * Get the cache for the given component from the theme, creating it if necessary
