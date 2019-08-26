@@ -1,6 +1,6 @@
 import { IComponent, IRenderData } from '@uifabric/foundation-compose';
 import { IComponentSettings, IStyleProp } from '@uifabric/theme-settings';
-import { ITextTokens, IForegroundColorTokens } from '../tokens';
+import { ITextTokens, IForegroundColorTokens } from '../tokens/index';
 import { ICSSStyle } from '../htmlTypes';
 
 /**

@@ -4,7 +4,6 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
-    "declarationMap": true,
     "strict": true,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": true,
@@ -17,6 +16,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "sourceMap": true,
     "jsx": "react"
   }
 }
