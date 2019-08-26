@@ -58,22 +58,6 @@ describe('Theme tests', () => {
     expect(resolved.settings).toBe(theme.settings);
   });
 
-  test('resolvePartialTheme copies theme.palette when the partial theme has an empty palette property', () => {
-    const resolved = resolvePartialTheme(theme, {
-      palette: {}
-    });
-    expect(resolved.palette).toEqual(theme.palette);
-    expect(resolved.palette).not.toBe(theme.palette);
-  });
-
-  test('resolvePartialTheme copies theme.typography when the partial theme has an empty typography property', () => {
-    const resolved = resolvePartialTheme(theme, {
-      typography: {}
-    });
-    expect(resolved.typography).toEqual(theme.typography);
-    expect(resolved.typography).not.toBe(theme.typography);
-  });
-
   test('resolvePartialTheme returns a blend of the partial theme and the full theme', () => {
     const resolved = resolvePartialTheme(theme, partialTheme);
     expect(resolved).toEqual({
@@ -92,6 +76,7 @@ describe('Theme tests', () => {
           medium: '500'
         }
       } as ITypography,
+      spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
       settings: {
         View: {
           root: {
