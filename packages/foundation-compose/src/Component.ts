@@ -1,10 +1,5 @@
-import { IComponent, IRenderData, IComponentProps } from "./Component.types";
-import {
-  getThemeSettings,
-  finalizeSettings,
-  INativeTheme,
-  resolveSettings
-} from "@uifabric/theming-react-native";
+import { IComponent, IRenderData, IComponentProps } from './Component.types';
+import { getThemeSettings, finalizeSettings, INativeTheme, resolveSettings } from '@uifabric/theming-react-native';
 import {
   IProcessResult,
   IResolvedSlot,
@@ -13,10 +8,10 @@ import {
   renderSlot,
   IGenericProps,
   ISlotProps
-} from "@uifabric/foundation-composable";
-import { mergeSettings } from "@uifabric/theme-settings";
-import { IWithTheme } from "./Customize.types";
-import { getOverrideKey } from "@uifabric/theming";
+} from '@uifabric/foundation-composable';
+import { mergeSettings } from '@uifabric/theme-settings';
+import { IWithTheme } from './Customize.types';
+import { getOverrideKey } from '@uifabric/theming';
 
 /**
  * Get the cache for the given component from the theme, creating it if necessary
@@ -24,10 +19,7 @@ import { getOverrideKey } from "@uifabric/theming";
  * @param component - component to get the cache for, the component object itself will store the unique symbol for its lookups
  * @param theme - theme where the cache will be stored
  */
-function _getComponentCache(
-  component: IComponent,
-  theme: INativeTheme
-): { [key: string]: ISlotProps } {
+function _getComponentCache(component: IComponent, theme: INativeTheme): { [key: string]: ISlotProps } {
   const cacheKey = component.tokenCacheKey!;
   theme[cacheKey] = theme[cacheKey] || {};
   return theme[cacheKey];
@@ -40,10 +32,7 @@ function _getComponentCache(
  * @param props - input props for the component, these will be shallow copied to allow mutating the object
  * @param theme - theme to set into the render data
  */
-export function standardPrepareRenderData(
-  props: IGenericProps,
-  theme: INativeTheme
-): IRenderData {
+export function standardPrepareRenderData(props: IGenericProps, theme: INativeTheme): IRenderData {
   return {
     props: { ...props },
     theme,
@@ -51,44 +40,29 @@ export function standardPrepareRenderData(
   };
 }
 
-export function standardThemeQueryInputs(
-  name: string,
-  renderData: IRenderData
-): { name: string; overrides?: object } {
+export function standardThemeQueryInputs(name: string, renderData: IRenderData): { name: string; overrides?: object } {
   return { name, overrides: renderData.props };
 }
 
-export function _processSettings<TComponent extends IComponent>(
-  component: TComponent,
-  data: IRenderData
-): IRenderData {
-  const { name, overrides } = component.themeQueryInputs(
-    component.className,
-    data
-  );
+export function _processSettings<TComponent extends IComponent>(component: TComponent, data: IRenderData): IRenderData {
+  const { name, overrides } = component.themeQueryInputs(component.className, data);
   let { settings, styleKey } = getThemeSettings(data.theme, name);
   const cache = _getComponentCache(component, data.theme);
 
   // if there are layers of customized settings apply those, caching along the way and building up the cache key as appropriate
   if (component.customSettings && component.customSettings.length > 0) {
-    const propsWithTheme = data.props as IWithTheme<
-      IComponentProps<IComponent>
-    >;
+    const propsWithTheme = data.props as IWithTheme<IComponentProps<IComponent>>;
     propsWithTheme.theme = data.theme;
     for (const customEntry of component.customSettings) {
       const customSettings = customEntry.settings;
-      const queryKeys = customSettings
-        ? ["-"]
-        : customEntry.queryKeys(propsWithTheme);
-      styleKey = styleKey + "|" + queryKeys.map(k => k || "-").join("-");
+      const queryKeys = customSettings ? ['-'] : customEntry.queryKeys(propsWithTheme);
+      styleKey = styleKey + '|' + queryKeys.map(k => k || '-').join('-');
       if (cache[styleKey]) {
         settings = cache[styleKey];
       } else {
         cache[styleKey] = settings = mergeSettings(
           settings,
-          customEntry.settings
-            ? customEntry.settings
-            : customEntry.getSettings(queryKeys)
+          customEntry.settings ? customEntry.settings : customEntry.getSettings(queryKeys)
         ) as ISlotProps;
       }
     }
@@ -101,11 +75,7 @@ export function _processSettings<TComponent extends IComponent>(
     if (cache[styleKey]) {
       settings = cache[styleKey];
     } else {
-      cache[styleKey] = settings = resolveSettings(
-        data.theme,
-        settings,
-        overrides
-      ) as ISlotProps;
+      cache[styleKey] = settings = resolveSettings(data.theme, settings, overrides) as ISlotProps;
     }
     data.settingsKey = styleKey;
     data.slotProps = settings;
@@ -125,11 +95,7 @@ export function _processSettings<TComponent extends IComponent>(
  * @param rootSlotProps - root slot props which provide baseline values
  * @param keys - keys to extract from the set
  */
-function _collectKeys(
-  userProps: object,
-  rootSlotProps: object,
-  keys: string[]
-): { collected: object | undefined; delta: string[] } {
+function _collectKeys(userProps: object, rootSlotProps: object, keys: string[]): { collected: object | undefined; delta: string[] } {
   const collected = {};
   const delta: string[] = [];
   for (const key of keys) {
@@ -154,24 +120,14 @@ function _collectKeys(
  * @param component - component options that holds the token processors
  * @param renderData - render data to update with the results
  */
-function _processTokens(
-  component: IComponent,
-  renderData: IRenderData
-): IRenderData {
+function _processTokens(component: IComponent, renderData: IRenderData): IRenderData {
   if (component.tokenProcessors && component.tokenKeys) {
     const cache = _getComponentCache(component, renderData.theme);
     const rootProps = (renderData.slotProps && renderData.slotProps.root) || {};
-    const { collected, delta } = _collectKeys(
-      renderData.props,
-      rootProps,
-      component.tokenKeys
-    );
-    let cacheKey = renderData.settingsKey || "none";
+    const { collected, delta } = _collectKeys(renderData.props, rootProps, component.tokenKeys);
+    let cacheKey = renderData.settingsKey || 'none';
 
-    cacheKey =
-      delta.length > 0
-        ? cacheKey.concat("|", delta.join("-"))
-        : cacheKey.concat("|");
+    cacheKey = delta.length > 0 ? cacheKey.concat('|', delta.join('-')) : cacheKey.concat('|');
 
     if (cache[cacheKey]) {
       renderData.slotProps = cache[cacheKey];
@@ -180,10 +136,7 @@ function _processTokens(
         renderData.slotProps = entry.processor(collected || {}, renderData);
       }
       if (renderData.slotProps) {
-        renderData.slotProps = finalizeSettings(
-          renderData.theme,
-          renderData.slotProps
-        );
+        renderData.slotProps = finalizeSettings(renderData.theme, renderData.slotProps);
       }
       cache[cacheKey] = renderData.slotProps as ISlotProps;
     }
@@ -219,10 +172,7 @@ export function mergeTokenKeys(component: IComponent): string[] {
  * @param renderData - data being prepared for render.
  */
 export function standardFinalizer(renderData: IRenderData): IRenderData {
-  renderData.slotProps = finalizeSettings(
-    renderData.theme,
-    mergeSettings(renderData.slotProps!, { root: renderData.props })
-  );
+  renderData.slotProps = finalizeSettings(renderData.theme, mergeSettings(renderData.slotProps!, { root: renderData.props }));
   return renderData;
 }
 
@@ -253,9 +203,7 @@ export function useProcessComponent<TComponent extends IComponent>(
   renderData = _processTokens(component, renderData);
 
   // finally run any finalizers on the props
-  renderData = component.finalizer
-    ? component.finalizer(renderData)
-    : standardFinalizer(renderData);
+  renderData = component.finalizer ? component.finalizer(renderData) : standardFinalizer(renderData);
 
   return renderData as IProcessResult;
 }
@@ -274,10 +222,7 @@ export function renderComponent<TComponent extends IComponent>(
   /* tslint:disable-next-line no-any */
   return component.view
     ? component.view(result as any, ...children)
-    : (result.slots &&
-        result.slots.root &&
-        renderSlot(result.slots.root, ...children)) ||
-        null;
+    : (result.slots && result.slots.root && renderSlot(result.slots.root, ...children)) || null;
 }
 
 /**
@@ -285,9 +230,7 @@ export function renderComponent<TComponent extends IComponent>(
  *
  * @param component - component options for this component
  */
-export function wrapComponent<TComponent extends IComponent>(
-  component: TComponent
-): IComposable {
+export function wrapComponent<TComponent extends IComponent>(component: TComponent): IComposable {
   return {
     useProcessProps: (props: IGenericProps, theme: object) => {
       return useProcessComponent(component, props, theme);
