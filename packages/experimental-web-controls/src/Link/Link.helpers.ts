@@ -75,18 +75,21 @@ export function view(result: IAsResolved<ILinkRenderData>, ...children: React.Re
   return renderSlot(slots.root, renderSlot(slots.content), ...additionalChildren);
 }
 
-export const LinkRoot : IWithComposable = { __composable: {
-  useProcessProps(props: IGenericProps) : IProcessResult
-  {
-    return {props: props}
-  },
+export const LinkRoot: IWithComposable = {
+  __composable: {
+    useProcessProps(props: IGenericProps): IProcessResult {
+      return { props: props };
+    },
 
-  render: (propInfo: IProcessResult, ...children) : JSX.Element | null =>
-  {
-    if (propInfo.props["href"])
-    {
-      return wrapStockComponent('a' as INativeSlotType).render(propInfo, ...children);
+    render: (propInfo: IProcessResult, ...children): JSX.Element | null => {
+      if (propInfo.props['href']) {
+        // To disable a web anchor, we must remove the href property from the props list
+        if (propInfo.props['disabled']) {
+          delete propInfo.props['href'];
+        }
+        return wrapStockComponent('a' as INativeSlotType).render(propInfo, ...children);
+      }
+      return wrapStockComponent('button' as INativeSlotType).render(propInfo, ...children);
     }
-    return wrapStockComponent('button' as INativeSlotType).render(propInfo, ...children);
   }
-}};
+};
