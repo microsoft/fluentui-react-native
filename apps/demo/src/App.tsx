@@ -45,7 +45,8 @@ export const App: React.FunctionComponent = () => {
   return (
     <div>
       <h1>Hello, world!!</h1>
-      <Link URL="https://www.bing.com/" content="Click Me!" />
+      <Link URL="https://www.bing.com/" content="Click Me" />
+      <Link content="Button-Style Link" />
       <Pressable renderStyle={_pressableRenderStyle}>
         <Text>Hello again</Text>
       </Pressable>

@@ -1,6 +1,3 @@
-/**
-
- */
 'use strict';
 
 import { ILinkRenderData, ILinkCustomizableProps, ILinkSettings, ILinkTokens } from './Link.types';
@@ -8,32 +5,38 @@ import { useAsPressable } from '../Pressable';
 import { foregroundColorKeys, processForegroundTokens, processTextTokens, processTokens, textTokenKeys } from '../tokens';
 import { mergeSettings } from '@uifabric/theme-settings';
 import { finalizeSettings } from '@uifabric/theming-react-native';
-import { IAsResolved, IWithComposable, IGenericProps, IProcessResult, renderSlot, wrapStockComponent, INativeSlotType } from '@uifabric/foundation-composable';
+import {
+  IAsResolved,
+  IWithComposable,
+  IGenericProps,
+  IProcessResult,
+  renderSlot,
+  wrapStockComponent,
+  INativeSlotType
+} from '@uifabric/foundation-composable';
 import { IThemeQueryInputs } from '@uifabric/foundation-compose';
 
 export function usePrepareState(data: ILinkRenderData): ILinkRenderData {
   // create the Link state/info once, re-renders happen with pressable state changes so this is storage
   const { props, state } = useAsPressable(data.props);
   data.props = props;
-  data.state.info = {
+  data.state = {
     ...state,
-    disabled: data.props.disabled,
-    onClick: !!data.props.onClick,
-    URL: !!data.props.URL
+    disabled: data.props.disabled
   };
 
   return data;
 }
 
 export function themeQueryInputs(name: string, renderData: ILinkRenderData): IThemeQueryInputs {
-  return { name, overrides: renderData.state.info };
+  return { name, overrides: renderData.state };
 }
 
 export const keyProps: (keyof ILinkCustomizableProps)[] = ['content', 'disabled', 'URL'].concat(
   textTokenKeys,
   foregroundColorKeys
 ) as (keyof ILinkCustomizableProps)[];
-export const tokenKeys: (keyof ILinkTokens)[] = ['content', 'disabled'];
+export const tokenKeys: (keyof ILinkTokens)[] = ['visitedLinkColor'];
 
 function processLinkTokens(tokens: ILinkTokens, ...targetProps: object[]): void {
   processTokens(tokens, tokenKeys, ...targetProps);
@@ -42,8 +45,7 @@ function processLinkTokens(tokens: ILinkTokens, ...targetProps: object[]): void 
 export function processor(tokenProps: ILinkCustomizableProps, renderData: ILinkRenderData): ILinkSettings {
   const baseSettings = {
     root: {},
-    content: {},
-    disabled: {}
+    content: {}
   };
   processForegroundTokens(tokenProps, baseSettings.content);
   processTextTokens(tokenProps, baseSettings.content);

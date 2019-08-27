@@ -1,6 +1,3 @@
-/**
-
- */
 'use strict';
 
 import { compose } from '@uifabric/foundation-compose';

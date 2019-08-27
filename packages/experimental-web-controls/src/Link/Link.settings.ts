@@ -3,7 +3,8 @@ import { augmentPlatformTheme } from '@uifabric/theming-react-native';
 
 export function loadLinkSettings(): void {
   const linkSettings: ILinkSettings = {
-    root: {
+    root: {},
+    content: {
       fontFamily: 'primary',
       fontSize: 'medium',
       fontWeight: 'medium',
@@ -13,20 +14,19 @@ export function loadLinkSettings(): void {
         textDecoration: 'underline'
       }
     },
-    content: {},
     _overrides: {
       disabled: {
-        root: {
+        content: {
           color: 'linkDisabled'
         }
       },
       hovered: {
-        root: {
+        content: {
           color: 'linkHovered'
         }
       },
       visited: {
-        root: {
+        content: {
           color: 'linkVisited'
         }
       }
