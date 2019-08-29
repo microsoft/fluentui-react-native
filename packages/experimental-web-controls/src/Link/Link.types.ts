@@ -34,10 +34,11 @@ export interface ILinkProps extends IPressableProps {
 
 export type ILinkCustomizableProps = ILinkProps & ILinkTokens;
 
-export type ILinkSettings = IComponentSettings<{
+export type ILinkSlotProps = {
   root: ILinkCustomizableProps;
   content: ITextProps;
-}>;
+}
 
+export type ILinkSettings = IComponentSettings<ILinkSlotProps>;
 export type ILinkComponent = IComponent<ILinkProps, ILinkSettings, ILinkCustomizableProps, ILinkState>;
 export type ILinkRenderData = IRenderData<ILinkCustomizableProps, ILinkSettings, ILinkState>;
