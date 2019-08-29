@@ -51,9 +51,7 @@ export function processor(tokenProps: ILinkCustomizableProps, renderData: ILinkR
   processTextTokens(tokenProps, baseSettings.content);
   processLinkTokens(tokenProps, baseSettings.root);
 
-  return mergeSettings<ILinkSettings>(renderData.slotProps, baseSettings, {
-    root: { href: tokenProps.URL }
-  });
+  return mergeSettings<ILinkSettings>(renderData.slotProps, baseSettings);
 }
 
 export function finalizer(renderData: ILinkRenderData): ILinkRenderData {
@@ -63,8 +61,6 @@ export function finalizer(renderData: ILinkRenderData): ILinkRenderData {
   if (props.content) {
     final.content = { children: props.content };
   }
-
-  delete renderData.props.URL;
 
   renderData.slotProps = finalizeSettings(theme, mergeSettings(slotProps, final));
   return renderData;
@@ -84,11 +80,12 @@ export const LinkRoot: IWithComposable = {
     },
 
     render: (propInfo: IProcessResult, ...children): JSX.Element | null => {
-      if (propInfo.props['href']) {
-        // To disable a web anchor, we must remove the href property from the props list
-        if (propInfo.props['disabled']) {
-          delete propInfo.props['href'];
+      if (propInfo.props['URL']) {
+        // Only pass the URL prop to the href attribute if the Link is enabled
+        if (!propInfo.props['disabled']) {
+          propInfo.props['href'] = propInfo.props['URL'];
         }
+
         return wrapStockComponent('a' as INativeSlotType).render(propInfo, ...children);
       }
       return wrapStockComponent('button' as INativeSlotType).render(propInfo, ...children);
