@@ -52,6 +52,11 @@ const b1resolvedRecurse: IButtonSettings = {
     }
   },
   content: {
+    // note that these three values will get cleared by the content element, but remerged by the base class, this
+    // is an issue with the test component implementation, not of the framework
+    fontSize: 'large',
+    fontWeight: 900,
+    color: 'buttonText',
     style: {
       fontSize: 14,
       fontWeight: 900,
@@ -83,5 +88,40 @@ describe('Token settings unit tests', () => {
     const cache = {};
     const resolved = MockButton({}, b1, theme, cache, true);
     expect(resolved).toEqual(b1resolvedRecurse);
+  });
+
+  test('two default buttons return same object', () => {
+    const cache = {};
+    const resolved1 = MockButton({ content: 'button1' }, b1, theme, cache, false);
+    const resolved2 = MockButton({ content: 'button2' }, b1, theme, cache, false);
+    expect(resolved1).toBe(resolved2);
+  });
+
+  test('setting props that match defaults keep same object', () => {
+    const cache = {};
+    const resolved1 = MockButton({ content: 'button1' }, b1, theme, cache, false);
+    const resolved2 = MockButton({ content: 'button2', color: 'buttonText' }, b1, theme, cache, false);
+    expect(resolved1).toBe(resolved2);
+  });
+
+  test('prop token overrides produce new object', () => {
+    const cache = {};
+    const resolved1 = MockButton({ content: 'button1' }, b1, theme, cache, false);
+    const resolved2 = MockButton({ content: 'button2', color: 'purple' }, b1, theme, cache, false);
+    expect(resolved1).not.toBe(resolved2);
+  });
+
+  test('prop token overrides, multiple values are memoized', () => {
+    const cache = {};
+    const resolved1 = MockButton({ content: 'button1', borderRadius: 3, color: 'purple' }, b1, theme, cache, false);
+    const resolved2 = MockButton({ content: 'button2', color: 'purple', borderRadius: 3 }, b1, theme, cache, false);
+    expect(resolved1).toBe(resolved2);
+  });
+
+  test('prop token overrides, different keys same value produce different objects', () => {
+    const cache = {};
+    const resolved1 = MockButton({ content: 'button1', backgroundColor: 'purple' }, b1, theme, cache, false);
+    const resolved2 = MockButton({ content: 'button2', color: 'purple' }, b1, theme, cache, false);
+    expect(resolved1).not.toBe(resolved2);
   });
 });

@@ -1,5 +1,5 @@
 import { IMockTheme } from './MockTheme';
-import { ITokenKeyLogic, ILookupThemePart } from './Token.types';
+import { ITokenOperation, ILookupThemePart } from './Token.types';
 
 export interface IMockTextTokens {
   fontSize?: string | number;
@@ -26,27 +26,27 @@ export interface IMockBorderTokens {
   borderColor?: string;
 }
 
-type ITokenParts<T> = ITokenKeyLogic<T, IMockTheme>[];
+type ITokenParts<T> = ITokenOperation<T, IMockTheme>[];
 
 export const standardTextTokens: ITokenParts<IMockTextTokens> = [
-  { key: 'fontSize', lookup: t => t.textSizes },
-  { key: 'fontWeight', lookup: t => t.textWeights }
+  { source: 'fontSize', lookup: t => t.textSizes },
+  { source: 'fontWeight', lookup: t => t.textWeights }
 ];
 
 const getPalette: ILookupThemePart<IMockTheme> = t => t.colors;
 export const standardColorTokens: ITokenParts<IMockColorTokens> = [
-  { key: 'backgroundColor', lookup: getPalette },
-  { key: 'color', lookup: getPalette }
+  { source: 'backgroundColor', lookup: getPalette },
+  { source: 'color', lookup: getPalette }
 ];
 
-export const standardForegroundColorTokens: ITokenParts<IMockColorTokens> = [{ key: 'color', lookup: getPalette }];
+export const standardForegroundColorTokens: ITokenParts<IMockColorTokens> = [{ source: 'color', lookup: getPalette }];
 
-export const standardBackgroundColorTokens: ITokenParts<IMockColorTokens> = [{ key: 'backgroundColor', lookup: getPalette }];
+export const standardBackgroundColorTokens: ITokenParts<IMockColorTokens> = [{ source: 'backgroundColor', lookup: getPalette }];
 
-export const standardCaptionTokens: ITokenParts<IMockCaptionTextTokens> = [{ key: 'captionColor', target: 'color', lookup: getPalette }];
+export const standardCaptionTokens: ITokenParts<IMockCaptionTextTokens> = [{ source: 'captionColor', target: 'color', lookup: getPalette }];
 
 export const standardBorderTokens: ITokenParts<IMockBorderTokens> = [
-  { key: 'borderColor', lookup: getPalette },
-  { key: 'borderRadius' },
-  { key: 'borderWidth' }
+  { source: 'borderColor', lookup: getPalette },
+  { source: 'borderRadius' },
+  { source: 'borderWidth' }
 ];

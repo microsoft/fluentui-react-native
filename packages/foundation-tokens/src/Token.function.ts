@@ -1,14 +1,14 @@
 import { IComponentSettings } from '@uifabric/theme-settings';
-import { ITargetHasToken, ITokenInputEntry, ITokenKeyLogic, IComponentTokens, ITokenFunction, ITokenProcessor } from './Token.types';
+import { ITargetHasToken, ITokenInputEntry, ITokenOperation, IComponentTokens, ITokenFunction, ITokenProcessor } from './Token.types';
 
 interface ITokenKeySet<TProps, TTheme> {
-  mapping: ITokenKeyLogic<TProps, TTheme>[];
+  mapping: ITokenOperation<TProps, TTheme>[];
   slots: string[];
 }
 
 interface ITokensForSlot<TProps, TTheme> {
-  toStyle: ITokenKeyLogic<TProps, TTheme>[];
-  toTokens: ITokenKeyLogic<TProps, TTheme>[];
+  toStyle: ITokenOperation<TProps, TTheme>[];
+  toTokens: ITokenOperation<TProps, TTheme>[];
 }
 
 interface IResolvedTokenMappings<TProps, TTheme> {
@@ -37,8 +37,8 @@ function _copyToken<TProps>(props: TProps, key: string, target: string | undefin
   }
 }
 
-function _lookupOrCopyToken<TProps, TTheme>(props: TProps, theme: TTheme, entry: ITokenKeyLogic<TProps, TTheme>, style: object): void {
-  const { key, lookup } = entry;
+function _lookupOrCopyToken<TProps, TTheme>(props: TProps, theme: TTheme, entry: ITokenOperation<TProps, TTheme>, style: object): void {
+  const { source: key, lookup } = entry;
   if (props.hasOwnProperty(key)) {
     const lookupResult = lookup && lookup(theme);
     let val = props[key];
@@ -68,7 +68,7 @@ function _processTokenEntries<TProps, TTheme>(
       }
     }
     for (const entry of mapping.toTokens) {
-      _copyToken(props, entry.key as string, entry.target, slotProps);
+      _copyToken(props, entry.source as string, entry.target, slotProps);
     }
     result[slot] = slotProps;
   });
@@ -113,8 +113,8 @@ export function buildComponentTokens<TProps, TTheme>(
         mappings[slot] = mappings[slot] || { toStyle: [], toTokens: [] };
         const { toStyle, toTokens } = mappings[slot];
         for (const mapEntry of keySet.mapping) {
-          tokenKeys.set(mapEntry.key as string, true);
-          const transfer = hasToken && hasToken(slot, mapEntry.key as string);
+          tokenKeys.set(mapEntry.source as string, true);
+          const transfer = hasToken && hasToken(slot, mapEntry.source as string);
           if (transfer) {
             toTokens.push(mapEntry);
           } else {

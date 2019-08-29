@@ -1,4 +1,4 @@
-import { ITokenKeyLogic, ITokenKeyLogicSet, ITokenProcessor, IComponentTokens } from './Token.types';
+import { ITokenOperation, ITokenOperations, ITokenProcessor, IComponentTokens } from './Token.types';
 import { ISlotProps, mergeSettings, IComponentSettings } from '@uifabric/theme-settings';
 
 /**
@@ -8,11 +8,7 @@ import { ISlotProps, mergeSettings, IComponentSettings } from '@uifabric/theme-s
  * @param theme - theme used to look up styling values
  * @param tokens - token processor array
  */
-export function resolveTokens<TProps, TTheme>(
-  props: TProps,
-  theme: TTheme,
-  tokens: ITokenProcessor<TProps, TTheme>[]
-): IComponentSettings[] {
+function _resolveTokens<TProps, TTheme>(props: TProps, theme: TTheme, tokens: ITokenProcessor<TProps, TTheme>[]): IComponentSettings[] {
   return tokens.map((processor: ITokenProcessor<TProps, TTheme>) => {
     return processor(props, theme);
   });
@@ -24,7 +20,7 @@ export function resolveTokens<TProps, TTheme>(
  * @param rootSlotProps - root slot props which will have tokens sources from settings
  * @param keys - array of prop keys which should be considered tokens
  */
-export function addTokensToProps<TProps>(
+function _prepareTokenProps<TProps>(
   props: TProps,
   rootSlotProps: object,
   keys: Map<string, boolean>
@@ -72,13 +68,13 @@ export function processTokens<TProps, TTheme>(
   cache: object
 ): ISlotProps {
   // merge in tokens and build up the cache key which are the tokens overridden by the user
-  const { cacheString, clearTokenSettings } = addTokensToProps(props, slotProps.root, tokenInfo.tokenKeys);
+  const { cacheString, clearTokenSettings } = _prepareTokenProps(props, slotProps.root, tokenInfo.tokenKeys);
   const cacheKey = baseCacheKey + cacheString;
 
   // if this is not already cached there is work to do
   if (!cache[cacheKey]) {
     // run through the tokens and build a list of slotProps to merge together
-    const propsToMerge = resolveTokens(props, theme, tokenInfo.tokens) || [];
+    const propsToMerge = _resolveTokens(props, theme, tokenInfo.tokens) || [];
     // merge the settings and cache them
     cache[cacheKey] = mergeSettings(slotProps, ...propsToMerge, clearTokenSettings);
   }
@@ -92,6 +88,6 @@ export function processTokens<TProps, TTheme>(
  * @param processor - processor to use
  * @param targets - target slots
  */
-export function token<TProps, TTheme>(mapping: ITokenKeyLogic<TProps, TTheme>[], ...slots: string[]): ITokenKeyLogicSet<TProps, TTheme> {
+export function token<TProps, TTheme>(mapping: ITokenOperation<TProps, TTheme>[], ...slots: string[]): ITokenOperations<TProps, TTheme> {
   return { mapping, slots };
 }

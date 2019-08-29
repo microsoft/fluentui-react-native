@@ -6,17 +6,7 @@ import { IComponentSettings } from '@uifabric/theme-settings';
  * The following types for writing handlers for token values.  At its core the token system runs through a
  * series of processing functions.  These function take tokenProps and theme and produce a partial slot props or
  * component settings object.
- *
- * Because in many cases the handling for tokens is the same, namely:
- * - copying to a target style
- * - transferring to a sub-component's tokens
- * - renaming the value
- * - looking up a value in a theme part
- * - some combination of these
- * There are affordances for generating a processor function for these sort of standard operations
  */
-
-export type ILookupThemePart<TTheme> = (theme: TTheme) => object;
 
 /**
  * A converter function which turns token properties into settings.  Note that this doesn't get input into
@@ -39,14 +29,31 @@ export interface ITokenFunctionData<TProps> {
 export type ITokenProcessor<TProps, TTheme = object> = ITokenFunction<TProps, TTheme> & ITokenFunctionData<TProps>;
 
 /**
- * In the case where standard processing is desireable this defines the core bit of logic.  Note that the slot target
- * is defined externally so that the standard entries here don't need to be recreated for every control type
+ * TOKEN OPERATIONS (PARTIAL TOKEN PROCESSORS)
+ *
+ * Because in many cases the handling for tokens is the same, namely:
+ * - copying to a target style
+ * - transferring to a sub-component's tokens
+ * - renaming the value
+ * - looking up a value in a theme part
+ * - some combination of these
+ *
+ * Token operations allow defining the actions to apply to a given token.  These will be built up by the
+ * framework into a processor function when the component is defined.
  */
-export interface ITokenKeyLogic<TProps, TTheme> {
+
+/** function which takes a theme and returns an object to look up a value with (t) => t.palette as an example */
+export type ILookupThemePart<TTheme> = (theme: TTheme) => object;
+
+/**
+ * The logic for a given operation.  This does not include slot targeting as that is component specific.  That
+ * is mapped separately so these object can be reused.
+ */
+export interface ITokenOperation<TProps, TTheme> {
   /**
    * key to look up in the token prop to get the definition of the token
    */
-  key: keyof TProps;
+  source: keyof TProps;
 
   /**
    * key to use to enter the resolved token in the style.  If omitted this will be the same as the key.
@@ -62,31 +69,49 @@ export interface ITokenKeyLogic<TProps, TTheme> {
 }
 
 /**
- * For a given component definition this defines the set of mappings as well as what slot the set of mappings should
- * target.
+ * A component specific set of operations to map to a set of slots
  */
-export interface ITokenKeyLogicSet<TProps, TTheme> {
-  mapping: ITokenKeyLogic<TProps, TTheme>[];
+export interface ITokenOperations<TProps, TTheme> {
+  mapping: ITokenOperation<TProps, TTheme>[];
   slots: string[];
 }
 
 /**
- * The combination type between the two
+ * COMPONENT DEFINITIONS
+ *
+ * A component provides an array of processors or operations that will get processed at render time.  Individual
+ * operations will be processed at component definition time and wrapped in processor functions.
  */
-export type ITokenInputEntry<TProps, TTheme> = ITokenKeyLogicSet<TProps, TTheme> | ITokenProcessor<TProps, TTheme>;
+
+/** Combination type for operations or processor */
+export type ITokenInputEntry<TProps, TTheme> = ITokenOperations<TProps, TTheme> | ITokenProcessor<TProps, TTheme>;
 
 /**
- * The format for defining the tokens of a component.  This can be a combination of token processors and logic for individual
- * tokens.
+ * The format for defining the tokens of a component.  An array of processors and operations to perform.
+ *
+ * Note that order will be maintained but one generated processor will be created for each chunk.  So the
+ * following input array:
+ *  [...3 operations, processor, ...2 operations, processor, ...5 operations]
+ * will have each chunk of operations replaced with a generated function.
+ *
+ * As a result it is somewhat more efficient to group these if order doesn't matter.
  */
 export type IComponentTokenDefinitions<TProps, TTheme> = ITokenInputEntry<TProps, TTheme>[];
 
+/**
+ * Callback function for a component to allow querying whether a given token is supported on a sub-component.  In
+ * the case of token operations if a sub-component supports this token value it will be transferred to that component
+ * rather than built into a style
+ */
 export type ITargetHasToken = (target: string, key: string) => boolean;
 
 /**
- * Fragment of a component that is ready to process tokens
+ * Resolved token definitions, ready to be rendered
  */
 export interface IComponentTokens<TProps, TTheme> {
+  /** all operations combined into token processors */
   tokens: ITokenProcessor<TProps, TTheme>[];
+
+  /** token keys put into a map for both ordered retrieval and quick lookups */
   tokenKeys: Map<string, boolean>;
 }
