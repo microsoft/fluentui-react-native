@@ -1,5 +1,5 @@
-import { IButtonSettings, MockButton } from '../__mocks__/MockButton';
-import { theme } from '../__mocks__/MockTheme';
+import { IButtonSettings, MockButton } from './MockButton';
+import { theme } from './MockTheme';
 
 const b1: IButtonSettings = {
   root: {
@@ -16,14 +16,6 @@ const b1: IButtonSettings = {
 
 const b1resolved: IButtonSettings = {
   root: {
-    fontSize: 'large',
-    fontWeight: 900,
-    color: 'buttonText',
-    backgroundColor: 'buttonBackground',
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: '#c1c1c1',
-    captionColor: 'blue',
     style: {
       borderColor: '#c1c1c1',
       borderWidth: 1,
@@ -50,16 +42,8 @@ const b1resolved: IButtonSettings = {
   }
 };
 
-export const _b1resolvedRecurse: IButtonSettings = {
+const b1resolvedRecurse: IButtonSettings = {
   root: {
-    fontSize: 'large',
-    fontWeight: 900,
-    color: 'buttonText',
-    backgroundColor: 'buttonBackground',
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: '#c1c1c1',
-    captionColor: 'blue',
     style: {
       borderColor: '#c1c1c1',
       borderWidth: 1,
@@ -68,9 +52,6 @@ export const _b1resolvedRecurse: IButtonSettings = {
     }
   },
   content: {
-    fontSize: 'large',
-    fontWeight: 900,
-    color: 'buttonText',
     style: {
       fontSize: 14,
       fontWeight: 900,
@@ -96,5 +77,11 @@ describe('Token settings unit tests', () => {
     const cache = {};
     const resolved = MockButton({}, b1, theme, cache, false);
     expect(resolved).toEqual(b1resolved);
+  });
+
+  test('resolve base with recursion', () => {
+    const cache = {};
+    const resolved = MockButton({}, b1, theme, cache, true);
+    expect(resolved).toEqual(b1resolvedRecurse);
   });
 });

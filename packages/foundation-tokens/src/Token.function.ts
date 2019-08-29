@@ -1,6 +1,19 @@
-import { ITokenProcessor, ITokenFunction } from './Token.types';
-import { ISlotProps } from '@uifabric/theme-settings';
-import { ITokenProcessorDefinitionEntry } from './Token.function.types';
+import { IComponentSettings } from '@uifabric/theme-settings';
+import { ITargetHasToken, ITokenInputEntry, ITokenKeyLogic, IComponentTokens, ITokenFunction, ITokenProcessor } from './Token.types';
+
+interface ITokenKeySet<TProps, TTheme> {
+  mapping: ITokenKeyLogic<TProps, TTheme>[];
+  slots: string[];
+}
+
+interface ITokensForSlot<TProps, TTheme> {
+  toStyle: ITokenKeyLogic<TProps, TTheme>[];
+  toTokens: ITokenKeyLogic<TProps, TTheme>[];
+}
+
+interface IResolvedTokenMappings<TProps, TTheme> {
+  [slot: string]: ITokensForSlot<TProps, TTheme>;
+}
 
 /**
  * Convenience helper to make it easy to configure token processors
@@ -9,76 +22,121 @@ import { ITokenProcessorDefinitionEntry } from './Token.function.types';
  * @param keys - keys for this token processor
  * @param allowTransfer - whether the keys can be transferred
  */
-export function setupTokenProcessor<TProps extends object, TTheme = object>(
+export function setupTokenProcessor<TProps, TTheme = object>(
   fn: ITokenFunction<TProps, TTheme>,
-  keys: (keyof TProps)[],
-  allowTransfer?: boolean
+  keys: (keyof TProps)[]
 ): ITokenProcessor<TProps, TTheme> {
   const processor = fn as ITokenProcessor<TProps, TTheme>;
   processor._keys = keys;
-  processor._allowTransfer = allowTransfer;
   return processor;
 }
 
-/**
- * If the token is specified, set the value in the style to either a value from the theme (if
- * we were able to use the token value as a key), or the token value itself
- *
- * @param tokens - token props to source the token from
- * @param src - source key name to use for lookups
- * @param target - target key name, to use for writing to the style
- * @param lookup - object to attempt to lookup the value in
- * @param style - style to write the value to (if the token was specified)
- */
-export function lookupToken(tokens: object, src: string, target: string, lookup: object, style: object): void {
-  if (tokens.hasOwnProperty(src)) {
-    const val = tokens[src];
-    style[target] = typeof val === 'string' && lookup.hasOwnProperty(val) ? lookup[val] : val;
+function _copyToken<TProps>(props: TProps, key: string, target: string | undefined, targetObj: object): void {
+  if (props.hasOwnProperty(key)) {
+    targetObj[target || key] = props[key];
   }
 }
 
-/**
- * Build the slot props to return from a token processor
- *
- * @param style - style that has been produced by this token processor
- * @param targets - target slots that will receive this style
- */
-export function buildSlotPropsFromStyle(style: object, targets: string[]): ISlotProps | undefined {
-  if (Object.keys(style).length > 0) {
-    const result = {};
-    const propsForEachSlot = { style };
-    for (const target of targets) {
-      result[target] = propsForEachSlot;
+function _lookupOrCopyToken<TProps, TTheme>(props: TProps, theme: TTheme, entry: ITokenKeyLogic<TProps, TTheme>, style: object): void {
+  const { key, lookup } = entry;
+  if (props.hasOwnProperty(key)) {
+    const lookupResult = lookup && lookup(theme);
+    let val = props[key];
+    if (typeof val === 'string' && lookupResult && lookupResult.hasOwnProperty(val)) {
+      val = lookupResult[val as string];
     }
-    return result as ISlotProps;
+    style[entry.target || (key as string)] = val;
   }
-  return undefined;
 }
 
-/**
- * Helper for easy token processor building.  This handles tokens that need to be looked up in
- * the theme or just copied directly to a style.
- *
- * @param entries - definition of how this token should be handled
- */
-export function defineTokenProcessor<TProps extends object, TTheme>(
-  entries: ITokenProcessorDefinitionEntry<TProps, TTheme>[]
-): ITokenProcessor<TProps, TTheme> {
-  return setupTokenProcessor<TProps, TTheme>(
-    (props: TProps, theme: TTheme, targets: string[]) => {
-      const style = {};
-      for (const entry of entries) {
-        const { key, lookup } = entry;
-        const target = entry.target || key;
-        if (lookup) {
-          lookupToken(props, key as string, target as string, lookup(theme), style);
-        } else if (props.hasOwnProperty(key)) {
-          style[target as string] = props[key];
+function _processTokenEntries<TProps, TTheme>(
+  props: TProps,
+  theme: TTheme,
+  mappings: IResolvedTokenMappings<TProps, TTheme>
+): IComponentSettings {
+  const result = {};
+  Object.keys(mappings).forEach((slot: string) => {
+    const slotProps: { style?: object } = {};
+    const mapping = mappings[slot];
+    if (mapping.toStyle.length > 0) {
+      const slotStyle = {};
+      for (const entry of mapping.toStyle) {
+        _lookupOrCopyToken(props, theme, entry, slotStyle);
+      }
+      if (Object.keys(slotStyle).length > 0) {
+        slotProps.style = slotStyle;
+      }
+    }
+    for (const entry of mapping.toTokens) {
+      _copyToken(props, entry.key as string, entry.target, slotProps);
+    }
+    result[slot] = slotProps;
+  });
+  return result;
+}
+
+function _pushMappings<TProps, TTheme>(
+  mappings: IResolvedTokenMappings<TProps, TTheme>,
+  tokens: ITokenProcessor<TProps, TTheme>[]
+): IResolvedTokenMappings<TProps, TTheme> {
+  // if there have been mappings set up then add a function that processes all the mappings
+  if (Object.keys(mappings).length > 0) {
+    tokens.push(
+      setupTokenProcessor<TProps, TTheme>((props: TProps, theme: TTheme) => {
+        return _processTokenEntries(props, theme, mappings);
+      }, [])
+    );
+    return {};
+  }
+  return mappings;
+}
+
+export function buildComponentTokens<TProps, TTheme>(
+  entries: ITokenInputEntry<TProps, TTheme>[],
+  hasToken?: ITargetHasToken
+): IComponentTokens<TProps, TTheme> {
+  const tokenKeys: Map<string, boolean> = new Map<string, boolean>();
+  const tokens: ITokenProcessor<TProps, TTheme>[] = [];
+  let mappings: IResolvedTokenMappings<TProps, TTheme> = {};
+
+  // parse the entries and build up token processors that are ready to run
+  for (const entry of entries) {
+    // if mapping is set on the object then this is a key set rather than a processor function
+    const keySet: ITokenKeySet<TProps, TTheme> | undefined = (entry as ITokenKeySet<TProps, TTheme>).mapping
+      ? (entry as ITokenKeySet<TProps, TTheme>)
+      : undefined;
+
+    if (keySet) {
+      // process each slot that is being targeted
+      for (const slot of keySet.slots) {
+        // ensure that mapping is initialized
+        mappings[slot] = mappings[slot] || { toStyle: [], toTokens: [] };
+        const { toStyle, toTokens } = mappings[slot];
+        for (const mapEntry of keySet.mapping) {
+          tokenKeys.set(mapEntry.key as string, true);
+          const transfer = hasToken && hasToken(slot, mapEntry.key as string);
+          if (transfer) {
+            toTokens.push(mapEntry);
+          } else {
+            toStyle.push(mapEntry);
+          }
         }
       }
-      return buildSlotPropsFromStyle(style, targets);
-    },
-    entries.map(entry => entry.key),
-    true
-  );
+    } else {
+      // if we are adding a function merge any active mappings together into a function and put it into the list
+      // this ensures order
+      mappings = _pushMappings(mappings, tokens);
+
+      // in this case a token processor has been added directly.  Add the keys to the map and then add
+      // the function to the queue directly
+      const keys: string[] = (entry as ITokenProcessor<TProps, TTheme>)._keys as string[];
+      keys.forEach((key: string) => tokenKeys.set(key, true));
+      tokens.push(entry as ITokenProcessor<TProps, TTheme>);
+    }
+  }
+
+  // finish any leftover mappings
+  _pushMappings(mappings, tokens);
+
+  return { tokenKeys, tokens };
 }

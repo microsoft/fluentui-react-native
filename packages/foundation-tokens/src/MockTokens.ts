@@ -1,6 +1,5 @@
-import { defineTokenProcessor } from '../Token.function';
-import { ILookupThemePart } from '../Token.function.types';
 import { IMockTheme } from './MockTheme';
+import { ITokenKeyLogic, ILookupThemePart } from './Token.types';
 
 export interface IMockTextTokens {
   fontSize?: string | number;
@@ -27,29 +26,27 @@ export interface IMockBorderTokens {
   borderColor?: string;
 }
 
-export const processTextTokens = defineTokenProcessor<IMockTextTokens, IMockTheme>([
+type ITokenParts<T> = ITokenKeyLogic<T, IMockTheme>[];
+
+export const standardTextTokens: ITokenParts<IMockTextTokens> = [
   { key: 'fontSize', lookup: t => t.textSizes },
   { key: 'fontWeight', lookup: t => t.textWeights }
-]);
+];
 
 const getPalette: ILookupThemePart<IMockTheme> = t => t.colors;
-export const processColorTokens = defineTokenProcessor<IMockColorTokens, IMockTheme>([
+export const standardColorTokens: ITokenParts<IMockColorTokens> = [
   { key: 'backgroundColor', lookup: getPalette },
   { key: 'color', lookup: getPalette }
-]);
+];
 
-export const processForegroundColorTokens = defineTokenProcessor<IMockColorTokens, IMockTheme>([{ key: 'color', lookup: getPalette }]);
+export const standardForegroundColorTokens: ITokenParts<IMockColorTokens> = [{ key: 'color', lookup: getPalette }];
 
-export const processBackgroundColorTokens = defineTokenProcessor<IMockColorTokens, IMockTheme>([
-  { key: 'backgroundColor', lookup: getPalette }
-]);
+export const standardBackgroundColorTokens: ITokenParts<IMockColorTokens> = [{ key: 'backgroundColor', lookup: getPalette }];
 
-export const processCaptionTokens = defineTokenProcessor<IMockCaptionTextTokens, IMockTheme>([
-  { key: 'captionColor', target: 'color', lookup: getPalette }
-]);
+export const standardCaptionTokens: ITokenParts<IMockCaptionTextTokens> = [{ key: 'captionColor', target: 'color', lookup: getPalette }];
 
-export const processBorderTokens = defineTokenProcessor<IMockBorderTokens, IMockTheme>([
+export const standardBorderTokens: ITokenParts<IMockBorderTokens> = [
   { key: 'borderColor', lookup: getPalette },
   { key: 'borderRadius' },
   { key: 'borderWidth' }
-]);
+];
