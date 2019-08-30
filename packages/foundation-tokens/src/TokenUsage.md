@@ -70,6 +70,78 @@ Note that the `baseCacheKey` will be prepended to the cache key the token proces
 
 ## Standard Token Authors
 
+While token interfaces can be shared across components, and the actions that need to be taken on those tokens will be consistent, the actual targets of those tokens (i.e. the slots they need to be set into) will vary wildly. As a result tokens can be specified in parts. These parts are defined using the `ITokenOperations<TProps, TTheme>` interface. This is an array of:
+
+    export interface ITokenOperation<TProps, TTheme> {
+      source: keyof TProps;
+      target?: string;
+      lookup?: ILookupThemePart<TTheme>;
+    }
+
+The values are used as follows:
+
+- `source` - the token key that is set on the token props interface
+- `target` - optional name for the target style or token. If this is empty it is assumed that `source === target1`
+- `lookup` - a function to look up an object in the theme. If the value of this property is a string type, this value will be looked up in this theme object and replaced if it exists. If this is undefined this behavior will be skipped.
+
+These token operations will be automatically processed when components are defined and merged into a custom processor function for this component.
+
 ## Component Authors
 
-When standing up a new component
+If the component framework has integrated the token package, there should be a configuration setting that allows for specifying a list of tokens to add.
+
+### Using standard token processors
+
+Standard tokens can be added by using the `token` function. This is a shorthand for producing an object which has an array of token processors and an array of slot names to target. Each entry will be propogated to each slot referenced. As an example:
+
+tokens: [
+token(foregroundColorTokens, 'text1', 'text2'),
+token(backgroundColorTokens, 'container')
+]
+
+Would take a set of standard processors called `foregroundColorTokens` and apply them to the slots called `text1` and `text2`. It would then apply `backgroundColorTokens` to `container`.
+
+Note that these can be created inline as well so:
+
+    tokens: [
+      token({ source: 'iconColor', target: 'color', lookup: t => t.palette }, 'icon')
+    ]
+
+Would work as well.
+
+### Using custom token processors
+
+A token processor function itself takes tokenProps and the theme and produces a partial `ISlotProps` to be merged in. It also must expose a set of keys that it depends on. The `setupTokenProcessor` function provides a convenience wrapper for creating these functions.
+
+The following code is an example of what this might look like:
+
+    const myTokenProcessor = setupTokenProcessor<IMyProps, ITheme>(
+      (props: IMyProps, theme: ITheme) => {
+        return {
+          root: {
+            style: {
+              color: props.isMode1 ? theme.palette.buttonText : theme.palette.windowText
+              borderWidth: props.borderless ? 0 : 1
+            }
+          }
+        }
+      },
+      ['isModel', 'borderless']
+    );
+
+    // in the component definition
+    tokens: [
+      myTokenProcessor
+    ]
+
+The two approaches can be mixed and order will be maintained but authors should be aware that a processor function will be generated for each chunk of standard processors, meaning it is more efficient to group them.
+
+So the following:
+
+    tokens: [
+      token(foregroundColorTokens, 'text1'),
+      myCustomProcessor,
+      token(backgroundColorTokens, 'container')
+    ]
+
+Will create two custom processors for the standard processors to maintain order.
