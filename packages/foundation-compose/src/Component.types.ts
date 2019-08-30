@@ -2,6 +2,8 @@ import { INativeTheme } from '@uifabric/theming-react-native';
 import { ISlotTypes, IResolvedSlotData, IComposable } from '@uifabric/foundation-composable';
 import { IComponentSettings } from '@uifabric/theme-settings';
 import { ICustomizedSettings, ICustomizedValueType } from './Customize.types';
+import { ITheme } from '@uifabric/theming';
+import { IComponentTokenDefinitions, IComponentTokens } from '@uifabric/foundation-tokens';
 
 /* tslint:disable no-any */
 
@@ -23,20 +25,6 @@ export type IResolvedData<TProps extends object, TSlotProps extends IComponentSe
   TState
 > &
   IResolvedSlotData;
-
-export interface ITokenProcessor<TProps extends object, TSlotProps extends IComponentSettings, TState extends object = any> {
-  /**
-   * processing function that takes the information in the render data and returns a potentially updated slot props to be set into the
-   * render data (and potentially cached)
-   */
-  processor: (keyProps: TProps, renderData: IRenderData<TProps, TSlotProps, TState>) => TSlotProps;
-
-  /**
-   * properties used as keys for caching the results of the styling function.  If the keys are unchanged from the last time it ran
-   * the function will not be called again.  These should be props that are
-   */
-  keyProps: (keyof TProps)[];
-}
 
 /**
  * finalizer function which does final processing on slotProps to prepare for render
@@ -90,12 +78,7 @@ export interface IComponent<
    * An array of style processing functions, all entries with cacheableMask set will be applied first, followed by entries without
    * that flag.  Results of token processing will be cached in the theme
    */
-  tokenProcessors?: ITokenProcessor<TCustomizeableProps, TSlotProps, TState>[];
-
-  /**
-   * the consolidated set of token keys for all the token processors, used for extracting properties and caching the results
-   */
-  tokenKeys?: string[];
+  tokens?: IComponentTokenDefinitions<TCustomizeableProps, ITheme>;
 
   /**
    * The finalizer function does final preparation for render.  The default one will push all props to the root entry of the slot props
@@ -116,12 +99,22 @@ export interface IComponent<
    * Optional slots to enable compound controls
    */
   slots?: ISlotTypes;
+}
+
+/**
+ * Internal options for the component, these are not user settable but are instead used by the compose package
+ */
+export type IComponentOptions<TComponent extends IComponent = IComponent> = TComponent & {
+  /**
+   * The input tokens processed, built into functions, with the keys built into a map
+   */
+  resolvedTokens?: IComponentTokens<IComponentProps<TComponent>, ITheme>;
 
   /**
    * Symbol used to uniquely identify the theme cache for this component, will be set at creation time
    */
   tokenCacheKey?: symbol;
-}
+};
 
 /**
  * Helper to extract the base props type from the component

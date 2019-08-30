@@ -68,7 +68,8 @@ export function processTokens<TProps, TTheme>(
   cache: object
 ): ISlotProps {
   // merge in tokens and build up the cache key which are the tokens overridden by the user
-  const { cacheString, clearTokenSettings } = _prepareTokenProps(props, slotProps.root, tokenInfo.tokenKeys);
+  const rootSlotProps = (slotProps && slotProps.root) || {};
+  const { cacheString, clearTokenSettings } = _prepareTokenProps(props, rootSlotProps, tokenInfo.tokenKeys);
   const cacheKey = baseCacheKey + cacheString;
 
   // if this is not already cached there is work to do

@@ -1,4 +1,6 @@
-import { processTokens } from './TokenHelpers';
+import { ITokenOperation } from '@uifabric/foundation-tokens';
+import { ITheme } from '@uifabric/theming';
+import { getPaletteFromTheme } from './ColorTokens';
 
 export interface IBorderTokens {
   borderColor?: string;
@@ -6,8 +8,8 @@ export interface IBorderTokens {
   borderRadius?: number | string;
 }
 
-export const borderKeys: (keyof IBorderTokens)[] = ['borderColor', 'borderRadius', 'borderWidth'];
-
-export function processBorderTokens(tokens: IBorderTokens, ...targetProps: object[]): void {
-  processTokens(tokens, borderKeys, ...targetProps);
-}
+export const borderTokens: ITokenOperation<IBorderTokens, ITheme>[] = [
+  { source: 'borderColor', lookup: getPaletteFromTheme },
+  { source: 'borderWidth' },
+  { source: 'borderRadius' }
+];

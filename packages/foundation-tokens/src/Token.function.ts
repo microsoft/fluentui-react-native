@@ -99,44 +99,46 @@ export function buildComponentTokens<TProps, TTheme>(
   const tokens: ITokenProcessor<TProps, TTheme>[] = [];
   let mappings: IResolvedTokenMappings<TProps, TTheme> = {};
 
-  // parse the entries and build up token processors that are ready to run
-  for (const entry of entries) {
-    // if mapping is set on the object then this is a key set rather than a processor function
-    const keySet: ITokenKeySet<TProps, TTheme> | undefined = (entry as ITokenKeySet<TProps, TTheme>).mapping
-      ? (entry as ITokenKeySet<TProps, TTheme>)
-      : undefined;
+  if (entries) {
+    // parse the entries and build up token processors that are ready to run
+    for (const entry of entries) {
+      // if mapping is set on the object then this is a key set rather than a processor function
+      const keySet: ITokenKeySet<TProps, TTheme> | undefined = (entry as ITokenKeySet<TProps, TTheme>).mapping
+        ? (entry as ITokenKeySet<TProps, TTheme>)
+        : undefined;
 
-    if (keySet) {
-      // process each slot that is being targeted
-      for (const slot of keySet.slots) {
-        // ensure that mapping is initialized
-        mappings[slot] = mappings[slot] || { toStyle: [], toTokens: [] };
-        const { toStyle, toTokens } = mappings[slot];
-        for (const mapEntry of keySet.mapping) {
-          tokenKeys.set(mapEntry.source as string, true);
-          const transfer = hasToken && hasToken(slot, mapEntry.source as string);
-          if (transfer) {
-            toTokens.push(mapEntry);
-          } else {
-            toStyle.push(mapEntry);
+      if (keySet) {
+        // process each slot that is being targeted
+        for (const slot of keySet.slots) {
+          // ensure that mapping is initialized
+          mappings[slot] = mappings[slot] || { toStyle: [], toTokens: [] };
+          const { toStyle, toTokens } = mappings[slot];
+          for (const mapEntry of keySet.mapping) {
+            tokenKeys.set(mapEntry.source as string, true);
+            const transfer = hasToken && hasToken(slot, mapEntry.source as string);
+            if (transfer) {
+              toTokens.push(mapEntry);
+            } else {
+              toStyle.push(mapEntry);
+            }
           }
         }
+      } else {
+        // if we are adding a function merge any active mappings together into a function and put it into the list
+        // this ensures order
+        mappings = _pushMappings(mappings, tokens);
+
+        // in this case a token processor has been added directly.  Add the keys to the map and then add
+        // the function to the queue directly
+        const keys: string[] = (entry as ITokenProcessor<TProps, TTheme>)._keys as string[];
+        keys.forEach((key: string) => tokenKeys.set(key, true));
+        tokens.push(entry as ITokenProcessor<TProps, TTheme>);
       }
-    } else {
-      // if we are adding a function merge any active mappings together into a function and put it into the list
-      // this ensures order
-      mappings = _pushMappings(mappings, tokens);
-
-      // in this case a token processor has been added directly.  Add the keys to the map and then add
-      // the function to the queue directly
-      const keys: string[] = (entry as ITokenProcessor<TProps, TTheme>)._keys as string[];
-      keys.forEach((key: string) => tokenKeys.set(key, true));
-      tokens.push(entry as ITokenProcessor<TProps, TTheme>);
     }
-  }
 
-  // finish any leftover mappings
-  _pushMappings(mappings, tokens);
+    // finish any leftover mappings
+    _pushMappings(mappings, tokens);
+  }
 
   return { tokenKeys, tokens };
 }

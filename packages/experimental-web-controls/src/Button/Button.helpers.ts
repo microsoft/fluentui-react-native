@@ -1,16 +1,5 @@
-import { IButtonCustomizableProps, IButtonRenderData, IButtonSettings } from './Button.types';
+import { IButtonRenderData, IButtonSettings } from './Button.types';
 import { renderSlot, IAsResolved } from '@uifabric/foundation-composable';
-import { finalizeSettings } from '@uifabric/theming-react-native';
-import {
-  textTokenKeys,
-  foregroundColorKeys,
-  backgroundColorKeys,
-  borderKeys,
-  processBackgroundTokens,
-  processForegroundTokens,
-  processTextTokens,
-  processBorderTokens
-} from '../tokens/index';
 import { mergeSettings } from '@uifabric/theme-settings';
 import { useAsPressable } from '../Pressable/index';
 import { IThemeQueryInputs } from '@uifabric/foundation-compose';
@@ -34,39 +23,8 @@ export function themeQueryInputs(name: string, renderData: IButtonRenderData): I
   return { name, overrides: renderData.state.info };
 }
 
-export const keyProps: (keyof IButtonCustomizableProps)[] = [
-  'contentPadding',
-  'contentPaddingFocused',
-  'iconColor',
-  'iconColorHovered',
-  'iconColorPressed',
-  'iconSize',
-  'iconWeight'
-].concat(textTokenKeys, foregroundColorKeys, backgroundColorKeys, borderKeys) as (keyof IButtonCustomizableProps)[];
-
-export function processor(tokenProps: IButtonCustomizableProps, renderData: IButtonRenderData): IButtonSettings {
-  const baseSettings = {
-    root: {},
-    stack: {},
-    icon: {},
-    content: {}
-  };
-  processBackgroundTokens(tokenProps, baseSettings.root);
-  processForegroundTokens(tokenProps, baseSettings.icon, baseSettings.content);
-  processTextTokens(tokenProps, baseSettings.content);
-  processBorderTokens(tokenProps, baseSettings.root);
-
-  return mergeSettings<IButtonSettings>(renderData.slotProps, baseSettings, {
-    icon: {
-      style: {
-        overlayColor: tokenProps.iconColor
-      }
-    }
-  });
-}
-
 export function finalizer(renderData: IButtonRenderData): IButtonRenderData {
-  const { props, slotProps, theme } = renderData;
+  const { props, slotProps } = renderData;
   const final: IButtonSettings = { root: props };
 
   if (props.content) {
@@ -77,7 +35,7 @@ export function finalizer(renderData: IButtonRenderData): IButtonRenderData {
     final.icon = { children: props.icon };
   }
 
-  renderData.slotProps = finalizeSettings(theme, mergeSettings(slotProps, final));
+  renderData.slotProps = mergeSettings(slotProps, final);
   return renderData;
 }
 

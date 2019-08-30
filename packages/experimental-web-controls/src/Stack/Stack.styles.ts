@@ -1,7 +1,8 @@
-import { IStackSettings, IStackProps, IStackRenderData } from './Stack.types';
+import { IStackSettings, IStackProps } from './Stack.types';
 import { parseGap, parsePadding } from './StackUtils';
 import { augmentPlatformTheme } from '@uifabric/theming-react-native';
-import { mergeSettings } from '@uifabric/theme-settings';
+import { ITheme } from '@uifabric/theming';
+import { setupTokenProcessor } from '@uifabric/foundation-tokens';
 
 const nameMap: { [key: string]: string } = {
   start: 'flex-start',
@@ -36,7 +37,7 @@ export function loadStackSettings(): void {
   });
 }
 
-export const keyProps: (keyof IStackProps)[] = [
+const _keyProps: (keyof IStackProps)[] = [
   'verticalFill',
   'horizontal',
   'reversed',
@@ -52,7 +53,7 @@ export const keyProps: (keyof IStackProps)[] = [
   'padding'
 ];
 
-export function processor(tokenProps: IStackProps, renderData: IStackRenderData): IStackSettings {
+function _processor(tokenProps: IStackProps, theme: ITheme): IStackSettings {
   const {
     verticalFill,
     horizontal,
@@ -68,10 +69,9 @@ export function processor(tokenProps: IStackProps, renderData: IStackRenderData)
     padding
   } = tokenProps;
   let childrenGap = tokenProps.childrenGap || gap;
-  const { rowGap, columnGap } = parseGap(childrenGap, renderData.theme);
+  const { rowGap, columnGap } = parseGap(childrenGap, theme);
   const horizontalMargin = `${-0.5 * columnGap.value}${columnGap.unit}`;
   const verticalMargin = `${-0.5 * rowGap.value}${rowGap.unit}`;
-  const theme = renderData.theme;
 
   // styles to be applied to all direct children regardless of wrap or direction
   const childStyles = {
@@ -87,7 +87,7 @@ export function processor(tokenProps: IStackProps, renderData: IStackRenderData)
   };
 
   if (wrap) {
-    const newSettings: IStackSettings = ({
+    return ({
       root: {
         style: [
           {
@@ -157,7 +157,6 @@ export function processor(tokenProps: IStackProps, renderData: IStackRenderData)
         ]
       }
     } as unknown) as IStackSettings;
-    renderData.slotProps = mergeSettings(renderData.slotProps, newSettings);
   }
 
   return {
@@ -207,3 +206,5 @@ export function processor(tokenProps: IStackProps, renderData: IStackRenderData)
     }
   } as IStackSettings;
 }
+
+export const stackTokenProcessor = setupTokenProcessor<IStackProps, ITheme>(_processor, _keyProps);

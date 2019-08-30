@@ -1,6 +1,6 @@
 import { IMergeOptions, immutableMerge } from '@uifabric/immutable-merge';
 import { IComponentSettingsCollection, IComponentSettings, ISlotProps, IOverrideLookup } from './Settings.types';
-import { mergeAndFinalizeStyles } from './Styles';
+import { mergeAndFlattenStyles } from './Styles';
 import { IFinalizeStyle, IStyleProp } from './Styles.types';
 
 /**
@@ -11,7 +11,7 @@ function _mergeCollection(_key: string, _options: IMergeOptions, ...objs: (objec
 }
 
 function _mergeStyles(_key: string, _options: IMergeOptions, ...objs: (IStyleProp<object>)[]): object | undefined {
-  return mergeAndFinalizeStyles(undefined, undefined, ...objs);
+  return mergeAndFlattenStyles(undefined, undefined, ...objs);
 }
 
 /**
@@ -78,7 +78,7 @@ export function mergeAndFinalizeSettings<TSettings extends IComponentSettings = 
     recurse: {
       ..._recurseOptions,
       style: (_key: string, _options: IMergeOptions, ...objs: (IStyleProp<object>)[]) => {
-        return mergeAndFinalizeStyles(finalizer, ...objs);
+        return mergeAndFlattenStyles(finalizer, ...objs);
       }
     }
   };

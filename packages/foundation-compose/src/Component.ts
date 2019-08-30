@@ -1,5 +1,5 @@
-import { IComponent, IRenderData, IComponentProps } from './Component.types';
-import { getThemeSettings, finalizeSettings, INativeTheme, resolveSettings } from '@uifabric/theming-react-native';
+import { IComponent, IRenderData, IComponentProps, IComponentOptions } from './Component.types';
+import { INativeTheme } from '@uifabric/theming-react-native';
 import {
   IProcessResult,
   IResolvedSlot,
@@ -11,7 +11,8 @@ import {
 } from '@uifabric/foundation-composable';
 import { mergeSettings } from '@uifabric/theme-settings';
 import { IWithTheme } from './Customize.types';
-import { getOverrideKey } from '@uifabric/theming';
+import { getOverrideKey, ITheme, getSettings, resolveSettings } from '@uifabric/theming';
+import { processTokens } from '@uifabric/foundation-tokens';
 
 /**
  * Get the cache for the given component from the theme, creating it if necessary
@@ -19,7 +20,7 @@ import { getOverrideKey } from '@uifabric/theming';
  * @param component - component to get the cache for, the component object itself will store the unique symbol for its lookups
  * @param theme - theme where the cache will be stored
  */
-function _getComponentCache(component: IComponent, theme: INativeTheme): { [key: string]: ISlotProps } {
+function _getComponentCache(component: IComponentOptions, theme: INativeTheme): { [key: string]: ISlotProps } {
   const cacheKey = component.tokenCacheKey!;
   theme[cacheKey] = theme[cacheKey] || {};
   return theme[cacheKey];
@@ -46,7 +47,7 @@ export function standardThemeQueryInputs(name: string, renderData: IRenderData):
 
 export function _processSettings<TComponent extends IComponent>(component: TComponent, data: IRenderData): IRenderData {
   const { name, overrides } = component.themeQueryInputs(component.className, data);
-  let { settings, styleKey } = getThemeSettings(data.theme, name);
+  let { settings, styleKey } = getSettings(data.theme, name);
   const cache = _getComponentCache(component, data.theme);
 
   // if there are layers of customized settings apply those, caching along the way and building up the cache key as appropriate
@@ -84,85 +85,26 @@ export function _processSettings<TComponent extends IComponent>(component: TComp
 }
 
 /**
- * At the point the token processor runs only the theme data has been loaded.  This may include values for tokens which
- * will be present in the root entry of the slot props.  This will extract the token keys from these rootProps first, then
- * from the userProps, giving precedence to the user props.
- *
- * The values of the keys that are specified but different in user props are used to build a cache key, applied on top of the
- * theming key for lookups.
- *
- * @param userProps - user props coming into the control
- * @param rootSlotProps - root slot props which provide baseline values
- * @param keys - keys to extract from the set
- */
-function _collectKeys(userProps: object, rootSlotProps: object, keys: string[]): { collected: object | undefined; delta: string[] } {
-  const collected = {};
-  const delta: string[] = [];
-  for (const key of keys) {
-    if (rootSlotProps.hasOwnProperty(key)) {
-      collected[key] = rootSlotProps[key];
-    }
-    if (userProps.hasOwnProperty(key)) {
-      const userProp = userProps[key];
-      if (userProp !== collected[key]) {
-        delta.push(String(userProp));
-      }
-      collected[key] = userProp;
-    }
-  }
-  return { collected, delta };
-}
-
-/**
  * Run the applicable token processors, caching the result so that other control instances with the same props combinations
  * can re-use the results
  *
  * @param component - component options that holds the token processors
  * @param renderData - render data to update with the results
  */
-function _processTokens(component: IComponent, renderData: IRenderData): IRenderData {
-  if (component.tokenProcessors && component.tokenKeys) {
-    const cache = _getComponentCache(component, renderData.theme);
-    const rootProps = (renderData.slotProps && renderData.slotProps.root) || {};
-    const { collected, delta } = _collectKeys(renderData.props, rootProps, component.tokenKeys);
-    let cacheKey = renderData.settingsKey || 'none';
-
-    cacheKey = delta.length > 0 ? cacheKey.concat('|', delta.join('-')) : cacheKey.concat('|');
-
-    if (cache[cacheKey]) {
-      renderData.slotProps = cache[cacheKey];
-    } else {
-      for (const entry of component.tokenProcessors) {
-        renderData.slotProps = entry.processor(collected || {}, renderData);
-      }
-      if (renderData.slotProps) {
-        renderData.slotProps = finalizeSettings(renderData.theme, renderData.slotProps);
-      }
-      cache[cacheKey] = renderData.slotProps as ISlotProps;
-    }
+function _processTokens(component: IComponentOptions, renderData: IRenderData): IRenderData {
+  if (component.resolvedTokens) {
+    const { props, theme, slotProps, settingsKey } = renderData;
+    const cache = _getComponentCache(component, theme);
+    renderData.slotProps = processTokens<IComponentProps<IComponent>, ITheme>(
+      props,
+      theme,
+      slotProps,
+      component.resolvedTokens,
+      settingsKey,
+      cache
+    );
   }
   return renderData;
-}
-
-/**
- * Aggregate all the keys together from the token processors and de-dup them
- *
- * @param component - component to aggregate key arrays for
- */
-export function mergeTokenKeys(component: IComponent): string[] {
-  const collector: { [key: string]: boolean } = {};
-  let keys: string[] = [];
-  if (component.tokenProcessors) {
-    for (const processor of component.tokenProcessors) {
-      if (processor.keyProps && processor.keyProps.length > 0) {
-        for (const key of processor.keyProps) {
-          collector[key] = true;
-        }
-      }
-    }
-    keys = Object.keys(collector);
-  }
-  return keys;
 }
 
 /**
@@ -172,7 +114,7 @@ export function mergeTokenKeys(component: IComponent): string[] {
  * @param renderData - data being prepared for render.
  */
 export function standardFinalizer(renderData: IRenderData): IRenderData {
-  renderData.slotProps = finalizeSettings(renderData.theme, mergeSettings(renderData.slotProps!, { root: renderData.props }));
+  renderData.slotProps = mergeSettings(renderData.slotProps!, { root: renderData.props });
   return renderData;
 }
 
@@ -187,8 +129,8 @@ export function standardUsePrepareState(renderData: IRenderData): IRenderData {
  * @param componentProps - input props passed in
  * @param theme - active theme for this component
  */
-export function useProcessComponent<TComponent extends IComponent>(
-  component: TComponent,
+export function useProcessComponent<TOptions extends IComponentOptions<IComponent>>(
+  component: TOptions,
   userProps: IGenericProps,
   theme: object
 ): IProcessResult {

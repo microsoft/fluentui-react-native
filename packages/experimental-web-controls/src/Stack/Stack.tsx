@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { keyProps, processor } from './Stack.styles';
+import { stackTokenProcessor } from './Stack.styles';
 import { IStackComponent, IStackRenderData } from './Stack.types';
 import { StackItem } from './StackItem/StackItem';
 import { compose } from '@uifabric/foundation-compose';
@@ -23,7 +23,7 @@ const StackStatics = {
 
 export const Stack = compose<IStackComponent>({
   className: 'RNFStack',
-  tokenProcessors: [{ keyProps, processor }],
+  tokens: [stackTokenProcessor],
   statics: StackStatics,
   slots: {
     root: 'div',

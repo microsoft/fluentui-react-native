@@ -42,8 +42,46 @@ By their very nature tokens allow expressing more complex concepts in a simpler 
 
 `more examples`
 
-## Public vs. custom tokens
+## Defining Token Interfaces
+
+Token interfaces can be defined in a standard or component specific manner. These can be grouped into related sets of properties for easy consumption.
+
+### Standard token interfaces
+
+A general token interface directly represents styles that apply to most or all controls. Some examples might be:
+
+    export interface IBorderTokens {
+      borderColor?: string;
+      borderWidth?: number;
+      borderRadius?: number;
+      // ...other related border properties
+    }
+
+These interfaces should have the following characteristics:
+
+- Names of the tokens should match the names of the style values where possible
+- The set of tokens should be related such that a component would include all or none of them
+- If more granularity is desired they can be broken into more granular interfaces then composed into larger convenience interfaces.
+
+#### Semantic naming for HOCs
+
+In the case of higher order components there may be a need to alias values. An example of this might be a control that has a primary and secondary text element.
+
+- Names for these should be semantic where it makes sense so having a token value for `secondaryTextColor` is generally preferable to having `buttonSecondLineTextColor`.
+- Note that if the mapping of token to value is not obvious a more specific name should be used. So for a calendar control it might make sense to have `dayHeaderTextColor` rather than a more generic name.
+
+### Component specific token interfaces
+
+In many cases the set of tokens on a component will be a mix of standard values and component specific values. While the standard values should map very directly to style values, component specific tokens might have multiple related effects. An example might be a switch for vertical or horizontal alignment of a complex control. This could produce or shift a number of values around across a number of sub-components.
+
+One way to think about this is whether a token could just be transferred to a sub-component. If a component exposes a `backgroundColor` token, but really applies that value to an inner control, that token can just be set on the inner control. Whereas a `spinnerMode` token is only understood by the spinner control itself.
+
+### Public vs. custom tokens
 
 It is also possible to split tokens into two sets. Those that should be exposed on the public props interface for the component, and those that should be exposed only via settings customizations. For a simple token where the value is not expected to change based on control state a public exposure makes sense.
 
 For properties like the colors of interactable controls, exposing these only via settings avoids the combinatoric expansion of property + state combinations. On a public interface the token values for a button would need to have backgroundColor, backgroundColorHovered, backgroundColorPressed, backgroundColorDisabled, and so on.
+
+## Usage
+
+For a detailed look at usage see the [Token Usage Guide](src/TokenUsage.md).
