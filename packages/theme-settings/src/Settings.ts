@@ -6,11 +6,11 @@ import { IFinalizeStyle, IStyleProp } from './Styles.types';
 /**
  * helper function to switch to a collection merge pattern when _overrides are encountered
  */
-function _mergeCollection(_key: string, _options: IMergeOptions, ...objs: (object | undefined)[]): IComponentSettingsCollection {
+function _mergeCollection(_options: IMergeOptions, ...objs: (object | undefined)[]): IComponentSettingsCollection {
   return mergeSettingsCollection(...(objs as IComponentSettingsCollection[]));
 }
 
-function _mergeStyles(_key: string, _options: IMergeOptions, ...objs: (IStyleProp<object>)[]): object | undefined {
+function _mergeStyles(_options: IMergeOptions, ...objs: (IStyleProp<object>)[]): object | undefined {
   return mergeAndFinalizeStyles(undefined, undefined, ...objs);
 }
 
@@ -77,7 +77,7 @@ export function mergeAndFinalizeSettings<TSettings extends IComponentSettings = 
     processSingles: true,
     recurse: {
       ..._recurseOptions,
-      style: (_key: string, _options: IMergeOptions, ...objs: (IStyleProp<object>)[]) => {
+      style: (_options: IMergeOptions, ...objs: (IStyleProp<object>)[]) => {
         return mergeAndFinalizeStyles(finalizer, ...objs);
       }
     }

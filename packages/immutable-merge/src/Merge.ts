@@ -19,7 +19,7 @@ export interface IMergeOptions {
   recurse?: { [key: string]: boolean | IMergeRecursionHandler };
 }
 
-export type IMergeRecursionHandler = (key: string, options: IMergeOptions, ...objs: (object | undefined)[]) => object | undefined;
+export type IMergeRecursionHandler = (options: IMergeOptions, ...objs: any[]) => any;
 
 /**
  * This will merge two or more objects together using an immutable style merge pattern.  If there is only one object or
@@ -33,14 +33,13 @@ export type IMergeRecursionHandler = (key: string, options: IMergeOptions, ...ob
  * be {} - no recursion, { depth: -1 } - recurse infinitely
  * @param objs - an array of objects to merge together
  */
-export function immutableMerge(options: IMergeOptions, ...objs: (object | undefined)[]): object | undefined {
-  const setToMerge = objs.filter((value: object | undefined) => {
-    return value && Object.getOwnPropertyNames(value).length > 0;
-  });
+export function immutableMerge(options: IMergeOptions, ...objs: any[]): any {
+  const setToMerge = objs.filter(v => _isObject(v, true));
+  const { depth = 0, recurse } = options;
   const processSingle = options.processSingles && setToMerge.length === 1;
+
+  // there is work to do if there is more than one object to merge or if we are proessing single objects
   if (setToMerge.length > 1 || processSingle) {
-    const depth = options.depth || 0;
-    const recurse = options.recurse;
     const nextOptions = depth || recurse ? { ...options, depth: depth ? depth - 1 : 0 } : undefined;
     let hasChanged = false;
 
@@ -51,26 +50,29 @@ export function immutableMerge(options: IMergeOptions, ...objs: (object | undefi
     for (const key in result) {
       if (result.hasOwnProperty(key)) {
         const originalVal = result[key];
+
         // next options is only set if there is a possibility of recursion
         if (nextOptions) {
-          // if this key qualifies for recursion and the last value set was an object, try to merge
-          if ((depth || (recurse && recurse[key])) && typeof originalVal === 'object') {
-            const collectedObjects = setToMerge.map((value: object | undefined) => {
-              return typeof value![key] === 'object' ? value![key] : undefined;
-            });
-            const handler = recurse && recurse[key];
-            result[key] =
-              handler && typeof handler === 'function'
-                ? handler(key, nextOptions, ...collectedObjects)
-                : immutableMerge(nextOptions, ...collectedObjects);
+          const isObject = _isObject(originalVal);
+          const recurseKey = recurse && recurse[key];
+          const customHandler = recurseKey && typeof recurseKey === 'function' ? recurseKey : false;
 
-            // this only matters for the single process case, in that case the only possible change is from a special
-            // handler on recursion, so if it has returned a new object mark that it has changed
-            if (result[key] !== originalVal) {
-              hasChanged = true;
-            }
+          // if this key has a custom handler, or is an object eligible for recursion, recurse
+          if (customHandler || (isObject && (depth || recurseKey))) {
+            // collect all the keys, filtering out undefined values
+            const collectedObjects = setToMerge
+              .map((value: any) => {
+                return _collectVal(value && value[key], !!customHandler);
+              })
+              .filter(v => v !== undefined);
+
+            // either recurse to this function or call the custom handler if specified
+            const handler: IMergeRecursionHandler = customHandler || immutableMerge;
+            result[key] = handler(nextOptions, ...collectedObjects);
+            hasChanged = hasChanged || result[key] !== originalVal;
           }
         }
+
         // delete undefined keys from the object, otherwise there is no easy way to delete keys
         if (result[key] === undefined) {
           delete result[key];
@@ -81,4 +83,12 @@ export function immutableMerge(options: IMergeOptions, ...objs: (object | undefi
     return processSingle && !hasChanged ? setToMerge[0] : result;
   }
   return setToMerge.length > 0 ? setToMerge[0] : undefined;
+}
+
+function _isObject(t: any, nonEmpty?: boolean): boolean {
+  return t && typeof t === 'object' && !Array.isArray(t) && (!nonEmpty || Object.getOwnPropertyNames(t).length > 0);
+}
+
+function _collectVal(t: any, custom: boolean): any {
+  return ((custom || _isObject(t)) && t) || undefined;
 }

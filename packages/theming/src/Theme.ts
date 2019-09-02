@@ -2,7 +2,7 @@ import { ITheme, IPartialTheme } from './Theme.types';
 import { mergeSettingsCollection } from '@uifabric/theme-settings';
 import { IMergeOptions, immutableMerge } from '@uifabric/immutable-merge';
 
-function _settingsHandler(_key: string, _options: IMergeOptions, ...objs: (object | undefined)[]): object | undefined {
+function _settingsHandler(_options: IMergeOptions, ...objs: (object | undefined)[]): object | undefined {
   return mergeSettingsCollection(...objs);
 }
 

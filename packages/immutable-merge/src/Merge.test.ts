@@ -134,7 +134,7 @@ const singleWithChanges = {
 
 const _colorKey = 'color';
 
-const changeMeHandler = (_key: string, _options: IMergeOptions, ...objs: (object | undefined)[]) => {
+const changeMeHandler = (_options: IMergeOptions, ...objs: (object | undefined)[]) => {
   // written always assuming only one entry
   if (objs.length === 1) {
     const firstObj = objs[0]!;
@@ -148,7 +148,7 @@ const changeMeHandler = (_key: string, _options: IMergeOptions, ...objs: (object
   return undefined;
 };
 
-describe('Component settings unit tests', () => {
+describe('Immutable merge unit tests', () => {
   test('merge one', () => {
     const merged = immutableMerge(mergeOptions, sett1, undefined);
     expect(merged).toBe(sett1);
@@ -197,5 +197,53 @@ describe('Component settings unit tests', () => {
     expect(merged).not.toBe(singleToChange);
     /* tslint:disable-next-line no-any */
     expect((merged as any).b).toBe(singleToChange.b);
+  });
+
+  const withArray1 = {
+    baseArray: [1, 2, 3],
+    sub: { subArray: ['a', 'b', 'c'] }
+  };
+
+  const withArray2 = {
+    baseArray: [4, 5, 6],
+    sub: { subArray: ['d', 'e', 'f'] }
+  };
+
+  test('arrays overwrite each other', () => {
+    const merged = immutableMerge({ depth: -1 }, withArray1, withArray2);
+    expect(merged).toEqual(withArray2);
+    expect(merged).not.toBe(withArray2);
+  });
+
+  const withObj = {
+    a: { foo: 'bar' },
+    b: 2
+  };
+
+  const withNonObj = {
+    a: 'hello',
+    b: 3
+  };
+
+  test('last writer wins for objects and non-objects', () => {
+    const merged = immutableMerge({ depth: -1 }, withObj, withNonObj);
+    expect(merged).toEqual(withNonObj);
+    const merged2 = immutableMerge({ depth: -1 }, withNonObj, withObj);
+    expect(merged2).toEqual(withObj);
+  });
+
+  const arrayMerger = (_options: IMergeOptions, ...targets: any[]) => {
+    const arrays = targets.filter(t => Array.isArray(t));
+    let result = [];
+    arrays.forEach(v => (result = result.concat(...v)));
+    return result;
+  };
+
+  test('arrays can merge with handler', () => {
+    const merged = immutableMerge({ depth: -1, recurse: { subArray: arrayMerger } }, withArray1, withArray2);
+    expect(merged).toEqual({
+      baseArray: [4, 5, 6],
+      sub: { subArray: ['a', 'b', 'c', 'd', 'e', 'f'] }
+    });
   });
 });
