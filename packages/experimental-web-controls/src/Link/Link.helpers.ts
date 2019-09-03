@@ -22,7 +22,8 @@ export function usePrepareState(data: ILinkRenderData): ILinkRenderData {
   data.props = props;
   data.state = {
     ...state,
-    disabled: data.props.disabled
+    disabled: data.props.disabled,
+    visited: false
   };
 
   return data;
