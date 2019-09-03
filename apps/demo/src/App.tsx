@@ -41,11 +41,35 @@ const DynamicButton = BlueButton.customize({
   }
 });
 
+const PinkLink = Link.customize`{
+  content: {
+    color: 'pink'
+  },
+  _overrides: {
+    hovered: {
+      content: {
+        color: 'pink'
+      }
+    },
+    pressed: {
+      content: {
+        color: 'blue'
+      }
+    },
+    visited: {
+      content: {
+        color: 'red'
+      }
+    }
+  }
+}`;
+
 export const App: React.FunctionComponent = () => {
   return (
     <div>
       <h1>Hello, world!!</h1>
       <Link URL="https://www.bing.com/" content="Click Me" />
+      <PinkLink content="Pink Link [button for verification]" />
       <Link content="Button-Style Link" />
       <Pressable renderStyle={_pressableRenderStyle}>
         <Text>Hello again</Text>
