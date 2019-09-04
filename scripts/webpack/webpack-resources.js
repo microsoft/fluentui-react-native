@@ -12,21 +12,8 @@ module.exports = {
           [bundleName]: './src/index.ts'
         },
         devtool: 'inline-source-map',
-        resolve: {
-          extensions: [".ts", ".tsx", ".js", ".json"]
-        },
         module: {
           rules: [
-            {
-              test: /\.tsx?$/,
-              use: {
-                loader: 'ts-loader',
-                options: {
-                  transpileOnly: true
-                },
-              },
-              exclude: [/node_modules/, /\.test.tsx?$/]
-            },
             {
               test: /\.js?$/,
               use: "source-map-loader",
@@ -53,21 +40,11 @@ module.exports = {
           [bundleName]: './src/index.tsx'
         },
         devtool: 'inline-source-map',
-        resolve: {
-          extensions: [".ts", ".tsx", ".js", ".json"]
-        },
         output: {
           filename: `${bundleName}.js`
         },
         module: {
           rules: [
-            {
-              test: /\.tsx?$/,
-              use: {
-                loader: 'ts-loader'
-              },
-              exclude: [/node_modules/, /\.test.tsx?$/]
-            },
             {
               test: /\.js?$/,
               use: "source-map-loader",

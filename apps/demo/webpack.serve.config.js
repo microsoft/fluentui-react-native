@@ -1,11 +1,11 @@
 const path = require('path');
 const { just } = require('@uifabric/build-native');
-const { webpackMerge, htmlOverlay, webpackConfig } = just;
+const { webpackMerge, htmlOverlay, webpackServeConfig } = just;
 
 const BUNDLE_NAME = 'demo';
 
 module.exports = webpackMerge(
-  webpackConfig,
+  webpackServeConfig,
   htmlOverlay({
     template: './index.ejs'
   }),
