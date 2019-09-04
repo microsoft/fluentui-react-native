@@ -8,10 +8,7 @@ module.exports = {
     return webpackMerge(
       webpackConfig,
       {
-        entry: {
-          [bundleName]: './src/index.ts'
-        },
-        devtool: 'inline-source-map',
+        devtool: 'cheap-module-eval-source-map',
         module: {
           rules: [
             {
@@ -39,7 +36,7 @@ module.exports = {
         entry: {
           [bundleName]: './src/index.tsx'
         },
-        devtool: 'inline-source-map',
+        devtool: 'cheap-module-eval-source-map',
         output: {
           filename: `${bundleName}.js`
         },

@@ -13,7 +13,7 @@ module.exports = webpackMerge(
     entry: {
       [BUNDLE_NAME]: './src/index.tsx'
     },
-    devtool: 'inline-source-map',
+    devtool: 'cheap-module-eval-source-map',
     output: {
       path: path.resolve(__dirname, '/dist'),
       publicPath: '/',
@@ -21,13 +21,6 @@ module.exports = webpackMerge(
     },
     module: {
       rules: [
-        {
-          test: /\.tsx?$/,
-          use: {
-            loader: 'ts-loader'
-          },
-          exclude: [/node_modules/, /\.test.tsx?$/]
-        },
         {
           test: /\.js?$/,
           use: "source-map-loader",
