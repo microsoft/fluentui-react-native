@@ -1,4 +1,4 @@
-import { IMergeOptions, immutableMerge } from '@uifabric/immutable-merge';
+import { IMergeOptions, immutableMergeCore } from '@uifabric/immutable-merge';
 import { IComponentSettingsCollection, IComponentSettings, ISlotProps, IOverrideLookup } from './Settings.types';
 import { mergeAndFinalizeStyles } from './Styles';
 import { IFinalizeStyle, IStyleProp } from './Styles.types';
@@ -50,7 +50,7 @@ const _mergePropsOptions: IMergeOptions = {
  * @param settings - settings to merge together
  */
 export function mergeSettings<TSettings extends IComponentSettings = IComponentSettings>(...settings: (object | undefined)[]): TSettings {
-  return immutableMerge(_mergeSettingsOptions, ...settings) as TSettings;
+  return immutableMergeCore(_mergeSettingsOptions, ...settings) as TSettings;
 }
 
 /**
@@ -58,7 +58,7 @@ export function mergeSettings<TSettings extends IComponentSettings = IComponentS
  * @param props - props to merge together
  */
 export function mergeProps<TProps extends object>(...props: (object | undefined)[]): TProps {
-  return immutableMerge(_mergePropsOptions, ...props) as TProps;
+  return immutableMergeCore(_mergePropsOptions, ...props) as TProps;
 }
 
 /**
@@ -82,7 +82,7 @@ export function mergeAndFinalizeSettings<TSettings extends IComponentSettings = 
       }
     }
   };
-  return immutableMerge(mergeOptions, ...settings) as TSettings;
+  return immutableMergeCore(mergeOptions, ...settings) as TSettings;
 }
 
 /**
@@ -92,7 +92,7 @@ export function mergeAndFinalizeSettings<TSettings extends IComponentSettings = 
 export function mergeSettingsCollection<TCollection extends IComponentSettingsCollection = IComponentSettingsCollection>(
   ...collections: object[]
 ): TCollection {
-  return immutableMerge(_mergeCollectionOptions, ...collections) as TCollection;
+  return immutableMergeCore(_mergeCollectionOptions, ...collections) as TCollection;
 }
 
 /**

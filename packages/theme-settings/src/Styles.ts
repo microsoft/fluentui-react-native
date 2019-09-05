@@ -31,7 +31,6 @@ export function flattenStyle(style: IStyleProp<object>): object {
 export function mergeAndFinalizeStyles(finalizer: IFinalizeStyle | undefined, ...styles: IStyleProp<object>[]): object | undefined {
   // baseline merge and flatten the objects
   let merged = immutableMerge(
-    {},
     ...styles.map((styleProp: IStyleProp<object>) => {
       return flattenStyle(styleProp);
     })
@@ -41,7 +40,7 @@ export function mergeAndFinalizeStyles(finalizer: IFinalizeStyle | undefined, ..
   if (finalizer && merged) {
     const updated = finalizer(merged);
     if (updated && Object.keys(updated).length > 0) {
-      merged = immutableMerge({}, merged, updated);
+      merged = immutableMerge(merged, updated);
     }
   }
 

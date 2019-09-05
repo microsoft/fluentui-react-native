@@ -139,7 +139,7 @@ const _platformDefaultsMergedWithProcessor: IFakeTheme = {
 };
 
 function fakeThemeResolver(parent: IFakeTheme, partial?: Partial<IFakeTheme>): IFakeTheme {
-  let newTheme = immutableMerge({ depth: -1 }, parent, partial) as IFakeTheme;
+  let newTheme = immutableMerge(parent, partial) as IFakeTheme;
   if (newTheme === parent) {
     newTheme = { ...newTheme };
   }

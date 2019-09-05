@@ -33,12 +33,12 @@ export type IMergeRecursionHandler = (options: IMergeOptions, ...objs: any[]) =>
  * be {} - no recursion, { depth: -1 } - recurse infinitely
  * @param objs - an array of objects to merge together
  */
-export function immutableMerge(options: IMergeOptions, ...objs: any[]): any {
-  const setToMerge = objs.filter(v => _isObject(v, true));
+export function immutableMergeCore(options: IMergeOptions, ...objs: any[]): any {
+  const setToMerge = objs.filter(v => _isNonArrayObject(v, true));
   const { depth = 0, recurse } = options;
   const processSingle = options.processSingles && setToMerge.length === 1;
 
-  // there is work to do if there is more than one object to merge or if we are proessing single objects
+  // there is work to do if there is more than one object to merge or if we are processing single objects
   if (setToMerge.length > 1 || processSingle) {
     const nextOptions = depth || recurse ? { ...options, depth: depth ? depth - 1 : 0 } : undefined;
     let hasChanged = false;
@@ -53,7 +53,7 @@ export function immutableMerge(options: IMergeOptions, ...objs: any[]): any {
 
         // next options is only set if there is a possibility of recursion
         if (nextOptions) {
-          const isObject = _isObject(originalVal);
+          const isObject = _isNonArrayObject(originalVal);
           const recurseKey = recurse && recurse[key];
           const customHandler = recurseKey && typeof recurseKey === 'function' ? recurseKey : false;
 
@@ -67,7 +67,7 @@ export function immutableMerge(options: IMergeOptions, ...objs: any[]): any {
               .filter(v => v !== undefined);
 
             // either recurse to this function or call the custom handler if specified
-            const handler: IMergeRecursionHandler = customHandler || immutableMerge;
+            const handler: IMergeRecursionHandler = customHandler || immutableMergeCore;
             result[key] = handler(nextOptions, ...collectedObjects);
             hasChanged = hasChanged || result[key] !== originalVal;
           }
@@ -85,10 +85,32 @@ export function immutableMerge(options: IMergeOptions, ...objs: any[]): any {
   return setToMerge.length > 0 ? setToMerge[0] : undefined;
 }
 
-function _isObject(t: any, nonEmpty?: boolean): boolean {
-  return t && typeof t === 'object' && !Array.isArray(t) && (!nonEmpty || Object.getOwnPropertyNames(t).length > 0);
+const _baseMergeOptions: IMergeOptions = { depth: -1 };
+
+/**
+ * Recursively immutable merge a set of objects
+ * @param objs - variable input array of typed objects to merge
+ */
+export function immutableMerge<T extends object>(...objs: (T | undefined)[]): T | undefined {
+  return immutableMergeCore(_baseMergeOptions, ...objs);
+}
+
+/**
+ * Process one or more immutable objects ensuring that handlers are called on every entry that applies.  If a single object
+ * is passed in and no changes are made, that object will be returned.  If updates happen from the handlers it will return the
+ * minimally mutated object.
+ *
+ * @param processors - set of processor functions for handling keys
+ * @param objs - one or more objects to process.  If multiple objects are passed they will be merged
+ */
+export function processImmutable<T extends object>(processors: IMergeOptions['recurse'], ...objs: (T | undefined)[]): T | undefined {
+  return immutableMergeCore({ depth: -1, processSingles: true, recurse: processors }, ...objs);
+}
+
+function _isNonArrayObject(t: any, onlyReturnNonEmptyObjects?: boolean): boolean {
+  return t && typeof t === 'object' && !Array.isArray(t) && (!onlyReturnNonEmptyObjects || Object.getOwnPropertyNames(t).length > 0);
 }
 
 function _collectVal(t: any, custom: boolean): any {
-  return ((custom || _isObject(t)) && t) || undefined;
+  return ((custom || _isNonArrayObject(t)) && t) || undefined;
 }
