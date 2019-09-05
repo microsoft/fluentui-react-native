@@ -8,8 +8,15 @@ module.exports = {
     return webpackMerge(
       webpackConfig,
       {
-        entry: {
-          [bundleName]: './lib/index.js'
+        devtool: 'cheap-module-eval-source-map',
+        module: {
+          rules: [
+            {
+              test: /\.js?$/,
+              use: "source-map-loader",
+              enforce: 'pre'
+            }
+          ]
         },
         output: {
           filename: `${bundleName}.js`
@@ -27,10 +34,20 @@ module.exports = {
       }),
       {
         entry: {
-          [bundleName]: './lib/index.js'
+          [bundleName]: './src/index.tsx'
         },
+        devtool: 'cheap-module-eval-source-map',
         output: {
           filename: `${bundleName}.js`
+        },
+        module: {
+          rules: [
+            {
+              test: /\.js?$/,
+              use: "source-map-loader",
+              enforce: 'pre'
+            }
+          ]
         },
         plugins: getPlugins(bundleName, _isProduction)
       },
