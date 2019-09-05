@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Text, Pressable, Button, IPressableState, IPressableProps } from 'experimental-web-controls';
 
 const _pressableRenderStyle: IPressableProps['renderStyle'] = (state: IPressableState) => {
@@ -47,5 +47,3 @@ export const App: React.FunctionComponent = () => {
     </div>
   );
 };
-
-export default App;
