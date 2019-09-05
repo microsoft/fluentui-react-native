@@ -21,9 +21,6 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@types/es6-collections": "^0.5.29",
-    "@types/es6-promise": "0.0.32",
-    "@types/node": "^10.3.5",
     "@types/jest": "^19.2.2",
     "@uifabric/immutable-merge": "0.1.1",
     "@uifabric/build-native": "^0.1.1"

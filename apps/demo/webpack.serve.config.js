@@ -1,11 +1,11 @@
 const path = require('path');
 const { just } = require('@uifabric/build-native');
-const { webpackMerge, htmlOverlay, webpackConfig } = just;
+const { webpackMerge, htmlOverlay, webpackServeConfig } = just;
 
 const BUNDLE_NAME = 'demo';
 
 module.exports = webpackMerge(
-  webpackConfig,
+  webpackServeConfig,
   htmlOverlay({
     template: './index.ejs'
   }),
@@ -13,10 +13,20 @@ module.exports = webpackMerge(
     entry: {
       [BUNDLE_NAME]: './src/index.tsx'
     },
+    devtool: 'cheap-module-eval-source-map',
     output: {
       path: path.resolve(__dirname, '/dist'),
       publicPath: '/',
       filename: `${BUNDLE_NAME}.js`
-    }
+    },
+    module: {
+      rules: [
+        {
+          test: /\.js?$/,
+          use: "source-map-loader",
+          enforce: 'pre'
+        }
+      ]
+    },
   }
 );
