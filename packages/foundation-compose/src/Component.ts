@@ -219,7 +219,6 @@ export function renderComponent<TComponent extends IComponent>(
   result: IResolvedSlot,
   ...children: React.ReactNode[]
 ): JSX.Element | null {
-  /* tslint:disable-next-line no-any */
   return component.view
     ? component.view(result as any, ...children)
     : (result.slots && result.slots.root && renderSlot(result.slots.root, ...children)) || null;

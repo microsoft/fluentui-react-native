@@ -133,6 +133,5 @@ export interface IStackStatics {
   Item: React.FunctionComponent<IStackItemProps>;
 }
 
-/* tslint:disable:no-any */
 export type IStackComponent = IComponent<IStackProps, IStackSettings, IStackProps, any, IStackStatics>;
 export type IStackRenderData = IRenderData<IStackProps, IStackSettings>;

@@ -15,7 +15,6 @@ function createTypeScriptModule(fileName, css) {
 
   // Create a source file.
   const source = [
-    `/* tslint:disable */`,
     `import { loadStyles } from \'@microsoft/load-themed-styles\';`,
     `loadStyles(${JSON.stringify(splitStyles(css))});`
   ];

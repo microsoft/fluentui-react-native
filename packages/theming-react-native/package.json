@@ -30,7 +30,8 @@
     "react": "16.8.3",
     "typescript": "3.3.3",
     "@uifabric/theme-registry": "0.1.1",
-    "@uifabric/build-native": "^0.1.1"
+    "@uifabric/build-native": "^0.1.1",
+    "@uifabric/eslint-config-rules": "^0.1.0"
   },
   "peerDependencies": {
     "react": "16.8.3"

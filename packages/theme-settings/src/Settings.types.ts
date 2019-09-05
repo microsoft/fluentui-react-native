@@ -19,6 +19,5 @@ export type IComponentSettingsCollection<TSettings extends IComponentSettings = 
  * the override will be applied.
  */
 export interface IOverrideLookup {
-  /* tslint:disable-next-line no-any */
   [key: string]: any;
 }

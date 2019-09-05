@@ -42,26 +42,6 @@
     "beachball": "^1.11.7",
     "lerna": "^3.16.4"
   },
-  "lint-staged": {
-    "linters": {
-      "*.{ts,tsx,js,jsx}": [
-        "node ./scripts/lint-staged/prettier",
-        "node ./scripts/lint-staged/tslint",
-        "git add"
-      ],
-      "*.{js,jsx,json,scss,html,md}": [
-        "node ./scripts/lint-staged/prettier",
-        "git add"
-      ]
-    },
-    "ignore": [
-      "common/scripts/*.js",
-      "packages/tslint-rules/tslint.json",
-      "**/CHANGELOG.*",
-      "**/*.api.md",
-      "**/_*.scss"
-    ]
-  },
   "workspaces": {
     "packages": [
       "apps/*",

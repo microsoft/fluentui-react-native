@@ -27,7 +27,7 @@ export type IResolvedSlot<
   TProps extends object = IGenericProps,
   TSlotProps = ISlotProps,
   TAdditional extends object = object
-> = IAsResolved<IProcessResult<TProps, TSlotProps, TAdditional>>;
+  > = IAsResolved<IProcessResult<TProps, TSlotProps, TAdditional>>;
 
 /**
  * a collection of resolved slots
@@ -64,7 +64,6 @@ export type IWithComposable<T extends object = object> = T & {
  * Generally a slot can be defined as a standard input to createElement or as an object with a __composable value
  * set on it
  */
-/* tslint:disable-next-line no-any */
 export type INativeSlotType = React.ElementType<any> | string;
 export type ISlotType = INativeSlotType | IWithComposable<object>;
 

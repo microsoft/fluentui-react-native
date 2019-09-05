@@ -24,7 +24,6 @@ function getComponentOptions<TComponent extends IComponent>(inputComponent: TCom
     const tokenProcessors = [].concat(parent.tokenProcessors, inputComponent.tokenProcessors).filter(v => v);
 
     if (baseRoot) {
-      /* tslint:disable-next-line no-any */
       slots.root = baseRoot as any;
     }
     return {
