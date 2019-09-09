@@ -28,9 +28,9 @@ The array of objects or undefined values (internally treated as anything falsy) 
 
 The key and options parameters are provided as conveniences in the case that a single handler needs to differentiate different branches or know how deep it is in the tree. In many cases these can be ignored.
 
-## immutableMerge
+## immutableMergeCore
 
-    export function immutableMerge(
+    export function immutableMergeCore(
       options: IMergeOptions, ...objs: (object | undefined)[]
     ): object | undefined {
 
@@ -45,11 +45,38 @@ The routine works as described above with one notable behavior. Unlike `Object.a
       bar: undefined
     };
 
-    const objIM = immutableMerge({}, obj1, obj2);
+    const objIM = immutableMergeCore({}, obj1, obj2);
     // objIM.hasOwnProperty('bar') will return false
 
     const objAssign = Object.assign({}, obj1, obj2);
     // objAssign.hasOwnProperty('bar') will return true but objAssign['bar'] will be undefined
+
+## immutableMerge
+
+    export function immutableMerge<T extends object>(
+      ...objs: (T | undefined)[]
+    ): T | undefined
+
+This convenience function wraps the common use case of recursively merging multiple objects together. Internally this calls `immutableMergeCore` in a fully recursive mode.
+
+## processImmutable
+
+    export function processImmutable<T extends object>(
+      processors: IMergeOptions['recurse'], ...objs: (T | undefined)[]
+    ): T | undefined
+
+This convenience function runs the merge routine as a processor for one or more objects. An example use case might be to turn all style entries into a css class name if it is not already a css class name. This should have the following behavior:
+
+- Every style value in the object should be processed
+- The object should remain unchanged if nothing changed
+- If a style gets updated the object should be mimally mutated
+
+The usage would be as follows. Given a processor called `myStyleProcessor`:
+
+    let complexObject: IMyObjtype = getObjectFromSomewhere();
+    complexObject = processImmutable({ style: myStyleProcessor }, complexObject);
+
+While the primary use case is for a single object this allows merging to happen at the same time if so desired.
 
 ## Things to Explore
 

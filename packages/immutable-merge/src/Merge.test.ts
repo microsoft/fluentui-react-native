@@ -1,4 +1,4 @@
-import { IMergeOptions, immutableMerge } from './Merge';
+import { IMergeOptions, immutableMergeCore } from './Merge';
 
 interface IFakeStyle {
   s1?: string;
@@ -134,7 +134,7 @@ const singleWithChanges = {
 
 const _colorKey = 'color';
 
-const changeMeHandler = (_key: string, _options: IMergeOptions, ...objs: (object | undefined)[]) => {
+const changeMeHandler = (_options: IMergeOptions, ...objs: (object | undefined)[]) => {
   // written always assuming only one entry
   if (objs.length === 1) {
     const firstObj = objs[0]!;
@@ -148,53 +148,101 @@ const changeMeHandler = (_key: string, _options: IMergeOptions, ...objs: (object
   return undefined;
 };
 
-describe('Component settings unit tests', () => {
+describe('Immutable merge unit tests', () => {
   test('merge one', () => {
-    const merged = immutableMerge(mergeOptions, sett1, undefined);
+    const merged = immutableMergeCore(mergeOptions, sett1, undefined);
     expect(merged).toBe(sett1);
   });
 
   test('merge with empty object', () => {
-    const merged = immutableMerge(mergeOptions, sett1, {});
+    const merged = immutableMergeCore(mergeOptions, sett1, {});
     expect(merged).toBe(sett1);
-    const merged2 = immutableMerge(mergeOptions, {}, sett2);
+    const merged2 = immutableMergeCore(mergeOptions, {}, sett2);
     expect(merged2).toBe(sett2);
   });
 
   test('merge sett1 and sett2', () => {
-    const merged = immutableMerge(mergeOptions, sett1, sett2) as IFakeSettings;
+    const merged = immutableMergeCore(mergeOptions, sett1, sett2) as IFakeSettings;
     expect(merged).toEqual(sett1plus2);
     expect(merged!.root.style).toBe(sett1.root.style);
     expect(merged!.fakeSlot!.style).toBe(sett2.fakeSlot!.style);
   });
 
   test('merge sett1 and sett3', () => {
-    const merged = immutableMerge(mergeOptions, sett1, sett3) as IFakeSettings;
+    const merged = immutableMergeCore(mergeOptions, sett1, sett3) as IFakeSettings;
     expect(merged).toEqual(sett1plus3);
     expect(merged!.fakeSlot).toBe(sett1.fakeSlot);
   });
 
   test('merge three', () => {
-    const merged = immutableMerge(mergeOptions, sett1, sett2, sett3);
+    const merged = immutableMergeCore(mergeOptions, sett1, sett2, sett3);
     expect(merged).toEqual(sett1plus2plus3);
   });
 
   test('deepMerge', () => {
-    const merged = immutableMerge({ depth: -1 }, deep1, deep2) as IDeepObj;
+    const merged = immutableMergeCore({ depth: -1 }, deep1, deep2) as IDeepObj;
     expect(merged).toEqual(deepMerged);
     expect(merged.b.c.d).toBe(deep1.b.c.d);
     expect(merged.a.b).not.toBe(deep2.a.b);
   });
 
   test('singleProcessNoChange', () => {
-    const merged = immutableMerge({ depth: -1, processSingles: true }, singleToChange);
+    const merged = immutableMergeCore({ depth: -1, processSingles: true }, singleToChange);
     expect(merged).toBe(singleToChange);
   });
 
   test('single process with change', () => {
-    const merged = immutableMerge({ depth: -1, processSingles: true, recurse: { changeMe: changeMeHandler } }, singleToChange);
+    const merged = immutableMergeCore({ depth: -1, processSingles: true, recurse: { changeMe: changeMeHandler } }, singleToChange);
     expect(merged).toEqual(singleWithChanges);
     expect(merged).not.toBe(singleToChange);
     expect((merged as any).b).toBe(singleToChange.b);
+  });
+
+  const withArray1 = {
+    baseArray: [1, 2, 3],
+    sub: { subArray: ['a', 'b', 'c'] }
+  };
+
+  const withArray2 = {
+    baseArray: [4, 5, 6],
+    sub: { subArray: ['d', 'e', 'f'] }
+  };
+
+  test('arrays overwrite each other', () => {
+    const merged = immutableMergeCore({ depth: -1 }, withArray1, withArray2);
+    expect(merged).toEqual(withArray2);
+    expect(merged).not.toBe(withArray2);
+  });
+
+  const withObj = {
+    a: { foo: 'bar' },
+    b: 2
+  };
+
+  const withNonObj = {
+    a: 'hello',
+    b: 3
+  };
+
+  test('last writer wins for objects and non-objects', () => {
+    const merged = immutableMergeCore({ depth: -1 }, withObj, withNonObj);
+    expect(merged).toEqual(withNonObj);
+    const merged2 = immutableMergeCore({ depth: -1 }, withNonObj, withObj);
+    expect(merged2).toEqual(withObj);
+  });
+
+  const arrayMerger = (_options: IMergeOptions, ...targets: any[]) => {
+    const arrays = targets.filter(t => Array.isArray(t));
+    let result = [];
+    arrays.forEach(v => (result = result.concat(...v)));
+    return result;
+  };
+
+  test('arrays can merge with handler', () => {
+    const merged = immutableMergeCore({ depth: -1, recurse: { subArray: arrayMerger } }, withArray1, withArray2);
+    expect(merged).toEqual({
+      baseArray: [4, 5, 6],
+      sub: { subArray: ['a', 'b', 'c', 'd', 'e', 'f'] }
+    });
   });
 });
