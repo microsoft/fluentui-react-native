@@ -195,7 +195,6 @@ describe('Component settings unit tests', () => {
     const merged = immutableMerge({ depth: -1, processSingles: true, recurse: { changeMe: changeMeHandler } }, singleToChange);
     expect(merged).toEqual(singleWithChanges);
     expect(merged).not.toBe(singleToChange);
-    /* tslint:disable-next-line no-any */
     expect((merged as any).b).toBe(singleToChange.b);
   });
 });

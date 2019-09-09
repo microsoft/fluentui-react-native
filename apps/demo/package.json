@@ -31,6 +31,7 @@
     "react-app-polyfill": "~1.0.1",
     "react-dom": "16.8.3",
     "ts-loader": "6.0.4",
-    "@uifabric/build-native": "^0.1.1"
+    "@uifabric/build-native": "^0.1.1",
+    "@uifabric/eslint-config-rules": "^0.1.0"
   }
 }

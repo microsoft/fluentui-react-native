@@ -2,8 +2,6 @@ import { ICustomizedSettings, ICustomizedValueType, IPropFunction, IWithTheme, I
 import { IComponentSettings } from '@uifabric/theme-settings';
 const JSON5 = require('json5');
 
-/* tslint:disable:no-any */
-
 export function customize<TSettings extends IComponentSettings, TProps extends object>(
   inputParts: TemplateStringsArray,
   ...inputKeys: ICustomizedValueType<TProps>[]
@@ -15,20 +13,20 @@ export function customize<TSettings extends IComponentSettings, TProps extends o
       return keys.length === 0
         ? []
         : keys.map((fn: IPropFunction<TProps>) => {
-            const val = fn(props);
-            return _stringifyValue(val);
-          });
+          const val = fn(props);
+          return _stringifyValue(val);
+        });
     },
     getSettings: settings
       ? () => settings
       : (keysParam: string[]) => {
-          const settingsString: string = parts
-            .map((part: string, index: number) => {
-              return index < keysParam.length ? part + keysParam[index] : part;
-            })
-            .join();
-          return _toSettings(settingsString);
-        },
+        const settingsString: string = parts
+          .map((part: string, index: number) => {
+            return index < keysParam.length ? part + keysParam[index] : part;
+          })
+          .join();
+        return _toSettings(settingsString);
+      },
     settings
   };
 }

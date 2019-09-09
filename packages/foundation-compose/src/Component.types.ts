@@ -3,13 +3,11 @@ import { ISlotTypes, IResolvedSlotData, IComposable } from '@uifabric/foundation
 import { IComponentSettings } from '@uifabric/theme-settings';
 import { ICustomizedSettings, ICustomizedValueType } from './Customize.types';
 
-/* tslint:disable no-any */
-
 export interface IRenderData<
   TProps extends object = object,
   TSlotProps extends IComponentSettings = IComponentSettings,
   TState extends object = any
-> {
+  > {
   props: TProps;
   theme: INativeTheme;
   state: TState;
@@ -56,7 +54,7 @@ export interface IComponent<
   TCustomizeableProps extends TProps = TProps,
   TState extends object = any,
   TStatics extends object = object
-> {
+  > {
   className: string;
 
   /**

@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
-    "json5": "2.1.0"
+    "json5": "2.1.0",
+    "@uifabric/eslint-config-rules": "^0.1.0"
   }
 }
