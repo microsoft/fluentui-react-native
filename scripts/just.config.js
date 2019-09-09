@@ -10,7 +10,7 @@ const { copy } = require('./tasks/copy');
 const { jest, jestWatch } = require('./tasks/jest');
 const { sass } = require('./tasks/sass');
 const { ts } = require('./tasks/ts');
-const { tslint } = require('./tasks/tslint');
+const { eslint } = require('./tasks/eslint');
 const { webpack, webpackDevServer } = require('./tasks/webpack');
 const { verifyApiExtractor, updateApiExtractor } = require('./tasks/api-extractor');
 const prettier = require('./tasks/prettier');
@@ -41,7 +41,7 @@ module.exports = function preset() {
   task('ts:commonjs', ts.commonjs);
   task('ts:esm', ts.esm);
   task('ts:amd', ts.amd);
-  task('tslint', tslint);
+  task('eslint', eslint);
   task('ts:commonjs-only', ts.commonjsOnly);
   task('webpack', webpack);
   task('webpack-dev-server', webpackDevServer);
@@ -58,8 +58,8 @@ module.exports = function preset() {
       : parallel('ts:commonjs', 'ts:esm', condition('ts:amd', () => argv().production && !argv().min));
   });
 
-  task('validate', fs.existsSync(path.join(process.cwd(), 'jest.config.js')) ? series('tslint', 'jest') : 'tslint');
-  task('code-style', series('prettier', 'tslint'));
+  task('validate', fs.existsSync(path.join(process.cwd(), 'jest.config.js')) ? series('eslint', 'jest') : 'eslint');
+  task('code-style', series('prettier', 'eslint'));
   task('update-api', series('clean', 'copy', 'sass', 'ts', 'update-api-extractor'));
   task('dev', series('clean', 'copy', 'sass', 'webpack-dev-server'));
 
@@ -75,5 +75,5 @@ module.exports = function preset() {
     )
   ).cached();
 
-  task('no-op', () => {}).cached();
+  task('no-op', () => { }).cached();
 };

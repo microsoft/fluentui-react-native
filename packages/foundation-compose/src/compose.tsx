@@ -33,7 +33,6 @@ function _getComponentOptions<TComponent extends IComponent>(
     const customSettings = [].concat(parent.customSettings, inputComponent.customSettings).filter(v => v);
 
     if (baseRoot) {
-      /* tslint:disable-next-line no-any */
       slots.root = baseRoot as any;
     }
     return {

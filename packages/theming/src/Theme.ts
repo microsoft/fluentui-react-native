@@ -1,8 +1,8 @@
 import { ITheme, IPartialTheme } from './Theme.types';
 import { mergeSettingsCollection } from '@uifabric/theme-settings';
-import { IMergeOptions, immutableMerge } from '@uifabric/immutable-merge';
+import { IMergeOptions, immutableMergeCore } from '@uifabric/immutable-merge';
 
-function _settingsHandler(_key: string, _options: IMergeOptions, ...objs: (object | undefined)[]): object | undefined {
+function _settingsHandler(_options: IMergeOptions, ...objs: (object | undefined)[]): object | undefined {
   return mergeSettingsCollection(...objs);
 }
 
@@ -18,7 +18,7 @@ const _themeMergeOptions: IMergeOptions = {
  * in any missing values.
  */
 export function resolvePartialTheme(theme: ITheme, partialTheme?: IPartialTheme): ITheme {
-  let newTheme = immutableMerge(_themeMergeOptions, theme, partialTheme) as ITheme;
+  let newTheme = immutableMergeCore(_themeMergeOptions, theme, partialTheme) as ITheme;
   if (newTheme === theme) {
     newTheme = { ...newTheme };
   }
