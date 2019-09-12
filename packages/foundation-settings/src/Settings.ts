@@ -135,6 +135,11 @@ export function getParentSettingsChain(lookup: IComponentSettingsCollection, tar
   return collectedSettings;
 }
 
+export function getActiveOverrides(target: IComponentSettings, lookup?: IOverrideLookup): string[] {
+  const hasOverride = typeof lookup === 'function' ? lookup : o => lookup[o];
+  return (target._precedence && target._precedence.filter(o => hasOverride(o))) || [];
+}
+
 /**
  * Apply overrides to `target`, producing a new settings object if any need to be applied.
  *
@@ -145,10 +150,9 @@ export function resolveSettingsOverrides(target: IComponentSettings, overrideLoo
   let result = target;
   const { _overrides, _precedence } = target;
   if (overrideLookup && _overrides && _precedence) {
-    for (const override of _precedence) {
-      if (_overrides[override] && overrideLookup[override]) {
-        result = mergeSettings(result, _overrides[override]);
-      }
+    const overrides = getActiveOverrides(target, overrideLookup);
+    for (const override of overrides) {
+      result = mergeSettings(result, _overrides[override]);
     }
   }
   return result;

@@ -18,6 +18,16 @@ export type IComponentSettingsCollection<TSettings extends IComponentSettings = 
  * overrides are looked up using an object where override names are evaluated against the object.  If the values are truthy
  * the override will be applied.
  */
-export interface IOverrideLookup {
+export interface IOverrideMask {
   [key: string]: any;
 }
+
+/**
+ * alternatively look them up with a passed in function
+ */
+export type IOverrideFunction = (name: string) => boolean;
+
+/**
+ * Lookup overrides by function or by mask
+ */
+export type IOverrideLookup = IOverrideFunction | IOverrideMask;
