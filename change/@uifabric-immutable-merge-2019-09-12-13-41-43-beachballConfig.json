@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Add exploratory item to immutable merge",
+  "packageName": "@uifabric/immutable-merge",
+  "email": "taamireh@microsoft.com",
+  "commit": "eadfcb234f79cfc208431571572e06ccbf00efac",
+  "date": "2019-09-12T20:41:43.066Z"
+}
