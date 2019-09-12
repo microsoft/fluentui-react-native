@@ -6,7 +6,7 @@ import {
   resolveSettingsOverrides,
   getParentSettingsChain,
   mergeSettings
-} from '@uifabric/theme-settings';
+} from '@uifabric/foundation-settings';
 
 interface ISettingsWithKey {
   settings: IComponentSettings;

@@ -1,6 +1,6 @@
 import { IButtonRenderData, IButtonSettings } from './Button.types';
 import { renderSlot, IAsResolved } from '@uifabric/foundation-composable';
-import { mergeSettings } from '@uifabric/theme-settings';
+import { mergeSettings } from '@uifabric/foundation-settings';
 import { useAsPressable } from '../Pressable/index';
 import { IThemeQueryInputs } from '@uifabric/foundation-compose';
 

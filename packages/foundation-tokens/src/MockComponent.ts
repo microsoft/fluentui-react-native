@@ -1,6 +1,6 @@
 import { IMockTheme } from './MockTheme';
 import { ITargetHasToken, IComponentTokens, ISlotStyleFactories } from './Token.types';
-import { IStyleProp, IComponentSettings, mergeSettings } from '@uifabric/theme-settings';
+import { IStyleProp, IComponentSettings, mergeSettings } from '@uifabric/foundation-settings';
 import { processTokens } from './Token';
 import { buildComponentTokens } from './Token.function';
 
@@ -47,9 +47,9 @@ export function mockCreate<TProps extends object, TSettings extends IComponentSe
   const slots = options.slots;
   const hasTokens: ITargetHasToken = slots
     ? (target: string, key: string) => {
-        const targetOptions = slots[target] && slots[target].component && slots[target].component.__options;
-        return targetOptions && targetOptions.tokenKeys.hasOwnProperty(key);
-      }
+      const targetOptions = slots[target] && slots[target].component && slots[target].component.__options;
+      return targetOptions && targetOptions.tokenKeys.hasOwnProperty(key);
+    }
     : undefined;
   const resolvedTokens: IComponentTokens<TProps, IMockTheme> = buildComponentTokens<TProps, IMockTheme>(slots, hasTokens);
   const fn = (props: TProps, settings: TSettings, theme: IMockTheme, cache: object, recurse?: boolean) => {

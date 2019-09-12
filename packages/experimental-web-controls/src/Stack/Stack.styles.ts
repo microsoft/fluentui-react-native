@@ -3,7 +3,7 @@ import { parseGap, parsePadding } from './StackUtils';
 import { augmentPlatformTheme } from '@uifabric/theming-react-native';
 import { ITheme } from '@uifabric/theming';
 import { styleFunction } from '@uifabric/foundation-tokens';
-import { IStyleProp } from '@uifabric/theme-settings';
+import { IStyleProp } from '@uifabric/foundation-settings';
 import { ICSSStyle } from '../htmlTypes';
 
 const nameMap: { [key: string]: string } = {
@@ -139,10 +139,10 @@ function _buildRootStyles(tokenProps: IStackProps, theme: ITheme): IStackProps {
         }
       },
       grow &&
-        !wrap && {
-          flexGrow: grow === true ? 1 : grow,
-          overflow: 'hidden'
-        }
+      !wrap && {
+        flexGrow: grow === true ? 1 : grow,
+        overflow: 'hidden'
+      }
     ]
   } as IStackProps;
 }

@@ -1,5 +1,5 @@
 import { ITheme, IPartialTheme } from './Theme.types';
-import { mergeSettingsCollection } from '@uifabric/theme-settings';
+import { mergeSettingsCollection } from '@uifabric/foundation-settings';
 import { IMergeOptions, immutableMergeCore } from '@uifabric/immutable-merge';
 
 function _settingsHandler(_options: IMergeOptions, ...objs: (object | undefined)[]): object | undefined {

@@ -9,7 +9,7 @@ import {
   IGenericProps,
   ISlotProps
 } from '@uifabric/foundation-composable';
-import { mergeSettings } from '@uifabric/theme-settings';
+import { mergeSettings } from '../../foundation-settings/lib';
 import { IWithTheme } from './Customize.types';
 import { getOverrideKey, getSettings, resolveSettings, ITheme } from '@uifabric/theming';
 import { processTokens } from '@uifabric/foundation-tokens';

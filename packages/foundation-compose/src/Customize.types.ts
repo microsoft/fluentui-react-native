@@ -1,4 +1,4 @@
-import { IComponentSettings } from '@uifabric/theme-settings';
+import { IComponentSettings } from '../../foundation-settings/lib';
 import { INativeTheme } from '@uifabric/theming-react-native';
 
 export type IWithTheme<TProps> = TProps & { theme: INativeTheme };

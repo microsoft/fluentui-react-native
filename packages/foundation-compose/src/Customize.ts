@@ -1,5 +1,5 @@
 import { ICustomizedSettings, ICustomizedValueType, IPropFunction, IWithTheme, ICustomizedResult } from './Customize.types';
-import { IComponentSettings } from '@uifabric/theme-settings';
+import { IComponentSettings } from '../../foundation-settings/lib';
 const JSON5 = require('json5');
 
 export function customize<TSettings extends IComponentSettings, TProps extends object>(

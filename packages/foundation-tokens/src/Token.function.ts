@@ -1,4 +1,4 @@
-import { mergeProps } from '@uifabric/theme-settings';
+import { mergeProps } from '@uifabric/foundation-settings';
 import {
   ITargetHasToken,
   IStyleFactoryOperation,

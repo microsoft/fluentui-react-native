@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IStyleProp } from '@uifabric/theme-settings';
+import { IStyleProp } from '@uifabric/foundation-settings';
 
 export type ICSSStyle = React.CSSProperties;
 export type IDivProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> & { style?: IStyleProp<ICSSStyle> };
