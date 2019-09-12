@@ -1,0 +1,19 @@
+{
+  "name": "@uifabric/immutable-merge",
+  "entries": [
+    {
+      "date": "Thu, 12 Sep 2019 20:46:12 GMT",
+      "tag": "@uifabric/immutable-merge_v0.1.2",
+      "version": "0.1.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add exploratory item to immutable merge",
+            "author": "taamireh@microsoft.com",
+            "commit": "eadfcb234f79cfc208431571572e06ccbf00efac"
+          }
+        ]
+      }
+    }
+  ]
+}
