@@ -1,4 +1,4 @@
-import { flattenStyle, mergeAndFinalizeStyles } from './Styles';
+import { flattenStyle, mergeAndFlattenStyles } from './Styles';
 import { IFinalizeStyle, IStyleProp } from './Styles.types';
 
 const theme = {
@@ -109,20 +109,20 @@ describe('Style flatten and merge tests', () => {
   });
 
   test('merge also flattens', () => {
-    const merged = mergeAndFinalizeStyles(undefined, undefined, s1, s2);
+    const merged = mergeAndFlattenStyles(undefined, undefined, s1, s2);
     expect(merged).toEqual(sMerged);
   });
 
   test('finalize single style', () => {
-    const final = mergeAndFinalizeStyles(styleFinalizer, s1);
+    const final = mergeAndFlattenStyles(styleFinalizer, s1);
     expect(final).toEqual(s1flattenFinal);
 
-    const final2 = mergeAndFinalizeStyles(styleFinalizer, s2);
+    const final2 = mergeAndFlattenStyles(styleFinalizer, s2);
     expect(final2).toEqual(s2Final);
   });
 
   test('merge and finalize style', () => {
-    const mergedAndFinal = mergeAndFinalizeStyles(styleFinalizer, s1, s2);
+    const mergedAndFinal = mergeAndFlattenStyles(styleFinalizer, s1, s2);
     expect(mergedAndFinal).toEqual(sMergedFinal);
   });
 });

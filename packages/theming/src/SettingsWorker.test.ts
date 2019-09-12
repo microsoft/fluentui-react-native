@@ -1,13 +1,7 @@
 import { ITheme } from './Theme.types';
 import { IPalette } from './Color.types';
 import { ITypography } from './Typography.types';
-import { createSettingsWorker, finalizeColor, finalizeFontWeight, finalizeFontFamily } from './SettingsWorker';
-
-const _worker = createSettingsWorker({
-  backgroundColor: finalizeColor,
-  fontWeight: finalizeFontWeight,
-  fontFamily: finalizeFontFamily
-});
+import { getSettings } from './SettingsWorker';
 
 const theme: ITheme = {
   palette: {
@@ -59,27 +53,27 @@ const _styleKey = 'style';
 
 describe('Style tests', () => {
   test('create style for the base layer', () => {
-    const style = _worker.getSettings(theme, 'base').settings.root![_styleKey];
+    const style = getSettings(theme, 'base').settings.root![_styleKey];
     expect(style).toEqual({
-      backgroundColor: '#ff0000'
+      backgroundColor: 'bodyBackground'
     });
   });
 
   test('create style for the Text layer', () => {
-    const style = _worker.getSettings(theme, 'Text').settings.root![_styleKey];
+    const style = getSettings(theme, 'Text').settings.root![_styleKey];
     expect(style).toEqual({
-      backgroundColor: '#ff0000',
+      backgroundColor: 'bodyBackground',
       textColor: '#0b1621',
-      fontFamily: 'Arial'
+      fontFamily: 'primary'
     });
   });
 
   test('create style for the Text layer with a disabled override', () => {
-    const style = _worker.getSettings(theme, 'Text', { disabled: true }).settings.root![_styleKey];
+    const style = getSettings(theme, 'Text', { disabled: true }).settings.root![_styleKey];
     expect(style).toEqual({
-      backgroundColor: '#ff0000',
+      backgroundColor: 'bodyBackground',
       textColor: '#0b1621',
-      fontFamily: 'Arial',
+      fontFamily: 'primary',
       fontWeight: 100
     });
   });

@@ -27,7 +27,7 @@ export const Pressable = compose<IPressableComponent>({
   usePrepareState: useWebPressable,
   finalizer,
   slots: {
-    root: 'div'
+    root: { slotType: 'div' }
   }
 });
 

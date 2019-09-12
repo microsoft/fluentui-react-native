@@ -1,21 +1,23 @@
-import { processTokens } from './TokenHelpers';
+import { ITheme } from '@uifabric/theming';
+import { IOperationSet } from '@uifabric/foundation-tokens';
 
 export interface IForegroundColorTokens {
   color?: string;
 }
 
-export const foregroundColorKeys: (keyof IForegroundColorTokens)[] = ['color'];
+export const getPaletteFromTheme = (theme: ITheme) => {
+  return theme.palette;
+};
 
-export function processForegroundTokens(tokens: IForegroundColorTokens, ...targetProps: object[]): void {
-  processTokens(tokens, foregroundColorKeys, ...targetProps);
-}
+export const foregroundColorTokens: IOperationSet<IForegroundColorTokens, ITheme> = [{ source: 'color', lookup: getPaletteFromTheme }];
 
 export interface IBackgroundColorTokens {
   backgroundColor?: string;
 }
 
-export const backgroundColorKeys: (keyof IBackgroundColorTokens)[] = ['backgroundColor'];
+export const backgroundColorTokens: IOperationSet<IBackgroundColorTokens, ITheme> = [
+  { source: 'backgroundColor', lookup: getPaletteFromTheme }
+];
 
-export function processBackgroundTokens(tokens: IBackgroundColorTokens, ...targetProps: object[]): void {
-  processTokens(tokens, backgroundColorKeys, ...targetProps);
-}
+export type IColorTokens = IForegroundColorTokens & IBackgroundColorTokens;
+export const colorTokens = [...foregroundColorTokens, ...backgroundColorTokens];

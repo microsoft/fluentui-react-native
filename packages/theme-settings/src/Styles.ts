@@ -28,7 +28,7 @@ export function flattenStyle(style: IStyleProp<object>): object {
  *
  * @param styles - array of styles to merge together.  The styles will be flattened as part of the process
  */
-export function mergeAndFinalizeStyles(finalizer: IFinalizeStyle | undefined, ...styles: IStyleProp<object>[]): object | undefined {
+export function mergeAndFlattenStyles(finalizer: IFinalizeStyle | undefined, ...styles: IStyleProp<object>[]): object | undefined {
   // baseline merge and flatten the objects
   let merged = immutableMerge(
     ...styles.map((styleProp: IStyleProp<object>) => {
