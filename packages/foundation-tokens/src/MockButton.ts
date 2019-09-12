@@ -12,7 +12,6 @@ import {
 } from './MockTokens';
 import { IMockBaseProps, mockCreate, stockFakeComponent } from './MockComponent';
 import { IComponentSettings } from '@uifabric/theme-settings';
-import { token } from './Token';
 
 export type IMockTextProps = IMockTextTokens & IMockForegroundColorTokens & IMockBaseProps;
 export type IMockViewProps = IMockBaseProps;
@@ -38,9 +37,11 @@ export type IButtonSettings = IComponentSettings<{
  * produced by the MockText component itself for those tokens
  */
 export const MockText = mockCreate<IMockTextProps, IComponentSettings>({
-  tokens: [token(standardTextTokens, 'root'), token(standardForegroundColorTokens, 'root')],
   slots: {
-    root: stockFakeComponent
+    root: {
+      component: stockFakeComponent,
+      styleFactories: [standardTextTokens, standardForegroundColorTokens]
+    }
   }
 });
 
@@ -49,17 +50,22 @@ export const MockText = mockCreate<IMockTextProps, IComponentSettings>({
  * text, and a stock component for the icon
  */
 export const MockButton = mockCreate<IMockButtonCustomProps, IButtonSettings>({
-  tokens: [
-    token(standardTextTokens, 'content', 'subContent'),
-    token(standardForegroundColorTokens, 'content', 'icon'),
-    token(standardBackgroundColorTokens, 'root'),
-    token(standardBorderTokens, 'root'),
-    token(standardCaptionTokens, 'subContent')
-  ],
   slots: {
-    root: stockFakeComponent,
-    content: MockText,
-    subContent: stockFakeComponent,
-    icon: stockFakeComponent
+    root: {
+      component: stockFakeComponent,
+      styleFactories: [standardBackgroundColorTokens, standardBorderTokens]
+    },
+    content: {
+      component: MockText,
+      styleFactories: [standardTextTokens, standardForegroundColorTokens]
+    },
+    subContent: {
+      component: stockFakeComponent,
+      styleFactories: [standardTextTokens, standardCaptionTokens]
+    },
+    icon: {
+      component: stockFakeComponent,
+      styleFactories: [standardForegroundColorTokens]
+    }
   }
 });

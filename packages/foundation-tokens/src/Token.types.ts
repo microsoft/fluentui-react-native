@@ -1,35 +1,7 @@
-import { IComponentSettings } from '@uifabric/theme-settings';
+import { ICacheInfo, ICachedPropHandlers } from './Token.internal';
 
 /**
- * TOKEN PROCESSING FUNCTIONS
- *
- * The following types for writing handlers for token values.  At its core the token system runs through a
- * series of processing functions.  These function take tokenProps and theme and produce a partial slot props or
- * component settings object.
- */
-
-/**
- * A converter function which turns token properties into settings.  Note that this doesn't get input into
- * the system directly, it gets _keys appended to it.
- *
- * @param tokenProps - the set of props which include the token values (if set)
- * @param theme - the current theme for this component
- */
-export type ITokenFunction<TProps, TTheme = object> = (tokenProps: TProps, theme: TTheme) => IComponentSettings | undefined;
-
-/**
- * Additional data attached to a token function, in particular the set of keys are necessary to effectively
- * cache the component.  If a processor function depends upon undeclared keys it may not re-resolve.
- */
-export interface ITokenFunctionData<TProps> {
-  _keys: (keyof TProps)[];
-}
-
-/** Combined type, use setupTokenProcessor to make it easy to create this */
-export type ITokenProcessor<TProps, TTheme = object> = ITokenFunction<TProps, TTheme> & ITokenFunctionData<TProps>;
-
-/**
- * TOKEN OPERATIONS (PARTIAL TOKEN PROCESSORS)
+ * STYLE FACTORY OPERATIONS (PARTIAL TOKEN PROCESSORS)
  *
  * Because in many cases the handling for tokens is the same, namely:
  * - copying to a target style
@@ -38,7 +10,7 @@ export type ITokenProcessor<TProps, TTheme = object> = ITokenFunction<TProps, TT
  * - looking up a value in a theme part
  * - some combination of these
  *
- * Token operations allow defining the actions to apply to a given token.  These will be built up by the
+ * Style factory operations allow defining the actions to apply to a given token.  These will be built up by the
  * framework into a processor function when the component is defined.
  */
 
@@ -49,7 +21,7 @@ export type ILookupThemePart<TTheme> = (theme: TTheme) => object;
  * The logic for a given operation.  This does not include slot targeting as that is component specific.  That
  * is mapped separately so these object can be reused.
  */
-export interface ITokenOperation<TProps, TTheme> {
+export interface IStyleFactoryOperation<TProps, TTheme> {
   /**
    * key to look up in the token prop to get the definition of the token
    */
@@ -67,36 +39,31 @@ export interface ITokenOperation<TProps, TTheme> {
    */
   lookup?: ILookupThemePart<TTheme>;
 }
+export type IOperationSet<TProps, TTheme> = IStyleFactoryOperation<TProps, TTheme>[];
 
 /**
- * A component specific set of operations to map to a set of slots
+ * A style factory function takes token props and a theme and returns a partial props + style to be mixed in
+ * to the token processing results.
+ *
+ * _keys - should specify the token keys the function is dependent on, required to cache properly
  */
-export interface ITokenOperations<TProps, TTheme> {
-  mapping: ITokenOperation<TProps, TTheme>[];
-  slots: string[];
+export type IStyleFactoryFunctionRaw<TProps, TTheme> = (tokenProps: TProps, theme: TTheme) => TProps;
+export type IStyleFactoryFunction<TProps, TTheme> = IStyleFactoryFunctionRaw<TProps, TTheme> & { _keys: (keyof TProps)[] };
+
+/**
+ * For a given slot a component author specifies an array of operations and functions to execute to produce props and styles
+ */
+export interface ISlotStyleFactories<TProps, TTheme> {
+  styleFactories?: (IOperationSet<TProps, TTheme> | IStyleFactoryFunction<TProps, TTheme>)[];
 }
 
 /**
- * COMPONENT DEFINITIONS
- *
- * A component provides an array of processors or operations that will get processed at render time.  Individual
- * operations will be processed at component definition time and wrapped in processor functions.
+ * This is the collection of style factories corresponding to the slots
  */
-
-/** Combination type for operations or processor */
-export type ITokenInputEntry<TProps, TTheme> = ITokenOperations<TProps, TTheme> | ITokenProcessor<TProps, TTheme>;
-
-/**
- * The format for defining the tokens of a component.  An array of processors and operations to perform.
- *
- * Note that order will be maintained but one generated processor will be created for each chunk.  So the
- * following input array:
- *  [...3 operations, processor, ...2 operations, processor, ...5 operations]
- * will have each chunk of operations replaced with a generated function.
- *
- * As a result it is somewhat more efficient to group these if order doesn't matter.
- */
-export type IComponentTokenDefinitions<TProps, TTheme> = ITokenInputEntry<TProps, TTheme>[];
+export interface IStyleFactories<TProps, TTheme> {
+  root: ISlotStyleFactories<TProps, TTheme>;
+  [key: string]: ISlotStyleFactories<TProps, TTheme>;
+}
 
 /**
  * Callback function for a component to allow querying whether a given token is supported on a sub-component.  In
@@ -106,12 +73,18 @@ export type IComponentTokenDefinitions<TProps, TTheme> = ITokenInputEntry<TProps
 export type ITargetHasToken = (target: string, key: string) => boolean;
 
 /**
+ * Style finalizer function.  Allows transforming props and styles before they are cached.  This could be used
+ * to create css rules for the styles and changing the reference to be by class name
+ */
+export type IStyleFinalizer<TProps> = (props: TProps, slotName: string, cacheInfo: ICacheInfo) => TProps;
+
+/**
  * Resolved token definitions, ready to be rendered
  */
 export interface IComponentTokens<TProps, TTheme> {
-  /** all operations combined into token processors */
-  tokens: ITokenProcessor<TProps, TTheme>[];
+  /** handlers to process the props of each slot */
+  handlers: ICachedPropHandlers<TProps, TTheme>;
 
   /** token keys put into a map for both ordered retrieval and quick lookups */
-  tokenKeys: Map<string, boolean>;
+  tokenKeys: { [key: string]: undefined };
 }

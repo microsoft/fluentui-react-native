@@ -94,28 +94,39 @@ describe('Token settings unit tests', () => {
     const cache = {};
     const resolved1 = MockButton({ content: 'button1' }, b1, theme, cache, false);
     const resolved2 = MockButton({ content: 'button2' }, b1, theme, cache, false);
-    expect(resolved1).toBe(resolved2);
+    expect(resolved1).toEqual(resolved2);
+    Object.getOwnPropertyNames(resolved1).forEach(key => {
+      expect(resolved1[key]).toBe(resolved2[key]);
+    });
   });
 
   test('setting props that match defaults keep same object', () => {
     const cache = {};
     const resolved1 = MockButton({ content: 'button1' }, b1, theme, cache, false);
     const resolved2 = MockButton({ content: 'button2', color: 'buttonText' }, b1, theme, cache, false);
-    expect(resolved1).toBe(resolved2);
+    expect(resolved1).toEqual(resolved2);
+    Object.getOwnPropertyNames(resolved1).forEach(key => {
+      expect(resolved1[key]).toBe(resolved2[key]);
+    });
   });
 
-  test('prop token overrides produce new object', () => {
+  test('prop token overrides produce partial new object', () => {
     const cache = {};
     const resolved1 = MockButton({ content: 'button1' }, b1, theme, cache, false);
     const resolved2 = MockButton({ content: 'button2', color: 'purple' }, b1, theme, cache, false);
     expect(resolved1).not.toBe(resolved2);
+    expect(resolved1['root']).toBe(resolved2['root']);
+    expect(resolved1.content).not.toBe(resolved2.content);
   });
 
   test('prop token overrides, multiple values are memoized', () => {
     const cache = {};
     const resolved1 = MockButton({ content: 'button1', borderRadius: 3, color: 'purple' }, b1, theme, cache, false);
     const resolved2 = MockButton({ content: 'button2', color: 'purple', borderRadius: 3 }, b1, theme, cache, false);
-    expect(resolved1).toBe(resolved2);
+    expect(resolved1).toEqual(resolved2);
+    Object.getOwnPropertyNames(resolved1).forEach(key => {
+      expect(resolved1[key]).toBe(resolved2[key]);
+    });
   });
 
   test('prop token overrides, different keys same value produce different objects', () => {
@@ -123,5 +134,7 @@ describe('Token settings unit tests', () => {
     const resolved1 = MockButton({ content: 'button1', backgroundColor: 'purple' }, b1, theme, cache, false);
     const resolved2 = MockButton({ content: 'button2', color: 'purple' }, b1, theme, cache, false);
     expect(resolved1).not.toBe(resolved2);
+    expect(resolved1['root']).not.toBe(resolved2['root']);
+    expect(resolved1.content).not.toBe(resolved2.content);
   });
 });

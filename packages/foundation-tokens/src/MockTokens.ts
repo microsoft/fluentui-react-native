@@ -1,5 +1,5 @@
 import { IMockTheme } from './MockTheme';
-import { ITokenOperation, ILookupThemePart } from './Token.types';
+import { IStyleFactoryOperation, ILookupThemePart } from './Token.types';
 
 export interface IMockTextTokens {
   fontSize?: string | number;
@@ -26,7 +26,7 @@ export interface IMockBorderTokens {
   borderColor?: string;
 }
 
-type ITokenParts<T> = ITokenOperation<T, IMockTheme>[];
+type ITokenParts<T> = IStyleFactoryOperation<T, IMockTheme>[];
 
 export const standardTextTokens: ITokenParts<IMockTextTokens> = [
   { source: 'fontSize', lookup: t => t.textSizes },

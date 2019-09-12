@@ -27,7 +27,7 @@ export type IResolvedSlot<
   TProps extends object = IGenericProps,
   TSlotProps = ISlotProps,
   TAdditional extends object = object
-  > = IAsResolved<IProcessResult<TProps, TSlotProps, TAdditional>>;
+> = IAsResolved<IProcessResult<TProps, TSlotProps, TAdditional>>;
 
 /**
  * a collection of resolved slots
@@ -77,15 +77,15 @@ export type IPropFilter = (props: object) => object;
  * In the case where a filter needs to be applied to props the slot can be set to an object which contains the slotType
  * and filter function reference
  */
-export interface ISlotWithFilter {
+export type ISlotWithFilter<TMixin = object> = {
   slotType?: ISlotType;
   filter?: IPropFilter;
-}
+} & TMixin;
 
 /**
  * The collection of slot types that should be defined on the definition of a component
  */
-export type ISlotTypes = {
-  root: ISlotType | ISlotWithFilter;
-  [key: string]: ISlotType | ISlotWithFilter;
+export type ISlotTypes<TMixin = object> = {
+  root: ISlotType | ISlotWithFilter<TMixin>;
+  [key: string]: ISlotType | ISlotWithFilter<TMixin>;
 };

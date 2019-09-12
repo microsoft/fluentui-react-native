@@ -12,7 +12,7 @@ import { wrapComponent, standardUsePrepareState, standardThemeQueryInputs } from
 import { ThemeContext, getTheme } from '@uifabric/theming-react-native';
 import { ICustomizedValueType } from './Customize.types';
 import { customize } from './Customize';
-import { buildComponentTokens } from '@uifabric/foundation-tokens';
+import { buildComponentTokens, IStyleFactories } from '@uifabric/foundation-tokens';
 import { ITheme } from '@uifabric/theming';
 
 /* tslint:disable-next-line no-any */
@@ -48,7 +48,7 @@ function _getComponentOptions<TComponent extends IComponent>(
 function _hasToken(slots: ISlotTypes, target: string, key: string): boolean {
   const slot = slots[target];
   const options = _getOptions(slot);
-  return options && options.resolvedTokens && options.resolvedTokens.tokenKeys.get(key);
+  return options && options.resolvedTokens && options.resolvedTokens.tokenKeys.hasOwnProperty(key);
 }
 
 function _setupComponentOptions(options: IComponentOptions<IComponent>): void {
@@ -64,7 +64,10 @@ function _setupComponentOptions(options: IComponentOptions<IComponent>): void {
         return _hasToken(slots, target, key);
       }
     : undefined;
-  options.resolvedTokens = buildComponentTokens<IComponentProps<IComponent>, ITheme>(options.tokens, hasTokens);
+  options.resolvedTokens = buildComponentTokens<IComponentProps<IComponent>, ITheme>(
+    options.slots as IStyleFactories<IComponentProps<IComponent>, ITheme>,
+    hasTokens
+  );
 }
 
 /**

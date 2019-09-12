@@ -17,7 +17,7 @@ To add token processing capabilities to your component libraries these are the s
 
 ### Component Creation Time
 
-Components should have the capability to have `IComponentTokenDefinitions<TProps, TTheme>` applied to them.
+Component slots should have the capability to have `ISlotStyleFactories<TProps, TTheme>` applied to them.
 
 - These should be set at the time when a component is defined
 - These should not change over the lifetime of a component
@@ -28,25 +28,33 @@ So as an example your configuration object might look like this:
 
     interface IComponentOptions<TProps> {
       baseSettings?: ...
-      tokens?: IComponentTokenDefinitions<TProps, ITheme>;
-      slots?: ...
+      slots?: IStyleFactories<TProps, ITheme>;
+            --- OR ---
+      slots?: { [key: string]: { /* some members */ } & ISlotStyleFactories<TProps, TTheme> }
     }
 
-When the component is created the `IComponentTokenDefinitions<TProps, TTheme>` need to be resolved into `IComponentTokens<TProps, TTheme>`. This happens by calling:
+When the component is created the set of `ISlotStyleFactories<TProps, TTheme>` need to be resolved into `IComponentTokens<TProps, TTheme>`. This happens by calling:
 
     export function buildComponentTokens<TProps, TTheme>(
-      entries: ITokenInputEntry<TProps, TTheme>[],
-      hasToken?: ITargetHasToken
+      entries: IStyleFactories<TProps, TTheme>,
+      hasToken?: ITargetHasToken,
+      finalizer? IStyleFinalizer<TProps, TTheme>
     ): IComponentTokens<TProps, TTheme> {
 
-This will turn the entries into an array of processor functions that are ready to render and build up the merged list of all token props for this component. While processor functions will be in the resulting tokens as-is, `ITokenOperations` will be merged into processor functions. Each `ITokenOperation` will do the following:
+The `IStyleFactoryOperation<TProps, TTheme>` entries will be processed into arrays targeting slots and tokens of the component, while any entires that are of type `IStyleFactoryFunction<TProps, TTheme>` will be put in a separate list that will be run at the end.
+
+For the operations, they will execute as follows:
 
 1. Go through each slot targeted in the operation
 1. Go through each token operation for that slot
 1. See if that token is supported on that slot by the `hasToken` callback
 1. If the token is supported set it up to transfer to the tokens, otherwise set it up to build a style
 
-Order will be maintained such that operations will run in the order they are declared in the token definitions.
+Order will be maintained such that operations will run in the order they are declared in the token definitions. Any functions will be run at the end.
+
+#### IStyleFinalizer
+
+`buildComponentTokens` can optionally accept a `IStyleFinalizer`. This is a processor that will run on a style before it is cached. This allows for custom integration with a styling system. A web version might create CSS rules with the style, remove the style objects, then add class names to the props.
 
 ### Component Render Time
 
@@ -57,22 +65,24 @@ At render time the library should call:
       theme: TTheme,
       slotProps: IComponentSettings,
       tokenInfo: IComponentTokens<TProps, TTheme>,
-      baseCacheKey: string,
-      cache: object
+      prefix: string,
+      cache: object,
+      displayName?: string
     ): ISlotProps {
 
 This will take the base settings (`slotProps`) and the user props (`props`) and run through the resolved tokens for the component (`tokenInfo`). This will first generate keys for the tokens to see if it is already present in the cache, otherwise it will be added to the cache so it will be found in subsequent calls.
 
-Note that the `baseCacheKey` will be prepended to the cache key the token processor generates. This `baseCacheKey` should have a one to one mapping with the `slotProps` passed in, such that the merge of these two is represented by the key. This is all to say that:
+Note that the `prefix` will be prepended to the cache key the token processor generates. This `prefix` should have a one to one mapping with the `slotProps` passed in, such that the merge of these two is represented by the key.
 
-- If the `baseCacheKey` is the same, the `slotProps` should be equal. Failure here would break caching.
-- If the `baseCacheKey` is different, `slotProps` should be a different object. Failure to do this would add inefficiency.
+#### Caching
+
+Props and styles for a given slot are cached in the cache on a per slot basis. The returned slotProps will be a new object but the props within will often be shared. This allows the caches for each slot to be invalidated on a one to one basis. If a foreground color is changed, a sub-component that does not pull from foreground color will not have its style changed.
 
 ## Standard Token Authors
 
-While token interfaces can be shared across components, and the actions that need to be taken on those tokens will be consistent, the actual targets of those tokens (i.e. the slots they need to be set into) will vary wildly. As a result tokens can be specified in parts. These parts are defined using the `ITokenOperations<TProps, TTheme>` interface. This is an array of:
+Token interfaces can often be shared across components, and the actions that need to be taken on those tokens will be consistent from the perspective of a given slot. As a result tokens can be specified in parts. These parts are defined using the `IOperationSet<TProps, TTheme>` interface. This is an array of:
 
-    export interface ITokenOperation<TProps, TTheme> {
+    export interface IStyleFactoryOperation<TProps, TTheme> {
       source: keyof TProps;
       target?: string;
       lookup?: ILookupThemePart<TTheme>;
@@ -81,7 +91,7 @@ While token interfaces can be shared across components, and the actions that nee
 The values are used as follows:
 
 - `source` - the token key that is set on the token props interface
-- `target` - optional name for the target style or token. If this is empty it is assumed that `source === target1`
+- `target` - optional name for the target style or token. If this is empty it is assumed that `source === target`
 - `lookup` - a function to look up an object in the theme. If the value of this property is a string type, this value will be looked up in this theme object and replaced if it exists. If this is undefined this behavior will be skipped.
 
 These token operations will be automatically processed when components are defined and merged into a custom processor function for this component.
@@ -90,58 +100,42 @@ These token operations will be automatically processed when components are defin
 
 If the component framework has integrated the token package, there should be a configuration setting that allows for specifying a list of tokens to add.
 
-### Using standard token processors
+### Using standard style operations
 
-Standard tokens can be added by using the `token` function. This is a shorthand for producing an object which has an array of token processors and an array of slot names to target. Each entry will be propogated to each slot referenced. As an example:
+Standard tokens can be added by referencing `IOperationSet` arrays. In the slot definitions the styleFactories can refer to these sets as follows:
 
-tokens: [
-token(foregroundColorTokens, 'text1', 'text2'),
-token(backgroundColorTokens, 'container')
-]
+    slots: {
+      root: {
+        styleFactories: [backgroundColorTokens, borderTokens]
+      },
+      content: {
+        styleFactories: [foregroundColorTokens]
+      }
+    }
 
-Would take a set of standard processors called `foregroundColorTokens` and apply them to the slots called `text1` and `text2`. It would then apply `backgroundColorTokens` to `container`.
+Each slot is defining what values it is pulling from the root props and settings. Note that root props can be propogated to multiple slots. This does not have to be 1 to 1.
 
-Note that these can be created inline as well so:
+### Using custom style functions
 
-    tokens: [
-      token({ source: 'iconColor', target: 'color', lookup: t => t.palette }, 'icon')
-    ]
+The `styleFactories` array can accept an `IStyleFunction` as an input as well. This is a processing function which also defines the keys it depends on. The `styleFunction` utility is provided to make these easy to create. Usage would be as follows:
 
-Would work as well.
-
-### Using custom token processors
-
-A token processor function itself takes tokenProps and the theme and produces a partial `ISlotProps` to be merged in. It also must expose a set of keys that it depends on. The `setupTokenProcessor` function provides a convenience wrapper for creating these functions.
-
-The following code is an example of what this might look like:
-
-    const myTokenProcessor = setupTokenProcessor<IMyProps, ITheme>(
+    const myTokenProcessor = styleFunction<IMyProps, ITheme>(
       (props: IMyProps, theme: ITheme) => {
         return {
-          root: {
-            style: {
-              color: props.isMode1 ? theme.palette.buttonText : theme.palette.windowText
-              borderWidth: props.borderless ? 0 : 1
-            }
+          style: {
+            color: props.isMode1 ? theme.palette.buttonText : theme.palette.windowText
+            borderWidth: props.borderless ? 0 : 1
           }
         }
       },
       ['isModel', 'borderless']
     );
 
-    // in the component definition
-    tokens: [
-      myTokenProcessor
-    ]
+    // in the component definition just mix them in with the operation sets
+    slots: {
+      root: {
+        styleFactories: [backgroundColorTokens, myTokenProcessor]
+      }
+    }
 
-The two approaches can be mixed and order will be maintained but authors should be aware that a processor function will be generated for each chunk of standard processors, meaning it is more efficient to group them.
-
-So the following:
-
-    tokens: [
-      token(foregroundColorTokens, 'text1'),
-      myCustomProcessor,
-      token(backgroundColorTokens, 'container')
-    ]
-
-Will create two custom processors for the standard processors to maintain order.
+Note that style functions run after the operations run and the results will be mixed together with higher precedence. This means that if a value is set by both a style function and an operation the style function will overwrite the value.

@@ -4,9 +4,11 @@ import { stackItemTokenProcessor } from './StackItem.tokens';
 
 export const StackItem = compose<IStackItemComponent>({
   className: 'RNFStackItem',
-  tokens: [stackItemTokenProcessor],
   slots: {
-    root: 'div'
+    root: {
+      slotType: 'div',
+      styleFactories: [stackItemTokenProcessor]
+    }
   }
 });
 

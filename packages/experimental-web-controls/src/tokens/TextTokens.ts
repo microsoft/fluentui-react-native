@@ -1,5 +1,5 @@
 import { ICSSStyle } from '../htmlTypes';
-import { ITokenOperation } from '@uifabric/foundation-tokens';
+import { IOperationSet } from '@uifabric/foundation-tokens';
 import { ITheme } from '@uifabric/theming';
 
 export interface ITextTokens {
@@ -8,7 +8,7 @@ export interface ITextTokens {
   fontWeight?: ICSSStyle['fontWeight'] | string;
 }
 
-export const textTokens: ITokenOperation<ITextTokens, ITheme>[] = [
+export const textTokens: IOperationSet<ITextTokens, ITheme> = [
   { source: 'fontFamily', lookup: t => t.typography.families },
   { source: 'fontSize', lookup: t => t.typography.sizes },
   { source: 'fontWeight', lookup: t => t.typography.weights }

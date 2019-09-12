@@ -3,13 +3,13 @@ import { ISlotTypes, IResolvedSlotData, IComposable } from '@uifabric/foundation
 import { IComponentSettings } from '@uifabric/theme-settings';
 import { ICustomizedSettings, ICustomizedValueType } from './Customize.types';
 import { ITheme } from '@uifabric/theming';
-import { IComponentTokenDefinitions, IComponentTokens } from '@uifabric/foundation-tokens';
+import { IComponentTokens, ISlotStyleFactories } from '@uifabric/foundation-tokens';
 
 export interface IRenderData<
   TProps extends object = object,
   TSlotProps extends IComponentSettings = IComponentSettings,
   TState extends object = any
-  > {
+> {
   props: TProps;
   theme: INativeTheme;
   state: TState;
@@ -36,13 +36,15 @@ export interface IThemeQueryInputs {
   overrides?: object;
 }
 
+export type IComponentSlotTypes<TProps> = ISlotTypes<ISlotStyleFactories<TProps, ITheme>>;
+
 export interface IComponent<
   TProps extends object = object,
   TSlotProps extends IComponentSettings = IComponentSettings,
   TCustomizeableProps extends TProps = TProps,
   TState extends object = any,
   TStatics extends object = object
-  > {
+> {
   className: string;
 
   /**
@@ -73,12 +75,6 @@ export interface IComponent<
   customSettings?: ICustomizedSettings<TSlotProps, TCustomizeableProps>[];
 
   /**
-   * An array of style processing functions, all entries with cacheableMask set will be applied first, followed by entries without
-   * that flag.  Results of token processing will be cached in the theme
-   */
-  tokens?: IComponentTokenDefinitions<TCustomizeableProps, ITheme>;
-
-  /**
    * The finalizer function does final preparation for render.  The default one will push all props to the root entry of the slot props
    */
   finalizer?: IFinalizer<TCustomizeableProps, TSlotProps, TState>;
@@ -96,7 +92,7 @@ export interface IComponent<
   /**
    * Optional slots to enable compound controls
    */
-  slots?: ISlotTypes;
+  slots?: IComponentSlotTypes<TCustomizeableProps>;
 }
 
 /**

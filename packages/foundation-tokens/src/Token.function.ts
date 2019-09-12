@@ -1,34 +1,34 @@
-import { IComponentSettings } from '@uifabric/theme-settings';
-import { ITargetHasToken, ITokenInputEntry, ITokenOperation, IComponentTokens, ITokenFunction, ITokenProcessor } from './Token.types';
+import { mergeProps } from '@uifabric/theme-settings';
+import {
+  ITargetHasToken,
+  IStyleFactoryOperation,
+  IComponentTokens,
+  IStyleFactories,
+  IStyleFinalizer,
+  IStyleFactoryFunction,
+  IStyleFactoryFunctionRaw
+} from './Token.types';
+import { ITokenPropInfo, ICachedPropHandlers, ICacheInfo } from './Token.internal';
 
-interface ITokenKeySet<TProps, TTheme> {
-  mapping: ITokenOperation<TProps, TTheme>[];
-  slots: string[];
+/**
+ * Helper to make it easy to create a style factory function.  Function statics are super convenient
+ * but kind of annoying to set up
+ *
+ * @param fn - function to decorate with keys
+ * @param keys - keys to append as a static to the function
+ */
+export function styleFunction<TProps, TTheme>(
+  fn: IStyleFactoryFunctionRaw<TProps, TTheme>,
+  keys: (keyof TProps)[]
+): IStyleFactoryFunction<TProps, TTheme> {
+  (fn as IStyleFactoryFunction<TProps, TTheme>)._keys = keys;
+  return fn as IStyleFactoryFunction<TProps, TTheme>;
 }
 
 interface ITokensForSlot<TProps, TTheme> {
-  toStyle: ITokenOperation<TProps, TTheme>[];
-  toTokens: ITokenOperation<TProps, TTheme>[];
-}
-
-interface IResolvedTokenMappings<TProps, TTheme> {
-  [slot: string]: ITokensForSlot<TProps, TTheme>;
-}
-
-/**
- * Convenience helper to make it easy to configure token processors
- *
- * @param fn - function that will be decorated with the keys and allow transfer settings
- * @param keys - keys for this token processor
- * @param allowTransfer - whether the keys can be transferred
- */
-export function setupTokenProcessor<TProps, TTheme = object>(
-  fn: ITokenFunction<TProps, TTheme>,
-  keys: (keyof TProps)[]
-): ITokenProcessor<TProps, TTheme> {
-  const processor = fn as ITokenProcessor<TProps, TTheme>;
-  processor._keys = keys;
-  return processor;
+  toStyle: IStyleFactoryOperation<TProps, TTheme>[];
+  toTokens: IStyleFactoryOperation<TProps, TTheme>[];
+  functions: IStyleFactoryFunction<TProps, TTheme>[];
 }
 
 function _copyToken<TProps>(props: TProps, key: string, target: string | undefined, targetObj: object): void {
@@ -37,7 +37,12 @@ function _copyToken<TProps>(props: TProps, key: string, target: string | undefin
   }
 }
 
-function _lookupOrCopyToken<TProps, TTheme>(props: TProps, theme: TTheme, entry: ITokenOperation<TProps, TTheme>, style: object): void {
+function _lookupOrCopyToken<TProps, TTheme>(
+  props: TProps,
+  theme: TTheme,
+  entry: IStyleFactoryOperation<TProps, TTheme>,
+  style: object
+): void {
   const { source: key, lookup } = entry;
   if (props.hasOwnProperty(key)) {
     const lookupResult = lookup && lookup(theme);
@@ -49,96 +54,128 @@ function _lookupOrCopyToken<TProps, TTheme>(props: TProps, theme: TTheme, entry:
   }
 }
 
-function _processTokenEntries<TProps, TTheme>(
-  props: TProps,
-  theme: TTheme,
-  mappings: IResolvedTokenMappings<TProps, TTheme>
-): IComponentSettings {
-  const result = {};
-  Object.keys(mappings).forEach((slot: string) => {
-    const slotProps: { style?: object } = {};
-    const mapping = mappings[slot];
-    if (mapping.toStyle.length > 0) {
-      const slotStyle = {};
-      for (const entry of mapping.toStyle) {
-        _lookupOrCopyToken(props, theme, entry, slotStyle);
-      }
-      if (Object.keys(slotStyle).length > 0) {
-        slotProps.style = slotStyle;
-      }
+function _processSlotEntries<TProps, TTheme>(props: TProps, theme: TTheme, mapping: ITokensForSlot<TProps, TTheme>): TProps {
+  const slotProps: { style?: object } = {};
+  if (mapping.toStyle.length > 0) {
+    const slotStyle = {};
+    for (const entry of mapping.toStyle) {
+      _lookupOrCopyToken(props, theme, entry, slotStyle);
     }
-    for (const entry of mapping.toTokens) {
-      _copyToken(props, entry.source as string, entry.target, slotProps);
+    if (Object.keys(slotStyle).length > 0) {
+      slotProps.style = slotStyle;
     }
-    result[slot] = slotProps;
-  });
-  return result;
-}
-
-function _pushMappings<TProps, TTheme>(
-  mappings: IResolvedTokenMappings<TProps, TTheme>,
-  tokens: ITokenProcessor<TProps, TTheme>[]
-): IResolvedTokenMappings<TProps, TTheme> {
-  // if there have been mappings set up then add a function that processes all the mappings
-  if (Object.keys(mappings).length > 0) {
-    tokens.push(
-      setupTokenProcessor<TProps, TTheme>((props: TProps, theme: TTheme) => {
-        return _processTokenEntries(props, theme, mappings);
-      }, [])
-    );
-    return {};
   }
-  return mappings;
+  for (const entry of mapping.toTokens) {
+    _copyToken(props, entry.source as string, entry.target, slotProps);
+  }
+  return slotProps as TProps;
 }
 
-export function buildComponentTokens<TProps, TTheme>(
-  entries: ITokenInputEntry<TProps, TTheme>[],
-  hasToken?: ITargetHasToken
+function _processStyleFunctions<TProps extends object, TTheme>(
+  functions: IStyleFactoryFunction<TProps, TTheme>[],
+  tokenProps: TProps,
+  theme: TTheme
+): TProps | undefined {
+  if (functions && functions.length > 0) {
+    return mergeProps(...functions.map(fn => fn(tokenProps, theme)));
+  }
+  return undefined;
+}
+
+function _buildTokenKey<TProps>(deltas: TProps, keys: string[], slotName: string, cacheInfo: ICacheInfo): string {
+  const key = cacheInfo.prefix + '-' + slotName + '-';
+  return key + keys.map(val => (deltas.hasOwnProperty(val) ? String(deltas[val]) : '')).join('-');
+}
+
+/**
+ * This is the worker function that does the work of either retrieving a cached props/style from the cache
+ * or building up the new props/style set
+ */
+function _getCachedPropsForSlot<TProps extends object, TTheme>(
+  props: TProps,
+  tokenProps: ITokenPropInfo<TProps>,
+  theme: TTheme,
+  slotName: string,
+  cacheInfo: ICacheInfo,
+  keys: string[],
+  mappings: ITokensForSlot<TProps, TTheme>,
+  finalizer?: IStyleFinalizer<TProps>
+): TProps {
+  // get the cache key for this entry
+  const { tokens, tokenKeys, deltas } = tokenProps;
+  const key = _buildTokenKey(deltas, keys, slotName, cacheInfo);
+  const cache = cacheInfo.cache;
+
+  // if it isn't in the cache then process the tokens to build it up
+  if (!cache[key]) {
+    let newProps: TProps = mergeProps(
+      props,
+      slotName === 'root' ? tokenKeys : undefined,
+      _processSlotEntries(tokens, theme, mappings),
+      _processStyleFunctions(mappings.functions, tokens, theme)
+    );
+    if (finalizer) {
+      newProps = finalizer(newProps, slotName, cacheInfo);
+    }
+    cache[key] = newProps;
+  }
+  return cache[key];
+}
+
+/**
+ * This function runs at component definition time (once for every component type) and
+ * processes the styleFactories on each of the slots and builds up handler functions that
+ * obtain or build the cached props.
+ *
+ * @param factories - collection of slot style factories
+ * @param hasToken - a function that returns whether or not a slot supports a given token
+ */
+export function buildComponentTokens<TProps extends object, TTheme>(
+  factories: IStyleFactories<TProps, TTheme>,
+  hasToken?: ITargetHasToken,
+  finalizer?: IStyleFinalizer<TProps>
 ): IComponentTokens<TProps, TTheme> {
-  const tokenKeys: Map<string, boolean> = new Map<string, boolean>();
-  const tokens: ITokenProcessor<TProps, TTheme>[] = [];
-  let mappings: IResolvedTokenMappings<TProps, TTheme> = {};
+  const tokenKeys: { [key: string]: undefined } = {};
+  const handlers: ICachedPropHandlers<TProps, TTheme> = {} as ICachedPropHandlers<TProps, TTheme>;
 
-  if (entries) {
-    // parse the entries and build up token processors that are ready to run
-    for (const entry of entries) {
-      // if mapping is set on the object then this is a key set rather than a processor function
-      const keySet: ITokenKeySet<TProps, TTheme> | undefined = (entry as ITokenKeySet<TProps, TTheme>).mapping
-        ? (entry as ITokenKeySet<TProps, TTheme>)
-        : undefined;
+  // iterate through each factory and generate a handler for it.  Note that even if no styleFactories
+  // are provided within it will still generate the handler to do style caching and finalization
+  Object.getOwnPropertyNames(factories).forEach(slot => {
+    const factorySet = factories[slot].styleFactories;
+    const mappings: ITokensForSlot<TProps, TTheme> = { toStyle: [], toTokens: [], functions: [] };
+    const { toStyle, toTokens, functions } = mappings;
+    const slotKeys = {};
 
-      if (keySet) {
-        // process each slot that is being targeted
-        for (const slot of keySet.slots) {
-          // ensure that mapping is initialized
-          mappings[slot] = mappings[slot] || { toStyle: [], toTokens: [] };
-          const { toStyle, toTokens } = mappings[slot];
-          for (const mapEntry of keySet.mapping) {
-            tokenKeys.set(mapEntry.source as string, true);
-            const transfer = hasToken && hasToken(slot, mapEntry.source as string);
-            if (transfer) {
-              toTokens.push(mapEntry);
+    // if there are style factories provided split them into ones that target tokens and ones that target styles
+    if (factorySet) {
+      for (const set of factorySet) {
+        if (Array.isArray(set)) {
+          for (const operation of set) {
+            slotKeys[operation.source as string] = undefined;
+            const target = operation.target || operation.source;
+            if (hasToken && hasToken(slot, target as string)) {
+              toTokens.push(operation);
             } else {
-              toStyle.push(mapEntry);
+              toStyle.push(operation);
             }
           }
+        } else {
+          functions.push(set);
+          set._keys.forEach(key => {
+            slotKeys[key as string] = undefined;
+          });
         }
-      } else {
-        // if we are adding a function merge any active mappings together into a function and put it into the list
-        // this ensures order
-        mappings = _pushMappings(mappings, tokens);
-
-        // in this case a token processor has been added directly.  Add the keys to the map and then add
-        // the function to the queue directly
-        const keys: string[] = (entry as ITokenProcessor<TProps, TTheme>)._keys as string[];
-        keys.forEach((key: string) => tokenKeys.set(key, true));
-        tokens.push(entry as ITokenProcessor<TProps, TTheme>);
       }
     }
 
-    // finish any leftover mappings
-    _pushMappings(mappings, tokens);
-  }
+    // add the collected keys to the root token keys
+    Object.assign(tokenKeys, slotKeys);
 
-  return { tokenKeys, tokens };
+    // create the closure for the handler and return that in the object
+    handlers[slot] = (props: TProps, tokenProps: ITokenPropInfo<TProps>, theme: TTheme, slotName: string, cacheInfo: ICacheInfo) => {
+      const keys = Object.getOwnPropertyNames(slotKeys);
+      return _getCachedPropsForSlot(props, tokenProps, theme, slotName, cacheInfo, keys, mappings, finalizer);
+    };
+  });
+  return { tokenKeys, handlers };
 }

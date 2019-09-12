@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { stackTokenProcessor } from './Stack.styles';
+import { buildStackRootStyles, buildStackInnerStyles } from './Stack.styles';
 import { IStackComponent, IStackRenderData } from './Stack.types';
 import { StackItem } from './StackItem/StackItem';
 import { compose } from '@uifabric/foundation-compose';
@@ -23,11 +23,10 @@ const StackStatics = {
 
 export const Stack = compose<IStackComponent>({
   className: 'RNFStack',
-  tokens: [stackTokenProcessor],
   statics: StackStatics,
   slots: {
-    root: 'div',
-    inner: 'div'
+    root: { slotType: 'div', styleFactories: [buildStackRootStyles] },
+    inner: { slotType: 'div', styleFactories: [buildStackInnerStyles] }
   },
   view
 });
