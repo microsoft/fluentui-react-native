@@ -18,7 +18,7 @@
   "license": "MIT",
   "dependencies": {
     "@uifabric/theme-registry": "0.1.1",
-    "@uifabric/theme-settings": "0.1.1",
+    "@uifabric/foundation-settings": "0.1.1",
     "@uifabric/theming": "0.1.1"
   },
   "devDependencies": {

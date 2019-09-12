@@ -1,5 +1,5 @@
 import { IComponentTokens } from './Token.types';
-import { ISlotProps, IComponentSettings } from '@uifabric/theme-settings';
+import { ISlotProps, IComponentSettings } from '@uifabric/foundation-settings';
 import { ITokenPropInfo, ICacheInfo } from './Token.internal';
 
 /**

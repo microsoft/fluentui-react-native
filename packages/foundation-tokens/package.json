@@ -22,7 +22,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^19.2.2",
-    "@uifabric/theme-settings": "0.1.1",
+    "@uifabric/foundation-settings": "0.1.1",
     "@uifabric/build-native": "^0.1.1"
   }
 }

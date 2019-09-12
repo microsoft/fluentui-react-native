@@ -1,6 +1,6 @@
 import { INativeTheme } from '@uifabric/theming-react-native';
 import { ISlotTypes, IResolvedSlotData, IComposable } from '@uifabric/foundation-composable';
-import { IComponentSettings } from '@uifabric/theme-settings';
+import { IComponentSettings } from '../../foundation-settings/lib';
 import { ICustomizedSettings, ICustomizedValueType } from './Customize.types';
 import { ITheme } from '@uifabric/theming';
 import { IComponentTokens, ISlotStyleFactories } from '@uifabric/foundation-tokens';
@@ -9,7 +9,7 @@ export interface IRenderData<
   TProps extends object = object,
   TSlotProps extends IComponentSettings = IComponentSettings,
   TState extends object = any
-> {
+  > {
   props: TProps;
   theme: INativeTheme;
   state: TState;
@@ -44,7 +44,7 @@ export interface IComponent<
   TCustomizeableProps extends TProps = TProps,
   TState extends object = any,
   TStatics extends object = object
-> {
+  > {
   className: string;
 
   /**

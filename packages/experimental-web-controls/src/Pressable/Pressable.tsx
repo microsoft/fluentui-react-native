@@ -12,7 +12,7 @@
 
 import { compose } from '@uifabric/foundation-compose';
 import { IPressableComponent, IPressableRenderData } from './Pressable.props';
-import { mergeSettings } from '@uifabric/theme-settings';
+import { mergeSettings } from '@uifabric/foundation-settings';
 import { useWebPressable } from './useAsPressable';
 
 function finalizer(renderData: IPressableRenderData): IPressableRenderData {

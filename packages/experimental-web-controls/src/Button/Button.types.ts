@@ -1,7 +1,7 @@
 import { IComponent, IRenderData } from '@uifabric/foundation-compose';
 import { ITextProps } from '../Text/index';
 import { IPressableState, IPressableProps } from '../Pressable/index';
-import { IComponentSettings } from '@uifabric/theme-settings';
+import { IComponentSettings } from '@uifabric/foundation-settings';
 import { IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, ITextTokens } from '../tokens/index';
 import { IImageProps } from '../htmlTypes';
 import { IStackProps } from '../Stack/index';

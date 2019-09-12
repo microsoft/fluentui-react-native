@@ -22,7 +22,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabric/theme-settings": "0.1.1",
+    "@uifabric/foundation-settings": "0.1.1",
     "@uifabric/theming": "0.1.1",
     "@uifabric/theming-react-native": "0.1.1",
     "@uifabric/foundation-compose": "0.1.1"

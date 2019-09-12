@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ITextTokens, IBackgroundColorTokens, IBorderTokens } from '../tokens/index';
-import { IComponentSettings } from '@uifabric/theme-settings';
+import { IComponentSettings } from '@uifabric/foundation-settings';
 import { IComponent, IRenderData } from '@uifabric/foundation-compose';
 import { IDivProps } from '../htmlTypes';
 import { IStackItemProps } from './StackItem/StackItem.types';
