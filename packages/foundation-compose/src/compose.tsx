@@ -4,16 +4,15 @@ import {
   IComponentReturnType,
   IReactComponentType,
   IComponentProps,
-  IExtractSettingsType,
-  IComponentOptions
+  IComponentOptions,
+  IExtractSettingsType
 } from './Component.types';
 import { ISlotTypes, useProcessComposableTree, renderSlot, IGenericProps } from '@uifabric/foundation-composable';
 import { wrapComponent, standardUsePrepareState, standardThemeQueryInputs } from './Component';
 import { ThemeContext, getTheme } from '@uifabric/theming-react-native';
-import { ICustomizedValueType } from './Customize.types';
-import { customize } from './Customize';
 import { buildComponentTokens, IStyleFactories } from '@uifabric/foundation-tokens';
 import { ITheme } from '@uifabric/theming';
+import { ISettingsEntry } from '@uifabric/custom-settings';
 
 /* tslint:disable-next-line no-any */
 function _getOptions<TComponent extends IComponent = IComponent>(obj: any): IComponentOptions<TComponent> | undefined {
@@ -30,7 +29,7 @@ function _getComponentOptions<TComponent extends IComponent>(
     // append custom settings to any pre-existing ones
     const parent = baseComposable || ({} as TComponent);
     const slots: ISlotTypes = { ...parent.slots, ...inputComponent.slots };
-    const customSettings = [].concat(parent.customSettings, inputComponent.customSettings).filter(v => v);
+    const settings = [].concat(parent.settings, inputComponent.settings).filter(v => v);
 
     if (baseRoot) {
       slots.root = baseRoot as any;
@@ -39,7 +38,7 @@ function _getComponentOptions<TComponent extends IComponent>(
       ...baseComposable,
       ...inputComponent,
       slots,
-      customSettings
+      settings
     };
   }
   return inputComponent;
@@ -53,7 +52,7 @@ function _hasToken(slots: ISlotTypes, target: string, key: string): boolean {
 
 function _setupComponentOptions(options: IComponentOptions<IComponent>): void {
   // ensure functions and the symbol are set up correctly
-  options.tokenCacheKey = Symbol(options.className);
+  options.tokenCacheKey = Symbol(options.displayName);
   options.usePrepareState = options.usePrepareState || standardUsePrepareState;
   options.themeQueryInputs = options.themeQueryInputs || standardThemeQueryInputs;
 
@@ -97,17 +96,17 @@ export function compose<TComponent extends IComponent>(
   };
 
   // set the displayName and merge in statics
-  Component.displayName = options.className;
+  Component.displayName = options.displayName;
   Component.__options = options;
   Component.__composable = composable;
   Object.assign(Component, options.statics);
 
   // set up the customize handler
-  Component.customize = (literals: TemplateStringsArray, ...keys: ICustomizedValueType<IComponentProps<TComponent>>[]) => {
+  Component.customize = (...settings: ISettingsEntry<IExtractSettingsType<TComponent>, ITheme>[]) => {
     return compose<TComponent>(
       ({
-        className: options.className,
-        customSettings: [customize<IExtractSettingsType<TComponent>, IComponentProps<TComponent>>(literals, ...keys)]
+        displayName: options.displayName + '+',
+        settings
       } as unknown) as TComponent,
       (Component as unknown) as React.ReactElement<object>
     );

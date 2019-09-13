@@ -9,10 +9,10 @@ import {
   IGenericProps,
   ISlotProps
 } from '@uifabric/foundation-composable';
-import { mergeSettings } from '../../foundation-settings/lib';
-import { IWithTheme } from './Customize.types';
-import { getOverrideKey, getSettings, resolveSettings, ITheme } from '@uifabric/theming';
+import { mergeSettings, IComponentSettings } from '@uifabric/foundation-settings';
+import { getSettings, ITheme } from '@uifabric/theming';
 import { processTokens } from '@uifabric/foundation-tokens';
+import { getThemedSettings } from '@uifabric/custom-settings';
 
 /**
  * Get the cache for the given component from the theme, creating it if necessary
@@ -45,42 +45,25 @@ export function standardThemeQueryInputs(name: string, renderData: IRenderData):
   return { name, overrides: renderData.props };
 }
 
+function getSettingsFromTheme(theme: ITheme, name: string): IComponentSettings {
+  return getSettings(theme, name).settings;
+}
+
 export function _processSettings<TComponent extends IComponent>(component: TComponent, data: IRenderData): IRenderData {
-  const { name, overrides } = component.themeQueryInputs(component.className, data);
-  let { settings, styleKey } = getSettings(data.theme, name);
+  const { overrides } = component.themeQueryInputs(component.displayName, data);
   const cache = _getComponentCache(component, data.theme);
 
-  // if there are layers of customized settings apply those, caching along the way and building up the cache key as appropriate
-  if (component.customSettings && component.customSettings.length > 0) {
-    const propsWithTheme = data.props as IWithTheme<IComponentProps<IComponent>>;
-    propsWithTheme.theme = data.theme;
-    for (const customEntry of component.customSettings) {
-      const customSettings = customEntry.settings;
-      const queryKeys = customSettings ? ['-'] : customEntry.queryKeys(propsWithTheme);
-      styleKey = styleKey + '|' + queryKeys.map(k => k || '-').join('-');
-      if (cache[styleKey]) {
-        settings = cache[styleKey];
-      } else {
-        cache[styleKey] = settings = mergeSettings(
-          settings,
-          customEntry.settings ? customEntry.settings : customEntry.getSettings(queryKeys)
-        ) as ISlotProps;
-      }
-    }
-    delete propsWithTheme.theme;
-  }
+  const { settings, key } = getThemedSettings(
+    component.settings,
+    data.theme,
+    cache,
+    component.displayName,
+    overrides,
+    getSettingsFromTheme
+  );
+  data.slotProps = settings;
+  data.settingsKey = key;
 
-  // finally get the override key to append to the merged settings
-  if (settings) {
-    styleKey = getOverrideKey(styleKey, settings._precedence || [], overrides);
-    if (cache[styleKey]) {
-      settings = cache[styleKey];
-    } else {
-      cache[styleKey] = settings = resolveSettings(data.theme, settings, overrides) as ISlotProps;
-    }
-    data.settingsKey = styleKey;
-    data.slotProps = settings;
-  }
   return data;
 }
 

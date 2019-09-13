@@ -10,7 +10,7 @@ const _pressableRenderStyle: IPressableProps['renderStyle'] = (state: IPressable
   };
 };
 
-const BlueButton = Button.customize`{
+const BlueButton = Button.customize({
   root: {
     borderRadius: 7,
     backgroundColor: 'blue',
@@ -24,14 +24,22 @@ const BlueButton = Button.customize`{
       }
     }
   }
-}`;
+});
 
-const DynamicButton = BlueButton.customize`{
+const DynamicButton = BlueButton.customize({
   root: {
-    borderColor: ${p => (p.disabled ? 'pink' : 'purple')}
-    fontSize: ${p => (p.disabled ? 'xLarge' : 'medium')}
+    borderColor: 'purple',
+    fontSize: 'medium'
+  },
+  _overrides: {
+    disabled: {
+      root: {
+        borderColor: 'pink',
+        fontSize: 'xLarge'
+      }
+    }
   }
-}`;
+});
 
 export const App: React.FunctionComponent = () => {
   return (

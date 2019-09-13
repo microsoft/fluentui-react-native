@@ -1,0 +1,8 @@
+{
+  "type": "major",
+  "comment": "switch implementations to use new customized settings",
+  "packageName": "@uifabric/foundation-compose",
+  "email": "jasonmo@microsoft.com",
+  "commit": "32ece97de4699f7e7048fd6e45f58c963b09df66",
+  "date": "2019-09-13T19:22:07.975Z"
+}

@@ -6,7 +6,8 @@ import { loadTextSettings } from './Text.settings';
 loadTextSettings();
 
 export const Text = compose<ITextComponent>({
-  className: 'RNFText',
+  displayName: 'Text',
+  settings: ['RNFText'],
   slots: {
     root: {
       slotType: 'div',

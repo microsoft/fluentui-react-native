@@ -5,7 +5,8 @@ import {
   IOverrideLookup,
   resolveSettingsOverrides,
   getParentSettingsChain,
-  mergeSettings
+  mergeSettings,
+  getActiveOverrides
 } from '@uifabric/foundation-settings';
 
 interface ISettingsWithKey {
@@ -41,6 +42,7 @@ export function resolveSettings(theme: ITheme, target: IComponentSettings, overr
  * @param overrides - lookup object for testing whether an override should be applied
  */
 export function getOverrideKey(name: string, precedence: string[], overrides: IOverrideLookup): string {
+  getActiveOverrides;
   const overrideKey = (precedence && precedence.filter(val => overrides[val]).join('-')) || undefined;
   return overrideKey ? name + '-' + overrideKey : name;
 }

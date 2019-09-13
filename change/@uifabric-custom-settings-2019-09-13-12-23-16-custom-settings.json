@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "create initial custom-settings package",
+  "packageName": "@uifabric/custom-settings",
+  "email": "jasonmo@microsoft.com",
+  "commit": "32ece97de4699f7e7048fd6e45f58c963b09df66",
+  "date": "2019-09-13T19:21:51.429Z"
+}

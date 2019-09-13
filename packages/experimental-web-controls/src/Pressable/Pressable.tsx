@@ -23,7 +23,8 @@ function finalizer(renderData: IPressableRenderData): IPressableRenderData {
 }
 
 export const Pressable = compose<IPressableComponent>({
-  className: 'RNFPressable',
+  displayName: 'Pressable',
+  settings: ['RNFPressable'],
   usePrepareState: useWebPressable,
   finalizer,
   slots: {
