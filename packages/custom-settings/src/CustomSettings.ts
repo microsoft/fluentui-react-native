@@ -14,9 +14,9 @@ export function getThemedSettings<TSettings extends IComponentSettings, TTheme>(
   key: string,
   lookup?: IGetSettingsFromTheme<TSettings, TTheme>
 ): TSettings | undefined {
-  if (!cache[key] && customSettings.length > 0) {
+  if (!cache[key] && customSettings && customSettings.length > 0) {
     cache[key] = mergeSettings(
-      customSettings.map(entry => {
+      ...customSettings.map(entry => {
         if (typeof entry === 'string') {
           return (lookup && lookup(theme, entry)) || undefined;
         } else if (typeof entry === 'function') {
@@ -37,6 +37,7 @@ export function getCachedResolvedSettings<TSettings extends IComponentSettings, 
   hasOverride?: IOverrideLookup,
   lookup?: IGetSettingsFromTheme<TSettings, TTheme>
 ): { settings: TSettings | undefined; key: string } {
+  key = key || '_base';
   let settings = getThemedSettings(customSettings, theme, cache, key, lookup);
   const overrides = getActiveOverrides(settings, hasOverride);
   if (overrides && overrides.length > 0) {
