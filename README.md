@@ -18,7 +18,7 @@ This repo is set up as a monorepo using Lerna + Yarn workspaces. The yarn comman
 ### Beachball
 This repo manages semantic versioning and publishing using Beachball (https://github.com/microsoft/beachball). When contributing, make sure to run the following before making a pull request
 1. `yarn change` will take you through a command line wizard to generate change files
-2. Make sure to commit and push the newly generate change file
+2. Make sure to commit and push the newly generated change file
 
 TODO:
 - [ ] Add a release pipeline to update versions and publish to npm registry
