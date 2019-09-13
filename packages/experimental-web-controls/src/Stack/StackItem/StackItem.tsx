@@ -3,7 +3,8 @@ import { compose } from '@uifabric/foundation-compose';
 import { stackItemTokenProcessor } from './StackItem.tokens';
 
 export const StackItem = compose<IStackItemComponent>({
-  className: 'RNFStackItem',
+  displayName: 'StackItem',
+  settings: ['RNFStackItem'],
   slots: {
     root: {
       slotType: 'div',

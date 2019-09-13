@@ -1,15 +1,15 @@
 import { INativeTheme } from '@uifabric/theming-react-native';
 import { ISlotTypes, IResolvedSlotData, IComposable } from '@uifabric/foundation-composable';
 import { IComponentSettings } from '../../foundation-settings/lib';
-import { ICustomizedSettings, ICustomizedValueType } from './Customize.types';
 import { ITheme } from '@uifabric/theming';
 import { IComponentTokens, ISlotStyleFactories } from '@uifabric/foundation-tokens';
+import { ISettingsEntry } from '@uifabric/custom-settings';
 
 export interface IRenderData<
   TProps extends object = object,
   TSlotProps extends IComponentSettings = IComponentSettings,
   TState extends object = any
-  > {
+> {
   props: TProps;
   theme: INativeTheme;
   state: TState;
@@ -44,9 +44,8 @@ export interface IComponent<
   TCustomizeableProps extends TProps = TProps,
   TState extends object = any,
   TStatics extends object = object
-  > {
-  className: string;
-
+> {
+  displayName: string;
   /**
    * used for type extraction, this will become the props interface for the component, the one that is used when authoring
    * against the component using JSX
@@ -70,9 +69,9 @@ export interface IComponent<
   themeQueryInputs?: (name: string, renderData: IRenderData<TCustomizeableProps, TSlotProps, TState>) => IThemeQueryInputs;
 
   /**
-   * Settings to be merged in after the theme settings
+   * Settings for the component, IComponentSettings, theme => IComponentSettings, or a name to look up in the theme
    */
-  customSettings?: ICustomizedSettings<TSlotProps, TCustomizeableProps>[];
+  settings?: ISettingsEntry<TSlotProps, ITheme>[];
 
   /**
    * The finalizer function does final preparation for render.  The default one will push all props to the root entry of the slot props
@@ -127,7 +126,7 @@ export type IPropsWithChildren<TProps extends object> = TProps & {
 export type IComponentCustomizations<TComponent extends IComponent> = {
   __options: TComponent;
   __composable: IComposable;
-  customize: ICustomizeRoutine<TComponent, IComponentProps<TComponent>>;
+  customize: ICustomizeRoutine<TComponent, IExtractSettingsType<TComponent>>;
 };
 
 export type IReactComponentType<TComponent extends IComponent> = React.FunctionComponent<IComponentProps<TComponent>> &
@@ -135,7 +134,6 @@ export type IReactComponentType<TComponent extends IComponent> = React.FunctionC
 
 export type IComponentReturnType<TComponent extends IComponent> = IReactComponentType<TComponent> & TComponent['statics'];
 
-export type ICustomizeRoutine<TComponent extends IComponent, TProps extends object> = (
-  literals: TemplateStringsArray,
-  ...keys: ICustomizedValueType<TProps>[]
+export type ICustomizeRoutine<TComponent extends IComponent, TSettings extends object> = (
+  ...keys: ISettingsEntry<TSettings, ITheme>[]
 ) => IComponentReturnType<TComponent>;

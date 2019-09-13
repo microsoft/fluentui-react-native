@@ -21,11 +21,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@uifabric/custom-settings": "0.1.1",
     "@uifabric/foundation-composable": "0.1.1",
     "@uifabric/foundation-tokens": "0.1.1",
     "@uifabric/theming-react-native": "0.1.1",
-    "@uifabric/theming": "0.1.1",
-    "json5": "2.1.0"
+    "@uifabric/theming": "0.1.1"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

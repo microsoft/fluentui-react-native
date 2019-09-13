@@ -22,7 +22,8 @@ const StackStatics = {
 };
 
 export const Stack = compose<IStackComponent>({
-  className: 'RNFStack',
+  displayName: 'Stack',
+  settings: ['RNFStack'],
   statics: StackStatics,
   slots: {
     root: { slotType: 'div', styleFactories: [buildStackRootStyles] },

@@ -11,7 +11,8 @@ import { backgroundColorTokens, foregroundColorTokens, getPaletteFromTheme } fro
 loadButtonSettings();
 
 export const Button = compose<IButtonComponent>({
-  className: 'RNFButton',
+  displayName: 'Button',
+  settings: ['RNFButton'],
   usePrepareState,
   themeQueryInputs,
   finalizer,

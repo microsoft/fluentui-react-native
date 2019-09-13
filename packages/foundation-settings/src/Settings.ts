@@ -137,7 +137,7 @@ export function getParentSettingsChain(lookup: IComponentSettingsCollection, tar
 
 export function getActiveOverrides(target: IComponentSettings, lookup?: IOverrideLookup): string[] {
   const hasOverride = typeof lookup === 'function' ? lookup : o => lookup[o];
-  return (target._precedence && target._precedence.filter(o => hasOverride(o))) || [];
+  return (target && target._precedence && target._precedence.filter(o => hasOverride(o))) || [];
 }
 
 /**
