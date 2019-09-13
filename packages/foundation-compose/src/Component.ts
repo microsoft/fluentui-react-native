@@ -9,10 +9,10 @@ import {
   IGenericProps,
   ISlotProps
 } from '@uifabric/foundation-composable';
-import { mergeSettings, IComponentSettings } from '../../foundation-settings/lib';
+import { mergeSettings, IComponentSettings } from '@uifabric/foundation-settings';
 import { getSettings, ITheme } from '@uifabric/theming';
 import { processTokens } from '@uifabric/foundation-tokens';
-import { getCachedResolvedSettings } from '@uifabric/custom-settings';
+import { getThemedSettings } from '@uifabric/custom-settings';
 
 /**
  * Get the cache for the given component from the theme, creating it if necessary
@@ -51,10 +51,9 @@ function getSettingsFromTheme(theme: ITheme, name: string): IComponentSettings {
 
 export function _processSettings<TComponent extends IComponent>(component: TComponent, data: IRenderData): IRenderData {
   const { overrides } = component.themeQueryInputs(component.displayName, data);
-  //let { settings, styleKey } = getSettings(data.theme, name);
   const cache = _getComponentCache(component, data.theme);
 
-  const { settings, key } = getCachedResolvedSettings(
+  const { settings, key } = getThemedSettings(
     component.settings,
     data.theme,
     cache,
