@@ -34,6 +34,7 @@
     "generate-version-files": "cd scripts && just-scripts generate-version-files",
     "prettier": "node scripts/prettier.js",
     "publish:beachball": "beachball publish",
+    "bump-versions": "beachball bump",
     "update-a11y": "cd apps/a11y-tests && npm run update-snapshots",
     "update-api": "cd packages/office-ui-fabric-react && npm run update-api",
     "update-snapshots": "cd packages/office-ui-fabric-react && npm run update-snapshots"

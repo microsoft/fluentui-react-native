@@ -81,3 +81,4 @@ While the primary use case is for a single object this allows merging to happen 
 ## Things to Explore
 
 - This should be stress tested and perf tested, because it is such a core routine it needs to be very fast.
+- It is likely the case that the typings on these routines could be strengthened.
