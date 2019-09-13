@@ -152,7 +152,7 @@ export function resolveSettingsOverrides(target: IComponentSettings, overrideLoo
   if (overrideLookup && _overrides && _precedence) {
     const overrides = getActiveOverrides(target, overrideLookup);
     for (const override of overrides) {
-      result = mergeSettings(result, _overrides[override]);
+      result = mergeSettings(result, result._overrides[override]);
     }
   }
   return result;

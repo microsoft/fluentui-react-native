@@ -13,8 +13,18 @@ const settingsBase: IComponentSettings<IProps> = {
   root: {
     fontFamily: 'Arial'
   },
-  _precedence: ['hover', 'hover2'],
+  _precedence: ['primary', 'hover', 'hover2'],
   _overrides: {
+    primary: {
+      root: {
+        fontFamily: 'primary'
+      },
+      _overrides: {
+        hover: {
+          root: { fontSize: 15 }
+        }
+      }
+    },
     hover: {
       root: {
         fontWeight: 'bold',
@@ -43,53 +53,28 @@ describe('Override settings tests', () => {
 
   test('applyOverrides applies the hover2 override using only the input', () => {
     const overridden = resolveSettingsOverrides(settingsBase, { hover2: true });
-    expect(overridden).toEqual({
-      root: {
-        fontFamily: 'Arial',
-        fontWeight: 'light',
-        fontSize: 5
-      },
-      _precedence: ['hover', 'hover2'],
-      _overrides: {
-        hover: {
-          root: {
-            fontWeight: 'bold',
-            fontSize: 20
-          }
-        },
-        hover2: {
-          root: {
-            fontWeight: 'light',
-            fontSize: 5
-          }
-        }
-      }
+    expect(overridden.root).toEqual({
+      fontFamily: 'Arial',
+      fontWeight: 'light',
+      fontSize: 5
     });
   });
 
   test('applyOverrides applies the hover override, followed by the hover2 override', () => {
     const overridden = resolveSettingsOverrides(settingsBase, { hover2: true, hover: true });
-    expect(overridden).toEqual({
-      root: {
-        fontFamily: 'Arial',
-        fontWeight: 'light',
-        fontSize: 5
-      },
-      _precedence: ['hover', 'hover2'],
-      _overrides: {
-        hover: {
-          root: {
-            fontWeight: 'bold',
-            fontSize: 20
-          }
-        },
-        hover2: {
-          root: {
-            fontWeight: 'light',
-            fontSize: 5
-          }
-        }
-      }
+    expect(overridden.root).toEqual({
+      fontFamily: 'Arial',
+      fontWeight: 'light',
+      fontSize: 5
+    });
+  });
+
+  test('applyOverrides can have overrides that modify overrides', () => {
+    const overridden = resolveSettingsOverrides(settingsBase, { primary: true, hover: true });
+    expect(overridden.root).toEqual({
+      fontFamily: 'primary',
+      fontWeight: 'bold',
+      fontSize: 15
     });
   });
 });

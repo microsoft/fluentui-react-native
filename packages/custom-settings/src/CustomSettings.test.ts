@@ -1,6 +1,6 @@
 import { IComponentSettings, mergeSettings } from '@uifabric/foundation-settings';
 import { ISettingsEntry, ISettingsFromTheme } from './CustomSettings.types';
-import { getThemedSettings } from './CustomSettings';
+import { getThemedSettings, getCachedResolvedSettings } from './CustomSettings';
 
 interface IMockTheme {
   palette: {
@@ -110,6 +110,20 @@ const _lookup: { [key: string]: IMockButtonSettings } = {
   }
 };
 
+const val1rootHovered: IMockButtonSettings['root'] = {
+  value: 'foo',
+  backgroundColor: 'gray',
+  color: 'val1',
+  borderWidth: 2
+};
+
+const val1primaryHovered: IMockButtonSettings['root'] = {
+  value: 'foo',
+  backgroundColor: 'pink',
+  color: 'val1',
+  borderWidth: 2
+};
+
 function getSettings(_t: IMockTheme, name: string) {
   return _lookup[name];
 }
@@ -172,5 +186,18 @@ describe('Custom settings tests', () => {
     const s2a = getThemedSettings(customSettings2, _theme, cache, 'foo', getSettings);
     const s2b = getThemedSettings(customSettings2, _theme, cache, 'foo', getSettings);
     expect(s2a).toBe(s2b);
+  });
+
+  test('getCachedResolvedSettings resolves overrides', () => {
+    const cache = {};
+    const { settings, key } = getCachedResolvedSettings(customSettings1, _theme, cache, 'foo', { hovered: true }, getSettings);
+    expect(key).toEqual('foo-hovered');
+    expect(settings.root).toEqual(val1rootHovered);
+  });
+
+  test('getCachedResolvedSettings resolves multiple overrides', () => {
+    const { settings, key } = getCachedResolvedSettings(customSettings1, _theme, {}, 'foo', { hovered: true, primary: true }, getSettings);
+    expect(key).toEqual('foo-primary-hovered');
+    expect(settings.root).toEqual(val1primaryHovered);
   });
 });

@@ -7,6 +7,8 @@ import {
 } from '@uifabric/foundation-settings';
 import { IGetSettingsFromTheme, ISettingsEntry } from './CustomSettings.types';
 
+const _baseKey = '_base';
+
 export function getThemedSettings<TSettings extends IComponentSettings, TTheme>(
   customSettings: ISettingsEntry<TSettings, TTheme>[],
   theme: TTheme,
@@ -14,6 +16,7 @@ export function getThemedSettings<TSettings extends IComponentSettings, TTheme>(
   key: string,
   lookup?: IGetSettingsFromTheme<TSettings, TTheme>
 ): TSettings | undefined {
+  key = key || _baseKey;
   if (!cache[key] && customSettings && customSettings.length > 0) {
     cache[key] = mergeSettings(
       ...customSettings.map(entry => {
@@ -37,7 +40,7 @@ export function getCachedResolvedSettings<TSettings extends IComponentSettings, 
   hasOverride?: IOverrideLookup,
   lookup?: IGetSettingsFromTheme<TSettings, TTheme>
 ): { settings: TSettings | undefined; key: string } {
-  key = key || '_base';
+  key = key || _baseKey;
   let settings = getThemedSettings(customSettings, theme, cache, key, lookup);
   const overrides = getActiveOverrides(settings, hasOverride);
   if (overrides && overrides.length > 0) {
