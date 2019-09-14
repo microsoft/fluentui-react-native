@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Begin turning on some linting rules",
-  "packageName": "@uifabric/custom-settings",
-  "email": "taamireh@microsoft.com",
-  "commit": "530f021858edbb964892dffcb6f15f86db8499fd",
-  "date": "2019-09-14T01:55:36.702Z"
-}

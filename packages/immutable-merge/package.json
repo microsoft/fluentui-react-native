@@ -1,6 +1,6 @@
 {
   "name": "@uifabric/immutable-merge",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Immutable merge routine",
   "repository": {
     "type": "git",
@@ -25,6 +25,6 @@
     "@types/jest": "^19.2.2",
     "@types/node": "^10.3.5",
     "@uifabric/build-native": "^0.1.1",
-    "@uifabric/eslint-config-rules": "^0.1.0"
+    "@uifabric/eslint-config-rules": "^0.1.1"
   }
 }

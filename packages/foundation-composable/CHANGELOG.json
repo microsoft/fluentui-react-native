@@ -1,0 +1,19 @@
+{
+  "name": "@uifabric/foundation-composable",
+  "entries": [
+    {
+      "date": "Sat, 14 Sep 2019 01:56:36 GMT",
+      "tag": "@uifabric/foundation-composable_v0.1.2",
+      "version": "0.1.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Begin turning on some linting rules",
+            "author": "taamireh@microsoft.com",
+            "commit": "530f021858edbb964892dffcb6f15f86db8499fd"
+          }
+        ]
+      }
+    }
+  ]
+}

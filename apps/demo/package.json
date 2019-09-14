@@ -1,6 +1,6 @@
 {
   "name": "uifabric-rn-demo",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Demo app for web code",
   "repository": {
     "type": "git",
@@ -33,6 +33,6 @@
     "react-dom": "16.8.3",
     "ts-loader": "6.0.4",
     "@uifabric/build-native": "^0.1.1",
-    "@uifabric/eslint-config-rules": "^0.1.0"
+    "@uifabric/eslint-config-rules": "^0.1.1"
   }
 }

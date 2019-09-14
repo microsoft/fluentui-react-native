@@ -1,6 +1,6 @@
 {
   "name": "@uifabric/eslint-config-rules",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ESLint ruleset for UI Fabric React Native",
   "repository": {
     "type": "git",
