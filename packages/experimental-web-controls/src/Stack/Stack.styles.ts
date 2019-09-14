@@ -100,7 +100,7 @@ function _buildRootStyles(tokenProps: IStackProps, theme: ITheme): IStackProps {
     maxWidth,
     padding
   } = tokenProps;
-  let childrenGap = tokenProps.childrenGap || gap;
+  const childrenGap = tokenProps.childrenGap || gap;
   const { rowGap, columnGap } = parseGap(childrenGap, theme);
 
   return {
@@ -162,7 +162,7 @@ const _innerKeyProps: (keyof IStackProps)[] = [
 
 function _buildInnerStyles(tokenProps: IStackProps, theme: ITheme): IStackProps {
   const { horizontal, reversed, gap, horizontalAlign, verticalAlign, disableShrink, padding } = tokenProps;
-  let childrenGap = tokenProps.childrenGap || gap;
+  const childrenGap = tokenProps.childrenGap || gap;
   const { rowGap, columnGap } = parseGap(childrenGap, theme);
   const horizontalMargin = `${-0.5 * columnGap.value}${columnGap.unit}`;
   const verticalMargin = `${-0.5 * rowGap.value}${rowGap.unit}`;

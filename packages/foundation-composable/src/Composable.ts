@@ -14,22 +14,6 @@ import {
 } from './Composable.types';
 
 /**
- * Process a component tree and return a resolved slot for it.  This should be used as the root call for processing
- * such that the recursion handles automatically
- *
- * @param composable - component to process the hierarchy for
- * @param props - input props to pass into the component hierarchy
- */
-export function useProcessComposableTree(composable: IComposable, props: IGenericProps, theme: object): IResolvedSlot {
-  const info: IProcessResult = composable.useProcessProps(props, theme);
-  return {
-    ...info,
-    slots: useSlotProcessing(composable, info, theme),
-    composable: composable
-  };
-}
-
-/**
  * Process the slots on a composable, passing in props targeted at each entry and then creating the resolved slot collection
  * that is ready to use in a render function
  *
@@ -44,12 +28,29 @@ export function useSlotProcessing(composable: IComposable, info: IProcessResult,
     const slotResults = {};
     for (const key in componentSlots) {
       if (componentSlots[key]) {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         slotResults[key] = useProcessComposableTree(componentSlots[key], slotProps[key] || {}, theme);
       }
     }
     return slotResults;
   }
   return undefined;
+}
+
+/**
+ * Process a component tree and return a resolved slot for it.  This should be used as the root call for processing
+ * such that the recursion handles automatically
+ *
+ * @param composable - component to process the hierarchy for
+ * @param props - input props to pass into the component hierarchy
+ */
+export function useProcessComposableTree(composable: IComposable, props: IGenericProps, theme: object): IResolvedSlot {
+  const info: IProcessResult = composable.useProcessProps(props, theme);
+  return {
+    ...info,
+    slots: useSlotProcessing(composable, info, theme),
+    composable: composable
+  };
 }
 
 /**
@@ -85,8 +86,8 @@ export function wrapStockComponent(component: INativeSlotType, filter?: IPropFil
   return {
     useProcessProps: filter
       ? (props: IGenericProps, theme: object) => {
-          return _stockProcessor(props, theme, filter);
-        }
+        return _stockProcessor(props, theme, filter);
+      }
       : _stockProcessor,
     render: (slotInfo: IProcessResult, ...children: React.ReactNode[]) => {
       return React.createElement(component, slotInfo.props, ...children);

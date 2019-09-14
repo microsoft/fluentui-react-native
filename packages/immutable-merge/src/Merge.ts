@@ -1,3 +1,21 @@
+/**
+ * Checks whether an argument is an object, it excludes arrays and potentially empty arrays
+ * @param t the argument to check against
+ * @param onlyReturnNonEmptyObjects if true only return true when the passed in arg is non-empty
+ */
+function _isNonArrayObject(t: any, onlyReturnNonEmptyObjects?: boolean): boolean {
+  return t && typeof t === 'object' && !Array.isArray(t) && (!onlyReturnNonEmptyObjects || Object.getOwnPropertyNames(t).length > 0);
+}
+
+/**
+ * Helper function to validate and collect a value
+ * @param t value to return if it is validated
+ * @param custom if true return the value even if it is an array or a non-object
+ */
+function _collectVal(t: any, custom: boolean): any {
+  return ((custom || _isNonArrayObject(t)) && t) || undefined;
+}
+
 export interface IMergeOptions {
   /**
    * number of times to recurse:
@@ -105,12 +123,4 @@ export function immutableMerge<T extends object>(...objs: (T | undefined)[]): T 
  */
 export function processImmutable<T extends object>(processors: IMergeOptions['recurse'], ...objs: (T | undefined)[]): T | undefined {
   return immutableMergeCore({ depth: -1, processSingles: true, recurse: processors }, ...objs);
-}
-
-function _isNonArrayObject(t: any, onlyReturnNonEmptyObjects?: boolean): boolean {
-  return t && typeof t === 'object' && !Array.isArray(t) && (!onlyReturnNonEmptyObjects || Object.getOwnPropertyNames(t).length > 0);
-}
-
-function _collectVal(t: any, custom: boolean): any {
-  return ((custom || _isNonArrayObject(t)) && t) || undefined;
 }

@@ -7,6 +7,7 @@ import { IFinalizeStyle, IStyleProp } from './Styles.types';
  * helper function to switch to a collection merge pattern when _overrides are encountered
  */
 function _mergeCollection(_options: IMergeOptions, ...objs: (object | undefined)[]): IComponentSettingsCollection {
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
   return mergeSettingsCollection(...(objs as IComponentSettingsCollection[]));
 }
 
@@ -163,6 +164,7 @@ export function resolveSettingsOverrides(target: IComponentSettings, overrideLoo
  * @param target - settings block to strip the settings specific information from
  */
 export function slotPropsFromSettings(target: IComponentSettings): ISlotProps {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { _overrides, _parent, _precedence, ...slotProps } = target;
   return slotProps as ISlotProps;
 }
