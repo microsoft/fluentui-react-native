@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Begin turning on some linting rules",
+  "packageName": "@uifabric/foundation-tokens",
+  "email": "taamireh@microsoft.com",
+  "commit": "530f021858edbb964892dffcb6f15f86db8499fd",
+  "date": "2019-09-14T01:55:53.932Z"
+}
