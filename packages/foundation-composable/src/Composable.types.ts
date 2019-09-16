@@ -3,6 +3,11 @@ export interface IGenericProps {
   children?: React.ReactNode;
 }
 
+export interface IRenderData<TSlotProps extends IRootSlotProps, TState = object> {
+  slotProps?: TSlotProps;
+  state?: TState;
+}
+
 /**
  * this is the result of the process call.  Note that any additional information returned here
  * will flow through the system
@@ -44,20 +49,28 @@ export interface ISlotProps {
   [key: string]: IGenericProps;
 }
 
+export interface IRootSlotProps<TProps extends object = object> {
+  root: TProps;
+}
+
+export type IUsePrepareProps<TProps extends object, TSlotProps extends IRootSlotProps = IRootSlotProps<TProps>, TState = object> = (
+  props: TProps
+) => IRenderData<TSlotProps, TState>;
+
 /**
  * Pattern for a composable component
  */
-export interface IComposable {
-  useProcessProps: (props: IGenericProps, theme: object) => IProcessResult;
+export interface IComposable<TProps extends object, TSlotProps extends IRootSlotProps = IRootSlotProps<TProps>, TState = object> {
+  usePrepareProps: IUsePrepareProps<TProps, TSlotProps, TState>;
   render: (propInfo: IProcessResult, ...children: React.ReactNode[]) => JSX.Element | null;
-  slots?: { [key: string]: IComposable };
+  slots?: ISlotTypes;
 }
 
 /**
  * Attach a composable component to an object in a standard manner
  */
 export type IWithComposable<T extends object = object> = T & {
-  __composable: IComposable;
+  __composable: IComposable<object>;
 };
 
 /**
@@ -86,6 +99,6 @@ export type ISlotWithFilter<TMixin = object> = {
  * The collection of slot types that should be defined on the definition of a component
  */
 export type ISlotTypes<TMixin = object> = {
-  root: ISlotType | ISlotWithFilter<TMixin>;
-  [key: string]: ISlotType | ISlotWithFilter<TMixin>;
+  root: ISlotWithFilter<TMixin>;
+  [key: string]: ISlotWithFilter<TMixin>;
 };
