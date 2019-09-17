@@ -11,7 +11,8 @@ import { foregroundColorTokens } from '../tokens/ColorTokens';
 loadLinkSettings();
 
 export const Link = compose<ILinkComponent>({
-  className: 'RNFLink',
+  displayName: 'Link',
+  settings: ['RNFLink'],
   usePrepareState,
   themeQueryInputs,
   finalizer,

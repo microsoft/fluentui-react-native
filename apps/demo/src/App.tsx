@@ -41,7 +41,7 @@ const DynamicButton = BlueButton.customize({
   }
 });
 
-const OrangeLink = Link.customize`{
+const OrangeLink = Link.customize({
   root: {
     color: 'orange'
   },
@@ -62,7 +62,7 @@ const OrangeLink = Link.customize`{
       }
     }
   }
-}`;
+});
 
 export const App: React.FunctionComponent = () => {
   return (
