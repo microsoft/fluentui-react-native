@@ -74,10 +74,31 @@ export const App: React.FunctionComponent = () => {
       <Pressable renderStyle={_pressableRenderStyle}>
         <Text>Hello again</Text>
       </Pressable>
-      <Button content="Test Button" />
-      <BlueButton content="Blue Button" />
-      <DynamicButton content="Not Disabled" />
-      <DynamicButton disabled content="Disabled" />
+      <Button
+        content="Test Button"
+        onClick={() => {
+          alert('Test Button');
+        }}
+      />
+      <BlueButton
+        content="Blue Button"
+        onClick={() => {
+          alert('Blue Button');
+        }}
+      />
+      <DynamicButton
+        content="Not Disabled"
+        onClick={() => {
+          alert('Button that is not Disabled');
+        }}
+      />
+      <DynamicButton
+        disabled
+        content="Disabled"
+        onClick={() => {
+          alert('Disabled Button');
+        }}
+      />
     </div>
   );
 };
