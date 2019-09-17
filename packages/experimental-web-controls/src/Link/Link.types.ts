@@ -1,5 +1,5 @@
 import { IComponent, IRenderData } from '@uifabric/foundation-compose';
-import { IComponentSettings } from '@uifabric/theme-settings';
+import { IComponentSettings } from '@uifabric/foundation-settings';
 import { IForegroundColorTokens, ITextTokens } from '../tokens';
 import { IPressableProps, IPressableState } from '../Pressable';
 import { ITextProps } from '../Text';
@@ -19,6 +19,9 @@ export interface ILinkTokens extends IForegroundColorTokens, ITextTokens {
  * for per-component storage.
  */
 export interface ILinkState extends IPressableState {
+  // whether this link uses a URL [will override onClick if provided]
+  URL?: boolean;
+
   // whether this link is disabled
   disabled?: boolean;
 
@@ -36,8 +39,9 @@ export type ILinkCustomizableProps = ILinkProps & ILinkTokens;
 
 export type ILinkSlotProps = {
   root: ILinkCustomizableProps;
+  ButtonAsRoot: ILinkCustomizableProps;
   content: ITextProps;
-}
+};
 
 export type ILinkSettings = IComponentSettings<ILinkSlotProps>;
 export type ILinkComponent = IComponent<ILinkProps, ILinkSettings, ILinkCustomizableProps, ILinkState>;

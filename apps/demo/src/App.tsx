@@ -41,23 +41,23 @@ const DynamicButton = BlueButton.customize({
   }
 });
 
-const PinkLink = Link.customize`{
-  content: {
-    color: 'pink'
+const OrangeLink = Link.customize`{
+  root: {
+    color: 'orange'
   },
   _overrides: {
     hovered: {
-      content: {
+      root: {
         color: 'pink'
       }
     },
     pressed: {
-      content: {
+      root: {
         color: 'blue'
       }
     },
     visited: {
-      content: {
+      root: {
         color: 'red'
       }
     }
@@ -69,8 +69,13 @@ export const App: React.FunctionComponent = () => {
     <div>
       <h1>Hello, world!!</h1>
       <Link URL="https://www.bing.com/" content="Click Me" />
-      <PinkLink content="Pink Link [button for verification]" />
-      <Link content="Button-Style Link" />
+      <Link content="Disabled Link" URL="https://www.bing.com/" disabled />
+      <OrangeLink
+        content="Orange Link [button for verification of 'visited' state]"
+        onClick={() => {
+          alert('Orange Link clicked.');
+        }}
+      />
       <Pressable renderStyle={_pressableRenderStyle}>
         <Text>Hello again</Text>
       </Pressable>
