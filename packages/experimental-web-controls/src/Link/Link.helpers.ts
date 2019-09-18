@@ -61,6 +61,7 @@ export function finalizer(renderData: ILinkRenderData): ILinkRenderData {
     if (!props['disabled']) {
       final.root['href'] = props['URL'];
     }
+    delete final.buttonAsRoot;
   } else {
     final.buttonAsRoot = final.root;
     delete final.root;
