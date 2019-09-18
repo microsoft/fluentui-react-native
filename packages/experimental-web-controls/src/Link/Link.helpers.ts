@@ -56,11 +56,12 @@ export function finalizer(renderData: ILinkRenderData): ILinkRenderData {
   }
 
   // If we have a URL,
-  if (props['URL']) {
+  if (props.URL) {
     // Only pass the URL prop to the href attribute if the Link is enabled
-    if (!props['disabled']) {
-      final.root['href'] = props['URL'];
+    if (!props.disabled) {
+      final.root['href'] = props.URL;
     }
+    delete props.URL;
     delete final.buttonAsRoot;
   } else {
     final.buttonAsRoot = final.root;
@@ -68,7 +69,7 @@ export function finalizer(renderData: ILinkRenderData): ILinkRenderData {
   }
 
   // Map internalOnClick over the original onClick; internalOnClick sets visited=true and calls the original onClick, if it exists
-  props['onClick'] = props['internalOnClick'];
+  props.onClick = props['internalOnClick'];
 
   renderData.slotProps = mergeSettings(slotProps, final);
   return renderData;
