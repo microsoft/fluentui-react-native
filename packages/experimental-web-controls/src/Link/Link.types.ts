@@ -8,32 +8,25 @@ import { ITextProps } from '../Text';
  * Properties for fabric native Link
  */
 
-export interface ILinkTokens extends IForegroundColorTokens, ITextTokens {
-  // Link color after it has been visited
-  visitedLinkColor?: string;
-}
+export type ILinkTokens = IForegroundColorTokens & ITextTokens;
 
 /**
  * Because style state updates are coming from the touchable and will cause a child render the link doesn't use
  * changes in state value to trigger re-render.  The values inside inner are effectively mutable and are used
  * for per-component storage.
  */
-export interface ILinkState extends IPressableState {
+export type ILinkState = IPressableState & {
   // whether this link uses a URL [will override onClick if provided]
   URL?: boolean;
-
-  // whether this link is disabled
-  disabled?: boolean;
-
   // whether this link has been visited
   visited?: boolean;
-}
+};
 
-export interface ILinkProps extends IPressableProps {
+export type ILinkProps = IPressableProps & {
   content?: string;
   disabled?: boolean;
   URL?: string;
-}
+};
 
 export type ILinkCustomizableProps = ILinkProps & ILinkTokens;
 

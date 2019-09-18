@@ -37,7 +37,6 @@ export function usePrepareState(data: ILinkRenderData): ILinkRenderData {
   data.state = {
     ...state,
     ...linkState,
-    disabled: data.props.disabled,
     URL: !!data.props.URL
   };
 
