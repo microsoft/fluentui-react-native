@@ -12,7 +12,7 @@ import { wrapComponent, standardUsePrepareState, standardThemeQueryInputs } from
 import { ThemeContext, getTheme } from '@uifabricshared/theming-react-native';
 import { buildComponentTokens, IStyleFactories } from '@uifabricshared/foundation-tokens';
 import { ITheme } from '@uifabricshared/theming';
-import { ISettingsEntry } from '@uifabricshared/custom-settings';
+import { ISettingsEntry } from '@uifabricshared/themed-settings';
 
 /* tslint:disable-next-line no-any */
 function _getOptions<TComponent extends IComponent = IComponent>(obj: any): IComponentOptions<TComponent> | undefined {

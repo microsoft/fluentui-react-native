@@ -12,7 +12,7 @@ import {
 import { mergeSettings, IComponentSettings } from '@uifabricshared/foundation-settings';
 import { getSettings, ITheme } from '@uifabricshared/theming';
 import { processTokens } from '@uifabricshared/foundation-tokens';
-import { getThemedSettings } from '@uifabricshared/custom-settings';
+import { getThemedSettings } from '@uifabricshared/themed-settings';
 
 /**
  * Get the cache for the given component from the theme, creating it if necessary

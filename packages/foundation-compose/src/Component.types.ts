@@ -3,7 +3,7 @@ import { ISlotTypes, IResolvedSlotData, IComposable } from '@uifabricshared/foun
 import { IComponentSettings } from '../../foundation-settings/lib';
 import { ITheme } from '@uifabricshared/theming';
 import { IComponentTokens, ISlotStyleFactories } from '@uifabricshared/foundation-tokens';
-import { ISettingsEntry } from '@uifabricshared/custom-settings';
+import { ISettingsEntry } from '@uifabricshared/themed-settings';
 
 export interface IRenderData<
   TProps extends object = object,

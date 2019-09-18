@@ -1,5 +1,5 @@
 {
-  "name": "@uifabricshared/custom-settings",
+  "name": "@uifabricshared/themed-settings",
   "version": "0.2.0",
   "description": "Package which drives custom cacheable settings for a component",
   "repository": {
