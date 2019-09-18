@@ -1,5 +1,5 @@
 {
-  "name": "@uifabric/foundation-compose",
+  "name": "@uifabricshared/foundation-compose",
   "version": "1.0.0",
   "description": "Compose infrastructure",
   "repository": {
@@ -22,15 +22,15 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabric/custom-settings": "0.2.0",
-    "@uifabric/foundation-composable": "0.1.2",
-    "@uifabric/foundation-tokens": "0.1.2",
-    "@uifabric/theming-react-native": "0.1.2",
-    "@uifabric/theming": "0.1.2"
+    "@uifabricshared/custom-settings": "0.2.0",
+    "@uifabricshared/foundation-composable": "0.1.2",
+    "@uifabricshared/foundation-tokens": "0.1.2",
+    "@uifabricshared/theming-react-native": "0.1.2",
+    "@uifabricshared/theming": "0.1.2"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
     "json5": "2.1.0",
-    "@uifabric/eslint-config-rules": "^0.1.1"
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
   }
 }

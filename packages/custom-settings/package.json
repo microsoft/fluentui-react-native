@@ -1,5 +1,5 @@
 {
-  "name": "@uifabric/custom-settings",
+  "name": "@uifabricshared/custom-settings",
   "version": "0.2.0",
   "description": "Package which drives custom cacheable settings for a component",
   "repository": {
@@ -22,12 +22,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabric/foundation-settings": "0.2.0"
+    "@uifabricshared/foundation-settings": "0.2.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
     "@types/node": "^10.3.5",
-    "@uifabric/build-native": "^0.1.1",
-    "@uifabric/eslint-config-rules": "^0.1.1"
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
   }
 }

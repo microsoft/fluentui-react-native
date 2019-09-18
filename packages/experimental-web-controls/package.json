@@ -1,5 +1,5 @@
 {
-  "name": "experimental-web-controls",
+  "name": "@uifabricshared/experimental-web-controls",
   "version": "0.1.1",
   "description": "Experimental web control implementations",
   "private": true,
@@ -23,15 +23,15 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabric/foundation-compose": "1.0.0",
-    "@uifabric/foundation-settings": "0.2.0",
-    "@uifabric/theming": "0.1.2",
-    "@uifabric/theming-react-native": "0.1.2"
+    "@uifabricshared/foundation-compose": "1.0.0",
+    "@uifabricshared/foundation-settings": "0.2.0",
+    "@uifabricshared/theming": "0.1.2",
+    "@uifabricshared/theming-react-native": "0.1.2"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
-    "@uifabric/build-native": "^0.1.1",
-    "@uifabric/eslint-config-rules": "^0.1.1",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
     "react": "16.8.3",
     "react-dom": "16.8.3"
   }

@@ -1,5 +1,5 @@
 {
-  "name": "@uifabric/foundation-composable",
+  "name": "@uifabricshared/foundation-composable",
   "version": "0.1.2",
   "description": "Composable component building blocks",
   "repository": {
@@ -24,7 +24,7 @@
   "devDependencies": {
     "@types/jest": "^19.2.2",
     "react": "16.8.3",
-    "@uifabric/build-native": "^0.1.1",
-    "@uifabric/eslint-config-rules": "^0.1.1"
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
   }
 }
