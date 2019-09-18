@@ -10,9 +10,9 @@
  */
 'use strict';
 
-import { compose } from '@uifabric/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
 import { IPressableComponent, IPressableRenderData } from './Pressable.props';
-import { mergeSettings } from '@uifabric/foundation-settings';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useWebPressable } from './useAsPressable';
 
 function finalizer(renderData: IPressableRenderData): IPressableRenderData {

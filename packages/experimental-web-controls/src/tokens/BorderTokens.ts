@@ -1,5 +1,5 @@
-import { IOperationSet } from '@uifabric/foundation-tokens';
-import { ITheme } from '@uifabric/theming';
+import { IOperationSet } from '@uifabricshared/foundation-tokens';
+import { ITheme } from '@uifabricshared/theming';
 import { getPaletteFromTheme } from './ColorTokens';
 
 export interface IBorderTokens {

@@ -1,5 +1,5 @@
 import { ITextSettings } from './Text.types';
-import { augmentPlatformTheme } from '@uifabric/theming-react-native';
+import { augmentPlatformTheme } from '@uifabricshared/theming-react-native';
 
 export function loadTextSettings(): void {
   const textSettings: ITextSettings = {

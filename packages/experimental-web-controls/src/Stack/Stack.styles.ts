@@ -1,9 +1,9 @@
 import { IStackSettings, IStackProps } from './Stack.types';
 import { parseGap, parsePadding } from './StackUtils';
-import { augmentPlatformTheme } from '@uifabric/theming-react-native';
-import { ITheme } from '@uifabric/theming';
-import { styleFunction } from '@uifabric/foundation-tokens';
-import { IStyleProp } from '@uifabric/foundation-settings';
+import { augmentPlatformTheme } from '@uifabricshared/theming-react-native';
+import { ITheme } from '@uifabricshared/theming';
+import { styleFunction } from '@uifabricshared/foundation-tokens';
+import { IStyleProp } from '@uifabricshared/foundation-settings';
 import { ICSSStyle } from '../htmlTypes';
 
 const nameMap: { [key: string]: string } = {

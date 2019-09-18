@@ -1,5 +1,5 @@
-import { createThemeRegistry } from '@uifabric/theme-registry';
-import { getStockWebPalette, resolvePartialTheme } from '@uifabric/theming';
+import { createThemeRegistry } from '@uifabricshared/theme-registry';
+import { getStockWebPalette, resolvePartialTheme } from '@uifabricshared/theming';
 import { setThemeRegistry } from './Global';
 import { INativeThemeDefinition, INativeTheme } from './INativeTheme';
 

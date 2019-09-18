@@ -1,6 +1,6 @@
 import { IPalette, IPartialPalette } from './Color.types';
 import { ITypography, IPartialTypography } from './Typography.types';
-import { IComponentSettingsCollection } from '@uifabric/foundation-settings';
+import { IComponentSettingsCollection } from '@uifabricshared/foundation-settings';
 
 export interface ISpacing {
   s2: string;

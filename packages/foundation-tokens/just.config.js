@@ -1,3 +1,3 @@
-const { preset } = require('@uifabric/build-native');
+const { preset } = require('@uifabricshared/build-native');
 
 preset();

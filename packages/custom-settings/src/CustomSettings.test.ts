@@ -1,4 +1,4 @@
-import { IComponentSettings, mergeSettings } from '@uifabric/foundation-settings';
+import { IComponentSettings, mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISettingsEntry, ISettingsFromTheme } from './CustomSettings.types';
 import { getBaseThemedSettings, getThemedSettings } from './CustomSettings';
 

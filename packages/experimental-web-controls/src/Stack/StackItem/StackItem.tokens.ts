@@ -1,6 +1,6 @@
 import { IStackItemProps } from './StackItem.types';
-import { ITheme } from '@uifabric/theming';
-import { styleFunction } from '@uifabric/foundation-tokens';
+import { ITheme } from '@uifabricshared/theming';
+import { styleFunction } from '@uifabricshared/foundation-tokens';
 
 const alignMap: { [key: string]: string } = {
   start: 'flex-start',

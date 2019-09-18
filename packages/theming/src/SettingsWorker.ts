@@ -7,7 +7,7 @@ import {
   getParentSettingsChain,
   mergeSettings,
   getActiveOverrides
-} from '@uifabric/foundation-settings';
+} from '@uifabricshared/foundation-settings';
 
 interface ISettingsWithKey {
   settings: IComponentSettings;

@@ -1,4 +1,4 @@
-import { IMergeOptions, immutableMergeCore } from '@uifabric/immutable-merge';
+import { IMergeOptions, immutableMergeCore } from '@uifabricshared/immutable-merge';
 import { IComponentSettingsCollection, IComponentSettings, ISlotProps, IOverrideLookup } from './Settings.types';
 import { mergeAndFlattenStyles } from './Styles';
 import { IFinalizeStyle, IStyleProp } from './Styles.types';

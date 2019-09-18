@@ -1,5 +1,5 @@
 import { IButtonSettings } from './Button.types';
-import { augmentPlatformTheme } from '@uifabric/theming-react-native';
+import { augmentPlatformTheme } from '@uifabricshared/theming-react-native';
 
 export function loadButtonSettings(): void {
   const buttonSettings: { [key: string]: IButtonSettings } = {

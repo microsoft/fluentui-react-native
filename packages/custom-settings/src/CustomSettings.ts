@@ -4,7 +4,7 @@ import {
   IOverrideLookup,
   getActiveOverrides,
   resolveSettingsOverrides
-} from '@uifabric/foundation-settings';
+} from '@uifabricshared/foundation-settings';
 import { IGetSettingsFromTheme, ISettingsEntry } from './CustomSettings.types';
 
 const _baseKey = '_base';

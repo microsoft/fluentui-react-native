@@ -19,7 +19,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "experimental-web-controls": "0.1.1"
+    "@uifabricshared/experimental-web-controls": "0.1.1"
   },
   "devDependencies": {
     "@types/es6-collections": "^0.5.29",

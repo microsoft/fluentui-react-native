@@ -1,6 +1,6 @@
 import { ITheme, IPartialTheme } from './Theme.types';
-import { mergeSettingsCollection } from '@uifabric/foundation-settings';
-import { IMergeOptions, immutableMergeCore } from '@uifabric/immutable-merge';
+import { mergeSettingsCollection } from '@uifabricshared/foundation-settings';
+import { IMergeOptions, immutableMergeCore } from '@uifabricshared/immutable-merge';
 
 function _settingsHandler(_options: IMergeOptions, ...objs: (object | undefined)[]): object | undefined {
   return mergeSettingsCollection(...objs);
