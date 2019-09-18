@@ -1,120 +1,54 @@
 import * as React from 'react';
-import {
-  ISlotTypes,
-  IComposable,
-  IProcessResult,
-  IGenericProps,
-  IResolvedSlot,
-  IResolvedSlots,
-  IPropFilter,
-  ISlotWithFilter,
-  ISlotType,
-  INativeSlotType,
-  IWithComposable
-} from './Composable.types';
+import { IComposable, IPropFilter, INativeSlotType, IWithComposable, IRenderData, ISlots } from './Composable.types';
+import { useCompoundPrepare } from './Composable.slots';
+import { renderSlot } from './slots';
+import { ISlotProps } from '@uifabric/foundation-settings';
+
+// just a generic object with children specified as props
+type IWithChildren<T> = T & { children?: React.ReactNode[] };
 
 /**
- * Process a component tree and return a resolved slot for it.  This should be used as the root call for processing
- * such that the recursion handles automatically
+ * Helper to create a composable implementation of a simple atomic component
  *
- * @param composable - component to process the hierarchy for
- * @param props - input props to pass into the component hierarchy
+ * @param target - slot type to create an atomic component from
+ * @param usePrepareProps - prop processing implementation.
+ * @param filter - optional filter.  If set it allows stripping properties before they are passed to target
  */
-export function useProcessComposableTree(composable: IComposable, props: IGenericProps, theme: object): IResolvedSlot {
-  const info: IProcessResult = composable.useProcessProps(props, theme);
-  return {
-    ...info,
-    slots: useSlotProcessing(composable, info, theme),
-    composable: composable
-  };
-}
-
-/**
- * Process the slots on a composable, passing in props targeted at each entry and then creating the resolved slot collection
- * that is ready to use in a render function
- *
- * @param composable - composable component to process the slots for
- * @param info - slot info object which will be combined with resolved props on return
- * @param slotProps - props to pass into each slot
- */
-export function useSlotProcessing(composable: IComposable, info: IProcessResult, theme: object): IResolvedSlots | undefined {
-  const slotProps = info.slotProps || {};
-  const componentSlots = composable.slots;
-  if (componentSlots) {
-    const slotResults = {};
-    for (const key in componentSlots) {
-      if (componentSlots[key]) {
-        slotResults[key] = useProcessComposableTree(componentSlots[key], slotProps[key] || {}, theme);
-      }
+export function atomic<TProps extends object, TState = object>(
+  target: INativeSlotType,
+  usePrepareProps: IComposable<TProps, ISlotProps<TProps>, TState>['usePrepareProps'],
+  filter?: IPropFilter
+): React.FunctionComponent<TProps> {
+  return composable<TProps, ISlotProps<TProps>, TState>({
+    usePrepareProps,
+    slots: { root: { slotType: target, filter } },
+    render: (Slots: ISlots<ISlotProps<TProps>>, _renderData: IRenderData<ISlotProps<TProps>, TState>, ...children: React.ReactNode[]) => {
+      return renderSlot(Slots.root, undefined, ...children);
     }
-    return slotResults;
-  }
-  return undefined;
+  });
 }
 
 /**
- * Render a slot according to the values stored in the slot info object
+ * Create a component that can be composed into other objects to remove extra levels from the tree
  *
- * @param slot - slot to perform standard rendering for
- * @param props - props for that slot, same pattern as for React.createElement
- * @param children - standard children values, as appropriate to pass to React.createElement
+ * @param options - composable options which define the behavior of the component
  */
-export function renderSlot(slot: IResolvedSlot, ...children: React.ReactNode[]): JSX.Element | null {
-  return slot.composable ? slot.composable.render(slot, ...children) : null;
-}
+export function composable<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object>(
+  options: IComposable<TProps, TSlotProps, TState>
+): React.FunctionComponent<TProps> {
+  // create the functional component
+  const render = (userProps: TProps) => {
+    // split out children, they will be excluded from the prop preparation phase
+    const { children, ...props } = userProps as IWithChildren<TProps>;
 
-/**
- * Process function for standard components
- *
- * @param props - props to put into the right format for return
- * @param _theme - theme, unused for this purpose
- * @param filter - optional filter function
- */
-const _stockProcessor = (props: IGenericProps, _theme: object, filter?: IPropFilter) => {
-  return {
-    props: filter ? filter(props) : props
+    // prepare the props, all the way down the tree, also build the slots
+    const { renderData, Slots } = useCompoundPrepare<TProps, TSlotProps, TState>(props as TProps, options);
+
+    // now do the render, adding the children back in
+    return options.render(Slots, renderData, ...children);
   };
-};
 
-/**
- * Take a non-composable component type or function and wrap it as a composable component
- *
- * @param component - type of component to wrap, either a standard react type or a function that takes props and children
- */
-export function wrapStockComponent(component: INativeSlotType, filter?: IPropFilter): IComposable {
-  return {
-    useProcessProps: filter
-      ? (props: IGenericProps, theme: object) => {
-          return _stockProcessor(props, theme, filter);
-        }
-      : _stockProcessor,
-    render: (slotInfo: IProcessResult, ...children: React.ReactNode[]) => {
-      return React.createElement(component, slotInfo.props, ...children);
-    }
-  };
-}
-
-/**
- * turn a set of slot types into a set of IComposable interfaces
- *
- * @param slots - set of slot types to either wrap in a stock component or embed directly
- */
-export function wrapSlots(slots: ISlotTypes): { [key: string]: IComposable } {
-  const result = {};
-  for (const key in slots) {
-    if (slots[key]) {
-      const slot = slots[key];
-      const isObject = (slot as ISlotWithFilter).slotType;
-      const slotType: ISlotType | undefined = isObject ? (slot as ISlotWithFilter).slotType : (slot as ISlotType);
-      const filter = isObject ? (slot as ISlotWithFilter).filter : undefined;
-      if (slot) {
-        if (typeof slotType !== 'string' && (slotType as IWithComposable).__composable) {
-          result[key] = (slotType as IWithComposable).__composable;
-        } else {
-          result[key] = wrapStockComponent(slotType as INativeSlotType, filter);
-        }
-      }
-    }
-  }
-  return result;
+  // set the options onto the new functional component and return it
+  (render as IWithComposable<React.FunctionComponent<TProps>>).__composable = (options as unknown) as IComposable<object>;
+  return render;
 }
