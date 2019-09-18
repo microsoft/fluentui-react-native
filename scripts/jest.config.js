@@ -1,4 +1,4 @@
-let { createConfig } = require('@uifabric/build-native/jest/jest-resources');
+let { createConfig } = require('@uifabricshared/build-native/jest/jest-resources');
 
 const config = createConfig({});
 
