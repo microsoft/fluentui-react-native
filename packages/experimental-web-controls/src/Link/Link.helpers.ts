@@ -63,7 +63,7 @@ export function finalizer(renderData: ILinkRenderData): ILinkRenderData {
       final.root['href'] = props['URL'];
     }
   } else {
-    final.ButtonAsRoot = final.root;
+    final.buttonAsRoot = final.root;
     delete final.root;
   }
 
@@ -78,6 +78,5 @@ export function view(result: IAsResolved<ILinkRenderData>, ...children: React.Re
   const slots = result.slots!;
   const additionalChildren = children || [result.props.children];
 
-  //return renderSlot((result.state.URL) ? renderSlot(slots.root) : renderSlot(slots.ButtonAsRoot),
-  return renderSlot(result.state.URL ? slots.root : slots.ButtonAsRoot, renderSlot(slots.content), ...additionalChildren);
+  return renderSlot(result.state.URL ? slots.root : slots.buttonAsRoot, renderSlot(slots.content), ...additionalChildren);
 }

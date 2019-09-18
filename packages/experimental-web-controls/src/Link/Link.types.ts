@@ -39,7 +39,7 @@ export type ILinkCustomizableProps = ILinkProps & ILinkTokens;
 
 export type ILinkSlotProps = {
   root: ILinkCustomizableProps;
-  ButtonAsRoot: ILinkCustomizableProps;
+  buttonAsRoot: ILinkCustomizableProps;
   content: ITextProps;
 };
 

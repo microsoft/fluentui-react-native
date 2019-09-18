@@ -21,7 +21,7 @@ export const Link = compose<ILinkComponent>({
     root: {
       slotType: 'a'
     },
-    ButtonAsRoot: {
+    buttonAsRoot: {
       slotType: 'button'
     },
     content: {
