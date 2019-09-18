@@ -1,6 +1,6 @@
 {
   "name": "@uifabric/eslint-config-rules",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ESLint ruleset for UI Fabric React Native",
   "repository": {
     "type": "git",
@@ -9,13 +9,17 @@
   "main": "./eslintrc.js",
   "license": "MIT",
   "peerDependencies": {
-    "eslint": ">= 6",
     "@typescript-eslint/eslint-plugin": "^2.1.0",
     "@typescript-eslint/parser": "^2.1.0",
+    "eslint": ">= 6",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^9.2.0",
     "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-standard": "^4.0.1"
+  },
+  "dependencies": {
+    "eslint-plugin-react": "^7.14.3"
   }
 }

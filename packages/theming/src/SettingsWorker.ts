@@ -20,6 +20,7 @@ const _styleCacheKey = Symbol('__styleCache');
 /** helper to strip out the component settings specific bits from the returned structure */
 export function returnAsSlotProps(target: IComponentSettings): IComponentSettings {
   if (target) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { _overrides, _parent, _precedence, ...settings } = target;
     return settings;
   }
