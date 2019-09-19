@@ -30,4 +30,5 @@ steps:
 
 - script: |
       yarn publish:beachball -- -b origin/master -n $(npmAuth) --access public -y
-    displayName: 'Publish NPM Packages'
+  displayName: 'Publish NPM Packages'
+
