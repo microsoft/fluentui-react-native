@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "change scope names",
+  "packageName": "@uifabricshared/foundation-composable",
+  "email": "taamireh@microsoft.com",
+  "commit": "a1e4beb10c154da04dd03f4588fa5422e51d5edc",
+  "date": "2019-09-19T00:20:12.103Z"
+}
