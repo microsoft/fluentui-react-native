@@ -135,8 +135,14 @@ export interface IPaletteTextColors {
 
   /** The color of a link. */
   link: ColorValue;
+  /** The color of a disabled link. */
+  linkDisabled: ColorValue;
   /** The color of a hovered link. Also used when the link is active. */
   linkHovered: ColorValue;
+  /** The color of a pressed link. */
+  linkPressed: ColorValue;
+  /** The color of a visited link. */
+  linkVisited: ColorValue;
   /** The default color for disabled text on top of disabledBackground; e.g. text in a disabled text field, disabled button text. */
   disabledText: ColorValue;
   /** The default color for disabled text on the default background (bodyBackground). */
@@ -466,6 +472,7 @@ export interface IWindowsPalette {
   textHyperlink: ColorValue;
   textHyperlinkHover: ColorValue;
   textHyperlinkPressed: ColorValue;
+  textHyperlinkVisited: ColorValue;
 
   /**
    * Active Text

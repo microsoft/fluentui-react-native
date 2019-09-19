@@ -2,12 +2,13 @@ import * as React from 'react';
 import { IPressableRenderData, IPressableState, IWithOnStateChange } from './Pressable.props';
 import { IDivProps } from '../htmlTypes';
 
-export function useAsPressable(
-  props: IWithOnStateChange<IDivProps>
-): { props: IWithOnStateChange<IDivProps>; state: IPressableState; setState: (partial: IPressableState) => void } {
-  const [state, setState] = React.useState({ pressed: false, hovered: false, focused: false } as IPressableState);
+export function usePressableStateChange<StateType, PropsType extends Record<string, any>>(
+  initialState: StateType,
+  props: IWithOnStateChange<PropsType>
+): [any, (partial: StateType) => void] {
+  const [state, setState] = React.useState(initialState as StateType);
   const onSetState = React.useCallback(
-    (partialState: IPressableState) => {
+    (partialState: StateType) => {
       const newState = { ...state, ...partialState };
       setState(newState);
       if (props.onStateChange) {
@@ -16,6 +17,16 @@ export function useAsPressable(
     },
     [state, setState, props.onStateChange]
   );
+
+  return [state, onSetState];
+}
+
+export function useAsPressable(
+  props: IWithOnStateChange<IDivProps>
+): { props: IWithOnStateChange<IDivProps>; state: IPressableState; setState: (partial: IPressableState) => void } {
+  const initialState = { pressed: false, hovered: false, focused: false };
+
+  const [state, onSetState] = usePressableStateChange<IPressableState, IWithOnStateChange<IDivProps>>(initialState, props);
   const onMouseEnter = React.useCallback(() => onSetState({ hovered: true }), [onSetState]);
   const onMouseLeave = React.useCallback(() => onSetState({ hovered: false }), [onSetState]);
   const onMouseDown = React.useCallback(() => onSetState({ pressed: true }), [onSetState]);
