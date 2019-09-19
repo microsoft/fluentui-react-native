@@ -1,7 +1,7 @@
 {
   "name": "@uifabricshared/immutable-merge",
   "version": "0.1.4",
-  "description": "Immutable merge routine",
+  "description": "Immutable merge routines for deep customizable merging",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/ui-fabric-react-native"
