@@ -2,6 +2,20 @@
   "name": "@uifabricshared/immutable-merge",
   "entries": [
     {
+      "date": "Thu, 19 Sep 2019 18:26:03 GMT",
+      "tag": "@uifabricshared/immutable-merge_v0.1.5",
+      "version": "0.1.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "change description",
+            "author": "taamireh@microsoft.com",
+            "commit": "3127d5c0b0fbb56bbaee00e0bb0cbe276cc48c4c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 19 Sep 2019 00:21:30 GMT",
       "tag": "@uifabricshared/immutable-merge_v0.1.4",
       "version": "0.1.4",

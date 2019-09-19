@@ -23,7 +23,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^19.2.2",
-    "@uifabricshared/immutable-merge": "0.1.4",
+    "@uifabricshared/immutable-merge": "0.1.5",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
   }
