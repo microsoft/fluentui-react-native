@@ -1,5 +1,5 @@
 import { IStackItemProps } from './StackItem.types';
-import { ITheme } from '@uifabricshared/theming';
+import { ITheme } from '@uifabricshared/theming-ramp';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 
 const alignMap: { [key: string]: string } = {

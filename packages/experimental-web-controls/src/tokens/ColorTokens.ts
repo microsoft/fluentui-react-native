@@ -1,4 +1,4 @@
-import { ITheme } from '@uifabricshared/theming';
+import { ITheme } from '@uifabricshared/theming-ramp';
 import { IOperationSet } from '@uifabricshared/foundation-tokens';
 
 export interface IForegroundColorTokens {

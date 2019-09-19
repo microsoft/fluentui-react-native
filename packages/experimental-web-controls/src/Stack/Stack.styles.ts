@@ -1,7 +1,7 @@
 import { IStackSettings, IStackProps } from './Stack.types';
 import { parseGap, parsePadding } from './StackUtils';
 import { augmentPlatformTheme } from '@uifabricshared/theming-react-native';
-import { ITheme } from '@uifabricshared/theming';
+import { ITheme } from '@uifabricshared/theming-ramp';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 import { IStyleProp } from '@uifabricshared/foundation-settings';
 import { ICSSStyle } from '../htmlTypes';

@@ -1,4 +1,4 @@
-import { ITheme, IPartialTheme } from '@uifabricshared/theming';
+import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 
 export type INativeTheme = ITheme;
 

@@ -10,7 +10,7 @@ import {
   ISlotProps
 } from '@uifabricshared/foundation-composable';
 import { mergeSettings, IComponentSettings } from '@uifabricshared/foundation-settings';
-import { getSettings, ITheme } from '@uifabricshared/theming';
+import { getSettings, ITheme } from '@uifabricshared/theming-ramp';
 import { processTokens } from '@uifabricshared/foundation-tokens';
 import { getThemedSettings } from '@uifabricshared/themed-settings';
 

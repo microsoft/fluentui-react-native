@@ -25,7 +25,7 @@
   "dependencies": {
     "@uifabricshared/foundation-compose": "1.0.0",
     "@uifabricshared/foundation-settings": "0.2.0",
-    "@uifabricshared/theming": "0.1.2",
+    "@uifabricshared/theming-ramp": "0.1.2",
     "@uifabricshared/theming-react-native": "0.1.2"
   },
   "devDependencies": {

@@ -11,7 +11,7 @@ import { ISlotTypes, useProcessComposableTree, renderSlot, IGenericProps } from 
 import { wrapComponent, standardUsePrepareState, standardThemeQueryInputs } from './Component';
 import { ThemeContext, getTheme } from '@uifabricshared/theming-react-native';
 import { buildComponentTokens, IStyleFactories } from '@uifabricshared/foundation-tokens';
-import { ITheme } from '@uifabricshared/theming';
+import { ITheme } from '@uifabricshared/theming-ramp';
 import { ISettingsEntry } from '@uifabricshared/themed-settings';
 
 /* tslint:disable-next-line no-any */

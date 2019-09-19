@@ -1,6 +1,6 @@
 import { ICSSStyle } from '../htmlTypes';
 import { IOperationSet } from '@uifabricshared/foundation-tokens';
-import { ITheme } from '@uifabricshared/theming';
+import { ITheme } from '@uifabricshared/theming-ramp';
 
 export interface ITextTokens {
   fontFamily?: ICSSStyle['fontFamily'] | string;

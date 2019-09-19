@@ -20,7 +20,7 @@
   "dependencies": {
     "@uifabricshared/theme-registry": "0.1.2",
     "@uifabricshared/foundation-settings": "0.2.0",
-    "@uifabricshared/theming": "0.1.2"
+    "@uifabricshared/theming-ramp": "0.1.2"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

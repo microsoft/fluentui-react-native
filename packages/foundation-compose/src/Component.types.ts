@@ -1,7 +1,7 @@
 import { INativeTheme } from '@uifabricshared/theming-react-native';
 import { ISlotTypes, IResolvedSlotData, IComposable } from '@uifabricshared/foundation-composable';
 import { IComponentSettings } from '../../foundation-settings/lib';
-import { ITheme } from '@uifabricshared/theming';
+import { ITheme } from '@uifabricshared/theming-ramp';
 import { IComponentTokens, ISlotStyleFactories } from '@uifabricshared/foundation-tokens';
 import { ISettingsEntry } from '@uifabricshared/themed-settings';
 
