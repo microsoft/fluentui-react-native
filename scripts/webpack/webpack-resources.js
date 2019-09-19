@@ -1,4 +1,4 @@
-const { just } = require('@uifabric/build-native');
+const { just } = require('@uifabricshared/build-native');
 const { webpackConfig, htmlOverlay, webpackMerge } = just;
 
 const _isProduction = process.argv.indexOf('--production') > -1;

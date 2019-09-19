@@ -20,7 +20,7 @@ module.exports = {
           '^.+\\.(js|ts|tsx)?$': 'babel-jest'
         },
 
-        transformIgnorePatterns: ['/node_modules/(?!(@uifabric)/).*/'],
+        transformIgnorePatterns: ['/node_modules/(?!(@uifabricshared)/).*/'],
 
         reporters: [path.resolve(__dirname, './jest-reporter.js')],
 

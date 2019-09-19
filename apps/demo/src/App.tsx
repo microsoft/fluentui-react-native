@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Pressable, Button, IPressableState, IPressableProps } from 'experimental-web-controls';
+import { Text, Pressable, Button, IPressableState, IPressableProps } from '@uifabricshared/experimental-web-controls';
 
 const _pressableRenderStyle: IPressableProps['renderStyle'] = (state: IPressableState) => {
   return {

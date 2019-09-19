@@ -1,6 +1,6 @@
 import { IMockTheme } from './MockTheme';
 import { ITargetHasToken, IComponentTokens, ISlotStyleFactories } from './Token.types';
-import { IStyleProp, IComponentSettings, mergeSettings } from '@uifabric/foundation-settings';
+import { IStyleProp, IComponentSettings, mergeSettings } from '@uifabricshared/foundation-settings';
 import { processTokens } from './Token';
 import { buildComponentTokens } from './Token.function';
 

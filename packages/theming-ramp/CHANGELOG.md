@@ -1,19 +1,17 @@
-# Change Log - @uifabricshared/foundation-compose
+# Change Log - @uifabricshared/theming-ramp
 
 This log was last generated on Thu, 19 Sep 2019 00:21:30 GMT and should not be manually modified.
 
-## 1.0.1
+## 0.1.3
 Thu, 19 Sep 2019 00:21:30 GMT
 
 ### Patches
 
 - change scope names (taamireh@microsoft.com)
-## 1.0.0
+## 0.1.2
 Sat, 14 Sep 2019 01:56:36 GMT
 
-### Major
-
-- switch implementations to use new customized settings (jasonmo@microsoft.com)
 ### Patches
 
+- Some updates around new settings flow (jasonmo@microsoft.com)
 - Begin turning on some linting rules (taamireh@microsoft.com)

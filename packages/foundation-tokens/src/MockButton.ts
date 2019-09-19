@@ -11,7 +11,7 @@ import {
   standardCaptionTokens
 } from './MockTokens';
 import { IMockBaseProps, mockCreate, stockFakeComponent } from './MockComponent';
-import { IComponentSettings } from '@uifabric/foundation-settings';
+import { IComponentSettings } from '@uifabricshared/foundation-settings';
 
 export type IMockTextProps = IMockTextTokens & IMockForegroundColorTokens & IMockBaseProps;
 export type IMockViewProps = IMockBaseProps;

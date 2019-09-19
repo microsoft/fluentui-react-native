@@ -1,6 +1,6 @@
 {
-  "name": "@uifabric/foundation-tokens",
-  "version": "0.1.2",
+  "name": "@uifabricshared/foundation-tokens",
+  "version": "0.1.3",
   "description": "Core tokens package",
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^19.2.2",
-    "@uifabric/foundation-settings": "0.2.0",
-    "@uifabric/build-native": "^0.1.1"
+    "@uifabricshared/foundation-settings": "0.2.1",
+    "@uifabricshared/build-native": "^0.1.1"
   }
 }

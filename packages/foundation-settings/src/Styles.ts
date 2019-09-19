@@ -1,4 +1,4 @@
-import { immutableMerge } from '@uifabric/immutable-merge';
+import { immutableMerge } from '@uifabricshared/immutable-merge';
 import { IFinalizeStyle, IStyleProp } from './Styles.types';
 
 /**

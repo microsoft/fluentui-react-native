@@ -1,10 +1,10 @@
 {
-  "name": "@uifabric/custom-settings",
-  "version": "0.2.0",
-  "description": "Package which drives custom cacheable settings for a component",
+  "name": "@uifabricshared/theming-ramp",
+  "version": "0.1.3",
+  "description": "Theming Library",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/ui-fabric-react-native"
+    "url": "https://github.com/microsoft/just"
   },
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -22,12 +22,17 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabric/foundation-settings": "0.2.0"
+    "@uifabricshared/foundation-settings": "0.2.1",
+    "@uifabricshared/immutable-merge": "0.1.4"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
-    "@types/node": "^10.3.5",
-    "@uifabric/build-native": "^0.1.1",
-    "@uifabric/eslint-config-rules": "^0.1.1"
+    "@types/react": "16.8.15",
+    "react": "16.8.3",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
+  },
+  "peerDependencies": {
+    "react": "16.8.3"
   }
 }

@@ -1,5 +1,5 @@
 const path = require('path');
-const { just } = require('@uifabric/build-native');
+const { just } = require('@uifabricshared/build-native');
 const { webpackMerge, htmlOverlay, webpackServeConfig } = just;
 
 const BUNDLE_NAME = 'demo';

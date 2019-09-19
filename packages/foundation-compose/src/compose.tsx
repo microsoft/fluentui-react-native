@@ -7,12 +7,12 @@ import {
   IComponentOptions,
   IExtractSettingsType
 } from './Component.types';
-import { ISlotTypes, useProcessComposableTree, renderSlot, IGenericProps } from '@uifabric/foundation-composable';
+import { ISlotTypes, useProcessComposableTree, renderSlot, IGenericProps } from '@uifabricshared/foundation-composable';
 import { wrapComponent, standardUsePrepareState, standardThemeQueryInputs } from './Component';
-import { ThemeContext, getTheme } from '@uifabric/theming-react-native';
-import { buildComponentTokens, IStyleFactories } from '@uifabric/foundation-tokens';
-import { ITheme } from '@uifabric/theming';
-import { ISettingsEntry } from '@uifabric/custom-settings';
+import { ThemeContext, getTheme } from '@uifabricshared/theming-react-native';
+import { buildComponentTokens, IStyleFactories } from '@uifabricshared/foundation-tokens';
+import { ITheme } from '@uifabricshared/theming-ramp';
+import { ISettingsEntry } from '@uifabricshared/themed-settings';
 
 /* tslint:disable-next-line no-any */
 function _getOptions<TComponent extends IComponent = IComponent>(obj: any): IComponentOptions<TComponent> | undefined {
@@ -60,8 +60,8 @@ function _setupComponentOptions(options: IComponentOptions<IComponent>): void {
   const slots = options.slots;
   const hasTokens = slots
     ? (target: string, key: string) => {
-        return _hasToken(slots, target, key);
-      }
+      return _hasToken(slots, target, key);
+    }
     : undefined;
   options.resolvedTokens = buildComponentTokens<IComponentProps<IComponent>, ITheme>(
     options.slots as IStyleFactories<IComponentProps<IComponent>, ITheme>,

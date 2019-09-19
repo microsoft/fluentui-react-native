@@ -1,8 +1,8 @@
 import { IButtonRenderData, IButtonSettings } from './Button.types';
-import { renderSlot, IAsResolved } from '@uifabric/foundation-composable';
-import { mergeSettings } from '@uifabric/foundation-settings';
+import { renderSlot, IAsResolved } from '@uifabricshared/foundation-composable';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useAsPressable } from '../Pressable/index';
-import { IThemeQueryInputs } from '@uifabric/foundation-compose';
+import { IThemeQueryInputs } from '@uifabricshared/foundation-compose';
 
 export function usePrepareState(data: IButtonRenderData): IButtonRenderData {
   // create the button state/info once, re-renders happen with pressable state changes so this is storage

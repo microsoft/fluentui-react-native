@@ -1,5 +1,5 @@
 import { IComponent, IRenderData, IComponentProps, IComponentOptions } from './Component.types';
-import { INativeTheme } from '@uifabric/theming-react-native';
+import { INativeTheme } from '@uifabricshared/theming-react-native';
 import {
   IProcessResult,
   IResolvedSlot,
@@ -8,11 +8,11 @@ import {
   renderSlot,
   IGenericProps,
   ISlotProps
-} from '@uifabric/foundation-composable';
-import { mergeSettings, IComponentSettings } from '@uifabric/foundation-settings';
-import { getSettings, ITheme } from '@uifabric/theming';
-import { processTokens } from '@uifabric/foundation-tokens';
-import { getThemedSettings } from '@uifabric/custom-settings';
+} from '@uifabricshared/foundation-composable';
+import { mergeSettings, IComponentSettings } from '@uifabricshared/foundation-settings';
+import { getSettings, ITheme } from '@uifabricshared/theming-ramp';
+import { processTokens } from '@uifabricshared/foundation-tokens';
+import { getThemedSettings } from '@uifabricshared/themed-settings';
 
 /**
  * Get the cache for the given component from the theme, creating it if necessary
