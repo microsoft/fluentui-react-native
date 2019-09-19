@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Thu, 19 Sep 2019 00:21:30 GMT and should not be manually modified.
+This log was last generated on Thu, 19 Sep 2019 22:36:45 GMT and should not be manually modified.
 
+## 0.2.0
+Thu, 19 Sep 2019 22:36:45 GMT
+
+### Minor changes
+
+- add palette color types (ppatboyd@outlook.com)
 ## 0.1.3
 Thu, 19 Sep 2019 00:21:30 GMT
 

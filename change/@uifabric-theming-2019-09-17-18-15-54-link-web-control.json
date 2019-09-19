@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "add palette color types",
-  "packageName": "@uifabric/theming",
-  "email": "ppatboyd@outlook.com",
-  "commit": "88a00ff661b9340f64231c05da0e39ce3ee0d6d6",
-  "date": "2019-09-18T01:15:54.512Z"
-}
