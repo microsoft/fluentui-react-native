@@ -1,0 +1,40 @@
+{
+  "name": "@uifabricshared/foundation-compose",
+  "entries": [
+    {
+      "date": "Thu, 19 Sep 2019 00:21:30 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.0.1",
+      "version": "1.0.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "change scope names",
+            "author": "taamireh@microsoft.com",
+            "commit": "a1e4beb10c154da04dd03f4588fa5422e51d5edc"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 14 Sep 2019 01:56:36 GMT",
+      "tag": "@uifabric/foundation-compose_v1.0.0",
+      "version": "1.0.0",
+      "comments": {
+        "major": [
+          {
+            "comment": "switch implementations to use new customized settings",
+            "author": "jasonmo@microsoft.com",
+            "commit": "32ece97de4699f7e7048fd6e45f58c963b09df66"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Begin turning on some linting rules",
+            "author": "taamireh@microsoft.com",
+            "commit": "530f021858edbb964892dffcb6f15f86db8499fd"
+          }
+        ]
+      }
+    }
+  ]
+}

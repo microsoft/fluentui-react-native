@@ -1,9 +1,9 @@
 import { IStackSettings, IStackProps } from './Stack.types';
 import { parseGap, parsePadding } from './StackUtils';
-import { augmentPlatformTheme } from '@uifabric/theming-react-native';
-import { ITheme } from '@uifabric/theming';
-import { styleFunction } from '@uifabric/foundation-tokens';
-import { IStyleProp } from '@uifabric/foundation-settings';
+import { augmentPlatformTheme } from '@uifabricshared/theming-react-native';
+import { ITheme } from '@uifabricshared/theming-ramp';
+import { styleFunction } from '@uifabricshared/foundation-tokens';
+import { IStyleProp } from '@uifabricshared/foundation-settings';
 import { ICSSStyle } from '../htmlTypes';
 
 const nameMap: { [key: string]: string } = {
@@ -100,7 +100,7 @@ function _buildRootStyles(tokenProps: IStackProps, theme: ITheme): IStackProps {
     maxWidth,
     padding
   } = tokenProps;
-  let childrenGap = tokenProps.childrenGap || gap;
+  const childrenGap = tokenProps.childrenGap || gap;
   const { rowGap, columnGap } = parseGap(childrenGap, theme);
 
   return {
@@ -162,7 +162,7 @@ const _innerKeyProps: (keyof IStackProps)[] = [
 
 function _buildInnerStyles(tokenProps: IStackProps, theme: ITheme): IStackProps {
   const { horizontal, reversed, gap, horizontalAlign, verticalAlign, disableShrink, padding } = tokenProps;
-  let childrenGap = tokenProps.childrenGap || gap;
+  const childrenGap = tokenProps.childrenGap || gap;
   const { rowGap, columnGap } = parseGap(childrenGap, theme);
   const horizontalMargin = `${-0.5 * columnGap.value}${columnGap.unit}`;
   const verticalMargin = `${-0.5 * rowGap.value}${rowGap.unit}`;

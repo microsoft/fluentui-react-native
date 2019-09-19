@@ -1,7 +1,7 @@
 {
-  "name": "@uifabric/immutable-merge",
-  "version": "0.1.2",
-  "description": "Immutable merge routine",
+  "name": "@uifabricshared/immutable-merge",
+  "version": "0.1.5",
+  "description": "Immutable merge routines for deep customizable merging",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/ui-fabric-react-native"
@@ -13,6 +13,7 @@
     "just": "just-scripts",
     "clean": "just-scripts clean",
     "code-style": "just-scripts code-style",
+    "lint": "just-scripts eslint",
     "start": "just-scripts dev",
     "start-test": "just-scripts jest-watch",
     "update-snapshots": "just-scripts jest -u"
@@ -23,7 +24,7 @@
   "devDependencies": {
     "@types/jest": "^19.2.2",
     "@types/node": "^10.3.5",
-    "@uifabric/build-native": "^0.1.1",
-    "@uifabric/eslint-config-rules": "^0.1.0"
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
   }
 }

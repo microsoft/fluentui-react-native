@@ -1,6 +1,6 @@
 import { IStackItemProps } from './StackItem.types';
-import { ITheme } from '@uifabric/theming';
-import { styleFunction } from '@uifabric/foundation-tokens';
+import { ITheme } from '@uifabricshared/theming-ramp';
+import { styleFunction } from '@uifabricshared/foundation-tokens';
 
 const alignMap: { [key: string]: string } = {
   start: 'flex-start',
@@ -9,7 +9,7 @@ const alignMap: { [key: string]: string } = {
 
 const _keyProps: (keyof IStackItemProps)[] = ['grow', 'shrink', 'disableShrink', 'align', 'verticalFill', 'margin'];
 
-function _processor(tokenProps: IStackItemProps, _theme: ITheme): IStackItemProps {
+function _processor(tokenProps: IStackItemProps): IStackItemProps {
   const { grow, shrink, disableShrink, align, verticalFill, margin } = tokenProps;
   return {
     style: [
@@ -23,9 +23,9 @@ function _processor(tokenProps: IStackItemProps, _theme: ITheme): IStackItemProp
         flexShrink: 0
       },
       shrink &&
-        !disableShrink && {
-          flexShrink: 1
-        },
+      !disableShrink && {
+        flexShrink: 1
+      },
       align && {
         alignSelf: alignMap[align] || align
       }

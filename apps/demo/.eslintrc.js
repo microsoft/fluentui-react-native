@@ -1,5 +1,5 @@
 module.exports = {
   extends: [
-    "@uifabric/eslint-config-rules"
+    "@uifabricshared/eslint-config-rules"
   ]
 }

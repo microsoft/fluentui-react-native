@@ -1,5 +1,5 @@
 import { IButtonComponent } from './Button.types';
-import { compose } from '@uifabric/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
 // import { Stack } from '../Stack';
 import { Text } from '../Text/index';
 import { finalizer, themeQueryInputs, usePrepareState, view } from './Button.helpers';

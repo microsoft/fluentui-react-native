@@ -1,6 +1,6 @@
 import { createThemeRegistry } from './Registry';
 import { IThemeRegistry } from './Registry.types';
-const { immutableMerge } = require('@uifabric/immutable-merge');
+import { immutableMerge } from '@uifabricshared/immutable-merge';
 
 interface IFakeStyle {
   textColor?: string;

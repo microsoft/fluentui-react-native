@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IThemeEventListener } from '@uifabric/theme-registry';
+import { IThemeEventListener } from '@uifabricshared/theme-registry';
 import { removeThemeRegistryListener, getTheme, addThemeRegistryListener } from './Global';
 import { INativeTheme } from './INativeTheme';
 

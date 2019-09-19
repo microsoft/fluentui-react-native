@@ -27,12 +27,12 @@ export function useAsPressable(
   const initialState = { pressed: false, hovered: false, focused: false };
 
   const [state, onSetState] = usePressableStateChange<IPressableState, IWithOnStateChange<IDivProps>>(initialState, props);
-  const onMouseEnter = React.useCallback(_e => onSetState({ hovered: true }), [onSetState]);
-  const onMouseLeave = React.useCallback(_e => onSetState({ hovered: false }), [onSetState]);
-  const onMouseDown = React.useCallback(_e => onSetState({ pressed: true }), [onSetState]);
-  const onMouseUp = React.useCallback(_e => onSetState({ pressed: false }), [onSetState]);
-  const onFocus = React.useCallback(_e => onSetState({ focused: true }), [onSetState]);
-  const onBlur = React.useCallback(_e => onSetState({ focused: false }), [onSetState]);
+  const onMouseEnter = React.useCallback(() => onSetState({ hovered: true }), [onSetState]);
+  const onMouseLeave = React.useCallback(() => onSetState({ hovered: false }), [onSetState]);
+  const onMouseDown = React.useCallback(() => onSetState({ pressed: true }), [onSetState]);
+  const onMouseUp = React.useCallback(() => onSetState({ pressed: false }), [onSetState]);
+  const onFocus = React.useCallback(() => onSetState({ focused: true }), [onSetState]);
+  const onBlur = React.useCallback(() => onSetState({ focused: false }), [onSetState]);
   const newProps = {
     ...props,
     onMouseEnter,

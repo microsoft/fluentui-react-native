@@ -1,15 +1,15 @@
-import { INativeTheme } from '@uifabric/theming-react-native';
-import { ISlotTypes, IResolvedSlotData, IComposable } from '@uifabric/foundation-composable';
+import { INativeTheme } from '@uifabricshared/theming-react-native';
+import { ISlotTypes, IResolvedSlotData, IComposable } from '@uifabricshared/foundation-composable';
 import { IComponentSettings } from '../../foundation-settings/lib';
-import { ITheme } from '@uifabric/theming';
-import { IComponentTokens, ISlotStyleFactories } from '@uifabric/foundation-tokens';
-import { ISettingsEntry } from '@uifabric/custom-settings';
+import { ITheme } from '@uifabricshared/theming-ramp';
+import { IComponentTokens, ISlotStyleFactories } from '@uifabricshared/foundation-tokens';
+import { ISettingsEntry } from '@uifabricshared/themed-settings';
 
 export interface IRenderData<
   TProps extends object = object,
   TSlotProps extends IComponentSettings = IComponentSettings,
   TState extends object = any
-> {
+  > {
   props: TProps;
   theme: INativeTheme;
   state: TState;
@@ -44,7 +44,7 @@ export interface IComponent<
   TCustomizeableProps extends TProps = TProps,
   TState extends object = any,
   TStatics extends object = object
-> {
+  > {
   displayName: string;
   /**
    * used for type extraction, this will become the props interface for the component, the one that is used when authoring

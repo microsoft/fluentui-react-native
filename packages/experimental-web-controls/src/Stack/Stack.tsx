@@ -2,8 +2,8 @@ import * as React from 'react';
 import { buildStackRootStyles, buildStackInnerStyles } from './Stack.styles';
 import { IStackComponent, IStackRenderData } from './Stack.types';
 import { StackItem } from './StackItem/StackItem';
-import { compose } from '@uifabric/foundation-compose';
-import { renderSlot, IAsResolved } from '@uifabric/foundation-composable';
+import { compose } from '@uifabricshared/foundation-compose';
+import { renderSlot, IAsResolved } from '@uifabricshared/foundation-composable';
 
 const view: IStackComponent['view'] = (renderData: IAsResolved<IStackRenderData>, ...children: React.ReactNode[]) => {
   const { props, slots } = renderData;

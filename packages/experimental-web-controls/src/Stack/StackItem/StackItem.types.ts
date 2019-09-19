@@ -1,5 +1,5 @@
-import { IComponentSettings, IStyleProp } from '@uifabric/foundation-settings';
-import { IComponent, IRenderData } from '@uifabric/foundation-compose';
+import { IComponentSettings, IStyleProp } from '@uifabricshared/foundation-settings';
+import { IComponent, IRenderData } from '@uifabricshared/foundation-compose';
 import { ICSSStyle } from '../../htmlTypes';
 
 /**
