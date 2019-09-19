@@ -2,7 +2,7 @@ import * as React from 'react';
 import { IPressableRenderData, IPressableState, IWithOnStateChange } from './Pressable.props';
 import { IDivProps } from '../htmlTypes';
 
-export function usePressableStateChange<StateType, PropsType extends Object>(
+export function usePressableStateChange<StateType, PropsType extends Record<string, any>>(
   initialState: StateType,
   props: IWithOnStateChange<PropsType>
 ): [any, (partial: StateType) => void] {

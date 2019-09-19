@@ -1,5 +1,5 @@
-import { IComponent, IRenderData } from '@uifabric/foundation-compose';
-import { IComponentSettings } from '@uifabric/foundation-settings';
+import { IComponent, IRenderData } from '@uifabricshared/foundation-compose';
+import { IComponentSettings } from '@uifabricshared/foundation-settings';
 import { IForegroundColorTokens, ITextTokens } from '../tokens';
 import { IPressableProps, IPressableState } from '../Pressable';
 import { ITextProps } from '../Text';

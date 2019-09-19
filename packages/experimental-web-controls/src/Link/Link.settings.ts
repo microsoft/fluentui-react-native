@@ -1,5 +1,5 @@
 import { ILinkSettings } from './Link.types';
-import { augmentPlatformTheme } from '@uifabric/theming-react-native';
+import { augmentPlatformTheme } from '@uifabricshared/theming-react-native';
 
 export function loadLinkSettings(): void {
   const linkSettings: ILinkSettings = {
@@ -38,7 +38,7 @@ export function loadLinkSettings(): void {
     }
   };
 
-   augmentPlatformTheme({
+  augmentPlatformTheme({
     settings: {
       RNFLink: linkSettings
     }

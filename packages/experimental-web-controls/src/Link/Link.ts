@@ -1,6 +1,6 @@
 'use strict';
 
-import { compose } from '@uifabric/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
 import { ILinkComponent } from './Link.types';
 import { Text } from '../Text';
 import { loadLinkSettings } from './Link.settings';

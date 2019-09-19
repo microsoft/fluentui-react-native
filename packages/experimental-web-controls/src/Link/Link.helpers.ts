@@ -3,9 +3,9 @@ import * as React from 'react';
 import { ILinkRenderData, ILinkSettings, ILinkState } from './Link.types';
 import { IDivProps } from '../htmlTypes';
 import { useAsPressable, IWithOnStateChange, usePressableStateChange } from '../Pressable';
-import { mergeSettings } from '@uifabric/foundation-settings';
-import { IAsResolved, renderSlot } from '@uifabric/foundation-composable';
-import { IThemeQueryInputs } from '@uifabric/foundation-compose';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
+import { IAsResolved, renderSlot } from '@uifabricshared/foundation-composable';
+import { IThemeQueryInputs } from '@uifabricshared/foundation-compose';
 
 export type retProp = { linkProps: IWithOnStateChange<IDivProps>; linkState: ILinkState; setState: (partial: ILinkState) => void };
 
