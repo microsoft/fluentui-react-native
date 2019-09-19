@@ -2,6 +2,27 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Thu, 19 Sep 2019 23:21:48 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.1.4",
+      "version": "0.1.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "force publish",
+            "author": "taamireh@microsoft.com",
+            "commit": "de19f442b56e807d03c08c44c0aa8e7fb8f222a9"
+          }
+        ],
+        "none": [
+          {
+            "comment": "force publish",
+            "author": "taamireh@microsoft.com",
+            "commit": "013d3c8328bd99b585c465df22e059166ae2b44a"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 19 Sep 2019 00:21:30 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.1.3",
       "version": "0.1.3",

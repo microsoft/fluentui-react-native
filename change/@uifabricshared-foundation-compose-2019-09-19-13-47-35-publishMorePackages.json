@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "force publish",
-  "packageName": "@uifabricshared/foundation-compose",
-  "email": "taamireh@microsoft.com",
-  "commit": "4a256c5a8bdf7279afa8bb2c45c40abc0b6bd9d8",
-  "date": "2019-09-19T20:47:35.148Z"
-}

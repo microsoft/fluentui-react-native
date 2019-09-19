@@ -2,6 +2,27 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Thu, 19 Sep 2019 23:21:48 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.0.2",
+      "version": "1.0.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "force publish",
+            "author": "taamireh@microsoft.com",
+            "commit": "4a256c5a8bdf7279afa8bb2c45c40abc0b6bd9d8"
+          }
+        ],
+        "none": [
+          {
+            "comment": "force publish",
+            "author": "taamireh@microsoft.com",
+            "commit": "47700dd298bc36feafcbb488f95f4ca20814f3f8"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 19 Sep 2019 00:21:30 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.0.1",
       "version": "1.0.1",

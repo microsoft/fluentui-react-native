@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theme-registry",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Implementation of the theme graph",
   "repository": {
     "type": "git",

@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "force publish",
-  "packageName": "@uifabricshared/theme-registry",
-  "email": "taamireh@microsoft.com",
-  "commit": "2765d42acd7edb34cb74883a3da5d5bf51f76d64",
-  "date": "2019-09-19T20:45:39.041Z"
-}

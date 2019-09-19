@@ -2,6 +2,27 @@
   "name": "@uifabricshared/themed-settings",
   "entries": [
     {
+      "date": "Thu, 19 Sep 2019 23:21:48 GMT",
+      "tag": "@uifabricshared/themed-settings_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "force publish",
+            "author": "taamireh@microsoft.com",
+            "commit": "cbcbdcf85196e4ca557c800209f65d81d3c0fa45"
+          }
+        ],
+        "none": [
+          {
+            "comment": "force publish",
+            "author": "taamireh@microsoft.com",
+            "commit": "8ece7dd04e90e8e6862e721dce712d1a15edfb01"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 19 Sep 2019 00:21:30 GMT",
       "tag": "@uifabricshared/themed-settings_v0.2.1",
       "version": "0.2.1",
