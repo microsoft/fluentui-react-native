@@ -34,5 +34,8 @@
     "ts-loader": "6.0.4",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
+  },
+  "beachball": {
+    "shouldPublish": false
   }
 }

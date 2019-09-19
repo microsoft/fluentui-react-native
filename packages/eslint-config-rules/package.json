@@ -21,5 +21,8 @@
   },
   "dependencies": {
     "eslint-plugin-react": "^7.14.3"
+  },
+  "beachball": {
+    "shouldPublish": false
   }
 }

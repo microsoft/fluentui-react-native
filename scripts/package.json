@@ -86,5 +86,8 @@
       "path": "../apps/test-bundles/dist/office-ui-fabric-react-Button.min.js",
       "maxSize": "50.1 kB"
     }
-  ]
+  ],
+  "beachball": {
+    "shouldPublish": false
+  }
 }
