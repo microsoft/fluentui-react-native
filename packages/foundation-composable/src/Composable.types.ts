@@ -1,14 +1,22 @@
 import { ISlotProps } from '@uifabric/foundation-settings';
 
+export type IUseStyling<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>> = (props: TProps) => TSlotProps;
+
 /**
  * Pattern for a composable component
  */
 export interface IComposable<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object> {
   /**
+   * Injectable styling for the component.  If not specified this will return an empty object
+   * @param props - user input props to process for styling
+   */
+  useStyling: IUseStyling<TProps, TSlotProps>;
+
+  /**
    * process the user props and return an IRenderData object with slot props and an optional state.
    * @param props - user props to be used for processing
    */
-  usePrepareProps: (props: TProps) => IRenderData<TSlotProps, TState>;
+  usePrepareProps: (props: TProps, useStyling: IUseStyling<TProps, TSlotProps>) => IRenderData<TSlotProps, TState>;
 
   /**
    * perform the actual building of the JSX tree.
@@ -24,6 +32,10 @@ export interface IComposable<TProps extends object, TSlotProps extends ISlotProp
    */
   slots: ISlotDefinitions<TSlotProps>;
 }
+
+export type IComposableDefinition<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object> = Partial<
+  IComposable<TProps, TSlotProps, TState>
+>;
 
 /**
  * data returned from prop preparation which will be handed to render
@@ -50,8 +62,8 @@ export type ISlotDefinitions<TSlotProps extends ISlotProps> = {
 /**
  * Attach a composable component to an object in a standard manner
  */
-export type IWithComposable<T extends object = object, TProps extends object = object> = T & {
-  __composable: IComposable<TProps>;
+export type IWithComposable<T extends object = object, TComposable = IComposable<object>> = T & {
+  __composable: TComposable;
 };
 
 /**

@@ -79,7 +79,8 @@ function useUpdateRenderData<TProps extends object, TSlotProps extends ISlotProp
   info: ISlotRenderInfo<TProps, TSlotProps, TState>
 ): { renderData: IRenderData<TSlotProps, TState>; Slots: ISlots<TSlotProps> } {
   // update the render data for this level of the hierarchy
-  info.renderData = info.composable.usePrepareProps(props) || {};
+  const { usePrepareProps, useStyling } = info.composable;
+  info.renderData = usePrepareProps(props, useStyling) || {};
 
   // now traverse to children if needed
   const childInfo = info.childInfo;
