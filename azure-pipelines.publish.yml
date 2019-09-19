@@ -1,0 +1,33 @@
+# Build pipeline for publishing
+
+trigger:
+- master
+
+pr: none
+
+variables:
+- group: 'NPM and Github Secrets'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    git config user.name "UI-Fabric-RN-Bot"
+    git config user.email "uifrnbot@microsoft.com"
+    git remote set-url origin https://$(githubUser):$(githubPAT)@github.com/microsoft/ui-fabric-react-native.git
+  displayName: Git Authentication
+
+- script: |
+    yarn
+    yarn build
+  displayName: 'yarn install and build'
+
+- script: |
+      yarn publish:beachball -- -b origin/master -n $(npmAuth) --access public -y
+    displayName: 'Publish NPM Packages'
