@@ -1,1 +1,1 @@
-module.exports = require('@uifabric/build-native/babel.config');
+module.exports = require('@uifabricshared/build-native/babel.config');

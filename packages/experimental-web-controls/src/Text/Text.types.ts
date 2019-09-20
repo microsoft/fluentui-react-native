@@ -1,8 +1,8 @@
-import { IComponent } from '@uifabric/foundation-compose';
-import { IComponentSettings, IStyleProp } from '@uifabric/foundation-settings';
+import { IComponent } from '@uifabricshared/foundation-compose';
+import { IComponentSettings, IStyleProp } from '@uifabricshared/foundation-settings';
 import { ITextTokens, IForegroundColorTokens } from '../tokens/index';
 import { ICSSStyle } from '../htmlTypes';
-import { IRenderData } from '@uifabric/foundation-composable';
+import { IRenderData } from '@uifabricshared/foundation-composable';
 
 /**
  * Properties for fabric native text field, these extend the default props for text

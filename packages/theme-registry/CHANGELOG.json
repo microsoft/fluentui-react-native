@@ -1,0 +1,61 @@
+{
+  "name": "@uifabricshared/theme-registry",
+  "entries": [
+    {
+      "date": "Thu, 19 Sep 2019 23:21:48 GMT",
+      "tag": "@uifabricshared/theme-registry_v0.1.4",
+      "version": "0.1.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "force publish",
+            "author": "taamireh@microsoft.com",
+            "commit": "2765d42acd7edb34cb74883a3da5d5bf51f76d64"
+          }
+        ],
+        "none": [
+          {
+            "comment": "force publish",
+            "author": "taamireh@microsoft.com",
+            "commit": "b3807fc1d6462f5ba49fefd2b04a02c192943d5f"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 19 Sep 2019 00:21:30 GMT",
+      "tag": "@uifabricshared/theme-registry_v0.1.3",
+      "version": "0.1.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "change scope names",
+            "author": "taamireh@microsoft.com",
+            "commit": "a1e4beb10c154da04dd03f4588fa5422e51d5edc"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 14 Sep 2019 01:56:36 GMT",
+      "tag": "@uifabric/theme-registry_v0.1.2",
+      "version": "0.1.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "update yarn.lock",
+            "author": "taamireh@microsoft.com",
+            "commit": "b28351081d8cb19c8f9bec9bc8f7f606eb2b251e"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Begin turning on some linting rules",
+            "author": "taamireh@microsoft.com",
+            "commit": "530f021858edbb964892dffcb6f15f86db8499fd"
+          }
+        ]
+      }
+    }
+  ]
+}

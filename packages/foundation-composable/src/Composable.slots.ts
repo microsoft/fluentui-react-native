@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IRenderData, ISlotWithFilter, IComposable, IWithComposable, ISlots, IPropFilter, INativeSlotType } from './Composable.types';
-import { mergeSettings, mergeProps, ISlotProps } from '@uifabric/foundation-settings';
+import { mergeSettings, mergeProps, ISlotProps } from '@uifabricshared/foundation-settings';
 
 export type ISlotFn<TProps> = React.FunctionComponent<TProps> & {
   _canCompose?: boolean;

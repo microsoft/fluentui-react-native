@@ -1,7 +1,7 @@
-import { IRenderData, IComposableDefinition } from '@uifabric/foundation-composable';
+import { IRenderData, IComposableDefinition } from '@uifabricshared/foundation-composable';
 import { IComponentSettings, ISlotProps } from '../../foundation-settings/lib';
-import { ITheme } from '@uifabric/theming';
-import { ISettingsEntry } from '@uifabric/custom-settings';
+import { ITheme } from '@uifabricshared/theming-ramp';
+import { ISettingsEntry } from '@uifabricshared/themed-settings';
 import { IStylingSettings, IUseOpinionatedStyling } from './useStyling';
 
 /**

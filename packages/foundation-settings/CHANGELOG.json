@@ -1,0 +1,68 @@
+{
+  "name": "@uifabricshared/foundation-settings",
+  "entries": [
+    {
+      "date": "Thu, 19 Sep 2019 23:21:48 GMT",
+      "tag": "@uifabricshared/foundation-settings_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "force publish",
+            "author": "taamireh@microsoft.com",
+            "commit": "6b22c332c07336c5d0bf9b87b4133365c72be98d"
+          }
+        ],
+        "none": [
+          {
+            "comment": "force publish",
+            "author": "taamireh@microsoft.com",
+            "commit": "2c34436e3d0e35785c9f65aa5f04d225a5aa03ec"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 19 Sep 2019 00:21:30 GMT",
+      "tag": "@uifabricshared/foundation-settings_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "change scope names",
+            "author": "taamireh@microsoft.com",
+            "commit": "a1e4beb10c154da04dd03f4588fa5422e51d5edc"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 14 Sep 2019 01:56:36 GMT",
+      "tag": "@uifabric/foundation-settings_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "update yarn.lock",
+            "author": "taamireh@microsoft.com",
+            "commit": "b28351081d8cb19c8f9bec9bc8f7f606eb2b251e"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Fix applying stacked overrides",
+            "author": "jasonmo@microsoft.com",
+            "commit": "32ece97de4699f7e7048fd6e45f58c963b09df66"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Begin turning on some linting rules",
+            "author": "taamireh@microsoft.com",
+            "commit": "530f021858edbb964892dffcb6f15f86db8499fd"
+          }
+        ]
+      }
+    }
+  ]
+}

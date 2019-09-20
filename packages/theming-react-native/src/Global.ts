@@ -1,7 +1,7 @@
 import { INativeThemeDefinition, INativeTheme } from './INativeTheme';
 import { getBaselinePlatformTheme } from './platform/index';
-import { resolvePartialTheme } from '@uifabric/theming';
-import { IThemeRegistry, createThemeRegistry, IProcessTheme, IThemeEventListener } from '@uifabric/theme-registry';
+import { resolvePartialTheme } from '@uifabricshared/theming-ramp';
+import { IThemeRegistry, createThemeRegistry, IProcessTheme, IThemeEventListener } from '@uifabricshared/theme-registry';
 
 export type INativeThemeRegistry = IThemeRegistry<INativeTheme, INativeThemeDefinition>;
 

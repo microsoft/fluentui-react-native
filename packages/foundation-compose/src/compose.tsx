@@ -1,10 +1,10 @@
 import { IComponent, IComponentReturnType, IComponentBase } from './Component.types';
-import { composable, INativeSlotType, IComposable } from '@uifabric/foundation-composable';
-import { ITheme } from '@uifabric/theming';
-import { ISettingsEntry } from '@uifabric/custom-settings';
+import { composable, INativeSlotType, IComposable } from '@uifabricshared/foundation-composable';
+import { ITheme } from '@uifabricshared/theming-ramp';
+import { ISettingsEntry } from '@uifabricshared/themed-settings';
 import { initializeStyling, getOptionsFromObj, IStylingSettings } from './useStyling';
-import { immutableMerge } from '@uifabric/immutable-merge';
-import { ISlotProps } from '@uifabric/foundation-settings';
+import { immutableMerge } from '@uifabricshared/immutable-merge';
+import { ISlotProps } from '@uifabricshared/foundation-settings';
 
 /**
  * Merge current and base options together to form the new object definition.  These objects will merge with the

@@ -1,6 +1,6 @@
 {
-  "name": "@uifabric/theme-registry",
-  "version": "0.1.1",
+  "name": "@uifabricshared/theme-registry",
+  "version": "0.1.4",
   "description": "Implementation of the theme graph",
   "repository": {
     "type": "git",
@@ -13,6 +13,7 @@
     "just": "just-scripts",
     "clean": "just-scripts clean",
     "code-style": "just-scripts code-style",
+    "lint": "just-scripts eslint",
     "start": "just-scripts dev",
     "start-test": "just-scripts jest-watch",
     "update-snapshots": "just-scripts jest -u"
@@ -22,8 +23,8 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^19.2.2",
-    "@uifabric/immutable-merge": "0.1.2",
-    "@uifabric/build-native": "^0.1.1",
-    "@uifabric/eslint-config-rules": "^0.1.0"
+    "@uifabricshared/immutable-merge": "0.1.5",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
   }
 }

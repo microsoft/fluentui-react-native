@@ -10,10 +10,10 @@
  */
 'use strict';
 
-import { atomic, IUseStyling } from '@uifabric/foundation-composable';
+import { atomic, IUseStyling } from '@uifabricshared/foundation-composable';
 import { IPressableProps } from './Pressable.props';
 import { useAsPressable } from './useAsPressable';
-import { mergeSettings } from '@uifabric/foundation-settings';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
 
 export const Pressable = atomic<IPressableProps>('div', (userProps: IPressableProps, useStyling: IUseStyling<IPressableProps>) => {
   const { props, state, setState } = useAsPressable(userProps);

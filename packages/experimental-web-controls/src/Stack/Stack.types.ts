@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { ITextTokens, IBackgroundColorTokens, IBorderTokens } from '../tokens/index';
-import { IComponentSettings } from '@uifabric/foundation-settings';
-import { IComponent } from '@uifabric/foundation-compose';
+import { IComponentSettings } from '@uifabricshared/foundation-settings';
+import { IComponent } from '@uifabricshared/foundation-compose';
 import { IDivProps } from '../htmlTypes';
 import { IStackItemProps } from './StackItem/StackItem.types';
-import { IRenderData } from '@uifabric/foundation-composable';
+import { IRenderData } from '@uifabricshared/foundation-composable';
 
 /**
  * Defines a type made by the union of the different values that the align-items and justify-content flexbox

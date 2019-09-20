@@ -1,6 +1,6 @@
 {
-  "name": "@uifabric/foundation-compose",
-  "version": "0.1.1",
+  "name": "@uifabricshared/foundation-compose",
+  "version": "1.0.2",
   "description": "Compose infrastructure",
   "repository": {
     "type": "git",
@@ -13,6 +13,7 @@
     "just": "just-scripts",
     "clean": "just-scripts clean",
     "code-style": "just-scripts code-style",
+    "lint": "just-scripts eslint",
     "start": "just-scripts dev",
     "start-test": "just-scripts jest-watch",
     "update-snapshots": "just-scripts jest -u"
@@ -21,15 +22,15 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabric/custom-settings": "0.1.1",
-    "@uifabric/foundation-composable": "0.1.1",
-    "@uifabric/foundation-tokens": "0.1.1",
-    "@uifabric/theming-react-native": "0.1.1",
-    "@uifabric/theming": "0.1.1"
+    "@uifabricshared/themed-settings": "0.2.2",
+    "@uifabricshared/foundation-composable": "0.1.4",
+    "@uifabricshared/foundation-tokens": "0.1.4",
+    "@uifabricshared/theming-react-native": "0.1.4",
+    "@uifabricshared/theming-ramp": "0.2.1"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
     "json5": "2.1.0",
-    "@uifabric/eslint-config-rules": "^0.1.0"
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
   }
 }

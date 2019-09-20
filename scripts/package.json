@@ -1,5 +1,5 @@
 {
-  "name": "@uifabric/build-native",
+  "name": "@uifabricshared/build-native",
   "version": "0.1.1",
   "private": true,
   "main": "./index.js",
@@ -73,7 +73,7 @@
     "yargs": "^13.2.4",
     "@typescript-eslint/eslint-plugin": "^2.1.0",
     "@typescript-eslint/parser": "^2.1.0",
-    "@uifabric/build-native": "^0.1.1",
+    "@uifabricshared/build-native": "^0.1.1",
     "eslint": "^6.3.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",
@@ -86,5 +86,8 @@
       "path": "../apps/test-bundles/dist/office-ui-fabric-react-Button.min.js",
       "maxSize": "50.1 kB"
     }
-  ]
+  ],
+  "beachball": {
+    "shouldPublish": false
+  }
 }

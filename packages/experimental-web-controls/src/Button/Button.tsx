@@ -1,15 +1,15 @@
 /** @jsx withSlots */
 import { IButtonComponent, IButtonSlots, IButtonRenderData, IButtonCustomizableProps, IButtonState } from './Button.types';
-import { compose, IUseOpinionatedStyling } from '@uifabric/foundation-compose';
+import { compose, IUseOpinionatedStyling } from '@uifabricshared/foundation-compose';
 // import { Stack } from '../Stack';
 import { Text } from '../Text/index';
 import { loadButtonSettings } from './Button.settings';
 import { Stack } from '../Stack/index';
 import { textTokens, borderTokens } from '../tokens';
 import { backgroundColorTokens, foregroundColorTokens, getPaletteFromTheme } from '../tokens/ColorTokens';
-import { ISlots, withSlots } from '@uifabric/foundation-composable';
+import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { useAsPressable } from '../Pressable';
-import { mergeSettings } from '@uifabric/foundation-settings';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
 
 loadButtonSettings();
 

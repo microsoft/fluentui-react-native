@@ -1,4 +1,4 @@
-import { IStyleProp } from '@uifabric/foundation-settings';
+import { IStyleProp } from '@uifabricshared/foundation-settings';
 import { IDivProps, ICSSStyle } from '../htmlTypes';
 
 /**

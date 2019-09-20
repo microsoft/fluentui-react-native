@@ -1,5 +1,5 @@
 import { ITextComponent } from './Text.types';
-import { compose } from '@uifabric/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
 import { foregroundColorTokens, textTokens } from '../tokens/index';
 import { loadTextSettings } from './Text.settings';
 

@@ -1,0 +1,33 @@
+{
+  "name": "@uifabricshared/themed-settings",
+  "version": "0.2.2",
+  "description": "Package which drives custom cacheable settings for a component",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/ui-fabric-react-native"
+  },
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "just-scripts build",
+    "just": "just-scripts",
+    "clean": "just-scripts clean",
+    "code-style": "just-scripts code-style",
+    "lint": "just-scripts eslint",
+    "start": "just-scripts dev",
+    "start-test": "just-scripts jest-watch",
+    "update-snapshots": "just-scripts jest -u"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@uifabricshared/foundation-settings": "0.2.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^19.2.2",
+    "@types/node": "^10.3.5",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
+  }
+}

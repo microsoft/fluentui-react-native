@@ -20,9 +20,6 @@ This repo manages semantic versioning and publishing using Beachball (https://gi
 1. `yarn change` will take you through a command line wizard to generate change files
 2. Make sure to commit and push the newly generated change file
 
-TODO:
-- [ ] Add a release pipeline to update versions and publish to npm registry
-
 ## Contributing
 
 This project welcomes contributions and suggestions. Most contributions require you to agree to a

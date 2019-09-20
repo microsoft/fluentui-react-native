@@ -11,10 +11,25 @@ import {
 } from './Composable.types';
 import { useCompoundPrepare } from './Composable.slots';
 import { renderSlot } from './slots';
-import { ISlotProps, mergeSettings } from '@uifabric/foundation-settings';
+import { ISlotProps, mergeSettings } from '@uifabricshared/foundation-settings';
 
 // just a generic object with children specified as props
 type IWithChildren<T> = T & { children?: React.ReactNode[] };
+
+function _validateComposable<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object>(
+  options: IComposableDefinition<TProps, TSlotProps, TState>
+): void {
+  const numSlots = (options.slots && Object.getOwnPropertyNames(options.slots).length) || 0;
+  if (!numSlots) {
+    throw 'A composable component must have at least one slot specified';
+  } else if (numSlots > 1) {
+    if (!options.render) {
+      throw 'A composable component with multiple slots cannot use the default render implementation';
+    } else if (!options.usePrepareProps) {
+      throw 'A composable component with multiple slots cannot use the default usePrepareProps implementation';
+    }
+  }
+}
 
 export function atomicRender<TProps extends object, TState = object>(
   Slots: ISlots<ISlotProps<TProps>>,
@@ -33,25 +48,6 @@ export function atomicUsePrepareProps<TProps extends object, TSlotProps extends 
 }
 
 /**
- * Helper to create a composable implementation of a simple atomic component
- *
- * @param target - slot type to create an atomic component from
- * @param usePrepareProps - prop processing implementation.
- * @param filter - optional filter.  If set it allows stripping properties before they are passed to target
- */
-export function atomic<TProps extends object, TState = object>(
-  target: INativeSlotType,
-  usePrepareProps: IComposable<TProps, ISlotProps<TProps>, TState>['usePrepareProps'],
-  filter?: IPropFilter
-): React.FunctionComponent<TProps> {
-  return composable<TProps, ISlotProps<TProps>, TState>({
-    usePrepareProps,
-    slots: { root: { slotType: target, filter } },
-    render: atomicRender
-  });
-}
-
-/**
  * Create a component that can be composed into other objects to remove extra levels from the tree
  *
  * @param options - composable options which define the behavior of the component
@@ -61,7 +57,7 @@ export function composable<TProps extends object, TSlotProps extends ISlotProps 
 ): IWithComposable<React.FunctionComponent<TProps>, IComposable<TProps, TSlotProps, TState>> {
   // create the functional component
   if (!options.useStyling) {
-    options.useStyling = (_props: TProps) => {
+    options.useStyling = () => {
       return {} as TSlotProps;
     };
   }
@@ -93,17 +89,21 @@ export function composable<TProps extends object, TSlotProps extends ISlotProps 
   return render as IReturnType;
 }
 
-function _validateComposable<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object>(
-  options: IComposableDefinition<TProps, TSlotProps, TState>
-): void {
-  const numSlots = (options.slots && Object.getOwnPropertyNames(options.slots).length) || 0;
-  if (!numSlots) {
-    throw 'A composable component must have at least one slot specified';
-  } else if (numSlots > 1) {
-    if (!options.render) {
-      throw 'A composable component with multiple slots cannot use the default render implementation';
-    } else if (!options.usePrepareProps) {
-      throw 'A composable component with multiple slots cannot use the default usePrepareProps implementation';
-    }
-  }
+/**
+ * Helper to create a composable implementation of a simple atomic component
+ *
+ * @param target - slot type to create an atomic component from
+ * @param usePrepareProps - prop processing implementation.
+ * @param filter - optional filter.  If set it allows stripping properties before they are passed to target
+ */
+export function atomic<TProps extends object, TState = object>(
+  target: INativeSlotType,
+  usePrepareProps: IComposable<TProps, ISlotProps<TProps>, TState>['usePrepareProps'],
+  filter?: IPropFilter
+): React.FunctionComponent<TProps> {
+  return composable<TProps, ISlotProps<TProps>, TState>({
+    usePrepareProps,
+    slots: { root: { slotType: target, filter } },
+    render: atomicRender
+  });
 }

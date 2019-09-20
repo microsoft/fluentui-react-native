@@ -1,5 +1,5 @@
 {
-  "name": "experimental-web-controls",
+  "name": "@uifabricshared/experimental-web-controls",
   "version": "0.1.1",
   "description": "Experimental web control implementations",
   "private": true,
@@ -14,6 +14,7 @@
     "just": "just-scripts",
     "clean": "just-scripts clean",
     "code-style": "just-scripts code-style",
+    "lint": "just-scripts eslint",
     "start": "just-scripts dev",
     "start-test": "just-scripts jest-watch",
     "update-snapshots": "just-scripts jest -u"
@@ -22,16 +23,19 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabric/foundation-settings": "0.1.1",
-    "@uifabric/theming": "0.1.1",
-    "@uifabric/theming-react-native": "0.1.1",
-    "@uifabric/foundation-compose": "0.1.1"
+    "@uifabricshared/foundation-compose": "1.0.2",
+    "@uifabricshared/foundation-settings": "0.2.2",
+    "@uifabricshared/theming-ramp": "0.2.1",
+    "@uifabricshared/theming-react-native": "0.1.4"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
     "react": "16.8.3",
-    "react-dom": "16.8.3",
-    "@uifabric/build-native": "^0.1.1",
-    "@uifabric/eslint-config-rules": "^0.1.0"
+    "react-dom": "16.8.3"
+  },
+  "beachball": {
+    "shouldPublish": false
   }
 }

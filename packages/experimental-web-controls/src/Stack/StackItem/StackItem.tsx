@@ -1,5 +1,5 @@
 import { IStackItemComponent } from './StackItem.types';
-import { compose } from '@uifabric/foundation-compose';
+import { compose } from '@uifabricshared/foundation-compose';
 import { stackItemTokenProcessor } from './StackItem.tokens';
 
 export const StackItem = compose<IStackItemComponent>({

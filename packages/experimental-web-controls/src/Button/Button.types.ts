@@ -1,11 +1,11 @@
-import { IComponent } from '@uifabric/foundation-compose';
+import { IComponent } from '@uifabricshared/foundation-compose';
 import { ITextProps } from '../Text/index';
 import { IPressableState, IPressableProps } from '../Pressable/index';
-import { IComponentSettings } from '@uifabric/foundation-settings';
+import { IComponentSettings } from '@uifabricshared/foundation-settings';
 import { IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, ITextTokens } from '../tokens/index';
 import { IImageProps } from '../htmlTypes';
 import { IStackProps } from '../Stack/index';
-import { IRenderData } from '@uifabric/foundation-composable';
+import { IRenderData } from '@uifabricshared/foundation-composable';
 
 export interface IButtonInfo extends IPressableState {
   // whether this button is disabled
