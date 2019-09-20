@@ -4,7 +4,7 @@ import { buildStackRootStyles, buildStackInnerStyles } from './Stack.styles';
 import { IStackComponent, IStackRenderData, IStackSlotProps } from './Stack.types';
 import { StackItem } from './StackItem/StackItem';
 import { compose } from '@uifabric/foundation-compose';
-import { withSlots, ISlots } from '@uifabric/foundation-composable';
+import { withSlots, ISlots, atomicUsePrepareProps } from '@uifabric/foundation-composable';
 
 const render: IStackComponent['render'] = (
   Slots: ISlots<IStackSlotProps>,
@@ -32,6 +32,7 @@ export const Stack = compose<IStackComponent>({
   displayName: 'Stack',
   settings: ['RNFStack'],
   statics: StackStatics,
+  usePrepareProps: atomicUsePrepareProps,
   slots: {
     root: { slotType: 'div', styleFactories: [buildStackRootStyles] },
     inner: { slotType: 'div', styleFactories: [buildStackInnerStyles] }

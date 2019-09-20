@@ -1,5 +1,5 @@
 import { IComponentSettings, IStyleProp } from '@uifabric/foundation-settings';
-import { IComponent, IRenderData } from '@uifabric/foundation-compose';
+import { IComponent } from '@uifabric/foundation-compose';
 import { ICSSStyle } from '../../htmlTypes';
 
 /**
@@ -56,5 +56,4 @@ export type IStackItemSettings = IComponentSettings<{
   root: IStackItemProps;
 }>;
 
-export type IStackItemComponent = IComponent<IStackItemProps, IStackItemSettings>;
-export type IStackItemRenderData = IRenderData<IStackItemProps, IStackItemSettings>;
+export type IStackItemComponent = IComponent<IStackItemProps>;

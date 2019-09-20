@@ -1,9 +1,10 @@
-import { IComponent, IComponentReturnType, IExtractSettingsType } from './Component.types';
-import { composable, INativeSlotType } from '@uifabric/foundation-composable';
+import { IComponent, IComponentReturnType, IComponentBase } from './Component.types';
+import { composable, INativeSlotType, IComposable } from '@uifabric/foundation-composable';
 import { ITheme } from '@uifabric/theming';
 import { ISettingsEntry } from '@uifabric/custom-settings';
-import { initializeStyling, getOptionsFromObj } from './useStyling';
+import { initializeStyling, getOptionsFromObj, IStylingSettings } from './useStyling';
 import { immutableMerge } from '@uifabric/immutable-merge';
+import { ISlotProps } from '@uifabric/foundation-settings';
 
 /**
  * Merge current and base options together to form the new object definition.  These objects will merge with the
@@ -12,7 +13,7 @@ import { immutableMerge } from '@uifabric/immutable-merge';
  * @param inputComponent - input component
  * @param base - component to use as a baseline (if it exists)
  */
-function _getComponentOptions<TComponent extends IComponent>(inputComponent: Partial<TComponent>, base?: TComponent): TComponent {
+function _getComponentOptions<TComponent extends IComponent<object>>(inputComponent: Partial<TComponent>, base?: TComponent): TComponent {
   if (base) {
     const mergedSettings = { settings: [].concat(base.settings || [], inputComponent.settings || []).filter(v => v) } as TComponent;
     return immutableMerge(base, inputComponent, mergedSettings) as TComponent;
@@ -28,28 +29,33 @@ function _getComponentOptions<TComponent extends IComponent>(inputComponent: Par
  * @param inputComponent - component definition for the component to be created.  See IComponent for more details.
  * @param base - optional base component to compose, this can be an intrinsic, a stock element, or another composable
  */
-
-export function compose<TComponent extends IComponent<any>>(
+export function compose<TComponent extends IComponentBase>(
   inputComponent: Partial<TComponent>,
   base?: INativeSlotType
 ): IComponentReturnType<TComponent> {
+  type ILProps = NonNullable<TComponent['propsType']>;
+  type ILSlotProps = ISlotProps<ILProps>;
+  type ILSettings = NonNullable<TComponent['settingsType']>;
+  type ILState = NonNullable<TComponent['stateType']>;
+  type ILocalComponent = IComponent<ILProps, ILProps, ILSlotProps, ILState, TComponent['statics']>;
+
   // get merged options for the component
-  const options = _getComponentOptions(inputComponent, base && getOptionsFromObj(base));
+  const options = (_getComponentOptions(inputComponent, base && getOptionsFromObj(base)) as unknown) as ILocalComponent;
 
   // set up the styling injection function
-  options.useStyling = initializeStyling(options, options.displayName);
+  options.useStyling = initializeStyling<ILProps, ILSlotProps>(options as IStylingSettings<ILProps, ILSlotProps>, options.displayName);
 
   // use composable to create the function implementation
-  const Component = composable(options) as IComponentReturnType<TComponent>;
+  const Component = composable((options as unknown) as IComposable<ILProps, ILSlotProps, ILState>) as IComponentReturnType<TComponent>;
 
   // attach extra information to the returned function component
   Component.displayName = options.displayName;
   Object.assign(Component, options.statics);
 
   // set up the customize handler
-  Component.customize = (...settings: ISettingsEntry<IExtractSettingsType<TComponent>, ITheme>[]) => {
+  Component.customize = (...settings: ISettingsEntry<ILSettings, ITheme>[]) => {
     return compose(
-      { settings } as Partial<TComponent>,
+      ({ settings } as unknown) as Partial<TComponent>,
       Component
     ) as IComponentReturnType<TComponent>;
   };

@@ -1,31 +1,48 @@
 /** @jsx withSlots */
-import { IButtonComponent, IButtonSlots, IButtonRenderData } from './Button.types';
-import { compose } from '@uifabric/foundation-compose';
+import { IButtonComponent, IButtonSlots, IButtonRenderData, IButtonCustomizableProps, IButtonState } from './Button.types';
+import { compose, IUseOpinionatedStyling } from '@uifabric/foundation-compose';
 // import { Stack } from '../Stack';
 import { Text } from '../Text/index';
-import { finalizer, themeQueryInputs, usePrepareState, view } from './Button.helpers';
 import { loadButtonSettings } from './Button.settings';
 import { Stack } from '../Stack/index';
 import { textTokens, borderTokens } from '../tokens';
 import { backgroundColorTokens, foregroundColorTokens, getPaletteFromTheme } from '../tokens/ColorTokens';
 import { ISlots, withSlots } from '@uifabric/foundation-composable';
+import { useAsPressable } from '../Pressable';
+import { mergeSettings } from '@uifabric/foundation-settings';
 
 loadButtonSettings();
-
-export function view(result: IAsResolved<IButtonRenderData>, ...children: React.ReactNode[]): JSX.Element | null {
-  const slots = result.slots!;
-  const info = result.state.info;
-  const additionalChildren = children || [result.props.children];
-
-  return renderSlot(slots.root, info.icon && renderSlot(slots.icon), info.content && renderSlot(slots.content), ...additionalChildren);
-}
 
 export const Button = compose<IButtonComponent>({
   displayName: 'Button',
   settings: ['RNFButton'],
-  usePrepareState,
-  themeQueryInputs,
-  finalizer,
+  usePrepareProps: (userProps: IButtonCustomizableProps, useStyling: IUseOpinionatedStyling<IButtonCustomizableProps, IButtonSlots>) => {
+    const { icon, content, ...rest } = userProps;
+    // attach the pressable state handlers
+    const pressable = useAsPressable(rest);
+
+    // set up state
+    const state: IButtonState = {
+      info: {
+        ...pressable.state,
+        disabled: userProps.disabled,
+        content: !!content,
+        icon: !!icon
+      }
+    };
+
+    // grab the styling information, referencing the state as well as the props
+    const styleProps = useStyling(userProps, override => state.info[override] || userProps[override]);
+
+    // create the merged slot props
+    const slotProps = mergeSettings<IButtonSlots>(styleProps, {
+      root: pressable.props,
+      content: { children: content },
+      icon: { children: icon }
+    });
+
+    return { slotProps, state };
+  },
   render: (Slots: ISlots<IButtonSlots>, renderData: IButtonRenderData, ...children: React.ReactNode[]) => {
     const info = renderData.state.info;
     return (

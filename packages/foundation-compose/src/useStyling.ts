@@ -30,29 +30,8 @@ export interface IStylingSettings<TProps extends object, TSlotProps extends ISlo
   resolvedTokens?: IComponentTokens<TProps, ITheme>;
 }
 
-function _getHasToken<TProps extends object, TSlotProps extends ISlotProps<TProps>>(
-  slots: IStylingSettings<TProps, TSlotProps>['slots']
-): ITargetHasToken {
-  const slotTokens: { [key: string]: IComponentTokens<TProps, ITheme>['tokenKeys'] | undefined } = {};
-  Object.keys(slots).forEach(slot => {
-    const options = getOptionsFromObj(slots[slot].slotType);
-    slotTokens[slot] = (options && options.resolvedTokens && options.resolvedTokens.tokenKeys) || undefined;
-  });
-  return (target: string, key: string) => {
-    return slotTokens[target] && slotTokens[target].hasOwnProperty(key);
-  };
-}
-
-function _nameFromSettings<TProps extends object, TSlotProps extends ISlotProps<TProps>>(
-  styleSettings: IStylingSettings<TProps, TSlotProps>
-): string | undefined {
-  const settings = styleSettings.settings;
-  const names: string[] = settings.filter(v => typeof v === 'string').map(v => v as string);
-  return names && names.length > 0 ? names.join('-') : undefined;
-}
-
 /* tslint:disable-next-line no-any */
-export function getOptionsFromObj<TComponent extends IComponent = IComponent>(obj: any): TComponent | undefined {
+export function getOptionsFromObj<TComponent extends IComponent<object> = IComponent<object>>(obj: any): TComponent | undefined {
   const objType = obj && typeof obj;
   return ((objType === 'object' || objType === 'function') && (obj as IWithComposable<object, TComponent>).__composable) || undefined;
 }
@@ -108,4 +87,25 @@ function _getComponentCache(cacheKey: symbol, theme: ITheme): { [key: string]: I
 
 function _getSettingsFromTheme(theme: ITheme, name: string): IComponentSettings {
   return getSettings(theme, name).settings;
+}
+
+function _getHasToken<TProps extends object, TSlotProps extends ISlotProps<TProps>>(
+  slots: IStylingSettings<TProps, TSlotProps>['slots']
+): ITargetHasToken {
+  const slotTokens: { [key: string]: IComponentTokens<TProps, ITheme>['tokenKeys'] | undefined } = {};
+  Object.keys(slots).forEach(slot => {
+    const options = getOptionsFromObj(slots[slot].slotType);
+    slotTokens[slot] = (options && options.resolvedTokens && options.resolvedTokens.tokenKeys) || undefined;
+  });
+  return (target: string, key: string) => {
+    return slotTokens[target] && slotTokens[target].hasOwnProperty(key);
+  };
+}
+
+function _nameFromSettings<TProps extends object, TSlotProps extends ISlotProps<TProps>>(
+  styleSettings: IStylingSettings<TProps, TSlotProps>
+): string | undefined {
+  const settings = styleSettings.settings;
+  const names: string[] = settings.filter(v => typeof v === 'string').map(v => v as string);
+  return names && names.length > 0 ? names.join('-') : undefined;
 }

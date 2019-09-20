@@ -10,17 +10,18 @@
  */
 'use strict';
 
-import { compose } from '@uifabric/foundation-compose';
-import { IPressableComponent } from './Pressable.props';
-import { useWebPressable } from './useAsPressable';
+import { atomic, IUseStyling } from '@uifabric/foundation-composable';
+import { IPressableProps } from './Pressable.props';
+import { useAsPressable } from './useAsPressable';
+import { mergeSettings } from '@uifabric/foundation-settings';
 
-export const Pressable = compose<IPressableComponent>({
-  displayName: 'Pressable',
-  settings: ['RNFPressable'],
-  usePrepareProps: useWebPressable,
-  slots: {
-    root: { slotType: 'div' }
-  }
+export const Pressable = atomic<IPressableProps>('div', (userProps: IPressableProps, useStyling: IUseStyling<IPressableProps>) => {
+  const { props, state, setState } = useAsPressable(userProps);
+  const styleProps = useStyling(props);
+  return {
+    slotProps: mergeSettings(styleProps, { root: props }),
+    state: { state, setState }
+  };
 });
 
 export default Pressable;

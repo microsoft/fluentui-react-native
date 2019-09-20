@@ -43,7 +43,7 @@ function createSlotRenderInfo<TProps extends object, TSlotProps extends ISlotPro
   slotInfo?: ISlotWithFilter
 ): ISlotRenderInfo<TProps, TSlotProps, TState> {
   const renderInfo: ISlotRenderInfo<TProps, TSlotProps, TState> = { composable, slotInfo };
-  const { slots } = composable;
+  const slots = composable && composable.slots;
   if (slots) {
     const Slots = (renderInfo.Slots = {} as ISlots<TSlotProps>);
     const childInfo = (renderInfo.childInfo = {});
@@ -79,8 +79,12 @@ function useUpdateRenderData<TProps extends object, TSlotProps extends ISlotProp
   info: ISlotRenderInfo<TProps, TSlotProps, TState>
 ): { renderData: IRenderData<TSlotProps, TState>; Slots: ISlots<TSlotProps> } {
   // update the render data for this level of the hierarchy
-  const { usePrepareProps, useStyling } = info.composable;
-  info.renderData = usePrepareProps(props, useStyling) || {};
+  if (info.composable) {
+    const { usePrepareProps, useStyling } = info.composable;
+    info.renderData = usePrepareProps(props, useStyling) || {};
+  } else {
+    info.renderData = { slotProps: ({ root: props } as unknown) as TSlotProps };
+  }
 
   // now traverse to children if needed
   const childInfo = info.childInfo;
