@@ -1,7 +1,10 @@
 # Build pipeline for publishing
 
 trigger:
-- master
+  batch: true
+  branches:
+    include:
+    - master
 
 pr: none
 
