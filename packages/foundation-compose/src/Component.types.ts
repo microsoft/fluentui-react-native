@@ -45,7 +45,7 @@ export interface IComponent<
   TInternalProps extends TProps = TProps,
   TSlotProps extends ISlotProps<TInternalProps> = ISlotProps<TInternalProps>,
   TState extends object = any,
-  TStatics extends object = object
+  TStatics extends object = any
 > extends Omit<IComposableDefinition<TInternalProps, TSlotProps, TState>, 'slots'>, IStylingSettings<TInternalProps, TSlotProps> {
   /**
    * Add an additional option to use styling to allow for injecting override lookup functions

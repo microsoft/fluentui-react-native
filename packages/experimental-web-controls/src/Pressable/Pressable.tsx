@@ -11,22 +11,13 @@
 'use strict';
 
 import { compose } from '@uifabric/foundation-compose';
-import { IPressableComponent, IPressableRenderData } from './Pressable.props';
-import { mergeSettings } from '@uifabric/foundation-settings';
+import { IPressableComponent } from './Pressable.props';
 import { useWebPressable } from './useAsPressable';
-
-function finalizer(renderData: IPressableRenderData): IPressableRenderData {
-  const { state, props } = renderData;
-  const extraStyle = props.renderStyle ? props.renderStyle(state.state) : {};
-  renderData.slotProps = mergeSettings(renderData.slotProps, { root: renderData.props }, { root: { style: extraStyle } });
-  return renderData;
-}
 
 export const Pressable = compose<IPressableComponent>({
   displayName: 'Pressable',
   settings: ['RNFPressable'],
-  usePrepareState: useWebPressable,
-  finalizer,
+  usePrepareProps: useWebPressable,
   slots: {
     root: { slotType: 'div' }
   }

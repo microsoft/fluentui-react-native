@@ -1,4 +1,5 @@
-import { IButtonComponent } from './Button.types';
+/** @jsx withSlots */
+import { IButtonComponent, IButtonSlots, IButtonRenderData } from './Button.types';
 import { compose } from '@uifabric/foundation-compose';
 // import { Stack } from '../Stack';
 import { Text } from '../Text/index';
@@ -7,8 +8,17 @@ import { loadButtonSettings } from './Button.settings';
 import { Stack } from '../Stack/index';
 import { textTokens, borderTokens } from '../tokens';
 import { backgroundColorTokens, foregroundColorTokens, getPaletteFromTheme } from '../tokens/ColorTokens';
+import { ISlots, withSlots } from '@uifabric/foundation-composable';
 
 loadButtonSettings();
+
+export function view(result: IAsResolved<IButtonRenderData>, ...children: React.ReactNode[]): JSX.Element | null {
+  const slots = result.slots!;
+  const info = result.state.info;
+  const additionalChildren = children || [result.props.children];
+
+  return renderSlot(slots.root, info.icon && renderSlot(slots.icon), info.content && renderSlot(slots.content), ...additionalChildren);
+}
 
 export const Button = compose<IButtonComponent>({
   displayName: 'Button',
@@ -16,11 +26,16 @@ export const Button = compose<IButtonComponent>({
   usePrepareState,
   themeQueryInputs,
   finalizer,
-  view,
-  // this is an alternative to the above, it moves the declarations to be slot by slot.  This is kind of what is built up
-  // internally in the automatic processor function and has the advantage of being able to easily add a slot and define additional
-  // mappings.  There is a question of how a custom processor like above would fit in but maybe that isn't even needed in most
-  // cases
+  render: (Slots: ISlots<IButtonSlots>, renderData: IButtonRenderData, ...children: React.ReactNode[]) => {
+    const info = renderData.state.info;
+    return (
+      <Slots.root>
+        {info.icon && <Slots.icon />}
+        {info.content && <Slots.content />}
+        {...children}
+      </Slots.root>
+    );
+  },
   slots: {
     root: {
       slotType: Stack,

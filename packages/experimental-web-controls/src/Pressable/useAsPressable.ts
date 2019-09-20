@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { IPressableRenderData, IPressableState, IWithOnStateChange } from './Pressable.props';
+import { IPressableRenderData, IPressableState, IWithOnStateChange, IPressableProps, IPressableSlotProps } from './Pressable.props';
 import { IDivProps } from '../htmlTypes';
+import { IUseOpinionatedStyling } from '@uifabric/foundation-compose';
+import { mergeSettings } from '@uifabric/foundation-settings';
 
 export function useAsPressable(
   props: IWithOnStateChange<IDivProps>
@@ -35,9 +37,12 @@ export function useAsPressable(
   return { props: newProps, state, setState: onSetState };
 }
 
-export function useWebPressable(data: IPressableRenderData): IPressableRenderData {
-  const { props, state, setState } = useAsPressable(data.props);
-  data.state = { state, setState };
-  data.props = props;
-  return data;
+export function useWebPressable(
+  inputProps: IPressableProps,
+  useStyling: IUseOpinionatedStyling<IPressableProps, IPressableSlotProps>
+): IPressableRenderData {
+  const { props, state, setState } = useAsPressable(inputProps);
+  const styleSlotProps = useStyling(inputProps);
+  const slotProps = mergeSettings<IPressableSlotProps>(styleSlotProps, { root: props }, { root: inputProps });
+  return { slotProps, state: { state, setState } };
 }

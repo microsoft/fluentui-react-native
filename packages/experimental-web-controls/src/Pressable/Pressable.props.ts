@@ -1,6 +1,7 @@
-import { IComponent, IRenderData } from '@uifabric/foundation-compose';
-import { IComponentSettings, IStyleProp } from '@uifabric/foundation-settings';
+import { IComponent } from '@uifabric/foundation-compose';
+import { IComponentSettings, IStyleProp, ISlotProps } from '@uifabric/foundation-settings';
 import { IDivProps, ICSSStyle } from '../htmlTypes';
+import { IRenderData } from '@uifabric/foundation-composable';
 
 /**
  * Used by IRenderChild, it simply describes a function that takes
@@ -52,6 +53,6 @@ export interface IPressableProps extends IDivProps {
   onStateChange?: (newState: IPressableState) => void;
 }
 
-export type IPressableSettings = IComponentSettings<{ root: IPressableProps }>;
-export type IPressableRenderData = IRenderData<IPressableProps, IPressableSettings, IPressableHooks>;
-export type IPressableComponent = IComponent<IPressableProps, IPressableSettings, IPressableProps, IPressableHooks>;
+export type IPressableSlotProps = ISlotProps<IPressableProps>;
+export type IPressableComponent = IComponent<IPressableProps, IPressableProps, IPressableSlotProps, IPressableHooks>;
+export type IPressableRenderData = IRenderData<IPressableSlotProps, IPressableHooks>;

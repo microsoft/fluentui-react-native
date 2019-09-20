@@ -33,14 +33,14 @@ export interface IComposable<TProps extends object, TSlotProps extends ISlotProp
   slots: ISlotDefinitions<TSlotProps>;
 }
 
-export type IComposableDefinition<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object> = Partial<
+export type IComposableDefinition<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = any> = Partial<
   IComposable<TProps, TSlotProps, TState>
 >;
 
 /**
  * data returned from prop preparation which will be handed to render
  */
-export interface IRenderData<TSlotProps extends ISlotProps, TState = object> {
+export interface IRenderData<TSlotProps extends ISlotProps, TState = any> {
   slotProps?: TSlotProps;
   state?: TState;
 }

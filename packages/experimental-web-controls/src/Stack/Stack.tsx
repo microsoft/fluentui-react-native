@@ -1,20 +1,27 @@
+/** @jsx withSlots */
 import * as React from 'react';
 import { buildStackRootStyles, buildStackInnerStyles } from './Stack.styles';
-import { IStackComponent, IStackRenderData } from './Stack.types';
+import { IStackComponent, IStackRenderData, IStackSlotProps } from './Stack.types';
 import { StackItem } from './StackItem/StackItem';
 import { compose } from '@uifabric/foundation-compose';
-import { renderSlot, IAsResolved } from '@uifabric/foundation-composable';
+import { withSlots, ISlots } from '@uifabric/foundation-composable';
 
-const view: IStackComponent['view'] = (renderData: IAsResolved<IStackRenderData>, ...children: React.ReactNode[]) => {
-  const { props, slots } = renderData;
-  const { wrap } = props;
-  const inputChildren = children || props.children;
+const render: IStackComponent['render'] = (
+  Slots: ISlots<IStackSlotProps>,
+  renderData: IStackRenderData,
+  ...children: React.ReactNode[]
+) => {
+  const wrap = renderData.slotProps && renderData.slotProps.root.wrap;
 
   if (wrap) {
-    return renderSlot(slots.root, renderSlot(slots.inner, inputChildren));
+    return (
+      <Slots.root>
+        <Slots.inner>{children}</Slots.inner>
+      </Slots.root>
+    );
   }
 
-  return renderSlot(slots.root, inputChildren);
+  return <Slots.root>{children}</Slots.root>;
 };
 
 const StackStatics = {
@@ -29,7 +36,7 @@ export const Stack = compose<IStackComponent>({
     root: { slotType: 'div', styleFactories: [buildStackRootStyles] },
     inner: { slotType: 'div', styleFactories: [buildStackInnerStyles] }
   },
-  view
+  render
 });
 
 export default Stack;

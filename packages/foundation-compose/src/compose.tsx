@@ -29,7 +29,7 @@ function _getComponentOptions<TComponent extends IComponent>(inputComponent: Par
  * @param base - optional base component to compose, this can be an intrinsic, a stock element, or another composable
  */
 
-export function compose<TComponent extends IComponent>(
+export function compose<TComponent extends IComponent<any>>(
   inputComponent: Partial<TComponent>,
   base?: INativeSlotType
 ): IComponentReturnType<TComponent> {
