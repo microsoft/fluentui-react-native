@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Get new compose infrastructure working",
+  "packageName": "@uifabricshared/foundation-composable",
+  "email": "jasonmo@microsoft.com",
+  "commit": "1a7233eb95ebc19348d10d145cc551627948cbc3",
+  "date": "2019-09-20T22:04:40.679Z"
+}
