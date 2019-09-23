@@ -32,5 +32,8 @@
     "@types/jest": "^19.2.2",
     "json5": "2.1.0",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
+  },
+  "beachball": {
+    "disallowedChangeTypes": ["major"]
   }
 }
