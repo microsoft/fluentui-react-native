@@ -1,0 +1,8 @@
+{
+  "type": "none",
+  "comment": "Disallow major changes",
+  "packageName": "@uifabricshared/foundation-tokens",
+  "email": "taamireh@microsoft.com",
+  "commit": "30c4e1f286520bd98c5f4fcd2f83a2559d0a7e71",
+  "date": "2019-09-23T18:21:03.080Z"
+}

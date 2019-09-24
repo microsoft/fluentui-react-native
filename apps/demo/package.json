@@ -36,6 +36,7 @@
     "@uifabricshared/eslint-config-rules": "^0.1.1"
   },
   "beachball": {
-    "shouldPublish": false
+    "shouldPublish": false,
+    "disallowedChangeTypes": ["major"]
   }
 }
