@@ -1,4 +1,3 @@
-import { IComponent } from '@uifabricshared/foundation-compose';
 import { IComponentSettings, IStyleProp } from '@uifabricshared/foundation-settings';
 import { ITextTokens, IForegroundColorTokens } from '../tokens/index';
 import { ICSSStyle } from '../htmlTypes';
@@ -18,5 +17,4 @@ export interface ITextSlotProps {
 }
 
 export type ITextSettings = IComponentSettings<ITextSlotProps>;
-export type ITextComponent = IComponent<ITextProps>;
 export type ITextRenderData = IRenderData<ITextSlotProps>;

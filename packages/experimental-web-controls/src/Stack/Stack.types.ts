@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { ITextTokens, IBackgroundColorTokens, IBorderTokens } from '../tokens/index';
 import { IComponentSettings } from '@uifabricshared/foundation-settings';
-import { IComponent } from '@uifabricshared/foundation-compose';
 import { IDivProps } from '../htmlTypes';
 import { IStackItemProps } from './StackItem/StackItem.types';
 import { IRenderData } from '@uifabricshared/foundation-composable';
@@ -135,5 +134,4 @@ export interface IStackStatics {
   Item: React.FunctionComponent<IStackItemProps>;
 }
 
-export type IStackComponent = IComponent<IStackProps, IStackProps, IStackSlotProps, object, IStackStatics>;
 export type IStackRenderData = IRenderData<IStackSlotProps>;

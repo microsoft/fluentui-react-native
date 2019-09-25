@@ -1,11 +1,11 @@
-import { ITextComponent } from './Text.types';
+import { ITextProps } from './Text.types';
 import { compose } from '@uifabricshared/foundation-compose';
 import { foregroundColorTokens, textTokens } from '../tokens/index';
 import { loadTextSettings } from './Text.settings';
 
 loadTextSettings();
 
-export const Text = compose<ITextComponent>({
+export const Text = compose<ITextProps>({
   displayName: 'Text',
   settings: ['RNFText'],
   slots: {

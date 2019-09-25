@@ -1,4 +1,3 @@
-import { IComponent } from '@uifabricshared/foundation-compose';
 import { ITextProps } from '../Text/index';
 import { IPressableState, IPressableProps } from '../Pressable/index';
 import { IComponentSettings } from '@uifabricshared/foundation-settings';
@@ -87,5 +86,4 @@ export type IButtonSlots = {
 };
 export type IButtonSettings = IComponentSettings<IButtonSlots>;
 
-export type IButtonComponent = IComponent<IButtonProps, IButtonCustomizableProps, IButtonSlots, IButtonState>;
 export type IButtonRenderData = IRenderData<IButtonSlots, IButtonState>;

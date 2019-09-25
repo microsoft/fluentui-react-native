@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { IButtonComponent, IButtonSlots, IButtonRenderData, IButtonCustomizableProps, IButtonState } from './Button.types';
+import { IButtonSlots, IButtonRenderData, IButtonCustomizableProps, IButtonState, IButtonProps } from './Button.types';
 import { compose, IUseOpinionatedStyling } from '@uifabricshared/foundation-compose';
 // import { Stack } from '../Stack';
 import { Text } from '../Text/index';
@@ -13,10 +13,10 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 
 loadButtonSettings();
 
-export const Button = compose<IButtonComponent>({
+export const Button = compose<IButtonProps, IButtonSlots, IButtonState>({
   displayName: 'Button',
   settings: ['RNFButton'],
-  usePrepareProps: (userProps: IButtonCustomizableProps, useStyling: IUseOpinionatedStyling<IButtonCustomizableProps, IButtonSlots>) => {
+  usePrepareProps: (userProps: IButtonCustomizableProps, useStyling: IUseOpinionatedStyling<IButtonSlots>) => {
     const { icon, content, ...rest } = userProps;
     // attach the pressable state handlers
     const pressable = useAsPressable(rest);

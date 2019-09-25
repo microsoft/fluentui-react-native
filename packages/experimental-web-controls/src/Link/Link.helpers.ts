@@ -30,7 +30,7 @@ export function useAsLink(props: IWithOnStateChange<IDivProps>): retProp {
 
 export function useLinkPrepareProps(
   userProps: ILinkCustomizableProps,
-  useStyling: IUseOpinionatedStyling<ILinkCustomizableProps, ILinkSlotProps>
+  useStyling: IUseOpinionatedStyling<ILinkSlotProps>
 ): ILinkRenderData {
   // create the Link state/info once, re-renders happen with pressable state changes so this is storage
   const { props, state } = useAsPressable(userProps);

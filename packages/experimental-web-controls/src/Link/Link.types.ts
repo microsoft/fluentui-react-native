@@ -1,4 +1,3 @@
-import { IComponent } from '@uifabricshared/foundation-compose';
 import { IComponentSettings } from '@uifabricshared/foundation-settings';
 import { IForegroundColorTokens, ITextTokens } from '../tokens';
 import { IPressableProps, IPressableState } from '../Pressable';
@@ -38,5 +37,4 @@ export type ILinkSlotProps = {
 };
 
 export type ILinkSettings = IComponentSettings<ILinkSlotProps>;
-export type ILinkComponent = IComponent<ILinkProps, ILinkCustomizableProps, ILinkSlotProps, ILinkState>;
 export type ILinkRenderData = IRenderData<ILinkSlotProps, ILinkState>;
