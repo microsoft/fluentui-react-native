@@ -4,7 +4,7 @@ import { ILinkRenderData, ILinkState, ILinkCustomizableProps, ILinkSlotProps } f
 import { IDivProps } from '../htmlTypes';
 import { useAsPressable, IWithOnStateChange, usePressableStateChange } from '../Pressable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { IUseOpinionatedStyling } from '@uifabricshared/foundation-compose';
+import { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 
 export type retProp = { linkProps: IWithOnStateChange<IDivProps>; linkState: ILinkState; setState: (partial: ILinkState) => void };
 
@@ -28,10 +28,7 @@ export function useAsLink(props: IWithOnStateChange<IDivProps>): retProp {
   return { linkProps: newProps, linkState: state, setState: onSetState };
 }
 
-export function useLinkPrepareProps(
-  userProps: ILinkCustomizableProps,
-  useStyling: IUseOpinionatedStyling<ILinkSlotProps>
-): ILinkRenderData {
+export function useLinkPrepareProps(userProps: ILinkCustomizableProps, useStyling: IUseComposeStyling<ILinkSlotProps>): ILinkRenderData {
   // create the Link state/info once, re-renders happen with pressable state changes so this is storage
   const { props, state } = useAsPressable(userProps);
   const { linkProps, linkState } = useAsLink(props);

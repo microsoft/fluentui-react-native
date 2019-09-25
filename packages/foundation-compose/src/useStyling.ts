@@ -5,7 +5,7 @@ import { ITheme, getSettings, returnAsSlotProps } from '@uifabricshared/theming-
 import { IComponentTokens, processTokens, ITargetHasToken, buildComponentTokens } from '@uifabricshared/foundation-tokens';
 import { getTheme, ThemeContext } from '@uifabricshared/theming-react-native';
 import { IWithComposable } from '@uifabricshared/foundation-composable';
-import { IComponentOptions, IStylingSettings, IUseOpinionatedStyling } from './compose.types';
+import { IComposeOptions, IStylingSettings, IUseComposeStyling } from './compose.types';
 
 /* tslint:disable-next-line no-any */
 export function getOptionsFromObj<TComponent>(obj: any): TComponent | undefined {
@@ -31,7 +31,7 @@ function _getSettingsFromTheme(theme: ITheme, name: string): IComponentSettings 
 function _getHasToken<TSlotProps extends ISlotProps>(slots: IStylingSettings<TSlotProps>['slots']): ITargetHasToken {
   const slotTokens: { [key: string]: IComponentTokens<TSlotProps['root'], ITheme>['tokenKeys'] | undefined } = {};
   Object.keys(slots).forEach(slot => {
-    const options = <IComponentOptions<TSlotProps['root']>>getOptionsFromObj(slots[slot].slotType);
+    const options = <IComposeOptions<TSlotProps['root']>>getOptionsFromObj(slots[slot].slotType);
     slotTokens[slot] = (options && options.resolvedTokens && options.resolvedTokens.tokenKeys) || undefined;
   });
   return (target: string, key: string) => {
@@ -67,10 +67,17 @@ function useStylingCore<TSlotProps extends ISlotProps>(
   ) as TSlotProps;
 }
 
+/**
+ * return a useStyling implementation, in the form of IUseComposeStyling, based on the passed in styleSettings.  The
+ * styleSettings will be captured in the created closure and will be set up to enable the appropriate levels of caching.
+ *
+ * @param styleSettings - style settings to configure this function.  Note that this should be scoped to a single component.
+ * @param name - optional base name to use as a cache key
+ */
 export function initializeStyling<TSlotProps extends ISlotProps>(
   styleSettings: IStylingSettings<TSlotProps>,
   name?: string
-): IUseOpinionatedStyling<TSlotProps> {
+): IUseComposeStyling<TSlotProps> {
   // process the tokens and get them ready to render
   const slots = styleSettings.slots;
   styleSettings.resolvedTokens = buildComponentTokens<TSlotProps['root'], ITheme>(slots, _getHasToken(slots));

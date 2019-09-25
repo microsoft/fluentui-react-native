@@ -4,8 +4,16 @@ import { ISettingsEntry } from '@uifabricshared/themed-settings';
 import { ITheme } from '@uifabricshared/theming-ramp';
 import { ISlotStyleFactories, IComponentTokens } from '@uifabricshared/foundation-tokens';
 
-export type IUseOpinionatedStyling<TSlotProps extends ISlotProps> = (props: TSlotProps['root'], lookup?: IOverrideLookup) => TSlotProps;
+/**
+ * Function signature for useStyling as implemented by compose.  This adds the lookup function to enable
+ * more control over how overrides are applied.
+ */
+export type IUseComposeStyling<TSlotProps extends ISlotProps> = (props: TSlotProps['root'], lookup?: IOverrideLookup) => TSlotProps;
 
+/**
+ * Settings which dictate the behavior of useStyling, as implemented by the compose package.  These are
+ * separated from IComponentOptions to allow the styling portion to be used independently if so desired.
+ */
 export interface IStylingSettings<TSlotProps extends ISlotProps> {
   /**
    * slots of IComposable with added style factory options
@@ -19,15 +27,17 @@ export interface IStylingSettings<TSlotProps extends ISlotProps> {
 
   /**
    * The input tokens processed, built into functions, with the keys built into a map.
-   * -- Set Automatically
+   *
+   * This gets set automatically when the component is set up for the first time and should not be set by hand.
    */
   resolvedTokens?: IComponentTokens<TSlotProps['root'], ITheme>;
 }
 
 /**
- * Interface for defining a component to be used with compose.
+ * Options to be used with compose.  These drive the actual behavior of the component and are comprised of styling
+ * options as well as options which configure composable.
  */
-export interface IComponentOptions<
+export interface IComposeOptions<
   TProps extends object = object,
   TSlotProps extends ISlotProps = ISlotProps<TProps>,
   TState extends object = object,
@@ -36,12 +46,12 @@ export interface IComponentOptions<
   /**
    * Add an additional option to use styling to allow for injecting override lookup functions
    */
-  useStyling?: IUseOpinionatedStyling<TSlotProps>;
+  useStyling?: IUseComposeStyling<TSlotProps>;
 
   /**
    * Use prepare props will take the more opinionated version of useStyling
    */
-  usePrepareProps?: (props: TSlotProps['root'], useStyling: IUseOpinionatedStyling<TSlotProps>) => IRenderData<TSlotProps, TState>;
+  usePrepareProps?: (props: TSlotProps['root'], useStyling: IUseComposeStyling<TSlotProps>) => IRenderData<TSlotProps, TState>;
 
   /**
    * Optional display name to set on the component
@@ -49,27 +59,39 @@ export interface IComponentOptions<
   displayName?: string;
 
   /**
-   * Optional statics to attach to the component
+   * Optional statics to attach to the component.  This is primary used to attach a sub-component to a parent component
    */
   statics?: TStatics;
-
-  slotPropsType?: TSlotProps;
-  propsType?: TProps;
-  stateType?: TState;
 }
 
 /**
- *
+ * The signature of the component returned from compose.
  */
-export type IComponentReturnType<
+export type IComposeReturnType<
   TProps extends object,
   TSlotProps extends ISlotProps,
   TState extends object = object,
   TStatics extends object = object
 > = React.FunctionComponent<TProps> &
   TStatics & {
-    __composable: IComponentOptions<TProps, TSlotProps, TState, TStatics>;
+    /**
+     * composable options, used by composable for chaining objects.  For compose this also includes the extensions
+     * such as settings or token information.
+     */
+    __composable: IComposeOptions<TProps, TSlotProps, TState, TStatics>;
+
+    /**
+     * shorthand function for doing quick customizations of a component by appending to settings
+     */
     customize: (
       ...keys: ISettingsEntry<IComponentSettings<TSlotProps>, ITheme>[]
-    ) => IComponentReturnType<TProps, TSlotProps, TState, TStatics>;
+    ) => IComposeReturnType<TProps, TSlotProps, TState, TStatics>;
+
+    /**
+     * helper function to quickly add new partial options to the base component.  The primary advantage is that
+     * this is strongly typed for the component type which avoids needing to pass all the type parameters correctly.
+     */
+    compose: (
+      newOptions: Partial<IComposeOptions<TProps, TSlotProps, TState, TStatics>>
+    ) => IComposeReturnType<TProps, TSlotProps, TState, TStatics>;
   };
