@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-composable",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Composable component building blocks",
   "repository": {
     "type": "git",
@@ -31,6 +31,8 @@
     "@uifabricshared/eslint-config-rules": "^0.1.1"
   },
   "beachball": {
-    "disallowedChangeTypes": ["major"]
+    "disallowedChangeTypes": [
+      "major"
+    ]
   }
 }

@@ -24,6 +24,8 @@
   },
   "beachball": {
     "shouldPublish": false,
-    "disallowedChangeTypes": ["major"]
+    "disallowedChangeTypes": [
+      "major"
+    ]
   }
 }

@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-composable
 
-This log was last generated on Thu, 19 Sep 2019 23:21:48 GMT and should not be manually modified.
+This log was last generated on Wed, 25 Sep 2019 23:15:41 GMT and should not be manually modified.
 
+## 0.2.0
+Wed, 25 Sep 2019 23:15:41 GMT
+
+### Minor changes
+
+- Get new compose infrastructure working (jasonmo@microsoft.com)
 ## 0.1.4
 Thu, 19 Sep 2019 23:21:48 GMT
 

@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theming-react-native",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A library of functions which produce React Native styles from a Theme",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -35,6 +35,8 @@
     "react": "16.8.3"
   },
   "beachball": {
-    "disallowedChangeTypes": ["major"]
+    "disallowedChangeTypes": [
+      "major"
+    ]
   }
 }
