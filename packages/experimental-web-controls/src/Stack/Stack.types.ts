@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { ITextTokens, IBackgroundColorTokens, IBorderTokens } from '../tokens/index';
 import { IComponentSettings } from '@uifabricshared/foundation-settings';
-import { IComponent, IRenderData } from '@uifabricshared/foundation-compose';
 import { IDivProps } from '../htmlTypes';
 import { IStackItemProps } from './StackItem/StackItem.types';
+import { IRenderData } from '@uifabricshared/foundation-composable';
 
 /**
  * Defines a type made by the union of the different values that the align-items and justify-content flexbox
@@ -124,14 +124,14 @@ export interface IStackTokens extends ITextTokens, IBackgroundColorTokens, IBord
   padding?: number | string;
 }
 
-export type IStackSettings = IComponentSettings<{
+export type IStackSlotProps = {
   root: IStackProps;
   inner: IDivProps;
-}>;
+};
+export type IStackSettings = IComponentSettings<IStackSlotProps>;
 
 export interface IStackStatics {
   Item: React.FunctionComponent<IStackItemProps>;
 }
 
-export type IStackComponent = IComponent<IStackProps, IStackSettings, IStackProps, any, IStackStatics>;
-export type IStackRenderData = IRenderData<IStackProps, IStackSettings>;
+export type IStackRenderData = IRenderData<IStackSlotProps>;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IPressableRenderData, IPressableState, IWithOnStateChange } from './Pressable.props';
+import { IPressableState, IWithOnStateChange } from './Pressable.props';
 import { IDivProps } from '../htmlTypes';
 
 export function usePressableStateChange<StateType, PropsType extends Record<string, any>>(
@@ -44,11 +44,4 @@ export function useAsPressable(
   };
 
   return { props: newProps, state, setState: onSetState };
-}
-
-export function useWebPressable(data: IPressableRenderData): IPressableRenderData {
-  const { props, state, setState } = useAsPressable(data.props);
-  data.state = { state, setState };
-  data.props = props;
-  return data;
 }

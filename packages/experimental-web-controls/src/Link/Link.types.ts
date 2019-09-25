@@ -1,8 +1,8 @@
-import { IComponent, IRenderData } from '@uifabricshared/foundation-compose';
 import { IComponentSettings } from '@uifabricshared/foundation-settings';
 import { IForegroundColorTokens, ITextTokens } from '../tokens';
 import { IPressableProps, IPressableState } from '../Pressable';
 import { ITextProps } from '../Text';
+import { IRenderData } from '@uifabricshared/foundation-composable';
 
 /**
  * Properties for fabric native Link
@@ -37,5 +37,4 @@ export type ILinkSlotProps = {
 };
 
 export type ILinkSettings = IComponentSettings<ILinkSlotProps>;
-export type ILinkComponent = IComponent<ILinkProps, ILinkSettings, ILinkCustomizableProps, ILinkState>;
-export type ILinkRenderData = IRenderData<ILinkCustomizableProps, ILinkSettings, ILinkState>;
+export type ILinkRenderData = IRenderData<ILinkSlotProps, ILinkState>;

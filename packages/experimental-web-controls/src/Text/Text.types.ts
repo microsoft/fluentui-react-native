@@ -1,7 +1,7 @@
-import { IComponent, IRenderData } from '@uifabricshared/foundation-compose';
 import { IComponentSettings, IStyleProp } from '@uifabricshared/foundation-settings';
 import { ITextTokens, IForegroundColorTokens } from '../tokens/index';
 import { ICSSStyle } from '../htmlTypes';
+import { IRenderData } from '@uifabricshared/foundation-composable';
 
 /**
  * Properties for fabric native text field, these extend the default props for text
@@ -17,5 +17,4 @@ export interface ITextSlotProps {
 }
 
 export type ITextSettings = IComponentSettings<ITextSlotProps>;
-export type ITextComponent = IComponent<ITextProps, ITextSettings>;
-export type ITextRenderData = IRenderData<ITextProps, ITextSettings>;
+export type ITextRenderData = IRenderData<ITextSlotProps>;

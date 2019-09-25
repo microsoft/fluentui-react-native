@@ -1,3 +1,3 @@
-export * from './Component.types';
-export * from './Component';
+export * from './compose.types';
 export * from './compose';
+export { initializeStyling } from './useStyling';

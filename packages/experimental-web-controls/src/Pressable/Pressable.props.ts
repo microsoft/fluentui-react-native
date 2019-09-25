@@ -1,5 +1,4 @@
-import { IComponent, IRenderData } from '@uifabricshared/foundation-compose';
-import { IComponentSettings, IStyleProp } from '@uifabricshared/foundation-settings';
+import { IStyleProp } from '@uifabricshared/foundation-settings';
 import { IDivProps, ICSSStyle } from '../htmlTypes';
 
 /**
@@ -51,7 +50,3 @@ export interface IPressableProps extends IDivProps {
   renderStyle?: IRenderStyle<IPressableState, ICSSStyle>;
   onStateChange?: (newState: IPressableState) => void;
 }
-
-export type IPressableSettings = IComponentSettings<{ root: IPressableProps }>;
-export type IPressableRenderData = IRenderData<IPressableProps, IPressableSettings, IPressableHooks>;
-export type IPressableComponent = IComponent<IPressableProps, IPressableSettings, IPressableProps, IPressableHooks>;
