@@ -96,46 +96,6 @@ export function mergeSettingsCollection<TCollection extends IComponentSettingsCo
   return immutableMergeCore(_mergeCollectionOptions, ...collections) as TCollection;
 }
 
-/**
- * Walk the chain of parents, calling the visitor function on each one
- */
-function visitSettingsHierarchyDepthFirst(
-  collection: IComponentSettingsCollection,
-  target: string | IComponentSettings,
-  visitor: (settings: IComponentSettings) => void
-): void {
-  const isSettings = typeof target === 'object';
-  if (isSettings || collection.hasOwnProperty(target as string)) {
-    const settings = isSettings ? (target as IComponentSettings) : collection[target as string];
-
-    if (settings) {
-      //  visit parents first
-      if (settings._parent) {
-        const parents = Array.isArray(settings._parent) ? settings._parent : [settings._parent];
-        for (const parent of parents) {
-          visitSettingsHierarchyDepthFirst(collection, parent, visitor);
-        }
-      }
-
-      //  visit this layer
-      visitor(settings);
-    }
-  }
-}
-
-/**
- * Get the set of settings, in the order they should be merged, to resolve the parent chain
- *
- * @param lookup - collection to use for looking up settings
- * @param target - settings entry to use as the root of the lookup chain
- */
-export function getParentSettingsChain(lookup: IComponentSettingsCollection, target: string | IComponentSettings): IComponentSettings[] {
-  //  gather the entire settings hierarchy into an ordered array
-  const collectedSettings: IComponentSettings[] = [];
-  visitSettingsHierarchyDepthFirst(lookup, target, settings => collectedSettings.push(settings));
-  return collectedSettings;
-}
-
 export function getActiveOverrides(target: IComponentSettings, lookup?: IOverrideLookup): string[] {
   const hasOverride = typeof lookup === 'function' ? lookup : o => lookup[o];
   return (target && target._precedence && target._precedence.filter(o => hasOverride(o))) || [];
@@ -165,6 +125,6 @@ export function resolveSettingsOverrides(target: IComponentSettings, overrideLoo
  */
 export function slotPropsFromSettings(target: IComponentSettings): ISlotProps {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { _overrides, _parent, _precedence, ...slotProps } = target;
+  const { _overrides, _precedence, ...slotProps } = target;
   return slotProps as ISlotProps;
 }
