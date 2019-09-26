@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "remove _parent from component settings and stop using augment platform theme for settings",
-  "packageName": "@uifabricshared/foundation-settings",
-  "email": "jasonmo360@gmail.com",
-  "commit": "7b983871659d635b808556e002c323ad2d222269",
-  "date": "2019-09-26T08:15:52.516Z"
-}

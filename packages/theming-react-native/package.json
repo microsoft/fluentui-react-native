@@ -19,8 +19,8 @@
   "license": "MIT",
   "dependencies": {
     "@uifabricshared/theme-registry": "0.1.4",
-    "@uifabricshared/foundation-settings": "0.2.2",
-    "@uifabricshared/theming-ramp": "0.2.1"
+    "@uifabricshared/foundation-settings": "0.3.0",
+    "@uifabricshared/theming-ramp": "0.3.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

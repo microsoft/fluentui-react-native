@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Wed, 25 Sep 2019 23:15:41 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Sep 2019 19:45:56 GMT and should not be manually modified.
 
+## 1.1.1
+Thu, 26 Sep 2019 19:45:56 GMT
+
+### Patches
+
+- remove _parent from component settings and stop using augment platform theme for settings (jasonmo360@gmail.com)
 ## 1.1.0
 Wed, 25 Sep 2019 23:15:41 GMT
 

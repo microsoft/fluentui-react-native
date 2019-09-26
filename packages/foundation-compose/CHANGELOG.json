@@ -2,6 +2,20 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Thu, 26 Sep 2019 19:45:56 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.1.1",
+      "version": "1.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "remove _parent from component settings and stop using augment platform theme for settings",
+            "author": "jasonmo360@gmail.com",
+            "commit": "7b983871659d635b808556e002c323ad2d222269"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 25 Sep 2019 23:15:41 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.1.0",
       "version": "1.1.0",

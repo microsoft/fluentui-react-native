@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-settings
 
-This log was last generated on Thu, 19 Sep 2019 23:21:48 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Sep 2019 19:45:56 GMT and should not be manually modified.
 
+## 0.3.0
+Thu, 26 Sep 2019 19:45:56 GMT
+
+### Minor changes
+
+- remove _parent from component settings and stop using augment platform theme for settings (jasonmo360@gmail.com)
 ## 0.2.2
 Thu, 19 Sep 2019 23:21:48 GMT
 
