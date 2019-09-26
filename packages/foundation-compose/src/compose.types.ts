@@ -11,6 +11,16 @@ import { ISlotStyleFactories, IComponentTokens } from '@uifabricshared/foundatio
 export type IUseComposeStyling<TSlotProps extends ISlotProps> = (props: TSlotProps['root'], lookup?: IOverrideLookup) => TSlotProps;
 
 /**
+ * Array of:
+ *  IComponentSettings for the component
+ *  string - name of the entry to query in the theme
+ *  theme => IComponentSettings function
+ *
+ * These settings are layered together in order to produce the merged settings for a component
+ */
+export type IComposeSettings<TSlotProps extends ISlotProps> = ISettingsEntry<IComponentSettings<TSlotProps>, ITheme>[];
+
+/**
  * Settings which dictate the behavior of useStyling, as implemented by the compose package.  These are
  * separated from IComponentOptions to allow the styling portion to be used independently if so desired.
  */
@@ -23,7 +33,7 @@ export interface IStylingSettings<TSlotProps extends ISlotProps> {
   /**
    * settings used to build up the style definitions
    */
-  settings?: ISettingsEntry<IComponentSettings<TSlotProps>, ITheme>[];
+  settings?: IComposeSettings<TSlotProps>;
 
   /**
    * The input tokens processed, built into functions, with the keys built into a map.
@@ -83,9 +93,7 @@ export type IComposeReturnType<
     /**
      * shorthand function for doing quick customizations of a component by appending to settings
      */
-    customize: (
-      ...keys: ISettingsEntry<IComponentSettings<TSlotProps>, ITheme>[]
-    ) => IComposeReturnType<TProps, TSlotProps, TState, TStatics>;
+    customize: (...settings: IComposeSettings<TSlotProps>) => IComposeReturnType<TProps, TSlotProps, TState, TStatics>;
 
     /**
      * helper function to quickly add new partial options to the base component.  The primary advantage is that

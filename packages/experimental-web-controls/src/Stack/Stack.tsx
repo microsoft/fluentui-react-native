@@ -8,7 +8,29 @@ import { withSlots, ISlots, atomicUsePrepareProps } from '@uifabricshared/founda
 
 export const Stack = compose<IStackProps, IStackSlotProps, object, IStackStatics>({
   displayName: 'Stack',
-  settings: ['RNFStack'],
+  settings: [
+    {
+      root: {
+        style: {
+          display: 'flex',
+          flexWrap: 'nowrap',
+          width: 'auto',
+          overflow: 'visible',
+          height: '100%'
+        }
+      },
+      inner: {
+        style: {
+          display: 'flex',
+          flexWrap: 'wrap',
+          overflow: 'visible',
+          boxSizing: 'border-box',
+          maxWidth: '100vw'
+        }
+      }
+    },
+    'RNFStack'
+  ],
   statics: { Item: StackItem },
   usePrepareProps: atomicUsePrepareProps,
   slots: {

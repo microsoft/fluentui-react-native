@@ -1,6 +1,5 @@
-import { IStackSettings, IStackProps } from './Stack.types';
+import { IStackProps } from './Stack.types';
 import { parseGap, parsePadding } from './StackUtils';
-import { augmentPlatformTheme } from '@uifabricshared/theming-react-native';
 import { ITheme } from '@uifabricshared/theming-ramp';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 import { IStyleProp } from '@uifabricshared/foundation-settings';
@@ -10,34 +9,6 @@ const nameMap: { [key: string]: string } = {
   start: 'flex-start',
   end: 'flex-end'
 };
-
-export function loadStackSettings(): void {
-  const settings: IStackSettings = {
-    root: {
-      style: {
-        display: 'flex',
-        flexWrap: 'nowrap',
-        width: 'auto',
-        overflow: 'visible',
-        height: '100%'
-      }
-    },
-    inner: {
-      style: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        overflow: 'visible',
-        boxSizing: 'border-box',
-        maxWidth: '100vw'
-      }
-    }
-  };
-  augmentPlatformTheme({
-    settings: {
-      RNFStack: settings
-    }
-  });
-}
 
 function _getAlignment(
   horizontal: IStackProps['horizontal'],
@@ -139,10 +110,10 @@ function _buildRootStyles(tokenProps: IStackProps, theme: ITheme): IStackProps {
         }
       },
       grow &&
-      !wrap && {
-        flexGrow: grow === true ? 1 : grow,
-        overflow: 'hidden'
-      }
+        !wrap && {
+          flexGrow: grow === true ? 1 : grow,
+          overflow: 'hidden'
+        }
     ]
   } as IStackProps;
 }

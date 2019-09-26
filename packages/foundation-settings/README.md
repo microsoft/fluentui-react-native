@@ -63,45 +63,7 @@ The IComponentSettings interface is an extension of ISlotProps which is designed
 
 Props interfaces have a mix of required and optional parameters. When defining settings in places such as theme definitions this is not desireable as those values will need to be filled from the actual props passed into the component. As a result `IComponentSettings<IMySlotProps>` will make the slot props into a partial object.
 
-### \_parent?: string | string[]
-
-When used in a theme, the `_parent` property allows inheritance from one or more previously declared settings. Settings blocks references as parents will be applied earlier in the precedence chain, meaning values in the current settings block will overwrite values coming from the parents. As an example:
-
-    const theme = {
-      settings: {
-        Obj1: {
-          root: {
-            val1: 'foo'
-            val2: 'bar'
-          }
-        },
-        Obj2: {
-          root: {
-            val2: 'baz'
-            val3: 'foobar'
-          }
-        },
-        Obj3: {
-          _parent: ['Obj1', 'Obj2'],
-          root: {
-            val3: 'this will win'
-          }
-        }
-      }
-    };
-
-When resolving Obj3 the result will be:
-
-    {
-      _parent: ['Obj1', 'Obj2'],
-      root: {
-        val1: 'foo',          // coming from Obj1
-        val2: 'baz',          // value from Obj2 overwrote value from Obj1
-        val3: 'thsi will win' // value from Obj3 overwrote value from Obj2
-      }
-    }
-
-#### \_overrides and \_precedence
+### \_overrides and \_precedence
 
 The overrides define recursive IComponentSettings that will be applied to the root in the order defined by \_precedence. These will be merged one by one, supplanting values at the root level and potentially supplying additional overrides.
 
