@@ -1,75 +1,133 @@
-# Composable Component Pattern
+# Composable - un-opinionated and composable base components
 
-This package establishes a pattern for compressing unnecessary layers in the component tree. This allows higher order components which are consuming other components to use the processing logic of embedded controls and then render them using their constituent parts.
+This package provides a framework for writing unopinionated functional components that can easily be extended to inject styling, and composed together in an efficient manner.
 
-React defines a simplest component as a render function which takes props. This package splits that into three parts. A processor for properties, a set of slots of child components, and a render function.
+This provides a foundation for writing both simple and higher order components with the following characteristics:
 
-As a result if there is a Stack component built, which internally wraps a View, this component will not add a stack entry in the tree when used in a HOC, it will run as a processor and then directly emit the View with decorated props.
+- **Unopinionated** - Components can be written such that they encapsulate the core functionality of a component, without having opinions on what styling system to use. There are myriad styling systems and all involve tradeoffs between flexibility, simplicity, and performance. Writing components which allow injection of a styling system allows consumers to optimize for their scenarios.
+- **Reusable** - Modern practice in react encourages making functionality reusable via hooks. This framework provides a standardized pattern for hooks and how their results are communicated to the actual rendering. This allows replacing or augmenting either the hook or rendering portions without the need of writing everything from scratch.
+- **Customizeable** - Typical customization patterns involve either passing customizations via props, or customizing via wrapping. Passing customizations via props explode the complexity of the props and cause issues with cacheability and performance. Wrapping components adds additional layers to the react hierarchy and still precludes access to internals of the component.
+- **Composable** - This framework provides a repeatable pattern which allows for a wrapped component, or a part of a higher order component, to be executed functionally without adding extra layers to the react hierarchy.
+- **Scalable** - Composable components can be used for both simple and higher order components. The framework uses the concept of slots to make targeting and customizing sub-components easier.
+- **Flexible** - This pattern is suitable for use with both react and react-native. None of the concepts are platform specific.
 
-## Base Types
+## Getting Started - writing a simple component
 
-### IGenericProps
+To use a traditionally contrived example, we can create a text control that will always render text in all caps. While this would work just as well holding something like a 'span', for the purposes of this example we will assume this is rendering something like a react-native text element. Writing a simple function component this might look something like:
 
-This can be any props interface. For purposes of this module it is defined as having an optional children entry which is the only thing IComposable will access directly.
+```jsx
+const UpperText: React.FunctionComponent<TextProps> = (userProps: TextProps) => {
+  const { children, ...props } = userProps;
+  const newChildren = changeTextToUppercaseWithLocale(children);
+  return <Text {...props}>{newChildren}</Text>;
+};
+```
 
-### ISlotProps
+In the simplest case this is extremely fast to write. This is fine if it will always be used as-is. In the case that implicit styling should be added one could do the following:
 
-This is a collection of props in the form of:
+```jsx
+// myStyle would likely be a StyleSheet for RN or a css-class for web
+const myStyle = {
+  fontFamily: 'Segoe UI',
+  fontSize: 14,
+  fontWeight: 700,
+  color: 'blue'
+}
 
-    interface ISlotProps {
-      root: IGenericProps;
-      [key: string]: IGenericProps;
-    }
+const StyledUpperText: React.FunctionComponent<TextProps> = (userProps: TextProps) => {
+  // do something that merged any style/classes coming from props with style above
+  const mergedStyleProps = mergePropsAndStyle(userProps, myStyle);
+  return (
+    <UpperText {...mergedStyleProps} />;
+  )
+}
+```
 
-These correspond to the props to pass to the matching slots for the component.
+At this point has brought in a number of things:
 
-### IProcessResult
+- there needs to be some utility for resolving styles or classes passed through props with the internal styling of the control.
+- Then these are injected via props to the `<UpperText>` component.
+- This has also added a layer to the hierarchy as using `<StyledUpperText>` will contain an `<UpperText>` which will contain a `<Text>`.
 
-As the process functionality runs it will use this as a payload to pass through the routines. It is defined as follows:
+### Using Composable for UpperText
 
-    type IProcessResult = {
-      props?: IGenericProps;
-      slotProps?: ISlotProps;
-    } & TAdditional;
+A composable component breaks the function into two parts, a hook for prop preparation called `usePrepareProps`, and a `render` function for returning the JSX elements.
 
-The TAdditional is a payload attached to the object that will get passed through, eventually to render. This allows components to pass custom data, such as the results of hook processing, to their render function.
+#### usePrepareProps hook function
 
-### IResolvedSlot
+This function takes in props, and a styling injection function, and returns the merged props in `ISlotProps` form. See the [foundation-settings](../foundation-settings/README.md) documentation for more on `ISlotProps` and `mergeSettings`.
 
-This is what is passed to the render function. It augments the IProcessResult and adds a reference to IComposable as well as a set of resolved slots for the sub-components.
+```ts
+type ITextSlotProps = ISlotProps<TextProps>;
 
-## IComposable
+export function usePrepareProps(
+  userProps: TextProps,
+  useStyling: IUseStyling<ITextSlotProps>
+): IRenderData<ITextSlotProps> {
+  const { children, ...props } = userProps;
+  const props.children = changeTextToUppercaseWithLocale(children);
+  const styleSlotProps = useStyling(props);
+  return { slotProps: mergeSettings(styleProps, { root: props }) };
+}
+```
 
-This is the pattern used to wrap a component. This can either wrap stock components or components defined using the compose pattern.
+The flow of this function is as follows:
 
-### useProcessProps
+1. This starts off in a very similar manner to the simple function implementation, creating a new set of props and modifying the children to make the text string all uppercase via an external routine.
+1. Next it calls the passed in `useStyling` function to get any styled props. If no `useStyling` handler exists in the component the framework will set this to a function which will return nothing.
+1. Finally the styling slot props are merged with the modified props to produce the slot props to hand to render.
 
-This is the property processor, named with a use in the title to denote the ability to contain hooks. It takes props, a theme object, and produces a process result object.
+#### render function
 
-`useProcessProps: (props: IGenericProps, theme: object) => IProcessResult`
+The `render` function will be handed the `IRenderData` returned from `usePrepareProps` as well as a set of Slots used for rendering. In the simple case the only slot that exists will be root. The render implementation would be as follows:
 
-The processor for a component should fill in the input prop data for its sub-components. These props set by the containing component will be passed as input properties to the child components and the process can repeat.
+```ts
+export function render(Slots: ISlots<ITextSlotProps>, renderData: IRenderData<ITextSlotProps>): JSX.Element | null {
+  return renderSlot(Slots.root);
+}
+```
 
-### render
+The passed in `Slots` parameter embeds a reference to the corresponding slot props entry from the `IRenderData`. The type used for rendering is from the `slots` option on `composable`.
 
-`render: (propInfo: IProcessResult, ...children: React.ReactNode[]) => JSX.Element | null`
+In the case that render is not specified for a simple component, a default implementation that simply renders the root slot will be provided automatically.
 
-The render function does the rendering for the component. Note that to have unnecessary layers skipped, component authors should use the `renderSlot` helper function. The JSX syntax is syntactic sugar for `React.createElement` which will create an entry in the component tree with the expected DOM diffing and everything else.
+Putting this all together and writing it inline would produce the following:
 
-Fabric-web uses a `withSlots` JSX helper which is an option if we want that functionality. The trick here is that the slots to be called need to be in function component form which means that they need to be wrapped in a closure for each slot. Right now this isn't present in this package but could be added in the future.
+#### Full `<UpperText>` using `composable`
 
-### slots
+```ts
+export const UpperText = composable<TextProps>({
+  usePrepareProps: (userProps: TextProps, useStyling: IUseStyling<ITextSlotProps>) => {
+    const { children, ...props } = userProps;
+    const props.children = changeTextToUppercaseWithLocale(children);
+    const styleSlotProps = useStyling(props);
+    return { slotProps: mergeSettings(styleProps, { root: props }) };
+  },
+  slots: {
+    root: { slotType: Text }
+  }
+})
+```
 
-`slots?: { [key: string]: IComposable }`
+An empty `useStyling` implementation and a default `render` implementation will be set automatically.
 
-The slots are the child IComposable components, which can either be complex components or wrapped controls which do not internally support this pattern.
+### Using composable for StyledUpperText
 
-## Other APIs
+To create a styled version of `<UpperText>` we simply compose the component using its `__composable` property which exposes its options and then add a `useStyling`
 
-### renderSlot
+```ts
+export const StyledUpperText = composable<TextProps>({
+  ...UpperText.__composable,
+  useStyling: (props: TextProps) => {
+    return { root: { myStyle } };
+  }
+});
+```
 
-This is a helper function which takes an IResolvedSlot as input as well as a set of children and does the rendering. This will call `createElement` if necessary or make the direct calls depending on the nature of the slot. The props information will already be attached to the resolved slot which is why children are the only input.
+This has now created a new control called `StyledUpperText` which will internally route directly to `Text` without having an intermediate `UpperText`, that shares the implementation code but just augments it by injecting a styling function.
 
-### wrapStockComponent
+Note that the customizations possible here go beyond adding styling. The type of the root slot could be changed, the actual hook implementation could be replaced, or the rendering function could be replaced.
 
-This takes a non-composable component and wraps it in an IComposable. Ideally this should be called when the parent component type itself is being set up so that it doesn't recreate on every instance.
+## Writing a Higher Order Component
+
+While the composable pattern works for simple components, it is designed to help manage the complexity of higher order components. Let's use writing a simple Button as an example, this time working backwards from `render`.
