@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "remove children from composable.render",
+  "packageName": "@uifabricshared/foundation-composable",
+  "email": "jasonmo@microsoft.com",
+  "commit": "c848521ab0f325110bf6b7e80f01f9f5606aa38b",
+  "date": "2019-09-27T23:49:57.986Z"
+}
