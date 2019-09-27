@@ -37,12 +37,27 @@ export type IComposableDefinition<TProps extends object, TSlotProps extends ISlo
   IComposable<TProps, TSlotProps, TState>
 >;
 
+type IWithChildren<TProps extends object> = TProps & { children?: object };
+export type IChildrenFromProps<TProps extends object> = TProps extends IWithChildren<TProps> ? TProps['children'] : React.ReactNode;
+
 /**
  * data returned from prop preparation which will be handed to render
  */
 export interface IRenderData<TSlotProps extends ISlotProps, TState = any> {
+  /**
+   * slot props returned from usePrepareProps
+   */
   slotProps?: TSlotProps;
+
+  /**
+   * component specific state value
+   */
   state?: TState;
+
+  /**
+   * convenience point for passing children to render
+   */
+  children?: IChildrenFromProps<TSlotProps['root']>;
 }
 
 /**

@@ -8,7 +8,7 @@ import { ISlotFn } from './Composable.slots';
  * @param extraProps - additional props to mixin.  If the actual
  * @param children
  */
-export function renderSlot<TProps>(slot: INativeSlotType | ISlotFn<TProps>, extraProps: TProps, ...children: React.ReactNode[]) {
+export function renderSlot<TProps>(slot: INativeSlotType | ISlotFn<TProps>, extraProps?: TProps, ...children: React.ReactNode[]) {
   return typeof slot === 'function' && (slot as ISlotFn<TProps>)._canCompose
     ? (slot as ISlotFn<TProps>)(extraProps, ...children)
     : React.createElement(slot, extraProps, ...children);

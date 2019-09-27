@@ -13,9 +13,6 @@ import { useCompoundPrepare } from './Composable.slots';
 import { renderSlot } from './slots';
 import { ISlotProps, mergeSettings } from '@uifabricshared/foundation-settings';
 
-// just a generic object with children specified as props
-type IWithChildren<T> = T & { children?: React.ReactNode[] };
-
 function _validateComposable<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object>(
   options: IComposableDefinition<TProps, TSlotProps, TState>
 ): void {
@@ -33,10 +30,9 @@ function _validateComposable<TProps extends object, TSlotProps extends ISlotProp
 
 export function atomicRender<TProps extends object, TState = object>(
   Slots: ISlots<ISlotProps<TProps>>,
-  _renderData: IRenderData<ISlotProps<TProps>, TState>,
-  ...children: React.ReactNode[]
+  _renderData: IRenderData<ISlotProps<TProps>, TState>
 ): JSX.Element | null {
-  return renderSlot(Slots.root, undefined, ...children);
+  return renderSlot(Slots.root);
 }
 
 export function atomicUsePrepareProps<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object>(
@@ -65,7 +61,7 @@ export function composable<TProps extends object, TSlotProps extends ISlotProps 
   _validateComposable(options);
 
   // use atomic handlers for usePrepareProps / render if necessary
-  options.render = options.render || atomicRender;
+  options.render = options.render || ((atomicRender as unknown) as IComposableDefinition<TProps, TSlotProps, TState>['render']);
   options.usePrepareProps = options.usePrepareProps || atomicUsePrepareProps;
 
   // create the actual implementation

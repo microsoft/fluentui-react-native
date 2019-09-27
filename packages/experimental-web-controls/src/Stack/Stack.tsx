@@ -1,10 +1,10 @@
 /** @jsx withSlots */
-import * as React from 'react';
 import { buildStackRootStyles, buildStackInnerStyles } from './Stack.styles';
 import { IStackRenderData, IStackSlotProps, IStackStatics, IStackProps } from './Stack.types';
 import { StackItem } from './StackItem/StackItem';
-import { compose } from '@uifabricshared/foundation-compose';
-import { withSlots, ISlots, atomicUsePrepareProps } from '@uifabricshared/foundation-composable';
+import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { withSlots, ISlots } from '@uifabricshared/foundation-composable';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
 
 export const Stack = compose<IStackProps, IStackSlotProps, object, IStackStatics>({
   displayName: 'Stack',
@@ -32,13 +32,21 @@ export const Stack = compose<IStackProps, IStackSlotProps, object, IStackStatics
     'RNFStack'
   ],
   statics: { Item: StackItem },
-  usePrepareProps: atomicUsePrepareProps,
+  usePrepareProps: (userProps: IStackProps, useStyling: IUseComposeStyling<IStackSlotProps>) => {
+    const { children, ...props } = userProps;
+    const styleProps = useStyling(props);
+    return {
+      slotProps: mergeSettings(styleProps, { root: props }),
+      children
+    };
+  },
   slots: {
     root: { slotType: 'div', styleFactories: [buildStackRootStyles] },
     inner: { slotType: 'div', styleFactories: [buildStackInnerStyles] }
   },
-  render: (Slots: ISlots<IStackSlotProps>, renderData: IStackRenderData, ...children: React.ReactNode[]) => {
+  render: (Slots: ISlots<IStackSlotProps>, renderData: IStackRenderData) => {
     const wrap = renderData.slotProps && renderData.slotProps.root.wrap;
+    const children = renderData.children;
 
     if (wrap) {
       return (

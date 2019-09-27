@@ -66,7 +66,8 @@ function createSlotRenderInfo<TProps extends object, TSlotProps extends ISlotPro
         // non-composable components should just render directly
         Slots[slot] = _createSlotRenderFunction((extraProps: TProps) => {
           const props = _mergeAndFilterProps(childRenderInfo.renderData.slotProps.root, extraProps, filter);
-          return React.createElement(slotType as INativeSlotType, props, ...props.children);
+          const children = props['children'];
+          return React.createElement(slotType as INativeSlotType, props, ...children);
         });
       }
     });

@@ -26,8 +26,7 @@ export const Button = compose<IButtonProps, IButtonSlots, IButtonState>({
         disabled: userProps.disabled,
         content: !!content,
         icon: !!icon
-      },
-      children
+      }
     };
 
     // grab the styling information, referencing the state as well as the props
@@ -40,11 +39,11 @@ export const Button = compose<IButtonProps, IButtonSlots, IButtonState>({
       icon: { children: icon }
     });
 
-    return { slotProps, state };
+    return { slotProps, state, children };
   },
   render: (Slots: ISlots<IButtonSlots>, renderData: IButtonRenderData) => {
     const info = renderData.state.info;
-    const children = renderData.state.children;
+    const children = renderData.children;
     return (
       <Slots.root>
         {info.icon && <Slots.icon />}
