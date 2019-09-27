@@ -71,7 +71,7 @@ export function composable<TProps extends object, TSlotProps extends ISlotProps 
   // create the actual implementation
   const render = (userProps: TProps) => {
     // split out children, they will be excluded from the prop preparation phase
-    const { children, ...props } = userProps as IWithChildren<TProps>;
+    const props = { ...userProps };
 
     // prepare the props, all the way down the tree, also build the slots
     const { renderData, Slots } = useCompoundPrepare<TProps, TSlotProps, TState>(
@@ -80,7 +80,7 @@ export function composable<TProps extends object, TSlotProps extends ISlotProps 
     );
 
     // now do the render, adding the children back in
-    return options.render(Slots, renderData, ...children);
+    return options.render(Slots, renderData);
   };
 
   // set the options onto the new functional component and return it

@@ -15,7 +15,7 @@ export const Button = compose<IButtonProps, IButtonSlots, IButtonState>({
   displayName: 'Button',
   settings,
   usePrepareProps: (userProps: IButtonCustomizableProps, useStyling: IUseComposeStyling<IButtonSlots>) => {
-    const { icon, content, ...rest } = userProps;
+    const { icon, content, children, ...rest } = userProps;
     // attach the pressable state handlers
     const pressable = useAsPressable(rest);
 
@@ -26,7 +26,8 @@ export const Button = compose<IButtonProps, IButtonSlots, IButtonState>({
         disabled: userProps.disabled,
         content: !!content,
         icon: !!icon
-      }
+      },
+      children
     };
 
     // grab the styling information, referencing the state as well as the props
@@ -41,13 +42,14 @@ export const Button = compose<IButtonProps, IButtonSlots, IButtonState>({
 
     return { slotProps, state };
   },
-  render: (Slots: ISlots<IButtonSlots>, renderData: IButtonRenderData, ...children: React.ReactNode[]) => {
+  render: (Slots: ISlots<IButtonSlots>, renderData: IButtonRenderData) => {
     const info = renderData.state.info;
+    const children = renderData.state.children;
     return (
       <Slots.root>
         {info.icon && <Slots.icon />}
         {info.content && <Slots.content />}
-        {...children}
+        {children}
       </Slots.root>
     );
   },

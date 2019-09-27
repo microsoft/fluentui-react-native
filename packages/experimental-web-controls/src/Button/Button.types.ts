@@ -22,6 +22,7 @@ export interface IButtonInfo extends IPressableState {
  */
 export interface IButtonState {
   info: IButtonInfo;
+  children?: IButtonProps['children'];
 }
 
 export interface IButtonTokens extends ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {

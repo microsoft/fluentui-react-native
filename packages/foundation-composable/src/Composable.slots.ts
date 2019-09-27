@@ -54,19 +54,19 @@ function createSlotRenderInfo<TProps extends object, TSlotProps extends ISlotPro
       const childRenderInfo = (childInfo[slot] = createSlotRenderInfo(composable, slots[slot]));
       if (composable) {
         // create the actual closure for rendering handing it a reference to the render info
-        Slots[slot] = _createSlotRenderFunction((extraProps: TProps, ...children: React.ReactNode[]) => {
+        Slots[slot] = _createSlotRenderFunction((extraProps: TProps) => {
           const { renderData, Slots } = childRenderInfo;
           if (filter || extraProps) {
             const toMerge = { root: _mergeAndFilterProps(renderData.slotProps.root, extraProps, filter) };
             renderData.slotProps = mergeSettings(renderData.slotProps, toMerge);
           }
-          return composable.render(Slots, renderData, ...children);
+          return composable.render(Slots, renderData);
         });
       } else {
         // non-composable components should just render directly
-        Slots[slot] = _createSlotRenderFunction((extraProps: TProps, ...children: React.ReactNode[]) => {
+        Slots[slot] = _createSlotRenderFunction((extraProps: TProps) => {
           const props = _mergeAndFilterProps(childRenderInfo.renderData.slotProps.root, extraProps, filter);
-          return React.createElement(slotType as INativeSlotType, props, ...children);
+          return React.createElement(slotType as INativeSlotType, props, ...props.children);
         });
       }
     });
