@@ -1484,22 +1484,21 @@
     npmlog "^4.1.2"
     write-file-atomic "^2.3.0"
 
-"@microsoft/api-extractor-model@7.3.2":
-  version "7.3.2"
-  resolved "https://registry.yarnpkg.com/@microsoft/api-extractor-model/-/api-extractor-model-7.3.2.tgz#71229ba80f8aafc56afe4d3ee83f19b1ce72eb24"
+"@microsoft/api-extractor-model@7.4.2":
+  version "7.4.2"
+  resolved "https://registry.yarnpkg.com/@microsoft/api-extractor-model/-/api-extractor-model-7.4.2.tgz#e7dea5aa6717fdbeb2745df57f3b118163a2e510"
   dependencies:
-    "@microsoft/node-core-library" "3.14.0"
-    "@microsoft/tsdoc" "0.12.12"
-    "@types/node" "8.5.8"
+    "@microsoft/node-core-library" "3.15.0"
+    "@microsoft/tsdoc" "0.12.14"
 
-"@microsoft/api-extractor@7.3.7":
-  version "7.3.7"
-  resolved "https://registry.yarnpkg.com/@microsoft/api-extractor/-/api-extractor-7.3.7.tgz#f3fde8b2fac50ff0de7510ae25b8bd497c785d3f"
+"@microsoft/api-extractor@^7.3.7":
+  version "7.4.4"
+  resolved "https://registry.yarnpkg.com/@microsoft/api-extractor/-/api-extractor-7.4.4.tgz#f7810c2b1bf171fcdc5c821172be7779f33e75b4"
   dependencies:
-    "@microsoft/api-extractor-model" "7.3.2"
-    "@microsoft/node-core-library" "3.14.0"
-    "@microsoft/ts-command-line" "4.2.6"
-    "@microsoft/tsdoc" "0.12.12"
+    "@microsoft/api-extractor-model" "7.4.2"
+    "@microsoft/node-core-library" "3.15.0"
+    "@microsoft/ts-command-line" "4.3.1"
+    "@microsoft/tsdoc" "0.12.14"
     colors "~1.2.1"
     lodash "~4.17.15"
     resolve "1.8.1"
@@ -1517,14 +1516,11 @@
     "@microsoft/load-themed-styles" "1.10.5"
     loader-utils "~1.1.0"
 
-"@microsoft/node-core-library@3.14.0":
-  version "3.14.0"
-  resolved "https://registry.yarnpkg.com/@microsoft/node-core-library/-/node-core-library-3.14.0.tgz#c7014328c67c4a4110e2ed2a9bd11cfd0ad3318d"
+"@microsoft/node-core-library@3.15.0":
+  version "3.15.0"
+  resolved "https://registry.yarnpkg.com/@microsoft/node-core-library/-/node-core-library-3.15.0.tgz#e6e84848346eacdafa4e497e2368a5a83a950d6f"
   dependencies:
-    "@types/fs-extra" "5.0.4"
-    "@types/jju" "~1.4.0"
-    "@types/node" "8.5.8"
-    "@types/z-schema" "3.16.31"
+    "@types/node" "8.10.54"
     colors "~1.2.1"
     fs-extra "~7.0.1"
     jju "~1.4.0"
@@ -1534,18 +1530,17 @@
   version "2.2.176"
   resolved "https://registry.yarnpkg.com/@microsoft/package-deps-hash/-/package-deps-hash-2.2.176.tgz#cd23ef29aeca54477a77a6d124776590e91884f9"
 
-"@microsoft/ts-command-line@4.2.6":
-  version "4.2.6"
-  resolved "https://registry.yarnpkg.com/@microsoft/ts-command-line/-/ts-command-line-4.2.6.tgz#c88a5d474f8c4f411598cdf17d23c1b6090e8fe9"
+"@microsoft/ts-command-line@4.3.1":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@microsoft/ts-command-line/-/ts-command-line-4.3.1.tgz#9a73337a85d0789a1d31528f6a241e9e59dd5c8c"
   dependencies:
     "@types/argparse" "1.0.33"
-    "@types/node" "8.5.8"
     argparse "~1.0.9"
     colors "~1.2.1"
 
-"@microsoft/tsdoc@0.12.12":
-  version "0.12.12"
-  resolved "https://registry.yarnpkg.com/@microsoft/tsdoc/-/tsdoc-0.12.12.tgz#6692f1cbca664f68abbc62f9a26459fba8b9ff28"
+"@microsoft/tsdoc@0.12.14":
+  version "0.12.14"
+  resolved "https://registry.yarnpkg.com/@microsoft/tsdoc/-/tsdoc-0.12.14.tgz#0e0810a0a174e50e22dfe8edb30599840712f22d"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -1658,12 +1653,6 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
 
-"@types/fs-extra@5.0.4":
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-5.0.4.tgz#b971134d162cc0497d221adde3dbb67502225599"
-  dependencies:
-    "@types/node" "*"
-
 "@types/glob@^7.1.1":
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.1.1.tgz#aa59a1c6e3fbc421e07ccd31a944c30eba521575"
@@ -1693,10 +1682,6 @@
   version "19.2.4"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-19.2.4.tgz#543651712535962b7dc615e18e4a381fc2687442"
 
-"@types/jju@~1.4.0":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@types/jju/-/jju-1.4.1.tgz#0a39f5f8e84fec46150a7b9ca985c3f89ad98e9f"
-
 "@types/json-schema@^7.0.3":
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.3.tgz#bdfd69d61e464dcc81b25159c270d75a73c1a636"
@@ -1709,17 +1694,13 @@
   version "12.7.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.5.tgz#e19436e7f8e9b4601005d73673b6dc4784ffcc2f"
 
-"@types/node@8.5.8":
-  version "8.5.8"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.5.8.tgz#92509422653f10e9c0ac18d87e0610b39f9821c7"
+"@types/node@8.10.54", "@types/node@^8.10.50":
+  version "8.10.54"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.54.tgz#1c88eb253ac1210f1a5876953fb70f7cc4928402"
 
 "@types/node@^10.12.18", "@types/node@^10.3.5":
   version "10.14.18"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.14.18.tgz#b7d45fc950e6ffd7edc685e890d13aa7b8535dce"
-
-"@types/node@^8.10.50":
-  version "8.10.54"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.54.tgz#1c88eb253ac1210f1a5876953fb70f7cc4928402"
 
 "@types/prop-types@*":
   version "15.7.2"
@@ -1771,10 +1752,6 @@
   resolved "https://registry.yarnpkg.com/@types/yargs/-/yargs-13.0.2.tgz#a64674fc0149574ecd90ba746e932b5a5f7b3653"
   dependencies:
     "@types/yargs-parser" "*"
-
-"@types/z-schema@3.16.31":
-  version "3.16.31"
-  resolved "https://registry.yarnpkg.com/@types/z-schema/-/z-schema-3.16.31.tgz#2eb1d00a5e4ec3fa58c76afde12e182b66dc5c1c"
 
 "@typescript-eslint/eslint-plugin@^2.1.0":
   version "2.3.0"

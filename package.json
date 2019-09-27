@@ -15,8 +15,6 @@
     "preinstall": "node ./scripts/use-yarn-please.js",
     "postinstall": "node ./scripts/postinstall.js",
     "clean-all": "node ./scripts/clean-all.js",
-    "vrtest": "cd apps && cd vr-tests && npm run screener",
-    "a11ytest": "cd apps && cd a11y-tests && npm run test",
     "start": "cd apps && cd demo && npm start",
     "build": "lerna run build --stream -- --production --lint",
     "buildci": "lerna run build --stream -- --lint",
@@ -35,9 +33,6 @@
     "prettier": "node scripts/prettier.js",
     "publish:beachball": "beachball publish",
     "bump-versions": "beachball bump",
-    "update-a11y": "cd apps/a11y-tests && npm run update-snapshots",
-    "update-api": "cd packages/office-ui-fabric-react && npm run update-api",
-    "update-snapshots": "cd packages/office-ui-fabric-react && npm run update-snapshots",
     "lint": "lerna run lint"
   },
   "devDependencies": {

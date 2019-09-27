@@ -19,7 +19,7 @@ function _collectVal(t: any, custom: boolean): any {
 export interface IMergeOptions {
   /**
    * number of times to recurse:
-   *  - <0 : infinite
+   *  - < 0 : infinite
    *  - 0 or undefined : don't recurse
    *  - 1+ : recurse this many levels
    */
