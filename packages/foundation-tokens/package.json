@@ -25,10 +25,12 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^19.2.2",
-    "@uifabricshared/foundation-settings": "0.2.2",
+    "@uifabricshared/foundation-settings": "0.3.0",
     "@uifabricshared/build-native": "^0.1.1"
   },
   "beachball": {
-    "disallowedChangeTypes": ["major"]
+    "disallowedChangeTypes": [
+      "major"
+    ]
   }
 }

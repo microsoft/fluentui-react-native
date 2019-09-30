@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theme-registry",
   "entries": [
     {
+      "date": "Wed, 25 Sep 2019 23:15:41 GMT",
+      "tag": "@uifabricshared/theme-registry_v0.1.4",
+      "version": "0.1.4",
+      "comments": {
+        "none": [
+          {
+            "comment": "Disallow major changes",
+            "author": "taamireh@microsoft.com",
+            "commit": "30c4e1f286520bd98c5f4fcd2f83a2559d0a7e71"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 19 Sep 2019 23:21:48 GMT",
       "tag": "@uifabricshared/theme-registry_v0.1.4",
       "version": "0.1.4",

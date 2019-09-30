@@ -24,7 +24,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": "0.2.2"
+    "@uifabricshared/foundation-settings": "0.3.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
@@ -33,6 +33,8 @@
     "@uifabricshared/eslint-config-rules": "^0.1.1"
   },
   "beachball": {
-    "disallowedChangeTypes": ["major"]
+    "disallowedChangeTypes": [
+      "major"
+    ]
   }
 }

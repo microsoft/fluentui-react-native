@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-compose",
-  "version": "1.0.2",
+  "version": "1.1.1",
   "description": "Compose infrastructure",
   "repository": {
     "type": "git",
@@ -25,10 +25,10 @@
   "license": "MIT",
   "dependencies": {
     "@uifabricshared/themed-settings": "0.2.2",
-    "@uifabricshared/foundation-composable": "0.1.4",
+    "@uifabricshared/foundation-composable": "0.2.0",
     "@uifabricshared/foundation-tokens": "0.1.4",
-    "@uifabricshared/theming-react-native": "0.1.4",
-    "@uifabricshared/theming-ramp": "0.2.1"
+    "@uifabricshared/theming-react-native": "0.1.5",
+    "@uifabricshared/theming-ramp": "0.3.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
@@ -36,6 +36,8 @@
     "@uifabricshared/eslint-config-rules": "^0.1.1"
   },
   "beachball": {
-    "disallowedChangeTypes": ["major"]
+    "disallowedChangeTypes": [
+      "major"
+    ]
   }
 }

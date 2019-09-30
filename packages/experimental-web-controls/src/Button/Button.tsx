@@ -1,26 +1,56 @@
-import { IButtonComponent } from './Button.types';
-import { compose } from '@uifabricshared/foundation-compose';
+/** @jsx withSlots */
+import { IButtonSlots, IButtonRenderData, IButtonCustomizableProps, IButtonState, IButtonProps } from './Button.types';
+import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 // import { Stack } from '../Stack';
 import { Text } from '../Text/index';
-import { finalizer, themeQueryInputs, usePrepareState, view } from './Button.helpers';
-import { loadButtonSettings } from './Button.settings';
+import { settings } from './Button.settings';
 import { Stack } from '../Stack/index';
 import { textTokens, borderTokens } from '../tokens';
 import { backgroundColorTokens, foregroundColorTokens, getPaletteFromTheme } from '../tokens/ColorTokens';
+import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
+import { useAsPressable } from '../Pressable';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
 
-loadButtonSettings();
-
-export const Button = compose<IButtonComponent>({
+export const Button = compose<IButtonProps, IButtonSlots, IButtonState>({
   displayName: 'Button',
-  settings: ['RNFButton'],
-  usePrepareState,
-  themeQueryInputs,
-  finalizer,
-  view,
-  // this is an alternative to the above, it moves the declarations to be slot by slot.  This is kind of what is built up
-  // internally in the automatic processor function and has the advantage of being able to easily add a slot and define additional
-  // mappings.  There is a question of how a custom processor like above would fit in but maybe that isn't even needed in most
-  // cases
+  settings,
+  usePrepareProps: (userProps: IButtonCustomizableProps, useStyling: IUseComposeStyling<IButtonSlots>) => {
+    const { icon, content, ...rest } = userProps;
+    // attach the pressable state handlers
+    const pressable = useAsPressable(rest);
+
+    // set up state
+    const state: IButtonState = {
+      info: {
+        ...pressable.state,
+        disabled: userProps.disabled,
+        content: !!content,
+        icon: !!icon
+      }
+    };
+
+    // grab the styling information, referencing the state as well as the props
+    const styleProps = useStyling(userProps, override => state.info[override] || userProps[override]);
+
+    // create the merged slot props
+    const slotProps = mergeSettings<IButtonSlots>(styleProps, {
+      root: pressable.props,
+      content: { children: content },
+      icon: { children: icon }
+    });
+
+    return { slotProps, state };
+  },
+  render: (Slots: ISlots<IButtonSlots>, renderData: IButtonRenderData, ...children: React.ReactNode[]) => {
+    const info = renderData.state.info;
+    return (
+      <Slots.root>
+        {info.icon && <Slots.icon />}
+        {info.content && <Slots.content />}
+        {...children}
+      </Slots.root>
+    );
+  },
   slots: {
     root: {
       slotType: Stack,

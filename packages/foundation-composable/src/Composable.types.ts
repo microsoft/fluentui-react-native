@@ -1,65 +1,70 @@
 import * as React from 'react';
+import { ISlotProps } from '@uifabricshared/foundation-settings';
 
-// just a generic object with children specified as props
-export interface IGenericProps {
-  children?: React.ReactNode;
-}
-
-/**
- * this is the result of the process call.  Note that any additional information returned here
- * will flow through the system
- */
-export type IProcessResult<TProps extends object = IGenericProps, TSlotProps = ISlotProps, TAdditional = object> = {
-  props?: TProps;
-  slotProps?: TSlotProps;
-} & TAdditional;
-
-export interface IResolvedSlotData {
-  composable?: IComposable;
-  slots?: IResolvedSlots;
-}
-
-export type IAsResolved<TBase> = TBase & IResolvedSlotData;
-
-/**
- * the process results, augmented with cthe composable element itself and optional slots,
- * ready to render
- */
-export type IResolvedSlot<
-  TProps extends object = IGenericProps,
-  TSlotProps = ISlotProps,
-  TAdditional extends object = object
-  > = IAsResolved<IProcessResult<TProps, TSlotProps, TAdditional>>;
-
-/**
- * a collection of resolved slots
- */
-export interface IResolvedSlots {
-  [key: string]: IResolvedSlot;
-}
-
-/**
- * props to pass to the sub-components, keys should match slots
- */
-export interface ISlotProps {
-  root: IGenericProps;
-  [key: string]: IGenericProps;
-}
+export type IUseStyling<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>> = (props: TProps) => TSlotProps;
 
 /**
  * Pattern for a composable component
  */
-export interface IComposable {
-  useProcessProps: (props: IGenericProps, theme: object) => IProcessResult;
-  render: (propInfo: IProcessResult, ...children: React.ReactNode[]) => JSX.Element | null;
-  slots?: { [key: string]: IComposable };
+export interface IComposable<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object> {
+  /**
+   * Injectable styling for the component.  If not specified this will return an empty object
+   * @param props - user input props to process for styling
+   */
+  useStyling: IUseStyling<TProps, TSlotProps>;
+
+  /**
+   * process the user props and return an IRenderData object with slot props and an optional state.
+   * @param props - user props to be used for processing
+   */
+  usePrepareProps: (props: TProps, useStyling: IUseStyling<TProps, TSlotProps>) => IRenderData<TSlotProps, TState>;
+
+  /**
+   * perform the actual building of the JSX tree.
+   * @param Slots - slots, keyed to the values of TSlotProps, suitable to be rendered via renderSlot or JSX syntax
+   * @param renderData - IRenderData returned from usePrepareProps
+   * @param children - The react children property in the form passed into React.createElement
+   */
+  render: (Slots: ISlots<TSlotProps>, renderData: IRenderData<TSlotProps, TState>, ...children: React.ReactNode[]) => JSX.Element | null;
+
+  /**
+   * The slot definitions for this component.  If this only has one sub-component this will only have a root entry.  Using
+   * the render helpers to render will automatically include props processed from usePrepareProps
+   */
+  slots: ISlotDefinitions<TSlotProps>;
 }
+
+export type IComposableDefinition<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = any> = Partial<
+  IComposable<TProps, TSlotProps, TState>
+>;
+
+/**
+ * data returned from prop preparation which will be handed to render
+ */
+export interface IRenderData<TSlotProps extends ISlotProps, TState = any> {
+  slotProps?: TSlotProps;
+  state?: TState;
+}
+
+/**
+ * Mapped type for the resolved/render-ready slots, keyed off of TSlotProps
+ */
+export type ISlots<TSlotProps extends ISlotProps> = {
+  [K in keyof TSlotProps]: React.FunctionComponent<TSlotProps[K]>;
+};
+
+/**
+ * Mapped type for the slot definitions, keyed off of TSlotProps
+ */
+export type ISlotDefinitions<TSlotProps extends ISlotProps> = {
+  [K in keyof TSlotProps]: ISlotWithFilter;
+};
 
 /**
  * Attach a composable component to an object in a standard manner
  */
-export type IWithComposable<T extends object = object> = T & {
-  __composable: IComposable;
+export type IWithComposable<T extends object = object, TComposable = IComposable<object>> = T & {
+  __composable: TComposable;
 };
 
 /**
@@ -67,27 +72,18 @@ export type IWithComposable<T extends object = object> = T & {
  * set on it
  */
 export type INativeSlotType = React.ElementType<any> | string;
-export type ISlotType = INativeSlotType | IWithComposable<object>;
 
 /**
  * Optional function to filter the properties that will be passed to the component.  If no props are to be
  * removed it should return the same object.  Otherwise it should return a new object with props filtered
  */
-export type IPropFilter = (props: object) => object;
+export type IPropFilter = (propName: string) => boolean;
 
 /**
  * In the case where a filter needs to be applied to props the slot can be set to an object which contains the slotType
  * and filter function reference
  */
 export type ISlotWithFilter<TMixin = object> = {
-  slotType?: ISlotType;
+  slotType?: INativeSlotType;
   filter?: IPropFilter;
 } & TMixin;
-
-/**
- * The collection of slot types that should be defined on the definition of a component
- */
-export type ISlotTypes<TMixin = object> = {
-  root: ISlotType | ISlotWithFilter<TMixin>;
-  [key: string]: ISlotType | ISlotWithFilter<TMixin>;
-};

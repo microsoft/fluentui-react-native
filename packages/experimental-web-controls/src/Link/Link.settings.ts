@@ -1,8 +1,8 @@
-import { ILinkSettings } from './Link.types';
-import { augmentPlatformTheme } from '@uifabricshared/theming-react-native';
+import { ILinkSlotProps } from './Link.types';
+import { IComposeSettings } from '@uifabricshared/foundation-compose';
 
-export function loadLinkSettings(): void {
-  const linkSettings: ILinkSettings = {
+export const settings: IComposeSettings<ILinkSlotProps> = [
+  {
     root: {
       fontFamily: 'primary',
       fontSize: 'medium',
@@ -36,11 +36,6 @@ export function loadLinkSettings(): void {
         }
       }
     }
-  };
-
-  augmentPlatformTheme({
-    settings: {
-      RNFLink: linkSettings
-    }
-  });
-}
+  },
+  'RNFLink'
+];

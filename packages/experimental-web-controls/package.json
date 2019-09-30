@@ -23,10 +23,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-compose": "1.0.2",
-    "@uifabricshared/foundation-settings": "0.2.2",
-    "@uifabricshared/theming-ramp": "0.2.1",
-    "@uifabricshared/theming-react-native": "0.1.4"
+    "@uifabricshared/foundation-compose": "1.1.1",
+    "@uifabricshared/foundation-settings": "0.3.0",
+    "@uifabricshared/theming-ramp": "0.3.0",
+    "@uifabricshared/theming-react-native": "0.1.5"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
@@ -37,6 +37,8 @@
   },
   "beachball": {
     "shouldPublish": false,
-    "disallowedChangeTypes": ["major"]
+    "disallowedChangeTypes": [
+      "major"
+    ]
   }
 }

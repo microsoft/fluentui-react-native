@@ -1,8 +1,8 @@
-import { ITextSettings } from './Text.types';
-import { augmentPlatformTheme } from '@uifabricshared/theming-react-native';
+import { ITextSlotProps } from './Text.types';
+import { IComposeSettings } from '@uifabricshared/foundation-compose';
 
-export function loadTextSettings(): void {
-  const textSettings: ITextSettings = {
+export const settings: IComposeSettings<ITextSlotProps> = [
+  {
     root: {
       fontFamily: 'primary',
       fontSize: 'medium',
@@ -22,11 +22,6 @@ export function loadTextSettings(): void {
       }
     },
     _precedence: ['disabled']
-  };
-
-  augmentPlatformTheme({
-    settings: {
-      RNFText: textSettings
-    }
-  });
-}
+  },
+  'RNFText'
+];
