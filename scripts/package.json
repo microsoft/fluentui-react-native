@@ -15,6 +15,9 @@
     "verify-api": "echo no api to verify",
     "update-api": "echo no api to update"
   },
+  "peerDependencies": {
+    "just-scripts": ">=0.28.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
