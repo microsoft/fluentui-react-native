@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 // just a generic object with children specified as props
 export interface IGenericProps {
   children?: React.ReactNode;
@@ -27,7 +29,7 @@ export type IResolvedSlot<
   TProps extends object = IGenericProps,
   TSlotProps = ISlotProps,
   TAdditional extends object = object
-> = IAsResolved<IProcessResult<TProps, TSlotProps, TAdditional>>;
+  > = IAsResolved<IProcessResult<TProps, TSlotProps, TAdditional>>;
 
 /**
  * a collection of resolved slots

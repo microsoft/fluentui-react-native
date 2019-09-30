@@ -22,7 +22,10 @@
     "@microsoft/load-themed-styles": "^1.7.13",
     "@microsoft/loader-load-themed-styles": "^1.6.0",
     "@octokit/rest": "^16.28.2",
+    "@typescript-eslint/eslint-plugin": "^2.1.0",
+    "@typescript-eslint/parser": "^2.1.0",
     "@uifabric/prettier-rules": "^7.0.3",
+    "@uifabricshared/build-native": "^0.1.1",
     "async": "^2.6.1",
     "autoprefixer": "^7.1.5",
     "babel-jest": "^24.9.0",
@@ -34,6 +37,12 @@
     "command-line-args": "^4.0.7",
     "cpx": "^1.5.0",
     "css-loader": "^0.28.7",
+    "eslint": "^6.3.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^9.2.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "find-free-port": "~2.0.0",
     "fork-ts-checker-webpack-plugin": "^0.4.1",
     "fs-extra": "^7.0.1",
@@ -46,7 +55,7 @@
     "jju": "^1.4.0",
     "jscodeshift": "^0.5.0",
     "json-loader": "^0.5.7",
-    "just-scripts": "~0.28.1",
+    "just-scripts": ">=0.28.1",
     "ngrok": "^3.0.1",
     "node-sass": "^4.5.3",
     "p-queue": "^6.0.2",
@@ -63,23 +72,15 @@
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.21.0",
     "ts-jest": "24.0.1",
-    "ts-loader": "^4.1.0",
+    "ts-loader": "^6.1.0",
     "typescript": "3.5.1",
-    "webpack": "4.29.5",
+    "webpack": "^4.29.5",
     "webpack-bundle-analyzer": "^3.0.4",
     "webpack-cli": "3.2.3",
     "webpack-dev-server": "3.1.14",
     "webpack-notifier": "^1.6.0",
     "yargs": "^13.2.4",
-    "@typescript-eslint/eslint-plugin": "^2.1.0",
-    "@typescript-eslint/parser": "^2.1.0",
-    "@uifabricshared/build-native": "^0.1.1",
-    "eslint": "^6.3.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^9.2.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "@types/react-native": "^0.57.51"
   },
   "bundlesize": [
     {
@@ -89,6 +90,8 @@
   ],
   "beachball": {
     "shouldPublish": false,
-    "disallowedChangeTypes": ["major"]
+    "disallowedChangeTypes": [
+      "major"
+    ]
   }
 }

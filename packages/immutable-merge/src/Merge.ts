@@ -19,7 +19,7 @@ function _collectVal(t: any, custom: boolean): any {
 export interface IMergeOptions {
   /**
    * number of times to recurse:
-   *  - < 0 : infinite
+   *  - \< 0 : infinite
    *  - 0 or undefined : don't recurse
    *  - 1+ : recurse this many levels
    */
@@ -48,7 +48,7 @@ export type IMergeRecursionHandler = (options: IMergeOptions, ...objs: any[]) =>
  * create a new object.
  *
  * @param options - options driving behavior of the merge.  See IMergeOptions for a description.  Some basic combos would
- * be {} - no recursion, { depth: -1 } - recurse infinitely
+ * be \{\} - no recursion, \{ depth: -1 \} - recurse infinitely
  * @param objs - an array of objects to merge together
  */
 export function immutableMergeCore(options: IMergeOptions, ...objs: any[]): any {

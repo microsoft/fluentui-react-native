@@ -4,6 +4,7 @@ import { IComponentSettings } from '../../foundation-settings/lib';
 import { ITheme } from '@uifabricshared/theming-ramp';
 import { IComponentTokens, ISlotStyleFactories } from '@uifabricshared/foundation-tokens';
 import { ISettingsEntry } from '@uifabricshared/themed-settings';
+import * as React from 'react';
 
 export interface IRenderData<
   TProps extends object = object,
@@ -69,7 +70,7 @@ export interface IComponent<
   themeQueryInputs?: (name: string, renderData: IRenderData<TCustomizeableProps, TSlotProps, TState>) => IThemeQueryInputs;
 
   /**
-   * Settings for the component, IComponentSettings, theme => IComponentSettings, or a name to look up in the theme
+   * Settings for the component, IComponentSettings, theme =\> IComponentSettings, or a name to look up in the theme
    */
   settings?: ISettingsEntry<TSlotProps, ITheme>[];
 

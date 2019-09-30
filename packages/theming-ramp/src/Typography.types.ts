@@ -2,9 +2,9 @@
  * A font family designation, made up of one or more font names or groupings
  * (comma-separated):
  *
- * - ``Calibri Light, Calibri, Times``
- * - ``Menlo, Monaco, "Courier New", Courier``
- * - ``Consolas``
+ * - \`Calibri Light, Calibri, Times\`
+ * - \`Menlo, Monaco, "Courier New", Courier\`
+ * - \`Consolas\`
  *
  * The font family expresses an ordered preference of fonts to use, working
  * from the first entry to the last. This "fallback" mechanism is necessary
@@ -19,7 +19,7 @@ export type FontFamilyValue = string;
  * The names express the fundamental character of the assigned font family. They
  * should be used when defining a theme.
  *
- * **NOTE:** ``primary`` and ``secondary`` are both meant to be assigned a 'normal' family.
+ * **NOTE:** \`primary\` and \`secondary\` are both meant to be assigned a 'normal' family.
  */
 export interface IFontFamilies {
   primary: FontFamilyValue;

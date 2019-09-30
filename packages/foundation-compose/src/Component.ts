@@ -13,6 +13,7 @@ import { mergeSettings, IComponentSettings } from '@uifabricshared/foundation-se
 import { getSettings, ITheme } from '@uifabricshared/theming-ramp';
 import { processTokens } from '@uifabricshared/foundation-tokens';
 import { getThemedSettings } from '@uifabricshared/themed-settings';
+import * as React from 'react';
 
 /**
  * Get the cache for the given component from the theme, creating it if necessary
