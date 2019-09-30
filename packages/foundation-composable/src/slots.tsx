@@ -3,10 +3,11 @@ import { INativeSlotType } from './Composable.types';
 import { ISlotFn } from './Composable.slots';
 
 /**
+ * Renders a slot
  *
  * @param slot - native react type or slot function to render
- * @param extraProps - additional props to mixin.  If the actual
- * @param children
+ * @param extraProps - additional props to mixin
+ * @param children - the children to pass down to the slot
  */
 export function renderSlot<TProps>(slot: INativeSlotType | ISlotFn<TProps>, extraProps: TProps, ...children: React.ReactNode[]) {
   return typeof slot === 'function' && (slot as ISlotFn<TProps>)._canCompose

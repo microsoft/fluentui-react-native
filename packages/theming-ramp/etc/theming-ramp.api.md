@@ -6,7 +6,6 @@
 
 import { IComponentSettings } from '@uifabricshared/foundation-settings';
 import { IComponentSettingsCollection } from '@uifabricshared/foundation-settings';
-import { IOverrideLookup } from '@uifabricshared/foundation-settings';
 
 // @public
 export type Color = keyof IPalette | ColorValue;
@@ -32,13 +31,8 @@ export type FontWeight = keyof IFontWeights | FontWeightValue;
 // @public
 export type FontWeightValue = '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
 
-// @public
-export function getOverrideKey(name: string, precedence: string[], overrides: IOverrideLookup): string;
-
-// Warning: (ae-forgotten-export) The symbol "ISettingsWithKey" needs to be exported by the entry point index.d.ts
-//
 // @public (undocumented)
-export function getSettings(theme: ITheme, name: string, overrides?: IOverrideLookup): ISettingsWithKey;
+export function getSettings(theme: ITheme, name: string): IComponentSettings;
 
 // @public (undocumented)
 export function getStockWebPalette(): IPalette;
@@ -488,9 +482,6 @@ export function paletteFromFabricColors(p: IFabricWebPalette, isInverted?: boole
 
 // @public
 export function resolvePartialTheme(theme: ITheme, partialTheme?: IPartialTheme): ITheme;
-
-// @public
-export function resolveSettings(theme: ITheme, target: IComponentSettings, overrides?: IOverrideLookup): IComponentSettings;
 
 // @public
 export function returnAsSlotProps(target: IComponentSettings): IComponentSettings;

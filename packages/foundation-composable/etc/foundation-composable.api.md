@@ -4,102 +4,77 @@
 
 ```ts
 
+import { ISlotProps } from '@uifabricshared/foundation-settings';
 import * as React from 'react';
 
+// @public
+export function atomic<TProps extends object, TState = object>(target: INativeSlotType, usePrepareProps: IComposable<TProps, ISlotProps<TProps>, TState>['usePrepareProps'], filter?: IPropFilter): React.FunctionComponent<TProps>;
+
 // @public (undocumented)
-export type IAsResolved<TBase> = TBase & IResolvedSlotData;
+export function atomicRender<TProps extends object, TState = object>(Slots: ISlots<ISlotProps<TProps>>, _renderData: IRenderData<ISlotProps<TProps>, TState>, ...children: React.ReactNode[]): JSX.Element | null;
+
+// @public (undocumented)
+export function atomicUsePrepareProps<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object>(props: TProps, useStyling: IUseStyling<TProps, TSlotProps>): IRenderData<TSlotProps, TState>;
 
 // @public
-export interface IComposable {
-    // (undocumented)
-    render: (propInfo: IProcessResult, ...children: React.ReactNode[]) => JSX.Element | null;
-    // (undocumented)
-    slots?: {
-        [key: string]: IComposable;
-    };
-    // (undocumented)
-    useProcessProps: (props: IGenericProps, theme: object) => IProcessResult;
+export function composable<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object>(options: IComposableDefinition<TProps, TSlotProps, TState>): IWithComposable<React.FunctionComponent<TProps>, IComposable<TProps, TSlotProps, TState>>;
+
+// @public
+export interface IComposable<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object> {
+    render: (Slots: ISlots<TSlotProps>, renderData: IRenderData<TSlotProps, TState>, ...children: React.ReactNode[]) => JSX.Element | null;
+    slots: ISlotDefinitions<TSlotProps>;
+    usePrepareProps: (props: TProps, useStyling: IUseStyling<TProps, TSlotProps>) => IRenderData<TSlotProps, TState>;
+    useStyling: IUseStyling<TProps, TSlotProps>;
 }
 
 // @public (undocumented)
-export interface IGenericProps {
-    // (undocumented)
-    children?: React.ReactNode;
-}
+export type IComposableDefinition<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = any> = Partial<IComposable<TProps, TSlotProps, TState>>;
 
 // @public
 export type INativeSlotType = React.ElementType<any> | string;
 
 // @public
-export type IProcessResult<TProps extends object = IGenericProps, TSlotProps = ISlotProps, TAdditional = object> = {
-    props?: TProps;
+export type IPropFilter = (propName: string) => boolean;
+
+// @public
+export interface IRenderData<TSlotProps extends ISlotProps, TState = any> {
+    // (undocumented)
     slotProps?: TSlotProps;
-} & TAdditional;
-
-// @public
-export type IPropFilter = (props: object) => object;
-
-// @public
-export type IResolvedSlot<TProps extends object = IGenericProps, TSlotProps = ISlotProps, TAdditional extends object = object> = IAsResolved<IProcessResult<TProps, TSlotProps, TAdditional>>;
-
-// @public (undocumented)
-export interface IResolvedSlotData {
     // (undocumented)
-    composable?: IComposable;
-    // (undocumented)
-    slots?: IResolvedSlots;
+    state?: TState;
 }
 
 // @public
-export interface IResolvedSlots {
-    // (undocumented)
-    [key: string]: IResolvedSlot;
-}
+export type ISlotDefinitions<TSlotProps extends ISlotProps> = {
+    [K in keyof TSlotProps]: ISlotWithFilter;
+};
 
 // @public
-export interface ISlotProps {
-    // (undocumented)
-    [key: string]: IGenericProps;
-    // (undocumented)
-    root: IGenericProps;
-}
-
-// @public (undocumented)
-export type ISlotType = INativeSlotType | IWithComposable<object>;
-
-// @public
-export type ISlotTypes<TMixin = object> = {
-    root: ISlotType | ISlotWithFilter<TMixin>;
-    [key: string]: ISlotType | ISlotWithFilter<TMixin>;
+export type ISlots<TSlotProps extends ISlotProps> = {
+    [K in keyof TSlotProps]: React.FunctionComponent<TSlotProps[K]>;
 };
 
 // @public
 export type ISlotWithFilter<TMixin = object> = {
-    slotType?: ISlotType;
+    slotType?: INativeSlotType;
     filter?: IPropFilter;
 } & TMixin;
 
+// @public (undocumented)
+export type IUseStyling<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>> = (props: TProps) => TSlotProps;
+
 // @public
-export type IWithComposable<T extends object = object> = T & {
-    __composable: IComposable;
+export type IWithComposable<T extends object = object, TComposable = IComposable<object>> = T & {
+    __composable: TComposable;
 };
 
+// Warning: (ae-forgotten-export) The symbol "ISlotFn" needs to be exported by the entry point index.d.ts
+// 
 // @public
-export function renderSlot(slot: IResolvedSlot, ...children: React.ReactNode[]): JSX.Element | null;
+export function renderSlot<TProps>(slot: INativeSlotType | ISlotFn<TProps>, extraProps: TProps, ...children: React.ReactNode[]): React.ReactElement<any, string | ((props: any) => React.ReactElement<any, string | any | (new (props: any) => React.Component<any, any, any>)>) | (new (props: any) => React.Component<any, any, any>)>;
 
 // @public
-export function useProcessComposableTree(composable: IComposable, props: IGenericProps, theme: object): IResolvedSlot;
-
-// @public
-export function useSlotProcessing(composable: IComposable, info: IProcessResult, theme: object): IResolvedSlots | undefined;
-
-// @public
-export function wrapSlots(slots: ISlotTypes): {
-    [key: string]: IComposable;
-};
-
-// @public
-export function wrapStockComponent(component: INativeSlotType, filter?: IPropFilter): IComposable;
+export function withSlots<P>(reactType: INativeSlotType, props?: React.Attributes & P | null, ...children: React.ReactNode[]): ReturnType<React.FunctionComponent<P>>;
 
 
 // (No @packageDocumentation comment for this package)

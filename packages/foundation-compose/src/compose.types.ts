@@ -3,6 +3,7 @@ import { ISlotProps, IComponentSettings, IOverrideLookup } from '@uifabricshared
 import { ISettingsEntry } from '@uifabricshared/themed-settings';
 import { ITheme } from '@uifabricshared/theming-ramp';
 import { ISlotStyleFactories, IComponentTokens } from '@uifabricshared/foundation-tokens';
+import * as React from 'react';
 
 /**
  * Function signature for useStyling as implemented by compose.  This adds the lookup function to enable
@@ -14,7 +15,7 @@ export type IUseComposeStyling<TSlotProps extends ISlotProps> = (props: TSlotPro
  * Array of:
  *  IComponentSettings for the component
  *  string - name of the entry to query in the theme
- *  theme => IComponentSettings function
+ *  theme =\> IComponentSettings function
  *
  * These settings are layered together in order to produce the merged settings for a component
  */
@@ -52,7 +53,7 @@ export interface IComposeOptions<
   TSlotProps extends ISlotProps = ISlotProps<TProps>,
   TState extends object = object,
   TStatics extends object = object
-> extends Omit<IComposableDefinition<TSlotProps['root'], TSlotProps, TState>, 'slots'>, IStylingSettings<TSlotProps> {
+  > extends Omit<IComposableDefinition<TSlotProps['root'], TSlotProps, TState>, 'slots'>, IStylingSettings<TSlotProps> {
   /**
    * Add an additional option to use styling to allow for injecting override lookup functions
    */
@@ -82,7 +83,7 @@ export type IComposeReturnType<
   TSlotProps extends ISlotProps,
   TState extends object = object,
   TStatics extends object = object
-> = React.FunctionComponent<TProps> &
+  > = React.FunctionComponent<TProps> &
   TStatics & {
     /**
      * composable options, used by composable for chaining objects.  For compose this also includes the extensions

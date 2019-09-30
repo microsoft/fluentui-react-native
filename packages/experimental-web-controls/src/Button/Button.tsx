@@ -10,6 +10,7 @@ import { backgroundColorTokens, foregroundColorTokens, getPaletteFromTheme } fro
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { useAsPressable } from '../Pressable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
+import * as React from 'react';
 
 export const Button = compose<IButtonProps, IButtonSlots, IButtonState>({
   displayName: 'Button',

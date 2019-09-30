@@ -13,7 +13,9 @@
     "clean": "just-scripts clean",
     "code-style": "just-scripts code-style",
     "lint": "just-scripts eslint",
-    "start": "just-scripts dev"
+    "start": "just-scripts dev",
+    "verify-api": "just-scripts verify-api-extractor",
+    "update-api": "just-scripts update-api-extractor"
   },
   "keywords": [],
   "author": "",

@@ -11,7 +11,9 @@
     "bundlesize": "bundlesize --debug",
     "clean": "",
     "code-style": "node ./just-scripts.js code-style",
-    "test": "jest"
+    "test": "jest",
+    "verify-api": "echo no api to verify",
+    "update-api": "echo no api to update"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

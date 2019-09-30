@@ -33,7 +33,8 @@
     "prettier": "node scripts/prettier.js",
     "publish:beachball": "beachball publish",
     "bump-versions": "beachball bump",
-    "lint": "lerna run lint"
+    "lint": "lerna run lint",
+    "verify-api": "lerna run verify-api"
   },
   "devDependencies": {
     "beachball": "^1.11.7",

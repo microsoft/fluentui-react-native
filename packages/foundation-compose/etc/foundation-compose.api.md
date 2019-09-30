@@ -4,130 +4,54 @@
 
 ```ts
 
+import { IComponentSettings } from '@uifabricshared/foundation-settings';
 import { IComponentTokens } from '@uifabricshared/foundation-tokens';
-import { IComposable } from '@uifabricshared/foundation-composable';
-import { IGenericProps } from '@uifabricshared/foundation-composable';
-import { INativeTheme } from '@uifabricshared/theming-react-native';
-import { IProcessResult } from '@uifabricshared/foundation-composable';
-import { IResolvedSlot } from '@uifabricshared/foundation-composable';
-import { IResolvedSlotData } from '@uifabricshared/foundation-composable';
+import { IComposableDefinition } from '@uifabricshared/foundation-composable';
+import { INativeSlotType } from '@uifabricshared/foundation-composable';
+import { IOverrideLookup } from '@uifabricshared/foundation-settings';
+import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ISettingsEntry } from '@uifabricshared/themed-settings';
+import { ISlotProps } from '@uifabricshared/foundation-settings';
 import { ISlotStyleFactories } from '@uifabricshared/foundation-tokens';
-import { ISlotTypes } from '@uifabricshared/foundation-composable';
+import { ISlotWithFilter } from '@uifabricshared/foundation-composable';
 import { ITheme } from '@uifabricshared/theming-ramp';
 import * as React from 'react';
 
 // @public
-export function compose<TComponent extends IComponent>(inputComponent: TComponent, base?: React.ReactElement<object>): IComponentReturnType<TComponent>;
+export function compose<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState extends object = object, TStatics extends object = object>(inputComponent: Partial<IComposeOptions<TProps, TSlotProps, TState, TStatics>>, base?: INativeSlotType): IComposeReturnType<TProps, TSlotProps, TState, TStatics>;
 
-// Warning: (ae-forgotten-export) The symbol "IComponentSettings" needs to be exported by the entry point index.d.ts
-//
-// @public (undocumented)
-export interface IComponent<TProps extends object = object, TSlotProps extends IComponentSettings = IComponentSettings, TCustomizeableProps extends TProps = TProps, TState extends object = any, TStatics extends object = object> {
-    // (undocumented)
-    displayName: string;
-    finalizer?: IFinalizer<TCustomizeableProps, TSlotProps, TState>;
-    propsType?: TProps;
-    settings?: ISettingsEntry<TSlotProps, ITheme>[];
-    // (undocumented)
-    settingsType?: TSlotProps;
-    slots?: IComponentSlotTypes<TCustomizeableProps>;
+// @public
+export interface IComposeOptions<TProps extends object = object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState extends object = object, TStatics extends object = object> extends Omit<IComposableDefinition<TSlotProps['root'], TSlotProps, TState>, 'slots'>, IStylingSettings<TSlotProps> {
+    displayName?: string;
     statics?: TStatics;
-    themeQueryInputs?: (name: string, renderData: IRenderData<TCustomizeableProps, TSlotProps, TState>) => IThemeQueryInputs;
-    usePrepareState?: (renderData: IRenderData<TCustomizeableProps, TSlotProps, TState>) => IRenderData<TCustomizeableProps, TSlotProps, TState>;
-    view?: (renderData: IResolvedData<TCustomizeableProps, TSlotProps, TState>, ...children: React.ReactNode[]) => JSX.Element | null;
+    usePrepareProps?: (props: TSlotProps['root'], useStyling: IUseComposeStyling<TSlotProps>) => IRenderData<TSlotProps, TState>;
+    useStyling?: IUseComposeStyling<TSlotProps>;
 }
 
-// @public (undocumented)
-export type IComponentCustomizations<TComponent extends IComponent> = {
-    __options: TComponent;
-    __composable: IComposable;
-    customize: ICustomizeRoutine<TComponent, IExtractSettingsType<TComponent>>;
+// @public
+export type IComposeReturnType<TProps extends object, TSlotProps extends ISlotProps, TState extends object = object, TStatics extends object = object> = React.FunctionComponent<TProps> & TStatics & {
+    __composable: IComposeOptions<TProps, TSlotProps, TState, TStatics>;
+    customize: (...settings: IComposeSettings<TSlotProps>) => IComposeReturnType<TProps, TSlotProps, TState, TStatics>;
+    compose: (newOptions: Partial<IComposeOptions<TProps, TSlotProps, TState, TStatics>>) => IComposeReturnType<TProps, TSlotProps, TState, TStatics>;
 };
 
 // @public
-export type IComponentOptions<TComponent extends IComponent = IComponent> = TComponent & {
-    resolvedTokens?: IComponentTokens<IComponentProps<TComponent>, ITheme>;
-    tokenCacheKey?: symbol;
-};
+export type IComposeSettings<TSlotProps extends ISlotProps> = ISettingsEntry<IComponentSettings<TSlotProps>, ITheme>[];
 
 // @public
-export type IComponentProps<TComponent extends IComponent> = NonNullable<TComponent['propsType']>;
-
-// @public (undocumented)
-export type IComponentReturnType<TComponent extends IComponent> = IReactComponentType<TComponent> & TComponent['statics'];
-
-// @public (undocumented)
-export type IComponentSlotTypes<TProps> = ISlotTypes<ISlotStyleFactories<TProps, ITheme>>;
-
-// @public (undocumented)
-export type ICustomizeRoutine<TComponent extends IComponent, TSettings extends object> = (...keys: ISettingsEntry<TSettings, ITheme>[]) => IComponentReturnType<TComponent>;
-
-// @public (undocumented)
-export type IExtractSettingsType<TComponent extends IComponent> = NonNullable<TComponent['settingsType']>;
+export function initializeStyling<TSlotProps extends ISlotProps>(styleSettings: IStylingSettings<TSlotProps>, name?: string): IUseComposeStyling<TSlotProps>;
 
 // @public
-export type IFinalizer<TProps extends object, TSlotProps extends IComponentSettings, TState extends object = object> = (renderData: IRenderData<TProps, TSlotProps, TState>) => IRenderData<TProps, TSlotProps, TState>;
-
-// @public (undocumented)
-export type IPropsWithChildren<TProps extends object> = TProps & {
-    children?: React.ReactNode;
-};
-
-// @public (undocumented)
-export type IReactComponentType<TComponent extends IComponent> = React.FunctionComponent<IComponentProps<TComponent>> & IComponentCustomizations<TComponent>;
-
-// @public (undocumented)
-export interface IRenderData<TProps extends object = object, TSlotProps extends IComponentSettings = IComponentSettings, TState extends object = any> {
-    // (undocumented)
-    props: TProps;
-    // (undocumented)
-    settingsKey?: string;
-    // (undocumented)
-    slotProps?: TSlotProps;
-    // (undocumented)
-    state: TState;
-    // (undocumented)
-    theme: INativeTheme;
+export interface IStylingSettings<TSlotProps extends ISlotProps> {
+    resolvedTokens?: IComponentTokens<TSlotProps['root'], ITheme>;
+    settings?: IComposeSettings<TSlotProps>;
+    slots: {
+        [K in keyof TSlotProps]: ISlotWithFilter<ISlotStyleFactories<TSlotProps['root'], ITheme>>;
+    };
 }
 
-// @public (undocumented)
-export type IResolvedData<TProps extends object, TSlotProps extends IComponentSettings, TState extends object = any> = IRenderData<TProps, TSlotProps, TState> & IResolvedSlotData;
-
-// @public (undocumented)
-export interface IThemeQueryInputs {
-    // (undocumented)
-    name: string;
-    // (undocumented)
-    overrides?: object;
-}
-
-// @public (undocumented)
-export function _processSettings<TComponent extends IComponent>(component: TComponent, data: IRenderData): IRenderData;
-
 // @public
-export function renderComponent<TComponent extends IComponent>(component: TComponent, result: IResolvedSlot, ...children: React.ReactNode[]): JSX.Element | null;
-
-// @public
-export function standardFinalizer(renderData: IRenderData): IRenderData;
-
-// @public
-export function standardPrepareRenderData(props: IGenericProps, theme: INativeTheme): IRenderData;
-
-// @public (undocumented)
-export function standardThemeQueryInputs(name: string, renderData: IRenderData): {
-    name: string;
-    overrides?: object;
-};
-
-// @public (undocumented)
-export function standardUsePrepareState(renderData: IRenderData): IRenderData;
-
-// @public
-export function useProcessComponent<TOptions extends IComponentOptions<IComponent>>(component: TOptions, userProps: IGenericProps, theme: object): IProcessResult;
-
-// @public
-export function wrapComponent<TComponent extends IComponent>(component: TComponent): IComposable;
+export type IUseComposeStyling<TSlotProps extends ISlotProps> = (props: TSlotProps['root'], lookup?: IOverrideLookup) => TSlotProps;
 
 
 // (No @packageDocumentation comment for this package)

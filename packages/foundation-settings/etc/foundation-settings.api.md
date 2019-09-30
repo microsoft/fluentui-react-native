@@ -10,12 +10,8 @@ export function flattenStyle(style: IStyleProp<object>): object;
 // @public (undocumented)
 export function getActiveOverrides(target: IComponentSettings, lookup?: IOverrideLookup): string[];
 
-// @public
-export function getParentSettingsChain(lookup: IComponentSettingsCollection, target: string | IComponentSettings): IComponentSettings[];
-
 // @public (undocumented)
 export type IComponentSettings<TSlotProps extends ISlotProps = ISlotProps> = IPartialSlotProps<TSlotProps> & {
-    _parent?: string | string[];
     _precedence?: string[];
     _overrides?: IComponentSettingsCollection<IComponentSettings<TSlotProps>>;
 };
@@ -54,7 +50,7 @@ export interface ISlotProps<TProps extends object = object> {
 // Warning: (ae-forgotten-export) The symbol "RegisteredStyle" needs to be exported by the entry point index.d.ts
 // Warning: (ae-forgotten-export) The symbol "RecursiveArray" needs to be exported by the entry point index.d.ts
 // Warning: (ae-forgotten-export) The symbol "Falsy" needs to be exported by the entry point index.d.ts
-//
+// 
 // @public (undocumented)
 export type IStyleProp<T> = T | RegisteredStyle<T> | RecursiveArray<T | RegisteredStyle<T> | Falsy> | Falsy;
 
