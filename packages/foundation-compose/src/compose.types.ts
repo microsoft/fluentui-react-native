@@ -15,7 +15,7 @@ export type IUseComposeStyling<TSlotProps extends ISlotProps> = (props: TSlotPro
  * Array of:
  *  IComponentSettings for the component
  *  string - name of the entry to query in the theme
- *  theme =\> IComponentSettings function
+ *  `theme => IComponentSettings` function
  *
  * These settings are layered together in order to produce the merged settings for a component
  */

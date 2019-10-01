@@ -34,7 +34,8 @@
     "publish:beachball": "beachball publish",
     "bump-versions": "beachball bump",
     "lint": "lerna run lint",
-    "verify-api": "lerna run verify-api"
+    "verify-api": "lerna run verify-api",
+    "update-api": "lerna run update-api"
   },
   "devDependencies": {
     "beachball": "^1.11.7",

@@ -48,7 +48,7 @@ export type IMergeRecursionHandler = (options: IMergeOptions, ...objs: any[]) =>
  * create a new object.
  *
  * @param options - options driving behavior of the merge.  See IMergeOptions for a description.  Some basic combos would
- * be \{\} - no recursion, \{ depth: -1 \} - recurse infinitely
+ * be `{}` - no recursion, `{ depth: -1 }` - recurse infinitely
  * @param objs - an array of objects to merge together
  */
 export function immutableMergeCore(options: IMergeOptions, ...objs: any[]): any {
