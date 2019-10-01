@@ -324,7 +324,7 @@ export function usePressableStateChange<StateType, PropsType extends Record<stri
 
 // Warnings were encountered during analysis:
 // 
-// src/Button/Button.types.ts:84:3 - (ae-forgotten-export) The symbol "IImageProps" needs to be exported by the entry point index.d.ts
+// lib/Button/Button.types.d.ts:67:5 - (ae-forgotten-export) The symbol "IImageProps" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

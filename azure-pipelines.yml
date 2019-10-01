@@ -19,8 +19,10 @@ steps:
     yarn
     npm run build
   displayName: 'yarn install and build'
+  failOnStderr: true
 
 - script: |
     yarn verify-api
     yarn check-for-changed-files
   displayName: 'Verify API and Ensure Changed Files'
+  failOnStderr: true
