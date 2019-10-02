@@ -13,9 +13,11 @@ This provides a foundation for writing both simple and higher order components w
 
 ## Guides
 
-- [Getting Started: Simple Components](./GuideSimple.md) - a walkthrough of creating a simple composable component. Start here to understand the base concepts.
-- [Getting Started: Higher Order Components](./GuideHOC.md) - a walkthrough of creating a complex composable component. Read this next to better understand how the pieces fit together and can be recombined.
+- [Getting Started: Simple Components](./docs/GuideSimple.md) - a walkthrough of creating a simple composable component. Start here to understand the base concepts.
+- [Getting Started: Higher Order Components](./docs/GuideHOC.md) - a walkthrough of creating a complex composable component. Read this next to better understand how the pieces fit together and can be recombined.
 
 ## Writing a Higher Order Component
 
 While the composable pattern works for simple components, it is designed to help manage the complexity of higher order components. Let's use writing a simple Button as an example, this time working backwards from `render`.
+
+![Composable Component Diagram](./docs/Composable.png)
