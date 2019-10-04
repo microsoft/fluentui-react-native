@@ -16,8 +16,52 @@ This provides a foundation for writing both simple and higher order components w
 - [Getting Started: Simple Components](./docs/GuideSimple.md) - a walkthrough of creating a simple composable component. Start here to understand the base concepts.
 - [Getting Started: Higher Order Components](./docs/GuideHOC.md) - a walkthrough of creating a complex composable component. Read this next to better understand how the pieces fit together and can be recombined.
 
-## Writing a Higher Order Component
+## Reference
 
-While the composable pattern works for simple components, it is designed to help manage the complexity of higher order components. Let's use writing a simple Button as an example, this time working backwards from `render`.
+The primary entry point into the module is via the `composable` function. This creates a functional component, for use with react or react-native, which can be efficiently layered and recomposed.
+
+### composable
+
+```ts
+export function composable<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object>(
+  options: IComposableDefinition<TProps, TSlotProps, TState>
+): IWithComposable<React.FunctionComponent<TProps>, IComposable<TProps, TSlotProps, TState>> {
+```
+
+#### Generic template arguments
+
+The `composable` function takes up to generic template arguments.
+
+- `TProps extends object` - This determines the type of the functional component. At its heart the component will be `React.FunctionalComponent<TProps>`.
+- `TSlotProps extends ISlotProps = ISlotProps<TProps>` - This is the collection of props corresponding to the parts of the component. If the type is omitted then this will be defined as an object in the form of `{ root: TProps }`. See the [foundation-settings](../foundation-settings/README.md) documentation for more on slot props.
+- `TState = object` - State is an optional type, used to pass data from `usePrepareProps` to `render`.
+
+#### options: IComposableDefinition
+
+The created component is defined by the set of options passed in. This is of type `IComposableDefinition<TProps, TSlotProps, TState>` and is described below.
+
+#### Return result
+
+`composable` will create a function component and will also append its options to the function as `__composable`. As an example if there is a `FancyThing` component, its options will be accessible via `FancyThing.__composable` while it can still be used in a JSX tree via `<FancyThing>` or `React.createElement(FancyThing, props, children)`.
+
+### IComposableDefinition
+
+The options which configure a composable component have four parts: `useStyling`, `usePrepareProps`, `render`, and `slots`.
+
+#### usePrepareProps
+
+#### render
+
+#### slots
+
+#### useStyling (optional)
+
+This optional function defines the pattern for injecting opinionated styling.
+
+```ts
+useStyling: (props: TProps) => TSlotProps;
+```
+
+If not defined, an empty implementation will be set into the options.
 
 ![Composable Component Diagram](./docs/Composable.png)
