@@ -33,13 +33,14 @@ export const ThemeContext = React.createContext<IThemeContextType>(undefined);
  * Multipurpose theme provider.  This can run in provider/consumer mode and pure consumer mode.
  *
  * In pure consumer mode the usage is as follows:
- *
+ * ```
  *    <ThemeLayer>{(theme: ITheme) => {
  *      return (<MyComponent style={someStyleFn(theme, 'stylename')}/>);
  *    }}</ThemeLayer>
+ * ```
  *
  * In provider/consumer mode a themeName will be specified:
- *
+ * ```
  *    <ThemeLayer themeName='myTheme'>{(theme: ITheme) => {
  *      return (
  *        <View>
@@ -48,7 +49,7 @@ export const ThemeContext = React.createContext<IThemeContextType>(undefined);
  *        </View>
  *      );
  *    }}</ThemeLayer>
- *
+ * ```
  * The work of registering for updates will be done automatically.  The highest level `ThemeLayer` in
  * consumer mode will automatically register and act like a provider to ensure renders happen on theme
  * change

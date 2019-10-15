@@ -7,6 +7,10 @@
     "url": "https://github.com/microsoft/ui-fabric-react-native"
   },
   "main": "./eslintrc.js",
+  "scripts": {
+    "verify-api": "echo no api to verify",
+    "update-api": "echo no api to update"
+  },
   "license": "MIT",
   "peerDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.1.0",

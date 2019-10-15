@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "api-extractor setup",
+  "packageName": "@uifabricshared/themed-settings",
+  "email": "taamireh@microsoft.com",
+  "commit": "eb1d0cf52629e6efe6241776cc97a25585e866a4",
+  "date": "2019-09-30T23:01:57.166Z"
+}
