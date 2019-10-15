@@ -2,6 +2,20 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Tue, 15 Oct 2019 02:11:41 GMT",
+      "tag": "@uifabricshared/foundation-composable_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "api-extractor setup",
+            "author": "taamireh@microsoft.com",
+            "commit": "eb1d0cf52629e6efe6241776cc97a25585e866a4"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 25 Sep 2019 23:15:41 GMT",
       "tag": "@uifabricshared/foundation-composable_v0.2.0",
       "version": "0.2.0",

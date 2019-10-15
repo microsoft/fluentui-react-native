@@ -25,10 +25,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-compose": "1.1.1",
-    "@uifabricshared/foundation-settings": "0.3.0",
-    "@uifabricshared/theming-ramp": "0.3.0",
-    "@uifabricshared/theming-react-native": "0.1.5"
+    "@uifabricshared/foundation-compose": "1.1.2",
+    "@uifabricshared/foundation-settings": "0.3.1",
+    "@uifabricshared/theming-ramp": "0.3.1",
+    "@uifabricshared/theming-react-native": "0.1.6"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

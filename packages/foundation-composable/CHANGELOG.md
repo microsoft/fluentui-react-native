@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-composable
 
-This log was last generated on Wed, 25 Sep 2019 23:15:41 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Oct 2019 02:11:41 GMT and should not be manually modified.
 
+## 0.2.1
+Tue, 15 Oct 2019 02:11:41 GMT
+
+### Patches
+
+- api-extractor setup (taamireh@microsoft.com)
 ## 0.2.0
 Wed, 25 Sep 2019 23:15:41 GMT
 

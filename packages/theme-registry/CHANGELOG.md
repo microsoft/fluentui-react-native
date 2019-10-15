@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/theme-registry
 
-This log was last generated on Thu, 19 Sep 2019 23:21:48 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Oct 2019 02:11:41 GMT and should not be manually modified.
 
+## 0.1.5
+Tue, 15 Oct 2019 02:11:41 GMT
+
+### Patches
+
+- api-extractor setup (taamireh@microsoft.com)
 ## 0.1.4
 Thu, 19 Sep 2019 23:21:48 GMT
 
