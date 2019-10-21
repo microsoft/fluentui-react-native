@@ -3,19 +3,18 @@ import { IButtonSlots, IButtonRenderData, IButtonCustomizableProps, IButtonState
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 // import { Stack } from '../Stack';
 import { Text } from '../Text/index';
-import { loadButtonSettings } from './Button.settings';
+import { settings } from './Button.settings';
 import { Stack } from '../Stack/index';
 import { textTokens, borderTokens } from '../tokens';
 import { backgroundColorTokens, foregroundColorTokens, getPaletteFromTheme } from '../tokens/ColorTokens';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { useAsPressable } from '../Pressable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-
-loadButtonSettings();
+import * as React from 'react';
 
 export const Button = compose<IButtonProps, IButtonSlots, IButtonState>({
   displayName: 'Button',
-  settings: ['RNFButton'],
+  settings,
   usePrepareProps: (userProps: IButtonCustomizableProps, useStyling: IUseComposeStyling<IButtonSlots>) => {
     const { icon, content, ...rest } = userProps;
     // attach the pressable state handlers

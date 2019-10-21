@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-composable",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Composable component building blocks",
   "repository": {
     "type": "git",
@@ -16,13 +16,15 @@
     "lint": "just-scripts eslint",
     "start": "just-scripts dev",
     "start-test": "just-scripts jest-watch",
-    "update-snapshots": "just-scripts jest -u"
+    "update-snapshots": "just-scripts jest -u",
+    "verify-api": "just-scripts verify-api-extractor",
+    "update-api": "just-scripts update-api-extractor"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": "0.2.2"
+    "@uifabricshared/foundation-settings": "0.3.1"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { ISlotProps } from '@uifabricshared/foundation-settings';
 
 export type IUseStyling<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>> = (props: TProps) => TSlotProps;

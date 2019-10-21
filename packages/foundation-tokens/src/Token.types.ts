@@ -14,7 +14,7 @@ import { ICacheInfo, ICachedPropHandlers } from './Token.internal';
  * framework into a processor function when the component is defined.
  */
 
-/** function which takes a theme and returns an object to look up a value with (t) => t.palette as an example */
+/** function which takes a theme and returns an object to look up a value with `(t) =>` t.palette as an example */
 export type ILookupThemePart<TTheme> = (theme: TTheme) => object;
 
 /**

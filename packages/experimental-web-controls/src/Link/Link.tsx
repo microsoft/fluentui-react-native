@@ -4,17 +4,15 @@
 import { compose } from '@uifabricshared/foundation-compose';
 import { ILinkSlotProps, ILinkRenderData, ILinkProps, ILinkState } from './Link.types';
 import { Text } from '../Text';
-import { loadLinkSettings } from './Link.settings';
+import { settings } from './Link.settings';
 import { useLinkPrepareProps } from './Link.helpers';
 import { textTokens } from '../tokens';
 import { foregroundColorTokens } from '../tokens/ColorTokens';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 
-loadLinkSettings();
-
 export const Link = compose<ILinkProps, ILinkSlotProps, ILinkState>({
   displayName: 'Link',
-  settings: ['RNFLink'],
+  settings,
   usePrepareProps: useLinkPrepareProps,
   render: (Slots: ISlots<ILinkSlotProps>, renderData: ILinkRenderData) => {
     const URL = renderData.state.URL;

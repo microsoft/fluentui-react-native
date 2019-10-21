@@ -1,5 +1,6 @@
 import { IStyleProp } from '@uifabricshared/foundation-settings';
 import { IDivProps, ICSSStyle } from '../htmlTypes';
+import * as React from 'react';
 
 /**
  * Used by IRenderChild, it simply describes a function that takes

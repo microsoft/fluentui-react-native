@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/immutable-merge
 
-This log was last generated on Thu, 19 Sep 2019 18:26:03 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Oct 2019 02:11:41 GMT and should not be manually modified.
 
+## 0.1.6
+Tue, 15 Oct 2019 02:11:41 GMT
+
+### Patches
+
+- api-extractor setup (taamireh@microsoft.com)
 ## 0.1.5
 Thu, 19 Sep 2019 18:26:03 GMT
 

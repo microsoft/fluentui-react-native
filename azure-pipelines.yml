@@ -1,8 +1,3 @@
-# Node.js with React
-# Build a Node.js project that uses React.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 pr:
 - master
 
@@ -19,3 +14,8 @@ steps:
     yarn
     npm run build
   displayName: 'yarn install and build'
+
+- script: |
+    yarn verify-api
+    yarn check-for-changed-files
+  displayName: 'Verify API and Ensure Changed Files'

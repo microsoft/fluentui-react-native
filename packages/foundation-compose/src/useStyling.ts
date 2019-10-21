@@ -25,7 +25,7 @@ function _getComponentCache(cacheKey: symbol, theme: ITheme): { [key: string]: I
 }
 
 function _getSettingsFromTheme(theme: ITheme, name: string): IComponentSettings {
-  return getSettings(theme, name).settings;
+  return getSettings(theme, name);
 }
 
 function _getHasToken<TSlotProps extends ISlotProps>(slots: IStylingSettings<TSlotProps>['slots']): ITargetHasToken {

@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/immutable-merge",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Immutable merge routines for deep customizable merging",
   "repository": {
     "type": "git",
@@ -16,7 +16,9 @@
     "lint": "just-scripts eslint",
     "start": "just-scripts dev",
     "start-test": "just-scripts jest-watch",
-    "update-snapshots": "just-scripts jest -u"
+    "update-snapshots": "just-scripts jest -u",
+    "verify-api": "just-scripts verify-api-extractor",
+    "update-api": "just-scripts update-api-extractor"
   },
   "keywords": [],
   "author": "",

@@ -1,7 +1,19 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Thu, 19 Sep 2019 23:21:48 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Oct 2019 02:11:41 GMT and should not be manually modified.
 
+## 0.3.1
+Tue, 15 Oct 2019 02:11:41 GMT
+
+### Patches
+
+- api-extractor setup (taamireh@microsoft.com)
+## 0.3.0
+Thu, 26 Sep 2019 19:45:56 GMT
+
+### Minor changes
+
+- remove _parent from component settings and stop using augment platform theme for settings (jasonmo360@gmail.com)
 ## 0.2.1
 Thu, 19 Sep 2019 23:21:48 GMT
 

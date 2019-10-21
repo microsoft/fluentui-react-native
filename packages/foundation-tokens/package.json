@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-tokens",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Core tokens package",
   "repository": {
     "type": "git",
@@ -16,14 +16,16 @@
     "lint": "just-scripts eslint",
     "start": "just-scripts dev",
     "start-test": "just-scripts jest-watch",
-    "update-snapshots": "just-scripts jest -u"
+    "update-snapshots": "just-scripts jest -u",
+    "verify-api": "just-scripts verify-api-extractor",
+    "update-api": "just-scripts update-api-extractor"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^19.2.2",
-    "@uifabricshared/foundation-settings": "0.2.2",
+    "@uifabricshared/foundation-settings": "0.3.1",
     "@uifabricshared/build-native": "^0.1.1"
   },
   "beachball": {

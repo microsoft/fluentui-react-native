@@ -3,12 +3,23 @@ import { ISlotProps, IComponentSettings, IOverrideLookup } from '@uifabricshared
 import { ISettingsEntry } from '@uifabricshared/themed-settings';
 import { ITheme } from '@uifabricshared/theming-ramp';
 import { ISlotStyleFactories, IComponentTokens } from '@uifabricshared/foundation-tokens';
+import * as React from 'react';
 
 /**
  * Function signature for useStyling as implemented by compose.  This adds the lookup function to enable
  * more control over how overrides are applied.
  */
 export type IUseComposeStyling<TSlotProps extends ISlotProps> = (props: TSlotProps['root'], lookup?: IOverrideLookup) => TSlotProps;
+
+/**
+ * Array of:
+ *  IComponentSettings for the component
+ *  string - name of the entry to query in the theme
+ *  `theme => IComponentSettings` function
+ *
+ * These settings are layered together in order to produce the merged settings for a component
+ */
+export type IComposeSettings<TSlotProps extends ISlotProps> = ISettingsEntry<IComponentSettings<TSlotProps>, ITheme>[];
 
 /**
  * Settings which dictate the behavior of useStyling, as implemented by the compose package.  These are
@@ -23,7 +34,7 @@ export interface IStylingSettings<TSlotProps extends ISlotProps> {
   /**
    * settings used to build up the style definitions
    */
-  settings?: ISettingsEntry<IComponentSettings<TSlotProps>, ITheme>[];
+  settings?: IComposeSettings<TSlotProps>;
 
   /**
    * The input tokens processed, built into functions, with the keys built into a map.
@@ -42,7 +53,7 @@ export interface IComposeOptions<
   TSlotProps extends ISlotProps = ISlotProps<TProps>,
   TState extends object = object,
   TStatics extends object = object
-> extends Omit<IComposableDefinition<TSlotProps['root'], TSlotProps, TState>, 'slots'>, IStylingSettings<TSlotProps> {
+  > extends Omit<IComposableDefinition<TSlotProps['root'], TSlotProps, TState>, 'slots'>, IStylingSettings<TSlotProps> {
   /**
    * Add an additional option to use styling to allow for injecting override lookup functions
    */
@@ -72,7 +83,7 @@ export type IComposeReturnType<
   TSlotProps extends ISlotProps,
   TState extends object = object,
   TStatics extends object = object
-> = React.FunctionComponent<TProps> &
+  > = React.FunctionComponent<TProps> &
   TStatics & {
     /**
      * composable options, used by composable for chaining objects.  For compose this also includes the extensions
@@ -83,9 +94,7 @@ export type IComposeReturnType<
     /**
      * shorthand function for doing quick customizations of a component by appending to settings
      */
-    customize: (
-      ...keys: ISettingsEntry<IComponentSettings<TSlotProps>, ITheme>[]
-    ) => IComposeReturnType<TProps, TSlotProps, TState, TStatics>;
+    customize: (...settings: IComposeSettings<TSlotProps>) => IComposeReturnType<TProps, TSlotProps, TState, TStatics>;
 
     /**
      * helper function to quickly add new partial options to the base component.  The primary advantage is that

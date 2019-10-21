@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-compose",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "Compose infrastructure",
   "repository": {
     "type": "git",
@@ -16,17 +16,19 @@
     "lint": "just-scripts eslint",
     "start": "just-scripts dev",
     "start-test": "just-scripts jest-watch",
-    "update-snapshots": "just-scripts jest -u"
+    "update-snapshots": "just-scripts jest -u",
+    "verify-api": "just-scripts verify-api-extractor",
+    "update-api": "just-scripts update-api-extractor"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/themed-settings": "0.2.2",
-    "@uifabricshared/foundation-composable": "0.2.0",
-    "@uifabricshared/foundation-tokens": "0.1.4",
-    "@uifabricshared/theming-react-native": "0.1.5",
-    "@uifabricshared/theming-ramp": "0.2.1"
+    "@uifabricshared/themed-settings": "0.2.3",
+    "@uifabricshared/foundation-composable": "0.2.1",
+    "@uifabricshared/foundation-tokens": "0.1.5",
+    "@uifabricshared/theming-react-native": "0.1.6",
+    "@uifabricshared/theming-ramp": "0.3.1"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
