@@ -15,12 +15,7 @@ export function flattenStyle(style: IStyleProp<object>): object {
   if (!Array.isArray(style)) {
     return style;
   }
-
-  const result = {};
-  for (let i = 0, styleLength = style.length; i < styleLength; ++i) {
-    Object.assign(result, flattenStyle(style[i]));
-  }
-  return result;
+  return immutableMerge(...style.map(v => flattenStyle(v)));
 }
 
 /**

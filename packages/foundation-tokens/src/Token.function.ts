@@ -141,16 +141,23 @@ export function buildComponentTokens<TProps extends object, TTheme>(
   // iterate through each factory and generate a handler for it.  Note that even if no styleFactories
   // are provided within it will still generate the handler to do style caching and finalization
   Object.getOwnPropertyNames(factories).forEach(slot => {
-    const factorySet = factories[slot].styleFactories;
+    const factoriesBase = factories[slot].styleFactories;
     const mappings: ITokensForSlot<TProps, TTheme> = { toStyle: [], toTokens: [], functions: [] };
     const { toStyle, toTokens, functions } = mappings;
     const slotKeys = {};
 
     // if there are style factories provided split them into ones that target tokens and ones that target styles
-    if (factorySet) {
+    if (factoriesBase) {
+      const factorySet = Array.isArray(factoriesBase) ? factoriesBase : [factoriesBase];
       for (const set of factorySet) {
-        if (Array.isArray(set)) {
-          for (const operation of set) {
+        if (typeof set === 'function') {
+          functions.push(set);
+          set._keys.forEach(key => {
+            slotKeys[key as string] = undefined;
+          });
+        } else {
+          const setArray = Array.isArray(set) ? set : [set as IStyleFactoryOperation<TProps, TTheme>];
+          for (const operation of setArray) {
             slotKeys[operation.source as string] = undefined;
             const target = operation.target || operation.source;
             if (hasToken && hasToken(slot, target as string)) {
@@ -159,11 +166,6 @@ export function buildComponentTokens<TProps extends object, TTheme>(
               toStyle.push(operation);
             }
           }
-        } else {
-          functions.push(set);
-          set._keys.forEach(key => {
-            slotKeys[key as string] = undefined;
-          });
         }
       }
     }
