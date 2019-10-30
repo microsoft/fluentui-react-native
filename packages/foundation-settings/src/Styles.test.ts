@@ -24,6 +24,7 @@ interface IFakeStyle {
   color?: string;
   fontFamily?: string;
   borderWidth?: number;
+  ':hover'?: IFakeStyle;
 }
 
 const styleFinalizer: IFinalizeStyle = (target: IFakeStyle) => {
@@ -96,6 +97,36 @@ const sMergedFinal: IFakeStyleProp = {
   ...s2Final
 };
 
+const sSelector: IFakeStyleProp = {
+  borderWidth: 1,
+  ':hover': {
+    borderWidth: 2,
+    fontFamily: 'primary'
+  }
+};
+
+const sSelector2: IFakeStyleProp = {
+  backgroundColor: 'white',
+  ':hover': {
+    backgroundColor: 'black',
+    borderWidth: 3
+  }
+};
+
+const sArraySelector: IFakeStyleProp = [[sSelector]];
+
+const sArraySelector2: IFakeStyleProp = [sSelector2];
+
+const sMergedSelectors: IFakeStyleProp = {
+  borderWidth: 1,
+  backgroundColor: 'white',
+  ':hover': {
+    borderWidth: 3,
+    fontFamily: 'primary',
+    backgroundColor: 'black'
+  }
+};
+
 describe('Style flatten and merge tests', () => {
   test('flatten recursive arrays', () => {
     const flattened = flattenStyle(s1);
@@ -111,6 +142,16 @@ describe('Style flatten and merge tests', () => {
   test('merge also flattens', () => {
     const merged = mergeAndFlattenStyles(undefined, undefined, s1, s2);
     expect(merged).toEqual(sMerged);
+  });
+
+  test('merge with sub objects', () => {
+    const merged = mergeAndFlattenStyles(undefined, undefined, sSelector, sSelector2);
+    expect(merged).toEqual(sMergedSelectors);
+  });
+
+  test('merge sub objects in arrays', () => {
+    const merged = mergeAndFlattenStyles(undefined, undefined, sArraySelector, sArraySelector2);
+    expect(merged).toEqual(sMergedSelectors);
   });
 
   test('finalize single style', () => {

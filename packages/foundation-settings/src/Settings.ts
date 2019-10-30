@@ -15,6 +15,10 @@ function _mergeStyles(_options: IMergeOptions, ...objs: (IStyleProp<object>)[]):
   return mergeAndFlattenStyles(undefined, undefined, ...objs);
 }
 
+function _mergeClassName(_options: IMergeOptions, ...names: any[]): string | undefined {
+  return names.filter(v => v && typeof v === 'string').join(' ');
+}
+
 /**
  * styles should be flattened and merged
  * tokens should be merged one level
@@ -23,6 +27,7 @@ function _mergeStyles(_options: IMergeOptions, ...objs: (IStyleProp<object>)[]):
 const _recurseOptions = {
   style: _mergeStyles,
   tokens: true,
+  className: _mergeClassName,
   _overrides: _mergeCollection
 };
 
@@ -43,7 +48,11 @@ const _mergeCollectionOptions: IMergeOptions = {
 };
 
 const _mergePropsOptions: IMergeOptions = {
-  recurse: { style: _mergeStyles, tokens: true }
+  recurse: {
+    style: _mergeStyles,
+    tokens: true,
+    className: _mergeClassName
+  }
 };
 
 /**
