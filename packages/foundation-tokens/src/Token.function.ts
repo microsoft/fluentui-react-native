@@ -142,13 +142,13 @@ export function buildComponentTokens<TProps extends object, TTheme>(
   // are provided within it will still generate the handler to do style caching and finalization
   Object.getOwnPropertyNames(factories).forEach(slot => {
     const factoriesBase = factories[slot].styleFactories;
-    const factorySet = Array.isArray(factoriesBase) ? factoriesBase : [factoriesBase];
     const mappings: ITokensForSlot<TProps, TTheme> = { toStyle: [], toTokens: [], functions: [] };
     const { toStyle, toTokens, functions } = mappings;
     const slotKeys = {};
 
     // if there are style factories provided split them into ones that target tokens and ones that target styles
-    if (factorySet) {
+    if (factoriesBase) {
+      const factorySet = Array.isArray(factoriesBase) ? factoriesBase : [factoriesBase];
       for (const set of factorySet) {
         if (typeof set === 'function') {
           functions.push(set);
