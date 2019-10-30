@@ -51,10 +51,18 @@ export type IStyleFactoryFunctionRaw<TProps, TTheme> = (tokenProps: TProps, them
 export type IStyleFactoryFunction<TProps, TTheme> = IStyleFactoryFunctionRaw<TProps, TTheme> & { _keys: (keyof TProps)[] };
 
 /**
+ * An entry can be an individual operation, an array of operations, or a token function
+ */
+export type IStyleFactoryEntry<TProps, TTheme> =
+  | IStyleFactoryOperation<TProps, TTheme>
+  | IOperationSet<TProps, TTheme>
+  | IStyleFactoryFunction<TProps, TTheme>;
+
+/**
  * For a given slot a component author specifies an array of operations and functions to execute to produce props and styles
  */
 export interface ISlotStyleFactories<TProps, TTheme> {
-  styleFactories?: (IOperationSet<TProps, TTheme> | IStyleFactoryFunction<TProps, TTheme>)[];
+  styleFactories?: IStyleFactoryEntry<TProps, TTheme> | IStyleFactoryEntry<TProps, TTheme>[];
 }
 
 /**
