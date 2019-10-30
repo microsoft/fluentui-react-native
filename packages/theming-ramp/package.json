@@ -24,7 +24,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": "0.3.1",
+    "@uifabricshared/foundation-settings": "0.3.2",
     "@uifabricshared/immutable-merge": "0.1.6"
   },
   "devDependencies": {

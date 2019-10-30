@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "ensure styles merge selectors and merge handles className",
-  "packageName": "@uifabricshared/foundation-settings",
-  "email": "jasonmo360@gmail.com",
-  "commit": "30d9a31ad57f098ab1b6074fd975dc157e64fdc8",
-  "date": "2019-10-30T07:05:21.836Z"
-}

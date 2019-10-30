@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-settings
 
-This log was last generated on Tue, 15 Oct 2019 02:11:41 GMT and should not be manually modified.
+This log was last generated on Wed, 30 Oct 2019 20:23:45 GMT and should not be manually modified.
 
+## 0.3.2
+Wed, 30 Oct 2019 20:23:45 GMT
+
+### Patches
+
+- ensure styles merge selectors and merge handles className (jasonmo360@gmail.com)
 ## 0.3.1
 Tue, 15 Oct 2019 02:11:41 GMT
 

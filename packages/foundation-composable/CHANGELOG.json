@@ -2,6 +2,20 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Wed, 30 Oct 2019 20:23:45 GMT",
+      "tag": "@uifabricshared/foundation-composable_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "update composable docs",
+            "author": "jasonmo@microsoft.com",
+            "commit": "3a6bf482a8ff5c69d9f2381e812ac1dbd882ba13"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Oct 2019 02:11:41 GMT",
       "tag": "@uifabricshared/foundation-composable_v0.2.1",
       "version": "0.2.1",

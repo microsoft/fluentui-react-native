@@ -21,7 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "@uifabricshared/theme-registry": "0.1.5",
-    "@uifabricshared/foundation-settings": "0.3.1",
+    "@uifabricshared/foundation-settings": "0.3.2",
     "@uifabricshared/theming-ramp": "0.3.1"
   },
   "devDependencies": {

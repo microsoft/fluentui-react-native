@@ -26,7 +26,7 @@
   "dependencies": {
     "@uifabricshared/themed-settings": "0.2.3",
     "@uifabricshared/foundation-composable": "0.2.1",
-    "@uifabricshared/foundation-tokens": "0.1.5",
+    "@uifabricshared/foundation-tokens": "0.1.6",
     "@uifabricshared/theming-react-native": "0.1.6",
     "@uifabricshared/theming-ramp": "0.3.1"
   },

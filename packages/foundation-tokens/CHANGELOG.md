@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-tokens
 
-This log was last generated on Tue, 15 Oct 2019 02:11:41 GMT and should not be manually modified.
+This log was last generated on Wed, 30 Oct 2019 20:23:45 GMT and should not be manually modified.
 
+## 0.1.6
+Wed, 30 Oct 2019 20:23:45 GMT
+
+### Patches
+
+- Make token types easier to use (jasonmo360@gmail.com)
 ## 0.1.5
 Tue, 15 Oct 2019 02:11:41 GMT
 
