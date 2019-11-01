@@ -24,7 +24,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/immutable-merge": "0.1.6"
+    "@uifabricshared/immutable-merge": "^0.1.6"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

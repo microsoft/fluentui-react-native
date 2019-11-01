@@ -23,9 +23,11 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "@uifabricshared/immutable-merge": "^0.1.6"
+  },
   "devDependencies": {
     "@types/jest": "^19.2.2",
-    "@uifabricshared/immutable-merge": "0.1.6",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
   },
