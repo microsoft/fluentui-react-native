@@ -2,6 +2,48 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Fri, 01 Nov 2019 16:51:54 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.1.7",
+      "version": "0.1.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix version references for packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "14f3cd3408032a2b682444303f50b407a9e2594e"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 30 Oct 2019 20:23:45 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.1.6",
+      "version": "0.1.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Make token types easier to use",
+            "author": "jasonmo360@gmail.com",
+            "commit": "30d9a31ad57f098ab1b6074fd975dc157e64fdc8"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 15 Oct 2019 02:11:41 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.1.5",
+      "version": "0.1.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "api-extractor setup",
+            "author": "taamireh@microsoft.com",
+            "commit": "eb1d0cf52629e6efe6241776cc97a25585e866a4"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 25 Sep 2019 23:15:41 GMT",
       "tag": "@uifabricshared/foundation-tokens_v0.1.4",
       "version": "0.1.4",

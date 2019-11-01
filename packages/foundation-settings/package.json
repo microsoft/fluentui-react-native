@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-settings",
-  "version": "0.3.0",
+  "version": "0.3.3",
   "description": "Settings and style definitions and helpers",
   "repository": {
     "type": "git",
@@ -16,13 +16,15 @@
     "lint": "just-scripts eslint",
     "start": "just-scripts dev",
     "start-test": "just-scripts jest-watch",
-    "update-snapshots": "just-scripts jest -u"
+    "update-snapshots": "just-scripts jest -u",
+    "verify-api": "just-scripts verify-api-extractor",
+    "update-api": "just-scripts update-api-extractor"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/immutable-merge": "0.1.5"
+    "@uifabricshared/immutable-merge": "^0.1.6"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

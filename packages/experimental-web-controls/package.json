@@ -17,16 +17,18 @@
     "lint": "just-scripts eslint",
     "start": "just-scripts dev",
     "start-test": "just-scripts jest-watch",
-    "update-snapshots": "just-scripts jest -u"
+    "update-snapshots": "just-scripts jest -u",
+    "verify-api": "just-scripts verify-api-extractor",
+    "update-api": "just-scripts update-api-extractor"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-compose": "1.1.1",
-    "@uifabricshared/foundation-settings": "0.3.0",
-    "@uifabricshared/theming-ramp": "0.3.0",
-    "@uifabricshared/theming-react-native": "0.1.5"
+    "@uifabricshared/foundation-compose": "1.1.3",
+    "@uifabricshared/foundation-settings": "0.3.3",
+    "@uifabricshared/theming-ramp": "0.3.2",
+    "@uifabricshared/theming-react-native": "0.1.7"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

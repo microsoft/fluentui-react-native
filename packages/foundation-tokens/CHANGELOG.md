@@ -1,7 +1,25 @@
 # Change Log - @uifabricshared/foundation-tokens
 
-This log was last generated on Thu, 19 Sep 2019 23:21:48 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Nov 2019 16:51:54 GMT and should not be manually modified.
 
+## 0.1.7
+Fri, 01 Nov 2019 16:51:54 GMT
+
+### Patches
+
+- fix version references for packages (jasonmo@microsoft.com)
+## 0.1.6
+Wed, 30 Oct 2019 20:23:45 GMT
+
+### Patches
+
+- Make token types easier to use (jasonmo360@gmail.com)
+## 0.1.5
+Tue, 15 Oct 2019 02:11:41 GMT
+
+### Patches
+
+- api-extractor setup (taamireh@microsoft.com)
 ## 0.1.4
 Thu, 19 Sep 2019 23:21:48 GMT
 

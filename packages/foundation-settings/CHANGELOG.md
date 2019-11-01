@@ -1,7 +1,25 @@
 # Change Log - @uifabricshared/foundation-settings
 
-This log was last generated on Thu, 26 Sep 2019 19:45:56 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Nov 2019 16:51:54 GMT and should not be manually modified.
 
+## 0.3.3
+Fri, 01 Nov 2019 16:51:54 GMT
+
+### Patches
+
+- fix version references for packages (jasonmo@microsoft.com)
+## 0.3.2
+Wed, 30 Oct 2019 20:23:45 GMT
+
+### Patches
+
+- ensure styles merge selectors and merge handles className (jasonmo360@gmail.com)
+## 0.3.1
+Tue, 15 Oct 2019 02:11:41 GMT
+
+### Patches
+
+- api-extractor setup (taamireh@microsoft.com)
 ## 0.3.0
 Thu, 26 Sep 2019 19:45:56 GMT
 

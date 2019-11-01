@@ -5,6 +5,7 @@ import { IStyleProp } from './Styles.types';
 interface IProps {
   root: {
     prop1: string;
+    className?: string;
     style: IStyleProp<{
       fontFamily?: string;
       fontWeight?: 'light' | 'normal' | 'bold';
@@ -19,6 +20,7 @@ interface IProps {
 
 const settingsDefault: IComponentSettings<IProps> = {
   root: {
+    className: 'foo bar',
     style: {
       fontFamily: 'Calibri',
       fontWeight: 'normal',
@@ -30,6 +32,7 @@ const settingsDefault: IComponentSettings<IProps> = {
 
 const settingsBase: IComponentSettings<IProps> = {
   root: {
+    className: 'baz',
     style: {
       fontWeight: 'bold',
       fontSize: 16,
@@ -105,6 +108,7 @@ describe('Merge settings tests', () => {
     const merged = mergeSettings(settingsDefault, settingsBase);
     expect(merged).toEqual({
       root: {
+        className: 'foo bar baz',
         style: {
           fontFamily: 'Calibri',
           fontWeight: 'bold',
@@ -137,6 +141,7 @@ describe('Merge settings tests', () => {
     const merged = mergeSettings(settingsBase, settingsNormal);
     expect(merged).toEqual({
       root: {
+        className: 'baz',
         style: {
           fontFamily: 'Calibri Body',
           fontWeight: 'bold',
@@ -161,6 +166,7 @@ describe('Merge settings tests', () => {
     const merged = mergeSettings(settingsDefault, settingsBase, settingsNormal);
     expect(merged).toEqual({
       root: {
+        className: 'foo bar baz',
         style: {
           fontFamily: 'Calibri Body',
           fontWeight: 'bold',
