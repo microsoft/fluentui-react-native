@@ -24,7 +24,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": "0.3.2"
+    "@uifabricshared/foundation-settings": "^0.3.2"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

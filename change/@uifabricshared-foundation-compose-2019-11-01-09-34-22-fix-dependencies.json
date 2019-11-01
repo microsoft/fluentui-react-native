@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "fix version references for packages",
+  "packageName": "@uifabricshared/foundation-compose",
+  "email": "jasonmo@microsoft.com",
+  "commit": "14f3cd3408032a2b682444303f50b407a9e2594e",
+  "date": "2019-11-01T16:34:14.827Z"
+}
