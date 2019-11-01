@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Tue, 15 Oct 2019 02:11:41 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Nov 2019 16:51:54 GMT and should not be manually modified.
 
+## 0.3.2
+Fri, 01 Nov 2019 16:51:54 GMT
+
+### Patches
+
+- fix version references for packages (jasonmo@microsoft.com)
 ## 0.3.1
 Tue, 15 Oct 2019 02:11:41 GMT
 

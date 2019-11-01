@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-tokens
 
-This log was last generated on Wed, 30 Oct 2019 20:23:45 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Nov 2019 16:51:54 GMT and should not be manually modified.
 
+## 0.1.7
+Fri, 01 Nov 2019 16:51:54 GMT
+
+### Patches
+
+- fix version references for packages (jasonmo@microsoft.com)
 ## 0.1.6
 Wed, 30 Oct 2019 20:23:45 GMT
 

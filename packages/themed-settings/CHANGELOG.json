@@ -2,6 +2,20 @@
   "name": "@uifabricshared/themed-settings",
   "entries": [
     {
+      "date": "Fri, 01 Nov 2019 16:51:54 GMT",
+      "tag": "@uifabricshared/themed-settings_v0.2.4",
+      "version": "0.2.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix version references for packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "14f3cd3408032a2b682444303f50b407a9e2594e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Oct 2019 02:11:41 GMT",
       "tag": "@uifabricshared/themed-settings_v0.2.3",
       "version": "0.2.3",
