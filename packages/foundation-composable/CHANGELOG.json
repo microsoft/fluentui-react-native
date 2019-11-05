@@ -2,6 +2,20 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Tue, 05 Nov 2019 22:51:54 GMT",
+      "tag": "@uifabricshared/foundation-composable_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix bug in tree compression for composable",
+            "author": "jasonmo@microsoft.com",
+            "commit": "14c024789e445150ca17e1e243dfbf1fb744ff5f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Nov 2019 16:51:54 GMT",
       "tag": "@uifabricshared/foundation-composable_v0.2.2",
       "version": "0.2.2",

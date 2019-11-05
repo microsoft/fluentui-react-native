@@ -25,7 +25,7 @@
   "license": "MIT",
   "dependencies": {
     "@uifabricshared/themed-settings": "^0.2.4",
-    "@uifabricshared/foundation-composable": "^0.2.2",
+    "@uifabricshared/foundation-composable": "^0.2.3",
     "@uifabricshared/foundation-tokens": "^0.1.7",
     "@uifabricshared/theming-react-native": "^0.1.7",
     "@uifabricshared/theming-ramp": "^0.3.2"
