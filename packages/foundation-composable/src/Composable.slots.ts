@@ -50,7 +50,7 @@ function createSlotRenderInfo<TProps extends object, TSlotProps extends ISlotPro
 
     Object.getOwnPropertyNames(slots).forEach(slot => {
       const { slotType, filter } = slots[slot];
-      const composable = (typeof slotType === 'object' && (slotType as IWithComposable<object>).__composable) || undefined;
+      const composable = (typeof slotType !== 'string' && (slotType as IWithComposable<object>).__composable) || undefined;
       const childRenderInfo = (childInfo[slot] = createSlotRenderInfo(composable, slots[slot]));
       if (composable) {
         // create the actual closure for rendering handing it a reference to the render info

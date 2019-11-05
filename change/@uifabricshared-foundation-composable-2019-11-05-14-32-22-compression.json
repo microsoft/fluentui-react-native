@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "fix bug in tree compression for composable",
+  "packageName": "@uifabricshared/foundation-composable",
+  "email": "jasonmo@microsoft.com",
+  "commit": "14c024789e445150ca17e1e243dfbf1fb744ff5f",
+  "date": "2019-11-05T22:32:22.429Z"
+}
