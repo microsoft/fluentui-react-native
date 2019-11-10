@@ -26,6 +26,10 @@ export interface IThemingModule {
   palettes: IPaletteIDs;
 }
 
+export interface IEventEmitter {
+  addListener: (event: string, PlatformDefaultsChangedCallback) => void;
+}
+
 export type IPlatformThemeDefinition = (parent: INativeTheme) => INativeThemeDefinition;
 
 export interface IThemingModuleHelper {
