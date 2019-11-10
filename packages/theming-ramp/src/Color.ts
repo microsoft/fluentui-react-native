@@ -1,4 +1,4 @@
-import { IPalette, IFabricWebPalette } from './Color.types';
+import { IPalette, IFabricWebPalette, IWindowsPalette } from './Color.types';
 
 /**
  * Generate a palette from a set of fabric web colors, like those output from the theme designer.
@@ -8,13 +8,13 @@ import { IPalette, IFabricWebPalette } from './Color.types';
  */
 export function paletteFromFabricColors(p: IFabricWebPalette, isInverted?: boolean): IPalette {
   return {
-    bodyBackground: p.white,
+    background: p.white,
     bodyStandoutBackground: p.neutralLighterAlt,
     bodyFrameBackground: p.white,
     bodyFrameDivider: p.neutralLight,
     bodyText: p.neutralPrimary,
     bodyTextChecked: p.black,
-    bodySubtext: p.neutralSecondary,
+    subtext: p.neutralSecondary,
     bodyDivider: p.neutralLight,
 
     disabledBackground: p.neutralLighter,
@@ -97,10 +97,104 @@ export function paletteFromFabricColors(p: IFabricWebPalette, isInverted?: boole
     actionLink: p.neutralPrimary,
     actionLinkHovered: p.neutralDark,
     link: p.themePrimary,
-    linkDisabled: p.themeSecondary,
     linkHovered: p.themeDarker,
-    linkPressed: p.themeDark,
-    linkVisited: p.themeTertiary
+    linkPressed: p.themeDark
+  };
+}
+
+export function paletteFromOfficeColors(p: IWindowsPalette): IPalette {
+  return {
+    background: p.background,
+    bodyStandoutBackground: p.background,
+    bodyFrameBackground: p.background,
+    bodyFrameDivider: p.accentLight,
+    bodyText: p.text,
+    bodyTextChecked: p.textSelected,
+    subtext: p.textSecondary,
+    bodyDivider: p.accentLight,
+
+    disabledBackground: p.backgroundControlSubtleDisabled,
+    disabledText: p.textControlSubtleDisabled,
+    disabledBodyText: p.textDisabled,
+    disabledSubtext: p.textControlSubtleDisabled,
+    disabledBodySubtext: p.textDisabled,
+
+    focusBorder: p.strokeKeyboard,
+    variantBorder: p.accentOutline,
+    variantBorderHovered: p.accentOutline,
+    defaultStateBackground: p.background,
+
+    errorText: p.textError,
+    warningText: p.text,
+    errorBackground: p.background,
+    blockingBackground: p.background,
+    warningBackground: p.background,
+    warningHighlight: p.textError,
+    successBackground: p.textEmphasis,
+
+    inputBorder: p.strokeControlSubtle,
+    inputBorderHovered: p.strokeControlSubtleHover,
+    inputBackground: p.backgroundControlSubtle,
+    inputBackgroundChecked: p.backgroundControlSubtle,
+    inputBackgroundCheckedHovered: p.backgroundControlSubtleHover,
+    inputForegroundChecked: p.textControlSubtle,
+    inputFocusBorderAlt: p.strokeControlEmphasisKeyboard,
+    smallInputBorder: p.strokeControlSubtle,
+    inputText: p.textControlSubtle,
+    inputTextHovered: p.textControlSubtleHover,
+    inputPlaceholderText: p.textControlSubtlePlaceholder,
+
+    buttonBackground: p.backgroundControl,
+    buttonBackgroundChecked: p.backgroundControlSelected,
+    buttonBackgroundHovered: p.backgroundControlHover,
+    buttonBackgroundCheckedHovered: p.backgroundControlSelected,
+    buttonBackgroundPressed: p.backgroundControlPressed,
+    buttonBackgroundDisabled: p.backgroundControlDisabled,
+    buttonBorder: p.strokeControl,
+    buttonText: p.textControl,
+    buttonTextHovered: p.textControlHover,
+    buttonTextChecked: p.textControlSelected,
+    buttonTextCheckedHovered: p.textControlSelected,
+    buttonTextPressed: p.textControlPressed,
+    buttonTextDisabled: p.textControlDisabled,
+    buttonBorderDisabled: p.strokeControlDisabled,
+
+    primaryButtonBackground: p.backgroundControlEmphasis,
+    primaryButtonBackgroundHovered: p.backgroundControlEmphasisHover,
+    primaryButtonBackgroundPressed: p.backgroundControlEmphasisPressed,
+    primaryButtonBackgroundDisabled: p.backgroundControlEmphasisDisabled,
+    primaryButtonBorder: p.strokeControlEmphasis,
+    primaryButtonText: p.textControlEmphasis,
+    primaryButtonTextHovered: p.textControlEmphasisHover,
+    primaryButtonTextPressed: p.textControlEmphasisPressed,
+    primaryButtonTextDisabled: p.textControlEmphasisDisabled,
+
+    accentButtonBackground: p.backgroundControlEmphasis,
+    accentButtonText: p.textControlEmphasis,
+
+    menuBackground: p.background,
+    menuDivider: p.accentLight,
+    menuIcon: p.text,
+    menuHeader: p.text,
+    menuItemBackgroundHovered: p.backgroundHover,
+    menuItemBackgroundPressed: p.backgroundPressed,
+    menuItemText: p.text,
+    menuItemTextHovered: p.textHover,
+
+    listBackground: p.background,
+    listText: p.text,
+    listItemBackgroundHovered: p.backgroundHover,
+    listItemBackgroundChecked: p.backgroundSelected,
+    listItemBackgroundCheckedHovered: p.backgroundSelected,
+
+    listHeaderBackgroundHovered: p.backgroundHover,
+    listHeaderBackgroundPressed: p.backgroundPressed,
+
+    actionLink: p.textActive,
+    actionLinkHovered: p.textActiveHover,
+    link: p.textHyperlink,
+    linkHovered: p.textHyperlinkHover,
+    linkPressed: p.textHyperlinkPressed
   };
 }
 

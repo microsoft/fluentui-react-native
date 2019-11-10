@@ -13,6 +13,35 @@
  */
 export type ColorValue = string;
 
+/** @public */
+export interface ICastableToString {
+  toString: () => string;
+}
+
+/** @public */
+export interface IColorRamp extends ICastableToString {
+  values: string[];
+  index: number;
+}
+
+export type IThemeColorDefinition = {
+  background: ColorValue;
+  bodyText: ColorValue;
+  subText: ColorValue;
+  disabledText: ColorValue;
+
+  brand: IColorRamp;
+  // accent: IColorRamp;
+
+  neutral: IColorRamp;
+
+  // success: IColorRamp;
+  warning: IColorRamp;
+  // danger: IColorRamp;
+
+  [key: string]: IColorRamp | string;
+};
+
 export interface IFabricWebPalette {
   // ROLE: Themed text
   // linkHovered
@@ -127,7 +156,7 @@ export interface IPaletteTextColors {
   /** Checked text color, e.g. selected menu item text. */
   bodyTextChecked: ColorValue;
   /** De-emphasized text; e.g. metadata, captions, placeholder text. */
-  bodySubtext: ColorValue;
+  subtext: ColorValue;
   /** Neutral colored links and links for action buttons. */
   actionLink: ColorValue;
   /** Hover state for neutral colored links and links for action buttons. */
@@ -135,14 +164,10 @@ export interface IPaletteTextColors {
 
   /** The color of a link. */
   link: ColorValue;
-  /** The color of a disabled link. */
-  linkDisabled: ColorValue;
   /** The color of a hovered link. Also used when the link is active. */
   linkHovered: ColorValue;
   /** The color of a pressed link. */
   linkPressed: ColorValue;
-  /** The color of a visited link. */
-  linkVisited: ColorValue;
   /** The default color for disabled text on top of disabledBackground; e.g. text in a disabled text field, disabled button text. */
   disabledText: ColorValue;
   /** The default color for disabled text on the default background (bodyBackground). */
@@ -206,7 +231,7 @@ export interface IPaletteBackgroundColors {
   //// Base slots
 
   /** The default color for backgrounds. */
-  bodyBackground: ColorValue;
+  background: ColorValue;
   /** A standout background a shade darker then background (or lighter in dark themes) */
   bodyStandoutBackground: ColorValue;
   /** The color for chrome adjacent to an area with bodyBackground.  Should either be distinct, or match bodyBackground */
@@ -472,7 +497,6 @@ export interface IWindowsPalette {
   textHyperlink: ColorValue;
   textHyperlinkHover: ColorValue;
   textHyperlinkPressed: ColorValue;
-  textHyperlinkVisited: ColorValue;
 
   /**
    * Active Text
