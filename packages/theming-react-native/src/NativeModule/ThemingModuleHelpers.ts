@@ -1,7 +1,8 @@
-import { IPartialPalette, IColorRamp, IWindowsPalette, resolvePartialTheme, paletteFromOfficeColors } from '@uifabricshared/theming-ramp';
+import { IPartialPalette, IColorRamp, resolvePartialTheme } from '@uifabricshared/theming-ramp';
 import { IThemingModule, ICxxException, PlatformDefaultsChangedCallback, IThemingModuleHelper, IEventEmitter } from './ThemingModule.types';
-import { getBaselinePlatformTheme } from '../platform';
+import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
 import { INativeThemeDefinition, INativeTheme } from '../INativeTheme';
+import { IOfficePalette, paletteFromOfficeColors } from './office';
 
 export class ColorRamp implements IColorRamp {
   constructor(public values: string[], median?: number) {
@@ -13,7 +14,7 @@ export class ColorRamp implements IColorRamp {
   };
 }
 
-export function translateWindowsTheme(module: IThemingModule, palette: IPartialPalette) {
+export function translateOfficeTheme(module: IThemingModule, palette: IPartialPalette) {
   return {
     colors: {
       brand: new ColorRamp(module.ramps.App),
@@ -27,9 +28,9 @@ export function translateWindowsTheme(module: IThemingModule, palette: IPartialP
   };
 }
 
-type PaletteCache = { [key: string]: IWindowsPalette };
+type PaletteCache = { [key: string]: IOfficePalette };
 
-function isException(palette: IWindowsPalette | ICxxException): palette is ICxxException {
+function isException(palette: IOfficePalette | ICxxException): palette is ICxxException {
   return (palette as ICxxException).message !== undefined;
 }
 
@@ -52,10 +53,10 @@ export function makeThemingModuleHelper(emitter: IEventEmitter, themingModule?: 
   themingModule || console.error('No NativeModule for Theming found');
   const paletteCache: PaletteCache = {};
   return {
-    getPlatformTheme: (palette?: string) => {
+    getPlatformDefaults: (palette?: string) => {
       return resolvePartialTheme(
         getBaselinePlatformTheme(),
-        translateWindowsTheme(themingModule, translatePalette(themingModule, paletteCache, palette))
+        translateOfficeTheme(themingModule, translatePalette(themingModule, paletteCache, palette))
       );
     },
     getPlatformThemeDefinition: (palette?: string) => {
@@ -65,7 +66,7 @@ export function makeThemingModuleHelper(emitter: IEventEmitter, themingModule?: 
         return { colors: newColors };
       };
     },
-    getPalettes: () => Object.keys(themingModule.palettes),
+    getThemeIDs: () => Object.keys(themingModule.palettes),
     addListener: (callback: PlatformDefaultsChangedCallback) => {
       emitter.addListener('onPlatformDefaultsChanged', callback);
     }

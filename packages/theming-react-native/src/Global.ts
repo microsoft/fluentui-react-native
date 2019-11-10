@@ -1,5 +1,5 @@
 import { INativeThemeDefinition, INativeTheme } from './INativeTheme';
-import { getBaselinePlatformTheme } from './platform/index';
+import { getPlatformDefaults } from './platform';
 import { resolvePartialTheme } from '@uifabricshared/theming-ramp';
 import { IThemeRegistry, createThemeRegistry, IProcessTheme, IThemeEventListener } from '@uifabricshared/theme-registry';
 
@@ -13,7 +13,7 @@ let _registry: INativeThemeRegistry;
  */
 function getThemeRegistry(): INativeThemeRegistry {
   if (!_registry) {
-    _registry = createThemeRegistry<INativeTheme, INativeThemeDefinition>(getBaselinePlatformTheme(), resolvePartialTheme);
+    _registry = createThemeRegistry<INativeTheme, INativeThemeDefinition>(getPlatformDefaults(), resolvePartialTheme);
   }
   return _registry;
 }

@@ -1,5 +1,6 @@
-import { IWindowsPalette, ITypography, ColorValue } from '@uifabricshared/theming-ramp';
-import { INativeTheme, INativeThemeDefinition } from '..';
+import { ITypography, ColorValue } from '@uifabricshared/theming-ramp';
+import { INativeTheme, INativeThemeDefinition } from '../INativeTheme';
+import { IOfficePalette } from './office';
 
 export type PlatformDefaultsChangedCallback = () => void;
 
@@ -20,7 +21,7 @@ export interface IPaletteIDs {
 }
 
 export interface IThemingModule {
-  getPalette(palette?: string): IWindowsPalette | ICxxException;
+  getPalette(palette?: string): IOfficePalette | ICxxException;
   typography: ITypography;
   ramps: INativeColorRamps;
   palettes: IPaletteIDs;
@@ -33,8 +34,15 @@ export interface IEventEmitter {
 export type IPlatformThemeDefinition = (parent: INativeTheme) => INativeThemeDefinition;
 
 export interface IThemingModuleHelper {
-  getPlatformTheme: (palette?: string) => INativeTheme;
-  getPlatformThemeDefinition: (palette?: string) => IPlatformThemeDefinition;
-  getPalettes: () => string[];
+  /**
+   * Gets a complete platform theme suitable for using with a Theme Registry
+   */
+  getPlatformDefaults: (themeId?: string) => INativeTheme;
+  /**
+   * Gets a theme definition to register with a Theme Registry & use with the theme context to create a subtree with the
+   * look & feel of a platform theme.
+   */
+  getPlatformThemeDefinition: (themeId?: string) => IPlatformThemeDefinition;
+  getThemeIDs: () => string[];
   addListener: (listener: PlatformDefaultsChangedCallback) => void; // TODO: Should probably be able to remove
 }

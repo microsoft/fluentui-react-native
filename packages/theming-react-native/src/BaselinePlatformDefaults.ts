@@ -1,4 +1,4 @@
-import { INativeTheme } from '../INativeTheme';
+import { INativeTheme } from './INativeTheme';
 import { getStockWebPalette, ITypography, ISpacing } from '@uifabricshared/theming-ramp';
 
 function _defaultTypography(): ITypography {
