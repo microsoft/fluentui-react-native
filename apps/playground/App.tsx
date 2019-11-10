@@ -10,18 +10,18 @@ setTheme(ThemingModuleHelper.getPlatformThemeDefinition('TaskPane'), 'PlatformTa
 const ButtonBackground: React.FunctionComponent<TextProps> = (p: ViewProps) => {
   const theme = React.useContext(ThemeContext);
   const { style, ...rest } = p;
-  return <View {...rest} style={[style, { backgroundColor: theme.colors.primaryButtonBackground }]} />;
+  return <View {...rest} style={[style, { backgroundColor: theme.colors.primaryButtonBackground as string }]} />;
 };
 
 const ButtonText: React.FunctionComponent<TextProps> = (p: TextProps) => {
   const theme = React.useContext(ThemeContext);
   const { style, ...rest } = p;
-  return <Text {...rest} style={[style, { color: theme.colors.primaryButtonText }]} />;
+  return <Text {...rest} style={[style, { color: theme.colors.primaryButtonText as string }]} />;
 };
 
-const PanelWithButton: React.FunctionComponent<{ themeName?: string }> = (p: { themeName: string }) => {
+const PanelWithButton: React.FunctionComponent<{ themeName?: string }> = (p: { themeName?: string }) => {
   return (
-    <ThemeLayer {...p}>
+    <ThemeLayer themeName={p.themeName}>
       {(theme: INativeTheme) => {
         const bgColor = theme.colors.background;
         return (
