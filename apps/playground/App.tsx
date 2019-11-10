@@ -1,17 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ViewProps, TextProps } from 'react-native';
-import {
-  ThemeLayer,
-  setTheme,
-  augmentPlatformTheme,
-  ThemingModuleHelper,
-  ThemeContext,
-  INativeTheme
-} from '@uifabricshared/theming-react-native';
+import { ThemeLayer, setTheme, ThemingModuleHelper, ThemeContext, INativeTheme } from '@uifabricshared/theming-react-native';
 
-ThemingModuleHelper.addListener(() => {
-  augmentPlatformTheme(ThemingModuleHelper.getPlatformTheme());
-});
 // Default Theme
 setTheme({});
 // Using a platform-provided Theme Definition

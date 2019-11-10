@@ -1,7 +1,7 @@
 import { IPartialPalette, IColorRamp, resolvePartialTheme } from '@uifabricshared/theming-ramp';
 import { IThemingModule, ICxxException, PlatformDefaultsChangedCallback, IThemingModuleHelper, IEventEmitter } from './ThemingModule.types';
 import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
-import { INativeThemeDefinition, INativeTheme } from '../INativeTheme';
+import { INativeThemeDefinition, INativeTheme } from '../INativeTheme.types';
 import { IOfficePalette, paletteFromOfficeColors } from './office';
 
 export class ColorRamp implements IColorRamp {

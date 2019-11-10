@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IThemeEventListener } from '@uifabricshared/theme-registry';
 import { removeThemeRegistryListener, getTheme, addThemeRegistryListener } from './Global';
-import { INativeTheme } from './INativeTheme';
+import { INativeTheme } from './INativeTheme.types';
 
 /**
  * type for the context.  If the context is undefined this will be treated as a reference

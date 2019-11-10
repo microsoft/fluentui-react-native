@@ -1,5 +1,5 @@
 import { ITypography, ColorValue } from '@uifabricshared/theming-ramp';
-import { INativeTheme, INativeThemeDefinition } from '../INativeTheme';
+import { INativeTheme, INativeThemeDefinition } from '../INativeTheme.types';
 import { IOfficePalette } from './office';
 
 export type PlatformDefaultsChangedCallback = () => void;

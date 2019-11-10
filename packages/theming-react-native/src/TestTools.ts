@@ -1,7 +1,7 @@
 import { createThemeRegistry } from '@uifabricshared/theme-registry';
 import { getStockWebPalette, resolvePartialTheme } from '@uifabricshared/theming-ramp';
 import { setThemeRegistry } from './Global';
-import { INativeThemeDefinition, INativeTheme } from './INativeTheme';
+import { INativeThemeDefinition, INativeTheme } from './INativeTheme.types';
 
 const platformDefaults: INativeThemeDefinition = {
   colors: getStockWebPalette(),
