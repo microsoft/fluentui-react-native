@@ -156,7 +156,7 @@ export interface IPaletteTextColors {
   /** Checked text color, e.g. selected menu item text. */
   bodyTextChecked: ColorValue;
   /** De-emphasized text; e.g. metadata, captions, placeholder text. */
-  subtext: ColorValue;
+  subText: ColorValue;
   /** Neutral colored links and links for action buttons. */
   actionLink: ColorValue;
   /** Hover state for neutral colored links and links for action buttons. */

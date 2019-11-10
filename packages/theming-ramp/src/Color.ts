@@ -1,4 +1,4 @@
-import { IPalette, IFabricWebPalette, IWindowsPalette } from './Color.types';
+import { IPalette, IFabricWebPalette, IWindowsPalette, IThemeColorDefinition, IColorRamp } from './Color.types';
 
 /**
  * Generate a palette from a set of fabric web colors, like those output from the theme designer.
@@ -14,7 +14,7 @@ export function paletteFromFabricColors(p: IFabricWebPalette, isInverted?: boole
     bodyFrameDivider: p.neutralLight,
     bodyText: p.neutralPrimary,
     bodyTextChecked: p.black,
-    subtext: p.neutralSecondary,
+    subText: p.neutralSecondary,
     bodyDivider: p.neutralLight,
 
     disabledBackground: p.neutralLighter,
@@ -110,7 +110,7 @@ export function paletteFromOfficeColors(p: IWindowsPalette): IPalette {
     bodyFrameDivider: p.accentLight,
     bodyText: p.text,
     bodyTextChecked: p.textSelected,
-    subtext: p.textSecondary,
+    subText: p.textSecondary,
     bodyDivider: p.accentLight,
 
     disabledBackground: p.backgroundControlSubtleDisabled,
@@ -198,36 +198,46 @@ export function paletteFromOfficeColors(p: IWindowsPalette): IPalette {
   };
 }
 
-export function getStockWebPalette(): IPalette {
-  return paletteFromFabricColors({
-    black: '#000000',
-    neutralDark: '#201f1e',
-    neutralPrimary: '#323130',
-    neutralPrimaryAlt: '#3b3a39',
-    neutralSecondary: '#605e5c',
-    neutralSecondaryAlt: '#8a8886',
-    neutralTertiary: '#a19f9d',
-    neutralTertiaryAlt: '#c8c6c4',
-    neutralQuaternary: '#d2d0ce',
-    neutralQuaternaryAlt: '#e1dfdd',
-    neutralLight: '#edebe9',
-    neutralLighter: '#f3f2f1',
-    neutralLighterAlt: '#faf9f8',
-    white: '#ffffff',
-    // Shared Colors
-    red: '#d13438',
-    redDark: '#a4262c',
+const defaultColorRamp: IColorRamp = {
+  values: [],
+  index: -1
+};
 
-    themeDarker: '#004578',
-    themeDark: '#005a9e',
-    themeDarkAlt: '#106ebe',
-    themePrimary: '#0078d4',
-    themeSecondary: '#2b88d8',
-    themeTertiary: '#71afe5',
-    themeLight: '#c7e0f4',
-    themeLighter: '#deecf9',
-    themeLighterAlt: '#eff6fc',
-    accent: '#0078d4',
-    blackTranslucent40: 'rgba(0,0,0,.4)'
-  });
+export function getStockWebPalette(): IThemeColorDefinition {
+  return {
+    brand: defaultColorRamp,
+    neutral: defaultColorRamp,
+    warning: defaultColorRamp,
+    ...paletteFromFabricColors({
+      black: '#000000',
+      neutralDark: '#201f1e',
+      neutralPrimary: '#323130',
+      neutralPrimaryAlt: '#3b3a39',
+      neutralSecondary: '#605e5c',
+      neutralSecondaryAlt: '#8a8886',
+      neutralTertiary: '#a19f9d',
+      neutralTertiaryAlt: '#c8c6c4',
+      neutralQuaternary: '#d2d0ce',
+      neutralQuaternaryAlt: '#e1dfdd',
+      neutralLight: '#edebe9',
+      neutralLighter: '#f3f2f1',
+      neutralLighterAlt: '#faf9f8',
+      white: '#ffffff',
+      // Shared Colors
+      red: '#d13438',
+      redDark: '#a4262c',
+
+      themeDarker: '#004578',
+      themeDark: '#005a9e',
+      themeDarkAlt: '#106ebe',
+      themePrimary: '#0078d4',
+      themeSecondary: '#2b88d8',
+      themeTertiary: '#71afe5',
+      themeLight: '#c7e0f4',
+      themeLighter: '#deecf9',
+      themeLighterAlt: '#eff6fc',
+      accent: '#0078d4',
+      blackTranslucent40: 'rgba(0,0,0,.4)'
+    })
+  };
 }
