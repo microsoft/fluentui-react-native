@@ -38,7 +38,7 @@ export function defaultSpacing(): ISpacing {
 
 export function getBaselinePlatformTheme(): INativeTheme {
   return {
-    palette: getStockWebPalette(),
+    colors: getStockWebPalette(),
     typography: _defaultTypography(),
     spacing: defaultSpacing(),
     settings: {}

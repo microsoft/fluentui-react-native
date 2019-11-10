@@ -4,7 +4,7 @@ import { setThemeRegistry } from './Global';
 import { INativeThemeDefinition, INativeTheme } from './INativeTheme';
 
 const platformDefaults: INativeThemeDefinition = {
-  palette: getStockWebPalette(),
+  colors: getStockWebPalette(),
   typography: {
     families: {
       primary: 'Helvetica',
