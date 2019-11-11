@@ -1,9 +1,8 @@
-import { INativeThemeDefinition, INativeTheme } from './INativeTheme';
-import { getBaselinePlatformTheme } from './platform/index';
+import { INativeThemeDefinition, INativeTheme, INativeThemeRegistry } from './INativeTheme';
+import { getBaselinePlatformTheme, attachToRegistry } from './platform';
 import { resolvePartialTheme } from '@uifabricshared/theming-ramp';
-import { IThemeRegistry, createThemeRegistry, IProcessTheme, IThemeEventListener } from '@uifabricshared/theme-registry';
-
-export type INativeThemeRegistry = IThemeRegistry<INativeTheme, INativeThemeDefinition>;
+import { createThemeRegistry, IProcessTheme, IThemeEventListener } from '@uifabricshared/theme-registry';
+import { getPlatformDefaults } from './platform/PlatformDefaults';
 
 let _registry: INativeThemeRegistry;
 
@@ -11,11 +10,18 @@ let _registry: INativeThemeRegistry;
  * Ensure that `_registry` is set. If not, create it using a native module to
  * provide platform defaults.
  */
-function getThemeRegistry(): INativeThemeRegistry {
+export function getThemeRegistry(): INativeThemeRegistry {
   if (!_registry) {
     _registry = createThemeRegistry<INativeTheme, INativeThemeDefinition>(getBaselinePlatformTheme(), resolvePartialTheme);
   }
   return _registry;
+}
+
+// TODO: attachToRegistry doesn't know how to pull a fresh version of the input platformDefaults
+export function createNativeThemeRegistry(platformDefaults?: INativeTheme) {
+  const registry = createThemeRegistry(platformDefaults || getPlatformDefaults(), resolvePartialTheme);
+  attachToRegistry(registry);
+  return registry;
 }
 
 /**
