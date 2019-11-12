@@ -1,4 +1,4 @@
-import { IPalette, IPartialPalette } from './Color.types';
+import { IThemeColorDefinition } from './Color.types';
 import { ITypography, IPartialTypography } from './Typography.types';
 import { IComponentSettingsCollection } from '@uifabricshared/foundation-settings';
 
@@ -14,7 +14,7 @@ export interface ISpacing {
  * A fully specified theme.
  */
 export interface ITheme {
-  palette: IPalette;
+  colors: IThemeColorDefinition;
   typography: ITypography;
   settings: IComponentSettingsCollection;
   spacing: ISpacing;
@@ -26,7 +26,7 @@ export interface ITheme {
  * Useful for overriding specific visual elements in a fully specified theme.
  */
 export interface IPartialTheme {
-  palette?: IPartialPalette;
+  colors?: Partial<IThemeColorDefinition>;
   typography?: IPartialTypography;
   settings?: IComponentSettingsCollection;
   spacing?: ISpacing;

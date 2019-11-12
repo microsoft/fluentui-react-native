@@ -6,7 +6,7 @@ export interface IForegroundColorTokens {
 }
 
 export const getPaletteFromTheme = (theme: ITheme) => {
-  return theme.palette;
+  return theme.colors;
 };
 
 export const foregroundColorTokens: IOperationSet<IForegroundColorTokens, ITheme> = [{ source: 'color', lookup: getPaletteFromTheme }];
