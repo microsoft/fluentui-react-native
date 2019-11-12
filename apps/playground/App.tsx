@@ -7,7 +7,7 @@ setTheme({});
 // Using a platform-provided Theme Definition
 setTheme(ThemingModuleHelper.getPlatformThemeDefinition('TaskPane'), 'PlatformTaskPane');
 
-const ButtonBackground: React.FunctionComponent<TextProps> = (p: ViewProps) => {
+const ButtonBackground: React.FunctionComponent<ViewProps> = (p: ViewProps) => {
   const theme = React.useContext(ThemeContext);
   const { style, ...rest } = p;
   return <View {...rest} style={[{ backgroundColor: String(theme.colors.primaryButtonBackground) }, style]} />;
