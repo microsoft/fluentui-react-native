@@ -1,27 +1,30 @@
 import { IPartialPalette, IColorRamp, resolvePartialTheme } from '@uifabricshared/theming-ramp';
-import { IThemingModule, ICxxException, PlatformDefaultsChangedCallback, IThemingModuleHelper, IEventEmitter } from './ThemingModule.types';
+import {
+  IOfficeThemingModule,
+  ICxxException,
+  PlatformDefaultsChangedCallback,
+  IThemingModuleHelper,
+  IEventEmitter
+} from './ThemingModule.types';
 import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
 import { INativeThemeDefinition, INativeTheme } from '../INativeTheme.types';
 import { IOfficePalette, paletteFromOfficeColors } from './office';
 
-export class ColorRamp implements IColorRamp {
-  constructor(public values: string[], median?: number) {
-    this.index = median || (values && Math.round(values.length / 2)) || -1;
+const createColorRamp = ({ values, index = -1 }: Partial<IColorRamp>) => ({
+  values,
+  index,
+  toString() {
+    return this.values[Math.round(values.length / 2)];
   }
-  index: number;
-  toString = () => {
-    return this.values[this.index];
-  };
-}
+});
 
-export function translateOfficeTheme(module: IThemingModule, palette: IPartialPalette) {
+export function translateOfficeTheme(module: IOfficeThemingModule, palette: IPartialPalette) {
   return {
     colors: {
-      brand: new ColorRamp(module.ramps.App),
-      neutrals: new ColorRamp(module.ramps.FluentGrays),
-      warning: new ColorRamp(module.ramps.Sepias),
-      neutrals2: new ColorRamp(module.ramps.ClassicGrays),
-      // danger: new ColorRamp()
+      brand: createColorRamp({ values: module.ramps.App }),
+      neutrals: createColorRamp({ values: module.ramps.FluentGrays }),
+      warning: createColorRamp({ values: module.ramps.Sepias }),
+      neutrals2: createColorRamp({ values: module.ramps.ClassicGrays }),
       ...palette
     },
     typography: module.typography
@@ -34,14 +37,14 @@ function isException(palette: IOfficePalette | ICxxException): palette is ICxxEx
   return (palette as ICxxException).message !== undefined;
 }
 
-function updatePaletteInCache(module: IThemingModule, cache: PaletteCache, palette: string) {
+function updatePaletteInCache(module: IOfficeThemingModule, cache: PaletteCache, palette: string) {
   const paletteValue = module.getPalette(palette);
   if (!isException(paletteValue)) {
     cache[palette] = paletteValue;
   }
 }
 
-function translatePalette(module: IThemingModule, paletteCache: PaletteCache, palette?: string): IPartialPalette {
+function translatePalette(module: IOfficeThemingModule, paletteCache: PaletteCache, palette?: string): IPartialPalette {
   const key = palette || 'WhiteColors';
   if (!paletteCache[key]) {
     updatePaletteInCache(module, paletteCache, key);
@@ -49,24 +52,23 @@ function translatePalette(module: IThemingModule, paletteCache: PaletteCache, pa
   return paletteCache[key] ? paletteFromOfficeColors(paletteCache[key]) : {};
 }
 
-export function makeThemingModuleHelper(emitter: IEventEmitter, themingModule?: IThemingModule): IThemingModuleHelper {
+export function makeOfficeThemingModuleHelper(emitter: IEventEmitter, themingModule?: IOfficeThemingModule): IThemingModuleHelper {
   themingModule || console.error('No NativeModule for Theming found');
   const paletteCache: PaletteCache = {};
   return {
-    getPlatformDefaults: (palette?: string) => {
+    getPlatformDefaults: (themeId?: string) => {
       return resolvePartialTheme(
         getBaselinePlatformTheme(),
-        translateOfficeTheme(themingModule, translatePalette(themingModule, paletteCache, palette))
+        translateOfficeTheme(themingModule, translatePalette(themingModule, paletteCache, themeId))
       );
     },
-    getPlatformThemeDefinition: (palette?: string) => {
+    getPlatformThemeDefinition: (themeId?: string) => {
       return (_parent: INativeTheme) => {
-        updatePaletteInCache(themingModule, paletteCache, palette);
-        const newColors: INativeThemeDefinition['colors'] = translatePalette(themingModule, paletteCache, palette);
+        updatePaletteInCache(themingModule, paletteCache, themeId);
+        const newColors: INativeThemeDefinition['colors'] = translatePalette(themingModule, paletteCache, themeId);
         return { colors: newColors };
       };
     },
-    getThemeIDs: () => Object.keys(themingModule.palettes),
     addListener: (callback: PlatformDefaultsChangedCallback) => {
       emitter.addListener('onPlatformDefaultsChanged', callback);
     }

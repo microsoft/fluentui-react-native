@@ -1,6 +1,6 @@
-import { IThemingModuleHelper, IThemingModule, IEventEmitter } from './ThemingModule.types';
+import { IThemingModuleHelper, IOfficeThemingModule, IEventEmitter } from './ThemingModule.types';
 import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
-import { makeThemingModuleHelper } from './ThemingModuleHelpers';
+import { makeOfficeThemingModuleHelper } from './ThemingModuleHelpers';
 import { IOfficePalette } from './office';
 
 const whiteColorsPalette: IOfficePalette = {
@@ -130,25 +130,24 @@ export const mockGetPaletteImpl = (pal?: string) => {
   return (pal === 'TaskPane' && taskPanePalette) || whiteColorsPalette;
 };
 
-const mockModule: IThemingModule = {
+const mockModule: IOfficeThemingModule = {
   ramps: {
-    App: [],
-    FluentGrays: [],
-    ClassicGrays: [],
-    Sepias: []
+    App: ['#F8F8F8', '#EFF6FC', '#BBDAF3', '#55A4E2', '#359EDD', '#0078d7', '#283E4A', '#030C13'],
+    FluentGrays: ['#FAF9F8', '#797775', '#11100F'],
+    ClassicGrays: ['#FFFFFF', '#737373', '#000000'],
+    Sepias: ['#ECE6DE']
   },
   getPalette: mockGetPaletteImpl,
-  typography: baseline.typography,
-  palettes: { WhiteColors: '1', TaskPane: '2' }
+  typography: baseline.typography
 };
 
-export function createMockThemingModuleInfo(
+export function makeMockThemingModuleHelper(
   eventEmitter: IEventEmitter,
-  moduleStub?: IThemingModule,
+  moduleStub?: IOfficeThemingModule,
   behaviorOverrides?: Partial<IThemingModuleHelper>
 ): IThemingModuleHelper {
   return {
-    ...makeThemingModuleHelper(eventEmitter, moduleStub || mockModule),
+    ...makeOfficeThemingModuleHelper(eventEmitter, moduleStub || mockModule),
     ...behaviorOverrides
   };
 }

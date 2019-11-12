@@ -1,7 +1,7 @@
-import { createMockThemingModuleInfo } from './MockThemingModule';
+import { makeMockThemingModuleHelper } from './MockThemingModule';
 import { EventEmitter } from 'events';
 import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
 
-export const ThemingModuleHelper = createMockThemingModuleInfo(new EventEmitter(), undefined, {
+export const ThemingModuleHelper = makeMockThemingModuleHelper(new EventEmitter(), undefined, {
   getPlatformDefaults: getBaselinePlatformTheme
 });

@@ -1,6 +1,7 @@
 import { ITypography, ColorValue } from '@uifabricshared/theming-ramp';
 import { INativeTheme, INativeThemeDefinition } from '../INativeTheme.types';
 import { IOfficePalette } from './office';
+import { IProcessTheme } from '@uifabricshared/theme-registry';
 
 export type PlatformDefaultsChangedCallback = () => void;
 
@@ -16,22 +17,17 @@ export interface INativeColorRamps {
   [key: string]: ColorValue[];
 }
 
-export interface IPaletteIDs {
-  [key: string]: string;
-}
-
-export interface IThemingModule {
+export interface IOfficeThemingModule {
   getPalette(palette?: string): IOfficePalette | ICxxException;
   typography: ITypography;
   ramps: INativeColorRamps;
-  palettes: IPaletteIDs;
 }
 
 export interface IEventEmitter {
   addListener: (event: string, PlatformDefaultsChangedCallback) => void;
 }
 
-export type IPlatformThemeDefinition = (parent: INativeTheme) => INativeThemeDefinition;
+export type IPlatformThemeDefinition = INativeThemeDefinition | IProcessTheme<INativeTheme, INativeThemeDefinition>;
 
 export interface IThemingModuleHelper {
   /**
@@ -43,6 +39,5 @@ export interface IThemingModuleHelper {
    * look & feel of a platform theme.
    */
   getPlatformThemeDefinition: (themeId?: string) => IPlatformThemeDefinition;
-  getThemeIDs: () => string[];
   addListener: (listener: PlatformDefaultsChangedCallback) => void; // TODO: Should probably be able to remove
 }

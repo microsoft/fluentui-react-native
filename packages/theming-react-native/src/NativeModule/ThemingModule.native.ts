@@ -1,11 +1,11 @@
-import { IThemingModule } from './ThemingModule.types';
-import { makeThemingModuleHelper } from './ThemingModuleHelpers';
+import { makeOfficeThemingModuleHelper } from './ThemingModuleHelpers';
 import { NativeEventEmitter, NativeModules } from 'react-native';
+import { IOfficeThemingModule } from '.';
 
 declare module 'react-native' {
   interface NativeModulesStatic {
-    Theming: IThemingModule & EventSubscriptionVendor;
+    Theming: IOfficeThemingModule & EventSubscriptionVendor;
   }
 }
 
-export const ThemingModuleHelper = makeThemingModuleHelper(new NativeEventEmitter(NativeModules.Theming), NativeModules.Theming);
+export const ThemingModuleHelper = makeOfficeThemingModuleHelper(new NativeEventEmitter(NativeModules.Theming), NativeModules.Theming);
