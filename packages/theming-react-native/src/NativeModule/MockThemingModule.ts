@@ -120,7 +120,7 @@ const whiteColorsPalette: IOfficePalette = {
 const taskPanePalette: IOfficePalette = {
   ...whiteColorsPalette,
   Bkg: '#E6E6E6',
-  BkgCtlEmphasis: 'blue',
+  BkgCtlEmphasis: 'green',
   TextCtlEmphasis: 'white'
 };
 

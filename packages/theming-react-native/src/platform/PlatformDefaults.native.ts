@@ -1,12 +1,11 @@
 import { ThemingModuleHelper } from '../NativeModule';
-import { INativeTheme, INativeThemeRegistry } from '../INativeTheme.types';
+import { createThemeRegistry } from '@uifabricshared/theme-registry';
+import { resolvePartialTheme } from '@uifabricshared/theming-ramp';
 
-export function getPlatformDefaults(): INativeTheme {
-  return ThemingModuleHelper.getPlatformDefaults();
-}
-
-export function attachToRegistry(registry: INativeThemeRegistry) {
+export function createPlatformThemeRegistry(platformThemeId?: string) {
+  const registry = createThemeRegistry(ThemingModuleHelper.getPlatformDefaults(platformThemeId), resolvePartialTheme);
   ThemingModuleHelper.addListener(() => {
-    registry.updatePlatformDefaults(getPlatformDefaults());
+    registry.updatePlatformDefaults(ThemingModuleHelper.getPlatformDefaults(platformThemeId));
   });
+  return registry;
 }
