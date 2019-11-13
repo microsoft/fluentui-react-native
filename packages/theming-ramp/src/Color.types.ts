@@ -13,6 +13,35 @@
  */
 export type ColorValue = string;
 
+/** @public */
+export interface ICastableToString {
+  toString: () => string;
+}
+
+/** @public */
+export interface IColorRamp extends ICastableToString {
+  values: string[];
+  index: number;
+}
+
+export type IThemeColorDefinition = {
+  background: ColorValue;
+  bodyText: ColorValue;
+  subText: ColorValue;
+  disabledText: ColorValue;
+
+  brand: IColorRamp;
+  // accent: IColorRamp;
+
+  neutral: IColorRamp;
+
+  // success: IColorRamp;
+  warning: IColorRamp;
+  // danger: IColorRamp;
+
+  [key: string]: IColorRamp | string;
+};
+
 export interface IFabricWebPalette {
   // ROLE: Themed text
   // linkHovered
@@ -127,7 +156,7 @@ export interface IPaletteTextColors {
   /** Checked text color, e.g. selected menu item text. */
   bodyTextChecked: ColorValue;
   /** De-emphasized text; e.g. metadata, captions, placeholder text. */
-  bodySubtext: ColorValue;
+  subText: ColorValue;
   /** Neutral colored links and links for action buttons. */
   actionLink: ColorValue;
   /** Hover state for neutral colored links and links for action buttons. */
@@ -135,14 +164,10 @@ export interface IPaletteTextColors {
 
   /** The color of a link. */
   link: ColorValue;
-  /** The color of a disabled link. */
-  linkDisabled: ColorValue;
   /** The color of a hovered link. Also used when the link is active. */
   linkHovered: ColorValue;
   /** The color of a pressed link. */
   linkPressed: ColorValue;
-  /** The color of a visited link. */
-  linkVisited: ColorValue;
   /** The default color for disabled text on top of disabledBackground; e.g. text in a disabled text field, disabled button text. */
   disabledText: ColorValue;
   /** The default color for disabled text on the default background (bodyBackground). */
@@ -206,7 +231,7 @@ export interface IPaletteBackgroundColors {
   //// Base slots
 
   /** The default color for backgrounds. */
-  bodyBackground: ColorValue;
+  background: ColorValue;
   /** A standout background a shade darker then background (or lighter in dark themes) */
   bodyStandoutBackground: ColorValue;
   /** The color for chrome adjacent to an area with bodyBackground.  Should either be distinct, or match bodyBackground */
@@ -332,182 +357,6 @@ export interface IPaletteBackgroundColors {
  * Palette names describe the role of a color within the application.
  */
 export type IPalette = IPaletteTextColors & IPaletteBackgroundColors;
-
-export interface IWindowsPalette {
-  /**
-   * Background Colors
-   *
-   * Background color for any region of the user interface.
-   */
-  background: ColorValue;
-  backgroundHover: ColorValue;
-  backgroundPressed: ColorValue;
-  backgroundSelected: ColorValue;
-  backgroundSelectionHighlight: ColorValue;
-
-  /**
-   * Transparent Control Colors
-   *
-   * These colors should be used to build controls with a transparent
-   * background. For example, list items and ribbon buttons.
-   */
-  // text
-  text: ColorValue;
-  textRest: ColorValue;
-  textHover: ColorValue;
-  textPressed: ColorValue;
-  textSelected: ColorValue;
-  textDisabled: ColorValue;
-  textSelectionHighlight: ColorValue;
-
-  textSecondary: ColorValue;
-  textSecondaryRest: ColorValue;
-  textSecondaryHover: ColorValue;
-  textSecondaryPressed: ColorValue;
-  textSecondarySelected: ColorValue;
-
-  // emphasized text, usually with an accent color
-  textEmphasis: ColorValue;
-  textEmphasisRest: ColorValue;
-  textEmphasisHover: ColorValue;
-  textEmphasisPressed: ColorValue;
-  textEmphasisSelected: ColorValue;
-
-  // stroke colors (typically borders, outlines or underlines)
-  strokeSelectedHover: ColorValue;
-  strokeKeyboard: ColorValue;
-
-  // stroke overlay colors (typically borders, outlines or underlines)
-  strokeOverlayRest: ColorValue;
-  strokeOverlayHover: ColorValue;
-  strokeOverlayPressed: ColorValue;
-  strokeOverlaySelectedRest: ColorValue;
-  strokeOverlaySelectedHover: ColorValue;
-  strokeOverlaySelectedPressed: ColorValue;
-
-  /**
-   * Push Button Controls
-   *
-   * Push button controls only. These controls have a non-transparent
-   * background. Most other controls should not use these colors.
-   */
-  // background
-  backgroundControl: ColorValue;
-  backgroundControlHover: ColorValue;
-  backgroundControlPressed: ColorValue;
-  backgroundControlSelected: ColorValue;
-  backgroundControlDisabled: ColorValue;
-
-  // text
-  textControl: ColorValue;
-  textControlHover: ColorValue;
-  textControlPressed: ColorValue;
-  textControlSelected: ColorValue;
-  textControlDisabled: ColorValue;
-
-  // stroke colors (typically borders, outlines or underlines)
-  strokeControl: ColorValue;
-  strokeControlHover: ColorValue;
-  strokeControlPressed: ColorValue;
-  strokeControlSelected: ColorValue;
-  strokeControlDisabled: ColorValue;
-  strokeControlKeyboard: ColorValue;
-
-  /**
-   * Emphasized Push Button Controls
-   *
-   * Push button controls only. These controls have a non-transparent
-   * background. Most other controls should not use these colors.
-   */
-  // background
-  backgroundControlEmphasis: ColorValue;
-  backgroundControlEmphasisHover: ColorValue;
-  backgroundControlEmphasisPressed: ColorValue;
-  backgroundControlEmphasisDisabled: ColorValue;
-
-  // text
-  textControlEmphasis: ColorValue;
-  textControlEmphasisHover: ColorValue;
-  textControlEmphasisPressed: ColorValue;
-  textControlEmphasisDisabled: ColorValue;
-
-  // stroke colors (typically borders, outlines or underlines)
-  strokeControlEmphasis: ColorValue;
-  strokeControlEmphasisHover: ColorValue;
-  strokeControlEmphasisPressed: ColorValue;
-  strokeControlEmphasisDisabled: ColorValue;
-  strokeControlEmphasisKeyboard: ColorValue;
-
-  /**
-   * Text Controls
-   *
-   * Controls which have a background, even in dark themes, such as text box,
-   * combo box, check box, and radio button.
-   */
-  // background
-  backgroundControlSubtle: ColorValue;
-  backgroundControlSubtleHover: ColorValue;
-  backgroundControlSubtlePressed: ColorValue;
-  backgroundControlSubtleDisabled: ColorValue;
-  backgroundControlSubtleSelectionHighlight: ColorValue;
-
-  // text
-  textControlSubtle: ColorValue;
-  textControlSubtlePlaceholder: ColorValue;
-  textControlSubtleHover: ColorValue;
-  textControlSubtlePressed: ColorValue;
-  textControlSubtleDisabled: ColorValue;
-  textControlSubtleSelectionHighlight: ColorValue;
-
-  // stroke colors (typically borders, outlines or underlines)
-  strokeControlSubtle: ColorValue;
-  strokeControlSubtleHover: ColorValue;
-  strokeControlSubtlePressed: ColorValue;
-  strokeControlSubtleDisabled: ColorValue;
-  strokeControlSubtleKeyboard: ColorValue;
-
-  /**
-   * Hyperlinks
-   */
-  textHyperlink: ColorValue;
-  textHyperlinkHover: ColorValue;
-  textHyperlinkPressed: ColorValue;
-  textHyperlinkVisited: ColorValue;
-
-  /**
-   * Active Text
-   *
-   * Text only states, with no background change, such as a pivot control.
-   */
-  textActive: ColorValue;
-  textActiveHover: ColorValue;
-  textActivePressed: ColorValue;
-  textActiveSelected: ColorValue;
-
-  /**
-   * Errors
-   */
-  textError: ColorValue;
-  textErrorHover: ColorValue;
-  textErrorPressed: ColorValue;
-  textErrorSelected: ColorValue;
-
-  /**
-   * Accents
-   */
-  accentDark: ColorValue;
-  accentLight: ColorValue;
-  accentEmphasis: ColorValue;
-  accentOutline: ColorValue;
-
-  /**
-   * Headers
-   *
-   * Used for headings on sections of the user interface.
-   */
-  backgroundHeader: ColorValue;
-  textHeader: ColorValue;
-}
 
 /**
  * A partially specified color palette.

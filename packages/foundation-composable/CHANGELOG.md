@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-composable
 
-This log was last generated on Fri, 01 Nov 2019 16:51:54 GMT and should not be manually modified.
+This log was last generated on Tue, 05 Nov 2019 22:51:54 GMT and should not be manually modified.
 
+## 0.2.3
+Tue, 05 Nov 2019 22:51:54 GMT
+
+### Patches
+
+- fix bug in tree compression for composable (jasonmo@microsoft.com)
 ## 0.2.2
 Fri, 01 Nov 2019 16:51:54 GMT
 
