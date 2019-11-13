@@ -1,4 +1,4 @@
-import { INativeThemeRegistry } from './INativeTheme';
+import { INativeThemeRegistry } from './INativeTheme.types';
 
 export interface IThemeProviderProps extends React.PropsWithChildren<{}> {
   themeName?: string;

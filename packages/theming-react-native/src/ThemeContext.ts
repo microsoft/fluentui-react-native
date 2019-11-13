@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ThemeContext } from './ThemeLayer';
-import { INativeThemeRegistry } from './INativeTheme';
+import { INativeThemeRegistry } from './INativeTheme.types';
 
 export const useTheme = () => React.useContext(ThemeContext);
 

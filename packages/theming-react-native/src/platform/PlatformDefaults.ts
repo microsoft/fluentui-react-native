@@ -1,10 +1,10 @@
-import { INativeThemeRegistry, INativeTheme } from '../INativeTheme';
-import { getBaselinePlatformTheme } from './PlatformTheme';
-
-export function attachToRegistry(_registry: INativeThemeRegistry) {
-  // empty
-}
+import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
+import { INativeTheme, INativeThemeRegistry } from '../INativeTheme.types';
 
 export function getPlatformDefaults(): INativeTheme {
   return getBaselinePlatformTheme();
+}
+
+export function attachToRegistry(_registry: INativeThemeRegistry) {
+  // empty
 }
