@@ -1,16 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View, ViewProps, TextProps, Button } from 'react-native';
+import { StyleSheet, Text, View, ViewProps, TextProps, NativeEventEmitter, TouchableOpacity } from 'react-native';
 import {
-  ThemeLayer,
   ThemingModuleHelper,
-  ThemeContext,
-  INativeTheme,
   ThemeProvider,
   createPlatformThemeRegistry,
-  useTheme
+  useTheme,
+  createMockThemingModule,
+  createMockThemingModuleHelper,
+  mockGetPaletteImpl
 } from '@uifabricshared/theming-react-native';
 
-const customThemeRegistry = createPlatformThemeRegistry('TaskPane');
+let useWhiteColors = true;
+const emitter = new NativeEventEmitter();
+const mockThemingModule = createMockThemingModule({
+  getPalette: (_pal?: string) => {
+    return mockGetPaletteImpl(useWhiteColors ? 'WhiteColors' : 'TaskPane');
+  }
+});
+
+const mockThemingModuleHelper = createMockThemingModuleHelper(mockThemingModule, emitter);
+
+const customThemeRegistry = createPlatformThemeRegistry('TaskPane', mockThemingModuleHelper);
 // default theme
 customThemeRegistry.setTheme({});
 customThemeRegistry.setTheme(ThemingModuleHelper.getPlatformThemeDefinition('WhiteColors'), 'PlatformWhiteColors');
@@ -27,6 +37,20 @@ const ButtonText: React.FunctionComponent<TextProps> = (p: TextProps) => {
   return <Text {...rest} style={[{ color: String(theme.colors.primaryButtonText) }, style]} />;
 };
 
+const ThemeSwitcher: React.FunctionComponent = (p: {}) => {
+  const switchTheme = React.useCallback(() => {
+    useWhiteColors = !useWhiteColors;
+    emitter.emit('onPlatformDefaultsChanged');
+  }, []);
+  return (
+    <TouchableOpacity activeOpacity={0.9} onPress={switchTheme}>
+      <ButtonBackground>
+        <ButtonText>Switch Theme!</ButtonText>
+      </ButtonBackground>
+    </TouchableOpacity>
+  );
+};
+
 export default function App() {
   return (
     <ThemeProvider themeRegistry={customThemeRegistry}>
@@ -36,6 +60,7 @@ export default function App() {
           <ButtonBackground>
             <ButtonText>Fake Primary Button</ButtonText>
           </ButtonBackground>
+          <ThemeSwitcher />
         </View>
         <ThemeProvider themeName="PlatformWhiteColors">
           <ThemedPanel style={styles.container}>

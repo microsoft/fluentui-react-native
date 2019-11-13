@@ -7,7 +7,7 @@ import {
   IEventEmitter
 } from './ThemingModule.types';
 import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
-import { INativeThemeDefinition, INativeTheme } from '../INativeTheme.types';
+import { INativeTheme } from '../INativeTheme.types';
 import { IOfficePalette, paletteFromOfficeColors } from './office';
 
 const createColorRamp = ({ values, index = -1 }: Partial<IColorRamp>) => ({
@@ -52,9 +52,13 @@ function translatePalette(module: IOfficeThemingModule, paletteCache: PaletteCac
   return paletteCache[key] ? paletteFromOfficeColors(paletteCache[key]) : {};
 }
 
-export function makeOfficeThemingModuleHelper(emitter: IEventEmitter, themingModule?: IOfficeThemingModule): IThemingModuleHelper {
+export function createThemingModuleHelper(themingModule?: IOfficeThemingModule, emitter?: IEventEmitter): IThemingModuleHelper {
   themingModule || console.error('No NativeModule for Theming found');
   const paletteCache: PaletteCache = {};
+  emitter &&
+    emitter.addListener('onPlatformDefaultsChanged', () => {
+      Object.keys(paletteCache).forEach((key: string) => delete paletteCache[key]);
+    });
   return {
     getPlatformDefaults: (themeId?: string) => {
       return resolvePartialTheme(
@@ -65,12 +69,12 @@ export function makeOfficeThemingModuleHelper(emitter: IEventEmitter, themingMod
     getPlatformThemeDefinition: (themeId?: string) => {
       return (_parent: INativeTheme) => {
         updatePaletteInCache(themingModule, paletteCache, themeId);
-        const newColors: INativeThemeDefinition['colors'] = translatePalette(themingModule, paletteCache, themeId);
+        const newColors = translatePalette(themingModule, paletteCache, themeId);
         return { colors: newColors };
       };
     },
     addListener: (callback: PlatformDefaultsChangedCallback) => {
-      emitter.addListener('onPlatformDefaultsChanged', callback);
+      emitter && emitter.addListener('onPlatformDefaultsChanged', callback);
     }
   };
 }
