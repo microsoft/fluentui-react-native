@@ -1,55 +1,101 @@
 import React from 'react';
-import { StyleSheet, Text, View, ViewProps, TextProps } from 'react-native';
-import { ThemeLayer, setTheme, ThemingModuleHelper, ThemeContext, INativeTheme } from '@uifabricshared/theming-react-native';
+import { StyleSheet, Text, View, ViewProps, TextProps, NativeEventEmitter, TouchableOpacity } from 'react-native';
+import {
+  ThemingModuleHelper,
+  ThemeProvider,
+  createPlatformThemeRegistry,
+  useTheme,
+  createMockThemingModule,
+  createMockThemingModuleHelper,
+  mockGetPaletteImpl
+} from '@uifabricshared/theming-react-native';
 
-// Default Theme
-setTheme({});
-// Using a platform-provided Theme Definition
-setTheme(ThemingModuleHelper.getPlatformThemeDefinition('TaskPane'), 'PlatformTaskPane');
+let useWhiteColors = true;
+const emitter = new NativeEventEmitter();
+const mockThemingModule = createMockThemingModule({
+  getPalette: (_pal?: string) => {
+    return mockGetPaletteImpl(useWhiteColors ? 'WhiteColors' : 'TaskPane');
+  }
+});
+
+const mockThemingModuleHelper = createMockThemingModuleHelper(mockThemingModule, emitter);
+
+const customThemeRegistry = createPlatformThemeRegistry('TaskPane', mockThemingModuleHelper);
+// default theme
+customThemeRegistry.setTheme({});
+customThemeRegistry.setTheme(ThemingModuleHelper.getPlatformThemeDefinition('WhiteColors'), 'PlatformWhiteColors');
 
 const ButtonBackground: React.FunctionComponent<ViewProps> = (p: ViewProps) => {
-  const theme = React.useContext(ThemeContext);
+  const theme = useTheme();
   const { style, ...rest } = p;
   return <View {...rest} style={[{ backgroundColor: String(theme.colors.primaryButtonBackground) }, style]} />;
 };
 
 const ButtonText: React.FunctionComponent<TextProps> = (p: TextProps) => {
-  const theme = React.useContext(ThemeContext);
+  const theme = useTheme();
   const { style, ...rest } = p;
   return <Text {...rest} style={[{ color: String(theme.colors.primaryButtonText) }, style]} />;
 };
 
-const PanelWithButton: React.FunctionComponent<{ themeName?: string }> = (p: { themeName?: string }) => {
+const ThemeSwitcher: React.FunctionComponent = (_p: {}) => {
+  const switchTheme = React.useCallback(() => {
+    useWhiteColors = !useWhiteColors;
+    emitter.emit('onPlatformDefaultsChanged');
+  }, []);
   return (
-    <ThemeLayer themeName={p.themeName}>
-      {(theme: INativeTheme) => {
-        const bgColor = theme.colors.background;
-        return (
-          <View style={[{ backgroundColor: bgColor, height: 50 }]}>
-            <ButtonBackground>
-              <ButtonText>{'BackgroundColor' + JSON.stringify(bgColor)}</ButtonText>
-            </ButtonBackground>
-          </View>
-        );
-      }}
-    </ThemeLayer>
+    <TouchableOpacity activeOpacity={0.9} onPress={switchTheme}>
+      <ButtonBackground>
+        <ButtonText>Switch Theme!</ButtonText>
+      </ButtonBackground>
+    </TouchableOpacity>
   );
 };
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <PanelWithButton />
-      <PanelWithButton themeName="PlatformTaskPane" />
-    </View>
+    <ThemeProvider themeRegistry={customThemeRegistry}>
+      <ThemedPanel style={styles.root}>
+        <View style={styles.container}>
+          <ThemedText>Open up App.tsx to start working on your app!</ThemedText>
+          <ButtonBackground>
+            <ButtonText>Fake Primary Button</ButtonText>
+          </ButtonBackground>
+          <ThemeSwitcher />
+        </View>
+        <ThemeProvider themeName="PlatformWhiteColors">
+          <ThemedPanel style={styles.container}>
+            <ThemedText>Theme Provider text!</ThemedText>
+            <ButtonBackground>
+              <ButtonText>Fake Primary Button</ButtonText>
+            </ButtonBackground>
+          </ThemedPanel>
+        </ThemeProvider>
+      </ThemedPanel>
+    </ThemeProvider>
   );
 }
 
+const ThemedPanel: React.FunctionComponent<ViewProps> = (props: ViewProps) => {
+  const { style, ...rest } = props;
+  const theme = useTheme();
+  return <View {...rest} style={[{ backgroundColor: theme.colors.background }, style]} />;
+};
+
+const ThemedText: React.FunctionComponent<TextProps> = (p: TextProps) => {
+  const theme = useTheme();
+  const { style, ...rest } = p;
+  return <Text {...rest} style={[{ color: String(theme.colors.bodyText) }, style]} />;
+};
+
 const styles = StyleSheet.create({
-  container: {
+  root: {
     flex: 1,
+    alignItems: 'stretch',
+    justifyContent: 'space-evenly'
+  },
+  container: {
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    minHeight: 500
   }
 });

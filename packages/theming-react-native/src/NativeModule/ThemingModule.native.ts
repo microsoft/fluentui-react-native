@@ -1,4 +1,4 @@
-import { makeOfficeThemingModuleHelper } from './ThemingModuleHelpers';
+import { createThemingModuleHelper } from './ThemingModuleHelpers';
 import { NativeEventEmitter, NativeModules } from 'react-native';
 import { IOfficeThemingModule } from '.';
 
@@ -8,4 +8,4 @@ declare module 'react-native' {
   }
 }
 
-export const ThemingModuleHelper = makeOfficeThemingModuleHelper(new NativeEventEmitter(NativeModules.Theming), NativeModules.Theming);
+export const ThemingModuleHelper = createThemingModuleHelper(NativeModules.Theming, new NativeEventEmitter(NativeModules.Theming));

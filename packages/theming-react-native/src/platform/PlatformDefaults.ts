@@ -1,10 +1,8 @@
 import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
-import { INativeTheme, INativeThemeRegistry } from '../INativeTheme.types';
+import { createThemeRegistry } from '@uifabricshared/theme-registry';
+import { resolvePartialTheme } from '@uifabricshared/theming-ramp';
+import { IThemingModuleHelper } from '../NativeModule';
 
-export function getPlatformDefaults(): INativeTheme {
-  return getBaselinePlatformTheme();
-}
-
-export function attachToRegistry(_registry: INativeThemeRegistry) {
-  // empty
+export function createPlatformThemeRegistry(_themeId?: string, _module?: IThemingModuleHelper) {
+  return createThemeRegistry(getBaselinePlatformTheme(), resolvePartialTheme);
 }

@@ -1,4 +1,4 @@
-import { makeMockThemingModuleHelper } from './MockThemingModule';
-import { NativeEventEmitter } from 'react-native';
+import { createThemingModuleHelper } from './ThemingModuleHelpers';
+import { createMockThemingModule } from './MockThemingModule';
 
-export const ThemingModuleHelper = makeMockThemingModuleHelper(new NativeEventEmitter());
+export const ThemingModuleHelper = createThemingModuleHelper(createMockThemingModule());

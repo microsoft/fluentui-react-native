@@ -1,7 +1,7 @@
-import { IThemingModuleHelper, IOfficeThemingModule, IEventEmitter } from './ThemingModule.types';
+import { IOfficeThemingModule, IThemingModuleHelper, IEventEmitter } from './ThemingModule.types';
 import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
-import { makeOfficeThemingModuleHelper } from './ThemingModuleHelpers';
 import { IOfficePalette } from './office';
+import { createThemingModuleHelper } from './ThemingModuleHelpers';
 
 const whiteColorsPalette: IOfficePalette = {
   Bkg: 'antiquewhite',
@@ -120,7 +120,7 @@ const whiteColorsPalette: IOfficePalette = {
 const taskPanePalette: IOfficePalette = {
   ...whiteColorsPalette,
   Bkg: '#E6E6E6',
-  BkgCtlEmphasis: 'blue',
+  BkgCtlEmphasis: 'green',
   TextCtlEmphasis: 'white'
 };
 
@@ -141,13 +141,17 @@ const mockModule: IOfficeThemingModule = {
   typography: baseline.typography
 };
 
-export function makeMockThemingModuleHelper(
-  eventEmitter: IEventEmitter,
-  moduleStub?: IOfficeThemingModule,
+export function createMockThemingModule(module?: Partial<IOfficeThemingModule>) {
+  return { ...mockModule, ...module };
+}
+
+export function createMockThemingModuleHelper(
+  module?: Partial<IOfficeThemingModule>,
+  emitter?: IEventEmitter,
   behaviorOverrides?: Partial<IThemingModuleHelper>
 ): IThemingModuleHelper {
   return {
-    ...makeOfficeThemingModuleHelper(eventEmitter, moduleStub || mockModule),
+    ...createThemingModuleHelper(createMockThemingModule(module), emitter),
     ...behaviorOverrides
   };
 }
