@@ -37,7 +37,7 @@ const ButtonText: React.FunctionComponent<TextProps> = (p: TextProps) => {
   return <Text {...rest} style={[{ color: String(theme.colors.primaryButtonText) }, style]} />;
 };
 
-const ThemeSwitcher: React.FunctionComponent = (p: {}) => {
+const ThemeSwitcher: React.FunctionComponent = (_p: {}) => {
   const switchTheme = React.useCallback(() => {
     useWhiteColors = !useWhiteColors;
     emitter.emit('onPlatformDefaultsChanged');
