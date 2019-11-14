@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { IThemeProviderProps } from './ThemeProvider.types';
-import { useThemeRegistry, ThemeRegistryContext } from './ThemeContext';
-import { ThemeContext } from './ThemeLayer';
+import { useThemeRegistry, ThemeRegistryContext, ThemeContext } from './ThemeContext';
 import { IThemeEventListener } from '@uifabricshared/theme-registry';
 import { getThemeRegistry } from './Global';
 

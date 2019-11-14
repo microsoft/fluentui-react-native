@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { ThemeContext } from './ThemeLayer';
-import { INativeThemeRegistry } from './INativeTheme.types';
+import { INativeThemeRegistry, IThemeContextType } from './INativeTheme.types';
 
+export const ThemeContext = React.createContext<IThemeContextType>(undefined);
 export const useTheme = () => React.useContext(ThemeContext);
 
 export const ThemeRegistryContext = React.createContext<INativeThemeRegistry>(undefined);

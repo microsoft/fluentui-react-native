@@ -1,13 +1,8 @@
 import * as React from 'react';
 import { IThemeEventListener } from '@uifabricshared/theme-registry';
 import { removeThemeRegistryListener, getTheme, addThemeRegistryListener } from './Global';
-import { INativeTheme } from './INativeTheme.types';
-
-/**
- * type for the context.  If the context is undefined this will be treated as a reference
- * to the default theme.
- */
-export type IThemeContextType = INativeTheme | undefined;
+import { INativeTheme, IThemeContextType } from './INativeTheme.types';
+import { ThemeContext } from './ThemeContext';
 
 /**
  * props for the ThemeLayer
@@ -26,8 +21,6 @@ export interface IThemeLayerProps {
    */
   children: (theme: INativeTheme) => JSX.Element | null;
 }
-
-export const ThemeContext = React.createContext<IThemeContextType>(undefined);
 
 /**
  * Multipurpose theme provider.  This can run in provider/consumer mode and pure consumer mode.
