@@ -1,21 +1,31 @@
 pr:
-- master
+  - master
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+  - checkout: self
+    persistCredentials: true
 
-- script: |
-    yarn
-    npm run build
-  displayName: 'yarn install and build'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '10.x'
+    displayName: 'Install Node.js'
 
-- script: |
-    yarn verify-api
-    yarn check-for-changed-files
-  displayName: 'Verify API and Ensure Changed Files'
+  - script: |
+      yarn
+    displayName: 'yarn'
+
+  - script: |
+      npm run checkchange
+    displayName: 'check change'
+
+  - script: |
+      npm run build
+    displayName: 'npm run build'
+
+  - script: |
+      yarn verify-api
+      yarn check-for-changed-files
+    displayName: 'Verify API and Ensure Changed Files'
