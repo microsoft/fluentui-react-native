@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Add Theming Module, Theme Provider, and Theme Context hooks",
+  "packageName": "@uifabricshared/theming-react-native",
+  "email": "adrum@microsoft.com",
+  "commit": "06a2bebba5a5df4623d8ca2199d600dc056214f3",
+  "date": "2019-11-15T18:59:31.466Z"
+}
