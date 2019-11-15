@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Add Themed StyleSheets for primitives",
+  "packageName": "@uifabricshared/themed-stylesheet",
+  "email": "adrum@microsoft.com",
+  "commit": "631a54b7debf3b6826e0ea192306762726abb799",
+  "date": "2019-11-14T01:10:31.526Z"
+}
