@@ -12,8 +12,15 @@ steps:
 
 - script: |
     yarn
+  displayName: 'yarn'
+
+- script: |
+    npm run checkchange
+  displayName: 'check change'
+
+- script |
     npm run build
-  displayName: 'yarn install and build'
+  displayName: 'npm run build'
 
 - script: |
     yarn verify-api
