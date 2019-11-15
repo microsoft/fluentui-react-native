@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Make Theme Ramp types closer to Fluent",
-  "packageName": "@uifabricshared/theming-ramp",
-  "email": "adrum@microsoft.com",
-  "commit": "96d32ab410042302a8d0763dbb2390fe14a25c9e",
-  "date": "2019-11-15T18:58:55.010Z"
-}
