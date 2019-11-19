@@ -1,13 +1,15 @@
-import { ILinkSlotProps } from './Link.types';
+import { ILinkType } from './Link.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 
-export const settings: IComposeSettings<ILinkSlotProps> = [
+export const settings: IComposeSettings<ILinkType> = [
   {
-    root: {
+    tokens: {
       fontFamily: 'primary',
       fontSize: 'medium',
       fontWeight: 'medium',
-      color: 'link',
+      color: 'link'
+    },
+    root: {
       style: {
         margin: 0,
         textDecoration: 'underline'
@@ -16,22 +18,22 @@ export const settings: IComposeSettings<ILinkSlotProps> = [
     _precedence: ['visited', 'hovered', 'pressed', 'disabled'],
     _overrides: {
       disabled: {
-        root: {
+        tokens: {
           color: 'linkDisabled'
         }
       },
       hovered: {
-        root: {
+        tokens: {
           color: 'linkHovered'
         }
       },
       pressed: {
-        root: {
+        tokens: {
           color: 'linkPressed'
         }
       },
       visited: {
-        root: {
+        tokens: {
           color: 'linkVisited'
         }
       }

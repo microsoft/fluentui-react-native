@@ -11,14 +11,14 @@ const _pressableRenderStyle: IPressableProps['renderStyle'] = (state: IPressable
 };
 
 const BlueButton = Button.customize({
-  root: {
+  tokens: {
     borderRadius: 7,
     backgroundColor: 'blue',
     color: 'white'
   },
   _overrides: {
     hovered: {
-      root: {
+      tokens: {
         backgroundColor: '#8080ff',
         color: 'black'
       }
@@ -27,13 +27,13 @@ const BlueButton = Button.customize({
 });
 
 const DynamicButton = BlueButton.customize({
-  root: {
+  tokens: {
     borderColor: 'purple',
     fontSize: 'medium'
   },
   _overrides: {
     disabled: {
-      root: {
+      tokens: {
         borderColor: 'pink',
         fontSize: 'xLarge'
       }
@@ -42,22 +42,22 @@ const DynamicButton = BlueButton.customize({
 });
 
 const OrangeLink = Link.customize({
-  root: {
+  tokens: {
     color: 'orange'
   },
   _overrides: {
     hovered: {
-      root: {
+      tokens: {
         color: 'pink'
       }
     },
     pressed: {
-      root: {
+      tokens: {
         color: 'blue'
       }
     },
     visited: {
-      root: {
+      tokens: {
         color: 'red'
       }
     }

@@ -10,18 +10,21 @@
  */
 'use strict';
 
-import { atomic, IUseStyling } from '@uifabricshared/foundation-composable';
+import { atomic, IDefineUseStyling } from '@uifabricshared/foundation-composable';
 import { IPressableProps } from './Pressable.props';
 import { useAsPressable } from './useAsPressable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 
-export const Pressable = atomic<IPressableProps>('div', (userProps: IPressableProps, useStyling: IUseStyling<IPressableProps>) => {
-  const { props, state, setState } = useAsPressable(userProps);
-  const styleProps = useStyling(props);
-  return {
-    slotProps: mergeSettings(styleProps, { root: props }),
-    state: { state, setState }
-  };
-});
+export const Pressable = atomic<IPressableProps>(
+  'div',
+  (userProps: IPressableProps, useStyling: IDefineUseStyling<IPressableProps, { root: IPressableProps }>) => {
+    const { props, state, setState } = useAsPressable(userProps);
+    const styleProps = useStyling(props);
+    return {
+      slotProps: mergeSettings(styleProps, { root: props }),
+      state: { state, setState }
+    };
+  }
+);
 
 export default Pressable;

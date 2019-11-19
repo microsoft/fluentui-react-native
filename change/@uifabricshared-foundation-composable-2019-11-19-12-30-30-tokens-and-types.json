@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "add token support to settings, change to type objects",
+  "packageName": "@uifabricshared/foundation-composable",
+  "email": "jasonmo@microsoft.com",
+  "commit": "4428dd2050288281cdbcc2d172e940362de45630",
+  "date": "2019-11-19T20:30:19.544Z"
+}

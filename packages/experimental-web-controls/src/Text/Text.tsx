@@ -1,9 +1,9 @@
-import { ITextProps } from './Text.types';
+import { ITextType } from './Text.types';
 import { compose } from '@uifabricshared/foundation-compose';
 import { foregroundColorTokens, textTokens } from '../tokens/index';
 import { settings } from './Text.settings';
 
-export const Text = compose<ITextProps>({
+export const Text = compose<ITextType>({
   displayName: 'Text',
   settings,
   slots: {
