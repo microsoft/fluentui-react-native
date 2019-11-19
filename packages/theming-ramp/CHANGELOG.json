@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Fri, 15 Nov 2019 19:30:39 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.3.3",
+      "version": "0.3.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Make Theme Ramp types closer to Fluent",
+            "author": "adrum@microsoft.com",
+            "commit": "96d32ab410042302a8d0763dbb2390fe14a25c9e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Nov 2019 16:51:54 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.3.2",
       "version": "0.3.2",

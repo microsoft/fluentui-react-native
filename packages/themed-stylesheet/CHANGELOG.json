@@ -1,0 +1,19 @@
+{
+  "name": "@uifabricshared/themed-stylesheet",
+  "entries": [
+    {
+      "date": "Fri, 15 Nov 2019 00:49:28 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.1.2",
+      "version": "0.1.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add Themed StyleSheets for primitives",
+            "author": "adrum@microsoft.com",
+            "commit": "631a54b7debf3b6826e0ea192306762726abb799"
+          }
+        ]
+      }
+    }
+  ]
+}

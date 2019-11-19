@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Fri, 01 Nov 2019 16:51:54 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Nov 2019 19:30:39 GMT and should not be manually modified.
 
+## 0.3.3
+Fri, 15 Nov 2019 19:30:39 GMT
+
+### Patches
+
+- Make Theme Ramp types closer to Fluent (adrum@microsoft.com)
 ## 0.3.2
 Fri, 01 Nov 2019 16:51:54 GMT
 

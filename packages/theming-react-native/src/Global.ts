@@ -1,9 +1,6 @@
-import { INativeThemeDefinition, INativeTheme } from './INativeTheme';
-import { getBaselinePlatformTheme } from './platform/index';
-import { resolvePartialTheme } from '@uifabricshared/theming-ramp';
-import { IThemeRegistry, createThemeRegistry, IProcessTheme, IThemeEventListener } from '@uifabricshared/theme-registry';
-
-export type INativeThemeRegistry = IThemeRegistry<INativeTheme, INativeThemeDefinition>;
+import { INativeThemeDefinition, INativeTheme, INativeThemeRegistry } from './INativeTheme.types';
+import { createPlatformThemeRegistry } from './platform';
+import { IProcessTheme, IThemeEventListener } from '@uifabricshared/theme-registry';
 
 let _registry: INativeThemeRegistry;
 
@@ -11,9 +8,9 @@ let _registry: INativeThemeRegistry;
  * Ensure that `_registry` is set. If not, create it using a native module to
  * provide platform defaults.
  */
-function getThemeRegistry(): INativeThemeRegistry {
+export function getThemeRegistry(): INativeThemeRegistry {
   if (!_registry) {
-    _registry = createThemeRegistry<INativeTheme, INativeThemeDefinition>(getBaselinePlatformTheme(), resolvePartialTheme);
+    _registry = createPlatformThemeRegistry();
   }
   return _registry;
 }

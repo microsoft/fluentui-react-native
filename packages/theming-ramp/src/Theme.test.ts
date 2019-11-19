@@ -1,12 +1,12 @@
 import { ITheme, IPartialTheme } from './Theme.types';
 import { resolvePartialTheme } from './Theme';
-import { IPalette } from './Color.types';
+import { IThemeColorDefinition } from './Color.types';
 import { ITypography } from './Typography.types';
 
 const theme: ITheme = {
-  palette: {
+  colors: ({
     bodyBackground: '#ff0000'
-  } as IPalette,
+  } as unknown) as IThemeColorDefinition,
   typography: {
     families: {
       primary: 'Arial'
@@ -30,7 +30,7 @@ const theme: ITheme = {
 };
 
 const partialTheme: IPartialTheme = {
-  palette: {
+  colors: {
     bodySubtext: 'rgb(100,100,100)'
   },
   settings: {
@@ -43,9 +43,9 @@ const partialTheme: IPartialTheme = {
 };
 
 describe('Theme tests', () => {
-  test("resolvePartialTheme reuses the theme's palette object when the partial theme is empty", () => {
+  test("resolvePartialTheme reuses the theme's colors object when the partial theme is empty", () => {
     const resolved = resolvePartialTheme(theme, {});
-    expect(resolved.palette).toBe(theme.palette);
+    expect(resolved.colors).toBe(theme.colors);
   });
 
   test("resolvePartialTheme reuses the theme's typography object when the partial theme is empty", () => {
@@ -61,10 +61,10 @@ describe('Theme tests', () => {
   test('resolvePartialTheme returns a blend of the partial theme and the full theme', () => {
     const resolved = resolvePartialTheme(theme, partialTheme);
     expect(resolved).toEqual({
-      palette: {
+      colors: ({
         bodyBackground: '#ff0000',
         bodySubtext: 'rgb(100,100,100)'
-      } as IPalette,
+      } as unknown) as IThemeColorDefinition,
       typography: {
         families: {
           primary: 'Arial'
