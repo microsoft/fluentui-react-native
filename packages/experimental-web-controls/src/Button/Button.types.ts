@@ -2,7 +2,7 @@ import { ITextProps } from '../Text/index';
 import { IPressableState, IPressableProps } from '../Pressable/index';
 import { IComponentSettings } from '@uifabricshared/foundation-settings';
 import { IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, ITextTokens } from '../tokens/index';
-import { IImageProps } from '../htmlTypes';
+import { IImageProps, IDivProps } from '../htmlTypes';
 import { IStackProps } from '../Stack/index';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 
@@ -80,10 +80,17 @@ export interface IButtonProps extends IPressableProps {
 export type IButtonCustomizableProps = IButtonProps & IButtonTokens & IStackProps;
 
 export type IButtonSlots = {
-  root: IButtonCustomizableProps;
+  root: IDivProps;
   icon: IImageProps;
   content: ITextProps;
 };
 export type IButtonSettings = IComponentSettings<IButtonSlots>;
 
 export type IButtonRenderData = IRenderData<IButtonSlots, IButtonState>;
+
+export interface IButtonType {
+  props: IButtonProps;
+  tokens: IButtonTokens;
+  slotProps: IButtonSlots;
+  state: IButtonState;
+}

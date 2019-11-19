@@ -1,5 +1,6 @@
-import { IComponentSettings, IStyleProp } from '@uifabricshared/foundation-settings';
-import { ICSSStyle } from '../../htmlTypes';
+import { CSSProperties } from 'react';
+import { IDivProps } from '../../htmlTypes';
+import { IStyleProp } from '@uifabricshared/foundation-settings';
 
 /**
  * {@docCategory Stack}
@@ -14,12 +15,7 @@ export interface IStackItemTokens {
    * Defines the padding to be applied to the StackItem contents relative to its border.
    */
   padding?: number | string;
-}
 
-/**
- * {@docCategory Stack}
- */
-export interface IStackItemProps extends IStackItemTokens {
   /**
    * Defines how much to grow the StackItem in proportion to its siblings.
    */
@@ -47,10 +43,19 @@ export interface IStackItemProps extends IStackItemTokens {
    * @defaultvalue true
    */
   verticalFill?: boolean;
-
-  style?: IStyleProp<ICSSStyle>;
 }
 
-export type IStackItemSettings = IComponentSettings<{
-  root: IStackItemProps;
-}>;
+type IDivWithRecursiveStyle = Omit<IDivProps, 'style'> & { style?: IStyleProp<CSSProperties> };
+
+/**
+ * {@docCategory Stack}
+ */
+export interface IStackItemProps extends IStackItemTokens, IDivWithRecursiveStyle {}
+
+export interface IStackItemType {
+  props: IStackItemProps;
+  tokens: IStackItemTokens;
+  slotProps: {
+    root: IDivWithRecursiveStyle;
+  };
+}

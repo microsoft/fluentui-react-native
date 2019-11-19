@@ -1,4 +1,4 @@
-import { IStackItemProps } from './StackItem.types';
+import { IStackItemProps, IStackItemTokens } from './StackItem.types';
 import { ITheme } from '@uifabricshared/theming-ramp';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 
@@ -7,9 +7,9 @@ const alignMap: { [key: string]: string } = {
   end: 'flex-end'
 };
 
-const _keyProps: (keyof IStackItemProps)[] = ['grow', 'shrink', 'disableShrink', 'align', 'verticalFill', 'margin'];
+const _keyProps: (keyof IStackItemTokens)[] = ['grow', 'shrink', 'disableShrink', 'align', 'verticalFill', 'margin'];
 
-function _processor(tokenProps: IStackItemProps): IStackItemProps {
+function _processor(tokenProps: IStackItemTokens): IStackItemProps {
   const { grow, shrink, disableShrink, align, verticalFill, margin } = tokenProps;
   return {
     style: [
@@ -23,9 +23,9 @@ function _processor(tokenProps: IStackItemProps): IStackItemProps {
         flexShrink: 0
       },
       shrink &&
-      !disableShrink && {
-        flexShrink: 1
-      },
+        !disableShrink && {
+          flexShrink: 1
+        },
       align && {
         alignSelf: alignMap[align] || align
       }
@@ -33,4 +33,4 @@ function _processor(tokenProps: IStackItemProps): IStackItemProps {
   };
 }
 
-export const stackItemTokenProcessor = styleFunction<IStackItemProps, ITheme>(_processor, _keyProps);
+export const stackItemTokenProcessor = styleFunction<IStackItemProps, IStackItemTokens, ITheme>(_processor, _keyProps);

@@ -1,4 +1,4 @@
-import { mergeProps } from '@uifabricshared/foundation-settings';
+import { mergeProps, ISlotProps } from '@uifabricshared/foundation-settings';
 import {
   ITargetHasToken,
   IStyleFactoryOperation,
@@ -17,30 +17,30 @@ import { ITokenPropInfo, ICachedPropHandlers, ICacheInfo } from './Token.interna
  * @param fn - function to decorate with keys
  * @param keys - keys to append as a static to the function
  */
-export function styleFunction<TProps, TTheme>(
-  fn: IStyleFactoryFunctionRaw<TProps, TTheme>,
-  keys: (keyof TProps)[]
-): IStyleFactoryFunction<TProps, TTheme> {
-  (fn as IStyleFactoryFunction<TProps, TTheme>)._keys = keys;
-  return fn as IStyleFactoryFunction<TProps, TTheme>;
+export function styleFunction<TProps, TTokens, TTheme>(
+  fn: IStyleFactoryFunctionRaw<TProps, TTokens, TTheme>,
+  keys: (keyof TTokens)[]
+): IStyleFactoryFunction<TProps, TTokens, TTheme> {
+  (fn as IStyleFactoryFunction<TProps, TTokens, TTheme>)._keys = keys;
+  return fn as IStyleFactoryFunction<TProps, TTokens, TTheme>;
 }
 
-interface ITokensForSlot<TProps, TTheme> {
-  toStyle: IStyleFactoryOperation<TProps, TTheme>[];
-  toTokens: IStyleFactoryOperation<TProps, TTheme>[];
-  functions: IStyleFactoryFunction<TProps, TTheme>[];
+interface ITokensForSlot<TProps, TTokens, TTheme> {
+  toStyle: IStyleFactoryOperation<TTokens, TTheme>[];
+  toTokens: IStyleFactoryOperation<TTokens, TTheme>[];
+  functions: IStyleFactoryFunction<TProps, TTokens, TTheme>[];
 }
 
-function _copyToken<TProps>(props: TProps, key: string, target: string | undefined, targetObj: object): void {
+function _copyToken<TTokens>(props: TTokens, key: string, target: string | undefined, targetObj: object): void {
   if (props.hasOwnProperty(key)) {
     targetObj[target || key] = props[key];
   }
 }
 
-function _lookupOrCopyToken<TProps, TTheme>(
-  props: TProps,
+function _lookupOrCopyToken<TTokens, TTheme>(
+  props: TTokens,
   theme: TTheme,
-  entry: IStyleFactoryOperation<TProps, TTheme>,
+  entry: IStyleFactoryOperation<TTokens, TTheme>,
   style: object
 ): void {
   const { source: key, lookup } = entry;
@@ -54,7 +54,11 @@ function _lookupOrCopyToken<TProps, TTheme>(
   }
 }
 
-function _processSlotEntries<TProps, TTheme>(props: TProps, theme: TTheme, mapping: ITokensForSlot<TProps, TTheme>): TProps {
+function _processSlotEntries<TProps, TTokens, TTheme>(
+  props: TTokens,
+  theme: TTheme,
+  mapping: ITokensForSlot<TProps, TTokens, TTheme>
+): TProps {
   const slotProps: { style?: object } = {};
   if (mapping.toStyle.length > 0) {
     const slotStyle = {};
@@ -71,9 +75,9 @@ function _processSlotEntries<TProps, TTheme>(props: TProps, theme: TTheme, mappi
   return slotProps as TProps;
 }
 
-function _processStyleFunctions<TProps extends object, TTheme>(
-  functions: IStyleFactoryFunction<TProps, TTheme>[],
-  tokenProps: TProps,
+function _processStyleFunctions<TProps extends object, TTokens, TTheme>(
+  functions: IStyleFactoryFunction<TProps, TTokens, TTheme>[],
+  tokenProps: TTokens,
   theme: TTheme
 ): TProps | undefined {
   if (functions && functions.length > 0) {
@@ -82,7 +86,7 @@ function _processStyleFunctions<TProps extends object, TTheme>(
   return undefined;
 }
 
-function _buildTokenKey<TProps>(deltas: TProps, keys: string[], slotName: string, cacheInfo: ICacheInfo): string {
+function _buildTokenKey<TTokens>(deltas: TTokens, keys: string[], slotName: string, cacheInfo: ICacheInfo): string {
   const key = cacheInfo.prefix + '-' + slotName + '-';
   return key + keys.map(val => (deltas.hasOwnProperty(val) ? String(deltas[val]) : '')).join('-');
 }
@@ -91,14 +95,14 @@ function _buildTokenKey<TProps>(deltas: TProps, keys: string[], slotName: string
  * This is the worker function that does the work of either retrieving a cached props/style from the cache
  * or building up the new props/style set
  */
-function _getCachedPropsForSlot<TProps extends object, TTheme>(
+function _getCachedPropsForSlot<TProps extends object, TTokens, TTheme>(
   props: TProps,
-  tokenProps: ITokenPropInfo<TProps>,
+  tokenProps: ITokenPropInfo<TTokens>,
   theme: TTheme,
   slotName: string,
   cacheInfo: ICacheInfo,
   keys: string[],
-  mappings: ITokensForSlot<TProps, TTheme>,
+  mappings: ITokensForSlot<TProps, TTokens, TTheme>,
   finalizer?: IStyleFinalizer<TProps>
 ): TProps {
   // get the cache key for this entry
@@ -130,19 +134,20 @@ function _getCachedPropsForSlot<TProps extends object, TTheme>(
  * @param factories - collection of slot style factories
  * @param hasToken - a function that returns whether or not a slot supports a given token
  */
-export function buildComponentTokens<TProps extends object, TTheme>(
-  factories: IStyleFactories<TProps, TTheme>,
+export function buildComponentTokens<TSlotProps extends ISlotProps, TTokens, TTheme>(
+  factories: IStyleFactories<TSlotProps, TTokens, TTheme>,
   hasToken?: ITargetHasToken,
-  finalizer?: IStyleFinalizer<TProps>
-): IComponentTokens<TProps, TTheme> {
+  finalizer?: IStyleFinalizer<object>
+): IComponentTokens<TSlotProps, TTokens, TTheme> {
   const tokenKeys: { [key: string]: undefined } = {};
-  const handlers: ICachedPropHandlers<TProps, TTheme> = {} as ICachedPropHandlers<TProps, TTheme>;
+  const handlers: ICachedPropHandlers<TSlotProps, TTokens, TTheme> = {} as ICachedPropHandlers<TSlotProps, TTokens, TTheme>;
 
   // iterate through each factory and generate a handler for it.  Note that even if no styleFactories
   // are provided within it will still generate the handler to do style caching and finalization
   Object.getOwnPropertyNames(factories).forEach(slot => {
+    type IPropsForSlot = TSlotProps['root'];
     const factoriesBase = factories[slot].styleFactories;
-    const mappings: ITokensForSlot<TProps, TTheme> = { toStyle: [], toTokens: [], functions: [] };
+    const mappings: ITokensForSlot<IPropsForSlot, TTokens, TTheme> = { toStyle: [], toTokens: [], functions: [] };
     const { toStyle, toTokens, functions } = mappings;
     const slotKeys = {};
 
@@ -156,7 +161,7 @@ export function buildComponentTokens<TProps extends object, TTheme>(
             slotKeys[key as string] = undefined;
           });
         } else {
-          const setArray = Array.isArray(set) ? set : [set as IStyleFactoryOperation<TProps, TTheme>];
+          const setArray = Array.isArray(set) ? set : [set as IStyleFactoryOperation<TTokens, TTheme>];
           for (const operation of setArray) {
             slotKeys[operation.source as string] = undefined;
             const target = operation.target || operation.source;
@@ -174,9 +179,18 @@ export function buildComponentTokens<TProps extends object, TTheme>(
     Object.assign(tokenKeys, slotKeys);
 
     // create the closure for the handler and return that in the object
-    handlers[slot] = (props: TProps, tokenProps: ITokenPropInfo<TProps>, theme: TTheme, slotName: string, cacheInfo: ICacheInfo) => {
+    handlers[slot] = (props: TTokens, tokenProps: ITokenPropInfo<TTokens>, theme: TTheme, slotName: string, cacheInfo: ICacheInfo) => {
       const keys = Object.getOwnPropertyNames(slotKeys);
-      return _getCachedPropsForSlot(props, tokenProps, theme, slotName, cacheInfo, keys, mappings, finalizer);
+      return _getCachedPropsForSlot<IPropsForSlot, TTokens, TTheme>(
+        props,
+        tokenProps,
+        theme,
+        slotName,
+        cacheInfo,
+        keys,
+        mappings,
+        finalizer
+      );
     };
   });
   return { tokenKeys, handlers };

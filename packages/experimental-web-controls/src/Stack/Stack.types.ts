@@ -15,11 +15,18 @@ export type Alignment = 'start' | 'end' | 'center' | 'space-between' | 'space-ar
 /**
  * {@docCategory Stack}
  */
-export interface IStackProps extends IStackTokens, IDivProps {
+export interface IStackProps extends IStackTokens, IDivProps {}
+
+/**
+ * {@docCategory Stack}
+ */
+export interface IStackTokens extends ITextTokens, IBackgroundColorTokens, IBorderTokens {
   /**
-   * Defines how to render the Stack.
+   * Defines the spacing between Stack children.
+   * The property is specified as a value for 'row gap', followed optionally by a value for 'column gap'.
+   * If 'column gap' is omitted, it's set to the same value as 'row gap'.
    */
-  as?: React.ReactType<React.HTMLAttributes<HTMLElement>>;
+  childrenGap?: number | string;
 
   /**
    * Defines whether to render Stack children horizontally.
@@ -97,33 +104,6 @@ export interface IStackProps extends IStackTokens, IDivProps {
   wrap?: boolean;
 }
 
-/**
- * {@docCategory Stack}
- */
-export interface IStackTokens extends ITextTokens, IBackgroundColorTokens, IBorderTokens {
-  /**
-   * Defines the spacing between Stack children.
-   * The property is specified as a value for 'row gap', followed optionally by a value for 'column gap'.
-   * If 'column gap' is omitted, it's set to the same value as 'row gap'.
-   */
-  childrenGap?: number | string;
-
-  /**
-   * Defines a maximum height for the Stack.
-   */
-  maxHeight?: number | string;
-
-  /**
-   * Defines a maximum width for the Stack.
-   */
-  maxWidth?: number | string;
-
-  /**
-   * Defines the padding to be applied to the Stack contents relative to its border.
-   */
-  padding?: number | string;
-}
-
 export type IStackSlotProps = {
   root: IStackProps;
   inner: IDivProps;
@@ -135,3 +115,10 @@ export interface IStackStatics {
 }
 
 export type IStackRenderData = IRenderData<IStackSlotProps>;
+
+export interface IStackType {
+  props: IStackProps;
+  slotProps: IStackSlotProps;
+  statics: IStackStatics;
+  tokens: IStackTokens;
+}

@@ -1,8 +1,8 @@
-import { IButtonSettings, MockButton } from './MockButton';
+import { MockButton, IButtonSettings } from './MockButton';
 import { theme } from './MockTheme';
 
 const b1: IButtonSettings = {
-  root: {
+  tokens: {
     fontSize: 'large',
     fontWeight: 900,
     color: 'buttonText',
