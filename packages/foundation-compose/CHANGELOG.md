@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Fri, 01 Nov 2019 16:51:54 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Nov 2019 22:37:36 GMT and should not be manually modified.
 
+## 1.2.0
+Tue, 19 Nov 2019 22:37:36 GMT
+
+### Minor changes
+
+- add token support to settings, change to type objects (jasonmo@microsoft.com)
 ## 1.1.3
 Fri, 01 Nov 2019 16:51:54 GMT
 

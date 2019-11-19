@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-tokens
 
-This log was last generated on Fri, 01 Nov 2019 16:51:54 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Nov 2019 22:37:36 GMT and should not be manually modified.
 
+## 0.2.0
+Tue, 19 Nov 2019 22:37:36 GMT
+
+### Minor changes
+
+- add token support to settings, change to type objects (jasonmo@microsoft.com)
 ## 0.1.7
 Fri, 01 Nov 2019 16:51:54 GMT
 

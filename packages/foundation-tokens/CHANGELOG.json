@@ -2,6 +2,20 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Tue, 19 Nov 2019 22:37:36 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "add token support to settings, change to type objects",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4428dd2050288281cdbcc2d172e940362de45630"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Nov 2019 16:51:54 GMT",
       "tag": "@uifabricshared/foundation-tokens_v0.1.7",
       "version": "0.1.7",

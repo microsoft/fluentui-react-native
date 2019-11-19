@@ -2,6 +2,20 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Tue, 19 Nov 2019 22:37:36 GMT",
+      "tag": "@uifabricshared/foundation-composable_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "add token support to settings, change to type objects",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4428dd2050288281cdbcc2d172e940362de45630"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 05 Nov 2019 22:51:54 GMT",
       "tag": "@uifabricshared/foundation-composable_v0.2.3",
       "version": "0.2.3",
