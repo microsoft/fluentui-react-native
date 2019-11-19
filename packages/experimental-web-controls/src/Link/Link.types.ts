@@ -3,6 +3,7 @@ import { IForegroundColorTokens, ITextTokens } from '../tokens';
 import { IPressableProps, IPressableState } from '../Pressable';
 import { ITextProps } from '../Text';
 import { IRenderData } from '@uifabricshared/foundation-composable';
+import { IButtonProps } from '../Button';
 
 /**
  * Properties for fabric native Link
@@ -31,10 +32,17 @@ export type ILinkProps = IPressableProps & {
 export type ILinkCustomizableProps = ILinkProps & ILinkTokens;
 
 export type ILinkSlotProps = {
-  root: ILinkCustomizableProps;
-  buttonAsRoot: ILinkCustomizableProps;
+  root: React.HTMLAttributes<HTMLAnchorElement>;
+  buttonAsRoot: IButtonProps & ILinkTokens;
   content: ITextProps;
 };
 
 export type ILinkSettings = IComponentSettings<ILinkSlotProps>;
 export type ILinkRenderData = IRenderData<ILinkSlotProps, ILinkState>;
+
+export interface ILinkType {
+  props: ILinkProps;
+  slotProps: ILinkSlotProps;
+  state: ILinkState;
+  tokens: IForegroundColorTokens & ITextTokens;
+}

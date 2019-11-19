@@ -1,23 +1,23 @@
-import { ITextSlotProps } from './Text.types';
+import { ITextType } from './Text.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 
-export const settings: IComposeSettings<ITextSlotProps> = [
+export const settings: IComposeSettings<ITextType> = [
   {
-    root: {
+    tokens: {
       fontFamily: 'primary',
       fontSize: 'medium',
       fontWeight: 'medium',
-      color: 'bodyText',
+      color: 'bodyText'
+    },
+    root: {
       style: {
         margin: 0
       }
     },
     _overrides: {
       disabled: {
-        root: {
-          style: {
-            color: 'bodyTextDisabled'
-          }
+        tokens: {
+          color: 'bodyTextDisabled'
         }
       }
     },

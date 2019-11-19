@@ -1,12 +1,12 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { buildStackRootStyles, buildStackInnerStyles } from './Stack.styles';
-import { IStackRenderData, IStackSlotProps, IStackStatics, IStackProps } from './Stack.types';
+import { IStackRenderData, IStackSlotProps, IStackType } from './Stack.types';
 import { StackItem } from './StackItem/StackItem';
 import { compose } from '@uifabricshared/foundation-compose';
 import { withSlots, ISlots, atomicUsePrepareProps } from '@uifabricshared/foundation-composable';
 
-export const Stack = compose<IStackProps, IStackSlotProps, object, IStackStatics>({
+export const Stack = compose<IStackType>({
   displayName: 'Stack',
   settings: [
     {

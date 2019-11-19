@@ -7,7 +7,11 @@ import {
   IRenderData,
   ISlots,
   IComposableDefinition,
-  IUseStyling
+  IExtractProps,
+  IExtractSlotProps,
+  IExtractState,
+  IDefineUseStyling,
+  IComposableType
 } from './Composable.types';
 import { useCompoundPrepare } from './Composable.slots';
 import { renderSlot } from './slots';
@@ -16,9 +20,7 @@ import { ISlotProps, mergeSettings } from '@uifabricshared/foundation-settings';
 // just a generic object with children specified as props
 type IWithChildren<T> = T & { children?: React.ReactNode[] };
 
-function _validateComposable<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object>(
-  options: IComposableDefinition<TProps, TSlotProps, TState>
-): void {
+function _validateComposable<TProps, TSlotProps, TState>(options: IComposableDefinition<TProps, TSlotProps, TState>): void {
   const numSlots = (options.slots && Object.getOwnPropertyNames(options.slots).length) || 0;
   if (!numSlots) {
     throw 'A composable component must have at least one slot specified';
@@ -41,7 +43,7 @@ export function atomicRender<TProps extends object, TState = object>(
 
 export function atomicUsePrepareProps<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object>(
   props: TProps,
-  useStyling: IUseStyling<TProps, TSlotProps>
+  useStyling: IDefineUseStyling<TProps, TSlotProps>
 ): IRenderData<TSlotProps, TState> {
   const slotProps = mergeSettings<TSlotProps>(useStyling(props), { root: props });
   return { slotProps };
@@ -52,13 +54,21 @@ export function atomicUsePrepareProps<TProps extends object, TSlotProps extends 
  *
  * @param options - composable options which define the behavior of the component
  */
-export function composable<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object>(
-  options: IComposableDefinition<TProps, TSlotProps, TState>
-): IWithComposable<React.FunctionComponent<TProps>, IComposable<TProps, TSlotProps, TState>> {
+export function composable<TType>(
+  options: IComposableDefinition<IExtractProps<TType>, IExtractSlotProps<TType>, IExtractState<TType>>
+): IWithComposable<
+  React.FunctionComponent<IExtractProps<TType>>,
+  IComposable<IExtractProps<TType>, IExtractSlotProps<TType>, IExtractState<TType>>
+> {
+  // type aliases
+  type IProps = IExtractProps<TType>;
+  type IThisSlotProps = IExtractSlotProps<TType>;
+  type IState = IExtractState<TType>;
+
   // create the functional component
   if (!options.useStyling) {
     options.useStyling = () => {
-      return {} as TSlotProps;
+      return {} as IThisSlotProps;
     };
   }
   // ensure we are correctly configured
@@ -69,23 +79,24 @@ export function composable<TProps extends object, TSlotProps extends ISlotProps 
   options.usePrepareProps = options.usePrepareProps || atomicUsePrepareProps;
 
   // create the actual implementation
-  const render = (userProps: TProps) => {
+  const render = (userProps: IProps) => {
     // split out children, they will be excluded from the prop preparation phase
-    const { children, ...props } = userProps as IWithChildren<TProps>;
+    const { children, ...props } = userProps as IWithChildren<IProps>;
 
     // prepare the props, all the way down the tree, also build the slots
-    const { renderData, Slots } = useCompoundPrepare<TProps, TSlotProps, TState>(
-      props as TProps,
-      options as IComposable<TProps, TSlotProps, TState>
+    const { renderData, Slots } = useCompoundPrepare<IProps, IThisSlotProps, IState>(
+      props as IProps,
+      options as IComposable<IProps, IThisSlotProps, IState>
     );
 
     // now do the render, adding the children back in
     return options.render(Slots, renderData, ...children);
   };
+  render.displayName = options.displayName;
 
   // set the options onto the new functional component and return it
-  type IReturnType = IWithComposable<React.FunctionComponent<TProps>, IComposable<TProps, TSlotProps, TState>>;
-  (render as IReturnType).__composable = options as IComposable<TProps, TSlotProps, TState>;
+  type IReturnType = IWithComposable<React.FunctionComponent<IProps>, IComposable<IProps, IThisSlotProps, IState>>;
+  (render as IReturnType).__composable = options as IComposable<IProps, IThisSlotProps, IState>;
   return render as IReturnType;
 }
 
@@ -96,12 +107,12 @@ export function composable<TProps extends object, TSlotProps extends ISlotProps 
  * @param usePrepareProps - prop processing implementation.
  * @param filter - optional filter.  If set it allows stripping properties before they are passed to target
  */
-export function atomic<TProps extends object, TState = object>(
+export function atomic<TProps extends object, TState extends object = object>(
   target: INativeSlotType,
   usePrepareProps: IComposable<TProps, ISlotProps<TProps>, TState>['usePrepareProps'],
   filter?: IPropFilter
 ): React.FunctionComponent<TProps> {
-  return composable<TProps, ISlotProps<TProps>, TState>({
+  return composable<IComposableType<TProps, ISlotProps<TProps>, TState>>({
     usePrepareProps,
     slots: { root: { slotType: target, filter } },
     render: atomicRender

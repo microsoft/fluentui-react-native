@@ -1,4 +1,5 @@
 import { ICacheInfo, ICachedPropHandlers } from './Token.internal';
+import { ISlotProps } from '@uifabricshared/foundation-settings';
 
 /**
  * STYLE FACTORY OPERATIONS (PARTIAL TOKEN PROCESSORS)
@@ -21,11 +22,11 @@ export type ILookupThemePart<TTheme> = (theme: TTheme) => object;
  * The logic for a given operation.  This does not include slot targeting as that is component specific.  That
  * is mapped separately so these object can be reused.
  */
-export interface IStyleFactoryOperation<TProps, TTheme> {
+export interface IStyleFactoryOperation<TTokens, TTheme> {
   /**
    * key to look up in the token prop to get the definition of the token
    */
-  source: keyof TProps;
+  source: keyof TTokens;
 
   /**
    * key to use to enter the resolved token in the style.  If omitted this will be the same as the key.
@@ -39,7 +40,7 @@ export interface IStyleFactoryOperation<TProps, TTheme> {
    */
   lookup?: ILookupThemePart<TTheme>;
 }
-export type IOperationSet<TProps, TTheme> = IStyleFactoryOperation<TProps, TTheme>[];
+export type IOperationSet<TTokens, TTheme> = IStyleFactoryOperation<TTokens, TTheme>[];
 
 /**
  * A style factory function takes token props and a theme and returns a partial props + style to be mixed in
@@ -47,31 +48,32 @@ export type IOperationSet<TProps, TTheme> = IStyleFactoryOperation<TProps, TThem
  *
  * _keys - should specify the token keys the function is dependent on, required to cache properly
  */
-export type IStyleFactoryFunctionRaw<TProps, TTheme> = (tokenProps: TProps, theme: TTheme) => TProps;
-export type IStyleFactoryFunction<TProps, TTheme> = IStyleFactoryFunctionRaw<TProps, TTheme> & { _keys: (keyof TProps)[] };
+export type IStyleFactoryFunctionRaw<TProps, TTokens, TTheme> = (tokenProps: TTokens, theme: TTheme) => TProps;
+export type IStyleFactoryFunction<TProps, TTokens, TTheme> = IStyleFactoryFunctionRaw<TProps, TTokens, TTheme> & {
+  _keys: (keyof TTokens)[];
+};
 
 /**
  * An entry can be an individual operation, an array of operations, or a token function
  */
-export type IStyleFactoryEntry<TProps, TTheme> =
-  | IStyleFactoryOperation<TProps, TTheme>
-  | IOperationSet<TProps, TTheme>
-  | IStyleFactoryFunction<TProps, TTheme>;
+export type IStyleFactoryEntry<TProps, TTokens, TTheme> =
+  | IStyleFactoryOperation<TTokens, TTheme>
+  | IOperationSet<TTokens, TTheme>
+  | IStyleFactoryFunction<TProps, TTokens, TTheme>;
 
 /**
  * For a given slot a component author specifies an array of operations and functions to execute to produce props and styles
  */
-export interface ISlotStyleFactories<TProps, TTheme> {
-  styleFactories?: IStyleFactoryEntry<TProps, TTheme> | IStyleFactoryEntry<TProps, TTheme>[];
+export interface ISlotStyleFactories<TProps, TTokens, TTheme> {
+  styleFactories?: IStyleFactoryEntry<TProps, TTokens, TTheme> | IStyleFactoryEntry<TProps, TTokens, TTheme>[];
 }
 
 /**
  * This is the collection of style factories corresponding to the slots
  */
-export interface IStyleFactories<TProps, TTheme> {
-  root: ISlotStyleFactories<TProps, TTheme>;
-  [key: string]: ISlotStyleFactories<TProps, TTheme>;
-}
+export type IStyleFactories<TSlotProps extends ISlotProps, TTokens, TTheme> = {
+  [K in keyof TSlotProps]?: ISlotStyleFactories<TSlotProps[K], TTokens, TTheme>;
+};
 
 /**
  * Callback function for a component to allow querying whether a given token is supported on a sub-component.  In
@@ -89,9 +91,9 @@ export type IStyleFinalizer<TProps> = (props: TProps, slotName: string, cacheInf
 /**
  * Resolved token definitions, ready to be rendered
  */
-export interface IComponentTokens<TProps, TTheme> {
+export interface IComponentTokens<TSlotProps extends ISlotProps, TTokens, TTheme> {
   /** handlers to process the props of each slot */
-  handlers: ICachedPropHandlers<TProps, TTheme>;
+  handlers: ICachedPropHandlers<TSlotProps, TTokens, TTheme>;
 
   /** token keys put into a map for both ordered retrieval and quick lookups */
   tokenKeys: { [key: string]: undefined };

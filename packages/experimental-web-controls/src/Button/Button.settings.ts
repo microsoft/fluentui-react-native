@@ -1,18 +1,18 @@
-import { IButtonSlots } from './Button.types';
+import { IButtonType } from './Button.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 
-export const settings: IComposeSettings<IButtonSlots> = [
+export const settings: IComposeSettings<IButtonType> = [
   {
-    root: {
+    tokens: {
       backgroundColor: 'buttonBackground',
       color: 'buttonText',
       borderColor: 'buttonBorder',
       borderWidth: 1,
       fontSize: 'large',
       fontWeight: 'semiBold',
-      fontFamily: 'primary',
-      horizontalAlign: 'center',
-      verticalAlign: 'center',
+      fontFamily: 'primary'
+    },
+    root: {
       style: {
         boxSizing: 'border-box',
         borderRadius: 2,
@@ -38,28 +38,28 @@ export const settings: IComposeSettings<IButtonSlots> = [
     _precedence: ['disabled', 'hovered', 'pressed', 'focused'],
     _overrides: {
       disabled: {
-        root: {
+        tokens: {
           backgroundColor: 'buttonBackgroundDisabled',
           color: 'buttonTextDisabled',
           borderColor: 'buttonBorderDisabled'
         }
       },
       hovered: {
-        root: {
+        tokens: {
           backgroundColor: 'buttonBackgroundHovered',
           color: 'buttonTextHovered',
           borderColor: 'buttonBorderHovered'
         }
       },
       pressed: {
-        root: {
+        tokens: {
           backgroundColor: 'buttonBackgroundPressed',
           color: 'buttonTextPressed',
           borderColor: 'buttonBorderPressed'
         }
       },
       focused: {
-        root: {
+        tokens: {
           borderColor: 'inputFocusBorderAlt'
         }
       }

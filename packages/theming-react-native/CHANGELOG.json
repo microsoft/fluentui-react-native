@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Fri, 15 Nov 2019 19:30:39 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.1.8",
+      "version": "0.1.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add Theming Module, Theme Provider, and Theme Context hooks",
+            "author": "adrum@microsoft.com",
+            "commit": "06a2bebba5a5df4623d8ca2199d600dc056214f3"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Nov 2019 16:51:54 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.1.7",
       "version": "0.1.7",

@@ -24,19 +24,24 @@ export interface IMockButtonProps extends IMockTextTokens, IMockBaseProps {
 
 export type IMockButtonCustomProps = IMockButtonProps & IMockColorTokens & IMockBorderTokens & IMockCaptionTextTokens;
 
-export type IButtonSettings = IComponentSettings<{
+export interface IMockTextSlotProps {
+  root: IMockTextProps;
+}
+
+export interface IMockButtonSlotProps {
   root: IMockButtonCustomProps;
   content: IMockTextProps;
   subContent: IMockViewProps;
   icon: IMockImageProps;
-}>;
+}
+export type IButtonSettings = IComponentSettings<IMockButtonSlotProps> & { tokens?: IMockButtonCustomProps };
 
 /**
  * A mock simple text component with one slot that represents an internal text element.  This
  * supports text and fg color tokens.  These tokens should be delegated here and styles should be
  * produced by the MockText component itself for those tokens
  */
-export const MockText = mockCreate<IMockTextProps, IComponentSettings>({
+export const MockText = mockCreate<IMockTextProps, IMockTextSlotProps, IMockTextTokens & IMockForegroundColorTokens>({
   slots: {
     root: {
       component: stockFakeComponent,
@@ -49,7 +54,7 @@ export const MockText = mockCreate<IMockTextProps, IComponentSettings>({
  * A mock button component that has a stock component for its root node, a sub-component for
  * text, and a stock component for the icon
  */
-export const MockButton = mockCreate<IMockButtonCustomProps, IButtonSettings>({
+export const MockButton = mockCreate<IMockButtonCustomProps, IMockButtonSlotProps, IMockButtonCustomProps>({
   slots: {
     root: {
       component: stockFakeComponent,

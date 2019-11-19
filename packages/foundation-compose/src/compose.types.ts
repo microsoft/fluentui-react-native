@@ -1,15 +1,53 @@
-import { IRenderData, IComposableDefinition, ISlotWithFilter } from '@uifabricshared/foundation-composable';
+import {
+  IRenderData,
+  IComposableDefinition,
+  ISlotWithFilter,
+  IComposableType,
+  IExtractSlotProps,
+  IExtractProps
+} from '@uifabricshared/foundation-composable';
 import { ISlotProps, IComponentSettings, IOverrideLookup } from '@uifabricshared/foundation-settings';
 import { ISettingsEntry } from '@uifabricshared/themed-settings';
 import { ITheme } from '@uifabricshared/theming-ramp';
 import { ISlotStyleFactories, IComponentTokens } from '@uifabricshared/foundation-tokens';
 import * as React from 'react';
 
+export interface IComposeType<
+  TProps extends object = object,
+  TSlotProps extends ISlotProps = ISlotProps<TProps>,
+  TState extends object = object,
+  TTokens extends object = object,
+  TStatics extends object = object
+> extends IComposableType<TProps, TSlotProps, TState> {
+  /**
+   * Any statics to attach to the component
+   */
+  statics: TStatics;
+
+  /**
+   * Token props for this component
+   */
+  tokens: TTokens;
+}
+
+// extract statics type from IComposeType
+type IStaticsFragment<TStatics extends object> = { statics: TStatics };
+export type IExtractStatics<T> = T extends IStaticsFragment<infer U> ? U : object;
+
+// extract tokens type from IComposeType
+type ITokensFragment<TTokens extends object> = { tokens: TTokens };
+export type IExtractTokens<T> = T extends ITokensFragment<infer U> ? U : object;
+export type IWithTokens<T, TTokens extends object> = T & { tokens?: TTokens };
+
 /**
  * Function signature for useStyling as implemented by compose.  This adds the lookup function to enable
  * more control over how overrides are applied.
  */
-export type IUseComposeStyling<TSlotProps extends ISlotProps> = (props: TSlotProps['root'], lookup?: IOverrideLookup) => TSlotProps;
+export type IDefineUseComposeStyling<TProps, TSlotProps extends ISlotProps, TTokens extends object> = (
+  props: TProps,
+  lookup?: IOverrideLookup
+) => IWithTokens<TSlotProps, TTokens>;
+export type IUseComposeStyling<T> = IDefineUseComposeStyling<IExtractProps<T>, IExtractSlotProps<T>, IExtractTokens<T>>;
 
 /**
  * Array of:
@@ -19,29 +57,33 @@ export type IUseComposeStyling<TSlotProps extends ISlotProps> = (props: TSlotPro
  *
  * These settings are layered together in order to produce the merged settings for a component
  */
-export type IComposeSettings<TSlotProps extends ISlotProps> = ISettingsEntry<IComponentSettings<TSlotProps>, ITheme>[];
+export type IDefineComposeSettings<TSlotProps extends ISlotProps, TTokens extends object> = ISettingsEntry<
+  IComponentSettings<IWithTokens<TSlotProps, TTokens>>,
+  ITheme
+>[];
+export type IComposeSettings<T> = IDefineComposeSettings<IExtractSlotProps<T>, IExtractTokens<T>>;
 
 /**
  * Settings which dictate the behavior of useStyling, as implemented by the compose package.  These are
  * separated from IComponentOptions to allow the styling portion to be used independently if so desired.
  */
-export interface IStylingSettings<TSlotProps extends ISlotProps> {
+export interface IStylingSettings<TSlotProps extends ISlotProps, TTokens extends object> {
   /**
    * slots of IComposable with added style factory options
    */
-  slots: { [K in keyof TSlotProps]: ISlotWithFilter<ISlotStyleFactories<TSlotProps['root'], ITheme>> };
+  slots: { [K in keyof TSlotProps]: ISlotWithFilter<ISlotStyleFactories<TSlotProps[K], TTokens, ITheme>> };
 
   /**
    * settings used to build up the style definitions
    */
-  settings?: IComposeSettings<TSlotProps>;
+  settings?: IDefineComposeSettings<TSlotProps, TTokens>;
 
   /**
    * The input tokens processed, built into functions, with the keys built into a map.
    *
    * This gets set automatically when the component is set up for the first time and should not be set by hand.
    */
-  resolvedTokens?: IComponentTokens<TSlotProps['root'], ITheme>;
+  resolvedTokens?: IComponentTokens<TSlotProps, TTokens, ITheme>;
 }
 
 /**
@@ -51,23 +93,19 @@ export interface IStylingSettings<TSlotProps extends ISlotProps> {
 export interface IComposeOptions<
   TProps extends object = object,
   TSlotProps extends ISlotProps = ISlotProps<TProps>,
+  TTokens extends object = object,
   TState extends object = object,
   TStatics extends object = object
-  > extends Omit<IComposableDefinition<TSlotProps['root'], TSlotProps, TState>, 'slots'>, IStylingSettings<TSlotProps> {
+> extends Omit<IComposableDefinition<TProps, TSlotProps, TState>, 'slots'>, IStylingSettings<TSlotProps, TTokens> {
   /**
    * Add an additional option to use styling to allow for injecting override lookup functions
    */
-  useStyling?: IUseComposeStyling<TSlotProps>;
+  useStyling?: IDefineUseComposeStyling<TProps, TSlotProps, TTokens>;
 
   /**
    * Use prepare props will take the more opinionated version of useStyling
    */
-  usePrepareProps?: (props: TSlotProps['root'], useStyling: IUseComposeStyling<TSlotProps>) => IRenderData<TSlotProps, TState>;
-
-  /**
-   * Optional display name to set on the component
-   */
-  displayName?: string;
+  usePrepareProps?: (props: TProps, useStyling: IDefineUseComposeStyling<TProps, TSlotProps, TTokens>) => IRenderData<TSlotProps, TState>;
 
   /**
    * Optional statics to attach to the component.  This is primary used to attach a sub-component to a parent component
@@ -81,26 +119,29 @@ export interface IComposeOptions<
 export type IComposeReturnType<
   TProps extends object,
   TSlotProps extends ISlotProps,
+  TTokens extends object,
   TState extends object = object,
   TStatics extends object = object
-  > = React.FunctionComponent<TProps> &
+> = React.FunctionComponent<TProps> &
   TStatics & {
     /**
      * composable options, used by composable for chaining objects.  For compose this also includes the extensions
      * such as settings or token information.
      */
-    __composable: IComposeOptions<TProps, TSlotProps, TState, TStatics>;
+    __composable: IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics>;
 
     /**
      * shorthand function for doing quick customizations of a component by appending to settings
      */
-    customize: (...settings: IComposeSettings<TSlotProps>) => IComposeReturnType<TProps, TSlotProps, TState, TStatics>;
+    customize: (
+      ...settings: IDefineComposeSettings<TSlotProps, TTokens>
+    ) => IComposeReturnType<TProps, TSlotProps, TTokens, TState, TStatics>;
 
     /**
      * helper function to quickly add new partial options to the base component.  The primary advantage is that
      * this is strongly typed for the component type which avoids needing to pass all the type parameters correctly.
      */
     compose: (
-      newOptions: Partial<IComposeOptions<TProps, TSlotProps, TState, TStatics>>
-    ) => IComposeReturnType<TProps, TSlotProps, TState, TStatics>;
+      newOptions: Partial<IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics>>
+    ) => IComposeReturnType<TProps, TSlotProps, TTokens, TState, TStatics>;
   };

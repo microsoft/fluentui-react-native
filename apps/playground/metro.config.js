@@ -25,6 +25,7 @@ const extraNodeModules = uifabricsharedPackages.reduce((o, key) => ({ ...o, [key
 
 // We could generalize the blacklistRE, too, if more packages start depending on 'react-native'.  For now this path is a one off.
 const themingPath = pathToSymLinkedPackage('@uifabricshared/theming-react-native');
+const themedStylsheetPath = pathToSymLinkedPackage('@uifabricshared/themed-stylesheet');
 
 module.exports = {
   // WatchFolders is only needed due to the yarn workspace layout of node_modules, we need to watch the symlinked locations separately
@@ -36,7 +37,10 @@ module.exports = {
 
   resolver: {
     extraNodeModules,
-    blacklistRE: blacklist([new RegExp(`${path.resolve(themingPath, 'node_modules/react-native').replace(/[/\\\\]/g, '[/\\\\]')}.*`)])
+    blacklistRE: blacklist([
+      new RegExp(`${path.resolve(themingPath, 'node_modules/react-native').replace(/[/\\\\]/g, '[/\\\\]')}.*`),
+      new RegExp(`${path.resolve(themedStylsheetPath, 'node_modules/react-native').replace(/[/\\\\]/g, '[/\\\\]')}.*`)
+    ])
     // platforms: ['ios', 'android', 'windesktop', 'windows', 'web', 'macos'],
   },
   transformer: {

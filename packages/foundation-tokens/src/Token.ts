@@ -11,16 +11,12 @@ import { ITokenPropInfo, ICacheInfo } from './Token.internal';
  * @param rootSlotProps - props for the root slot, this will have any tokens loaded from settings
  * @param tokenKeys - an object that contains the set of keys we care about for tokens on this component
  */
-function _getTokenPropInfo<TProps>(props: TProps, rootSlotProps: object, tokenKeys: { [key: string]: undefined }): ITokenPropInfo<TProps> {
-  const tokens = {} as TProps;
-  const deltas = {} as TProps;
+function _getTokenPropInfo<TTokens>(props: TTokens, tokensSlot: TTokens, tokenKeys: { [key: string]: undefined }): ITokenPropInfo<TTokens> {
+  const tokens = { ...tokensSlot };
+  const deltas = {} as TTokens;
   for (const key in tokenKeys) {
-    if (props.hasOwnProperty(key) || rootSlotProps.hasOwnProperty(key)) {
-      const hasUser = props.hasOwnProperty(key);
-      const token = (tokens[key] = hasUser ? props[key] : rootSlotProps[key]);
-      if (hasUser && token !== rootSlotProps[key]) {
-        deltas[key] = token;
-      }
+    if (props.hasOwnProperty(key) && props[key] !== tokens[key]) {
+      deltas[key] = tokens[key] = props[key];
     }
   }
   return { tokens, deltas, tokenKeys };
@@ -39,28 +35,28 @@ function _getTokenPropInfo<TProps>(props: TProps, rootSlotProps: object, tokenKe
  * @param displayName - optional component display name, used for class building
  * @param finalizer - optional function to process styles before caching happens
  */
-export function processTokens<TProps, TTheme>(
-  props: TProps,
+export function processTokens<TSlotProps extends ISlotProps, TTokens extends object, TTheme>(
+  props: TTokens,
   theme: TTheme,
-  slotProps: IComponentSettings,
-  tokenInfo: IComponentTokens<TProps, TTheme>,
+  slotProps: IComponentSettings<TSlotProps & { tokens?: TTokens }>,
+  tokenInfo: IComponentTokens<TSlotProps, TTokens, TTheme>,
   prefix: string,
   cache: object,
   displayName?: string
 ): ISlotProps {
   // merge in tokens and build up the cache key which are the tokens overridden by the user
   slotProps = slotProps || {};
-  const rootSlotProps = slotProps.root || {};
+  const rootSlotProps = slotProps.tokens || {};
   const { handlers, tokenKeys } = tokenInfo;
   const tokenPropInfo = _getTokenPropInfo(props, rootSlotProps, tokenKeys);
   const cacheInfo: ICacheInfo = { cache, prefix, displayName };
-  const resolvedSlotProps = {};
+  const resolvedSlotProps = { tokens: tokenPropInfo.tokens || {} };
 
   Object.getOwnPropertyNames(handlers).forEach(slotName => {
     const handler = handlers[slotName];
-    resolvedSlotProps[slotName] = handler(slotProps[slotName] || {}, tokenPropInfo, theme, slotName, cacheInfo);
+    resolvedSlotProps[slotName] = handler(slotProps[slotName] || {}, tokenPropInfo as any, theme, slotName, cacheInfo);
   });
 
   // return the cache entry
-  return resolvedSlotProps as ISlotProps;
+  return (resolvedSlotProps as unknown) as ISlotProps;
 }

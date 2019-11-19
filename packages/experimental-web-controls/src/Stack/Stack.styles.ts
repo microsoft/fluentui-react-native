@@ -1,4 +1,4 @@
-import { IStackProps } from './Stack.types';
+import { IStackProps, IStackTokens } from './Stack.types';
 import { parseGap, parsePadding } from './StackUtils';
 import { ITheme } from '@uifabricshared/theming-ramp';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
@@ -40,7 +40,7 @@ const childStyles = {
   textOverflow: 'ellipsis'
 };
 
-const _keyProps: (keyof IStackProps)[] = [
+const _keyProps: (keyof IStackTokens)[] = [
   'verticalFill',
   'horizontal',
   'reversed',
@@ -56,7 +56,7 @@ const _keyProps: (keyof IStackProps)[] = [
   'padding'
 ];
 
-function _buildRootStyles(tokenProps: IStackProps, theme: ITheme): IStackProps {
+function _buildRootStyles(tokenProps: IStackTokens, theme: ITheme): IStackProps {
   const {
     verticalFill,
     horizontal,
@@ -118,9 +118,9 @@ function _buildRootStyles(tokenProps: IStackProps, theme: ITheme): IStackProps {
   } as IStackProps;
 }
 
-export const buildStackRootStyles = styleFunction<IStackProps, ITheme>(_buildRootStyles, _keyProps);
+export const buildStackRootStyles = styleFunction<IStackProps, IStackTokens, ITheme>(_buildRootStyles, _keyProps);
 
-const _innerKeyProps: (keyof IStackProps)[] = [
+const _innerKeyProps: (keyof IStackTokens)[] = [
   'horizontal',
   'reversed',
   'gap',
@@ -131,7 +131,7 @@ const _innerKeyProps: (keyof IStackProps)[] = [
   'padding'
 ];
 
-function _buildInnerStyles(tokenProps: IStackProps, theme: ITheme): IStackProps {
+function _buildInnerStyles(tokenProps: IStackTokens, theme: ITheme): IStackProps {
   const { horizontal, reversed, gap, horizontalAlign, verticalAlign, disableShrink, padding } = tokenProps;
   const childrenGap = tokenProps.childrenGap || gap;
   const { rowGap, columnGap } = parseGap(childrenGap, theme);
@@ -186,4 +186,4 @@ function _buildInnerStyles(tokenProps: IStackProps, theme: ITheme): IStackProps 
   } as IStackProps;
 }
 
-export const buildStackInnerStyles = styleFunction<IStackProps, ITheme>(_buildInnerStyles, _innerKeyProps);
+export const buildStackInnerStyles = styleFunction<IStackProps, IStackTokens, ITheme>(_buildInnerStyles, _innerKeyProps);

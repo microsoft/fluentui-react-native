@@ -6,7 +6,7 @@ export type ISlotFn<TProps> = React.FunctionComponent<TProps> & {
   _canCompose?: boolean;
 };
 
-interface ISlotRenderInfo<TProps extends object = object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object> {
+interface ISlotRenderInfo<TProps, TSlotProps, TState> {
   composable: IComposable<TProps, TSlotProps, TState>;
   renderData?: IRenderData<TSlotProps, TState>;
   slotInfo?: ISlotWithFilter;
@@ -33,12 +33,12 @@ function _mergeAndFilterProps<TProps extends object>(propsBase: TProps, propsExt
  * Helper function to add the _canCompose settings to a given render function
  * @param fn - function to decorate with _canCompose
  */
-function _createSlotRenderFunction<TProps extends object>(fn: React.FunctionComponent<TProps>): React.FunctionComponent<TProps> {
+function _createSlotRenderFunction<TProps>(fn: React.FunctionComponent<TProps>): React.FunctionComponent<TProps> {
   (fn as ISlotFn<TProps>)._canCompose = true;
   return fn;
 }
 
-function createSlotRenderInfo<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object>(
+function createSlotRenderInfo<TProps, TSlotProps extends ISlotProps, TState>(
   composable: IComposable<TProps, TSlotProps, TState>,
   slotInfo?: ISlotWithFilter
 ): ISlotRenderInfo<TProps, TSlotProps, TState> {
@@ -48,13 +48,15 @@ function createSlotRenderInfo<TProps extends object, TSlotProps extends ISlotPro
     const Slots = (renderInfo.Slots = {} as ISlots<TSlotProps>);
     const childInfo = (renderInfo.childInfo = {});
 
-    Object.getOwnPropertyNames(slots).forEach(slot => {
+    Object.getOwnPropertyNames(slots).forEach((slot: string) => {
       const { slotType, filter } = slots[slot];
-      const composable = (typeof slotType !== 'string' && (slotType as IWithComposable<object>).__composable) || undefined;
-      const childRenderInfo = (childInfo[slot] = createSlotRenderInfo(composable, slots[slot]));
+      const composable =
+        (typeof slotType !== 'string' && (slotType as IWithComposable<object, IComposable<TProps, TSlotProps, TState>>).__composable) ||
+        undefined;
+      const childRenderInfo = (childInfo[slot as string] = createSlotRenderInfo(composable, slots[slot]));
       if (composable) {
         // create the actual closure for rendering handing it a reference to the render info
-        Slots[slot] = _createSlotRenderFunction((extraProps: TProps, ...children: React.ReactNode[]) => {
+        Slots[slot] = _createSlotRenderFunction((extraProps: object, ...children: React.ReactNode[]) => {
           const { renderData, Slots } = childRenderInfo;
           if (filter || extraProps) {
             const toMerge = { root: _mergeAndFilterProps(renderData.slotProps.root, extraProps, filter) };
@@ -64,7 +66,7 @@ function createSlotRenderInfo<TProps extends object, TSlotProps extends ISlotPro
         });
       } else {
         // non-composable components should just render directly
-        Slots[slot] = _createSlotRenderFunction((extraProps: TProps, ...children: React.ReactNode[]) => {
+        Slots[slot] = _createSlotRenderFunction((extraProps: object, ...children: React.ReactNode[]) => {
           const props = _mergeAndFilterProps(childRenderInfo.renderData.slotProps.root, extraProps, filter);
           return React.createElement(slotType as INativeSlotType, props, ...children);
         });
@@ -74,7 +76,7 @@ function createSlotRenderInfo<TProps extends object, TSlotProps extends ISlotPro
   return renderInfo;
 }
 
-function useUpdateRenderData<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object>(
+function useUpdateRenderData<TProps, TSlotProps, TState>(
   props: TProps,
   info: ISlotRenderInfo<TProps, TSlotProps, TState>
 ): { renderData: IRenderData<TSlotProps, TState>; Slots: ISlots<TSlotProps> } {
@@ -105,14 +107,14 @@ function useUpdateRenderData<TProps extends object, TSlotProps extends ISlotProp
  * @param props - user props send to prepare props
  * @param composable - composable for this component
  */
-export function useCompoundPrepare<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object>(
+export function useCompoundPrepare<TProps, TSlotProps extends ISlotProps, TState>(
   props: TProps,
   composable: IComposable<TProps, TSlotProps, TState>
 ): { renderData: IRenderData<TSlotProps, TState>; Slots: ISlots<TSlotProps> } {
   // create the slot render info (which may be a tree) and store it into state once.  Note that this will also create any
   // needed closures for the slots to ensure they don't get recreated over the lifetime of the component
-  const [renderInfo] = React.useState(createSlotRenderInfo(composable));
+  const [renderInfo] = React.useState(createSlotRenderInfo<TProps, TSlotProps, TState>(composable));
 
   // process the props of the tree using the created/retrieved renderInfo
-  return useUpdateRenderData(props, renderInfo);
+  return useUpdateRenderData<TProps, TSlotProps, TState>(props, renderInfo);
 }

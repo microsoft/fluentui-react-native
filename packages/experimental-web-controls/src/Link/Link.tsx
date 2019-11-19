@@ -2,7 +2,7 @@
 'use strict';
 
 import { compose } from '@uifabricshared/foundation-compose';
-import { ILinkSlotProps, ILinkRenderData, ILinkProps, ILinkState } from './Link.types';
+import { ILinkSlotProps, ILinkRenderData, ILinkType } from './Link.types';
 import { Text } from '../Text';
 import { settings } from './Link.settings';
 import { useLinkPrepareProps } from './Link.helpers';
@@ -10,7 +10,7 @@ import { textTokens } from '../tokens';
 import { foregroundColorTokens } from '../tokens/ColorTokens';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 
-export const Link = compose<ILinkProps, ILinkSlotProps, ILinkState>({
+export const Link = compose<ILinkType>({
   displayName: 'Link',
   settings,
   usePrepareProps: useLinkPrepareProps,
