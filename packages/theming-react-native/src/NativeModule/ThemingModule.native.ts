@@ -8,4 +8,15 @@ declare module 'react-native' {
   }
 }
 
-export const ThemingModuleHelper = createThemingModuleHelper(NativeModules.Theming, new NativeEventEmitter(NativeModules.Theming));
+const getThemingModule = () => {
+  return __DEV__
+    ? {
+        ...NativeModules.Theming,
+        getPalette: () => {
+          return require('./office/debugpalette.json');
+        }
+      }
+    : NativeModules.Theming;
+};
+
+export const ThemingModuleHelper = createThemingModuleHelper(getThemingModule(), new NativeEventEmitter(NativeModules.Theming));
