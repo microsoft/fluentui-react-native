@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Fix Web Debug for ThemingModule consumers",
+  "packageName": "@uifabricshared/theming-react-native",
+  "email": "adrum@microsoft.com",
+  "commit": "659950de8665c89551fc9ecea55374fbf71048dd",
+  "date": "2019-11-19T20:56:33.436Z"
+}
