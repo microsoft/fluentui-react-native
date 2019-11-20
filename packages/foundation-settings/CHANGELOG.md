@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-settings
 
-This log was last generated on Fri, 01 Nov 2019 16:51:54 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Nov 2019 19:37:06 GMT and should not be manually modified.
 
+## 0.4.0
+Wed, 20 Nov 2019 19:37:06 GMT
+
+### Minor changes
+
+- 📦 fix package entrypoints to distinguish CJS/ES6 (adrum@microsoft.com)
 ## 0.3.3
 Fri, 01 Nov 2019 16:51:54 GMT
 

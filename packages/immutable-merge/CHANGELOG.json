@@ -2,6 +2,20 @@
   "name": "@uifabricshared/immutable-merge",
   "entries": [
     {
+      "date": "Wed, 20 Nov 2019 19:37:06 GMT",
+      "tag": "@uifabricshared/immutable-merge_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "📦 fix package entrypoints to distinguish CJS/ES6",
+            "author": "adrum@microsoft.com",
+            "commit": "d51fcaea614de5606989d8463c7f66ccbc5322cf"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Oct 2019 02:11:41 GMT",
       "tag": "@uifabricshared/immutable-merge_v0.1.6",
       "version": "0.1.6",

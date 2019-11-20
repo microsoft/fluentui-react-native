@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Tue, 19 Nov 2019 22:37:36 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Nov 2019 19:37:06 GMT and should not be manually modified.
 
+## 1.3.0
+Wed, 20 Nov 2019 19:37:06 GMT
+
+### Minor changes
+
+- 📦 fix package entrypoints to distinguish CJS/ES6 (adrum@microsoft.com)
 ## 1.2.0
 Tue, 19 Nov 2019 22:37:36 GMT
 
