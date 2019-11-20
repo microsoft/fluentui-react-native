@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "changes styleFactories to styles",
+  "packageName": "@uifabricshared/foundation-tokens",
+  "email": "jasonmo360@gmail.com",
+  "commit": "ac07c832db9ffe0034a27bb28e2ff1bce7d33d63",
+  "date": "2019-11-20T16:36:43.053Z"
+}
