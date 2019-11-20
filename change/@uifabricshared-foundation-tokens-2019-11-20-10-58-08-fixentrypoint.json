@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "📦 fix package entrypoints to distinguish CJS/ES6",
+  "packageName": "@uifabricshared/foundation-tokens",
+  "email": "adrum@microsoft.com",
+  "commit": "d51fcaea614de5606989d8463c7f66ccbc5322cf",
+  "date": "2019-11-20T18:57:44.458Z"
+}
