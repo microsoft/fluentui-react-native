@@ -2,6 +2,20 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Wed, 20 Nov 2019 19:51:16 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.4.0",
+      "version": "1.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "changes styleFactories to styles",
+            "author": "jasonmo360@gmail.com",
+            "commit": "ac07c832db9ffe0034a27bb28e2ff1bce7d33d63"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 Nov 2019 19:37:06 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.3.0",
       "version": "1.3.0",
