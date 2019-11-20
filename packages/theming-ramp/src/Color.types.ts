@@ -24,7 +24,7 @@ export interface IColorRamp extends ICastableToString {
   index: number;
 }
 
-export type IThemeColorDefinition = {
+export type IThemeColorDefinition = IPalette & {
   background: ColorValue;
   bodyText: ColorValue;
   subText: ColorValue;
@@ -299,6 +299,8 @@ export interface IPaletteBackgroundColors {
   buttonBackgroundPressed: ColorValue;
   /** Border of a standard button */
   buttonBorder: ColorValue;
+  /** Border of a standard button in focused state */
+  buttonBorderFocused: ColorValue;
   /** Border of a disabled standard button */
   buttonBorderDisabled: ColorValue;
   /** Background of a primary button */
@@ -311,6 +313,8 @@ export interface IPaletteBackgroundColors {
   primaryButtonBackgroundDisabled: ColorValue;
   /** Border of a primary button */
   primaryButtonBorder: ColorValue;
+  /** Border of a primary button in focused state*/
+  primaryButtonBorderFocused: ColorValue;
   /** Background of an accent button (kicker) */
   accentButtonBackground: ColorValue;
 
