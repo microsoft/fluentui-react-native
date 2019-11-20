@@ -1,5 +1,5 @@
 import { IMockTheme } from './MockTheme';
-import { ITargetHasToken, IComponentTokens, ISlotStyleFactories } from './Token.types';
+import { ITargetHasToken, IComponentTokens, IStyleFactories } from './Token.types';
 import { IStyleProp, mergeSettings, ISlotProps, IComponentSettings } from '@uifabricshared/foundation-settings';
 import { processTokens } from './Token';
 import { buildComponentTokens } from './Token.function';
@@ -22,12 +22,13 @@ export type IMockComponent<TProps, TSlotProps extends ISlotProps, TTokens> = IMo
   __options?: IComponentTokens<TSlotProps, TTokens, IMockTheme>;
 };
 
-export type IMockSlots<TSlotProps extends ISlotProps, TTokens> = {
-  [K in keyof TSlotProps]: { component: any } & ISlotStyleFactories<TSlotProps[K], TTokens, IMockTheme>;
+export type IMockSlots<TSlotProps extends ISlotProps> = {
+  [K in keyof TSlotProps]: any;
 };
 
 export interface IMockComponentOptions<TSlotProps extends ISlotProps, TTokens> {
-  slots?: IMockSlots<TSlotProps, TTokens>;
+  slots?: IMockSlots<TSlotProps>;
+  styles?: IStyleFactories<TSlotProps, TTokens, IMockTheme>;
 }
 
 export function stockFakeComponent(
@@ -46,12 +47,12 @@ export function mockCreate<TProps extends object, TSlotProps extends ISlotProps,
   const slots = options.slots;
   const hasTokens: ITargetHasToken = slots
     ? (target: string, key: string) => {
-        const targetOptions = slots[target] && slots[target].component && slots[target].component.__options;
+        const targetOptions = slots[target] && slots[target].__options;
         return targetOptions && targetOptions.tokenKeys.hasOwnProperty(key);
       }
     : undefined;
   const resolvedTokens: IComponentTokens<TSlotProps, TTokens, IMockTheme> = buildComponentTokens<TSlotProps, TTokens, IMockTheme>(
-    slots,
+    options.styles,
     hasTokens
   );
   const fn = (props: TProps, settings: TSlotProps & { tokens?: TTokens }, theme: IMockTheme, cache: object, recurse?: boolean) => {
@@ -59,9 +60,9 @@ export function mockCreate<TProps extends object, TSlotProps extends ISlotProps,
     if (recurse) {
       Object.keys(slots).forEach((slotName: string) => {
         const slot = slots[slotName];
-        if (slot.component.__options && newSettings[slotName]) {
+        if (slot.__options && newSettings[slotName]) {
           cache[slotName] = cache[slotName] || {};
-          const slotSettings = slot.component(newSettings[slotName] || {}, {}, theme, cache[slotName], false);
+          const slotSettings = slot(newSettings[slotName] || {}, {}, theme, cache[slotName], false);
           const rootKey = 'root';
           if (slotSettings[rootKey]) {
             newSettings = mergeSettings(newSettings, { [slotName]: slotSettings[rootKey] });

@@ -82,23 +82,29 @@ function useStylingCore<TProps, TSlotProps extends ISlotProps, TTokens extends o
  * return a useStyling implementation, in the form of IUseComposeStyling, based on the passed in styleSettings.  The
  * styleSettings will be captured in the created closure and will be set up to enable the appropriate levels of caching.
  *
- * @param styleSettings - style settings to configure this function.  Note that this should be scoped to a single component.
+ * @param options - style settings to configure this function.  Note that this should be scoped to a single component.
  * @param name - optional base name to use as a cache key
  */
-export function initializeStyling<TProps, TSlotProps extends ISlotProps, TTokens extends object>(
-  styleSettings: IStylingSettings<TSlotProps, TTokens>,
+export function initializeStyling<
+  TProps extends object,
+  TSlotProps extends ISlotProps,
+  TTokens extends object,
+  TState extends object,
+  TStatics extends object
+>(
+  options: IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics>,
   name?: string
 ): IDefineUseComposeStyling<TProps, TSlotProps, TTokens> {
   // process the tokens and get them ready to render
-  const slots = styleSettings.slots;
-  styleSettings.resolvedTokens = buildComponentTokens<TSlotProps, TTokens, ITheme>(slots, _getHasToken(slots));
+  const { styles, slots } = options;
+  options.resolvedTokens = buildComponentTokens<TSlotProps, TTokens, ITheme>(styles, _getHasToken(slots));
 
   // ensure we have a name to use for caching.  Try to pull something identifiable to help with debugging
-  name = name || _nameFromSettings(styleSettings) || 'anonymous';
+  name = name || _nameFromSettings(options) || 'anonymous';
   const tokenCacheKey = Symbol(name);
 
   // create a useStyling implementation for this component type (per type, not per instance)
   return (props: TProps, lookupOverride?: IOverrideLookup) => {
-    return useStylingCore<TProps, TSlotProps, TTokens>(props, styleSettings, name, tokenCacheKey, lookupOverride);
+    return useStylingCore<TProps, TSlotProps, TTokens>(props, options, name, tokenCacheKey, lookupOverride);
   };
 }
