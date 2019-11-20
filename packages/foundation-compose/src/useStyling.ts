@@ -4,7 +4,7 @@ import { getThemedSettings } from '@uifabricshared/themed-settings';
 import { ITheme, getSettings, returnAsSlotProps } from '@uifabricshared/theming-ramp';
 import { IComponentTokens, processTokens, ITargetHasToken, buildComponentTokens } from '@uifabricshared/foundation-tokens';
 import { getTheme, ThemeContext } from '@uifabricshared/theming-react-native';
-import { IWithComposable, AsObject } from '@uifabricshared/foundation-composable';
+import { IWithComposable, AsObject, IComposable } from '@uifabricshared/foundation-composable';
 import { IComposeOptions, IStylingSettings, IDefineUseComposeStyling, IWithTokens } from './compose.types';
 
 /* tslint:disable-next-line no-any */
@@ -28,8 +28,8 @@ function _getSettingsFromTheme(theme: ITheme, name: string): IComponentSettings 
   return getSettings(theme, name);
 }
 
-function _getHasToken<TProps, TSlotProps extends ISlotProps, TTokens extends object>(
-  slots: IStylingSettings<TSlotProps, TTokens>['slots']
+function _getHasToken<TProps, TSlotProps extends ISlotProps, TTokens extends object, TState>(
+  slots: IComposable<TProps, TSlotProps, TState>['slots']
 ): ITargetHasToken {
   const slotTokens: { [key: string]: IComponentTokens<TSlotProps, TTokens, ITheme>['tokenKeys'] | undefined } = {};
   Object.keys(slots).forEach(slot => {

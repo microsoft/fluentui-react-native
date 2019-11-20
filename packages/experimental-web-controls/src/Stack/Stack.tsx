@@ -34,8 +34,12 @@ export const Stack = compose<IStackType>({
   statics: { Item: StackItem },
   usePrepareProps: atomicUsePrepareProps,
   slots: {
-    root: { slotType: 'div', styleFactories: [buildStackRootStyles] },
-    inner: { slotType: 'div', styleFactories: [buildStackInnerStyles] }
+    root: { slotType: 'div' },
+    inner: { slotType: 'div' }
+  },
+  styles: {
+    root: buildStackRootStyles,
+    inner: buildStackInnerStyles
   },
   render: (Slots: ISlots<IStackSlotProps>, renderData: IStackRenderData, ...children: React.ReactNode[]) => {
     const wrap = renderData.slotProps && renderData.slotProps.root.wrap;

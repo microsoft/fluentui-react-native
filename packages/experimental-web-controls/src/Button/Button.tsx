@@ -53,18 +53,14 @@ export const Button = compose<IButtonType>({
     );
   },
   slots: {
-    root: {
-      slotType: Stack,
-      styleFactories: [backgroundColorTokens, borderTokens]
-    },
-    icon: {
-      slotType: 'image',
-      styleFactories: [foregroundColorTokens, [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'overlayColor' }]]
-    },
-    content: {
-      slotType: Text,
-      styleFactories: [textTokens, foregroundColorTokens]
-    }
+    root: { slotType: Stack },
+    icon: { slotType: 'image' },
+    content: { slotType: Text }
+  },
+  styles: {
+    root: [backgroundColorTokens, borderTokens],
+    icon: [foregroundColorTokens, [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'overlayColor' }]],
+    content: [textTokens, foregroundColorTokens]
   }
 });
 
