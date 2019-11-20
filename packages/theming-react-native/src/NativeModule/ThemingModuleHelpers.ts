@@ -45,7 +45,7 @@ function updatePaletteInCache(module: IOfficeThemingModule, cache: PaletteCache,
 }
 
 function translatePalette(module: IOfficeThemingModule, paletteCache: PaletteCache, palette?: string): IPartialPalette {
-  const key = palette || 'WhiteColors';
+  const key = __DEV__ ? 'debug' : palette || 'WhiteColors';
   if (!paletteCache[key]) {
     updatePaletteInCache(module, paletteCache, key);
   }
