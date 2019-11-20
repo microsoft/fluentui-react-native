@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { INativeThemeRegistry, IThemeContextType } from './INativeTheme.types';
+import { ThemeRegistry, ITheme } from './Theme.types';
 
-export const ThemeContext = React.createContext<IThemeContextType>(undefined);
+export const ThemeContext = React.createContext<ITheme>(undefined);
 export const useTheme = () => React.useContext(ThemeContext);
 
-export const ThemeRegistryContext = React.createContext<INativeThemeRegistry>(undefined);
+export const ThemeRegistryContext = React.createContext<ThemeRegistry>(undefined);
 export const useThemeRegistry = () => React.useContext(ThemeRegistryContext);

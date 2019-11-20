@@ -1,4 +1,4 @@
-import { INativeTheme } from './INativeTheme.types';
+import { ITheme } from './Theme.types';
 import { getStockWebPalette, ITypography, ISpacing } from '@uifabricshared/theming-ramp';
 
 function _defaultTypography(): ITypography {
@@ -36,7 +36,7 @@ export function defaultSpacing(): ISpacing {
   return { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' };
 }
 
-export function getBaselinePlatformTheme(): INativeTheme {
+export function getBaselinePlatformTheme(): ITheme {
   return {
     colors: getStockWebPalette(),
     typography: _defaultTypography(),
