@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Wed, 20 Nov 2019 00:19:04 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.1.9",
+      "version": "0.1.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix Web Debug for ThemingModule consumers",
+            "author": "adrum@microsoft.com",
+            "commit": "659950de8665c89551fc9ecea55374fbf71048dd"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 15 Nov 2019 19:30:39 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.1.8",
       "version": "0.1.8",
