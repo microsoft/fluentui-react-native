@@ -62,17 +62,10 @@ export type IStyleFactoryEntry<TProps, TTokens, TTheme> =
   | IStyleFactoryFunction<TProps, TTokens, TTheme>;
 
 /**
- * For a given slot a component author specifies an array of operations and functions to execute to produce props and styles
- */
-export interface ISlotStyleFactories<TProps, TTokens, TTheme> {
-  styleFactories?: IStyleFactoryEntry<TProps, TTokens, TTheme> | IStyleFactoryEntry<TProps, TTokens, TTheme>[];
-}
-
-/**
  * This is the collection of style factories corresponding to the slots
  */
 export type IStyleFactories<TSlotProps extends ISlotProps, TTokens, TTheme> = {
-  [K in keyof TSlotProps]?: ISlotStyleFactories<TSlotProps[K], TTokens, TTheme>;
+  [K in keyof TSlotProps]?: IStyleFactoryEntry<TSlotProps[K], TTokens, TTheme> | IStyleFactoryEntry<TSlotProps[K], TTokens, TTheme>[];
 };
 
 /**

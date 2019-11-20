@@ -146,7 +146,7 @@ export function buildComponentTokens<TSlotProps extends ISlotProps, TTokens, TTh
   // are provided within it will still generate the handler to do style caching and finalization
   Object.getOwnPropertyNames(factories).forEach(slot => {
     type IPropsForSlot = TSlotProps['root'];
-    const factoriesBase = factories[slot].styleFactories;
+    const factoriesBase = factories[slot];
     const mappings: ITokensForSlot<IPropsForSlot, TTokens, TTheme> = { toStyle: [], toTokens: [], functions: [] };
     const { toStyle, toTokens, functions } = mappings;
     const slotKeys = {};
@@ -179,10 +179,16 @@ export function buildComponentTokens<TSlotProps extends ISlotProps, TTokens, TTh
     Object.assign(tokenKeys, slotKeys);
 
     // create the closure for the handler and return that in the object
-    handlers[slot] = (props: TTokens, tokenProps: ITokenPropInfo<TTokens>, theme: TTheme, slotName: string, cacheInfo: ICacheInfo) => {
+    handlers[slot as keyof TSlotProps] = (
+      props: TSlotProps[keyof TSlotProps],
+      tokenProps: ITokenPropInfo<TTokens>,
+      theme: TTheme,
+      slotName: string,
+      cacheInfo: ICacheInfo
+    ) => {
       const keys = Object.getOwnPropertyNames(slotKeys);
       return _getCachedPropsForSlot<IPropsForSlot, TTokens, TTheme>(
-        props,
+        props as TSlotProps['root'],
         tokenProps,
         theme,
         slotName,

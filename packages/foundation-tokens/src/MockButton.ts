@@ -43,10 +43,10 @@ export type IButtonSettings = IComponentSettings<IMockButtonSlotProps> & { token
  */
 export const MockText = mockCreate<IMockTextProps, IMockTextSlotProps, IMockTextTokens & IMockForegroundColorTokens>({
   slots: {
-    root: {
-      component: stockFakeComponent,
-      styleFactories: [standardTextTokens, standardForegroundColorTokens]
-    }
+    root: stockFakeComponent
+  },
+  styles: {
+    root: [standardTextTokens, standardForegroundColorTokens]
   }
 });
 
@@ -56,21 +56,15 @@ export const MockText = mockCreate<IMockTextProps, IMockTextSlotProps, IMockText
  */
 export const MockButton = mockCreate<IMockButtonCustomProps, IMockButtonSlotProps, IMockButtonCustomProps>({
   slots: {
-    root: {
-      component: stockFakeComponent,
-      styleFactories: [standardBackgroundColorTokens, standardBorderTokens]
-    },
-    content: {
-      component: MockText,
-      styleFactories: [standardTextTokens, standardForegroundColorTokens]
-    },
-    subContent: {
-      component: stockFakeComponent,
-      styleFactories: [standardTextTokens, standardCaptionTokens]
-    },
-    icon: {
-      component: stockFakeComponent,
-      styleFactories: [standardForegroundColorTokens]
-    }
+    root: stockFakeComponent,
+    content: MockText,
+    subContent: stockFakeComponent,
+    icon: stockFakeComponent
+  },
+  styles: {
+    root: [standardBackgroundColorTokens, standardBorderTokens],
+    content: [standardTextTokens, standardForegroundColorTokens],
+    subContent: [standardTextTokens, standardCaptionTokens],
+    icon: [standardForegroundColorTokens]
   }
 });
