@@ -95,7 +95,9 @@ export interface IComposable<TProps, TSlotProps, TState> {
   slots: ISlotDefinitions<TSlotProps>;
 }
 
-export type IComposableDefinition<TProps, TSlotProps, TState> = Partial<IComposable<TProps, TSlotProps, TState>>;
+export type IComposableDefinition<TProps, TSlotProps, TState> = Partial<Omit<IComposable<TProps, TSlotProps, TState>, 'slots'>> & {
+  slots?: IPartialSlotDefinitions<TSlotProps>;
+};
 
 /**
  * data returned from prop preparation which will be handed to render
@@ -117,6 +119,10 @@ export type ISlots<TSlotProps> = {
  */
 export type ISlotDefinitions<TSlotProps> = {
   [K in keyof TSlotProps]: ISlotWithFilter;
+};
+
+export type IPartialSlotDefinitions<TSlotProps> = {
+  [K in keyof TSlotProps]?: INativeSlotType | ISlotWithFilter;
 };
 
 /**

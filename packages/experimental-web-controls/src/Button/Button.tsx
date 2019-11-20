@@ -53,9 +53,9 @@ export const Button = compose<IButtonType>({
     );
   },
   slots: {
-    root: { slotType: Stack },
-    icon: { slotType: 'image' },
-    content: { slotType: Text }
+    root: Stack,
+    icon: 'image',
+    content: Text
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],

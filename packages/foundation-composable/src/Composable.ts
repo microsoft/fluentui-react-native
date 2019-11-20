@@ -11,7 +11,8 @@ import {
   IExtractSlotProps,
   IExtractState,
   IDefineUseStyling,
-  IComposableType
+  IComposableType,
+  ISlotWithFilter
 } from './Composable.types';
 import { useCompoundPrepare } from './Composable.slots';
 import { renderSlot } from './slots';
@@ -19,19 +20,6 @@ import { ISlotProps, mergeSettings } from '@uifabricshared/foundation-settings';
 
 // just a generic object with children specified as props
 type IWithChildren<T> = T & { children?: React.ReactNode[] };
-
-function _validateComposable<TProps, TSlotProps, TState>(options: IComposableDefinition<TProps, TSlotProps, TState>): void {
-  const numSlots = (options.slots && Object.getOwnPropertyNames(options.slots).length) || 0;
-  if (!numSlots) {
-    throw 'A composable component must have at least one slot specified';
-  } else if (numSlots > 1) {
-    if (!options.render) {
-      throw 'A composable component with multiple slots cannot use the default render implementation';
-    } else if (!options.usePrepareProps) {
-      throw 'A composable component with multiple slots cannot use the default usePrepareProps implementation';
-    }
-  }
-}
 
 export function atomicRender<TProps extends object, TState = object>(
   Slots: ISlots<ISlotProps<TProps>>,
@@ -50,12 +38,49 @@ export function atomicUsePrepareProps<TProps extends object, TSlotProps extends 
 }
 
 /**
+ * Ensure the composable is set up correctly, fill in missing functions and turn slots into
+ * object format rather than the shorthand format.
+ *
+ * @param options - partial options definition to turn into full options
+ */
+function _validateOptions<TProps extends object, TSlotProps extends ISlotProps, TState>(
+  options: IComposableDefinition<TProps, TSlotProps, TState>
+): IComposable<TProps, TSlotProps, TState> {
+  const numSlots = (options.slots && Object.getOwnPropertyNames(options.slots).length) || 0;
+  if (!numSlots) {
+    throw 'A composable component must have at least one slot specified';
+  } else if (numSlots > 1) {
+    if (!options.render) {
+      throw 'A composable component with multiple slots cannot use the default render implementation';
+    }
+  }
+  // ensure slots are in slot with filter format
+  for (const key in options.slots) {
+    const slot = options.slots[key];
+    if (slot && typeof slot !== 'object') {
+      options.slots[key] = { slotType: slot } as ISlotWithFilter;
+    }
+  }
+  if (!options.useStyling) {
+    options.useStyling = () => {
+      return {} as TSlotProps;
+    };
+  }
+  // use atomic handlers for usePrepareProps / render if necessary
+  options.render = options.render || atomicRender;
+  options.usePrepareProps = options.usePrepareProps || atomicUsePrepareProps;
+
+  // return options as the full type rather than a partial
+  return options as IComposable<TProps, TSlotProps, TState>;
+}
+
+/**
  * Create a component that can be composed into other objects to remove extra levels from the tree
  *
  * @param options - composable options which define the behavior of the component
  */
 export function composable<TType>(
-  options: IComposableDefinition<IExtractProps<TType>, IExtractSlotProps<TType>, IExtractState<TType>>
+  definition: IComposableDefinition<IExtractProps<TType>, IExtractSlotProps<TType>, IExtractState<TType>>
 ): IWithComposable<
   React.FunctionComponent<IExtractProps<TType>>,
   IComposable<IExtractProps<TType>, IExtractSlotProps<TType>, IExtractState<TType>>
@@ -65,18 +90,8 @@ export function composable<TType>(
   type IThisSlotProps = IExtractSlotProps<TType>;
   type IState = IExtractState<TType>;
 
-  // create the functional component
-  if (!options.useStyling) {
-    options.useStyling = () => {
-      return {} as IThisSlotProps;
-    };
-  }
   // ensure we are correctly configured
-  _validateComposable(options);
-
-  // use atomic handlers for usePrepareProps / render if necessary
-  options.render = options.render || atomicRender;
-  options.usePrepareProps = options.usePrepareProps || atomicUsePrepareProps;
+  const options = _validateOptions<IProps, IThisSlotProps, IState>(definition);
 
   // create the actual implementation
   const render = (userProps: IProps) => {
@@ -96,7 +111,7 @@ export function composable<TType>(
 
   // set the options onto the new functional component and return it
   type IReturnType = IWithComposable<React.FunctionComponent<IProps>, IComposable<IProps, IThisSlotProps, IState>>;
-  (render as IReturnType).__composable = options as IComposable<IProps, IThisSlotProps, IState>;
+  (render as IReturnType).__composable = options;
   return render as IReturnType;
 }
 

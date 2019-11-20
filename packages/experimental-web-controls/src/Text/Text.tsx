@@ -7,7 +7,7 @@ export const Text = compose<ITextType>({
   displayName: 'Text',
   settings,
   slots: {
-    root: { slotType: 'div' }
+    root: 'div'
   },
   styles: {
     root: [textTokens, foregroundColorTokens]

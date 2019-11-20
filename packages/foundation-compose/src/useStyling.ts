@@ -4,7 +4,7 @@ import { getThemedSettings } from '@uifabricshared/themed-settings';
 import { ITheme, getSettings, returnAsSlotProps } from '@uifabricshared/theming-ramp';
 import { IComponentTokens, processTokens, ITargetHasToken, buildComponentTokens } from '@uifabricshared/foundation-tokens';
 import { getTheme, ThemeContext } from '@uifabricshared/theming-react-native';
-import { IWithComposable, AsObject, IComposable } from '@uifabricshared/foundation-composable';
+import { IWithComposable, AsObject, IComposableDefinition, INativeSlotType } from '@uifabricshared/foundation-composable';
 import { IComposeOptions, IStylingSettings, IDefineUseComposeStyling, IWithTokens } from './compose.types';
 
 /* tslint:disable-next-line no-any */
@@ -29,12 +29,14 @@ function _getSettingsFromTheme(theme: ITheme, name: string): IComponentSettings 
 }
 
 function _getHasToken<TProps, TSlotProps extends ISlotProps, TTokens extends object, TState>(
-  slots: IComposable<TProps, TSlotProps, TState>['slots']
+  slots: IComposableDefinition<TProps, TSlotProps, TState>['slots']
 ): ITargetHasToken {
   const slotTokens: { [key: string]: IComponentTokens<TSlotProps, TTokens, ITheme>['tokenKeys'] | undefined } = {};
-  Object.keys(slots).forEach(slot => {
-    const options = <IComposeOptions<AsObject<TProps>, TSlotProps>>getOptionsFromObj(slots[slot].slotType);
-    slotTokens[slot] = (options && options.resolvedTokens && options.resolvedTokens.tokenKeys) || undefined;
+  Object.keys(slots).forEach(slotName => {
+    const slot = slots[slotName];
+    const slotType = (typeof slot !== 'object' ? slot : slot.slotType) as INativeSlotType;
+    const options = <IComposeOptions<AsObject<TProps>, TSlotProps>>getOptionsFromObj(slotType);
+    slotTokens[slotName] = (options && options.resolvedTokens && options.resolvedTokens.tokenKeys) || undefined;
   });
   return (target: string, key: string) => {
     return slotTokens[target] && slotTokens[target].hasOwnProperty(key);
