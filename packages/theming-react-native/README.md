@@ -1,19 +1,17 @@
 # Theming React Native
 
-This package serves as an entry point which aggregates and reexports some of the various features in this repo for those who want to quickly get started.
+This package serves as an entry point which aggregates and re-exports some of the various features in this repo for those who want to quickly get started.
 
-# Getting Started
+## Getting Started
 
-## How to make primitives theme-aware
+### Update package.json & install dependencies
 
-### Step One - Update package.json to add new dependencies on this repo's packages
-
-You'll may want a few different packages from this repo. Let's start with the following:
+You may want a few different packages from this repo. Let's start with the following:
 
 - `@uifabricshared/theming-react-native`
-- `@uifabricshared/themed-stylesheets` for styling primitives.
+- `@uifabricshared/themed-stylesheets` for styling react-native's primitives components.
 
-E.g.
+E.g. In your package.json file:
 
 ```json
 {
@@ -28,47 +26,85 @@ E.g.
 }
 ```
 
-And then `yarn`, `npm install`, or `rush install` equivalent command to update your node_modules directory
+And then run `yarn`, `npm install`, `rush install`, or an equivalent command to update your node_modules.
 
-### Step Two - Add a ThemeProvider with a ThemeRegistry to the root of your tree
+### Add a ThemeProvider & ThemeRegistry to the root of your tree
 
-```typescript
+All consumers of these theming packages will want a ThemeProvider somewhere in their UI tree.
+
+The ThemeProvider has two primary roles:
+
+- Supplying the Theme [react context](https://reactjs.org/docs/context.html)
+- Supplying the [ThemeRegistry](../theme-registry/README.md) context, if needed.
+
+To access the Theme context, you simply need to import & use the Theme hook, for example:
+
+```tsx
+// MyComponent.tsx
+
+import * as React from 'react';
+import { useTheme } from '@uifabricshared/theming-react-native';
+
+export const MyComponent: React.FunctionComponent = (_props: {}) => {
+  const theme = useTheme();
+  const themeColor = theme.colors.bodyText;
+  return <SomeComponent color={themeColor} />;
+};
+```
+
+While a 'greenfield' app developer might be fine without providing a ThemeRegistry, any 'brownfield' app where there are multiple islands of react-native UI being hosted which use the same JavaScript host instance may want to avoid leaking theme information into the other islands of UX. Creating your own ThemeRegistry and providing this as additional context at the root of your component tree can help you manage this behavior.
+
+```tsx
 // App.tsx
 
 import { ThemeProvider, createPlatformThemeRegistry } from '@uifabricshared/theming-react-native';
+import { MyAppImpl } from './MyAppImpl';
 
 export const myThemeRegistry = createPlatformThemeRegistry();
 
 export default function App() {
-    return (
-        <ThemeProvider themeRegistry={myThemeRegistry}>
-            <MyAppImpl />
-        </ThemeProvider>
-    );
+  return (
+    <ThemeProvider themeRegistry={myThemeRegistry}>
+      <MyAppImpl />
+    </ThemeProvider>
+  );
+}
 ```
 
-### Step Three - Create a Themed Stylesheet
+The ThemeRegistry is also responsible for pre-seeding the theme object with platform defaults from the Native Module, listening to the Theming Native Module, and updating dependent themes as parent themes change (such as a platform theme change). You can read more about the [ThemeRegistry here](../theme-registry/README.md).
 
-You can learn more [themed-stylesheet's README](https://github.com/microsoft/ui-fabric-react-native/tree/master/packages/themed-stylesheet)
+## Theme-aware Primitives
 
-```typescript
+### Create a Themed Stylesheet
+
+The `themed-stylesheet` package allows you to author View/Text/Image Style objects similar to `StyleSheet.create(...);`. You can learn more at the [themed-stylesheet's README](../themed-stylesheet/README.md)
+
+```tsx
+// styles.ts
+
 import { ITheme } from '@uifabricshared/theming-react-native';
 
 export const getThemedStyles = themedStyleSheet((t: ITheme) => {
   return {
     style1: {
-      backgroundColor: t.colors.background || 'gray'
+      backgroundColor: t.colors.background,
+      borderStyle: 'solid',
+      borderWidth: 1
     },
     style2: {
-      backgroundColor: t.palette.primaryButtonBackground || 'white'
+      backgroundColor: t.colors.primaryButtonBackground,
+      borderStyle: 'solid',
+      borderWidth: 1
     }
   };
 });
 ```
 
-### Step Four - Extract your themed styles using the theme hook
+### Using the hook with themed stylesheets
 
-```typescript
+```tsx
+// MyAppImpl.tsx
+
 import * as React from 'react';
 import * as ReactNative from 'react-native';
 import { useTheme } from '@uifabricshared/theming-react-native';
