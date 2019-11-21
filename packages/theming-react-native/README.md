@@ -37,7 +37,7 @@ The ThemeProvider has two primary roles:
 - Supplying the Theme [react context](https://reactjs.org/docs/context.html)
 - Supplying the [ThemeRegistry](../theme-registry/README.md) context, if needed.
 
-To access the Theme context, you simply need to import & use the Theme hook, for example:
+To access the Theme context from within a component, you simply need to import & use the Theme hook, for example:
 
 ```tsx
 // MyComponent.tsx
@@ -46,13 +46,14 @@ import * as React from 'react';
 import { useTheme } from '@uifabricshared/theming-react-native';
 
 export const MyComponent: React.FunctionComponent = (_props: {}) => {
+  // This hook retrieves the theme from the context set by the nearest parent ThemeProvider
   const theme = useTheme();
   const themeColor = theme.colors.bodyText;
   return <SomeComponent color={themeColor} />;
 };
 ```
 
-While a 'greenfield' app developer might be fine without providing a ThemeRegistry, any 'brownfield' app where there are multiple islands of react-native UI being hosted which use the same JavaScript host instance may want to avoid leaking theme information into the other islands of UX. Creating your own ThemeRegistry and providing this as additional context at the root of your component tree can help you manage this behavior.
+While a 'greenfield' app developer might be fine without setting a ThemeRegistry with their ThemeProvider, any 'brownfield' app where there are multiple islands of react-native UI being hosted which use the same JavaScript host instance may want to avoid leaking theme information into the other islands of UX. Creating your own ThemeRegistry and providing this as additional context at the root of your component tree can help you manage this behavior.
 
 ```tsx
 // App.tsx
@@ -71,7 +72,13 @@ export default function App() {
 }
 ```
 
-The ThemeRegistry is also responsible for pre-seeding the theme object with platform defaults from the Native Module, listening to the Theming Native Module, and updating dependent themes as parent themes change (such as a platform theme change). You can read more about the [ThemeRegistry here](../theme-registry/README.md).
+The ThemeRegistry is a crucial piece. It's responsible for
+
+- Initializing theme object with platform defaults from the Native Module
+- Listening to the Theming Native Module for changes to the platform theme
+- Updating dependent themes as parent themes change (such as a platform theme change)
+
+You can read more about the [ThemeRegistry here](../theme-registry/README.md).
 
 ## Theme-aware Primitives
 
