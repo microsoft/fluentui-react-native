@@ -7,8 +7,10 @@ import {
   useTheme,
   createMockThemingModule,
   createMockThemingModuleHelper,
-  mockGetPaletteImpl
+  mockGetPaletteImpl,
+  ITheme
 } from '@uifabricshared/theming-react-native';
+import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
 
 let useWhiteColors = true;
 const emitter = new NativeEventEmitter();
@@ -24,6 +26,14 @@ const customThemeRegistry = createPlatformThemeRegistry('TaskPane', mockThemingM
 // default theme
 customThemeRegistry.setTheme({});
 customThemeRegistry.setTheme(ThemingModuleHelper.getPlatformThemeDefinition('WhiteColors'), 'PlatformWhiteColors');
+
+const primaryButtonStyles = themedStyleSheet((t: ITheme) => {
+  return {
+    textStyle: {
+      color: t.colors.primaryButtonText
+    }
+  };
+});
 
 const ButtonBackground: React.FunctionComponent<ViewProps> = (p: ViewProps) => {
   const theme = useTheme();
