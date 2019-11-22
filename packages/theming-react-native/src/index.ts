@@ -1,5 +1,5 @@
 export { addThemeRegistryListener, removeThemeRegistryListener, setTheme, getTheme, augmentPlatformTheme } from './Global';
-export * from './INativeTheme.types';
+export * from './Theme.types';
 export { IThemeLayerProps, ThemeLayer } from './ThemeLayer';
 export * from './platform';
 export * from './ThemeProvider';

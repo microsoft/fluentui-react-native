@@ -7,8 +7,10 @@ import {
   useTheme,
   createMockThemingModule,
   createMockThemingModuleHelper,
-  mockGetPaletteImpl
+  mockGetPaletteImpl,
+  ITheme
 } from '@uifabricshared/theming-react-native';
+import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
 
 let useWhiteColors = true;
 const emitter = new NativeEventEmitter();
@@ -25,16 +27,30 @@ const customThemeRegistry = createPlatformThemeRegistry('TaskPane', mockThemingM
 customThemeRegistry.setTheme({});
 customThemeRegistry.setTheme(ThemingModuleHelper.getPlatformThemeDefinition('WhiteColors'), 'PlatformWhiteColors');
 
+const getPrimaryButtonStyles = themedStyleSheet((t: ITheme) => {
+  return {
+    textStyle: {
+      color: t.colors.primaryButtonText
+    },
+    backgroundStyle: {
+      backgroundColor: t.colors.primaryButtonBackground,
+      borderColor: t.colors.primaryButtonBorder
+    }
+  };
+});
+
 const ButtonBackground: React.FunctionComponent<ViewProps> = (p: ViewProps) => {
   const theme = useTheme();
+  const styles = getPrimaryButtonStyles(theme);
   const { style, ...rest } = p;
-  return <View {...rest} style={[{ backgroundColor: String(theme.colors.primaryButtonBackground) }, style]} />;
+  return <View {...rest} style={[styles.backgroundStyle, style]} />;
 };
 
 const ButtonText: React.FunctionComponent<TextProps> = (p: TextProps) => {
   const theme = useTheme();
+  const styles = getPrimaryButtonStyles(theme);
   const { style, ...rest } = p;
-  return <Text {...rest} style={[{ color: String(theme.colors.primaryButtonText) }, style]} />;
+  return <Text {...rest} style={[styles.textStyle, style]} />;
 };
 
 const ThemeSwitcher: React.FunctionComponent = (_p: {}) => {
@@ -53,7 +69,7 @@ const ThemeSwitcher: React.FunctionComponent = (_p: {}) => {
 
 export default function App() {
   return (
-    <ThemeProvider themeRegistry={customThemeRegistry}>
+    <ThemeProvider registry={customThemeRegistry}>
       <ThemedPanel style={styles.root}>
         <View style={styles.container}>
           <ThemedText>Open up App.tsx to start working on your app!</ThemedText>
@@ -62,7 +78,7 @@ export default function App() {
           </ButtonBackground>
           <ThemeSwitcher />
         </View>
-        <ThemeProvider themeName="PlatformWhiteColors">
+        <ThemeProvider theme="PlatformWhiteColors">
           <ThemedPanel style={styles.container}>
             <ThemedText>Theme Provider text!</ThemedText>
             <ButtonBackground>

@@ -1,14 +1,14 @@
-import { INativeThemeDefinition, INativeTheme, INativeThemeRegistry } from './INativeTheme.types';
+import { IPartialTheme, ITheme, ThemeRegistry } from './Theme.types';
 import { createPlatformThemeRegistry } from './platform';
 import { IProcessTheme, IThemeEventListener } from '@uifabricshared/theme-registry';
 
-let _registry: INativeThemeRegistry;
+let _registry: ThemeRegistry;
 
 /**
  * Ensure that `_registry` is set. If not, create it using a native module to
  * provide platform defaults.
  */
-export function getThemeRegistry(): INativeThemeRegistry {
+export function getThemeRegistry(): ThemeRegistry {
   if (!_registry) {
     _registry = createPlatformThemeRegistry();
   }
@@ -25,7 +25,7 @@ export function getThemeRegistry(): INativeThemeRegistry {
  * `_registry`. Changing `_registry` while the app is running will disrupt
  * theming, causing undefined behavior.
  */
-export function setThemeRegistry(registry: INativeThemeRegistry): void {
+export function setThemeRegistry(registry: ThemeRegistry): void {
   _registry = registry;
 }
 
@@ -35,11 +35,7 @@ export function setThemeRegistry(registry: INativeThemeRegistry): void {
  * @param name - name of the theme, undefined or '' for default
  * @param parent - parent theme to depend on, if unspecified this will pull from the default theme
  */
-export function setTheme(
-  definition: INativeThemeDefinition | IProcessTheme<INativeTheme, INativeThemeDefinition>,
-  name?: string,
-  parent?: string
-): void {
+export function setTheme(definition: IPartialTheme | IProcessTheme<ITheme, IPartialTheme>, name?: string, parent?: string): void {
   return getThemeRegistry().setTheme(definition, name, parent);
 }
 
@@ -63,7 +59,7 @@ export function removeThemeRegistryListener(listener: IThemeEventListener): void
  * Get a theme by name
  * @param name - name of the theme.  Undefined or '' will resolve to the default theme
  */
-export function getTheme(name?: string): INativeTheme {
+export function getTheme(name?: string): ITheme {
   return getThemeRegistry().getTheme(name);
 }
 
@@ -74,6 +70,6 @@ export function getTheme(name?: string): INativeTheme {
  * @param definition - properties to add to the platform theme.  Note that this will invalidate every theme and cause rerenders
  * if this is not done in the boot sequence.
  */
-export function augmentPlatformTheme(definition: INativeThemeDefinition): void {
+export function augmentPlatformTheme(definition: IPartialTheme): void {
   getThemeRegistry().updatePlatformDefaults(definition);
 }

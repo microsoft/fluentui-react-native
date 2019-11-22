@@ -49,11 +49,11 @@ export type INamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageSty
  *
  * @param generator - a function which will get run once per theme to create a cached style sheet.
  */
-export function themedStyleSheet<T extends INamedStyles<T>>(
-  generator: (theme: object) => INamedStyles<T>
-): (theme: object) => INamedStyles<T> {
+export function themedStyleSheet<TStyles extends INamedStyles<TStyles>, TTheme>(
+  generator: (theme: TTheme) => INamedStyles<TStyles>
+): (theme: TTheme) => INamedStyles<TStyles> {
   const _keyForThisSheet = Symbol();
-  return (theme: object) => {
+  return (theme: TTheme) => {
     const cache = theme ? (theme[_keyForSheetsInTheme] = theme[_keyForSheetsInTheme] || {}) : _cacheForNoTheme;
     cache[_keyForThisSheet] = cache[_keyForThisSheet] || StyleSheet.create(generator(theme));
     return cache[_keyForThisSheet];

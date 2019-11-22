@@ -1,4 +1,4 @@
-import { IPartialPalette, IColorRamp, resolvePartialTheme } from '@uifabricshared/theming-ramp';
+import { ITheme, IPartialPalette, IColorRamp, resolvePartialTheme } from '@uifabricshared/theming-ramp';
 import {
   IOfficeThemingModule,
   ICxxException,
@@ -7,7 +7,6 @@ import {
   IEventEmitter
 } from './ThemingModule.types';
 import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
-import { INativeTheme } from '../INativeTheme.types';
 import { IOfficePalette, paletteFromOfficeColors } from './office';
 
 const createColorRamp = ({ values, index = -1 }: Partial<IColorRamp>) => ({
@@ -67,7 +66,7 @@ export function createThemingModuleHelper(themingModule?: IOfficeThemingModule, 
       );
     },
     getPlatformThemeDefinition: (themeId?: string) => {
-      return (_parent: INativeTheme) => {
+      return (_parent: ITheme) => {
         updatePaletteInCache(themingModule, paletteCache, themeId);
         const newColors = translatePalette(themingModule, paletteCache, themeId);
         return { colors: newColors };

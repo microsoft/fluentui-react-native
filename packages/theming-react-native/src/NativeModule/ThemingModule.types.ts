@@ -1,5 +1,5 @@
 import { ITypography, ColorValue } from '@uifabricshared/theming-ramp';
-import { INativeTheme, INativeThemeDefinition } from '../INativeTheme.types';
+import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 import { IOfficePalette } from './office';
 import { IProcessTheme } from '@uifabricshared/theme-registry';
 
@@ -27,13 +27,13 @@ export interface IEventEmitter {
   addListener: (event: string, PlatformDefaultsChangedCallback) => void;
 }
 
-export type IPlatformThemeDefinition = INativeThemeDefinition | IProcessTheme<INativeTheme, INativeThemeDefinition>;
+export type IPlatformThemeDefinition = IPartialTheme | IProcessTheme<ITheme, IPartialTheme>;
 
 export interface IThemingModuleHelper {
   /**
    * Gets a complete platform theme suitable for using with a Theme Registry
    */
-  getPlatformDefaults: (themeId?: string) => INativeTheme;
+  getPlatformDefaults: (themeId?: string) => ITheme;
   /**
    * Gets a theme definition to register with a Theme Registry & use with the theme context to create a subtree with the
    * look & feel of a platform theme.

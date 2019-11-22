@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IThemeEventListener } from '@uifabricshared/theme-registry';
 import { removeThemeRegistryListener, getTheme, addThemeRegistryListener } from './Global';
-import { INativeTheme, IThemeContextType } from './INativeTheme.types';
+import { ITheme } from './Theme.types';
 import { ThemeContext } from './ThemeContext';
 
 /**
@@ -19,7 +19,7 @@ export interface IThemeLayerProps {
    * children function that allows passing of the theme to children.  This is a standard pattern for
    * consumers.
    */
-  children: (theme: INativeTheme) => JSX.Element | null;
+  children: (theme: ITheme) => JSX.Element | null;
 }
 
 /**
@@ -74,7 +74,7 @@ export class ThemeLayer extends React.Component<IThemeLayerProps> {
     let themeName = this.props.themeName;
     return (
       <ThemeContext.Consumer>
-        {(theme: IThemeContextType) => {
+        {(theme?: ITheme) => {
           // go to provider mode if a themeName is specified or if this is the first consumer and the context
           // is undefined.
           if (themeName !== undefined || theme === undefined) {

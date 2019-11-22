@@ -1,9 +1,9 @@
 import { createThemeRegistry } from '@uifabricshared/theme-registry';
 import { getStockWebPalette, resolvePartialTheme } from '@uifabricshared/theming-ramp';
 import { setThemeRegistry } from './Global';
-import { INativeThemeDefinition, INativeTheme } from './INativeTheme.types';
+import { IPartialTheme, ITheme } from './Theme.types';
 
-const platformDefaults: INativeThemeDefinition = {
+const platformDefaults: IPartialTheme = {
   colors: getStockWebPalette(),
   typography: {
     families: {
@@ -140,5 +140,5 @@ const platformDefaults: INativeThemeDefinition = {
 };
 
 export function initializeTestThemeRegistry(): void {
-  setThemeRegistry(createThemeRegistry(platformDefaults as INativeTheme, resolvePartialTheme));
+  setThemeRegistry(createThemeRegistry(platformDefaults as ITheme, resolvePartialTheme));
 }
