@@ -2,6 +2,34 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Wed, 20 Nov 2019 19:51:16 GMT",
+      "tag": "@uifabricshared/foundation-composable_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "ease typing of slots when no filters are present",
+            "author": "jasonmo360@gmail.com",
+            "commit": "ac07c832db9ffe0034a27bb28e2ff1bce7d33d63"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 Nov 2019 19:37:06 GMT",
+      "tag": "@uifabricshared/foundation-composable_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "📦 fix package entrypoints to distinguish CJS/ES6",
+            "author": "adrum@microsoft.com",
+            "commit": "d51fcaea614de5606989d8463c7f66ccbc5322cf"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 19 Nov 2019 22:37:36 GMT",
       "tag": "@uifabricshared/foundation-composable_v0.3.0",
       "version": "0.3.0",

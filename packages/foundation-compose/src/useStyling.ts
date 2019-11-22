@@ -4,7 +4,7 @@ import { getThemedSettings } from '@uifabricshared/themed-settings';
 import { ITheme, getSettings, returnAsSlotProps } from '@uifabricshared/theming-ramp';
 import { IComponentTokens, processTokens, ITargetHasToken, buildComponentTokens } from '@uifabricshared/foundation-tokens';
 import { getTheme, ThemeContext } from '@uifabricshared/theming-react-native';
-import { IWithComposable, AsObject } from '@uifabricshared/foundation-composable';
+import { IWithComposable, AsObject, IComposableDefinition, INativeSlotType } from '@uifabricshared/foundation-composable';
 import { IComposeOptions, IStylingSettings, IDefineUseComposeStyling, IWithTokens } from './compose.types';
 
 /* tslint:disable-next-line no-any */
@@ -28,13 +28,15 @@ function _getSettingsFromTheme(theme: ITheme, name: string): IComponentSettings 
   return getSettings(theme, name);
 }
 
-function _getHasToken<TProps, TSlotProps extends ISlotProps, TTokens extends object>(
-  slots: IStylingSettings<TSlotProps, TTokens>['slots']
+function _getHasToken<TProps, TSlotProps extends ISlotProps, TTokens extends object, TState>(
+  slots: IComposableDefinition<TProps, TSlotProps, TState>['slots']
 ): ITargetHasToken {
   const slotTokens: { [key: string]: IComponentTokens<TSlotProps, TTokens, ITheme>['tokenKeys'] | undefined } = {};
-  Object.keys(slots).forEach(slot => {
-    const options = <IComposeOptions<AsObject<TProps>, TSlotProps>>getOptionsFromObj(slots[slot].slotType);
-    slotTokens[slot] = (options && options.resolvedTokens && options.resolvedTokens.tokenKeys) || undefined;
+  Object.keys(slots).forEach(slotName => {
+    const slot = slots[slotName];
+    const slotType = (typeof slot !== 'object' ? slot : slot.slotType) as INativeSlotType;
+    const options = <IComposeOptions<AsObject<TProps>, TSlotProps>>getOptionsFromObj(slotType);
+    slotTokens[slotName] = (options && options.resolvedTokens && options.resolvedTokens.tokenKeys) || undefined;
   });
   return (target: string, key: string) => {
     return slotTokens[target] && slotTokens[target].hasOwnProperty(key);
@@ -82,23 +84,29 @@ function useStylingCore<TProps, TSlotProps extends ISlotProps, TTokens extends o
  * return a useStyling implementation, in the form of IUseComposeStyling, based on the passed in styleSettings.  The
  * styleSettings will be captured in the created closure and will be set up to enable the appropriate levels of caching.
  *
- * @param styleSettings - style settings to configure this function.  Note that this should be scoped to a single component.
+ * @param options - style settings to configure this function.  Note that this should be scoped to a single component.
  * @param name - optional base name to use as a cache key
  */
-export function initializeStyling<TProps, TSlotProps extends ISlotProps, TTokens extends object>(
-  styleSettings: IStylingSettings<TSlotProps, TTokens>,
+export function initializeStyling<
+  TProps extends object,
+  TSlotProps extends ISlotProps,
+  TTokens extends object,
+  TState extends object,
+  TStatics extends object
+>(
+  options: IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics>,
   name?: string
 ): IDefineUseComposeStyling<TProps, TSlotProps, TTokens> {
   // process the tokens and get them ready to render
-  const slots = styleSettings.slots;
-  styleSettings.resolvedTokens = buildComponentTokens<TSlotProps, TTokens, ITheme>(slots, _getHasToken(slots));
+  const { styles, slots } = options;
+  options.resolvedTokens = buildComponentTokens<TSlotProps, TTokens, ITheme>(styles, _getHasToken(slots));
 
   // ensure we have a name to use for caching.  Try to pull something identifiable to help with debugging
-  name = name || _nameFromSettings(styleSettings) || 'anonymous';
+  name = name || _nameFromSettings(options) || 'anonymous';
   const tokenCacheKey = Symbol(name);
 
   // create a useStyling implementation for this component type (per type, not per instance)
   return (props: TProps, lookupOverride?: IOverrideLookup) => {
-    return useStylingCore<TProps, TSlotProps, TTokens>(props, styleSettings, name, tokenCacheKey, lookupOverride);
+    return useStylingCore<TProps, TSlotProps, TTokens>(props, options, name, tokenCacheKey, lookupOverride);
   };
 }

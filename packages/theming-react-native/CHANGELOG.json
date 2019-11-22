@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Wed, 20 Nov 2019 19:37:06 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "📦 fix package entrypoints to distinguish CJS/ES6",
+            "author": "adrum@microsoft.com",
+            "commit": "d51fcaea614de5606989d8463c7f66ccbc5322cf"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 Nov 2019 00:19:04 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.1.9",
       "version": "0.1.9",

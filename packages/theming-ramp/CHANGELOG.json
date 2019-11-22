@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Wed, 20 Nov 2019 19:37:06 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "📦 fix package entrypoints to distinguish CJS/ES6",
+            "author": "adrum@microsoft.com",
+            "commit": "d51fcaea614de5606989d8463c7f66ccbc5322cf"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 15 Nov 2019 19:30:39 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.3.3",
       "version": "0.3.3",

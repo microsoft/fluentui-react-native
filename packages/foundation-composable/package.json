@@ -1,12 +1,13 @@
 {
   "name": "@uifabricshared/foundation-composable",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "description": "Composable component building blocks",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/ui-fabric-react-native"
   },
-  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "main": "lib-commonjs/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "just-scripts build",
@@ -24,7 +25,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": "^0.3.3"
+    "@uifabricshared/foundation-settings": "^0.4.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

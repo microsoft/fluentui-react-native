@@ -1,7 +1,6 @@
 import {
   IRenderData,
   IComposableDefinition,
-  ISlotWithFilter,
   IComposableType,
   IExtractSlotProps,
   IExtractProps
@@ -9,7 +8,7 @@ import {
 import { ISlotProps, IComponentSettings, IOverrideLookup } from '@uifabricshared/foundation-settings';
 import { ISettingsEntry } from '@uifabricshared/themed-settings';
 import { ITheme } from '@uifabricshared/theming-ramp';
-import { ISlotStyleFactories, IComponentTokens } from '@uifabricshared/foundation-tokens';
+import { IStyleFactories, IComponentTokens } from '@uifabricshared/foundation-tokens';
 import * as React from 'react';
 
 export interface IComposeType<
@@ -69,14 +68,14 @@ export type IComposeSettings<T> = IDefineComposeSettings<IExtractSlotProps<T>, I
  */
 export interface IStylingSettings<TSlotProps extends ISlotProps, TTokens extends object> {
   /**
-   * slots of IComposable with added style factory options
-   */
-  slots: { [K in keyof TSlotProps]: ISlotWithFilter<ISlotStyleFactories<TSlotProps[K], TTokens, ITheme>> };
-
-  /**
    * settings used to build up the style definitions
    */
   settings?: IDefineComposeSettings<TSlotProps, TTokens>;
+
+  /**
+   * factories for producing styles from tokens
+   */
+  styles?: IStyleFactories<TSlotProps, TTokens, ITheme>;
 
   /**
    * The input tokens processed, built into functions, with the keys built into a map.
@@ -96,7 +95,7 @@ export interface IComposeOptions<
   TTokens extends object = object,
   TState extends object = object,
   TStatics extends object = object
-> extends Omit<IComposableDefinition<TProps, TSlotProps, TState>, 'slots'>, IStylingSettings<TSlotProps, TTokens> {
+> extends IComposableDefinition<TProps, TSlotProps, TState>, IStylingSettings<TSlotProps, TTokens> {
   /**
    * Add an additional option to use styling to allow for injecting override lookup functions
    */

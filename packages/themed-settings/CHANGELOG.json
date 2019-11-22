@@ -2,6 +2,20 @@
   "name": "@uifabricshared/themed-settings",
   "entries": [
     {
+      "date": "Wed, 20 Nov 2019 19:37:06 GMT",
+      "tag": "@uifabricshared/themed-settings_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "📦 fix package entrypoints to distinguish CJS/ES6",
+            "author": "adrum@microsoft.com",
+            "commit": "d51fcaea614de5606989d8463c7f66ccbc5322cf"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Nov 2019 16:51:54 GMT",
       "tag": "@uifabricshared/themed-settings_v0.2.4",
       "version": "0.2.4",

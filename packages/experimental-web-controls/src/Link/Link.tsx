@@ -27,16 +27,12 @@ export const Link = compose<ILinkType>({
     );
   },
   slots: {
-    root: {
-      slotType: 'a'
-    },
-    buttonAsRoot: {
-      slotType: 'button'
-    },
-    content: {
-      slotType: Text,
-      styleFactories: [textTokens, foregroundColorTokens]
-    }
+    root: 'a',
+    buttonAsRoot: 'button',
+    content: Text
+  },
+  styles: {
+    content: [textTokens, foregroundColorTokens]
   }
 });
 

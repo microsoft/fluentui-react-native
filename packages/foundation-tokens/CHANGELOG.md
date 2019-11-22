@@ -1,7 +1,19 @@
 # Change Log - @uifabricshared/foundation-tokens
 
-This log was last generated on Tue, 19 Nov 2019 22:37:36 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Nov 2019 19:51:16 GMT and should not be manually modified.
 
+## 0.4.0
+Wed, 20 Nov 2019 19:51:16 GMT
+
+### Minor changes
+
+- changes styleFactories to styles (jasonmo360@gmail.com)
+## 0.3.0
+Wed, 20 Nov 2019 19:37:06 GMT
+
+### Minor changes
+
+- 📦 fix package entrypoints to distinguish CJS/ES6 (adrum@microsoft.com)
 ## 0.2.0
 Tue, 19 Nov 2019 22:37:36 GMT
 
