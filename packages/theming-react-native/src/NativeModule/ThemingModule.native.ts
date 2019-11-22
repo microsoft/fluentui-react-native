@@ -19,7 +19,7 @@ const getThemingModule = () => {
   const themingModule = (NativeModules && NativeModules.Theming) || createMockThemingModule();
   !isWebDebugging || console.warn('Web Debugging forces Theming Native Module to fallback to fake color values.');
   (NativeModules && NativeModules.Theming) || console.warn('No NativeModule for Theming found, using mock impl.');
-  return isWebDebugging
+  return isWebDebugging && __DEV__
     ? {
         ...themingModule,
         getPalette: () => {
