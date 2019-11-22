@@ -20,24 +20,26 @@ E.g. In your package.json file:
   "description": "An app with lots of cool features",
   "main": "lib/index.js",
   "dependencies": {
-    "@uifabricshared/theming-react-native": "0.2.0",
-    "@uifabricshared/themed-stylesheet": "0.2.0"
+    "@uifabricshared/theming-react-native": "^0.2.0",
+    "@uifabricshared/themed-stylesheet": "^0.2.0"
   }
 }
 ```
 
 And then run `yarn`, `npm install`, `rush install`, or an equivalent command to update your node_modules.
 
-### Add a ThemeProvider & ThemeRegistry to the root of your tree
+## The ThemeProvider
 
-All consumers of these theming packages will want a ThemeProvider somewhere in their UI tree.
+All consumers of these theming packages will want at least one `ThemeProvider` in their tree. Descendents of a `ThemeProvider` will have access to the current theme object via a [react context](https://reactjs.org/docs/context.html).
 
-The ThemeProvider has two primary roles:
+| Property | Type                                          | Description                                                                                                                                                                                                                                                                                                                                                                         |
+| -------- | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| theme    | string?                                       | Changes the ThemeContext.Value to the Theme object in the current registry with the given name. If unspecified, or set to '', the default theme will be used.                                                                                                                                                                                                                       |
+| registry | [ThemeRegistry?](../theme-registry/README.md) | Changes the theme registry context (which also changes the theme to this registry's default theme if no `theme` prop is provided). The active theme registry will be used for all Theme lookups performed by this and descendant `ThemeProviders`. Most consumers will want at least one `ThemeProvider` near the root of their Component tree that specifies the primary registry. |
 
-- Supplying the Theme [react context](https://reactjs.org/docs/context.html)
-- Supplying the [ThemeRegistry](../theme-registry/README.md) context, if needed.
+### Accessing the ThemeContext
 
-To access the Theme context from within a component, you simply need to import & use the Theme hook, for example:
+Once you've added a ThemeProvider to your tree, functional component descendents will have access to the Theme context via the useTheme hook. To access the theme from within a functional component, see below:
 
 ```tsx
 // MyComponent.tsx
@@ -53,7 +55,33 @@ export const MyComponent: React.FunctionComponent = (_props: {}) => {
 };
 ```
 
-While a 'greenfield' app developer might be fine without setting a ThemeRegistry with their ThemeProvider, any 'brownfield' app where there are multiple islands of react-native UI being hosted which use the same JavaScript host instance may want to avoid leaking theme information into the other islands of UX. Creating your own ThemeRegistry and providing this as additional context at the root of your component tree can help you manage this behavior.
+If you're writing class components instead of functional components, you'll need use the `ThemeContext.Consumer` directly like so:
+
+```tsx
+// OtherComponent.tsx
+
+import * as React from 'react';
+import { ThemeContext, ITheme } from '@uifabricshared/theming-react-native';
+
+export class OtherComponent extends React.Component {
+  public render(): JSX.Element {
+    return (
+      <ThemeContext.Consumer>
+        {(theme: ITheme) => {
+          const themeColor = theme.colors.bodyText;
+          return <SomeComponent color={themeColor} />;
+        }}
+      </ThemeContext.Consumer>
+    );
+  }
+}
+```
+
+### Using a ThemeRegistry with a ThemeProvider
+
+While a 'greenfield' app developer might be fine without setting a ThemeRegistry with their ThemeProvider, any 'brownfield' app where there are multiple islands of react-native UI being hosted which use the same JavaScript host instance may want to avoid leaking theme information into the other islands of UX. Creating your own ThemeRegistry and providing this as additional context **near the root** of your component tree can help you manage this behavior.
+
+**Note:** Many users will only need a single theme registry. This should be provided to the top ThemeProvider which is above all other ThemeProviders and theme-aware UI. Subsequent ThemeProviders will be used to change the Theme context.
 
 ```tsx
 // App.tsx
@@ -65,7 +93,7 @@ export const myThemeRegistry = createPlatformThemeRegistry();
 
 export default function App() {
   return (
-    <ThemeProvider themeRegistry={myThemeRegistry}>
+    <ThemeProvider registry={myThemeRegistry}>
       <MyAppImpl />
     </ThemeProvider>
   );
@@ -131,4 +159,31 @@ export const MyAppImpl = () => {
     </ThemedView>
   );
 };
+```
+
+## Using different Platform Themes
+
+Certain platforms will have multiple platform theme definitions. If you want the default theme to be initialized with a specific platform theme, or want to use a different platform theme for a portion of your UI, you can get the platform themes through the ThemingModuleHelper.
+
+```tsx
+// App.tsx
+
+import { ThemeProvider, createPlatformThemeRegistry, ThemingModuleHelper } from '@uifabricshared/theming-react-native';
+
+// Initializes the Default Theme with the 'TaskPane' platform theme, implicitly pulled from ThemingModuleHelper
+export const myThemeRegistry = createPlatformThemeRegistry('TaskPane');
+
+// Registers the platform's 'TaskPaneCard' theme as 'PlatformTaskPaneCard'
+myThemeRegistry.registerTheme(ThemingModuleHelper.createPlatformThemeDefinition('TaskPaneCard'), 'PlatformTaskPaneCard');
+
+export default function App() {
+  return (
+    <ThemeProvider registry={myThemeRegistry}>
+      <SomeComponent />
+      <ThemeProvider theme="PlatformTaskPaneCard">
+        <SomeComponent />
+      </ThemeProvider>
+    </ThemeProvider>
+  );
+}
 ```
