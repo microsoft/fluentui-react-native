@@ -27,24 +27,30 @@ const customThemeRegistry = createPlatformThemeRegistry('TaskPane', mockThemingM
 customThemeRegistry.setTheme({});
 customThemeRegistry.setTheme(ThemingModuleHelper.getPlatformThemeDefinition('WhiteColors'), 'PlatformWhiteColors');
 
-const primaryButtonStyles = themedStyleSheet((t: ITheme) => {
+const getPrimaryButtonStyles = themedStyleSheet((t: ITheme) => {
   return {
     textStyle: {
       color: t.colors.primaryButtonText
+    },
+    backgroundStyle: {
+      backgroundColor: t.colors.primaryButtonBackground,
+      borderColor: t.colors.primaryButtonBorder
     }
   };
 });
 
 const ButtonBackground: React.FunctionComponent<ViewProps> = (p: ViewProps) => {
   const theme = useTheme();
+  const styles = getPrimaryButtonStyles(theme);
   const { style, ...rest } = p;
-  return <View {...rest} style={[{ backgroundColor: String(theme.colors.primaryButtonBackground) }, style]} />;
+  return <View {...rest} style={[styles.backgroundStyle, style]} />;
 };
 
 const ButtonText: React.FunctionComponent<TextProps> = (p: TextProps) => {
   const theme = useTheme();
+  const styles = getPrimaryButtonStyles(theme);
   const { style, ...rest } = p;
-  return <Text {...rest} style={[{ color: String(theme.colors.primaryButtonText) }, style]} />;
+  return <Text {...rest} style={[styles.textStyle, style]} />;
 };
 
 const ThemeSwitcher: React.FunctionComponent = (_p: {}) => {
