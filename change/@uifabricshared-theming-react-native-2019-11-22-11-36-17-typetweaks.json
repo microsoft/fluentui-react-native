@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "♻ rename props & typings",
-  "packageName": "@uifabricshared/theming-react-native",
-  "email": "adrum@microsoft.com",
-  "commit": "6af83981eefbf0305e62b2ec459031ced7853407",
-  "date": "2019-11-22T19:36:17.817Z"
-}

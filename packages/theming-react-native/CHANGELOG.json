@@ -2,6 +2,25 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Fri, 22 Nov 2019 23:33:23 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "🐛 Fix Theming Module web debugging/debug bundles",
+            "author": "adrum@microsoft.com",
+            "commit": "2dd288baaa900fba229660957609485d9d283a3f"
+          },
+          {
+            "comment": "♻ rename props & typings",
+            "author": "adrum@microsoft.com",
+            "commit": "6af83981eefbf0305e62b2ec459031ced7853407"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 Nov 2019 19:37:06 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.2.0",
       "version": "0.2.0",
