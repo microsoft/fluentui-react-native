@@ -5,7 +5,7 @@ import { IThemeEventListener } from '@uifabricshared/theme-registry';
 import { getThemeRegistry } from './Global';
 
 export const ThemeProvider: React.FunctionComponent<IThemeProviderProps> = (props: IThemeProviderProps) => {
-  const { themeRegistry, themeName = '', children } = props;
+  const { registry: themeRegistry, theme: themeName = '', children } = props;
   const registry = themeRegistry || useThemeRegistry() || getThemeRegistry();
   const [theme, setThemeState] = React.useState(registry.getTheme(themeName));
 
