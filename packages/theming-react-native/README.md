@@ -172,9 +172,10 @@ import { ThemeProvider, createPlatformThemeRegistry, ThemingModuleHelper } from 
 
 // Initializes the Default Theme with the 'TaskPane' platform theme, implicitly pulled from ThemingModuleHelper
 export const myThemeRegistry = createPlatformThemeRegistry('TaskPane');
-
-// Registers the platform's 'TaskPaneCard' theme as 'PlatformTaskPaneCard'
-myThemeRegistry.registerTheme(ThemingModuleHelper.createPlatformThemeDefinition('TaskPaneCard'), 'PlatformTaskPaneCard');
+// Get the 'TaskPaneCard' theme from the ThemingModuleHelper
+const taskPaneCardTheme = ThemingModuleHelper.createPlatformThemeDefinition('TaskPaneCard');
+// Registers it with the name 'PlatformTaskPaneCard'
+myThemeRegistry.registerTheme(taskPaneCardTheme, 'PlatformTaskPaneCard');
 
 export default function App() {
   return (
