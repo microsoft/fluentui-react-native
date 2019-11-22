@@ -53,7 +53,7 @@ const ThemeSwitcher: React.FunctionComponent = (_p: {}) => {
 
 export default function App() {
   return (
-    <ThemeProvider themeRegistry={customThemeRegistry}>
+    <ThemeProvider registry={customThemeRegistry}>
       <ThemedPanel style={styles.root}>
         <View style={styles.container}>
           <ThemedText>Open up App.tsx to start working on your app!</ThemedText>
@@ -62,7 +62,7 @@ export default function App() {
           </ButtonBackground>
           <ThemeSwitcher />
         </View>
-        <ThemeProvider themeName="PlatformWhiteColors">
+        <ThemeProvider theme="PlatformWhiteColors">
           <ThemedPanel style={styles.container}>
             <ThemedText>Theme Provider text!</ThemedText>
             <ButtonBackground>
