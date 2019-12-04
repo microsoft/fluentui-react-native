@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "✅ Add better jest mocks for consuming packages",
-  "packageName": "@uifabricshared/theming-react-native",
-  "email": "adrum@microsoft.com",
-  "commit": "9c6a1b02b0e9a5e72b1415b02a875663330051af",
-  "date": "2019-12-04T20:00:00.126Z"
-}

@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Wed, 04 Dec 2019 21:00:39 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "✅ Add better jest mocks for consuming packages",
+            "author": "adrum@microsoft.com",
+            "commit": "9c6a1b02b0e9a5e72b1415b02a875663330051af"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 22 Nov 2019 23:33:23 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.2.1",
       "version": "0.2.1",
