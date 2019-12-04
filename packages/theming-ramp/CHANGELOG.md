@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Fri, 22 Nov 2019 23:33:23 GMT and should not be manually modified.
+This log was last generated on Wed, 04 Dec 2019 23:08:56 GMT and should not be manually modified.
 
+## 0.4.2
+Wed, 04 Dec 2019 23:08:56 GMT
+
+### Patches
+
+- Add button colors to ramp (adrum@microsoft.com)
 ## 0.4.1
 Fri, 22 Nov 2019 23:33:23 GMT
 

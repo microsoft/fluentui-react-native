@@ -2,6 +2,20 @@
   "name": "@uifabricshared/themed-stylesheet",
   "entries": [
     {
+      "date": "Wed, 04 Dec 2019 23:08:56 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix typings for theme object",
+            "author": "adrum@microsoft.com",
+            "commit": "2dab6829f0742c05454b104b3d6f47c4b307ac81"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 22 Nov 2019 23:33:23 GMT",
       "tag": "@uifabricshared/themed-stylesheet_v0.2.1",
       "version": "0.2.1",

@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add button colors to ramp",
-  "packageName": "@uifabricshared/theming-ramp",
-  "email": "adrum@microsoft.com",
-  "commit": "2dab6829f0742c05454b104b3d6f47c4b307ac81",
-  "date": "2019-12-04T22:41:34.811Z"
-}

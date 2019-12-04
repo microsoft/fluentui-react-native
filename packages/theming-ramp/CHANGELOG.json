@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Wed, 04 Dec 2019 23:08:56 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.4.2",
+      "version": "0.4.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add button colors to ramp",
+            "author": "adrum@microsoft.com",
+            "commit": "2dab6829f0742c05454b104b3d6f47c4b307ac81"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 22 Nov 2019 23:33:23 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.4.1",
       "version": "0.4.1",
