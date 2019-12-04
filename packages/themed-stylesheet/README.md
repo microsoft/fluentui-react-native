@@ -57,7 +57,7 @@ const getThemedStyles = themedStyleSheet((t: ITheme) => {
 });
 
 const MyComponent = (props: IMyProps) => {
-  const theme = useContext(MyThemeProvider);
+  const theme = React.useContext(ThemeContext);
   const styles = getThemedStyles(theme);
   return <MyComponent style={styles.style1}>;
 }
