@@ -57,7 +57,7 @@ function _validateOptions<TProps extends object, TSlotProps extends ISlotProps, 
   // ensure slots are in slot with filter format
   for (const key in options.slots) {
     const slot = options.slots[key];
-    if (slot && typeof slot !== 'object') {
+    if (slot && (typeof slot !== 'object' || !(slot as ISlotWithFilter).slotType)) {
       options.slots[key] = { slotType: slot } as ISlotWithFilter;
     }
   }
