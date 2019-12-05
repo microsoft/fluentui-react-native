@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix error on web where __DEV__ is undefined",
-  "packageName": "@uifabricshared/theming-react-native",
-  "email": "jasonmo360@gmail.com",
-  "commit": "9dc404966f9832fdd4a5ac79b5df56a8560841bd",
-  "date": "2019-12-05T22:45:29.675Z"
-}

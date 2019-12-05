@@ -2,6 +2,20 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Thu, 05 Dec 2019 23:11:01 GMT",
+      "tag": "@uifabricshared/foundation-composable_v0.5.1",
+      "version": "0.5.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix typing for slots when type is a forward ref",
+            "author": "jasonmo360@gmail.com",
+            "commit": "9dc404966f9832fdd4a5ac79b5df56a8560841bd"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 Nov 2019 19:51:16 GMT",
       "tag": "@uifabricshared/foundation-composable_v0.5.0",
       "version": "0.5.0",

@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Thu, 05 Dec 2019 23:11:01 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.2.4",
+      "version": "0.2.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix error on web where __DEV__ is undefined",
+            "author": "jasonmo360@gmail.com",
+            "commit": "9dc404966f9832fdd4a5ac79b5df56a8560841bd"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 05 Dec 2019 01:37:57 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.2.3",
       "version": "0.2.3",

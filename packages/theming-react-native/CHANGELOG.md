@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Thu, 05 Dec 2019 01:37:57 GMT and should not be manually modified.
+This log was last generated on Thu, 05 Dec 2019 23:11:01 GMT and should not be manually modified.
 
+## 0.2.4
+Thu, 05 Dec 2019 23:11:01 GMT
+
+### Patches
+
+- fix error on web where __DEV__ is undefined (jasonmo360@gmail.com)
 ## 0.2.3
 Thu, 05 Dec 2019 01:37:57 GMT
 

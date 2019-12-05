@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-composable
 
-This log was last generated on Wed, 20 Nov 2019 19:51:16 GMT and should not be manually modified.
+This log was last generated on Thu, 05 Dec 2019 23:11:01 GMT and should not be manually modified.
 
+## 0.5.1
+Thu, 05 Dec 2019 23:11:01 GMT
+
+### Patches
+
+- fix typing for slots when type is a forward ref (jasonmo360@gmail.com)
 ## 0.5.0
 Wed, 20 Nov 2019 19:51:16 GMT
 
