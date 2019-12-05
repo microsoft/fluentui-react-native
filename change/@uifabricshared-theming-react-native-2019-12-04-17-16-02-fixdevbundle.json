@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "🐛 DEV bundles break theming module",
+  "packageName": "@uifabricshared/theming-react-native",
+  "email": "adrum@microsoft.com",
+  "commit": "55f26cb065703feec5bd4da76bef0ea14f54008a",
+  "date": "2019-12-05T01:16:02.669Z"
+}

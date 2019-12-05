@@ -9,6 +9,12 @@ import {
 import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
 import { IOfficePalette, paletteFromOfficeColors } from './office';
 
+/**
+ *  If we have a userAgent string, let's assume we're web debugging.  __DEV__ is for developer bundles.  Currently,
+ *  react-native only polyfills navigator with { product: 'ReactNative', geolocation: NativeModules.Geolocation }
+ */
+export const useFakePalette = __DEV__ && navigator && navigator.userAgent !== undefined;
+
 const createColorRamp = ({ values, index = -1 }: Partial<IColorRamp>) => ({
   values,
   index,
@@ -44,7 +50,7 @@ function updatePaletteInCache(module: IOfficeThemingModule, cache: PaletteCache,
 }
 
 function translatePalette(module: IOfficeThemingModule, paletteCache: PaletteCache, palette?: string): IPartialPalette {
-  const key = __DEV__ ? 'debug' : palette || 'WhiteColors';
+  const key = useFakePalette ? 'debug' : palette || 'WhiteColors';
   if (!paletteCache[key]) {
     updatePaletteInCache(module, paletteCache, key);
   }
