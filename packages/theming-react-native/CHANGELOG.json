@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Thu, 05 Dec 2019 01:37:57 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "🐛 DEV bundles break theming module",
+            "author": "adrum@microsoft.com",
+            "commit": "55f26cb065703feec5bd4da76bef0ea14f54008a"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 Dec 2019 21:00:39 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.2.2",
       "version": "0.2.2",

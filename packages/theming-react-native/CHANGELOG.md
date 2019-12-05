@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Wed, 04 Dec 2019 21:00:39 GMT and should not be manually modified.
+This log was last generated on Thu, 05 Dec 2019 01:37:57 GMT and should not be manually modified.
 
+## 0.2.3
+Thu, 05 Dec 2019 01:37:57 GMT
+
+### Patches
+
+- 🐛 DEV bundles break theming module (adrum@microsoft.com)
 ## 0.2.2
 Wed, 04 Dec 2019 21:00:39 GMT
 
