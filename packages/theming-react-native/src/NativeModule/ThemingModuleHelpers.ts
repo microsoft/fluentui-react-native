@@ -8,20 +8,7 @@ import {
 } from './ThemingModule.types';
 import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
 import { IOfficePalette, paletteFromOfficeColors } from './office';
-
-function _isRNDevMode(): boolean {
-  try {
-    return __DEV__;
-  } catch {
-    return false;
-  }
-}
-
-/**
- *  If we have a userAgent string, let's assume we're web debugging.  __DEV__ is for developer bundles.  Currently,
- *  react-native only polyfills navigator with { product: 'ReactNative', geolocation: NativeModules.Geolocation }
- */
-export const useFakePalette = _isRNDevMode() && navigator && navigator.userAgent !== undefined;
+import { useFakePalette } from './useFakePalette';
 
 const createColorRamp = ({ values, index = -1 }: Partial<IColorRamp>) => ({
   values,

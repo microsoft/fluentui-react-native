@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "🐛 Fix web/native bundles to use __DEV__ as appropriate",
+  "packageName": "@uifabricshared/theming-react-native",
+  "email": "adrum@microsoft.com",
+  "commit": "bb15e86f137ede861dadc2d1c9bf6a90de50f491",
+  "date": "2019-12-06T00:35:23.556Z"
+}
