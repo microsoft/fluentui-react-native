@@ -1,4 +1,5 @@
-import { createThemingModuleHelper, useFakePalette } from './ThemingModuleHelpers';
+import { createThemingModuleHelper } from './ThemingModuleHelpers';
+import { useFakePalette } from './useFakePalette';
 import { NativeEventEmitter, NativeModules } from 'react-native';
 import { IOfficeThemingModule } from '.';
 import { createMockThemingModule } from './MockThemingModule';
