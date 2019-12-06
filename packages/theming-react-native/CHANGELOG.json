@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Fri, 06 Dec 2019 01:37:51 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.2.5",
+      "version": "0.2.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "🐛 Fix web/native bundles to use __DEV__ as appropriate",
+            "author": "adrum@microsoft.com",
+            "commit": "bb15e86f137ede861dadc2d1c9bf6a90de50f491"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 05 Dec 2019 23:11:01 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.2.4",
       "version": "0.2.4",
