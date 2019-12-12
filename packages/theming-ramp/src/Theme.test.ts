@@ -19,7 +19,7 @@ const theme: ITheme = {
     }
   } as ITypography,
   spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
-  settings: {
+  components: {
     View: {
       root: {
         backgroundColor: 'bodyBackground',
@@ -33,7 +33,7 @@ const partialTheme: IPartialTheme = {
   colors: {
     bodySubtext: 'rgb(100,100,100)'
   },
-  settings: {
+  components: {
     Text: {
       root: {
         backgroundColor: 'cyan'
@@ -55,7 +55,7 @@ describe('Theme tests', () => {
 
   test("resolvePartialTheme reuses the theme's layer collection object when the partial theme is empty", () => {
     const resolved = resolvePartialTheme(theme, {});
-    expect(resolved.settings).toBe(theme.settings);
+    expect(resolved.components).toBe(theme.components);
   });
 
   test('resolvePartialTheme returns a blend of the partial theme and the full theme', () => {
@@ -77,7 +77,7 @@ describe('Theme tests', () => {
         }
       } as ITypography,
       spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
-      settings: {
+      components: {
         View: {
           root: {
             backgroundColor: 'bodyBackground',

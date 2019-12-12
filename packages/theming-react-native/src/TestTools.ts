@@ -33,7 +33,7 @@ const platformDefaults: IPartialTheme = {
       bold: '700'
     }
   },
-  settings: {
+  components: {
     View: {
       root: {
         style: {
