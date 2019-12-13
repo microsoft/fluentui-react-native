@@ -4,9 +4,9 @@ import { IThemeColorDefinition } from './Color.types';
 import { ITypography } from './Typography.types';
 
 const theme: ITheme = {
-  colors: ({
-    bodyBackground: '#ff0000'
-  } as unknown) as IThemeColorDefinition,
+  colors: {
+    background: '#ff0000'
+  } as IThemeColorDefinition,
   typography: {
     families: {
       primary: 'Arial'
@@ -21,7 +21,7 @@ const theme: ITheme = {
   spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
   components: {
     View: {
-      root: {
+      tokens: {
         backgroundColor: 'bodyBackground',
         fontFamily: 'primary'
       }
@@ -35,7 +35,7 @@ const partialTheme: IPartialTheme = {
   },
   components: {
     Text: {
-      root: {
+      tokens: {
         backgroundColor: 'cyan'
       }
     }
@@ -62,7 +62,7 @@ describe('Theme tests', () => {
     const resolved = resolvePartialTheme(theme, partialTheme);
     expect(resolved).toEqual({
       colors: ({
-        bodyBackground: '#ff0000',
+        background: '#ff0000',
         bodySubtext: 'rgb(100,100,100)'
       } as unknown) as IThemeColorDefinition,
       typography: {
@@ -79,13 +79,13 @@ describe('Theme tests', () => {
       spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
       components: {
         View: {
-          root: {
+          tokens: {
             backgroundColor: 'bodyBackground',
             fontFamily: 'primary'
           }
         },
         Text: {
-          root: {
+          tokens: {
             backgroundColor: 'cyan'
           }
         }
