@@ -18,5 +18,5 @@ export function returnAsSlotProps(target: IComponentSettings): IComponentSetting
  * @param overrides - optional override lookup object to conditionally apply overrides
  */
 export function getSettings(theme: ITheme, name: string): IComponentSettings {
-  return (theme.settings && theme.settings[name]) || undefined;
+  return (theme.components && theme.components[name]) || undefined;
 }

@@ -4,9 +4,9 @@ import { IThemeColorDefinition } from './Color.types';
 import { ITypography } from './Typography.types';
 
 const theme: ITheme = {
-  colors: ({
-    bodyBackground: '#ff0000'
-  } as unknown) as IThemeColorDefinition,
+  colors: {
+    background: '#ff0000'
+  } as IThemeColorDefinition,
   typography: {
     families: {
       primary: 'Arial'
@@ -19,9 +19,9 @@ const theme: ITheme = {
     }
   } as ITypography,
   spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
-  settings: {
+  components: {
     View: {
-      root: {
+      tokens: {
         backgroundColor: 'bodyBackground',
         fontFamily: 'primary'
       }
@@ -33,9 +33,9 @@ const partialTheme: IPartialTheme = {
   colors: {
     bodySubtext: 'rgb(100,100,100)'
   },
-  settings: {
+  components: {
     Text: {
-      root: {
+      tokens: {
         backgroundColor: 'cyan'
       }
     }
@@ -55,14 +55,14 @@ describe('Theme tests', () => {
 
   test("resolvePartialTheme reuses the theme's layer collection object when the partial theme is empty", () => {
     const resolved = resolvePartialTheme(theme, {});
-    expect(resolved.settings).toBe(theme.settings);
+    expect(resolved.components).toBe(theme.components);
   });
 
   test('resolvePartialTheme returns a blend of the partial theme and the full theme', () => {
     const resolved = resolvePartialTheme(theme, partialTheme);
     expect(resolved).toEqual({
       colors: ({
-        bodyBackground: '#ff0000',
+        background: '#ff0000',
         bodySubtext: 'rgb(100,100,100)'
       } as unknown) as IThemeColorDefinition,
       typography: {
@@ -77,15 +77,15 @@ describe('Theme tests', () => {
         }
       } as ITypography,
       spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
-      settings: {
+      components: {
         View: {
-          root: {
+          tokens: {
             backgroundColor: 'bodyBackground',
             fontFamily: 'primary'
           }
         },
         Text: {
-          root: {
+          tokens: {
             backgroundColor: 'cyan'
           }
         }

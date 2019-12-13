@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { ISlotProps, IComponentSettings, IOverrideLookup } from '@uifabricshared/foundation-settings';
+import { ISlotProps, IComponentSettings, IOverrideLookup, IWithTokens } from '@uifabricshared/foundation-settings';
 import { getThemedSettings } from '@uifabricshared/themed-settings';
 import { ITheme, getSettings, returnAsSlotProps } from '@uifabricshared/theming-ramp';
 import { IComponentTokens, processTokens, ITargetHasToken, buildComponentTokens } from '@uifabricshared/foundation-tokens';
 import { getTheme, ThemeContext } from '@uifabricshared/theming-react-native';
 import { IWithComposable, AsObject, IComposableDefinition, INativeSlotType } from '@uifabricshared/foundation-composable';
-import { IComposeOptions, IStylingSettings, IDefineUseComposeStyling, IWithTokens } from './compose.types';
+import { IComposeOptions, IStylingSettings, IDefineUseComposeStyling } from './compose.types';
 
 /* tslint:disable-next-line no-any */
 export function getOptionsFromObj<TComponent>(obj: any): TComponent | undefined {

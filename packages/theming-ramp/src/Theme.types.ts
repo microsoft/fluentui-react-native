@@ -16,7 +16,7 @@ export interface ISpacing {
 export interface ITheme {
   colors: IThemeColorDefinition;
   typography: ITypography;
-  settings: IComponentSettingsCollection;
+  components: IComponentSettingsCollection;
   spacing: ISpacing;
 }
 
@@ -28,6 +28,6 @@ export interface ITheme {
 export interface IPartialTheme {
   colors?: Partial<IThemeColorDefinition>;
   typography?: IPartialTypography;
-  settings?: IComponentSettingsCollection;
+  components?: IComponentSettingsCollection;
   spacing?: ISpacing;
 }

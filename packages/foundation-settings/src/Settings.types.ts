@@ -2,14 +2,18 @@ export interface ISlotProps<TProps extends object = object> {
   root: TProps;
 }
 
+export type IWithTokens<T, TTokens extends object> = T & { tokens?: TTokens };
+
 export type IPartialSlotProps<TSlotProps extends ISlotProps> = { [K in keyof TSlotProps]+?: Partial<TSlotProps[K]> };
 
 export type IComponentSettings<TSlotProps extends ISlotProps = ISlotProps> = IPartialSlotProps<TSlotProps> & {
   _precedence?: string[];
-  _overrides?: IComponentSettingsCollection<IComponentSettings<TSlotProps>>;
+  _overrides?: IComponentSettingsCollection<IWithTokens<IComponentSettings<TSlotProps>, object>>;
 };
 
-export type IComponentSettingsCollection<TSettings extends IComponentSettings = IComponentSettings> = {
+export type IComponentSettingsCollection<
+  TSettings extends IWithTokens<IComponentSettings, object> = IWithTokens<IComponentSettings, object>
+> = {
   [key: string]: TSettings;
 };
 

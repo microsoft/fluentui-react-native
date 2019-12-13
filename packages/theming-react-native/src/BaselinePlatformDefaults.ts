@@ -41,6 +41,6 @@ export function getBaselinePlatformTheme(): ITheme {
     colors: getStockWebPalette(),
     typography: _defaultTypography(),
     spacing: defaultSpacing(),
-    settings: {}
+    components: {}
   };
 }

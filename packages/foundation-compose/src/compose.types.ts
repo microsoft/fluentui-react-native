@@ -5,7 +5,7 @@ import {
   IExtractSlotProps,
   IExtractProps
 } from '@uifabricshared/foundation-composable';
-import { ISlotProps, IComponentSettings, IOverrideLookup } from '@uifabricshared/foundation-settings';
+import { ISlotProps, IComponentSettings, IWithTokens, IOverrideLookup } from '@uifabricshared/foundation-settings';
 import { ISettingsEntry } from '@uifabricshared/themed-settings';
 import { ITheme } from '@uifabricshared/theming-ramp';
 import { IStyleFactories, IComponentTokens } from '@uifabricshared/foundation-tokens';
@@ -36,7 +36,6 @@ export type IExtractStatics<T> = T extends IStaticsFragment<infer U> ? U : objec
 // extract tokens type from IComposeType
 type ITokensFragment<TTokens extends object> = { tokens: TTokens };
 export type IExtractTokens<T> = T extends ITokensFragment<infer U> ? U : object;
-export type IWithTokens<T, TTokens extends object> = T & { tokens?: TTokens };
 
 /**
  * Function signature for useStyling as implemented by compose.  This adds the lookup function to enable
