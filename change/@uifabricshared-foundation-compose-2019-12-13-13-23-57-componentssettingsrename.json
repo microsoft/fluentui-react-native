@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "♻ rename theme.settings -> theme.components for better alignment",
+  "packageName": "@uifabricshared/foundation-compose",
+  "email": "adrum@microsoft.com",
+  "commit": "d12a9d68ed5d3ba7435237a0fb392abe51312711",
+  "date": "2019-12-13T21:22:05.097Z"
+}
