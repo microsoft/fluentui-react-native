@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Fri, 06 Dec 2019 01:37:51 GMT and should not be manually modified.
+This log was last generated on Fri, 13 Dec 2019 21:50:31 GMT and should not be manually modified.
 
+## 0.3.0
+Fri, 13 Dec 2019 21:50:31 GMT
+
+### Minor changes
+
+- ♻ rename theme.settings -> theme.components for better alignment (adrum@microsoft.com)
 ## 0.2.5
 Fri, 06 Dec 2019 01:37:51 GMT
 

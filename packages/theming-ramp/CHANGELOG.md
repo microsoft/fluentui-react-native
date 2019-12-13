@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Wed, 04 Dec 2019 23:08:56 GMT and should not be manually modified.
+This log was last generated on Fri, 13 Dec 2019 21:50:31 GMT and should not be manually modified.
 
+## 0.5.0
+Fri, 13 Dec 2019 21:50:31 GMT
+
+### Minor changes
+
+- ♻ rename theme.settings -> theme.components for better alignment (adrum@microsoft.com)
 ## 0.4.2
 Wed, 04 Dec 2019 23:08:56 GMT
 

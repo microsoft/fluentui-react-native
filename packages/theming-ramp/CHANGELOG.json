@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Fri, 13 Dec 2019 21:50:31 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "♻ rename theme.settings -> theme.components for better alignment",
+            "author": "adrum@microsoft.com",
+            "commit": "d12a9d68ed5d3ba7435237a0fb392abe51312711"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 Dec 2019 23:08:56 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.4.2",
       "version": "0.4.2",

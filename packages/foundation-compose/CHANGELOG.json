@@ -2,6 +2,20 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Fri, 13 Dec 2019 21:50:31 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.5.0",
+      "version": "1.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "🐛 Add missing tokens typing to theme definitions",
+            "author": "adrum@microsoft.com",
+            "commit": "d12a9d68ed5d3ba7435237a0fb392abe51312711"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 Nov 2019 19:51:16 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.4.0",
       "version": "1.4.0",

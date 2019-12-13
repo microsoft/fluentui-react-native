@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Wed, 20 Nov 2019 19:51:16 GMT and should not be manually modified.
+This log was last generated on Fri, 13 Dec 2019 21:50:31 GMT and should not be manually modified.
 
+## 1.5.0
+Fri, 13 Dec 2019 21:50:31 GMT
+
+### Minor changes
+
+- 🐛 Add missing tokens typing to theme definitions (adrum@microsoft.com)
 ## 1.4.0
 Wed, 20 Nov 2019 19:51:16 GMT
 

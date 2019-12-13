@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-settings
 
-This log was last generated on Wed, 20 Nov 2019 19:37:06 GMT and should not be manually modified.
+This log was last generated on Fri, 13 Dec 2019 21:50:31 GMT and should not be manually modified.
 
+## 0.4.1
+Fri, 13 Dec 2019 21:50:31 GMT
+
+### Patches
+
+- 🐛 Add missing tokens typing to theme definitions (adrum@microsoft.com)
 ## 0.4.0
 Wed, 20 Nov 2019 19:37:06 GMT
 

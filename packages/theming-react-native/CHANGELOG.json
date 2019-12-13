@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Fri, 13 Dec 2019 21:50:31 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "♻ rename theme.settings -> theme.components for better alignment",
+            "author": "adrum@microsoft.com",
+            "commit": "d12a9d68ed5d3ba7435237a0fb392abe51312711"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 06 Dec 2019 01:37:51 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.2.5",
       "version": "0.2.5",
