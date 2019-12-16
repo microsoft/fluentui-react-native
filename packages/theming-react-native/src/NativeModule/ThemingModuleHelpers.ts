@@ -8,7 +8,6 @@ import {
 } from './ThemingModule.types';
 import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
 import { IOfficePalette, paletteFromOfficeColors } from './office';
-import { useFakePalette } from './useFakePalette';
 
 const createColorRamp = ({ values, index = -1 }: Partial<IColorRamp>) => ({
   values,
@@ -45,7 +44,7 @@ function updatePaletteInCache(module: IOfficeThemingModule, cache: PaletteCache,
 }
 
 function translatePalette(module: IOfficeThemingModule, paletteCache: PaletteCache, palette?: string): IPartialPalette {
-  const key = useFakePalette ? 'debug' : palette || 'WhiteColors';
+  const key = palette || 'WhiteColors';
   if (!paletteCache[key]) {
     updatePaletteInCache(module, paletteCache, key);
   }

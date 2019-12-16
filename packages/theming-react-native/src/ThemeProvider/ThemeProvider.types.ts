@@ -1,4 +1,4 @@
-import { ThemeRegistry } from './Theme.types';
+import { ThemeRegistry } from '../Theme.types';
 
 export interface IThemeProviderProps extends React.PropsWithChildren<{}> {
   theme?: string;

@@ -1,8 +1,11 @@
 import * as React from 'react';
+import { withBox } from './withBox';
 import { IThemeProviderProps } from './ThemeProvider.types';
-import { useThemeRegistry, ThemeRegistryContext, ThemeContext } from './ThemeContext';
+import { useThemeRegistry, ThemeRegistryContext, ThemeContext } from '../ThemeContext';
 import { IThemeEventListener } from '@uifabricshared/theme-registry';
-import { getThemeRegistry } from './Global';
+import { getThemeRegistry } from '../Global';
+
+const Box = withBox();
 
 export const ThemeProvider: React.FunctionComponent<IThemeProviderProps> = (props: IThemeProviderProps) => {
   const { registry: registryFromProps, theme: themeName = '', children } = props;
@@ -22,7 +25,11 @@ export const ThemeProvider: React.FunctionComponent<IThemeProviderProps> = (prop
     };
   }, [registryToUse, themeName, setThemeState]);
 
-  const themeProvider = <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>;
+  const themeProvider = (
+    <ThemeContext.Provider value={theme}>
+      <Box>{children}</Box>
+    </ThemeContext.Provider>
+  );
 
   // note `registryFromProps` came from props and it's not the same as `registryToUse`
   return registryFromProps ? (
