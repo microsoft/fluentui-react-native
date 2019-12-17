@@ -24,13 +24,28 @@ const mockThemingModule = createMockThemingModule({
 // msgq.spy(true);
 
 const caterpillarTheme: IPartialTheme = {
-  colors: {
-    buttonBackground: '#ffcd11',
-    buttonBackgroundHovered: '#111',
-    buttonBackgroundPressed: '#eee',
-    buttonText: '#000',
-    buttonTextPressed: '#111',
-    buttonTextHovered: '#fff'
+  components: {
+    Button: {
+      tokens: {
+        borderWidth: 0,
+        backgroundColor: '#ffcd11',
+        color: '#000'
+      },
+      _overrides: {
+        hovered: {
+          tokens: {
+            backgroundColor: '#111',
+            color: '#fff'
+          }
+        },
+        pressed: {
+          tokens: {
+            backgroundColor: '#eee',
+            color: '#111'
+          }
+        }
+      }
+    }
   }
 };
 
@@ -38,7 +53,7 @@ const mockThemingModuleHelper = createMockThemingModuleHelper(mockThemingModule,
 
 const customThemeRegistry = createPlatformThemeRegistry('TaskPane', mockThemingModuleHelper);
 // default theme
-customThemeRegistry.setTheme(caterpillarTheme, 'cat');
+customThemeRegistry.setTheme(caterpillarTheme);
 customThemeRegistry.setTheme(ThemingModuleHelper.getPlatformThemeDefinition('WhiteColors'), 'PlatformWhiteColors');
 
 const ThemeSwitcher: React.FunctionComponent = (_p: {}) => {
