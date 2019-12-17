@@ -23,6 +23,10 @@ const mockThemingModule = createMockThemingModule({
 const mockThemingModuleHelper = createMockThemingModuleHelper(mockThemingModule, emitter);
 
 const customThemeRegistry = createPlatformThemeRegistry('TaskPane', mockThemingModuleHelper);
+mockThemingModuleHelper.addListener(() => {
+  customThemeRegistry.updatePlatformDefaults(mockThemingModuleHelper.getPlatformDefaults('TaskPane'));
+});
+
 // default theme
 customThemeRegistry.setTheme({});
 customThemeRegistry.setTheme(mockThemingModuleHelper.getPlatformThemeDefinition('WhiteColors'), 'PlatformWhiteColors');
@@ -99,7 +103,6 @@ const ThemedText: React.FunctionComponent<TextProps> = (p: TextProps) => {
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
     alignItems: 'stretch',
     justifyContent: 'space-evenly'
   },
