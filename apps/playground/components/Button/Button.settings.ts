@@ -4,9 +4,9 @@ import { IComposeSettings } from '@uifabricshared/foundation-compose';
 export const settings: IComposeSettings<IButtonType> = [
   {
     tokens: {
-      backgroundColor: 'buttonBackground',
-      color: 'buttonText',
-      borderColor: 'buttonBorder',
+      backgroundColor: 'primaryButtonBackground',
+      color: 'primaryButtonText',
+      borderColor: 'primaryButtonBorder',
       borderWidth: 1
     },
     root: {
@@ -31,16 +31,16 @@ export const settings: IComposeSettings<IButtonType> = [
     _overrides: {
       disabled: {
         tokens: {
-          backgroundColor: 'buttonBackgroundDisabled',
-          color: 'buttonTextDisabled',
-          borderColor: 'buttonBorderDisabled'
+          backgroundColor: 'primaryButtonBackgroundDisabled',
+          color: 'primaryButtonTextDisabled',
+          borderColor: 'primaryButtonBorderDisabled'
         }
       },
       pressed: {
         tokens: {
-          backgroundColor: 'buttonBackgroundPressed',
-          color: 'buttonTextPressed',
-          borderColor: 'buttonBorderPressed'
+          backgroundColor: 'primaryButtonBackgroundPressed',
+          color: 'primaryButtonTextPressed',
+          borderColor: 'primaryButtonBorderPressed'
         }
       }
     }

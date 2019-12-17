@@ -21,8 +21,8 @@ const mockThemingModule = createMockThemingModule({
   }
 });
 
-const msgq = require('MessageQueue');
-msgq.spy(true);
+// const msgq = require('MessageQueue');
+// msgq.spy(true);
 
 const caterpillarTheme: IPartialTheme = {
   colors: {
@@ -39,7 +39,7 @@ const mockThemingModuleHelper = createMockThemingModuleHelper(mockThemingModule,
 
 const customThemeRegistry = createPlatformThemeRegistry('TaskPane', mockThemingModuleHelper);
 // default theme
-customThemeRegistry.setTheme(caterpillarTheme);
+customThemeRegistry.setTheme(caterpillarTheme, 'cat');
 customThemeRegistry.setTheme(ThemingModuleHelper.getPlatformThemeDefinition('WhiteColors'), 'PlatformWhiteColors');
 
 const getPrimaryButtonStyles = themedStyleSheet((t: ITheme) => {
@@ -85,8 +85,8 @@ const ThemeSwitcher: React.FunctionComponent = (_p: {}) => {
 export default function App() {
   return (
     <ThemeProvider registry={customThemeRegistry}>
-      <ThemedPanel pointerEvents="box-none" style={styles.root}>
-        <View pointerEvents="box-none" style={styles.container}>
+      <ThemedPanel style={styles.root}>
+        <View style={styles.container}>
           <Button content="Hello Android Button" />
           <ThemedText>Open up App.tsx to start working on your app!</ThemedText>
           <ButtonBackground>
@@ -121,7 +121,6 @@ const ThemedText: React.FunctionComponent<TextProps> = (p: TextProps) => {
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
     alignItems: 'stretch',
     justifyContent: 'space-evenly'
   },
