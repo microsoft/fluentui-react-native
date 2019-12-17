@@ -22,6 +22,7 @@
     "no-useless-escape": "off",
     "require-atomic-updates": "off",
     "@typescript-eslint/indent": "off",
+    "@typescript-eslint/interface-name-prefix": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-use-before-define": "off",

@@ -11,6 +11,7 @@ import {
   ITheme
 } from '@uifabricshared/theming-react-native';
 import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
+import { Button } from './components';
 
 let useWhiteColors = true;
 const emitter = new NativeEventEmitter();
@@ -20,11 +21,25 @@ const mockThemingModule = createMockThemingModule({
   }
 });
 
+const msgq = require('MessageQueue');
+msgq.spy(true);
+
+const caterpillarTheme: IPartialTheme = {
+  colors: {
+    buttonBackground: '#ffcd11',
+    buttonBackgroundHovered: '#111',
+    buttonBackgroundPressed: '#eee',
+    buttonText: '#000',
+    buttonTextPressed: '#111',
+    buttonTextHovered: '#fff'
+  }
+};
+
 const mockThemingModuleHelper = createMockThemingModuleHelper(mockThemingModule, emitter);
 
 const customThemeRegistry = createPlatformThemeRegistry('TaskPane', mockThemingModuleHelper);
 // default theme
-customThemeRegistry.setTheme({});
+customThemeRegistry.setTheme(caterpillarTheme);
 customThemeRegistry.setTheme(ThemingModuleHelper.getPlatformThemeDefinition('WhiteColors'), 'PlatformWhiteColors');
 
 const getPrimaryButtonStyles = themedStyleSheet((t: ITheme) => {
@@ -70,8 +85,9 @@ const ThemeSwitcher: React.FunctionComponent = (_p: {}) => {
 export default function App() {
   return (
     <ThemeProvider registry={customThemeRegistry}>
-      <ThemedPanel style={styles.root}>
-        <View style={styles.container}>
+      <ThemedPanel pointerEvents="box-none" style={styles.root}>
+        <View pointerEvents="box-none" style={styles.container}>
+          <Button content="Hello Android Button" />
           <ThemedText>Open up App.tsx to start working on your app!</ThemedText>
           <ButtonBackground>
             <ButtonText>Fake Primary Button</ButtonText>
