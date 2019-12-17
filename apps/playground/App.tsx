@@ -8,9 +8,8 @@ import {
   createMockThemingModule,
   createMockThemingModuleHelper,
   mockGetPaletteImpl,
-  ITheme
+  IPartialTheme
 } from '@uifabricshared/theming-react-native';
-import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
 import { Button } from './components';
 
 let useWhiteColors = true;
@@ -41,18 +40,6 @@ const customThemeRegistry = createPlatformThemeRegistry('TaskPane', mockThemingM
 // default theme
 customThemeRegistry.setTheme(caterpillarTheme, 'cat');
 customThemeRegistry.setTheme(ThemingModuleHelper.getPlatformThemeDefinition('WhiteColors'), 'PlatformWhiteColors');
-
-const getPrimaryButtonStyles = themedStyleSheet((t: ITheme) => {
-  return {
-    textStyle: {
-      color: t.colors.primaryButtonText
-    },
-    backgroundStyle: {
-      backgroundColor: t.colors.primaryButtonBackground,
-      borderColor: t.colors.primaryButtonBorder
-    }
-  };
-});
 
 const ThemeSwitcher: React.FunctionComponent = (_p: {}) => {
   const switchTheme = React.useCallback(() => {
