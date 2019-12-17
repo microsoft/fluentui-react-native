@@ -27,7 +27,7 @@ export const settings: IComposeSettings<IButtonType> = [
         justifyContent: 'center'
       }
     },
-    _precedence: ['hovered', 'focused', 'pressed', 'disabled'],
+    _precedence: ['pressed', 'disabled'],
     _overrides: {
       disabled: {
         tokens: {
@@ -36,25 +36,11 @@ export const settings: IComposeSettings<IButtonType> = [
           borderColor: 'buttonBorderDisabled'
         }
       },
-      hovered: {
-        tokens: {
-          backgroundColor: 'buttonBackgroundHovered',
-          color: 'buttonTextHovered',
-          borderColor: 'buttonBorderHovered'
-        }
-      },
       pressed: {
         tokens: {
           backgroundColor: 'buttonBackgroundPressed',
           color: 'buttonTextPressed',
           borderColor: 'buttonBorderPressed'
-        }
-      },
-      focused: {
-        tokens: {
-          borderColor: 'buttonBorderFocused',
-          backgroundColor: 'buttonBackgroundHovered',
-          color: 'buttonTextHovered'
         }
       }
     }
