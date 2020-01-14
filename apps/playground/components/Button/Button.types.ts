@@ -9,7 +9,6 @@ export interface IButtonInfo extends IPressableState {
   /*
    * Disables the button.
    * @default false
-   * @deprecated
    */
   disabled?: boolean;
 

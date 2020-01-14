@@ -12,6 +12,10 @@ import {
 } from '@uifabricshared/theming-react-native';
 import { Button } from './components';
 
+// Uncomment to log the js-to-native message queue to console
+// const msgq = require('MessageQueue');
+// msgq.spy(true);
+
 let useWhiteColors = true;
 const emitter = new NativeEventEmitter();
 const mockThemingModule = createMockThemingModule({
@@ -19,9 +23,6 @@ const mockThemingModule = createMockThemingModule({
     return mockGetPaletteImpl(useWhiteColors ? 'WhiteColors' : 'TaskPane');
   }
 });
-
-// const msgq = require('MessageQueue');
-// msgq.spy(true);
 
 const caterpillarTheme: IPartialTheme = {
   components: {
