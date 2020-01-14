@@ -8,9 +8,13 @@ import {
   createMockThemingModule,
   createMockThemingModuleHelper,
   mockGetPaletteImpl,
-  ITheme
+  IPartialTheme
 } from '@uifabricshared/theming-react-native';
-import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
+import { Button } from './components';
+
+// Uncomment to log the js-to-native message queue to console
+// const msgq = require('MessageQueue');
+// msgq.spy(true);
 
 let useWhiteColors = true;
 const emitter = new NativeEventEmitter();
@@ -20,38 +24,38 @@ const mockThemingModule = createMockThemingModule({
   }
 });
 
+const caterpillarTheme: IPartialTheme = {
+  components: {
+    Button: {
+      tokens: {
+        borderWidth: 0,
+        backgroundColor: '#ffcd11',
+        color: '#000'
+      },
+      _overrides: {
+        hovered: {
+          tokens: {
+            backgroundColor: '#111',
+            color: '#fff'
+          }
+        },
+        pressed: {
+          tokens: {
+            backgroundColor: '#eee',
+            color: '#111'
+          }
+        }
+      }
+    }
+  }
+};
+
 const mockThemingModuleHelper = createMockThemingModuleHelper(mockThemingModule, emitter);
 
 const customThemeRegistry = createPlatformThemeRegistry('TaskPane', mockThemingModuleHelper);
 // default theme
-customThemeRegistry.setTheme({});
+customThemeRegistry.setTheme(caterpillarTheme);
 customThemeRegistry.setTheme(ThemingModuleHelper.getPlatformThemeDefinition('WhiteColors'), 'PlatformWhiteColors');
-
-const getPrimaryButtonStyles = themedStyleSheet((t: ITheme) => {
-  return {
-    textStyle: {
-      color: t.colors.primaryButtonText
-    },
-    backgroundStyle: {
-      backgroundColor: t.colors.primaryButtonBackground,
-      borderColor: t.colors.primaryButtonBorder
-    }
-  };
-});
-
-const ButtonBackground: React.FunctionComponent<ViewProps> = (p: ViewProps) => {
-  const theme = useTheme();
-  const styles = getPrimaryButtonStyles(theme);
-  const { style, ...rest } = p;
-  return <View {...rest} style={[styles.backgroundStyle, style]} />;
-};
-
-const ButtonText: React.FunctionComponent<TextProps> = (p: TextProps) => {
-  const theme = useTheme();
-  const styles = getPrimaryButtonStyles(theme);
-  const { style, ...rest } = p;
-  return <Text {...rest} style={[styles.textStyle, style]} />;
-};
 
 const ThemeSwitcher: React.FunctionComponent = (_p: {}) => {
   const switchTheme = React.useCallback(() => {
@@ -59,10 +63,8 @@ const ThemeSwitcher: React.FunctionComponent = (_p: {}) => {
     emitter.emit('onPlatformDefaultsChanged');
   }, []);
   return (
-    <TouchableOpacity activeOpacity={0.9} onPress={switchTheme}>
-      <ButtonBackground>
-        <ButtonText>Switch Theme!</ButtonText>
-      </ButtonBackground>
+    <TouchableOpacity onPress={switchTheme} style={styles.themeSwitcher}>
+      <Text>Switch Theme</Text>
     </TouchableOpacity>
   );
 };
@@ -72,18 +74,13 @@ export default function App() {
     <ThemeProvider registry={customThemeRegistry}>
       <ThemedPanel style={styles.root}>
         <View style={styles.container}>
+          <Button content="Hello Android Button" />
           <ThemedText>Open up App.tsx to start working on your app!</ThemedText>
-          <ButtonBackground>
-            <ButtonText>Fake Primary Button</ButtonText>
-          </ButtonBackground>
           <ThemeSwitcher />
         </View>
         <ThemeProvider theme="PlatformWhiteColors">
           <ThemedPanel style={styles.container}>
             <ThemedText>Theme Provider text!</ThemedText>
-            <ButtonBackground>
-              <ButtonText>Fake Primary Button</ButtonText>
-            </ButtonBackground>
           </ThemedPanel>
         </ThemeProvider>
       </ThemedPanel>
@@ -105,7 +102,6 @@ const ThemedText: React.FunctionComponent<TextProps> = (p: TextProps) => {
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
     alignItems: 'stretch',
     justifyContent: 'space-evenly'
   },
@@ -113,5 +109,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     minHeight: 500
+  },
+  themeSwitcher: {
+    backgroundColor: 'gray'
   }
 });
