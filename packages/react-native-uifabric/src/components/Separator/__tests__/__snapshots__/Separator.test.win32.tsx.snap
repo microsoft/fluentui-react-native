@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Separator all props & tokens 1`] = `
+<View
+  style={
+    Object {
+      "borderColor": "red",
+      "borderLeftWidth": 15,
+    }
+  }
+/>
+`;
+
+exports[`Separator default 1`] = `
+<View
+  style={
+    Object {
+      "borderLeftWidth": undefined,
+      "borderTopWidth": 1,
+    }
+  }
+/>
+`;

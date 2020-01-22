@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FocusTrapZone all props props 1`] = `
+<RCTFocusTrapZone
+  disableFirstFocus={true}
+  disabled={true}
+  focusPreviouslyFocusedInnerElement={true}
+  ignoreExternalFocusing={true}
+/>
+`;
+
+exports[`FocusTrapZone default props 1`] = `<RCTFocusTrapZone />`;

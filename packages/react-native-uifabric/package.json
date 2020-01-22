@@ -33,6 +33,7 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
+    "@office-iss/react-native-win32": "0.26.2",
     "@types/dedent": "0.7.0",
     "@types/enzyme": "^2.8.11",
     "@types/es6-collections": "^0.5.29",
@@ -53,11 +54,15 @@
     "office-ui-fabric-react": "^7.28.2",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "react-native": "0.60.0",
+    "react-native": "https://github.com/microsoft/react-native/archive/v0.60.0-microsoft.35.tar.gz",
     "react-native-windows": "0.60.0-vnext.115",
     "react-test-renderer": "16.8.6",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
+  },
+  "peerDependencies": {
+    "react": "16.8.6",
+    "react-native": "0.60.0 || https://github.com/microsoft/react-native/archive/v0.60.0-microsoft.35.tar.gz"
   },
   "author": "",
   "license": "MIT"
