@@ -12,6 +12,7 @@ const { sass } = require('./tasks/sass');
 const { ts } = require('./tasks/ts');
 const { eslint } = require('./tasks/eslint');
 const { webpack, webpackDevServer } = require('./tasks/webpack');
+const { metroPack } = require('./tasks/metro-pack');
 const { verifyApiExtractor, updateApiExtractor } = require('./tasks/api-extractor');
 const prettier = require('./tasks/prettier');
 const bundleSizeCollect = require('./tasks/bundle-size-collect');
@@ -33,6 +34,9 @@ module.exports = function preset() {
   // Build only commonjs (not other TS variants) but still run other tasks
   option('commonjs');
 
+  // use Metro for bundling task instead of the default webpack
+  option('useMetro');
+
   task('clean', clean);
   task('copy', copy);
   task('jest', jest);
@@ -44,6 +48,7 @@ module.exports = function preset() {
   task('eslint', eslint);
   task('ts:commonjs-only', ts.commonjsOnly);
   task('webpack', webpack);
+  task('metroPack', metroPack);
   task('webpack-dev-server', webpackDevServer);
   task('verify-api-extractor', verifyApiExtractor);
   task('update-api-extractor', updateApiExtractor);
@@ -71,9 +76,12 @@ module.exports = function preset() {
       'clean',
       'copy',
       'sass',
-      parallel(condition('validate', () => !argv().min), series('ts', parallel(condition('webpack', () => !argv().min))))
+      parallel(
+        condition('validate', () => !argv().min),
+        series('ts', parallel(condition(argv().useMetro ? 'metroPack' : 'webpack', () => !argv().min)))
+      )
     )
   ).cached();
 
-  task('no-op', () => { }).cached();
+  task('no-op', () => {}).cached();
 };
