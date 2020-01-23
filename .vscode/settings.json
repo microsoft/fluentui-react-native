@@ -18,5 +18,9 @@
   "search.exclude": {
     "**/node_modules": true,
     "**/lib": true
+  },
+  "files.exclude": {
+    "**/lib-amd": true,
+    "**/lib-commonjs": true
   }
 }
