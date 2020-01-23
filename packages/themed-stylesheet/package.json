@@ -28,7 +28,7 @@
     "@types/react-native": "0.60.19",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "react-native": "^0.59.0",
+    "react-native": "^0.60.0",
     "metro-react-native-babel-preset": "0.57.0"
   },
   "beachball": {
