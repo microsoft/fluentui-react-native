@@ -30,4 +30,4 @@ class RNTesterApp extends React.Component<IRNTesterAppProps, IRNTesterNavigation
 
 AppRegistry.registerComponent('RNTesterApp', () => RNTesterApp);
 
-export = RNTesterApp;
+export default RNTesterApp;
