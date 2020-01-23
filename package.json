@@ -45,7 +45,8 @@
     "packages": [
       "apps/*",
       "packages/*",
-      "scripts"
+      "scripts",
+      "experimentals/*"
     ],
     "nohoist": [
       "**/expo"
