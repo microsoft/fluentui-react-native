@@ -58,7 +58,7 @@
     "react-test-renderer": "16.8.6"
   },
   "peerDependencies": {
-    "react": "16.8.6",
+    "react": "^16.0.0",
     "react-native": "https://github.com/microsoft/react-native/archive/v0.60.0-microsoft.35.tar.gz"
   },
   "author": "",
