@@ -1,5 +1,5 @@
 {
-  "packages": ["packages/*", "scripts", "apps/*", "experimentals/*"],
+  "packages": ["packages/*", "scripts", "apps/*", "experiments/*"],
   "useWorkspaces": true,
   "npmClient": "yarn",
   "version": "0.0.0"
