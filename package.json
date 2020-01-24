@@ -44,9 +44,9 @@
   "workspaces": {
     "packages": [
       "apps/*",
+      "experimentals/*",
       "packages/*",
-      "scripts",
-      "experimentals/*"
+      "scripts"
     ],
     "nohoist": [
       "**/expo"
