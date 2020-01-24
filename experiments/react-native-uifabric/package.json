@@ -7,7 +7,7 @@
   "typings": "lib/index.d.ts",
   "private": true,
   "scripts": {
-    "build": "just-scripts build --useMetro",
+    "build": "just-scripts build --useMetro --platform win32",
     "just": "just-scripts",
     "clean": "just-scripts clean",
     "code-style": "just-scripts code-style",
@@ -61,6 +61,11 @@
   "peerDependencies": {
     "react": "^16.0.0",
     "react-native": "https://github.com/microsoft/react-native/archive/v0.60.0-microsoft.35.tar.gz"
+  },
+  "metroBundles": {
+    "win32": {
+      "output": "./dist/react-native-uifabric.win32.js"
+    }
   },
   "author": "",
   "license": "MIT"

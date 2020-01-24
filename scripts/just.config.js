@@ -12,7 +12,7 @@ const { sass } = require('./tasks/sass');
 const { ts } = require('./tasks/ts');
 const { eslint } = require('./tasks/eslint');
 const { webpack, webpackDevServer } = require('./tasks/webpack');
-const { metroPack } = require('./tasks/metro-pack');
+const { metroPackTask } = require('./tasks/metro-pack');
 const { verifyApiExtractor, updateApiExtractor } = require('./tasks/api-extractor');
 const prettier = require('./tasks/prettier');
 const bundleSizeCollect = require('./tasks/bundle-size-collect');
@@ -37,6 +37,8 @@ module.exports = function preset() {
   // use Metro for bundling task instead of the default webpack
   option('useMetro');
 
+  // option('platform');
+
   task('clean', clean);
   task('copy', copy);
   task('jest', jest);
@@ -48,7 +50,7 @@ module.exports = function preset() {
   task('eslint', eslint);
   task('ts:commonjs-only', ts.commonjsOnly);
   task('webpack', webpack);
-  task('metroPack', metroPack);
+  task('metroPack', metroPackTask(argv()['platform']));
   task('webpack-dev-server', webpackDevServer);
   task('verify-api-extractor', verifyApiExtractor);
   task('update-api-extractor', updateApiExtractor);
