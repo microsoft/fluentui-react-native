@@ -37,8 +37,6 @@ module.exports = function preset() {
   // use Metro for bundling task instead of the default webpack
   option('useMetro');
 
-  // option('platform');
-
   task('clean', clean);
   task('copy', copy);
   task('jest', jest);
