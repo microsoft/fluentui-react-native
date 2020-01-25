@@ -21,6 +21,7 @@
     "builddemo": "node ./scripts/monorepo/buildTo.js fabric-website-resources --min",
     "buildfast": "lerna run build -- --min --color",
     "buildto": "node ./scripts/monorepo/buildTo.js",
+    "bundle": "lerna run bundle --stream -- --production --lint --color",
     "bundlesize": "cd scripts && npm run bundlesize",
     "bundlesizecollect": "cd scripts && yarn just-scripts bundle-size-collect",
     "rebuild": "node ./scripts/invalidate-just-cache.js && yarn build",

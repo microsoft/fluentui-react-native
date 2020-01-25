@@ -17,15 +17,14 @@ function loadOptionsFromPackagesJson(platform) {
 }
 
 exports.metroPackTask = function(platform) {
-  justTask.logger.verbose(`Starting metropack task with platform ${platform}...`);
-
-  const options = loadOptionsFromPackagesJson(platform);
-  const outputBundlePath = options && options.output;
-  if (!outputBundlePath) {
-    throw new Error(`Couldn't find the 'metroBundles/${platform}/output' attribute in your packages.json file.`);
-  }
-
   return async function metroPack(done) {
+    justTask.logger.verbose(`Starting metropack task with platform ${platform}...`);
+
+    const options = loadOptionsFromPackagesJson(platform);
+    const outputBundlePath = options && options.output;
+    if (!outputBundlePath) {
+      throw new Error(`Couldn't find the 'metroBundles/${platform}/output' attribute in your packages.json file.`);
+    }
     const config = await Metro.loadConfig();
 
     const parentDirectory = path.dirname(path.resolve('.', outputBundlePath));

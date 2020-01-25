@@ -70,18 +70,9 @@ module.exports = function preset() {
 
   task('build:node-lib', series('clean', 'copy', series(condition('validate', () => !argv().min), 'ts:commonjs-only'))).cached();
 
-  task(
-    'build',
-    series(
-      'clean',
-      'copy',
-      'sass',
-      parallel(
-        condition('validate', () => !argv().min),
-        series('ts', parallel(condition(argv().useMetro ? 'metroPack' : 'webpack', () => !argv().min)))
-      )
-    )
-  ).cached();
+  task('bundle', argv().useMetro ? 'metroPack' : 'webpack').cached();
+
+  task('build', series('clean', 'copy', 'sass', parallel(condition('validate', () => !argv().min), 'ts'))).cached();
 
   task('no-op', () => {}).cached();
 };

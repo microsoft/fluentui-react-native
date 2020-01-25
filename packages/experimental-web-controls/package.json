@@ -12,6 +12,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "just-scripts build",
+    "bundle": "just-scripts bundle",
     "just": "just-scripts",
     "clean": "just-scripts clean",
     "code-style": "just-scripts code-style",

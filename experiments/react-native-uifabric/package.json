@@ -7,11 +7,12 @@
   "typings": "lib/index.d.ts",
   "private": true,
   "scripts": {
-    "build": "just-scripts build --useMetro --platform win32",
+    "build": "just-scripts build",
     "just": "just-scripts",
     "clean": "just-scripts clean",
     "code-style": "just-scripts code-style",
     "lint": "just-scripts eslint",
+    "bundle": "just-scripts bundle --useMetro --platform win32",
     "start": "just-scripts dev",
     "start-test": "just-scripts jest-watch",
     "update-snapshots": "just-scripts jest -u",

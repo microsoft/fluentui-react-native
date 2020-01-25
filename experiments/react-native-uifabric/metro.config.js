@@ -17,10 +17,6 @@ const uifabricsharedPackages = Object.keys(allPackages).reduce(
 
 const additionalWatchFolders = uifabricsharedPackages.map(package => pathToSymLinkedPackage(package));
 
-const extraNodeModules = {
-  'react-native': path.resolve(__dirname, '../../node_modules/@office-iss/react-native-win32')
-};
-
 module.exports = {
   // WatchFolders is only needed due to the yarn workspace layout of node_modules, we need to watch the symlinked locations separately
   watchFolders: [
@@ -31,7 +27,9 @@ module.exports = {
   ],
 
   resolver: {
-    extraNodeModules,
+    extraNodeModules: {
+      'react-native': path.resolve(__dirname, '../../node_modules/@office-iss/react-native-win32')
+    },
     blacklistRE: blacklist([
       new RegExp(`${path.resolve('../..', 'node_modules/react-native').replace(/[/\\\\]/g, '[/\\\\]')}.*`),
       new RegExp(
