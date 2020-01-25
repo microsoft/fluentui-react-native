@@ -36,7 +36,8 @@ exports.metroPackTask = function(platform) {
       platform: platform,
       entry: (options && options.entry) || './lib/index.js',
       minify: (options && options.minify) || true,
-      out: outputBundlePath
+      out: outputBundlePath,
+      optimize: true
     });
 
     done();

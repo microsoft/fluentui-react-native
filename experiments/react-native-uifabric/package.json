@@ -18,7 +18,8 @@
     "update-snapshots": "just-scripts jest -u",
     "verify-api": "just-scripts verify-api-extractor",
     "update-api": "just-scripts update-api-extractor",
-    "run-win32": "rex-win32 --bundle RNTester.win32 --component RNTesterApp --basePath ./dist/win32/dev",
+    "build:tester": "just-scripts bundle --useMetro --platform win32 --entry",
+    "run-win32": "rex-win32 --bundle RNTester.win32 --component RNTesterApp --basePath ./dist",
     "run-win32-web": "rex-win32 --bundle RNTester.win32 --component RNTesterApp --basePath ./dist/win32/dev --useWebDebugger"
   },
   "dependencies": {
@@ -53,6 +54,7 @@
     "enzyme-adapter-react-16": "^1.0.0",
     "enzyme-to-json": "^3.1.1",
     "office-ui-fabric-react": "^7.28.2",
+    "metro-react-native-babel-preset": "0.58.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-native": "https://github.com/microsoft/react-native/archive/v0.60.0-microsoft.35.tar.gz",

@@ -48,5 +48,6 @@ module.exports = {
         inlineRequires: false
       }
     })
-  }
+  },
+  resetCache: true
 };
