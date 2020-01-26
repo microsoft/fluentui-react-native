@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 
 export const personaCoinName = 'RNFPersonaCoin';
@@ -46,7 +47,7 @@ export enum PersonaPresence {
   busy
 }
 
-export interface PersonaCoinIcon {
+export interface IPersonaCoinIcon {
   url: string;
 }
 
@@ -58,5 +59,18 @@ export interface IPersonaCoinProps extends IViewWin32Props {
   coinColor?: PersonaCoinColor;
   presence?: PersonaPresence;
   isOutOfOffice?: boolean;
-  customIcon?: PersonaCoinIcon;
+  customIcon?: IPersonaCoinIcon;
+}
+
+export interface IPersonaCoinSlotProps {
+  root: React.PropsWithoutRef<IViewWin32Props>;
+  icon: IPersonaCoinIcon;
+}
+
+export interface IPersonaCoinTokens {}
+
+export interface IPersonaCoinType {
+  props: IPersonaCoinProps;
+  slotProps: IPersonaCoinSlotProps;
+  tokens: IPersonaCoinTokens;
 }
