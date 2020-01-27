@@ -49,5 +49,5 @@ module.exports = {
       }
     })
   },
-  resetCache: true
+  resetCache: false
 };

@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const justTask = require('just-task');
 
-function loadOptionsFromPackagesJson(platform) {
+function loadOptionsFromPackagesJson(bundleName) {
   const packageConfigPath = path.resolve('.', 'package.json');
   const packageConfig = JSON.parse(fs.readFileSync(packageConfigPath, 'utf8'));
 
@@ -13,17 +13,17 @@ function loadOptionsFromPackagesJson(platform) {
     return {};
   }
 
-  return packageConfig.metroBundles[platform];
+  return packageConfig.metroBundles[bundleName];
 }
 
-exports.metroPackTask = function(platform) {
+exports.metroPackTask = function(bundleName) {
   return async function metroPack(done) {
-    justTask.logger.verbose(`Starting metropack task with platform ${platform}...`);
+    justTask.logger.verbose(`Starting metropack task with platform ${bundleName}...`);
 
-    const options = loadOptionsFromPackagesJson(platform);
+    const options = loadOptionsFromPackagesJson(bundleName);
     const outputBundlePath = options && options.output;
     if (!outputBundlePath) {
-      throw new Error(`Couldn't find the 'metroBundles/${platform}/output' attribute in your packages.json file.`);
+      throw new Error(`Couldn't find the 'metroBundles/${bundleName}/output' attribute in your packages.json file.`);
     }
     const config = await Metro.loadConfig();
 
@@ -32,9 +32,13 @@ exports.metroPackTask = function(platform) {
       fs.mkdirSync(parentDirectory);
     }
 
+    const entryFile = (options && options.entry) || './lib/index.js';
+    justTask.logger.info(`Entry file ${entryFile}.`);
+    justTask.logger.info(`Output file ${outputBundlePath}.`);
+
     await Metro.runBuild(config, {
-      platform: platform,
-      entry: (options && options.entry) || './lib/index.js',
+      platform: (options && options.platform) || 'win32',
+      entry: entryFile,
       minify: (options && options.minify) || true,
       out: outputBundlePath,
       optimize: true

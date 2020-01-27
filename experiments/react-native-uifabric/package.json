@@ -12,13 +12,13 @@
     "clean": "just-scripts clean",
     "code-style": "just-scripts code-style",
     "lint": "just-scripts eslint",
-    "bundle": "just-scripts bundle --useMetro --platform win32",
+    "bundle": "just-scripts bundle --useMetro --bundleName uifabric",
     "start": "just-scripts dev",
     "start-test": "just-scripts jest-watch",
     "update-snapshots": "just-scripts jest -u",
     "verify-api": "just-scripts verify-api-extractor",
     "update-api": "just-scripts update-api-extractor",
-    "build:tester": "just-scripts bundle --useMetro --platform win32 --entry",
+    "build:tester": "just-scripts bundle --useMetro --bundleName rnTester",
     "run-win32": "rex-win32 --bundle RNTester.win32 --component RNTesterApp --basePath ./dist",
     "run-win32-web": "rex-win32 --bundle RNTester.win32 --component RNTesterApp --basePath ./dist/win32/dev --useWebDebugger"
   },
@@ -66,8 +66,13 @@
     "react-native": "https://github.com/microsoft/react-native/archive/v0.60.0-microsoft.35.tar.gz"
   },
   "metroBundles": {
-    "win32": {
+    "uifabric": {
+      "entry": "./lib/index.js",
       "output": "./dist/react-native-uifabric.win32.js"
+    },
+    "rnTester": {
+      "entry": "./lib/rntester.js",
+      "output": "./dist/rntester.win32.js"
     }
   },
   "author": "",
