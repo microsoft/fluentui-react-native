@@ -20,7 +20,7 @@
     "update-api": "just-scripts update-api-extractor",
     "build:tester": "just-scripts bundle --useMetro --bundleName rnTester",
     "run-win32": "rex-win32 --bundle RNTester.win32 --component RNTesterApp --basePath ./dist",
-    "run-win32-web": "rex-win32 --bundle RNTester.win32 --component RNTesterApp --basePath ./dist/win32/dev --useWebDebugger"
+    "run-win32-web": "rex-win32 --bundle RNTester.win32 --component RNTesterApp --basePath ./dist --useWebDebugger"
   },
   "dependencies": {
     "@uifabricshared/foundation-composable": "0.5.1",
@@ -71,8 +71,8 @@
       "output": "./dist/react-native-uifabric.win32.js"
     },
     "rnTester": {
-      "entry": "./lib/rntester.js",
-      "output": "./dist/rntester.win32.js"
+      "entry": "./lib/RNTester.js",
+      "output": "./dist/RNTester.win32.js"
     }
   },
   "author": "",
