@@ -44,6 +44,8 @@ exports.metroPackTask = function(bundleName) {
       optimize: true
     });
 
-    done();
+    if (done) {
+      done();
+    }
   };
 };
