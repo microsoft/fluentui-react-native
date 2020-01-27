@@ -12,7 +12,7 @@ const { sass } = require('./tasks/sass');
 const { ts } = require('./tasks/ts');
 const { eslint } = require('./tasks/eslint');
 const { webpack, webpackDevServer } = require('./tasks/webpack');
-const { metroPack } = require('./tasks/metro-pack');
+const { metroPackTask } = require('./tasks/metro-pack');
 const { verifyApiExtractor, updateApiExtractor } = require('./tasks/api-extractor');
 const prettier = require('./tasks/prettier');
 const bundleSizeCollect = require('./tasks/bundle-size-collect');
@@ -48,7 +48,7 @@ module.exports = function preset() {
   task('eslint', eslint);
   task('ts:commonjs-only', ts.commonjsOnly);
   task('webpack', webpack);
-  task('metroPack', metroPack);
+  task('metroPack', metroPackTask(argv()['bundleName']));
   task('webpack-dev-server', webpackDevServer);
   task('verify-api-extractor', verifyApiExtractor);
   task('update-api-extractor', updateApiExtractor);
@@ -70,18 +70,9 @@ module.exports = function preset() {
 
   task('build:node-lib', series('clean', 'copy', series(condition('validate', () => !argv().min), 'ts:commonjs-only'))).cached();
 
-  task(
-    'build',
-    series(
-      'clean',
-      'copy',
-      'sass',
-      parallel(
-        condition('validate', () => !argv().min),
-        series('ts', parallel(condition(argv().useMetro ? 'metroPack' : 'webpack', () => !argv().min)))
-      )
-    )
-  ).cached();
+  task('bundle', argv().useMetro ? 'metroPack' : 'webpack').cached();
+
+  task('build', series('clean', 'copy', 'sass', parallel(condition('validate', () => !argv().min), 'ts'))).cached();
 
   task('no-op', () => {}).cached();
 };

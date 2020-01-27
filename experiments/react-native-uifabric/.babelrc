@@ -1,0 +1,3 @@
+{
+  "presets": ["env", "react", "stage-2", "module:metro-react-native-babel-preset"]
+}

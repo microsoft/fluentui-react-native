@@ -11,6 +11,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "just-scripts build",
+    "bundle": "just-scripts bundle",
     "just": "just-scripts",
     "clean": "just-scripts clean",
     "code-style": "just-scripts code-style",
@@ -29,7 +30,7 @@
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "react-native": "^0.59.0",
-    "metro-react-native-babel-preset": "0.57.0"
+    "metro-react-native-babel-preset": "0.58.0"
   },
   "beachball": {
     "disallowedChangeTypes": [
