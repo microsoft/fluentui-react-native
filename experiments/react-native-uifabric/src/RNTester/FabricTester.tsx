@@ -43,11 +43,11 @@ const Panel: React.FunctionComponent = () => {
   const theme = useTheme();
   return (
     <ReactNative.View style={[styles.viewStyle, styles.stackStyle, { backgroundColor: theme.colors.background }]}>
-      <PrimaryButton onPress={onClick} content="Primary Button" disabled={disabled} />
-      <Button onPress={onClick} content="Default Button" disabled={disabled} />
-      <StealthButton onPress={onClick} content="Stealth Button" disabled={disabled} />
+      <PrimaryButton onClick={onClick} content="Primary Button" disabled={disabled} />
+      <Button onClick={onClick} content="Default Button" disabled={disabled} />
+      <StealthButton onClick={onClick} content="Stealth Button" disabled={disabled} />
       <Text>This is a text element</Text>
-      <Button onPress={onClick} content="This button has longer text" disabled={disabled} />
+      <Button onClick={onClick} content="This button has longer text" disabled={disabled} />
     </ReactNative.View>
   );
 };

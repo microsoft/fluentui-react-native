@@ -85,7 +85,7 @@ export interface IButtonTokens extends ITextTokens, IForegroundColorTokens, IBac
   icon?: string;
 }
 
-export interface IButtonProps extends IPressableProps {
+export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
   /*
    * Text to show on the Button.
    */
@@ -99,6 +99,10 @@ export interface IButtonProps extends IPressableProps {
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
+  /**
+   * A callback to call on button clock event
+   */
+  onClick?:  () => void;
 }
 
 export interface IButtonSlotProps {

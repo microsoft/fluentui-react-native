@@ -18,9 +18,9 @@ export const ButtonTest: React.FunctionComponent<{}> = () => {
   }, [state, setState]);
 
   return (
-    <Stack style={ stackStyle }>
-      <Button content={ state.focused ? 'Focused' : 'Not Focused' } componentRef={ buttonRef } accessibilityLabel='overridden button name' />
-      <Button content="Click to focus" onPress={ onFocus } />
+    <Stack style={stackStyle}>
+      <Button content={state.focused ? 'Focused' : 'Not Focused'} componentRef={buttonRef} accessibilityLabel='overridden button name' />
+      <Button content="Click to focus" onClick={onFocus} />
     </Stack>
   );
 };
