@@ -100,9 +100,9 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
    */
   componentRef?: React.RefObject<IFocusable>;
   /**
-   * A callback to call on button clock event
+   * A callback to call on button click event
    */
-  onClick?:  () => void;
+  onClick?: () => void;
 }
 
 export interface IButtonSlotProps {
