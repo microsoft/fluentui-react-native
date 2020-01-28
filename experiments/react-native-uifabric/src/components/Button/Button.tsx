@@ -17,7 +17,7 @@ export const Button = compose<IButtonType>({
     const {
       icon,
       content,
-      onAccessibilityTap = userProps.onPress,
+      onAccessibilityTap = userProps.onClick,
       accessibilityLabel = userProps.content,
       onClick,
       ...rest
