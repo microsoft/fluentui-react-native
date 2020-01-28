@@ -2,7 +2,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "es5",
-    "module": "commonjs",
     "jsx": "react",
     "outDir": "lib",
     "declaration": true,

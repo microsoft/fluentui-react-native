@@ -48,7 +48,7 @@ export const Button = compose<IButtonType>({
       <Slots.root>
         {info.icon && <Slots.icon />}
         {info.content && <Slots.content />}
-        {...children}
+        {children}
       </Slots.root>
     );
   },

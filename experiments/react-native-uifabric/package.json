@@ -13,14 +13,14 @@
     "code-style": "just-scripts code-style",
     "lint": "just-scripts eslint",
     "bundle": "just-scripts bundle --useMetro --bundleName uifabric",
-    "start": "just-scripts dev",
+    "start:tester": "react-native start --projectRoot ./src",
     "start-test": "just-scripts jest-watch",
     "update-snapshots": "just-scripts jest -u",
     "verify-api": "just-scripts verify-api-extractor",
     "update-api": "just-scripts update-api-extractor",
     "build:tester": "just-scripts bundle --useMetro --bundleName rnTester",
-    "run-win32": "rex-win32 --bundle RNTester.win32 --component RNTesterApp --basePath ./dist",
-    "run-win32-web": "rex-win32 --bundle RNTester.win32 --component RNTesterApp --basePath ./dist --useWebDebugger"
+    "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist",
+    "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger"
   },
   "dependencies": {
     "@uifabricshared/foundation-composable": "0.5.1",
@@ -43,7 +43,7 @@
     "@types/node": "^12.11.2",
     "@types/prop-types": "15.5.1",
     "@types/react": "16.9.11",
-    "@types/react-dom": "16.0.7",
+    "@types/react-dom": "16.9.5",
     "@types/react-native": "0.60.19",
     "@types/react-test-renderer": "16.9.0",
     "@types/webpack-env": "1.13.6",
@@ -56,10 +56,7 @@
     "office-ui-fabric-react": "^7.28.2",
     "metro-react-native-babel-preset": "0.58.0",
     "react": "16.8.6",
-    "react-dom": "16.8.6",
-    "react-native": "https://github.com/microsoft/react-native/archive/v0.60.0-microsoft.35.tar.gz",
-    "react-native-windows": "0.60.0-vnext.115",
-    "react-test-renderer": "16.8.6"
+    "react-native": "https://github.com/microsoft/react-native/archive/v0.60.0-microsoft.35.tar.gz"
   },
   "peerDependencies": {
     "react": "^16.0.0",
@@ -68,11 +65,11 @@
   "metroBundles": {
     "uifabric": {
       "entry": "./lib/index.js",
-      "output": "./dist/react-native-uifabric.win32.js"
+      "output": "./dist/react-native-uifabric.bundle"
     },
     "rnTester": {
       "entry": "./lib/RNTester.js",
-      "output": "./dist/RNTester.win32.js"
+      "output": "./dist/RNTester.bundle"
     }
   },
   "author": "",
