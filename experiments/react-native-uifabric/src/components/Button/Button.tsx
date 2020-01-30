@@ -23,7 +23,7 @@ export const Button = compose<IButtonType>({
       ...rest
     } = userProps;
     // attach the pressable state handlers
-    const pressable = useAsPressable(rest && {onPress: onClick});
+    const pressable = useAsPressable(rest && { onPress: onClick });
     // set up state
     const state: IButtonState = {
       info: {
@@ -43,7 +43,7 @@ export const Button = compose<IButtonType>({
         ...pressable.props,
         ref: buttonRef,
         onAccessibilityTap: onAccessibilityTap,
-        accessibilityLabel: accessibilityLabel,
+        accessibilityLabel: accessibilityLabel
       },
       content: { children: content },
       icon: { source: icon }
@@ -59,9 +59,9 @@ export const Button = compose<IButtonType>({
     return (
       <Slots.root>
         <Slots.stack>
-          { info.icon && <Slots.icon source={ renderData.slotProps!.icon.source } /> }
-          { info.content && <Slots.content /> }
-          { ...children }
+          {info.icon && <Slots.icon source={renderData.slotProps!.icon.source} />}
+          {info.content && <Slots.content />}
+          {children}
         </Slots.stack>
       </Slots.root>
     );

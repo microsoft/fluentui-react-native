@@ -44,6 +44,16 @@ exports.metroPackTask = function(bundleName) {
       optimize: true
     });
 
+    // if the output file's extension is not '.js', metro appends the '.js' to it (how rude!)
+    // we'll rename the bundle file back to the desired name.
+    if (!outputBundlePath.endsWith('.js')) {
+      const metroBundlePath = outputBundlePath + '.js';
+      if (fs.existsSync(metroBundlePath) && !fs.existsSync(outputBundlePath)) {
+        justTask.logger.verbose(`Renaming ${metroBundlePath} to ${outputBundlePath}...`);
+        fs.renameSync(metroBundlePath, outputBundlePath);
+      }
+    }
+
     if (done) {
       done();
     }
