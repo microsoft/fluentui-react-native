@@ -18,6 +18,10 @@ const EmptyComponent: React.FunctionComponent = () => {
   return <Text fontSize={14} style={fabricTesterStyles.noTest}>Select a component from the left.</Text>;
 }
 
+const sortedTestComponents = allTestComponents.sort(
+  (a, b) => a.name.localeCompare(b.name)
+);
+
 const TestListSeparator = Separator.customize(
   {
     tokens: {
@@ -30,21 +34,20 @@ const TestListSeparator = Separator.customize(
 export const FabricTester: React.FunctionComponent<{}> = ()=> {
 
   const [selectedTestIndex, setSelectedTestIndex] = React.useState(-1);
-  const clickCallback = React.useCallback(setSelectedTestIndex, []);
 
-  const TestComponent = selectedTestIndex == -1 ? EmptyComponent : allTestComponents[selectedTestIndex].component;
+  const TestComponent = selectedTestIndex == -1 ? EmptyComponent : sortedTestComponents[selectedTestIndex].component;
 
   return (
     <ViewWin32 style={fabricTesterStyles.root}>     
       <ScrollView style={fabricTesterStyles.testList} contentContainerStyle={fabricTesterStyles.testListContainerStyle}>
         {
-          allTestComponents.map((description, index) => {
+          sortedTestComponents.map((description, index) => {
             return (
               <StealthButton
                 key={index} 
                 disabled={index == selectedTestIndex}
                 content={description.name}
-                onPress={()=>clickCallback(index)}
+                onPress={()=>setSelectedTestIndex(index)}
                 style={fabricTesterStyles.testListItem} />
             );
           })
