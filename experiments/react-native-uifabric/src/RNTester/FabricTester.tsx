@@ -18,6 +18,7 @@ const EmptyComponent: React.FunctionComponent = () => {
   return <Text fontSize={14} style={fabricTesterStyles.noTest}>Select a component from the left.</Text>;
 }
 
+// sort tests alphabetically by name 
 const sortedTestComponents = allTestComponents.sort(
   (a, b) => a.name.localeCompare(b.name)
 );
@@ -35,7 +36,9 @@ export const FabricTester: React.FunctionComponent<{}> = ()=> {
 
   const [selectedTestIndex, setSelectedTestIndex] = React.useState(-1);
 
-  const TestComponent = selectedTestIndex == -1 ? EmptyComponent : sortedTestComponents[selectedTestIndex].component;
+  const TestComponent = (selectedTestIndex == -1)
+    ? EmptyComponent 
+    : sortedTestComponents[selectedTestIndex].component;
 
   return (
     <ViewWin32 style={fabricTesterStyles.root}>     
