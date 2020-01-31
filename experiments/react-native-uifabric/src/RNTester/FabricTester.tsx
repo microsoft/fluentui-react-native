@@ -36,7 +36,7 @@ export interface IFabricTesterProps {
   initialTest?: string;
 }
 
-export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props)=> {
+export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props: IFabricTesterProps)=> {
   const { initialTest } = props;
   const initialSelectedTestIndex = sortedTestComponents.findIndex(
     (description) => {
