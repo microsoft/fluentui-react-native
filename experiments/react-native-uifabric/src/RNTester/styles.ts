@@ -19,8 +19,8 @@ export const commonTestStyles = ReactNative.StyleSheet.create({
 });
 
 export const fabricTesterStyles = ReactNative.StyleSheet.create({
-  root: { 
-    flexDirection: 'row', 
+  root: {
+    flexDirection: 'row',
     minHeight: 500,
     minWidth: 300,
     justifyContent: 'flex-start',
@@ -29,6 +29,8 @@ export const fabricTesterStyles = ReactNative.StyleSheet.create({
   },
 
   testHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 8
   },
 
@@ -37,7 +39,7 @@ export const fabricTesterStyles = ReactNative.StyleSheet.create({
   },
 
   testListContainerStyle: {
-    flexDirection: 'column', 
+    flexDirection: 'column',
     alignItems: 'stretch'
   },
 
@@ -52,5 +54,5 @@ export const fabricTesterStyles = ReactNative.StyleSheet.create({
 
   noTest: {
     alignSelf: 'center'
-  },
+  }
 });
