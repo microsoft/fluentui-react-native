@@ -47,10 +47,6 @@ export enum PersonaPresence {
   busy
 }
 
-export interface IPersonaCoinIcon {
-  url: string;
-}
-
 export interface IPersonaCoinProps extends IViewWin32Props {
   size?: PersonaSize;
   imageUrl?: string;
@@ -59,12 +55,10 @@ export interface IPersonaCoinProps extends IViewWin32Props {
   coinColor?: PersonaCoinColor;
   presence?: PersonaPresence;
   isOutOfOffice?: boolean;
-  customIcon?: IPersonaCoinIcon;
 }
 
 export interface IPersonaCoinSlotProps {
   root: React.PropsWithoutRef<IViewWin32Props>;
-  icon: IPersonaCoinIcon;
 }
 
 export interface IPersonaCoinTokens {}

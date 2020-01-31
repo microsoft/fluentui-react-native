@@ -5,6 +5,7 @@ import { LinkTest } from './LinkTest.win32';
 import { SeparatorTest } from './SeparatorTest';
 import { ThemeTest } from './ThemeTest';
 import { FocusTrapTest } from './FocusTrapZoneTest';
+import { PersonaCoinTest } from './PersonaCoinTest';
 
 export type TestDescription = {
     name: string;
@@ -33,7 +34,11 @@ export const allTestComponents: TestDescription[] = [
         component: SeparatorTest
     },
     {
-        name: 'ThemeTest',
+        name: 'Theme Test',
         component: ThemeTest
     },
+    {
+        name: 'PersonaCoin Test',
+        component: PersonaCoinTest
+    }
 ];
