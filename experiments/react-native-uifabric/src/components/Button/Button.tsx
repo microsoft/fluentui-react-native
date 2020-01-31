@@ -14,13 +14,7 @@ import { useAsPressable, useViewCommandFocus } from '../../hooks';
 export const Button = compose<IButtonType>({
   displayName: buttonName,
   usePrepareProps: (userProps: IButtonProps, useStyling: IUseComposeStyling<IButtonType>) => {
-    const {
-      icon,
-      content,
-      onAccessibilityTap = userProps.onPress,
-      accessibilityLabel = userProps.content,
-      ...rest
-    } = userProps;
+    const { icon, content, onAccessibilityTap = userProps.onPress, accessibilityLabel = userProps.content, ...rest } = userProps;
     // attach the pressable state handlers
     const pressable = useAsPressable(rest);
     // set up state
@@ -42,7 +36,7 @@ export const Button = compose<IButtonType>({
         ...pressable.props,
         ref: buttonRef,
         onAccessibilityTap: onAccessibilityTap,
-        accessibilityLabel: accessibilityLabel,
+        accessibilityLabel: accessibilityLabel
       },
       content: { children: content },
       icon: { source: icon }
@@ -58,9 +52,9 @@ export const Button = compose<IButtonType>({
     return (
       <Slots.root>
         <Slots.stack>
-          { info.icon && <Slots.icon source={ renderData.slotProps!.icon.source } /> }
-          { info.content && <Slots.content /> }
-          { ...children }
+          {info.icon && <Slots.icon source={renderData.slotProps!.icon.source} />}
+          {info.content && <Slots.content />}
+          {children}
         </Slots.stack>
       </Slots.root>
     );
