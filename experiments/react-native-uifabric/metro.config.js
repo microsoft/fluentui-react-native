@@ -25,7 +25,15 @@ module.exports = {
     path.resolve(__dirname, '../..', 'node_modules/@office-iss/react-native-win32'),
     ...additionalWatchFolders
   ],
-
+  serializer: {
+    getPolyfills: () => {
+      return [
+        '../../node_modules/@office-iss/react-native-win32/Libraries/polyfills/console.js',
+        '../../node_modules/@office-iss/react-native-win32/Libraries/polyfills/error-guard.js',
+        '../../node_modules/@office-iss/react-native-win32/Libraries/polyfills/Object.es7.js'
+      ];
+    }
+  },
   resolver: {
     extraNodeModules: {
       'react-native': path.resolve(__dirname, '../../node_modules/@office-iss/react-native-win32')
@@ -49,5 +57,5 @@ module.exports = {
       }
     })
   },
-  resetCache: true
+  resetCache: false
 };

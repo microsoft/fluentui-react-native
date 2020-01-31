@@ -48,7 +48,7 @@ module.exports = function preset() {
   task('eslint', eslint);
   task('ts:commonjs-only', ts.commonjsOnly);
   task('webpack', webpack);
-  task('metroPack', metroPackTask(argv()['platform']));
+  task('metroPack', metroPackTask(argv()['bundleName']));
   task('webpack-dev-server', webpackDevServer);
   task('verify-api-extractor', verifyApiExtractor);
   task('update-api-extractor', updateApiExtractor);

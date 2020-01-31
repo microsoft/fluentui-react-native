@@ -1,15 +1,10 @@
 import * as React from 'react';
-import * as ReactNative from 'react-native';
 import { ScrollView } from 'react-native';
-import { Stack, Text, Button, Pressable, IPressableState, PrimaryButton, StealthButton } from '../components';
-import { Square } from './Square';
+import { StealthButton, Text, Separator } from '../components';
 import { registerThemes } from './CustomThemes';
-import { ThemeProvider, useTheme } from '@uifabricshared/theming-react-native';
-import { FocusTrapTest } from './FocusTrapZoneTest';
-import { SeparatorTest } from './SeparatorTest';
-import { LinkTest } from './LinkTest.win32';
-import { ButtonTest } from './ButtonTest';
-// import RNTesterApp = require('./RNTester.win32');
+import { allTestComponents } from './TestComponents';
+import { ViewWin32 } from '@office-iss/react-native-win32';
+import { fabricTesterStyles } from './styles';
 
 // uncomment the below lines to enable message spy
 /*
@@ -19,70 +14,56 @@ msgq.spy(true);
 
 registerThemes();
 
-const styles = ReactNative.StyleSheet.create({
-  viewStyle: {
-    minHeight: 200,
-    justifyContent: 'space-between'
-  },
-  stackStyle: {
-    borderWidth: 2,
-    borderColor: '#bdbdbd',
-    padding: 12,
-    margin: 8
-  },
-  separatorStackStyle: {
-    height: 200,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly'
-  }
-});
+const EmptyComponent: React.FunctionComponent = () => {
+  return <Text fontSize={14} style={fabricTesterStyles.noTest}>Select a component from the left.</Text>;
+}
 
-const Panel: React.FunctionComponent = () => {
-  const [disabled, setDisabled] = React.useState(false);
-  const onClick = React.useCallback(() => setDisabled(!disabled), [disabled, setDisabled]);
-  const theme = useTheme();
+// sort tests alphabetically by name 
+const sortedTestComponents = allTestComponents.sort(
+  (a, b) => a.name.localeCompare(b.name)
+);
+
+const TestListSeparator = Separator.customize(
+  {
+    tokens: {
+      color: 'darkGray',
+      separatorWidth: 2
+    }
+  }
+);
+
+export const FabricTester: React.FunctionComponent<{}> = ()=> {
+
+  const [selectedTestIndex, setSelectedTestIndex] = React.useState(-1);
+
+  const TestComponent = (selectedTestIndex == -1)
+    ? EmptyComponent 
+    : sortedTestComponents[selectedTestIndex].component;
+
   return (
-    <ReactNative.View style={[styles.viewStyle, styles.stackStyle, { backgroundColor: theme.colors.background }]}>
-      <PrimaryButton onPress={onClick} content="Primary Button" disabled={disabled} />
-      <Button onPress={onClick} content="Default Button" disabled={disabled} />
-      <StealthButton onPress={onClick} content="Stealth Button" disabled={disabled} />
-      <Text>This is a text element</Text>
-      <Button onPress={onClick} content="This button has longer text" disabled={disabled} />
-    </ReactNative.View>
-  );
-};
-
-export class FabricTester extends React.Component<{}, { c: number; t: string }> {
-  constructor(props: object) {
-    super(props);
-    this.state = { c: 0, t: 'Clicked 0 times' };
-  }
-
-  public render(): JSX.Element {
-    return (
-      <ScrollView>
-        <Stack gap={2}>
-          <Stack horizontal gap={5}>
-            <Square color="blue" />
-            <Pressable renderStyle={this._pressableRenderStyle}>
-              <Square />
-            </Pressable>
-            <Square color="green" />
-          </Stack>
-          <Panel />
-          <ThemeProvider theme="Caterpillar">
-            <Panel />
-          </ThemeProvider>
-          <FocusTrapTest />
-          <SeparatorTest />
-          <LinkTest />
-          <ButtonTest />
-        </Stack>
+    <ViewWin32 style={fabricTesterStyles.root}>     
+      <ScrollView style={fabricTesterStyles.testList} contentContainerStyle={fabricTesterStyles.testListContainerStyle}>
+        <Text fontSize={14} fontWeight='bold' style={fabricTesterStyles.testHeader}>⚛ FluentUI Tests</Text>
+        
+        {
+          sortedTestComponents.map((description, index) => {
+            return (
+              <StealthButton
+                key={index} 
+                disabled={index == selectedTestIndex}
+                content={description.name}
+                onPress={()=>setSelectedTestIndex(index)}
+                style={fabricTesterStyles.testListItem} />
+            );
+          })
+        }
       </ScrollView>
-    );
-  }
 
-  private _pressableRenderStyle = (state: IPressableState): ReactNative.ViewStyle => {
-    return (state.pressed && { opacity: 0.5 }) || {};
-  };
+      <TestListSeparator vertical style={fabricTesterStyles.separator} />
+
+      <ScrollView>
+          <TestComponent />
+      </ScrollView>
+    </ViewWin32>
+  );
 }
