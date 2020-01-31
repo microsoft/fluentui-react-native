@@ -26,5 +26,9 @@ steps:
     displayName: 'npm run build'
 
   - script: |
+      yarn check-for-changed-files
+    displayName: 'Verify API and Ensure Changed Files'
+
+  - script: |
       yarn bundle
     displayName: 'yarn bundle'
