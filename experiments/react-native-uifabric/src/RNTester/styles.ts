@@ -28,6 +28,10 @@ export const fabricTesterStyles = ReactNative.StyleSheet.create({
     padding: 4
   },
 
+  testHeader: {
+    marginBottom: 8
+  },
+
   testList: {
     width: 160
   },
