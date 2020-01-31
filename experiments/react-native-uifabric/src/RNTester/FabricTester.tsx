@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { ScrollView, Image } from 'react-native';
-import { StealthButton, Text, Separator, Stack } from '../components';
+import { ScrollView } from 'react-native';
+import { StealthButton, Text, Separator } from '../components';
 import { registerThemes } from './CustomThemes';
 import { allTestComponents } from './TestComponents';
 import { ViewWin32 } from '@office-iss/react-native-win32';
 import { fabricTesterStyles } from './styles';
-const reactLogo = require('./images/react.png');
 
 // uncomment the below lines to enable message spy
 /*
@@ -41,7 +40,7 @@ export const FabricTester: React.FunctionComponent<{}> = ()=> {
   return (
     <ViewWin32 style={fabricTesterStyles.root}>     
       <ScrollView style={fabricTesterStyles.testList} contentContainerStyle={fabricTesterStyles.testListContainerStyle}>
-        <Text fontSize={14} fontWeight='bold' style={fabricTesterStyles.testHeader}>⚛Fabric Tests</Text>
+        <Text fontSize={14} fontWeight='bold' style={fabricTesterStyles.testHeader}>⚛ FluentUI Tests</Text>
         
         {
           sortedTestComponents.map((description, index) => {
