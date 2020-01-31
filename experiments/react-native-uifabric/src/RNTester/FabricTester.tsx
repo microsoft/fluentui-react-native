@@ -32,9 +32,19 @@ const TestListSeparator = Separator.customize(
   }
 );
 
-export const FabricTester: React.FunctionComponent<{}> = ()=> {
+export interface IFabricTesterProps {
+  initialTest?: string;
+}
 
-  const [selectedTestIndex, setSelectedTestIndex] = React.useState(-1);
+export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props: IFabricTesterProps)=> {
+  const { initialTest } = props;
+  const initialSelectedTestIndex = sortedTestComponents.findIndex(
+    (description) => {
+      return description.name === initialTest;
+    }
+  );
+
+  const [selectedTestIndex, setSelectedTestIndex] = React.useState(initialSelectedTestIndex);
 
   const TestComponent = (selectedTestIndex == -1)
     ? EmptyComponent 
