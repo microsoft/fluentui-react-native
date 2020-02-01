@@ -1,4 +1,4 @@
-import { PersonaSize } from './PersonaCoin.types';
+import { PersonaSize, PersonaCoinColor } from './PersonaCoin.types';
 
 export function getPhysicalSize(size: PersonaSize): number {
     switch (size) {
@@ -24,5 +24,9 @@ export function getPhysicalSize(size: PersonaSize): number {
       case PersonaSize.size72: return 20;
       case PersonaSize.size100: return 36;
     }
+  }
+
+  export function convertCoinColor(coinColor?: PersonaCoinColor): string | undefined {
+    return (coinColor === undefined) ? undefined : PersonaCoinColor[coinColor];     
   }
   

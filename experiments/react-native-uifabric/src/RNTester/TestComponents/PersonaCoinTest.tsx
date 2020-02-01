@@ -20,8 +20,9 @@ export const PersonaCoinTest: React.FunctionComponent<{}> = () => {
             <PersonaCoin
               size={PersonaSize.size100}
               initials='SN'
+              imageDescription="Photo of Satya Nadella"
               imageUrl={showImage ? 'https://www.microsoft.com/en-us/CMSImages/satya.jpg?version=0881eb71-4942-b627-d602-84c832b8a0b6&amp;CollectionId=1b46ce2d-c90d-421e-94f1-cfb6bc6ef6ec' : undefined}
-              coinColor={PersonaCoinColor.burgundy} />
+              coinColor={PersonaCoinColor.gold} />
         </Stack>
     );
   };
