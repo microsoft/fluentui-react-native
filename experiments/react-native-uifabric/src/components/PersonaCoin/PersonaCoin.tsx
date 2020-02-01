@@ -5,8 +5,9 @@ import { getPhysicalSize, getFontSize, convertCoinColor } from './PersonaCoinHel
 
 export const PersonaCoin: React.FunctionComponent<IPersonaCoinProps> = (props: IPersonaCoinProps) => {
   const { imageUrl, imageDescription, size, initials, coinColor } = props;
+  const normalizedSize = (size === undefined) ? PersonaSize.size40 : size;
   
-  const physicalSize = getPhysicalSize(size || PersonaSize.size40);
+  const physicalSize = getPhysicalSize(normalizedSize);
   const backgroundColor = convertCoinColor(coinColor);
   
   if (imageUrl) {
@@ -19,7 +20,7 @@ export const PersonaCoin: React.FunctionComponent<IPersonaCoinProps> = (props: I
       />
     );
   } else {
-    const fontSize = getFontSize(size || PersonaSize.size40);
+    const fontSize = getFontSize(normalizedSize);
 
     return (
       <View
