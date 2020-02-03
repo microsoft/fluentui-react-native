@@ -1,17 +1,15 @@
 import * as React from 'react';
-import { PersonaCoin, PersonaSize, PersonaCoinColor } from '../../components/PersonaCoin';
+import { PersonaCoin, PersonaSize, PersonaCoinColor, PersonaPresence } from '../../components/PersonaCoin';
 import { Switch, View, Text } from 'react-native';
 import { Picker } from '../Picker/Picker.win32';
 import { PickerItem } from '../Picker/PickerItem';
 import { StyleSheet } from 'react-native';
 
-const allSizes = Object.keys(PersonaSize).filter(item => {
-  return isNaN(Number(item));
-});
-
-const allColors = Object.keys(PersonaCoinColor).filter(item => {
-  return isNaN(Number(item));
-});
+function getAllEnumValues<T extends object>(o: T): string[] {
+  return Object.keys(o).filter(item => {
+    return isNaN(Number(item));
+  });
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -33,10 +31,15 @@ const styles = StyleSheet.create({
   }
 });
 
+const allSizes = getAllEnumValues(PersonaSize);
+const allColors = getAllEnumValues(PersonaCoinColor);
+const allPresences = getAllEnumValues(PersonaPresence);
+
 export const PersonaCoinTest: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [imageSize, setImageSize] = React.useState(PersonaSize.size40);
   const [coinColor, setCoinColor] = React.useState(PersonaCoinColor.gold);
+  const [presence, setPresence] = React.useState(PersonaPresence.none);
 
   return (
     <View style={styles.root}>
@@ -62,6 +65,13 @@ export const PersonaCoinTest: React.FunctionComponent<{}> = () => {
         >
           {allColors.map((color, index) => (
             <PickerItem label={color} key={index} value={color} />
+          ))}
+        </Picker>
+
+        <Text style={styles.header}>Presence Status</Text>
+        <Picker selectedValue={PersonaPresence[presence]} onValueChange={presence => setPresence(PersonaPresence[presence as string])}>
+          {allPresences.map((presence, index) => (
+            <PickerItem label={presence} key={index} value={presence} />
           ))}
         </Picker>
       </View>
