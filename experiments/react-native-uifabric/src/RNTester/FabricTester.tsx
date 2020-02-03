@@ -5,6 +5,7 @@ import { registerThemes } from './CustomThemes';
 import { allTestComponents } from './TestComponents';
 import { ViewWin32 } from '@office-iss/react-native-win32';
 import { fabricTesterStyles } from './styles';
+import { useTheme } from '@uifabricshared/theming-react-native';
 
 // uncomment the below lines to enable message spy
 
@@ -24,13 +25,6 @@ const EmptyComponent: React.FunctionComponent = () => {
 // sort tests alphabetically by name
 const sortedTestComponents = allTestComponents.sort((a, b) => a.name.localeCompare(b.name));
 
-const TestListSeparator = Separator.customize({
-  tokens: {
-    color: 'darkGray',
-    separatorWidth: 2
-  }
-});
-
 export interface IFabricTesterProps {
   initialTest?: string;
 }
@@ -44,6 +38,13 @@ export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props:
   const [selectedTestIndex, setSelectedTestIndex] = React.useState(initialSelectedTestIndex);
 
   const TestComponent = selectedTestIndex == -1 ? EmptyComponent : sortedTestComponents[selectedTestIndex].component;
+
+  const TestListSeparator = Separator.customize({
+    tokens: {
+      color: useTheme().colors.inputBorder,
+      separatorWidth: 2
+    }
+  });
 
   return (
     <ViewWin32 style={fabricTesterStyles.root}>
