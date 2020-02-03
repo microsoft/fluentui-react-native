@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Stack } from '../components';
-import { Button } from '../components';
-import { stackStyle } from './TesterStyles';
-import { IFocusable } from '../hooks';
+import { Stack } from '../../components';
+import { Button } from '../../components';
+import { stackStyle } from '../TesterStyles';
+import { IFocusable } from '../../hooks';
 
-export const ButtonTest: React.FunctionComponent<{}> = () => {
+export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
   const [state, setState] = React.useState({
     focused: false,
   });

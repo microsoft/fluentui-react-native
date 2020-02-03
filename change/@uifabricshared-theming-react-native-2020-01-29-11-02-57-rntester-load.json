@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Get RNTester test app launch for uifabric package.",
+  "packageName": "@uifabricshared/theming-react-native",
+  "email": "kinhln@microsoft.com",
+  "commit": "8d07915aedb53422ccc6ead6103e6684c99fb43a",
+  "date": "2020-01-29T19:02:57.009Z"
+}

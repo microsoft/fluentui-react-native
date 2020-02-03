@@ -25,7 +25,15 @@ module.exports = {
     path.resolve(__dirname, '../..', 'node_modules/@office-iss/react-native-win32'),
     ...additionalWatchFolders
   ],
-
+  serializer: {
+    getPolyfills: () => {
+      return [
+        '../../node_modules/@office-iss/react-native-win32/Libraries/polyfills/console.js',
+        '../../node_modules/@office-iss/react-native-win32/Libraries/polyfills/error-guard.js',
+        '../../node_modules/@office-iss/react-native-win32/Libraries/polyfills/Object.es7.js'
+      ];
+    }
+  },
   resolver: {
     extraNodeModules: {
       'react-native': path.resolve(__dirname, '../../node_modules/@office-iss/react-native-win32')
@@ -35,7 +43,9 @@ module.exports = {
       new RegExp(
         `${path.resolve('../..', 'node_modules/@office-iss/react-native-win32/node_modules/react-native').replace(/[/\\\\]/g, '[/\\\\]')}.*`
       ),
-      new RegExp(`${path.resolve('.', 'node_modules/react-native').replace(/[/\\\\]/g, '[/\\\\]')}.*`)
+      new RegExp(`${path.resolve('.', 'node_modules/react-native').replace(/[/\\\\]/g, '[/\\\\]')}.*`),
+      new RegExp(`${path.resolve('../..', 'node_modules/office-ui-fabric-react').replace(/[/\\\\]/g, '[/\\\\]')}.*`)
+
     ]),
     hasteImplModulePath: path.resolve('../..', 'node_modules/@office-iss/react-native-win32/jest/hasteImpl.js'),
     platforms: ['win32', 'ios', 'android', 'windows', 'web', 'macos'],
