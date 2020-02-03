@@ -5,40 +5,40 @@ import { LinkTest } from './LinkTest.win32';
 import { SeparatorTest } from './SeparatorTest';
 import { ThemeTest } from './ThemeTest';
 import { FocusTrapTest } from './FocusTrapZoneTest';
-import { PersonaCoinTest } from './PersonaCoinTest';
+import { PersonaCoinTest } from './Persona/PersonaCoinTest';
 
 export type TestDescription = {
-    name: string;
-    component: React.FunctionComponent<{}>;
-}
+  name: string;
+  component: React.FunctionComponent<{}>;
+};
 
 export const allTestComponents: TestDescription[] = [
-    {
-        name: 'Button Test',
-        component: ButtonFocusTest
-    },
-    {
-        name: 'Focus Trap Zone Test',
-        component: FocusTrapTest
-    },
-    {
-        name: 'Pressable Test',
-        component: PressableTest
-    },
-    {
-        name: 'Link Test',
-        component: LinkTest
-    },
-    {
-        name: 'Separator Test',
-        component: SeparatorTest
-    },
-    {
-        name: 'Theme Test',
-        component: ThemeTest
-    },
-    {
-        name: 'PersonaCoin Test',
-        component: PersonaCoinTest
-    }
+  {
+    name: 'Button Test',
+    component: ButtonFocusTest
+  },
+  {
+    name: 'Focus Trap Zone Test',
+    component: FocusTrapTest
+  },
+  {
+    name: 'Pressable Test',
+    component: PressableTest
+  },
+  {
+    name: 'Link Test',
+    component: LinkTest
+  },
+  {
+    name: 'Separator Test',
+    component: SeparatorTest
+  },
+  {
+    name: 'Theme Test',
+    component: ThemeTest
+  },
+  {
+    name: 'PersonaCoin Test',
+    component: PersonaCoinTest
+  }
 ];
