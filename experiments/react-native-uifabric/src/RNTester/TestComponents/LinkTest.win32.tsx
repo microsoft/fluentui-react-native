@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as ReactNative from 'react-native';
-import { Stack } from '../components';
-import { Link } from '../components/Link/Link';
+import { Stack } from '../../components';
+import { Link } from '../../components/Link/Link';
 import { Square } from './Square';
-import { stackStyle } from './TesterStyles';
+import { stackStyle } from '../TesterStyles';
 
 export const LinkTest: React.FunctionComponent<{}> = () => {
   const doPress = (): void => {
