@@ -7,73 +7,69 @@ import { ViewWin32 } from '@office-iss/react-native-win32';
 import { fabricTesterStyles } from './styles';
 
 // uncomment the below lines to enable message spy
-/*
-const msgq = require('MessageQueue');
-msgq.spy(true);
-*/
+
+// const msgq = require('MessageQueue');
+// msgq.spy(true);
 
 registerThemes();
 
 const EmptyComponent: React.FunctionComponent = () => {
-  return <Text fontSize={14} style={fabricTesterStyles.noTest}>Select a component from the left.</Text>;
-}
+  return (
+    <Text fontSize={14} style={fabricTesterStyles.noTest}>
+      Select a component from the left.
+    </Text>
+  );
+};
 
-// sort tests alphabetically by name 
-const sortedTestComponents = allTestComponents.sort(
-  (a, b) => a.name.localeCompare(b.name)
-);
+// sort tests alphabetically by name
+const sortedTestComponents = allTestComponents.sort((a, b) => a.name.localeCompare(b.name));
 
-const TestListSeparator = Separator.customize(
-  {
-    tokens: {
-      color: 'darkGray',
-      separatorWidth: 2
-    }
+const TestListSeparator = Separator.customize({
+  tokens: {
+    color: 'darkGray',
+    separatorWidth: 2
   }
-);
+});
 
 export interface IFabricTesterProps {
   initialTest?: string;
 }
 
-export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props: IFabricTesterProps)=> {
+export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props: IFabricTesterProps) => {
   const { initialTest } = props;
-  const initialSelectedTestIndex = sortedTestComponents.findIndex(
-    (description) => {
-      return description.name === initialTest;
-    }
-  );
+  const initialSelectedTestIndex = sortedTestComponents.findIndex(description => {
+    return description.name === initialTest;
+  });
 
   const [selectedTestIndex, setSelectedTestIndex] = React.useState(initialSelectedTestIndex);
 
-  const TestComponent = (selectedTestIndex == -1)
-    ? EmptyComponent 
-    : sortedTestComponents[selectedTestIndex].component;
+  const TestComponent = selectedTestIndex == -1 ? EmptyComponent : sortedTestComponents[selectedTestIndex].component;
 
   return (
-    <ViewWin32 style={fabricTesterStyles.root}>     
+    <ViewWin32 style={fabricTesterStyles.root}>
       <ScrollView style={fabricTesterStyles.testList} contentContainerStyle={fabricTesterStyles.testListContainerStyle}>
-        <Text fontSize={14} fontWeight='bold' style={fabricTesterStyles.testHeader}>⚛ FluentUI Tests</Text>
-        
-        {
-          sortedTestComponents.map((description, index) => {
-            return (
-              <StealthButton
-                key={index} 
-                disabled={index == selectedTestIndex}
-                content={description.name}
-                onPress={()=>setSelectedTestIndex(index)}
-                style={fabricTesterStyles.testListItem} />
-            );
-          })
-        }
+        <Text fontSize={14} fontWeight="bold" style={fabricTesterStyles.testHeader}>
+          ⚛ FluentUI Tests
+        </Text>
+
+        {sortedTestComponents.map((description, index) => {
+          return (
+            <StealthButton
+              key={index}
+              disabled={index == selectedTestIndex}
+              content={description.name}
+              onPress={() => setSelectedTestIndex(index)}
+              style={fabricTesterStyles.testListItem}
+            />
+          );
+        })}
       </ScrollView>
 
       <TestListSeparator vertical style={fabricTesterStyles.separator} />
 
       <ScrollView>
-          <TestComponent />
+        <TestComponent />
       </ScrollView>
     </ViewWin32>
   );
-}
+};
