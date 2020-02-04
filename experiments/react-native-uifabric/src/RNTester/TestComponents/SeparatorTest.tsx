@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Button, Stack, Separator, Text } from '../components';
-import { stackStyle, separatorStackStyle } from './TesterStyles';
+import { Button, Stack, Separator, Text } from '../../components';
+import { stackStyle, separatorStackStyle } from '../TesterStyles';
 
 const BlueSeparator = Separator.customize({ tokens: { color: 'blue' } });
 const RedSeparator = Separator.customize({ tokens: { color: 'red' } });
