@@ -84,6 +84,7 @@ export const PressableTest: React.FunctionComponent<{}> = () => {
         <FocusComponent />
       </Stack>
       <Stack>
+        <Text>Press to alert: </Text>
         <PressComponent />
       </Stack>
     </Stack>
