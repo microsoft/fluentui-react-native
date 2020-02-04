@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Image, View, Text } from 'react-native';
 import { IPersonaCoinProps, PersonaSize, PersonaCoinColor } from './PersonaCoin.types';
-import { getPhysicalSize, getFontSize, convertCoinColor } from './PersonaCoinHelper';
+import { getPhysicalSize, getFontSize, convertCoinColor, getIconSize, getPresenceIconSource } from './PersonaCoinHelper';
 import { StyleSheet } from 'react-native';
 
 interface IPersonaCoinInitials {
@@ -13,7 +13,6 @@ interface IPersonaCoinInitials {
 
 const Initials: React.FunctionComponent<IPersonaCoinInitials> = (props: IPersonaCoinInitials) => {
   const { size, fontSize, coinColor, initials } = props;
-  const backgroundColor = convertCoinColor(coinColor);
 
   return (
     <View
@@ -21,7 +20,7 @@ const Initials: React.FunctionComponent<IPersonaCoinInitials> = (props: IPersona
         borderRadius: size / 2,
         width: size,
         height: size,
-        backgroundColor,
+        backgroundColor: convertCoinColor(coinColor),
         justifyContent: 'center',
         alignItems: 'center'
       }}
@@ -32,16 +31,20 @@ const Initials: React.FunctionComponent<IPersonaCoinInitials> = (props: IPersona
 };
 
 export const PersonaCoin: React.FunctionComponent<IPersonaCoinProps> = (props: IPersonaCoinProps) => {
-  const { imageUrl, imageDescription, size, initials, coinColor, style: propStyle } = props;
+  const { imageUrl, imageDescription, size, initials, coinColor, style: propStyle, presence } = props;
   const normalizedSize = size === undefined ? PersonaSize.size40 : size;
 
   const physicalSize = getPhysicalSize(normalizedSize);
+  const iconSize = getIconSize(normalizedSize);
 
   const rootStyle = StyleSheet.flatten([
     propStyle,
     {
       width: physicalSize,
-      height: physicalSize
+      height: physicalSize,
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      alignItems: 'flex-end'
     }
   ]);
 
@@ -56,6 +59,9 @@ export const PersonaCoin: React.FunctionComponent<IPersonaCoinProps> = (props: I
         />
       ) : (
         <Initials fontSize={getFontSize(normalizedSize)} initials={initials} coinColor={coinColor} size={physicalSize} />
+      )}
+      {!!presence && iconSize > 0 && (
+        <Image source={getPresenceIconSource(presence)} style={{ position: 'absolute', width: iconSize, height: iconSize }} />
       )}
     </View>
   );
