@@ -107,7 +107,7 @@ const FocusComponent: React.FunctionComponent<IViewWin32Props> = (props: IViewWi
   );
 };
 
-/* Pressable that only has focusState */
+/* Pressable that only has pressState */
 const PressComponent: React.FunctionComponent<IViewWin32Props> = (props: IViewWin32Props) => {
   const [pressProps, pressState] = usePressState(props);
 
