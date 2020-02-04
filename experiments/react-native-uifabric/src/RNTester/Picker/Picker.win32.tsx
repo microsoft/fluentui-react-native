@@ -21,6 +21,8 @@ function getValueChangeEvent(pickerProps: PickerProps, children?: React.ReactNod
 }
 
 export class Picker extends React.Component<PickerProps, {}> {
+  static Item: typeof PickerItem;
+
   public render(): React.ReactNode {
     const { selectedValue, children } = this.props;
 
@@ -34,8 +36,8 @@ export class Picker extends React.Component<PickerProps, {}> {
     const onValueChange = getValueChangeEvent(this.props, children);
     const nativeProps = {
       ...this.props,
-      selectedIndex: selectedIndex,
-      onValueChange: onValueChange
+      selectedIndex,
+      onValueChange
     };
 
     return <RCTPicker {...nativeProps}>{children}</RCTPicker>;
