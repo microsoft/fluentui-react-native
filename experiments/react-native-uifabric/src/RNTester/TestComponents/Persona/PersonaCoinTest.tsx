@@ -26,20 +26,24 @@ export const PersonaCoinTest: React.FunctionComponent<{}> = () => {
       {/* settings */}
       <View style={styles.settings}>
         <View style={styles.showImage}>
-          <Switch value={showImage} onValueChange={setShowImage} />
           <Text>Show image</Text>
+          <Switch value={showImage} onValueChange={setShowImage} />
         </View>
 
-        <Text style={styles.header}>Size</Text>
-        <Picker selectedValue={PersonaSize[imageSize]} onValueChange={size => setImageSize(PersonaSize[size as string])}>
+        <Picker
+          prompt="Size"
+          style={styles.header}
+          selectedValue={PersonaSize[imageSize]}
+          onValueChange={size => setImageSize(PersonaSize[size as string])}
+        >
           {allSizes.map((size, index) => (
             <PickerItem label={size} key={index} value={size} />
           ))}
         </Picker>
 
-        <Text style={styles.header}>Coin Color</Text>
         <Picker
-          enabled={!showImage}
+          prompt="Coin color"
+          style={styles.header}
           selectedValue={PersonaCoinColor[coinColor]}
           onValueChange={color => setCoinColor(PersonaCoinColor[color as string])}
         >
@@ -48,8 +52,12 @@ export const PersonaCoinTest: React.FunctionComponent<{}> = () => {
           ))}
         </Picker>
 
-        <Text style={styles.header}>Presence Status</Text>
-        <Picker selectedValue={PersonaPresence[presence]} onValueChange={presence => setPresence(PersonaPresence[presence as string])}>
+        <Picker
+          prompt="Presence status"
+          style={styles.header}
+          selectedValue={PersonaPresence[presence]}
+          onValueChange={presence => setPresence(PersonaPresence[presence as string])}
+        >
           {allPresences.map((presence, index) => (
             <PickerItem label={presence} key={index} value={presence} />
           ))}
