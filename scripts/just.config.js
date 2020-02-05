@@ -1,6 +1,6 @@
 // @ts-check
 
-const { task, series, parallel, condition, option, argv, addResolvePath } = require('just-scripts');
+const { task, series, parallel, condition, option, argv, addResolvePath, copyTask } = require('just-scripts');
 
 const path = require('path');
 const fs = require('fs');
@@ -8,7 +8,6 @@ const fs = require('fs');
 const { clean } = require('./tasks/clean');
 const { copy } = require('./tasks/copy');
 const { jest, jestWatch } = require('./tasks/jest');
-const { sass } = require('./tasks/sass');
 const { ts } = require('./tasks/ts');
 const { eslint } = require('./tasks/eslint');
 const { webpack, webpackDevServer } = require('./tasks/webpack');
@@ -41,38 +40,35 @@ module.exports = function preset() {
   task('copy', copy);
   task('jest', jest);
   task('jest-watch', jestWatch);
-  task('sass', sass);
   task('ts:commonjs', ts.commonjs);
   task('ts:esm', ts.esm);
-  task('ts:amd', ts.amd);
   task('eslint', eslint);
   task('ts:commonjs-only', ts.commonjsOnly);
   task('webpack', webpack);
-  task('metroPack', metroPackTask(argv()['bundleName']));
+  task('metroPack', () => metroPackTask(argv()['bundleName']));
   task('webpack-dev-server', webpackDevServer);
   task('verify-api-extractor', verifyApiExtractor);
   task('update-api-extractor', updateApiExtractor);
   task('prettier', prettier);
   task('bundle-size-collect', bundleSizeCollect);
+  task('check-for-modified-files', checkForModifiedFiles);
   task('generate-version-files', generateVersionFiles);
   task('generate-package-manifest', generatePackageManifestTask);
-  task('ts', () => {
-    return argv().commonjs
-      ? 'ts:commonjs-only'
-      : parallel('ts:commonjs', 'ts:esm', condition('ts:amd', () => argv().production && !argv().min));
-  });
+  task(
+    'ts',
+    series(condition('ts:commonjs-only', () => argv().commonjs), condition(parallel('ts:commonjs', 'ts:esm'), () => !argv().commonjs))
+  );
 
-  task('validate', fs.existsSync(path.join(process.cwd(), 'jest.config.js')) ? series('eslint', 'jest') : 'eslint');
+  task('validate', fs.existsSync(path.join(process.cwd(), 'jest.config.js')) ? parallel('eslint', 'jest') : 'eslint');
   task('code-style', series('prettier', 'eslint'));
-  task('update-api', series('clean', 'copy', 'sass', 'ts', 'update-api-extractor'));
-  task('dev', series('clean', 'copy', 'sass', 'webpack-dev-server'));
+  task('update-api', series('clean', 'copy', 'ts', 'update-api-extractor'));
+  task('dev', series('clean', 'copy', 'webpack-dev-server'));
 
   task('build:node-lib', series('clean', 'copy', series(condition('validate', () => !argv().min), 'ts:commonjs-only'))).cached();
 
-  task('bundle', argv().useMetro ? 'metroPack' : 'webpack').cached();
+  task('bundle', series(condition('metroPack', () => argv().useMetro), condition('webpack', () => !argv().useMetro))).cached();
 
-  task('build', series('clean', 'copy', 'sass', parallel(condition('validate', () => !argv().min), 'ts'))).cached();
+  task('build', series('clean', 'copy', parallel(condition('validate', () => !argv().min), 'ts'))).cached();
 
   task('no-op', () => {}).cached();
-  task('check-for-modified-files', checkForModifiedFiles);
 };
