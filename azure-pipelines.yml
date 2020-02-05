@@ -4,6 +4,9 @@ pr:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  CI: true
+
 steps:
   - checkout: self
     persistCredentials: true
@@ -28,10 +31,6 @@ steps:
   - script: |
       yarn check-for-changed-files
     displayName: 'Verify API and Ensure Changed Files'
-
-  - script: |
-      sysctl fs.inotify.max_user_watches=524288
-    displayName: 'Increase max file system watchers'
 
   - script: |
       yarn bundle
