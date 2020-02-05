@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   settings: {
     flexGrow: 1
   },
-  showImage: {
+  switch: {
     flexDirection: 'row',
     alignItems: 'center'
   },

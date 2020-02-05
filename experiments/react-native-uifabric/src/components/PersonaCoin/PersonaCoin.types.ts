@@ -11,7 +11,8 @@ export enum PersonaSize {
   size48,
   size56,
   size72,
-  size100
+  size100,
+  size120
 }
 
 export enum PersonaCoinColor {

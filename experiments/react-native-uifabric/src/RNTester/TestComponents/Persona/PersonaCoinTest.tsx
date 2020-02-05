@@ -25,7 +25,7 @@ export const PersonaCoinTest: React.FunctionComponent<{}> = () => {
     <View style={styles.root}>
       {/* settings */}
       <View style={styles.settings}>
-        <View style={styles.showImage}>
+        <View style={styles.switch}>
           <Text>Show image</Text>
           <Switch value={showImage} onValueChange={setShowImage} />
         </View>
