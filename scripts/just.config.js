@@ -54,7 +54,6 @@ module.exports = function preset() {
   task('update-api-extractor', updateApiExtractor);
   task('prettier', prettier);
   task('bundle-size-collect', bundleSizeCollect);
-  task('check-for-modified-files', checkForModifiedFiles);
   task('generate-version-files', generateVersionFiles);
   task('generate-package-manifest', generatePackageManifestTask);
   task('ts', () => {
@@ -75,4 +74,5 @@ module.exports = function preset() {
   task('build', series('clean', 'copy', 'sass', parallel(condition('validate', () => !argv().min), 'ts'))).cached();
 
   task('no-op', () => {}).cached();
+  task('check-for-modified-files', checkForModifiedFiles);
 };
