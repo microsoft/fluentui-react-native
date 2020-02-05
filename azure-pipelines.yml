@@ -18,12 +18,12 @@ steps:
     displayName: 'yarn'
 
   - script: |
-      npm run checkchange
+      yarn checkchange
     displayName: 'check change'
 
   - script: |
-      npm run build
-    displayName: 'npm run build'
+      yarn build
+    displayName: 'yarn build'
 
   - script: |
       yarn check-for-changed-files
