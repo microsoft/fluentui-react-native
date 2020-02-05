@@ -30,7 +30,7 @@ steps:
     displayName: 'Verify API and Ensure Changed Files'
 
   - script: |
-      echo fs.inotify.max_user_watches=524288 | tee -a /etc/sysctl.conf && sysctl -p
+      sysctl fs.inotify.max_user_watches=524288
     displayName: 'Increase max file system watchers'
 
   - script: |
