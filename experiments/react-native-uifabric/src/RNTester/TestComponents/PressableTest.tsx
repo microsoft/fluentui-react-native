@@ -12,14 +12,14 @@ const styles = StyleSheet.create({
     padding: 8,
     margin: 4,
     borderStyle: 'dotted',
-    borderColor: 'red',
+    borderColor: 'red'
   },
   solidBorder: {
     borderWidth: 1,
     padding: 8,
     margin: 4,
     borderStyle: 'solid',
-    borderColor: 'black',
+    borderColor: 'black'
   },
   notfocused: {
     borderWidth: 1,
@@ -72,7 +72,11 @@ export const PressableTest: React.FunctionComponent<{}> = () => {
       </Pressable>
       <Square color="green" />
       <Stack>
-        <ViewWin32 onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} style={hoverState.hovered ? styles.dottedBorder : styles.solidBorder}>
+        <ViewWin32
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          style={hoverState.hovered ? styles.dottedBorder : styles.solidBorder}
+        >
           <Text>{hoverState.hovered ? 'hovered' : 'not hovered'}</Text>
         </ViewWin32>
       </Stack>
@@ -92,17 +96,12 @@ export const PressableTest: React.FunctionComponent<{}> = () => {
 };
 
 /* Pressable that only has focusState */
-const FocusComponent: React.FunctionComponent<IViewWin32Props> = (props: IViewWin32Props) => {
+const FocusComponent: React.FunctionComponent<IViewWin32Props> = () => {
   const [{ onFocus, onBlur }, focusState] = useFocusState();
 
   return (
     <Stack {...{ acceptsKeyboardFocus: false }}>
-      <ViewWin32
-        acceptsKeyboardFocus
-        onFocus={onFocus}
-        onBlur={onBlur}
-        style={focusState.focused ? styles.focused : styles.notfocused}
-      />
+      <ViewWin32 acceptsKeyboardFocus onFocus={onFocus} onBlur={onBlur} style={focusState.focused ? styles.focused : styles.notfocused} />
     </Stack>
   );
 };
@@ -115,7 +114,9 @@ const PressComponent: React.FunctionComponent<IViewWin32Props> = (props: IViewWi
     (e: ReactNative.GestureResponderEvent) => {
       pressProps.onTouchEnd && pressProps.onTouchEnd(e);
       ReactNative.Alert.alert('Alert.', 'Object has been pressed.');
-    }, [pressProps]);
+    },
+    [pressProps]
+  );
 
   return (
     <Stack {...{ acceptsKeyboardFocus: false }}>
