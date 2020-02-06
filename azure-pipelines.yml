@@ -33,9 +33,5 @@ steps:
     displayName: 'Verify API and Ensure Changed Files'
 
   - script: |
-      export CI=true & echo $CI
-    displayName: 'Ensure env variable is set and check result'
-
-  - script: |
-      yarn bundle
+      export CI=true & yarn bundle
     displayName: 'yarn bundle'
