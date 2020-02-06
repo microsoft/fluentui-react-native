@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, ViewProps, TextProps, NativeEventEmitter, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextProps, NativeEventEmitter, TouchableOpacity } from 'react-native';
 import {
   ThemingModuleHelper,
   ThemeProvider,
@@ -53,6 +53,10 @@ const caterpillarTheme: IPartialTheme = {
 const mockThemingModuleHelper = createMockThemingModuleHelper(mockThemingModule, emitter);
 
 const customThemeRegistry = createPlatformThemeRegistry('TaskPane', mockThemingModuleHelper);
+mockThemingModuleHelper.addListener(() => {
+  customThemeRegistry.updatePlatformDefaults(mockThemingModuleHelper.getPlatformDefaults('TaskPane'));
+});
+
 // default theme
 customThemeRegistry.setTheme(caterpillarTheme);
 customThemeRegistry.setTheme(ThemingModuleHelper.getPlatformThemeDefinition('WhiteColors'), 'PlatformWhiteColors');
@@ -72,27 +76,21 @@ const ThemeSwitcher: React.FunctionComponent = (_p: {}) => {
 export default function App() {
   return (
     <ThemeProvider registry={customThemeRegistry}>
-      <ThemedPanel style={styles.root}>
+      <View style={styles.root}>
         <View style={styles.container}>
           <Button content="Hello Android Button" />
           <ThemedText>Open up App.tsx to start working on your app!</ThemedText>
           <ThemeSwitcher />
         </View>
         <ThemeProvider theme="PlatformWhiteColors">
-          <ThemedPanel style={styles.container}>
+          <View style={styles.container}>
             <ThemedText>Theme Provider text!</ThemedText>
-          </ThemedPanel>
+          </View>
         </ThemeProvider>
-      </ThemedPanel>
+      </View>
     </ThemeProvider>
   );
 }
-
-const ThemedPanel: React.FunctionComponent<ViewProps> = (props: ViewProps) => {
-  const { style, ...rest } = props;
-  const theme = useTheme();
-  return <View {...rest} style={[{ backgroundColor: theme.colors.background }, style]} />;
-};
 
 const ThemedText: React.FunctionComponent<TextProps> = (p: TextProps) => {
   const theme = useTheme();

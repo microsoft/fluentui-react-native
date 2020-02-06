@@ -24,6 +24,7 @@
   "dependencies": {
     "@uifabricshared/theme-registry": "^0.2.1",
     "@uifabricshared/foundation-settings": "^0.4.2",
+    "@uifabricshared/themed-stylesheet": "0.2.3",
     "@uifabricshared/theming-ramp": "^0.5.1"
   },
   "devDependencies": {

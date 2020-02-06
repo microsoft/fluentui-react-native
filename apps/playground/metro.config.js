@@ -24,8 +24,10 @@ const additionalWatchFolders = uifabricsharedPackages.map(package => pathToSymLi
 const extraNodeModules = uifabricsharedPackages.reduce((o, key) => ({ ...o, [key]: require.resolve(key) }), {});
 
 // We could generalize the blacklistRE, too, if more packages start depending on 'react-native'.  For now this path is a one off.
+const rnCommunityPath = pathToSymLinkedPackage('@react-native-community/cli');
 const themingPath = pathToSymLinkedPackage('@uifabricshared/theming-react-native');
-const themedStylsheetPath = pathToSymLinkedPackage('@uifabricshared/themed-stylesheet');
+const themedStylesheetPath = pathToSymLinkedPackage('@uifabricshared/themed-stylesheet');
+const rnw32Path = pathToSymLinkedPackage('@office-iss/react-native-win32');
 
 module.exports = {
   // WatchFolders is only needed due to the yarn workspace layout of node_modules, we need to watch the symlinked locations separately
@@ -38,8 +40,10 @@ module.exports = {
   resolver: {
     extraNodeModules,
     blacklistRE: blacklist([
+      new RegExp(`${path.resolve(rnCommunityPath, 'node_modules/react-native').replace(/[/\\\\]/g, '[/\\\\]')}.*`),
       new RegExp(`${path.resolve(themingPath, 'node_modules/react-native').replace(/[/\\\\]/g, '[/\\\\]')}.*`),
-      new RegExp(`${path.resolve(themedStylsheetPath, 'node_modules/react-native').replace(/[/\\\\]/g, '[/\\\\]')}.*`)
+      new RegExp(`${path.resolve(themedStylesheetPath, 'node_modules/react-native').replace(/[/\\\\]/g, '[/\\\\]')}.*`),
+      new RegExp(`${path.resolve(rnw32Path, 'node_modules/react-native').replace(/[/\\\\]/g, '[/\\\\]')}.*`)
     ])
     // platforms: ['ios', 'android', 'windesktop', 'windows', 'web', 'macos'],
   },
