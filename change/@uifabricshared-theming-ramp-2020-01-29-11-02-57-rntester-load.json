@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "GetRNTester test app launch for uifabriu package.",
-  "packageName": "@uifabricshared/theming-ramp",
-  "email": "kinhln@microsoft.com",
-  "commit": "8d07915aedb53422ccc6ead6103e6684c99fb43a",
-  "date": "2020-01-29T19:02:27.680Z"
-}

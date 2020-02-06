@@ -59,7 +59,7 @@ export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props:
               key={index}
               disabled={index == selectedTestIndex}
               content={description.name}
-              onPress={() => setSelectedTestIndex(index)}
+              onClick={() => setSelectedTestIndex(index)}
               style={fabricTesterStyles.testListItem}
             />
           );

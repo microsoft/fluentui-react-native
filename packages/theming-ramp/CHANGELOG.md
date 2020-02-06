@@ -1,7 +1,14 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Fri, 13 Dec 2019 21:50:31 GMT and should not be manually modified.
+This log was last generated on Thu, 06 Feb 2020 01:00:13 GMT and should not be manually modified.
 
+## 0.5.1
+Thu, 06 Feb 2020 01:00:13 GMT
+
+### Patches
+
+- GetRNTester test app launch for uifabriu package. (kinhln@microsoft.com)
+- clean up just tasks and remove unnecessary webpack configs (jasonmo@microsoft.com)
 ## 0.5.0
 Fri, 13 Dec 2019 21:50:31 GMT
 
