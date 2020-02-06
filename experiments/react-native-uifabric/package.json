@@ -33,7 +33,7 @@
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.26.2",
+    "@office-iss/react-native-win32": "0.27.1",
     "@office-iss/rex-win32": "0.0.33",
     "@types/prop-types": "15.5.1",
     "@types/react": "16.9.11",
@@ -49,7 +49,7 @@
   "peerDependencies": {
     "react": "^16.0.0",
     "react-native": "^0.59.0",
-    "@office-iss/react-native-win32": "0.26.4"
+    "@office-iss/react-native-win32": "0.27.1"
   },
   "metroBundles": {
     "uifabric": {

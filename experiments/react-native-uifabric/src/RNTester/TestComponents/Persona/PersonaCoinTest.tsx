@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { PersonaCoin, PersonaSize, PersonaCoinColor, PersonaPresence } from '../../../components/PersonaCoin';
-import { Switch, View, Text } from 'react-native';
-import { Picker } from '../../Picker/Picker.win32';
-import { PickerItem } from '../../Picker/PickerItem';
+import { Switch, View, Text, Picker } from 'react-native';
 import { styles, satyaPhotoUrl } from './styles';
 import { getAllEnumValues, canUsePickerComponent } from './utils';
 import { PersonaCoinSimpleTest } from './PersonaCoinSimpleTest';
@@ -37,7 +35,7 @@ export const PersonaCoinTest: React.FunctionComponent<{}> = () => {
           onValueChange={size => setImageSize(PersonaSize[size as string])}
         >
           {allSizes.map((size, index) => (
-            <PickerItem label={size} key={index} value={size} />
+            <Picker.Item label={size} key={index} value={size} />
           ))}
         </Picker>
 
@@ -48,7 +46,7 @@ export const PersonaCoinTest: React.FunctionComponent<{}> = () => {
           onValueChange={color => setCoinColor(PersonaCoinColor[color as string])}
         >
           {allColors.map((color, index) => (
-            <PickerItem label={color} key={index} value={color} />
+            <Picker.Item label={color} key={index} value={color} />
           ))}
         </Picker>
 
@@ -59,7 +57,7 @@ export const PersonaCoinTest: React.FunctionComponent<{}> = () => {
           onValueChange={presence => setPresence(PersonaPresence[presence as string])}
         >
           {allPresences.map((presence, index) => (
-            <PickerItem label={presence} key={index} value={presence} />
+            <Picker.Item label={presence} key={index} value={presence} />
           ))}
         </Picker>
       </View>
