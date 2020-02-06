@@ -14,69 +14,32 @@ const presenceIconCache: Dictionary<ImageURISource> = {
   busy: require('./icons/busy.png')
 };
 
-export function getPhysicalSize(size: PersonaSize): number {
-  switch (size) {
-    case PersonaSize.size8:
-      return 8;
-    case PersonaSize.size24:
-      return 24;
-    case PersonaSize.size32:
-      return 32;
-    case PersonaSize.size40:
-      return 40;
-    case PersonaSize.size48:
-      return 48;
-    case PersonaSize.size56:
-      return 56;
-    case PersonaSize.size72:
-      return 72;
-    case PersonaSize.size100:
-      return 100;
-    case PersonaSize.size120:
-      return 120;
-  }
-}
+export type PersonaSizeConfig = {
+  coinSize: number;
+  iconSize: number;
+  initialsFontSize: number;
+};
 
-export function getIconSize(size: PersonaSize): number {
+export function getSizeConfig(size: PersonaSize): PersonaSizeConfig {
   switch (size) {
     case PersonaSize.size8:
+      return { coinSize: 8, iconSize: 0, initialsFontSize: 0 };
     case PersonaSize.size24:
+      return { coinSize: 24, iconSize: 8, initialsFontSize: 10 };
     case PersonaSize.size32:
-      return 8;
+      return { coinSize: 32, iconSize: 8, initialsFontSize: 12 };
     case PersonaSize.size40:
+      return { coinSize: 40, iconSize: 12, initialsFontSize: 14 };
     case PersonaSize.size48:
-      return 12;
+      return { coinSize: 48, iconSize: 12, initialsFontSize: 16 };
     case PersonaSize.size56:
-      return 16;
+      return { coinSize: 56, iconSize: 16, initialsFontSize: 18 };
     case PersonaSize.size72:
-      return 20;
+      return { coinSize: 72, iconSize: 20, initialsFontSize: 20 };
     case PersonaSize.size100:
-      return 28;
+      return { coinSize: 100, iconSize: 28, initialsFontSize: 36 };
     case PersonaSize.size120:
-      return 32;
-  }
-}
-
-export function getFontSize(size: PersonaSize): number {
-  switch (size) {
-    case PersonaSize.size8:
-      return 8;
-    case PersonaSize.size24:
-      return 10;
-    case PersonaSize.size32:
-      return 12;
-    case PersonaSize.size40:
-      return 14;
-    case PersonaSize.size48:
-      return 16;
-    case PersonaSize.size56:
-      return 18;
-    case PersonaSize.size72:
-      return 20;
-    case PersonaSize.size100:
-      return 36;
-    case PersonaSize.size120:
-      return 40;
+      return { coinSize: 120, iconSize: 32, initialsFontSize: 40 };
   }
 }
 
