@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Fri, 13 Dec 2019 21:50:31 GMT and should not be manually modified.
+This log was last generated on Thu, 06 Feb 2020 01:00:13 GMT and should not be manually modified.
 
+## 1.5.1
+Thu, 06 Feb 2020 01:00:13 GMT
+
+### Patches
+
+- clean up just tasks and remove unnecessary webpack configs (jasonmo@microsoft.com)
 ## 1.5.0
 Fri, 13 Dec 2019 21:50:31 GMT
 

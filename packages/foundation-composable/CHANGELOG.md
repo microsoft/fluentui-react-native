@@ -1,7 +1,14 @@
 # Change Log - @uifabricshared/foundation-composable
 
-This log was last generated on Thu, 05 Dec 2019 23:11:01 GMT and should not be manually modified.
+This log was last generated on Thu, 06 Feb 2020 01:00:13 GMT and should not be manually modified.
 
+## 0.5.2
+Thu, 06 Feb 2020 01:00:13 GMT
+
+### Patches
+
+- Get RNTester test app launch for uifabric package. (kinhln@microsoft.com)
+- clean up just tasks and remove unnecessary webpack configs (jasonmo@microsoft.com)
 ## 0.5.1
 Thu, 05 Dec 2019 23:11:01 GMT
 
