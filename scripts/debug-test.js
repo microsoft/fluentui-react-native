@@ -1,5 +1,5 @@
 const path = require('path');
-const findConfig = require('./find-config');
+const findConfig = require('./monorepo/find-config');
 const findGitRoot = require('./monorepo/findGitRoot');
 
 const configPath = findConfig('jest.config.js');
