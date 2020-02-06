@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "clean up just tasks and remove unnecessary webpack configs",
+  "packageName": "@uifabricshared/foundation-compose",
+  "email": "jasonmo@microsoft.com",
+  "commit": "325ea8c30a8c8fbe37f84cd5b5080fc7e6c2864b",
+  "date": "2020-02-05T23:35:08.937Z"
+}
