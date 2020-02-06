@@ -15,7 +15,7 @@ const presenceIconCache: Dictionary<ImageURISource> = {
 };
 
 export type PersonaSizeConfig = {
-  coinSize: number;
+  physicalCoinSize: number;
   iconSize: number;
   initialsFontSize: number;
 };
@@ -23,23 +23,23 @@ export type PersonaSizeConfig = {
 export function getSizeConfig(size: PersonaSize): PersonaSizeConfig {
   switch (size) {
     case PersonaSize.size8:
-      return { coinSize: 8, iconSize: 0, initialsFontSize: 0 };
+      return { physicalCoinSize: 8, iconSize: 0, initialsFontSize: 0 };
     case PersonaSize.size24:
-      return { coinSize: 24, iconSize: 8, initialsFontSize: 10 };
+      return { physicalCoinSize: 24, iconSize: 8, initialsFontSize: 10 };
     case PersonaSize.size32:
-      return { coinSize: 32, iconSize: 8, initialsFontSize: 12 };
+      return { physicalCoinSize: 32, iconSize: 8, initialsFontSize: 12 };
     case PersonaSize.size40:
-      return { coinSize: 40, iconSize: 12, initialsFontSize: 14 };
+      return { physicalCoinSize: 40, iconSize: 12, initialsFontSize: 14 };
     case PersonaSize.size48:
-      return { coinSize: 48, iconSize: 12, initialsFontSize: 16 };
+      return { physicalCoinSize: 48, iconSize: 12, initialsFontSize: 16 };
     case PersonaSize.size56:
-      return { coinSize: 56, iconSize: 16, initialsFontSize: 18 };
+      return { physicalCoinSize: 56, iconSize: 16, initialsFontSize: 18 };
     case PersonaSize.size72:
-      return { coinSize: 72, iconSize: 20, initialsFontSize: 20 };
+      return { physicalCoinSize: 72, iconSize: 20, initialsFontSize: 20 };
     case PersonaSize.size100:
-      return { coinSize: 100, iconSize: 28, initialsFontSize: 36 };
+      return { physicalCoinSize: 100, iconSize: 28, initialsFontSize: 36 };
     case PersonaSize.size120:
-      return { coinSize: 120, iconSize: 32, initialsFontSize: 40 };
+      return { physicalCoinSize: 120, iconSize: 32, initialsFontSize: 40 };
   }
 }
 

@@ -34,7 +34,7 @@ export const PersonaCoin: React.FunctionComponent<IPersonaCoinProps> = (props: I
   const { imageUrl, imageDescription, size, initials, coinColor, style: propStyle, presence } = props;
   const normalizedSize = size === undefined ? PersonaSize.size40 : size;
 
-  const { coinSize: physicalSize, iconSize, initialsFontSize: initialFontSize } = getSizeConfig(normalizedSize);
+  const { physicalCoinSize: physicalSize, iconSize, initialsFontSize: initialFontSize } = getSizeConfig(normalizedSize);
 
   const rootStyle = StyleSheet.flatten([
     propStyle,
