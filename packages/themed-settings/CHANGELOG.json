@@ -2,6 +2,20 @@
   "name": "@uifabricshared/themed-settings",
   "entries": [
     {
+      "date": "Thu, 06 Feb 2020 01:00:13 GMT",
+      "tag": "@uifabricshared/themed-settings_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "clean up just tasks and remove unnecessary webpack configs",
+            "author": "jasonmo@microsoft.com",
+            "commit": "325ea8c30a8c8fbe37f84cd5b5080fc7e6c2864b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 Nov 2019 19:37:06 GMT",
       "tag": "@uifabricshared/themed-settings_v0.3.0",
       "version": "0.3.0",

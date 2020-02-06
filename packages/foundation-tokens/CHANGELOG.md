@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-tokens
 
-This log was last generated on Wed, 20 Nov 2019 19:51:16 GMT and should not be manually modified.
+This log was last generated on Thu, 06 Feb 2020 01:00:13 GMT and should not be manually modified.
 
+## 0.4.1
+Thu, 06 Feb 2020 01:00:13 GMT
+
+### Patches
+
+- clean up just tasks and remove unnecessary webpack configs (jasonmo@microsoft.com)
 ## 0.4.0
 Wed, 20 Nov 2019 19:51:16 GMT
 

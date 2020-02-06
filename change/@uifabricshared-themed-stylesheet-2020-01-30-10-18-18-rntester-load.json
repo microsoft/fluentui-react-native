@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Temporarily disable test to work around test error.",
-  "packageName": "@uifabricshared/themed-stylesheet",
-  "email": "email not defined",
-  "commit": "a2ef1fb1be0d60a4afa7a39c3cf4e387d9879746",
-  "date": "2020-01-30T18:18:18.602Z"
-}
