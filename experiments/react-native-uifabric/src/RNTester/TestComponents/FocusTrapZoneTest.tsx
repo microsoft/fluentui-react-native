@@ -1,6 +1,7 @@
 import { ViewWin32, IKeyboardEvent, IViewWin32Props, IViewWin32 } from '@office-iss/react-native-win32';
 import { IFocusTrapZoneProps, Text, Stack, FocusTrapZone } from '../../components';
 import { TouchableHighlight, TouchableHighlightProps } from 'react-native';
+import { useFocusState } from '../../hooks';
 import * as React from 'react';
 import { stackStyle } from '../TesterStyles';
 
@@ -38,17 +39,15 @@ interface IComponentTwiddlerProps {
 }
 
 const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps> = (props: IComponentTwiddlerProps) => {
-  const [isFocused, setFocused] = React.useState(false);
-  const onFocus = React.useCallback(() => setFocused(true), [setFocused]);
-  const onBlurImpl = React.useCallback(() => setFocused(false), [setFocused]);
+  const [{ onFocus, onBlur }, focusState] = useFocusState();
 
   return (
     <TouchableHighlight {...{ acceptsKeyboardFocus: false }} onPress={props.onPress}>
       <ViewWin32
         acceptsKeyboardFocus
         onFocus={onFocus}
-        onBlur={onBlurImpl}
-        style={isFocused ? focusedComponentTwiddlerStyle : componentTwiddlerStyle}
+        onBlur={onBlur}
+        style={focusState.focused ? focusedComponentTwiddlerStyle : componentTwiddlerStyle}
       >
         <Text>{props.label}</Text>
       </ViewWin32>
