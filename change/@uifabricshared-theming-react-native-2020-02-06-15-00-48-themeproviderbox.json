@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Add Box with bg color to ThemeProvider",
+  "packageName": "@uifabricshared/theming-react-native",
+  "email": "adrum@microsoft.com",
+  "commit": "b4477eb2e10ccaaad1f431a0a847b7032417e7d7",
+  "date": "2020-02-06T23:00:48.553Z"
+}
