@@ -1,6 +1,6 @@
 // @ts-check
 
-const { task, series, parallel, condition, option, argv, addResolvePath, copyTask } = require('just-scripts');
+const { task, series, parallel, condition, option, argv, addResolvePath, prettierCheckTask, prettierTask } = require('just-scripts');
 
 const path = require('path');
 const fs = require('fs');
@@ -13,7 +13,6 @@ const { eslint } = require('./tasks/eslint');
 const { webpack, webpackDevServer } = require('./tasks/webpack');
 const { metroPackTask } = require('./tasks/metro-pack');
 const { verifyApiExtractor, updateApiExtractor } = require('./tasks/api-extractor');
-const prettier = require('./tasks/prettier');
 const bundleSizeCollect = require('./tasks/bundle-size-collect');
 const checkForModifiedFiles = require('./tasks/check-for-modified-files');
 const generateVersionFiles = require('./tasks/generate-version-files');
@@ -36,6 +35,9 @@ module.exports = function preset() {
   // use Metro for bundling task instead of the default webpack
   option('useMetro');
 
+  // for options that have a check/fix switch this puts them into fix mode
+  option('fix');
+
   task('clean', clean);
   task('copy', copy);
   task('jest', jest);
@@ -49,7 +51,7 @@ module.exports = function preset() {
   task('webpack-dev-server', webpackDevServer);
   task('verify-api-extractor', verifyApiExtractor);
   task('update-api-extractor', updateApiExtractor);
-  task('prettier', prettier);
+  task('prettier', () => argv().fix ? prettierTask : prettierCheckTask);
   task('bundle-size-collect', bundleSizeCollect);
   task('check-for-modified-files', checkForModifiedFiles);
   task('generate-version-files', generateVersionFiles);
@@ -70,5 +72,5 @@ module.exports = function preset() {
 
   task('build', series('clean', 'copy', parallel(condition('validate', () => !argv().min), 'ts'))).cached();
 
-  task('no-op', () => {}).cached();
+  task('no-op', () => { }).cached();
 };
