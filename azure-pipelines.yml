@@ -33,5 +33,7 @@ steps:
     displayName: 'Verify API and Ensure Changed Files'
 
   - script: |
-      export CI=true & yarn bundle
+      yarn bundle
     displayName: 'yarn bundle'
+    env:
+      CI=true
