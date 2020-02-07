@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix packages for react-native to unblock builds",
-  "packageName": "@uifabricshared/themed-stylesheet",
-  "email": "jasonmo@microsoft.com",
-  "commit": "30e802cb10f5e91cf3d8ed7d9d9e123c4b7c4fcb",
-  "date": "2020-02-04T23:30:10.428Z"
-}
