@@ -1,5 +1,5 @@
 const { spawnSync } = require('child_process');
-const { readConfig } = require('../read-config');
+const { readConfig } = require('./read-config');
 const path = require('path');
 const findGitRoot = require('./findGitRoot');
 
