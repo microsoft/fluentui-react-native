@@ -35,5 +35,3 @@ steps:
   - script: |
       yarn bundle
     displayName: 'yarn bundle'
-    env:
-      CI=true
