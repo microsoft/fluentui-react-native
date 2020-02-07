@@ -2794,6 +2794,11 @@
     prop-types "^15.5.10"
     tslib "^1.10.0"
 
+"@uifabricshared/themed-stylesheet@0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@uifabricshared/themed-stylesheet/-/themed-stylesheet-0.2.3.tgz#5fcac80f80760a1710a4fe8befdc2bf759873be4"
+  integrity sha512-YEdm981FAQIdF1MSYljYHg4HLuUjeC6Oxi5bfItl82jf8UddZS+GHjZTMYxg5yskplVpSzeN2/sHcE06ihEXYg==
+
 "@unimodules/core@~4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@unimodules/core/-/core-4.0.0.tgz#898dafa5a121e7d6d7d4acd9c0c38d12f7da5b19"
