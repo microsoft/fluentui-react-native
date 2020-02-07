@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { Image, View, Text } from 'react-native';
-import { IPersonaCoinProps, PersonaSize, PersonaCoinColor } from './PersonaCoin.types';
-import { convertCoinColor, getPresenceIconSource, getSizeConfig } from './PersonaCoinHelper';
+import { IPersonaCoinProps, PersonaSize, PersonaCoinColor, IPersonaCoinType, personaCoinName } from './PersonaCoin.types';
+import { convertCoinColor, getPresenceIconSource, getSizeConfig } from './PersonaCoin.helpers';
 import { StyleSheet } from 'react-native';
+import { compose } from '@uifabricshared/foundation-compose';
+import { filterViewProps, filterImageProps } from 'src/utilities/RenderHelpers';
+import { settings } from './PersonaCoin.settings';
 
 interface IPersonaCoinInitials {
   size: number;
@@ -30,7 +33,22 @@ const Initials: React.FunctionComponent<IPersonaCoinInitials> = (props: IPersona
   );
 };
 
-export const PersonaCoin: React.FunctionComponent<IPersonaCoinProps> = (props: IPersonaCoinProps) => {
+export const PersonaCoin = compose<IPersonaCoinType>({
+  displayName: personaCoinName,
+  settings: settings,
+  slots: {
+    root: {
+      slotType: View,
+      filter: filterViewProps
+    },
+    icon: {
+      slotType: Image,
+      filter: filterImageProps
+    }
+  }
+});
+
+export const PersonaCoinCore: React.FunctionComponent<IPersonaCoinProps> = (props: IPersonaCoinProps) => {
   const { imageUrl, imageDescription, size, initials, coinColor, style: propStyle, presence } = props;
   const normalizedSize = size === undefined ? PersonaSize.size40 : size;
 

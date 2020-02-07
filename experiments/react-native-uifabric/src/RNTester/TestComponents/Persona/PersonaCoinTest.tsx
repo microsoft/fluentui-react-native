@@ -2,18 +2,13 @@ import * as React from 'react';
 import { PersonaCoin, PersonaSize, PersonaCoinColor, PersonaPresence } from '../../../components/PersonaCoin';
 import { Switch, View, Text, Picker } from 'react-native';
 import { styles, satyaPhotoUrl } from './styles';
-import { getAllEnumValues, canUsePickerComponent } from './utils';
-import { PersonaCoinSimpleTest } from './PersonaCoinSimpleTest';
+import { getAllEnumValues } from './utils';
 
 const allSizes = getAllEnumValues(PersonaSize);
 const allColors = getAllEnumValues(PersonaCoinColor);
 const allPresences = getAllEnumValues(PersonaPresence);
 
 export const PersonaCoinTest: React.FunctionComponent<{}> = () => {
-  if (!canUsePickerComponent) {
-    return <PersonaCoinSimpleTest />;
-  }
-
   const [showImage, setShowImage] = React.useState(true);
   const [imageSize, setImageSize] = React.useState(PersonaSize.size40);
   const [coinColor, setCoinColor] = React.useState(PersonaCoinColor.gold);

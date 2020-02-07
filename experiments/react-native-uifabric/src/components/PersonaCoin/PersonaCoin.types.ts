@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
+import { ImageProps } from 'react-native';
+import { IBackgroundColorTokens, IForegroundColorTokens } from 'src/tokens';
 
 export const personaCoinName = 'RNFPersonaCoin';
 
@@ -60,9 +62,19 @@ export interface IPersonaCoinProps extends IViewWin32Props {
 
 export interface IPersonaCoinSlotProps {
   root: React.PropsWithoutRef<IViewWin32Props>;
+  icon: ImageProps;
 }
 
-export interface IPersonaCoinTokens {}
+export type IconAlignment = 'start' | 'center' | 'end';
+
+export interface IPersonaCoinTokens extends IBackgroundColorTokens, IForegroundColorTokens {
+  coinSize?: number;
+  iconSize?: number;
+  iconSource?: string;
+  horizontalIconAlignment?: IconAlignment;
+  verticalIconAlignment?: IconAlignment;
+  initialsFontSize?: number;
+}
 
 export interface IPersonaCoinType {
   props: IPersonaCoinProps;
