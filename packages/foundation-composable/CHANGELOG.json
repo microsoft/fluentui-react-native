@@ -2,6 +2,20 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Fri, 07 Feb 2020 00:29:25 GMT",
+      "tag": "@uifabricshared/foundation-composable_v0.5.3",
+      "version": "0.5.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "clean up just tasks and remove unnecessary webpack configs",
+            "author": "jasonmo@microsoft.com",
+            "commit": "325ea8c30a8c8fbe37f84cd5b5080fc7e6c2864b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 06 Feb 2020 01:00:13 GMT",
       "tag": "@uifabricshared/foundation-composable_v0.5.2",
       "version": "0.5.2",

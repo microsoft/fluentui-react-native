@@ -2,6 +2,20 @@
   "name": "@uifabricshared/themed-stylesheet",
   "entries": [
     {
+      "date": "Fri, 07 Feb 2020 00:29:25 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.2.4",
+      "version": "0.2.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix packages for react-native to unblock builds",
+            "author": "jasonmo@microsoft.com",
+            "commit": "30e802cb10f5e91cf3d8ed7d9d9e123c4b7c4fcb"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 06 Feb 2020 01:00:13 GMT",
       "tag": "@uifabricshared/themed-stylesheet_v0.2.3",
       "version": "0.2.3",

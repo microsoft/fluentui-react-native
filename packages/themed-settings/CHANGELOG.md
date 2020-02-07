@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/themed-settings
 
-This log was last generated on Thu, 06 Feb 2020 01:00:13 GMT and should not be manually modified.
+This log was last generated on Fri, 07 Feb 2020 00:29:25 GMT and should not be manually modified.
 
+## 0.3.2
+Fri, 07 Feb 2020 00:29:25 GMT
+
+### Patches
+
+- clean up just tasks and remove unnecessary webpack configs (jasonmo@microsoft.com)
 ## 0.3.1
 Thu, 06 Feb 2020 01:00:13 GMT
 
