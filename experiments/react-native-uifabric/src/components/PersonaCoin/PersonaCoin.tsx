@@ -1,85 +1,71 @@
-import * as React from 'react';
-import { Image, View, Text } from 'react-native';
-import { IPersonaCoinProps, PersonaSize, PersonaCoinColor, IPersonaCoinType, personaCoinName } from './PersonaCoin.types';
-import { convertCoinColor, getPresenceIconSource, getSizeConfig } from './PersonaCoin.helpers';
-import { StyleSheet } from 'react-native';
-import { compose } from '@uifabricshared/foundation-compose';
-import { filterViewProps, filterImageProps } from 'src/utilities/RenderHelpers';
+/** @jsx withSlots */
+import { Image, View } from 'react-native';
+import { IPersonaCoinProps, IPersonaCoinType, personaCoinName, IPersonaCoinSlotProps, IPersonaCoinRenderData } from './PersonaCoin.types';
+import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { filterViewProps, filterImageProps } from '../../utilities/RenderHelpers';
 import { settings } from './PersonaCoin.settings';
+import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
+import { Initials } from './PersonaCoinInitials';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
+// import { getSizeConfig } from './PersonaCoin.helpers';
+import { buildPersonaCoinRootStyles } from './PersonaCoin.tokens';
 
-interface IPersonaCoinInitials {
-  size: number;
-  fontSize: number;
-  coinColor?: PersonaCoinColor;
-  initials?: string;
-}
+const usePrepareForProps = (props: IPersonaCoinProps, useStyling: IUseComposeStyling<IPersonaCoinType>) => {
+  // const { imageUrl, imageDescription, size, initials, coinColor, presence } = props;
+  // const normalizedSize = size === undefined ? PersonaSize.size40 : size;
 
-const Initials: React.FunctionComponent<IPersonaCoinInitials> = (props: IPersonaCoinInitials) => {
-  const { size, fontSize, coinColor, initials } = props;
+  // const { physicalCoinSize: physicalSize, iconSize, initialsFontSize: initialFontSize } = getSizeConfig(normalizedSize);
+
+  const { ...rest } = props;
+  return {
+    slotProps: mergeSettings<IPersonaCoinType['slotProps']>(useStyling(props), { root: rest }),
+    state: {
+      iconSource: undefined,
+      personaPhotoSource: undefined
+    }
+  };
+};
+
+const render = (Slots: ISlots<IPersonaCoinSlotProps>, renderData: IPersonaCoinRenderData): JSX.Element | null => {
+  if (!renderData.state) {
+    return null;
+  }
+
+  const { personaPhotoSource, iconSource } = renderData.state;
 
   return (
-    <View
-      style={{
-        borderRadius: size / 2,
-        width: size,
-        height: size,
-        backgroundColor: convertCoinColor(coinColor),
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-    >
-      <Text style={{ fontSize, color: 'white' }}>{initials}</Text>
-    </View>
+    <Slots.root>
+      {personaPhotoSource ? <Slots.photo /> : <Slots.initials />}
+      {!!iconSource && <Slots.icon source={iconSource} />}
+    </Slots.root>
   );
 };
 
 export const PersonaCoin = compose<IPersonaCoinType>({
   displayName: personaCoinName,
+  usePrepareProps: usePrepareForProps,
   settings: settings,
   slots: {
     root: {
       slotType: View,
       filter: filterViewProps
     },
+    photo: {
+      slotType: View,
+      filter: filterViewProps
+    },
+    initials: {
+      slotType: Initials
+    },
     icon: {
       slotType: Image,
       filter: filterImageProps
     }
+  },
+  render: render,
+  styles: {
+    root: [buildPersonaCoinRootStyles]
+    // initials: [buildPersonaCoinInitialsStyles],
+    // photo: [buildPersonaCoinPhotoStyles]
   }
 });
-
-export const PersonaCoinCore: React.FunctionComponent<IPersonaCoinProps> = (props: IPersonaCoinProps) => {
-  const { imageUrl, imageDescription, size, initials, coinColor, style: propStyle, presence } = props;
-  const normalizedSize = size === undefined ? PersonaSize.size40 : size;
-
-  const { physicalCoinSize: physicalSize, iconSize, initialsFontSize: initialFontSize } = getSizeConfig(normalizedSize);
-
-  const rootStyle = StyleSheet.flatten([
-    propStyle,
-    {
-      width: physicalSize,
-      height: physicalSize,
-      flexDirection: 'row',
-      justifyContent: 'flex-end',
-      alignItems: 'flex-end'
-    }
-  ]);
-
-  return (
-    <View style={rootStyle}>
-      {imageUrl ? (
-        <Image
-          accessibilityLabel={imageDescription}
-          style={{ borderRadius: physicalSize / 2, width: physicalSize, height: physicalSize }}
-          source={{ uri: imageUrl, width: physicalSize, height: physicalSize }}
-          resizeMode="cover"
-        />
-      ) : (
-        <Initials fontSize={initialFontSize} initials={initials} coinColor={coinColor} size={physicalSize} />
-      )}
-      {!!presence && iconSize > 0 && (
-        <Image source={getPresenceIconSource(presence)} style={{ position: 'absolute', width: iconSize, height: iconSize }} />
-      )}
-    </View>
-  );
-};

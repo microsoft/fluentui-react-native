@@ -1,7 +1,7 @@
-import * as React from 'react';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
-import { ImageProps } from 'react-native';
+import { ImageProps, ViewProps, ImageURISource } from 'react-native';
 import { IBackgroundColorTokens, IForegroundColorTokens } from 'src/tokens';
+import { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const personaCoinName = 'RNFPersonaCoin';
 
@@ -61,7 +61,9 @@ export interface IPersonaCoinProps extends IViewWin32Props {
 }
 
 export interface IPersonaCoinSlotProps {
-  root: React.PropsWithoutRef<IViewWin32Props>;
+  root: ViewProps;
+  photo: ViewProps;
+  initials: ViewProps;
   icon: ImageProps;
 }
 
@@ -76,8 +78,16 @@ export interface IPersonaCoinTokens extends IBackgroundColorTokens, IForegroundC
   initialsFontSize?: number;
 }
 
+export interface IPersonaCoinState {
+  personaPhotoSource: ImageURISource | undefined;
+  iconSource: ImageURISource | undefined;
+}
+
 export interface IPersonaCoinType {
   props: IPersonaCoinProps;
   slotProps: IPersonaCoinSlotProps;
   tokens: IPersonaCoinTokens;
+  state: IPersonaCoinState;
 }
+
+export type IPersonaCoinRenderData = IRenderData<IPersonaCoinSlotProps, IPersonaCoinState>;
