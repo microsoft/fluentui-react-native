@@ -24,6 +24,8 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
     }
   });
 
+  const backgroundColor = React.useRef<string>();
+
   return (
     <View style={styles.root}>
       {/* settings */}
@@ -37,9 +39,9 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           style={[styles.textBox, textBoxBorderStyle]}
           placeholder="Background color"
           blurOnSubmit={true}
-          onChange={e => console.log(e.nativeEvent.text)}
+          onChange={e => backgroundColor.current = e.nativeEvent.text}
           onSubmitEditing={e => {
-            setCoinColor(e.nativeEvent.text);
+            setCoinColor(backgroundColor.current);
           }}
         />
 
