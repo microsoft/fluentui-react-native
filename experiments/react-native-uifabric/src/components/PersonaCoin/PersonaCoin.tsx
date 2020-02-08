@@ -1,60 +1,90 @@
 /** @jsx withSlots */
-import { Image, View } from 'react-native';
+import { Image, View, ViewStyle, ImageStyle, ImageURISource } from 'react-native';
 import {
   IPersonaCoinProps,
   IPersonaCoinType,
   personaCoinName,
   IPersonaCoinSlotProps,
   IPersonaCoinRenderData,
-  PersonaSize
+  PersonaSize,
+  IPersonaCoinState
 } from './PersonaCoin.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { filterViewProps, filterImageProps } from '../../utilities/RenderHelpers';
 import { settings } from './PersonaCoin.settings';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
+import { ISlots, withSlots, IRenderData } from '@uifabricshared/foundation-composable';
 import { Initials } from './PersonaCoinInitials';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { getSizeConfig, convertCoinColor } from './PersonaCoin.helpers';
+import { getSizeConfig, convertCoinColor, getPresenceIconSource } from './PersonaCoin.helpers';
 import { buildPersonaCoinRootStyles } from './PersonaCoin.tokens';
 import { foregroundColorTokens, backgroundColorTokens } from '../../tokens';
 
-const usePrepareForProps = (props: IPersonaCoinProps, useStyling: IUseComposeStyling<IPersonaCoinType>) => {
-  const { imageUrl, imageDescription, size, initials, coinColor } = props;
+function usePrepareForProps(
+  props: IPersonaCoinProps,
+  useStyling: IUseComposeStyling<IPersonaCoinType>
+): IRenderData<IPersonaCoinSlotProps, IPersonaCoinState> {
+  const { imageUrl, imageDescription, size, initials, coinColor, presence } = props;
   const normalizedSize = size === undefined ? PersonaSize.size40 : size;
 
-  const { physicalCoinSize, initialsFontSize: initialFontSize } = getSizeConfig(normalizedSize);
+  const { physicalCoinSize, initialsFontSize, iconSize } = getSizeConfig(normalizedSize);
 
-  const personaPhotoSource = imageUrl
+  const { ...rest } = props;
+  const rootStyle: ViewStyle = {
+    width: physicalCoinSize,
+    height: physicalCoinSize
+  };
+
+  const personaPhotoSource: ImageURISource | undefined = imageUrl
     ? {
         uri: imageUrl,
         width: physicalCoinSize,
         height: physicalCoinSize
       }
     : undefined;
+  const photoStyle: ImageStyle | undefined = imageUrl
+    ? {
+        borderRadius: physicalCoinSize / 2,
+        width: physicalCoinSize,
+        height: physicalCoinSize
+      }
+    : undefined;
 
-  const { ...rest } = props;
+  let iconSource: ImageURISource | undefined = undefined;
+  let iconStyle: ImageStyle | undefined = undefined;
+  if (!!presence && iconSize > 0) {
+    iconSource = getPresenceIconSource(presence);
+    iconStyle = {
+      position: 'absolute',
+      width: iconSize,
+      height: iconSize
+    };
+  }
+
   return {
     slotProps: mergeSettings<IPersonaCoinType['slotProps']>(useStyling(props), {
-      root: rest,
-      intials: {
+      root: { ...rest, style: rootStyle },
+      initials: {
         size: physicalCoinSize,
         initials,
-        fontSize: initialFontSize,
+        fontSize: initialsFontSize,
         backgroundColor: convertCoinColor(coinColor),
-        color: 'white' // for initials, we always render it as white
+        color: 'white' // for initials, we always render it as white, unless it is customized
       },
       photo: {
         accessibilityLabel: imageDescription,
-        resizeMode: 'cover'
+        resizeMode: 'cover',
+        style: photoStyle
       },
-      icon: {}
+      icon: {
+        style: iconStyle
+      }
     }),
     state: {
-      iconSource: undefined,
+      iconSource,
       personaPhotoSource
     }
   };
-};
+}
 
 const render = (Slots: ISlots<IPersonaCoinSlotProps>, renderData: IPersonaCoinRenderData): JSX.Element | null => {
   if (!renderData.state) {
@@ -65,7 +95,7 @@ const render = (Slots: ISlots<IPersonaCoinSlotProps>, renderData: IPersonaCoinRe
 
   return (
     <Slots.root>
-      {personaPhotoSource ? <Slots.photo source={personaPhotoSource} /> : <Slots.initials />}
+      {personaPhotoSource ? <Slots.photo source={personaPhotoSource} /> : <Slots.initials {...renderData.slotProps!.initials} />}
       {!!iconSource && <Slots.icon source={iconSource} />}
     </Slots.root>
   );
