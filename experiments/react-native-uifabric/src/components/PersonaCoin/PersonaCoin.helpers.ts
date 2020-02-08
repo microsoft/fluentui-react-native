@@ -23,7 +23,7 @@ export type PersonaSizeConfig = {
 export function getSizeConfig(size: PersonaSize): PersonaSizeConfig {
   switch (size) {
     case PersonaSize.size8:
-      return { physicalCoinSize: 8, iconSize: 0, initialsFontSize: 0 };
+      return { physicalCoinSize: 8, iconSize: 0, initialsFontSize: 4 };
     case PersonaSize.size24:
       return { physicalCoinSize: 24, iconSize: 8, initialsFontSize: 10 };
     case PersonaSize.size32:
