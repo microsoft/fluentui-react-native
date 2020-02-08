@@ -21,6 +21,12 @@ export const styles = StyleSheet.create({
   },
   oneCoin: {
     margin: 8
+  },
+  textBox: {
+    borderWidth: 1,
+    height: 25,
+    fontSize: 12,
+    width: 150
   }
 });
 

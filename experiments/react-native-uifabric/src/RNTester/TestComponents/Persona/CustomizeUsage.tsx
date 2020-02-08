@@ -1,18 +1,28 @@
 import * as React from 'react';
-import { PersonaSize, PersonaCoinColor, PersonaPresence, PersonaCoin } from '../../../components/PersonaCoin';
-import { Switch, View, Text, Picker } from 'react-native';
+import { PersonaSize, PersonaPresence, PersonaCoin } from '../../../components/PersonaCoin';
+import { Switch, View, Text, Picker, TextInput } from 'react-native';
 import { styles, steveBallerPhotoUrl } from './styles';
 import { getAllEnumValues } from './utils';
+import { useTheme } from '@uifabricshared/theming-react-native';
 
-const allSizes = getAllEnumValues(PersonaSize);
-const allColors = getAllEnumValues(PersonaCoinColor);
 const allPresences = getAllEnumValues(PersonaPresence);
 
 export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
-  const [imageSize, setImageSize] = React.useState(PersonaSize.size40);
-  const [coinColor, setCoinColor] = React.useState(PersonaCoinColor.gold);
+  const [imageSize] = React.useState(PersonaSize.size56);
+  const [coinColor, setCoinColor] = React.useState<string | undefined>(undefined);
   const [presence, setPresence] = React.useState(PersonaPresence.none);
+
+  const theme = useTheme();
+  const textBoxBorderStyle = {
+    borderColor: theme.colors.inputBorder
+  };
+
+  const CustomizedPersonaCoin = PersonaCoin.customize({
+    tokens: {
+      backgroundColor: coinColor
+    }
+  });
 
   return (
     <View style={styles.root}>
@@ -23,27 +33,15 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           <Switch value={showImage} onValueChange={setShowImage} />
         </View>
 
-        <Picker
-          prompt="Size"
-          style={styles.header}
-          selectedValue={PersonaSize[imageSize]}
-          onValueChange={size => setImageSize(PersonaSize[size as string])}
-        >
-          {allSizes.map((size, index) => (
-            <Picker.Item label={size} key={index} value={size} />
-          ))}
-        </Picker>
-
-        <Picker
-          prompt="Coin color"
-          style={styles.header}
-          selectedValue={PersonaCoinColor[coinColor]}
-          onValueChange={color => setCoinColor(PersonaCoinColor[color as string])}
-        >
-          {allColors.map((color, index) => (
-            <Picker.Item label={color} key={index} value={color} />
-          ))}
-        </Picker>
+        <TextInput
+          style={[styles.textBox, textBoxBorderStyle]}
+          placeholder="Background color"
+          blurOnSubmit={true}
+          onChange={e => console.log(e.nativeEvent.text)}
+          onSubmitEditing={e => {
+            setCoinColor(e.nativeEvent.text);
+          }}
+        />
 
         <Picker
           prompt="Presence status"
@@ -59,13 +57,12 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
 
       {/* component under test */}
       <View style={styles.personaContainer}>
-        <PersonaCoin
+        <CustomizedPersonaCoin
           size={imageSize}
           initials="SB"
           imageDescription="Former CEO of Microsoft"
           presence={presence}
           imageUrl={showImage ? steveBallerPhotoUrl : undefined}
-          coinColor={coinColor}
         />
       </View>
     </View>
