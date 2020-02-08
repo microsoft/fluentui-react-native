@@ -62,7 +62,7 @@ export interface IPersonaCoinProps extends IViewWin32Props {
 
 export interface IPersonaCoinSlotProps {
   root: ViewProps;
-  photo: ViewProps;
+  photo: ImageProps;
   initials: ViewProps;
   icon: ImageProps;
 }
@@ -72,10 +72,9 @@ export type IconAlignment = 'start' | 'center' | 'end';
 export interface IPersonaCoinTokens extends IBackgroundColorTokens, IForegroundColorTokens {
   coinSize?: number;
   iconSize?: number;
-  iconSource?: string;
+  initialsFontSize?: number;
   horizontalIconAlignment?: IconAlignment;
   verticalIconAlignment?: IconAlignment;
-  initialsFontSize?: number;
 }
 
 export interface IPersonaCoinState {

@@ -19,8 +19,8 @@
     "verify-api": "just-scripts verify-api-extractor",
     "update-api": "just-scripts update-api-extractor",
     "build:tester": "just-scripts bundle --useMetro --bundleName rnTester",
-    "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --windowTitle \"FluentUI Tester\" --basePath ./dist",
-    "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\""
+    "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
+    "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --pluginProps"
   },
   "dependencies": {
     "@uifabricshared/foundation-composable": "0.5.3",

@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { PersonaSize, PersonaCoinColor, PersonaPresence } from '../../../components/PersonaCoin';
+import { PersonaSize, PersonaCoinColor, PersonaPresence, PersonaCoin } from '../../../components/PersonaCoin';
 import { Switch, View, Text, Picker } from 'react-native';
 import { styles, satyaPhotoUrl } from './styles';
 import { getAllEnumValues } from './utils';
-import { PersonaCoinCore } from '../../../components/PersonaCoin/PersonaCoinCore';
 
 const allSizes = getAllEnumValues(PersonaSize);
 const allColors = getAllEnumValues(PersonaCoinColor);
@@ -60,7 +59,7 @@ export const PersonaCoinTest: React.FunctionComponent<{}> = () => {
 
       {/* component under test */}
       <View style={styles.personaContainer}>
-        <PersonaCoinCore
+        <PersonaCoin
           size={imageSize}
           initials="SN"
           imageDescription="Photo of Satya Nadella"
