@@ -1,17 +1,19 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { Separator } from '../../../components/Separator';
 import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';
+import { styles } from './styles';
+import { TextWin32 } from '@office-iss/react-native-win32';
 
 export const PersonaCoinTest: React.FunctionComponent<{}> = () => {
   return (
     <View>
-      <Text style={{ fontSize: 15, fontWeight: 'bold' }}>Standard Usage</Text>
+      <TextWin32 style={styles.section}>Standard Usage</TextWin32>
       <Separator />
       <StandardUsage />
 
-      <Text style={{ fontSize: 15, fontWeight: 'bold', marginTop: 20 }}>Customize Usage</Text>
+      <TextWin32 style={styles.section}>Customize Usage</TextWin32>
       <Separator />
       <CustomizeUsage />
     </View>

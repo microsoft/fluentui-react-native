@@ -13,9 +13,9 @@ const _keyProps: (keyof IPersonaCoinTokens)[] = [
   'backgroundColor',
   'coinSize',
   'color',
-  'horizontalIconAlignment',
   'iconSize',
   'initialsFontSize',
+  'horizontalIconAlignment',
   'verticalIconAlignment'
 ];
 

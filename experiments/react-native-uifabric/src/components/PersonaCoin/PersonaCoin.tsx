@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { Image, View, ViewStyle, ImageStyle, ImageURISource } from 'react-native';
+import { Image, View, ViewStyle, ImageStyle, ImageURISource, TextStyle } from 'react-native';
 import {
   IPersonaCoinProps,
   IPersonaCoinType,
@@ -7,7 +7,8 @@ import {
   IPersonaCoinSlotProps,
   IPersonaCoinRenderData,
   PersonaSize,
-  IPersonaCoinState
+  IPersonaCoinState,
+  PersonaCoinColor
 } from './PersonaCoin.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { filterViewProps, filterImageProps } from '../../utilities/RenderHelpers';
@@ -24,7 +25,9 @@ function usePrepareForProps(
   useStyling: IUseComposeStyling<IPersonaCoinType>
 ): IRenderData<IPersonaCoinSlotProps, IPersonaCoinState> {
   const { imageUrl, imageDescription, size, initials, coinColor, presence } = props;
+
   const normalizedSize = size === undefined ? PersonaSize.size40 : size;
+  const normalizedCoinColor = coinColor === undefined ? PersonaCoinColor.lightBlue : coinColor;
 
   const { physicalCoinSize, initialsFontSize, iconSize } = getSizeConfig(normalizedSize);
 
@@ -34,20 +37,35 @@ function usePrepareForProps(
     height: physicalCoinSize
   };
 
-  const personaPhotoSource: ImageURISource | undefined = imageUrl
-    ? {
-        uri: imageUrl,
-        width: physicalCoinSize,
-        height: physicalCoinSize
-      }
-    : undefined;
-  const photoStyle: ImageStyle | undefined = imageUrl
-    ? {
-        borderRadius: physicalCoinSize / 2,
-        width: physicalCoinSize,
-        height: physicalCoinSize
-      }
-    : undefined;
+  let personaPhotoSource: ImageURISource | undefined;
+  let photoStyle: ImageStyle | undefined;
+  let initialsStyle: ViewStyle | undefined;
+  let initialsTextStyle: TextStyle | undefined;
+
+  if (imageUrl) {
+    personaPhotoSource = {
+      uri: imageUrl,
+      width: physicalCoinSize,
+      height: physicalCoinSize
+    };
+
+    photoStyle = {
+      borderRadius: physicalCoinSize / 2,
+      width: physicalCoinSize,
+      height: physicalCoinSize
+    };
+  } else {
+    initialsStyle = {
+      borderRadius: physicalCoinSize / 2,
+      width: physicalCoinSize,
+      height: physicalCoinSize,
+      backgroundColor: convertCoinColor(normalizedCoinColor)
+    };
+    initialsTextStyle = {
+      fontSize: initialsFontSize,
+      color: 'white'
+    };
+  }
 
   let iconSource: ImageURISource | undefined = undefined;
   let iconStyle: ImageStyle | undefined = undefined;
@@ -60,15 +78,15 @@ function usePrepareForProps(
     };
   }
 
+  const stylized = useStyling(props);
+
   return {
-    slotProps: mergeSettings<IPersonaCoinType['slotProps']>(useStyling(props), {
+    slotProps: mergeSettings<IPersonaCoinType['slotProps']>(stylized, {
       root: { ...rest, style: rootStyle },
       initials: {
-        size: physicalCoinSize,
         initials,
-        fontSize: initialsFontSize,
-        backgroundColor: convertCoinColor(coinColor),
-        color: 'white' // for initials, we always render it as white, unless it is customized
+        style: initialsStyle,
+        textStyle: initialsTextStyle
       },
       photo: {
         accessibilityLabel: imageDescription,
@@ -95,7 +113,7 @@ const render = (Slots: ISlots<IPersonaCoinSlotProps>, renderData: IPersonaCoinRe
 
   return (
     <Slots.root>
-      {personaPhotoSource ? <Slots.photo source={personaPhotoSource} /> : <Slots.initials {...renderData.slotProps!.initials} />}
+      {personaPhotoSource ? <Slots.photo source={personaPhotoSource} /> : <Slots.initials />}
       {!!iconSource && <Slots.icon source={iconSource} />}
     </Slots.root>
   );
@@ -127,7 +145,7 @@ export const PersonaCoin = compose<IPersonaCoinType>({
       { source: 'iconSize', target: 'width' },
       { source: 'iconSize', target: 'height' }
     ],
-    initials: [foregroundColorTokens, { source: 'initialsFontSize', target: 'fontSize' }],
-    photo: [backgroundColorTokens]
+    initials: [foregroundColorTokens, backgroundColorTokens, { source: 'initialsFontSize', target: 'fontSize' }],
+    photo: []
   }
 });

@@ -1,29 +1,17 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleProp, ViewStyle, TextStyle } from 'react-native';
 
 export interface IPersonaCoinInitials {
-  size: number;
-  fontSize: number;
-  backgroundColor?: string;
-  color?: string;
+  style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
   initials?: string;
 }
 
 export const Initials: React.FunctionComponent<IPersonaCoinInitials> = (props: IPersonaCoinInitials) => {
-  const { size, fontSize, backgroundColor, color, initials } = props;
-
+  const { style, textStyle, initials } = props;
   return (
-    <View
-      style={{
-        borderRadius: size / 2,
-        width: size,
-        height: size,
-        backgroundColor,
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}
-    >
-      <Text style={{ fontSize, color }}>{initials}</Text>
+    <View style={[style, { justifyContent: 'center', alignItems: 'center' }]}>
+      <Text style={textStyle}>{initials}</Text>
     </View>
   );
 };

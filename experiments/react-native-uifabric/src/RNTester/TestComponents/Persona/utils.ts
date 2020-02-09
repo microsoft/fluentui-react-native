@@ -1,5 +1,9 @@
+export const undefinedText = '(undefined)';
+
 export function getAllEnumValues<T extends object>(o: T): string[] {
-  return Object.keys(o).filter(item => {
+  const results = Object.keys(o).filter(item => {
     return isNaN(Number(item));
   });
+  results.unshift(undefinedText);
+  return results;
 }

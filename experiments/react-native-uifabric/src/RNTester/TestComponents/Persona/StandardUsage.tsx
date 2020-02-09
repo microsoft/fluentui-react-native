@@ -2,7 +2,7 @@ import * as React from 'react';
 import { PersonaSize, PersonaCoinColor, PersonaPresence, PersonaCoin } from '../../../components/PersonaCoin';
 import { Switch, View, Text, Picker } from 'react-native';
 import { styles, satyaPhotoUrl } from './styles';
-import { getAllEnumValues } from './utils';
+import { getAllEnumValues, undefinedText } from './utils';
 
 const allSizes = getAllEnumValues(PersonaSize);
 const allColors = getAllEnumValues(PersonaCoinColor);
@@ -10,9 +10,9 @@ const allPresences = getAllEnumValues(PersonaPresence);
 
 export const StandardUsage: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
-  const [imageSize, setImageSize] = React.useState(PersonaSize.size40);
+  const [imageSize, setImageSize] = React.useState(PersonaSize.size72);
   const [coinColor, setCoinColor] = React.useState(PersonaCoinColor.gold);
-  const [presence, setPresence] = React.useState(PersonaPresence.none);
+  const [presence, setPresence] = React.useState(PersonaPresence.online);
 
   return (
     <View style={styles.root}>
@@ -26,7 +26,7 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
         <Picker
           prompt="Size"
           style={styles.header}
-          selectedValue={PersonaSize[imageSize]}
+          selectedValue={imageSize ? PersonaSize[imageSize] : undefinedText}
           onValueChange={size => setImageSize(PersonaSize[size as string])}
         >
           {allSizes.map((size, index) => (
@@ -37,7 +37,7 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
         <Picker
           prompt="Coin color"
           style={styles.header}
-          selectedValue={PersonaCoinColor[coinColor]}
+          selectedValue={coinColor ? PersonaCoinColor[coinColor] : undefinedText}
           onValueChange={color => setCoinColor(PersonaCoinColor[color as string])}
         >
           {allColors.map((color, index) => (
@@ -48,7 +48,7 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
         <Picker
           prompt="Presence status"
           style={styles.header}
-          selectedValue={PersonaPresence[presence]}
+          selectedValue={presence ? PersonaPresence[presence] : undefinedText}
           onValueChange={presence => setPresence(PersonaPresence[presence as string])}
         >
           {allPresences.map((presence, index) => (
@@ -58,16 +58,14 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
       </View>
 
       {/* component under test */}
-      <View style={styles.personaContainer}>
-        <PersonaCoin
-          size={imageSize}
-          initials="SN"
-          imageDescription="Photo of Satya Nadella"
-          presence={presence}
-          imageUrl={showImage ? satyaPhotoUrl : undefined}
-          coinColor={coinColor}
-        />
-      </View>
+      <PersonaCoin
+        size={imageSize}
+        initials="SN"
+        imageDescription="Photo of Satya Nadella"
+        presence={presence}
+        imageUrl={showImage ? satyaPhotoUrl : undefined}
+        coinColor={coinColor}
+      />
     </View>
   );
 };

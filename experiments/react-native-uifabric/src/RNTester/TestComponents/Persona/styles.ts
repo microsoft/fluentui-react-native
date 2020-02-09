@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   root: {
     marginTop: 16,
+    marginRight: 32,
     flexDirection: 'row'
   },
   settings: {
@@ -16,6 +17,12 @@ export const styles = StyleSheet.create({
     marginTop: 12,
     fontSize: 12
   },
+  section: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: '#0B6A0B',
+    marginTop: 12
+  },
   personaContainer: {
     minWidth: 150
   },
@@ -26,7 +33,8 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     height: 25,
     fontSize: 12,
-    width: 150
+    width: 150,
+    marginBottom: 8
   }
 });
 
