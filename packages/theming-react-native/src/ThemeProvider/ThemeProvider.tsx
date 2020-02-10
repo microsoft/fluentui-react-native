@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
-import { getBoxStyle } from './useBoxStyle';
+import { Box } from './Box';
 import { IThemeProviderProps } from './ThemeProvider.types';
 import { useThemeRegistry, ThemeRegistryContext, ThemeContext } from '../ThemeContext';
 import { IThemeEventListener } from '@uifabricshared/theme-registry';
@@ -24,11 +23,9 @@ export const ThemeProvider: React.FunctionComponent<IThemeProviderProps> = (prop
     };
   }, [registryToUse, themeName, setThemeState]);
 
-  const boxStyle = getBoxStyle(theme);
-
   const themeProvider = (
     <ThemeContext.Provider value={theme}>
-      <View style={boxStyle}>{children}</View>
+      <Box>{children}</Box>
     </ThemeContext.Provider>
   );
 

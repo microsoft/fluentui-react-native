@@ -1,4 +1,5 @@
-import { ViewStyle } from 'react-native';
+import * as React from 'react';
+import { View, ViewStyle } from 'react-native';
 import { ITheme } from '../Theme.types';
 import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
 import { useTheme } from '../ThemeContext';
@@ -14,4 +15,8 @@ export const useBoxStyle = (): ViewStyle => {
   return getStyles(theme).box;
 };
 
-export const getBoxStyle = (t: ITheme) => getStyles(t).box;
+type IBoxProps = React.PropsWithChildren<{}>;
+export const Box: React.FunctionComponent<IBoxProps> = (p: IBoxProps) => {
+  const style = useBoxStyle();
+  return <View style={style} {...p} />;
+};
