@@ -31,13 +31,8 @@ function _buildRootStyles(tokenProps: IPersonaCoinTokens /*, theme: ITheme */): 
     rootStyle.height = coinSize;
   }
 
-  if (horizontalIconAlignment) {
-    rootStyle.justifyContent = nameMap[horizontalIconAlignment] as ViewStyle['justifyContent'];
-  }
-
-  if (verticalIconAlignment) {
-    rootStyle.alignItems = nameMap[verticalIconAlignment] as ViewStyle['alignItems'];
-  }
+  rootStyle.justifyContent = nameMap[horizontalIconAlignment || 'end'] as ViewStyle['justifyContent'];
+  rootStyle.alignItems = nameMap[verticalIconAlignment || 'end'] as ViewStyle['alignItems'];
 
   return { style: rootStyle };
 }

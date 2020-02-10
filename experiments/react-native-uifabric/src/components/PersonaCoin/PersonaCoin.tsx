@@ -27,6 +27,7 @@ function usePrepareForProps(
   const { imageUrl, imageDescription, size, initials, coinColor, presence } = props;
 
   const normalizedSize = size === undefined ? PersonaSize.size40 : size;
+
   const normalizedCoinColor = coinColor === undefined ? PersonaCoinColor.lightBlue : coinColor;
 
   const { physicalCoinSize, initialsFontSize, iconSize } = getSizeConfig(normalizedSize);

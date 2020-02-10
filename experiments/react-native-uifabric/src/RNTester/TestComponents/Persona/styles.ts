@@ -23,9 +23,6 @@ export const styles = StyleSheet.create({
     color: '#0B6A0B',
     marginTop: 12
   },
-  personaContainer: {
-    minWidth: 150
-  },
   oneCoin: {
     margin: 8
   },

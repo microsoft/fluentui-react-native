@@ -2,18 +2,77 @@ import * as React from 'react';
 import { PersonaSize, PersonaPresence, PersonaCoin, IconAlignment } from '../../../components/PersonaCoin';
 import { Switch, View, Text, Picker, TextInput } from 'react-native';
 import { styles, steveBallerPhotoUrl } from './styles';
-import { getAllEnumValues, undefinedText } from './utils';
+import { undefinedText } from './utils';
 import { useTheme } from '@uifabricshared/theming-react-native';
 
-const allPresences = getAllEnumValues(PersonaPresence);
-const alignments: IconAlignment[] = ['(undefined)', 'start', 'center', 'end'];
+const alignmentValues: Array<typeof undefinedText | IconAlignment> = [undefinedText, 'start', 'center', 'end'];
+
+interface IAlignmentPickerProps {
+  label: string;
+  onSelectionChange: (value: IconAlignment | undefined) => void;
+}
+
+const AlignmentPicker: React.FunctionComponent<IAlignmentPickerProps> = (props: IAlignmentPickerProps) => {
+  const { label, onSelectionChange } = props;
+  return (
+    <Picker
+      prompt={label}
+      style={styles.header}
+      selectedValue={undefinedText}
+      onValueChange={(value, index) => onSelectionChange(index == 0 ? undefined : value)}
+    >
+      {alignmentValues.map((alignment, index) => (
+        <Picker.Item label={alignment} key={index} value={alignment} />
+      ))}
+    </Picker>
+  );
+};
+
+interface INumericInputProps {
+  label: string;
+  maximum?: number;
+  onSubmit: (value: number | undefined) => void;
+}
+
+const NumericInput: React.FunctionComponent<INumericInputProps> = (props: INumericInputProps) => {
+  const { label, onSubmit, maximum } = props;
+
+  const theme = useTheme();
+  const textBoxBorderStyle = {
+    borderColor: theme.colors.inputBorder,
+    width: 100
+  };
+
+  return (
+    <TextInput
+      placeholder={label}
+      style={[styles.textBox, textBoxBorderStyle]}
+      blurOnSubmit={true}
+      onSubmitEditing={e => {
+        const stringValue = e.nativeEvent.text;
+        let numericValue = stringValue ? parseInt(stringValue) : NaN;
+        if (isNaN(numericValue)) {
+          onSubmit(undefined);
+        } else {
+          numericValue = Math.max(0, numericValue);
+          if (maximum) {
+            numericValue = Math.min(numericValue, maximum);
+          }
+          onSubmit(numericValue);
+        }
+      }}
+    />
+  );
+};
 
 export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [imageSize] = React.useState(PersonaSize.size56);
-  const [coinColor, setCoinColor] = React.useState<string | undefined>(undefined);
-  const [textColor, setTextColor] = React.useState<string | undefined>(undefined);
-  const [presence, setPresence] = React.useState(PersonaPresence.none);
+  const [coinColor, setCoinColor] = React.useState<string>();
+  const [textColor, setTextColor] = React.useState<string>();
+  const [physicalCoinSize, setPhysicalCoinSize] = React.useState<number>();
+  const [iconSize, setIconSize] = React.useState<number>();
+  const [initialsFontSize, setInitialsFontSize] = React.useState<number>();
   const [horizontalAlignment, setHorizontalAlignment] = React.useState<IconAlignment>();
   const [verticalAlignment, setVerticalAlignment] = React.useState<IconAlignment>();
 
@@ -25,12 +84,14 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const CustomizedPersonaCoin = PersonaCoin.customize({
     tokens: {
       backgroundColor: coinColor,
-      color: textColor
+      color: textColor,
+      horizontalIconAlignment: horizontalAlignment,
+      verticalIconAlignment: verticalAlignment,
+      iconSize: iconSize,
+      initialsFontSize: initialsFontSize,
+      coinSize: physicalCoinSize
     }
   });
-
-  const backgroundColor = React.useRef<string>();
-  const color = React.useRef<string>();
 
   return (
     <View style={styles.root}>
@@ -45,9 +106,8 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           style={[styles.textBox, textBoxBorderStyle]}
           placeholder="Background color"
           blurOnSubmit={true}
-          onChange={e => (backgroundColor.current = e.nativeEvent.text)}
-          onSubmitEditing={() => {
-            setCoinColor(backgroundColor.current);
+          onSubmitEditing={e => {
+            setCoinColor(e.nativeEvent.text);
           }}
         />
 
@@ -55,34 +115,30 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           style={[styles.textBox, textBoxBorderStyle]}
           placeholder="Initials text color"
           blurOnSubmit={true}
-          onChange={e => (color.current = e.nativeEvent.text)}
-          onSubmitEditing={() => {
-            setTextColor(color.current);
+          onSubmitEditing={e => {
+            setTextColor(e.nativeEvent.text);
           }}
         />
 
-        <Picker
-          prompt="Presence status"
-          style={styles.header}
-          selectedValue={presence ? PersonaPresence[presence] : undefinedText}
-          onValueChange={presence => setPresence(PersonaPresence[presence as string])}
-        >
-          {allPresences.map((presence, index) => (
-            <Picker.Item label={presence} key={index} value={presence} />
-          ))}
-        </Picker>
+        <AlignmentPicker label="Horizontal icon alignment" onSelectionChange={setHorizontalAlignment} />
+
+        <AlignmentPicker label="Vertical icon alignment" onSelectionChange={setVerticalAlignment} />
+
+        <NumericInput label="Coin size" maximum={200} onSubmit={setPhysicalCoinSize} />
+
+        <NumericInput label="Icon size" maximum={100} onSubmit={setIconSize} />
+
+        <NumericInput label="Font size" maximum={50} onSubmit={setInitialsFontSize} />
       </View>
 
       {/* component under test */}
-      {/* <View style={styles.personaContainer}> */}
       <CustomizedPersonaCoin
         size={imageSize}
         initials="SB"
         imageDescription="Former CEO of Microsoft"
-        presence={presence}
+        presence={PersonaPresence.away}
         imageUrl={showImage ? steveBallerPhotoUrl : undefined}
       />
-      {/* </View> */}
     </View>
   );
 };
