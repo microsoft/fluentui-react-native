@@ -1,0 +1,66 @@
+{
+  "name": "react-native-uifabric",
+  "version": "0.12.10",
+  "description": "A react-native companion to fabric web that only depends on stock controls and theming",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "private": true,
+  "scripts": {
+    "build": "just-scripts build",
+    "just": "just-scripts",
+    "clean": "just-scripts clean",
+    "code-style": "just-scripts code-style",
+    "lint": "just-scripts eslint",
+    "bundle": "just-scripts bundle --useMetro --bundleName uifabric",
+    "start:tester": "react-native start --projectRoot ./src",
+    "start-test": "just-scripts jest-watch",
+    "update-snapshots": "just-scripts jest -u",
+    "verify-api": "just-scripts verify-api-extractor",
+    "update-api": "just-scripts update-api-extractor",
+    "build:tester": "just-scripts bundle --useMetro --bundleName rnTester",
+    "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --windowTitle \"FluentUI Tester\" --basePath ./dist",
+    "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\""
+  },
+  "dependencies": {
+    "@uifabricshared/foundation-composable": "0.5.3",
+    "@uifabricshared/foundation-compose": "1.5.2",
+    "@uifabricshared/foundation-settings": "0.4.3",
+    "@uifabricshared/foundation-tokens": "0.4.2",
+    "@uifabricshared/immutable-merge": "0.2.2",
+    "@uifabricshared/theming-ramp": "0.5.2",
+    "@uifabricshared/theming-react-native": "0.3.2",
+    "tslib": "^1.9.3"
+  },
+  "devDependencies": {
+    "@office-iss/react-native-win32": "0.27.1",
+    "@office-iss/rex-win32": "0.0.34",
+    "@types/prop-types": "15.5.1",
+    "@types/react": "16.9.11",
+    "@types/react-dom": "16.9.5",
+    "@types/react-native": "0.60.19",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "office-ui-fabric-react": "^7.28.2",
+    "metro-react-native-babel-preset": "0.58.0",
+    "react": "16.8.6",
+    "react-native": "^0.60.0"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-native": "^0.59.0",
+    "@office-iss/react-native-win32": "0.27.1"
+  },
+  "metroBundles": {
+    "uifabric": {
+      "entry": "./lib/index.js",
+      "output": "./dist/react-native-uifabric.bundle"
+    },
+    "rnTester": {
+      "entry": "./lib/RNTester.js",
+      "output": "./dist/RNTester.bundle"
+    }
+  },
+  "author": "",
+  "license": "MIT"
+}
