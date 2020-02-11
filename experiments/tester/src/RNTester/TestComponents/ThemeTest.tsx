@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactNative from 'react-native';
 import { ThemeProvider, useTheme } from '@uifabricshared/theming-react-native';
 import { commonTestStyles } from '../styles';
-import { Button, PrimaryButton, StealthButton, Text } from '../../components';
+import { Button, PrimaryButton, StealthButton, Text } from 'react-native-uifabric';
 
 const Panel: React.FunctionComponent = () => {
   const [disabled, setDisabled] = React.useState(false);

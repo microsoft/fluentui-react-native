@@ -13,7 +13,7 @@
 3. Build the RNTester bundle:
 
 ```
-    yarn build:tester
+    yarn bundle
 ```
 
 4. Launch the RNTester app:

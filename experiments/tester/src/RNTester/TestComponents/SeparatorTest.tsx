@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Stack, Separator, Text } from '../../components';
+import { Button, Stack, Separator, Text } from 'react-native-uifabric';
 import { stackStyle, separatorStackStyle } from '../TesterStyles';
 
 const BlueSeparator = Separator.customize({ tokens: { color: 'blue' } });

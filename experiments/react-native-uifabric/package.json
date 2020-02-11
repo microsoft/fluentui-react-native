@@ -55,10 +55,6 @@
     "uifabric": {
       "entry": "./lib/index.js",
       "output": "./dist/react-native-uifabric.bundle"
-    },
-    "rnTester": {
-      "entry": "./lib/RNTester.js",
-      "output": "./dist/RNTester.bundle"
     }
   },
   "author": "",

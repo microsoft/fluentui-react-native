@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { Stack } from '../../components';
-import { Button } from '../../components';
+import { Stack, Button, IFocusable } from 'react-native-uifabric';
 import { stackStyle } from '../TesterStyles';
-import { IFocusable } from '../../hooks';
 
 export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
   const [state, setState] = React.useState({
-    focused: false,
+    focused: false
   });
   const buttonRef = React.useRef<IFocusable>(null);
 
@@ -19,7 +17,7 @@ export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
 
   return (
     <Stack style={stackStyle}>
-      <Button content={state.focused ? 'Focused' : 'Not Focused'} componentRef={buttonRef} accessibilityLabel='overridden button name' />
+      <Button content={state.focused ? 'Focused' : 'Not Focused'} componentRef={buttonRef} accessibilityLabel="overridden button name" />
       <Button content="Click to focus" onClick={onFocus} />
     </Stack>
   );

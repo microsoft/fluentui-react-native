@@ -1,3 +1,3 @@
 module.exports = {
-  reactNativePath: '../../node_modules/@office-iss/react-native-win32'
+  reactNativePath: '../../node_modules/react-native'
 };

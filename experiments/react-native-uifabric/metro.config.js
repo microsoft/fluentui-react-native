@@ -45,7 +45,6 @@ module.exports = {
       ),
       new RegExp(`${path.resolve('.', 'node_modules/react-native').replace(/[/\\\\]/g, '[/\\\\]')}.*`),
       new RegExp(`${path.resolve('../..', 'node_modules/office-ui-fabric-react').replace(/[/\\\\]/g, '[/\\\\]')}.*`)
-
     ]),
     hasteImplModulePath: path.resolve('../..', 'node_modules/@office-iss/react-native-win32/jest/hasteImpl.js'),
     platforms: ['win32', 'ios', 'android', 'windows', 'web', 'macos'],

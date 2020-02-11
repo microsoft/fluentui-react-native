@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { ScrollView } from 'react-native';
-import { StealthButton, Text, Separator } from '../components';
+import { ScrollView, View } from 'react-native';
+import { StealthButton, Text, Separator } from 'react-native-uifabric';
 import { registerThemes } from './CustomThemes';
 import { allTestComponents } from './TestComponents';
-import { ViewWin32 } from '@office-iss/react-native-win32';
 import { fabricTesterStyles } from './styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
 
@@ -16,11 +15,7 @@ msgq.spy(true);
 registerThemes();
 
 const EmptyComponent: React.FunctionComponent = () => {
-  return (
-    <Text fontSize={14} style={fabricTesterStyles.noTest}>
-      Select a component from the left.
-    </Text>
-  );
+  return <Text style={fabricTesterStyles.noTest}>Select a component from the left.</Text>;
 };
 
 // sort tests alphabetically by name
@@ -48,11 +43,9 @@ export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props:
   });
 
   return (
-    <ViewWin32 style={fabricTesterStyles.root}>
+    <View style={fabricTesterStyles.root}>
       <ScrollView style={fabricTesterStyles.testList} contentContainerStyle={fabricTesterStyles.testListContainerStyle}>
-        <Text fontSize={14} fontWeight="bold" style={fabricTesterStyles.testHeader}>
-          ⚛ FluentUI Tests
-        </Text>
+        <Text style={fabricTesterStyles.testHeader}>⚛ FluentUI Tests</Text>
 
         {sortedTestComponents.map((description, index) => {
           return (
@@ -72,6 +65,6 @@ export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props:
       <ScrollView>
         <TestComponent />
       </ScrollView>
-    </ViewWin32>
+    </View>
   );
 };

@@ -29,6 +29,7 @@
     "@uifabricshared/immutable-merge": "0.2.2",
     "@uifabricshared/theming-ramp": "0.5.2",
     "@uifabricshared/theming-react-native": "0.3.2",
+    "react-native-uifabric": "0.12.10",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
@@ -51,10 +52,6 @@
     "@office-iss/react-native-win32": "0.27.1"
   },
   "metroBundles": {
-    "uifabric": {
-      "entry": "./lib/index.js",
-      "output": "./dist/react-native-uifabric.bundle"
-    },
     "rnTester": {
       "entry": "./lib/RNTester.js",
       "output": "./dist/RNTester.bundle"
