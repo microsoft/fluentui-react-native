@@ -1,5 +1,5 @@
 {
-  "type": "minor",
+  "type": "patch",
   "comment": "fix peer dependencies",
   "packageName": "@uifabricshared/themed-stylesheet",
   "email": "adrum@microsoft.com",
