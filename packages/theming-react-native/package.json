@@ -25,7 +25,7 @@
     "@uifabricshared/theme-registry": "^0.2.2",
     "@uifabricshared/foundation-settings": "^0.4.3",
     "@uifabricshared/theming-ramp": "^0.5.2",
-    "@uifabricshared/themed-stylesheet": "0.2.3"
+    "@uifabricshared/themed-stylesheet": "^0.2.4"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
