@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "fix peer dependencies",
+  "packageName": "@uifabricshared/themed-stylesheet",
+  "email": "adrum@microsoft.com",
+  "commit": "fd7a2a25289820e901152e46159030d5e4b10a10",
+  "date": "2020-02-11T20:33:17.495Z"
+}

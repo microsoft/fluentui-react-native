@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Fix peer dependencies",
+  "packageName": "@uifabricshared/foundation-compose",
+  "email": "adrum@microsoft.com",
+  "commit": "fd7a2a25289820e901152e46159030d5e4b10a10",
+  "date": "2020-02-11T20:31:54.515Z"
+}
