@@ -26,5 +26,11 @@
     "babel-preset-expo": "^7.1.0",
     "typescript": "^3.6.3"
   },
+  "workspaces": {
+    "nohoist": [
+      "react-native",
+      "react-native/**"
+    ]
+  },
   "private": true
 }

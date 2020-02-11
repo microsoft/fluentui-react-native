@@ -42,13 +42,14 @@
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "office-ui-fabric-react": "^7.28.2",
+    "metro-config": "^0.58",
     "metro-react-native-babel-preset": "0.58.0",
     "react": "16.8.6",
     "react-native": "^0.60.0"
   },
   "peerDependencies": {
     "react": "^16.0.0",
-    "react-native": "^0.59.0",
+    "react-native": ">=0.59.0 <0.61",
     "@office-iss/react-native-win32": "0.27.1"
   },
   "metroBundles": {
