@@ -52,6 +52,7 @@ module.exports = {
     providesModuleNodeModules: ['@office-iss/react-native-win32']
   },
   transformer: {
+    assetRegistryPath: path.resolve(__dirname, 'src'),
     getTransformOptions: async () => ({
       transform: {
         experimentalImportSupport: false,

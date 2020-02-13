@@ -53,11 +53,11 @@
   },
   "metroBundles": {
     "uifabric": {
-      "entry": "./lib/index.js",
+      "entry": "./src/index.ts",
       "output": "./dist/react-native-uifabric.bundle"
     },
     "rnTester": {
-      "entry": "./lib/RNTester.js",
+      "entry": "./src/RNTester.ts",
       "output": "./dist/RNTester.bundle"
     }
   },
