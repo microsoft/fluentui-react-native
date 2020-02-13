@@ -2198,11 +2198,6 @@
   version "1.10.9"
   resolved "https://registry.yarnpkg.com/@microsoft/load-themed-styles/-/load-themed-styles-1.10.9.tgz#74fec6bbeace837f5c68a7809db752c5280cc9e7"
 
-"@microsoft/load-themed-styles@^1.10.26":
-  version "1.10.36"
-  resolved "https://registry.yarnpkg.com/@microsoft/load-themed-styles/-/load-themed-styles-1.10.36.tgz#aa087f1094d1f42b3672878f5c41806421478115"
-  integrity sha512-xsBSgHhUbivT6cHqw5UP567fa+yJ1gM/L9CDnYftTmeruxpDUsLiK1sPrWeyMc+5VSaxcd+lsY10vqDVEptxoA==
-
 "@microsoft/loader-load-themed-styles@^1.6.0":
   version "1.7.188"
   resolved "https://registry.yarnpkg.com/@microsoft/loader-load-themed-styles/-/loader-load-themed-styles-1.7.188.tgz#a2d8c4fa87992685ac47a0bd1e95b7869331b5a2"
@@ -2725,74 +2720,9 @@
     lodash.unescape "4.0.1"
     semver "^6.3.0"
 
-"@uifabric/foundation@^7.5.3":
-  version "7.5.3"
-  resolved "https://registry.yarnpkg.com/@uifabric/foundation/-/foundation-7.5.3.tgz#f7fbfd18abf8ff8455003d16dfb87541669e89cf"
-  integrity sha512-LCUETWPkTOjJ0LeP7/fyfpVt8MTzdb41LgV+n3rmKo809R1NjDyG62xX/f7DOLaEvJIO10f8h8I8vilYmUoCRg==
-  dependencies:
-    "@uifabric/merge-styles" "^7.8.3"
-    "@uifabric/set-version" "^7.0.3"
-    "@uifabric/styling" "^7.10.2"
-    "@uifabric/utilities" "^7.11.3"
-    tslib "^1.10.0"
-
-"@uifabric/icons@^7.3.2":
-  version "7.3.2"
-  resolved "https://registry.yarnpkg.com/@uifabric/icons/-/icons-7.3.2.tgz#7eef67422f8087ba73dd18aec669f64c0e40fc71"
-  integrity sha512-ZqlRBkFporJWHusvAzXI3ye99B/pKN/mGmHbMZtAPoGSFSge3ahv3GzQA8IvamrrHdf5j2OwCZR7db9BJvOOzA==
-  dependencies:
-    "@uifabric/set-version" "^7.0.3"
-    "@uifabric/styling" "^7.10.2"
-    tslib "^1.10.0"
-
-"@uifabric/merge-styles@^7.8.3":
-  version "7.8.3"
-  resolved "https://registry.yarnpkg.com/@uifabric/merge-styles/-/merge-styles-7.8.3.tgz#affb99342733791217474e3e7a7bd6d67c8e18c8"
-  integrity sha512-mMLXIKmB7NH2ss6k7I4o7kE7Dy9+vcgubkxNVsgzBdV9vlDtnMDMc6/nZjOxgmBAr1UCRxCxERaKSB1oNFxtAg==
-  dependencies:
-    "@uifabric/set-version" "^7.0.3"
-    tslib "^1.10.0"
-
 "@uifabric/prettier-rules@^7.0.3":
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/@uifabric/prettier-rules/-/prettier-rules-7.0.4.tgz#03082a6cc4b586104738a24892c56e0f1d3df1b6"
-
-"@uifabric/react-hooks@^7.0.3":
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/@uifabric/react-hooks/-/react-hooks-7.0.3.tgz#d51a96a64b0c4f33c0d0af371f53938aa92d4dae"
-  integrity sha512-ANkdK7ckRfljl4CKHDoW4H2DfTqRJ4QqTM7VD3IddcbZwBlvyhbRJO3sxnBigdBW5An7qdsJeZuOEoRjhm9e+Q==
-  dependencies:
-    "@uifabric/set-version" "^7.0.3"
-    "@uifabric/utilities" "^7.11.3"
-    tslib "^1.10.0"
-
-"@uifabric/set-version@^7.0.3":
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/@uifabric/set-version/-/set-version-7.0.3.tgz#3a82be857bbdc984dc74e9761e4bc48d268c9374"
-  integrity sha512-03A68Fyfx3y75dUW9rjQ2fZv/9zmGgMeovVLAQa0wc/oVjQ++eVDlAEK0AjfgnOaujYmhk79lXbYAuW3n+YUXw==
-  dependencies:
-    tslib "^1.10.0"
-
-"@uifabric/styling@^7.10.2":
-  version "7.10.2"
-  resolved "https://registry.yarnpkg.com/@uifabric/styling/-/styling-7.10.2.tgz#ba5398582f204fee43f2679bf6523ad418e10d32"
-  integrity sha512-a4BCtbm273s2997wZwBkOeWNm2lzUr6eVzE+CmShUVxXWAMPXI5ZZS6SZ4LpZkDkhdItLnNq+VODSJ7M/VM0aw==
-  dependencies:
-    "@microsoft/load-themed-styles" "^1.10.26"
-    "@uifabric/merge-styles" "^7.8.3"
-    "@uifabric/set-version" "^7.0.3"
-    "@uifabric/utilities" "^7.11.3"
-    tslib "^1.10.0"
-
-"@uifabric/utilities@^7.11.3":
-  version "7.11.3"
-  resolved "https://registry.yarnpkg.com/@uifabric/utilities/-/utilities-7.11.3.tgz#8672736bab450e4db9ed2d51aa309405317a318d"
-  integrity sha512-y/2H65F41Q3DU4GQJFWj6x09qfjMYcwutHkU7sm2r0h82K01u5qeCPkPV9RqGGsJOrqllvsR5BoaRP77a1ot8A==
-  dependencies:
-    "@uifabric/merge-styles" "^7.8.3"
-    "@uifabric/set-version" "^7.0.3"
-    prop-types "^15.5.10"
-    tslib "^1.10.0"
 
 "@unimodules/core@~4.0.0":
   version "4.0.0"
@@ -10946,22 +10876,6 @@ octokit-pagination-methods@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/octokit-pagination-methods/-/octokit-pagination-methods-1.1.0.tgz#cf472edc9d551055f9ef73f6e42b4dbb4c80bea4"
 
-office-ui-fabric-react@^7.28.2:
-  version "7.84.1"
-  resolved "https://registry.yarnpkg.com/office-ui-fabric-react/-/office-ui-fabric-react-7.84.1.tgz#981b5c06214ba8dcec01eac449b9fb0962e393da"
-  integrity sha512-FvztXk8WC96FQJRMD6g2jwDx8of+adAdxloL90o3+U9jqic3t2y9bQXODFxtmbPL1yxgPFuU8Kx/soCAvrIvgA==
-  dependencies:
-    "@microsoft/load-themed-styles" "^1.10.26"
-    "@uifabric/foundation" "^7.5.3"
-    "@uifabric/icons" "^7.3.2"
-    "@uifabric/merge-styles" "^7.8.3"
-    "@uifabric/react-hooks" "^7.0.3"
-    "@uifabric/set-version" "^7.0.3"
-    "@uifabric/styling" "^7.10.2"
-    "@uifabric/utilities" "^7.11.3"
-    prop-types "^15.5.10"
-    tslib "^1.10.0"
-
 on-finished@~2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.3.0.tgz#20f1336481b083cd75337992a16971aa2d906947"
@@ -11878,7 +11792,7 @@ prop-types-exact@^1.2.0:
     object.assign "^4.1.0"
     reflect.ownkeys "^0.2.0"
 
-prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   dependencies:
@@ -13895,7 +13809,7 @@ ts-loader@^6.1.0:
     micromatch "^4.0.0"
     semver "^6.0.0"
 
-tslib@^1.10.0, tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
+tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
 

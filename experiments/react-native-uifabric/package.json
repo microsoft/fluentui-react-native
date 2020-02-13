@@ -41,7 +41,6 @@
     "@types/react-native": "0.60.19",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "office-ui-fabric-react": "^7.28.2",
     "metro-react-native-babel-preset": "0.58.0",
     "react": "16.8.6",
     "react-native": "^0.60.0"
