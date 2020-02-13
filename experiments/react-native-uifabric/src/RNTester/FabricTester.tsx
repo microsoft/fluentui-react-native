@@ -8,9 +8,10 @@ import { fabricTesterStyles } from './styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
 
 // uncomment the below lines to enable message spy
-
-// const msgq = require('MessageQueue');
-// msgq.spy(true);
+/*
+const msgq = require('MessageQueue');
+msgq.spy(true);
+*/
 
 registerThemes();
 
