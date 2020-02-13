@@ -64,6 +64,7 @@ export interface IPersonaCoinSlotProps {
   root: ViewProps;
   photo: ImageProps;
   initials: TextProps;
+  initialsBackground: ViewProps;
   icon: ImageProps;
 }
 

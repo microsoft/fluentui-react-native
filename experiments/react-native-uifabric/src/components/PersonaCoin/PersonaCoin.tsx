@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { Image, View, ViewStyle, ImageStyle, ImageURISource, TextStyle } from 'react-native';
+import { Image, View, ImageStyle, ImageURISource, TextStyle, ViewStyle, Text } from 'react-native';
 import {
   IPersonaCoinProps,
   IPersonaCoinType,
@@ -13,18 +13,17 @@ import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose'
 import { filterViewProps, filterImageProps } from '../../utilities/RenderHelpers';
 import { settings } from './PersonaCoin.settings';
 import { ISlots, withSlots, IRenderData } from '@uifabricshared/foundation-composable';
-import { Initials } from './PersonaCoinInitials';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { getSizeConfig, convertCoinColor, getPresenceIconSource } from './PersonaCoin.helpers';
 import { buildPersonaCoinRootStyles, buildPersonaCoinContentStyles } from './PersonaCoin.tokens';
-import { colorTokens } from '../../tokens';
+import { foregroundColorTokens, backgroundColorTokens } from '../../tokens';
 
 function usePrepareForProps(
   props: IPersonaCoinProps,
   useStyling: IUseComposeStyling<IPersonaCoinType>
 ): IRenderData<IPersonaCoinSlotProps, IPersonaCoinState> {
 
-  const { imageUrl, imageDescription, size, initials, coinColor, presence } = props;
+  const { imageUrl, imageDescription, size, initials, coinColor, presence, ...rest } = props;
 
   const useSizeFromProps = size !== undefined;
   const normalizedSize = size === undefined ? PersonaSize.size40 : size;
@@ -36,12 +35,10 @@ function usePrepareForProps(
     sizeStyle.height = physicalCoinSize;
   }
 
-  const { ...rest } = props;
-  const rootStyle: ViewStyle = sizeStyle;
-
   let personaPhotoSource: ImageURISource | undefined;
   let photoStyle: ImageStyle | undefined;
   let initialsStyle: TextStyle | undefined;
+  let initialsBackgroundStyle: ViewStyle | undefined;
 
   if (imageUrl) {
     personaPhotoSource = {
@@ -54,14 +51,15 @@ function usePrepareForProps(
     }
   } else {
     initialsStyle = {};
+    initialsBackgroundStyle = { flexGrow: 1, alignSelf: 'stretch', justifyContent: 'center', alignItems: 'center' };
 
     if (useSizeFromProps) {
-      initialsStyle.borderRadius = physicalCoinSize / 2;
+      initialsBackgroundStyle.borderRadius = physicalCoinSize / 2;
       initialsStyle.fontSize = initialsFontSize;
     }
 
     if (coinColor !== undefined) {
-      initialsStyle.backgroundColor = convertCoinColor(coinColor);
+      initialsBackgroundStyle.backgroundColor = convertCoinColor(coinColor);
     }
   }
 
@@ -81,10 +79,13 @@ function usePrepareForProps(
 
   return {
     slotProps: mergeSettings<IPersonaCoinType['slotProps']>(useStyling(props), {
-      root: { ...rest, style: rootStyle },
+      root: { ...rest, style: sizeStyle },
       initials: {
-        initials,
+        children: initials,
         style: initialsStyle
+      },
+      initialsBackground: {
+        style: initialsBackgroundStyle
       },
       photo: {
         accessibilityLabel: imageDescription,
@@ -111,7 +112,11 @@ const render = (Slots: ISlots<IPersonaCoinSlotProps>, renderData: IPersonaCoinRe
 
   return (
     <Slots.root>
-      {personaPhotoSource ? <Slots.photo source={personaPhotoSource} /> : <Slots.initials />}
+      {personaPhotoSource ? 
+        <Slots.photo source={personaPhotoSource} /> : 
+        <Slots.initialsBackground>
+          <Slots.initials />
+        </Slots.initialsBackground> }
       {!!iconSource && <Slots.icon source={iconSource} />}
     </Slots.root>
   );
@@ -130,28 +135,35 @@ export const PersonaCoin = compose<IPersonaCoinType>({
       slotType: Image,
       filter: filterImageProps
     },
-    initials: Initials,
+    initials: Text,
+    initialsBackground: {
+      slotType: View,
+      filter: filterViewProps
+    },
     icon: {
-      slotType: Image as React.ComponentType<object>,
+      slotType: Image,
       filter: filterImageProps
     }
   },
   render: render,
   styles: {
-    root: [buildPersonaCoinRootStyles],
-    icon: [
-      { source: 'iconSize', target: 'width' },
-      { source: 'iconSize', target: 'height' }
-    ],
+    root: [buildPersonaCoinRootStyles], 
     initials: [
-      colorTokens,
+      foregroundColorTokens,
       { source: 'initialsFontSize', target: 'fontSize' },
+    ],
+    initialsBackground: [
+      backgroundColorTokens,
       buildPersonaCoinContentStyles
     ],
     photo: [
       { source: 'coinSize', target: 'width' },
       { source: 'coinSize', target: 'height' },
       buildPersonaCoinContentStyles
-    ]
+    ],
+    icon: [
+      { source: 'iconSize', target: 'width' },
+      { source: 'iconSize', target: 'height' }
+    ],
   }
 });
