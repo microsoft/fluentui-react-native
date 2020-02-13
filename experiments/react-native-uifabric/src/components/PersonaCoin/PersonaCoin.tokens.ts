@@ -1,5 +1,5 @@
 import { styleFunction } from '@uifabricshared/foundation-tokens';
-import { ViewStyle, ViewProps } from 'react-native';
+import { ViewStyle, ViewProps, ImageProps } from 'react-native';
 import { IPersonaCoinTokens } from './PersonaCoin.types';
 import { ITheme } from '@uifabricshared/theming-ramp';
 
@@ -9,12 +9,8 @@ const nameMap: { [key: string]: string } = {
   end: 'flex-end'
 };
 
-const _keyProps: (keyof IPersonaCoinTokens)[] = [
-  'backgroundColor',
+const _rootKeyProps: (keyof IPersonaCoinTokens)[] = [
   'coinSize',
-  'color',
-  'iconSize',
-  'initialsFontSize',
   'horizontalIconAlignment',
   'verticalIconAlignment'
 ];
@@ -37,4 +33,24 @@ function _buildRootStyles(tokenProps: IPersonaCoinTokens /*, theme: ITheme */): 
   return { style: rootStyle };
 }
 
-export const buildPersonaCoinRootStyles = styleFunction<ViewProps, IPersonaCoinTokens, ITheme>(_buildRootStyles, _keyProps);
+const _photoKeyProps: (keyof IPersonaCoinTokens)[] = [
+  'coinSize',
+];
+
+export const buildPersonaCoinRootStyles = styleFunction<ViewProps, IPersonaCoinTokens, ITheme>(_buildRootStyles, _rootKeyProps);
+
+function _buildPersonaCoinContentStyles(tokenProps: IPersonaCoinTokens /*, theme: ITheme */): ImageProps {
+  const { coinSize } = tokenProps;
+  if (coinSize && coinSize <= 0) {
+    throw new Error(`Invalid value of {coinSize} for 'coinSize'.`);
+  }
+
+  return {
+    source: { uri: '' },
+    style: !!coinSize && {
+      borderRadius: coinSize / 2
+    }
+  };
+}
+
+export const buildPersonaCoinContentStyles = styleFunction<ImageProps, IPersonaCoinTokens, ITheme>(_buildPersonaCoinContentStyles, _photoKeyProps);

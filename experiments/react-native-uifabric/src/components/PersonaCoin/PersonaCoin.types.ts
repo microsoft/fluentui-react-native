@@ -1,5 +1,5 @@
 import { IViewWin32Props } from '@office-iss/react-native-win32';
-import { ImageProps, ViewProps, ImageURISource } from 'react-native';
+import { ImageProps, ViewProps, ImageURISource, TextProps } from 'react-native';
 import { IBackgroundColorTokens, IForegroundColorTokens } from 'src/tokens';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 
@@ -63,7 +63,7 @@ export interface IPersonaCoinProps extends IViewWin32Props {
 export interface IPersonaCoinSlotProps {
   root: ViewProps;
   photo: ImageProps;
-  initials: ViewProps;
+  initials: TextProps;
   icon: ImageProps;
 }
 

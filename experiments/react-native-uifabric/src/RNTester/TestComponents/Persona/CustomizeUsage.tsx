@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PersonaSize, PersonaPresence, PersonaCoin, IconAlignment } from '../../../components/PersonaCoin';
+import { PersonaPresence, PersonaCoin, IconAlignment, IPersonaCoinTokens } from '../../../components/PersonaCoin';
 import { Switch, View, Text, Picker, TextInput } from 'react-native';
 import { styles, steveBallerPhotoUrl } from './styles';
 import { undefinedText } from './utils';
@@ -67,7 +67,6 @@ const NumericInput: React.FunctionComponent<INumericInputProps> = (props: INumer
 
 export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
-  const [imageSize] = React.useState(PersonaSize.size56);
   const [coinColor, setCoinColor] = React.useState<string>();
   const [textColor, setTextColor] = React.useState<string>();
   const [physicalCoinSize, setPhysicalCoinSize] = React.useState<number>();
@@ -81,17 +80,30 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
     borderColor: theme.colors.inputBorder
   };
 
-  const CustomizedPersonaCoin = PersonaCoin.customize({
-    tokens: {
-      backgroundColor: coinColor,
-      color: textColor,
-      horizontalIconAlignment: horizontalAlignment,
-      verticalIconAlignment: verticalAlignment,
-      iconSize: iconSize,
-      initialsFontSize: initialsFontSize,
-      coinSize: physicalCoinSize
-    }
-  });
+  const tokens: Partial<IPersonaCoinTokens> = {};
+  if (coinColor) {
+    tokens.backgroundColor = coinColor;
+  }
+  if (textColor) {
+    tokens.color = textColor;
+  }
+  if (horizontalAlignment) {
+    tokens.horizontalIconAlignment = horizontalAlignment;
+  }
+  if (verticalAlignment) {
+    tokens.verticalIconAlignment = verticalAlignment;
+  }
+  if (iconSize) {
+    tokens.iconSize = iconSize;
+  }
+  if (initialsFontSize) {
+    tokens.initialsFontSize = initialsFontSize;
+  }
+  if (physicalCoinSize) {
+    tokens.coinSize = physicalCoinSize;
+  }
+
+  const CustomizedPersonaCoin = PersonaCoin.customize({tokens});
 
   return (
     <View style={styles.root}>
@@ -133,7 +145,6 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
 
       {/* component under test */}
       <CustomizedPersonaCoin
-        size={imageSize}
         initials="SB"
         imageDescription="Former CEO of Microsoft"
         presence={PersonaPresence.away}
