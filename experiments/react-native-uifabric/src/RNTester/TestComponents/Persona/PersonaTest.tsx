@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Separator } from '../../../components/Separator';
-import { styles, satyaPhotoUrl } from '../PersonaCoin/styles';
 import { TextWin32 } from '@office-iss/react-native-win32';
 import { Persona } from '../../../components/Persona/Persona';
 import { PersonaSize, PersonaPresence } from '../../../components/PersonaCoin';
+import { styles, rajeshImageUrl } from './styles';
 
 export const PersonaTest: React.FunctionComponent<{}> = () => {
   return (
@@ -13,11 +13,14 @@ export const PersonaTest: React.FunctionComponent<{}> = () => {
       <Separator />
       <Persona
         style={styles.root}
-        text="Satya Nadella"
-        secondaryText="CEO"
-        tertiaryText="Building 34/5600"
-        size={PersonaSize.size72}
-        imageUrl={satyaPhotoUrl}
+        text="Rajesh Jha"
+        secondaryText="Executive Vice President"
+        tertiaryText="Experiences and Devices"
+        optionalText="Building 36/5600"
+        size={PersonaSize.size100}
+        initials="RJ"
+        imageUrl={rajeshImageUrl}
+        imageDescription="Profile photo of Rajesh Jha"
         presence={PersonaPresence.busy}
       />
 

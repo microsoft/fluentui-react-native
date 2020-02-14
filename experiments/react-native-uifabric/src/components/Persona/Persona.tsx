@@ -6,7 +6,6 @@ import { View, Text } from 'react-native';
 import { filterViewProps } from '../../utilities/RenderHelpers';
 import { PersonaCoin } from '../PersonaCoin/PersonaCoin';
 import { ISlots, withSlots, IRenderData } from '@uifabricshared/foundation-composable';
-import { foregroundColorTokens } from '../../tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { buildPersonaRootStyles } from './Persona.tokens';
 
@@ -75,10 +74,10 @@ export const Persona = compose<IPersonaType>({
   },
   styles: {
     root: [buildPersonaRootStyles],
-    text: [foregroundColorTokens, { source: 'verticalGap', target: 'marginBottom' }],
-    secondary: [foregroundColorTokens, { source: 'verticalGap', target: 'marginBottom' }],
-    tertinary: [foregroundColorTokens, { source: 'verticalGap', target: 'marginBottom' }],
-    optional: [foregroundColorTokens],
+    text: [{ source: 'verticalGap', target: 'marginBottom' }],
+    secondary: [{ source: 'verticalGap', target: 'marginBottom' }],
+    tertinary: [{ source: 'verticalGap', target: 'marginBottom' }],
+    optional: [],
     stack: [{ source: 'horizontalGap', target: 'marginLeft' }]
   }
 });
