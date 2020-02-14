@@ -1,6 +1,7 @@
 import { IPersonaCoinProps, IPersonaCoinTokens } from '../PersonaCoin';
 import { ViewProps, TextProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
+import { ITextTokens } from '../../../src/tokens/TextTokens';
 
 export const personaName = 'RNFPersona';
 
@@ -24,6 +25,11 @@ export interface IPersonaSlotProps {
 export interface IPersonaTokens extends IPersonaCoinTokens {
   verticalGap?: number;
   horizontalGap?: number;
+
+  textFont?: ITextTokens;
+  secondaryFont?: ITextTokens;
+  tertinaryFont?: ITextTokens;
+  optionalFont?: ITextTokens;
 }
 
 export interface IPersonaType {
