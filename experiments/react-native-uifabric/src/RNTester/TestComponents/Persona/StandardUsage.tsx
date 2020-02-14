@@ -26,7 +26,7 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
         <Picker
           prompt="Size"
           style={styles.header}
-          selectedValue={imageSize ? PersonaSize[imageSize] : undefinedText}
+          selectedValue={imageSize !== undefined ? PersonaSize[imageSize] : undefinedText}
           onValueChange={size => setImageSize(PersonaSize[size as string])}
         >
           {allSizes.map((size, index) => (
@@ -37,7 +37,7 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
         <Picker
           prompt="Coin color"
           style={styles.header}
-          selectedValue={coinColor ? PersonaCoinColor[coinColor] : undefinedText}
+          selectedValue={coinColor !== undefined ? PersonaCoinColor[coinColor] : undefinedText}
           onValueChange={color => setCoinColor(PersonaCoinColor[color as string])}
         >
           {allColors.map((color, index) => (
@@ -48,7 +48,7 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
         <Picker
           prompt="Presence status"
           style={styles.header}
-          selectedValue={presence ? PersonaPresence[presence] : undefinedText}
+          selectedValue={presence !== undefined ? PersonaPresence[presence] : undefinedText}
           onValueChange={presence => setPresence(PersonaPresence[presence as string])}
         >
           {allPresences.map((presence, index) => (
