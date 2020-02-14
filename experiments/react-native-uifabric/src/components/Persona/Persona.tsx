@@ -2,32 +2,42 @@
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { IPersonaType, personaName, IPersonaSlotProps, IPersonaProps } from './Persona.types';
 import { settings } from './Persona.settings';
-import { View, Text } from 'react-native';
+import { View, Text, TextStyle } from 'react-native';
 import { filterViewProps } from '../../utilities/RenderHelpers';
 import { PersonaCoin } from '../PersonaCoin/PersonaCoin';
 import { ISlots, withSlots, IRenderData } from '@uifabricshared/foundation-composable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { buildPersonaRootStyles } from './Persona.tokens';
+import { getTextFont } from './Persona.helpers';
 
 function usePrepareForProps(props: IPersonaProps, useStyling: IUseComposeStyling<IPersonaType>): IRenderData<IPersonaSlotProps, {}> {
-  const { text, secondaryText, tertiaryText, optionalText, ...rootProps } = props;
+  const { text, secondaryText, tertiaryText, optionalText, size, ...rootProps } = props;
 
   const styledProps = useStyling(props);
 
+  const textStyle: TextStyle = size !== undefined ? { ...getTextFont(size) } : {};
+  const secondaryStyle: TextStyle = size !== undefined ? { ...getTextFont(size) } : {};
+  const tertinaryStyle: TextStyle = size !== undefined ? { ...getTextFont(size) } : {};
+  const optionalStyle: TextStyle = size !== undefined ? { ...getTextFont(size) } : {};
+
   const slotProps = mergeSettings<IPersonaType['slotProps']>(styledProps, {
     root: { ...rootProps },
-    coin: rootProps,
+    coin: { ...rootProps, size },
     text: {
-      children: text
+      children: text,
+      style: textStyle
     },
     secondary: {
-      children: secondaryText
+      children: secondaryText,
+      style: secondaryStyle
     },
     tertinary: {
-      children: tertiaryText
+      children: tertiaryText,
+      style: tertinaryStyle
     },
     optional: {
-      children: optionalText
+      children: optionalText,
+      style: optionalStyle
     }
   });
 
@@ -36,12 +46,7 @@ function usePrepareForProps(props: IPersonaProps, useStyling: IUseComposeStyling
   };
 }
 
-const render = (Slots: ISlots<IPersonaSlotProps> /*, renderData: IPersonaRenderData */): JSX.Element | null => {
-  // if (!renderData.state) {
-  //   return null;
-  // }
-  // const { personaPhotoSource, iconSource } = renderData.state;
-
+const render = (Slots: ISlots<IPersonaSlotProps>): JSX.Element => {
   return (
     <Slots.root>
       <Slots.coin />

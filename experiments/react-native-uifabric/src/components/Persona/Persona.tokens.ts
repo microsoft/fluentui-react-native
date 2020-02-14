@@ -5,7 +5,8 @@ import { ITheme } from '@uifabricshared/theming-ramp';
 
 function _buildRootStyles(): ViewProps {
   const rootStyle: ViewStyle = {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center'
   };
 
   return { style: rootStyle };

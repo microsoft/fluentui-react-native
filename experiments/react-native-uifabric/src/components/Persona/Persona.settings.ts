@@ -5,7 +5,11 @@ export const settings: IComposeSettings<IPersonaType> = [
   {
     tokens: {
       horizontalGap: 8,
-      verticalGap: 4
+      verticalGap: 4,
+      textFont: {},
+      secondaryFont: {},
+      tertinaryFont: {},
+      optionalFont: {}
     }
   },
   personaName
