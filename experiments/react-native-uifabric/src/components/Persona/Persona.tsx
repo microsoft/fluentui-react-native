@@ -8,7 +8,7 @@ import { PersonaCoin } from '../PersonaCoin/PersonaCoin';
 import { ISlots, withSlots, IRenderData } from '@uifabricshared/foundation-composable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { buildPersonaRootStyles } from './Persona.tokens';
-import { getTextFont } from './Persona.helpers';
+import { getTextFont, getSecondaryFont, getTertiaryFont, getOptionalFont } from './Persona.helpers';
 
 function usePrepareForProps(props: IPersonaProps, useStyling: IUseComposeStyling<IPersonaType>): IRenderData<IPersonaSlotProps, {}> {
   const { text, secondaryText, tertiaryText, optionalText, size, ...rootProps } = props;
@@ -16,27 +16,23 @@ function usePrepareForProps(props: IPersonaProps, useStyling: IUseComposeStyling
   const styledProps = useStyling(props);
 
   const textStyle: TextStyle = size !== undefined ? { ...getTextFont(size) } : {};
-  const secondaryStyle: TextStyle = size !== undefined ? { ...getTextFont(size) } : {};
-  const tertiaryStyle: TextStyle = size !== undefined ? { ...getTextFont(size) } : {};
-  const optionalStyle: TextStyle = size !== undefined ? { ...getTextFont(size) } : {};
+  const secondaryStyle: TextStyle = size !== undefined ? { ...getSecondaryFont(size) } : {};
+  const tertiaryStyle: TextStyle = size !== undefined ? { ...getTertiaryFont(size) } : {};
+  const optionalStyle: TextStyle = size !== undefined ? { ...getOptionalFont(size) } : {};
 
   const slotProps = mergeSettings<IPersonaType['slotProps']>(styledProps, {
     root: { ...rootProps },
     coin: { ...rootProps, size },
     text: {
-      children: text,
       style: textStyle
     },
     secondary: {
-      children: secondaryText,
       style: secondaryStyle
     },
     tertiary: {
-      children: tertiaryText,
       style: tertiaryStyle
     },
     optional: {
-      children: optionalText,
       style: optionalStyle
     }
   });

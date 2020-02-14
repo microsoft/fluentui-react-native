@@ -56,7 +56,7 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
       <Persona
         text={showPrimary ? 'Rajesh Jha' : undefined}
         secondaryText={showSecondary ? 'Executive Vice President' : undefined}
-        tertiaryText={showTertiary ? 'Experiences and Devices' : undefined}
+        tertiaryText={showTertiary ? 'E & D' : undefined}
         optionalText={showOptional ? 'Building 36/5600' : undefined}
         size={imageSize}
         initials="RJ"
