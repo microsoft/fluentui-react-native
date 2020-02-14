@@ -52,7 +52,7 @@
   },
   "metroBundles": {
     "rnTester": {
-      "entry": "./lib/RNTester.js",
+      "entry": "./src/RNTester.ts",
       "output": "./dist/RNTester.bundle"
     }
   },

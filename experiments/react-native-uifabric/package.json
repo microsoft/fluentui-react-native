@@ -17,10 +17,7 @@
     "start-test": "just-scripts jest-watch",
     "update-snapshots": "just-scripts jest -u",
     "verify-api": "just-scripts verify-api-extractor",
-    "update-api": "just-scripts update-api-extractor",
-    "build:tester": "just-scripts bundle --useMetro --bundleName rnTester",
-    "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
-    "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useLiveReload --pluginProps"
+    "update-api": "just-scripts update-api-extractor"
   },
   "dependencies": {
     "@uifabricshared/foundation-composable": "0.5.3",
