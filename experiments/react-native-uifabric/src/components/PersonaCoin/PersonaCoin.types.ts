@@ -1,6 +1,6 @@
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 import { ImageProps, ViewProps, ImageURISource, TextProps } from 'react-native';
-import { IBackgroundColorTokens, IForegroundColorTokens } from 'src/tokens';
+import { IBackgroundColorTokens, IForegroundColorTokens } from '../../tokens';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const personaCoinName = 'RNFPersonaCoin';
