@@ -103,7 +103,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
     tokens.coinSize = physicalCoinSize;
   }
 
-  const CustomizedPersonaCoin = PersonaCoin.customize({tokens});
+  const CustomizedPersonaCoin = PersonaCoin.customize({ tokens });
 
   return (
     <View style={styles.root}>
@@ -147,7 +147,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
       <CustomizedPersonaCoin
         initials="SB"
         imageDescription="Former CEO of Microsoft"
-        presence={PersonaPresence.away}
+        presence={PersonaPresence.blocked}
         imageUrl={showImage ? steveBallerPhotoUrl : undefined}
       />
     </View>
