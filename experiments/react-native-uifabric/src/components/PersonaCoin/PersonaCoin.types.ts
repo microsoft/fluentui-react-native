@@ -40,15 +40,7 @@ export enum PersonaCoinColor {
   rust
 }
 
-export enum PersonaPresence {
-  none,
-  offline,
-  online,
-  away,
-  dnd,
-  blocked,
-  busy
-}
+export type PersonaPresence = 'none' | 'offline' | 'online' | 'away' | 'dnd' | 'blocked' | 'busy';
 
 export interface IPersonaCoinProps extends IViewWin32Props {
   size?: PersonaSize;

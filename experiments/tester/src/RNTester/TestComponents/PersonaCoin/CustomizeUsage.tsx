@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PersonaPresence, PersonaCoin, IconAlignment, IPersonaCoinTokens } from 'react-native-uifabric';
+import { PersonaCoin, IconAlignment, IPersonaCoinTokens } from 'react-native-uifabric';
 import { Switch, View, Text, Picker, TextInput } from 'react-native';
 import { styles, steveBallerPhotoUrl as steveBallmerPhotoUrl } from './styles';
 import { undefinedText } from './utils';
@@ -147,7 +147,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
       <CustomizedPersonaCoin
         initials="SB"
         imageDescription="Former CEO of Microsoft"
-        presence={PersonaPresence.blocked}
+        presence="blocked"
         imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
       />
     </View>

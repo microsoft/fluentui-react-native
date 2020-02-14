@@ -44,7 +44,7 @@ export function getSizeConfig(size: PersonaSize): PersonaSizeConfig {
 }
 
 export function getPresenceIconSource(presence: PersonaPresence): ImageURISource {
-  return presenceIconCache[PersonaPresence[presence]];
+  return presenceIconCache[presence];
 }
 
 function personaCoinColorToHexCode(personaCoinColor: PersonaCoinColor): string {

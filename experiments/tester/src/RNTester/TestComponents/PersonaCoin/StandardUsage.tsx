@@ -1,18 +1,18 @@
 import * as React from 'react';
-import { PersonaSize, PersonaCoinColor, PersonaPresence, PersonaCoin } from 'react-native-uifabric';
+import { PersonaSize, PersonaCoinColor, PersonaCoin, PersonaPresence } from 'react-native-uifabric';
 import { Switch, View, Text, Picker } from 'react-native';
 import { styles, satyaPhotoUrl } from './styles';
 import { getAllEnumValues, undefinedText } from './utils';
 
 const allSizes = getAllEnumValues(PersonaSize);
 const allColors = getAllEnumValues(PersonaCoinColor);
-const allPresences = getAllEnumValues(PersonaPresence);
+const allPresences = ['none', 'online', 'offline', 'busy', 'dnd', 'blocked', 'away'];
 
 export const StandardUsage: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [imageSize, setImageSize] = React.useState(PersonaSize.size72);
   const [coinColor, setCoinColor] = React.useState(PersonaCoinColor.gold);
-  const [presence, setPresence] = React.useState(PersonaPresence.online);
+  const [presence, setPresence] = React.useState<PersonaPresence>('online');
 
   return (
     <View style={styles.root}>
@@ -48,8 +48,8 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
         <Picker
           prompt="Presence status"
           style={styles.header}
-          selectedValue={presence !== undefined ? PersonaPresence[presence] : undefinedText}
-          onValueChange={presence => setPresence(PersonaPresence[presence as string])}
+          selectedValue={presence}
+          onValueChange={setPresence}
         >
           {allPresences.map((presence, index) => (
             <Picker.Item label={presence} key={index} value={presence} />
