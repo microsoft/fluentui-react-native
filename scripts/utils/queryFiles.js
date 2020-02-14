@@ -21,7 +21,7 @@ function queryPackages(packageNames) {
   const lernaData = require(gitRoot + '/lerna');
   const packages = lernaData.packages;
   const results = [];
-  // "packages": ["packages/*", "scripts", "apps/*", "experiments/*"],
+  // format for packages looks like: ["packages/*", "scripts", "apps/*", "experiments/*"]
   for (const packageRaw of packages) {
     const package = path.join(gitRoot, packageRaw.trim());
     if (package.endsWith('/*') || package.endsWith('\\*')) {

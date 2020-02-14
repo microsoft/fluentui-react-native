@@ -4,10 +4,10 @@
 
 1. After you've cloned the repository for the first time, follow the instructions [here](../../README.md) to install npm packages and build the entire repository.
 
-2. Then go into `experiments\react-native-uifabric` folder:
+2. Then go into `experiments\tester` folder:
 
 ```
-    cd experiments\react-native-uifabric
+    cd experiments\tester
 ```
 
 3. Build the RNTester bundle:
@@ -34,7 +34,7 @@
 
 4. Open Chrome and navigate to http://localhost:8081/debugger-ui
 
-5. Open another command propmpt and go into the same location `experiment\react-native-uifabric` and run:
+5. Open another command prompt and go into the same location `experiments\tester` and run:
 
 ```
     yarn run-win32-web
