@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { IPersonaType, personaName, IPersonaSlotProps, IPersonaProps } from './Persona.types';
+import { IPersonaType, personaName, IPersonaSlotProps, IPersonaProps, IPersonaRenderData } from './Persona.types';
 import { settings } from './Persona.settings';
 import { View, Text, TextStyle } from 'react-native';
 import { filterViewProps } from '../../utilities/RenderHelpers';
@@ -17,7 +17,7 @@ function usePrepareForProps(props: IPersonaProps, useStyling: IUseComposeStyling
 
   const textStyle: TextStyle = size !== undefined ? { ...getTextFont(size) } : {};
   const secondaryStyle: TextStyle = size !== undefined ? { ...getTextFont(size) } : {};
-  const tertinaryStyle: TextStyle = size !== undefined ? { ...getTextFont(size) } : {};
+  const tertiaryStyle: TextStyle = size !== undefined ? { ...getTextFont(size) } : {};
   const optionalStyle: TextStyle = size !== undefined ? { ...getTextFont(size) } : {};
 
   const slotProps = mergeSettings<IPersonaType['slotProps']>(styledProps, {
@@ -31,9 +31,9 @@ function usePrepareForProps(props: IPersonaProps, useStyling: IUseComposeStyling
       children: secondaryText,
       style: secondaryStyle
     },
-    tertinary: {
+    tertiary: {
       children: tertiaryText,
-      style: tertinaryStyle
+      style: tertiaryStyle
     },
     optional: {
       children: optionalText,
@@ -42,19 +42,31 @@ function usePrepareForProps(props: IPersonaProps, useStyling: IUseComposeStyling
   });
 
   return {
-    slotProps
+    slotProps,
+    state: {
+      text,
+      secondaryText,
+      tertiaryText,
+      optionalText
+    }
   };
 }
 
-const render = (Slots: ISlots<IPersonaSlotProps>): JSX.Element => {
+const render = (Slots: ISlots<IPersonaSlotProps>, renderData: IPersonaRenderData): JSX.Element | null => {
+  if (!renderData.state) {
+    return null;
+  }
+
+  const { text, secondaryText, tertiaryText, optionalText } = renderData.state;
+
   return (
     <Slots.root>
       <Slots.coin />
       <Slots.stack>
-        <Slots.text />
-        <Slots.secondary />
-        <Slots.tertinary />
-        <Slots.optional />
+        {!!text && <Slots.text>{text}</Slots.text>}
+        {!!secondaryText && <Slots.secondary>{secondaryText}</Slots.secondary>}
+        {!!tertiaryText && <Slots.tertiary>{tertiaryText}</Slots.tertiary>}
+        {!!optionalText && <Slots.optional>{optionalText}</Slots.optional>}
       </Slots.stack>
     </Slots.root>
   );
@@ -74,14 +86,14 @@ export const Persona = compose<IPersonaType>({
     stack: View,
     text: Text,
     secondary: Text,
-    tertinary: Text,
+    tertiary: Text,
     optional: Text
   },
   styles: {
     root: [buildPersonaRootStyles],
     text: [{ source: 'verticalGap', target: 'marginBottom' }],
     secondary: [{ source: 'verticalGap', target: 'marginBottom' }],
-    tertinary: [{ source: 'verticalGap', target: 'marginBottom' }],
+    tertiary: [{ source: 'verticalGap', target: 'marginBottom' }],
     optional: [],
     stack: [{ source: 'horizontalGap', target: 'marginLeft' }]
   }

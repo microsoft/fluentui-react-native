@@ -4,7 +4,8 @@ export const styles = StyleSheet.create({
   root: {
     marginTop: 16,
     marginRight: 32,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'flex-start'
   },
   settings: {
     flexGrow: 1

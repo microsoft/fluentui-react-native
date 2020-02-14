@@ -9,7 +9,7 @@ export type FontAttributes = {
 
 export function getTextFont(size: PersonaSize): FontAttributes {
   return {
-    fontSize: 14,
-    fontWeight: 'bold'
+    fontSize: 10,
+    fontWeight: 'normal'
   };
 }

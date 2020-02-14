@@ -8,7 +8,7 @@ export const settings: IComposeSettings<IPersonaType> = [
       verticalGap: 4,
       textFont: {},
       secondaryFont: {},
-      tertinaryFont: {},
+      tertiaryFont: {},
       optionalFont: {}
     }
   },

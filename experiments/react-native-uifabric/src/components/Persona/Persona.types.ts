@@ -5,12 +5,14 @@ import { ITextTokens } from '../../../src/tokens/TextTokens';
 
 export const personaName = 'RNFPersona';
 
-export interface IPersonaProps extends IPersonaCoinProps {
+export interface IPersonaState {
   text?: string;
   secondaryText?: string;
   tertiaryText?: string;
   optionalText?: string;
 }
+
+export interface IPersonaProps extends IPersonaCoinProps, IPersonaState {}
 
 export interface IPersonaSlotProps {
   root: ViewProps;
@@ -18,7 +20,7 @@ export interface IPersonaSlotProps {
   stack: ViewProps;
   text: TextProps;
   secondary: TextProps;
-  tertinary: TextProps;
+  tertiary: TextProps;
   optional: TextProps;
 }
 
@@ -28,7 +30,7 @@ export interface IPersonaTokens extends IPersonaCoinTokens {
 
   textFont?: ITextTokens;
   secondaryFont?: ITextTokens;
-  tertinaryFont?: ITextTokens;
+  tertiaryFont?: ITextTokens;
   optionalFont?: ITextTokens;
 }
 
@@ -39,4 +41,4 @@ export interface IPersonaType {
   state: {};
 }
 
-export type IPersonaRenderData = IRenderData<IPersonaSlotProps, {}>;
+export type IPersonaRenderData = IRenderData<IPersonaSlotProps, IPersonaState>;
