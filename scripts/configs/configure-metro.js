@@ -5,19 +5,16 @@ function prepareRegex(blacklistPath) {
 }
 
 module.exports = {
-  configureMetro: function() {
+  configureMetro: function(options) {
+    const { bundleName = 'anonymous', platforms = [] } = options;
+    const win32 = Array.isArray(platforms) ? platforms.find(p => p === 'win32') : platforms === 'win32';
+
     const path = require('path');
     const { getPackagePaths, resolveModule, resolveFile } = require('../utils/queryFiles');
     const blacklist = require('metro-config/src/defaults/blacklist');
     const rnWin32Path = resolveModule('@office-iss/react-native-win32');
     const rnPath = resolveModule('react-native');
-    const blacklistRE = blacklist([
-      prepareRegex(rnPath),
-      prepareRegex(rnWin32Path + '/node_modules/react-native'),
-      prepareRegex(path.resolve('.', 'node_modules/react-native')),
-      prepareRegex(path.resolve('.', 'node_modules/@office-iss/react-native-win32'))
-    ]);
-    console.log(blacklistRE);
+
     return {
       // WatchFolders is only needed due to the yarn workspace layout of node_modules, we need to watch the symlinked locations separately
       watchFolders: [
@@ -36,10 +33,15 @@ module.exports = {
         }
       },
       resolver: {
-        extraNodeModules: {
-          'react-native': rnWin32Path
-        },
-        blacklistRE,
+        extraNodeModules: { 'react-native': rnWin32Path },
+        blacklistRE: blacklist([
+          /node_modules\/react-native\/.*/,
+          /node_modules\/.*\/node_modules\/react-native\/.*/,
+          prepareRegex(rnPath),
+          prepareRegex(rnWin32Path + '/node_modules/react-native'),
+          prepareRegex(path.resolve('.', 'node_modules/react-native')),
+          prepareRegex(path.resolve('.', 'node_modules/@office-iss/react-native-win32'))
+        ]),
         hasteImplModulePath: resolveFile('@office-iss/react-native-win32/jest/hasteImpl.js'),
         platforms: ['win32', 'ios', 'android', 'windows', 'web', 'macos'],
         providesModuleNodeModules: ['@office-iss/react-native-win32']

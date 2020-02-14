@@ -2289,10 +2289,10 @@
     once "^1.4.0"
     universal-user-agent "^4.0.0"
 
-"@office-iss/react-native-win32@0.27.1":
-  version "0.27.1"
-  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.27.1.tgz#4e844e7e3eafd5c78fa8e173c6023b543430745d"
-  integrity sha512-nlsMrW1DhmO1X4lRKu5uiDJ6ObV0K2kK8aBXU3KDILVWmdJSUC8xUKBj9Aqs2g1UptkTGDn9l2UKq7LWgbiRTQ==
+"@office-iss/react-native-win32@0.27.3":
+  version "0.27.3"
+  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.27.3.tgz#6ef39a683ba342d9d36306255d4baf96caefe68c"
+  integrity sha512-0jwreya0Bcf8rEhpb4ENdeXR5wBbUGNAC0v5sbV+7w268dAkgkvonvoZjqIG0EQgED5b/DnK2X8t3g51N/bDkQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@react-native-community/cli" "^2.6.0"
