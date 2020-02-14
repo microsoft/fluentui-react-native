@@ -5,5 +5,5 @@ module.exports = {
     '@babel/preset-typescript',
     'module:metro-react-native-babel-preset'
   ],
-  babelrcRoots: ['packages/*', 'apps/*']
+  babelrcRoots: ['packages/*', 'apps/*', 'experiments/*']
 };

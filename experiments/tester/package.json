@@ -1,7 +1,7 @@
 {
-  "name": "react-native-uifabric",
+  "name": "fluentui-shared-tester",
   "version": "0.12.10",
-  "description": "A react-native companion to fabric web that only depends on stock controls and theming",
+  "description": "Shared RNTester package for validating controls",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -12,13 +12,12 @@
     "clean": "just-scripts clean",
     "code-style": "just-scripts code-style",
     "lint": "just-scripts eslint",
-    "bundle": "just-scripts bundle --useMetro --bundleName uifabric",
+    "bundle": "just-scripts bundle --useMetro --bundleName rnTester",
     "start:tester": "react-native start --projectRoot ./src",
     "start-test": "just-scripts jest-watch",
     "update-snapshots": "just-scripts jest -u",
     "verify-api": "just-scripts verify-api-extractor",
     "update-api": "just-scripts update-api-extractor",
-    "build:tester": "just-scripts bundle --useMetro --bundleName rnTester",
     "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --windowTitle \"FluentUI Tester\" --basePath ./dist",
     "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\""
   },
@@ -30,6 +29,7 @@
     "@uifabricshared/immutable-merge": "0.2.2",
     "@uifabricshared/theming-ramp": "0.5.2",
     "@uifabricshared/theming-react-native": "0.3.2",
+    "react-native-uifabric": "0.12.10",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
@@ -51,9 +51,9 @@
     "@office-iss/react-native-win32": "0.27.3"
   },
   "metroBundles": {
-    "uifabric": {
-      "entry": "./lib/index.js",
-      "output": "./dist/react-native-uifabric.bundle"
+    "rnTester": {
+      "entry": "./lib/RNTester.js",
+      "output": "./dist/RNTester.bundle"
     }
   },
   "author": "",

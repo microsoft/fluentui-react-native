@@ -1,4 +1,4 @@
-import { IStackProps } from 'src';
+import { IStackProps } from 'react-native-uifabric';
 
 export const stackStyle: IStackProps['style'] = {
   borderWidth: 1,
