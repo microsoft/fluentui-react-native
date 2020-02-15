@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { Image, View, ImageStyle, ImageURISource, TextStyle, ViewStyle, Text } from 'react-native';
+import { Image, View, ImageURISource, Text } from 'react-native';
 import {
   IPersonaCoinProps,
   IPersonaCoinType,
@@ -13,87 +13,38 @@ import { filterViewProps, filterImageProps } from '../../utilities/RenderHelpers
 import { settings } from './PersonaCoin.settings';
 import { ISlots, withSlots, IRenderData } from '@uifabricshared/foundation-composable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { getSizeConfig, convertCoinColor, getPresenceIconSource } from './PersonaCoin.helpers';
-import { buildPersonaCoinRootStyles, buildPersonaCoinContentStyles } from './PersonaCoin.tokens';
-import { foregroundColorTokens, backgroundColorTokens } from '../../tokens';
+import {  getPresenceIconSource } from './PersonaCoin.helpers';
+import { buildRootStyles, buildPhotoStyles, buildInitialsStyles, buildInitialsBackgroundStyles, buildIconStyles } from './PersonaCoin.tokens';
+import { foregroundColorTokens } from '../../tokens';
 
 function usePrepareForProps(
   props: IPersonaCoinProps,
   useStyling: IUseComposeStyling<IPersonaCoinType>
 ): IRenderData<IPersonaCoinSlotProps, IPersonaCoinState> {
-  const { imageUrl, imageDescription, size, initials, coinColor, presence, ...rest } = props;
+  const { imageUrl, imageDescription, initials,  presence, ...rest } = props;
 
-  const useSizeFromProps = size !== undefined;
-  
-  const normalizedSize = size || 'size40';
-  const { physicalSize: physicalSize, initialsSize, iconSize } = getSizeConfig(normalizedSize);
-
-  const sizeStyle: ImageStyle = {};
-  if (useSizeFromProps) {
-    sizeStyle.width = physicalSize;
-    sizeStyle.height = physicalSize;
-  }
-
-  let personaPhotoSource: ImageURISource | undefined;
-  let photoStyle: ImageStyle | undefined;
-  let initialsStyle: TextStyle | undefined;
-  let initialsBackgroundStyle: ViewStyle | undefined;
-
+  let personaPhotoSource: ImageURISource | undefined = undefined;
   if (imageUrl) {
     personaPhotoSource = {
       uri: imageUrl
     };
-
-    photoStyle = { ...sizeStyle };
-    if (useSizeFromProps) {
-      photoStyle.borderRadius = physicalSize / 2;
-    }
-  } else {
-    initialsStyle = {};
-    initialsBackgroundStyle = { flexGrow: 1, alignSelf: 'stretch', justifyContent: 'center', alignItems: 'center' };
-
-    if (useSizeFromProps) {
-      initialsBackgroundStyle.borderRadius = physicalSize / 2;
-      initialsStyle.fontSize = initialsSize;
-    }
-
-    if (coinColor !== undefined) {
-      initialsBackgroundStyle.backgroundColor = convertCoinColor(coinColor);
-    }
   }
 
   let iconSource: ImageURISource | undefined = undefined;
-  let iconStyle: ImageStyle | undefined = undefined;
   if (presence) {
     iconSource = getPresenceIconSource(presence);
-    iconStyle = {
-      position: 'absolute'
-    };
-
-    if (useSizeFromProps && iconSize > 0) {
-      iconStyle.width = iconSize;
-      iconStyle.height = iconSize;
-    }
   }
 
   return {
     slotProps: mergeSettings<IPersonaCoinType['slotProps']>(useStyling(props), {
-      root: { ...rest, style: sizeStyle },
+      root: { ...rest },
       initials: {
         children: initials,
-        style: initialsStyle
-      },
-      initialsBackground: {
-        style: initialsBackgroundStyle
       },
       photo: {
         accessibilityLabel: imageDescription,
         resizeMode: 'cover',
-        style: photoStyle
       },
-      icon: {
-        style: iconStyle
-      }
     }),
     state: {
       iconSource,
@@ -148,13 +99,10 @@ export const PersonaCoin = compose<IPersonaCoinType>({
   },
   render: render,
   styles: {
-    root: [buildPersonaCoinRootStyles],
-    initials: [foregroundColorTokens, { source: 'initialsSize', target: 'fontSize' }],
-    initialsBackground: [backgroundColorTokens, buildPersonaCoinContentStyles],
-    photo: [{ source: 'coinSize', target: 'width' }, { source: 'coinSize', target: 'height' }, buildPersonaCoinContentStyles],
-    icon: [
-      { source: 'iconSize', target: 'width' },
-      { source: 'iconSize', target: 'height' }
-    ],
+    root: [buildRootStyles],
+    initials: [foregroundColorTokens, buildInitialsStyles],
+    initialsBackground: [buildInitialsBackgroundStyles],
+    photo: [buildPhotoStyles],
+    icon: [buildIconStyles],
   }
 });

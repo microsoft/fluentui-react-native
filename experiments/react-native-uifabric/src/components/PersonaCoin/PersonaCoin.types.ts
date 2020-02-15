@@ -31,12 +31,15 @@ export type PersonaCoinColor =
 
 export type PersonaPresence = 'none' | 'offline' | 'online' | 'away' | 'dnd' | 'blocked' | 'busy';
 
-export interface IPersonaCoinProps extends IViewWin32Props {
+export interface IPersonaConfigurableProps {
   size?: PersonaSize;
+  coinColor?: PersonaCoinColor;
+}
+
+export interface IPersonaCoinProps extends IViewWin32Props, IPersonaConfigurableProps {
   imageUrl?: string;
   imageDescription?: string;
   initials?: string;
-  coinColor?: PersonaCoinColor;
   presence?: PersonaPresence;
   isOutOfOffice?: boolean;
 }
@@ -51,7 +54,7 @@ export interface IPersonaCoinSlotProps {
 
 export type IconAlignment = 'start' | 'center' | 'end';
 
-export interface IPersonaCoinTokens extends IBackgroundColorTokens, IForegroundColorTokens {
+export interface IPersonaCoinTokens extends IBackgroundColorTokens, IForegroundColorTokens, IPersonaConfigurableProps {
   coinSize?: number;
   iconSize?: number;
   initialsSize?: number;

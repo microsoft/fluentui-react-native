@@ -1,8 +1,9 @@
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
-import { personaCoinName, IPersonaCoinType } from './PersonaCoin.types';
-import { getSizeConfig, convertCoinColor } from './PersonaCoin.helpers';
+import { personaCoinName, IPersonaCoinType, PersonaSize, PersonaCoinColor } from './PersonaCoin.types';
+import { convertCoinColor } from './PersonaCoin.helpers';
 
-const defaultSizeConfig = getSizeConfig('size40');
+export const defaultSize: PersonaSize = 'size40';
+export const defaultColor: PersonaCoinColor = 'lightBlue';
 
 export const settings: IComposeSettings<IPersonaCoinType> = [
   {
@@ -10,9 +11,9 @@ export const settings: IComposeSettings<IPersonaCoinType> = [
       horizontalIconAlignment: 'end',
       verticalIconAlignment: 'end',
       color: 'white', // initials is always 'white', unless overriden by token
-      initialsSize: defaultSizeConfig.initialsSize,
-      coinSize: defaultSizeConfig.physicalSize,
-      iconSize: defaultSizeConfig.iconSize,
+      // initialsSize: defaultSizeConfig.initialsSize,
+      // coinSize: defaultSizeConfig.physicalSize,
+      // iconSize: defaultSizeConfig.iconSize,
       backgroundColor: convertCoinColor('lightBlue')
     }
   },

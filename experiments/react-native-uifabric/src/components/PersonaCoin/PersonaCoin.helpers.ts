@@ -61,6 +61,6 @@ const colorTable: { [P in PersonaCoinColor]: string } =
   'coolGray': '#69797E',
 };
 
-export function convertCoinColor(coinColor?: PersonaCoinColor): string | undefined {
-  return coinColor === undefined ? undefined : colorTable[coinColor];
+export function convertCoinColor(coinColor: PersonaCoinColor): string {
+  return colorTable[coinColor];
 }

@@ -31,7 +31,6 @@
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.27.3",
-    "@office-iss/rex-win32": "0.0.35",
     "@types/prop-types": "15.5.1",
     "@types/react": "16.9.11",
     "@types/react-dom": "16.9.5",
