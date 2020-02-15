@@ -24,13 +24,14 @@ function usePrepareForProps(
   const { imageUrl, imageDescription, size, initials, coinColor, presence, ...rest } = props;
 
   const useSizeFromProps = size !== undefined;
+  
   const normalizedSize = size || 'size40';
-  const { physicalCoinSize, initialsFontSize, iconSize } = getSizeConfig(normalizedSize);
+  const { physicalSize: physicalSize, initialsSize, iconSize } = getSizeConfig(normalizedSize);
 
   const sizeStyle: ImageStyle = {};
   if (useSizeFromProps) {
-    sizeStyle.width = physicalCoinSize;
-    sizeStyle.height = physicalCoinSize;
+    sizeStyle.width = physicalSize;
+    sizeStyle.height = physicalSize;
   }
 
   let personaPhotoSource: ImageURISource | undefined;
@@ -45,15 +46,15 @@ function usePrepareForProps(
 
     photoStyle = { ...sizeStyle };
     if (useSizeFromProps) {
-      photoStyle.borderRadius = physicalCoinSize / 2;
+      photoStyle.borderRadius = physicalSize / 2;
     }
   } else {
     initialsStyle = {};
     initialsBackgroundStyle = { flexGrow: 1, alignSelf: 'stretch', justifyContent: 'center', alignItems: 'center' };
 
     if (useSizeFromProps) {
-      initialsBackgroundStyle.borderRadius = physicalCoinSize / 2;
-      initialsStyle.fontSize = initialsFontSize;
+      initialsBackgroundStyle.borderRadius = physicalSize / 2;
+      initialsStyle.fontSize = initialsSize;
     }
 
     if (coinColor !== undefined) {
@@ -148,12 +149,12 @@ export const PersonaCoin = compose<IPersonaCoinType>({
   render: render,
   styles: {
     root: [buildPersonaCoinRootStyles],
-    initials: [foregroundColorTokens, { source: 'initialsFontSize', target: 'fontSize' }],
+    initials: [foregroundColorTokens, { source: 'initialsSize', target: 'fontSize' }],
     initialsBackground: [backgroundColorTokens, buildPersonaCoinContentStyles],
     photo: [{ source: 'coinSize', target: 'width' }, { source: 'coinSize', target: 'height' }, buildPersonaCoinContentStyles],
     icon: [
       { source: 'iconSize', target: 'width' },
       { source: 'iconSize', target: 'height' }
-    ]
+    ],
   }
 });

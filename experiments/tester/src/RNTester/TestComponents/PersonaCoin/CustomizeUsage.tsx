@@ -69,9 +69,9 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [coinColor, setCoinColor] = React.useState<string>();
   const [textColor, setTextColor] = React.useState<string>();
-  const [physicalCoinSize, setPhysicalCoinSize] = React.useState<number>();
+  const [physicalSize, setPhysicalCoinSize] = React.useState<number>();
   const [iconSize, setIconSize] = React.useState<number>();
-  const [initialsFontSize, setInitialsFontSize] = React.useState<number>();
+  const [initialsSize, setInitialsFontSize] = React.useState<number>();
   const [horizontalAlignment, setHorizontalAlignment] = React.useState<IconAlignment>();
   const [verticalAlignment, setVerticalAlignment] = React.useState<IconAlignment>();
 
@@ -96,11 +96,11 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   if (iconSize) {
     tokens.iconSize = iconSize;
   }
-  if (initialsFontSize) {
-    tokens.initialsFontSize = initialsFontSize;
+  if (initialsSize) {
+    tokens.initialsSize = initialsSize;
   }
-  if (physicalCoinSize) {
-    tokens.coinSize = physicalCoinSize;
+  if (physicalSize) {
+    tokens.coinSize = physicalSize;
   }
 
   const CustomizedPersonaCoin = PersonaCoin.customize({ tokens });

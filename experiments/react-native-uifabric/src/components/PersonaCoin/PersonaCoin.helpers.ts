@@ -11,37 +11,30 @@ const presenceIconCache: { [key in PersonaPresence]: ImageURISource } = {
   busy: { uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAANlBMVEUAAADpABvpABvpABvpABvpABvpABvpABvpABvpABvpABvpABvpABvpABvpABvpABvpABvpABvsgIdoAAAAEXRSTlMA8eLUEQj6s2sheXrlyrJqHBqb3nMAAAB/SURBVCjPhZFRDsQgCEQFEdS223L/yy7JummtGN/nvASUCSvoFGSIclIXpwragC3deYn6IJZ/fqF24NXmHPri+E2rOlCDQTAKIBNZHbKJjyfEBHoCTbAn2ATMRPRHzZfPn+t/cH4SIw3rY2p17H2+l0VRRtr8ag3KgswomcKCL1NmGBp9lqsZAAAAAElFTkSuQmCC' }
 };
 
-export type PersonaSizeConfig = {
-  physicalCoinSize: number;
-  iconSize: number;
-  initialsFontSize: number;
-};
-
-export function getSizeConfig(size: PersonaSize): PersonaSizeConfig {
-  switch (size) {
-    case 'size8':
-      return { physicalCoinSize: 8, iconSize: 0, initialsFontSize: 4 };
-    case 'size24':
-      return { physicalCoinSize: 24, iconSize: 8, initialsFontSize: 10 };
-    case 'size32':
-      return { physicalCoinSize: 32, iconSize: 8, initialsFontSize: 12 };
-    case 'size40':
-      return { physicalCoinSize: 40, iconSize: 12, initialsFontSize: 14 };
-    case 'size48':
-      return { physicalCoinSize: 48, iconSize: 12, initialsFontSize: 16 };
-    case 'size56':
-      return { physicalCoinSize: 56, iconSize: 16, initialsFontSize: 18 };
-    case 'size72':
-      return { physicalCoinSize: 72, iconSize: 20, initialsFontSize: 20 };
-    case 'size100':
-      return { physicalCoinSize: 100, iconSize: 28, initialsFontSize: 36 };
-    case 'size120':
-      return { physicalCoinSize: 120, iconSize: 32, initialsFontSize: 40 };
-  }
-}
-
 export function getPresenceIconSource(presence: PersonaPresence): ImageURISource {
   return presenceIconCache[presence];
+}
+
+export type PersonaSizeConfig = {
+  physicalSize: number;
+  iconSize: number;
+  initialsSize: number;
+};
+
+const sizeTable: {[P in PersonaSize]: PersonaSizeConfig} = {
+  size8: { physicalSize: 8, iconSize: 0, initialsSize: 4 },
+  size24: { physicalSize: 24, iconSize: 8, initialsSize: 10 },
+  size32: { physicalSize: 32, iconSize: 8, initialsSize: 12 },
+  size40: { physicalSize: 40, iconSize: 12, initialsSize: 14 },
+  size48: { physicalSize: 48, iconSize: 12, initialsSize: 16 },
+  size56: { physicalSize: 56, iconSize: 16, initialsSize: 18 },
+  size72: { physicalSize: 72, iconSize: 20, initialsSize: 20 },
+  size100: { physicalSize: 100, iconSize: 28, initialsSize: 36 },
+  size120: { physicalSize: 120, iconSize: 32, initialsSize: 40 },
+}
+
+export function getSizeConfig(size: PersonaSize): PersonaSizeConfig {
+  return sizeTable[size];
 }
 
 const colorTable: { [P in PersonaCoinColor]: string } =

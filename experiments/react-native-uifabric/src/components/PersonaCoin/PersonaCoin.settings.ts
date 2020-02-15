@@ -10,8 +10,8 @@ export const settings: IComposeSettings<IPersonaCoinType> = [
       horizontalIconAlignment: 'end',
       verticalIconAlignment: 'end',
       color: 'white', // initials is always 'white', unless overriden by token
-      initialsFontSize: defaultSizeConfig.initialsFontSize,
-      coinSize: defaultSizeConfig.physicalCoinSize,
+      initialsSize: defaultSizeConfig.initialsSize,
+      coinSize: defaultSizeConfig.physicalSize,
       iconSize: defaultSizeConfig.iconSize,
       backgroundColor: convertCoinColor('lightBlue')
     }
