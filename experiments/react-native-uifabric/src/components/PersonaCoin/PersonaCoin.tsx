@@ -3,11 +3,10 @@ import { Image, View, ImageStyle, ImageURISource, TextStyle, ViewStyle, Text } f
 import {
   IPersonaCoinProps,
   IPersonaCoinType,
-  personaCoinName,
   IPersonaCoinSlotProps,
   IPersonaCoinRenderData,
-  PersonaSize,
-  IPersonaCoinState
+  IPersonaCoinState,
+  personaCoinName
 } from './PersonaCoin.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { filterViewProps, filterImageProps } from '../../utilities/RenderHelpers';
@@ -22,15 +21,14 @@ function usePrepareForProps(
   props: IPersonaCoinProps,
   useStyling: IUseComposeStyling<IPersonaCoinType>
 ): IRenderData<IPersonaCoinSlotProps, IPersonaCoinState> {
-
   const { imageUrl, imageDescription, size, initials, coinColor, presence, ...rest } = props;
 
   const useSizeFromProps = size !== undefined;
-  const normalizedSize = size === undefined ? PersonaSize.size40 : size;
+  const normalizedSize = size || 'size40';
   const { physicalCoinSize, initialsFontSize, iconSize } = getSizeConfig(normalizedSize);
 
   const sizeStyle: ImageStyle = {};
-  if (useSizeFromProps) { 
+  if (useSizeFromProps) {
     sizeStyle.width = physicalCoinSize;
     sizeStyle.height = physicalCoinSize;
   }
@@ -45,7 +43,7 @@ function usePrepareForProps(
       uri: imageUrl
     };
 
-    photoStyle = {...sizeStyle};
+    photoStyle = { ...sizeStyle };
     if (useSizeFromProps) {
       photoStyle.borderRadius = physicalCoinSize / 2;
     }
@@ -68,10 +66,10 @@ function usePrepareForProps(
   if (presence) {
     iconSource = getPresenceIconSource(presence);
     iconStyle = {
-      position: 'absolute',
+      position: 'absolute'
     };
 
-    if (useSizeFromProps && iconSize > 0 ) {
+    if (useSizeFromProps && iconSize > 0) {
       iconStyle.width = iconSize;
       iconStyle.height = iconSize;
     }
@@ -112,11 +110,13 @@ const render = (Slots: ISlots<IPersonaCoinSlotProps>, renderData: IPersonaCoinRe
 
   return (
     <Slots.root>
-      {personaPhotoSource ? 
-        <Slots.photo source={personaPhotoSource} /> : 
+      {personaPhotoSource ? (
+        <Slots.photo source={personaPhotoSource} />
+      ) : (
         <Slots.initialsBackground>
           <Slots.initials />
-        </Slots.initialsBackground> }
+        </Slots.initialsBackground>
+      )}
       {!!iconSource && <Slots.icon source={iconSource} />}
     </Slots.root>
   );
@@ -147,23 +147,13 @@ export const PersonaCoin = compose<IPersonaCoinType>({
   },
   render: render,
   styles: {
-    root: [buildPersonaCoinRootStyles], 
-    initials: [
-      foregroundColorTokens,
-      { source: 'initialsFontSize', target: 'fontSize' },
-    ],
-    initialsBackground: [
-      backgroundColorTokens,
-      buildPersonaCoinContentStyles
-    ],
-    photo: [
-      { source: 'coinSize', target: 'width' },
-      { source: 'coinSize', target: 'height' },
-      buildPersonaCoinContentStyles
-    ],
+    root: [buildPersonaCoinRootStyles],
+    initials: [foregroundColorTokens, { source: 'initialsFontSize', target: 'fontSize' }],
+    initialsBackground: [backgroundColorTokens, buildPersonaCoinContentStyles],
+    photo: [{ source: 'coinSize', target: 'width' }, { source: 'coinSize', target: 'height' }, buildPersonaCoinContentStyles],
     icon: [
       { source: 'iconSize', target: 'width' },
       { source: 'iconSize', target: 'height' }
-    ],
+    ]
   }
 });

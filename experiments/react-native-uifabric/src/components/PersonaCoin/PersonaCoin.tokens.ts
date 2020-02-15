@@ -9,11 +9,7 @@ const nameMap: { [key: string]: string } = {
   end: 'flex-end'
 };
 
-const _rootKeyProps: (keyof IPersonaCoinTokens)[] = [
-  'coinSize',
-  'horizontalIconAlignment',
-  'verticalIconAlignment'
-];
+const _rootKeyProps: (keyof IPersonaCoinTokens)[] = ['coinSize', 'horizontalIconAlignment', 'verticalIconAlignment'];
 
 function _buildRootStyles(tokenProps: IPersonaCoinTokens /*, theme: ITheme */): ViewProps {
   const rootStyle: ViewStyle = {
@@ -33,16 +29,14 @@ function _buildRootStyles(tokenProps: IPersonaCoinTokens /*, theme: ITheme */): 
   return { style: rootStyle };
 }
 
-const _photoKeyProps: (keyof IPersonaCoinTokens)[] = [
-  'coinSize',
-];
+const _photoKeyProps: (keyof IPersonaCoinTokens)[] = ['coinSize'];
 
 export const buildPersonaCoinRootStyles = styleFunction<ViewProps, IPersonaCoinTokens, ITheme>(_buildRootStyles, _rootKeyProps);
 
 function _buildPersonaCoinContentStyles(tokenProps: IPersonaCoinTokens /*, theme: ITheme */): ImageProps {
   const { coinSize } = tokenProps;
   if (coinSize && coinSize <= 0) {
-    throw new Error(`Invalid value of {coinSize} for 'coinSize'.`);
+    throw new Error(`Invalid value of ${coinSize} for 'coinSize'.`);
   }
 
   return {
@@ -53,4 +47,7 @@ function _buildPersonaCoinContentStyles(tokenProps: IPersonaCoinTokens /*, theme
   };
 }
 
-export const buildPersonaCoinContentStyles = styleFunction<ImageProps, IPersonaCoinTokens, ITheme>(_buildPersonaCoinContentStyles, _photoKeyProps);
+export const buildPersonaCoinContentStyles = styleFunction<ImageProps, IPersonaCoinTokens, ITheme>(
+  _buildPersonaCoinContentStyles,
+  _photoKeyProps
+);

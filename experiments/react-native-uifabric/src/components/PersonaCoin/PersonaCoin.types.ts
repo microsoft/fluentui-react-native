@@ -5,40 +5,29 @@ import { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const personaCoinName = 'RNFPersonaCoin';
 
-export enum PersonaSize {
-  size8,
-  size24,
-  size32,
-  size40,
-  size48,
-  size56,
-  size72,
-  size100,
-  size120
-}
+export type PersonaSize = 'size8' | 'size24' | 'size32' | 'size40' | 'size48' | 'size56' | 'size72' | 'size100' | 'size120';
 
-export enum PersonaCoinColor {
-  lightBlue,
-  blue,
-  darkBlue,
-  teal,
-  green,
-  darkGreen,
-  lightPink,
-  pink,
-  magenta,
-  purple,
-  orange,
-  darkRed,
-  violet,
-  lightRed,
-  gold,
-  burgundy,
-  warmGray,
-  coolGray,
-  cyan,
-  rust
-}
+export type PersonaCoinColor =
+  | 'lightBlue'
+  | 'blue'
+  | 'darkBlue'
+  | 'teal'
+  | 'green'
+  | 'darkGreen'
+  | 'lightPink'
+  | 'pink'
+  | 'magenta'
+  | 'purple'
+  | 'orange'
+  | 'darkRed'
+  | 'violet'
+  | 'lightRed'
+  | 'gold'
+  | 'burgundy'
+  | 'warmGray'
+  | 'coolGray'
+  | 'cyan'
+  | 'rust';
 
 export type PersonaPresence = 'none' | 'offline' | 'online' | 'away' | 'dnd' | 'blocked' | 'busy';
 
