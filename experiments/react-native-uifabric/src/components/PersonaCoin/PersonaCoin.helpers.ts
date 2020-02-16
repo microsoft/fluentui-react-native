@@ -87,13 +87,13 @@ export function calculateEffectiveSizes(tokens: IPersonaCoinTokens): PersonaSize
 
   if (size) {
     return sizeTable[size];
-  } else if (coinSize) {
-    return {
-      physicalSize: coinSize,
-      iconSize: iconSize || 0,
-      initialsSize: initialsSize || 0
-    };
   } else {
-    return sizeTable['size40'];
+    const { physicalSize: defaultPhysicalSize, iconSize: defaultIconSize, initialsSize: defaultInitialsSize } = sizeTable['size40'];
+
+    return {
+      physicalSize: coinSize || defaultPhysicalSize,
+      iconSize: iconSize || defaultIconSize,
+      initialsSize: initialsSize || defaultInitialsSize
+    };
   }
 }
