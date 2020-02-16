@@ -2,10 +2,14 @@ import * as React from 'react';
 import { PersonaSize, PersonaCoinColor, PersonaCoin, PersonaPresence } from 'react-native-uifabric';
 import { Switch, View, Text, Picker } from 'react-native';
 import { styles, satyaPhotoUrl } from './styles';
+import { undefinedText } from './utils';
 
-const allSizes: PersonaSize[] = ['size8', 'size24', 'size32', 'size40', 'size48', 'size56', 'size72', 'size100', 'size120'];
+type WithUndefined<T> = T | typeof undefinedText;
 
-const allColors: PersonaCoinColor[] = [
+const allSizes: WithUndefined<PersonaSize>[] = [undefinedText, 'size8', 'size24', 'size32', 'size40', 'size48', 'size56', 'size72', 'size100', 'size120'];
+
+const allColors: WithUndefined<PersonaCoinColor>[] = [
+  undefinedText,
   'lightBlue',
   'blue',
   'darkBlue',
@@ -27,13 +31,13 @@ const allColors: PersonaCoinColor[] = [
   'cyan',
   'rust'
 ];
-const allPresences = ['none', 'online', 'offline', 'busy', 'dnd', 'blocked', 'away'];
+const allPresences: WithUndefined<PersonaPresence>[] = [undefinedText, 'none', 'online', 'offline', 'busy', 'dnd', 'blocked', 'away'];
 
 export const StandardUsage: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
-  const [imageSize, setImageSize] = React.useState<PersonaSize>('size72');
-  const [coinColor, setCoinColor] = React.useState<PersonaCoinColor>('gold');
-  const [presence, setPresence] = React.useState<PersonaPresence>('online');
+  const [imageSize, setImageSize] = React.useState<WithUndefined<PersonaSize>>('size72');
+  const [coinColor, setCoinColor] = React.useState<WithUndefined<PersonaCoinColor>>('gold');
+  const [presence, setPresence] = React.useState<WithUndefined<PersonaPresence>>('online');
 
   const onSizeChange = React.useCallback(value => setImageSize(value), []);
   const onColorChange = React.useCallback(value => setCoinColor(value), []);
@@ -69,12 +73,12 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
 
       {/* component under test */}
       <PersonaCoin
-        size={imageSize}
+        size={imageSize === undefinedText ? undefined : imageSize}
         initials="SN"
         imageDescription="Photo of Satya Nadella"
-        presence={presence}
+        presence={presence === undefinedText ? undefined : presence}
         imageUrl={showImage ? satyaPhotoUrl : undefined}
-        coinColor={coinColor}
+        coinColor={coinColor === undefinedText ? undefined : coinColor}
       />
     </View>
   );
