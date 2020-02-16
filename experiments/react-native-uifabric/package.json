@@ -2,7 +2,7 @@
   "name": "react-native-uifabric",
   "version": "0.12.10",
   "description": "A react-native companion to fabric web that only depends on stock controls and theming",
-  "main": "lib-commonjs/index.js",
+  "main": "lib/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
   "private": true,
