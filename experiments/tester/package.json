@@ -1,8 +1,8 @@
 {
-  "name": "react-native-uifabric",
+  "name": "fluentui-shared-tester",
   "version": "0.12.10",
-  "description": "A react-native companion to fabric web that only depends on stock controls and theming",
-  "main": "lib/index.js",
+  "description": "Shared RNTester package for validating controls",
+  "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
   "private": true,
@@ -12,12 +12,10 @@
     "clean": "just-scripts clean",
     "code-style": "just-scripts code-style",
     "lint": "just-scripts eslint",
-    "bundle": "just-scripts bundle --useMetro --bundleName uifabric",
-    "start:tester": "react-native start --projectRoot ./src",
-    "start-test": "just-scripts jest-watch",
-    "update-snapshots": "just-scripts jest -u",
-    "verify-api": "just-scripts verify-api-extractor",
-    "update-api": "just-scripts update-api-extractor"
+    "bundle": "just-scripts bundle --useMetro --bundleName rnTester",
+    "start": "react-native start --projectRoot ./src",
+    "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
+    "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useLiveReload --pluginProps"
   },
   "dependencies": {
     "@uifabricshared/foundation-composable": "0.5.3",
@@ -27,10 +25,12 @@
     "@uifabricshared/immutable-merge": "0.2.2",
     "@uifabricshared/theming-ramp": "0.5.2",
     "@uifabricshared/theming-react-native": "0.3.2",
+    "react-native-uifabric": "0.12.10",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.27.3",
+    "@office-iss/rex-win32": "0.0.35",
     "@types/prop-types": "15.5.1",
     "@types/react": "16.9.11",
     "@types/react-dom": "16.9.5",
@@ -47,9 +47,9 @@
     "@office-iss/react-native-win32": "0.27.3"
   },
   "metroBundles": {
-    "uifabric": {
-      "entry": "./src/index.ts",
-      "output": "./dist/react-native-uifabric.bundle"
+    "rnTester": {
+      "entry": "./src/RNTester.ts",
+      "output": "./dist/RNTester.bundle"
     }
   },
   "author": "",

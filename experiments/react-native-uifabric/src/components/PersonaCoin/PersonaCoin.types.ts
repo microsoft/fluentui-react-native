@@ -1,61 +1,45 @@
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 import { ImageProps, ViewProps, ImageURISource, TextProps } from 'react-native';
-import { IBackgroundColorTokens, IForegroundColorTokens } from 'src/tokens';
+import { IBackgroundColorTokens, IForegroundColorTokens } from '../../tokens';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const personaCoinName = 'RNFPersonaCoin';
 
-export enum PersonaSize {
-  size8,
-  size24,
-  size32,
-  size40,
-  size48,
-  size56,
-  size72,
-  size100,
-  size120
-}
+export type PersonaSize = 'size8' | 'size24' | 'size32' | 'size40' | 'size48' | 'size56' | 'size72' | 'size100' | 'size120';
 
-export enum PersonaCoinColor {
-  lightBlue,
-  blue,
-  darkBlue,
-  teal,
-  green,
-  darkGreen,
-  lightPink,
-  pink,
-  magenta,
-  purple,
-  orange,
-  darkRed,
-  violet,
-  lightRed,
-  gold,
-  burgundy,
-  warmGray,
-  coolGray,
-  cyan,
-  rust
-}
+export type PersonaCoinColor =
+  | 'lightBlue'
+  | 'blue'
+  | 'darkBlue'
+  | 'teal'
+  | 'green'
+  | 'darkGreen'
+  | 'lightPink'
+  | 'pink'
+  | 'magenta'
+  | 'purple'
+  | 'orange'
+  | 'darkRed'
+  | 'violet'
+  | 'lightRed'
+  | 'gold'
+  | 'burgundy'
+  | 'warmGray'
+  | 'coolGray'
+  | 'cyan'
+  | 'rust';
 
-export enum PersonaPresence {
-  none,
-  offline,
-  online,
-  away,
-  dnd,
-  blocked,
-  busy
-}
+export type PersonaPresence = 'none' | 'offline' | 'online' | 'away' | 'dnd' | 'blocked' | 'busy';
 
-export interface IPersonaCoinProps extends IViewWin32Props {
+export interface IPersonaConfigurableProps {
   size?: PersonaSize;
+  coinColor?: PersonaCoinColor;
+}
+
+export interface IPersonaCoinProps extends IViewWin32Props, IPersonaConfigurableProps {
   imageUrl?: string;
   imageDescription?: string;
   initials?: string;
-  coinColor?: PersonaCoinColor;
   presence?: PersonaPresence;
   isOutOfOffice?: boolean;
 }
@@ -70,10 +54,10 @@ export interface IPersonaCoinSlotProps {
 
 export type IconAlignment = 'start' | 'center' | 'end';
 
-export interface IPersonaCoinTokens extends IBackgroundColorTokens, IForegroundColorTokens {
+export interface IPersonaCoinTokens extends IBackgroundColorTokens, IForegroundColorTokens, IPersonaConfigurableProps {
   coinSize?: number;
   iconSize?: number;
-  initialsFontSize?: number;
+  initialsSize?: number;
   horizontalIconAlignment?: IconAlignment;
   verticalIconAlignment?: IconAlignment;
 }

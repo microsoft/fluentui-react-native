@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PersonaCoin, IconAlignment, IPersonaCoinTokens } from 'react-native-uifabric';
 import { Switch, View, Text, Picker, TextInput } from 'react-native';
-import { styles, steveBallerPhotoUrl as steveBallmerPhotoUrl } from './styles';
+import { styles, steveBallmerPhotoUrl } from './styles';
 import { undefinedText } from './utils';
 import { useTheme } from '@uifabricshared/theming-react-native';
 
