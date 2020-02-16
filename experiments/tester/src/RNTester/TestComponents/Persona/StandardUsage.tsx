@@ -1,11 +1,23 @@
 import * as React from 'react';
-import { Persona } from 'react-native-uifabric/src/components/Persona/Persona';
-import { PersonaSize } from 'react-native-uifabric/src/components/PersonaCoin';
+import { Persona, PersonaSize } from 'react-native-uifabric';
 import { styles, rajeshImageUrl } from './styles';
 import { View, Text, Switch, Picker } from 'react-native';
-import { getAllEnumValues, undefinedText } from 'react-native-uifabric/src/RNTester/TestComponents/PersonaCoin/utils';
+import { undefinedText } from '../PersonaCoin/utils';
 
-const allSizes = getAllEnumValues(PersonaSize);
+type WithUndefined<T> = T | typeof undefinedText;
+
+const allSizes: WithUndefined<PersonaSize>[] = [
+  undefinedText,
+  'size8',
+  'size24',
+  'size32',
+  'size40',
+  'size48',
+  'size56',
+  'size72',
+  'size100',
+  'size120'
+];
 
 interface ISwitchWithLabelProps {
   label: string;
@@ -29,7 +41,7 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
   const [showSecondary, setShowSecondary] = React.useState(true);
   const [showTertiary, setShowTertiary] = React.useState(true);
   const [showOptional, setShowOptional] = React.useState(true);
-  const [imageSize, setImageSize] = React.useState<PersonaSize | undefined>(PersonaSize.size72);
+  const [imageSize, setImageSize] = React.useState<PersonaSize | undefined>('size72');
 
   return (
     <View style={styles.root}>
@@ -44,8 +56,8 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
         <Picker
           prompt="Size"
           style={styles.header}
-          selectedValue={imageSize !== undefined ? PersonaSize[imageSize] : undefinedText}
-          onValueChange={size => setImageSize(PersonaSize[size as string])}
+          selectedValue={imageSize !== undefined ? imageSize : undefinedText}
+          onValueChange={size => setImageSize(size)}
         >
           {allSizes.map((size, index) => (
             <Picker.Item label={size} key={index} value={size} />
