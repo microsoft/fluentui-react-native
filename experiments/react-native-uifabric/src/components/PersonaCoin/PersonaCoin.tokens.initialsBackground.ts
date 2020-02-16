@@ -3,7 +3,6 @@ import { ViewProps } from 'react-native';
 import { IPersonaCoinTokens } from './PersonaCoin.types';
 import { ITheme } from '@uifabricshared/theming-ramp';
 import { convertCoinColor, calculateEffectiveSizes } from './PersonaCoin.helpers';
-import { defaultColor } from './PersonaCoin.settings';
 
 const _initialsBackgroundKeyProps: (keyof IPersonaCoinTokens)[] = ['coinSize', 'size', 'coinColor', 'backgroundColor'];
 
@@ -11,14 +10,7 @@ function _buildInitialsBackgroundStyles(tokenProps: IPersonaCoinTokens /*, theme
   const { physicalSize } = calculateEffectiveSizes(tokenProps);
 
   const { backgroundColor, coinColor } = tokenProps;
-  let effectiveBackgroundColor: string;
-  if (coinColor) {
-    effectiveBackgroundColor = convertCoinColor(coinColor);
-  } else if (backgroundColor) {
-    effectiveBackgroundColor = backgroundColor;
-  } else {
-    effectiveBackgroundColor = convertCoinColor(defaultColor);
-  }
+  const effectiveBackgroundColor = coinColor ? convertCoinColor(coinColor) : backgroundColor;
 
   return {
     style: {

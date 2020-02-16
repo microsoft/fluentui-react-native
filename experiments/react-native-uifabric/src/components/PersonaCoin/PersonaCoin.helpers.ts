@@ -1,6 +1,5 @@
 import { PersonaSize, PersonaCoinColor, PersonaPresence, IPersonaCoinTokens } from './PersonaCoin.types';
 import { ImageURISource } from 'react-native';
-import { defaultSize } from './PersonaCoin.settings';
 
 const presenceIconCache: { [key in PersonaPresence]: ImageURISource } = {
   none: { uri: '' },
@@ -95,6 +94,6 @@ export function calculateEffectiveSizes(tokens: IPersonaCoinTokens): PersonaSize
       initialsSize: initialsSize || 0
     };
   } else {
-    return sizeTable[defaultSize];
+    return sizeTable['size40'];
   }
 }

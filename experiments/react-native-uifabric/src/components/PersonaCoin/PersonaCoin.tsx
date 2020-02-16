@@ -43,8 +43,7 @@ function usePrepareForProps(
         children: initials
       },
       photo: {
-        accessibilityLabel: imageDescription,
-        resizeMode: 'cover'
+        accessibilityLabel: imageDescription
       }
     }),
     state: {
