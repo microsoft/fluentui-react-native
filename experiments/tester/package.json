@@ -13,11 +13,7 @@
     "code-style": "just-scripts code-style",
     "lint": "just-scripts eslint",
     "bundle": "just-scripts bundle --useMetro --bundleName rnTester",
-    "start:tester": "react-native start --projectRoot ./src",
-    "start-test": "just-scripts jest-watch",
-    "update-snapshots": "just-scripts jest -u",
-    "verify-api": "just-scripts verify-api-extractor",
-    "update-api": "just-scripts update-api-extractor",
+    "start": "react-native start --projectRoot ./src",
     "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
     "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useLiveReload --pluginProps"
   },
