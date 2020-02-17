@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Persona, PersonaSize } from 'react-native-uifabric';
 import { styles, rajeshImageUrl } from './styles';
 import { View, Text, Switch, Picker } from 'react-native';
-import { undefinedText } from '../PersonaCoin/utils';
+import { undefinedText } from '../PersonaCoin/styles';
 
 type WithUndefined<T> = T | typeof undefinedText;
 

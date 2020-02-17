@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { PersonaSize, PersonaCoinColor, PersonaCoin, PersonaPresence } from 'react-native-uifabric';
 import { Switch, View, Text, Picker } from 'react-native';
-import { styles, satyaPhotoUrl } from './styles';
-import { undefinedText } from './utils';
+import { styles, satyaPhotoUrl, undefinedText } from './styles';
 
 type WithUndefined<T> = T | typeof undefinedText;
 

@@ -29,8 +29,11 @@ const presenceIconCache: { [key in PersonaPresence]: ImageURISource } = {
   }
 };
 
-export function getPresenceIconSource(presence: PersonaPresence): ImageURISource {
-  return presenceIconCache[presence];
+// TODO: Need icons for the OOF statues
+const presenceOOFIconCache = presenceIconCache;
+
+export function getPresenceIconSource(presence: PersonaPresence, isOutOfOffice: boolean): ImageURISource {
+  return isOutOfOffice ? presenceOOFIconCache[presence] : presenceIconCache[presence];
 }
 
 export type PersonaSizeConfig = {
