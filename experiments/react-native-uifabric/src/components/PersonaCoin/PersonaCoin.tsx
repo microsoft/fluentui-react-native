@@ -25,7 +25,7 @@ function usePrepareForProps(
   props: IPersonaCoinProps,
   useStyling: IUseComposeStyling<IPersonaCoinType>
 ): IRenderData<IPersonaCoinSlotProps, IPersonaCoinState> {
-  const { imageUrl, imageDescription, initials, presence, ...rest } = props;
+  const { imageUrl, imageDescription, initials, presence, isOutOfOffice, ...rest } = props;
 
   const personaPhotoSource =
     imageUrl === undefined
@@ -34,7 +34,7 @@ function usePrepareForProps(
           uri: imageUrl
         };
 
-  const iconSource = presence === undefined ? undefined : getPresenceIconSource(presence);
+  const iconSource = presence === undefined ? undefined : getPresenceIconSource(presence, isOutOfOffice || false);
 
   return {
     slotProps: mergeSettings<IPersonaCoinType['slotProps']>(useStyling(props), {
