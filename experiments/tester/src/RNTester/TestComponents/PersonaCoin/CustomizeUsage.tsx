@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { PersonaCoin, IconAlignment, IPersonaCoinTokens } from 'react-native-uifabric';
 import { Switch, View, Text, Picker, TextInput } from 'react-native';
-import { styles, steveBallerPhotoUrl as steveBallmerPhotoUrl } from './styles';
-import { undefinedText } from './utils';
+import { styles, steveBallmerPhotoUrl, undefinedText } from './styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
 
 const alignmentValues: Array<typeof undefinedText | IconAlignment> = [undefinedText, 'start', 'center', 'end'];
