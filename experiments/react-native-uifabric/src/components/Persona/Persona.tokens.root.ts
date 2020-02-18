@@ -3,7 +3,9 @@ import { styleFunction } from '@uifabricshared/foundation-tokens';
 import { IPersonaTokens } from './Persona.types';
 import { ITheme } from '@uifabricshared/theming-ramp';
 
-function _buildRootStyles(tokenProps: IPersonaTokens): ViewProps {
+const _rootKeyProps: (keyof IPersonaTokens)[] = ['coinSize', 'size'];
+
+function _buildRootStyle(tokenProps: IPersonaTokens): ViewProps {
   const rootStyle: ViewStyle = {
     flexDirection: 'row',
     alignItems: 'center'
@@ -18,4 +20,4 @@ function _buildRootStyles(tokenProps: IPersonaTokens): ViewProps {
   return { style: rootStyle };
 }
 
-export const buildPersonaRootStyles = styleFunction<ViewProps, IPersonaTokens, ITheme>(_buildRootStyles, []);
+export const buildRootStyle = styleFunction<ViewProps, IPersonaTokens, ITheme>(_buildRootStyle, _rootKeyProps);

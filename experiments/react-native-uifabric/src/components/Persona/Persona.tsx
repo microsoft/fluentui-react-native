@@ -2,39 +2,34 @@
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { IPersonaType, personaName, IPersonaSlotProps, IPersonaProps, IPersonaRenderData } from './Persona.types';
 import { settings } from './Persona.settings';
-import { View, Text, TextStyle } from 'react-native';
+import { View, Text } from 'react-native';
 import { filterViewProps } from '../../utilities/RenderHelpers';
 import { PersonaCoin } from '../PersonaCoin/PersonaCoin';
 import { ISlots, withSlots, IRenderData } from '@uifabricshared/foundation-composable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { buildPersonaRootStyles } from './Persona.tokens';
-import { getTextFont, getSecondaryFont, getTertiaryFont, getOptionalFont } from './Persona.helpers';
+import { buildRootStyle } from './Persona.tokens.root';
+import { buildTextStyle, buildTertiaryStyle, buildOptionalStyle, buildSecondaryStyle } from './Persona.tokens.texts';
+import { buildCoinStyle } from './Persona.tokens.coin';
 
 function usePrepareForProps(props: IPersonaProps, useStyling: IUseComposeStyling<IPersonaType>): IRenderData<IPersonaSlotProps, {}> {
-  const { text, secondaryText, tertiaryText, optionalText, size, ...rootProps } = props;
+  const {
+    text,
+    secondaryText,
+    tertiaryText,
+    optionalText,
+    size,
+    coinColor,
+    imageUrl,
+    imageDescription,
+    initials,
+    presence,
+    isOutOfOffice,
+    ...rootProps
+  } = props;
 
-  const styledProps = useStyling(props);
-
-  const textStyle: TextStyle = size !== undefined ? { ...getTextFont(size) } : {};
-  const secondaryStyle: TextStyle = size !== undefined ? { ...getSecondaryFont(size) } : {};
-  const tertiaryStyle: TextStyle = size !== undefined ? { ...getTertiaryFont(size) } : {};
-  const optionalStyle: TextStyle = size !== undefined ? { ...getOptionalFont(size) } : {};
-
-  const slotProps = mergeSettings<IPersonaType['slotProps']>(styledProps, {
+  const slotProps = mergeSettings<IPersonaType['slotProps']>(useStyling(props), {
     root: { ...rootProps },
-    coin: { ...rootProps, size },
-    text: {
-      style: textStyle
-    },
-    secondary: {
-      style: secondaryStyle
-    },
-    tertiary: {
-      style: tertiaryStyle
-    },
-    optional: {
-      style: optionalStyle
-    }
+    coin: { size, coinColor, imageUrl, imageDescription, initials, presence, isOutOfOffice }
   });
 
   return {
@@ -52,7 +47,6 @@ const render = (Slots: ISlots<IPersonaSlotProps>, renderData: IPersonaRenderData
   if (!renderData.state) {
     return null;
   }
-
   const { text, secondaryText, tertiaryText, optionalText } = renderData.state;
 
   return (
@@ -86,11 +80,12 @@ export const Persona = compose<IPersonaType>({
     optional: Text
   },
   styles: {
-    root: [buildPersonaRootStyles],
-    text: [{ source: 'verticalGap', target: 'marginBottom' }],
-    secondary: [{ source: 'verticalGap', target: 'marginBottom' }],
-    tertiary: [{ source: 'verticalGap', target: 'marginBottom' }],
-    optional: [],
+    root: [buildRootStyle],
+    coin: [buildCoinStyle],
+    text: [buildTextStyle],
+    secondary: [buildSecondaryStyle],
+    tertiary: [buildTertiaryStyle],
+    optional: [buildOptionalStyle],
     stack: [{ source: 'horizontalGap', target: 'marginLeft' }]
   }
 });

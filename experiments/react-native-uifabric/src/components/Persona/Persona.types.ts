@@ -16,7 +16,7 @@ export interface IPersonaProps extends IPersonaCoinProps, IPersonaState {}
 
 export interface IPersonaSlotProps {
   root: ViewProps;
-  coin: ViewProps;
+  coin: IPersonaCoinProps;
   stack: ViewProps;
   text: TextProps;
   secondary: TextProps;
@@ -24,9 +24,11 @@ export interface IPersonaSlotProps {
   optional: TextProps;
 }
 
-export interface IPersonaTokens extends IPersonaCoinTokens {
+export interface IPersonaTokens extends Omit<IPersonaCoinTokens, 'backgroundColor'> {
   verticalGap?: number;
   horizontalGap?: number;
+
+  coinBackgroundColor?: string;
 
   textFont?: ITextTokens;
   secondaryFont?: ITextTokens;
@@ -38,7 +40,7 @@ export interface IPersonaType {
   props: IPersonaProps;
   slotProps: IPersonaSlotProps;
   tokens: IPersonaTokens;
-  state: {};
+  state: IPersonaState;
 }
 
 export type IPersonaRenderData = IRenderData<IPersonaSlotProps, IPersonaState>;
