@@ -10,10 +10,14 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [coinColor, setCoinColor] = React.useState<string>();
   const [textColor, setTextColor] = React.useState<string>();
+
   const [textSize, setTextSize] = React.useState<number>();
   const [secondarySize, setSecondarySize] = React.useState<number>();
   const [tertiarySize, setTertiarySize] = React.useState<number>();
   const [optionalSize, setOptionalSize] = React.useState<number>();
+
+  const [horizontalGap, setHorizontalGap] = React.useState<number>();
+  const [verticalGap, setVerticalGap] = React.useState<number>();
 
   const tokens: Partial<IPersonaTokens> = {};
   if (coinColor) {
@@ -33,6 +37,12 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   }
   if (optionalSize) {
     tokens.optionalFont = { fontSize: optionalSize };
+  }
+  if (horizontalGap) {
+    tokens.horizontalGap = horizontalGap;
+  }
+  if (verticalGap) {
+    tokens.verticalGap = verticalGap;
   }
 
   const theme = useTheme();
@@ -72,6 +82,9 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
         <NumericInput label="Secondary text size" maximum={100} onSubmit={setSecondarySize} />
         <NumericInput label="Tertiary text size" maximum={100} onSubmit={setTertiarySize} />
         <NumericInput label="Optional text size" maximum={100} onSubmit={setOptionalSize} />
+
+        <NumericInput label="Horizontal gap" maximum={100} onSubmit={setHorizontalGap} />
+        <NumericInput label="Vertical gap" maximum={100} onSubmit={setVerticalGap} />
       </View>
 
       {/* component under test */}
