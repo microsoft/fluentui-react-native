@@ -4,6 +4,7 @@ import { Separator } from 'react-native-uifabric';
 import { TextWin32 } from '@office-iss/react-native-win32';
 import { styles } from './styles';
 import { StandardUsage } from './StandardUsage';
+import { CustomizeUsage } from './CustomizeUsage';
 
 export const PersonaTest: React.FunctionComponent<{}> = () => {
   return (
@@ -14,7 +15,7 @@ export const PersonaTest: React.FunctionComponent<{}> = () => {
 
       <TextWin32 style={styles.section}>Customize Usage</TextWin32>
       <Separator />
-      {/* <CustomizeUsage /> */}
+      <CustomizeUsage />
     </View>
   );
 };

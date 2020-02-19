@@ -14,7 +14,7 @@ const textFontCache: { [key in PersonaSize]: FontAttributes } = {
   size40: { fontSize: 14, fontWeight: '500' },
   size48: { fontSize: 14, fontWeight: '500' },
   size56: { fontSize: 14, fontWeight: '500' },
-  size72: { fontSize: 14, fontWeight: '500' },
+  size72: { fontSize: 15, fontWeight: '500' },
   size100: { fontSize: 14, fontWeight: '500' },
   size120: { fontSize: 14, fontWeight: '500' }
 };
@@ -26,7 +26,7 @@ const secondaryFontCache: { [key in PersonaSize]: FontAttributes } = {
   size40: { fontSize: 14, fontWeight: '500' },
   size48: { fontSize: 14, fontWeight: '500' },
   size56: { fontSize: 14, fontWeight: '500' },
-  size72: { fontSize: 14, fontWeight: '500' },
+  size72: { fontSize: 13, fontWeight: '500' },
   size100: { fontSize: 14, fontWeight: '500' },
   size120: { fontSize: 14, fontWeight: '500' }
 };
@@ -38,7 +38,7 @@ const tertiaryFontCache: { [key in PersonaSize]: FontAttributes } = {
   size40: { fontSize: 14, fontWeight: '500' },
   size48: { fontSize: 14, fontWeight: '500' },
   size56: { fontSize: 14, fontWeight: '500' },
-  size72: { fontSize: 14, fontWeight: '500' },
+  size72: { fontSize: 12, fontWeight: '500' },
   size100: { fontSize: 14, fontWeight: '500' },
   size120: { fontSize: 14, fontWeight: '500' }
 };
@@ -50,7 +50,7 @@ const optionalFontCache: { [key in PersonaSize]: FontAttributes } = {
   size40: { fontSize: 14, fontWeight: '500' },
   size48: { fontSize: 14, fontWeight: '500' },
   size56: { fontSize: 14, fontWeight: '500' },
-  size72: { fontSize: 14, fontWeight: '500' },
+  size72: { fontSize: 11, fontWeight: '500' },
   size100: { fontSize: 14, fontWeight: '500' },
   size120: { fontSize: 14, fontWeight: '500' }
 };

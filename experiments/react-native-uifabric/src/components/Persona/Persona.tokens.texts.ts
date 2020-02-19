@@ -14,14 +14,16 @@ function buildTextStyleHelper(
   theme: ITheme
 ) {
   const textStyle: TextStyle = {};
+
   if (verticalGap && verticalGap > 0) {
     textStyle.marginBottom = verticalGap;
   }
+
   if (fontTokens) {
     const { fontFamily, fontSize, fontWeight } = fontTokens;
-    textStyle.fontFamily = fontFamily && theme.typography.families[fontFamily];
-    textStyle.fontSize = fontSize && theme.typography.sizes[fontSize];
-    textStyle.fontWeight = fontWeight && theme.typography.weights[fontWeight];
+    textStyle.fontFamily = fontFamily && (theme.typography.families[fontFamily] || fontFamily);
+    textStyle.fontSize = fontSize && (typeof fontSize === 'string' ? theme.typography.sizes[fontSize] : fontSize);
+    textStyle.fontWeight = fontWeight && (theme.typography.weights[fontWeight] || fontWeight);
   } else {
     const { fontFamily, fontSize, fontWeight } = getFontAttributes(size || 'size40');
     textStyle.fontFamily = fontFamily;

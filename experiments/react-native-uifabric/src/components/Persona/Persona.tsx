@@ -10,6 +10,7 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { buildRootStyle } from './Persona.tokens.root';
 import { buildTextStyle, buildTertiaryStyle, buildOptionalStyle, buildSecondaryStyle } from './Persona.tokens.texts';
 import { buildCoinStyle } from './Persona.tokens.coin';
+import { foregroundColorTokens } from '../../tokens';
 
 function usePrepareForProps(props: IPersonaProps, useStyling: IUseComposeStyling<IPersonaType>): IRenderData<IPersonaSlotProps, {}> {
   const {
@@ -81,7 +82,7 @@ export const Persona = compose<IPersonaType>({
   },
   styles: {
     root: [buildRootStyle],
-    coin: [buildCoinStyle],
+    coin: [foregroundColorTokens, { source: 'coinBackgroundColor', target: 'backgroundColor' }, buildCoinStyle],
     text: [buildTextStyle],
     secondary: [buildSecondaryStyle],
     tertiary: [buildTertiaryStyle],

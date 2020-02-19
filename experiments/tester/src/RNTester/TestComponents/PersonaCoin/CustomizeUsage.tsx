@@ -3,6 +3,8 @@ import { PersonaCoin, IconAlignment, IPersonaCoinTokens } from 'react-native-uif
 import { Switch, View, Text, Picker, TextInput } from 'react-native';
 import { styles, steveBallmerPhotoUrl, undefinedText } from './styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
+import { NumericInput } from '../Common/NumericInput';
+import { styles as commonStyles } from '../Common/styles';
 
 const alignmentValues: Array<typeof undefinedText | IconAlignment> = [undefinedText, 'start', 'center', 'end'];
 
@@ -24,43 +26,6 @@ const AlignmentPicker: React.FunctionComponent<IAlignmentPickerProps> = (props: 
         <Picker.Item label={alignment} key={index} value={alignment} />
       ))}
     </Picker>
-  );
-};
-
-interface INumericInputProps {
-  label: string;
-  maximum?: number;
-  onSubmit: (value: number | undefined) => void;
-}
-
-const NumericInput: React.FunctionComponent<INumericInputProps> = (props: INumericInputProps) => {
-  const { label, onSubmit, maximum } = props;
-
-  const theme = useTheme();
-  const textBoxBorderStyle = {
-    borderColor: theme.colors.inputBorder,
-    width: 100
-  };
-
-  return (
-    <TextInput
-      placeholder={label}
-      style={[styles.textBox, textBoxBorderStyle]}
-      blurOnSubmit={true}
-      onSubmitEditing={e => {
-        const stringValue = e.nativeEvent.text;
-        let numericValue = stringValue ? parseInt(stringValue) : NaN;
-        if (isNaN(numericValue)) {
-          onSubmit(undefined);
-        } else {
-          numericValue = Math.max(0, numericValue);
-          if (maximum) {
-            numericValue = Math.min(numericValue, maximum);
-          }
-          onSubmit(numericValue);
-        }
-      }}
-    />
   );
 };
 
@@ -114,7 +79,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
         </View>
 
         <TextInput
-          style={[styles.textBox, textBoxBorderStyle]}
+          style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Background color"
           blurOnSubmit={true}
           onSubmitEditing={e => {
@@ -123,7 +88,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
         />
 
         <TextInput
-          style={[styles.textBox, textBoxBorderStyle]}
+          style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Initials text color"
           blurOnSubmit={true}
           onSubmitEditing={e => {

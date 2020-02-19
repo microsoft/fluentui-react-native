@@ -1,0 +1,91 @@
+import * as React from 'react';
+import { View, Text, Switch, TextInput } from 'react-native';
+import { IPersonaTokens, Persona } from 'react-native-uifabric';
+import { styles, michaelImageUrl } from './styles';
+import { styles as commonStyles } from '../Common/styles';
+import { useTheme } from '@uifabricshared/theming-react-native';
+import { NumericInput } from '../Common/NumericInput';
+
+export const CustomizeUsage: React.FunctionComponent<{}> = () => {
+  const [showImage, setShowImage] = React.useState(true);
+  const [coinColor, setCoinColor] = React.useState<string>();
+  const [textColor, setTextColor] = React.useState<string>();
+  const [textSize, setTextSize] = React.useState<number>();
+  const [secondarySize, setSecondarySize] = React.useState<number>();
+  const [tertiarySize, setTertiarySize] = React.useState<number>();
+  const [optionalSize, setOptionalSize] = React.useState<number>();
+
+  const tokens: Partial<IPersonaTokens> = {};
+  if (coinColor) {
+    tokens.coinBackgroundColor = coinColor;
+  }
+  if (textColor) {
+    tokens.color = textColor;
+  }
+  if (textSize) {
+    tokens.textFont = { fontSize: textSize };
+  }
+  if (secondarySize) {
+    tokens.secondaryFont = { fontSize: secondarySize };
+  }
+  if (tertiarySize) {
+    tokens.tertiaryFont = { fontSize: tertiarySize };
+  }
+  if (optionalSize) {
+    tokens.optionalFont = { fontSize: optionalSize };
+  }
+
+  const theme = useTheme();
+  const textBoxBorderStyle = {
+    borderColor: theme.colors.inputBorder
+  };
+
+  const CustomizedPersona = Persona.customize({ tokens });
+  return (
+    <View style={styles.root}>
+      {/* settings */}
+      <View style={styles.settings}>
+        <View style={styles.switch}>
+          <Text>Show image</Text>
+          <Switch value={showImage} onValueChange={setShowImage} />
+        </View>
+
+        <TextInput
+          style={[commonStyles.textBox, textBoxBorderStyle]}
+          placeholder="Background color"
+          blurOnSubmit={true}
+          onSubmitEditing={e => {
+            setCoinColor(e.nativeEvent.text);
+          }}
+        />
+
+        <TextInput
+          style={[commonStyles.textBox, textBoxBorderStyle]}
+          placeholder="Initials text color"
+          blurOnSubmit={true}
+          onSubmitEditing={e => {
+            setTextColor(e.nativeEvent.text);
+          }}
+        />
+
+        <NumericInput label="Primary text size" maximum={100} onSubmit={setTextSize} />
+        <NumericInput label="Secondary text size" maximum={100} onSubmit={setSecondarySize} />
+        <NumericInput label="Tertiary text size" maximum={100} onSubmit={setTertiarySize} />
+        <NumericInput label="Optional text size" maximum={100} onSubmit={setOptionalSize} />
+      </View>
+
+      {/* component under test */}
+      <CustomizedPersona
+        initials="MJ"
+        size="size72"
+        text="Michael Jackson"
+        secondaryText="Pop singer"
+        tertiaryText="King of pop"
+        optionalText="Indiana"
+        imageDescription="Legendary pop singer"
+        presence="offline"
+        imageUrl={showImage ? michaelImageUrl : undefined}
+      />
+    </View>
+  );
+};
