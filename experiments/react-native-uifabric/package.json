@@ -2,7 +2,7 @@
   "name": "react-native-uifabric",
   "version": "0.12.10",
   "description": "A react-native companion to fabric web that only depends on stock controls and theming",
-  "main": "lib-commonjs/index.js",
+  "main": "lib/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
   "private": true,
@@ -17,10 +17,7 @@
     "start-test": "just-scripts jest-watch",
     "update-snapshots": "just-scripts jest -u",
     "verify-api": "just-scripts verify-api-extractor",
-    "update-api": "just-scripts update-api-extractor",
-    "build:tester": "just-scripts bundle --useMetro --bundleName rnTester",
-    "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --windowTitle \"FluentUI Tester\" --basePath ./dist",
-    "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\""
+    "update-api": "just-scripts update-api-extractor"
   },
   "dependencies": {
     "@uifabricshared/foundation-composable": "0.5.3",
@@ -34,7 +31,6 @@
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.27.3",
-    "@office-iss/rex-win32": "0.0.34",
     "@types/prop-types": "15.5.1",
     "@types/react": "16.9.11",
     "@types/react-dom": "16.9.5",
@@ -52,7 +48,7 @@
   },
   "metroBundles": {
     "uifabric": {
-      "entry": "./lib/index.js",
+      "entry": "./src/index.ts",
       "output": "./dist/react-native-uifabric.bundle"
     }
   },

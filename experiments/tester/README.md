@@ -29,7 +29,7 @@
 3. Start the debug server:
 
 ```
-    yarn start:tester
+    yarn start
 ```
 
 4. Open Chrome and navigate to http://localhost:8081/debugger-ui
