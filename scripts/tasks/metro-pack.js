@@ -48,7 +48,12 @@ exports.metroPackTask = function(bundleName) {
     // we'll rename the bundle file back to the desired name.
     if (!outputBundlePath.endsWith('.js')) {
       const metroBundlePath = outputBundlePath + '.js';
-      if (fs.existsSync(metroBundlePath) && !fs.existsSync(outputBundlePath)) {
+      if (fs.existsSync(metroBundlePath)) {
+        if (fs.existsSync(outputBundlePath)) {
+          justTask.logger.verbose(`Deleting existing output file at ${outputBundlePath}...`);
+          fs.unlinkSync(outputBundlePath);
+        }
+
         justTask.logger.verbose(`Renaming ${metroBundlePath} to ${outputBundlePath}...`);
         fs.renameSync(metroBundlePath, outputBundlePath);
       }

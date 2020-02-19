@@ -13,13 +13,9 @@
     "code-style": "just-scripts code-style",
     "lint": "just-scripts eslint",
     "bundle": "just-scripts bundle --useMetro --bundleName rnTester",
-    "start:tester": "react-native start --projectRoot ./src",
-    "start-test": "just-scripts jest-watch",
-    "update-snapshots": "just-scripts jest -u",
-    "verify-api": "just-scripts verify-api-extractor",
-    "update-api": "just-scripts update-api-extractor",
-    "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --windowTitle \"FluentUI Tester\" --basePath ./dist",
-    "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\""
+    "start": "react-native start --projectRoot ./src",
+    "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
+    "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useLiveReload --pluginProps"
   },
   "dependencies": {
     "@uifabricshared/foundation-composable": "0.5.3",
@@ -34,7 +30,7 @@
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.27.3",
-    "@office-iss/rex-win32": "0.0.34",
+    "@office-iss/rex-win32": "0.0.35",
     "@types/prop-types": "15.5.1",
     "@types/react": "16.9.11",
     "@types/react-dom": "16.9.5",
@@ -52,7 +48,7 @@
   },
   "metroBundles": {
     "rnTester": {
-      "entry": "./lib/RNTester.js",
+      "entry": "./src/RNTester.ts",
       "output": "./dist/RNTester.bundle"
     }
   },
