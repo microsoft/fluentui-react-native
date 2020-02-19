@@ -16,22 +16,48 @@ function getPackageInfo(subdir, packageName) {
   } catch {}
 }
 
+/**
+ * Parse the lerna package entry and return one or more actual directories to get package info for
+ * @param {string} repoRoot - path to the root of the repository
+ * @param {string} packageEntry - package entry in the format of "subdir" | "subdir/*" | "subdir/**"
+ */
+function parseLernaPackageEntry(repoRoot, packageEntry) {
+  const parts = packageEntry.split('/');
+  var basePath = repoRoot;
+  var tailType = '';
+  parts.forEach(part => {
+    tailType = part;
+    if (tailType !== '*' && tailType !== '**') {
+      basePath = path.join(basePath, part);
+    }
+  });
+  if (tailType === '*' || tailType === '**') {
+    const results = [];
+    const dirs = fs.readdirSync(basePath).filter(f => fs.statSync(path.join(basePath, f)).isDirectory());
+
+    dirs.forEach(dir => {
+      const packageDir = path.join(basePath, dir);
+      results.push(packageDir);
+      if (tailType === '**') {
+        const subDirs = fs.readdirSync(packageDir).filter(f => fs.statSync(path.join(packageDir, f)).isDirectory());
+        subDirs.forEach(subDir => results.push(path.join(packageDir, subDir)));
+      }
+    });
+
+    return results;
+  }
+  return [basePath];
+}
+
 function queryPackages(packageNames) {
   const gitRoot = require('./findGitRoot')();
   const lernaData = require(gitRoot + '/lerna');
   const packages = lernaData.packages;
+
   const results = [];
-  // format for packages looks like: ["packages/*", "scripts", "apps/*", "experiments/*"]
-  for (const packageRaw of packages) {
-    const package = path.join(gitRoot, packageRaw.trim());
-    if (package.endsWith('/*') || package.endsWith('\\*')) {
-      const subRoot = package.slice(0, -2);
-      const dirs = fs.readdirSync(subRoot).filter(f => fs.statSync(path.join(subRoot, f)).isDirectory());
-      dirs.forEach(dir => results.push(getPackageInfo(path.join(subRoot, dir), packageNames)));
-    } else {
-      results.push(getPackageInfo(package, packageNames));
-    }
-  }
+  packages.forEach(packageEntry =>
+    parseLernaPackageEntry(gitRoot, packageEntry).forEach(entry => results.push(getPackageInfo(entry, packageNames)))
+  );
   return results.filter(p => p);
 }
 
