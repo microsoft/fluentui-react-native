@@ -23,9 +23,7 @@ function fileExists(path) {
   }
 }
 
-module.exports = function preset(options = {}) {
-  const { noTests } = options;
-
+module.exports = function preset() {
   // this add s a resolve path for the build tooling deps like TS from the scripts folder
   addResolvePath(__dirname);
 
