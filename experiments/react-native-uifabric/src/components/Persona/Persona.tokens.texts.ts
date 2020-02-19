@@ -15,7 +15,7 @@ function buildTextStyleHelper(
 ) {
   const textStyle: TextStyle = {};
 
-  if (verticalGap && verticalGap > 0) {
+  if (verticalGap !== undefined) {
     textStyle.marginBottom = verticalGap;
   }
 
