@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { PersonaCoin, IconAlignment, IPersonaCoinTokens } from 'react-native-uifabric';
 import { Switch, View, Text, Picker, TextInput } from 'react-native';
+import { Slider } from '../Common/Slider';
 import { styles, steveBallmerPhotoUrl, undefinedText } from './styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
 
@@ -27,50 +28,13 @@ const AlignmentPicker: React.FunctionComponent<IAlignmentPickerProps> = (props: 
   );
 };
 
-interface INumericInputProps {
-  label: string;
-  maximum?: number;
-  onSubmit: (value: number | undefined) => void;
-}
-
-const NumericInput: React.FunctionComponent<INumericInputProps> = (props: INumericInputProps) => {
-  const { label, onSubmit, maximum } = props;
-
-  const theme = useTheme();
-  const textBoxBorderStyle = {
-    borderColor: theme.colors.inputBorder,
-    width: 100
-  };
-
-  return (
-    <TextInput
-      placeholder={label}
-      style={[styles.textBox, textBoxBorderStyle]}
-      blurOnSubmit={true}
-      onSubmitEditing={e => {
-        const stringValue = e.nativeEvent.text;
-        let numericValue = stringValue ? parseInt(stringValue) : NaN;
-        if (isNaN(numericValue)) {
-          onSubmit(undefined);
-        } else {
-          numericValue = Math.max(0, numericValue);
-          if (maximum) {
-            numericValue = Math.min(numericValue, maximum);
-          }
-          onSubmit(numericValue);
-        }
-      }}
-    />
-  );
-};
-
 export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [coinColor, setCoinColor] = React.useState<string>();
   const [textColor, setTextColor] = React.useState<string>();
-  const [physicalSize, setPhysicalCoinSize] = React.useState<number>();
-  const [iconSize, setIconSize] = React.useState<number>();
-  const [initialsSize, setInitialsFontSize] = React.useState<number>();
+  const [physicalSize, setPhysicalSize] = React.useState<number>(80);
+  const [iconSize, setIconSize] = React.useState<number>(24);
+  const [initialsSize, setInitialsSize] = React.useState<number>(14);
   const [horizontalAlignment, setHorizontalAlignment] = React.useState<IconAlignment>();
   const [verticalAlignment, setVerticalAlignment] = React.useState<IconAlignment>();
 
@@ -135,11 +99,14 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
 
         <AlignmentPicker label="Vertical icon alignment" onSelectionChange={setVerticalAlignment} />
 
-        <NumericInput label="Coin size" maximum={200} onSubmit={setPhysicalCoinSize} />
+        <Text>Coin size</Text>
+        <Slider minimum={8} maximum={200} initialValue={80} style={styles.slider} onChange={setPhysicalSize} />
 
-        <NumericInput label="Icon size" maximum={100} onSubmit={setIconSize} />
+        <Text>Icon size</Text>
+        <Slider minimum={8} maximum={100} initialValue={24} style={styles.slider} onChange={setIconSize} />
 
-        <NumericInput label="Font size" maximum={50} onSubmit={setInitialsFontSize} />
+        <Text>Font size</Text>
+        <Slider minimum={5} maximum={50} initialValue={14} style={styles.slider} onChange={setInitialsSize} />
       </View>
 
       {/* component under test */}

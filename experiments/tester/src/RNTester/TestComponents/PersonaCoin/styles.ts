@@ -32,6 +32,10 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     width: 150,
     marginBottom: 8
+  },
+  slider: {
+    width: 200,
+    marginVertical: 8
   }
 });
 
