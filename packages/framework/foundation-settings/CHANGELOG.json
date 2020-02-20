@@ -2,6 +2,20 @@
   "name": "@uifabricshared/foundation-settings",
   "entries": [
     {
+      "date": "Thu, 20 Feb 2020 01:36:35 GMT",
+      "tag": "@uifabricshared/foundation-settings_v0.4.4",
+      "version": "0.4.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "restructure directories in project",
+            "author": "jasonmo@microsoft.com",
+            "commit": "6a2d86027f68f50423fed6d893fcc8071e67e89c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 07 Feb 2020 00:29:25 GMT",
       "tag": "@uifabricshared/foundation-settings_v0.4.3",
       "version": "0.4.3",

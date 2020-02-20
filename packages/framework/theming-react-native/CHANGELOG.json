@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Thu, 20 Feb 2020 01:36:35 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.3.3",
+      "version": "0.3.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "restructure directories in project",
+            "author": "jasonmo@microsoft.com",
+            "commit": "6a2d86027f68f50423fed6d893fcc8071e67e89c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 07 Feb 2020 00:29:25 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.3.2",
       "version": "0.3.2",
