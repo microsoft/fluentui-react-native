@@ -1,32 +1,10 @@
 import * as React from 'react';
 import { PersonaCoin, IconAlignment, IPersonaCoinTokens } from 'react-native-uifabric';
-import { Switch, View, Text, Picker, TextInput } from 'react-native';
+import { Switch, View, Text, TextInput } from 'react-native';
 import { Slider } from '../Common/Slider';
-import { styles, steveBallmerPhotoUrl, undefinedText } from './styles';
+import { styles, steveBallmerPhotoUrl } from './styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
-
-const alignmentValues: Array<typeof undefinedText | IconAlignment> = [undefinedText, 'start', 'center', 'end'];
-
-interface IAlignmentPickerProps {
-  label: string;
-  onSelectionChange: (value: IconAlignment | undefined) => void;
-}
-
-const AlignmentPicker: React.FunctionComponent<IAlignmentPickerProps> = (props: IAlignmentPickerProps) => {
-  const { label, onSelectionChange } = props;
-  return (
-    <Picker
-      prompt={label}
-      style={styles.header}
-      selectedValue={undefinedText}
-      onValueChange={(value, index) => onSelectionChange(index == 0 ? undefined : value)}
-    >
-      {alignmentValues.map((alignment, index) => (
-        <Picker.Item label={alignment} key={index} value={alignment} />
-      ))}
-    </Picker>
-  );
-};
+import { AlignmentPicker } from '../Common/AlignmentPicker';
 
 export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
@@ -95,9 +73,8 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           }}
         />
 
-        <AlignmentPicker label="Horizontal icon alignment" onSelectionChange={setHorizontalAlignment} />
-
-        <AlignmentPicker label="Vertical icon alignment" onSelectionChange={setVerticalAlignment} />
+        <AlignmentPicker style={styles.header} label="Horizontal icon alignment" onSelectionChange={setHorizontalAlignment} />
+        <AlignmentPicker style={styles.header} label="Vertical icon alignment" onSelectionChange={setVerticalAlignment} />
 
         <Text>Coin size</Text>
         <Slider minimum={8} maximum={200} initialValue={80} style={styles.slider} onChange={setPhysicalSize} />
