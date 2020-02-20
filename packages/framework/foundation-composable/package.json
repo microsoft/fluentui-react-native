@@ -1,19 +1,24 @@
 {
-  "name": "@uifabricshared/uifabric-rn-demo",
-  "version": "0.3.1",
-  "description": "Demo app for web code",
+  "name": "@uifabricshared/foundation-composable",
+  "version": "0.5.4",
+  "description": "Composable component building blocks",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/ui-fabric-react-native"
   },
-  "main": "lib/index.tsx",
+  "module": "lib/index.js",
+  "main": "lib-commonjs/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "build": "just-scripts build",
+    "bundle": "just-scripts bundle",
     "just": "just-scripts",
     "clean": "just-scripts clean",
     "code-style": "just-scripts code-style",
     "lint": "just-scripts eslint",
     "start": "just-scripts dev",
+    "start-test": "just-scripts jest-watch",
+    "update-snapshots": "just-scripts jest -u",
     "verify-api": "just-scripts verify-api-extractor",
     "update-api": "just-scripts update-api-extractor"
   },
@@ -21,24 +26,15 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/experimental-web-controls": "0.1.1"
+    "@uifabricshared/foundation-settings": "^0.4.4"
   },
   "devDependencies": {
-    "@types/es6-collections": "^0.5.29",
-    "@types/es6-promise": "0.0.32",
-    "@types/node": "^10.3.5",
     "@types/jest": "^19.2.2",
-    "@types/react": "16.8.15",
-    "@types/react-dom": "16.8.5",
     "react": "16.8.6",
-    "react-app-polyfill": "~1.0.1",
-    "react-dom": "16.8.6",
-    "ts-loader": "6.0.4",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
   },
   "beachball": {
-    "shouldPublish": false,
     "disallowedChangeTypes": [
       "major"
     ]

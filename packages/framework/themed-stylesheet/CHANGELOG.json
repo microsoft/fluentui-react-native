@@ -1,0 +1,108 @@
+{
+  "name": "@uifabricshared/themed-stylesheet",
+  "entries": [
+    {
+      "date": "Thu, 20 Feb 2020 01:36:35 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.2.5",
+      "version": "0.2.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "restructure directories in project",
+            "author": "jasonmo@microsoft.com",
+            "commit": "6a2d86027f68f50423fed6d893fcc8071e67e89c"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 07 Feb 2020 00:29:25 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.2.4",
+      "version": "0.2.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix packages for react-native to unblock builds",
+            "author": "jasonmo@microsoft.com",
+            "commit": "30e802cb10f5e91cf3d8ed7d9d9e123c4b7c4fcb"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 06 Feb 2020 01:00:13 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Temporarily disable test to work around test error.",
+            "author": "email not defined",
+            "commit": "a2ef1fb1be0d60a4afa7a39c3cf4e387d9879746"
+          },
+          {
+            "comment": "fix packages for react-native to unblock builds",
+            "author": "jasonmo@microsoft.com",
+            "commit": "30e802cb10f5e91cf3d8ed7d9d9e123c4b7c4fcb"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 Dec 2019 23:08:56 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix typings for theme object",
+            "author": "adrum@microsoft.com",
+            "commit": "2dab6829f0742c05454b104b3d6f47c4b307ac81"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 22 Nov 2019 23:33:23 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "🐛 Fix themed stylesheet typings",
+            "author": "adrum@microsoft.com",
+            "commit": "6af83981eefbf0305e62b2ec459031ced7853407"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 Nov 2019 19:37:06 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "📦 fix package entrypoints to distinguish CJS/ES6",
+            "author": "adrum@microsoft.com",
+            "commit": "d51fcaea614de5606989d8463c7f66ccbc5322cf"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 15 Nov 2019 00:49:28 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.1.2",
+      "version": "0.1.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add Themed StyleSheets for primitives",
+            "author": "adrum@microsoft.com",
+            "commit": "631a54b7debf3b6826e0ea192306762726abb799"
+          }
+        ]
+      }
+    }
+  ]
+}
