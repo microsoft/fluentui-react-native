@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Stack } from '..';
+import { Stack } from '../../Stack';
 import { Text } from '../../Text';
 import * as renderer from 'react-test-renderer';
 

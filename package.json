@@ -36,7 +36,6 @@
     "packages": [
       "apps/*",
       "docs",
-      "experiments/*",
       "packages/**",
       "scripts"
     ],

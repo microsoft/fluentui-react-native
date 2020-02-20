@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Separator } from '..';
+import { Separator } from '../../Separator';
 import * as renderer from 'react-test-renderer';
 
 it('Separator default', () => {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text } from '..';
+import { Text } from '../../Text';
 import * as renderer from 'react-test-renderer';
 
 it('Text default', () => {

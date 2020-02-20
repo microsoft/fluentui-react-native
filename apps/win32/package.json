@@ -1,5 +1,5 @@
 {
-  "name": "fluentui-shared-tester",
+  "name": "fluentui-tester-win32",
   "version": "0.12.10",
   "description": "Shared RNTester package for validating controls",
   "main": "lib-commonjs/index.js",

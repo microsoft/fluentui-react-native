@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactNative from 'react-native';
-import { Link } from '..';
+import { Link } from '../../Link';
 import * as renderer from 'react-test-renderer';
 
 it('Link all props', () => {
