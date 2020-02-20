@@ -12,10 +12,10 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [coinColor, setCoinColor] = React.useState<string>();
   const [textColor, setTextColor] = React.useState<string>();
 
-  const [textSize, setTextSize] = React.useState<number>();
-  const [secondarySize, setSecondarySize] = React.useState<number>();
-  const [tertiarySize, setTertiarySize] = React.useState<number>();
-  const [optionalSize, setOptionalSize] = React.useState<number>();
+  const [textSize, setTextSize] = React.useState<number>(23);
+  const [secondarySize, setSecondarySize] = React.useState<number>(20);
+  const [tertiarySize, setTertiarySize] = React.useState<number>(17);
+  const [optionalSize, setOptionalSize] = React.useState<number>(14);
 
   const [horizontalGap, setHorizontalGap] = React.useState<number>();
   const [verticalGap, setVerticalGap] = React.useState<number>();
@@ -80,16 +80,16 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
         />
 
         <Text>Primary text size</Text>
-        <Slider maximum={60} style={{ width: 200 }} onChange={setTextSize} />
+        <Slider maximum={50} minimum={5} initialValue={textSize} style={styles.slider} onChange={setTextSize} />
 
         <Text>Secondary text size</Text>
-        <Slider maximum={60} style={{ width: 200 }} onChange={setSecondarySize} />
+        <Slider maximum={50} minimum={5} initialValue={secondarySize} style={styles.slider} onChange={setSecondarySize} />
 
         <Text>Tertiary text size</Text>
-        <Slider maximum={60} style={{ width: 200 }} onChange={setTertiarySize} />
+        <Slider maximum={50} minimum={5} initialValue={tertiarySize} style={styles.slider} onChange={setTertiarySize} />
 
         <Text>Optional text size</Text>
-        <Slider maximum={60} style={{ width: 200 }} onChange={setOptionalSize} />
+        <Slider maximum={50} minimum={5} initialValue={optionalSize} style={styles.slider} onChange={setOptionalSize} />
 
         <NumericInput label="Horizontal gap" maximum={100} onSubmit={setHorizontalGap} />
         <NumericInput label="Vertical gap" maximum={100} onSubmit={setVerticalGap} />

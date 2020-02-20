@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ViewProps, StyleSheet, StyleProp, ViewStyle, UIManager, findNodeHandle, View } from 'react-native';
+import { ViewProps, StyleSheet, StyleProp, ViewStyle, UIManager, findNodeHandle } from 'react-native';
 import { ViewWin32 } from '@office-iss/react-native-win32';
 import { Separator, Pressable, IPressableState } from 'react-native-uifabric';
 
@@ -47,60 +47,77 @@ function onThumbRenderStyle(state: IPressableState, thumbLocation: number): Styl
   };
 }
 
-function calculateNewValue(thumbLocation: number, trackWidth: number, minimum: number, maximum: number): [number, number] {
-  const newValue = minimum + (thumbLocation / trackWidth * (maximum - minimum));
+function calculateNewValue(thumbLocation: number, trackLength: number, minimum: number, maximum: number): [number, number] {
+  const newValue = minimum + (thumbLocation / trackLength * (maximum - minimum));
   const intValue = Math.min(maximum, Math.floor(newValue + 0.3));   // snap to nearest integer value
-  const newThumbLocation = trackWidth * (intValue - minimum) / (maximum - minimum);
+  const newThumbLocation = trackLength * (intValue - minimum) / (maximum - minimum);
   return [intValue, newThumbLocation];
 }
 
-function calculateNewThumbLocation(currentThumbLocation: number, startTouchPosition: number, currentTouchPosition: number, trackWidth: number): number {
+function calculateNewThumbLocation(currentThumbLocation: number, startTouchPosition: number, currentTouchPosition: number, trackLength: number): number {
   let newLocation = currentThumbLocation + currentTouchPosition - startTouchPosition;
   newLocation = Math.max(0, newLocation);
-  newLocation = Math.min(newLocation, trackWidth);
+  newLocation = Math.min(newLocation, trackLength);
   return newLocation;
 }
 
+function verifyProps(initialValue: number, minimum: number, maximum: number) {
+  if (minimum >= maximum) {
+    throw new Error(`'minimum' must not be greater than or equal 'maximum'.`);
+  }
+
+  if (initialValue < minimum) {
+    throw new Error(`'initialValue' must not be less than 'minimum'.`);
+  }
+
+  if (initialValue > maximum) {
+    throw new Error(`'initialValue' must not be greater than 'maximum'.`);
+  }
+}
+
 export const Slider: React.FunctionComponent<ISliderProps> = (props: ISliderProps) => {
-  const { style: userStyle, onChange } = props;
-  let { minimum, maximum } = props;
+  let { minimum, maximum, initialValue } = props;
   minimum = minimum || defaultMinimumValue;
   maximum = maximum || defaultMaximumValue;
-  if (minimum >= maximum) {
-    throw new Error(`'minimum' value must not be greater than or equal 'maximum' value.`);
-  }
+  initialValue = initialValue || minimum;
+  verifyProps(initialValue, minimum, maximum);
+
+  const { style: userStyle, onChange } = props;
 
   const [thumbLocation, setThumbLocation] = React.useState<number>(0);
   
   const startTouchPosition = React.useRef<number>(-1);
   const startTouchThumbLocation = React.useRef<number>(-1);
-  const trackWidth = React.useRef<number>(-1);
+  const trackLength = React.useRef<number>(-1);
 
   const ref = React.useRef<ViewWin32>(null);
+
+  React.useEffect(()=> {
+    const parent = findNodeHandle(ref.current);
+    if (parent) {
+      UIManager.measure(parent, (x, y, width) => {
+        // the track length is the entire view width subtracted by the thumb size.
+        trackLength.current = Math.max(0, width - thumbSize);
+        
+        const initialThumbLocation = trackLength.current * (initialValue! - minimum!) / (maximum! - minimum!);
+        setThumbLocation(initialThumbLocation);
+      });
+    }
+  }, [ref.current, initialValue, maximum, minimum]);
 
   return (
     <ViewWin32 ref={ref} {...props} style={[userStyle, styles.root]}>
       <Track style={styles.track} />
       <Pressable
         renderStyle={state => onThumbRenderStyle(state, thumbLocation)}
-        onStartShouldSetResponder={() => {
-          const parent = findNodeHandle(ref.current);
-          if (parent) {
-            UIManager.measure(parent, (x, y, width) => {
-              trackWidth.current = Math.max(0, width - thumbSize);
-            });
-            return true;
-          } else {
-            return false;
-          }
-        }}
+        onStartShouldSetResponder={() => trackLength.current > 0}
         onResponderStart={e => {
           startTouchPosition.current = e.nativeEvent.pageX;
           startTouchThumbLocation.current = thumbLocation;
         }}
         onResponderMove={e => {
-          if (startTouchPosition.current !== -1 && trackWidth.current > 0) {
-            const newThumLocation = calculateNewThumbLocation(startTouchThumbLocation.current, startTouchPosition.current, e.nativeEvent.pageX, trackWidth.current);
+          if (startTouchPosition.current !== -1 && trackLength.current > 0) {
+            const newThumLocation = calculateNewThumbLocation(startTouchThumbLocation.current, startTouchPosition.current, e.nativeEvent.pageX, trackLength.current);
             setThumbLocation(newThumLocation);
           }
         }}
@@ -109,10 +126,10 @@ export const Slider: React.FunctionComponent<ISliderProps> = (props: ISliderProp
           startTouchThumbLocation.current = -1;
         }}
         onResponderRelease={() => {
-          if (trackWidth.current <= 0) {
+          if (trackLength.current <= 0) {
             return;
           }
-          const [newValue, newThumbLocation] = calculateNewValue(thumbLocation, trackWidth.current, minimum || defaultMinimumValue, maximum || defaultMaximumValue);
+          const [newValue, newThumbLocation] = calculateNewValue(thumbLocation, trackLength.current, minimum || defaultMinimumValue, maximum || defaultMaximumValue);
           setThumbLocation(newThumbLocation);
           if (onChange) {
             onChange(newValue);

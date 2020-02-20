@@ -26,6 +26,10 @@ export const styles = StyleSheet.create({
   },
   oneCoin: {
     margin: 8
+  },
+  slider: {
+    width: 200,
+    marginVertical: 8
   }
 });
 
