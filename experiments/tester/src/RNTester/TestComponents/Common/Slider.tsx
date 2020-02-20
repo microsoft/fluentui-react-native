@@ -4,10 +4,12 @@ import { ViewWin32 } from '@office-iss/react-native-win32';
 import { Separator, Pressable, IPressableState } from 'react-native-uifabric';
 
 const thumbSize = 20;
+const defaultMaximumValue = 100;
+const defaultMinimumValue = 1;
 
 interface ISliderProps extends ViewProps {
-  vertical?: boolean;
-  maximum: number;
+  minimum?: number;
+  maximum?: number;
   initialValue?: number;
   onChange?: (value: number) => void;
 }
@@ -37,7 +39,6 @@ const styles = StyleSheet.create({
 
 const Track = Separator.customize({ tokens: { separatorWidth: 4 } });
 
-
 function onThumbRenderStyle(state: IPressableState, thumbLocation: number): StyleProp<ViewStyle> {
   return { 
     ...styles.thumb,
@@ -46,10 +47,10 @@ function onThumbRenderStyle(state: IPressableState, thumbLocation: number): Styl
   };
 }
 
-function calculateNewValue(thumbLocation: number, trackWidth: number, maximum: number): [number, number] {
-  const newValue = thumbLocation / trackWidth * maximum;
-  const intValue = Math.min(maximum, Math.floor(newValue + 0.3));
-  const newThumbLocation = trackWidth * intValue / maximum;
+function calculateNewValue(thumbLocation: number, trackWidth: number, minimum: number, maximum: number): [number, number] {
+  const newValue = minimum + (thumbLocation / trackWidth * (maximum - minimum));
+  const intValue = Math.min(maximum, Math.floor(newValue + 0.3));   // snap to nearest integer value
+  const newThumbLocation = trackWidth * (intValue - minimum) / (maximum - minimum);
   return [intValue, newThumbLocation];
 }
 
@@ -61,7 +62,13 @@ function calculateNewThumbLocation(currentThumbLocation: number, startTouchPosit
 }
 
 export const Slider: React.FunctionComponent<ISliderProps> = (props: ISliderProps) => {
-  const { style: userStyle, onChange, maximum } = props;
+  const { style: userStyle, onChange } = props;
+  let { minimum, maximum } = props;
+  minimum = minimum || defaultMinimumValue;
+  maximum = maximum || defaultMaximumValue;
+  if (minimum >= maximum) {
+    throw new Error(`'minimum' value must not be greater than or equal 'maximum' value.`);
+  }
 
   const [thumbLocation, setThumbLocation] = React.useState<number>(0);
   
@@ -105,7 +112,7 @@ export const Slider: React.FunctionComponent<ISliderProps> = (props: ISliderProp
           if (trackWidth.current <= 0) {
             return;
           }
-          const [newValue, newThumbLocation] = calculateNewValue(thumbLocation, trackWidth.current, maximum);
+          const [newValue, newThumbLocation] = calculateNewValue(thumbLocation, trackWidth.current, minimum || defaultMinimumValue, maximum || defaultMaximumValue);
           setThumbLocation(newThumbLocation);
           if (onChange) {
             onChange(newValue);
