@@ -56,8 +56,6 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
     <View style={styles.root}>
       {/* settings */}
       <View style={styles.settings}>
-        <Slider maximum={100} style={{ width: 200 }} />
-
         <View style={styles.switch}>
           <Text>Show image</Text>
           <Switch value={showImage} onValueChange={setShowImage} />
@@ -81,10 +79,17 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           }}
         />
 
-        <NumericInput label="Primary text size" maximum={100} onSubmit={setTextSize} />
-        <NumericInput label="Secondary text size" maximum={100} onSubmit={setSecondarySize} />
-        <NumericInput label="Tertiary text size" maximum={100} onSubmit={setTertiarySize} />
-        <NumericInput label="Optional text size" maximum={100} onSubmit={setOptionalSize} />
+        <Text>Primary text size</Text>
+        <Slider maximum={60} style={{ width: 200 }} onChange={setTextSize} />
+
+        <Text>Secondary text size</Text>
+        <Slider maximum={60} style={{ width: 200 }} onChange={setSecondarySize} />
+
+        <Text>Tertiary text size</Text>
+        <Slider maximum={60} style={{ width: 200 }} onChange={setTertiarySize} />
+
+        <Text>Optional text size</Text>
+        <Slider maximum={60} style={{ width: 200 }} onChange={setOptionalSize} />
 
         <NumericInput label="Horizontal gap" maximum={100} onSubmit={setHorizontalGap} />
         <NumericInput label="Vertical gap" maximum={100} onSubmit={setVerticalGap} />
