@@ -5,6 +5,7 @@ import { styles, michaelImageUrl } from './styles';
 import { styles as commonStyles } from '../Common/styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
 import { NumericInput } from '../Common/NumericInput';
+import { Slider } from '../Common/Slider';
 
 export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
@@ -38,10 +39,10 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   if (optionalSize) {
     tokens.optionalFont = { fontSize: optionalSize };
   }
-  if (horizontalGap) {
+  if (horizontalGap !== undefined) {
     tokens.horizontalGap = horizontalGap;
   }
-  if (verticalGap) {
+  if (verticalGap !== undefined) {
     tokens.verticalGap = verticalGap;
   }
 
@@ -55,6 +56,8 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
     <View style={styles.root}>
       {/* settings */}
       <View style={styles.settings}>
+        <Slider maximum={100} style={{ width: 200 }} />
+
         <View style={styles.switch}>
           <Text>Show image</Text>
           <Switch value={showImage} onValueChange={setShowImage} />
