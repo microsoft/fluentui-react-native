@@ -5,6 +5,7 @@ import { Slider } from '../Common/Slider';
 import { styles, steveBallmerPhotoUrl } from './styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
 import { AlignmentPicker } from '../Common/AlignmentPicker';
+import { styles as commonStyles } from '../Common/styles';
 
 export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
