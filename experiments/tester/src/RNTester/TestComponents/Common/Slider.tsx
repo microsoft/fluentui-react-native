@@ -143,7 +143,6 @@ export const Slider: React.FunctionComponent<ISliderProps> = (props: ISliderProp
                   e.nativeEvent.pageX,
                   trackLength.current
                 );
-                console.log(newThumbLocation);
                 setThumbLocation(newThumbLocation);
               }
             }}
