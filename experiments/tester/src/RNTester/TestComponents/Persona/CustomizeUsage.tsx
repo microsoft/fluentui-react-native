@@ -4,7 +4,6 @@ import { IPersonaTokens, Persona } from 'react-native-uifabric';
 import { styles, michaelImageUrl } from './styles';
 import { styles as commonStyles } from '../Common/styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
-import { NumericInput } from '../Common/NumericInput';
 import { Slider } from '../Common/Slider';
 
 export const CustomizeUsage: React.FunctionComponent<{}> = () => {
@@ -91,8 +90,11 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
         <Text>Optional text size</Text>
         <Slider maximum={50} minimum={5} initialValue={optionalSize} style={styles.slider} onChange={setOptionalSize} />
 
-        <NumericInput label="Horizontal gap" maximum={100} onSubmit={setHorizontalGap} />
-        <NumericInput label="Vertical gap" maximum={100} onSubmit={setVerticalGap} />
+        <Text>Horizontal gap</Text>
+        <Slider maximum={100} initialValue={5} minimum={0} style={styles.slider} onChange={setHorizontalGap} />
+
+        <Text>Vertical gap</Text>
+        <Slider maximum={20} initialValue={5} minimum={0} style={styles.slider} onChange={setVerticalGap} />
       </View>
 
       {/* component under test */}
