@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center'
   },
   header: {
-    marginTop: 12,
+    marginVertical: 6,
     fontSize: 12
   },
   section: {
@@ -28,8 +28,7 @@ export const styles = StyleSheet.create({
     margin: 8
   },
   slider: {
-    width: 200,
-    marginVertical: 8
+    marginVertical: 6
   }
 });
 
