@@ -34,8 +34,7 @@ export const styles = StyleSheet.create({
     marginBottom: 8
   },
   slider: {
-    width: 200,
-    marginVertical: 8
+    marginVertical: 6
   }
 });
 
