@@ -1,72 +1,66 @@
 import { PersonaSize } from '../PersonaCoin';
-import { TextStyle } from 'react-native';
+import { ITextTokens } from '../../tokens';
 
-export type FontAttributes = {
-  fontFamily?: TextStyle['fontFamily'];
-  fontSize?: TextStyle['fontSize'];
-  fontWeight?: TextStyle['fontWeight'];
+const textFontTable: { [key in PersonaSize]: ITextTokens } = {
+  size8: { fontSize: 'small' },
+  size24: { fontSize: 'medium' },
+  size32: { fontSize: 'medium' },
+  size40: { fontSize: 'medium' },
+  size48: { fontSize: 'medium' },
+  size56: { fontSize: 'xLarge' },
+  size72: { fontSize: 'xLarge' },
+  size100: { fontSize: 'xLarge' },
+  size120: { fontSize: 'xLarge' }
 };
 
-const textFontCache: { [key in PersonaSize]: FontAttributes } = {
-  size8: { fontSize: 14, fontWeight: '500' },
-  size24: { fontSize: 14, fontWeight: '500' },
-  size32: { fontSize: 14, fontWeight: '500' },
-  size40: { fontSize: 14, fontWeight: '500' },
-  size48: { fontSize: 14, fontWeight: '500' },
-  size56: { fontSize: 14, fontWeight: '500' },
-  size72: { fontSize: 15, fontWeight: '500' },
-  size100: { fontSize: 14, fontWeight: '500' },
-  size120: { fontSize: 14, fontWeight: '500' }
+const secondaryFontTable: { [key in PersonaSize]: ITextTokens } = {
+  size8: { fontSize: 0 },
+  size24: { fontSize: 0 },
+  size32: { fontSize: 0 },
+  size40: { fontSize: 'small' },
+  size48: { fontSize: 'small' },
+  size56: { fontSize: 'medium' },
+  size72: { fontSize: 'medium' },
+  size100: { fontSize: 'medium' },
+  size120: { fontSize: 'medium' }
 };
 
-const secondaryFontCache: { [key in PersonaSize]: FontAttributes } = {
-  size8: { fontSize: 14, fontWeight: '500' },
-  size24: { fontSize: 14, fontWeight: '500' },
-  size32: { fontSize: 14, fontWeight: '500' },
-  size40: { fontSize: 14, fontWeight: '500' },
-  size48: { fontSize: 14, fontWeight: '500' },
-  size56: { fontSize: 14, fontWeight: '500' },
-  size72: { fontSize: 13, fontWeight: '500' },
-  size100: { fontSize: 14, fontWeight: '500' },
-  size120: { fontSize: 14, fontWeight: '500' }
+const tertiaryFontTable: { [key in PersonaSize]: ITextTokens } = {
+  size8: { fontSize: 0 },
+  size24: { fontSize: 0 },
+  size32: { fontSize: 0 },
+  size40: { fontSize: 0 },
+  size48: { fontSize: 0 },
+  size56: { fontSize: 0 },
+  size72: { fontSize: 'medium' },
+  size100: { fontSize: 'medium' },
+  size120: { fontSize: 'medium' }
 };
 
-const tertiaryFontCache: { [key in PersonaSize]: FontAttributes } = {
-  size8: { fontSize: 14, fontWeight: '500' },
-  size24: { fontSize: 14, fontWeight: '500' },
-  size32: { fontSize: 14, fontWeight: '500' },
-  size40: { fontSize: 14, fontWeight: '500' },
-  size48: { fontSize: 14, fontWeight: '500' },
-  size56: { fontSize: 14, fontWeight: '500' },
-  size72: { fontSize: 12, fontWeight: '500' },
-  size100: { fontSize: 14, fontWeight: '500' },
-  size120: { fontSize: 14, fontWeight: '500' }
+const optionalFontTable: { [key in PersonaSize]: ITextTokens } = {
+  size8: { fontSize: 0 },
+  size24: { fontSize: 0 },
+  size32: { fontSize: 0 },
+  size40: { fontSize: 0 },
+  size48: { fontSize: 0 },
+  size56: { fontSize: 0 },
+  size72: { fontSize: 0 },
+  size100: { fontSize: 'medium' },
+  size120: { fontSize: 'medium' }
 };
 
-const optionalFontCache: { [key in PersonaSize]: FontAttributes } = {
-  size8: { fontSize: 14, fontWeight: '500' },
-  size24: { fontSize: 14, fontWeight: '500' },
-  size32: { fontSize: 14, fontWeight: '500' },
-  size40: { fontSize: 14, fontWeight: '500' },
-  size48: { fontSize: 14, fontWeight: '500' },
-  size56: { fontSize: 14, fontWeight: '500' },
-  size72: { fontSize: 11, fontWeight: '500' },
-  size100: { fontSize: 14, fontWeight: '500' },
-  size120: { fontSize: 14, fontWeight: '500' }
-};
-
-export function getTextFont(size: PersonaSize): FontAttributes {
-  return textFontCache[size];
+export function getTextFont(size: PersonaSize): ITextTokens {
+  return textFontTable[size];
 }
 
-export function getSecondaryFont(size: PersonaSize): FontAttributes {
-  return secondaryFontCache[size];
+export function getSecondaryFont(size: PersonaSize): ITextTokens {
+  return secondaryFontTable[size];
 }
 
-export function getTertiaryFont(size: PersonaSize): FontAttributes {
-  return tertiaryFontCache[size];
+export function getTertiaryFont(size: PersonaSize): ITextTokens {
+  return tertiaryFontTable[size];
 }
 
-export function getOptionalFont(size: PersonaSize): FontAttributes {
-  return optionalFontCache[size];
+export function getOptionalFont(size: PersonaSize): ITextTokens {
+  return optionalFontTable[size];
 }

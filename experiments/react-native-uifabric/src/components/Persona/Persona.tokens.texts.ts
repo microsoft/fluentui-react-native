@@ -4,12 +4,12 @@ import { IPersonaTokens } from './Persona.types';
 import { ITheme } from '@uifabricshared/theming-ramp';
 import { ITextTokens } from '../../tokens/TextTokens';
 import { PersonaSize } from '..';
-import { getTextFont, FontAttributes, getSecondaryFont, getTertiaryFont, getOptionalFont } from './Persona.helpers';
+import { getTextFont, getSecondaryFont, getTertiaryFont, getOptionalFont } from './Persona.helpers';
 
 function buildTextStyleHelper(
   verticalGap: number | undefined,
   size: PersonaSize | undefined,
-  getFontAttributes: (size: PersonaSize) => FontAttributes,
+  getFontAttributes: (size: PersonaSize) => ITextTokens,
   fontTokens: ITextTokens | undefined,
   theme: ITheme
 ) {
@@ -19,16 +19,13 @@ function buildTextStyleHelper(
     textStyle.marginBottom = verticalGap;
   }
 
-  if (fontTokens) {
-    const { fontFamily, fontSize, fontWeight } = fontTokens;
-    textStyle.fontFamily = fontFamily && (theme.typography.families[fontFamily] || fontFamily);
-    textStyle.fontSize = fontSize && (typeof fontSize === 'string' ? theme.typography.sizes[fontSize] : fontSize);
-    textStyle.fontWeight = fontWeight && (theme.typography.weights[fontWeight] || fontWeight);
-  } else {
-    const { fontFamily, fontSize, fontWeight } = getFontAttributes(size || 'size40');
-    textStyle.fontFamily = fontFamily;
-    textStyle.fontSize = fontSize;
-    textStyle.fontWeight = fontWeight;
+  const { fontFamily, fontSize, fontWeight } = fontTokens || getFontAttributes(size || 'size40');
+  textStyle.fontFamily = fontFamily && (theme.typography.families[fontFamily] || fontFamily);
+  textStyle.fontSize = fontSize && (typeof fontSize === 'string' ? theme.typography.sizes[fontSize] : fontSize);
+  textStyle.fontWeight = fontWeight && (theme.typography.weights[fontWeight] || fontWeight);
+
+  if (textStyle.fontSize === 0) {
+    textStyle.display = 'none';
   }
 
   return textStyle;
