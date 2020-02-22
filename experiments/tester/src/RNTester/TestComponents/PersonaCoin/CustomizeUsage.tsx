@@ -5,6 +5,7 @@ import { Slider } from '../Common/Slider';
 import { styles, steveBallmerPhotoUrl } from './styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
 import { AlignmentPicker } from '../Common/AlignmentPicker';
+import { styles as commonStyles } from '../Common/styles';
 
 export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
@@ -56,7 +57,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
         </View>
 
         <TextInput
-          style={[styles.textBox, textBoxBorderStyle]}
+          style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Background color"
           blurOnSubmit={true}
           onSubmitEditing={e => {
@@ -65,7 +66,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
         />
 
         <TextInput
-          style={[styles.textBox, textBoxBorderStyle]}
+          style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Initials text color"
           blurOnSubmit={true}
           onSubmitEditing={e => {
