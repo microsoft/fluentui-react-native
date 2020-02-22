@@ -1,7 +1,11 @@
 import { PersonaSize } from '../PersonaCoin';
 import { ITextTokens } from '../../tokens';
 
-const textFontTable: { [key in PersonaSize]: ITextTokens } = {
+type IPersonaFontTable = {
+  [key in PersonaSize]: ITextTokens;
+};
+
+const textFontTable: IPersonaFontTable = {
   size8: { fontSize: 'small' },
   size24: { fontSize: 'medium' },
   size32: { fontSize: 'medium' },
@@ -13,7 +17,7 @@ const textFontTable: { [key in PersonaSize]: ITextTokens } = {
   size120: { fontSize: 'xLarge' }
 };
 
-const secondaryFontTable: { [key in PersonaSize]: ITextTokens } = {
+const secondaryFontTable: IPersonaFontTable = {
   size8: { fontSize: 0 },
   size24: { fontSize: 0 },
   size32: { fontSize: 0 },
@@ -25,7 +29,7 @@ const secondaryFontTable: { [key in PersonaSize]: ITextTokens } = {
   size120: { fontSize: 'medium' }
 };
 
-const tertiaryFontTable: { [key in PersonaSize]: ITextTokens } = {
+const tertiaryFontTable: IPersonaFontTable = {
   size8: { fontSize: 0 },
   size24: { fontSize: 0 },
   size32: { fontSize: 0 },
@@ -37,7 +41,7 @@ const tertiaryFontTable: { [key in PersonaSize]: ITextTokens } = {
   size120: { fontSize: 'medium' }
 };
 
-const optionalFontTable: { [key in PersonaSize]: ITextTokens } = {
+const optionalFontTable: IPersonaFontTable = {
   size8: { fontSize: 0 },
   size24: { fontSize: 0 },
   size32: { fontSize: 0 },
@@ -63,4 +67,20 @@ export function getTertiaryFont(size: PersonaSize): ITextTokens {
 
 export function getOptionalFont(size: PersonaSize): ITextTokens {
   return optionalFontTable[size];
+}
+
+const horizontalGapTable: { [P in PersonaSize]: number } = {
+  size8: 17,
+  size24: 8,
+  size32: 8,
+  size40: 12,
+  size48: 12,
+  size56: 16,
+  size72: 16,
+  size100: 16,
+  size120: 16
+};
+
+export function getHorizontalGap(size: PersonaSize | undefined): number {
+  return horizontalGapTable[size || 'size40'];
 }

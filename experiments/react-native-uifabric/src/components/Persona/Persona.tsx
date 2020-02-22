@@ -11,6 +11,7 @@ import { buildRootStyle } from './Persona.tokens.root';
 import { buildTextStyle, buildTertiaryStyle, buildOptionalStyle, buildSecondaryStyle } from './Persona.tokens.texts';
 import { buildCoinStyle } from './Persona.tokens.coin';
 import { foregroundColorTokens } from '../../tokens';
+import { buildStackStyle } from './Persona.tokens.stack';
 
 function usePrepareForProps(props: IPersonaProps, useStyling: IUseComposeStyling<IPersonaType>): IRenderData<IPersonaSlotProps, {}> {
   const {
@@ -87,6 +88,6 @@ export const Persona = compose<IPersonaType>({
     secondary: [buildSecondaryStyle],
     tertiary: [buildTertiaryStyle],
     optional: [buildOptionalStyle],
-    stack: [{ source: 'horizontalGap', target: 'marginLeft' }]
+    stack: [buildStackStyle]
   }
 });
