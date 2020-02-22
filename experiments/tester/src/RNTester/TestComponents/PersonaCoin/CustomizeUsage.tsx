@@ -1,76 +1,18 @@
 import * as React from 'react';
 import { PersonaCoin, IconAlignment, IPersonaCoinTokens } from 'react-native-uifabric';
-import { Switch, View, Text, Picker, TextInput } from 'react-native';
-import { styles, steveBallmerPhotoUrl, undefinedText } from './styles';
+import { Switch, View, Text, TextInput } from 'react-native';
+import { Slider } from '../Common/Slider';
+import { styles, steveBallmerPhotoUrl } from './styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
-
-const alignmentValues: Array<typeof undefinedText | IconAlignment> = [undefinedText, 'start', 'center', 'end'];
-
-interface IAlignmentPickerProps {
-  label: string;
-  onSelectionChange: (value: IconAlignment | undefined) => void;
-}
-
-const AlignmentPicker: React.FunctionComponent<IAlignmentPickerProps> = (props: IAlignmentPickerProps) => {
-  const { label, onSelectionChange } = props;
-  return (
-    <Picker
-      prompt={label}
-      style={styles.header}
-      selectedValue={undefinedText}
-      onValueChange={(value, index) => onSelectionChange(index == 0 ? undefined : value)}
-    >
-      {alignmentValues.map((alignment, index) => (
-        <Picker.Item label={alignment} key={index} value={alignment} />
-      ))}
-    </Picker>
-  );
-};
-
-interface INumericInputProps {
-  label: string;
-  maximum?: number;
-  onSubmit: (value: number | undefined) => void;
-}
-
-const NumericInput: React.FunctionComponent<INumericInputProps> = (props: INumericInputProps) => {
-  const { label, onSubmit, maximum } = props;
-
-  const theme = useTheme();
-  const textBoxBorderStyle = {
-    borderColor: theme.colors.inputBorder,
-    width: 100
-  };
-
-  return (
-    <TextInput
-      placeholder={label}
-      style={[styles.textBox, textBoxBorderStyle]}
-      blurOnSubmit={true}
-      onSubmitEditing={e => {
-        const stringValue = e.nativeEvent.text;
-        let numericValue = stringValue ? parseInt(stringValue) : NaN;
-        if (isNaN(numericValue)) {
-          onSubmit(undefined);
-        } else {
-          numericValue = Math.max(0, numericValue);
-          if (maximum) {
-            numericValue = Math.min(numericValue, maximum);
-          }
-          onSubmit(numericValue);
-        }
-      }}
-    />
-  );
-};
+import { AlignmentPicker } from '../Common/AlignmentPicker';
 
 export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [coinColor, setCoinColor] = React.useState<string>();
   const [textColor, setTextColor] = React.useState<string>();
-  const [physicalSize, setPhysicalCoinSize] = React.useState<number>();
-  const [iconSize, setIconSize] = React.useState<number>();
-  const [initialsSize, setInitialsFontSize] = React.useState<number>();
+  const [physicalSize, setPhysicalSize] = React.useState<number>(80);
+  const [iconSize, setIconSize] = React.useState<number>(24);
+  const [initialsSize, setInitialsSize] = React.useState<number>(14);
   const [horizontalAlignment, setHorizontalAlignment] = React.useState<IconAlignment>();
   const [verticalAlignment, setVerticalAlignment] = React.useState<IconAlignment>();
 
@@ -131,15 +73,17 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           }}
         />
 
-        <AlignmentPicker label="Horizontal icon alignment" onSelectionChange={setHorizontalAlignment} />
+        <AlignmentPicker style={styles.header} label="Horizontal icon alignment" onSelectionChange={setHorizontalAlignment} />
+        <AlignmentPicker style={styles.header} label="Vertical icon alignment" onSelectionChange={setVerticalAlignment} />
 
-        <AlignmentPicker label="Vertical icon alignment" onSelectionChange={setVerticalAlignment} />
+        <Text>Coin size</Text>
+        <Slider minimum={8} maximum={200} initialValue={80} style={styles.slider} onChange={setPhysicalSize} />
 
-        <NumericInput label="Coin size" maximum={200} onSubmit={setPhysicalCoinSize} />
+        <Text>Icon size</Text>
+        <Slider minimum={8} maximum={100} initialValue={24} style={styles.slider} onChange={setIconSize} />
 
-        <NumericInput label="Icon size" maximum={100} onSubmit={setIconSize} />
-
-        <NumericInput label="Font size" maximum={50} onSubmit={setInitialsFontSize} />
+        <Text>Font size</Text>
+        <Slider minimum={5} maximum={50} initialValue={14} style={styles.slider} onChange={setInitialsSize} />
       </View>
 
       {/* component under test */}
