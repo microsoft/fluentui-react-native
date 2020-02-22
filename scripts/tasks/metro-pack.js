@@ -36,12 +36,15 @@ exports.metroPackTask = function(bundleName) {
     justTask.logger.info(`Entry file ${entryFile}.`);
     justTask.logger.info(`Output file ${outputBundlePath}.`);
 
+    const dev = (options && options.dev) || false;
+
     await Metro.runBuild(config, {
       platform: (options && options.platform) || 'win32',
       entry: entryFile,
-      minify: (options && options.minify) || true,
+      minify: !dev,
       out: outputBundlePath,
-      optimize: true
+      optimize: !dev,
+      sourceMap: dev
     });
 
     // if the output file's extension is not '.js', metro appends the '.js' to it (how rude!)
