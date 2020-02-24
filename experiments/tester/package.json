@@ -13,6 +13,7 @@
     "code-style": "just-scripts code-style",
     "lint": "just-scripts eslint",
     "bundle": "just-scripts bundle --useMetro --bundleName rnTester",
+    "bundle-dev": "just-scripts bundle --useMetro --bundleName rnTester.dev",
     "start": "react-native start --projectRoot ./src",
     "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
     "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useLiveReload --pluginProps"
@@ -50,6 +51,11 @@
     "rnTester": {
       "entry": "./src/RNTester.ts",
       "output": "./dist/RNTester.bundle"
+    },
+    "rnTester.dev": {
+      "entry": "./src/RNTester.ts",
+      "output": "./dist/RNTester.bundle",
+      "dev": true
     }
   },
   "author": "",
