@@ -7,7 +7,8 @@ import {
   IRadioGroupProps,
   IRadioGroupState,
   IRadioGroupSlotProps,
-  IRadioGroupRenderData
+  IRadioGroupRenderData,
+  IRadioGroupContext
 } from './RadioGroup.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
@@ -17,8 +18,7 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens } from '../../tokens';
 import { useAsRadioGroupSelection } from '../../hooks';
 
-// Creates context to allow communication between its children components (RadioButtons)
-export const RadioGroupContext = React.createContext({
+export const RadioGroupContext = React.createContext<IRadioGroupContext>({
   selectedKey: '',
   onButtonSelect: (key: string) => {
     return;
@@ -56,27 +56,21 @@ export const RadioGroup = compose<IRadioGroupType>({
   },
 
   render: (Slots: ISlots<IRadioGroupSlotProps>, renderData: IRadioGroupRenderData, ...children: React.ReactNode[]) => {
-    // This is necessary because renderData can be undefined, which causes problems in the return call.
-    let key = 'Undefined';
-    let onChangeCall = (key: string) => {
-      return;
-    };
-    if (renderData.state != undefined) {
-      key = renderData.state.selectedKey;
-      onChangeCall = renderData.state.onChange;
+    if (renderData.state == undefined) {
+      return null;
     }
 
     return (
       <RadioGroupContext.Provider
         // Passes in the selected key and a hook function to update the newly selected button and call the client's onChange callback
         value={{
-          selectedKey: key,
-          onButtonSelect: onChangeCall
+          selectedKey: renderData.state.selectedKey,
+          onButtonSelect: renderData.state.onChange
         }}
       >
         <Slots.root>
           <Slots.label />
-          <Slots.radioButtonContainer>{children}</Slots.radioButtonContainer>
+          <Slots.container>{children}</Slots.container>
         </Slots.root>
       </RadioGroupContext.Provider>
     );
@@ -86,12 +80,12 @@ export const RadioGroup = compose<IRadioGroupType>({
   slots: {
     root: View,
     label: Text,
-    radioButtonContainer: { slotType: View, filter: filterViewProps }
+    container: { slotType: View, filter: filterViewProps }
   },
   styles: {
     root: [],
     label: [foregroundColorTokens, textTokens],
-    radioButtonContainer: []
+    container: []
   }
 });
 

@@ -28,7 +28,7 @@ export interface IRadioGroupProps {
   /*
    ** The key of the RadioButton that will initially be selected
    */
-  defaultSelectedKey: string;
+  defaultSelectedKey?: string;
 
   /*
    **  OPTIONAL: An aria label for narrator. If not provided, it will be set to the label of the radio group
@@ -38,7 +38,7 @@ export interface IRadioGroupProps {
   /*
    ** Callback for receiving a notification when the choice has been changed
    */
-  onChange: (key: string) => void;
+  onChange?: (key: string) => void;
 }
 
 export interface IRadioGroupTokens extends ITextTokens {}
@@ -46,8 +46,13 @@ export interface IRadioGroupTokens extends ITextTokens {}
 export interface IRadioGroupSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
   label: ITextProps;
-  radioButtonContainer: ViewProps;
+  container: ViewProps;
 }
+
+export type IRadioGroupContext = {
+  selectedKey: string;
+  onButtonSelect: (key: string) => void;
+};
 
 export type IRadioGroupRenderData = IRenderData<IRadioGroupSlotProps, IRadioGroupState>;
 

@@ -13,11 +13,12 @@ import {
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { filterViewProps } from '../../utilities/RenderHelpers';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { settings, selectedStyle, hoveredStyle, focusedStyle } from './RadioButton.settings';
+import { settings } from './RadioButton.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens } from '../../tokens';
+import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens } from '../../tokens';
 import { useAsPressable } from '../../hooks';
 import { RadioGroupContext } from './RadioGroup';
+import { selectedStyle, hoveredStyle } from './RadioButton.settings';
 
 export const RadioButton = compose<IRadioButtonType>({
   displayName: radioButtonName,
@@ -77,15 +78,6 @@ export const RadioButton = compose<IRadioButtonType>({
         };
     const buttonProps = state.disabled ? { rest, style: { borderColor: 'grey' } } : rest;
 
-    let contentProps = {};
-    if (state.disabled) {
-      contentProps = { children: content, style: { color: 'grey' } };
-    } else if (state.focused) {
-      contentProps = { children: content, style: focusedStyle };
-    } else {
-      contentProps = { children: content };
-    }
-
     // This handles the hovered/pressed UI functionality
     let innerCircleProps = {};
     if (state.selected) {
@@ -100,7 +92,7 @@ export const RadioButton = compose<IRadioButtonType>({
       root: rootProps,
       button: buttonProps,
       innerCircle: innerCircleProps,
-      content: contentProps
+      content: { children: content }
     });
 
     return { slotProps, state };
@@ -131,8 +123,8 @@ export const RadioButton = compose<IRadioButtonType>({
   },
   styles: {
     root: [],
-    button: [],
-    innerCircle: [],
+    button: [borderTokens],
+    innerCircle: [backgroundColorTokens],
     content: [foregroundColorTokens, textTokens]
   }
 });

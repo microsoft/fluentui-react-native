@@ -1,9 +1,13 @@
 import { radioButtonName, IRadioButtonType } from './RadioButton.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
-import { ViewProps } from 'react-native';
 
 export const settings: IComposeSettings<IRadioButtonType> = [
   {
+    tokens: {
+      borderColor: 'menuItemText',
+      color: 'menuItemText',
+      backgroundColor: 'menuItemText'
+    },
     root: {
       accessible: true,
       acceptsKeyboardFocus: true,
@@ -12,12 +16,11 @@ export const settings: IComposeSettings<IRadioButtonType> = [
         display: 'flex',
         alignItems: 'flex-start',
         flexDirection: 'row',
-        alignSelf: 'flex-start',
         minHeight: 20,
         marginTop: 0,
         position: 'relative'
       }
-    } as ViewProps,
+    },
     button: {
       style: {
         backgroundColor: 'transparent',
@@ -27,13 +30,11 @@ export const settings: IComposeSettings<IRadioButtonType> = [
         left: 0,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderColor: 'black',
         borderRadius: 50,
         marginTop: 4,
         marginRight: 6,
         marginBottom: 6,
-        marginLeft: 6,
-        position: 'relative'
+        marginLeft: 6
       }
     },
     innerCircle: {},
@@ -42,15 +43,39 @@ export const settings: IComposeSettings<IRadioButtonType> = [
         fontSize: 12,
         marginTop: 3,
         borderStyle: 'dashed',
-        borderColor: 'rgba(128, 128, 128, 0)',
+        borderColor: 'transparent',
         borderWidth: 1
       }
     },
-    _precedence: ['hovered', 'pressed', 'focused'],
+    // This still uses the innerCircle's 'hover' style instead of the 'focused' style when need be. I'm commenting out
+    _precedence: ['focused', 'pressed', 'hovered'],
     _overrides: {
-      focused: {},
-      hovered: {},
-      pressed: {}
+      focused: {
+        content: {
+          style: {
+            borderColor: 'rgba(128, 128, 128, 1)'
+          }
+        },
+        tokens: {
+          borderColor: 'menuItemTextHovered',
+          color: 'menuItemTextHovered',
+          backgroundColor: 'menuItemTextHovered'
+        }
+      },
+      hovered: {
+        tokens: {
+          borderColor: 'menuItemTextHovered',
+          color: 'menuItemTextHovered',
+          backgroundColor: 'menuItemTextHovered'
+        }
+      },
+      pressed: {
+        tokens: {
+          borderColor: 'menuItemTextPressed',
+          color: 'menuItemTextPressed',
+          backgroundColor: 'menuItemTextPressed'
+        }
+      }
     }
   },
   radioButtonName
@@ -60,7 +85,6 @@ export const selectedStyle = {
   style: {
     position: 'relative',
     borderRadius: 50,
-    backgroundColor: 'black',
     height: 10,
     width: 10,
     left: 4,
@@ -73,7 +97,6 @@ export const hoveredStyle = {
     position: 'relative',
     opacity: 0.5,
     borderRadius: 50,
-    backgroundColor: 'black',
     height: 10,
     width: 10,
     left: 4,
