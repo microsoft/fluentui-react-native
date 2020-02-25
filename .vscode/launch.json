@@ -33,6 +33,13 @@
       "console": "integratedTerminal",
       "sourceMaps": true,
       "outFiles": []
+    },
+    {
+      "name": "Debug Fabric Tester",
+      "type": "node",
+      "request": "attach",
+      "protocol": "inspector",
+      "port": 9229
     }
   ]
 }

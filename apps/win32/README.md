@@ -22,7 +22,30 @@
     yarn run-win32
 ```
 
-## Debug `RNTester` app
+## Debug `RNTester` app with direct debugging
+
+1. Follow the same step #1 as above.
+2. Follow the same step #2 as above.
+
+3. Build the RNTester bundle with dev option. This will ensure source map is included in the bundle.
+
+```
+    yarn bundle-dev
+```
+
+4. Launch the RNTester app:
+
+```
+    yarn run-win32
+```
+
+5. Inside ReactTest, open the debug option menu and select the checkbox `Use Direct Debugger`
+
+6. In VS Code, open the debug pane and select `Debug Fabric Tester` option from the "Run And Debug" dropdown.
+
+7. At this time, VS Code will attach to the JS runtime and you can start debugging.
+
+## Debug `RNTester` app with web debugging
 
 1. Follow the same step #1 as above.
 2. Follow the same step #2 as above.
