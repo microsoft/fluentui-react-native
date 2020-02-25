@@ -35,7 +35,7 @@ export const RadioButton = compose<IRadioButtonType>({
 
     const state: IRadioButtonState = {
       ...pressable.state,
-      selected: info.selectedKey == userProps.buttonKey ? true : false,
+      selected: info.selectedKey === userProps.buttonKey,
       disabled: disabled ? disabled : false
     };
 
