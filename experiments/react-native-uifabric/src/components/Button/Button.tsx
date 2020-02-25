@@ -4,10 +4,10 @@ import { Image, View } from 'react-native';
 import { IButtonSlotProps, IButtonState, IButtonProps, IButtonRenderData, buttonName, IButtonType } from './Button.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { Text } from '../Text';
+import { Text } from '@fluentui-native/text';
 import { settings } from './Button.settings';
-import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '../../tokens';
-import { filterViewProps, filterImageProps } from '../../utilities/RenderHelpers';
+import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-native/tokens';
+import { filterViewProps, filterImageProps } from '@fluentui-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useAsPressable, useViewCommandFocus } from '../../hooks';
 

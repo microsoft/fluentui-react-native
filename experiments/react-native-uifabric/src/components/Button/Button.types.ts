@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ViewProps, ImageProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { ITextProps } from '../Text';
+import { ITextProps } from '@fluentui-native/text';
 import { IPressableState, IPressableProps } from '../Pressable';
 import { ITextTokens } from '../../tokens/TextTokens';
 import { IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from 'src/tokens';

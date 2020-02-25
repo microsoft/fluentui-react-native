@@ -1,8 +1,8 @@
 import { textName, ITextType } from './Text.types';
 import { compose } from '@uifabricshared/foundation-compose';
 import { Text as RNText } from 'react-native';
-import { filterTextProps } from '../../utilities/RenderHelpers';
-import { foregroundColorTokens, textTokens } from '../../tokens';
+import { filterTextProps } from '@fluentui-native/adapters';
+import { foregroundColorTokens, textTokens } from '@fluentui-native/tokens';
 import { settings } from './Text.settings';
 
 export const Text = compose<ITextType>({

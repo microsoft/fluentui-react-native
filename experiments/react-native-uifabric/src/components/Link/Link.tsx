@@ -4,7 +4,7 @@ import * as ReactNative from 'react-native';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ILinkProps, ILinkSlotProps, ILinkState, ILinkRenderData, IWithLinkOptions, linkName, ILinkType } from './Link.types';
 import { settings } from './Link.settings';
-import { foregroundColorTokens, textTokens } from '../../tokens';
+import { foregroundColorTokens, textTokens } from '@fluentui-native/tokens';
 // import { Text } from '../Text';
 import { useAsPressable, useViewCommandFocus } from '../../hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
@@ -73,8 +73,8 @@ export const Link = compose<ILinkType>({
         {children}
       </Slots.root>
     ) : (
-      <Slots.content {...renderData.slotProps!.root} />
-    );
+        <Slots.content {...renderData.slotProps!.root} />
+      );
   },
   slots: {
     root: ReactNative.View,

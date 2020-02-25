@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { IForegroundColorTokens, ITextTokens } from 'src/tokens';
+import { IForegroundColorTokens, ITextTokens } from '@fluentui-native/tokens';
 import { IPressableState, IWithPressableOptions } from '../Pressable';
-import { ITextProps } from '../Text';
+import { ITextProps } from '@fluentui-native/text';
 import { IFocusable } from '../../hooks';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 

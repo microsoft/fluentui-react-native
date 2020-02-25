@@ -27,6 +27,9 @@
     "@uifabricshared/immutable-merge": "0.2.3",
     "@uifabricshared/theming-ramp": "0.5.3",
     "@uifabricshared/theming-react-native": "0.3.3",
+    "@fluentui-native/adapters": "0.1.0",
+    "@fluentui-native/text": "0.1.0",
+    "@fluentui-native/tokens": "0.1.0",
     "tslib": "^1.9.3"
   },
   "devDependencies": {

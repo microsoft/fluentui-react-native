@@ -1,7 +1,7 @@
 import * as ReactNative from 'react-native';
 import { IOperationSet } from '@uifabricshared/foundation-tokens';
 import { ITheme } from '@uifabricshared/theming-ramp';
-import { getPaletteFromTheme } from './ColorTokens';
+import { getPaletteFromTheme } from './color-tokens';
 
 export interface IBorderTokens {
   borderColor?: string;

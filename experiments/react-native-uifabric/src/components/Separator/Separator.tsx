@@ -1,10 +1,10 @@
 import { View } from 'react-native';
 import { separatorName, ISeparatorType } from './Separator.types';
 import { compose } from '@uifabricshared/foundation-compose';
-import { filterViewProps } from '../../utilities/RenderHelpers';
+import { filterViewProps } from '@fluentui-native/adapters';
 import { separatorTokenProcessor } from './Separator.helpers';
 import { settings } from './Separator.settings';
-import { getPaletteFromTheme } from '../../tokens';
+import { getPaletteFromTheme } from '@fluentui-native/tokens';
 
 export const Separator = compose<ISeparatorType>({
   displayName: separatorName,
