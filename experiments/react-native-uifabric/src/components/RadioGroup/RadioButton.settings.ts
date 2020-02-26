@@ -37,7 +37,17 @@ export const settings: IComposeSettings<IRadioButtonType> = [
         marginLeft: 6
       }
     },
-    innerCircle: {},
+    innerCircle: {
+      style: {
+        position: 'relative',
+        opacity: 0,
+        borderRadius: 50,
+        height: 10,
+        width: 10,
+        left: 4,
+        top: 4
+      }
+    },
     content: {
       style: {
         fontSize: 12,
@@ -47,9 +57,19 @@ export const settings: IComposeSettings<IRadioButtonType> = [
         borderWidth: 1
       }
     },
-    // This still uses the innerCircle's 'hover' style instead of the 'focused' style when need be. I'm commenting out
-    _precedence: ['focused', 'pressed', 'hovered'],
+    // This still uses the innerCircle's 'hover' style instead of the 'focused' style when need be. I'm commenting out'
+    _precedence: ['disabled', 'hovered', 'focused', 'selected'],
     _overrides: {
+      selected: {
+        innerCircle: {
+          style: {
+            opacity: 1
+          }
+        },
+        tokens: {
+          color: 'menuItemTextPressed'
+        }
+      },
       focused: {
         content: {
           style: {
@@ -57,23 +77,28 @@ export const settings: IComposeSettings<IRadioButtonType> = [
           }
         },
         tokens: {
-          borderColor: 'menuItemTextHovered',
-          color: 'menuItemTextHovered',
-          backgroundColor: 'menuItemTextHovered'
-        }
-      },
-      hovered: {
-        tokens: {
-          borderColor: 'menuItemTextHovered',
-          color: 'menuItemTextHovered',
-          backgroundColor: 'menuItemTextHovered'
-        }
-      },
-      pressed: {
-        tokens: {
           borderColor: 'menuItemTextPressed',
           color: 'menuItemTextPressed',
           backgroundColor: 'menuItemTextPressed'
+        }
+      },
+      hovered: {
+        innerCircle: {
+          style: {
+            opacity: 0.5
+          }
+        },
+        tokens: {
+          color: 'menuItemTextHovered',
+          borderColor: 'menuItemTextHovered',
+          backgroundColor: 'menuItemTextHovered'
+        }
+      },
+      disabled: {
+        tokens: {
+          borderColor: 'buttonBorderDisabled',
+          color: 'disabledBodyText',
+          backgroundColor: 'background'
         }
       }
     }

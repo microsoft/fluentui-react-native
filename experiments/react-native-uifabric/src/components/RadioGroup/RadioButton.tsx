@@ -18,7 +18,6 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens } from '../../tokens';
 import { useAsPressable } from '../../hooks';
 import { RadioGroupContext } from './RadioGroup';
-import { selectedStyle, hoveredStyle } from './RadioButton.settings';
 
 export const RadioButton = compose<IRadioButtonType>({
   displayName: radioButtonName,
@@ -49,7 +48,9 @@ export const RadioButton = compose<IRadioButtonType>({
     const onFocusChange = (ev: NativeSyntheticEvent<{}>) => {
       pressable.props.onFocus && pressable.props.onFocus(ev);
       // This check is necessary because this func gets called even when a button loses focus (not sure why?) which then calls the client's onChange multiple times
-      if (!state.selected) info.onButtonSelect(buttonKey);
+      if (!state.selected) {
+        info.onButtonSelect(buttonKey);
+      }
     };
 
     const accessibilityTraits = {
@@ -76,22 +77,11 @@ export const RadioButton = compose<IRadioButtonType>({
           rest,
           onFocus: onFocusChange
         };
-    const buttonProps = state.disabled ? { rest, style: { borderColor: 'grey' } } : rest;
-
-    // This handles the hovered/pressed UI functionality
-    let innerCircleProps = {};
-    if (state.selected) {
-      innerCircleProps = selectedStyle;
-    } else if (state.hovered || state.focused) {
-      innerCircleProps = hoveredStyle;
-    } else {
-      innerCircleProps = rest;
-    }
 
     const slotProps = mergeSettings<IRadioButtonSlotProps>(styleProps, {
       root: rootProps,
-      button: buttonProps,
-      innerCircle: innerCircleProps,
+      button: rest,
+      innerCircle: rest,
       content: { children: content }
     });
 

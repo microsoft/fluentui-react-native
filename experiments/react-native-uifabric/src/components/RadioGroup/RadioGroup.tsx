@@ -49,7 +49,7 @@ export const RadioGroup = compose<IRadioGroupType>({
     const slotProps = mergeSettings<IRadioGroupSlotProps>(styleProps, {
       root: { rest, ...ariaRoles },
       label: { children: label },
-      radioButtonContainer: rest
+      container: rest
     });
 
     return { slotProps, state };
