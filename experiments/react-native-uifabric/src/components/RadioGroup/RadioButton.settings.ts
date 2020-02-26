@@ -1,6 +1,12 @@
 import { radioButtonName, IRadioButtonType } from './RadioButton.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 
+const radioButtonSize = 20;
+const radioButtonRadius = radioButtonSize / 2;
+
+const radioButtonInnerCircleSize = 10;
+const radioButtonInnerCircleRadius = radioButtonInnerCircleSize / 2;
+
 export const settings: IComposeSettings<IRadioButtonType> = [
   {
     tokens: {
@@ -24,13 +30,13 @@ export const settings: IComposeSettings<IRadioButtonType> = [
     button: {
       style: {
         backgroundColor: 'transparent',
-        width: 20,
-        height: 20,
+        width: radioButtonSize,
+        height: radioButtonSize,
         top: 0,
         left: 0,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderRadius: 50,
+        borderRadius: radioButtonRadius,
         marginTop: 4,
         marginRight: 6,
         marginBottom: 6,
@@ -41,9 +47,9 @@ export const settings: IComposeSettings<IRadioButtonType> = [
       style: {
         position: 'relative',
         opacity: 0,
-        borderRadius: 50,
-        height: 10,
-        width: 10,
+        borderRadius: radioButtonInnerCircleRadius,
+        height: radioButtonInnerCircleSize,
+        width: radioButtonInnerCircleSize,
         left: 4,
         top: 4
       }
@@ -105,30 +111,3 @@ export const settings: IComposeSettings<IRadioButtonType> = [
   },
   radioButtonName
 ];
-
-export const selectedStyle = {
-  style: {
-    position: 'relative',
-    borderRadius: 50,
-    height: 10,
-    width: 10,
-    left: 4,
-    top: 4
-  }
-};
-
-export const hoveredStyle = {
-  style: {
-    position: 'relative',
-    opacity: 0.5,
-    borderRadius: 50,
-    height: 10,
-    width: 10,
-    left: 4,
-    top: 4
-  }
-};
-
-export const focusedStyle = {
-  borderColor: 'rgba(128, 128, 128, 1)'
-};
