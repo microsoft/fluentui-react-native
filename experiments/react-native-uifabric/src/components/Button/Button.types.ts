@@ -3,8 +3,7 @@ import { ViewProps, ImageProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-native/text';
 import { IPressableState, IPressableProps } from '../Pressable';
-import { ITextTokens } from '../../tokens/TextTokens';
-import { IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from 'src/tokens';
+import { ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-native/tokens';
 import { IFocusable } from '../../hooks';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 

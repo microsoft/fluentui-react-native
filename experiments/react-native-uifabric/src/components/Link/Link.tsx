@@ -9,11 +9,12 @@ import { foregroundColorTokens, textTokens } from '@fluentui-native/tokens';
 import { useAsPressable, useViewCommandFocus } from '../../hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { IViewWin32Props } from '@office-iss/react-native-win32';
+// import { IViewWin32Props } from '@office-iss/react-native-win32';
+import { IViewProps } from '@fluentui-native/adapters';
 
-export type ILinkHooks = [IWithLinkOptions<IViewWin32Props>, ILinkState];
+export type ILinkHooks = [IWithLinkOptions<IViewProps>, ILinkState];
 
-export function useAsLink(userProps: IWithLinkOptions<IViewWin32Props>): ILinkHooks {
+export function useAsLink(userProps: IWithLinkOptions<IViewProps>): ILinkHooks {
   const { url, onPress, ...rest } = userProps;
 
   const [linkState, setLinkState] = React.useState({ visited: false });
@@ -73,7 +74,7 @@ export const Link = compose<ILinkType>({
         {children}
       </Slots.root>
     ) : (
-        <Slots.content {...renderData.slotProps!.root} />
+        <Slots.content {...renderData.slotProps!.root as any} />
       );
   },
   slots: {
