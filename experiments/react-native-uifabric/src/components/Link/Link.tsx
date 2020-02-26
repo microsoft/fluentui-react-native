@@ -6,7 +6,7 @@ import { ILinkProps, ILinkSlotProps, ILinkState, ILinkRenderData, IWithLinkOptio
 import { settings } from './Link.settings';
 import { foregroundColorTokens, textTokens } from '@fluentui-native/tokens';
 // import { Text } from '../Text';
-import { useAsPressable, useViewCommandFocus } from '../../hooks';
+import { useAsPressable, useViewCommandFocus } from '@fluentui-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 // import { IViewWin32Props } from '@office-iss/react-native-win32';
@@ -74,8 +74,8 @@ export const Link = compose<ILinkType>({
         {children}
       </Slots.root>
     ) : (
-        <Slots.content {...renderData.slotProps!.root as any} />
-      );
+      <Slots.content {...(renderData.slotProps!.root as any)} />
+    );
   },
   slots: {
     root: ReactNative.View,

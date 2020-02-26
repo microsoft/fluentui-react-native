@@ -1,7 +1,7 @@
 import { textName, ITextType } from './Text.types';
-import { compose } from '@uifabricshared/foundation-compose';
+import { compose, IComposeTypecast } from '@uifabricshared/foundation-compose';
 import { Text as RNText } from 'react-native';
-import { filterTextProps } from '@fluentui-native/adapters';
+import { filterTextProps, ITextPropsWin32 } from '@fluentui-native/adapters';
 import { foregroundColorTokens, textTokens } from '@fluentui-native/tokens';
 import { settings } from './Text.settings';
 
@@ -15,5 +15,7 @@ export const Text = compose<ITextType>({
     root: [textTokens, foregroundColorTokens]
   }
 });
+
+export const TextWin32 = Text as IComposeTypecast<ITextType<ITextPropsWin32>>;
 
 export default Text;

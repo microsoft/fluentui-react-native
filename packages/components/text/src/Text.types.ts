@@ -6,13 +6,15 @@ export const textName = 'RNFText';
 /**
  * Properties for fabric native text field, these extend the default props for text
  */
-export interface ITextProps extends INativeTextProps, ITextTokens, IForegroundColorTokens {
-  disabled?: boolean;
-}
-
-export interface ITextType {
-  props: ITextProps;
-  slotProps: {
-    root: INativeTextProps;
+export type ITextProps<TBase = INativeTextProps> = TBase &
+  ITextTokens &
+  IForegroundColorTokens & {
+    disabled?: boolean;
   };
-}
+
+export type ITextType<TBase = INativeTextProps> = {
+  props: ITextProps<TBase>;
+  slotProps: {
+    root: TBase;
+  };
+};

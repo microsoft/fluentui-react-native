@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IForegroundColorTokens, ITextTokens } from '@fluentui-native/tokens';
-import { IPressableState, IWithPressableOptions } from '../Pressable';
 import { ITextProps } from '@fluentui-native/text';
-import { IFocusable } from '../../hooks';
+import { IFocusable, IPressableState, IWithPressableOptions } from '@fluentui-native/interactive-hooks';
 import { IViewProps } from '@fluentui-native/adapters';
 
 export const linkName = 'RNFLink';

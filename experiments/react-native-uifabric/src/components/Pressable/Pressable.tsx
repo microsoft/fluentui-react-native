@@ -10,24 +10,27 @@
  */
 'use strict';
 
-import { atomic, IDefineUseStyling } from '@uifabricshared/foundation-composable';
-import { ViewWin32 } from '@office-iss/react-native-win32';
-import { IPressableProps } from './Pressable.props';
-import { mergeSettings, ISlotProps } from '@uifabricshared/foundation-settings';
-import { useAsPressable } from '../../hooks';
+import { IUseStyling, IComposableTypecast, composable } from '@uifabricshared/foundation-composable';
+import { View } from 'react-native';
+import { IPressableProps, IPressableType } from './Pressable.props';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
+import { useAsPressable } from '@fluentui-native/interactive-hooks';
+import { IViewPropsWin32 } from '@fluentui-native/adapters';
 
-export const Pressable = atomic<IPressableProps>(
-  ViewWin32,
-  (userProps: IPressableProps, useStyling: IDefineUseStyling<IPressableProps, ISlotProps<IPressableProps>>) => {
+export const Pressable = composable<IPressableType>({
+  slots: { root: View },
+  usePrepareProps: (userProps: IPressableProps, useStyling: IUseStyling<IPressableType>) => {
     const { renderStyle, ...rest } = userProps;
     const { props, state } = useAsPressable(rest);
     const styleProps = useStyling(props);
     renderStyle && (props.style = renderStyle(state));
     return {
-      slotProps: mergeSettings<ISlotProps<IPressableProps>>(styleProps, { root: props }),
+      slotProps: mergeSettings<IPressableType['slotProps']>(styleProps, { root: props }),
       state: { state }
     };
   }
-);
+});
+
+export const PressableWin32 = Pressable as IComposableTypecast<IPressableType<IViewPropsWin32>>;
 
 export default Pressable;

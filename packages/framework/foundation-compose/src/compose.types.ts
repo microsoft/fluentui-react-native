@@ -3,7 +3,8 @@ import {
   IComposableDefinition,
   IComposableType,
   IExtractSlotProps,
-  IExtractProps
+  IExtractProps,
+  IExtractState
 } from '@uifabricshared/foundation-composable';
 import { ISlotProps, IComponentSettings, IWithTokens, IOverrideLookup } from '@uifabricshared/foundation-settings';
 import { ISettingsEntry } from '@uifabricshared/themed-settings';
@@ -143,3 +144,15 @@ export type IComposeReturnType<
       newOptions: Partial<IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics>>
     ) => IComposeReturnType<TProps, TSlotProps, TTokens, TState, TStatics>;
   };
+
+/**
+ * A shorthand for typecasting a component into a more specific type, used for dealing with multiple platforms in
+ * react-native
+ */
+export type IComposeTypecast<TType> = IComposeReturnType<
+  IExtractProps<TType>,
+  IExtractSlotProps<TType>,
+  IExtractTokens<TType>,
+  IExtractState<TType>,
+  IExtractStatics<TType>
+>;

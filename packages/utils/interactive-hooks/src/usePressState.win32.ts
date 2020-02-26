@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { UIManager, NativeTouchEvent, GestureResponderEvent } from 'react-native';
-import { IViewProps } from '@fluentui-native/adapters/lib/adapters.win32';
+import { IViewPropsWin32 } from '@fluentui-native/adapters';
 import { IPosition, IDimensions } from './Responder.types';
 import { IPressState, IWithPressableOptions } from './Pressable.types';
 
@@ -14,7 +14,7 @@ function extractSingleTouch(e: GestureResponderEvent): NativeTouchEvent | null {
   return !hasTouches && hasChangedTouches ? changedTouches[0] : hasTouches ? touches[0] : nativeEvent;
 }
 
-export function usePressState(props: IWithPressableOptions<IViewProps>): [IViewProps, IPressState] {
+export function usePressState<_T>(props: IWithPressableOptions<IViewPropsWin32>): [IViewPropsWin32, IPressState] {
   const positionOnActivate = React.useRef<IPosition | null>(null);
   const dimensionsOnActivate = React.useRef<IDimensions>({ width: 0, height: 0 });
 

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { ViewStyle, StyleProp } from 'react-native';
-import { IRenderChild, IRenderStyle } from './Pressable.types';
-import { IViewWin32Props } from '@office-iss/react-native-win32';
+import { IViewProps } from '@fluentui-native/adapters';
+import { IWithPressableOptions, IPressableState } from '@fluentui-native/interactive-hooks';
 
-export interface IPressableProps extends IWithPressableOptions<IViewWin32Props> {
+export type IPressableProps<TBase extends object = IViewProps> = IWithPressableOptions<TBase> & {
   children?: IRenderChild<IPressableState>;
 
   // Typescript will not allow an extension of the IView* interface
@@ -13,7 +13,7 @@ export interface IPressableProps extends IWithPressableOptions<IViewWin32Props> 
   // instead, in conjunction with the base style prop (StyleProp<ViewStyle>).
   // The style prop will only be used if a renderStyle is not provided.
   renderStyle?: IRenderStyle<IPressableState, ViewStyle>;
-}
+};
 
 /**
  * Used by IRenderChild, it simply describes a function that takes
@@ -38,3 +38,10 @@ export type IRenderChild<T> = IChildAsFunction<T> | React.ReactNode;
  * This is convenient for when styles need to be calculated depending on interaction states.
  */
 export type IRenderStyle<T, S> = (state: T) => StyleProp<S>;
+
+export type IPressableType<TBase extends object = IViewProps> = {
+  props: IPressableProps<TBase>;
+  slotProps: {
+    root: TBase;
+  };
+};
