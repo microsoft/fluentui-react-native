@@ -67,7 +67,7 @@ export const settings: IComposeSettings<IRadioButtonType> = [
           }
         },
         tokens: {
-          color: 'menuItemTextPressed'
+          color: 'menuItemTextHovered'
         }
       },
       focused: {
@@ -78,7 +78,7 @@ export const settings: IComposeSettings<IRadioButtonType> = [
         },
         tokens: {
           borderColor: 'menuItemTextPressed',
-          color: 'menuItemTextPressed',
+          color: 'menuItemTextHovered',
           backgroundColor: 'menuItemTextPressed'
         }
       },
