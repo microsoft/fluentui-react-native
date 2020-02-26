@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-native/interactive-hooks",
   "version": "0.1.0",
-  "description": "Token interface parts and helpers",
+  "description": "Hooks for adding focus, hover, and press semantics to view based components",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -15,15 +15,21 @@
     "update-api": "just-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-tokens": "^0.4.3",
-    "@uifabricshared/theming-ramp": "^0.5.3"
+    "@fluentui-native/adapters": "^0.1.0"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.27.3",
+    "@types/react": "16.9.11",
+    "@types/react-dom": "16.9.5",
     "@types/react-native": "0.60.19",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "react": "16.8.6",
     "react-native": "^0.60.0"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "react-native": "^0.59.0"
   },
   "author": "",
   "license": "MIT"
