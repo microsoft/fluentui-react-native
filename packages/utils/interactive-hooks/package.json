@@ -1,5 +1,5 @@
 {
-  "name": "@fluentui-native/hooks",
+  "name": "@fluentui-native/interactive-hooks",
   "version": "0.1.0",
   "description": "Token interface parts and helpers",
   "main": "lib/index.js",
