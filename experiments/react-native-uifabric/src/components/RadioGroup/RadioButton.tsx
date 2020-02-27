@@ -53,7 +53,7 @@ export const RadioButton = compose<IRadioButtonType>({
           info.onChange(buttonKey);
         }
       },
-      [pressable.props]
+      [state, pressable.props]
     );
 
     let accessibilityStates: string[] = [];
@@ -69,7 +69,7 @@ export const RadioButton = compose<IRadioButtonType>({
         ...pressable.props,
         onFocus: onFocusChange,
         accessibilityRole: 'radio',
-        accessibilityLabel: content,
+        accessibilityLabel: ariaLabel ? ariaLabel : content,
         accessibilityStates: accessibilityStates,
         accessibilityActions: [{ name: 'Select', label: 'Select a RadioButton' }],
         onAccessibilityAction: React.useCallback((event: { nativeEvent: { actionName: any } }) => {
