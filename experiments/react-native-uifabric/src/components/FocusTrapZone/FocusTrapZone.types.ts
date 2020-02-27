@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { IViewWin32Props } from '@office-iss/react-native-win32';
-import { IFocusable } from '../../hooks';
+import { IViewProps } from '@fluentui-native/adapters';
+import { IFocusable } from '@fluentui-native/interactive-hooks';
 
-export interface IFocusTrapZoneProps extends IViewWin32Props {
+export type IFocusTrapZoneProps<TBase = IViewProps> = TBase & {
   /**
    * A RefObject to access the IFocusTrapZone interface. Use this to access the public methods and properties of the component.
    */
@@ -32,13 +32,13 @@ export interface IFocusTrapZoneProps extends IViewWin32Props {
    * @default false
    */
   ignoreExternalFocusing?: boolean;
-}
+};
 
-export interface IFocusTrapZoneSlotProps {
-  root: React.PropsWithRef<Omit<IFocusTrapZoneProps, 'componentRef'>>;
-}
+export type IFocusTrapZoneSlotProps<TBase = IViewProps> = {
+  root: React.PropsWithRef<Omit<IFocusTrapZoneProps<TBase>, 'componentRef'>>;
+};
 
-export interface IFocusTrapZoneType {
-  props: IFocusTrapZoneProps;
-  slotProps: IFocusTrapZoneSlotProps;
-}
+export type IFocusTrapZoneType<TBase = IViewProps> = {
+  props: IFocusTrapZoneProps<TBase>;
+  slotProps: IFocusTrapZoneSlotProps<TBase>;
+};

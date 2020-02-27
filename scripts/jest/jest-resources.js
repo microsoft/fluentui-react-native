@@ -11,6 +11,8 @@ module.exports = {
   createConfig: customConfig =>
     merge(
       {
+        roots: ['<rootDir>/src'],
+
         moduleNameMapper: {
           '\\.(scss)$': path.resolve(__dirname, 'jest-style-mock.js'),
           KeyCodes: path.resolve(__dirname, 'jest-mock.js')
@@ -20,7 +22,7 @@ module.exports = {
           '^.+\\.(js|ts|tsx)?$': 'babel-jest'
         },
 
-        transformIgnorePatterns: ['/node_modules/(?!(@uifabricshared)/).*/'],
+        transformIgnorePatterns: ['/node_modules/(?!(@uifabricshared)/).*/', '/node_modules/(?!(@fluentui-native)/).*/'],
 
         reporters: [path.resolve(__dirname, './jest-reporter.js')],
 

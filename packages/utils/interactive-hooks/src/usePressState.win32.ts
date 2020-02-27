@@ -1,21 +1,20 @@
 import * as React from 'react';
-import { UIManager, GestureResponderEvent } from 'react-native';
-import { IViewWin32Props } from '@office-iss/react-native-win32';
-import { IPosition, IDimensions } from 'src/components/Pressable/Pressable.types';
-import { extractSingleTouch } from './Pressable.hooks.helpers';
-import {
-  IPressableState,
-  IPressableHooks,
-  IWithPressableOptions,
-  IFocusState,
-  IHoverState,
-  IPressState,
-  IHoverProps,
-  IFocusProps,
-  IPressProps
-} from 'src/components/Pressable/Pressable.props';
+import { UIManager, NativeTouchEvent, GestureResponderEvent } from 'react-native';
+import { IViewPropsWin32 } from '@fluentui-native/adapters';
+import { IPosition, IDimensions } from './Responder.types';
+import { IPressState, IWithPressableOptions } from './Pressable.types';
 
-export function usePressState(props: IWithPressableOptions<IViewWin32Props>): [IPressProps, IPressState] {
+function extractSingleTouch(e: GestureResponderEvent): NativeTouchEvent | null {
+  const nativeEvent = e.nativeEvent;
+  const touches = nativeEvent.touches;
+  const changedTouches = nativeEvent.changedTouches;
+  const hasTouches = touches && touches.length > 0;
+  const hasChangedTouches = changedTouches && changedTouches.length > 0;
+
+  return !hasTouches && hasChangedTouches ? changedTouches[0] : hasTouches ? touches[0] : nativeEvent;
+}
+
+export function usePressState<_T>(props: IWithPressableOptions<IViewPropsWin32>): [IViewPropsWin32, IPressState] {
   const positionOnActivate = React.useRef<IPosition | null>(null);
   const dimensionsOnActivate = React.useRef<IDimensions>({ width: 0, height: 0 });
 
@@ -64,38 +63,4 @@ export function usePressState(props: IWithPressableOptions<IViewWin32Props>): [I
     [state, props.onPress, props.disabled]
   );
   return [{ onTouchStart, onTouchCancel, onTouchEnd }, state];
-}
-
-export function useHoverState(): [IHoverProps, IHoverState] {
-  const [state, setHoverState] = React.useState({ hovered: false });
-  const onMouseEnter = React.useCallback(() => setHoverState({ hovered: true }), [setHoverState]);
-  const onMouseLeave = React.useCallback(() => setHoverState({ hovered: false }), [setHoverState]);
-  return [{ onMouseEnter, onMouseLeave }, state];
-}
-
-export function useFocusState(): [IFocusProps, IFocusState] {
-  const [state, setFocusState] = React.useState({ focused: false });
-  const onFocus = React.useCallback(() => setFocusState({ focused: true }), [setFocusState]);
-  const onBlur = React.useCallback(() => setFocusState({ focused: false }), [setFocusState]);
-  return [{ onFocus, onBlur }, state];
-}
-
-export function useAsPressable(props: IWithPressableOptions<IViewWin32Props>): IPressableHooks {
-  const [hoverProps, hoverState] = useHoverState();
-  const [pressProps, pressState] = usePressState(props);
-  const [focusProps, focusState] = useFocusState();
-
-  const newProps = {
-    ...props,
-    ...hoverProps,
-    ...pressProps,
-    ...focusProps
-  };
-  const newState: IPressableState = {
-    ...hoverState,
-    ...pressState,
-    ...focusState
-  };
-
-  return { props: newProps, state: newState };
 }

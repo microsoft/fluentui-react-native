@@ -1,5 +1,5 @@
 import { PersonaSize } from '../PersonaCoin';
-import { ITextTokens } from '../../tokens';
+import { ITextTokens } from '@fluentui-native/tokens';
 
 type IPersonaFontTable = {
   [key in PersonaSize]: ITextTokens;

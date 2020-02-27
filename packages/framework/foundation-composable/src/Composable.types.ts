@@ -152,3 +152,12 @@ export type ISlotWithFilter<TMixin = object> = {
   slotType?: INativeSlotType;
   filter?: IPropFilter;
 } & TMixin;
+
+/**
+ * A shorthand for typecasting a component into a more specific type, used for dealing with multiple platforms in
+ * react-native
+ */
+export type IComposableTypecast<TType> = IWithComposable<
+  React.FunctionComponent<IExtractProps<TType>>,
+  IComposable<IExtractProps<TType>, IExtractSlotProps<TType>, IExtractState<TType>>
+>;

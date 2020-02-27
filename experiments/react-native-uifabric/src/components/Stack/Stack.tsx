@@ -3,12 +3,12 @@ import * as React from 'react';
 import StackItem from './StackItem/StackItem';
 import { IStackRenderData, IStackProps, IStackSlotProps, stackName, IStackType } from './Stack.types';
 import { View } from 'react-native';
-import { filterViewProps } from '../../utilities/RenderHelpers';
+import { filterViewProps } from '@fluentui-native/adapters';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { settings } from './Stack.settings';
-import { backgroundColorTokens, borderTokens } from '../../tokens';
+import { backgroundColorTokens, borderTokens } from '@fluentui-native/tokens';
 import { buildStackRootStyles, buildStackInnerStyles } from './Stack.tokens';
 import { StyleProp, ViewStyle } from 'react-native';
 

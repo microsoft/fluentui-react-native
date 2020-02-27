@@ -4,16 +4,17 @@ import * as ReactNative from 'react-native';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ILinkProps, ILinkSlotProps, ILinkState, ILinkRenderData, IWithLinkOptions, linkName, ILinkType } from './Link.types';
 import { settings } from './Link.settings';
-import { foregroundColorTokens, textTokens } from '../../tokens';
+import { foregroundColorTokens, textTokens } from '@fluentui-native/tokens';
 // import { Text } from '../Text';
-import { useAsPressable, useViewCommandFocus } from '../../hooks';
+import { useAsPressable, useViewCommandFocus } from '@fluentui-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { IViewWin32Props } from '@office-iss/react-native-win32';
+// import { IViewWin32Props } from '@office-iss/react-native-win32';
+import { IViewProps } from '@fluentui-native/adapters';
 
-export type ILinkHooks = [IWithLinkOptions<IViewWin32Props>, ILinkState];
+export type ILinkHooks = [IWithLinkOptions<IViewProps>, ILinkState];
 
-export function useAsLink(userProps: IWithLinkOptions<IViewWin32Props>): ILinkHooks {
+export function useAsLink(userProps: IWithLinkOptions<IViewProps>): ILinkHooks {
   const { url, onPress, ...rest } = userProps;
 
   const [linkState, setLinkState] = React.useState({ visited: false });
@@ -73,7 +74,7 @@ export const Link = compose<ILinkType>({
         {children}
       </Slots.root>
     ) : (
-      <Slots.content {...renderData.slotProps!.root} />
+      <Slots.content {...(renderData.slotProps!.root as any)} />
     );
   },
   slots: {

@@ -1,5 +1,5 @@
 import { ViewWin32, IKeyboardEvent, IViewWin32Props, IViewWin32 } from '@office-iss/react-native-win32';
-import { IFocusTrapZoneProps, Text, Stack, FocusTrapZone } from 'react-native-uifabric';
+import { IFocusTrapZoneProps, Text, Stack, FocusTrapZoneWin32 } from 'react-native-uifabric';
 import { TouchableHighlight, TouchableHighlightProps } from 'react-native';
 import { useFocusState } from 'react-native-uifabric';
 import * as React from 'react';
@@ -112,7 +112,7 @@ export const FocusTrapTest: React.FunctionComponent<{}> = () => {
           onPress={onTwiddleFirstFocus}
         />
         {state.renderTrapZone && (
-          <FocusTrapZone
+          <FocusTrapZoneWin32
             componentRef={ftzRef}
             disableFirstFocus={state.disableFirstFocus}
             ignoreExternalFocusing={state.ignoreExternalFocusing}
@@ -125,7 +125,7 @@ export const FocusTrapTest: React.FunctionComponent<{}> = () => {
             <ComponentTwiddler label="trapped" />
             <ComponentTwiddler label="trapped" />
             <ComponentTwiddler label="trapped" />
-          </FocusTrapZone>
+          </FocusTrapZoneWin32>
         )}
       </Stack>
     </ViewWin32>

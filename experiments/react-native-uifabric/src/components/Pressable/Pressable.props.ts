@@ -1,39 +1,9 @@
-import { ViewStyle } from 'react-native';
-import { IRenderChild, IRenderStyle } from './Pressable.types';
-import { IViewWin32Props } from '@office-iss/react-native-win32';
+import * as React from 'react';
+import { ViewStyle, StyleProp } from 'react-native';
+import { IViewProps } from '@fluentui-native/adapters';
+import { IWithPressableOptions, IPressableState } from '@fluentui-native/interactive-hooks';
 
-export type IPressState = {
-  pressed?: boolean;
-};
-
-export type IFocusState = {
-  focused?: boolean;
-};
-
-export type IHoverState = {
-  hovered?: boolean;
-};
-
-export type IHoverProps = Pick<IViewWin32Props, 'onMouseEnter' | 'onMouseLeave'>;
-export type IFocusProps = Pick<IViewWin32Props, 'onFocus' | 'onBlur'>;
-export type IPressProps = Pick<IViewWin32Props, 'onTouchStart' | 'onTouchCancel' | 'onTouchEnd'>;
-
-export type IPressableState = IPressState & IFocusState & IHoverState;
-
-export type IPressableOptions = {
-  onStateChange?: (state: IPressableState) => void;
-  disabled?: boolean;
-  onPress?: () => void;
-};
-
-export type IWithPressableOptions<T extends object> = T & IPressableOptions;
-
-export type IPressableHooks = {
-  props: IWithPressableOptions<IViewWin32Props>;
-  state: IPressableState;
-};
-
-export interface IPressableProps extends IWithPressableOptions<IViewWin32Props> {
+export type IPressableProps<TBase extends object = IViewProps> = IWithPressableOptions<TBase> & {
   children?: IRenderChild<IPressableState>;
 
   // Typescript will not allow an extension of the IView* interface
@@ -43,4 +13,35 @@ export interface IPressableProps extends IWithPressableOptions<IViewWin32Props> 
   // instead, in conjunction with the base style prop (StyleProp<ViewStyle>).
   // The style prop will only be used if a renderStyle is not provided.
   renderStyle?: IRenderStyle<IPressableState, ViewStyle>;
-}
+};
+
+/**
+ * Used by IRenderChild, it simply describes a function that takes
+ * some generic state type T and returns a ReactNode
+ */
+export type IChildAsFunction<T> = (state: T) => React.ReactNode;
+
+/**
+ * An IRenderChild describes children as a function that take the current
+ * state of the parent component. It is up to the parent to invoke the function
+ * and make proper use of the more typical ReactNode object that is returned
+ * This is an especially helpful construct when children of a Touchable require
+ * knowledge of the interaction state of their parent to properly render themselves
+ * (e.g. foreground color of a text child)
+ */
+export type IRenderChild<T> = IChildAsFunction<T> | React.ReactNode;
+
+/**
+ * An IRenderStyle describes style as a function that takes the current
+ * state of the parent component. It is up to the parent to invoke the function
+ * and make proper use of the more typical StyleProp<S> object that is returned
+ * This is convenient for when styles need to be calculated depending on interaction states.
+ */
+export type IRenderStyle<T, S> = (state: T) => StyleProp<S>;
+
+export type IPressableType<TBase extends object = IViewProps> = {
+  props: IPressableProps<TBase>;
+  slotProps: {
+    root: TBase;
+  };
+};

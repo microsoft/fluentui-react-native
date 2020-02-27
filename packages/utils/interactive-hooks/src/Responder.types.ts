@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { GestureResponderEvent, StyleProp } from 'react-native';
+import { GestureResponderEvent } from 'react-native';
 
 /**
  * Gesture responder states
@@ -39,6 +39,11 @@ export type ITransitions = { [P in IState]: ISignalTransitions };
  * some specified criteria
  */
 export type IStateConditions = { [P in IState]: boolean };
+
+export interface IRect extends IPosition {
+  right: number;
+  bottom: number;
+}
 
 /**
  * Describes the position at which an event occurred
@@ -141,27 +146,3 @@ export interface IPressInLocation {
   locationX: number;
   locationY: number;
 }
-
-/**
- * Used by IRenderChild, it simply describes a function that takes
- * some generic state type T and returns a ReactNode
- */
-export type IChildAsFunction<T> = (state: T) => React.ReactNode;
-
-/**
- * An IRenderChild describes children as a function that take the current
- * state of the parent component. It is up to the parent to invoke the function
- * and make proper use of the more typical ReactNode object that is returned
- * This is an especially helpful construct when children of a Touchable require
- * knowledge of the interaction state of their parent to properly render themselves
- * (e.g. foreground color of a text child)
- */
-export type IRenderChild<T> = IChildAsFunction<T> | React.ReactNode;
-
-/**
- * An IRenderStyle describes style as a function that takes the current
- * state of the parent component. It is up to the parent to invoke the function
- * and make proper use of the more typical StyleProp<S> object that is returned
- * This is convenient for when styles need to be calculated depending on interaction states.
- */
-export type IRenderStyle<T, S> = (state: T) => StyleProp<S>;
