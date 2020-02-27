@@ -51,7 +51,7 @@ export interface IRadioGroupSlotProps {
 
 export type IRadioGroupContext = {
   selectedKey: string;
-  onButtonSelect: (key: string) => void;
+  onChange: (key: string) => void;
 };
 
 export type IRadioGroupRenderData = IRenderData<IRadioGroupSlotProps, IRadioGroupState>;

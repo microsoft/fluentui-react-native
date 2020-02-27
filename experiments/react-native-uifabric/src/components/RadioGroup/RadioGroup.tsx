@@ -20,7 +20,7 @@ import { useAsRadioGroupSelection } from '../../hooks';
 
 export const RadioGroupContext = React.createContext<IRadioGroupContext>({
   selectedKey: '',
-  onButtonSelect: (key: string) => {
+  onChange: (key: string) => {
     return;
   }
 });
@@ -48,8 +48,7 @@ export const RadioGroup = compose<IRadioGroupType>({
 
     const slotProps = mergeSettings<IRadioGroupSlotProps>(styleProps, {
       root: { rest, ...ariaRoles },
-      label: { children: label },
-      container: rest
+      label: { children: label }
     });
 
     return { slotProps, state };
@@ -63,10 +62,7 @@ export const RadioGroup = compose<IRadioGroupType>({
     return (
       <RadioGroupContext.Provider
         // Passes in the selected key and a hook function to update the newly selected button and call the client's onChange callback
-        value={{
-          selectedKey: renderData.state.selectedKey,
-          onButtonSelect: renderData.state.onChange
-        }}
+        value={renderData.state}
       >
         <Slots.root>
           <Slots.label />
@@ -76,7 +72,7 @@ export const RadioGroup = compose<IRadioGroupType>({
     );
   },
 
-  settings: settings,
+  settings,
   slots: {
     root: View,
     label: Text,

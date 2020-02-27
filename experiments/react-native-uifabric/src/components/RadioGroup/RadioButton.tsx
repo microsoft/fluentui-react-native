@@ -28,9 +28,7 @@ export const RadioButton = compose<IRadioButtonType>({
     // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
     const info = React.useContext(RadioGroupContext);
 
-    const pressable = useAsPressable({
-      ...rest
-    });
+    const pressable = useAsPressable(rest);
 
     const state: IRadioButtonState = {
       ...pressable.state,
@@ -49,39 +47,33 @@ export const RadioButton = compose<IRadioButtonType>({
       pressable.props.onFocus && pressable.props.onFocus(ev);
       // This check is necessary because this func gets called even when a button loses focus (not sure why?) which then calls the client's onChange multiple times
       if (!state.selected) {
-        info.onButtonSelect(buttonKey);
+        info.onChange(buttonKey);
       }
     };
 
-    const accessibilityTraits = {
-      accessibilityRole: 'radio',
-      accessibilityLabel: ariaLabel ? ariaLabel : content,
-      // Why are we able to do this? The radio button that's focused is always going to be the one selected. Therefore, unless it's disabled,
-      // we can always set state=selected for the narrator, because every time the narrator is focused on a button, that's the one selected
-      accessibilityStates: state.disabled ? ['disabled'] : ['selected'],
-      accessibilityActions: [{ name: 'Select', label: 'Select a RadioButton' }],
-      onAccessibilityAction: (event: { nativeEvent: { actionName: any } }) => {
-        switch (event.nativeEvent.actionName) {
-          case 'Select':
-            info.onButtonSelect(buttonKey);
-        }
-      }
-    };
-
-    //When the option is disabled, there's no built-in disable functionality for React-Native. So here's the logic I implemented for it.
-    const rootProps = state.disabled
-      ? { rest, ...accessibilityTraits }
-      : {
-          ...pressable.props,
-          ...accessibilityTraits,
-          rest,
-          onFocus: onFocusChange
-        };
+    let accessibilityStates: string[] = [];
+    if (state.disabled) {
+      accessibilityStates = ['disabled'];
+    } else if (state.selected) {
+      accessibilityStates = ['selected'];
+    }
 
     const slotProps = mergeSettings<IRadioButtonSlotProps>(styleProps, {
-      root: rootProps,
-      button: rest,
-      innerCircle: rest,
+      root: {
+        rest,
+        ...pressable.props,
+        onFocus: onFocusChange,
+        accessibilityRole: 'radio',
+        accessibilityLabel: content,
+        accessibilityStates: accessibilityStates,
+        accessibilityActions: [{ name: 'Select', label: 'Select a RadioButton' }],
+        onAccessibilityAction: React.useCallback((event: { nativeEvent: { actionName: any } }) => {
+          switch (event.nativeEvent.actionName) {
+            case 'Select':
+              info.onChange(buttonKey);
+          }
+        }, [])
+      },
       content: { children: content }
     });
 
@@ -90,21 +82,17 @@ export const RadioButton = compose<IRadioButtonType>({
 
   render: (Slots: ISlots<IRadioButtonSlotProps>, renderData: IRadioButtonRenderData, ...children: React.ReactNode[]) => {
     return (
-      <RadioGroupContext.Consumer>
-        {context => (
-          <Slots.root>
-            <Slots.button>
-              <Slots.innerCircle />
-            </Slots.button>
-            <Slots.content />
-            {children}
-          </Slots.root>
-        )}
-      </RadioGroupContext.Consumer>
+      <Slots.root>
+        <Slots.button>
+          <Slots.innerCircle />
+        </Slots.button>
+        <Slots.content />
+        {children}
+      </Slots.root>
     );
   },
 
-  settings: settings,
+  settings,
   slots: {
     root: View,
     button: { slotType: View, filter: filterViewProps },
