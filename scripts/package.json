@@ -17,6 +17,7 @@
     "update-api": "echo no api to update"
   },
   "peerDependencies": {
+    "@babel/core": "^7.5.5",
     "just-scripts": ">=0.28.1"
   },
   "devDependencies": {
@@ -74,7 +75,8 @@
     "jscodeshift": "^0.5.0",
     "json-loader": "^0.5.7",
     "just-scripts": ">=0.28.1",
-    "metro-react-native-babel-preset": "0.58.0",
+    "metro": "^0.54.0",
+    "metro-react-native-babel-preset": "^0.54.0",
     "ngrok": "^3.0.1",
     "node-sass": "^4.5.3",
     "p-queue": "^6.0.2",
@@ -99,7 +101,7 @@
     "webpack-dev-server": "3.1.14",
     "webpack-notifier": "^1.6.0",
     "yargs": "^13.2.4",
-    "@types/react-native": "^0.57.51"
+    "@types/react-native": "0.60.31"
   },
   "bundlesize": [
     {

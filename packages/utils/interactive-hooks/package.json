@@ -19,16 +19,16 @@
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.27.3",
-    "@types/react": "16.9.11",
-    "@types/react-dom": "16.9.5",
-    "@types/react-native": "0.60.19",
+    "@types/react": "16.8.23",
+    "@types/react-dom": "^16.8.0",
+    "@types/react-native": "^0.60.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "react": "16.8.6",
     "react-native": "^0.60.0"
   },
   "peerDependencies": {
-    "react": "^16.0.0",
+    "react": "^16.8.6",
     "react-native": "^0.59.0"
   },
   "author": "",
