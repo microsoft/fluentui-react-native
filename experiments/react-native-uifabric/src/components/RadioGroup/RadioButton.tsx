@@ -31,13 +31,15 @@ export const RadioButton = compose<IRadioButtonType>({
     const pressable = useAsPressable(rest);
 
     const state: IRadioButtonState = {
-      ...pressable.state,
-      selected: info.selectedKey === userProps.buttonKey,
-      disabled: disabled || false
+      info: {
+        ...pressable.state,
+        selected: info.selectedKey === userProps.buttonKey,
+        disabled: disabled || false
+      }
     };
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
-    const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
+    const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
 
     // This function is called every time a RadioButton gains focus. It does two things:
     // 1) Calls pressable's onFocus in order to keep track of our state's focus variable. It is dependent on pressable's
@@ -46,15 +48,15 @@ export const RadioButton = compose<IRadioButtonType>({
     const onFocusChange = (ev: NativeSyntheticEvent<{}>) => {
       pressable.props.onFocus && pressable.props.onFocus(ev);
       // This check is necessary because this func gets called even when a button loses focus (not sure why?) which then calls the client's onChange multiple times
-      if (!state.selected) {
+      if (!state.info.selected) {
         info.onChange(buttonKey);
       }
     };
 
     let accessibilityStates: string[] = [];
-    if (state.disabled) {
+    if (state.info.disabled) {
       accessibilityStates = ['disabled'];
-    } else if (state.selected) {
+    } else if (state.info.selected) {
       accessibilityStates = ['selected'];
     }
 
