@@ -76,6 +76,7 @@
     "json-loader": "^0.5.7",
     "just-scripts": ">=0.28.1",
     "metro": "^0.54.0",
+    "metro-config": "^0.54.0",
     "metro-react-native-babel-preset": "^0.54.0",
     "ngrok": "^3.0.1",
     "node-sass": "^4.5.3",
