@@ -1,19 +1,18 @@
-// @ts-check
-
 const fs = require('fs');
 const path = require('path');
 
-function queryModule(name, direct) {
+function queryModule(name: string, direct?: boolean): string {
   const cur = direct ? path.resolve(require.resolve(name)) : path.resolve(require.resolve(name + '/package.json'), '..');
   return fs.realpathSync(cur).replace(/\\/g, '/');
 }
 
-function getPackageInfo(subdir, packageName) {
+function getPackageInfo(subdir: string, packageName?: boolean): string | undefined {
   const normalizedPath = subdir.replace(/\\/g, '/');
   try {
     const packageJson = require(normalizedPath + '/package.json');
     return packageName ? packageJson.name : normalizedPath;
   } catch {}
+  return undefined;
 }
 
 /**
@@ -21,7 +20,7 @@ function getPackageInfo(subdir, packageName) {
  * @param {string} repoRoot - path to the root of the repository
  * @param {string} packageEntry - package entry in the format of "subdir" | "subdir/*" | "subdir/**"
  */
-function parseLernaPackageEntry(repoRoot, packageEntry) {
+function parseLernaPackageEntry(repoRoot: string, packageEntry: string): string[] {
   const parts = packageEntry.split('/');
   var basePath = repoRoot;
   var tailType = '';
@@ -32,7 +31,7 @@ function parseLernaPackageEntry(repoRoot, packageEntry) {
     }
   });
   if (tailType === '*' || tailType === '**') {
-    const results = [];
+    const results: string[] = [];
     const dirs = fs.readdirSync(basePath).filter(f => fs.statSync(path.join(basePath, f)).isDirectory());
 
     dirs.forEach(dir => {
@@ -49,7 +48,7 @@ function parseLernaPackageEntry(repoRoot, packageEntry) {
   return [basePath];
 }
 
-function queryPackages(packageNames) {
+function queryPackages(packageNames?: boolean): string[] {
   const gitRoot = require('./findGitRoot')();
   const lernaData = require(gitRoot + '/lerna');
   const packages = lernaData.packages;
@@ -61,17 +60,32 @@ function queryPackages(packageNames) {
   return results.filter(p => p);
 }
 
-module.exports = {
-  resolveModule: moduleName => {
-    return queryModule(moduleName);
-  },
-  resolveFile: fileName => {
-    return queryModule(fileName, true);
-  },
-  getPackagePaths: () => {
-    return queryPackages();
-  },
-  getPackageNames: () => {
-    return queryPackages(true);
-  }
-};
+/**
+ * Resolve a module to a true, normalized, non-symlink path
+ * @param moduleName - name of the module to resolve
+ */
+export function resolveModule(moduleName: string): string {
+  return queryModule(moduleName);
+}
+
+/**
+ * Resolve a file reference to a true, normalized, non-symlink path
+ * @param fileName - file to resolve
+ */
+export function resolveFile(fileName: string): string {
+  return queryModule(fileName, true);
+}
+
+/**
+ * Get an array of the package paths for packages in the repo
+ */
+export function getPackagePaths(): string[] {
+  return queryPackages();
+}
+
+/**
+ * Get an array with the package names for packages in the repo
+ */
+export function getPackageNames(): string[] {
+  return queryPackages(true);
+}
