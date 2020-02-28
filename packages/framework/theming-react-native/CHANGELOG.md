@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Thu, 20 Feb 2020 01:36:35 GMT and should not be manually modified.
+This log was last generated on Fri, 28 Feb 2020 00:04:18 GMT and should not be manually modified.
 
+## 0.3.4
+Fri, 28 Feb 2020 00:04:18 GMT
+
+### Patches
+
+- fix builds with moved packages (jasonmo@microsoft.com)
 ## 0.3.3
 Thu, 20 Feb 2020 01:36:35 GMT
 

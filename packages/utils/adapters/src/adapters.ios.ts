@@ -1,9 +1,12 @@
-import { ViewProps, TextProps, ImageProps } from 'react-native';
+import { TextProps, TextPropsAndroid, ViewProps, ViewPropsAndroid, ImageProps, ImagePropsAndroid } from 'react-native';
+import { IFilterMask } from './filter.types';
 
-type IWithChildren<T> = T & { children?: React.ReactNode[] };
-type IPropMask<TProps> = { [P in keyof TProps]-?: boolean };
+// export core interface types
+export type ITextProps = Omit<TextProps, keyof TextPropsAndroid>;
+export type IViewProps = Omit<ViewProps, keyof ViewPropsAndroid>;
+export type IImageProps = Omit<ImageProps, keyof ImagePropsAndroid>;
 
-const _viewMask: IPropMask<IWithChildren<ViewProps>> = {
+const _viewMask: IFilterMask<IViewProps> = {
   children: true,
   accessible: true,
   accessibilityLabel: true,
@@ -46,10 +49,7 @@ const _viewMask: IPropMask<IWithChildren<ViewProps>> = {
   accessibilityLiveRegion: true,
   accessibilityTraits: true,
   accessibilityViewIsModal: true,
-  collapsable: true,
-  needsOffscreenAlphaCompositing: true,
   isTVSelectable: true,
-  renderToHardwareTextureAndroid: true,
   shouldRasterizeIOS: true,
   hasTVPreferredFocus: true,
   tvParallaxMagnification: true,
@@ -59,7 +59,7 @@ const _viewMask: IPropMask<IWithChildren<ViewProps>> = {
   tvParallaxTiltAngle: true
 };
 
-const _textMask: IPropMask<IWithChildren<TextProps>> = {
+const _textMask: IFilterMask<ITextProps> = {
   children: true,
   accessibilityActions: true,
   accessibilityComponentType: true,
@@ -77,7 +77,6 @@ const _textMask: IPropMask<IWithChildren<TextProps>> = {
   onAccessibilityAction: true,
   onAccessibilityTap: true,
   importantForAccessibility: true,
-  textBreakStrategy: true,
   testID: true,
   allowFontScaling: true,
   ellipsizeMode: true,
@@ -92,12 +91,10 @@ const _textMask: IPropMask<IWithChildren<TextProps>> = {
   maxFontSizeMultiplier: true,
   adjustsFontSizeToFit: true,
   minimumFontScale: true,
-  selectable: true,
-  selectionColor: true,
   suppressHighlighting: true
 };
 
-const _imageMask: IPropMask<IWithChildren<ImageProps>> = {
+const _imageMask: IFilterMask<IImageProps> = {
   children: true,
   accessibilityActions: true,
   accessibilityComponentType: true,
@@ -131,16 +128,12 @@ const _imageMask: IPropMask<IWithChildren<ImageProps>> = {
   borderTopRightRadius: true,
   progressiveRenderingEnabled: true,
   source: true,
-  resizeMethod: true,
   resizeMode: true,
   loadingIndicatorSource: true,
   testID: true,
   defaultSource: true,
   blurRadius: true,
   capInsets: true,
-  width: true,
-  height: true,
-  fadeDuration: true
 };
 
 export function filterViewProps(propName: string): boolean {

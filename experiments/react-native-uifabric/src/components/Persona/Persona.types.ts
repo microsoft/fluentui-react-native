@@ -1,7 +1,7 @@
 import { IPersonaCoinProps, IPersonaCoinTokens } from '../PersonaCoin';
 import { ViewProps, TextProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { ITextTokens } from '../../../src/tokens/TextTokens';
+import { ITextTokens } from '@fluentui-native/tokens';
 
 export const personaName = 'RNFPersona';
 
@@ -12,7 +12,7 @@ export interface IPersonaState {
   optionalText?: string;
 }
 
-export interface IPersonaProps extends IPersonaCoinProps, IPersonaState {}
+export interface IPersonaProps extends IPersonaCoinProps, IPersonaState { }
 
 export interface IPersonaSlotProps {
   root: ViewProps;

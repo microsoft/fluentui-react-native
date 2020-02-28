@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Thu, 20 Feb 2020 01:36:35 GMT and should not be manually modified.
+This log was last generated on Fri, 28 Feb 2020 00:04:18 GMT and should not be manually modified.
 
+## 1.5.4
+Fri, 28 Feb 2020 00:04:18 GMT
+
+### Patches
+
+- split hooks into dedicated files (jasonmo@microsoft.com)
 ## 1.5.3
 Thu, 20 Feb 2020 01:36:35 GMT
 
