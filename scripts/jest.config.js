@@ -1,5 +1,2 @@
-let { createConfig } = require('@uifabricshared/build-native/jest/jest-resources');
-
-const config = createConfig({});
-
-module.exports = config;
+let { configureJest } = require('@uifabricshared/build-native');
+module.exports = configureJest({});

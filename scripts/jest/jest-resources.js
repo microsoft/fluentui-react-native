@@ -1,5 +1,5 @@
 const path = require('path');
-const merge = require('../tasks/merge');
+const merge = require('../utils/merge');
 const resolve = require('resolve');
 const { resolveCwd } = require('just-scripts');
 

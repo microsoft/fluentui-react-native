@@ -1,24 +1,14 @@
-import { getPackagePaths, resolveModule, resolveFile } from '../utils/queryFiles';
+// @ts-check
+'use strict';
 
-export type PlatformValue = 'win32' | 'ios' | 'android' | 'windows' | 'web' | 'macos';
+const { resolveModule, resolveFile } = require('../utils/file-paths');
+const { getPackagePaths } = require('../utils/package-info');
 
-export interface IMetroOptions {
-  /**
-   * bundle name, potentially used to keep caches distinct
-   */
-  bundle?: string;
-
-  /**
-   * which platforms should this bundle target, either a single string or an array
-   */
-  platform?: PlatformValue;
-}
-
-function prepareRegex(blacklistPath: string) {
+function prepareRegex(blacklistPath) {
   return new RegExp(`${blacklistPath.replace(/[/\\\\]/g, '[/\\\\]')}.*`);
 }
 
-const _platformFlags: { [K in PlatformValue]?: { rnOverride: string } } = {
+const _platformFlags = {
   win32: { rnOverride: '@office-iss/react-native-win32' },
   windows: { rnOverride: 'react-native-windows' }
 };
@@ -28,9 +18,9 @@ const _platformFlags: { [K in PlatformValue]?: { rnOverride: string } } = {
  *
  * @param options - metro configuration options
  */
-export function configureMetro(options: IMetroOptions): any {
+function configureMetro(options) {
   const { platform = 'iOS' } = options;
-  const rnOverride: string = platform && _platformFlags[platform] && _platformFlags[platform].rnOverride;
+  const rnOverride = platform && _platformFlags[platform] && _platformFlags[platform].rnOverride;
 
   const path = require('path');
   const blacklist = require('metro-config/src/defaults/blacklist');
@@ -80,3 +70,5 @@ export function configureMetro(options: IMetroOptions): any {
     resetCache: false
   };
 }
+
+module.exports.configureMetro = configureMetro;
