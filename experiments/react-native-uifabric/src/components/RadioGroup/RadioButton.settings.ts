@@ -7,6 +7,8 @@ const radioButtonRadius = radioButtonSize / 2;
 const radioButtonInnerCircleSize = 10;
 const radioButtonInnerCircleRadius = radioButtonInnerCircleSize / 2;
 
+export const radioButtonSelectActionLabel = 'Select a RadioButton';
+
 export const settings: IComposeSettings<IRadioButtonType> = [
   {
     tokens: {

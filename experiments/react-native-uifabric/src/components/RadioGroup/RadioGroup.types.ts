@@ -7,7 +7,7 @@ import { ITextTokens } from '../../tokens/TextTokens';
 
 export const radioGroupName = 'RadioGroup';
 
-export interface IRadioGroupState {
+export interface IRadioGroupContext {
   /*
    ** The currently selected RadioButton's key
    */
@@ -17,6 +17,10 @@ export interface IRadioGroupState {
    ** Updates the selected button and calls the client’s onChange callback
    */
   onChange: (key: string) => void;
+}
+
+export interface IRadioGroupState {
+  context: IRadioGroupContext;
 }
 
 export interface IRadioGroupProps {
@@ -48,11 +52,6 @@ export interface IRadioGroupSlotProps {
   label: ITextProps;
   container: ViewProps;
 }
-
-export type IRadioGroupContext = {
-  selectedKey: string;
-  onChange: (key: string) => void;
-};
 
 export type IRadioGroupRenderData = IRenderData<IRadioGroupSlotProps, IRadioGroupState>;
 

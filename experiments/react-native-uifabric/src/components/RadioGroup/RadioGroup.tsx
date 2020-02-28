@@ -35,8 +35,10 @@ export const RadioGroup = compose<IRadioGroupType>({
     const data = useAsRadioGroupSelection(userProps.defaultSelectedKey ? userProps.defaultSelectedKey : '', userProps.onChange);
 
     const state: IRadioGroupState = {
-      selectedKey: data.selectedKey,
-      onChange: data.onChange
+      context: {
+        selectedKey: data.selectedKey,
+        onChange: data.onChange
+      }
     };
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
@@ -62,7 +64,7 @@ export const RadioGroup = compose<IRadioGroupType>({
     return (
       <RadioGroupContext.Provider
         // Passes in the selected key and a hook function to update the newly selected button and call the client's onChange callback
-        value={renderData.state}
+        value={renderData.state.context}
       >
         <Slots.root>
           <Slots.label />

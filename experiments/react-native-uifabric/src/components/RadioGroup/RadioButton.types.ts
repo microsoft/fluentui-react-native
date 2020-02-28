@@ -10,7 +10,7 @@ import { IPressableState, IPressableProps } from '../Pressable';
 export const radioButtonName = 'RadioButton';
 
 // The state of the Radio Button. It extends IPressableState to keep track of press, focus, and hover
-export interface IRadioButtonInfo extends IPressableState {
+export interface IRadioButtonState extends IPressableState {
   /*
    ** Whether or not the RadioButton is currently checked
    */
@@ -20,15 +20,6 @@ export interface IRadioButtonInfo extends IPressableState {
    ** Whether or not the option is disabled
    */
   disabled: boolean;
-}
-
-/**
- * Because state updates are coming from the touchable and will cause a child render the button doesn't use
- * changes in state value to trigger re-render.  The values inside inner are effectively mutable and are used
- * for per-component storage
- */
-export interface IRadioButtonState {
-  info: IRadioButtonInfo;
 }
 
 // Props for the radio button
