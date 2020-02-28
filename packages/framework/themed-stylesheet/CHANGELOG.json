@@ -2,6 +2,20 @@
   "name": "@uifabricshared/themed-stylesheet",
   "entries": [
     {
+      "date": "Fri, 28 Feb 2020 00:04:18 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.2.6",
+      "version": "0.2.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix builds with moved packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f7de04a1b15d9b56a1192454bc000766d75013df"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 20 Feb 2020 01:36:35 GMT",
       "tag": "@uifabricshared/themed-stylesheet_v0.2.5",
       "version": "0.2.5",

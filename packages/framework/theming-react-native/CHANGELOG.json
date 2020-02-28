@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Fri, 28 Feb 2020 00:04:18 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.3.4",
+      "version": "0.3.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix builds with moved packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f7de04a1b15d9b56a1192454bc000766d75013df"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 20 Feb 2020 01:36:35 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.3.3",
       "version": "0.3.3",

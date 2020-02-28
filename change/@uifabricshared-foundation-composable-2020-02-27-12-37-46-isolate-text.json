@@ -1,9 +1,0 @@
-{
-  "type": "patch",
-  "comment": "split hooks into dedicated files",
-  "packageName": "@uifabricshared/foundation-composable",
-  "email": "jasonmo@microsoft.com",
-  "commit": "f7de04a1b15d9b56a1192454bc000766d75013df",
-  "dependentChangeType": "patch",
-  "date": "2020-02-27T20:37:13.224Z"
-}
