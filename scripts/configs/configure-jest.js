@@ -20,6 +20,9 @@ function configureJest(customConfig) {
       moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
       moduleDirectories: chainToRoot().map(dir => dir + '/node_modules'),
 
+      // reporter to suppress detailed logging, worth considering whether this can be switched via a verbose flag
+      reporters: [path.resolve(__dirname, './jest/jest-reporter.js')],
+
       // use babel-jest to transform files including typescript
       transform: {
         '^.+\\.(js|ts|tsx)?$': 'babel-jest'
@@ -31,8 +34,8 @@ function configureJest(customConfig) {
       // testRegex for which files to consider test files
       testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$',
       testURL: 'http://localhost'
+
       // some options which have been removed (but saved here for posterity/easy re-adding)
-      // reporters: [path.resolve(__dirname, './jest-reporter.js')],
       // setupFiles: [path.resolve(__dirname, 'jest-setup.js')],
     },
     customConfig
@@ -40,3 +43,16 @@ function configureJest(customConfig) {
 }
 
 exports.configureJest = configureJest;
+
+function configureReactNativeJest(platform, customConfig) {
+  return configureJest(
+    merge(
+      {
+        preset: 'react-native'
+      },
+      customConfig
+    )
+  );
+}
+
+exports.configureReactNativeJest = configureReactNativeJest;
