@@ -24,13 +24,16 @@ export const RadioButton = compose<IRadioButtonType>({
     const pressable = useAsPressable(rest);
 
     // Used when creating accessibility properties in mergeSettings below
-    const onAccessibilityAction = React.useCallback((event: { nativeEvent: { actionName: any } }) => {
-      switch (event.nativeEvent.actionName) {
-        case 'Select':
-          info.onChange && info.onChange(buttonKey);
-          break;
-      }
-    }, []);
+    const onAccessibilityAction = React.useCallback(
+      (event: { nativeEvent: { actionName: any } }) => {
+        switch (event.nativeEvent.actionName) {
+          case 'Select':
+            info.onChange && info.onChange(buttonKey);
+            break;
+        }
+      },
+      [info, buttonKey]
+    );
 
     const state = {
       ...pressable.state,
@@ -53,7 +56,7 @@ export const RadioButton = compose<IRadioButtonType>({
           info.onChange && info.onChange(buttonKey);
         }
       },
-      [state, pressable.props]
+      [state, pressable.props, info, buttonKey]
     );
 
     let accessibilityStates: string[] = [];

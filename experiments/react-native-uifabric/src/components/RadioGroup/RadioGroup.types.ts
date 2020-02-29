@@ -57,7 +57,6 @@ export type IRadioGroupRenderData = IRenderData<IRadioGroupSlotProps, IRadioGrou
 
 export interface IRadioGroupType {
   props: IRadioGroupProps;
-  //tokens:
   slotProps: IRadioGroupSlotProps;
   state: IRadioGroupState;
 }
