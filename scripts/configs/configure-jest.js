@@ -25,6 +25,7 @@ function configureJest(customConfig) {
 
       // reporter to suppress detailed logging, worth considering whether this can be switched via a verbose flag
       reporters: [path.resolve(__dirname, './jest/jest-reporter.js')],
+      snapshotSerializers: ['enzyme-to-json/serializer'],
 
       // use babel-jest to transform files including typescript
       transform: {
@@ -78,7 +79,11 @@ function configureReactNativeJest(platform, customConfig) {
           'react-native-windows/lib/.*.d.ts',
           'lib-amd/.*'
         ],
-        moduleFileExtensions: [...(platform && moduleFileExtensions.map(v => `${platform}.${v}`)), ...moduleFileExtensions]
+        setupFiles: [path.resolve(__dirname, 'jest/jest-setup-enzyme.js')],
+        ...(platform && {
+          moduleFileExtensions: [...moduleFileExtensions.map(v => `${platform}.${v}`), ...moduleFileExtensions],
+          testRegex: `(/__tests__/.*|\\.(test|spec))(\\.${platform})?\\.(ts|tsx)$`
+        })
       },
       customConfig
     )
