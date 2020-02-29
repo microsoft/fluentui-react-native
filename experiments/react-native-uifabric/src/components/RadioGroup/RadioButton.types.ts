@@ -5,22 +5,9 @@ import { ITextProps } from '../Text';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 import { ITextTokens } from '../../tokens/TextTokens';
 import { IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from 'src/tokens';
-import { IPressableState, IPressableProps } from '../Pressable';
+import { IPressableProps } from '../Pressable';
 
 export const radioButtonName = 'RadioButton';
-
-// The state of the Radio Button. It extends IPressableState to keep track of press, focus, and hover
-export interface IRadioButtonState extends IPressableState {
-  /*
-   ** Whether or not the RadioButton is currently checked
-   */
-  selected: boolean;
-
-  /*
-   ** Whether or not the option is disabled
-   */
-  disabled: boolean;
-}
 
 // Props for the radio button
 export interface IRadioButtonProps extends IPressableProps {
@@ -60,5 +47,4 @@ export interface IRadioButtonType {
   props: IRadioButtonProps;
   //tokens:
   slotProps: IRadioButtonSlotProps;
-  state: IRadioButtonState;
 }

@@ -2,14 +2,7 @@
 'use strict';
 import * as React from 'react';
 import { View, Text, NativeSyntheticEvent } from 'react-native';
-import {
-  radioButtonName,
-  IRadioButtonType,
-  IRadioButtonProps,
-  IRadioButtonState,
-  IRadioButtonSlotProps,
-  IRadioButtonRenderData
-} from './RadioButton.types';
+import { radioButtonName, IRadioButtonType, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonRenderData } from './RadioButton.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { filterViewProps } from '../../utilities/RenderHelpers';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
@@ -39,7 +32,7 @@ export const RadioButton = compose<IRadioButtonType>({
       }
     }, []);
 
-    const state: IRadioButtonState = {
+    const state = {
       ...pressable.state,
       selected: info.selectedKey === userProps.buttonKey,
       disabled: disabled || false
