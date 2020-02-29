@@ -84,7 +84,7 @@ export const RadioButton = compose<IRadioButtonType>({
       content: { children: content }
     });
 
-    return { slotProps, state };
+    return { slotProps };
   },
 
   render: (Slots: ISlots<IRadioButtonSlotProps>, renderData: IRadioButtonRenderData, ...children: React.ReactNode[]) => {

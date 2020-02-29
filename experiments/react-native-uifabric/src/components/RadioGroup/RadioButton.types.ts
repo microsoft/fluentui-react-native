@@ -54,7 +54,7 @@ export interface IRadioButtonSlotProps {
   content: ITextProps;
 }
 
-export type IRadioButtonRenderData = IRenderData<IRadioButtonSlotProps, IRadioButtonState>;
+export type IRadioButtonRenderData = IRenderData<IRadioButtonSlotProps>;
 
 export interface IRadioButtonType {
   props: IRadioButtonProps;
