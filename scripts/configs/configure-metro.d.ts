@@ -1,13 +1,14 @@
-export declare type PlatformValue = 'win32' | 'ios' | 'android' | 'windows' | 'web' | 'macos';
+import { PlatformValue } from './platforms';
+
 export interface IMetroOptions {
-    /**
-     * bundle name, potentially used to keep caches distinct
-     */
-    bundle?: string;
-    /**
-     * which platforms should this bundle target, either a single string or an array
-     */
-    platform?: PlatformValue;
+  /**
+   * bundle name, potentially used to keep caches distinct
+   */
+  bundle?: string;
+  /**
+   * which platforms should this bundle target, either a single string or an array
+   */
+  platform?: PlatformValue;
 }
 /**
  * This configures metro bundling based on the passed in options.

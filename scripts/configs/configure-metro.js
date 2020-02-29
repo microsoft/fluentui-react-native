@@ -3,15 +3,11 @@
 
 const { resolveModule, resolveFile } = require('../utils/file-paths');
 const { getPackagePaths } = require('../utils/package-info');
+const { getRNPackage, getAllPlatforms } = require('./platforms');
 
 function prepareRegex(blacklistPath) {
   return new RegExp(`${blacklistPath.replace(/[/\\\\]/g, '[/\\\\]')}.*`);
 }
-
-const _platformFlags = {
-  win32: { rnOverride: '@office-iss/react-native-win32' },
-  windows: { rnOverride: 'react-native-windows' }
-};
 
 /**
  * This configures metro bundling based on the passed in options.
@@ -19,13 +15,12 @@ const _platformFlags = {
  * @param options - metro configuration options
  */
 function configureMetro(options) {
-  const { platform = 'iOS' } = options;
-  const rnOverride = platform && _platformFlags[platform] && _platformFlags[platform].rnOverride;
-
+  const platform = options && options.platform;
   const path = require('path');
   const blacklist = require('metro-config/src/defaults/blacklist');
   const rnPath = resolveModule('react-native');
-  const rnName = rnOverride || 'react-native';
+  const rnName = getRNPackage(platform);
+  const rnOverride = rnName !== 'react-native' && rnName;
   const rnPlatformPath = (rnOverride && resolveModule(rnOverride)) || rnPath;
 
   return {
@@ -56,7 +51,7 @@ function configureMetro(options) {
         prepareRegex(path.resolve('.', 'node_modules/@office-iss/react-native-win32'))
       ]),
       hasteImplModulePath: resolveFile(rnName + '/jest/hasteImpl.js'),
-      platforms: ['win32', 'ios', 'android', 'windows', 'web', 'macos'],
+      platforms: getAllPlatforms(),
       providesModuleNodeModules: [rnName]
     },
     transformer: {

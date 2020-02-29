@@ -4,7 +4,10 @@
 const path = require('path');
 const merge = require('../utils/merge');
 const { getPackageNames } = require('../utils/package-info');
-const { chainToRoot } = require('../utils/file-paths');
+const { chainToRoot, resolveModule } = require('../utils/file-paths');
+const { getRNPackage, getAllPlatforms } = require('./platforms');
+
+const moduleFileExtensions = ['ts', 'tsx', 'js', 'jsx', 'json'];
 
 function configureJest(customConfig) {
   return merge(
@@ -17,7 +20,7 @@ function configureJest(customConfig) {
         '\\.(scss)$': path.resolve(__dirname, 'jest/jest-style-mock.js'),
         KeyCodes: path.resolve(__dirname, 'jest/jest-mock.js')
       },
-      moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
+      moduleFileExtensions,
       moduleDirectories: chainToRoot().map(dir => dir + '/node_modules'),
 
       // reporter to suppress detailed logging, worth considering whether this can be switched via a verbose flag
@@ -45,10 +48,37 @@ function configureJest(customConfig) {
 exports.configureJest = configureJest;
 
 function configureReactNativeJest(platform, customConfig) {
+  platform = platform || 'ios';
+  const rnPackage = getRNPackage(platform);
+  const rnPath = resolveModule(rnPackage);
+
+  console.log(__dirname);
   return configureJest(
     merge(
       {
-        preset: 'react-native'
+        preset: 'react-native',
+        roots: [rnPath, '<rootDir>/src'],
+        haste: {
+          defaultPlatform: platform,
+          platforms: getAllPlatforms(),
+          hasteImplModulePath: rnPath + '/jest/hasteImpl.js',
+          providesModuleNodeModules: [rnPackage]
+        },
+        moduleNameMapper: {
+          '^react-native$': rnPath + '/',
+          '^react-native/(.*)': rnPath + '/$1'
+        },
+        modulePathIgnorePatterns: [
+          '<rootDir>/../../src/react-native/Libraries/react-native/',
+          '<rootDir>/../../src/react-native/node_modules/',
+          '<rootDir>/../../src/react-native/packager/',
+          'react-native-win32/src/.*',
+          'react-native-win32/lib/.*.d.ts',
+          'react-native-windows/src/Libraries/.*',
+          'react-native-windows/lib/.*.d.ts',
+          'lib-amd/.*'
+        ],
+        moduleFileExtensions: [...(platform && moduleFileExtensions.map(v => `${platform}.${v}`)), ...moduleFileExtensions]
       },
       customConfig
     )
