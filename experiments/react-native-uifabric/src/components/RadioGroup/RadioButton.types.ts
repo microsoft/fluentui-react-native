@@ -35,12 +35,12 @@ export interface IRadioButtonProps extends IPressableProps {
   buttonKey: string;
 
   /*
-   ** OPTIONAL: Whether or not the radio button is selectable
+   ** Whether or not the radio button is selectable
    */
   disabled?: boolean;
 
   /*
-   ** OPTIONAL: An optional string for the Narrator to read for each RadioButton. If not provided, this will be set to the button's content
+   ** An optional string for the Narrator to read for each RadioButton. If not provided, this will be set to the button's content
    */
   ariaLabel?: string;
 }

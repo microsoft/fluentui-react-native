@@ -11,12 +11,12 @@ export interface IRadioGroupContext {
   /*
    ** The currently selected RadioButton's key
    */
-  selectedKey: string;
+  selectedKey: string | null;
 
   /*
    ** Updates the selected button and calls the client’s onChange callback
    */
-  onChange: (key: string) => void;
+  onChange?: (key: string) => void;
 }
 
 export interface IRadioGroupState {

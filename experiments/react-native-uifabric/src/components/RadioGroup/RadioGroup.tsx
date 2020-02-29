@@ -19,7 +19,7 @@ import { foregroundColorTokens, textTokens } from '../../tokens';
 import { useAsRadioGroupSelection } from '../../hooks';
 
 export const RadioGroupContext = React.createContext<IRadioGroupContext>({
-  selectedKey: '',
+  selectedKey: null,
   onChange: (key: string) => {
     return;
   }
@@ -32,7 +32,7 @@ export const RadioGroup = compose<IRadioGroupType>({
     const { label, ariaLabel, ...rest } = userProps;
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
-    const data = useAsRadioGroupSelection(userProps.defaultSelectedKey ? userProps.defaultSelectedKey : '', userProps.onChange);
+    const data = useAsRadioGroupSelection(userProps.defaultSelectedKey || null, userProps.onChange);
 
     const state: IRadioGroupState = {
       context: {
@@ -45,7 +45,7 @@ export const RadioGroup = compose<IRadioGroupType>({
 
     const ariaRoles = {
       accessibilityRole: 'radiogroup',
-      accessibilityLabel: ariaLabel ? ariaLabel : label
+      accessibilityLabel: ariaLabel || label
     };
 
     const slotProps = mergeSettings<IRadioGroupSlotProps>(styleProps, {

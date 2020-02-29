@@ -48,7 +48,7 @@ export const RadioButton = compose<IRadioButtonType>({
         pressable.props.onFocus && pressable.props.onFocus(ev);
         // This check is necessary because this func gets called even when a button loses focus (not sure why?) which then calls the client's onChange multiple times
         if (!state.selected) {
-          info.onChange(buttonKey);
+          info.onChange && info.onChange(buttonKey);
         }
       },
       [state, pressable.props]
@@ -73,7 +73,8 @@ export const RadioButton = compose<IRadioButtonType>({
         onAccessibilityAction: React.useCallback((event: { nativeEvent: { actionName: any } }) => {
           switch (event.nativeEvent.actionName) {
             case 'Select':
-              info.onChange(buttonKey);
+              info.onChange && info.onChange(buttonKey);
+              break;
           }
         }, [])
       },
