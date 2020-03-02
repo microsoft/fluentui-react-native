@@ -4,24 +4,17 @@ import { Image, View } from 'react-native';
 import { IButtonSlotProps, IButtonState, IButtonProps, IButtonRenderData, buttonName, IButtonType } from './Button.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { Text } from '../Text';
+import { Text } from '@fluentui-native/text';
 import { settings } from './Button.settings';
-import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '../../tokens';
-import { filterViewProps, filterImageProps } from '../../utilities/RenderHelpers';
+import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-native/tokens';
+import { filterViewProps, filterImageProps } from '@fluentui-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable, useViewCommandFocus } from '../../hooks';
+import { useAsPressable, useViewCommandFocus } from '@fluentui-native/interactive-hooks';
 
 export const Button = compose<IButtonType>({
   displayName: buttonName,
   usePrepareProps: (userProps: IButtonProps, useStyling: IUseComposeStyling<IButtonType>) => {
-    const {
-      icon,
-      content,
-      onAccessibilityTap = userProps.onClick,
-      accessibilityLabel = userProps.content,
-      onClick,
-      ...rest
-    } = userProps;
+    const { icon, content, onAccessibilityTap = userProps.onClick, accessibilityLabel = userProps.content, onClick, ...rest } = userProps;
     // attach the pressable state handlers
     const pressable = useAsPressable(rest && { onPress: onClick });
     // set up state

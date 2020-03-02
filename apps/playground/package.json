@@ -16,15 +16,23 @@
     "react-dom": "16.8.6",
     "react-native": "^0.59.0",
     "react-native-web": "^0.11.7",
-    "@uifabricshared/theming-react-native": "0.3.3",
-    "@uifabricshared/themed-stylesheet": "0.2.5",
-    "@uifabricshared/foundation-compose": "1.5.3"
+    "@uifabricshared/theming-react-native": "0.3.4",
+    "@uifabricshared/themed-stylesheet": "0.2.6",
+    "@uifabricshared/foundation-compose": "1.5.4"
   },
   "devDependencies": {
-    "@types/react": "^16.8.23",
-    "@types/react-native": "^0.57.65",
+    "@types/react": "16.8.23",
+    "@types/react-native": "0.57.65",
     "babel-preset-expo": "^7.1.0",
     "typescript": "^3.6.3"
+  },
+  "workspaces": {
+    "nohoist": [
+      "*react-native*",
+      "*react-native*/**",
+      "*metro*",
+      "*metro*/**"
+    ]
   },
   "private": true
 }

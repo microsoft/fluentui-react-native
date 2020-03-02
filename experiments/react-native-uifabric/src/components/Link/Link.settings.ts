@@ -1,6 +1,7 @@
 import { linkName, ILinkType } from './Link.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
-import { IViewWin32Props } from '@office-iss/react-native-win32';
+// import { IViewWin32Props } from '@office-iss/react-native-win32';
+import { IViewProps } from '@fluentui-native/adapters';
 
 export const settings: IComposeSettings<ILinkType> = [
   {
@@ -14,7 +15,7 @@ export const settings: IComposeSettings<ILinkType> = [
       style: {
         margin: 0,
         textDecorationLine: 'underline'
-      } as IViewWin32Props['style']
+      } as IViewProps['style']
     },
     _precedence: ['visited', 'hovered', 'pressed', 'disabled'],
     _overrides: {

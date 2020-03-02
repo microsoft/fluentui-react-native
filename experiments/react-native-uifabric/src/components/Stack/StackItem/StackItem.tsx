@@ -2,7 +2,7 @@ import * as React from 'react';
 import { IStackItemProps, stackItemName, IStackItemType } from './StackItem.types';
 import { compose } from '@uifabricshared/foundation-compose';
 import { View } from 'react-native';
-import { filterViewProps } from '../../../utilities/RenderHelpers';
+import { filterViewProps } from '@fluentui-native/adapters';
 import { settings } from './StackItem.settings';
 import { stackItemTokenProcessor } from './StackItem.tokens';
 

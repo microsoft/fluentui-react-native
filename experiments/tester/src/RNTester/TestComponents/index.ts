@@ -7,6 +7,7 @@ import { ThemeTest } from './ThemeTest';
 import { FocusTrapTest } from './FocusTrapZoneTest';
 import { PersonaCoinTest } from './PersonaCoin/PersonaCoinTest';
 import { RadioGroupTest } from './RadioGroupTest';
+import { PersonaTest } from './Persona/PersonaTest';
 
 export type TestDescription = {
   name: string;
@@ -45,5 +46,9 @@ export const allTestComponents: TestDescription[] = [
   {
     name: 'RadioGroup Test',
     component: RadioGroupTest
+  },
+  {
+    name: 'Persona Test',
+    component: PersonaTest
   }
 ];

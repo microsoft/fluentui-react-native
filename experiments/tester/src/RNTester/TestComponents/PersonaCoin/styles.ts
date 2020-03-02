@@ -4,7 +4,8 @@ export const styles = StyleSheet.create({
   root: {
     marginTop: 16,
     marginRight: 32,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'flex-start'
   },
   settings: {
     flexGrow: 1
@@ -14,7 +15,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center'
   },
   header: {
-    marginTop: 12,
+    marginVertical: 6,
     fontSize: 12
   },
   section: {
@@ -26,12 +27,8 @@ export const styles = StyleSheet.create({
   oneCoin: {
     margin: 8
   },
-  textBox: {
-    borderWidth: 1,
-    height: 25,
-    fontSize: 12,
-    width: 150,
-    marginBottom: 8
+  slider: {
+    marginVertical: 6
   }
 });
 

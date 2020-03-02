@@ -74,6 +74,11 @@ export const settings: IComposeSettings<IRadioButtonType> = [
             opacity: 1
           }
         },
+        content: {
+          style: {
+            borderColor: 'rgba(128, 128, 128, 1)'
+          }
+        },
         tokens: {
           color: 'menuItemTextHovered'
         }
