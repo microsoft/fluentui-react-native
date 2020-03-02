@@ -6,3 +6,4 @@ export * from './PersonaCoin/index';
 export * from './Pressable/index';
 export * from './Separator/index';
 export * from './Stack/index';
+export * from './RadioGroup/index';
