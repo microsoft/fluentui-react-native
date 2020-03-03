@@ -7,7 +7,7 @@ const glob = require('glob');
 /**
  * Returns an object initialized in the format of:
  * {
- *  packageName: { path: normalized path, config: expanded package JSON }
+ *  packageName: { path: normalized path, config: expanded package JSON, dependencies: {} }
  * }
  *
  * If this is not a package this will return undefined.
@@ -18,7 +18,8 @@ const glob = require('glob');
 function buildPackageInfo(root, pkgPath) {
   const pkgJsonPath = `${root}/${pkgPath}`;
   const config = require(pkgJsonPath);
-  return { [config.name]: { config, path: path.resolve(pkgJsonPath, '..').replace(/\\/g, '/') } };
+  console.log(path.resolve(pkgPath, '..'));
+  return { [config.name]: { config, path: path.resolve(pkgJsonPath, '..').replace(/\\/g, '/'), dependencies: {} } };
 }
 
 /**
@@ -32,18 +33,54 @@ function buildPackageInfoForGlob(root, pkgGlob) {
   return Object.assign({}, ...glob.sync(matchPattern, globOptions).map(subPath => buildPackageInfo(root, subPath)));
 }
 
-function queryPackages(packageNames) {
-  var gitRoot = findGitRoot().replace(/\\/g, '/');
-  var lernaData = require(gitRoot + '/lerna');
-  var results = Object.assign({}, ...lernaData.packages.map(pkgGlob => buildPackageInfoForGlob(gitRoot, pkgGlob)));
-  return Object.keys(results).map(name => (packageNames ? name : results[name].path));
+function addPackageDependencies(repoInfo, pkg, key) {
+  const config = pkg.config;
+  const section = config[key];
+  const dependencies = pkg.dependencies;
+  if (section) {
+    Object.keys(section).forEach(dependency => {
+      if (repoInfo[dependency] && !dependencies[dependency]) {
+        dependencies[dependency] = repoInfo[dependency];
+      }
+    });
+  }
+}
+
+function buildRepoPackageInfo(loadDependencies) {
+  const gitRoot = findGitRoot().replace(/\\/g, '/');
+  const lernaData = require(gitRoot + '/lerna');
+  const results = Object.assign({}, ...lernaData.packages.map(pkgGlob => buildPackageInfoForGlob(gitRoot, pkgGlob)));
+  if (loadDependencies) {
+    Object.keys(results).forEach(pkg => {
+      addPackageDependencies(results, results[pkg], 'dependencies');
+      addPackageDependencies(results, results[pkg], 'devDependencies');
+      addPackageDependencies(results, results[pkg], 'peerDependencies');
+    });
+  }
+  return results;
+}
+
+function getThisPackageName() {
+  const packageJson = require(path.join(process.cwd(), 'package.json'));
+  return packageJson.name;
+}
+
+function addRecursiveDependencies(collector, info) {
+  const dependencies = info.dependencies;
+  Object.keys(dependencies).forEach(dep => {
+    if (!collector[dep]) {
+      collector[dep] = dependencies[dep];
+      addRecursiveDependencies(collector, dependencies[dep]);
+    }
+  });
 }
 
 /**
  * Get an array of the package paths for packages in the repo
  */
 function getPackagePaths() {
-  return queryPackages();
+  const repoInfo = buildRepoPackageInfo();
+  return Object.keys(repoInfo).map(name => repoInfo[name].path);
 }
 
 exports.getPackagePaths = getPackagePaths;
@@ -52,7 +89,20 @@ exports.getPackagePaths = getPackagePaths;
  * Get an array with the package names for packages in the repo
  */
 function getPackageNames() {
-  return queryPackages(true);
+  return Object.keys(buildRepoPackageInfo());
 }
 
 exports.getPackageNames = getPackageNames;
+
+function getDependentPackages(options = {}) {
+  const { name = getThisPackageName(), paths } = options;
+  const dependencies = {};
+  const repoInfo = buildRepoPackageInfo(true);
+  const thisPackage = repoInfo[name];
+  if (thisPackage) {
+    addRecursiveDependencies(dependencies, thisPackage);
+  }
+  return Object.keys(dependencies).map(pkg => (paths ? dependencies[pkg].path : pkg));
+}
+
+exports.getDependentPackages = getDependentPackages;
