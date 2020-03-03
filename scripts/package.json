@@ -78,6 +78,7 @@
     "metro": "^0.54.0",
     "metro-config": "^0.54.0",
     "metro-react-native-babel-preset": "^0.54.0",
+    "node-glob": "1.2.0",
     "ngrok": "^3.0.1",
     "node-sass": "^4.5.3",
     "p-queue": "^6.0.2",

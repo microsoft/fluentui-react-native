@@ -1,70 +1,42 @@
 'use strict';
 
 const { findGitRoot } = require('./file-paths');
-const fs = require('fs');
 const path = require('path');
+const glob = require('glob');
 
-function getPackageInfo(subdir, packageName) {
-  var normalizedPath = subdir.replace(/\\/g, '/');
-  try {
-    var packageJson = require(normalizedPath + '/package.json');
-    return packageName ? packageJson.name : normalizedPath;
-  } catch (_a) {}
-  return undefined;
+/**
+ * Returns an object initialized in the format of:
+ * {
+ *  packageName: { path: normalized path, config: expanded package JSON }
+ * }
+ *
+ * If this is not a package this will return undefined.
+ *
+ * @param {string} root = root of the search
+ * @param {string} pkgPath - subdirectory currently being looked at to see if it is a directory
+ */
+function buildPackageInfo(root, pkgPath) {
+  const pkgJsonPath = `${root}/${pkgPath}`;
+  const config = require(pkgJsonPath);
+  return { [config.name]: { config, path: path.resolve(pkgJsonPath, '..').replace(/\\/g, '/') } };
 }
 
 /**
- * Parse the lerna package entry and return one or more actual directories to get package info for
- * @param {string} repoRoot - path to the root of the repository
- * @param {string} packageEntry - package entry in the format of "subdir" | "subdir/*" | "subdir/**"
+ * Calls buildPackageInfo for all the glob matches within the pattern
+ * @param {string} root - root path for the repo
+ * @param {string} pkgGlob - pattern from the lerna.json or yarn workspaces config
  */
-function parseLernaPackageEntry(repoRoot, packageEntry) {
-  const parts = packageEntry.split('/');
-  var basePath = repoRoot;
-  var tailType = '';
-
-  parts.forEach(function(part) {
-    tailType = part;
-    if (tailType !== '*' && tailType !== '**') {
-      basePath = path.join(basePath, part);
-    }
-  });
-
-  if (tailType === '*' || tailType === '**') {
-    var results_1 = [];
-    var dirs = fs.readdirSync(basePath).filter(function(f) {
-      return fs.statSync(path.join(basePath, f)).isDirectory();
-    });
-    dirs.forEach(function(dir) {
-      var packageDir = path.join(basePath, dir);
-      results_1.push(packageDir);
-      if (tailType === '**') {
-        var subDirs = fs.readdirSync(packageDir).filter(function(f) {
-          return fs.statSync(path.join(packageDir, f)).isDirectory();
-        });
-        subDirs.forEach(function(subDir) {
-          return results_1.push(path.join(packageDir, subDir));
-        });
-      }
-    });
-    return results_1;
-  }
-  return [basePath];
+function buildPackageInfoForGlob(root, pkgGlob) {
+  const matchPattern = pkgGlob + '/package.json';
+  const globOptions = { cwd: root, ignore: '**/node_modules/**' };
+  return Object.assign({}, ...glob.sync(matchPattern, globOptions).map(subPath => buildPackageInfo(root, subPath)));
 }
 
 function queryPackages(packageNames) {
-  var gitRoot = findGitRoot();
+  var gitRoot = findGitRoot().replace(/\\/g, '/');
   var lernaData = require(gitRoot + '/lerna');
-  var packages = lernaData.packages;
-  var results = [];
-  packages.forEach(function(packageEntry) {
-    return parseLernaPackageEntry(gitRoot, packageEntry).forEach(function(entry) {
-      return results.push(getPackageInfo(entry, packageNames));
-    });
-  });
-  return results.filter(function(p) {
-    return p;
-  });
+  var results = Object.assign({}, ...lernaData.packages.map(pkgGlob => buildPackageInfoForGlob(gitRoot, pkgGlob)));
+  return Object.keys(results).map(name => (packageNames ? name : results[name].path));
 }
 
 /**
