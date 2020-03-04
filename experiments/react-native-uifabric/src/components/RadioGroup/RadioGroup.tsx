@@ -15,7 +15,7 @@ import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { filterViewProps } from '@fluentui-native/adapters';
 import { settings } from './RadioGroup.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens } from '@fluentui-native/tokens';
+import { foregroundColorTokens, textTokens } from '@fluentui-native/tokens';
 import { useAsRadioGroupSelection } from '@fluentui-native/interactive-hooks';
 
 export const RadioGroupContext = React.createContext<IRadioGroupContext>({
@@ -82,7 +82,7 @@ export const RadioGroup = compose<IRadioGroupType>({
   },
   styles: {
     root: [],
-    label: [foregroundColorTokens],
+    label: [foregroundColorTokens, textTokens],
     container: []
   }
 });
