@@ -18,19 +18,6 @@ const createColorRamp = ({ values, index = -1 }: Partial<IColorRamp>) => ({
   }
 });
 
-export function translateOfficeTheme(module: IOfficeThemingModule, palette: IPartialPalette) {
-  return {
-    colors: {
-      brand: createColorRamp({ values: module.ramps.App }),
-      neutrals: createColorRamp({ values: module.ramps.FluentGrays }),
-      warning: createColorRamp({ values: module.ramps.Sepias }),
-      neutrals2: createColorRamp({ values: module.ramps.ClassicGrays }),
-      ...palette
-    },
-    typography: module.typography
-  };
-}
-
 type PaletteCache = { [key: string]: IOfficePalette };
 
 function isException(palette: IOfficePalette | ICxxException): palette is ICxxException {
@@ -52,6 +39,23 @@ function translatePalette(module: IOfficeThemingModule, paletteCache: PaletteCac
   return paletteCache[key] ? paletteFromOfficeColors(paletteCache[key]) : {};
 }
 
+export function translateOfficeTheme(module: IOfficeThemingModule, cache: PaletteCache, id?: string) {
+  const palette = translatePalette(module, cache, id);
+  return {
+    colors: {
+      brand: createColorRamp({ values: module.ramps.App }),
+      neutrals: createColorRamp({ values: module.ramps.FluentGrays }),
+      warning: createColorRamp({ values: module.ramps.Sepias }),
+      neutrals2: createColorRamp({ values: module.ramps.ClassicGrays }),
+      ...palette
+    },
+    typography: module.typography,
+    host: {
+      palette: cache[id]
+    }
+  };
+}
+
 export function createThemingModuleHelper(themingModule?: IOfficeThemingModule, emitter?: IEventEmitter): IThemingModuleHelper {
   themingModule || console.error('No NativeModule for Theming found');
   const paletteCache: PaletteCache = {};
@@ -61,16 +65,12 @@ export function createThemingModuleHelper(themingModule?: IOfficeThemingModule, 
     });
   return {
     getPlatformDefaults: (themeId?: string) => {
-      return resolvePartialTheme(
-        getBaselinePlatformTheme(),
-        translateOfficeTheme(themingModule, translatePalette(themingModule, paletteCache, themeId))
-      );
+      return resolvePartialTheme(getBaselinePlatformTheme(), translateOfficeTheme(themingModule, paletteCache, themeId));
     },
     getPlatformThemeDefinition: (themeId?: string) => {
       return (_parent: ITheme) => {
         updatePaletteInCache(themingModule, paletteCache, themeId);
-        const newColors = translatePalette(themingModule, paletteCache, themeId);
-        return { colors: newColors };
+        return translateOfficeTheme(themingModule, paletteCache, themeId);
       };
     },
     addListener: (callback: PlatformDefaultsChangedCallback) => {
