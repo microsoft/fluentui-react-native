@@ -1,5 +1,4 @@
-export declare function chainToRoot(): string[];
-export declare function findGitRoot(): string;
+export declare function nodeModulesToRoot(): string[];
 /**
  * Resolve a module to a true, normalized, non-symlink path
  * @param moduleName - name of the module to resolve

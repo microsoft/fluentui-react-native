@@ -2,8 +2,8 @@
 'use strict';
 
 const { resolveModule, resolveFile } = require('../utils/file-paths');
-const { getPackagePaths } = require('../utils/package-info');
 const { getRNPackage, getAllPlatforms } = require('./platforms');
+const { getDependentPackagePaths } = require('../just-repo-utils');
 
 function prepareRegex(blacklistPath) {
   return new RegExp(`${blacklistPath.replace(/[/\\\\]/g, '[/\\\\]')}.*`);
@@ -29,7 +29,7 @@ function configureMetro(options) {
       // Include hoisted modules
       path.resolve(__dirname, '../..', 'node_modules'),
       rnPlatformPath,
-      ...getPackagePaths()
+      ...getDependentPackagePaths()
     ],
     serializer: {
       getPolyfills: () => {

@@ -1,40 +1,33 @@
-"use strict";
+// @ts-check
+
+const { repoInfo, normalizePath, findGitRoot } = require('../just-repo-utils');
+
+('use strict');
 exports.__esModule = true;
 var fs = require('fs');
 var path = require('path');
-function walkToProjectRoot(stepFn) {
-    var cwd = process.cwd();
-    var root = path.parse(cwd).root;
-    while (cwd !== root) {
-        stepFn && stepFn(cwd);
-        if (fs.existsSync(path.join(cwd, '.git'))) {
-            return cwd;
-        }
-        cwd = path.dirname(cwd);
+function nodeModulesToRoot() {
+  var results = [];
+  findGitRoot(cur => {
+    const nodeModulePath = path.join(cur, 'node_modules');
+    if (fs.existsSync(nodeModulePath)) {
+      results.push(nodeModulePath.replace(/\\/g, '/'));
     }
-    stepFn && stepFn(cwd);
-    return cwd;
+    return false;
+  });
+  return results;
 }
-function chainToRoot() {
-    var results = [];
-    walkToProjectRoot(function (cur) { return results.push(cur.replace(/\\/g, '/')); });
-    return results;
-}
-exports.chainToRoot = chainToRoot;
-function findGitRoot() {
-    return walkToProjectRoot();
-}
-exports.findGitRoot = findGitRoot;
+exports.nodeModulesToRoot = nodeModulesToRoot;
 function queryModule(name, direct) {
-    var cur = direct ? path.resolve(require.resolve(name)) : path.resolve(require.resolve(name + '/package.json'), '..');
-    return fs.realpathSync(cur).replace(/\\/g, '/');
+  var cur = direct ? path.resolve(require.resolve(name)) : path.resolve(require.resolve(name + '/package.json'), '..');
+  return fs.realpathSync(cur).replace(/\\/g, '/');
 }
 /**
  * Resolve a module to a true, normalized, non-symlink path
  * @param moduleName - name of the module to resolve
  */
 function resolveModule(moduleName) {
-    return queryModule(moduleName);
+  return queryModule(moduleName);
 }
 exports.resolveModule = resolveModule;
 /**
@@ -42,6 +35,6 @@ exports.resolveModule = resolveModule;
  * @param fileName - file to resolve
  */
 function resolveFile(fileName) {
-    return queryModule(fileName, true);
+  return queryModule(fileName, true);
 }
 exports.resolveFile = resolveFile;

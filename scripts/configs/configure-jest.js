@@ -3,8 +3,8 @@
 
 const path = require('path');
 const merge = require('../utils/merge');
-const { getPackageNames } = require('../utils/package-info');
-const { chainToRoot, resolveModule } = require('../utils/file-paths');
+const { getRepoPackageNames } = require('../just-repo-utils');
+const { nodeModulesToRoot, resolveModule } = require('../utils/file-paths');
 const { getRNPackage, getAllPlatforms } = require('./platforms');
 
 const moduleFileExtensions = ['ts', 'tsx', 'js', 'jsx', 'json'];
@@ -21,7 +21,7 @@ function configureJest(customConfig) {
         KeyCodes: path.resolve(__dirname, 'jest/jest-mock.js')
       },
       moduleFileExtensions,
-      moduleDirectories: chainToRoot().map(dir => dir + '/node_modules'),
+      moduleDirectories: nodeModulesToRoot(),
 
       // reporter to suppress detailed logging, worth considering whether this can be switched via a verbose flag
       reporters: [path.resolve(__dirname, './jest/jest-reporter.js')],
@@ -33,7 +33,7 @@ function configureJest(customConfig) {
       },
 
       // ignore our own packages in node_modules
-      transformIgnorePatterns: getPackageNames().map(pkg => '/node_modules/' + pkg),
+      transformIgnorePatterns: getRepoPackageNames().map(pkg => '/node_modules/' + pkg),
 
       // testRegex for which files to consider test files
       testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$',

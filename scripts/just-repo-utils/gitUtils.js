@@ -9,19 +9,15 @@ function cleanGitStdout(stdout) {
         .map(l => l.trim())
         .filter(v => v);
 }
-function findGitRoot() {
-    return repoInfo_1.repoInfo().rootPath;
-}
-exports.findGitRoot = findGitRoot;
 function gitListFiles(root, scope) {
-    root = root || findGitRoot();
+    root = root || repoInfo_1.findGitRoot();
     scope = scope || [];
     const lsResults = child_process_1.spawnSync('git', ['ls-files', ...scope], { cwd: root });
     return lsResults.status !== 0 ? [] : cleanGitStdout(lsResults.stdout);
 }
 exports.gitListFiles = gitListFiles;
 function gitHashObject(root, files) {
-    root = root || findGitRoot();
+    root = root || repoInfo_1.findGitRoot();
     const hashResults = child_process_1.spawnSync('git', ['hash-object', ...files], { cwd: root });
     return hashResults.status !== 0 ? [] : cleanGitStdout(hashResults.stdout);
 }
