@@ -6,7 +6,8 @@ function cleanGitStdout(stdout) {
     return stdout
         .toString()
         .split(/\n/)
-        .map(l => l.trim());
+        .map(l => l.trim())
+        .filter(v => v);
 }
 function findGitRoot() {
     return repoInfo_1.repoInfo().rootPath;
