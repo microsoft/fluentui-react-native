@@ -7,6 +7,7 @@ const repoInfo_1 = require("./repoInfo");
 const cacheUtils_1 = require("./cacheUtils");
 const readConfigs_1 = require("./readConfigs");
 const fs_extra_1 = __importDefault(require("fs-extra"));
+const path_1 = __importDefault(require("path"));
 const cacheFileName = 'package-info.json';
 const cachePath = cacheUtils_1.getCachePath(cacheFileName, true);
 function getSerializableRepoPackages(info) {
@@ -51,6 +52,12 @@ function cachePackageInfo(pkgInfo) {
         hash: cacheUtils_1.getRepoHashKey(repo.rootPath),
         packages: getSerializableRepoPackages(pkgInfo)
     };
+    // ensure the directory is created
+    const cacheDir = path_1.default.dirname(cachePath);
+    if (!fs_extra_1.default.pathExistsSync(cacheDir)) {
+        fs_extra_1.default.mkdirpSync(cacheDir);
+    }
+    // now write out the cache file
     fs_extra_1.default.writeFileSync(cachePath, JSON.stringify(toJson, null, 2));
     _packageInfo = pkgInfo;
 }
