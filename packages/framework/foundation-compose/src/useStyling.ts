@@ -13,6 +13,8 @@ export function getOptionsFromObj<TComponent>(obj: any): TComponent | undefined 
   return ((objType === 'object' || objType === 'function') && (obj as IWithComposable<object, TComponent>).__composable) || undefined;
 }
 
+const themeCache = new WeakMap();
+
 /**
  * Get the cache for the given component from the theme, creating it if necessary
  *
@@ -20,8 +22,9 @@ export function getOptionsFromObj<TComponent>(obj: any): TComponent | undefined 
  * @param theme - theme where the cache will be stored
  */
 function _getComponentCache(cacheKey: symbol, theme: ITheme): { [key: string]: ISlotProps } {
-  theme[cacheKey] = theme[cacheKey] || {};
-  return theme[cacheKey];
+  const cache = themeCache.get(theme) || themeCache.set(theme, {}).get(theme);
+  cache[cacheKey] = cache[cacheKey] || {};
+  return cache[cacheKey];
 }
 
 function _getSettingsFromTheme(theme: ITheme, name: string): IComponentSettings {
