@@ -4,7 +4,8 @@ import {
   ICxxException,
   PlatformDefaultsChangedCallback,
   IThemingModuleHelper,
-  IEventEmitter
+  IEventEmitter,
+  PlatformDefaultsChangedArgs
 } from './ThemingModule.types';
 import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
 import { IOfficePalette, paletteFromOfficeColors } from './office';
@@ -55,16 +56,18 @@ function translatePalette(module: IOfficeThemingModule, paletteCache: PaletteCac
 export function createThemingModuleHelper(themingModule?: IOfficeThemingModule, emitter?: IEventEmitter): IThemingModuleHelper {
   themingModule || console.error('No NativeModule for Theming found');
   const paletteCache: PaletteCache = {};
+  let _hostTheme = themingModule.initialHostThemeSetting || '';
   emitter &&
-    emitter.addListener('onPlatformDefaultsChanged', () => {
+    emitter.addListener('onPlatformDefaultsChanged', (args: PlatformDefaultsChangedArgs) => {
+      _hostTheme = args.hostThemeSetting || themingModule.initialHostThemeSetting;
       Object.keys(paletteCache).forEach((key: string) => delete paletteCache[key]);
     });
   return {
     getPlatformDefaults: (themeId?: string) => {
-      return resolvePartialTheme(
-        getBaselinePlatformTheme(),
-        translateOfficeTheme(themingModule, translatePalette(themingModule, paletteCache, themeId))
-      );
+      return resolvePartialTheme(getBaselinePlatformTheme(), {
+        name: _hostTheme,
+        ...translateOfficeTheme(themingModule, translatePalette(themingModule, paletteCache, themeId))
+      });
     },
     getPlatformThemeDefinition: (themeId?: string) => {
       return (_parent: ITheme) => {
