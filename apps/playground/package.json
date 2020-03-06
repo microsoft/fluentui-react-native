@@ -31,7 +31,11 @@
       "*react-native*",
       "*react-native*/**",
       "*metro*",
-      "*metro*/**"
+      "*metro*/**",
+      "*@unimodules*",
+      "*@unimodules*/**",
+      "*expo*",
+      "*expo*/**"
     ]
   },
   "private": true

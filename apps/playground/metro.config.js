@@ -8,10 +8,11 @@
 
 const path = require('path');
 const blacklist = require('metro-config/src/defaults/blacklist');
-const { getPackagePaths, getPackageNames, resolveModule } = require('@uifabricshared/build-native');
+const { resolveModule } = require('@uifabricshared/build-native');
+const { getDependentPackageNames, getDependentPackagePaths, findGitRoot } = require('@uifabricshared/build-native/just-repo-utils');
 
 // Get an array of all packages under repo-root/packages
-const extraNodeModules = getPackageNames().reduce((o, key) => ({ ...o, [key]: require.resolve(key) }), {});
+const extraNodeModules = getDependentPackageNames().reduce((o, key) => ({ ...o, [key]: require.resolve(key) }), {});
 
 // We could generalize the blacklistRE, too, if more packages start depending on 'react-native'.  For now this path is a one off.
 const themingPath = resolveModule('@uifabricshared/theming-react-native');
@@ -22,14 +23,15 @@ module.exports = {
   watchFolders: [
     // Include hoisted modules
     path.resolve(__dirname, '../..', 'node_modules'),
-    ...getPackagePaths()
+    ...getDependentPackagePaths()
   ],
 
   resolver: {
     extraNodeModules,
     blacklistRE: blacklist([
       new RegExp(`${path.resolve(themingPath, 'node_modules/react-native').replace(/[/\\\\]/g, '[/\\\\]')}.*`),
-      new RegExp(`${path.resolve(themedStylsheetPath, 'node_modules/react-native').replace(/[/\\\\]/g, '[/\\\\]')}.*`)
+      new RegExp(`${path.resolve(themedStylsheetPath, 'node_modules/react-native').replace(/[/\\\\]/g, '[/\\\\]')}.*`),
+      new RegExp(`${path.resolve(findGitRoot(), 'node_modules/react-native').replace(/[/\\\\]/g, '[/\\\\]')}.*`),
     ])
     // platforms: ['ios', 'android', 'windesktop', 'windows', 'web', 'macos'],
   },
