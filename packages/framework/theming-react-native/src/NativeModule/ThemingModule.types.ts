@@ -4,7 +4,7 @@ import { IOfficePalette } from './office';
 import { IProcessTheme } from '@uifabricshared/theme-registry';
 
 export type PlatformDefaultsChangedArgs = { hostThemeSetting: string };
-export type PlatformDefaultsChangedCallback = (args: PlatformDefaultsChangedArgs) => void;
+export type PlatformDefaultsChangedCallback = (args?: PlatformDefaultsChangedArgs) => void;
 
 export interface ICxxException {
   message: string;
