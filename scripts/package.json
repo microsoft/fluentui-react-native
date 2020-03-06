@@ -74,6 +74,7 @@
     "jju": "^1.4.0",
     "jscodeshift": "^0.5.0",
     "json-loader": "^0.5.7",
+    "just-repo-utils": "^0.2.0",
     "just-scripts": "0.36.1",
     "metro": "^0.54.0",
     "metro-config": "^0.54.0",

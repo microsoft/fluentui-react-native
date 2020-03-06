@@ -3,13 +3,14 @@
 
 const path = require('path');
 const merge = require('../utils/merge');
-const { getRepoPackageNames } = require('../just-repo-utils');
+const { getPackageInfo } = require('just-repo-utils');
 const { nodeModulesToRoot, resolveModule } = require('../utils/file-paths');
 const { getRNPackage, getAllPlatforms } = require('./platforms');
 
 const moduleFileExtensions = ['ts', 'tsx', 'js', 'jsx', 'json'];
 
 function configureJest(customConfig) {
+  const pkgInfo = getPackageInfo();
   return merge(
     {
       // run tests from the src directory rather than lib
@@ -33,7 +34,7 @@ function configureJest(customConfig) {
       },
 
       // ignore our own packages in node_modules
-      transformIgnorePatterns: getRepoPackageNames().map(pkg => '/node_modules/' + pkg),
+      transformIgnorePatterns: pkgInfo.names().map(pkg => '/node_modules/' + pkg),
 
       // testRegex for which files to consider test files
       testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$',

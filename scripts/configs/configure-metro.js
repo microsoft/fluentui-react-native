@@ -3,7 +3,7 @@
 
 const { resolveModule, resolveFile } = require('../utils/file-paths');
 const { getRNPackage, getAllPlatforms } = require('./platforms');
-const { getDependentPackagePaths } = require('../just-repo-utils');
+const { getPackageInfo } = require('just-repo-utils');
 
 function prepareRegex(blacklistPath) {
   return new RegExp(`${blacklistPath.replace(/[/\\\\]/g, '[/\\\\]')}.*`);
@@ -22,6 +22,7 @@ function configureMetro(options) {
   const rnName = getRNPackage(platform);
   const rnOverride = rnName !== 'react-native' && rnName;
   const rnPlatformPath = (rnOverride && resolveModule(rnOverride)) || rnPath;
+  const dependencies = getPackageInfo().dependencies();
 
   return {
     // WatchFolders is only needed due to the yarn workspace layout of node_modules, we need to watch the symlinked locations separately
@@ -29,7 +30,7 @@ function configureMetro(options) {
       // Include hoisted modules
       path.resolve(__dirname, '../..', 'node_modules'),
       rnPlatformPath,
-      ...getDependentPackagePaths()
+      ...dependencies.paths()
     ],
     serializer: {
       getPolyfills: () => {

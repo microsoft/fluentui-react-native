@@ -1,22 +1,16 @@
 const {
-  getRepoPackageNames,
-  getRepoPackagePaths,
-  getDependentPackageNames,
-  getRepoHashKey,
-  findGitRoot,
-  gitListFiles,
-  gitHashObject
-} = require('./just-repo-utils');
+  getPackageInfo
+} = require('just-repo-utils');
 const fs = require('fs');
 
 function testStuff(strategy) {
   const options = strategy ? { strategy } : {};
   return [
-    getRepoPackageNames(options),
-    getRepoPackagePaths(options),
-    getDependentPackageNames({ ...options, target: '@uifabricshared/foundation-compose' }),
-    getDependentPackageNames({ ...options, target: '@uifabricshared/immutable-merge' }),
-    getDependentPackageNames({ ...options, target: 'foo' })
+    getPackageInfo(options).names(),
+    getPackageInfo(options).paths(),
+    getPackageInfo(options).dependencies({ ...options, target: '@uifabricshared/foundation-compose' }).names(),
+    getPackageInfo(options).dependencies({ ...options, target: '@uifabricshared/immutable-merge' }).names(),
+    getPackageInfo(options).dependencies({ ...options, target: 'foo' }).names()
   ];
 }
 
@@ -30,4 +24,3 @@ function testSet(strategy) {
 testSet('no-cache');
 testSet();
 
-console.log(`Hash is ${getRepoHashKey(findGitRoot())}`);

@@ -1,6 +1,6 @@
 // @ts-check
 
-const { repoInfo, normalizePath, findGitRoot } = require('../just-repo-utils');
+const { findGitRoot, normalizeToUnixPath } = require('just-repo-utils');
 
 ('use strict');
 exports.__esModule = true;
@@ -20,7 +20,7 @@ function nodeModulesToRoot() {
 exports.nodeModulesToRoot = nodeModulesToRoot;
 function queryModule(name, direct) {
   var cur = direct ? path.resolve(require.resolve(name)) : path.resolve(require.resolve(name + '/package.json'), '..');
-  return fs.realpathSync(cur).replace(/\\/g, '/');
+  return normalizeToUnixPath(fs.realpathSync(cur));
 }
 /**
  * Resolve a module to a true, normalized, non-symlink path
