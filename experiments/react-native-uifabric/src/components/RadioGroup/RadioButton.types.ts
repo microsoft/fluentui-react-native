@@ -44,6 +44,6 @@ export type IRadioButtonRenderData = IRenderData<IRadioButtonSlotProps>;
 
 export interface IRadioButtonType {
   props: IRadioButtonProps;
-  //tokens:
+  tokens: IRadioButtonTokens;
   slotProps: IRadioButtonSlotProps;
 }
