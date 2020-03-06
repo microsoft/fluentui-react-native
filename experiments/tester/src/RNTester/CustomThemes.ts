@@ -66,10 +66,11 @@ const caterpillarTheme: IProcessTheme<ITheme, IPartialTheme> = (t: ITheme) => {
     case 'Black':
       return caterpillarBlackTheme;
     case 'Colorful':
+      return caterpillarColorfulTheme;
     case 'White':
     case 'DarkGray':
     default:
-      return caterpillarColorfulTheme;
+      return {}; // same as as the parent `t`.
   }
 };
 
