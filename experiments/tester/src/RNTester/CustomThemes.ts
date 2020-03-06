@@ -37,7 +37,5 @@ const caterpillarTheme: IPartialTheme = {
 export const customRegistry: ThemeRegistry = createPlatformThemeRegistry('TaskPane');
 
 export function registerThemes(): void {
-  customRegistry.setTheme({});
-
   customRegistry.setTheme(caterpillarTheme, 'Caterpillar');
 }

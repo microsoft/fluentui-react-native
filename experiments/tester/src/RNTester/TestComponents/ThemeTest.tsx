@@ -1,26 +1,11 @@
 import * as React from 'react';
 import * as ReactNative from 'react-native';
-import { getHostSettingsWin32, ThemeProvider, useTheme, IThemeDefinition } from '@uifabricshared/theming-react-native';
+import { getHostSettingsWin32, ThemeProvider, useTheme, IThemeDefinition, ThemingModuleHelper } from '@uifabricshared/theming-react-native';
 import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
 import { commonTestStyles } from '../styles';
 import { Button, PrimaryButton, Separator, StealthButton, Text, RadioGroup, RadioButton } from 'react-native-uifabric';
 import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 import { customRegistry } from '../CustomThemes';
-
-const Panel: React.FunctionComponent = () => {
-  const [disabled, setDisabled] = React.useState(false);
-  const onClick = React.useCallback(() => setDisabled(!disabled), [disabled, setDisabled]);
-  const theme = useTheme();
-  return (
-    <ReactNative.View style={[commonTestStyles.viewStyle, commonTestStyles.stackStyle, { backgroundColor: theme.colors.background }]}>
-      <PrimaryButton onClick={onClick} content="Primary Button" disabled={disabled} />
-      <Button onClick={onClick} content="Default Button" disabled={disabled} />
-      <StealthButton onClick={onClick} content="Stealth Button" disabled={disabled} />
-      <Text>This is a text element</Text>
-      <Button onClick={onClick} content="This button has longer text" disabled={disabled} />
-    </ReactNative.View>
-  );
-};
 
 let brand = 'Office';
 
@@ -31,6 +16,7 @@ const brandColors = {
   Outlook: ['#CCE3F5', '#B3D6F2', '#69AFE5', '#2488D8', '#0078D7', '#106EBE', '#1664A7', '#135995']
 };
 
+// This IProcessTheme takes the parent theme and shims in the brand colors selected in the RadioGroup
 const fakeBrandTheme: IThemeDefinition = (theme: ITheme): IPartialTheme => {
   if (brand === 'Office') return {};
 
@@ -53,7 +39,12 @@ const fakeBrandTheme: IThemeDefinition = (theme: ITheme): IPartialTheme => {
   return brandedTheme;
 };
 
-customRegistry.setTheme(fakeBrandTheme, 'BrandedTheme');
+// this applies the shim to the default theme
+customRegistry.setTheme(fakeBrandTheme, 'Default');
+// this registers platform white colors
+customRegistry.setTheme(ThemingModuleHelper.getPlatformThemeDefinition('WhiteColors'), 'RealWhiteColors');
+// this applies the shim to the white colors theme
+customRegistry.setTheme(fakeBrandTheme, 'WhiteColors', 'RealWhiteColors');
 
 const getThemedStyles = themedStyleSheet((theme: ITheme) => ({
   swatch: {
@@ -75,7 +66,14 @@ const getThemedStyles = themedStyleSheet((theme: ITheme) => ({
     fontWeight: theme.typography.weights.medium,
     fontFamily: theme.typography.families.primary,
     marginBottom: 5
-  } as ReactNative.TextStyle
+  } as ReactNative.TextStyle,
+  stackStyle: {
+    borderWidth: 2,
+    borderColor: theme.colors.focusBorder,
+    padding: 12,
+    margin: 8,
+    backgroundColor: theme.colors.background
+  }
 }));
 
 const styles = ReactNative.StyleSheet.create({
@@ -83,8 +81,27 @@ const styles = ReactNative.StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 5
+  },
+  pickerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly'
   }
 });
+
+const Panel: React.FunctionComponent = () => {
+  const [disabled, setDisabled] = React.useState(false);
+  const onClick = React.useCallback(() => setDisabled(!disabled), [disabled, setDisabled]);
+  const themedStyles = getThemedStyles(useTheme());
+  return (
+    <ReactNative.View style={[commonTestStyles.viewStyle, themedStyles.stackStyle]}>
+      <PrimaryButton onClick={onClick} content="Primary Button" disabled={disabled} />
+      <Button onClick={onClick} content="Default Button" disabled={disabled} />
+      <StealthButton onClick={onClick} content="Stealth Button" disabled={disabled} />
+      <Text>This is a text element</Text>
+      <Button onClick={onClick} content="This button has longer text" disabled={disabled} />
+    </ReactNative.View>
+  );
+};
 
 const getSwatchColorStyle = (color: string): ReactNative.ViewStyle => {
   styles[color] = styles[color] || { backgroundColor: color };
@@ -127,9 +144,11 @@ const SwatchList: React.FunctionComponent = () => {
     return <SemanticColor key={name} color={color} name={name} />;
   }, []);
   return (
-    <ReactNative.View style={[commonTestStyles.viewStyle, commonTestStyles.stackStyle]}>
+    <ReactNative.View style={[commonTestStyles.viewStyle]}>
       <Text style={themedStyles.largeStandard}>getHostSettingsWin32(theme: ITheme).palette</Text>
-      <ReactNative.FlatList data={paletteAsArray} renderItem={renderSwatch} />
+      <ReactNative.View style={themedStyles.stackStyle}>
+        <ReactNative.FlatList data={paletteAsArray} renderItem={renderSwatch} />
+      </ReactNative.View>
     </ReactNative.View>
   );
 };
@@ -138,22 +157,39 @@ const ThemeTestInner: React.FunctionComponent = () => {
   const themedStyles = getThemedStyles(useTheme());
   const onAppChange = React.useCallback((app: string) => {
     brand = app;
-    customRegistry.setTheme(fakeBrandTheme, 'BrandedTheme');
+    // Invalidate the DAG children of the shimmed brand colors
+    customRegistry.setTheme(fakeBrandTheme, 'Default');
+    customRegistry.setTheme(fakeBrandTheme, 'WhiteColors', 'RealWhiteColors');
   }, []);
+
+  const [theme, setTheme] = React.useState('Default');
+  const onThemeChange = React.useCallback(
+    (theme: string) => {
+      setTheme(theme);
+    },
+    [theme, setTheme]
+  );
   return (
     <ReactNative.View>
-      <RadioGroup label="Pick App Colors" onChange={onAppChange} defaultSelectedKey="Office">
-        <RadioButton buttonKey="Office" content="Office" />
-        {Object.keys(brandColors).map((app: string) => (
-          <RadioButton key={app} buttonKey={app} content={app} />
-        ))}
-      </RadioGroup>
-      <Text style={themedStyles.extraLargeStandardEmphasis}>Platform Theme</Text>
+      <Text style={themedStyles.extraLargeStandardEmphasis}>Configure Theme</Text>
       <Separator />
-      <Panel />
-      <Text style={themedStyles.extraLargeStandardEmphasis}>Custom JS Theme</Text>
+      <ReactNative.View style={styles.pickerContainer}>
+        <RadioGroup label="Pick App Colors" onChange={onAppChange} defaultSelectedKey="Office">
+          <RadioButton buttonKey="Office" content="Office" />
+          {Object.keys(brandColors).map((app: string) => (
+            <RadioButton key={app} buttonKey={app} content={app} />
+          ))}
+        </RadioGroup>
+        <Separator vertical />
+        <RadioGroup label="Pick Theme" onChange={onThemeChange} defaultSelectedKey="Default">
+          <RadioButton buttonKey="Default" content="Default (GrayB / TaskPane)" />
+          <RadioButton buttonKey="Caterpillar" content="Caterpillar (Custom JS Theme)" />
+          <RadioButton buttonKey="WhiteColors" content="WhiteColors (Platform Theme)" />
+        </RadioGroup>
+      </ReactNative.View>
+      <Text style={themedStyles.extraLargeStandardEmphasis}>{theme + ' Theme'}</Text>
       <Separator />
-      <ThemeProvider theme="Caterpillar">
+      <ThemeProvider theme={theme}>
         <Panel />
       </ThemeProvider>
       <Text style={themedStyles.extraLargeStandardEmphasis}>Host-specific Theme Settings</Text>
@@ -165,7 +201,7 @@ const ThemeTestInner: React.FunctionComponent = () => {
 
 export const ThemeTest: React.FunctionComponent = () => {
   return (
-    <ThemeProvider theme="BrandedTheme">
+    <ThemeProvider theme="Default">
       <ThemeTestInner />
     </ThemeProvider>
   );
