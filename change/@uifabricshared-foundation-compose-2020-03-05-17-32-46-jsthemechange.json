@@ -1,0 +1,9 @@
+{
+  "type": "patch",
+  "comment": "🐛 Use weak map to avoid copying theme cache when resolving child themes",
+  "packageName": "@uifabricshared/foundation-compose",
+  "email": "adrum@microsoft.com",
+  "commit": "38bf48ba799e46649a3d45c19bd2e40372f9f926",
+  "dependentChangeType": "patch",
+  "date": "2020-03-06T01:31:16.152Z"
+}
