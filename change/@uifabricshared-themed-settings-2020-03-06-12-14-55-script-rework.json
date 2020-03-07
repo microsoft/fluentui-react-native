@@ -1,9 +1,0 @@
-{
-  "type": "patch",
-  "comment": "more config fixes",
-  "packageName": "@uifabricshared/themed-settings",
-  "email": "jasonmo@microsoft.com",
-  "commit": "bdb2a853738f6b4819bc388c351599c982ac2790",
-  "dependentChangeType": "patch",
-  "date": "2020-03-06T20:14:41.722Z"
-}
