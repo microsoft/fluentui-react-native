@@ -1,3 +1,3 @@
 module.exports = {
-  ...require('./queryFiles')
+  ...require('./file-paths')
 };

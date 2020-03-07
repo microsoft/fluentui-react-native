@@ -9,6 +9,7 @@
   "main": "lib/index.tsx",
   "scripts": {
     "build": "just-scripts build",
+    "bundle": "just-scripts bundle",
     "just": "just-scripts",
     "clean": "just-scripts clean",
     "code-style": "just-scripts code-style",

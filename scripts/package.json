@@ -18,7 +18,7 @@
   },
   "peerDependencies": {
     "@babel/core": "^7.5.5",
-    "just-scripts": ">=0.28.1"
+    "just-scripts": ">=0.36.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -74,10 +74,12 @@
     "jju": "^1.4.0",
     "jscodeshift": "^0.5.0",
     "json-loader": "^0.5.7",
-    "just-scripts": ">=0.28.1",
+    "just-repo-utils": "^0.2.0",
+    "just-scripts": "0.36.1",
     "metro": "^0.54.0",
     "metro-config": "^0.54.0",
     "metro-react-native-babel-preset": "^0.54.0",
+    "node-glob": "1.2.0",
     "ngrok": "^3.0.1",
     "node-sass": "^4.5.3",
     "p-queue": "^6.0.2",
@@ -95,6 +97,7 @@
     "style-loader": "^0.21.0",
     "ts-jest": "24.0.1",
     "ts-loader": "^6.1.0",
+    "ts-node": "8.6.2",
     "typescript": "3.5.1",
     "webpack": "^4.29.5",
     "webpack-bundle-analyzer": "^3.0.4",

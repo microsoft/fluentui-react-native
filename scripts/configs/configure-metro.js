@@ -1,60 +1,70 @@
 // @ts-check
+'use strict';
+
+const { resolveModule, resolveFile } = require('../utils/file-paths');
+const { getRNPackage, getAllPlatforms } = require('./platforms');
+const { getPackageInfo } = require('just-repo-utils');
 
 function prepareRegex(blacklistPath) {
   return new RegExp(`${blacklistPath.replace(/[/\\\\]/g, '[/\\\\]')}.*`);
 }
 
-module.exports = {
-  configureMetro: function(options) {
-    const { bundleName = 'anonymous', platforms = [] } = options;
-    const win32 = Array.isArray(platforms) ? platforms.find(p => p === 'win32') : platforms === 'win32';
+/**
+ * This configures metro bundling based on the passed in options.
+ *
+ * @param options - metro configuration options
+ */
+function configureMetro(options) {
+  const platform = options && options.platform;
+  const path = require('path');
+  const blacklist = require('metro-config/src/defaults/blacklist');
+  const rnPath = resolveModule('react-native');
+  const rnName = getRNPackage(platform);
+  const rnOverride = rnName !== 'react-native' && rnName;
+  const rnPlatformPath = (rnOverride && resolveModule(rnOverride)) || rnPath;
+  const dependencies = getPackageInfo().dependencies();
 
-    const path = require('path');
-    const { getPackagePaths, resolveModule, resolveFile } = require('../utils/queryFiles');
-    const blacklist = require('metro-config/src/defaults/blacklist');
-    const rnWin32Path = resolveModule('@office-iss/react-native-win32');
-    const rnPath = resolveModule('react-native');
-
-    return {
-      // WatchFolders is only needed due to the yarn workspace layout of node_modules, we need to watch the symlinked locations separately
-      watchFolders: [
-        // Include hoisted modules
-        path.resolve(__dirname, '../..', 'node_modules'),
-        rnWin32Path,
-        ...getPackagePaths()
-      ],
-      serializer: {
-        getPolyfills: () => {
-          return [
-            resolveFile('@office-iss/react-native-win32/Libraries/polyfills/console.js'),
-            resolveFile('@office-iss/react-native-win32/Libraries/polyfills/error-guard.js'),
-            resolveFile('@office-iss/react-native-win32/Libraries/polyfills/Object.es7.js')
-          ];
+  return {
+    // WatchFolders is only needed due to the yarn workspace layout of node_modules, we need to watch the symlinked locations separately
+    watchFolders: [
+      // Include hoisted modules
+      path.resolve(__dirname, '../..', 'node_modules'),
+      rnPlatformPath,
+      ...dependencies.paths()
+    ],
+    serializer: {
+      getPolyfills: () => {
+        return [
+          resolveFile(rnName + '/Libraries/polyfills/console.js'),
+          resolveFile(rnName + '/Libraries/polyfills/error-guard.js'),
+          resolveFile(rnName + '/Libraries/polyfills/Object.es7.js')
+        ];
+      }
+    },
+    resolver: {
+      extraNodeModules: { 'react-native': rnPlatformPath },
+      blacklistRE: blacklist([
+        /node_modules\/react-native\/.*/,
+        /node_modules\/.*\/node_modules\/react-native\/.*/,
+        prepareRegex(rnPath),
+        prepareRegex(rnPlatformPath + '/node_modules/react-native'),
+        prepareRegex(path.resolve('.', 'node_modules/react-native')),
+        prepareRegex(path.resolve('.', 'node_modules/@office-iss/react-native-win32'))
+      ]),
+      hasteImplModulePath: resolveFile(rnName + '/jest/hasteImpl.js'),
+      platforms: getAllPlatforms(),
+      providesModuleNodeModules: [rnName]
+    },
+    transformer: {
+      getTransformOptions: async () => ({
+        transform: {
+          experimentalImportSupport: false,
+          inlineRequires: false
         }
-      },
-      resolver: {
-        extraNodeModules: { 'react-native': rnWin32Path },
-        blacklistRE: blacklist([
-          /node_modules\/react-native\/.*/,
-          /node_modules\/.*\/node_modules\/react-native\/.*/,
-          prepareRegex(rnPath),
-          prepareRegex(rnWin32Path + '/node_modules/react-native'),
-          prepareRegex(path.resolve('.', 'node_modules/react-native')),
-          prepareRegex(path.resolve('.', 'node_modules/@office-iss/react-native-win32'))
-        ]),
-        hasteImplModulePath: resolveFile('@office-iss/react-native-win32/jest/hasteImpl.js'),
-        platforms: ['win32', 'ios', 'android', 'windows', 'web', 'macos'],
-        providesModuleNodeModules: ['@office-iss/react-native-win32']
-      },
-      transformer: {
-        getTransformOptions: async () => ({
-          transform: {
-            experimentalImportSupport: false,
-            inlineRequires: false
-          }
-        })
-      },
-      resetCache: false
-    };
-  }
-};
+      })
+    },
+    resetCache: false
+  };
+}
+
+module.exports.configureMetro = configureMetro;

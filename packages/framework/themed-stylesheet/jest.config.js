@@ -1,2 +1,2 @@
 const { configureReactNativeJest } = require('@uifabricshared/build-native');
-module.exports = configureReactNativeJest('win32');
+module.exports = configureReactNativeJest('android');

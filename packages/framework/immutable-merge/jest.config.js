@@ -1,1 +1,2 @@
-module.exports = require('@uifabricshared/build-native/jest.config');
+const { configureJest } = require('@uifabricshared/build-native');
+module.exports = configureJest();
