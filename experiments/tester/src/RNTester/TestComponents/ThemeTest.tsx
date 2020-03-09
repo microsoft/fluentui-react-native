@@ -48,35 +48,38 @@ customRegistry.setTheme(ThemingModuleHelper.getPlatformThemeDefinition('WhiteCol
 // this applies the shim to the white colors theme
 customRegistry.setTheme(fakeBrandTheme, 'WhiteColors', 'RealWhiteColors');
 
-const getThemedStyles = themedStyleSheet((theme: ITheme) => ({
-  swatch: {
-    width: 80,
-    height: 20,
-    marginRight: 5,
-    borderWidth: 2,
-    borderColor: theme.colors.bodyText
-  },
-  extraLargeStandardEmphasis: {
-    color: theme['host'].palette.TextEmphasis,
-    fontSize: theme.typography.sizes.xxLarge,
-    fontWeight: theme.typography.weights.medium,
-    fontFamily: theme.typography.families.primary
-  } as ReactNative.TextStyle,
-  largeStandard: {
-    color: theme.colors.bodyText,
-    fontSize: theme.typography.sizes.large,
-    fontWeight: theme.typography.weights.medium,
-    fontFamily: theme.typography.families.primary,
-    marginBottom: 5
-  } as ReactNative.TextStyle,
-  stackStyle: {
-    borderWidth: 2,
-    borderColor: theme.colors.focusBorder,
-    padding: 12,
-    margin: 8,
-    backgroundColor: theme.colors.background
-  }
-}));
+const getThemedStyles = themedStyleSheet((theme: ITheme) => {
+  const hostSettings = getHostSettingsWin32(theme);
+  return {
+    swatch: {
+      width: 80,
+      height: 20,
+      marginRight: 5,
+      borderWidth: 2,
+      borderColor: theme.colors.bodyText
+    },
+    extraLargeStandardEmphasis: {
+      color: hostSettings ? hostSettings.palette.TextEmphasis : theme.colors.bodyText,
+      fontSize: theme.typography.sizes.xxLarge,
+      fontWeight: theme.typography.weights.medium,
+      fontFamily: theme.typography.families.primary
+    } as ReactNative.TextStyle,
+    largeStandard: {
+      color: theme.colors.bodyText,
+      fontSize: theme.typography.sizes.large,
+      fontWeight: theme.typography.weights.medium,
+      fontFamily: theme.typography.families.primary,
+      marginBottom: 5
+    } as ReactNative.TextStyle,
+    stackStyle: {
+      borderWidth: 2,
+      borderColor: theme.colors.focusBorder,
+      padding: 12,
+      margin: 8,
+      backgroundColor: theme.colors.background
+    }
+  };
+});
 
 const styles = ReactNative.StyleSheet.create({
   swatchItem: {

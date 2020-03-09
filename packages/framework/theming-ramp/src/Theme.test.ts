@@ -26,7 +26,8 @@ const theme: ITheme = {
         fontFamily: 'primary'
       }
     }
-  }
+  },
+  host: {}
 };
 
 const partialTheme: IPartialTheme = {
