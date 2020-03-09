@@ -18,7 +18,9 @@ const brandColors = {
 
 // This IProcessTheme takes the parent theme and shims in the brand colors selected in the RadioGroup
 const fakeBrandTheme: IThemeDefinition = (theme: ITheme): IPartialTheme => {
-  if (brand === 'Office') return {};
+  if (brand === 'Office') {
+    return {};
+  }
 
   const brandValues = theme.colors.brand.values;
   const brandedTheme = { colors: {}, host: { palette: {} } };
@@ -163,12 +165,6 @@ const ThemeTestInner: React.FunctionComponent = () => {
   }, []);
 
   const [theme, setTheme] = React.useState('Default');
-  const onThemeChange = React.useCallback(
-    (theme: string) => {
-      setTheme(theme);
-    },
-    [theme, setTheme]
-  );
   return (
     <ReactNative.View>
       <Text style={themedStyles.extraLargeStandardEmphasis}>Configure Theme</Text>
@@ -181,7 +177,7 @@ const ThemeTestInner: React.FunctionComponent = () => {
           ))}
         </RadioGroup>
         <Separator vertical />
-        <RadioGroup label="Pick Theme" onChange={onThemeChange} defaultSelectedKey="Default">
+        <RadioGroup label="Pick Theme" onChange={setTheme} defaultSelectedKey="Default">
           <RadioButton buttonKey="Default" content="Default (GrayB / TaskPane)" />
           <RadioButton buttonKey="Caterpillar" content="Caterpillar (Custom JS Theme)" />
           <RadioButton buttonKey="WhiteColors" content="WhiteColors (Platform Theme)" />
