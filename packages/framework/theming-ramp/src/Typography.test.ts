@@ -1,4 +1,4 @@
-import { IFontFamilies, IFontSizes, IFontWeights, ITypography } from './Typography.types';
+import { IFontFamilies, IFontSizes, IFontWeights, IFontVariants, ITypography } from './Typography.types';
 import { resolveFontFamily, resolveFontSize, resolveFontWeight } from './Typography';
 
 const families = {
@@ -16,10 +16,19 @@ const weights = {
   semiBold: '700'
 } as IFontWeights;
 
+const variants = {
+  mediumStandard: {
+    face: 'Verdana',
+    size: 12,
+    weight: '400'
+  }
+} as IFontVariants;
+
 const typography: ITypography = {
   families,
   sizes,
-  weights
+  weights,
+  variants
 };
 
 describe('Typography tests', () => {

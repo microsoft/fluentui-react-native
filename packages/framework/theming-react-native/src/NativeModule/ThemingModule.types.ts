@@ -2,6 +2,7 @@ import { ITypography, ColorValue } from '@uifabricshared/theming-ramp';
 import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 import { IOfficePalette } from './office';
 import { IProcessTheme } from '@uifabricshared/theme-registry';
+declare type Omit<T, K> = Pick<T, Exclude<keyof T, keyof K>>;
 
 export type PlatformDefaultsChangedCallback = () => void;
 
@@ -19,7 +20,7 @@ export interface INativeColorRamps {
 
 export interface IOfficeThemingModule {
   getPalette(palette?: string): IOfficePalette | ICxxException;
-  typography: ITypography;
+  typography: Omit<ITypography, 'variants'>;
   ramps: INativeColorRamps;
 }
 

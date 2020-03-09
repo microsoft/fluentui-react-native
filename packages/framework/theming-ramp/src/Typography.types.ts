@@ -97,6 +97,42 @@ export interface IFontWeights {
 export type FontWeight = keyof IFontWeights | FontWeightValue;
 
 /**
+ * A font variant value.
+ *
+ * Smaller numbers yield a thinner, lighter font. Larger numbers yield a thicker, farker
+ * font.
+ */
+export type FontVariantValue = {
+  face: FontFamilyValue;
+  size: FontSizeValuePoints;
+  weight: FontWeightValue;
+};
+
+/**
+ * A collection of named font variants.
+ */
+export interface IFontVariants {
+  smallStandard: FontVariantValue;
+  mediumStandard: FontVariantValue;
+  mediumSemibold: FontVariantValue;
+  largeStandard: FontVariantValue;
+  largeSemibold: FontVariantValue;
+  extraLargeStandard: FontVariantValue;
+  extraLargeSemibold: FontVariantValue;
+  extraLargeBold: FontVariantValue;
+  hugeStandard: FontVariantValue;
+  hugeSemibold: FontVariantValue;
+  hugeBold: FontVariantValue;
+  giantStandard: FontVariantValue;
+  giantSemibold: FontVariantValue;
+}
+
+/**
+ * A font variant, used when defining a visual element in a theme.
+ */
+export type FontVariant = keyof IFontVariants | FontVariantValue;
+
+/**
  * A collection of typographic (font) information.
  *
  * When setting a font in a theme, choose a family, size and weight from
@@ -106,6 +142,7 @@ export interface ITypography {
   families: IFontFamilies;
   sizes: IFontSizes;
   weights: IFontWeights;
+  variants: IFontVariants;
 }
 
 /**

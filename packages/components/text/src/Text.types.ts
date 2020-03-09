@@ -1,4 +1,4 @@
-import { ITextTokens, IForegroundColorTokens } from '@fluentui-native/tokens';
+import { ITextTokens, IForegroundColorTokens, IColorTokens } from '@fluentui-native/tokens';
 import { ITextProps as INativeTextProps } from '@fluentui-native/adapters';
 
 export const textName = 'RNFText';
@@ -14,6 +14,7 @@ export type ITextProps<TBase = INativeTextProps> = TBase &
 
 export type ITextType<TBase = INativeTextProps> = {
   props: ITextProps<TBase>;
+  tokens: ITextTokens & IColorTokens;
   slotProps: {
     root: TBase;
   };

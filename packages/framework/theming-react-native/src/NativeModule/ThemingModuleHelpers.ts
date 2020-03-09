@@ -9,6 +9,8 @@ import {
 import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
 import { IOfficePalette, paletteFromOfficeColors } from './office';
 import { useFakePalette } from './useFakePalette';
+import { IPartialTheme } from '../Theme.types';
+import { getDefaultVariants } from '../../../../framework/theming-react-native/src/BaselinePlatformDefaults';
 
 const createColorRamp = ({ values, index = -1 }: Partial<IColorRamp>) => ({
   values,
@@ -18,7 +20,7 @@ const createColorRamp = ({ values, index = -1 }: Partial<IColorRamp>) => ({
   }
 });
 
-export function translateOfficeTheme(module: IOfficeThemingModule, palette: IPartialPalette) {
+export function translateOfficeTheme(module: IOfficeThemingModule, palette: IPartialPalette): IPartialTheme {
   return {
     colors: {
       brand: createColorRamp({ values: module.ramps.App }),
@@ -27,7 +29,10 @@ export function translateOfficeTheme(module: IOfficeThemingModule, palette: IPar
       neutrals2: createColorRamp({ values: module.ramps.ClassicGrays }),
       ...palette
     },
-    typography: module.typography
+    typography: {
+      ...module.typography,
+      variants: getDefaultVariants()
+    }
   };
 }
 

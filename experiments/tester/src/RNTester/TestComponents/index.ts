@@ -3,6 +3,7 @@ import { ButtonFocusTest } from './ButtonFocusTest';
 import { PressableTest } from './PressableTest';
 import { LinkTest } from './LinkTest.win32';
 import { SeparatorTest } from './SeparatorTest';
+import { TextTest } from './Text/TextTest';
 import { ThemeTest } from './ThemeTest';
 import { FocusTrapTest } from './FocusTrapZoneTest';
 import { PersonaCoinTest } from './PersonaCoin/PersonaCoinTest';
@@ -33,6 +34,10 @@ export const allTestComponents: TestDescription[] = [
   {
     name: 'Separator Test',
     component: SeparatorTest
+  },
+  {
+    name: 'Text Test',
+    component: TextTest
   },
   {
     name: 'Theme Test',

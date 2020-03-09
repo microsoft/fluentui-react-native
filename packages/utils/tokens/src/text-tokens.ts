@@ -1,15 +1,34 @@
-import { TextStyle } from 'react-native';
-import { IOperationSet } from '@uifabricshared/foundation-tokens';
+import { TextStyle, TextProps } from 'react-native';
 import { ITheme } from '@uifabricshared/theming-ramp';
+import { styleFunction } from '@uifabricshared/foundation-tokens';
 
 export interface ITextTokens {
   fontFamily?: TextStyle['fontFamily'] | string;
   fontSize?: TextStyle['fontSize'] | string;
   fontWeight?: TextStyle['fontWeight'] | string;
+  fontVariant?: string;
 }
 
-export const textTokens: IOperationSet<ITextTokens, ITheme> = [
-  { source: 'fontFamily', lookup: (t: ITheme) => t.typography.families },
-  { source: 'fontSize', lookup: (t: ITheme) => t.typography.sizes },
-  { source: 'fontWeight', lookup: (t: ITheme) => t.typography.weights }
-];
+export function _buildTextStyles(tokens: ITextTokens, theme: ITheme): TextProps {
+  if (tokens.fontFamily || tokens.fontSize || tokens.fontWeight || tokens.fontVariant) {
+    return {
+      style: {
+        fontFamily: tokens.fontFamily
+          ? theme.typography.families[tokens.fontFamily] || tokens.fontFamily
+          : theme.typography.variants[tokens.fontVariant].face,
+        fontSize: tokens.fontSize
+          ? theme.typography.sizes[tokens.fontSize] || tokens.fontSize
+          : theme.typography.variants[tokens.fontVariant].size,
+        fontWeight: tokens.fontWeight
+          ? theme.typography.weights[tokens.fontWeight] || tokens.fontWeight
+          : theme.typography.variants[tokens.fontVariant].weight
+      }
+    };
+  }
+
+  return {};
+}
+
+const _keyProps: (keyof ITextTokens)[] = ['fontFamily', 'fontSize', 'fontWeight', 'fontVariant'];
+
+export const textTokens = styleFunction<TextProps, ITextTokens, ITheme>(_buildTextStyles, _keyProps);
