@@ -18,6 +18,7 @@
     "@uifabricshared/foundation-compose": "^1.5.6",
     "@fluentui-native/adapters": "^0.1.0",
     "@fluentui-native/interactive-hooks": "^0.1.0",
+    "@fluentui-native/text": "^0.1.0",
     "@fluentui-native/tokens": "^0.1.0"
   },
   "devDependencies": {
