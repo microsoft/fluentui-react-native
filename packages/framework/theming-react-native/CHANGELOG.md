@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Fri, 28 Feb 2020 00:04:18 GMT and should not be manually modified.
+This log was last generated on Fri, 06 Mar 2020 19:46:35 GMT and should not be manually modified.
 
+## 0.4.0
+Fri, 06 Mar 2020 19:46:35 GMT
+
+### Minor changes
+
+- 🎨 Create host settings in theme object for direct access to native colors (adrum@microsoft.com)
 ## 0.3.4
 Fri, 28 Feb 2020 00:04:18 GMT
 

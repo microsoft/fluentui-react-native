@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/theme-registry
 
-This log was last generated on Thu, 20 Feb 2020 01:36:35 GMT and should not be manually modified.
+This log was last generated on Sat, 07 Mar 2020 00:42:50 GMT and should not be manually modified.
 
+## 0.2.4
+Sat, 07 Mar 2020 00:42:50 GMT
+
+### Patches
+
+- more config fixes (jasonmo@microsoft.com)
 ## 0.2.3
 Thu, 20 Feb 2020 01:36:35 GMT
 

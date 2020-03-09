@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Sat, 07 Mar 2020 00:42:50 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.5.5",
+      "version": "0.5.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "more config fixes",
+            "author": "jasonmo@microsoft.com",
+            "commit": "bdb2a853738f6b4819bc388c351599c982ac2790"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Feb 2020 00:04:18 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.5.4",
       "version": "0.5.4",

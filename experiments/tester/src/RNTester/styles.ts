@@ -20,6 +20,8 @@ export const commonTestStyles = ReactNative.StyleSheet.create({
 
 export const fabricTesterStyles = ReactNative.StyleSheet.create({
   root: {
+    flex: 1,
+    flexGrow: 1,
     flexDirection: 'row',
     minHeight: 550,
     minWidth: 300,

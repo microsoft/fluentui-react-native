@@ -2,6 +2,20 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Sat, 07 Mar 2020 00:42:50 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.4.4",
+      "version": "0.4.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "more config fixes",
+            "author": "jasonmo@microsoft.com",
+            "commit": "bdb2a853738f6b4819bc388c351599c982ac2790"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 20 Feb 2020 01:36:35 GMT",
       "tag": "@uifabricshared/foundation-tokens_v0.4.3",
       "version": "0.4.3",

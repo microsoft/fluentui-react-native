@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Fri, 06 Mar 2020 19:46:35 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "🎨 Create host settings in theme object for direct access to native colors",
+            "author": "adrum@microsoft.com",
+            "commit": "bd89c1fdc283b80bdfaec69fc43164a845bbc48f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Feb 2020 00:04:18 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.3.4",
       "version": "0.3.4",

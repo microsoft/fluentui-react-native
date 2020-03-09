@@ -20,13 +20,14 @@
     "run-win32-devmain": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useDevMain --useWebDebugger --windowTitle \"FluentUI Tester\" --pluginProps"
   },
   "dependencies": {
-    "@uifabricshared/foundation-composable": "0.5.5",
-    "@uifabricshared/foundation-compose": "1.5.4",
-    "@uifabricshared/foundation-settings": "0.4.4",
-    "@uifabricshared/foundation-tokens": "0.4.3",
-    "@uifabricshared/immutable-merge": "0.2.3",
-    "@uifabricshared/theming-ramp": "0.5.4",
-    "@uifabricshared/theming-react-native": "0.3.4",
+    "@uifabricshared/foundation-composable": "0.5.6",
+    "@uifabricshared/foundation-compose": "1.5.6",
+    "@uifabricshared/foundation-settings": "0.4.5",
+    "@uifabricshared/foundation-tokens": "0.4.4",
+    "@uifabricshared/immutable-merge": "0.3.0",
+    "@uifabricshared/theming-ramp": "0.5.5",
+    "@uifabricshared/theming-react-native": "0.4.1",
+    "@uifabricshared/themed-stylesheet": "0.2.7",
     "react-native-uifabric": "0.12.10",
     "tslib": "^1.9.3"
   },
