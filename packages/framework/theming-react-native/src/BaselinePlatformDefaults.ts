@@ -1,6 +1,5 @@
 import { ITheme } from './Theme.types';
-import { getStockWebPalette, ITypography, ISpacing } from '@uifabricshared/theming-ramp';
-import { IFontVariants } from '../../../framework/theming-ramp/src/Typography.types';
+import { getStockWebPalette, ITypography, ISpacing, IFontVariants } from '@uifabricshared/theming-ramp';
 
 export function getDefaultVariants(): IFontVariants {
   return {

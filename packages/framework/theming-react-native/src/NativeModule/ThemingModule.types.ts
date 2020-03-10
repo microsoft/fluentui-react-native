@@ -2,7 +2,7 @@ import { ITypography, ColorValue } from '@uifabricshared/theming-ramp';
 import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 import { IOfficePalette } from './office';
 import { IProcessTheme } from '@uifabricshared/theme-registry';
-declare type Omit<T, K> = Pick<T, Exclude<keyof T, keyof K>>;
+import { Omit } from '../TSUtils';
 
 export type PlatformDefaultsChangedCallback = () => void;
 

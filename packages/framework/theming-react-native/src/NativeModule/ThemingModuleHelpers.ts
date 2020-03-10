@@ -6,10 +6,9 @@ import {
   IThemingModuleHelper,
   IEventEmitter
 } from './ThemingModule.types';
-import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
+import { getBaselinePlatformTheme, getDefaultVariants } from '../BaselinePlatformDefaults';
 import { IOfficePalette, paletteFromOfficeColors } from './office';
 import { useFakePalette } from './useFakePalette';
-import { getDefaultVariants } from '../../../../framework/theming-react-native/src/BaselinePlatformDefaults';
 
 const createColorRamp = ({ values, index = -1 }: Partial<IColorRamp>) => ({
   values,
