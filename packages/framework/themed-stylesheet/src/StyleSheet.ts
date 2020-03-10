@@ -13,12 +13,7 @@ function getCacheEntry<TStyles extends INamedStyles<TStyles>, TTheme extends obj
   map: WeakMap<TTheme, IWithStyle<TStyles>>,
   theme: TTheme
 ): IWithStyle<TStyles> {
-  let cache = map.get(theme);
-  if (!cache) {
-    cache = {};
-    map.set(theme, cache);
-  }
-  return cache;
+  return map.get(theme) || map.set(theme, {}).get(theme);
 }
 
 /**

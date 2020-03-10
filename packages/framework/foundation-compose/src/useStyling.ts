@@ -24,12 +24,7 @@ function _buildGetComponentCache(): IGetComponentCache {
   const nullTheme = {} as ITheme;
   return (theme: ITheme) => {
     theme = theme || nullTheme;
-    let cacheEntry = weakMap.get(theme);
-    if (!cacheEntry) {
-      cacheEntry = {};
-      weakMap.set(theme, cacheEntry);
-    }
-    return cacheEntry;
+    return weakMap.get(theme) || weakMap.set(theme, {}).get(theme);
   };
 }
 
