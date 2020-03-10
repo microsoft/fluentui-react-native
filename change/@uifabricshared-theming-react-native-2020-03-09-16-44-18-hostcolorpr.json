@@ -1,0 +1,9 @@
+{
+  "type": "patch",
+  "comment": "Add host to theme object typing",
+  "packageName": "@uifabricshared/theming-react-native",
+  "email": "adrum@microsoft.com",
+  "commit": "f5dfe0411c65df116b53d874d369d28eab555152",
+  "dependentChangeType": "patch",
+  "date": "2020-03-09T23:44:18.945Z"
+}
