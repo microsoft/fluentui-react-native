@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Fri, 28 Feb 2020 00:04:18 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Mar 2020 22:28:00 GMT and should not be manually modified.
 
+## 1.5.7
+Tue, 10 Mar 2020 22:28:00 GMT
+
+### Patches
+
+- switch symbol based caching to use WeakMaps (jasonmo@microsoft.com)
 ## 1.5.4
 Fri, 28 Feb 2020 00:04:18 GMT
 
