@@ -1,23 +1,5 @@
 import { ITheme } from './Theme.types';
-import { getStockWebPalette, ITypography, ISpacing, IFontVariants } from '@uifabricshared/theming-ramp';
-
-export function getDefaultVariants(): IFontVariants {
-  return {
-    smallStandard: { face: 'Segoe UI', size: 11, weight: '500' },
-    mediumStandard: { face: 'Segoe UI', size: 12, weight: '500' },
-    mediumSemibold: { face: 'Segoe UI', size: 12, weight: '700' },
-    largeStandard: { face: 'Segoe UI', size: 14, weight: '500' },
-    largeSemibold: { face: 'Segoe UI', size: 14, weight: '700' },
-    extraLargeStandard: { face: 'Segoe UI', size: 18, weight: '500' },
-    extraLargeSemibold: { face: 'Segoe UI', size: 18, weight: '700' },
-    extraLargeBold: { face: 'Segoe UI', size: 18, weight: '900' },
-    hugeStandard: { face: 'Segoe UI', size: 24, weight: '500' },
-    hugeSemibold: { face: 'Segoe UI', size: 24, weight: '700' },
-    hugeBold: { face: 'Segoe UI', size: 24, weight: '900' },
-    giantStandard: { face: 'Segoe UI', size: 32, weight: '500' },
-    giantSemibold: { face: 'Segoe UI', size: 32, weight: '700' }
-  };
-}
+import { getStockWebPalette, ITypography, ISpacing } from '@uifabricshared/theming-ramp';
 
 function _defaultTypography(): ITypography {
   return {
@@ -47,7 +29,21 @@ function _defaultTypography(): ITypography {
       sansSerif: 'System',
       serif: 'System'
     },
-    variants: getDefaultVariants()
+    variants: {
+      smallStandard: { face: 'Segoe UI', size: 11, weight: '500' },
+      mediumStandard: { face: 'Segoe UI', size: 12, weight: '500' },
+      mediumSemibold: { face: 'Segoe UI', size: 12, weight: '700' },
+      largeStandard: { face: 'Segoe UI', size: 14, weight: '500' },
+      largeSemibold: { face: 'Segoe UI', size: 14, weight: '700' },
+      extraLargeStandard: { face: 'Segoe UI', size: 18, weight: '500' },
+      extraLargeSemibold: { face: 'Segoe UI', size: 18, weight: '700' },
+      extraLargeBold: { face: 'Segoe UI', size: 18, weight: '900' },
+      hugeStandard: { face: 'Segoe UI', size: 24, weight: '500' },
+      hugeSemibold: { face: 'Segoe UI', size: 24, weight: '700' },
+      hugeBold: { face: 'Segoe UI', size: 24, weight: '900' },
+      giantStandard: { face: 'Segoe UI', size: 32, weight: '500' },
+      giantSemibold: { face: 'Segoe UI', size: 32, weight: '700' }
+    }
   };
 }
 
