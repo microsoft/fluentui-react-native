@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Wed, 11 Mar 2020 17:57:52 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.4.3",
+      "version": "0.4.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "🎨 Add the ability to respond to host theme change",
+            "author": "adrum@microsoft.com",
+            "commit": "38bf48ba799e46649a3d45c19bd2e40372f9f926"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 11 Mar 2020 00:02:33 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.4.2",
       "version": "0.4.2",

@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Wed, 11 Mar 2020 00:02:33 GMT and should not be manually modified.
+This log was last generated on Wed, 11 Mar 2020 17:57:52 GMT and should not be manually modified.
 
+## 0.6.0
+Wed, 11 Mar 2020 17:57:52 GMT
+
+### Minor changes
+
+- 🎨 Add host theme setting to theme for JS theme authors (adrum@microsoft.com)
 ## 0.5.6
 Wed, 11 Mar 2020 00:02:33 GMT
 

@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Tue, 10 Mar 2020 22:28:00 GMT and should not be manually modified.
+This log was last generated on Wed, 11 Mar 2020 17:57:52 GMT and should not be manually modified.
 
+## 1.5.9
+Wed, 11 Mar 2020 17:57:52 GMT
+
+### Patches
+
+- 🐛 Use weak map to avoid copying theme cache when resolving child themes (adrum@microsoft.com)
 ## 1.5.7
 Tue, 10 Mar 2020 22:28:00 GMT
 

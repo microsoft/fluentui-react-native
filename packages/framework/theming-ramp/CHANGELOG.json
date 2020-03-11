@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Wed, 11 Mar 2020 17:57:52 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "🎨 Add host theme setting to theme for JS theme authors",
+            "author": "adrum@microsoft.com",
+            "commit": "38bf48ba799e46649a3d45c19bd2e40372f9f926"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 11 Mar 2020 00:02:33 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.5.6",
       "version": "0.5.6",
