@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Sat, 07 Mar 2020 00:42:50 GMT and should not be manually modified.
+This log was last generated on Wed, 11 Mar 2020 00:02:33 GMT and should not be manually modified.
 
+## 0.5.6
+Wed, 11 Mar 2020 00:02:33 GMT
+
+### Patches
+
+- 👌 Code review comment from Jason (adrum@microsoft.com)
 ## 0.5.5
 Sat, 07 Mar 2020 00:42:50 GMT
 

@@ -2,6 +2,20 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Wed, 11 Mar 2020 00:02:33 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.4.2",
+      "version": "0.4.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add host to theme object typing",
+            "author": "adrum@microsoft.com",
+            "commit": "f5dfe0411c65df116b53d874d369d28eab555152"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 06 Mar 2020 19:46:35 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.4.0",
       "version": "0.4.0",
