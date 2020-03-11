@@ -1,19 +1,20 @@
 import { ViewStyle, TextStyle, ImageStyle, StyleSheet } from 'react-native';
 
-/**
- * Style sheets will be cached in the theme itself under a unique symbol value.  Note that the requirement
- * here is that if theme values (such as colors) change, a new theme object will be created.
- *
- * This uses a symbol to avoid conflicts.  This also ensures that when the theme is copied via assign or spread
- * the cache values don't come with it.
- */
-const _keyForSheetsInTheme = Symbol('StyleSheets');
+type IWithStyle<TStyles extends INamedStyles<TStyles>> = {
+  styles?: INamedStyles<TStyles>;
+};
 
 /**
- * If a user has a system where there may or may not be a theme then this is a fallback cache to create
- * style sheets and cache them for the no-theme case
+ * Retrieve or create/set a cache value corresponding to this theme
+ * @param map - WeakMap to use for value lookups
+ * @param theme - theme to use as the key into the map
  */
-const _cacheForNoTheme = {};
+function getCacheEntry<TStyles extends INamedStyles<TStyles>, TTheme extends object>(
+  map: WeakMap<TTheme, IWithStyle<TStyles>>,
+  theme: TTheme
+): IWithStyle<TStyles> {
+  return map.get(theme) || map.set(theme, {}).get(theme);
+}
 
 /**
  * Signature for inputs and outputs for StyleSheet.create.  This is a collection of named styles which can
@@ -49,13 +50,14 @@ export type INamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageSty
  *
  * @param generator - a function which will get run once per theme to create a cached style sheet.
  */
-export function themedStyleSheet<TStyles extends INamedStyles<TStyles>, TTheme>(
+export function themedStyleSheet<TStyles extends INamedStyles<TStyles>, TTheme extends object>(
   generator: (theme: TTheme) => INamedStyles<TStyles>
 ): (theme: TTheme) => INamedStyles<TStyles> {
-  const _keyForThisSheet = Symbol();
+  const noTheme = {} as TTheme;
+  const themeMap = new WeakMap<TTheme, object>();
   return (theme: TTheme) => {
-    const cache = theme ? (theme[_keyForSheetsInTheme] = theme[_keyForSheetsInTheme] || {}) : _cacheForNoTheme;
-    cache[_keyForThisSheet] = cache[_keyForThisSheet] || StyleSheet.create(generator(theme));
-    return cache[_keyForThisSheet];
+    const cache = getCacheEntry<TStyles, TTheme>(themeMap, theme || noTheme);
+    cache.styles = cache.styles || StyleSheet.create(generator(theme));
+    return cache.styles;
   };
 }

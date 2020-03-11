@@ -43,3 +43,7 @@ export interface IThemingModuleHelper {
   getPlatformThemeDefinition: (themeId?: string) => IPlatformThemeDefinition;
   addListener: (listener: PlatformDefaultsChangedCallback) => void; // TODO: Should probably be able to remove
 }
+
+export type IHostSettingsWin32 = {
+  palette: IOfficePalette;
+};

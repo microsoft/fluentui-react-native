@@ -15,8 +15,8 @@
     "update-api": "just-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-tokens": "^0.4.3",
-    "@uifabricshared/theming-ramp": "^0.5.4"
+    "@uifabricshared/foundation-tokens": "^0.4.4",
+    "@uifabricshared/theming-ramp": "^0.5.5"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.27.3",

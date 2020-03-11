@@ -1,7 +1,19 @@
 # Change Log - @uifabricshared/themed-stylesheet
 
-This log was last generated on Fri, 28 Feb 2020 00:04:18 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Mar 2020 22:28:00 GMT and should not be manually modified.
 
+## 0.2.8
+Tue, 10 Mar 2020 22:28:00 GMT
+
+### Patches
+
+- switch symbol based caching to use WeakMaps (jasonmo@microsoft.com)
+## 0.2.7
+Sat, 07 Mar 2020 00:42:50 GMT
+
+### Patches
+
+- fix broken react-native jest configurations (jasonmo@microsoft.com)
 ## 0.2.6
 Fri, 28 Feb 2020 00:04:18 GMT
 

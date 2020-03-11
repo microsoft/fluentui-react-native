@@ -13,18 +13,19 @@ export function getOptionsFromObj<TComponent>(obj: any): TComponent | undefined 
   return ((objType === 'object' || objType === 'function') && (obj as IWithComposable<object, TComponent>).__composable) || undefined;
 }
 
-const themeCache = new WeakMap();
+interface ICacheEntry {
+  [key: string]: ISlotProps;
+}
 
-/**
- * Get the cache for the given component from the theme, creating it if necessary
- *
- * @param component - component to get the cache for, the component object itself will store the unique symbol for its lookups
- * @param theme - theme where the cache will be stored
- */
-function _getComponentCache(cacheKey: symbol, theme: ITheme): { [key: string]: ISlotProps } {
-  const cache = themeCache.get(theme) || themeCache.set(theme, {}).get(theme);
-  cache[cacheKey] = cache[cacheKey] || {};
-  return cache[cacheKey];
+type IGetComponentCache = (theme: ITheme) => ICacheEntry;
+
+function _buildGetComponentCache(): IGetComponentCache {
+  const weakMap = new WeakMap<ITheme, ICacheEntry>();
+  const nullTheme = {} as ITheme;
+  return (theme: ITheme) => {
+    theme = theme || nullTheme;
+    return weakMap.get(theme) || weakMap.set(theme, {}).get(theme);
+  };
 }
 
 function _getSettingsFromTheme(theme: ITheme, name: string): IComponentSettings {
@@ -46,25 +47,17 @@ function _getHasToken<TProps, TSlotProps extends ISlotProps, TTokens extends obj
   };
 }
 
-function _nameFromSettings<TSlotProps extends ISlotProps, TTokens extends object>(
-  styleSettings: IStylingSettings<TSlotProps, TTokens>
-): string | undefined {
-  const settings = styleSettings.settings;
-  const names: string[] = settings.filter(v => typeof v === 'string').map(v => v as string);
-  return names && names.length > 0 ? names.join('-') : undefined;
-}
-
 function useStylingCore<TProps, TSlotProps extends ISlotProps, TTokens extends object>(
   props: TProps,
   options: IStylingSettings<TSlotProps, TTokens>,
   baseKey: string,
-  tokenCacheKey: symbol,
+  getComponentCache: IGetComponentCache,
   lookupOverride?: IOverrideLookup
 ): IWithTokens<TSlotProps, TTokens> {
   // get the theme value from the context (or the default theme if it is not set)
   const theme = React.useContext(ThemeContext) || getTheme();
   // get the cache for this component from the theme
-  const cache = _getComponentCache(tokenCacheKey, theme);
+  const cache = getComponentCache(theme);
 
   // resolve the array of settings for these options
   lookupOverride = lookupOverride || props;
@@ -104,12 +97,8 @@ export function initializeStyling<
   const { styles, slots } = options;
   options.resolvedTokens = buildComponentTokens<TSlotProps, TTokens, ITheme>(styles, _getHasToken(slots));
 
-  // ensure we have a name to use for caching.  Try to pull something identifiable to help with debugging
-  name = name || _nameFromSettings(options) || 'anonymous';
-  const tokenCacheKey = Symbol(name);
-
   // create a useStyling implementation for this component type (per type, not per instance)
   return (props: TProps, lookupOverride?: IOverrideLookup) => {
-    return useStylingCore<TProps, TSlotProps, TTokens>(props, options, name, tokenCacheKey, lookupOverride);
+    return useStylingCore<TProps, TSlotProps, TTokens>(props, options, name, _buildGetComponentCache(), lookupOverride);
   };
 }

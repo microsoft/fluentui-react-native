@@ -4,7 +4,7 @@ import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-native/text';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 import { ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-native/tokens';
-import { IPressableProps } from '../Pressable/Pressable.props';
+import { IPressableProps } from '@fluentui-native/pressable';
 
 export const radioButtonName = 'RadioButton';
 
@@ -44,6 +44,6 @@ export type IRadioButtonRenderData = IRenderData<IRadioButtonSlotProps>;
 
 export interface IRadioButtonType {
   props: IRadioButtonProps;
-  //tokens:
+  tokens: IRadioButtonTokens;
   slotProps: IRadioButtonSlotProps;
 }

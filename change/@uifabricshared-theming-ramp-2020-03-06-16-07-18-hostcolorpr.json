@@ -1,0 +1,9 @@
+{
+  "type": "patch",
+  "comment": "👌 Code review comment from Jason",
+  "packageName": "@uifabricshared/theming-ramp",
+  "email": "adrum@microsoft.com",
+  "commit": "a91c6c46970dd8273f5a08115cab2941b0c6fbf7",
+  "dependentChangeType": "patch",
+  "date": "2020-03-07T00:07:18.865Z"
+}

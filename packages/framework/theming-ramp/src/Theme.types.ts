@@ -19,6 +19,7 @@ export interface ITheme {
   typography: ITypography;
   components: IComponentSettingsCollection;
   spacing: ISpacing;
+  host: object; // platform specific host settings
 }
 
 /**
@@ -32,4 +33,5 @@ export interface IPartialTheme {
   typography?: IPartialTypography;
   components?: IComponentSettingsCollection;
   spacing?: ISpacing;
+  host?: object;
 }

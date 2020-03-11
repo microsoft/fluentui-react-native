@@ -1,0 +1,34 @@
+{
+  "name": "@fluentui-native/separator",
+  "version": "0.1.0",
+  "description": "A cross-platform opinionated Fluent Text component",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "private": true,
+  "scripts": {
+    "build": "just-scripts build",
+    "just": "just-scripts",
+    "clean": "just-scripts clean",
+    "update-snapshots": "just-scripts jest -u",
+    "verify-api": "just-scripts verify-api-extractor",
+    "update-api": "just-scripts update-api-extractor"
+  },
+  "dependencies": {
+    "@uifabricshared/foundation-compose": "^1.5.7",
+    "@fluentui-native/adapters": "^0.1.0",
+    "@fluentui-native/tokens": "^0.1.0"
+  },
+  "devDependencies": {
+    "@office-iss/react-native-win32": "0.27.3",
+    "@types/react-native": "^0.60.0",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "react-native": "^0.60.0"
+  },
+  "peerDependencies": {
+    "react-native": "^0.59.0"
+  },
+  "author": "",
+  "license": "MIT"
+}

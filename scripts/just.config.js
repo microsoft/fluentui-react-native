@@ -63,6 +63,7 @@ module.exports = function preset() {
   );
 
   task('validate', parallel('eslint', condition('jest', () => fileExists(path.join(process.cwd(), 'jest.config.js')))));
+
   task('code-style', series('prettier', 'eslint'));
   task('update-api', series('clean', 'copy', 'ts', 'update-api-extractor'));
   task('dev', series('clean', 'copy', 'webpack-dev-server'));
