@@ -3,7 +3,8 @@ import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 import { IOfficePalette } from './office';
 import { IProcessTheme } from '@uifabricshared/theme-registry';
 
-export type PlatformDefaultsChangedCallback = () => void;
+export type PlatformDefaultsChangedArgs = { hostThemeSetting: string };
+export type PlatformDefaultsChangedCallback = (args?: PlatformDefaultsChangedArgs) => void;
 
 export interface ICxxException {
   message: string;
@@ -21,6 +22,7 @@ export interface IOfficeThemingModule {
   getPalette(palette?: string): IOfficePalette | ICxxException;
   typography: ITypography;
   ramps: INativeColorRamps;
+  initialHostThemeSetting?: string;
 }
 
 export interface IEventEmitter {

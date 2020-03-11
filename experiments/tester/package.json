@@ -1,7 +1,7 @@
 {
   "name": "fluentui-shared-tester",
   "version": "0.12.10",
-  "description": "Shared RNTester package for validating controls",
+  "description": "FluentUI component showroom for testing and experimentation",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -16,7 +16,8 @@
     "bundle-dev": "just-scripts bundle --useMetro --bundleName rnTester.dev",
     "start": "react-native start --projectRoot ./src",
     "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
-    "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useLiveReload --pluginProps"
+    "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useLiveReload --pluginProps",
+    "run-win32-devmain": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps"
   },
   "dependencies": {
     "@uifabricshared/foundation-composable": "0.5.6",
