@@ -1,7 +1,19 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Fri, 06 Mar 2020 19:46:35 GMT and should not be manually modified.
+This log was last generated on Wed, 11 Mar 2020 17:57:52 GMT and should not be manually modified.
 
+## 0.4.3
+Wed, 11 Mar 2020 17:57:52 GMT
+
+### Patches
+
+- 🎨 Add the ability to respond to host theme change (adrum@microsoft.com)
+## 0.4.2
+Wed, 11 Mar 2020 00:02:33 GMT
+
+### Patches
+
+- Add host to theme object typing (adrum@microsoft.com)
 ## 0.4.0
 Fri, 06 Mar 2020 19:46:35 GMT
 

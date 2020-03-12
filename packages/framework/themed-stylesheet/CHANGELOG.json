@@ -2,6 +2,20 @@
   "name": "@uifabricshared/themed-stylesheet",
   "entries": [
     {
+      "date": "Tue, 10 Mar 2020 22:28:00 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.2.8",
+      "version": "0.2.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch symbol based caching to use WeakMaps",
+            "author": "jasonmo@microsoft.com",
+            "commit": "7ccb806b6df0520ad775ef0f7eae8786ced67315"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 07 Mar 2020 00:42:50 GMT",
       "tag": "@uifabricshared/themed-stylesheet_v0.2.7",
       "version": "0.2.7",

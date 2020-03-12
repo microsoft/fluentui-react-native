@@ -2,6 +2,34 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Wed, 11 Mar 2020 17:57:52 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.5.9",
+      "version": "1.5.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "🐛 Use weak map to avoid copying theme cache when resolving child themes",
+            "author": "adrum@microsoft.com",
+            "commit": "38bf48ba799e46649a3d45c19bd2e40372f9f926"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 10 Mar 2020 22:28:00 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.5.7",
+      "version": "1.5.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch symbol based caching to use WeakMaps",
+            "author": "jasonmo@microsoft.com",
+            "commit": "7ccb806b6df0520ad775ef0f7eae8786ced67315"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Feb 2020 00:04:18 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.5.4",
       "version": "1.5.4",
