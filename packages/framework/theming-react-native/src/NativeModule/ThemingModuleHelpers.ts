@@ -55,12 +55,12 @@ export function translateOfficeTheme(module: IOfficeThemingModule, cache: Palett
         smallStandard: {
           face: module.typography.families.primary,
           size: module.typography.sizes.small,
-          weight: module.typography.weights.medium
+          weight: module.typography.weights.normal
         },
         mediumStandard: {
           face: module.typography.families.primary,
           size: module.typography.sizes.medium,
-          weight: module.typography.weights.medium
+          weight: module.typography.weights.normal
         },
         mediumSemibold: {
           face: module.typography.families.primary,
@@ -70,7 +70,7 @@ export function translateOfficeTheme(module: IOfficeThemingModule, cache: Palett
         largeStandard: {
           face: module.typography.families.primary,
           size: module.typography.sizes.large,
-          weight: module.typography.weights.medium
+          weight: module.typography.weights.normal
         },
         largeSemibold: {
           face: module.typography.families.primary,
@@ -80,7 +80,7 @@ export function translateOfficeTheme(module: IOfficeThemingModule, cache: Palett
         extraLargeStandard: {
           face: module.typography.families.primary,
           size: module.typography.sizes.xLarge,
-          weight: module.typography.weights.medium
+          weight: module.typography.weights.normal
         },
         extraLargeSemibold: {
           face: module.typography.families.primary,
@@ -95,7 +95,7 @@ export function translateOfficeTheme(module: IOfficeThemingModule, cache: Palett
         hugeStandard: {
           face: module.typography.families.primary,
           size: module.typography.sizes.xxLarge,
-          weight: module.typography.weights.medium
+          weight: module.typography.weights.normal
         },
         hugeSemibold: {
           face: module.typography.families.primary,
@@ -110,7 +110,7 @@ export function translateOfficeTheme(module: IOfficeThemingModule, cache: Palett
         giantStandard: {
           face: module.typography.families.primary,
           size: module.typography.sizes.xxxLarge,
-          weight: module.typography.weights.medium
+          weight: module.typography.weights.normal
         },
         giantSemibold: {
           face: module.typography.families.primary,

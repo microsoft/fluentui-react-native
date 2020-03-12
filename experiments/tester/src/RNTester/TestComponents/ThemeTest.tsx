@@ -66,13 +66,13 @@ const getThemedStyles = themedStyleSheet((theme: ITheme) => ({
   extraLargeStandardEmphasis: {
     color: theme['host'].palette.TextEmphasis,
     fontSize: theme.typography.sizes.xxLarge,
-    fontWeight: theme.typography.weights.medium,
+    fontWeight: theme.typography.weights.normal,
     fontFamily: theme.typography.families.primary
   } as ReactNative.TextStyle,
   largeStandard: {
     color: theme.colors.bodyText,
     fontSize: theme.typography.sizes.large,
-    fontWeight: theme.typography.weights.medium,
+    fontWeight: theme.typography.weights.normal,
     fontFamily: theme.typography.families.primary,
     marginBottom: 5
   } as ReactNative.TextStyle

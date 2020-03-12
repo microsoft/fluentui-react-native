@@ -72,7 +72,20 @@ export type FontSize = keyof IFontSizes | FontSizeValuePoints;
  * Smaller numbers yield a thinner, lighter font. Larger numbers yield a thicker, farker
  * font.
  */
-export type FontWeightValue = '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
+export type FontWeightValue =
+  | 'light'
+  | 'normal'
+  | 'semibold'
+  | 'bold'
+  | '100'
+  | '200'
+  | '300'
+  | '400'
+  | '500'
+  | '600'
+  | '700'
+  | '800'
+  | '900';
 
 /**
  * A collection of named font weights.
@@ -85,8 +98,7 @@ export type FontWeightValue = '100' | '200' | '300' | '400' | '500' | '600' | '7
  */
 export interface IFontWeights {
   light: FontWeightValue;
-  semiLight: FontWeightValue;
-  medium: FontWeightValue;
+  normal: FontWeightValue;
   semiBold: FontWeightValue;
   bold: FontWeightValue;
 }

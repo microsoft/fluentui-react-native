@@ -15,9 +15,8 @@ function _defaultTypography(): ITypography {
       xxxLarge: 32
     },
     weights: {
-      light: '200',
-      semiLight: '300',
-      medium: '500',
+      light: '300',
+      normal: '400',
       semiBold: '700',
       bold: '900'
     },
@@ -30,18 +29,18 @@ function _defaultTypography(): ITypography {
       serif: 'System'
     },
     variants: {
-      smallStandard: { face: 'Segoe UI', size: 11, weight: '500' },
-      mediumStandard: { face: 'Segoe UI', size: 12, weight: '500' },
+      smallStandard: { face: 'Segoe UI', size: 11, weight: '400' },
+      mediumStandard: { face: 'Segoe UI', size: 12, weight: '400' },
       mediumSemibold: { face: 'Segoe UI', size: 12, weight: '700' },
-      largeStandard: { face: 'Segoe UI', size: 14, weight: '500' },
+      largeStandard: { face: 'Segoe UI', size: 14, weight: '400' },
       largeSemibold: { face: 'Segoe UI', size: 14, weight: '700' },
-      extraLargeStandard: { face: 'Segoe UI', size: 18, weight: '500' },
+      extraLargeStandard: { face: 'Segoe UI', size: 18, weight: '400' },
       extraLargeSemibold: { face: 'Segoe UI', size: 18, weight: '700' },
       extraLargeBold: { face: 'Segoe UI', size: 18, weight: '900' },
-      hugeStandard: { face: 'Segoe UI', size: 24, weight: '500' },
+      hugeStandard: { face: 'Segoe UI', size: 24, weight: '400' },
       hugeSemibold: { face: 'Segoe UI', size: 24, weight: '700' },
       hugeBold: { face: 'Segoe UI', size: 24, weight: '900' },
-      giantStandard: { face: 'Segoe UI', size: 32, weight: '500' },
+      giantStandard: { face: 'Segoe UI', size: 32, weight: '400' },
       giantSemibold: { face: 'Segoe UI', size: 32, weight: '700' }
     }
   };

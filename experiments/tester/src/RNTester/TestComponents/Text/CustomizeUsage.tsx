@@ -30,10 +30,10 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
       fontSize: theme.typography.sizes.xxxLarge
     }
   });
-  const MediumText = Text.customize({
+  const NormalText = Text.customize({
     tokens: {
       fontFamily: theme.typography.families.primary,
-      fontWeight: theme.typography.weights.medium,
+      fontWeight: theme.typography.weights.normal,
       fontSize: theme.typography.sizes.xxxLarge
     }
   });
@@ -73,7 +73,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
 
       <Stack style={stackStyle} gap={5}>
         <LightText>LightText</LightText>
-        <MediumText>MediumText</MediumText>
+        <NormalText>NormalText</NormalText>
         <SemiBoldText>SemiBoldText</SemiBoldText>
         <BoldText>BoldText</BoldText>
       </Stack>

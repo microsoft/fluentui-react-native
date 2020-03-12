@@ -15,7 +15,14 @@ const theme: ITheme = {
       medium: 14
     },
     weights: {
-      medium: '500'
+      normal: '400'
+    },
+    variants: {
+      mediumStandard: {
+        face: 'Arial',
+        size: 14,
+        weight: '400'
+      }
     }
   } as ITypography,
   spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
@@ -73,7 +80,14 @@ describe('Theme tests', () => {
           medium: 14
         },
         weights: {
-          medium: '500'
+          normal: '400'
+        },
+        variants: {
+          mediumStandard: {
+            face: 'Arial',
+            size: 14,
+            weight: '400'
+          }
         }
       } as ITypography,
       spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },

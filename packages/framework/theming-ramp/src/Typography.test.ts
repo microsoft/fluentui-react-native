@@ -12,7 +12,7 @@ const sizes = {
 } as IFontSizes;
 
 const weights = {
-  medium: '500',
+  normal: '400',
   semiBold: '700'
 } as IFontWeights;
 
