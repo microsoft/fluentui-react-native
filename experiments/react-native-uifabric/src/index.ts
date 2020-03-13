@@ -5,6 +5,7 @@ export * from '@fluentui-react-native/link';
 export * from '@fluentui-react-native/persona';
 export * from '@fluentui-react-native/persona-coin';
 export * from '@fluentui-react-native/pressable';
+export * from '@fluentui-react-native/radio-group';
 export * from '@fluentui-react-native/separator';
 export * from '@fluentui-react-native/stack';
 export * from '@fluentui-react-native/text';
