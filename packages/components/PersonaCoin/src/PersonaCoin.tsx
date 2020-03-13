@@ -9,12 +9,12 @@ import {
   personaCoinName
 } from './PersonaCoin.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { filterViewProps, filterImageProps } from '@fluentui-native/adapters';
+import { filterViewProps, filterImageProps } from '@fluentui-react-native/adapters';
 import { settings } from './PersonaCoin.settings';
 import { ISlots, withSlots, IRenderData } from '@uifabricshared/foundation-composable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { getPresenceIconSource } from './PersonaCoin.helpers';
-import { foregroundColorTokens } from '@fluentui-native/tokens';
+import { foregroundColorTokens } from '@fluentui-react-native/tokens';
 import { buildRootStyles } from './PersonaCoin.tokens.root';
 import { buildInitialsStyles } from './PersonaCoin.tokens.initials';
 import { buildInitialsBackgroundStyles } from './PersonaCoin.tokens.initialsBackground';
@@ -31,8 +31,8 @@ function usePrepareForProps(
     imageUrl === undefined
       ? undefined
       : {
-        uri: imageUrl
-      };
+          uri: imageUrl
+        };
 
   const iconSource = presence === undefined ? undefined : getPresenceIconSource(presence, isOutOfOffice || false);
 
@@ -65,10 +65,10 @@ const render = (Slots: ISlots<IPersonaCoinSlotProps>, renderData: IPersonaCoinRe
       {personaPhotoSource ? (
         <Slots.photo source={personaPhotoSource} />
       ) : (
-          <Slots.initialsBackground>
-            <Slots.initials />
-          </Slots.initialsBackground>
-        )}
+        <Slots.initialsBackground>
+          <Slots.initials />
+        </Slots.initialsBackground>
+      )}
       {!!iconSource && !!iconSource.uri && <Slots.icon source={iconSource} />}
     </Slots.root>
   );

@@ -1,5 +1,5 @@
 import { IHoverState } from './Pressable.types';
-import { IViewProps } from '@fluentui-native/adapters';
+import { IViewProps } from '@fluentui-react-native/adapters';
 
 /**
  * on platforms that don't support hover this is a complete no-op, don't decorate any props

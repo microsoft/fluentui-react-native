@@ -4,12 +4,12 @@ import * as React from 'react';
 import { View, Text, NativeSyntheticEvent } from 'react-native';
 import { radioButtonName, IRadioButtonType, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonRenderData } from './RadioButton.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { filterViewProps } from '@fluentui-native/adapters';
+import { filterViewProps } from '@fluentui-react-native/adapters';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings, radioButtonSelectActionLabel } from './RadioButton.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens } from '@fluentui-native/tokens';
-import { useAsPressable } from '@fluentui-native/interactive-hooks';
+import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
+import { useAsPressable } from '@fluentui-react-native/interactive-hooks';
 import { RadioGroupContext } from './RadioGroup';
 
 export const RadioButton = compose<IRadioButtonType>({

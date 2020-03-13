@@ -1,5 +1,5 @@
 {
-  "name": "@fluentui-native/adapters",
+  "name": "@fluentui-react-native/adapters",
   "version": "0.1.0",
   "description": "Adapters for working with react-native types",
   "main": "lib/index.js",

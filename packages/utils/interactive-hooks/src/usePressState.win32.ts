@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { UIManager, NativeTouchEvent, GestureResponderEvent } from 'react-native';
-import { IViewPropsWin32 } from '@fluentui-native/adapters';
+import { IViewPropsWin32 } from '@fluentui-react-native/adapters';
 import { IPosition, IDimensions } from './Responder.types';
 import { IPressState, IWithPressableOptions } from './Pressable.types';
 
