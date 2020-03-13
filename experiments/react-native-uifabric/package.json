@@ -30,6 +30,7 @@
     "@fluentui-native/adapters": "0.1.0",
     "@fluentui-native/interactive-hooks": "0.1.0",
     "@fluentui-native/button": "0.1.0",
+    "@fluentui-native/checkbox": "0.1.0",
     "@fluentui-native/focus-trap-zone": "0.1.0",
     "@fluentui-native/link": "0.1.0",
     "@fluentui-native/persona": "0.1.0",

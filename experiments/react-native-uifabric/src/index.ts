@@ -1,5 +1,6 @@
 export * from './components/index';
 export * from '@fluentui-native/button';
+export * from '@fluentui-native/checkbox';
 export * from '@fluentui-native/focus-trap-zone';
 export * from '@fluentui-native/link';
 export * from '@fluentui-native/persona';
