@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactNative from 'react-native';
-import { Stack, Link } from 'react-native-uifabric';
+import { Stack, Link } from '@fluentui/react-native';
 import { Square } from './Square';
 import { stackStyle } from '../TesterStyles';
 

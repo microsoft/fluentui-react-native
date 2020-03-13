@@ -2,6 +2,6 @@
 
 const { configureMetro } = require('@uifabricshared/build-native');
 module.exports = configureMetro({
-  bundle: 'react-native-uifabric',
+  bundle: '@fluentui/react-native',
   platform: 'win32'
 });

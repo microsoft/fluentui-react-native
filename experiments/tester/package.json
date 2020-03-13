@@ -28,7 +28,7 @@
     "@uifabricshared/theming-ramp": "0.6.0",
     "@uifabricshared/theming-react-native": "0.4.3",
     "@uifabricshared/themed-stylesheet": "0.2.8",
-    "react-native-uifabric": "0.12.10",
+    "@fluentui/react-native": "0.12.10",
     "tslib": "^1.9.3"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Separator } from 'react-native-uifabric';
+import { Separator } from '@fluentui/react-native';
 import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';
 import { styles } from './styles';
