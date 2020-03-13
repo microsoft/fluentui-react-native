@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 'use strict';
 import * as React from 'react';
-import { View, Text, NativeSyntheticEvent } from 'react-native';
+import { View, Text } from 'react-native';
 import { radioButtonName, IRadioButtonType, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonRenderData } from './RadioButton.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { filterViewProps } from '@fluentui-react-native/adapters';
@@ -49,7 +49,7 @@ export const RadioButton = compose<IRadioButtonType>({
     //    focus variable. Without this, it wouldn't stay updated because we're overriding it's onFocus below for the rootProps.
     // 2) Selects the currently focused button by calling the RadioGroup's callback function.
     const onFocusChange = React.useCallback(
-      (ev: NativeSyntheticEvent<{}>) => {
+      (/* ev: NativeSyntheticEvent<{}> */) => {
         // This check is necessary because this func gets called even when a button loses focus (not sure why?) which then calls the client's onChange multiple times
         if (!state.selected) {
           info.onChange && info.onChange(buttonKey);
@@ -82,7 +82,7 @@ export const RadioButton = compose<IRadioButtonType>({
     return { slotProps };
   },
 
-  render: (Slots: ISlots<IRadioButtonSlotProps>, renderData: IRadioButtonRenderData, ...children: React.ReactNode[]) => {
+  render: (Slots: ISlots<IRadioButtonSlotProps>, _renderData: IRadioButtonRenderData, ...children: React.ReactNode[]) => {
     return (
       <Slots.root>
         <Slots.button>

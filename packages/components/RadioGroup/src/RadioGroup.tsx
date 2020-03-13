@@ -20,7 +20,7 @@ import { useAsRadioGroupSelection } from '@fluentui-react-native/interactive-hoo
 
 export const RadioGroupContext = React.createContext<IRadioGroupContext>({
   selectedKey: null,
-  onChange: (key: string) => {
+  onChange: (/* key: string */) => {
     return;
   }
 });

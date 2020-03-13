@@ -1,4 +1,3 @@
-export * from './components/index';
 export * from '@fluentui-react-native/button';
 export * from '@fluentui-react-native/focus-trap-zone';
 export * from '@fluentui-react-native/link';
