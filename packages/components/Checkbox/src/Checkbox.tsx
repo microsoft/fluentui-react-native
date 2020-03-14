@@ -22,12 +22,12 @@ export const Checkbox = compose<ICheckboxType>({
     const data = useAsToggleCheckbox(defaultChecked || false);
 
     // On press of a checkbox, call state hook and call client's onChange()
-    const onPress = React.useCallback(() => {
+    const onToggle = React.useCallback(() => {
       data.onChange();
       userProps.onChange && userProps.onChange(!data.checked);
     }, [data, userProps]);
 
-    const pressable = useAsPressable({ onPress: onPress, ...rest });
+    const pressable = useAsPressable({ onPress: onToggle, ...rest });
 
     const state: ICheckboxState = {
       info: {
@@ -39,11 +39,20 @@ export const Checkbox = compose<ICheckboxType>({
       }
     };
 
-    const onKeyDown = React.useCallback(
+    // const onKeyDown = React.useCallback(
+    //   (args: IKeyboardEvent) => {
+    //     // Allows user to toggle checkbox by pressing the Space key
+    //     if (args.nativeEvent.key == ' ') {
+    //       pressable.props.onPress();
+    //     }
+    //   },
+    //   [userProps]
+    // );
+
+    const onKeyUp = React.useCallback(
       (args: IKeyboardEvent) => {
-        // Allows user to toggle checkbox by pressing the Space key
         if (args.nativeEvent.key == ' ') {
-          onPress();
+          onToggle();
         }
       },
       [userProps]
@@ -69,7 +78,8 @@ export const Checkbox = compose<ICheckboxType>({
         accessibilityRole: 'checkbox',
         accessibilityLabel: ariaLabel ? ariaLabel : label,
         accessibilityStates: allyStates,
-        onKeyDown: onKeyDown
+        // onKeyDown: onKeyDown,
+        onKeyUp: onKeyUp
         // TO DO: Add Actions
         // Actions: 'Select' and "RemoveFromSelection"
       },
