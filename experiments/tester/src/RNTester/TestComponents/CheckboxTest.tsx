@@ -2,6 +2,8 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Checkbox } from 'react-native-uifabric';
 
+const CircleCheckbox = Checkbox.customize({ tokens: { borderRadius: 50 } });
+
 function onChangeUncontrolled(isChecked: boolean) {
   console.log(isChecked);
 }
@@ -20,7 +22,7 @@ export const CheckboxTest: React.FunctionComponent<{}> = () => {
   return (
     <View>
       <Checkbox label="This is an Uncontrolled Checkbox" onChange={onChangeUncontrolled} defaultChecked={false} ariaLabel="Hello there" />
-      <Checkbox label="This is an Uncontrolled Checkbox" onChange={onChangeUncontrolled} defaultChecked={true} />
+      <CircleCheckbox label="This is an Uncontrolled Checkbox" onChange={onChangeUncontrolled} defaultChecked={true} />
       <Checkbox label="This is a controlled Checkbox" onChange={onChangeControlled1} checked={isCheckedControlled1} />
       <Checkbox
         label="This is a controlled Checkbox"
