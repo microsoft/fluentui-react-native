@@ -1,0 +1,19 @@
+{
+  "name": "@fluentui-react-native/text",
+  "entries": [
+    {
+      "date": "Mon, 16 Mar 2020 23:03:24 GMT",
+      "tag": "@fluentui-react-native/text_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "turn on publishing",
+            "author": "jasonmo@microsoft.com",
+            "commit": "86f6fc7932479f6afcb8f77c539dd4e0d4e436d7"
+          }
+        ]
+      }
+    }
+  ]
+}
