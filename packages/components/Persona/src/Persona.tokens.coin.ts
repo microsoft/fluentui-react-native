@@ -1,7 +1,7 @@
 import { ViewProps } from 'react-native';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 import { ITheme } from '@uifabricshared/theming-ramp';
-import { buildRootStyles as buildPersonaCoinRootStyle, IPersonaCoinTokens } from '@fluentui-native/persona-coin';
+import { buildRootStyles as buildPersonaCoinRootStyle, IPersonaCoinTokens } from '@fluentui-react-native/persona-coin';
 import { IPersonaTokens } from './Persona.types';
 
 const _coinStyleKeys: (keyof IPersonaTokens)[] = [

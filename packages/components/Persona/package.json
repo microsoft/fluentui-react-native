@@ -1,11 +1,10 @@
 {
-  "name": "@fluentui-native/persona",
+  "name": "@fluentui-react-native/persona",
   "version": "0.1.0",
   "description": "A cross-platform opinionated Fluent Text component",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "private": true,
   "scripts": {
     "build": "just-scripts build",
     "just": "just-scripts",
@@ -16,9 +15,9 @@
   },
   "dependencies": {
     "@uifabricshared/foundation-compose": "^1.5.9",
-    "@fluentui-native/adapters": "^0.1.0",
-    "@fluentui-native/persona-coin": "^0.1.0",
-    "@fluentui-native/tokens": "^0.1.0"
+    "@fluentui-react-native/adapters": "^0.1.0",
+    "@fluentui-react-native/persona-coin": "^0.1.0",
+    "@fluentui-react-native/tokens": "^0.1.0"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.27.3",

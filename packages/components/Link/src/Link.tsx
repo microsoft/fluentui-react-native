@@ -4,13 +4,13 @@ import * as ReactNative from 'react-native';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ILinkProps, ILinkSlotProps, ILinkState, ILinkRenderData, IWithLinkOptions, linkName, ILinkType } from './Link.types';
 import { settings } from './Link.settings';
-import { foregroundColorTokens, textTokens } from '@fluentui-native/tokens';
+import { foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
 // import { Text } from '../Text';
-import { useAsPressable, useViewCommandFocus } from '@fluentui-native/interactive-hooks';
+import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 // import { IViewWin32Props } from '@office-iss/react-native-win32';
-import { IViewProps } from '@fluentui-native/adapters';
+import { IViewProps } from '@fluentui-react-native/adapters';
 
 export type ILinkHooks = [IWithLinkOptions<IViewProps>, ILinkState];
 

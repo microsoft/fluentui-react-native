@@ -3,7 +3,7 @@ import * as ReactNative from 'react-native';
 import { getHostSettingsWin32, ThemeProvider, useTheme, IThemeDefinition, ThemingModuleHelper } from '@uifabricshared/theming-react-native';
 import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
 import { commonTestStyles } from '../styles';
-import { Button, PrimaryButton, Separator, StealthButton, Text, RadioGroup, RadioButton } from 'react-native-uifabric';
+import { Button, PrimaryButton, Separator, StealthButton, Text, RadioGroup, RadioButton } from '@fluentui/react-native';
 import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 import { customRegistry } from '../CustomThemes';
 

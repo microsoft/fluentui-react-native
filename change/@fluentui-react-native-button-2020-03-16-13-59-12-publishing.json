@@ -1,0 +1,9 @@
+{
+  "type": "minor",
+  "comment": "turn on publishing",
+  "packageName": "@fluentui-react-native/button",
+  "email": "jasonmo@microsoft.com",
+  "commit": "86f6fc7932479f6afcb8f77c539dd4e0d4e436d7",
+  "dependentChangeType": "patch",
+  "date": "2020-03-16T20:58:47.746Z"
+}

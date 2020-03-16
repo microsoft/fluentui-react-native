@@ -1,5 +1,5 @@
 {
-  "name": "@fluentui-native/tokens",
+  "name": "@fluentui-react-native/tokens",
   "version": "0.1.0",
   "description": "Token interface parts and helpers",
   "main": "lib/index.js",

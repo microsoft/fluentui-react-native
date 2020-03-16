@@ -2,8 +2,8 @@ import { TextStyle, TextProps } from 'react-native';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 import { IPersonaTokens } from './Persona.types';
 import { ITheme } from '@uifabricshared/theming-ramp';
-import { ITextTokens } from '@fluentui-native/tokens';
-import { PersonaSize } from '@fluentui-native/persona-coin';
+import { ITextTokens } from '@fluentui-react-native/tokens';
+import { PersonaSize } from '@fluentui-react-native/persona-coin';
 import { getTextFont, getSecondaryFont, getTertiaryFont, getOptionalFont } from './Persona.helpers';
 
 function buildTextStyleHelper(

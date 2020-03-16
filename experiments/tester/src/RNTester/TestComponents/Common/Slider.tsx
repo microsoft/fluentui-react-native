@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ViewProps, StyleSheet, StyleProp, ViewStyle, UIManager, Text, findNodeHandle } from 'react-native';
 import { ViewWin32 } from '@office-iss/react-native-win32';
-import { Separator, Pressable, IPressableState } from 'react-native-uifabric';
+import { Separator, Pressable, IPressableState } from '@fluentui/react-native';
 
 const thumbSize = 20;
 const defaultMaximumValue = 100;

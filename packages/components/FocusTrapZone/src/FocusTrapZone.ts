@@ -2,8 +2,8 @@ import { IFocusTrapZoneProps, IFocusTrapZoneSlotProps, IFocusTrapZoneType } from
 import { requireNativeComponent } from 'react-native';
 import { IUseStyling, composable, IComposableTypecast } from '@uifabricshared/foundation-composable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useViewCommandFocus } from '@fluentui-native/interactive-hooks';
-import { IViewPropsWin32 } from '@fluentui-native/adapters';
+import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { IViewPropsWin32 } from '@fluentui-react-native/adapters';
 
 const RCTFocusTrapZone = requireNativeComponent('RCTFocusTrapZone');
 
