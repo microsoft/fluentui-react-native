@@ -2,6 +2,20 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Tue, 17 Mar 2020 21:24:06 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Publish",
+            "author": "email not defined",
+            "commit": "cbd0e5e321d7b5f74afecae813959dfba5e52319"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 17 Mar 2020 18:24:10 GMT",
       "tag": "@fluentui-react-native/adapters_v0.1.0",
       "version": "0.1.0",
