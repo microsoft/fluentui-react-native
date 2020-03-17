@@ -1,11 +1,10 @@
 {
   "name": "@fluentui-react-native/adapters",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Adapters for working with react-native types",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "private": true,
   "scripts": {
     "build": "just-scripts build",
     "just": "just-scripts",

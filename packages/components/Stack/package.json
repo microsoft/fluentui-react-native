@@ -16,13 +16,13 @@
   },
   "dependencies": {
     "@uifabricshared/foundation-compose": "^1.5.9",
-    "@fluentui-react-native/adapters": "^0.1.0",
-    "@fluentui-react-native/tokens": "^0.1.0"
+    "@fluentui-react-native/adapters": "^0.1.1",
+    "@fluentui-react-native/tokens": "^0.1.1"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.27.3",
     "@types/react-native": "^0.60.0",
-    "@fluentui-react-native/text": "^0.2.0",
+    "@fluentui-react-native/text": "^0.2.2",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "react-native": "^0.60.0"
