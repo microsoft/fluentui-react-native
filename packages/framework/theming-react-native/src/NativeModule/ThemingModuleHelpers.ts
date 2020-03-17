@@ -50,74 +50,7 @@ export function translateOfficeTheme(module: IOfficeThemingModule, cache: Palett
       ...palette
     },
     typography: {
-      ...module.typography,
-      variants: {
-        smallStandard: {
-          face: module.typography.families.primary,
-          size: module.typography.sizes.small,
-          weight: module.typography.weights.normal
-        },
-        mediumStandard: {
-          face: module.typography.families.primary,
-          size: module.typography.sizes.medium,
-          weight: module.typography.weights.normal
-        },
-        mediumSemibold: {
-          face: module.typography.families.primary,
-          size: module.typography.sizes.medium,
-          weight: module.typography.weights.semiBold
-        },
-        largeStandard: {
-          face: module.typography.families.primary,
-          size: module.typography.sizes.large,
-          weight: module.typography.weights.normal
-        },
-        largeSemibold: {
-          face: module.typography.families.primary,
-          size: module.typography.sizes.large,
-          weight: module.typography.weights.semiBold
-        },
-        extraLargeStandard: {
-          face: module.typography.families.primary,
-          size: module.typography.sizes.xLarge,
-          weight: module.typography.weights.normal
-        },
-        extraLargeSemibold: {
-          face: module.typography.families.primary,
-          size: module.typography.sizes.xLarge,
-          weight: module.typography.weights.semiBold
-        },
-        extraLargeBold: {
-          face: module.typography.families.primary,
-          size: module.typography.sizes.xLarge,
-          weight: module.typography.weights.bold
-        },
-        hugeStandard: {
-          face: module.typography.families.primary,
-          size: module.typography.sizes.xxLarge,
-          weight: module.typography.weights.normal
-        },
-        hugeSemibold: {
-          face: module.typography.families.primary,
-          size: module.typography.sizes.xxLarge,
-          weight: module.typography.weights.semiBold
-        },
-        hugeBold: {
-          face: module.typography.families.primary,
-          size: module.typography.sizes.xxLarge,
-          weight: module.typography.weights.bold
-        },
-        giantStandard: {
-          face: module.typography.families.primary,
-          size: module.typography.sizes.xxxLarge,
-          weight: module.typography.weights.normal
-        },
-        giantSemibold: {
-          face: module.typography.families.primary,
-          size: module.typography.sizes.xxxLarge,
-          weight: module.typography.weights.semiBold
-        }
-      }
+      ...module.typography
     },
     host: {
       palette: cache[id]

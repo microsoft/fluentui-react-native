@@ -1,13 +1,18 @@
 import { TextStyle, TextProps } from 'react-native';
-import { ITheme } from '@uifabricshared/theming-ramp';
+import { ITheme, ITypography } from '@uifabricshared/theming-ramp';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 
-export interface ITextTokens {
+export interface ITextVariantTokens {
+  fontVariant?: keyof ITypography['variants'];
+}
+
+export interface ITextStyleTokens {
   fontFamily?: TextStyle['fontFamily'] | string;
   fontSize?: TextStyle['fontSize'] | string;
   fontWeight?: TextStyle['fontWeight'] | string;
-  fontVariant?: string;
 }
+
+export type ITextTokens = ITextStyleTokens & ITextVariantTokens;
 
 export function _buildTextStyles(tokens: ITextTokens, theme: ITheme): TextProps {
   if (tokens.fontFamily || tokens.fontSize || tokens.fontWeight || tokens.fontVariant) {

@@ -21,14 +21,12 @@ exports[`Text all tokens 1`] = `
   style={
     Object {
       "color": "orange",
-      "fontFamily": "Wingdings",
-      "fontSize": 15,
-      "fontWeight": "900",
+      "fontVariant": "largeStandard",
       "margin": 0,
     }
   }
 >
-  All tokens
+  Variant tokens
 </Text>
 `;
 

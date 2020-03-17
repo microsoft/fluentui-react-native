@@ -1,4 +1,4 @@
-import { ITextTokens, IForegroundColorTokens, IColorTokens } from '@fluentui-native/tokens';
+import { ITextTokens, ITextVariantTokens, IForegroundColorTokens, IColorTokens } from '@fluentui-native/tokens';
 import { ITextProps as INativeTextProps } from '@fluentui-native/adapters';
 
 export const textName = 'RNFText';
@@ -7,7 +7,7 @@ export const textName = 'RNFText';
  * Properties for fabric native text field, these extend the default props for text
  */
 export type ITextProps<TBase = INativeTextProps> = TBase &
-  ITextTokens &
+  ITextVariantTokens &
   IForegroundColorTokens & {
     disabled?: boolean;
   };

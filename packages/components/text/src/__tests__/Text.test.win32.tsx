@@ -12,11 +12,11 @@ it('Text all props', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('Text all tokens', () => {
+it('Text variant tokens', () => {
   const tree = renderer
     .create(
-      <Text color="orange" fontFamily="Wingdings" fontSize={15} fontWeight="bold">
-        All tokens
+      <Text color="orange" fontVariant="largeStandard">
+        Variant tokens
       </Text>
     )
     .toJSON();
