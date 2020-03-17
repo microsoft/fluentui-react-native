@@ -7,12 +7,12 @@ const families = {
 } as IFontFamilies;
 
 const sizes = {
-  xSmall: 8,
-  xLarge: 16
+  small: 8,
+  extraLarge: 16
 } as IFontSizes;
 
 const weights = {
-  normal: '400',
+  regular: '400',
   semiBold: '700'
 } as IFontWeights;
 
@@ -40,8 +40,8 @@ describe('Typography tests', () => {
     expect(resolveFontFamily(typography, 'Arial')).toBe('Arial');
   });
 
-  test('resolveFontSize "xSmall" returns 8', () => {
-    expect(resolveFontSize(typography, 'xSmall')).toBe(8);
+  test('resolveFontSize "small" returns 8', () => {
+    expect(resolveFontSize(typography, 'small')).toBe(8);
   });
 
   test('resolveFontSize 15 returns 15', () => {

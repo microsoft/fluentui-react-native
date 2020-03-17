@@ -50,15 +50,12 @@ export type FontSizeValuePoints = number;
  * These names should be used when defining a theme.
  */
 export interface IFontSizes {
-  xxxSmall: FontSizeValuePoints;
-  xxSmall: FontSizeValuePoints;
-  xSmall: FontSizeValuePoints;
   small: FontSizeValuePoints;
   medium: FontSizeValuePoints;
   large: FontSizeValuePoints;
-  xLarge: FontSizeValuePoints;
-  xxLarge: FontSizeValuePoints;
-  xxxLarge: FontSizeValuePoints;
+  largePlus: FontSizeValuePoints;
+  extraLarge: FontSizeValuePoints;
+  huge: FontSizeValuePoints;
 }
 
 /**
@@ -72,20 +69,7 @@ export type FontSize = keyof IFontSizes | FontSizeValuePoints;
  * Smaller numbers yield a thinner, lighter font. Larger numbers yield a thicker, farker
  * font.
  */
-export type FontWeightValue =
-  | 'light'
-  | 'normal'
-  | 'semibold'
-  | 'bold'
-  | '100'
-  | '200'
-  | '300'
-  | '400'
-  | '500'
-  | '600'
-  | '700'
-  | '800'
-  | '900';
+export type FontWeightValue = '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
 
 /**
  * A collection of named font weights.
@@ -98,7 +82,7 @@ export type FontWeightValue =
  */
 export interface IFontWeights {
   light: FontWeightValue;
-  normal: FontWeightValue;
+  regular: FontWeightValue;
   semiBold: FontWeightValue;
   bold: FontWeightValue;
 }
@@ -126,17 +110,12 @@ export type FontVariantValue = {
 export interface IFontVariants {
   smallStandard: FontVariantValue;
   mediumStandard: FontVariantValue;
-  mediumSemibold: FontVariantValue;
+  mediumBold: FontVariantValue;
   largeStandard: FontVariantValue;
-  largeSemibold: FontVariantValue;
+  largePlusStandard: FontVariantValue;
+  largePlusSemibold: FontVariantValue;
   extraLargeStandard: FontVariantValue;
-  extraLargeSemibold: FontVariantValue;
-  extraLargeBold: FontVariantValue;
   hugeStandard: FontVariantValue;
-  hugeSemibold: FontVariantValue;
-  hugeBold: FontVariantValue;
-  giantStandard: FontVariantValue;
-  giantSemibold: FontVariantValue;
 }
 
 /**
@@ -150,12 +129,17 @@ export type FontVariant = keyof IFontVariants | FontVariantValue;
  * When setting a font in a theme, choose a family, size and weight from
  * this collection.
  */
-export interface ITypography {
+export interface ITextVariant {
+  variants: IFontVariants;
+}
+
+export interface ITextStyle {
   families: IFontFamilies;
   sizes: IFontSizes;
   weights: IFontWeights;
-  variants: IFontVariants;
 }
+
+export type ITypography = ITextStyle & ITextVariant;
 
 /**
  * A partially specified typography.

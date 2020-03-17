@@ -12,15 +12,15 @@ const theme: ITheme = {
       primary: 'Arial'
     },
     sizes: {
-      medium: 14
+      medium: 12
     },
     weights: {
-      normal: '400'
+      regular: '400'
     },
     variants: {
       mediumStandard: {
         face: 'Arial',
-        size: 14,
+        size: 12,
         weight: '400'
       }
     }
@@ -77,15 +77,15 @@ describe('Theme tests', () => {
           primary: 'Arial'
         },
         sizes: {
-          medium: 14
+          medium: 12
         },
         weights: {
-          normal: '400'
+          regular: '400'
         },
         variants: {
           mediumStandard: {
             face: 'Arial',
-            size: 14,
+            size: 12,
             weight: '400'
           }
         }
