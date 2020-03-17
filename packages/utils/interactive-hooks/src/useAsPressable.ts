@@ -1,4 +1,4 @@
-import { IViewProps } from '@fluentui-native/adapters';
+import { IViewProps } from '@fluentui-react-native/adapters';
 import { IPressableHooks, IWithPressableOptions } from './Pressable.types';
 import { useHoverState } from './useHoverState';
 import { useFocusState } from './useFocusState';

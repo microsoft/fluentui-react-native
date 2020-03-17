@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { IPressableProps } from '@fluentui-native/pressable';
-import { IPressableState } from '@fluentui-native/interactive-hooks';
+import { IPressableProps } from '@fluentui-react-native/pressable';
+import { IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { ITextProps } from '@fluentui-native/text';
-import { ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-native/tokens';
+import { ITextProps } from '@fluentui-react-native/text';
+import { ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 
 export const checkboxName = 'Checkbox';

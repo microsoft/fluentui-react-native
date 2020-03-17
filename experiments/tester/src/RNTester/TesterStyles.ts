@@ -1,4 +1,4 @@
-import { IStackProps } from 'react-native-uifabric';
+import { IStackProps } from '@fluentui/react-native';
 
 export const stackStyle: IStackProps['style'] = {
   borderWidth: 1,

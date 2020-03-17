@@ -1,4 +1,4 @@
-import { IViewProps } from '@fluentui-native/adapters';
+import { IViewProps } from '@fluentui-react-native/adapters';
 import { IWithPressableOptions, IPressState } from './Pressable.types';
 
 /**

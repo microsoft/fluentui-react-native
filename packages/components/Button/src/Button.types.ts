@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { ViewProps, ImageProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { ITextProps } from '@fluentui-native/text';
-import { IPressableProps } from '@fluentui-native/pressable';
-import { ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-native/tokens';
-import { IFocusable, IPressableState } from '@fluentui-native/interactive-hooks';
+import { ITextProps } from '@fluentui-react-native/text';
+import { IPressableProps } from '@fluentui-react-native/pressable';
+import { ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 
 export const buttonName = 'Button';

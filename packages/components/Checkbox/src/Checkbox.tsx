@@ -4,13 +4,13 @@ import { View, Text } from 'react-native';
 import { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData, ICheckboxType, checkboxName } from './Checkbox.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { filterViewProps } from '@fluentui-native/adapters';
+import { filterViewProps } from '@fluentui-react-native/adapters';
 import { settings } from './Checkbox.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens, borderTokens } from '@fluentui-native/tokens';
-import { useAsPressable, useAsToggleCheckbox } from '@fluentui-native/interactive-hooks';
+import { foregroundColorTokens, textTokens, borderTokens } from '@fluentui-react-native/tokens';
+import { useAsPressable, useAsToggleCheckbox } from '@fluentui-react-native/interactive-hooks';
 import { IKeyboardEvent } from '@office-iss/react-native-win32';
-import { backgroundColorTokens } from '@fluentui-native/tokens';
+import { backgroundColorTokens } from '@fluentui-react-native/tokens';
 
 export const Checkbox = compose<ICheckboxType>({
   displayName: checkboxName,
@@ -38,16 +38,6 @@ export const Checkbox = compose<ICheckboxType>({
         boxSide: boxSide == undefined || boxSide == 'start' ? false : true
       }
     };
-
-    // const onKeyDown = React.useCallback(
-    //   (args: IKeyboardEvent) => {
-    //     // Allows user to toggle checkbox by pressing the Space key
-    //     if (args.nativeEvent.key == ' ') {
-    //       pressable.props.onPress();
-    //     }
-    //   },
-    //   [userProps]
-    // );
 
     const onKeyUp = React.useCallback(
       (args: IKeyboardEvent) => {
@@ -78,10 +68,9 @@ export const Checkbox = compose<ICheckboxType>({
         accessibilityRole: 'checkbox',
         accessibilityLabel: ariaLabel ? ariaLabel : label,
         accessibilityStates: allyStates,
-        // onKeyDown: onKeyDown,
         onKeyUp: onKeyUp
         // TO DO: Add Actions
-        // Actions: 'Select' and "RemoveFromSelection"
+        // Actions: 'Toggle"
       },
       // Temporary checkmark until SVG functionality
       checkmark: { children: '✓' },

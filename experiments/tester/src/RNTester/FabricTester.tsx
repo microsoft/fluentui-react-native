@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ScrollView, View } from 'react-native';
-import { StealthButton, Text, Separator } from 'react-native-uifabric';
+import { StealthButton, Text, Separator } from '@fluentui/react-native';
 import { registerThemes } from './CustomThemes';
 import { allTestComponents } from './TestComponents';
 import { fabricTesterStyles } from './styles';

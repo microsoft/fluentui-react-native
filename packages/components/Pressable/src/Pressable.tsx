@@ -14,8 +14,8 @@ import { IUseStyling, IComposableTypecast, composable } from '@uifabricshared/fo
 import { View } from 'react-native';
 import { IPressableProps, IPressableType } from './Pressable.props';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable } from '@fluentui-native/interactive-hooks';
-import { IViewPropsWin32 } from '@fluentui-native/adapters';
+import { useAsPressable } from '@fluentui-react-native/interactive-hooks';
+import { IViewPropsWin32 } from '@fluentui-react-native/adapters';
 
 export const Pressable = composable<IPressableType>({
   slots: { root: View },

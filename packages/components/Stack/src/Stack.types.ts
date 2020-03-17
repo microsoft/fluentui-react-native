@@ -1,7 +1,7 @@
 import { IStackItemProps } from './StackItem/StackItem.types';
 import { ViewStyle, ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { IBackgroundColorTokens, IBorderTokens, ITextTokens } from '@fluentui-native/tokens';
+import { IBackgroundColorTokens, IBorderTokens, ITextTokens } from '@fluentui-react-native/tokens';
 
 export const stackName = 'RNFStack';
 
@@ -100,7 +100,7 @@ export interface IStackTokens extends ITextTokens, IBackgroundColorTokens, IBord
 /**
  * Base property definitions, these generally match fabric
  */
-export interface IStackProps extends IStackTokens, ViewProps { }
+export interface IStackProps extends IStackTokens, ViewProps {}
 
 export type IStackSlotProps = {
   root: ViewProps;

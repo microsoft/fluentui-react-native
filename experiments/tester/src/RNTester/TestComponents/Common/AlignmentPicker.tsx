@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { undefinedText } from '../PersonaCoin/styles';
-import { IconAlignment } from 'react-native-uifabric';
+import { IconAlignment } from '@fluentui/react-native';
 import { Picker, StyleProp, ViewStyle } from 'react-native';
-
 
 const alignmentValues: Array<typeof undefinedText | IconAlignment> = [undefinedText, 'start', 'center', 'end'];
 

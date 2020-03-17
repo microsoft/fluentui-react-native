@@ -1,5 +1,5 @@
 import { ViewProps } from 'react-native';
-import { IForegroundColorTokens } from '@fluentui-native/tokens';
+import { IForegroundColorTokens } from '@fluentui-react-native/tokens';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 
 export const separatorName = 'RNFSeparator';
