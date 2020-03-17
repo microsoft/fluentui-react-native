@@ -1,0 +1,19 @@
+{
+  "name": "@fluentui-react-native/interactive-hooks",
+  "entries": [
+    {
+      "date": "Tue, 17 Mar 2020 18:24:10 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Publish",
+            "author": "email not defined",
+            "commit": "a0e097ec7cad3b88bc48215d9b58323057068794"
+          }
+        ]
+      }
+    }
+  ]
+}
