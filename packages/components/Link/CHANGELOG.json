@@ -2,6 +2,20 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Wed, 18 Mar 2020 00:37:12 GMT",
+      "tag": "@fluentui-react-native/link_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "none": [
+          {
+            "comment": "none",
+            "author": "email not defined",
+            "commit": "eb75093eefe61d9235cb01a8adcafd105e57351c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 16 Mar 2020 23:03:24 GMT",
       "tag": "@fluentui-react-native/link_v0.2.0",
       "version": "0.2.0",
