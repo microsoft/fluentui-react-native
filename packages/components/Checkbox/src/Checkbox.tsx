@@ -16,18 +16,12 @@ export const Checkbox = compose<ICheckboxType>({
   displayName: checkboxName,
 
   usePrepareProps: (userProps: ICheckboxProps, useStyling: IUseComposeStyling<ICheckboxType>) => {
-    const { ariaLabel, checked, defaultChecked, boxSide, disabled, label, ...rest } = userProps;
+    const { ariaLabel, checked, defaultChecked, boxSide, disabled, label, onChange, ...rest } = userProps;
 
     // Used for uncontrolled Checkbox's to keep internal state
-    const data = useAsToggleCheckbox(defaultChecked || false);
+    const data = useAsToggleCheckbox(defaultChecked || false, onChange);
 
-    // On press of a checkbox, call state hook and call client's onChange()
-    const onToggle = React.useCallback(() => {
-      data.onChange();
-      userProps.onChange && userProps.onChange(!data.checked);
-    }, [data, userProps]);
-
-    const pressable = useAsPressable({ onPress: onToggle, ...rest });
+    const pressable = useAsPressable({ onPress: data.onChange, ...rest });
 
     const state: ICheckboxState = {
       info: {
@@ -42,7 +36,7 @@ export const Checkbox = compose<ICheckboxType>({
     const onKeyUp = React.useCallback(
       (args: IKeyboardEvent) => {
         if (args.nativeEvent.key == ' ') {
-          onToggle();
+          data.onChange();
         }
       },
       [userProps]
@@ -57,6 +51,8 @@ export const Checkbox = compose<ICheckboxType>({
     //   accessibilityStates = ['disabled'];
     // } else if (state.info.checked) {
     //   accessibilityStates = ['checked'];
+    // } else {
+    //   accessibilityStates = ['unchecked'];
     // }
 
     const allyStates = state.info.disabled ? ['disabled'] : undefined;
@@ -69,8 +65,6 @@ export const Checkbox = compose<ICheckboxType>({
         accessibilityLabel: ariaLabel || label,
         accessibilityStates: allyStates,
         onKeyUp: onKeyUp
-        // TO DO: Add Actions
-        // Actions: 'Toggle"
       },
       // Temporary checkmark until SVG functionality
       checkmark: { children: '✓' },
