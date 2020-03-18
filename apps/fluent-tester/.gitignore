@@ -30,11 +30,21 @@ build/
 local.properties
 *.iml
 
-# node.js
+# node.js / web
 #
 node_modules/
+node_modules/**/*
 npm-debug.log
 yarn-error.log
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+web-report/
 
 # BUCK
 buck-out/
