@@ -36,7 +36,6 @@
     "@fluentui-react-native/pressable": "0.2.2",
     "@fluentui-react-native/radio-group": "0.2.2",
     "@fluentui-react-native/separator": "0.2.2",
-    "@fluentui-react-native/stack": "0.1.0",
     "@fluentui-react-native/text": "0.2.2",
     "@fluentui-react-native/tokens": "0.1.1",
     "tslib": "^1.9.3"
