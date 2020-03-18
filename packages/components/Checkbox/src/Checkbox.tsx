@@ -26,7 +26,7 @@ export const Checkbox = compose<ICheckboxType>({
     const state: ICheckboxState = {
       info: {
         ...pressable.state,
-        disabled: disabled || false,
+        disabled,
         checked: checked != undefined ? checked : data.checked,
         // To allow overrides in .settings. 'start' || undefined = false and 'end' = true
         boxSide: boxSide == undefined || boxSide == 'start' ? false : true

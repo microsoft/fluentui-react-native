@@ -10,12 +10,12 @@ import { IViewWin32Props } from '@office-iss/react-native-win32';
 export const checkboxName = 'Checkbox';
 
 export interface ICheckboxInfo extends IPressableState {
-  checked: boolean;
+  checked?: boolean;
 
-  disabled: boolean;
+  disabled?: boolean;
 
   // To allow overrides in .settings. 'start' || undefined = false and 'end' = true
-  boxSide: boolean;
+  boxSide?: boolean;
 }
 
 export interface ICheckboxState {
