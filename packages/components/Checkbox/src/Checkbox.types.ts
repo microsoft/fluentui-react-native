@@ -37,7 +37,7 @@ export interface ICheckboxProps extends IPressableProps {
    */
   defaultChecked?: boolean;
 
-  boxSide?: string;
+  boxSide?: 'start' | 'end';
 
   disabled?: boolean;
 

@@ -52,21 +52,21 @@ export const Checkbox = compose<ICheckboxType>({
     const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
 
     // TO DO: Add ally states.
-    // let accessibilityStates: string[] = [];
+    // let accessibilityStates: string[] = undefined;
     // if (state.info.disabled) {
     //   accessibilityStates = ['disabled'];
     // } else if (state.info.checked) {
     //   accessibilityStates = ['checked'];
     // }
 
-    const allyStates = state.info.disabled ? ['disabled'] : [];
+    const allyStates = state.info.disabled ? ['disabled'] : undefined;
 
     const slotProps = mergeSettings<ICheckboxSlotProps>(styleProps, {
       root: {
         rest,
         ...pressable.props,
         accessibilityRole: 'checkbox',
-        accessibilityLabel: ariaLabel ? ariaLabel : label,
+        accessibilityLabel: ariaLabel || label,
         accessibilityStates: allyStates,
         onKeyUp: onKeyUp
         // TO DO: Add Actions
@@ -81,27 +81,16 @@ export const Checkbox = compose<ICheckboxType>({
   },
 
   render: (Slots: ISlots<ICheckboxSlotProps>, renderData: ICheckboxRenderData, ...children: React.ReactNode[]) => {
-    if (renderData.state && renderData.state.info.boxSide == false) {
-      return (
-        <Slots.root>
-          <Slots.checkbox>
-            <Slots.checkmark />
-          </Slots.checkbox>
-          <Slots.content />
-          {children}
-        </Slots.root>
-      );
-    } else {
-      return (
-        <Slots.root>
-          <Slots.content />
-          <Slots.checkbox>
-            <Slots.checkmark />
-          </Slots.checkbox>
-          {children}
-        </Slots.root>
-      );
-    }
+    return (
+      <Slots.root>
+        {renderData.state && renderData.state.info.boxSide && <Slots.content />}
+        <Slots.checkbox>
+          <Slots.checkmark />
+        </Slots.checkbox>
+        {renderData.state && !renderData.state.info.boxSide && <Slots.content />}
+        {children}
+      </Slots.root>
+    );
   },
 
   settings,
