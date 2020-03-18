@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IFocusState } from './Pressable.types';
-import { IViewPropsWin32 } from '@fluentui-native/adapters';
+import { IViewPropsWin32 } from '@fluentui-react-native/adapters';
 
 export function useFocusState<_T>(): [IViewPropsWin32, IFocusState] {
   const [state, setFocusState] = React.useState({ focused: false });

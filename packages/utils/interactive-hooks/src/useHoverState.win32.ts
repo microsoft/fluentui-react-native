@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IHoverState } from './Pressable.types';
-import { IViewPropsWin32 } from '@fluentui-native/adapters';
+import { IViewPropsWin32 } from '@fluentui-react-native/adapters';
 
 /**
  * useHoverState will add implementations for onMouseEnter and onMouseLeave to the props passed to the

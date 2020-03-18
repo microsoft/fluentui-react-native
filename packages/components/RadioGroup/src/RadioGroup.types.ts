@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { ViewProps } from 'react-native';
-import { ITextProps } from '@fluentui-native/text';
+import { ITextProps } from '@fluentui-react-native/text';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { IForegroundColorTokens, ITextTokens } from '@fluentui-native/tokens';
+import { IForegroundColorTokens, ITextTokens } from '@fluentui-react-native/tokens';
 
 export const radioGroupName = 'RadioGroup';
 
