@@ -129,17 +129,15 @@ export type FontVariant = keyof IFontVariants | FontVariantValue;
  * When setting a font in a theme, choose a family, size and weight from
  * this collection.
  */
-export interface ITextVariant {
-  variants: IFontVariants;
-}
 
 export interface ITextStyle {
   families: IFontFamilies;
   sizes: IFontSizes;
   weights: IFontWeights;
+  variants: IFontVariants;
 }
 
-export type ITypography = ITextStyle & ITextVariant;
+export type ITypography = ITextStyle;
 
 /**
  * A partially specified typography.

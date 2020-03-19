@@ -49,9 +49,7 @@ export function translateOfficeTheme(module: IOfficeThemingModule, cache: Palett
       neutrals2: createColorRamp({ values: module.ramps.ClassicGrays }),
       ...palette
     },
-    typography: {
-      ...module.typography
-    },
+    typography: module.typography,
     host: {
       palette: cache[id]
     }

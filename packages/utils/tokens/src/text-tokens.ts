@@ -3,30 +3,25 @@ import { ITheme, ITypography } from '@uifabricshared/theming-ramp';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 
 export interface ITextVariantTokens {
-  fontVariant?: keyof ITypography['variants'];
+  fontVariant?: keyof ITypography['variants'] | string;
 }
 
 export interface ITextStyleTokens {
-  fontFamily?: TextStyle['fontFamily'] | string;
-  fontSize?: TextStyle['fontSize'] | string;
-  fontWeight?: TextStyle['fontWeight'] | string;
+  fontFamily?: keyof ITypography['families'] | TextStyle['fontFamily'] | string;
+  fontSize?: keyof ITypography['sizes'] | TextStyle['fontSize'] | string;
+  fontWeight?: keyof ITypography['weights'] | TextStyle['fontWeight'] | string;
 }
 
 export type ITextTokens = ITextStyleTokens & ITextVariantTokens;
 
-export function _buildTextStyles(tokens: ITextTokens, theme: ITheme): TextProps {
-  if (tokens.fontFamily || tokens.fontSize || tokens.fontWeight || tokens.fontVariant) {
+export function _buildTextStyles({ fontFamily, fontSize, fontWeight, fontVariant }: ITextTokens, theme: ITheme): TextProps {
+  const { families, sizes, weights, variants } = theme.typography;
+  if (fontFamily || fontSize || fontWeight || fontVariant) {
     return {
       style: {
-        fontFamily: tokens.fontFamily
-          ? theme.typography.families[tokens.fontFamily] || tokens.fontFamily
-          : theme.typography.variants[tokens.fontVariant].face,
-        fontSize: tokens.fontSize
-          ? theme.typography.sizes[tokens.fontSize] || tokens.fontSize
-          : theme.typography.variants[tokens.fontVariant].size,
-        fontWeight: tokens.fontWeight
-          ? theme.typography.weights[tokens.fontWeight] || tokens.fontWeight
-          : theme.typography.variants[tokens.fontVariant].weight
+        fontFamily: families[fontFamily] || fontFamily || variants[fontVariant].face,
+        fontSize: sizes[fontSize] || fontSize || variants[fontVariant].size,
+        fontWeight: weights[fontWeight] || fontWeight || variants[fontVariant].weight
       }
     };
   }
