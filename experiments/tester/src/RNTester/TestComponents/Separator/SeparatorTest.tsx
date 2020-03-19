@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Button, Stack, Separator, Text } from '@fluentui/react-native';
+import { Button, Separator, Text } from '@fluentui/react-native';
 import { stackStyle, separatorStackStyle } from '../Common/styles';
+import { Stack } from '@fluentui-react-native/stack';
 
 const BlueSeparator = Separator.customize({ tokens: { color: 'blue' } });
 const RedSeparator = Separator.customize({ tokens: { color: 'red' } });
