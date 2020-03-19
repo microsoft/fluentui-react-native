@@ -1,0 +1,9 @@
+{
+  "type": "minor",
+  "comment": "Create simple FluentUI callout component",
+  "packageName": "@fluentui-react-native/callout",
+  "email": "ppatboyd@outlook.com",
+  "commit": "0d5392051b969cdd9856848516f658730a058b75",
+  "dependentChangeType": "patch",
+  "date": "2020-03-19T00:10:45.844Z"
+}
