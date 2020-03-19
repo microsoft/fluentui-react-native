@@ -17,6 +17,11 @@ export const Checkbox = compose<ICheckboxType>({
   usePrepareProps: (userProps: ICheckboxProps, useStyling: IUseComposeStyling<ICheckboxType>) => {
     const { ariaLabel, checked, defaultChecked, boxSide, disabled, label, onChange, ...rest } = userProps;
 
+    // Warns defaultChecked and checked being mutually exclusive.
+    if (defaultChecked != undefined && checked != undefined) {
+      console.warn('defaultChecked and checked are mutually exclusive to one another. Use one or the other.');
+    }
+
     // Used for uncontrolled Checkbox's to keep internal state
     const data = useAsToggle(defaultChecked, checked, onChange, boxSide);
 
