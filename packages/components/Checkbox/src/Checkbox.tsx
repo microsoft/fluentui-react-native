@@ -8,8 +8,7 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { settings } from './Checkbox.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, borderTokens } from '@fluentui-react-native/tokens';
-import { useAsPressable, useAsToggleCheckbox, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { IKeyboardEvent } from '@office-iss/react-native-win32';
+import { useAsPressable, useAsToggle, useViewCommandFocus, useAsKeyUp } from '@fluentui-react-native/interactive-hooks';
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
 
 export const Checkbox = compose<ICheckboxType>({
@@ -19,40 +18,24 @@ export const Checkbox = compose<ICheckboxType>({
     const { ariaLabel, checked, defaultChecked, boxSide, disabled, label, onChange, ...rest } = userProps;
 
     // Used for uncontrolled Checkbox's to keep internal state
-    const data = useAsToggleCheckbox(defaultChecked || false, onChange);
+    const data = useAsToggle(defaultChecked, checked, onChange, boxSide);
 
     const pressable = useAsPressable({ onPress: data.onChange, ...rest });
 
     const buttonRef = useViewCommandFocus(userProps.componentRef);
 
+    // Handles the "Space" key toggling the Checkbox
+    const onKeyUpSpace = useAsKeyUp(' ', data.onChange);
+
     const state: ICheckboxState = {
       ...pressable.state,
       disabled,
-      checked: checked != undefined ? checked : data.checked,
-      boxAtEnd: boxSide == undefined || boxSide == 'start' ? false : true
+      checked: data.state.isChecked,
+      boxAtEnd: data.state.boxAtEnd
     };
-
-    const onKeyUp = React.useCallback(
-      (args: IKeyboardEvent) => {
-        if (args.nativeEvent.key == ' ') {
-          data.onChange();
-        }
-      },
-      [userProps]
-    );
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
-
-    // TO DO: Add ally states.
-    // let accessibilityStates: string[] = undefined;
-    // if (state.info.disabled) {
-    //   accessibilityStates = ['disabled'];
-    // } else if (state.info.checked) {
-    //   accessibilityStates = ['checked'];
-    // } else {
-    //   accessibilityStates = ['unchecked'];
-    // }
 
     const allyStates = state.disabled ? ['disabled'] : undefined;
 
@@ -64,7 +47,7 @@ export const Checkbox = compose<ICheckboxType>({
         accessibilityRole: 'checkbox',
         accessibilityLabel: ariaLabel || label,
         accessibilityStates: allyStates,
-        onKeyUp: onKeyUp
+        onKeyUp: onKeyUpSpace.onKeyUp
       },
       // Temporary checkmark until SVG functionality
       checkmark: { children: '✓' },
