@@ -22,7 +22,8 @@ export const CheckboxTest: React.FunctionComponent<{}> = () => {
   return (
     <View>
       <Checkbox label="This is an Uncontrolled Checkbox" onChange={onChangeUncontrolled} defaultChecked={false} ariaLabel="Hello there" />
-      <CircleCheckbox label="This is an Uncontrolled Checkbox" onChange={onChangeUncontrolled} defaultChecked={true} />
+      <CircleCheckbox label="This is an Uncontrolled Checkbox" onChange={onChangeUncontrolled} defaultChecked={true} disabled={false} />
+      <Checkbox label="This is an Uncontrolled Checkbox" onChange={onChangeUncontrolled} defaultChecked={false} disabled={true} />
       <Checkbox label="This is a controlled Checkbox" onChange={onChangeControlled1} checked={isCheckedControlled1} />
       <Checkbox
         label="This is a controlled Checkbox"

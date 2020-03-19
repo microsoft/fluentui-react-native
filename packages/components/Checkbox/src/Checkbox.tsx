@@ -8,7 +8,7 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { settings } from './Checkbox.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, borderTokens } from '@fluentui-react-native/tokens';
-import { useAsPressable, useAsToggleCheckbox } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useAsToggleCheckbox, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { IKeyboardEvent } from '@office-iss/react-native-win32';
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
 
@@ -23,12 +23,13 @@ export const Checkbox = compose<ICheckboxType>({
 
     const pressable = useAsPressable({ onPress: data.onChange, ...rest });
 
+    const buttonRef = useViewCommandFocus(userProps.componentRef);
+
     const state: ICheckboxState = {
       ...pressable.state,
       disabled,
       checked: checked != undefined ? checked : data.checked,
-      // To allow overrides in .settings. 'start' || undefined = false and 'end' = true
-      boxSide: boxSide == undefined || boxSide == 'start' ? false : true
+      boxAtEnd: boxSide == undefined || boxSide == 'start' ? false : true
     };
 
     const onKeyUp = React.useCallback(
@@ -58,6 +59,7 @@ export const Checkbox = compose<ICheckboxType>({
     const slotProps = mergeSettings<ICheckboxSlotProps>(styleProps, {
       root: {
         rest,
+        ref: buttonRef,
         ...pressable.props,
         accessibilityRole: 'checkbox',
         accessibilityLabel: ariaLabel || label,
@@ -75,11 +77,11 @@ export const Checkbox = compose<ICheckboxType>({
   render: (Slots: ISlots<ICheckboxSlotProps>, renderData: ICheckboxRenderData, ...children: React.ReactNode[]) => {
     return (
       <Slots.root>
-        {renderData.state && renderData.state.boxSide && <Slots.content />}
+        {renderData.state && renderData.state.boxAtEnd && <Slots.content />}
         <Slots.checkbox>
           <Slots.checkmark />
         </Slots.checkbox>
-        {renderData.state && !renderData.state.boxSide && <Slots.content />}
+        {renderData.state && !renderData.state.boxAtEnd && <Slots.content />}
         {children}
       </Slots.root>
     );

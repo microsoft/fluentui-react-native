@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IPressableProps } from '@fluentui-react-native/pressable';
-import { IPressableState } from '@fluentui-react-native/interactive-hooks';
+import { IPressableState, IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
@@ -14,8 +14,8 @@ export interface ICheckboxState extends IPressableState {
 
   disabled?: boolean;
 
-  // To allow overrides in .settings. 'start' || undefined = false and 'end' = true
-  boxSide?: boolean;
+  // True if boxSide='end'
+  boxAtEnd?: boolean;
 }
 
 export interface ICheckboxProps extends IPressableProps {
@@ -38,6 +38,11 @@ export interface ICheckboxProps extends IPressableProps {
   disabled?: boolean;
 
   label?: string;
+
+  /**
+   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
+   */
+  componentRef?: React.RefObject<IFocusable>;
 
   onChange?: (isChecked: boolean) => void;
 }

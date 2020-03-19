@@ -49,7 +49,7 @@ export const settings: IComposeSettings<ICheckboxType> = [
         borderWidth: 1
       }
     },
-    _precedence: ['disabled', 'boxSide', 'checked', 'hovered', 'focused', 'pressed'],
+    _precedence: ['disabled', 'boxAtEnd', 'checked', 'hovered', 'focused', 'pressed'],
     _overrides: {
       focused: {
         tokens: {
@@ -89,7 +89,7 @@ export const settings: IComposeSettings<ICheckboxType> = [
           backgroundColor: 'background'
         }
       },
-      boxSide: {
+      boxAtEnd: {
         checkbox: {
           style: {
             marginLeft: 4,
