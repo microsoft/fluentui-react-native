@@ -11,12 +11,12 @@ function onChangeUncontrolled(isChecked: boolean) {
 export const CheckboxTest: React.FunctionComponent<{}> = () => {
   const [isCheckedControlled1, setCheckedControlled1] = React.useState(false);
   const onChangeControlled1 = React.useCallback(checked => {
-    setCheckedControlled1(!!checked);
+    setCheckedControlled1(checked);
   }, []);
 
   const [isCheckedControlled2, setCheckedControlled2] = React.useState(false);
   const onChangeControlled2 = React.useCallback(checked => {
-    setCheckedControlled2(!!checked);
+    setCheckedControlled2(checked);
   }, []);
 
   return (
