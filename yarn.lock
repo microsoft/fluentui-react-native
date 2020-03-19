@@ -1131,16 +1131,6 @@
     pouchdb-collections "^1.0.1"
     tiny-queue "^0.2.1"
 
-"@fluentui-react-native/link@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/link/-/link-0.2.0.tgz#db4bfe0761fa7dcb1727ce291e8e90af0ded8e43"
-  dependencies:
-    "@fluentui-react-native/adapters" "^0.1.0"
-    "@fluentui-react-native/interactive-hooks" "^0.1.0"
-    "@fluentui-react-native/text" "^0.2.0"
-    "@fluentui-react-native/tokens" "^0.1.0"
-    "@uifabricshared/foundation-compose" "^1.5.9"
-
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
