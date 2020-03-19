@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { ScrollView, View } from 'react-native';
 import { StealthButton, Text, Separator } from '@fluentui/react-native';
-import { registerThemes } from './CustomThemes';
+import { registerThemes } from './TestComponents/Theme/CustomThemes';
 import { allTestComponents } from './TestComponents';
-import { fabricTesterStyles } from './styles';
+import { fabricTesterStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
 
 // uncomment the below lines to enable message spy

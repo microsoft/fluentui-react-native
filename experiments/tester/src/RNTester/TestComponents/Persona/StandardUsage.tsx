@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Persona, PersonaSize } from '@fluentui/react-native';
-import { styles, rajeshImageUrl } from './styles';
+import { rajeshImageUrl } from './styles';
+import { commonTestStyles as commonStyles } from '../Common/styles';
 import { View, Text, Switch, Picker } from 'react-native';
 import { undefinedText } from '../PersonaCoin/styles';
 
@@ -28,7 +29,7 @@ interface ISwitchWithLabelProps {
 function SwitchWithLabel(props: ISwitchWithLabelProps): React.ReactElement {
   const { label, value, onValueChange } = props;
   return (
-    <View style={styles.switch}>
+    <View style={commonStyles.switch}>
       <Text>{label}</Text>
       <Switch value={value} onValueChange={onValueChange} />
     </View>
@@ -44,9 +45,9 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
   const [imageSize, setImageSize] = React.useState<PersonaSize | undefined>('size72');
 
   return (
-    <View style={styles.root}>
+    <View style={commonStyles.root}>
       {/* settings */}
-      <View style={styles.settings}>
+      <View style={commonStyles.settings}>
         <SwitchWithLabel label="Show image" value={showImage} onValueChange={setShowImage} />
         <SwitchWithLabel label="Show primary text" value={showPrimary} onValueChange={setShowPrimary} />
         <SwitchWithLabel label="Show secondary text" value={showSecondary} onValueChange={setShowSecondary} />
@@ -55,7 +56,7 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
 
         <Picker
           prompt="Size"
-          style={styles.header}
+          style={commonStyles.header}
           selectedValue={imageSize || undefinedText}
           onValueChange={size => setImageSize(size === undefinedText ? undefined : size)}
         >
