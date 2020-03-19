@@ -24,13 +24,11 @@ export const Checkbox = compose<ICheckboxType>({
     const pressable = useAsPressable({ onPress: data.onChange, ...rest });
 
     const state: ICheckboxState = {
-      info: {
-        ...pressable.state,
-        disabled,
-        checked: checked != undefined ? checked : data.checked,
-        // To allow overrides in .settings. 'start' || undefined = false and 'end' = true
-        boxSide: boxSide == undefined || boxSide == 'start' ? false : true
-      }
+      ...pressable.state,
+      disabled,
+      checked: checked != undefined ? checked : data.checked,
+      // To allow overrides in .settings. 'start' || undefined = false and 'end' = true
+      boxSide: boxSide == undefined || boxSide == 'start' ? false : true
     };
 
     const onKeyUp = React.useCallback(
@@ -43,7 +41,7 @@ export const Checkbox = compose<ICheckboxType>({
     );
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
-    const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
+    const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
     // TO DO: Add ally states.
     // let accessibilityStates: string[] = undefined;
@@ -55,7 +53,7 @@ export const Checkbox = compose<ICheckboxType>({
     //   accessibilityStates = ['unchecked'];
     // }
 
-    const allyStates = state.info.disabled ? ['disabled'] : undefined;
+    const allyStates = state.disabled ? ['disabled'] : undefined;
 
     const slotProps = mergeSettings<ICheckboxSlotProps>(styleProps, {
       root: {
@@ -77,11 +75,11 @@ export const Checkbox = compose<ICheckboxType>({
   render: (Slots: ISlots<ICheckboxSlotProps>, renderData: ICheckboxRenderData, ...children: React.ReactNode[]) => {
     return (
       <Slots.root>
-        {renderData.state && renderData.state.info.boxSide && <Slots.content />}
+        {renderData.state && renderData.state.boxSide && <Slots.content />}
         <Slots.checkbox>
           <Slots.checkmark />
         </Slots.checkbox>
-        {renderData.state && !renderData.state.info.boxSide && <Slots.content />}
+        {renderData.state && !renderData.state.boxSide && <Slots.content />}
         {children}
       </Slots.root>
     );
