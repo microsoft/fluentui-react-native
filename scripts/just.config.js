@@ -68,11 +68,11 @@ module.exports = function preset() {
   task('update-api', series('clean', 'copy', 'ts', 'update-api-extractor'));
   task('dev', series('clean', 'copy', 'webpack-dev-server'));
 
-  task('build:node-lib', series('clean', 'copy', series(condition('validate', () => !argv().min), 'ts:commonjs-only'))).cached();
+  task('build:node-lib', series('clean', 'copy', series(condition('validate', () => !argv().min), 'ts:commonjs-only')));
 
-  task('bundle', series(condition('metroPack', () => argv().useMetro), condition('webpack', () => !argv().useMetro))).cached();
+  task('bundle', series(condition('metroPack', () => argv().useMetro), condition('webpack', () => !argv().useMetro)));
 
-  task('build', series('clean', 'copy', parallel(condition('validate', () => !argv().min), 'ts'))).cached();
+  task('build', series('clean', 'copy', parallel(condition('validate', () => !argv().min), 'ts')));
 
-  task('no-op', () => {}).cached();
+  task('no-op', () => { });
 };

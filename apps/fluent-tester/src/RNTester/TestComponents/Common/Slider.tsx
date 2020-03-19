@@ -109,7 +109,7 @@ export const Slider: React.FunctionComponent<ISliderProps> = (props: ISliderProp
   React.useEffect(() => {
     const parent = findNodeHandle(ref.current);
     if (parent) {
-      UIManager.measure(parent, (x, y, width) => {
+      UIManager.measure(parent, (_x, _y, width) => {
         if (width <= 0) {
           return;
         }

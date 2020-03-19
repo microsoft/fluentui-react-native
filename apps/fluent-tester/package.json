@@ -2,12 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "version": "0.0.1",
   "private": true,
+  "main": "lib-commonjs/RNTester.js",
+  "module": "lib/RNTester.js",
   "scripts": {
-    "start": "react-native start",
-    "test": "jest"
+    "build": "just-scripts build",
+    "just": "just-scripts",
+    "clean": "just-scripts clean",
+    "code-style": "just-scripts code-style",
+    "lint": "just-scripts eslint",
+    "start": "react-native start"
   },
   "dependencies": {
+    "@fluentui/react-native": "0.13.3",
+    "@fluentui-react-native/stack": "0.1.0",
     "@office-iss/react-native-win32": "0.27.3",
+    "@uifabricshared/theming-react-native": "0.4.3",
     "react": "16.8.6",
     "react-native": "^0.60.0-0",
     "react-native-windows": "^0.60.0-vnext.149",
