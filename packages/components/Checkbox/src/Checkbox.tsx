@@ -8,7 +8,7 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { settings } from './Checkbox.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, borderTokens } from '@fluentui-react-native/tokens';
-import { useAsPressable, useAsToggle, useViewCommandFocus, useAsKeyUp } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useAsToggle, useViewCommandFocus, useKeyCallback } from '@fluentui-react-native/interactive-hooks';
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
 
 export const Checkbox = compose<ICheckboxType>({
@@ -30,7 +30,7 @@ export const Checkbox = compose<ICheckboxType>({
     const buttonRef = useViewCommandFocus(userProps.componentRef);
 
     // Handles the "Space" key toggling the Checkbox
-    const onKeyUpSpace = useAsKeyUp(' ', data.onChange);
+    const onKeyUpSpace = useKeyCallback(' ', data.onChange);
 
     const state: ICheckboxState = {
       ...pressable.state,
@@ -52,7 +52,7 @@ export const Checkbox = compose<ICheckboxType>({
         accessibilityRole: 'checkbox',
         accessibilityLabel: ariaLabel || label,
         accessibilityStates: allyStates,
-        onKeyUp: onKeyUpSpace.onKeyUp
+        onKeyUp: onKeyUpSpace
       },
       // Temporary checkmark until SVG functionality
       checkmark: { children: '✓' },
