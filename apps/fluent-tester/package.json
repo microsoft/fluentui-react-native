@@ -10,13 +10,19 @@
     "clean": "fluentui-scripts clean",
     "code-style": "fluentui-scripts code-style",
     "lint": "fluentui-scripts eslint",
-    "start": "react-native start"
+    "start": "react-native start",
+    "bundle": "fluentui-scripts bundle --useMetro --bundleName rnTester",
+    "bundle-dev": "fluentui-scripts bundle --useMetro --bundleName rnTester.dev",
+    "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
+    "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useLiveReload --pluginProps",
+    "run-win32-devmain": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps"
   },
   "dependencies": {
     "@fluentui/react-native": "0.13.3",
     "@fluentui-react-native/stack": "0.1.0",
     "@office-iss/react-native-win32": "0.27.3",
     "@uifabricshared/theming-react-native": "0.4.3",
+    "@uifabricshared/themed-stylesheet": "0.2.8",
     "react": "16.8.6",
     "react-native": "^0.60.0-0",
     "react-native-windows": "^0.60.0-vnext.149",
@@ -38,6 +44,19 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "metroBundles": {
+    "rnTester": {
+      "platform": "win32",
+      "entry": "./src/RNTester.ts",
+      "output": "./dist/RNTester.bundle"
+    },
+    "rnTester.dev": {
+      "platform": "win32",
+      "entry": "./src/RNTester.ts",
+      "output": "./dist/RNTester.bundle",
+      "dev": true
+    }
   },
   "workspaces": {
     "nohoist": [

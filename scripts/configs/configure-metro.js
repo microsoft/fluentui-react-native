@@ -22,7 +22,7 @@ function configureMetro(options) {
   const rnName = getRNPackage(platform);
   const rnOverride = rnName !== 'react-native' && rnName;
   const rnPlatformPath = (rnOverride && resolveModule(rnOverride)) || rnPath;
-  const dependencies = getPackageInfo().dependencies();
+  const dependencies = getPackageInfo({ strategy: 'update' }).dependencies();
 
   return {
     // WatchFolders is only needed due to the yarn workspace layout of node_modules, we need to watch the symlinked locations separately
