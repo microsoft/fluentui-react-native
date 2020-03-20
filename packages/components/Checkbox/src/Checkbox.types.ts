@@ -40,7 +40,7 @@ export interface ICheckboxProps extends IPressableProps {
   label?: string;
 
   /**
-   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
+   * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
 

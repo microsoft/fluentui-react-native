@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IKeyboardEvent } from '@office-iss/react-native-win32';
 
-export type onToggleCallback = (val: boolean) => void;
+export type onToggleCallback = (value: boolean) => void;
 export type boxSideType = 'start' | 'end' | undefined;
 export type keyUpCallback = () => void;
 export type checkedType = boolean | undefined;
