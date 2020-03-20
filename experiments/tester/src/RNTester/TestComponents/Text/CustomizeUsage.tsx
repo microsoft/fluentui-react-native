@@ -15,11 +15,13 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const LargePlusGreenBold = Text.customize({ tokens: { fontVariant: 'largePlusStandard', fontWeight: 'bold', color: '#02c440' } });
   const ExtraLargeBlueBold = Text.customize({ tokens: { fontVariant: 'extraLargeStandard', fontWeight: 'bold', color: '#0229c4' } });
   const HugePurpleBold = Text.customize({ tokens: { fontVariant: 'hugeStandard', fontWeight: 'bold', color: '#8402c4' } });
+  const GiantPinkBold = Text.customize({ tokens: { fontVariant: 'giantStandard', fontWeight: 'bold', color: '#ffc0cb' } });
 
-  const ArialBlack = Text.customize({ tokens: { fontVariant: 'hugeStandard', fontFamily: 'Arial Black' } });
-  const BrushScriptMT = Text.customize({ tokens: { fontVariant: 'extraLargeStandard', fontFamily: 'Brush Script MT' } });
-  const CourierNew = Text.customize({ tokens: { fontVariant: 'largePlusStandard', fontFamily: 'Courier New' } });
+  const ArialBlack = Text.customize({ tokens: { fontVariant: 'giantStandard', fontFamily: 'Arial Black' } });
+  const BrushScriptMT = Text.customize({ tokens: { fontVariant: 'hugeStandard', fontFamily: 'Brush Script MT' } });
+  const CourierNew = Text.customize({ tokens: { fontVariant: 'extraLargeStandard', fontFamily: 'Courier New' } });
   const Georgia = Text.customize({ tokens: { fontVariant: 'largeStandard', fontFamily: 'Georgia' } });
+  const Impact = Text.customize({ tokens: { fontVariant: 'largePlusStandard', fontFamily: 'Impact' } });
   const TimesNewRoman = Text.customize({ tokens: { fontVariant: 'mediumStandard', fontFamily: 'Times New Roman' } });
   const Wingdings = Text.customize({ tokens: { fontVariant: 'smallStandard', fontFamily: 'Wingdings' } });
 
@@ -61,6 +63,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
         <LargePlusGreenBold>LargePlusGreenBold</LargePlusGreenBold>
         <ExtraLargeBlueBold>ExtraLargeBlueBold</ExtraLargeBlueBold>
         <HugePurpleBold>HugePurpleBold</HugePurpleBold>
+        <GiantPinkBold>GiantPinkBold</GiantPinkBold>
       </Stack>
 
       <Stack style={stackStyle} gap={5}>
@@ -68,6 +71,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
         <BrushScriptMT>Brush Script MT</BrushScriptMT>
         <CourierNew>Courier New</CourierNew>
         <Georgia>Georgia</Georgia>
+        <Impact>Impact</Impact>
         <TimesNewRoman>TimesNewRoman</TimesNewRoman>
         <Wingdings>Wingdings</Wingdings>
       </Stack>

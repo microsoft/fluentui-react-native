@@ -56,6 +56,7 @@ export interface IFontSizes {
   largePlus: FontSizeValuePoints;
   extraLarge: FontSizeValuePoints;
   huge: FontSizeValuePoints;
+  giant: FontSizeValuePoints;
 }
 
 /**
@@ -99,9 +100,9 @@ export type FontWeight = keyof IFontWeights | FontWeightValue;
  * font.
  */
 export type FontVariantValue = {
-  face: FontFamilyValue;
-  size: FontSizeValuePoints;
-  weight: FontWeightValue;
+  face: FontFamily;
+  size: FontSize;
+  weight: FontWeight;
 };
 
 /**
@@ -110,12 +111,18 @@ export type FontVariantValue = {
 export interface IFontVariants {
   smallStandard: FontVariantValue;
   mediumStandard: FontVariantValue;
+  mediumSemibold: FontVariantValue;
   mediumBold: FontVariantValue;
   largeStandard: FontVariantValue;
+  largeSemibold: FontVariantValue;
   largePlusStandard: FontVariantValue;
   largePlusSemibold: FontVariantValue;
   extraLargeStandard: FontVariantValue;
+  extraLargeSemibold: FontVariantValue;
   hugeStandard: FontVariantValue;
+  hugeSemibold: FontVariantValue;
+  giantStandard: FontVariantValue;
+  giantSemibold: FontVariantValue;
 }
 
 /**

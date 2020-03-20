@@ -4,12 +4,13 @@ import { getStockWebPalette, ITypography, ISpacing } from '@uifabricshared/themi
 function _defaultTypography(): ITypography {
   return {
     sizes: {
-      small: 11,
+      small: 10,
       medium: 12,
       large: 14,
-      largePlus: 18,
-      extraLarge: 24,
-      huge: 32
+      largePlus: 16,
+      extraLarge: 20,
+      huge: 28,
+      giant: 42
     },
     weights: {
       light: '300',
@@ -26,14 +27,20 @@ function _defaultTypography(): ITypography {
       serif: 'System'
     },
     variants: {
-      smallStandard: { face: 'Segoe UI', size: 11, weight: '400' },
-      mediumStandard: { face: 'Segoe UI', size: 12, weight: '400' },
-      mediumBold: { face: 'Segoe UI', size: 12, weight: '900' },
-      largeStandard: { face: 'Segoe UI', size: 14, weight: '400' },
-      largePlusStandard: { face: 'Segoe UI', size: 18, weight: '400' },
-      largePlusSemibold: { face: 'Segoe UI', size: 18, weight: '700' },
-      extraLargeStandard: { face: 'Segoe UI', size: 24, weight: '400' },
-      hugeStandard: { face: 'Segoe UI', size: 32, weight: '400' }
+      smallStandard: { face: 'primary', size: 'small', weight: 'regular' },
+      mediumStandard: { face: 'primary', size: 'medium', weight: 'regular' },
+      mediumSemibold: { face: 'primary', size: 'medium', weight: 'semiBold' },
+      mediumBold: { face: 'primary', size: 'medium', weight: 'bold' },
+      largeStandard: { face: 'primary', size: 'large', weight: 'regular' },
+      largeSemibold: { face: 'primary', size: 'large', weight: 'semiBold' },
+      largePlusStandard: { face: 'primary', size: 'largePlus', weight: 'regular' },
+      largePlusSemibold: { face: 'primary', size: 'largePlus', weight: 'semiBold' },
+      extraLargeStandard: { face: 'primary', size: 'extraLarge', weight: 'regular' },
+      extraLargeSemibold: { face: 'primary', size: 'extraLarge', weight: 'semiBold' },
+      hugeStandard: { face: 'primary', size: 'huge', weight: 'regular' },
+      hugeSemibold: { face: 'primary', size: 'huge', weight: 'semiBold' },
+      giantStandard: { face: 'primary', size: 'giant', weight: 'regular' },
+      giantSemibold: { face: 'primary', size: 'giant', weight: 'semiBold' }
     }
   };
 }

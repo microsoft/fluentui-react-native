@@ -14,14 +14,14 @@ export interface ITextStyleTokens {
 
 export type ITextTokens = ITextStyleTokens & ITextVariantTokens;
 
-export function _buildTextStyles({ fontFamily, fontSize, fontWeight, fontVariant }: ITextTokens, theme: ITheme): TextProps {
-  const { families, sizes, weights, variants } = theme.typography;
+export function _buildTextStyles({ fontFamily, fontSize, fontWeight, fontVariant }: ITextTokens, { typography }: ITheme): TextProps {
+  const { families, sizes, weights, variants } = typography;
   if (fontFamily || fontSize || fontWeight || fontVariant) {
     return {
       style: {
-        fontFamily: families[fontFamily] || fontFamily || variants[fontVariant].face,
-        fontSize: sizes[fontSize] || fontSize || variants[fontVariant].size,
-        fontWeight: weights[fontWeight] || fontWeight || variants[fontVariant].weight
+        fontFamily: families[fontFamily] || fontFamily || families[variants[fontVariant].face] || variants[fontVariant].face,
+        fontSize: sizes[fontSize] || fontSize || sizes[variants[fontVariant].size] || variants[fontVariant].size,
+        fontWeight: weights[fontWeight] || fontWeight || weights[variants[fontVariant].weight] || variants[fontVariant].weight
       }
     };
   }
