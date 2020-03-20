@@ -15333,7 +15333,7 @@ react-native-windows@^0.60.0-vnext.149:
     uuid "^3.3.2"
     xml-parser "^1.2.1"
 
-react-native@^0.60.0, react-native@^0.60.0-0:
+react-native@^0.60.0:
   version "0.60.6"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.60.6.tgz#8a13dece1c3f6e01db0833db14d2b01b2d8ccba5"
   integrity sha512-eIoHh0fncrmw2WUs42D1KwLfatOuLFLFLOKzJJJ8mOOQtbo9i2rOOa0+2iWjefDoAy8BJH88bQGvDvlrexmhow==

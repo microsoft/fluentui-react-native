@@ -20,17 +20,13 @@
   "dependencies": {
     "@fluentui/react-native": "0.13.3",
     "@fluentui-react-native/stack": "0.1.0",
-    "@office-iss/react-native-win32": "0.27.3",
     "@uifabricshared/theming-react-native": "0.4.3",
-    "@uifabricshared/themed-stylesheet": "0.2.8",
-    "react": "16.8.6",
-    "react-native": "^0.60.0-0",
-    "react-native-windows": "^0.60.0-vnext.149",
-    "rnpm-plugin-windows": "^0.5.1-0"
+    "@uifabricshared/themed-stylesheet": "0.2.8"
   },
   "devDependencies": {
     "@babel/core": "^7.3.3",
     "@babel/runtime": "^7.3.1",
+    "@office-iss/react-native-win32": "0.27.3",
     "@office-iss/rex-win32": "0.0.35",
     "@react-native-community/eslint-config": "^0.0.3",
     "@types/prop-types": "15.5.1",
@@ -40,7 +36,17 @@
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "metro-react-native-babel-preset": "^0.54.1",
-    "react-test-renderer": "16.8.6"
+    "react": "16.8.6",
+    "react-native": "^0.60.0",
+    "react-native-windows": "^0.60.0-vnext.149",
+    "react-test-renderer": "16.8.6",
+    "rnpm-plugin-windows": "^0.5.1-0"
+  },
+  "peerDependencies": {
+    "@office-iss/react-native-win32": "0.27.3",
+    "react": "^16.8.6",
+    "react-native": "^0.60.0",
+    "react-native-windows": "^0.60.0-vnext.149"
   },
   "jest": {
     "preset": "react-native"
@@ -57,15 +63,5 @@
       "output": "./dist/RNTester.bundle",
       "dev": true
     }
-  },
-  "workspaces": {
-    "nohoist": [
-      "*react-native*",
-      "*react-native*/**",
-      "*react-native-windows*",
-      "*react-native-windows*/**",
-      "*metro*",
-      "*metro*/**"
-    ]
   }
 }
