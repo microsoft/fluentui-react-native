@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { View, ScreenRect } from 'react-native';
+import { ScreenRect, Text, View } from 'react-native';
 import { Button, Callout, Separator } from '@fluentui/react-native';
-import { TextWin32 } from '@office-iss/react-native-win32';
 import { fabricTesterStyles } from '../Common/styles';
 
 export const CalloutTest: React.FunctionComponent<{}> = () => {
@@ -10,9 +9,9 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
     showCustomizedCallout: false
   });
 
-  const stdBtnRef = React.useRef<TextWin32>(null);
+  const stdBtnRef = React.useRef<Text>(null);
 
-  const custBtnRef = React.useRef<TextWin32>(null);
+  const custBtnRef = React.useRef<Text>(null);
 
   const toggleShowStandardCallout = React.useCallback(() => {
     setState({ ...state, showStandardCallout: !state.showStandardCallout });
@@ -32,9 +31,9 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
   const myRect: ScreenRect = { screenX: 10, screenY: 10, width: 100, height: 100 };
   return (
     <View>
-      <TextWin32 ref={stdBtnRef} style={fabricTesterStyles.testSection}>
+      <Text ref={stdBtnRef} style={fabricTesterStyles.testSection}>
         Standard Usage
-      </TextWin32>
+      </Text>
       <Separator />
       <Button content="Press for Callout" onClick={toggleShowStandardCallout} />
 
@@ -46,9 +45,9 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
         </Callout>
       )}
 
-      <TextWin32 ref={custBtnRef} style={fabricTesterStyles.testSection}>
+      <Text ref={custBtnRef} style={fabricTesterStyles.testSection}>
         Customized Usage
-      </TextWin32>
+      </Text>
       <Separator />
       <Button content="Press for Callout" onClick={toggleShowCustomizedCallout} />
 
