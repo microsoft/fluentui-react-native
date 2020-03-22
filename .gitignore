@@ -70,3 +70,6 @@ typings/
 
 # document generation directory
 .docz
+
+# macOS
+.DS_Store
