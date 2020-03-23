@@ -2,7 +2,6 @@ import * as React from 'react';
 import { IKeyboardEvent } from '@office-iss/react-native-win32';
 
 export type OnToggleCallback = (value: boolean) => void;
-export type BoxSideType = 'start' | 'end' | undefined;
 export type KeyUpCallback = () => void;
 
 /* Re-usable hook for toggle components.
@@ -18,7 +17,7 @@ export type KeyUpCallback = () => void;
  **         state.isChecked - Whether or not component is currently checked or selected
  **         state.boxAtEnd - Whether the toggle component is at the end or start
  */
-export function useAsToggle(defaultChecked?: boolean, checked?: boolean, userCallback?: OnToggleCallback, boxSide?: BoxSideType) {
+export function useAsToggle(defaultChecked?: boolean, checked?: boolean, userCallback?: OnToggleCallback) {
   // NOTE: Using "defaultChecked ?? checked" gives me a parsing error when building
   const [isChecked, setChecked] = React.useState(defaultChecked != undefined ? defaultChecked : checked);
 
@@ -27,9 +26,7 @@ export function useAsToggle(defaultChecked?: boolean, checked?: boolean, userCal
     setChecked(!isChecked);
   }, [isChecked]);
 
-  const boxAtEnd = boxSide == undefined || boxSide == 'start' ? false : true;
-
-  return { onChange, state: { isChecked: checked != undefined ? checked : isChecked, boxAtEnd } };
+  return { onChange, state: { isChecked: checked != undefined ? checked : isChecked } };
 }
 
 /* Re-usable hook for an onKeyUp/onKeyDown event.
@@ -40,7 +37,7 @@ export function useAsToggle(defaultChecked?: boolean, checked?: boolean, userCal
 export function useKeyCallback(key?: string, userCallback?: KeyUpCallback) {
   const onKeyEvent = React.useCallback(
     (args: IKeyboardEvent) => {
-      if (args.nativeEvent.key === key || key === undefined) {
+      if (args.nativeEvent.key === key || key == undefined) {
         userCallback && userCallback();
       }
     },

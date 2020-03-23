@@ -23,7 +23,7 @@ export const Checkbox = compose<ICheckboxType>({
     }
 
     // Used for uncontrolled Checkbox's to keep internal state
-    const data = useAsToggle(defaultChecked, checked, onChange, boxSide);
+    const data = useAsToggle(defaultChecked, checked, onChange);
 
     const pressable = useAsPressable({ onPress: data.onChange, ...rest });
 
@@ -36,7 +36,7 @@ export const Checkbox = compose<ICheckboxType>({
       ...pressable.state,
       disabled,
       checked: data.state.isChecked,
-      boxAtEnd: data.state.boxAtEnd
+      boxAtEnd: boxSide == undefined || boxSide == 'start' ? false : true
     };
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
