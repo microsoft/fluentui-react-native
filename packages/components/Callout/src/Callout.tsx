@@ -11,11 +11,11 @@ export const Callout = composable<ICalloutType>({
   displayName: calloutName,
   usePrepareProps: (props: ICalloutProps, useStyling: IUseComposeStyling<ICalloutType>) => {
     const { componentRef, ...rest } = props;
-    const buttonRef = useViewCommandFocus(componentRef);
+    const calloutRef = useViewCommandFocus(componentRef);
 
     const slotProps = mergeSettings<ICalloutSlotProps>(useStyling(props), {
       root: {
-        ref: buttonRef,
+        ref: calloutRef,
         ...rest
       }
     });
