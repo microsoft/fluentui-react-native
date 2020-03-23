@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IPressableProps } from '@fluentui-react-native/pressable';
+// import { IPressableProps } from '@fluentui-react-native/pressable';
 import { IPressableState, IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
@@ -18,7 +18,7 @@ export interface ICheckboxState extends IPressableState {
   boxAtEnd?: boolean;
 }
 
-export interface ICheckboxProps extends IPressableProps {
+export interface ICheckboxProps {
   ariaLabel?: string;
 
   /*
@@ -47,7 +47,7 @@ export interface ICheckboxProps extends IPressableProps {
   onChange?: (isChecked: boolean) => void;
 }
 
-export interface ICheckboxTokens extends ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {}
+export type ICheckboxTokens = ITextTokens & IForegroundColorTokens & IBackgroundColorTokens & IBorderTokens;
 
 export interface ICheckboxSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
