@@ -1,11 +1,10 @@
 {
-  "name": "@fluentui-native/tokens",
-  "version": "0.1.0",
+  "name": "@fluentui-react-native/tokens",
+  "version": "0.1.1",
   "description": "Token interface parts and helpers",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "private": true,
   "scripts": {
     "build": "just-scripts build",
     "just": "just-scripts",

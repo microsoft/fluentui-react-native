@@ -1,5 +1,5 @@
 import { IFocusState } from './Pressable.types';
-import { IViewProps } from '@fluentui-native/adapters';
+import { IViewProps } from '@fluentui-react-native/adapters';
 
 /**
  * on platforms that don't support focus this is a complete no-op, don't decorate any props

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ViewStyle, StyleProp } from 'react-native';
-import { IViewProps } from '@fluentui-native/adapters';
-import { IWithPressableOptions, IPressableState } from '@fluentui-native/interactive-hooks';
+import { IViewProps } from '@fluentui-react-native/adapters';
+import { IWithPressableOptions, IPressableState } from '@fluentui-react-native/interactive-hooks';
 
 export type IPressableProps<TBase extends object = IViewProps> = IWithPressableOptions<TBase> & {
   children?: IRenderChild<IPressableState>;

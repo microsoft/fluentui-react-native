@@ -1,7 +1,8 @@
 import { ViewWin32, IKeyboardEvent, IViewWin32Props, IViewWin32 } from '@office-iss/react-native-win32';
-import { IFocusTrapZoneProps, Text, Stack, FocusTrapZoneWin32 } from 'react-native-uifabric';
+import { IFocusTrapZoneProps, Text, FocusTrapZoneWin32 } from '@fluentui/react-native';
+import { Stack } from '@fluentui-react-native/stack';
 import { TouchableHighlight, TouchableHighlightProps } from 'react-native';
-import { useFocusState } from 'react-native-uifabric';
+import { useFocusState } from '@fluentui/react-native';
 import * as React from 'react';
 import { stackStyle } from '../TesterStyles';
 

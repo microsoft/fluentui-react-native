@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RadioButton, RadioGroup } from 'react-native-uifabric';
+import { RadioButton, RadioGroup } from '@fluentui/react-native';
 
 export const RadioGroupTest: React.FunctionComponent<{}> = () => {
   // Client's example onChange function

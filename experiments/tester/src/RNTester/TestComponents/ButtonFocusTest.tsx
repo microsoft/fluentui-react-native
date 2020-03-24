@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Stack, Button, IFocusable } from 'react-native-uifabric';
+import { Button, IFocusable } from '@fluentui/react-native';
+import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../TesterStyles';
 
 export const ButtonFocusTest: React.FunctionComponent<{}> = () => {

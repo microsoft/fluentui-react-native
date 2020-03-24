@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Stack } from '..';
-import { Text } from '@fluentui-native/text';
+import { Text } from '@fluentui-react-native/text';
 import * as renderer from 'react-test-renderer';
 
 it('Stack with tokens', () => {
