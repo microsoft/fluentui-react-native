@@ -18,9 +18,6 @@ import { useCompoundPrepare } from './Composable.slots';
 import { renderSlot } from './slots';
 import { ISlotProps, mergeSettings } from '@uifabricshared/foundation-settings';
 
-// just a generic object with children specified as props
-type IWithChildren<T> = T & { children?: React.ReactNode[] };
-
 export function atomicRender<TProps extends object, TState = object>(
   Slots: ISlots<ISlotProps<TProps>>,
   _renderData: IRenderData<ISlotProps<TProps>, TState>,
@@ -96,7 +93,7 @@ export function composable<TType>(
   // create the actual implementation
   const render = (userProps: IProps) => {
     // split out children, they will be excluded from the prop preparation phase
-    const { children, ...props } = userProps as IWithChildren<IProps>;
+    const { children, ...props } = userProps as React.PropsWithChildren<IProps>;
 
     // prepare the props, all the way down the tree, also build the slots
     const { renderData, Slots } = useCompoundPrepare<IProps, IThisSlotProps, IState>(
@@ -105,7 +102,7 @@ export function composable<TType>(
     );
 
     // now do the render, adding the children back in
-    return options.render(Slots, renderData, ...children);
+    return options.render(Slots, renderData, children);
   };
   render.displayName = options.displayName;
 

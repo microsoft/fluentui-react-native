@@ -2,6 +2,20 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Tue, 24 Mar 2020 21:40:11 GMT",
+      "tag": "@uifabricshared/foundation-composable_v0.5.7",
+      "version": "0.5.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "🐛 Fix children crashing the test app",
+            "author": "email not defined",
+            "commit": "2344c650c213befe98be0bfc0764e11abd1c04e1"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Feb 2020 00:04:18 GMT",
       "tag": "@uifabricshared/foundation-composable_v0.5.5",
       "version": "0.5.5",

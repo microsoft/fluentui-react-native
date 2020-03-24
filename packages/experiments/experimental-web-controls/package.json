@@ -27,7 +27,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-compose": "1.5.9",
+    "@uifabricshared/foundation-compose": "1.5.10",
     "@uifabricshared/foundation-settings": "0.4.5",
     "@uifabricshared/theming-ramp": "0.6.0",
     "@uifabricshared/theming-react-native": "0.4.3"
