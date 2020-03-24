@@ -52,6 +52,7 @@ export type FontSizeValuePoints = number;
 export interface IFontSizes {
   small: FontSizeValuePoints;
   medium: FontSizeValuePoints;
+  mediumPlus: FontSizeValuePoints;
   large: FontSizeValuePoints;
   largePlus: FontSizeValuePoints;
   extraLarge: FontSizeValuePoints;
@@ -113,6 +114,8 @@ export interface IFontVariants {
   mediumStandard: FontVariantValue;
   mediumSemibold: FontVariantValue;
   mediumBold: FontVariantValue;
+  mediumPlusStandard: FontVariantValue;
+  mediumPlusSemibold: FontVariantValue;
   largeStandard: FontVariantValue;
   largeSemibold: FontVariantValue;
   largePlusStandard: FontVariantValue;

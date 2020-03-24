@@ -4,19 +4,20 @@ import { getStockWebPalette, ITypography, ISpacing } from '@uifabricshared/themi
 function _defaultTypography(): ITypography {
   return {
     sizes: {
-      small: 10,
-      medium: 12,
-      large: 14,
-      largePlus: 16,
-      extraLarge: 20,
-      huge: 28,
-      giant: 42
+      small: 8,
+      medium: 9,
+      mediumPlus: 10,
+      large: 11,
+      largePlus: 14,
+      extraLarge: 16,
+      huge: 22,
+      giant: 30
     },
     weights: {
       light: '300',
       regular: '400',
-      semiBold: '700',
-      bold: '900'
+      semiBold: '600',
+      bold: '700'
     },
     families: {
       primary: 'Segoe UI',
@@ -31,6 +32,8 @@ function _defaultTypography(): ITypography {
       mediumStandard: { face: 'primary', size: 'medium', weight: 'regular' },
       mediumSemibold: { face: 'primary', size: 'medium', weight: 'semiBold' },
       mediumBold: { face: 'primary', size: 'medium', weight: 'bold' },
+      mediumPlusStandard: { face: 'primary', size: 'mediumPlus', weight: 'regular' },
+      mediumPlusSemibold: { face: 'primary', size: 'mediumPlus', weight: 'semiBold' },
       largeStandard: { face: 'primary', size: 'large', weight: 'regular' },
       largeSemibold: { face: 'primary', size: 'large', weight: 'semiBold' },
       largePlusStandard: { face: 'primary', size: 'largePlus', weight: 'regular' },

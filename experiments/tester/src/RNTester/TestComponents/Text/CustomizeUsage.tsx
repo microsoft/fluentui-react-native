@@ -11,17 +11,19 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
 
   const SmallRedBold = Text.customize({ tokens: { fontVariant: 'smallStandard', fontWeight: 'bold', color: '#ff0000' } });
   const MediumOrangeBold = Text.customize({ tokens: { fontVariant: 'mediumStandard', fontWeight: 'bold', color: '#ff9900' } });
-  const LargeYellowBold = Text.customize({ tokens: { fontVariant: 'largeStandard', fontWeight: 'bold', color: '#f3ce00' } });
-  const LargePlusGreenBold = Text.customize({ tokens: { fontVariant: 'largePlusStandard', fontWeight: 'bold', color: '#02c440' } });
-  const ExtraLargeBlueBold = Text.customize({ tokens: { fontVariant: 'extraLargeStandard', fontWeight: 'bold', color: '#0229c4' } });
+  const MediumPlusYellowBold = Text.customize({ tokens: { fontVariant: 'mediumPlusStandard', fontWeight: 'bold', color: '#f3ce00' } });
+  const LargeGreenBold = Text.customize({ tokens: { fontVariant: 'largeStandard', fontWeight: 'bold', color: '#02c440' } });
+  const LargePlusBlueBold = Text.customize({ tokens: { fontVariant: 'largePlusStandard', fontWeight: 'bold', color: '#0229c4' } });
+  const ExtraLargeIndigoBold = Text.customize({ tokens: { fontVariant: 'extraLargeStandard', fontWeight: 'bold', color: '#4b0082' } });
   const HugePurpleBold = Text.customize({ tokens: { fontVariant: 'hugeStandard', fontWeight: 'bold', color: '#8402c4' } });
-  const GiantPinkBold = Text.customize({ tokens: { fontVariant: 'giantStandard', fontWeight: 'bold', color: '#ffc0cb' } });
+  const GiantPinkBold = Text.customize({ tokens: { fontVariant: 'giantStandard', fontWeight: 'bold', color: '#c202c4' } });
 
   const ArialBlack = Text.customize({ tokens: { fontVariant: 'giantStandard', fontFamily: 'Arial Black' } });
   const BrushScriptMT = Text.customize({ tokens: { fontVariant: 'hugeStandard', fontFamily: 'Brush Script MT' } });
   const CourierNew = Text.customize({ tokens: { fontVariant: 'extraLargeStandard', fontFamily: 'Courier New' } });
   const Georgia = Text.customize({ tokens: { fontVariant: 'largeStandard', fontFamily: 'Georgia' } });
   const Impact = Text.customize({ tokens: { fontVariant: 'largePlusStandard', fontFamily: 'Impact' } });
+  const SegoeScript = Text.customize({ tokens: { fontVariant: 'mediumPlusStandard', fontFamily: 'Segoe Script' } });
   const TimesNewRoman = Text.customize({ tokens: { fontVariant: 'mediumStandard', fontFamily: 'Times New Roman' } });
   const Wingdings = Text.customize({ tokens: { fontVariant: 'smallStandard', fontFamily: 'Wingdings' } });
 
@@ -59,9 +61,10 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
       <Stack style={stackStyle} gap={5}>
         <SmallRedBold>SmallRedBold</SmallRedBold>
         <MediumOrangeBold>MediumOrangeBold</MediumOrangeBold>
-        <LargeYellowBold>LargeYellowBold</LargeYellowBold>
-        <LargePlusGreenBold>LargePlusGreenBold</LargePlusGreenBold>
-        <ExtraLargeBlueBold>ExtraLargeBlueBold</ExtraLargeBlueBold>
+        <MediumPlusYellowBold>MediumPlusYellowBold</MediumPlusYellowBold>
+        <LargeGreenBold>LargeGreenBold</LargeGreenBold>
+        <LargePlusBlueBold>LargePlusBlueBold</LargePlusBlueBold>
+        <ExtraLargeIndigoBold>ExtraLargeIndigoBold</ExtraLargeIndigoBold>
         <HugePurpleBold>HugePurpleBold</HugePurpleBold>
         <GiantPinkBold>GiantPinkBold</GiantPinkBold>
       </Stack>
@@ -72,6 +75,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
         <CourierNew>Courier New</CourierNew>
         <Georgia>Georgia</Georgia>
         <Impact>Impact</Impact>
+        <SegoeScript>Segoe Script</SegoeScript>
         <TimesNewRoman>TimesNewRoman</TimesNewRoman>
         <Wingdings>Wingdings</Wingdings>
       </Stack>

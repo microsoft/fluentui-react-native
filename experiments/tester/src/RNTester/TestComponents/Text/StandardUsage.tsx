@@ -10,6 +10,8 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
       <Text fontVariant="mediumStandard">MediumStandard</Text>
       <Text fontVariant="mediumSemibold">MediumSemibold</Text>
       <Text fontVariant="mediumBold">MediumBold</Text>
+      <Text fontVariant="mediumPlusStandard">MediumPlusStandard</Text>
+      <Text fontVariant="mediumPlusSemibold">MediumPlusSemibold</Text>
       <Text fontVariant="largeStandard">LargeStandard</Text>
       <Text fontVariant="largeSemibold">LargeSemibold</Text>
       <Text fontVariant="largePlusStandard">LargePlusStandard</Text>
