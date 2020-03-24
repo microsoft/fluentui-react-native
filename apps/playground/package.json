@@ -18,7 +18,7 @@
     "react-native-web": "^0.11.7",
     "@uifabricshared/theming-react-native": "0.4.3",
     "@uifabricshared/themed-stylesheet": "0.2.8",
-    "@uifabricshared/foundation-compose": "1.5.9"
+    "@uifabricshared/foundation-compose": "1.5.10"
   },
   "devDependencies": {
     "@types/react": "16.8.23",

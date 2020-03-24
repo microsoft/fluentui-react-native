@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-composable
 
-This log was last generated on Fri, 28 Feb 2020 00:04:18 GMT and should not be manually modified.
+This log was last generated on Tue, 24 Mar 2020 21:40:11 GMT and should not be manually modified.
 
+## 0.5.7
+Tue, 24 Mar 2020 21:40:11 GMT
+
+### Patches
+
+- 🐛 Fix children crashing the test app (email not defined)
 ## 0.5.5
 Fri, 28 Feb 2020 00:04:18 GMT
 
