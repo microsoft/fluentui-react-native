@@ -19,7 +19,7 @@ export type KeyUpCallback = () => void;
  */
 export function useAsToggle(defaultChecked?: boolean, checked?: boolean, userCallback?: OnToggleCallback) {
   // NOTE: Using "defaultChecked ?? checked" gives me a parsing error when building
-  const [isChecked, setChecked] = React.useState(defaultChecked != undefined ? defaultChecked : checked);
+  const [isChecked, setChecked] = React.useState(defaultChecked ?? checked);
 
   const onChange = React.useCallback(() => {
     userCallback && userCallback(!isChecked);
