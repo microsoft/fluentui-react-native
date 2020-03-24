@@ -5,9 +5,7 @@ exports[`Text all props 1`] = `
   style={
     Object {
       "color": "pink",
-      "fontFamily": "Segoe UI",
-      "fontSize": 12,
-      "fontWeight": "500",
+      "fontVariant": "bodyStandard",
       "margin": 0,
     }
   }

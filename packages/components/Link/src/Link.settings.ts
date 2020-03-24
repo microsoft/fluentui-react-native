@@ -7,8 +7,8 @@ export const settings: IComposeSettings<ILinkType> = [
   {
     tokens: {
       fontFamily: 'primary',
-      fontSize: 'medium',
-      fontWeight: 'medium',
+      fontSize: 'secondary',
+      fontWeight: 'regular',
       color: 'link'
     },
     root: {
