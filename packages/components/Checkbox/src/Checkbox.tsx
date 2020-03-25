@@ -7,7 +7,7 @@ import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { settings } from './Checkbox.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens, borderTokens } from '@fluentui-react-native/tokens';
+import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { useAsPressable, useAsToggle, useViewCommandFocus, useKeyCallback } from '@fluentui-react-native/interactive-hooks';
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
 
@@ -22,7 +22,7 @@ export const Checkbox = compose<ICheckboxType>({
       console.warn('defaultChecked and checked are mutually exclusive to one another. Use one or the other.');
     }
 
-    // Used for uncontrolled Checkbox's to keep internal state
+    // Re-usable hook for toggle components.
     const data = useAsToggle(defaultChecked, checked, onChange);
 
     const pressable = useAsPressable({ onPress: data.onChange, ...rest });
@@ -84,8 +84,15 @@ export const Checkbox = compose<ICheckboxType>({
   },
   styles: {
     root: [],
-    checkbox: [backgroundColorTokens, borderTokens],
-    checkmark: [foregroundColorTokens],
+    checkbox: [
+      backgroundColorTokens,
+      borderTokens,
+      [
+        { source: 'checkboxBackgroundColor', lookup: getPaletteFromTheme, target: 'backgroundColor' },
+        { source: 'checkboxBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }
+      ]
+    ],
+    checkmark: [foregroundColorTokens, [{ source: 'checkmarkColor', lookup: getPaletteFromTheme, target: 'color' }]],
     content: [foregroundColorTokens, textTokens]
   }
 });

@@ -18,7 +18,6 @@ export type KeyUpCallback = () => void;
  **         state.boxAtEnd - Whether the toggle component is at the end or start
  */
 export function useAsToggle(defaultChecked?: boolean, checked?: boolean, userCallback?: OnToggleCallback) {
-  // NOTE: Using "defaultChecked ?? checked" gives me a parsing error when building
   const [isChecked, setChecked] = React.useState(defaultChecked ?? checked);
 
   const onChange = React.useCallback(() => {
@@ -31,8 +30,10 @@ export function useAsToggle(defaultChecked?: boolean, checked?: boolean, userCal
 
 /* Re-usable hook for an onKeyUp/onKeyDown event.
  ** PROPS:
- **    key - A string of the key you want to perform some action on. If undefined, always invokes userCallback
- **    userCallback - The function you want to be called once the key has been activated on key up
+ **       key - A string of the key you want to perform some action on. If undefined, always invokes userCallback
+ **       userCallback - The function you want to be called once the key has been activated on key up
+ ** RETURNS:
+ **       onKeyEvent() - Callback to determine if key was pressed, if so, call userCallback
  */
 export function useKeyCallback(key?: string, userCallback?: KeyUpCallback) {
   const onKeyEvent = React.useCallback(
