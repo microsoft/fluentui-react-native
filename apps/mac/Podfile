@@ -1,0 +1,5 @@
+target 'FluentUIReactNative-macOS' do
+  platform :osx, '10.14'
+
+  project 'FluentUIReactNative-macOS.xcodeproj'
+end

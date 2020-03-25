@@ -1,0 +1,624 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1460775DAEB6574491B2EC29 /* libPods-FluentUIReactNative-macOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEC0B290EC313695D569D7C /* libPods-FluentUIReactNative-macOS.a */; };
+		9F8DD6E8242B2F2000C5877B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8DD6E7242B2F2000C5877B /* AppDelegate.m */; };
+		9F8DD6EA242B2F2100C5877B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F8DD6E9242B2F2100C5877B /* Assets.xcassets */; };
+		9F8DD6ED242B2F2100C5877B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F8DD6EB242B2F2100C5877B /* MainMenu.xib */; };
+		9F8DD6F0242B2F2100C5877B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8DD6EF242B2F2100C5877B /* main.m */; };
+		9F8DD6FB242B2F2100C5877B /* FluentUIReactNative_macOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8DD6FA242B2F2100C5877B /* FluentUIReactNative_macOSTests.m */; };
+		9F8DD706242B2F2100C5877B /* FluentUIReactNative_macOSUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F8DD705242B2F2100C5877B /* FluentUIReactNative_macOSUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9F8DD6F7242B2F2100C5877B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F8DD6DB242B2F2000C5877B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F8DD6E2242B2F2000C5877B;
+			remoteInfo = "FluentUIReactNative-macOS";
+		};
+		9F8DD702242B2F2100C5877B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F8DD6DB242B2F2000C5877B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F8DD6E2242B2F2000C5877B;
+			remoteInfo = "FluentUIReactNative-macOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8F5CC297D8BAD779C50D0EF8 /* Pods-FluentUIReactNative-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FluentUIReactNative-macOS.debug.xcconfig"; path = "Target Support Files/Pods-FluentUIReactNative-macOS/Pods-FluentUIReactNative-macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		9F8DD6E3242B2F2000C5877B /* FluentUIReactNative-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FluentUIReactNative-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F8DD6E6242B2F2000C5877B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9F8DD6E7242B2F2000C5877B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9F8DD6E9242B2F2100C5877B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9F8DD6EC242B2F2100C5877B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		9F8DD6EE242B2F2100C5877B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F8DD6EF242B2F2100C5877B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9F8DD6F1242B2F2100C5877B /* FluentUIReactNative_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FluentUIReactNative_macOS.entitlements; sourceTree = "<group>"; };
+		9F8DD6F6242B2F2100C5877B /* FluentUIReactNative-macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FluentUIReactNative-macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F8DD6FA242B2F2100C5877B /* FluentUIReactNative_macOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FluentUIReactNative_macOSTests.m; sourceTree = "<group>"; };
+		9F8DD6FC242B2F2100C5877B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F8DD701242B2F2100C5877B /* FluentUIReactNative-macOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FluentUIReactNative-macOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F8DD705242B2F2100C5877B /* FluentUIReactNative_macOSUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FluentUIReactNative_macOSUITests.m; sourceTree = "<group>"; };
+		9F8DD707242B2F2100C5877B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC148A3CD835B9D815EDCBDA /* Pods-FluentUIReactNative-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FluentUIReactNative-macOS.release.xcconfig"; path = "Target Support Files/Pods-FluentUIReactNative-macOS/Pods-FluentUIReactNative-macOS.release.xcconfig"; sourceTree = "<group>"; };
+		FCEC0B290EC313695D569D7C /* libPods-FluentUIReactNative-macOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FluentUIReactNative-macOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9F8DD6E0242B2F2000C5877B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1460775DAEB6574491B2EC29 /* libPods-FluentUIReactNative-macOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F8DD6F3242B2F2100C5877B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F8DD6FE242B2F2100C5877B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		31E0599C217116A8C4D9D172 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCEC0B290EC313695D569D7C /* libPods-FluentUIReactNative-macOS.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9F8DD6DA242B2F2000C5877B = {
+			isa = PBXGroup;
+			children = (
+				9F8DD6E5242B2F2000C5877B /* FluentUIReactNative-macOS */,
+				9F8DD6F9242B2F2100C5877B /* FluentUIReactNative-macOSTests */,
+				9F8DD704242B2F2100C5877B /* FluentUIReactNative-macOSUITests */,
+				9F8DD6E4242B2F2000C5877B /* Products */,
+				E9574D3DC342F9E1C26FBED3 /* Pods */,
+				31E0599C217116A8C4D9D172 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		9F8DD6E4242B2F2000C5877B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9F8DD6E3242B2F2000C5877B /* FluentUIReactNative-macOS.app */,
+				9F8DD6F6242B2F2100C5877B /* FluentUIReactNative-macOSTests.xctest */,
+				9F8DD701242B2F2100C5877B /* FluentUIReactNative-macOSUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9F8DD6E5242B2F2000C5877B /* FluentUIReactNative-macOS */ = {
+			isa = PBXGroup;
+			children = (
+				9F8DD6E6242B2F2000C5877B /* AppDelegate.h */,
+				9F8DD6E7242B2F2000C5877B /* AppDelegate.m */,
+				9F8DD6E9242B2F2100C5877B /* Assets.xcassets */,
+				9F8DD6EB242B2F2100C5877B /* MainMenu.xib */,
+				9F8DD6EE242B2F2100C5877B /* Info.plist */,
+				9F8DD6EF242B2F2100C5877B /* main.m */,
+				9F8DD6F1242B2F2100C5877B /* FluentUIReactNative_macOS.entitlements */,
+			);
+			path = "FluentUIReactNative-macOS";
+			sourceTree = "<group>";
+		};
+		9F8DD6F9242B2F2100C5877B /* FluentUIReactNative-macOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				9F8DD6FA242B2F2100C5877B /* FluentUIReactNative_macOSTests.m */,
+				9F8DD6FC242B2F2100C5877B /* Info.plist */,
+			);
+			path = "FluentUIReactNative-macOSTests";
+			sourceTree = "<group>";
+		};
+		9F8DD704242B2F2100C5877B /* FluentUIReactNative-macOSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				9F8DD705242B2F2100C5877B /* FluentUIReactNative_macOSUITests.m */,
+				9F8DD707242B2F2100C5877B /* Info.plist */,
+			);
+			path = "FluentUIReactNative-macOSUITests";
+			sourceTree = "<group>";
+		};
+		E9574D3DC342F9E1C26FBED3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8F5CC297D8BAD779C50D0EF8 /* Pods-FluentUIReactNative-macOS.debug.xcconfig */,
+				CC148A3CD835B9D815EDCBDA /* Pods-FluentUIReactNative-macOS.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9F8DD6E2242B2F2000C5877B /* FluentUIReactNative-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F8DD70A242B2F2100C5877B /* Build configuration list for PBXNativeTarget "FluentUIReactNative-macOS" */;
+			buildPhases = (
+				78AF58DA0BE3753E43A8BA7E /* [CP] Check Pods Manifest.lock */,
+				9F8DD6DF242B2F2000C5877B /* Sources */,
+				9F8DD6E0242B2F2000C5877B /* Frameworks */,
+				9F8DD6E1242B2F2000C5877B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FluentUIReactNative-macOS";
+			productName = "FluentUIReactNative-macOS";
+			productReference = 9F8DD6E3242B2F2000C5877B /* FluentUIReactNative-macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		9F8DD6F5242B2F2100C5877B /* FluentUIReactNative-macOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F8DD70D242B2F2100C5877B /* Build configuration list for PBXNativeTarget "FluentUIReactNative-macOSTests" */;
+			buildPhases = (
+				9F8DD6F2242B2F2100C5877B /* Sources */,
+				9F8DD6F3242B2F2100C5877B /* Frameworks */,
+				9F8DD6F4242B2F2100C5877B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9F8DD6F8242B2F2100C5877B /* PBXTargetDependency */,
+			);
+			name = "FluentUIReactNative-macOSTests";
+			productName = "FluentUIReactNative-macOSTests";
+			productReference = 9F8DD6F6242B2F2100C5877B /* FluentUIReactNative-macOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9F8DD700242B2F2100C5877B /* FluentUIReactNative-macOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F8DD710242B2F2100C5877B /* Build configuration list for PBXNativeTarget "FluentUIReactNative-macOSUITests" */;
+			buildPhases = (
+				9F8DD6FD242B2F2100C5877B /* Sources */,
+				9F8DD6FE242B2F2100C5877B /* Frameworks */,
+				9F8DD6FF242B2F2100C5877B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9F8DD703242B2F2100C5877B /* PBXTargetDependency */,
+			);
+			name = "FluentUIReactNative-macOSUITests";
+			productName = "FluentUIReactNative-macOSUITests";
+			productReference = 9F8DD701242B2F2100C5877B /* FluentUIReactNative-macOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9F8DD6DB242B2F2000C5877B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = Microsoft;
+				TargetAttributes = {
+					9F8DD6E2242B2F2000C5877B = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					9F8DD6F5242B2F2100C5877B = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 9F8DD6E2242B2F2000C5877B;
+					};
+					9F8DD700242B2F2100C5877B = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 9F8DD6E2242B2F2000C5877B;
+					};
+				};
+			};
+			buildConfigurationList = 9F8DD6DE242B2F2000C5877B /* Build configuration list for PBXProject "FluentUIReactNative-macOS" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9F8DD6DA242B2F2000C5877B;
+			productRefGroup = 9F8DD6E4242B2F2000C5877B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9F8DD6E2242B2F2000C5877B /* FluentUIReactNative-macOS */,
+				9F8DD6F5242B2F2100C5877B /* FluentUIReactNative-macOSTests */,
+				9F8DD700242B2F2100C5877B /* FluentUIReactNative-macOSUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9F8DD6E1242B2F2000C5877B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F8DD6EA242B2F2100C5877B /* Assets.xcassets in Resources */,
+				9F8DD6ED242B2F2100C5877B /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F8DD6F4242B2F2100C5877B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F8DD6FF242B2F2100C5877B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		78AF58DA0BE3753E43A8BA7E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FluentUIReactNative-macOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9F8DD6DF242B2F2000C5877B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F8DD6F0242B2F2100C5877B /* main.m in Sources */,
+				9F8DD6E8242B2F2000C5877B /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F8DD6F2242B2F2100C5877B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F8DD6FB242B2F2100C5877B /* FluentUIReactNative_macOSTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F8DD6FD242B2F2100C5877B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F8DD706242B2F2100C5877B /* FluentUIReactNative_macOSUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9F8DD6F8242B2F2100C5877B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F8DD6E2242B2F2000C5877B /* FluentUIReactNative-macOS */;
+			targetProxy = 9F8DD6F7242B2F2100C5877B /* PBXContainerItemProxy */;
+		};
+		9F8DD703242B2F2100C5877B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F8DD6E2242B2F2000C5877B /* FluentUIReactNative-macOS */;
+			targetProxy = 9F8DD702242B2F2100C5877B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9F8DD6EB242B2F2100C5877B /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F8DD6EC242B2F2100C5877B /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9F8DD708242B2F2100C5877B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9F8DD709242B2F2100C5877B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		9F8DD70B242B2F2100C5877B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F5CC297D8BAD779C50D0EF8 /* Pods-FluentUIReactNative-macOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "FluentUIReactNative-macOS/FluentUIReactNative_macOS.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = UBF8T346G9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "FluentUIReactNative-macOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Microsoft.FluentUIReactNative-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9F8DD70C242B2F2100C5877B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC148A3CD835B9D815EDCBDA /* Pods-FluentUIReactNative-macOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "FluentUIReactNative-macOS/FluentUIReactNative_macOS.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = UBF8T346G9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "FluentUIReactNative-macOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Microsoft.FluentUIReactNative-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		9F8DD70E242B2F2100C5877B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = UBF8T346G9;
+				INFOPLIST_FILE = "FluentUIReactNative-macOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = "Microsoft.FluentUIReactNative-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FluentUIReactNative-macOS.app/Contents/MacOS/FluentUIReactNative-macOS";
+			};
+			name = Debug;
+		};
+		9F8DD70F242B2F2100C5877B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = UBF8T346G9;
+				INFOPLIST_FILE = "FluentUIReactNative-macOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_BUNDLE_IDENTIFIER = "Microsoft.FluentUIReactNative-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FluentUIReactNative-macOS.app/Contents/MacOS/FluentUIReactNative-macOS";
+			};
+			name = Release;
+		};
+		9F8DD711242B2F2100C5877B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = UBF8T346G9;
+				INFOPLIST_FILE = "FluentUIReactNative-macOSUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Microsoft.FluentUIReactNative-macOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "FluentUIReactNative-macOS";
+			};
+			name = Debug;
+		};
+		9F8DD712242B2F2100C5877B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = UBF8T346G9;
+				INFOPLIST_FILE = "FluentUIReactNative-macOSUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Microsoft.FluentUIReactNative-macOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "FluentUIReactNative-macOS";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9F8DD6DE242B2F2000C5877B /* Build configuration list for PBXProject "FluentUIReactNative-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F8DD708242B2F2100C5877B /* Debug */,
+				9F8DD709242B2F2100C5877B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9F8DD70A242B2F2100C5877B /* Build configuration list for PBXNativeTarget "FluentUIReactNative-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F8DD70B242B2F2100C5877B /* Debug */,
+				9F8DD70C242B2F2100C5877B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9F8DD70D242B2F2100C5877B /* Build configuration list for PBXNativeTarget "FluentUIReactNative-macOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F8DD70E242B2F2100C5877B /* Debug */,
+				9F8DD70F242B2F2100C5877B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9F8DD710242B2F2100C5877B /* Build configuration list for PBXNativeTarget "FluentUIReactNative-macOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F8DD711242B2F2100C5877B /* Debug */,
+				9F8DD712242B2F2100C5877B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9F8DD6DB242B2F2000C5877B /* Project object */;
+}
