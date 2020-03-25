@@ -8,8 +8,8 @@ import { useTheme } from '@uifabricshared/theming-react-native';
 
 // uncomment the below lines to enable message spy
 /*
-const msgq = require('MessageQueue');
-msgq.spy(true);
+import MessageQueue from 'react-native/Libraries/BatchedBridge/MessageQueue';
+MessageQueue.spy(true);
 */
 
 registerThemes();
