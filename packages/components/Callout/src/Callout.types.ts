@@ -4,7 +4,7 @@ import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
 
-export const calloutName = 'RNFCallout';
+export const calloutName = 'Callout';
 
 /**
  * Properties and Tokens for fabric native Callout
@@ -28,6 +28,7 @@ export type DirectionalHint =
 
 export interface ICalloutTokens extends IBackgroundColorTokens, IBorderTokens {
   anchorRect?: ReactNative.ScreenRect;
+  beakWidth?: number;
   directionalHint?: DirectionalHint;
   gapSpace?: number;
   minPadding?: number;

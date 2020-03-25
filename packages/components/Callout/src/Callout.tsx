@@ -1,13 +1,15 @@
 import { requireNativeComponent } from 'react-native';
-import { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { calloutName, ICalloutProps, ICalloutSlotProps, ICalloutType } from './Callout.types';
+import { settings } from './Callout.settings';
+import { IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { composable } from '@uifabricshared/foundation-composable';
+import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
+import { compose } from '@uifabricshared/foundation-compose';
 
 const RCTCallout = requireNativeComponent('RCTCallout');
 
-export const Callout = composable<ICalloutType>({
+export const Callout = compose<ICalloutType>({
   displayName: calloutName,
   usePrepareProps: (props: ICalloutProps, useStyling: IUseComposeStyling<ICalloutType>) => {
     const { componentRef, ...rest } = props;
@@ -22,8 +24,12 @@ export const Callout = composable<ICalloutType>({
 
     return { slotProps };
   },
+  settings: settings,
   slots: {
     root: RCTCallout
+  },
+  styles: {
+    root: [backgroundColorTokens, borderTokens]
   }
 });
 
