@@ -1,23 +1,7 @@
 {
+  "extends": "@uifabricshared/build-native/tsconfig.json",
   "compilerOptions": {
-    "target": "es2015",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "declaration": true,
-    "declarationMap": true,
-    "strict": true,
-    "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": true,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "sourceMap": true,
-    "jsx": "react"
-  }
+    "outDir": "lib"
+  },
+  "include": ["src"]
 }
