@@ -13,10 +13,8 @@ function _defaultTypography(): ITypography {
       heroLarge: 30
     },
     weights: {
-      light: '300',
       regular: '400',
-      semiBold: '600',
-      bold: '700'
+      semiBold: '600'
     },
     families: {
       primary: 'Segoe UI',
