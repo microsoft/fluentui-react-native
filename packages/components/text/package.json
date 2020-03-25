@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/text",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A cross-platform opinionated Fluent Text component",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -14,7 +14,7 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.5.9",
+    "@uifabricshared/foundation-compose": "^1.5.10",
     "@fluentui-react-native/adapters": "^0.1.1",
     "@fluentui-react-native/tokens": "^0.1.1"
   },
