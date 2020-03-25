@@ -1,4 +1,5 @@
 export * from '@fluentui-react-native/button';
+export * from '@fluentui-react-native/checkbox';
 export * from '@fluentui-react-native/focus-trap-zone';
 export * from '@fluentui-react-native/link';
 export * from '@fluentui-react-native/persona';
