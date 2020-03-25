@@ -1,1 +1,1 @@
-import './RNTester/RNTester.win32';
+import './RNTester/RNTester';

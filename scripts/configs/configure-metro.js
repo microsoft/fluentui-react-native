@@ -33,6 +33,7 @@ function configureMetro(options) {
       ...dependencies.paths()
     ],
     serializer: {
+      getModulesRunBeforeMainModule: () => [require.resolve(path.join(rnPlatformPath, 'Libraries/Core/InitializeCore'))],
       getPolyfills: () => {
         return [
           resolveFile(rnName + '/Libraries/polyfills/console.js'),
@@ -42,13 +43,13 @@ function configureMetro(options) {
       }
     },
     resolver: {
-      extraNodeModules: { 'react-native': rnPlatformPath },
+      resolverMainFields: ['react-native', 'browser', 'main'],
+      extraNodeModules: { 'react-native': rnPlatformPath, [rnName]: rnPlatformPath },
       blacklistRE: blacklist([
         /node_modules\/react-native\/.*/,
         /node_modules\/.*\/node_modules\/react-native\/.*/,
-        prepareRegex(rnPath),
-        prepareRegex(rnPlatformPath + '/node_modules/react-native'),
         prepareRegex(path.resolve('.', 'node_modules/react-native')),
+        prepareRegex(path.resolve('.', 'node_modules/react-native-windows')),
         prepareRegex(path.resolve('.', 'node_modules/@office-iss/react-native-win32'))
       ]),
       hasteImplModulePath: resolveFile(rnName + '/jest/hasteImpl.js'),
@@ -56,6 +57,8 @@ function configureMetro(options) {
       providesModuleNodeModules: [rnName]
     },
     transformer: {
+      babelTransformPath: require.resolve('metro-react-native-babel-transformer'),
+      assetRegistryPath: path.join(rnPlatformPath, 'Libraries/Image/AssetRegistry'),
       getTransformOptions: async () => ({
         transform: {
           experimentalImportSupport: false,
@@ -68,3 +71,11 @@ function configureMetro(options) {
 }
 
 module.exports.configureMetro = configureMetro;
+
+//         /node_modules\/react-native\/.*/,
+// /node_modules\/.*\/node_modules\/react-native\/.*/,
+// prepareRegex(rnPath),
+// prepareRegex(rnPlatformPath + '/node_modules/react-native'),
+// prepareRegex(path.resolve('.', 'node_modules/react-native')),
+// prepareRegex(path.resolve('.', 'node_modules/react-native-windows')),
+// prepareRegex(path.resolve('.', 'node_modules/@office-iss/react-native-win32'))

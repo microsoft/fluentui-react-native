@@ -1,9 +1,16 @@
+const { configureMetro } = require('@uifabricshared/build-native');
+module.exports = configureMetro({
+  bundle: 'fluentui-shared-tester',
+  platform: 'windows'
+});
+
 /**
  * Metro configuration for React Native
  * https://github.com/facebook/react-native
  *
  * @format
  */
+/*
 const fs = require('fs');
 const path = require('path');
 const blacklist = require('metro-config/src/defaults/blacklist');
@@ -14,7 +21,9 @@ const rnwPath = fs.realpathSync(path.resolve(require.resolve('react-native-windo
 
 module.exports = {
   watchFolders: [
-    ...getPackageInfo().dependencies().paths()
+    ...getPackageInfo()
+      .dependencies()
+      .paths()
   ],
   resolver: {
     extraNodeModules: {
@@ -22,6 +31,7 @@ module.exports = {
       'react-native': rnwPath,
       'react-native-windows': rnwPath
     },
+    hasteImplModulePath: '/Users/jasonmorse/dev/fluentui-rn/node_modules/react-native-windows/jest/hasteImpl.js',
     // Include the macos platform in addition to the defaults because the fork includes macos, but doesn't declare it
     platforms: ['ios', 'android', 'windesktop', 'windows', 'win32', 'web', 'macos'],
     providesModuleNodeModules: ['react-native-windows'],
@@ -43,3 +53,4 @@ module.exports = {
     })
   }
 };
+*/

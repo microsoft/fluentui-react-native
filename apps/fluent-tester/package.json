@@ -13,6 +13,7 @@
     "start": "react-native start",
     "bundle": "fluentui-scripts bundle --useMetro --bundleName rnTester",
     "bundle-dev": "fluentui-scripts bundle --useMetro --bundleName rnTester.dev",
+    "bundle-windows": "fluentui-scripts bundle --useMetro --bundleName rnTester.windows",
     "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
     "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useLiveReload --pluginProps",
     "run-win32-devmain": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps"
@@ -24,7 +25,7 @@
     "@uifabricshared/theming-react-native": "0.4.3",
     "@uifabricshared/themed-stylesheet": "0.2.8",
     "react": "16.8.6",
-    "react-native": "^0.60.0-0",
+    "react-native": "^0.60.0",
     "react-native-windows": "^0.60.0-vnext.149",
     "rnpm-plugin-windows": "^0.5.1-0"
   },
@@ -56,16 +57,11 @@
       "entry": "./src/RNTester.ts",
       "output": "./dist/RNTester.bundle",
       "dev": true
+    },
+    "rnTester.windows": {
+      "platform": "windows",
+      "entry": "./src/RNTester.ts",
+      "output": "./dist/RNTester.windows.bundle"
     }
-  },
-  "workspaces": {
-    "nohoist": [
-      "*react-native*",
-      "*react-native*/**",
-      "*react-native-windows*",
-      "*react-native-windows*/**",
-      "*metro*",
-      "*metro*/**"
-    ]
   }
 }

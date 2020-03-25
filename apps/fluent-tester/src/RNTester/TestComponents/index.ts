@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ButtonFocusTest } from './ButtonFocusTest';
 import { PressableTest } from './PressableTest';
-import { LinkTest } from './LinkTest.win32';
+import { LinkTest } from './LinkTest';
 import { SeparatorTest } from './SeparatorTest';
 import { ThemeTest } from './ThemeTest';
 import { FocusTrapTest } from './FocusTrapZoneTest';
