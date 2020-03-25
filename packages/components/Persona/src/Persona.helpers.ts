@@ -6,27 +6,27 @@ type IPersonaFontTable = {
 };
 
 const textFontTable: IPersonaFontTable = {
-  size8: { fontSize: 'small' },
-  size24: { fontSize: 'medium' },
-  size32: { fontSize: 'medium' },
-  size40: { fontSize: 'medium' },
-  size48: { fontSize: 'medium' },
-  size56: { fontSize: 'xLarge' },
-  size72: { fontSize: 'xLarge' },
-  size100: { fontSize: 'xLarge' },
-  size120: { fontSize: 'xLarge' }
+  size8: { fontSize: 'caption' },
+  size24: { fontSize: 'secondary' },
+  size32: { fontSize: 'secondary' },
+  size40: { fontSize: 'secondary' },
+  size48: { fontSize: 'secondary' },
+  size56: { fontSize: 'subheader' },
+  size72: { fontSize: 'subheader' },
+  size100: { fontSize: 'subheader' },
+  size120: { fontSize: 'subheader' }
 };
 
 const secondaryFontTable: IPersonaFontTable = {
   size8: { fontSize: 0 },
   size24: { fontSize: 0 },
   size32: { fontSize: 0 },
-  size40: { fontSize: 'small' },
-  size48: { fontSize: 'small' },
-  size56: { fontSize: 'medium' },
-  size72: { fontSize: 'medium' },
-  size100: { fontSize: 'medium' },
-  size120: { fontSize: 'medium' }
+  size40: { fontSize: 'caption' },
+  size48: { fontSize: 'caption' },
+  size56: { fontSize: 'secondary' },
+  size72: { fontSize: 'secondary' },
+  size100: { fontSize: 'secondary' },
+  size120: { fontSize: 'secondary' }
 };
 
 const tertiaryFontTable: IPersonaFontTable = {
@@ -36,9 +36,9 @@ const tertiaryFontTable: IPersonaFontTable = {
   size40: { fontSize: 0 },
   size48: { fontSize: 0 },
   size56: { fontSize: 0 },
-  size72: { fontSize: 'medium' },
-  size100: { fontSize: 'medium' },
-  size120: { fontSize: 'medium' }
+  size72: { fontSize: 'secondary' },
+  size100: { fontSize: 'secondary' },
+  size120: { fontSize: 'secondary' }
 };
 
 const optionalFontTable: IPersonaFontTable = {
@@ -49,8 +49,8 @@ const optionalFontTable: IPersonaFontTable = {
   size48: { fontSize: 0 },
   size56: { fontSize: 0 },
   size72: { fontSize: 0 },
-  size100: { fontSize: 'medium' },
-  size120: { fontSize: 'medium' }
+  size100: { fontSize: 'secondary' },
+  size120: { fontSize: 'secondary' }
 };
 
 export function getTextFont(size: PersonaSize): ITextTokens {
