@@ -7,15 +7,9 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
   const [showStandardCallout, setShowStandardCallout] = React.useState(false);
   const [showCustomizedCallout, setShowCustomizedCallout] = React.useState(false);
 
-  const stdBtnRef = React.useRef<Text>(null);
-
   const custBtnRef = React.useRef<Text>(null);
 
   const toggleShowStandardCallout = React.useCallback(() => {
-    setShowStandardCallout(!showStandardCallout);
-  }, [showStandardCallout, setShowStandardCallout]);
-
-  const toggleShowStandardCalloutInner = React.useCallback(() => {
     setShowStandardCallout(!showStandardCallout);
   }, [showStandardCallout, setShowStandardCallout]);
 
@@ -23,23 +17,17 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
     setShowCustomizedCallout(!showCustomizedCallout);
   }, [showCustomizedCallout, setShowCustomizedCallout]);
 
-  const toggleShowCustomizedCalloutInner = React.useCallback(() => {
-    setShowCustomizedCallout(!showCustomizedCallout);
-  }, [showCustomizedCallout, setShowCustomizedCallout]);
-
   const myRect: ScreenRect = { screenX: 10, screenY: 10, width: 100, height: 100 };
   return (
     <View>
-      <Text ref={stdBtnRef} style={fabricTesterStyles.testSection}>
-        Standard Usage
-      </Text>
+      <Text style={fabricTesterStyles.testSection}>Standard Usage</Text>
       <Separator />
       <Button content="Press for Callout" onClick={toggleShowStandardCallout} />
 
       {showStandardCallout && (
         <Callout anchorRect={myRect}>
           <View style={{ height: 200, width: 400 }}>
-            <Button content="test button please ignore" onClick={toggleShowStandardCalloutInner} />
+            <Button content="test button please ignore" onClick={toggleShowStandardCallout} />
           </View>
         </Callout>
       )}
@@ -51,9 +39,9 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
       <Button content="Press for Callout" onClick={toggleShowCustomizedCallout} />
 
       {showCustomizedCallout && (
-        <Callout anchorRect={myRect}>
+        <Callout target={custBtnRef}>
           <View style={{ height: 300, width: 500 }}>
-            <Button content="test button please also ignore" onClick={toggleShowCustomizedCalloutInner} />
+            <Button content="test button please also ignore" onClick={toggleShowCustomizedCallout} />
           </View>
         </Callout>
       )}
