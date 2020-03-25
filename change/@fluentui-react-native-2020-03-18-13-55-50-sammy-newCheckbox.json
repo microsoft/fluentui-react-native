@@ -1,9 +1,0 @@
-{
-  "type": "none",
-  "comment": "Adding checkbox",
-  "packageName": "@fluentui/react-native",
-  "email": "safreibe@microsoft.com",
-  "commit": "8ebc59cae2cabafba8857fa23913a86f96d01b89",
-  "dependentChangeType": "patch",
-  "date": "2020-03-18T20:55:43.575Z"
-}
