@@ -1,6 +1,6 @@
 //
 //  AppDelegate.m
-//  FluentUIReactNative-macOS
+//  FluentUIReactNativeTester-macOS
 //
 //  Copyright © 2020 Microsoft. All rights reserved.
 //

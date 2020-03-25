@@ -1,18 +1,17 @@
 //
-//  FluentUIReactNative_macOSTests.m
-//  FluentUIReactNative-macOSTests
+//  FluentUIReactNativeTester_macOSTests.m
+//  FluentUIReactNativeTester-macOSTests
 //
-//  Created by Chris Hogan on 3/24/20.
 //  Copyright © 2020 Microsoft. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface FluentUIReactNative_macOSTests : XCTestCase
+@interface FluentUIReactNativeTester_macOSTests : XCTestCase
 
 @end
 
-@implementation FluentUIReactNative_macOSTests
+@implementation FluentUIReactNativeTester_macOSTests
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.

@@ -1,5 +1,5 @@
-target 'FluentUIReactNative-macOS' do
+target 'FluentUIReactNativeTester-macOS' do
   platform :osx, '10.14'
 
-  project 'FluentUIReactNative-macOS.xcodeproj'
+  project 'FluentUIReactNativeTester-macOS.xcodeproj'
 end
