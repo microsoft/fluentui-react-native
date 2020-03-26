@@ -2,6 +2,20 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Wed, 25 Mar 2020 23:14:43 GMT",
+      "tag": "@fluentui/react-native_v0.13.5",
+      "version": "0.13.5",
+      "comments": {
+        "none": [
+          {
+            "comment": "Adding checkbox",
+            "author": "safreibe@microsoft.com",
+            "commit": "8ebc59cae2cabafba8857fa23913a86f96d01b89"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 18 Mar 2020 00:37:12 GMT",
       "tag": "@fluentui/react-native_v0.13.3",
       "version": "0.13.3",

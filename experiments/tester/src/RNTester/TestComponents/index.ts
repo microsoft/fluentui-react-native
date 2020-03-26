@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ButtonFocusTest } from './Button';
 import { CalloutTest } from './Callout';
+import { CheckboxTest } from './CheckboxTest';
 import { FocusTrapTest } from './FocusTrapZone';
 import { LinkTest } from './Link';
 import { PersonaTest } from './Persona';
@@ -55,5 +56,9 @@ export const allTestComponents: TestDescription[] = [
   {
     name: 'Persona Test',
     component: PersonaTest
+  },
+  {
+    name: 'Checkbox Test',
+    component: CheckboxTest
   }
 ];

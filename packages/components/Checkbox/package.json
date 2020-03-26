@@ -1,7 +1,7 @@
 {
-  "name": "@fluentui-react-native/button",
-  "version": "0.2.5",
-  "description": "A cross-platform opinionated Fluent Text component",
+  "name": "@fluentui-react-native/checkbox",
+  "version": "0.1.0",
+  "description": "A cross-platform opinionated Fluent Checkbox component",
   "main": "lib/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
