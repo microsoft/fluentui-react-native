@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9F8DD790242C033500C5877B"
-               BuildableName = ".app"
+               BuildableName = "FluentUIReactNativeTester-macOS.app"
                BlueprintName = "FluentUIReactNativeTester_macOS"
                ReferencedContainer = "container:FluentUIReactNativeTester_macOS.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9F8DD790242C033500C5877B"
-            BuildableName = ".app"
+            BuildableName = "FluentUIReactNativeTester-macOS.app"
             BlueprintName = "FluentUIReactNativeTester_macOS"
             ReferencedContainer = "container:FluentUIReactNativeTester_macOS.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9F8DD790242C033500C5877B"
-            BuildableName = ".app"
+            BuildableName = "FluentUIReactNativeTester-macOS.app"
             BlueprintName = "FluentUIReactNativeTester_macOS"
             ReferencedContainer = "container:FluentUIReactNativeTester_macOS.xcodeproj">
          </BuildableReference>

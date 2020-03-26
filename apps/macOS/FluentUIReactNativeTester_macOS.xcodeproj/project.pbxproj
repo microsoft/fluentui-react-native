@@ -17,12 +17,11 @@
 		270AB6CD3EAC875B04C554AD /* Pods-FluentUIReactNativeTester_macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FluentUIReactNativeTester_macOS.debug.xcconfig"; path = "Target Support Files/Pods-FluentUIReactNativeTester_macOS/Pods-FluentUIReactNativeTester_macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		3764647238B3CE87869651A7 /* libPods-FluentUIReactNativeTester_macOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FluentUIReactNativeTester_macOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3F8D374CE12B9C46ED1519 /* Pods-FluentUIReactNativeTester_macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FluentUIReactNativeTester_macOS.release.xcconfig"; path = "Target Support Files/Pods-FluentUIReactNativeTester_macOS/Pods-FluentUIReactNativeTester_macOS.release.xcconfig"; sourceTree = "<group>"; };
-		9F8DD791242C033500C5877B /* .app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = .app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F8DD791242C033500C5877B /* FluentUIReactNativeTester-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FluentUIReactNativeTester-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F8DD794242C033600C5877B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F8DD796242C033700C5877B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F8DD799242C033700C5877B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		9F8DD79B242C033700C5877B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9F8DD79C242C033700C5877B /* FluentUIReactNativeTester_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FluentUIReactNativeTester_macOS.entitlements; sourceTree = "<group>"; };
 		9F8DD7A3242C0FFE00C5877B /* FluentUIReactNative_debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = FluentUIReactNative_debug.xcconfig; sourceTree = "<group>"; };
 		9F8DD7A4242C102000C5877B /* FluentUIReactNative_release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = FluentUIReactNative_release.xcconfig; sourceTree = "<group>"; };
 		9F8DD7A6242D160A00C5877B /* FluentUIReactNative_common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = FluentUIReactNative_common.xcconfig; sourceTree = "<group>"; };
@@ -53,7 +52,7 @@
 		9F8DD792242C033500C5877B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9F8DD791242C033500C5877B /* .app */,
+				9F8DD791242C033500C5877B /* FluentUIReactNativeTester-macOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,7 +65,6 @@
 				9F8DD796242C033700C5877B /* Assets.xcassets */,
 				9F8DD798242C033700C5877B /* MainMenu.xib */,
 				9F8DD79B242C033700C5877B /* Info.plist */,
-				9F8DD79C242C033700C5877B /* FluentUIReactNativeTester_macOS.entitlements */,
 			);
 			path = FluentUIReactNativeTester_macOS;
 			sourceTree = "<group>";
@@ -116,7 +114,7 @@
 			);
 			name = FluentUIReactNativeTester_macOS;
 			productName = FluentUIReactNativeTester_macOS;
-			productReference = 9F8DD791242C033500C5877B /* .app */;
+			productReference = 9F8DD791242C033500C5877B /* FluentUIReactNativeTester-macOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
