@@ -54,7 +54,7 @@ export const CheckboxTest: React.FunctionComponent<{}> = () => {
     setCheckedControlled1(checked);
   }, []);
 
-  const [isCheckedControlled2, setCheckedControlled2] = React.useState(false);
+  const [isCheckedControlled2, setCheckedControlled2] = React.useState(true);
   const onChangeControlled2 = React.useCallback(checked => {
     setCheckedControlled2(checked);
   }, []);
@@ -88,7 +88,7 @@ export const CheckboxTest: React.FunctionComponent<{}> = () => {
       <CircularCheckbox label="A circular checkbox" onChange={onChangeUncontrolled} defaultChecked={false} />
       <CircleColorCheckbox label="A circular token-customized checkbox" onChange={onChangeUncontrolled} defaultChecked={true} />
       <BlueCheckbox
-        label="token-customized checkbox. Customizable below."
+        label="Token-customized checkbox. Customizable below."
         onChange={onChangeUncontrolled}
         boxSide="end"
         defaultChecked={false}

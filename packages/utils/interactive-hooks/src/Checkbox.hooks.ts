@@ -17,7 +17,7 @@ export type KeyUpCallback = () => void;
  **         state.isChecked - Whether or not component is currently checked or selected
  **         state.boxAtEnd - Whether the toggle component is at the end or start
  */
-export function useAsToggle(defaultChecked?: boolean, checked?: boolean, userCallback?: OnToggleCallback) {
+export function useAsToggle(defaultChecked?: boolean, checked?: boolean, userCallback?: OnToggleCallback): [boolean, KeyUpCallback] {
   const [isChecked, setChecked] = React.useState(defaultChecked ?? checked);
 
   const onChange = React.useCallback(() => {
@@ -25,7 +25,7 @@ export function useAsToggle(defaultChecked?: boolean, checked?: boolean, userCal
     setChecked(!isChecked);
   }, [isChecked]);
 
-  return { onChange, state: { isChecked: checked != undefined ? checked : isChecked } };
+  return [checked ?? isChecked, onChange];
 }
 
 /* Re-usable hook for an onKeyUp/onKeyDown event.

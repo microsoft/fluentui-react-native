@@ -8,7 +8,7 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { settings } from './Checkbox.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
-import { useAsPressable, useAsToggle, useViewCommandFocus, useKeyCallback } from '@fluentui-react-native/interactive-hooks';
+import { useAsToggle, useAsPressable, useViewCommandFocus, useKeyCallback } from '@fluentui-react-native/interactive-hooks';
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
 
 export const Checkbox = compose<ICheckboxType>({
@@ -23,19 +23,19 @@ export const Checkbox = compose<ICheckboxType>({
     }
 
     // Re-usable hook for toggle components.
-    const data = useAsToggle(defaultChecked, checked, onChange);
+    const [isChecked, toggleChecked] = useAsToggle(defaultChecked, checked, onChange);
 
-    const pressable = useAsPressable({ onPress: data.onChange, ...rest });
+    const pressable = useAsPressable({ onPress: toggleChecked, ...rest });
 
     const buttonRef = useViewCommandFocus(userProps.componentRef);
 
     // Handles the "Space" key toggling the Checkbox
-    const onKeyUpSpace = useKeyCallback(' ', data.onChange);
+    const onKeyUpSpace = useKeyCallback(' ', toggleChecked);
 
     const state: ICheckboxState = {
       ...pressable.state,
       disabled,
-      checked: data.state.isChecked,
+      checked: isChecked,
       boxAtEnd: boxSide == undefined || boxSide == 'start' ? false : true
     };
 
