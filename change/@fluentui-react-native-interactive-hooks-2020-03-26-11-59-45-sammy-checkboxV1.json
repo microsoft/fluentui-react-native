@@ -1,0 +1,9 @@
+{
+  "type": "patch",
+  "comment": "Updating Checkbox version",
+  "packageName": "@fluentui-react-native/interactive-hooks",
+  "email": "safreibe@microsoft.com",
+  "commit": "0a82a531a8dd9cd29d1799badaa49733ef7c8ccf",
+  "dependentChangeType": "patch",
+  "date": "2020-03-26T18:59:45.509Z"
+}
