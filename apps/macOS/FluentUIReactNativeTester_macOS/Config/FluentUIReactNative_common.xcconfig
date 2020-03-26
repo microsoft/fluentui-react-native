@@ -1,0 +1,14 @@
+//
+//  Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
+//
+
+PRODUCT_MODULE_NAME = FluentUIReactNativeTester
+SWIFT_MODULE_NAME = FluentUIReactNativeTester
+
+ALWAYS_SEARCH_USER_PATHS = NO
+CLANG_ENABLE_MODULES = YES
+
+// Versions
+MACOSX_DEPLOYMENT_TARGET = 10.14
+SWIFT_VERSION = 5.0
