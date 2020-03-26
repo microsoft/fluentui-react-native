@@ -5,7 +5,7 @@ import { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { filterViewProps } from '@fluentui-react-native/adapters';
-import { settings } from './Checkbox.settings';
+import { settings, checkboxSelectActionLabel } from './Checkbox.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { useAsToggle, useAsPressable, useViewCommandFocus, useKeyCallback } from '@fluentui-react-native/interactive-hooks';
@@ -42,7 +42,26 @@ export const Checkbox = compose<ICheckboxType>({
     // Grab the styling information from the userProps, referencing the state as well as the props.
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
-    const allyStates = state.disabled ? ['disabled'] : undefined;
+    // Used when creating accessibility properties in mergeSettings below
+    const onAccessibilityAction = React.useCallback(
+      (event: { nativeEvent: { actionName: any } }) => {
+        switch (event.nativeEvent.actionName) {
+          case 'Toggle':
+            toggleChecked();
+            break;
+        }
+      },
+      [toggleChecked, userProps, state, pressable.props]
+    );
+
+    let accessibilityStates: string[] = [];
+    if (state.disabled) {
+      accessibilityStates = ['disabled'];
+    } else if (state.checked) {
+      accessibilityStates = ['checked'];
+    } else {
+      accessibilityStates = ['unchecked'];
+    }
 
     const slotProps = mergeSettings<ICheckboxSlotProps>(styleProps, {
       root: {
@@ -51,7 +70,9 @@ export const Checkbox = compose<ICheckboxType>({
         ...pressable.props,
         accessibilityRole: 'checkbox',
         accessibilityLabel: ariaLabel || label,
-        accessibilityStates: allyStates,
+        accessibilityStates: accessibilityStates,
+        accessibilityActions: [{ name: 'Toggle', label: checkboxSelectActionLabel }],
+        onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUpSpace
       },
       // Temporary checkmark until SVG functionality
