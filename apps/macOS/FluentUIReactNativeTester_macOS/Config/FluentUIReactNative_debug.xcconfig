@@ -1,0 +1,12 @@
+//
+//  Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
+//
+
+#include "FluentUIReactNative_common.xcconfig"
+#include "Pods/Target Support Files/Pods-FluentUIReactNativeTester_macOS/Pods-FluentUIReactNativeTester_macOS.debug.xcconfig"
+
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG
+SWIFT_OPTIMIZATION_LEVEL = -Onone
+GCC_OPTIMIZATION_LEVEL = 0
+COPY_PHASE_STRIP = NO;
