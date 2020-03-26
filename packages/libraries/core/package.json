@@ -29,7 +29,7 @@
     "@fluentui-react-native/adapters": "0.1.1",
     "@fluentui-react-native/interactive-hooks": "0.2.0",
     "@fluentui-react-native/button": "0.2.5",
-    "@fluentui-react-native/checkbox": "0.1.0",
+    "@fluentui-react-native/checkbox": "0.1.1",
     "@fluentui-react-native/focus-trap-zone": "0.2.5",
     "@fluentui-react-native/link": "0.2.5",
     "@fluentui-react-native/persona": "0.2.4",
