@@ -24,7 +24,7 @@
       "type": "node",
       "request": "launch",
       "program": "${workspaceRoot}/scripts/debug-metro-pack.js",
-      "cwd": "${workspaceFolder}/experiments/react-native-uifabric",
+      "cwd": "${workspaceFolder}/packages/libraries/core",
       "args": ["rnTester"],
       "runtimeArgs": ["--nolazy"],
       "env": {
@@ -33,6 +33,13 @@
       "console": "integratedTerminal",
       "sourceMaps": true,
       "outFiles": []
+    },
+    {
+      "name": "Debug Fabric Tester",
+      "type": "node",
+      "request": "attach",
+      "protocol": "inspector",
+      "port": 9229
     }
   ]
 }

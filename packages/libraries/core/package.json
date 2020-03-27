@@ -1,0 +1,69 @@
+{
+  "name": "@fluentui/react-native",
+  "version": "0.14.0",
+  "description": "A react-native companion to fabric web that only depends on stock controls and theming",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "just-scripts build",
+    "just": "just-scripts",
+    "clean": "just-scripts clean",
+    "code-style": "just-scripts code-style",
+    "lint": "just-scripts eslint",
+    "bundle": "just-scripts bundle --useMetro --bundleName uifabric",
+    "start:tester": "react-native start --projectRoot ./src",
+    "start-test": "just-scripts jest-watch",
+    "update-snapshots": "just-scripts jest -u",
+    "verify-api": "just-scripts verify-api-extractor",
+    "update-api": "just-scripts update-api-extractor"
+  },
+  "dependencies": {
+    "@uifabricshared/foundation-composable": "0.5.8",
+    "@uifabricshared/foundation-compose": "1.5.11",
+    "@uifabricshared/foundation-settings": "0.4.6",
+    "@uifabricshared/foundation-tokens": "0.4.5",
+    "@uifabricshared/immutable-merge": "0.3.0",
+    "@uifabricshared/theming-ramp": "0.6.1",
+    "@uifabricshared/theming-react-native": "0.4.4",
+    "@fluentui-react-native/adapters": "0.1.1",
+    "@fluentui-react-native/interactive-hooks": "0.2.1",
+    "@fluentui-react-native/button": "0.2.6",
+    "@fluentui-react-native/callout": "0.2.0",
+    "@fluentui-react-native/checkbox": "0.1.1",
+    "@fluentui-react-native/focus-trap-zone": "0.2.6",
+    "@fluentui-react-native/link": "0.2.6",
+    "@fluentui-react-native/persona": "0.2.5",
+    "@fluentui-react-native/persona-coin": "0.2.5",
+    "@fluentui-react-native/pressable": "0.2.6",
+    "@fluentui-react-native/radio-group": "0.2.6",
+    "@fluentui-react-native/separator": "0.2.5",
+    "@fluentui-react-native/text": "0.2.5",
+    "@fluentui-react-native/tokens": "0.1.2",
+    "tslib": "^1.9.3"
+  },
+  "devDependencies": {
+    "@office-iss/react-native-win32": "0.27.3",
+    "@types/prop-types": "15.5.1",
+    "@types/react": "16.8.23",
+    "@types/react-dom": "16.8.5",
+    "@types/react-native": "^0.60.0",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "react": "16.8.6",
+    "react-native": "^0.60.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-native": "^0.59.0",
+    "@office-iss/react-native-win32": "0.27.3"
+  },
+  "metroBundles": {
+    "uifabric": {
+      "entry": "./src/index.ts",
+      "output": "./dist/fluentui-react-native.bundle"
+    }
+  },
+  "author": "",
+  "license": "MIT"
+}

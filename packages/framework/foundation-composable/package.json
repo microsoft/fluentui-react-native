@@ -1,0 +1,43 @@
+{
+  "name": "@uifabricshared/foundation-composable",
+  "version": "0.5.8",
+  "description": "Composable component building blocks",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/ui-fabric-react-native"
+  },
+  "module": "lib/index.js",
+  "main": "lib-commonjs/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "just-scripts build",
+    "bundle": "just-scripts bundle",
+    "just": "just-scripts",
+    "clean": "just-scripts clean",
+    "code-style": "just-scripts code-style",
+    "lint": "just-scripts eslint",
+    "start": "just-scripts dev",
+    "start-test": "just-scripts jest-watch",
+    "update-snapshots": "just-scripts jest -u",
+    "verify-api": "just-scripts verify-api-extractor",
+    "update-api": "just-scripts update-api-extractor"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@uifabricshared/foundation-settings": "^0.4.6"
+  },
+  "devDependencies": {
+    "@types/jest": "^19.2.2",
+    "@types/react": "16.8.23",
+    "react": "16.8.6",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
+  },
+  "beachball": {
+    "disallowedChangeTypes": [
+      "major"
+    ]
+  }
+}

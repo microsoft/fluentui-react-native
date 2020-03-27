@@ -1,0 +1,47 @@
+{
+  "name": "@uifabricshared/theming-ramp",
+  "version": "0.6.1",
+  "description": "Theming Library",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/just"
+  },
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "just-scripts build",
+    "bundle": "just-scripts bundle",
+    "just": "just-scripts",
+    "clean": "just-scripts clean",
+    "code-style": "just-scripts code-style",
+    "lint": "just-scripts eslint",
+    "start": "just-scripts dev",
+    "start-test": "just-scripts jest-watch",
+    "update-snapshots": "just-scripts jest -u",
+    "verify-api": "just-scripts verify-api-extractor",
+    "update-api": "just-scripts update-api-extractor"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@uifabricshared/foundation-settings": "^0.4.6",
+    "@uifabricshared/immutable-merge": "^0.3.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^19.2.2",
+    "@types/react": "16.8.23",
+    "react": "16.8.6",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6"
+  },
+  "beachball": {
+    "disallowedChangeTypes": [
+      "major"
+    ]
+  }
+}

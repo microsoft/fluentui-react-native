@@ -1,0 +1,52 @@
+{
+  "name": "@uifabricshared/experimental-web-controls",
+  "version": "0.1.1",
+  "description": "Experimental web control implementations",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/ui-fabric-react-native"
+  },
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "just-scripts build",
+    "bundle": "just-scripts bundle",
+    "just": "just-scripts",
+    "clean": "just-scripts clean",
+    "code-style": "just-scripts code-style",
+    "lint": "just-scripts eslint",
+    "start": "just-scripts dev",
+    "start-test": "just-scripts jest-watch",
+    "update-snapshots": "just-scripts jest -u",
+    "verify-api": "just-scripts verify-api-extractor",
+    "update-api": "just-scripts update-api-extractor"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@uifabricshared/foundation-compose": "1.5.11",
+    "@uifabricshared/foundation-settings": "0.4.6",
+    "@uifabricshared/theming-ramp": "0.6.1",
+    "@uifabricshared/theming-react-native": "0.4.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^19.2.2",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "react": "16.8.6",
+    "react-dom": "16.8.6"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "beachball": {
+    "shouldPublish": false,
+    "disallowedChangeTypes": [
+      "major"
+    ]
+  }
+}

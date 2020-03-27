@@ -1,0 +1,61 @@
+{
+  "name": "@fluentui-react-native/adapters",
+  "entries": [
+    {
+      "date": "Fri, 27 Mar 2020 04:10:56 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "shared package configs",
+            "author": "ppatboyd@outlook.com",
+            "commit": "1471793de9a859b9908ef50069aeb673d06e5b42"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 18 Mar 2020 00:37:12 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "none",
+            "author": "email not defined",
+            "commit": "eb75093eefe61d9235cb01a8adcafd105e57351c"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 17 Mar 2020 21:24:06 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Publish",
+            "author": "email not defined",
+            "commit": "cbd0e5e321d7b5f74afecae813959dfba5e52319"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 17 Mar 2020 18:24:10 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Publish",
+            "author": "email not defined",
+            "commit": "a0e097ec7cad3b88bc48215d9b58323057068794"
+          }
+        ]
+      }
+    }
+  ]
+}

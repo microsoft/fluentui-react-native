@@ -12,19 +12,32 @@
   },
   "dependencies": {
     "expo": "^35.0.0",
-    "react": "16.8.3",
-    "react-dom": "16.8.3",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
     "react-native-web": "^0.11.7",
-    "@uifabricshared/theming-react-native": "0.3.0",
-    "@uifabricshared/themed-stylesheet": "0.2.2",
-    "@uifabricshared/foundation-compose": "1.5.0"
+    "@uifabricshared/theming-react-native": "0.4.4",
+    "@uifabricshared/themed-stylesheet": "0.2.8",
+    "@uifabricshared/foundation-compose": "1.5.11"
   },
   "devDependencies": {
-    "@types/react": "^16.8.23",
-    "@types/react-native": "^0.57.65",
+    "@types/react": "16.8.23",
+    "@types/react-native": "0.57.65",
     "babel-preset-expo": "^7.1.0",
+    "just-repo-utils": "^0.2.0",
     "typescript": "^3.6.3"
+  },
+  "workspaces": {
+    "nohoist": [
+      "*react-native*",
+      "*react-native*/**",
+      "*metro*",
+      "*metro*/**",
+      "*@unimodules*",
+      "*@unimodules*/**",
+      "*expo*",
+      "*expo*/**"
+    ]
   },
   "private": true
 }

@@ -2,7 +2,10 @@ pr:
   - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'macos-latest'
+
+variables:
+  CI: true
 
 steps:
   - checkout: self
@@ -18,14 +21,17 @@ steps:
     displayName: 'yarn'
 
   - script: |
-      npm run checkchange
+      yarn checkchange
     displayName: 'check change'
 
   - script: |
-      npm run build
-    displayName: 'npm run build'
+      yarn build
+    displayName: 'yarn build'
 
   - script: |
-      yarn verify-api
       yarn check-for-changed-files
     displayName: 'Verify API and Ensure Changed Files'
+
+  - script: |
+      yarn bundle
+    displayName: 'yarn bundle'

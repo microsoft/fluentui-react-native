@@ -36,13 +36,31 @@ exports.metroPackTask = function(bundleName) {
     justTask.logger.info(`Entry file ${entryFile}.`);
     justTask.logger.info(`Output file ${outputBundlePath}.`);
 
+    const dev = (options && options.dev) || false;
+
     await Metro.runBuild(config, {
       platform: (options && options.platform) || 'win32',
       entry: entryFile,
-      minify: (options && options.minify) || true,
+      minify: !dev,
       out: outputBundlePath,
-      optimize: true
+      optimize: !dev,
+      sourceMap: dev
     });
+
+    // if the output file's extension is not '.js', metro appends the '.js' to it (how rude!)
+    // we'll rename the bundle file back to the desired name.
+    if (!outputBundlePath.endsWith('.js')) {
+      const metroBundlePath = outputBundlePath + '.js';
+      if (fs.existsSync(metroBundlePath)) {
+        if (fs.existsSync(outputBundlePath)) {
+          justTask.logger.verbose(`Deleting existing output file at ${outputBundlePath}...`);
+          fs.unlinkSync(outputBundlePath);
+        }
+
+        justTask.logger.verbose(`Renaming ${metroBundlePath} to ${outputBundlePath}...`);
+        fs.renameSync(metroBundlePath, outputBundlePath);
+      }
+    }
 
     if (done) {
       done();
