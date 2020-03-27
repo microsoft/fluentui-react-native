@@ -1428,12 +1428,6 @@
     pouchdb-collections "^1.0.1"
     tiny-queue "^0.2.1"
 
-"@fluentui-react-native/interactive-hooks@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/interactive-hooks/-/interactive-hooks-0.1.3.tgz#1e4d00f709a202de19706c88902869572732478e"
-  dependencies:
-    "@fluentui-react-native/adapters" "^0.1.1"
-
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
