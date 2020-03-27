@@ -2,10 +2,10 @@ import * as React from 'react';
 import { PersonaCoin, IconAlignment, IPersonaCoinTokens } from '@fluentui/react-native';
 import { Switch, View, Text, TextInput } from 'react-native';
 import { Slider } from '../Common/Slider';
-import { styles, steveBallmerPhotoUrl } from './styles';
+import { steveBallmerPhotoUrl } from './styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
 import { AlignmentPicker } from '../Common/AlignmentPicker';
-import { styles as commonStyles } from '../Common/styles';
+import { commonTestStyles as commonStyles } from '../Common/styles';
 
 export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
@@ -48,10 +48,10 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const CustomizedPersonaCoin = PersonaCoin.customize({ tokens });
 
   return (
-    <View style={styles.root}>
+    <View style={commonStyles.root}>
       {/* settings */}
-      <View style={styles.settings}>
-        <View style={styles.switch}>
+      <View style={commonStyles.settings}>
+        <View style={commonStyles.switch}>
           <Text>Show image</Text>
           <Switch value={showImage} onValueChange={setShowImage} />
         </View>
@@ -74,17 +74,17 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           }}
         />
 
-        <AlignmentPicker style={styles.header} label="Horizontal icon alignment" onSelectionChange={setHorizontalAlignment} />
-        <AlignmentPicker style={styles.header} label="Vertical icon alignment" onSelectionChange={setVerticalAlignment} />
+        <AlignmentPicker style={commonStyles.header} label="Horizontal icon alignment" onSelectionChange={setHorizontalAlignment} />
+        <AlignmentPicker style={commonStyles.header} label="Vertical icon alignment" onSelectionChange={setVerticalAlignment} />
 
         <Text>Coin size</Text>
-        <Slider minimum={8} maximum={200} initialValue={80} style={styles.slider} onChange={setPhysicalSize} />
+        <Slider minimum={8} maximum={200} initialValue={80} style={commonStyles.slider} onChange={setPhysicalSize} />
 
         <Text>Icon size</Text>
-        <Slider minimum={8} maximum={100} initialValue={24} style={styles.slider} onChange={setIconSize} />
+        <Slider minimum={8} maximum={100} initialValue={24} style={commonStyles.slider} onChange={setIconSize} />
 
         <Text>Font size</Text>
-        <Slider minimum={5} maximum={50} initialValue={14} style={styles.slider} onChange={setInitialsSize} />
+        <Slider minimum={5} maximum={50} initialValue={14} style={commonStyles.slider} onChange={setInitialsSize} />
       </View>
 
       {/* component under test */}

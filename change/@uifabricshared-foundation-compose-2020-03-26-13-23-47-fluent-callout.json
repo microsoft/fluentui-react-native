@@ -1,0 +1,9 @@
+{
+  "type": "none",
+  "comment": "shared package configs",
+  "packageName": "@uifabricshared/foundation-compose",
+  "email": "ppatboyd@outlook.com",
+  "commit": "1471793de9a859b9908ef50069aeb673d06e5b42",
+  "dependentChangeType": "patch",
+  "date": "2020-03-26T20:22:58.521Z"
+}

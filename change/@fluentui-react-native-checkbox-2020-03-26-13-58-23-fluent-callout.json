@@ -1,0 +1,9 @@
+{
+  "type": "none",
+  "comment": "Move api-extractor and tsconfig to shared folder",
+  "packageName": "@fluentui-react-native/checkbox",
+  "email": "ppatboyd@outlook.com",
+  "commit": "b71bf6d43b41c2049fa68c422249b6e2cff0e8b8",
+  "dependentChangeType": "patch",
+  "date": "2020-03-26T20:58:23.060Z"
+}
