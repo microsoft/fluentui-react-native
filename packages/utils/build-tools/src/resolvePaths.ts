@@ -17,7 +17,9 @@ export function nodeModulesToRoot(): string[] {
 }
 
 function queryModule(name: string, direct?: boolean): string {
-  const cur = direct ? path.resolve(require.resolve(name)) : path.resolve(require.resolve(name + '/package.json'), '..');
+  const cur = direct
+    ? path.resolve(require.resolve(name, { paths: [process.cwd()] }))
+    : path.resolve(require.resolve(name + '/package.json', { paths: [process.cwd()] }), '..');
   return normalizeToUnixPath(fs.realpathSync(cur));
 }
 

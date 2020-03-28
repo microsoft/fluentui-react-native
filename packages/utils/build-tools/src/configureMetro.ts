@@ -5,7 +5,7 @@ import path from 'path';
 import { resolveModule, resolveFile } from './resolvePaths';
 import { getAllRNVersions, getRNVersion, ensurePlatform, getAllPlatforms } from './platforms';
 import { getPackageInfo, findGitRoot, normalizeToUnixPath } from 'just-repo-utils';
-import { blacklist } from 'metro-config-60/src/defaults/blacklist';
+import blacklist from 'metro-config-60/src/defaults/blacklist';
 
 function prepareRegex(blacklistPath): RegExp {
   return new RegExp(`${blacklistPath.replace(/[/\\\\]/g, '\\/')}.*`);
@@ -43,7 +43,7 @@ function getBlacklistRE(rnPath: string): RegExp {
  *
  * @param options - metro configuration options
  */
-function configureMetro(options) {
+export function configureMetro(options) {
   const platform = ensurePlatform(options && options.platform);
   const rnPath = resolveModule('react-native');
   const rnName = getRNVersion(platform);
@@ -56,7 +56,7 @@ function configureMetro(options) {
     watchFolders: [
       // Include hoisted modules
       rnPlatformPath,
-      path.resolve(__dirname, '../..', 'node_modules'),
+      path.resolve(findGitRoot(), 'node_modules'),
       ...dependencies.paths()
     ],
     serializer: {
@@ -90,5 +90,3 @@ function configureMetro(options) {
     resetCache: false
   };
 }
-
-module.exports.configureMetro = configureMetro;
