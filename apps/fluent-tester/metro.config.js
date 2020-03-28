@@ -1,8 +1,10 @@
 const { configureMetro } = require('@uifabricshared/build-native');
-module.exports = configureMetro({
+const config = configureMetro({
   bundle: 'fluentui-shared-tester',
   platform: 'windows'
 });
+console.log(config);
+module.exports = config;
 
 /**
  * Metro configuration for React Native

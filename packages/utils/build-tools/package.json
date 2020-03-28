@@ -1,0 +1,21 @@
+{
+  "name": "@fluentui-react-native/build-tools",
+  "version": "0.1.1",
+  "description": "Build tools for working with react native",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc --target es6 --outDir lib --module esnext"
+  },
+  "dependencies": {
+    "just-repo-utils": "0.2.0",
+    "metro-config-60": "npm:metro-config@^0.54.0"
+  },
+  "devDependencies": {
+    "just-scripts": "0.36.1",
+    "typescript": "3.8.3"
+  },
+  "author": "",
+  "license": "MIT"
+}

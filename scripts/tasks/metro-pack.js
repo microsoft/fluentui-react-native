@@ -16,18 +16,19 @@ function loadOptionsFromPackagesJson(bundleName) {
   return packageConfig.metroBundles[bundleName];
 }
 
-exports.metroPackTask = function (bundleName) {
+exports.metroPackTask = function(bundleName) {
   return async function metroPack(done) {
     justTask.logger.verbose(`Starting metropack task with platform ${bundleName}...`);
 
     const options = loadOptionsFromPackagesJson(bundleName);
-    const platform = options && options.platform;
+    const { ensurePlatform } = require('../configs/platforms');
+    const platform = ensurePlatform((options && options.platform) || 'default');
     const outputBundlePath = options && options.output;
     if (!outputBundlePath) {
       throw new Error(`Couldn't find the 'metroBundles/${bundleName}/output' attribute in your packages.json file.`);
     }
     let configName = platform && `metro.config.${platform}.js`;
-    configName = (configName && fs.existsSync(path.join(process.cwd(), configName))) ? configName : 'metro.config.js';
+    configName = configName && fs.existsSync(path.join(process.cwd(), configName)) ? configName : 'metro.config.js';
     const config = await Metro.loadConfig({ config: configName });
 
     const parentDirectory = path.dirname(path.resolve('.', outputBundlePath));

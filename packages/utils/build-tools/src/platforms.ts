@@ -1,7 +1,9 @@
+export type PlatformValue = 'win32' | 'ios' | 'android' | 'windows' | 'web' | 'macos' | 'default';
+
 const _defaultPlatform = 'default';
 const _defaultVersion = 'react-native';
 
-const _rnVersions = {
+const _rnVersions: { [key in PlatformValue]: string } = {
   default: _defaultVersion,
   android: _defaultVersion,
   ios: _defaultVersion,
@@ -11,12 +13,11 @@ const _rnVersions = {
   windows: 'react-native-windows'
 };
 
-function getRNVersion(platform) {
+export function getRNVersion(platform?: PlatformValue): string {
   return (platform && _rnVersions[platform]) || _rnVersions.default;
 }
-module.exports.getRNVersion = getRNVersion;
 
-function getAllRNVersions() {
+export function getAllRNVersions(): string[] {
   return Object.keys(_rnVersions)
     .map(ver => _rnVersions[ver])
     .filter(pkg => {
@@ -27,29 +28,26 @@ function getAllRNVersions() {
       }
     });
 }
-module.exports.getAllRNVersions = getAllRNVersions;
 
-function getAllPlatforms() {
+export function getAllPlatforms(): string[] {
   return Object.keys(_rnVersions).filter(plat => plat !== _defaultPlatform);
 }
-module.exports.getAllPlatforms = getAllPlatforms;
 
-function findPlatformFromArgv() {
+function findPlatformFromArgv(): PlatformValue | undefined {
   for (let index = 0; index < process.argv.length; index++) {
     if (process.argv[index] === 'platform') {
-      return process.argv[index + 1];
+      const platformArg = process.argv[index + 1];
+      return platformArg && _rnVersions[platformArg] ? (platformArg as PlatformValue) : undefined;
     }
   }
   return undefined;
 }
 
-function findPlatform() {
+export function findPlatform(): PlatformValue {
   return findPlatformFromArgv() || _defaultPlatform;
 }
 
-module.exports.findPlatform = findPlatform;
-
-function ensurePlatform(platform) {
+export function ensurePlatform(platform?: PlatformValue): PlatformValue {
   const found = findPlatformFromArgv();
   platform = found || platform;
   if (platform && !found) {
@@ -58,10 +56,6 @@ function ensurePlatform(platform) {
   return platform || _defaultPlatform;
 }
 
-module.exports.ensurePlatform = ensurePlatform;
-
-function findReactNativePackage() {
+export function findReactNativePackage(): string {
   return getRNVersion(findPlatform());
 }
-
-module.exports.findReactNativePackage = findReactNativePackage;

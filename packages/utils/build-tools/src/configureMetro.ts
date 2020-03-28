@@ -1,30 +1,40 @@
 // @ts-check
 'use strict';
 
-const path = require('path');
-const { resolveModule, resolveFile } = require('../utils/file-paths');
-const { getAllRNVersions, getRNVersion, ensurePlatform, getAllPlatforms } = require('./platforms');
-const { getPackageInfo, findGitRoot, normalizeToUnixPath } = require('just-repo-utils');
+import path from 'path';
+import { resolveModule, resolveFile } from './resolvePaths';
+import { getAllRNVersions, getRNVersion, ensurePlatform, getAllPlatforms } from './platforms';
+import { getPackageInfo, findGitRoot, normalizeToUnixPath } from 'just-repo-utils';
+import { blacklist } from 'metro-config-60/src/defaults/blacklist';
 
-function prepareRegex(blacklistPath) {
+function prepareRegex(blacklistPath): RegExp {
   return new RegExp(`${blacklistPath.replace(/[/\\\\]/g, '\\/')}.*`);
 }
 
-function getBlacklistRE(platform) {
-  console.log(`Blacklist platform is ${platform}`);
-
-  const blacklist = require('metro-config/src/defaults/blacklist');
-  const versions = getAllRNVersions();
-  const thisVersion = getRNVersion(platform);
+/**
+ * The goal of the blacklist is to block all react-native locations from the haste map except the one blessed location.
+ * @param rnPath - path to the allowed version of react native
+ */
+function getBlacklistRE(rnPath: string): RegExp {
+  // get all react native package types in this repo (visible from this location)
+  const locations = getAllRNVersions();
+  const thisLocation = rnPath + '/';
 
   const rootPath = normalizeToUnixPath(findGitRoot());
   const cwdPath = normalizeToUnixPath(process.cwd());
 
+  // now create an array with all locations, both hoisted to the root, and based in the current working directory
+  const allPaths = [
+    ...locations.map(pkgName => `${rootPath}/node_modules/${pkgName}/`),
+    ...locations.map(pkgName => `${cwdPath}/node_modules/${pkgName}/`)
+  ];
+
+  // filter out the current valid location to ensure haste can find files there, then transform the remainder into
+  // regular expressions for matching
   return blacklist([
     //      /node_modules\/react-native\/.*/,
     //      /node_modules\/.*\/node_modules\/react-native\/.*/,
-    ...versions.filter(ver => ver !== thisVersion).map(ver => prepareRegex(rootPath + `/node_modules/${ver}/`)),
-    ...versions.map(ver => prepareRegex(cwdPath + `/node_modules/${ver}/`))
+    ...allPaths.filter(loc => loc !== thisLocation).map(loc => prepareRegex(loc))
   ]);
 }
 
@@ -40,7 +50,6 @@ function configureMetro(options) {
   const rnOverride = rnName !== 'react-native' && rnName;
   const rnPlatformPath = (rnOverride && resolveModule(rnOverride)) || rnPath;
   const dependencies = getPackageInfo({ strategy: 'update' }).dependencies();
-  console.log(`Platform is ${platform}`);
 
   return {
     // WatchFolders is only needed due to the yarn workspace layout of node_modules, we need to watch the symlinked locations separately
@@ -63,7 +72,7 @@ function configureMetro(options) {
     resolver: {
       resolverMainFields: ['react-native', 'browser', 'main'],
       extraNodeModules: { 'react-native': rnPlatformPath },
-      blacklistRE: getBlacklistRE(platform),
+      blacklistRE: getBlacklistRE(rnPlatformPath),
       hasteImplModulePath: rnPlatformPath + '/jest/hasteImpl.js',
       platforms: getAllPlatforms(),
       providesModuleNodeModules: [rnName]

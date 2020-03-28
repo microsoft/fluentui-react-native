@@ -1,17 +1,16 @@
-// @ts-check
 'use strict';
 
-const path = require('path');
-const merge = require('../utils/merge');
-const { getPackageInfo } = require('just-repo-utils');
-const { nodeModulesToRoot, resolveModule } = require('../utils/file-paths');
-const { getRNVersion, getAllPlatforms } = require('./platforms');
+import path from 'path';
+import { mergeConfigs } from './mergeConfigs';
+import { getPackageInfo } from 'just-repo-utils';
+import { nodeModulesToRoot, resolveModule } from './resolvePaths';
+import { getRNVersion, getAllPlatforms } from './platforms';
 
 const moduleFileExtensions = ['ts', 'tsx', 'js', 'jsx', 'json'];
 
-function configureJest(customConfig) {
+export function configureJest(customConfig) {
   const pkgInfo = getPackageInfo();
-  return merge(
+  return mergeConfigs(
     {
       // run tests from the src directory rather than lib
       roots: ['<rootDir>/src'],
@@ -47,16 +46,14 @@ function configureJest(customConfig) {
   );
 }
 
-exports.configureJest = configureJest;
-
-function configureReactNativeJest(platform, customConfig) {
+export function configureReactNativeJest(platform, customConfig) {
   platform = platform || 'ios';
   const rnPackage = getRNVersion(platform);
   const rnPath = resolveModule(rnPackage);
 
   console.log(__dirname);
   return configureJest(
-    merge(
+    mergeConfigs(
       {
         preset: 'react-native',
         roots: [rnPath, '<rootDir>/src'],
@@ -90,5 +87,3 @@ function configureReactNativeJest(platform, customConfig) {
     )
   );
 }
-
-exports.configureReactNativeJest = configureReactNativeJest;

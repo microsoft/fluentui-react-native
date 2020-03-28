@@ -58,6 +58,7 @@
   },
   "metroBundles": {
     "uifabric": {
+      "platform": "win32",
       "entry": "./src/index.ts",
       "output": "./dist/fluentui-react-native.bundle"
     }

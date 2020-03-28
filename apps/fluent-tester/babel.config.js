@@ -1,1 +1,3 @@
-module.exports = require('@uifabricshared/build-native/babel.config');
+module.exports = {
+  presets: ['module:metro-react-native-babel-preset']
+};
