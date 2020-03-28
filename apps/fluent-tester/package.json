@@ -19,9 +19,9 @@
     "run-win32-devmain": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps"
   },
   "dependencies": {
-    "@fluentui/react-native": "0.13.3",
+    "@fluentui/react-native": "0.14.0",
     "@fluentui-react-native/stack": "0.1.0",
-    "@uifabricshared/theming-react-native": "0.4.3",
+    "@uifabricshared/theming-react-native": "0.4.4",
     "@uifabricshared/themed-stylesheet": "0.2.8",
     "react": "16.8.6",
     "react-native": "^0.60.0",

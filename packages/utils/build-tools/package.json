@@ -6,7 +6,8 @@
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc --target es6 --outDir lib --module esnext"
+    "build": "just-scripts build",
+    "clean": "just-scripts clean"
   },
   "dependencies": {
     "just-repo-utils": "0.2.0",

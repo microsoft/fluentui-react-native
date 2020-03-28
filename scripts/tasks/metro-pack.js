@@ -21,7 +21,7 @@ exports.metroPackTask = function(bundleName) {
     justTask.logger.verbose(`Starting metropack task with platform ${bundleName}...`);
 
     const options = loadOptionsFromPackagesJson(bundleName);
-    const { ensurePlatform } = require('../configs/platforms');
+    const { ensurePlatform } = require('@fluentui-react-native/build-tools');
     const platform = ensurePlatform((options && options.platform) || 'default');
     const outputBundlePath = options && options.output;
     if (!outputBundlePath) {
