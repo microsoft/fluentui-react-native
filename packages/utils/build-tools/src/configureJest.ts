@@ -23,8 +23,6 @@ export function configureJest(customConfig) {
       moduleFileExtensions,
       moduleDirectories: nodeModulesToRoot(),
 
-      // reporter to suppress detailed logging, worth considering whether this can be switched via a verbose flag
-      reporters: [path.resolve(__dirname, './jest/jest-reporter.js')],
       snapshotSerializers: ['enzyme-to-json/serializer'],
 
       // use babel-jest to transform files including typescript
@@ -37,7 +35,9 @@ export function configureJest(customConfig) {
 
       // testRegex for which files to consider test files
       testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$',
-      testURL: 'http://localhost'
+      testURL: 'http://localhost',
+
+      verbose: false
 
       // some options which have been removed (but saved here for posterity/easy re-adding)
       // setupFiles: [path.resolve(__dirname, 'jest-setup.js')],

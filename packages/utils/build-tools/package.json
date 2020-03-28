@@ -10,10 +10,21 @@
     "clean": "just-scripts clean"
   },
   "dependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16.3": "^1.7.2",
+    "jest": "^25.2.3",
     "just-repo-utils": "0.2.0",
     "metro-config-60": "npm:metro-config@^0.54.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.1.0",
+    "@typescript-eslint/parser": "^2.1.0",
+    "eslint": ">= 6",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^9.2.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "just-scripts": "0.36.1",
     "typescript": "3.8.3"
   },

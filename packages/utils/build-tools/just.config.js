@@ -18,7 +18,7 @@ module.exports = function preset() {
       pretty: true,
       target: 'es6',
       outDir: 'lib',
-      module: 'esnext',
+      module: 'commonjs',
       ...(argv().production && { inlineSources: true, sourceRoot: path.relative(libPath, srcPath) })
     })
   );
