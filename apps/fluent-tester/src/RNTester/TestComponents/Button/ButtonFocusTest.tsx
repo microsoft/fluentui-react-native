@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, IFocusable } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle } from '../TesterStyles';
+import { stackStyle } from '../Common/styles';
 
 export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
   const [state, setState] = React.useState({

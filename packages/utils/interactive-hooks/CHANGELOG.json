@@ -2,6 +2,34 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Fri, 27 Mar 2020 04:10:56 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "shared package configs",
+            "author": "ppatboyd@outlook.com",
+            "commit": "1471793de9a859b9908ef50069aeb673d06e5b42"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 Mar 2020 23:14:43 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Adding checkbox hook",
+            "author": "safreibe@microsoft.com",
+            "commit": "8ebc59cae2cabafba8857fa23913a86f96d01b89"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 18 Mar 2020 00:37:12 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.1.3",
       "version": "0.1.3",

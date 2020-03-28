@@ -1,0 +1,19 @@
+{
+  "name": "@fluentui-react-native/callout",
+  "entries": [
+    {
+      "date": "Fri, 27 Mar 2020 04:10:56 GMT",
+      "tag": "@fluentui-react-native/callout_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Create simple FluentUI callout component",
+            "author": "ppatboyd@outlook.com",
+            "commit": "0d5392051b969cdd9856848516f658730a058b75"
+          }
+        ]
+      }
+    }
+  ]
+}
