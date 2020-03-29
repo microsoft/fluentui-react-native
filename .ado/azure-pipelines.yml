@@ -46,7 +46,7 @@ steps:
     displayName: 'yarn bundle'
 
   # Select proper XCode version
-  - template: apple-xcode-select.yml
+  - template: templates/apple-xcode-select.yml
 
   # Install any pods necessary for the project
   - template: apple-install-pods.yml
