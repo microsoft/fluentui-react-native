@@ -46,12 +46,14 @@ steps:
     displayName: 'yarn bundle'
 
   # Select proper XCode version
+  - template: templates/apple-xcode-select.yml
+  
+  # Install any pods necessary for the project
   - task: ShellScript@2
     inputs:
       scriptPath: ./ado/templates/
     displayName: "Install Pod Project Dependencies"
 
-  # Install any pods necessary for the project
   - template: templates/apple-install-pods.yml
 
   - template: templates/apple-xcode-build.yml
