@@ -49,9 +49,9 @@ steps:
   - template: templates/apple-xcode-select.yml
 
   # Install any pods necessary for the project
-  - template: apple-install-pods.yml
+  - template: templates/apple-install-pods.yml
 
-  - template: apple-xcode-build.yml
+  - template: templates/apple-xcode-build.yml
     parameters:
       xcode_sdx: macosx
       xcode_configuration: Debug
