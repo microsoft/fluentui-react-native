@@ -2,6 +2,20 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Fri, 27 Mar 2020 04:10:56 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Move api-extractor and tsconfig to shared folder",
+            "author": "ppatboyd@outlook.com",
+            "commit": "b71bf6d43b41c2049fa68c422249b6e2cff0e8b8"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 25 Mar 2020 23:14:43 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.1.0",
       "version": "0.1.0",

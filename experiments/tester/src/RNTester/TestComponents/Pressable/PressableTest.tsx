@@ -3,7 +3,7 @@ import * as ReactNative from 'react-native';
 import { Text, Pressable, IPressableState } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { useHoverState, useFocusState, usePressState } from '@fluentui/react-native';
-import { Square } from './Square';
+import { Square } from '../Common/Square';
 import { ViewWin32, IViewWin32Props } from '@office-iss/react-native-win32';
 import { StyleSheet } from 'react-native';
 

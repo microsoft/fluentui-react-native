@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { PersonaSize, PersonaCoinColor, PersonaCoin, PersonaPresence } from '@fluentui/react-native';
 import { Switch, View, Text, Picker } from 'react-native';
-import { styles, satyaPhotoUrl, undefinedText } from './styles';
+import { satyaPhotoUrl, undefinedText } from './styles';
+import { commonTestStyles as commonStyles } from '../Common/styles';
 
 type WithUndefined<T> = T | typeof undefinedText;
 
@@ -54,27 +55,27 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
   const onPresenceChange = React.useCallback(value => setPresence(value), []);
 
   return (
-    <View style={styles.root}>
+    <View style={commonStyles.root}>
       {/* settings */}
-      <View style={styles.settings}>
-        <View style={styles.switch}>
+      <View style={commonStyles.settings}>
+        <View style={commonStyles.switch}>
           <Text>Show image</Text>
           <Switch value={showImage} onValueChange={setShowImage} />
         </View>
 
-        <Picker prompt="Size" style={styles.header} selectedValue={imageSize} onValueChange={onSizeChange}>
+        <Picker prompt="Size" style={commonStyles.header} selectedValue={imageSize} onValueChange={onSizeChange}>
           {allSizes.map((size, index) => (
             <Picker.Item label={size} key={index} value={size} />
           ))}
         </Picker>
 
-        <Picker prompt="Coin color" style={styles.header} selectedValue={coinColor} onValueChange={onColorChange}>
+        <Picker prompt="Coin color" style={commonStyles.header} selectedValue={coinColor} onValueChange={onColorChange}>
           {allColors.map((color, index) => (
             <Picker.Item label={color} key={index} value={color} />
           ))}
         </Picker>
 
-        <Picker prompt="Presence status" style={styles.header} selectedValue={presence} onValueChange={onPresenceChange}>
+        <Picker prompt="Presence status" style={commonStyles.header} selectedValue={presence} onValueChange={onPresenceChange}>
           {allPresences.map((presence, index) => (
             <Picker.Item label={presence} key={index} value={presence} />
           ))}
