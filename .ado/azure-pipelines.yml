@@ -49,7 +49,9 @@ steps:
   - template: templates/apple-xcode-select.yml
   
   # Install any pods necessary for the project
-  - bash: templates/apple-install-pods.sh
+  - bash: |
+      cd ../apps/macOS &&
+      pod install
     displayName: "Install Pod Project Dependencies"
 
   - template: templates/apple-xcode-build.yml
