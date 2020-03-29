@@ -61,7 +61,7 @@ steps:
       xcode_useXcpretty: true
       xcode_destination: 'platform=macOS,arch=x86_64'
 
-  - template: apple-xcode-build.yml
+  - template: templates/apple-xcode-build.yml
     parameters:
       xcode_sdx: macosx
       xcode_configuration: Release
