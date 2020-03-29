@@ -1,0 +1,8 @@
+#
+# Task Group: Install Pods
+#
+steps:
+  - bash: |
+      cd apps/macOS; pod install; cd ../..
+    displayName: 'Install Pods'
+    failOnStderr: true

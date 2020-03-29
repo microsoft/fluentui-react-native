@@ -1,0 +1,8 @@
+#
+# Task Group: XCode select proper version
+#
+steps:
+  - bash: |
+      sudo xcode-select --switch '/Applications/Xcode_11.2.1.app'
+    displayName: 'Switch to XCode 11.2.1'
+    failOnStderr: true
