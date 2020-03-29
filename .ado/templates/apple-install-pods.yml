@@ -3,6 +3,8 @@
 #
 steps:
   - bash: |
-      cd apps/macOS; pod install; cd ../..
-    displayName: 'Install Pods'
+      cd apps/macOS
+      pod install
+      cd ../..
+    displayName: 'Install Pod Dependencies'
     failOnStderr: true
