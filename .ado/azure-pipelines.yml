@@ -60,7 +60,7 @@ steps:
       xcode_configuration: Debug
       xcode_workspacePath: apps/macOS/FluentUIReactNativeTester_macOS.xcworkspace
       xcode_scheme: 'FluentUIReactNativeTester_macOS-Debug'
-      xcode_actions: 'build test'
+      xcode_actions: 'build'
       xcode_useXcpretty: true
       xcode_destination: 'platform=macOS,arch=x86_64'
 
