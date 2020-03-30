@@ -3,13 +3,13 @@ import { ITheme, ITypography } from '@uifabricshared/theming-ramp';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 
 export interface ITextVariantTokens {
-  fontVariant?: keyof ITypography['variants'] | string;
+  fontVariant?: keyof ITypography['variants'];
 }
 
 export interface ITextStyleTokens {
-  fontFamily?: keyof ITypography['families'] | TextStyle['fontFamily'] | string;
-  fontSize?: keyof ITypography['sizes'] | TextStyle['fontSize'] | string;
-  fontWeight?: keyof ITypography['weights'] | TextStyle['fontWeight'] | string;
+  fontFamily?: keyof ITypography['families'] | TextStyle['fontFamily'];
+  fontSize?: keyof ITypography['sizes'] | TextStyle['fontSize'];
+  fontWeight?: keyof ITypography['weights'] | TextStyle['fontWeight'];
 }
 
 export type ITextTokens = ITextStyleTokens & ITextVariantTokens;
