@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/theme-registry
 
-This log was last generated on Sat, 07 Mar 2020 00:42:50 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Mar 2020 16:27:00 GMT and should not be manually modified.
 
+## 0.2.6
+Mon, 30 Mar 2020 16:27:00 GMT
+
+### Patches
+
+- Update main attribute to specify TypeScript index file. (kinhln@microsoft.com)
 ## 0.2.4
 Sat, 07 Mar 2020 00:42:50 GMT
 

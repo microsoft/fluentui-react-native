@@ -2,6 +2,20 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Mon, 30 Mar 2020 16:27:00 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.5.12",
+      "version": "1.5.12",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update main attribute to specify TypeScript index file.",
+            "author": "kinhln@microsoft.com",
+            "commit": "ab291fb90d584c81310aa6559d05a360e86f97de"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 27 Mar 2020 04:10:56 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.5.11",
       "version": "1.5.11",
