@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { View, TextInput } from 'react-native';
+import { View, TextInput, Text } from 'react-native';
 import { Checkbox } from '@fluentui/react-native';
-import { TextWin32 } from '@office-iss/react-native-win32';
 import { Separator } from '@fluentui/react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
@@ -65,14 +64,14 @@ export const CheckboxTest: React.FunctionComponent<{}> = () => {
 
   return (
     <View>
-      <TextWin32 style={commonStyles.section}>Basic Checkboxes</TextWin32>
+      <Text style={commonStyles.section}>Basic Checkboxes</Text>
       <Separator />
       <Checkbox label="Unchecked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked={false} />
       <Checkbox label="Checked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked={true} ariaLabel="Hello there" />
       <Checkbox label="Disabled checkbox" onChange={onChangeUncontrolled} defaultChecked={false} disabled={true} />
       <Checkbox label="Disabled checked checkbox" onChange={onChangeUncontrolled} defaultChecked={true} disabled={true} />
 
-      <TextWin32 style={commonStyles.section}>Other Implementations</TextWin32>
+      <Text style={commonStyles.section}>Other Implementations</Text>
       <Separator />
       <Checkbox label="This is a controlled Checkbox" onChange={onChangeControlled1} checked={isCheckedControlled1} />
       <Checkbox
@@ -82,7 +81,7 @@ export const CheckboxTest: React.FunctionComponent<{}> = () => {
         checked={isCheckedControlled2}
       />
 
-      <TextWin32 style={commonStyles.section}>Token Customized Checkboxes</TextWin32>
+      <Text style={commonStyles.section}>Token Customized Checkboxes</Text>
       <Separator />
       <CircularCheckbox label="A circular checkbox" onChange={onChangeUncontrolled} defaultChecked={false} />
       <CircleColorCheckbox label="A circular token-customized checkbox" onChange={onChangeUncontrolled} defaultChecked={true} />
