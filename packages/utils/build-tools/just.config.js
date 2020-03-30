@@ -10,8 +10,6 @@ const libPath = path.join(process.cwd(), 'lib');
 module.exports = function preset() {
   option('production');
 
-  task('clean', cleanTask([libPath]));
-
   task(
     'ts',
     tscTask({
@@ -24,6 +22,8 @@ module.exports = function preset() {
   );
 
   task('lint', eslintTask({ files: ['src/.'] }));
-  task('build', series('clean', parallel('lint', 'ts')));
+  task('cleanlib', cleanTask([libPath]));
+  task('build', series('cleanlib', parallel('lint', 'ts')));
   task('no-op', () => {});
+  task('clean', 'no-op');
 };

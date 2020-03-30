@@ -18,6 +18,7 @@
     "docs": "cd docs && npm start",
     "build": "lerna run build --stream -- --production --lint --color",
     "bundle": "lerna run bundle --stream -- --production --lint --color",
+    "clean": "lerna run clean --stream",
     "change": "beachball change",
     "check-for-changed-files": "cd scripts && yarn fluentui-scripts check-for-modified-files",
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",

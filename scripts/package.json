@@ -9,7 +9,7 @@
   "scripts": {
     "build": "node ./just-scripts.js no-op",
     "bundlesize": "bundlesize --debug",
-    "clean": "",
+    "clean": "node ./just-scripts.js no-op",
     "code-style": "node ./just-scripts.js code-style",
     "test": "jest",
     "prettier": "node ./just-scripts.js prettier",
@@ -38,6 +38,7 @@
     "@types/es6-promise": "0.0.32",
     "@types/jest": "^25.1.4",
     "@types/node": "^12.11.2",
+    "@types/react-native": "0.60.31",
     "@types/react-test-renderer": "16.9.0",
     "@types/webpack-env": "1.13.6",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
@@ -83,8 +84,8 @@
     "metro": "^0.54.0",
     "metro-config": "^0.54.0",
     "metro-react-native-babel-preset": "^0.54.0",
-    "node-glob": "1.2.0",
     "ngrok": "^3.0.1",
+    "node-glob": "1.2.0",
     "node-sass": "^4.5.3",
     "p-queue": "^6.0.2",
     "postcss": "^6.0.9",
@@ -108,8 +109,7 @@
     "webpack-cli": "3.2.3",
     "webpack-dev-server": "3.1.14",
     "webpack-notifier": "^1.6.0",
-    "yargs": "^15.3.1",
-    "@types/react-native": "0.60.31"
+    "yargs": "^15.3.1"
   },
   "bundlesize": [
     {
