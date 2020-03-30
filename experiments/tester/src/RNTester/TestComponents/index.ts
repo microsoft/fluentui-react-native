@@ -9,6 +9,7 @@ import { PersonaCoinTest } from './PersonaCoin';
 import { PressableTest } from './Pressable';
 import { RadioGroupTest } from './RadioGroup';
 import { SeparatorTest } from './Separator';
+import { TextTest } from './Text';
 import { ThemeTest } from './Theme';
 
 export type TestDescription = {

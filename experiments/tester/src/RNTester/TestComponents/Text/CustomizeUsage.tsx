@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui-react-native/text';
-import { stackStyle } from '../../TesterStyles';
+import { stackStyle } from '../Common/styles';
 import { styles } from './styles';
 
 export const CustomizeUsage: React.FunctionComponent<{}> = () => {
