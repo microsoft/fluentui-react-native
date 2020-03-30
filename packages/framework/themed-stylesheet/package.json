@@ -1,13 +1,13 @@
 {
   "name": "@uifabricshared/themed-stylesheet",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Helper for using react-native StyleSheets with themes",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/ui-fabric-react-native"
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "just-scripts build",

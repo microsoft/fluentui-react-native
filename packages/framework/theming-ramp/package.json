@@ -1,13 +1,13 @@
 {
   "name": "@uifabricshared/theming-ramp",
-  "version": "0.6.0",
+  "version": "0.6.2",
   "description": "Theming Library",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/just"
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "just-scripts build",
@@ -26,8 +26,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": "^0.4.5",
-    "@uifabricshared/immutable-merge": "^0.3.0"
+    "@uifabricshared/foundation-settings": "^0.4.7",
+    "@uifabricshared/immutable-merge": "^0.3.1"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

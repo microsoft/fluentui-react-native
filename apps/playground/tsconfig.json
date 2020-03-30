@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "@uifabricshared/build-native/tsconfig.json",
   "compilerOptions": {
     "outDir": "lib",
     "allowSyntheticDefaultImports": true,

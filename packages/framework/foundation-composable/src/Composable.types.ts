@@ -17,7 +17,7 @@ export interface IComposableType<
   props: TProps;
 
   /**
-   * slotProps, an object containing at least { root: IRootPropType }.  The type of this object will dictate
+   * slotProps, an object containing at least \{ root: IRootPropType \}.  The type of this object will dictate
    * the slots on the component.
    */
   slotProps: TSlotProps;
