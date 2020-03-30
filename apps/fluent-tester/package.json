@@ -2,8 +2,9 @@
   "name": "@fluentui-react-native/tester",
   "version": "0.0.1",
   "private": true,
-  "main": "lib-commonjs/RNTester.js",
-  "module": "lib/RNTester.js",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
     "just": "fluentui-scripts",
