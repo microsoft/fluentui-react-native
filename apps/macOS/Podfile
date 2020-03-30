@@ -1,0 +1,5 @@
+target 'FluentUIReactNativeTester_macOS' do
+  platform :osx, '10.15'
+
+  project 'FluentUIReactNativeTester_macOS.xcodeproj'
+end

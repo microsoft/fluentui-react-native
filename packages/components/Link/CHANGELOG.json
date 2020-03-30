@@ -2,6 +2,34 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Mon, 30 Mar 2020 16:27:00 GMT",
+      "tag": "@fluentui-react-native/link_v0.2.7",
+      "version": "0.2.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update main attribute to specify TypeScript index file.",
+            "author": "kinhln@microsoft.com",
+            "commit": "ab291fb90d584c81310aa6559d05a360e86f97de"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 27 Mar 2020 04:10:56 GMT",
+      "tag": "@fluentui-react-native/link_v0.2.6",
+      "version": "0.2.6",
+      "comments": {
+        "none": [
+          {
+            "comment": "shared package configs",
+            "author": "ppatboyd@outlook.com",
+            "commit": "1471793de9a859b9908ef50069aeb673d06e5b42"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 18 Mar 2020 00:37:12 GMT",
       "tag": "@fluentui-react-native/link_v0.2.3",
       "version": "0.2.3",

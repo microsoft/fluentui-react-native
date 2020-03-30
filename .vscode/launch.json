@@ -39,7 +39,8 @@
       "type": "node",
       "request": "attach",
       "protocol": "inspector",
-      "port": 9229
+      "port": 9229,
+      "sourceMaps": true
     }
   ]
 }

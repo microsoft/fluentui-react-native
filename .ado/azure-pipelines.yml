@@ -1,0 +1,75 @@
+pr:
+  - master
+
+pool:
+  vmImage: 'macos-latest'
+
+variables:
+  CI: true
+
+steps:
+  - checkout: self
+    persistCredentials: true
+
+  # Clean Derived Data
+  - script: |
+      rm -rf $(Build.Repository.LocalPath)/DerivedData
+    displayName: 'Clean DerivedData'
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '10.x'
+    displayName: 'Install Node.js'
+
+  - script: |
+      sudo gem install cocoapods
+    displayName: 'Install Cocoapods Environment'
+
+  - script: |
+      yarn
+    displayName: 'yarn'
+
+  - script: |
+      yarn checkchange
+    displayName: 'check change'
+
+  - script: |
+      yarn build
+    displayName: 'yarn build'
+
+  - script: |
+      yarn check-for-changed-files
+    displayName: 'Verify API and Ensure Changed Files'
+
+  - script: |
+      yarn bundle
+    displayName: 'yarn bundle'
+
+  # Select proper XCode version
+  - template: templates/apple-xcode-select.yml
+  
+  # Install any pods necessary for the project
+  - bash: |
+      cd apps/macOS &&
+      pod install
+    displayName: "Install Pod Project Dependencies"
+
+  - template: templates/apple-xcode-build.yml
+    parameters:
+      xcode_sdx: macosx
+      xcode_configuration: Debug
+      xcode_workspacePath: apps/macOS/FluentUIReactNativeTester_macOS.xcworkspace
+      xcode_scheme: 'FluentUIReactNativeTester_macOS-Debug'
+      xcode_actions: 'build'
+      xcode_useXcpretty: true
+      xcode_destination: 'platform=macOS,arch=x86_64'
+
+  - template: templates/apple-xcode-build.yml
+    parameters:
+      xcode_sdx: macosx
+      xcode_configuration: Release
+      xcode_workspacePath: apps/macOS/FluentUIReactNativeTester_macOS.xcworkspace
+      xcode_scheme: 'FluentUIReactNativeTester_macOS-Release'
+      xcode_actions: 'build'
+      xcode_useXcpretty: false
+      xcode_destination: 'platform=macOS,arch=x86_64'

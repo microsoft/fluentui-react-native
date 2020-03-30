@@ -1,13 +1,13 @@
 {
   "name": "@uifabricshared/foundation-compose",
-  "version": "1.5.10",
+  "version": "1.5.12",
   "description": "Compose infrastructure",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/ui-fabric-react-native"
   },
-  "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "just-scripts build",
@@ -26,11 +26,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/themed-settings": "^0.3.4",
-    "@uifabricshared/foundation-composable": "^0.5.7",
-    "@uifabricshared/foundation-tokens": "^0.4.4",
-    "@uifabricshared/theming-react-native": "^0.4.3",
-    "@uifabricshared/theming-ramp": "^0.6.0"
+    "@uifabricshared/themed-settings": "^0.3.6",
+    "@uifabricshared/foundation-composable": "^0.5.9",
+    "@uifabricshared/foundation-tokens": "^0.4.6",
+    "@uifabricshared/theming-react-native": "^0.4.5",
+    "@uifabricshared/theming-ramp": "^0.6.2"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

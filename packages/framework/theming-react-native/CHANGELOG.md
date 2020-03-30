@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Wed, 11 Mar 2020 17:57:52 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Mar 2020 16:27:00 GMT and should not be manually modified.
 
+## 0.4.5
+Mon, 30 Mar 2020 16:27:00 GMT
+
+### Patches
+
+- Update main attribute to specify TypeScript index file. (kinhln@microsoft.com)
 ## 0.4.3
 Wed, 11 Mar 2020 17:57:52 GMT
 

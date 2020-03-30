@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-composable
 
-This log was last generated on Tue, 24 Mar 2020 21:40:11 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Mar 2020 16:27:00 GMT and should not be manually modified.
 
+## 0.5.9
+Mon, 30 Mar 2020 16:27:00 GMT
+
+### Patches
+
+- Update main attribute to specify TypeScript index file. (kinhln@microsoft.com)
 ## 0.5.7
 Tue, 24 Mar 2020 21:40:11 GMT
 
