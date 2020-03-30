@@ -26,6 +26,16 @@ export type FontSize = keyof IFontSizes | FontSizeValuePoints;
 export type FontSizeValuePoints = number;
 
 // @public
+export type FontVariant = keyof IFontVariants | FontVariantValue;
+
+// @public
+export type FontVariantValue = {
+    face: FontFamily;
+    size: FontSize;
+    weight: FontWeight;
+};
+
+// @public
 export type FontWeight = keyof IFontWeights | FontWeightValue;
 
 // @public
@@ -35,7 +45,21 @@ export type FontWeightValue = '100' | '200' | '300' | '400' | '500' | '600' | '7
 export function getSettings(theme: ITheme, name: string): IComponentSettings;
 
 // @public (undocumented)
-export function getStockWebPalette(): IPalette;
+export function getStockWebPalette(): IThemeColorDefinition;
+
+// @public (undocumented)
+export interface ICastableToString {
+    // (undocumented)
+    toString: () => string;
+}
+
+// @public (undocumented)
+export interface IColorRamp extends ICastableToString {
+    // (undocumented)
+    index: number;
+    // (undocumented)
+    values: string[];
+}
 
 // @public (undocumented)
 export interface IFabricWebPalette {
@@ -114,37 +138,57 @@ export interface IFontFamilies {
 // @public
 export interface IFontSizes {
     // (undocumented)
-    large: FontSizeValuePoints;
+    body: FontSizeValuePoints;
     // (undocumented)
-    medium: FontSizeValuePoints;
+    caption: FontSizeValuePoints;
     // (undocumented)
-    small: FontSizeValuePoints;
+    header: FontSizeValuePoints;
     // (undocumented)
-    xLarge: FontSizeValuePoints;
+    hero: FontSizeValuePoints;
     // (undocumented)
-    xSmall: FontSizeValuePoints;
+    heroLarge: FontSizeValuePoints;
     // (undocumented)
-    xxLarge: FontSizeValuePoints;
+    secondary: FontSizeValuePoints;
     // (undocumented)
-    xxSmall: FontSizeValuePoints;
+    subheader: FontSizeValuePoints;
+}
+
+// @public
+export interface IFontVariants {
     // (undocumented)
-    xxxLarge: FontSizeValuePoints;
+    bodySemibold: FontVariantValue;
     // (undocumented)
-    xxxSmall: FontSizeValuePoints;
+    bodyStandard: FontVariantValue;
+    // (undocumented)
+    captionStandard: FontVariantValue;
+    // (undocumented)
+    headerSemibold: FontVariantValue;
+    // (undocumented)
+    headerStandard: FontVariantValue;
+    // (undocumented)
+    heroLargeSemibold: FontVariantValue;
+    // (undocumented)
+    heroLargeStandard: FontVariantValue;
+    // (undocumented)
+    heroSemibold: FontVariantValue;
+    // (undocumented)
+    heroStandard: FontVariantValue;
+    // (undocumented)
+    secondarySemibold: FontVariantValue;
+    // (undocumented)
+    secondaryStandard: FontVariantValue;
+    // (undocumented)
+    subheaderSemibold: FontVariantValue;
+    // (undocumented)
+    subheaderStandard: FontVariantValue;
 }
 
 // @public
 export interface IFontWeights {
     // (undocumented)
-    bold: FontWeightValue;
-    // (undocumented)
-    light: FontWeightValue;
-    // (undocumented)
-    medium: FontWeightValue;
+    regular: FontWeightValue;
     // (undocumented)
     semiBold: FontWeightValue;
-    // (undocumented)
-    semiLight: FontWeightValue;
 }
 
 // @public
@@ -153,8 +197,8 @@ export type IPalette = IPaletteTextColors & IPaletteBackgroundColors;
 // @public
 export interface IPaletteBackgroundColors {
     accentButtonBackground: ColorValue;
+    background: ColorValue;
     blockingBackground: ColorValue;
-    bodyBackground: ColorValue;
     bodyDivider: ColorValue;
     bodyFrameBackground: ColorValue;
     bodyFrameDivider: ColorValue;
@@ -167,6 +211,7 @@ export interface IPaletteBackgroundColors {
     buttonBackgroundPressed: ColorValue;
     buttonBorder: ColorValue;
     buttonBorderDisabled: ColorValue;
+    buttonBorderFocused: ColorValue;
     defaultStateBackground: ColorValue;
     disabledBackground: ColorValue;
     errorBackground: ColorValue;
@@ -198,6 +243,7 @@ export interface IPaletteBackgroundColors {
     primaryButtonBackgroundHovered: ColorValue;
     primaryButtonBackgroundPressed: ColorValue;
     primaryButtonBorder: ColorValue;
+    primaryButtonBorderFocused: ColorValue;
     smallInputBorder: ColorValue;
     successBackground: ColorValue;
     variantBorder: ColorValue;
@@ -211,7 +257,6 @@ export interface IPaletteTextColors {
     accentButtonText: ColorValue;
     actionLink: ColorValue;
     actionLinkHovered: ColorValue;
-    bodySubtext: ColorValue;
     bodyText: ColorValue;
     bodyTextChecked: ColorValue;
     buttonText: ColorValue;
@@ -229,15 +274,14 @@ export interface IPaletteTextColors {
     inputText: ColorValue;
     inputTextHovered: ColorValue;
     link: ColorValue;
-    linkDisabled: ColorValue;
     linkHovered: ColorValue;
     linkPressed: ColorValue;
-    linkVisited: ColorValue;
     listText: ColorValue;
     primaryButtonText: ColorValue;
     primaryButtonTextDisabled: ColorValue;
     primaryButtonTextHovered: ColorValue;
     primaryButtonTextPressed: ColorValue;
+    subText: ColorValue;
     warningText: ColorValue;
 }
 
@@ -247,9 +291,13 @@ export type IPartialPalette = Partial<IPalette>;
 // @public
 export interface IPartialTheme {
     // (undocumented)
-    palette?: IPartialPalette;
+    colors?: Partial<IThemeColorDefinition>;
     // (undocumented)
-    settings?: IComponentSettingsCollection;
+    components?: IComponentSettingsCollection;
+    // (undocumented)
+    host?: object;
+    // (undocumented)
+    name?: string;
     // (undocumented)
     spacing?: ISpacing;
     // (undocumented)
@@ -276,206 +324,47 @@ export interface ISpacing {
 }
 
 // @public
+export interface ITextStyle {
+    // (undocumented)
+    families: IFontFamilies;
+    // (undocumented)
+    sizes: IFontSizes;
+    // (undocumented)
+    variants: IFontVariants;
+    // (undocumented)
+    weights: IFontWeights;
+}
+
+// @public
 export interface ITheme {
     // (undocumented)
-    palette: IPalette;
+    colors: IThemeColorDefinition;
     // (undocumented)
-    settings: IComponentSettingsCollection;
+    components: IComponentSettingsCollection;
+    // (undocumented)
+    host: object;
+    // (undocumented)
+    name?: string;
     // (undocumented)
     spacing: ISpacing;
     // (undocumented)
     typography: ITypography;
 }
 
-// @public
-export interface ITypography {
-    // (undocumented)
-    families: IFontFamilies;
-    // (undocumented)
-    sizes: IFontSizes;
-    // (undocumented)
-    weights: IFontWeights;
-}
+// @public (undocumented)
+export type IThemeColorDefinition = IPalette & {
+    background: ColorValue;
+    bodyText: ColorValue;
+    subText: ColorValue;
+    disabledText: ColorValue;
+    brand: IColorRamp;
+    neutral: IColorRamp;
+    warning: IColorRamp;
+    [key: string]: IColorRamp | string;
+};
 
 // @public (undocumented)
-export interface IWindowsPalette {
-    accentDark: ColorValue;
-    // (undocumented)
-    accentEmphasis: ColorValue;
-    // (undocumented)
-    accentLight: ColorValue;
-    // (undocumented)
-    accentOutline: ColorValue;
-    background: ColorValue;
-    backgroundControl: ColorValue;
-    // (undocumented)
-    backgroundControlDisabled: ColorValue;
-    backgroundControlEmphasis: ColorValue;
-    // (undocumented)
-    backgroundControlEmphasisDisabled: ColorValue;
-    // (undocumented)
-    backgroundControlEmphasisHover: ColorValue;
-    // (undocumented)
-    backgroundControlEmphasisPressed: ColorValue;
-    // (undocumented)
-    backgroundControlHover: ColorValue;
-    // (undocumented)
-    backgroundControlPressed: ColorValue;
-    // (undocumented)
-    backgroundControlSelected: ColorValue;
-    backgroundControlSubtle: ColorValue;
-    // (undocumented)
-    backgroundControlSubtleDisabled: ColorValue;
-    // (undocumented)
-    backgroundControlSubtleHover: ColorValue;
-    // (undocumented)
-    backgroundControlSubtlePressed: ColorValue;
-    // (undocumented)
-    backgroundControlSubtleSelectionHighlight: ColorValue;
-    backgroundHeader: ColorValue;
-    // (undocumented)
-    backgroundHover: ColorValue;
-    // (undocumented)
-    backgroundPressed: ColorValue;
-    // (undocumented)
-    backgroundSelected: ColorValue;
-    // (undocumented)
-    backgroundSelectionHighlight: ColorValue;
-    // (undocumented)
-    strokeControl: ColorValue;
-    // (undocumented)
-    strokeControlDisabled: ColorValue;
-    // (undocumented)
-    strokeControlEmphasis: ColorValue;
-    // (undocumented)
-    strokeControlEmphasisDisabled: ColorValue;
-    // (undocumented)
-    strokeControlEmphasisHover: ColorValue;
-    // (undocumented)
-    strokeControlEmphasisKeyboard: ColorValue;
-    // (undocumented)
-    strokeControlEmphasisPressed: ColorValue;
-    // (undocumented)
-    strokeControlHover: ColorValue;
-    // (undocumented)
-    strokeControlKeyboard: ColorValue;
-    // (undocumented)
-    strokeControlPressed: ColorValue;
-    // (undocumented)
-    strokeControlSelected: ColorValue;
-    // (undocumented)
-    strokeControlSubtle: ColorValue;
-    // (undocumented)
-    strokeControlSubtleDisabled: ColorValue;
-    // (undocumented)
-    strokeControlSubtleHover: ColorValue;
-    // (undocumented)
-    strokeControlSubtleKeyboard: ColorValue;
-    // (undocumented)
-    strokeControlSubtlePressed: ColorValue;
-    // (undocumented)
-    strokeKeyboard: ColorValue;
-    // (undocumented)
-    strokeOverlayHover: ColorValue;
-    // (undocumented)
-    strokeOverlayPressed: ColorValue;
-    // (undocumented)
-    strokeOverlayRest: ColorValue;
-    // (undocumented)
-    strokeOverlaySelectedHover: ColorValue;
-    // (undocumented)
-    strokeOverlaySelectedPressed: ColorValue;
-    // (undocumented)
-    strokeOverlaySelectedRest: ColorValue;
-    // (undocumented)
-    strokeSelectedHover: ColorValue;
-    text: ColorValue;
-    textActive: ColorValue;
-    // (undocumented)
-    textActiveHover: ColorValue;
-    // (undocumented)
-    textActivePressed: ColorValue;
-    // (undocumented)
-    textActiveSelected: ColorValue;
-    // (undocumented)
-    textControl: ColorValue;
-    // (undocumented)
-    textControlDisabled: ColorValue;
-    // (undocumented)
-    textControlEmphasis: ColorValue;
-    // (undocumented)
-    textControlEmphasisDisabled: ColorValue;
-    // (undocumented)
-    textControlEmphasisHover: ColorValue;
-    // (undocumented)
-    textControlEmphasisPressed: ColorValue;
-    // (undocumented)
-    textControlHover: ColorValue;
-    // (undocumented)
-    textControlPressed: ColorValue;
-    // (undocumented)
-    textControlSelected: ColorValue;
-    // (undocumented)
-    textControlSubtle: ColorValue;
-    // (undocumented)
-    textControlSubtleDisabled: ColorValue;
-    // (undocumented)
-    textControlSubtleHover: ColorValue;
-    // (undocumented)
-    textControlSubtlePlaceholder: ColorValue;
-    // (undocumented)
-    textControlSubtlePressed: ColorValue;
-    // (undocumented)
-    textControlSubtleSelectionHighlight: ColorValue;
-    // (undocumented)
-    textDisabled: ColorValue;
-    // (undocumented)
-    textEmphasis: ColorValue;
-    // (undocumented)
-    textEmphasisHover: ColorValue;
-    // (undocumented)
-    textEmphasisPressed: ColorValue;
-    // (undocumented)
-    textEmphasisRest: ColorValue;
-    // (undocumented)
-    textEmphasisSelected: ColorValue;
-    textError: ColorValue;
-    // (undocumented)
-    textErrorHover: ColorValue;
-    // (undocumented)
-    textErrorPressed: ColorValue;
-    // (undocumented)
-    textErrorSelected: ColorValue;
-    // (undocumented)
-    textHeader: ColorValue;
-    // (undocumented)
-    textHover: ColorValue;
-    textHyperlink: ColorValue;
-    // (undocumented)
-    textHyperlinkHover: ColorValue;
-    // (undocumented)
-    textHyperlinkPressed: ColorValue;
-    // (undocumented)
-    textHyperlinkVisited: ColorValue;
-    // (undocumented)
-    textPressed: ColorValue;
-    // (undocumented)
-    textRest: ColorValue;
-    // (undocumented)
-    textSecondary: ColorValue;
-    // (undocumented)
-    textSecondaryHover: ColorValue;
-    // (undocumented)
-    textSecondaryPressed: ColorValue;
-    // (undocumented)
-    textSecondaryRest: ColorValue;
-    // (undocumented)
-    textSecondarySelected: ColorValue;
-    // (undocumented)
-    textSelected: ColorValue;
-    // (undocumented)
-    textSelectionHighlight: ColorValue;
-}
+export type ITypography = ITextStyle;
 
 // @public
 export function paletteFromFabricColors(p: IFabricWebPalette, isInverted?: boolean): IPalette;
