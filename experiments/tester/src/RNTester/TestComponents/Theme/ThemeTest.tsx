@@ -2,10 +2,10 @@ import * as React from 'react';
 import * as ReactNative from 'react-native';
 import { getHostSettingsWin32, ThemeProvider, useTheme, IThemeDefinition, ThemingModuleHelper } from '@uifabricshared/theming-react-native';
 import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
-import { commonTestStyles } from '../styles';
+import { commonTestStyles } from '../Common/styles';
 import { Button, PrimaryButton, Separator, StealthButton, Text, RadioGroup, RadioButton } from '@fluentui/react-native';
 import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
-import { customRegistry } from '../CustomThemes';
+import { customRegistry } from './CustomThemes';
 
 let brand = 'Office';
 
@@ -98,7 +98,7 @@ const Panel: React.FunctionComponent = () => {
   const onClick = React.useCallback(() => setDisabled(!disabled), [disabled, setDisabled]);
   const themedStyles = getThemedStyles(useTheme());
   return (
-    <ReactNative.View style={[commonTestStyles.viewStyle, themedStyles.stackStyle]}>
+    <ReactNative.View style={[commonTestStyles.view, themedStyles.stackStyle]}>
       <PrimaryButton onClick={onClick} content="Primary Button" disabled={disabled} />
       <Button onClick={onClick} content="Default Button" disabled={disabled} />
       <StealthButton onClick={onClick} content="Stealth Button" disabled={disabled} />
@@ -149,7 +149,7 @@ const SwatchList: React.FunctionComponent = () => {
     return <SemanticColor key={name} color={color} name={name} />;
   }, []);
   return (
-    <ReactNative.View style={[commonTestStyles.viewStyle]}>
+    <ReactNative.View style={[commonTestStyles.view]}>
       <Text style={themedStyles.largeStandard}>getHostSettingsWin32(theme: ITheme).palette</Text>
       <ReactNative.View style={themedStyles.stackStyle}>
         <ReactNative.FlatList data={paletteAsArray} renderItem={renderSwatch} />

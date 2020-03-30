@@ -2,6 +2,34 @@
   "name": "@uifabricshared/immutable-merge",
   "entries": [
     {
+      "date": "Mon, 30 Mar 2020 16:27:00 GMT",
+      "tag": "@uifabricshared/immutable-merge_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update main attribute to specify TypeScript index file.",
+            "author": "kinhln@microsoft.com",
+            "commit": "ab291fb90d584c81310aa6559d05a360e86f97de"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 27 Mar 2020 04:10:56 GMT",
+      "tag": "@uifabricshared/immutable-merge_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "shared package configs",
+            "author": "ppatboyd@outlook.com",
+            "commit": "1471793de9a859b9908ef50069aeb673d06e5b42"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 07 Mar 2020 00:42:50 GMT",
       "tag": "@uifabricshared/immutable-merge_v0.3.0",
       "version": "0.3.0",

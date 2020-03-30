@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { View, Text, Switch, TextInput } from 'react-native';
 import { IPersonaTokens, Persona } from '@fluentui/react-native';
-import { styles, michaelImageUrl } from './styles';
-import { styles as commonStyles } from '../Common/styles';
+import { michaelImageUrl } from './styles';
+import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
 import { Slider } from '../Common/Slider';
 
@@ -52,10 +52,10 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
 
   const CustomizedPersona = Persona.customize({ tokens });
   return (
-    <View style={styles.root}>
+    <View style={commonStyles.root}>
       {/* settings */}
-      <View style={styles.settings}>
-        <View style={styles.switch}>
+      <View style={commonStyles.settings}>
+        <View style={commonStyles.switch}>
           <Text>Show image</Text>
           <Switch value={showImage} onValueChange={setShowImage} />
         </View>
@@ -79,22 +79,22 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
         />
 
         <Text>Primary text size</Text>
-        <Slider maximum={50} minimum={5} initialValue={textSize} style={styles.slider} onChange={setTextSize} />
+        <Slider maximum={50} minimum={5} initialValue={textSize} style={commonStyles.slider} onChange={setTextSize} />
 
         <Text>Secondary text size</Text>
-        <Slider maximum={50} minimum={5} initialValue={secondarySize} style={styles.slider} onChange={setSecondarySize} />
+        <Slider maximum={50} minimum={5} initialValue={secondarySize} style={commonStyles.slider} onChange={setSecondarySize} />
 
         <Text>Tertiary text size</Text>
-        <Slider maximum={50} minimum={5} initialValue={tertiarySize} style={styles.slider} onChange={setTertiarySize} />
+        <Slider maximum={50} minimum={5} initialValue={tertiarySize} style={commonStyles.slider} onChange={setTertiarySize} />
 
         <Text>Optional text size</Text>
-        <Slider maximum={50} minimum={5} initialValue={optionalSize} style={styles.slider} onChange={setOptionalSize} />
+        <Slider maximum={50} minimum={5} initialValue={optionalSize} style={commonStyles.slider} onChange={setOptionalSize} />
 
         <Text>Horizontal gap</Text>
-        <Slider maximum={100} initialValue={5} minimum={0} style={styles.slider} onChange={setHorizontalGap} />
+        <Slider maximum={100} initialValue={5} minimum={0} style={commonStyles.slider} onChange={setHorizontalGap} />
 
         <Text>Vertical gap</Text>
-        <Slider maximum={20} initialValue={5} minimum={0} style={styles.slider} onChange={setVerticalGap} />
+        <Slider maximum={20} initialValue={5} minimum={0} style={commonStyles.slider} onChange={setVerticalGap} />
       </View>
 
       {/* component under test */}

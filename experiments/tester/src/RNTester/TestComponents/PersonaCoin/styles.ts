@@ -1,34 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-  root: {
-    marginTop: 16,
-    marginRight: 32,
-    flexDirection: 'row',
-    alignItems: 'flex-start'
-  },
-  settings: {
-    flexGrow: 1
-  },
-  switch: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  header: {
-    marginVertical: 6,
-    fontSize: 12
-  },
-  section: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: '#0B6A0B',
-    marginTop: 12
-  },
   oneCoin: {
     margin: 8
-  },
-  slider: {
-    marginVertical: 6
   }
 });
 

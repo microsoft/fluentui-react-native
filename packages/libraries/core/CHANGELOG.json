@@ -2,6 +2,34 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Mon, 30 Mar 2020 16:27:00 GMT",
+      "tag": "@fluentui/react-native_v0.14.1",
+      "version": "0.14.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update main attribute to specify TypeScript index file.",
+            "author": "kinhln@microsoft.com",
+            "commit": "ab291fb90d584c81310aa6559d05a360e86f97de"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 27 Mar 2020 04:10:56 GMT",
+      "tag": "@fluentui/react-native_v0.14.0",
+      "version": "0.14.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add FluentUI callout to the package",
+            "author": "ppatboyd@outlook.com",
+            "commit": "0d5392051b969cdd9856848516f658730a058b75"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 25 Mar 2020 23:14:43 GMT",
       "tag": "@fluentui/react-native_v0.13.5",
       "version": "0.13.5",
