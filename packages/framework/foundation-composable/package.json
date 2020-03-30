@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-composable",
-  "version": "0.5.8",
+  "version": "0.5.9",
   "description": "Composable component building blocks",
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": "^0.4.6"
+    "@uifabricshared/foundation-settings": "^0.4.7"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

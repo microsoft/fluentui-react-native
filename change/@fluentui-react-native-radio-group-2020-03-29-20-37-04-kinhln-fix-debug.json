@@ -1,9 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update main attribute to specify TypeScript index file.",
-  "packageName": "@fluentui-react-native/radio-group",
-  "email": "kinhln@microsoft.com",
-  "commit": "ab291fb90d584c81310aa6559d05a360e86f97de",
-  "dependentChangeType": "patch",
-  "date": "2020-03-30T03:36:21.134Z"
-}

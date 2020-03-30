@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/themed-stylesheet
 
-This log was last generated on Tue, 10 Mar 2020 22:28:00 GMT and should not be manually modified.
+This log was last generated on Mon, 30 Mar 2020 16:27:00 GMT and should not be manually modified.
 
+## 0.2.9
+Mon, 30 Mar 2020 16:27:00 GMT
+
+### Patches
+
+- Update main attribute to specify TypeScript index file. (kinhln@microsoft.com)
 ## 0.2.8
 Tue, 10 Mar 2020 22:28:00 GMT
 
