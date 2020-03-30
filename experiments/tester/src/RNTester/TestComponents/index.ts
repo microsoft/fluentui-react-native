@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ButtonFocusTest } from './Button';
 import { CalloutTest } from './Callout';
-import { CheckboxTest } from './CheckboxTest';
+import { CheckboxTest } from './Checkbox';
 import { FocusTrapTest } from './FocusTrapZone';
 import { LinkTest } from './Link';
 import { PersonaTest } from './Persona';

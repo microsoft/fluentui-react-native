@@ -3,7 +3,7 @@ import { View, TextInput } from 'react-native';
 import { Checkbox } from '@fluentui/react-native';
 import { TextWin32 } from '@office-iss/react-native-win32';
 import { Separator } from '@fluentui/react-native';
-import { commonTestStyles as commonStyles } from './Common/styles';
+import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
 
 const CircularCheckbox = Checkbox.customize({ tokens: { borderRadius: 50 } });
