@@ -1,7 +1,13 @@
 # Change Log - @fluentui-react-native/persona-coin
 
-This log was last generated on Mon, 30 Mar 2020 16:27:00 GMT and should not be manually modified.
+This log was last generated on Tue, 31 Mar 2020 18:01:09 GMT and should not be manually modified.
 
+## 0.2.7
+Tue, 31 Mar 2020 18:01:09 GMT
+
+### Patches
+
+- Merge branch 'sammy/checkboxV1' of https://github.com/samuelfreiberg/fluentui-react-native into sammy/checkboxV1 (safreibe@microsoft.com)
 ## 0.2.6
 Mon, 30 Mar 2020 16:27:00 GMT
 

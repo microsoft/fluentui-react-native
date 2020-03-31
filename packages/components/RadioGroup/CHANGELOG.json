@@ -2,6 +2,20 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Tue, 31 Mar 2020 18:01:09 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.2.8",
+      "version": "0.2.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Updating Checkbox version",
+            "author": "safreibe@microsoft.com",
+            "commit": "0a82a531a8dd9cd29d1799badaa49733ef7c8ccf"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Mar 2020 16:27:00 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.2.7",
       "version": "0.2.7",

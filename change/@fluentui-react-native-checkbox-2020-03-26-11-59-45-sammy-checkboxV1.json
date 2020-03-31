@@ -1,9 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Checkbox Final V1 Changes",
-  "packageName": "@fluentui-react-native/checkbox",
-  "email": "safreibe@microsoft.com",
-  "commit": "0a82a531a8dd9cd29d1799badaa49733ef7c8ccf",
-  "dependentChangeType": "patch",
-  "date": "2020-03-26T18:59:22.526Z"
-}

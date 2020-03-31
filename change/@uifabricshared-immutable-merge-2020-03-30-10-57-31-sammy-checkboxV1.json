@@ -1,9 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Merge branch 'sammy/checkboxV1' of https://github.com/samuelfreiberg/fluentui-react-native into sammy/checkboxV1",
-  "packageName": "@uifabricshared/immutable-merge",
-  "email": "safreibe@microsoft.com",
-  "commit": "d38c7c235ebfe8278a31a4318d14ba76a98ef2a6",
-  "dependentChangeType": "patch",
-  "date": "2020-03-30T17:57:30.353Z"
-}
