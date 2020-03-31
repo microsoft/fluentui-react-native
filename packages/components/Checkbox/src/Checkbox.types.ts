@@ -10,33 +10,53 @@ import { IViewWin32Props } from '@office-iss/react-native-win32';
 export const checkboxName = 'Checkbox';
 
 export interface ICheckboxState extends IPressableState {
+  /**
+   * Whether the Checkbox is checked or not
+   */
   checked?: boolean;
 
+  /**
+   * Whether the Checkbox is disabled or not
+   */
   disabled?: boolean;
 
-  // True if boxSide='end'
+  /**
+   * Determines position of Checkbox. True if boxSide='end'
+   */
   boxAtEnd?: boolean;
 }
 
 export interface ICheckboxProps {
+  /**
+   * An optional string for the Narrator to read. If not provided, this will be set to the Checkbox label
+   */
   ariaLabel?: string;
 
-  /*
+  /**
    ** Checked state. Mutually exclusive to “defaultChecked”. Use this if you control the checked state at a higher level
    ** and plan to pass in the correct value based on handling onChange events and re-rendering.
    */
   checked?: boolean;
 
-  /*
+  /**
    ** Default checked state. Mutually exclusive to ‘checked’. Use this if you want an uncontrolled component, and
    ** want the Checkbox instance to maintain its own state.
    */
   defaultChecked?: boolean;
 
+  /**
+   * Allows you to set the checkbox to be at the before (start) or after (end) the label
+   */
   boxSide?: 'start' | 'end';
 
+  /**
+   * Disabled state of the checkbox.
+   */
   disabled?: boolean;
 
+  /**
+   * Label to display next to the checkbox.
+   */
   label?: string;
 
   /**
@@ -44,10 +64,17 @@ export interface ICheckboxProps {
    */
   componentRef?: React.RefObject<IFocusable>;
 
+  /**
+   * Callback that is called when the checked value has changed.
+   */
   onChange?: (isChecked: boolean) => void;
 }
 
-export type ICheckboxTokens = ITextTokens & IForegroundColorTokens & IBackgroundColorTokens & IBorderTokens;
+export interface ICheckboxTokens extends ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
+  checkboxBackgroundColor?: string;
+  checkboxBorderColor?: string;
+  checkmarkColor?: string;
+}
 
 export interface ICheckboxSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
