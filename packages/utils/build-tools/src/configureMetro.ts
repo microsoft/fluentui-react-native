@@ -3,7 +3,7 @@
 
 import path from 'path';
 import { resolveModule, resolveFile } from './resolvePaths';
-import { getRNVersion, getAllPlatforms, getAllReactNativePaths, PlatformValue } from './platforms';
+import { getRNVersion, getAllPlatforms, getAllReactNativePaths, PlatformValue, findPlatformFromArgv } from './platforms';
 import { getPackageInfo, findGitRoot } from 'just-repo-utils';
 import blacklist from 'metro-config-60/src/defaults/blacklist';
 import { mergeConfigs } from './mergeConfigs';
@@ -37,6 +37,7 @@ export function addPlatformMetroConfig(platform: PlatformValue, base: any = {}):
   const rnPlatformPath = (rnOverride && resolveModule(rnOverride)) || rnPath;
 
   base.watchFolders.push(rnPlatformPath);
+
   const resolver = (base.resolver = base.resolver || {});
   resolver.extraNodeModules = { 'react-native': rnPlatformPath };
   resolver.blacklistRE = getBlacklistRE(rnPlatformPath);
@@ -89,6 +90,12 @@ export function configureMetro(optionsToMerge?: object) {
     },
     resetCache: false
   };
+
+  // decorate with platform bits if the cmd line has the platform info
+  const platform = findPlatformFromArgv();
+  if (platform) {
+    addPlatformMetroConfig(platform, options);
+  }
 
   return optionsToMerge ? mergeConfigs(options, optionsToMerge) : options;
 }

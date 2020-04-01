@@ -3,7 +3,7 @@ import Metro from 'metro';
 import path from 'path';
 import fs from 'fs';
 import { logger, TaskFunction } from 'just-task';
-import { ensurePlatform, AllPlatforms } from './platforms';
+import { AllPlatforms } from './platforms';
 import { addPlatformMetroConfig } from './configureMetro';
 
 export interface BundleDetails {
@@ -113,9 +113,6 @@ export function metroTask(options: MetroTaskOptions = {}): TaskFunction {
     for (const targetPlatform of targets) {
       // get the options specified for the platform
       const platformDefinition = getOptionsForPlatform(definition, targetPlatform);
-
-      // update/ensure the argv platform setting
-      ensurePlatform(targetPlatform);
 
       // set up file input and output
       const { entry = './lib/index.js', outputPath = './dist', bundleName, noJSExtension, noPlatformSuffix } = platformDefinition;

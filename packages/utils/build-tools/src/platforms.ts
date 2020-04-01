@@ -36,7 +36,7 @@ export function getAllPlatforms(): string[] {
   return Object.keys(_rnVersions).filter(plat => plat !== _defaultPlatform);
 }
 
-function findPlatformFromArgv(toSet?: PlatformValue): PlatformValue | undefined {
+export function findPlatformFromArgv(toSet?: PlatformValue): PlatformValue | undefined {
   for (let index = 0; index < process.argv.length; index++) {
     if (process.argv[index] === '--platform') {
       if (toSet) {
