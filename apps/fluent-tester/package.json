@@ -63,6 +63,12 @@
     ],
     "entry": "./src/RNTester.ts",
     "outputPath": "./dist",
-    "bundleName": "RNTester.bundle"
+    "bundleName": "RNTester.bundle",
+    "platforms": {
+      "win32": {
+        "noPlatformSuffix": true,
+        "noJSExtension": true
+      }
+    }
   }
 }
