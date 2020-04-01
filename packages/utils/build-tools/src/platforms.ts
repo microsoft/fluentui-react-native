@@ -1,3 +1,5 @@
+import { normalizeToUnixPath, findGitRoot } from 'just-repo-utils';
+
 export type PlatformValue = 'win32' | 'ios' | 'android' | 'windows' | 'web' | 'macos' | 'default';
 
 const _defaultPlatform = 'default';
@@ -47,15 +49,29 @@ export function findPlatform(): PlatformValue {
   return findPlatformFromArgv() || _defaultPlatform;
 }
 
-export function ensurePlatform(platform?: PlatformValue): PlatformValue {
+export function ensurePlatform(platform?: PlatformValue, defaultOverride?: PlatformValue): PlatformValue {
   const found = findPlatformFromArgv();
   platform = found || platform;
   if (platform && !found) {
     process.argv.push('platform', platform);
   }
-  return platform || _defaultPlatform;
+  return platform || defaultOverride || _defaultPlatform;
 }
 
 export function findReactNativePackage(): string {
   return getRNVersion(findPlatform());
+}
+
+/**
+ * Returns all the potential paths for react-native either in local (cwd) node_modules or root (hoisted) node_modules in one array
+ * @param trailingSlash - whether to terminate each path with a / character
+ */
+export function getAllReactNativePaths(noTrailing?: boolean): string[] {
+  const mapHelper = noTrailing
+    ? (pkg: string, dir: string) => `${dir}/node_modules/${pkg}/`
+    : (pkg: string, dir: string) => `${dir}/node_modules/${pkg}`;
+  const rnPlatforms = getAllRNVersions();
+  const rootPath = normalizeToUnixPath(findGitRoot());
+  const cwdPath = normalizeToUnixPath(process.cwd());
+  return [...rnPlatforms.map(plat => mapHelper(plat, rootPath)), ...rnPlatforms.map(plat => mapHelper(plat, cwdPath))];
 }

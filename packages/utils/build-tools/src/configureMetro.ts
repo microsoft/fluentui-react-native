@@ -3,8 +3,8 @@
 
 import path from 'path';
 import { resolveModule, resolveFile } from './resolvePaths';
-import { getAllRNVersions, getRNVersion, ensurePlatform, getAllPlatforms } from './platforms';
-import { getPackageInfo, findGitRoot, normalizeToUnixPath } from 'just-repo-utils';
+import { getRNVersion, ensurePlatform, getAllPlatforms, getAllReactNativePaths } from './platforms';
+import { getPackageInfo, findGitRoot } from 'just-repo-utils';
 import blacklist from 'metro-config-60/src/defaults/blacklist';
 
 function prepareRegex(blacklistPath): RegExp {
@@ -17,24 +17,11 @@ function prepareRegex(blacklistPath): RegExp {
  */
 function getBlacklistRE(rnPath: string): RegExp {
   // get all react native package types in this repo (visible from this location)
-  const locations = getAllRNVersions();
   const thisLocation = rnPath + '/';
-
-  const rootPath = normalizeToUnixPath(findGitRoot());
-  const cwdPath = normalizeToUnixPath(process.cwd());
-
-  // now create an array with all locations, both hoisted to the root, and based in the current working directory
-  const allPaths = [
-    ...locations.map(pkgName => `${rootPath}/node_modules/${pkgName}/`),
-    ...locations.map(pkgName => `${cwdPath}/node_modules/${pkgName}/`)
-  ];
-
-  // filter out the current valid location to ensure haste can find files there, then transform the remainder into
-  // regular expressions for matching
   return blacklist([
-    //      /node_modules\/react-native\/.*/,
-    //      /node_modules\/.*\/node_modules\/react-native\/.*/,
-    ...allPaths.filter(loc => loc !== thisLocation).map(loc => prepareRegex(loc))
+    ...getAllReactNativePaths()
+      .filter(loc => loc !== thisLocation)
+      .map(p => prepareRegex(p))
   ]);
 }
 

@@ -40,7 +40,6 @@ module.exports = {
           '.windows.tsx'
         ]
       }
-    ],
-    '@babel/plugin-transform-runtime'
+    ]
   ]
 };

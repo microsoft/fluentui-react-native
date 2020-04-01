@@ -4,11 +4,11 @@ import path from 'path';
 import { mergeConfigs } from './mergeConfigs';
 import { getPackageInfo } from 'just-repo-utils';
 import { nodeModulesToRoot, resolveModule } from './resolvePaths';
-import { getRNVersion, getAllPlatforms } from './platforms';
+import { ensurePlatform, PlatformValue, getRNVersion, getAllPlatforms } from './platforms';
 
 const moduleFileExtensions = ['ts', 'tsx', 'js', 'jsx', 'json'];
 
-export function configureJest(customConfig) {
+export function configureJest(customConfig?: object): object {
   const pkgInfo = getPackageInfo();
   return mergeConfigs(
     {
@@ -46,44 +46,53 @@ export function configureJest(customConfig) {
   );
 }
 
-export function configureReactNativeJest(platform, customConfig) {
-  platform = platform || 'ios';
+export function configureReactNativeJest(platform?: PlatformValue, customConfig?: object): object {
+  platform = ensurePlatform(platform, 'ios');
   const rnPackage = getRNVersion(platform);
-  const rnPath = resolveModule(rnPackage);
+  const rnPath = resolveModule(rnPackage) + '/';
+  console.log(rnPath);
+  console.log(platform);
+  console.log(require.resolve(rnPackage));
 
-  console.log(__dirname);
-  return configureJest(
-    mergeConfigs(
-      {
-        preset: 'react-native',
+  return mergeConfigs(
+    {
+      roots: ['<rootDir>/src', rnPath],
+      moduleFileExtensions,
+      transform: {
+        '^.+\\.(js|ts|tsx)?$': ['babel-jest', { cwd: __dirname, presets: ['module:metro-react-native-babel-preset'] }]
+      },
+      preset: 'react-native',
+      moduleNameMapper: {
+        '^react-native$': require.resolve(rnPackage),
+        '^react-native/(.*)': rnPath + '$1'
+      },
+      haste: {
+        defaultPlatform: platform,
+        platforms: getAllPlatforms(),
+        hasteImplModulePath: rnPath + 'jest/hasteImpl.js',
+        providesModuleNodeModules: [rnPackage]
+      },
+      transformIgnorePatterns: ['node_modules/(?!(react-native)/)']
+      /*
         roots: [rnPath, '<rootDir>/src'],
         haste: {
           defaultPlatform: platform,
           platforms: getAllPlatforms(),
-          hasteImplModulePath: rnPath + '/jest/hasteImpl.js',
+          hasteImplModulePath: rnPath + 'jest/hasteImpl.js',
           providesModuleNodeModules: [rnPackage]
         },
         moduleNameMapper: {
-          '^react-native$': rnPath + '/',
-          '^react-native/(.*)': rnPath + '/$1'
+          '^react-native$': rnPath,
+          '^react-native/(.*)': rnPath + '$1'
         },
-        modulePathIgnorePatterns: [
-          '<rootDir>/../../src/react-native/Libraries/react-native/',
-          '<rootDir>/../../src/react-native/node_modules/',
-          '<rootDir>/../../src/react-native/packager/',
-          'react-native-win32/src/.*',
-          'react-native-win32/lib/.*.d.ts',
-          'react-native-windows/src/Libraries/.*',
-          'react-native-windows/lib/.*.d.ts',
-          'lib-amd/.*'
-        ],
+        modulePathIgnorePatterns: [...getAllReactNativePaths().filter(p => p !== rnPath)],
         setupFiles: [path.resolve(__dirname, 'jest/jest-setup-enzyme.js')],
         ...(platform && {
           moduleFileExtensions: [...moduleFileExtensions.map(v => `${platform}.${v}`), ...moduleFileExtensions],
           testRegex: `(/__tests__/.*|\\.(test|spec))(\\.${platform})?\\.(ts|tsx)$`
         })
-      },
-      customConfig
-    )
+        */
+    },
+    customConfig
   );
 }

@@ -10,9 +10,10 @@
     "clean": "just-scripts clean"
   },
   "dependencies": {
+    "babel-jest": "^25.0.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16.3": "^1.7.2",
-    "jest": "^25.2.3",
+    "jest": "^25.0.0",
     "just-repo-utils": "0.2.0",
     "metro-config-60": "npm:metro-config@^0.54.0"
   },

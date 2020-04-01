@@ -1,9 +1,8 @@
 import { IFocusTrapZoneProps, IFocusTrapZoneSlotProps, IFocusTrapZoneType } from './FocusTrapZone.types';
 import { requireNativeComponent } from 'react-native';
-import { IUseStyling, composable, IComposableTypecast } from '@uifabricshared/foundation-composable';
+import { IUseStyling, composable } from '@uifabricshared/foundation-composable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { IViewPropsWin32 } from '@fluentui-react-native/adapters';
 
 const RCTFocusTrapZone = requireNativeComponent('RCTFocusTrapZone');
 
@@ -22,5 +21,3 @@ export const FocusTrapZone = composable<IFocusTrapZoneType>({
     root: { slotType: RCTFocusTrapZone, filter: filterOutComponentRef }
   }
 });
-
-export const FocusTrapZoneWin32 = FocusTrapZone as IComposableTypecast<IFocusTrapZoneType<IViewPropsWin32>>;

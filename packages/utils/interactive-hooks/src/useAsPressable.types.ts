@@ -1,3 +1,5 @@
+import { PressabilityConfig, PressabilityEventHandlers } from './Pressability/Pressability.types';
+
 export type IPressState = {
   pressed?: boolean;
 };
@@ -12,15 +14,15 @@ export type IHoverState = {
 
 export type IPressableState = IPressState & IFocusState & IHoverState;
 
-export type IPressableOptions = {
+export type IPressableOptions = PressabilityConfig & {
   onStateChange?: (state: IPressableState) => void;
-  disabled?: boolean;
-  onPress?: () => void;
 };
 
 export type IWithPressableOptions<T extends object> = T & IPressableOptions;
 
+export type IWithPressableEvents<T extends object> = T & PressabilityEventHandlers;
+
 export type IPressableHooks<T extends object> = {
-  props: IWithPressableOptions<T>;
+  props: IWithPressableEvents<T>;
   state: IPressableState;
 };

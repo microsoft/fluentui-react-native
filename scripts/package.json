@@ -20,14 +20,20 @@
     "@fluentui-react-native/build-tools": "0.1.1"
   },
   "peerDependencies": {
-    "@babel/core": "^7.5.5",
+    "@babel/core": "^7.8.0",
     "just-scripts": ">=0.36.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
-    "@babel/preset-react": "^7.9.0",
-    "@babel/preset-typescript": "^7.9.0",
+    "@babel/core": "^7.8.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.0",
+    "@babel/plugin-proposal-decorators": "^7.8.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.0",
+    "@babel/plugin-transform-regenerator": "^7.8.0",
+    "@babel/plugin-transform-runtime": "^7.8.0",
+    "@babel/preset-env": "^7.8.0",
+    "@babel/preset-flow": "^7.8.0",
+    "@babel/preset-react": "^7.8.0",
+    "@babel/preset-typescript": "^7.8.0",
     "@microsoft/api-extractor": "^7.3.7",
     "@microsoft/load-themed-styles": "^1.7.13",
     "@microsoft/loader-load-themed-styles": "^1.6.0",

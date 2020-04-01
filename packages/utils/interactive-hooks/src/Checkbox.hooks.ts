@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IKeyboardEvent } from '@office-iss/react-native-win32';
+import { KeyPressEvent } from './Pressability/CoreEventTypes';
 
 export type OnToggleCallback = (value: boolean) => void;
 export type KeyUpCallback = () => void;
@@ -36,7 +36,7 @@ export function useAsToggle(defaultChecked?: boolean, checked?: boolean, userCal
  */
 export function useKeyCallback(key?: string, userCallback?: KeyUpCallback) {
   const onKeyEvent = React.useCallback(
-    (args: IKeyboardEvent) => {
+    (args: KeyPressEvent) => {
       if (args.nativeEvent.key === key || key == undefined) {
         userCallback && userCallback();
       }
