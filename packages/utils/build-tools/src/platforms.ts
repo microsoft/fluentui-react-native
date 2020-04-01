@@ -1,6 +1,7 @@
 import { normalizeToUnixPath, findGitRoot } from 'just-repo-utils';
 
-export type PlatformValue = 'win32' | 'ios' | 'android' | 'windows' | 'web' | 'macos' | 'default';
+export type AllPlatforms = 'win32' | 'ios' | 'android' | 'windows' | 'web' | 'macos';
+export type PlatformValue = AllPlatforms | 'default';
 
 const _defaultPlatform = 'default';
 const _defaultVersion = 'react-native';
@@ -35,9 +36,12 @@ export function getAllPlatforms(): string[] {
   return Object.keys(_rnVersions).filter(plat => plat !== _defaultPlatform);
 }
 
-function findPlatformFromArgv(): PlatformValue | undefined {
+function findPlatformFromArgv(toSet?: PlatformValue): PlatformValue | undefined {
   for (let index = 0; index < process.argv.length; index++) {
-    if (process.argv[index] === 'platform') {
+    if (process.argv[index] === '--platform') {
+      if (toSet) {
+        process.argv[index + 1] = toSet;
+      }
       const platformArg = process.argv[index + 1];
       return platformArg && _rnVersions[platformArg] ? (platformArg as PlatformValue) : undefined;
     }
@@ -50,10 +54,10 @@ export function findPlatform(): PlatformValue {
 }
 
 export function ensurePlatform(platform?: PlatformValue, defaultOverride?: PlatformValue): PlatformValue {
-  const found = findPlatformFromArgv();
+  const found = findPlatformFromArgv(platform);
   platform = found || platform;
   if (platform && !found) {
-    process.argv.push('platform', platform);
+    process.argv.push('--platform', platform);
   }
   return platform || defaultOverride || _defaultPlatform;
 }

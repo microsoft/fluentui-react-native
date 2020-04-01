@@ -39,6 +39,9 @@ module.exports = function preset() {
 
   // use Metro for bundling task instead of the default webpack
   option('useMetro');
+  option('dev');
+  option('platform', { type: 'string' });
+  option('bundleName', { type: 'string' });
 
   // for options that have a check/fix switch this puts them into fix mode
   option('fix');
@@ -51,16 +54,13 @@ module.exports = function preset() {
   task('eslint', eslint);
   task('ts:commonjs-only', ts.commonjsOnly);
   task('webpack', webpack);
-  task('metroPack', () => metroTask(argv()['bundleName']));
   task('webpack-dev-server', webpackDevServer);
   task('verify-api-extractor', verifyApiExtractor);
   task('update-api-extractor', updateApiExtractor);
   task('prettier', () => (argv().fix ? prettierTask : prettierCheckTask));
   task('check-for-modified-files', checkForModifiedFiles);
-  task(
-    'ts',
-    series(condition('ts:commonjs-only', () => argv().commonjs), condition(parallel('ts:commonjs', 'ts:esm'), () => !argv().commonjs))
-  );
+  task('tsall', parallel('ts:commonjs', 'ts:esm'));
+  task('ts', series(condition('ts:commonjs-only', () => !!argv().commonjs), condition('tsall', () => !argv().commonjs)));
 
   task('validate', parallel('eslint', condition('jest', () => fileExists(path.join(process.cwd(), 'jest.config.js')))));
 
@@ -70,7 +70,15 @@ module.exports = function preset() {
 
   task('build:node-lib', series('clean', 'copy', series(condition('validate', () => !argv().min), 'ts:commonjs-only')));
 
-  task('bundle', series(condition('metroPack', () => argv().useMetro), condition('webpack', () => !argv().useMetro)));
+  task('metro', () =>
+    metroTask({
+      dev: !!argv().dev,
+      ...(argv().platform && { platform: argv().platform }),
+      ...(argv().bundleName && { bundleName: argv().bundleName })
+    })
+  );
+
+  task('bundle', series(condition('metro', () => !!argv().useMetro), condition('webpack', () => !argv().useMetro)));
 
   task('build', series('clean', 'copy', parallel(condition('validate', () => !argv().min), 'ts')));
 
