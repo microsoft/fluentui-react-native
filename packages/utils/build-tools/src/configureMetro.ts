@@ -18,6 +18,7 @@ function prepareRegex(blacklistPath): RegExp {
 function getBlacklistRE(rnPath: string): RegExp {
   // get all react native package types in this repo (visible from this location)
   const thisLocation = rnPath + '/';
+  console.log(thisLocation);
   return blacklist([
     ...getAllReactNativePaths()
       .filter(loc => loc !== thisLocation)

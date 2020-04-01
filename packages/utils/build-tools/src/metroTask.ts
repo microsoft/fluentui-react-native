@@ -1,8 +1,9 @@
 // @ts-check
-const Metro = require('metro');
-const path = require('path');
-const fs = require('fs');
-const justTask = require('just-task');
+import Metro from 'metro';
+import path from 'path';
+import fs from 'fs';
+import { logger } from 'just-task';
+import { ensurePlatform } from './platforms';
 
 function loadOptionsFromPackagesJson(bundleName) {
   const packageConfigPath = path.resolve('.', 'package.json');
@@ -16,12 +17,11 @@ function loadOptionsFromPackagesJson(bundleName) {
   return packageConfig.metroBundles[bundleName];
 }
 
-exports.metroPackTask = function(bundleName) {
+export function metroTask(bundleName) {
   return async function metroPack(done) {
-    justTask.logger.verbose(`Starting metropack task with platform ${bundleName}...`);
+    logger.verbose(`Starting metropack task with platform ${bundleName}...`);
 
     const options = loadOptionsFromPackagesJson(bundleName);
-    const { ensurePlatform } = require('@fluentui-react-native/build-tools');
     const platform = ensurePlatform((options && options.platform) || 'default');
     const outputBundlePath = options && options.output;
     if (!outputBundlePath) {
@@ -37,8 +37,8 @@ exports.metroPackTask = function(bundleName) {
     }
 
     const entryFile = (options && options.entry) || './lib/index.js';
-    justTask.logger.info(`Entry file ${entryFile}.`);
-    justTask.logger.info(`Output file ${outputBundlePath}.`);
+    logger.info(`Entry file ${entryFile}.`);
+    logger.info(`Output file ${outputBundlePath}.`);
 
     const dev = (options && options.dev) || false;
 
@@ -57,11 +57,11 @@ exports.metroPackTask = function(bundleName) {
       const metroBundlePath = outputBundlePath + '.js';
       if (fs.existsSync(metroBundlePath)) {
         if (fs.existsSync(outputBundlePath)) {
-          justTask.logger.verbose(`Deleting existing output file at ${outputBundlePath}...`);
+          logger.verbose(`Deleting existing output file at ${outputBundlePath}...`);
           fs.unlinkSync(outputBundlePath);
         }
 
-        justTask.logger.verbose(`Renaming ${metroBundlePath} to ${outputBundlePath}...`);
+        logger.verbose(`Renaming ${metroBundlePath} to ${outputBundlePath}...`);
         fs.renameSync(metroBundlePath, outputBundlePath);
       }
     }
@@ -70,4 +70,4 @@ exports.metroPackTask = function(bundleName) {
       done();
     }
   };
-};
+}

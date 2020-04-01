@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { ViewProps, StyleSheet, StyleProp, ViewStyle, UIManager, Text, findNodeHandle } from 'react-native';
-import { ViewWin32 } from '@office-iss/react-native-win32';
+import { ViewProps, StyleSheet, StyleProp, ViewStyle, UIManager, Text, findNodeHandle, View } from 'react-native';
 import { Separator, Pressable, IPressableState } from '@fluentui/react-native';
 
 const thumbSize = 20;
@@ -104,7 +103,7 @@ export const Slider: React.FunctionComponent<ISliderProps> = (props: ISliderProp
   const trackLength = React.useRef<number>(-1);
   const sliderValue = React.useRef<number>(initialValue);
 
-  const ref = React.useRef<ViewWin32>(null);
+  const ref = React.useRef<View>(null);
 
   React.useEffect(() => {
     const parent = findNodeHandle(ref.current);
@@ -124,8 +123,8 @@ export const Slider: React.FunctionComponent<ISliderProps> = (props: ISliderProp
   }, [ref.current, initialValue, maximum, minimum]);
 
   return (
-    <ViewWin32 style={[userStyle, styles.root]}>
-      <ViewWin32 ref={ref} {...props} style={styles.slider}>
+    <View style={[userStyle, styles.root]}>
+      <View ref={ref} {...props} style={styles.slider}>
         <Track style={styles.track} />
         {trackLength.current > 0 && (
           <Pressable
@@ -161,9 +160,9 @@ export const Slider: React.FunctionComponent<ISliderProps> = (props: ISliderProp
             }}
           />
         )}
-      </ViewWin32>
+      </View>
 
       <Text style={styles.label}>{sliderValue.current}</Text>
-    </ViewWin32>
+    </View>
   );
 };

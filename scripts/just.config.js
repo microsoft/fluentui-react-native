@@ -11,7 +11,7 @@ const { jest } = require('./tasks/jest');
 const { ts } = require('./tasks/ts');
 const { eslint } = require('./tasks/eslint');
 const { webpack, webpackDevServer } = require('./tasks/webpack');
-const { metroPackTask } = require('./tasks/metro-pack');
+const { metroTask } = require('@fluentui-react-native/build-tools');
 const { verifyApiExtractor, updateApiExtractor } = require('./tasks/api-extractor');
 const checkForModifiedFiles = require('./tasks/check-for-modified-files');
 
@@ -51,7 +51,7 @@ module.exports = function preset() {
   task('eslint', eslint);
   task('ts:commonjs-only', ts.commonjsOnly);
   task('webpack', webpack);
-  task('metroPack', () => metroPackTask(argv()['bundleName']));
+  task('metroPack', () => metroTask(argv()['bundleName']));
   task('webpack-dev-server', webpackDevServer);
   task('verify-api-extractor', verifyApiExtractor);
   task('update-api-extractor', updateApiExtractor);
@@ -74,5 +74,5 @@ module.exports = function preset() {
 
   task('build', series('clean', 'copy', parallel(condition('validate', () => !argv().min), 'ts')));
 
-  task('no-op', () => { });
+  task('no-op', () => {});
 };
