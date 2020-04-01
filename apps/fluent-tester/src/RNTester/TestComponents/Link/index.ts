@@ -1,1 +1,1 @@
-export * from './LinkTest.win32';
+export * from './LinkTest';

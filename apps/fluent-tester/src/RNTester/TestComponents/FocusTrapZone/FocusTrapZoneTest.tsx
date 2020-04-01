@@ -1,7 +1,6 @@
-import { ViewWin32, IKeyboardEvent, IViewWin32Props, IViewWin32 } from '@office-iss/react-native-win32';
-import { IFocusTrapZoneProps, Text, FocusTrapZoneWin32 } from '@fluentui/react-native';
+import { IFocusTrapZoneProps, Text, FocusTrapZone, KeyPressEvent } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
-import { TouchableHighlight, TouchableHighlightProps } from 'react-native';
+import { TouchableHighlight, TouchableHighlightProps, View, ViewProps } from 'react-native';
 import { useFocusState } from '@fluentui/react-native';
 import * as React from 'react';
 import { stackStyle } from '../Common/styles';
@@ -20,7 +19,7 @@ const activeTrapZoneStyle: IFocusTrapZoneProps['style'] = {
   borderStyle: 'solid'
 };
 
-const componentTwiddlerStyle: IViewWin32Props['style'] = {
+const componentTwiddlerStyle: ViewProps['style'] = {
   borderWidth: 1,
   padding: 8,
   margin: 4,
@@ -28,7 +27,7 @@ const componentTwiddlerStyle: IViewWin32Props['style'] = {
   borderStyle: 'solid'
 };
 
-const focusedComponentTwiddlerStyle: IViewWin32Props['style'] = {
+const focusedComponentTwiddlerStyle: ViewProps['style'] = {
   ...componentTwiddlerStyle,
   borderColor: 'black',
   backgroundColor: 'lightblue'
@@ -40,18 +39,16 @@ interface IComponentTwiddlerProps {
 }
 
 const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps> = (props: IComponentTwiddlerProps) => {
-  const [{ onFocus, onBlur }, focusState] = useFocusState();
+  const [focusProps, focusState] = useFocusState({});
 
   return (
     <TouchableHighlight {...{ acceptsKeyboardFocus: false }} onPress={props.onPress}>
-      <ViewWin32
-        acceptsKeyboardFocus
-        onFocus={onFocus}
-        onBlur={onBlur}
+      <View
+        {...({ acceptsKeyboardFocus: true, ...focusProps } as any)}
         style={focusState.focused ? focusedComponentTwiddlerStyle : componentTwiddlerStyle}
       >
         <Text>{props.label}</Text>
-      </ViewWin32>
+      </View>
     </TouchableHighlight>
   );
 };
@@ -65,10 +62,10 @@ export const FocusTrapTest: React.FunctionComponent<{}> = () => {
     focusPreviouslyFocusedInnerElement: false
   });
 
-  const ftzRef = React.useRef<IViewWin32>(null);
+  const ftzRef = React.useRef<View>(null);
 
   const onKeyDown = React.useCallback(
-    (ev: IKeyboardEvent) => {
+    (ev: KeyPressEvent) => {
       if (ev.nativeEvent.key === 'Enter') {
         setState({ ...state, useTrapZone: !state.useTrapZone });
       } else if (ev.nativeEvent.key === ' ') {
@@ -93,7 +90,7 @@ export const FocusTrapTest: React.FunctionComponent<{}> = () => {
   }, [state, setState]);
 
   return (
-    <ViewWin32 onKeyDown={onKeyDown}>
+    <View {...{ onKeyDown: onKeyDown }}>
       <Stack style={stackStyle} gap={5}>
         <ComponentTwiddler label="Press space to render or enter to trap, f to focus" />
         <ComponentTwiddler
@@ -113,7 +110,7 @@ export const FocusTrapTest: React.FunctionComponent<{}> = () => {
           onPress={onTwiddleFirstFocus}
         />
         {state.renderTrapZone && (
-          <FocusTrapZoneWin32
+          <FocusTrapZone
             componentRef={ftzRef}
             disableFirstFocus={state.disableFirstFocus}
             ignoreExternalFocusing={state.ignoreExternalFocusing}
@@ -126,9 +123,9 @@ export const FocusTrapTest: React.FunctionComponent<{}> = () => {
             <ComponentTwiddler label="trapped" />
             <ComponentTwiddler label="trapped" />
             <ComponentTwiddler label="trapped" />
-          </FocusTrapZoneWin32>
+          </FocusTrapZone>
         )}
       </Stack>
-    </ViewWin32>
+    </View>
   );
 };

@@ -1,5 +1,6 @@
 import { RectOrSize } from './InternalTypes';
 import { BlurEvent, FocusEvent, PressEvent, MouseEvent } from './CoreEventTypes';
+import { ViewProps } from 'react-native';
 
 export type PressabilityConfig = Readonly<{
   /**
@@ -16,7 +17,7 @@ export type PressabilityConfig = Readonly<{
   /**
    * Amount to extend the `VisualRect` by to create `HitRect`.
    */
-  hitSlop?: RectOrSize;
+  hitSlop?: ViewProps['hitSlop'];
 
   /**
    * Amount to extend the `HitRect` by to create `PressRect`.
