@@ -1,4 +1,4 @@
-# Fluent UI React Native
+# FluentUI React Native
 
 ## Getting Started
 
