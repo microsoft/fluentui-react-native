@@ -1,15 +1,15 @@
-# UI Fabric React Native
+# Fluent UI React Native
 
 ## Getting Started
 
 To start developing in the repository you can:
 
-1. `git clone https://github.com/microsoft/ui-fabric-react-native.git`
-1. `cd ui-fabric-react-native`
+1. `git clone https://github.com/microsoft/fluentui-react-native.git`
+1. `cd fluentui-react-native`
 1. `yarn`
-1. `yarn build` or `yarn start`
+1. `yarn build`
 
-The demo package is currently where controls can be played with. If yarn start doesn't work go into the demo package and run yarn from there.
+After a successful yarn build, you can explore FluentUI Tester, our demo application to play with each of the controls. To run FluentUI Tester, please follow instructions in the [FluentUI Tester readme](https://github.com/microsoft/fluentui-react-native/blob/master/experiments/tester/README.md).
 
 ### Yarn + Lerna
 
