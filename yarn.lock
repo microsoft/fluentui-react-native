@@ -3270,11 +3270,6 @@
   resolved "https://registry.yarnpkg.com/@uifabricshared/immutable-merge/-/immutable-merge-0.3.0.tgz#445f52a8cdc1bfc7f7e2b4a9f928d6e4f7d5fac5"
   integrity sha512-mOWOoFWTVSuD2InbH6w28URSu+IuhqZZjDzRQbHvbt65C/+4HVXKmRUJhjBsklXVqAog6xeT/S9uThlQewP3VA==
 
-"@uifabricshared/themed-stylesheet@0.2.8":
-  version "0.2.8"
-  resolved "https://registry.yarnpkg.com/@uifabricshared/themed-stylesheet/-/themed-stylesheet-0.2.8.tgz#a81957ac2c79ac0d0329a3100f76301c95f274b0"
-  integrity sha512-xBF78LkW0fnBruoX30cKfrhEKWSw8rn7hqHz5jHRfvuz6StidKVIU5e7YuAgJvbmu9wLPgc15fn8ha/IBLdy1g==
-
 "@uifabricshared/theming-ramp@0.6.0":
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/@uifabricshared/theming-ramp/-/theming-ramp-0.6.0.tgz#94861d9f9c88ce2b0154abafe4eb66038642412c"
@@ -3291,15 +3286,6 @@
     "@uifabricshared/foundation-settings" "^0.4.5"
     "@uifabricshared/theme-registry" "^0.2.4"
     "@uifabricshared/theming-ramp" "^0.6.0"
-
-"@uifabricshared/theming-react-native@0.4.4":
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/@uifabricshared/theming-react-native/-/theming-react-native-0.4.4.tgz#65821ed130765101ff03971f1e13bbba93c60d98"
-  integrity sha512-SzHVD2g6SyzgTkJi7ibpB3swXACJQbT/2u8pvdJB9XrPRmxMTBSG9A/unQmdkU3wSaBj13PuwgxSkv+LNpUaew==
-  dependencies:
-    "@uifabricshared/foundation-settings" "^0.4.6"
-    "@uifabricshared/theme-registry" "^0.2.5"
-    "@uifabricshared/theming-ramp" "^0.6.1"
 
 "@unimodules/core@~4.0.0":
   version "4.0.0"

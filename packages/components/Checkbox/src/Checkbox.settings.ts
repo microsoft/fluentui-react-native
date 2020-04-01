@@ -1,6 +1,8 @@
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 import { checkboxName, ICheckboxType } from './Checkbox.types';
 
+export const checkboxSelectActionLabel = 'Toggle the Checkbox';
+
 export const settings: IComposeSettings<ICheckboxType> = [
   {
     tokens: {
@@ -49,7 +51,7 @@ export const settings: IComposeSettings<ICheckboxType> = [
         borderWidth: 1
       }
     },
-    _precedence: ['disabled', 'boxAtEnd', 'checked', 'hovered', 'focused', 'pressed'],
+    _precedence: ['disabled', 'boxAtEnd', 'hovered', 'focused', 'pressed', 'checked'],
     _overrides: {
       focused: {
         tokens: {
@@ -71,15 +73,6 @@ export const settings: IComposeSettings<ICheckboxType> = [
       hovered: {
         tokens: {
           backgroundColor: 'menuItemBackgroundHovered'
-        },
-        _overrides: {
-          checked: {
-            checkmark: {
-              style: {
-                opacity: 1
-              }
-            }
-          }
         }
       },
       disabled: {

@@ -2,6 +2,20 @@
   "name": "@fluentui-react-native/separator",
   "entries": [
     {
+      "date": "Tue, 31 Mar 2020 18:01:09 GMT",
+      "tag": "@fluentui-react-native/separator_v0.2.7",
+      "version": "0.2.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Merge branch 'sammy/checkboxV1' of https://github.com/samuelfreiberg/fluentui-react-native into sammy/checkboxV1",
+            "author": "safreibe@microsoft.com",
+            "commit": "d38c7c235ebfe8278a31a4318d14ba76a98ef2a6"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Mar 2020 16:27:00 GMT",
       "tag": "@fluentui-react-native/separator_v0.2.6",
       "version": "0.2.6",

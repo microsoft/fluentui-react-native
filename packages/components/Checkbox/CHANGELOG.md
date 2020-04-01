@@ -1,7 +1,13 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Mon, 30 Mar 2020 16:27:00 GMT and should not be manually modified.
+This log was last generated on Tue, 31 Mar 2020 18:01:09 GMT and should not be manually modified.
 
+## 0.2.0
+Tue, 31 Mar 2020 18:01:09 GMT
+
+### Minor changes
+
+- Checkbox Final V1 Changes (safreibe@microsoft.com)
 ## 0.1.2
 Mon, 30 Mar 2020 16:27:00 GMT
 

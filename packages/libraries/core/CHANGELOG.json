@@ -2,6 +2,20 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Tue, 31 Mar 2020 18:01:09 GMT",
+      "tag": "@fluentui/react-native_v0.14.2",
+      "version": "0.14.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Updating Checkbox version",
+            "author": "safreibe@microsoft.com",
+            "commit": "0a82a531a8dd9cd29d1799badaa49733ef7c8ccf"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Mar 2020 16:27:00 GMT",
       "tag": "@fluentui/react-native_v0.14.1",
       "version": "0.14.1",
