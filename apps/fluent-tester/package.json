@@ -64,10 +64,15 @@
     "entry": "./src/index.ts",
     "outputPath": "./dist",
     "bundleName": "RNTester.bundle",
+    "noJSExtension": true,
+    "noPlatformSuffix": true,
     "platforms": {
       "win32": {
-        "noPlatformSuffix": true,
-        "noJSExtension": true
+        "outputPath": "./dist"
+      },
+      "windows": {
+        "outputPath": "./windows/FluentTester/Bundle",
+        "bundleName": "index.windows.bundle"
       }
     }
   }
