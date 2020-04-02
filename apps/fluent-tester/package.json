@@ -11,7 +11,7 @@
     "clean": "fluentui-scripts clean",
     "code-style": "fluentui-scripts code-style",
     "lint": "fluentui-scripts eslint",
-    "start": "react-native start",
+    "start": "fluentui-scripts metro --server",
     "bundle": "fluentui-scripts metro",
     "bundle-dev": "fluentui-scripts metro --dev",
     "bundle-windows": "fluentui-scripts metro --platform windows",
@@ -61,7 +61,7 @@
       "win32",
       "windows"
     ],
-    "entry": "./src/RNTester.ts",
+    "entry": "./src/index.ts",
     "outputPath": "./dist",
     "bundleName": "RNTester.bundle",
     "platforms": {

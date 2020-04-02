@@ -98,10 +98,20 @@ export interface MetroTaskOptions {
    * whether to bundle in development mode
    */
   dev?: boolean;
+
+  /**
+   * run metro in server mode
+   */
+  server?: boolean;
+
+  /**
+   * port override for server mode
+   */
+  port?: number;
 }
 
 export function metroTask(options: MetroTaskOptions = {}): TaskFunction {
-  const { bundleName, platform, dev = false } = options;
+  const { bundleName, platform, dev = false, server, port = 8080 } = options;
 
   return async function metroPack(done) {
     logger.verbose(`Starting metropack task with platform ${bundleName}...`);
@@ -135,36 +145,46 @@ export function metroTask(options: MetroTaskOptions = {}): TaskFunction {
         fs.mkdirSync(parentDirectory);
       }
 
-      // log out what is about to happen
-      logger.info(`Starting metro bundling for ${targetPlatform}.`);
-      logger.info(`Entry file ${entry}.`);
-      logger.info(`Output file ${out}.`);
+      if (server) {
+        // for server start up the server, note that this is for only one platform, at least by configuration
+        logger.info(`Starting metro server for ${targetPlatform} platform.`);
 
-      // now run the bundle task itself
-      await Metro.runBuild(config, {
-        platform: targetPlatform,
-        entry,
-        minify: !dev,
-        out,
-        optimize: !dev,
-        sourceMap: dev
-      });
+        await Metro.runServer(config, { port });
 
-      // optionally rename the output to remove the JS extension if requested
-      if (noJSExtension && !out.endsWith('.js')) {
-        const metroBundlePath = out + '.js';
-        if (fs.existsSync(metroBundlePath)) {
-          if (fs.existsSync(out)) {
-            logger.verbose(`Deleting existing output file at ${out}...`);
-            fs.unlinkSync(out);
+        // break out of the loop, doesn't make sense to run servers for multiple platforms
+        break;
+      } else {
+        // log out what is about to happen
+        logger.info(`Starting metro bundling for ${targetPlatform}.`);
+        logger.info(`Entry file ${entry}.`);
+        logger.info(`Output file ${out}.`);
+
+        // now run the bundle task itself
+        await Metro.runBuild(config, {
+          platform: targetPlatform,
+          entry,
+          minify: !dev,
+          out,
+          optimize: !dev,
+          sourceMap: dev
+        });
+
+        // optionally rename the output to remove the JS extension if requested
+        if (noJSExtension && !out.endsWith('.js')) {
+          const metroBundlePath = out + '.js';
+          if (fs.existsSync(metroBundlePath)) {
+            if (fs.existsSync(out)) {
+              logger.verbose(`Deleting existing output file at ${out}...`);
+              fs.unlinkSync(out);
+            }
+
+            logger.verbose(`Renaming ${metroBundlePath} to ${out}...`);
+            fs.renameSync(metroBundlePath, out);
           }
-
-          logger.verbose(`Renaming ${metroBundlePath} to ${out}...`);
-          fs.renameSync(metroBundlePath, out);
         }
-      }
 
-      logger.info(`Finished bundling ${out} for ${targetPlatform}.`);
+        logger.info(`Finished bundling ${out} for ${targetPlatform}.`);
+      }
     }
 
     if (done) {

@@ -42,6 +42,8 @@ module.exports = function preset() {
   option('dev');
   option('platform', { type: 'string' });
   option('bundleName', { type: 'string' });
+  option('server');
+  option('port', { type: 'number' });
 
   // for options that have a check/fix switch this puts them into fix mode
   option('fix');
@@ -74,7 +76,8 @@ module.exports = function preset() {
     metroTask({
       dev: !!argv().dev,
       ...(argv().platform && { platform: argv().platform }),
-      ...(argv().bundleName && { bundleName: argv().bundleName })
+      ...(argv().bundleName && { bundleName: argv().bundleName }),
+      ...(argv().server && { server: true, port: argv().port || 8080 })
     })
   );
 
