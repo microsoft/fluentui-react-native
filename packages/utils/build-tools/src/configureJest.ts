@@ -72,26 +72,8 @@ export function configureReactNativeJest(platform?: PlatformValue, customConfig?
         hasteImplModulePath: rnPath + 'jest/hasteImpl.js',
         providesModuleNodeModules: [rnPackage]
       },
-      transformIgnorePatterns: ['node_modules/(?!(react-native)/)']
-      /*
-        roots: [rnPath, '<rootDir>/src'],
-        haste: {
-          defaultPlatform: platform,
-          platforms: getAllPlatforms(),
-          hasteImplModulePath: rnPath + 'jest/hasteImpl.js',
-          providesModuleNodeModules: [rnPackage]
-        },
-        moduleNameMapper: {
-          '^react-native$': rnPath,
-          '^react-native/(.*)': rnPath + '$1'
-        },
-        modulePathIgnorePatterns: [...getAllReactNativePaths().filter(p => p !== rnPath)],
-        setupFiles: [path.resolve(__dirname, 'jest/jest-setup-enzyme.js')],
-        ...(platform && {
-          moduleFileExtensions: [...moduleFileExtensions.map(v => `${platform}.${v}`), ...moduleFileExtensions],
-          testRegex: `(/__tests__/.*|\\.(test|spec))(\\.${platform})?\\.(ts|tsx)$`
-        })
-        */
+      transformIgnorePatterns: ['node_modules/(?!(react-native)/)'],
+      verbose: false
     },
     customConfig
   );
