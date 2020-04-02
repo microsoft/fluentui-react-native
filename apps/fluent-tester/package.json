@@ -71,7 +71,6 @@
         "outputPath": "./dist"
       },
       "windows": {
-        "outputPath": "./windows/FluentTester/Bundle",
         "bundleName": "index.windows.bundle"
       }
     }
