@@ -71,7 +71,7 @@ export function configureMetro(optionsToMerge?: object) {
     // WatchFolders is only needed due to the yarn workspace layout of node_modules, we need to watch the symlinked locations separately
     watchFolders: [
       path.resolve(findGitRoot(), 'node_modules'),
-      ...getPackageInfo({ strategy: 'update' })
+      ...getPackageInfo()
         .dependencies()
         .paths()
     ],

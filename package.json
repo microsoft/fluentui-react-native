@@ -13,6 +13,7 @@
   },
   "scripts": {
     "preinstall": "node ./scripts/use-yarn-please.js",
+    "postinstall": "node ./scripts/postinstall.js",
     "clean-all": "node ./scripts/clean-all.js",
     "start": "cd apps && cd demo && npm start",
     "docs": "cd docs && npm start",

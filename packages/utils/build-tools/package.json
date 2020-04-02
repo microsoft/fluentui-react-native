@@ -7,6 +7,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "just-scripts build",
+    "bundle": "just-scripts build",
     "clean": "just-scripts clean"
   },
   "dependencies": {
