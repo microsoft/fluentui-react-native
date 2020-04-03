@@ -19,7 +19,7 @@ Navigate to the root folder of your project, and use npm to install the package:
  npm i @fluentui/react-native
 ```
 
-After successful installation, you can use the package by importing components at the top of your app's entry file, e.g. `App.js`:
+After successful installation, you can test the package by importing components at the top of your app's entry file, e.g. `App.js`:
 
 ```
  import { Checkbox } from '@fluentui/react-native';
