@@ -1,9 +1,0 @@
-{
-  "type": "patch",
-  "comment": "switch the bin name from just-script to fluent-scripts to disambiguate names",
-  "packageName": "@fluentui-react-native/radio-group",
-  "email": "jasonmo@microsoft.com",
-  "commit": "799641daaf523e1e4c19fa8c6799ef40bd48843a",
-  "dependentChangeType": "patch",
-  "date": "2020-03-20T22:08:16.985Z"
-}
