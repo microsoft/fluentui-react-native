@@ -1,6 +1,6 @@
-`RNTester` is the test app that we use to test our FluentUI components during development.
+`FluentUI Tester` is the test app that we use to test our FluentUI components during development.
 
-## Launch `RNTester` app
+## Launch `FluentUI Tester` app
 
 1. After you've cloned the repository for the first time, follow the instructions [here](../../README.md) to install npm packages and build the entire repository.
 
@@ -10,32 +10,35 @@
     cd experiments\tester
 ```
 
-3. Build the RNTester bundle:
+3. Build the FluentUI Tester bundle:
 
 ```
     yarn bundle
 ```
 
-4. Launch the RNTester app:
+4. Launch the FluentUI Tester app:
 
 ```
     yarn run-win32
 ```
+5. You will see FluentUI Tester show up in a new window.
 
-## Debug `RNTester` app with direct debugging
+![ReactTest image debug menu location](./../../docs/pages/images/fluent_tester_debug_menu.png)
 
-We recommend using [Visual Studio Code](https://code.visualstudio.com/download) for direct debugging.
+## Debug `FluentUI Tester` app with direct debugging
+
+Note: we recommend using [Visual Studio Code](https://code.visualstudio.com/download) for direct debugging.
 
 1. Follow the same step #1 as above.
 2. Follow the same step #2 as above.
 
-3. Build the RNTester bundle with dev option. This will ensure source map is included in the bundle.
+3. Build the FluentUI Tester bundle with dev option. This will ensure source map is included in the bundle.
 
 ```
     yarn bundle-dev
 ```
 
-4. Launch the RNTester app:
+4. Launch the FluentUI Tester app:
 
 ```
     yarn run-win32
@@ -51,7 +54,7 @@ We recommend using [Visual Studio Code](https://code.visualstudio.com/download) 
 
 7. At this time, VS Code will attach to the JS runtime and you can start debugging. For more information on debugging in VS Code, please see [Visual Studio Code documentation](https://code.visualstudio.com/docs/editor/debugging).
 
-## Debug `RNTester` app with web debugging
+## Debug `FluentUI Tester` app with web debugging
 
 1. Follow the same step #1 as above.
 2. Follow the same step #2 as above.
