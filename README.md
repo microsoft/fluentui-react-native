@@ -1,6 +1,6 @@
 # FluentUI React Native
 
-FluentUI React Native is a javascript component library that provides developers with controls that are part of the Fluent Design Language. These controls are built on React Native and fully customizable.
+FluentUI React Native is a javascript component library that provides developers with controls that are part of the [Fluent Design System](https://www.microsoft.com/design/fluent/). These controls are built on [React Native](https://reactnative.dev/) and fully customizable.
 
 ## Getting Started
 
