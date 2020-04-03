@@ -2,7 +2,7 @@
 
 ## Launch `FluentUI Tester` app
 
-1. After you've cloned the repository for the first time, follow the instructions [here](../../README.md) to install npm packages and build the entire repository.
+1. Make sure you have followed the Getting Started instructions [here](../../README.md) to install packages and build the entire repository.
 
 2. Then go into `experiments\tester` folder:
 
