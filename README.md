@@ -8,8 +8,8 @@ If you have an existing React Native project, it's easy to begin using FluentUI 
 
 ### Prerequisites
 
-*[Standard React Native dependencies](http://facebook.github.io/react-native/docs/getting-started.html#node-python2-jdk)
-*[Node.js](https://nodejs.org/en/download/)
+* [Standard React Native dependencies](http://facebook.github.io/react-native/docs/getting-started.html#node-python2-jdk)
+* [Node.js](https://nodejs.org/en/download/)
 
 ### Install FluentUI React Native into an existing project
 
