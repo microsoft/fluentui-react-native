@@ -126,16 +126,66 @@ In the above example, Narrator will read the first button as "One, 1 of 2, level
 
 ### States
 
-```accessibilityStates``` describes the current state of a component to the user.
+`accessibilityStates` is an array of values, and may include any of the following:
+
+- **disabled** Used when the element is disabled and cannot be interacted with.	
+- **checked** Used to indicate that a checkable element is currently checked.	
+- **unchecked** Used to indicate that a checkable element is not currently checked.	
+- **mixed** Used to indicate that a checkable element is in a mixed state.
+- **expanded** Used to indicate that an expandable element is currently expanded.
+- **selected** Used when the element is in a selected state.
+- **required** Used to indicate that selection is required for a group of elements.
+- **multiselectable** Used to indicate that multiple items can be selected from a group.
+
+To use, set the `accessibilityStates` to an array containing the list of current states.
 
 ### Actions
 
-Accessibility actions allow assistive technology to programmatically invoke actions you provide to a component. In order to
-add support an action, a component must do two things:
+Accessibility actions allow an assistive technology to programmatically invoke the actions of a component. In order to support accessibility actions, a component must do two things:
 
-- Define a list of actions it supports via the accessibilityActions property
-- Implement an onAccessibilityAction function handle to handle action requests
+- Define the list of actions it supports via the `accessibilityActions` property.
+- Implement an `onAccessibilityAction` function to handle action requests.
 
+The `accessibilityActions` property should contain a list of action objects. Each action object should contain the following fields:
+
+| Name  | Type   | Required |
+| ----- | ------ | -------- |
+| name  | string | Yes      |
+| label | string | No       |
+
+Actions either represent standard actions, such as clicking a button or adjusting a slider, or custom actions specific to a given component such as deleting an email message. The `name` field is required for both standard and custom actions, but `label` is optional for standard actions.
+
+When adding support for standard actions, `name` must be one of the following:
+
+- `'Expand'` - Displays all child nodes, controls, or content of the control.
+- `'Collapse'` - Hides all child nodes, controls, or content of this element.
+- `'Select'` - Deselects any selected items and then selects the current element.
+- `'AddToSelection'` - Adds the current element to the collection of selected items.
+- `'RemoveFromSelection'` - Removes the current element from the collection of selected items.
+- `'Toggle'` - Cycles through the toggle states of a control.
+
+The `label` field is optional for standard actions, and is often unused by assistive technologies. For custom actions, it is a localized string containing a description of the action to be presented to the user.
+
+To handle action requests, a component must implement an `onAccessibilityAction` function. The only argument to this function is an event containing the name of the action to perform. The below example showing how to create a component which defines and handles several custom actions.
+
+```tsx
+<View
+  accessible={true}
+  accessibilityActions={[
+    {name: 'Expand'},
+    {name: 'Collapse'},
+  ]}
+  onAccessibilityAction={(event) => {
+    switch (event.nativeEvent.actionName) {
+      case 'Expand':
+        Alert.alert('Alert', 'Expand action success');
+        break;
+      case 'Collapse':
+        Alert.alert('Alert', 'Collapse action success');
+        break;
+  }}
+/>
+```
 ## Testing
 
 To test your application with Narrator, visit the complete guide to Narrator: https://support.microsoft.com/en-us/help/22798/windows-10-complete-guide-to-narrator
