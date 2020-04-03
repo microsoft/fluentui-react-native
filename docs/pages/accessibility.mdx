@@ -1,0 +1,104 @@
+# Accessibility
+
+Accessibility means designing and creating UI that's accessible to all users, including those with disabilities.
+It's important to create accessible UI so that assitive technology, like screen readers, can access information users 
+need to interact with your contorls. Here you can find a guide to get started as well as tools to help you test your UI 
+for accessibility.
+
+## Our Approach
+FluentUI React Native enables developers to create accessible UI by providing APIs that are complimentary to Microsoft
+UI Automation (UIA), an accessibility framework for Windows. Our API surface is heavly inspired by Accessible Internet Rich 
+Applications (ARIA), an accessibility framework for the web. We chose to align with ARIA to provide a "web first" 
+development experience. ARIA also provides a lot of guidelines and best practices for creating accessible content.
+
+## Making UI accessible
+
+FluentUI React Native components are accessible by default meaning you only need to provide minimal customizations to make
+your UI accessible. Here you will find information the folowing components: Properties, Roles, States, and Actions.
+
+### Properties
+
+#### accessible
+When ```true```, indicates that the view is an accessible element meaning it receives accessibility focus. By default, all 
+controls are accessible. 
+
+```tsx
+<Text accessible={true}>first</Text>
+<Text accessible={false}>second</Text>
+```
+
+In the above example, 'first' recieves accessiblity focus but 'second' does not. 
+
+
+#### accessibilityLabel
+When something is accessible, it's good practice to set an ```accessiblityLabel``` so the user knows what element they have
+selected. Narrator will read out this string when the user places focus on the control.
+
+To use, set the ```accessibilityLabel``` property to a custom string:
+
+```tsx
+<Button content="Click me" accessibilityLabel="Press me" />
+```
+
+In the above example, Narrator will read "Press me" instead of "Click me".
+
+#### accessibilityHint
+
+An accessibility hint helps users understand what will happen when they preform an action on the accessibility element when
+the result isn't clear from the accessibility label.
+
+To use, set the ```accessibilityHint``` property to a custom string:
+
+```tsx
+<Button content="Back" accessibilityLabel="Go Back" accessibilityHint="Navigates to the previous screen" />
+```
+
+In the above example, Narrator will read the hint after the label.
+
+#### acceptsKeyboardFocus
+
+When ```true```, this enables the component to accept keyboard focus. 
+
+#### accessibilityLevel, accessibiiltyPositionInSet, accessibilitySetSize
+
+These properties are used together to define a set of items.
+- ```accessibilityLevel``` defines the level of the set
+- ```accessibilityPositionInSet``` defines the position of the item in a set
+- ```accessibilitySetSize``` defines the number of items in a set
+
+```tsx
+<View>
+  <Button content="One" accessibilityLevel={1} accessibiltyPositionInSet={1} accessibilitySetSize={2}/>
+  <Button content="Two" accessibilityLevel={1} accessibiltyPositionInSet={2} accessibilitySetSize={2}/>
+  <View>
+    <Button content="Three" accessibilityLevel={2} accessibiltyPositionInSet={1} accessibilitySetSize={3} />
+    <Button content="Four" accessibilityLevel={2} accessibiltyPositionInSet={2} accessibilitySetSize={3} />
+    <Button content="Five" accessibilityLevel={2} accessibiltyPositionInSet={3} accessibilitySetSize={3} />
+  </View>
+</View>
+```
+
+In the above example, Narrator will read the first button as "One, 1 of 2, level 1" and the second button as "Two, 2 of 
+2, level 1" and so on.
+
+### Roles
+```accessibilityRole``` communicates the purpose of the component to the user.
+
+### States
+
+```accessibilityStates``` describes the current state of a component to the user.
+
+### Actions
+
+Accessibility actions allow assistive technology to programically invoke actions you provide to a component. In order to
+add support an action, a component must do two things:
+
+- Define a list of actions it supports via the accessibilityActions property
+- Implement an onAccessibilityAction function handle to handle action requests
+
+## Testing
+
+To test your application with Narrator, visit the complete guide to Narrator: https://support.microsoft.com/en-us/help/22798/windows-10-complete-guide-to-narrator
+
+To test your application wiht Accessibility Insights, visit Accessibility Insights for Windows: https://accessibilityinsights.io/docs/en/windows/overview
+
