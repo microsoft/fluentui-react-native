@@ -4,7 +4,30 @@ FluentUI React Native is a javascript component library that provides developers
 
 ## Getting Started
 
-### Prerequisites: Yarn + Lerna
+If you have an existing React Native project, it's easy to begin using FluentUI React Native. If you need to setup a new React Native project, please see the [React Native Windows Getting Started documentation](https://microsoft.github.io/react-native-windows/docs/getting-started).
+
+### Prerequisites
+
+*[Standard React Native dependencies](http://facebook.github.io/react-native/docs/getting-started.html#node-python2-jdk)
+*[Node.js](https://nodejs.org/en/download/)
+
+### Install FluentUI React Native into an existing project
+
+Navigate to the root folder of your project, and use npm to install the package:
+
+```
+ npm i @fluentui/react-native
+```
+
+After successful installation, you can use the package by importing components at the top of your app's entry file, e.g. `App.js`:
+
+```
+ import { Checkbox } from '@fluentui/react-native';
+```
+
+## Developing in the repo
+
+### Yarn + Lerna
 
 This repo is set up as a monorepo using Lerna + Yarn workspaces. The yarn commands will trigger the lerna commands which will execute yarn commands in each package. To install yarn, please follow instructions in the [Yarn documentation](https://classic.yarnpkg.com/en/docs/install/).
 
