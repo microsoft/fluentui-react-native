@@ -14,12 +14,12 @@ development experience. ARIA also provides a lot of guidelines and best practice
 ## Making UI accessible
 
 FluentUI React Native components are accessible by default meaning you only need to provide minimal customizations to make
-your UI accessible. Here you will find information the folowing components: Properties, Roles, States, and Actions.
+your UI accessible. Here you will find information on the folowing components: Properties, Roles, States, and Actions.
 
 ### Properties
 
 #### accessible
-When ```true```, indicates that the view is an accessible element meaning it receives accessibility focus. By default, all 
+When `true`, indicates that the view is an accessible element meaning it receives accessibility focus. By default, all 
 controls are accessible. 
 
 ```tsx
@@ -31,10 +31,9 @@ In the above example, 'first' recieves accessiblity focus but 'second' does not.
 
 
 #### accessibilityLabel
-When something is accessible, it's good practice to set an ```accessiblityLabel``` so the user knows what element they have
-selected. Narrator will read out this string when the user places focus on the control.
+When something is accessible, it's good practice to set an `accessiblityLabel` so the user knows what element has focus. Narrator will read out this string when the user places focus on the control.
 
-To use, set the ```accessibilityLabel``` property to a custom string:
+To use, set the `accessibilityLabel` property to a custom string:
 
 ```tsx
 <Button content="Click me" accessibilityLabel="Press me" />
@@ -47,7 +46,7 @@ In the above example, Narrator will read "Press me" instead of "Click me".
 An accessibility hint helps users understand what will happen when they preform an action on the accessibility element when
 the result isn't clear from the accessibility label.
 
-To use, set the ```accessibilityHint``` property to a custom string:
+To use, set the `accessibilityHint` property to a custom string:
 
 ```tsx
 <Button content="Back" accessibilityLabel="Go Back" accessibilityHint="Navigates to the previous screen" />
@@ -57,7 +56,7 @@ In the above example, Narrator will read the hint after the label.
 
 #### acceptsKeyboardFocus
 
-When ```true```, this enables the component to accept keyboard focus. 
+When `true`, this enables the component to accept keyboard focus. 
 
 #### accessibilityLevel, accessibiiltyPositionInSet, accessibilitySetSize
 
@@ -123,7 +122,6 @@ In the above example, Narrator will read the first button as "One, 1 of 2, level
 - **tree** Used to represent a list that contains sub-level nested groups that can be collapsed and expanded. 
 - **treeitem** Used to represent an option item in a tree that may be expanded or collapsed if it contains a sub-level group of tree item elements.
 
-
 ### States
 
 `accessibilityStates` is an array of values, and may include any of the following:
@@ -164,9 +162,11 @@ When adding support for standard actions, `name` must be one of the following:
 - `'RemoveFromSelection'` - Removes the current element from the collection of selected items.
 - `'Toggle'` - Cycles through the toggle states of a control.
 
+Note: These are the only standard actions we have support for at this time. When new actions are added, they will be updated here.
+
 The `label` field is optional for standard actions, and is often unused by assistive technologies. For custom actions, it is a localized string containing a description of the action to be presented to the user.
 
-To handle action requests, a component must implement an `onAccessibilityAction` function. The only argument to this function is an event containing the name of the action to perform. The below example showing how to create a component which defines and handles several custom actions.
+To handle action requests, a component must implement an `onAccessibilityAction` function. The only argument to this function is an event containing the name of the action to perform. The below example shows how to use standard actions.
 
 ```tsx
 <View
@@ -186,6 +186,7 @@ To handle action requests, a component must implement an `onAccessibilityAction`
   }}
 />
 ```
+
 ## Testing
 
 To test your application with Narrator, visit the complete guide to Narrator: https://support.microsoft.com/en-us/help/22798/windows-10-complete-guide-to-narrator
