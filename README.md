@@ -25,7 +25,7 @@ After successful installation, you can test the package by importing components 
  import { Checkbox } from '@fluentui/react-native';
 ```
 
-Once you have the package installed, check out our [Hello World Fluent page](.\docs\pages\HELLO_WORLD.md) to start writing code (Coming Soon).
+Once you have the package installed, check out our [Hello World Fluent page](./docs/pages/HELLO_WORLD.md) to start writing code (Coming Soon).
 
 ## Developing in the repo
 
