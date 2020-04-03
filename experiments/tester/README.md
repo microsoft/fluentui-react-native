@@ -23,7 +23,7 @@
 ```
 5. You will see FluentUI Tester show up in a new window.
 
-![ReactTest image debug menu location](./../../docs/pages/images/fluent_tester_debug_menu.png)
+![ReactTest image debug menu location](./../../docs/pages/images/fluent_tester_radiogroup.png)
 
 ## Debug `FluentUI Tester` app with direct debugging
 
@@ -46,7 +46,7 @@ Note: we recommend using [Visual Studio Code](https://code.visualstudio.com/down
 
 5. Inside ReactTest, open the debug option menu and select the checkbox `Use Direct Debugger`
 
-![ReactTest image debug menu location](./../../docs/pages/images/fluent_tester_radiogroup.png)
+![ReactTest image debug menu location](./../../docs/pages/images/fluent_tester_debug_menu.png)
 
 6. In Visual Studio Code, open the debug pane and select `Debug Fabric Tester` option from the "Run And Debug" dropdown.
 
