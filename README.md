@@ -13,10 +13,10 @@ After a successful yarn build, you can explore FluentUI Tester, our demo applica
 
 ### Yarn + Lerna
 
-This repo is set up as a monorepo using Lerna + Yarn workspaces. The yarn commands will trigger the lerna commands which will execute yarn commands in each package.
+This repo is set up as a monorepo using Lerna + Yarn workspaces. The yarn commands will trigger the lerna commands which will execute yarn commands in each package. To install yarn, please follow instructions in the [Yarn documentation](https://classic.yarnpkg.com/en/docs/install/).
 
 ### Beachball
-This repo manages semantic versioning and publishing using Beachball (https://github.com/microsoft/beachball). When contributing, make sure to run the following before making a pull request
+This repo manages semantic versioning and publishing using [Beachball](https://github.com/microsoft/beachball). When contributing, make sure to run the following before making a pull request
 1. `yarn change` will take you through a command line wizard to generate change files
 2. Make sure to commit and push the newly generated change file
 
