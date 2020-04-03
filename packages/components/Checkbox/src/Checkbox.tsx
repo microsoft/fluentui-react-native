@@ -5,10 +5,10 @@ import { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { filterViewProps } from '@fluentui-react-native/adapters';
-import { settings } from './Checkbox.settings';
+import { settings, checkboxSelectActionLabel } from './Checkbox.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens, borderTokens } from '@fluentui-react-native/tokens';
-import { useAsPressable, useAsToggle, useViewCommandFocus, useKeyCallback } from '@fluentui-react-native/interactive-hooks';
+import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
+import { useAsToggle, useAsPressable, useViewCommandFocus, useKeyCallback } from '@fluentui-react-native/interactive-hooks';
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
 
 export const Checkbox = compose<ICheckboxType>({
@@ -22,27 +22,46 @@ export const Checkbox = compose<ICheckboxType>({
       console.warn('defaultChecked and checked are mutually exclusive to one another. Use one or the other.');
     }
 
-    // Used for uncontrolled Checkbox's to keep internal state
-    const data = useAsToggle(defaultChecked, checked, onChange);
+    // Re-usable hook for toggle components.
+    const [isChecked, toggleChecked] = useAsToggle(defaultChecked, checked, onChange);
 
-    const pressable = useAsPressable({ onPress: data.onChange, ...rest });
+    const pressable = useAsPressable({ onPress: toggleChecked, ...rest });
 
     const buttonRef = useViewCommandFocus(userProps.componentRef);
 
     // Handles the "Space" key toggling the Checkbox
-    const onKeyUpSpace = useKeyCallback(' ', data.onChange);
+    const onKeyUpSpace = useKeyCallback(' ', toggleChecked);
 
     const state: ICheckboxState = {
       ...pressable.state,
       disabled,
-      checked: data.state.isChecked,
+      checked: isChecked,
       boxAtEnd: boxSide == undefined || boxSide == 'start' ? false : true
     };
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
-    const allyStates = state.disabled ? ['disabled'] : undefined;
+    // Used when creating accessibility properties in mergeSettings below
+    const onAccessibilityAction = React.useCallback(
+      (event: { nativeEvent: { actionName: any } }) => {
+        switch (event.nativeEvent.actionName) {
+          case 'Toggle':
+            toggleChecked();
+            break;
+        }
+      },
+      [toggleChecked, userProps, state, pressable.props]
+    );
+
+    let accessibilityStates: string[] = [];
+    if (state.disabled) {
+      accessibilityStates = ['disabled'];
+    } else if (state.checked) {
+      accessibilityStates = ['checked'];
+    } else {
+      accessibilityStates = ['unchecked'];
+    }
 
     const slotProps = mergeSettings<ICheckboxSlotProps>(styleProps, {
       root: {
@@ -51,7 +70,9 @@ export const Checkbox = compose<ICheckboxType>({
         ...pressable.props,
         accessibilityRole: 'checkbox',
         accessibilityLabel: ariaLabel || label,
-        accessibilityStates: allyStates,
+        accessibilityStates: accessibilityStates,
+        accessibilityActions: [{ name: 'Toggle', label: checkboxSelectActionLabel }],
+        onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUpSpace
       },
       // Temporary checkmark until SVG functionality
@@ -84,8 +105,15 @@ export const Checkbox = compose<ICheckboxType>({
   },
   styles: {
     root: [],
-    checkbox: [backgroundColorTokens, borderTokens],
-    checkmark: [foregroundColorTokens],
+    checkbox: [
+      backgroundColorTokens,
+      borderTokens,
+      [
+        { source: 'checkboxBackgroundColor', lookup: getPaletteFromTheme, target: 'backgroundColor' },
+        { source: 'checkboxBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }
+      ]
+    ],
+    checkmark: [foregroundColorTokens, [{ source: 'checkmarkColor', lookup: getPaletteFromTheme, target: 'color' }]],
     content: [foregroundColorTokens, textTokens]
   }
 });

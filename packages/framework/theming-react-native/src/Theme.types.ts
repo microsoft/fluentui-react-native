@@ -1,10 +1,6 @@
-import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 import { IThemeRegistry, IProcessTheme } from '@uifabricshared/theme-registry';
+import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 
-export type ITheme = ITheme;
-
-export type IPartialTheme = IPartialTheme;
-
+export { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 export type IThemeDefinition = IPartialTheme | IProcessTheme<ITheme, IPartialTheme>;
-
 export type ThemeRegistry = IThemeRegistry<ITheme, IPartialTheme>;

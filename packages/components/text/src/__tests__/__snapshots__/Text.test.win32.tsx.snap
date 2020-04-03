@@ -4,7 +4,7 @@ exports[`Text all props 1`] = `
 <Text
   style={
     Object {
-      "color": "pink",
+      "color": "#a19f9d",
       "fontFamily": "Segoe UI",
       "fontSize": 12,
       "fontWeight": "500",
@@ -36,7 +36,7 @@ exports[`Text default 1`] = `
 <Text
   style={
     Object {
-      "color": "#505050",
+      "color": "#323130",
       "fontFamily": "Segoe UI",
       "fontSize": 12,
       "fontWeight": "500",

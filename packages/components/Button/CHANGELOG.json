@@ -2,6 +2,35 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Fri, 03 Apr 2020 20:40:51 GMT",
+      "tag": "@fluentui-react-native/button_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch the bin name from just-script to fluent-scripts to disambiguate names",
+            "author": "jasonmo@microsoft.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 31 Mar 2020 18:01:09 GMT",
+      "tag": "@fluentui-react-native/button_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Checkbox Final V1 Changes",
+            "author": "safreibe@microsoft.com",
+            "commit": "0a82a531a8dd9cd29d1799badaa49733ef7c8ccf"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Mar 2020 16:27:00 GMT",
       "tag": "@fluentui-react-native/button_v0.2.7",
       "version": "0.2.7",

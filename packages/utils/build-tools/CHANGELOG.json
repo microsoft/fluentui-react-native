@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/build-tools",
+  "entries": [
+    {
+      "date": "Fri, 03 Apr 2020 20:40:51 GMT",
+      "tag": "@fluentui-react-native/build-tools_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "fixed metro bundling and start to build rn tools package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@fluentui-react-native/build-tools"
+          }
+        ]
+      }
+    }
+  ]
+}
