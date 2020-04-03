@@ -13,13 +13,15 @@
   },
   "scripts": {
     "preinstall": "node ./scripts/use-yarn-please.js",
+    "postinstall": "node ./scripts/postinstall.js",
     "clean-all": "node ./scripts/clean-all.js",
     "start": "cd apps && cd demo && npm start",
     "docs": "cd docs && npm start",
     "build": "lerna run build --stream -- --production --lint --color",
     "bundle": "lerna run bundle --stream -- --production --lint --color",
+    "clean": "lerna run clean --stream",
     "change": "beachball change",
-    "check-for-changed-files": "cd scripts && yarn just-scripts check-for-modified-files",
+    "check-for-changed-files": "cd scripts && yarn fluentui-scripts check-for-modified-files",
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
     "prettier": "cd scripts && yarn prettier",
     "publish:beachball": "beachball publish --bump-deps -m\"📦 applying package updates ***NO_CI***\"",
@@ -29,14 +31,22 @@
     "update-api": "lerna run update-api"
   },
   "devDependencies": {
+    "@office-iss/react-native-win32": "0.27.3",
+    "@office-iss/rex-win32": "0.0.35",
+    "@types/react": "16.8.23",
+    "@types/react-dom": "16.8.5",
+    "@types/react-native": "^0.60.0",
     "beachball": "^1.11.7",
-    "lerna": "^3.16.4"
+    "lerna": "^3.16.4",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-native": "0.60.6",
+    "react-native-windows": "0.60.0-vnext.149"
   },
   "workspaces": {
     "packages": [
       "apps/*",
       "docs",
-      "experiments/*",
       "packages/**",
       "scripts"
     ],
