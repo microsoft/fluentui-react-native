@@ -2,12 +2,12 @@
 
 Accessibility means designing and creating UI that's accessible to all users, including those with disabilities.
 It's important to create accessible UI so that assitive technology, like screen readers, can access information users 
-need to interact with your contorls. Here you can find a guide to get started as well as tools to help you test your UI 
+need to interact with your controls. Here you can find a guide to get started as well as tools to help you test your UI 
 for accessibility.
 
 ## Our Approach
 FluentUI React Native enables developers to create accessible UI by providing APIs that are complimentary to Microsoft
-UI Automation (UIA), an accessibility framework for Windows. Our API surface is heavly inspired by Accessible Internet Rich 
+UI Automation (UIA), an accessibility framework for Windows. Our API surface is heavily inspired by Accessible Internet Rich 
 Applications (ARIA), an accessibility framework for the web. We chose to align with ARIA to provide a "web first" 
 development experience. ARIA also provides a lot of guidelines and best practices for creating accessible content.
 
@@ -82,7 +82,47 @@ In the above example, Narrator will read the first button as "One, 1 of 2, level
 2, level 1" and so on.
 
 ### Roles
-```accessibilityRole``` communicates the purpose of the component to the user.
+`accessibilityRole` communicates the purpose of a component to the user.
+
+`accessibilityRole` can be one of the following:
+
+- **adjustable** Used when an element can be "adjusted" (e.g. a slider).
+- **alert** Used when an element contains important text to be presented to the user. (note: maps to UIA Group control type)
+- **alertdialog** Used to represent a dialog that contains an alert message. (note: maps to UIA Pane control type)
+- **application** Used to represent a structure containing one or more focusable elements requiring user input such as keyboard or gesture events. (note: maps to UIA Pane control type)
+- **button** Used when the element should be treated as a button.
+- **checkbox** Used when an element represents a checkbox which can be checked, unchecked, or have mixed checked state.
+- **combobox** Used when an element represents a combo box, which allows the user to select among several choices.
+- **dialog** Used to represent a descendant window of a primary window of an application. (note: maps to UIA Pane control type)
+- **group** Used to represent a set of user interface objects.
+- **header** Used when an element acts as a header for a content section (e.g. the title of a navigation bar) (note: maps to UIA Text control type)
+- **image** Used when the element should be treated as an image.
+- **imagebutton** Used when the element should be treated as a button and is also an image. (note: maps to UIA Button control type)
+- **keyboardkey** Used when the element acts as a keyboard key. (note: maps to UIA Button control type)
+- **link** Used when the element should be treated as a link.
+- **menu** Used when the component is a menu of choices.
+- **menubar** Used when a component is a container of multiple menus.
+- **menuitem** Used to represent an item within a menu.
+- **none** Used when the element has no role. (note: maps to UIA Group control type and is removed from the control tree)
+- **progressbar** Used to represent a component which indicates progress of a task.
+- **presentation** Used to represent an element whose implicit native role semantics will not be mapped to the accessibility API. Synonymn is none. (note: maps to UIA Group control type and is removed from the control tree)
+- **radio** Used to represent a radio button.
+- **radiogroup** Used to represent a group of radio buttons. (note: maps to UIA List control type)
+- **scrollbar** Used to represent a scroll bar.
+- **search** Used when the text field element should also be treated as a search field (note: maps to UIA Group control type)
+- **spinbutton** Used to represent a button which opens a list of choices. (note: maps to UIA Spinner control type)
+- **summary** Used when an element can be used to provide a quick summary of current conditions in the app when the app first launches. (note: maps to UIA Text control type)
+- **switch** Used to represent a switch which can be turned on and off. (note: maps to UIA Button control type)
+- **tab** Used to represent a tab. (note: maps to UIA Tabitem control type)
+- **tablist** Used to represent a list of tabs. (note: maps to UIA Tab control type)
+- **tabpanel** Used to represent a container for the resources associated with a tab, where each tab is contained in a tablist. (note: maps to UIA Pane contorl type)
+- **text** Used when the element should be treated as static text that cannot change.
+- **textbox** Used whent the element should be treated as a type of input that allows free-form text as its value. (note: maps to UIA Edit control type)
+- **timer** Used to represent a timer. (note: maps to UIA Group control type)
+- **toolbar** Used to represent a tool bar (a container of action buttons or components).
+- **tree** Used to represent a list that contains sub-level nested groups that can be collapsed and expanded. 
+- **treeitem** Used to represent an option item in a tree that may be expanded or collapsed if it contains a sub-level group of tree item elements.
+
 
 ### States
 
@@ -90,7 +130,7 @@ In the above example, Narrator will read the first button as "One, 1 of 2, level
 
 ### Actions
 
-Accessibility actions allow assistive technology to programically invoke actions you provide to a component. In order to
+Accessibility actions allow assistive technology to programmatically invoke actions you provide to a component. In order to
 add support an action, a component must do two things:
 
 - Define a list of actions it supports via the accessibilityActions property
