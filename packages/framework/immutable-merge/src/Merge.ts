@@ -66,35 +66,6 @@ function getEntityType(val: any): 'array' | string {
 }
 
 /**
- * This will return the last sequential non-null sets of a given type.  Some examples:
- *  - array, object, number, array, array - returns the last two arrays
- *  - object, not set, object, object - will return all three objects
- *  - object, undefined, object, object - will return the last two objects
- *
- * @param key - key to get matched types for
- * @param sets - sets that are to be merged
- */
-function getMatchedEntityTypes(key: string, sets: object[]): object[] {
-  let results = [];
-  let lastType = undefined;
-
-  for (const set of sets) {
-    if (set.hasOwnProperty(key)) {
-      const thisVal = set[key];
-      const thisType = getEntityType(thisVal);
-      if (thisType === lastType) {
-        results.push(thisVal);
-      } else {
-        results = [thisVal];
-      }
-      lastType = thisType;
-    }
-  }
-
-  return results;
-}
-
-/**
  * Figure out the handler for this key.  It will either be a function, a config object to pass to a recursive call, or undefined
  * in which case this key will be left as-is
  *
@@ -167,7 +138,7 @@ function immutableMergeWorker(mergeOptions: MergeOptions, singleMode: boolean, .
           const entityType = getEntityType(originalVal);
           const handler = getHandlerForKey(options, key, entityType);
           if (handler !== undefined) {
-            const values = getMatchedEntityTypes(key, setToMerge);
+            const values = setToMerge.map(set => set[key]).filter(v => v !== undefined);
             const updatedVal = typeof handler === 'function' ? handler(...values) : immutableMergeWorker(handler, singleMode, ...values);
             if (updatedVal !== originalVal) {
               result = result || Object.assign({}, ...setToMerge);
