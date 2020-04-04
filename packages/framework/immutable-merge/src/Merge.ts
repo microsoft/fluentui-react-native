@@ -1,43 +1,140 @@
 /**
- * Checks whether an argument is an object, it excludes arrays and potentially empty arrays
- * @param t the argument to check against
- * @param onlyReturnNonEmptyObjects if true only return true when the passed in arg is non-empty
+ * a function that can be set to merge arguments
  */
-function _isNonArrayObject(t: any, onlyReturnNonEmptyObjects?: boolean): boolean {
-  return t && typeof t === 'object' && !Array.isArray(t) && (!onlyReturnNonEmptyObjects || Object.getOwnPropertyNames(t).length > 0);
+export type MergeRecursionHandler = (...objs: any[]) => any;
+
+/**
+ * built in handler functions that can be applied for a given key
+ */
+export type MergeHandlers = 'appendArray';
+
+const _builtinHandlers: { [K in MergeHandlers]: MergeRecursionHandler } = {
+  appendArray: (...objs: any[]) => {
+    return [].concat(...objs);
+  }
+};
+
+/**
+ * combined type for merge configurations.  This can be of a number of types
+ * - boolean: if true, deep merge, if false don't merge this key
+ * - number: if >= 0 merge that number of levels in the tree then stop, if negative deep merge
+ * - MergeHandlers (string): use one of the built-in merge handlers
+ * - MergeRecursionHandler: use the given function to merge these keys together
+ * - T: use the merge config as the configuration for the child
+ */
+export type MergeKeyType<T> = number | boolean | MergeHandlers | MergeRecursionHandler | T;
+
+/**
+ * configuration object for the merge, key names are matched with a few exceptions:
+ * - object: matches non-array object types
+ * - array: matches array types
+ * - [key: string]: matches anything by name
+ */
+export interface MergeConfig {
+  object?: MergeKeyType<MergeConfig>;
+  array?: MergeKeyType<MergeConfig>;
+  [key: string]: MergeKeyType<MergeConfig>;
 }
 
 /**
- * Helper function to validate and collect a value
- * @param t value to return if it is validated
- * @param custom if true return the value even if it is an array or a non-object
+ * Options which can be passed into the immutable merge core routine.  This can be one
+ * of:
+ * - boolean - if true deeply merge, must not be false at the root
+ * - number - >= 0 is how many times to recurse before stopping merging, < 0 is the same as boolean true
+ * - MergeConfig - more detailed options for the merge
  */
-function _collectVal(t: any, custom: boolean): any {
-  return ((custom || _isNonArrayObject(t)) && t) || undefined;
+export type MergeOptions = MergeConfig | boolean | number;
+
+/**
+ * This processes the various type options for merge core and turns them into a MergeConfig
+ * @param options - options passed into immutableMergeCore
+ */
+function normalizeOptions(options: MergeOptions): [MergeConfig, boolean] {
+  return typeof options === 'boolean'
+    ? [{ object: options }, options]
+    : typeof options === 'number'
+    ? [{ object: options >= 0 ? options : true }, options !== 0]
+    : [options, true];
 }
 
-export interface IMergeOptions {
-  /**
-   * number of times to recurse:
-   *  - \< 0 : infinite
-   *  - 0 or undefined : don't recurse
-   *  - 1+ : recurse this many levels
-   */
-  depth?: number;
-
-  /**
-   * if true this will run through the tree even if there is only one viable branch.  This is so the handlers can do
-   * processing, only modifying the tree if something is updated
-   */
-  processSingles?: boolean;
-
-  /**
-   * map of key values to recurse on, this will override the depth if specified
-   */
-  recurse?: { [key: string]: boolean | IMergeRecursionHandler };
+/**
+ * Return the type except return 'array' for objects that are arrays
+ * @param val - value to check type
+ */
+function getEntityType(val: any): 'array' | string {
+  return typeof val === 'object' ? (Array.isArray(val) ? 'array' : 'object') : typeof val;
 }
 
-export type IMergeRecursionHandler = (options: IMergeOptions, ...objs: any[]) => any;
+/**
+ * This will return the last sequential non-null sets of a given type.  Some examples:
+ *  - array, object, number, array, array - returns the last two arrays
+ *  - object, not set, object, object - will return all three objects
+ *  - object, undefined, object, object - will return the last two objects
+ *
+ * @param key - key to get matched types for
+ * @param sets - sets that are to be merged
+ */
+function getMatchedEntityTypes(key: string, sets: object[]): object[] {
+  let results = [];
+  let lastType = undefined;
+
+  for (const set of sets) {
+    if (set.hasOwnProperty(key)) {
+      const thisVal = set[key];
+      const thisType = getEntityType(thisVal);
+      if (thisType === lastType) {
+        results.push(thisVal);
+      } else {
+        results = [thisVal];
+      }
+      lastType = thisType;
+    }
+  }
+
+  return results;
+}
+
+/**
+ * Figure out the handler for this key.  It will either be a function, a config object to pass to a recursive call, or undefined
+ * in which case this key will be left as-is
+ *
+ * @param config - configuration for this merge call
+ * @param key - key being processed
+ * @param entityType - entity type of this key
+ */
+function getHandlerForKey(config: MergeConfig, key: string, entityType: string): MergeRecursionHandler | MergeConfig | undefined {
+  const option = config[key] !== undefined ? config[key] : config[entityType] !== undefined ? config[entityType] : undefined;
+  if (option !== undefined) {
+    // if this is a function it can just be returned as the handler
+    if (typeof option === 'function') {
+      return option;
+    }
+
+    // if this is a string it is only valid if it routes to a built-in handler
+    if (typeof option === 'string') {
+      return _builtinHandlers[option] ? _builtinHandlers[option] : undefined;
+    }
+
+    // other handlers only apply to object entities
+    if (entityType === 'object') {
+      // if we deeply recurse in some form pass the general array handler on
+      const mixin = config.array ? { array: config.array } : {};
+
+      // booleans won't recurse if false, otherwise recurse infinitely
+      if (typeof option === 'boolean') {
+        return option ? { object: option, ...mixin } : undefined;
+      }
+
+      // numbers get decremented or set to false if we've reached zero.  Negative values will have been converted to boolean true
+      if (typeof option === 'number') {
+        return option === 0 ? { ...mixin } : { object: option - 1, ...mixin };
+      }
+
+      return option;
+    }
+  }
+  return undefined;
+}
 
 /**
  * This will merge two or more objects together using an immutable style merge pattern.  If there is only one object or
@@ -51,66 +148,65 @@ export type IMergeRecursionHandler = (options: IMergeOptions, ...objs: any[]) =>
  * be `{}` - no recursion, `{ depth: -1 }` - recurse infinitely
  * @param objs - an array of objects to merge together
  */
-export function immutableMergeCore(options: IMergeOptions, ...objs: any[]): any {
-  const setToMerge = objs.filter(v => _isNonArrayObject(v, true));
-  const { depth = 0, recurse } = options;
-  const processSingle = options.processSingles && setToMerge.length === 1;
+function immutableMergeWorker(mergeOptions: MergeOptions, singleMode: boolean, ...objs: any[]): any {
+  const setToMerge = objs.filter(v => getEntityType(v) === 'object' && Object.getOwnPropertyNames(v).length > 0);
+  const [options, mightRecurse] = normalizeOptions(mergeOptions);
+  const processSingle = singleMode && setToMerge.length === 1;
 
   // there is work to do if there is more than one object to merge or if we are processing single objects
-  if (setToMerge.length > 1 || processSingle) {
-    const nextOptions = depth || recurse ? { ...options, depth: depth ? depth - 1 : 0 } : undefined;
-    let hasChanged = false;
-
+  if (setToMerge.length > 1 || (processSingle && setToMerge.length === 1)) {
     // now assign everything to get the normal property precedence (and merge all the keys)
-    const result = Object.assign({}, ...setToMerge);
+    let result = processSingle ? undefined : Object.assign({}, ...setToMerge);
+    const processSet = result || setToMerge[0];
 
-    // if there is a possibility of needing the recurse, process the keys
-    for (const key in result) {
-      if (result.hasOwnProperty(key)) {
-        const originalVal = result[key];
-
-        // next options is only set if there is a possibility of recursion
-        if (nextOptions) {
-          const isObject = _isNonArrayObject(originalVal);
-          const recurseKey = recurse && recurse[key];
-          const customHandler = recurseKey && typeof recurseKey === 'function' ? recurseKey : false;
-
-          // if this key has a custom handler, or is an object eligible for recursion, recurse
-          if (customHandler || (isObject && (depth || recurseKey))) {
-            // collect all the keys, filtering out undefined values
-            const collectedObjects = setToMerge
-              .map((value: any) => {
-                return _collectVal(value && value[key], !!customHandler);
-              })
-              .filter(v => v !== undefined);
-
-            // either recurse to this function or call the custom handler if specified
-            const handler: IMergeRecursionHandler = customHandler || immutableMergeCore;
-            result[key] = handler(nextOptions, ...collectedObjects);
-            hasChanged = hasChanged || result[key] !== originalVal;
+    for (const key in processSet) {
+      if (processSet.hasOwnProperty(key)) {
+        // only process if there is potential work to do
+        if (mightRecurse) {
+          const originalVal = processSet[key];
+          const entityType = getEntityType(originalVal);
+          const handler = getHandlerForKey(options, key, entityType);
+          if (handler !== undefined) {
+            const values = getMatchedEntityTypes(key, setToMerge);
+            const updatedVal = typeof handler === 'function' ? handler(...values) : immutableMergeWorker(handler, singleMode, ...values);
+            if (updatedVal !== originalVal) {
+              result = result || Object.assign({}, ...setToMerge);
+              result[key] = updatedVal;
+            }
           }
         }
 
         // delete undefined keys from the object, otherwise there is no easy way to delete keys
-        if (result[key] === undefined) {
+        if (!processSingle && result[key] === undefined) {
           delete result[key];
         }
       }
     }
+
     // in the single processing case return the original if nothing changed, otherwise return result
-    return processSingle && !hasChanged ? setToMerge[0] : result;
+    return result || processSet;
   }
   return setToMerge.length > 0 ? setToMerge[0] : undefined;
 }
 
-const _baseMergeOptions: IMergeOptions = { depth: -1 };
-
 /**
- * Recursively immutable merge a set of objects
+ * Recursively immutable merge sets of objects infinitely deep.  This behaves like a standard deep merge with arrays replacing
+ * one another rather than appending.  If appending arrays is desireable this can be configured via immutableMergeCore
+ *
  * @param objs - variable input array of typed objects to merge
  */
 export function immutableMerge<T extends object>(...objs: (T | undefined)[]): T | undefined {
-  return immutableMergeCore(_baseMergeOptions, ...objs);
+  return immutableMergeWorker(true, false, ...objs);
+}
+
+/**
+ * Version of immutable merge that can be configured to behave in a variety of manners.  See the documentation for details.
+ *
+ * @param options - configuration options for the merge, this dictates what keys will be handled in what way
+ * @param objs - set of objects to merge together
+ */
+export function immutableMergeCore<T extends object>(options: MergeOptions, ...objs: (T | undefined)[]): T | undefined {
+  return immutableMergeWorker(options, false, ...objs);
 }
 
 /**
@@ -118,9 +214,12 @@ export function immutableMerge<T extends object>(...objs: (T | undefined)[]): T 
  * is passed in and no changes are made, that object will be returned.  If updates happen from the handlers it will return the
  * minimally mutated object.
  *
+ * The use case for this might be a style transformation on a deeply nested object.  If no changes are made the object won't be
+ * updated but in the case where something needs to be transformed this will perform the minimal mutations.
+ *
  * @param processors - set of processor functions for handling keys
  * @param objs - one or more objects to process.  If multiple objects are passed they will be merged
  */
-export function processImmutable<T extends object>(processors: IMergeOptions['recurse'], ...objs: (T | undefined)[]): T | undefined {
-  return immutableMergeCore({ depth: -1, processSingles: true, recurse: processors }, ...objs);
+export function processImmutable<T extends object>(options: MergeOptions, ...objs: (T | undefined)[]): T | undefined {
+  return immutableMergeWorker(options, true, ...objs);
 }
