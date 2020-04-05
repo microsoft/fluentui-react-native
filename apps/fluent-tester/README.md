@@ -7,7 +7,7 @@
 2. Then go into `apps\fluent-tester` folder:
 
 ```
-    cd experiments\tester
+    cd apps\fluent-tester
 ```
 
 3. Build the FluentUI Tester bundle:

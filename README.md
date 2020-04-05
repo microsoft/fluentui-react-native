@@ -45,7 +45,7 @@ To start developing in the repository you can:
 After a successful yarn build, you can explore FluentUI Tester, our demo application to play with each of the controls. To run FluentUI Tester, please follow instructions in the [FluentUI Tester readme](https://github.com/microsoft/fluentui-react-native/blob/master/experiments/tester/README.md).
 
 ### Beachball
-This repo manages semantic versioning and publishing using [Beachball](https://github.com/microsoft/beachball). When contributing, make sure to run the following before making a pull request
+This repo manages semantic versioning and publishing using [Beachball](https://github.com/microsoft/beachball). When contributing, make sure to run the following before making a pull request:
 1. `yarn change` will take you through a command line wizard to generate change files
 2. Make sure to commit and push the newly generated change file
 
