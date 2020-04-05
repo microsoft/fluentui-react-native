@@ -4,7 +4,7 @@
 
 1. Make sure you have followed the Getting Started instructions [here](../../README.md) to install packages and build the entire repository.
 
-2. Then go into `experiments\tester` folder:
+2. Then go into `apps\fluent-tester` folder:
 
 ```
     cd experiments\tester
