@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Fri, 03 Apr 2020 20:40:51 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.4.7",
+      "version": "0.4.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch the bin name from just-script to fluent-scripts to disambiguate names",
+            "author": "jasonmo@microsoft.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 31 Mar 2020 18:01:09 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.4.6",
       "version": "0.4.6",

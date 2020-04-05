@@ -1,7 +1,13 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Tue, 31 Mar 2020 18:01:09 GMT and should not be manually modified.
+This log was last generated on Fri, 03 Apr 2020 20:40:51 GMT and should not be manually modified.
 
+## 0.2.4
+Fri, 03 Apr 2020 20:40:51 GMT
+
+### Patches
+
+- switch the bin name from just-script to fluent-scripts to disambiguate names (jasonmo@microsoft.com)
 ## 0.2.3
 Tue, 31 Mar 2020 18:01:09 GMT
 
