@@ -1,0 +1,24 @@
+{
+  "name": "gatsby-starter-uifabric-doc",
+  "entries": [
+    {
+      "date": "Sat, 27 Jul 2019 05:29:12 GMT",
+      "tag": "gatsby-starter-uifabric-doc_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "initial publish",
+            "author": "kchau@microsoft.com",
+            "commit": "d5ff88bc7ddf21d5e9035f4a95503df50709f55c"
+          },
+          {
+            "comment": "initial release",
+            "author": "kchau@microsoft.com",
+            "commit": "e9f0dccdd68a5890a3a063b79314d3ea446a95da"
+          }
+        ]
+      }
+    }
+  ]
+}
