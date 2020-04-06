@@ -129,7 +129,7 @@ function getHandlerForPropertyOfType(
  * @param objs - an array of objects to merge together
  */
 function immutableMergeWorker(mergeOptions: RecursionOption | MergeOptions, singleMode: boolean, ...objs: any[]): any {
-  const setToMerge = objs.filter(v => getEntityType(v) === 'object' && Object.getOwnPropertyNames(v).length > 0);
+  const setToMerge = objs.filter(v => v && getEntityType(v) === 'object' && Object.getOwnPropertyNames(v).length > 0);
   const [options, mightRecurse] = normalizeOptions(mergeOptions);
   const processSingle = singleMode && setToMerge.length === 1;
 

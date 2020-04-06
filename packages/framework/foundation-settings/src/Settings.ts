@@ -27,7 +27,12 @@ const _mergeSettingsOptions: MergeOptions = {
   tokens: 0,
 
   // all other objects should be treated as props
-  object: _mergePropsOptions
+  object: _mergePropsOptions,
+
+  // overrides have a collection of objects which each are treated as settings
+  get _overrides() {
+    return { object: this };
+  }
 };
 
 /**
@@ -36,11 +41,6 @@ const _mergeSettingsOptions: MergeOptions = {
 const _mergeCollectionOptions: MergeOptions = {
   object: _mergeSettingsOptions
 };
-
-/**
- * Create a recursive structure for overrides where the overrides are treated as collections of settings
- */
-_mergeSettingsOptions._overrides = _mergeCollectionOptions;
 
 /**
  * Merge settings together.  This routine should work for IComponentSettings types or ISlotProps
