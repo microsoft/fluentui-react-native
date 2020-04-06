@@ -8,9 +8,12 @@
     "build": "next build && echo"
   },
   "dependencies": {
+    "@fluentui/react-native": "^0.14.3",
     "@mdx-js/loader": "^1.5.5",
     "@mdx-js/mdx": "^1.5.5",
     "@next/mdx": "^9.2.1",
-    "next": "^9.2.1"
+    "next": "^9.2.1",
+    "react": "16.8.6",
+    "react-dom": "16.8.6"
   }
 }

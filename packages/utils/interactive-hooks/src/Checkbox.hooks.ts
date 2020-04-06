@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IKeyboardEvent } from '@office-iss/react-native-win32';
+import { KeyPressEvent } from './Pressability/CoreEventTypes';
 
 export type OnToggleCallback = (value: boolean) => void;
 export type KeyUpCallback = () => void;
@@ -17,8 +17,7 @@ export type KeyUpCallback = () => void;
  **         state.isChecked - Whether or not component is currently checked or selected
  **         state.boxAtEnd - Whether the toggle component is at the end or start
  */
-export function useAsToggle(defaultChecked?: boolean, checked?: boolean, userCallback?: OnToggleCallback) {
-  // NOTE: Using "defaultChecked ?? checked" gives me a parsing error when building
+export function useAsToggle(defaultChecked?: boolean, checked?: boolean, userCallback?: OnToggleCallback): [boolean, KeyUpCallback] {
   const [isChecked, setChecked] = React.useState(defaultChecked ?? checked);
 
   const onChange = React.useCallback(() => {
@@ -26,17 +25,19 @@ export function useAsToggle(defaultChecked?: boolean, checked?: boolean, userCal
     setChecked(!isChecked);
   }, [isChecked]);
 
-  return { onChange, state: { isChecked: checked != undefined ? checked : isChecked } };
+  return [checked ?? isChecked, onChange];
 }
 
 /* Re-usable hook for an onKeyUp/onKeyDown event.
  ** PROPS:
- **    key - A string of the key you want to perform some action on. If undefined, always invokes userCallback
- **    userCallback - The function you want to be called once the key has been activated on key up
+ **       key - A string of the key you want to perform some action on. If undefined, always invokes userCallback
+ **       userCallback - The function you want to be called once the key has been activated on key up
+ ** RETURNS:
+ **       onKeyEvent() - Callback to determine if key was pressed, if so, call userCallback
  */
 export function useKeyCallback(key?: string, userCallback?: KeyUpCallback) {
   const onKeyEvent = React.useCallback(
-    (args: IKeyboardEvent) => {
+    (args: KeyPressEvent) => {
       if (args.nativeEvent.key === key || key == undefined) {
         userCallback && userCallback();
       }

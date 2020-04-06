@@ -10,12 +10,11 @@
  */
 'use strict';
 
-import { IUseStyling, IComposableTypecast, composable } from '@uifabricshared/foundation-composable';
+import { IUseStyling, composable } from '@uifabricshared/foundation-composable';
 import { View } from 'react-native';
 import { IPressableProps, IPressableType } from './Pressable.props';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useAsPressable } from '@fluentui-react-native/interactive-hooks';
-import { IViewPropsWin32 } from '@fluentui-react-native/adapters';
 
 export const Pressable = composable<IPressableType>({
   slots: { root: View },
@@ -30,7 +29,5 @@ export const Pressable = composable<IPressableType>({
     };
   }
 });
-
-export const PressableWin32 = Pressable as IComposableTypecast<IPressableType<IViewPropsWin32>>;
 
 export default Pressable;
