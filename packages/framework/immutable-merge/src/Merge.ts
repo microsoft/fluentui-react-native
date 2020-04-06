@@ -1,28 +1,32 @@
 /**
+ * The basic options for recursion at a given level.  Two types for two behaviors:
+ *
+ * boolean:
+ *  - if true, recurse indefinitely
+ *  - if false, don't recurse
+ *
+ * number:
+ *  - if 0, don't recurse from this level
+ *  - if > 0, recurse that many times then stop
+ *  - if < 0, recurse indefinitely
+ */
+export type RecursionOption = boolean | number;
+
+/**
  * a function that can be set to merge arguments
  */
-export type MergeRecursionHandler = (...objs: any[]) => any;
+export type CustomRecursionHandler = (...vals: any[]) => any;
 
 /**
  * built in handler functions that can be applied for a given key
  */
-export type MergeHandlers = 'appendArray';
-
-const _builtinHandlers: { [K in MergeHandlers]: MergeRecursionHandler } = {
-  appendArray: (...objs: any[]) => {
-    return [].concat(...objs);
-  }
-};
+export type BuiltinRecursionHandlers = 'appendArray';
 
 /**
- * combined type for merge configurations.  This can be of a number of types
- * - boolean: if true, deep merge, if false don't merge this key
- * - number: if >= 0 merge that number of levels in the tree then stop, if negative deep merge
- * - MergeHandlers (string): use one of the built-in merge handlers
- * - MergeRecursionHandler: use the given function to merge these keys together
- * - T: use the merge config as the configuration for the child
+ * Handlers for recursion of a given key or type.  These can either be functions or a reference to a supported
+ * built-in merge routine
  */
-export type MergeKeyType<T> = number | boolean | MergeHandlers | MergeRecursionHandler | T;
+export type RecursionHandler = BuiltinRecursionHandlers | CustomRecursionHandler;
 
 /**
  * configuration object for the merge, key names are matched with a few exceptions:
@@ -30,26 +34,24 @@ export type MergeKeyType<T> = number | boolean | MergeHandlers | MergeRecursionH
  * - array: matches array types
  * - [key: string]: matches anything by name
  */
-export interface MergeConfig {
-  object?: MergeKeyType<MergeConfig>;
-  array?: MergeKeyType<MergeConfig>;
-  [key: string]: MergeKeyType<MergeConfig>;
+export interface MergeOptions {
+  [objectTypeOrKeyName: string]: RecursionOption | RecursionHandler | MergeOptions;
 }
 
 /**
- * Options which can be passed into the immutable merge core routine.  This can be one
- * of:
- * - boolean - if true deeply merge, must not be false at the root
- * - number - >= 0 is how many times to recurse before stopping merging, < 0 is the same as boolean true
- * - MergeConfig - more detailed options for the merge
+ * built in handlers for the module
  */
-export type MergeOptions = MergeConfig | boolean | number;
+const _builtinHandlers: { [K in BuiltinRecursionHandlers]: CustomRecursionHandler } = {
+  appendArray: (...objs: any[]) => {
+    return [].concat(...objs);
+  }
+};
 
 /**
  * This processes the various type options for merge core and turns them into a MergeConfig
  * @param options - options passed into immutableMergeCore
  */
-function normalizeOptions(options: MergeOptions): [MergeConfig, boolean] {
+function normalizeOptions(options: RecursionOption | MergeOptions): [MergeOptions, boolean] {
   return typeof options === 'boolean'
     ? [{ object: options }, options]
     : typeof options === 'number'
@@ -65,46 +67,53 @@ function getEntityType(val: any): 'array' | string {
   return typeof val === 'object' ? (Array.isArray(val) ? 'array' : 'object') : typeof val;
 }
 
+/** resolve custom handlers if they are applicable */
+function resolveIfHandler(option: RecursionHandler | RecursionOption | MergeOptions): CustomRecursionHandler | MergeOptions | undefined {
+  return typeof option === 'function' ? option : typeof option === 'string' ? _builtinHandlers[option] : undefined;
+}
+
+/** pass array configurations down, this allows for saying all arrays should be appended rather than replaced */
+function getTypesMixin(config: MergeOptions): MergeOptions {
+  return config.array ? { array: config.array } : {};
+}
+
+/** resolve the object behaviors for configuration */
+function resolveForObject(option: RecursionHandler | RecursionOption | MergeOptions, mixin: MergeOptions): MergeOptions | undefined {
+  if (typeof option === 'boolean') {
+    // booleans won't recurse if false, otherwise recurse infinitely
+    return option ? { object: option, ...mixin } : mixin;
+  } else if (typeof option === 'number') {
+    // numbers get decremented or set to false if we've reached zero.  Negative values will have been converted to boolean true
+    return option === 0 ? mixin : { object: option - 1, ...mixin };
+  } else {
+    // otherwise it is an object type so just pass the child object through
+    return option as MergeOptions;
+  }
+}
+
 /**
- * Figure out the handler for this key.  It will either be a function, a config object to pass to a recursive call, or undefined
+ * Figure out the handler for this property.  It will either be a function, a config object to pass to a recursive call, or undefined
  * in which case this key will be left as-is
- *
- * @param config - configuration for this merge call
- * @param key - key being processed
- * @param entityType - entity type of this key
  */
-function getHandlerForKey(config: MergeConfig, key: string, entityType: string): MergeRecursionHandler | MergeConfig | undefined {
-  const option = config[key] !== undefined ? config[key] : config[entityType] !== undefined ? config[entityType] : undefined;
+function getHandlerForPropertyOfType(
+  config: MergeOptions,
+  propKey: string,
+  propType: string
+): CustomRecursionHandler | MergeOptions | undefined {
+  let result: CustomRecursionHandler | MergeOptions | undefined = undefined;
+  const option = config[propKey] !== undefined ? config[propKey] : config[propType] !== undefined ? config[propType] : undefined;
+
   if (option !== undefined) {
-    // if this is a function it can just be returned as the handler
-    if (typeof option === 'function') {
-      return option;
-    }
+    // try to resolve the option as a handler, either function or built-in first.  This is the only option that is valid for non-object types.
+    result = resolveIfHandler(option);
 
-    // if this is a string it is only valid if it routes to a built-in handler
-    if (typeof option === 'string') {
-      return _builtinHandlers[option] ? _builtinHandlers[option] : undefined;
-    }
-
-    // other handlers only apply to object entities
-    if (entityType === 'object') {
-      // if we deeply recurse in some form pass the general array handler on
-      const mixin = config.array ? { array: config.array } : {};
-
-      // booleans won't recurse if false, otherwise recurse infinitely
-      if (typeof option === 'boolean') {
-        return option ? { object: option, ...mixin } : undefined;
-      }
-
-      // numbers get decremented or set to false if we've reached zero.  Negative values will have been converted to boolean true
-      if (typeof option === 'number') {
-        return option === 0 ? { ...mixin } : { object: option - 1, ...mixin };
-      }
-
-      return option;
+    // if it is an object then resolve boolean, number or config types
+    if (result === undefined && propType === 'object') {
+      result = resolveForObject(option, getTypesMixin(config));
     }
   }
-  return undefined;
+
+  return result;
 }
 
 /**
@@ -119,7 +128,7 @@ function getHandlerForKey(config: MergeConfig, key: string, entityType: string):
  * be `{}` - no recursion, `{ depth: -1 }` - recurse infinitely
  * @param objs - an array of objects to merge together
  */
-function immutableMergeWorker(mergeOptions: MergeOptions, singleMode: boolean, ...objs: any[]): any {
+function immutableMergeWorker(mergeOptions: RecursionOption | MergeOptions, singleMode: boolean, ...objs: any[]): any {
   const setToMerge = objs.filter(v => getEntityType(v) === 'object' && Object.getOwnPropertyNames(v).length > 0);
   const [options, mightRecurse] = normalizeOptions(mergeOptions);
   const processSingle = singleMode && setToMerge.length === 1;
@@ -136,7 +145,7 @@ function immutableMergeWorker(mergeOptions: MergeOptions, singleMode: boolean, .
         if (mightRecurse) {
           const originalVal = processSet[key];
           const entityType = getEntityType(originalVal);
-          const handler = getHandlerForKey(options, key, entityType);
+          const handler = getHandlerForPropertyOfType(options, key, entityType);
           if (handler !== undefined) {
             const values = setToMerge.map(set => set[key]).filter(v => v !== undefined);
             const updatedVal = typeof handler === 'function' ? handler(...values) : immutableMergeWorker(handler, singleMode, ...values);
@@ -176,7 +185,7 @@ export function immutableMerge<T extends object>(...objs: (T | undefined)[]): T 
  * @param options - configuration options for the merge, this dictates what keys will be handled in what way
  * @param objs - set of objects to merge together
  */
-export function immutableMergeCore<T extends object>(options: MergeOptions, ...objs: (T | undefined)[]): T | undefined {
+export function immutableMergeCore<T extends object>(options: RecursionOption | MergeOptions, ...objs: (T | undefined)[]): T | undefined {
   return immutableMergeWorker(options, false, ...objs);
 }
 

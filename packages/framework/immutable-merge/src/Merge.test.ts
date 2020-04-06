@@ -250,7 +250,7 @@ describe('Immutable merge unit tests', () => {
   });
 
   test('singleProcessNoChange', () => {
-    const merged = processImmutable(true, singleToChange);
+    const merged = processImmutable({ object: true }, singleToChange);
     expect(merged).toBe(singleToChange);
   });
 
