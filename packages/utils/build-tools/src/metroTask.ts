@@ -112,7 +112,7 @@ export interface MetroTaskOptions {
 
 export function metroTask(options: MetroTaskOptions = {}): TaskFunction {
   const { bundleName, platform, dev = false, server } = options;
-  const port = options.port || platform === 'windows' ? 8081 : 8080;
+  const port = options.port || (platform === 'windows' ? 8081 : 8080);
 
   return async function metroPack(done) {
     logger.verbose(`Starting metropack task with platform ${bundleName}...`);
