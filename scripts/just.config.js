@@ -77,7 +77,8 @@ module.exports = function preset() {
       dev: !!argv().dev,
       ...(argv().platform && { platform: argv().platform }),
       ...(argv().bundleName && { bundleName: argv().bundleName }),
-      ...(argv().server && { server: true, port: argv().port || 8080 })
+      ...(argv().server && { server: true }),
+      ...(argv().server && argv().port && { port: argv().port })
     })
   );
 
