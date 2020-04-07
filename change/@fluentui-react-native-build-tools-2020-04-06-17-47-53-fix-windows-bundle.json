@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "make server task respect cmd line ports and set good defaults for windows",
-  "packageName": "@fluentui-react-native/build-tools",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-04-07T00:47:53.269Z"
-}
