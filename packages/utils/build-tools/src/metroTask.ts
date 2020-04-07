@@ -111,7 +111,8 @@ export interface MetroTaskOptions {
 }
 
 export function metroTask(options: MetroTaskOptions = {}): TaskFunction {
-  const { bundleName, platform, dev = false, server, port = 8080 } = options;
+  const { bundleName, platform, dev = false, server } = options;
+  const port = options.port || (platform === 'windows' ? 8081 : 8080);
 
   return async function metroPack(done) {
     logger.verbose(`Starting metropack task with platform ${bundleName}...`);
@@ -137,7 +138,11 @@ export function metroTask(options: MetroTaskOptions = {}): TaskFunction {
       const configBase = await Metro.loadConfig({ config: configName });
 
       // add platform specific details for bundling this config
-      const config = addPlatformMetroConfig(targetPlatform, configBase);
+      const config = addPlatformMetroConfig(targetPlatform, configBase) as any;
+      if (server) {
+        config.server = config.server || {};
+        config.server.port = port;
+      }
 
       // ensure the parent directory exists for the target output
       const parentDirectory = path.dirname(path.resolve(process.cwd(), out));
@@ -147,9 +152,9 @@ export function metroTask(options: MetroTaskOptions = {}): TaskFunction {
 
       if (server) {
         // for server start up the server, note that this is for only one platform, at least by configuration
-        logger.info(`Starting metro server for ${targetPlatform} platform.`);
+        logger.info(`Starting metro server for ${targetPlatform} platform on port ${port}.`);
 
-        await Metro.runServer(config, { port });
+        await Metro.runServer(config, { port: port });
 
         // break out of the loop, doesn't make sense to run servers for multiple platforms
         break;
