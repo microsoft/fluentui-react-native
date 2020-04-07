@@ -25,6 +25,11 @@
     "gatsby": "^2.19.27",
     "gatsby-plugin-emotion": "^4.1.23",
     "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react-dom": "^16.13.0",
+    "@fluentui/react-native": "^0.14.4",
+    "@mdx-js/loader": "^1.5.5",
+    "@mdx-js/mdx": "^1.5.5",
+    "@next/mdx": "^9.2.1",
+    "next": "^9.2.1"
   }
 }
