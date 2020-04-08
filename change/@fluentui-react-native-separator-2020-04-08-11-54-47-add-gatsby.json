@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "update package name",
-  "packageName": "@fluentui-react-native/separator",
-  "email": "mgodbolt@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-04-08T18:54:35.945Z"
-}
