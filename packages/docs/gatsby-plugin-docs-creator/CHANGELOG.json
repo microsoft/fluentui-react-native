@@ -1,0 +1,20 @@
+{
+  "name": "gatsby-plugin-docs-creator",
+  "entries": [
+    {
+      "date": "Wed, 08 Apr 2020 21:26:12 GMT",
+      "tag": "gatsby-plugin-docs-creator_v2.1.41",
+      "version": "2.1.41",
+      "comments": {
+        "patch": [
+          {
+            "comment": "update package name",
+            "author": "mgodbolt@microsoft.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "gatsby-plugin-docs-creator"
+          }
+        ]
+      }
+    }
+  ]
+}
