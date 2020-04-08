@@ -1,5 +1,5 @@
 {
-  "name": "fluent-website",
+  "name": "fluent-rn-website",
   "version": "0.0.1",
   "description": "Fluent website content",
   "repository": {
@@ -28,8 +28,6 @@
     "react-dom": "^16.13.0",
     "@fluentui/react-native": "^0.14.4",
     "@mdx-js/loader": "^1.5.5",
-    "@mdx-js/mdx": "^1.5.5",
-    "@next/mdx": "^9.2.1",
-    "next": "^9.2.1"
+    "@mdx-js/mdx": "^1.5.5"
   }
 }
