@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "update package name",
+  "packageName": "@fluentui-react-native/checkbox",
+  "email": "mgodbolt@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-04-08T18:54:30.661Z"
+}
