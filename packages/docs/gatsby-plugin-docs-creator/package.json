@@ -4,7 +4,7 @@
   "description": "Gatsby plugin that automatically creates pages from React components in specified directories with additional docs related data",
   "main": "dist/gatsby-node.js",
   "scripts": {
-    "build": "tsc",
+    "build": "echo 'build'",
     "start": "yarn watch",
     "watch": "tsc -w --preserveWatchOutput",
     "prepare": "cross-env NODE_ENV=production npm run build"
