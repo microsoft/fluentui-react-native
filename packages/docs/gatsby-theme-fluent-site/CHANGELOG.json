@@ -1,6 +1,21 @@
 {
-  "name": "gatsby-starter-uifabric-doc",
+  "name": "gatsby-theme-fluent-site",
   "entries": [
+    {
+      "date": "Wed, 08 Apr 2020 21:26:12 GMT",
+      "tag": "gatsby-theme-fluent-site_v0.1.2",
+      "version": "0.1.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "update package name",
+            "author": "mgodbolt@microsoft.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "gatsby-theme-fluent-site"
+          }
+        ]
+      }
+    },
     {
       "date": "Sat, 27 Jul 2019 05:29:12 GMT",
       "tag": "gatsby-starter-uifabric-doc_v0.1.1",

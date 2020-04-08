@@ -1,7 +1,13 @@
-# Change Log - gatsby-starter-uifabric-doc
+# Change Log - gatsby-theme-fluent-site
 
-This log was last generated on Sat, 27 Jul 2019 05:29:12 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Apr 2020 21:26:12 GMT and should not be manually modified.
 
+## 0.1.2
+Wed, 08 Apr 2020 21:26:12 GMT
+
+### Patches
+
+- update package name (mgodbolt@microsoft.com)
 ## 0.1.1
 Sat, 27 Jul 2019 05:29:12 GMT
 

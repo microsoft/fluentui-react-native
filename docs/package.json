@@ -1,6 +1,6 @@
 {
   "name": "fluent-rn-website",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Fluent website content",
   "repository": {
     "type": "git",
@@ -15,7 +15,7 @@
     "start": "npm run develop"
   },
   "devDependencies": {
-    "gatsby-theme-fluent-site": "^0.1.1",
+    "gatsby-theme-fluent-site": "^0.1.2",
     "gatsby-plugin-sharp": "^2.3.13",
     "gatsby-transformer-sharp": "^2.3.12"
   },
