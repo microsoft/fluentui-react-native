@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "lib",
+    "paths": {
+      "*": [
+        "*",
+        "*.win32"
+      ]
+    }
+  },
+  "include": [
+    "src"
+  ]
+}

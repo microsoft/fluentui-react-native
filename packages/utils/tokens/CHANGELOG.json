@@ -2,6 +2,35 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Fri, 03 Apr 2020 20:40:51 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.1.5",
+      "version": "0.1.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch the bin name from just-script to fluent-scripts to disambiguate names",
+            "author": "jasonmo@microsoft.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 31 Mar 2020 18:01:09 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.1.4",
+      "version": "0.1.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Merge branch 'sammy/checkboxV1' of https://github.com/samuelfreiberg/fluentui-react-native into sammy/checkboxV1",
+            "author": "safreibe@microsoft.com",
+            "commit": "d38c7c235ebfe8278a31a4318d14ba76a98ef2a6"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 30 Mar 2020 16:27:00 GMT",
       "tag": "@fluentui-react-native/tokens_v0.1.3",
       "version": "0.1.3",

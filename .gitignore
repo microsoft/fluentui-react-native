@@ -28,6 +28,10 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
+# gatsby files
+.cache/
+public
+
 # nyc test coverage
 .nyc_output
 
@@ -81,3 +85,6 @@ typings/
 
 # document generation directory
 .docz
+
+# macOS
+.DS_Store

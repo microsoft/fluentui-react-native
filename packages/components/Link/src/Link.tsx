@@ -18,14 +18,17 @@ export function useAsLink(userProps: IWithLinkOptions<IViewProps>): ILinkHooks {
   const { url, onPress, ...rest } = userProps;
 
   const [linkState, setLinkState] = React.useState({ visited: false });
-  const linkOnPress = React.useCallback(() => {
-    setLinkState({ visited: true });
-    if (url) {
-      ReactNative.Linking.openURL(url as string);
-    } else if (onPress) {
-      onPress();
-    }
-  }, [setLinkState, url, onPress]);
+  const linkOnPress = React.useCallback(
+    e => {
+      setLinkState({ visited: true });
+      if (url) {
+        ReactNative.Linking.openURL(url as string);
+      } else if (onPress) {
+        onPress(e);
+      }
+    },
+    [setLinkState, url, onPress]
+  );
 
   const pressable = useAsPressable({ onPress: linkOnPress, ...rest });
 

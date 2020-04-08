@@ -41,6 +41,23 @@ if (path.basename(npmPath) !== 'yarn.js') {
   process.exit(1);
 }
 
+checkNodeVersion();
+
+function checkNodeVersion() {
+  const nodeVersion = process.versions.node;
+  if (!nodeVersion) {
+    return;
+  }
+
+  const nodeMajorVersion = nodeVersion.split('.', 1);
+  if (nodeMajorVersion.length > 0 && parseInt(nodeMajorVersion[0]) >= 11) {
+    console.warn(
+      '\x1b[33m%s\x1b[0m',
+      `Your Node version is ${nodeVersion}. If you are seeing some strange build error, try downgrading Node to version 10.x.x.`
+    );
+  }
+}
+
 checkRepositoryLocation();
 
 function checkRepositoryLocation() {

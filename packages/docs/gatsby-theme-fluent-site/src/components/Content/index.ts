@@ -1,0 +1,1 @@
+export { PageInnerContent } from './PageInnerContent'

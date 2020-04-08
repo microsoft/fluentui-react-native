@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "build": "just-scripts build",
+    "build": "fluentui-scripts build",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
@@ -16,16 +16,16 @@
     "react-dom": "16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
     "react-native-web": "^0.11.7",
-    "@uifabricshared/theming-react-native": "0.4.5",
-    "@uifabricshared/themed-stylesheet": "0.2.9",
-    "@uifabricshared/foundation-compose": "1.5.12"
+    "@uifabricshared/theming-react-native": "0.4.8",
+    "@uifabricshared/themed-stylesheet": "0.2.12",
+    "@uifabricshared/foundation-compose": "1.5.15"
   },
   "devDependencies": {
     "@types/react": "16.8.23",
     "@types/react-native": "0.57.65",
     "babel-preset-expo": "^7.1.0",
     "just-repo-utils": "^0.2.0",
-    "typescript": "^3.6.3"
+    "typescript": "^3.8.3"
   },
   "workspaces": {
     "nohoist": [
