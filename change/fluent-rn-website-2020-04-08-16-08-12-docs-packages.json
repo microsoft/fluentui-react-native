@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "add some dependencies",
+  "packageName": "fluent-rn-website",
+  "email": "mgodbolt@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-04-08T23:08:12.933Z"
+}
