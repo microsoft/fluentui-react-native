@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "rework merge with improved API",
+  "packageName": "@uifabricshared/immutable-merge",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-04-06T18:34:18.520Z"
+}
