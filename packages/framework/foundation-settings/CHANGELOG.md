@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/foundation-settings
 
-This log was last generated on Thu, 09 Apr 2020 18:39:15 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Apr 2020 21:14:58 GMT and should not be manually modified.
 
+## 0.4.12
+Thu, 09 Apr 2020 21:14:58 GMT
+
+### Patches
+
+- rework merge with improved API (jasonmo@microsoft.com)
 ## 0.4.11
 Thu, 09 Apr 2020 18:39:15 GMT
 
