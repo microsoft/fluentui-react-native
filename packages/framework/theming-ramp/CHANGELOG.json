@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Thu, 09 Apr 2020 18:39:15 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.6.6",
+      "version": "0.6.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "merge conflicts",
+            "author": "ppatboyd@outlook.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Apr 2020 20:40:51 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.6.4",
       "version": "0.6.4",
