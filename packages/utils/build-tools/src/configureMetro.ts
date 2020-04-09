@@ -78,7 +78,7 @@ export async function configureMetro(optionsToMerge?: object) {
     resolver: {
       resolverMainFields: ['react-native', 'browser', 'main'],
       assetExts: assetExts.filter((ext) => ext !== 'svg'),
-      sourceExts: [...sourceExts, 'svg'],
+      sourceExts: [...sourceExts, 'svg']
     },
     transformer: {
       babelTransformerPath: require.resolve('./transform-selector'),
@@ -86,11 +86,11 @@ export async function configureMetro(optionsToMerge?: object) {
       getTransformOptions: async () => ({
         transform: {
           experimentalImportSupport: false,
-          inlineRequires: false,
-        },
-      }),
+          inlineRequires: false
+        }
+      })
     },
-    resetCache: false,
+    resetCache: false
   };
 
   // decorate with platform bits if the cmd line has the platform info
