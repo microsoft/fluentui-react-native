@@ -118,14 +118,15 @@ function getHandlerForPropertyOfType(
 
 /**
  * This will merge two or more objects together using an immutable style merge pattern.  If there is only one object or
- * if there is only one object with values, that object will be returned, with two or more objects the keys within will
+ * if there is only one object with values, that object itself will be returned, with two or more objects the keys within will
  * be first merged with Object.assign and then optionally will recurse to merge sub objects as specified by the options.
  *
  * Note that this tries hard to not create extra objects, because of this merging an object with an empty object will not
  * create a new object.
  *
- * @param options - options driving behavior of the merge.  See IMergeOptions for a description.  Some basic combos would
- * be `{}` - no recursion, `{ depth: -1 }` - recurse infinitely
+ * @param mergeOptions - options driving behavior of the merge.  See MergeOptions for a description
+ * @param singleMode - normally if there is only one branch to follow in the merge the routine will not recurse.  If single mode
+ * is true the routine will progress through all branches of the hierarchy.  Useful if using a processor function that needs to be run.
  * @param objs - an array of objects to merge together
  */
 function immutableMergeWorker(mergeOptions: RecursionOption | MergeOptions, singleMode: boolean, ...objs: any[]): any {
