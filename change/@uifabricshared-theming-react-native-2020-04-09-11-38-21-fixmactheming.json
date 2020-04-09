@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "🐛 Make ThemingModule not crash on Mac",
+  "packageName": "@uifabricshared/theming-react-native",
+  "email": "email not defined",
+  "dependentChangeType": "patch",
+  "date": "2020-04-09T18:38:21.231Z"
+}
