@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Thu, 09 Apr 2020 18:39:15 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Apr 2020 20:23:08 GMT and should not be manually modified.
 
+## 0.4.10
+Thu, 09 Apr 2020 20:23:08 GMT
+
+### Patches
+
+- 🐛 Make ThemingModule not crash on Mac (email not defined)
 ## 0.4.9
 Thu, 09 Apr 2020 18:39:15 GMT
 
