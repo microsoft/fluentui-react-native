@@ -129,7 +129,7 @@ function getHandlerForPropertyOfType(
  * is true the routine will progress through all branches of the hierarchy.  Useful if using a processor function that needs to be run.
  * @param objs - an array of objects to merge together
  */
-function immutableMergeWorker(mergeOptions: RecursionOption | MergeOptions, singleMode: boolean, ...objs: any[]): any {
+function immutableMergeWorker<T extends object>(mergeOptions: RecursionOption | MergeOptions, singleMode: boolean, ...objs: T[]): T {
   const setToMerge = objs.filter(v => v && getEntityType(v) === 'object' && Object.getOwnPropertyNames(v).length > 0);
   const [options, mightRecurse] = normalizeOptions(mergeOptions);
   const processSingle = singleMode && setToMerge.length === 1;
