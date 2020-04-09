@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-settings",
-  "version": "0.4.10",
+  "version": "0.4.11",
   "description": "Settings and style definitions and helpers",
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/immutable-merge": "^0.3.4"
+    "@uifabricshared/immutable-merge": "^0.3.5"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

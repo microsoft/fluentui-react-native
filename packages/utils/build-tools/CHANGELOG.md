@@ -1,7 +1,13 @@
 # Change Log - @fluentui-react-native/build-tools
 
-This log was last generated on Tue, 07 Apr 2020 02:11:02 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Apr 2020 18:39:15 GMT and should not be manually modified.
 
+## 0.2.2
+Thu, 09 Apr 2020 18:39:15 GMT
+
+### Patches
+
+- merge conflicts (ppatboyd@outlook.com)
 ## 0.2.1
 Tue, 07 Apr 2020 02:11:02 GMT
 
