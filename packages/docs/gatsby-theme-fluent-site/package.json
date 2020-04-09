@@ -1,6 +1,6 @@
 {
   "name": "gatsby-theme-fluent-site",
-  "version": "0.1.2",
+  "version": "0.1.1",
   "main": "index.js",
   "description": "A Fluent theme for GatsbyJS",
   "repository": {
@@ -16,7 +16,12 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "devDependencies": {
+  "peerDependencies": {
+    "gatsby": "^2.20.15",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
+  },
+  "dependencies": {
     "@babel/core": "^7.8.3",
     "@mdx-js/mdx": "^1.1.0",
     "@mdx-js/react": "^1.0.27",
@@ -30,13 +35,12 @@
     "@types/react-dom": "^16.8.4",
     "@types/react-helmet": "^5.0.8",
     "babel-loader": "^8.0.6",
-    "gatsby": "^2.20.10",
     "gatsby-image": "^2.2.38",
     "gatsby-link": "^2.2.2",
-    "gatsby-plugin-docs-creator": "^2.1.41",
+    "gatsby-plugin-docs-creator": "^2.1.40",
     "gatsby-plugin-manifest": "^2.2.20",
     "gatsby-plugin-mdx": "^1.0.67",
-    "gatsby-plugin-netlify-cms": "^4.2.2",
+    "gatsby-plugin-netlify-cms": "^4.1.39",
     "gatsby-plugin-offline": "^3.0.32",
     "gatsby-plugin-react-helmet": "^3.1.21",
     "gatsby-plugin-sharp": "^2.3.13",
@@ -50,19 +54,15 @@
     "gatsby-transformer-sharp": "^2.3.12",
     "gatsby-transformer-yaml": "^2.2.24",
     "monaco-editor-webpack-plugin": "^1.9.0",
-    "netlify-cms-app": "^2.12.2",
+    "netlify-cms-app": "^2.11.16",
     "office-ui-fabric-react": "^7.92.0",
     "prism-react-renderer": "^1.0.1",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
     "react-helmet": "^5.2.1",
     "react-live": "^2.1.2",
     "react-monaco-editor": "^0.34.0",
     "remark-parse": "^7.0.0",
     "remark-react": "^6.0.0",
-    "unified": "^8.3.2"
-  },
-  "dependencies": {
+    "unified": "^8.3.2",
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
     "@hot-loader/react-dom": "^16.12.0",
