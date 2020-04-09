@@ -1,19 +1,33 @@
 {
-  "name": "fluentui-docs",
-  "version": "0.1.0",
-  "private": true,
+  "name": "fluent-rn-website",
+  "version": "0.0.2",
+  "description": "Fluent website content",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluent-site"
+  },
+  "license": "MIT",
   "scripts": {
-    "dev": "next",
-    "start": "next start",
-    "build": "next build && echo"
+    "clean": "gatsby clean",
+    "build": "gatsby build --prefix-paths",
+    "develop": "gatsby clean && gatsby develop --port 3000",
+    "serve": "gatsby serve",
+    "start": "npm run develop"
+  },
+  "devDependencies": {
+    "gatsby-theme-fluent-site": "^0.1.2",
+    "gatsby-plugin-sharp": "^2.3.13",
+    "gatsby-transformer-sharp": "^2.3.12"
   },
   "dependencies": {
-    "@fluentui/react-native": "^0.14.3",
+    "gatsby-plugin-typescript": "^2.1.26",
+    "typescript": "^3.5.1",
+    "gatsby": "^2.19.27",
+    "gatsby-plugin-emotion": "^4.1.23",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "@fluentui/react-native": "^0.14.4",
     "@mdx-js/loader": "^1.5.5",
-    "@mdx-js/mdx": "^1.5.5",
-    "@next/mdx": "^9.2.1",
-    "next": "^9.2.1",
-    "react": "16.8.6",
-    "react-dom": "16.8.6"
+    "@mdx-js/mdx": "^1.5.5"
   }
 }
