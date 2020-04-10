@@ -192,3 +192,13 @@ To handle action requests, a component must implement an `onAccessibilityAction`
 To test your application with Narrator, visit the complete guide to Narrator: https://support.microsoft.com/en-us/help/22798/windows-10-complete-guide-to-narrator
 
 To test your application wiht Accessibility Insights, visit Accessibility Insights for Windows: https://accessibilityinsights.io/docs/en/windows/overview
+
+## Checklist
+- Is the control marked as accessible?
+- Does the control acceptKeyboardFocus?
+- Does the control have the correct accessibilityRole set?
+- Does the control have the correct acccessibilityStates set?
+- Does the control have the correct accessibilityActions set?
+- Does the control include appropriate customizations (accessibilityLabel, accessibilityHint, etc.)?
+- Try testing it with Narrator. Does narrator annouce the control correctly? When interacting with it, does it have the correct behavior?
+- Try testing it with AccessibilityInsights. Does the control expose the correct UIA patterns? Does the control reflect the right properties, role, states and actions?
