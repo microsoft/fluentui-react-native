@@ -41,6 +41,16 @@ export interface ICalloutProps extends ICalloutTokens {
   componentRef?: React.RefObject<IFocusable>;
 
   /**
+   * Callback invoked when the callout has been dismissed.
+   */
+  onDismiss?: () => void;
+
+  /**
+   * Callback invoked when the callout has been shown.
+   */
+  onShow?: () => void;
+
+  /**
    * Target node the callout uses for relative positioning; the anchor of the callout.
    */
   target?: React.RefObject<React.Component>;

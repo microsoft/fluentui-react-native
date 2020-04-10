@@ -2,6 +2,36 @@
   "name": "@uifabricshared/foundation-settings",
   "entries": [
     {
+      "date": "Thu, 09 Apr 2020 21:14:58 GMT",
+      "tag": "@uifabricshared/foundation-settings_v0.4.12",
+      "version": "0.4.12",
+      "comments": {
+        "patch": [
+          {
+            "comment": "rework merge with improved API",
+            "author": "jasonmo@microsoft.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@uifabricshared/foundation-settings"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Apr 2020 18:39:15 GMT",
+      "tag": "@uifabricshared/foundation-settings_v0.4.11",
+      "version": "0.4.11",
+      "comments": {
+        "patch": [
+          {
+            "comment": "merge conflicts",
+            "author": "ppatboyd@outlook.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@uifabricshared/foundation-settings"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Apr 2020 20:40:51 GMT",
       "tag": "@uifabricshared/foundation-settings_v0.4.9",
       "version": "0.4.9",

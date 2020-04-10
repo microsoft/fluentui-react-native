@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/build-tools",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "Build tools for working with react native",
   "main": "lib/index.js",
   "module": "lib/index.js",
