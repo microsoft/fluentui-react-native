@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Thu, 09 Apr 2020 21:14:58 GMT",
+      "tag": "@fluentui-react-native/button_v0.3.5",
+      "version": "0.3.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "enable button snapshot test and update merge to fix bug",
+            "author": "jasonmo@microsoft.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Apr 2020 18:39:15 GMT",
+      "tag": "@fluentui-react-native/button_v0.3.3",
+      "version": "0.3.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "merge conflicts",
+            "author": "ppatboyd@outlook.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Apr 2020 20:40:51 GMT",
       "tag": "@fluentui-react-native/button_v0.3.1",
       "version": "0.3.1",

@@ -1,0 +1,50 @@
+{
+  "name": "fluent-rn-website",
+  "entries": [
+    {
+      "date": "Thu, 09 Apr 2020 18:39:15 GMT",
+      "tag": "fluent-rn-website_v0.0.4",
+      "version": "0.0.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "merge conflicts",
+            "author": "ppatboyd@outlook.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "fluent-rn-website"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Apr 2020 17:35:20 GMT",
+      "tag": "fluent-rn-website_v0.0.3",
+      "version": "0.0.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add some dependencies",
+            "author": "mgodbolt@microsoft.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "fluent-rn-website"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 08 Apr 2020 21:26:12 GMT",
+      "tag": "fluent-rn-website_v0.0.2",
+      "version": "0.0.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "update package name",
+            "author": "mgodbolt@microsoft.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "fluent-rn-website"
+          }
+        ]
+      }
+    }
+  ]
+}
