@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/button",
-  "version": "0.3.1",
+  "version": "0.3.5",
   "description": "A cross-platform opinionated Fluent Text component",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -14,12 +14,12 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.5.14",
-    "@fluentui-react-native/adapters": "^0.1.4",
-    "@fluentui-react-native/interactive-hooks": "^0.2.4",
-    "@fluentui-react-native/pressable": "^0.2.9",
-    "@fluentui-react-native/text": "^0.2.8",
-    "@fluentui-react-native/tokens": "^0.1.5"
+    "@uifabricshared/foundation-compose": "^1.5.18",
+    "@fluentui-react-native/adapters": "^0.1.6",
+    "@fluentui-react-native/interactive-hooks": "^0.2.6",
+    "@fluentui-react-native/pressable": "^0.2.13",
+    "@fluentui-react-native/text": "^0.2.12",
+    "@fluentui-react-native/tokens": "^0.1.8"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.27.3",

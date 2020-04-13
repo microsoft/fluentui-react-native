@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button default 1`] = `
+<View
+  acceptsKeyboardFocus={true}
+  accessibilityLabel="Default Button"
+  accessibilityRole="button"
+  accessible={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#f3f2f1",
+      "borderColor": "#8a8886",
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "minHeight": 32,
+        "minWidth": 80,
+        "paddingEnd": 16,
+        "paddingStart": 16,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323130",
+          "fontFamily": "Segoe UI",
+          "fontSize": 12,
+          "fontWeight": "500",
+          "margin": 0,
+        }
+      }
+    >
+      Default Button
+    </Text>
+  </View>
+</View>
+`;
