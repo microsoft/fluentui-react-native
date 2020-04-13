@@ -21,6 +21,7 @@ export interface INativeColorRamps {
 export interface IOfficeThemingModule {
   getPalette(palette?: string): IOfficePalette | ICxxException;
   typography: ITypography;
+  fluentTypography: ITypography;
   ramps: INativeColorRamps;
   initialHostThemeSetting?: string;
 }

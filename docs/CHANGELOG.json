@@ -2,6 +2,21 @@
   "name": "fluent-rn-website",
   "entries": [
     {
+      "date": "Mon, 13 Apr 2020 22:48:23 GMT",
+      "tag": "fluent-rn-website_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "add docs for text",
+            "author": "krsiler@microsoft.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "fluent-rn-website"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Apr 2020 18:39:15 GMT",
       "tag": "fluent-rn-website_v0.0.4",
       "version": "0.0.4",

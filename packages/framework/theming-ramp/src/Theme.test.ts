@@ -12,10 +12,17 @@ const theme: ITheme = {
       primary: 'Arial'
     },
     sizes: {
-      medium: 14
+      secondary: 14
     },
     weights: {
-      medium: '500'
+      regular: '400'
+    },
+    variants: {
+      secondaryStandard: {
+        face: 'Arial',
+        size: 14,
+        weight: '400'
+      }
     }
   } as ITypography,
   spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
@@ -71,10 +78,17 @@ describe('Theme tests', () => {
           primary: 'Arial'
         },
         sizes: {
-          medium: 14
+          secondary: 14
         },
         weights: {
-          medium: '500'
+          regular: '400'
+        },
+        variants: {
+          secondaryStandard: {
+            face: 'Arial',
+            size: 14,
+            weight: '400'
+          }
         }
       } as ITypography,
       spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
