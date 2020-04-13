@@ -1,0 +1,9 @@
+{
+  "type": "minor",
+  "comment": "Add variants and fluent typeramp to text",
+  "packageName": "@fluentui-react-native/text",
+  "email": "krsiler@microsoft.com",
+  "commit": "0b43086face022949813d6712d5833cd78fb407a",
+  "dependentChangeType": "patch",
+  "date": "2020-03-25T00:22:52.817Z"
+}
