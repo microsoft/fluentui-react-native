@@ -1,7 +1,13 @@
 # Change Log - @uifabricshared/themed-settings
 
-This log was last generated on Fri, 03 Apr 2020 20:40:51 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Apr 2020 18:39:15 GMT and should not be manually modified.
 
+## 0.3.10
+Thu, 09 Apr 2020 18:39:15 GMT
+
+### Patches
+
+- merge conflicts (ppatboyd@outlook.com)
 ## 0.3.8
 Fri, 03 Apr 2020 20:40:51 GMT
 

@@ -7,18 +7,20 @@ exports[`Button default 1`] = `
   accessibilityRole="button"
   accessible={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
-  onTouchCancel={[Function]}
-  onTouchEnd={[Function]}
-  onTouchStart={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignItems": "flex-start",
       "alignSelf": "flex-start",
-      "backgroundColor": "#D2D2D2",
-      "borderColor": "transparent",
+      "backgroundColor": "#f3f2f1",
+      "borderColor": "#8a8886",
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
@@ -43,7 +45,7 @@ exports[`Button default 1`] = `
     <Text
       style={
         Object {
-          "color": "#505050",
+          "color": "#323130",
           "fontFamily": "Segoe UI",
           "fontSize": 12,
           "fontWeight": "500",
