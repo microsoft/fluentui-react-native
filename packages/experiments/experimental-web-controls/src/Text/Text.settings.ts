@@ -5,8 +5,8 @@ export const settings: IComposeSettings<ITextType> = [
   {
     tokens: {
       fontFamily: 'primary',
-      fontSize: 'secondary',
-      fontWeight: 'regular',
+      fontSize: 'medium',
+      fontWeight: 'medium',
       color: 'bodyText'
     },
     root: {
