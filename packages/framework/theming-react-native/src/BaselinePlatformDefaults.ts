@@ -9,8 +9,8 @@ function _defaultTypography(): ITypography {
       body: 11,
       subheader: 12,
       header: 15,
-      hero: 22,
-      heroLarge: 30
+      hero: 21,
+      heroLarge: 32
     },
     weights: {
       regular: '400',
