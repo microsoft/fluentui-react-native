@@ -1,9 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add variants and fluent typeramp to text",
-  "packageName": "@uifabricshared/theming-ramp",
-  "email": "krsiler@microsoft.com",
-  "commit": "0b43086face022949813d6712d5833cd78fb407a",
-  "dependentChangeType": "patch",
-  "date": "2020-03-25T00:23:45.697Z"
-}

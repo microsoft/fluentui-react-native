@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/separator",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "description": "A cross-platform opinionated Fluent Text component",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -14,9 +14,9 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.5.18",
+    "@uifabricshared/foundation-compose": "^1.5.19",
     "@fluentui-react-native/adapters": "^0.1.6",
-    "@fluentui-react-native/tokens": "^0.1.8"
+    "@fluentui-react-native/tokens": "^0.2.0"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.27.3",

@@ -1,7 +1,13 @@
 # Change Log - fluent-rn-website
 
-This log was last generated on Thu, 09 Apr 2020 18:39:15 GMT and should not be manually modified.
+This log was last generated on Mon, 13 Apr 2020 22:48:23 GMT and should not be manually modified.
 
+## 0.1.0
+Mon, 13 Apr 2020 22:48:23 GMT
+
+### Minor changes
+
+- add docs for text (krsiler@microsoft.com)
 ## 0.0.4
 Thu, 09 Apr 2020 18:39:15 GMT
 

@@ -1,9 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Update fontSizes to new fluent typeramp names",
-  "packageName": "@fluentui-react-native/persona",
-  "email": "krsiler@microsoft.com",
-  "commit": "97ee7fa9bd026481f68201c05a1e23c8494b0b54",
-  "dependentChangeType": "patch",
-  "date": "2020-03-25T20:15:38.956Z"
-}
