@@ -24,4 +24,7 @@ const getThemingModule = () => {
     : themingModule;
 };
 
-export const ThemingModuleHelper = createThemingModuleHelper(getThemingModule(), new NativeEventEmitter(NativeModules.Theming));
+export const ThemingModuleHelper = createThemingModuleHelper(
+  getThemingModule(),
+  NativeModules && NativeModules.Theming && new NativeEventEmitter(NativeModules.Theming)
+);

@@ -1,0 +1,100 @@
+---
+titleCategory: Design & developer
+title: Callout
+---
+
+import { Usage, Example } from 'gatsby-theme-fluent-site/src/components/Usage';
+import { NYI } from 'gatsby-theme-fluent-site/src/components/NYI';
+import { Playground } from 'gatsby-theme-fluent-site/src/components/Playground';
+
+<style>{`
+  .fakefocus {
+    outline: 2px solid black;
+    outline-offset: 2px;
+  }
+`}</style>
+
+## Overview
+
+Callouts are a powerful way to simplify a user interface. They host tips and other information users need when they need it, with minimal effort on their part. Callouts can help you use screen space more effectively and reduce screen clutter. However, poorly designed Callouts can be annoying, distracting, unhelpful, overwhelming, or in the way.
+
+Use a Callout for displaying additional contextual information about an item on the screen. Callouts also have a tail that identifies their source. A common use for Callout is the introduction of a new feature or capability of an app or site. Alternate usages include pairing the Callout with a button or clickable element for on-demand presentation of additional or supporting content.
+
+By default, Callouts that do not contain focusable elements (links, buttons etc) cannot gain focus when opened. For proper screen reader support, follow the non-focusable callout example, which treats the callout content like a status message.
+
+[Design spec]() |
+[GitHub](https://github.com/microsoft/fluentui-react-native/tree/master/packages/components/Callout)
+
+export const themes = ['Light', 'Dark'];
+export const examples = [
+  {
+    title: 'Simple Callout',
+    description: "We don't have FluentUI working in the examples yet.",
+    source: 'export default () => <Callout><Text>React Native Callout control</Text></Callout>'
+  }
+];
+
+<Playground themes={themes} examples={examples} />
+
+## Best practices
+
+<NYI>Content needed: best practices</NYI>
+
+### Usage
+
+<NYI>Content needed: usage examples</NYI>
+
+### Layout
+
+<NYI>Content needed: positioning, anchoring</NYI>
+
+### Accessibility
+
+<NYI>Content needed: explain specifics of ARIA properties; mind 'announce' in particular</NYI>
+
+### Globalization
+
+<NYI>Content needed: any int'l concerns</NYI>
+
+## How to customize
+
+<NYI>Content needed: add a customization example</NYI>
+
+You can customize the appearance of this and other controls by overriding its _design tokens_. Controls in your UI should be consistent in appearance, so most changes to a control's appearance should affect _all_ controls of the same type in your app. If you need a one-off style, however, you can override the design tokens for a single instance of a control.
+
+- [Overview: How to use design tokens](/web/styles)
+
+Each control uses many different design tokens. To explore the design tokens that affect this control, select "Design tokens" in the the playground at the top of this page. <NYI />
+
+## Related components
+
+<NYI>Content needed</NYI>
+
+## In-depth examples
+
+<NYI>Content needed</NYI>
+
+### Additional examples
+
+<NYI>Content needed</NYI>
+<NYI>Explain the actual process of overriding design tokens (which doesn't exist yet)</NYI>
+
+## Implementation status
+
+This control is **unfinished**. The table below shows the current status of the implementation.
+
+&#x2713; Design specifications and UI kits
+
+&#x2713; Theming and spacing
+
+&#x2713; Motion
+
+&#x2713; Design tokens
+
+&#x2713; Responsive
+
+### Issues
+
+#### Is this page helpful?
+
+&#x1f44d;&nbsp;Yes &#x1f44e;&nbsp;No
