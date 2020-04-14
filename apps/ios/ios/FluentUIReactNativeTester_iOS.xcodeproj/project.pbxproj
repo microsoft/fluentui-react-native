@@ -15,7 +15,7 @@
 		9F275A5424451211007E7870 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9F275A5124451211007E7870 /* Release.xcconfig */; };
 		9F275A5524451211007E7870 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9F275A5224451211007E7870 /* Debug.xcconfig */; };
 		9F275A5624451211007E7870 /* Common.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 9F275A5324451211007E7870 /* Common.xcconfig */; };
-		9F275A5924452A32007E7870 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F275A5824452A32007E7870 /* File.swift */; };
+		9F275A5924452A32007E7870 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F275A5824452A32007E7870 /* Dummy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,8 +33,7 @@
 		9F275A5124451211007E7870 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = FluentUIReactNativeTester_iOS/Config/Release.xcconfig; sourceTree = "<group>"; };
 		9F275A5224451211007E7870 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = FluentUIReactNativeTester_iOS/Config/Debug.xcconfig; sourceTree = "<group>"; };
 		9F275A5324451211007E7870 /* Common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Common.xcconfig; path = FluentUIReactNativeTester_iOS/Config/Common.xcconfig; sourceTree = "<group>"; };
-		9F275A5724452A32007E7870 /* FluentUIReactNativeTester_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FluentUIReactNativeTester_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
-		9F275A5824452A32007E7870 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		9F275A5824452A32007E7870 /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -84,8 +83,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				9F275A5824452A32007E7870 /* File.swift */,
-				9F275A5724452A32007E7870 /* FluentUIReactNativeTester_iOS-Bridging-Header.h */,
+				9F275A5824452A32007E7870 /* Dummy.swift */,
 				13B07FAE1A68108700A75B9A /* FluentUIReactNativeTester_iOS */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -257,7 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				9F275A5924452A32007E7870 /* File.swift in Sources */,
+				9F275A5924452A32007E7870 /* Dummy.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

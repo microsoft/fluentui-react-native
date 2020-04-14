@@ -17,9 +17,7 @@ pids
 
 # CocoaPods
 /apps/macos/Pods/*
-/apps/macos/Podfile.lock
 /apps/ios/ios/Pods/*
-/apps/ios/ios/Podfile.lock
 **/project.xcworkspace/contents.xcworkspacedata
 **/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
 **/*.xcuserdatad/xcschemes
