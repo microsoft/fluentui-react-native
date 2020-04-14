@@ -105,6 +105,7 @@
 		13B07FAE1A68108700A75B9A /* FluentTester */ = {
 			isa = PBXGroup;
 			children = (
+				9F275A442444D141007E7870 /* Config */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -157,6 +158,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		9F275A442444D141007E7870 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -193,7 +201,7 @@
 			dependencies = (
 			);
 			name = FluentTester;
-			productName = "FluentTester";
+			productName = FluentTester;
 			productReference = 13B07F961A680F5B00A75B9A /* FluentTester.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -263,6 +271,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
