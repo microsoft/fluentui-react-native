@@ -1,7 +1,19 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Fri, 03 Apr 2020 20:40:51 GMT and should not be manually modified.
+This log was last generated on Mon, 13 Apr 2020 22:48:23 GMT and should not be manually modified.
 
+## 0.2.0
+Mon, 13 Apr 2020 22:48:23 GMT
+
+### Minor changes
+
+- Add variants and fluent typeramp to text (krsiler@microsoft.com)
+## 0.1.7
+Thu, 09 Apr 2020 18:39:15 GMT
+
+### Patches
+
+- merge conflicts (ppatboyd@outlook.com)
 ## 0.1.5
 Fri, 03 Apr 2020 20:40:51 GMT
 

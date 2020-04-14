@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/persona",
   "entries": [
     {
+      "date": "Mon, 13 Apr 2020 22:48:23 GMT",
+      "tag": "@fluentui-react-native/persona_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update fontSizes to new fluent typeramp names",
+            "author": "krsiler@microsoft.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Apr 2020 18:39:15 GMT",
+      "tag": "@fluentui-react-native/persona_v0.2.10",
+      "version": "0.2.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "merge conflicts",
+            "author": "ppatboyd@outlook.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Apr 2020 20:40:51 GMT",
       "tag": "@fluentui-react-native/persona_v0.2.8",
       "version": "0.2.8",

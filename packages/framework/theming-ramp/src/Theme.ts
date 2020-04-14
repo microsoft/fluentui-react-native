@@ -1,16 +1,14 @@
 import { ITheme, IPartialTheme } from './Theme.types';
 import { mergeSettingsCollection } from '@uifabricshared/foundation-settings';
-import { IMergeOptions, immutableMergeCore } from '@uifabricshared/immutable-merge';
+import { MergeOptions, immutableMergeCore } from '@uifabricshared/immutable-merge';
 
-function _settingsHandler(_options: IMergeOptions, ...objs: (object | undefined)[]): object | undefined {
+function _settingsHandler(...objs: (object | undefined)[]): object | undefined {
   return mergeSettingsCollection(...objs);
 }
 
-const _themeMergeOptions: IMergeOptions = {
-  depth: -1,
-  recurse: {
-    settings: _settingsHandler
-  }
+const _themeMergeOptions: MergeOptions = {
+  object: true,
+  settings: _settingsHandler
 };
 
 /**
