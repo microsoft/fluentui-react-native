@@ -50,7 +50,7 @@ steps:
   
   # Install any pods necessary for the project
   - bash: |
-      cd apps/macOS &&
+      cd apps/apple/macos &&
       pod install
     displayName: "Install Pod Project Dependencies"
 
