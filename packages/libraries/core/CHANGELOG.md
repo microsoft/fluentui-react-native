@@ -1,7 +1,13 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Fri, 03 Apr 2020 20:40:51 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Apr 2020 18:39:15 GMT and should not be manually modified.
 
+## 0.14.5
+Thu, 09 Apr 2020 18:39:15 GMT
+
+### Patches
+
+- merge conflicts (ppatboyd@outlook.com)
 ## 0.14.3
 Fri, 03 Apr 2020 20:40:51 GMT
 

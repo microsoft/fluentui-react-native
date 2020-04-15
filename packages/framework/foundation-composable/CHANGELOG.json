@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Thu, 09 Apr 2020 18:39:15 GMT",
+      "tag": "@uifabricshared/foundation-composable_v0.5.13",
+      "version": "0.5.13",
+      "comments": {
+        "patch": [
+          {
+            "comment": "merge conflicts",
+            "author": "ppatboyd@outlook.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@uifabricshared/foundation-composable"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Apr 2020 20:40:51 GMT",
       "tag": "@uifabricshared/foundation-composable_v0.5.11",
       "version": "0.5.11",

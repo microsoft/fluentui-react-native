@@ -16,8 +16,8 @@ pids
 **/.DS_Store
 
 # CocoaPods
-/apps/macOS/Pods/*
-/apps/macOS/Podfile.lock
+/apps/macos/Pods/*
+/apps/ios/ios/Pods/*
 **/project.xcworkspace/contents.xcworkspacedata
 **/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
 **/*.xcuserdatad/xcschemes
@@ -27,6 +27,10 @@ lib-cov
 
 # Coverage directory used by tools like istanbul
 coverage
+
+# gatsby files
+.cache/
+public
 
 # nyc test coverage
 .nyc_output
