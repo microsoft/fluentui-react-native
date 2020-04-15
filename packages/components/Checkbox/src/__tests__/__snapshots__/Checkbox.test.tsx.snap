@@ -1,0 +1,623 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox default 1`] = `
+<View
+  acceptsKeyboardFocus={true}
+  accessibilityActions={
+    Array [
+      Object {
+        "label": "Toggle the Checkbox",
+        "name": "Toggle",
+      },
+    ]
+  }
+  accessibilityRole="checkbox"
+  accessibilityStates={
+    Array [
+      "unchecked",
+    ]
+  }
+  accessible={true}
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyUp={[Function]}
+  onPress={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  rest={Object {}}
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "display": "flex",
+      "flexDirection": "row",
+      "marginTop": 0,
+      "minHeight": 14,
+      "position": "relative",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffff",
+        "borderColor": "#323130",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "height": 14,
+        "marginRight": 4,
+        "marginTop": 5,
+        "width": 14,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323130",
+          "fontSize": 8,
+          "left": 2,
+          "opacity": 0,
+          "position": "relative",
+          "top": -1,
+        }
+      }
+    >
+      ✓
+    </Text>
+  </View>
+  <Text
+    style={
+      Object {
+        "borderColor": "transparent",
+        "borderStyle": "dashed",
+        "borderWidth": 1,
+        "color": "#323130",
+        "fontSize": 11,
+        "marginTop": 1,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Controlled Checkbox with label  1`] = `
+<View
+  acceptsKeyboardFocus={true}
+  accessibilityActions={
+    Array [
+      Object {
+        "label": "Toggle the Checkbox",
+        "name": "Toggle",
+      },
+    ]
+  }
+  accessibilityLabel="Test"
+  accessibilityRole="checkbox"
+  accessibilityStates={
+    Array [
+      "unchecked",
+    ]
+  }
+  accessible={true}
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyUp={[Function]}
+  onPress={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  rest={Object {}}
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "display": "flex",
+      "flexDirection": "row",
+      "marginTop": 0,
+      "minHeight": 14,
+      "position": "relative",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffff",
+        "borderColor": "#323130",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "height": 14,
+        "marginRight": 4,
+        "marginTop": 5,
+        "width": 14,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323130",
+          "fontSize": 8,
+          "left": 2,
+          "opacity": 0,
+          "position": "relative",
+          "top": -1,
+        }
+      }
+    >
+      ✓
+    </Text>
+  </View>
+  <Text
+    style={
+      Object {
+        "borderColor": "transparent",
+        "borderStyle": "dashed",
+        "borderWidth": 1,
+        "color": "#323130",
+        "fontSize": 11,
+        "marginTop": 1,
+      }
+    }
+  >
+    Test
+  </Text>
+</View>
+`;
+
+exports[`Disabled Checkbox  1`] = `
+<View
+  acceptsKeyboardFocus={true}
+  accessibilityActions={
+    Array [
+      Object {
+        "label": "Toggle the Checkbox",
+        "name": "Toggle",
+      },
+    ]
+  }
+  accessibilityLabel="Test"
+  accessibilityRole="checkbox"
+  accessibilityStates={
+    Array [
+      "disabled",
+    ]
+  }
+  accessible={true}
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyUp={[Function]}
+  onPress={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  rest={Object {}}
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "display": "flex",
+      "flexDirection": "row",
+      "marginTop": 0,
+      "minHeight": 14,
+      "position": "relative",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffff",
+        "borderColor": "#f3f2f1",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "height": 14,
+        "marginRight": 4,
+        "marginTop": 5,
+        "width": 14,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#a19f9d",
+          "fontSize": 8,
+          "left": 2,
+          "opacity": 0,
+          "position": "relative",
+          "top": -1,
+        }
+      }
+    >
+      ✓
+    </Text>
+  </View>
+  <Text
+    style={
+      Object {
+        "borderColor": "transparent",
+        "borderStyle": "dashed",
+        "borderWidth": 1,
+        "color": "#a19f9d",
+        "fontSize": 11,
+        "marginTop": 1,
+      }
+    }
+  >
+    Test
+  </Text>
+</View>
+`;
+
+exports[`Uncontrolled Checkbox with all Tokens  1`] = `
+<View
+  acceptsKeyboardFocus={true}
+  accessibilityActions={
+    Array [
+      Object {
+        "label": "Toggle the Checkbox",
+        "name": "Toggle",
+      },
+    ]
+  }
+  accessibilityLabel="Test"
+  accessibilityRole="checkbox"
+  accessibilityStates={
+    Array [
+      "unchecked",
+    ]
+  }
+  accessible={true}
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyUp={[Function]}
+  onPress={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  rest={Object {}}
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "display": "flex",
+      "flexDirection": "row",
+      "marginTop": 0,
+      "minHeight": 14,
+      "position": "relative",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "white",
+        "borderColor": "#323130",
+        "borderRadius": 50,
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "height": 14,
+        "marginRight": 4,
+        "marginTop": 5,
+        "width": 14,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323130",
+          "fontSize": 8,
+          "left": 2,
+          "opacity": 0,
+          "position": "relative",
+          "top": -1,
+        }
+      }
+    >
+      ✓
+    </Text>
+  </View>
+  <Text
+    style={
+      Object {
+        "borderColor": "transparent",
+        "borderStyle": "dashed",
+        "borderWidth": 1,
+        "color": "#323130",
+        "fontSize": 11,
+        "marginTop": 1,
+      }
+    }
+  >
+    Test
+  </Text>
+</View>
+`;
+
+exports[`Uncontrolled Checkbox with boxside=end 1`] = `
+<View
+  acceptsKeyboardFocus={true}
+  accessibilityActions={
+    Array [
+      Object {
+        "label": "Toggle the Checkbox",
+        "name": "Toggle",
+      },
+    ]
+  }
+  accessibilityLabel="Test"
+  accessibilityRole="checkbox"
+  accessibilityStates={
+    Array [
+      "unchecked",
+    ]
+  }
+  accessible={true}
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyUp={[Function]}
+  onPress={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  rest={Object {}}
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "display": "flex",
+      "flexDirection": "row",
+      "marginTop": 0,
+      "minHeight": 14,
+      "position": "relative",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "borderColor": "transparent",
+        "borderStyle": "dashed",
+        "borderWidth": 1,
+        "color": "#323130",
+        "fontSize": 11,
+        "marginTop": 1,
+      }
+    }
+  >
+    Test
+  </Text>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffff",
+        "borderColor": "#323130",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "height": 14,
+        "marginLeft": 4,
+        "marginRight": 0,
+        "marginTop": 5,
+        "width": 14,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323130",
+          "fontSize": 8,
+          "left": 2,
+          "opacity": 0,
+          "position": "relative",
+          "top": -1,
+        }
+      }
+    >
+      ✓
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Uncontrolled Checkbox with label  1`] = `
+<View
+  acceptsKeyboardFocus={true}
+  accessibilityActions={
+    Array [
+      Object {
+        "label": "Toggle the Checkbox",
+        "name": "Toggle",
+      },
+    ]
+  }
+  accessibilityLabel="Test"
+  accessibilityRole="checkbox"
+  accessibilityStates={
+    Array [
+      "unchecked",
+    ]
+  }
+  accessible={true}
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyUp={[Function]}
+  onPress={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  rest={Object {}}
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "display": "flex",
+      "flexDirection": "row",
+      "marginTop": 0,
+      "minHeight": 14,
+      "position": "relative",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffff",
+        "borderColor": "#323130",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "height": 14,
+        "marginRight": 4,
+        "marginTop": 5,
+        "width": 14,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323130",
+          "fontSize": 8,
+          "left": 2,
+          "opacity": 0,
+          "position": "relative",
+          "top": -1,
+        }
+      }
+    >
+      ✓
+    </Text>
+  </View>
+  <Text
+    style={
+      Object {
+        "borderColor": "transparent",
+        "borderStyle": "dashed",
+        "borderWidth": 1,
+        "color": "#323130",
+        "fontSize": 11,
+        "marginTop": 1,
+      }
+    }
+  >
+    Test
+  </Text>
+</View>
+`;
+
+exports[`Uncontrolled Checkbox with label and ariaLabel  1`] = `
+<View
+  acceptsKeyboardFocus={true}
+  accessibilityActions={
+    Array [
+      Object {
+        "label": "Toggle the Checkbox",
+        "name": "Toggle",
+      },
+    ]
+  }
+  accessibilityLabel="Aria label"
+  accessibilityRole="checkbox"
+  accessibilityStates={
+    Array [
+      "unchecked",
+    ]
+  }
+  accessible={true}
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyUp={[Function]}
+  onPress={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  rest={Object {}}
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "display": "flex",
+      "flexDirection": "row",
+      "marginTop": 0,
+      "minHeight": 14,
+      "position": "relative",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#ffffff",
+        "borderColor": "#323130",
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "height": 14,
+        "marginRight": 4,
+        "marginTop": 5,
+        "width": 14,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#323130",
+          "fontSize": 8,
+          "left": 2,
+          "opacity": 0,
+          "position": "relative",
+          "top": -1,
+        }
+      }
+    >
+      ✓
+    </Text>
+  </View>
+  <Text
+    style={
+      Object {
+        "borderColor": "transparent",
+        "borderStyle": "dashed",
+        "borderWidth": 1,
+        "color": "#323130",
+        "fontSize": 11,
+        "marginTop": 1,
+      }
+    }
+  >
+    Test
+  </Text>
+</View>
+`;
