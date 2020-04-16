@@ -38,10 +38,5 @@
     "react": "16.8.6",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
-  },
-  "beachball": {
-    "disallowedChangeTypes": [
-      "major"
-    ]
   }
 }

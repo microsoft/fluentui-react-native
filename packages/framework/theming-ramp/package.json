@@ -42,10 +42,5 @@
   },
   "peerDependencies": {
     "react": "^16.8.6"
-  },
-  "beachball": {
-    "disallowedChangeTypes": [
-      "major"
-    ]
   }
 }

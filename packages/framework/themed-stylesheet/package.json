@@ -35,10 +35,5 @@
   },
   "peerDependencies": {
     "react-native": "^0.59.0"
-  },
-  "beachball": {
-    "disallowedChangeTypes": [
-      "major"
-    ]
   }
 }
