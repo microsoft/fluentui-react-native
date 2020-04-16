@@ -4,6 +4,10 @@
   "description": "A react-native companion to fabric web that only depends on stock controls and theming",
   "main": "src/index.ts",
   "module": "src/index.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
