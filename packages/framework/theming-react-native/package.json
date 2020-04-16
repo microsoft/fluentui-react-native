@@ -5,6 +5,10 @@
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
   "scripts": {
     "build": "fluentui-scripts build",
     "bundle": "fluentui-scripts bundle",
@@ -36,10 +40,5 @@
   },
   "peerDependencies": {
     "react": "^16.8.6"
-  },
-  "beachball": {
-    "disallowedChangeTypes": [
-      "major"
-    ]
   }
 }
