@@ -7607,6 +7607,21 @@ beachball@^1.11.7:
     semver "^6.1.1"
     yargs-parser "^13.1.0"
 
+beachball@^1.29.0:
+  version "1.29.0"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-1.29.0.tgz#e42c3f2652c367c983a5deabcca1ea0046aae8cd"
+  integrity sha512-cOof+euNuphjGx+mwlzoW4DT2PUU8DkvfMZaR1RGtuRqbRsH3nVDA8zTyH2nWlBsZqQT+x38yZfKWU1io29lNw==
+  dependencies:
+    cosmiconfig "^6.0.0"
+    fs-extra "^8.0.1"
+    git-url-parse "^11.1.2"
+    glob "^7.1.4"
+    lodash "^4.17.15"
+    minimatch "^3.0.4"
+    prompts "~2.1.0"
+    semver "^6.1.1"
+    yargs-parser "^13.1.0"
+
 before-after-hook@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/before-after-hook/-/before-after-hook-2.1.0.tgz#b6c03487f44e24200dd30ca5e6a1979c5d2fb635"
