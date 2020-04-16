@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "publish with correct main/module references",
+  "packageName": "@uifabricshared/themed-settings",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-04-16T03:03:31.948Z"
+}
