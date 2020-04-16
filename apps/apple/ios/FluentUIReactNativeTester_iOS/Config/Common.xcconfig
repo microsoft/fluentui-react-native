@@ -25,7 +25,6 @@ GCC_WARN_UNUSED_FUNCTION = YES
 GCC_WARN_UNUSED_VARIABLE = YES
 SWIFT_TREAT_WARNINGS_AS_ERRORS = YES
 LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks
-SWIFT_OBJC_BRIDGING_HEADER = FluentUIReactNativeTester_iOS-Bridging-Header.h
 
 INFOPLIST_FILE = FluentUIReactNativeTester_iOS/Info.plist
 
