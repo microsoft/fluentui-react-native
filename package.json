@@ -53,10 +53,5 @@
     "nohoist": [
       "**/expo"
     ]
-  },
-  "beachball": {
-    "disallowedChangeTypes": [
-      "major"
-    ]
   }
 }
