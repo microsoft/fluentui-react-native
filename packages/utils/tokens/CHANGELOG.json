@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Fri, 17 Apr 2020 16:48:18 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Revert \"Merge pull request #136 from ksiler/fluent-variant-support\"",
+            "author": "krsiler@microsoft.com",
+            "commit": "302097d2dc2dc50680be2ff3747b9c244501d7d5",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Apr 2020 23:57:38 GMT",
       "tag": "@fluentui-react-native/tokens_v0.2.1",
       "version": "0.2.1",

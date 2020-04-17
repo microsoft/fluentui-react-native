@@ -1,8 +1,16 @@
 # Change Log - fluent-rn-website
 
-This log was last generated on Tue, 14 Apr 2020 05:14:46 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Apr 2020 16:48:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.2
+
+Fri, 17 Apr 2020 16:48:18 GMT
+
+### Patches
+
+- Revert "Merge pull request #136 from ksiler/fluent-variant-support" (krsiler@microsoft.com)
 
 ## 0.2.0
 

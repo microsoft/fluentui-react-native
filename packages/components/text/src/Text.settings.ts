@@ -5,7 +5,9 @@ import { IComposeSettings } from '@uifabricshared/foundation-compose';
 export const settings: IComposeSettings<ITextType> = [
   {
     tokens: {
-      fontVariant: 'secondaryStandard',
+      fontFamily: 'primary',
+      fontSize: 'medium',
+      fontWeight: 'medium',
       color: 'bodyText'
     },
     root: {
