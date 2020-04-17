@@ -2,6 +2,36 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Fri, 17 Apr 2020 16:48:18 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.7.2",
+      "version": "0.7.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Revert \"Merge pull request #136 from ksiler/fluent-variant-support\"",
+            "author": "krsiler@microsoft.com",
+            "commit": "302097d2dc2dc50680be2ff3747b9c244501d7d5",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Apr 2020 23:57:38 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.7.1",
+      "version": "0.7.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "publish with correct main/module references",
+            "author": "jasonmo@microsoft.com",
+            "commit": "6709e9eed6e08029114e8d893d27d91b99f73d0a",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 13 Apr 2020 22:48:23 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.7.0",
       "version": "0.7.0",

@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-tokens",
-  "version": "0.4.11",
+  "version": "0.4.12",
   "description": "Core tokens package",
   "repository": {
     "type": "git",
@@ -9,6 +9,10 @@
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
   "scripts": {
     "build": "fluentui-scripts build",
     "bundle": "fluentui-scripts bundle",
@@ -26,16 +30,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": "^0.4.12"
+    "@uifabricshared/foundation-settings": "^0.4.13"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
-    "@uifabricshared/foundation-settings": "0.4.12",
+    "@uifabricshared/foundation-settings": "0.4.13",
     "@uifabricshared/build-native": "^0.1.1"
-  },
-  "beachball": {
-    "disallowedChangeTypes": [
-      "major"
-    ]
   }
 }

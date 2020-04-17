@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/themed-stylesheet",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "description": "Helper for using react-native StyleSheets with themes",
   "repository": {
     "type": "git",
@@ -9,6 +9,10 @@
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
   "scripts": {
     "build": "fluentui-scripts build",
     "bundle": "fluentui-scripts bundle",
@@ -31,10 +35,5 @@
   },
   "peerDependencies": {
     "react-native": "^0.59.0"
-  },
-  "beachball": {
-    "disallowedChangeTypes": [
-      "major"
-    ]
   }
 }

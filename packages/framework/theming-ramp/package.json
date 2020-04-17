@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theming-ramp",
-  "version": "0.7.0",
+  "version": "0.7.2",
   "description": "Theming Library",
   "repository": {
     "type": "git",
@@ -9,6 +9,10 @@
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
   "scripts": {
     "build": "fluentui-scripts build",
     "bundle": "fluentui-scripts bundle",
@@ -26,8 +30,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": "^0.4.12",
-    "@uifabricshared/immutable-merge": "^0.4.0"
+    "@uifabricshared/foundation-settings": "^0.4.13",
+    "@uifabricshared/immutable-merge": "^0.4.1"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
@@ -38,10 +42,5 @@
   },
   "peerDependencies": {
     "react": "^16.8.6"
-  },
-  "beachball": {
-    "disallowedChangeTypes": [
-      "major"
-    ]
   }
 }

@@ -2,6 +2,21 @@
   "name": "@uifabricshared/immutable-merge",
   "entries": [
     {
+      "date": "Thu, 16 Apr 2020 23:57:38 GMT",
+      "tag": "@uifabricshared/immutable-merge_v0.4.1",
+      "version": "0.4.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "publish with correct main/module references",
+            "author": "jasonmo@microsoft.com",
+            "commit": "6709e9eed6e08029114e8d893d27d91b99f73d0a",
+            "package": "@uifabricshared/immutable-merge"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Apr 2020 21:14:58 GMT",
       "tag": "@uifabricshared/immutable-merge_v0.4.0",
       "version": "0.4.0",

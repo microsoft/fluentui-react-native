@@ -5,6 +5,10 @@
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
   "private": true,
   "scripts": {
     "build": "fluentui-scripts build",
@@ -15,14 +19,14 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.5.19",
-    "@fluentui-react-native/adapters": "^0.1.6",
-    "@fluentui-react-native/tokens": "^0.2.0"
+    "@uifabricshared/foundation-compose": "^1.5.21",
+    "@fluentui-react-native/adapters": "^0.1.7",
+    "@fluentui-react-native/tokens": "^0.2.2"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.27.3",
     "@types/react-native": "^0.60.0",
-    "@fluentui-react-native/text": "^0.3.0",
+    "@fluentui-react-native/text": "^0.3.2",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "react-native": "^0.60.0"
