@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "yarn.lock",
+  "packageName": "@uifabricshared/foundation-composable",
+  "email": "warleu@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-04-16T00:49:32.644Z"
+}

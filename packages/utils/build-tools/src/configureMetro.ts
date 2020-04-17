@@ -7,6 +7,7 @@ import { getRNVersion, getAllPlatforms, getAllReactNativePaths, PlatformValue, f
 import { getPackageInfo, findGitRoot } from 'just-repo-utils';
 import blacklist from 'metro-config-60/src/defaults/blacklist';
 import { mergeConfigs } from './mergeConfigs';
+import { getDefaultConfig } from 'metro-config-60';
 
 function prepareRegex(blacklistPath): RegExp {
   return new RegExp(`${blacklistPath.replace(/[/\\\\]/g, '\\/')}.*`);
@@ -66,20 +67,21 @@ export function addPlatformMetroConfig(platform: PlatformValue, base: any = {}):
  *
  * @param options - metro configuration options
  */
-export function configureMetro(optionsToMerge?: object) {
+export async function configureMetro(optionsToMerge?: object) {
+  const {
+    resolver: { sourceExts, assetExts },
+  } = await getDefaultConfig();
+
   const options = {
     // WatchFolders is only needed due to the yarn workspace layout of node_modules, we need to watch the symlinked locations separately
-    watchFolders: [
-      path.resolve(findGitRoot(), 'node_modules'),
-      ...getPackageInfo()
-        .dependencies()
-        .paths()
-    ],
+    watchFolders: [path.resolve(findGitRoot(), 'node_modules'), ...getPackageInfo().dependencies().paths()],
     resolver: {
-      resolverMainFields: ['react-native', 'browser', 'main']
+      resolverMainFields: ['react-native', 'browser', 'main'],
+      assetExts: assetExts.filter((ext) => ext !== 'svg'),
+      sourceExts: [...sourceExts, 'svg']
     },
     transformer: {
-      babelTransformPath: require.resolve('metro-react-native-babel-transformer'),
+      babelTransformerPath: require.resolve('./transform-selector'),
 
       getTransformOptions: async () => ({
         transform: {
