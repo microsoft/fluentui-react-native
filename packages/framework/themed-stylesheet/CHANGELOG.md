@@ -1,7 +1,23 @@
 # Change Log - @uifabricshared/themed-stylesheet
 
-This log was last generated on Fri, 03 Apr 2020 20:40:51 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Apr 2020 23:57:38 GMT and should not be manually modified.
 
+<!-- Start content -->
+
+## 0.2.14
+
+Thu, 16 Apr 2020 23:57:38 GMT
+
+### Patches
+
+- publish with correct main/module references (jasonmo@microsoft.com)
+
+## 0.2.13
+Thu, 09 Apr 2020 18:39:15 GMT
+
+### Patches
+
+- merge conflicts (ppatboyd@outlook.com)
 ## 0.2.11
 Fri, 03 Apr 2020 20:40:51 GMT
 

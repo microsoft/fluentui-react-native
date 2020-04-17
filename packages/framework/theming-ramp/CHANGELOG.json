@@ -2,6 +2,66 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Thu, 16 Apr 2020 23:57:38 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.7.1",
+      "version": "0.7.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "publish with correct main/module references",
+            "author": "jasonmo@microsoft.com",
+            "commit": "6709e9eed6e08029114e8d893d27d91b99f73d0a",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 13 Apr 2020 22:48:23 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add variants and fluent typeramp to text",
+            "author": "krsiler@microsoft.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Apr 2020 21:14:58 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.6.7",
+      "version": "0.6.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "rework merge with improved API",
+            "author": "jasonmo@microsoft.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Apr 2020 18:39:15 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.6.6",
+      "version": "0.6.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "merge conflicts",
+            "author": "ppatboyd@outlook.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Apr 2020 20:40:51 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.6.4",
       "version": "0.6.4",

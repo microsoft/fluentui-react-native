@@ -17,7 +17,7 @@
     "update-api": "echo no api to update"
   },
   "dependencies": {
-    "@fluentui-react-native/build-tools": "0.2.1"
+    "@fluentui-react-native/build-tools": "0.2.2"
   },
   "peerDependencies": {
     "@babel/core": "^7.8.0",
@@ -56,7 +56,6 @@
     "babel-jest": "^25.2.3",
     "babel-plugin-module-resolver": "^4.0.0",
     "babylon": "^7.0.0-beta.47",
-    "beachball": "^1.11.7",
     "bundlesize": "^0.15.2",
     "chalk": "^2.1.0",
     "codecov": "^3.1.0",

@@ -1,7 +1,35 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Fri, 03 Apr 2020 20:40:51 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Apr 2020 23:57:38 GMT and should not be manually modified.
 
+<!-- Start content -->
+
+## 0.3.7
+
+Thu, 16 Apr 2020 23:57:38 GMT
+
+### Patches
+
+- publish with correct main/module references (jasonmo@microsoft.com)
+
+## 0.3.6
+Mon, 13 Apr 2020 22:48:23 GMT
+
+### Patches
+
+- Update button snapshot (krsiler@microsoft.com)
+## 0.3.5
+Thu, 09 Apr 2020 21:14:58 GMT
+
+### Patches
+
+- enable button snapshot test and update merge to fix bug (jasonmo@microsoft.com)
+## 0.3.3
+Thu, 09 Apr 2020 18:39:15 GMT
+
+### Patches
+
+- merge conflicts (ppatboyd@outlook.com)
 ## 0.3.1
 Fri, 03 Apr 2020 20:40:51 GMT
 

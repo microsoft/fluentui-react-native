@@ -2,6 +2,36 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Thu, 16 Apr 2020 23:57:38 GMT",
+      "tag": "@fluentui/react-native_v0.14.9",
+      "version": "0.14.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "publish with correct main/module references",
+            "author": "jasonmo@microsoft.com",
+            "commit": "6709e9eed6e08029114e8d893d27d91b99f73d0a",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Apr 2020 18:39:15 GMT",
+      "tag": "@fluentui/react-native_v0.14.5",
+      "version": "0.14.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "merge conflicts",
+            "author": "ppatboyd@outlook.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Apr 2020 20:40:51 GMT",
       "tag": "@fluentui/react-native_v0.14.3",
       "version": "0.14.3",

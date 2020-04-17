@@ -1,58 +1,45 @@
-import { IMergeOptions, immutableMergeCore } from '@uifabricshared/immutable-merge';
+import { MergeOptions, immutableMergeCore } from '@uifabricshared/immutable-merge';
 import { IComponentSettingsCollection, IComponentSettings, ISlotProps, IOverrideLookup } from './Settings.types';
 import { mergeAndFlattenStyles } from './Styles';
-import { IFinalizeStyle, IStyleProp } from './Styles.types';
+import { IStyleProp } from './Styles.types';
 
-/**
- * helper function to switch to a collection merge pattern when _overrides are encountered
- */
-function _mergeCollection(_options: IMergeOptions, ...objs: (object | undefined)[]): IComponentSettingsCollection {
-  // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  return mergeSettingsCollection(...(objs as IComponentSettingsCollection[]));
-}
-
-function _mergeStyles(_options: IMergeOptions, ...objs: (IStyleProp<object>)[]): object | undefined {
+function _mergeStyles(...objs: IStyleProp<object>[]): object | undefined {
   return mergeAndFlattenStyles(undefined, undefined, ...objs);
 }
 
-function _mergeClassName(_options: IMergeOptions, ...names: any[]): string | undefined {
+function _mergeClassName(...names: any[]): string | undefined {
   return names.filter(v => v && typeof v === 'string').join(' ');
 }
 
 /**
- * styles should be flattened and merged
- * tokens should be merged one level
- * overrides should be handled as a collection
+ * Props will not deeply merge with the exception of a style property.  Also className needs to be handled specially.
  */
-const _recurseOptions = {
-  style: _mergeStyles,
-  tokens: true,
+const _mergePropsOptions: MergeOptions = {
   className: _mergeClassName,
-  _overrides: _mergeCollection
+  style: _mergeStyles
 };
 
 /**
- * for a single settings block, recurse one level deep to include the various slot props
+ * an individual settings block is a set of slotProps, with an additional collection of tokens.
  */
-const _mergeSettingsOptions: IMergeOptions = {
-  depth: 1,
-  recurse: _recurseOptions
-};
+const _mergeSettingsOptions: MergeOptions = {
+  // tokens should be merged but not recurse
+  tokens: 0,
 
-/**
- * for a collection of settings, recurse two levels
- */
-const _mergeCollectionOptions: IMergeOptions = {
-  depth: 2,
-  recurse: _recurseOptions
-};
+  // all other objects should be treated as props
+  object: _mergePropsOptions,
 
-const _mergePropsOptions: IMergeOptions = {
-  recurse: {
-    style: _mergeStyles,
-    tokens: true,
-    className: _mergeClassName
+  // overrides have a collection of objects which each are treated as settings
+  get _overrides() {
+    return { object: this };
   }
+};
+
+/**
+ * A collection of settings simply applies settings down one level
+ */
+const _mergeCollectionOptions: MergeOptions = {
+  object: _mergeSettingsOptions
 };
 
 /**
@@ -69,30 +56,6 @@ export function mergeSettings<TSettings extends IComponentSettings = IComponentS
  */
 export function mergeProps<TProps extends object>(...props: (object | undefined)[]): TProps {
   return immutableMergeCore(_mergePropsOptions, ...props) as TProps;
-}
-
-/**
- * Merge settings together and run finalization as part of the process
- *
- * @param theme - theme to use for value lookups
- * @param finalizers - finalizers to use for style processing
- * @param settings - settings to merge, can be only a single entry
- */
-export function mergeAndFinalizeSettings<TSettings extends IComponentSettings = IComponentSettings>(
-  finalizer: IFinalizeStyle,
-  ...settings: (object | undefined)[]
-): TSettings {
-  const mergeOptions: IMergeOptions = {
-    depth: 1,
-    processSingles: true,
-    recurse: {
-      ..._recurseOptions,
-      style: (_options: IMergeOptions, ...objs: (IStyleProp<object>)[]) => {
-        return mergeAndFlattenStyles(finalizer, ...objs);
-      }
-    }
-  };
-  return immutableMergeCore(mergeOptions, ...settings) as TSettings;
 }
 
 /**

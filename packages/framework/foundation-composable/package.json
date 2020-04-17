@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-composable",
-  "version": "0.5.12",
+  "version": "0.5.15",
   "description": "Composable component building blocks",
   "repository": {
     "type": "git",
@@ -9,6 +9,10 @@
   "module": "src/index.ts",
   "main": "src/index.ts",
   "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
   "scripts": {
     "build": "fluentui-scripts build",
     "bundle": "fluentui-scripts bundle",
@@ -26,7 +30,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": "^0.4.10"
+    "@uifabricshared/foundation-settings": "^0.4.13"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
@@ -34,10 +38,5 @@
     "react": "16.8.6",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
-  },
-  "beachball": {
-    "disallowedChangeTypes": [
-      "major"
-    ]
   }
 }

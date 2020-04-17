@@ -2,7 +2,7 @@ pr:
   - master
 
 pool:
-  vmImage: 'macos-latest'
+  vmImage: 'macos-10.15'
 
 variables:
   CI: true
@@ -50,7 +50,7 @@ steps:
   
   # Install any pods necessary for the project
   - bash: |
-      cd apps/macOS &&
+      cd apps/apple/macos &&
       pod install
     displayName: "Install Pod Project Dependencies"
 
@@ -58,7 +58,7 @@ steps:
     parameters:
       xcode_sdx: macosx
       xcode_configuration: Debug
-      xcode_workspacePath: apps/macOS/FluentUIReactNativeTester_macOS.xcworkspace
+      xcode_workspacePath: apps/apple/macos/FluentUIReactNativeTester_macOS.xcworkspace
       xcode_scheme: 'FluentUIReactNativeTester_macOS-Debug'
       xcode_actions: 'build'
       xcode_useXcpretty: true
@@ -68,7 +68,7 @@ steps:
     parameters:
       xcode_sdx: macosx
       xcode_configuration: Release
-      xcode_workspacePath: apps/macOS/FluentUIReactNativeTester_macOS.xcworkspace
+      xcode_workspacePath: apps/apple/macos/FluentUIReactNativeTester_macOS.xcworkspace
       xcode_scheme: 'FluentUIReactNativeTester_macOS-Release'
       xcode_actions: 'build'
       xcode_useXcpretty: false

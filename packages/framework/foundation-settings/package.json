@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-settings",
-  "version": "0.4.10",
+  "version": "0.4.13",
   "description": "Settings and style definitions and helpers",
   "repository": {
     "type": "git",
@@ -9,6 +9,10 @@
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
   "scripts": {
     "build": "fluentui-scripts build",
     "bundle": "fluentui-scripts bundle",
@@ -26,16 +30,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/immutable-merge": "^0.3.4"
+    "@uifabricshared/immutable-merge": "^0.4.1"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
-  },
-  "beachball": {
-    "disallowedChangeTypes": [
-      "major"
-    ]
   }
 }

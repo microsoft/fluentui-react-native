@@ -16,7 +16,7 @@
     "postinstall": "node ./scripts/postinstall.js",
     "clean-all": "node ./scripts/clean-all.js",
     "start": "cd apps && cd demo && npm start",
-    "docs": "cd docs && npm start",
+    "docs": "yarn workspace fluent-rn-website start",
     "build": "lerna run build --stream -- --production --lint --color",
     "bundle": "lerna run bundle --stream -- --production --lint --color",
     "clean": "lerna run clean --stream",
@@ -36,7 +36,7 @@
     "@types/react": "16.8.23",
     "@types/react-dom": "16.8.5",
     "@types/react-native": "^0.60.0",
-    "beachball": "^1.11.7",
+    "beachball": "^1.29.1",
     "lerna": "^3.16.4",
     "react": "16.8.6",
     "react-dom": "16.8.6",
@@ -52,11 +52,6 @@
     ],
     "nohoist": [
       "**/expo"
-    ]
-  },
-  "beachball": {
-    "disallowedChangeTypes": [
-      "major"
     ]
   }
 }

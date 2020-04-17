@@ -138,7 +138,8 @@ const mockModule: IOfficeThemingModule = {
     Sepias: ['#ECE6DE']
   },
   getPalette: mockGetPaletteImpl,
-  typography: baseline.typography
+  typography: baseline.typography,
+  fluentTypography: baseline.typography
 };
 
 export function createMockThemingModule(module?: Partial<IOfficeThemingModule>) {
