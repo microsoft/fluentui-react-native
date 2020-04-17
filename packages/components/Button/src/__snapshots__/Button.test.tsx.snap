@@ -47,8 +47,8 @@ exports[`Button default 1`] = `
         Object {
           "color": "#323130",
           "fontFamily": "Segoe UI",
-          "fontSize": 9,
-          "fontWeight": "400",
+          "fontSize": 12,
+          "fontWeight": "500",
           "margin": 0,
         }
       }

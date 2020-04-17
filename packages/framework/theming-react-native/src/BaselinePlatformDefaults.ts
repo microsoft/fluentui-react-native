@@ -4,17 +4,22 @@ import { getStockWebPalette, ITypography, ISpacing } from '@uifabricshared/themi
 function _defaultTypography(): ITypography {
   return {
     sizes: {
-      caption: 8,
-      secondary: 9,
-      body: 11,
-      subheader: 12,
-      header: 15,
-      hero: 21,
-      heroLarge: 32
+      xxxSmall: 8,
+      xxSmall: 9,
+      xSmall: 10,
+      small: 11,
+      medium: 12,
+      large: 14,
+      xLarge: 18,
+      xxLarge: 24,
+      xxxLarge: 32
     },
     weights: {
-      regular: '400',
-      semiBold: '600'
+      light: '200',
+      semiLight: '300',
+      medium: '500',
+      semiBold: '700',
+      bold: '900'
     },
     families: {
       primary: 'Segoe UI',
@@ -23,21 +28,6 @@ function _defaultTypography(): ITypography {
       monospace: 'System',
       sansSerif: 'System',
       serif: 'System'
-    },
-    variants: {
-      captionStandard: { face: 'primary', size: 'caption', weight: 'regular' },
-      secondaryStandard: { face: 'primary', size: 'secondary', weight: 'regular' },
-      secondarySemibold: { face: 'primary', size: 'secondary', weight: 'semiBold' },
-      bodyStandard: { face: 'primary', size: 'body', weight: 'regular' },
-      bodySemibold: { face: 'primary', size: 'body', weight: 'semiBold' },
-      subheaderStandard: { face: 'primary', size: 'subheader', weight: 'regular' },
-      subheaderSemibold: { face: 'primary', size: 'subheader', weight: 'semiBold' },
-      headerStandard: { face: 'primary', size: 'header', weight: 'regular' },
-      headerSemibold: { face: 'primary', size: 'header', weight: 'semiBold' },
-      heroStandard: { face: 'primary', size: 'hero', weight: 'regular' },
-      heroSemibold: { face: 'primary', size: 'hero', weight: 'semiBold' },
-      heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: 'regular' },
-      heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: 'semiBold' }
     }
   };
 }
