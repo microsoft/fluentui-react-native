@@ -50,13 +50,15 @@ export type FontSizeValuePoints = number;
  * These names should be used when defining a theme.
  */
 export interface IFontSizes {
-  caption: FontSizeValuePoints;
-  secondary: FontSizeValuePoints;
-  body: FontSizeValuePoints;
-  subheader: FontSizeValuePoints;
-  header: FontSizeValuePoints;
-  hero: FontSizeValuePoints;
-  heroLarge: FontSizeValuePoints;
+  xxxSmall: FontSizeValuePoints;
+  xxSmall: FontSizeValuePoints;
+  xSmall: FontSizeValuePoints;
+  small: FontSizeValuePoints;
+  medium: FontSizeValuePoints;
+  large: FontSizeValuePoints;
+  xLarge: FontSizeValuePoints;
+  xxLarge: FontSizeValuePoints;
+  xxxLarge: FontSizeValuePoints;
 }
 
 /**
@@ -82,8 +84,11 @@ export type FontWeightValue = '100' | '200' | '300' | '400' | '500' | '600' | '7
  * These names should be used when defining a theme.
  */
 export interface IFontWeights {
-  regular: FontWeightValue;
+  light: FontWeightValue;
+  semiLight: FontWeightValue;
+  medium: FontWeightValue;
   semiBold: FontWeightValue;
+  bold: FontWeightValue;
 }
 
 /**
@@ -92,53 +97,16 @@ export interface IFontWeights {
 export type FontWeight = keyof IFontWeights | FontWeightValue;
 
 /**
- * A font variant value.
- */
-export type FontVariantValue = {
-  face: FontFamily;
-  size: FontSize;
-  weight: FontWeight;
-};
-
-/**
- * A collection of named font variants.
- */
-export interface IFontVariants {
-  captionStandard: FontVariantValue;
-  secondaryStandard: FontVariantValue;
-  secondarySemibold: FontVariantValue;
-  bodyStandard: FontVariantValue;
-  bodySemibold: FontVariantValue;
-  subheaderStandard: FontVariantValue;
-  subheaderSemibold: FontVariantValue;
-  headerStandard: FontVariantValue;
-  headerSemibold: FontVariantValue;
-  heroStandard: FontVariantValue;
-  heroSemibold: FontVariantValue;
-  heroLargeStandard: FontVariantValue;
-  heroLargeSemibold: FontVariantValue;
-}
-
-/**
- * A font variant, used when defining a visual element in a theme.
- */
-export type FontVariant = keyof IFontVariants | FontVariantValue;
-
-/**
  * A collection of typographic (font) information.
  *
  * When setting a font in a theme, choose a family, size and weight from
  * this collection.
  */
-
-export interface ITextStyle {
+export interface ITypography {
   families: IFontFamilies;
   sizes: IFontSizes;
   weights: IFontWeights;
-  variants: IFontVariants;
 }
-
-export type ITypography = ITextStyle;
 
 /**
  * A partially specified typography.

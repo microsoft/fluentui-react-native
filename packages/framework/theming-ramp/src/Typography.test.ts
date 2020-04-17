@@ -1,4 +1,4 @@
-import { IFontFamilies, IFontSizes, IFontWeights, IFontVariants, ITypography } from './Typography.types';
+import { IFontFamilies, IFontSizes, IFontWeights, ITypography } from './Typography.types';
 import { resolveFontFamily, resolveFontSize, resolveFontWeight } from './Typography';
 
 const families = {
@@ -7,38 +7,19 @@ const families = {
 } as IFontFamilies;
 
 const sizes = {
-  caption: 8,
-  subheader: 16
+  xSmall: 8,
+  xLarge: 16
 } as IFontSizes;
 
 const weights = {
-  regular: '500',
+  medium: '500',
   semiBold: '700'
 } as IFontWeights;
-
-const variants = {
-  captionStandard: {
-    face: 'Verdana',
-    size: 8,
-    weight: '500'
-  },
-  subheaderStandard: {
-    face: 'Verdana',
-    size: 16,
-    weight: '500'
-  },
-  subheaderSemibold: {
-    face: 'Verdana',
-    size: 16,
-    weight: '700'
-  }
-} as IFontVariants;
 
 const typography: ITypography = {
   families,
   sizes,
-  weights,
-  variants
+  weights
 };
 
 describe('Typography tests', () => {
@@ -50,8 +31,8 @@ describe('Typography tests', () => {
     expect(resolveFontFamily(typography, 'Arial')).toBe('Arial');
   });
 
-  test('resolveFontSize "caption" returns 8', () => {
-    expect(resolveFontSize(typography, 'caption')).toBe(8);
+  test('resolveFontSize "xSmall" returns 8', () => {
+    expect(resolveFontSize(typography, 'xSmall')).toBe(8);
   });
 
   test('resolveFontSize 15 returns 15', () => {
