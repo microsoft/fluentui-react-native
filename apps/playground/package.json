@@ -16,9 +16,9 @@
     "react-dom": "16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
     "react-native-web": "^0.11.7",
-    "@uifabricshared/theming-react-native": "0.5.1",
+    "@uifabricshared/theming-react-native": "0.5.2",
     "@uifabricshared/themed-stylesheet": "0.2.14",
-    "@uifabricshared/foundation-compose": "1.5.20"
+    "@uifabricshared/foundation-compose": "1.5.21"
   },
   "devDependencies": {
     "@types/react": "16.8.23",
