@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "yarn.lock",
-  "packageName": "gatsby-plugin-docs-creator",
-  "email": "warleu@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-04-16T00:49:31.438Z"
-}

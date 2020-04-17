@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Fri, 17 Apr 2020 22:36:03 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "yarn.lock",
+            "author": "warleu@microsoft.com",
+            "commit": "205e7b7e88151a17f2560ecdaec1c6e13c5825b7",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Apr 2020 16:48:18 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.7.2",
       "version": "0.7.2",

@@ -2,6 +2,21 @@
   "name": "gatsby-theme-fluent-site",
   "entries": [
     {
+      "date": "Fri, 17 Apr 2020 22:36:03 GMT",
+      "tag": "gatsby-theme-fluent-site_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "yarn.lock",
+            "author": "warleu@microsoft.com",
+            "commit": "205e7b7e88151a17f2560ecdaec1c6e13c5825b7",
+            "package": "gatsby-theme-fluent-site"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Apr 2020 18:39:15 GMT",
       "tag": "gatsby-theme-fluent-site_v0.1.3",
       "version": "0.1.3",

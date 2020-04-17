@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "yarn.lock",
-  "packageName": "@fluentui-react-native/radio-group",
-  "email": "warleu@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-04-16T00:49:29.859Z"
-}

@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-settings",
   "entries": [
     {
+      "date": "Fri, 17 Apr 2020 22:36:03 GMT",
+      "tag": "@uifabricshared/foundation-settings_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "yarn.lock",
+            "author": "warleu@microsoft.com",
+            "commit": "205e7b7e88151a17f2560ecdaec1c6e13c5825b7",
+            "package": "@uifabricshared/foundation-settings"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Apr 2020 23:57:38 GMT",
       "tag": "@uifabricshared/foundation-settings_v0.4.13",
       "version": "0.4.13",
