@@ -1,12 +1,11 @@
-name: CI
+pr:
+  - master
 
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+pool:
+  vmImage: 'macos-10.15'
+
+variables:
+  CI: true
 
 jobs:
   - job: environmentSetup
