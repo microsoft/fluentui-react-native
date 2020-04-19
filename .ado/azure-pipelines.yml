@@ -1,17 +1,15 @@
 pr:
   - master
 
-pool:
-  vmImage: 'macos-10.15'
-
-variables:
-  CI: true
-
 jobs:
 - job: xcodebuild
 
+  pool:
+    vmImage: 'macos-10.15'
+  variables:
+    CI: true
+
   strategy:
-    fail-fast: false
     matrix:
       build_command: [
         'macos_build FluentUITester-macOS Debug build',
