@@ -4,10 +4,11 @@
 echo -en "\\033]0;Metro Bundler\\a"
 clear
 
-# Run the packager
-yarn start:macos
+THIS_DIR=$(cd -P "$(dirname "$(readlink "${BASH_SOURCE[0]}" || echo "${BASH_SOURCE[0]}")")" && pwd)
 
-# Handle process ending
+# shellcheck source=/dev/null
+. "$THIS_DIR/run-packager_ios.sh"
+
 if [[ -z "$CI" ]]; then
   echo "Process terminated. Press <enter> to close the window"
   read -r

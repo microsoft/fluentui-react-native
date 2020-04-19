@@ -29,6 +29,19 @@ function invoke_xcodebuild()
     return $?
 }
 
+# Start packager
+function run_packager()
+{
+if [ $1 == "ios" ]
+then
+  echo $PWD
+  ../scrips/run-packager_ios.sh
+else
+  ../scrips/run-packager_macos.sh
+fi
+  return $?
+}
+
 # Run an iOS simulator xcodebuild invocation with the specified scheme, configuration, and build commands
 #
 # \param $1 scheme
@@ -37,6 +50,7 @@ function invoke_xcodebuild()
 function ios_simulator_build()
 {
     pod_install ios
+    run_packager ios
     invoke_xcodebuild "apps/apple/FluentUITester/ios/FluentUITester.xcworkspace" "$1" "$2" iphonesimulator "${@:3}" -destination "platform=iOS Simulator,name=iPhone 8"
     return $?
 }
@@ -49,6 +63,7 @@ function ios_simulator_build()
 function macos_build()
 {
     pod_install macos
+    run_packager macos
     invoke_xcodebuild "apps/apple/FluentUITester/macos/FluentUITester.xcworkspace" "$1" "$2" macosx "${@:3}"
     return $?
 }

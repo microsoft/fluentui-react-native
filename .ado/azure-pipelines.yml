@@ -48,13 +48,6 @@ jobs:
         yarn bundle
       displayName: 'yarn bundle'
 
-    - task: ShellScript@2
-      displayName: 'Setup packager'
-      inputs:
-        scriptPath: 'scripts/run-packager.sh'
-        disableAutoCwd: true
-        cwd: ''
-
   - job: xcodebuild
     dependsOn: environmentSetup
     runs-on: macos-10.15
