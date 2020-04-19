@@ -8,8 +8,19 @@ variables:
   CI: true
 
 jobs:
-  - job: environmentSetup
-    steps:
+- job: xcodebuild
+
+  strategy:
+    fail-fast: false
+    matrix:
+      build_command: [
+        'macos_build FluentUITester-macOS Debug build',
+        'macos_build FluentUITester-macOS Release build',
+        'ios_simulator_build FluentUITester-iOS Debug build',
+        'ios_simulator_build FluentUITester-iOS Release build',
+      ]
+
+  steps:
     - checkout: self
       persistCredentials: true
 
@@ -46,20 +57,6 @@ jobs:
     - script: |
         yarn bundle
       displayName: 'yarn bundle'
-
-  - job: xcodebuild
-    dependsOn: environmentSetup
-    runs-on: macos-10.15
-
-    strategy:
-      fail-fast: false
-      matrix:
-        build_command: [
-          'macos_build FluentUITester-macOS Debug build',
-          'macos_build FluentUITester-macOS Release build',
-          'ios_simulator_build FluentUITester-iOS Debug build',
-          'ios_simulator_build FluentUITester-iOS Release build',
-        ]
 
     - name: scripts/xcodebuild_wrapper.sh ${{ matrix.build_command }}
       run: scripts/xcodebuild_wrapper.sh ${{ matrix.build_command }}
