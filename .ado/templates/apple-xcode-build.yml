@@ -24,6 +24,7 @@ steps:
         script: .ado/ado-packager-setup_ios.sh
 
   - ${{ if eq(parameters.relative_directory, 'macos') }}:
+    - task: CmdLine@2
       displayName: 'Start Packager- macOS'
       inputs:
         script: .ado/ado-packager-setup-macos.sh
