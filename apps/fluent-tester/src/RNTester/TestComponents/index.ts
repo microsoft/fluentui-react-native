@@ -9,6 +9,7 @@ import { PersonaCoinTest } from './PersonaCoin';
 import { PressableTest } from './Pressable';
 import { RadioGroupTest } from './RadioGroup';
 import { SeparatorTest } from './Separator';
+import { SvgTest } from './Svg';
 import { TextTest } from './Text';
 import { ThemeTest } from './Theme';
 
@@ -65,5 +66,9 @@ export const allTestComponents: TestDescription[] = [
   {
     name: 'Checkbox Test',
     component: CheckboxTest
+  },
+  {
+    name: 'Svg Test',
+    component: SvgTest
   }
 ];

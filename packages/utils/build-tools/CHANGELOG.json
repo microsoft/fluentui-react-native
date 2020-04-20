@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/build-tools",
   "entries": [
     {
+      "date": "Fri, 17 Apr 2020 22:36:03 GMT",
+      "tag": "@fluentui-react-native/build-tools_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "yarn.lock",
+            "author": "warleu@microsoft.com",
+            "commit": "205e7b7e88151a17f2560ecdaec1c6e13c5825b7",
+            "package": "@fluentui-react-native/build-tools"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Apr 2020 18:39:15 GMT",
       "tag": "@fluentui-react-native/build-tools_v0.2.2",
       "version": "0.2.2",
