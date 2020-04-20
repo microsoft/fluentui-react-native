@@ -1,24 +1,42 @@
 pr:
   - master
 
+pool:
+  vmImage: 'macos-10.15'
+
+variables:
+  CI: true
+
 jobs:
-- job: xcodebuild
+  - job: ApplePR
+    displayName: Apple PR
+    pool:
+      vmImage: $(VmImage)
+      demands: ['xcode', 'sh', 'npm']
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+    strategy:
+      matrix:
+        ios:
+          relative_directory: 'ios'
+          xcode_sdx: 'ios'
+          xcode_configuration: 'Debug'
+          xcode_workspacePath: 'apps/apple/ios/FluentUITester.xcworkspace'
+          xcode_scheme: 'FluentUITester' #todo add debug/release schemes here
+          xcode_actions: 'build'
+          xcode_useXcpretty: true
+          xcode_destination: 'platform=iOS Simulator,OS=latest,name=iPhone 8'
+        macos:
+          relative_directory: 'macos'
+          xcode_sdx: 'macosx'
+          xcode_configuration: 'Debug'
+          xcode_workspacePath: 'apps/apple/macos/FluentUITester.xcworkspace'
+          xcode_scheme: 'FluentUITester-macOS' #todo add debug/release schemes here
+          xcode_actions: 'build'
+          xcode_useXcpretty: true
+          xcode_destination: 'platform=macOS,arch=x86_64'
 
-  pool:
-    vmImage: 'macos-10.15'
-  variables:
-    CI: true
-
-  strategy:
-    matrix:
-      build_command: [
-        'macos_build FluentUITester-macOS Debug build',
-        'macos_build FluentUITester-macOS Release build',
-        'ios_simulator_build FluentUITester-iOS Debug build',
-        'ios_simulator_build FluentUITester-iOS Release build',
-      ]
-
-  steps:
+    steps:
     - checkout: self
       persistCredentials: true
 
@@ -56,5 +74,16 @@ jobs:
         yarn bundle
       displayName: 'yarn bundle'
 
-    - name: scripts/xcodebuild_wrapper.sh ${{ matrix.build_command }}
-      run: scripts/xcodebuild_wrapper.sh ${{ matrix.build_command }}
+    # Select proper XCode version
+    - template: templates/apple-xcode-select.yml
+
+    - template: templates/apple-xcode-build.yml
+      parameters:
+        relative_directory: $(packager_platform)
+        xcode_sdx: $(xcode_sdx)
+        xcode_configuration: $(xcode_configuration)
+        xcode_workspacePath: $(xcode_workspacePath)
+        xcode_scheme: $(xcode_scheme)
+        xcode_actions: $(xcode_actions)
+        xcode_useXcpretty: $(xcode_useXcpretty)
+        xcode_destination: $(xcode_destination)

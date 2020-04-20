@@ -1,4 +1,5 @@
 parameters:
+  relative_directory: ''
   xcode_sdk: ''
   xcode_configuration: ''
   xcode_workspacePath: ''
@@ -9,6 +10,24 @@ parameters:
   xcode_extraArgs: ''
 
 steps:
+  # Install any pods necessary for the project
+  - bash: |
+      cd apps/apple/${{ parameters.relative_directory }} &&
+      pod install
+    displayName: "Install Pod Project Dependencies"
+
+  # Different packagers for iOS and macOS
+  - ${{ if eq(parameters.relative_directory, 'ios') }}:
+    - task: CmdLine@2
+      displayName: 'Start Packager- iOS'
+      inputs:
+        script: .ado/ado-packager-setup_ios.sh
+
+  - ${{ if eq(parameters.relative_directory, 'macos') }}:
+      displayName: 'Start Packager- macOS'
+      inputs:
+        script: .ado/ado-packager-setup-macos.sh
+
   - task: Xcode@5
     displayName: 'XCode ${{ parameters.xcode_actions }} ${{ parameters.xcode_configuration }} ${{ parameters.xcode_sdk }} ${{ parameters.xcode_scheme }}'
     inputs:

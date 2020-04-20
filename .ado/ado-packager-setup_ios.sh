@@ -12,13 +12,9 @@ THIS_DIR=$PWD
 
 # Start the WebSocket test server
 # osascript -e "tell application \"Terminal\" to do script \"cd ${THIS_DIR}; export SERVERS_NO_WAIT=1; ./IntegrationTests/launchWebSocketServer.command\""
+# Start packager
 
-COMMAND="$TMPDIR/launchPackager.command"
-if [ $1 == "ios" ]
-then
-  echo "cd ${THIS_DIR}; export SERVERS_NO_WAIT=1; ./scripts/launchPackager-ios.command" > "$COMMAND"
-else
-  echo "cd ${THIS_DIR}; export SERVERS_NO_WAIT=1; ./scripts/launchPackager-macos.command" > "$COMMAND"
-fi
+echo "cd ${THIS_DIR}; export SERVERS_NO_WAIT=1; ./scripts/launchPackager-ios.command" > "$COMMAND"
+
 chmod +x "$COMMAND"
 open "$COMMAND"
