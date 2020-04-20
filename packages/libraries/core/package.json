@@ -1,6 +1,6 @@
 {
   "name": "@fluentui/react-native",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "description": "A react-native companion to fabric web that only depends on stock controls and theming",
   "main": "src/index.ts",
   "module": "src/index.ts",

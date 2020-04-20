@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Mon, 20 Apr 2020 17:05:35 GMT",
+      "tag": "@fluentui/react-native_v0.15.1",
+      "version": "0.15.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix package publishing (#163)",
+            "author": "jasonmo@microsoft.com",
+            "commit": "be3e1b9a554f30cef48eadc607247f92c72bd333",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Apr 2020 22:36:03 GMT",
       "tag": "@fluentui/react-native_v0.15.0",
       "version": "0.15.0",
