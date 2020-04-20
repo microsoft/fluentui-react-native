@@ -12,8 +12,8 @@ parameters:
 steps:
   # Install any pods necessary for the project
   - bash: |
-      echo "Running: cd apps/apple/FluentUITester/$parameters.relative_directory && pod install from $PWD" &&
-      cd apps/apple/FluentUITester/$parameters.relative_directory &&
+      echo "Running: cd apps/apple/FluentUITester/$(parameters.relative_directory) && pod install from $PWD" &&
+      cd apps/apple/FluentUITester/$(parameters.relative_directory) &&
       pod install
     displayName: "Install Pod Project Dependencies"
 
