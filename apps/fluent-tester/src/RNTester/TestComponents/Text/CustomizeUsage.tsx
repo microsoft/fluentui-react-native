@@ -6,21 +6,21 @@ import { stackStyle } from '../Common/styles';
 import { styles } from './styles';
 
 export const CustomizeUsage: React.FunctionComponent<{}> = () => {
-  const RedCaptionBold = Text.customize({ tokens: { fontVariant: 'captionStandard', fontWeight: 'semiBold', color: '#ff0000' } });
-  const OrangeSecondaryBold = Text.customize({ tokens: { fontVariant: 'secondaryStandard', fontWeight: 'semiBold', color: '#ff9900' } });
-  const YellowBodyBold = Text.customize({ tokens: { fontVariant: 'bodyStandard', fontWeight: 'semiBold', color: '#f3ce00' } });
-  const GreenSubheaderBold = Text.customize({ tokens: { fontVariant: 'subheaderStandard', fontWeight: 'semiBold', color: '#02c440' } });
-  const BlueHeaderBold = Text.customize({ tokens: { fontVariant: 'headerStandard', fontWeight: 'semiBold', color: '#0229c4' } });
-  const IndigoHeroBold = Text.customize({ tokens: { fontVariant: 'heroStandard', fontWeight: 'semiBold', color: '#4b0082' } });
-  const PurpleHeroLargeBold = Text.customize({ tokens: { fontVariant: 'heroLargeStandard', fontWeight: 'semiBold', color: '#8402c4' } });
+  const RedCaptionBold = Text.customize({ tokens: { variant: 'captionStandard', fontWeight: 'semiBold', color: '#ff0000' } });
+  const OrangeSecondaryBold = Text.customize({ tokens: { variant: 'secondaryStandard', fontWeight: 'semiBold', color: '#ff9900' } });
+  const YellowBodyBold = Text.customize({ tokens: { variant: 'bodyStandard', fontWeight: 'semiBold', color: '#f3ce00' } });
+  const GreenSubheaderBold = Text.customize({ tokens: { variant: 'subheaderStandard', fontWeight: 'semiBold', color: '#02c440' } });
+  const BlueHeaderBold = Text.customize({ tokens: { variant: 'headerStandard', fontWeight: 'semiBold', color: '#0229c4' } });
+  const IndigoHeroBold = Text.customize({ tokens: { variant: 'heroStandard', fontWeight: 'semiBold', color: '#4b0082' } });
+  const PurpleHeroLargeBold = Text.customize({ tokens: { variant: 'heroLargeStandard', fontWeight: 'semiBold', color: '#8402c4' } });
 
-  const ArialBlack = Text.customize({ tokens: { fontVariant: 'heroLargeStandard', fontFamily: 'Arial Black' } });
-  const BrushScriptMT = Text.customize({ tokens: { fontVariant: 'heroStandard', fontFamily: 'Brush Script MT' } });
-  const CourierNew = Text.customize({ tokens: { fontVariant: 'headerStandard', fontFamily: 'Courier New' } });
-  const Georgia = Text.customize({ tokens: { fontVariant: 'subheaderStandard', fontFamily: 'Georgia' } });
-  const SegoeScript = Text.customize({ tokens: { fontVariant: 'bodyStandard', fontFamily: 'Segoe Script' } });
-  const TimesNewRoman = Text.customize({ tokens: { fontVariant: 'secondaryStandard', fontFamily: 'Times New Roman' } });
-  const Wingdings = Text.customize({ tokens: { fontVariant: 'captionStandard', fontFamily: 'Wingdings' } });
+  const ArialBlack = Text.customize({ tokens: { variant: 'heroLargeStandard', fontFamily: 'Arial Black' } });
+  const BrushScriptMT = Text.customize({ tokens: { variant: 'heroStandard', fontFamily: 'Brush Script MT' } });
+  const CourierNew = Text.customize({ tokens: { variant: 'headerStandard', fontFamily: 'Courier New' } });
+  const Georgia = Text.customize({ tokens: { variant: 'subheaderStandard', fontFamily: 'Georgia' } });
+  const SegoeScript = Text.customize({ tokens: { variant: 'bodyStandard', fontFamily: 'Segoe Script' } });
+  const TimesNewRoman = Text.customize({ tokens: { variant: 'secondaryStandard', fontFamily: 'Times New Roman' } });
+  const Wingdings = Text.customize({ tokens: { variant: 'captionStandard', fontFamily: 'Wingdings' } });
 
   return (
     <View style={styles.root}>

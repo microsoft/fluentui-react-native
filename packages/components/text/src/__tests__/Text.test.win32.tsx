@@ -10,7 +10,7 @@ it('Text default', () => {
 it('Text all props', () => {
   const tree = renderer
     .create(
-      <Text disabled fontVariant="bodyStandard">
+      <Text disabled variant="bodyStandard">
         All props
       </Text>
     )

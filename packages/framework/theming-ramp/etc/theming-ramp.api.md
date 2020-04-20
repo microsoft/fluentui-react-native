@@ -26,16 +26,6 @@ export type FontSize = keyof IFontSizes | FontSizeValuePoints;
 export type FontSizeValuePoints = number;
 
 // @public
-export type FontVariant = keyof IFontVariants | FontVariantValue;
-
-// @public
-export type FontVariantValue = {
-    face: FontFamily;
-    size: FontSize;
-    weight: FontWeight;
-};
-
-// @public
 export type FontWeight = keyof IFontWeights | FontWeightValue;
 
 // @public
@@ -151,36 +141,6 @@ export interface IFontSizes {
     secondary: FontSizeValuePoints;
     // (undocumented)
     subheader: FontSizeValuePoints;
-}
-
-// @public
-export interface IFontVariants {
-    // (undocumented)
-    bodySemibold: FontVariantValue;
-    // (undocumented)
-    bodyStandard: FontVariantValue;
-    // (undocumented)
-    captionStandard: FontVariantValue;
-    // (undocumented)
-    headerSemibold: FontVariantValue;
-    // (undocumented)
-    headerStandard: FontVariantValue;
-    // (undocumented)
-    heroLargeSemibold: FontVariantValue;
-    // (undocumented)
-    heroLargeStandard: FontVariantValue;
-    // (undocumented)
-    heroSemibold: FontVariantValue;
-    // (undocumented)
-    heroStandard: FontVariantValue;
-    // (undocumented)
-    secondarySemibold: FontVariantValue;
-    // (undocumented)
-    secondaryStandard: FontVariantValue;
-    // (undocumented)
-    subheaderSemibold: FontVariantValue;
-    // (undocumented)
-    subheaderStandard: FontVariantValue;
 }
 
 // @public
@@ -330,7 +290,7 @@ export interface ITextStyle {
     // (undocumented)
     sizes: IFontSizes;
     // (undocumented)
-    variants: IFontVariants;
+    variants: IVariants;
     // (undocumented)
     weights: IFontWeights;
 }
@@ -367,6 +327,36 @@ export type IThemeColorDefinition = IPalette & {
 export type ITypography = ITextStyle;
 
 // @public
+export interface IVariants {
+    // (undocumented)
+    bodySemibold: VariantValue;
+    // (undocumented)
+    bodyStandard: VariantValue;
+    // (undocumented)
+    captionStandard: VariantValue;
+    // (undocumented)
+    headerSemibold: VariantValue;
+    // (undocumented)
+    headerStandard: VariantValue;
+    // (undocumented)
+    heroLargeSemibold: VariantValue;
+    // (undocumented)
+    heroLargeStandard: VariantValue;
+    // (undocumented)
+    heroSemibold: VariantValue;
+    // (undocumented)
+    heroStandard: VariantValue;
+    // (undocumented)
+    secondarySemibold: VariantValue;
+    // (undocumented)
+    secondaryStandard: VariantValue;
+    // (undocumented)
+    subheaderSemibold: VariantValue;
+    // (undocumented)
+    subheaderStandard: VariantValue;
+}
+
+// @public
 export function paletteFromFabricColors(p: IFabricWebPalette, isInverted?: boolean): IPalette;
 
 // @public
@@ -374,6 +364,16 @@ export function resolvePartialTheme(theme: ITheme, partialTheme?: IPartialTheme)
 
 // @public
 export function returnAsSlotProps(target: IComponentSettings): IComponentSettings;
+
+// @public
+export type Variant = keyof IVariants | VariantValue;
+
+// @public
+export type VariantValue = {
+    face: FontFamily;
+    size: FontSize;
+    weight: FontWeight;
+};
 
 
 // (No @packageDocumentation comment for this package)

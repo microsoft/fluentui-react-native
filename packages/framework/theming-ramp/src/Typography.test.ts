@@ -1,4 +1,4 @@
-import { IFontFamilies, IFontSizes, IFontWeights, IFontVariants, ITypography } from './Typography.types';
+import { IFontFamilies, IFontSizes, IFontWeights, IVariants, ITypography } from './Typography.types';
 import { resolveFontFamily, resolveFontSize, resolveFontWeight } from './Typography';
 
 const families = {
@@ -32,7 +32,7 @@ const variants = {
     size: 16,
     weight: '700'
   }
-} as IFontVariants;
+} as IVariants;
 
 const typography: ITypography = {
   families,

@@ -6,7 +6,7 @@ import { IViewProps } from '@fluentui-react-native/adapters';
 export const settings: IComposeSettings<ILinkType> = [
   {
     tokens: {
-      fontVariant: 'secondaryStandard',
+      variant: 'secondaryStandard',
       color: 'link'
     },
     root: {

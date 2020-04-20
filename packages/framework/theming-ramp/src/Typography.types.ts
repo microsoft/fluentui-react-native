@@ -94,7 +94,7 @@ export type FontWeight = keyof IFontWeights | FontWeightValue;
 /**
  * A font variant value.
  */
-export type FontVariantValue = {
+export type VariantValue = {
   face: FontFamily;
   size: FontSize;
   weight: FontWeight;
@@ -103,26 +103,26 @@ export type FontVariantValue = {
 /**
  * A collection of named font variants.
  */
-export interface IFontVariants {
-  captionStandard: FontVariantValue;
-  secondaryStandard: FontVariantValue;
-  secondarySemibold: FontVariantValue;
-  bodyStandard: FontVariantValue;
-  bodySemibold: FontVariantValue;
-  subheaderStandard: FontVariantValue;
-  subheaderSemibold: FontVariantValue;
-  headerStandard: FontVariantValue;
-  headerSemibold: FontVariantValue;
-  heroStandard: FontVariantValue;
-  heroSemibold: FontVariantValue;
-  heroLargeStandard: FontVariantValue;
-  heroLargeSemibold: FontVariantValue;
+export interface IVariants {
+  captionStandard: VariantValue;
+  secondaryStandard: VariantValue;
+  secondarySemibold: VariantValue;
+  bodyStandard: VariantValue;
+  bodySemibold: VariantValue;
+  subheaderStandard: VariantValue;
+  subheaderSemibold: VariantValue;
+  headerStandard: VariantValue;
+  headerSemibold: VariantValue;
+  heroStandard: VariantValue;
+  heroSemibold: VariantValue;
+  heroLargeStandard: VariantValue;
+  heroLargeSemibold: VariantValue;
 }
 
 /**
  * A font variant, used when defining a visual element in a theme.
  */
-export type FontVariant = keyof IFontVariants | FontVariantValue;
+export type Variant = keyof IVariants | VariantValue;
 
 /**
  * A collection of typographic (font) information.
@@ -135,7 +135,7 @@ export interface ITextStyle {
   families: IFontFamilies;
   sizes: IFontSizes;
   weights: IFontWeights;
-  variants: IFontVariants;
+  variants: IVariants;
 }
 
 export type ITypography = ITextStyle;
