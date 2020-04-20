@@ -43,6 +43,7 @@ steps:
 
   - task: Bash@3
     condition: and(succeeded(), eq('${{ parameters.relative_directory }}', 'ios'))
+    inputs:
       script: cd apps/apple/FluentUITester/$platform_directory && npx react-native run-ios
     env:
       platform_directory: ${{ parameters.relative_directory }}
@@ -50,6 +51,7 @@ steps:
     
   - task: Bash@3
     condition: and(succeeded(), eq('${{ parameters.relative_directory }}', 'macos'))
+    inputs:
       script: cd apps/apple/FluentUITester/$platform_directory && npx react-native run-macos
     env:
       platform_directory: ${{ parameters.relative_directory }}
