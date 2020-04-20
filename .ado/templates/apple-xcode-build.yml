@@ -12,19 +12,21 @@ parameters:
 steps:
   # Install any pods necessary for the project
   - bash: |
-      echo "Running: cd apps/apple/FluentUITester/$(parameters.relative_directory) && pod install from $PWD" &&
-      cd apps/apple/FluentUITester/$(parameters.relative_directory) &&
+      echo "Running: cd apps/apple/FluentUITester/$platform_directory && pod install from $PWD" &&
+      cd apps/apple/FluentUITester/$platform_directory &&
       pod install
+    env:
+      platform_directory: ${{ parameters.relative_directory }}
     displayName: "Install Pod Project Dependencies"
 
   # Different packagers for iOS and macOS
-  - ${{ if eq(parameters.relative_directory, 'ios') }}:
+  - ${{ if eq(${{ parameters.relative_directory }}, 'ios') }}:
     - task: CmdLine@2
       displayName: 'Start Packager- iOS'
       inputs:
         script: .ado/ado-packager-setup_ios.sh
 
-  - ${{ if eq(parameters.relative_directory, 'macos') }}:
+  - ${{ if eq(${{ parameters.relative_directory }}, 'macos') }}:
     - task: CmdLine@2
       displayName: 'Start Packager- macOS'
       inputs:
