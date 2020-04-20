@@ -1,7 +1,39 @@
 # Change Log - fluent-rn-website
 
-This log was last generated on Thu, 09 Apr 2020 18:39:15 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Apr 2020 22:36:03 GMT and should not be manually modified.
 
+<!-- Start content -->
+
+## 0.3.0
+
+Fri, 17 Apr 2020 22:36:03 GMT
+
+### Minor changes
+
+- yarn.lock (warleu@microsoft.com)
+
+## 0.2.2
+
+Fri, 17 Apr 2020 16:48:18 GMT
+
+### Patches
+
+- Revert "Merge pull request #136 from ksiler/fluent-variant-support" (krsiler@microsoft.com)
+
+## 0.2.0
+
+Tue, 14 Apr 2020 05:14:46 GMT
+
+### Minor changes
+
+- add accessibility documentation (krsiler@microsoft.com)
+
+## 0.1.0
+Mon, 13 Apr 2020 22:48:23 GMT
+
+### Minor changes
+
+- add docs for text (krsiler@microsoft.com)
 ## 0.0.4
 Thu, 09 Apr 2020 18:39:15 GMT
 

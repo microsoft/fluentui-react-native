@@ -1,6 +1,24 @@
 # Change Log - @uifabricshared/immutable-merge
 
-This log was last generated on Thu, 09 Apr 2020 21:14:58 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Apr 2020 22:36:03 GMT and should not be manually modified.
+
+<!-- Start content -->
+
+## 0.5.0
+
+Fri, 17 Apr 2020 22:36:03 GMT
+
+### Minor changes
+
+- yarn.lock (warleu@microsoft.com)
+
+## 0.4.1
+
+Thu, 16 Apr 2020 23:57:38 GMT
+
+### Patches
+
+- publish with correct main/module references (jasonmo@microsoft.com)
 
 ## 0.4.0
 Thu, 09 Apr 2020 21:14:58 GMT

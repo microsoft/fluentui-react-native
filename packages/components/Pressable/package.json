@@ -1,10 +1,14 @@
 {
   "name": "@fluentui-react-native/pressable",
-  "version": "0.2.13",
+  "version": "0.3.0",
   "description": "A cross-platform opinionated Fluent Text component",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
   "scripts": {
     "build": "fluentui-scripts build",
     "just": "fluentui-scripts",
@@ -14,9 +18,9 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.5.18",
-    "@fluentui-react-native/adapters": "^0.1.6",
-    "@fluentui-react-native/interactive-hooks": "^0.2.6"
+    "@uifabricshared/foundation-compose": "^1.6.0",
+    "@fluentui-react-native/adapters": "^0.2.0",
+    "@fluentui-react-native/interactive-hooks": "^0.3.0"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.27.3",
