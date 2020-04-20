@@ -17,12 +17,16 @@ steps:
       yarn install
     env:
       platform_directory: ${{ parameters.relative_directory }}
-    displayName: "Install Pod Project Dependencies"
+    displayName: "yarn install"
 
   # Install any pods necessary for the project
   - bash: |
+      echo "Running: cd apps/apple/FluentUITester/$platform_directory && pod install" &&
+      cd apps/apple/FluentUITester/$platform_directory &&
       pod install
-    displayName: "Install Pod Project Dependencies"
+    env:
+      platform_directory: ${{ parameters.relative_directory }}
+    displayName: "pod install"
 
   # Different packagers for iOS and macOS
   - ${{ if eq(parameters.relative_directory, 'ios') }}:
