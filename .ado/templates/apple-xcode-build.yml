@@ -12,7 +12,7 @@ parameters:
 steps:
   # Install any pods necessary for the project
   - bash: |
-      cd apps/apple/${{ parameters.relative_directory }} &&
+      cd apps/apple/FluentUITester/${{ parameters.relative_directory }} &&
       pod install
     displayName: "Install Pod Project Dependencies"
 
