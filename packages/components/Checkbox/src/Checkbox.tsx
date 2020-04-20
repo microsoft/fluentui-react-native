@@ -113,7 +113,11 @@ export const Checkbox = compose<ICheckboxType>({
         { source: 'checkboxBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }
       ]
     ],
-    checkmark: [foregroundColorTokens, [{ source: 'checkmarkColor', lookup: getPaletteFromTheme, target: 'color' }]],
+    checkmark: [foregroundColorTokens,
+      [
+        { source: 'checkmarkColor', lookup: getPaletteFromTheme, target: 'color' },
+        { source: 'checkmarkVisibility', target: 'opacity'}
+      ]],
     content: [foregroundColorTokens, textTokens]
   }
 });

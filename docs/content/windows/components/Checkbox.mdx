@@ -24,6 +24,7 @@ Checkbox supports the following tokens:
   2. checkboxBorderColor – This changes the border color of the Checkbox.
   3. checkmarkColor – This changes the color of Checkmark.
   4. borderRadius - This changes the border radius of the Checkbox (use this to create a circular checkbox)
+  5. checkmarkVisibility - Allows you to change Checkmark visibility - 1 is visible. More info in Examples below.
 
 ## Token Usage Example:
 Circular Checkbox: We use "borderRadius=7" right now because we currently don't support % for borderRadius. The checkbox
@@ -56,4 +57,16 @@ Circular Color-Customized Checkbox - (Green background + green border + white ch
   });
   ```
 
+  Checkbox with Checkmark visible on hover:
+  ```
+  const HoverCheckbox = Checkbox.customize({
+    _overrides: {
+      hovered: {
+        tokens: {
+          checkmarkVisibility: 1
+        }
+      }
+    }
+  });
+  ```
 

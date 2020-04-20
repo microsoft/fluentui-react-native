@@ -8,7 +8,7 @@ import { useTheme } from '@uifabricshared/theming-react-native';
 const CircularCheckbox = Checkbox.customize({ tokens: { borderRadius: 50 } });
 
 const CircleColorCheckbox = Checkbox.customize({
-  tokens: { borderRadius: 50, checkboxBackgroundColor: 'white' },
+  tokens: { borderRadius: 7, checkboxBackgroundColor: 'white' },
   _overrides: {
     checked: {
       tokens: {
@@ -18,8 +18,28 @@ const CircleColorCheckbox = Checkbox.customize({
       }
     },
     focused: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
-    hovered: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
+    hovered: {
+      tokens: {
+        checkboxBackgroundColor: 'menuItemBackgroundHovered'
+      }
+    },
     pressed: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundPressed' } }
+  }
+});
+
+const HoverCheckbox = Checkbox.customize({
+  _overrides: {
+    checked: {
+      tokens: {
+        checkboxBackgroundColor: 'black',
+        checkmarkColor: 'white'
+      }
+    },
+    hovered: {
+      tokens: {
+        checkmarkVisibility: 1
+      }
+    }
   }
 });
 
@@ -84,6 +104,7 @@ export const CheckboxTest: React.FunctionComponent<{}> = () => {
       <Text style={commonStyles.section}>Token Customized Checkboxes</Text>
       <Separator />
       <CircularCheckbox label="A circular checkbox" onChange={onChangeUncontrolled} defaultChecked={false} />
+      <HoverCheckbox label="A checkbox with checkmark visible on hover" onChange={onChangeUncontrolled} defaultChecked={false} />
       <CircleColorCheckbox label="A circular token-customized checkbox" onChange={onChangeUncontrolled} defaultChecked={true} />
       <BlueCheckbox
         label="Token-customized checkbox. Customizable below."
