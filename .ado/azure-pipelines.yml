@@ -22,7 +22,7 @@ jobs:
           relative_directory: 'ios'
           xcode_sdx: 'ios'
           xcode_configuration: 'Debug'
-          xcode_workspacePath: 'apps/apple/ios/FluentUITester.xcworkspace'
+          xcode_workspacePath: 'apps/apple/FluentUITester/ios/FluentUITester.xcworkspace'
           xcode_scheme: 'FluentUITester' #todo add debug/release schemes here
           xcode_actions: 'build'
           xcode_useXcpretty: true
@@ -31,7 +31,7 @@ jobs:
           relative_directory: 'macos'
           xcode_sdx: 'macosx'
           xcode_configuration: 'Debug'
-          xcode_workspacePath: 'apps/apple/macos/FluentUITester.xcworkspace'
+          xcode_workspacePath: 'apps/apple/FluentUITester/macos/FluentUITester.xcworkspace'
           xcode_scheme: 'FluentUITester-macOS' #todo add debug/release schemes here
           xcode_actions: 'build'
           xcode_useXcpretty: true

@@ -14,10 +14,10 @@ steps:
   - bash: |
       echo "Running: cd apps/apple/FluentUITester/$platform_directory && yarn install" &&
       cd apps/apple/FluentUITester/$platform_directory &&
-      yarn install
+      yarn
     env:
       platform_directory: ${{ parameters.relative_directory }}
-    displayName: "yarn install"
+    displayName: "yarn"
 
   # Install any pods necessary for the project
   - bash: |
