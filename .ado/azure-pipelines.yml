@@ -80,7 +80,7 @@ jobs:
 
     - template: templates/apple-xcode-build.yml
       parameters:
-        relative_directory: $(packager_platform)
+        relative_directory: $(relative_directory)
         xcode_sdx: $(xcode_sdx)
         xcode_configuration: $(xcode_configuration)
         xcode_workspacePath: $(xcode_workspacePath)
