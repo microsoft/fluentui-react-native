@@ -27,32 +27,3 @@ steps:
     env:
       platform_directory: ${{ parameters.relative_directory }}
     displayName: "pod install"
-
-  # Different packagers for iOS and macOS
-  - task: CmdLine@2
-    condition: and(succeeded(), eq('${{ parameters.relative_directory }}', 'ios'))
-    displayName: 'Start Packager- iOS'
-    inputs:
-      script: .ado/ado-packager-setup_ios.sh
-
-  - task: CmdLine@2
-    condition: and(succeeded(), eq('${{ parameters.relative_directory }}', 'macos'))
-    displayName: 'Start Packager- macOS'
-    inputs:
-      script: .ado/ado-packager-setup-macos.sh
-
-  - task: Bash@3
-    condition: and(succeeded(), eq('${{ parameters.relative_directory }}', 'ios'))
-    inputs:
-      script: cd apps/apple/FluentUITester/$platform_directory && npx react-native run-ios
-    env:
-      platform_directory: ${{ parameters.relative_directory }}
-    displayName: "build ios xcworkspace"
-    
-  - task: Bash@3
-    condition: and(succeeded(), eq('${{ parameters.relative_directory }}', 'macos'))
-    inputs:
-      script: cd apps/apple/FluentUITester/$platform_directory && npx react-native run-macos
-    env:
-      platform_directory: ${{ parameters.relative_directory }}
-    displayName: "build ios xcworkspace"
