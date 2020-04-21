@@ -7592,10 +7592,10 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-beachball@^1.30.0:
-  version "1.30.0"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-1.30.0.tgz#9a0073507e5fce4cff0afc855cf630c8aa8499b7"
-  integrity sha512-5vQmoi8qIiUDyMluncYZH2xFlUGpJ36kV2riJWmpNvM//zi+ybXfEmuil0CWn9s2Vw4KAgARXYRjtUDbNFYnUA==
+beachball@^1.30.2:
+  version "1.30.2"
+  resolved "https://registry.npmjs.org/beachball/-/beachball-1.30.2.tgz#c0e645b783d74de23fea404ed220dac59aab651d"
+  integrity sha512-d/2+T5+vQD/32wAQAMY7hRVyVunjD0mRCVYLPYqfxBeYHMJeQ/Irwm8u1rhhjCf94oIdoVGn2dXtWLm99RcttA==
   dependencies:
     cosmiconfig "^6.0.0"
     fs-extra "^8.0.1"
