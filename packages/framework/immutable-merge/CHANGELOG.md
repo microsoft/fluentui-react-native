@@ -1,8 +1,32 @@
 # Change Log - @uifabricshared/immutable-merge
 
-This log was last generated on Thu, 16 Apr 2020 23:57:38 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Apr 2020 05:58:24 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.2
+
+Tue, 21 Apr 2020 05:58:24 GMT
+
+### Patches
+
+- pick up patched beachball version (jasonmo@microsoft.com)
+
+## 0.5.1
+
+Tue, 21 Apr 2020 00:41:10 GMT
+
+### Patches
+
+- update beachball hook to use new prepublish strategy (jasonmo@microsoft.com)
+
+## 0.5.0
+
+Fri, 17 Apr 2020 22:36:03 GMT
+
+### Minor changes
+
+- yarn.lock (warleu@microsoft.com)
 
 ## 0.4.1
 
