@@ -7,20 +7,19 @@
 
 @end
 
-@implementation AppDelegate
-
-- (void)awakeFromNib {
-  [super awakeFromNib];
-
-  _bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:nil];
+@implementation AppDelegate {
+  RCTBridge *_bridge;
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-  // Insert code here to initialize your application
-}
-
-- (void)applicationWillTerminate:(NSNotification *)aNotification {
-  // Insert code here to tear down your application
+/*
+ * Lazily create the bridge on demand
+ * Returns the current instance of RCTBridge
+*/
+- (RCTBridge*)bridge {
+  if (_bridge == nil) {
+    _bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:nil];
+  }
+  return _bridge;
 }
 
 #pragma mark - RCTBridgeDelegate Methods

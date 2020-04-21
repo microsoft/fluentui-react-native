@@ -4,6 +4,6 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
-@property (nonatomic, readonly) RCTBridge *bridge;
+- (RCTBridge*)bridge;
 
 @end

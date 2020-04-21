@@ -5,18 +5,17 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
-  [super viewDidLoad];
+- (void)loadView {
+  id<NSApplicationDelegate> appDelegate = [NSApp delegate];
+  if ([appDelegate isKindOfClass:[AppDelegate class]]) {
+    RCTBridge *bridge = [((AppDelegate *)appDelegate) bridge];
+    RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"FluentUITester" initialProperties:nil];
 
-  RCTBridge *bridge = [((AppDelegate *)[NSApp delegate])bridge];
-  RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"FluentUITester" initialProperties:nil];
-
-  NSView *view = [self view];
-
-  [view addSubview:rootView];
-  [rootView setBackgroundColor:[NSColor windowBackgroundColor]];
-  [rootView setFrame:[view bounds]];
-  [rootView setAutoresizingMask:(NSViewMinXMargin | NSViewMinXMargin | NSViewMinYMargin | NSViewMaxYMargin | NSViewWidthSizable | NSViewHeightSizable)];
+    [self setView:rootView];
+    [rootView addConstraint:[NSLayoutConstraint constraintWithItem:rootView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:500]];
+    [rootView addConstraint:[NSLayoutConstraint constraintWithItem:rootView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:700]];
+    [rootView setAutoresizingMask:(NSViewMinXMargin | NSViewMinXMargin | NSViewMinYMargin | NSViewMaxYMargin | NSViewWidthSizable | NSViewHeightSizable)];
+  }
 }
 
 @end
