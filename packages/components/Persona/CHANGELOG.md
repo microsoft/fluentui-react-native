@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/persona
 
-This log was last generated on Fri, 17 Apr 2020 22:36:03 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Apr 2020 17:03:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.0
+
+Tue, 21 Apr 2020 17:03:45 GMT
+
+### Minor changes
+
+- Update fontSizes to reflect new fluent typeramp (krsiler@microsoft.com)
+
+## 0.4.1
+
+Tue, 21 Apr 2020 00:41:10 GMT
+
+### Patches
+
+- update beachball hook to use new prepublish strategy (jasonmo@microsoft.com)
 
 ## 0.4.0
 

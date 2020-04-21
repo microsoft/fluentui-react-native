@@ -2,6 +2,36 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Tue, 21 Apr 2020 17:03:45 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add variants and new fluent typeramp to text",
+            "author": "krsiler@microsoft.com",
+            "commit": "b034558f160d8815b11b16cd8d30e274e035c87e",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Apr 2020 00:41:10 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "update beachball hook to use new prepublish strategy",
+            "author": "jasonmo@microsoft.com",
+            "commit": "7bc030df722a6fcb6f693658b9d80f4617a26713",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Apr 2020 22:36:03 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.6.0",
       "version": "0.6.0",
