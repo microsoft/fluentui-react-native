@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0496A360A6F874C295C73D4B /* libPods-Shared-FluentUITester-macOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8DBC48FD7C3AEF576C57B21 /* libPods-Shared-FluentUITester-macOS.a */; };
-		5142014D2437B4B30078DB4F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5142014C2437B4B30078DB4F /* AppDelegate.m */; };
-		514201502437B4B30078DB4F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5142014F2437B4B30078DB4F /* ViewController.m */; };
+		5142014D2437B4B30078DB4F /* FRNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5142014C2437B4B30078DB4F /* FRNAppDelegate.m */; };
+		514201502437B4B30078DB4F /* FRNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5142014F2437B4B30078DB4F /* FRNViewController.m */; };
 		514201522437B4B40078DB4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 514201512437B4B40078DB4F /* Assets.xcassets */; };
 		514201552437B4B40078DB4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 514201532437B4B40078DB4F /* Main.storyboard */; };
 		514201582437B4B40078DB4F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 514201572437B4B40078DB4F /* main.m */; };
@@ -19,10 +19,10 @@
 /* Begin PBXFileReference section */
 		02422F9FB6FF5F34B4E63E6F /* Pods-Shared-FluentUITester-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shared-FluentUITester-macOS.debug.xcconfig"; path = "Target Support Files/Pods-Shared-FluentUITester-macOS/Pods-Shared-FluentUITester-macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		514201492437B4B30078DB4F /* FluentUITester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FluentUITester.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5142014B2437B4B30078DB4F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		5142014C2437B4B30078DB4F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		5142014E2437B4B30078DB4F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5142014F2437B4B30078DB4F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		5142014B2437B4B30078DB4F /* FRNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRNAppDelegate.h; sourceTree = "<group>"; };
+		5142014C2437B4B30078DB4F /* FRNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRNAppDelegate.m; sourceTree = "<group>"; };
+		5142014E2437B4B30078DB4F /* FRNViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRNViewController.h; sourceTree = "<group>"; };
+		5142014F2437B4B30078DB4F /* FRNViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRNViewController.m; sourceTree = "<group>"; };
 		514201512437B4B40078DB4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		514201542437B4B40078DB4F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		514201562437B4B40078DB4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,10 +76,10 @@
 			children = (
 				9F3A29F6244F65FA00A401D2 /* Config */,
 				9F3A29F1244F64CD00A401D2 /* Dummy.swift */,
-				5142014B2437B4B30078DB4F /* AppDelegate.h */,
-				5142014C2437B4B30078DB4F /* AppDelegate.m */,
-				5142014E2437B4B30078DB4F /* ViewController.h */,
-				5142014F2437B4B30078DB4F /* ViewController.m */,
+				5142014B2437B4B30078DB4F /* FRNAppDelegate.h */,
+				5142014C2437B4B30078DB4F /* FRNAppDelegate.m */,
+				5142014E2437B4B30078DB4F /* FRNViewController.h */,
+				5142014F2437B4B30078DB4F /* FRNViewController.m */,
 				514201512437B4B40078DB4F /* Assets.xcassets */,
 				514201532437B4B40078DB4F /* Main.storyboard */,
 				514201562437B4B40078DB4F /* Info.plist */,
@@ -224,10 +224,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				514201502437B4B30078DB4F /* ViewController.m in Sources */,
+				514201502437B4B30078DB4F /* FRNViewController.m in Sources */,
 				514201582437B4B40078DB4F /* main.m in Sources */,
 				9F3A29F2244F64CD00A401D2 /* Dummy.swift in Sources */,
-				5142014D2437B4B30078DB4F /* AppDelegate.m in Sources */,
+				5142014D2437B4B30078DB4F /* FRNAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

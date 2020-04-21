@@ -26,7 +26,7 @@ jobs:
           xcode_scheme: 'FluentUITester' #todo add debug/release schemes here
           xcode_actions: 'build'
           xcode_useXcpretty: true
-          xcode_destination: 'platform=iOS Simulator,OS=latest,name=iPhone 8'
+          xcode_destination: 'platform=iOS Simulator,OS=latest,name=iPhone 11'
         macos:
           relative_directory: 'macos'
           xcode_sdx: 'macosx'
