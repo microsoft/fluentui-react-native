@@ -77,8 +77,10 @@ export const Link = compose<ILinkType>({
         {children}
       </Slots.root>
     ) : (
-      <Slots.content {...(renderData.slotProps!.root as any)} />
-    );
+        <Slots.root>
+          {content && <Slots.content />}
+        </Slots.root>
+      );
   },
   slots: {
     root: ReactNative.View,
