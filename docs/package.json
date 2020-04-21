@@ -1,6 +1,6 @@
 {
   "name": "fluent-rn-website",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Fluent website content",
   "repository": {
     "type": "git",
@@ -66,7 +66,7 @@
     "gatsby-plugin-emotion": "^4.1.23",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
-    "@fluentui/react-native": "^0.15.3",
+    "@fluentui/react-native": "^0.15.4",
     "@mdx-js/loader": "^1.5.5"
   }
 }
