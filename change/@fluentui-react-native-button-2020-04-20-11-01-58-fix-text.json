@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Update button snapshots to reflect new fluent typeramp",
-  "packageName": "@fluentui-react-native/button",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-04-20T17:58:41.083Z"
-}
