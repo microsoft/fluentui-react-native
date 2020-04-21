@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "pick up patched beachball version",
-  "packageName": "@uifabricshared/immutable-merge",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-04-21T05:12:03.571Z"
-}

@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/immutable-merge
 
-This log was last generated on Tue, 21 Apr 2020 00:41:10 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Apr 2020 05:58:24 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.2
+
+Tue, 21 Apr 2020 05:58:24 GMT
+
+### Patches
+
+- pick up patched beachball version (jasonmo@microsoft.com)
 
 ## 0.5.1
 
