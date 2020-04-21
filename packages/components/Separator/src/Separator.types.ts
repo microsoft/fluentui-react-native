@@ -24,8 +24,9 @@ export interface ISeparatorProps extends ViewProps, ISeparatorPropTokens {
   /**
    * Specifies where the text or image should be aligned in the separator, when the separator has a text or image label.
    * @defaultValue 'center'
+   * Not yet supported
    */
-  alignContent?: 'start' | 'center' | 'end';
+  // alignContent?: 'start' | 'center' | 'end';
 }
 
 export interface ISeparatorType {
