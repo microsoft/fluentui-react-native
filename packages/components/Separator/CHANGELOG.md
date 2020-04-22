@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/separator
 
-This log was last generated on Tue, 21 Apr 2020 00:41:10 GMT and should not be manually modified.
+This log was last generated on Wed, 22 Apr 2020 02:30:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.5
+
+Wed, 22 Apr 2020 02:30:04 GMT
+
+### Patches
+
+- remove Separator's alignContent until we can fully support it (lehon@microsoft.com)
 
 ## 0.3.1
 
