@@ -1,13 +1,13 @@
 {
-  "name": "@fluentui-react-native/tester",
+  "name": "FluentTester-win32",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.ts",
-  "module": "src/index.ts",
+  "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
   "onPublish": {
-    "main": "lib-commonjs/index.js",
-    "module": "lib/index.js"
+    "main": "lib-commonjs/index.jsx",
+    "module": "lib/index.jsx"
   },
   "scripts": {
     "build": "fluentui-scripts build",
@@ -24,15 +24,12 @@
     "run-win32-devmain": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps"
   },
   "dependencies": {
-    "@fluentui/react-native": "0.15.5",
-    "@fluentui-react-native/stack": "0.1.0",
+    "@fluentui-react-native/tester": "^0.0.1",
     "@uifabricshared/theming-react-native": "0.7.0",
     "@uifabricshared/themed-stylesheet": "0.3.2",
     "react": "16.8.6",
     "react-native": "^0.60.0",
-    "react-native-windows": "^0.60.0-vnext.149",
-    "react-native-svg": "^11.0.0",
-    "rnpm-plugin-windows": "^0.5.1-0"
+    "react-native-svg": "^11.0.0"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.27.3",
@@ -49,14 +46,12 @@
     "react-native": "^0.60.0",
     "react-native-windows": "^0.60.0-vnext.149",
     "react-native-svg-transformer": "^0.14.3",
-    "react-test-renderer": "16.8.6",
-    "rnpm-plugin-windows": "^0.5.1-0"
+    "react-test-renderer": "16.8.6"
   },
   "peerDependencies": {
     "@office-iss/react-native-win32": "0.27.3",
     "react": "^16.8.6",
-    "react-native": "^0.60.0",
-    "react-native-windows": "^0.60.0-vnext.149"
+    "react-native": "^0.60.0"
   },
   "jest": {
     "preset": "react-native"
@@ -64,10 +59,9 @@
   "metroBundles": {
     "name": "rnTester",
     "targets": [
-      "win32",
-      "windows"
+      "win32"
     ],
-    "entry": "./src/App.ts",
+    "entry": "./src/index.tsx",
     "outputPath": "./dist",
     "bundleName": "RNTester.bundle",
     "noJSExtension": true,
@@ -75,9 +69,6 @@
     "platforms": {
       "win32": {
         "outputPath": "./dist"
-      },
-      "windows": {
-        "bundleName": "index.windows.bundle"
       }
     }
   }
