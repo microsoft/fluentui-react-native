@@ -1149,7 +1149,7 @@
     core-js-pure "^3.0.0"
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.7.7", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.7.7", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
   version "7.9.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.2.tgz#d90df0583a3a252f09aaa619665367bae518db06"
   integrity sha512-NE2DtOdufG7R5vnfQUTehdTfNycfUANEtCa9PssN9O/xmTzP4E08UI797ixaei6hBEVL9BI/PsdJS5x7mWoB9Q==
@@ -20943,52 +20943,12 @@ react-native-web@^0.12.2:
     prop-types "^15.6.0"
     react-timer-mixin "^0.13.4"
 
-react-native-windows@0.60.0-vnext.149:
-  version "0.60.0-vnext.149"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.60.0-vnext.149.tgz#3a0e7b7b5b5d5c6530054802ea6fb2e60955d4fd"
-  integrity sha512-cQ0WVNHVtZazoMHQGVviu4a4Fc3TyyjGofgrRUIqy3vb5MprpmMphNhgfPQtAQocHd/Z/GQgBEX6vpp5tNVL7w==
-  dependencies:
-    "@babel/runtime" "^7.4.0"
-    "@react-native-community/cli" "^2.6.0"
-    cli-spinners "^2.2.0"
-    create-react-class "^15.6.3"
-    envinfo "^7.5.0"
-    fbjs "^1.0.0"
-    glob "^7.1.1"
-    ora "^3.4.0"
-    prop-types "^15.7.2"
-    regenerator-runtime "^0.13.2"
-    shelljs "^0.7.8"
-    username "^5.1.0"
-    uuid "^3.3.2"
-    xml-parser "^1.2.1"
-
 react-native-windows@^0.0.0-master.45:
   version "0.0.0-master.45"
   resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.0.0-master.45.tgz#f38e9ea7702492695c25c4efec890d33f01c0533"
   integrity sha512-pdYNk6eNDrWF+50WWZegNZat7R0bzXWkwXKm/0+tgI1HyF8fTOeg6v8wFHNW6cMYi/VMCqZnygMhXdOHdEcOYA==
   dependencies:
     "@babel/runtime" "^7.8.4"
-    cli-spinners "^2.2.0"
-    create-react-class "^15.6.3"
-    envinfo "^7.5.0"
-    fbjs "^1.0.0"
-    glob "^7.1.1"
-    ora "^3.4.0"
-    prop-types "^15.7.2"
-    regenerator-runtime "^0.13.2"
-    shelljs "^0.7.8"
-    username "^5.1.0"
-    uuid "^3.3.2"
-    xml-parser "^1.2.1"
-
-react-native-windows@^0.60.0-vnext.149:
-  version "0.60.0-vnext.154"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.60.0-vnext.154.tgz#40b5f91d947ce4f14d14801282a7e79637d53127"
-  integrity sha512-Sgl7YBFkBd+Vf+SxTH0P2af59gmbcJ23LIuD1sqTFPf/PymRS21PzT7kP7yCmoQeWrvWTmY44/4sPpreqkzz5w==
-  dependencies:
-    "@babel/runtime" "^7.4.0"
-    "@react-native-community/cli" "^2.6.0"
     cli-spinners "^2.2.0"
     create-react-class "^15.6.3"
     envinfo "^7.5.0"
