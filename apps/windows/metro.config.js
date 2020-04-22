@@ -6,8 +6,10 @@
  */
 const path = require('path');
 const blacklist = require('metro-config/src/defaults/blacklist');
+const {getWatchFolders} = require('@uifabricshared/build-native');
 
 module.exports = {
+  watchFolders: getWatchFolders(),
   resolver: {
     resolveRequest: require('react-native-windows/metro-react-native-platform').reactNativePlatformResolver(
       {windows: 'react-native-windows'},

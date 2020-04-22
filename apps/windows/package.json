@@ -6,7 +6,8 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "windows": "react-native run-windows"
+    "windows": "react-native run-windows",
+    "bundle": "react-native bundle --platform windows --entry-file index.js --bundle-output dist/index.bundle"
   },
   "dependencies": {
     "react": "16.11.0",
@@ -17,6 +18,7 @@
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^0.0.5",
+    "@uifabricshared/build-native": "0.1.1",
     "babel-jest": "^24.9.0",
     "eslint": "^6.5.1",
     "jest": "^24.9.0",
