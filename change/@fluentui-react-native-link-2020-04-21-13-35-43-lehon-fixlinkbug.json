@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix Link issues on UWP",
-  "packageName": "@fluentui-react-native/link",
-  "email": "lehon@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-04-21T20:35:43.226Z"
-}
