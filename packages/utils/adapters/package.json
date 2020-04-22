@@ -24,7 +24,7 @@
     "@types/react-native": "^0.60.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "react-native": "^0.60.0",
+    "react-native": "^0.62.0",
     "react-native-web": "^0.12.2",
     "react-native-windows": "^0.0.0-master.45"
   },
