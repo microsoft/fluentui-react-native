@@ -16,7 +16,6 @@
     "jest": "^25.0.0",
     "just-repo-utils": "^0.2.0",
     "just-task": "^0.14.3",
-    "metro-60": "npm:metro@^0.54.0",
     "metro-config-60": "npm:metro-config@^0.54.0"
   },
   "devDependencies": {
