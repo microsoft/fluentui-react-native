@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/themed-stylesheet
 
-This log was last generated on Tue, 21 Apr 2020 00:41:10 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Apr 2020 17:03:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.2
+
+Tue, 21 Apr 2020 17:03:45 GMT
+
+### Patches
+
+- Bump beachball and trigger republish of packages (#173) (jasonmo@microsoft.com)
 
 ## 0.3.1
 
