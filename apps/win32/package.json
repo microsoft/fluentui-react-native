@@ -27,7 +27,7 @@
     "@fluentui-react-native/tester": "^0.0.1",
     "@uifabricshared/theming-react-native": "0.7.0",
     "@uifabricshared/themed-stylesheet": "0.3.2",
-    "react": "16.8.6",
+    "react": "^16.11.0",
     "react-native": "^0.62.0",
     "react-native-svg": "^11.0.0"
   },
@@ -36,13 +36,12 @@
     "@office-iss/rex-win32": "0.0.35",
     "@react-native-community/eslint-config": "^0.0.3",
     "@types/prop-types": "15.5.1",
-    "@types/react": "16.8.23",
-    "@types/react-dom": "16.8.5",
-    "@types/react-native": "^0.60.0",
+    "@types/react": "^16.9.34",
+    "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "metro-react-native-babel-preset": "^0.54.1",
-    "react": "16.8.6",
+    "react": "^16.11.0",
     "react-native": "^0.62.0",
     "react-native-windows": "^0.0.0-master.45",
     "react-native-svg-transformer": "^0.14.3",
@@ -50,7 +49,7 @@
   },
   "peerDependencies": {
     "@office-iss/react-native-win32": "0.27.3",
-    "react": "^16.8.6",
+    "react": "^16.11.0",
     "react-native": "^0.62.0"
   },
   "jest": {
