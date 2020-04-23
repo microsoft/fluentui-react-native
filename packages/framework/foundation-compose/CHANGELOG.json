@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Tue, 21 Apr 2020 00:41:10 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.1",
+      "version": "1.6.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "update beachball hook to use new prepublish strategy",
+            "author": "jasonmo@microsoft.com",
+            "commit": "7bc030df722a6fcb6f693658b9d80f4617a26713",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Apr 2020 22:36:03 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.6.0",
       "version": "1.6.0",

@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Fri, 17 Apr 2020 22:36:03 GMT and should not be manually modified.
+This log was last generated on Wed, 22 Apr 2020 02:30:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.2
+
+Wed, 22 Apr 2020 02:30:04 GMT
+
+### Patches
+
+- fix Link issues on UWP (lehon@microsoft.com)
+
+## 0.5.0
+
+Tue, 21 Apr 2020 17:03:45 GMT
+
+### Minor changes
+
+- Update link settings to reflect new fluent typeramp (krsiler@microsoft.com)
+
+## 0.4.1
+
+Tue, 21 Apr 2020 00:41:10 GMT
+
+### Patches
+
+- update beachball hook to use new prepublish strategy (jasonmo@microsoft.com)
 
 ## 0.4.0
 

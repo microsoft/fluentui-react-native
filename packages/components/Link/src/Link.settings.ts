@@ -6,9 +6,7 @@ import { IViewProps } from '@fluentui-react-native/adapters';
 export const settings: IComposeSettings<ILinkType> = [
   {
     tokens: {
-      fontFamily: 'primary',
-      fontSize: 'medium',
-      fontWeight: 'medium',
+      variant: 'secondaryStandard',
       color: 'link'
     },
     root: {
@@ -16,6 +14,11 @@ export const settings: IComposeSettings<ILinkType> = [
         margin: 0,
         textDecorationLine: 'underline'
       } as IViewProps['style']
+    },
+    content: {
+      style: {
+        textDecorationLine: 'underline'
+      }
     },
     _precedence: ['visited', 'hovered', 'pressed', 'disabled'],
     _overrides: {

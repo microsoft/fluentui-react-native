@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "update beachball hook to use new prepublish strategy",
-  "packageName": "@fluentui-react-native/checkbox",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-04-20T17:10:23.790Z"
-}
