@@ -38,6 +38,7 @@
     "@microsoft/load-themed-styles": "^1.7.13",
     "@microsoft/loader-load-themed-styles": "^1.6.0",
     "@octokit/rest": "^16.28.2",
+    "@react-native-community/cli": "^4.7.0",
     "@types/dedent": "0.7.0",
     "@types/enzyme": "^3.10.5",
     "@types/es6-collections": "^0.5.29",
