@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/radio-group",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "A cross-platform opinionated Radio Group component",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -19,9 +19,9 @@
   },
   "dependencies": {
     "@uifabricshared/foundation-compose": "^1.6.3",
-    "@fluentui-react-native/adapters": "^0.2.1",
-    "@fluentui-react-native/pressable": "^0.3.3",
-    "@fluentui-react-native/text": "^0.5.0",
+    "@fluentui-react-native/adapters": "^0.2.2",
+    "@fluentui-react-native/pressable": "^0.3.4",
+    "@fluentui-react-native/text": "^0.5.1",
     "@fluentui-react-native/tokens": "^0.4.0"
   },
   "devDependencies": {

@@ -1,0 +1,11 @@
+//
+//  Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
+//
+
+#include "Pods/Target Support Files/Pods-FluentUITester/Pods-FluentUITester.release.xcconfig"
+#include "Common.xcconfig"
+
+ENABLE_NS_ASSERTIONS = NO
+SWIFT_COMPILATION_MODE = wholemodule
+SWIFT_OPTIMIZATION_LEVEL = -O
