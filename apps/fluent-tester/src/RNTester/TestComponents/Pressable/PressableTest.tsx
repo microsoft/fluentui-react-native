@@ -1,10 +1,9 @@
 import * as React from 'react';
-import * as ReactNative from 'react-native';
 import { Text, Pressable, IPressableState } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { useHoverState, useFocusState, usePressState } from '@fluentui/react-native';
 import { Square } from '../Common/Square';
-import { StyleSheet, View, ViewProps } from 'react-native';
+import { Alert, GestureResponderEvent, StyleSheet, View, ViewProps, ViewState } from 'react-native';
 
 const styles = StyleSheet.create({
   dottedBorder: {
@@ -12,21 +11,21 @@ const styles = StyleSheet.create({
     padding: 8,
     margin: 4,
     borderStyle: 'dotted',
-    borderColor: 'red'
+    borderColor: 'red',
   },
   solidBorder: {
     borderWidth: 1,
     padding: 8,
     margin: 4,
     borderStyle: 'solid',
-    borderColor: 'black'
+    borderColor: 'black',
   },
   notfocused: {
     borderWidth: 1,
     padding: 8,
     margin: 4,
     borderColor: '#ababab',
-    borderStyle: 'solid'
+    borderStyle: 'solid',
   },
   focused: {
     borderWidth: 1,
@@ -34,7 +33,7 @@ const styles = StyleSheet.create({
     margin: 4,
     borderStyle: 'solid',
     borderColor: 'black',
-    backgroundColor: 'lightblue'
+    backgroundColor: 'lightblue',
   },
   notPressed: {
     borderWidth: 1,
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderColor: '#ababab',
-    borderStyle: 'solid'
+    borderStyle: 'solid',
   },
   pressed: {
     borderWidth: 1,
@@ -53,11 +52,11 @@ const styles = StyleSheet.create({
     height: 30,
     borderStyle: 'dashed',
     borderColor: 'black',
-    backgroundColor: 'lightgreen'
-  }
+    backgroundColor: 'lightgreen',
+  },
 });
 
-function renderStyle(state: IPressableState): ReactNative.ViewStyle {
+function renderStyle(state: IPressableState): ViewStyle {
   return (state.pressed && { opacity: 0.5 }) || {};
 }
 
@@ -107,9 +106,9 @@ const PressComponent: React.FunctionComponent<ViewProps> = (props: ViewProps) =>
   const [pressProps, pressState] = usePressState(props);
 
   const onTouchEnd = React.useCallback(
-    (e: ReactNative.GestureResponderEvent) => {
+    (e: GestureResponderEvent) => {
       pressProps.onTouchEnd && pressProps.onTouchEnd(e);
-      ReactNative.Alert.alert('Alert.', 'Object has been pressed.');
+      Alert.alert('Alert.', 'Object has been pressed.');
     },
     [pressProps]
   );

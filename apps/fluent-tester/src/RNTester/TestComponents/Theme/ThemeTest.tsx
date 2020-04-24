@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactNative from 'react-native';
+import { FlatList, View, ViewStyle, TextStyle, StyleSheet } from 'react-native';
 import { getHostSettingsWin32, ThemeProvider, useTheme, IThemeDefinition, ThemingModuleHelper } from '@uifabricshared/theming-react-native';
 import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
 import { commonTestStyles } from '../Common/styles';
@@ -13,7 +13,7 @@ const brandColors = {
   Word: ['#E3ECFA', '#A5B9D1', '#7DA3C6', '#4A78B0', '#3C65A4', '#2B579A', '#124078', '#002050'],
   Excel: ['#E9F5EE', '#9FCDB3', '#6EB38A', '#4E9668', '#3F8159', '#217346', '#0E5C2F', '#004B1C'],
   Powerpoint: ['#FCF0ED', '#FDC9B5', '#ED9583', '#E86E58', '#C75033', '#B7472A', '#A92B1A', '#740912'],
-  Outlook: ['#CCE3F5', '#B3D6F2', '#69AFE5', '#2488D8', '#0078D7', '#106EBE', '#1664A7', '#135995']
+  Outlook: ['#CCE3F5', '#B3D6F2', '#69AFE5', '#2488D8', '#0078D7', '#106EBE', '#1664A7', '#135995'],
 };
 
 // This IProcessTheme takes the parent theme and shims in the brand colors selected in the RadioGroup
@@ -56,41 +56,41 @@ const getThemedStyles = themedStyleSheet((theme: ITheme) => {
       height: 20,
       marginRight: 5,
       borderWidth: 2,
-      borderColor: theme.colors.bodyText
+      borderColor: theme.colors.bodyText,
     },
     extraLargeStandardEmphasis: {
       color: hostSettings ? hostSettings.palette.TextEmphasis : theme.colors.bodyText,
       fontSize: theme.typography.sizes.header,
       fontWeight: theme.typography.weights.regular,
-      fontFamily: theme.typography.families.primary
-    } as ReactNative.TextStyle,
+      fontFamily: theme.typography.families.primary,
+    } as TextStyle,
     largeStandard: {
       color: theme.colors.bodyText,
       fontSize: theme.typography.sizes.body,
       fontWeight: theme.typography.weights.regular,
       fontFamily: theme.typography.families.primary,
-      marginBottom: 5
-    } as ReactNative.TextStyle,
+      marginBottom: 5,
+    } as TextStyle,
     stackStyle: {
       borderWidth: 2,
       borderColor: theme.colors.focusBorder,
       padding: 12,
       margin: 8,
-      backgroundColor: theme.colors.background
-    }
+      backgroundColor: theme.colors.background,
+    },
   };
 });
 
-const styles = ReactNative.StyleSheet.create({
+const styles = StyleSheet.create({
   swatchItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 5
+    marginVertical: 5,
   },
   pickerContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly'
-  }
+    justifyContent: 'space-evenly',
+  },
 });
 
 const Panel: React.FunctionComponent = () => {
@@ -98,17 +98,17 @@ const Panel: React.FunctionComponent = () => {
   const onClick = React.useCallback(() => setDisabled(!disabled), [disabled, setDisabled]);
   const themedStyles = getThemedStyles(useTheme());
   return (
-    <ReactNative.View style={[commonTestStyles.view, themedStyles.stackStyle]}>
+    <View style={[commonTestStyles.view, themedStyles.stackStyle]}>
       <PrimaryButton onClick={onClick} content="Primary Button" disabled={disabled} />
       <Button onClick={onClick} content="Default Button" disabled={disabled} />
       <StealthButton onClick={onClick} content="Stealth Button" disabled={disabled} />
       <Text>This is a text element</Text>
       <Button onClick={onClick} content="This button has longer text" disabled={disabled} />
-    </ReactNative.View>
+    </View>
   );
 };
 
-const getSwatchColorStyle = (color: string): ReactNative.ViewStyle => {
+const getSwatchColorStyle = (color: string): ViewStyle => {
   styles[color] = styles[color] || { backgroundColor: color };
   return styles[color];
 };
@@ -117,10 +117,10 @@ type SemanticColorProps = { color: string; name: string };
 const SemanticColor: React.FunctionComponent<SemanticColorProps> = (p: SemanticColorProps) => {
   const themedStyles = getThemedStyles(useTheme());
   return (
-    <ReactNative.View style={styles.swatchItem}>
-      <ReactNative.View style={[getSwatchColorStyle(p.color), themedStyles.swatch]} />
+    <View style={styles.swatchItem}>
+      <View style={[getSwatchColorStyle(p.color), themedStyles.swatch]} />
       <Text>{p.name}</Text>
-    </ReactNative.View>
+    </View>
   );
 };
 
@@ -138,9 +138,7 @@ const SwatchList: React.FunctionComponent = () => {
   );
 
   const flattenArray = React.useCallback(() => {
-    return Object.keys(hostSettings.palette)
-      .sort()
-      .map(aggregator);
+    return Object.keys(hostSettings.palette).sort().map(aggregator);
   }, [hostSettings.palette, aggregator]);
 
   const paletteAsArray = React.useMemo(flattenArray, [flattenArray]);
@@ -149,12 +147,12 @@ const SwatchList: React.FunctionComponent = () => {
     return <SemanticColor key={name} color={color} name={name} />;
   }, []);
   return (
-    <ReactNative.View style={[commonTestStyles.view]}>
+    <View style={[commonTestStyles.view]}>
       <Text style={themedStyles.largeStandard}>getHostSettingsWin32(theme: ITheme).palette</Text>
-      <ReactNative.View style={themedStyles.stackStyle}>
-        <ReactNative.FlatList data={paletteAsArray} renderItem={renderSwatch} />
-      </ReactNative.View>
-    </ReactNative.View>
+      <View style={themedStyles.stackStyle}>
+        <FlatList data={paletteAsArray} renderItem={renderSwatch} />
+      </View>
+    </View>
   );
 };
 
@@ -169,10 +167,10 @@ const ThemeTestInner: React.FunctionComponent = () => {
 
   const [theme, setTheme] = React.useState('Default');
   return (
-    <ReactNative.View>
+    <View>
       <Text style={themedStyles.extraLargeStandardEmphasis}>Configure Theme</Text>
       <Separator />
-      <ReactNative.View style={styles.pickerContainer}>
+      <View style={styles.pickerContainer}>
         <RadioGroup label="Pick App Colors" onChange={onAppChange} defaultSelectedKey="Office">
           <RadioButton buttonKey="Office" content="Office" />
           {Object.keys(brandColors).map((app: string) => (
@@ -185,7 +183,7 @@ const ThemeTestInner: React.FunctionComponent = () => {
           <RadioButton buttonKey="Caterpillar" content="Caterpillar (Custom JS Theme)" />
           <RadioButton buttonKey="WhiteColors" content="WhiteColors (Platform Theme)" />
         </RadioGroup>
-      </ReactNative.View>
+      </View>
       <Text style={themedStyles.extraLargeStandardEmphasis}>{theme + ' Theme'}</Text>
       <Separator />
       <ThemeProvider theme={theme}>
@@ -194,7 +192,7 @@ const ThemeTestInner: React.FunctionComponent = () => {
       <Text style={themedStyles.extraLargeStandardEmphasis}>Host-specific Theme Settings</Text>
       <Separator />
       <SwatchList />
-    </ReactNative.View>
+    </View>
   );
 };
 
