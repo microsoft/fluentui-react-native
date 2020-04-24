@@ -124,13 +124,13 @@ export const getThemedStyles = themedStyleSheet((t: ITheme) => {
     style1: {
       backgroundColor: t.colors.background,
       borderStyle: 'solid',
-      borderWidth: 1
+      borderWidth: 1,
     },
     style2: {
       backgroundColor: t.colors.primaryButtonBackground,
       borderStyle: 'solid',
-      borderWidth: 1
-    }
+      borderWidth: 1,
+    },
   };
 });
 ```
@@ -141,11 +141,11 @@ export const getThemedStyles = themedStyleSheet((t: ITheme) => {
 // MyAppImpl.tsx
 
 import * as React from 'react';
-import * as ReactNative from 'react-native';
+import { Text, ViewProps } from 'react-native';
 import { useTheme } from '@uifabricshared/theming-react-native';
 import { getThemedStyles } from './styles';
 
-export const ThemedView: React.FunctionComponent<ReactNative.ViewProps> = (p: ReactNative.ViewProps) => {
+export const ThemedView: React.FunctionComponent<ViewProps> = (p: ViewProps) => {
   const { userStyle, ...rest } = p;
   const theme = useTheme();
   const styles = getThemedStyles(theme);
@@ -155,7 +155,7 @@ export const ThemedView: React.FunctionComponent<ReactNative.ViewProps> = (p: Re
 export const MyAppImpl = () => {
   return (
     <ThemedView>
-      <ReactNative.Text>Hello, World!</ReactNative.Text>
+      <Text>Hello, World!</Text>
     </ThemedView>
   );
 };

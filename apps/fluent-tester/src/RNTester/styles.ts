@@ -1,24 +1,24 @@
-import * as ReactNative from 'react-native';
+import { StyleSheet } from 'react-native';
 
-export const commonTestStyles = ReactNative.StyleSheet.create({
+export const commonTestStyles = StyleSheet.create({
   viewStyle: {
     minHeight: 200,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   stackStyle: {
     borderWidth: 2,
     borderColor: '#bdbdbd',
     padding: 12,
-    margin: 8
+    margin: 8,
   },
   separatorStackStyle: {
     height: 200,
     flexDirection: 'row',
-    justifyContent: 'space-evenly'
-  }
+    justifyContent: 'space-evenly',
+  },
 });
 
-export const fabricTesterStyles = ReactNative.StyleSheet.create({
+export const fabricTesterStyles = StyleSheet.create({
   root: {
     flex: 1,
     flexGrow: 1,
@@ -27,35 +27,35 @@ export const fabricTesterStyles = ReactNative.StyleSheet.create({
     minWidth: 300,
     justifyContent: 'flex-start',
     alignItems: 'stretch',
-    padding: 4
+    padding: 4,
   },
 
   testHeader: {
     marginBottom: 8,
     fontSize: 14,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
 
   testList: {
-    width: 160
+    width: 160,
   },
 
   testListContainerStyle: {
     flexDirection: 'column',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
   },
 
   testListItem: {
-    width: 150
+    width: 150,
   },
 
   separator: {
     marginHorizontal: 8,
-    width: 2
+    width: 2,
   },
 
   noTest: {
     alignSelf: 'center',
-    fontSize: 14
-  }
+    fontSize: 14,
+  },
 });
