@@ -2819,6 +2819,20 @@
   resolved "https://registry.yarnpkg.com/@uifabric/prettier-rules/-/prettier-rules-7.0.4.tgz#03082a6cc4b586104738a24892c56e0f1d3df1b6"
   integrity sha512-PK60wLAjPrG2l93r1l/VY2BmnC1la0oxIXYBuln5DOAFJcSXMea9RxoNjuqhhqZGZo6aLjO7lW070MeVOvkABQ==
 
+"@uifabricshared/themed-stylesheet@0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@uifabricshared/themed-stylesheet/-/themed-stylesheet-0.3.2.tgz#5fdaa6d822c42e4d463cfc10c073188304a5d5b7"
+  integrity sha512-L7Xovp7ek+WiQgieS+XKPyYMCuzhZq1HOuGQUSiiF+k2ity3sjcD+4Wd9MHrIDazecPRIIqdWM+Sb/Bi5mKG3A==
+
+"@uifabricshared/theming-react-native@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@uifabricshared/theming-react-native/-/theming-react-native-0.7.0.tgz#521c7b694677053ff934234b8ad88cba75b762f8"
+  integrity sha512-S52nIZ4B5ZASLNYHLa6mW5cmsvcxerj+cRYT3HrbdzB//eIjvQxpkQLzMfpK/nerP2q3/9pbT3jYluKglp+EYw==
+  dependencies:
+    "@uifabricshared/foundation-settings" "^0.5.2"
+    "@uifabricshared/theme-registry" "^0.3.2"
+    "@uifabricshared/theming-ramp" "^0.9.0"
+
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.9.0.tgz#bd850604b4042459a5a41cd7d338cbed695ed964"
