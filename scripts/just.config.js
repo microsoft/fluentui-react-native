@@ -44,6 +44,7 @@ module.exports = function preset() {
   option('bundleName', { type: 'string' });
   option('server');
   option('port', { type: 'number' });
+  option('cli');
 
   // for options that have a check/fix switch this puts them into fix mode
   option('fix');
@@ -75,6 +76,7 @@ module.exports = function preset() {
   task('metro', () =>
     metroTask({
       dev: !!argv().dev,
+      ...(argv().cli && { cli: true }),
       ...(argv().platform && { platform: argv().platform }),
       ...(argv().bundleName && { bundleName: argv().bundleName }),
       ...(argv().server && { server: true }),

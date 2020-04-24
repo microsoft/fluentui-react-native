@@ -28,6 +28,18 @@ function getBlacklistRE(rnPath: string): RegExp {
 }
 
 /**
+ * Get the watch folders for a mono-repo, based on position in the repo as well as the location of dependencies
+ */
+export function getWatchFolders(): string[] {
+  return [
+    path.resolve(findGitRoot(), 'node_modules'),
+    ...getPackageInfo()
+      .dependencies()
+      .paths()
+  ];
+}
+
+/**
  * This adds platform specific options to a metro configuration.  Note that this directly modifies the object because subtle
  * error can creep up with merging
  */
@@ -69,15 +81,15 @@ export function addPlatformMetroConfig(platform: PlatformValue, base: any = {}):
  */
 export async function configureMetro(optionsToMerge?: object) {
   const {
-    resolver: { sourceExts, assetExts },
+    resolver: { sourceExts, assetExts }
   } = await getDefaultConfig();
 
   const options = {
     // WatchFolders is only needed due to the yarn workspace layout of node_modules, we need to watch the symlinked locations separately
-    watchFolders: [path.resolve(findGitRoot(), 'node_modules'), ...getPackageInfo().dependencies().paths()],
+    watchFolders: getWatchFolders(),
     resolver: {
       resolverMainFields: ['react-native', 'browser', 'main'],
-      assetExts: assetExts.filter((ext) => ext !== 'svg'),
+      assetExts: assetExts.filter(ext => ext !== 'svg'),
       sourceExts: [...sourceExts, 'svg']
     },
     transformer: {

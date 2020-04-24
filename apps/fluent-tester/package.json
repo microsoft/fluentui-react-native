@@ -16,69 +16,37 @@
     "code-style": "fluentui-scripts code-style",
     "lint": "fluentui-scripts eslint",
     "start": "fluentui-scripts metro --server",
-    "bundle": "fluentui-scripts metro",
-    "bundle-dev": "fluentui-scripts metro --dev",
-    "bundle-windows": "fluentui-scripts metro --platform windows",
-    "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
-    "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useLiveReload --pluginProps",
-    "run-win32-devmain": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps"
+    "bundle": "fluentui-scripts bundle"
   },
   "dependencies": {
     "@fluentui/react-native": "0.15.7",
     "@fluentui-react-native/stack": "0.1.0",
     "@uifabricshared/theming-react-native": "0.7.2",
     "@uifabricshared/themed-stylesheet": "0.3.3",
-    "react": "16.8.6",
-    "react-native": "^0.60.0",
-    "react-native-windows": "^0.60.0-vnext.149",
-    "react-native-svg": "^11.0.0",
-    "rnpm-plugin-windows": "^0.5.1-0"
+    "react-native-svg": "^11.0.0"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.27.3",
     "@office-iss/rex-win32": "0.0.35",
-    "@react-native-community/eslint-config": "^0.0.3",
+    "@react-native-community/eslint-config": "^1.1.0",
     "@types/prop-types": "15.5.1",
-    "@types/react": "16.8.23",
-    "@types/react-dom": "16.8.5",
-    "@types/react-native": "^0.60.0",
+    "@types/react": "^16.9.34",
+    "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "metro-react-native-babel-preset": "^0.54.1",
-    "react": "16.8.6",
-    "react-native": "^0.60.0",
-    "react-native-windows": "^0.60.0-vnext.149",
+    "react": "16.11.0",
+    "react-native": "0.62.2",
+    "react-native-windows": "^0.0.0-master.45",
     "react-native-svg-transformer": "^0.14.3",
-    "react-test-renderer": "16.8.6",
+    "react-test-renderer": "~16.11.0",
     "rnpm-plugin-windows": "^0.5.1-0"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "0.27.3",
-    "react": "^16.8.6",
-    "react-native": "^0.60.0",
-    "react-native-windows": "^0.60.0-vnext.149"
+    "react": "16.11.0",
+    "react-native": "0.62.2"
   },
   "jest": {
     "preset": "react-native"
-  },
-  "metroBundles": {
-    "name": "rnTester",
-    "targets": [
-      "win32",
-      "windows"
-    ],
-    "entry": "./src/index.ts",
-    "outputPath": "./dist",
-    "bundleName": "RNTester.bundle",
-    "noJSExtension": true,
-    "noPlatformSuffix": true,
-    "platforms": {
-      "win32": {
-        "outputPath": "./dist"
-      },
-      "windows": {
-        "bundleName": "index.windows.bundle"
-      }
-    }
   }
 }
