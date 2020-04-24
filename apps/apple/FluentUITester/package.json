@@ -10,7 +10,7 @@
     "start:macos": "node node_modules/react-native-macos/local-cli/cli.js start --use-react-native-macos"
   },
   "dependencies": {
-    "react": "~16.11.0",
+    "react": "16.11.0",
     "react-native": "0.60.0",
     "react-native-macos": "^0.60.0-0"
   },
