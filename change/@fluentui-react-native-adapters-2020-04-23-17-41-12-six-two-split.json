@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "add apps/mobile to replace expo",
+  "packageName": "@fluentui-react-native/adapters",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-04-24T00:40:46.357Z"
+}
