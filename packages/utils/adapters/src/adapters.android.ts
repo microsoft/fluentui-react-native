@@ -13,6 +13,7 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessibilityRole: true,
   accessibilityState: true,
   accessibilityStates: true,
+  accessibilityValue: true,
   accessibilityHint: true,
   collapsable: true,
   hitSlop: true,
@@ -32,6 +33,7 @@ const _viewMask: IFilterMask<IViewProps> = {
   onResponderMove: true,
   onResponderReject: true,
   onAccessibilityAction: true,
+  onAccessibilityEscape: true,
   onAccessibilityTap: true,
   onMagicTap: true,
   onResponderRelease: true,
@@ -67,9 +69,11 @@ const _textMask: IFilterMask<ITextProps> = {
   accessibilityState: true,
   accessibilityStates: true,
   accessibilityTraits: true,
+  accessibilityValue: true,
   accessibilityViewIsModal: true,
   accessible: true,
   onAccessibilityAction: true,
+  onAccessibilityEscape: true,
   onAccessibilityTap: true,
   importantForAccessibility: true,
   testID: true,
@@ -102,9 +106,11 @@ const _imageMask: IFilterMask<IImageProps> = {
   accessibilityState: true,
   accessibilityStates: true,
   accessibilityTraits: true,
+  accessibilityValue: true,
   accessibilityViewIsModal: true,
   accessible: true,
   onAccessibilityAction: true,
+  onAccessibilityEscape: true,
   onAccessibilityTap: true,
   importantForAccessibility: true,
   style: true,
@@ -128,7 +134,7 @@ const _imageMask: IFilterMask<IImageProps> = {
   defaultSource: true,
   width: true,
   height: true,
-  fadeDuration: true
+  fadeDuration: true,
 };
 
 export function filterViewProps(propName: string): boolean {

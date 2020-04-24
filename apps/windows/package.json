@@ -1,0 +1,43 @@
+{
+  "name": "FluentTester-windows",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint .",
+    "windows": "react-native run-windows",
+    "bundle": "fluentui-scripts metro --cli"
+  },
+  "dependencies": {
+    "@fluentui-react-native/tester": "^0.0.1",
+    "@uifabricshared/theming-react-native": "0.7.4",
+    "react": "16.11.0",
+    "react-native": "0.62.2",
+    "react-native-windows": "^0.0.0-master.45"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/runtime": "^7.6.2",
+    "@react-native-community/eslint-config": "^1.1.0",
+    "@uifabricshared/build-native": "0.1.1",
+    "babel-jest": "^25.4.0",
+    "eslint": "^6.5.1",
+    "jest": "^25.4.0",
+    "metro-config": "^0.58.0",
+    "metro-react-native-babel-preset": "^0.58.0",
+    "react-test-renderer": "~16.11.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "metroBundles": {
+    "targets": [
+      "windows"
+    ],
+    "entry": "index.js",
+    "outputPath": "./dist",
+    "bundleName": "index.bundle",
+    "noPlatformSuffix": true
+  }
+}

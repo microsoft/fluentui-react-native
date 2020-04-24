@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactNative from 'react-native';
+import { ScreenRect } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
@@ -31,7 +31,7 @@ export interface ICalloutTokens extends IBackgroundColorTokens, IBorderTokens {
    * AnchorRect arbitrary anchor rectangle; coordinate system is in DIPs, relative
    * to the React surface origin.
    */
-  anchorRect?: ReactNative.ScreenRect;
+  anchorRect?: ScreenRect;
 
   /**
    * Width of the beak on the Callout indicating its anchor.

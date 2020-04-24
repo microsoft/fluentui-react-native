@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Fri, 24 Apr 2020 19:41:08 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.2.4",
+      "version": "0.2.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add apps/mobile to replace expo",
+            "author": "jasonmo@microsoft.com",
+            "commit": "1d2b333a0d29109c6734f43d949699ede91f3358",
+            "package": "@fluentui-react-native/adapters"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 24 Apr 2020 19:11:27 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "renormalize files",
+            "author": "jasonmo@microsoft.com",
+            "commit": "dc062498d62d6f52c1d350d48cd463322f29471d",
+            "package": "@fluentui-react-native/adapters"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Apr 2020 23:50:25 GMT",
       "tag": "@fluentui-react-native/adapters_v0.2.2",
       "version": "0.2.2",
