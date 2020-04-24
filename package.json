@@ -37,7 +37,6 @@
   "workspaces": {
     "packages": [
       "apps/*",
-      "docs",
       "packages/**",
       "scripts"
     ]

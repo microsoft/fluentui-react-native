@@ -21,9 +21,7 @@ export interface BundleDetails {
 export type BundleDefinition = BundleDetails & {
   name?: string;
   targets?: AllPlatforms[];
-  platforms?: {
-    [K in AllPlatforms]: BundleDetails;
-  };
+  platforms?: { [K in AllPlatforms]: BundleDetails };
 };
 
 export type MetroBundles = BundleDefinition | BundleDefinition[];
@@ -60,7 +58,7 @@ function loadBundleDefinition(bundleName?: string): BundleDefinition {
 
   const metroBundles = asArray<BundleDefinition>(packageConfig.metroBundles);
   if (bundleName) {
-    return metroBundles.find((bundle) => bundle.name === bundleName) || {};
+    return metroBundles.find(bundle => bundle.name === bundleName) || {};
   }
 
   if (metroBundles.length > 1) {
@@ -140,7 +138,7 @@ function runMetroFromCli(platform: AllPlatforms, entry: string, out: string, dev
         out,
         '--dev',
         devValue,
-        ...((sourceMap && ['--sourcemap-output', sourceMap]) || []),
+        ...((sourceMap && ['--sourcemap-output', sourceMap]) || [])
       ],
       options
     );
@@ -186,7 +184,7 @@ async function runMetroDirect(
       minify: !dev,
       out,
       optimize: !dev,
-      sourceMap,
+      sourceMap
     });
   }
 

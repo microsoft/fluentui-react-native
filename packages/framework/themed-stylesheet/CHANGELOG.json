@@ -2,6 +2,21 @@
   "name": "@uifabricshared/themed-stylesheet",
   "entries": [
     {
+      "date": "Fri, 24 Apr 2020 19:11:27 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.3.3",
+      "version": "0.3.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "renormalize files",
+            "author": "jasonmo@microsoft.com",
+            "commit": "dc062498d62d6f52c1d350d48cd463322f29471d",
+            "package": "@uifabricshared/themed-stylesheet"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Apr 2020 17:03:45 GMT",
       "tag": "@uifabricshared/themed-stylesheet_v0.3.2",
       "version": "0.3.2",

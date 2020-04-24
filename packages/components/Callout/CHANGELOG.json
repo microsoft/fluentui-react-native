@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Fri, 24 Apr 2020 19:11:27 GMT",
+      "tag": "@fluentui-react-native/callout_v0.4.6",
+      "version": "0.4.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "renormalize files",
+            "author": "jasonmo@microsoft.com",
+            "commit": "dc062498d62d6f52c1d350d48cd463322f29471d",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 24 Apr 2020 17:13:37 GMT",
+      "tag": "@fluentui-react-native/callout_v0.4.5",
+      "version": "0.4.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Dont import * from react-native",
+            "author": "acoates@microsoft.com",
+            "commit": "dde56dbae6703bf17ed840ffac6aecc840d1ec35",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Apr 2020 00:41:10 GMT",
       "tag": "@fluentui-react-native/callout_v0.4.1",
       "version": "0.4.1",

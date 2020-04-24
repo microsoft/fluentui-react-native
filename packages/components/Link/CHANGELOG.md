@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Wed, 22 Apr 2020 02:30:04 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Apr 2020 19:11:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.4
+
+Fri, 24 Apr 2020 19:11:27 GMT
+
+### Patches
+
+- renormalize files (jasonmo@microsoft.com)
+
+## 0.5.3
+
+Fri, 24 Apr 2020 17:13:37 GMT
+
+### Patches
+
+- Dont import * from react-native (acoates@microsoft.com)
 
 ## 0.5.2
 
