@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Tue, 21 Apr 2020 17:03:45 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Apr 2020 17:13:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.1
+
+Fri, 24 Apr 2020 17:13:37 GMT
+
+### Patches
+
+- Dont import * from react-native (acoates@microsoft.com)
 
 ## 0.7.0
 

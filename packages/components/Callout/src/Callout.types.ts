@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactNative from 'react-native';
+import { ScreenRect } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
@@ -27,7 +27,7 @@ export type DirectionalHint =
   | 'bottomRightEdge';
 
 export interface ICalloutTokens extends IBackgroundColorTokens, IBorderTokens {
-  anchorRect?: ReactNative.ScreenRect;
+  anchorRect?: ScreenRect;
   beakWidth?: number;
   directionalHint?: DirectionalHint;
   gapSpace?: number;
