@@ -67,7 +67,12 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
       </View>
 
       {showStandardCallout && (
-        <Callout anchorRect={myRect} onDismiss={onDismissStandardCallout} onShow={onShowStandardCallout}>
+        <Callout
+          anchorRect={myRect}
+          onDismiss={onDismissStandardCallout}
+          onShow={onShowStandardCallout}
+          accessibilityLabel="Standard Callout"
+        >
           <View style={{ height: 200, width: 400 }}>
             <Button content="test button please ignore" onClick={toggleShowStandardCallout} />
           </View>
@@ -88,9 +93,16 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
       </View>
 
       {showCustomizedCallout && (
-        <Callout target={custBtnRef} onDismiss={onDismissCustomizedCallout} onShow={onShowCustomizedCallout}>
+        <Callout
+          target={custBtnRef}
+          onDismiss={onDismissCustomizedCallout}
+          onShow={onShowCustomizedCallout}
+          accessibilityLabel="Customized Callout"
+          accessibilityRole="alert"
+          accessibilityOnShowAnnouncement="Be informed that a customized callout has been opened."
+        >
           <View style={{ height: 300, width: 500 }}>
-            <Button content="test button please also ignore" onClick={toggleShowCustomizedCallout} />
+            <Text>just some text so it doesn't take focus and isn't empty.</Text>
           </View>
         </Callout>
       )}
