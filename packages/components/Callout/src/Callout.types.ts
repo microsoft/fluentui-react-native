@@ -51,11 +51,6 @@ export interface ICalloutTokens extends IBackgroundColorTokens, IBorderTokens {
   gapSpace?: number;
 
   /**
-   * Defines the minimum padding between the Callout and the display edges.
-   */
-  minPadding?: number;
-
-  /**
    * Defines a maximum height for the Callout.
    */
   maxHeight?: number | string;
@@ -64,6 +59,11 @@ export interface ICalloutTokens extends IBackgroundColorTokens, IBorderTokens {
    * Defines a maximum width for the Callout.
    */
   maxWidth?: number | string;
+
+  /**
+   * Defines the minimum padding between the Callout and the display edges.
+   */
+  minPadding?: number;
 }
 
 export interface ICalloutProps extends ICalloutTokens {
