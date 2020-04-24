@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Fri, 24 Apr 2020 19:11:27 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.5",
+      "version": "1.6.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "renormalize files",
+            "author": "jasonmo@microsoft.com",
+            "commit": "dc062498d62d6f52c1d350d48cd463322f29471d",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Apr 2020 00:41:10 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.6.1",
       "version": "1.6.1",

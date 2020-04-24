@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Fri, 24 Apr 2020 19:11:27 GMT",
+      "tag": "@fluentui-react-native/text_v0.5.3",
+      "version": "0.5.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "renormalize files",
+            "author": "jasonmo@microsoft.com",
+            "commit": "dc062498d62d6f52c1d350d48cd463322f29471d",
+            "package": "@fluentui-react-native/text"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Apr 2020 23:50:25 GMT",
       "tag": "@fluentui-react-native/text_v0.5.1",
       "version": "0.5.1",

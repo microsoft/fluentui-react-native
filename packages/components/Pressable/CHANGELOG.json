@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/pressable",
   "entries": [
     {
+      "date": "Fri, 24 Apr 2020 19:11:27 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.3.6",
+      "version": "0.3.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "renormalize files",
+            "author": "jasonmo@microsoft.com",
+            "commit": "dc062498d62d6f52c1d350d48cd463322f29471d",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Apr 2020 00:41:10 GMT",
       "tag": "@fluentui-react-native/pressable_v0.3.1",
       "version": "0.3.1",

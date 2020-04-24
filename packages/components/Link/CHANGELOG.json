@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Fri, 24 Apr 2020 19:11:27 GMT",
+      "tag": "@fluentui-react-native/link_v0.5.4",
+      "version": "0.5.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "renormalize files",
+            "author": "jasonmo@microsoft.com",
+            "commit": "dc062498d62d6f52c1d350d48cd463322f29471d",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Apr 2020 17:13:37 GMT",
       "tag": "@fluentui-react-native/link_v0.5.3",
       "version": "0.5.3",

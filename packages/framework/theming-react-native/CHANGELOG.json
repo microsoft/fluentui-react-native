@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Fri, 24 Apr 2020 19:11:27 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.7.2",
+      "version": "0.7.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "renormalize files",
+            "author": "jasonmo@microsoft.com",
+            "commit": "dc062498d62d6f52c1d350d48cd463322f29471d",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Apr 2020 17:13:37 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.7.1",
       "version": "0.7.1",
