@@ -2,9 +2,11 @@
 import Metro from 'metro';
 import path from 'path';
 import fs from 'fs';
+import os from 'os';
 import { logger, TaskFunction } from 'just-task';
 import { AllPlatforms } from './platforms';
 import { addPlatformMetroConfig } from './configureMetro';
+import { spawnSync } from 'child_process';
 
 export interface BundleDetails {
   /**
@@ -14,7 +16,6 @@ export interface BundleDetails {
   outputPath?: string;
   bundleName?: string;
   noPlatformSuffix?: boolean;
-  noJSExtension?: boolean;
 }
 
 export type BundleDefinition = BundleDetails & {
@@ -59,7 +60,7 @@ function loadBundleDefinition(bundleName?: string): BundleDefinition {
 
   const metroBundles = asArray<BundleDefinition>(packageConfig.metroBundles);
   if (bundleName) {
-    return metroBundles.find(bundle => bundle.name === bundleName) || {};
+    return metroBundles.find((bundle) => bundle.name === bundleName) || {};
   }
 
   if (metroBundles.length > 1) {
@@ -108,11 +109,106 @@ export interface MetroTaskOptions {
    * port override for server mode
    */
   port?: number;
+
+  /**
+   * route the task to the CLI
+   */
+  cli?: boolean;
+}
+
+function runMetroFromCli(platform: AllPlatforms, entry: string, out: string, dev: boolean, server: boolean, port?: number): void {
+  const options = { cwd: process.cwd(), stdio: 'inherit' } as any;
+  const yarnCmd = os.platform() === 'win32' ? 'yarn.cmd' : 'yarn';
+  if (server) {
+    spawnSync(yarnCmd, ['react-native', 'start', ...(port && ['--port', port.toString()])], options);
+  } else {
+    logger.info(`Starting metro bundling for ${platform}.`);
+    logger.info(`Entry file ${entry}.`);
+    logger.info(`Output file ${out}.`);
+    const sourceMap = dev && out + '.map';
+    const devValue = dev ? 'true' : 'false';
+    spawnSync(
+      yarnCmd,
+      [
+        'react-native',
+        'bundle',
+        '--platform',
+        platform,
+        '--entry-file',
+        entry,
+        '--bundle-output',
+        out,
+        '--dev',
+        devValue,
+        ...((sourceMap && ['--sourcemap-output', sourceMap]) || []),
+      ],
+      options
+    );
+  }
+}
+
+async function runMetroDirect(
+  platform: AllPlatforms,
+  entry: string,
+  out: string,
+  dev: boolean,
+  server: boolean,
+  port?: number
+): Promise<void> {
+  // get the config file, checking if there is a platform specific override
+  let configName = `metro.config.${platform}.js`;
+  configName = fs.existsSync(path.join(process.cwd(), configName)) ? configName : 'metro.config.js';
+  const configBase = await Metro.loadConfig({ config: configName });
+
+  // add platform specific details for bundling this config
+  const config = addPlatformMetroConfig(platform, configBase) as any;
+  if (server) {
+    config.server = config.server || {};
+    config.server.port = port;
+  }
+
+  if (server) {
+    // for server start up the server, note that this is for only one platform, at least by configuration
+    logger.info(`Starting metro server for ${platform} platform on port ${port}.`);
+
+    await Metro.runServer(config, { port: port });
+  } else {
+    // log out what is about to happen
+    logger.info(`Starting metro bundling for ${platform}.`);
+    logger.info(`Entry file ${entry}.`);
+    logger.info(`Output file ${out}.`);
+    const sourceMap = dev && out + '.map';
+
+    // now run the bundle task itself
+    await Metro.runBuild(config, {
+      platform: platform,
+      entry,
+      minify: !dev,
+      out,
+      optimize: !dev,
+      sourceMap,
+    });
+  }
+
+  // optionally rename the output to remove the JS extension if requested
+  if (!out.endsWith('.js')) {
+    const metroBundlePath = out + '.js';
+    if (fs.existsSync(metroBundlePath)) {
+      if (fs.existsSync(out)) {
+        logger.verbose(`Deleting existing output file at ${out}...`);
+        fs.unlinkSync(out);
+      }
+
+      logger.verbose(`Renaming ${metroBundlePath} to ${out}...`);
+      fs.renameSync(metroBundlePath, out);
+    }
+  }
+
+  logger.info(`Finished bundling ${out} for ${platform}.`);
 }
 
 export function metroTask(options: MetroTaskOptions = {}): TaskFunction {
-  const { bundleName, platform, dev = false, server } = options;
-  const port = options.port || (platform === 'windows' ? 8081 : 8080);
+  const { bundleName, platform, dev = false, server, cli, port } = options;
 
   return async function metroPack(done) {
     logger.verbose(`Starting metropack task with platform ${bundleName}...`);
@@ -126,22 +222,10 @@ export function metroTask(options: MetroTaskOptions = {}): TaskFunction {
       const platformDefinition = getOptionsForPlatform(definition, targetPlatform);
 
       // set up file input and output
-      const { entry = './lib/index.js', outputPath = './dist', bundleName, noJSExtension, noPlatformSuffix } = platformDefinition;
+      const { entry = './lib/index.js', outputPath = './dist', bundleName, noPlatformSuffix } = platformDefinition;
       let out = path.join(outputPath, bundleName);
       if (!noPlatformSuffix) {
         out = `${out}.${targetPlatform}`;
-      }
-
-      // get the config file, checking if there is a platform specific override
-      let configName = `metro.config.${targetPlatform}.js`;
-      configName = fs.existsSync(path.join(process.cwd(), configName)) ? configName : 'metro.config.js';
-      const configBase = await Metro.loadConfig({ config: configName });
-
-      // add platform specific details for bundling this config
-      const config = addPlatformMetroConfig(targetPlatform, configBase) as any;
-      if (server) {
-        config.server = config.server || {};
-        config.server.port = port;
       }
 
       // ensure the parent directory exists for the target output
@@ -150,48 +234,12 @@ export function metroTask(options: MetroTaskOptions = {}): TaskFunction {
         fs.mkdirSync(parentDirectory);
       }
 
-      if (server) {
-        // for server start up the server, note that this is for only one platform, at least by configuration
-        logger.info(`Starting metro server for ${targetPlatform} platform on port ${port}.`);
-
-        await Metro.runServer(config, { port: port });
-
-        // break out of the loop, doesn't make sense to run servers for multiple platforms
-        break;
+      if (cli) {
+        runMetroFromCli(targetPlatform, entry, out, !!dev, server, port);
       } else {
-        // log out what is about to happen
-        logger.info(`Starting metro bundling for ${targetPlatform}.`);
-        logger.info(`Entry file ${entry}.`);
-        logger.info(`Output file ${out}.`);
-
-        // now run the bundle task itself
-        await Metro.runBuild(config, {
-          platform: targetPlatform,
-          entry,
-          minify: !dev,
-          out,
-          optimize: !dev,
-          sourceMap: dev
-        });
-
-        // optionally rename the output to remove the JS extension if requested
-        if (noJSExtension && !out.endsWith('.js')) {
-          const metroBundlePath = out + '.js';
-          if (fs.existsSync(metroBundlePath)) {
-            if (fs.existsSync(out)) {
-              logger.verbose(`Deleting existing output file at ${out}...`);
-              fs.unlinkSync(out);
-            }
-
-            logger.verbose(`Renaming ${metroBundlePath} to ${out}...`);
-            fs.renameSync(metroBundlePath, out);
-          }
-        }
-
-        logger.info(`Finished bundling ${out} for ${targetPlatform}.`);
+        await runMetroDirect(targetPlatform, entry, out, !!dev, server, port);
       }
     }
-
     if (done) {
       done();
     }

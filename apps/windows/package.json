@@ -1,5 +1,5 @@
 {
-  "name": "FluentTester",
+  "name": "FluentTester-windows",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,7 +7,7 @@
     "test": "jest",
     "lint": "eslint .",
     "windows": "react-native run-windows",
-    "bundle": "react-native bundle --platform windows --entry-file index.js --bundle-output dist/index.bundle"
+    "bundle": "fluentui-scripts metro --cli"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",
@@ -29,5 +29,14 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "metroBundles": {
+    "targets": [
+      "windows"
+    ],
+    "entry": "index.js",
+    "outputPath": "./dist",
+    "bundleName": "index.bundle",
+    "noPlatformSuffix": true
   }
 }

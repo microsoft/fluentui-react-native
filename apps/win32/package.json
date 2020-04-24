@@ -56,19 +56,12 @@
     "preset": "react-native"
   },
   "metroBundles": {
-    "name": "rnTester",
     "targets": [
       "win32"
     ],
     "entry": "./src/index.tsx",
     "outputPath": "./dist",
     "bundleName": "RNTester.bundle",
-    "noJSExtension": true,
-    "noPlatformSuffix": true,
-    "platforms": {
-      "win32": {
-        "outputPath": "./dist"
-      }
-    }
+    "noPlatformSuffix": true
   }
 }
