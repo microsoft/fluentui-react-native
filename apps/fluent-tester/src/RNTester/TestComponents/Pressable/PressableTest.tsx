@@ -3,7 +3,7 @@ import { Text, Pressable, IPressableState } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { useHoverState, useFocusState, usePressState } from '@fluentui/react-native';
 import { Square } from '../Common/Square';
-import { Alert, GestureResponderEvent, StyleSheet, View, ViewProps, ViewState } from 'react-native';
+import { Alert, GestureResponderEvent, StyleSheet, View, ViewProps, ViewStyle } from 'react-native';
 
 const styles = StyleSheet.create({
   dottedBorder: {
