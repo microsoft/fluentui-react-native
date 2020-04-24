@@ -2,6 +2,21 @@
   "name": "@uifabricshared/themed-stylesheet",
   "entries": [
     {
+      "date": "Tue, 21 Apr 2020 17:03:45 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.3.2",
+      "version": "0.3.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump beachball and trigger republish of packages (#173)",
+            "author": "jasonmo@microsoft.com",
+            "commit": "ea3319b28bf5c03cf941b0789efdc4c104bd7526",
+            "package": "@uifabricshared/themed-stylesheet"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Apr 2020 00:41:10 GMT",
       "tag": "@uifabricshared/themed-stylesheet_v0.3.1",
       "version": "0.3.1",

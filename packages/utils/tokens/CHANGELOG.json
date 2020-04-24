@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Fri, 24 Apr 2020 17:13:37 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.4.1",
+      "version": "0.4.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Dont import * from react-native",
+            "author": "acoates@microsoft.com",
+            "commit": "dde56dbae6703bf17ed840ffac6aecc840d1ec35",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Apr 2020 17:03:45 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add variants and new fluent typeramp to text",
+            "author": "krsiler@microsoft.com",
+            "commit": "b034558f160d8815b11b16cd8d30e274e035c87e",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Apr 2020 00:41:10 GMT",
       "tag": "@fluentui-react-native/tokens_v0.3.1",
       "version": "0.3.1",

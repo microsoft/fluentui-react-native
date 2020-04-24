@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactNative from 'react-native';
+import { FlatList, View, ViewStyle, TextStyle, StyleSheet } from 'react-native';
 import { getHostSettingsWin32, ThemeProvider, useTheme, IThemeDefinition, ThemingModuleHelper } from '@uifabricshared/theming-react-native';
 import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
 import { commonTestStyles } from '../Common/styles';
@@ -63,14 +63,14 @@ const getThemedStyles = themedStyleSheet((theme: ITheme) => {
       fontSize: theme.typography.sizes.header,
       fontWeight: theme.typography.weights.regular,
       fontFamily: theme.typography.families.primary
-    } as ReactNative.TextStyle,
+    } as TextStyle,
     largeStandard: {
       color: theme.colors.bodyText,
       fontSize: theme.typography.sizes.body,
       fontWeight: theme.typography.weights.regular,
       fontFamily: theme.typography.families.primary,
       marginBottom: 5
-    } as ReactNative.TextStyle,
+    } as TextStyle,
     stackStyle: {
       borderWidth: 2,
       borderColor: theme.colors.focusBorder,
@@ -81,7 +81,7 @@ const getThemedStyles = themedStyleSheet((theme: ITheme) => {
   };
 });
 
-const styles = ReactNative.StyleSheet.create({
+const styles = StyleSheet.create({
   swatchItem: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -98,17 +98,17 @@ const Panel: React.FunctionComponent = () => {
   const onClick = React.useCallback(() => setDisabled(!disabled), [disabled, setDisabled]);
   const themedStyles = getThemedStyles(useTheme());
   return (
-    <ReactNative.View style={[commonTestStyles.view, themedStyles.stackStyle]}>
+    <View style={[commonTestStyles.view, themedStyles.stackStyle]}>
       <PrimaryButton onClick={onClick} content="Primary Button" disabled={disabled} />
       <Button onClick={onClick} content="Default Button" disabled={disabled} />
       <StealthButton onClick={onClick} content="Stealth Button" disabled={disabled} />
       <Text>This is a text element</Text>
       <Button onClick={onClick} content="This button has longer text" disabled={disabled} />
-    </ReactNative.View>
+    </View>
   );
 };
 
-const getSwatchColorStyle = (color: string): ReactNative.ViewStyle => {
+const getSwatchColorStyle = (color: string): ViewStyle => {
   styles[color] = styles[color] || { backgroundColor: color };
   return styles[color];
 };
@@ -117,10 +117,10 @@ type SemanticColorProps = { color: string; name: string };
 const SemanticColor: React.FunctionComponent<SemanticColorProps> = (p: SemanticColorProps) => {
   const themedStyles = getThemedStyles(useTheme());
   return (
-    <ReactNative.View style={styles.swatchItem}>
-      <ReactNative.View style={[getSwatchColorStyle(p.color), themedStyles.swatch]} />
+    <View style={styles.swatchItem}>
+      <View style={[getSwatchColorStyle(p.color), themedStyles.swatch]} />
       <Text>{p.name}</Text>
-    </ReactNative.View>
+    </View>
   );
 };
 
@@ -149,12 +149,12 @@ const SwatchList: React.FunctionComponent = () => {
     return <SemanticColor key={name} color={color} name={name} />;
   }, []);
   return (
-    <ReactNative.View style={[commonTestStyles.view]}>
+    <View style={[commonTestStyles.view]}>
       <Text style={themedStyles.largeStandard}>getHostSettingsWin32(theme: ITheme).palette</Text>
-      <ReactNative.View style={themedStyles.stackStyle}>
-        <ReactNative.FlatList data={paletteAsArray} renderItem={renderSwatch} />
-      </ReactNative.View>
-    </ReactNative.View>
+      <View style={themedStyles.stackStyle}>
+        <FlatList data={paletteAsArray} renderItem={renderSwatch} />
+      </View>
+    </View>
   );
 };
 
@@ -169,10 +169,10 @@ const ThemeTestInner: React.FunctionComponent = () => {
 
   const [theme, setTheme] = React.useState('Default');
   return (
-    <ReactNative.View>
+    <View>
       <Text style={themedStyles.extraLargeStandardEmphasis}>Configure Theme</Text>
       <Separator />
-      <ReactNative.View style={styles.pickerContainer}>
+      <View style={styles.pickerContainer}>
         <RadioGroup label="Pick App Colors" onChange={onAppChange} defaultSelectedKey="Office">
           <RadioButton buttonKey="Office" content="Office" />
           {Object.keys(brandColors).map((app: string) => (
@@ -185,7 +185,7 @@ const ThemeTestInner: React.FunctionComponent = () => {
           <RadioButton buttonKey="Caterpillar" content="Caterpillar (Custom JS Theme)" />
           <RadioButton buttonKey="WhiteColors" content="WhiteColors (Platform Theme)" />
         </RadioGroup>
-      </ReactNative.View>
+      </View>
       <Text style={themedStyles.extraLargeStandardEmphasis}>{theme + ' Theme'}</Text>
       <Separator />
       <ThemeProvider theme={theme}>
@@ -194,7 +194,7 @@ const ThemeTestInner: React.FunctionComponent = () => {
       <Text style={themedStyles.extraLargeStandardEmphasis}>Host-specific Theme Settings</Text>
       <Separator />
       <SwatchList />
-    </ReactNative.View>
+    </View>
   );
 };
 
