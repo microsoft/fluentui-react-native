@@ -13,7 +13,7 @@ const brandColors = {
   Word: ['#E3ECFA', '#A5B9D1', '#7DA3C6', '#4A78B0', '#3C65A4', '#2B579A', '#124078', '#002050'],
   Excel: ['#E9F5EE', '#9FCDB3', '#6EB38A', '#4E9668', '#3F8159', '#217346', '#0E5C2F', '#004B1C'],
   Powerpoint: ['#FCF0ED', '#FDC9B5', '#ED9583', '#E86E58', '#C75033', '#B7472A', '#A92B1A', '#740912'],
-  Outlook: ['#CCE3F5', '#B3D6F2', '#69AFE5', '#2488D8', '#0078D7', '#106EBE', '#1664A7', '#135995'],
+  Outlook: ['#CCE3F5', '#B3D6F2', '#69AFE5', '#2488D8', '#0078D7', '#106EBE', '#1664A7', '#135995']
 };
 
 // This IProcessTheme takes the parent theme and shims in the brand colors selected in the RadioGroup
@@ -56,28 +56,28 @@ const getThemedStyles = themedStyleSheet((theme: ITheme) => {
       height: 20,
       marginRight: 5,
       borderWidth: 2,
-      borderColor: theme.colors.bodyText,
+      borderColor: theme.colors.bodyText
     },
     extraLargeStandardEmphasis: {
       color: hostSettings ? hostSettings.palette.TextEmphasis : theme.colors.bodyText,
       fontSize: theme.typography.sizes.header,
       fontWeight: theme.typography.weights.regular,
-      fontFamily: theme.typography.families.primary,
+      fontFamily: theme.typography.families.primary
     } as TextStyle,
     largeStandard: {
       color: theme.colors.bodyText,
       fontSize: theme.typography.sizes.body,
       fontWeight: theme.typography.weights.regular,
       fontFamily: theme.typography.families.primary,
-      marginBottom: 5,
+      marginBottom: 5
     } as TextStyle,
     stackStyle: {
       borderWidth: 2,
       borderColor: theme.colors.focusBorder,
       padding: 12,
       margin: 8,
-      backgroundColor: theme.colors.background,
-    },
+      backgroundColor: theme.colors.background
+    }
   };
 });
 
@@ -85,12 +85,12 @@ const styles = StyleSheet.create({
   swatchItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 5,
+    marginVertical: 5
   },
   pickerContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
-  },
+    justifyContent: 'space-evenly'
+  }
 });
 
 const Panel: React.FunctionComponent = () => {
@@ -138,7 +138,9 @@ const SwatchList: React.FunctionComponent = () => {
   );
 
   const flattenArray = React.useCallback(() => {
-    return Object.keys(hostSettings.palette).sort().map(aggregator);
+    return Object.keys(hostSettings.palette)
+      .sort()
+      .map(aggregator);
   }, [hostSettings.palette, aggregator]);
 
   const paletteAsArray = React.useMemo(flattenArray, [flattenArray]);
