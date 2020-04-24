@@ -45,7 +45,7 @@
     "babel-jest": "^25.2.3",
     "babel-plugin-module-resolver": "^4.0.0",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16.3": "^1.7.2",
+    "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.4.4",
     "eslint": "^6.3.0",
     "eslint-config-standard": "^14.1.0",

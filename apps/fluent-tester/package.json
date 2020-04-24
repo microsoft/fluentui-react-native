@@ -35,15 +35,15 @@
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "metro-react-native-babel-preset": "^0.54.1",
-    "react": "^16.11.0",
+    "react": "~16.11.0",
     "react-native": "^0.62.0",
     "react-native-windows": "^0.0.0-master.45",
     "react-native-svg-transformer": "^0.14.3",
-    "react-test-renderer": "16.8.6",
+    "react-test-renderer": "~16.11.0",
     "rnpm-plugin-windows": "^0.5.1-0"
   },
   "peerDependencies": {
-    "react": "^16.11.0",
+    "react": "~16.11.0",
     "react-native": "^0.62.0"
   },
   "jest": {

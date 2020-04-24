@@ -12,7 +12,7 @@
   "dependencies": {
     "babel-jest": "^25.0.0",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16.3": "^1.7.2",
+    "enzyme-adapter-react-16": "^1.15.2",
     "jest": "^25.0.0",
     "just-repo-utils": "^0.2.0",
     "just-task": "^0.14.3",
