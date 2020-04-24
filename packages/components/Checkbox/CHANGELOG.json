@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Fri, 24 Apr 2020 20:21:33 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.3.8",
+      "version": "0.3.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Merge branch 'master' of https://github.com/microsoft/fluentui-react-native",
+            "author": "safreibe@microsoft.com",
+            "commit": "73c8b2f83599431c8fd8c50b61c67edfe14ae174",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Apr 2020 19:41:08 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.3.7",
       "version": "0.3.7",
