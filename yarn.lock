@@ -2169,10 +2169,10 @@
     stacktrace-parser "^0.1.3"
     whatwg-fetch "^3.0.0"
 
-"@office-iss/rex-win32@0.0.35":
-  version "0.0.35"
-  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.0.35.tgz#d49066511ca66b5fa07401a0419a59a1cd13a193"
-  integrity sha512-51ZFQmalVHfS2l7OrHzHEVN3rfmYEhCyQZGEsYN4CYPrXGIZdyw6w6k5bBwj7nlea3wiWhHCXjQbplbNhb244A==
+"@office-iss/rex-win32@0.0.0-devmain.12823.10000":
+  version "0.0.0-devmain.12823.10000"
+  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.0.0-devmain.12823.10000.tgz#ad4e1cf040fc02e51fcc5f6ba926a3b6f2c14bb0"
+  integrity sha512-rAjjiSgUFcB0ogHSKklHF+CaDZd7OXCXrv0zkfDM4XY2xfJykOtnr6rT0OqRgZvInDT9RSxi0yuQ4ck1HV+Bdw==
   dependencies:
     command-line-args "^5.0.2"
     command-line-usage "^5.0.5"
@@ -2818,20 +2818,6 @@
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/@uifabric/prettier-rules/-/prettier-rules-7.0.4.tgz#03082a6cc4b586104738a24892c56e0f1d3df1b6"
   integrity sha512-PK60wLAjPrG2l93r1l/VY2BmnC1la0oxIXYBuln5DOAFJcSXMea9RxoNjuqhhqZGZo6aLjO7lW070MeVOvkABQ==
-
-"@uifabricshared/themed-stylesheet@0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@uifabricshared/themed-stylesheet/-/themed-stylesheet-0.3.2.tgz#5fdaa6d822c42e4d463cfc10c073188304a5d5b7"
-  integrity sha512-L7Xovp7ek+WiQgieS+XKPyYMCuzhZq1HOuGQUSiiF+k2ity3sjcD+4Wd9MHrIDazecPRIIqdWM+Sb/Bi5mKG3A==
-
-"@uifabricshared/theming-react-native@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@uifabricshared/theming-react-native/-/theming-react-native-0.7.0.tgz#521c7b694677053ff934234b8ad88cba75b762f8"
-  integrity sha512-S52nIZ4B5ZASLNYHLa6mW5cmsvcxerj+cRYT3HrbdzB//eIjvQxpkQLzMfpK/nerP2q3/9pbT3jYluKglp+EYw==
-  dependencies:
-    "@uifabricshared/foundation-settings" "^0.5.2"
-    "@uifabricshared/theme-registry" "^0.3.2"
-    "@uifabricshared/theming-ramp" "^0.9.0"
 
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
