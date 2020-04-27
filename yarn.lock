@@ -2819,11 +2819,6 @@
   resolved "https://registry.yarnpkg.com/@uifabric/prettier-rules/-/prettier-rules-7.0.4.tgz#03082a6cc4b586104738a24892c56e0f1d3df1b6"
   integrity sha512-PK60wLAjPrG2l93r1l/VY2BmnC1la0oxIXYBuln5DOAFJcSXMea9RxoNjuqhhqZGZo6aLjO7lW070MeVOvkABQ==
 
-"@uifabricshared/immutable-merge@0.3.4":
-  version "0.3.4"
-  resolved "https://registry.npmjs.org/@uifabricshared/immutable-merge/-/immutable-merge-0.3.4.tgz#1ac9f8115507901db5398b6b870beb8984b84513"
-  integrity sha512-sHLWWsOpdPFu1uQxctUPbJ082eHaFIa2/USxEXn3qIFFVwLbkoA1d0Vbnil64ptDcDzgtAcEugx5p0j3Hsc3LQ==
-
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.9.0.tgz#bd850604b4042459a5a41cd7d338cbed695ed964"

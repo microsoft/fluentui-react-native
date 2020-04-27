@@ -33,7 +33,7 @@
     "@uifabricshared/themed-settings": "^0.4.5",
     "@uifabricshared/foundation-composable": "^0.6.5",
     "@uifabricshared/foundation-tokens": "^0.5.5",
-    "@uifabricshared/immutable-merge": "0.3.4",
+    "@uifabricshared/immutable-merge": "^0.5.5",
     "@uifabricshared/theming-react-native": "^0.7.5",
     "@uifabricshared/theming-ramp": "^0.9.4"
   },
