@@ -1,1 +1,1 @@
-import './RNTester/RNTester';
+export * from './RNTester/index';

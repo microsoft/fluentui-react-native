@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "renormalize files",
-  "packageName": "@fluentui-react-native/persona-coin",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-04-24T07:22:12.343Z"
-}
