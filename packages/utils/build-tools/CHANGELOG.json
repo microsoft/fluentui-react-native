@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/build-tools",
   "entries": [
     {
+      "date": "Mon, 27 Apr 2020 20:17:01 GMT",
+      "tag": "@fluentui-react-native/build-tools_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "get just command that works with cli",
+            "author": "jasonmo@microsoft.com",
+            "commit": "1d2b333a0d29109c6734f43d949699ede91f3358",
+            "package": "@fluentui-react-native/build-tools"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 27 Apr 2020 19:11:44 GMT",
       "tag": "@fluentui-react-native/build-tools_v0.3.0",
       "version": "0.3.0",

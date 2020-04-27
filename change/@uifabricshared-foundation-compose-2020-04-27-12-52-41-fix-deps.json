@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "add missing merge dependency in foundation-compose",
-  "packageName": "@uifabricshared/foundation-compose",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-04-27T19:52:41.878Z"
-}

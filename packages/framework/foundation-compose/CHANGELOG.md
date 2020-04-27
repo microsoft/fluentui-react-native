@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Fri, 24 Apr 2020 19:41:08 GMT and should not be manually modified.
+This log was last generated on Mon, 27 Apr 2020 20:17:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.6.9
+
+Mon, 27 Apr 2020 20:17:01 GMT
+
+### Patches
+
+- add missing merge dependency in foundation-compose (jasonmo@microsoft.com)
 
 ## 1.6.6
 

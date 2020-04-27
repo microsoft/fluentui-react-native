@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Mon, 27 Apr 2020 20:17:01 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.9",
+      "version": "1.6.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add missing merge dependency in foundation-compose",
+            "author": "jasonmo@microsoft.com",
+            "commit": "0305261241ba60dc065b8ba2b46494a6e722ff9e",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Apr 2020 19:41:08 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.6.6",
       "version": "1.6.6",
