@@ -1,5 +1,5 @@
 import { ITheme } from './Theme.types';
-import { getStockWebPalette, ITypography, ISpacing, FontWeightValue, FontSize, IFontSizes, IFontVariants } from '@uifabricshared/theming-ramp';
+import { getStockWebPalette, ITypography, ISpacing, FontWeightValue, FontSize, IFontSizes, IVariants } from '@uifabricshared/theming-ramp';
 import { Platform } from 'react-native';
 
 function _defaultTypography(): ITypography {
@@ -40,19 +40,18 @@ function _defaultTypography(): ITypography {
       heroSemibold: { face: 'primary', size: 'hero', weight: 'semiBold' },
       heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: 'regular' },
       heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: 'semiBold' }
-    } as IFontVariants
+    } as IVariants
   };
 
-  const familiesDictApple = {
-    primary: 'System',
-    secondary: 'System',
-    cursive: 'System',
-    monospace: 'System',
-    sansSerif: 'System',
-    serif: 'System'
-  }
-
   if (Platform.OS === 'macos' || Platform.OS === 'ios') {
+    const familiesDictApple = {
+      primary: 'System',
+      secondary: 'System',
+      cursive: 'System',
+      monospace: 'System',
+      sansSerif: 'System',
+      serif: 'System'
+    }
     defaultsDict.families = familiesDictApple;
   }
 
