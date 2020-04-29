@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactNative from 'react-native';
+import { Alert } from 'react-native';
 import { Link } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { Square } from '../Common/Square';
@@ -7,7 +7,7 @@ import { stackStyle } from '../Common/styles';
 
 export const LinkTest: React.FunctionComponent<{}> = () => {
   const doPress = (): void => {
-    ReactNative.Alert.alert('Alert.', 'You have been alerted.');
+    Alert.alert('Alert.', 'You have been alerted.');
   };
   return (
     <Stack style={stackStyle}>

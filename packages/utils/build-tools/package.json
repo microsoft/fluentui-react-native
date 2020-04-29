@@ -5,18 +5,18 @@
   "main": "lib/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "private": true,
   "scripts": {
     "build": "just-scripts build",
     "clean": "just-scripts clean"
   },
   "dependencies": {
-    "babel-jest": "^25.0.0",
+    "babel-jest": "^25.4.0",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16.3": "^1.7.2",
-    "jest": "^25.0.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jest": "^25.4.0",
     "just-repo-utils": "^0.2.0",
     "just-task": "^0.14.3",
-    "metro-60": "npm:metro@^0.54.0",
     "metro-config-60": "npm:metro-config@^0.54.0"
   },
   "devDependencies": {

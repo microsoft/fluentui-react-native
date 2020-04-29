@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactNative from 'react-native';
+import { View } from 'react-native';
 import { Link } from '..';
 import * as renderer from 'react-test-renderer';
 
@@ -12,7 +12,7 @@ it('Link with child', () => {
   const tree = renderer
     .create(
       <Link content="Link with child" url="https://www.bing.com">
-        <ReactNative.View />
+        <View />
       </Link>
     )
     .toJSON();
