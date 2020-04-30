@@ -68,8 +68,19 @@ export interface ICalloutTokens extends IBackgroundColorTokens, IBorderTokens {
 
 export interface ICalloutProps extends ICalloutTokens {
   /*
+   * Used by screen readers to inform the user about the control.
+   */
+  accessibilityLabel?: string;
+
+  /*
+   * A string that should be announced when the callout is shown.
    */
   accessibilityOnShowAnnouncement?: string;
+
+  /*
+   * Used by screen readers to inform the user about the purpose of the control.
+   */
+  accessibilityRole?: string;
 
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.

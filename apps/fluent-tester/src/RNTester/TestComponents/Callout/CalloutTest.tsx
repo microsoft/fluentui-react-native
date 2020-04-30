@@ -9,7 +9,9 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
   const [isStandardCalloutVisible, setIsStandardCalloutVisible] = React.useState(false);
   const [isCustomizedCalloutVisible, setIsCustomizedCalloutVisible] = React.useState(false);
 
+  const stdBtnRef = React.useRef<Text>(null);
   const custBtnRef = React.useRef<Text>(null);
+  const [anchorRef, setAnchorRef] = React.useState(stdBtnRef);
 
   const toggleShowStandardCallout = React.useCallback(() => {
     setShowStandardCallout(!showStandardCallout);
@@ -28,6 +30,10 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
     // the isVisible state will be corrected to 'true' by the onShow callback.
     setIsCustomizedCalloutVisible(false);
   }, [showCustomizedCallout, setIsCustomizedCalloutVisible, setShowCustomizedCallout]);
+
+  const toggleCalloutRef = React.useCallback(() => {
+    setAnchorRef(anchorRef === stdBtnRef ? custBtnRef : stdBtnRef);
+  }, [anchorRef, setAnchorRef]);
 
   const onShowStandardCallout = React.useCallback(() => {
     setIsStandardCalloutVisible(true);
@@ -56,7 +62,9 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
   const myRect: ScreenRect = { screenX: 10, screenY: 10, width: 100, height: 100 };
   return (
     <View>
-      <Text style={fabricTesterStyles.testSection}>Standard Usage</Text>
+      <Text ref={stdBtnRef} style={fabricTesterStyles.testSection}>
+        Standard Usage
+      </Text>
       <Separator />
       <View style={{ flexDirection: 'row' }}>
         <Button content="Press for Callout" onClick={toggleShowStandardCallout} />
@@ -68,13 +76,13 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
 
       {showStandardCallout && (
         <Callout
-          anchorRect={myRect}
+          target={anchorRef}
           onDismiss={onDismissStandardCallout}
           onShow={onShowStandardCallout}
           accessibilityLabel="Standard Callout"
         >
           <View style={{ height: 200, width: 400 }}>
-            <Button content="test button please ignore" onClick={toggleShowStandardCallout} />
+            <Button content="click to change anchor" onClick={toggleCalloutRef} />
           </View>
         </Callout>
       )}
@@ -94,7 +102,7 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
 
       {showCustomizedCallout && (
         <Callout
-          target={custBtnRef}
+          anchorRect={myRect}
           onDismiss={onDismissCustomizedCallout}
           onShow={onShowCustomizedCallout}
           accessibilityLabel="Customized Callout"
@@ -102,7 +110,7 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
           accessibilityOnShowAnnouncement="Be informed that a customized callout has been opened."
         >
           <View style={{ height: 300, width: 500 }}>
-            <Text>just some text so it doesn't take focus and isn't empty.</Text>
+            <Text>just some text so it does not take focus and is not empty.</Text>
           </View>
         </Callout>
       )}
