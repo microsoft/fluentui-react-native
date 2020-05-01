@@ -9,8 +9,8 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
   const [isStandardCalloutVisible, setIsStandardCalloutVisible] = React.useState(false);
   const [isCustomizedCalloutVisible, setIsCustomizedCalloutVisible] = React.useState(false);
 
-  const stdBtnRef = React.useRef<Text>(null);
-  const custBtnRef = React.useRef<Text>(null);
+  const stdBtnRef = React.useRef<View>(null);
+  const custBtnRef = React.useRef<View>(null);
   const [anchorRef, setAnchorRef] = React.useState(stdBtnRef);
 
   const toggleShowStandardCallout = React.useCallback(() => {
@@ -62,11 +62,9 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
   const myRect: ScreenRect = { screenX: 10, screenY: 10, width: 100, height: 100 };
   return (
     <View>
-      <Text ref={stdBtnRef} style={fabricTesterStyles.testSection}>
-        Standard Usage
-      </Text>
+      <Text style={fabricTesterStyles.testSection}>Standard Usage</Text>
       <Separator />
-      <View style={{ flexDirection: 'row' }}>
+      <View ref={stdBtnRef} style={{ flexDirection: 'row' }}>
         <Button content="Press for Callout" onClick={toggleShowStandardCallout} />
         <Text>
           <Text>Visibility: </Text>
@@ -87,12 +85,10 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
         </Callout>
       )}
 
-      <Text ref={custBtnRef} style={fabricTesterStyles.testSection}>
-        Customized Usage
-      </Text>
+      <Text style={fabricTesterStyles.testSection}>Customized Usage</Text>
       <Separator />
 
-      <View style={{ flexDirection: 'row' }}>
+      <View ref={custBtnRef} style={{ flexDirection: 'row' }}>
         <Button content="Press for Callout" onClick={toggleShowCustomizedCallout} />
         <Text>
           <Text>Visibility: </Text>
