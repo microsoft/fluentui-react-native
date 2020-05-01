@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "use findNodeHandle to avoid serializing refobject",
-  "packageName": "@fluentui-react-native/callout",
-  "email": "ppatboyd@outlook.com",
-  "dependentChangeType": "patch",
-  "date": "2020-05-01T00:52:52.939Z"
-}
