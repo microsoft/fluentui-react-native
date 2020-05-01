@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Fri, 01 May 2020 00:23:50 GMT",
+      "tag": "@fluentui-react-native/callout_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add accessibility props and max width/height props to Callout",
+            "author": "ppatboyd@outlook.com",
+            "commit": "324863fde12b2541d25eba0d0e6ac46961965f37",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Apr 2020 19:41:08 GMT",
       "tag": "@fluentui-react-native/callout_v0.4.7",
       "version": "0.4.7",

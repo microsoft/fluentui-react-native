@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add accessibility props and max width/height props to Callout",
-  "packageName": "@fluentui-react-native/callout",
-  "email": "ppatboyd@outlook.com",
-  "dependentChangeType": "patch",
-  "date": "2020-04-30T18:24:46.578Z"
-}
