@@ -1,8 +1,56 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Fri, 17 Apr 2020 22:36:03 GMT and should not be manually modified.
+This log was last generated on Wed, 29 Apr 2020 21:00:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.7
+
+Wed, 29 Apr 2020 21:00:40 GMT
+
+### Patches
+
+- theme fix (chrishog@microsoft.com)
+
+## 0.7.3
+
+Fri, 24 Apr 2020 19:41:08 GMT
+
+### Patches
+
+- more package version updates (jasonmo@microsoft.com)
+
+## 0.7.2
+
+Fri, 24 Apr 2020 19:11:27 GMT
+
+### Patches
+
+- renormalize files (jasonmo@microsoft.com)
+
+## 0.7.1
+
+Fri, 24 Apr 2020 17:13:37 GMT
+
+### Patches
+
+- Dont import * from react-native (acoates@microsoft.com)
+
+## 0.7.0
+
+Tue, 21 Apr 2020 17:03:45 GMT
+
+### Minor changes
+
+- Add variants and new fluent typeramp to text (krsiler@microsoft.com)
+
+## 0.6.1
+
+Tue, 21 Apr 2020 00:41:10 GMT
+
+### Patches
+
+- update beachball hook to use new prepublish strategy (jasonmo@microsoft.com)
 
 ## 0.6.0
 

@@ -1,8 +1,24 @@
 # Change Log - @uifabricshared/foundation-composable
 
-This log was last generated on Fri, 17 Apr 2020 22:36:03 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Apr 2020 19:41:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.3
+
+Fri, 24 Apr 2020 19:41:08 GMT
+
+### Patches
+
+- more package version updates (jasonmo@microsoft.com)
+
+## 0.6.1
+
+Tue, 21 Apr 2020 00:41:10 GMT
+
+### Patches
+
+- update beachball hook to use new prepublish strategy (jasonmo@microsoft.com)
 
 ## 0.6.0
 

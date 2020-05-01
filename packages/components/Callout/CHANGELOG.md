@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Fri, 17 Apr 2020 22:36:03 GMT and should not be manually modified.
+This log was last generated on Fri, 01 May 2020 00:23:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.0
+
+Fri, 01 May 2020 00:23:50 GMT
+
+### Minor changes
+
+- Add accessibility props and max width/height props to Callout (ppatboyd@outlook.com)
+
+## 0.4.7
+
+Fri, 24 Apr 2020 19:41:08 GMT
+
+### Patches
+
+- more package version updates (jasonmo@microsoft.com)
+
+## 0.4.6
+
+Fri, 24 Apr 2020 19:11:27 GMT
+
+### Patches
+
+- renormalize files (jasonmo@microsoft.com)
+
+## 0.4.5
+
+Fri, 24 Apr 2020 17:13:37 GMT
+
+### Patches
+
+- Dont import * from react-native (acoates@microsoft.com)
+
+## 0.4.1
+
+Tue, 21 Apr 2020 00:41:10 GMT
+
+### Patches
+
+- update beachball hook to use new prepublish strategy (jasonmo@microsoft.com)
 
 ## 0.4.0
 

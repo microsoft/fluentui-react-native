@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theming-ramp",
-  "version": "0.8.0",
+  "version": "0.9.9",
   "description": "Theming Library",
   "repository": {
     "type": "git",
@@ -30,17 +30,17 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": "^0.5.0",
-    "@uifabricshared/immutable-merge": "^0.5.0"
+    "@uifabricshared/foundation-settings": "^0.5.10",
+    "@uifabricshared/immutable-merge": "^0.5.10"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
-    "@types/react": "16.8.23",
-    "react": "16.8.6",
+    "@types/react": "^16.9.34",
+    "react": "16.11.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
   },
   "peerDependencies": {
-    "react": "^16.8.6"
+    "react": "16.11.0"
   }
 }

@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/adapters
 
-This log was last generated on Fri, 17 Apr 2020 22:36:03 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Apr 2020 19:41:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.4
+
+Fri, 24 Apr 2020 19:41:08 GMT
+
+### Patches
+
+- add apps/mobile to replace expo (jasonmo@microsoft.com)
+
+## 0.2.3
+
+Fri, 24 Apr 2020 19:11:27 GMT
+
+### Patches
+
+- renormalize files (jasonmo@microsoft.com)
+
+## 0.2.2
+
+Tue, 21 Apr 2020 23:50:25 GMT
+
+### Patches
+
+- Fix package publishing (#163) (jasonmo@microsoft.com)
+
+## 0.2.1
+
+Tue, 21 Apr 2020 00:41:10 GMT
+
+### Patches
+
+- update beachball hook to use new prepublish strategy (jasonmo@microsoft.com)
 
 ## 0.2.0
 

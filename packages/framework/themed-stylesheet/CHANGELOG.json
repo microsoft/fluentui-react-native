@@ -2,6 +2,66 @@
   "name": "@uifabricshared/themed-stylesheet",
   "entries": [
     {
+      "date": "Fri, 24 Apr 2020 19:41:08 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.3.4",
+      "version": "0.3.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "more package version updates",
+            "author": "jasonmo@microsoft.com",
+            "commit": "1d2b333a0d29109c6734f43d949699ede91f3358",
+            "package": "@uifabricshared/themed-stylesheet"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 24 Apr 2020 19:11:27 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.3.3",
+      "version": "0.3.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "renormalize files",
+            "author": "jasonmo@microsoft.com",
+            "commit": "dc062498d62d6f52c1d350d48cd463322f29471d",
+            "package": "@uifabricshared/themed-stylesheet"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Apr 2020 17:03:45 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.3.2",
+      "version": "0.3.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump beachball and trigger republish of packages (#173)",
+            "author": "jasonmo@microsoft.com",
+            "commit": "ea3319b28bf5c03cf941b0789efdc4c104bd7526",
+            "package": "@uifabricshared/themed-stylesheet"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Apr 2020 00:41:10 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "update beachball hook to use new prepublish strategy",
+            "author": "jasonmo@microsoft.com",
+            "commit": "7bc030df722a6fcb6f693658b9d80f4617a26713",
+            "package": "@uifabricshared/themed-stylesheet"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Apr 2020 22:36:03 GMT",
       "tag": "@uifabricshared/themed-stylesheet_v0.3.0",
       "version": "0.3.0",

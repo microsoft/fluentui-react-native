@@ -1,25 +1,22 @@
 import { ITheme } from './Theme.types';
-import { getStockWebPalette, ITypography, ISpacing } from '@uifabricshared/theming-ramp';
+import { getStockWebPalette, ITypography, ISpacing, FontWeightValue, FontSize, IFontSizes, IVariants } from '@uifabricshared/theming-ramp';
+import { Platform } from 'react-native';
 
 function _defaultTypography(): ITypography {
-  return {
+
+  const defaultsDict = {
     sizes: {
-      xxxSmall: 8,
-      xxSmall: 9,
-      xSmall: 10,
-      small: 11,
-      medium: 12,
-      large: 14,
-      xLarge: 18,
-      xxLarge: 24,
-      xxxLarge: 32
-    },
+      caption: 8 as FontSize,
+      secondary: 9 as FontSize,
+      body: 11 as FontSize,
+      subheader: 12 as FontSize,
+      header: 15 as FontSize,
+      hero: 21 as FontSize,
+      heroLarge: 32 as FontSize
+    } as IFontSizes,
     weights: {
-      light: '200',
-      semiLight: '300',
-      medium: '500',
-      semiBold: '700',
-      bold: '900'
+      regular: '400' as FontWeightValue,
+      semiBold: '600' as FontWeightValue
     },
     families: {
       primary: 'Segoe UI',
@@ -28,8 +25,37 @@ function _defaultTypography(): ITypography {
       monospace: 'System',
       sansSerif: 'System',
       serif: 'System'
-    }
+    },
+    variants: {
+      captionStandard: { face: 'primary', size: 'caption', weight: 'regular' },
+      secondaryStandard: { face: 'primary', size: 'secondary', weight: 'regular' },
+      secondarySemibold: { face: 'primary', size: 'secondary', weight: 'semiBold' },
+      bodyStandard: { face: 'primary', size: 'body', weight: 'regular' },
+      bodySemibold: { face: 'primary', size: 'body', weight: 'semiBold' },
+      subheaderStandard: { face: 'primary', size: 'subheader', weight: 'regular' },
+      subheaderSemibold: { face: 'primary', size: 'subheader', weight: 'semiBold' },
+      headerStandard: { face: 'primary', size: 'header', weight: 'regular' },
+      headerSemibold: { face: 'primary', size: 'header', weight: 'semiBold' },
+      heroStandard: { face: 'primary', size: 'hero', weight: 'regular' },
+      heroSemibold: { face: 'primary', size: 'hero', weight: 'semiBold' },
+      heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: 'regular' },
+      heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: 'semiBold' }
+    } as IVariants
   };
+
+  if (Platform.OS === 'macos' || Platform.OS === 'ios') {
+    const familiesDictApple = {
+      primary: 'System',
+      secondary: 'System',
+      cursive: 'System',
+      monospace: 'System',
+      sansSerif: 'System',
+      serif: 'System'
+    }
+    defaultsDict.families = familiesDictApple;
+  }
+
+  return defaultsDict;
 }
 
 export function defaultSpacing(): ISpacing {
