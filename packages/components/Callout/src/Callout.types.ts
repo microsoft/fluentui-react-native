@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactNative from 'react-native';
+import { ScreenRect } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
@@ -7,7 +7,7 @@ import { IFocusable } from '@fluentui-react-native/interactive-hooks';
 export const calloutName = 'Callout';
 
 /**
- * Properties and Tokens for fabric native Callout
+ * Properties and Tokens for FluentUI React Native Callout
  */
 
 export type DirectionalHint =
@@ -27,14 +27,61 @@ export type DirectionalHint =
   | 'bottomRightEdge';
 
 export interface ICalloutTokens extends IBackgroundColorTokens, IBorderTokens {
-  anchorRect?: ReactNative.ScreenRect;
+  /**
+   * AnchorRect arbitrary anchor rectangle; coordinate system is in DIPs, relative
+   * to the React surface origin.
+   */
+  anchorRect?: ScreenRect;
+
+  /**
+   * Width of the beak on the Callout indicating its anchor.
+   */
   beakWidth?: number;
+
+  /**
+   * Defines the suggested drop direction and alignment for the Callout to use, relative
+   * to the anchor information.
+   */
   directionalHint?: DirectionalHint;
+
+  /**
+   * Defines the size of the gap between the anchor and the Callout.  Not used if
+   * no anchor information is provided.
+   */
   gapSpace?: number;
+
+  /**
+   * Defines a maximum height for the Callout.
+   */
+  maxHeight?: number | string;
+
+  /**
+   * Defines a maximum width for the Callout.
+   */
+  maxWidth?: number | string;
+
+  /**
+   * Defines the minimum padding between the Callout and the display edges.
+   */
   minPadding?: number;
 }
 
 export interface ICalloutProps extends ICalloutTokens {
+  /*
+   * Used by screen readers to inform the user about the control.
+   */
+  accessibilityLabel?: string;
+
+  /*
+   * A string that should be announced when the callout is shown.
+   */
+  accessibilityOnShowAnnouncement?: string;
+
+  /*
+   * Used by screen readers to inform the user about the purpose of the control.
+   */
+  accessibilityRole?: string;
+
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */

@@ -1,20 +1,22 @@
 import { ITheme } from './Theme.types';
-import { getStockWebPalette, ITypography, ISpacing } from '@uifabricshared/theming-ramp';
+import { getStockWebPalette, ITypography, ISpacing, FontWeightValue, FontSize, IFontSizes, IVariants } from '@uifabricshared/theming-ramp';
+import { Platform } from 'react-native';
 
 function _defaultTypography(): ITypography {
-  return {
+
+  const defaultsDict = {
     sizes: {
-      caption: 8,
-      secondary: 9,
-      body: 11,
-      subheader: 12,
-      header: 15,
-      hero: 21,
-      heroLarge: 32
-    },
+      caption: 8 as FontSize,
+      secondary: 9 as FontSize,
+      body: 11 as FontSize,
+      subheader: 12 as FontSize,
+      header: 15 as FontSize,
+      hero: 21 as FontSize,
+      heroLarge: 32 as FontSize
+    } as IFontSizes,
     weights: {
-      regular: '400',
-      semiBold: '600'
+      regular: '400' as FontWeightValue,
+      semiBold: '600' as FontWeightValue
     },
     families: {
       primary: 'Segoe UI',
@@ -38,8 +40,22 @@ function _defaultTypography(): ITypography {
       heroSemibold: { face: 'primary', size: 'hero', weight: 'semiBold' },
       heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: 'regular' },
       heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: 'semiBold' }
-    }
+    } as IVariants
   };
+
+  if (Platform.OS === 'macos' || Platform.OS === 'ios') {
+    const familiesDictApple = {
+      primary: 'System',
+      secondary: 'System',
+      cursive: 'System',
+      monospace: 'System',
+      sansSerif: 'System',
+      serif: 'System'
+    }
+    defaultsDict.families = familiesDictApple;
+  }
+
+  return defaultsDict;
 }
 
 export function defaultSpacing(): ISpacing {

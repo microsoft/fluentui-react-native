@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-composable",
-  "version": "0.6.2",
+  "version": "0.6.10",
   "description": "Composable component building blocks",
   "repository": {
     "type": "git",
@@ -30,12 +30,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": "^0.5.2"
+    "@uifabricshared/foundation-settings": "^0.5.10"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
-    "@types/react": "16.8.23",
-    "react": "16.8.6",
+    "@types/react": "^16.9.34",
+    "react": "16.11.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
   }

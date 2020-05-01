@@ -69,7 +69,7 @@ export function configureReactNativeJest(platform?: PlatformValue, customConfig?
       haste: {
         defaultPlatform: platform,
         platforms: getAllPlatforms(),
-        hasteImplModulePath: rnPath + 'jest/hasteImpl.js',
+        // hasteImplModulePath: rnPath + 'jest/hasteImpl.js',
         providesModuleNodeModules: [rnPackage]
       },
       transformIgnorePatterns: ['node_modules/(?!(react-native)/)'],

@@ -8,8 +8,8 @@ If you have an existing React Native project, it's easy to begin using FluentUI 
 
 ### Prerequisites
 
-* [Standard React Native dependencies](http://facebook.github.io/react-native/docs/getting-started.html#node-python2-jdk)
-* [Node.js](https://nodejs.org/en/download/)
+- [Standard React Native dependencies](https://reactnative.dev/docs/environment-setup)
+- [Node.js](https://nodejs.org/en/download/)
 
 ### Install FluentUI React Native into an existing project
 
@@ -25,7 +25,25 @@ After successful installation, you can test the package by importing components 
  import { Checkbox } from '@fluentui/react-native';
 ```
 
-Once you have the package installed, check out our [Hello World Fluent page](./docs/pages/HELLO_WORLD.md) to start writing code (Coming Soon).
+Once you have the package installed, check out our [Hello World Fluent page](https://github.com/microsoft/fluent-site/blob/master/packages/fluent-website/docs/windows/get-started/Hello-World.mdx) to start writing code (Coming Soon).
+
+## Documentation
+
+### Components and Controls
+
+Our component documentation is hosted in a separate repository, [Microsoft FluentUI Site](https://github.com/Microsoft/fluent-site) that will be published to its own website (Coming Soon).
+
+### Theming framework
+
+Our FluentUI framework documentation is found in this repository alongside the implementation.
+
+- [Theming Overview](./packages/framework/theming-react-native/README.md)
+- [StyleSheets](./packages/framework/themed-stylesheet/README.md)
+- [Customizing Theme Settings](./packages/framework/themed-settings/README.md)
+- [Theme Registry](./packages/framework/theme-registry/README.md)
+- [Tokens](./packages/framework/foundation-tokens/README.md)
+- [Settings and Slots](./packages/framework/foundation-settings/README.md)
+- [Compose](./packages/framework/foundation-compose/README.md) and [Composable](./packages/framework/foundation-composable/README.md)
 
 ## Developing in the repo
 
@@ -45,7 +63,9 @@ To start developing in the repository you can:
 After a successful yarn build, you can explore FluentUI Tester, our demo application to play with each of the controls. To run FluentUI Tester, please follow instructions in the [FluentUI Tester readme](./apps/fluent-tester/README.md).
 
 ### Beachball
+
 This repo manages semantic versioning and publishing using [Beachball](https://github.com/microsoft/beachball). When contributing, make sure to run the following before making a pull request:
+
 1. `yarn change` will take you through a command line wizard to generate change files
 2. Make sure to commit and push the newly generated change file
 

@@ -7,69 +7,84 @@ pool:
 variables:
   CI: true
 
-steps:
-  - checkout: self
-    persistCredentials: true
+jobs:
+  - job: ApplePR
+    displayName: Apple PR
+    pool:
+      vmImage: 'macos-10.15'
+      demands: ['xcode', 'sh', 'npm']
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+    strategy:
+      maxParallel: 4
+      matrix:
+        ios:
+          relative_directory: 'ios'
+          xcode_sdx: 'ios'
+          xcode_configuration: 'Debug'
+          xcode_workspacePath: 'apps/apple/FluentUITester/ios/FluentUITester.xcworkspace'
+          xcode_scheme: 'FluentUITester' #todo add debug/release schemes here
+          xcode_actions: 'build'
+          xcode_useXcpretty: true
+          xcode_destination: 'platform=iOS Simulator,OS=latest,name=iPhone 11'
+        macos:
+          relative_directory: 'macos'
+          xcode_sdx: 'macosx'
+          xcode_configuration: 'Debug'
+          xcode_workspacePath: 'apps/apple/FluentUITester/macos/FluentUITester.xcworkspace'
+          xcode_scheme: 'FluentUITester-macOS' #todo add debug/release schemes here
+          xcode_actions: 'build'
+          xcode_useXcpretty: true
+          xcode_destination: 'platform=macOS,arch=x86_64'
 
-  # Clean Derived Data
-  - script: |
-      rm -rf $(Build.Repository.LocalPath)/DerivedData
-    displayName: 'Clean DerivedData'
+    steps:
+    - checkout: self
+      persistCredentials: true
 
-  - task: NodeTool@0
-    inputs:
-      versionSpec: '10.x'
-    displayName: 'Install Node.js'
+    # Clean Derived Data
+    - script: |
+        rm -rf $(Build.Repository.LocalPath)/DerivedData
+      displayName: 'Clean DerivedData'
 
-  - script: |
-      sudo gem install cocoapods
-    displayName: 'Install Cocoapods Environment'
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '10.x'
+      displayName: 'Install Node.js'
 
-  - script: |
-      yarn
-    displayName: 'yarn'
+    - script: |
+        sudo gem install cocoapods
+      displayName: 'Install Cocoapods Environment'
 
-  - script: |
-      yarn checkchange
-    displayName: 'check change'
+    - script: |
+        yarn
+      displayName: 'yarn'
 
-  - script: |
-      yarn build
-    displayName: 'yarn build'
+    - script: |
+        yarn checkchange
+      displayName: 'check change'
 
-  - script: |
-      yarn check-for-changed-files
-    displayName: 'Verify API and Ensure Changed Files'
+    - script: |
+        yarn build
+      displayName: 'yarn build'
 
-  - script: |
-      yarn bundle
-    displayName: 'yarn bundle'
+    - script: |
+        yarn check-for-changed-files
+      displayName: 'Verify API and Ensure Changed Files'
 
-  # Select proper XCode version
-  - template: templates/apple-xcode-select.yml
-  
-  # Install any pods necessary for the project
-  - bash: |
-      cd apps/apple/macos &&
-      pod install
-    displayName: "Install Pod Project Dependencies"
+    - script: |
+        yarn bundle
+      displayName: 'yarn bundle'
 
-  - template: templates/apple-xcode-build.yml
-    parameters:
-      xcode_sdx: macosx
-      xcode_configuration: Debug
-      xcode_workspacePath: apps/apple/macos/FluentUIReactNativeTester_macOS.xcworkspace
-      xcode_scheme: 'FluentUIReactNativeTester_macOS-Debug'
-      xcode_actions: 'build'
-      xcode_useXcpretty: true
-      xcode_destination: 'platform=macOS,arch=x86_64'
+    # Select proper XCode version
+    - template: templates/apple-xcode-select.yml
 
-  - template: templates/apple-xcode-build.yml
-    parameters:
-      xcode_sdx: macosx
-      xcode_configuration: Release
-      xcode_workspacePath: apps/apple/macos/FluentUIReactNativeTester_macOS.xcworkspace
-      xcode_scheme: 'FluentUIReactNativeTester_macOS-Release'
-      xcode_actions: 'build'
-      xcode_useXcpretty: false
-      xcode_destination: 'platform=macOS,arch=x86_64'
+    - template: templates/apple-xcode-build.yml
+      parameters:
+        relative_directory: $(relative_directory)
+        xcode_sdx: $(xcode_sdx)
+        xcode_configuration: $(xcode_configuration)
+        xcode_workspacePath: $(xcode_workspacePath)
+        xcode_scheme: $(xcode_scheme)
+        xcode_actions: $(xcode_actions)
+        xcode_useXcpretty: $(xcode_useXcpretty)
+        xcode_destination: $(xcode_destination)

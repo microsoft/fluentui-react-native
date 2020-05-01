@@ -15,6 +15,11 @@ export const settings: IComposeSettings<ILinkType> = [
         textDecorationLine: 'underline'
       } as IViewProps['style']
     },
+    content: {
+      style: {
+        textDecorationLine: 'underline'
+      }
+    },
     _precedence: ['visited', 'hovered', 'pressed', 'disabled'],
     _overrides: {
       disabled: {
