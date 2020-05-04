@@ -14,7 +14,7 @@ This infrastructure builds upon a number of key concepts.
 
 ### Component Settings
 
-Settings are collections of props and styles for the parts of a component. They allow for inheritance and the ability to specify overrides for certain states. See the documentation of the [theme-settings](../theme-settings/README.md) package for a more detailed description.
+Settings are collections of props and styles for the parts of a component. They allow for inheritance and the ability to specify overrides for certain states. See the documentation of the [themed-settings](../themed-settings/README.md) package for a more detailed description.
 
 ### Tokens
 

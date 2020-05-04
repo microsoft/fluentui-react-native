@@ -23,6 +23,22 @@ const CircleColorCheckbox = Checkbox.customize({
   }
 });
 
+const HoverCheckbox = Checkbox.customize({
+  _overrides: {
+    checked: {
+      tokens: {
+        checkboxBackgroundColor: 'black',
+        checkmarkColor: 'white'
+      }
+    },
+    hovered: {
+      tokens: {
+        checkmarkVisibility: 1
+      }
+    }
+  }
+});
+
 function onChangeUncontrolled(isChecked: boolean) {
   console.log(isChecked);
 }
@@ -84,6 +100,7 @@ export const CheckboxTest: React.FunctionComponent<{}> = () => {
       <Text style={commonStyles.section}>Token Customized Checkboxes</Text>
       <Separator />
       <CircularCheckbox label="A circular checkbox" onChange={onChangeUncontrolled} defaultChecked={false} />
+      <HoverCheckbox label="A checkbox with checkmark visible on hover" onChange={onChangeUncontrolled} defaultChecked={false} />
       <CircleColorCheckbox label="A circular token-customized checkbox" onChange={onChangeUncontrolled} defaultChecked={true} />
       <BlueCheckbox
         label="Token-customized checkbox. Customizable below."
