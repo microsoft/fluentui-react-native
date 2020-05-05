@@ -60,7 +60,9 @@ To start developing in the repository you can:
 1. `yarn`
 1. `yarn build`
 
-After a successful yarn build, you can explore FluentUI Tester, our demo application to play with each of the controls. To run FluentUI Tester, please follow instructions in the [FluentUI Tester readme](./apps/fluent-tester/README.md).
+After a successful yarn build, you can explore FluentUI Tester, our Windows and Win32 demo application to play with each of the controls. To run FluentUI Tester, please follow instructions in the [FluentUI Tester readme](./apps/fluent-tester/README.md).
+
+Please see the [Apple FluentUI Tester readme](./apps/apple/FluentUITester/README.md) for running the iOS and macOS test apps.
 
 ### Beachball
 
