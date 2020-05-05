@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/themed-stylesheet",
-  "version": "0.3.9",
+  "version": "0.3.12",
   "description": "Helper for using react-native StyleSheets with themes",
   "repository": {
     "type": "git",

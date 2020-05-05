@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Mon, 27 Apr 2020 20:17:01 GMT and should not be manually modified.
+This log was last generated on Thu, 30 Apr 2020 21:18:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.6.12
+
+Thu, 30 Apr 2020 21:18:33 GMT
+
+### Patches
+
+- typo fix (chrishog@microsoft.com)
 
 ## 1.6.9
 

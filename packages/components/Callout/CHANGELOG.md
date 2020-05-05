@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Fri, 24 Apr 2020 19:41:08 GMT and should not be manually modified.
+This log was last generated on Fri, 01 May 2020 23:02:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.0
+
+Fri, 01 May 2020 23:02:06 GMT
+
+### Minor changes
+
+- use findNodeHandle to avoid serializing refobject (ppatboyd@outlook.com)
+
+## 0.5.0
+
+Fri, 01 May 2020 00:23:50 GMT
+
+### Minor changes
+
+- Add accessibility props and max width/height props to Callout (ppatboyd@outlook.com)
 
 ## 0.4.7
 
