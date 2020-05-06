@@ -21,9 +21,9 @@
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^1.1.0",
     "@uifabricshared/build-native": "0.1.1",
-    "babel-jest": "^25.4.0",
+    "babel-jest": "^24.9.0",
     "eslint": "^6.5.1",
-    "jest": "^25.4.0",
+    "jest": "^24.9.0",
     "metro-config": "^0.58.0",
     "metro-react-native-babel-preset": "^0.58.0",
     "react-test-renderer": "~16.11.0"

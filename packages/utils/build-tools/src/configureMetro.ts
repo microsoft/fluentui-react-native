@@ -5,9 +5,9 @@ import path from 'path';
 import { resolveModule, resolveFile } from './resolvePaths';
 import { getRNVersion, getAllPlatforms, getAllReactNativePaths, PlatformValue, findPlatformFromArgv } from './platforms';
 import { getPackageInfo, findGitRoot } from 'just-repo-utils';
-import blacklist from 'metro-config-60/src/defaults/blacklist';
+import blacklist from 'metro-config/src/defaults/blacklist';
 import { mergeConfigs } from './mergeConfigs';
-import { getDefaultConfig } from 'metro-config-60';
+import { getDefaultConfig } from 'metro-config';
 
 function prepareRegex(blacklistPath): RegExp {
   return new RegExp(`${blacklistPath.replace(/[/\\\\]/g, '\\/')}.*`);
