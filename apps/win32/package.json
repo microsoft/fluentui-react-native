@@ -31,8 +31,8 @@
     "react-native-svg": "^11.0.0"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.27.3",
-    "@office-iss/rex-win32": "0.0.0-devmain.12823.10000",
+    "@office-iss/react-native-win32": "0.62.0-preview.2",
+    "@office-iss/rex-win32": "0.62.2-tenantrnw.12825.10000",
     "@react-native-community/eslint-config": "^1.1.0",
     "@types/prop-types": "15.5.1",
     "@types/react": "^16.9.34",
@@ -42,12 +42,11 @@
     "metro-react-native-babel-preset": "^0.54.1",
     "react": "16.11.0",
     "react-native": "0.62.2",
-    "react-native-windows": "^0.0.0-master.45",
     "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "~16.11.0"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "0.27.3",
+    "@office-iss/react-native-win32": "0.62.0-preview.2",
     "react": "16.11.0",
     "react-native": "0.62.2"
   },
