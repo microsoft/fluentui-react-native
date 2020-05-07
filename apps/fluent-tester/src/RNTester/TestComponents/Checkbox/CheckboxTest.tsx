@@ -79,7 +79,7 @@ export const CheckboxTest: React.FunctionComponent<{}> = () => {
   };
 
   return (
-    <View>
+    <View testID="CheckboxTestPage">
       <Text style={commonStyles.section}>Basic Checkboxes</Text>
       <Separator />
       <Checkbox label="Unchecked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked={false} />

@@ -1,7 +1,7 @@
-// import BootTestPage from '../pages/BootTestPage';
-// import CheckboxTestPage from '../pages/CheckboxTestPage';
+import BootTestPage from '../pages/BootTestPage';
+import CheckboxTestPage from '../pages/CheckboxTestPage';
 
-describe('Clicks on each test page and checks if it renders', function () {
+describe('Clicks on each test page and checks if it renders', function() {
   // it('Button Test Page', () => {
   //   BootTestPage.clickAndGoToCheckboxPage();
   //   expect(CheckboxTestPage.isPageLoaded()).toBeTruthy();
@@ -13,10 +13,8 @@ describe('Clicks on each test page and checks if it renders', function () {
   // });
 
   it('Checkbox Test Page', () => {
-    const test = false;
-    expect(test).toBeFalsy();
-    // BootTestPage.clickAndGoToCheckboxPage();
-    // expect(CheckboxTestPage.isPageLoaded()).toBeTruthy();
+    BootTestPage.clickAndGoToCheckboxPage();
+    expect(CheckboxTestPage.isPageLoaded()).toBeTruthy();
   });
 
   // it('FocusTrapZone Test Page', () => {

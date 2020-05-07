@@ -55,6 +55,7 @@ export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props:
               content={description.name}
               onClick={() => setSelectedTestIndex(index)}
               style={fabricTesterStyles.testListItem}
+              testID={description.name}
             />
           );
         })}

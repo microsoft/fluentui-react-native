@@ -1,9 +1,8 @@
 class CheckboxTestPage {
   isPageLoaded(): boolean {
-    return this._calloutPage.isDisplayed();
+    return this._checkboxPage.isDisplayed();
   }
-
-  get _calloutPage() {
+  get _checkboxPage() {
     return $('~CheckboxTestPage');
   }
 }

@@ -13,13 +13,11 @@ exports.config = {
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'windows',
-      'appium:deviceName': 'WindowsPC',
       deviceName: 'WindowsPC',
-      'winAppDriver:experimental-w3c': true,
-      'appium:app': 'C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest',
-      //'appium:app': 'C:/Windows/System32/notepad.exe',
-      //'appium:appArguments':
-      //  'basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp'
+      app: 'C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe',
+      appArguments:
+        'basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp',
+      appWorkingDir: 'C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/'
     }
   ],
 
@@ -40,17 +38,25 @@ exports.config = {
   connectionRetryCount: 2, // Maximum count of request retries to the Selenium server.
 
   port: 4723, // default appium port
-  services: [
-    [
-      'appium',
-      {
-        logPath: '../fluent-tester/src/E2E/reports/',
-        args: {
-          port: '4723'
-        }
-      }
-    ]
-  ],
+  services: ['appium'],
+  appium: {
+    logPath: '../fluent-tester/src/E2E/reports/',
+    args: {
+      port: '4723'
+    }
+  },
+  // services: [
+  //   [
+  //     'appium',
+  //     {
+  //       logPath: '../fluent-tester/src/E2E/reports/',
+  //       args: {
+  //         port: '4723',
+  //         command: 'appium'
+  //       }
+  //     }
+  //   ]
+  // ],
 
   framework: 'jasmine',
   jasmineNodeOpts: {
@@ -104,8 +110,10 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  // before: function (capabilities, specs) {
-  // },
+  before: function() {
+    // not needed for Cucumber
+    require('ts-node').register({ files: true });
+  },
   /**
    * Runs before a WebdriverIO command gets executed.
    * @param {String} commandName hook command name

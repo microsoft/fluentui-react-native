@@ -1,0 +1,182 @@
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session[39m
+[35m[HTTP][39m [90m{"capabilities":{"alwaysMatch":{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"},"firstMatch":[{}]},"desiredCapabilities":{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"}}[39m
+[debug] [35m[W3C][39m Calling AppiumDriver.createSession() with args: [{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"},null,{"alwaysMatch":{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"},"firstMatch":[{}]}]
+[debug] [35m[BaseDriver][39m Event 'newSessionRequested' logged at 1588880474881 (12:41:14 GMT-0700 (Pacific Daylight Time))
+[35m[BaseDriver][39m The following capabilities are not standard capabilities and should have an extension prefix:
+[35m[BaseDriver][39m   deviceName
+[35m[BaseDriver][39m   app
+[35m[BaseDriver][39m   appArguments
+[35m[BaseDriver][39m   appWorkingDir
+[35m[Appium][39m Appium v1.17.1 creating new WindowsDriver (v1.12.1) session
+[debug] [35m[BaseDriver][39m Creating session with MJSONWP desired capabilities: {
+[debug] [35m[BaseDriver][39m   "platformName": "windows",
+[debug] [35m[BaseDriver][39m   "deviceName": "WindowsPC",
+[debug] [35m[BaseDriver][39m   "app": "C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe",
+[debug] [35m[BaseDriver][39m   "appArguments": "basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp",
+[debug] [35m[BaseDriver][39m   "appWorkingDir": "C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"
+[debug] [35m[BaseDriver][39m }
+[35m[BaseDriver][39m The following capabilities were provided, but are not recognized by Appium:
+[35m[BaseDriver][39m   appArguments
+[35m[BaseDriver][39m   appWorkingDir
+[35m[BaseDriver][39m Session created with session id: c2dbabd6-94cf-4124-ae1d-794af0595e19
+[35m[WinAppDriver][39m WinAppDriver exists, but the checksum did not match. Was it replaced manually?
+[debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'starting'
+[35m[WinAppDriver][39m Killing any old WinAppDrivers on same port, running: FOR /F "usebackq tokens=5" %a in (`netstat -nao ^| findstr /R /C:"4724 "`) do (FOR /F "usebackq" %b in (`TASKLIST /FI "PID eq %a" ^| findstr /I winappdriver.exe`) do (IF NOT %b=="" TASKKILL /F /PID %a))
+[35m[WinAppDriver][39m No old WinAppDrivers seemed to exist
+[35m[WinAppDriver][39m Spawning WinAppDriver with: 4724/wd/hub
+[35m[WinAppDriver][39m [STDOUT] Windows Application Driver listening for requests at: http://127.0.0.1:4724/wd/hub
+[debug] [35m[WD Proxy][39m Proxying [GET /status] to [GET http://127.0.0.1:4724/wd/hub/status] with no body
+[35m[WinAppDriver][39m [STDOUT] Press ENTER to exit.
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] GET /wd/hub/status HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: close
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 200 OK
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 147
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[debug] [35m[WD Proxy][39m Got response with status 200: {"build":{"revision":"18001","time":"Tue Sep 18 18:35:38 2018","version":"1.1.1809"},"os":{"arch":"amd64","name":"windows","version":"10.0.18362"}}
+[35m[WinAppDriver][39m Status call returned 200. we're online and ready to run tests
+[debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'online'
+[debug] [35m[WinAppDriver][39m Starting WinAppDriver session. Will timeout in '20000' ms.
+[debug] [35m[WD Proxy][39m Matched '/session' to command name 'createSession'
+[debug] [35m[WD Proxy][39m Proxying [POST /session] to [POST http://127.0.0.1:4724/wd/hub/session] with body: {"desiredCapabilities":{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"}}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: close
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 485
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"desiredCapabilities":{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"}}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"770F8950-946F-4DA0-8D29-5170529AA36B","status":0,"value":{"app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/","platformName":"windows"}}
+[35m[WD Proxy][39m Determined the downstream protocol as 'MJSONWP'
+[35m[Appium][39m New WindowsDriver session created successfully, session c2dbabd6-94cf-4124-ae1d-794af0595e19 added to master session list
+[debug] [35m[BaseDriver][39m Event 'newSessionStarted' logged at 1588880476986 (12:41:16 GMT-0700 (Pacific Daylight Time))
+[debug] [35m[MJSONWP (c2dbabd6)][39m Cached the protocol value 'MJSONWP' for the new session c2dbabd6-94cf-4124-ae1d-794af0595e19
+[debug] [35m[MJSONWP (c2dbabd6)][39m Responding to client with driver.createSession() result: {"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session [39m[32m200[39m [90m2110 ms - 533[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mDELETE[39m [37m/wd/hub/session/c2dbabd6-94cf-4124-ae1d-794af0595e19[39m
+[35m[HTTP][39m [90m{}[39m
+[debug] [35m[MJSONWP (c2dbabd6)][39m Calling AppiumDriver.deleteSession() with args: ["c2dbabd6-94cf-4124-ae1d-794af0595e19"]
+[debug] [35m[BaseDriver][39m Event 'quitSessionRequested' logged at 1588880478606 (12:41:18 GMT-0700 (Pacific Daylight Time))
+[35m[Appium][39m Removing session c2dbabd6-94cf-4124-ae1d-794af0595e19 from our master session list
+[debug] [35m[WinAppDriver][39m Deleting WinAppDriver session
+[debug] [35m[WinAppDriver][39m Deleting WinAppDriver server session
+[debug] [35m[WD Proxy][39m Matched '/' to command name 'deleteSession'
+[debug] [35m[WD Proxy][39m Proxying [DELETE /] to [DELETE http://127.0.0.1:4724/wd/hub/session/770F8950-946F-4DA0-8D29-5170529AA36B] with no body
+[debug] [35m[WD Proxy][39m Got response with status 200: {"status":0}
+[debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'stopping'
+[35m[WinAppDriver][39m [STDOUT] 畒湮湩⁧灡汰捩瑡潩⁮刢呎獥整䅲灰•楷桴愠灰慐慲獭›≻湩瑩慩偬潲獰㨢絻∬潲瑯慔≧ㄺ㄰⹽张䑟噅彟㴠㴽映污敳‬敤敶潬浰湥⵴敬敶⁬慷湲湩⁧牡⁥䙏ⱆ瀠牥潦浲湡散漠瑰浩穩瑡潩獮愠敲传ൎ䠊吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀　㠀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㜀㜀　䘀㠀㤀㔀　ⴀ㤀㐀㘀䘀ⴀ㐀䐀䄀　ⴀ㠀䐀㈀㤀ⴀ㔀㄀㜀　㔀㈀㤀䄀䄀㌀㘀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀愀瀀瀀∀㨀∀䌀㨀⼀唀猀攀爀猀⼀猀愀昀爀攀椀戀攀⸀刀䔀䐀䴀伀一䐀⼀䐀攀猀欀琀漀瀀⼀一攀眀䘀氀甀攀渀琀⼀昀氀甀攀渀琀甀椀ⴀ爀攀愀挀琀ⴀ渀愀琀椀瘀攀⼀渀漀搀攀开洀漀搀甀氀攀猀⼀䀀漀昀昀椀挀攀ⴀ椀猀猀⼀爀攀砀ⴀ眀椀渀㌀㈀⼀刀攀愀挀琀吀攀猀琀⸀攀砀攀∀Ⰰ∀愀瀀瀀䄀爀最甀洀攀渀琀猀∀㨀∀戀愀猀攀倀愀琀栀 䌀㨀⼀唀猀攀爀猀⼀猀愀昀爀攀椀戀攀⸀刀䔀䐀䴀伀一䐀⼀䐀攀猀欀琀漀瀀⼀一攀眀䘀氀甀攀渀琀⼀昀氀甀攀渀琀甀椀ⴀ爀攀愀挀琀ⴀ渀愀琀椀瘀攀⼀愀瀀瀀猀⼀眀椀渀㌀㈀⼀搀椀猀琀 瀀氀甀最椀渀 搀攀昀愀甀氀琀瀀氀甀最椀渀 戀甀渀搀氀攀 刀一吀攀猀琀攀爀 挀漀洀瀀漀渀攀渀琀 刀一吀攀猀琀攀爀䄀瀀瀀∀Ⰰ∀愀瀀瀀圀漀爀欀椀渀最䐀椀爀∀㨀∀䌀㨀⼀唀猀攀爀猀⼀猀愀昀爀攀椀戀攀⸀刀䔀䐀䴀伀一䐀⼀䐀攀猀欀琀漀瀀⼀一攀眀䘀氀甀攀渀琀⼀昀氀甀攀渀琀甀椀ⴀ爀攀愀挀琀ⴀ渀愀 嬀⸀⸀⸀崀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䐀䔀䰀䔀吀䔀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㜀㜀　䘀㠀㤀㔀　ⴀ㤀㐀㘀䘀ⴀ㐀䐀䄀　ⴀ㠀䐀㈀㤀ⴀ㔀㄀㜀　㔀㈀㤀䄀䄀㌀㘀䈀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 　ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀　紀ഀ਀
+[debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'stopped'
+[debug] [35m[BaseDriver][39m Event 'quitSessionFinished' logged at 1588880478766 (12:41:18 GMT-0700 (Pacific Daylight Time))
+[debug] [35m[MJSONWP (c2dbabd6)][39m Received response: null
+[debug] [35m[MJSONWP (c2dbabd6)][39m But deleting session, so not returning
+[debug] [35m[MJSONWP (c2dbabd6)][39m Responding to client with driver.deleteSession() result: null
+[debug] [35m[MJSONWP (c2dbabd6)][39m Destroying socket connection
+[35m[HTTP][39m [37m<-- DELETE /wd/hub/session/c2dbabd6-94cf-4124-ae1d-794af0595e19 [39m[32m200[39m [90m161 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session[39m
+[35m[HTTP][39m [90m{"capabilities":{"alwaysMatch":{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"},"firstMatch":[{}]},"desiredCapabilities":{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"}}[39m
+[debug] [35m[W3C][39m Calling AppiumDriver.createSession() with args: [{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"},null,{"alwaysMatch":{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"},"firstMatch":[{}]}]
+[debug] [35m[BaseDriver][39m Event 'newSessionRequested' logged at 1588880479540 (12:41:19 GMT-0700 (Pacific Daylight Time))
+[35m[BaseDriver][39m The following capabilities are not standard capabilities and should have an extension prefix:
+[35m[BaseDriver][39m   deviceName
+[35m[BaseDriver][39m   app
+[35m[BaseDriver][39m   appArguments
+[35m[BaseDriver][39m   appWorkingDir
+[35m[Appium][39m Appium v1.17.1 creating new WindowsDriver (v1.12.1) session
+[debug] [35m[BaseDriver][39m Creating session with MJSONWP desired capabilities: {
+[debug] [35m[BaseDriver][39m   "platformName": "windows",
+[debug] [35m[BaseDriver][39m   "deviceName": "WindowsPC",
+[debug] [35m[BaseDriver][39m   "app": "C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe",
+[debug] [35m[BaseDriver][39m   "appArguments": "basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp",
+[debug] [35m[BaseDriver][39m   "appWorkingDir": "C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"
+[debug] [35m[BaseDriver][39m }
+[35m[BaseDriver][39m The following capabilities were provided, but are not recognized by Appium:
+[35m[BaseDriver][39m   appArguments
+[35m[BaseDriver][39m   appWorkingDir
+[35m[BaseDriver][39m Session created with session id: 10a2c225-66f8-4664-87af-bcbf0ee00918
+[35m[WinAppDriver][39m WinAppDriver exists, but the checksum did not match. Was it replaced manually?
+[debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'starting'
+[35m[WinAppDriver][39m Killing any old WinAppDrivers on same port, running: FOR /F "usebackq tokens=5" %a in (`netstat -nao ^| findstr /R /C:"4724 "`) do (FOR /F "usebackq" %b in (`TASKLIST /FI "PID eq %a" ^| findstr /I winappdriver.exe`) do (IF NOT %b=="" TASKKILL /F /PID %a))
+[35m[WinAppDriver][39m No old WinAppDrivers seemed to exist
+[35m[WinAppDriver][39m Spawning WinAppDriver with: 4724/wd/hub
+[35m[WinAppDriver][39m [STDOUT] Windows Application Driver listening for requests at: http://127.0.0.1:4724/wd/hub
+[debug] [35m[WD Proxy][39m Proxying [GET /status] to [GET http://127.0.0.1:4724/wd/hub/status] with no body
+[35m[WinAppDriver][39m [STDOUT] Press ENTER to exit.
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] GET /wd/hub/status HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: close
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 200 OK
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 147
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[debug] [35m[WD Proxy][39m Got response with status 200: {"build":{"revision":"18001","time":"Tue Sep 18 18:35:38 2018","version":"1.1.1809"},"os":{"arch":"amd64","name":"windows","version":"10.0.18362"}}
+[35m[WinAppDriver][39m Status call returned 200. we're online and ready to run tests
+[debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'online'
+[debug] [35m[WinAppDriver][39m Starting WinAppDriver session. Will timeout in '20000' ms.
+[debug] [35m[WD Proxy][39m Matched '/session' to command name 'createSession'
+[debug] [35m[WD Proxy][39m Proxying [POST /session] to [POST http://127.0.0.1:4724/wd/hub/session] with body: {"desiredCapabilities":{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"}}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: close
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 485
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"desiredCapabilities":{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"}}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"1419C75D-BE82-4293-B89A-22634CAB7ECB","status":0,"value":{"app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/","platformName":"windows"}}
+[35m[WD Proxy][39m Determined the downstream protocol as 'MJSONWP'
+[35m[Appium][39m New WindowsDriver session created successfully, session 10a2c225-66f8-4664-87af-bcbf0ee00918 added to master session list
+[debug] [35m[BaseDriver][39m Event 'newSessionStarted' logged at 1588880481879 (12:41:21 GMT-0700 (Pacific Daylight Time))
+[debug] [35m[MJSONWP (10a2c225)][39m Cached the protocol value 'MJSONWP' for the new session 10a2c225-66f8-4664-87af-bcbf0ee00918
+[debug] [35m[MJSONWP (10a2c225)][39m Responding to client with driver.createSession() result: {"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session [39m[32m200[39m [90m2340 ms - 533[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mDELETE[39m [37m/wd/hub/session/10a2c225-66f8-4664-87af-bcbf0ee00918[39m
+[35m[HTTP][39m [90m{}[39m
+[debug] [35m[MJSONWP (10a2c225)][39m Calling AppiumDriver.deleteSession() with args: ["10a2c225-66f8-4664-87af-bcbf0ee00918"]
+[debug] [35m[BaseDriver][39m Event 'quitSessionRequested' logged at 1588880483498 (12:41:23 GMT-0700 (Pacific Daylight Time))
+[35m[Appium][39m Removing session 10a2c225-66f8-4664-87af-bcbf0ee00918 from our master session list
+[debug] [35m[WinAppDriver][39m Deleting WinAppDriver session
+[debug] [35m[WinAppDriver][39m Deleting WinAppDriver server session
+[debug] [35m[WD Proxy][39m Matched '/' to command name 'deleteSession'
+[debug] [35m[WD Proxy][39m Proxying [DELETE /] to [DELETE http://127.0.0.1:4724/wd/hub/session/1419C75D-BE82-4293-B89A-22634CAB7ECB] with no body
+[debug] [35m[WD Proxy][39m Got response with status 200: {"status":0}
+[debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'stopping'
+[35m[WinAppDriver][39m [STDOUT] 畒湮湩⁧灡汰捩瑡潩⁮刢呎獥整䅲灰•楷桴愠灰慐慲獭›≻湩瑩慩偬潲獰㨢絻∬潲瑯慔≧ㄺ㄰⹽张䑟噅彟㴠㴽映污敳‬敤敶潬浰湥⵴敬敶⁬慷湲湩⁧牡⁥䙏ⱆ瀠牥潦浲湡散漠瑰浩穩瑡潩獮愠敲传ൎ䠊吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀　㠀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㄀㐀㄀㤀䌀㜀㔀䐀ⴀ䈀䔀㠀㈀ⴀ㐀㈀㤀㌀ⴀ䈀㠀㤀䄀ⴀ㈀㈀㘀㌀㐀䌀䄀䈀㜀䔀䌀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀愀瀀瀀∀㨀∀䌀㨀⼀唀猀攀爀猀⼀猀愀昀爀攀椀戀攀⸀刀䔀䐀䴀伀一䐀⼀䐀攀猀欀琀漀瀀⼀一攀眀䘀氀甀攀渀琀⼀昀氀甀攀渀琀甀椀ⴀ爀攀愀挀琀ⴀ渀愀琀椀瘀攀⼀渀漀搀攀开洀漀搀甀氀攀猀⼀䀀漀昀昀椀挀攀ⴀ椀猀猀⼀爀攀砀ⴀ眀椀渀㌀㈀⼀刀攀愀挀琀吀攀猀琀⸀攀砀攀∀Ⰰ∀愀瀀瀀䄀爀最甀洀攀渀琀猀∀㨀∀戀愀猀攀倀愀琀栀 䌀㨀⼀唀猀攀爀猀⼀猀愀昀爀攀椀戀攀⸀刀䔀䐀䴀伀一䐀⼀䐀攀猀欀琀漀瀀⼀一攀眀䘀氀甀攀渀琀⼀昀氀甀攀渀琀甀椀ⴀ爀攀愀挀琀ⴀ渀愀琀椀瘀攀⼀愀瀀瀀猀⼀眀椀渀㌀㈀⼀搀椀猀琀 瀀氀甀最椀渀 搀攀昀愀甀氀琀瀀氀甀最椀渀 戀甀渀搀氀攀 刀一吀攀猀琀攀爀 挀漀洀瀀漀渀攀渀琀 刀一吀攀猀琀攀爀䄀瀀瀀∀Ⰰ∀愀瀀瀀圀漀爀欀椀渀最䐀椀爀∀㨀∀䌀㨀⼀唀猀攀爀猀⼀猀愀昀爀攀椀戀攀⸀刀䔀䐀䴀伀一䐀⼀䐀攀猀欀琀漀瀀⼀一攀眀䘀氀甀攀渀琀⼀昀氀甀攀渀琀甀椀ⴀ爀攀愀挀琀ⴀ渀愀 嬀⸀⸀⸀崀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䐀䔀䰀䔀吀䔀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㄀㐀㄀㤀䌀㜀㔀䐀ⴀ䈀䔀㠀㈀ⴀ㐀㈀㤀㌀ⴀ䈀㠀㤀䄀ⴀ㈀㈀㘀㌀㐀䌀䄀䈀㜀䔀䌀䈀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 　ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀　紀ഀ਀
+[debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'stopped'
+[debug] [35m[BaseDriver][39m Event 'quitSessionFinished' logged at 1588880483661 (12:41:23 GMT-0700 (Pacific Daylight Time))
+[debug] [35m[MJSONWP (10a2c225)][39m Received response: null
+[debug] [35m[MJSONWP (10a2c225)][39m But deleting session, so not returning
+[debug] [35m[MJSONWP (10a2c225)][39m Responding to client with driver.deleteSession() result: null
+[debug] [35m[MJSONWP (10a2c225)][39m Destroying socket connection
+[35m[HTTP][39m [37m<-- DELETE /wd/hub/session/10a2c225-66f8-4664-87af-bcbf0ee00918 [39m[32m200[39m [90m164 ms - 76[39m
+[35m[HTTP][39m [90m[39m
