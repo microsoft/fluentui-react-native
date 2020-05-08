@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/persona-coin",
   "entries": [
     {
+      "date": "Fri, 08 May 2020 18:49:53 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.17",
+      "version": "0.3.17",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "ff5a5b0edb37bb35c9b2a4e817089a5a56551604",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Apr 2020 19:41:08 GMT",
       "tag": "@fluentui-react-native/persona-coin_v0.3.7",
       "version": "0.3.7",
