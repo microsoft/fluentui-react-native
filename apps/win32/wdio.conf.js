@@ -45,23 +45,11 @@ exports.config = {
       port: '4723'
     }
   },
-  // services: [
-  //   [
-  //     'appium',
-  //     {
-  //       logPath: '../fluent-tester/src/E2E/reports/',
-  //       args: {
-  //         port: '4723',
-  //         command: 'appium'
-  //       }
-  //     }
-  //   ]
-  // ],
 
   framework: 'jasmine',
   jasmineNodeOpts: {
-    defaultTimeoutInterval: 10000,
-    requires: ['ts-node/register'] // Required for Typescript setup
+    defaultTimeoutInterval: 10000
+    //requires: ['ts-node/register'] // Required for Typescript setup
   },
 
   reporters: ['dot', 'spec'],

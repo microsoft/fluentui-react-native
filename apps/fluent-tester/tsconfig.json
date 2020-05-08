@@ -5,10 +5,9 @@
     "outDir": "lib",
     "paths": {
       "*": ["*", "*.win32", "./*"],
-      "src/*": ["./src/*"]
+      "src/*": ["./src/*", "src"]
     },
-    "types": ["node", "@wdio/sync", "@wdio/jasmine-framework", "@types/jasmine"]
+    "types": ["@wdio/sync", "@wdio/jasmine-framework", "node", "@types/jasmine"]
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": ["./src/**/*.ts", "./src/E2E", "./src/E2E/pages/BootTestPage.ts", "/src/**/*.ts", "/src/E2E", "/src/E2E/pages/BootTestPage.ts"]
 }
