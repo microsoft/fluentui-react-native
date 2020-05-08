@@ -1,0 +1,8 @@
+{
+  "type": "none",
+  "comment": "use findNodeHandle to avoid serializing refobject (#191)",
+  "packageName": "@fluentui-react-native/radio-group",
+  "email": "lehon@microsoft.com",
+  "dependentChangeType": "none",
+  "date": "2020-05-08T16:20:30.297Z"
+}
