@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "bump react native win32 version to 0.62 and pull in matching tester",
+  "packageName": "@fluentui-react-native/focus-trap-zone",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-05-11T17:44:09.270Z"
+}
