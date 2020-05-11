@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Fri, 24 Apr 2020 19:41:08 GMT and should not be manually modified.
+This log was last generated on Fri, 08 May 2020 18:49:53 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.14
+
+Fri, 08 May 2020 18:49:53 GMT
+
+### Patches
+
+- change parameter format so include necessary props (lehon@microsoft.com)
 
 ## 0.5.4
 

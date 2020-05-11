@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/build-tools
 
-This log was last generated on Fri, 01 May 2020 23:02:06 GMT and should not be manually modified.
+This log was last generated on Fri, 08 May 2020 18:49:53 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Fri, 08 May 2020 18:49:53 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Fri, 08 May 2020 02:15:26 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
 
 ## 0.3.0
 
