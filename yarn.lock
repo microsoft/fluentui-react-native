@@ -2104,10 +2104,10 @@
   dependencies:
     "@types/node" ">= 8"
 
-"@office-iss/react-native-win32@0.62.0-preview.2":
-  version "0.62.0-preview.2"
-  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.62.0-preview.2.tgz#7771bf8839d2f6e089bf16fcfcc38cbb9e73f979"
-  integrity sha512-vsXL2blKHSWpyLFYB8aoOojZpyGJDU/r4+xLH99tprENupIIxYPmbEe239FJaTvDzKzqR99D0IFVUKgbERpW4g==
+"@office-iss/react-native-win32@0.62.0-preview.3":
+  version "0.62.0-preview.3"
+  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.62.0-preview.3.tgz#c3235311c5507c57b02e35853f17ae7da43ff54b"
+  integrity sha512-dbjnwHTcF3IcfrBER/sMYh7tBG290WIlhwPVNR7n48zonx432r+2KOBtXQ+GTqmmdv+QxfG8BZDIJmvIUv/+3Q==
   dependencies:
     "@babel/runtime" "^7.8.4"
     abort-controller "^3.0.0"
