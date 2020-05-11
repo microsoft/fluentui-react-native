@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Fri, 08 May 2020 18:49:53 GMT and should not be manually modified.
+This log was last generated on Mon, 11 May 2020 20:15:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.15
+
+Mon, 11 May 2020 20:15:56 GMT
+
+### Patches
+
+- bump react native win32 version to 0.62 and pull in matching tester (jasonmo@microsoft.com)
 
 ## 0.5.14
 

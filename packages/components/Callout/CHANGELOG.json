@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Mon, 11 May 2020 20:15:56 GMT",
+      "tag": "@fluentui-react-native/callout_v0.6.3",
+      "version": "0.6.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "bump react native win32 version to 0.62 and pull in matching tester",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e0a1a7baa8be61b037ee65c49be22be60dc4b032",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 08 May 2020 18:49:53 GMT",
       "tag": "@fluentui-react-native/callout_v0.6.2",
       "version": "0.6.2",
