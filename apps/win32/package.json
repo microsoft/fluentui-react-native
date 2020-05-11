@@ -2,7 +2,7 @@
   "name": "FluentTester-win32",
   "version": "0.0.1",
   "private": true,
-  "main": "src/index.ts",
+  "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
   "onPublish": {
@@ -15,12 +15,12 @@
     "clean": "fluentui-scripts clean",
     "code-style": "fluentui-scripts code-style",
     "lint": "fluentui-scripts eslint",
-    "start": "fluentui-scripts metro --server",
+    "start": "fluentui-scripts metro --server --cli --port 8081",
     "bundle": "fluentui-scripts metro --platform win32 --cli",
     "bundle-dev": "fluentui-scripts metro -platform win32 --dev --cli",
-    "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
-    "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useLiveReload --pluginProps",
-    "run-win32-devmain": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps"
+    "run-win32": "rex-win32 --bundle index --component FluentTester --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
+    "run-win32-web": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useLiveReload --pluginProps",
+    "run-win32-devmain": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",
@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.62.0-preview.2",
-    "@office-iss/rex-win32": "0.62.2-tenantrnw.12825.10000",
+    "@office-iss/rex-win32": "0.62.0-preview.3-tenantreactnativewin-12906",
     "@react-native-community/eslint-config": "^1.1.0",
     "@types/prop-types": "15.5.1",
     "@types/react": "^16.9.34",
@@ -57,9 +57,9 @@
     "targets": [
       "win32"
     ],
-    "entry": "./src/index.tsx",
+    "entry": "index.js",
     "outputPath": "./dist",
-    "bundleName": "RNTester.bundle",
+    "bundleName": "index.bundle",
     "noPlatformSuffix": true
   }
 }
