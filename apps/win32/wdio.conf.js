@@ -13,8 +13,11 @@ exports.config = {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'windows',
       deviceName: 'WindowsPC',
-      //app: 'C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe',
-      app: 'e:/OM/Target/x64/debug/reacttest_testapp/x-none/ReactTest.exe',
+
+      /*
+      ** This will be fixed, unsure how to use path.resolve though
+      */
+      app: 'C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe',
       appArguments:
         'basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp',
       appWorkingDir: 'C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/'
@@ -40,7 +43,7 @@ exports.config = {
   port: 4723, // default appium port
   services: ['appium'],
   appium: {
-    logPath: '../fluent-tester/src/E2E/reports/',
+    logPath: './src/reports/',
     args: {
       port: '4723'
     }
@@ -49,7 +52,6 @@ exports.config = {
   framework: 'jasmine',
   jasmineNodeOpts: {
     defaultTimeoutInterval: 10000
-    //requires: ['ts-node/register'] // Required for Typescript setup
   },
 
   reporters: ['dot', 'spec'],
@@ -101,6 +103,7 @@ exports.config = {
   before: function() {
     // not needed for Cucumber
     require('ts-node').register({ files: true });
+    browser.maximizeWindow();
   },
   /**
    * Runs before a WebdriverIO command gets executed.
@@ -135,7 +138,12 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  //afterTest: function (test) {},
+  afterTest: function(test) {
+    if (test.error !== undefined) {
+      const name = 'ERROR-' + Date.now();
+      browser.saveScreenshot('./src/errorShots/' + name + '.png');
+    }
+  },
 
   /**
    * Hook that gets executed after the suite has ended
