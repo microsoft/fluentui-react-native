@@ -1,96 +1,130 @@
+import {
+  HOMEPAGE_BUTTON_BUTTON,
+  HOMEPAGE_CALLOUT_BUTTON,
+  HOMEPAGE_CHECKBOX_BUTTON,
+  HOMEPAGE_FOCUSTRAPZONE_BUTTON,
+  HOMEPAGE_LINK_BUTTON,
+  HOMEPAGE_PERSONA_BUTTON,
+  HOMEPAGE_PERSONACOIN_BUTTON,
+  HOMEPAGE_PRESSABLE_BUTTON,
+  HOMEPAGE_RADIOGROUP_BUTTON,
+  HOMEPAGE_SEPARATOR_BUTTON,
+  HOMEPAGE_SVG_BUTTON,
+  HOMEPAGE_TEXT_BUTTON,
+  HOMEPAGE_THEME_BUTTON
+} from '../../RNTester/Consts';
+
 export function By(testId: string): WebdriverIO.Element {
   return $('~' + testId);
 }
 
 class BootTestPage {
-  // clickAndGoToButtonPage() {
-  //   this.buttonPage.click();
-  // }
+  clickAndGoToButtonPage() {
+    this.buttonPage.click();
+  }
 
-  // clickAndGoToCalloutPage() {
-  //   this.calloutPage.click();
-  // }
+  clickAndGoToCalloutPage() {
+    this.calloutPage.click();
+  }
 
   clickAndGoToCheckboxPage() {
     this.checkboxPage.click();
   }
 
-  // clickAndGoToFocusTrapZonePage() {
-  //   this.focusTrapZonePage.click();
-  // }
-
-  // clickAndGoToLinkPage() {
-  //   this.linkPage.click();
-  // }
-
-  // clickAndGoToPersonaPage() {
-  //   this.personaPage.click();
-  // }
-
-  // clickAndGoToPersonaCoinPage() {
-  //   this.personaCoinPage.click();
-  // }
-
-  // clickAndGoToPressablePage() {
-  //   this.pressablePage.click();
-  // }
-
-  // clickAndGoToRadioGroupPage() {
-  //   this.radioGroupPage.click();
-  // }
-
-  // clickAndGoToSeparatorPage() {
-  //   this.separatorPage.click();
-  // }
-
-  // clickAndGoToThemePage() {
-  //   this.themePage.click();
-  // }
-
-  // private get buttonPage() {
-  //   return $('~Button Test');
-  // }
-
-  // private get calloutPage() {
-  //   return $('~Callout Test');
-  // }
-
-  private get checkboxPage() {
-    return By('Checkbox Test');
-    //return $('~Checkbox Test');
+  clickAndGoToFocusTrapZonePage() {
+    this.focusTrapZonePage.click();
   }
 
-  // private get focusTrapZonePage() {
-  //   return $('~Focus Trap Zone Test');
-  // }
+  clickAndGoToLinkPage() {
+    this.linkPage.click();
+  }
 
-  // private get linkPage() {
-  //   return $('~Link Test');
-  // }
+  clickAndGoToPersonaPage() {
+    this.personaPage.click();
+  }
 
-  // private get personaPage() {
-  //   return $('~Persona Test');
-  // }
+  clickAndGoToPersonaCoinPage() {
+    this.personaCoinPage.click();
+  }
 
-  // private get personaCoinPage() {
-  //   return $('~Persona Coin Test');
-  // }
+  clickAndGoToPressablePage() {
+    this.pressablePage.click();
+  }
 
-  // private get pressablePage() {
-  //   return $('~Pressable Test');
-  // }
+  clickAndGoToRadioGroupPage() {
+    this.radioGroupPage.click();
+  }
 
-  // private get radioGroupPage() {
-  //   return $('~RadioGroup Test');
-  // }
+  clickAndGoToSeparatorPage() {
+    this.separatorPage.click();
+  }
 
-  // private get separatorPage() {
-  //   return $('~Separator Test');
-  // }
+  clickAndGoToSvgPage() {
+    this.svgPage.click();
+  }
 
-  // private get themePage() {
-  //   return $('~Theme Test');
-  // }
+  clickAndGoToTextPage() {
+    this.textPage.click();
+  }
+
+  clickAndGoToThemePage() {
+    this.themePage.click();
+  }
+
+  private get buttonPage() {
+    return By(HOMEPAGE_BUTTON_BUTTON);
+  }
+
+  /*
+  ** Returns the StealthButton element on the left-hand column that navigates to each page
+  */
+  private get calloutPage() {
+    return By(HOMEPAGE_CALLOUT_BUTTON);
+  }
+
+  private get checkboxPage() {
+    return By(HOMEPAGE_CHECKBOX_BUTTON);
+  }
+
+  private get focusTrapZonePage() {
+    return By(HOMEPAGE_FOCUSTRAPZONE_BUTTON);
+  }
+
+  private get linkPage() {
+    return By(HOMEPAGE_LINK_BUTTON);
+  }
+
+  private get personaPage() {
+    return By(HOMEPAGE_PERSONA_BUTTON);
+  }
+
+  private get personaCoinPage() {
+    return By(HOMEPAGE_PERSONACOIN_BUTTON);
+  }
+
+  private get pressablePage() {
+    return By(HOMEPAGE_PRESSABLE_BUTTON);
+  }
+
+  private get radioGroupPage() {
+    return By(HOMEPAGE_RADIOGROUP_BUTTON);
+  }
+
+  private get separatorPage() {
+    return By(HOMEPAGE_SEPARATOR_BUTTON);
+  }
+
+  private get svgPage() {
+    return By(HOMEPAGE_SVG_BUTTON);
+  }
+
+  private get textPage() {
+    return By(HOMEPAGE_TEXT_BUTTON);
+  }
+
+  private get themePage() {
+    return By(HOMEPAGE_THEME_BUTTON);
+  }
 }
 
 export default new BootTestPage();

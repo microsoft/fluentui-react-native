@@ -1,7 +1,7 @@
 [35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session[39m
 [35m[HTTP][39m [90m{"capabilities":{"alwaysMatch":{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"},"firstMatch":[{}]},"desiredCapabilities":{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"}}[39m
 [debug] [35m[W3C][39m Calling AppiumDriver.createSession() with args: [{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"},null,{"alwaysMatch":{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"},"firstMatch":[{}]}]
-[debug] [35m[BaseDriver][39m Event 'newSessionRequested' logged at 1588976893589 (15:28:13 GMT-0700 (Pacific Daylight Time))
+[debug] [35m[BaseDriver][39m Event 'newSessionRequested' logged at 1589243149480 (17:25:49 GMT-0700 (Pacific Daylight Time))
 [35m[BaseDriver][39m The following capabilities are not standard capabilities and should have an extension prefix:
 [35m[BaseDriver][39m   deviceName
 [35m[BaseDriver][39m   app
@@ -18,7 +18,7 @@
 [35m[BaseDriver][39m The following capabilities were provided, but are not recognized by Appium:
 [35m[BaseDriver][39m   appArguments
 [35m[BaseDriver][39m   appWorkingDir
-[35m[BaseDriver][39m Session created with session id: d336da93-35ee-402c-be0d-6fd9196fcf0f
+[35m[BaseDriver][39m Session created with session id: 5fdb3113-1023-4154-94bd-061f4138ea2b
 [35m[WinAppDriver][39m WinAppDriver exists, but the checksum did not match. Was it replaced manually?
 [debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'starting'
 [35m[WinAppDriver][39m Killing any old WinAppDrivers on same port, running: FOR /F "usebackq tokens=5" %a in (`netstat -nao ^| findstr /R /C:"4724 "`) do (FOR /F "usebackq" %b in (`TASKLIST /FI "PID eq %a" ^| findstr /I winappdriver.exe`) do (IF NOT %b=="" TASKKILL /F /PID %a))
@@ -42,7 +42,7 @@
 [35m[WinAppDriver][39m [STDOUT] Content-Length: 147
 [35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
 [35m[WinAppDriver][39m [STDOUT] 
-[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"build":{"revision":"18001","time":"Tue Sep 18 18:35:38 2018","version":"1.1.1809"},"os":{"arch":"amd64","name":"windows","version":"10.0.18362"}}
 [debug] [35m[WD Proxy][39m Got response with status 200: {"build":{"revision":"18001","time":"Tue Sep 18 18:35:38 2018","version":"1.1.1809"},"os":{"arch":"amd64","name":"windows","version":"10.0.18362"}}
 [35m[WinAppDriver][39m Status call returned 200. we're online and ready to run tests
 [debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'online'
@@ -65,282 +65,594 @@
 [35m[WinAppDriver][39m [STDOUT] Content-Length: 508
 [35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
 [35m[WinAppDriver][39m [STDOUT] 
-[35m[WinAppDriver][39m [STDOUT] {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":{"app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-na [...]
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":{"app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/","platformName":"windows"}}
+[35m[WinAppDriver][39m [STDOUT] {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-na [...]
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/","platformName":"windows"}}
 [35m[WD Proxy][39m Determined the downstream protocol as 'MJSONWP'
-[35m[Appium][39m New WindowsDriver session created successfully, session d336da93-35ee-402c-be0d-6fd9196fcf0f added to master session list
-[debug] [35m[BaseDriver][39m Event 'newSessionStarted' logged at 1588976895183 (15:28:15 GMT-0700 (Pacific Daylight Time))
-[debug] [35m[MJSONWP (d336da93)][39m Cached the protocol value 'MJSONWP' for the new session d336da93-35ee-402c-be0d-6fd9196fcf0f
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.createSession() result: {"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"}
-[35m[HTTP][39m [37m<-- POST /wd/hub/session [39m[32m200[39m [90m1599 ms - 533[39m
+[35m[Appium][39m New WindowsDriver session created successfully, session 5fdb3113-1023-4154-94bd-061f4138ea2b added to master session list
+[debug] [35m[BaseDriver][39m Event 'newSessionStarted' logged at 1589243150918 (17:25:50 GMT-0700 (Pacific Daylight Time))
+[debug] [35m[MJSONWP (5fdb3113)][39m Cached the protocol value 'MJSONWP' for the new session 5fdb3113-1023-4154-94bd-061f4138ea2b
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.createSession() result: {"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session [39m[32m200[39m [90m1443 ms - 533[39m
 [35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/element[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Button_Button"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Button_Button","5fdb3113-1023-4154-94bd-061f4138ea2b"]
 [debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
 [debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
-[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/element] with body: {"using":"accessibility id","value":"Checkbox Test"}
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Homepage_Button_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1712302768.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1712302768.314","ELEMENT":"42.11666800.4.-1712302768.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m215 ms - 185[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712302768.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712302768.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712302768.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1712302768.314/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0}
+[35m[WD Proxy][39m Replacing sessionId 3751960F-75B2-4FDC-96C1-3CF765EC240D with 5fdb3113-1023-4154-94bd-061f4138ea2b
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712302768.314/click [39m[32m200[39m [90m293 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Button_TestPage"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Button_TestPage","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Button_TestPage"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1713119888.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1713119888.314","ELEMENT":"42.11666800.4.-1713119888.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m197 ms - 185[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713119888.314/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713119888.314/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713119888.314/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1713119888.314/displayed] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":true}
+[35m[WD Proxy][39m Replacing sessionId 3751960F-75B2-4FDC-96C1-3CF765EC240D with 5fdb3113-1023-4154-94bd-061f4138ea2b
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713119888.314/displayed [39m[32m200[39m [90m11 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Callout_Button"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Callout_Button","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Homepage_Callout_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1712312336.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1712312336.314","ELEMENT":"42.11666800.4.-1712312336.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m171 ms - 185[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712312336.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712312336.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712312336.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1712312336.314/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0}
+[35m[WD Proxy][39m Replacing sessionId 3751960F-75B2-4FDC-96C1-3CF765EC240D with 5fdb3113-1023-4154-94bd-061f4138ea2b
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712312336.314/click [39m[32m200[39m [90m260 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Callout_TestPage"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Callout_TestPage","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Callout_TestPage"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1713100624.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1713100624.314","ELEMENT":"42.11666800.4.-1713100624.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m210 ms - 185[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713100624.314/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713100624.314/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713100624.314/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1713100624.314/displayed] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":true}
+[35m[WD Proxy][39m Replacing sessionId 3751960F-75B2-4FDC-96C1-3CF765EC240D with 5fdb3113-1023-4154-94bd-061f4138ea2b
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713100624.314/displayed [39m[32m200[39m [90m5 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Checkbox_Button"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Checkbox_Button","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Homepage_Checkbox_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1712309424.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1712309424.314","ELEMENT":"42.11666800.4.-1712309424.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m173 ms - 185[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712309424.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712309424.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712309424.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1712309424.314/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0}
+[35m[WD Proxy][39m Replacing sessionId 3751960F-75B2-4FDC-96C1-3CF765EC240D with 5fdb3113-1023-4154-94bd-061f4138ea2b
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712309424.314/click [39m[32m200[39m [90m255 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox_TestPage"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Checkbox_TestPage","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Checkbox_TestPage"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1713088960.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1713088960.314","ELEMENT":"42.11666800.4.-1713088960.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m335 ms - 185[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713088960.314/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713088960.314/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713088960.314/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1713088960.314/displayed] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":true}
+[35m[WD Proxy][39m Replacing sessionId 3751960F-75B2-4FDC-96C1-3CF765EC240D with 5fdb3113-1023-4154-94bd-061f4138ea2b
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713088960.314/displayed [39m[32m200[39m [90m4 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_FocusTrapZone_Button"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_FocusTrapZone_Button","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Homepage_FocusTrapZone_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1712301936.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1712301936.314","ELEMENT":"42.11666800.4.-1712301936.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m180 ms - 185[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712301936.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712301936.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712301936.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1712301936.314/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0}
+[35m[WD Proxy][39m Replacing sessionId 3751960F-75B2-4FDC-96C1-3CF765EC240D with 5fdb3113-1023-4154-94bd-061f4138ea2b
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712301936.314/click [39m[32m200[39m [90m254 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"FocusTrapZone_TestPage"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","FocusTrapZone_TestPage","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"FocusTrapZone_TestPage"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1713100624.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1713100624.314","ELEMENT":"42.11666800.4.-1713100624.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m236 ms - 185[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713100624.314/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713100624.314/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713100624.314/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1713100624.314/displayed] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":10,"value":{"error":"stale element reference","message":"An element command failed because the referenced element is no longer attached to the DOM."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - "{\"status\":10,\"value\":{\"error\":\"stale element reference\",\"message\":\"An element command failed because the referenced element is no longer attached to the DOM.\"}}"
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'stale element reference' to StaleElementReferenceError
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713100624.314/displayed [39m[31m500[39m [90m20 ms - 177[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713100624.314/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713100624.314/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713100624.314/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1713100624.314/displayed] with body: {}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 404 - "{\"status\":7,\"value\":{\"error\":\"no such element\",\"message\":\"An element could not be located on the page using the given search parameters.\"}}"
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713100624.314/displayed [39m[31m500[39m [90m9 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Link_Button"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Link_Button","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Homepage_Link_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1710567728.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1710567728.314","ELEMENT":"42.11666800.4.-1710567728.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m175 ms - 185[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710567728.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710567728.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710567728.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1710567728.314/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0}
+[35m[WD Proxy][39m Replacing sessionId 3751960F-75B2-4FDC-96C1-3CF765EC240D with 5fdb3113-1023-4154-94bd-061f4138ea2b
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710567728.314/click [39m[32m200[39m [90m249 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Link_TestPage"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Link_TestPage","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Link_TestPage"}
 [35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
 [debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
-[debug] [35m[MJSONWP (d336da93)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
-[debug] [35m[MJSONWP (d336da93)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
-[debug] [35m[MJSONWP (d336da93)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
-[debug] [35m[MJSONWP (d336da93)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:264:19)
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/element [39m[31m500[39m [90m332 ms - 164[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (5fdb3113)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (5fdb3113)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:264:19)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[31m500[39m [90m220 ms - 164[39m
 [35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Link_TestPage"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Link_TestPage","5fdb3113-1023-4154-94bd-061f4138ea2b"]
 [debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m199 ms - 74[39m
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Link_TestPage"}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (5fdb3113)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (5fdb3113)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:264:19)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[31m500[39m [90m195 ms - 164[39m
 [35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Persona_Button"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Persona_Button","5fdb3113-1023-4154-94bd-061f4138ea2b"]
 [debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m210 ms - 74[39m
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Homepage_Persona_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1710561488.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1710561488.314","ELEMENT":"42.11666800.4.-1710561488.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m183 ms - 185[39m
 [35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m208 ms - 74[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m204 ms - 74[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m212 ms - 74[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m215 ms - 74[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m218 ms - 74[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m211 ms - 74[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m215 ms - 74[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m205 ms - 74[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m207 ms - 74[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m203 ms - 74[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m205 ms - 74[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m204 ms - 74[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m203 ms - 74[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m203 ms - 74[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m202 ms - 74[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m204 ms - 74[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"9D0D4A20-8CC3-4D65-B9B8-171761A451D8","status":0,"value":[]}
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.findElements() result: []
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[32m200[39m [90m206 ms - 74[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.findElements() with args: ["accessibility id","Checkbox Test","d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
-[debug] [35m[WD Proxy][39m Matched '/elements' to command name 'findElements'
-[debug] [35m[WD Proxy][39m Proxying [POST /elements] to [POST http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8/elements] with body: {"using":"accessibility id","value":"Checkbox Test"}
-[35m[HTTP][39m [37m-->[39m [37mDELETE[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710561488.314/click[39m
 [35m[HTTP][39m [90m{}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Calling AppiumDriver.deleteSession() with args: ["d336da93-35ee-402c-be0d-6fd9196fcf0f"]
-[debug] [35m[BaseDriver][39m Event 'quitSessionRequested' logged at 1588976906971 (15:28:26 GMT-0700 (Pacific Daylight Time))
-[35m[Appium][39m Removing session d336da93-35ee-402c-be0d-6fd9196fcf0f from our master session list
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710561488.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710561488.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1710561488.314/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0}
+[35m[WD Proxy][39m Replacing sessionId 3751960F-75B2-4FDC-96C1-3CF765EC240D with 5fdb3113-1023-4154-94bd-061f4138ea2b
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710561488.314/click [39m[32m200[39m [90m243 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Persona_TestPage"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Persona_TestPage","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Persona_TestPage"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1713092848.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1713092848.314","ELEMENT":"42.11666800.4.-1713092848.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m903 ms - 185[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713092848.314/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713092848.314/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713092848.314/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1713092848.314/displayed] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":true}
+[35m[WD Proxy][39m Replacing sessionId 3751960F-75B2-4FDC-96C1-3CF765EC240D with 5fdb3113-1023-4154-94bd-061f4138ea2b
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1713092848.314/displayed [39m[32m200[39m [90m4 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_PersonaCoin_Button"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_PersonaCoin_Button","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Homepage_PersonaCoin_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1710563984.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1710563984.314","ELEMENT":"42.11666800.4.-1710563984.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m178 ms - 185[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710563984.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710563984.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710563984.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1710563984.314/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0}
+[35m[WD Proxy][39m Replacing sessionId 3751960F-75B2-4FDC-96C1-3CF765EC240D with 5fdb3113-1023-4154-94bd-061f4138ea2b
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710563984.314/click [39m[32m200[39m [90m335 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"PersonaCoin_TestPage"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","PersonaCoin_TestPage","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"PersonaCoin_TestPage"}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (5fdb3113)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (5fdb3113)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:264:19)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[31m500[39m [90m259 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"PersonaCoin_TestPage"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","PersonaCoin_TestPage","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"PersonaCoin_TestPage"}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (5fdb3113)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (5fdb3113)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:264:19)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[31m500[39m [90m234 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Pressable_Button"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Pressable_Button","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Homepage_Pressable_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1710559824.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1710559824.314","ELEMENT":"42.11666800.4.-1710559824.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m180 ms - 185[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710559824.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710559824.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710559824.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1710559824.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710559824.314/click [39m[31m500[39m [90m1029 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710559824.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710559824.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710559824.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1710559824.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710559824.314/click [39m[31m500[39m [90m1024 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710559824.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710559824.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710559824.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1710559824.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710559824.314/click [39m[31m500[39m [90m1026 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_RadioGroup_Button"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_RadioGroup_Button","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Homepage_RadioGroup_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1710573136.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1710573136.314","ELEMENT":"42.11666800.4.-1710573136.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m201 ms - 185[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710573136.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710573136.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710573136.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1710573136.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710573136.314/click [39m[31m500[39m [90m1023 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710573136.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710573136.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710573136.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1710573136.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710573136.314/click [39m[31m500[39m [90m1022 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710573136.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710573136.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710573136.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1710573136.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1710573136.314/click [39m[31m500[39m [90m1020 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Separator_Button"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Separator_Button","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Homepage_Separator_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1712299856.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1712299856.314","ELEMENT":"42.11666800.4.-1712299856.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m190 ms - 185[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712299856.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712299856.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712299856.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1712299856.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712299856.314/click [39m[31m500[39m [90m1020 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712299856.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712299856.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712299856.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1712299856.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712299856.314/click [39m[31m500[39m [90m1029 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712299856.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712299856.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712299856.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1712299856.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712299856.314/click [39m[31m500[39m [90m1014 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Svg_Button"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Svg_Button","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Homepage_Svg_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1712313168.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1712313168.314","ELEMENT":"42.11666800.4.-1712313168.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m194 ms - 185[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712313168.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712313168.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712313168.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1712313168.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712313168.314/click [39m[31m500[39m [90m1021 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712313168.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712313168.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712313168.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1712313168.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712313168.314/click [39m[31m500[39m [90m1016 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712313168.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712313168.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712313168.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1712313168.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712313168.314/click [39m[31m500[39m [90m1013 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Text_Button"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Text_Button","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Homepage_Text_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1712308176.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1712308176.314","ELEMENT":"42.11666800.4.-1712308176.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m191 ms - 185[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712308176.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712308176.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712308176.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1712308176.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712308176.314/click [39m[31m500[39m [90m1010 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712308176.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712308176.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712308176.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1712308176.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712308176.314/click [39m[31m500[39m [90m1023 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712308176.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712308176.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712308176.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1712308176.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712308176.314/click [39m[31m500[39m [90m1015 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Theme_Button"}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Theme_Button","5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element] with body: {"using":"accessibility id","value":"Homepage_Theme_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3751960F-75B2-4FDC-96C1-3CF765EC240D","status":0,"value":{"ELEMENT":"42.11666800.4.-1712304432.314"}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.11666800.4.-1712304432.314","ELEMENT":"42.11666800.4.-1712304432.314"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element [39m[32m200[39m [90m191 ms - 185[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712304432.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712304432.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712304432.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1712304432.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712304432.314/click [39m[31m500[39m [90m1029 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712304432.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712304432.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712304432.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1712304432.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712304432.314/click [39m[31m500[39m [90m1017 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712304432.314/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (5fdb3113)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712304432.314/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712304432.314/click] to [POST http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D/element/42.11666800.4.-1712304432.314/click] with body: {}
+[35m[WD Proxy][39m Got response with status 400: {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m Encountered internal error running command: ProxyRequestError: Could not proxy command to remote server. Original error: 400 - {"status":105,"value":{"error":"element not interactable","message":"An element command could not be completed because the element is not pointer- or keyboard interactable."}}
+[debug] [35m[MJSONWP (5fdb3113)][39m     at JWProxy.proxy (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:218:13)
+[debug] [35m[W3C][39m Matched W3C error code 'element not interactable' to ElementNotInteractableError
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b/element/42.11666800.4.-1712304432.314/click [39m[31m500[39m [90m1021 ms - 190[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mDELETE[39m [37m/wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b[39m
+[35m[HTTP][39m [90m{}[39m
+[debug] [35m[MJSONWP (5fdb3113)][39m Calling AppiumDriver.deleteSession() with args: ["5fdb3113-1023-4154-94bd-061f4138ea2b"]
+[debug] [35m[BaseDriver][39m Event 'quitSessionRequested' logged at 1589243178514 (17:26:18 GMT-0700 (Pacific Daylight Time))
+[35m[Appium][39m Removing session 5fdb3113-1023-4154-94bd-061f4138ea2b from our master session list
 [debug] [35m[WinAppDriver][39m Deleting WinAppDriver session
 [debug] [35m[WinAppDriver][39m Deleting WinAppDriver server session
 [debug] [35m[WD Proxy][39m Matched '/' to command name 'deleteSession'
-[debug] [35m[WD Proxy][39m Proxying [DELETE /] to [DELETE http://127.0.0.1:4724/wd/hub/session/9D0D4A20-8CC3-4D65-B9B8-171761A451D8] with no body
+[debug] [35m[WD Proxy][39m Proxying [DELETE /] to [DELETE http://127.0.0.1:4724/wd/hub/session/3751960F-75B2-4FDC-96C1-3CF765EC240D] with no body
 [debug] [35m[WD Proxy][39m Got response with status 200: {"status":0}
 [debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'stopping'
-[35m[WinAppDriver][39m [STDOUT] 畒湮湩⁧灡汰捩瑡潩⁮刢呎獥整䅲灰•楷桴愠灰慐慲獭›≻湩瑩慩偬潲獰㨢絻∬潲瑯慔≧ㄺ㄰⹽张䑟噅彟㴠㴽映污敳‬敤敶潬浰湥⵴敬敶⁬慷湲湩⁧牡⁥䙏ⱆ瀠牥潦浲湡散漠瑰浩穩瑡潩獮愠敲传ൎഊ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　㐀 一漀琀 䘀漀甀渀搀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㌀㤀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㜀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀渀漀 猀甀挀栀 攀氀攀洀攀渀琀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀甀氀搀 渀漀琀 戀攀 氀漀挀愀琀攀搀 漀渀 琀栀攀 瀀愀最攀 甀猀椀渀最 琀栀攀 最椀瘀攀渀 猀攀愀爀挀栀 瀀愀爀愀洀攀琀攀爀猀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀嬀崀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀⼀攀氀攀洀攀渀琀猀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀 吀攀猀琀∀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䐀䔀䰀䔀吀䔀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㤀䐀　䐀㐀䄀㈀　ⴀ㠀䌀䌀㌀ⴀ㐀䐀㘀㔀ⴀ䈀㤀䈀㠀ⴀ㄀㜀㄀㜀㘀㄀䄀㐀㔀㄀䐀㠀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 　ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀ഀ਀
-[35m[WD Proxy][39m Got response with unknown status: {"errno":"ECONNRESET","code":"ECONNRESET","syscall":"read"}
-[debug] [35m[MJSONWP (d336da93)][39m Encountered internal error running command: UnknownError: An unknown server-side error occurred while processing the command. Original error: Could not proxy command to remote server. Original error: Error: read ECONNRESET
-[debug] [35m[MJSONWP (d336da93)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:266:13)
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[31m500[39m [90m225 ms - 251[39m
-[35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements[39m
-[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox Test"}[39m
-[debug] [35m[MJSONWP (d336da93)][39m Encountered internal error running command: NoSuchDriverError: A session is either terminated or not started
-[debug] [35m[MJSONWP (d336da93)][39m     at asyncHandler (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\protocol.js:255:15)
-[debug] [35m[MJSONWP (d336da93)][39m     at app.(anonymous function) (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\protocol.js:447:15)
-[debug] [35m[MJSONWP (d336da93)][39m     at Layer.handle [as handle_request] (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\layer.js:95:5)
-[debug] [35m[MJSONWP (d336da93)][39m     at next (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\route.js:137:13)
-[debug] [35m[MJSONWP (d336da93)][39m     at Route.dispatch (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\route.js:112:3)
-[debug] [35m[MJSONWP (d336da93)][39m     at Layer.handle [as handle_request] (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\layer.js:95:5)
-[debug] [35m[MJSONWP (d336da93)][39m     at C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:281:22
-[debug] [35m[MJSONWP (d336da93)][39m     at param (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:354:14)
-[debug] [35m[MJSONWP (d336da93)][39m     at param (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:365:14)
-[debug] [35m[MJSONWP (d336da93)][39m     at Function.process_params (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:410:3)
-[debug] [35m[MJSONWP (d336da93)][39m     at next (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:275:10)
-[debug] [35m[MJSONWP (d336da93)][39m     at logger (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\morgan\index.js:144:5)
-[debug] [35m[MJSONWP (d336da93)][39m     at Layer.handle [as handle_request] (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\layer.js:95:5)
-[debug] [35m[MJSONWP (d336da93)][39m     at trim_prefix (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:317:13)
-[debug] [35m[MJSONWP (d336da93)][39m     at C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:284:7
-[debug] [35m[MJSONWP (d336da93)][39m     at Function.process_params (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:335:12)
-[debug] [35m[MJSONWP (d336da93)][39m     at next (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:275:10)
-[debug] [35m[MJSONWP (d336da93)][39m     at C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\body-parser\lib\read.js:130:5
-[debug] [35m[MJSONWP (d336da93)][39m     at invokeCallback (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\raw-body\index.js:224:16)
-[debug] [35m[MJSONWP (d336da93)][39m     at done (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\raw-body\index.js:213:7)
-[debug] [35m[MJSONWP (d336da93)][39m     at IncomingMessage.onEnd (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\raw-body\index.js:273:7)
-[debug] [35m[MJSONWP (d336da93)][39m     at IncomingMessage.emit (events.js:203:15)
-[debug] [35m[MJSONWP (d336da93)][39m Destroying socket connection
-[35m[HTTP][39m [37m<-- POST /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f/elements [39m[33m404[39m [90m19 ms - 131[39m
-[35m[HTTP][39m [90m[39m
+[35m[WinAppDriver][39m [STDOUT] 畒湮湩⁧灡汰捩瑡潩⁮刢呎獥整䅲灰•楷桴愠灰慐慲獭›≻湩瑩慩偬潲獰㨢絻∬潲瑯慔≧ㄺ㄰⹽张䑟噅彟㴠㴽映污敳‬敤敶潬浰湥⵴敬敶⁬慷湲湩⁧牡⁥䙏ⱆ瀠牥潦浲湡散漠瑰浩穩瑡潩獮愠敲传ൎഊ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㄀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀　㈀㜀㘀㠀⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀　㈀㜀㘀㠀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䈀甀琀琀漀渀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㌀㄀㄀㤀㠀㠀㠀⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䜀䔀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㌀㄀㄀㤀㠀㠀㠀⸀㌀㄀㐀⼀搀椀猀瀀氀愀礀攀搀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀琀爀甀攀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开䌀愀氀氀漀甀琀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀㄀㈀㌀㌀㘀⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀㄀㈀㌀㌀㘀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀愀氀氀漀甀琀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㌀㄀　　㘀㈀㐀⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䜀䔀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㌀㄀　　㘀㈀㐀⸀㌀㄀㐀⼀搀椀猀瀀氀愀礀攀搀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀琀爀甀攀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开䌀栀攀挀欀戀漀砀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀　㤀㐀㈀㐀⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀　㤀㐀㈀㐀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㌀　㠀㠀㤀㘀　⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䜀䔀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㌀　㠀㠀㤀㘀　⸀㌀㄀㐀⼀搀椀猀瀀氀愀礀攀搀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀琀爀甀攀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㠀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开䘀漀挀甀猀吀爀愀瀀娀漀渀攀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀　㄀㤀㌀㘀⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀　㄀㤀㌀㘀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㄀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䘀漀挀甀猀吀爀愀瀀娀漀渀攀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㌀㄀　　㘀㈀㐀⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䜀䔀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㌀㄀　　㘀㈀㐀⸀㌀㄀㐀⼀搀椀猀瀀氀愀礀攀搀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㘀　ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀猀琀愀氀攀 攀氀攀洀攀渀琀 爀攀昀攀爀攀渀挀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 昀愀椀氀攀搀 戀攀挀愀甀猀攀 琀栀攀 爀攀昀攀爀攀渀挀攀搀 攀氀攀洀攀渀琀 椀猀 渀漀 氀漀渀最攀爀 愀琀琀愀挀栀攀搀 琀漀 琀栀攀 䐀伀䴀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䜀䔀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㌀㄀　　㘀㈀㐀⸀㌀㄀㐀⼀搀椀猀瀀氀愀礀攀搀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　㐀 一漀琀 䘀漀甀渀搀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㌀㤀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㜀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀渀漀 猀甀挀栀 攀氀攀洀攀渀琀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀甀氀搀 渀漀琀 戀攀 氀漀挀愀琀攀搀 漀渀 琀栀攀 瀀愀最攀 甀猀椀渀最 琀栀攀 最椀瘀攀渀 猀攀愀爀挀栀 瀀愀爀愀洀攀琀攀爀猀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㤀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开䰀椀渀欀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀　㔀㘀㜀㜀㈀㠀⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀　㔀㘀㜀㜀㈀㠀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䰀椀渀欀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　㐀 一漀琀 䘀漀甀渀搀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㌀㤀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㜀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀渀漀 猀甀挀栀 攀氀攀洀攀渀琀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀甀氀搀 渀漀琀 戀攀 氀漀挀愀琀攀搀 漀渀 琀栀攀 瀀愀最攀 甀猀椀渀最 琀栀攀 最椀瘀攀渀 猀攀愀爀挀栀 瀀愀爀愀洀攀琀攀爀猀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䰀椀渀欀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　㐀 一漀琀 䘀漀甀渀搀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㌀㤀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㜀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀渀漀 猀甀挀栀 攀氀攀洀攀渀琀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀甀氀搀 渀漀琀 戀攀 氀漀挀愀琀攀搀 漀渀 琀栀攀 瀀愀最攀 甀猀椀渀最 琀栀攀 最椀瘀攀渀 猀攀愀爀挀栀 瀀愀爀愀洀攀琀攀爀猀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀　㔀㘀㄀㐀㠀㠀⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀　㔀㘀㄀㐀㠀㠀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㌀　㤀㈀㠀㐀㠀⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䜀䔀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㌀　㤀㈀㠀㐀㠀⸀㌀㄀㐀⼀搀椀猀瀀氀愀礀攀搀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀琀爀甀攀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开倀攀爀猀漀渀愀䌀漀椀渀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀　㔀㘀㌀㤀㠀㐀⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀　㔀㘀㌀㤀㠀㐀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㤀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀倀攀爀猀漀渀愀䌀漀椀渀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　㐀 一漀琀 䘀漀甀渀搀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㌀㤀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㜀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀渀漀 猀甀挀栀 攀氀攀洀攀渀琀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀甀氀搀 渀漀琀 戀攀 氀漀挀愀琀攀搀 漀渀 琀栀攀 瀀愀最攀 甀猀椀渀最 琀栀攀 最椀瘀攀渀 猀攀愀爀挀栀 瀀愀爀愀洀攀琀攀爀猀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㤀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀倀攀爀猀漀渀愀䌀漀椀渀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　㐀 一漀琀 䘀漀甀渀搀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㌀㤀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㜀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀渀漀 猀甀挀栀 攀氀攀洀攀渀琀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀甀氀搀 渀漀琀 戀攀 氀漀挀愀琀攀搀 漀渀 琀栀攀 瀀愀最攀 甀猀椀渀最 琀栀攀 最椀瘀攀渀 猀攀愀爀挀栀 瀀愀爀愀洀攀琀攀爀猀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开倀爀攀猀猀愀戀氀攀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀　㔀㔀㤀㠀㈀㐀⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀　㔀㔀㤀㠀㈀㐀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀　㔀㔀㤀㠀㈀㐀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀　㔀㔀㤀㠀㈀㐀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开刀愀搀椀漀䜀爀漀甀瀀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀　㔀㜀㌀㄀㌀㘀⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀　㔀㜀㌀㄀㌀㘀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀　㔀㜀㌀㄀㌀㘀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀　㔀㜀㌀㄀㌀㘀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开匀攀瀀愀爀愀琀漀爀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㈀㤀㤀㠀㔀㘀⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㈀㤀㤀㠀㔀㘀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㈀㤀㤀㠀㔀㘀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㈀㤀㤀㠀㔀㘀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㠀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀㄀㌀㄀㘀㠀⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀㄀㌀㄀㘀㠀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀㄀㌀㄀㘀㠀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀㄀㌀㄀㘀㠀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㤀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开吀攀砀琀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀　㠀㄀㜀㘀⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀　㠀㄀㜀㘀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀　㠀㄀㜀㘀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀　㠀㄀㜀㘀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀　ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开吀栀攀洀攀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀　㐀㐀㌀㈀⸀㌀㄀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀　㐀㐀㌀㈀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀　㐀㐀㌀㈀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㄀㘀㘀㘀㠀　　⸀㐀⸀ⴀ㄀㜀㄀㈀㌀　㐀㐀㌀㈀⸀㌀㄀㐀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ 㐀　　 䈀愀搀 刀攀焀甀攀猀琀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㜀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀㄀　㔀Ⰰ∀瘀愀氀甀攀∀㨀笀∀攀爀爀漀爀∀㨀∀攀氀攀洀攀渀琀 渀漀琀 椀渀琀攀爀愀挀琀愀戀氀攀∀Ⰰ∀洀攀猀猀愀最攀∀㨀∀䄀渀 攀氀攀洀攀渀琀 挀漀洀洀愀渀搀 挀漀甀氀搀 渀漀琀 戀攀 挀漀洀瀀氀攀琀攀搀 戀攀挀愀甀猀攀 琀栀攀 攀氀攀洀攀渀琀 椀猀 渀漀琀 瀀漀椀渀琀攀爀ⴀ 漀爀 欀攀礀戀漀愀爀搀 椀渀琀攀爀愀挀琀愀戀氀攀⸀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䐀䔀䰀䔀吀䔀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㌀㜀㔀㄀㤀㘀　䘀ⴀ㜀㔀䈀㈀ⴀ㐀䘀䐀䌀ⴀ㤀㘀䌀㄀ⴀ㌀䌀䘀㜀㘀㔀䔀䌀㈀㐀　䐀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 　ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀　紀ഀ਀
 [debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'stopped'
-[debug] [35m[BaseDriver][39m Event 'quitSessionFinished' logged at 1588976907166 (15:28:27 GMT-0700 (Pacific Daylight Time))
-[debug] [35m[MJSONWP (d336da93)][39m Received response: null
-[debug] [35m[MJSONWP (d336da93)][39m But deleting session, so not returning
-[debug] [35m[MJSONWP (d336da93)][39m Responding to client with driver.deleteSession() result: null
-[debug] [35m[MJSONWP (d336da93)][39m Destroying socket connection
-[35m[HTTP][39m [37m<-- DELETE /wd/hub/session/d336da93-35ee-402c-be0d-6fd9196fcf0f [39m[32m200[39m [90m197 ms - 76[39m
+[debug] [35m[BaseDriver][39m Event 'quitSessionFinished' logged at 1589243178732 (17:26:18 GMT-0700 (Pacific Daylight Time))
+[debug] [35m[MJSONWP (5fdb3113)][39m Received response: null
+[debug] [35m[MJSONWP (5fdb3113)][39m But deleting session, so not returning
+[debug] [35m[MJSONWP (5fdb3113)][39m Responding to client with driver.deleteSession() result: null
+[debug] [35m[MJSONWP (5fdb3113)][39m Destroying socket connection
+[35m[HTTP][39m [37m<-- DELETE /wd/hub/session/5fdb3113-1023-4154-94bd-061f4138ea2b [39m[32m200[39m [90m219 ms - 76[39m
 [35m[HTTP][39m [90m[39m
 [35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session[39m
 [35m[HTTP][39m [90m{"capabilities":{"alwaysMatch":{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"},"firstMatch":[{}]},"desiredCapabilities":{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"}}[39m
 [debug] [35m[W3C][39m Calling AppiumDriver.createSession() with args: [{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"},null,{"alwaysMatch":{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"},"firstMatch":[{}]}]
-[debug] [35m[BaseDriver][39m Event 'newSessionRequested' logged at 1588976907936 (15:28:27 GMT-0700 (Pacific Daylight Time))
+[debug] [35m[BaseDriver][39m Event 'newSessionRequested' logged at 1589243179504 (17:26:19 GMT-0700 (Pacific Daylight Time))
 [35m[BaseDriver][39m The following capabilities are not standard capabilities and should have an extension prefix:
 [35m[BaseDriver][39m   deviceName
 [35m[BaseDriver][39m   app
@@ -357,7 +669,7 @@
 [35m[BaseDriver][39m The following capabilities were provided, but are not recognized by Appium:
 [35m[BaseDriver][39m   appArguments
 [35m[BaseDriver][39m   appWorkingDir
-[35m[BaseDriver][39m Session created with session id: 3795d209-ff0c-496c-accb-2e746d2b7335
+[35m[BaseDriver][39m Session created with session id: e57c113f-e591-4b2b-81ee-bb086d44c33b
 [35m[WinAppDriver][39m WinAppDriver exists, but the checksum did not match. Was it replaced manually?
 [debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'starting'
 [35m[WinAppDriver][39m Killing any old WinAppDrivers on same port, running: FOR /F "usebackq tokens=5" %a in (`netstat -nao ^| findstr /R /C:"4724 "`) do (FOR /F "usebackq" %b in (`TASKLIST /FI "PID eq %a" ^| findstr /I winappdriver.exe`) do (IF NOT %b=="" TASKKILL /F /PID %a))
@@ -381,7 +693,7 @@
 [35m[WinAppDriver][39m [STDOUT] Content-Length: 147
 [35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
 [35m[WinAppDriver][39m [STDOUT] 
-[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"build":{"revision":"18001","time":"Tue Sep 18 18:35:38 2018","version":"1.1.1809"},"os":{"arch":"amd64","name":"windows","version":"10.0.18362"}}
 [debug] [35m[WD Proxy][39m Got response with status 200: {"build":{"revision":"18001","time":"Tue Sep 18 18:35:38 2018","version":"1.1.1809"},"os":{"arch":"amd64","name":"windows","version":"10.0.18362"}}
 [35m[WinAppDriver][39m Status call returned 200. we're online and ready to run tests
 [debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'online'
@@ -399,32 +711,32 @@
 [35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
 [35m[WinAppDriver][39m [STDOUT] User-Agent: appium
 [35m[WinAppDriver][39m [STDOUT] 
-[35m[WinAppDriver][39m [STDOUT] 
-[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"09F9969F-7D53-4AC5-978B-94DC545A0431","status":0,"value":{"app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/","platformName":"windows"}}
+[35m[WinAppDriver][39m [STDOUT] {"desiredCapabilities":{"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"}}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"DFDF4DD6-94AC-49BD-97A1-03DAD7A3EA16","status":0,"value":{"app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/","platformName":"windows"}}
 [35m[WD Proxy][39m Determined the downstream protocol as 'MJSONWP'
-[35m[Appium][39m New WindowsDriver session created successfully, session 3795d209-ff0c-496c-accb-2e746d2b7335 added to master session list
-[debug] [35m[BaseDriver][39m Event 'newSessionStarted' logged at 1588976911604 (15:28:31 GMT-0700 (Pacific Daylight Time))
-[debug] [35m[MJSONWP (3795d209)][39m Cached the protocol value 'MJSONWP' for the new session 3795d209-ff0c-496c-accb-2e746d2b7335
-[debug] [35m[MJSONWP (3795d209)][39m Responding to client with driver.createSession() result: {"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"}
-[35m[HTTP][39m [37m<-- POST /wd/hub/session [39m[32m200[39m [90m3669 ms - 533[39m
+[35m[Appium][39m New WindowsDriver session created successfully, session e57c113f-e591-4b2b-81ee-bb086d44c33b added to master session list
+[debug] [35m[BaseDriver][39m Event 'newSessionStarted' logged at 1589243186212 (17:26:26 GMT-0700 (Pacific Daylight Time))
+[debug] [35m[MJSONWP (e57c113f)][39m Cached the protocol value 'MJSONWP' for the new session e57c113f-e591-4b2b-81ee-bb086d44c33b
+[debug] [35m[MJSONWP (e57c113f)][39m Responding to client with driver.createSession() result: {"platformName":"windows","deviceName":"WindowsPC","app":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe","appArguments":"basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp","appWorkingDir":"C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session [39m[32m200[39m [90m6709 ms - 533[39m
 [35m[HTTP][39m [90m[39m
-[35m[HTTP][39m [37m-->[39m [37mDELETE[39m [37m/wd/hub/session/3795d209-ff0c-496c-accb-2e746d2b7335[39m
+[35m[HTTP][39m [37m-->[39m [37mDELETE[39m [37m/wd/hub/session/e57c113f-e591-4b2b-81ee-bb086d44c33b[39m
 [35m[HTTP][39m [90m{}[39m
-[debug] [35m[MJSONWP (3795d209)][39m Calling AppiumDriver.deleteSession() with args: ["3795d209-ff0c-496c-accb-2e746d2b7335"]
-[debug] [35m[BaseDriver][39m Event 'quitSessionRequested' logged at 1588976913366 (15:28:33 GMT-0700 (Pacific Daylight Time))
-[35m[Appium][39m Removing session 3795d209-ff0c-496c-accb-2e746d2b7335 from our master session list
+[debug] [35m[MJSONWP (e57c113f)][39m Calling AppiumDriver.deleteSession() with args: ["e57c113f-e591-4b2b-81ee-bb086d44c33b"]
+[debug] [35m[BaseDriver][39m Event 'quitSessionRequested' logged at 1589243187947 (17:26:27 GMT-0700 (Pacific Daylight Time))
+[35m[Appium][39m Removing session e57c113f-e591-4b2b-81ee-bb086d44c33b from our master session list
 [debug] [35m[WinAppDriver][39m Deleting WinAppDriver session
 [debug] [35m[WinAppDriver][39m Deleting WinAppDriver server session
 [debug] [35m[WD Proxy][39m Matched '/' to command name 'deleteSession'
-[debug] [35m[WD Proxy][39m Proxying [DELETE /] to [DELETE http://127.0.0.1:4724/wd/hub/session/09F9969F-7D53-4AC5-978B-94DC545A0431] with no body
+[debug] [35m[WD Proxy][39m Proxying [DELETE /] to [DELETE http://127.0.0.1:4724/wd/hub/session/DFDF4DD6-94AC-49BD-97A1-03DAD7A3EA16] with no body
 [debug] [35m[WD Proxy][39m Got response with status 200: {"status":0}
 [debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'stopping'
-[35m[WinAppDriver][39m [STDOUT] 畒湮湩⁧灡汰捩瑡潩⁮刢呎獥整䅲灰•楷桴愠灰慐慲獭›≻湩瑩慩偬潲獰㨢絻∬潲瑯慔≧ㄺ㄰⹽张䑟噅彟㴠㴽映污敳‬敤敶潬浰湥⵴敬敶⁬慷湲湩⁧牡⁥䙏ⱆ瀠牥潦浲湡散漠瑰浩穩瑡潩獮愠敲传ൎ䠊吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀　㠀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀　㤀䘀㤀㤀㘀㤀䘀ⴀ㜀䐀㔀㌀ⴀ㐀䄀䌀㔀ⴀ㤀㜀㠀䈀ⴀ㤀㐀䐀䌀㔀㐀㔀䄀　㐀㌀㄀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀愀瀀瀀∀㨀∀䌀㨀⼀唀猀攀爀猀⼀猀愀昀爀攀椀戀攀⸀刀䔀䐀䴀伀一䐀⼀䐀攀猀欀琀漀瀀⼀一攀眀䘀氀甀攀渀琀⼀昀氀甀攀渀琀甀椀ⴀ爀攀愀挀琀ⴀ渀愀琀椀瘀攀⼀渀漀搀攀开洀漀搀甀氀攀猀⼀䀀漀昀昀椀挀攀ⴀ椀猀猀⼀爀攀砀ⴀ眀椀渀㌀㈀⼀刀攀愀挀琀吀攀猀琀⸀攀砀攀∀Ⰰ∀愀瀀瀀䄀爀最甀洀攀渀琀猀∀㨀∀戀愀猀攀倀愀琀栀 䌀㨀⼀唀猀攀爀猀⼀猀愀昀爀攀椀戀攀⸀刀䔀䐀䴀伀一䐀⼀䐀攀猀欀琀漀瀀⼀一攀眀䘀氀甀攀渀琀⼀昀氀甀攀渀琀甀椀ⴀ爀攀愀挀琀ⴀ渀愀琀椀瘀攀⼀愀瀀瀀猀⼀眀椀渀㌀㈀⼀搀椀猀琀 瀀氀甀最椀渀 搀攀昀愀甀氀琀瀀氀甀最椀渀 戀甀渀搀氀攀 刀一吀攀猀琀攀爀 挀漀洀瀀漀渀攀渀琀 刀一吀攀猀琀攀爀䄀瀀瀀∀Ⰰ∀愀瀀瀀圀漀爀欀椀渀最䐀椀爀∀㨀∀䌀㨀⼀唀猀攀爀猀⼀猀愀昀爀攀椀戀攀⸀刀䔀䐀䴀伀一䐀⼀䐀攀猀欀琀漀瀀⼀一攀眀䘀氀甀攀渀琀⼀昀氀甀攀渀琀甀椀ⴀ爀攀愀挀琀ⴀ渀愀 嬀⸀⸀⸀崀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䐀䔀䰀䔀吀䔀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀　㤀䘀㤀㤀㘀㤀䘀ⴀ㜀䐀㔀㌀ⴀ㐀䄀䌀㔀ⴀ㤀㜀㠀䈀ⴀ㤀㐀䐀䌀㔀㐀㔀䄀　㐀㌀㄀ 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 　ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀　紀ഀ਀
+[35m[WinAppDriver][39m [STDOUT] 畒湮湩⁧灡汰捩瑡潩⁮刢呎獥整䅲灰•楷桴愠灰慐慲獭›≻湩瑩慩偬潲獰㨢絻∬潲瑯慔≧ㄺ㄰⹽张䑟噅彟㴠㴽映污敳‬敤敶潬浰湥⵴敬敶⁬慷湲湩⁧牡⁥䙏ⱆ瀠牥潦浲湡散漠瑰浩穩瑡潩獮愠敲传ൎ䠊吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀　㠀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀䐀䘀䐀䘀㐀䐀䐀㘀ⴀ㤀㐀䄀䌀ⴀ㐀㤀䈀䐀ⴀ㤀㜀䄀㄀ⴀ　㌀䐀䄀䐀㜀䄀㌀䔀䄀㄀㘀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀愀瀀瀀∀㨀∀䌀㨀⼀唀猀攀爀猀⼀猀愀昀爀攀椀戀攀⸀刀䔀䐀䴀伀一䐀⼀䐀攀猀欀琀漀瀀⼀一攀眀䘀氀甀攀渀琀⼀昀氀甀攀渀琀甀椀ⴀ爀攀愀挀琀ⴀ渀愀琀椀瘀攀⼀渀漀搀攀开洀漀搀甀氀攀猀⼀䀀漀昀昀椀挀攀ⴀ椀猀猀⼀爀攀砀ⴀ眀椀渀㌀㈀⼀刀攀愀挀琀吀攀猀琀⸀攀砀攀∀Ⰰ∀愀瀀瀀䄀爀最甀洀攀渀琀猀∀㨀∀戀愀猀攀倀愀琀栀 䌀㨀⼀唀猀攀爀猀⼀猀愀昀爀攀椀戀攀⸀刀䔀䐀䴀伀一䐀⼀䐀攀猀欀琀漀瀀⼀一攀眀䘀氀甀攀渀琀⼀昀氀甀攀渀琀甀椀ⴀ爀攀愀挀琀ⴀ渀愀琀椀瘀攀⼀愀瀀瀀猀⼀眀椀渀㌀㈀⼀搀椀猀琀 瀀氀甀最椀渀 搀攀昀愀甀氀琀瀀氀甀最椀渀 戀甀渀搀氀攀 刀一吀攀猀琀攀爀 挀漀洀瀀漀渀攀渀琀 刀一吀攀猀琀攀爀䄀瀀瀀∀Ⰰ∀愀瀀瀀圀漀爀欀椀渀最䐀椀爀∀㨀∀䌀㨀⼀唀猀攀爀猀⼀猀愀昀爀攀椀戀攀⸀刀䔀䐀䴀伀一䐀⼀䐀攀猀欀琀漀瀀⼀一攀眀䘀氀甀攀渀琀⼀昀氀甀攀渀琀甀椀ⴀ爀攀愀挀琀ⴀ渀愀 嬀⸀⸀⸀崀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䐀䔀䰀䔀吀䔀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀䐀䘀䐀䘀㐀䐀䐀㘀ⴀ㤀㐀䄀䌀ⴀ㐀㤀䈀䐀ⴀ㤀㜀䄀㄀ⴀ　㌀䐀䄀䐀㜀䄀㌀䔀䄀㄀㘀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 挀氀漀猀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 　ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀琀愀琀甀猀∀㨀　紀ഀ਀
 [debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'stopped'
-[debug] [35m[BaseDriver][39m Event 'quitSessionFinished' logged at 1588976913533 (15:28:33 GMT-0700 (Pacific Daylight Time))
-[debug] [35m[MJSONWP (3795d209)][39m Received response: null
-[debug] [35m[MJSONWP (3795d209)][39m But deleting session, so not returning
-[debug] [35m[MJSONWP (3795d209)][39m Responding to client with driver.deleteSession() result: null
-[debug] [35m[MJSONWP (3795d209)][39m Destroying socket connection
-[35m[HTTP][39m [37m<-- DELETE /wd/hub/session/3795d209-ff0c-496c-accb-2e746d2b7335 [39m[32m200[39m [90m168 ms - 76[39m
+[debug] [35m[BaseDriver][39m Event 'quitSessionFinished' logged at 1589243188122 (17:26:28 GMT-0700 (Pacific Daylight Time))
+[debug] [35m[MJSONWP (e57c113f)][39m Received response: null
+[debug] [35m[MJSONWP (e57c113f)][39m But deleting session, so not returning
+[debug] [35m[MJSONWP (e57c113f)][39m Responding to client with driver.deleteSession() result: null
+[debug] [35m[MJSONWP (e57c113f)][39m Destroying socket connection
+[35m[HTTP][39m [37m<-- DELETE /wd/hub/session/e57c113f-e591-4b2b-81ee-bb086d44c33b [39m[32m200[39m [90m176 ms - 76[39m
 [35m[HTTP][39m [90m[39m

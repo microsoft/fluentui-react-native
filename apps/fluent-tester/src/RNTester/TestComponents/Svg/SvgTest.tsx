@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Svg, Path, Circle, Defs, RadialGradient, Stop, Line, SvgCssUri, G, Rect, Use, Polygon } from 'react-native-svg';
+import { SVG_TESTPAGE } from './../../Consts';
 
 const styles = StyleSheet.create({
   svg: {
@@ -13,7 +14,7 @@ import TestSvg from './Assets/accessible-icon-brands.svg';
 export const SvgTest: React.FunctionComponent<{}> = () => {
   return (
     <View>
-      <Text>Rect</Text>
+      <Text testID={SVG_TESTPAGE}>Rect</Text>
       <Svg width="50" height="50">
         <Rect x="10" y="10" width="20" height="20" fill="red" stroke="black" />
       </Svg>

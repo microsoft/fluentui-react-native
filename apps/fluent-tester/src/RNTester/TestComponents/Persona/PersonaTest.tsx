@@ -4,11 +4,14 @@ import { Separator, Text } from '@fluentui/react-native';
 import { commonTestStyles } from '../Common/styles';
 import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';
+import { PERSONA_TESTPAGE } from './../../Consts';
 
 export const PersonaTest: React.FunctionComponent<{}> = () => {
   return (
     <View>
-      <Text style={commonTestStyles.section}>Standard Usage</Text>
+      <Text style={commonTestStyles.section} testID={PERSONA_TESTPAGE}>
+        Standard Usage
+      </Text>
       <Separator />
       <StandardUsage />
 

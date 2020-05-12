@@ -27,9 +27,10 @@
     "@fluentui-react-native/tester": "^0.0.1",
     "@uifabricshared/theming-react-native": "0.7.11",
     "@uifabricshared/themed-stylesheet": "0.3.12",
+    "react-native-svg": "^11.0.0",
     "react": "16.11.0",
     "react-native": "0.62.2",
-    "react-native-svg": "^11.0.0"
+    "react-native-windows": "0.0.0-master.52"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.27.3",
@@ -43,7 +44,7 @@
     "metro-react-native-babel-preset": "^0.54.1",
     "react": "16.11.0",
     "react-native": "0.62.2",
-    "react-native-windows": "^0.0.0-master.45",
+    "react-native-windows": "0.0.0-master.52",
     "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "~16.11.0",
     "appium": "1.17.1",
@@ -57,7 +58,9 @@
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
     "typescript": "3.8.3",
-    "@types/jasmine": "3.5.10"
+    "@types/jasmine": "3.5.10",
+    "webdriver": "git+https://github.com/react-native-windows/webdriver.git",
+    "webdriverio": "5.22.4"
   },
   "workspaces": {
     "nohoist": [

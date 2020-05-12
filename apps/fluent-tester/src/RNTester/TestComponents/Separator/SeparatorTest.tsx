@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button, Separator, Text } from '@fluentui/react-native';
 import { stackStyle, separatorStackStyle } from '../Common/styles';
 import { Stack } from '@fluentui-react-native/stack';
+import { SEPARATOR_TESTPAGE } from './../../Consts';
 
 const BlueSeparator = Separator.customize({ tokens: { color: 'blue' } });
 const RedSeparator = Separator.customize({ tokens: { color: 'red' } });
@@ -17,7 +18,7 @@ export const SeparatorTest: React.FunctionComponent<{}> = () => {
         <Button content="Button6" />
         <Separator />
       </Stack>
-      <Text>This is a text element</Text>
+      <Text testID={SEPARATOR_TESTPAGE}>This is a text element</Text>
       <Separator />
       <Button content="This button has longer text" />
     </Stack>
