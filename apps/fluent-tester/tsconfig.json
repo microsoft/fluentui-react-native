@@ -9,5 +9,5 @@
     },
     "types": ["@wdio/sync", "@wdio/jasmine-framework", "node", "@types/jasmine"]
   },
-  "include": ["./src/**/*.ts", "./src/E2E", "./src/E2E/pages/BootTestPage.ts", "/src/**/*.ts", "/src/E2E", "/src/E2E/pages/BootTestPage.ts"]
+  "include": ["./src/**/*.ts"]
 }
