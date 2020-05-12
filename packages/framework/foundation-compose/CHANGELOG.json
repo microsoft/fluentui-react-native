@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Fri, 08 May 2020 18:49:53 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.16",
+      "version": "1.6.16",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "ff5a5b0edb37bb35c9b2a4e817089a5a56551604",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 30 Apr 2020 21:18:33 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.6.12",
       "version": "1.6.12",
