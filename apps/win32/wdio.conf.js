@@ -2,7 +2,6 @@ const baseUrl = 'https://webdriver.io';
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  //specs: ['src/E2E/test/Checkbox.spec.ts'], // Where the spec documents live
   specs: ['../fluent-tester/src/E2E/test/**/*.ts'],
   exclude: [
     /* 'path/to/excluded/files' */
@@ -14,7 +13,8 @@ exports.config = {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'windows',
       deviceName: 'WindowsPC',
-      app: 'C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe',
+      //app: 'C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe',
+      app: 'e:/OM/Target/x64/debug/reacttest_testapp/x-none/ReactTest.exe',
       appArguments:
         'basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp',
       appWorkingDir: 'C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/'
