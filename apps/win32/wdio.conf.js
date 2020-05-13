@@ -1,7 +1,7 @@
 const path = require('path');
 
 const appPath = path.resolve(path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js')), 'ReactTest.exe');
-const appArgs = 'basePath ' + path.resolve('dist') + ' plugin defaultplugin bundle RNTester component RNTesterApp';
+const appArgs = 'basePath ' + path.resolve('dist') + ' plugin defaultplugin bundle index component FluentTester';
 const appDir = path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js'));
 
 const baseUrl = 'https://webdriver.io';
