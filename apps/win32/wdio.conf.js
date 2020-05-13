@@ -1,3 +1,9 @@
+const path = require('path');
+
+const appPath = path.resolve(path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js')), 'ReactTest.exe');
+const appArgs = 'basePath ' + path.resolve('dist') + ' plugin defaultplugin bundle RNTester component RNTesterApp';
+const appDir = path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js'));
+
 const baseUrl = 'https://webdriver.io';
 
 exports.config = {
@@ -13,14 +19,9 @@ exports.config = {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'windows',
       deviceName: 'WindowsPC',
-
-      /*
-      ** This will be fixed, unsure how to use path.resolve though
-      */
-      app: 'C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/ReactTest.exe',
-      appArguments:
-        'basePath C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/apps/win32/dist plugin defaultplugin bundle RNTester component RNTesterApp',
-      appWorkingDir: 'C:/Users/safreibe.REDMOND/Desktop/NewFluent/fluentui-react-native/node_modules/@office-iss/rex-win32/'
+      app: appPath,
+      appArguments: appArgs,
+      appWorkingDir: appDir
     }
   ],
 
