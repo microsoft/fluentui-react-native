@@ -19,22 +19,20 @@
     "bundle": "fluentui-scripts bundle"
   },
   "dependencies": {
-    "@fluentui/react-native": "0.15.16",
+    "@fluentui/react-native": "0.15.20",
     "@fluentui-react-native/stack": "0.1.0",
-    "@uifabricshared/theming-react-native": "0.7.11",
-    "@uifabricshared/themed-stylesheet": "0.3.12",
+    "@uifabricshared/theming-react-native": "0.7.15",
+    "@uifabricshared/themed-stylesheet": "0.3.16",
     "react-native-svg": "^11.0.0"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.27.3",
-    "@office-iss/rex-win32": "0.0.0-devmain.12823.10000",
     "@react-native-community/eslint-config": "^1.1.0",
     "@types/prop-types": "15.5.1",
     "@types/react": "^16.9.34",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "metro-react-native-babel-preset": "^0.54.1",
+    "metro-react-native-babel-preset": "^0.58.0",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-windows": "^0.0.0-master.45",

@@ -2,6 +2,21 @@
   "name": "@uifabricshared/immutable-merge",
   "entries": [
     {
+      "date": "Fri, 08 May 2020 18:49:53 GMT",
+      "tag": "@uifabricshared/immutable-merge_v0.5.13",
+      "version": "0.5.13",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "ff5a5b0edb37bb35c9b2a4e817089a5a56551604",
+            "package": "@uifabricshared/immutable-merge"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Apr 2020 05:58:24 GMT",
       "tag": "@uifabricshared/immutable-merge_v0.5.2",
       "version": "0.5.2",
