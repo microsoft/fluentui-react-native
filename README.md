@@ -2,6 +2,8 @@
 
 FluentUI React Native is a javascript component library that provides developers with controls that are part of the [Fluent Design System](https://www.microsoft.com/design/fluent/). These controls are built on [React Native](https://reactnative.dev/) and fully customizable.
 
+FluentUI React Native is still in the alpha stages of development for both the components and the repo. We encourage anyone who is interested in getting an early glimpse of our plans to download and use our components, but please note that you may hit bumps along the way. Please leave us feedback or file issues if you run into bumps, and we will continue to improve the quality of the repo.
+
 ## Getting Started
 
 If you have an existing React Native project, it's easy to begin using FluentUI React Native. If you need to setup a new React Native project, please see the [React Native Windows Getting Started documentation](https://microsoft.github.io/react-native-windows/docs/getting-started).
@@ -11,27 +13,50 @@ If you have an existing React Native project, it's easy to begin using FluentUI 
 - [Standard React Native dependencies](https://reactnative.dev/docs/environment-setup)
 - [Node.js](https://nodejs.org/en/download/)
 
-### Install FluentUI React Native into an existing project
+### Create New React Native project (if needed)
 
-Navigate to the root folder of your project, and use npm to install the package:
+1. Follow the instructions on the [React Native Windows Getting Started documentation](https://microsoft.github.io/react-native-windows/docs/getting-started) to create a React Native project.
+
+2. Navigate to the root folder of your project, and use npm to install the package:
 
 ```
  npm i @fluentui/react-native
 ```
 
-After successful installation, you can test the package by importing components at the top of your app's entry file, e.g. `App.js`:
+3. After successful installation, you can test the package by importing components at the top of your app's entry file, e.g. `App.js`:
 
 ```
  import { Checkbox } from '@fluentui/react-native';
 ```
 
-Once you have the package installed, check out our [Hello World Fluent page](https://github.com/microsoft/fluent-site/blob/master/packages/fluent-website/docs/windows/get-started/Hello-World.mdx) to start writing code (Coming Soon).
+4. After importing the @fluentui/react-native package, you can use components such as `Text` and `Checkbox` in your JSX.
+
+```
+// In App.js in a new project
+import React from 'react';
+import { View, Text } from 'react-native';
+import { Checkbox } from '@fluentui/react-native';
+function HelloWorldApp() {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+      }}>
+      <Text>Hello, world!</Text>
+      <Checkbox label="Hello World Checkbox"/>
+    </View>
+  )
+}
+export default HelloWorldApp;
+```
 
 ## Documentation
 
 ### Components and Controls
 
-Our component documentation is hosted in a separate repository, [Microsoft FluentUI Site](https://github.com/Microsoft/fluent-site) that will be published to its own website (Coming Soon).
+Our component documentation is hosted on the [FluentUI documentation](https://developer.microsoft.com/fluentui).
 
 ### Theming framework
 
