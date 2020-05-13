@@ -24,7 +24,7 @@ export const Button = compose<IButtonType>({
       ...rest
     } = userProps;
     // attach the pressable state handlers
-    const pressable = useAsPressable(rest && { onPress: onClick });
+    const pressable = useAsPressable({ ...rest, onPress: onClick });
     // set up state
     const state: IButtonState = {
       info: {

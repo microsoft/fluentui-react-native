@@ -2,7 +2,7 @@
   "name": "FluentTester-win32",
   "version": "0.0.1",
   "private": true,
-  "main": "src/index.ts",
+  "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
   "onPublish": {
@@ -33,15 +33,15 @@
     "react-native-windows": "0.0.0-master.52"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.27.3",
-    "@office-iss/rex-win32": "0.0.0-devmain.12823.10000",
+    "@office-iss/react-native-win32": "0.62.0-preview.3",
+    "@office-iss/rex-win32": "0.62.0-preview.3-tenantreactnativewin-12906",
     "@react-native-community/eslint-config": "^1.1.0",
     "@types/prop-types": "15.5.1",
     "@types/react": "^16.9.34",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "metro-react-native-babel-preset": "^0.54.1",
+    "metro-react-native-babel-preset": "^0.58.0",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-windows": "0.0.0-master.52",
@@ -68,7 +68,7 @@
     ]
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "0.27.3",
+    "@office-iss/react-native-win32": "0.62.0-preview.3",
     "react": "16.11.0",
     "react-native": "0.62.2"
   },
@@ -79,9 +79,9 @@
     "targets": [
       "win32"
     ],
-    "entry": "./src/index.tsx",
+    "entry": "index.js",
     "outputPath": "./dist",
-    "bundleName": "RNTester.bundle",
+    "bundleName": "index.bundle",
     "noPlatformSuffix": true
   }
 }
