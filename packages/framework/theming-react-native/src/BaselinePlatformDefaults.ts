@@ -3,16 +3,15 @@ import { getStockWebPalette, ITypography, ISpacing, FontWeightValue, FontSize, I
 import { Platform } from 'react-native';
 
 function _defaultTypography(): ITypography {
-
   const defaultsDict = {
     sizes: {
-      caption: 8 as FontSize,
-      secondary: 9 as FontSize,
-      body: 11 as FontSize,
-      subheader: 12 as FontSize,
-      header: 15 as FontSize,
-      hero: 21 as FontSize,
-      heroLarge: 32 as FontSize
+      caption: 10 as FontSize,
+      secondary: 12 as FontSize,
+      body: 14 as FontSize,
+      subheader: 16 as FontSize,
+      header: 20 as FontSize,
+      hero: 28 as FontSize,
+      heroLarge: 42 as FontSize
     } as IFontSizes,
     weights: {
       regular: '400' as FontWeightValue,
@@ -51,7 +50,7 @@ function _defaultTypography(): ITypography {
       monospace: 'System',
       sansSerif: 'System',
       serif: 'System'
-    }
+    };
     defaultsDict.families = familiesDictApple;
   }
 
