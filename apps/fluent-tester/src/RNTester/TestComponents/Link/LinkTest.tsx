@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Alert } from 'react-native';
 import { Link } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
-import { Square } from '../Common/Square';
 import { stackStyle } from '../Common/styles';
 import { LINK_TESTPAGE } from './../../Consts';
 import { Text, View } from 'react-native';
