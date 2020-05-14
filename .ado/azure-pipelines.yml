@@ -25,19 +25,9 @@ jobs:
           yarn
         displayName: "yarn"
 
-      # This only needs to happen once, since the source code doesn't change.
-      - script: |
-          yarn checkchange
-        displayName: "check change"
-
       - script: |
           yarn build
         displayName: "yarn build"
-
-      # This only needs to happen once, since the source code doesn't change.
-      - script: |
-          yarn check-for-changed-files
-        displayName: "Verify API and Ensure Changed Files"
 
       - script: |
           yarn bundle
@@ -98,9 +88,19 @@ jobs:
           yarn
         displayName: "yarn"
 
+      # This only needs to happen once, since the source code doesn't change.
+      - script: |
+          yarn checkchange
+        displayName: "check change"
+
       - script: |
           yarn build
         displayName: "yarn build"
+
+      # This only needs to happen once, since the source code doesn't change.
+      - script: |
+          yarn check-for-changed-files
+        displayName: "Verify API and Ensure Changed Files"
 
       - script: |
           yarn bundle
