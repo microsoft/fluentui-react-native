@@ -29,7 +29,7 @@
     "lint": "lerna run lint",
     "verify-api": "lerna run verify-api",
     "update-api": "lerna run update-api",
-    "e2etest": "cd apps/win32 && yarn bundle && yarn run e2etest"
+    "e2etest": "cd apps/win32 && yarn run e2etest"
   },
   "devDependencies": {
     "beachball": "^1.30.2",
