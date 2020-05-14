@@ -46,66 +46,76 @@ jobs:
       - script: |
           yarn e2etest
         displayName: "Running E2E Tests"
-  # - job: ApplePR
-  #   displayName: Apple PR
-  #   pool:
-  #     vmImage: "macos-10.15"
-  #     demands: ["xcode", "sh", "npm"]
-  #   timeoutInMinutes: 60 # how long to run the job before automatically cancelling
-  #   cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
-  #   strategy:
-  #     maxParallel: 4
-  #     matrix:
-  #       ios:
-  #         relative_directory: "ios"
-  #         xcode_sdx: "ios"
-  #         xcode_configuration: "Debug"
-  #         xcode_workspacePath: "apps/apple/FluentUITester/ios/FluentUITester.xcworkspace"
-  #         xcode_scheme: "FluentUITester" #todo add debug/release schemes here
-  #         xcode_actions: "build"
-  #         xcode_useXcpretty: true
-  #         xcode_destination: "platform=iOS Simulator,OS=latest,name=iPhone 11"
-  #       macos:
-  #         relative_directory: "macos"
-  #         xcode_sdx: "macosx"
-  #         xcode_configuration: "Debug"
-  #         xcode_workspacePath: "apps/apple/FluentUITester/macos/FluentUITester.xcworkspace"
-  #         xcode_scheme: "FluentUITester-macOS" #todo add debug/release schemes here
-  #         xcode_actions: "build"
-  #         xcode_useXcpretty: true
-  #         xcode_destination: "platform=macOS,arch=x86_64"
-  #   steps:
-  #     - checkout: self
-  #       persistCredentials: true
-  #     # Clean Derived Data
-  #     - script: |
-  #         rm -rf $(Build.Repository.LocalPath)/DerivedData
-  #       displayName: "Clean DerivedData"
-  #     - task: NodeTool@0
-  #       inputs:
-  #         versionSpec: "10.x"
-  #       displayName: "Install Node.js"
-  #     - script: |
-  #         sudo gem install cocoapods
-  #       displayName: "Install Cocoapods Environment"
-  #     - script: |
-  #         yarn
-  #       displayName: "yarn"
-  #     - script: |
-  #         yarn build
-  #       displayName: "yarn build"
-  #     - script: |
-  #         yarn bundle
-  #       displayName: "yarn bundle"
-  #     # Select proper XCode version
-  #     - template: templates/apple-xcode-select.yml
-  #     - template: templates/apple-xcode-build.yml
-  #       parameters:
-  #         relative_directory: $(relative_directory)
-  #         xcode_sdx: $(xcode_sdx)
-  #         xcode_configuration: $(xcode_configuration)
-  #         xcode_workspacePath: $(xcode_workspacePath)
-  #         xcode_scheme: $(xcode_scheme)
-  #         xcode_actions: $(xcode_actions)
-  #         xcode_useXcpretty: $(xcode_useXcpretty)
-  #         xcode_destination: $(xcode_destination)
+
+  - job: ApplePR
+    displayName: Apple PR
+    pool:
+      vmImage: "macos-10.15"
+      demands: ["xcode", "sh", "npm"]
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+    strategy:
+      maxParallel: 4
+      matrix:
+        ios:
+          relative_directory: "ios"
+          xcode_sdx: "ios"
+          xcode_configuration: "Debug"
+          xcode_workspacePath: "apps/apple/FluentUITester/ios/FluentUITester.xcworkspace"
+          xcode_scheme: "FluentUITester" #todo add debug/release schemes here
+          xcode_actions: "build"
+          xcode_useXcpretty: true
+          xcode_destination: "platform=iOS Simulator,OS=latest,name=iPhone 11"
+        macos:
+          relative_directory: "macos"
+          xcode_sdx: "macosx"
+          xcode_configuration: "Debug"
+          xcode_workspacePath: "apps/apple/FluentUITester/macos/FluentUITester.xcworkspace"
+          xcode_scheme: "FluentUITester-macOS" #todo add debug/release schemes here
+          xcode_actions: "build"
+          xcode_useXcpretty: true
+          xcode_destination: "platform=macOS,arch=x86_64"
+
+    steps:
+      - checkout: self
+        persistCredentials: true
+
+      # Clean Derived Data
+      - script: |
+          rm -rf $(Build.Repository.LocalPath)/DerivedData
+        displayName: "Clean DerivedData"
+
+      - task: NodeTool@0
+        inputs:
+          versionSpec: "10.x"
+        displayName: "Install Node.js"
+
+      - script: |
+          sudo gem install cocoapods
+        displayName: "Install Cocoapods Environment"
+
+      - script: |
+          yarn
+        displayName: "yarn"
+
+      - script: |
+          yarn build
+        displayName: "yarn build"
+
+      - script: |
+          yarn bundle
+        displayName: "yarn bundle"
+
+      # Select proper XCode version
+      - template: templates/apple-xcode-select.yml
+
+      - template: templates/apple-xcode-build.yml
+        parameters:
+          relative_directory: $(relative_directory)
+          xcode_sdx: $(xcode_sdx)
+          xcode_configuration: $(xcode_configuration)
+          xcode_workspacePath: $(xcode_workspacePath)
+          xcode_scheme: $(xcode_scheme)
+          xcode_actions: $(xcode_actions)
+          xcode_useXcpretty: $(xcode_useXcpretty)
+          xcode_destination: $(xcode_destination)
