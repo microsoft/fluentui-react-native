@@ -34,7 +34,7 @@ abstract_target 'Shared' do
   pod 'Folly', :podspec => '../node_modules/react-native-macos/third-party-podspecs/Folly.podspec'
 
   target 'FluentUITester-macOS' do
-    platform :macos, '10.15'
+    platform :macos, '10.14'
     use_native_modules!
     # Pods specifically for macOS target
   end
