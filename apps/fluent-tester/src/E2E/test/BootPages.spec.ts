@@ -9,7 +9,7 @@ import PersonaTestPage from '../pages/PersonaTestPage';
 import PressableTestPage from '../pages/PressableTestPage';
 import RadioGroupTestPage from '../pages/RadioGroupTestPage';
 import SeparatorTestPage from '../pages/SeparatorTestPage';
-//import SvgTestPage from '../pages/SvgTestPage';
+import SvgTestPage from '../pages/SvgTestPage';
 import TextTestPage from '../pages/TextTestPage';
 import ThemeTestPage from '../pages/ThemeTestPage';
 
@@ -64,10 +64,10 @@ describe('Clicks on each test page and checks if it renders', function() {
     expect(SeparatorTestPage.isPageLoaded()).toBeTruthy();
   });
 
-  // it('Svg Test Page', () => {
-  //   BootTestPage.clickAndGoToSvgPage();
-  //   expect(SvgTestPage.isPageLoaded()).toBeTruthy();
-  // });
+  it('Svg Test Page', () => {
+    BootTestPage.clickAndGoToSvgPage();
+    expect(SvgTestPage.isPageLoaded()).toBeTruthy();
+  });
 
   it('Text Test Page', () => {
     BootTestPage.clickAndGoToTextPage();
