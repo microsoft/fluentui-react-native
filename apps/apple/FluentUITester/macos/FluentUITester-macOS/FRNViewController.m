@@ -11,18 +11,12 @@
 
 @implementation FRNViewController
 
-- (void)viewDidLoad {
-  [super viewDidLoad];
-  
+- (void)loadView {
+  // The delegate must conform to RCTBridgeDelegate to retrieve the JS source file for the packager
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:nil];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"FluentUITester" initialProperties:nil];
 
-  NSView *view = [self view];
-
-  [view addSubview:rootView];
-  [rootView setBackgroundColor:[NSColor windowBackgroundColor]];
-  [rootView setFrame:[view bounds]];
-  [rootView setAutoresizingMask:(NSViewMinXMargin | NSViewMinXMargin | NSViewMinYMargin | NSViewMaxYMargin | NSViewWidthSizable | NSViewHeightSizable)];
+  [self setView:rootView];
 }
 
 #pragma mark - RCTBridgeDelegate Methods
