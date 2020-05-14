@@ -25,7 +25,7 @@ exports.config = {
     }
   ],
 
-  /*\
+  /*
    ** ===================
    ** Test Configurations
    ** ===================
@@ -57,14 +57,15 @@ exports.config = {
 
   reporters: ['dot', 'spec'],
 
-  //
-  // =====
-  // Hooks
-  // =====
-  // WebdriverIO provides several hooks you can use to interfere with the test process in order to enhance
-  // it and to build services around it. You can either apply a single function or an array of
-  // methods to it. If one of them returns with a promise, WebdriverIO will wait until that promise got
-  // resolved to continue.
+  /*
+   ** ===================
+   ** Hooks
+   ** ===================
+   ** WebdriverIO provides several hooks you can use to interfere with the test process in order to enhance
+   ** it and to build services around it. You can either apply a single function or an array of
+   ** methods to it. If one of them returns with a promise, WebdriverIO will wait until that promise got
+   ** resolved to continue.
+   */
   /**
    * Gets executed once before all workers get launched.
    * @param {Object} config wdio configuration object

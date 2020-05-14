@@ -29,7 +29,6 @@ steps:
   - script: |
       yarn
       yarn build
-      yarn e2etest
     displayName: "yarn install and build"
 
   - script: |

@@ -1,14 +1,14 @@
 // Button Test Page
-export const HOMEPAGE_BUTTON_BUTTON = 'Homepage_Button_Button';
-export const BUTTON_TESTPAGE = 'Button_TestPage';
+export const HOMEPAGE_BUTTON_BUTTON = 'Homepage_Button_Button'; // Button on the homepage that navigates to the selected test page
+export const BUTTON_TESTPAGE = 'Button_TestPage'; // A component on each specific test page.
 
 // Callout Test Page
 export const HOMEPAGE_CALLOUT_BUTTON = 'Homepage_Callout_Button';
 export const CALLOUT_TESTPAGE = 'Callout_TestPage';
 
 // Checkbox Test Page
-export const HOMEPAGE_CHECKBOX_BUTTON = 'Homepage_Checkbox_Button'; // Button from homepage to navigate to Button Test Page
-export const CHECKBOX_TESTPAGE = 'Checkbox_TestPage'; // Attached to component on Button test page
+export const HOMEPAGE_CHECKBOX_BUTTON = 'Homepage_Checkbox_Button';
+export const CHECKBOX_TESTPAGE = 'Checkbox_TestPage';
 
 // FocusTrapZone Test Page
 export const HOMEPAGE_FOCUSTRAPZONE_BUTTON = 'Homepage_FocusTrapZone_Button';

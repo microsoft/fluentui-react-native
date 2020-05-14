@@ -9,11 +9,12 @@ import PersonaTestPage from '../pages/PersonaTestPage';
 import PressableTestPage from '../pages/PressableTestPage';
 import RadioGroupTestPage from '../pages/RadioGroupTestPage';
 import SeparatorTestPage from '../pages/SeparatorTestPage';
-// import SvgTestPage from '../pages/SvgTestPage';
 import TextTestPage from '../pages/TextTestPage';
 import ThemeTestPage from '../pages/ThemeTestPage';
 
-describe('Clicks on each test page and checks if it renders', function() {
+// TODO: Add SVG test back once Redbox error is solved.
+
+describe('Click on each test page and check if it renders', function() {
   it('Button Test Page', () => {
     BootTestPage.clickAndGoToButtonPage();
     expect(ButtonTestPage.isPageLoaded()).toBeTruthy();
@@ -63,11 +64,6 @@ describe('Clicks on each test page and checks if it renders', function() {
     BootTestPage.clickAndGoToSeparatorPage();
     expect(SeparatorTestPage.isPageLoaded()).toBeTruthy();
   });
-
-  // it('Svg Test Page', () => {
-  //   BootTestPage.clickAndGoToSvgPage();
-  //   expect(SvgTestPage.isPageLoaded()).toBeTruthy();
-  // });
 
   it('Text Test Page', () => {
     BootTestPage.clickAndGoToTextPage();

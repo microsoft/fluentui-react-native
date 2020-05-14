@@ -59,7 +59,6 @@
     "tsconfig-paths": "^3.9.0",
     "typescript": "3.8.3",
     "@types/jasmine": "3.5.10",
-    "webdriver": "git+https://github.com/react-native-windows/webdriver.git",
     "webdriverio": "5.22.4"
   },
   "workspaces": {
