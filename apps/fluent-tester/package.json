@@ -23,10 +23,7 @@
     "@fluentui-react-native/stack": "0.1.0",
     "@uifabricshared/theming-react-native": "0.7.15",
     "@uifabricshared/themed-stylesheet": "0.3.16",
-    "react-native-svg": "^11.0.0",
-    "react": "16.11.0",
-    "react-native": "0.62.2",
-    "react-native-windows": "0.0.0-master.52"
+    "react-native-svg": "^11.0.0"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "^1.1.0",
