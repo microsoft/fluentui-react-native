@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { styles } from './styles';
-import { TEXT_TESTPAGE } from './../../Consts';
+import { TEXT_TESTPAGE } from '../../Consts';
 
 export const StandardUsage: React.FunctionComponent<{}> = () => {
   return (

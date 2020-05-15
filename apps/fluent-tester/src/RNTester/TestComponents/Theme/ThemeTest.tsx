@@ -6,7 +6,7 @@ import { commonTestStyles } from '../Common/styles';
 import { Button, PrimaryButton, Separator, StealthButton, Text, RadioGroup, RadioButton } from '@fluentui/react-native';
 import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 import { customRegistry } from './CustomThemes';
-import { THEME_TESTPAGE } from './../../Consts';
+import { THEME_TESTPAGE } from '../../Consts';
 
 let brand = 'Office';
 

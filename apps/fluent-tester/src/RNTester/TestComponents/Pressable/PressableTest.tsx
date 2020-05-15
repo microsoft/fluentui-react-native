@@ -4,7 +4,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { useHoverState, useFocusState, usePressState } from '@fluentui/react-native';
 import { Square } from '../Common/Square';
 import { Alert, GestureResponderEvent, StyleSheet, View, ViewProps, ViewStyle } from 'react-native';
-import { PRESSABLE_TESTPAGE } from './../../Consts';
+import { PRESSABLE_TESTPAGE } from '../../Consts';
 
 const styles = StyleSheet.create({
   dottedBorder: {

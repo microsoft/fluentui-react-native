@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button, IFocusable } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
-import { BUTTON_TESTPAGE } from './../../Consts';
+import { BUTTON_TESTPAGE } from '../../Consts';
 
 export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
   const [state, setState] = React.useState({

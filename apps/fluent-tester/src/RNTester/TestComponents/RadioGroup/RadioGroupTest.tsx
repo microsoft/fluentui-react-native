@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RadioButton, RadioGroup } from '@fluentui/react-native';
 import { View } from 'react-native';
-import { RADIOGROUP_TESTPAGE } from './../../Consts';
+import { RADIOGROUP_TESTPAGE } from '../../Consts';
 
 export const RadioGroupTest: React.FunctionComponent<{}> = () => {
   // Client's example onChange function
