@@ -1,11 +1,8 @@
 import { FOCUSTRAPZONE_TESTPAGE } from '../../RNTester/Consts';
-import { By } from './BootTestPage';
+import { BasePage, By } from './BasePage';
 
-class FocusTrapZonePage {
-  isPageLoaded(): boolean {
-    return this._focusTrapZonePage.isDisplayed();
-  }
-  get _focusTrapZonePage() {
+class FocusTrapZonePage extends BasePage {
+  get _testPage() {
     return By(FOCUSTRAPZONE_TESTPAGE);
   }
 }

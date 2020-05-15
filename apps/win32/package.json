@@ -29,8 +29,7 @@
     "@uifabricshared/themed-stylesheet": "0.3.17",
     "react": "16.11.0",
     "react-native": "0.62.2",
-    "react-native-svg": "^11.0.0",
-    "react-native-windows": "0.0.0-master.52"
+    "react-native-svg": "^11.0.0"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.62.0-preview.3",
@@ -46,7 +45,6 @@
     "react-native": "0.62.2",
     "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "~16.11.0",
-    "react-native-windows": "0.0.0-master.52",
     "appium": "1.17.1",
     "@wdio/cli": "^5.22.4",
     "@wdio/jasmine-framework": "^5.18.6",

@@ -1,11 +1,8 @@
 import { PERSONA_TESTPAGE } from '../../RNTester/Consts';
-import { By } from './BootTestPage';
+import { BasePage, By } from './BasePage';
 
-class PersonaTestPage {
-  isPageLoaded(): boolean {
-    return this._personaTestPage.isDisplayed();
-  }
-  get _personaTestPage() {
+class PersonaTestPage extends BasePage {
+  get _testPage() {
     return By(PERSONA_TESTPAGE);
   }
 }

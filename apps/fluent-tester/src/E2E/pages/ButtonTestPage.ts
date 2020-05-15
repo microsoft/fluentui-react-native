@@ -1,12 +1,8 @@
 import { BUTTON_TESTPAGE } from '../../RNTester/Consts';
-import { By } from './BootTestPage';
+import { BasePage, By } from './BasePage';
 
-class ButtonTestPage {
-  isPageLoaded(): boolean {
-    return this._buttonPage.isDisplayed();
-  }
-
-  get _buttonPage() {
+class ButtonTestPage extends BasePage {
+  get _testPage() {
     return By(BUTTON_TESTPAGE);
   }
 }

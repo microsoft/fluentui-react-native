@@ -1,11 +1,8 @@
 import { SVG_TESTPAGE } from '../../RNTester/Consts';
-import { By } from './BootTestPage';
+import { BasePage, By } from './BasePage';
 
-class SvgTestPage {
-  isPageLoaded(): boolean {
-    return this._svgPage.isDisplayed();
-  }
-  get _svgPage() {
+class SvgTestPage extends BasePage {
+  get _testPage() {
     return By(SVG_TESTPAGE);
   }
 }

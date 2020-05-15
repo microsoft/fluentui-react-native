@@ -1,11 +1,8 @@
 import { THEME_TESTPAGE } from '../../RNTester/Consts';
-import { By } from './BootTestPage';
+import { BasePage, By } from './BasePage';
 
-class ThemeTestPage {
-  isPageLoaded(): boolean {
-    return this._themePage.isDisplayed();
-  }
-  get _themePage() {
+class ThemeTestPage extends BasePage {
+  get _testPage() {
     return By(THEME_TESTPAGE);
   }
 }

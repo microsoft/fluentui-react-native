@@ -1,12 +1,8 @@
 import { TEXT_TESTPAGE } from '../../RNTester/Consts';
-import { By } from './BootTestPage';
+import { BasePage, By } from './BasePage';
 
-class TextTestPage {
-  isPageLoaded(): boolean {
-    return this._textPage.isDisplayed();
-  }
-
-  get _textPage() {
+class TextTestPage extends BasePage {
+  get _testPage() {
     return By(TEXT_TESTPAGE);
   }
 }

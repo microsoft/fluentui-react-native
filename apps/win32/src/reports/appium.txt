@@ -1,0 +1,631 @@
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session[39m
+[35m[HTTP][39m [90m{"capabilities":{"alwaysMatch":{"platformName":"windows","deviceName":"WindowsPC","app":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32\\ReactTest.exe","appArguments":"basePath C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\apps\\win32\\dist plugin defaultplugin bundle index component FluentTester","appWorkingDir":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32"},"firstMatch":[{}]},"desiredCapabilities":{"platformName":"windows","deviceName":"WindowsPC","app":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32\\ReactTest.exe","appArguments":"basePath C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\apps\\win32\\dist plugin defaultplugin bundle index component FluentTester","appWorkingDir":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\[39m
+[debug] [35m[W3C][39m Calling AppiumDriver.createSession() with args: [{"platformName":"windows","deviceName":"WindowsPC","app":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32\\ReactTest.exe","appArguments":"basePath C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\apps\\win32\\dist plugin defaultplugin bundle index component FluentTester","appWorkingDir":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32"},null,{"alwaysMatch":{"platformName":"windows","deviceName":"WindowsPC","app":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32\\ReactTest.exe","appArguments":"basePath C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\apps\\win32\\dist plugin defaultplugin bundle index component FluentTester","appWorkingDir":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32"},"firstMatch":[{}]}]
+[debug] [35m[BaseDriver][39m Event 'newSessionRequested' logged at 1589578130100 (14:28:50 GMT-0700 (Pacific Daylight Time))
+[35m[BaseDriver][39m The following capabilities are not standard capabilities and should have an extension prefix:
+[35m[BaseDriver][39m   deviceName
+[35m[BaseDriver][39m   app
+[35m[BaseDriver][39m   appArguments
+[35m[BaseDriver][39m   appWorkingDir
+[35m[Appium][39m Appium v1.17.1 creating new WindowsDriver (v1.13.0) session
+[debug] [35m[BaseDriver][39m Creating session with MJSONWP desired capabilities: {
+[debug] [35m[BaseDriver][39m   "platformName": "windows",
+[debug] [35m[BaseDriver][39m   "deviceName": "WindowsPC",
+[debug] [35m[BaseDriver][39m   "app": "C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32\\ReactTest.exe",
+[debug] [35m[BaseDriver][39m   "appArguments": "basePath C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\apps\\win32\\dist plugin defaultplugin bundle index component FluentTester",
+[debug] [35m[BaseDriver][39m   "appWorkingDir": "C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32"
+[debug] [35m[BaseDriver][39m }
+[35m[BaseDriver][39m The following capabilities were provided, but are not recognized by Appium:
+[35m[BaseDriver][39m   appArguments
+[35m[BaseDriver][39m   appWorkingDir
+[35m[BaseDriver][39m Session created with session id: 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[WinAppDriver][39m WinAppDriver exists, but the checksum did not match. Was it replaced manually?
+[debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'starting'
+[35m[WinAppDriver][39m Killing any old WinAppDrivers on same port, running: FOR /F "usebackq tokens=5" %a in (`netstat -nao ^| findstr /R /C:"4724 "`) do (FOR /F "usebackq" %b in (`TASKLIST /FI "PID eq %a" ^| findstr /I winappdriver.exe`) do (IF NOT %b=="" TASKKILL /F /PID %a))
+[35m[WinAppDriver][39m No old WinAppDrivers seemed to exist
+[35m[WinAppDriver][39m Spawning WinAppDriver with: 4724/wd/hub
+[35m[WinAppDriver][39m [STDOUT] Windows Application Driver listening for requests at: http://127.0.0.1:4724/wd/hub
+[debug] [35m[WD Proxy][39m Proxying [GET /status] to [GET http://127.0.0.1:4724/wd/hub/status] with no body
+[35m[WinAppDriver][39m [STDOUT] Press ENTER to exit.
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] GET /wd/hub/status HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[debug] [35m[WD Proxy][39m Got response with status 200: {"build":{"revision":"18001","time":"Tue Sep 18 18:35:38 2018","version":"1.1.1809"},"os":{"arch":"amd64","name":"windows","version":"10.0.18362"}}
+[35m[WinAppDriver][39m Status call returned 200. we're online and ready to run tests
+[debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'online'
+[debug] [35m[WinAppDriver][39m Starting WinAppDriver session. Will timeout in '20000' ms.
+[debug] [35m[WD Proxy][39m Matched '/session' to command name 'createSession'
+[debug] [35m[WD Proxy][39m Proxying [POST /session] to [POST http://127.0.0.1:4724/wd/hub/session] with body: {"desiredCapabilities":{"platformName":"windows","deviceName":"WindowsPC","app":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32\\ReactTest.exe","appArguments":"basePath C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\apps\\win32\\dist plugin defaultplugin bundle index component FluentTester","appWorkingDir":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32"}}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 200 OK
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 147
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 507
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"desiredCapabilities":{"platformName":"windows","deviceName":"WindowsPC","app":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32\\ReactTest.exe","appArguments":"basePath C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\apps\\win32\\dist plugin defaultplugin bundle index component FluentTester","appWorkingDir":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32"}}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 200 OK
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 530
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"app":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32\\ReactTest.exe","appArguments":"basePath C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\apps\\win32\\dist plugin defaultplugin bundle index component FluentTester","appWorkingDir":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluen [...]
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"app":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32\\ReactTest.exe","appArguments":"basePath C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\apps\\win32\\dist plugin defaultplugin bundle index component FluentTester","appWorkingDir":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32","platformName":"windows"}}
+[35m[WD Proxy][39m Determined the downstream protocol as 'MJSONWP'
+[35m[Appium][39m New WindowsDriver session created successfully, session 803fc981-f49d-4cf3-a63a-7939aa73afaa added to master session list
+[debug] [35m[BaseDriver][39m Event 'newSessionStarted' logged at 1589578131775 (14:28:51 GMT-0700 (Pacific Daylight Time))
+[debug] [35m[MJSONWP (803fc981)][39m Cached the protocol value 'MJSONWP' for the new session 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.createSession() result: {"platformName":"windows","deviceName":"WindowsPC","app":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32\\ReactTest.exe","appArguments":"basePath C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\apps\\win32\\dist plugin defaultplugin bundle index component FluentTester","appWorkingDir":"C:\\Users\\safreibe.REDMOND\\Desktop\\NewFluent\\fluentui-react-native\\node_modules\\@office-iss\\rex-win32"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session [39m[32m200[39m [90m1680 ms - 555[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/window/maximize[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/window/maximize' to command name 'maximizeWindow'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/window/maximize] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/window/maximize] with body: {}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/window/maximize HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 2
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 200 OK
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 63
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/window/maximize [39m[32m200[39m [90m33 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Button_Button"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Button_Button","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Homepage_Button_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1788971120.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1788971120.316","ELEMENT":"42.1640234.4.1788971120.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m258 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788971120.316/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788971120.316/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788971120.316/click] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1788971120.316/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788971120.316/click [39m[32m200[39m [90m293 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Button_TestPage"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Button_TestPage","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Button_TestPage"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1784293312.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1784293312.316","ELEMENT":"42.1640234.4.1784293312.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m200 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784293312.316/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784293312.316/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784293312.316/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1784293312.316/displayed] with no body
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":true}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784293312.316/displayed [39m[32m200[39m [90m12 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Callout_Button"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Callout_Button","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Homepage_Callout_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1788981104.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1788981104.316","ELEMENT":"42.1640234.4.1788981104.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m167 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788981104.316/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788981104.316/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788981104.316/click] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1788981104.316/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788981104.316/click [39m[32m200[39m [90m225 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Callout_TestPage"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Callout_TestPage","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Callout_TestPage"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1789548608.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1789548608.316","ELEMENT":"42.1640234.4.1789548608.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m231 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1789548608.316/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1789548608.316/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1789548608.316/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1789548608.316/displayed] with no body
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":true}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1789548608.316/displayed [39m[32m200[39m [90m10 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Checkbox_Button"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Checkbox_Button","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Homepage_Checkbox_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1788974864.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1788974864.316","ELEMENT":"42.1640234.4.1788974864.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m173 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788974864.316/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788974864.316/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788974864.316/click] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1788974864.316/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788974864.316/click [39m[32m200[39m [90m229 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Checkbox_TestPage"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Checkbox_TestPage","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Checkbox_TestPage"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1789538240.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1789538240.316","ELEMENT":"42.1640234.4.1789538240.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m284 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1789538240.316/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1789538240.316/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1789538240.316/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1789538240.316/displayed] with no body
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":true}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1789538240.316/displayed [39m[32m200[39m [90m9 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_FocusTrapZone_Button"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_FocusTrapZone_Button","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Homepage_FocusTrapZone_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1788972368.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1788972368.316","ELEMENT":"42.1640234.4.1788972368.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m185 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788972368.316/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788972368.316/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788972368.316/click] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1788972368.316/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788972368.316/click [39m[32m200[39m [90m234 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"FocusTrapZone_TestPage"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","FocusTrapZone_TestPage","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"FocusTrapZone_TestPage"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1790985472.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1790985472.316","ELEMENT":"42.1640234.4.1790985472.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m232 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1790985472.316/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1790985472.316/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1790985472.316/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1790985472.316/displayed] with no body
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":true}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1790985472.316/displayed [39m[32m200[39m [90m4 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Link_Button"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Link_Button","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Homepage_Link_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1788974032.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1788974032.316","ELEMENT":"42.1640234.4.1788974032.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m175 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788974032.316/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788974032.316/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788974032.316/click] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1788974032.316/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788974032.316/click [39m[32m200[39m [90m215 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Link_TestPage"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Link_TestPage","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Link_TestPage"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1790994112.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1790994112.316","ELEMENT":"42.1640234.4.1790994112.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m200 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1790994112.316/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1790994112.316/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1790994112.316/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1790994112.316/displayed] with no body
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":true}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1790994112.316/displayed [39m[32m200[39m [90m4 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Persona_Button"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Persona_Button","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Homepage_Persona_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1788978608.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1788978608.316","ELEMENT":"42.1640234.4.1788978608.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m172 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788978608.316/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788978608.316/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788978608.316/click] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1788978608.316/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1788978608.316/click [39m[32m200[39m [90m225 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Persona_TestPage"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Persona_TestPage","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Persona_TestPage"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1790986336.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1790986336.316","ELEMENT":"42.1640234.4.1790986336.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m763 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1790986336.316/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1790986336.316/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1790986336.316/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1790986336.316/displayed] with no body
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":true}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1790986336.316/displayed [39m[32m200[39m [90m9 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_PersonaCoin_Button"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_PersonaCoin_Button","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Homepage_PersonaCoin_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1784284992.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1784284992.316","ELEMENT":"42.1640234.4.1784284992.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m174 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784284992.316/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784284992.316/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784284992.316/click] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1784284992.316/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784284992.316/click [39m[32m200[39m [90m234 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"PersonaCoin_TestPage"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","PersonaCoin_TestPage","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"PersonaCoin_TestPage"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.2011853744.324"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.2011853744.324","ELEMENT":"42.1640234.4.2011853744.324"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m540 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2011853744.324/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2011853744.324/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2011853744.324/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.2011853744.324/displayed] with no body
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":true}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2011853744.324/displayed [39m[32m200[39m [90m5 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Pressable_Button"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Pressable_Button","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Homepage_Pressable_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1784280416.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1784280416.316","ELEMENT":"42.1640234.4.1784280416.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m177 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784280416.316/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784280416.316/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784280416.316/click] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1784280416.316/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784280416.316/click [39m[32m200[39m [90m228 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Pressable_TestPage"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Pressable_TestPage","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Pressable_TestPage"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.2013717600.324"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.2013717600.324","ELEMENT":"42.1640234.4.2013717600.324"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m217 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2013717600.324/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2013717600.324/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2013717600.324/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.2013717600.324/displayed] with no body
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":true}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2013717600.324/displayed [39m[32m200[39m [90m4 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_RadioGroup_Button"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_RadioGroup_Button","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Homepage_RadioGroup_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1784285824.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1784285824.316","ELEMENT":"42.1640234.4.1784285824.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m187 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784285824.316/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784285824.316/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784285824.316/click] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1784285824.316/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784285824.316/click [39m[32m200[39m [90m232 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"RadioGroup_TestPage"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","RadioGroup_TestPage","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"RadioGroup_TestPage"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1789883120.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1789883120.316","ELEMENT":"42.1640234.4.1789883120.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m227 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1789883120.316/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1789883120.316/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1789883120.316/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1789883120.316/displayed] with no body
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":true}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1789883120.316/displayed [39m[32m200[39m [90m4 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Separator_Button"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Separator_Button","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Homepage_Separator_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1784282912.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1784282912.316","ELEMENT":"42.1640234.4.1784282912.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m174 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784282912.316/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784282912.316/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784282912.316/click] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1784282912.316/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784282912.316/click [39m[32m200[39m [90m225 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Separator_TestPage"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Separator_TestPage","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Separator_TestPage"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.2013705072.324"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.2013705072.324","ELEMENT":"42.1640234.4.2013705072.324"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m208 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2013705072.324/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2013705072.324/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2013705072.324/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.2013705072.324/displayed] with no body
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":true}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2013705072.324/displayed [39m[32m200[39m [90m9 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Text_Button"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Text_Button","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Homepage_Text_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1784287904.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1784287904.316","ELEMENT":"42.1640234.4.1784287904.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m180 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784287904.316/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784287904.316/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784287904.316/click] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1784287904.316/click] with body: {}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784287904.316/click [39m[32m200[39m [90m219 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Text_TestPage"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Text_TestPage","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Text_TestPage"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.2013706800.324"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.2013706800.324","ELEMENT":"42.1640234.4.2013706800.324"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m225 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2013706800.324/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2013706800.324/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2013706800.324/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.2013706800.324/displayed] with no body
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":true}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2013706800.324/displayed [39m[32m200[39m [90m4 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Homepage_Theme_Button"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Homepage_Theme_Button","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Homepage_Theme_Button"}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.1784290400.316"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.1784290400.316","ELEMENT":"42.1640234.4.1784290400.316"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m192 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784290400.316/click[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784290400.316/click' to command name 'click'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784290400.316/click] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.1784290400.316/click] with body: {}
+[35m[WinAppDriver][39m [STDOUT] 畒湮湩⁧䘢畬湥呴獥整≲眠瑩⁨≻湩瑩慩偬潲獰㨢絻∬潲瑯慔≧ㄺ㄰ൽഊ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㄀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开䈀甀琀琀漀渀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㠀㤀㜀㄀㄀㈀　⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㠀㤀㜀㄀㄀㈀　⸀㌀㄀㘀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䈀甀琀琀漀渀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㐀㈀㤀㌀㌀㄀㈀⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䜀䔀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㐀㈀㤀㌀㌀㄀㈀⸀㌀㄀㘀⼀搀椀猀瀀氀愀礀攀搀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀琀爀甀攀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㠀㤀㠀㄀㄀　㐀⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㠀㤀㠀㄀㄀　㐀⸀㌀㄀㘀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀愀氀氀漀甀琀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㤀㔀㐀㠀㘀　㠀⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䜀䔀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㤀㔀㐀㠀㘀　㠀⸀㌀㄀㘀⼀搀椀猀瀀氀愀礀攀搀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀琀爀甀攀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开䌀栀攀挀欀戀漀砀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㠀㤀㜀㐀㠀㘀㐀⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㠀㤀㜀㐀㠀㘀㐀⸀㌀㄀㘀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䌀栀攀挀欀戀漀砀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㤀㔀㌀㠀㈀㐀　⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䜀䔀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㤀㔀㌀㠀㈀㐀　⸀㌀㄀㘀⼀搀椀猀瀀氀愀礀攀搀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀琀爀甀攀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㠀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㠀㤀㜀㈀㌀㘀㠀⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㠀㤀㜀㈀㌀㘀㠀⸀㌀㄀㘀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㄀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䘀漀挀甀猀吀爀愀瀀娀漀渀攀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㤀　㤀㠀㔀㐀㜀㈀⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䜀䔀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㤀　㤀㠀㔀㐀㜀㈀⸀㌀㄀㘀⼀搀椀猀瀀氀愀礀攀搀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀琀爀甀攀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㤀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开䰀椀渀欀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㠀㤀㜀㐀　㌀㈀⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㠀㤀㜀㐀　㌀㈀⸀㌀㄀㘀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䰀椀渀欀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㤀　㤀㤀㐀㄀㄀㈀⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䜀䔀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㤀　㤀㤀㐀㄀㄀㈀⸀㌀㄀㘀⼀搀椀猀瀀氀愀礀攀搀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀琀爀甀攀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开倀攀爀猀漀渀愀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㠀㤀㜀㠀㘀　㠀⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㠀㤀㜀㠀㘀　㠀⸀㌀㄀㘀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀倀攀爀猀漀渀愀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㤀　㤀㠀㘀㌀㌀㘀⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䜀䔀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㤀　㤀㠀㘀㌀㌀㘀⸀㌀㄀㘀⼀搀椀猀瀀氀愀礀攀搀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀琀爀甀攀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开倀攀爀猀漀渀愀䌀漀椀渀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㐀㈀㠀㐀㤀㤀㈀⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㐀㈀㠀㐀㤀㤀㈀⸀㌀㄀㘀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㤀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀倀攀爀猀漀渀愀䌀漀椀渀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㈀　㄀㄀㠀㔀㌀㜀㐀㐀⸀㌀㈀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䜀䔀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㈀　㄀㄀㠀㔀㌀㜀㐀㐀⸀㌀㈀㐀⼀搀椀猀瀀氀愀礀攀搀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀琀爀甀攀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㐀㈀㠀　㐀㄀㘀⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㐀㈀㠀　㐀㄀㘀⸀㌀㄀㘀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㜀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀倀爀攀猀猀愀戀氀攀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㈀　㄀㌀㜀㄀㜀㘀　　⸀㌀㈀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䜀䔀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㈀　㄀㌀㜀㄀㜀㘀　　⸀㌀㈀㐀⼀搀椀猀瀀氀愀礀攀搀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀琀爀甀攀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㔀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开刀愀搀椀漀䜀爀漀甀瀀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㐀㈀㠀㔀㠀㈀㐀⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㐀㈀㠀㔀㠀㈀㐀⸀㌀㄀㘀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㠀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀刀愀搀椀漀䜀爀漀甀瀀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㤀㠀㠀㌀㄀㈀　⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䜀䔀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㤀㠀㠀㌀㄀㈀　⸀㌀㄀㘀⼀搀椀猀瀀氀愀礀攀搀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀琀爀甀攀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㐀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开匀攀瀀愀爀愀琀漀爀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㐀㈀㠀㈀㤀㄀㈀⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㐀㈀㠀㈀㤀㄀㈀⸀㌀㄀㘀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㜀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀匀攀瀀愀爀愀琀漀爀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㈀　㄀㌀㜀　㔀　㜀㈀⸀㌀㈀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䜀䔀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㈀　㄀㌀㜀　㔀　㜀㈀⸀㌀㈀㐀⼀搀椀猀瀀氀愀礀攀搀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀琀爀甀攀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㤀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开吀攀砀琀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㐀㈀㠀㜀㤀　㐀⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㐀㈀㠀㜀㤀　㐀⸀㌀㄀㘀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㔀㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀吀攀砀琀开吀攀猀琀倀愀最攀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㈀　㄀㌀㜀　㘀㠀　　⸀㌀㈀㐀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀䜀䔀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㈀　㄀㌀㜀　㘀㠀　　⸀㌀㈀㐀⼀搀椀猀瀀氀愀礀攀搀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㜀㘀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀琀爀甀攀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 㘀　ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀∀甀猀椀渀最∀㨀∀愀挀挀攀猀猀椀戀椀氀椀琀礀 椀搀∀Ⰰ∀瘀愀氀甀攀∀㨀∀䠀漀洀攀瀀愀最攀开吀栀攀洀攀开䈀甀琀琀漀渀∀紀ഀ਀䠀吀吀倀⼀㄀⸀㄀ ㈀　　 伀䬀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㄀㄀㌀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀ഀഀ਀ഀഀ਀笀∀猀攀猀猀椀漀渀䤀搀∀㨀∀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀∀Ⰰ∀猀琀愀琀甀猀∀㨀　Ⰰ∀瘀愀氀甀攀∀㨀笀∀䔀䰀䔀䴀䔀一吀∀㨀∀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㐀㈀㤀　㐀　　⸀㌀㄀㘀∀紀紀ഀ਀ഀ਀ഀ਀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀㴀ഀ਀倀伀匀吀 ⼀眀搀⼀栀甀戀⼀猀攀猀猀椀漀渀⼀㔀㠀㔀㐀䌀　㜀㤀ⴀ㈀䌀䄀㄀ⴀ㐀䌀㤀䌀ⴀ㠀䌀䔀㈀ⴀ䐀䔀䔀䌀㐀㜀㈀䄀㜀䐀䔀䈀⼀攀氀攀洀攀渀琀⼀㐀㈀⸀㄀㘀㐀　㈀㌀㐀⸀㐀⸀㄀㜀㠀㐀㈀㤀　㐀　　⸀㌀㄀㘀⼀挀氀椀挀欀 䠀吀吀倀⼀㄀⸀㄀ഀഀ਀䄀挀挀攀瀀琀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀Ⰰ ⨀⼀⨀ഀഀ਀䌀漀渀渀攀挀琀椀漀渀㨀 欀攀攀瀀ⴀ愀氀椀瘀攀ഀഀ਀䌀漀渀琀攀渀琀ⴀ䰀攀渀最琀栀㨀 ㈀ഀഀ਀䌀漀渀琀攀渀琀ⴀ吀礀瀀攀㨀 愀瀀瀀氀椀挀愀琀椀漀渀⼀樀猀漀渀㬀 挀栀愀爀猀攀琀㴀甀琀昀ⴀ㠀ഀഀ਀䠀漀猀琀㨀 ㄀㈀㜀⸀　⸀　⸀㄀㨀㐀㜀㈀㐀ഀഀ਀唀猀攀爀ⴀ䄀最攀渀琀㨀 愀瀀瀀椀甀洀ഀഀ਀ഀഀ਀笀紀ഀ਀✀楖瑲慵楬敺䱤獩㩴洠獩楳杮欠祥⁳潦⁲瑩浥ⱳ洠歡⁥畳敲琠⁯灳捥晩⁹⁡敫⁹牯椠⁤牰灯牥祴漠⁮慥档椠整⁭牯瀠潲楶敤愠挠獵潴⁭敫䕹瑸慲瑣牯✮‬✧਍HTTP/1.1 200 OK
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 63
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.1784290400.316/click [39m[32m200[39m [90m232 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Theme_TestPage"}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Theme_TestPage","803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element] with body: {"using":"accessibility id","value":"Theme_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 53
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Theme_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 200 OK
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 113
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.2013712848.324"}}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":{"ELEMENT":"42.1640234.4.2013712848.324"}}
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.findElement() result: {"element-6066-11e4-a52e-4f735466cecf":"42.1640234.4.2013712848.324","ELEMENT":"42.1640234.4.2013712848.324"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element [39m[32m200[39m [90m2696 ms - 181[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mGET[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2013712848.324/displayed[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (803fc981)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2013712848.324/displayed' to command name 'elementDisplayed'
+[debug] [35m[WD Proxy][39m Proxying [GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2013712848.324/displayed] to [GET http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.2013712848.324/displayed] with no body
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] GET /wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB/element/42.1640234.4.2013712848.324/displayed HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 200 OK
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 76
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":true}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB","status":0,"value":true}
+[35m[WD Proxy][39m Replacing sessionId 5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB with 803fc981-f49d-4cf3-a63a-7939aa73afaa
+[35m[HTTP][39m [37m<-- GET /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa/element/42.1640234.4.2013712848.324/displayed [39m[32m200[39m [90m8 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mDELETE[39m [37m/wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa[39m
+[35m[HTTP][39m [90m{}[39m
+[debug] [35m[MJSONWP (803fc981)][39m Calling AppiumDriver.deleteSession() with args: ["803fc981-f49d-4cf3-a63a-7939aa73afaa"]
+[debug] [35m[BaseDriver][39m Event 'quitSessionRequested' logged at 1589578145124 (14:29:05 GMT-0700 (Pacific Daylight Time))
+[35m[Appium][39m Removing session 803fc981-f49d-4cf3-a63a-7939aa73afaa from our master session list
+[debug] [35m[WinAppDriver][39m Deleting WinAppDriver session
+[debug] [35m[WinAppDriver][39m Deleting WinAppDriver server session
+[debug] [35m[WD Proxy][39m Matched '/' to command name 'deleteSession'
+[debug] [35m[WD Proxy][39m Proxying [DELETE /] to [DELETE http://127.0.0.1:4724/wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB] with no body
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] DELETE /wd/hub/session/5854C079-2CA1-4C9C-8CE2-DEEC472A7DEB HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 200 OK
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 12
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":0}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"status":0}
+[debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'stopping'
+[debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'stopped'
+[debug] [35m[BaseDriver][39m Event 'quitSessionFinished' logged at 1589578145397 (14:29:05 GMT-0700 (Pacific Daylight Time))
+[debug] [35m[MJSONWP (803fc981)][39m Received response: null
+[debug] [35m[MJSONWP (803fc981)][39m But deleting session, so not returning
+[debug] [35m[MJSONWP (803fc981)][39m Responding to client with driver.deleteSession() result: null
+[debug] [35m[MJSONWP (803fc981)][39m Destroying socket connection
+[35m[HTTP][39m [37m<-- DELETE /wd/hub/session/803fc981-f49d-4cf3-a63a-7939aa73afaa [39m[32m200[39m [90m274 ms - 76[39m
+[35m[HTTP][39m [90m[39m

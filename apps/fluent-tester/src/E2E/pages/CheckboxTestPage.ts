@@ -1,11 +1,8 @@
 import { CHECKBOX_TESTPAGE } from '../../RNTester/Consts';
-import { By } from './BootTestPage';
+import { BasePage, By } from './BasePage';
 
-class CheckboxTestPage {
-  isPageLoaded(): boolean {
-    return this._checkboxPage.isDisplayed();
-  }
-  get _checkboxPage() {
+class CheckboxTestPage extends BasePage {
+  get _testPage() {
     return By(CHECKBOX_TESTPAGE);
   }
 }

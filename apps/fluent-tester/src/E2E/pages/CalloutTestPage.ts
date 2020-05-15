@@ -1,11 +1,8 @@
 import { CALLOUT_TESTPAGE } from '../../RNTester/Consts';
-import { By } from './BootTestPage';
+import { BasePage, By } from './BasePage';
 
-class CalloutTestPage {
-  isPageLoaded(): boolean {
-    return this._calloutPage.isDisplayed();
-  }
-  get _calloutPage() {
+class CalloutTestPage extends BasePage {
+  get _testPage() {
     return By(CALLOUT_TESTPAGE);
   }
 }

@@ -1,11 +1,8 @@
 import { PRESSABLE_TESTPAGE } from '../../RNTester/Consts';
-import { By } from './BootTestPage';
+import { BasePage, By } from './BasePage';
 
-class PressableTestPage {
-  isPageLoaded(): boolean {
-    return this._pressablePage.isDisplayed();
-  }
-  get _pressablePage() {
+class PressableTestPage extends BasePage {
+  get _testPage() {
     return By(PRESSABLE_TESTPAGE);
   }
 }

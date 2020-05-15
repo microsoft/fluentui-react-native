@@ -1,11 +1,8 @@
 import { RADIOGROUP_TESTPAGE } from '../../RNTester/Consts';
-import { By } from './BootTestPage';
+import { BasePage, By } from './BasePage';
 
-class RadioGroupPage {
-  isPageLoaded(): boolean {
-    return this._radioGroupPage.isDisplayed();
-  }
-  get _radioGroupPage() {
+class RadioGroupPage extends BasePage {
+  get _testPage() {
     return By(RADIOGROUP_TESTPAGE);
   }
 }

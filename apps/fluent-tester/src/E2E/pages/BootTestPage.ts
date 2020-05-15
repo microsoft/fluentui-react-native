@@ -13,10 +13,7 @@ import {
   HOMEPAGE_TEXT_BUTTON,
   HOMEPAGE_THEME_BUTTON
 } from '../../RNTester/Consts';
-
-export function By(testId: string): WebdriverIO.Element {
-  return $('~' + testId);
-}
+import { By } from './BasePage';
 
 class BootTestPage {
   clickAndGoToButtonPage() {
@@ -72,8 +69,8 @@ class BootTestPage {
   }
 
   /*
-  ** Returns the StealthButton element on the left-hand column that navigates to each page
-  */
+   ** Returns the StealthButton element on the left-hand column that navigates to each page
+   */
   private get buttonPage() {
     return By(HOMEPAGE_BUTTON_BUTTON);
   }

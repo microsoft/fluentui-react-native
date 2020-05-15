@@ -1,11 +1,8 @@
 import { SEPARATOR_TESTPAGE } from '../../RNTester/Consts';
-import { By } from './BootTestPage';
+import { BasePage, By } from './BasePage';
 
-class SeparatorTestPage {
-  isPageLoaded(): boolean {
-    return this._separatorPage.isDisplayed();
-  }
-  get _separatorPage() {
+class SeparatorTestPage extends BasePage {
+  get _testPage() {
     return By(SEPARATOR_TESTPAGE);
   }
 }
