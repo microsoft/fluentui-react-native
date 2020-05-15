@@ -3363,7 +3363,7 @@
     yargs "^15.0.1"
     yarn-install "^1.0.0"
 
-"@wdio/config@5.22.4", "@wdio/config@^5.12.1":
+"@wdio/config@5.22.4":
   version "5.22.4"
   resolved "https://registry.yarnpkg.com/@wdio/config/-/config-5.22.4.tgz#053d4ba0a8b0dae6be740b1b7b9ab25abac2799e"
   integrity sha512-i5dJQWb80darcRA//tfG0guMeQCeRUXroZNnHjGNb1qzvTRZmcIIhdxaD+DbK/5dWEx6aoMfoi6wjVp/CXwdAg==
@@ -3409,7 +3409,7 @@
     async-exit-hook "^2.0.1"
     stream-buffers "^3.0.2"
 
-"@wdio/logger@5.16.10", "@wdio/logger@^5.12.1":
+"@wdio/logger@5.16.10":
   version "5.16.10"
   resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-5.16.10.tgz#45d0ea485d52c8a7c526954ccc980d54c3e29e56"
   integrity sha512-hRKhxgd9uB48Dtj2xe2ckxU4KwI/RO8IwguySuaI2SLFj6EDbdonwzpVkq111/fjBuq7R1NauAaNcm3AMEbIFA==
@@ -16598,16 +16598,6 @@ webdriver@6.1.11:
     "@wdio/utils" "6.1.8"
     got "^11.0.2"
     lodash.merge "^4.6.1"
-
-"webdriver@git+https://github.com/react-native-windows/webdriver.git":
-  version "5.12.1"
-  resolved "git+https://github.com/react-native-windows/webdriver.git#43e84dbd1a6effdf305942304daa7e6bddea4fc4"
-  dependencies:
-    "@wdio/config" "^5.12.1"
-    "@wdio/logger" "^5.12.1"
-    deepmerge "^4.0.0"
-    lodash.merge "^4.6.1"
-    request "^2.83.0"
 
 webdriverio@5.22.4, webdriverio@^5.10.9:
   version "5.22.4"
