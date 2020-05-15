@@ -71,13 +71,13 @@ class BootTestPage {
     this.themePage.click();
   }
 
+  /*
+  ** Returns the StealthButton element on the left-hand column that navigates to each page
+  */
   private get buttonPage() {
     return By(HOMEPAGE_BUTTON_BUTTON);
   }
 
-  /*
-  ** Returns the StealthButton element on the left-hand column that navigates to each page
-  */
   private get calloutPage() {
     return By(HOMEPAGE_CALLOUT_BUTTON);
   }
