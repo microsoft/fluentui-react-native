@@ -1,5 +1,5 @@
 {
-  "type": "minor",
+  "type": "patch",
   "comment": "adding testid",
   "packageName": "@fluentui-react-native/separator",
   "email": "safreibe@microsoft.com",

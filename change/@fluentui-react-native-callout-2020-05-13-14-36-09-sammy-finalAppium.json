@@ -1,5 +1,5 @@
 {
-  "type": "minor",
+  "type": "patch",
   "comment": "Adding testID",
   "packageName": "@fluentui-react-native/callout",
   "email": "safreibe@microsoft.com",

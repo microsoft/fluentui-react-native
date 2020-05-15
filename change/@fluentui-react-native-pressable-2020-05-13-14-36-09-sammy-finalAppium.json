@@ -1,5 +1,5 @@
 {
-  "type": "minor",
+  "type": "patch",
   "comment": "adding testid",
   "packageName": "@fluentui-react-native/pressable",
   "email": "safreibe@microsoft.com",
