@@ -12,8 +12,6 @@ import SeparatorTestPage from '../pages/SeparatorTestPage';
 import TextTestPage from '../pages/TextTestPage';
 import ThemeTestPage from '../pages/ThemeTestPage';
 
-// TODO: Add SVG test back once Redbox error is solved.
-
 describe('Click on each test page and check if it renders', function() {
   it('Button Test Page', () => {
     BootTestPage.clickAndGoToButtonPage();
