@@ -13939,25 +13939,6 @@ react-native-web@^0.12.2:
     prop-types "^15.6.0"
     react-timer-mixin "^0.13.4"
 
-react-native-windows@0.0.0-master.52:
-  version "0.0.0-master.52"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.0.0-master.52.tgz#5046783a28e81456fb2c98becb234c12fa58fc6c"
-  integrity sha512-8S6H67DX8Gha7q1M43D9FTZLlJoiKBBa/uf7LxLzyWbh2LfF7G5I6nXX4Qz/pSs0uaow5qx7bZC2CR/ie5dudg==
-  dependencies:
-    "@babel/runtime" "^7.8.4"
-    cli-spinners "^2.2.0"
-    create-react-class "^15.6.3"
-    envinfo "^7.5.0"
-    fbjs "^1.0.0"
-    glob "^7.1.1"
-    ora "^3.4.0"
-    prop-types "^15.7.2"
-    regenerator-runtime "^0.13.2"
-    shelljs "^0.7.8"
-    username "^5.1.0"
-    uuid "^3.3.2"
-    xml-parser "^1.2.1"
-
 react-native-windows@^0.0.0-master.45:
   version "0.0.0-master.65"
   resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.0.0-master.65.tgz#fb4f02c366ebd2bd9644ac13837a51cccd26a9b9"
