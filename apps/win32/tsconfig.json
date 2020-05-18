@@ -9,5 +9,5 @@
     },
     "types": ["@wdio/sync", "@wdio/jasmine-framework", "node", "@types/jasmine"]
   },
-  "include": ["./src/**/*.ts", "../fluent-tester/src/**/*.ts"]
+  "include": ["src", "../fluent-tester/src"]
 }

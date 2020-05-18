@@ -8,7 +8,8 @@ const baseUrl = 'https://webdriver.io';
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['../fluent-tester/src/E2E/test/**/*.ts'],
+  //specs: ['../fluent-tester/src/E2E/test/**/*.ts'],
+  specs: ['../fluent-tester/src/E2E/BootPage/specs/**/*.ts'],
   exclude: [
     /* 'path/to/excluded/files' */
   ],

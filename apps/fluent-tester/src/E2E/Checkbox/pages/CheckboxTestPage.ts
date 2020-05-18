@@ -1,5 +1,5 @@
-import { CHECKBOX_TESTPAGE } from '../../RNTester/Consts';
-import { BasePage, By } from './BasePage';
+import { CHECKBOX_TESTPAGE } from '../../../RNTester/TestComponents/Checkbox/consts';
+import { BasePage, By } from '../../pages/BasePage';
 
 class CheckboxTestPage extends BasePage {
   get _testPage() {
