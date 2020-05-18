@@ -28,6 +28,7 @@ export const Button = compose<IButtonType>({
     };
 
     const buttonRef = useViewCommandFocus(userProps.componentRef);
+    const outerNode = findNodeHandle(buttonRef);
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
     // create the merged slot props
