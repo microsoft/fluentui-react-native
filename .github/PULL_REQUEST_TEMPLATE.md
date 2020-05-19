@@ -20,9 +20,7 @@
 ### Pull request checklist
 
 This PR has considered (when applicable):
-- [ ] Unit tests
-- [ ] UI tests
-- [ ] Different resolutions (1x, 2x, 3x)
+- [ ] Automated Tests
 - [ ] Documentation and examples
 - [ ] Keyboard Accessibility
 - [ ] Voiceover

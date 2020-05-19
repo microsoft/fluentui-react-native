@@ -18,6 +18,7 @@ about: Interested in contributing a new component to Fluent UI React Native? Thi
 ### Design assets
 
 <!-- Please provide links to redlines or screenshots of intended component design -->
+<!-- Are you internal to Microsoft and your design isn't yet public? Please reach out to us internally via the Fluent UI Community. -->
 
 ### Component ownership
 
@@ -50,9 +51,7 @@ about: Interested in contributing a new component to Fluent UI React Native? Thi
 ### New Component Checklist
 
 General:
-- [ ] Unit tests
-- [ ] UI tests
-- [ ] Different resolutions (1x, 2x, 3x)
+- [ ] Automated Tests
 - [ ] Documentation and examples
 - [ ] Keyboard Accessibility
 - [ ] Internationalization and Right-to-left Layouts
@@ -64,13 +63,19 @@ iOS:
 - [ ] Light and Dark Appearance
 - [ ] Size classes and window sizes (iPhone vs iPad, notched devices, multitasking, different window sizes, etc)
 - [ ] Increase Contrast Support
+- [ ] Different resolutions (1x, 2x, 3x)
 - [ ] Voiceover
+- [ ] Unit tests
+- [ ] UI tests
 - [ ] Other (please specify)
 
 macOS:
 - [ ] Light and Dark Appearance
 - [ ] Window sizes
+- [ ] Different resolutions (1x, 2x, 3x)
 - [ ] Voiceover
+- [ ] Unit tests
+- [ ] UI tests
 - [ ] Other (please specify)
 
 Windows:

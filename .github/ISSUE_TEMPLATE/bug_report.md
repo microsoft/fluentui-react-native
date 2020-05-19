@@ -12,25 +12,17 @@ Note that if you do not provide enough information to reproduce the issue, we ma
 
 ### Environment Information
 
+- **Package version(s)**: (fill this out, include which package manager you're using)
+- **OS version**: (fill this out if relevant)
+
 - **Platform**:
   - [ ] iOS
     - **Xcode version**:  (fill this out if relevant)
-    - **Package version(s)**: (fill this out, include which package manager you're using)
-    - **OS version**: (fill this out if relevant)
   - [ ] macOS
     - **Xcode version**:  (fill this out if relevant)
-    - **Package version(s)**: (fill this out, include which package manager you're using)
-    - **OS version**: (fill this out if relevant)
   - [ ] win32
-    - **Package version(s)**: (fill this out, include which package manager you're using)
-    - **OS version**: (fill this out if relevant)
   - [ ] windows
-    - **Package version(s)**: (fill this out, include which package manager you're using)
-    - **OS version**: (fill this out if relevant)
   - [ ] android
-    - **Package version(s)**: (fill this out, include which package manager you're using)
-    - **OS version**: (fill this out if relevant)
-
 
 ### Please provide a reproduction of the bug:
 
