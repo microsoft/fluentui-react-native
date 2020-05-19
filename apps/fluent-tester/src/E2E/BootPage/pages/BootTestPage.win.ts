@@ -1,3 +1,4 @@
+//import { BASE_TESTPAGE } from '../../../RNTester/FabricTester';
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../../../RNTester/TestComponents/Checkbox/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../../../RNTester/TestComponents/Button/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../../../RNTester/TestComponents/Callout/consts';
@@ -11,9 +12,9 @@ import { HOMEPAGE_SEPARATOR_BUTTON } from '../../../RNTester/TestComponents/Sepa
 import { HOMEPAGE_SVG_BUTTON } from '../../../RNTester/TestComponents/Svg/consts';
 import { HOMEPAGE_TEXT_BUTTON } from '../../../RNTester/TestComponents/Text/consts';
 import { HOMEPAGE_THEME_BUTTON } from '../../../RNTester/TestComponents/Theme/consts';
-import { By } from '../../common/BasePage';
+import { By, BasePage } from '../../common/BasePage';
 
-class BootTestPage {
+class BootTestPage extends BasePage {
   clickAndGoToButtonPage() {
     this.buttonPage.click();
   }
@@ -69,6 +70,11 @@ class BootTestPage {
   /*
    ** Returns the StealthButton element on the left-hand column that navigates to each page
    */
+
+  get _testPage() {
+    return By('Base_TestPage');
+  }
+
   private get buttonPage() {
     return By(HOMEPAGE_BUTTON_BUTTON);
   }

@@ -1,14 +1,8 @@
-const path = require('path');
-
-const appPath = path.resolve(path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js')), 'ReactTest.exe');
-const appArgs = 'basePath ' + path.resolve('dist') + ' plugin defaultplugin bundle index component FluentTester';
-const appDir = path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js'));
-
 const baseUrl = 'https://webdriver.io';
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['../fluent-tester/src/E2E/**/specs/*.win.ts'],
+  specs: ['../fluent-tester/src/E2E/**/specs/*.uwp.ts'],
   exclude: [
     /* 'path/to/excluded/files' */
   ],
@@ -19,10 +13,8 @@ exports.config = {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'windows',
       deviceName: 'WindowsPC',
-      app: appPath,
-      appArguments: appArgs,
-      appWorkingDir: appDir
-    }
+      app: '3763f28e-bdfd-440d-9822-7e06168df892_kceynq4x5hrp4!App',
+    },
   ],
 
   /*
@@ -46,13 +38,13 @@ exports.config = {
   appium: {
     logPath: './reports/',
     args: {
-      port: '4723'
-    }
+      port: '4723',
+    },
   },
 
   framework: 'jasmine',
   jasmineNodeOpts: {
-    defaultTimeoutInterval: 10000
+    defaultTimeoutInterval: 10000,
   },
 
   reporters: ['dot', 'spec'],
@@ -104,7 +96,7 @@ exports.config = {
    */
   before: function() {
     // not needed for Cucumber
-    require('ts-node').register({ files: true });
+    require('ts-node').register({files: true});
     browser.maximizeWindow();
   },
   /**
@@ -189,7 +181,7 @@ exports.config = {
    */
   onComplete: function(exitCode, config, capabilities, results) {
     console.log('<<< TESTING FINISHED >>>');
-  }
+  },
   /**
    * Gets executed when a refresh happens.
    * @param {String} oldSessionId session ID of the old session

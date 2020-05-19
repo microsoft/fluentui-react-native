@@ -12,6 +12,8 @@ import MessageQueue from 'react-native/Libraries/BatchedBridge/MessageQueue';
 MessageQueue.spy(true);
 */
 
+export const BASE_TESTPAGE = 'Base_TestPage';
+
 registerThemes();
 
 const EmptyComponent: React.FunctionComponent = () => {
@@ -45,7 +47,9 @@ export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props:
   return (
     <View style={fabricTesterStyles.root}>
       <ScrollView style={fabricTesterStyles.testList} contentContainerStyle={fabricTesterStyles.testListContainerStyle}>
-        <Text style={fabricTesterStyles.testHeader}>⚛ FluentUI Tests</Text>
+        <Text style={fabricTesterStyles.testHeader} testID={BASE_TESTPAGE}>
+          ⚛ FluentUI Tests
+        </Text>
         {sortedTestComponents.map((description, index) => {
           return (
             <StealthButton
