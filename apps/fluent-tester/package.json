@@ -19,10 +19,10 @@
     "bundle": "fluentui-scripts bundle"
   },
   "dependencies": {
-    "@fluentui/react-native": "0.15.22",
+    "@fluentui/react-native": "0.15.23",
     "@fluentui-react-native/stack": "0.1.0",
-    "@uifabricshared/theming-react-native": "0.7.17",
-    "@uifabricshared/themed-stylesheet": "0.3.18",
+    "@uifabricshared/theming-react-native": "0.7.18",
+    "@uifabricshared/themed-stylesheet": "0.3.19",
     "react-native-svg": "^11.0.0"
   },
   "devDependencies": {
