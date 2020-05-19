@@ -68,6 +68,8 @@ export interface ICheckboxProps {
    * Callback that is called when the checked value has changed.
    */
   onChange?: (isChecked: boolean) => void;
+
+  testID?: string;
 }
 
 export interface ICheckboxTokens extends ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
