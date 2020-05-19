@@ -15,7 +15,7 @@ As with normal UWP app development, the UWP test harness that loads the JS bundl
 1. Windows+R to open the Run Dialog and type in `certmgr.msc`. **NOTE:** For some reason this takes some time on my machine.
 2. Expand `Personal` and right click on `Certificates`
 3. Under `All tasks` click `Import`
-4. For the Current User, `Browse` to find `FluentTester_Temporary.pfx` in your local clone of the repo. It is currently under [fluentui-react-native/apps/windows/windows/FluentTester](windows/FluentTester).
+4. For the Current User, `Browse` to find `FluentTester_TemporaryKey.pfx` in your local clone of the repo. It is currently under [fluentui-react-native/apps/windows/windows/FluentTester](windows/FluentTester).
 5. On the next page, type in 'password' for the password.
    ![Certificate Manager Browse Window](./../../assets/CertFile.png)
 
