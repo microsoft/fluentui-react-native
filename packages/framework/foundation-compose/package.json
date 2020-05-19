@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-compose",
-  "version": "1.6.19",
+  "version": "1.6.20",
   "description": "Compose infrastructure",
   "repository": {
     "type": "git",
@@ -30,12 +30,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/themed-settings": "^0.4.16",
-    "@uifabricshared/foundation-composable": "^0.6.16",
-    "@uifabricshared/foundation-tokens": "^0.5.16",
-    "@uifabricshared/immutable-merge": "^0.5.16",
-    "@uifabricshared/theming-react-native": "^0.7.16",
-    "@uifabricshared/theming-ramp": "^0.9.15"
+    "@uifabricshared/themed-settings": "^0.4.17",
+    "@uifabricshared/foundation-composable": "^0.6.17",
+    "@uifabricshared/foundation-tokens": "^0.5.17",
+    "@uifabricshared/immutable-merge": "^0.5.17",
+    "@uifabricshared/theming-react-native": "^0.7.17",
+    "@uifabricshared/theming-ramp": "^0.9.16"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
