@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Tue, 19 May 2020 23:37:15 GMT",
+      "tag": "@fluentui-react-native/callout_v0.6.13",
+      "version": "0.6.13",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Adding testID",
+            "author": "safreibe@microsoft.com",
+            "commit": "ab9641d24eba9201d41794fe303ef25155ef89e3",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 19 May 2020 20:06:57 GMT",
       "tag": "@fluentui-react-native/callout_v0.6.11",
       "version": "0.6.11",
