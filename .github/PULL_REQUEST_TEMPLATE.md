@@ -3,6 +3,7 @@
 - [ ] macOS
 - [ ] win32
 - [ ] windows
+- [ ] android
 
 ### Description of changes
 
@@ -18,9 +19,11 @@
 
 ### Pull request checklist
 
-This PR has considered:
-- [ ] Light and Dark appearances
-- [ ] VoiceOver and Keyboard Accessibility
-- [ ] Internationalization and Right to Left layouts
+This PR has considered (when applicable):
+- [ ] Unit tests
+- [ ] UI tests
 - [ ] Different resolutions (1x, 2x, 3x)
-- [ ] Size classes and window sizes (iPhone vs iPad, notched devices, multitasking, different window sizes, etc)
+- [ ] Documentation and examples
+- [ ] Keyboard Accessibility
+- [ ] Voiceover
+- [ ] Internationalization and Right-to-left Layouts

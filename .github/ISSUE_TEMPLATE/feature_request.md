@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Do you have Feature or improvement for Fluent UI React-Native? Let us know.
+about: Do you have Feature or improvement for Fluent UI React Native? Let us know.
 ---
 
 #### Platform
@@ -8,6 +8,7 @@ about: Do you have Feature or improvement for Fluent UI React-Native? Let us kno
 - [ ] macOS
 - [ ] win32
 - [ ] windows
+- [ ] android
  
 #### Describe the feature that you would like added
 

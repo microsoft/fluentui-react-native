@@ -1,6 +1,6 @@
 ---
 name: New Component
-about: Interested in contributing a new component to Fluent UI React-Native? This template includes necessary information to get started, and steps to completion
+about: Interested in contributing a new component to Fluent UI React Native? This template includes necessary information to get started, and steps to completion
 ---
 
 <!-- Use this template for new components or new component variants -->
@@ -18,7 +18,6 @@ about: Interested in contributing a new component to Fluent UI React-Native? Thi
 ### Design assets
 
 <!-- Please provide links to redlines or screenshots of intended component design -->
-<!-- Are you internal to Microsoft and your design isn't yet public? Please reach out to us internally via the Fluent UI Apple Teams channel or log a request at https://aka.ms/fluentui-native. -->
 
 ### Component ownership
 
@@ -28,7 +27,7 @@ about: Interested in contributing a new component to Fluent UI React-Native? Thi
 
 ### Imports/Dependencies
 
-<!-- What other dependencies will your component be using -->
+<!-- What dependencies will your component be using -->
 
 ### Proposed Public API
 
@@ -39,25 +38,46 @@ about: Interested in contributing a new component to Fluent UI React-Native? Thi
 - [ ] macOS
 - [ ] win32
 - [ ] windows
+- [ ] android
 
 ## Component code
 
 ### Example code
 
-```Swift
+```javascript
 ```
 
 ### New Component Checklist
 
-- [ ] Light and Dark Appearance
+General:
 - [ ] Unit tests
 - [ ] UI tests
 - [ ] Different resolutions (1x, 2x, 3x)
-- [ ] Size classes and window sizes (iPhone vs iPad, notched devices, multitasking, different window sizes, etc)
 - [ ] Documentation and examples
-- [ ] VoiceOver and Keyboard Accessibility
-- [ ] Increase Contrast Support
+- [ ] Keyboard Accessibility
 - [ ] Internationalization and Right-to-left Layouts
 - [ ] Design Review
 - [ ] API review
 - [ ] Ready for Contribution
+
+iOS:
+- [ ] Light and Dark Appearance
+- [ ] Size classes and window sizes (iPhone vs iPad, notched devices, multitasking, different window sizes, etc)
+- [ ] Increase Contrast Support
+- [ ] Voiceover
+- [ ] Other (please specify)
+
+macOS:
+- [ ] Light and Dark Appearance
+- [ ] Window sizes
+- [ ] Voiceover
+- [ ] Other (please specify)
+
+Windows:
+- [ ] Other (please specify)
+
+Win32:
+- [ ] Other (please specify)
+
+Android:
+- [ ] Other (please specify)

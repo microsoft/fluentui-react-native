@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Found a bug in Fluent UI React-Native? Please let us know.
+about: Found a bug in Fluent UI React Native? Please let us know.
 ---
 
 <!--
@@ -14,11 +14,23 @@ Note that if you do not provide enough information to reproduce the issue, we ma
 
 - **Platform**:
   - [ ] iOS
+    - **Xcode version**:  (fill this out if relevant)
+    - **Package version(s)**: (fill this out, include which package manager you're using)
+    - **OS version**: (fill this out if relevant)
   - [ ] macOS
+    - **Xcode version**:  (fill this out if relevant)
+    - **Package version(s)**: (fill this out, include which package manager you're using)
+    - **OS version**: (fill this out if relevant)
   - [ ] win32
+    - **Package version(s)**: (fill this out, include which package manager you're using)
+    - **OS version**: (fill this out if relevant)
   - [ ] windows
-- **Package version(s)**: (fill this out, include which package manager you're using)
-- **Xcode (for iOS/macOS) and OS versions**: (fill this out if relevant)
+    - **Package version(s)**: (fill this out, include which package manager you're using)
+    - **OS version**: (fill this out if relevant)
+  - [ ] android
+    - **Package version(s)**: (fill this out, include which package manager you're using)
+    - **OS version**: (fill this out if relevant)
+
 
 ### Please provide a reproduction of the bug:
 
