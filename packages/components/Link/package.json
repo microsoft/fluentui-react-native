@@ -1,12 +1,7 @@
 {
   "name": "@fluentui-react-native/link",
-<<<<<<< HEAD
   "version": "0.5.23",
   "description": "A cross-platform Link component using the Fluent Design System",
-=======
-  "version": "0.5.23",
-  "description": "A cross-platform opinionated Fluent Text component",
->>>>>>> 45e93c15296dae4866318eedbd9e11fe3b2ebd3e
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
