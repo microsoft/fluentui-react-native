@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/callout",
   "version": "0.6.9",
-  "description": "A cross-platform opinionated Fluent Callout component",
+  "description": "A cross-platform Callout component using the FluentUI design system",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",

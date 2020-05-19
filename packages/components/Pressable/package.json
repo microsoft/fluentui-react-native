@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/pressable",
   "version": "0.3.24",
-  "description": "A cross-platform opinionated Fluent Text component",
+  "description": "A cross-platform Pressable component",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
