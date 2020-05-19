@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/checkbox",
-  "version": "0.3.19",
-  "description": "A cross-platform opinionated Fluent Checkbox component",
+  "version": "0.3.27",
+  "description": "A cross-platform Checkbox component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -18,12 +18,12 @@
     "update-api": "just-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.6.18",
-    "@fluentui-react-native/adapters": "^0.2.16",
-    "@fluentui-react-native/interactive-hooks": "^0.3.14",
-    "@fluentui-react-native/pressable": "^0.3.19",
-    "@fluentui-react-native/text": "^0.5.16",
-    "@fluentui-react-native/tokens": "^0.4.15"
+    "@uifabricshared/foundation-compose": "^1.6.26",
+    "@fluentui-react-native/adapters": "^0.2.24",
+    "@fluentui-react-native/interactive-hooks": "^0.3.22",
+    "@fluentui-react-native/pressable": "^0.3.27",
+    "@fluentui-react-native/text": "^0.5.24",
+    "@fluentui-react-native/tokens": "^0.4.23"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.62.0-preview.3",

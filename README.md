@@ -1,8 +1,15 @@
 # FluentUI React Native
 
+[![npm version](https://badge.fury.io/js/%40fluentui%2Freact-native.svg)](https://badge.fury.io/js/%40fluentui%2Freact-native) [![Build Status](https://dev.azure.com/ms/ui-fabric-react-native/_apis/build/status/PR?branchName=master)](https://dev.azure.com/ms/ui-fabric-react-native/_build/latest?definitionId=226&branchName=master)
+
 FluentUI React Native is a javascript component library that provides developers with controls that are part of the [Fluent Design System](https://www.microsoft.com/design/fluent/). These controls are built on [React Native](https://reactnative.dev/) and fully customizable.
 
 FluentUI React Native is still in the alpha stages of development for both the components and the repo. We encourage anyone who is interested in getting an early glimpse of our plans to download and use our components, but please note that you may hit bumps along the way. Please leave us feedback or file issues if you run into bumps, and we will continue to improve the quality of the repo.
+
+Development status on each platform:
+| Windows             | macOS               | iOS         | Android     |
+|---------------------|---------------------|-------------|-------------|
+| Alpha (in progress) | Alpha (in progress) | Alpha (in progress) | Coming Soon |
 
 ## Getting Started
 
