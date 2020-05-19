@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/pressable",
-  "version": "0.3.26",
+  "version": "0.3.27",
   "description": "A cross-platform Pressable component",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -18,9 +18,9 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.6.25",
-    "@fluentui-react-native/adapters": "^0.2.23",
-    "@fluentui-react-native/interactive-hooks": "^0.3.21"
+    "@uifabricshared/foundation-compose": "^1.6.26",
+    "@fluentui-react-native/adapters": "^0.2.24",
+    "@fluentui-react-native/interactive-hooks": "^0.3.22"
   },
   "devDependencies": {
     "@types/react-native": "^0.62.0",
