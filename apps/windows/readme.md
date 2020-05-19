@@ -5,6 +5,7 @@
 - [Node.js](https://nodejs.org/en/download/)
 - [React Native Windows Development Dependencies](https://microsoft.github.io/react-native-windows/docs/rnw-dependencies)
   - **NOTE:** Please make sure you grab all of the items listed there and the appropriate versions.
+    ![this picture](../../assets/VSDeps.png)
 - [Azure Credentials Plugin for NuGet](https://github.com/microsoft/artifacts-credprovider#manual-installation-on-windows)
   - We're currently on an expermental version of react-native-windows which is being published to a private NPM feed hosted on Azure DevOps.
 
