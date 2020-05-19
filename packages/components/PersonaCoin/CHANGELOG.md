@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/persona-coin
 
-This log was last generated on Mon, 11 May 2020 20:15:56 GMT and should not be manually modified.
+This log was last generated on Tue, 19 May 2020 20:06:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.26
+
+Tue, 19 May 2020 20:06:57 GMT
+
+### Patches
+
+- 📦 Update package descriptions (email not defined)
 
 ## 0.3.18
 
