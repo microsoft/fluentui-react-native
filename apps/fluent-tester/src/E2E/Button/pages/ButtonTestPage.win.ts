@@ -1,5 +1,5 @@
 import { BUTTON_TESTPAGE } from '../../../RNTester/TestComponents/Button/consts';
-import { BasePage, By } from '../../pages/BasePage';
+import { BasePage, By } from '../../common/BasePage';
 
 class ButtonTestPage extends BasePage {
   get _testPage() {

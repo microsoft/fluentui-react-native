@@ -1,19 +1,17 @@
-import {
-  HOMEPAGE_BUTTON_BUTTON,
-  HOMEPAGE_CALLOUT_BUTTON,
-  HOMEPAGE_CHECKBOX_BUTTON,
-  HOMEPAGE_FOCUSTRAPZONE_BUTTON,
-  HOMEPAGE_LINK_BUTTON,
-  HOMEPAGE_PERSONA_BUTTON,
-  HOMEPAGE_PERSONACOIN_BUTTON,
-  HOMEPAGE_PRESSABLE_BUTTON,
-  HOMEPAGE_RADIOGROUP_BUTTON,
-  HOMEPAGE_SEPARATOR_BUTTON,
-  HOMEPAGE_SVG_BUTTON,
-  HOMEPAGE_TEXT_BUTTON,
-  HOMEPAGE_THEME_BUTTON
-} from '../../RNTester/Consts';
-import { By } from './BasePage';
+import { HOMEPAGE_CHECKBOX_BUTTON } from '../../../RNTester/TestComponents/Checkbox/consts';
+import { HOMEPAGE_BUTTON_BUTTON } from '../../../RNTester/TestComponents/Button/consts';
+import { HOMEPAGE_CALLOUT_BUTTON } from '../../../RNTester/TestComponents/Callout/consts';
+import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../../RNTester/TestComponents/FocusTrapZone/consts';
+import { HOMEPAGE_LINK_BUTTON } from '../../../RNTester/TestComponents/Link/consts';
+import { HOMEPAGE_PERSONA_BUTTON } from '../../../RNTester/TestComponents/Persona/consts';
+import { HOMEPAGE_PERSONACOIN_BUTTON } from '../../../RNTester/TestComponents/PersonaCoin/consts';
+import { HOMEPAGE_PRESSABLE_BUTTON } from '../../../RNTester/TestComponents/Pressable/consts';
+import { HOMEPAGE_RADIOGROUP_BUTTON } from '../../../RNTester/TestComponents/RadioGroup/consts';
+import { HOMEPAGE_SEPARATOR_BUTTON } from '../../../RNTester/TestComponents/Separator/consts';
+import { HOMEPAGE_SVG_BUTTON } from '../../../RNTester/TestComponents/Svg/consts';
+import { HOMEPAGE_TEXT_BUTTON } from '../../../RNTester/TestComponents/Text/consts';
+import { HOMEPAGE_THEME_BUTTON } from '../../../RNTester/TestComponents/Theme/consts';
+import { By } from '../../common/BasePage';
 
 class BootTestPage {
   clickAndGoToButtonPage() {

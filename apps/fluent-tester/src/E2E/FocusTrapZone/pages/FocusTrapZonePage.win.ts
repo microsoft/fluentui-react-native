@@ -1,5 +1,5 @@
-import { FOCUSTRAPZONE_TESTPAGE } from '../../RNTester/Consts';
-import { BasePage, By } from './BasePage';
+import { FOCUSTRAPZONE_TESTPAGE } from '../../../RNTester/TestComponents/FocusTrapZone/consts';
+import { BasePage, By } from '../../common/BasePage';
 
 class FocusTrapZonePage extends BasePage {
   get _testPage() {

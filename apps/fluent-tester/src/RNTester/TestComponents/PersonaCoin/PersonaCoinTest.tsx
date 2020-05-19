@@ -4,7 +4,7 @@ import { Separator } from '@fluentui/react-native';
 import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';
 import { commonTestStyles as commonStyles } from '../Common/styles';
-import { PERSONACOIN_TESTPAGE } from '../../Consts';
+import { PERSONACOIN_TESTPAGE } from './consts';
 
 export const PersonaCoinTest: React.FunctionComponent<{}> = () => {
   return (

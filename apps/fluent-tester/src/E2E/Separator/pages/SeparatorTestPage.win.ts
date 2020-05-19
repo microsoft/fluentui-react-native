@@ -1,5 +1,5 @@
-import { SEPARATOR_TESTPAGE } from '../../RNTester/Consts';
-import { BasePage, By } from './BasePage';
+import { SEPARATOR_TESTPAGE } from '../../../RNTester/TestComponents/Separator/consts';
+import { BasePage, By } from '../../common/BasePage';
 
 class SeparatorTestPage extends BasePage {
   get _testPage() {

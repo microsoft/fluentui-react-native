@@ -8,8 +8,7 @@ const baseUrl = 'https://webdriver.io';
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  //specs: ['../fluent-tester/src/E2E/test/**/*.ts'],
-  specs: ['../fluent-tester/src/E2E/BootPage/specs/**/*.ts'],
+  specs: ['../fluent-tester/src/E2E/**/specs/*.ts'],
   exclude: [
     /* 'path/to/excluded/files' */
   ],
@@ -45,7 +44,7 @@ exports.config = {
   port: 4723, // default appium port
   services: ['appium'],
   appium: {
-    logPath: './src/reports/',
+    logPath: './reports/',
     args: {
       port: '4723'
     }
@@ -144,7 +143,7 @@ exports.config = {
   afterTest: function(test) {
     if (test.error !== undefined) {
       const name = 'ERROR-' + Date.now();
-      browser.saveScreenshot('./src/errorShots/' + name + '.png');
+      browser.saveScreenshot('./reports/errorShots/' + name + '.png');
     }
   },
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Svg, Path, Circle, Defs, RadialGradient, Stop, Line, SvgCssUri, G, Rect, Use, Polygon } from 'react-native-svg';
-import { SVG_TESTPAGE } from '../../Consts';
+import { SVG_TESTPAGE } from './consts';
 
 const styles = StyleSheet.create({
   svg: {

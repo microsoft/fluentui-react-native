@@ -1,5 +1,5 @@
-import { PRESSABLE_TESTPAGE } from '../../RNTester/Consts';
-import { BasePage, By } from './BasePage';
+import { PRESSABLE_TESTPAGE } from '../../../RNTester/TestComponents/Pressable/consts';
+import { BasePage, By } from '../../common/BasePage';
 
 class PressableTestPage extends BasePage {
   get _testPage() {

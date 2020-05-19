@@ -12,23 +12,19 @@ import { SeparatorTest } from './Separator';
 import { SvgTest } from './Svg';
 import { TextTest } from './Text';
 import { ThemeTest } from './Theme';
-import {
-  // HOMEPAGE_BUTTON_BUTTON,
-  HOMEPAGE_CALLOUT_BUTTON,
-  // HOMEPAGE_CHECKBOX_BUTTON,
-  HOMEPAGE_FOCUSTRAPZONE_BUTTON,
-  HOMEPAGE_LINK_BUTTON,
-  HOMEPAGE_PERSONA_BUTTON,
-  HOMEPAGE_PERSONACOIN_BUTTON,
-  HOMEPAGE_PRESSABLE_BUTTON,
-  HOMEPAGE_RADIOGROUP_BUTTON,
-  HOMEPAGE_SEPARATOR_BUTTON,
-  HOMEPAGE_SVG_BUTTON,
-  HOMEPAGE_TEXT_BUTTON,
-  HOMEPAGE_THEME_BUTTON
-} from '../Consts';
 import { HOMEPAGE_CHECKBOX_BUTTON } from './Checkbox/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from './Button/consts';
+import { HOMEPAGE_CALLOUT_BUTTON } from './Callout/consts';
+import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './FocusTrapZone/consts';
+import { HOMEPAGE_LINK_BUTTON } from './Link/consts';
+import { HOMEPAGE_PERSONA_BUTTON } from './Persona/consts';
+import { HOMEPAGE_PERSONACOIN_BUTTON } from './PersonaCoin/consts';
+import { HOMEPAGE_PRESSABLE_BUTTON } from './Pressable/consts';
+import { HOMEPAGE_RADIOGROUP_BUTTON } from './RadioGroup/consts';
+import { HOMEPAGE_SEPARATOR_BUTTON } from './Separator/consts';
+import { HOMEPAGE_SVG_BUTTON } from './Svg/consts';
+import { HOMEPAGE_TEXT_BUTTON } from './Text/consts';
+import { HOMEPAGE_THEME_BUTTON } from './Theme/consts';
 
 export type TestDescription = {
   name: string;
