@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/separator",
   "version": "0.3.26",
-  "description": "A cross-platform opinionated Fluent Text component",
+  "description": "A cross-platform Separator component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",

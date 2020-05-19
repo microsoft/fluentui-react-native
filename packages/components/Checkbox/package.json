@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/checkbox",
   "version": "0.3.25",
-  "description": "A cross-platform opinionated Fluent Checkbox component",
+  "description": "A cross-platform Checkbox component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
