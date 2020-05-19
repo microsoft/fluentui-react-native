@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/build-tools",
   "entries": [
     {
+      "date": "Tue, 19 May 2020 19:30:47 GMT",
+      "tag": "@fluentui-react-native/build-tools_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "get just command that works with cli",
+            "author": "jasonmo@microsoft.com",
+            "commit": "1d2b333a0d29109c6734f43d949699ede91f3358",
+            "package": "@fluentui-react-native/build-tools"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 May 2020 19:06:04 GMT",
+      "tag": "@fluentui-react-native/build-tools_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "get just command that works with cli",
+            "author": "jasonmo@microsoft.com",
+            "commit": "1d2b333a0d29109c6734f43d949699ede91f3358",
+            "package": "@fluentui-react-native/build-tools"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 May 2020 18:47:19 GMT",
+      "tag": "@fluentui-react-native/build-tools_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "get just command that works with cli",
+            "author": "jasonmo@microsoft.com",
+            "commit": "1d2b333a0d29109c6734f43d949699ede91f3358",
+            "package": "@fluentui-react-native/build-tools"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 May 2020 18:15:02 GMT",
+      "tag": "@fluentui-react-native/build-tools_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "get just command that works with cli",
+            "author": "jasonmo@microsoft.com",
+            "commit": "1d2b333a0d29109c6734f43d949699ede91f3358",
+            "package": "@fluentui-react-native/build-tools"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 19 May 2020 18:00:59 GMT",
       "tag": "@fluentui-react-native/build-tools_v0.3.0",
       "version": "0.3.0",
