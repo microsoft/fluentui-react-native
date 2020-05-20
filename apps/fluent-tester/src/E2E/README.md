@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/en/download/) - Version 10.19 or higher. **RECOMMENDED: v10.20**
+- [Node.js](https://nodejs.org/en/download/) - Version 10.19 or higher.
 - [React Native Windows Development Dependencies](https://microsoft.github.io/react-native-windows/docs/rnw-dependencies)
   - **NOTE:** Please make sure you grab all of the items listed there and the appropriate versions.
 - [WinAppDriver](https://github.com/microsoft/WinAppDriver) - Version 1.1
