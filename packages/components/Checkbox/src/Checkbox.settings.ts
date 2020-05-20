@@ -37,14 +37,14 @@ export const settings: IComposeSettings<ICheckboxType> = [
       style: {
         position: 'relative',
         opacity: 0,
-        fontSize: 8,
+        fontSize: 10,
         left: 2,
         top: -1
       }
     },
     content: {
+      variant: 'bodyStandard',
       style: {
-        fontSize: 11,
         marginTop: 1,
         borderStyle: 'dashed',
         borderColor: 'transparent',

@@ -57,8 +57,8 @@ export const settings: IComposeSettings<IRadioButtonType> = [
       }
     },
     content: {
+      variant: 'subheaderStandard',
       style: {
-        fontSize: 12,
         marginTop: 3,
         borderStyle: 'dashed',
         borderColor: 'transparent',
