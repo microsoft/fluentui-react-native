@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "remove backgroundColor from focused _override setting to let hovered setting take precedence",
+  "packageName": "@fluentui-react-native/button",
+  "email": "lehon@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-05-08T16:34:43.778Z"
+}
