@@ -97,7 +97,7 @@ export const fabricTesterStyles = StyleSheet.create({
 
   noTest: {
     alignSelf: 'center',
-    fontSize: 14
+    fontSize: 18
   }
 });
 
