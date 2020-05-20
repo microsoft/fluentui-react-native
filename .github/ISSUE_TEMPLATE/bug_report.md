@@ -17,9 +17,9 @@ Note that if you do not provide enough information to reproduce the issue, we ma
 
 - **Platform**:
   - [ ] iOS
-    - **Xcode version**:  (fill this out if relevant)
+    - **Xcode version**:
   - [ ] macOS
-    - **Xcode version**:  (fill this out if relevant)
+    - **Xcode version**:
   - [ ] win32
   - [ ] windows
   - [ ] android

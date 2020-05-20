@@ -55,8 +55,6 @@ General:
 - [ ] Documentation and examples
 - [ ] Keyboard Accessibility
 - [ ] Internationalization and Right-to-left Layouts
-- [ ] Design Review
-- [ ] API review
 - [ ] Ready for Contribution
 
 iOS:
