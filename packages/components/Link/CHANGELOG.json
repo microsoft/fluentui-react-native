@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Tue, 19 May 2020 23:37:15 GMT",
+      "tag": "@fluentui-react-native/link_v0.5.26",
+      "version": "0.5.26",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Adding testID",
+            "author": "safreibe@microsoft.com",
+            "commit": "ab9641d24eba9201d41794fe303ef25155ef89e3",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 May 2020 20:06:57 GMT",
+      "tag": "@fluentui-react-native/link_v0.5.24",
+      "version": "0.5.24",
+      "comments": {
+        "patch": [
+          {
+            "comment": "📦 Update package descriptions",
+            "author": "email not defined",
+            "commit": "16687f10ee6e6115cb0756e936eecacb4e198b85",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 11 May 2020 20:15:56 GMT",
+      "tag": "@fluentui-react-native/link_v0.5.16",
+      "version": "0.5.16",
+      "comments": {
+        "patch": [
+          {
+            "comment": "bump react native win32 version to 0.62 and pull in matching tester",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e0a1a7baa8be61b037ee65c49be22be60dc4b032",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 08 May 2020 18:49:53 GMT",
+      "tag": "@fluentui-react-native/link_v0.5.15",
+      "version": "0.5.15",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "ff5a5b0edb37bb35c9b2a4e817089a5a56551604",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Apr 2020 19:41:08 GMT",
       "tag": "@fluentui-react-native/link_v0.5.5",
       "version": "0.5.5",

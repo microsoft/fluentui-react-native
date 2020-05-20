@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Tue, 19 May 2020 23:37:15 GMT",
+      "tag": "@fluentui-react-native/button_v0.5.25",
+      "version": "0.5.25",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Adding testID",
+            "author": "safreibe@microsoft.com",
+            "commit": "ab9641d24eba9201d41794fe303ef25155ef89e3",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 May 2020 20:06:57 GMT",
+      "tag": "@fluentui-react-native/button_v0.5.23",
+      "version": "0.5.23",
+      "comments": {
+        "patch": [
+          {
+            "comment": "📦 Update package descriptions",
+            "author": "email not defined",
+            "commit": "16687f10ee6e6115cb0756e936eecacb4e198b85",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 11 May 2020 20:15:56 GMT",
+      "tag": "@fluentui-react-native/button_v0.5.15",
+      "version": "0.5.15",
+      "comments": {
+        "patch": [
+          {
+            "comment": "bump react native win32 version to 0.62 and pull in matching tester",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e0a1a7baa8be61b037ee65c49be22be60dc4b032",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 08 May 2020 18:49:53 GMT",
+      "tag": "@fluentui-react-native/button_v0.5.14",
+      "version": "0.5.14",
+      "comments": {
+        "patch": [
+          {
+            "comment": "change parameter format so include necessary props",
+            "author": "lehon@microsoft.com",
+            "commit": "ff5a5b0edb37bb35c9b2a4e817089a5a56551604",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Apr 2020 19:41:08 GMT",
       "tag": "@fluentui-react-native/button_v0.5.4",
       "version": "0.5.4",

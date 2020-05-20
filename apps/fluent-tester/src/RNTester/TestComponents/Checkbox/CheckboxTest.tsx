@@ -4,6 +4,7 @@ import { Checkbox } from '@fluentui/react-native';
 import { Separator } from '@fluentui/react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
+import { CHECKBOX_TESTPAGE } from '../../Consts';
 
 const CircularCheckbox = Checkbox.customize({ tokens: { borderRadius: 50 } });
 
@@ -80,7 +81,9 @@ export const CheckboxTest: React.FunctionComponent<{}> = () => {
 
   return (
     <View>
-      <Text style={commonStyles.section}>Basic Checkboxes</Text>
+      <Text style={commonStyles.section} testID={CHECKBOX_TESTPAGE}>
+        Basic Checkboxes
+      </Text>
       <Separator />
       <Checkbox label="Unchecked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked={false} />
       <Checkbox label="Checked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked={true} ariaLabel="Hello there" />

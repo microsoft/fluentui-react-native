@@ -46,7 +46,6 @@ export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props:
     <View style={fabricTesterStyles.root}>
       <ScrollView style={fabricTesterStyles.testList} contentContainerStyle={fabricTesterStyles.testListContainerStyle}>
         <Text style={fabricTesterStyles.testHeader}>⚛ FluentUI Tests</Text>
-
         {sortedTestComponents.map((description, index) => {
           return (
             <StealthButton
@@ -55,6 +54,7 @@ export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props:
               content={description.name}
               onClick={() => setSelectedTestIndex(index)}
               style={fabricTesterStyles.testListItem}
+              testID={description.testPage}
             />
           );
         })}

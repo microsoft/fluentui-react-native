@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/persona",
-  "version": "0.5.11",
-  "description": "A cross-platform opinionated Fluent Text component",
+  "version": "0.5.25",
+  "description": "A cross-platform Persona component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -18,13 +18,12 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.6.13",
-    "@fluentui-react-native/adapters": "^0.2.11",
-    "@fluentui-react-native/persona-coin": "^0.3.14",
-    "@fluentui-react-native/tokens": "^0.4.10"
+    "@uifabricshared/foundation-compose": "^1.6.27",
+    "@fluentui-react-native/adapters": "^0.2.25",
+    "@fluentui-react-native/persona-coin": "^0.3.28",
+    "@fluentui-react-native/tokens": "^0.4.24"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.27.3",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",

@@ -4,6 +4,7 @@ import { TouchableHighlight, TouchableHighlightProps, View, ViewProps } from 're
 import { useFocusState } from '@fluentui/react-native';
 import * as React from 'react';
 import { stackStyle } from '../Common/styles';
+import { FOCUSTRAPZONE_TESTPAGE } from '../../Consts';
 
 const trapZoneStyle: IFocusTrapZoneProps['style'] = {
   padding: 10,
@@ -44,7 +45,7 @@ const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps> = (pro
   return (
     <TouchableHighlight {...{ acceptsKeyboardFocus: false }} onPress={props.onPress}>
       <View
-        {...({ acceptsKeyboardFocus: true, ...focusProps } as any)}
+        {...{ acceptsKeyboardFocus: true, ...focusProps } as any}
         style={focusState.focused ? focusedComponentTwiddlerStyle : componentTwiddlerStyle}
       >
         <Text>{props.label}</Text>
@@ -118,7 +119,7 @@ export const FocusTrapTest: React.FunctionComponent<{}> = () => {
             disabled={!state.useTrapZone}
             style={state.useTrapZone ? activeTrapZoneStyle : trapZoneStyle}
           >
-            <Text>{state.useTrapZone ? 'Trap Active' : 'Trap Active'}</Text>
+            <Text testID={FOCUSTRAPZONE_TESTPAGE}>{state.useTrapZone ? 'Trap Active' : 'Trap Active'}</Text>
             <ComponentTwiddler label="trapped" />
             <ComponentTwiddler label="trapped" />
             <ComponentTwiddler label="trapped" />

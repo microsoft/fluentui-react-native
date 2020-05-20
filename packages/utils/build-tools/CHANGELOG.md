@@ -1,8 +1,120 @@
 # Change Log - @fluentui-react-native/build-tools
 
-This log was last generated on Fri, 01 May 2020 00:23:50 GMT and should not be manually modified.
+This log was last generated on Tue, 19 May 2020 23:37:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Tue, 19 May 2020 23:37:15 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Tue, 19 May 2020 20:21:04 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Tue, 19 May 2020 20:06:57 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Tue, 19 May 2020 19:30:47 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Tue, 19 May 2020 19:06:04 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Tue, 19 May 2020 18:47:19 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Tue, 19 May 2020 18:15:02 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Tue, 19 May 2020 18:00:59 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Thu, 14 May 2020 22:23:11 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Wed, 13 May 2020 01:13:02 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Mon, 11 May 2020 20:15:56 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Fri, 08 May 2020 18:49:53 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Fri, 08 May 2020 02:15:26 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Fri, 01 May 2020 23:02:06 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
 
 ## 0.3.0
 
