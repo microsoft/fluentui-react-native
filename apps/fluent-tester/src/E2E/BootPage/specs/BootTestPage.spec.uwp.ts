@@ -10,9 +10,9 @@ import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
 import TextTestPage from '../../Text/pages/TextTestPage.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
 
-// Before testing begins, wait for bundle to load for 45 seconds
+// Before testing begins, wait for bundle to load for 30 seconds
 beforeAll(() => {
-  BootTestPage.waitForPageLoaded(45000);
+  BootTestPage.waitForPageLoaded(30000);
 });
 
 describe('Click on each test page and check if it renders', function() {
@@ -36,36 +36,43 @@ describe('Click on each test page and check if it renders', function() {
 
   it('Link Test Page', () => {
     BootTestPage.clickAndGoToLinkPage();
+    LinkTestPage.waitForPageLoaded(5000);
     expect(LinkTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('PersonaCoin Test Page', () => {
     BootTestPage.clickAndGoToPersonaCoinPage();
+    PersonaCoinTestPage.waitForPageLoaded(5000);
     expect(PersonaCoinTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Pressable Test Page', () => {
     BootTestPage.clickAndGoToPressablePage();
+    PressableTestPage.waitForPageLoaded(5000);
     expect(PressableTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('RadioGroup Test Page', () => {
     BootTestPage.clickAndGoToRadioGroupPage();
+    RadioGroupTestPage.waitForPageLoaded(5000);
     expect(RadioGroupTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Separator Test Page', () => {
     BootTestPage.clickAndGoToSeparatorPage();
+    SeparatorTestPage.waitForPageLoaded(5000);
     expect(SeparatorTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Text Test Page', () => {
     BootTestPage.clickAndGoToTextPage();
+    TextTestPage.waitForPageLoaded(5000);
     expect(TextTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Theme Test Page', () => {
     BootTestPage.clickAndGoToThemePage();
+    ThemeTestPage.waitForPageLoaded(5000);
     expect(ThemeTestPage.isPageLoaded()).toBeTruthy();
   });
 });

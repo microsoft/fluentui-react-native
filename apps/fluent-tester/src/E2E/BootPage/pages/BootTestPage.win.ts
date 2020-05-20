@@ -1,4 +1,3 @@
-//import { BASE_TESTPAGE } from '../../../RNTester/FabricTester';
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../../../RNTester/TestComponents/Checkbox/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../../../RNTester/TestComponents/Button/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../../../RNTester/TestComponents/Callout/consts';
@@ -12,6 +11,7 @@ import { HOMEPAGE_SEPARATOR_BUTTON } from '../../../RNTester/TestComponents/Sepa
 import { HOMEPAGE_SVG_BUTTON } from '../../../RNTester/TestComponents/Svg/consts';
 import { HOMEPAGE_TEXT_BUTTON } from '../../../RNTester/TestComponents/Text/consts';
 import { HOMEPAGE_THEME_BUTTON } from '../../../RNTester/TestComponents/Theme/consts';
+import { BASE_TESTPAGE } from '../../../RNTester/TestComponents/Common/consts';
 import { By, BasePage } from '../../common/BasePage';
 
 class BootTestPage extends BasePage {
@@ -72,7 +72,7 @@ class BootTestPage extends BasePage {
    */
 
   get _testPage() {
-    return By('Base_TestPage');
+    return By(BASE_TESTPAGE);
   }
 
   private get buttonPage() {

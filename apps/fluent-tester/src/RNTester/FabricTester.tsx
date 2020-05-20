@@ -5,14 +5,13 @@ import { registerThemes } from './TestComponents/Theme/CustomThemes';
 import { allTestComponents } from './TestComponents';
 import { fabricTesterStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
+import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 
 // uncomment the below lines to enable message spy
 /*
 import MessageQueue from 'react-native/Libraries/BatchedBridge/MessageQueue';
 MessageQueue.spy(true);
 */
-
-export const BASE_TESTPAGE = 'Base_TestPage';
 
 registerThemes();
 
