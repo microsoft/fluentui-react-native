@@ -4,7 +4,6 @@ import { IViewWin32 } from '@office-iss/react-native-win32';
 
 const setAndForwardRef = require('./setAndForwardRef');
 
-
 export type IFocusable = IViewWin32;
 /**
  * A hook to add an imperative focus method to functional components which simply dispatch a focus command to
@@ -14,27 +13,16 @@ export type IFocusable = IViewWin32;
  * @returns The inner View-type you're rendering that you want to dispatch to & focus on.
  */
 export function useViewCommandFocus(
-  forwardRef: React.Ref<IViewWin32 | null> | undefined
-): React.RefObject<React.Component> {
-  /*
-  const innerRef = React.useRef<React.Component>(initialValue || null);
-  React.useImperativeHandle(forwardRef, () => ({
-    focus: () => {
-      if (innerRef.current) {
-        NativeModules.UIManager.dispatchViewManagerCommand(
-          findNodeHandle(innerRef.current),
-          NativeModules.UIManager.getViewManagerConfig('RCTView').Commands.focus,
-          null
-        );
-      }
-    }
-  }));
-  return innerRef
+  forwardedRef: React.Ref<IViewWin32 | null> | undefined,
+  // initialValue?: React.Component
+): (ref: React.ElementRef<any>) => void {
+  /**
+  * Set up the forwarding ref to enable adding the focus method.
   */
   const focusRef = React.useRef<React.Component>();
 
   const _setNativeRef = setAndForwardRef({
-    getForwardedRef: () => forwardRef,
+    getForwardedRef: () => forwardedRef,
     setLocalRef: localRef => {
       focusRef.current = localRef;
 

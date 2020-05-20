@@ -16,7 +16,7 @@ export const Button = compose<IButtonType>({
   usePrepareProps: (userProps: IButtonProps, useStyling: IUseComposeStyling<IButtonType>) => {
     const { icon, content, onAccessibilityTap = userProps.onClick, accessibilityLabel = userProps.content, onClick, ...rest } = userProps;
     // attach the pressable state handlers
-    const pressable = useAsPressable({ ...rest, onPress: onClick });
+    const pressable = useAsPressable(rest && { onPress: onClick });
     // set up state
     const state: IButtonState = {
       info: {
@@ -28,7 +28,6 @@ export const Button = compose<IButtonType>({
     };
 
     const buttonRef = useViewCommandFocus(userProps.componentRef);
-    const outerNode = findNodeHandle(buttonRef);
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
     // create the merged slot props
