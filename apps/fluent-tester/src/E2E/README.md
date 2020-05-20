@@ -10,7 +10,7 @@
 
 ## E2E Project Structure
 
-- E2E - The root E2E testing folder containing components and their respective platform-specific page objects and spec documents.
+- E2E - The root E2E testing folder containing test components and their respective platform-specific page objects and spec documents.
 - reports - Each platform folder (apple, win32, windows) contains this folder that saves the test reports from Appium/WebDriverIO.
 - wdio.conf.js - Each platform folder contains this file. It's the configuration file for WebDriverIO, which also configures Appium and WinAppDriver parameters.
 
