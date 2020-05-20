@@ -2,6 +2,36 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Wed, 20 May 2020 03:37:41 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.5.25",
+      "version": "0.5.25",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "4867e1dde6f8c5cdb3fe894e60f5bcbe8f3c2817",
+            "package": "@uifabricshared/foundation-tokens"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 May 2020 20:06:57 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.5.22",
+      "version": "0.5.22",
+      "comments": {
+        "none": [
+          {
+            "comment": "🔀 Missed file in merge",
+            "author": "email not defined",
+            "commit": "16687f10ee6e6115cb0756e936eecacb4e198b85",
+            "package": "@uifabricshared/foundation-tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 08 May 2020 18:49:53 GMT",
       "tag": "@uifabricshared/foundation-tokens_v0.5.13",
       "version": "0.5.13",

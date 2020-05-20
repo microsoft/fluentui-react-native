@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Mon, 11 May 2020 20:15:56 GMT and should not be manually modified.
+This log was last generated on Tue, 19 May 2020 23:37:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.28
+
+Tue, 19 May 2020 23:37:15 GMT
+
+### Patches
+
+- adding testid (safreibe@microsoft.com)
+
+## 0.3.26
+
+Tue, 19 May 2020 20:06:57 GMT
+
+### Patches
+
+- 📦 Update package descriptions (email not defined)
 
 ## 0.3.18
 
