@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
-import { styles } from './styles';
+import { commonTestStyles as commonStyles } from '../Common/styles';
 
 export const StandardUsage: React.FunctionComponent<{}> = () => {
   return (
-    <View style={styles.root}>
+    <View style={commonStyles.root}>
       <Text variant="captionStandard">CaptionStandard</Text>
       <Text variant="secondaryStandard">SecondaryStandard</Text>
       <Text variant="secondarySemibold">SecondarySemibold</Text>

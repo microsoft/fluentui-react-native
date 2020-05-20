@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui-react-native/text';
 import { stackStyle } from '../Common/styles';
-import { styles } from './styles';
+import { commonTestStyles as commonStyles } from '../Common/styles';
 
 export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const RedCaptionBold = Text.customize({ tokens: { variant: 'captionStandard', fontWeight: '700', color: '#ff0000' } });
@@ -23,7 +23,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const Wingdings = Text.customize({ tokens: { variant: 'captionStandard', fontFamily: 'Wingdings' } });
 
   return (
-    <View style={styles.root}>
+    <View style={commonStyles.root}>
       <Stack style={stackStyle} gap={5}>
         <RedCaptionBold>RedCaptionBold</RedCaptionBold>
         <OrangeSecondaryBold>OrangeSecondaryBold</OrangeSecondaryBold>
