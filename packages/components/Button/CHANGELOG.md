@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Tue, 19 May 2020 23:37:15 GMT and should not be manually modified.
+This log was last generated on Wed, 20 May 2020 03:37:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.26
+
+Wed, 20 May 2020 03:37:41 GMT
+
+### Patches
+
+- remove backgroundColor from focused _override setting to let hovered setting take precedence (lehon@microsoft.com)
 
 ## 0.5.25
 
