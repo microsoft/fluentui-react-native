@@ -4,10 +4,10 @@
 
 1. Make sure you have followed the Getting Started instructions [here](../../README.md) to install packages and build the entire repository.
 
-2. Then go into `apps\fluent-tester` folder:
+2. Then go into `apps\fluent-tester` folder for the platform you want to test (e.g. win32):
 
 ```
-    cd apps\fluent-tester
+    cd apps\win32
 ```
 
 3. Build the FluentUI Tester bundle:
