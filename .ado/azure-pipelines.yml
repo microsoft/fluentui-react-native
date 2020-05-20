@@ -8,7 +8,7 @@ jobs:
   - job: WindowsPR
     displayName: Windows PR
     pool:
-      vmImage: 'windows-2019'
+      vmImage: "windows-2019"
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -18,12 +18,12 @@ jobs:
 
       - task: NodeTool@0
         inputs:
-          versionSpec: '12.x'
-        displayName: 'Install Node.js'
+          versionSpec: "10.x"
+        displayName: "Install Node.js"
 
       - script: |
           yarn
-        displayName: 'yarn'
+        displayName: "yarn"
 
       # This only needs to happen once, since the source code doesn't change.
       # - script: |
@@ -32,7 +32,7 @@ jobs:
 
       - script: |
           yarn build
-        displayName: 'yarn build'
+        displayName: "yarn build"
 
       # This only needs to happen once, since the source code doesn't change.
       # - script: |
@@ -41,7 +41,7 @@ jobs:
 
       - script: |
           yarn bundle
-        displayName: 'yarn bundle'
+        displayName: "yarn bundle"
 
       # - script: |
       #     yarn e2etest_win32
@@ -49,11 +49,11 @@ jobs:
 
       - script: |
           yarn start_uwp
-        displayName: 'Starting UWP E2E Testing Server'
+        displayName: "Starting UWP E2E Testing Server"
 
       - script: |
           yarn e2etest_uwp
-        displayName: 'Running UWP E2E Tests'
+        displayName: "Running UWP E2E Tests"
   # - job: ApplePR
   #   displayName: Apple PR
   #   pool:
