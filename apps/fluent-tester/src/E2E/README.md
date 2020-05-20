@@ -17,7 +17,7 @@
 # Running E2E Tests
 
 1. Install node packages, build JS
-   - C:\repo> `cd fluentiui-react-native`
+   - C:\repo> `cd fluentui-react-native`
    - C:\repo\fluentui-react-native> `yarn`
    - C:\repo\fluentui-react-native> `yarn build`
 2. Bundle the test app (pick specific platform you want to test, we'll use win32)
@@ -31,9 +31,9 @@
 ## Create a new Page Object
 
 Page Object is a design pattern which has become popular in test automation for enhancing test maintenance and reducing code duplication. A [page object](https://webdriver.io/docs/pageobjects.html) is an object-oriented class that serves as an interface to a page of you testing app. The tests then use the methods of this Page Object whenever they need to interact with the UI of that page.
-The benefit if that if the UI changes for the test page, the tests themselves don’t need to change, only the code within the page object needs to change.
+The benefit is that if the UI changes for the test page, the tests themselves don’t need to change, only the code within the page object needs to change.
 
-Page Objects should be put in apps/fluent-tester/src/E2E/_ *ComponentToBeTested* _/pages.
+Page Objects should be put in apps/fluent-tester/src/E2E/_ *ComponentToBeTested* _/pages/.
 
 ```
 // CheckboxTestPage.win.ts
@@ -63,9 +63,9 @@ export default new CheckboxTestPage();
 ## Write a Test Spec
 
 The spec document is where the tests will be written. We use [Jasmine](https://jasmine.github.io/), an open-sourced testing framework for JavaScript.
-The spec document imports a page object and uses it to manipulate the UI and uses 'expect' statements to ensure proper functionality.
+The spec document imports a page object and uses it to manipulate the UI and uses 'expect' and other Jasmine statements to ensure proper functionality.
 
-Spec documents should be put in apps/fluent-tester/src/E2E/\_ _ComponentToBeTested_ /specs.
+Spec documents should be put in apps/fluent-tester/src/E2E/\_ _ComponentToBeTested_ /specs/.
 
 ```
 describe('Click on each test page and check if it renders', function() {
