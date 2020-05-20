@@ -4,34 +4,33 @@ trigger:
   batch: true
   branches:
     include:
-    - master
+      - master
 
 pr: none
 
 variables:
-- group: 'NPM and Github Secrets'
+  - group: "NPM and Github Secrets"
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "10.x"
+    displayName: "Install Node.js"
 
-- script: |
-    git config user.name "UI-Fabric-RN-Bot"
-    git config user.email "uifrnbot@microsoft.com"
-    git remote set-url origin https://$(githubUser):$(githubPAT)@github.com/microsoft/ui-fabric-react-native.git
-  displayName: Git Authentication
+  - script: |
+      git config user.name "UI-Fabric-RN-Bot"
+      git config user.email "uifrnbot@microsoft.com"
+      git remote set-url origin https://$(githubUser):$(githubPAT)@github.com/microsoft/ui-fabric-react-native.git
+    displayName: Git Authentication
 
-- script: |
-    yarn
-    yarn build
-  displayName: 'yarn install and build'
+  - script: |
+      yarn
+      yarn build
+    displayName: "yarn install and build"
 
-- script: |
+  - script: |
       yarn publish:beachball -- -b origin/master -n $(npmAuth) --access public -y
-  displayName: 'Publish NPM Packages'
-
+    displayName: "Publish NPM Packages"
