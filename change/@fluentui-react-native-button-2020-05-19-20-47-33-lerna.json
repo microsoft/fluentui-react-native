@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "lerna",
+  "packageName": "@fluentui-react-native/button",
+  "email": "chrishog@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-05-20T03:47:06.264Z"
+}
