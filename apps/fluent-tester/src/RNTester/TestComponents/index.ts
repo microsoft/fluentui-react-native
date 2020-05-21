@@ -1,32 +1,17 @@
 import * as React from 'react';
-import { ButtonFocusTest } from './Button';
-import { CalloutTest } from './Callout';
-import { CheckboxTest } from './Checkbox';
-import { FocusTrapTest } from './FocusTrapZone';
-import { LinkTest } from './Link';
-import { PersonaTest } from './Persona';
-import { PersonaCoinTest } from './PersonaCoin';
-import { PressableTest } from './Pressable';
-import { RadioGroupTest } from './RadioGroup';
-import { SeparatorTest } from './Separator';
-import { SvgTest } from './Svg';
-import { TextTest } from './Text';
-import { ThemeTest } from './Theme';
-import {
-  HOMEPAGE_BUTTON_BUTTON,
-  HOMEPAGE_CALLOUT_BUTTON,
-  HOMEPAGE_CHECKBOX_BUTTON,
-  HOMEPAGE_FOCUSTRAPZONE_BUTTON,
-  HOMEPAGE_LINK_BUTTON,
-  HOMEPAGE_PERSONA_BUTTON,
-  HOMEPAGE_PERSONACOIN_BUTTON,
-  HOMEPAGE_PRESSABLE_BUTTON,
-  HOMEPAGE_RADIOGROUP_BUTTON,
-  HOMEPAGE_SEPARATOR_BUTTON,
-  HOMEPAGE_SVG_BUTTON,
-  HOMEPAGE_TEXT_BUTTON,
-  HOMEPAGE_THEME_BUTTON
-} from '../Consts';
+import { ButtonFocusTest, HOMEPAGE_BUTTON_BUTTON } from './Button';
+import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './Callout';
+import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './Checkbox';
+import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './FocusTrapZone';
+import { LinkTest, HOMEPAGE_LINK_BUTTON } from './Link';
+import { PersonaTest, HOMEPAGE_PERSONA_BUTTON } from './Persona';
+import { PersonaCoinTest, HOMEPAGE_PERSONACOIN_BUTTON } from './PersonaCoin';
+import { PressableTest, HOMEPAGE_PRESSABLE_BUTTON } from './Pressable';
+import { RadioGroupTest, HOMEPAGE_RADIOGROUP_BUTTON } from './RadioGroup';
+import { SeparatorTest, HOMEPAGE_SEPARATOR_BUTTON } from './Separator';
+import { SvgTest, HOMEPAGE_SVG_BUTTON } from './Svg';
+import { TextTest, HOMEPAGE_TEXT_BUTTON } from './Text';
+import { ThemeTest, HOMEPAGE_THEME_BUTTON } from './Theme';
 
 export type TestDescription = {
   name: string;

@@ -4,7 +4,7 @@ import { Checkbox } from '@fluentui/react-native';
 import { Separator } from '@fluentui/react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
-import { CHECKBOX_TESTPAGE } from '../../Consts';
+import { CHECKBOX_TESTPAGE } from './consts';
 
 const CircularCheckbox = Checkbox.customize({ tokens: { borderRadius: 50 } });
 

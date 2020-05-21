@@ -3,7 +3,7 @@ import { Alert } from 'react-native';
 import { Link } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
-import { LINK_TESTPAGE } from '../../Consts';
+import { LINK_TESTPAGE } from './consts';
 import { Text, View } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
