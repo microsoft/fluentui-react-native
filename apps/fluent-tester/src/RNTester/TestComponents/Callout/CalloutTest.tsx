@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ScreenRect, Text, View } from 'react-native';
 import { Button, Callout, Separator } from '@fluentui/react-native';
 import { fabricTesterStyles } from '../Common/styles';
+import { CALLOUT_TESTPAGE } from './consts';
 
 export const CalloutTest: React.FunctionComponent<{}> = () => {
   const [showStandardCallout, setShowStandardCallout] = React.useState(false);
@@ -62,7 +63,9 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
   const myRect: ScreenRect = { screenX: 10, screenY: 10, width: 100, height: 100 };
   return (
     <View>
-      <Text style={fabricTesterStyles.testSection}>Standard Usage</Text>
+      <Text style={fabricTesterStyles.testSection} testID={CALLOUT_TESTPAGE}>
+        Standard Usage
+      </Text>
       <Separator />
       <View ref={stdBtnRef} style={{ flexDirection: 'row' }}>
         <Button content="Press for Callout" onClick={toggleShowStandardCallout} />
