@@ -10,12 +10,12 @@
     "module": "lib/index.js"
   },
   "scripts": {
-    "build": "just-scripts build",
-    "just": "just-scripts",
-    "clean": "just-scripts clean",
-    "update-snapshots": "just-scripts jest -u",
-    "verify-api": "just-scripts verify-api-extractor",
-    "update-api": "just-scripts update-api-extractor"
+    "build": "fluentui-scripts build",
+    "just": "fluentui-scripts",
+    "clean": "fluentui-scripts clean",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "verify-api": "fluentui-scripts verify-api-extractor",
+    "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
     "@uifabricshared/foundation-compose": "^1.6.30",
