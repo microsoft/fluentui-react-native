@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/callout",
-  "version": "0.6.16",
+  "version": "0.6.17",
   "description": "A cross-platform Callout component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -18,10 +18,10 @@
     "update-api": "just-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.6.30",
-    "@fluentui-react-native/adapters": "^0.2.28",
-    "@fluentui-react-native/interactive-hooks": "^0.3.26",
-    "@fluentui-react-native/tokens": "^0.4.27"
+    "@uifabricshared/foundation-compose": "^1.6.31",
+    "@fluentui-react-native/adapters": "^0.2.29",
+    "@fluentui-react-native/interactive-hooks": "^0.4.0",
+    "@fluentui-react-native/tokens": "^0.4.28"
   },
   "devDependencies": {
     "@types/react-native": "^0.62.0",
