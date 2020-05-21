@@ -2,8 +2,7 @@
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { IPersonaType, personaName, IPersonaSlotProps, IPersonaProps, IPersonaRenderData } from './Persona.types';
 import { settings } from './Persona.settings';
-import { View } from 'react-native';
-import { Text } from '@fluentui-react-native/text';
+import { View, Text } from 'react-native';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { PersonaCoin } from '@fluentui-react-native/persona-coin';
 import { ISlots, withSlots, IRenderData } from '@uifabricshared/foundation-composable';
