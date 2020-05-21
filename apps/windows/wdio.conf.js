@@ -36,7 +36,7 @@ exports.config = {
   port: 4723, // default appium port
   services: ['appium'],
   appium: {
-    logPath: './reports/',
+    logPath: './reports/appium',
     args: {
       port: '4723',
     },
@@ -132,10 +132,13 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  afterTest: function(test) {
+  afterTest: function(test, context) {
+    // console.log(test);
+    // console.log('\n');
+    // console.log(context);
     if (test.error !== undefined) {
-      const name = 'ERROR-' + Date.now();
-      browser.saveScreenshot('./reports/errorShots/' + name + '.png');
+      // const name = 'ERROR-' + Date.now();
+      // browser.saveScreenshot('./errorShots/' + name + '.png');
     }
   },
 

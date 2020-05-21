@@ -47,7 +47,7 @@ export const Button = compose<IButtonType>({
         onAccessibilityTap: onAccessibilityTap,
         accessibilityLabel: accessibilityLabel
       },
-      content: { children: content },
+      content: { children: content, testID },
       icon: { source: icon }
     });
 
