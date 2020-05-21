@@ -1,74 +1,88 @@
 import * as React from 'react';
-import { ButtonFocusTest } from './Button';
-import { CalloutTest } from './Callout';
-import { CheckboxTest } from './Checkbox';
-import { FocusTrapTest } from './FocusTrapZone';
-import { LinkTest } from './Link';
-import { PersonaTest } from './Persona';
-import { PersonaCoinTest } from './PersonaCoin';
-import { PressableTest } from './Pressable';
-import { RadioGroupTest } from './RadioGroup';
-import { SeparatorTest } from './Separator';
-import { SvgTest } from './Svg';
-import { TextTest } from './Text';
-import { ThemeTest } from './Theme';
+import { ButtonFocusTest, HOMEPAGE_BUTTON_BUTTON } from './Button';
+import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './Callout';
+import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './Checkbox';
+import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './FocusTrapZone';
+import { LinkTest, HOMEPAGE_LINK_BUTTON } from './Link';
+import { PersonaTest, HOMEPAGE_PERSONA_BUTTON } from './Persona';
+import { PersonaCoinTest, HOMEPAGE_PERSONACOIN_BUTTON } from './PersonaCoin';
+import { PressableTest, HOMEPAGE_PRESSABLE_BUTTON } from './Pressable';
+import { RadioGroupTest, HOMEPAGE_RADIOGROUP_BUTTON } from './RadioGroup';
+import { SeparatorTest, HOMEPAGE_SEPARATOR_BUTTON } from './Separator';
+import { SvgTest, HOMEPAGE_SVG_BUTTON } from './Svg';
+import { TextTest, HOMEPAGE_TEXT_BUTTON } from './Text';
+import { ThemeTest, HOMEPAGE_THEME_BUTTON } from './Theme';
 
 export type TestDescription = {
   name: string;
   component: React.FunctionComponent<{}>;
+  testPage: string;
 };
 
 export const allTestComponents: TestDescription[] = [
   {
     name: 'Button Test',
-    component: ButtonFocusTest
+    component: ButtonFocusTest,
+    testPage: HOMEPAGE_BUTTON_BUTTON
   },
   {
     name: 'Callout Test',
-    component: CalloutTest
+    component: CalloutTest,
+    testPage: HOMEPAGE_CALLOUT_BUTTON
   },
   {
     name: 'Focus Trap Zone Test',
-    component: FocusTrapTest
+    component: FocusTrapTest,
+    testPage: HOMEPAGE_FOCUSTRAPZONE_BUTTON
   },
   {
     name: 'Pressable Test',
-    component: PressableTest
+    component: PressableTest,
+    testPage: HOMEPAGE_PRESSABLE_BUTTON
   },
   {
     name: 'Link Test',
-    component: LinkTest
+    component: LinkTest,
+    testPage: HOMEPAGE_LINK_BUTTON
   },
   {
     name: 'Separator Test',
-    component: SeparatorTest
+    component: SeparatorTest,
+    testPage: HOMEPAGE_SEPARATOR_BUTTON
   },
   {
     name: 'Text Test',
-    component: TextTest
+    component: TextTest,
+    testPage: HOMEPAGE_TEXT_BUTTON
   },
   {
     name: 'Theme Test',
-    component: ThemeTest
+    component: ThemeTest,
+    testPage: HOMEPAGE_THEME_BUTTON
   },
   {
     name: 'PersonaCoin Test',
-    component: PersonaCoinTest
+    component: PersonaCoinTest,
+    testPage: HOMEPAGE_PERSONACOIN_BUTTON
   },
   {
     name: 'RadioGroup Test',
-    component: RadioGroupTest
+    component: RadioGroupTest,
+    testPage: HOMEPAGE_RADIOGROUP_BUTTON
   },
   {
     name: 'Persona Test',
-    component: PersonaTest
+    component: PersonaTest,
+    testPage: HOMEPAGE_PERSONA_BUTTON
   },
   {
     name: 'Checkbox Test',
-    component: CheckboxTest
+    component: CheckboxTest,
+    testPage: HOMEPAGE_CHECKBOX_BUTTON
   },
   {
     name: 'Svg Test',
-    component: SvgTest
+    component: SvgTest,
+    testPage: HOMEPAGE_SVG_BUTTON
   }
 ];

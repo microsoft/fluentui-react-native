@@ -1,0 +1,10 @@
+import { PERSONACOIN_TESTPAGE } from '../../../RNTester/TestComponents/PersonaCoin/consts';
+import { BasePage, By } from '../../common/BasePage';
+
+class PersonaCoinTestPage extends BasePage {
+  get _testPage() {
+    return By(PERSONACOIN_TESTPAGE);
+  }
+}
+
+export default new PersonaCoinTestPage();
