@@ -28,7 +28,6 @@ export const Callout = compose<ICalloutType>({
       root: {
         ...{
         ref: calloutRef,
-        target: targetNativeTag,
         ...rest
       },
       ...((targetNativeTag !== null) ? {target: targetNativeTag} : {})
