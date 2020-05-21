@@ -4,7 +4,7 @@ import { Separator, Text } from '@fluentui/react-native';
 import { commonTestStyles } from '../Common/styles';
 import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';
-import { PERSONA_TESTPAGE } from '../../Consts';
+import { PERSONA_TESTPAGE } from './consts';
 
 export const PersonaTest: React.FunctionComponent<{}> = () => {
   return (

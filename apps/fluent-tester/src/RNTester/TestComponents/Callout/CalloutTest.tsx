@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ScreenRect, Text, View } from 'react-native';
 import { Button, Callout, Separator } from '@fluentui/react-native';
 import { fabricTesterStyles } from '../Common/styles';
-import { CALLOUT_TESTPAGE } from '../../Consts';
+import { CALLOUT_TESTPAGE } from './consts';
 
 export const CalloutTest: React.FunctionComponent<{}> = () => {
   const [showStandardCallout, setShowStandardCallout] = React.useState(false);
