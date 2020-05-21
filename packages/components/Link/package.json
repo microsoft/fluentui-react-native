@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/link",
-  "version": "0.5.12",
-  "description": "A cross-platform opinionated Fluent Text component",
+  "version": "0.5.29",
+  "description": "A cross-platform Link component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -18,14 +18,14 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.6.13",
-    "@fluentui-react-native/adapters": "^0.2.11",
-    "@fluentui-react-native/interactive-hooks": "^0.3.9",
-    "@fluentui-react-native/text": "^0.5.11",
-    "@fluentui-react-native/tokens": "^0.4.10"
+    "@uifabricshared/foundation-compose": "^1.6.30",
+    "@fluentui-react-native/adapters": "^0.2.28",
+    "@fluentui-react-native/interactive-hooks": "^0.3.26",
+    "@fluentui-react-native/text": "^0.5.28",
+    "@fluentui-react-native/tokens": "^0.4.27"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.27.3",
+    "@office-iss/react-native-win32": "0.62.0-preview.3",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",

@@ -2,11 +2,14 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { styles } from './styles';
+import { TEXT_TESTPAGE } from './consts';
 
 export const StandardUsage: React.FunctionComponent<{}> = () => {
   return (
     <View style={styles.root}>
-      <Text variant="captionStandard">CaptionStandard</Text>
+      <Text variant="captionStandard" testID={TEXT_TESTPAGE}>
+        CaptionStandard
+      </Text>
       <Text variant="secondaryStandard">SecondaryStandard</Text>
       <Text variant="secondarySemibold">SecondarySemibold</Text>
       <Text variant="bodyStandard">BodyStandard</Text>

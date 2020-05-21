@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Fri, 01 May 2020 00:23:50 GMT and should not be manually modified.
+This log was last generated on Tue, 19 May 2020 23:37:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.13
+
+Tue, 19 May 2020 23:37:15 GMT
+
+### Patches
+
+- Adding testID (safreibe@microsoft.com)
+
+## 0.6.11
+
+Tue, 19 May 2020 20:06:57 GMT
+
+### Patches
+
+- 📦 Update package descriptions (email not defined)
+
+## 0.6.3
+
+Mon, 11 May 2020 20:15:56 GMT
+
+### Patches
+
+- bump react native win32 version to 0.62 and pull in matching tester (jasonmo@microsoft.com)
+
+## 0.6.0
+
+Fri, 01 May 2020 23:02:06 GMT
+
+### Minor changes
+
+- use findNodeHandle to avoid serializing refobject (ppatboyd@outlook.com)
 
 ## 0.5.0
 

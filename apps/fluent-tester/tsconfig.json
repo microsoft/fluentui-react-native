@@ -4,13 +4,10 @@
     "baseUrl": ".",
     "outDir": "lib",
     "paths": {
-      "*": [
-        "*",
-        "*.win32"
-      ]
-    }
+      "*": ["*", "*.win32", "./*"],
+      "src/*": ["./src/*", "src"]
+    },
+    "types": ["@wdio/sync", "@wdio/jasmine-framework", "node", "@types/jasmine"]
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

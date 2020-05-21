@@ -14,9 +14,17 @@ import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/inte
 export const Button = compose<IButtonType>({
   displayName: buttonName,
   usePrepareProps: (userProps: IButtonProps, useStyling: IUseComposeStyling<IButtonType>) => {
-    const { icon, content, onAccessibilityTap = userProps.onClick, accessibilityLabel = userProps.content, onClick, ...rest } = userProps;
+    const {
+      icon,
+      content,
+      onAccessibilityTap = userProps.onClick,
+      accessibilityLabel = userProps.content,
+      onClick,
+      testID,
+      ...rest
+    } = userProps;
     // attach the pressable state handlers
-    const pressable = useAsPressable(rest && { onPress: onClick });
+    const pressable = useAsPressable({ ...rest, onPress: onClick });
     // set up state
     const state: IButtonState = {
       info: {
@@ -33,6 +41,7 @@ export const Button = compose<IButtonType>({
     // create the merged slot props
     const slotProps = mergeSettings<IButtonSlotProps>(styleProps, {
       root: {
+        testID,
         ...pressable.props,
         ref: buttonRef,
         onAccessibilityTap: onAccessibilityTap,

@@ -2,6 +2,81 @@
   "name": "@fluentui-react-native/separator",
   "entries": [
     {
+      "date": "Wed, 20 May 2020 03:37:41 GMT",
+      "tag": "@fluentui-react-native/separator_v0.3.30",
+      "version": "0.3.30",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "4867e1dde6f8c5cdb3fe894e60f5bcbe8f3c2817",
+            "package": "@fluentui-react-native/separator"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 May 2020 23:37:15 GMT",
+      "tag": "@fluentui-react-native/separator_v0.3.29",
+      "version": "0.3.29",
+      "comments": {
+        "patch": [
+          {
+            "comment": "adding testid",
+            "author": "safreibe@microsoft.com",
+            "commit": "ab9641d24eba9201d41794fe303ef25155ef89e3",
+            "package": "@fluentui-react-native/separator"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 May 2020 20:06:57 GMT",
+      "tag": "@fluentui-react-native/separator_v0.3.27",
+      "version": "0.3.27",
+      "comments": {
+        "patch": [
+          {
+            "comment": "📦 Update package descriptions",
+            "author": "email not defined",
+            "commit": "16687f10ee6e6115cb0756e936eecacb4e198b85",
+            "package": "@fluentui-react-native/separator"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 11 May 2020 20:15:56 GMT",
+      "tag": "@fluentui-react-native/separator_v0.3.19",
+      "version": "0.3.19",
+      "comments": {
+        "patch": [
+          {
+            "comment": "bump react native win32 version to 0.62 and pull in matching tester",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e0a1a7baa8be61b037ee65c49be22be60dc4b032",
+            "package": "@fluentui-react-native/separator"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 08 May 2020 18:49:53 GMT",
+      "tag": "@fluentui-react-native/separator_v0.3.18",
+      "version": "0.3.18",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "ff5a5b0edb37bb35c9b2a4e817089a5a56551604",
+            "package": "@fluentui-react-native/separator"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Apr 2020 19:41:08 GMT",
       "tag": "@fluentui-react-native/separator_v0.3.8",
       "version": "0.3.8",

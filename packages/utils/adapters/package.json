@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/adapters",
-  "version": "0.2.11",
+  "version": "0.2.28",
   "description": "Adapters for working with react-native types",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -19,7 +19,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.27.3",
+    "@office-iss/react-native-win32": "0.62.0-preview.3",
     "@types/jest": "^19.2.2",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
