@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 import * as React from 'react';
-=======
->>>>>>> cb4e025596638b05a828828d5dbe8f4e58b416d5
 import { requireNativeComponent, findNodeHandle } from 'react-native';
 import { calloutName, ICalloutProps, ICalloutSlotProps, ICalloutType } from './Callout.types';
 import { settings } from './Callout.settings';
