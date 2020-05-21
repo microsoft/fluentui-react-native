@@ -38,7 +38,7 @@ exports.config = {
   bail: 0,
   baseUrl: baseUrl, // Shorten url command calls by setting a base URL.
   waitforTimeout: 10000, // Default timeout for all waitForXXX commands.
-  connectionRetryTimeout: 9000, // Timeout for any WebDriver request to a driver or grid.
+  connectionRetryTimeout: 15000, // Timeout for any WebDriver request to a driver or grid.
   connectionRetryCount: 2, // Maximum count of request retries to the Selenium server.
 
   port: 4723, // default appium port
@@ -52,10 +52,10 @@ exports.config = {
 
   framework: 'jasmine',
   jasmineNodeOpts: {
-    defaultTimeoutInterval: 10000
+    defaultTimeoutInterval: 45000
   },
 
-  reporters: ['dot', 'spec'],
+  reporters: ['spec'],
 
   /*
    ** ===================

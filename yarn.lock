@@ -3381,14 +3381,6 @@
     deepmerge "^4.0.0"
     glob "^7.1.2"
 
-"@wdio/dot-reporter@^5.22.4":
-  version "5.22.4"
-  resolved "https://registry.yarnpkg.com/@wdio/dot-reporter/-/dot-reporter-5.22.4.tgz#675d056fb99b49e5035390150b974273aa517551"
-  integrity sha512-PKhfPugbYCy3qoPvsYjfxnYI1fVQOLYVh1R9tEvwZx5lMM3bZGSoyfqqyjRb5S4H6rQG5s+S8DczpCub+wJA2A==
-  dependencies:
-    "@wdio/reporter" "5.22.4"
-    chalk "^3.0.0"
-
 "@wdio/jasmine-framework@^5.18.6":
   version "5.18.6"
   resolved "https://registry.yarnpkg.com/@wdio/jasmine-framework/-/jasmine-framework-5.18.6.tgz#5a0bc5123b98d06a97c7199102a48820f560c0ce"

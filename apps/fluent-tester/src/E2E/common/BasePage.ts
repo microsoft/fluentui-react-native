@@ -15,7 +15,7 @@ export class BasePage {
       () => {
         return this.isPageLoaded();
       },
-      timeout,
+      this.timeoutForPageLoaded(timeout),
       'Timeout Error - The page was not loaded in time.'
     );
   }
@@ -23,4 +23,12 @@ export class BasePage {
   get _testPage() {
     return By(DUMMY_CHAR);
   }
+
+  protected timeoutForPageLoaded(currentTimeout?: number) {
+    if (currentTimeout) return currentTimeout;
+    return this.waitforPageTimeout;
+  }
+
+  // Default timeout for waitForPageLoaded command in PageObject
+  private waitforPageTimeout: number = 45000;
 }
