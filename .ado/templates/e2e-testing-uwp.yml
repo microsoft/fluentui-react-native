@@ -47,4 +47,4 @@ jobs:
 
       - script: yarn e2etest
         displayName: Running UWP E2E Tests
-        workingDir: apps/windows
+        workingDirectory: apps/windows
