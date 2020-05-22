@@ -133,12 +133,9 @@ exports.config = {
    * Function to be executed after a test (in Mocha/Jasmine).
    */
   afterTest: function(test, context) {
-    // console.log(test);
-    // console.log('\n');
-    // console.log(context);
     if (test.error !== undefined) {
-      // const name = 'ERROR-' + Date.now();
-      // browser.saveScreenshot('./errorShots/' + name + '.png');
+      const name = 'ERROR-' + Date.now();
+      browser.saveScreenshot('./errorShots/' + name + '.png');
     }
   },
 
