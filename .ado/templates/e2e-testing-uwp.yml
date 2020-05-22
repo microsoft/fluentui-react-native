@@ -1,0 +1,50 @@
+jobs:
+  - job: E2E_UWP_TEST
+    displayName: E2E UWP Testing
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+
+    pool:
+      vmImage: "windows-2019"
+
+    steps:
+      - checkout: self
+        persistCredentials: true
+
+      - task: NodeTool@0
+        inputs:
+          versionSpec: "12.x"
+        displayName: "Install Node.js"
+
+      - task: NuGetToolInstaller@0
+        inputs:
+          versionSpec: ">=5.0.0"
+        displayName: "Install Nuget"
+
+      - script: |
+          yarn
+        displayName: "yarn"
+
+      - script: |
+          yarn build
+        displayName: "yarn build"
+
+      - script: |
+          yarn bundle
+        displayName: "yarn bundle"
+
+      - script: yarn windows
+        displayName: Running UWP App
+        workingDir: apps/windows
+
+      # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
+      - task: PowerShell@2
+        displayName: Wait for app to launch
+        inputs:
+          targetType: inline # filePath | inline
+          script: |
+            Start-Sleep -Seconds 30
+
+      - script: yarn e2etest
+        displayName: Running UWP E2E Tests
+        workingDir: apps/windows
