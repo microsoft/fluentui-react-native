@@ -1,5 +1,5 @@
 {
-  "name": "FluentUITester",
+  "name": "FluentUITester-apple",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,16 +7,18 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "start:macos": "node node_modules/react-native-macos/local-cli/cli.js start --use-react-native-macos"
+    "bundle": "fluentui-scripts metro -platform macos --dev --cli",
+    "start:macos": "node ../../node_modules/react-native-macos/local-cli/cli.js start --use-react-native-macos"
   },
   "dependencies": {
-    "react": "16.9.0",
+    "react": "16.11.0",
     "react-native": "0.61.0",
     "react-native-macos": "^0.61.0-0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
+    "@uifabricshared/build-native": "0.1.1",
     "@react-native-community/eslint-config": "^0.0.5",
     "babel-jest": "^24.9.0",
     "eslint": "^6.5.1",
@@ -26,7 +28,13 @@
   "jest": {
     "preset": "react-native"
   },
-  "workspaces": {
-    "nohoist": ["react-native", "react-native/**", "@babel/runtime/**"]
+  "metroBundles": {
+    "targets": [
+      "win32"
+    ],
+    "entry": "index.js",
+    "outputPath": "./dist",
+    "bundleName": "index.bundle",
+    "noPlatformSuffix": true
   }
 }

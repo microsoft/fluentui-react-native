@@ -5,15 +5,25 @@
 
 const path = require('path');
 const blacklist = require('metro-config/src/defaults/blacklist');
+const {getWatchFolders} = require('@uifabricshared/build-native');
 
 const rnmPath = path.resolve(__dirname, 'node_modules/react-native-macos');
 
 module.exports = {
+  watchFolders: getWatchFolders(),
   resolver: {
     extraNodeModules: {
       'react-native': rnmPath,
     },
     platforms: ['macos', 'ios'],
     blacklistRE: blacklist([/node_modules\/react-native\/.*/]),
+  },
+  transformer: {
+    getTransformOptions: async () => ({
+      transform: {
+        experimentalImportSupport: false,
+        inlineRequires: false,
+      },
+    }),
   },
 };
