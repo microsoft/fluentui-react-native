@@ -33,9 +33,11 @@ jobs:
           yarn bundle
         displayName: "yarn bundle"
 
-      - script: yarn windows
+      - script: |
+          yarn windows
         displayName: Running UWP App
-        workingDir: apps/windows
+        inputs:
+          workingDir: apps/windows
 
       # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
       - task: PowerShell@2
@@ -47,4 +49,5 @@ jobs:
 
       - script: yarn e2etest
         displayName: Running UWP E2E Tests
-        workingDir: apps/windows
+        inputs:
+          workingDir: apps/windows
