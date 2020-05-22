@@ -1,7 +1,7 @@
 {
   "name": "@fluentui/react-native",
-  "version": "0.15.18",
-  "description": "A react-native companion to fabric web that only depends on stock controls and theming",
+  "version": "0.15.33",
+  "description": "A react-native component library that implements the Fluent Design System.",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "onPublish": {
@@ -23,30 +23,29 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-composable": "0.6.13",
-    "@uifabricshared/foundation-compose": "1.6.16",
-    "@uifabricshared/foundation-settings": "0.5.13",
-    "@uifabricshared/foundation-tokens": "0.5.13",
-    "@uifabricshared/immutable-merge": "0.5.13",
-    "@uifabricshared/theming-ramp": "0.9.12",
-    "@uifabricshared/theming-react-native": "0.7.13",
-    "@fluentui-react-native/adapters": "0.2.14",
-    "@fluentui-react-native/interactive-hooks": "0.3.12",
-    "@fluentui-react-native/button": "0.5.14",
-    "@fluentui-react-native/callout": "0.6.2",
-    "@fluentui-react-native/checkbox": "0.3.17",
-    "@fluentui-react-native/focus-trap-zone": "0.3.17",
-    "@fluentui-react-native/link": "0.5.15",
-    "@fluentui-react-native/persona": "0.5.14",
-    "@fluentui-react-native/persona-coin": "0.3.17",
-    "@fluentui-react-native/pressable": "0.3.17",
-    "@fluentui-react-native/radio-group": "0.3.17",
-    "@fluentui-react-native/separator": "0.3.18",
-    "@fluentui-react-native/text": "0.5.14",
-    "@fluentui-react-native/tokens": "0.4.13"
+    "@uifabricshared/foundation-composable": "0.6.28",
+    "@uifabricshared/foundation-compose": "1.6.31",
+    "@uifabricshared/foundation-settings": "0.5.28",
+    "@uifabricshared/foundation-tokens": "0.5.28",
+    "@uifabricshared/immutable-merge": "0.5.28",
+    "@uifabricshared/theming-ramp": "0.9.27",
+    "@uifabricshared/theming-react-native": "0.7.28",
+    "@fluentui-react-native/adapters": "0.2.29",
+    "@fluentui-react-native/interactive-hooks": "0.4.0",
+    "@fluentui-react-native/button": "0.6.0",
+    "@fluentui-react-native/callout": "0.6.17",
+    "@fluentui-react-native/checkbox": "0.3.32",
+    "@fluentui-react-native/focus-trap-zone": "0.3.32",
+    "@fluentui-react-native/link": "0.5.30",
+    "@fluentui-react-native/persona": "0.5.29",
+    "@fluentui-react-native/persona-coin": "0.3.32",
+    "@fluentui-react-native/pressable": "0.3.32",
+    "@fluentui-react-native/radio-group": "0.3.32",
+    "@fluentui-react-native/separator": "0.3.33",
+    "@fluentui-react-native/text": "0.5.29",
+    "@fluentui-react-native/tokens": "0.4.28"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.27.3",
     "@types/prop-types": "15.5.1",
     "@types/react": "^16.9.34",
     "@types/react-native": "^0.62.0",
@@ -57,8 +56,7 @@
   },
   "peerDependencies": {
     "react": "16.11.0",
-    "react-native": ">=0.60.0",
-    "@office-iss/react-native-win32": "0.27.3"
+    "react-native": ">=0.60.0"
   },
   "author": "",
   "license": "MIT"

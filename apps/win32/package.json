@@ -2,7 +2,7 @@
   "name": "FluentTester-win32",
   "version": "0.0.1",
   "private": true,
-  "main": "src/index.ts",
+  "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
   "onPublish": {
@@ -15,39 +15,57 @@
     "clean": "fluentui-scripts clean",
     "code-style": "fluentui-scripts code-style",
     "lint": "fluentui-scripts eslint",
-    "start": "fluentui-scripts metro --server",
-    "bundle": "fluentui-scripts metro --platform win32",
-    "bundle-dev": "fluentui-scripts metro -platform win32 --dev",
-    "run-win32": "rex-win32 --bundle RNTester --component RNTesterApp --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
-    "run-win32-web": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useLiveReload --pluginProps",
-    "run-win32-devmain": "rex-win32 --bundle RNTester --component RNTesterApp --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps"
+    "start": "fluentui-scripts metro --server --cli --port 8081",
+    "bundle": "fluentui-scripts metro --platform win32 --cli",
+    "bundle-dev": "fluentui-scripts metro -platform win32 --dev --cli",
+    "run-win32": "rex-win32 --bundle index --component FluentTester --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
+    "run-win32-web": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useLiveReload --pluginProps",
+    "run-win32-devmain": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps",
+    "e2etest": "rimraf reports/* && wdio"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",
-    "@uifabricshared/theming-react-native": "0.7.13",
-    "@uifabricshared/themed-stylesheet": "0.3.14",
+    "@uifabricshared/theming-react-native": "0.7.28",
+    "@uifabricshared/themed-stylesheet": "0.3.29",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-svg": "^11.0.0"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.27.3",
-    "@office-iss/rex-win32": "0.0.0-devmain.12823.10000",
+    "@office-iss/react-native-win32": "0.62.0-preview.3",
+    "@office-iss/rex-win32": "0.62.0-preview.3-tenantreactnativewin-12906",
     "@react-native-community/eslint-config": "^1.1.0",
     "@types/prop-types": "15.5.1",
     "@types/react": "^16.9.34",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "metro-react-native-babel-preset": "^0.54.1",
+    "metro-react-native-babel-preset": "^0.58.0",
     "react": "16.11.0",
     "react-native": "0.62.2",
-    "react-native-windows": "^0.0.0-master.45",
     "react-native-svg-transformer": "^0.14.3",
-    "react-test-renderer": "~16.11.0"
+    "react-test-renderer": "~16.11.0",
+    "appium": "1.17.1",
+    "@wdio/cli": "^5.22.4",
+    "@wdio/jasmine-framework": "^5.18.6",
+    "@wdio/local-runner": "^5.22.4",
+    "@wdio/spec-reporter": "^5.22.4",
+    "@wdio/sync": "^5.20.1",
+    "@wdio/dot-reporter": "^5.22.4",
+    "@wdio/appium-service": "^5.0.0",
+    "ts-node": "^8.10.1",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "3.8.3",
+    "@types/jasmine": "3.5.10",
+    "webdriverio": "5.22.4"
+  },
+  "workspaces": {
+    "nohoist": [
+      "@types/jasmine"
+    ]
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "0.27.3",
+    "@office-iss/react-native-win32": "0.62.0-preview.3",
     "react": "16.11.0",
     "react-native": "0.62.2"
   },
@@ -58,9 +76,9 @@
     "targets": [
       "win32"
     ],
-    "entry": "./src/index.tsx",
+    "entry": "index.js",
     "outputPath": "./dist",
-    "bundleName": "RNTester.bundle",
+    "bundleName": "index.bundle",
     "noPlatformSuffix": true
   }
 }

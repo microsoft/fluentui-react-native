@@ -6,6 +6,7 @@ import { commonTestStyles } from '../Common/styles';
 import { Button, PrimaryButton, Separator, StealthButton, Text, RadioGroup, RadioButton } from '@fluentui/react-native';
 import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 import { customRegistry } from './CustomThemes';
+import { THEME_TESTPAGE } from './consts';
 
 let brand = 'Office';
 
@@ -170,7 +171,9 @@ const ThemeTestInner: React.FunctionComponent = () => {
   const [theme, setTheme] = React.useState('Default');
   return (
     <View>
-      <Text style={themedStyles.extraLargeStandardEmphasis}>Configure Theme</Text>
+      <Text style={themedStyles.extraLargeStandardEmphasis} testID={THEME_TESTPAGE}>
+        Configure Theme
+      </Text>
       <Separator />
       <View style={styles.pickerContainer}>
         <RadioGroup label="Pick App Colors" onChange={onAppChange} defaultSelectedKey="Office">

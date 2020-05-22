@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Fri, 24 Apr 2020 19:41:08 GMT and should not be manually modified.
+This log was last generated on Thu, 21 May 2020 20:00:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.0
+
+Thu, 21 May 2020 20:00:42 GMT
+
+### Minor changes
+
+- use forwardRef for handling ref in useViewCommandFocus (lehon@microsoft.com)
+
+## 0.3.13
+
+Mon, 11 May 2020 20:15:56 GMT
+
+### Patches
+
+- bump react native win32 version to 0.62 and pull in matching tester (jasonmo@microsoft.com)
 
 ## 0.3.2
 

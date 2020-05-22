@@ -5,7 +5,7 @@ import { AppRegistry } from 'react-native';
 import { ThemeProvider } from '@uifabricshared/theming-react-native';
 import { FabricTester, IFabricTesterProps, customRegistry } from '@fluentui-react-native/tester';
 
-const RNTesterApp: React.FunctionComponent<IFabricTesterProps> = props => {
+const FluentTester: React.FunctionComponent<IFabricTesterProps> = props => {
   return (
     <ThemeProvider registry={customRegistry}>
       <FabricTester {...props} />
@@ -13,6 +13,6 @@ const RNTesterApp: React.FunctionComponent<IFabricTesterProps> = props => {
   );
 };
 
-AppRegistry.registerComponent('RNTesterApp', () => RNTesterApp);
+AppRegistry.registerComponent('FluentTester', () => FluentTester);
 
-export default RNTesterApp;
+export default FluentTester;
