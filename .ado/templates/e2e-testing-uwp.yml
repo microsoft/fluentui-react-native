@@ -27,6 +27,11 @@ jobs:
           versionSpec: ">=4.6.0"
         displayName: "Install Nuget"
 
+      # Clone the artifact repo
+
+      # - task: PowerShell@2
+      #   inputs:
+
       - template: setup-repo.yml
 
       - task: NuGetCommand@2
