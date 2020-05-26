@@ -8,6 +8,10 @@
 - [WinAppDriver](https://github.com/microsoft/WinAppDriver) - Version 1.1
 - Enable [_Developer Mode_](https://docs.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development) in Windows settings
 
+### UWP Additional Prerequisites
+
+- [UWP Prerequisites](https://github.com/microsoft/fluentui-react-native/blob/master/apps/windows/readme.md)
+
 ## E2E Project Structure
 
 - E2E - The root E2E testing folder containing test components and their respective platform-specific page objects and spec documents.
