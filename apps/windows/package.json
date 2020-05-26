@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "windows": "react-native run-windows",
     "bundle": "fluentui-scripts metro --cli",
-    "e2etest": "rimraf reports/* && wdio"
+    "e2etest": "rimraf reports/* && wdio",
+    "run_e2e": "rimraf reports/* && react-native run-windows && wdio"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",

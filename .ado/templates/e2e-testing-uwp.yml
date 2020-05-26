@@ -21,17 +21,13 @@ jobs:
       #     versionSpec: ">=5.0.0"
       #   displayName: "Install Nuget"
 
-      - script: |
-          yarn
-        displayName: "yarn"
+      - template: setup-repo.yml
 
-      - script: |
-          yarn build
-        displayName: "yarn build"
-
-      - script: |
-          yarn bundle
-        displayName: "yarn bundle"
+      - task: DownloadSecureFile@1
+        name: UwpCertificate
+        displayName: "Download UWP App Certificate"
+        inputs:
+          secureFile: "FluentTester_TemporaryKey.pfx"
 
       - script: yarn windows
         displayName: Running UWP App

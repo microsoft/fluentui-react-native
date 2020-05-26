@@ -12,41 +12,31 @@ jobs:
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
+    steps:
+      - checkout: self
+        persistCredentials: true
 
-    # steps:
-    #   - checkout: self
-    #     persistCredentials: true
+      - task: NodeTool@0
+        inputs:
+          versionSpec: "12.x"
+        displayName: "Install Node.js"
 
-    #   - task: NodeTool@0
-    #     inputs:
-    #       versionSpec: "10.x"
-    #     displayName: "Install Node.js"
+      - template: templates/setup-repo.yml
 
-    #   - script: |
-    #       yarn
-    #     displayName: "yarn"
+      # This only needs to happen once, since the source code doesn't change.
+      # - script: |
+      #     yarn checkchange
+      #   displayName: "check change"
 
-    #   # This only needs to happen once, since the source code doesn't change.
-    #   - script: |
-    #       yarn checkchange
-    #     displayName: "check change"
+      # This only needs to happen once, since the source code doesn't change.
+      # - script: |
+      #     yarn check-for-changed-files
+      #   displayName: "Verify API and Ensure Changed Files"
 
-    #   - script: |
-    #       yarn build
-    #     displayName: "yarn build"
+      - script: |
+          yarn e2etest-win32
+        displayName: "Running Win32 E2E Tests"
 
-    #   # This only needs to happen once, since the source code doesn't change.
-    #   - script: |
-    #       yarn check-for-changed-files
-    #     displayName: "Verify API and Ensure Changed Files"
-
-    #   - script: |
-    #       yarn bundle
-    #     displayName: "yarn bundle"
-
-    #   - script: |
-    #       yarn e2etest-win32
-    #     displayName: "Running Win32 E2E Tests"
   - template: templates/e2e-testing-uwp.yml
   # - job: ApplePR
   #   displayName: Apple PR
