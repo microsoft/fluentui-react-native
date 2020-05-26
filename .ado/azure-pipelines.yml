@@ -23,7 +23,7 @@ jobs:
 
       - template: templates/setup-repo.yml
 
-      # This only needs to happen once, since the source code doesn't change.
+      # This only needs to happen once, since the source code doesn't change
       # - script: |
       #     yarn checkchange
       #   displayName: "check change"
