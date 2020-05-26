@@ -13931,7 +13931,7 @@ react-native-web@^0.12.2:
     prop-types "^15.6.0"
     react-timer-mixin "^0.13.4"
 
-react-native-windows@^0.0.0-master.45:
+react-native-windows@0.0.0-master.47:
   version "0.0.0-master.47"
   resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.0.0-master.47.tgz#48d1e598d52aa844090e1b82caba207e95dc38b5"
   integrity sha512-g9YjZKQMIVyl58SdbBdfm8cNYMPQrHtY2kfVebGKeuZVi3iuMZNq4bPTVUoV2oMu5CzZdrFlyZ5VbYO4Ew3V4w==
