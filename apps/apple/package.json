@@ -30,7 +30,7 @@
   },
   "metroBundles": {
     "targets": [
-      "win32"
+      "ios"
     ],
     "entry": "index.js",
     "outputPath": "./dist",
