@@ -24,23 +24,29 @@ jobs:
       - script: |
           yarn
         displayName: "yarn"
+
       # This only needs to happen once, since the source code doesn't change.
       - script: |
           yarn checkchange
         displayName: "check change"
+
       - script: |
           yarn build
         displayName: "yarn build"
+
       # This only needs to happen once, since the source code doesn't change.
       - script: |
           yarn check-for-changed-files
         displayName: "Verify API and Ensure Changed Files"
+
       - script: |
           yarn bundle
         displayName: "yarn bundle"
+
       - script: |
           yarn e2etest
         displayName: "Running E2E Tests"
+
   - job: ApplePR
     displayName: Apple PR
     pool:
@@ -78,6 +84,7 @@ jobs:
       - script: |
           rm -rf $(Build.Repository.LocalPath)/DerivedData
         displayName: "Clean DerivedData"
+
       - task: NodeTool@0
         inputs:
           versionSpec: "10.x"
@@ -86,15 +93,19 @@ jobs:
       - script: |
           sudo gem install cocoapods
         displayName: "Install Cocoapods Environment"
+
       - script: |
           yarn
         displayName: "yarn"
+
       - script: |
           yarn build
         displayName: "yarn build"
+
       - script: |
           yarn bundle
         displayName: "yarn bundle"
+
       # Select proper XCode version
       - template: templates/apple-xcode-select.yml
 
