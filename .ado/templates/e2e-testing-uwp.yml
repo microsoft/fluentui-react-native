@@ -16,6 +16,12 @@ jobs:
           versionSpec: "12.x"
         displayName: "Install Node.js"
 
+      - task: DownloadSecureFile@1
+        name: UwpCertificate
+        displayName: "Download UWP App Certificate"
+        inputs:
+          secureFile: "FluentTester_TemporaryKey.pfx"
+
       - task: NuGetToolInstaller@0
         inputs:
           versionSpec: ">=4.6.0"
@@ -23,11 +29,13 @@ jobs:
 
       - template: setup-repo.yml
 
-      - task: DownloadSecureFile@1
-        name: UwpCertificate
-        displayName: "Download UWP App Certificate"
+      - task: NuGetCommand@2
+        displayName: NuGet restore - ReactUWPTestApp
         inputs:
-          secureFile: "FluentTester_TemporaryKey.pfx"
+          command: restore
+          noCache: true
+          restoreSolution: packages/E2ETest/windows/ReactUWPTestApp.sln
+          verbosityRestore: Detailed # Options: quiet, normal, detailed
 
       - script: yarn windows
         displayName: Running UWP App
