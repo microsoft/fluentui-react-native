@@ -1,11 +1,12 @@
 parameters:
   sdkVersion: ""
+  filePath: ""
 
 steps:
   - task: powershell@2
     inputs:
       targetType: filePath
-      filePath: vnext\Scripts\Install-WindowsSdkISO.ps1
+      filePath: { parameters.filePath }
       arguments: ${{ parameters.sdkVersion }}
     displayName: "Install Insider SDK (${{ parameters.sdkVersion }})"
     condition: ne('', '${{ parameters.sdkVersion }}')
