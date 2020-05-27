@@ -48,7 +48,7 @@ jobs:
       - task: CmdLine@2
         displayName: cd
         inputs:
-          script: "cd C:/users/"
+          script: cd C:\Users\VssAdministrator\.nuget\plugins
 
       - task: CmdLine@2
         displayName: dir
