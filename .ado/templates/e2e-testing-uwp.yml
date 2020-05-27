@@ -41,13 +41,13 @@ jobs:
 
       - template: setup-repo.yml
 
-      - task: NuGetCommand@2
-        displayName: NuGet restore - FluentTester
-        inputs:
-          command: restore
-          noCache: true
-          restoreSolution: apps/windows/windows/FluentTester.sln
-          verbosityRestore: Detailed # Options: quiet, normal, detailed
+      # - task: NuGetCommand@2
+      #   displayName: NuGet restore - FluentTester
+      #   inputs:
+      #     command: restore
+      #     noCache: true
+      #     restoreSolution: apps/windows/windows/FluentTester.sln
+      #     verbosityRestore: Detailed # Options: quiet, normal, detailed
 
       - script: yarn windows
         displayName: Running UWP App
