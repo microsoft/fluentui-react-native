@@ -1,11 +1,9 @@
-platform :ios, '12.0'
 require_relative '../../../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-target 'FluentUITester' do
-  # YOUR REACT NATIVE PATH (from the iOS folder)
-  rn_path = '../node_modules/react-native'
+abstract_target 'Shared' do
+  # YOUR REACT NATIVE PATH (from the macos folder)
+  rn_path = '../../../node_modules/react-native-macos'
 
-  # Pods for FluentUITester
   pod 'FBLazyVector', :path => "#{rn_path}/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "#{rn_path}/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "#{rn_path}/Libraries/RCTRequired"
@@ -33,9 +31,14 @@ target 'FluentUITester' do
   pod 'ReactCommon/turbomodule/core', :path => "#{rn_path}/ReactCommon"
   pod 'Yoga', :path => "#{rn_path}/ReactCommon/yoga"
 
+  pod 'boost-for-react-native', :podspec => "#{rn_path}/third-party-podspecs/boost-for-react-native.podspec"
   pod 'DoubleConversion', :podspec => "#{rn_path}/third-party-podspecs/DoubleConversion.podspec"
   pod 'glog', :podspec => "#{rn_path}/third-party-podspecs/glog.podspec"
   pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
 
-  use_native_modules!
+  target 'FluentUITester-macOS' do
+    platform :macos, '10.14'
+    # Pods specifically for macOS target
+  end
+
 end

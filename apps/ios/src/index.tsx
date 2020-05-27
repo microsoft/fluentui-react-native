@@ -13,6 +13,6 @@ const FluentTester: React.FunctionComponent<IFabricTesterProps> = props => {
   );
 };
 
-AppRegistry.registerComponent('FluentTester', () => FluentTester);
+AppRegistry.registerComponent('FluentUITester', () => FluentTester);
 
 export default FluentTester;
