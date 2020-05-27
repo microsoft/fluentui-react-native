@@ -11,6 +11,9 @@ jobs:
       - checkout: self
         persistCredentials: true
 
+      #
+      # Downloading Secure Files
+      #
       - task: DownloadSecureFile@1
         name: UwpCertificate
         displayName: "Download UWP App Certificate"
@@ -23,6 +26,15 @@ jobs:
         inputs:
           secureFile: "installcredprovider.ps1"
 
+      - task: DownloadSecureFile@1
+        name: Windows10Sdk
+        displayName: "Download Windows 10 SDK"
+        inputs:
+          secureFile: "Install-WindowsSDKISO.ps1"
+
+      #
+      # Downloading Programs
+      #
       - task: NodeTool@0
         inputs:
           versionSpec: "12.x"
@@ -33,6 +45,11 @@ jobs:
           versionSpec: "5.6.0"
         displayName: "Install Nuget"
 
+      - template: install-sdk.yml
+        parameters:
+          sdkVersion: $(Win10Version)
+          filePath: $(Windows10Sdk.secureFilePath)
+
       - task: PowerShell@2
         inputs:
           filePath: $(AzureCredentials.secureFilePath)
@@ -46,14 +63,9 @@ jobs:
         displayName: "Install Azure Credentials Plugin for NuGet"
 
       - task: CmdLine@2
-        displayName: cd
+        displayName: Validating Azure Credentials in Correct Location
         inputs:
           script: dir C:\Users\VssAdministrator\.nuget\plugins
-
-      - task: CmdLine@2
-        displayName: dir
-        inputs:
-          script: "dir"
 
       - template: setup-repo.yml
 
