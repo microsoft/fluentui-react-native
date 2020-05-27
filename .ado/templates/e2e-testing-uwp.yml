@@ -48,7 +48,7 @@ jobs:
       - template: install-SDK.yml
         parameters:
           sdkVersion: $(Win10Version)
-          filePath1: $(Windows10Sdk.secureFilePath)
+          thePath: $(Windows10Sdk.secureFilePath)
 
       - task: PowerShell@2
         inputs:
