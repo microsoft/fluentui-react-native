@@ -31,13 +31,13 @@ jobs:
       - task: CmdLine@2
         inputs:
           script: "git clone https://github.com/microsoft/artifacts-credprovider.git"
+        displayName: "Clone Azure Credentials Plugin for NuGet Repo"
 
       - task: PowerShell@2
         inputs:
           filePath: "d:/a/1/s/artifacts-credprovider/helpers/installcredprovider.ps1"
           arguments: "-AddNetfx"
-
-      - template: setup-repo.yml
+        displayName: "Install Azure Credentials Plugin for NuGet"
 
       - task: NuGetCommand@2
         displayName: NuGet restore - FluentTester
@@ -46,6 +46,8 @@ jobs:
           noCache: true
           restoreSolution: apps/windows/windows/FluentTester.sln
           verbosityRestore: Detailed # Options: quiet, normal, detailed
+
+      - template: setup-repo.yml
 
       - script: yarn windows
         displayName: Running UWP App
