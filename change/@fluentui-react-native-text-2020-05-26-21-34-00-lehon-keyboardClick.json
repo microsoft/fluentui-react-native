@@ -1,0 +1,8 @@
+{
+  "type": "none",
+  "comment": "Support enter key for calling onClick on Button",
+  "packageName": "@fluentui-react-native/text",
+  "email": "lehon@microsoft.com",
+  "dependentChangeType": "none",
+  "date": "2020-05-27T04:33:45.519Z"
+}
