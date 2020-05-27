@@ -1,3 +1,71 @@
-# The template sets up the environment
+# Steps to checkout, install node_modules, yarn build, install SDK and install VS dependencies
+
+parameters:
+  yarnBuildCmd: build
+  debug: false
+
+  # Visual Studio Installer
+  vsComponents: ""
+  listVsComponents: false
+  installVsComponents: false
+
 steps:
-  # Install Node
+  - task: PowerShell@2
+    displayName: Display env
+    inputs:
+      targetType: "inline"
+      script: gci env:* | sort-object name
+
+  - task: PowerShell@2
+    displayName: Display disksize
+    inputs:
+      targetType: inline # filePath | inline
+      script: |
+        Get-WmiObject Win32_LogicalDisk
+
+  - task: NuGetToolInstaller@0
+    inputs:
+      versionSpec: ">=4.6.0"
+
+  - task: CmdLine@2
+    displayName: yarn install
+    inputs:
+      script: yarn install --frozen-lockfile
+
+  - task: CmdLine@2
+    displayName: Install react-native-cli
+    inputs:
+      script: npm install -g react-native-cli
+
+  - task: CmdLine@2
+    displayName: yarn ${{ parameters.yarnBuildCmd }}
+    inputs:
+      script: yarn ${{ parameters.yarnBuildCmd }}
+
+  - template: install-SDK.yml
+    parameters:
+      sdkVersion: $(Win10Version)
+
+  - task: PowerShell@2
+    displayName: List Visual Studio Components
+    inputs:
+      targetType: filePath
+      filePath: $(Build.SourcesDirectory)/.ado/VSComponentList.ps1
+    condition: and(succeeded(), ${{ parameters.listVsComponents }})
+
+  - task: PowerShell@2
+    displayName: Install Visual Studio dependencies
+    inputs:
+      targetType: filePath
+      filePath: $(Build.SourcesDirectory)/vnext/Scripts/Tfs/Install-VsFeatures.ps1
+      arguments: -Components ${{ parameters.vsComponents }}
+        -Collect:$${{ parameters.debug }}
+        -Cleanup:$true
+    condition: and(succeeded(), ${{ parameters.installVsComponents }})
+
+  - task: PowerShell@2
+    displayName: List disksize after prepare-env
+    inputs:
+      targetType: inline # filePath | inline
+      script: |
+        Get-WmiObject Win32_LogicalDisk
