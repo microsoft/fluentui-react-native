@@ -7,10 +7,13 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "bundle": "fluentui-scripts metro -platform macos --dev --cli",
+    "bundle": "fluentui-scripts metro -platform macos --dev",
     "start:macos": "node ../../node_modules/react-native-macos/local-cli/cli.js start --use-react-native-macos"
   },
   "dependencies": {
+    "@fluentui-react-native/tester": "^0.0.1",
+    "@uifabricshared/theming-react-native": "0.7.28",
+    "@uifabricshared/themed-stylesheet": "0.3.29",
     "react": "16.11.0",
     "react-native": "0.61.0",
     "react-native-macos": "^0.61.0-0"
