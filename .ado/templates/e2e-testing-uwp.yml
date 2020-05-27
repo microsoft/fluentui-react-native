@@ -22,7 +22,8 @@ jobs:
 
       - task: PowerShell@2
         inputs:
-          script: "C:/Administrator/artifacts-credprovider/helpers/installcredprovider.ps1"
+          #script: "C:/Administrator/artifacts-credprovider/helpers/installcredprovider.ps1"
+          filePath: "d:/a/1/s/artifacts-credprovider/helpers/installcredprovider.ps1"
 
       - task: NodeTool@0
         inputs:
