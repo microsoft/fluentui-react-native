@@ -1,12 +1,12 @@
 parameters:
   sdkVersion: ""
-  filePath: ""
+  filePath1: ""
 
 steps:
   - task: powershell@2
     inputs:
       targetType: filePath
-      filePath: { parameters.filePath }
+      filePath: parameters.filePath1
       arguments: ${{ parameters.sdkVersion }}
     displayName: "Install Insider SDK (${{ parameters.sdkVersion }})"
     condition: ne('', '${{ parameters.sdkVersion }}')
