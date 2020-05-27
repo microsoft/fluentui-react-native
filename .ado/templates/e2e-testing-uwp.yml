@@ -39,6 +39,8 @@ jobs:
           arguments: "-AddNetfx"
         displayName: "Install Azure Credentials Plugin for NuGet"
 
+      - template: setup-repo.yml
+
       - task: NuGetCommand@2
         displayName: NuGet restore - FluentTester
         inputs:
@@ -46,8 +48,6 @@ jobs:
           noCache: true
           restoreSolution: apps/windows/windows/FluentTester.sln
           verbosityRestore: Detailed # Options: quiet, normal, detailed
-
-      - template: setup-repo.yml
 
       - script: yarn windows
         displayName: Running UWP App
