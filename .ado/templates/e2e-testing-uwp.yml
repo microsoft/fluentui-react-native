@@ -25,6 +25,11 @@ jobs:
 
       - task: CmdLine@2
         inputs:
+          script: cd C:\Users\VssAdministrator\AppData\Local\Temp\CredProviderZip
+        displayName: "cd"
+
+      - task: CmdLine@2
+        inputs:
           script: dir
         displayName: "dir"
 

@@ -5,37 +5,37 @@ variables:
   CI: true
 
 jobs:
-  - job: WindowsPR
-    displayName: Windows PR
-    pool:
-      vmImage: "windows-2019"
-    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
-    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+  # - job: WindowsPR
+  #   displayName: Windows PR
+  #   pool:
+  #     vmImage: "windows-2019"
+  #   timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+  #   cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
-    steps:
-      - checkout: self
-        persistCredentials: true
+  #   steps:
+  #     - checkout: self
+  #       persistCredentials: true
 
-      - task: NodeTool@0
-        inputs:
-          versionSpec: "12.x"
-        displayName: "Install Node.js"
+  #     - task: NodeTool@0
+  #       inputs:
+  #         versionSpec: "12.x"
+  #       displayName: "Install Node.js"
 
-      - template: templates/setup-repo.yml
+  #     - template: templates/setup-repo.yml
 
-      # This only needs to happen once, since the source code doesn't change
-      # - script: |
-      #     yarn checkchange
-      #   displayName: "check change"
+  #     This only needs to happen once, since the source code doesn't change
+  #     - script: |
+  #         yarn checkchange
+  #       displayName: "check change"
 
-      # This only needs to happen once, since the source code doesn't change.
-      # - script: |
-      #     yarn check-for-changed-files
-      #   displayName: "Verify API and Ensure Changed Files"
+  #     This only needs to happen once, since the source code doesn't change.
+  #     - script: |
+  #         yarn check-for-changed-files
+  #       displayName: "Verify API and Ensure Changed Files"
 
-      - script: |
-          yarn e2etest-win32
-        displayName: "Running Win32 E2E Tests"
+  #     - script: |
+  #         yarn e2etest-win32
+  #       displayName: "Running Win32 E2E Tests"
 
   - template: templates/e2e-testing-uwp.yml
   # - job: ApplePR
