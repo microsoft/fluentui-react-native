@@ -25,7 +25,7 @@ jobs:
 
       - task: CmdLine@2
         inputs:
-          script: dir C:\Users\VssAdministrator\AppData\Local\Temp\
+          script: dir C:\Users\VssAdministrator\AppData\Local\Temp\CredProviderZip
         displayName: "cd"
 
       - task: NodeTool@0
