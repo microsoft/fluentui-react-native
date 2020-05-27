@@ -29,6 +29,7 @@ export const Button = compose<IButtonType>({
       e => {
         if (onClick && e.nativeEvent.key === 'Enter') {
           onClick();
+          e.stopPropagation()
         }
       },
       [onClick]
