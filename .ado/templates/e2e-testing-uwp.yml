@@ -22,10 +22,10 @@ jobs:
         inputs:
           secureFile: "FluentTester_TemporaryKey.pfx"
 
-      - task: NuGetToolInstaller@0
-        inputs:
-          versionSpec: ">=4.6.0"
-        displayName: "Install Nuget"
+      # - task: NuGetToolInstaller@0
+      #   inputs:
+      #     versionSpec: ">=4.6.0"
+      #   displayName: "Install Nuget"
 
       # Clone the artifact repo
       - task: CmdLine@2
