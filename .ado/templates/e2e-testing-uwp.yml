@@ -16,6 +16,10 @@ jobs:
         inputs:
           script: "git clone https://github.com/microsoft/artifacts-credprovider.git"
 
+      - task: CmdLine@2
+        inputs:
+          script: "dir"
+
       - task: PowerShell@2
         inputs:
           script: "C:/Administrator/artifacts-credprovider/helpers/installcredprovider.ps1"
