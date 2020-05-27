@@ -27,7 +27,7 @@ export const Button = compose<IButtonType>({
     const pressable = useAsPressable({ ...rest, onPress: onClick });
     const onKeyDown = React.useCallback(
       e => {
-        if (onClick && e.nativeEvent.key === 'Enter') {
+        if (onClick && (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ')) {
           onClick();
           e.stopPropagation()
         }
