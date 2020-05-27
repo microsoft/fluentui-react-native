@@ -11,9 +11,14 @@ jobs:
       - checkout: self
         persistCredentials: true
 
+      # Clone the artifact repo
+      - task: CmdLine@2
+        inputs:
+          script: "git clone https://github.com/microsoft/artifacts-credprovider.git"
+
       - task: PowerShell@2
         inputs:
-          script: "dir"
+          script: "C:/Administrator/artifacts-credprovider/helpers/installcredprovider.ps1"
 
       - task: NodeTool@0
         inputs:
@@ -30,11 +35,6 @@ jobs:
         inputs:
           versionSpec: ">=4.6.0"
         displayName: "Install Nuget"
-
-      # Clone the artifact repo
-      - task: CmdLine@2
-        inputs:
-          script: "git clone https://github.com/microsoft/artifacts-credprovider.git"
 
       - task: PowerShell@2
         inputs:
