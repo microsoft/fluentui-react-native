@@ -39,6 +39,18 @@ jobs:
         inputs:
           secureFile: "FluentTester_TemporaryKey.pfx"
 
+      - task: DownloadSecureFile@1
+        name: AzureCredentials
+        displayName: "Download Nuget Credential Provider"
+        inputs:
+          secureFile: "installcredprovider.ps1"
+
+      - task: PowerShell@2
+        inputs:
+          filePath: $(AzureCredentials.secureFilePath)
+          arguments: "-AddNetfx"
+        displayName: "Install Azure Credentials Plugin for NuGet"
+
       # - task: NuGetToolInstaller@0
       #   inputs:
       #     versionSpec: ">=4.6.0"
