@@ -11,28 +11,6 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      # Clone the artifact repo
-      # - task: CmdLine@2
-      #   inputs:
-      #     script: "git clone https://github.com/microsoft/artifacts-credprovider.git"
-      #   displayName: "Clone Azure Credentials Plugin for NuGet Repo"
-
-      # - task: PowerShell@2
-      #   inputs:
-      #     filePath: "d:/a/1/s/artifacts-credprovider/helpers/installcredprovider.ps1"
-      #     arguments: "-AddNetfx"
-      #   displayName: "Install Azure Credentials Plugin for NuGet"
-
-      - task: NodeTool@0
-        inputs:
-          versionSpec: "12.x"
-        displayName: "Install Node.js"
-
-      - task: NuGetToolInstaller@0
-        inputs:
-          versionSpec: "5.6.0"
-        displayName: "Install Nuget"
-
       - task: DownloadSecureFile@1
         name: UwpCertificate
         displayName: "Download UWP App Certificate"
@@ -45,23 +23,31 @@ jobs:
         inputs:
           secureFile: "installcredprovider.ps1"
 
+      - task: NodeTool@0
+        inputs:
+          versionSpec: "12.x"
+        displayName: "Install Node.js"
+
+      - task: NuGetToolInstaller@0
+        inputs:
+          versionSpec: "5.6.0"
+        displayName: "Install Nuget"
+
       - task: PowerShell@2
         inputs:
           filePath: $(AzureCredentials.secureFilePath)
           arguments: "-AddNetfx"
         displayName: "Install Azure Credentials Plugin for NuGet"
 
-      # Clone the artifact repo
-      # - task: CmdLine@2
-      #   inputs:
-      #     script: "git clone https://github.com/microsoft/artifacts-credprovider.git"
-      #   displayName: "Clone Azure Credentials Plugin for NuGet Repo"
+      - task: CmdLine@2
+        displayName: cd
+        inputs:
+          script: "cd C:/users/"
 
-      # - task: PowerShell@2
-      #   inputs:
-      #     filePath: "d:/a/1/s/artifacts-credprovider/helpers/installcredprovider.ps1"
-      #     arguments: "-AddNetfx"
-      #   displayName: "Install Azure Credentials Plugin for NuGet"
+      - task: CmdLine@2
+        displayName: dir
+        inputs:
+          script: "dir"
 
       - template: setup-repo.yml
 
