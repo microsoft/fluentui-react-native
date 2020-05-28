@@ -27,6 +27,11 @@ jobs:
           secureFile: "installcredprovider.ps1"
 
       # Downloading Nuget
+      - task: CmdLine@2
+        displayName: Checking dir of Repo
+        inputs:
+          script: dir "d:\a\1\s"
+
       - task: NuGetToolInstaller@0
         inputs:
           versionSpec: "5.6.0"
