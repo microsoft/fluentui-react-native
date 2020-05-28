@@ -6,7 +6,6 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "bundle": "fluentui-scripts metro -platform macos --dev",
     "start:macos": "node ../../node_modules/react-native-macos/local-cli/cli.js start --use-react-native-macos"
   },
   "dependencies": {
