@@ -11,6 +11,7 @@ import RadioGroupTestPage from '../../RadioGroup/pages/RadioGroupTestPage.win';
 import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
 import TextTestPage from '../../Text/pages/TextTestPage.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
+// test
 
 describe('Click on each test page and check if it renders', function() {
   it('Button Test Page', () => {
