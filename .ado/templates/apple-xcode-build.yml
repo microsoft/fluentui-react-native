@@ -12,8 +12,8 @@ parameters:
 steps:
   # Install any pods necessary for the project
   - bash: |
-      echo "Running: cd apps/apple/$platform_directory && pod install" &&
-      cd apps/apple/$platform_directory &&
+      echo "Running: cd apps/$platform_directory && pod install" &&
+      cd apps/$platform_directory &&
       pod install
     env:
       platform_directory: ${{ parameters.relative_directory }}
