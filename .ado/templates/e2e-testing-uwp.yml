@@ -29,7 +29,7 @@ jobs:
       - task: CmdLine@2
         displayName: Checking dir of Repo
         inputs:
-          script: dir "d:\a\1\s\apps\windows\windows\packages"
+          script: dir "d:\a\1\s\apps\windows\windows\"
 
       # Downloading Nuget
       - task: NuGetToolInstaller@0
