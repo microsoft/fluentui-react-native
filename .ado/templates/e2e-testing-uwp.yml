@@ -26,11 +26,6 @@ jobs:
         inputs:
           secureFile: "installcredprovider.ps1"
 
-      - task: CmdLine@2
-        displayName: Checking dir of Repo
-        inputs:
-          script: dir "d:\a\1\s\apps\windows\windows\"
-
       # Downloading Nuget
       - task: NuGetToolInstaller@0
         inputs:
@@ -51,7 +46,16 @@ jobs:
         inputs:
           script: dir C:\Users\VssAdministrator\.nuget\plugins
 
-      - template: setup-repo.yml
+      - script: |
+          yarn
+        displayName: "yarn"
+
+      - task: CmdLine@2
+        displayName: Checking dir of Repo
+        inputs:
+          script: dir "d:\a\1\s\apps\windows\windows\"
+
+      # - template: setup-repo.yml
 
       # - task: NuGetCommand@2
       #   displayName: NuGet restore - FluentTester
