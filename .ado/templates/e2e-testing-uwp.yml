@@ -46,16 +46,12 @@ jobs:
         inputs:
           script: dir C:\Users\VssAdministrator\.nuget\plugins
 
-      - script: |
-          yarn
-        displayName: "yarn"
+      - template: setup-repo.yml
 
       - task: CmdLine@2
         displayName: Checking dir of Repo
         inputs:
           script: dir "d:\a\1\s\apps\windows\windows\"
-
-      # - template: setup-repo.yml
 
       # - task: NuGetCommand@2
       #   displayName: NuGet restore - FluentTester
