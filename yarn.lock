@@ -3510,6 +3510,20 @@
   resolved "https://registry.yarnpkg.com/@uifabric/prettier-rules/-/prettier-rules-7.0.4.tgz#03082a6cc4b586104738a24892c56e0f1d3df1b6"
   integrity sha512-PK60wLAjPrG2l93r1l/VY2BmnC1la0oxIXYBuln5DOAFJcSXMea9RxoNjuqhhqZGZo6aLjO7lW070MeVOvkABQ==
 
+"@uifabricshared/themed-stylesheet@0.3.29":
+  version "0.3.29"
+  resolved "https://registry.yarnpkg.com/@uifabricshared/themed-stylesheet/-/themed-stylesheet-0.3.29.tgz#19d41328e714589d77fe2ce05c143fc27fc15cf3"
+  integrity sha512-kFXv0EVFUJ0Ekkuhfiy/7WiuUpTNZyYNP+TOSfGqVl1lhjEyn2FY5goPvHCxdWYINovHGL+QAwxedN43Yp1N5w==
+
+"@uifabricshared/theming-react-native@0.7.28":
+  version "0.7.28"
+  resolved "https://registry.yarnpkg.com/@uifabricshared/theming-react-native/-/theming-react-native-0.7.28.tgz#3dee7ce9f852dbbdb36ee10653e612bbaabaf03b"
+  integrity sha512-25wGC1UQOYp2VqyPD5I/V3H9Mzlx3/3gAEQ4J1Uw1xoXxp0YaNaxVjBU9UygmOM3LooyBdmcwrPuIDOkhC+GrA==
+  dependencies:
+    "@uifabricshared/foundation-settings" "^0.5.28"
+    "@uifabricshared/theme-registry" "^0.3.28"
+    "@uifabricshared/theming-ramp" "^0.9.27"
+
 "@wdio/appium-service@^5.0.0":
   version "5.18.2"
   resolved "https://registry.yarnpkg.com/@wdio/appium-service/-/appium-service-5.18.2.tgz#e6461c939393c3edbb027e69780f0fd2dadff6a4"
