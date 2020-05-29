@@ -29,7 +29,7 @@
     "@babel/preset-react": "^7.8.0",
     "@babel/preset-typescript": "^7.8.0",
     "@microsoft/api-extractor": "^7.3.7",
-    "@react-native-community/cli": "^4.7.0",
+    "@react-native-community/cli": "^4.9.0",
     "@types/enzyme": "^3.10.5",
     "@types/es6-collections": "^0.5.29",
     "@types/es6-promise": "0.0.32",

@@ -5,7 +5,10 @@
  * @format
  */
 
+const {getWatchFolders} = require('@uifabricshared/build-native');
+
 module.exports = {
+  watchFolders: getWatchFolders(),
   transformer: {
     getTransformOptions: async () => ({
       transform: {

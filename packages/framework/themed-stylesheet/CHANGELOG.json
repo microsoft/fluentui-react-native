@@ -2,6 +2,21 @@
   "name": "@uifabricshared/themed-stylesheet",
   "entries": [
     {
+      "date": "Thu, 21 May 2020 20:00:42 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.3.29",
+      "version": "0.3.29",
+      "comments": {
+        "none": [
+          {
+            "comment": "none",
+            "author": "lehon@microsoft.com",
+            "commit": "5ba3ac570ae17a0d3138302ad12807362dea06c1",
+            "package": "@uifabricshared/themed-stylesheet"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 May 2020 03:37:41 GMT",
       "tag": "@uifabricshared/themed-stylesheet_v0.3.26",
       "version": "0.3.26",
