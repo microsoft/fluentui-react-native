@@ -44,12 +44,12 @@ jobs:
       - task: CmdLine@2
         displayName: Validating Azure Credentials in Correct Location - NetCore
         inputs:
-          script: dir C:\Users\VssAdministrator\.nuget\plugins\netcore
+          script: dir C:\Users\VssAdministrator\.nuget\plugins\netcore\CredentialProvider.Microsoft
 
       - task: CmdLine@2
         displayName: Validating Azure Credentials in Correct Location - NetFX
         inputs:
-          script: dir C:\Users\VssAdministrator\.nuget\plugins\netfx
+          script: dir C:\Users\VssAdministrator\.nuget\plugins\netfx\CredentialProvider.Microsoft
 
       # Adding certificate to store
       - task: PowerShell@2
