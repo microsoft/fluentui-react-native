@@ -12,9 +12,8 @@ parameters:
 steps:
   # Install any pods necessary for the project
   - bash: |
-      echo "Running: cd apps/$platform_directory/src && pod install" &&
-      cd apps/$platform_directory/src &&
-      pod install
+      echo "pod install --project-directory=apps/$platform_directory/src"
+      pod install --project-directory=apps/$platform_directory/src
     env:
       platform_directory: ${{ parameters.relative_directory }}
     displayName: "pod install"
