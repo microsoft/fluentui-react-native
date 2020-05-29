@@ -46,20 +46,19 @@ jobs:
         inputs:
           script: dir C:\Users\VssAdministrator\.nuget\plugins
 
+      # Adding certificate to store
+      - task: PowerShell@2
+        inputs:
+          filePath: inline
+          script: certutil –f –p password –importpfx $(UwpCertificate.secureFilePath)
+        displayName: "Add Certificate to Personal Store"
+
       - template: setup-repo.yml
 
       - task: CmdLine@2
         displayName: Checking dir of Repo
         inputs:
           script: dir "d:\a\1\s\apps\windows\windows\"
-
-      # - task: NuGetCommand@2
-      #   displayName: NuGet restore - FluentTester
-      #   inputs:
-      #     command: restore
-      #     noCache: true
-      #     restoreSolution: apps/windows/windows/FluentTester.sln
-      #     verbosityRestore: Detailed # Options: quiet, normal, detailed
 
       - script: yarn windows
         displayName: Running UWP App
