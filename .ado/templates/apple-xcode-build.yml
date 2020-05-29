@@ -10,19 +10,10 @@ parameters:
   xcode_extraArgs: ''
 
 steps:
-  # Install node_modules necessary for the project
-  - bash: |
-      echo "Running: cd apps/apple/FluentUITester/$platform_directory && yarn install" &&
-      cd apps/apple/FluentUITester/$platform_directory &&
-      yarn
-    env:
-      platform_directory: ${{ parameters.relative_directory }}
-    displayName: "yarn"
-
   # Install any pods necessary for the project
   - bash: |
-      echo "Running: cd apps/apple/FluentUITester/$platform_directory && pod install" &&
-      cd apps/apple/FluentUITester/$platform_directory &&
+      echo "Running: cd apps/$platform_directory/src && pod install" &&
+      cd apps/$platform_directory/src &&
       pod install
     env:
       platform_directory: ${{ parameters.relative_directory }}
