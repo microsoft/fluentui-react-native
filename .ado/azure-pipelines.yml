@@ -33,9 +33,9 @@ jobs:
   #         yarn check-for-changed-files
   #       displayName: "Verify API and Ensure Changed Files"
 
-  #     - script: |
-  #         yarn e2etest-win32
-  #       displayName: "Running Win32 E2E Tests"
+  # - script: yarn e2etest
+  #   displayName: Run Win32 E2E Tests
+  #   workingDirectory: apps/win32
 
   - template: templates/e2e-testing-uwp.yml
   # - job: ApplePR
