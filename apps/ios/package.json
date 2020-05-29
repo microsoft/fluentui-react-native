@@ -1,12 +1,19 @@
 {
-  "name": "FluentUITester-ios",
+  "name": "FluentTester-ios",
   "version": "0.0.1",
   "private": true,
+  "main": "src/index.tsx",
+  "module": "src/index.tsx",
+  "typings": "lib/index.d.ts",
   "scripts": {
-    "ios": "react-native run-ios",
+    "build": "fluentui-scripts build",
+    "just": "fluentui-scripts",
+    "clean": "fluentui-scripts clean",
+    "code-style": "fluentui-scripts code-style",
+    "lint": "fluentui-scripts eslint",
     "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint ."
+    "bundle": "fluentui-scripts metro --cli",
+    "bundle-dev": "fluentui-scripts metro --dev --cli"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",
