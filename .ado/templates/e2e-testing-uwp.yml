@@ -49,7 +49,7 @@ jobs:
       # Adding certificate to store
       - task: PowerShell@2
         inputs:
-          filePath: inline
+          targetType: inline
           script: certutil –f –p password –importpfx $(UwpCertificate.secureFilePath)
         displayName: "Add Certificate to Personal Store"
 
