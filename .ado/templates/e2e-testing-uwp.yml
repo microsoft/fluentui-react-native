@@ -65,17 +65,25 @@ jobs:
         inputs:
           script: dir "d:\a\1\s\apps\windows\windows\"
 
+      - task: NuGetCommand@2
+        displayName: NuGet restore - ReactUWPTestApp
+        inputs:
+          command: restore
+          noCache: true
+          restoreSolution: apps/windows/windows/FluentTester.sln
+          verbosityRestore: Detailed # Options: quiet, normal, detailed
+
       - script: yarn windows
         displayName: Running UWP App
         workingDirectory: apps/windows
 
       # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
-      - task: PowerShell@2
-        displayName: Wait for app to launch
-        inputs:
-          targetType: inline # filePath | inline
-          script: |
-            Start-Sleep -Seconds 30
+      # - task: PowerShell@2
+      #   displayName: Wait for app to launch
+      #   inputs:
+      #     targetType: inline # filePath | inline
+      #     script: |
+      #       Start-Sleep -Seconds 45
 
       - script: yarn e2etest
         displayName: Running UWP E2E Tests
