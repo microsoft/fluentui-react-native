@@ -1,8 +1,0 @@
-{
-  "type": "none",
-  "comment": "Support enter key for calling onClick on Button",
-  "packageName": "@uifabricshared/foundation-compose",
-  "email": "lehon@microsoft.com",
-  "dependentChangeType": "none",
-  "date": "2020-05-27T04:33:47.522Z"
-}
