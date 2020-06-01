@@ -27,10 +27,10 @@ jobs:
           secureFile: "installcredprovider.ps1"
 
       # Downloading Nuget
-      # - task: NuGetToolInstaller@0
-      #   inputs:
-      #     versionSpec: "5.6.0"
-      #   displayName: "Install Nuget"
+      - task: NuGetToolInstaller@0
+        inputs:
+          versionSpec: "5.6.0"
+        displayName: "Install Nuget"
 
       #
       # Downloading the Azure Credentials Plugin to launch UWP app
@@ -41,16 +41,6 @@ jobs:
           arguments: "-AddNetfx -Force"
         displayName: "Install Azure Credentials Plugin for NuGet"
 
-      - task: CmdLine@2
-        displayName: Validating Azure Credentials in Correct Location - NetCore
-        inputs:
-          script: dir C:\Users\VssAdministrator\.nuget\plugins\netcore\CredentialProvider.Microsoft
-
-      - task: CmdLine@2
-        displayName: Validating Azure Credentials in Correct Location - NetFX
-        inputs:
-          script: dir C:\Users\VssAdministrator\.nuget\plugins\netfx\CredentialProvider.Microsoft
-
       # Adding certificate to store
       - task: PowerShell@2
         inputs:
@@ -59,11 +49,6 @@ jobs:
         displayName: "Add Certificate to Personal Store"
 
       - template: setup-repo.yml
-
-      - task: CmdLine@2
-        displayName: Checking dir of Repo
-        inputs:
-          script: dir "d:\a\1\s\apps\windows\windows\"
 
       - script: yarn windows
         displayName: Running UWP App
