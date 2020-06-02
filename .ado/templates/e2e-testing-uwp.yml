@@ -50,9 +50,15 @@ jobs:
 
       - template: setup-repo.yml
 
-      - script: start cmd.exe @cmd /k "yarn start"
-        displayName: Run React-Native Server
-        workingDirectory: apps/windows
+      - task: CmdLine@2
+        inputs:
+          script: start cmd.exe @cmd /k "yarn start"
+          workingDirectory: apps/windows
+        displayName: Start Server
+
+      # - script: start cmd.exe @cmd /k "yarn start"
+      #   displayName: Run React-Native Server
+      #   workingDirectory: apps/windows
 
       # - script: yarn windows
       #   displayName: Running UWP App
@@ -66,6 +72,11 @@ jobs:
       #     script: |
       #       Start-Sleep -Seconds 45
 
-      - script: yarn e2etest
-        displayName: Running UWP E2E Tests
-        workingDirectory: apps/windows
+      - task: CmdLine@2
+        inputs:
+          script: yarn run e2etest
+          workingDirectory: apps/windows
+        displayName: Running E2E Test
+      # - script: yarn e2etest
+      #   displayName: Running UWP E2E Tests
+      #   workingDirectory: apps/windows
