@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/separator",
   "entries": [
     {
+      "date": "Mon, 01 Jun 2020 22:06:07 GMT",
+      "tag": "@fluentui-react-native/separator_v0.3.38",
+      "version": "0.3.38",
+      "comments": {
+        "none": [
+          {
+            "comment": "Support enter key for calling onClick on Button",
+            "author": "lehon@microsoft.com",
+            "commit": "399cead569e120926521d01c13a49088fe96036b",
+            "package": "@fluentui-react-native/separator"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 21 May 2020 20:00:42 GMT",
+      "tag": "@fluentui-react-native/separator_v0.3.33",
+      "version": "0.3.33",
+      "comments": {
+        "none": [
+          {
+            "comment": "none",
+            "author": "lehon@microsoft.com",
+            "commit": "5ba3ac570ae17a0d3138302ad12807362dea06c1",
+            "package": "@fluentui-react-native/separator"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 May 2020 03:37:41 GMT",
       "tag": "@fluentui-react-native/separator_v0.3.30",
       "version": "0.3.30",

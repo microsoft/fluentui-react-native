@@ -2,6 +2,36 @@
   "name": "@uifabricshared/immutable-merge",
   "entries": [
     {
+      "date": "Mon, 01 Jun 2020 22:06:07 GMT",
+      "tag": "@uifabricshared/immutable-merge_v0.5.33",
+      "version": "0.5.33",
+      "comments": {
+        "none": [
+          {
+            "comment": "Support enter key for calling onClick on Button",
+            "author": "lehon@microsoft.com",
+            "commit": "399cead569e120926521d01c13a49088fe96036b",
+            "package": "@uifabricshared/immutable-merge"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 21 May 2020 20:00:42 GMT",
+      "tag": "@uifabricshared/immutable-merge_v0.5.28",
+      "version": "0.5.28",
+      "comments": {
+        "none": [
+          {
+            "comment": "none",
+            "author": "lehon@microsoft.com",
+            "commit": "5ba3ac570ae17a0d3138302ad12807362dea06c1",
+            "package": "@uifabricshared/immutable-merge"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 May 2020 03:37:41 GMT",
       "tag": "@uifabricshared/immutable-merge_v0.5.25",
       "version": "0.5.25",
