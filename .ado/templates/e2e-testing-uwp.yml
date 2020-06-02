@@ -57,7 +57,8 @@ jobs:
 
       - task: CmdLine@2
         inputs:
-          script: start cmd.exe @cmd /k "yarn start"
+          # script: start cmd.exe @cmd /k "yarn start"
+          script: yarn start
           workingDirectory: apps/windows
         displayName: Start Server
 
