@@ -63,28 +63,22 @@ jobs:
 
       - template: setup-repo.yml
 
-      - task: PowerShell@2
-        inputs:
-          targetType: inline
-          script: Start-Process -FilePath "C:\Windows\System32\cmd.exe" -Verb RunAs -ArgumentList "/k cd d:\a\1\s\apps\windows\ & yarn start"
-        displayName: "Starting Server1"
-
-      - task: PowerShell@2
-        inputs:
-          targetType: inline
-          script: Start-Process -FilePath "C:\Windows\System32\cmd.exe" -Verb RunAs -ArgumentList "/c cd D:\a\1\s\apps\windows\ & yarn start"
-        displayName: "Starting Server2"
-
-      - task: PowerShell@2
-        inputs:
-          targetType: inline
-          script: Start-Process -FilePath "C:\Windows\System32\cmd.exe" -ArgumentList "/k cd d:\a\1\s\apps\windows\ & yarn start"
-        displayName: "Starting Server3"
+      # - script: |
+      #     yarn windows
+      #   workingDirectory: apps\windows
+      #   displayName: RUNNING APP
 
       - script: |
-          yarn windows
+          start cmd /k 'yarn start'
         workingDirectory: apps\windows
-        displayName: RUNING APP
+        displayName: Starting Server
+
+      - task: PowerShell@2
+        displayName: "Check TestApp"
+        inputs:
+          targetType: "inline"
+          # script: 'if ((Get-Process FluentTester*) -eq $Null) { echo "TestApp is not running"; exit 1}'
+          script: Get-Process
 
       # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
       - task: PowerShell@2
