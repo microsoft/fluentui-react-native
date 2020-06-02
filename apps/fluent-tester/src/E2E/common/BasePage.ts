@@ -11,7 +11,7 @@ export class BasePage {
 
   // Waits for page to be loaded. Timeout could differ depending on usage.
   waitForPageDisplayed(timeout?: number) {
-    this._testPage.waitForDisplayed(timeout ?? this.waitForPageTimeout, false, 'ERROR: ' + this._pageName + ' was never displayed.');
+    this._testPage.waitForDisplayed(timeout ?? this.waitForPageTimeout, false, 'ERROR: ' + this._pageName + ' was never displayed. Please visit /errorShots for more information.');
   }
 
   // Actual element on page
