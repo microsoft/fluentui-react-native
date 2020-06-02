@@ -150,7 +150,7 @@ exports.config = {
     const fileName = encodeURIComponent(test.title.replace(/\s+/g, '-'));
 
     // build file path
-    const filePath = this.screenshotPath + fileName + '.png';
+    const filePath = './errorShots/' + fileName + '.png';
 
     // save screenshot
     browser.saveScreenshot(filePath);
