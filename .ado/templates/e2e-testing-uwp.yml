@@ -63,9 +63,15 @@ jobs:
 
       - template: setup-repo.yml
 
-      - powershell: |
-          Start-Process -FilePath "C:\Windows\System32\cmd.exe" -Verb RunAs -ArgumentList "/k cd d:\a\1\s\apps\windows & yarn start"
+      - task: PowerShell@2
+        inputs:
+          targetType: inline
+          script: Start-Process -FilePath "C:\Windows\System32\cmd.exe" -Verb RunAs -ArgumentList "/k cd d:\a\1\s\apps\windows & yarn start"
         displayName: "Starting Server"
+
+      # - powershell: |
+      #     Start-Process -FilePath "C:\Windows\System32\cmd.exe" -Verb RunAs -ArgumentList "/k cd d:\a\1\s\apps\windows & yarn start"
+      #   displayName: "Starting Server"
 
       # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
       - task: PowerShell@2
