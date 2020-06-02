@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
   }
 });
 
-import TestSvg from './Assets/accessible-icon-brands.svg';
 export const SvgTest: React.FunctionComponent<{}> = () => {
   return (
     <View>
@@ -65,7 +64,6 @@ export const SvgTest: React.FunctionComponent<{}> = () => {
         <Use href="#shape" x="170" y="0" />
       </Svg>
       <Text>Bundled svg </Text>
-      <TestSvg width={200} height={200} color="red" />
       <Text>Remotely retrieved svgs</Text>
       <SvgCssUri
         style={styles.svg}
