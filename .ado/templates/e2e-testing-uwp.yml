@@ -66,12 +66,20 @@ jobs:
       - task: PowerShell@2
         inputs:
           targetType: inline
-          script: Start-Process -FilePath "C:\Windows\System32\cmd.exe" -Verb RunAs -ArgumentList "/k cd d:\a\1\s\apps\windows & yarn start"
-        displayName: "Starting Server"
+          script: Start-Process -FilePath "C:\Windows\System32\cmd.exe" -Verb RunAs -ArgumentList "/k cd d:\a\1\s\apps\windows\ & yarn start"
+        displayName: "Starting Server1"
 
-      # - powershell: |
-      #     Start-Process -FilePath "C:\Windows\System32\cmd.exe" -Verb RunAs -ArgumentList "/k cd d:\a\1\s\apps\windows & yarn start"
-      #   displayName: "Starting Server"
+      - task: PowerShell@2
+        inputs:
+          targetType: inline
+          script: Start-Process -FilePath "C:\Windows\System32\cmd.exe" -Verb RunAs -ArgumentList "/c cd D:\a\1\s\apps\windows\ & yarn start"
+        displayName: "Starting Server2"
+
+      - task: PowerShell@2
+        inputs:
+          targetType: inline
+          script: Start-Process -FilePath "C:\Windows\System32\cmd.exe" -ArgumentList "/k cd d:\a\1\s\apps\windows\ & yarn start"
+        displayName: "Starting Server3"
 
       # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
       - task: PowerShell@2
@@ -79,13 +87,17 @@ jobs:
         inputs:
           targetType: inline # filePath | inline
           script: |
-            Start-Sleep -Seconds 45
+            Start-Sleep -Seconds 30
 
-      - task: CmdLine@2
-        inputs:
-          script: yarn e2etest
-          workingDirectory: apps\windows
+      - script: |
+          yarn e2etest
+        workingDirectory: apps\windows
         displayName: Running E2E Test
+      # - task: CmdLine@2
+      #   inputs:
+      #     script: yarn e2etest
+      #     workingDirectory: apps\windows
+      #   displayName: Running E2E Test
       # - task: CmdLine@2
       #   inputs:
       #     script: yarn run e2etest
