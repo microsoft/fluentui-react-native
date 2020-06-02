@@ -26,13 +26,6 @@ jobs:
         inputs:
           secureFile: "installcredprovider.ps1"
 
-      - task: CmdLine@2
-        inputs:
-          # script: start cmd.exe @cmd /k "yarn start"
-          script: start cmd.exe /c "yarn start"
-          workingDirectory: apps/windows
-        displayName: Start Server
-
       - task: NodeTool@0
         inputs:
           versionSpec: "12.16.1"
@@ -83,9 +76,22 @@ jobs:
 
       - task: CmdLine@2
         inputs:
-          script: yarn run e2etest
+          # script: start cmd.exe @cmd /k "yarn start"
+          script: start cmd.exe /c "yarn start"
           workingDirectory: apps/windows
-        displayName: Running E2E Test
+        displayName: Start Server
+
+      - task: CmdLine@2
+        inputs:
+          # script: start cmd.exe @cmd /k "yarn start"
+          script: start cmd.exe /c "yarn e2etest"
+          workingDirectory: apps/windows
+        displayName: Start Server
+      # - task: CmdLine@2
+      #   inputs:
+      #     script: yarn run e2etest
+      #     workingDirectory: apps/windows
+      #   displayName: Running E2E Test
       # - script: yarn e2etest
       #   displayName: Running UWP E2E Tests
       #   workingDirectory: apps/windows
