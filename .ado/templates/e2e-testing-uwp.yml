@@ -81,6 +81,11 @@ jobs:
           script: Start-Process -FilePath "C:\Windows\System32\cmd.exe" -ArgumentList "/k cd d:\a\1\s\apps\windows\ & yarn start"
         displayName: "Starting Server3"
 
+      - script: |
+          yarn windows
+        workingDirectory: apps\windows
+        displayName: RUNING APP
+
       # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
       - task: PowerShell@2
         displayName: Wait for app to launch
