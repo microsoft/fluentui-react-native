@@ -32,11 +32,11 @@ jobs:
         displayName: "Install Node"
 
       - script: |
-          'dir C:\Windows\System32\'
+          dir C:\Windows\System32\
         displayName: Looking for CMD.exe
 
       - script: |
-          'dir d:\a\1\s\a'
+          dir d:\a\1\s\a
         displayName: Looking for apps
 
       # Downloading Nuget
@@ -64,7 +64,7 @@ jobs:
       - template: setup-repo.yml
 
       - powershell: |
-          Start-Process -FilePath "C:\Windows\System32\cmd.exe" -verb runas -ArgumentList "/k cd d:\a\1\s\apps\windows & yarn start"
+          Start-Process -FilePath "C:\Windows\System32\cmd.exe" -Verb RunAs -ArgumentList "/k cd d:\a\1\s\apps\windows & yarn start"
         displayName: "Starting Server"
 
       # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
