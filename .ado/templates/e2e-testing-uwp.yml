@@ -37,39 +37,6 @@ jobs:
           versionSpec: "5.6.0"
         displayName: "Install Nuget"
 
-      - task: PowerShell@2
-        displayName: "Check CMD's"
-        inputs:
-          targetType: "inline"
-          script: Get-Process
-
-      - script: |
-          start cmd /k 'yarn start'
-        workingDirectory: apps\windows
-        displayName: Starting Server1
-
-      - script: |
-          start cmd /k 'yarn start'
-        workingDirectory: apps\windows
-        displayName: Starting Server2
-
-      - task: PowerShell@2
-        displayName: "Check CMD's 1"
-        inputs:
-          targetType: "inline"
-          script: Get-Process
-
-      - script: |
-          start cmd /k 'yarn start'
-        workingDirectory: apps\windows
-        displayName: Starting Server  3
-
-      - task: PowerShell@2
-        displayName: "Check CMD's 2"
-        inputs:
-          targetType: "inline"
-          script: Get-Process
-
       #
       # Downloading the Azure Credentials Plugin to launch UWP app
       #
@@ -94,9 +61,13 @@ jobs:
       #   displayName: RUNNING APP
 
       - script: |
-          start cmd /k 'yarn start'
+          start cmd /k yarn start
         workingDirectory: apps\windows
         displayName: Starting Server
+
+      - task: CommandLine@2
+          cd apps/windows & start cmd /k yarn start
+        displayName: Starting Server 3
 
       - task: PowerShell@2
         displayName: "Check TestApp"
