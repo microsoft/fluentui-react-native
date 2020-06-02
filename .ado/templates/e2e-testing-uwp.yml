@@ -55,17 +55,15 @@ jobs:
 
       - template: setup-repo.yml
 
+      - powershell: |
+          'Start-Process -FilePath "C:\Windows\System32\cmd.exe" -verb runas -ArgumentList "/k cd d:\a\1\s\apps\windows & yarn start"'
+        displayName: "Starting Server"
+
       - task: CmdLine@2
         inputs:
-          # script: start cmd.exe @cmd /k "yarn start"
-          script: start cmd.exe /c "yarn start"
-          # workingDirectory: apps/windows
-        displayName: Start Server
-
-      # - script: start cmd.exe @cmd /k "yarn start"
-      #   displayName: Run React-Native Server
-      #   workingDirectory: apps/windows
-
+          script: yarn e2etest
+          workingDirectory: apps/windows
+        displayName: Running E2E Test
       # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
       # - task: PowerShell@2
       #   displayName: Wait for app to launch
@@ -73,20 +71,6 @@ jobs:
       #     targetType: inline # filePath | inline
       #     script: |
       #       Start-Sleep -Seconds 45
-
-      - task: CmdLine@2
-        inputs:
-          # script: start cmd.exe @cmd /k "yarn start"
-          script: start cmd.exe /c "yarn start"
-          workingDirectory: apps/windows
-        displayName: Start Server
-
-      - task: CmdLine@2
-        inputs:
-          # script: start cmd.exe @cmd /k "yarn start"
-          script: start cmd.exe /c "yarn e2etest"
-          workingDirectory: apps/windows
-        displayName: Start Server
       # - task: CmdLine@2
       #   inputs:
       #     script: yarn run e2etest
