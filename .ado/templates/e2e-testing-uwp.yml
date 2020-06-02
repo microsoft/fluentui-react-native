@@ -31,19 +31,38 @@ jobs:
           versionSpec: "12.16.1"
         displayName: "Install Node"
 
-      - script: |
-          dir C:\Windows\System32\
-        displayName: Looking for CMD.exe
-
-      - script: |
-          cd d:\a\1\s\apps\windows & dir
-        displayName: Looking for apps
-
       # Downloading Nuget
       - task: NuGetToolInstaller@0
         inputs:
           versionSpec: "5.6.0"
         displayName: "Install Nuget"
+
+      - script: |
+          start cmd /k 'yarn start'
+        workingDirectory: apps\windows
+        displayName: Starting Server1
+
+      - script: |
+          start cmd /k 'yarn start'
+        workingDirectory: apps\windows
+        displayName: Starting Server2
+
+      - task: PowerShell@2
+        displayName: "Check CMD's 1"
+        inputs:
+          targetType: "inline"
+          script: Get-Process
+
+      - script: |
+          start cmd /k 'yarn start'
+        workingDirectory: apps\windows
+        displayName: Starting Server  3
+
+      - task: PowerShell@2
+        displayName: "Check CMD's 2"
+        inputs:
+          targetType: "inline"
+          script: Get-Process
 
       #
       # Downloading the Azure Credentials Plugin to launch UWP app
