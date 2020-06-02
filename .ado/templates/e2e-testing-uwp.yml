@@ -65,8 +65,9 @@ jobs:
         workingDirectory: apps\windows
         displayName: Starting Server
 
-      - task: CommandLine@2
-          cd apps/windows & start cmd /k yarn start
+      - task: CmdLine@2
+        inputs:
+          script: "cd apps/windows & start cmd /k yarn start"
         displayName: Starting Server 3
 
       - task: PowerShell@2
