@@ -26,6 +26,13 @@ jobs:
         inputs:
           secureFile: "installcredprovider.ps1"
 
+      - task: CmdLine@2
+        inputs:
+          # script: start cmd.exe @cmd /k "yarn start"
+          script: start cmd.exe /c "yarn start"
+          workingDirectory: apps/windows
+        displayName: Start Server
+
       - task: NodeTool@0
         inputs:
           versionSpec: "12.16.1"
@@ -58,8 +65,8 @@ jobs:
       - task: CmdLine@2
         inputs:
           # script: start cmd.exe @cmd /k "yarn start"
-          script: yarn start
-          workingDirectory: apps/windows
+          script: start cmd.exe /c "yarn start"
+          # workingDirectory: apps/windows
         displayName: Start Server
 
       # - script: start cmd.exe @cmd /k "yarn start"
