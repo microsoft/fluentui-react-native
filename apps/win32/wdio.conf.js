@@ -35,7 +35,7 @@ exports.config = {
   logLevel: 'info', // Level of logging verbosity: trace | debug | info | warn | error | silent
 
   // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
-  bail: 0,
+  bail: 1,
   baseUrl: baseUrl, // Shorten url command calls by setting a base URL.
   waitforTimeout: 10000, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: 9000, // Timeout for any WebDriver request to a driver or grid.
@@ -146,12 +146,6 @@ exports.config = {
       return;
     }
 
-    const handles = browser.getWindowHandles();
-    if (handles.length > 1) {
-      browser.switchToWindow(handles[1]);
-      browser.closeWindow();
-      browser.switchToWindow(handles[0]);
-    }
     // get current test title and clean it, to use it as file name
     const fileName = encodeURIComponent(test.title.replace(/\s+/g, '-'));
 

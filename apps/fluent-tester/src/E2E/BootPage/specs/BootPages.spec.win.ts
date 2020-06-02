@@ -24,6 +24,12 @@ describe('Click on each test page and check if it renders', function () {
     expect(CalloutTestPage.isPageLoaded()).toBeTruthy();
   });
 
+  it('Svg Test Page', () => {
+    BootTestPage.clickAndGoToSvgPage();
+    SvgTestPage.waitForPageDisplayed(3000);
+    expect(SvgTestPage.isPageLoaded()).toBeTruthy();
+  });
+
   it('Checkbox Test Page', () => {
     BootTestPage.clickAndGoToCheckboxPage();
     expect(CheckboxTestPage.isPageLoaded()).toBeTruthy();
@@ -73,10 +79,4 @@ describe('Click on each test page and check if it renders', function () {
   //   BootTestPage.clickAndGoToThemePage();
   //   expect(ThemeTestPage.isPageLoaded()).toBeTruthy();
   // });
-
-  it('Svg Test Page', () => {
-    BootTestPage.clickAndGoToSvgPage();
-    SvgTestPage.waitForPageDisplayed(3000);
-    expect(SvgTestPage.isPageLoaded()).toBeTruthy();
-  });
 });

@@ -1,0 +1,1591 @@
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session[39m
+[35m[HTTP][39m [90m{"capabilities":{"alwaysMatch":{"platformName":"windows","deviceName":"WindowsPC","app":"3763f28e-bdfd-440d-9822-7e06168df892_kceynq4x5hrp4!App"},"firstMatch":[{}]},"desiredCapabilities":{"platformName":"windows","deviceName":"WindowsPC","app":"3763f28e-bdfd-440d-9822-7e06168df892_kceynq4x5hrp4!App"}}[39m
+[debug] [35m[W3C][39m Calling AppiumDriver.createSession() with args: [{"platformName":"windows","deviceName":"WindowsPC","app":"3763f28e-bdfd-440d-9822-7e06168df892_kceynq4x5hrp4!App"},null,{"alwaysMatch":{"platformName":"windows","deviceName":"WindowsPC","app":"3763f28e-bdfd-440d-9822-7e06168df892_kceynq4x5hrp4!App"},"firstMatch":[{}]}]
+[debug] [35m[BaseDriver][39m Event 'newSessionRequested' logged at 1591135179577 (14:59:39 GMT-0700 (Pacific Daylight Time))
+[35m[BaseDriver][39m The following capabilities are not standard capabilities and should have an extension prefix:
+[35m[BaseDriver][39m   deviceName
+[35m[BaseDriver][39m   app
+[35m[Appium][39m Appium v1.17.1 creating new WindowsDriver (v1.13.0) session
+[debug] [35m[BaseDriver][39m Creating session with MJSONWP desired capabilities: {
+[debug] [35m[BaseDriver][39m   "platformName": "windows",
+[debug] [35m[BaseDriver][39m   "deviceName": "WindowsPC",
+[debug] [35m[BaseDriver][39m   "app": "3763f28e-bdfd-440d-9822-7e06168df892_kceynq4x5hrp4!App"
+[debug] [35m[BaseDriver][39m }
+[35m[BaseDriver][39m Session created with session id: cd7b8b98-8b6e-4fee-9240-b0d2b303db32
+[35m[WinAppDriver][39m WinAppDriver exists, but the checksum did not match. Was it replaced manually?
+[debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'starting'
+[35m[WinAppDriver][39m Killing any old WinAppDrivers on same port, running: FOR /F "usebackq tokens=5" %a in (`netstat -nao ^| findstr /R /C:"4724 "`) do (FOR /F "usebackq" %b in (`TASKLIST /FI "PID eq %a" ^| findstr /I winappdriver.exe`) do (IF NOT %b=="" TASKKILL /F /PID %a))
+[35m[WinAppDriver][39m No old WinAppDrivers seemed to exist
+[35m[WinAppDriver][39m Spawning WinAppDriver with: 4724/wd/hub
+[35m[WinAppDriver][39m [STDOUT] Windows Application Driver listening for requests at: http://127.0.0.1:4724/wd/hub
+[debug] [35m[WD Proxy][39m Proxying [GET /status] to [GET http://127.0.0.1:4724/wd/hub/status] with no body
+[35m[WinAppDriver][39m [STDOUT] Press ENTER to exit.
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] GET /wd/hub/status HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[debug] [35m[WD Proxy][39m Got response with status 200: {"build":{"revision":"18001","time":"Tue Sep 18 18:35:38 2018","version":"1.1.1809"},"os":{"arch":"amd64","name":"windows","version":"10.0.18362"}}
+[35m[WinAppDriver][39m Status call returned 200. we're online and ready to run tests
+[debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'online'
+[debug] [35m[WinAppDriver][39m Starting WinAppDriver session. Will timeout in '20000' ms.
+[debug] [35m[WD Proxy][39m Matched '/session' to command name 'createSession'
+[debug] [35m[WD Proxy][39m Proxying [POST /session] to [POST http://127.0.0.1:4724/wd/hub/session] with body: {"desiredCapabilities":{"platformName":"windows","deviceName":"WindowsPC","app":"3763f28e-bdfd-440d-9822-7e06168df892_kceynq4x5hrp4!App"}}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 200 OK
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 147
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 138
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"desiredCapabilities":{"platformName":"windows","deviceName":"WindowsPC","app":"3763f28e-bdfd-440d-9822-7e06168df892_kceynq4x5hrp4!App"}}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 200 OK
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 161
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"sessionId":"3AF2C57E-BADF-4859-A7D2-2329F3BCE335","status":0,"value":{"app":"3763f28e-bdfd-440d-9822-7e06168df892_kceynq4x5hrp4!App","platformName":"windows"}}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3AF2C57E-BADF-4859-A7D2-2329F3BCE335","status":0,"value":{"app":"3763f28e-bdfd-440d-9822-7e06168df892_kceynq4x5hrp4!App","platformName":"windows"}}
+[35m[WD Proxy][39m Determined the downstream protocol as 'MJSONWP'
+[35m[Appium][39m New WindowsDriver session created successfully, session cd7b8b98-8b6e-4fee-9240-b0d2b303db32 added to master session list
+[debug] [35m[BaseDriver][39m Event 'newSessionStarted' logged at 1591135185185 (14:59:45 GMT-0700 (Pacific Daylight Time))
+[debug] [35m[MJSONWP (cd7b8b98)][39m Cached the protocol value 'MJSONWP' for the new session cd7b8b98-8b6e-4fee-9240-b0d2b303db32
+[debug] [35m[MJSONWP (cd7b8b98)][39m Responding to client with driver.createSession() result: {"platformName":"windows","deviceName":"WindowsPC","app":"3763f28e-bdfd-440d-9822-7e06168df892_kceynq4x5hrp4!App"}
+[35m[HTTP][39m [37m<-- POST /wd/hub/session [39m[32m200[39m [90m5612 ms - 186[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/window/maximize[39m
+[35m[HTTP][39m [90m{}[39m
+[35m[MJSONWP (cd7b8b98)][39m Driver proxy active, passing request on via HTTP proxy
+[debug] [35m[WD Proxy][39m Matched '/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/window/maximize' to command name 'maximizeWindow'
+[debug] [35m[WD Proxy][39m Proxying [POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/window/maximize] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/window/maximize] with body: {}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/window/maximize HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 2
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 200 OK
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 63
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"sessionId":"3AF2C57E-BADF-4859-A7D2-2329F3BCE335","status":0}
+[debug] [35m[WD Proxy][39m Got response with status 200: {"sessionId":"3AF2C57E-BADF-4859-A7D2-2329F3BCE335","status":0}
+[35m[WD Proxy][39m Replacing sessionId 3AF2C57E-BADF-4859-A7D2-2329F3BCE335 with cd7b8b98-8b6e-4fee-9240-b0d2b303db32
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/window/maximize [39m[32m200[39m [90m30 ms - 76[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m96 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m41 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m33 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m31 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m41 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m33 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m39 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m33 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m40 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m33 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m35 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m33 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m40 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m35 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m42 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m31 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m40 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m32 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m39 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m33 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m39 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m32 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m42 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m28 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m40 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m33 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m41 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m32 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m42 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m37 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m41 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m33 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m39 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m32 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m35 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m32 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m38 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m31 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m41 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m34 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m41 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m32 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m36 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[HTTP][39m [37m-->[39m [37mPOST[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element[39m
+[35m[HTTP][39m [90m{"using":"accessibility id","value":"Base_TestPage"}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Calling AppiumDriver.findElement() with args: ["accessibility id","Base_TestPage","cd7b8b98-8b6e-4fee-9240-b0d2b303db32"]
+[debug] [35m[BaseDriver][39m Valid locator strategies for this request: xpath, id, name, class name, accessibility id
+[debug] [35m[WD Proxy][39m Matched '/element' to command name 'findElement'
+[debug] [35m[WD Proxy][39m Proxying [POST /element] to [POST http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element] with body: {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] ==========================================
+[35m[WinAppDriver][39m [STDOUT] POST /wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335/element HTTP/1.1
+[35m[WinAppDriver][39m [STDOUT] Accept: application/json, */*
+[35m[WinAppDriver][39m [STDOUT] Connection: keep-alive
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 52
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json; charset=utf-8
+[35m[WinAppDriver][39m [STDOUT] Host: 127.0.0.1:4724
+[35m[WinAppDriver][39m [STDOUT] User-Agent: appium
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"using":"accessibility id","value":"Base_TestPage"}
+[35m[WinAppDriver][39m [STDOUT] HTTP/1.1 404 Not Found
+[35m[WinAppDriver][39m [STDOUT] Content-Length: 139
+[35m[WinAppDriver][39m [STDOUT] Content-Type: application/json
+[35m[WinAppDriver][39m [STDOUT] 
+[35m[WinAppDriver][39m [STDOUT] {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[35m[WD Proxy][39m Got response with status 404: {"status":7,"value":{"error":"no such element","message":"An element could not be located on the page using the given search parameters."}}
+[debug] [35m[W3C][39m Matched W3C error code 'no such element' to NoSuchElementError
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchElementError: An element could not be located on the page using the given search parameters.
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at errorFromW3CJsonCode (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:780:25)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at ProxyRequestError.getActualError (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\protocol\errors.js:663:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at JWProxy.command (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium-base-driver\lib\jsonwp-proxy\proxy.js:265:19)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at runMicrotasks (<anonymous>)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+[35m[HTTP][39m [37m<-- POST /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32/element [39m[31m500[39m [90m32 ms - 164[39m
+[35m[HTTP][39m [90m[39m
+[35m[Appium][39m Received SIGINT - shutting down
+[debug] [35m[Appium][39m Cleaning up 1 active session
+[35m[Appium][39m Closing session, cause was 'The process has received SIGINT signal'
+[35m[Appium][39m Removing session 'cd7b8b98-8b6e-4fee-9240-b0d2b303db32' from our master session list
+[debug] [35m[WinAppDriver][39m Deleting WinAppDriver session
+[debug] [35m[WinAppDriver][39m Deleting WinAppDriver server session
+[debug] [35m[WD Proxy][39m Matched '/' to command name 'deleteSession'
+[debug] [35m[WD Proxy][39m Proxying [DELETE /] to [DELETE http://127.0.0.1:4724/wd/hub/session/3AF2C57E-BADF-4859-A7D2-2329F3BCE335] with no body
+[35m[HTTP][39m [37m-->[39m [37mDELETE[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32[39m
+[35m[HTTP][39m [90m{}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchDriverError: A session is either terminated or not started
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at asyncHandler (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium\node_modules\appium-base-driver\lib\protocol\protocol.js:255:15)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium\node_modules\appium-base-driver\lib\protocol\protocol.js:447:15
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at Layer.handle [as handle_request] (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\layer.js:95:5)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at next (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\route.js:137:13)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at Route.dispatch (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\route.js:112:3)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at Layer.handle [as handle_request] (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\layer.js:95:5)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:281:22
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at param (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:354:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at param (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:365:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at Function.process_params (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:410:3)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at next (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:275:10)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at logger (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\morgan\index.js:144:5)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at Layer.handle [as handle_request] (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\layer.js:95:5)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at trim_prefix (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:317:13)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:284:7
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at Function.process_params (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:335:12)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at next (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:275:10)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\body-parser\lib\read.js:130:5
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at invokeCallback (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\raw-body\index.js:224:16)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at done (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\raw-body\index.js:213:7)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at IncomingMessage.onEnd (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\raw-body\index.js:273:7)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at IncomingMessage.emit (events.js:323:22)
+[debug] [35m[MJSONWP (cd7b8b98)][39m Destroying socket connection
+[35m[HTTP][39m [37m<-- DELETE /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32 [39m[33m404[39m [90m20 ms - 131[39m
+[35m[HTTP][39m [90m[39m
+[35m[WinAppDriver][39m WinAppDriver exited unexpectedly with code 3221225786, signal null
+[debug] [35m[WinAppDriver][39m WinAppDriver changed state to 'stopped'
+[35m[HTTP][39m [37m-->[39m [37mDELETE[39m [37m/wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32[39m
+[35m[HTTP][39m [90m{}[39m
+[debug] [35m[MJSONWP (cd7b8b98)][39m Encountered internal error running command: NoSuchDriverError: A session is either terminated or not started
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at asyncHandler (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium\node_modules\appium-base-driver\lib\protocol\protocol.js:255:15)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\appium\node_modules\appium-base-driver\lib\protocol\protocol.js:447:15
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at Layer.handle [as handle_request] (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\layer.js:95:5)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at next (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\route.js:137:13)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at Route.dispatch (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\route.js:112:3)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at Layer.handle [as handle_request] (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\layer.js:95:5)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:281:22
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at param (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:354:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at param (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:365:14)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at Function.process_params (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:410:3)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at next (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:275:10)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at logger (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\morgan\index.js:144:5)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at Layer.handle [as handle_request] (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\layer.js:95:5)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at trim_prefix (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:317:13)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:284:7
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at Function.process_params (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:335:12)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at next (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\express\lib\router\index.js:275:10)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\body-parser\lib\read.js:130:5
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at invokeCallback (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\raw-body\index.js:224:16)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at done (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\raw-body\index.js:213:7)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at IncomingMessage.onEnd (C:\Users\safreibe.REDMOND\Desktop\NewFluent\fluentui-react-native\node_modules\raw-body\index.js:273:7)
+[debug] [35m[MJSONWP (cd7b8b98)][39m     at IncomingMessage.emit (events.js:323:22)
+[debug] [35m[MJSONWP (cd7b8b98)][39m Destroying socket connection
+[35m[HTTP][39m [37m<-- DELETE /wd/hub/session/cd7b8b98-8b6e-4fee-9240-b0d2b303db32 [39m[33m404[39m [90m2 ms - 131[39m
+[35m[HTTP][39m [90m[39m
