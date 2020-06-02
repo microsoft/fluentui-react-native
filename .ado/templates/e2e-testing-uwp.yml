@@ -37,6 +37,12 @@ jobs:
           versionSpec: "5.6.0"
         displayName: "Install Nuget"
 
+      - task: PowerShell@2
+        displayName: "Check CMD's"
+        inputs:
+          targetType: "inline"
+          script: Get-Process
+
       - script: |
           start cmd /k 'yarn start'
         workingDirectory: apps\windows
