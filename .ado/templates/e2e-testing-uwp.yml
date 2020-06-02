@@ -36,7 +36,7 @@ jobs:
         displayName: Looking for CMD.exe
 
       - script: |
-          cd d:\a\1\s\a & dir
+          cd d:\a\1\s\apps\windows & dir
         displayName: Looking for apps
 
       # Downloading Nuget
