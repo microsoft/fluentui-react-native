@@ -50,9 +50,13 @@ jobs:
 
       - template: setup-repo.yml
 
-      - script: yarn windows
-        displayName: Running UWP App
+      - script: start cmd.exe @cmd /k "yarn start"
+        displayName: Run React-Native Server
         workingDirectory: apps/windows
+
+      # - script: yarn windows
+      #   displayName: Running UWP App
+      #   workingDirectory: apps/windows
 
       # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
       # - task: PowerShell@2
