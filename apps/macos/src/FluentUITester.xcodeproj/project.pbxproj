@@ -13,7 +13,6 @@
 		514201522437B4B40078DB4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 514201512437B4B40078DB4F /* Assets.xcassets */; };
 		514201552437B4B40078DB4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 514201532437B4B40078DB4F /* Main.storyboard */; };
 		514201582437B4B40078DB4F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 514201572437B4B40078DB4F /* main.m */; };
-		9F3A29F2244F64CD00A401D2 /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3A29F1244F64CD00A401D2 /* Dummy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +27,6 @@
 		514201562437B4B40078DB4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		514201572437B4B40078DB4F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		514201592437B4B40078DB4F /* FluentUITester.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FluentUITester.entitlements; sourceTree = "<group>"; };
-		9F3A29F1244F64CD00A401D2 /* Dummy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dummy.swift; path = ../../ios/Dummy.swift; sourceTree = "<group>"; };
 		9F3A29F7244F660700A401D2 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		9F3A29F8244F660F00A401D2 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		9F3A29F9244F661800A401D2 /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
@@ -75,7 +73,6 @@
 			isa = PBXGroup;
 			children = (
 				9F3A29F6244F65FA00A401D2 /* Config */,
-				9F3A29F1244F64CD00A401D2 /* Dummy.swift */,
 				5142014B2437B4B30078DB4F /* FRNAppDelegate.h */,
 				5142014C2437B4B30078DB4F /* FRNAppDelegate.m */,
 				5142014E2437B4B30078DB4F /* FRNViewController.h */,
@@ -226,7 +223,6 @@
 			files = (
 				514201502437B4B30078DB4F /* FRNViewController.m in Sources */,
 				514201582437B4B40078DB4F /* main.m in Sources */,
-				9F3A29F2244F64CD00A401D2 /* Dummy.swift in Sources */,
 				5142014D2437B4B30078DB4F /* FRNAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

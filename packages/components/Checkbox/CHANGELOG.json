@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Mon, 01 Jun 2020 22:06:07 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.3.37",
+      "version": "0.3.37",
+      "comments": {
+        "none": [
+          {
+            "comment": "Support enter key for calling onClick on Button",
+            "author": "lehon@microsoft.com",
+            "commit": "399cead569e120926521d01c13a49088fe96036b",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 21 May 2020 20:00:42 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.3.32",
       "version": "0.3.32",

@@ -14,7 +14,7 @@
 - (void)loadView {
   // The delegate must conform to RCTBridgeDelegate to retrieve the JS source file for the packager
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:nil];
-  RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"FluentUITester" initialProperties:nil];
+  RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"FluentTester" initialProperties:nil];
 
   [self setView:rootView];
 }
