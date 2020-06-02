@@ -31,6 +31,14 @@ jobs:
           versionSpec: "12.16.1"
         displayName: "Install Node"
 
+      - script: |
+          'dir C:\Windows\System32\'
+        displayName: Looking for CMD.exe
+
+      - script: |
+          'dir d:\a\1\s\a'
+        displayName: Looking for apps
+
       # Downloading Nuget
       - task: NuGetToolInstaller@0
         inputs:
@@ -56,21 +64,22 @@ jobs:
       - template: setup-repo.yml
 
       - powershell: |
-          'Start-Process -FilePath "C:\Windows\System32\cmd.exe" -verb runas -ArgumentList "/k cd d:\a\1\s\apps\windows & yarn start"'
+          Start-Process -FilePath "C:\Windows\System32\cmd.exe" -verb runas -ArgumentList "/k cd d:\a\1\s\apps\windows & yarn start"
         displayName: "Starting Server"
+
+      # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
+      - task: PowerShell@2
+        displayName: Wait for app to launch
+        inputs:
+          targetType: inline # filePath | inline
+          script: |
+            Start-Sleep -Seconds 45
 
       - task: CmdLine@2
         inputs:
           script: yarn e2etest
-          workingDirectory: apps/windows
+          workingDirectory: apps\windows
         displayName: Running E2E Test
-      # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
-      # - task: PowerShell@2
-      #   displayName: Wait for app to launch
-      #   inputs:
-      #     targetType: inline # filePath | inline
-      #     script: |
-      #       Start-Sleep -Seconds 45
       # - task: CmdLine@2
       #   inputs:
       #     script: yarn run e2etest
