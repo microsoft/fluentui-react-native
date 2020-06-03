@@ -2,7 +2,7 @@ jobs:
   - job: E2E_UWP_TEST
     displayName: E2E UWP Testing
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
-    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks before killing them
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
     pool:
       vmImage: "windows-2019"
@@ -11,62 +11,68 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      #
-      # Downloading Secure Files
+      # Download Node.JS
+      - task: NodeTool@0
+        inputs:
+          versionSpec: "12.16.1"
+        displayName: "Install Node"
+
+      # Download Nuget
+      - task: NuGetToolInstaller@0
+        inputs:
+          versionSpec: "5.6.0"
+        displayName: "Install Nuget"
+
+      # Download App Certificate
       - task: DownloadSecureFile@1
         name: UwpCertificate
         displayName: "Download UWP App Certificate"
         inputs:
           secureFile: "FluentTester_TemporaryKey.pfx"
 
-      - task: DownloadSecureFile@1
-        name: AzureCredentials
-        displayName: "Download Nuget Credential Provider"
-        inputs:
-          secureFile: "installcredprovider.ps1"
-
-      - task: NodeTool@0
-        inputs:
-          versionSpec: "12.16.1"
-        displayName: "Install Node"
-
-      # Downloading Nuget
-      - task: NuGetToolInstaller@0
-        inputs:
-          versionSpec: "5.6.0"
-        displayName: "Install Nuget"
-
-      #
-      # Downloading the Azure Credentials Plugin to launch UWP app
-      #
-      - task: PowerShell@2
-        inputs:
-          filePath: $(AzureCredentials.secureFilePath)
-          arguments: "-AddNetfx -Force"
-        displayName: "Install Azure Credentials Plugin for NuGet"
-
-      # Adding certificate to store
+      # Add certificate to store
       - task: PowerShell@2
         inputs:
           targetType: inline
           script: certutil –f –p password –importpfx $(UwpCertificate.secureFilePath)
         displayName: "Add Certificate to Personal Store"
 
+      # Download Azure Credentials Plugin
+      - task: DownloadSecureFile@1
+        name: AzureCredentials
+        displayName: "Download Nuget Credential Provider"
+        inputs:
+          secureFile: "installcredprovider.ps1"
+
+      # Install Azure Credentials Plugin
+      - task: PowerShell@2
+        inputs:
+          filePath: $(AzureCredentials.secureFilePath)
+          arguments: "-AddNetfx -Force"
+        displayName: "Install Azure Credentials Plugin for NuGet"
+
       - template: setup-repo.yml
 
-      # - script: |
-      #     yarn windows
-      #   workingDirectory: apps\windows
-      #   displayName: RUNNING APP
-
+      # Run server + FluentTester App
       - script: |
-          start cmd /k yarn start
+          yarn windows
         workingDirectory: apps\windows
-        displayName: Starting Server
-      - task: CmdLine@2
+        displayName: Run FluentTester App
+
+      # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
+      - task: PowerShell@2
+        displayName: Wait for app to launch
         inputs:
-          script: "cd apps/windows & start cmd /k yarn start"
-        displayName: Starting Server 3
+          targetType: inline # filePath | inline
+          script: |
+            Start-Sleep -Seconds 60
+
+      # Kill FluentTester, leave server up and running
+      - task: PowerShell@2
+        inputs:
+          targetType: inline
+          script: Stop-Process -Name FluentTester
+        displayName: Kill FluentTester Process
 
       - task: PowerShell@2
         displayName: "Check TestApp"
@@ -75,114 +81,7 @@ jobs:
           # script: 'if ((Get-Process FluentTester*) -eq $Null) { echo "TestApp is not running"; exit 1}'
           script: Get-Process
 
-      # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
-      - task: PowerShell@2
-        displayName: Wait for app to launch
-        inputs:
-          targetType: inline # filePath | inline
-          script: |
-            Start-Sleep -Seconds 30
       - script: |
           yarn e2etest
         workingDirectory: apps\windows
         displayName: Running E2E Test
-      # - task: CmdLine@2
-      #   inputs:
-      #     script: yarn e2etest
-      #     workingDirectory: apps\windows
-      #   displayName: Running E2E Test
-      # - task: CmdLine@2
-      #   inputs:
-      #     script: yarn run e2etest
-      #     workingDirectory: apps/windows
-      #   displayName: Running E2E Test
-      # - script: yarn e2etest
-      #   displayName: Running UWP E2E Tests
-      #   workingDirectory: apps/windows
-# jobs:
-#   - job: E2E_UWP_TEST
-#     displayName: E2E UWP Testing
-#     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
-#     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
-
-#     pool:
-#       vmImage: "windows-2019"
-
-#     steps:
-#       - checkout: self
-#         persistCredentials: true
-
-#       # Download Node.JS
-#       - task: NodeTool@0
-#         inputs:
-#           versionSpec: "12.16.1"
-#         displayName: "Install Node"
-
-#       # Download Nuget
-#       - task: NuGetToolInstaller@0
-#         inputs:
-#           versionSpec: "5.6.0"
-#         displayName: "Install Nuget"
-
-#       # Download App Certificate
-#       - task: DownloadSecureFile@1
-#         name: UwpCertificate
-#         displayName: "Download UWP App Certificate"
-#         inputs:
-#           secureFile: "FluentTester_TemporaryKey.pfx"
-
-#       # Download Azure Credentials Plugin
-#       - task: DownloadSecureFile@1
-#         name: AzureCredentials
-#         displayName: "Download Nuget Credential Provider"
-#         inputs:
-#           secureFile: "installcredprovider.ps1"
-
-#       # Install Azure Credentials Plugin
-#       - task: PowerShell@2
-#         inputs:
-#           filePath: $(AzureCredentials.secureFilePath)
-#           arguments: "-AddNetfx -Force"
-#         displayName: "Install Azure Credentials Plugin for NuGet"
-
-#       # Add certificate to store
-#       - task: PowerShell@2
-#         inputs:
-#           targetType: inline
-#           script: certutil –f –p password –importpfx $(UwpCertificate.secureFilePath)
-#         displayName: "Add Certificate to Personal Store"
-
-#       - template: setup-repo.yml
-
-#       # Run server + FluentTester App
-#       - script: |
-#           yarn windows
-#         workingDirectory: apps\windows
-#         displayName: Run FluentTester App
-
-#       # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
-#       - task: PowerShell@2
-#         displayName: Wait for app to launch
-#         inputs:
-#           targetType: inline # filePath | inline
-#           script: |
-#             Start-Sleep -Seconds 60
-
-#       # Kill FluentTester, leave server up and running
-#       - task: PowerShell@2
-#         inputs:
-#           targetType: inline
-#           script: Stop-Process -Name FluentTester
-#         displayName: Kill FluentTester Process
-
-#       - task: PowerShell@2
-#         displayName: "Check TestApp"
-#         inputs:
-#           targetType: "inline"
-#           # script: 'if ((Get-Process FluentTester*) -eq $Null) { echo "TestApp is not running"; exit 1}'
-#           script: Get-Process
-
-#       - script: |
-#           yarn e2etest
-#         workingDirectory: apps\windows
-#         displayName: Running E2E Test
