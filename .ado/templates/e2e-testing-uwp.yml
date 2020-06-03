@@ -55,20 +55,24 @@ jobs:
 
       - template: setup-repo.yml
 
-      # - script: |
-      #     yarn windows
-      #   workingDirectory: apps\windows
-      #   displayName: RUNNING APP
-
       - script: |
-          start cmd /k yarn start
+          yarn windows
         workingDirectory: apps\windows
-        displayName: Starting Server
+        displayName: Run FluentTester App
 
-      - task: CmdLine@2
+      # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
+      - task: PowerShell@2
+        displayName: Wait for app to launch
         inputs:
-          script: "cd apps/windows & start cmd /k yarn start"
-        displayName: Starting Server 3
+          targetType: inline # filePath | inline
+          script: |
+            Start-Sleep -Seconds 60
+
+      # - task: CmdLine@2
+      #   inputs:
+      #     script: start cmd /k yarn start
+      #     workingDirectory: apps/windows
+      #   displayName: Starting Server 3
 
       - task: PowerShell@2
         displayName: "Check TestApp"
@@ -77,28 +81,7 @@ jobs:
           # script: 'if ((Get-Process FluentTester*) -eq $Null) { echo "TestApp is not running"; exit 1}'
           script: Get-Process
 
-      # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
-      - task: PowerShell@2
-        displayName: Wait for app to launch
-        inputs:
-          targetType: inline # filePath | inline
-          script: |
-            Start-Sleep -Seconds 30
-
       - script: |
           yarn e2etest
         workingDirectory: apps\windows
         displayName: Running E2E Test
-      # - task: CmdLine@2
-      #   inputs:
-      #     script: yarn e2etest
-      #     workingDirectory: apps\windows
-      #   displayName: Running E2E Test
-      # - task: CmdLine@2
-      #   inputs:
-      #     script: yarn run e2etest
-      #     workingDirectory: apps/windows
-      #   displayName: Running E2E Test
-      # - script: yarn e2etest
-      #   displayName: Running UWP E2E Tests
-      #   workingDirectory: apps/windows
