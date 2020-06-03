@@ -13,7 +13,6 @@ jobs:
 
       #
       # Downloading Secure Files
-      #
       - task: DownloadSecureFile@1
         name: UwpCertificate
         displayName: "Download UWP App Certificate"
