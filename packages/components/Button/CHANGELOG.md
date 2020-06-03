@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Wed, 20 May 2020 03:37:41 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Jun 2020 22:06:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Mon, 01 Jun 2020 22:06:07 GMT
+
+### Minor changes
+
+- Support enter key for calling onClick on Button (lehon@microsoft.com)
+
+## 0.6.0
+
+Thu, 21 May 2020 20:00:42 GMT
+
+### Minor changes
+
+- add findNodeHandle in ButtonFocusTest (lehon@microsoft.com)
 
 ## 0.5.26
 
