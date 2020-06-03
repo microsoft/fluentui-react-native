@@ -15,23 +15,20 @@ export const Callout = compose<ICalloutType>({
   usePrepareProps: (props: ICalloutProps, useStyling: IUseComposeStyling<ICalloutType>) => {
     const { componentRef, target, ...rest } = props;
     const calloutRef = useViewCommandFocus(componentRef);
-    const [targetNativeTag, setTargetNativeTag] = React.useState<number>(null);
+    const [targetNativeTag, setTargetNativeTag] = React.useState<number>(undefined);
 
     React.useLayoutEffect(() => {
-      if ((target !== undefined && target?.current !== null))
-      {
+      if (target && target.current) {
         setTargetNativeTag(findNodeHandle(target.current));
       }
     }, [target]);
 
     const slotProps = mergeSettings<ICalloutSlotProps>(useStyling(props), {
       root: {
-        ...{
         ref: calloutRef,
+        target: targetNativeTag,
         ...rest
-      },
-      ...((targetNativeTag !== null) ? {target: targetNativeTag} : {})
-    }
+      }
     });
 
     return { slotProps };
