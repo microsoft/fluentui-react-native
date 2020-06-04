@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Thu, 04 Jun 2020 23:23:26 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Updating package",
+            "author": "safreibe@microsoft.com",
+            "commit": "f46fc39f159f235f09ae5c3f8498d9ec36dac4fe",
+            "package": "@fluentui-react-native/adapters"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Jun 2020 22:06:07 GMT",
       "tag": "@fluentui-react-native/adapters_v0.2.34",
       "version": "0.2.34",
