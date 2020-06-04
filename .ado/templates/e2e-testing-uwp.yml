@@ -74,13 +74,6 @@ jobs:
           script: Stop-Process -Name FluentTester
         displayName: Kill FluentTester Process
 
-      - task: PowerShell@2
-        displayName: "Check TestApp"
-        inputs:
-          targetType: "inline"
-          # script: 'if ((Get-Process FluentTester*) -eq $Null) { echo "TestApp is not running"; exit 1}'
-          script: Get-Process
-
       - script: |
           yarn e2etest
         workingDirectory: apps\windows

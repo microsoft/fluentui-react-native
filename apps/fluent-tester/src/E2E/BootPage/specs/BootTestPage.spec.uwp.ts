@@ -9,6 +9,7 @@ import RadioGroupTestPage from '../../RadioGroup/pages/RadioGroupTestPage.win';
 import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
 import TextTestPage from '../../Text/pages/TextTestPage.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
+import SvgTestPage from '../../Svg/pages/SvgTestPage.win';
 
 // Before testing begins, allow 45 seconds for bundle to load (WebDriverIO)
 beforeAll(() => {
@@ -44,6 +45,11 @@ describe('Click on each test page and check if it renders', function() {
   it('Pressable Test Page', () => {
     BootTestPage.clickAndGoToPressablePage();
     expect(PressableTestPage.isPageLoaded()).toBeTruthy();
+  });
+
+  it('Svg Test Page', () => {
+    BootTestPage.clickAndGoToSvgPage();
+    expect(SvgTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('RadioGroup Test Page', () => {
