@@ -102,6 +102,8 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
    * A callback to call on button click event
    */
   onClick?: () => void;
+
+  testID?: string;
 }
 
 export interface IButtonSlotProps {

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/pressable
 
-This log was last generated on Tue, 19 May 2020 20:06:57 GMT and should not be manually modified.
+This log was last generated on Tue, 19 May 2020 23:37:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.28
+
+Tue, 19 May 2020 23:37:15 GMT
+
+### Patches
+
+- adding testid (safreibe@microsoft.com)
 
 ## 0.3.26
 

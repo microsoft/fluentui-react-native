@@ -43,6 +43,8 @@ export interface IRadioGroupProps {
    ** Callback for receiving a notification when the choice has been changed
    */
   onChange?: (key: string) => void;
+
+  testID?: string;
 }
 
 export interface IRadioGroupTokens extends IForegroundColorTokens, ITextTokens {}

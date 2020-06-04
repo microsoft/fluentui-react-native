@@ -9,6 +9,7 @@ exports[`Button default 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onKeyDown={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -21,6 +22,7 @@ exports[`Button default 1`] = `
       "alignSelf": "flex-start",
       "backgroundColor": "#f3f2f1",
       "borderColor": "#8a8886",
+      "borderRadius": 2,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
