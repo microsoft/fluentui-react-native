@@ -20,7 +20,7 @@
 
 # Running E2E Tests
 
-## Win32 Step
+## Win32 Steps
 
 1. Install node packages, build JS
    - C:\repo> `cd fluentui-react-native`
@@ -34,7 +34,7 @@
 
 ## UWP Steps
 
-1. Follow the same step as #1 above.
+1. Follow step #1 from "Win32 Steps" section above.
 2. Start the server
    - C:\repo\fluentui-react-native> `cd apps\windows`
    - C:\repo\fluentui-react-native\apps\windows> `yarn start`
