@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Thu, 04 Jun 2020 22:15:30 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.3.38",
+      "version": "0.3.38",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update control to use fluentui-react-native text and CSS pixels for fontSize",
+            "author": "krsiler@microsoft.com",
+            "commit": "fb659219fcc84bb437515c97d816e82eb58e3fa9",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Jun 2020 22:06:07 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.3.37",
       "version": "0.3.37",

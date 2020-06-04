@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Fri, 24 Apr 2020 19:41:08 GMT and should not be manually modified.
+This log was last generated on Thu, 04 Jun 2020 22:15:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.33
+
+Thu, 04 Jun 2020 22:15:30 GMT
+
+### Patches
+
+- Update comment to reflect fontSize is specified in CSS pixels (krsiler@microsoft.com)
 
 ## 0.9.2
 

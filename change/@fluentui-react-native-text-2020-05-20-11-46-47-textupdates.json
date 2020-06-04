@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update snapshots to reflect fontSize in CSS pixels",
-  "packageName": "@fluentui-react-native/text",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-05-20T18:43:18.865Z"
-}

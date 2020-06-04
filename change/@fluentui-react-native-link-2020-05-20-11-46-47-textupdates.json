@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update control to use fluentui-react-native text",
-  "packageName": "@fluentui-react-native/link",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-05-20T18:41:47.686Z"
-}
