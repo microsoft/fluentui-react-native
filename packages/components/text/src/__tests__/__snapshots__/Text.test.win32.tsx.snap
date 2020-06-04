@@ -6,7 +6,7 @@ exports[`Text all props 1`] = `
     Object {
       "color": "#a19f9d",
       "fontFamily": "Segoe UI",
-      "fontSize": 11,
+      "fontSize": 14,
       "fontWeight": "400",
       "margin": 0,
     }
@@ -22,7 +22,7 @@ exports[`Text all tokens 1`] = `
     Object {
       "color": "#323130",
       "fontFamily": "Wingdings",
-      "fontSize": 15,
+      "fontSize": 20,
       "fontWeight": "900",
       "margin": 0,
     }
@@ -38,7 +38,7 @@ exports[`Text default 1`] = `
     Object {
       "color": "#323130",
       "fontFamily": "Segoe UI",
-      "fontSize": 9,
+      "fontSize": 12,
       "fontWeight": "400",
       "margin": 0,
     }

@@ -1,7 +1,8 @@
 /** @jsx withSlots */
 import * as React from 'react';
 
-import { Linking, Text, View } from 'react-native';
+import { Linking, View } from 'react-native';
+import { Text } from '@fluentui-react-native/text';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ILinkProps, ILinkSlotProps, ILinkState, ILinkRenderData, IWithLinkOptions, linkName, ILinkType } from './Link.types';
 import { settings } from './Link.settings';
@@ -20,7 +21,7 @@ export function useAsLink(userProps: IWithLinkOptions<IViewProps>): ILinkHooks {
 
   const [linkState, setLinkState] = React.useState({ visited: false });
   const linkOnPress = React.useCallback(
-    (e) => {
+    e => {
       setLinkState({ visited: true });
       if (url) {
         Linking.openURL(url as string);
@@ -35,12 +36,12 @@ export function useAsLink(userProps: IWithLinkOptions<IViewProps>): ILinkHooks {
 
   const newState = {
     ...pressable.state,
-    ...linkState,
+    ...linkState
   };
 
   const newProps = {
     ...userProps,
-    ...pressable.props,
+    ...pressable.props
   };
 
   return [newProps, newState];
@@ -64,7 +65,7 @@ export const Link = compose<ILinkType>({
     // create the merged slot props
     const slotProps = mergeSettings<ILinkSlotProps>(styleProps, {
       root: { ...linkProps, ref: linkRef },
-      content: { children: content },
+      content: { children: content }
     });
 
     return { slotProps, state: { ...linkState, ...info } };
@@ -83,12 +84,12 @@ export const Link = compose<ILinkType>({
   },
   slots: {
     root: View,
-    content: Text,
+    content: Text
   },
   styles: {
     root: [],
-    content: [foregroundColorTokens, textTokens],
-  },
+    content: [foregroundColorTokens, textTokens]
+  }
 });
 
 export default Link;

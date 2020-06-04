@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Mon, 01 Jun 2020 22:06:07 GMT and should not be manually modified.
+This log was last generated on Thu, 04 Jun 2020 22:15:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.1
+
+Thu, 04 Jun 2020 22:15:30 GMT
+
+### Patches
+
+- Update snapshots to reflect fontSize in CSS pixels (krsiler@microsoft.com)
 
 ## 0.7.0
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Tue, 19 May 2020 23:37:15 GMT and should not be manually modified.
+This log was last generated on Thu, 04 Jun 2020 22:15:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.38
+
+Thu, 04 Jun 2020 22:15:30 GMT
+
+### Patches
+
+- Update control to use fluentui-react-native text and CSS pixels for fontSize (krsiler@microsoft.com)
 
 ## 0.3.28
 
