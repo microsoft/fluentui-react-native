@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Mon, 01 Jun 2020 22:06:07 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.9.32",
+      "version": "0.9.32",
+      "comments": {
+        "none": [
+          {
+            "comment": "Support enter key for calling onClick on Button",
+            "author": "lehon@microsoft.com",
+            "commit": "399cead569e120926521d01c13a49088fe96036b",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 21 May 2020 20:00:42 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.9.27",
       "version": "0.9.27",
