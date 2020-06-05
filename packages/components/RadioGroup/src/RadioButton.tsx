@@ -1,7 +1,8 @@
 /** @jsx withSlots */
 'use strict';
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import { Text } from '@fluentui-react-native/text';
 import { radioButtonName, IRadioButtonType, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonRenderData } from './RadioButton.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { filterViewProps } from '@fluentui-react-native/adapters';
@@ -48,15 +49,12 @@ export const RadioButton = compose<IRadioButtonType>({
     // 1) Calls pressable's onFocus in order to keep track of our state's focus variable. It is dependent on pressable's
     //    focus variable. Without this, it wouldn't stay updated because we're overriding it's onFocus below for the rootProps.
     // 2) Selects the currently focused button by calling the RadioGroup's callback function.
-    const onFocusChange = React.useCallback(
-      (/* ev: NativeSyntheticEvent<{}> */) => {
-        // This check is necessary because this func gets called even when a button loses focus (not sure why?) which then calls the client's onChange multiple times
-        if (!state.selected) {
-          info.onChange && info.onChange(buttonKey);
-        }
-      },
-      [state, pressable.props, info, buttonKey]
-    );
+    const onFocusChange = React.useCallback((/* ev: NativeSyntheticEvent<{}> */) => {
+      // This check is necessary because this func gets called even when a button loses focus (not sure why?) which then calls the client's onChange multiple times
+      if (!state.selected) {
+        info.onChange && info.onChange(buttonKey);
+      }
+    }, [state, pressable.props, info, buttonKey]);
 
     let accessibilityStates: string[] = [];
     if (state.disabled) {

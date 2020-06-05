@@ -2,6 +2,36 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Thu, 04 Jun 2020 22:15:30 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.7.34",
+      "version": "0.7.34",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update fontSizes to use CSS pixels",
+            "author": "krsiler@microsoft.com",
+            "commit": "fb659219fcc84bb437515c97d816e82eb58e3fa9",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 01 Jun 2020 22:06:07 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.7.33",
+      "version": "0.7.33",
+      "comments": {
+        "none": [
+          {
+            "comment": "Support enter key for calling onClick on Button",
+            "author": "lehon@microsoft.com",
+            "commit": "399cead569e120926521d01c13a49088fe96036b",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 21 May 2020 20:00:42 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.7.28",
       "version": "0.7.28",

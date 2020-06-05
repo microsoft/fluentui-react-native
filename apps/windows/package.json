@@ -8,12 +8,11 @@
     "lint": "eslint .",
     "windows": "react-native run-windows",
     "bundle": "fluentui-scripts metro --cli",
-    "e2etest": "rimraf reports/* && wdio",
-    "run_e2e": "rimraf reports/* && react-native run-windows && wdio"
+    "e2etest": "rimraf reports/* && wdio"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",
-    "@uifabricshared/theming-react-native": "0.7.31",
+    "@uifabricshared/theming-react-native": "0.7.35",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-windows": "0.0.0-master.47"

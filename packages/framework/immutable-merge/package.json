@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/immutable-merge",
-  "version": "0.5.31",
+  "version": "0.5.35",
   "description": "Immutable merge routines for deep customizable merging",
   "repository": {
     "type": "git",

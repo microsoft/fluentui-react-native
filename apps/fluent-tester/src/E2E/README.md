@@ -8,6 +8,10 @@
 - [WinAppDriver](https://github.com/microsoft/WinAppDriver) - Version 1.1
 - Enable [_Developer Mode_](https://docs.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development) in Windows settings
 
+### UWP Additional Prerequisites
+
+- [UWP Prerequisites](https://github.com/microsoft/fluentui-react-native/blob/master/apps/windows/readme.md)
+
 ## E2E Project Structure
 
 - E2E - The root E2E testing folder containing test components and their respective platform-specific page objects and spec documents.
@@ -16,7 +20,7 @@
 
 # Running E2E Tests
 
-## Win32 Step
+## Win32 Steps
 
 1. Install node packages, build JS
    - C:\repo> `cd fluentui-react-native`
@@ -30,7 +34,7 @@
 
 ## UWP Steps
 
-1. Follow the same step as #1 above.
+1. Follow step #1 from "Win32 Steps" section above.
 2. Start the server
    - C:\repo\fluentui-react-native> `cd apps\windows`
    - C:\repo\fluentui-react-native\apps\windows> `yarn start`

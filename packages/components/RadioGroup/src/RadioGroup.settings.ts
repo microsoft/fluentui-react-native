@@ -18,7 +18,7 @@ export const settings: IComposeSettings<IRadioGroupType> = [
     label: {
       style: {
         fontFamily: 'inherit',
-        fontSize: 12,
+        fontSize: 16,
         fontWeight: '600'
       }
     }
