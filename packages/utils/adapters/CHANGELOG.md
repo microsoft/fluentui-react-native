@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/adapters
 
-This log was last generated on Mon, 11 May 2020 20:15:56 GMT and should not be manually modified.
+This log was last generated on Thu, 04 Jun 2020 23:23:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Thu, 04 Jun 2020 23:23:26 GMT
+
+### Minor changes
+
+- Updating package (safreibe@microsoft.com)
 
 ## 0.2.15
 

@@ -36,7 +36,7 @@ export interface IFontFamilies {
 export type FontFamily = keyof IFontFamilies | FontFamilyValue;
 
 /**
- * A font size value, specified in points (pt).
+ * A font size value, specified in CSS pixels (px).
  */
 export type FontSizeValuePoints = number;
 

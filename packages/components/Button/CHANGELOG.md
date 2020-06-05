@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Thu, 21 May 2020 20:00:42 GMT and should not be manually modified.
+This log was last generated on Thu, 04 Jun 2020 23:23:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.0
+
+Thu, 04 Jun 2020 23:23:26 GMT
+
+### Minor changes
+
+- Changing location of testID (safreibe@microsoft.com)
+
+## 0.7.1
+
+Thu, 04 Jun 2020 22:15:30 GMT
+
+### Patches
+
+- Update snapshots to reflect fontSize in CSS pixels (krsiler@microsoft.com)
+
+## 0.7.0
+
+Mon, 01 Jun 2020 22:06:07 GMT
+
+### Minor changes
+
+- Support enter key for calling onClick on Button (lehon@microsoft.com)
 
 ## 0.6.0
 

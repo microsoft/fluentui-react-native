@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/persona
 
-This log was last generated on Tue, 19 May 2020 23:37:15 GMT and should not be manually modified.
+This log was last generated on Thu, 04 Jun 2020 22:15:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.35
+
+Thu, 04 Jun 2020 22:15:30 GMT
+
+### Patches
+
+- Update control to use fluentui-react-native text (krsiler@microsoft.com)
 
 ## 0.5.25
 

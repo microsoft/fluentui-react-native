@@ -25,6 +25,15 @@ export const Button = compose<IButtonType>({
     } = userProps;
     // attach the pressable state handlers
     const pressable = useAsPressable({ ...rest, onPress: onClick });
+    const onKeyDown = React.useCallback(
+      e => {
+        if (onClick && (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ')) {
+          onClick();
+          e.stopPropagation()
+        }
+      },
+      [onClick]
+    );
     // set up state
     const state: IButtonState = {
       info: {
@@ -41,13 +50,13 @@ export const Button = compose<IButtonType>({
     // create the merged slot props
     const slotProps = mergeSettings<IButtonSlotProps>(styleProps, {
       root: {
-        testID,
         ...pressable.props,
         ref: buttonRef,
         onAccessibilityTap: onAccessibilityTap,
-        accessibilityLabel: accessibilityLabel
+        accessibilityLabel: accessibilityLabel,
+        onKeyDown: onKeyDown
       },
-      content: { children: content },
+      content: { children: content, testID },
       icon: { source: icon }
     });
 
