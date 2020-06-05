@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add setInitialFocus prop",
-  "packageName": "@fluentui-react-native/callout",
-  "email": "ppatboyd@outlook.com",
-  "dependentChangeType": "patch",
-  "date": "2020-06-04T19:32:21.042Z"
-}
