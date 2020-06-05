@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Thu, 04 Jun 2020 22:15:30 GMT and should not be manually modified.
+This log was last generated on Thu, 04 Jun 2020 23:23:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.0
+
+Thu, 04 Jun 2020 23:23:26 GMT
+
+### Minor changes
+
+- Changing location of testID (safreibe@microsoft.com)
 
 ## 0.7.1
 

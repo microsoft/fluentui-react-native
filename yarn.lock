@@ -3560,14 +3560,6 @@
     deepmerge "^4.0.0"
     glob "^7.1.2"
 
-"@wdio/dot-reporter@^5.22.4":
-  version "5.22.4"
-  resolved "https://registry.yarnpkg.com/@wdio/dot-reporter/-/dot-reporter-5.22.4.tgz#675d056fb99b49e5035390150b974273aa517551"
-  integrity sha512-PKhfPugbYCy3qoPvsYjfxnYI1fVQOLYVh1R9tEvwZx5lMM3bZGSoyfqqyjRb5S4H6rQG5s+S8DczpCub+wJA2A==
-  dependencies:
-    "@wdio/reporter" "5.22.4"
-    chalk "^3.0.0"
-
 "@wdio/jasmine-framework@^5.18.6":
   version "5.18.6"
   resolved "https://registry.yarnpkg.com/@wdio/jasmine-framework/-/jasmine-framework-5.18.6.tgz#5a0bc5123b98d06a97c7199102a48820f560c0ce"
@@ -14442,10 +14434,10 @@ react-native-web@^0.12.2:
     prop-types "^15.6.0"
     react-timer-mixin "^0.13.4"
 
-react-native-windows@^0.0.0-master.45:
-  version "0.0.0-master.65"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.0.0-master.65.tgz#fb4f02c366ebd2bd9644ac13837a51cccd26a9b9"
-  integrity sha512-1zJkZdqkMYnCYMfN6/MMxGb6KTMfo6TA878CDT9IIqimeyJOFNqiv6i0gZWCmvveKwS9oeE1bBbY99HpreAaPw==
+react-native-windows@0.0.0-master.47:
+  version "0.0.0-master.47"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.0.0-master.47.tgz#48d1e598d52aa844090e1b82caba207e95dc38b5"
+  integrity sha512-g9YjZKQMIVyl58SdbBdfm8cNYMPQrHtY2kfVebGKeuZVi3iuMZNq4bPTVUoV2oMu5CzZdrFlyZ5VbYO4Ew3V4w==
   dependencies:
     "@babel/runtime" "^7.8.4"
     cli-spinners "^2.2.0"

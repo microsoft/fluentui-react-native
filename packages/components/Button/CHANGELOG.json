@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Thu, 04 Jun 2020 23:23:26 GMT",
+      "tag": "@fluentui-react-native/button_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Changing location of testID",
+            "author": "safreibe@microsoft.com",
+            "commit": "f46fc39f159f235f09ae5c3f8498d9ec36dac4fe",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 04 Jun 2020 22:15:30 GMT",
       "tag": "@fluentui-react-native/button_v0.7.1",
       "version": "0.7.1",
