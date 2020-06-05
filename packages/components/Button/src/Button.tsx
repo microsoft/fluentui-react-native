@@ -50,14 +50,13 @@ export const Button = compose<IButtonType>({
     // create the merged slot props
     const slotProps = mergeSettings<IButtonSlotProps>(styleProps, {
       root: {
-        testID,
         ...pressable.props,
         ref: buttonRef,
         onAccessibilityTap: onAccessibilityTap,
         accessibilityLabel: accessibilityLabel,
         onKeyDown: onKeyDown
       },
-      content: { children: content },
+      content: { children: content, testID },
       icon: { source: icon }
     });
 

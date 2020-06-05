@@ -10,10 +10,10 @@ export const commonTestStyles = StyleSheet.create({
   },
   header: {
     marginVertical: 6,
-    fontSize: 12
+    fontSize: 16
   },
   section: {
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#0B6A0B',
     marginTop: 12
@@ -66,7 +66,7 @@ export const fabricTesterStyles = StyleSheet.create({
 
   testHeader: {
     marginBottom: 8,
-    fontSize: 14,
+    fontSize: 18,
     fontWeight: 'bold'
   },
 
@@ -84,7 +84,7 @@ export const fabricTesterStyles = StyleSheet.create({
   },
 
   testSection: {
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#0B6A0B',
     marginTop: 12
@@ -97,7 +97,7 @@ export const fabricTesterStyles = StyleSheet.create({
 
   noTest: {
     alignSelf: 'center',
-    fontSize: 14
+    fontSize: 18
   }
 });
 

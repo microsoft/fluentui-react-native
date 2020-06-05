@@ -5,6 +5,7 @@ import { registerThemes } from './TestComponents/Theme/CustomThemes';
 import { allTestComponents } from './TestComponents';
 import { fabricTesterStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
+import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 
 // uncomment the below lines to enable message spy
 /*
@@ -45,7 +46,9 @@ export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props:
   return (
     <View style={fabricTesterStyles.root}>
       <ScrollView style={fabricTesterStyles.testList} contentContainerStyle={fabricTesterStyles.testListContainerStyle}>
-        <Text style={fabricTesterStyles.testHeader}>⚛ FluentUI Tests</Text>
+        <Text style={fabricTesterStyles.testHeader} testID={BASE_TESTPAGE}>
+          ⚛ FluentUI Tests
+        </Text>
         {sortedTestComponents.map((description, index) => {
           return (
             <StealthButton
