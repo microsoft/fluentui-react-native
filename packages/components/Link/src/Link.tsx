@@ -30,7 +30,7 @@ export function useAsLink(userProps: IWithLinkOptions<IViewProps>): ILinkHooks {
   );
 
   const pressable = useAsPressable({ onPress: linkOnPress, ...rest });
-  const onKeyDown = React.useCallback(
+  const onKeyUp = React.useCallback(
     e => {
       if (linkOnPress && (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ')) {
         linkOnPress(e);
@@ -48,7 +48,7 @@ export function useAsLink(userProps: IWithLinkOptions<IViewProps>): ILinkHooks {
   const newProps = {
     ...userProps,
     ...pressable.props,
-    onKeyDown
+    onKeyUp
   };
 
   return [newProps, newState];
