@@ -2,7 +2,7 @@
   "name": "FluentTester-ios",
   "version": "0.0.1",
   "private": true,
-  "main": "src/index.tsx",
+  "main": "index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
   "scripts": {
@@ -14,7 +14,7 @@
     "start": "react-native start",
     "bundle": "fluentui-scripts metro --cli",
     "bundle-dev": "fluentui-scripts metro --dev --cli",
-    "ios": "react-native run-ios --project-path src"
+    "ios": "react-native start & react-native run-ios --project-path src"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",
