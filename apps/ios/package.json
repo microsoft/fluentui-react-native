@@ -14,7 +14,7 @@
     "start": "react-native start",
     "bundle": "fluentui-scripts metro --cli",
     "bundle-dev": "fluentui-scripts metro --dev --cli",
-    "ios": "react-native start & react-native run-ios --project-path src"
+    "ios": "react-native run-ios --project-path src & react-native start"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",
