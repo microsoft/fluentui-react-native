@@ -2,6 +2,26 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Thu, 04 Jun 2020 22:15:30 GMT",
+      "tag": "@fluentui-react-native/text_v0.5.35",
+      "version": "0.5.35",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "commit": "fb659219fcc84bb437515c97d816e82eb58e3fa9",
+            "package": "@fluentui-react-native/text"
+          },
+          {
+            "comment": "Update snapshots to reflect fontSize in CSS pixels",
+            "author": "krsiler@microsoft.com",
+            "commit": "fb659219fcc84bb437515c97d816e82eb58e3fa9",
+            "package": "@fluentui-react-native/text"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Jun 2020 22:06:07 GMT",
       "tag": "@fluentui-react-native/text_v0.5.34",
       "version": "0.5.34",

@@ -8,13 +8,19 @@
 - [WinAppDriver](https://github.com/microsoft/WinAppDriver) - Version 1.1
 - Enable [_Developer Mode_](https://docs.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development) in Windows settings
 
+### UWP Additional Prerequisites
+
+- [UWP Prerequisites](https://github.com/microsoft/fluentui-react-native/blob/master/apps/windows/readme.md)
+
 ## E2E Project Structure
 
 - E2E - The root E2E testing folder containing test components and their respective platform-specific page objects and spec documents.
 - reports - Each platform folder (apple, win32, windows) contains this folder that saves the test reports from Appium/WebDriverIO.
-- wdio.conf.js - Each platform folder contains this file. It's the configuration file for WebDriverIO, which also configures Appium and WinAppDriver parameters.
+- wdio.conf.js - Each platform folder contains this file. It's the configuration file for WebDriverIO, which also configures Appium, WinAppDriver, and Jasmine parameters.
 
 # Running E2E Tests
+
+## Win32 Steps
 
 1. Install node packages, build JS
    - C:\repo> `cd fluentui-react-native`
@@ -24,7 +30,18 @@
    - C:\repo\fluentui-react-native>`cd apps\win32`
    - C:\repo\fluentui-react-native\apps\win32> `yarn bundle`
 3. Run E2E tests
-   - C:\repo\fluentui-react-native\apps\win32> `yarn run e2etest`
+   - C:\repo\fluentui-react-native\apps\win32> `yarn e2etest`
+
+## UWP Steps
+
+1. Follow step #1 from "Win32 Steps" section above.
+2. Start the server
+   - C:\repo\fluentui-react-native> `cd apps\windows`
+   - C:\repo\fluentui-react-native\apps\windows> `yarn start`
+3. Open a new command prompt and run the E2E tests
+   - C:\repo\fluentui-react-native\apps\windows> `yarn e2etest`
+
+_Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
 
 # Authoring E2E Test
 

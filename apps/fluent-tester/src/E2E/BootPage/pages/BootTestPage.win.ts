@@ -11,9 +11,10 @@ import { HOMEPAGE_SEPARATOR_BUTTON } from '../../../RNTester/TestComponents/Sepa
 import { HOMEPAGE_SVG_BUTTON } from '../../../RNTester/TestComponents/Svg/consts';
 import { HOMEPAGE_TEXT_BUTTON } from '../../../RNTester/TestComponents/Text/consts';
 import { HOMEPAGE_THEME_BUTTON } from '../../../RNTester/TestComponents/Theme/consts';
-import { By } from '../../common/BasePage';
+import { BASE_TESTPAGE } from '../../../RNTester/TestComponents/Common/consts';
+import { By, BasePage } from '../../common/BasePage';
 
-class BootTestPage {
+class BootTestPage extends BasePage {
   clickAndGoToButtonPage() {
     this.buttonPage.click();
   }
@@ -69,6 +70,11 @@ class BootTestPage {
   /*
    ** Returns the StealthButton element on the left-hand column that navigates to each page
    */
+
+  get _testPage() {
+    return By(BASE_TESTPAGE);
+  }
+
   private get buttonPage() {
     return By(HOMEPAGE_BUTTON_BUTTON);
   }
