@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/separator",
   "entries": [
     {
+      "date": "Sat, 06 Jun 2020 03:03:17 GMT",
+      "tag": "@fluentui-react-native/separator_v0.3.42",
+      "version": "0.3.42",
+      "comments": {
+        "none": [
+          {
+            "comment": "support keyboardFocus for Link and add focus visuals",
+            "author": "lehon@microsoft.com",
+            "commit": "effb17ada2fd26c6ba8f7cbb4ab7d7ddf8d74c49",
+            "package": "@fluentui-react-native/separator"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Jun 2020 22:06:07 GMT",
       "tag": "@fluentui-react-native/separator_v0.3.38",
       "version": "0.3.38",

@@ -1,8 +1,0 @@
-{
-  "type": "none",
-  "comment": "support keyboardFocus for Link and add focus visuals",
-  "packageName": "@fluentui-react-native/callout",
-  "email": "lehon@microsoft.com",
-  "dependentChangeType": "none",
-  "date": "2020-06-04T21:38:30.018Z"
-}
