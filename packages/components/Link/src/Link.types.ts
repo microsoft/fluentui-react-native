@@ -3,7 +3,7 @@ import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IForegroundColorTokens, ITextTokens } from '@fluentui-react-native/tokens';
 import { ITextProps } from '@fluentui-react-native/text';
 import { IFocusable, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
-import { IViewProps } from '@fluentui-react-native/adapters';
+import { IViewWin32Props } from '@office-iss/react-native-win32';
 
 export const linkName = 'RNFLink';
 
@@ -57,7 +57,7 @@ export interface ILinkProps extends IWithLinkOptions<ITextProps> {
 }
 
 export type ILinkSlotProps = {
-  root: React.PropsWithRef<IViewProps>;
+  root: React.PropsWithRef<IViewWin32Props>;
   content: ITextProps;
 };
 
