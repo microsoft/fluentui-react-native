@@ -12,7 +12,7 @@ jobs:
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
-    # The "displayName" of all steps that begin lowercase execute a command within our repo (such as 'yarn build') to make it
+    # The "displayName" of all steps that execute a command within our repo (such as 'yarn build') start lowercase to make it
     # easier to differentiate in-repo scripts from environmental setup. This makes it easier to understand CI pipeline results.
     steps:
       - checkout: self
