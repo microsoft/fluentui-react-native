@@ -1,7 +1,4 @@
 steps:
-  - checkout: self
-    persistCredentials: true
-
   - task: DownloadSecureFile@1
     name: UwpCertificate
     inputs:
