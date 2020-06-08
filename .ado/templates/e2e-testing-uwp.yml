@@ -5,7 +5,8 @@ steps:
       secureFile: FluentTester_TemporaryKey.pfx
     displayName: "Download UWP App Certificate"
 
-  - powershell: certutil –f –p password –importpfx $(UwpCertificate.secureFilePath)
+  - powershell: |
+      certutil –f –p password –importpfx $(UwpCertificate.secureFilePath)
     displayName: "Add Certificate to Personal Store"
 
   - task: DownloadSecureFile@1
@@ -20,18 +21,22 @@ steps:
       arguments: "-AddNetfx -Force"
     displayName: "Install Azure Credentials Plugin for NuGet"
 
-  - script: yarn windows
+  - script: |
+      yarn windows
     workingDirectory: apps\windows
-    displayName: "Run FluentTester App"
+    displayName: "run UWP app"
 
   # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
-  - powershell: Start-Sleep -Seconds 60
+  - powershell: |
+      Start-Sleep -Seconds 60
     displayName: "Wait for app to launch"
 
   # Kill FluentTester, leave server up and running
-  - powershell: Stop-Process -Name FluentTester
+  - powershell: |
+      Stop-Process -Name FluentTester
     displayName: "Kill FluentTester Process"
 
-  - script: yarn e2etest
+  - script: |
+      yarn e2etest
     workingDirectory: apps\windows
-    displayName: "UWP E2E Testing"
+    displayName: "run E2E UWP tests"

@@ -1,10 +1,13 @@
 # This template install dependencies, builds, and bundles this repo
 steps:
-  - script: yarn
+  - script: |
+      yarn
     displayName: "yarn"
 
-  - script: yarn build
+  - script: |
+      yarn build
     displayName: "yarn build"
 
-  - script: yarn bundle
+  - script: |
+      yarn bundle
     displayName: "yarn bundle"
