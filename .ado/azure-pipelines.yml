@@ -5,39 +5,42 @@ variables:
   CI: true
 
 jobs:
-  # - job: WindowsPR
-  #   displayName: Windows PR
-  #   pool:
-  #     vmImage: "windows-2019"
-  #   timeoutInMinutes: 60 # how long to run the job before automatically cancelling
-  #   cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+  - job: WindowsPR
+    displayName: Windows PR
+    pool:
+      vmImage: "windows-2019"
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
-  #   steps:
-  #     - checkout: self
-  #       persistCredentials: true
+    steps:
+      - checkout: self
+        persistCredentials: true
 
-  #     - task: NodeTool@0
-  #       inputs:
-  #         versionSpec: "12.x"
-  #       displayName: "Install Node.js"
+      - task: NodeTool@0
+        inputs:
+          versionSpec: "12.x"
+        displayName: "Install Node.js"
 
-  #     - template: templates/setup-repo.yml
+      - task: NuGetToolInstaller@0
+        inputs:
+          versionSpec: "5.6.0"
+        displayName: "Install Nuget"
 
-  #     This only needs to happen once, since the source code doesn't change
-  #     - script: |
-  #         yarn checkchange
-  #       displayName: "check change"
+      - template: templates/setup-repo.yml
 
-  #     This only needs to happen once, since the source code doesn't change.
-  #     - script: |
-  #         yarn check-for-changed-files
-  #       displayName: "Verify API and Ensure Changed Files"
+      # This only needs to happen once, since the source code doesn't change
+      - script: yarn checkchange
+        displayName: "check change"
 
-  # - script: yarn e2etest
-  #   displayName: Run Win32 E2E Tests
-  #   workingDirectory: apps/win32
+      # This only needs to happen once, since the source code doesn't change.
+      - script: yarn check-for-changed-files
+        displayName: "Verify API and Ensure Changed Files"
 
-  - template: templates/e2e-testing-uwp.yml
+      - template: templates/e2e-testing-uwp.yml
+
+      - script: yarn e2etest
+        workingDirectory: apps/win32
+        displayName: "Win32 E2E Tests"
   # - job: ApplePR
   #   displayName: Apple PR
   #   pool:
