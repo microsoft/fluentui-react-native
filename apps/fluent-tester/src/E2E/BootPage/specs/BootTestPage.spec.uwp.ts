@@ -17,7 +17,7 @@ beforeAll(() => {
   BootTestPage.waitForPageLoaded(PAGE_TIMEOUT);
 });
 
-describe('Click on each test page and check if it renders', function () {
+describe('Click on each test page and check if it renders', function() {
   it('Button Test Page', () => {
     BootTestPage.clickAndGoToButtonPage();
     expect(ButtonTestPage.isPageLoaded()).toBeTruthy();

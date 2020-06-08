@@ -28,10 +28,7 @@
     "bump-versions": "beachball bump",
     "lint": "lerna run lint",
     "verify-api": "lerna run verify-api",
-    "update-api": "lerna run update-api",
-    "e2etest-win32": "cd apps/win32 && yarn run e2etest",
-    "startUwp": "cd apps/windows && yarn start",
-    "e2etest-uwp": "cd apps/windows && yarn run e2etest"
+    "update-api": "lerna run update-api"
   },
   "devDependencies": {
     "beachball": "^1.30.2",
