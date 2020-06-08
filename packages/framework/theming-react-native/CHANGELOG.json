@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Sat, 06 Jun 2020 03:03:17 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.7.37",
+      "version": "0.7.37",
+      "comments": {
+        "none": [
+          {
+            "comment": "support keyboardFocus for Link and add focus visuals",
+            "author": "lehon@microsoft.com",
+            "commit": "effb17ada2fd26c6ba8f7cbb4ab7d7ddf8d74c49",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 04 Jun 2020 22:15:30 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.7.34",
       "version": "0.7.34",

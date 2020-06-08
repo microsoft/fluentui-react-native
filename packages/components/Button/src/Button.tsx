@@ -25,7 +25,7 @@ export const Button = compose<IButtonType>({
     } = userProps;
     // attach the pressable state handlers
     const pressable = useAsPressable({ ...rest, onPress: onClick });
-    const onKeyDown = React.useCallback(
+    const onKeyUp = React.useCallback(
       e => {
         if (onClick && (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ')) {
           onClick();
@@ -54,7 +54,7 @@ export const Button = compose<IButtonType>({
         ref: buttonRef,
         onAccessibilityTap: onAccessibilityTap,
         accessibilityLabel: accessibilityLabel,
-        onKeyDown: onKeyDown
+        onKeyUp: onKeyUp
       },
       content: { children: content, testID },
       icon: { source: icon }
