@@ -31,11 +31,13 @@ jobs:
           secureFile: "FluentTester_TemporaryKey.pfx"
 
       # Add certificate to store
-      - task: PowerShell@2
-        inputs:
-          targetType: inline
-          script: certutil –f –p password –importpfx $(UwpCertificate.secureFilePath)
+      - powershell: certutil –f –p password –importpfx $(UwpCertificate.secureFilePath)
         displayName: "Add Certificate to Personal Store"
+      # - task: PowerShell@2
+      #   inputs:
+      #     targetType: inline
+      #     script: certutil –f –p password –importpfx $(UwpCertificate.secureFilePath)
+      #   displayName: "Add Certificate to Personal Store"
 
       # Download Azure Credentials Plugin
       - task: DownloadSecureFile@1
@@ -45,36 +47,42 @@ jobs:
           secureFile: "installcredprovider.ps1"
 
       # Install Azure Credentials Plugin
-      - task: PowerShell@2
-        inputs:
-          filePath: $(AzureCredentials.secureFilePath)
-          arguments: "-AddNetfx -Force"
+      - powershell:
+        filePath: $(AzureCredentials.secureFilePath)
+        arguments: "-AddNetfx -Force"
         displayName: "Install Azure Credentials Plugin for NuGet"
+      # - task: PowerShell@2
+      #   inputs:
+      #     filePath: $(AzureCredentials.secureFilePath)
+      #     arguments: "-AddNetfx -Force"
+      #   displayName: "Install Azure Credentials Plugin for NuGet"
 
       - template: setup-repo.yml
 
       # Run server + FluentTester App
-      - script: |
-          yarn windows
+      - script: yarn windows
         workingDirectory: apps\windows
         displayName: Run FluentTester App
 
       # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
-      - task: PowerShell@2
+      - powershell: Start-Sleep -Seconds 60
         displayName: Wait for app to launch
-        inputs:
-          targetType: inline # filePath | inline
-          script: |
-            Start-Sleep -Seconds 60
+      # - task: PowerShell@2
+      #   displayName: Wait for app to launch
+      #   inputs:
+      #     targetType: inline # filePath | inline
+      #     script: |
+      #       Start-Sleep -Seconds 60
 
       # Kill FluentTester, leave server up and running
-      - task: PowerShell@2
-        inputs:
-          targetType: inline
-          script: Stop-Process -Name FluentTester
+      - powershell: Stop-Process -Name FluentTester
         displayName: Kill FluentTester Process
+      # - task: PowerShell@2
+      #   inputs:
+      #     targetType: inline
+      #     script: Stop-Process -Name FluentTester
+      #   displayName: Kill FluentTester Process
 
-      - script: |
-          yarn e2etest
+      - script: yarn e2etest
         workingDirectory: apps\windows
         displayName: Running E2E Test
