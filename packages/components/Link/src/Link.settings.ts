@@ -10,17 +10,23 @@ export const settings: IComposeSettings<ILinkType> = [
       color: 'link'
     },
     root: {
+      acceptsKeyboardFocus: true,
       style: {
         margin: 0,
-        textDecorationLine: 'underline'
+        textDecorationLine: 'underline',
+        display: 'flex',
+        alignItems: 'flex-start',
       } as IViewProps['style']
     },
     content: {
       style: {
-        textDecorationLine: 'underline'
+        textDecorationLine: 'underline',
+        borderStyle: 'dotted',
+        borderColor: 'transparent',
+        borderWidth: 1
       }
     },
-    _precedence: ['visited', 'hovered', 'pressed', 'disabled'],
+    _precedence: ['visited', 'hovered', 'focused', 'pressed', 'disabled'],
     _overrides: {
       disabled: {
         tokens: {
@@ -40,6 +46,13 @@ export const settings: IComposeSettings<ILinkType> = [
       visited: {
         tokens: {
           color: 'link'
+        }
+      },
+      focused: {
+        content: {
+          style: {
+            borderColor: 'rgba(128, 128, 128, 1)',
+          }
         }
       }
     }
