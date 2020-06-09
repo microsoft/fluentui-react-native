@@ -5,17 +5,17 @@ const _delim = '|';
 describe('Memo key unit tests', () => {
   test('merge keys works with multiple', () => {
     const keys = ['hello', 'world'];
-    expect(mergeKeys(keys)).toEqual(`hello${_delim}world`);
+    expect(mergeKeys(keys)).toEqual(`hello${_delim}world${_delim}2`);
   });
 
   test('merge one key returns key', () => {
     const keys = ['hello'];
-    expect(mergeKeys(keys)).toEqual('hello');
+    expect(mergeKeys(keys)).toEqual(`hello${_delim}1`);
   });
 
   test('merge keys with empty returns empty string', () => {
     const keys = [];
-    expect(mergeKeys(keys)).toEqual('');
+    expect(mergeKeys(keys)).toEqual('|0');
   });
 
   test('toKey with string', () => {
@@ -79,7 +79,7 @@ describe('Memo key unit tests', () => {
   test('toKey with null key', () => {
     const val = null;
     const { key, isObj } = toKey(val);
-    expect(key).toBe(val);
-    expect(isObj).toBeTruthy();
+    expect(key).toEqual('null');
+    expect(isObj).toBeFalsy();
   });
 });
