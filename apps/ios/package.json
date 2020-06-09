@@ -13,7 +13,8 @@
     "lint": "fluentui-scripts eslint",
     "start": "react-native start",
     "bundle": "fluentui-scripts metro --cli",
-    "bundle-dev": "fluentui-scripts metro --dev --cli"
+    "bundle-dev": "fluentui-scripts metro --dev --cli",
+    "ios": "react-native run-ios --project-path src"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",
