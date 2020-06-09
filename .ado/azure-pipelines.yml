@@ -12,40 +12,28 @@ jobs:
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
+    # The "displayName" of all steps that execute a command within our repo (such as 'yarn build') start lowercase to make it
+    # easier to differentiate in-repo scripts from environmental setup. This makes it easier to understand CI pipeline results.
     steps:
       - checkout: self
         persistCredentials: true
 
-      - task: NodeTool@0
-        inputs:
-          versionSpec: "10.x"
-        displayName: "Install Node.js"
+      - template: templates/setup-repo.yml
 
-      - script: |
-          yarn
-        displayName: "yarn"
-
-      # This only needs to happen once, since the source code doesn't change.
       - script: |
           yarn checkchange
         displayName: "check change"
 
       - script: |
-          yarn build
-        displayName: "yarn build"
-
-      # This only needs to happen once, since the source code doesn't change.
-      - script: |
           yarn check-for-changed-files
-        displayName: "Verify API and Ensure Changed Files"
+        displayName: "verify API and Ensure Changed Files"
+
+      - template: templates/e2e-testing-uwp.yml
 
       - script: |
-          yarn bundle
-        displayName: "yarn bundle"
-
-      - script: yarn e2etest
-        displayName: Running Win32 E2E Testing
+          yarn e2etest
         workingDirectory: apps/win32
+        displayName: "run E2E Win32 tests"
 
   - job: ApplePR
     displayName: Apple PR
@@ -85,26 +73,11 @@ jobs:
           rm -rf $(Build.Repository.LocalPath)/DerivedData
         displayName: "Clean DerivedData"
 
-      - task: NodeTool@0
-        inputs:
-          versionSpec: "10.x"
-        displayName: "Install Node.js"
-
       - script: |
           sudo gem install cocoapods
         displayName: "Install Cocoapods Environment"
 
-      - script: |
-          yarn
-        displayName: "yarn"
-
-      - script: |
-          yarn build
-        displayName: "yarn build"
-
-      - script: |
-          yarn bundle
-        displayName: "yarn bundle"
+      - template: templates/setup-repo.yml
 
       # Select proper XCode version
       - template: templates/apple-xcode-select.yml
