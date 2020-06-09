@@ -11,8 +11,9 @@ import RadioGroupTestPage from '../../RadioGroup/pages/RadioGroupTestPage.win';
 import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
 import TextTestPage from '../../Text/pages/TextTestPage.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
+import SvgTestPage from '../../Svg/pages/SvgTestPage.win';
 
-describe('Click on each test page and check if it renders', function() {
+describe('Click on each test page and check if it renders', function () {
   it('Button Test Page', () => {
     BootTestPage.clickAndGoToButtonPage();
     expect(ButtonTestPage.isPageLoaded()).toBeTruthy();
@@ -31,6 +32,11 @@ describe('Click on each test page and check if it renders', function() {
   it('FocusTrapZone Test Page', () => {
     BootTestPage.clickAndGoToFocusTrapZonePage();
     expect(FocusTrapZoneTestPage.isPageLoaded()).toBeTruthy();
+  });
+
+  it('Svg Test Page', () => {
+    BootTestPage.clickAndGoToSvgPage();
+    expect(SvgTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Link Test Page', () => {

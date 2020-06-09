@@ -23,8 +23,8 @@ exports.config = {
       deviceName: 'WindowsPC',
       app: appPath,
       appArguments: appArgs,
-      appWorkingDir: appDir
-    }
+      appWorkingDir: appDir,
+    },
   ],
 
   /*
@@ -47,13 +47,13 @@ exports.config = {
   appium: {
     logPath: './reports/',
     args: {
-      port: '4723'
-    }
+      port: '4723',
+    },
   },
 
   framework: 'jasmine',
   jasmineNodeOpts: {
-    defaultTimeoutInterval: jasmineDefaultTimeout
+    defaultTimeoutInterval: jasmineDefaultTimeout,
   },
 
   reporters: ['spec'],
@@ -103,7 +103,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  before: function() {
+  before: function () {
     // not needed for Cucumber
     require('ts-node').register({ files: true });
     browser.maximizeWindow();
@@ -141,11 +141,20 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  afterTest: function(test) {
-    if (test.error !== undefined) {
-      const name = 'ERROR-' + Date.now();
-      browser.saveScreenshot('./reports/errorShots/' + name + '.png');
+  afterTest: function (test) {
+    // if test passed, ignore, else take and save screenshot.
+    if (test.passed) {
+      return;
     }
+
+    // get current test title and clean it, to use it as file name
+    const fileName = encodeURIComponent(test.title.replace(/\s+/g, '-'));
+
+    // build file path
+    const filePath = './errorShots/' + fileName + '.png';
+
+    // save screenshot
+    browser.saveScreenshot(filePath);
   },
 
   /**
@@ -188,9 +197,9 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function(exitCode, config, capabilities, results) {
+  onComplete: function (exitCode, config, capabilities, results) {
     console.log('<<< TESTING FINISHED >>>');
-  }
+  },
   /**
    * Gets executed when a refresh happens.
    * @param {String} oldSessionId session ID of the old session

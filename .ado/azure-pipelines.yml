@@ -30,20 +30,39 @@ jobs:
 
       - template: templates/setup-repo.yml
 
-      - script: |
-          yarn checkchange
-        displayName: 'check change'
+      # - script: |
+      #     yarn checkchange
+      #   displayName: 'check change'
+
+      # - script: |
+      #     yarn check-for-changed-files
+      #   displayName: 'verify API and Ensure Changed Files'
+
+      #- template: templates/e2e-testing-uwp.yml
 
       - script: |
-          yarn check-for-changed-files
-        displayName: 'verify API and Ensure Changed Files'
-
-      - template: templates/e2e-testing-uwp.yml
+          mkdir errorShots
+        workingDirectory: apps/win32/
+        displayName: 'mkdir errorShots'
 
       - script: |
           yarn e2etest
         workingDirectory: apps/win32
         displayName: 'run E2E Win32 tests'
+
+      - task: CopyFiles@2
+        condition: succeededOrFailed()
+        inputs:
+          sourceFolder: $(Build.SourcesDirectory)\apps\windows\errorShots
+          targetFolder: $(Build.StagingDirectory)/FluentTesterDumps
+        displayName: 'Copy dumps'
+
+      - task: PublishBuildArtifacts@1
+        condition: succeededOrFailed()
+        inputs:
+          artifactName: FluentTesterDumps
+          pathToPublish: $(Build.StagingDirectory)/FluentTesterDumps
+        displayName: 'Publish build artifacts'
   # - job: ApplePR
   #   displayName: Apple PR
   #   pool:
