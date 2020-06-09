@@ -55,7 +55,7 @@ exports.config = {
     defaultTimeoutInterval: 10000,
   },
 
-  reporters: ['dot', 'spec'],
+  reporters: ['concise'],
 
   /*
    ** ===================

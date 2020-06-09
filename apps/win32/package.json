@@ -57,7 +57,8 @@
     "tsconfig-paths": "^3.9.0",
     "typescript": "3.8.3",
     "@types/jasmine": "3.5.10",
-    "webdriverio": "5.22.4"
+    "webdriverio": "5.22.4",
+    "@wdio/concise-reporter": "^5.22.4"
   },
   "workspaces": {
     "nohoist": [

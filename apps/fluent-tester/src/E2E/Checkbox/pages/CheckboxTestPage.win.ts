@@ -5,6 +5,10 @@ class CheckboxTestPage extends BasePage {
   get _testPage() {
     return By(CHECKBOX_TESTPAGE);
   }
+
+  get _pageName() {
+    return CHECKBOX_TESTPAGE;
+  }
 }
 
 export default new CheckboxTestPage();
