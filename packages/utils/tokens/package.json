@@ -18,8 +18,8 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-tokens": "^0.5.38",
-    "@uifabricshared/theming-ramp": "^0.9.37"
+    "@uifabricshared/foundation-tokens": ">=0.5.38 <1.0.0",
+    "@uifabricshared/theming-ramp": ">=0.9.37 <1.0.0"
   },
   "devDependencies": {
     "@types/react-native": "^0.62.0",

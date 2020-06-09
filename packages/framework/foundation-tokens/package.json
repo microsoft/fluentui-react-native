@@ -30,11 +30,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": "^0.5.38"
+    "@uifabricshared/foundation-settings": ">=0.5.38 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
-    "@uifabricshared/foundation-settings": "0.5.38",
     "@uifabricshared/build-native": "^0.1.1"
   }
 }

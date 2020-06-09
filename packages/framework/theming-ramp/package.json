@@ -30,8 +30,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": "^0.5.38",
-    "@uifabricshared/immutable-merge": "^0.5.38"
+    "@uifabricshared/foundation-settings": ">=0.5.38 <1.0.0",
+    "@uifabricshared/immutable-merge": ">=0.5.38 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
