@@ -19,9 +19,9 @@
   },
   "dependencies": {
     "@uifabricshared/foundation-compose": "^1.6.41",
-    "@fluentui-react-native/adapters": "^0.3.3",
-    "@fluentui-react-native/persona-coin": "^0.3.42",
-    "@fluentui-react-native/tokens": "^0.4.38"
+    "@fluentui-react-native/adapters": ">=0.3.3 <1.0.0",
+    "@fluentui-react-native/persona-coin": ">=0.3.42 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.4.38 <1.0.0"
   },
   "devDependencies": {
     "@types/react-native": "^0.62.0",
