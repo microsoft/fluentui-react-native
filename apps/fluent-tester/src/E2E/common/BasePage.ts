@@ -16,9 +16,7 @@ export class BasePage {
         return this.isPageLoaded();
       },
       timeout ?? this.waitForPageTimeout,
-      'Error: ' +
-        this._pageName +
-        ' did not render correctly. This is most likely due to a redbox error. Please see /errorShots for more information.',
+      this._pageName + ' did not render correctly. Please see /errorShots of the first failed test for more information.',
       1000
     );
   }

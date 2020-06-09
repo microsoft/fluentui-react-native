@@ -2,6 +2,51 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Tue, 09 Jun 2020 17:39:01 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.9.38",
+      "version": "0.9.38",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch dependencies to use greater than semver until we reach 1.0.0",
+            "author": "jasonmo@microsoft.com",
+            "commit": "8461668e0387928c0831846b219188a6d4408295",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 06 Jun 2020 03:03:17 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.9.36",
+      "version": "0.9.36",
+      "comments": {
+        "none": [
+          {
+            "comment": "support keyboardFocus for Link and add focus visuals",
+            "author": "lehon@microsoft.com",
+            "commit": "effb17ada2fd26c6ba8f7cbb4ab7d7ddf8d74c49",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 04 Jun 2020 22:15:30 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.9.33",
+      "version": "0.9.33",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update comment to reflect fontSize is specified in CSS pixels",
+            "author": "krsiler@microsoft.com",
+            "commit": "fb659219fcc84bb437515c97d816e82eb58e3fa9",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Jun 2020 22:06:07 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.9.32",
       "version": "0.9.32",

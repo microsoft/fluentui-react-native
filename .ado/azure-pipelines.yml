@@ -12,110 +12,95 @@ jobs:
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
+    # The "displayName" of all steps that execute a command within our repo (such as 'yarn build') start lowercase to make it
+    # easier to differentiate in-repo scripts from environmental setup. This makes it easier to understand CI pipeline results.
     steps:
       - checkout: self
         persistCredentials: true
 
-      - task: NodeTool@0
-        inputs:
-          versionSpec: "10.x"
-        displayName: "Install Node.js"
+      - template: templates/setup-repo.yml
+
+      # - script: |
+      #     yarn checkchange
+      #   displayName: "check change"
+
+      # - script: |
+      #     yarn check-for-changed-files
+      #   displayName: "verify API and Ensure Changed Files"
+
+      # - template: templates/e2e-testing-uwp.yml
 
       - script: |
-          yarn
-        displayName: "yarn"
-
-      # This only needs to happen once, since the source code doesn't change.
-      - script: |
-          yarn checkchange
-        displayName: "check change"
-
-      - script: |
-          yarn build
-        displayName: "yarn build"
-
-      # This only needs to happen once, since the source code doesn't change.
-      - script: |
-          yarn check-for-changed-files
-        displayName: "Verify API and Ensure Changed Files"
-
-      - script: |
-          yarn bundle
-        displayName: "yarn bundle"
+          mkdir errorShots
+        workingDirectory: apps/win32
+        displayName: "mkdir errorShots"
 
       - script: |
           yarn e2etest
-        displayName: "Running E2E Tests"
+        workingDirectory: apps/win32
+        displayName: "run E2E Win32 tests"
 
-  - job: ApplePR
-    displayName: Apple PR
-    pool:
-      vmImage: "macos-10.15"
-      demands: ["xcode", "sh", "npm"]
-    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
-    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
-    strategy:
-      maxParallel: 4
-      matrix:
-        ios:
-          relative_directory: "ios"
-          xcode_sdx: "ios"
-          xcode_configuration: "Debug"
-          xcode_workspacePath: "apps/ios/src/FluentUITester.xcworkspace"
-          xcode_scheme: "FluentUITester"
-          xcode_actions: "build"
-          xcode_useXcpretty: true
-          xcode_destination: "platform=iOS Simulator,OS=latest,name=iPhone 11"
-        macos:
-          relative_directory: "macos"
-          xcode_sdx: "macosx"
-          xcode_configuration: "Debug"
-          xcode_workspacePath: "apps/macos/src/FluentUITester.xcworkspace"
-          xcode_scheme: "FluentUITester-macOS"
-          xcode_actions: "build"
-          xcode_useXcpretty: true
-          xcode_destination: "platform=macOS,arch=x86_64"
-
-    steps:
-      - checkout: self
-        persistCredentials: true
-
-      # Clean Derived Data
-      - script: |
-          rm -rf $(Build.Repository.LocalPath)/DerivedData
-        displayName: "Clean DerivedData"
-
-      - task: NodeTool@0
+      - task: CopyFiles@2
+        displayName: Copy tree dump screenshots
         inputs:
-          versionSpec: "10.x"
-        displayName: "Install Node.js"
+          sourceFolder: $(Build.SourcesDirectory)\apps\win32\errorShots
+          targetFolder: $(Build.StagingDirectory)/FluentTesterDump
+        condition: succeededOrFailed()
 
-      - script: |
-          sudo gem install cocoapods
-        displayName: "Install Cocoapods Environment"
-
-      - script: |
-          yarn
-        displayName: "yarn"
-
-      - script: |
-          yarn build
-        displayName: "yarn build"
-
-      - script: |
-          yarn bundle
-        displayName: "yarn bundle"
-
-      # Select proper XCode version
-      - template: templates/apple-xcode-select.yml
-
-      - template: templates/apple-xcode-build.yml
-        parameters:
-          relative_directory: $(relative_directory)
-          xcode_sdx: $(xcode_sdx)
-          xcode_configuration: $(xcode_configuration)
-          xcode_workspacePath: $(xcode_workspacePath)
-          xcode_scheme: $(xcode_scheme)
-          xcode_actions: $(xcode_actions)
-          xcode_useXcpretty: $(xcode_useXcpretty)
-          xcode_destination: $(xcode_destination)
+      - task: PowerShell@2
+        displayName: "MSInfo32"
+        inputs:
+          targetType: "inline"
+          script: "Start-Process msinfo32 -ArgumentList '/report $(Build.StagingDirectory)\\FluentTesterDump\\msinfo32.txt' -Wait"
+        condition: failed()
+  # - job: ApplePR
+  #   displayName: Apple PR
+  #   pool:
+  #     vmImage: "macos-10.15"
+  #     demands: ["xcode", "sh", "npm"]
+  #   timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+  #   cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+  #   strategy:
+  #     maxParallel: 4
+  #     matrix:
+  #       ios:
+  #         relative_directory: "ios"
+  #         xcode_sdx: "ios"
+  #         xcode_configuration: "Debug"
+  #         xcode_workspacePath: "apps/ios/src/FluentUITester.xcworkspace"
+  #         xcode_scheme: "FluentUITester"
+  #         xcode_actions: "build"
+  #         xcode_useXcpretty: true
+  #         xcode_destination: "platform=iOS Simulator,OS=latest,name=iPhone 11"
+  #       macos:
+  #         relative_directory: "macos"
+  #         xcode_sdx: "macosx"
+  #         xcode_configuration: "Debug"
+  #         xcode_workspacePath: "apps/macos/src/FluentUITester.xcworkspace"
+  #         xcode_scheme: "FluentUITester-macOS"
+  #         xcode_actions: "build"
+  #         xcode_useXcpretty: true
+  #         xcode_destination: "platform=macOS,arch=x86_64"
+  #   steps:
+  #     - checkout: self
+  #       persistCredentials: true
+  #     # Clean Derived Data
+  #     - script: |
+  #         rm -rf $(Build.Repository.LocalPath)/DerivedData
+  #       displayName: "Clean DerivedData"
+  #     - script: |
+  #         sudo gem install cocoapods
+  #       displayName: "Install Cocoapods Environment"
+  #     - template: templates/setup-repo.yml
+  #     # Select proper XCode version
+  #     - template: templates/apple-xcode-select.yml
+  #     - template: templates/apple-xcode-build.yml
+  #       parameters:
+  #         relative_directory: $(relative_directory)
+  #         xcode_sdx: $(xcode_sdx)
+  #         xcode_configuration: $(xcode_configuration)
+  #         xcode_workspacePath: $(xcode_workspacePath)
+  #         xcode_scheme: $(xcode_scheme)
+  #         xcode_actions: $(xcode_actions)
+  #         xcode_useXcpretty: $(xcode_useXcpretty)
+  #         xcode_destination: $(xcode_destination)
