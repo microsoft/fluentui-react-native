@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Sat, 06 Jun 2020 03:03:17 GMT",
+      "tag": "@fluentui-react-native/callout_v0.7.1",
+      "version": "0.7.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "support keyboardFocus for Link and add focus visuals",
+            "author": "lehon@microsoft.com",
+            "commit": "effb17ada2fd26c6ba8f7cbb4ab7d7ddf8d74c49",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 05 Jun 2020 22:02:58 GMT",
+      "tag": "@fluentui-react-native/callout_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add setInitialFocus prop",
+            "author": "ppatboyd@outlook.com",
+            "commit": "55c14c9a1e77b2dc6f39b67a4540916f4d3ba0f0",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Jun 2020 22:06:07 GMT",
       "tag": "@fluentui-react-native/callout_v0.6.22",
       "version": "0.6.22",

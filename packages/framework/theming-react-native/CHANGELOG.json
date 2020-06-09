@@ -2,6 +2,36 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Sat, 06 Jun 2020 03:03:17 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.7.37",
+      "version": "0.7.37",
+      "comments": {
+        "none": [
+          {
+            "comment": "support keyboardFocus for Link and add focus visuals",
+            "author": "lehon@microsoft.com",
+            "commit": "effb17ada2fd26c6ba8f7cbb4ab7d7ddf8d74c49",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 04 Jun 2020 22:15:30 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.7.34",
+      "version": "0.7.34",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update fontSizes to use CSS pixels",
+            "author": "krsiler@microsoft.com",
+            "commit": "fb659219fcc84bb437515c97d816e82eb58e3fa9",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Jun 2020 22:06:07 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.7.33",
       "version": "0.7.33",

@@ -9,7 +9,7 @@ exports[`Button default 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyDown={[Function]}
+  onKeyUp={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -49,7 +49,7 @@ exports[`Button default 1`] = `
         Object {
           "color": "#323130",
           "fontFamily": "Segoe UI",
-          "fontSize": 9,
+          "fontSize": 12,
           "fontWeight": "400",
           "margin": 0,
         }

@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Wed, 29 Apr 2020 21:00:40 GMT and should not be manually modified.
+This log was last generated on Thu, 04 Jun 2020 22:15:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.34
+
+Thu, 04 Jun 2020 22:15:30 GMT
+
+### Patches
+
+- Update fontSizes to use CSS pixels (krsiler@microsoft.com)
 
 ## 0.7.7
 

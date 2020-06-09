@@ -43,9 +43,9 @@ jobs:
           yarn bundle
         displayName: "yarn bundle"
 
-      - script: |
-          yarn e2etest
-        displayName: "Running E2E Tests"
+      - script: yarn e2etest
+        displayName: Running Win32 E2E Testing
+        workingDirectory: apps/win32
 
   - job: ApplePR
     displayName: Apple PR
