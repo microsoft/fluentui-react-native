@@ -75,3 +75,13 @@ describe('Click on each test page and check if it renders', function() {
   });
 });
 ```
+
+# Debugging E2E Failures
+
+If one tests fails, it will cause every subsequent test to fail as well. Due to this structure, if you get a failing E2E run, you should find the first failing test and focus on fixing that one. In the example below, the SVG test is the one failing the run.
+
+![E2E Error Debugging](../../../../assets/E2E_Error_Debugging.png)
+
+When running E2E locally, after failing an E2E run, you will get a screenshot of the error in /errorShots/ of the platform you tested.
+
+For a failing E2E run in our CI, scroll up to find specific error messages. There's work being done right now to add better error messages/reporting to the CI.
