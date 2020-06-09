@@ -2,7 +2,7 @@
   "name": "FluentTester-ios",
   "version": "0.0.1",
   "private": true,
-  "main": "index.tsx",
+  "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
   "scripts": {
@@ -14,12 +14,12 @@
     "start": "react-native start",
     "bundle": "fluentui-scripts metro --cli",
     "bundle-dev": "fluentui-scripts metro --dev --cli",
-    "ios": "react-native run-ios --project-path src & react-native start"
+    "ios": "react-native run-ios --project-path src"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",
-    "@uifabricshared/theming-react-native": "0.7.37",
-    "@uifabricshared/themed-stylesheet": "0.3.38",
+    "@uifabricshared/theming-react-native": "0.7.35",
+    "@uifabricshared/themed-stylesheet": "0.3.36",
     "react": "16.11.0",
     "react-native": "0.62.2"
   },
