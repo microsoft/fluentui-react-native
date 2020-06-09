@@ -18,8 +18,8 @@
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",
-    "@uifabricshared/theming-react-native": "0.7.40",
-    "@uifabricshared/themed-stylesheet": "0.3.41",
+    "@uifabricshared/theming-react-native": "0.7.41",
+    "@uifabricshared/themed-stylesheet": "0.3.42",
     "react": "16.11.0",
     "react-native": "0.62.2"
   },
