@@ -53,6 +53,13 @@ jobs:
           targetType: "inline"
           script: "Start-Process msinfo32 -ArgumentList '/report $(Build.StagingDirectory)\\FluentTesterDump\\msinfo32.txt' -Wait"
         condition: failed()
+
+      - task: PowerShell@2
+        displayName: "Show appium log"
+        inputs:
+          targetType: "inline"
+          script: "Get-Content apps/win32/reports/appium.txt | foreach {Write-Output $_}"
+        condition: failed()
   # - job: ApplePR
   #   displayName: Apple PR
   #   pool:
