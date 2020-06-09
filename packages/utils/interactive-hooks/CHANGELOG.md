@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Thu, 21 May 2020 20:00:42 GMT and should not be manually modified.
+This log was last generated on Tue, 09 Jun 2020 17:39:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.11
+
+Tue, 09 Jun 2020 17:39:01 GMT
+
+### Patches
+
+- switch dependencies to use greater than semver until we reach 1.0.0 (jasonmo@microsoft.com)
 
 ## 0.4.0
 

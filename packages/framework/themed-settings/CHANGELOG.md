@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/themed-settings
 
-This log was last generated on Tue, 21 Apr 2020 00:41:10 GMT and should not be manually modified.
+This log was last generated on Tue, 09 Jun 2020 17:39:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.39
+
+Tue, 09 Jun 2020 17:39:01 GMT
+
+### Patches
+
+- switch dependencies to use greater than semver until we reach 1.0.0 (jasonmo@microsoft.com)
 
 ## 0.4.1
 

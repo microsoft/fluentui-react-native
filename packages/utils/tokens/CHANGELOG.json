@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Tue, 09 Jun 2020 17:39:01 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.4.39",
+      "version": "0.4.39",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch dependencies to use greater than semver until we reach 1.0.0",
+            "author": "jasonmo@microsoft.com",
+            "commit": "8461668e0387928c0831846b219188a6d4408295",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 06 Jun 2020 03:03:17 GMT",
       "tag": "@fluentui-react-native/tokens_v0.4.37",
       "version": "0.4.37",
