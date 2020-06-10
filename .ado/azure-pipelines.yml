@@ -41,6 +41,10 @@ jobs:
         displayName: 'run E2E Win32 tests'
 
       - powershell: |
+          Get-Process
+        displayName: Get Process
+
+      - powershell: |
           Stop-Process -Name 'ReactTest'
         displayName: Close Test App
 
