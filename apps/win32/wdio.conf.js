@@ -39,7 +39,7 @@ exports.config = {
   logLevel: 'info', // Level of logging verbosity: trace | debug | info | warn | error | silent
 
   // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
-  bail: 1,
+  bail: 0,
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
   connectionRetryCount: 2, // Maximum count of request retries to the Selenium server.
@@ -58,7 +58,16 @@ exports.config = {
     defaultTimeoutInterval: jasmineDefaultTimeout,
   },
 
-  reporters: ['dot', 'spec'],
+  reporters: [
+    'dot',
+    'spec',
+    [
+      'junit',
+      {
+        outputDir: './reports/',
+      },
+    ],
+  ],
 
   /*
    ** ===================
@@ -163,6 +172,13 @@ exports.config = {
 
     // save screenshot
     browser.saveScreenshot(filePath);
+
+    // const handles = browser.getWindowHandles();
+    // if (handles.length > 1) {
+    //   browser.switchToWindow(handles[1]);
+    //   browser.closeWindow();
+    // }
+    // browser.deleteSession();
   },
 
   /**
@@ -187,8 +203,11 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that ran
    */
-  // after: function (result, capabilities, specs) {
-  // },
+  after: function (result, capabilities, specs) {
+    console.log('IT FAILED\n\n\n');
+    console.log('HELLO');
+    browser.deleteSession;
+  },
   /**
    * Gets executed right after terminating the webdriver session.
    * @param {Object} config wdio configuration object

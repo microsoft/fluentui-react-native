@@ -3560,6 +3560,14 @@
     deepmerge "^4.0.0"
     glob "^7.1.2"
 
+"@wdio/dot-reporter@^5.22.4":
+  version "5.22.4"
+  resolved "https://registry.yarnpkg.com/@wdio/dot-reporter/-/dot-reporter-5.22.4.tgz#675d056fb99b49e5035390150b974273aa517551"
+  integrity sha512-PKhfPugbYCy3qoPvsYjfxnYI1fVQOLYVh1R9tEvwZx5lMM3bZGSoyfqqyjRb5S4H6rQG5s+S8DczpCub+wJA2A==
+  dependencies:
+    "@wdio/reporter" "5.22.4"
+    chalk "^3.0.0"
+
 "@wdio/jasmine-framework@^5.18.6":
   version "5.18.6"
   resolved "https://registry.yarnpkg.com/@wdio/jasmine-framework/-/jasmine-framework-5.18.6.tgz#5a0bc5123b98d06a97c7199102a48820f560c0ce"
@@ -3568,6 +3576,16 @@
     "@wdio/logger" "5.16.10"
     "@wdio/utils" "5.18.6"
     jasmine "^3.5.0"
+
+"@wdio/junit-reporter@^5.22.4":
+  version "5.22.4"
+  resolved "https://registry.yarnpkg.com/@wdio/junit-reporter/-/junit-reporter-5.22.4.tgz#218cba336fe69e88949c54de56967a7daf372286"
+  integrity sha512-qXuFMeBjPthOPDOCNLglOdpLMzjaGrMS5yeatrcH9dG8HDGnCnvDdpIUBTedor5M4Edr5FBMYKeUd0JifGPbqw==
+  dependencies:
+    "@wdio/reporter" "5.22.4"
+    json-stringify-safe "^5.0.1"
+    junit-report-builder "^1.3.0"
+    validator "^13.0.0"
 
 "@wdio/local-runner@^5.22.4":
   version "5.22.4"
@@ -6911,6 +6929,11 @@ data-urls@^1.0.0:
     abab "^2.0.0"
     whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
+
+date-format@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/date-format/-/date-format-0.0.2.tgz#fafd448f72115ef1e2b739155ae92f2be6c28dd1"
+  integrity sha1-+v1Ej3IRXvHitzkVWukvK+bCjdE=
 
 dateformat@^3.0.0, dateformat@^3.0.3:
   version "3.0.3"
@@ -11002,6 +11025,16 @@ jszip@^3.1.3:
     pako "~1.0.2"
     readable-stream "~2.3.6"
     set-immediate-shim "~1.0.1"
+
+junit-report-builder@^1.3.0:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/junit-report-builder/-/junit-report-builder-1.3.3.tgz#a848e9ef1b1664b855d1abf8766c39f0a9c5ff33"
+  integrity sha512-75bwaXjP/3ogyzOSkkcshXGG7z74edkJjgTZlJGAyzxlOHaguexM3VLG6JyD9ZBF8mlpgsUPB1sIWU4LISgeJw==
+  dependencies:
+    date-format "0.0.2"
+    lodash "^4.17.15"
+    mkdirp "^0.5.0"
+    xmlbuilder "^10.0.0"
 
 just-repo-utils@^0.2.0:
   version "0.2.0"
@@ -16992,6 +17025,11 @@ validate.js@^0.13.0:
   resolved "https://registry.yarnpkg.com/validate.js/-/validate.js-0.13.1.tgz#b58bfac04a0f600a340f62e5227e70d95971e92a"
   integrity sha512-PnFM3xiZ+kYmLyTiMgTYmU7ZHkjBZz2/+F0DaALc/uUtVzdCt1wAosvYJ5hFQi/hz8O4zb52FQhHZRC+uVkJ+g==
 
+validator@^13.0.0:
+  version "13.1.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-13.1.0.tgz#c1cab4e07f3959fd60c81a9f8588346d846a6986"
+  integrity sha512-/pCLYqPpAW10x0kkrtFUoN3O3JhB4/kblWD5NsaI6Anei85pxVr3p0xjFkBmB54JnKRf6d4sKtUI23+CtbzNHQ==
+
 validator@^8.0.0:
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/validator/-/validator-8.2.0.tgz#3c1237290e37092355344fef78c231249dab77b9"
@@ -17579,6 +17617,11 @@ xml2js@^0.4.17, xml2js@^0.4.5:
   dependencies:
     sax ">=0.6.0"
     xmlbuilder "~11.0.0"
+
+xmlbuilder@^10.0.0:
+  version "10.1.1"
+  resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-10.1.1.tgz#8cae6688cc9b38d850b7c8d3c0a4161dcaf475b0"
+  integrity sha512-OyzrcFLL/nb6fMGHbiRDuPup9ljBycsdCypwuyg5AAHvyWzGfChJpCXMG88AGTIMFhGZ9RccFN1e6lhg3hkwKg==
 
 xmlbuilder@^9.0.1, xmlbuilder@^9.0.7:
   version "9.0.7"
