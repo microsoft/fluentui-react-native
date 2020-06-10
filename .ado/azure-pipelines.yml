@@ -50,17 +50,19 @@ jobs:
       - task: PowerShell@2
         inputs:
           targetType: inline
-          script: 'Stop-Process -Name ReactTest'
+          script: Stop-Process -Name 'ReactTest'
         displayName: Get process 1
         condition: succeededOrFailed()
 
       - powershell: |
           Get-Process
         displayName: Get Process
+        condition: succeededOrFailed()
 
       - powershell: |
           Stop-Process -Name 'ReactTest'
         displayName: Close Test App
+        condition: succeededOrFailed()
 
       # Copy errorShots to FluentTesterDump
       - task: CopyFiles@2
