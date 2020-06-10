@@ -6,32 +6,34 @@ export type CacheEntry<T, TGet = any> = {
   byObj?: WeakMap<object, TGet>;
 };
 
-function ensureEntry<T>(entry: CacheEntry<T>, obj?: object, keys?: string[]): CacheEntry<T> {
-  if (obj) {
+type Key = object | string[];
+
+function ensureEntry<T>(entry: CacheEntry<T>, key: Key): CacheEntry<T> {
+  if (!Array.isArray(key)) {
     const byObj = (entry.byObj = entry.byObj || new WeakMap<object, CacheEntry<T>>());
-    if (!byObj.has(obj)) {
-      byObj.set(obj, {});
+    if (!byObj.has(key)) {
+      byObj.set(key, {});
     }
-    return byObj.get(obj);
+    return byObj.get(key);
   }
-  const key = mergeKeys(keys!);
+  const merged = mergeKeys(key);
   const byKey = (entry.byKey = entry.byKey || {});
-  byKey[key] = byKey[key] || {};
-  return byKey[key];
+  byKey[merged] = byKey[merged] || {};
+  return byKey[merged];
 }
 
 export function getMemoCacheEntry<T>(entry: CacheEntry<T>, args: any[]): CacheEntry<T> {
-  type Jump = { obj?: object; keys?: string[] };
   return args
-    .reduce((jumps: Jump[], arg: any) => {
+    .reduce((keys: Key[], arg: any) => {
       const { key, isObj } = toKey(arg);
-      if (jumps.length === 0 || isObj || jumps[jumps.length - 1].obj) {
-        return jumps.concat(isObj ? { obj: key as object } : { keys: [key as string] });
+      if (keys.length === 0 || isObj || !Array.isArray(keys[keys.length - 1])) {
+        keys.push(isObj ? (key as object) : [key as string]);
+        return keys;
       }
-      jumps[jumps.length - 1].keys.push(key as string);
-      return jumps;
+      (keys[keys.length - 1] as string[]).push(key as string);
+      return keys;
     }, [])
-    .reduce((lastEntry: CacheEntry<T>, jump: Jump) => {
-      return ensureEntry(lastEntry, jump.obj, jump.keys);
+    .reduce((lastEntry: CacheEntry<T>, key: Key) => {
+      return ensureEntry(lastEntry, key);
     }, entry);
 }

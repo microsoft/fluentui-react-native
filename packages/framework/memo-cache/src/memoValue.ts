@@ -1,25 +1,18 @@
 import { CacheEntry, getMemoCacheEntry } from './getMemoCacheEntry';
 
-export type MemoValue<T, TGet = any> = {
-  value: T;
-  getMemoValue: (fn: () => TGet, ...keys: any[]) => MemoValue<TGet>;
-};
-
-export type GetMemoValue<T> = MemoValue<T, T>['getMemoValue'];
+export type ValueFactory<T> = () => T;
+export type GetMemoValue<T, TGet = any> = (factory: T | ValueFactory<T>, ...keys: any[]) => [T, GetMemoValue<TGet>];
 
 const _baseEntry: CacheEntry<any> = {};
 
-function getMemoValueWorker<T, TGet = any>(entry: CacheEntry<any>, fn: () => T, keys: any[]): MemoValue<T> {
+function getMemoValueWorker<T, TGet = any>(entry: CacheEntry<any>, factory: T | ValueFactory<T>, keys: any[]): [T, GetMemoValue<TGet>] {
   const foundEntry = getMemoCacheEntry(entry, keys);
   if (foundEntry.value === undefined) {
-    foundEntry.value = fn();
+    foundEntry.value = typeof factory === 'function' ? (factory as ValueFactory<T>)() : factory;
   }
-  return {
-    value: foundEntry.value,
-    getMemoValue: (fn: () => TGet, ...keys: any[]) => getMemoValueWorker<TGet>(foundEntry, fn, keys)
-  };
+  return [foundEntry.value, (fact: TGet | ValueFactory<TGet>, ...args: any[]) => getMemoValueWorker<TGet>(foundEntry, fact, args)];
 }
 
-export function memoValue<T>(fn: () => T, ...keys: any[]): MemoValue<T> {
-  return getMemoValueWorker<T>(_baseEntry, fn, keys);
+export function memoValue<T, TGet = any>(factory: T | ValueFactory<T>, ...keys: any[]): [T, GetMemoValue<TGet>] {
+  return getMemoValueWorker<T>(_baseEntry, factory, keys);
 }

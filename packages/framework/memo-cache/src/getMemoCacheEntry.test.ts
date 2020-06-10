@@ -4,15 +4,6 @@ interface TestObj {
   id: number;
 }
 
-/*
-function getObjFactory() {
-  const obj: TestObj = { id: 0 };
-  return () => ({
-    id: obj.id++
-  });
-}
-*/
-
 type TestEntry = CacheEntry<TestObj>;
 
 function compareResults(base: TestEntry, args: any[], argsNoMatch?: any[]): void {
