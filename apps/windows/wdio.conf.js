@@ -51,7 +51,15 @@ exports.config = {
     defaultTimeoutInterval: jasmineDefaultTimeout,
   },
 
-  reporters: ['spec'],
+  reporters: [
+    'spec',
+    [
+      'junit',
+      {
+        outputDir: './reports/',
+      },
+    ],
+  ],
 
   /*
    ** ===================

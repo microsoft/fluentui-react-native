@@ -8,7 +8,7 @@ jobs:
   - job: WindowsPR
     displayName: Windows PR
     pool:
-      vmImage: 'windows-2019'
+      vmImage: "windows-2019"
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -33,36 +33,12 @@ jobs:
       - script: |
           mkdir errorShots
         workingDirectory: apps/win32
-        displayName: 'mkdir errorShots'
+        displayName: "mkdir errorShots"
 
       - script: |
           yarn e2etest
         workingDirectory: apps/win32
-        displayName: 'run E2E Win32 tests'
-
-      - task: PowerShell@2
-        inputs:
-          targetType: inline
-          script: 'Get-Process'
-        displayName: Get process 1
-        condition: succeededOrFailed()
-
-      - task: PowerShell@2
-        inputs:
-          targetType: inline
-          script: Stop-Process -Name 'ReactTest'
-        displayName: Get process 1
-        condition: succeededOrFailed()
-
-      - powershell: |
-          Get-Process
-        displayName: Get Process
-        condition: succeededOrFailed()
-
-      - powershell: |
-          Stop-Process -Name 'ReactTest'
-        displayName: Close Test App
-        condition: succeededOrFailed()
+        displayName: "run E2E Win32 tests"
 
       # Copy errorShots to FluentTesterDump
       - task: CopyFiles@2
@@ -77,13 +53,13 @@ jobs:
         displayName: Copy tree dump appium logs
         inputs:
           sourceFolder: $(Build.SourcesDirectory)\apps\win32\reports\
-          contents: '*'
+          contents: "*"
           targetFolder: $(Build.StagingDirectory)/FluentTesterDump
         condition: succeededOrFailed()
 
       # Publish FluentTesterDump
       - task: PublishBuildArtifacts@1
-        displayName: 'Publish Artifact:FluentTesterDump'
+        displayName: "Publish Artifact:FluentTesterDump"
         inputs:
           artifactName: FluentTesterDump
           pathtoPublish: $(Build.StagingDirectory)/FluentTesterDump

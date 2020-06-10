@@ -65,6 +65,9 @@ exports.config = {
       'junit',
       {
         outputDir: './reports/',
+        outputFileFormat: function (options) {
+          return 'wdio-' + options.cid + '-junit-reporter.xml';
+        },
       },
     ],
   ],
