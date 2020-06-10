@@ -3511,9 +3511,9 @@
   integrity sha512-PK60wLAjPrG2l93r1l/VY2BmnC1la0oxIXYBuln5DOAFJcSXMea9RxoNjuqhhqZGZo6aLjO7lW070MeVOvkABQ==
 
 "@wdio/appium-service@^5.0.0":
-  version "5.18.2"
-  resolved "https://registry.yarnpkg.com/@wdio/appium-service/-/appium-service-5.18.2.tgz#e6461c939393c3edbb027e69780f0fd2dadff6a4"
-  integrity sha512-PyLVk88BLpgt0H+3AX5FLFE4fD7QMTAMTqPB92eBYEpivN3Zn1cRPuFfXUpsFNekg65HUsutcbLHIhZSBsH6mA==
+  version "5.23.0"
+  resolved "https://registry.yarnpkg.com/@wdio/appium-service/-/appium-service-5.23.0.tgz#a2e91de7cb660e74582d64cacfd1847fa435e80f"
+  integrity sha512-yjlXCwSFcX8JUUcmndF3AIyC4QyxNe3opxCWP8eIGygt9kUDfCxP0Vlwec9+vvf8JnnVoZPq5Hc01JhoMx5PBw==
   dependencies:
     "@wdio/logger" "5.16.10"
     fs-extra "^8.0.1"
