@@ -38,7 +38,7 @@
     "@types/react-native": "^0.62.0",
     "@types/react-test-renderer": "16.9.0",
     "@types/webpack-env": "1.13.6",
-    "@typescript-eslint/eslint-plugin": "^2.24.0",
+    "@typescript-eslint/eslint-plugin": "^3.2.0",
     "@typescript-eslint/parser": "^2.24.0",
     "@uifabric/prettier-rules": "^7.0.3",
     "@uifabricshared/build-native": "^0.1.1",
