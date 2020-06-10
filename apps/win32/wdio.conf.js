@@ -8,7 +8,7 @@ const appDir = path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js'
 
 const defaultWaitForTimeout = 10000;
 const defaultConnectionRetryTimeout = 15000;
-const jasmineDefaultTimeout = 25000; // 45 seconds for Jasmine test timeout
+const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
@@ -172,13 +172,6 @@ exports.config = {
 
     // save screenshot
     browser.saveScreenshot(filePath);
-
-    // const handles = browser.getWindowHandles();
-    // if (handles.length > 1) {
-    //   browser.switchToWindow(handles[1]);
-    //   browser.closeWindow();
-    // }
-    // browser.deleteSession();
   },
 
   /**
@@ -203,11 +196,8 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that ran
    */
-  after: function (result, capabilities, specs) {
-    console.log('IT FAILED\n\n\n');
-    console.log('HELLO');
-    browser.deleteSession;
-  },
+  // after: function (result, capabilities, specs) {
+  // },
   /**
    * Gets executed right after terminating the webdriver session.
    * @param {Object} config wdio configuration object
