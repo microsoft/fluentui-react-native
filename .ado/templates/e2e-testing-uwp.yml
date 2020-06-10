@@ -22,6 +22,11 @@ steps:
     displayName: "Install Azure Credentials Plugin for NuGet"
 
   - script: |
+      mkdir errorShots
+    workingDirectory: apps/windows
+    displayName: "mkdir errorShots"
+
+  - script: |
       yarn windows
     workingDirectory: apps\windows
     displayName: "run UWP app"
@@ -41,3 +46,28 @@ steps:
       yarn e2etest
     workingDirectory: apps\windows
     displayName: "run E2E UWP tests"
+
+  # Copy errorShots to FluentTesterDump
+  - task: CopyFiles@2
+    displayName: Copy tree dump screenshots
+    inputs:
+      sourceFolder: $(Build.SourcesDirectory)\apps\windows\errorShots
+      targetFolder: $(Build.StagingDirectory)/E2E_UWP_Dump
+    condition: succeededOrFailed()
+
+  # Copy appium log to FluentTesterDump
+  - task: CopyFiles@2
+    displayName: Copy tree dump appium logs
+    inputs:
+      sourceFolder: $(Build.SourcesDirectory)\apps\windows\reports\
+      contents: "*"
+      targetFolder: $(Build.StagingDirectory)/E2E_UWP_Dump
+    condition: succeededOrFailed()
+
+  # Publish FluentTesterDump
+  - task: PublishBuildArtifacts@1
+    displayName: "Publish Artifact:E2E_UWP_Dump"
+    inputs:
+      artifactName: E2E_UWP_Dump
+      pathtoPublish: $(Build.StagingDirectory)/E2E_UWP_Dump
+    condition: succeededOrFailed()
