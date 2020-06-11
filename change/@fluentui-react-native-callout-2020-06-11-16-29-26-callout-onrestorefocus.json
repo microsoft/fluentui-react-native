@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Add onRestoreFocus callback and improve test page capabilities",
+  "packageName": "@fluentui-react-native/callout",
+  "email": "ppatboyd@outlook.com",
+  "dependentChangeType": "patch",
+  "date": "2020-06-11T23:29:25.955Z"
+}
