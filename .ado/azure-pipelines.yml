@@ -20,52 +20,15 @@ jobs:
 
       - template: templates/setup-repo.yml
 
-      - template: templates/e2e-testing-uwp.yml
       # - script: |
       #     yarn checkchange
       #   displayName: "check change"
+
       # - script: |
       #     yarn check-for-changed-files
       #   displayName: "verify API and Ensure Changed Files"
-      # - template: templates/e2e-testing-uwp.yml
-      - script: |
-          mkdir errorShots
-        workingDirectory: apps/win32
-        displayName: mkdir errorShots
-        condition: succeededOrFailed()
 
-      - script: |
-          yarn e2etest
-        workingDirectory: apps/win32
-        displayName: "run E2E Win32 tests"
-        condition: succeededOrFailed()
-
-      - template: templates/e2e-publish-artifacts.yml
-        parameters:
-          platform: win32
-          applicationType: win32
-      # # Copy errorShots to FluentTesterDump
-      # - task: CopyFiles@2
-      #   displayName: Copy tree dump screenshots
-      #   inputs:
-      #     sourceFolder: $(Build.SourcesDirectory)\apps\win32\errorShots
-      #     targetFolder: $(Build.StagingDirectory)/FluentTesterDump
-      #   condition: succeededOrFailed()
-      # # Copy appium log to FluentTesterDump
-      # - task: CopyFiles@2
-      #   displayName: Copy tree dump appium logs
-      #   inputs:
-      #     sourceFolder: $(Build.SourcesDirectory)\apps\win32\reports\
-      #     contents: "*"
-      #     targetFolder: $(Build.StagingDirectory)/FluentTesterDump
-      #   condition: succeededOrFailed()
-      # # Publish FluentTesterDump
-      # - task: PublishBuildArtifacts@1
-      #   displayName: "Publish Artifact:FluentTesterDump"
-      #   inputs:
-      #     artifactName: FluentTesterDump
-      #     pathtoPublish: $(Build.StagingDirectory)/FluentTesterDump
-      #   condition: succeededOrFailed()
+      - template: templates/e2e-testing-windows.yml
   # - job: ApplePR
   #   displayName: Apple PR
   #   pool:

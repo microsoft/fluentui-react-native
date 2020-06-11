@@ -13,7 +13,7 @@ steps:
 
   # Copy appium log to FluentTesterDump
   - task: CopyFiles@2
-    displayName: Copy tree dump appium logs
+    displayName: Copy tree dump report logs
     inputs:
       sourceFolder: $(Build.SourcesDirectory)\apps\${{parameters.platform}}\reports\
       contents: "*"
