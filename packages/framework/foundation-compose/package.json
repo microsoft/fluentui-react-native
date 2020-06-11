@@ -35,7 +35,8 @@
     "@uifabricshared/foundation-tokens": "^0.5.33",
     "@uifabricshared/immutable-merge": "^0.5.33",
     "@uifabricshared/theming-react-native": "^0.7.33",
-    "@uifabricshared/theming-ramp": "^0.9.32"
+    "@uifabricshared/theming-ramp": "^0.9.32",
+    "@fluentui-react-native/memo-cache": ">=0.1.0 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

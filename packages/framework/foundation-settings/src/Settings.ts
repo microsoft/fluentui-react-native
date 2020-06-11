@@ -43,6 +43,15 @@ const _mergeCollectionOptions: MergeOptions = {
 };
 
 /**
+ * Typescript can't always inference types that are actually objects correctly.  This helper effectively
+ * coerces types that aren't based on objects into objects for purposes of merging
+ * @param inputs - array of inputs of a given type
+ */
+function _filterToObjectArray<T>(inputs: T[]): object[] {
+  return (inputs.filter(input => typeof input === 'object') as unknown) as object[];
+}
+
+/**
  * Merge settings together.  This routine should work for IComponentSettings types or ISlotProps
  * @param settings - settings to merge together
  */
@@ -54,8 +63,8 @@ export function mergeSettings<TSettings extends IComponentSettings = IComponentS
  * Merge props together, flattening and merging styles as appropriate
  * @param props - props to merge together
  */
-export function mergeProps<TProps extends object>(...props: (object | undefined)[]): TProps {
-  return immutableMergeCore(_mergePropsOptions, ...props) as TProps;
+export function mergeProps<TProps>(...props: (TProps | undefined)[]): TProps {
+  return (immutableMergeCore(_mergePropsOptions, ..._filterToObjectArray(props)) as unknown) as TProps;
 }
 
 /**

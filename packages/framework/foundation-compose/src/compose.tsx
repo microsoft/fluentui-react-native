@@ -61,7 +61,7 @@ export function compose<TType>(
   const options = _getComponentOptions<ITProps, ITSlotProps, ITTokens, ITState, ITStatics>(inputComponent, base && getOptionsFromObj(base));
 
   // set up the styling injection function
-  options.useStyling = initializeStyling<ITProps, ITSlotProps, ITTokens, ITState, ITStatics>(options, options.displayName);
+  options.useStyling = initializeStyling<ITProps, ITSlotProps, ITTokens, ITState, ITStatics>(options);
 
   // use composable to create the function implementation
   const Component = composable<IComposableType<ITProps, ITSlotProps, ITState>>(options as any) as IReturnType;
@@ -72,12 +72,18 @@ export function compose<TType>(
 
   // set up the customize handler
   Component.customize = (...settings: IDefineComposeSettings<ITSlotProps, ITTokens>) => {
-    return compose({ settings }, Component);
+    return compose(
+      { settings },
+      Component
+    );
   };
 
   // set up the compose handler
   Component.compose = (newOptions: Partial<IComposeOptions<ITProps, ITSlotProps, ITTokens, ITState, ITStatics>>) => {
-    return compose<TType>(newOptions, Component);
+    return compose<TType>(
+      newOptions,
+      Component
+    );
   };
 
   // now return the newly created component

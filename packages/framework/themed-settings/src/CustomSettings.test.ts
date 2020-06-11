@@ -1,6 +1,7 @@
 import { IComponentSettings, mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISettingsEntry, ISettingsFromTheme } from './CustomSettings.types';
-import { getBaseThemedSettings, getThemedSettings } from './CustomSettings';
+import { mergeBaseSettings, getThemedSettings } from './CustomSettings';
+import { memoValue } from '@fluentui-react-native/memo-cache';
 
 interface IMockTheme {
   palette: {
@@ -161,43 +162,38 @@ const customSettings2: ICustomSettingsBlock = [fragment2, 'val2', themeFn2];
 const result2 = mergeSettings(fragment2, _lookup.val2, themeFn2(_theme));
 
 describe('Custom settings tests', () => {
-  test('getBaseThemedSettings handles empty values', () => {
-    const cache = {};
-    const sNull = getBaseThemedSettings(undefined, _theme, cache, 'foo', getSettings);
+  test('mergeBaseSettings handles empty values', () => {
+    const sNull = mergeBaseSettings(undefined, _theme, getSettings);
     expect(sNull).toEqual(undefined);
-    const sEmpty = getBaseThemedSettings([], _theme, cache, 'foo', getSettings);
+    const sEmpty = mergeBaseSettings([], _theme, getSettings);
     expect(sEmpty).toEqual(undefined);
   });
 
-  test('getBaseThemedSettings looks up in theme correctly', () => {
-    const cache = {};
-    const s1 = getBaseThemedSettings(customSettings1, _theme, cache, 'foo', getSettings);
+  test('mergeBaseSettings looks up in theme correctly', () => {
+    const s1 = mergeBaseSettings(customSettings1, _theme, getSettings);
     expect(s1).toEqual(result1);
   });
 
-  test('getBaseThemedSettings merges correctly', () => {
-    const cache = {};
-    const s2 = getBaseThemedSettings(customSettings2, _theme, cache, 'foo', getSettings);
+  test('mergeBaseSettings merges correctly', () => {
+    const s2 = mergeBaseSettings(customSettings2, _theme, getSettings);
     expect(s2).toEqual(result2);
   });
 
-  test('getBaseThemedSettings caches merge result', () => {
-    const cache = {};
-    const s2a = getBaseThemedSettings(customSettings2, _theme, cache, 'foo', getSettings);
-    const s2b = getBaseThemedSettings(customSettings2, _theme, cache, 'foo', getSettings);
-    expect(s2a).toBe(s2b);
+  test('getThemedSettings caches merge result', () => {
+    const [, newCache] = memoValue(null, {});
+    const { settings } = getThemedSettings(customSettings2, _theme, newCache, {}, getSettings);
+    expect(getThemedSettings(customSettings2, _theme, newCache, {}, getSettings).settings).toBe(settings);
   });
 
   test('getThemedSettings resolves overrides', () => {
-    const cache = {};
-    const { settings, key } = getThemedSettings(customSettings1, _theme, cache, 'foo', { hovered: true }, getSettings);
-    expect(key).toEqual('foo-hovered');
+    const [, newCache] = memoValue(null, {});
+    const { settings } = getThemedSettings(customSettings1, _theme, newCache, { hovered: true }, getSettings);
     expect(settings.root).toEqual(val1rootHovered);
   });
 
   test('getThemedSettings resolves multiple overrides', () => {
-    const { settings, key } = getThemedSettings(customSettings1, _theme, {}, 'foo', { hovered: true, primary: true }, getSettings);
-    expect(key).toEqual('foo-primary-hovered');
+    const [, newCache] = memoValue(null, {});
+    const { settings } = getThemedSettings(customSettings1, _theme, newCache, { hovered: true, primary: true }, getSettings);
     expect(settings.root).toEqual(val1primaryHovered);
   });
 });

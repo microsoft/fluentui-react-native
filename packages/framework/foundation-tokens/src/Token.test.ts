@@ -1,5 +1,6 @@
 import { MockButton, IButtonSettings } from './MockButton';
 import { theme } from './MockTheme';
+import { memoValue } from '@fluentui-react-native/memo-cache';
 
 const b1: IButtonSettings = {
   tokens: {
@@ -79,19 +80,19 @@ const b1resolvedRecurse: IButtonSettings = {
 
 describe('Token settings unit tests', () => {
   test('resolve base settings', () => {
-    const cache = {};
+    const [, cache] = memoValue(null, {});
     const resolved = MockButton({}, b1, theme, cache, false);
     expect(resolved).toEqual(b1resolved);
   });
 
   test('resolve base with recursion', () => {
-    const cache = {};
+    const [, cache] = memoValue(null, {});
     const resolved = MockButton({}, b1, theme, cache, true);
     expect(resolved).toEqual(b1resolvedRecurse);
   });
 
   test('two default buttons return same object', () => {
-    const cache = {};
+    const [, cache] = memoValue(null, {});
     const resolved1 = MockButton({ content: 'button1' }, b1, theme, cache, false);
     const resolved2 = MockButton({ content: 'button2' }, b1, theme, cache, false);
     expect(resolved1).toEqual(resolved2);
@@ -101,7 +102,7 @@ describe('Token settings unit tests', () => {
   });
 
   test('setting props that match defaults keep same object', () => {
-    const cache = {};
+    const [, cache] = memoValue(null, {});
     const resolved1 = MockButton({ content: 'button1' }, b1, theme, cache, false);
     const resolved2 = MockButton({ content: 'button2', color: 'buttonText' }, b1, theme, cache, false);
     expect(resolved1).toEqual(resolved2);
@@ -111,7 +112,7 @@ describe('Token settings unit tests', () => {
   });
 
   test('prop token overrides produce partial new object', () => {
-    const cache = {};
+    const [, cache] = memoValue(null, {});
     const resolved1 = MockButton({ content: 'button1' }, b1, theme, cache, false);
     const resolved2 = MockButton({ content: 'button2', color: 'purple' }, b1, theme, cache, false);
     expect(resolved1).not.toBe(resolved2);
@@ -120,7 +121,7 @@ describe('Token settings unit tests', () => {
   });
 
   test('prop token overrides, multiple values are memoized', () => {
-    const cache = {};
+    const [, cache] = memoValue(null, {});
     const resolved1 = MockButton({ content: 'button1', borderRadius: 3, color: 'purple' }, b1, theme, cache, false);
     const resolved2 = MockButton({ content: 'button2', color: 'purple', borderRadius: 3 }, b1, theme, cache, false);
     expect(resolved1).toEqual(resolved2);
@@ -130,7 +131,7 @@ describe('Token settings unit tests', () => {
   });
 
   test('prop token overrides, different keys same value produce different objects', () => {
-    const cache = {};
+    const [, cache] = memoValue(null, {});
     const resolved1 = MockButton({ content: 'button1', backgroundColor: 'purple' }, b1, theme, cache, false);
     const resolved2 = MockButton({ content: 'button2', color: 'purple' }, b1, theme, cache, false);
     expect(resolved1).not.toBe(resolved2);

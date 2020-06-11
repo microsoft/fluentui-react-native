@@ -14,7 +14,7 @@ interface ISlotRenderInfo<TProps, TSlotProps, TState> {
   Slots?: ISlots<TSlotProps>;
 }
 
-function _mergeAndFilterProps<TProps extends object>(propsBase: TProps, propsExtra: TProps, filter?: IPropFilter): TProps {
+function _mergeAndFilterProps<TProps>(propsBase: TProps, propsExtra: TProps, filter?: IPropFilter): TProps {
   // do a basic merge, not mutating if nothing changed
   let props = mergeProps<TProps>(propsBase, propsExtra);
   if (filter && props) {
@@ -24,7 +24,7 @@ function _mergeAndFilterProps<TProps extends object>(propsBase: TProps, propsExt
         removeMask[key] = undefined;
       }
     });
-    props = mergeProps(props, removeMask);
+    props = mergeProps<TProps>(props, removeMask as TProps);
   }
   return props;
 }
@@ -60,7 +60,7 @@ function createSlotRenderInfo<TProps, TSlotProps extends ISlotProps, TState>(
           const { renderData, Slots } = childRenderInfo;
           if (filter || extraProps) {
             const toMerge = { root: _mergeAndFilterProps(renderData.slotProps.root, extraProps, filter) };
-            renderData.slotProps = mergeSettings(renderData.slotProps, toMerge);
+            renderData.slotProps = mergeSettings<TSlotProps>(renderData.slotProps, toMerge as TSlotProps);
           }
           return composable.render(Slots, renderData, ...children);
         });

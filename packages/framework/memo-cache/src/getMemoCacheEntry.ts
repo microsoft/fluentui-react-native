@@ -11,10 +11,7 @@ type Key = object | string[];
 function ensureEntry<T>(entry: CacheEntry<T>, key: Key): CacheEntry<T> {
   if (!Array.isArray(key)) {
     const byObj = (entry.byObj = entry.byObj || new WeakMap<object, CacheEntry<T>>());
-    if (!byObj.has(key)) {
-      byObj.set(key, {});
-    }
-    return byObj.get(key);
+    return byObj.get(key) || byObj.set(key, {}).get(key);
   }
   const merged = mergeKeys(key);
   const byKey = (entry.byKey = entry.byKey || {});
