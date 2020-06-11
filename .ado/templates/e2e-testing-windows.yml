@@ -52,22 +52,6 @@ steps:
     workingDirectory: apps\windows
     displayName: "run UWP E2E tests"
 
-  - powershell: |
-      Stop-Process -Name cmd
-    displayName: "Kill CMD Process"
-
-  - powershell: |
-      Stop-Process -Name powershell
-    displayName: "Kill PS Process"
-
-  - powershell: |
-      Stop-Process -Name powershell
-    displayName: "Kill PS2 Process"
-
-  - powershell: |
-      Get-Process
-    displayName: "Get Process'"
-
   - script: |
       yarn e2etest
     workingDirectory: apps\win32
