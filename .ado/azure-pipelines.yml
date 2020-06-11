@@ -32,10 +32,13 @@ jobs:
           mkdir errorShots
         workingDirectory: apps/win32
         displayName: "mkdir errorShots"
+        condition: succeededOrFailed()
+
       - script: |
           yarn e2etest
         workingDirectory: apps/win32
         displayName: "run E2E Win32 tests"
+        condition: succeededOrFailed()
 
       - template: templates/e2e-publish-artifacts.yml
         parameters:

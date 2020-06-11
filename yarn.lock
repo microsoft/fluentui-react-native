@@ -3510,7 +3510,7 @@
   resolved "https://registry.yarnpkg.com/@uifabric/prettier-rules/-/prettier-rules-7.0.4.tgz#03082a6cc4b586104738a24892c56e0f1d3df1b6"
   integrity sha512-PK60wLAjPrG2l93r1l/VY2BmnC1la0oxIXYBuln5DOAFJcSXMea9RxoNjuqhhqZGZo6aLjO7lW070MeVOvkABQ==
 
-"@wdio/appium-service@^5.0.0":
+"@wdio/appium-service@5.18.2", "@wdio/appium-service@^5.0.0":
   version "5.18.2"
   resolved "https://registry.yarnpkg.com/@wdio/appium-service/-/appium-service-5.18.2.tgz#e6461c939393c3edbb027e69780f0fd2dadff6a4"
   integrity sha512-PyLVk88BLpgt0H+3AX5FLFE4fD7QMTAMTqPB92eBYEpivN3Zn1cRPuFfXUpsFNekg65HUsutcbLHIhZSBsH6mA==
