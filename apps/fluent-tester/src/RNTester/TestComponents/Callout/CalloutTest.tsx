@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ScreenRect, Text, View } from 'react-native';
-import { Button, Callout, Separator } from '@fluentui/react-native';
+import { ScreenRect, Text, View, Switch } from 'react-native';
+import { Button, Callout, Separator, IFocusable, OnRestoreFocusEvent } from '@fluentui/react-native';
 import { fabricTesterStyles } from '../Common/styles';
 import { CALLOUT_TESTPAGE } from './consts';
 
@@ -10,7 +10,15 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
   const [isStandardCalloutVisible, setIsStandardCalloutVisible] = React.useState(false);
   const [isCustomizedCalloutVisible, setIsCustomizedCalloutVisible] = React.useState(false);
 
+  const [shouldSetInitialFocus, setShouldSetInitialFocus] = React.useState(true);
+  const onInitialFocusChange = React.useCallback((value) => setShouldSetInitialFocus(value), []);
+
+  const [customRestoreFocus, setCustomRestoreFocus] = React.useState(false);
+  const onRestoreFocusChange = React.useCallback((value) => setCustomRestoreFocus(value), []);
+
   const stdBtnRef = React.useRef<View>(null);
+  const decoyBtn1Ref = React.useRef<IFocusable>(null);
+  const decoyBtn2Ref = React.useRef<IFocusable>(null);
   const custBtnRef = React.useRef<View>(null);
   const [anchorRef, setAnchorRef] = React.useState(stdBtnRef);
 
@@ -60,6 +68,17 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
     setShowCustomizedCallout(false);
   }, [setIsCustomizedCalloutVisible, setShowCustomizedCallout]);
 
+  const onRestoreFocusStandardCallout = React.useCallback(
+    (restoreFocusEvent: OnRestoreFocusEvent) => {
+      if (restoreFocusEvent.nativeEvent.containsFocus && decoyBtn1Ref && decoyBtn1Ref.current) {
+        decoyBtn1Ref.current.focus();
+      } else if (!restoreFocusEvent.nativeEvent.containsFocus && decoyBtn2Ref && decoyBtn2Ref.current) {
+        decoyBtn2Ref.current.focus();
+      }
+    },
+    [decoyBtn1Ref, decoyBtn2Ref]
+  );
+
   const myRect: ScreenRect = { screenX: 10, screenY: 10, width: 100, height: 100 };
   return (
     <View>
@@ -68,22 +87,44 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
       </Text>
       <Separator />
       <View ref={stdBtnRef} style={{ flexDirection: 'row' }}>
-        <Button content="Press for Callout" onClick={toggleShowStandardCallout} />
-        <Text>
-          <Text>Visibility: </Text>
-          {isStandardCalloutVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
-        </Text>
+        <View style={{ flexDirection: 'column' }}>
+          <View style={{ flexDirection: 'row' }}>
+            <Switch value={shouldSetInitialFocus} onValueChange={onInitialFocusChange} />
+            <Text>Set Initial Focus</Text>
+          </View>
+
+          <View style={{ flexDirection: 'row' }}>
+            <Switch value={customRestoreFocus} onValueChange={onRestoreFocusChange} />
+            <Text>Customize Restore Focus</Text>
+          </View>
+        </View>
+
+        <Separator vertical />
+
+        <View style={{ flexDirection: 'column' }}>
+          <Button content="Press for Callout" onClick={toggleShowStandardCallout} />
+          <Text>
+            <Text>Visibility: </Text>
+            {isStandardCalloutVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
+          </Text>
+        </View>
       </View>
+
+      <Separator />
+
+      <Button componentRef={decoyBtn1Ref} content="Custom reFocus w/ focus in Callout" />
+      <Button componentRef={decoyBtn2Ref} content="Custom reFocus w/o focus in Callout" />
 
       {showStandardCallout && (
         <Callout
           target={anchorRef}
           onDismiss={onDismissStandardCallout}
           onShow={onShowStandardCallout}
+          onRestoreFocus={customRestoreFocus ? onRestoreFocusStandardCallout : undefined}
           accessibilityLabel="Standard Callout"
-          setInitialFocus
+          setInitialFocus={shouldSetInitialFocus}
         >
-          <View style={{ height: 200, width: 400 }}>
+          <View style={{ padding: 20, borderWidth: 2, borderColor: 'black' }}>
             <Button content="click to change anchor" onClick={toggleCalloutRef} />
           </View>
         </Callout>
@@ -94,7 +135,7 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
 
       <View ref={custBtnRef} style={{ flexDirection: 'row' }}>
         <Button content="Press for Callout" onClick={toggleShowCustomizedCallout} />
-        <Text>
+        <Text selectable={true}>
           <Text>Visibility: </Text>
           {isCustomizedCalloutVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
         </Text>
@@ -109,7 +150,7 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
           accessibilityRole="alert"
           accessibilityOnShowAnnouncement="Be informed that a customized callout has been opened."
         >
-          <View style={{ height: 300, width: 500 }}>
+          <View style={{ padding: 20, borderWidth: 2, borderColor: 'black' }}>
             <Text>just some text so it does not take focus and is not empty.</Text>
           </View>
         </Callout>
