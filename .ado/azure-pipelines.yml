@@ -31,7 +31,7 @@ jobs:
       - script: |
           mkdir errorShots
         workingDirectory: apps/win32
-        displayName: "mkdir errorShots"
+        displayName: mkdir errorShots
         condition: succeededOrFailed()
 
       - script: |
