@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ScreenRect, Text, View, Switch } from 'react-native';
-import { Button, Callout, Separator, IFocusable, OnRestoreFocusEvent } from '@fluentui/react-native';
+import { Button, Callout, Separator, IFocusable, RestoreFocusEvent } from '@fluentui/react-native';
 import { fabricTesterStyles } from '../Common/styles';
 import { CALLOUT_TESTPAGE } from './consts';
 
@@ -69,11 +69,11 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
   }, [setIsCustomizedCalloutVisible, setShowCustomizedCallout]);
 
   const onRestoreFocusStandardCallout = React.useCallback(
-    (restoreFocusEvent: OnRestoreFocusEvent) => {
-      if (restoreFocusEvent.nativeEvent.containsFocus && decoyBtn1Ref && decoyBtn1Ref.current) {
-        decoyBtn1Ref.current.focus();
-      } else if (!restoreFocusEvent.nativeEvent.containsFocus && decoyBtn2Ref && decoyBtn2Ref.current) {
-        decoyBtn2Ref.current.focus();
+    (restoreFocusEvent: RestoreFocusEvent) => {
+      if (restoreFocusEvent?.nativeEvent?.containsFocus) {
+        decoyBtn1Ref?.current?.focus();
+      } else {
+        decoyBtn2Ref?.current?.focus();
       }
     },
     [decoyBtn1Ref, decoyBtn2Ref]

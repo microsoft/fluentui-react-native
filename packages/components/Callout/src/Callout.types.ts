@@ -26,7 +26,7 @@ export type DirectionalHint =
   | 'bottomCenter'
   | 'bottomRightEdge';
 
-export interface OnRestoreFocusEvent {
+export interface RestoreFocusEvent {
   nativeEvent: {
     /**
      * containsFocus is true if the Callout had focus while being dismissed.
@@ -111,7 +111,7 @@ export interface ICalloutProps extends ICalloutTokens {
    *
    * restoreFocusEvent.nativeEvent.containsFocus is true if the Callout had focus while being dismissed.
    */
-  onRestoreFocus?: (restoreFocusEvent: OnRestoreFocusEvent) => void;
+  onRestoreFocus?: (restoreFocusEvent: RestoreFocusEvent) => void;
 
   /**
    * Callback invoked when the callout has been shown.
