@@ -1,4 +1,4 @@
-import { flattenStyle, mergeAndFlattenStyles } from './Styles';
+import { flattenStyle, mergeAndFlattenStyles, memoAndMergeStyles } from './Styles';
 import { IFinalizeStyle, IStyleProp } from './Styles.types';
 
 const theme = {
@@ -165,5 +165,32 @@ describe('Style flatten and merge tests', () => {
   test('merge and finalize style', () => {
     const mergedAndFinal = mergeAndFlattenStyles(styleFinalizer, s1, s2);
     expect(mergedAndFinal).toEqual(sMergedFinal);
+  });
+
+  test('memo recursive arrays', () => {
+    const flattened = memoAndMergeStyles(s1);
+    const flattened2 = memoAndMergeStyles(s1);
+    expect(flattened).toEqual(s1flatten);
+    expect(flattened2).toBe(flattened);
+  });
+
+  test('memo flat style', () => {
+    const flattened = memoAndMergeStyles(s2);
+    const flattened2 = memoAndMergeStyles(s2);
+    expect(flattened).toBe(s2);
+    expect(flattened2).toBe(flattened);
+  });
+
+  test('memo and flatten multiple', () => {
+    const flattened = memoAndMergeStyles(s1, s2);
+    const flattened2 = memoAndMergeStyles(s1, s2);
+    expect(flattened).toEqual(sMerged);
+    expect(flattened2).toBe(flattened);
+  });
+
+  test('memo styles ignores undefined values', () => {
+    const result1 = memoAndMergeStyles(s1, s2, undefined, s1flatten);
+    const result2 = memoAndMergeStyles(s1, undefined, s2, s1flatten);
+    expect(result2).toBe(result1);
   });
 });

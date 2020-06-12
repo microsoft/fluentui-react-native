@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IRenderData, ISlotWithFilter, IComposable, IWithComposable, ISlots, IPropFilter, INativeSlotType } from './Composable.types';
-import { mergeSettings, mergeProps, ISlotProps } from '@uifabricshared/foundation-settings';
+import { mergeSettings, memoMergeProps, ISlotProps } from '@uifabricshared/foundation-settings';
 
 export type ISlotFn<TProps> = React.FunctionComponent<TProps> & {
   _canCompose?: boolean;
@@ -16,7 +16,7 @@ interface ISlotRenderInfo<TProps, TSlotProps, TState> {
 
 function _mergeAndFilterProps<TProps>(propsBase: TProps, propsExtra: TProps, filter?: IPropFilter): TProps {
   // do a basic merge, not mutating if nothing changed
-  let props = mergeProps<TProps>(propsBase, propsExtra);
+  let props = memoMergeProps<TProps>(propsBase, propsExtra);
   if (filter && props) {
     const removeMask = {};
     Object.getOwnPropertyNames(props).forEach(key => {
@@ -24,7 +24,7 @@ function _mergeAndFilterProps<TProps>(propsBase: TProps, propsExtra: TProps, fil
         removeMask[key] = undefined;
       }
     });
-    props = mergeProps<TProps>(props, removeMask as TProps);
+    props = memoMergeProps<TProps>(props, removeMask as TProps);
   }
   return props;
 }

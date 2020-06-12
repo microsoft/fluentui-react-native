@@ -30,7 +30,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/immutable-merge": "^0.5.33"
+    "@uifabricshared/immutable-merge": "^0.5.33",
+    "@fluentui-react-native/memo-cache": ">=0.1.0 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
