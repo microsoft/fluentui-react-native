@@ -2,6 +2,81 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Fri, 12 Jun 2020 03:17:59 GMT",
+      "tag": "@fluentui-react-native/callout_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "use findNodeHandle to avoid serializing refobject",
+            "author": "ppatboyd@outlook.com",
+            "commit": "f59a701b9ae9558bde8058a5a7199bf1a45313d8",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Jun 2020 23:53:15 GMT",
+      "tag": "@fluentui-react-native/callout_v0.7.8",
+      "version": "0.7.8",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' into button-tooltip",
+            "author": "lehon@microsoft.com",
+            "commit": "70f7d6d5972b384f2e8d4dd2626adda762c59206",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 09 Jun 2020 17:39:01 GMT",
+      "tag": "@fluentui-react-native/callout_v0.7.3",
+      "version": "0.7.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch dependencies to use greater than semver until we reach 1.0.0",
+            "author": "jasonmo@microsoft.com",
+            "commit": "8461668e0387928c0831846b219188a6d4408295",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 06 Jun 2020 03:03:17 GMT",
+      "tag": "@fluentui-react-native/callout_v0.7.1",
+      "version": "0.7.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "support keyboardFocus for Link and add focus visuals",
+            "author": "lehon@microsoft.com",
+            "commit": "effb17ada2fd26c6ba8f7cbb4ab7d7ddf8d74c49",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 05 Jun 2020 22:02:58 GMT",
+      "tag": "@fluentui-react-native/callout_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add setInitialFocus prop",
+            "author": "ppatboyd@outlook.com",
+            "commit": "55c14c9a1e77b2dc6f39b67a4540916f4d3ba0f0",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Jun 2020 22:06:07 GMT",
       "tag": "@fluentui-react-native/callout_v0.6.22",
       "version": "0.6.22",

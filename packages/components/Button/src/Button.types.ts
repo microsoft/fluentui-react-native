@@ -104,6 +104,7 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
   onClick?: () => void;
 
   testID?: string;
+  tooltip?: string;
 }
 
 export interface IButtonSlotProps {

@@ -2,6 +2,51 @@
   "name": "@uifabricshared/immutable-merge",
   "entries": [
     {
+      "date": "Thu, 11 Jun 2020 23:53:15 GMT",
+      "tag": "@uifabricshared/immutable-merge_v0.5.44",
+      "version": "0.5.44",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' into button-tooltip",
+            "author": "lehon@microsoft.com",
+            "commit": "70f7d6d5972b384f2e8d4dd2626adda762c59206",
+            "package": "@uifabricshared/immutable-merge"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 09 Jun 2020 17:39:01 GMT",
+      "tag": "@uifabricshared/immutable-merge_v0.5.39",
+      "version": "0.5.39",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch dependencies to use greater than semver until we reach 1.0.0",
+            "author": "jasonmo@microsoft.com",
+            "commit": "8461668e0387928c0831846b219188a6d4408295",
+            "package": "@uifabricshared/immutable-merge"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 06 Jun 2020 03:03:17 GMT",
+      "tag": "@uifabricshared/immutable-merge_v0.5.37",
+      "version": "0.5.37",
+      "comments": {
+        "none": [
+          {
+            "comment": "support keyboardFocus for Link and add focus visuals",
+            "author": "lehon@microsoft.com",
+            "commit": "effb17ada2fd26c6ba8f7cbb4ab7d7ddf8d74c49",
+            "package": "@uifabricshared/immutable-merge"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Jun 2020 22:06:07 GMT",
       "tag": "@uifabricshared/immutable-merge_v0.5.33",
       "version": "0.5.33",
