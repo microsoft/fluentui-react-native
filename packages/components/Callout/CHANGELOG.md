@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Tue, 09 Jun 2020 17:39:01 GMT and should not be manually modified.
+This log was last generated on Fri, 12 Jun 2020 03:17:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.0
+
+Fri, 12 Jun 2020 03:17:59 GMT
+
+### Minor changes
+
+- use findNodeHandle to avoid serializing refobject (ppatboyd@outlook.com)
 
 ## 0.7.3
 

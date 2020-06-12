@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Thu, 11 Jun 2020 23:53:15 GMT",
+      "tag": "@fluentui-react-native/link_v0.6.7",
+      "version": "0.6.7",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' into button-tooltip",
+            "author": "lehon@microsoft.com",
+            "commit": "70f7d6d5972b384f2e8d4dd2626adda762c59206",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 09 Jun 2020 17:39:01 GMT",
       "tag": "@fluentui-react-native/link_v0.6.2",
       "version": "0.6.2",

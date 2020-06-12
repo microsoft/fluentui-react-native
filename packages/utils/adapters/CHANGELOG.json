@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Thu, 11 Jun 2020 23:53:15 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.3.9",
+      "version": "0.3.9",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' into button-tooltip",
+            "author": "lehon@microsoft.com",
+            "commit": "70f7d6d5972b384f2e8d4dd2626adda762c59206",
+            "package": "@fluentui-react-native/adapters"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 09 Jun 2020 17:39:01 GMT",
       "tag": "@fluentui-react-native/adapters_v0.3.4",
       "version": "0.3.4",

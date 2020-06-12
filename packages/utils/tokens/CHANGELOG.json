@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Thu, 11 Jun 2020 23:53:15 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.4.44",
+      "version": "0.4.44",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' into button-tooltip",
+            "author": "lehon@microsoft.com",
+            "commit": "70f7d6d5972b384f2e8d4dd2626adda762c59206",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 09 Jun 2020 17:39:01 GMT",
       "tag": "@fluentui-react-native/tokens_v0.4.39",
       "version": "0.4.39",

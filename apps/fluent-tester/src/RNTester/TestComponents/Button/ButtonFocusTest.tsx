@@ -29,7 +29,7 @@ export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
         componentRef={buttonRef}
         accessibilityLabel="overridden button name"
       />
-      <Button content="Click to focus" onClick={onFocus} />
+      <Button content="Click to focus" onClick={onFocus} tooltip="button tooltip" />
     </Stack>
   );
 };
