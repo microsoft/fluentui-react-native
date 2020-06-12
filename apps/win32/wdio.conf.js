@@ -61,15 +61,16 @@ exports.config = {
   reporters: [
     'dot',
     'spec',
-    [
-      'junit',
-      {
-        outputDir: './reports/',
-        outputFileFormat: function (options) {
-          return 'wdio-' + options.cid + '-junit-reporter.xml';
-        },
-      },
-    ],
+    ['allure', { outputDir: 'allure-results' }],
+    // [
+    //   'junit',
+    //   {
+    //     outputDir: './reports/',
+    //     outputFileFormat: function (options) {
+    //       return 'wdio-' + options.cid + '-junit-reporter.xml';
+    //     },
+    //   },
+    // ],
   ],
 
   /*
@@ -127,6 +128,11 @@ exports.config = {
       rimraf.sync('./errorShots');
     }
     fs.mkdirSync('./errorShots');
+
+    if (fs.existsSync('./allure-results')) {
+      rimraf.sync('./allure-results');
+    }
+    fs.mkdirSync('./allure-results');
   },
   /**
    * Runs before a WebdriverIO command gets executed.
