@@ -11,7 +11,10 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "react": "^16.13.1",
+    "react-art": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-native": "0.62.2",
+    "react-native-web": "^0.12.3",
     "react-scripts": "3.4.1",
     "typescript": "~3.7.2"
   },
@@ -35,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-native": "0.62.2"
   }
 }
