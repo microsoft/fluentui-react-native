@@ -61,16 +61,13 @@ exports.config = {
   reporters: [
     'dot',
     'spec',
-    ['allure', { outputDir: 'allure-results' }],
-    // [
-    //   'junit',
-    //   {
-    //     outputDir: './reports/',
-    //     outputFileFormat: function (options) {
-    //       return 'wdio-' + options.cid + '-junit-reporter.xml';
-    //     },
-    //   },
-    // ],
+    [
+      'allure',
+      {
+        outputDir: 'allure-results',
+        disableWebdriverScreenshotsReporting: false,
+      },
+    ],
   ],
 
   /*

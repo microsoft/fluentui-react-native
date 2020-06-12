@@ -6,6 +6,7 @@
 - [React Native Windows Development Dependencies](https://microsoft.github.io/react-native-windows/docs/rnw-dependencies)
   - **NOTE:** Please make sure you grab all of the items listed there and the appropriate versions.
 - [WinAppDriver](https://github.com/microsoft/WinAppDriver) - Version 1.1
+- [Java 1.8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html) (Optional) - Used for generating in-depth after-action reports. More information in "Debugging E2E Failures" section below.
 - Enable [_Developer Mode_](https://docs.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development) in Windows settings
 
 ### UWP Additional Prerequisites
@@ -95,10 +96,30 @@ describe('Click on each test page and check if it renders', function() {
 
 # Debugging E2E Failures
 
-If one tests fails, it will cause every subsequent test to fail as well. Due to this structure, if you get a failing E2E run, you should find the first failing test and focus on fixing that one. In the example below, the SVG test is the one failing the run.
+If one tests fails, it will cause every subsequent test to fail as well. Due to this structure, if you get a failing E2E run, you should find the **first** failing test and focus on fixing that one.
 
-![E2E Error Debugging](../../../../assets/E2E_Error_Debugging.png)
+Having a clear and concise report on testing failures is key in efficient debugging. We're utilizing two report generator:
+
+1. **Spec Reporter** - Low overhead, easy to read, automatically runs with E2E testing. However, less information and less reliable.
+
+2. **Allure Reporter** - Creates in-depth reports with key information about each test. Must have Java 1.8 downloaded to create reports and requires running additional script after E2E testing is complete.
+
+## Using Spec Reporter
+
+You can view the spec report right as E2E testing is finished. It shows the failing tests and a brief explanation of what went wrong. However, in some cases when a redbox error occurs (mostly in Win32), these messages and report will not exist. This is because the FluentTester app becomes a non-responsive window, and WebDriverIO cannot close the window, which leaves the spec reporter in a bad state. In this case, I would recommend using the Allure Reporter.
+
+In the example below, the SVG test is the one failing the run, and at the bottom, you can see an error message.
+
+![E2E Error Debugging](../../../../assets/E2E_spec_reporter.png)
 
 When running E2E locally, after failing an E2E run, you will get a screenshot of the error in /errorShots/ of the platform you tested.
 
-For a failing E2E run in our CI, scroll up to find specific error messages. There's work being done right now to add better error messages/reporting to the CI.
+## Using Allure Reporter
+
+Allure Framework is a flexible lightweight multi-language test report tool that not only shows a very concise representation of what have been tested in a neat web report form, but allows everyone participating in the development process to extract maximum of useful information from everyday execution of tests.
+
+After E2E testing runs, allure creates a folder of XML files with all relevant information from the tests. In order to generate the report, you need to run the following command:
+
+- `yarn generate-report`
+
+This will bundle all the generated information and create a report for you to read.
