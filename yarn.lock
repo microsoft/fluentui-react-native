@@ -3654,9 +3654,9 @@
     pretty-ms "^6.0.0"
 
 "@wdio/sync@^5.20.1":
-  version "5.20.1"
-  resolved "https://registry.yarnpkg.com/@wdio/sync/-/sync-5.20.1.tgz#7423966e0e810187be13359ab53d07db9adbe464"
-  integrity sha512-HaXFSsVD7jtrvNJs2VOngCzvGZYZsekfg+OARO5twQHX5ajnwPEGGJebCGZ4I+1AQB0xRJjznyFwNpc6h4qyoQ==
+  version "5.23.0"
+  resolved "https://registry.yarnpkg.com/@wdio/sync/-/sync-5.23.0.tgz#7c531b5974609ac120d25304d8f73e2cb78093a1"
+  integrity sha512-i+ntMVXqKcdQRfnjZ0qCXUoPlQhK2/GwDeCeO35fBeLkd7hbo5r8jGd/maXgnL19Jscjeotid5w53HJqSDYCYA==
   dependencies:
     "@wdio/logger" "5.16.10"
   optionalDependencies:
