@@ -54,9 +54,10 @@ exports.config = {
   reporters: [
     'spec',
     [
-      'junit',
+      'allure',
       {
-        outputDir: './reports/',
+        outputDir: 'allure-results',
+        disableWebdriverScreenshotsReporting: false,
       },
     ],
   ],
@@ -116,6 +117,11 @@ exports.config = {
       rimraf.sync('./errorShots');
     }
     fs.mkdirSync('./errorShots');
+
+    if (fs.existsSync('./allure-results')) {
+      rimraf.sync('./allure-results');
+    }
+    fs.mkdirSync('./allure-results');
   },
   /**
    * Runs before a WebdriverIO command gets executed.

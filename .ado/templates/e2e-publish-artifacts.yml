@@ -3,6 +3,12 @@ parameters:
   applicationType:
 
 steps:
+  # Generate reports
+  - script: |
+      yarn generate-report
+    workingDirectory: apps\${{parameters.platform}}
+    displayName: generate ${{parameters.platform}} report
+
   # Copy errorShots to FluentTesterDump
   - task: CopyFiles@2
     displayName: Copy tree dump screenshots

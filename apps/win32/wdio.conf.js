@@ -59,7 +59,6 @@ exports.config = {
   },
 
   reporters: [
-    'dot',
     'spec',
     [
       'allure',

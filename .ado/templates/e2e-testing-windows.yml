@@ -62,10 +62,10 @@ steps:
     workingDirectory: apps\win32
     displayName: run Win32 E2E tests
 
-  - script: |
-      allure generate allure-results --clean
-    workingDirectory: apps\win32
-    displayName: 'generate Win32 report'
+  # - script: |
+  #     yarn generate-report
+  #   workingDirectory: apps\win32
+  #   displayName: 'generate Win32 report'
 
   - template: e2e-publish-artifacts.yml
     parameters:
