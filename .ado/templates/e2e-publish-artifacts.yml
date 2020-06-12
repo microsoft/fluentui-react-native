@@ -8,6 +8,7 @@ steps:
       yarn generate-report
     workingDirectory: apps\${{parameters.platform}}
     displayName: generate ${{parameters.platform}} report
+    condition: succeededOrFailed()
 
   # Copy errorShots to FluentTesterDump
   - task: CopyFiles@2
