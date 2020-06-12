@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Move findNodeHandle into useLayoutEffect",
+  "packageName": "@fluentui-react-native/checkbox",
+  "email": "ppatboyd@outlook.com",
+  "dependentChangeType": "patch",
+  "date": "2020-05-21T21:45:25.478Z"
+}
