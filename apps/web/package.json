@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fluentui/react-native": "^0.15.55",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -16,7 +17,8 @@
     "react-native": "0.62.2",
     "react-native-web": "^0.12.3",
     "react-scripts": "3.4.1",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "webpack": "4.42.0"
   },
   "scripts": {
     "start": "react-scripts start",
