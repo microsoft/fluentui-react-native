@@ -81,6 +81,7 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
           onDismiss={onDismissStandardCallout}
           onShow={onShowStandardCallout}
           accessibilityLabel="Standard Callout"
+          setInitialFocus
         >
           <View style={{ height: 200, width: 400 }}>
             <Button content="click to change anchor" onClick={toggleCalloutRef} />

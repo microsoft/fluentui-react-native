@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/persona",
   "entries": [
     {
+      "date": "Thu, 11 Jun 2020 23:53:15 GMT",
+      "tag": "@fluentui-react-native/persona_v0.5.45",
+      "version": "0.5.45",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' into button-tooltip",
+            "author": "lehon@microsoft.com",
+            "commit": "70f7d6d5972b384f2e8d4dd2626adda762c59206",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 09 Jun 2020 17:39:01 GMT",
+      "tag": "@fluentui-react-native/persona_v0.5.40",
+      "version": "0.5.40",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch dependencies to use greater than semver until we reach 1.0.0",
+            "author": "jasonmo@microsoft.com",
+            "commit": "8461668e0387928c0831846b219188a6d4408295",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 06 Jun 2020 03:03:17 GMT",
+      "tag": "@fluentui-react-native/persona_v0.5.38",
+      "version": "0.5.38",
+      "comments": {
+        "none": [
+          {
+            "comment": "support keyboardFocus for Link and add focus visuals",
+            "author": "lehon@microsoft.com",
+            "commit": "effb17ada2fd26c6ba8f7cbb4ab7d7ddf8d74c49",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 04 Jun 2020 22:15:30 GMT",
+      "tag": "@fluentui-react-native/persona_v0.5.35",
+      "version": "0.5.35",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update control to use fluentui-react-native text",
+            "author": "krsiler@microsoft.com",
+            "commit": "fb659219fcc84bb437515c97d816e82eb58e3fa9",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Jun 2020 22:06:07 GMT",
       "tag": "@fluentui-react-native/persona_v0.5.34",
       "version": "0.5.34",

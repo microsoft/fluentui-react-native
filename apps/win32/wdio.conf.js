@@ -4,11 +4,13 @@ const appPath = path.resolve(path.dirname(require.resolve('@office-iss/rex-win32
 const appArgs = 'basePath ' + path.resolve('dist') + ' plugin defaultplugin bundle index component FluentTester';
 const appDir = path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js'));
 
-const baseUrl = 'https://webdriver.io';
+const defaultWaitForTimeout = 10000;
+const defaultConnectionRetryTimeout = 15000;
+const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['../fluent-tester/src/E2E/**/specs/*.ts'],
+  specs: ['../fluent-tester/src/E2E/**/specs/*.win.ts'],
   exclude: [
     /* 'path/to/excluded/files' */
   ],
@@ -36,9 +38,8 @@ exports.config = {
 
   // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
   bail: 0,
-  baseUrl: baseUrl, // Shorten url command calls by setting a base URL.
-  waitforTimeout: 10000, // Default timeout for all waitForXXX commands.
-  connectionRetryTimeout: 9000, // Timeout for any WebDriver request to a driver or grid.
+  waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
+  connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
   connectionRetryCount: 2, // Maximum count of request retries to the Selenium server.
 
   port: 4723, // default appium port
@@ -52,10 +53,10 @@ exports.config = {
 
   framework: 'jasmine',
   jasmineNodeOpts: {
-    defaultTimeoutInterval: 10000
+    defaultTimeoutInterval: jasmineDefaultTimeout
   },
 
-  reporters: ['dot', 'spec'],
+  reporters: ['spec'],
 
   /*
    ** ===================

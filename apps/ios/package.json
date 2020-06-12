@@ -13,12 +13,13 @@
     "lint": "fluentui-scripts eslint",
     "start": "react-native start",
     "bundle": "fluentui-scripts metro --cli",
-    "bundle-dev": "fluentui-scripts metro --dev --cli"
+    "bundle-dev": "fluentui-scripts metro --dev --cli",
+    "ios": "react-native run-ios --project-path src"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",
-    "@uifabricshared/theming-react-native": "0.7.33",
-    "@uifabricshared/themed-stylesheet": "0.3.34",
+    "@uifabricshared/theming-react-native": "0.7.46",
+    "@uifabricshared/themed-stylesheet": "0.3.47",
     "react": "16.11.0",
     "react-native": "0.62.2"
   },

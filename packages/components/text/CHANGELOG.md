@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Tue, 19 May 2020 23:37:15 GMT and should not be manually modified.
+This log was last generated on Tue, 09 Jun 2020 17:39:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.40
+
+Tue, 09 Jun 2020 17:39:01 GMT
+
+### Patches
+
+- switch dependencies to use greater than semver until we reach 1.0.0 (jasonmo@microsoft.com)
+
+## 0.5.35
+
+Thu, 04 Jun 2020 22:15:30 GMT
+
+### Patches
+
+- undefined (krsiler@microsoft.com)
+- Update snapshots to reflect fontSize in CSS pixels (krsiler@microsoft.com)
 
 ## 0.5.25
 

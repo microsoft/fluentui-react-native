@@ -23,7 +23,7 @@ it('Text all tokens', () => {
     tokens: {
       fontFamily: 'Wingdings',
       fontWeight: '900',
-      fontSize: 15
+      fontSize: 20
     }
   });
   const tree = renderer.create(<BoldText>All tokens</BoldText>).toJSON();
