@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Fri, 12 Jun 2020 03:17:59 GMT",
+      "tag": "@fluentui-react-native/callout_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "use findNodeHandle to avoid serializing refobject",
+            "author": "ppatboyd@outlook.com",
+            "commit": "f59a701b9ae9558bde8058a5a7199bf1a45313d8",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Jun 2020 23:53:15 GMT",
       "tag": "@fluentui-react-native/callout_v0.7.8",
       "version": "0.7.8",
