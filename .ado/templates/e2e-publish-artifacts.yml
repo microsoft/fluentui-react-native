@@ -9,8 +9,8 @@ steps:
     inputs:
       sourceFolder: $(Build.SourcesDirectory)\apps\${{parameters.platform}}\errorShots
       targetFolder: $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
-    condition: succeededOrFailed()
 
+    # condition: succeededOrFailed()
   # Copy appium log to FluentTesterDump
   - task: CopyFiles@2
     displayName: Copy tree dump report logs
@@ -18,12 +18,12 @@ steps:
       sourceFolder: $(Build.SourcesDirectory)\apps\${{parameters.platform}}\reports\
       contents: "*"
       targetFolder: $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
-    condition: succeededOrFailed()
 
+    # condition: succeededOrFailed()
   # Publish FluentTesterDump
   - task: PublishBuildArtifacts@1
     displayName: "Publish Artifact:E2E_${{parameters.applicationType}}_Dump"
     inputs:
       artifactName: E2E_${{parameters.applicationType}}_Dump
       pathtoPublish: $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
-    condition: succeededOrFailed()
+    # condition: succeededOrFailed()

@@ -38,7 +38,7 @@ steps:
 
   # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
   - powershell: |
-      Start-Sleep -Seconds 60
+      Start-Sleep -Seconds 90
     displayName: "Wait for app to launch"
 
   # Kill FluentTester, leave server up and running. This was the only way I could get the server continuously running
@@ -50,17 +50,19 @@ steps:
   - script: |
       yarn e2etest
     workingDirectory: apps\windows
+    continueOnError: true
     displayName: "run UWP E2E tests"
-
-  - script: |
-      yarn e2etest
-    workingDirectory: apps\win32
-    displayName: run Win32 E2E tests
 
   - template: e2e-publish-artifacts.yml
     parameters:
       applicationType: UWP
       platform: windows
+
+  - script: |
+      yarn e2etest
+    workingDirectory: apps\win32
+    continueOnError: true
+    displayName: run Win32 E2E tests
 
   - template: e2e-publish-artifacts.yml
     parameters:

@@ -12,12 +12,15 @@ steps:
 
   - script: |
       yarn
+    continueOnError: false
     displayName: "yarn"
 
   - script: |
       yarn build
+    continueOnError: false
     displayName: "yarn build"
 
   - script: |
       yarn bundle
+    continueOnError: false
     displayName: "yarn bundle"
