@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Tue, 09 Jun 2020 17:39:01 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Jun 2020 23:53:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.0
+
+Thu, 11 Jun 2020 23:53:15 GMT
+
+### Minor changes
+
+- add tooltip prop to Button (lehon@microsoft.com)
 
 ## 0.8.4
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Tue, 09 Jun 2020 17:39:01 GMT and should not be manually modified.
+This log was last generated on Fri, 12 Jun 2020 03:17:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.50
+
+Fri, 12 Jun 2020 03:17:59 GMT
+
+### Patches
+
+- Move findNodeHandle into useLayoutEffect (ppatboyd@outlook.com)
 
 ## 0.3.43
 
