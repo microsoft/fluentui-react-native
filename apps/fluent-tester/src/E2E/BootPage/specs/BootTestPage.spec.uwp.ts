@@ -9,7 +9,7 @@ import RadioGroupTestPage from '../../RadioGroup/pages/RadioGroupTestPage.win';
 import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
 import TextTestPage from '../../Text/pages/TextTestPage.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
-//import SvgTestPage from '../../Svg/pages/SvgTestPage.win';
+// import SvgTestPage from '../../Svg/pages/SvgTestPage.win';
 
 const PAGE_TIMEOUT = 45000;
 
