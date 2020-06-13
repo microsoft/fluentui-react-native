@@ -9,6 +9,7 @@ steps:
     workingDirectory: apps\${{parameters.platform}}
     displayName: generate ${{parameters.platform}} report
     condition: succeededOrFailed()
+    timeoutInMinutes: 1
 
   # Copy errorShots to FluentTesterDump
   - task: CopyFiles@2
