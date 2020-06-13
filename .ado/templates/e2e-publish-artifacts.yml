@@ -3,12 +3,13 @@ parameters:
   applicationType:
 
 steps:
-  # Generate reports
+  # Generate reports. conitnueOnError is true because this task will always fail (until I figure out way to stop command before timeout)
   - script: |
       yarn generate-report
     workingDirectory: apps\${{parameters.platform}}
     displayName: generate ${{parameters.platform}} report
     condition: succeededOrFailed()
+    continueOnError: true
     timeoutInMinutes: 1
 
   # Copy errorShots to FluentTesterDump
@@ -31,6 +32,7 @@ steps:
   - powershell: |
       Move-Item -Path $(Build.SourcesDirectory)\apps\${{parameters.platform}}\allure-report -Destination $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
     displayName: Copy allure report
+    condition: succeededOrFailed()
 
   # Publish FluentTesterDump
   - task: PublishBuildArtifacts@1
