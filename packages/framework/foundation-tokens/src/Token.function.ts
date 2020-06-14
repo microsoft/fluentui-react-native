@@ -103,22 +103,18 @@ function _getCachedPropsForSlot<TProps, TTokens, TTheme>(
 ): TProps {
   // get the cache key for this entry
   const { tokens, tokenKeys, deltas } = tokenProps;
-  return getMemoValue(
-    () => {
-      let newProps: TProps = mergeProps<any>(
-        (props as unknown) as object,
-        slotName === 'root' ? tokenKeys : undefined,
-        (_processSlotEntries(tokens, theme, mappings) as unknown) as object,
-        _processStyleFunctions(mappings.functions, tokens, theme)
-      );
-      if (finalizer) {
-        newProps = finalizer(newProps, slotName);
-      }
-      return newProps;
-    },
-    slotName,
-    ...keys.map(val => (deltas[val] !== undefined ? deltas[val] : ''))
-  )[0];
+  return getMemoValue(() => {
+    let newProps: TProps = mergeProps<any>(
+      (props as unknown) as object,
+      slotName === 'root' ? tokenKeys : undefined,
+      (_processSlotEntries(tokens, theme, mappings) as unknown) as object,
+      _processStyleFunctions(mappings.functions, tokens, theme)
+    );
+    if (finalizer) {
+      newProps = finalizer(newProps, slotName);
+    }
+    return newProps;
+  }, [slotName, ...keys.map(val => (deltas[val] !== undefined ? deltas[val] : ''))])[0];
 }
 
 /**

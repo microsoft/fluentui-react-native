@@ -6,7 +6,7 @@ import { IComponentTokens, processTokens, ITargetHasToken, buildComponentTokens 
 import { getTheme, ThemeContext } from '@uifabricshared/theming-react-native';
 import { IWithComposable, AsObject, IComposableDefinition, INativeSlotType } from '@uifabricshared/foundation-composable';
 import { IComposeOptions, IStylingSettings, IDefineUseComposeStyling } from './compose.types';
-import { memoValue, GetMemoValue } from '@fluentui-react-native/memo-cache';
+import { getMemoCache, GetMemoValue } from '@fluentui-react-native/memo-cache';
 
 /* tslint:disable-next-line no-any */
 export function getOptionsFromObj<TComponent>(obj: any): TComponent | undefined {
@@ -84,7 +84,7 @@ export function initializeStyling<
   options.resolvedTokens = buildComponentTokens<TSlotProps, TTokens, ITheme>(styles, _getHasToken(slots));
 
   // memo cache root for this component, keyed on options
-  const [, getMemoValue] = memoValue<TSlotProps, TSlotProps>(null, options);
+  const getMemoValue = getMemoCache<TSlotProps>(options);
 
   // create a useStyling implementation for this component type (per type, not per instance)
   return (props: TProps, lookupOverride?: IOverrideLookup) => {

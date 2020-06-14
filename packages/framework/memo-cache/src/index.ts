@@ -1,1 +1,1 @@
-export { memoValue, GetMemoValue } from './memoValue';
+export { getMemoCache, GetMemoValue } from './memoValue';

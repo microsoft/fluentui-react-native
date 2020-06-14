@@ -1,7 +1,7 @@
 import { IComponentSettings, mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISettingsEntry, ISettingsFromTheme } from './CustomSettings.types';
 import { mergeBaseSettings, getThemedSettings } from './CustomSettings';
-import { memoValue } from '@fluentui-react-native/memo-cache';
+import { getMemoCache } from '@fluentui-react-native/memo-cache';
 
 interface IMockTheme {
   palette: {
@@ -180,19 +180,19 @@ describe('Custom settings tests', () => {
   });
 
   test('getThemedSettings caches merge result', () => {
-    const [, newCache] = memoValue(null, {});
+    const newCache = getMemoCache();
     const { settings } = getThemedSettings(customSettings2, _theme, newCache, {}, getSettings);
     expect(getThemedSettings(customSettings2, _theme, newCache, {}, getSettings).settings).toBe(settings);
   });
 
   test('getThemedSettings resolves overrides', () => {
-    const [, newCache] = memoValue(null, {});
+    const newCache = getMemoCache();
     const { settings } = getThemedSettings(customSettings1, _theme, newCache, { hovered: true }, getSettings);
     expect(settings.root).toEqual(val1rootHovered);
   });
 
   test('getThemedSettings resolves multiple overrides', () => {
-    const [, newCache] = memoValue(null, {});
+    const newCache = getMemoCache();
     const { settings } = getThemedSettings(customSettings1, _theme, newCache, { hovered: true, primary: true }, getSettings);
     expect(settings.root).toEqual(val1primaryHovered);
   });

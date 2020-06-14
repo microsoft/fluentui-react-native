@@ -51,12 +51,12 @@ export function getThemedSettings<TSettings extends IComponentSettings, TTheme>(
   getFromTheme?: IGetSettingsFromTheme<TSettings, TTheme>
 ): { settings: TSettings | undefined; getMemoValue: GetMemoValue<TSettings, TSettings> } {
   // resolve the settings for this component, keyed on the theme
-  let [settings, getMemoValue] = memoValue(() => mergeBaseSettings(customSettings, theme, getFromTheme), theme);
+  let [settings, getMemoValue] = memoValue(() => mergeBaseSettings(customSettings, theme, getFromTheme), [theme]);
 
   // if overrides are set, resolve the override settings, keyed on the applied overrides
   const overrides = getActiveOverrides(settings, hasOverride);
   if (overrides.length > 0) {
-    [settings, getMemoValue] = getMemoValue(() => resolveSettingsOverrides(settings, hasOverride) as TSettings, ...overrides);
+    [settings, getMemoValue] = getMemoValue(() => resolveSettingsOverrides(settings, hasOverride) as TSettings, overrides);
   }
 
   // return the merged settings and a query routine to go deeper in the cache

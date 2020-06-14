@@ -66,7 +66,7 @@ export function mockCreate<TProps extends object, TSlotProps extends ISlotProps,
       Object.keys(slots).forEach((slotName: string) => {
         const slot = slots[slotName];
         if (slot.__options && newSettings[slotName]) {
-          const [, slotCache] = cache(null, slotName);
+          const [, slotCache] = cache(null, [slotName]);
           const slotSettings = slot(newSettings[slotName] || {}, {}, theme, slotCache, false);
           const rootKey = 'root';
           if (slotSettings[rootKey]) {

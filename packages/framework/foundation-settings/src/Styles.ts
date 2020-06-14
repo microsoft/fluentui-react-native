@@ -1,6 +1,6 @@
 import { immutableMerge } from '@uifabricshared/immutable-merge';
 import { IFinalizeStyle, IStyleProp } from './Styles.types';
-import { memoValue } from '@fluentui-react-native/memo-cache';
+import { getMemoCache } from '@fluentui-react-native/memo-cache';
 
 /**
  * Take a react-native style, which may be a recursive array, and return as a flattened
@@ -43,12 +43,14 @@ export function mergeAndFlattenStyles(finalizer: IFinalizeStyle | undefined, ...
   return merged;
 }
 
+const _styleCache = getMemoCache();
+
 export function memoAndMergeStyles(...styles: IStyleProp<object>[]): object | undefined {
   // filter the style set to just objects (which might be arrays or plain style objects)
   const inputs = styles.filter(s => typeof s === 'object') as object[];
 
   // now memo the results if there is more than one element or if the one element is an array
   return inputs.length > 1 || (inputs.length === 1 && Array.isArray(inputs[0]))
-    ? memoValue(() => mergeAndFlattenStyles(undefined, ...inputs), ...inputs)[0]
+    ? _styleCache(() => mergeAndFlattenStyles(undefined, ...inputs), inputs)[0]
     : inputs[0] || {};
 }
