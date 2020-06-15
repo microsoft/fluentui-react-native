@@ -1,4 +1,4 @@
-import { getMemoCache } from './memoValue';
+import { getMemoCache } from './getMemoCache';
 
 interface TestObj {
   id: number;
@@ -52,6 +52,14 @@ describe('getMemoCache unit tests', () => {
     const keys = ['hello', 'world'];
     const [o1] = memoValue(fn, keys);
     const [o2] = memoValue(fn, keys);
+    expect(o2).toBe(o1);
+  });
+
+  test('memo calls function only once for empty inputs', () => {
+    const memoValue = getMemoCache();
+    const fn = getObjFactory();
+    const [o1] = memoValue(fn, undefined);
+    const [o2] = memoValue(fn, undefined);
     expect(o2).toBe(o1);
   });
 
