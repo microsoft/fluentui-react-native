@@ -57,6 +57,11 @@ steps:
   #     applicationType: UWP
   #     platform: windows
 
+  # Performance Reasons
+  - powershell: |
+      Start-Sleep -Seconds 30
+    displayName: "Performance Delay"
+
   - script: |
       yarn e2etest
     workingDirectory: apps\win32

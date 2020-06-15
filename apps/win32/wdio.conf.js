@@ -42,7 +42,7 @@ exports.config = {
   bail: 0,
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
-  connectionRetryCount: 2, // Maximum count of request retries to the Selenium server.
+  connectionRetryCount: 1, // Maximum count of request retries to the Selenium server.
 
   port: 4723, // default appium port
   services: ['appium'],
@@ -105,19 +105,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  // beforeSession: function (config, capabilities, specs) {
-  // },
-  /**
-   * Gets executed before test execution begins. At this point you can access to all global
-   * variables like `browser`. It is the perfect place to define custom commands.
-   * @param {Array.<Object>} capabilities list of capabilities details
-   * @param {Array.<String>} specs List of spec file paths that are to be run
-   */
-  before: function () {
-    // not needed for Cucumber
-    require('ts-node').register({ files: true });
-    browser.maximizeWindow();
-
+  beforeSession: function (config, capabilities, specs) {
     // Delete old screenshots and create empty directory
     if (fs.existsSync('./errorShots')) {
       rimraf.sync('./errorShots');
@@ -128,6 +116,17 @@ exports.config = {
       rimraf.sync('./allure-results');
     }
     fs.mkdirSync('./allure-results');
+  },
+  /**
+   * Gets executed before test execution begins. At this point you can access to all global
+   * variables like `browser`. It is the perfect place to define custom commands.
+   * @param {Array.<Object>} capabilities list of capabilities details
+   * @param {Array.<String>} specs List of spec file paths that are to be run
+   */
+  before: function () {
+    // not needed for Cucumber
+    require('ts-node').register({ files: true });
+    browser.maximizeWindow();
   },
   /**
    * Runs before a WebdriverIO command gets executed.
