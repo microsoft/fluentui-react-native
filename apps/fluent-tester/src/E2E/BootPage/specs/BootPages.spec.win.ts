@@ -13,73 +13,71 @@ import TextTestPage from '../../Text/pages/TextTestPage.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
 // import SvgTestPage from '../../Svg/pages/SvgTestPage.win';
 
-const PAGE_TIMEOUT = 45000;
+// const PAGE_TIMEOUT = 45000;
 
 // Before testing begins, allow 45 seconds for bundle to load (WebDriverIO)
-beforeAll(() => {
-  BootTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
-});
+// beforeAll(() => {
+//   BootTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+// });
 
 describe('Click on each test page and check if it renders', function () {
   it('Button Test Page', () => {
     BootTestPage.clickAndGoToButtonPage();
-    ButtonTestPage.waitForPageDisplayed(3000);
+    // ButtonTestPage.waitForPageDisplayed(3000);
     expect(ButtonTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Callout Test Page', () => {
     BootTestPage.clickAndGoToCalloutPage();
-    CalloutTestPage.waitForPageDisplayed(3000);
+    // CalloutTestPage.waitForPageDisplayed(3000);
     expect(CalloutTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Checkbox Test Page', () => {
     BootTestPage.clickAndGoToCheckboxPage();
-    CheckboxTestPage.waitForPageDisplayed(3000);
-    //browser.react$('Text').click();
-    //expect(browser.react$('Checkbox', { props: { label: 'Checked checkbox (uncontrolled)'}})).toBeNull();
+    // CheckboxTestPage.waitForPageDisplayed(3000);
     expect(CheckboxTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('FocusTrapZone Test Page', () => {
     BootTestPage.clickAndGoToFocusTrapZonePage();
-    FocusTrapZoneTestPage.waitForPageDisplayed(3000);
+    // FocusTrapZoneTestPage.waitForPageDisplayed(3000);
     expect(FocusTrapZoneTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Link Test Page', () => {
     BootTestPage.clickAndGoToLinkPage();
-    LinkTestPage.waitForPageDisplayed(3000);
+    // LinkTestPage.waitForPageDisplayed(3000);
     expect(LinkTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Persona Test Page', () => {
     BootTestPage.clickAndGoToPersonaPage();
-    PersonaTestPage.waitForPageDisplayed(3000);
+    // PersonaTestPage.waitForPageDisplayed(3000);
     expect(PersonaTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('PersonaCoin Test Page', () => {
     BootTestPage.clickAndGoToPersonaCoinPage();
-    PersonaCoinTestPage.waitForPageDisplayed(3000);
+    // PersonaCoinTestPage.waitForPageDisplayed(3000);
     expect(PersonaCoinTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Pressable Test Page', () => {
     BootTestPage.clickAndGoToPressablePage();
-    PressableTestPage.waitForPageDisplayed(3000);
+    // PressableTestPage.waitForPageDisplayed(3000);
     expect(PressableTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('RadioGroup Test Page', () => {
     BootTestPage.clickAndGoToRadioGroupPage();
-    RadioGroupTestPage.waitForPageDisplayed(3000);
+    // RadioGroupTestPage.waitForPageDisplayed(3000);
     expect(RadioGroupTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Separator Test Page', () => {
     BootTestPage.clickAndGoToSeparatorPage();
-    SeparatorTestPage.waitForPageDisplayed(3000);
+    // SeparatorTestPage.waitForPageDisplayed(3000);
     expect(SeparatorTestPage.isPageLoaded()).toBeTruthy();
   });
 
@@ -91,13 +89,13 @@ describe('Click on each test page and check if it renders', function () {
 
   it('Text Test Page', () => {
     BootTestPage.clickAndGoToTextPage();
-    TextTestPage.waitForPageDisplayed(3000);
+    // TextTestPage.waitForPageDisplayed(3000);
     expect(TextTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Theme Test Page', () => {
     BootTestPage.clickAndGoToThemePage();
-    ThemeTestPage.waitForPageDisplayed(3000);
+    // ThemeTestPage.waitForPageDisplayed(3000);
     expect(ThemeTestPage.isPageLoaded()).toBeTruthy();
   });
 });
