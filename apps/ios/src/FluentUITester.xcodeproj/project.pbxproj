@@ -13,11 +13,13 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7DF8DF52D6D1EF6F591FBFF8 /* libPods-FluentUITester.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF614AD8FFCE1B31EDC8C4B5 /* libPods-FluentUITester.a */; };
 		9F986B75244F5EAC0068CA9B /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F986B74244F5EAC0068CA9B /* Dummy.swift */; };
+		9FAFEC9124888902005B3023 /* FRNAvatarViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FAFEC9024888901005B3023 /* FRNAvatarViewManager.m */; };
+		9FAFEC9324888921005B3023 /* FRNAvatar.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FAFEC9224888921005B3023 /* FRNAvatar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* FluentUITester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = FluentUITester.app; path = "FluentUITester-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* FluentUITester-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FluentUITester-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = FluentUITester/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = FluentUITester/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -31,6 +33,10 @@
 		9F3A29F4244F657400A401D2 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		9F3A29F5244F658400A401D2 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		9F986B74244F5EAC0068CA9B /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
+		9FAFEC8F248888F2005B3023 /* FRNAvatarViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRNAvatarViewManager.h; sourceTree = "<group>"; };
+		9FAFEC9024888901005B3023 /* FRNAvatarViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRNAvatarViewManager.m; sourceTree = "<group>"; };
+		9FAFEC9224888921005B3023 /* FRNAvatar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRNAvatar.m; sourceTree = "<group>"; };
+		9FAFEC942488892C005B3023 /* FRNAvatar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRNAvatar.h; sourceTree = "<group>"; };
 		A11B7AD9F208A1A9A34E9C99 /* Pods-FluentUITester-FluentUITesterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FluentUITester-FluentUITesterTests.release.xcconfig"; path = "Target Support Files/Pods-FluentUITester-FluentUITesterTests/Pods-FluentUITester-FluentUITesterTests.release.xcconfig"; sourceTree = "<group>"; };
 		B7FF3B9B45E58F40D42487A2 /* Pods-FluentUITester.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FluentUITester.release.xcconfig"; path = "Target Support Files/Pods-FluentUITester/Pods-FluentUITester.release.xcconfig"; sourceTree = "<group>"; };
 		C04065D4BD5AD9F3D52CA8FB /* libPods-FluentUITester-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FluentUITester-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +61,7 @@
 		13B07FAE1A68108700A75B9A /* FluentUITester */ = {
 			isa = PBXGroup;
 			children = (
+				9FAFEC8E248888CE005B3023 /* Avatar */,
 				9F986B6D244F5CCC0068CA9B /* Config */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -105,7 +112,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* FluentUITester.app */,
+				13B07F961A680F5B00A75B9A /* FluentUITester-iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,6 +125,17 @@
 				9F3A29F5244F658400A401D2 /* Release.xcconfig */,
 			);
 			name = Config;
+			sourceTree = "<group>";
+		};
+		9FAFEC8E248888CE005B3023 /* Avatar */ = {
+			isa = PBXGroup;
+			children = (
+				9FAFEC8F248888F2005B3023 /* FRNAvatarViewManager.h */,
+				9FAFEC9024888901005B3023 /* FRNAvatarViewManager.m */,
+				9FAFEC9224888921005B3023 /* FRNAvatar.m */,
+				9FAFEC942488892C005B3023 /* FRNAvatar.h */,
+			);
+			name = Avatar;
 			sourceTree = "<group>";
 		};
 		AE22543BE0FB6AF2B7E4D506 /* Pods */ = {
@@ -144,6 +162,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				6564E3B149F2EA72D99CD0D8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -151,7 +170,7 @@
 			);
 			name = FluentUITester;
 			productName = FluentUITester;
-			productReference = 13B07F961A680F5B00A75B9A /* FluentUITester.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* FluentUITester-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -212,6 +231,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../../../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
+		6564E3B149F2EA72D99CD0D8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FluentUITester/Pods-FluentUITester-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/MicrosoftFluentUI/FluentUIResources-ios.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FluentUIResources-ios.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FluentUITester/Pods-FluentUITester-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		BFC73051CC2C5CD08789453C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -262,6 +299,8 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				9F986B75244F5EAC0068CA9B /* Dummy.swift in Sources */,
+				9FAFEC9124888902005B3023 /* FRNAvatarViewManager.m in Sources */,
+				9FAFEC9324888921005B3023 /* FRNAvatar.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,6 +324,27 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9F3A29F4244F657400A401D2 /* Debug.xcconfig */;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/DoubleConversion\"",
+					"\"${PODS_ROOT}/Headers/Public/FBLazyVector\"",
+					"\"${PODS_ROOT}/Headers/Public/FBReactNativeSpec\"",
+					"\"${PODS_ROOT}/Headers/Public/MicrosoftFluentUI\"",
+					"\"${PODS_ROOT}/Headers/Public/RCTRequired\"",
+					"\"${PODS_ROOT}/Headers/Public/RCTTypeSafety\"",
+					"\"${PODS_ROOT}/Headers/Public/React-Core\"",
+					"\"${PODS_ROOT}/Headers/Public/React-RCTText\"",
+					"\"${PODS_ROOT}/Headers/Public/React-cxxreact\"",
+					"\"${PODS_ROOT}/Headers/Public/React-jsi\"",
+					"\"${PODS_ROOT}/Headers/Public/React-jsiexecutor\"",
+					"\"${PODS_ROOT}/Headers/Public/React-jsinspector\"",
+					"\"${PODS_ROOT}/Headers/Public/ReactCommon\"",
+					"\"${PODS_ROOT}/Headers/Public/Yoga\"",
+					"\"${PODS_ROOT}/Headers/Public/glog\"",
+					"\"$(PODS_ROOT)/Headers/Private/React-Core\"",
+					"\"$(PODS_ROOT)/Headers/Public/MicrosoftFluentUI\"/**",
+				);
 			};
 			name = Debug;
 		};
@@ -292,6 +352,27 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9F3A29F5244F658400A401D2 /* Release.xcconfig */;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/DoubleConversion\"",
+					"\"${PODS_ROOT}/Headers/Public/FBLazyVector\"",
+					"\"${PODS_ROOT}/Headers/Public/FBReactNativeSpec\"",
+					"\"${PODS_ROOT}/Headers/Public/MicrosoftFluentUI\"",
+					"\"${PODS_ROOT}/Headers/Public/RCTRequired\"",
+					"\"${PODS_ROOT}/Headers/Public/RCTTypeSafety\"",
+					"\"${PODS_ROOT}/Headers/Public/React-Core\"",
+					"\"${PODS_ROOT}/Headers/Public/React-RCTText\"",
+					"\"${PODS_ROOT}/Headers/Public/React-cxxreact\"",
+					"\"${PODS_ROOT}/Headers/Public/React-jsi\"",
+					"\"${PODS_ROOT}/Headers/Public/React-jsiexecutor\"",
+					"\"${PODS_ROOT}/Headers/Public/React-jsinspector\"",
+					"\"${PODS_ROOT}/Headers/Public/ReactCommon\"",
+					"\"${PODS_ROOT}/Headers/Public/Yoga\"",
+					"\"${PODS_ROOT}/Headers/Public/glog\"",
+					"\"$(PODS_ROOT)/Headers/Private/React-Core\"",
+					"\"$(PODS_ROOT)/Headers/Public/MicrosoftFluentUI\"/**",
+				);
 			};
 			name = Release;
 		};

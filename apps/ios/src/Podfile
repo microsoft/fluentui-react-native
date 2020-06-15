@@ -77,4 +77,5 @@ target 'FluentUITester' do
   pod 'glog', :podspec => "#{rn_path}/third-party-podspecs/glog.podspec"
   pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
 
+  pod 'MicrosoftFluentUI', '~> 0.1.0'
 end

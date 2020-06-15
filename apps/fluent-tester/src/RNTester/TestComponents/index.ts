@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { AvatarTest, HOMEPAGE_AVATAR_BUTTON } from './Avatar';
 import { ButtonFocusTest, HOMEPAGE_BUTTON_BUTTON } from './Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './Checkbox';
@@ -20,6 +21,11 @@ export type TestDescription = {
 };
 
 export const allTestComponents: TestDescription[] = [
+  {
+    name: 'Avatar Test',
+    component: AvatarTest,
+    testPage: HOMEPAGE_AVATAR_BUTTON
+  },
   {
     name: 'Button Test',
     component: ButtonFocusTest,

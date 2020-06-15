@@ -1,3 +1,4 @@
+export * from '@fluentui-react-native/avatar';
 export * from '@fluentui-react-native/button';
 export * from '@fluentui-react-native/callout';
 export * from '@fluentui-react-native/checkbox';
