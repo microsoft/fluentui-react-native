@@ -47,6 +47,11 @@ steps:
       applicationType: UWP
       platform: windows
 
+  # Necessary for Appium server to run twice (for UWP and Win32). One instance at a time
+  - powershell: |
+      Stop-Process -Name node
+    displayName: "Kill node Process"
+
   # Performance Reasons
   - powershell: |
       Start-Sleep -Seconds 30
