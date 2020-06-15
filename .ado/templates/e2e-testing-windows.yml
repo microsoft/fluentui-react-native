@@ -46,15 +46,18 @@ steps:
     parameters:
       applicationType: UWP
       platform: windows
+
   # Performance Reasons
-  # - powershell: |
-  #     Start-Sleep -Seconds 30
-  #   displayName: "Performance Delay"
-  # - script: |
-  #     yarn e2etest
-  #   workingDirectory: apps\win32
-  #   displayName: run Win32 E2E tests
-  # - template: e2e-publish-artifacts.yml
-  #   parameters:
-  #     applicationType: win32
-  #     platform: win32
+  - powershell: |
+      Start-Sleep -Seconds 30
+    displayName: "Performance Delay"
+
+  - script: |
+      yarn e2etest
+    workingDirectory: apps\win32
+    displayName: run Win32 E2E tests
+
+  - template: e2e-publish-artifacts.yml
+    parameters:
+      applicationType: win32
+      platform: win32
