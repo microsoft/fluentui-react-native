@@ -144,8 +144,9 @@ exports.config = {
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
    */
-  // beforeTest: function (test, context) {
-  // },
+  beforeTest: function (test, context) {
+    browser.startRecordingScreen();
+  },
   /**
    * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
    * beforeEach in Mocha)
@@ -164,6 +165,7 @@ exports.config = {
   afterTest: function (test) {
     // if test passed, ignore, else take and save screenshot.
     if (test.passed) {
+      browser.stopRecordingScreen();
       return;
     }
 
@@ -171,10 +173,9 @@ exports.config = {
     const fileName = encodeURIComponent(test.title.replace(/\s+/g, '-'));
 
     // build file path
-    const filePath = './errorShots/' + fileName + '.png';
+    const videoFilePath = './errorShots/' + fileName + '.mp4';
 
-    // save screenshot
-    browser.saveScreenshot(filePath);
+    browser.saveRecordingScreen(videoFilePath);
   },
 
   /**
