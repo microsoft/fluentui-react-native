@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theming-ramp",
-  "version": "0.9.53",
+  "version": "0.9.54",
   "description": "Theming Library",
   "repository": {
     "type": "git",
@@ -30,8 +30,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": ">=0.5.54 <1.0.0",
-    "@uifabricshared/immutable-merge": ">=0.5.54 <1.0.0"
+    "@uifabricshared/foundation-settings": ">=0.5.55 <1.0.0",
+    "@uifabricshared/immutable-merge": ">=0.5.55 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

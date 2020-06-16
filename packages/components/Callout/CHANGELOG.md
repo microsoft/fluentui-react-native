@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Fri, 12 Jun 2020 03:17:59 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Jun 2020 23:13:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.0
+
+Tue, 16 Jun 2020 23:13:19 GMT
+
+### Minor changes
+
+- Add onRestoreFocus callback and improve test page capabilities (ppatboyd@outlook.com)
 
 ## 0.8.0
 

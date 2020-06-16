@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/themed-settings",
-  "version": "0.4.54",
+  "version": "0.4.55",
   "description": "Package which drives custom cacheable settings for a component",
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": ">=0.5.54 <1.0.0"
+    "@uifabricshared/foundation-settings": ">=0.5.55 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
