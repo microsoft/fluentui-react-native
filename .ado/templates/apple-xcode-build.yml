@@ -19,8 +19,8 @@ steps:
     displayName: "pod install"
 
   - bash: |
-      echo "cd apps/$platform_directory && yarn ios"
-      cd apps/$platform_directory && yarn ios
+      echo "cd apps/$platform_directory && yarn $platform_directory"
+      cd apps/$platform_directory && yarn $platform_directory
     env:
       platform_directory: ${{ parameters.relative_directory }}
-    displayName: "yarn ios"
+    displayName: "yarn ios/macos"
