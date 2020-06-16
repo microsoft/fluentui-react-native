@@ -26,7 +26,14 @@ export type DirectionalHint =
   | 'bottomCenter'
   | 'bottomRightEdge';
 
-export interface ICalloutTokens extends IBackgroundColorTokens, IBorderTokens {
+export interface OmittedBorderTokens {
+  borderRadius?: number | string;
+  borderStyle?: ViewStyle['borderStyle'];
+}
+
+export type CalloutBorderTokens = Omit<IBorderTokens, keyof OmittedBorderTokens>;
+
+export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTokens {
   /**
    * AnchorRect arbitrary anchor rectangle; coordinate system is in DIPs, relative
    * to the React surface origin.
