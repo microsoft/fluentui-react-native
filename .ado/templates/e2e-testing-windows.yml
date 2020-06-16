@@ -61,6 +61,7 @@ steps:
       yarn e2etest
     workingDirectory: apps\win32
     displayName: run Win32 E2E tests
+    condition: succeededOrFailed()
 
   - template: e2e-publish-artifacts.yml
     parameters:
