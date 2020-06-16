@@ -51,11 +51,13 @@ steps:
   - powershell: |
       Stop-Process -Name node
     displayName: "Kill node Process"
+    condition: succeededOrFailed()
 
   # Performance Reasons
   - powershell: |
       Start-Sleep -Seconds 30
     displayName: "Performance Delay"
+    condition: succeededOrFailed()
 
   - script: |
       yarn e2etest
