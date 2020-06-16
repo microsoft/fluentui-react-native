@@ -11,7 +11,7 @@ import RadioGroupTestPage from '../../RadioGroup/pages/RadioGroupTestPage.win';
 import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
 import TextTestPage from '../../Text/pages/TextTestPage.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
-// import SvgTestPage from '../../Svg/pages/SvgTestPage.win';
+import SvgTestPage from '../../Svg/pages/SvgTestPage.win';
 
 const BOOT_APP_TIMEOUT = 60000;
 
@@ -74,11 +74,11 @@ describe('Click on each test page and check if it renders', function () {
     expect(SeparatorTestPage.isPageLoaded()).toBeTruthy();
   });
 
-  // it('Svg Test Page', () => {
-  //   BootTestPage.clickAndGoToSvgPage();
-  //   SvgTestPage.waitForPageDisplayed(3000);
-  //   expect(SvgTestPage.isPageLoaded()).toBeTruthy();
-  // });
+  it('Svg Test Page', () => {
+    BootTestPage.clickAndGoToSvgPage();
+    SvgTestPage.waitForPageDisplayed(3000);
+    expect(SvgTestPage.isPageLoaded()).toBeTruthy();
+  });
 
   it('Text Test Page', () => {
     BootTestPage.clickAndGoToTextPage();
