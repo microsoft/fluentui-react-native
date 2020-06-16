@@ -1,8 +1,72 @@
 # Change Log - @fluentui-react-native/build-tools
 
-This log was last generated on Fri, 12 Jun 2020 03:17:59 GMT and should not be manually modified.
+This log was last generated on Tue, 16 Jun 2020 17:24:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Tue, 16 Jun 2020 17:24:49 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Mon, 15 Jun 2020 22:59:27 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Mon, 15 Jun 2020 22:19:40 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Fri, 12 Jun 2020 22:02:43 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Fri, 12 Jun 2020 20:35:48 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Fri, 12 Jun 2020 20:23:30 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Fri, 12 Jun 2020 18:00:30 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Fri, 12 Jun 2020 17:45:09 GMT
+
+### Minor changes
+
+- get just command that works with cli (jasonmo@microsoft.com)
 
 ## 0.3.0
 
