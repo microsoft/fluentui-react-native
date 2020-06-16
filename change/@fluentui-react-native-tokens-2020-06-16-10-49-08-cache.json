@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "add memo-cache package and consume it in the core framework",
+  "packageName": "@fluentui-react-native/tokens",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-06-16T17:49:08.951Z"
+}
