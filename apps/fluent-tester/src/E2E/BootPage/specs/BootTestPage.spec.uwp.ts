@@ -11,77 +11,81 @@ import TextTestPage from '../../Text/pages/TextTestPage.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
 import SvgTestPage from '../../Svg/pages/SvgTestPage.win';
 
-const PAGE_TIMEOUT = 45000;
+const BOOT_APP_TIMEOUT = 60000;
+const PAGE_TIMEOUT = 3000;
 
-// Before testing begins, allow 45 seconds for bundle to load (WebDriverIO)
-beforeAll(() => {
-  BootTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+// Before testing begins, allow up to 60 seconds for bundle to load (WebDriverIO)
+describe('Open the app', function() {
+  it('Boot app', () => {
+    BootTestPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
+    expect(BootTestPage.isPageLoaded()).toBeTruthy();
+  });
 });
 
 describe('Click on each test page and check if it renders', function () {
   it('Button Test Page', () => {
     BootTestPage.clickAndGoToButtonPage();
-    ButtonTestPage.waitForPageDisplayed(3000);
+    ButtonTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(ButtonTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Callout Test Page', () => {
     BootTestPage.clickAndGoToCalloutPage();
-    CalloutTestPage.waitForPageDisplayed(3000);
+    CalloutTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(CalloutTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Checkbox Test Page', () => {
     BootTestPage.clickAndGoToCheckboxPage();
-    CheckboxTestPage.waitForPageDisplayed(3000);
+    CheckboxTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(CheckboxTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Link Test Page', () => {
     BootTestPage.clickAndGoToLinkPage();
-    LinkTestPage.waitForPageDisplayed(3000);
+    LinkTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(LinkTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('PersonaCoin Test Page', () => {
     BootTestPage.clickAndGoToPersonaCoinPage();
-    PersonaCoinTestPage.waitForPageDisplayed(3000);
+    PersonaCoinTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(PersonaCoinTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Pressable Test Page', () => {
     BootTestPage.clickAndGoToPressablePage();
-    PressableTestPage.waitForPageDisplayed(3000);
+    PressableTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(PressableTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('RadioGroup Test Page', () => {
     BootTestPage.clickAndGoToRadioGroupPage();
-    RadioGroupTestPage.waitForPageDisplayed(3000);
+    RadioGroupTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(RadioGroupTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Separator Test Page', () => {
     BootTestPage.clickAndGoToSeparatorPage();
-    SeparatorTestPage.waitForPageDisplayed(3000);
+    SeparatorTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(SeparatorTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Svg Test Page', () => {
     BootTestPage.clickAndGoToSvgPage();
-    SvgTestPage.waitForPageDisplayed(3000);
+    SvgTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(SvgTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Text Test Page', () => {
     BootTestPage.clickAndGoToTextPage();
-    TextTestPage.waitForPageDisplayed(3000);
+    TextTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(TextTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Theme Test Page', () => {
     BootTestPage.clickAndGoToThemePage();
-    ThemeTestPage.waitForPageDisplayed(3000);
+    ThemeTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(ThemeTestPage.isPageLoaded()).toBeTruthy();
   });
 });

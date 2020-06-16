@@ -28,7 +28,7 @@ steps:
 
   # Wait for app to launch. A workaround to avoid WinAppDriver error: Failed to locate opened application window with appId
   - powershell: |
-      Start-Sleep -Seconds 60
+      Start-Sleep -Seconds 90
     displayName: "Wait for app to launch"
 
   # Kill FluentTester, leave server up and running. This was the only way I could get the server continuously running

@@ -13,6 +13,16 @@ import TextTestPage from '../../Text/pages/TextTestPage.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
 // import SvgTestPage from '../../Svg/pages/SvgTestPage.win';
 
+const BOOT_APP_TIMEOUT = 60000;
+
+// Before testing begins, allow up to 60 seconds for app to open
+describe('Open the app', function() {
+  it('Boot app', () => {
+    BootTestPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
+    expect(BootTestPage.isPageLoaded()).toBeTruthy();
+  });
+});
+
 describe('Click on each test page and check if it renders', function () {
   it('Button Test Page', () => {
     BootTestPage.clickAndGoToButtonPage();
