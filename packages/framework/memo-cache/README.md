@@ -1,4 +1,4 @@
-# Memo cache package
+# @fluentui-react-native/memo-cache
 
 This package implements a hierarchical memoization cache using an API pattern that mimics the react.js useMemo hook. It also provides an implementation of traditional JavaScript memoization built using react style utility.
 
