@@ -67,6 +67,7 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
         Standard Usage
       </Text>
       <Separator />
+
       <View ref={stdBtnRef} style={{ flexDirection: 'row' }}>
         <Button content="Press for Callout" onClick={toggleShowStandardCallout} />
         <Text>
@@ -91,7 +92,6 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
 
       <Text style={fabricTesterStyles.testSection}>Customized Usage</Text>
       <Separator />
-
       <View ref={custBtnRef} style={{ flexDirection: 'row' }}>
         <Button content="Press for Callout" onClick={toggleShowCustomizedCallout} />
         <Text>

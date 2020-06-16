@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Alert } from 'react-native';
-import { Link } from '@fluentui/react-native';
+import { Link, Separator } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { LINK_TESTPAGE } from './consts';
@@ -16,6 +16,7 @@ export const LinkTest: React.FunctionComponent<{}> = () => {
       <Text style={commonStyles.section} testID={LINK_TESTPAGE}>
         Link Test Page
       </Text>
+      <Separator />
       <Stack style={stackStyle}>
         <Link url="https://www.bing.com/" content="Click to navigate." />
         <Link onPress={doPress} content="Click to alert." />
