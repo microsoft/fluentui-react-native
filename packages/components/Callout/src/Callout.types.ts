@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ScreenRect } from 'react-native';
+import { ScreenRect, ViewStyle } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
