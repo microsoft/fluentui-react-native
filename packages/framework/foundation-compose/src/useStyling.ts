@@ -6,26 +6,12 @@ import { IComponentTokens, processTokens, ITargetHasToken, buildComponentTokens 
 import { getTheme, ThemeContext } from '@uifabricshared/theming-react-native';
 import { IWithComposable, AsObject, IComposableDefinition, INativeSlotType } from '@uifabricshared/foundation-composable';
 import { IComposeOptions, IStylingSettings, IDefineUseComposeStyling } from './compose.types';
+import { getMemoCache, GetMemoValue } from '@fluentui-react-native/memo-cache';
 
 /* tslint:disable-next-line no-any */
 export function getOptionsFromObj<TComponent>(obj: any): TComponent | undefined {
   const objType = obj && typeof obj;
   return ((objType === 'object' || objType === 'function') && (obj as IWithComposable<object, TComponent>).__composable) || undefined;
-}
-
-interface ICacheEntry {
-  [key: string]: ISlotProps;
-}
-
-type IGetComponentCache = (theme: ITheme) => ICacheEntry;
-
-function _buildGetComponentCache(): IGetComponentCache {
-  const weakMap = new WeakMap<ITheme, ICacheEntry>();
-  const nullTheme = {} as ITheme;
-  return (theme: ITheme) => {
-    theme = theme || nullTheme;
-    return weakMap.get(theme) || weakMap.set(theme, {}).get(theme);
-  };
 }
 
 function _getSettingsFromTheme(theme: ITheme, name: string): IComponentSettings {
@@ -50,29 +36,32 @@ function _getHasToken<TProps, TSlotProps extends ISlotProps, TTokens extends obj
 function useStylingCore<TProps, TSlotProps extends ISlotProps, TTokens extends object>(
   props: TProps,
   options: IStylingSettings<TSlotProps, TTokens>,
-  baseKey: string,
-  getComponentCache: IGetComponentCache,
+  instanceMemoCache: GetMemoValue<TSlotProps, TSlotProps>,
   lookupOverride?: IOverrideLookup
 ): IWithTokens<TSlotProps, TTokens> {
   // get the theme value from the context (or the default theme if it is not set)
   const theme = React.useContext(ThemeContext) || getTheme();
-  // get the cache for this component from the theme
-  const cache = getComponentCache(theme);
 
   // resolve the array of settings for these options
   lookupOverride = lookupOverride || props;
-  const { settings, key } = getThemedSettings<IComponentSettings<IWithTokens<TSlotProps, TTokens>>, ITheme>(
+  type ILocalSettings = IComponentSettings<IWithTokens<TSlotProps, TTokens>>;
+  const { settings, getMemoValue } = getThemedSettings<ILocalSettings, ITheme>(
     options.settings,
     theme,
-    cache,
-    baseKey,
+    instanceMemoCache as GetMemoValue<any>,
     lookupOverride,
     _getSettingsFromTheme as any
   );
 
   // finish by processing the tokens and turning IComponentSettings into ISlotProps (this removes things like _overrides)
   return returnAsSlotProps(
-    processTokens<TSlotProps, TTokens, ITheme>((props as unknown) as TTokens, theme, settings as any, options.resolvedTokens, key, cache)
+    processTokens<TSlotProps, TTokens, ITheme>(
+      (props as unknown) as TTokens,
+      theme,
+      settings as any,
+      options.resolvedTokens,
+      getMemoValue as GetMemoValue<any>
+    )
   ) as IWithTokens<TSlotProps, TTokens>;
 }
 
@@ -89,16 +78,16 @@ export function initializeStyling<
   TTokens extends object,
   TState extends object,
   TStatics extends object
->(
-  options: IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics>,
-  name?: string
-): IDefineUseComposeStyling<TProps, TSlotProps, TTokens> {
+>(options: IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics>): IDefineUseComposeStyling<TProps, TSlotProps, TTokens> {
   // process the tokens and get them ready to render
   const { styles, slots } = options;
   options.resolvedTokens = buildComponentTokens<TSlotProps, TTokens, ITheme>(styles, _getHasToken(slots));
 
+  // memo cache root for this component, keyed on options
+  const getMemoValue = getMemoCache<TSlotProps>(options);
+
   // create a useStyling implementation for this component type (per type, not per instance)
   return (props: TProps, lookupOverride?: IOverrideLookup) => {
-    return useStylingCore<TProps, TSlotProps, TTokens>(props, options, name, _buildGetComponentCache(), lookupOverride);
+    return useStylingCore<TProps, TSlotProps, TTokens>(props, options, getMemoValue, lookupOverride);
   };
 }

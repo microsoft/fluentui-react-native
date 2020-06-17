@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
-    "@uifabricshared/build-native": "^0.1.1"
+    "@uifabricshared/build-native": "^0.1.1",
+    "@fluentui-react-native/memo-cache": ">=0.1.0 <1.0.0"
   }
 }
