@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/memo-cache",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Layered memoization style cache helper",
   "repository": {
     "type": "git",
