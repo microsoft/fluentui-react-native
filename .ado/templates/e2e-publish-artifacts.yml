@@ -10,7 +10,7 @@ steps:
       yarn generate-report
     workingDirectory: apps\${{parameters.platform}}
     continueOnError: true
-    timeoutInMinutes: 0.5
+    timeoutInMinutes: 1
     displayName: "generate ${{parameters.platform}} report"
     condition: succeededOrFailed()
 
