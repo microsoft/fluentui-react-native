@@ -41,7 +41,6 @@
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
     "@uifabric/prettier-rules": "^7.0.3",
-    "@uifabricshared/build-native": "^0.1.1",
     "babel-jest": "^24.9.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "enzyme": "^3.11.0",
