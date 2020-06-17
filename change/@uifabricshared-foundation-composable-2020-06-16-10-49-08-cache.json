@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "add memo-cache package and consume it in the core framework",
-  "packageName": "@uifabricshared/foundation-composable",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-06-16T17:48:03.231Z"
-}
