@@ -3,6 +3,7 @@ import { ITargetHasToken, IComponentTokens, IStyleFactories } from './Token.type
 import { IStyleProp, mergeSettings, ISlotProps, IComponentSettings } from '@uifabricshared/foundation-settings';
 import { processTokens } from './Token';
 import { buildComponentTokens } from './Token.function';
+import { GetMemoValue } from '@fluentui-react-native/memo-cache';
 
 export type ICSSStyle = React.CSSProperties;
 
@@ -14,7 +15,7 @@ export type IMockComponentFn<TProps, TSlotProps extends ISlotProps, TTokens> = (
   props: TProps,
   settings: IComponentSettings<TSlotProps> & { tokens?: TTokens },
   theme: IMockTheme,
-  cache: object,
+  cache: GetMemoValue<any>,
   recurse?: boolean
 ) => TSlotProps | TProps;
 
@@ -22,9 +23,7 @@ export type IMockComponent<TProps, TSlotProps extends ISlotProps, TTokens> = IMo
   __options?: IComponentTokens<TSlotProps, TTokens, IMockTheme>;
 };
 
-export type IMockSlots<TSlotProps extends ISlotProps> = {
-  [K in keyof TSlotProps]: any;
-};
+export type IMockSlots<TSlotProps extends ISlotProps> = { [K in keyof TSlotProps]: any };
 
 export interface IMockComponentOptions<TSlotProps extends ISlotProps, TTokens> {
   slots?: IMockSlots<TSlotProps>;
@@ -35,7 +34,7 @@ export function stockFakeComponent(
   props: IMockBaseProps,
   _settings: ISlotProps,
   _theme: IMockTheme,
-  _cache: object,
+  _cache: GetMemoValue<any>,
   _recurse: boolean
 ): IMockBaseProps {
   return props;
@@ -55,17 +54,23 @@ export function mockCreate<TProps extends object, TSlotProps extends ISlotProps,
     options.styles,
     hasTokens
   );
-  const fn = (props: TProps, settings: TSlotProps & { tokens?: TTokens }, theme: IMockTheme, cache: object, recurse?: boolean) => {
-    let newSettings = processTokens(props as any, theme, settings, resolvedTokens, 'base', cache);
+  const fn = (
+    props: TProps,
+    settings: TSlotProps & { tokens?: TTokens },
+    theme: IMockTheme,
+    cache: GetMemoValue<any>,
+    recurse?: boolean
+  ) => {
+    let newSettings = processTokens(props as any, theme, settings as any, resolvedTokens, cache);
     if (recurse) {
       Object.keys(slots).forEach((slotName: string) => {
         const slot = slots[slotName];
         if (slot.__options && newSettings[slotName]) {
-          cache[slotName] = cache[slotName] || {};
-          const slotSettings = slot(newSettings[slotName] || {}, {}, theme, cache[slotName], false);
+          const [, slotCache] = cache(null, [slotName]);
+          const slotSettings = slot(newSettings[slotName] || {}, {}, theme, slotCache, false);
           const rootKey = 'root';
           if (slotSettings[rootKey]) {
-            newSettings = mergeSettings(newSettings, { [slotName]: slotSettings[rootKey] });
+            newSettings = mergeSettings(newSettings, { [slotName]: slotSettings[rootKey] } as TSlotProps);
           }
         }
       });

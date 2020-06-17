@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IRenderData, ISlotWithFilter, IComposable, IWithComposable, ISlots, IPropFilter, INativeSlotType } from './Composable.types';
-import { mergeSettings, mergeProps, ISlotProps } from '@uifabricshared/foundation-settings';
+import { mergeSettings, memoMergeProps, ISlotProps } from '@uifabricshared/foundation-settings';
 
 export type ISlotFn<TProps> = React.FunctionComponent<TProps> & {
   _canCompose?: boolean;
@@ -14,9 +14,9 @@ interface ISlotRenderInfo<TProps, TSlotProps, TState> {
   Slots?: ISlots<TSlotProps>;
 }
 
-function _mergeAndFilterProps<TProps extends object>(propsBase: TProps, propsExtra: TProps, filter?: IPropFilter): TProps {
+function _mergeAndFilterProps<TProps>(propsBase: TProps, propsExtra: TProps, filter?: IPropFilter): TProps {
   // do a basic merge, not mutating if nothing changed
-  let props = mergeProps<TProps>(propsBase, propsExtra);
+  let props = memoMergeProps<TProps>(propsBase, propsExtra);
   if (filter && props) {
     const removeMask = {};
     Object.getOwnPropertyNames(props).forEach(key => {
@@ -24,7 +24,7 @@ function _mergeAndFilterProps<TProps extends object>(propsBase: TProps, propsExt
         removeMask[key] = undefined;
       }
     });
-    props = mergeProps(props, removeMask);
+    props = memoMergeProps<TProps>(props, removeMask as TProps);
   }
   return props;
 }
@@ -60,7 +60,7 @@ function createSlotRenderInfo<TProps, TSlotProps extends ISlotProps, TState>(
           const { renderData, Slots } = childRenderInfo;
           if (filter || extraProps) {
             const toMerge = { root: _mergeAndFilterProps(renderData.slotProps.root, extraProps, filter) };
-            renderData.slotProps = mergeSettings(renderData.slotProps, toMerge);
+            renderData.slotProps = mergeSettings<TSlotProps>(renderData.slotProps, toMerge as TSlotProps);
           }
           return composable.render(Slots, renderData, ...children);
         });

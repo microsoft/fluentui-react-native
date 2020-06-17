@@ -11,12 +11,13 @@
     "clean": "fluentui-scripts clean",
     "code-style": "fluentui-scripts code-style",
     "lint": "fluentui-scripts eslint",
-    "start:macos": "node ../../node_modules/react-native-macos/local-cli/cli.js start --use-react-native-macos"
+    "start:macos": "node ../../node_modules/react-native-macos/local-cli/cli.js start --use-react-native-macos",
+    "macos": "fluentui-scripts"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",
-    "@uifabricshared/theming-react-native": "0.7.48",
-    "@uifabricshared/themed-stylesheet": "0.3.49",
+    "@uifabricshared/theming-react-native": "0.7.59",
+    "@uifabricshared/themed-stylesheet": "0.3.60",
     "react": "16.11.0",
     "react-native-macos": "^0.61.0-0"
   },
