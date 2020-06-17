@@ -15,7 +15,7 @@ describe('getMemoCache unit tests', () => {
   test('memoValue with null function', () => {
     const memoValue = getMemoCache();
     const [val] = memoValue(null, ['foo', 'bar']);
-    expect(val).toBeUndefined();
+    expect(val).toBeNull();
   });
 
   test('memoValue with undefined', () => {
