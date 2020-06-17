@@ -38,27 +38,27 @@ The parameters are used as follows:
 | Param     | Description                                                                                                                                                                                                                                                                             |
 | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `factory` | This is typically a function, often a simple closure, which returns a value. This value will be cached for a given set of keys. Subsequent calls will just return the value without executing the function. This can also be a value type in which case that will be returned directly. |
-| `keys`    | Variable parameter list, used as the keys for caching                                                                                                                                                                                                                                   |
+| `keys`    | Variable parameter list, used as the keys for caching. Note that the order of keys matter. [A, B] resolves differently than [B, A].                                                                                                                                                     |
 
 The return result is a tuple with two elements containing:
 
 - The result of the factory function, or the value of factory if it is not a function
 - A function for caching which is local to the previous keys queried
 
-This recursive calling pattern can be used to create branches piece by piece in component execution. See the examples below for more detail.
+This recursive calling pattern allows for a natural pipelining of caching and memoization. Because the cache is effectively implemented as a tree, this pattern falls out fairly easily. See the examples below for more detail.
 
 ### getMemoCache
 
 To get an instance of the memo cache to work with, a caller starts by calling `getMemoCache`.
 
 ```ts
-export function getMemoCache<T = any>(key?: object): GetMemoValue<T>;
+export function getMemoCache<T = any>(globalKey?: object): GetMemoValue<T>;
 ```
 
-This function takes an optional parameter `key` which can be an object to use as a base cache reference.
+This function takes an optional parameter `globalKey` which can be an object to use as a base cache reference.
 
-- If `key` is specified, the same cache will be retrieved from the global call with the same object reference.
-- If `key` is not specified the cache instance will be unique and contained entirely within the returned function.
+- If `globalKey` is specified, the same cache will be retrieved from the global call with the same object reference.
+- If `globalKey` is not specified the cache instance will be unique and contained entirely within the returned function.
 
 ### memoize
 
@@ -124,7 +124,7 @@ export const MyComponent = (props: IMyComponentProps) => {
   const newProps = { ...props };
 
   // get the style, cached against the theme so it will only be called once, note that because
-  const [style, nextCache] = myComponentCache(() => {
+  const [style, themeLocalCache] = myComponentCache(() => {
     const colors = theme.colors;
     return {
       backgroundColor: colors.neutralBackground,
@@ -134,7 +134,7 @@ export const MyComponent = (props: IMyComponentProps) => {
   }, [theme]);
 
   // merge the styles if a style is passed in via props, caching the union to ensure consistent object identity
-  newProps.style = newProps.style ? nextCache(() => mergeStyles(style, newProps.style), [newProps.style])[0] : style;
+  newProps.style = newProps.style ? themeLocalCache(() => mergeStyles(style, newProps.style), [newProps.style])[0] : style;
 
   return <InnerControl {...newProps} />;
 };
