@@ -16,8 +16,8 @@
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",
-    "@uifabricshared/theming-react-native": "0.7.57",
-    "@uifabricshared/themed-stylesheet": "0.3.58",
+    "@uifabricshared/theming-react-native": "0.7.58",
+    "@uifabricshared/themed-stylesheet": "0.3.59",
     "react": "16.11.0",
     "react-native-macos": "^0.61.0-0"
   },
