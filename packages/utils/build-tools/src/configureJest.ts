@@ -22,7 +22,7 @@ export function configureJest(customConfig?: object): object {
       },
       moduleFileExtensions,
       moduleDirectories: nodeModulesToRoot(),
-edd
+
       snapshotSerializers: ['enzyme-to-json/serializer'],
 
       // use babel-jest to transform files including typescript
