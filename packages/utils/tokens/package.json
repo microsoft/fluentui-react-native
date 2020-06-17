@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tokens",
-  "version": "0.4.54",
+  "version": "0.4.56",
   "description": "Token interface parts and helpers",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -18,8 +18,8 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-tokens": ">=0.5.54 <1.0.0",
-    "@uifabricshared/theming-ramp": ">=0.9.53 <1.0.0"
+    "@uifabricshared/foundation-tokens": ">=0.5.56 <1.0.0",
+    "@uifabricshared/theming-ramp": ">=0.9.55 <1.0.0"
   },
   "devDependencies": {
     "@types/react-native": "^0.62.0",
