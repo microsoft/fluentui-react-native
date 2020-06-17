@@ -4,13 +4,19 @@ parameters:
 
 steps:
   # Generate reports. conitnueOnError is true because this task will always fail (until I figure out way to stop command before timeout)
+  # - script: |
+  #     yarn generate-report
+  #   workingDirectory: apps\${{parameters.platform}}
+  #   displayName: generate ${{parameters.platform}} report
+  #   condition: succeededOrFailed()
+  #   continueOnError: true
+  #   timeoutInMinutes: 1
+
   - script: |
-      yarn generate-report
-    workingDirectory: apps\${{parameters.platform}}
-    displayName: generate ${{parameters.platform}} report
+      start cmd.exe @cmd /k "allure generate allure-results --clean"
+    workingDirectory: apps\${{parameters.platform}}\allure-results
     condition: succeededOrFailed()
-    continueOnError: true
-    timeoutInMinutes: 1
+    displayName: generate ${{parameters.platform}} report
 
   # Copy errorShots to FluentTesterDump
   - task: CopyFiles@2
