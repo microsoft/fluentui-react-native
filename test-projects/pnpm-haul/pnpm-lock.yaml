@@ -6,7 +6,7 @@ importers:
       lerna: ^3.16.4
   packages/simple-win32:
     dependencies:
-      '@fluentui/react-native': registry.npmjs.org/@fluentui/react-native/0.15.28_686ec919160581136b28b7fe63160a42
+      '@fluentui/react-native': registry.npmjs.org/@fluentui/react-native/0.15.63_686ec919160581136b28b7fe63160a42
       '@office-iss/react-native-win32': registry.npmjs.org/@office-iss/react-native-win32/0.62.0-preview.3_985aa3db18110c061a786f4f7dbb42f7
       '@uifabricshared/themed-stylesheet': registry.npmjs.org/@uifabricshared/themed-stylesheet/0.3.15_react-native@0.62.2
       '@uifabricshared/theming-react-native': registry.npmjs.org/@uifabricshared/theming-react-native/0.7.14_react@16.11.0
@@ -33,7 +33,7 @@ importers:
       typescript: registry.npmjs.org/typescript/3.9.2
     specifiers:
       '@babel/core': ^7.9.6
-      '@fluentui/react-native': 0.15.28
+      '@fluentui/react-native': '>=0.15.63 <1.0.0'
       '@haul-bundler/cli': ^0.22.1
       '@haul-bundler/core': ^0.22.1
       '@haul-bundler/preset-0.60': 0.18.0
@@ -2203,283 +2203,291 @@ packages:
       registry: 'https://registry.yarnpkg.com/'
       tarball: 'https://registry.npmjs.org/@evocateur/pacote/-/pacote-9.6.5.tgz'
     version: 9.6.5
-  registry.npmjs.org/@fluentui-react-native/adapters/0.2.24:
+  registry.npmjs.org/@fluentui-react-native/adapters/0.3.23:
     dev: false
     name: '@fluentui-react-native/adapters'
     resolution:
-      integrity: sha512-h05XtWNOHBKUg3SRkEk7LUuEz8PkXYKfRIu+ZCUiDvSN/m1Csf8X1QgwMrg3OJL9YLDMul18sF/DaXyyLcT8Og==
+      integrity: sha512-Cxg2WJYhCAONUM491irlC1WmVFt8sRF3+ixI3oxwqtFJWOhMO0zq0SMzZdUnVI1OzB10YlQ5nVcgYPBos8sJhw==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@fluentui-react-native/adapters/-/adapters-0.2.24.tgz'
-    version: 0.2.24
-  registry.npmjs.org/@fluentui-react-native/button/0.5.24_686ec919160581136b28b7fe63160a42:
+      tarball: 'https://registry.npmjs.org/@fluentui-react-native/adapters/-/adapters-0.3.23.tgz'
+    version: 0.3.23
+  registry.npmjs.org/@fluentui-react-native/button/0.9.14_686ec919160581136b28b7fe63160a42:
     dependencies:
-      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.2.24
-      '@fluentui-react-native/interactive-hooks': registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.3.22_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/pressable': registry.npmjs.org/@fluentui-react-native/pressable/0.3.27_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/text': registry.npmjs.org/@fluentui-react-native/text/0.5.24_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.23_react@16.11.0
-      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.26_react@16.11.0
+      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.3.23
+      '@fluentui-react-native/interactive-hooks': registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.4.30_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/pressable': registry.npmjs.org/@fluentui-react-native/pressable/0.3.62_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/text': registry.npmjs.org/@fluentui-react-native/text/0.5.59_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.58_react@16.11.0
+      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.61_react@16.11.0
       react-native: registry.npmjs.org/react-native/0.62.2_686ec919160581136b28b7fe63160a42
     dev: false
-    id: registry.npmjs.org/@fluentui-react-native/button/0.5.24
+    id: registry.npmjs.org/@fluentui-react-native/button/0.9.14
     name: '@fluentui-react-native/button'
     peerDependencies:
       react: '*'
       react-native: '>=0.60.0'
     resolution:
-      integrity: sha512-g2eJBn0AmveLj1W56VpPt8S6mK8h/GZpdJIt9CrU0UXPpAGaS1gy7WgABePu2AlAK1LhKTvL4xDeG3lCa5Rwjw==
+      integrity: sha512-7nRLu/OM5XvIjrRXqw1i5e01Fqfb5ygoZh6UMkr0IAJCouS5AM7QjFb2JWookeZyFc5xH1sfagNvbIONtlvfkg==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@fluentui-react-native/button/-/button-0.5.24.tgz'
-    version: 0.5.24
-  registry.npmjs.org/@fluentui-react-native/callout/0.6.12_686ec919160581136b28b7fe63160a42:
+      tarball: 'https://registry.npmjs.org/@fluentui-react-native/button/-/button-0.9.14.tgz'
+    version: 0.9.14
+  registry.npmjs.org/@fluentui-react-native/callout/0.9.3_686ec919160581136b28b7fe63160a42:
     dependencies:
-      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.2.24
-      '@fluentui-react-native/interactive-hooks': registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.3.22_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.23_react@16.11.0
-      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.26_react@16.11.0
+      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.3.23
+      '@fluentui-react-native/interactive-hooks': registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.4.30_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.58_react@16.11.0
+      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.61_react@16.11.0
       react-native: registry.npmjs.org/react-native/0.62.2_686ec919160581136b28b7fe63160a42
     dev: false
-    id: registry.npmjs.org/@fluentui-react-native/callout/0.6.12
+    id: registry.npmjs.org/@fluentui-react-native/callout/0.9.3
     name: '@fluentui-react-native/callout'
     peerDependencies:
       react: '*'
       react-native: '>=0.60.0'
     resolution:
-      integrity: sha512-rl2AL1bufk0Nmo2cm4G7nRf9SIHW2RC1Ljx/bVMJnZhh30n8CUR6GUBoeNBbZlPJ2Kos8kDUM9h1gFwsSRBTgg==
+      integrity: sha512-dWlCCNME7xtQQeGYjpKf09Gxfx9a6lmtrWduH4I2AwWR42sEaX1B4ORwCTBGjPLn2DdiSgOQN+eaJFaQn0P0MA==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@fluentui-react-native/callout/-/callout-0.6.12.tgz'
-    version: 0.6.12
-  registry.npmjs.org/@fluentui-react-native/checkbox/0.3.27_686ec919160581136b28b7fe63160a42:
+      tarball: 'https://registry.npmjs.org/@fluentui-react-native/callout/-/callout-0.9.3.tgz'
+    version: 0.9.3
+  registry.npmjs.org/@fluentui-react-native/checkbox/0.3.62_686ec919160581136b28b7fe63160a42:
     dependencies:
-      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.2.24
-      '@fluentui-react-native/interactive-hooks': registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.3.22_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/pressable': registry.npmjs.org/@fluentui-react-native/pressable/0.3.27_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/text': registry.npmjs.org/@fluentui-react-native/text/0.5.24_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.23_react@16.11.0
-      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.26_react@16.11.0
+      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.3.23
+      '@fluentui-react-native/interactive-hooks': registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.4.30_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/pressable': registry.npmjs.org/@fluentui-react-native/pressable/0.3.62_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/text': registry.npmjs.org/@fluentui-react-native/text/0.5.59_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.58_react@16.11.0
+      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.61_react@16.11.0
       react-native: registry.npmjs.org/react-native/0.62.2_686ec919160581136b28b7fe63160a42
     dev: false
-    id: registry.npmjs.org/@fluentui-react-native/checkbox/0.3.27
+    id: registry.npmjs.org/@fluentui-react-native/checkbox/0.3.62
     name: '@fluentui-react-native/checkbox'
     peerDependencies:
       react: '*'
       react-native: '>=0.60.0'
     resolution:
-      integrity: sha512-ea5puytQwpIgOtPQGWjOhzEgFKNTDasPY8SaCHOz9OejV/9Nn+6rXCoqkgFe9eQYoKQa58fhY8ZbjIuRvyzunw==
+      integrity: sha512-lnNs8ohOm4JeXmLu1KsXgyUaRsu1mfk7VwyTSpmdzVGSGHwQlgIp5m3hyGnUpVgkcL+12zxdUqUoVXP82DGi3Q==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@fluentui-react-native/checkbox/-/checkbox-0.3.27.tgz'
-    version: 0.3.27
-  registry.npmjs.org/@fluentui-react-native/focus-trap-zone/0.3.27_686ec919160581136b28b7fe63160a42:
+      tarball: 'https://registry.npmjs.org/@fluentui-react-native/checkbox/-/checkbox-0.3.62.tgz'
+    version: 0.3.62
+  registry.npmjs.org/@fluentui-react-native/focus-trap-zone/0.3.62_686ec919160581136b28b7fe63160a42:
     dependencies:
-      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.2.24
-      '@fluentui-react-native/interactive-hooks': registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.3.22_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.23_react@16.11.0
-      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.26_react@16.11.0
+      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.3.23
+      '@fluentui-react-native/interactive-hooks': registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.4.30_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.58_react@16.11.0
+      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.61_react@16.11.0
       react-native: registry.npmjs.org/react-native/0.62.2_686ec919160581136b28b7fe63160a42
     dev: false
-    id: registry.npmjs.org/@fluentui-react-native/focus-trap-zone/0.3.27
+    id: registry.npmjs.org/@fluentui-react-native/focus-trap-zone/0.3.62
     name: '@fluentui-react-native/focus-trap-zone'
     peerDependencies:
       react: '*'
       react-native: '>=0.60.0'
     resolution:
-      integrity: sha512-1RceN1Y2hTQqI6AiqIJ0G6wX/+RkSUPfGFZPmjsy0RKbf8A0jN4w0Pp/qi+gvgnIjCL3Jdkp3Evul8X44asYYQ==
+      integrity: sha512-KZDLCUqctCAYS3VEOF6v6m/oC7ntDv6UlrqTBE2wkpiE8r/FTKOUYaPV+2IBKtHXXopjrOWnIwyUCQNQHAgs3g==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@fluentui-react-native/focus-trap-zone/-/focus-trap-zone-0.3.27.tgz'
-    version: 0.3.27
-  registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.3.22_686ec919160581136b28b7fe63160a42:
+      tarball: 'https://registry.npmjs.org/@fluentui-react-native/focus-trap-zone/-/focus-trap-zone-0.3.62.tgz'
+    version: 0.3.62
+  registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.4.30_686ec919160581136b28b7fe63160a42:
     dependencies:
       invariant: registry.npmjs.org/invariant/2.2.4
       react: registry.npmjs.org/react/16.11.0
       react-native: registry.npmjs.org/react-native/0.62.2_686ec919160581136b28b7fe63160a42
     dev: false
-    id: registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.3.22
+    id: registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.4.30
     name: '@fluentui-react-native/interactive-hooks'
     peerDependencies:
       react: 16.11.0
       react-native: '>=0.60.0'
     resolution:
-      integrity: sha512-jSbP/MqS368QZ64NFF810N3CTvHMVGPLALLfmvQICafAo6bd/4DhD1xMgb6ggdlkzbfIAVFf/I0+KP0Znzh+pQ==
+      integrity: sha512-N9MTA7klt6ENJxCTvjJP10ltNMzKIiP7rgmmWvJpCmKVa9Rxv77OIcQcAQFY+LaNQawkf0xZQLVx7OEWOODq4w==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@fluentui-react-native/interactive-hooks/-/interactive-hooks-0.3.22.tgz'
-    version: 0.3.22
-  registry.npmjs.org/@fluentui-react-native/link/0.5.25_686ec919160581136b28b7fe63160a42:
+      tarball: 'https://registry.npmjs.org/@fluentui-react-native/interactive-hooks/-/interactive-hooks-0.4.30.tgz'
+    version: 0.4.30
+  registry.npmjs.org/@fluentui-react-native/link/0.6.21_686ec919160581136b28b7fe63160a42:
     dependencies:
-      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.2.24
-      '@fluentui-react-native/interactive-hooks': registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.3.22_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/text': registry.npmjs.org/@fluentui-react-native/text/0.5.24_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.23_react@16.11.0
-      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.26_react@16.11.0
+      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.3.23
+      '@fluentui-react-native/interactive-hooks': registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.4.30_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/text': registry.npmjs.org/@fluentui-react-native/text/0.5.59_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.58_react@16.11.0
+      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.61_react@16.11.0
       react-native: registry.npmjs.org/react-native/0.62.2_686ec919160581136b28b7fe63160a42
     dev: false
-    id: registry.npmjs.org/@fluentui-react-native/link/0.5.25
+    id: registry.npmjs.org/@fluentui-react-native/link/0.6.21
     name: '@fluentui-react-native/link'
     peerDependencies:
       react: '*'
       react-native: '>=0.60.0'
     resolution:
-      integrity: sha512-G3QtfKCHSxGOYh4CeM06/8I56zuytmDfOTgM73FUinal8zZf4D8AgVewWsOIKl3aq6WEPw933TZ2nZm1Kc4+tQ==
+      integrity: sha512-e/P8T3/B7nT6a5FhkOz0RvKma7YrFHYpbmNzd7F8imBx3kqVfmnK+lL2+KhkSDpBnWgLIg7yDTyiQlKyyjOvQg==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@fluentui-react-native/link/-/link-0.5.25.tgz'
-    version: 0.5.25
-  registry.npmjs.org/@fluentui-react-native/persona-coin/0.3.27_686ec919160581136b28b7fe63160a42:
+      tarball: 'https://registry.npmjs.org/@fluentui-react-native/link/-/link-0.6.21.tgz'
+    version: 0.6.21
+  registry.npmjs.org/@fluentui-react-native/memo-cache/0.2.1:
+    dev: false
+    name: '@fluentui-react-native/memo-cache'
+    resolution:
+      integrity: sha512-Yj6JDcwo8P5fG4m4/wIoPz8ThhQdHUlEcJvlVO1BNiQeGeAkt4U88lkPiNRyhx1OGuuJWemDp3ZNIGTRMzkwdg==
+      registry: 'https://registry.yarnpkg.com/'
+      tarball: 'https://registry.npmjs.org/@fluentui-react-native/memo-cache/-/memo-cache-0.2.1.tgz'
+    version: 0.2.1
+  registry.npmjs.org/@fluentui-react-native/persona-coin/0.3.62_686ec919160581136b28b7fe63160a42:
     dependencies:
-      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.2.24
-      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.23_react@16.11.0
-      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.26_react@16.11.0
+      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.3.23
+      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.58_react@16.11.0
+      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.61_react@16.11.0
       react: registry.npmjs.org/react/16.11.0
       react-native: registry.npmjs.org/react-native/0.62.2_686ec919160581136b28b7fe63160a42
     dev: false
-    id: registry.npmjs.org/@fluentui-react-native/persona-coin/0.3.27
+    id: registry.npmjs.org/@fluentui-react-native/persona-coin/0.3.62
     name: '@fluentui-react-native/persona-coin'
     peerDependencies:
       react: '*'
       react-native: '>=0.60.0'
     resolution:
-      integrity: sha512-1kYYv2i+3J8+opBVJVPr/u+kCpsSArlygqC/pabeqA4l85VgDnhW7Tjr6g6NmQZP+fkaDnvKS7CA+e82QKRbcg==
+      integrity: sha512-0jfbddIQaBWFglxzP2Y+PqOaLG4wzMZCwnNnPgVFJKKcgJAoLomK9P6DsB3ErzZtT8/GnC+aXJFOCpiHFYCpBQ==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@fluentui-react-native/persona-coin/-/persona-coin-0.3.27.tgz'
-    version: 0.3.27
-  registry.npmjs.org/@fluentui-react-native/persona/0.5.24_686ec919160581136b28b7fe63160a42:
+      tarball: 'https://registry.npmjs.org/@fluentui-react-native/persona-coin/-/persona-coin-0.3.62.tgz'
+    version: 0.3.62
+  registry.npmjs.org/@fluentui-react-native/persona/0.5.59_686ec919160581136b28b7fe63160a42:
     dependencies:
-      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.2.24
-      '@fluentui-react-native/persona-coin': registry.npmjs.org/@fluentui-react-native/persona-coin/0.3.27_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.23_react@16.11.0
-      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.26_react@16.11.0
+      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.3.23
+      '@fluentui-react-native/persona-coin': registry.npmjs.org/@fluentui-react-native/persona-coin/0.3.62_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.58_react@16.11.0
+      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.61_react@16.11.0
       react-native: registry.npmjs.org/react-native/0.62.2_686ec919160581136b28b7fe63160a42
     dev: false
-    id: registry.npmjs.org/@fluentui-react-native/persona/0.5.24
+    id: registry.npmjs.org/@fluentui-react-native/persona/0.5.59
     name: '@fluentui-react-native/persona'
     peerDependencies:
       react: '*'
       react-native: '>=0.60.0'
     resolution:
-      integrity: sha512-b/mtMaWKy3sCimHMfixgQ6DFYJOO5hCk7lNdzLX1JRZ3gL7mJMpV2QiowdyQzaT0lfQMjKFOUjrMAJmcV2B2og==
+      integrity: sha512-Tio29CgMZ8korz0vxQScS9SQCpwTt8+Z6/qjrhH3XWLSCoGU7xnOJYE2KHpgWSvLla7WcU6qKtr0BEOM02JyZw==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@fluentui-react-native/persona/-/persona-0.5.24.tgz'
-    version: 0.5.24
-  registry.npmjs.org/@fluentui-react-native/pressable/0.3.27_686ec919160581136b28b7fe63160a42:
+      tarball: 'https://registry.npmjs.org/@fluentui-react-native/persona/-/persona-0.5.59.tgz'
+    version: 0.5.59
+  registry.npmjs.org/@fluentui-react-native/pressable/0.3.62_686ec919160581136b28b7fe63160a42:
     dependencies:
-      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.2.24
-      '@fluentui-react-native/interactive-hooks': registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.3.22_686ec919160581136b28b7fe63160a42
-      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.26_react@16.11.0
+      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.3.23
+      '@fluentui-react-native/interactive-hooks': registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.4.30_686ec919160581136b28b7fe63160a42
+      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.61_react@16.11.0
       react: registry.npmjs.org/react/16.11.0
       react-native: registry.npmjs.org/react-native/0.62.2_686ec919160581136b28b7fe63160a42
     dev: false
-    id: registry.npmjs.org/@fluentui-react-native/pressable/0.3.27
+    id: registry.npmjs.org/@fluentui-react-native/pressable/0.3.62
     name: '@fluentui-react-native/pressable'
     peerDependencies:
       react: '*'
       react-native: '>=0.60.0'
     resolution:
-      integrity: sha512-wQm60s8aCYh1z5YNEu9E6HwQK11pfVTzu1RRMObHCU0f0NZbfdUsfc2sxY6GrlIPa0KeUHFmCIk+T9eLcdP+AQ==
+      integrity: sha512-nWmKykIhFVfnhjgFmfUykBAM00magGcEjhc6izkB74yqMqKWGmwT+tbI/68TdV9Dq2eQU5Bgt8hOyNIVTLSOqA==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@fluentui-react-native/pressable/-/pressable-0.3.27.tgz'
-    version: 0.3.27
-  registry.npmjs.org/@fluentui-react-native/radio-group/0.3.27_686ec919160581136b28b7fe63160a42:
+      tarball: 'https://registry.npmjs.org/@fluentui-react-native/pressable/-/pressable-0.3.62.tgz'
+    version: 0.3.62
+  registry.npmjs.org/@fluentui-react-native/radio-group/0.3.62_686ec919160581136b28b7fe63160a42:
     dependencies:
-      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.2.24
-      '@fluentui-react-native/pressable': registry.npmjs.org/@fluentui-react-native/pressable/0.3.27_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/text': registry.npmjs.org/@fluentui-react-native/text/0.5.24_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.23_react@16.11.0
-      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.26_react@16.11.0
+      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.3.23
+      '@fluentui-react-native/pressable': registry.npmjs.org/@fluentui-react-native/pressable/0.3.62_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/text': registry.npmjs.org/@fluentui-react-native/text/0.5.59_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.58_react@16.11.0
+      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.61_react@16.11.0
       react-native: registry.npmjs.org/react-native/0.62.2_686ec919160581136b28b7fe63160a42
     dev: false
-    id: registry.npmjs.org/@fluentui-react-native/radio-group/0.3.27
+    id: registry.npmjs.org/@fluentui-react-native/radio-group/0.3.62
     name: '@fluentui-react-native/radio-group'
     peerDependencies:
       react: '*'
       react-native: '>=0.60.0'
     resolution:
-      integrity: sha512-k3y53G5kanFV5IjskBQxvo+EwYp3O9WMy0X687iYJgBetqeNcuFPMO6G6xo4RA02tS5PUd1trsX/rSexTIa8JQ==
+      integrity: sha512-gEZUeps8yGNvwThs/5t7rAe27Q5BVMKbrYUMyVnMFaXvoJev5RL5G5saLJ92z8iUrnDQYBAH/PivLdzPVBOPsw==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@fluentui-react-native/radio-group/-/radio-group-0.3.27.tgz'
-    version: 0.3.27
-  registry.npmjs.org/@fluentui-react-native/separator/0.3.28_686ec919160581136b28b7fe63160a42:
+      tarball: 'https://registry.npmjs.org/@fluentui-react-native/radio-group/-/radio-group-0.3.62.tgz'
+    version: 0.3.62
+  registry.npmjs.org/@fluentui-react-native/separator/0.3.63_686ec919160581136b28b7fe63160a42:
     dependencies:
-      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.2.24
-      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.23_react@16.11.0
-      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.26_react@16.11.0
+      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.3.23
+      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.58_react@16.11.0
+      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.61_react@16.11.0
       react-native: registry.npmjs.org/react-native/0.62.2_686ec919160581136b28b7fe63160a42
     dev: false
-    id: registry.npmjs.org/@fluentui-react-native/separator/0.3.28
+    id: registry.npmjs.org/@fluentui-react-native/separator/0.3.63
     name: '@fluentui-react-native/separator'
     peerDependencies:
       react: '*'
       react-native: '>=0.60.0'
     resolution:
-      integrity: sha512-1bGGQwX6PTUNVjYsJZ8ZNAYxozmwRyG6fQH+Sa0XK+TbJA7rFIt3+QeqhnvE6ujrqlUXTv6LALD16P49CaFg4w==
+      integrity: sha512-/c0MXFcCx02DGrYyeSwFDExpD8vMLskhGCRYY0mkwxUHz3ZQOeg5C/GPrHLF9uMi3Gx9eYgFdxR7ZwFEm6vl9A==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@fluentui-react-native/separator/-/separator-0.3.28.tgz'
-    version: 0.3.28
-  registry.npmjs.org/@fluentui-react-native/text/0.5.24_686ec919160581136b28b7fe63160a42:
+      tarball: 'https://registry.npmjs.org/@fluentui-react-native/separator/-/separator-0.3.63.tgz'
+    version: 0.3.63
+  registry.npmjs.org/@fluentui-react-native/text/0.5.59_686ec919160581136b28b7fe63160a42:
     dependencies:
-      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.2.24
-      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.23_react@16.11.0
-      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.26_react@16.11.0
+      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.3.23
+      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.58_react@16.11.0
+      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.61_react@16.11.0
       react: registry.npmjs.org/react/16.11.0
       react-native: registry.npmjs.org/react-native/0.62.2_686ec919160581136b28b7fe63160a42
     dev: false
-    id: registry.npmjs.org/@fluentui-react-native/text/0.5.24
+    id: registry.npmjs.org/@fluentui-react-native/text/0.5.59
     name: '@fluentui-react-native/text'
     peerDependencies:
       react: '*'
       react-native: '>=0.60.0'
     resolution:
-      integrity: sha512-ihMwI7lJgNHKlcC+O+r3zto0RX9ue4zhV8Xpjjagiu/oI6UNlGe7tpc5JKEPNUaErbc1Cn1cW9ZrxTpmNLLXjQ==
+      integrity: sha512-rQ+bEp/2RF50fyrv44DCGla9DZ5Ny3vck+8wa3rj6Rkq49MHWErj21xK4t8jP+9PVvMdsDymRw15/oglaBsorA==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@fluentui-react-native/text/-/text-0.5.24.tgz'
-    version: 0.5.24
-  registry.npmjs.org/@fluentui-react-native/tokens/0.4.23_react@16.11.0:
+      tarball: 'https://registry.npmjs.org/@fluentui-react-native/text/-/text-0.5.59.tgz'
+    version: 0.5.59
+  registry.npmjs.org/@fluentui-react-native/tokens/0.4.58_react@16.11.0:
     dependencies:
-      '@uifabricshared/foundation-tokens': registry.npmjs.org/@uifabricshared/foundation-tokens/0.5.23
-      '@uifabricshared/theming-ramp': registry.npmjs.org/@uifabricshared/theming-ramp/0.9.22_react@16.11.0
+      '@uifabricshared/foundation-tokens': registry.npmjs.org/@uifabricshared/foundation-tokens/0.6.1
+      '@uifabricshared/theming-ramp': registry.npmjs.org/@uifabricshared/theming-ramp/0.9.57_react@16.11.0
     dev: false
-    id: registry.npmjs.org/@fluentui-react-native/tokens/0.4.23
+    id: registry.npmjs.org/@fluentui-react-native/tokens/0.4.58
     name: '@fluentui-react-native/tokens'
     peerDependencies:
       react: '*'
     resolution:
-      integrity: sha512-3fjAjAkjC3szB1UJQPgg86tZwnjrFwuVGsyQHXC0OOclG0vLH9p8LXOqfRo5bx/hf9h6H8lnUKaQI/fM7EfK/w==
+      integrity: sha512-Kk4yIfh8pDbasbxINcw2Lm9KsCeH5Xkc1IwEhRCThajNe6VEx0s3VP12Iyhcw0WH1WNDsAMhOpXzP7SQsgYQhg==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@fluentui-react-native/tokens/-/tokens-0.4.23.tgz'
-    version: 0.4.23
-  registry.npmjs.org/@fluentui/react-native/0.15.28_686ec919160581136b28b7fe63160a42:
+      tarball: 'https://registry.npmjs.org/@fluentui-react-native/tokens/-/tokens-0.4.58.tgz'
+    version: 0.4.58
+  registry.npmjs.org/@fluentui/react-native/0.15.63_686ec919160581136b28b7fe63160a42:
     dependencies:
-      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.2.24
-      '@fluentui-react-native/button': registry.npmjs.org/@fluentui-react-native/button/0.5.24_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/callout': registry.npmjs.org/@fluentui-react-native/callout/0.6.12_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/checkbox': registry.npmjs.org/@fluentui-react-native/checkbox/0.3.27_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/focus-trap-zone': registry.npmjs.org/@fluentui-react-native/focus-trap-zone/0.3.27_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/interactive-hooks': registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.3.22_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/link': registry.npmjs.org/@fluentui-react-native/link/0.5.25_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/persona': registry.npmjs.org/@fluentui-react-native/persona/0.5.24_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/persona-coin': registry.npmjs.org/@fluentui-react-native/persona-coin/0.3.27_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/pressable': registry.npmjs.org/@fluentui-react-native/pressable/0.3.27_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/radio-group': registry.npmjs.org/@fluentui-react-native/radio-group/0.3.27_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/separator': registry.npmjs.org/@fluentui-react-native/separator/0.3.28_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/text': registry.npmjs.org/@fluentui-react-native/text/0.5.24_686ec919160581136b28b7fe63160a42
-      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.23_react@16.11.0
-      '@uifabricshared/foundation-composable': registry.npmjs.org/@uifabricshared/foundation-composable/0.6.23
-      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.26_react@16.11.0
-      '@uifabricshared/foundation-settings': registry.npmjs.org/@uifabricshared/foundation-settings/0.5.23
-      '@uifabricshared/foundation-tokens': registry.npmjs.org/@uifabricshared/foundation-tokens/0.5.23
-      '@uifabricshared/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.23
-      '@uifabricshared/theming-ramp': registry.npmjs.org/@uifabricshared/theming-ramp/0.9.22_react@16.11.0
-      '@uifabricshared/theming-react-native': registry.npmjs.org/@uifabricshared/theming-react-native/0.7.23_react@16.11.0
+      '@fluentui-react-native/adapters': registry.npmjs.org/@fluentui-react-native/adapters/0.3.23
+      '@fluentui-react-native/button': registry.npmjs.org/@fluentui-react-native/button/0.9.14_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/callout': registry.npmjs.org/@fluentui-react-native/callout/0.9.3_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/checkbox': registry.npmjs.org/@fluentui-react-native/checkbox/0.3.62_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/focus-trap-zone': registry.npmjs.org/@fluentui-react-native/focus-trap-zone/0.3.62_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/interactive-hooks': registry.npmjs.org/@fluentui-react-native/interactive-hooks/0.4.30_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/link': registry.npmjs.org/@fluentui-react-native/link/0.6.21_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/persona': registry.npmjs.org/@fluentui-react-native/persona/0.5.59_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/persona-coin': registry.npmjs.org/@fluentui-react-native/persona-coin/0.3.62_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/pressable': registry.npmjs.org/@fluentui-react-native/pressable/0.3.62_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/radio-group': registry.npmjs.org/@fluentui-react-native/radio-group/0.3.62_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/separator': registry.npmjs.org/@fluentui-react-native/separator/0.3.63_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/text': registry.npmjs.org/@fluentui-react-native/text/0.5.59_686ec919160581136b28b7fe63160a42
+      '@fluentui-react-native/tokens': registry.npmjs.org/@fluentui-react-native/tokens/0.4.58_react@16.11.0
+      '@uifabricshared/foundation-composable': registry.npmjs.org/@uifabricshared/foundation-composable/0.6.58
+      '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.61_react@16.11.0
+      '@uifabricshared/foundation-settings': registry.npmjs.org/@uifabricshared/foundation-settings/0.5.58
+      '@uifabricshared/foundation-tokens': registry.npmjs.org/@uifabricshared/foundation-tokens/0.6.1
+      '@uifabricshared/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.58
+      '@uifabricshared/theming-ramp': registry.npmjs.org/@uifabricshared/theming-ramp/0.9.57_react@16.11.0
+      '@uifabricshared/theming-react-native': registry.npmjs.org/@uifabricshared/theming-react-native/0.7.58_react@16.11.0
       react: registry.npmjs.org/react/16.11.0
       react-native: registry.npmjs.org/react-native/0.62.2_686ec919160581136b28b7fe63160a42
     dev: false
-    id: registry.npmjs.org/@fluentui/react-native/0.15.28
+    id: registry.npmjs.org/@fluentui/react-native/0.15.63
     name: '@fluentui/react-native'
     peerDependencies:
       react: 16.11.0
       react-native: '>=0.60.0'
     resolution:
-      integrity: sha512-n61rwqPajR7NYSZ/dhKK6i4eo4v3UQsjfdDHhHYc6tBJs4epCVq2KAZVdGMImfQZtc3CA75fz+HJXm3CyDma0w==
+      integrity: sha512-IRsglIaF1xdQqs+GVIPVSTz6Lgdjge2CZVbpMVF49aoIjUZzslmhQSQcJbNv4bGa10MkKz+kII+RRyw+8U8CDQ==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@fluentui/react-native/-/react-native-0.15.28.tgz'
-    version: 0.15.28
+      tarball: 'https://registry.npmjs.org/@fluentui/react-native/-/react-native-0.15.63.tgz'
+    version: 0.15.63
   registry.npmjs.org/@hapi/accept/3.2.4:
     dependencies:
       '@hapi/boom': registry.npmjs.org/@hapi/boom/7.4.11
@@ -4900,34 +4908,35 @@ packages:
       registry: 'https://registry.yarnpkg.com/'
       tarball: 'https://registry.npmjs.org/@typescript-eslint/typescript-estree/-/typescript-estree-2.34.0.tgz'
     version: 2.34.0
-  registry.npmjs.org/@uifabricshared/foundation-composable/0.6.23:
+  registry.npmjs.org/@uifabricshared/foundation-composable/0.6.58:
     dependencies:
-      '@uifabricshared/foundation-settings': registry.npmjs.org/@uifabricshared/foundation-settings/0.5.23
+      '@uifabricshared/foundation-settings': registry.npmjs.org/@uifabricshared/foundation-settings/0.5.58
     dev: false
     name: '@uifabricshared/foundation-composable'
     resolution:
-      integrity: sha512-V7ZEmNmKtdKOSTAOaXGYgAnU5Bz1aTVeR6tNsBty3iPcVR59sPReRXewMG1ynNWxw9DLhlggZDST3NXM0BaCRQ==
+      integrity: sha512-vzkvKSsNl8Sk3dI1YWC/FMhdLLo5RBilEwHtCz8KqOwDYfHi2bbQpd+iM3C5dSWz3fe3I0D/dP2u9VrtTEtwkA==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@uifabricshared/foundation-composable/-/foundation-composable-0.6.23.tgz'
-    version: 0.6.23
-  registry.npmjs.org/@uifabricshared/foundation-compose/1.6.26_react@16.11.0:
+      tarball: 'https://registry.npmjs.org/@uifabricshared/foundation-composable/-/foundation-composable-0.6.58.tgz'
+    version: 0.6.58
+  registry.npmjs.org/@uifabricshared/foundation-compose/1.6.61_react@16.11.0:
     dependencies:
-      '@uifabricshared/foundation-composable': registry.npmjs.org/@uifabricshared/foundation-composable/0.6.23
-      '@uifabricshared/foundation-tokens': registry.npmjs.org/@uifabricshared/foundation-tokens/0.5.23
-      '@uifabricshared/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.23
-      '@uifabricshared/themed-settings': registry.npmjs.org/@uifabricshared/themed-settings/0.4.23
-      '@uifabricshared/theming-ramp': registry.npmjs.org/@uifabricshared/theming-ramp/0.9.22_react@16.11.0
-      '@uifabricshared/theming-react-native': registry.npmjs.org/@uifabricshared/theming-react-native/0.7.23_react@16.11.0
+      '@fluentui-react-native/memo-cache': registry.npmjs.org/@fluentui-react-native/memo-cache/0.2.1
+      '@uifabricshared/foundation-composable': registry.npmjs.org/@uifabricshared/foundation-composable/0.6.58
+      '@uifabricshared/foundation-tokens': registry.npmjs.org/@uifabricshared/foundation-tokens/0.6.1
+      '@uifabricshared/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.58
+      '@uifabricshared/themed-settings': registry.npmjs.org/@uifabricshared/themed-settings/0.4.58
+      '@uifabricshared/theming-ramp': registry.npmjs.org/@uifabricshared/theming-ramp/0.9.57_react@16.11.0
+      '@uifabricshared/theming-react-native': registry.npmjs.org/@uifabricshared/theming-react-native/0.7.58_react@16.11.0
     dev: false
-    id: registry.npmjs.org/@uifabricshared/foundation-compose/1.6.26
+    id: registry.npmjs.org/@uifabricshared/foundation-compose/1.6.61
     name: '@uifabricshared/foundation-compose'
     peerDependencies:
       react: '*'
     resolution:
-      integrity: sha512-IGzDvR5ttmmF+Plu97kbxYy8BukByx7OE1E1g4S0HQcYzOHhxsurmrbGKlpBHfyAM2Ingg4Ga5IZhBGvLa3VVw==
+      integrity: sha512-QrWCQPXxCEaj/xCrhaVLPpeTOgPdueUROmNFMemo87Fib7hjGQ8NsIH0JULK6HmpK20BDjcoDz3tAznKfn8Rtg==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@uifabricshared/foundation-compose/-/foundation-compose-1.6.26.tgz'
-    version: 1.6.26
+      tarball: 'https://registry.npmjs.org/@uifabricshared/foundation-compose/-/foundation-compose-1.6.61.tgz'
+    version: 1.6.61
   registry.npmjs.org/@uifabricshared/foundation-settings/0.5.23:
     dependencies:
       '@uifabricshared/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.23
@@ -4938,16 +4947,27 @@ packages:
       registry: 'https://registry.yarnpkg.com/'
       tarball: 'https://registry.npmjs.org/@uifabricshared/foundation-settings/-/foundation-settings-0.5.23.tgz'
     version: 0.5.23
-  registry.npmjs.org/@uifabricshared/foundation-tokens/0.5.23:
+  registry.npmjs.org/@uifabricshared/foundation-settings/0.5.58:
     dependencies:
-      '@uifabricshared/foundation-settings': registry.npmjs.org/@uifabricshared/foundation-settings/0.5.23
+      '@fluentui-react-native/memo-cache': registry.npmjs.org/@fluentui-react-native/memo-cache/0.2.1
+      '@uifabricshared/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.58
+    dev: false
+    name: '@uifabricshared/foundation-settings'
+    resolution:
+      integrity: sha512-3MH6w+xtuOKhtASrU8QKnRYbTHBhrK879gUWx+Tu0Y3WPDUIPpRs7XbC/CdRbzC6jR6CXCxLlCbJ7Wfqy+UW2A==
+      registry: 'https://registry.yarnpkg.com/'
+      tarball: 'https://registry.npmjs.org/@uifabricshared/foundation-settings/-/foundation-settings-0.5.58.tgz'
+    version: 0.5.58
+  registry.npmjs.org/@uifabricshared/foundation-tokens/0.6.1:
+    dependencies:
+      '@uifabricshared/foundation-settings': registry.npmjs.org/@uifabricshared/foundation-settings/0.5.58
     dev: false
     name: '@uifabricshared/foundation-tokens'
     resolution:
-      integrity: sha512-tEepKgGIf0LADGL55N8pA1jPKkG4W4YqGtQ3DusboasIslmATXsLXGd8YT6cC10VM+29z3TtcGabw068s1uqrA==
+      integrity: sha512-l5l0+Ge0VChXfjpJMYQm65ZShsn+3fSIqiUgDBT7gfwnJ9DiJhHuKcP/8LYQB1PfQBDSVpygr5R6+dEWuMGqcw==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@uifabricshared/foundation-tokens/-/foundation-tokens-0.5.23.tgz'
-    version: 0.5.23
+      tarball: 'https://registry.npmjs.org/@uifabricshared/foundation-tokens/-/foundation-tokens-0.6.1.tgz'
+    version: 0.6.1
   registry.npmjs.org/@uifabricshared/immutable-merge/0.5.23:
     dev: false
     name: '@uifabricshared/immutable-merge'
@@ -4956,6 +4976,14 @@ packages:
       registry: 'https://registry.yarnpkg.com/'
       tarball: 'https://registry.npmjs.org/@uifabricshared/immutable-merge/-/immutable-merge-0.5.23.tgz'
     version: 0.5.23
+  registry.npmjs.org/@uifabricshared/immutable-merge/0.5.58:
+    dev: false
+    name: '@uifabricshared/immutable-merge'
+    resolution:
+      integrity: sha512-jRWy7V7rewBBw1dabS9wfrjTLu03SYu5Lhh5zc9lATjc+SNVBvsYkN16/0WOTmkX10iK7R0ApoOBXtL+fPCMtg==
+      registry: 'https://registry.yarnpkg.com/'
+      tarball: 'https://registry.npmjs.org/@uifabricshared/immutable-merge/-/immutable-merge-0.5.58.tgz'
+    version: 0.5.58
   registry.npmjs.org/@uifabricshared/theme-registry/0.3.23:
     dependencies:
       '@uifabricshared/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.23
@@ -4966,16 +4994,26 @@ packages:
       registry: 'https://registry.yarnpkg.com/'
       tarball: 'https://registry.npmjs.org/@uifabricshared/theme-registry/-/theme-registry-0.3.23.tgz'
     version: 0.3.23
-  registry.npmjs.org/@uifabricshared/themed-settings/0.4.23:
+  registry.npmjs.org/@uifabricshared/theme-registry/0.3.58:
     dependencies:
-      '@uifabricshared/foundation-settings': registry.npmjs.org/@uifabricshared/foundation-settings/0.5.23
+      '@uifabricshared/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.58
+    dev: false
+    name: '@uifabricshared/theme-registry'
+    resolution:
+      integrity: sha512-2UFryVQd+hqG5Ocz4GG4DsuAef8xXyAoDD54azcbwuDtfqiWpKZH2SpM2FaqiWXUAUYmDn9L0BYA8+TPgUz9lw==
+      registry: 'https://registry.yarnpkg.com/'
+      tarball: 'https://registry.npmjs.org/@uifabricshared/theme-registry/-/theme-registry-0.3.58.tgz'
+    version: 0.3.58
+  registry.npmjs.org/@uifabricshared/themed-settings/0.4.58:
+    dependencies:
+      '@uifabricshared/foundation-settings': registry.npmjs.org/@uifabricshared/foundation-settings/0.5.58
     dev: false
     name: '@uifabricshared/themed-settings'
     resolution:
-      integrity: sha512-+hkFqlqxFkCi16Vs8V0d4kVyNVi6a4Li1A3qrgjkKrtYQ6HrlPyDhm1KE5pmmsfbDrp+L2RhXfrfKbvsH+Kd2Q==
+      integrity: sha512-DQdhCeOBj5oS2nFioMCg13jElDvyOuPNFIx56/M6ErHhNa5wtO7rRhrMx0q6Av1uFKHxv5oUpmlwo4/rDG+/gQ==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@uifabricshared/themed-settings/-/themed-settings-0.4.23.tgz'
-    version: 0.4.23
+      tarball: 'https://registry.npmjs.org/@uifabricshared/themed-settings/-/themed-settings-0.4.58.tgz'
+    version: 0.4.58
   registry.npmjs.org/@uifabricshared/themed-stylesheet/0.3.15_react-native@0.62.2:
     dependencies:
       react-native: registry.npmjs.org/react-native/0.62.2_686ec919160581136b28b7fe63160a42
@@ -5004,6 +5042,21 @@ packages:
       registry: 'https://registry.yarnpkg.com/'
       tarball: 'https://registry.npmjs.org/@uifabricshared/theming-ramp/-/theming-ramp-0.9.22.tgz'
     version: 0.9.22
+  registry.npmjs.org/@uifabricshared/theming-ramp/0.9.57_react@16.11.0:
+    dependencies:
+      '@uifabricshared/foundation-settings': registry.npmjs.org/@uifabricshared/foundation-settings/0.5.58
+      '@uifabricshared/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.58
+      react: registry.npmjs.org/react/16.11.0
+    dev: false
+    id: registry.npmjs.org/@uifabricshared/theming-ramp/0.9.57
+    name: '@uifabricshared/theming-ramp'
+    peerDependencies:
+      react: 16.11.0
+    resolution:
+      integrity: sha512-z7mdc81xpIHxS120XEzw+ClAG/ibuJ7KBX/ZCVZYdzw9FENwdCEJKB2Jb31VI+DaENENKcWzbzuB7n3fi4J+Zw==
+      registry: 'https://registry.yarnpkg.com/'
+      tarball: 'https://registry.npmjs.org/@uifabricshared/theming-ramp/-/theming-ramp-0.9.57.tgz'
+    version: 0.9.57
   registry.npmjs.org/@uifabricshared/theming-react-native/0.7.14_react@16.11.0:
     dependencies:
       '@uifabricshared/foundation-settings': registry.npmjs.org/@uifabricshared/foundation-settings/0.5.23
@@ -5020,22 +5073,22 @@ packages:
       registry: 'https://registry.yarnpkg.com/'
       tarball: 'https://registry.npmjs.org/@uifabricshared/theming-react-native/-/theming-react-native-0.7.14.tgz'
     version: 0.7.14
-  registry.npmjs.org/@uifabricshared/theming-react-native/0.7.23_react@16.11.0:
+  registry.npmjs.org/@uifabricshared/theming-react-native/0.7.58_react@16.11.0:
     dependencies:
-      '@uifabricshared/foundation-settings': registry.npmjs.org/@uifabricshared/foundation-settings/0.5.23
-      '@uifabricshared/theme-registry': registry.npmjs.org/@uifabricshared/theme-registry/0.3.23
-      '@uifabricshared/theming-ramp': registry.npmjs.org/@uifabricshared/theming-ramp/0.9.22_react@16.11.0
+      '@uifabricshared/foundation-settings': registry.npmjs.org/@uifabricshared/foundation-settings/0.5.58
+      '@uifabricshared/theme-registry': registry.npmjs.org/@uifabricshared/theme-registry/0.3.58
+      '@uifabricshared/theming-ramp': registry.npmjs.org/@uifabricshared/theming-ramp/0.9.57_react@16.11.0
       react: registry.npmjs.org/react/16.11.0
     dev: false
-    id: registry.npmjs.org/@uifabricshared/theming-react-native/0.7.23
+    id: registry.npmjs.org/@uifabricshared/theming-react-native/0.7.58
     name: '@uifabricshared/theming-react-native'
     peerDependencies:
       react: 16.11.0
     resolution:
-      integrity: sha512-z6naiO/FwZ1Bjz7S54WcDWG0rEfXxmToKEblWfROEtUnciD86nnTDZ8qyWfVbNKkUAiAPWRG3yv5EalZiQm0rQ==
+      integrity: sha512-IQ9qvuaFW39JUeJL5SCwAU04ndesEcbv5lMCn07oMfOlDT4FZlA54iiylpmh62MkFgwhKdT+BcMd2TOQdvYB1Q==
       registry: 'https://registry.yarnpkg.com/'
-      tarball: 'https://registry.npmjs.org/@uifabricshared/theming-react-native/-/theming-react-native-0.7.23.tgz'
-    version: 0.7.23
+      tarball: 'https://registry.npmjs.org/@uifabricshared/theming-react-native/-/theming-react-native-0.7.58.tgz'
+    version: 0.7.58
   registry.npmjs.org/@webassemblyjs/ast/1.9.0:
     dependencies:
       '@webassemblyjs/helper-module-context': registry.npmjs.org/@webassemblyjs/helper-module-context/1.9.0
