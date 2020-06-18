@@ -6,40 +6,31 @@ import {
   resolveSettingsOverrides
 } from '@uifabricshared/foundation-settings';
 import { IGetSettingsFromTheme, ISettingsEntry } from './CustomSettings.types';
-
-const _baseKey = '_base';
+import { GetMemoValue } from '@fluentui-react-native/memo-cache';
 
 /**
- * Resolve the stack of settings but do not apply any overrides.  This should only calculate once for a given
- * theme
- *
- * @param customSettings - array of settings entries to merge
- * @param theme - theme to use for named settings retrieval
- * @param cache - object to use as a cache, should be component specific
- * @param key - key to use for the base cache info
- * @param getFromTheme - routine to look up the named entries in the theme.  They will be skipped if this is not specified
+ * Merges the various settings for a component together
+ * @param customSettings - the array of settings to apply for this object
+ * @param theme - the theme to use for value lookups and component definitions
+ * @param getFromTheme - helper function to retrieve settings from a theme
  */
-export function getBaseThemedSettings<TSettings extends IComponentSettings, TTheme>(
+export function mergeBaseSettings<TSettings extends IComponentSettings, TTheme>(
   customSettings: ISettingsEntry<TSettings, TTheme>[],
   theme: TTheme,
-  cache: object,
-  key: string,
   getFromTheme?: IGetSettingsFromTheme<TSettings, TTheme>
-): TSettings | undefined {
-  key = key || _baseKey;
-  if (!cache[key] && customSettings && customSettings.length > 0) {
-    cache[key] = mergeSettings(
-      ...customSettings.map(entry => {
-        if (typeof entry === 'string') {
-          return (getFromTheme && getFromTheme(theme, entry)) || undefined;
-        } else if (typeof entry === 'function') {
-          return entry(theme);
-        }
-        return entry;
-      })
-    );
-  }
-  return cache[key];
+): TSettings {
+  return customSettings
+    ? mergeSettings(
+        ...customSettings.map(entry => {
+          if (typeof entry === 'string') {
+            return (getFromTheme && getFromTheme(theme, entry)) || undefined;
+          } else if (typeof entry === 'function') {
+            return entry(theme);
+          }
+          return entry;
+        })
+      )
+    : undefined;
 }
 
 /**
@@ -48,28 +39,26 @@ export function getBaseThemedSettings<TSettings extends IComponentSettings, TThe
  *
  * @param customSettings - array of settings entries to merge
  * @param theme - theme used to look up named settings
- * @param cache - object to use as a cache, should be component specific
- * @param key - starting key for the cache entry
+ * @param memoValue - a GetMemoValue function to use as the root of caching
  * @param hasOverride - override lookup type for looking up whether an override should be applied to the settings
  * @param getFromTheme - routine to look up the named entries in the theme.  They will be skipped if not specified.
  */
 export function getThemedSettings<TSettings extends IComponentSettings, TTheme>(
   customSettings: ISettingsEntry<TSettings, TTheme>[],
   theme: TTheme,
-  cache: object,
-  key: string,
+  memoValue: GetMemoValue<TSettings, TSettings>,
   hasOverride?: IOverrideLookup,
   getFromTheme?: IGetSettingsFromTheme<TSettings, TTheme>
-): { settings: TSettings | undefined; key: string } {
-  key = key || _baseKey;
-  let settings = getBaseThemedSettings(customSettings, theme, cache, key, getFromTheme);
+): { settings: TSettings | undefined; getMemoValue: GetMemoValue<TSettings, TSettings> } {
+  // resolve the settings for this component, keyed on the theme
+  let [settings, getMemoValue] = memoValue(() => mergeBaseSettings(customSettings, theme, getFromTheme), [theme]);
+
+  // if overrides are set, resolve the override settings, keyed on the applied overrides
   const overrides = getActiveOverrides(settings, hasOverride);
-  if (overrides && overrides.length > 0) {
-    key = key + '-' + overrides.join('-');
-    if (!cache[key]) {
-      cache[key] = resolveSettingsOverrides(settings, hasOverride) as TSettings;
-    }
-    settings = cache[key];
+  if (overrides.length > 0) {
+    [settings, getMemoValue] = getMemoValue(() => resolveSettingsOverrides(settings, hasOverride) as TSettings, overrides);
   }
-  return { settings, key };
+
+  // return the merged settings and a query routine to go deeper in the cache
+  return { settings, getMemoValue };
 }

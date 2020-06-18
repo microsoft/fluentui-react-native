@@ -1,6 +1,7 @@
 import { IComponentTokens } from './Token.types';
 import { ISlotProps, IComponentSettings } from '@uifabricshared/foundation-settings';
-import { ITokenPropInfo, ICacheInfo } from './Token.internal';
+import { ITokenPropInfo } from './Token.internal';
+import { GetMemoValue } from '@fluentui-react-native/memo-cache';
 
 /**
  * Take the input props and props from settings and return a merged set of token props (a single source
@@ -15,7 +16,7 @@ function _getTokenPropInfo<TTokens>(props: TTokens, tokensSlot: TTokens, tokenKe
   const tokens = { ...tokensSlot };
   const deltas = {} as TTokens;
   for (const key in tokenKeys) {
-    if (props.hasOwnProperty(key) && props[key] !== tokens[key]) {
+    if (props[key] !== undefined && props[key] !== tokens[key]) {
       deltas[key] = tokens[key] = props[key];
     }
   }
@@ -40,21 +41,18 @@ export function processTokens<TSlotProps extends ISlotProps, TTokens extends obj
   theme: TTheme,
   slotProps: IComponentSettings<TSlotProps & { tokens?: TTokens }>,
   tokenInfo: IComponentTokens<TSlotProps, TTokens, TTheme>,
-  prefix: string,
-  cache: object,
-  displayName?: string
+  cache: GetMemoValue<TSlotProps>
 ): ISlotProps {
   // merge in tokens and build up the cache key which are the tokens overridden by the user
   slotProps = slotProps || {};
   const rootSlotProps = slotProps.tokens || {};
   const { handlers, tokenKeys } = tokenInfo;
   const tokenPropInfo = _getTokenPropInfo(props, rootSlotProps, tokenKeys);
-  const cacheInfo: ICacheInfo = { cache, prefix, displayName };
   const resolvedSlotProps = { tokens: tokenPropInfo.tokens || {} };
 
   Object.getOwnPropertyNames(handlers).forEach(slotName => {
     const handler = handlers[slotName];
-    resolvedSlotProps[slotName] = handler(slotProps[slotName] || {}, tokenPropInfo as any, theme, slotName, cacheInfo);
+    resolvedSlotProps[slotName] = handler(slotProps[slotName] || {}, tokenPropInfo as any, theme, slotName, cache);
   });
 
   // return the cache entry

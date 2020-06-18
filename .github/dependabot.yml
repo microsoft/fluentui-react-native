@@ -1,0 +1,11 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: '13:00'
+  labels:
+  - dependencies
+  version_requirement_updates: off
+  versioning-strategy: lockfile-only

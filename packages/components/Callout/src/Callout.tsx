@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { requireNativeComponent, findNodeHandle } from 'react-native';
 import { calloutName, ICalloutProps, ICalloutSlotProps, ICalloutType } from './Callout.types';
 import { settings } from './Callout.settings';
@@ -14,7 +15,13 @@ export const Callout = compose<ICalloutType>({
   usePrepareProps: (props: ICalloutProps, useStyling: IUseComposeStyling<ICalloutType>) => {
     const { componentRef, target, ...rest } = props;
     const calloutRef = useViewCommandFocus(componentRef);
-    const targetNativeTag = findNodeHandle(target.current);
+    const [targetNativeTag, setTargetNativeTag] = React.useState<number>(undefined);
+
+    React.useLayoutEffect(() => {
+      if (target?.current) {
+        setTargetNativeTag(findNodeHandle(target.current));
+      }
+    }, [target]);
 
     const slotProps = mergeSettings<ICalloutSlotProps>(useStyling(props), {
       root: {
