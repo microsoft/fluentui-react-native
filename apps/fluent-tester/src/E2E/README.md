@@ -8,7 +8,7 @@
 - [WinAppDriver](https://github.com/microsoft/WinAppDriver) - Version 1.1
 - Enable [_Developer Mode_](https://docs.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development) in Windows settings
 - [Java 1.8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html) (Optional) - Used for generating in-depth after-action reports. More information in "Debugging E2E Failures" section below.
-- [Allure Command-Line](https://www.npmjs.com/package/allure-commandline) - Used for creating in-depth reporting.
+- [Allure Command-Line](https://www.npmjs.com/package/allure-commandline) (Optional) - Used for creating in-depth reporting.
   - `npm install -g allure-commandline`
 
 ### UWP Additional Prerequisites
@@ -100,7 +100,7 @@ describe('Click on each test page and check if it renders', function() {
 
 If one tests fails, it will cause every subsequent test to fail as well. Due to this structure, if you get a failing E2E run, you should find the **first** failing test and focus on fixing that one.
 
-Having a clear and concise report on testing failures is key in efficient debugging. We're utilizing two report generator:
+Having a clear and concise report on testing failures is key in efficient debugging. We're utilizing two report generators:
 
 1. **Spec Reporter** - Low overhead, easy to read, automatically runs with E2E testing. However, less information and less reliable.
 
@@ -118,7 +118,7 @@ When running E2E locally, after failing an E2E run, you will get a screenshot of
 
 ## Using Allure Reporter
 
-Allure Framework is a flexible lightweight multi-language test report tool that not only shows a very concise representation of what have been tested in a neat web report form, but allows everyone participating in the development process to extract maximum of useful information from everyday execution of tests.
+Allure Framework is a flexible, lightweight multi-language test report tool that not only shows a very concise representation of what have been tested in a neat web report form, but allows everyone participating in the development process to extract maximum of useful information from everyday execution of tests.
 
 After E2E testing runs, allure creates a folder of XML files with all relevant information from the tests. In order to generate the report, you need to run the following command:
 

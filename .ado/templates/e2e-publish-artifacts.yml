@@ -5,7 +5,7 @@ parameters:
 steps:
   # Generate reports. This task doesn't end until a ctrl+c is pressed. I'm not sure how to end it in this case, so
   # I added a 1 minute timer. It should always generate the report in this time, then the task timeouts and continues on the pipeline.
-  # conitnueOnError is true because the pipeline should continue even on failure
+  # continueOnError is true because the pipeline should continue even on failure
   - script: |
       yarn generate-report
     workingDirectory: apps\${{parameters.platform}}
