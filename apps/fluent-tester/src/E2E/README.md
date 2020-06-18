@@ -6,8 +6,10 @@
 - [React Native Windows Development Dependencies](https://microsoft.github.io/react-native-windows/docs/rnw-dependencies)
   - **NOTE:** Please make sure you grab all of the items listed there and the appropriate versions.
 - [WinAppDriver](https://github.com/microsoft/WinAppDriver) - Version 1.1
-- [Java 1.8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html) (Optional) - Used for generating in-depth after-action reports. More information in "Debugging E2E Failures" section below.
 - Enable [_Developer Mode_](https://docs.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development) in Windows settings
+- [Java 1.8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html) (Optional) - Used for generating in-depth after-action reports. More information in "Debugging E2E Failures" section below.
+- [Allure Command-Line](https://www.npmjs.com/package/allure-commandline) - Used for creating in-depth reporting.
+  - `npm install -g allure-commandline`
 
 ### UWP Additional Prerequisites
 
@@ -94,7 +96,7 @@ describe('Click on each test page and check if it renders', function() {
 });
 ```
 
-# Debugging E2E Failures
+# Debugging E2E Failures (Locally)
 
 If one tests fails, it will cause every subsequent test to fail as well. Due to this structure, if you get a failing E2E run, you should find the **first** failing test and focus on fixing that one.
 
@@ -110,7 +112,7 @@ You can view the spec report right as E2E testing is finished. It shows the fail
 
 In the example below, the SVG test is the one failing the run, and at the bottom, you can see an error message.
 
-![E2E Error Debugging](../../../../assets/E2E_spec_reporter.png)
+![E2E Error Debugging](../../../../assets/E2E/E2E_spec_reporter.png)
 
 When running E2E locally, after failing an E2E run, you will get a screenshot of the error in /errorShots/ of the platform you tested.
 
@@ -123,3 +125,26 @@ After E2E testing runs, allure creates a folder of XML files with all relevant i
 - `yarn generate-report`
 
 This will bundle all the generated information and create a report for you to read.
+
+# Debugging E2E Failures (CI Pipeline)
+
+When an E2E test run fails within our CI, crucial information is output to Azure-Pipelines to help you debug the failure. Follow these steps:
+
+1. On the PR page, navigate to the "Checks" tab, ensure you've selected the "PR" tab on the left, and press "View more details on Azure Pipelines" at the bottom. ![E2E_Debugging_Step_1](../../../../assets/E2E/E2E_Debugging_Step_1.png)
+
+2. Click on the "# published" section. ![E2E_Debugging_Step_2](../../../../assets/E2E/E2E_Debugging_Step_2.png)
+
+3. Here, you have crucial information to help you debug the problem.
+
+   - The bottom files (green) are screenshots of the failing tests. The first one from the top (in this case, Svg-Test-Page), is the test failing the whole run. This is the one you're focus should be on.
+
+   - The middle file (pink) is the Appium output file. This contains more in-depth information on each test, including possible failures with WebDriverIO or the driver being used.
+
+   - The top folder (blue) is the Allure reporter output. In order to generate the report, you must:
+
+     1. Download the folder and unzip it
+
+     2. Navigate to it's location within your cmd, and type:
+        - C:\pathToFolder\allure-report\E2E_win32_Dump> `allure open`
+
+![E2E_Debugging_Step_3](../../../../assets/E2E/E2E_Debugging_Step_3.png)
