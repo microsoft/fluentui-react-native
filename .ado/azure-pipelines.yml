@@ -20,13 +20,13 @@ jobs:
 
       - template: templates/setup-repo.yml
 
-      - script: |
-          yarn checkchange
-        displayName: "check change"
+      # - script: |
+      #     yarn checkchange
+      #   displayName: "check change"
 
-      - script: |
-          yarn check-for-changed-files
-        displayName: "verify API and Ensure Changed Files"
+      # - script: |
+      #     yarn check-for-changed-files
+      #   displayName: "verify API and Ensure Changed Files"
 
       - template: templates/e2e-testing-windows.yml
 
