@@ -34,6 +34,7 @@ jobs:
           script: |
             Write-Host "##vso[task.setvariable variable=task.A.status]Success"
         condition: succeeded()
+        displayName: "Creating success build variable"
 
       - template: templates/e2e-testing-windows.yml
         parameters:
