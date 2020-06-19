@@ -1,5 +1,5 @@
 parameters:
-  status:
+  buildSuccess:
 
 steps:
   - task: DownloadSecureFile@1
@@ -50,28 +50,28 @@ steps:
     parameters:
       applicationType: UWP
       platform: windows
-      status: ${{parameters.status}}
+      buildArtifacts: ${{parameters.buildSuccess}}
 
   # Necessary for Appium server to run twice (for UWP and Win32). One instance at a time
   - powershell: |
       Stop-Process -Name node
     displayName: "Kill node Process"
-    condition: and (succeededOrFailed(), eq(${{parameters.status}}, 'success'))
+    condition: and (succeededOrFailed(), eq(${{parameters.buildSuccess}}, 'success'))
 
   # Performance Reasons
   - powershell: |
       Start-Sleep -Seconds 30
     displayName: "Performance Delay"
-    condition: and (succeededOrFailed(), eq(${{parameters.status}}, 'success'))
+    condition: and (succeededOrFailed(), eq(${{parameters.buildSuccess}}, 'success'))
 
   - script: |
       yarn e2etest
     workingDirectory: apps\win32
     displayName: "run Win32 E2E tests"
-    condition: and (succeededOrFailed(), eq(${{parameters.status}}, 'success'))
+    condition: and (succeededOrFailed(), eq(${{parameters.buildSuccess}}, 'success'))
 
   - template: e2e-publish-artifacts.yml
     parameters:
       applicationType: win32
       platform: win32
-      status: ${{parameters.status}}
+      buildArtifacts: ${{parameters.buildSuccess}}
