@@ -35,12 +35,12 @@ export interface RestoreFocusEvent {
   };
 }
 
-export interface OmittedBorderTokens {
+interface OmittedBorderTokens {
   borderRadius?: number | string;
   borderStyle?: ViewStyle['borderStyle'];
 }
 
-export type CalloutBorderTokens = Omit<IBorderTokens, keyof OmittedBorderTokens>;
+type CalloutBorderTokens = Omit<IBorderTokens, keyof OmittedBorderTokens>;
 
 export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTokens {
   /**
