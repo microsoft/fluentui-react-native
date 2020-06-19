@@ -25,7 +25,7 @@ export function atomicRender<TProps extends object, TState = object>(
 ): JSX.Element | null {
   return renderSlot(Slots.root, undefined, ...children);
 }
-dewfcwfvf2f24f34f43;
+
 export function atomicUsePrepareProps<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object>(
   props: TProps,
   useStyling: IDefineUseStyling<TProps, TSlotProps>
