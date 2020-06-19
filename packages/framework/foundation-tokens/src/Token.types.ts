@@ -1,5 +1,4 @@
-import { ICacheInfo, ICachedPropHandlers } from './Token.internal';
-import { ISlotProps } from '@uifabricshared/foundation-settings';
+import { ICachedPropHandlers } from './Token.internal';
 
 /**
  * STYLE FACTORY OPERATIONS (PARTIAL TOKEN PROCESSORS)
@@ -64,8 +63,8 @@ export type IStyleFactoryEntry<TProps, TTokens, TTheme> =
 /**
  * This is the collection of style factories corresponding to the slots
  */
-export type IStyleFactories<TSlotProps extends ISlotProps, TTokens, TTheme> = {
-  [K in keyof TSlotProps]?: IStyleFactoryEntry<TSlotProps[K], TTokens, TTheme> | IStyleFactoryEntry<TSlotProps[K], TTokens, TTheme>[];
+export type IStyleFactories<TSlotProps extends object, TTokens, TTheme> = {
+  [K in keyof TSlotProps]?: IStyleFactoryEntry<TSlotProps[K], TTokens, TTheme> | IStyleFactoryEntry<TSlotProps[K], TTokens, TTheme>[]
 };
 
 /**
@@ -79,12 +78,12 @@ export type ITargetHasToken = (target: string, key: string) => boolean;
  * Style finalizer function.  Allows transforming props and styles before they are cached.  This could be used
  * to create css rules for the styles and changing the reference to be by class name
  */
-export type IStyleFinalizer<TProps> = (props: TProps, slotName: string, cacheInfo: ICacheInfo) => TProps;
+export type IStyleFinalizer<TProps> = (props: TProps, slotName: string) => TProps;
 
 /**
  * Resolved token definitions, ready to be rendered
  */
-export interface IComponentTokens<TSlotProps extends ISlotProps, TTokens, TTheme> {
+export interface IComponentTokens<TSlotProps extends object, TTokens, TTheme> {
   /** handlers to process the props of each slot */
   handlers: ICachedPropHandlers<TSlotProps, TTokens, TTheme>;
 

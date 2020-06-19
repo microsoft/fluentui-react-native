@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-settings",
   "entries": [
     {
+      "date": "Wed, 17 Jun 2020 05:00:56 GMT",
+      "tag": "@uifabricshared/foundation-settings_v0.5.57",
+      "version": "0.5.57",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add memo-cache package and consume it in the core framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "27b5fc6790369ab629dcf7f93d6091d4913915fa",
+            "package": "@uifabricshared/foundation-settings"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Jun 2020 23:53:15 GMT",
       "tag": "@uifabricshared/foundation-settings_v0.5.44",
       "version": "0.5.44",
