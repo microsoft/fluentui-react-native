@@ -104,6 +104,13 @@ export interface ICalloutProps extends ICalloutTokens {
   componentRef?: React.RefObject<IFocusable>;
 
   /**
+   * Adds a beak to the Callout, pointing to the anchor target.
+   * Notable Win32 limitation: Beak rendering currently limits the border width to its default, and the
+   * border width prop will not be honored.
+   */
+  isBeakVisible?: boolean;
+
+  /**
    * Callback invoked when the callout has been dismissed.
    */
   onDismiss?: () => void;
