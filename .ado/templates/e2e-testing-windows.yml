@@ -50,7 +50,7 @@ steps:
     parameters:
       applicationType: UWP
       platform: windows
-      buildArtifacts: buildSuccess
+      buildArtifacts: ${{parameters.buildSuccess}}
 
   # Necessary for Appium server to run twice (for UWP and Win32). One instance at a time
   - powershell: |
@@ -74,4 +74,4 @@ steps:
     parameters:
       applicationType: win32
       platform: win32
-      buildArtifacts: buildSuccess
+      buildArtifacts: ${{parameters.buildSuccess}}
