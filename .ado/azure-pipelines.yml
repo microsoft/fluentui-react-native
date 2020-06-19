@@ -28,7 +28,16 @@ jobs:
           yarn check-for-changed-files
         displayName: "verify API and Ensure Changed Files"
 
+      - task: PowerShell@2
+        inputs:
+          targetType: "inline"
+          script: |
+            Write-Host "##vso[task.setvariable variable=task.A.status]Success"
+        condition: succeeded()
+
       - template: templates/e2e-testing-windows.yml
+        parameters:
+          buildSuccess: variables['task.A.status']
 
   - job: ApplePR
     displayName: Apple PR
