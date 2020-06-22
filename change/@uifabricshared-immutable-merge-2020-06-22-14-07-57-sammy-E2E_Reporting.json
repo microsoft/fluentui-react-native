@@ -1,0 +1,8 @@
+{
+  "type": "none",
+  "comment": "Fix yarn",
+  "packageName": "@uifabricshared/immutable-merge",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "none",
+  "date": "2020-06-22T21:07:50.550Z"
+}
