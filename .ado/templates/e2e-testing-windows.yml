@@ -1,3 +1,6 @@
+parameters:
+  buildSuccess: # Whether or not the initial build steps succeeded
+
 steps:
   - task: DownloadSecureFile@1
     name: UwpCertificate
@@ -40,31 +43,37 @@ steps:
   - script: |
       yarn e2etest
     workingDirectory: apps\windows
+    condition: succeeded()
     displayName: "run UWP E2E tests"
 
+  # The following conditions (using buildSuccess variable) make it so these tasks run even if the E2E tasks fails,
+  # but not if the initial repo build steps fail.
   - template: e2e-publish-artifacts.yml
     parameters:
       applicationType: UWP
       platform: windows
+      buildArtifacts: ${{parameters.buildSuccess}}
 
   # Necessary for Appium server to run twice (for UWP and Win32). One instance at a time
   - powershell: |
       Stop-Process -Name node
     displayName: "Kill node Process"
-    condition: succeededOrFailed()
+    condition: and (succeededOrFailed(), eq(${{parameters.buildSuccess}}, 'success'))
 
   # Performance Reasons
   - powershell: |
       Start-Sleep -Seconds 30
     displayName: "Performance Delay"
-    condition: succeededOrFailed()
+    condition: and (succeededOrFailed(), eq(${{parameters.buildSuccess}}, 'success'))
 
   - script: |
       yarn e2etest
     workingDirectory: apps\win32
     displayName: "run Win32 E2E tests"
+    condition: and (succeededOrFailed(), eq(${{parameters.buildSuccess}}, 'success'))
 
   - template: e2e-publish-artifacts.yml
     parameters:
       applicationType: win32
       platform: win32
+      buildArtifacts: ${{parameters.buildSuccess}}
