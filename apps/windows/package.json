@@ -8,7 +8,9 @@
     "lint": "eslint .",
     "windows": "react-native run-windows",
     "bundle": "fluentui-scripts metro --cli",
-    "e2etest": "rimraf reports/* && wdio"
+    "e2etest": "rimraf reports/* && wdio",
+    "report": "allure generate allure-results --clean",
+    "generate-report": "allure generate allure-results --clean && allure open"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",
@@ -39,7 +41,9 @@
     "tsconfig-paths": "^3.9.0",
     "typescript": "3.8.3",
     "@types/jasmine": "3.5.10",
-    "webdriverio": "5.22.4"
+    "webdriverio": "5.22.4",
+    "@wdio/allure-reporter": "^5.22.4",
+    "allure-commandline": "2.13.0"
   },
   "workspaces": {
     "nohoist": [

@@ -5,6 +5,10 @@ class SvgTestPage extends BasePage {
   get _testPage() {
     return By(SVG_TESTPAGE);
   }
+
+  get _pageName() {
+    return SVG_TESTPAGE;
+  }
 }
 
 export default new SvgTestPage();

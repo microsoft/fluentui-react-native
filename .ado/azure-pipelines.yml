@@ -23,17 +23,21 @@ jobs:
       - script: |
           yarn checkchange
         displayName: "check change"
-
       - script: |
           yarn check-for-changed-files
         displayName: "verify API and Ensure Changed Files"
+      # Creates a variable that determines whether the previous tasks succeeded.
+      - task: PowerShell@2
+        inputs:
+          targetType: "inline"
+          script: |
+            Write-Host "##vso[task.setvariable variable=task.A.status]Success"
+        condition: succeeded()
+        displayName: "Create success build variable"
 
-      - template: templates/e2e-testing-uwp.yml
-
-      - script: |
-          yarn e2etest
-        workingDirectory: apps/win32
-        displayName: "run E2E Win32 tests"
+      - template: templates/e2e-testing-windows.yml
+        parameters:
+          buildSuccess: variables['task.A.status']
 
   - job: ApplePR
     displayName: Apple PR
@@ -72,11 +76,9 @@ jobs:
       - script: |
           rm -rf $(Build.Repository.LocalPath)/DerivedData
         displayName: "Clean DerivedData"
-
       - script: |
           sudo gem install cocoapods
         displayName: "Install Cocoapods Environment"
-
       - template: templates/setup-repo.yml
 
       # Select proper XCode version
