@@ -25,7 +25,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, './public/index.html'),
+      template: path.join(__dirname, './web/index.html'),
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],
@@ -45,13 +45,3 @@ module.exports = {
     }),
   },
 };
-
-// var path = require('path');
-
-// module.exports = {
-//   entry: './src/index.tsx',
-//   output: {
-//     filename: 'bundle.js',
-//     path: path.resolve(__dirname, 'dist')
-//   }
-// };
