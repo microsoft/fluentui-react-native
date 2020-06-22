@@ -7,7 +7,7 @@ import { BUTTON_TESTPAGE } from './consts';
 
 export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
   const [state, setState] = React.useState({
-    focused: false,
+    focused: false
   });
   const buttonRef = React.useRef<IFocusable>(null);
 
@@ -17,6 +17,7 @@ export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
       const node = findNodeHandle(buttonRef.current);
       console.log(node);
       buttonRef.current.focus();
+
     }
   }, [state, setState]);
 

@@ -13,21 +13,21 @@ const styles = StyleSheet.create({
     padding: 8,
     margin: 4,
     borderStyle: 'dotted',
-    borderColor: 'red',
+    borderColor: 'red'
   },
   solidBorder: {
     borderWidth: 1,
     padding: 8,
     margin: 4,
     borderStyle: 'solid',
-    borderColor: 'black',
+    borderColor: 'black'
   },
   notfocused: {
     borderWidth: 1,
     padding: 8,
     margin: 4,
     borderColor: '#ababab',
-    borderStyle: 'solid',
+    borderStyle: 'solid'
   },
   focused: {
     borderWidth: 1,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     margin: 4,
     borderStyle: 'solid',
     borderColor: 'black',
-    backgroundColor: 'lightblue',
+    backgroundColor: 'lightblue'
   },
   notPressed: {
     borderWidth: 1,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderColor: '#ababab',
-    borderStyle: 'solid',
+    borderStyle: 'solid'
   },
   pressed: {
     borderWidth: 1,
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     height: 30,
     borderStyle: 'dashed',
     borderColor: 'black',
-    backgroundColor: 'lightgreen',
+    backgroundColor: 'lightgreen'
   },
 });
 
@@ -104,7 +104,7 @@ const FocusComponent: React.FunctionComponent<ViewProps> = () => {
 
   return (
     <Stack {...{ acceptsKeyboardFocus: false }}>
-      <View {...({ acceptsKeyboardFocus: true, ...focusProps } as any)} style={focusState.focused ? styles.focused : styles.notfocused} />
+      <View {...{ acceptsKeyboardFocus: true, ...focusProps } as any} style={focusState.focused ? styles.focused : styles.notfocused} />
     </Stack>
   );
 };

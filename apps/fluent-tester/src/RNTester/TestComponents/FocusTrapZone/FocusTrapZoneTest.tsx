@@ -10,14 +10,14 @@ const trapZoneStyle: IFocusTrapZoneProps['style'] = {
   padding: 10,
   borderWidth: 2,
   borderColor: '#ababab',
-  borderStyle: 'dashed',
+  borderStyle: 'dashed'
 };
 
 const activeTrapZoneStyle: IFocusTrapZoneProps['style'] = {
   padding: 10,
   borderColor: '#ababab',
   borderWidth: 2,
-  borderStyle: 'solid',
+  borderStyle: 'solid'
 };
 
 const componentTwiddlerStyle: ViewProps['style'] = {
@@ -25,13 +25,13 @@ const componentTwiddlerStyle: ViewProps['style'] = {
   padding: 8,
   margin: 4,
   borderColor: '#ababab',
-  borderStyle: 'solid',
+  borderStyle: 'solid'
 };
 
 const focusedComponentTwiddlerStyle: ViewProps['style'] = {
   ...componentTwiddlerStyle,
   borderColor: 'black',
-  backgroundColor: 'lightblue',
+  backgroundColor: 'lightblue'
 };
 
 interface IComponentTwiddlerProps {
@@ -45,7 +45,7 @@ const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps> = (pro
   return (
     <TouchableHighlight {...{ acceptsKeyboardFocus: false }} onPress={props.onPress}>
       <View
-        {...({ acceptsKeyboardFocus: true, ...focusProps } as any)}
+        {...{ acceptsKeyboardFocus: true, ...focusProps } as any}
         style={focusState.focused ? focusedComponentTwiddlerStyle : componentTwiddlerStyle}
       >
         <Text>{props.label}</Text>
@@ -60,7 +60,7 @@ export const FocusTrapTest: React.FunctionComponent<{}> = () => {
     renderTrapZone: true,
     disableFirstFocus: false,
     ignoreExternalFocusing: false,
-    focusPreviouslyFocusedInnerElement: false,
+    focusPreviouslyFocusedInnerElement: false
   });
 
   const ftzRef = React.useRef<View>(null);

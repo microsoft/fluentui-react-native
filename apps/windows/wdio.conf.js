@@ -116,7 +116,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  before: function () {
+  before: function() {
     // not needed for Cucumber
     require('ts-node').register({files: true});
     browser.maximizeWindow();
@@ -210,7 +210,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function (exitCode, config, capabilities, results) {
+  onComplete: function(exitCode, config, capabilities, results) {
     console.log('<<< TESTING FINISHED >>>');
   },
   /**
