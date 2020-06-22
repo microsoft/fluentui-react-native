@@ -8,7 +8,7 @@ steps:
   # I added a 1 minute timer. It should always generate the report in this time, then the task timeouts and continues on the pipeline.
   # continueOnError is true because the pipeline should continue even on failure
   - script: |
-      allure generate allure-results --clean
+      yarn report
     workingDirectory: apps\${{parameters.platform}}
     displayName: "generate ${{parameters.platform}} report"
     condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'))
