@@ -9,6 +9,7 @@
     "windows": "react-native run-windows",
     "bundle": "fluentui-scripts metro --cli",
     "e2etest": "rimraf reports/* && wdio",
+    "report": "allure generate allure-results --clean",
     "generate-report": "allure generate allure-results --clean && allure open"
   },
   "dependencies": {

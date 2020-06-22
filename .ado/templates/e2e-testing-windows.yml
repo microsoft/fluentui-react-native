@@ -1,5 +1,5 @@
 parameters:
-  buildSuccess:
+  buildSuccess: # Whether or not the initial build steps succeeded
 
 steps:
   - task: DownloadSecureFile@1
@@ -45,6 +45,9 @@ steps:
     workingDirectory: apps\windows
     displayName: "run UWP E2E tests"
     condition: succeeded()
+
+  # The following conditions (using buildSuccess variable) make it so these tasks run even if the E2E tasks fails,
+  # but not if the initial repo build steps fail.
 
   - template: e2e-publish-artifacts.yml
     parameters:

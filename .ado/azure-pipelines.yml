@@ -28,6 +28,7 @@ jobs:
       #     yarn check-for-changed-files
       #   displayName: "verify API and Ensure Changed Files"
 
+      # Creates a variable that determines whether the previous tasks succeeded.
       - task: PowerShell@2
         inputs:
           targetType: "inline"
