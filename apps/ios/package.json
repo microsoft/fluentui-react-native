@@ -14,19 +14,19 @@
     "start": "react-native start",
     "bundle": "fluentui-scripts metro --cli",
     "bundle-dev": "fluentui-scripts metro --dev --cli",
-    "ios": "react-native run-ios --project-path src"
+    "ios": "react-native run-ios --scheme ReactTestApp --project-path src"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",
     "@uifabricshared/theming-react-native": "0.7.67",
     "@uifabricshared/themed-stylesheet": "0.3.67",
     "react": "16.11.0",
-    "react-native": "0.62.2"
+    "react-native": "0.62.2",
+    "react-native-test-app": "0.1.24"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
-    "@react-native-community/cli-platform-ios": "3.0.0",
     "@react-native-community/eslint-config": "^0.0.5",
     "@uifabricshared/build-native": "0.1.1",
     "babel-jest": "^24.9.0",

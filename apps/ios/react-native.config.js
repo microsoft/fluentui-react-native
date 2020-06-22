@@ -18,7 +18,7 @@
 module.exports = {
   project: {
     ios: {
-      project: "apps/ios/src/FluentUITester.xcworkspace"
+      project: "src/FluentUITester.xcworkspace"
     }
   }
 }
