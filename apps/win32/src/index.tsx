@@ -1,4 +1,6 @@
 'use strict';
+
+// This is an unstable replacement for Yellow Box
 require('react-native').unstable_enableLogBox();
 
 import * as React from 'react';
