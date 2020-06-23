@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
-    "@office-iss/rex-win32": "0.62.0-preview.3-tenantreactnativewin-12906",
+    "@office-iss/rex-win32": "0.62.0-preview.16-tenantreactnativewin-13017.2",
     "@react-native-community/cli": "^4.9.0",
     "@react-native-community/eslint-config": "^1.1.0",
     "@types/prop-types": "15.5.1",

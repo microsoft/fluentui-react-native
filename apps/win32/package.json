@@ -19,7 +19,7 @@
     "bundle": "fluentui-scripts metro --platform win32 --cli",
     "bundle-dev": "fluentui-scripts metro -platform win32 --dev --cli",
     "run-win32": "rex-win32 --bundle index --component FluentTester --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
-    "run-win32-web": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useLiveReload --pluginProps",
+    "run-win32-web": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useWebDebugger --useFastRefresh --windowTitle \"FluentUI Tester\" --pluginProps",
     "run-win32-devmain": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps",
     "e2etest": "rimraf reports/* && wdio"
   },
@@ -32,9 +32,10 @@
     "react-native-svg": "^11.0.0"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.62.0-preview.3",
-    "@office-iss/rex-win32": "0.62.0-preview.3-tenantreactnativewin-12906",
+    "@office-iss/rex-win32": "0.62.0-preview.16-tenantreactnativewin-13017.2",
+    "@office-iss/react-native-win32": "0.62.0-preview.7",
     "@react-native-community/eslint-config": "^1.1.0",
+    "@react-native-community/cli": "^4.9.0",
     "@types/jasmine": "3.5.10",
     "@types/prop-types": "15.5.1",
     "@types/react": "^16.9.34",
@@ -62,9 +63,8 @@
     ]
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "0.62.0-preview.3",
     "react": "16.11.0",
-    "react-native": "0.62.2"
+    "react-native": "^0.62.0-0"
   },
   "jest": {
     "preset": "react-native"
