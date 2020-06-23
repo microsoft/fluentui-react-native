@@ -5334,9 +5334,9 @@ bcrypt-pbkdf@^1.0.0:
     tweetnacl "^0.14.3"
 
 beachball@^1.30.2:
-  version "1.31.3"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-1.31.3.tgz#63323cc6001f34adf9c0198f188b6c616b7a0f81"
-  integrity sha512-1znEEvma0Ozu5IFhH7WARNVTGuAXvadckKtVaG4YWqJ7J8ZMhJ2Aw9gJMcgQV8UEXw1t720h58zU23t6ZKET1g==
+  version "1.31.4"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-1.31.4.tgz#e58e3f593ce734577d7016960c760dc77397dcac"
+  integrity sha512-x0tBTOeDqirCdjK5KIE3KcXSgsQOAE7vpyki305dC/4Dh0iSgSrWVQUrX1O8O4L2PGTwaCmr1cyLjduAVvsGQA==
   dependencies:
     cosmiconfig "^6.0.0"
     fs-extra "^8.0.1"
@@ -14354,9 +14354,9 @@ react-is@^16.12.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6, react-i
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
 react-native-macos@^0.61.0-0:
-  version "0.61.37"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.61.37.tgz#cbc3c1cc7fd2284fc428e50f15e48f83958a5b16"
-  integrity sha512-asWOmydpmVRTPpc6wRXVrFGOqQ3SFD2yYg3h1rkqaLTr+CJmDF32bctdfk5OWEIe6r6n0u1F8QyaJWAZMLPKcQ==
+  version "0.61.50"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.61.50.tgz#733f525c35afc9c856bd7dae7bf7910e1896c89a"
+  integrity sha512-BlMaTmJRpvm9JyZ5PSZvZH7CakCJYPEuWaWHBBCaPHU0zkTE1SLeLM9PsfFX8+2olihXt4CeIYnGypwmB10eTw==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@react-native-community/cli" "^3.0.0"
