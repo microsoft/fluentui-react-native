@@ -18,16 +18,14 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "invariant": "^2.2.0"
+    "invariant": "^2.2.0",
+    "@office-iss/react-native-win32": "0.62.0-preview.7"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.62.0-preview.7",
     "@types/react": "^16.9.34",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "react": "16.11.0",
-    "react-native": "0.62.2"
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
   },
   "peerDependencies": {
     "react": "16.11.0",
