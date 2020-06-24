@@ -6,7 +6,7 @@ function App() {
   return (
     <View>
       <Text>hello from react native.</Text>
-      <Checkbox label="Hello World Checkbox" />
+      <Checkbox label="FluentUI Checkbox" />
     </View>
   );
 }
