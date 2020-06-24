@@ -28,9 +28,10 @@ export const settings: IComposeSettings<ICheckboxType> = [
         height: 14,
         width: 14,
         marginRight: 4,
+        marginLeft: 4,
+        marginTop: 5,
         borderStyle: 'solid',
         borderWidth: 1,
-        marginTop: 5
       }
     },
     checkmark: {
