@@ -26,6 +26,15 @@ export type DirectionalHint =
   | 'bottomCenter'
   | 'bottomRightEdge';
 
+export interface RestoreFocusEvent {
+  nativeEvent: {
+    /**
+     * containsFocus is true if the Callout had focus while being dismissed.
+     */
+    containsFocus: boolean;
+  };
+}
+
 export interface ICalloutTokens extends IBackgroundColorTokens, IBorderTokens {
   /**
    * AnchorRect arbitrary anchor rectangle; coordinate system is in DIPs, relative
@@ -91,6 +100,18 @@ export interface ICalloutProps extends ICalloutTokens {
    * Callback invoked when the callout has been dismissed.
    */
   onDismiss?: () => void;
+
+  /**
+   * Callback invoked during callout dismissal; if set, focus will not be restored by the callout and onRestoreFocus must
+   * result in focus being moved to the appropriate focusable target.
+   *
+   * The callee should carefully consider their scenarios to avoid dropping focus, or inappropriately
+   * moving focus from another component.  Focus is not guaranteed to have entered the React-Native surface at all, and
+   * this callback is most appropriate for components strictly controlling focus.
+   *
+   * restoreFocusEvent.nativeEvent.containsFocus is true if the Callout had focus while being dismissed.
+   */
+  onRestoreFocus?: (restoreFocusEvent: RestoreFocusEvent) => void;
 
   /**
    * Callback invoked when the callout has been shown.

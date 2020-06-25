@@ -1,10 +1,10 @@
 import { MergeOptions, immutableMergeCore } from '@uifabricshared/immutable-merge';
 import { IComponentSettingsCollection, IComponentSettings, ISlotProps, IOverrideLookup } from './Settings.types';
-import { mergeAndFlattenStyles } from './Styles';
+import { mergeAndFlattenStyles, memoAndMergeStyles } from './Styles';
 import { IStyleProp } from './Styles.types';
 
 function _mergeStyles(...objs: IStyleProp<object>[]): object | undefined {
-  return mergeAndFlattenStyles(undefined, undefined, ...objs);
+  return mergeAndFlattenStyles(undefined, ...objs);
 }
 
 function _mergeClassName(...names: any[]): string | undefined {
@@ -17,6 +17,14 @@ function _mergeClassName(...names: any[]): string | undefined {
 const _mergePropsOptions: MergeOptions = {
   className: _mergeClassName,
   style: _mergeStyles
+};
+
+/**
+ * As above but will cache merges of styles
+ */
+const _mergeAndMemoPropsOptions: MergeOptions = {
+  className: _mergeClassName,
+  style: memoAndMergeStyles
 };
 
 /**
@@ -43,6 +51,15 @@ const _mergeCollectionOptions: MergeOptions = {
 };
 
 /**
+ * Typescript can't always inference types that are actually objects correctly.  This helper effectively
+ * coerces types that aren't based on objects into objects for purposes of merging
+ * @param inputs - array of inputs of a given type
+ */
+function _filterToObjectArray<T>(inputs: T[]): object[] {
+  return (inputs.filter(input => typeof input === 'object') as unknown) as object[];
+}
+
+/**
  * Merge settings together.  This routine should work for IComponentSettings types or ISlotProps
  * @param settings - settings to merge together
  */
@@ -54,8 +71,17 @@ export function mergeSettings<TSettings extends IComponentSettings = IComponentS
  * Merge props together, flattening and merging styles as appropriate
  * @param props - props to merge together
  */
-export function mergeProps<TProps extends object>(...props: (object | undefined)[]): TProps {
-  return immutableMergeCore(_mergePropsOptions, ...props) as TProps;
+export function mergeProps<TProps>(...props: (TProps | undefined)[]): TProps {
+  return (immutableMergeCore(_mergePropsOptions, ..._filterToObjectArray(props)) as unknown) as TProps;
+}
+
+/**
+ * As mergeProps except this will cache the result of style merges such that merging the same two styles (by object identity)
+ * a second time will result in the same object.
+ * @param props - set of props to merge together
+ */
+export function memoMergeProps<TProps>(...props: (TProps | undefined)[]): TProps {
+  return (immutableMergeCore(_mergeAndMemoPropsOptions, ..._filterToObjectArray(props)) as unknown) as TProps;
 }
 
 /**

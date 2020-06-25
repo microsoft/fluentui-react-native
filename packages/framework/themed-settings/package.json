@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/themed-settings",
-  "version": "0.4.46",
+  "version": "0.4.63",
   "description": "Package which drives custom cacheable settings for a component",
   "repository": {
     "type": "git",
@@ -30,12 +30,13 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": ">=0.5.46 <1.0.0"
+    "@uifabricshared/foundation-settings": ">=0.5.63 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
     "@types/node": "^10.3.5",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1"
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "@fluentui-react-native/memo-cache": ">=0.2.6 <1.0.0"
   }
 }

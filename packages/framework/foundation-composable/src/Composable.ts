@@ -30,7 +30,7 @@ export function atomicUsePrepareProps<TProps extends object, TSlotProps extends 
   props: TProps,
   useStyling: IDefineUseStyling<TProps, TSlotProps>
 ): IRenderData<TSlotProps, TState> {
-  const slotProps = mergeSettings<TSlotProps>(useStyling(props), { root: props });
+  const slotProps = mergeSettings<TSlotProps>(useStyling(props), ({ root: props } as unknown) as TSlotProps);
   return { slotProps };
 }
 
