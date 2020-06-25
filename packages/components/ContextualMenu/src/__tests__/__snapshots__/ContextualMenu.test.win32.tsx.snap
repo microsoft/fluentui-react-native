@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContextualMenu default props 1`] = `
+<RCTCallout
+  backgroundColor="bodyStandoutBackground"
+  borderColor="bodyFrameBackground"
+  borderWidth={10}
+  style={
+    Object {
+      "backgroundColor": "#faf9f8",
+      "borderColor": "#ffffff",
+      "borderWidth": 10,
+    }
+  }
+/>
+`;
