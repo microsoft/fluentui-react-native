@@ -10,13 +10,14 @@
 
 'use strict';
 
-import { Platform, UIManager } from 'react-native';
-import { normalizeRect, Rect, HostComponent } from './InternalTypes';
-import { PressabilityEventHandlers, PressabilityConfig } from './Pressability.types';
-
-import { isHoverEnabled } from './HoverState';
 import invariant from 'invariant';
-import { BlurEvent, FocusEvent, PressEvent, MouseEvent } from './CoreEventTypes';
+import * as React from 'react';
+import { Platform, UIManager } from 'react-native';
+import { BlurEvent, FocusEvent, MouseEvent, PressEvent } from './CoreEventTypes';
+import { isHoverEnabled } from './HoverState';
+import { HostComponent, normalizeRect, Rect } from './InternalTypes';
+import { PressabilityConfig, PressabilityEventHandlers } from './Pressability.types';
+
 
 type TouchState =
   | 'NOT_RESPONDER'
@@ -394,42 +395,42 @@ export class Pressability {
       Platform.OS === 'ios' || Platform.OS === 'android'
         ? null
         : {
-            onMouseEnter: (event: MouseEvent): void => {
-              if (isHoverEnabled()) {
-                this._isHovered = true;
-                this._cancelHoverOutDelayTimeout();
-                const { onHoverIn } = this._config;
-                if (onHoverIn != null) {
-                  const delayHoverIn = normalizeDelay(this._config.delayHoverIn);
-                  if (delayHoverIn > 0) {
-                    this._hoverInDelayTimeout = setTimeout(() => {
-                      onHoverIn(event);
-                    }, delayHoverIn);
-                  } else {
+          onMouseEnter: (event: MouseEvent): void => {
+            if (isHoverEnabled()) {
+              this._isHovered = true;
+              this._cancelHoverOutDelayTimeout();
+              const { onHoverIn } = this._config;
+              if (onHoverIn != null) {
+                const delayHoverIn = normalizeDelay(this._config.delayHoverIn);
+                if (delayHoverIn > 0) {
+                  this._hoverInDelayTimeout = setTimeout(() => {
                     onHoverIn(event);
-                  }
-                }
-              }
-            },
-
-            onMouseLeave: (event: MouseEvent): void => {
-              if (this._isHovered) {
-                this._isHovered = false;
-                this._cancelHoverInDelayTimeout();
-                const { onHoverOut } = this._config;
-                if (onHoverOut != null) {
-                  const delayHoverOut = normalizeDelay(this._config.delayHoverOut);
-                  if (delayHoverOut > 0) {
-                    this._hoverInDelayTimeout = setTimeout(() => {
-                      onHoverOut(event);
-                    }, delayHoverOut);
-                  } else {
-                    onHoverOut(event);
-                  }
+                  }, delayHoverIn);
+                } else {
+                  onHoverIn(event);
                 }
               }
             }
-          };
+          },
+
+          onMouseLeave: (event: MouseEvent): void => {
+            if (this._isHovered) {
+              this._isHovered = false;
+              this._cancelHoverInDelayTimeout();
+              const { onHoverOut } = this._config;
+              if (onHoverOut != null) {
+                const delayHoverOut = normalizeDelay(this._config.delayHoverOut);
+                if (delayHoverOut > 0) {
+                  this._hoverInDelayTimeout = setTimeout(() => {
+                    onHoverOut(event);
+                  }, delayHoverOut);
+                } else {
+                  onHoverOut(event);
+                }
+              }
+            }
+          }
+        };
 
     return {
       ...focusEventHandlers,
