@@ -32,13 +32,13 @@ If you have an existing React Native project, it's easy to begin using FluentUI 
 
 3. After successful installation, you can test the package by importing components at the top of your app's entry file, e.g. `App.js`:
 
-```
+```jsx
  import { Checkbox } from '@fluentui/react-native';
 ```
 
 4. After importing the @fluentui/react-native package, you can use components such as `Text` and `Checkbox` in your JSX.
 
-```
+```jsx
 // In App.js in a new project
 import React from 'react';
 import { View, Text } from 'react-native';

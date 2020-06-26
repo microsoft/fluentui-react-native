@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theme-registry",
-  "version": "0.3.63",
+  "version": "0.3.64",
   "description": "Implementation of the theme graph",
   "repository": {
     "type": "git",
@@ -30,7 +30,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/immutable-merge": ">=0.5.63 <1.0.0"
+    "@uifabricshared/immutable-merge": ">=0.5.64 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
