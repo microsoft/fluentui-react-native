@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Fri, 26 Jun 2020 18:58:23 GMT",
+      "tag": "@fluentui-react-native/callout_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Expose Callout property isBeakVisible",
+            "author": "ppatboyd@outlook.com",
+            "commit": "467e250d2df187f9df16beac8e55cad26fb4736f",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Jun 2020 05:00:56 GMT",
       "tag": "@fluentui-react-native/callout_v0.9.2",
       "version": "0.9.2",
