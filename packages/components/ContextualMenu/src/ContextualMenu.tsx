@@ -13,18 +13,12 @@ export const ContextualMenu = compose<IContextualMenuType>({
   usePrepareProps: (props: IContextualMenuProps, useStyling: IUseComposeStyling<IContextualMenuType>) => {
     const { componentRef, target, ...rest } = props;
     const cmRef = useViewCommandFocus(componentRef);
-    const [targetNativeTag, setTargetNativeTag] = React.useState<number>(undefined);
-
-    React.useLayoutEffect(() => {
-      if (target && target.current) {
-        setTargetNativeTag(findNodeHandle(target.current));
-      }
-    }, [target]);
 
     const slotProps = mergeSettings<IContextualMenuSlotProps>(useStyling(props), {
       root: {
         ref: cmRef,
-        target: targetNativeTag,
+        target: target,
+        setInitialFocus: false,
         ...rest
       }
     });

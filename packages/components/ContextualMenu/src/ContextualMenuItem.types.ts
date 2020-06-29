@@ -54,7 +54,8 @@ export interface IContextualMenuItemProps extends Omit<IPressableProps, 'onPress
    * Title (tooltip) text displayed when hovering over an item.
    */
   title?: string;
-  // dismissMenu?: (e? : any, dismissAll?: boolean) => void;
+  dismissMenu?: (e?: any, dismissAll?: boolean) => void;
+
 }
 
 export interface IContextualMenuItemSlotProps {

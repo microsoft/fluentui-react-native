@@ -39,7 +39,9 @@ export const ContextualMenuTest: React.FunctionComponent<{}> = () => {
           onShow={onMenuShow}
           accessibilityLabel="Standard ContextualMenu"
         >
-          <ContextualMenuItem text="ContextualMenuItem 1" key="ContextualMenuItem 1" onClick={onMenuItemClick} />
+          <ContextualMenuItem text="ContextualMenuItem 1" key="ContextualMenuItem 1" onClick={onMenuShow} />
+          <ContextualMenuItem text="ContextualMenuItem 2" key="ContextualMenuItem 2" onClick={onMenuShow} />
+          <ContextualMenuItem text="ContextualMenuItem 3" key="ContextualMenuItem 3" onClick={onMenuShow} />
         </ContextualMenu>
       )}
     </View>
