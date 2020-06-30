@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-settings",
-  "version": "0.5.65",
+  "version": "0.5.66",
   "description": "Settings and style definitions and helpers",
   "repository": {
     "type": "git",
@@ -30,8 +30,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/memo-cache": ">=0.2.8 <1.0.0",
-    "@uifabricshared/immutable-merge": ">=0.5.65 <1.0.0"
+    "@fluentui-react-native/memo-cache": ">=0.2.9 <1.0.0",
+    "@uifabricshared/immutable-merge": ">=0.5.66 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
