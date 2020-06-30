@@ -65,6 +65,16 @@ export default HelloWorldApp;
 
 Our component documentation is hosted on the [FluentUI documentation](https://developer.microsoft.com/fluentui).
 
+#### Expanding Component documentation
+
+The FluentUI website is built out of the [FluentUI repository](https://github.com/microsoft/fluentui/tree/master/apps/fabric-website).  React-Native components and controls are documented in a 'cross' (cross-platform) directory in each component page directory, e.g. [Button 'cross' directory](https://github.com/microsoft/fluentui/tree/master/apps/fabric-website/src/pages/Controls/ButtonPage/docs/cross).  The FluentUI website can be run locally to verify changes, and should reflect the current state of controls that have established the *v1* set of properties on any one platform.
+
+Since the FluentUI React Native controls are cross-platform, but represented by a single page, it's important to distinguish platform differences and limitations.  Examples include:
+- If the component is not available on all supported platforms.
+- If the component has properties not available on all supported platforms.
+- If the component has limited support for a given property on any supported platforms.
+- If the component has distinguishable behavior on a supported platform that must be minded while used.
+
 ### Theming framework
 
 Our FluentUI framework documentation is found in this repository alongside the implementation.
