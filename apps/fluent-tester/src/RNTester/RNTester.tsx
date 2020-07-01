@@ -20,7 +20,6 @@ import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 import { customRegistry } from './TestComponents/Theme/CustomThemes';
 
-
 const tests: TestDescription[] = [
   {
     name: 'Button Test',
@@ -88,6 +87,7 @@ const tests: TestDescription[] = [
     testPage: HOMEPAGE_SVG_BUTTON
   }
 ];
+
 const RNTesterApp: React.FunctionComponent<IFabricTesterProps> = props => {
   return (
     <ThemeProvider registry={customRegistry}>
