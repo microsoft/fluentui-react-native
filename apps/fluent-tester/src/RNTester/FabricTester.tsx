@@ -2,7 +2,7 @@ import { Separator, StealthButton, Text } from '@fluentui/react-native';
 import { useTheme } from '@uifabricshared/theming-react-native';
 import * as React from 'react';
 import { ScrollView, View } from 'react-native';
-import { allTestComponents, TestDescription } from './TestComponents';
+import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fabricTesterStyles } from './TestComponents/Common/styles';
 import { registerThemes } from './TestComponents/Theme/CustomThemes';
@@ -21,14 +21,13 @@ const EmptyComponent: React.FunctionComponent = () => {
 
 export interface IFabricTesterProps {
   initialTest?: string;
-  enabledTest?: TestDescription[];
+  enabledTest: TestDescription[];
 }
 
 export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props: IFabricTesterProps) => {
 
-  const testComponents = props.enabledTest || allTestComponents;
   // sort tests alphabetically by name
-  const sortedTestComponents = testComponents.sort((a, b) => a.name.localeCompare(b.name));
+  const sortedTestComponents = props.enabledTest.sort((a, b) => a.name.localeCompare(b.name));
 
   const { initialTest } = props;
   const initialSelectedTestIndex = sortedTestComponents.findIndex(description => {

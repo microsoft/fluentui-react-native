@@ -6,9 +6,7 @@ import * as React from 'react';
 import { AppRegistry } from 'react-native';
 import { TestDescription } from '../../fluent-tester/src/RNTester/TestComponents';
 import { ButtonFocusTest, HOMEPAGE_BUTTON_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Button';
-import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Checkbox';
-import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/FocusTrapZone';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from '../../fluent-tester/src/RNTester/TestComponents/Link';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from '../../fluent-tester/src/RNTester/TestComponents/Persona';
 import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from '../../fluent-tester/src/RNTester/TestComponents/PersonaCoin';
@@ -18,34 +16,11 @@ import { HOMEPAGE_SEPARATOR_BUTTON, SeparatorTest } from '../../fluent-tester/sr
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from '../../fluent-tester/src/RNTester/TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from '../../fluent-tester/src/RNTester/TestComponents/Theme';
 
-
-const FluentTester: React.FunctionComponent<IFabricTesterProps> = props => {
-  return (
-    <ThemeProvider registry={customRegistry}>
-      <FabricTester enabledTest={tests} {...props} />
-    </ThemeProvider>
-  );
-};
-
-AppRegistry.registerComponent('FluentTester', () => FluentTester);
-
-export default FluentTester;
-
 const tests: TestDescription[] = [
   {
     name: 'Button Test',
     component: ButtonFocusTest,
     testPage: HOMEPAGE_BUTTON_BUTTON
-  },
-  {
-    name: 'Callout Test',
-    component: CalloutTest,
-    testPage: HOMEPAGE_CALLOUT_BUTTON
-  },
-  {
-    name: 'Focus Trap Zone Test',
-    component: FocusTrapTest,
-    testPage: HOMEPAGE_FOCUSTRAPZONE_BUTTON
   },
   {
     name: 'Pressable Test',
@@ -93,6 +68,18 @@ const tests: TestDescription[] = [
     testPage: HOMEPAGE_CHECKBOX_BUTTON
   },
 ];
+
+const FluentTester: React.FunctionComponent<IFabricTesterProps> = props => {
+  return (
+    <ThemeProvider registry={customRegistry}>
+      <FabricTester enabledTest={tests} {...props} />
+    </ThemeProvider>
+  );
+};
+
+AppRegistry.registerComponent('FluentTester', () => FluentTester);
+
+export default FluentTester;
 
 // import { AppRegistry } from 'react-native';
 // import App from './App';
