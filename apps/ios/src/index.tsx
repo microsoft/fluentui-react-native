@@ -3,7 +3,7 @@
 import { customRegistry, FabricTester, IFabricTesterProps } from '@fluentui-react-native/tester';
 import { ThemeProvider } from '@uifabricshared/theming-react-native';
 import * as React from 'react';
-import { AppRegistry } from 'react-native';
+import { AppRegistry, SafeAreaView } from 'react-native';
 import { TestDescription } from '../../fluent-tester/src/RNTester/TestComponents';
 import { ButtonFocusTest, HOMEPAGE_BUTTON_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Callout';
@@ -89,9 +89,11 @@ const tests: TestDescription[] = [
 
 const FluentTester: React.FunctionComponent<IFabricTesterProps> = props => {
   return (
-    <ThemeProvider registry={customRegistry}>
-      <FabricTester enabledTest={tests} {...props} />
-    </ThemeProvider>
+    <SafeAreaView>
+      <ThemeProvider registry={customRegistry}>
+        <FabricTester enabledTest={tests} {...props} />
+      </ThemeProvider>
+    </SafeAreaView>
   );
 };
 
