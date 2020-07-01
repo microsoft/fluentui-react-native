@@ -80,14 +80,3 @@ const FluentTester: React.FunctionComponent<IFabricTesterProps> = props => {
 AppRegistry.registerComponent('FluentTester', () => FluentTester);
 
 export default FluentTester;
-
-// import { AppRegistry } from 'react-native';
-// import App from './App';
-
-// // Register app
-// AppRegistry.registerComponent('App', () => App);
-
-// AppRegistry.runApplication('App', {
-//   initialProp: {},
-//   rootTag: document.getElementById('root')
-// });
