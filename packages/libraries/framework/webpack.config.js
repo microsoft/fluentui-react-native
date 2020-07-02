@@ -1,8 +1,6 @@
 const path = require('path');
-const webpack = require('webpack');
 const webpackEnv = process.env.NODE_ENV || 'production';
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   mode: webpackEnv,
@@ -15,7 +13,6 @@ module.exports = {
   },
   target: 'node',
   devtool: 'source-map',
-  externals: [nodeExternals()],
   module: {
     rules: [
       {
