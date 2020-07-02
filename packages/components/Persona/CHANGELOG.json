@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/persona",
   "entries": [
     {
+      "date": "Thu, 02 Jul 2020 21:06:06 GMT",
+      "tag": "@fluentui-react-native/persona_v0.5.67",
+      "version": "0.5.67",
+      "comments": {
+        "none": [
+          {
+            "comment": "Change files",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Jun 2020 05:00:56 GMT",
       "tag": "@fluentui-react-native/persona_v0.5.58",
       "version": "0.5.58",
