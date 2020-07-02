@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Wed, 17 Jun 2020 05:00:56 GMT and should not be manually modified.
+This log was last generated on Fri, 26 Jun 2020 18:58:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.0
+
+Fri, 26 Jun 2020 18:58:23 GMT
+
+### Minor changes
+
+- Expose Callout property isBeakVisible (ppatboyd@outlook.com)
 
 ## 0.9.2
 

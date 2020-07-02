@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ScreenRect } from 'react-native';
+import { ScreenRect, ViewStyle } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
@@ -35,7 +35,14 @@ export interface RestoreFocusEvent {
   };
 }
 
-export interface ICalloutTokens extends IBackgroundColorTokens, IBorderTokens {
+interface OmittedBorderTokens {
+  borderRadius?: number | string;
+  borderStyle?: ViewStyle['borderStyle'];
+}
+
+type CalloutBorderTokens = Omit<IBorderTokens, keyof OmittedBorderTokens>;
+
+export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTokens {
   /**
    * AnchorRect arbitrary anchor rectangle; coordinate system is in DIPs, relative
    * to the React surface origin.
@@ -95,6 +102,13 @@ export interface ICalloutProps extends ICalloutTokens {
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
+
+  /**
+   * Adds a beak to the Callout, pointing to the anchor target.
+   * Notable Win32 limitation: Beak rendering currently limits the border width to its default, and the
+   * border width prop will not be honored.
+   */
+  isBeakVisible?: boolean;
 
   /**
    * Callback invoked when the callout has been dismissed.
