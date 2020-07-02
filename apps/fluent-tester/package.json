@@ -19,7 +19,7 @@
     "bundle": "fluentui-scripts bundle"
   },
   "dependencies": {
-    "@fluentui/react-native": ">=0.15.71 <1.0.0",
+    "@fluentui/react-native": ">=0.15.72 <1.0.0",
     "@fluentui-react-native/stack": ">=0.1.0 <1.0.0",
     "@uifabricshared/theming-react-native": ">=0.7.66 <1.0.0",
     "@uifabricshared/themed-stylesheet": ">=0.3.67 <1.0.0",

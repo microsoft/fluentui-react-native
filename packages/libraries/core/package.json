@@ -1,6 +1,6 @@
 {
   "name": "@fluentui/react-native",
-  "version": "0.15.71",
+  "version": "0.15.72",
   "description": "A react-native component library that implements the Fluent Design System.",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -34,7 +34,7 @@
     "@fluentui-react-native/interactive-hooks": ">=0.4.38 <1.0.0",
     "@fluentui-react-native/button": ">=0.9.22 <1.0.0",
     "@fluentui-react-native/callout": ">=0.10.1 <1.0.0",
-    "@fluentui-react-native/checkbox": ">=0.3.70 <1.0.0",
+    "@fluentui-react-native/checkbox": ">=0.3.71 <1.0.0",
     "@fluentui-react-native/focus-trap-zone": ">=0.3.70 <1.0.0",
     "@fluentui-react-native/link": ">=0.6.29 <1.0.0",
     "@fluentui-react-native/persona": ">=0.5.67 <1.0.0",
