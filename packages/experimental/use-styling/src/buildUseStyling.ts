@@ -1,10 +1,10 @@
 import { getMemoCache, GetMemoValue } from '@fluentui-react-native/memo-cache';
 import { immutableMerge } from '@uifabricshared/immutable-merge';
-import { TokenPropMask, StyleFunctions, refineStyleFunctions } from './styleFunction';
-import { WithLayers, HasLayer, applyTokenLayers } from './applyTokenLayers';
+import { TokenPropMask, BuildSlotProps, refinePropsFunctions } from './buildProps';
+import { HasLayer, applyTokenLayers } from './applyTokenLayers';
 
 /** A function to generate tokens based on a theme */
-export type TokensFromTheme<TTokens, TTheme> = (theme: TTheme) => WithLayers<TTokens>;
+export type TokensFromTheme<TTokens, TTheme> = (theme: TTheme) => TTokens;
 
 /**
  * Types of tokens, can be:
@@ -12,7 +12,7 @@ export type TokensFromTheme<TTokens, TTheme> = (theme: TTheme) => WithLayers<TTo
  * - Tokens - will merge the tokens in directly
  * - Function - will run against the theme once for each unique theme encountered
  */
-export type TokenSettings<TTokens, TTheme> = string | WithLayers<TTokens> | TokensFromTheme<TTokens, TTheme>;
+export type TokenSettings<TTokens, TTheme> = string | TTokens | TokensFromTheme<TTokens, TTheme>;
 
 /**
  * Options used to build up a useStyling hook
@@ -24,9 +24,14 @@ export type UseStylingOptions<TProps, TSlotProps, TTokens, TTheme> = {
   tokens?: TokenSettings<TTokens, TTheme>[];
 
   /**
+   * States that might be applied for the component like disabled or hovered
+   */
+  states?: (keyof TTokens)[];
+
+  /**
    * Functions which build up the props for each slot
    */
-  styles?: StyleFunctions<TSlotProps, TTokens, TTheme>;
+  slotProps?: BuildSlotProps<TSlotProps, TTokens, TTheme>;
 
   /**
    * Which props should be considered to be tokens.
@@ -92,14 +97,14 @@ function mapToTokens<TTokens, TTheme>(
   tokenEntry: TTokens | string | TokensFromTheme<TTokens, TTheme>,
   theme: TTheme,
   getComponentInfo: ThemeHelper<TTheme>['getComponentInfo']
-): WithLayers<TTokens> {
+): object {
   if (typeof tokenEntry === 'string') {
     tokenEntry = getComponentInfo(theme, tokenEntry);
   }
   if (typeof tokenEntry === 'function') {
     tokenEntry = (tokenEntry as TokensFromTheme<TTokens, TTheme>)(theme);
   }
-  return tokenEntry as WithLayers<TTokens>;
+  return (tokenEntry as unknown) as object;
 }
 
 /**
@@ -111,7 +116,7 @@ function mapToTokens<TTokens, TTheme>(
  * @param cache - cache to use for the base of slot caching
  */
 function resolveToSlotProps<TSlotProps, TTokens, TTheme>(
-  styles: StyleFunctions<TSlotProps, TTokens, TTheme>,
+  styles: BuildSlotProps<TSlotProps, TTokens, TTheme>,
   tokens: TTokens,
   theme: TTheme,
   cache: GetMemoValue<TTokens>
@@ -135,10 +140,10 @@ export function buildUseStyling<TProps, TSlotProps, TTokens, TTheme>(
   themeHelper: ThemeHelper<TTheme>
 ): UseStyling<TProps, TSlotProps> {
   // create a cache instance for this use styling implementation
-  const cache = getMemoCache<WithLayers<TTokens>>();
+  const cache = getMemoCache();
   const { useTheme, getComponentInfo } = themeHelper;
   const { tokens, tokenProps } = options;
-  const styles = refineStyleFunctions(options.styles || {}, tokenProps);
+  const styles = refinePropsFunctions(options.slotProps || {}, tokenProps);
 
   return (props: TProps, lookup?: HasLayer) => {
     // query the theme
@@ -148,7 +153,9 @@ export function buildUseStyling<TProps, TSlotProps, TTokens, TTheme>(
     const [merged, subCache] = cache(() => immutableMerge(...tokens.map(value => mapToTokens(value, theme, getComponentInfo))), [theme]);
 
     // resolve overrides as appropriate
-    const [layered, cacheBase] = merged.precedence ? applyTokenLayers(merged, subCache, lookup || (val => props[val])) : [merged, subCache];
+    const [layered, cacheBase] = options.states
+      ? applyTokenLayers(merged, options.states as string[], subCache, lookup || (val => props[val]))
+      : [merged, subCache];
 
     // now resolve tokens
     const finalTokens = promotePropsToTokens(layered, props, tokenProps);

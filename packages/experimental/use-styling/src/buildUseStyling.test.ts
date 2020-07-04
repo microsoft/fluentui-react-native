@@ -1,7 +1,6 @@
 import { buildUseStyling, ThemeHelper, UseStylingOptions } from './buildUseStyling';
 import { getMemoCache } from '@fluentui-react-native/memo-cache';
-import { WithLayers } from './applyTokenLayers';
-import { styleFunction } from './styleFunction';
+import { buildProps } from './buildProps';
 
 let lastInstance = 0;
 
@@ -9,20 +8,19 @@ interface Tokens {
   a?: string;
   b?: string;
   c?: string;
+  hover?: Tokens;
+  press?: Tokens;
 }
 
-const baseTokens: WithLayers<Tokens> = {
+const baseTokens: Tokens = {
   a: 'a-base',
   b: 'b-base',
   c: 'c-base',
-  precedence: ['hover', 'press'],
-  layers: {
-    hover: {
-      c: 'c-base-hover'
-    },
-    press: {
-      c: 'c-base-press'
-    }
+  hover: {
+    c: 'c-base-hover'
+  },
+  press: {
+    c: 'c-base-press'
   }
 };
 
@@ -32,7 +30,7 @@ interface Theme {
     bar?: string;
   };
   components: {
-    [key: string]: WithLayers<Tokens>;
+    [key: string]: Tokens;
   };
 }
 
@@ -111,13 +109,14 @@ const baseOptions: UseStylingOptions<Props, TestSlotProps, Tokens, Theme> = {
       b: theme.vals.foo
     })
   ],
-  styles: {
+  states: ['hover', 'press'],
+  slotProps: {
     slot1: {
       style: {
         instance: lastInstance++
       }
     },
-    slot2: styleFunction(slotFn1, ['a', 'b', 'c']),
+    slot2: buildProps(slotFn1, ['a', 'b', 'c']),
     slot3: slotFn2
   },
   tokenProps: ['b']
@@ -127,9 +126,7 @@ describe('useStyling test suite', () => {
   test('basic built hook', () => {
     const useStyling = buildUseStyling(baseOptions, themeHelper);
     const slotProps = useStyling({});
-    console.log(slotProps);
     const slotProps2 = useStyling({ p1: 2, p2: 'bar' });
-    console.log(slotProps2);
     Object.keys(slotProps).forEach(key => {
       expect(slotProps[key]).toBe(slotProps2[key]);
     });

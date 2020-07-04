@@ -1,68 +1,67 @@
-import { WithLayers, applyTokenLayers } from './applyTokenLayers';
+import { applyTokenLayers } from './applyTokenLayers';
 import { getMemoCache } from '@fluentui-react-native/memo-cache';
 
 type Tokens = {
   a?: string;
   b?: string;
   c?: string;
+  hover?: Tokens;
+  press?: Tokens;
+  disabled?: Tokens;
 };
 
-type LayeredTokens = WithLayers<Tokens>;
+const stateOrder = ['hover', 'press', 'disabled'];
 
-const tokens1: LayeredTokens = {
+const tokens1: Tokens = {
   a: 'a',
   b: 'b',
   c: 'c',
-  precedence: ['hover', 'press', 'disabled'],
-  layers: {
-    hover: {
-      a: 'a-hover',
-      b: 'b-hover',
-      layers: {
-        press: {
-          a: 'a-hover-press'
-        }
-      }
-    },
+  hover: {
+    a: 'a-hover',
+    b: 'b-hover',
     press: {
-      a: 'a-press',
-      b: 'b-press'
-    },
-    disabled: {
-      a: 'disabled',
-      b: 'disabled',
-      c: 'disabled'
+      a: 'a-hover-press'
     }
+  },
+  press: {
+    a: 'a-press',
+    b: 'b-press'
+  },
+  disabled: {
+    a: 'disabled',
+    b: 'disabled',
+    c: 'disabled'
   }
 };
 
-function stripLayers(tokens: LayeredTokens): Tokens {
+function stripLayers(tokens: Tokens): Tokens {
   const t = { ...tokens };
-  delete t.layers;
-  delete t.precedence;
+  delete t.hover;
+  delete t.press;
+  delete t.disabled;
   return t;
 }
 
 describe('applyLayers tests', () => {
   test('no layers returns tokens', () => {
     const cache = getMemoCache();
-    const tokens = applyTokenLayers(tokens1, cache, () => false)[0];
+    const tokens = applyTokenLayers(tokens1, stateOrder, cache, () => false)[0];
     expect(tokens).toBe(tokens1);
   });
 
   test('apply hover works', () => {
     const cache = getMemoCache();
     const lookup = layer => layer === 'hover';
-    const result1 = applyTokenLayers(tokens1, cache, lookup)[0];
-    expect(applyTokenLayers(tokens1, cache, lookup)[0]).toBe(result1);
+    const result1 = applyTokenLayers(tokens1, stateOrder, cache, lookup)[0];
+    expect(applyTokenLayers(tokens1, stateOrder, cache, lookup)[0]).toBe(result1);
     expect(stripLayers(result1)).toEqual({ a: 'a-hover', b: 'b-hover', c: 'c' });
   });
 
   test('apply hover and press layer correctly', () => {
     const cache = getMemoCache();
     const lookup = layer => layer === 'hover' || layer === 'press';
-    const result1 = applyTokenLayers(tokens1, cache, lookup)[0];
-    expect(applyTokenLayers(tokens1, cache, lookup)[0]).toBe(result1);
+    const result1 = applyTokenLayers(tokens1, stateOrder, cache, lookup)[0];
+    expect(applyTokenLayers(tokens1, stateOrder, cache, lookup)[0]).toBe(result1);
     expect(stripLayers(result1)).toEqual({ a: 'a-hover-press', b: 'b-press', c: 'c' });
   });
 });

@@ -1,5 +1,5 @@
 import { getMemoCache } from '@fluentui-react-native/memo-cache';
-import { styleFunction } from './styleFunction';
+import { buildProps } from './buildProps';
 
 type ITheme = { foo?: string; bar?: string };
 type ITokens = { a?: string; b?: string; c?: string; d?: string };
@@ -17,10 +17,10 @@ function munge(tokens: ITokens, theme: ITheme): IProps {
   };
 }
 
-describe('style function tests', () => {
-  test('basic style function caches as expected', () => {
+describe('props function tests', () => {
+  test('basic build props function caches as expected', () => {
     const cache = getMemoCache();
-    const styleFn = styleFunction(munge, ['a', 'b']);
+    const styleFn = buildProps(munge, ['a', 'b']);
     const p1 = styleFn({ a: 'a', b: 'b', c: 'c' }, theme, cache);
     expect(styleFn({ a: 'a', b: 'b', c: 'foo' }, theme, cache)).toBe(p1);
     const p2 = styleFn({ a: 'b', b: 'b' }, theme, cache);
@@ -28,9 +28,9 @@ describe('style function tests', () => {
     expect(styleFn({ a: 'b', b: 'b', c: 'bar' }, theme, cache)).toBe(p2);
   });
 
-  test('style function refinement works with explicit keys', () => {
+  test('build props function refinement works with explicit keys', () => {
     const cache = getMemoCache();
-    const styleFn = styleFunction(munge, ['a', 'b', 'c', 'd']);
+    const styleFn = buildProps(munge, ['a', 'b', 'c', 'd']);
     const refinedFn = styleFn.refine(['a', 'b']);
     const t1 = { a: 'a', b: 'b', c: 'c', d: 'd' };
     const t2 = { a: 'a', b: 'b', c: 'foo', d: 'bar' };
