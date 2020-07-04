@@ -1,2 +1,2 @@
-const { configureJest } = require('@uifabricshared/build-native');
-module.exports = configureJest();
+const { configureReactNativeJest } = require('@uifabricshared/build-native');
+module.exports = configureReactNativeJest('android');

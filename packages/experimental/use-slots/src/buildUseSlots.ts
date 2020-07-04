@@ -31,14 +31,15 @@ function internalRender<TProps>(
   slot: NativeReactType | ComposableFunction<TProps>,
   result: React.FunctionComponent<TProps> | TProps,
   extraProps: TProps,
-  filter?: (propsName: string) => boolean
+  filter: (propsName: string) => boolean,
+  children: React.ReactNode[]
 ): JSX.Element | null {
   let props: TProps = typeof result === 'function' ? extraProps : mergeProps(result, extraProps);
   const propsToRemove = filter ? Object.keys(props).filter(key => !filter(key)) : undefined;
-  if (propsToRemove.length > 0) {
+  if (propsToRemove?.length > 0) {
     props = mergeProps(props, ({ ...propsToRemove.map(prop => ({ [prop]: undefined })) } as unknown) as TProps);
   }
-  return typeof result === 'function' ? (result as Function)(props) : React.createElement(slot, props);
+  return typeof result === 'function' ? (result as Function)(props, ...children) : React.createElement(slot, props, ...children);
 }
 
 function getStagedRender<TProps>(slot: NativeReactType | ComposableFunction<TProps>): StagedRender<TProps> | undefined {
@@ -51,8 +52,8 @@ function buildSlotFunctions<TSlotProps>(
 ): CachedState<TSlotProps> {
   const info: CachedState<TSlotProps> = { slots: {}, results: {} } as CachedState<TSlotProps>;
   Object.keys(slots).forEach(slot => {
-    info.slots[slot] = (props: TSlotProps[keyof TSlotProps]) => {
-      return internalRender<TSlotProps[keyof TSlotProps]>(slots[slot], info.results[slot], props, (filters && filters[slot]) || undefined);
+    info.slots[slot] = (props: TSlotProps[keyof TSlotProps], ...children: React.ReactNode[]) => {
+      return internalRender<TSlotProps[keyof TSlotProps]>(slots[slot], info.results[slot], props, (filters && filters[slot]) || undefined, children);
     };
     info.slots[slot]._canCompose = true;
   });
