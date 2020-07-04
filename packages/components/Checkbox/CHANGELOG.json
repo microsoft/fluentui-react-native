@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Thu, 02 Jul 2020 21:06:06 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.3.71",
+      "version": "0.3.71",
+      "comments": {
+        "none": [
+          {
+            "comment": "Change files",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 01 Jul 2020 19:54:46 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.3.71",
       "version": "0.3.71",

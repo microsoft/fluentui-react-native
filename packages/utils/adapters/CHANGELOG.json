@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Thu, 02 Jul 2020 23:50:34 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.3.32",
+      "version": "0.3.32",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add framework package to roll up internal packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "d4ec61ac5dfc3e5f14d68bfc78423c5ff9cdc038",
+            "package": "@fluentui-react-native/adapters"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 02 Jul 2020 21:06:06 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.3.31",
+      "version": "0.3.31",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Change files\"",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@fluentui-react-native/adapters"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Jun 2020 05:00:56 GMT",
       "tag": "@fluentui-react-native/adapters_v0.3.22",
       "version": "0.3.22",
