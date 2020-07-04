@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Text all props 1`] = `
+<Text
+  style={
+    Object {
+      "color": "#a19f9d",
+      "fontFamily": "Segoe UI",
+      "fontSize": 14,
+      "fontWeight": "400",
+      "margin": 0,
+    }
+  }
+>
+  All props
+</Text>
+`;
+
+exports[`Text all tokens 1`] = `
+<Text
+  style={
+    Object {
+      "color": "#323130",
+      "fontFamily": "Wingdings",
+      "fontSize": 20,
+      "fontWeight": "900",
+      "margin": 0,
+    }
+  }
+>
+  All tokens
+</Text>
+`;
+
+exports[`Text default 1`] = `
+<Text
+  style={
+    Object {
+      "color": "#323130",
+      "fontFamily": "Segoe UI",
+      "fontSize": 12,
+      "fontWeight": "400",
+      "margin": 0,
+    }
+  }
+>
+  Text default
+</Text>
+`;
