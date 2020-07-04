@@ -1,5 +1,5 @@
 {
-  "name": "@fluentui-react-native/stack",
+  "name": "@fluentui-react-native/experimental-stack",
   "version": "0.1.0",
   "description": "A cross-platform opinionated Fluent Text component",
   "main": "src/index.ts",
