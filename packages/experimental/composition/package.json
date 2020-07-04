@@ -30,10 +30,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/memo-cache": ">=0.2.2 <1.0.0",
+    "@fluentui-react-native/memo-cache": ">=0.2.9 <1.0.0",
     "@fluentui-react-native/use-slots": ">=0.1.0 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.1.0 <1.0.0",
-    "@uifabricshared/immutable-merge": ">=0.5.61 <1.0.0"
+    "@uifabricshared/immutable-merge": ">=0.5.66 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
