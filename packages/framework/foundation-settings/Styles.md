@@ -35,16 +35,8 @@ This is a port of the flatten routine from react-native. While this is provided 
 
 This routine simply merges all of the styles together in the order they are found and produces a single flattened and merged style object.
 
-## mergeAndFinalizeStyles
+## mergeStyles
 
-This routine is used as the merge handler when merging `IComponentSettings` objects which contain styles. It will merge and flatten the styles together and optionally resolve theme values if a theme and finalizer are passed in.
+This routine is used as the merge handler when merging `IComponentSettings` objects which contain styles. It will merge and flatten the styles together.
 
-The flattening is done here so that if and when values are cached they are cached in a form that is ready to apply to the actual components. With caching comes the assumption that work done before the caching happens will happen less frequently than the usage outside.
-
-## Future Explorations
-
-Here are some quick thoughts on future explorations to do here.
-
-- Explore filling in the number & { } pattern in props to create a reference to a common index. This could be used for things like caching repeated merge results. An example would be looking up that merging #1 and #2 should produce #3. If #1 and #2 are encountered again #3 can be used without needing to create a new object.
-- The number pattern is interesting for web because of CSS rule creation being expensive. When styles are turned into rules it is important that we create the minimum number of rules. This is really the same optimization as creating the minimum number of objects.
-- Look at adding rule creation for web as part of the finalization.
+This routine has a built-in caching layer that will attempt to ensure that object identity remains consistent. This means that style A + style B, where the references to A and B are the same, will always produce object C, where the reference will also be the same.

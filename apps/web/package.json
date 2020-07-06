@@ -3,11 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
-    "@fluentui-react-native/checkbox": "0.3.50",
-=======
     "@fluentui-react-native/checkbox": "0.3.71",
->>>>>>> master
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",

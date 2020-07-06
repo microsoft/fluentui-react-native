@@ -1086,18 +1086,6 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
-"@fluentui-react-native/checkbox@0.3.50":
-  version "0.3.50"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/checkbox/-/checkbox-0.3.50.tgz#c88489b0773c95a7d29f5fadcf5ceb9d35a0f2ed"
-  integrity sha512-DMXbQWAOiSzNgdIeBtrdIXXoG2BIZx3uk8U0quXs9NxiRhPMI7AsP/Ce8a+H5vRUKKe8wnFrAxnFJhYMubNjpw==
-  dependencies:
-    "@fluentui-react-native/adapters" ">=0.3.11 <1.0.0"
-    "@fluentui-react-native/interactive-hooks" ">=0.4.18 <1.0.0"
-    "@fluentui-react-native/pressable" ">=0.3.50 <1.0.0"
-    "@fluentui-react-native/text" ">=0.5.47 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.4.46 <1.0.0"
-    "@uifabricshared/foundation-compose" "^1.6.49"
-
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -14900,23 +14888,7 @@ react-native-svg@^11.0.0:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
 
-react-native-web@^0.12.2:
-  version "0.12.2"
-  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.12.2.tgz#d0fe8739d222f412decc4f1de2e12f25e91e2f56"
-  integrity sha512-0YLDjwIm5LjQDOPUUregtuEBexH7oQph6x9FSAyzCM52QmM82TfrYRXXSwzI2eSdT1OzM2BTfP3zxmEL+coyhg==
-  dependencies:
-    array-find-index "^1.0.2"
-    create-react-class "^15.6.2"
-    debounce "^1.2.0"
-    deep-assign "^3.0.0"
-    fbjs "^1.0.0"
-    hyphenate-style-name "^1.0.3"
-    inline-style-prefixer "^5.1.0"
-    normalize-css-color "^1.0.2"
-    prop-types "^15.6.0"
-    react-timer-mixin "^0.13.4"
-
-react-native-web@^0.12.3:
+react-native-web@0.12.3, react-native-web@^0.12.3:
   version "0.12.3"
   resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.12.3.tgz#9f43301539672d46a302ee642afd29243a4376d5"
   integrity sha512-6evhZl3tzYz5IUesbHEC4/ooUkXJPIAtrmDJWe3CdpDrV6rvBNNa1Utq192YKbHPzGtETuw+5X59K0O1n5EjWQ==
