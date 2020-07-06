@@ -1,11 +1,11 @@
+import { Separator, StealthButton, Text } from '@fluentui/react-native';
+import { useTheme } from '@uifabricshared/theming-react-native';
 import * as React from 'react';
 import { ScrollView, View } from 'react-native';
-import { StealthButton, Text, Separator } from '@fluentui/react-native';
-import { registerThemes } from './TestComponents/Theme/CustomThemes';
-import { allTestComponents } from './TestComponents';
-import { fabricTesterStyles } from './TestComponents/Common/styles';
-import { useTheme } from '@uifabricshared/theming-react-native';
+import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
+import { fabricTesterStyles } from './TestComponents/Common/styles';
+import { registerThemes } from './TestComponents/Theme/CustomThemes';
 
 // uncomment the below lines to enable message spy
 /*
@@ -19,14 +19,16 @@ const EmptyComponent: React.FunctionComponent = () => {
   return <Text style={fabricTesterStyles.noTest}>Select a component from the left.</Text>;
 };
 
-// sort tests alphabetically by name
-const sortedTestComponents = allTestComponents.sort((a, b) => a.name.localeCompare(b.name));
-
 export interface IFabricTesterProps {
   initialTest?: string;
+  enabledTest: TestDescription[];
 }
 
 export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props: IFabricTesterProps) => {
+
+  // sort tests alphabetically by name
+  const sortedTestComponents = props.enabledTest.sort((a, b) => a.name.localeCompare(b.name));
+
   const { initialTest } = props;
   const initialSelectedTestIndex = sortedTestComponents.findIndex(description => {
     return description.name === initialTest;
