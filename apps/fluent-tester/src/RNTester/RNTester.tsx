@@ -6,7 +6,6 @@ import { AppRegistry } from 'react-native';
 import { FabricTester, IFabricTesterProps } from './FabricTester';
 import { TestDescription } from './TestComponents';
 import { ButtonFocusTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
-import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './TestComponents/FocusTrapZone';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
@@ -25,11 +24,6 @@ const tests: TestDescription[] = [
     name: 'Button Test',
     component: ButtonFocusTest,
     testPage: HOMEPAGE_BUTTON_BUTTON
-  },
-  {
-    name: 'Callout Test',
-    component: CalloutTest,
-    testPage: HOMEPAGE_CALLOUT_BUTTON
   },
   {
     name: 'Focus Trap Zone Test',
