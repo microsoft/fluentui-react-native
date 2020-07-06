@@ -30,7 +30,7 @@ jobs:
 
       - script: |
           yarn checkchange
-      displayName: "check change"
+        displayName: "check change"
 
       - script: |
           yarn check-for-changed-files
