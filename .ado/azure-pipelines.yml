@@ -123,11 +123,6 @@ jobs:
         workingDirectory: apps/ios
         displayName: "yarn bundle ios"
 
-      - script: |
-          yarn bundle
-        workingDirectory: apps/macos
-        displayName: "yarn bundle macos"
-
       # Select proper XCode version
       - template: templates/apple-xcode-select.yml
 
