@@ -61,7 +61,7 @@ jobs:
     displayName: Win32 PR
     pool:
       vmImage: "windows-2019"
-    timeoutInMinutes: : 60
+    timeoutInMinutes: 60
     cancelTimeoutInMinutes: 5
 
     steps:
