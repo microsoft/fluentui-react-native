@@ -13,11 +13,3 @@ steps:
   - script: |
       yarn
     displayName: "yarn"
-
-  - script: |
-      yarn build
-    displayName: "yarn build"
-
-  - script: |
-      yarn bundle
-    displayName: "yarn bundle"
