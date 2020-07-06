@@ -1,5 +1,5 @@
 import { immutableMerge } from '@uifabricshared/immutable-merge';
-import { IFinalizeStyle, IStyleProp } from './Styles.types';
+import { IStyleProp } from './Styles.types';
 import { getMemoCache } from '@fluentui-react-native/memo-cache';
 
 /**
@@ -24,28 +24,18 @@ export function flattenStyle(style: IStyleProp<object>): object {
  *
  * @param styles - array of styles to merge together.  The styles will be flattened as part of the process
  */
-export function mergeAndFlattenStyles(finalizer: IFinalizeStyle | undefined, ...styles: IStyleProp<object>[]): object | undefined {
+export function mergeAndFlattenStyles(...styles: IStyleProp<object>[]): object | undefined {
   // baseline merge and flatten the objects
-  let merged = immutableMerge(
+  return immutableMerge(
     ...styles.map((styleProp: IStyleProp<object>) => {
       return flattenStyle(styleProp);
     })
   );
-
-  // if the styles should be finalized as part of this do that as well
-  if (finalizer && merged) {
-    const updated = finalizer(merged);
-    if (updated && Object.keys(updated).length > 0) {
-      merged = immutableMerge(merged, updated);
-    }
-  }
-
-  return merged;
 }
 
 const _styleCache = getMemoCache();
 
-export function memoAndMergeStyles(...styles: IStyleProp<object>[]): object | undefined {
+export function mergeStyles(...styles: IStyleProp<object>[]): object | undefined {
   // filter the style set to just objects (which might be arrays or plain style objects)
   const inputs = styles.filter(s => typeof s === 'object') as object[];
 

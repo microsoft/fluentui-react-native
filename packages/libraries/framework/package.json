@@ -1,9 +1,10 @@
 {
-  "name": "@fluentui/react-native",
-  "version": "0.15.74",
-  "description": "A react-native component library that implements the Fluent Design System.",
+  "name": "@fluentui-react-native/framework",
+  "version": "0.1.1",
+  "description": "Component framework used by fluentui react native controls",
   "main": "src/index.ts",
   "module": "src/index.ts",
+  "private": true,
   "onPublish": {
     "main": "lib-commonjs/index.js",
     "module": "lib/index.js"
@@ -15,7 +16,7 @@
     "clean": "fluentui-scripts clean",
     "code-style": "fluentui-scripts code-style",
     "lint": "fluentui-scripts eslint",
-    "bundle": "fluentui-scripts bundle",
+    "bundle": "fluentui-scripts webpack",
     "start:tester": "react-native start --projectRoot ./src",
     "start-test": "fluentui-scripts jest-watch",
     "update-snapshots": "fluentui-scripts jest -u",
@@ -30,19 +31,7 @@
     "@uifabricshared/immutable-merge": ">=0.5.66 <1.0.0",
     "@uifabricshared/theming-ramp": ">=0.9.66 <1.0.0",
     "@uifabricshared/theming-react-native": ">=0.7.67 <1.0.0",
-    "@fluentui-react-native/adapters": ">=0.3.32 <1.0.0",
-    "@fluentui-react-native/interactive-hooks": ">=0.4.38 <1.0.0",
-    "@fluentui-react-native/button": ">=0.9.24 <1.0.0",
-    "@fluentui-react-native/callout": ">=0.10.3 <1.0.0",
-    "@fluentui-react-native/checkbox": ">=0.3.73 <1.0.0",
-    "@fluentui-react-native/focus-trap-zone": ">=0.3.72 <1.0.0",
-    "@fluentui-react-native/link": ">=0.6.31 <1.0.0",
-    "@fluentui-react-native/persona": ">=0.5.69 <1.0.0",
-    "@fluentui-react-native/persona-coin": ">=0.3.72 <1.0.0",
-    "@fluentui-react-native/pressable": ">=0.3.72 <1.0.0",
-    "@fluentui-react-native/radio-group": ">=0.3.72 <1.0.0",
-    "@fluentui-react-native/separator": ">=0.3.73 <1.0.0",
-    "@fluentui-react-native/text": ">=0.5.69 <1.0.0",
+    "@fluentui-react-native/memo-cache": ">=0.2.9 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.4.67 <1.0.0"
   },
   "devDependencies": {
@@ -52,7 +41,9 @@
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "react": "16.11.0",
-    "react-native": "0.62.2"
+    "react-dom": "^16.13.1",
+    "react-native": "0.62.2",
+    "react-native-web": "0.12.3"
   },
   "peerDependencies": {
     "react": "16.11.0",
