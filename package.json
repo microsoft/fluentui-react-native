@@ -32,7 +32,8 @@
   },
   "devDependencies": {
     "beachball": "^1.30.2",
-    "lerna": "^3.16.4"
+    "lerna": "^3.16.4",
+    "react-dom": "^16.13.1"
   },
   "workspaces": {
     "packages": [

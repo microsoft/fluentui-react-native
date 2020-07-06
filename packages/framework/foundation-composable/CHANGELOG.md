@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/foundation-composable
 
-This log was last generated on Wed, 17 Jun 2020 05:00:56 GMT and should not be manually modified.
+This log was last generated on Sat, 04 Jul 2020 06:24:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.67
+
+Sat, 04 Jul 2020 06:24:16 GMT
+
+### Patches
+
+- make all style merging use caching, get rid of unused finalizer (jasonmo@microsoft.com)
 
 ## 0.6.57
 

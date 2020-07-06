@@ -1,11 +1,6 @@
 import { MergeOptions, immutableMergeCore } from '@uifabricshared/immutable-merge';
 import { IComponentSettingsCollection, IComponentSettings, ISlotProps, IOverrideLookup } from './Settings.types';
-import { mergeAndFlattenStyles, memoAndMergeStyles } from './Styles';
-import { IStyleProp } from './Styles.types';
-
-function _mergeStyles(...objs: IStyleProp<object>[]): object | undefined {
-  return mergeAndFlattenStyles(undefined, ...objs);
-}
+import { mergeStyles } from './Styles';
 
 function _mergeClassName(...names: any[]): string | undefined {
   return names.filter(v => v && typeof v === 'string').join(' ');
@@ -16,15 +11,7 @@ function _mergeClassName(...names: any[]): string | undefined {
  */
 const _mergePropsOptions: MergeOptions = {
   className: _mergeClassName,
-  style: _mergeStyles
-};
-
-/**
- * As above but will cache merges of styles
- */
-const _mergeAndMemoPropsOptions: MergeOptions = {
-  className: _mergeClassName,
-  style: memoAndMergeStyles
+  style: mergeStyles
 };
 
 /**
@@ -73,15 +60,6 @@ export function mergeSettings<TSettings extends IComponentSettings = IComponentS
  */
 export function mergeProps<TProps>(...props: (TProps | undefined)[]): TProps {
   return (immutableMergeCore(_mergePropsOptions, ..._filterToObjectArray(props)) as unknown) as TProps;
-}
-
-/**
- * As mergeProps except this will cache the result of style merges such that merging the same two styles (by object identity)
- * a second time will result in the same object.
- * @param props - set of props to merge together
- */
-export function memoMergeProps<TProps>(...props: (TProps | undefined)[]): TProps {
-  return (immutableMergeCore(_mergeAndMemoPropsOptions, ..._filterToObjectArray(props)) as unknown) as TProps;
 }
 
 /**
