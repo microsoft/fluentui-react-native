@@ -13,7 +13,6 @@ import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from '../../fluent-teste
 import { HOMEPAGE_PRESSABLE_BUTTON, PressableTest } from '../../fluent-tester/src/RNTester/TestComponents/Pressable';
 import { HOMEPAGE_RADIOGROUP_BUTTON, RadioGroupTest } from '../../fluent-tester/src/RNTester/TestComponents/RadioGroup';
 import { HOMEPAGE_SEPARATOR_BUTTON, SeparatorTest } from '../../fluent-tester/src/RNTester/TestComponents/Separator';
-// import { HOMEPAGE_SVG_BUTTON, SvgTest } from '../../fluent-tester/src/RNTester/TestComponents/Svg';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from '../../fluent-tester/src/RNTester/TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from '../../fluent-tester/src/RNTester/TestComponents/Theme';
 
@@ -68,11 +67,6 @@ const tests: TestDescription[] = [
     component: PersonaTest,
     testPage: HOMEPAGE_PERSONA_BUTTON
   },
-  // {
-  //   name: 'Svg Test',
-  //   component: SvgTest,
-  //   testPage: HOMEPAGE_SVG_BUTTON
-  // },
 ];
 
 const FluentTester: React.FunctionComponent<IFabricTesterProps> = props => {
