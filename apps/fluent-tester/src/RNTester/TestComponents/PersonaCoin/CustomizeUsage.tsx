@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PersonaCoin, IconAlignment, IPersonaCoinTokens } from '@fluentui/react-native';
+import { PersonaCoin, IconAlignment, IPersonaCoinTokens } from '@fluentui-react-native/persona-coin';
 import { Switch, View, Text, TextInput } from 'react-native';
 import { Slider } from '../Common/Slider';
 import { steveBallmerPhotoUrl } from './styles';

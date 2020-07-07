@@ -7,12 +7,14 @@ import { AppRegistry } from 'react-native';
 import { TestDescription } from '../../fluent-tester/src/RNTester/TestComponents';
 import { ButtonFocusTest, HOMEPAGE_BUTTON_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Button';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Checkbox';
+// import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/FocusTrapZone';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from '../../fluent-tester/src/RNTester/TestComponents/Link';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from '../../fluent-tester/src/RNTester/TestComponents/Persona';
 import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from '../../fluent-tester/src/RNTester/TestComponents/PersonaCoin';
 import { HOMEPAGE_PRESSABLE_BUTTON, PressableTest } from '../../fluent-tester/src/RNTester/TestComponents/Pressable';
 import { HOMEPAGE_RADIOGROUP_BUTTON, RadioGroupTest } from '../../fluent-tester/src/RNTester/TestComponents/RadioGroup';
 import { HOMEPAGE_SEPARATOR_BUTTON, SeparatorTest } from '../../fluent-tester/src/RNTester/TestComponents/Separator';
+import { HOMEPAGE_SVG_BUTTON, SvgTest } from '../../fluent-tester/src/RNTester/TestComponents/Svg';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from '../../fluent-tester/src/RNTester/TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from '../../fluent-tester/src/RNTester/TestComponents/Theme';
 
@@ -22,6 +24,16 @@ const tests: TestDescription[] = [
     component: ButtonFocusTest,
     testPage: HOMEPAGE_BUTTON_BUTTON
   },
+  {
+    name: 'Checkbox Test',
+    component: CheckboxTest,
+    testPage: HOMEPAGE_CHECKBOX_BUTTON
+  },
+  // {
+  //   name: 'Focus Trap Zone Test',
+  //   component: FocusTrapTest,
+  //   testPage: HOMEPAGE_FOCUSTRAPZONE_BUTTON
+  // },
   {
     name: 'Pressable Test',
     component: PressableTest,
@@ -63,9 +75,9 @@ const tests: TestDescription[] = [
     testPage: HOMEPAGE_PERSONA_BUTTON
   },
   {
-    name: 'Checkbox Test',
-    component: CheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_BUTTON
+    name: 'Svg Test',
+    component: SvgTest,
+    testPage: HOMEPAGE_SVG_BUTTON
   },
 ];
 

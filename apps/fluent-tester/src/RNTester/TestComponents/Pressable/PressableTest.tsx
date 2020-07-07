@@ -1,9 +1,10 @@
-import * as React from 'react';
-import { Text, Pressable, IPressableState } from '@fluentui/react-native';
+import { IPressableState, useFocusState, useHoverState, usePressState } from '@fluentui-react-native/interactive-hooks';
+import { Pressable } from '@fluentui-react-native/pressable';
 import { Stack } from '@fluentui-react-native/stack';
-import { useHoverState, useFocusState, usePressState } from '@fluentui/react-native';
-import { Square } from '../Common/Square';
+import { Text } from '@fluentui-react-native/text';
+import * as React from 'react';
 import { Alert, GestureResponderEvent, StyleSheet, View, ViewProps, ViewStyle } from 'react-native';
+import { Square } from '../Common/Square';
 import { PRESSABLE_TESTPAGE } from './consts';
 
 const styles = StyleSheet.create({

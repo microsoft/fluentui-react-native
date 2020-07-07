@@ -1,8 +1,9 @@
-import { IFocusTrapZoneProps, Text, FocusTrapZone, KeyPressEvent } from '@fluentui/react-native';
+import { FocusTrapZone, IFocusTrapZoneProps } from '@fluentui-react-native/focus-trap-zone';
+import { KeyPressEvent, useFocusState } from '@fluentui-react-native/interactive-hooks';
 import { Stack } from '@fluentui-react-native/stack';
-import { TouchableHighlight, TouchableHighlightProps, View, ViewProps } from 'react-native';
-import { useFocusState } from '@fluentui/react-native';
+import { Text } from '@fluentui-react-native/text';
 import * as React from 'react';
+import { TouchableHighlight, TouchableHighlightProps, View, ViewProps } from 'react-native';
 import { stackStyle } from '../Common/styles';
 import { FOCUSTRAPZONE_TESTPAGE } from './consts';
 

@@ -1,7 +1,8 @@
+import { Button } from '@fluentui-react-native/button';
+import { IFocusable } from '@fluentui-react-native/interactive-hooks';
+import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { findNodeHandle } from 'react-native';
-import { Button, IFocusable } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { BUTTON_TESTPAGE } from './consts';
 

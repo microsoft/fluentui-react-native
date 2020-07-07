@@ -1,9 +1,9 @@
-import * as React from 'react';
-import { View, TextInput, Text } from 'react-native';
-import { Checkbox } from '@fluentui/react-native';
-import { Separator } from '@fluentui/react-native';
-import { commonTestStyles as commonStyles } from '../Common/styles';
+import { Checkbox } from '@fluentui-react-native/checkbox';
+import { Separator } from '@fluentui-react-native/separator';
 import { useTheme } from '@uifabricshared/theming-react-native';
+import * as React from 'react';
+import { Text, TextInput, View } from 'react-native';
+import { commonTestStyles as commonStyles } from '../Common/styles';
 import { CHECKBOX_TESTPAGE } from './consts';
 
 const CircularCheckbox = Checkbox.customize({ tokens: { borderRadius: 50 } });

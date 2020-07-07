@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RadioButton, RadioGroup } from '@fluentui/react-native';
+import { RadioButton, RadioGroup } from '@fluentui-react-native/radio-group';
 import { View } from 'react-native';
 import { RADIOGROUP_TESTPAGE } from './consts';
 

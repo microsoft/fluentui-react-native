@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Alert } from 'react-native';
-import { Link } from '@fluentui/react-native';
+import { Link } from '@fluentui-react-native/link';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { LINK_TESTPAGE } from './consts';
