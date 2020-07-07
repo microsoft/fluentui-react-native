@@ -27,7 +27,7 @@ steps:
     displayName: 'Install Azure Credentials Plugin for NuGet'
 
   - script: |
-      yarn windows --logging --release
+      yarn windows --logging --release --arch x64
     workingDirectory: apps\windows
     displayName: 'run UWP app'
 
