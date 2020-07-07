@@ -1,4 +1,9 @@
 steps:
+  - script: |
+      yarn bundle
+    workingDirectory: apps\windows
+    displayName: yarn bundle
+
   - task: DownloadSecureFile@1
     name: UwpCertificate
     inputs:

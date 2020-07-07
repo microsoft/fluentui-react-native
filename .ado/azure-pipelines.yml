@@ -5,6 +5,38 @@ variables:
   CI: true
 
 jobs:
+  # Dedicated task to build and bundle JS code, including jest tests, snapshot testing, and linting, because these things can be super
+  # time consuming they don't need to run on every CI pass, instead do a dedicated JS loop to make the platform specific tests start quicker
+  - job: BuildAndBundle
+    displayName: Build, test, and bundle JavaScript
+    pool:
+      vmImage: "ubuntu-latest"
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+
+    steps:
+      - checkout: self
+        persistCredentials: true
+
+      - template: templates/setup-repo.yml
+
+      - script: |
+          yarn build
+        displayName: "yarn build"
+
+      - script: |
+          yarn bundle
+        displayName: "yarn bundle"
+
+      - script: |
+          yarn checkchange
+        displayName: "check change"
+
+      - script: |
+          yarn check-for-changed-files
+        displayName: "verify API and Ensure Changed Files"
+
+  # Windows bundling and end to end testing
   - job: WindowsPR
     displayName: Windows PR
     pool:
@@ -18,22 +50,29 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      - template: templates/setup-repo.yml
+      # yarn and minimal build to get set up
+      - template: templates/setup-repo-min-build.yml
 
-      - script: |
-          yarn checkchange
-        displayName: "check change"
-
-      - script: |
-          yarn check-for-changed-files
-        displayName: "verify API and Ensure Changed Files"
-
+      # bundle windows adn do end to end tests
       - template: templates/e2e-testing-uwp.yml
 
-      - script: |
-          yarn e2etest
-        workingDirectory: apps/win32
-        displayName: "run E2E Win32 tests"
+  # Win32 bundling and end to end testing
+  - job: Win32PR
+    displayName: Win32 PR
+    pool:
+      vmImage: "windows-2019"
+    timeoutInMinutes: 60
+    cancelTimeoutInMinutes: 5
+
+    steps:
+      - checkout: self
+        persistCredentials: true
+
+      # yarn and minimal build to get set up
+      - template: templates/setup-repo-min-build.yml
+
+      # bundle win32 and do end to end tests
+      - template: templates/e2e-testing-win32.yml
 
   - job: ApplePR
     displayName: Apple PR
@@ -77,7 +116,12 @@ jobs:
           sudo gem install cocoapods
         displayName: "Install Cocoapods Environment"
 
-      - template: templates/setup-repo.yml
+      - template: templates/setup-repo-min-build.yml
+
+      - script: |
+          yarn bundle
+        workingDirectory: apps/ios
+        displayName: "yarn bundle ios"
 
       # Select proper XCode version
       - template: templates/apple-xcode-select.yml
