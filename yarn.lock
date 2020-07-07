@@ -14904,10 +14904,10 @@ react-native-web@0.12.3, react-native-web@^0.12.3:
     prop-types "^15.6.0"
     react-timer-mixin "^0.13.4"
 
-react-native-windows@^0.62.0:
-  version "0.62.0"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.62.0.tgz#c2cfa83ee235bbba0823350db4271f0218733344"
-  integrity sha512-yufBtsEPDJ4V+SR76v3+2tt+hHsbOQo4X4Boc6Etu1NmEC37956WS0YAyGez6a1RTxKMky+TBvX1cVHb7THZdA==
+react-native-windows@^0.62.1:
+  version "0.62.1"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.62.1.tgz#8ed01b6778ff6d3f9d9e2a9b65b0180a8ee4e9f1"
+  integrity sha512-0q3iMV/uvosnYJdMeCjI1oXLJSFgN23ZrnW1tJpnyO4LPALQ4PgguFeNF8y8tUf/bTcc9UGATwzrj9qd4ulKQg==
   dependencies:
     "@babel/runtime" "^7.8.4"
     cli-spinners "^2.2.0"
