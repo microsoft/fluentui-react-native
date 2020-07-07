@@ -10,6 +10,4 @@ steps:
       versionSpec: "5.6.0"
     displayName: "Install Nuget"
 
-  - script: |
-      yarn
-    displayName: "yarn"
+  - template: yarn-install.yml
