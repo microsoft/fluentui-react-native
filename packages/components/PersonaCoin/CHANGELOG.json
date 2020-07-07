@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/persona-coin",
   "entries": [
     {
+      "date": "Wed, 17 Jun 2020 05:00:56 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.61",
+      "version": "0.3.61",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add memo-cache package and consume it in the core framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "27b5fc6790369ab629dcf7f93d6091d4913915fa",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Jun 2020 23:53:15 GMT",
       "tag": "@fluentui-react-native/persona-coin_v0.3.48",
       "version": "0.3.48",

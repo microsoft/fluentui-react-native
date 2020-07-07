@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Fri, 12 Jun 2020 03:17:59 GMT and should not be manually modified.
+This log was last generated on Fri, 26 Jun 2020 18:58:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.0
+
+Fri, 26 Jun 2020 18:58:23 GMT
+
+### Minor changes
+
+- Expose Callout property isBeakVisible (ppatboyd@outlook.com)
+
+## 0.9.2
+
+Wed, 17 Jun 2020 05:00:56 GMT
+
+### Patches
+
+- add memo-cache package and consume it in the core framework (jasonmo@microsoft.com)
+
+## 0.9.0
+
+Tue, 16 Jun 2020 23:13:19 GMT
+
+### Minor changes
+
+- Add onRestoreFocus callback and improve test page capabilities (ppatboyd@outlook.com)
 
 ## 0.8.0
 
