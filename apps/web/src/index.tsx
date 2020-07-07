@@ -7,7 +7,6 @@ import { AppRegistry } from 'react-native';
 import { TestDescription } from '../../fluent-tester/src/RNTester/TestComponents';
 import { ButtonFocusTest, HOMEPAGE_BUTTON_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Button';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Checkbox';
-// import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/FocusTrapZone';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from '../../fluent-tester/src/RNTester/TestComponents/Link';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from '../../fluent-tester/src/RNTester/TestComponents/Persona';
 import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from '../../fluent-tester/src/RNTester/TestComponents/PersonaCoin';
@@ -29,11 +28,6 @@ const tests: TestDescription[] = [
     component: CheckboxTest,
     testPage: HOMEPAGE_CHECKBOX_BUTTON
   },
-  // {
-  //   name: 'Focus Trap Zone Test',
-  //   component: FocusTrapTest,
-  //   testPage: HOMEPAGE_FOCUSTRAPZONE_BUTTON
-  // },
   {
     name: 'Pressable Test',
     component: PressableTest,
