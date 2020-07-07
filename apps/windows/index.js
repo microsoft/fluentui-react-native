@@ -89,7 +89,7 @@ const tests = [
 const FluentTester = props => {
   return (
     <ThemeProvider registry={customRegistry}>
-      <FabricTester enabledTest={tests} {...props} />
+      <FabricTester enabledTests={tests} {...props} />
     </ThemeProvider>
   );
 };

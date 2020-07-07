@@ -91,7 +91,7 @@ const FluentTester: React.FunctionComponent<IFabricTesterProps> = props => {
   return (
     <SafeAreaView>
       <ThemeProvider registry={customRegistry}>
-        <FabricTester enabledTest={tests} {...props} />
+        <FabricTester enabledTests={tests} {...props} />
       </ThemeProvider>
     </SafeAreaView>
   );

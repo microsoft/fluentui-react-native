@@ -85,7 +85,7 @@ const tests: TestDescription[] = [
 const RNTesterApp: React.FunctionComponent<IFabricTesterProps> = props => {
   return (
     <ThemeProvider registry={customRegistry}>
-      <FabricTester enabledTest={tests} {...props} />
+      <FabricTester enabledTests={tests} {...props} />
     </ThemeProvider>
   );
 };

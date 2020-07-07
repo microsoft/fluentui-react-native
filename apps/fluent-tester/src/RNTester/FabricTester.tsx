@@ -23,13 +23,13 @@ const EmptyComponent: React.FunctionComponent = () => {
 
 export interface IFabricTesterProps {
   initialTest?: string;
-  enabledTest: TestDescription[];
+  enabledTests: TestDescription[];
 }
 
 export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props: IFabricTesterProps) => {
 
   // sort tests alphabetically by name
-  const sortedTestComponents = props.enabledTest.sort((a, b) => a.name.localeCompare(b.name));
+  const sortedTestComponents = props.enabledTests.sort((a, b) => a.name.localeCompare(b.name));
 
   const { initialTest } = props;
   const initialSelectedTestIndex = sortedTestComponents.findIndex(description => {
