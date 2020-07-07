@@ -1,0 +1,10 @@
+steps:
+  - script: |
+      yarn bundle
+    workingDirectory: apps/win32
+    displayName: "yarn bundle"
+
+  - script: |
+      yarn e2etest
+    workingDirectory: apps/win32
+    displayName: "run E2E Win32 tests"
