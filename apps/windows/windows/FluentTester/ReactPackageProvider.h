@@ -2,6 +2,7 @@
 
 #include "winrt/Microsoft.ReactNative.h"
 
+
 namespace winrt::FluentTester::implementation
 {
     struct ReactPackageProvider : winrt::implements<ReactPackageProvider, winrt::Microsoft::ReactNative::IReactPackageProvider>
