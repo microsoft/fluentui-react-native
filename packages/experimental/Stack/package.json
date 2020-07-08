@@ -1,7 +1,7 @@
 {
-  "name": "@fluentui-react-native/adapters",
-  "version": "0.3.32",
-  "description": "Adapters for working with react-native types",
+  "name": "@fluentui-react-native/experimental-stack",
+  "version": "0.1.0",
+  "description": "A cross-platform opinionated Fluent Text component",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -9,6 +9,7 @@
     "main": "lib-commonjs/index.js",
     "module": "lib/index.js"
   },
+  "private": true,
   "scripts": {
     "build": "fluentui-scripts build",
     "just": "fluentui-scripts",
@@ -17,16 +18,20 @@
     "verify-api": "fluentui-scripts verify-api-extractor",
     "update-api": "fluentui-scripts update-api-extractor"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@uifabricshared/foundation-compose": "^1.6.70",
+    "@fluentui-react-native/adapters": ">=0.3.32 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.4.67 <1.0.0"
+  },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.62.0-preview.3",
-    "@types/jest": "^19.2.2",
     "@types/react-native": "^0.62.0",
+    "@fluentui-react-native/text": ">=0.5.69 <1.0.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "react-native": "0.62.2",
-    "react-native-web": "0.12.3",
-    "react-native-windows": "^0.62.1"
+    "react-native": "0.62.2"
+  },
+  "peerDependencies": {
+    "react-native": ">=0.60.0"
   },
   "author": "",
   "license": "MIT"
