@@ -2,14 +2,16 @@
 
 exports[`ContextualMenu default props 1`] = `
 <RCTCallout
+  accessibilityRole="menu"
   backgroundColor="bodyStandoutBackground"
   borderColor="bodyFrameBackground"
-  borderWidth={10}
+  borderWidth={1}
+  setInitialFocus={false}
   style={
     Object {
       "backgroundColor": "#faf9f8",
       "borderColor": "#ffffff",
-      "borderWidth": 10,
+      "borderWidth": 1,
     }
   }
 />

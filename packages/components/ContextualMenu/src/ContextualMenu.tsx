@@ -1,5 +1,3 @@
-import * as React from 'react';
-import { findNodeHandle } from 'react-native';
 import { contextualMenuName, IContextualMenuProps, IContextualMenuSlotProps, IContextualMenuType } from './ContextualMenu.types';
 import { settings } from './ContextualMenu.settings';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
