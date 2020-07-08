@@ -11,11 +11,6 @@ export const contextualMenuItemName = 'ContextualMenuItem';
 
 export interface IContextualMenuItemState extends IPressableState {
   /**
-   * Whether the menu item is clicked
-   */
-  // clicked?: boolean;
-
-  /**
    * Whether the menu item is disabled or not
    */
   disabled?: boolean;
