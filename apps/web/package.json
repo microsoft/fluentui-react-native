@@ -13,7 +13,6 @@
     "react-dom": "^16.13.1",
     "react-native": "0.62.2",
     "react-native-web": "^0.12.3",
-    "svg-inline-loader": "^0.8.2",
     "typescript": "3.8.3",
     "webpack": "4.42.0"
   },

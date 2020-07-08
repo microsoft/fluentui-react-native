@@ -7,5 +7,5 @@
       "*": ["*", "*.web"],
     },
   },
-  "include": ["src", "custom.d.ts"]
+  "include": ["src"]
 }

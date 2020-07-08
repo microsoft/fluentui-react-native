@@ -21,10 +21,6 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'ts-loader',
       },
-      {
-        test: /\.svg$/,
-        loader: 'svg-inline-loader'
-      },
     ],
   },
   plugins: [
