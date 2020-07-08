@@ -27,7 +27,14 @@ steps:
     displayName: "Install Azure Credentials Plugin for NuGet"
 
   - script: |
-      yarn windows
+      mkdir windows\target
+      mkdir windows\target\x64
+      mklink /J windows\target\x64\Release windows\x64\Release\FluentTester
+    workingDirectory: apps\windows
+    displayName: "Workaround RNW CLI bug"
+
+  - script: |
+      yarn windows --logging --release --arch x64
     workingDirectory: apps\windows
     displayName: "run UWP app"
 
