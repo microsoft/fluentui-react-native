@@ -45,7 +45,7 @@ export function compose<TProps, TSlotProps, TTokens, TTheme>(
   options = base && base.__options ? immutableMergeCore(mergeOptions, base.__options, options) : { ...options };
 
   // build styling if styling options are specified
-  options.useStyling = options.styles || options.tokens ? buildUseStyling(options, themeHelper) : () => ({} as TSlotProps);
+  options.useStyling = options.slotProps || options.tokens ? buildUseStyling(options, themeHelper) : () => ({} as TSlotProps);
 
   // build the slots hook, which will use the styling hook if it has been built
   const useSlots = buildUseSlots(options) as UseStyledSlots<TProps, TSlotProps>;

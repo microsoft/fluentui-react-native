@@ -1,4 +1,4 @@
-export { TokenPropMask, WithLayers, HasLayer, applyTokenLayers, UseStyling } from '@fluentui-react-native/use-styling';
+export { TokenPropMask, HasLayer, applyTokenLayers, UseStyling } from '@fluentui-react-native/use-styling';
 import {
   StyleFunction as StyleFunctionBase,
   RefineFunction as RefineFunctionBase,
