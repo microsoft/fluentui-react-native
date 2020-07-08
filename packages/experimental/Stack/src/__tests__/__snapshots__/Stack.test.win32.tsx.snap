@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Stack with tokens 1`] = `
+<View
+  style={
+    Object {
+      "display": "flex",
+      "maxWidth": 400,
+      "padding": 16,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#505050",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "500",
+        "margin": 0,
+      }
+    }
+  >
+    Hello
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#505050",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "500",
+        "margin": 0,
+        "marginTop": 8,
+      }
+    }
+  >
+    Hello
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#505050",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "500",
+        "margin": 0,
+        "marginTop": 8,
+      }
+    }
+  >
+    Hello
+  </Text>
+</View>
+`;
