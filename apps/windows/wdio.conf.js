@@ -1,3 +1,6 @@
+const fs = require('fs');
+const rimraf = require('rimraf');
+
 const defaultWaitForTimeout = 10000;
 const defaultConnectionRetryTimeout = 15000;
 const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
@@ -29,10 +32,10 @@ exports.config = {
   logLevel: 'info', // Level of logging verbosity: trace | debug | info | warn | error | silent
 
   // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
-  bail: 0,
+  bail: 1,
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
-  connectionRetryCount: 2, // Maximum count of request retries to the Selenium server.
+  connectionRetryCount: 1, // Maximum count of request retries to the Selenium server.
 
   port: 4723, // default appium port
   services: ['appium'],
@@ -48,7 +51,15 @@ exports.config = {
     defaultTimeoutInterval: jasmineDefaultTimeout,
   },
 
-  reporters: ['spec'],
+  reporters: [
+    'spec',
+    [
+      'allure',
+      {
+        outputDir: 'allure-results',
+      },
+    ],
+  ],
 
   /*
    ** ===================
@@ -87,8 +98,18 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  // beforeSession: function (config, capabilities, specs) {
-  // },
+  beforeSession: function (config, capabilities, specs) {
+    // Delete old screenshots and create empty directory
+    if (fs.existsSync('./errorShots')) {
+      rimraf.sync('./errorShots');
+    }
+    fs.mkdirSync('./errorShots');
+
+    if (fs.existsSync('./allure-results')) {
+      rimraf.sync('./allure-results');
+    }
+    fs.mkdirSync('./allure-results');
+  },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
    * variables like `browser`. It is the perfect place to define custom commands.
@@ -133,11 +154,20 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  afterTest: function(test, context) {
-    if (test.error !== undefined) {
-      const name = 'ERROR-' + Date.now();
-      browser.saveScreenshot('./errorShots/' + name + '.png');
+  afterTest: function (test, context) {
+    // if test passed, ignore, else take and save screenshot.
+    if (test.passed) {
+      return;
     }
+
+    // get current test title and clean it, to use it as file name
+    const fileName = encodeURIComponent(test.title.replace(/\s+/g, '-'));
+
+    // build file path
+    const filePath = './errorShots/' + fileName + '.png';
+
+    // save screenshot
+    browser.saveScreenshot(filePath);
   },
 
   /**
