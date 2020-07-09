@@ -15,7 +15,7 @@ exports.config = {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'windows',
       deviceName: 'WindowsPC',
-      app: '3763f28e-bdfd-440d-9822-7e06168df892_kceynq4x5hrp4!App',
+      app: '2a07a99c-7130-4e93-856d-880ea22dd4f4_kceynq4x5hrp4!App',
     },
   ],
 
