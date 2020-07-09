@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "bump rnw version to 0.62.1",
+  "packageName": "@fluentui-react-native/adapters",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-07-07T07:05:19.658Z"
+}

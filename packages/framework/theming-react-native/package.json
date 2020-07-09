@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theming-react-native",
-  "version": "0.7.61",
+  "version": "0.7.67",
   "description": "A library of functions which produce React Native styles from a Theme",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,9 +26,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/theme-registry": ">=0.3.61 <1.0.0",
-    "@uifabricshared/foundation-settings": ">=0.5.61 <1.0.0",
-    "@uifabricshared/theming-ramp": ">=0.9.60 <1.0.0"
+    "@uifabricshared/theme-registry": ">=0.3.66 <1.0.0",
+    "@uifabricshared/foundation-settings": ">=0.6.0 <1.0.0",
+    "@uifabricshared/theming-ramp": ">=0.9.66 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

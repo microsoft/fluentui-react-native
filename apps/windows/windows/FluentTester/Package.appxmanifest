@@ -7,11 +7,11 @@
   IgnorableNamespaces="uap mp">
 
  <Identity
-    Name="3763f28e-bdfd-440d-9822-7e06168df892"
+    Name="2a07a99c-7130-4e93-856d-880ea22dd4f4"
     Publisher="CN=jasonmo"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="3763f28e-bdfd-440d-9822-7e06168df892" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="2a07a99c-7130-4e93-856d-880ea22dd4f4" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>FluentTester</DisplayName>
