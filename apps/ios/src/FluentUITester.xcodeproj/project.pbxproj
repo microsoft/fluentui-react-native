@@ -285,7 +285,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9F3A29F4244F657400A401D2 /* Debug.xcconfig */;
 			buildSettings = {
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -293,7 +292,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9F3A29F5244F658400A401D2 /* Release.xcconfig */;
 			buildSettings = {
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

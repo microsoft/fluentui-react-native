@@ -27,6 +27,8 @@ GCC_WARN_UNUSED_VARIABLE = YES
 SWIFT_TREAT_WARNINGS_AS_ERRORS = YES
 LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks
 
+TARGETED_DEVICE_FAMILY = "1,2"
+
 INFOPLIST_FILE = FluentUITester/Info.plist
 
 // Versions
