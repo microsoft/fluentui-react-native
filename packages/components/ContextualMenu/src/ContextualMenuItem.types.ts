@@ -5,11 +5,10 @@ import { ITextProps } from '@fluentui-react-native/text';
 import { IPressableProps } from '@fluentui-react-native/pressable';
 import { ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
-import { IViewWin32Props } from '@office-iss/react-native-win32';
 
 export const contextualMenuItemName = 'ContextualMenuItem';
 
-export interface IContextualMenuItemState extends IPressableState {
+export interface ContextualMenuItemState extends IPressableState {
   /**
    * Whether the menu item is disabled or not
    */
@@ -19,9 +18,9 @@ export interface IContextualMenuItemState extends IPressableState {
   icon?: boolean;
 }
 
-export interface IContextualMenuItemTokens extends ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens { }
+export interface ContextualMenuItemTokens extends ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens { }
 
-export interface IContextualMenuItemProps extends Omit<IPressableProps, 'onPress'> {
+export interface ContextualMenuItemProps extends Omit<IPressableProps, 'onPress'> {
   /*
    ** A unique key-identifier for each menu item
    */
@@ -53,18 +52,18 @@ export interface IContextualMenuItemProps extends Omit<IPressableProps, 'onPress
 
 }
 
-export interface IContextualMenuItemSlotProps {
-  root: React.PropsWithRef<IViewWin32Props>;
+export interface ContextualMenuItemSlotProps {
+  root: React.PropsWithRef<ViewProps>;
   stack: ViewProps;
   icon: ImageProps;
   content: ITextProps;
 }
 
-export type IContextualMenuItemRenderData = IRenderData<IContextualMenuItemSlotProps, IContextualMenuItemState>;
+export type ContextualMenuItemRenderData = IRenderData<ContextualMenuItemSlotProps, ContextualMenuItemState>;
 
-export interface IContextualMenuItemType {
-  props: IContextualMenuItemProps;
-  tokens: IContextualMenuItemTokens;
-  slotProps: IContextualMenuItemSlotProps;
-  state: IContextualMenuItemState;
+export interface ContextualMenuItemType {
+  props: ContextualMenuItemProps;
+  tokens: ContextualMenuItemTokens;
+  slotProps: ContextualMenuItemSlotProps;
+  state: ContextualMenuItemState;
 }

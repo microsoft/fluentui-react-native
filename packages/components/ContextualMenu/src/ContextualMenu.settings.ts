@@ -1,7 +1,7 @@
-import { contextualMenuName, IContextualMenuType } from './ContextualMenu.types';
+import { contextualMenuName, ContextualMenuType } from './ContextualMenu.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 
-export const settings: IComposeSettings<IContextualMenuType> = [
+export const settings: IComposeSettings<ContextualMenuType> = [
   {
     tokens: {
       backgroundColor: 'bodyStandoutBackground',

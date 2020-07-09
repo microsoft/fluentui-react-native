@@ -1,33 +1,30 @@
-import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ICalloutProps, ICalloutTokens } from '@fluentui-react-native/callout';
 
-export const contextualMenuName = 'ContexualMenu';
+export const contextualMenuName = 'ContextualMenu';
 
-export type IContextualMenuTokens = ICalloutTokens;
+export type ContextualMenuTokens = ICalloutTokens;
 /**
  * Properties and Tokens for FluentUI React Native ContextualMenu
  */
 
-export interface IContextualMenuProps extends Omit<ICalloutProps, 'setInitialFocus'> {
+export interface ContextualMenuProps extends Omit<ICalloutProps, 'setInitialFocus'> {
   /*
   * Whether to set initial focus on the contextual menu container, as opposed to the first menu item.
   */
   shouldFocusOnContainer?: boolean;
 
   /*
-  * Whether tofocus on the menu when mounted
+  * Whether to focus on the menu when mounted
   */
   shouldFocusOnMount?: boolean;
 }
 
-export type IContextualMenuSlotProps = {
+export type ContextualMenuSlotProps = {
   root: ICalloutProps;
 };
 
-export type IContextualMenuRenderData = IRenderData<IContextualMenuSlotProps>;
-
-export interface IContextualMenuType {
-  props: IContextualMenuProps;
-  slotProps: IContextualMenuSlotProps;
-  tokens: IContextualMenuTokens;
+export interface ContextualMenuType {
+  props: ContextualMenuProps;
+  slotProps: ContextualMenuSlotProps;
+  tokens: ContextualMenuTokens;
 }

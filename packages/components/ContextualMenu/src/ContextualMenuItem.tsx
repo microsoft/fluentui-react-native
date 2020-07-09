@@ -1,19 +1,18 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { Image, View } from 'react-native';
-import { IContextualMenuItemSlotProps, IContextualMenuItemState, IContextualMenuItemProps, IContextualMenuItemRenderData, contextualMenuItemName, IContextualMenuItemType } from './ContextualMenuItem.types';
+import { ContextualMenuItemSlotProps, ContextualMenuItemState, ContextualMenuItemProps, ContextualMenuItemRenderData, contextualMenuItemName, ContextualMenuItemType } from './ContextualMenuItem.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
 import { settings } from './ContextualMenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens } from '@fluentui-react-native/tokens';
-import { filterViewProps, filterImageProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 
-export const ContextualMenuItem = compose<IContextualMenuItemType>({
+export const ContextualMenuItem = compose<ContextualMenuItemType>({
   displayName: contextualMenuItemName,
-  usePrepareProps: (userProps: IContextualMenuItemProps, useStyling: IUseComposeStyling<IContextualMenuItemType>) => {
+  usePrepareProps: (userProps: ContextualMenuItemProps, useStyling: IUseComposeStyling<ContextualMenuItemType>) => {
     const {
       icon,
       text,
@@ -36,7 +35,7 @@ export const ContextualMenuItem = compose<IContextualMenuItemType>({
     );
 
     // set up state
-    const state: IContextualMenuItemState = {
+    const state: ContextualMenuItemState = {
       ...pressable.state,
       disabled: userProps.disabled,
       content: !!text,
@@ -48,7 +47,7 @@ export const ContextualMenuItem = compose<IContextualMenuItemType>({
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
     // create the merged slot props
-    const slotProps = mergeSettings<IContextualMenuItemSlotProps>(styleProps, {
+    const slotProps = mergeSettings<ContextualMenuItemSlotProps>(styleProps, {
       root: {
         ...pressable.props,
         ref: cmRef,
@@ -62,7 +61,7 @@ export const ContextualMenuItem = compose<IContextualMenuItemType>({
     return { slotProps, state };
   },
   settings,
-  render: (Slots: ISlots<IContextualMenuItemSlotProps>, renderData: IContextualMenuItemRenderData, ...children: React.ReactNode[]) => {
+  render: (Slots: ISlots<ContextualMenuItemSlotProps>, renderData: ContextualMenuItemRenderData, ...children: React.ReactNode[]) => {
 
     // We shouldn't have to specify the source prop on Slots.icon, here, but we need another drop from @uifabricshared
     return (
@@ -77,8 +76,8 @@ export const ContextualMenuItem = compose<IContextualMenuItemType>({
   },
   slots: {
     root: View,
-    stack: { slotType: View, filter: filterViewProps },
-    icon: { slotType: Image as React.ComponentType<object>, filter: filterImageProps },
+    stack: { slotType: View },
+    icon: { slotType: Image as React.ComponentType<object> },
     content: Text
   },
   styles: {

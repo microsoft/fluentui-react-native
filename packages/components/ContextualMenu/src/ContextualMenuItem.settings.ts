@@ -1,18 +1,15 @@
-import { contextualMenuItemName, IContextualMenuItemType } from './ContextualMenuItem.types';
+import { contextualMenuItemName, ContextualMenuItemType } from './ContextualMenuItem.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 
-export const settings: IComposeSettings<IContextualMenuItemType> = [
+export const settings: IComposeSettings<ContextualMenuItemType> = [
   {
     tokens: {
       backgroundColor: 'buttonBackground',
       color: 'buttonText',
-      borderColor: 'buttonBorder',
-      borderWidth: 1,
-      borderRadius: 2
+      borderColor: 'buttonBorder'
     },
     root: {
       accessible: true,
-      acceptsKeyboardFocus: true,
       accessibilityRole: 'menuitem',
       style: { display: 'flex', alignItems: 'flex-start', flexDirection: 'row', alignSelf: 'flex-start' }
     },
