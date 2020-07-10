@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { View, TextInput, Text } from 'react-native';
-import { Checkbox } from '@fluentui/react-native';
-import { Separator } from '@fluentui/react-native';
+import { Checkbox, Separator } from '@fluentui/react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@uifabricshared/theming-react-native';
 import { CHECKBOX_TESTPAGE } from './consts';
@@ -65,12 +64,12 @@ export const CheckboxTest: React.FunctionComponent<{}> = () => {
   });
 
   const [isCheckedControlled1, setCheckedControlled1] = React.useState(false);
-  const onChangeControlled1 = React.useCallback(checked => {
+  const onChangeControlled1 = React.useCallback((checked) => {
     setCheckedControlled1(checked);
   }, []);
 
   const [isCheckedControlled2, setCheckedControlled2] = React.useState(true);
-  const onChangeControlled2 = React.useCallback(checked => {
+  const onChangeControlled2 = React.useCallback((checked) => {
     setCheckedControlled2(checked);
   }, []);
 
