@@ -5,6 +5,10 @@ class PressableTestPage extends BasePage {
   get _testPage() {
     return By(PRESSABLE_TESTPAGE);
   }
+
+  get _pageName() {
+    return PRESSABLE_TESTPAGE;
+  }
 }
 
 export default new PressableTestPage();

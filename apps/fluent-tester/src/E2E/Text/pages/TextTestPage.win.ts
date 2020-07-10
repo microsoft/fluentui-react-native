@@ -5,6 +5,10 @@ class TextTestPage extends BasePage {
   get _testPage() {
     return By(TEXT_TESTPAGE);
   }
+
+  get _pageName() {
+    return TEXT_TESTPAGE;
+  }
 }
 
 export default new TextTestPage();

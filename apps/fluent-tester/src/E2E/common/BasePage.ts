@@ -10,25 +10,27 @@ export class BasePage {
   }
 
   // Waits for page to be loaded. Timeout could differ depending on usage.
-  waitForPageLoaded(timeout?: number) {
+  waitForPageDisplayed(timeout?: number) {
     browser.waitUntil(
       () => {
         return this.isPageLoaded();
       },
-      this.timeoutForPageLoaded(timeout),
-      'Timeout Error - The page was not loaded in time.'
+      timeout ?? this.waitForPageTimeout,
+      this._pageName + ' did not render correctly. Please see /errorShots of the first failed test for more information.',
+      1000
     );
   }
 
+  // Actual element on page
   get _testPage() {
     return By(DUMMY_CHAR);
   }
 
-  protected timeoutForPageLoaded(currentTimeout?: number) {
-    if (currentTimeout) return currentTimeout;
-    return this.waitforPageTimeout;
+  // Title of page
+  get _pageName() {
+    return DUMMY_CHAR;
   }
 
-  // Default timeout for waitForPageLoaded command in PageObject
-  private waitforPageTimeout: number = 45000;
+  // Default timeout to wait until page is displayed (10s)
+  private waitForPageTimeout: number = 10000;
 }
