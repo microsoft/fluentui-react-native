@@ -1,80 +1,42 @@
-platform :ios, '12.0'
-require_relative '../../../node_modules/@react-native-community/cli-platform-ios/native_modules'
+require_relative '../../../node_modules/react-native-test-app/test_app.rb'
 
-def add_flipper_pods!(versions = {})
-  versions['Flipper'] ||= '~> 0.33.1'
-  versions['DoubleConversion'] ||= '1.1.7'
-  versions['Flipper-Folly'] ||= '~> 2.1'
-  versions['Flipper-Glog'] ||= '0.3.6'
-  versions['Flipper-PeerTalk'] ||= '~> 0.0.4'
-  versions['Flipper-RSocket'] ||= '~> 1.0'
-  pod 'FlipperKit', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FlipperKitLayoutPlugin', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/SKIOSNetworkPlugin', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FlipperKitUserDefaultsPlugin', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FlipperKitReactPlugin', versions['Flipper'], :configuration => 'Debug'
-  # List all transitive dependencies for FlipperKit pods
-  # to avoid them being linked in Release builds
-  pod 'Flipper', versions['Flipper'], :configuration => 'Debug'
-  pod 'Flipper-DoubleConversion', versions['DoubleConversion'], :configuration => 'Debug'
-  pod 'Flipper-Folly', versions['Flipper-Folly'], :configuration => 'Debug'
-  pod 'Flipper-Glog', versions['Flipper-Glog'], :configuration => 'Debug'
-  pod 'Flipper-PeerTalk', versions['Flipper-PeerTalk'], :configuration => 'Debug'
-  pod 'Flipper-RSocket', versions['Flipper-RSocket'], :configuration => 'Debug'
-  pod 'FlipperKit/Core', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/CppBridge', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FBCxxFollyDynamicConvert', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FBDefines', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FKPortForwarding', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FlipperKitHighlightOverlay', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FlipperKitLayoutTextSearchable', versions['Flipper'], :configuration => 'Debug'
-  pod 'FlipperKit/FlipperKitNetworkPlugin', versions['Flipper'], :configuration => 'Debug'
-end
-# Post Install processing for Flipper
-def flipper_post_install(installer)
-  installer.pods_project.targets.each do |target|
-    if target.name == 'YogaKit'
-      target.build_configurations.each do |config|
-        config.build_settings['SWIFT_VERSION'] = '4.1'
-      end
-    end
+workspace 'FluentUITester.xcworkspace'
+
+react_native_path = "#{__dir__}/../../../node_modules/react-native"
+
+bundle_script = %{
+export NODE_BINARY=node
+#{react_native_path}/scripts/react-native-xcode.sh
+}
+
+start_packager_script = %{
+export RCT_METRO_PORT="${RCT_METRO_PORT:=8081}"
+echo "export RCT_METRO_PORT=${RCT_METRO_PORT}" > "#{react_native_path}/scripts/.packager.env"
+if [ -z "${RCT_NO_LAUNCH_PACKAGER+xxx}" ] ; then
+  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then
+    if ! curl -s "http://localhost:${RCT_METRO_PORT}/status" | grep -q "packager-status:running" ; then
+      echo "Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly"
+      exit 2
+    fi
+  else
+    open "#{__dir__}/../launchPackager.command" || echo "Can't start packager automatically"
+  fi
+fi
+}
+
+use_flipper!(false)
+use_test_app! do |target|
+  target.app do
+    script_phase name: 'Start Packager',
+                 script: start_packager_script,
+                 execution_position: :before_compile
+    script_phase name: 'Bundle React Native code and images',
+                 script: bundle_script
   end
-end
 
-target 'FluentUITester' do
-  # YOUR REACT NATIVE PATH (from the iOS folder)
-  rn_path = '../../../node_modules/react-native'
+  target.tests do
+  end
 
-  # Pods for FluentUITester
-  pod 'FBLazyVector', :path => "#{rn_path}/Libraries/FBLazyVector"
-  pod 'FBReactNativeSpec', :path => "#{rn_path}/Libraries/FBReactNativeSpec"
-  pod 'RCTRequired', :path => "#{rn_path}/Libraries/RCTRequired"
-  pod 'RCTTypeSafety', :path => "#{rn_path}/Libraries/TypeSafety"
-  pod 'React', :path => "#{rn_path}/"
-  pod 'React-Core', :path => "#{rn_path}/"
-  pod 'React-CoreModules', :path => "#{rn_path}/React/CoreModules"
-  pod 'React-Core/DevSupport', :path => "#{rn_path}/"
-  pod 'React-RCTActionSheet', :path => "#{rn_path}/Libraries/ActionSheetIOS"
-  pod 'React-RCTAnimation', :path => "#{rn_path}/Libraries/NativeAnimation"
-  pod 'React-RCTBlob', :path => "#{rn_path}/Libraries/Blob"
-  pod 'React-RCTImage', :path => "#{rn_path}/Libraries/Image"
-  pod 'React-RCTLinking', :path => "#{rn_path}/Libraries/LinkingIOS"
-  pod 'React-RCTNetwork', :path => "#{rn_path}/Libraries/Network"
-  pod 'React-RCTSettings', :path => "#{rn_path}/Libraries/Settings"
-  pod 'React-RCTText', :path => "#{rn_path}/Libraries/Text"
-  pod 'React-RCTVibration', :path => "#{rn_path}/Libraries/Vibration"
-  pod 'React-Core/RCTWebSocket', :path => "#{rn_path}/"
-
-  pod 'React-cxxreact', :path => "#{rn_path}/ReactCommon/cxxreact"
-  pod 'React-jsi', :path => "#{rn_path}/ReactCommon/jsi"
-  pod 'React-jsiexecutor', :path => "#{rn_path}/ReactCommon/jsiexecutor"
-  pod 'React-jsinspector', :path => "#{rn_path}/ReactCommon/jsinspector"
-  pod 'ReactCommon/callinvoker', :path => "#{rn_path}/ReactCommon"
-  pod 'ReactCommon/turbomodule/core', :path => "#{rn_path}/ReactCommon"
-  pod 'Yoga', :path => "#{rn_path}/ReactCommon/yoga", :modular_headers => true
-
-  pod 'DoubleConversion', :podspec => "#{rn_path}/third-party-podspecs/DoubleConversion.podspec"
-  pod 'glog', :podspec => "#{rn_path}/third-party-podspecs/glog.podspec"
-  pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
-
+  target.ui_tests do
+  end
 end

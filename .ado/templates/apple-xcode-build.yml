@@ -12,15 +12,15 @@ parameters:
 steps:
   # Install any pods necessary for the project
   - bash: |
-      echo "pod install --project-directory=apps/$platform_directory/src"
-      pod install --project-directory=apps/$platform_directory/src
-    env:
-      platform_directory: ${{ parameters.relative_directory }}
+      echo "pod install --project-directory=src"
+      pod install --project-directory=src
+    workingDirectory: apps/${{ parameters.relative_directory }}
     displayName: "pod install"
 
   - bash: |
-      echo "cd apps/$platform_directory && yarn $platform_directory"
-      cd apps/$platform_directory && yarn $platform_directory
+      echo "yarn $platform_directory"
+      yarn $platform_directory
+    workingDirectory: apps/${{ parameters.relative_directory }}
+    displayName: "yarn ios/macos"
     env:
       platform_directory: ${{ parameters.relative_directory }}
-    displayName: "yarn ios/macos"
