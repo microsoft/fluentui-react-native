@@ -3762,9 +3762,9 @@
     webdriverio "5.23.0"
 
 "@wdio/spec-reporter@^5.22.4":
-  version "5.22.4"
-  resolved "https://registry.yarnpkg.com/@wdio/spec-reporter/-/spec-reporter-5.22.4.tgz#4c01a42492c5ac8019050db79b378f30b5af3e4b"
-  integrity sha512-gj5crZuMzlu9LnYsaQrKhSOy8wnSyqkVrJ4XNcpUjxT5Yl1MCkavNw37KWpwf0nwZgtcbufIWT/+UszxeleeSg==
+  version "5.23.0"
+  resolved "https://registry.yarnpkg.com/@wdio/spec-reporter/-/spec-reporter-5.23.0.tgz#9e2aebd3162316f36387664196ef8ea3635364fc"
+  integrity sha512-dqVqo5+wbSaJhQfOOnw8o53StFtPOlUwrsMsp80YATZZxGjtLLuNFWlT9xGVhMDzTnzBUNO8ZxsSIl8gSE2Iew==
   dependencies:
     "@wdio/reporter" "5.22.4"
     chalk "^3.0.0"
