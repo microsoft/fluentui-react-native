@@ -4,7 +4,7 @@ import { immutableMergeCore, MergeOptions } from '@uifabricshared/immutable-merg
 
 export type UseStyledSlots<TProps, TSlotProps> = (props: TProps, lookup?: HasLayer) => Slots<TSlotProps>;
 
-export type ComposeOptions<TProps, TSlotProps, TTokens, TTheme, TStatics extends object = object> = UseStylingOptions<TProps, TSlotProps, TTokens, TTheme> &
+export type ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics extends object = object> = UseStylingOptions<TProps, TSlotProps, TTokens, TTheme> &
   UseSlotOptions<TSlotProps> & {
     /**
      * Includes from UseStylingOptions:
@@ -23,11 +23,11 @@ export type ComposeOptions<TProps, TSlotProps, TTokens, TTheme, TStatics extends
     statics?: TStatics;
   };
 
-export type ComposableComponent<TProps, TSlotProps, TTokens, TTheme, TStatics extends object = object> = ComposableFunction<TProps> & {
-  __options: ComposeOptions<TProps, TSlotProps, TTokens, TTheme>;
+export type ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics extends object = object> = ComposableFunction<TProps> & {
+  __options: ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme>;
   customize: (
     tokens: UseStylingOptions<TProps, TSlotProps, TTokens, TTheme>['tokens']
-  ) => ComposableComponent<TProps, TSlotProps, TTokens, TTheme>;
+  ) => ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme>;
 } & TStatics;
 
 /**
@@ -39,12 +39,12 @@ const mergeOptions: MergeOptions = {
 };
 
 export function composeFactory<TProps, TSlotProps, TTokens, TTheme, TStatics extends object = object>(
-  options: ComposeOptions<TProps, TSlotProps, TTokens, TTheme, TStatics>,
+  options: ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics>,
   themeHelper: ThemeHelper<TTheme>,
-  base?: ComposableComponent<TProps, TSlotProps, TTokens, TTheme, TStatics>
-): ComposableComponent<TProps, TSlotProps, TTokens, TTheme, TStatics> {
-  type LocalComponent = ComposableComponent<TProps, TSlotProps, TTokens, TTheme, TStatics>;
-  type LocalOptions = ComposeOptions<TProps, TSlotProps, TTokens, TTheme, TStatics>;
+  base?: ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics>
+): ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics> {
+  type LocalComponent = ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics>;
+  type LocalOptions = ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics>;
 
   // merge options together if a base is specified
   const baseOptions: LocalOptions = base?.__options as LocalOptions;

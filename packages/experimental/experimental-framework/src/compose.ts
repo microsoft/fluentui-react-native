@@ -1,9 +1,5 @@
 import { ITheme } from '@uifabricshared/theming-ramp';
-import {
-  compose as composeBase,
-  ComposeOptions as ComposeOptionsBase,
-  ComposableComponent as ComposableComponentBase
-} from '@fluentui-react-native/composition';
+import { composeFactory, ComposeFactoryOptions, ComposeFactoryComponent, UseStyledSlots } from '@fluentui-react-native/composition';
 import { themeHelper } from './themeHelper';
 
 /**
@@ -14,6 +10,7 @@ export interface ComposeType<TProps, TSlotProps, TTokens, TStatics = object> {
   props: TProps;
   slotProps: TSlotProps;
   tokens: TTokens;
+  statics: TStatics;
 }
 
 /** fragments used in type extraction */
@@ -28,16 +25,26 @@ export type ExtractSlotProps<T> = T extends SlotPropsFragment<infer U> ? U : nev
 export type ExtractTokens<T> = T extends TokensFragment<infer U> ? U : object;
 export type ExtractStatics<T> = T extends StaticsFragment<infer U> ? U : object;
 
-export type ComposeOptions<TProps, TSlotProps, TTokens> = ComposeOptionsBase<TProps, TSlotProps, TTokens, ITheme>;
-export type ComposableComponent<TProps, TSlotProps, TTokens> = ComposableComponentBase<TProps, TSlotProps, TTokens, ITheme>;
+export type ComposeOptions<TProps, TSlotProps, TTokens, TStatics extends object> = ComposeFactoryOptions<
+  TProps,
+  TSlotProps,
+  TTokens,
+  ITheme,
+  TStatics
+>;
+export type ComposableComponent<TProps, TSlotProps, TTokens, TStatics extends object> = ComposeFactoryComponent<
+  TProps,
+  TSlotProps,
+  TTokens,
+  ITheme,
+  TStatics
+>;
+
+export type UseSlots<T> = UseStyledSlots<ExtractProps<T>, ExtractSlotProps<T>>;
 
 export function compose<T>(
-  options: ComposeOptions<ExtractProps<T>, ExtractSlotProps<T>, ExtractTokens<T>> & { statics?: ExtractStatics<T> },
-  base?: ComposableComponent<ExtractProps<T>, ExtractSlotProps<T>, ExtractTokens<T>>
-): ComposableComponent<ExtractProps<T>, ExtractSlotProps<T>, ExtractTokens<T>> & ExtractStatics<T> {
-  const result = composeBase(options, themeHelper, base);
-  if (options.statics) {
-    Object.assign(result, options.statics);
-  }
-  return result as any;
+  options: ComposeOptions<ExtractProps<T>, ExtractSlotProps<T>, ExtractTokens<T>, ExtractStatics<T>>,
+  base?: ComposableComponent<ExtractProps<T>, ExtractSlotProps<T>, ExtractTokens<T>, ExtractStatics<T>>
+): ComposableComponent<ExtractProps<T>, ExtractSlotProps<T>, ExtractTokens<T>, ExtractStatics<T>> {
+  return composeFactory(options, themeHelper, base);
 }

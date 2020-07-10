@@ -1,29 +1,27 @@
+/**
+ * Many of the types from use-styling take a theme as a type parameter. This re-exports them in such a way
+ * as to be dependent on the core theme type
+ */
 export { TokenPropMask, HasLayer, applyTokenLayers, UseStyling } from '@fluentui-react-native/use-styling';
 import {
-  StyleFunction as StyleFunctionBase,
-  RefineFunction as RefineFunctionBase,
-  RefinableStyleFunction as RefinableStyleFunctionBase,
-  StyleFunctions as StyleFunctionsBase,
-  styleFunction as styleFunctionBase,
   TokensFromTheme as TokensFromThemeBase,
   TokenSettings as TokenSettingsBase,
   UseStylingOptions as UseStylingOptionsBase,
   buildUseStyling as buildUseStylingBase,
-  UseStyling
+  UseStyling,
+  buildProps as buildPropsBase,
+  BuildPropsBase
 } from '@fluentui-react-native/use-styling';
 import { ITheme } from '@uifabricshared/theming-ramp';
 import { themeHelper } from './themeHelper';
 
-export type StyleFunction<TProps, TTokens> = StyleFunctionBase<TProps, TTokens, ITheme>;
-export type RefineFunction<TProps, TTokens> = RefineFunctionBase<TProps, TTokens, ITheme>;
-export type RefinableStyleFunction<TProps, TTokens> = RefinableStyleFunctionBase<TProps, TTokens, ITheme>;
-export type StyleFunctions<TSlotProps, TTokens> = StyleFunctionsBase<TSlotProps, TTokens, ITheme>;
+export type BuildProps<TProps, TTokens> = BuildPropsBase<TProps, TTokens, ITheme>;
 
-export function styleFunction<TProps, TTokens>(
+export function buildProps<TProps, TTokens>(
   fn: (tokens: TTokens, theme: ITheme) => TProps,
   keys?: (keyof TTokens)[]
-): RefinableStyleFunction<TProps, TTokens> {
-  return styleFunctionBase<TProps, TTokens, ITheme>(fn, keys);
+): BuildProps<TProps, TTokens> {
+  return buildPropsBase<TProps, TTokens, ITheme>(fn, keys);
 }
 
 export type TokensFromTheme<TTokens> = TokensFromThemeBase<TTokens, ITheme>;

@@ -13,7 +13,7 @@ export type UseSlotOptions<TSlotProps> = {
 
 export type GetSlotProps<TSlotProps> = (...args: any[]) => TSlotProps;
 
-export type UseSlots<TSlotProps> = (...args: any[]) => Slots<TSlotProps>;
+export type UseSlotsBase<TSlotProps> = (...args: any[]) => Slots<TSlotProps>;
 
 type CachedState<TSlotProps> = {
   /**
@@ -60,7 +60,7 @@ function buildSlotFunctions<TSlotProps>(
   return info as CachedState<TSlotProps>;
 }
 
-export function buildUseSlots<TSlotProps>(options: UseSlotOptions<TSlotProps>): UseSlots<TSlotProps> {
+export function buildUseSlots<TSlotProps>(options: UseSlotOptions<TSlotProps>): UseSlotsBase<TSlotProps> {
   const { slots, filters, useStyling } = options;
   return (...args: any[]) => {
     // build up a set of slots closures and store them in props
