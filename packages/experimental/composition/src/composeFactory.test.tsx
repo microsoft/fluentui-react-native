@@ -65,7 +65,7 @@ const Base = composeFactory<ViewProps, SlotProps, Tokens, Theme>({
   }
 }, themeHelper);
 
-const Customized = Base.customize([{ backgroundColor: 'pink' }]);
+const Customized = Base.customize({ backgroundColor: 'pink' });
 
 const mixinStyle = {
   width: 30, height: 20, borderColor: 'green', borderWidth: 1

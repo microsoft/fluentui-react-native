@@ -1,9 +1,7 @@
 import { PersonaSize } from '@fluentui-react-native/persona-coin';
-import { ITextTokens } from '@fluentui-react-native/tokens';
+import { FontTokens } from '@fluentui-react-native/tokens';
 
-type IPersonaFontTable = {
-  [key in PersonaSize]: ITextTokens;
-};
+type IPersonaFontTable = { [key in PersonaSize]: FontTokens };
 
 const textFontTable: IPersonaFontTable = {
   size8: { fontSize: 'caption' },
@@ -53,19 +51,19 @@ const optionalFontTable: IPersonaFontTable = {
   size120: { fontSize: 'secondary' }
 };
 
-export function getTextFont(size: PersonaSize): ITextTokens {
+export function getTextFont(size: PersonaSize): FontTokens {
   return textFontTable[size];
 }
 
-export function getSecondaryFont(size: PersonaSize): ITextTokens {
+export function getSecondaryFont(size: PersonaSize): FontTokens {
   return secondaryFontTable[size];
 }
 
-export function getTertiaryFont(size: PersonaSize): ITextTokens {
+export function getTertiaryFont(size: PersonaSize): FontTokens {
   return tertiaryFontTable[size];
 }
 
-export function getOptionalFont(size: PersonaSize): ITextTokens {
+export function getOptionalFont(size: PersonaSize): FontTokens {
   return optionalFontTable[size];
 }
 

@@ -4,7 +4,7 @@ import { IPressableState, IFocusable } from '@fluentui-react-native/interactive-
 import { ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
-import { ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 
 export const checkboxName = 'Checkbox';
@@ -72,7 +72,7 @@ export interface ICheckboxProps {
   testID?: string;
 }
 
-export interface ICheckboxTokens extends ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
+export interface ICheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
   checkboxBackgroundColor?: string;
   checkboxBorderColor?: string;
   checkmarkColor?: string;

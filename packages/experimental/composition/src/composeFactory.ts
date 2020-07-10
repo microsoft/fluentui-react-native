@@ -26,7 +26,7 @@ export type ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics 
 export type ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics extends object = object> = ComposableFunction<TProps> & {
   __options: ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme>;
   customize: (
-    tokens: UseStylingOptions<TProps, TSlotProps, TTokens, TTheme>['tokens']
+    ...tokens: UseStylingOptions<TProps, TSlotProps, TTokens, TTheme>['tokens']
   ) => ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme>;
 } & TStatics;
 
@@ -62,7 +62,7 @@ export function composeFactory<TProps, TSlotProps, TTokens, TTheme, TStatics ext
   // attach additional props to the returned component
   component.displayName = options.displayName;
   component.__options = options;
-  component.customize = (tokens: LocalOptions['tokens']) =>
+  component.customize = (...tokens: LocalOptions['tokens']) =>
     composeFactory<TProps, TSlotProps, TTokens, TTheme, TStatics>(
       immutableMergeCore(mergeOptions, options, { tokens: tokens } as LocalOptions),
       themeHelper

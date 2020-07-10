@@ -1,4 +1,5 @@
 export * from '@fluentui-react-native/memo-cache';
+export * from '@fluentui-react-native/tokens';
 export * from '@fluentui-react-native/use-slots';
 export * from '@uifabricshared/immutable-merge';
 export * from '@uifabricshared/theming-ramp';
