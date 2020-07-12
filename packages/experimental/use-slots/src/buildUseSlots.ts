@@ -37,7 +37,7 @@ function internalRender<TProps>(
   let props: TProps = typeof result === 'function' ? extraProps : mergeProps(result, extraProps);
   const propsToRemove = filter ? Object.keys(props).filter(key => !filter(key)) : undefined;
   if (propsToRemove?.length > 0) {
-    props = mergeProps(props, ({ ...propsToRemove.map(prop => ({ [prop]: undefined })) } as unknown) as TProps);
+    props = mergeProps(props, (Object.assign({}, ...propsToRemove.map(prop => ({ [prop]: undefined }))) as unknown) as TProps);
   }
   return typeof result === 'function' ? (result as Function)(props, ...children) : React.createElement(slot, props, ...children);
 }

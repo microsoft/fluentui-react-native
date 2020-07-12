@@ -74,7 +74,7 @@ function promotePropsToTokens<TTokens, TProps>(tokens: TTokens, props: TProps, t
     ? {
         ...tokens,
         ...(typeof tokenProps === 'object' && Array.isArray(tokenProps)
-          ? tokenProps.filter(key => props[key as string] !== undefined).map(key => ({ [key]: props[key as string] }))
+          ? Object.assign({}, ...tokenProps.filter(key => props[key as string] !== undefined).map(key => ({ [key]: props[key as string] })))
           : props)
       }
     : tokens;

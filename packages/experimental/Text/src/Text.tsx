@@ -86,7 +86,6 @@ export const Text = compose<TextType>({
   render: (props: TextProps, useSlots: UseSlots<TextType>) => {
     // stage one, execute any hooks, styling lookups to build the styled slot
     const Root = useSlots(props).root;
-
     // return a function used to complete the render
     return (rest: TextProps) => <Root {...mergeProps(props, rest)} />;
   }
