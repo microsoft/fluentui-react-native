@@ -1,0 +1,360 @@
+{
+  "name": "@fluentui-react-native/pressable",
+  "entries": [
+    {
+      "date": "Thu, 02 Jul 2020 21:06:06 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.3.70",
+      "version": "0.3.70",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Change files\"",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 17 Jun 2020 05:00:56 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.3.61",
+      "version": "0.3.61",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add memo-cache package and consume it in the core framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "27b5fc6790369ab629dcf7f93d6091d4913915fa",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Jun 2020 23:53:15 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.3.48",
+      "version": "0.3.48",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' into button-tooltip",
+            "author": "lehon@microsoft.com",
+            "commit": "70f7d6d5972b384f2e8d4dd2626adda762c59206",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 09 Jun 2020 17:39:01 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.3.43",
+      "version": "0.3.43",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch dependencies to use greater than semver until we reach 1.0.0",
+            "author": "jasonmo@microsoft.com",
+            "commit": "8461668e0387928c0831846b219188a6d4408295",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 06 Jun 2020 03:03:17 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.3.41",
+      "version": "0.3.41",
+      "comments": {
+        "none": [
+          {
+            "comment": "support keyboardFocus for Link and add focus visuals",
+            "author": "lehon@microsoft.com",
+            "commit": "effb17ada2fd26c6ba8f7cbb4ab7d7ddf8d74c49",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 01 Jun 2020 22:06:07 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.3.37",
+      "version": "0.3.37",
+      "comments": {
+        "none": [
+          {
+            "comment": "Support enter key for calling onClick on Button",
+            "author": "lehon@microsoft.com",
+            "commit": "399cead569e120926521d01c13a49088fe96036b",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 21 May 2020 20:00:42 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.3.32",
+      "version": "0.3.32",
+      "comments": {
+        "none": [
+          {
+            "comment": "none",
+            "author": "lehon@microsoft.com",
+            "commit": "5ba3ac570ae17a0d3138302ad12807362dea06c1",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 May 2020 03:37:41 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.3.29",
+      "version": "0.3.29",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "4867e1dde6f8c5cdb3fe894e60f5bcbe8f3c2817",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 May 2020 23:37:15 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.3.28",
+      "version": "0.3.28",
+      "comments": {
+        "patch": [
+          {
+            "comment": "adding testid",
+            "author": "safreibe@microsoft.com",
+            "commit": "ab9641d24eba9201d41794fe303ef25155ef89e3",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 May 2020 20:06:57 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.3.26",
+      "version": "0.3.26",
+      "comments": {
+        "patch": [
+          {
+            "comment": "📦 Update package descriptions",
+            "author": "email not defined",
+            "commit": "16687f10ee6e6115cb0756e936eecacb4e198b85",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 11 May 2020 20:15:56 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.3.18",
+      "version": "0.3.18",
+      "comments": {
+        "patch": [
+          {
+            "comment": "bump react native win32 version to 0.62 and pull in matching tester",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e0a1a7baa8be61b037ee65c49be22be60dc4b032",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 08 May 2020 18:49:53 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.3.17",
+      "version": "0.3.17",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "ff5a5b0edb37bb35c9b2a4e817089a5a56551604",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 24 Apr 2020 19:41:08 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.3.7",
+      "version": "0.3.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "more package version updates",
+            "author": "jasonmo@microsoft.com",
+            "commit": "1d2b333a0d29109c6734f43d949699ede91f3358",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 24 Apr 2020 19:11:27 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.3.6",
+      "version": "0.3.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "renormalize files",
+            "author": "jasonmo@microsoft.com",
+            "commit": "dc062498d62d6f52c1d350d48cd463322f29471d",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Apr 2020 00:41:10 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "update beachball hook to use new prepublish strategy",
+            "author": "jasonmo@microsoft.com",
+            "commit": "7bc030df722a6fcb6f693658b9d80f4617a26713",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Apr 2020 22:36:03 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "yarn.lock",
+            "author": "warleu@microsoft.com",
+            "commit": "205e7b7e88151a17f2560ecdaec1c6e13c5825b7",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Apr 2020 23:57:38 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.2.15",
+      "version": "0.2.15",
+      "comments": {
+        "patch": [
+          {
+            "comment": "publish with correct main/module references",
+            "author": "jasonmo@microsoft.com",
+            "commit": "6709e9eed6e08029114e8d893d27d91b99f73d0a",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Apr 2020 18:39:15 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.2.11",
+      "version": "0.2.11",
+      "comments": {
+        "patch": [
+          {
+            "comment": "merge conflicts",
+            "author": "ppatboyd@outlook.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 03 Apr 2020 20:40:51 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.2.9",
+      "version": "0.2.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch the bin name from just-script to fluent-scripts to disambiguate names",
+            "author": "jasonmo@microsoft.com",
+            "commit": "232a97794dc044cec9671e5cca4cf204d881f614",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 31 Mar 2020 18:01:09 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.2.8",
+      "version": "0.2.8",
+      "comments": {
+        "none": [
+          {
+            "comment": "Updating Checkbox version",
+            "author": "safreibe@microsoft.com",
+            "commit": "0a82a531a8dd9cd29d1799badaa49733ef7c8ccf"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 30 Mar 2020 16:27:00 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.2.7",
+      "version": "0.2.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update main attribute to specify TypeScript index file.",
+            "author": "kinhln@microsoft.com",
+            "commit": "ab291fb90d584c81310aa6559d05a360e86f97de"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 27 Mar 2020 04:10:56 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.2.6",
+      "version": "0.2.6",
+      "comments": {
+        "none": [
+          {
+            "comment": "shared package configs",
+            "author": "ppatboyd@outlook.com",
+            "commit": "1471793de9a859b9908ef50069aeb673d06e5b42"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 18 Mar 2020 00:37:12 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "none": [
+          {
+            "comment": "none",
+            "author": "email not defined",
+            "commit": "eb75093eefe61d9235cb01a8adcafd105e57351c"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 16 Mar 2020 23:03:24 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "turn on publishing",
+            "author": "jasonmo@microsoft.com",
+            "commit": "86f6fc7932479f6afcb8f77c539dd4e0d4e436d7"
+          }
+        ]
+      }
+    }
+  ]
+}
