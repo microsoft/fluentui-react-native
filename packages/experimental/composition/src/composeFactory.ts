@@ -24,10 +24,11 @@ export type ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics 
   };
 
 export type ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics extends object = object> = ComposableFunction<TProps> & {
-  __options: ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme>;
+  __options: ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics>;
   customize: (
     ...tokens: UseStylingOptions<TProps, TSlotProps, TTokens, TTheme>['tokens']
-  ) => ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme>;
+  ) => ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics>;
+  compose: (options: Partial<ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics>>) => ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics>;
 } & TStatics;
 
 /**
@@ -67,6 +68,11 @@ export function composeFactory<TProps, TSlotProps, TTokens, TTheme, TStatics ext
       immutableMergeCore(mergeOptions, options, { tokens: tokens } as LocalOptions),
       themeHelper
     );
+
+  component.compose = (customOptions: Partial<LocalOptions>) => composeFactory<TProps, TSlotProps, TTokens, TTheme, TStatics>(
+    immutableMergeCore(mergeOptions, options, customOptions) as LocalOptions,
+    themeHelper
+  )
 
   // attach statics if specified
   if (options.statics) {

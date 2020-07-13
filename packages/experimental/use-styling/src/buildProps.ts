@@ -16,7 +16,7 @@ export type TokenPropMask<TTokens> = (keyof TTokens)[] | boolean;
  * The provided
  * cache will be scoped to the theme, slot, and tokens that are coming out of the theme.
  */
-export type BuildPropsBase<TProps, TTokens, TTheme> = (tokens: TTokens, theme: TTheme, cache: GetMemoValue<TProps>) => TProps;
+export type BuildPropsBase<TProps, TTokens, TTheme> = (tokens: TTokens, theme: TTheme, cache: GetMemoValue<any>) => Partial<TProps>;
 
 /**
  * A refine function allows style functions to be updated based on tokens that are also props. Only those tokens that are also

@@ -31,9 +31,11 @@ export type ComposableFunction<TProps> = React.FunctionComponent<TProps> & { _st
  * @param memo - optional flag to enable wrapping the created component in a React.memo HOC
  */
 export function stagedComponent<TProps>(staged: StagedRender<TProps>, memo?: boolean): ComposableFunction<TProps> {
-  const component: ComposableFunction<TProps> = memo
-    ? ((React.memo((props: TProps) => staged(props)({} as TProps)) as unknown) as ComposableFunction<TProps>)
-    : (props: TProps) => staged(props)({} as TProps);
-  component._staged = staged;
-  return component;
+  const test = (props: React.PropsWithChildren<TProps>) => {
+    const { children, ...rest } = props;
+    return staged(rest as TProps)({ children } as React.PropsWithChildren<TProps>);
+  };
+  const stagedComponent = memo ? React.memo(test) : test;
+  Object.assign(stagedComponent, { _staged: staged });
+  return stagedComponent as ComposableFunction<TProps>;
 }

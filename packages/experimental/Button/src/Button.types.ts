@@ -1,43 +1,24 @@
 import * as React from 'react';
 import { ViewProps, ImageProps } from 'react-native';
-import { IRenderData } from '@uifabricshared/foundation-composable';
-import { ITextProps } from '@fluentui-react-native/text';
+import { TextProps } from '@fluentui-react-native/experimental-text';
 import { IPressableProps } from '@fluentui-react-native/pressable';
-import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
+import { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 
 export const buttonName = 'Button';
 
-export interface IButtonInfo extends IPressableState {
-  /*
-   * Disables the button.
-   * @default false
-   * @deprecated
+export interface ButtonTokens extends FontTokens, IBorderTokens {
+  /**
+   * Background color for the button
    */
-  disabled?: boolean;
+  backgroundColor?: string;
 
-  /*
-   * Button icon.
+  /**
+   * Foreground color for the text and/or icon of the button
    */
-  icon?: boolean;
+  color?: string;
 
-  /*
-   * Button text.
-   */
-  content?: boolean;
-}
-
-/**
- * Because state updates are coming from the touchable and will cause a child render the button doesn't use
- * changes in state value to trigger re-render.  The values inside inner are effectively mutable and are used
- * for per-component storage
- */
-export interface IButtonState {
-  info: IButtonInfo;
-}
-
-export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
   /**
    * The amount of padding between the border and the contents.
    */
@@ -82,9 +63,17 @@ export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBack
    * Source URL or name of the icon to show on the Button.
    */
   icon?: string;
+
+  /**
+   * States that can be applied to a button
+   */
+  hovered?: ButtonTokens;
+  focused?: ButtonTokens;
+  pressed?: ButtonTokens;
+  disabled?: ButtonTokens;
 }
 
-export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
+export interface ButtonProps extends Omit<IPressableProps, 'onPress'> {
   /*
    * Text to show on the Button.
    */
@@ -107,18 +96,15 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
   tooltip?: string;
 }
 
-export interface IButtonSlotProps {
+export interface ButtonSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
   stack: ViewProps;
   icon: ImageProps;
-  content: ITextProps;
+  content: TextProps;
 }
 
-export type IButtonRenderData = IRenderData<IButtonSlotProps, IButtonState>;
-
-export interface IButtonType {
-  props: IButtonProps;
-  tokens: IButtonTokens;
-  slotProps: IButtonSlotProps;
-  state: IButtonState;
+export interface ButtonType {
+  props: ButtonProps;
+  tokens: ButtonTokens;
+  slotProps: ButtonSlotProps;
 }

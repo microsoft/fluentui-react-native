@@ -1,24 +1,52 @@
-import { buttonName, IButtonType } from './Button.types';
-import { IComposeSettings } from '@uifabricshared/foundation-compose';
-import { ViewProps } from 'react-native';
+import { buttonName, ButtonTokens, ButtonSlotProps, ButtonProps } from './Button.types';
+import { ITheme, UseStylingOptions, buildProps } from '@fluentui-react-native/experimental-framework';
+import { buildBorderStyle, fontStyles } from '@fluentui-react-native/tokens';
 
-export const settings: IComposeSettings<IButtonType> = [
-  {
-    tokens: {
-      backgroundColor: 'buttonBackground',
-      color: 'buttonText',
-      borderColor: 'buttonBorder',
+export const settings: UseStylingOptions<ButtonProps, ButtonSlotProps, ButtonTokens> = {
+  tokens: [
+    (t: ITheme) => ({
+      backgroundColor: t.colors.buttonBackground,
+      color: t.colors.buttonText,
+      borderColor: t.colors.buttonBorder,
       borderWidth: 1,
-      borderRadius: 2
-    },
-    root: {
-      accessible: true,
-      acceptsKeyboardFocus: true,
-      accessibilityRole: 'button',
-      style: { display: 'flex', alignItems: 'flex-start', flexDirection: 'row', alignSelf: 'flex-start' }
-    } as ViewProps,
-    content: {},
-    icon: {},
+      borderRadius: 2,
+      disabled: {
+        backgroundColor: t.colors.buttonBackgroundDisabled,
+        color: t.colors.buttonTextDisabled,
+        borderColor: t.colors.buttonBorderDisabled
+      },
+      hovered: {
+        backgroundColor: t.colors.buttonBackgroundHovered,
+        color: t.colors.buttonTextHovered,
+        borderColor: t.colors.buttonBorderHovered as string
+      },
+      pressed: {
+        backgroundColor: t.colors.buttonBackgroundPressed,
+        color: t.colors.buttonTextPressed,
+        borderColor: t.colors.buttonBorderPressed as string
+      },
+      focused: {
+        borderColor: t.colors.buttonBorderFocused,
+        color: t.colors.buttonTextHovered
+      }
+    }),
+    buttonName
+  ],
+  states: ['hovered', 'focused', 'pressed', 'disabled'],
+  slotProps: {
+    root: buildProps(
+      (tokens: ButtonTokens, theme: ITheme) => ({
+        style: {
+          display: 'flex',
+          alignItems: 'flex-start',
+          flexDirection: 'row',
+          alignSelf: 'flex-start',
+          backgroundColor: tokens.backgroundColor,
+          ...buildBorderStyle.from(tokens, theme)
+        }
+      }),
+      ['backgroundColor', ...buildBorderStyle.keys]
+    ),
     stack: {
       style: {
         display: 'flex',
@@ -32,36 +60,23 @@ export const settings: IComposeSettings<IButtonType> = [
         justifyContent: 'center'
       }
     },
-    _precedence: ['hovered', 'focused', 'pressed', 'disabled'],
-    _overrides: {
-      disabled: {
-        tokens: {
-          backgroundColor: 'buttonBackgroundDisabled',
-          color: 'buttonTextDisabled',
-          borderColor: 'buttonBorderDisabled'
+    content: buildProps(
+      (tokens: ButtonTokens, theme: ITheme) => ({
+        style: {
+          color: tokens.color,
+          ...fontStyles.from(tokens, theme)
         }
-      },
-      hovered: {
-        tokens: {
-          backgroundColor: 'buttonBackgroundHovered',
-          color: 'buttonTextHovered',
-          borderColor: 'buttonBorderHovered'
+      }),
+      ['color', ...fontStyles.keys]
+    ),
+    icon: buildProps(
+      (tokens: ButtonTokens) => ({
+        style: {
+          color: tokens.iconColor || tokens.color,
+          overlayColor: tokens.iconColor
         }
-      },
-      pressed: {
-        tokens: {
-          backgroundColor: 'buttonBackgroundPressed',
-          color: 'buttonTextPressed',
-          borderColor: 'buttonBorderPressed'
-        }
-      },
-      focused: {
-        tokens: {
-          borderColor: 'buttonBorderFocused',
-          color: 'buttonTextHovered'
-        }
-      }
-    }
-  },
-  buttonName
-];
+      }),
+      ['color', 'iconColor']
+    )
+  }
+};
