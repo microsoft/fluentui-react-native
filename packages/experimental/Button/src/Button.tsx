@@ -50,7 +50,7 @@ export const Button = compose<ButtonType>({
 
     // now return the handler for finishing render
     return (extra: ButtonProps) => {
-      const { children, ...final } = extra;
+      const { children, ...final } = extra as React.PropsWithChildren<ButtonProps>;
       const mergedProps = mergeProps(
         {
           ref: buttonRef,

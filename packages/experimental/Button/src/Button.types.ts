@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { ViewProps, ImageProps } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
-import { IPressableProps } from '@fluentui-react-native/pressable';
 import { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { IFocusable } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 
 export const buttonName = 'Button';
@@ -73,7 +72,7 @@ export interface ButtonTokens extends FontTokens, IBorderTokens {
   disabled?: ButtonTokens;
 }
 
-export interface ButtonProps extends Omit<IPressableProps, 'onPress'> {
+export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   /*
    * Text to show on the Button.
    */

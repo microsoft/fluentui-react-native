@@ -13,12 +13,13 @@ export type SlotFn<TProps> = React.FunctionComponent<TProps> & {
  */
 export type NativeReactType = React.ElementType<any> | string;
 
-function withChildrenProps<TProps>(props: TProps, children: React.ReactNode[]): React.PropsWithChildren<TProps> {
-  return children.length > 0 ? { ...props, children } : props;
+function withChildrenProps<TProps>(props: TProps, collectedChildren: React.ReactNode[]): React.PropsWithChildren<TProps> {
+  const children = collectedChildren.length > 0 ? (collectedChildren.length === 1 ? collectedChildren[0] : collectedChildren) : undefined;
+  return children ? { ...props, children } : props;
 }
 
 function withChildrenParams<TProps>(props: React.PropsWithChildren<TProps>, children: React.ReactNode[]): React.ReactNode[] {
-  return children.length > 0 ? children : props.children ? (Array.isArray(props.children) ? props.children : [props.children]) : [];
+  return children.length > 0 ? children : Array.isArray(props.children) ? props.children : [props.children];
 }
 
 /**
