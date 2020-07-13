@@ -1,6 +1,6 @@
 import { ViewProps } from 'react-native';
 
-export const stackItemName = 'RNFStackItem';
+export const stackItemName = 'Stack.StackItem';
 
 /**
  * Stack item props
@@ -51,11 +51,10 @@ export interface StackItemTokens {
 }
 
 export type StackItemProps = StackItemTokens & ViewProps;
+export type StackItemSlotProps = { root: ViewProps };
 
 export interface StackItemType {
   props: StackItemProps;
-  slotProps: {
-    root: ViewProps;
-  };
+  slotProps: StackItemSlotProps;
   tokens: StackItemTokens;
 }
