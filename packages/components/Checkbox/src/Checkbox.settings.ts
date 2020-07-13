@@ -38,7 +38,7 @@ export const settings: IComposeSettings<ICheckboxType> = [
         position: 'relative',
         opacity: 0,
         fontSize: 10,
-        left: 2,
+        marginStart: 2,
         top: -1
       }
     },
