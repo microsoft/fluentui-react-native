@@ -3,14 +3,14 @@ import * as React from 'react';
 import { Image, View, ViewProps } from 'react-native';
 import { ButtonProps, buttonName, ButtonType } from './Button.types';
 import { Text } from '@fluentui-react-native/experimental-text';
-import { settings } from './Button.settings';
+import { stylingSettings } from './Button.styling';
 import { filterViewProps, filterImageProps } from '@fluentui-react-native/adapters';
 import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/experimental-framework';
 
 export const Button = compose<ButtonType>({
   displayName: buttonName,
-  ...settings,
+  ...stylingSettings,
   slots: {
     root: View,
     stack: View,

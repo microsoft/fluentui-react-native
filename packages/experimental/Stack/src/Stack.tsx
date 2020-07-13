@@ -9,6 +9,10 @@ import { stylingSettings } from './Stack.styling';
 
 const mixinCache = getMemoCache<ViewProps>();
 
+/**
+ * ensures that the object reference of the ViewProps is the same if the values of horizontal and gap are the same, this
+ * avoids extraneous mutations of styles for the child objects
+ */
 function getMixinProps(horizontal: boolean, gap: StackTokens['gap']): ViewProps {
   return mixinCache(
     () => ({

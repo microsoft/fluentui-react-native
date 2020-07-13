@@ -2,7 +2,7 @@ import { buttonName, ButtonTokens, ButtonSlotProps, ButtonProps } from './Button
 import { ITheme, UseStylingOptions, buildProps } from '@fluentui-react-native/experimental-framework';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
 
-export const settings: UseStylingOptions<ButtonProps, ButtonSlotProps, ButtonTokens> = {
+export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, ButtonTokens> = {
   tokens: [
     (t: ITheme) => ({
       backgroundColor: t.colors.buttonBackground,
