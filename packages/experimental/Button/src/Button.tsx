@@ -49,8 +49,7 @@ export const Button = compose<ButtonType>({
     const Slots = useSlots(userProps, layer => pressable.state[layer] || userProps[layer]);
 
     // now return the handler for finishing render
-    return (extra: ButtonProps) => {
-      const { children, ...final } = extra as React.PropsWithChildren<ButtonProps>;
+    return (final: ButtonProps, ...children: React.ReactNode[]) => {
       const mergedProps = mergeProps(
         {
           ref: buttonRef,

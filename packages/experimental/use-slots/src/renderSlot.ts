@@ -13,15 +13,6 @@ export type SlotFn<TProps> = React.FunctionComponent<TProps> & {
  */
 export type NativeReactType = React.ElementType<any> | string;
 
-function withChildrenProps<TProps>(props: TProps, collectedChildren: React.ReactNode[]): React.PropsWithChildren<TProps> {
-  const children = collectedChildren.length > 0 ? (collectedChildren.length === 1 ? collectedChildren[0] : collectedChildren) : undefined;
-  return children ? { ...props, children } : props;
-}
-
-function withChildrenParams<TProps>(props: React.PropsWithChildren<TProps>, children: React.ReactNode[]): React.ReactNode[] {
-  return children.length > 0 ? children : Array.isArray(props.children) ? props.children : [props.children];
-}
-
 /**
  * Renders a slot
  *
@@ -31,6 +22,6 @@ function withChildrenParams<TProps>(props: React.PropsWithChildren<TProps>, chil
  */
 export function renderSlot<TProps>(slot: NativeReactType | SlotFn<TProps>, extraProps: TProps, ...children: React.ReactNode[]) {
   return typeof slot === 'function' && (slot as SlotFn<TProps>)._canCompose
-    ? (slot as SlotFn<TProps>)(withChildrenProps(extraProps, children))
-    : React.createElement(slot, extraProps, ...withChildrenParams(extraProps, children));
+    ? (slot as SlotFn<TProps>)(extraProps, ...children)
+    : React.createElement(slot, extraProps, ...children);
 }
