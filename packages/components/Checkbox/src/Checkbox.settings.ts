@@ -85,8 +85,8 @@ export const settings: IComposeSettings<ICheckboxType> = [
       boxAtEnd: {
         checkbox: {
           style: {
-            marginLeft: 4,
-            marginRight: 0
+            marginStart: 4,
+            marginEnd: 0
           }
         }
       },
