@@ -4,7 +4,6 @@
   "description": "Component framework used by fluentui react native controls",
   "main": "src/index.ts",
   "module": "src/index.ts",
-  "private": true,
   "onPublish": {
     "main": "lib-commonjs/index.js",
     "module": "lib/index.js"
