@@ -4,7 +4,7 @@ import { compose } from '@uifabricshared/foundation-compose';
 import { View } from 'react-native';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { settings } from './StackItem.settings';
-import { stackItemTokenProcessor } from './StackItem.tokens';
+import { stackItemTokenProcessor } from './StackItem.styles';
 
 export const StackItem: React.FunctionComponent<IStackItemProps> = compose<IStackItemType>({
   displayName: stackItemName,

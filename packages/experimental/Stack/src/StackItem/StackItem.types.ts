@@ -5,7 +5,7 @@ export const stackItemName = 'RNFStackItem';
 /**
  * Stack item props
  */
-export interface IStackItemTokens extends ViewProps {
+export interface StackItemTokens {
   /**
    * Defines the margin to be applied to the StackItem relative to its container.
    */
@@ -50,12 +50,12 @@ export interface IStackItemTokens extends ViewProps {
   order?: number | string;
 }
 
-export type IStackItemProps = IStackItemTokens & ViewProps;
+export type StackItemProps = StackItemTokens & ViewProps;
 
-export interface IStackItemType {
-  props: IStackItemProps;
+export interface StackItemType {
+  props: StackItemProps;
   slotProps: {
     root: ViewProps;
   };
-  tokens: IStackItemTokens;
+  tokens: StackItemTokens;
 }
