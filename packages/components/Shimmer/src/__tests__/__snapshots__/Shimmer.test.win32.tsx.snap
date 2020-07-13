@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link all props 1`] = `
+<Text
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onPress={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchStart={[Function]}
+  style={
+    Object {
+      "color": "pink",
+      "fontFamily": "Segoe UI",
+      "fontSize": 12,
+      "fontWeight": "500",
+      "margin": 0,
+      "textDecorationLine": "underline",
+    }
+  }
+  url="https://www.bing.com"
+>
+  Link all props
+</Text>
+`;
+
+exports[`Link with child 1`] = `
+<View
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onPress={[Function]}
+  onTouchCancel={[Function]}
+  onTouchEnd={[Function]}
+  onTouchStart={[Function]}
+  style={
+    Object {
+      "margin": 0,
+      "textDecorationLine": "underline",
+    }
+  }
+  url="https://www.bing.com"
+>
+  <Text
+    style={
+      Object {
+        "color": "pink",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "500",
+      }
+    }
+  >
+    Link with child
+  </Text>
+  <View />
+</View>
+`;
