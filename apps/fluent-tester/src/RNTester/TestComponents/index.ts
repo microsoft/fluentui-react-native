@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ButtonFocusTest, HOMEPAGE_BUTTON_BUTTON } from './Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './Checkbox';
+import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './ContextualMenu';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './FocusTrapZone';
 import { LinkTest, HOMEPAGE_LINK_BUTTON } from './Link';
 import { PersonaTest, HOMEPAGE_PERSONA_BUTTON } from './Persona';
@@ -29,6 +30,16 @@ export const allTestComponents: TestDescription[] = [
     name: 'Callout Test',
     component: CalloutTest,
     testPage: HOMEPAGE_CALLOUT_BUTTON
+  },
+  {
+    name: 'Checkbox Test',
+    component: CheckboxTest,
+    testPage: HOMEPAGE_CHECKBOX_BUTTON
+  },
+  {
+    name: 'ContextualMenu Test',
+    component: ContextualMenuTest,
+    testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON
   },
   {
     name: 'Focus Trap Zone Test',
@@ -74,11 +85,6 @@ export const allTestComponents: TestDescription[] = [
     name: 'Persona Test',
     component: PersonaTest,
     testPage: HOMEPAGE_PERSONA_BUTTON
-  },
-  {
-    name: 'Checkbox Test',
-    component: CheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_BUTTON
   },
   {
     name: 'Svg Test',
