@@ -32,6 +32,7 @@
     "@fluentui-react-native/radio-group": ">=0.1.0 <1.0.0",
     "@fluentui-react-native/persona-coin": ">=0.1.0 <1.0.0",
     "@fluentui-react-native/persona": ">=0.1.0 <1.0.0",
+    "@fluentui-react-native/contextual-menu": ">=0.1.0 <1.0.0",
     "@uifabricshared/theming-react-native": ">=0.7.67 <1.0.0",
     "@uifabricshared/themed-stylesheet": ">=0.3.67 <1.0.0",
     "react-native-svg": "^11.0.0"
