@@ -1,8 +1,6 @@
 const path = require('path');
-const webpack = require('webpack');
 const webpackEnv = process.env.NODE_ENV || 'production';
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   mode: webpackEnv,
@@ -11,11 +9,10 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'framework.bundle.js'
+    filename: 'experimental-framework.bundle.js'
   },
   target: 'node',
   devtool: 'source-map',
-  externals: [nodeExternals()],
   module: {
     rules: [
       {
@@ -34,7 +31,7 @@ module.exports = {
   plugins: [
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
-      reportFilename: 'framework.stats.html',
+      reportFilename: 'experimental-framework.stats.html',
       openAnalyzer: false,
       generateStatsFile: true,
       statsOptions: {
@@ -42,7 +39,7 @@ module.exports = {
         reasons: false,
         chunks: false
       },
-      statsFilename: 'framework.stats.json',
+      statsFilename: 'experimental-framework.stats.json',
       logLevel: 'warn'
     })
   ],
