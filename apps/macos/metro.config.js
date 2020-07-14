@@ -7,7 +7,7 @@ const path = require('path');
 const blacklist = require('metro-config/src/defaults/blacklist');
 const {getWatchFolders} = require('@uifabricshared/build-native');
 
-const rnmPath = path.resolve(__dirname, 'node_modules/react-native-macos');
+const rnmPath = path.dirname(require.resolve('react-native-macos/package.json'));
 
 module.exports = {
   watchFolders: getWatchFolders(),

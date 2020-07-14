@@ -120,8 +120,8 @@ jobs:
 
       - script: |
           yarn bundle
-        workingDirectory: apps/ios
-        displayName: "yarn bundle ios"
+        workingDirectory: apps/$(relative_directory)
+        displayName: "yarn bundle $(relative_directory)"
 
       # Select proper XCode version
       - template: templates/apple-xcode-select.yml
