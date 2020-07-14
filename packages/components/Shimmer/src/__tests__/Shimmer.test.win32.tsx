@@ -3,12 +3,12 @@ import { View } from 'react-native';
 import { Shimmer } from '..';
 import * as renderer from 'react-test-renderer';
 
-it('Link all props', () => {
+it('Shimmer all props', () => {
   const tree = renderer.create(<Shimmer content="Link all props" url="https://www.bing.com" />).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-it('Link with child', () => {
+it('Shimmer with child', () => {
   const tree = renderer
     .create(
       <Shimmer content="Link with child" url="https://www.bing.com">
