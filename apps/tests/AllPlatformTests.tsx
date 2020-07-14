@@ -2,6 +2,7 @@ import { TestDescription } from '../fluent-tester/src/RNTester/TestComponents';
 import { ButtonFocusTest, HOMEPAGE_BUTTON_BUTTON } from '../fluent-tester/src/RNTester/TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from '../fluent-tester/src/RNTester/TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from '../fluent-tester/src/RNTester/TestComponents/Checkbox';
+import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../fluent-tester/src/RNTester/TestComponents/ContextualMenu';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../fluent-tester/src/RNTester/TestComponents/FocusTrapZone';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from '../fluent-tester/src/RNTester/TestComponents/Link';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from '../fluent-tester/src/RNTester/TestComponents/Persona';
@@ -23,6 +24,11 @@ export const allPlatformTests: TestDescription[] = [
     name: 'Callout Test',
     component: CalloutTest,
     testPage: HOMEPAGE_CALLOUT_BUTTON
+  },
+  {
+    name: 'ContextualMenu Test',
+    component: ContextualMenuTest,
+    testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON
   },
   {
     name: 'Focus Trap Zone Test',
