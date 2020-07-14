@@ -7,19 +7,20 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
+    "bundle": "fluentui-scripts metro --cli",
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
     "code-style": "fluentui-scripts code-style",
     "lint": "fluentui-scripts eslint",
-    "start:macos": "node ../../node_modules/react-native-macos/local-cli/cli.js start --use-react-native-macos",
+    "start": "react-native start",
     "macos": "fluentui-scripts"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",
     "@uifabricshared/theming-react-native": "0.7.67",
     "@uifabricshared/themed-stylesheet": "0.3.67",
-    "react": "16.11.0",
-    "react-native-macos": "^0.61.0-0"
+    "react-native-macos": "^0.61.0-0",
+    "react-native-test-app": "0.1.27"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

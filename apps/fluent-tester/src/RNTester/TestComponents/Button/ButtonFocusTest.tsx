@@ -1,8 +1,10 @@
-import * as React from 'react';
-import { findNodeHandle } from 'react-native';
-import { Button, IFocusable } from '@fluentui/react-native';
+import { Button } from '@fluentui-react-native/button';
+import { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle } from '../Common/styles';
+import * as React from 'react';
+import { View, findNodeHandle, Text } from 'react-native';
+import { Separator } from '@fluentui-react-native/separator';
+import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import { BUTTON_TESTPAGE } from './consts';
 
 export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
@@ -22,14 +24,15 @@ export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
   }, [state, setState]);
 
   return (
-    <Stack style={stackStyle}>
-      <Button
-        testID={BUTTON_TESTPAGE}
-        content={state.focused ? 'Focused' : 'Not Focused'}
-        componentRef={buttonRef}
-        accessibilityLabel="overridden button name"
-      />
-      <Button content="Click to focus" onClick={onFocus} tooltip="button tooltip" />
-    </Stack>
+    <View>
+      <Text style={commonStyles.section} testID={BUTTON_TESTPAGE}>
+        Basic Buttons
+      </Text>
+      <Separator />
+      <Stack style={stackStyle}>
+        <Button content={state.focused ? 'Focused' : 'Not Focused'} componentRef={buttonRef} accessibilityLabel="overridden button name" />
+        <Button content="Click to focus" onClick={onFocus} tooltip="button tooltip" />
+      </Stack>
+    </View>
   );
 };
