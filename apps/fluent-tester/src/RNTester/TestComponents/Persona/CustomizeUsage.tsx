@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text, Switch, TextInput } from 'react-native';
-import { IPersonaTokens, Persona } from '@fluentui/react-native';
+import { IPersonaTokens, Persona } from '@fluentui-react-native/persona';
 import { michaelImageUrl } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@uifabricshared/theming-react-native';

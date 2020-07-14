@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Button, Separator, Text } from '@fluentui/react-native';
+import { Button } from '@fluentui-react-native/button';
+import { Separator } from '@fluentui-react-native/separator';
+import { Text } from '@fluentui-react-native/text';
 import { stackStyle, separatorStackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import { Stack } from '@fluentui-react-native/stack';
 import { SEPARATOR_TESTPAGE } from './consts';
