@@ -10,7 +10,9 @@ export const settings: IComposeSettings<ILinkType> = [
       color: 'link'
     },
     root: {
+      accessible: true,
       acceptsKeyboardFocus: true,
+      accessibilityRole: 'link',
       style: {
         margin: 0,
         textDecorationLine: 'underline',
