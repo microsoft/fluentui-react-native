@@ -5,6 +5,7 @@ import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from '../../fluent-tester/src/
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/ContextualMenu';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/FocusTrapZone';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from '../../fluent-tester/src/RNTester/TestComponents/Link';
+import { HOMEPAGE_SHIMMER_BUTTON, ShimmerTest } from '../../fluent-tester/src/RNTester/TestComponents/Shimmer';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from '../../fluent-tester/src/RNTester/TestComponents/Persona';
 import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from '../../fluent-tester/src/RNTester/TestComponents/PersonaCoin';
 import { HOMEPAGE_PRESSABLE_BUTTON, PressableTest } from '../../fluent-tester/src/RNTester/TestComponents/Pressable';
@@ -44,6 +45,11 @@ export const iosTests: TestDescription[] = [
     name: 'Link Test',
     component: LinkTest,
     testPage: HOMEPAGE_LINK_BUTTON
+  },
+  {
+    name: 'Shimmer Test',
+    component: ShimmerTest,
+    testPage: HOMEPAGE_SHIMMER_BUTTON
   },
   {
     name: 'Separator Test',

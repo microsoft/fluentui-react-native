@@ -3,6 +3,7 @@ import { ButtonFocusTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './TestComponents/FocusTrapZone';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
+import { HOMEPAGE_SHIMMER_BUTTON, ShimmerTest } from './TestComponents/Shimmer';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from './TestComponents/Persona';
 import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from './TestComponents/PersonaCoin';
 import { HOMEPAGE_PRESSABLE_BUTTON, PressableTest } from './TestComponents/Pressable';
@@ -32,6 +33,11 @@ export const Tests: TestDescription[] = [
     name: 'Link Test',
     component: LinkTest,
     testPage: HOMEPAGE_LINK_BUTTON
+  },
+  {
+    name: 'Shimmer Test',
+    component: ShimmerTest,
+    testPage: HOMEPAGE_SHIMMER_BUTTON
   },
   {
     name: 'Separator Test',
