@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { RadioButton, RadioGroup, Separator } from '@fluentui/react-native';
+import { RadioButton, RadioGroup } from '@fluentui-react-native/radio-group';
+import { Separator } from '@fluentui-react-native/separator';
 import { View, Text } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { RADIOGROUP_TESTPAGE } from './consts';

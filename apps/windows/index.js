@@ -1,14 +1,15 @@
 'use strict';
 
+import { customRegistry, FabricTester } from '@fluentui-react-native/tester';
+import { ThemeProvider } from '@uifabricshared/theming-react-native';
 import * as React from 'react';
-import {AppRegistry} from 'react-native';
-import {ThemeProvider} from '@uifabricshared/theming-react-native';
-import {FabricTester, customRegistry} from '@fluentui-react-native/tester';
+import { AppRegistry } from 'react-native';
+import { windowsTests } from './WindowsTests';
 
 const FluentTester = props => {
   return (
     <ThemeProvider registry={customRegistry}>
-      <FabricTester {...props} />
+      <FabricTester enabledTests={windowsTests} {...props} />
     </ThemeProvider>
   );
 };

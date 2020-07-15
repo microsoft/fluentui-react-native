@@ -15279,10 +15279,10 @@ react-native-svg@^11.0.0:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
 
-react-native-test-app@0.1.24:
-  version "0.1.24"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.1.24.tgz#a583cd895885dec94b57809cbac35536f705077f"
-  integrity sha512-NAYqessg0o2zG9HOk5jBHmcIkPAaNHfeiCxYKolkrXWnH0Xm+pWC/91ieTwLQ/Ju8U2eRPYxAzRYd4rBxrp73A==
+react-native-test-app@0.1.27:
+  version "0.1.27"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.1.27.tgz#90d93e2b687f449a890d9a7a2906a8f3d4c9e477"
+  integrity sha512-BB0hXgoHAFyrJlfWz/pvA6ESVn+5rFuDjcqSbfj+ED655nrV4JsuF/OpnD4bo26LLrdhK4GLcislUybQjYRfIw==
   dependencies:
     "@babel/core" "^7.0.0"
     "@babel/runtime" "^7.0.0"

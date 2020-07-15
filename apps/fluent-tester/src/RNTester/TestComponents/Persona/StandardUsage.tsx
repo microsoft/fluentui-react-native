@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Persona, PersonaSize } from '@fluentui/react-native';
+import { Persona } from '@fluentui-react-native/persona';
+import { PersonaSize } from '@fluentui-react-native/persona-coin';
 import { rajeshImageUrl } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { View, Text, Switch, Picker } from 'react-native';

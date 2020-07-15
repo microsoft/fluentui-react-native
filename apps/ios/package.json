@@ -22,7 +22,7 @@
     "@uifabricshared/themed-stylesheet": "0.3.67",
     "react": "16.11.0",
     "react-native": "0.62.2",
-    "react-native-test-app": "0.1.24"
+    "react-native-test-app": "0.1.27"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

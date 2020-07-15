@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { Button, Separator, ContextualMenu, ContextualMenuItem } from '@fluentui/react-native';
+import { Button } from '@fluentui-react-native/button';
+import { Separator } from '@fluentui-react-native/separator';
+import { ContextualMenu, ContextualMenuItem } from '@fluentui-react-native/contextual-menu';
 import { fabricTesterStyles } from '../Common/styles';
 import { CONTEXTUALMENU_TESTPAGE } from './consts';
 

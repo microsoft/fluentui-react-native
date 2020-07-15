@@ -13,4 +13,4 @@
 ```
     yarn web
 ```
-5. Go to `localhost:8080` in your browser of choice and you will see the FluentUI Checkbox component show up.
+5. Go to `localhost:8080` in your browser of choice and you will see the FluentUI Tester show up.
