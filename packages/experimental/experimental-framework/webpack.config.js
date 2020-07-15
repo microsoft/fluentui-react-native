@@ -9,7 +9,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'experimental-framework.bundle.js'
+    filename: 'experimental.bundle.js'
   },
   target: 'node',
   devtool: 'source-map',
@@ -31,7 +31,7 @@ module.exports = {
   plugins: [
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
-      reportFilename: 'experimental-framework.stats.html',
+      reportFilename: 'experimental.stats.html',
       openAnalyzer: false,
       generateStatsFile: true,
       statsOptions: {
@@ -39,7 +39,7 @@ module.exports = {
         reasons: false,
         chunks: false
       },
-      statsFilename: 'experimental-framework.stats.json',
+      statsFilename: 'experimental.stats.json',
       logLevel: 'warn'
     })
   ],
