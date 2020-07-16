@@ -47,6 +47,8 @@ export const settings: IComposeSettings<ICheckboxType> = [
       variant: 'bodyStandard',
       style: {
         marginTop: 1,
+        borderStyle: 'dotted',
+        borderWidth: 1
       }
     },
     _precedence: ['disabled', 'boxAtEnd', 'hovered', 'focused', 'pressed', 'checked'],
@@ -56,12 +58,6 @@ export const settings: IComposeSettings<ICheckboxType> = [
           backgroundColor: 'menuItemBackgroundHovered',
           textBorderColor: 'focusBorder'
         },
-        content: {
-          style: {
-            borderStyle: 'dotted',
-            borderWidth: 1
-          }
-        }
       },
       checked: {
         checkmark: {

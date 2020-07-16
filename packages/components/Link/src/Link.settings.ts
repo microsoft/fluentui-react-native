@@ -7,7 +7,9 @@ export const settings: IComposeSettings<ILinkType> = [
     tokens: {
       variant: 'secondaryStandard',
       color: 'link',
-      borderColor: 'transparent'
+      borderColor: 'transparent',
+      borderStyle: 'dotted',
+      borderWidth: 1,
     },
     root: {
       accessible: true,
@@ -49,8 +51,6 @@ export const settings: IComposeSettings<ILinkType> = [
       },
       focused: {
         tokens: {
-          borderStyle: 'dotted',
-          borderWidth: 1,
           borderColor: 'focusBorder'
         }
       }
