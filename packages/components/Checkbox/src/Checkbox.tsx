@@ -87,11 +87,11 @@ export const Checkbox = compose<ICheckboxType>({
   render: (Slots: ISlots<ICheckboxSlotProps>, renderData: ICheckboxRenderData, ...children: React.ReactNode[]) => {
     return (
       <Slots.root>
-        {renderData ?.state.boxAtEnd && <Slots.content />}
+        {renderData?.state.boxAtEnd && <Slots.content />}
         <Slots.checkbox>
           <Slots.checkmark />
         </Slots.checkbox>
-        {!renderData ?.state.boxAtEnd && <Slots.content />}
+        {!renderData?.state.boxAtEnd && <Slots.content />}
         {children}
       </Slots.root>
     );
