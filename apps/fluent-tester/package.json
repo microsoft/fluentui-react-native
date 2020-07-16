@@ -21,6 +21,18 @@
   "dependencies": {
     "@fluentui/react-native": ">=0.15.74 <1.0.0",
     "@fluentui-react-native/stack": ">=0.1.0 <1.0.0",
+    "@fluentui-react-native/button": ">=0.1.0 <1.0.0",
+    "@fluentui-react-native/separator": ">=0.1.0 <1.0.0",
+    "@fluentui-react-native/checkbox": ">=0.1.0 <1.0.0",
+    "@fluentui-react-native/text": ">=0.1.0 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.1.0 <1.0.0",
+    "@fluentui-react-native/pressable": ">=0.1.0 <1.0.0",
+    "@fluentui-react-native/focus-trap-zone": ">=0.1.0 <1.0.0",
+    "@fluentui-react-native/link": ">=0.1.0 <1.0.0",
+    "@fluentui-react-native/radio-group": ">=0.1.0 <1.0.0",
+    "@fluentui-react-native/persona-coin": ">=0.1.0 <1.0.0",
+    "@fluentui-react-native/persona": ">=0.1.0 <1.0.0",
+    "@fluentui-react-native/contextual-menu": ">=0.1.0 <1.0.0",
     "@uifabricshared/theming-react-native": ">=0.7.67 <1.0.0",
     "@uifabricshared/themed-stylesheet": ">=0.3.67 <1.0.0",
     "react-native-svg": "^11.0.0"

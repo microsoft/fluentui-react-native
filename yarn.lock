@@ -2742,10 +2742,10 @@
     stacktrace-parser "^0.1.3"
     whatwg-fetch "^3.0.0"
 
-"@office-iss/rex-win32@0.62.0-preview.3-tenantreactnativewin-12906":
-  version "0.62.0-preview.3-tenantreactnativewin-12906"
-  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.62.0-preview.3-tenantreactnativewin-12906.tgz#d2a8138db40751d53ea8daf2a83780cb4a47993d"
-  integrity sha512-FeK/5JFkNHOuwpWzUTm226D4D3Rs6nGDycFXtPghPlevdlF5kipdDz7xJw2JsB56Y9P6VcYMisqRpRVqTRVA1w==
+"@office-iss/rex-win32@0.62.0-preview.16-tenantreactnativewin-13029":
+  version "0.62.0-preview.16-tenantreactnativewin-13029"
+  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.62.0-preview.16-tenantreactnativewin-13029.tgz#2ecccf489980a5ef0e08710d4cb337f3d6db8459"
+  integrity sha512-lGgai+y+HUpT37PeSVIfRXr0mfr2IIRMFhcGxeJV7QuYPVPyle//CNKSOIw6fliIL7poNFadt/N2PMAYqqlAWg==
   dependencies:
     command-line-args "^5.0.2"
     command-line-usage "^5.0.5"
@@ -15279,10 +15279,10 @@ react-native-svg@^11.0.0:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
 
-react-native-test-app@0.1.24:
-  version "0.1.24"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.1.24.tgz#a583cd895885dec94b57809cbac35536f705077f"
-  integrity sha512-NAYqessg0o2zG9HOk5jBHmcIkPAaNHfeiCxYKolkrXWnH0Xm+pWC/91ieTwLQ/Ju8U2eRPYxAzRYd4rBxrp73A==
+react-native-test-app@0.1.27:
+  version "0.1.27"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.1.27.tgz#90d93e2b687f449a890d9a7a2906a8f3d4c9e477"
+  integrity sha512-BB0hXgoHAFyrJlfWz/pvA6ESVn+5rFuDjcqSbfj+ED655nrV4JsuF/OpnD4bo26LLrdhK4GLcislUybQjYRfIw==
   dependencies:
     "@babel/core" "^7.0.0"
     "@babel/runtime" "^7.0.0"

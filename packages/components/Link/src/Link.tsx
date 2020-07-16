@@ -6,7 +6,7 @@ import { Text } from '@fluentui-react-native/text';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ILinkProps, ILinkSlotProps, ILinkState, ILinkRenderData, IWithLinkOptions, linkName, ILinkType } from './Link.types';
 import { settings } from './Link.settings';
-import { foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
+import { foregroundColorTokens, textTokens, borderTokens } from '@fluentui-react-native/tokens';
 import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
@@ -96,7 +96,7 @@ export const Link = compose<ILinkType>({
   },
   styles: {
     root: [],
-    content: [foregroundColorTokens, textTokens]
+    content: [foregroundColorTokens, textTokens, borderTokens]
   }
 });
 

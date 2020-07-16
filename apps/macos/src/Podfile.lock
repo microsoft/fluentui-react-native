@@ -217,6 +217,9 @@ PODS:
     - React-cxxreact (= 0.61.50)
     - React-jsi (= 0.61.50)
     - ReactCommon/jscallinvoker (= 0.61.50)
+  - ReactTestApp-DevSupport (0.1.27)
+  - ReactTestApp-Resources (1.0.0-dev)
+  - SwiftLint (0.39.2)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -248,7 +251,14 @@ DEPENDENCIES:
   - React-RCTVibration (from `../../../node_modules/react-native-macos/Libraries/Vibration`)
   - ReactCommon/jscallinvoker (from `../../../node_modules/react-native-macos/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../../../node_modules/react-native-macos/ReactCommon`)
+  - ReactTestApp-DevSupport (from `../../../node_modules/react-native-test-app`)
+  - ReactTestApp-Resources (from `..`)
+  - SwiftLint
   - Yoga (from `../../../node_modules/react-native-macos/ReactCommon/yoga`)
+
+SPEC REPOS:
+  trunk:
+    - SwiftLint
 
 EXTERNAL SOURCES:
   boost-for-react-native:
@@ -301,6 +311,10 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-macos/Libraries/Vibration"
   ReactCommon:
     :path: "../../../node_modules/react-native-macos/ReactCommon"
+  ReactTestApp-DevSupport:
+    :path: "../../../node_modules/react-native-test-app"
+  ReactTestApp-Resources:
+    :path: ".."
   Yoga:
     :path: "../../../node_modules/react-native-macos/ReactCommon/yoga"
 
@@ -330,8 +344,11 @@ SPEC CHECKSUMS:
   React-RCTText: 65680e2688b226c9a9e5d48b5c659ef9c5555e52
   React-RCTVibration: 62a4e9c533767b3b795ed0467b0c509c2a7252d4
   ReactCommon: 539af16bab3c81f5ee896c1fdde385d83b035d43
+  ReactTestApp-DevSupport: 703e2d998a1e3475d84b60f328ee13be0a71a61f
+  ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
+  SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
   Yoga: 10b8504046b746855175d014663da2872d083b12
 
-PODFILE CHECKSUM: a13b2cd9dea53e8befba9b73bfc20958762e937c
+PODFILE CHECKSUM: d5bb10f3100e97332d940a60e523c293d90b245b
 
 COCOAPODS: 1.9.3
