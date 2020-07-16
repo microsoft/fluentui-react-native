@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Set Focus props during initial render to avoid shifting other components",
+  "packageName": "@fluentui-react-native/checkbox",
+  "email": "lehon@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-07-16T21:01:54.651Z"
+}
