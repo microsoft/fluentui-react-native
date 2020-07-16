@@ -8,7 +8,8 @@ export const settings: IComposeSettings<ICheckboxType> = [
     tokens: {
       borderColor: 'menuItemText',
       color: 'menuItemText',
-      backgroundColor: 'menuBackground'
+      backgroundColor: 'menuBackground',
+      textBorderColor: 'transparent'
     },
     root: {
       accessible: true,
@@ -46,20 +47,19 @@ export const settings: IComposeSettings<ICheckboxType> = [
       variant: 'bodyStandard',
       style: {
         marginTop: 1,
-        borderStyle: 'dashed',
-        borderColor: 'transparent',
-        borderWidth: 1
       }
     },
     _precedence: ['disabled', 'boxAtEnd', 'hovered', 'focused', 'pressed', 'checked'],
     _overrides: {
       focused: {
         tokens: {
-          backgroundColor: 'menuItemBackgroundHovered'
+          backgroundColor: 'menuItemBackgroundHovered',
+          textBorderColor: 'focusBorder'
         },
         content: {
           style: {
-            borderColor: 'rgba(128, 128, 128, 1)'
+            borderStyle: 'dotted',
+            borderWidth: 1
           }
         }
       },

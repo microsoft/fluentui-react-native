@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { IForegroundColorTokens, ITextTokens } from '@fluentui-react-native/tokens';
+import { IForegroundColorTokens, ITextTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { ITextProps } from '@fluentui-react-native/text';
 import { IFocusable, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
@@ -11,7 +11,7 @@ export const linkName = 'RNFLink';
  * Properties for fabric native Link
  */
 
-export type ILinkTokens = IForegroundColorTokens & ITextTokens;
+export type ILinkTokens = IForegroundColorTokens & ITextTokens & IBorderTokens;
 
 /**
  * Because style state updates are coming from the touchable and will cause a child render the link doesn't use
