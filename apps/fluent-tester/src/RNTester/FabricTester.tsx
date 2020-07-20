@@ -8,6 +8,7 @@ import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fabricTesterStyles } from './TestComponents/Common/styles';
 import { registerThemes } from './TestComponents/Theme/CustomThemes';
+import { StyleSheet } from 'react-native';
 
 // uncomment the below lines to enable message spy
 /*
@@ -50,7 +51,7 @@ export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props:
   return (
     <View style={fabricTesterStyles.root}>
       <ScrollView style={fabricTesterStyles.testList} contentContainerStyle={fabricTesterStyles.testListContainerStyle}>
-        <Text style={fabricTesterStyles.testHeader} testID={BASE_TESTPAGE}>
+        <Text style={styles.testHeader} testID={BASE_TESTPAGE}>
           ⚛ FluentUI Tests
         </Text>
         {sortedTestComponents.map((description, index) => {
@@ -75,3 +76,11 @@ export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props:
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  testHeader: {
+    marginBottom: 8,
+    fontSize: 18,
+    fontWeight: 'bold'
+  }
+});
