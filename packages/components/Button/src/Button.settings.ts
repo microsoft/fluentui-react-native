@@ -58,7 +58,8 @@ export const settings: IComposeSettings<IButtonType> = [
       focused: {
         tokens: {
           borderColor: 'buttonBorderFocused',
-          color: 'buttonTextHovered'
+          color: 'buttonTextHovered',
+          backgroundColor: 'buttonBackgroundHovered'
         }
       }
     }
