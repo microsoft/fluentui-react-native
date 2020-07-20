@@ -24,7 +24,6 @@
   },
   "devDependencies": {
     "@types/react-native": "0.62.2",
-    "babel-plugin-react-native-web": "^0.13.3",
     "html-webpack-plugin": "^4.3.0",
     "ts-loader": "^7.0.5",
     "webpack": "^4.43.0",
