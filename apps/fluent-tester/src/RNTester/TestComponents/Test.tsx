@@ -1,10 +1,13 @@
-// import * as React from 'react';
+import * as React from 'react';
+import { Text } from 'react-native';
 
-// export interface TestProps {
-//   description: string;
-//   sections: any[];
-// }
+export interface TestProps {
+  description: string;
+  sections: any[];
+}
 
-// export const Test = React.FunctionComponent < TestProps > = (props: TestProps) => {
-
-// };
+export const Test = (props: TestProps) => {
+  return (
+    <Text>{props.description}</Text>
+  );
+};
