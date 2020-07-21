@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { Separator } from '@fluentui-react-native/separator';
 
 export type TestSection = {
   name: string;
@@ -35,6 +36,7 @@ export const Test = (props: TestProps) => {
           <View>
             <Text key={index} style={styles.section}>{section.name}</Text>
             <Text key={index}>{section.status}</Text>
+            <Separator />
             {section.component}
           </View>
         );
