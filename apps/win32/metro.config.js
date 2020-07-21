@@ -19,6 +19,28 @@ module.exports = (async () => {
     } = await getDefaultConfig();
     return {
         watchFolders: getWatchFolders(),
+        resolver: {
+          assetExts: assetExts.filter(ext => ext !== 'svg'),
+          sourceExts: [
+              ...sourceExts,
+              'svg'
+          ],
+          resolveRequest: require('@office-iss/react-native-win32/metro-react-native-platform').reactNativePlatformResolver(
+              {win32: '@office-iss/react-native-win32'}
+          ),
+          blacklistRE: blacklist(
+              [
+                  // This stops "react-native run-windows" from causing the metro server to crash if its already running
+                  new RegExp(`${
+                      path.resolve(__dirname, 'windows').replace(/[/\\]/g, '/')
+                  }.*`),
+                  // This prevents "react-native run-windows" from hitting: EBUSY: resource busy or locked, open msbuild.ProjectImports.zip
+                  new RegExp(`${
+                      path.resolve(__dirname, 'msbuild.ProjectImports.zip').replace(/[/\\]/g, '/')
+                  }.*`)
+              ]
+          )
+        },
         transformer: {
             // The cli defaults this to a full path to react-native, which bypasses the reactNativePlatformResolver above
             // Hopefully we can fix the default in the future
@@ -32,28 +54,6 @@ module.exports = (async () => {
                         inlineRequires: false
                     }
                 }
-            )
-        },
-        resolver: {
-            assetExts: assetExts.filter(ext => ext !== 'svg'),
-            sourceExts: [
-                ...sourceExts,
-                'svg'
-            ],
-            resolveRequest: require('@office-iss/react-native-win32/metro-react-native-platform').reactNativePlatformResolver(
-                {win32: '@office-iss/react-native-win32'}
-            ),
-            blacklistRE: blacklist(
-                [
-                    // This stops "react-native run-windows" from causing the metro server to crash if its already running
-                    new RegExp(`${
-                        path.resolve(__dirname, 'windows').replace(/[/\\]/g, '/')
-                    }.*`),
-                    // This prevents "react-native run-windows" from hitting: EBUSY: resource busy or locked, open msbuild.ProjectImports.zip
-                    new RegExp(`${
-                        path.resolve(__dirname, 'msbuild.ProjectImports.zip').replace(/[/\\]/g, '/')
-                    }.*`)
-                ]
             )
         }
     };
