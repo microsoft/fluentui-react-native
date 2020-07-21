@@ -28,33 +28,25 @@ module.exports = (async () => {
           resolveRequest: require('@office-iss/react-native-win32/metro-react-native-platform').reactNativePlatformResolver(
               {win32: '@office-iss/react-native-win32'}
           ),
-          blacklistRE: blacklist(
-              [
-                  // This stops "react-native run-windows" from causing the metro server to crash if its already running
-                  new RegExp(`${
-                      path.resolve(__dirname, 'windows').replace(/[/\\]/g, '/')
-                  }.*`),
-                  // This prevents "react-native run-windows" from hitting: EBUSY: resource busy or locked, open msbuild.ProjectImports.zip
-                  new RegExp(`${
-                      path.resolve(__dirname, 'msbuild.ProjectImports.zip').replace(/[/\\]/g, '/')
-                  }.*`)
-              ]
-          )
+          blacklistRE: blacklist([
+              // This stops "react-native run-windows" from causing the metro server to crash if its already running
+              new RegExp(`${path.resolve(__dirname, 'windows').replace(/[/\\]/g, '/')}.*`),
+              // This prevents "react-native run-windows" from hitting: EBUSY: resource busy or locked, open msbuild.ProjectImports.zip
+              new RegExp(`${path.resolve(__dirname, 'msbuild.ProjectImports.zip').replace(/[/\\]/g, '/')}.*`)
+          ])
         },
         transformer: {
-            // The cli defaults this to a full path to react-native, which bypasses the reactNativePlatformResolver above
-            // Hopefully we can fix the default in the future
-            assetRegistryPath: 'react-native/Libraries/Image/AssetRegistry',
-            // This transformer selects between the regular transformer and svg transformer depending on the file type
-            babelTransformerPath: require.resolve('react-native-svg-transformer'),
-            getTransformOptions: async () => (
-                {
-                    transform: {
-                        experimentalImportSupport: false,
-                        inlineRequires: false
-                    }
-                }
-            )
+          // The cli defaults this to a full path to react-native, which bypasses the reactNativePlatformResolver above
+          // Hopefully we can fix the default in the future
+          assetRegistryPath: 'react-native/Libraries/Image/AssetRegistry',
+          // This transformer selects between the regular transformer and svg transformer depending on the file type
+          babelTransformerPath: require.resolve('react-native-svg-transformer'),
+          getTransformOptions: async () => ({
+              transform: {
+                  experimentalImportSupport: false,
+                  inlineRequires: false
+              }
+          })
         }
     };
 })();
