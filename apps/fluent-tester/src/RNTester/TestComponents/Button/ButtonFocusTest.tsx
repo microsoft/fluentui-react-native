@@ -41,7 +41,7 @@ import { Button } from '@fluentui-react-native/button';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
-import { findNodeHandle, Platform } from 'react-native';
+import { findNodeHandle } from 'react-native';
 import { stackStyle } from '../Common/styles';
 import { BUTTON_TESTPAGE } from './consts';
 import { Test, TestSection } from '../Test';
@@ -73,7 +73,6 @@ const basicButton: React.FunctionComponent<{}> = () => {
 const buttonSections: TestSection[] = [
   {
     name: 'Basic Button',
-    status: Platform.OS == 'windows' ? 'BETA' : 'EXPERIMENTAL',
     testID: BUTTON_TESTPAGE,
     component: basicButton
   }
@@ -81,6 +80,6 @@ const buttonSections: TestSection[] = [
 
 export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
   return (
-    <Test name="Button Test" description="No description." sections={buttonSections}></Test>
+    <Test name="Button Test" description="No description." sections={buttonSections} winStatus="BETA" iosStatus="EXPERIMENTAL" macosStatus="EXPERIMENTAL" androidStatus="EXPERIMENTAL"></Test>
   );
 };

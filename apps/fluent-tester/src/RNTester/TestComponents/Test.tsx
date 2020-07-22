@@ -4,7 +4,6 @@ import { Separator } from '@fluentui-react-native/separator';
 
 export type TestSection = {
   name: string;
-  status: string; // shipped, beta, experimental
   testID: string;
   component: React.FunctionComponent<{}>;
 };
@@ -12,6 +11,10 @@ export type TestSection = {
 export interface TestProps {
   name: string;
   description: string;
+  winStatus: string; // status: production, beta, experimental
+  iosStatus: string;
+  macosStatus: string;
+  androidStatus: string;
   sections: TestSection[];
 }
 
@@ -44,14 +47,12 @@ export const Test = (props: TestProps) => {
       <Separator />
       <Text style={styles.description}>{props.description}</Text>
       {props.sections.map((section, index) => {
+        const TestComponent = section.component;
         return (
           <View key={index}>
-            <Text key={index} style={styles.section}>
-              {section.name}
-              <Text key={index} style={styles.status}>{'   '}{section.status}</Text>
-            </Text>
+            <Text key={index} style={styles.section} testID={section.testID}>{section.name}</Text>
             <Separator key={index} />
-            {/* {section.component} */}
+            <TestComponent />
           </View>
         );
       })}
