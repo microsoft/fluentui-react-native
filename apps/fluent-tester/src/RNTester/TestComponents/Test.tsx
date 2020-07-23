@@ -8,13 +8,18 @@ export type TestSection = {
   component: React.FunctionComponent<{}>;
 };
 
+export type Status = 'production' | 'beta' | 'experimental';
+interface PlatformStatus {
+  winStatus: Status;
+  iosStatus: Status;
+  macosStatus: Status;
+  androidStatus: Status;
+}
+
 export interface TestProps {
   name: string;
   description: string;
-  winStatus: string; // status: production, beta, experimental
-  iosStatus: string;
-  macosStatus: string;
-  androidStatus: string;
+  status: PlatformStatus;
   sections: TestSection[];
 }
 
