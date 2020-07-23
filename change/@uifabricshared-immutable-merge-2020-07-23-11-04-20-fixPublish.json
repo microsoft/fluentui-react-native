@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "fix comment",
+  "packageName": "@uifabricshared/immutable-merge",
+  "email": "taamireh@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-07-23T18:04:20.387Z"
+}
