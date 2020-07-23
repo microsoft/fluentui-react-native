@@ -3,7 +3,7 @@ import { TextProps } from 'react-native';
 import { ImageProps } from 'react-native';
 import { IFilterMask } from './filter.types';
 
-// export core interface types
+// export core interface types from RN
 export type ITextProps = TextProps;
 export type IViewProps = IViewWindowsProps;
 export type IImageProps = ImageProps;
@@ -72,7 +72,7 @@ const _viewMask: IFilterMask<IViewProps> = {
   tvParallaxProperties: true,
   tvParallaxShiftDistanceX: true,
   tvParallaxShiftDistanceY: true,
-  tvParallaxTiltAngle: true,
+  tvParallaxTiltAngle: true
 };
 
 const _textMask: IFilterMask<ITextProps> = {
@@ -112,7 +112,7 @@ const _textMask: IFilterMask<ITextProps> = {
   suppressHighlighting: true,
   selectable: true,
   selectionColor: true,
-  textBreakStrategy: true,
+  textBreakStrategy: true
 };
 
 const _imageMask: IFilterMask<IImageProps> = {
@@ -160,7 +160,7 @@ const _imageMask: IFilterMask<IImageProps> = {
   capInsets: true,
   width: true,
   height: true,
-  fadeDuration: true,
+  fadeDuration: true
 };
 
 export function filterViewProps(propName: string): boolean {
