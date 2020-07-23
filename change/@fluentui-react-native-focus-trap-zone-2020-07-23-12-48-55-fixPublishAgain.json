@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "manually update versions",
-  "packageName": "@fluentui-react-native/focus-trap-zone",
-  "email": "taamireh@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-07-23T19:48:27.294Z"
-}
