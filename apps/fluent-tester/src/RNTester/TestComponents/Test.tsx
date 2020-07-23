@@ -9,7 +9,7 @@ export type TestSection = {
 };
 
 export type Status = 'production' | 'beta' | 'experimental';
-interface PlatformStatus {
+export type PlatformStatus = {
   winStatus: Status;
   iosStatus: Status;
   macosStatus: Status;

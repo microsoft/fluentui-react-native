@@ -5,7 +5,7 @@ import * as React from 'react';
 import { findNodeHandle } from 'react-native';
 import { stackStyle } from '../Common/styles';
 import { BUTTON_TESTPAGE } from './consts';
-import { Test, TestSection } from '../Test';
+import { Test, TestSection, PlatformStatus } from '../Test';
 
 const basicButton: React.FunctionComponent<{}> = () => {
   const [state, setState] = React.useState({
@@ -40,7 +40,14 @@ const buttonSections: TestSection[] = [
 ];
 
 export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
+  const status: PlatformStatus = {
+    winStatus: 'beta',
+    iosStatus: 'experimental',
+    macosStatus: 'experimental',
+    androidStatus: 'experimental'
+  }
+
   return (
-    <Test name="Button Test" description="No description." sections={buttonSections} winStatus="BETA" iosStatus="EXPERIMENTAL" macosStatus="EXPERIMENTAL" androidStatus="EXPERIMENTAL"></Test>
+    <Test name="Button Test" description="No description." sections={buttonSections} status={status}></Test>
   );
 };
