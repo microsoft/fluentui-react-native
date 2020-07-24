@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		ACA7B35524CB57BC00AB93B9 /* FRNShimmerView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA7B35424CB57BC00AB93B9 /* FRNShimmerView.m */; };
 		ACA7B35824CB581300AB93B9 /* FRNShimmerViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA7B35724CB581300AB93B9 /* FRNShimmerViewManager.m */; };
+		ACA7B35D24CB986B00AB93B9 /* ShimmerViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA7B35C24CB986B00AB93B9 /* ShimmerViewManager.swift */; };
 		EC8090801F6EC9659FD6493F /* libPods-ShimmerView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5A2434CAE548D66353B4F67 /* libPods-ShimmerView.a */; };
 /* End PBXBuildFile section */
 
@@ -29,10 +29,8 @@
 		4CDBF2F9CC4FB0AF6C332D4D /* Pods-ShimmerView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShimmerView.release.xcconfig"; path = "Target Support Files/Pods-ShimmerView/Pods-ShimmerView.release.xcconfig"; sourceTree = "<group>"; };
 		ACA7B34924CB568700AB93B9 /* libShimmerView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libShimmerView.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACA7B35324CB57BB00AB93B9 /* ShimmerView-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShimmerView-Bridging-Header.h"; sourceTree = "<group>"; };
-		ACA7B35424CB57BC00AB93B9 /* FRNShimmerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRNShimmerView.m; sourceTree = "<group>"; };
-		ACA7B35624CB57FD00AB93B9 /* FRNShimmerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRNShimmerView.h; sourceTree = "<group>"; };
 		ACA7B35724CB581300AB93B9 /* FRNShimmerViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRNShimmerViewManager.m; sourceTree = "<group>"; };
-		ACA7B35924CB583500AB93B9 /* FRNShimmerViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRNShimmerViewManager.h; sourceTree = "<group>"; };
+		ACA7B35C24CB986B00AB93B9 /* ShimmerViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerViewManager.swift; sourceTree = "<group>"; };
 		C5A2434CAE548D66353B4F67 /* libPods-ShimmerView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ShimmerView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -59,10 +57,8 @@
 		ACA7B34024CB568700AB93B9 = {
 			isa = PBXGroup;
 			children = (
+				ACA7B35C24CB986B00AB93B9 /* ShimmerViewManager.swift */,
 				ACA7B35324CB57BB00AB93B9 /* ShimmerView-Bridging-Header.h */,
-				ACA7B35624CB57FD00AB93B9 /* FRNShimmerView.h */,
-				ACA7B35424CB57BC00AB93B9 /* FRNShimmerView.m */,
-				ACA7B35924CB583500AB93B9 /* FRNShimmerViewManager.h */,
 				ACA7B35724CB581300AB93B9 /* FRNShimmerViewManager.m */,
 				ACA7B34A24CB568700AB93B9 /* Products */,
 				ACC22ACBF8B51AADEB70CED8 /* Pods */,
@@ -84,7 +80,6 @@
 				33902BABE2E849C8020B3564 /* Pods-ShimmerView.debug.xcconfig */,
 				4CDBF2F9CC4FB0AF6C332D4D /* Pods-ShimmerView.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -172,7 +167,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACA7B35524CB57BC00AB93B9 /* FRNShimmerView.m in Sources */,
+				ACA7B35D24CB986B00AB93B9 /* ShimmerViewManager.swift in Sources */,
 				ACA7B35824CB581300AB93B9 /* FRNShimmerViewManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
