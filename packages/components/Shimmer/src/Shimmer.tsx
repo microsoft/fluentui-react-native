@@ -1,11 +1,13 @@
 import * as React from 'react';
-import { Text } from 'react-native';
+import { requireNativeComponent } from 'react-native';
+
+export const FRNShimmer = requireNativeComponent('FRNShimmerView')
 
 export class Shimmer extends React.Component<{}> {
 
   public render() {
     return (
-      <Text>Hello World</Text>
+      <FRNShimmer />
     );
   }
 }
