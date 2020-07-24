@@ -2,6 +2,43 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Thu, 23 Jul 2020 21:28:55 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Change files",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "RTL/LTR for boxAtEnd",
+            "author": "safreibe@microsoft.com",
+            "commit": "6055b31476fd3d5377be702dd392a7e73c0ca724",
+            "package": "@fluentui-react-native/checkbox"
+          },
+          {
+            "comment": "Set Focus props during initial render to avoid shifting other components",
+            "author": "lehon@microsoft.com",
+            "commit": "d8664b93a7cae2135662bd689680cb8acb051a05",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Add text borderColor as a token for Link and Checkbox to allow theming",
+            "author": "lehon@microsoft.com",
+            "commit": "a150fd10eed9c18b5b134630a9f124e80df90212",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 02 Jul 2020 21:06:06 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.3.71",
       "version": "0.3.71",

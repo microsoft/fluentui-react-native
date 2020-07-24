@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/contextual-menu",
+  "entries": [
+    {
+      "date": "Thu, 23 Jul 2020 21:28:55 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add ContextualMent Component",
+            "author": "lehon@microsoft.com",
+            "commit": "aa6c82d20ce2e3ced34284896e3c1aa002468dbe",
+            "package": "@fluentui-react-native/contextual-menu"
+          }
+        ]
+      }
+    }
+  ]
+}
