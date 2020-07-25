@@ -19,6 +19,7 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
+  - MicrosoftFluentUIReactNativeShimmer (0.1.0)
   - QRCodeReader.swift (10.1.0)
   - RCTRequired (0.62.2)
   - RCTTypeSafety (0.62.2):
@@ -253,6 +254,7 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../../../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Folly (from `../../../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - MicrosoftFluentUIReactNativeShimmer (from `../../../packages/components/Shimmer/MicrosoftFluentUIReactNativeShimmer.podspec`)
   - QRCodeReader.swift
   - RCTRequired (from `../../../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../../../node_modules/react-native/Libraries/TypeSafety`)
@@ -298,6 +300,8 @@ EXTERNAL SOURCES:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/glog.podspec"
+  MicrosoftFluentUIReactNativeShimmer:
+    :path: "../../../packages/components/Shimmer/MicrosoftFluentUIReactNativeShimmer.podspec"
   RCTRequired:
     :path: "../../../node_modules/react-native/Libraries/RCTRequired"
   RCTTypeSafety:
@@ -350,6 +354,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
+  MicrosoftFluentUIReactNativeShimmer: 44ea936fda79620a5bed0b87aad6ece27c8468e5
   QRCodeReader.swift: 373a389fe9a22d513c879a32a6f647c58f4ef572
   RCTRequired: cec6a34b3ac8a9915c37e7e4ad3aa74726ce4035
   RCTTypeSafety: 93006131180074cffa227a1075802c89a49dd4ce
@@ -375,6 +380,6 @@ SPEC CHECKSUMS:
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
 
-PODFILE CHECKSUM: 0d1a14cb0cdb7ed5c30de302b0bc9bec0c76c253
+PODFILE CHECKSUM: 9c421a9352077e760a47efd770866ba4a1bd0fc5
 
 COCOAPODS: 1.9.1
