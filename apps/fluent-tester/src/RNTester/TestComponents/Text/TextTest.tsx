@@ -1,20 +1,28 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Separator } from '@fluentui-react-native/separator';
 import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';
-import { commonTestStyles as commonStyles } from '../Common/styles';
+import { Test, TestSection, PlatformStatus } from '../Test';
+
+const textSections: TestSection[] = [
+  {
+    name: 'Standard Usage',
+    component: StandardUsage
+  },
+  {
+    name: 'Customize Usage',
+    component: CustomizeUsage
+  }
+];
 
 export const TextTest: React.FunctionComponent<{}> = () => {
-  return (
-    <View>
-      <Text style={commonStyles.section}>Standard Usage</Text>
-      <Separator />
-      <StandardUsage />
+  const status: PlatformStatus = {
+    winStatus: 'beta',
+    iosStatus: 'experimental',
+    macosStatus: 'experimental',
+    androidStatus: 'experimental'
+  }
 
-      <Text style={commonStyles.section}>Customize Usage</Text>
-      <Separator />
-      <CustomizeUsage />
-    </View>
+  return (
+    <Test name="Text Test" description="No description." sections={textSections} status={status}></Test>
   );
 };
