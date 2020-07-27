@@ -4,7 +4,7 @@ import { Separator } from '@fluentui-react-native/separator';
 
 export type TestSection = {
   name: string;
-  testID: string;
+  testID?: string;
   component: React.FunctionComponent<{}>;
 };
 
