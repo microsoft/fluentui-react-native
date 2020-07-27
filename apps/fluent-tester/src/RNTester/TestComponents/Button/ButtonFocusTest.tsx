@@ -2,12 +2,12 @@ import { Button } from '@fluentui-react-native/button';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
-import { View, findNodeHandle, Text } from 'react-native';
-import { Separator } from '@fluentui-react-native/separator';
-import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
+import { findNodeHandle } from 'react-native';
+import { stackStyle } from '../Common/styles';
 import { BUTTON_TESTPAGE } from './consts';
+import { Test, TestSection, PlatformStatus } from '../Test';
 
-export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
+const basicButton: React.FunctionComponent<{}> = () => {
   const [state, setState] = React.useState({
     focused: false
   });
@@ -24,15 +24,30 @@ export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
   }, [state, setState]);
 
   return (
-    <View>
-      <Text style={commonStyles.section} testID={BUTTON_TESTPAGE}>
-        Basic Buttons
-      </Text>
-      <Separator />
-      <Stack style={stackStyle}>
-        <Button content={state.focused ? 'Focused' : 'Not Focused'} componentRef={buttonRef} accessibilityLabel="overridden button name" />
-        <Button content="Click to focus" onClick={onFocus} tooltip="button tooltip" />
-      </Stack>
-    </View>
+    <Stack style={stackStyle}>
+      <Button content={state.focused ? 'Focused' : 'Not Focused'} componentRef={buttonRef} accessibilityLabel="overridden button name" />
+      <Button content="Click to focus" onClick={onFocus} tooltip="button tooltip" />
+    </Stack>
+  );
+}
+
+const buttonSections: TestSection[] = [
+  {
+    name: 'Basic Button',
+    testID: BUTTON_TESTPAGE,
+    component: basicButton
+  }
+];
+
+export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
+  const status: PlatformStatus = {
+    winStatus: 'beta',
+    iosStatus: 'experimental',
+    macosStatus: 'experimental',
+    androidStatus: 'experimental'
+  }
+
+  return (
+    <Test name="Button Test" description="No description." sections={buttonSections} status={status}></Test>
   );
 };

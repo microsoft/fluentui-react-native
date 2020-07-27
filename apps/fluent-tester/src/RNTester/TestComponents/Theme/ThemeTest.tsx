@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { FlatList, View, ViewStyle, TextStyle, StyleSheet } from 'react-native';
+import { FlatList, View, ViewStyle, TextStyle, Text, StyleSheet } from 'react-native';
 import { getHostSettingsWin32, ThemeProvider, useTheme, IThemeDefinition, ThemingModuleHelper } from '@uifabricshared/theming-react-native';
 import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
 import { commonTestStyles } from '../Common/styles';
 import { Button, PrimaryButton, StealthButton } from '@fluentui-react-native/button';
 import { Separator } from '@fluentui-react-native/separator';
-import { Text } from '@fluentui-react-native/text';
 import { RadioGroup, RadioButton } from '@fluentui-react-native/radio-group';
 import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 import { customRegistry } from './CustomThemes';
