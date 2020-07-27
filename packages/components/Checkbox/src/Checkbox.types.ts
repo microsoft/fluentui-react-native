@@ -77,6 +77,7 @@ export interface ICheckboxTokens extends ITextTokens, IForegroundColorTokens, IB
   checkboxBorderColor?: string;
   checkmarkColor?: string;
   checkmarkVisibility?: number;
+  textBorderColor?: string;
 }
 
 export interface ICheckboxSlotProps {

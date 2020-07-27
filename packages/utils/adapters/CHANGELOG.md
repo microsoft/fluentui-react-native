@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/adapters
 
-This log was last generated on Thu, 02 Jul 2020 23:50:34 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Jul 2020 21:28:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.34
+
+Thu, 23 Jul 2020 21:28:55 GMT
+
+### Patches
+
+- move rnw version to 0.62 (jasonmo@microsoft.com)
+- bump rnw version to 0.62.1 (jasonmo@microsoft.com)
+- bump adapters (taamireh@microsoft.com)
 
 ## 0.3.32
 
