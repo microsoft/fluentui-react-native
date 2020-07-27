@@ -55,8 +55,8 @@ export const Test = (props: TestProps) => {
         const TestComponent = section.component;
         return (
           <View key={index}>
-            <Text key={index} style={styles.section} testID={section.testID}>{section.name}</Text>
-            <Separator key={index} />
+            <Text style={styles.section} testID={section.testID}>{section.name}</Text>
+            <Separator />
             <TestComponent />
           </View>
         );
