@@ -1,23 +1,30 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Separator } from '@fluentui-react-native/separator';
 import { ButtonFocusTest } from './ButtonFocusTest';
 import { ButtonIconTest } from './ButtonIconTest';
-import { commonTestStyles as commonStyles } from '../Common/styles';
 import { BUTTON_TESTPAGE } from './consts';
+import { Test, TestSection, PlatformStatus } from '../Test';
+
+const buttonSections: TestSection[] = [
+  {
+    name: 'Basic Button',
+    testID: BUTTON_TESTPAGE,
+    component: ButtonFocusTest
+  },
+  {
+    name: 'Icon Button',
+    component: ButtonIconTest
+  },
+];
 
 export const ButtonTest: React.FunctionComponent<{}> = () => {
-  return (
-    <View>
-      <Text style={commonStyles.section} testID={BUTTON_TESTPAGE}>
-        Button Focus
-      </Text>
-      <Separator />
-      <ButtonFocusTest />
+  const status: PlatformStatus = {
+    winStatus: 'beta',
+    iosStatus: 'experimental',
+    macosStatus: 'experimental',
+    androidStatus: 'experimental'
+  }
 
-      <Text style={commonStyles.section}>Button Icon</Text>
-      <Separator />
-      <ButtonIconTest />
-    </View>
+  return (
+    <Test name="Button Test" description="No description." sections={buttonSections} status={status}></Test>
   );
 };
