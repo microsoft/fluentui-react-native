@@ -1,4 +1,4 @@
-import { ButtonFocusTest, HOMEPAGE_BUTTON_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Button';
+import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Checkbox';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/ContextualMenu';
@@ -17,7 +17,7 @@ import { TestDescription } from '@fluentui-react-native/tester/src/RNTester/Test
 export const windowsTests: TestDescription[] = [
   {
     name: 'Button Test',
-    component: ButtonFocusTest,
+    component: ButtonTest,
     testPage: HOMEPAGE_BUTTON_BUTTON
   },
   {

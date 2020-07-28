@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Separator } from '@fluentui-react-native/separator';
-import { Text } from '@fluentui-react-native/text';
+import { Text } from 'react-native';
 import { commonTestStyles } from '../Common/styles';
 import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';

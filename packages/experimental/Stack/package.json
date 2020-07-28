@@ -19,13 +19,13 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": ">=0.3.32 <1.0.0",
+    "@fluentui-react-native/adapters": ">=0.3.34 <1.0.0",
     "@fluentui-react-native/experimental-framework": "0.1.1",
-    "@fluentui-react-native/tokens": ">=0.4.67 <1.0.0"
+    "@fluentui-react-native/tokens": ">=0.4.68 <1.0.0"
   },
   "devDependencies": {
     "@types/react-native": "^0.62.0",
-    "@fluentui-react-native/text": ">=0.5.69 <1.0.0",
+    "@fluentui-react-native/text": ">=0.5.71 <1.0.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "react-native": "0.62.2"

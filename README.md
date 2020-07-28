@@ -17,8 +17,9 @@ If you have an existing React Native project, it's easy to begin using FluentUI 
 
 ### Prerequisites
 
-- [Standard React Native dependencies](https://reactnative.dev/docs/environment-setup)
+- [Standard React Native dependencies](https://microsoft.github.io/react-native-windows/docs/rnw-dependencies#manual-setup)
 - [Node.js](https://nodejs.org/en/download/)
+- [Setting up your React Native Development Environment](https://reactnative.dev/docs/environment-setup)
 
 ### Create New React Native project (if needed)
 

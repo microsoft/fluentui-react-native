@@ -2,6 +2,29 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Thu, 23 Jul 2020 21:28:55 GMT",
+      "tag": "@fluentui/react-native_v0.15.75",
+      "version": "0.15.75",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Change files\"",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@fluentui/react-native"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Add new component ContextualMenu to FURN",
+            "author": "lehon@microsoft.com",
+            "commit": "aa6c82d20ce2e3ced34284896e3c1aa002468dbe",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 02 Jul 2020 21:06:06 GMT",
       "tag": "@fluentui/react-native_v0.15.72",
       "version": "0.15.72",

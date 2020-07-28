@@ -1,8 +1,21 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Wed, 01 Jul 2020 19:54:46 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Jul 2020 21:28:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.0
+
+Thu, 23 Jul 2020 21:28:55 GMT
+
+### Minor changes
+
+- RTL/LTR for boxAtEnd (safreibe@microsoft.com)
+- Set Focus props during initial render to avoid shifting other components (lehon@microsoft.com)
+
+### Patches
+
+- Add text borderColor as a token for Link and Checkbox to allow theming (lehon@microsoft.com)
 
 ## 0.3.71
 

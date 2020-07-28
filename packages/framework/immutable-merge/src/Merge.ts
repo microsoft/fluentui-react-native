@@ -92,8 +92,9 @@ function resolveForObject(option: RecursionHandler | RecursionOption | MergeOpti
 }
 
 /**
- * Figure out the handler for this property.  It will either be a function, a config object to pass to a recursive call, or undefined
- * in which case this key will be left as-is
+ * Figure out the handler for this property.
+ * It will either be a function, a config object to pass to a recursive call, or undefined
+ * in the undefined case, this key will be left as-is
  */
 function getHandlerForPropertyOfType(
   config: MergeOptions,
