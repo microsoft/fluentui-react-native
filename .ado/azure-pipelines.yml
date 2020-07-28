@@ -21,8 +21,12 @@ jobs:
       - template: templates/setup-repo.yml
 
       - script: |
-          yarn full-build --verbose
-        displayName: 'yarn full-build --verbose'
+          yarn test
+        displayName: 'yarn test'
+
+      - script: |
+          yarn bundle
+        displayName: 'yarn bundle'
 
       - script: |
           yarn checkchange
