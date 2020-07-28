@@ -1,43 +1,31 @@
-import { IButtonType } from '../Button.types';
-import { IComposeSettings } from '@uifabricshared/foundation-compose';
+import { ButtonTokens } from '../Button.types';
+import { TokenSettings } from '@fluentui-react-native/experimental-framework';
 
-export const settings: IComposeSettings<IButtonType> = [
-  {
-    tokens: {
-      backgroundColor: 'primaryButtonBackground',
-      color: 'primaryButtonText',
-      borderColor: 'primaryButtonBorder'
+export const settings: TokenSettings<ButtonTokens>[] = [
+  t => ({
+    backgroundColor: t.colors.primaryButtonBackground,
+    color: t.colors.primaryButtonText,
+    borderColor: t.colors.primaryButtonBorder,
+    disabled: {
+      backgroundColor: t.colors.primaryButtonBackgroundDisabled,
+      color: t.colors.primaryButtonTextDisabled,
+      borderColor: t.colors.primaryButtonBackgroundDisabled
     },
-    _overrides: {
-      disabled: {
-        tokens: {
-          backgroundColor: 'primaryButtonBackgroundDisabled',
-          color: 'primaryButtonTextDisabled',
-          borderColor: 'primaryButtonBackgroundDisabled'
-        }
-      },
-      hovered: {
-        tokens: {
-          backgroundColor: 'primaryButtonBackgroundHovered',
-          color: 'primaryButtonTextHovered',
-          borderColor: 'primaryButtonBorderHovered'
-        }
-      },
-      pressed: {
-        tokens: {
-          backgroundColor: 'primaryButtonBackgroundPressed',
-          color: 'primaryButtonTextPressed',
-          borderColor: 'primaryButtonBorderPressed'
-        }
-      },
-      focused: {
-        tokens: {
-          borderColor: 'primaryButtonBorderFocused',
-          backgroundColor: 'primaryButtonBackgroundHovered',
-          color: 'primaryButtonTextHovered'
-        }
-      }
+    hovered: {
+      backgroundColor: t.colors.primaryButtonBackgroundHovered,
+      color: t.colors.primaryButtonTextHovered,
+      borderColor: t.colors.primaryButtonBorderHovered as string
+    },
+    pressed: {
+      backgroundColor: t.colors.primaryButtonBackgroundPressed,
+      color: t.colors.primaryButtonTextPressed,
+      borderColor: t.colors.primaryButtonBorderPressed as string
+    },
+    focused: {
+      borderColor: t.colors.primaryButtonBorderFocused,
+      backgroundColor: t.colors.primaryButtonBackgroundHovered,
+      color: t.colors.primaryButtonTextHovered
     }
-  },
+  }),
   'PrimaryButton'
 ];

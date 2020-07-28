@@ -1,11 +1,11 @@
 import { ViewProps } from 'react-native';
 
-export const stackItemName = 'RNFStackItem';
+export const stackItemName = 'Stack.StackItem';
 
 /**
  * Stack item props
  */
-export interface IStackItemTokens extends ViewProps {
+export interface StackItemTokens {
   /**
    * Defines the margin to be applied to the StackItem relative to its container.
    */
@@ -50,12 +50,11 @@ export interface IStackItemTokens extends ViewProps {
   order?: number | string;
 }
 
-export type IStackItemProps = IStackItemTokens & ViewProps;
+export type StackItemProps = StackItemTokens & ViewProps;
+export type StackItemSlotProps = { root: ViewProps };
 
-export interface IStackItemType {
-  props: IStackItemProps;
-  slotProps: {
-    root: ViewProps;
-  };
-  tokens: IStackItemTokens;
+export interface StackItemType {
+  props: StackItemProps;
+  slotProps: StackItemSlotProps;
+  tokens: StackItemTokens;
 }

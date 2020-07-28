@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Tue, 28 Jul 2020 18:21:12 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "rename some token types and update Text",
+            "author": "jasonmo@microsoft.com",
+            "commit": "585007a447ba6dec0ae70be693879bbf7125c71b",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Jul 2020 21:28:55 GMT",
       "tag": "@fluentui-react-native/tokens_v0.4.68",
       "version": "0.4.68",
