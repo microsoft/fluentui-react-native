@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "rename some token types and update Text",
-  "packageName": "@fluentui-react-native/button",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-07-13T23:44:46.145Z"
-}

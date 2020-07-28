@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "add experimental framework packages",
-  "packageName": "@fluentui-react-native/composition",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-07-13T23:46:06.942Z"
-}

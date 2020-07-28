@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Tue, 28 Jul 2020 18:21:12 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix merge error with contextual menu",
+            "author": "jasonmo@microsoft.com",
+            "commit": "585007a447ba6dec0ae70be693879bbf7125c71b",
+            "package": "@fluentui-react-native/contextual-menu"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Jul 2020 21:28:55 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.2.0",
       "version": "0.2.0",
