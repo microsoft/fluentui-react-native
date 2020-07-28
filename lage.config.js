@@ -2,8 +2,8 @@ module.exports = {
   pipeline: {
     ['build-tools']: ['^build-tools'],
     build: ['build-tools', '^build'],
+    buildci: ['build', 'test', 'bundle'],
     bundle: ['build-tools'],
-    ['full-build']: ['build', 'test', 'bundle'],
     lint: ['build-tools'],
     test: ['build-tools', 'lint', 'build']
   }
