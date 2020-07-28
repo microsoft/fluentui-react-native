@@ -101,7 +101,7 @@ For running tasks the repo has switched to using [Lage](https://github.com/micro
 - `yarn build` - does the typescript build for all packages in the repository
 - `yarn test` - will build, lint, and run any applicable tests on all packages in the repo
 - `yarn bundle` - will bundle all packages in the repo
-- `yarn full-build` - will build, lint, run tests, and bundle everything in the repo
+- `yarn buildci` - will build, lint, run tests, and bundle everything in the repo
 
 Note that Lage uses caching to avoid redundant steps and has very minimal output. To avoid caching add `--no-cache` as a command line argument. Similarly adding `--verbose` will give more detailed output.
 
