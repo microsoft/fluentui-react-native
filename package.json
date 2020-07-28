@@ -24,6 +24,7 @@
     "change": "beachball change",
     "check-for-changed-files": "cd scripts && yarn fluentui-scripts check-for-modified-files",
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
+    "full-build": "lage full-build",
     "prettier": "cd scripts && yarn prettier",
     "publish:beachball": "beachball publish --bump-deps -m\"📦 applying package updates ***NO_CI***\"",
     "bump-versions": "beachball bump",
