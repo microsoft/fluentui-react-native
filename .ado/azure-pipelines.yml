@@ -10,7 +10,7 @@ jobs:
   - job: BuildAndBundle
     displayName: Build, test, and bundle JavaScript
     pool:
-      vmImage: "ubuntu-latest"
+      vmImage: 'ubuntu-latest'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -22,21 +22,21 @@ jobs:
 
       - script: |
           yarn full-build
-        displayName: "yarn full-build"
+        displayName: 'yarn full-build --verbose'
 
       - script: |
           yarn checkchange
-        displayName: "check change"
+        displayName: 'check change'
 
       - script: |
           yarn check-for-changed-files
-        displayName: "verify API and Ensure Changed Files"
+        displayName: 'verify API and Ensure Changed Files'
 
   # Windows bundling and end to end testing
   - job: WindowsPR
     displayName: Windows PR
     pool:
-      vmImage: "windows-2019"
+      vmImage: 'windows-2019'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -56,7 +56,7 @@ jobs:
   - job: Win32PR
     displayName: Win32 PR
     pool:
-      vmImage: "windows-2019"
+      vmImage: 'windows-2019'
     timeoutInMinutes: 60
     cancelTimeoutInMinutes: 5
 
@@ -73,31 +73,31 @@ jobs:
   - job: ApplePR
     displayName: Apple PR
     pool:
-      vmImage: "macos-10.15"
-      demands: ["xcode", "sh", "npm"]
+      vmImage: 'macos-10.15'
+      demands: ['xcode', 'sh', 'npm']
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
     strategy:
       maxParallel: 4
       matrix:
         ios:
-          relative_directory: "ios"
-          xcode_sdx: "ios"
-          xcode_configuration: "Debug"
-          xcode_workspacePath: "apps/ios/src/FluentUITester.xcworkspace"
-          xcode_scheme: "FluentUITester"
-          xcode_actions: "build"
+          relative_directory: 'ios'
+          xcode_sdx: 'ios'
+          xcode_configuration: 'Debug'
+          xcode_workspacePath: 'apps/ios/src/FluentUITester.xcworkspace'
+          xcode_scheme: 'FluentUITester'
+          xcode_actions: 'build'
           xcode_useXcpretty: true
-          xcode_destination: "platform=iOS Simulator,OS=latest,name=iPhone 11"
+          xcode_destination: 'platform=iOS Simulator,OS=latest,name=iPhone 11'
         macos:
-          relative_directory: "macos"
-          xcode_sdx: "macosx"
-          xcode_configuration: "Debug"
-          xcode_workspacePath: "apps/macos/src/FluentUITester.xcworkspace"
-          xcode_scheme: "FluentUITester-macOS"
-          xcode_actions: "build"
+          relative_directory: 'macos'
+          xcode_sdx: 'macosx'
+          xcode_configuration: 'Debug'
+          xcode_workspacePath: 'apps/macos/src/FluentUITester.xcworkspace'
+          xcode_scheme: 'FluentUITester-macOS'
+          xcode_actions: 'build'
           xcode_useXcpretty: true
-          xcode_destination: "platform=macOS,arch=x86_64"
+          xcode_destination: 'platform=macOS,arch=x86_64'
 
     steps:
       - checkout: self
@@ -106,18 +106,18 @@ jobs:
       # Clean Derived Data
       - script: |
           rm -rf $(Build.Repository.LocalPath)/DerivedData
-        displayName: "Clean DerivedData"
+        displayName: 'Clean DerivedData'
 
       - script: |
           sudo gem install cocoapods
-        displayName: "Install Cocoapods Environment"
+        displayName: 'Install Cocoapods Environment'
 
       - template: templates/setup-repo-min-build.yml
 
       - script: |
           yarn bundle
         workingDirectory: apps/$(relative_directory)
-        displayName: "yarn bundle $(relative_directory)"
+        displayName: 'yarn bundle $(relative_directory)'
 
       # Select proper XCode version
       - template: templates/apple-xcode-select.yml
