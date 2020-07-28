@@ -162,8 +162,9 @@ const SwatchList: React.FunctionComponent = () => {
   );
 };
 
+const [theme, setTheme] = React.useState('Default');
+
 const configureTheme: React.FunctionComponent<{}> = () => {
-  const themedStyles = getThemedStyles(useTheme());
   const onAppChange = React.useCallback((app: string) => {
     brand = app;
     // Invalidate the DAG children of the shimmed brand colors
@@ -171,81 +172,31 @@ const configureTheme: React.FunctionComponent<{}> = () => {
     customRegistry.setTheme(fakeBrandTheme, 'WhiteColors', 'RealWhiteColors');
   }, []);
 
-  const [theme, setTheme] = React.useState('Default');
   return (
     <ThemeProvider theme="Default">
-      <View>
-        <Text style={themedStyles.extraLargeStandardEmphasis} testID={THEME_TESTPAGE}>
-          Configure Theme
-      </Text>
-        <Separator />
-        <View style={styles.pickerContainer}>
-          <RadioGroup label="Pick App Colors" onChange={onAppChange} defaultSelectedKey="Office">
-            <RadioButton buttonKey="Office" content="Office" />
-            {Object.keys(brandColors).map((app: string) => (
-              <RadioButton key={app} buttonKey={app} content={app} />
-            ))}
-          </RadioGroup>
-          <Separator vertical />
-          <RadioGroup label="Pick Theme" onChange={setTheme} defaultSelectedKey="Default">
-            <RadioButton buttonKey="Default" content="Default (GrayB / TaskPane)" />
-            <RadioButton buttonKey="Caterpillar" content="Caterpillar (Custom JS Theme)" />
-            <RadioButton buttonKey="WhiteColors" content="WhiteColors (Platform Theme)" />
-          </RadioGroup>
-        </View>
-        <Text style={themedStyles.extraLargeStandardEmphasis}>{theme + ' Theme'}</Text>
-        <Separator />
-        <ThemeProvider theme={theme}>
-          <Panel />
-        </ThemeProvider>
-        <Text style={themedStyles.extraLargeStandardEmphasis}>Host-specific Theme Settings</Text>
-        <Separator />
-        <SwatchList />
+      <View style={styles.pickerContainer}>
+        <RadioGroup label="Pick App Colors" onChange={onAppChange} defaultSelectedKey="Office">
+          <RadioButton buttonKey="Office" content="Office" />
+          {Object.keys(brandColors).map((app: string) => (
+            <RadioButton key={app} buttonKey={app} content={app} />
+          ))}
+        </RadioGroup>
+        <Separator vertical />
+        <RadioGroup label="Pick Theme" onChange={setTheme} defaultSelectedKey="Default">
+          <RadioButton buttonKey="Default" content="Default (GrayB / TaskPane)" />
+          <RadioButton buttonKey="Caterpillar" content="Caterpillar (Custom JS Theme)" />
+          <RadioButton buttonKey="WhiteColors" content="WhiteColors (Platform Theme)" />
+        </RadioGroup>
       </View>
     </ThemeProvider>
   );
 };
 
-const defaultTheme: React.FunctionComponent<{}> = () => {
-  const themedStyles = getThemedStyles(useTheme());
-  const onAppChange = React.useCallback((app: string) => {
-    brand = app;
-    // Invalidate the DAG children of the shimmed brand colors
-    customRegistry.setTheme(fakeBrandTheme, 'Default');
-    customRegistry.setTheme(fakeBrandTheme, 'WhiteColors', 'RealWhiteColors');
-  }, []);
+const selectedTheme: React.FunctionComponent<{}> = () => {
 
-  const [theme, setTheme] = React.useState('Default');
   return (
-    <ThemeProvider theme="Default">
-      <View>
-        <Text style={themedStyles.extraLargeStandardEmphasis} testID={THEME_TESTPAGE}>
-          Configure Theme
-      </Text>
-        <Separator />
-        <View style={styles.pickerContainer}>
-          <RadioGroup label="Pick App Colors" onChange={onAppChange} defaultSelectedKey="Office">
-            <RadioButton buttonKey="Office" content="Office" />
-            {Object.keys(brandColors).map((app: string) => (
-              <RadioButton key={app} buttonKey={app} content={app} />
-            ))}
-          </RadioGroup>
-          <Separator vertical />
-          <RadioGroup label="Pick Theme" onChange={setTheme} defaultSelectedKey="Default">
-            <RadioButton buttonKey="Default" content="Default (GrayB / TaskPane)" />
-            <RadioButton buttonKey="Caterpillar" content="Caterpillar (Custom JS Theme)" />
-            <RadioButton buttonKey="WhiteColors" content="WhiteColors (Platform Theme)" />
-          </RadioGroup>
-        </View>
-        <Text style={themedStyles.extraLargeStandardEmphasis}>{theme + ' Theme'}</Text>
-        <Separator />
-        <ThemeProvider theme={theme}>
-          <Panel />
-        </ThemeProvider>
-        <Text style={themedStyles.extraLargeStandardEmphasis}>Host-specific Theme Settings</Text>
-        <Separator />
-        <SwatchList />
-      </View>
+    <ThemeProvider theme={theme}>
+      <Panel />
     </ThemeProvider>
   );
 };
@@ -266,8 +217,8 @@ const themeSections: TestSection[] = [
     component: configureTheme
   },
   {
-    name: 'Default Theme',
-    component: defaultTheme
+    name: theme + ' Theme',
+    component: selectedTheme
   },
   {
     name: 'Host-Specific Theme Settings',
