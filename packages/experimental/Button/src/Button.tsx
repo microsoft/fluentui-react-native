@@ -1,19 +1,27 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Image, View } from 'react-native';
-import { IButtonSlotProps, IButtonState, IButtonProps, IButtonRenderData, buttonName, IButtonType } from './Button.types';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { Text } from '@fluentui-react-native/text';
-import { settings } from './Button.settings';
-import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
+import { Image, View, ViewProps } from 'react-native';
+import { ButtonProps, buttonName, ButtonType } from './Button.types';
+import { Text } from '@fluentui-react-native/experimental-text';
+import { stylingSettings } from './Button.styling';
 import { filterViewProps, filterImageProps } from '@fluentui-react-native/adapters';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/experimental-framework';
 
-export const Button = compose<IButtonType>({
+export const Button = compose<ButtonType>({
   displayName: buttonName,
-  usePrepareProps: (userProps: IButtonProps, useStyling: IUseComposeStyling<IButtonType>) => {
+  ...stylingSettings,
+  slots: {
+    root: View,
+    stack: View,
+    icon: Image,
+    content: Text
+  },
+  filters: {
+    stack: filterViewProps,
+    icon: filterImageProps
+  },
+  render: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
     const {
       icon,
       content,
@@ -23,71 +31,53 @@ export const Button = compose<IButtonType>({
       testID,
       ...rest
     } = userProps;
+
     // attach the pressable state handlers
     const pressable = useAsPressable({ ...rest, onPress: onClick });
     const onKeyUp = React.useCallback(
       e => {
         if (onClick && (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ')) {
           onClick();
-          e.stopPropagation()
+          e.stopPropagation();
         }
       },
       [onClick]
     );
-    // set up state
-    const state: IButtonState = {
-      info: {
-        ...pressable.state,
-        disabled: userProps.disabled,
-        content: !!content,
-        icon: !!icon
-      }
-    };
 
     const buttonRef = useViewCommandFocus(userProps.componentRef);
-    // grab the styling information, referencing the state as well as the props
-    const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
-    // create the merged slot props
-    const slotProps = mergeSettings<IButtonSlotProps>(styleProps, {
-      root: {
-        ...pressable.props,
-        ref: buttonRef,
-        onAccessibilityTap: onAccessibilityTap,
-        accessibilityLabel: accessibilityLabel,
-        onKeyUp: onKeyUp
-      },
-      content: { children: content, testID },
-      icon: { source: icon }
-    });
+    // grab the styled slots
+    const Slots = useSlots(userProps, layer => pressable.state[layer] || userProps[layer]);
 
-    return { slotProps, state };
-  },
-  settings,
-  render: (Slots: ISlots<IButtonSlotProps>, renderData: IButtonRenderData, ...children: React.ReactNode[]) => {
-    const info = renderData.state!.info;
+    // now return the handler for finishing render
+    return (final: ButtonProps, ...children: React.ReactNode[]) => {
+      const mergedProps = mergeProps(
+        {
+          ref: buttonRef,
+          accessible: true,
+          acceptsKeyboardFocus: true,
+          accessibilityRole: 'button',
+          onAccessibilityTap,
+          accessibilityLabel,
+          onKeyUp
+        } as ViewProps,
+        pressable.props,
+        final
+      );
 
-    // We shouldn't have to specify the source prop on Slots.icon, here, but we need another drop from @uifabricshared
-    return (
-      <Slots.root>
-        <Slots.stack>
-          {info.icon && <Slots.icon source={renderData.slotProps!.icon.source} />}
-          {info.content && <Slots.content />}
-          {children}
-        </Slots.stack>
-      </Slots.root>
-    );
-  },
-  slots: {
-    root: View,
-    stack: { slotType: View, filter: filterViewProps },
-    icon: { slotType: Image as React.ComponentType<object>, filter: filterImageProps },
-    content: Text
-  },
-  styles: {
-    root: [backgroundColorTokens, borderTokens],
-    stack: [],
-    icon: [foregroundColorTokens, [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'overlayColor' }]],
-    content: [textTokens, foregroundColorTokens]
+      return (
+        <Slots.root {...mergedProps}>
+          <Slots.stack>
+            {icon && <Slots.icon key="icon" source={{ uri: icon }} />}
+            {content && (
+              <Slots.content key="content" testID={testID}>
+                {content}
+              </Slots.content>
+            )}
+            {children}
+          </Slots.stack>
+        </Slots.root>
+      );
+    };
   }
 });
 
