@@ -29,8 +29,8 @@ steps:
   - template: templates/yarn-install.yml
 
   - script: |
-      yarn build
-    displayName: "yarn build"
+      yarn test
+    displayName: "yarn test"
 
   - script: |
       yarn publish:beachball -- -b origin/master -n $(npmAuth) --access public -y
