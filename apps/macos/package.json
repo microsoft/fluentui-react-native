@@ -13,6 +13,7 @@
     "code-style": "fluentui-scripts code-style",
     "lint": "fluentui-scripts eslint",
     "start": "react-native start",
+    "test": "fluentui-scripts jest",
     "macos": "react-native run-macos --scheme ReactTestApp --project-path src"
   },
   "dependencies": {

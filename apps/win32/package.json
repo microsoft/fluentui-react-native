@@ -16,6 +16,7 @@
     "code-style": "fluentui-scripts code-style",
     "lint": "fluentui-scripts eslint",
     "start": "fluentui-scripts metro --server --cli --port 8081",
+    "test": "fluentui-scripts jest",
     "bundle": "fluentui-scripts metro --platform win32 --cli",
     "bundle-dev": "fluentui-scripts metro -platform win32 --dev --cli",
     "run-win32": "rex-win32 --bundle index --component FluentTester --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",

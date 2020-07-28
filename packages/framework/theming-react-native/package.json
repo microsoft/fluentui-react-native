@@ -18,6 +18,7 @@
     "lint": "fluentui-scripts eslint",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
+    "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
     "verify-api": "fluentui-scripts verify-api-extractor",
     "update-api": "fluentui-scripts update-api-extractor"
