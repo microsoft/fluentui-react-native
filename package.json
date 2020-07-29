@@ -19,7 +19,7 @@
     "clean-all": "node ./scripts/clean-all.js",
     "docs": "yarn workspace fluent-rn-website start",
     "bundle": "lage bundle",
-    "clean": "lerna run clean --stream",
+    "clean": "lage clean",
     "change": "beachball change",
     "check-for-changed-files": "cd scripts && yarn fluentui-scripts check-for-modified-files",
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
@@ -29,13 +29,12 @@
     "postinstall": "node ./scripts/postinstall.js",
     "publish:beachball": "beachball publish --bump-deps -m\"📦 applying package updates ***NO_CI***\"",
     "test": "lage test",
-    "verify-api": "lerna run verify-api",
-    "update-api": "lerna run update-api"
+    "verify-api": "lage verify-api",
+    "update-api": "lage update-api"
   },
   "devDependencies": {
     "beachball": "^1.30.2",
     "lage": "^0.16.1",
-    "lerna": "^3.16.4",
     "react-dom": "^16.13.1"
   },
   "workspaces": {
