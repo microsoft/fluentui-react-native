@@ -3,14 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint .",
-    "windows": "react-native run-windows",
     "bundle": "fluentui-scripts metro --cli",
     "e2etest": "rimraf reports/* && wdio",
+    "generate-report": "allure generate allure-results --clean && allure open",
+    "lint": "eslint .",
     "report": "allure generate allure-results --clean",
-    "generate-report": "allure generate allure-results --clean && allure open"
+    "start": "react-native start",
+    "test": "jest",
+    "windows": "react-native run-windows"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.0.1",

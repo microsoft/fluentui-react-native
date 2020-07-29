@@ -7,8 +7,8 @@
   "typings": "lib/index.d.ts",
   "private": true,
   "scripts": {
-    "build": "just-scripts build",
-    "clean": "just-scripts clean"
+    "build-tools": "just-scripts build",
+    "lint": "fluentui-scripts eslint"
   },
   "dependencies": {
     "babel-jest": "^24.9.0",

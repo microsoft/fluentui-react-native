@@ -98,7 +98,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  beforeSession: function (config, capabilities, specs) {
+  beforeSession: function (/* config, capabilities, specs */) {
     // Delete old screenshots and create empty directory
     if (fs.existsSync('./errorShots')) {
       rimraf.sync('./errorShots');
@@ -116,7 +116,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  before: function() {
+  before: function () {
     // not needed for Cucumber
     require('ts-node').register({files: true});
     browser.maximizeWindow();
@@ -154,7 +154,7 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  afterTest: function (test, context) {
+  afterTest: function (test /*, context*/) {
     // if test passed, ignore, else take and save screenshot.
     if (test.passed) {
       return;
@@ -210,7 +210,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function(exitCode, config, capabilities, results) {
+  onComplete: function (/* exitCode, config, capabilities, results */) {
     console.log('<<< TESTING FINISHED >>>');
   },
   /**

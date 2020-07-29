@@ -1,0 +1,8 @@
+{
+  "type": "none",
+  "comment": "switch to using Lage for build sequencing",
+  "packageName": "@fluentui-react-native/callout",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "none",
+  "date": "2020-07-28T19:53:23.655Z"
+}

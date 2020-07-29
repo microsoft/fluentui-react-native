@@ -16,6 +16,7 @@
     "code-style": "fluentui-scripts code-style",
     "lint": "fluentui-scripts eslint",
     "start": "fluentui-scripts metro --server",
+    "test": "fluentui-scripts jest",
     "bundle": "fluentui-scripts bundle"
   },
   "dependencies": {

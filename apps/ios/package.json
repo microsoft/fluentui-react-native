@@ -12,6 +12,7 @@
     "code-style": "fluentui-scripts code-style",
     "lint": "fluentui-scripts eslint",
     "start": "react-native start",
+    "test": "fluentui-scripts jest",
     "bundle": "fluentui-scripts metro --cli",
     "bundle-dev": "fluentui-scripts metro --dev --cli",
     "ios": "react-native run-ios --scheme ReactTestApp --project-path src"

@@ -19,6 +19,7 @@
     "bundle": "fluentui-scripts webpack",
     "start:tester": "react-native start --projectRoot ./src",
     "start-test": "fluentui-scripts jest-watch",
+    "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
     "verify-api": "fluentui-scripts verify-api-extractor",
     "update-api": "fluentui-scripts update-api-extractor"
