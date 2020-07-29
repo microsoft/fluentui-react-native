@@ -92,7 +92,7 @@ Our FluentUI framework documentation is found in this repository alongside the i
 
 ## Developing in the repo
 
-### Yarn + Lerna
+### Yarn + Lage
 
 This repo is set up as a monorepo using Yarn workspaces. To install yarn, please follow instructions in the [Yarn documentation](https://classic.yarnpkg.com/en/docs/install/).
 
