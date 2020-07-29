@@ -3,7 +3,7 @@ import { ViewProps, ImageProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
 import { IPressableProps } from '@fluentui-react-native/pressable';
-import { ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 
 export const contextualMenuItemName = 'ContextualMenuItem';
@@ -18,7 +18,7 @@ export interface ContextualMenuItemState extends IPressableState {
   icon?: boolean;
 }
 
-export interface ContextualMenuItemTokens extends ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens { }
+export interface ContextualMenuItemTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {}
 
 export interface ContextualMenuItemProps extends Omit<IPressableProps, 'onPress'> {
   /*
@@ -48,8 +48,8 @@ export interface ContextualMenuItemProps extends Omit<IPressableProps, 'onPress'
    * Title (tooltip) text displayed when hovering over an item.
    */
   title?: string;
-  dismissMenu?: (e?: any, dismissAll?: boolean) => void;
 
+  dismissMenu?: (e?: any, dismissAll?: boolean) => void;
 }
 
 export interface ContextualMenuItemSlotProps {

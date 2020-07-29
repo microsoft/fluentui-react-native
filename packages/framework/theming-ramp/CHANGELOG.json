@@ -2,6 +2,36 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Tue, 28 Jul 2020 18:21:12 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.9.68",
+      "version": "0.9.68",
+      "comments": {
+        "patch": [
+          {
+            "comment": "rename some token types and update Text",
+            "author": "jasonmo@microsoft.com",
+            "commit": "585007a447ba6dec0ae70be693879bbf7125c71b",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 23 Jul 2020 21:28:55 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.9.67",
+      "version": "0.9.67",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Change files\"",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 02 Jul 2020 21:06:06 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.9.65",
       "version": "0.9.65",

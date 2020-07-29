@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add text borderColor as a token for Link and Checkbox to allow theming",
-  "packageName": "@fluentui-react-native/checkbox",
-  "email": "lehon@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-07-16T06:24:43.461Z"
-}

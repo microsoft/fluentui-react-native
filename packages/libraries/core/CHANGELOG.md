@@ -1,8 +1,16 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Wed, 17 Jun 2020 05:00:56 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Jul 2020 21:28:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.75
+
+Thu, 23 Jul 2020 21:28:55 GMT
+
+### Patches
+
+- Add new component ContextualMenu to FURN (lehon@microsoft.com)
 
 ## 0.15.62
 

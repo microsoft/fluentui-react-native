@@ -2,6 +2,52 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Tue, 28 Jul 2020 18:21:12 GMT",
+      "tag": "@fluentui-react-native/link_v0.7.1",
+      "version": "0.7.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "rename some token types and update Text",
+            "author": "jasonmo@microsoft.com",
+            "commit": "585007a447ba6dec0ae70be693879bbf7125c71b",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 23 Jul 2020 21:28:55 GMT",
+      "tag": "@fluentui-react-native/link_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Change files\"",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@fluentui-react-native/link"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Add text borderColor as a token for Link and Checkbox to allow theming",
+            "author": "lehon@microsoft.com",
+            "commit": "a150fd10eed9c18b5b134630a9f124e80df90212",
+            "package": "@fluentui-react-native/link"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Set Focus props during initial render to avoid shifting other components",
+            "author": "lehon@microsoft.com",
+            "commit": "d8664b93a7cae2135662bd689680cb8acb051a05",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 02 Jul 2020 21:06:06 GMT",
       "tag": "@fluentui-react-native/link_v0.6.29",
       "version": "0.6.29",

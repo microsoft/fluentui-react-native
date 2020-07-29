@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Set Focus props during initial render to avoid shifting other components",
-  "packageName": "@fluentui-react-native/link",
-  "email": "lehon@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-07-16T21:01:57.050Z"
-}
