@@ -21,7 +21,15 @@ jobs:
       - template: templates/setup-repo.yml
 
       - script: |
-          yarn buildci --concurrency 4
+          yarn build
+        displayName: 'yarn build'
+
+      - script: |
+          yarn test
+        displayName: 'yarn test'
+
+      - script: |
+          yarn buildci
         displayName: 'yarn buildci'
 
       - script: |
