@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-framework",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Component framework used by fluentui react native controls",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -24,9 +24,9 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@fluentui-react-native/composition": ">=0.2.0 <1.0.0",
-    "@fluentui-react-native/use-styling": ">=0.2.0 <1.0.0",
-    "@fluentui-react-native/use-slots": ">=0.2.0 <1.0.0",
+    "@fluentui-react-native/composition": ">=0.2.1 <1.0.0",
+    "@fluentui-react-native/use-styling": ">=0.2.1 <1.0.0",
+    "@fluentui-react-native/use-slots": ">=0.2.1 <1.0.0",
     "@uifabricshared/immutable-merge": ">=0.5.67 <1.0.0",
     "@uifabricshared/foundation-settings": ">=0.6.1 <1.0.0",
     "@uifabricshared/theming-ramp": ">=0.9.68 <1.0.0",

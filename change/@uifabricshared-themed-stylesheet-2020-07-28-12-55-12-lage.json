@@ -1,8 +1,0 @@
-{
-  "type": "none",
-  "comment": "switch to using Lage for build sequencing",
-  "packageName": "@uifabricshared/themed-stylesheet",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "none",
-  "date": "2020-07-28T19:54:54.916Z"
-}
