@@ -21,7 +21,7 @@ jobs:
       - template: templates/setup-repo.yml
 
       - script: |
-          yarn buildci --node="--max_old_space_size=8192"
+          yarn buildci --concurrency 4
         displayName: 'yarn buildci'
 
       - script: |
