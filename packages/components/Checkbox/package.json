@@ -14,7 +14,7 @@
     "clean": "fluentui-scripts clean",
     "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
-    "test": "Fluentui-scripts jest",
+    "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
     "verify-api": "fluentui-scripts verify-api-extractor",
     "update-api": "fluentui-scripts update-api-extractor"

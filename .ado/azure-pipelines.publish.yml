@@ -29,10 +29,6 @@ steps:
   - template: templates/yarn-install.yml
 
   - script: |
-      yarn build
-    displayName: 'yarn build'
-
-  - script: |
       yarn test
     displayName: 'yarn test'
 
