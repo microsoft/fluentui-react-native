@@ -9,7 +9,6 @@ import { RadioGroup, RadioButton } from '@fluentui-react-native/radio-group';
 import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 import { customRegistry } from './CustomThemes';
 import { THEME_TESTPAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
 
 let brand = 'Office';
 
@@ -162,9 +161,8 @@ const SwatchList: React.FunctionComponent = () => {
   );
 };
 
-const [theme, setTheme] = React.useState('Default');
-
-const configureTheme: React.FunctionComponent<{}> = () => {
+const ThemeTestInner: React.FunctionComponent = () => {
+  const themedStyles = getThemedStyles(useTheme());
   const onAppChange = React.useCallback((app: string) => {
     brand = app;
     // Invalidate the DAG children of the shimmed brand colors
@@ -172,8 +170,13 @@ const configureTheme: React.FunctionComponent<{}> = () => {
     customRegistry.setTheme(fakeBrandTheme, 'WhiteColors', 'RealWhiteColors');
   }, []);
 
+  const [theme, setTheme] = React.useState('Default');
   return (
-    <ThemeProvider theme="Default">
+    <View>
+      <Text style={themedStyles.extraLargeStandardEmphasis} testID={THEME_TESTPAGE}>
+        Configure Theme
+      </Text>
+      <Separator />
       <View style={styles.pickerContainer}>
         <RadioGroup label="Pick App Colors" onChange={onAppChange} defaultSelectedKey="Office">
           <RadioButton buttonKey="Office" content="Office" />
@@ -188,53 +191,22 @@ const configureTheme: React.FunctionComponent<{}> = () => {
           <RadioButton buttonKey="WhiteColors" content="WhiteColors (Platform Theme)" />
         </RadioGroup>
       </View>
-    </ThemeProvider>
-  );
-};
-
-const selectedTheme: React.FunctionComponent<{}> = () => {
-
-  return (
-    <ThemeProvider theme={theme}>
-      <Panel />
-    </ThemeProvider>
-  );
-};
-
-const hostTheme: React.FunctionComponent<{}> = () => {
-
-  return (
-    <ThemeProvider theme="Default">
+      <Text style={themedStyles.extraLargeStandardEmphasis}>{theme + ' Theme'}</Text>
+      <Separator />
+      <ThemeProvider theme={theme}>
+        <Panel />
+      </ThemeProvider>
+      <Text style={themedStyles.extraLargeStandardEmphasis}>Host-specific Theme Settings</Text>
+      <Separator />
       <SwatchList />
-    </ThemeProvider>
+    </View>
   );
 };
-
-const themeSections: TestSection[] = [
-  {
-    name: 'Configure Theme',
-    testID: THEME_TESTPAGE,
-    component: configureTheme
-  },
-  {
-    name: theme + ' Theme',
-    component: selectedTheme
-  },
-  {
-    name: 'Host-Specific Theme Settings',
-    component: hostTheme
-  }
-];
 
 export const ThemeTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    winStatus: 'beta',
-    iosStatus: 'experimental',
-    macosStatus: 'experimental',
-    androidStatus: 'experimental'
-  }
-
   return (
-    <Test name="Theme Test" description="No description." sections={themeSections} status={status}></Test>
+    <ThemeProvider theme="Default">
+      <ThemeTestInner />
+    </ThemeProvider>
   );
 };
