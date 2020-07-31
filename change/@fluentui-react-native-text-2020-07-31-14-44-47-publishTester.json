@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "specify types for tests",
+  "packageName": "@fluentui-react-native/text",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-07-31T21:44:38.131Z"
+}
