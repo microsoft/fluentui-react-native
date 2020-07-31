@@ -1,5 +1,5 @@
 {
-  "name": "FluentTester-ios",
+  "name": "@fluentui-react-native/tester-ios",
   "version": "0.0.1",
   "private": true,
   "main": "src/index.tsx",
