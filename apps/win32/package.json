@@ -1,7 +1,6 @@
 {
-  "name": "FluentTester-win32",
+  "name": "@fluentui-react-native/tester-win32",
   "version": "0.0.1",
-  "private": true,
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
@@ -60,11 +59,6 @@
     "@wdio/spec-reporter": "^5.22.4",
     "@wdio/sync": "^5.20.1",
     "@wdio/allure-reporter": "^5.22.4"
-  },
-  "workspaces": {
-    "nohoist": [
-      "@types/jasmine"
-    ]
   },
   "peerDependencies": {
     "@office-iss/react-native-win32": "0.62.0-preview.3",
