@@ -4864,16 +4864,18 @@ bcrypt-pbkdf@^1.0.0:
     tweetnacl "^0.14.3"
 
 beachball@^1.30.2:
-  version "1.31.4"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-1.31.4.tgz#e58e3f593ce734577d7016960c760dc77397dcac"
-  integrity sha512-x0tBTOeDqirCdjK5KIE3KcXSgsQOAE7vpyki305dC/4Dh0iSgSrWVQUrX1O8O4L2PGTwaCmr1cyLjduAVvsGQA==
+  version "1.32.2"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-1.32.2.tgz#8c8501a20bc3d7f7cffcb5e7661dcffe2c00cfee"
+  integrity sha512-1rUhqockNXdAjCCzFLszHxnfsjf+/dTFo2YudpeQWyKUyQ1HeIiwdUVp/bM9uOc+VxG6sUrk5nnrBRAX7yI4aw==
   dependencies:
     cosmiconfig "^6.0.0"
+    execa "^4.0.3"
     fs-extra "^8.0.1"
     git-url-parse "^11.1.2"
     glob "^7.1.4"
     lodash "^4.17.15"
     minimatch "^3.0.4"
+    p-limit "^3.0.2"
     prompts "~2.1.0"
     semver "^6.1.1"
     toposort "^2.0.2"
@@ -7695,22 +7697,7 @@ execa@^3.3.0:
     signal-exit "^3.0.2"
     strip-final-newline "^2.0.0"
 
-execa@^4.0.0:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/execa/-/execa-4.0.1.tgz#988488781f1f0238cd156f7aaede11c3e853b4c1"
-  integrity sha512-SCjM/zlBdOK8Q5TIjOn6iEHZaPHFsMoTxXQ2nvUvtPnuohz3H2dIozSg+etNR98dGoYUp2ENSKLL/XaMmbxVgw==
-  dependencies:
-    cross-spawn "^7.0.0"
-    get-stream "^5.0.0"
-    human-signals "^1.1.1"
-    is-stream "^2.0.0"
-    merge-stream "^2.0.0"
-    npm-run-path "^4.0.0"
-    onetime "^5.1.0"
-    signal-exit "^3.0.2"
-    strip-final-newline "^2.0.0"
-
-execa@^4.0.3:
+execa@^4.0.0, execa@^4.0.3:
   version "4.0.3"
   resolved "https://registry.npmjs.org/execa/-/execa-4.0.3.tgz#0a34dabbad6d66100bd6f2c576c8669403f317f2"
   integrity sha512-WFDXGHckXPWZX19t1kCsXzOpqX9LWYNqn4C+HqZlk/V0imTkzJZqf87ZBhvpHaftERYknpk0fjSylnXVlVgI0A==
@@ -12895,6 +12882,13 @@ p-limit@^2.0.0, p-limit@^2.2.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/p-limit/-/p-limit-2.3.0.tgz#3dd33c647a214fdfffd835933eb086da0dc21db1"
   integrity sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==
+  dependencies:
+    p-try "^2.0.0"
+
+p-limit@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/p-limit/-/p-limit-3.0.2.tgz#1664e010af3cadc681baafd3e2a437be7b0fb5fe"
+  integrity sha512-iwqZSOoWIW+Ew4kAGUlN16J4M7OB3ysMLSZtnhmqx7njIHFPlxWBX8xo3lVTyFVq6mI/lL9qt2IsN1sHwaxJkg==
   dependencies:
     p-try "^2.0.0"
 
