@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Wed, 29 Jul 2020 22:38:20 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.72",
+      "version": "1.6.72",
+      "comments": {
+        "none": [
+          {
+            "comment": "switch to using Lage for build sequencing",
+            "author": "jasonmo@microsoft.com",
+            "commit": "79677c8f3260dbf55e053db5983fb161c6fb44b5",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Jul 2020 21:28:55 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.6.71",
       "version": "1.6.71",

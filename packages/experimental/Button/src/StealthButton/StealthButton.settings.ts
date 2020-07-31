@@ -1,42 +1,30 @@
-import { IButtonType } from '../Button.types';
-import { IComposeSettings } from '@uifabricshared/foundation-compose';
+import { ButtonTokens } from '../Button.types';
+import { TokenSettings } from '@fluentui-react-native/experimental-framework';
 
-export const settings: IComposeSettings<IButtonType> = [
-  {
-    tokens: {
-      backgroundColor: 'menuBackground',
-      color: 'menuItemText',
-      borderColor: 'menuBackground'
+export const settings: TokenSettings<ButtonTokens>[] = [
+  t => ({
+    backgroundColor: t.colors.menuBackground,
+    color: t.colors.menuItemText,
+    borderColor: t.colors.menuBackground,
+    disabled: {
+      color: t.colors.disabledBodyText,
+      borderColor: t.colors.menuBackground,
+      backgroundColor: t.colors.background
     },
-    _overrides: {
-      disabled: {
-        tokens: {
-          color: 'disabledBodyText',
-          borderColor: 'menuBackground',
-          backgroundColor: 'background'
-        }
-      },
-      hovered: {
-        tokens: {
-          backgroundColor: 'menuItemBackgroundHovered',
-          color: 'menuItemTextHovered',
-          borderColor: 'menuItemBackgroundHovered'
-        }
-      },
-      pressed: {
-        tokens: {
-          backgroundColor: 'menuItemBackgroundPressed',
-          borderColor: 'menuItemBackgroundPressed'
-        }
-      },
-      focused: {
-        tokens: {
-          borderColor: 'focusBorder',
-          backgroundColor: 'menuItemBackgroundHovered',
-          color: 'menuItemTextHovered'
-        }
-      }
+    hovered: {
+      backgroundColor: t.colors.menuItemBackgroundHovered,
+      color: t.colors.menuItemTextHovered,
+      borderColor: t.colors.menuItemBackgroundHovered
+    },
+    pressed: {
+      backgroundColor: t.colors.menuItemBackgroundPressed,
+      borderColor: t.colors.menuItemBackgroundPressed
+    },
+    focused: {
+      borderColor: t.colors.focusBorder,
+      backgroundColor: t.colors.menuItemBackgroundHovered,
+      color: t.colors.menuItemTextHovered
     }
-  },
+  }),
   'PrimaryButton'
 ];

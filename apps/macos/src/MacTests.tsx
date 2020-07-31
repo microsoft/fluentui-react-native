@@ -1,5 +1,5 @@
 import { TestDescription } from '../../fluent-tester/src/RNTester/TestComponents';
-import { ButtonFocusTest, HOMEPAGE_BUTTON_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Button';
+import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Checkbox';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/ContextualMenu';
@@ -17,7 +17,7 @@ import { HOMEPAGE_THEME_BUTTON, ThemeTest } from '../../fluent-tester/src/RNTest
 export const macTests: TestDescription[] = [
   {
     name: 'Button Test',
-    component: ButtonFocusTest,
+    component: ButtonTest,
     testPage: HOMEPAGE_BUTTON_BUTTON
   },
   {

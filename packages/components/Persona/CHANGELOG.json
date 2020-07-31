@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/persona",
   "entries": [
     {
+      "date": "Wed, 29 Jul 2020 22:38:20 GMT",
+      "tag": "@fluentui-react-native/persona_v0.5.72",
+      "version": "0.5.72",
+      "comments": {
+        "none": [
+          {
+            "comment": "switch to using Lage for build sequencing",
+            "author": "jasonmo@microsoft.com",
+            "commit": "79677c8f3260dbf55e053db5983fb161c6fb44b5",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 28 Jul 2020 18:21:12 GMT",
+      "tag": "@fluentui-react-native/persona_v0.5.72",
+      "version": "0.5.72",
+      "comments": {
+        "patch": [
+          {
+            "comment": "rename some token types and update Text",
+            "author": "jasonmo@microsoft.com",
+            "commit": "585007a447ba6dec0ae70be693879bbf7125c71b",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Jul 2020 21:28:55 GMT",
       "tag": "@fluentui-react-native/persona_v0.5.71",
       "version": "0.5.71",

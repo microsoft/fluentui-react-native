@@ -1,7 +1,7 @@
 import { IStackItemProps } from './StackItem/StackItem.types';
 import { ViewStyle, ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { IBackgroundColorTokens, IBorderTokens, ITextTokens } from '@fluentui-react-native/tokens';
+import { IBackgroundColorTokens, IBorderTokens, FontTokens } from '@fluentui-react-native/tokens';
 
 export const stackName = 'RNFStack';
 
@@ -19,7 +19,7 @@ export interface IStackStatics {
  * Tokens from fabric.  Right now they are embedded in the props pending discussions of whether tokens: {} is
  * the right approach
  */
-export interface IStackTokens extends ITextTokens, IBackgroundColorTokens, IBorderTokens {
+export interface IStackTokens extends FontTokens, IBackgroundColorTokens, IBorderTokens {
   /**
    * Defines the spacing between Stack children.
    * The property is specified as a value for 'row gap', followed optionally by a value for 'column gap'.

@@ -3,7 +3,7 @@ import { ViewProps } from 'react-native';
 import { ITextProps } from '@fluentui-react-native/text';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { IForegroundColorTokens, ITextTokens } from '@fluentui-react-native/tokens';
+import { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
 
 export const radioGroupName = 'RadioGroup';
 
@@ -47,7 +47,7 @@ export interface IRadioGroupProps {
   testID?: string;
 }
 
-export interface IRadioGroupTokens extends IForegroundColorTokens, ITextTokens {}
+export interface IRadioGroupTokens extends IForegroundColorTokens, FontTokens {}
 
 export interface IRadioGroupSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;

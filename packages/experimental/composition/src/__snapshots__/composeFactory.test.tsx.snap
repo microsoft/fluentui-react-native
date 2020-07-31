@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`composeFactory test suite Base component render 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "black",
+      "borderColor": "green",
+      "borderWidth": 1,
+      "height": 20,
+      "width": 30,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "white",
+      }
+    }
+  >
+    Hello
+  </Text>
+</View>
+`;
+
+exports[`composeFactory test suite Base component render 2`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "pink",
+      "borderColor": "green",
+      "borderWidth": 1,
+      "height": 20,
+      "width": 30,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "white",
+      }
+    }
+  >
+    Hello
+  </Text>
+</View>
+`;
