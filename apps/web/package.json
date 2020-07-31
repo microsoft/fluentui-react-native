@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "@fluentui-react-native/tester-web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
