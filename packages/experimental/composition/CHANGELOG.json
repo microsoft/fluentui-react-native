@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/composition",
   "entries": [
     {
+      "date": "Sat, 01 Aug 2020 00:34:34 GMT",
+      "tag": "@fluentui-react-native/composition_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "specify types for tests",
+            "author": "krsiler@microsoft.com",
+            "commit": "f0021e6d95a1fa68c946a2dab2c797f32705fb9e",
+            "package": "@fluentui-react-native/composition"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jul 2020 22:38:20 GMT",
       "tag": "@fluentui-react-native/composition_v0.2.1",
       "version": "0.2.1",

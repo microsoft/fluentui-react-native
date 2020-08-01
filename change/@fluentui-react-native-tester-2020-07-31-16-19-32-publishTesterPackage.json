@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Make FLURN tester package public",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-07-31T23:19:32.915Z"
-}

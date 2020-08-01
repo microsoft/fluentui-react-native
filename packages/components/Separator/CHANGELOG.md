@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/separator
 
-This log was last generated on Wed, 17 Jun 2020 05:00:56 GMT and should not be manually modified.
+This log was last generated on Sat, 01 Aug 2020 00:34:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.0
+
+Sat, 01 Aug 2020 00:34:34 GMT
+
+### Minor changes
+
+- specify types for tests (krsiler@microsoft.com)
 
 ## 0.3.62
 

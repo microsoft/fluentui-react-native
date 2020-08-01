@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/stack",
+  "entries": [
+    {
+      "date": "Sat, 01 Aug 2020 00:34:34 GMT",
+      "tag": "@fluentui-react-native/stack_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "publish 🚀",
+            "author": "adrum@microsoft.com",
+            "commit": "0142fab55fb905d439ab97c15bbb492f8a82de0d",
+            "package": "@fluentui-react-native/stack"
+          }
+        ]
+      }
+    }
+  ]
+}
