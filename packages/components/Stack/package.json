@@ -9,7 +9,6 @@
     "main": "lib-commonjs/index.js",
     "module": "lib/index.js"
   },
-  "private": true,
   "scripts": {
     "build": "fluentui-scripts build",
     "just": "fluentui-scripts",
