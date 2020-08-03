@@ -45,7 +45,9 @@ export const SeparatorTest: React.FunctionComponent<{}> = () => {
     androidStatus: 'experimental'
   }
 
+  const description = "A separator visually separates content into groups.\n\nYou can render content in the separator by specifying the component's children. The component's children can be plain text or a component like Icon. The content is center-aligned by default."
+
   return (
-    <Test name="Separator Test" description="No description." sections={separatorSections} status={status}></Test>
+    <Test name="Separator Test" description={description} sections={separatorSections} status={status}></Test>
   );
 };

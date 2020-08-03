@@ -22,7 +22,9 @@ export const TextTest: React.FunctionComponent<{}> = () => {
     androidStatus: 'experimental'
   }
 
+  const description = "Text is a component for displaying text. You can use Text to standardize text across your app."
+
   return (
-    <Test name="Text Test" description="No description." sections={textSections} status={status}></Test>
+    <Test name="Text Test" description={description} sections={textSections} status={status}></Test>
   );
 };

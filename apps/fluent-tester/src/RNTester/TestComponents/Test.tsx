@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Separator } from '@fluentui-react-native/separator';
+import { Stack } from '@fluentui-react-native/stack';
+import { stackStyle } from './Common/styles';
 
 export type TestSection = {
   name: string;
@@ -53,7 +55,9 @@ export const Test = (props: TestProps) => {
     <View>
       <Text style={styles.name}>{props.name}</Text>
       <Separator />
-      <Text style={styles.description}>{props.description}</Text>
+      <Stack style={stackStyle}>
+        <Text style={styles.description}>{props.description}</Text>
+      </Stack>
       {props.sections.map((section, index) => {
         const TestComponent = section.component;
         return (
