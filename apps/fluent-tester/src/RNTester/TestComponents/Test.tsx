@@ -30,7 +30,10 @@ const styles = StyleSheet.create({
     color: '#0B6A0B',
     marginTop: 4
   },
-  description: {},
+  description: {
+    alignItems: 'flex-start',
+    flexWrap: 'wrap'
+  },
   section: {
     fontSize: 20,
     fontWeight: 'bold',
