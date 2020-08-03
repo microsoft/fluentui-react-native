@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Thu, 23 Jul 2020 21:28:55 GMT and should not be manually modified.
+This log was last generated on Sat, 01 Aug 2020 00:34:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.0
+
+Sat, 01 Aug 2020 00:34:34 GMT
+
+### Minor changes
+
+- specify types for tests (krsiler@microsoft.com)
+
+## 0.5.72
+
+Tue, 28 Jul 2020 18:21:12 GMT
+
+### Patches
+
+- rename some token types and update Text (jasonmo@microsoft.com)
 
 ## 0.5.71
 

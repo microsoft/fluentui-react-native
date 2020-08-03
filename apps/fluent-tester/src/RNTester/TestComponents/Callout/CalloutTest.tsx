@@ -93,7 +93,7 @@ export const CalloutTest: React.FunctionComponent<{}> = () => {
   const borderWidthDefault: string = 'default (1)';
   const borderWidthSelections: (number | string)[] = ['default (1)', 2, 4, 10];
 
-  const [selectedBorderWidth, setSelectedBorderWidth] = React.useState<string | undefined>(undefined);
+  const [selectedBorderWidth, setSelectedBorderWidth] = React.useState<number | undefined>(undefined);
 
   const myRect: ScreenRect = { screenX: 10, screenY: 10, width: 100, height: 100 };
 

@@ -1,9 +1,8 @@
-import { IStackItemProps } from './StackItem/StackItem.types';
+import { StackItemProps } from './StackItem/StackItem.types';
 import { ViewStyle, ViewProps } from 'react-native';
-import { IRenderData } from '@uifabricshared/foundation-composable';
-import { IBackgroundColorTokens, IBorderTokens, ITextTokens } from '@fluentui-react-native/tokens';
+import { IBorderTokens, FontTokens } from '@fluentui-react-native/tokens';
 
-export const stackName = 'RNFStack';
+export const stackName = 'Stack';
 
 /**
  * Defines a type made by the union of the different values that the align-items and justify-content flexbox
@@ -11,15 +10,15 @@ export const stackName = 'RNFStack';
  */
 export type Alignment = ViewStyle['justifyContent'] | 'start' | 'end';
 
-export interface IStackStatics {
-  Item: React.FunctionComponent<IStackItemProps>;
+export interface StackStatics {
+  Item: React.FunctionComponent<StackItemProps>;
 }
 
 /**
  * Tokens from fabric.  Right now they are embedded in the props pending discussions of whether tokens: {} is
  * the right approach
  */
-export interface IStackTokens extends ITextTokens, IBackgroundColorTokens, IBorderTokens {
+export interface StackTokenProps {
   /**
    * Defines the spacing between Stack children.
    * The property is specified as a value for 'row gap', followed optionally by a value for 'column gap'.
@@ -97,26 +96,26 @@ export interface IStackTokens extends ITextTokens, IBackgroundColorTokens, IBord
   gap?: number;
 }
 
+export interface StackTokens extends FontTokens, IBorderTokens, StackTokenProps {
+  /**
+   * background color for the stack
+   */
+  backgroundColor?: string;
+}
+
 /**
  * Base property definitions, these generally match fabric
  */
-export interface IStackProps extends IStackTokens, ViewProps {}
+export interface StackProps extends StackTokenProps, ViewProps {}
 
-export type IStackSlotProps = {
+export type StackSlotProps = {
   root: ViewProps;
   inner: ViewProps;
 };
 
-export interface IStackType {
-  props: IStackProps;
-  tokens: IStackTokens;
-  slotProps: IStackSlotProps;
-  statics: IStackStatics;
-  state: {
-    gap: IStackProps['gap'];
-    horizontal: IStackProps['horizontal'];
-    wrap: IStackProps['wrap'];
-  };
+export interface StackType {
+  props: StackProps;
+  tokens: StackTokens;
+  slotProps: StackSlotProps;
+  statics: StackStatics;
 }
-
-export type IStackRenderData = IRenderData<IStackSlotProps, IStackType['state']>;

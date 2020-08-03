@@ -7,7 +7,7 @@ FluentUI React Native is a javascript component library that provides developers
 FluentUI React Native is still in the alpha stages of development for both the components and the repo. We encourage anyone who is interested in getting an early glimpse of our plans to download and use our components, but please note that you may hit bumps along the way. Please leave us feedback or file issues if you run into bumps, and we will continue to improve the quality of the repo.
 
 Development status on each platform:
-| Windows             | macOS               | iOS         | Android     |
+| Windows | macOS | iOS | Android |
 |---------------------|---------------------|-------------|-------------|
 | Alpha (in progress) | Alpha (in progress) | Alpha (in progress) | Coming Soon |
 
@@ -34,7 +34,7 @@ If you have an existing React Native project, it's easy to begin using FluentUI 
 3. After successful installation, you can test the package by importing components at the top of your app's entry file, e.g. `App.js`:
 
 ```jsx
- import { Checkbox } from '@fluentui/react-native';
+import { Checkbox } from '@fluentui/react-native';
 ```
 
 4. After importing the @fluentui/react-native package, you can use components such as `Text` and `Checkbox` in your JSX.
@@ -49,13 +49,14 @@ function HelloWorldApp() {
     <View
       style={{
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
-      }}>
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}
+    >
       <Text>Hello, world!</Text>
-      <Checkbox label="Hello World Checkbox"/>
+      <Checkbox label="Hello World Checkbox" />
     </View>
-  )
+  );
 }
 export default HelloWorldApp;
 ```
@@ -68,9 +69,10 @@ Our component documentation is hosted on the [FluentUI documentation](https://de
 
 #### Expanding Component documentation
 
-The FluentUI website is built out of the [FluentUI repository](https://github.com/microsoft/fluentui/tree/master/apps/fabric-website).  React-Native components and controls are documented in a 'cross' (cross-platform) directory in each component page directory, e.g. [Button 'cross' directory](https://github.com/microsoft/fluentui/tree/master/apps/fabric-website/src/pages/Controls/ButtonPage/docs/cross).  The FluentUI website can be run locally to verify changes, and should reflect the current state of controls that have established the *v1* set of properties on any one platform.
+The FluentUI website is built out of the [FluentUI repository](https://github.com/microsoft/fluentui/tree/master/apps/fabric-website). React-Native components and controls are documented in a 'cross' (cross-platform) directory in each component page directory, e.g. [Button 'cross' directory](https://github.com/microsoft/fluentui/tree/master/apps/fabric-website/src/pages/Controls/ButtonPage/docs/cross). The FluentUI website can be run locally to verify changes, and should reflect the current state of controls that have established the _v1_ set of properties on any one platform.
 
-Since the FluentUI React Native controls are cross-platform, but represented by a single page, it's important to distinguish platform differences and limitations.  Examples include:
+Since the FluentUI React Native controls are cross-platform, but represented by a single page, it's important to distinguish platform differences and limitations. Examples include:
+
 - If the component is not available on all supported platforms.
 - If the component has properties not available on all supported platforms.
 - If the component has limited support for a given property on any supported platforms.
@@ -90,9 +92,18 @@ Our FluentUI framework documentation is found in this repository alongside the i
 
 ## Developing in the repo
 
-### Yarn + Lerna
+### Yarn + Lage
 
-This repo is set up as a monorepo using Lerna + Yarn workspaces. The yarn commands will trigger the lerna commands which will execute yarn commands in each package. To install yarn, please follow instructions in the [Yarn documentation](https://classic.yarnpkg.com/en/docs/install/).
+This repo is set up as a monorepo using Yarn workspaces. To install yarn, please follow instructions in the [Yarn documentation](https://classic.yarnpkg.com/en/docs/install/).
+
+For running tasks the repo has switched to using [Lage](https://github.com/microsoft/lage) for task running. The primary tasks that can be executed at the root are:
+
+- `yarn build` - does the typescript build for all packages in the repository
+- `yarn test` - will build, lint, and run any applicable tests on all packages in the repo
+- `yarn bundle` - will bundle all packages in the repo
+- `yarn buildci` - will build, lint, run tests, and bundle everything in the repo
+
+Note that Lage uses caching to avoid redundant steps and has very minimal output. To avoid caching add `--no-cache` as a command line argument. Similarly adding `--verbose` will give more detailed output.
 
 ### Setup your development environment
 

@@ -18,6 +18,7 @@ export interface ITheme {
   colors: IThemeColorDefinition;
   typography: ITypography;
   components: IComponentSettingsCollection;
+  componentTokens?: object;
   spacing: ISpacing;
   host: object; // platform specific host settings
 }
@@ -32,6 +33,7 @@ export interface IPartialTheme {
   colors?: Partial<IThemeColorDefinition>;
   typography?: IPartialTypography;
   components?: IComponentSettingsCollection;
+  componentTokens?: object;
   spacing?: ISpacing;
   host?: object;
 }
