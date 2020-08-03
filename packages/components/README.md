@@ -7,12 +7,15 @@ Building cross platform JS experiences within Office and other SDX Host apps usi
 1. [Choosing a Component Builder Framework](#choosing-a-component-builder-framework)
    - [Compose vs Composable](#Compose-vs-Composable)
 2. [Building a Component](#building-a-component)
+
    - [Using the Compose Framework](#using-the-compose-framework)
-      - [Types](#types)
-      - [Settings](#settings)
-      - [Putting it all together](#putting-it-all-together)
+
+     - [Types](#types)
+     - [Settings](#settings)
+     - [Putting it all together](#putting-it-all-together)
 
    - [Using the Composable Framework](#using-the-composable-framework)
+
 3. [Jest Snapshot Testing for FluentUI](#jest-snapshot-testing-for-fluentui)
    - [Writing Snapshot Tests](#writing-snapshot-tests)
    - [Updating Snapshot Tests](#updating-snapshot-tests)
@@ -33,7 +36,6 @@ Simply put,
 
 **Composable** - Purely behavioral / structural, but provides extensibility point for a styling system to be provided, allows for recomposition without overhead.
 
-
 ## Building a Component
 
 ### Using the Compose Framework
@@ -45,6 +47,7 @@ Let's look at how to write a complex component using the compose framework. This
 Each control dedicates file using the format [Button.types.ts](https://github.com/microsoft/fluentui-react-native/blob/master/packages/components/Button/src/Button.types.ts) to define the component's tokens, props, and slots.
 
 Button is essentially a composition of View which is a layout element, a Text element, and an Icon element. The Button's slots reflect this composition. The root slot is a View which will wrap another View, represented as a stack slot which will contain the image and text content.
+
 ```javascript
 export interface IButtonSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
@@ -57,13 +60,14 @@ export interface IButtonSlotProps {
 Button inherits a large part of its styling tokens from those defined for Text, View, and Image. Tokens that are needed for Button specifically are defined in the IButtonTokens interface.
 
 ```javascript
-export interface IButtonTokens extends ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens
+export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens
 {
    ...
 }
 ```
 
-Props that do not map to a style property are defined as part of Button props. Button props extends Pressable's props with the except of __onPress__, since Button will have an onClick prop intead.
+Props that do not map to a style property are defined as part of Button props. Button props extends Pressable's props with the except of **onPress**, since Button will have an onClick prop intead.
+
 ```javascipt
 export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
   ...
@@ -72,6 +76,7 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
 ```
 
 IButtonState will keep track of Button's state values that may change with events and interactions. It will extend IPressableStates for states related to press events.
+
 ```javascipt
 export interface IButtonInfo extends IPressableState
 {
@@ -84,6 +89,7 @@ export interface IButtonState
 ```
 
 Button's render data, which will be passed to the render function, is defined with own its slots and state interface.
+
 ```javascript
 export type IButtonRenderData = IRenderData<IButtonSlotProps, IButtonState>;
 ```
@@ -164,14 +170,16 @@ export const settings: IComposeSettings<IButtonType> = [
 #### Putting it all together
 
 Lastly, Button imports and uses the compose framework to build the final function component. A compose component will have the following parameters. Each parameter is explained in detail in the [Parameters](https://github.com/microsoft/fluentui-react-native/blob/2c8fcfa9cd098752bc45f5482664937a8472a05c/packages/framework/foundation-composable/README.md#parameters) section under foundation-composable.
-   - displayName
-   - usePrepareProps
-   - settings
-   - render
-   - slots
-   - styles
 
- An important thing to note is that the compose framework will call useStyling to grab the styling information in usePrepareProps. On that note, it's useful to look at what useStyling does:
+- displayName
+- usePrepareProps
+- settings
+- render
+- slots
+- styles
+
+An important thing to note is that the compose framework will call useStyling to grab the styling information in usePrepareProps. On that note, it's useful to look at what useStyling does:
+
 1. It is aware of our Theme object, because it looks at the ThemeContext.
 2. It checks the theme's cache for resolved component slot props before doing any work.
 3. If none are found, it gets your settings object/function, processes it in response to the theme and applies overrides that you specify in your state.
@@ -208,26 +216,29 @@ Every component should have one (or more) snapshot tests to ensure that the data
 
 - Create test file under the \_\_tests\_\_ folder in your component's root directory.
 
-   packages/components/Component/src/\_\_tests\_\_/Component.test.win32.tsx
+  packages/components/Component/src/\_\_tests\_\_/Component.test.win32.tsx
 
 - Import [react-test-renderer](https://reactjs.org/docs/test-renderer.html)
-   ```javascript
-      import * as renderer from 'react-test-renderer';
-   ```
+
+  ```javascript
+  import * as renderer from 'react-test-renderer';
+  ```
 
 - Create a test that renders your component. Consider adding a snapshot(s) that exercise:
-   - Default rendering behavior
-   - Any interesting variants (e.g. horizonal vs. vertical separators, primary buttons)
-   - All props
-   - All tokens
 
-   ex) Button component snapshot test with default props
-   ```javascript
-      it('Button default', () => {
-         const tree = renderer.create(<Button content="Default Button" />).toJSON();
-         expect(tree).toMatchSnapshot();
-      });
-   ```
+  - Default rendering behavior
+  - Any interesting variants (e.g. horizonal vs. vertical separators, primary buttons)
+  - All props
+  - All tokens
+
+  ex) Button component snapshot test with default props
+
+  ```javascript
+  it('Button default', () => {
+    const tree = renderer.create(<Button content="Default Button" />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+  ```
 
 - Rebuilding your component directory should run the snapshot tests for you. When you run the tests for the first time. a new snapshot file will be created inside a \_\_snapshots\_\_ directory. If your test file was named Component.test.tsx, the snapshot file will be named Component.test.tsx.snap.
 
@@ -240,7 +251,3 @@ Every component should have one (or more) snapshot tests to ensure that the data
 - Running the following command in your component root directory will update the snapshots to match the updates you made on your component
 
       yarn update-snapshots
-
-
-
-

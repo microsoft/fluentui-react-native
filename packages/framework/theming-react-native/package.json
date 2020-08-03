@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theming-react-native",
-  "version": "0.7.67",
+  "version": "0.7.70",
   "description": "A library of functions which produce React Native styles from a Theme",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -18,6 +18,7 @@
     "lint": "fluentui-scripts eslint",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
+    "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
     "verify-api": "fluentui-scripts verify-api-extractor",
     "update-api": "fluentui-scripts update-api-extractor"
@@ -26,9 +27,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/theme-registry": ">=0.3.66 <1.0.0",
-    "@uifabricshared/foundation-settings": ">=0.6.0 <1.0.0",
-    "@uifabricshared/theming-ramp": ">=0.9.66 <1.0.0"
+    "@uifabricshared/theme-registry": ">=0.3.67 <1.0.0",
+    "@uifabricshared/foundation-settings": ">=0.6.1 <1.0.0",
+    "@uifabricshared/theming-ramp": ">=0.10.0 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

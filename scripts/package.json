@@ -11,7 +11,6 @@
     "bundlesize": "bundlesize --debug",
     "clean": "node ./just-scripts.js no-op",
     "code-style": "node ./just-scripts.js code-style",
-    "test": "jest",
     "prettier": "node ./just-scripts.js prettier",
     "verify-api": "echo no api to verify",
     "update-api": "echo no api to update"

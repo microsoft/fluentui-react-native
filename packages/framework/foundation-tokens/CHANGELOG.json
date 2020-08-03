@@ -2,6 +2,51 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Sat, 01 Aug 2020 00:34:34 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "specify types for tests",
+            "author": "krsiler@microsoft.com",
+            "commit": "f0021e6d95a1fa68c946a2dab2c797f32705fb9e",
+            "package": "@uifabricshared/foundation-tokens"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jul 2020 22:38:20 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.6.11",
+      "version": "0.6.11",
+      "comments": {
+        "none": [
+          {
+            "comment": "switch to using Lage for build sequencing",
+            "author": "jasonmo@microsoft.com",
+            "commit": "79677c8f3260dbf55e053db5983fb161c6fb44b5",
+            "package": "@uifabricshared/foundation-tokens"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 23 Jul 2020 21:28:55 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.6.11",
+      "version": "0.6.11",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Change files\"",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@uifabricshared/foundation-tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 02 Jul 2020 21:06:06 GMT",
       "tag": "@uifabricshared/foundation-tokens_v0.6.9",
       "version": "0.6.9",

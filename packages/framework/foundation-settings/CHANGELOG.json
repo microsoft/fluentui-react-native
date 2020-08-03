@@ -2,6 +2,36 @@
   "name": "@uifabricshared/foundation-settings",
   "entries": [
     {
+      "date": "Wed, 29 Jul 2020 22:38:20 GMT",
+      "tag": "@uifabricshared/foundation-settings_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "switch to using Lage for build sequencing",
+            "author": "jasonmo@microsoft.com",
+            "commit": "79677c8f3260dbf55e053db5983fb161c6fb44b5",
+            "package": "@uifabricshared/foundation-settings"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 23 Jul 2020 21:28:55 GMT",
+      "tag": "@uifabricshared/foundation-settings_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Change files\"",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@uifabricshared/foundation-settings"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 04 Jul 2020 06:24:16 GMT",
       "tag": "@uifabricshared/foundation-settings_v0.6.0",
       "version": "0.6.0",

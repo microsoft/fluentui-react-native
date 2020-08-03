@@ -13,10 +13,10 @@ exports[`Stack with tokens 1`] = `
   <Text
     style={
       Object {
-        "color": "#505050",
+        "color": "#323130",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
-        "fontWeight": "500",
+        "fontWeight": "400",
         "margin": 0,
       }
     }
@@ -26,10 +26,10 @@ exports[`Stack with tokens 1`] = `
   <Text
     style={
       Object {
-        "color": "#505050",
+        "color": "#323130",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
-        "fontWeight": "500",
+        "fontWeight": "400",
         "margin": 0,
         "marginTop": 8,
       }
@@ -40,10 +40,10 @@ exports[`Stack with tokens 1`] = `
   <Text
     style={
       Object {
-        "color": "#505050",
+        "color": "#323130",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
-        "fontWeight": "500",
+        "fontWeight": "400",
         "margin": 0,
         "marginTop": 8,
       }

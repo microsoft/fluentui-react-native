@@ -1,5 +1,5 @@
 import { TestDescription } from '../../fluent-tester/src/RNTester/TestComponents';
-import { ButtonFocusTest, HOMEPAGE_BUTTON_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Button';
+import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Button';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from '../../fluent-tester/src/RNTester/TestComponents/Checkbox';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from '../../fluent-tester/src/RNTester/TestComponents/Link';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from '../../fluent-tester/src/RNTester/TestComponents/Persona';
@@ -13,7 +13,7 @@ import { HOMEPAGE_THEME_BUTTON, ThemeTest } from '../../fluent-tester/src/RNTest
 export const webTests: TestDescription[] = [
   {
     name: 'Button Test',
-    component: ButtonFocusTest,
+    component: ButtonTest,
     testPage: HOMEPAGE_BUTTON_BUTTON
   },
   {

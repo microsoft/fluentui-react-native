@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/tester",
+  "entries": [
+    {
+      "date": "Sat, 01 Aug 2020 00:34:34 GMT",
+      "tag": "@fluentui-react-native/tester_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Make FLURN tester package public",
+            "author": "krsiler@microsoft.com",
+            "commit": "7094bcfe0291e86796bf1d4706490f3fb96fc7a6",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    }
+  ]
+}
