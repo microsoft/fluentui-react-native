@@ -6,8 +6,8 @@
  */
 const path = require('path');
 const blacklist = require('metro-config/src/defaults/blacklist');
-const {getWatchFolders} = require('@uifabricshared/build-native');
-const {getDefaultConfig} = require('metro-config');
+const { getWatchFolders } = require('@uifabricshared/build-native');
+const { getDefaultConfig } = require('metro-config');
 
 
 module.exports = (async () => {
