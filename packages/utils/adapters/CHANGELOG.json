@@ -2,6 +2,56 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Wed, 29 Jul 2020 22:38:20 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.3.34",
+      "version": "0.3.34",
+      "comments": {
+        "none": [
+          {
+            "comment": "switch to using Lage for build sequencing",
+            "author": "jasonmo@microsoft.com",
+            "commit": "79677c8f3260dbf55e053db5983fb161c6fb44b5",
+            "package": "@fluentui-react-native/adapters"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 23 Jul 2020 21:28:55 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.3.34",
+      "version": "0.3.34",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Change files\"",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@fluentui-react-native/adapters"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "move rnw version to 0.62",
+            "author": "jasonmo@microsoft.com",
+            "commit": "34184fbbc0837169f828c568103b68f86273c93e",
+            "package": "@fluentui-react-native/adapters"
+          },
+          {
+            "comment": "bump rnw version to 0.62.1",
+            "author": "jasonmo@microsoft.com",
+            "commit": "ea386320f8810bfea5b808539e9b9498cc94210a",
+            "package": "@fluentui-react-native/adapters"
+          },
+          {
+            "comment": "bump adapters",
+            "author": "taamireh@microsoft.com",
+            "commit": "b44fff28c360bf433ad558206b08408d4b857f15",
+            "package": "@fluentui-react-native/adapters"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 02 Jul 2020 23:50:34 GMT",
       "tag": "@fluentui-react-native/adapters_v0.3.32",
       "version": "0.3.32",

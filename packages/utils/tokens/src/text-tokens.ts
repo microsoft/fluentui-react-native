@@ -1,34 +1,40 @@
 import { TextStyle, TextProps } from 'react-native';
 import { ITheme, ITypography } from '@uifabricshared/theming-ramp';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
+import { TokenBuilder } from './tokenBuilder';
 
-export interface ITextVariantTokens {
+export interface FontVariantTokens {
   variant?: keyof ITypography['variants'];
 }
 
-export interface ITextStyleTokens {
+export interface FontStyleTokens {
   fontFamily?: keyof ITypography['families'] | TextStyle['fontFamily'];
   fontSize?: keyof ITypography['sizes'] | TextStyle['fontSize'];
   fontWeight?: keyof ITypography['weights'] | TextStyle['fontWeight'];
 }
 
-export type ITextTokens = ITextStyleTokens & ITextVariantTokens;
+export type FontTokens = FontStyleTokens & FontVariantTokens;
 
-export function _buildTextStyles({ fontFamily, fontSize, fontWeight, variant }: ITextTokens, { typography }: ITheme): TextProps {
-  const { families, sizes, weights, variants } = typography;
-  if (fontFamily || fontSize || fontWeight || variant) {
-    return {
-      style: {
+export const fontStyles: TokenBuilder<FontTokens> = {
+  from: ({ fontFamily, fontSize, fontWeight, variant }: FontTokens, { typography }: ITheme) => {
+    const { families, sizes, weights, variants } = typography;
+    if (fontFamily || fontSize || fontWeight || variant) {
+      return {
         fontFamily: families[fontFamily] || fontFamily || families[variants[variant].face] || variants[variant].face,
         fontSize: sizes[fontSize] || fontSize || sizes[variants[variant].size] || variants[variant].size,
         fontWeight: weights[fontWeight] || fontWeight || weights[variants[variant].weight] || variants[variant].weight
-      }
-    };
-  }
+      };
+    }
 
-  return {};
+    return {};
+  },
+  keys: ['fontFamily', 'fontSize', 'fontWeight', 'variant']
+};
+
+function _buildTextStyles(tokens: FontTokens, theme: ITheme): TextProps {
+  return {
+    style: fontStyles.from(tokens, theme)
+  };
 }
 
-const _keyProps: (keyof ITextTokens)[] = ['fontFamily', 'fontSize', 'fontWeight', 'variant'];
-
-export const textTokens = styleFunction<TextProps, ITextTokens, ITheme>(_buildTextStyles, _keyProps);
+export const textTokens = styleFunction<TextProps, FontTokens, ITheme>(_buildTextStyles, fontStyles.keys);

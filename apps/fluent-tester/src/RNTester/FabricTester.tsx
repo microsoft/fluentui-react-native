@@ -1,9 +1,8 @@
 import { StealthButton } from '@fluentui-react-native/button';
 import { Separator } from '@fluentui-react-native/separator';
-import { Text } from '@fluentui-react-native/text';
 import { useTheme } from '@uifabricshared/theming-react-native';
 import * as React from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fabricTesterStyles } from './TestComponents/Common/styles';

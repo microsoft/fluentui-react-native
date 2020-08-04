@@ -2,15 +2,15 @@ import { TextStyle, TextProps } from 'react-native';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 import { IPersonaTokens } from './Persona.types';
 import { ITheme } from '@uifabricshared/theming-ramp';
-import { ITextTokens } from '@fluentui-react-native/tokens';
+import { FontTokens } from '@fluentui-react-native/tokens';
 import { PersonaSize } from '@fluentui-react-native/persona-coin';
 import { getTextFont, getSecondaryFont, getTertiaryFont, getOptionalFont } from './Persona.helpers';
 
 function buildTextStyleHelper(
   verticalGap: number | undefined,
   size: PersonaSize | undefined,
-  getFontAttributes: (size: PersonaSize) => ITextTokens,
-  fontTokens: ITextTokens | undefined,
+  getFontAttributes: (size: PersonaSize) => FontTokens,
+  fontTokens: FontTokens | undefined,
   theme: ITheme
 ) {
   const textStyle: TextStyle = {};

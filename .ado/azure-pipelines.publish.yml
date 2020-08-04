@@ -9,16 +9,16 @@ trigger:
 pr: none
 
 variables:
-  - group: "NPM and Github Secrets"
+  - group: 'NPM and Github Secrets'
 
 pool:
-  vmImage: "ubuntu-latest"
+  vmImage: 'ubuntu-latest'
 
 steps:
   - task: NodeTool@0
     inputs:
-      versionSpec: "10.x"
-    displayName: "Install Node.js"
+      versionSpec: '12.x'
+    displayName: 'Install Node.js'
 
   - script: |
       git config user.name "UI-Fabric-RN-Bot"
@@ -29,9 +29,9 @@ steps:
   - template: templates/yarn-install.yml
 
   - script: |
-      yarn build
-    displayName: "yarn build"
+      yarn test
+    displayName: 'yarn test'
 
   - script: |
       yarn publish:beachball -- -b origin/master -n $(npmAuth) --access public -y
-    displayName: "Publish NPM Packages"
+    displayName: 'Publish NPM Packages'

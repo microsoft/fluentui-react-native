@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`buildUseSlots test suite Simple component render 1`] = `
+<View
+  style={
+    Object {
+      "borderColor": "green",
+      "borderWidth": 1,
+      "height": 20,
+      "width": 30,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "blue",
+        "height": 10,
+        "width": 20,
+      }
+    }
+  >
+    <Text>
+      Hello
+    </Text>
+  </View>
+</View>
+`;
