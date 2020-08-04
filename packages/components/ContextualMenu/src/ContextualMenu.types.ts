@@ -1,6 +1,24 @@
 import { ICalloutProps, ICalloutTokens } from '@fluentui-react-native/callout';
+import { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const contextualMenuName = 'ContextualMenu';
+
+export interface ContextualMenuContext {
+  /*
+   ** The currently selected ContextualMenu's key
+   */
+  selectedKey: string | null;
+
+  /*
+   ** Updates the clicked menu item and calls the client’s onItemClick callback
+   */
+  onItemClick?: (key: string) => void;
+  dismissMenu?: () => void;
+}
+
+export interface ContextualMenuState {
+  context: ContextualMenuContext;
+}
 
 export type ContextualMenuTokens = ICalloutTokens;
 /**
@@ -17,14 +35,22 @@ export interface ContextualMenuProps extends Omit<ICalloutProps, 'setInitialFocu
   * Whether to focus on the menu when mounted
   */
   shouldFocusOnMount?: boolean;
+  /*
+   ** Callback for when menu item is clicked
+   */
+  onItemClick?: (key: string) => void;
+  isContextualMenu?: boolean;
 }
 
 export type ContextualMenuSlotProps = {
-  root: ICalloutProps;
+  root: ContextualMenuProps;
 };
+
+export type ContextualMenuRenderData = IRenderData<ContextualMenuSlotProps, ContextualMenuState>;
 
 export interface ContextualMenuType {
   props: ContextualMenuProps;
   slotProps: ContextualMenuSlotProps;
   tokens: ContextualMenuTokens;
+  state: ContextualMenuState;
 }

@@ -1,27 +1,69 @@
-import { contextualMenuName, ContextualMenuProps, ContextualMenuSlotProps, ContextualMenuType } from './ContextualMenu.types';
+/** @jsx withSlots */
+import * as React from 'react';
+import {
+  contextualMenuName,
+  ContextualMenuProps,
+  ContextualMenuSlotProps,
+  ContextualMenuType,
+  ContextualMenuRenderData,
+  ContextualMenuContext,
+  ContextualMenuState
+} from './ContextualMenu.types';
 import { settings } from './ContextualMenu.settings';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
-import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import { Callout } from '@fluentui-react-native/callout';
+import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
+import { findNodeHandle, NativeModules } from 'react-native';
+
+export const CMContext = React.createContext<ContextualMenuContext>({
+  selectedKey: null,
+  onItemClick: (/* key: string */) => {
+    return;
+  },
+  dismissMenu: () => {
+    return;
+  }
+});
 
 export const ContextualMenu = compose<ContextualMenuType>({
   displayName: contextualMenuName,
-  usePrepareProps: (props: ContextualMenuProps, useStyling: IUseComposeStyling<ContextualMenuType>) => {
-    const { componentRef, target, ...rest } = props;
-    const cmRef = useViewCommandFocus(componentRef);
+  usePrepareProps: (userProps: ContextualMenuProps, useStyling: IUseComposeStyling<ContextualMenuType>) => {
+    const { componentRef, ...rest } = userProps;
 
-    const slotProps = mergeSettings<ContextualMenuSlotProps>(useStyling(props), {
+    // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
+    const data = useSelectedKey(null, userProps.onItemClick);
+    const menuRef = componentRef == undefined ? React.useRef(null) : componentRef;
+
+    const dismissCallback = React.useCallback(
+      () => {
+        NativeModules.UIManager.dispatchViewManagerCommand(
+          findNodeHandle(menuRef.current),
+          NativeModules.UIManager.getViewManagerConfig('RCTCallout').Commands.dismiss,
+          null
+        );
+      }, [menuRef]);
+
+    const state: ContextualMenuState = {
+      context: {
+        selectedKey: data.selectedKey,
+        onItemClick: data.onKeySelect,
+        dismissMenu: dismissCallback
+      }
+    };
+
+    const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
+
+    const slotProps = mergeSettings<ContextualMenuSlotProps>(styleProps, {
       root: {
-        ref: cmRef,
-        target: target,
-        setInitialFocus: false,
+        componentRef: menuRef,
         ...rest
       }
     });
 
-    return { slotProps };
+    return { slotProps, state };
   },
   settings: settings,
   slots: {
@@ -29,6 +71,12 @@ export const ContextualMenu = compose<ContextualMenuType>({
   },
   styles: {
     root: [backgroundColorTokens, borderTokens]
+  },
+  render: (Slots: ISlots<ContextualMenuSlotProps>, renderData: ContextualMenuRenderData, ...children: React.ReactNode[]) => {
+    if (renderData.state == undefined) {
+      return null;
+    }
+    return <CMContext.Provider value={renderData.state.context}><Slots.root>{children}</Slots.root></CMContext.Provider>;
   }
 });
 

@@ -9,6 +9,7 @@ import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-
 export const contextualMenuItemName = 'ContextualMenuItem';
 
 export interface ContextualMenuItemState extends IPressableState {
+  selected?: boolean;
   /**
    * Whether the menu item is disabled or not
    */
@@ -24,7 +25,7 @@ export interface ContextualMenuItemProps extends Omit<IPressableProps, 'onPress'
   /*
    ** A unique key-identifier for each menu item
    */
-  key: string;
+  itemKey: string;
   /*
    * Text to show on the ContextualMenuItem.
    */
@@ -53,7 +54,7 @@ export interface ContextualMenuItemProps extends Omit<IPressableProps, 'onPress'
 }
 
 export interface ContextualMenuItemSlotProps {
-  root: React.PropsWithRef<ViewProps>;
+  root: React.PropsWithRef<ViewProps> & { acceptsKeyboardFocus?: boolean };
   stack: ViewProps;
   icon: ImageProps;
   content: ITextProps;

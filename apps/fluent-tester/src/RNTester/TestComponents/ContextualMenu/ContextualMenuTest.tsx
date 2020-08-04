@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Alert } from 'react-native';
 import { Button } from '@fluentui-react-native/button';
 import { Separator } from '@fluentui-react-native/separator';
 import { ContextualMenu, ContextualMenuItem } from '@fluentui-react-native/contextual-menu';
@@ -23,6 +23,13 @@ export const ContextualMenuTest: React.FunctionComponent<{}> = () => {
     console.log('ContextualMenu shown');
   };
 
+  const onItemClick1 = () => {
+    Alert.alert('Item Click', 'This is meuuItem\'s onClick event')
+  }
+
+  const onItemClick2 = (key: string) => {
+    Alert.alert('Menu Click', 'Menu item ' + key + ' was clicked.');
+  }
   return (
     <View>
       <Text style={fabricTesterStyles.testSection} testID={CONTEXTUALMENU_TESTPAGE}>
@@ -36,12 +43,19 @@ export const ContextualMenuTest: React.FunctionComponent<{}> = () => {
           onDismiss={onDismissContextualMenu}
           onShow={onMenuShow}
           accessibilityLabel="Standard ContextualMenu"
+          onItemClick={onItemClick2}
         >
-          <ContextualMenuItem text="ContextualMenuItem 1" key="ContextualMenuItem 1" onClick={onMenuShow} accessibilityLabel="First Menu Item" />
-          <ContextualMenuItem text="ContextualMenuItem 2" key="ContextualMenuItem 2" onClick={onMenuShow} />
-          <ContextualMenuItem text="ContextualMenuItem 3" key="ContextualMenuItem 3" onClick={onMenuShow} />
+          <ContextualMenuItem text="MenuItem 1" itemKey="1" onClick={onItemClick1} accessibilityLabel="First Menu Item" />
+          <ContextualMenuItem text="MenuItem 2" itemKey="2" />
+          <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
+          <ContextualMenuItem text="MenuItem 4" itemKey="4" />
+          <ContextualMenuItem text="MenuItem 5" itemKey="5" onClick={onItemClick1} />
         </ContextualMenu>
       )}
     </View>
   );
 };
+
+/* Test 1: onClick handled by each item
+** Text 2: onClick handled by Menu
+*/

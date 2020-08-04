@@ -9,11 +9,13 @@ import { settings } from './ContextualMenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { CMContext } from './ContextualMenu';
 
 export const ContextualMenuItem = compose<ContextualMenuItemType>({
   displayName: contextualMenuItemName,
   usePrepareProps: (userProps: ContextualMenuItemProps, useStyling: IUseComposeStyling<ContextualMenuItemType>) => {
     const {
+      itemKey,
       icon,
       text,
       accessibilityLabel = userProps.text,
@@ -22,25 +24,39 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       ...rest
     } = userProps;
 
-    // attach the pressable state handlers
-    const pressable = useAsPressable({ ...rest, onPress: onClick });
+    // Grabs the context information from ContextualMenu (currently selected menuItem and client's onItemClick callback)
+    const context = React.useContext(CMContext);
+
+    const onItemClick = React.useCallback(
+      e => {
+        context.dismissMenu && context.dismissMenu();
+        if (onClick) {
+          onClick();
+        }
+        else {
+          context.onItemClick && context.onItemClick(itemKey);
+        }
+        e.stopPropagation();
+      }, [context, itemKey, onClick]
+    );
+
     const onKeyUp = React.useCallback(
       e => {
-        if (onClick && (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ')) {
-          onClick();
-          e.stopPropagation()
+        if (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ') {
+          onItemClick(e);
         }
-      },
-      [onClick]
-    );
+      }, [onItemClick]);
+
+    // attach the pressable state handlers
+    const pressable = useAsPressable({ ...rest, onPress: onItemClick });
 
     // set up state
     const state: ContextualMenuItemState = {
       ...pressable.state,
+      selected: context.selectedKey === userProps.itemKey,
       disabled: userProps.disabled,
       content: !!text,
       icon: !!icon
-
     };
 
     const cmRef = useViewCommandFocus(userProps.componentRef);
@@ -52,7 +68,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         ...pressable.props,
         ref: cmRef,
         onKeyUp: onKeyUp,
-        accessibilityLabel: accessibilityLabel,
+        accessibilityLabel: accessibilityLabel
       },
       content: { children: text, testID },
       icon: { source: icon }
