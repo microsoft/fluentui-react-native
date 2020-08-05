@@ -85,14 +85,13 @@ export const Test = (props: TestProps) => {
           <Text style={styles.status}>{props.status.iosStatus}</Text>
         </Text>
         <Text style={styles.statusLabel}>
-          MacOS:{' '}
+          macOS:{' '}
           <Text style={styles.status}>{props.status.macosStatus}</Text>
         </Text>
         <Text style={styles.statusLabel}>
           Android:{' '}
           <Text style={styles.status}>{props.status.androidStatus}</Text>
         </Text>
-        <Separator vertical />
       </Stack>
       {props.sections.map((section, index) => {
         const TestComponent = section.component;

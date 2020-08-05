@@ -26,7 +26,9 @@ export const PersonaCoinTest: React.FunctionComponent<{}> = () => {
     androidStatus: 'backlog'
   }
 
+  const description = 'PersonaCoins are used for rendering an individual\'s avatar. PersonaCoin renders the circular image component.'
+
   return (
-    <Test name="PersonaCoin Test" description="No description." sections={personaCoinSections} status={status}></Test>
+    <Test name="PersonaCoin Test" description={description} sections={personaCoinSections} status={status}></Test>
   );
 };
