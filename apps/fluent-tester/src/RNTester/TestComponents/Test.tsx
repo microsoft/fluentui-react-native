@@ -13,7 +13,7 @@ export type TestSection = {
 export type Status = 'production' | 'beta' | 'experimental' | 'backlog' | 'n/a';
 export type PlatformStatus = {
   win32Status: Status;
-  uwpStatus: Status,
+  uwpStatus: Status;
   iosStatus: Status;
   macosStatus: Status;
   androidStatus: Status;
