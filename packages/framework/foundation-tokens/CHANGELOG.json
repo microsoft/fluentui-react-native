@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Wed, 05 Aug 2020 22:50:11 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "added descriptions",
+            "author": "email not defined",
+            "commit": "eb607f63531821f1b20b27081418045927b0f130",
+            "package": "@uifabricshared/foundation-tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 01 Aug 2020 00:34:34 GMT",
       "tag": "@uifabricshared/foundation-tokens_v0.7.0",
       "version": "0.7.0",
