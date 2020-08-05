@@ -17,11 +17,13 @@ const personaCoinSections: TestSection[] = [
 ];
 
 export const PersonaCoinTest: React.FunctionComponent<{}> = () => {
+
   const status: PlatformStatus = {
-    winStatus: 'beta',
+    win32Status: 'beta',
+    uwpStatus: 'experimental',
     iosStatus: 'experimental',
     macosStatus: 'experimental',
-    androidStatus: 'experimental'
+    androidStatus: 'backlog'
   }
 
   return (
