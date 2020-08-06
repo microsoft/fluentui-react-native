@@ -1,12 +1,12 @@
 import { FocusTrapZone, IFocusTrapZoneProps } from '@fluentui-react-native/focus-trap-zone';
 import { KeyPressEvent, useFocusState } from '@fluentui-react-native/interactive-hooks';
-import { Separator } from '@fluentui-react-native/separator';
 import { Stack } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui-react-native/text';
 import * as React from 'react';
 import { TouchableHighlight, TouchableHighlightProps, View, ViewProps } from 'react-native';
-import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
+import { stackStyle } from '../Common/styles';
 import { FOCUSTRAPZONE_TESTPAGE } from './consts';
+import { Test, TestSection, PlatformStatus } from '../Test';
 
 const trapZoneStyle: IFocusTrapZoneProps['style'] = {
   padding: 10,
@@ -56,7 +56,8 @@ const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps> = (pro
   );
 };
 
-export const FocusTrapTest: React.FunctionComponent<{}> = () => {
+const basicFocusTrapZone: React.FunctionComponent<{}> = () => {
+
   const [state, setState] = React.useState({
     useTrapZone: false,
     renderTrapZone: true,
@@ -93,48 +94,67 @@ export const FocusTrapTest: React.FunctionComponent<{}> = () => {
   }, [state, setState]);
 
   return (
-    <View>
-      <Text style={commonStyles.section} testID={FOCUSTRAPZONE_TESTPAGE}>
-        Basic FocusTrapZone Usage
-      </Text>
-      <Separator />
-      <View {...{ onKeyDown: onKeyDown }}>
-        <Stack style={stackStyle} gap={5}>
-          <ComponentTwiddler label="Press space to render or enter to trap, f to focus" />
-          <ComponentTwiddler
-            label={state.ignoreExternalFocusing ? 'ignoreExternalFocusing: true' : 'ignoreExternalFocusing: false'}
-            onPress={onTwiddleExternalFocusing}
-          />
-          <ComponentTwiddler
-            label={
-              state.focusPreviouslyFocusedInnerElement
-                ? 'focusPreviouslyFocusedInnerElement: true'
-                : 'focusPreviouslyFocusedInnerElement: false'
-            }
-            onPress={onTwiddleFocusPrevious}
-          />
-          <ComponentTwiddler
-            label={state.disableFirstFocus ? 'disableFirstFocus: true' : 'disableFirstFocus: false'}
-            onPress={onTwiddleFirstFocus}
-          />
-          {state.renderTrapZone && (
-            <FocusTrapZone
-              componentRef={ftzRef}
-              disableFirstFocus={state.disableFirstFocus}
-              ignoreExternalFocusing={state.ignoreExternalFocusing}
-              focusPreviouslyFocusedInnerElement={state.focusPreviouslyFocusedInnerElement}
-              disabled={!state.useTrapZone}
-              style={state.useTrapZone ? activeTrapZoneStyle : trapZoneStyle}
-            >
-              <Text>{state.useTrapZone ? 'Trap Active' : 'Trap Active'}</Text>
-              <ComponentTwiddler label="trapped" />
-              <ComponentTwiddler label="trapped" />
-              <ComponentTwiddler label="trapped" />
-              <ComponentTwiddler label="trapped" />
-            </FocusTrapZone>
-          )}
-        </Stack>
-      </View>
+    <View {...{ onKeyDown: onKeyDown }}>
+      <Stack style={stackStyle} gap={5}>
+        <ComponentTwiddler label="Press space to render or enter to trap, f to focus" />
+        <ComponentTwiddler
+          label={state.ignoreExternalFocusing ? 'ignoreExternalFocusing: true' : 'ignoreExternalFocusing: false'}
+          onPress={onTwiddleExternalFocusing}
+        />
+        <ComponentTwiddler
+          label={
+            state.focusPreviouslyFocusedInnerElement
+              ? 'focusPreviouslyFocusedInnerElement: true'
+              : 'focusPreviouslyFocusedInnerElement: false'
+          }
+          onPress={onTwiddleFocusPrevious}
+        />
+        <ComponentTwiddler
+          label={state.disableFirstFocus ? 'disableFirstFocus: true' : 'disableFirstFocus: false'}
+          onPress={onTwiddleFirstFocus}
+        />
+        {state.renderTrapZone && (
+          <FocusTrapZone
+            componentRef={ftzRef}
+            disableFirstFocus={state.disableFirstFocus}
+            ignoreExternalFocusing={state.ignoreExternalFocusing}
+            focusPreviouslyFocusedInnerElement={state.focusPreviouslyFocusedInnerElement}
+            disabled={!state.useTrapZone}
+            style={state.useTrapZone ? activeTrapZoneStyle : trapZoneStyle}
+          >
+            <Text>{state.useTrapZone ? 'Trap Active' : 'Trap Active'}</Text>
+            <ComponentTwiddler label="trapped" />
+            <ComponentTwiddler label="trapped" />
+            <ComponentTwiddler label="trapped" />
+            <ComponentTwiddler label="trapped" />
+          </FocusTrapZone>
+        )}
+      </Stack>
     </View>
+  );
+}
+
+const focusTrapZoneSections: TestSection[] = [
+  {
+    name: 'Basic FocusTrapZone Usage',
+    testID: FOCUSTRAPZONE_TESTPAGE,
+    component: basicFocusTrapZone
+  },
+];
+
+export const FocusTrapTest: React.FunctionComponent<{}> = () => {
+
+  const status: PlatformStatus = {
+    win32Status: 'beta',
+    uwpStatus: 'backlog',
+    iosStatus: 'N/A',
+    macosStatus: 'N/A',
+    androidStatus: 'N/A'
+  }
+
+  const description = 'FocusTrapZone is used to trap the focus in any html element. Pressing tab will circle focus within the inner focusable elements of the FocusTrapZone.'
+
+  return (
+    <Test name="Focus Trap Zone Test" description={description} sections={focusTrapZoneSections} status={status}></Test>
   );
 };

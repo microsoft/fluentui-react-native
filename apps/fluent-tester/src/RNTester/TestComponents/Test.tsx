@@ -10,7 +10,7 @@ export type TestSection = {
   component: React.FunctionComponent<{}>;
 };
 
-export type Status = 'production' | 'beta' | 'experimental' | 'backlog' | 'n/a';
+export type Status = 'production' | 'beta' | 'experimental' | 'backlog' | 'N/A';
 export type PlatformStatus = {
   win32Status: Status;
   uwpStatus: Status;
