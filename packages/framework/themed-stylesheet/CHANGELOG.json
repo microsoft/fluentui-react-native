@@ -2,6 +2,21 @@
   "name": "@uifabricshared/themed-stylesheet",
   "entries": [
     {
+      "date": "Wed, 05 Aug 2020 22:50:11 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.3.67",
+      "version": "0.3.67",
+      "comments": {
+        "none": [
+          {
+            "comment": "added descriptions",
+            "author": "email not defined",
+            "commit": "eb607f63531821f1b20b27081418045927b0f130",
+            "package": "@uifabricshared/themed-stylesheet"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jul 2020 22:38:20 GMT",
       "tag": "@uifabricshared/themed-stylesheet_v0.3.67",
       "version": "0.3.67",
