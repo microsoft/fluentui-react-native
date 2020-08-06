@@ -20,11 +20,9 @@ it('Text all props', () => {
 
 it('Text all tokens', () => {
   const BoldText = Text.customize({
-    tokens: {
-      fontFamily: 'Wingdings',
-      fontWeight: '900',
-      fontSize: 20
-    }
+    fontFamily: 'Wingdings',
+    fontWeight: '900',
+    fontSize: 20
   });
   const tree = renderer.create(<BoldText>All tokens</BoldText>).toJSON();
   expect(tree).toMatchSnapshot();

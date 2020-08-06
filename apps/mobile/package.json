@@ -1,5 +1,5 @@
 {
-  "name": "FluentTester-mobile",
+  "name": "@fluentui-react-native/tester-mobile",
   "version": "0.0.1",
   "private": true,
   "scripts": {

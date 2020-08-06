@@ -1,0 +1,50 @@
+{
+  "name": "@fluentui-react-native/tester-win32",
+  "entries": [
+    {
+      "date": "Wed, 05 Aug 2020 22:50:11 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "added descriptions",
+            "author": "email not defined",
+            "commit": "eb607f63531821f1b20b27081418045927b0f130",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 05 Aug 2020 20:48:11 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix bundler to bundle svgs",
+            "author": "warleu@microsoft.com",
+            "commit": "cfcf11504798b56ab6043c03041db202317af9fb",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 01 Aug 2020 00:34:34 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "publish @fluentui-react-native/tester-win32",
+            "author": "krsiler@microsoft.com",
+            "commit": "f0021e6d95a1fa68c946a2dab2c797f32705fb9e",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theme-registry",
-  "version": "0.3.66",
+  "version": "0.3.67",
   "description": "Implementation of the theme graph",
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
     "lint": "fluentui-scripts eslint",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
+    "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
     "verify-api": "fluentui-scripts verify-api-extractor",
     "update-api": "fluentui-scripts update-api-extractor"
@@ -30,7 +31,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/immutable-merge": ">=0.5.66 <1.0.0"
+    "@uifabricshared/immutable-merge": ">=0.5.67 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

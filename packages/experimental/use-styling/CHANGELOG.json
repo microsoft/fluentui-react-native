@@ -1,0 +1,50 @@
+{
+  "name": "@fluentui-react-native/use-styling",
+  "entries": [
+    {
+      "date": "Wed, 05 Aug 2020 22:50:11 GMT",
+      "tag": "@fluentui-react-native/use-styling_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "added descriptions",
+            "author": "email not defined",
+            "commit": "eb607f63531821f1b20b27081418045927b0f130",
+            "package": "@fluentui-react-native/use-styling"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jul 2020 22:38:20 GMT",
+      "tag": "@fluentui-react-native/use-styling_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch to using Lage for build sequencing",
+            "author": "jasonmo@microsoft.com",
+            "commit": "79677c8f3260dbf55e053db5983fb161c6fb44b5",
+            "package": "@fluentui-react-native/use-styling"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 28 Jul 2020 18:21:12 GMT",
+      "tag": "@fluentui-react-native/use-styling_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "add experimental framework packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "585007a447ba6dec0ae70be693879bbf7125c71b",
+            "package": "@fluentui-react-native/use-styling"
+          }
+        ]
+      }
+    }
+  ]
+}
