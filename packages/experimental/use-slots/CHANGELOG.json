@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/use-slots",
   "entries": [
     {
+      "date": "Wed, 05 Aug 2020 22:50:11 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "added descriptions",
+            "author": "email not defined",
+            "commit": "eb607f63531821f1b20b27081418045927b0f130",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 01 Aug 2020 00:34:34 GMT",
       "tag": "@fluentui-react-native/use-slots_v0.3.0",
       "version": "0.3.0",
