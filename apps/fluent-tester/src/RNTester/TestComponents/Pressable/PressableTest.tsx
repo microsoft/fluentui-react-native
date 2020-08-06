@@ -144,7 +144,9 @@ export const PressableTest: React.FunctionComponent<{}> = () => {
     androidStatus: 'backlog'
   }
 
+  const description = 'No description.'
+
   return (
-    <Test name="Pressable Test" description="No description." sections={pressableSections} status={status}></Test>
+    <Test name="Pressable Test" description={description} sections={pressableSections} status={status}></Test>
   );
 };

@@ -37,7 +37,9 @@ export const RadioGroupTest: React.FunctionComponent<{}> = () => {
     androidStatus: 'backlog'
   }
 
+  const description = 'No description.'
+
   return (
-    <Test name="RadioGroup Test" description="No description." sections={radioGroupSections} status={status}></Test>
+    <Test name="RadioGroup Test" description={description} sections={radioGroupSections} status={status}></Test>
   );
 };
