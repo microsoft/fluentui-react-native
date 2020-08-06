@@ -9,6 +9,7 @@ import { RadioGroup, RadioButton } from '@fluentui-react-native/radio-group';
 import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 import { customRegistry } from './CustomThemes';
 import { THEME_TESTPAGE } from './consts';
+import { Test, TestSection, PlatformStatus } from '../Test';
 
 let brand = 'Office';
 
@@ -191,22 +192,43 @@ const ThemeTestInner: React.FunctionComponent = () => {
           <RadioButton buttonKey="WhiteColors" content="WhiteColors (Platform Theme)" />
         </RadioGroup>
       </View>
+
       <Text style={themedStyles.extraLargeStandardEmphasis}>{theme + ' Theme'}</Text>
       <Separator />
       <ThemeProvider theme={theme}>
         <Panel />
       </ThemeProvider>
+
       <Text style={themedStyles.extraLargeStandardEmphasis}>Host-specific Theme Settings</Text>
       <Separator />
       <SwatchList />
+
     </View>
   );
 };
 
+const themeSections: TestSection[] = [
+  {
+    name: 'Theme Test',
+    component: ThemeTestInner
+  },
+];
+
 export const ThemeTest: React.FunctionComponent = () => {
+
+  const status: PlatformStatus = {
+    win32Status: 'beta',
+    uwpStatus: 'experimental',
+    iosStatus: 'experimental',
+    macosStatus: 'experimental',
+    androidStatus: 'backlog'
+  }
+
+  const description = 'The entire color palette of the controls is themeable. We provide a set of sensible defaults, but you can override all colors individually.'
+
   return (
     <ThemeProvider theme="Default">
-      <ThemeTestInner />
+      <Test name="Theme Test" description={description} sections={themeSections} status={status}></Test>
     </ThemeProvider>
   );
 };
