@@ -18,7 +18,7 @@
     "webpack": "^4.42.0"
   },
   "scripts": {
-    "web": "webpack-dev-server",
+    "web": "start http://localhost:8080/ & webpack-dev-server",
     "test": "fluentui-scripts jest"
   },
   "eslintConfig": {
