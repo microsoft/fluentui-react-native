@@ -39,7 +39,7 @@ export interface ContextualMenuProps extends Omit<ICalloutProps, 'setInitialFocu
    ** Callback for when menu item is clicked
    */
   onItemClick?: (key: string) => void;
-  isContextualMenu?: boolean;
+  setShowMenu?: (showMenu: boolean) => void;
 }
 
 export type ContextualMenuSlotProps = {

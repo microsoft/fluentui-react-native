@@ -24,16 +24,20 @@ export const ContextualMenuTest: React.FunctionComponent<{}> = () => {
   };
 
   const onItemClick1 = () => {
-    Alert.alert('Item Click', 'This is meuuItem\'s onClick event')
+    console.log('Item Click', 'This is meuuItem\'s onClick event')
   }
 
   const onItemClick2 = (key: string) => {
-    Alert.alert('Menu Click', 'Menu item ' + key + ' was clicked.');
+    console.log('Menu Click', 'Menu item ' + key + ' was clicked.');
   }
   return (
     <View>
       <Text style={fabricTesterStyles.testSection} testID={CONTEXTUALMENU_TESTPAGE}>
         ContextualMenu Test
+      </Text>
+      <Separator />
+      <Text>
+        Menu Item Click Handled by Menu
       </Text>
       <Separator />
       <Button content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
@@ -44,6 +48,7 @@ export const ContextualMenuTest: React.FunctionComponent<{}> = () => {
           onShow={onMenuShow}
           accessibilityLabel="Standard ContextualMenu"
           onItemClick={onItemClick2}
+          setShowMenu={setShowContextualMenu}
         >
           <ContextualMenuItem text="MenuItem 1" itemKey="1" onClick={onItemClick1} accessibilityLabel="First Menu Item" />
           <ContextualMenuItem text="MenuItem 2" itemKey="2" />
@@ -52,6 +57,10 @@ export const ContextualMenuTest: React.FunctionComponent<{}> = () => {
           <ContextualMenuItem text="MenuItem 5" itemKey="5" onClick={onItemClick1} />
         </ContextualMenu>
       )}
+      <Text>
+        Menu Item Click Handled by each Item
+      </Text>
+      <Separator />
     </View>
   );
 };

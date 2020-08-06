@@ -16,7 +16,6 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import { Callout } from '@fluentui-react-native/callout';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { findNodeHandle, NativeModules } from 'react-native';
 
 export const CMContext = React.createContext<ContextualMenuContext>({
   selectedKey: null,
@@ -31,20 +30,15 @@ export const CMContext = React.createContext<ContextualMenuContext>({
 export const ContextualMenu = compose<ContextualMenuType>({
   displayName: contextualMenuName,
   usePrepareProps: (userProps: ContextualMenuProps, useStyling: IUseComposeStyling<ContextualMenuType>) => {
-    const { componentRef, ...rest } = userProps;
+    const { setShowMenu, ...rest } = userProps;
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
     const data = useSelectedKey(null, userProps.onItemClick);
-    const menuRef = componentRef == undefined ? React.useRef(null) : componentRef;
 
     const dismissCallback = React.useCallback(
       () => {
-        NativeModules.UIManager.dispatchViewManagerCommand(
-          findNodeHandle(menuRef.current),
-          NativeModules.UIManager.getViewManagerConfig('RCTCallout').Commands.dismiss,
-          null
-        );
-      }, [menuRef]);
+        setShowMenu(false);
+      }, [setShowMenu]);
 
     const state: ContextualMenuState = {
       context: {
@@ -58,7 +52,6 @@ export const ContextualMenu = compose<ContextualMenuType>({
 
     const slotProps = mergeSettings<ContextualMenuSlotProps>(styleProps, {
       root: {
-        componentRef: menuRef,
         ...rest
       }
     });
