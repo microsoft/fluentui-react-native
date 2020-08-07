@@ -145,8 +145,8 @@ const focusTrapZoneSections: TestSection[] = [
 export const FocusTrapTest: React.FunctionComponent<{}> = () => {
 
   const status: PlatformStatus = {
-    win32Status: 'beta',
-    uwpStatus: 'backlog',
+    win32Status: 'Beta',
+    uwpStatus: 'Backlog',
     iosStatus: 'N/A',
     macosStatus: 'N/A',
     androidStatus: 'N/A'

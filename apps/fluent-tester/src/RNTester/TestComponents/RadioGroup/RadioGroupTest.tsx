@@ -30,11 +30,11 @@ const radioGroupSections: TestSection[] = [
 export const RadioGroupTest: React.FunctionComponent<{}> = () => {
 
   const status: PlatformStatus = {
-    win32Status: 'beta',
-    uwpStatus: 'experimental',
-    iosStatus: 'experimental',
-    macosStatus: 'experimental',
-    androidStatus: 'backlog'
+    win32Status: 'Beta',
+    uwpStatus: 'Experimental',
+    iosStatus: 'Experimental',
+    macosStatus: 'Experimental',
+    androidStatus: 'Backlog'
   }
 
   const description = 'No description.'

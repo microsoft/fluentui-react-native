@@ -17,11 +17,11 @@ const textSections: TestSection[] = [
 export const TextTest: React.FunctionComponent<{}> = () => {
 
   const status: PlatformStatus = {
-    win32Status: 'experimental',
-    uwpStatus: 'experimental',
-    iosStatus: 'experimental',
-    macosStatus: 'experimental',
-    androidStatus: 'beta'
+    win32Status: 'Experimental',
+    uwpStatus: 'Experimental',
+    iosStatus: 'Experimental',
+    macosStatus: 'Experimental',
+    androidStatus: 'Beta'
   }
 
   const description = 'Text is a component for displaying text. You can use Text to standardize text across your app.'

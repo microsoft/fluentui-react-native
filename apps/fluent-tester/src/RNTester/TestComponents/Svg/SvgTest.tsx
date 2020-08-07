@@ -156,11 +156,11 @@ const svgSections: TestSection[] = [
 export const SvgTest: React.FunctionComponent<{}> = () => {
 
   const status: PlatformStatus = {
-    win32Status: 'beta',
-    uwpStatus: 'backlog',
-    iosStatus: 'backlog',
-    macosStatus: 'backlog',
-    androidStatus: 'backlog'
+    win32Status: 'Beta',
+    uwpStatus: 'Backlog',
+    iosStatus: 'Backlog',
+    macosStatus: 'Backlog',
+    androidStatus: 'Backlog'
   }
 
   const description = 'No description.'

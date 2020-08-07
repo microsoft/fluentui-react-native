@@ -243,11 +243,11 @@ const calloutSections: TestSection[] = [
 export const CalloutTest: React.FunctionComponent<{}> = () => {
 
   const status: PlatformStatus = {
-    win32Status: 'beta',
-    uwpStatus: 'backlog',
-    iosStatus: 'backlog',
-    macosStatus: 'backlog',
-    androidStatus: 'backlog'
+    win32Status: 'Beta',
+    uwpStatus: 'Backlog',
+    iosStatus: 'Backlog',
+    macosStatus: 'Backlog',
+    androidStatus: 'Backlog'
   }
 
   const description = 'A callout is an anchored tip that can be used to teach people or guide them through the app without blocking them.'
