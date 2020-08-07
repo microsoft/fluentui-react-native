@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Remove unnecessary calls to slot data factories",
+  "packageName": "@fluentui-react-native/use-slots",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-08-07T21:08:39.235Z"
+}
