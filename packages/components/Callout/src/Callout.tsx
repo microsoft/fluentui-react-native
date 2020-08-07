@@ -17,7 +17,7 @@ export const Callout = compose<ICalloutType>({
     const [targetNativeTag, setTargetNativeTag] = React.useState<number>(undefined);
 
     React.useLayoutEffect(() => {
-      if (target ?.current) {
+      if (target?.current) {
         setTargetNativeTag(findNodeHandle(target.current));
       }
     }, [target]);

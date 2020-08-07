@@ -13,7 +13,7 @@ export interface ContextualMenuContext {
    ** Updates the clicked menu item and calls the client’s onItemClick callback
    */
   onItemClick?: (key: string) => void;
-  dismissMenu?: () => void;
+  onDismissMenu?: () => void;
 }
 
 export interface ContextualMenuState {

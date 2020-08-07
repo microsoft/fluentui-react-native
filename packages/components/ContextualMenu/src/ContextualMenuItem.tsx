@@ -29,7 +29,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
 
     const onItemClick = React.useCallback(
       e => {
-        context.dismissMenu && context.dismissMenu();
+        context?.onDismissMenu();
         if (onClick) {
           onClick();
         }

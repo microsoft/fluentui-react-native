@@ -19,7 +19,7 @@ export interface ContextualMenuItemState extends IPressableState {
   icon?: boolean;
 }
 
-export interface ContextualMenuItemTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {}
+export interface ContextualMenuItemTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens { }
 
 export interface ContextualMenuItemProps extends Omit<IPressableProps, 'onPress'> {
   /*
@@ -54,7 +54,7 @@ export interface ContextualMenuItemProps extends Omit<IPressableProps, 'onPress'
 }
 
 export interface ContextualMenuItemSlotProps {
-  root: React.PropsWithRef<ViewProps> & { acceptsKeyboardFocus?: boolean };
+  root: React.PropsWithRef<ViewProps>;
   stack: ViewProps;
   icon: ImageProps;
   content: ITextProps;

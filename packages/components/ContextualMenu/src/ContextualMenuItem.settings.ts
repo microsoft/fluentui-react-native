@@ -11,7 +11,6 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
     root: {
       accessible: true,
       accessibilityRole: 'menuitem',
-      acceptsKeyboardFocus: true,
       style: {
         display: 'flex',
         alignItems: 'flex-start',

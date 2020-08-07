@@ -21,18 +21,14 @@ export const ContextualMenuTest: React.FunctionComponent<{}> = () => {
 
   const onShowContextualMenu = React.useCallback(() => {
     setIsContextualMenuVisible(true);
-    console.log('ContextualMenu shown');
   }, [setIsContextualMenuVisible]);
 
   const onDismissContextualMenu = React.useCallback(() => {
     setShowContextualMenu(false);
     setIsContextualMenuVisible(false);
-    console.log('ContextualMenu dismissed by unmounting');
   }, [setShowContextualMenu]);
 
   const onItemClick = React.useCallback((key) => {
-    console.log('ContextualMenu dismissed by item click');
-    console.log('This is Menu\'s onItemClick event. Menu item ' + key + ' was clicked.');
     setLastMenuItemClicked(key);
   }, [setLastMenuItemClicked]);
 
@@ -43,11 +39,11 @@ export const ContextualMenuTest: React.FunctionComponent<{}> = () => {
       </Text>
       <Separator />
       <View style={{ flexDirection: 'column', paddingVertical: 5 }}>
-        <Text selectable={true}>
+        <Text>
           <Text>Menu Visibility: </Text>
           {isContextualMenuVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
         </Text>
-        <Text selectable={true}>
+        <Text>
           <Text>Last Menu Item Clicked: </Text>
           {lastMenuItemClicked > 0 ? <Text style={{ color: 'blue' }}>{lastMenuItemClicked}</Text> : <Text style={{ color: 'blue' }}>none</Text>}
         </Text>

@@ -22,7 +22,7 @@ export const CMContext = React.createContext<ContextualMenuContext>({
   onItemClick: (/* key: string */) => {
     return;
   },
-  dismissMenu: () => {
+  onDismissMenu: () => {
     return;
   }
 });
@@ -44,7 +44,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
       context: {
         selectedKey: data.selectedKey,
         onItemClick: data.onKeySelect,
-        dismissMenu: dismissCallback
+        onDismissMenu: dismissCallback
       }
     };
 
