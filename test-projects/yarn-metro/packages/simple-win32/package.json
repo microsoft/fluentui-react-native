@@ -12,7 +12,7 @@
     "run-win32-devmain": "rex-win32 --bundle index --component BasicWin32Test --basePath . --useDevMain --pluginProps"
   },
   "dependencies": {
-    "@fluentui/react-native": ">=0.15.77 <1.0.0",
+    "@fluentui/react-native": ">=0.15.78 <1.0.0",
     "@office-iss/react-native-win32": "0.62.0-preview.3",
     "@uifabricshared/theming-react-native": "0.7.70",
     "@uifabricshared/themed-stylesheet": "0.3.67",

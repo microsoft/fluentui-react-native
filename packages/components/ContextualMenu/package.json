@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/contextual-menu",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A cross-platform ContextualMenu component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -20,14 +20,14 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.6.73",
+    "@uifabricshared/foundation-compose": "^1.6.74",
     "@fluentui-react-native/adapters": ">=0.3.34 <1.0.0",
     "@fluentui-react-native/interactive-hooks": ">=0.4.38 <1.0.0",
-    "@fluentui-react-native/text": ">=0.6.0 <1.0.0",
+    "@fluentui-react-native/text": ">=0.6.1 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.5.1 <1.0.0"
   },
   "devDependencies": {
-    "@fluentui-react-native/pressable": ">=0.3.76 <1.0.0",
+    "@fluentui-react-native/pressable": ">=0.3.77 <1.0.0",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",

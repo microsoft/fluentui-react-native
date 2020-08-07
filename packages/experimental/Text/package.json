@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.3.34 <1.0.0",
-    "@fluentui-react-native/experimental-framework": "0.2.2",
+    "@fluentui-react-native/experimental-framework": "0.2.3",
     "@fluentui-react-native/tokens": ">=0.5.1 <1.0.0"
   },
   "devDependencies": {
