@@ -103,6 +103,7 @@ export const Test = (props: TestProps) => {
           </Stack>
 
           <Stack style={stackStyle}>
+            <Text style={styles.statusHeader}>Status Definitions</Text>
             <Text style={styles.statusLabel}>
               Production:{' '}
               <Text style={styles.status}>Control is ready for broad partner use and to be used in production-ready scenarios.</Text>
