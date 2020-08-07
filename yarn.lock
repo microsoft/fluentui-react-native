@@ -4995,10 +4995,10 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-beachball@^1.30.2:
-  version "1.32.2"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-1.32.2.tgz#8c8501a20bc3d7f7cffcb5e7661dcffe2c00cfee"
-  integrity sha512-1rUhqockNXdAjCCzFLszHxnfsjf+/dTFo2YudpeQWyKUyQ1HeIiwdUVp/bM9uOc+VxG6sUrk5nnrBRAX7yI4aw==
+beachball@^1.35.0:
+  version "1.35.0"
+  resolved "https://registry.npmjs.org/beachball/-/beachball-1.35.0.tgz#0bca3c87a9d64a2d92b08e9ec26dd8cd759d2c6f"
+  integrity sha512-VtQP9dKhAWeqh5NDuWqtzci9bN/xJT/fr/+t0h3OjaNLDCefybU6F1Txv9zhoLiimaiiWOYXjh0dqoa8hrPz8w==
   dependencies:
     cosmiconfig "^6.0.0"
     execa "^4.0.3"
@@ -10899,10 +10899,10 @@ kuler@1.0.x:
   dependencies:
     colornames "^1.1.1"
 
-lage@^0.16.1:
-  version "0.16.1"
-  resolved "https://registry.npmjs.org/lage/-/lage-0.16.1.tgz#35495df385a16317bec29ecd43f85bf89b6fd4c1"
-  integrity sha512-jbEky2j09yUAYUPB/brWtYBsuYek1331XxIbiXHuFCkpgV33UAgg+SWpXw4A8jL/7PN8n6JF2xydsIt/ZVwn8w==
+"lage@>=0.17.4 <1.0.0":
+  version "0.17.4"
+  resolved "https://registry.npmjs.org/lage/-/lage-0.17.4.tgz#0ac9f467448eb8bea362689844dd5f959e92e93f"
+  integrity sha512-3JVpI2SNFVqgq42wk//OtPBu34VcUmwSy+khgvIUTKVosK7Wy0pacJ/cjW+3O5mxgGBSl9RtveLXFOWz9EpHWw==
   dependencies:
     "@microsoft/task-scheduler" "^2.4.0"
     abort-controller "^3.0.0"
