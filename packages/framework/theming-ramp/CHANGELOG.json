@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Fri, 07 Aug 2020 22:08:03 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.1",
+      "version": "0.10.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "update react peer dep to be more flexible",
+            "author": "jasonmo@microsoft.com",
+            "commit": "3e6fc4de37ae98bbdd3ed62f259112df6d790082",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 05 Aug 2020 22:50:11 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.10.0",
       "version": "0.10.0",

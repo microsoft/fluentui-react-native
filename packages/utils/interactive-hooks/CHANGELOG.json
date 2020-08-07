@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Fri, 07 Aug 2020 22:08:03 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.4.39",
+      "version": "0.4.39",
+      "comments": {
+        "patch": [
+          {
+            "comment": "update react peer dep to be more flexible",
+            "author": "jasonmo@microsoft.com",
+            "commit": "3e6fc4de37ae98bbdd3ed62f259112df6d790082",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 05 Aug 2020 22:50:11 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.4.38",
       "version": "0.4.38",
