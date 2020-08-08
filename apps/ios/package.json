@@ -18,7 +18,7 @@
     "ios": "react-native run-ios --scheme ReactTestApp --project-path src"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.1.3",
+    "@fluentui-react-native/tester": "^0.2.0",
     "@uifabricshared/theming-react-native": "0.7.71",
     "@uifabricshared/themed-stylesheet": "0.3.67",
     "react": "16.11.0",
