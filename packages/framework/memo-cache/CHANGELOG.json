@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/memo-cache",
   "entries": [
     {
+      "date": "Wed, 05 Aug 2020 22:50:11 GMT",
+      "tag": "@fluentui-react-native/memo-cache_v0.2.10",
+      "version": "0.2.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "added descriptions",
+            "author": "email not defined",
+            "commit": "eb607f63531821f1b20b27081418045927b0f130",
+            "package": "@fluentui-react-native/memo-cache"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jul 2020 22:38:20 GMT",
       "tag": "@fluentui-react-native/memo-cache_v0.2.10",
       "version": "0.2.10",

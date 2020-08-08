@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Wed, 17 Jun 2020 05:00:56 GMT and should not be manually modified.
+This log was last generated on Fri, 07 Aug 2020 22:08:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.39
+
+Fri, 07 Aug 2020 22:08:03 GMT
+
+### Patches
+
+- update react peer dep to be more flexible (jasonmo@microsoft.com)
 
 ## 0.4.29
 

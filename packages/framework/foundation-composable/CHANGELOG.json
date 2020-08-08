@@ -2,6 +2,36 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Fri, 07 Aug 2020 21:50:55 GMT",
+      "tag": "@uifabricshared/foundation-composable_v0.6.69",
+      "version": "0.6.69",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Remove unnecessary calls to slot data factories",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f33616b3e07a5297d5938a297606cf0f8691f602",
+            "package": "@uifabricshared/foundation-composable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 05 Aug 2020 22:50:11 GMT",
+      "tag": "@uifabricshared/foundation-composable_v0.6.68",
+      "version": "0.6.68",
+      "comments": {
+        "none": [
+          {
+            "comment": "added descriptions",
+            "author": "email not defined",
+            "commit": "eb607f63531821f1b20b27081418045927b0f130",
+            "package": "@uifabricshared/foundation-composable"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jul 2020 22:38:20 GMT",
       "tag": "@uifabricshared/foundation-composable_v0.6.68",
       "version": "0.6.68",
