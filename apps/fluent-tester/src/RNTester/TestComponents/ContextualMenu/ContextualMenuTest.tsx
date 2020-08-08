@@ -10,36 +10,59 @@ export const ContextualMenuTest: React.FunctionComponent<{}> = () => {
   const stdBtnRef = React.useRef(null);
 
   const [showContextualMenu, setShowContextualMenu] = React.useState(false);
+  const [isContextualMenuVisible, setIsContextualMenuVisible] = React.useState(false);
+
+  const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
 
   const toggleShowContextualMenu = React.useCallback(() => {
     setShowContextualMenu(!showContextualMenu);
-  }, [showContextualMenu, setShowContextualMenu]);
+    setIsContextualMenuVisible(false);
+  }, [showContextualMenu, setShowContextualMenu, setIsContextualMenuVisible]);
+
+  const onShowContextualMenu = React.useCallback(() => {
+    setIsContextualMenuVisible(true);
+  }, [setIsContextualMenuVisible]);
 
   const onDismissContextualMenu = React.useCallback(() => {
     setShowContextualMenu(false);
+    setIsContextualMenuVisible(false);
   }, [setShowContextualMenu]);
 
-  const onMenuShow = () => {
-    console.log('ContextualMenu shown');
-  };
+  const onItemClick = React.useCallback((key) => {
+    setLastMenuItemClicked(key);
+  }, [setLastMenuItemClicked]);
 
   return (
     <View>
       <Text style={fabricTesterStyles.testSection} testID={CONTEXTUALMENU_TESTPAGE}>
-        ContextualMenu Test
+        Standard ContextualMenu
       </Text>
       <Separator />
-      <Button content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
+      <View style={{ flexDirection: 'column', paddingVertical: 5 }}>
+        <Text>
+          <Text>Menu Visibility: </Text>
+          {isContextualMenuVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
+        </Text>
+        <Text>
+          <Text>Last Menu Item Clicked: </Text>
+          {lastMenuItemClicked > 0 ? <Text style={{ color: 'blue' }}>{lastMenuItemClicked}</Text> : <Text style={{ color: 'blue' }}>none</Text>}
+        </Text>
+        <Button content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
+      </View>
       {showContextualMenu && (
         <ContextualMenu
           target={stdBtnRef}
           onDismiss={onDismissContextualMenu}
-          onShow={onMenuShow}
+          onShow={onShowContextualMenu}
           accessibilityLabel="Standard ContextualMenu"
+          onItemClick={onItemClick}
+          setShowMenu={setShowContextualMenu}
         >
-          <ContextualMenuItem text="ContextualMenuItem 1" key="ContextualMenuItem 1" onClick={onMenuShow} accessibilityLabel="First Menu Item" />
-          <ContextualMenuItem text="ContextualMenuItem 2" key="ContextualMenuItem 2" onClick={onMenuShow} />
-          <ContextualMenuItem text="ContextualMenuItem 3" key="ContextualMenuItem 3" onClick={onMenuShow} />
+          <ContextualMenuItem text="MenuItem 1" itemKey="1" accessibilityLabel="First Menu Item" />
+          <ContextualMenuItem text="MenuItem 2" itemKey="2" />
+          <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
+          <ContextualMenuItem text="MenuItem 4" itemKey="4" />
+          <ContextualMenuItem text="MenuItem 5" itemKey="5" />
         </ContextualMenu>
       )}
     </View>

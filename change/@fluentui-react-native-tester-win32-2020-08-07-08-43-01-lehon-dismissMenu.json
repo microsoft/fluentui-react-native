@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Add item click indicator in ContextualMenuTest",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "lehon@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-08-07T15:39:25.365Z"
+}
