@@ -19,14 +19,15 @@ export function useAsLink(userProps: IWithLinkOptions<IViewProps>): ILinkHooks {
 
   const [linkState, setLinkState] = React.useState({ visited: false });
   const linkOnPress = React.useCallback(
-    (e) => {
+    e => {
       setLinkState({ visited: true });
       if (url) {
         Linking.openURL(url as string);
       } else if (onPress) {
         onPress(e);
       }
-    }, [setLinkState, url, onPress]
+    },
+    [setLinkState, url, onPress]
   );
   const pressable = useAsPressable({ onPress: linkOnPress, ...rest });
   const onKeyUp = React.useCallback(
@@ -57,10 +58,10 @@ export const Link = compose<ILinkType>({
   displayName: linkName,
   settings,
   usePrepareProps: (userProps: ILinkProps, useStyling: IUseComposeStyling<ILinkType>): ILinkRenderData => {
-    const { content, ...rest } = userProps;
+    const { content, onAccessibilityTap, ...rest } = userProps;
 
     const [linkProps, linkState] = useAsLink(rest);
-    const onAccTap = userProps.onAccessibilityTap ? userProps.onAccessibilityTap : linkProps.onPress;
+    const onAccTap = onAccessibilityTap ? onAccessibilityTap : linkProps.onPress;
 
     const info = { content: !!content };
 
