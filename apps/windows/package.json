@@ -1,20 +1,20 @@
 {
-  "name": "FluentTester-windows",
+  "name": "@fluentui-react-native/tester-windows",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint .",
-    "windows": "react-native run-windows",
     "bundle": "fluentui-scripts metro --cli",
     "e2etest": "rimraf reports/* && wdio",
+    "generate-report": "allure generate allure-results --clean && allure open",
+    "lint": "eslint .",
     "report": "allure generate allure-results --clean",
-    "generate-report": "allure generate allure-results --clean && allure open"
+    "start": "react-native start",
+    "test": "jest",
+    "windows": "react-native run-windows"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.0.1",
-    "@uifabricshared/theming-react-native": "0.7.69",
+    "@fluentui-react-native/tester": "^0.2.0",
+    "@uifabricshared/theming-react-native": "0.7.71",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-windows": "^0.62.1"

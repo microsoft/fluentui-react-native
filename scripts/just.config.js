@@ -86,7 +86,7 @@ module.exports = function preset() {
 
   task('bundle', series(condition('metro', () => !!argv().useMetro), condition('webpack', () => !argv().useMetro)));
 
-  task('build', series('clean', 'copy', parallel(condition('validate', () => !argv().min), 'ts')));
+  task('build', series('clean', 'copy', 'ts'));
 
   task('no-op', () => {});
 };

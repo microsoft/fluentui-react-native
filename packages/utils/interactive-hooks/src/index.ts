@@ -2,7 +2,7 @@ export * from './useAsPressable.types';
 export * from './useAsPressable';
 export * from './usePressability';
 export * from './useViewCommandFocus';
-export * from './RadioGroup.hooks';
+export * from './useSelectedKey.hooks';
 export * from './Checkbox.hooks';
 export * from './Pressability/Pressability.types';
 export * from './Pressability/InternalTypes';
