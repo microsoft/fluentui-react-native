@@ -1,6 +1,4 @@
-const {
-  getPackageInfo
-} = require('just-repo-utils');
+const { getPackageInfo } = require('just-repo-utils');
 const fs = require('fs');
 
 function testStuff(strategy) {
@@ -8,9 +6,15 @@ function testStuff(strategy) {
   return [
     getPackageInfo(options).names(),
     getPackageInfo(options).paths(),
-    getPackageInfo(options).dependencies({ ...options, target: '@uifabricshared/foundation-compose' }).names(),
-    getPackageInfo(options).dependencies({ ...options, target: '@uifabricshared/immutable-merge' }).names(),
-    getPackageInfo(options).dependencies({ ...options, target: 'foo' }).names()
+    getPackageInfo(options)
+      .dependencies({ ...options, target: '@uifabricshared/foundation-compose' })
+      .names(),
+    getPackageInfo(options)
+      .dependencies({ ...options, target: '@fluentui-react-native/immutable-merge' })
+      .names(),
+    getPackageInfo(options)
+      .dependencies({ ...options, target: 'foo' })
+      .names()
   ];
 }
 
@@ -23,4 +27,3 @@ function testSet(strategy) {
 
 testSet('no-cache');
 testSet();
-

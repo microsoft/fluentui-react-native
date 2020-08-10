@@ -1,4 +1,4 @@
-import { MergeOptions, immutableMergeCore } from '@uifabricshared/immutable-merge';
+import { MergeOptions, immutableMergeCore } from '@fluentui-react-native/immutable-merge';
 import { IComponentSettingsCollection, IComponentSettings, ISlotProps, IOverrideLookup } from './Settings.types';
 import { mergeStyles } from './Styles';
 
