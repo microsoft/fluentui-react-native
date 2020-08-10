@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Sat, 08 Aug 2020 20:13:19 GMT",
+      "tag": "@fluentui-react-native/tester_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' of https://github.com/microsoft/fluentui-react-native",
+            "author": "safreibe@microsoft.com",
+            "commit": "045ffb6012ce4b69a1d4e910e5065885bb9ecd2d",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 08 Aug 2020 05:35:23 GMT",
+      "tag": "@fluentui-react-native/tester_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add item click indicator in ContextualMenuTest",
+            "author": "lehon@microsoft.com",
+            "commit": "f5a45d2505d1ae6a89e98480544245091d2bfbbd",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 05 Aug 2020 22:50:11 GMT",
       "tag": "@fluentui-react-native/tester_v0.1.1",
       "version": "0.1.1",

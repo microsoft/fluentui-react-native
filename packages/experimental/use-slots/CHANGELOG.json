@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/use-slots",
   "entries": [
     {
+      "date": "Sat, 08 Aug 2020 05:35:23 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "f5a45d2505d1ae6a89e98480544245091d2bfbbd",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 07 Aug 2020 21:50:55 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Remove unnecessary calls to slot data factories",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f33616b3e07a5297d5938a297606cf0f8691f602",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 05 Aug 2020 22:50:11 GMT",
       "tag": "@fluentui-react-native/use-slots_v0.3.0",
       "version": "0.3.0",

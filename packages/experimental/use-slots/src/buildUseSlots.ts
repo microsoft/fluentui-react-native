@@ -64,7 +64,7 @@ export function buildUseSlots<TSlotProps>(options: UseSlotOptions<TSlotProps>): 
   const { slots, filters, useStyling } = options;
   return (...args: any[]) => {
     // build up a set of slots closures and store them in props
-    const [state] = React.useState(buildSlotFunctions<TSlotProps>(slots, filters));
+    const state = React.useMemo(() => buildSlotFunctions<TSlotProps>(slots, filters), []);
 
     // get the baseline slot props to render with the slots
     const slotProps: TSlotProps = typeof useStyling === 'function' ? (useStyling as Function)(...args) : ((useStyling || {}) as TSlotProps);

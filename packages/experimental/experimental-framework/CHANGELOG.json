@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/experimental-framework",
   "entries": [
     {
+      "date": "Sat, 08 Aug 2020 05:35:23 GMT",
+      "tag": "@fluentui-react-native/experimental-framework_v0.2.4",
+      "version": "0.2.4",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "f5a45d2505d1ae6a89e98480544245091d2bfbbd",
+            "package": "@fluentui-react-native/experimental-framework"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 07 Aug 2020 22:08:03 GMT",
+      "tag": "@fluentui-react-native/experimental-framework_v0.2.4",
+      "version": "0.2.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "update react peer dep to be more flexible",
+            "author": "jasonmo@microsoft.com",
+            "commit": "3e6fc4de37ae98bbdd3ed62f259112df6d790082",
+            "package": "@fluentui-react-native/experimental-framework"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 05 Aug 2020 22:50:11 GMT",
       "tag": "@fluentui-react-native/experimental-framework_v0.2.2",
       "version": "0.2.2",

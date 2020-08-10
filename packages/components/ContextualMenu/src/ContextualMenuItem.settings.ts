@@ -11,7 +11,13 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
     root: {
       accessible: true,
       accessibilityRole: 'menuitem',
-      style: { display: 'flex', alignItems: 'flex-start', flexDirection: 'row', alignSelf: 'flex-start' }
+      style: {
+        display: 'flex',
+        alignItems: 'flex-start',
+        flexDirection: 'row',
+        alignSelf: 'flex-start',
+        width: '100%'
+      }
     },
     content: {},
     icon: {},

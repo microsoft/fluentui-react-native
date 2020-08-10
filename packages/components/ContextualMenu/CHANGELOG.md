@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Sat, 01 Aug 2020 00:34:34 GMT and should not be manually modified.
+This log was last generated on Sat, 08 Aug 2020 05:35:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.3
+
+Sat, 08 Aug 2020 05:35:23 GMT
+
+### Patches
+
+- Support menu dismiss on item click (lehon@microsoft.com)
 
 ## 0.3.0
 
