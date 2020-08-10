@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Mon, 10 Aug 2020 18:04:46 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Remove dist folder from exluded folders",
+            "author": "krsiler@microsoft.com",
+            "commit": "c4472c72cedd953adf28978c8b3b60c8f451513f",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 08 Aug 2020 20:13:19 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.2.0",
       "version": "0.2.0",

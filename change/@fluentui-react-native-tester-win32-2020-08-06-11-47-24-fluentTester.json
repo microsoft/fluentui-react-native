@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Remove dist folder from exluded folders",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-08-06T18:47:24.348Z"
-}
