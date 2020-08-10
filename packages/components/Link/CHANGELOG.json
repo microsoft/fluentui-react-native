@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Mon, 10 Aug 2020 19:05:49 GMT",
+      "tag": "@fluentui-react-native/link_v0.8.4",
+      "version": "0.8.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix invoke issue for Link",
+            "author": "lehon@microsoft.com",
+            "commit": "003c2dad3d059361ad0d5fb660b81a2ebc5650e0",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 08 Aug 2020 05:35:23 GMT",
       "tag": "@fluentui-react-native/link_v0.8.3",
       "version": "0.8.3",
