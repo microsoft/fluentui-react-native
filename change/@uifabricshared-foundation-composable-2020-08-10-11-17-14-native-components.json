@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "convert frameworks and usage to use the native component cache",
+  "packageName": "@uifabricshared/foundation-composable",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-08-10T18:15:44.423Z"
+}
