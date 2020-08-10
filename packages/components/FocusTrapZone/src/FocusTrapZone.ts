@@ -2,6 +2,7 @@ import { IFocusTrapZoneProps, IFocusTrapZoneSlotProps, IFocusTrapZoneType } from
 import { IUseStyling, composable } from '@uifabricshared/foundation-composable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { NativeComponent } from '@fluentui-react-native/native-component';
 
 export function filterOutComponentRef(propName: string): boolean {
   return propName !== 'componentRef';
@@ -15,6 +16,6 @@ export const FocusTrapZone = composable<IFocusTrapZoneType>({
     };
   },
   slots: {
-    root: { slotType: 'RCTFocusTrapZone', filter: filterOutComponentRef }
+    root: { slotType: NativeComponent('RCTFocusTrapZone'), filter: filterOutComponentRef }
   }
 });

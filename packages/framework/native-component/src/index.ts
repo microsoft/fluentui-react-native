@@ -1,2 +1,2 @@
-export * from './lateBindComponent';
-export * from './nativeComponent';
+export * from './NativeComponent';
+export * from './queryNativeComponent';

@@ -6,6 +6,7 @@ import * as React from 'react';
 import { findNodeHandle } from 'react-native';
 import { settings } from './Callout.settings';
 import { calloutName, ICalloutProps, ICalloutSlotProps, ICalloutType } from './Callout.types';
+import { NativeComponent } from '@fluentui-react-native/native-component';
 
 export const Callout = compose<ICalloutType>({
   displayName: calloutName,
@@ -32,7 +33,7 @@ export const Callout = compose<ICalloutType>({
   },
   settings: settings,
   slots: {
-    root: 'RCTCallout'
+    root: NativeComponent('RCTCallout')
   },
   styles: {
     root: [backgroundColorTokens, borderTokens]
