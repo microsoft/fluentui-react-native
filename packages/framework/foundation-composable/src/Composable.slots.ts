@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { IRenderData, ISlotWithFilter, IComposable, IWithComposable, ISlots, IPropFilter, INativeSlotType } from './Composable.types';
 import { mergeSettings, mergeProps, ISlotProps } from '@uifabricshared/foundation-settings';
+import { lateBindComponent } from '@fluentui-react-native/native-component';
 
 export type ISlotFn<TProps> = React.FunctionComponent<TProps> & {
   _canCompose?: boolean;
@@ -49,7 +50,9 @@ function createSlotRenderInfo<TProps, TSlotProps extends ISlotProps, TState>(
     const childInfo = (renderInfo.childInfo = {});
 
     Object.getOwnPropertyNames(slots).forEach((slot: string) => {
-      const { slotType, filter } = slots[slot];
+      const slotRef = slots[slot];
+      slotRef.slotType = lateBindComponent(slotRef.slotType);
+      const { slotType, filter } = slotRef;
       const composable =
         (typeof slotType !== 'string' && (slotType as IWithComposable<object, IComposable<TProps, TSlotProps, TState>>).__composable) ||
         undefined;

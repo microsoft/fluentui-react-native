@@ -3,11 +3,9 @@ import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/toke
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import * as React from 'react';
-import { findNodeHandle, requireNativeComponent } from 'react-native';
+import { findNodeHandle } from 'react-native';
 import { settings } from './Callout.settings';
 import { calloutName, ICalloutProps, ICalloutSlotProps, ICalloutType } from './Callout.types';
-
-const RCTCallout = requireNativeComponent('RCTCallout');
 
 export const Callout = compose<ICalloutType>({
   displayName: calloutName,
@@ -34,7 +32,7 @@ export const Callout = compose<ICalloutType>({
   },
   settings: settings,
   slots: {
-    root: RCTCallout
+    root: 'RCTCallout'
   },
   styles: {
     root: [backgroundColorTokens, borderTokens]

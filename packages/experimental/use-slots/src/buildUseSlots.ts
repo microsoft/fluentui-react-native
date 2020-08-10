@@ -2,6 +2,7 @@ import * as React from 'react';
 import { SlotFn, NativeReactType } from './renderSlot';
 import { mergeProps } from '@uifabricshared/foundation-settings';
 import { ComposableFunction, StagedRender } from './stagedComponent';
+import { lateBindComponent } from '@fluentui-react-native/native-component';
 
 export type Slots<TSlotProps> = { [K in keyof TSlotProps]: SlotFn<TSlotProps[K]> };
 
@@ -52,6 +53,7 @@ function buildSlotFunctions<TSlotProps>(
 ): CachedState<TSlotProps> {
   const info: CachedState<TSlotProps> = { slots: {}, results: {} } as CachedState<TSlotProps>;
   Object.keys(slots).forEach(slot => {
+    slots[slot] = lateBindComponent(slots[slot]);
     info.slots[slot] = (props: TSlotProps[keyof TSlotProps], ...children: React.ReactNode[]) => {
       return internalRender<TSlotProps[keyof TSlotProps]>(slots[slot], info.results[slot], props, (filters && filters[slot]) || undefined, children);
     };

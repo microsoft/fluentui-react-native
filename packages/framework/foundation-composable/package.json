@@ -31,6 +31,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@fluentui-react-native/native-component": "^1.0.0",
     "@uifabricshared/foundation-settings": ">=0.6.1 <1.0.0"
   },
   "devDependencies": {
