@@ -27,6 +27,71 @@ export interface IFabricTesterProps {
   enabledTests: TestDescription[];
 }
 
+const Header: React.FunctionComponent<{}> = () => {
+
+  const [selectedPlatform, setSelectedPlatform] = React.useState("win32");
+  const [selectedApp, setSelectedApp] = React.useState("office");
+  const [selectedTheme, setSelectedTheme] = React.useState("default");
+
+  const onAppChange = React.useCallback((appValue: string) => {
+    app = appValue;
+    setSelectedApp(app);
+  }, []);
+
+  return (
+    <View style={fabricTesterStyles.header}>
+      <Text style={fabricTesterStyles.testHeader} testID={BASE_TESTPAGE}>
+        ⚛ FluentUI Tests
+      </Text>
+
+      <View style={fabricTesterStyles.pickerRoot}>
+        <View style={fabricTesterStyles.picker}>
+          <Text style={fabricTesterStyles.pickerLabel}>Platform:  </Text>
+          <Picker
+            selectedValue={selectedPlatform}
+            style={fabricTesterStyles.dropdown}
+            onValueChange={(platformValue) => setSelectedPlatform(platformValue)}
+          >
+            <Picker.Item label="Win32" value="win32" />
+            <Picker.Item label="UWP" value="uwp" />
+            <Picker.Item label="iOS" value="ios" />
+            <Picker.Item label="macOS" value="mac" />
+            <Picker.Item label="Android" value="android" />
+          </Picker>
+        </View>
+
+        <View style={fabricTesterStyles.picker}>
+          <Text style={fabricTesterStyles.pickerLabel}>App:  </Text>
+          <Picker
+            selectedValue={selectedApp}
+            style={fabricTesterStyles.dropdown}
+            onValueChange={(appValue) => onAppChange(appValue)}
+          >
+            <Picker.Item label="Office" value="office" />
+            <Picker.Item label="Word" value="word" />
+            <Picker.Item label="Excel" value="excel" />
+            <Picker.Item label="Powerpoint" value="ppt" />
+            <Picker.Item label="Outlook" value="outlook" />
+          </Picker>
+        </View>
+
+        <View style={fabricTesterStyles.picker}>
+          <Text style={fabricTesterStyles.pickerLabel}>Theme:  </Text>
+          <Picker
+            selectedValue={selectedTheme}
+            style={fabricTesterStyles.dropdown}
+            onValueChange={(themeValue) => setSelectedTheme(themeValue)}
+          >
+            <Picker.Item label="Default" value="default" />
+            <Picker.Item label="Caterpillar" value="caterpillar" />
+            <Picker.Item label="WhiteColors" value="white" />
+          </Picker>
+        </View>
+      </View>
+    </View>
+  );
+}
+
 export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props: IFabricTesterProps) => {
 
   // sort tests alphabetically by name
@@ -48,74 +113,36 @@ export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props:
     }
   });
 
-  const [selectedPlatform, setSelectedPlatform] = React.useState("win32");
-  const [selectedApp, setSelectedApp] = React.useState("office");
-  const [selectedTheme, setSelectedTheme] = React.useState("default");
-
-  const onAppChange = React.useCallback((appValue: string) => {
-    app = appValue;
-    setSelectedApp(app);
-  }, []);
-
   return (
     <View style={fabricTesterStyles.root}>
-      <Picker
-        selectedValue={selectedPlatform}
-        style={{ height: 50, width: 150 }}
-        onValueChange={(platformValue) => setSelectedPlatform(platformValue)}
-      >
-        <Picker.Item label="Win32" value="win32" />
-        <Picker.Item label="UWP" value="uwp" />
-        <Picker.Item label="iOS" value="ios" />
-        <Picker.Item label="macOS" value="mac" />
-        <Picker.Item label="Android" value="android" />
-      </Picker>
-      <Picker
-        selectedValue={selectedApp}
-        style={{ height: 50, width: 150 }}
-        onValueChange={(appValue) => onAppChange(appValue)}
-      >
-        <Picker.Item label="Office" value="office" />
-        <Picker.Item label="Word" value="word" />
-        <Picker.Item label="Excel" value="excel" />
-        <Picker.Item label="Powerpoint" value="ppt" />
-        <Picker.Item label="Outlook" value="outlook" />
-      </Picker>
-      <Picker
-        selectedValue={selectedTheme}
-        style={{ height: 50, width: 150 }}
-        onValueChange={(themeValue) => setSelectedTheme(themeValue)}
-      >
-        <Picker.Item label="Win32" value="win32" />
-        <Picker.Item label="UWP" value="uwp" />
-        <Picker.Item label="iOS" value="ios" />
-        <Picker.Item label="macOS" value="mac" />
-        <Picker.Item label="Android" value="android" />
-      </Picker>
+      <Header />
 
-      <ScrollView style={fabricTesterStyles.testList} contentContainerStyle={fabricTesterStyles.testListContainerStyle}>
-        <Text style={fabricTesterStyles.testHeader} testID={BASE_TESTPAGE}>
-          ⚛ FluentUI Tests
-        </Text>
-        {sortedTestComponents.map((description, index) => {
-          return (
-            <StealthButton
-              key={index}
-              disabled={index == selectedTestIndex}
-              content={description.name}
-              onClick={() => setSelectedTestIndex(index)}
-              style={fabricTesterStyles.testListItem}
-              testID={description.testPage}
-            />
-          );
-        })}
-      </ScrollView>
+      <Separator />
 
-      <TestListSeparator vertical style={fabricTesterStyles.separator} />
+      <View style={fabricTesterStyles.testRoot}>
+        <ScrollView style={fabricTesterStyles.testList} contentContainerStyle={fabricTesterStyles.testListContainerStyle}>
+          {sortedTestComponents.map((description, index) => {
+            return (
+              <StealthButton
+                key={index}
+                disabled={index == selectedTestIndex}
+                content={description.name}
+                onClick={() => setSelectedTestIndex(index)}
+                style={fabricTesterStyles.testListItem}
+                testID={description.testPage}
+              />
+            );
+          })}
+        </ScrollView>
 
-      <ScrollView>
-        <TestComponent />
-      </ScrollView>
+        <TestListSeparator vertical style={{ marginHorizontal: 8, width: 2 }} />
+
+        <View style={fabricTesterStyles.testSection}>
+          <ScrollView>
+            <TestComponent />
+          </ScrollView>
+        </View>
+      </View>
     </View>
   );
 };
