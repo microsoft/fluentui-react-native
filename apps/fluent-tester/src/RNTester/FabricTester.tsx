@@ -2,7 +2,7 @@ import { StealthButton } from '@fluentui-react-native/button';
 import { Separator } from '@fluentui-react-native/separator';
 import { useTheme } from '@uifabricshared/theming-react-native';
 import * as React from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { Picker, ScrollView, View, Text } from 'react-native';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fabricTesterStyles } from './TestComponents/Common/styles';
@@ -15,6 +15,10 @@ MessageQueue.spy(true);
 */
 
 registerThemes();
+
+export const [selectedPlatform, setSelectedPlatform] = React.useState("win32");
+export const [selectedApp, setSelectedApp] = React.useState("office");
+export const [selectedTheme, setSelectedTheme] = React.useState("default");
 
 const EmptyComponent: React.FunctionComponent = () => {
   return <Text style={fabricTesterStyles.noTest}>Select a component from the left.</Text>;
@@ -46,8 +50,46 @@ export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props:
     }
   });
 
+  const onAppChange = React.useCallback((app: string) => {
+    setSelectedApp(app);
+  }, []);
+
   return (
     <View style={fabricTesterStyles.root}>
+      <Picker
+        selectedValue={selectedPlatform}
+        style={{ height: 50, width: 150 }}
+        onValueChange={(platformValue) => setSelectedPlatform(platformValue)}
+      >
+        <Picker.Item label="Win32" value="win32" />
+        <Picker.Item label="UWP" value="uwp" />
+        <Picker.Item label="iOS" value="ios" />
+        <Picker.Item label="macOS" value="mac" />
+        <Picker.Item label="Android" value="android" />
+      </Picker>
+      <Picker
+        selectedValue={selectedApp}
+        style={{ height: 50, width: 150 }}
+        onValueChange={(appValue) => onAppChange(appValue)}
+      >
+        <Picker.Item label="Office" value="office" />
+        <Picker.Item label="Word" value="word" />
+        <Picker.Item label="Excel" value="excel" />
+        <Picker.Item label="Powerpoint" value="ppt" />
+        <Picker.Item label="Outlook" value="outlook" />
+      </Picker>
+      <Picker
+        selectedValue={selectedTheme}
+        style={{ height: 50, width: 150 }}
+        onValueChange={(themeValue) => setSelectedTheme(themeValue)}
+      >
+        <Picker.Item label="Win32" value="win32" />
+        <Picker.Item label="UWP" value="uwp" />
+        <Picker.Item label="iOS" value="ios" />
+        <Picker.Item label="macOS" value="mac" />
+        <Picker.Item label="Android" value="android" />
+      </Picker>
+
       <ScrollView style={fabricTesterStyles.testList} contentContainerStyle={fabricTesterStyles.testListContainerStyle}>
         <Text style={fabricTesterStyles.testHeader} testID={BASE_TESTPAGE}>
           ⚛ FluentUI Tests
