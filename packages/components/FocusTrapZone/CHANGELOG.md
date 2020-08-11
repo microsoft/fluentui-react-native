@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/focus-trap-zone
 
-This log was last generated on Sat, 01 Aug 2020 00:34:34 GMT and should not be manually modified.
+This log was last generated on Tue, 11 Aug 2020 19:53:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.4
+
+Tue, 11 Aug 2020 19:53:33 GMT
+
+### Patches
+
+- Add missing deps (rezha@microsoft.com)
 
 ## 0.4.0
 

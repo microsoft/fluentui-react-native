@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add missing deps",
-  "packageName": "@fluentui-react-native/radio-group",
-  "email": "rezha@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-08-11T00:51:18.704Z"
-}
