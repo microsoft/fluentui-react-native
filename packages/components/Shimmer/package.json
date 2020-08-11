@@ -18,14 +18,11 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.6.70",
+    "@fluentui-react-native/experimental-framework": "0.2.2",
     "@fluentui-react-native/adapters": ">=0.3.32 <1.0.0",
-    "@fluentui-react-native/interactive-hooks": ">=0.4.38 <1.0.0",
-    "@fluentui-react-native/text": ">=0.5.69 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.4.67 <1.0.0"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.62.0-preview.3",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",

@@ -29,7 +29,7 @@
     "@fluentui-react-native/pressable": ">=0.3.76 <1.0.0",
     "@fluentui-react-native/focus-trap-zone": ">=0.4.0 <1.0.0",
     "@fluentui-react-native/link": ">=0.8.0 <1.0.0",
-    "@fluentui-react-native/shimmer": ">=0.1.0 <1.0.0",
+    "@fluentui-react-native/experimental-shimmer": ">=0.1.0 <1.0.0",
     "@fluentui-react-native/radio-group": ">=0.3.76 <1.0.0",
     "@fluentui-react-native/persona-coin": ">=0.3.76 <1.0.0",
     "@fluentui-react-native/persona": ">=0.5.73 <1.0.0",
