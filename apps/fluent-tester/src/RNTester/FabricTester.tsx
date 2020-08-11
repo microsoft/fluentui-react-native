@@ -16,9 +16,7 @@ MessageQueue.spy(true);
 
 registerThemes();
 
-export const [selectedPlatform, setSelectedPlatform] = React.useState("win32");
-export const [selectedApp, setSelectedApp] = React.useState("office");
-export const [selectedTheme, setSelectedTheme] = React.useState("default");
+let app = 'office';
 
 const EmptyComponent: React.FunctionComponent = () => {
   return <Text style={fabricTesterStyles.noTest}>Select a component from the left.</Text>;
@@ -50,7 +48,12 @@ export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props:
     }
   });
 
-  const onAppChange = React.useCallback((app: string) => {
+  const [selectedPlatform, setSelectedPlatform] = React.useState("win32");
+  const [selectedApp, setSelectedApp] = React.useState("office");
+  const [selectedTheme, setSelectedTheme] = React.useState("default");
+
+  const onAppChange = React.useCallback((appValue: string) => {
+    app = appValue;
     setSelectedApp(app);
   }, []);
 
