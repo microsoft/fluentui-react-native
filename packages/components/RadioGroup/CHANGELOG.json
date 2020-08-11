@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Sat, 08 Aug 2020 05:35:23 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "rename radioGroup hook to useSelectedKey for shared usage",
+            "author": "lehon@microsoft.com",
+            "commit": "f5a45d2505d1ae6a89e98480544245091d2bfbbd",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 05 Aug 2020 22:50:11 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.3.76",
+      "version": "0.3.76",
+      "comments": {
+        "none": [
+          {
+            "comment": "added descriptions",
+            "author": "email not defined",
+            "commit": "eb607f63531821f1b20b27081418045927b0f130",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jul 2020 22:38:20 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.3.75",
       "version": "0.3.75",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-framework
 
-This log was last generated on Wed, 29 Jul 2020 22:38:20 GMT and should not be manually modified.
+This log was last generated on Fri, 07 Aug 2020 22:08:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.4
+
+Fri, 07 Aug 2020 22:08:03 GMT
+
+### Patches
+
+- update react peer dep to be more flexible (jasonmo@microsoft.com)
 
 ## 0.2.1
 

@@ -22,10 +22,10 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.3.34 <1.0.0",
-    "@fluentui-react-native/experimental-framework": "0.2.2",
-    "@fluentui-react-native/interactive-hooks": ">=0.4.38 <1.0.0",
+    "@fluentui-react-native/experimental-framework": "0.2.4",
+    "@fluentui-react-native/interactive-hooks": ">=0.5.0 <1.0.0",
     "@fluentui-react-native/experimental-text": ">=0.1.0 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.5.1 <1.0.0"
+    "@fluentui-react-native/tokens": ">=0.5.2 <1.0.0"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.62.0-preview.3",

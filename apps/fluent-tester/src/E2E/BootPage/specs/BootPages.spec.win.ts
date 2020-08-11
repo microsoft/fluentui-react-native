@@ -1,29 +1,30 @@
-import BootTestPage from '../pages/BootTestPage.win';
 import ButtonTestPage from '../../Button/pages/ButtonTestPage.win';
-import CheckboxTestPage from '../../Checkbox/pages/CheckboxTestPage.win';
 import CalloutTestPage from '../../Callout/pages/CalloutTestPage.win';
+import CheckboxTestPage from '../../Checkbox/pages/CheckboxTestPage.win';
 import FocusTrapZoneTestPage from '../../FocusTrapZone/pages/FocusTrapZonePage.win';
 import LinkTestPage from '../../Link/pages/LinkTestPage.win';
-import PersonaCoinTestPage from '../../PersonaCoin/pages/PersonaCoinTestPage.win';
 import PersonaTestPage from '../../Persona/pages/PersonaTestPage.win';
+import PersonaCoinTestPage from '../../PersonaCoin/pages/PersonaCoinTestPage.win';
 import PressableTestPage from '../../Pressable/pages/PressableTestPage.win';
 import RadioGroupTestPage from '../../RadioGroup/pages/RadioGroupTestPage.win';
 import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
+import SvgTestPage from '../../Svg/pages/SvgTestPage.win';
 import TextTestPage from '../../Text/pages/TextTestPage.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
+import BootTestPage from '../pages/BootTestPage.win';
 
 const BOOT_APP_TIMEOUT = 60000;
 const PAGE_TIMEOUT = 3000;
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Open the app', function () {
+describe('Open the app', function() {
   it('Boot app', () => {
     BootTestPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     expect(BootTestPage.isPageLoaded()).toBeTruthy();
   });
 });
 
-describe('Click on each test page and check if it renders', function () {
+describe('Click on each test page and check if it renders', function() {
   it('Button Test Page', () => {
     BootTestPage.clickAndGoToButtonPage();
     ButtonTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
@@ -82,6 +83,12 @@ describe('Click on each test page and check if it renders', function () {
     BootTestPage.clickAndGoToSeparatorPage();
     SeparatorTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(SeparatorTestPage.isPageLoaded()).toBeTruthy();
+  });
+
+  it('Svg Test Page', () => {
+    BootTestPage.clickAndGoToSvgPage();
+    SvgTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+    expect(SvgTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Text Test Page', () => {

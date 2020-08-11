@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Sat, 01 Aug 2020 00:34:34 GMT and should not be manually modified.
+This log was last generated on Fri, 07 Aug 2020 22:08:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.1
+
+Fri, 07 Aug 2020 22:08:03 GMT
+
+### Patches
+
+- update react peer dep to be more flexible (jasonmo@microsoft.com)
 
 ## 0.10.0
 

@@ -159,13 +159,16 @@ const checkboxSections: TestSection[] = [
 export const CheckboxTest: React.FunctionComponent<{}> = () => {
 
   const status: PlatformStatus = {
-    winStatus: 'beta',
-    iosStatus: 'experimental',
-    macosStatus: 'experimental',
-    androidStatus: 'experimental'
+    win32Status: 'Beta',
+    uwpStatus: 'Experimental',
+    iosStatus: 'N/A',
+    macosStatus: 'Experimental',
+    androidStatus: 'N/A'
   }
 
+  const description = 'Checkboxes give people a way to select one or more items from a group, or switch between two mutually exclusive options (checked or unchecked, on or off).'
+
   return (
-    <Test name="Checkbox Test" description="No description." sections={checkboxSections} status={status}></Test>
+    <Test name="Checkbox Test" description={description} sections={checkboxSections} status={status}></Test>
   );
 };

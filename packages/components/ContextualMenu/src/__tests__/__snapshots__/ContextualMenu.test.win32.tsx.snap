@@ -6,7 +6,6 @@ exports[`ContextualMenu default props 1`] = `
   backgroundColor="bodyStandoutBackground"
   borderColor="bodyFrameBackground"
   borderWidth={1}
-  setInitialFocus={false}
   style={
     Object {
       "backgroundColor": "#faf9f8",
