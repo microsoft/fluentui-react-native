@@ -27,8 +27,7 @@
     "@fluentui-react-native/text": ">=0.6.2 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.5.2 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.6.69 <1.0.0",
-    "@uifabricshared/foundation-settings": ">=0.6.1 <1.0.0",
-    "react": "16.11.0"
+    "@uifabricshared/foundation-settings": ">=0.6.1 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/pressable": ">=0.3.79 <1.0.0",
@@ -38,6 +37,7 @@
     "react-native": "0.62.2"
   },
   "peerDependencies": {
+    "react": "^16.8.0",
     "react-native": ">=0.60.0"
   },
   "author": "",

@@ -22,8 +22,7 @@
   "dependencies": {
     "@uifabricshared/foundation-compose": "^1.6.75",
     "@fluentui-react-native/adapters": ">=0.3.34 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.5.2 <1.0.0",
-    "react": "16.11.0"
+    "@fluentui-react-native/tokens": ">=0.5.2 <1.0.0"
   },
   "devDependencies": {
     "@types/react-native": "^0.62.0",
