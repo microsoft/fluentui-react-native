@@ -22,9 +22,13 @@
   "dependencies": {
     "@uifabricshared/foundation-compose": "^1.6.75",
     "@fluentui-react-native/adapters": ">=0.3.34 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.5.0 <1.0.0",
     "@fluentui-react-native/pressable": ">=0.3.79 <1.0.0",
     "@fluentui-react-native/text": ">=0.6.2 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.5.2 <1.0.0"
+    "@fluentui-react-native/tokens": ">=0.5.2 <1.0.0",
+    "@uifabricshared/foundation-composable": ">=0.6.69 <1.0.0",
+    "@uifabricshared/foundation-settings": ">=0.6.1 <1.0.0",
+    "react": "16.11.0"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.62.0-preview.3",
