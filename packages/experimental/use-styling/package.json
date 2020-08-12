@@ -31,7 +31,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/memo-cache": ">=0.2.10 <1.0.0",
+    "@fluentui-react-native/memo-cache": "^1.0.0",
     "@uifabricshared/foundation-settings": ">=0.6.1 <1.0.0",
     "@uifabricshared/immutable-merge": ">=0.5.67 <1.0.0"
   },

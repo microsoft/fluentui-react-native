@@ -31,7 +31,7 @@
     "@uifabricshared/foundation-settings": ">=0.6.1 <1.0.0",
     "@uifabricshared/theming-ramp": ">=0.10.1 <1.0.0",
     "@uifabricshared/theming-react-native": ">=0.7.71 <1.0.0",
-    "@fluentui-react-native/memo-cache": ">=0.2.10 <1.0.0",
+    "@fluentui-react-native/memo-cache": "^1.0.0",
     "@fluentui-react-native/tokens": ">=0.5.2 <1.0.0"
   },
   "devDependencies": {
