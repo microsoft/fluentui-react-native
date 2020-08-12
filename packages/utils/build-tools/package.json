@@ -8,6 +8,7 @@
   "private": true,
   "scripts": {
     "build-tools": "just-scripts build",
+    "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint"
   },
   "dependencies": {

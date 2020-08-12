@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "bundle": "fluentui-scripts metro --cli",
+    "depcheck": "fluentui-scripts depcheck",
     "e2etest": "rimraf reports/* && wdio",
     "generate-report": "allure generate allure-results --clean && allure open",
     "lint": "eslint .",

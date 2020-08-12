@@ -5,6 +5,7 @@ module.exports = {
     buildci: ['build', 'test', 'bundle'],
     bundle: ['build-tools'],
     clean: [],
+    depcheck: ['^depcheck'],
     lint: ['build-tools'],
     ['verify-api']: [],
     ['update-api']: [],

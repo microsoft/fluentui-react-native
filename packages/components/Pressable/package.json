@@ -13,6 +13,7 @@
     "build": "fluentui-scripts build",
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
