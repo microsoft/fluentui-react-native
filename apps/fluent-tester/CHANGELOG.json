@@ -2,6 +2,44 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 11 Aug 2020 19:53:33 GMT",
+      "tag": "@fluentui-react-native/tester_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "status definitions",
+            "author": "email not defined",
+            "commit": "f01a0671daa0512a18cd6343518160e5ffc3a409",
+            "package": "@fluentui-react-native/tester"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Removing from UWP because it doesn't work",
+            "author": "safreibe@microsoft.com",
+            "commit": "691dd42d01719a8e7f043b3354a6c44a0a29e8a1",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 08 Aug 2020 20:13:19 GMT",
+      "tag": "@fluentui-react-native/tester_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' of https://github.com/microsoft/fluentui-react-native",
+            "author": "safreibe@microsoft.com",
+            "commit": "045ffb6012ce4b69a1d4e910e5065885bb9ecd2d",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 08 Aug 2020 05:35:23 GMT",
       "tag": "@fluentui-react-native/tester_v0.2.0",
       "version": "0.2.0",

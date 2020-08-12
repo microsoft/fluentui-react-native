@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/use-slots
 
-This log was last generated on Fri, 07 Aug 2020 21:50:55 GMT and should not be manually modified.
+This log was last generated on Tue, 11 Aug 2020 19:53:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.2
+
+Tue, 11 Aug 2020 19:53:33 GMT
+
+### Patches
+
+- Add missing deps (rezha@microsoft.com)
 
 ## 0.3.1
 

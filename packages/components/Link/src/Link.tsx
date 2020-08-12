@@ -29,7 +29,6 @@ export function useAsLink(userProps: IWithLinkOptions<IViewProps>): ILinkHooks {
     },
     [setLinkState, url, onPress]
   );
-
   const pressable = useAsPressable({ onPress: linkOnPress, ...rest });
   const onKeyUp = React.useCallback(
     e => {
@@ -59,9 +58,10 @@ export const Link = compose<ILinkType>({
   displayName: linkName,
   settings,
   usePrepareProps: (userProps: ILinkProps, useStyling: IUseComposeStyling<ILinkType>): ILinkRenderData => {
-    const { content, ...rest } = userProps;
+    const { content, onAccessibilityTap, ...rest } = userProps;
 
     const [linkProps, linkState] = useAsLink(rest);
+    const onAccTap = onAccessibilityTap ? onAccessibilityTap : linkProps.onPress;
 
     const info = { content: !!content };
 
@@ -72,7 +72,7 @@ export const Link = compose<ILinkType>({
 
     // create the merged slot props
     const slotProps = mergeSettings<ILinkSlotProps>(styleProps, {
-      root: { ...linkProps, ref: linkRef },
+      root: { ...linkProps, ref: linkRef, onAccessibilityTap: onAccTap },
       content: { children: content }
     });
 
