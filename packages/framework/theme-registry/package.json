@@ -31,12 +31,11 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {
-    "@uifabricshared/immutable-merge": ">=0.5.67 <1.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^19.2.2",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1"
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "@uifabricshared/immutable-merge": ">=0.5.66 <1.0.0"
   }
 }

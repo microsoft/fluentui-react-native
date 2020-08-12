@@ -21,9 +21,12 @@
   },
   "dependencies": {
     "@fluentui/react-native": ">=0.15.81 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.5.0 <1.0.0",
     "@fluentui-react-native/stack": ">=0.2.3 <1.0.0",
     "@uifabricshared/theming-react-native": ">=0.7.71 <1.0.0",
+    "@uifabricshared/theme-registry": ">=0.3.66 <1.0.0",
     "@uifabricshared/themed-stylesheet": ">=0.3.67 <1.0.0",
+    "@uifabricshared/theming-ramp": ">=0.10.1 <1.0.0",
     "react-native-svg": "^11.0.0"
   },
   "devDependencies": {

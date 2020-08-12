@@ -29,18 +29,19 @@
   "license": "MIT",
   "dependencies": {
     "@uifabricshared/theme-registry": ">=0.3.67 <1.0.0",
-    "@uifabricshared/foundation-settings": ">=0.6.1 <1.0.0",
     "@uifabricshared/theming-ramp": ">=0.10.1 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
     "@types/react": "^16.9.34",
     "react": "16.11.0",
+    "react-native": "^0.62.2",
     "typescript": "3.8.3",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
   },
   "peerDependencies": {
-    "react": "^16.8.0"
+    "react": "^16.8.0",
+    "react-native": ">=0.60.0"
   }
 }
