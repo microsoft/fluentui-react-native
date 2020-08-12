@@ -1,11 +1,28 @@
+function mergeOneLevel(a, b = {}) {
+  const result = { ...a, ...b };
+  Object.keys(a).forEach(key => {
+    if (Array.isArray(b[key]) && Array.isArray(a[key])) {
+      result[key] = [].concat(a[key], b[key]);
+    }
+  });
+  return result;
+}
+
 function depcheckTask() {
   return function(done) {
     const { logger } = require('just-scripts');
     const depcheck = require('depcheck');
-    const options = {
-      ignoreMatches: ['*eslint*', '*.d.ts', '*.test.*'],
-      specials: [depcheck.special.eslint, depcheck.special.webpack, depcheck.special.jest]
-    };
+    const path = require('path');
+    const config = require(path.join(process.cwd(), 'package.json'));
+    const options = mergeOneLevel(
+      {
+        ignorePatterns: ['*eslint*', '*.d.ts'],
+        ignoreMatches: ['@uifabricshared/build-native', '@uifabricshared/eslint-config-rules'],
+        specials: [depcheck.special.eslint, depcheck.special.webpack, depcheck.special.jest]
+      },
+      config.depcheck
+    );
+
     return depcheck(process.cwd(), options, result => {
       try {
         if (result.devDependencies.length > 0) {
@@ -14,7 +31,7 @@ function depcheckTask() {
             logger.warn(`-- ${dependency}`);
           });
         }
-        if (result.dependencies.length > 0 || result.missing) {
+        if (result.dependencies.length > 0 || Object.keys(result.missing).length > 0) {
           if (result.dependencies.length > 0) {
             logger.error('Unused dependencies');
             result.dependencies.forEach(dependency => {
@@ -22,14 +39,13 @@ function depcheckTask() {
             });
           }
 
-          if (result.missing) {
-            Object.keys(result.missing).forEach(dependency => {
-              logger.error(`Missing dependency on ${dependency}`);
-              result.missing[dependency].forEach(file => {
-                logger.error(`-- ${file}`);
-              });
+          Object.keys(result.missing).forEach(dependency => {
+            logger.error(`Missing dependency on ${dependency}`);
+            result.missing[dependency].forEach(file => {
+              logger.error(`-- ${file}`);
             });
-          }
+          });
+
           throw 'Dependency checking failed';
         }
       } catch (error) {
