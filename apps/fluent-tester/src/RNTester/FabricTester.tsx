@@ -29,9 +29,9 @@ export interface IFabricTesterProps {
 
 const Header: React.FunctionComponent<{}> = () => {
 
-  const [selectedPlatform, setSelectedPlatform] = React.useState("win32");
-  const [selectedApp, setSelectedApp] = React.useState("office");
-  const [selectedTheme, setSelectedTheme] = React.useState("default");
+  const [selectedPlatform, setSelectedPlatform] = React.useState('win32');
+  const [selectedApp, setSelectedApp] = React.useState('office');
+  const [selectedTheme, setSelectedTheme] = React.useState('default');
 
   const onAppChange = React.useCallback((appValue: string) => {
     app = appValue;
