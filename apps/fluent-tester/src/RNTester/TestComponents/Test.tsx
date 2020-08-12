@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Separator } from '@fluentui-react-native/separator';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from './Common/styles';
+// import { themeColor } from '../FabricTester';
 
 export type TestSection = {
   name: string;

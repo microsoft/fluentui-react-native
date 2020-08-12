@@ -16,8 +16,6 @@ MessageQueue.spy(true);
 
 registerThemes();
 
-let app = 'office';
-
 const EmptyComponent: React.FunctionComponent = () => {
   return <Text style={fabricTesterStyles.noTest}>Select a component from the left.</Text>;
 };
@@ -33,14 +31,26 @@ const Header: React.FunctionComponent<{}> = () => {
   const [selectedApp, setSelectedApp] = React.useState('office');
   const [selectedTheme, setSelectedTheme] = React.useState('default');
 
+  const themeColor = () => {
+
+    var color = "black"; // default: office (black)
+
+    if (selectedApp == 'office') color = 'black';
+    if (selectedApp == 'word') color = "#2B579A";
+    if (selectedApp == 'excel') color = "#217346";
+    if (selectedApp == 'powerpoint') color = "#B7472A";
+    if (selectedApp == 'outlook') color = "#106EBE";
+
+    return { color: color };
+  }
+
   const onAppChange = React.useCallback((appValue: string) => {
-    app = appValue;
-    setSelectedApp(app);
+    setSelectedApp(appValue);
   }, []);
 
   return (
     <View style={fabricTesterStyles.header}>
-      <Text style={fabricTesterStyles.testHeader} testID={BASE_TESTPAGE}>
+      <Text style={[fabricTesterStyles.testHeader, themeColor()]} testID={BASE_TESTPAGE}>
         ⚛ FluentUI Tests
       </Text>
 
@@ -70,7 +80,7 @@ const Header: React.FunctionComponent<{}> = () => {
             <Picker.Item label="Office" value="office" />
             <Picker.Item label="Word" value="word" />
             <Picker.Item label="Excel" value="excel" />
-            <Picker.Item label="Powerpoint" value="ppt" />
+            <Picker.Item label="Powerpoint" value="powerpoint" />
             <Picker.Item label="Outlook" value="outlook" />
           </Picker>
         </View>
