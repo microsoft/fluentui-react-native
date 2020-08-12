@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/immutable-merge",
-  "version": "0.5.67",
+  "version": "1.0.0",
   "description": "Immutable merge routines for deep customizable merging",
   "repository": {
     "type": "git",
