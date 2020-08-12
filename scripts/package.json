@@ -59,6 +59,8 @@
     "just-repo-utils": "^0.2.0",
     "just-scripts": "^0.38.0",
     "prettier": "~1.17.0",
+    "react-test-renderer": "~16.11.0",
+    "rimraf": "^3.0.2",
     "typescript": "3.8.3",
     "webpack": "^4.42.0",
     "webpack-bundle-analyzer": "^3.0.4",

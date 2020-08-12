@@ -8,6 +8,11 @@ function mergeOneLevel(a, b = {}) {
   return result;
 }
 
+function scriptsDevDeps() {
+  const config = require('@uifabricshared/build-native/package.json');
+  return Object.keys(config.devDependencies);
+}
+
 function depcheckTask() {
   return function(done) {
     const { logger } = require('just-scripts');
@@ -16,8 +21,8 @@ function depcheckTask() {
     const config = require(path.join(process.cwd(), 'package.json'));
     const options = mergeOneLevel(
       {
-        ignorePatterns: ['*eslint*', '*.d.ts'],
-        ignoreMatches: ['@uifabricshared/build-native', '@uifabricshared/eslint-config-rules'],
+        ignorePatterns: ['*eslint*', '/lib/*', '/lib-commonjs/*'],
+        ignoreMatches: ['@uifabricshared/build-native', '@uifabricshared/eslint-config-rules', ...scriptsDevDeps()],
         specials: [depcheck.special.eslint, depcheck.special.webpack, depcheck.special.jest]
       },
       config.depcheck

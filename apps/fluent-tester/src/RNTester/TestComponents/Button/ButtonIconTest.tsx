@@ -1,4 +1,4 @@
-import { Button } from '@fluentui-react-native/button';
+import { Button } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { Platform, View, Text } from 'react-native';

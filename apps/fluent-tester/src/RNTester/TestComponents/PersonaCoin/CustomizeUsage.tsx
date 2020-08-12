@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PersonaCoin, IconAlignment, IPersonaCoinTokens } from '@fluentui-react-native/persona-coin';
+import { PersonaCoin, IconAlignment, IPersonaCoinTokens } from '@fluentui/react-native';
 import { Switch, View, Text, TextInput } from 'react-native';
 import { Slider } from '../Common/Slider';
 import { steveBallmerPhotoUrl } from './styles';
@@ -19,7 +19,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
 
   const theme = useTheme();
   const textBoxBorderStyle = {
-    borderColor: theme.colors.inputBorder
+    borderColor: theme.colors.inputBorder,
   };
 
   const tokens: Partial<IPersonaCoinTokens> = {};
@@ -60,7 +60,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Background color"
           blurOnSubmit={true}
-          onSubmitEditing={e => {
+          onSubmitEditing={(e) => {
             setCoinColor(e.nativeEvent.text);
           }}
         />
@@ -69,7 +69,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Initials text color"
           blurOnSubmit={true}
-          onSubmitEditing={e => {
+          onSubmitEditing={(e) => {
             setTextColor(e.nativeEvent.text);
           }}
         />

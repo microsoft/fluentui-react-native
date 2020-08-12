@@ -36,7 +36,6 @@
     "@fluentui-react-native/tokens": ">=0.5.2 <1.0.0"
   },
   "devDependencies": {
-    "@types/prop-types": "15.5.1",
     "@types/react": "^16.9.34",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",

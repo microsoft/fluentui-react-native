@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RadioButton, RadioGroup } from '@fluentui-react-native/radio-group';
+import { RadioButton, RadioGroup } from '@fluentui/react-native';
 import { RADIOGROUP_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
@@ -17,29 +17,26 @@ const basicRadioGroup: React.FunctionComponent<{}> = () => {
       <RadioButton content="Option D" buttonKey="D" />
     </RadioGroup>
   );
-}
+};
 
 const radioGroupSections: TestSection[] = [
   {
     name: 'Basic RadioGroup Usage',
     testID: RADIOGROUP_TESTPAGE,
-    component: basicRadioGroup
-  }
+    component: basicRadioGroup,
+  },
 ];
 
 export const RadioGroupTest: React.FunctionComponent<{}> = () => {
-
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',
-    androidStatus: 'Backlog'
-  }
+    androidStatus: 'Backlog',
+  };
 
-  const description = 'No description.'
+  const description = 'No description.';
 
-  return (
-    <Test name="RadioGroup Test" description={description} sections={radioGroupSections} status={status}></Test>
-  );
+  return <Test name="RadioGroup Test" description={description} sections={radioGroupSections} status={status}></Test>;
 };
