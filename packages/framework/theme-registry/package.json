@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theme-registry",
-  "version": "0.3.67",
+  "version": "0.3.68",
   "description": "Implementation of the theme graph",
   "repository": {
     "type": "git",
@@ -31,7 +31,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/immutable-merge": "^1.0.0"
+    "@fluentui-react-native/immutable-merge": "^1.0.1"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

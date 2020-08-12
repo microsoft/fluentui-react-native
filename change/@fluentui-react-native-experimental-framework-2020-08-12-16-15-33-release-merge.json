@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "release @fluentui-react-native/immutable-merge",
-  "packageName": "@fluentui-react-native/experimental-framework",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-08-12T23:15:12.856Z"
-}
