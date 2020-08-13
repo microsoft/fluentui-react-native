@@ -19,11 +19,11 @@ const personaSections: TestSection[] = [
 export const PersonaTest: React.FunctionComponent<{}> = () => {
 
   const status: PlatformStatus = {
-    win32Status: 'beta',
-    uwpStatus: 'experimental',
-    iosStatus: 'experimental',
-    macosStatus: 'experimental',
-    androidStatus: 'backlog'
+    win32Status: 'Beta',
+    uwpStatus: 'Experimental',
+    iosStatus: 'Experimental',
+    macosStatus: 'Experimental',
+    androidStatus: 'Backlog'
   }
 
   const description = 'Personas are used for rendering an individual\'s avatar and presence. Persona renders a PersonaCoin along with descriptive text components.'

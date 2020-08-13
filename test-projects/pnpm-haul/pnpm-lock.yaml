@@ -2472,7 +2472,7 @@ packages:
       '@uifabricshared/foundation-compose': registry.npmjs.org/@uifabricshared/foundation-compose/1.6.61_react@16.11.0
       '@uifabricshared/foundation-settings': registry.npmjs.org/@uifabricshared/foundation-settings/0.5.58
       '@uifabricshared/foundation-tokens': registry.npmjs.org/@uifabricshared/foundation-tokens/0.6.1
-      '@uifabricshared/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.58
+      '@fluentui-react-native/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.58
       '@uifabricshared/theming-ramp': registry.npmjs.org/@uifabricshared/theming-ramp/0.9.57_react@16.11.0
       '@uifabricshared/theming-react-native': registry.npmjs.org/@uifabricshared/theming-react-native/0.7.58_react@16.11.0
       react: registry.npmjs.org/react/16.11.0
@@ -4923,7 +4923,7 @@ packages:
       '@fluentui-react-native/memo-cache': registry.npmjs.org/@fluentui-react-native/memo-cache/0.2.1
       '@uifabricshared/foundation-composable': registry.npmjs.org/@uifabricshared/foundation-composable/0.6.58
       '@uifabricshared/foundation-tokens': registry.npmjs.org/@uifabricshared/foundation-tokens/0.6.1
-      '@uifabricshared/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.58
+      '@fluentui-react-native/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.58
       '@uifabricshared/themed-settings': registry.npmjs.org/@uifabricshared/themed-settings/0.4.58
       '@uifabricshared/theming-ramp': registry.npmjs.org/@uifabricshared/theming-ramp/0.9.57_react@16.11.0
       '@uifabricshared/theming-react-native': registry.npmjs.org/@uifabricshared/theming-react-native/0.7.58_react@16.11.0
@@ -4939,7 +4939,7 @@ packages:
     version: 1.6.61
   registry.npmjs.org/@uifabricshared/foundation-settings/0.5.23:
     dependencies:
-      '@uifabricshared/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.23
+      '@fluentui-react-native/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.23
     dev: false
     name: '@uifabricshared/foundation-settings'
     resolution:
@@ -4950,7 +4950,7 @@ packages:
   registry.npmjs.org/@uifabricshared/foundation-settings/0.5.58:
     dependencies:
       '@fluentui-react-native/memo-cache': registry.npmjs.org/@fluentui-react-native/memo-cache/0.2.1
-      '@uifabricshared/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.58
+      '@fluentui-react-native/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.58
     dev: false
     name: '@uifabricshared/foundation-settings'
     resolution:
@@ -4970,7 +4970,7 @@ packages:
     version: 0.6.1
   registry.npmjs.org/@uifabricshared/immutable-merge/0.5.23:
     dev: false
-    name: '@uifabricshared/immutable-merge'
+    name: '@fluentui-react-native/immutable-merge'
     resolution:
       integrity: sha512-nSXn40UZQhAYkWhdxJSGvo99dqAjJJxltlAz60YB7KzKrKQpEDrD55o6FAGB5dWj65X6agYS7BeS+88rQ1/ibQ==
       registry: 'https://registry.yarnpkg.com/'
@@ -4978,7 +4978,7 @@ packages:
     version: 0.5.23
   registry.npmjs.org/@uifabricshared/immutable-merge/0.5.58:
     dev: false
-    name: '@uifabricshared/immutable-merge'
+    name: '@fluentui-react-native/immutable-merge'
     resolution:
       integrity: sha512-jRWy7V7rewBBw1dabS9wfrjTLu03SYu5Lhh5zc9lATjc+SNVBvsYkN16/0WOTmkX10iK7R0ApoOBXtL+fPCMtg==
       registry: 'https://registry.yarnpkg.com/'
@@ -4986,7 +4986,7 @@ packages:
     version: 0.5.58
   registry.npmjs.org/@uifabricshared/theme-registry/0.3.23:
     dependencies:
-      '@uifabricshared/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.23
+      '@fluentui-react-native/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.23
     dev: false
     name: '@uifabricshared/theme-registry'
     resolution:
@@ -4996,7 +4996,7 @@ packages:
     version: 0.3.23
   registry.npmjs.org/@uifabricshared/theme-registry/0.3.58:
     dependencies:
-      '@uifabricshared/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.58
+      '@fluentui-react-native/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.58
     dev: false
     name: '@uifabricshared/theme-registry'
     resolution:
@@ -5030,7 +5030,7 @@ packages:
   registry.npmjs.org/@uifabricshared/theming-ramp/0.9.22_react@16.11.0:
     dependencies:
       '@uifabricshared/foundation-settings': registry.npmjs.org/@uifabricshared/foundation-settings/0.5.23
-      '@uifabricshared/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.23
+      '@fluentui-react-native/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.23
       react: registry.npmjs.org/react/16.11.0
     dev: false
     id: registry.npmjs.org/@uifabricshared/theming-ramp/0.9.22
@@ -5045,7 +5045,7 @@ packages:
   registry.npmjs.org/@uifabricshared/theming-ramp/0.9.57_react@16.11.0:
     dependencies:
       '@uifabricshared/foundation-settings': registry.npmjs.org/@uifabricshared/foundation-settings/0.5.58
-      '@uifabricshared/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.58
+      '@fluentui-react-native/immutable-merge': registry.npmjs.org/@uifabricshared/immutable-merge/0.5.58
       react: registry.npmjs.org/react/16.11.0
     dev: false
     id: registry.npmjs.org/@uifabricshared/theming-ramp/0.9.57
@@ -13296,7 +13296,7 @@ packages:
   registry.npmjs.org/mkdirp-promise/5.0.1:
     dependencies:
       mkdirp: registry.npmjs.org/mkdirp/1.0.4
-    deprecated: 'This package is broken and no longer maintained. ''mkdirp'' itself supports promises now, please switch to that.'
+    deprecated: "This package is broken and no longer maintained. 'mkdirp' itself supports promises now, please switch to that."
     dev: true
     engines:
       node: '>=4'

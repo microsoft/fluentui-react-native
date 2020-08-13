@@ -40,11 +40,11 @@ const separatorSections: TestSection[] = [
 export const SeparatorTest: React.FunctionComponent<{}> = () => {
 
   const status: PlatformStatus = {
-    win32Status: 'beta',
-    uwpStatus: 'experimental',
-    iosStatus: 'experimental',
-    macosStatus: 'beta',
-    androidStatus: 'backlog'
+    win32Status: 'Beta',
+    uwpStatus: 'Experimental',
+    iosStatus: 'Experimental',
+    macosStatus: 'Beta',
+    androidStatus: 'Backlog'
   }
 
   const description = "A separator visually separates content into groups.\n\nYou can render content in the separator by specifying the component's children. The component's children can be plain text or a component like Icon. The content is center-aligned by default."

@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/foundation-composable
 
-This log was last generated on Sat, 04 Jul 2020 06:24:16 GMT and should not be manually modified.
+This log was last generated on Fri, 07 Aug 2020 21:50:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.69
+
+Fri, 07 Aug 2020 21:50:55 GMT
+
+### Patches
+
+- Remove unnecessary calls to slot data factories (jasonmo@microsoft.com)
 
 ## 0.6.67
 
