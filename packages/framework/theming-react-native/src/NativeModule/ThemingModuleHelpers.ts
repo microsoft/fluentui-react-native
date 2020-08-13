@@ -52,7 +52,7 @@ export function translateOfficeTheme(module: IOfficeThemingModule, cache: Palett
     },
     typography: module.fluentTypography,
     host: {
-      palette: cache[id]
+      palette: cache[id || 'WhiteColors']
     }
   };
 }
