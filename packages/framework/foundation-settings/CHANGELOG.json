@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-settings",
   "entries": [
     {
+      "date": "Thu, 13 Aug 2020 19:49:20 GMT",
+      "tag": "@uifabricshared/foundation-settings_v0.6.3",
+      "version": "0.6.3",
+      "comments": {
+        "none": [
+          {
+            "comment": "change text color",
+            "author": "email not defined",
+            "commit": "690dc0f91728c471e6d0207c30414416f8cd71d5",
+            "package": "@uifabricshared/foundation-settings"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 13 Aug 2020 04:48:19 GMT",
       "tag": "@uifabricshared/foundation-settings_v0.6.3",
       "version": "0.6.3",

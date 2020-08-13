@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "change text color",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "email not defined",
-  "dependentChangeType": "patch",
-  "date": "2020-08-13T15:31:45.016Z"
-}
