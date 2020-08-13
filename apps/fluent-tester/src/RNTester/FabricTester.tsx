@@ -25,6 +25,8 @@ export interface IFabricTesterProps {
   enabledTests: TestDescription[];
 }
 
+export let app = 'office';
+
 const Header: React.FunctionComponent<{}> = () => {
 
   const [selectedPlatform, setSelectedPlatform] = React.useState('win32');
@@ -45,6 +47,7 @@ const Header: React.FunctionComponent<{}> = () => {
   }
 
   const onAppChange = React.useCallback((appValue: string) => {
+    app = appValue;
     setSelectedApp(appValue);
   }, []);
 
