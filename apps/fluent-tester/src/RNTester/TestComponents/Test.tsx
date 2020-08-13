@@ -75,10 +75,10 @@ export const Test = (props: TestProps) => {
     var color = "black"; // default: office (black)
 
     if (app == 'office') color = 'black';
-    if (app == 'word') color = "#2B579A";
-    if (app == 'excel') color = "#217346";
-    if (app == 'powerpoint') color = "#B7472A";
-    if (app == 'outlook') color = "#106EBE";
+    if (app == 'word') color = '#2B579A';
+    if (app == 'excel') color = '#217346';
+    if (app == 'powerpoint') color = '#B7472A';
+    if (app == 'outlook') color = '#106EBE';
 
     return { color: color };
   }

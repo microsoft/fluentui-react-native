@@ -38,10 +38,10 @@ const Header: React.FunctionComponent<{}> = () => {
     var color = "black"; // default: office (black)
 
     if (selectedApp == 'office') color = 'black';
-    if (selectedApp == 'word') color = "#2B579A";
-    if (selectedApp == 'excel') color = "#217346";
-    if (selectedApp == 'powerpoint') color = "#B7472A";
-    if (selectedApp == 'outlook') color = "#106EBE";
+    if (selectedApp == 'word') color = '#2B579A';
+    if (selectedApp == 'excel') color = '#217346';
+    if (selectedApp == 'powerpoint') color = '#B7472A';
+    if (selectedApp == 'outlook') color = '#106EBE';
 
     return { color: color };
   }
