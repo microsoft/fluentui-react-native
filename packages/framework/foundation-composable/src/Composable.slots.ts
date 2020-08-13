@@ -113,7 +113,7 @@ export function useCompoundPrepare<TProps, TSlotProps extends ISlotProps, TState
 ): { renderData: IRenderData<TSlotProps, TState>; Slots: ISlots<TSlotProps> } {
   // create the slot render info (which may be a tree) and store it into state once.  Note that this will also create any
   // needed closures for the slots to ensure they don't get recreated over the lifetime of the component
-  const [renderInfo] = React.useState(createSlotRenderInfo<TProps, TSlotProps, TState>(composable));
+  const renderInfo = React.useMemo(() => createSlotRenderInfo<TProps, TSlotProps, TState>(composable), []);
 
   // process the props of the tree using the created/retrieved renderInfo
   return useUpdateRenderData<TProps, TSlotProps, TState>(props, renderInfo);
