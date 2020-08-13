@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/use-slots",
   "entries": [
     {
+      "date": "Wed, 12 Aug 2020 23:52:15 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.3.3",
+      "version": "0.3.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "release @fluentui-react-native/immutable-merge",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b0ac4360b79b4286e2a4ea9fe768c96568e954fa",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 11 Aug 2020 19:53:33 GMT",
       "tag": "@fluentui-react-native/use-slots_v0.3.2",
       "version": "0.3.2",

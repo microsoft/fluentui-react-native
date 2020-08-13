@@ -1,5 +1,5 @@
 import { getMemoCache, GetMemoValue } from '@fluentui-react-native/memo-cache';
-import { immutableMerge } from '@uifabricshared/immutable-merge';
+import { immutableMerge } from '@fluentui-react-native/immutable-merge';
 import { TokenPropMask, BuildSlotProps, refinePropsFunctions } from './buildProps';
 import { HasLayer, applyTokenLayers } from './applyTokenLayers';
 
