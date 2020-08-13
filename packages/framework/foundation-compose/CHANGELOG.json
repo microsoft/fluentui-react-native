@@ -2,6 +2,36 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Thu, 13 Aug 2020 04:48:19 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.77",
+      "version": "1.6.77",
+      "comments": {
+        "patch": [
+          {
+            "comment": "release @fluentui-react-native/memo-cache",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b490c9915260a055b2f3c044f06263be0be42216",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 Aug 2020 23:52:15 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.76",
+      "version": "1.6.76",
+      "comments": {
+        "patch": [
+          {
+            "comment": "release @fluentui-react-native/immutable-merge",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b0ac4360b79b4286e2a4ea9fe768c96568e954fa",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 11 Aug 2020 19:53:33 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.6.75",
       "version": "1.6.75",

@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/themed-settings
 
-This log was last generated on Wed, 17 Jun 2020 05:00:56 GMT and should not be manually modified.
+This log was last generated on Thu, 13 Aug 2020 04:48:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.70
+
+Thu, 13 Aug 2020 04:48:19 GMT
+
+### Patches
+
+- release @fluentui-react-native/memo-cache (jasonmo@microsoft.com)
 
 ## 0.4.57
 

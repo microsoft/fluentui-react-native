@@ -1,8 +1,16 @@
-# Change Log - @uifabricshared/immutable-merge
+# Change Log - @fluentui-react-native/immutable-merge
 
-This log was last generated on Thu, 23 Jul 2020 21:28:55 GMT and should not be manually modified.
+This log was last generated on Wed, 12 Aug 2020 23:52:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.1
+
+Wed, 12 Aug 2020 23:52:15 GMT
+
+### Patches
+
+- release @fluentui-react-native/immutable-merge (jasonmo@microsoft.com)
 
 ## 0.5.67
 
