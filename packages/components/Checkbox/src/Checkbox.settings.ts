@@ -17,7 +17,7 @@ export const settings: IComposeSettings<ICheckboxType> = [
       accessibilityRole: 'checkbox',
       style: {
         display: 'flex',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         flexDirection: 'row',
         minHeight: 14,
         marginTop: 0,
@@ -29,9 +29,8 @@ export const settings: IComposeSettings<ICheckboxType> = [
         height: 14,
         width: 14,
         marginEnd: 4,
-        marginTop: 5,
         borderStyle: 'solid',
-        borderWidth: 1,
+        borderWidth: 1
       }
     },
     checkmark: {
@@ -46,9 +45,10 @@ export const settings: IComposeSettings<ICheckboxType> = [
     content: {
       variant: 'bodyStandard',
       style: {
-        marginTop: 1,
         borderStyle: 'dotted',
-        borderWidth: 1
+        borderWidth: 1,
+        alignSelf: 'baseline',
+        marginTop: 3
       }
     },
     _precedence: ['disabled', 'boxAtEnd', 'hovered', 'focused', 'pressed', 'checked'],
@@ -57,7 +57,7 @@ export const settings: IComposeSettings<ICheckboxType> = [
         tokens: {
           backgroundColor: 'menuItemBackgroundHovered',
           textBorderColor: 'focusBorder'
-        },
+        }
       },
       checked: {
         checkmark: {
