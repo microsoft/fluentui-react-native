@@ -35,7 +35,7 @@ const Header: React.FunctionComponent<{}> = () => {
 
   const themeColor = () => {
 
-    var color = "black"; // default: office (black)
+    var color = 'black'; // default: office (black)
 
     if (selectedApp == 'office') color = 'black';
     if (selectedApp == 'word') color = '#2B579A';

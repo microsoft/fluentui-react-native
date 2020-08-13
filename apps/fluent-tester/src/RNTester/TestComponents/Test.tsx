@@ -72,7 +72,7 @@ export const Test = (props: TestProps) => {
 
   const themeColor = () => {
 
-    var color = "black"; // default: office (black)
+    var color = 'black'; // default: office (black)
 
     if (app == 'office') color = 'black';
     if (app == 'word') color = '#2B579A';
