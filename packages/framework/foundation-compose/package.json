@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-compose",
-  "version": "1.6.75",
+  "version": "1.6.77",
   "description": "Compose infrastructure",
   "repository": {
     "type": "git",
@@ -32,13 +32,13 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/themed-settings": ">=0.4.68 <1.0.0",
-    "@uifabricshared/foundation-composable": ">=0.6.69 <1.0.0",
-    "@uifabricshared/foundation-settings": ">=0.6.1 <1.0.0",
-    "@uifabricshared/foundation-tokens": ">=0.7.0 <1.0.0",
-    "@uifabricshared/immutable-merge": ">=0.5.67 <1.0.0",
-    "@uifabricshared/theming-ramp": ">=0.10.1 <1.0.0",
-    "@uifabricshared/theming-react-native": ">=0.7.71 <1.0.0"
+    "@fluentui-react-native/immutable-merge": "^1.0.1",
+    "@uifabricshared/themed-settings": ">=0.4.70 <1.0.0",
+    "@uifabricshared/foundation-composable": ">=0.6.71 <1.0.0",
+    "@uifabricshared/foundation-settings": ">=0.6.3 <1.0.0",
+    "@uifabricshared/foundation-tokens": ">=0.7.2 <1.0.0",
+    "@uifabricshared/theming-ramp": ">=0.10.3 <1.0.0",
+    "@uifabricshared/theming-react-native": ">=0.7.73 <1.0.0"
   },
   "devDependencies": {
     "@uifabricshared/eslint-config-rules": "^0.1.1",

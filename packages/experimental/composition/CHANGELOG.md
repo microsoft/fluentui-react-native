@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/composition
 
-This log was last generated on Sat, 01 Aug 2020 00:34:34 GMT and should not be manually modified.
+This log was last generated on Thu, 13 Aug 2020 04:48:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.3
+
+Thu, 13 Aug 2020 04:48:19 GMT
+
+### Patches
+
+- release @fluentui-react-native/memo-cache (jasonmo@microsoft.com)
+
+## 0.3.2
+
+Wed, 12 Aug 2020 23:52:15 GMT
+
+### Patches
+
+- release @fluentui-react-native/immutable-merge (jasonmo@microsoft.com)
 
 ## 0.3.0
 
