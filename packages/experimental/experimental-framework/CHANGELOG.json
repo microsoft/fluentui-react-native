@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-framework",
   "entries": [
     {
+      "date": "Thu, 13 Aug 2020 04:48:19 GMT",
+      "tag": "@fluentui-react-native/experimental-framework_v0.2.6",
+      "version": "0.2.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "release @fluentui-react-native/memo-cache",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b490c9915260a055b2f3c044f06263be0be42216",
+            "package": "@fluentui-react-native/experimental-framework"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Aug 2020 23:52:15 GMT",
       "tag": "@fluentui-react-native/experimental-framework_v0.2.5",
       "version": "0.2.5",

@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-settings",
   "entries": [
     {
+      "date": "Thu, 13 Aug 2020 04:48:19 GMT",
+      "tag": "@uifabricshared/foundation-settings_v0.6.3",
+      "version": "0.6.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "release @fluentui-react-native/memo-cache",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b490c9915260a055b2f3c044f06263be0be42216",
+            "package": "@uifabricshared/foundation-settings"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Aug 2020 23:52:15 GMT",
       "tag": "@uifabricshared/foundation-settings_v0.6.2",
       "version": "0.6.2",

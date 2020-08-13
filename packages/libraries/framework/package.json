@@ -25,15 +25,15 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-composable": ">=0.6.70 <1.0.0",
-    "@uifabricshared/foundation-compose": "^1.6.76",
-    "@uifabricshared/foundation-settings": ">=0.6.2 <1.0.0",
-    "@uifabricshared/foundation-tokens": ">=0.7.1 <1.0.0",
+    "@uifabricshared/foundation-composable": ">=0.6.71 <1.0.0",
+    "@uifabricshared/foundation-compose": "^1.6.77",
+    "@uifabricshared/foundation-settings": ">=0.6.3 <1.0.0",
+    "@uifabricshared/foundation-tokens": ">=0.7.2 <1.0.0",
     "@fluentui-react-native/immutable-merge": "^1.0.1",
-    "@uifabricshared/theming-ramp": ">=0.10.2 <1.0.0",
-    "@uifabricshared/theming-react-native": ">=0.7.72 <1.0.0",
-    "@fluentui-react-native/memo-cache": "^1.0.0",
-    "@fluentui-react-native/tokens": ">=0.5.3 <1.0.0"
+    "@uifabricshared/theming-ramp": ">=0.10.3 <1.0.0",
+    "@uifabricshared/theming-react-native": ">=0.7.73 <1.0.0",
+    "@fluentui-react-native/memo-cache": "^1.0.1",
+    "@fluentui-react-native/tokens": ">=0.5.4 <1.0.0"
   },
   "devDependencies": {
     "@types/prop-types": "15.5.1",

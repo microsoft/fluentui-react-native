@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/foundation-settings
 
-This log was last generated on Wed, 12 Aug 2020 23:52:15 GMT and should not be manually modified.
+This log was last generated on Thu, 13 Aug 2020 04:48:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.3
+
+Thu, 13 Aug 2020 04:48:19 GMT
+
+### Patches
+
+- release @fluentui-react-native/memo-cache (jasonmo@microsoft.com)
 
 ## 0.6.2
 
