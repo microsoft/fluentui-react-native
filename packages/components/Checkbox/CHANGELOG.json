@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Fri, 14 Aug 2020 17:26:00 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Aligning checkbox text centered vertically",
+            "author": "safreibe@microsoft.com",
+            "commit": "dac663b7d74d60f3c71911e8c4b395ac89e8acc6",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 13 Aug 2020 19:49:20 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.4.8",
       "version": "0.4.8",
