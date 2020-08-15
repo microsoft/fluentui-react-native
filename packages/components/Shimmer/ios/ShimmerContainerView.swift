@@ -5,11 +5,25 @@ import FluentUI
 @objc(MSFShimmerContainerView)
 class ShimmerContainerView: UIView {
 	
-	var appearance: ShimmerViewAppearance = ShimmerViewAppearance() {
+	@objc var appearance: Dictionary<AnyHashable, Any> = [:] {
 		didSet {
 			assert(Thread.isMainThread)
 			
-			currentShimmerView.appearance = appearance
+			let oldAppearance = shimmerView.appearance
+			
+			let tintColor = RCTConvert.uiColor("tintColor") ?? oldAppearance.tintColor
+			let cornerRadius = RCTConvert.nsNumber("cornerRadius") ?? NSNumber(value: Float(oldAppearance.cornerRadius))
+			let labelCornerRadius = RCTConvert.nsNumber("labelCornerRadius") ?? NSNumber(value: Float(oldAppearance.labelCornerRadius))
+			let usesTextHeightForLabels = RCTConvert.nsNumber("usesTextHeightForLabels") ?? NSNumber(booleanLiteral: oldAppearance.usesTextHeightForLabels)
+			let labelHeight = RCTConvert.nsNumber("labelHeight") ?? NSNumber(value: Float(oldAppearance.labelHeight))
+
+			shimmerView.appearance = ShimmerViewAppearance(
+				tintColor: tintColor,
+				cornerRadius: cornerRadius as! CGFloat,
+				labelCornerRadius: labelCornerRadius as! CGFloat,
+				usesTextHeightForLabels: usesTextHeightForLabels.boolValue,
+				labelHeight: labelHeight as! CGFloat
+			)
 		}
 	}
 	
@@ -17,15 +31,15 @@ class ShimmerContainerView: UIView {
 		didSet {
 			assert(Thread.isMainThread)
 			
-			currentShimmerView.removeFromSuperview()
+			shimmerView.removeFromSuperview()
 			let newShimmerView = ShimmerView(containerView: self, excludedViews: excludedViews ?? [], animationSynchronizer: AnimationSynchronizer())
 			newShimmerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 			addSubview(newShimmerView)
-			currentShimmerView = newShimmerView
+			shimmerView = newShimmerView
 		}
 	}
 	
-	var currentShimmerView: ShimmerView = ShimmerView()
+	var shimmerView: ShimmerView = ShimmerView()
 	
 	private var mirrors: [UIView] = []
 	
@@ -55,7 +69,7 @@ class ShimmerContainerView: UIView {
 		let leaves = containerLeaves(in: self)
 		
 		for leaf in leaves {
-			if (leaf.superview == nil || leaf == self.currentShimmerView) {
+			if (leaf.superview == nil || leaf == self.shimmerView) {
 				continue
 			}
 			
@@ -66,7 +80,7 @@ class ShimmerContainerView: UIView {
 			addSubview(mirror)
 		}
 		
-		bringSubviewToFront(currentShimmerView)
+		bringSubviewToFront(shimmerView)
 	}
 	
 // MARK: - UIView+React
@@ -86,7 +100,7 @@ class ShimmerContainerView: UIView {
 		var leaves: [UIView] = []
 		
 		for view in view.subviews {
-			if (view.subviews.count == 0 && view != currentShimmerView) {
+			if (view.subviews.count == 0 && view != shimmerView) {
 				leaves.append(view)
 			} else if (!view.isHidden) {
 				leaves.append(contentsOf: containerLeaves(in: view))
