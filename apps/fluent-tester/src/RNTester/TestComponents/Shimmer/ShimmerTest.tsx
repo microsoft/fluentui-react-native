@@ -14,12 +14,16 @@ export const ShimmerTest: React.FunctionComponent<{}> = () => {
       </Text>
       <Separator />
       <Stack style={stackStyle}>
-        <Shimmer>
-          <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </Text>
+        <Shimmer style={{ flex: 1, alignItems: 'center' }}>
+          <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row', marginStart: 16, marginEnd: 16 }}>
+            <View style={{ width: 40, height: 40 }} />
+            <View style={{ flexDirection: 'column', flex: 2, marginLeft: 16 }} >
+              <Text style={{ marginBottom: 3, width: '40%' }}>{''}</Text>
+              <Text style={{ marginTop: 3, width: '30%' }} >{''}</Text>
+            </View>
+          </View>
         </Shimmer>
       </Stack>
-    </View>
+    </View >
   );
 };

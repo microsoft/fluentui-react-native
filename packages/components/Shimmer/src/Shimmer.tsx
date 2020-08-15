@@ -1,69 +1,92 @@
-/** @jsx withSlots */
-import {
-  compose,
-  IColorTokens,
-  UseSlots,
-  buildProps,
-  mergeProps,
-  withSlots,
-} from '@fluentui-react-native/experimental-framework';
-import { requireNativeComponent } from 'react-native';
-import { IViewProps } from '@fluentui-react-native/adapters';
+import { requireNativeComponent, View, ViewProps, processColor } from 'react-native';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
-const FRNShimmer = requireNativeComponent('FRNShimmerView');
-
-const shimmerName = 'Shimmer';
+const COMPONENT_NAME = 'MSFShimmerView';
 
 /**
- * Shimmer tokens, these are the internally configurable values for Shimmer elements. In particular these
- * drive decisions on how to build the styles
+ * Native view wrapper
  */
-export interface ShimmerTokens {
+const NativeShimmerView = requireNativeComponent(COMPONENT_NAME);
 
+export interface IShimmerViewAppearance {
+  /**
+   * Color to tint the shimmer boxes. Defaults to the Fabric default color.
+   */
+  tintColor?: string;
+
+  /**
+   * Corner radius on each view.
+   */
+  cornerRadius?: number;
+
+  /**
+   * Corner radius on each UILabel. Set to < 0 to disable and use default `cornerRadius`.
+   */
+  labelCornerRadius?: number;
+
+  /**
+   * usesTextHeightForLabels: True to enable shimmers to auto-adjust to font height for a UILabel -- this
+   * will more accurately reflect the text in the label rect rather than using the bounding box. `labelHeight`
+   * will take precendence over this property.
+   */
+  usesTextHeightForLabels?: boolean;
+
+  /**
+   * If greater than 0, a fixed height to use for all UILabels. This will take precedence
+   * over `usesTextHeightForLabels`. Set to less than 0 to disable.
+   */
+  labelHeight?: number;
+}
+
+export interface IShimmerViewProps {
+  /**
+   * Appearance of the views that are shimmered. If not passed, the default will be used.
+   */
+  appearance?: IShimmerViewAppearance;
 }
 
 /**
- * ViewProps props, based off of the standard react-native ViewProps with some new extensions
+ * Shimmering view (loading state).
+ *
+ * @discussion Wrap an arbitrary number of subviews with Shimmer to have them all shimmer together.
+ * Multiple shimmers added to a page (eg as cells in a FlatList) will all be synchronized so they move together. See the
+ * example app for a more advanced demo.
+ *
+ * @note Only non-hidden leaf views will be considered for shimmering so that views wrapped for a flexbox layout will not
+ * overshadow children. (see example)
+ *
+ * @example
+```
+<Shimmer style={{ flex: 1 }}>
+    <View style={{ width: 40, height: 40 }} /> // <--- This will be shimmered
+    <View style={{ flex: 2, flex-direction: 'column' }} > // <-- This will be ignored (not a leaf)
+      <Text style={{ width: 100 }}/> // <--- This will be shimmered
+      <Text style={{ width: 70 }}/> // <--- This will be shimmered
+    </View>
+</Shimmer>
+```
  */
-export type ShimmerProps<TBase = IViewProps> = TBase & {
+export class Shimmer extends React.PureComponent<ViewProps & IShimmerViewProps> {
+  // tslint:disable-next-line:no-any
+  public static propTypes: any = {
+    tintColor: PropTypes.object
+  };
 
-};
+  public render(): JSX.Element | null {
+    if (NativeShimmerView === undefined) {
+      return <View {...this.props} />;
+    }
 
-/**
- * These are the tokens which are also present in props. If specified in props this will override the values
- * from tokens.
- */
-// const tokenProps: (keyof IColorTokens)[] = [];
-
-/** Type to use for compose */
-interface ShimmerType {
-  props: ShimmerProps;
-  slotProps: { root: IViewProps };
-  tokens: ShimmerTokens;
-}
-
-export const Shimmer = compose<ShimmerType>({
-  displayName: shimmerName,
-  /** Settings for the use-styling hook */
-  tokens: [
-    t => ({}),
-    shimmerName
-  ],
-  // states: [],
-  // tokenProps,
-  slotProps: {
-    root: buildProps<IViewProps, IColorTokens>(() => ({}))
-  },
-  /** Settings for the useSlots that will be passed on */
-  slots: { root: FRNShimmer },
-  // filters: { root: filterTextProps },
-  /** render function for the component */
-  render: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
-    // stage one, execute any hooks, styling lookups to build the styled slot
-    const Root = useSlots(props).root;
-    // return a function used to complete the render
-    return (rest: ShimmerProps, children: React.ReactNode) => <Root {...mergeProps(props, rest)}>{children}</Root>;
+    const appearance = this.props.appearance;
+    return (
+      <NativeShimmerView
+        {...this.props}
+        appearance={{
+          ...appearance,
+          tintColor: appearance && appearance.tintColor ? processColor(appearance.tintColor) : undefined
+        }}
+      />
+    );
   }
-});
-
-export default Shimmer;
+}

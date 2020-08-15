@@ -1,12 +1,11 @@
 import Foundation
 import FluentUI
 
-
-@objc(FRNShimmerViewManager)
+@objc(MSFShimmerViewManager)
 class ShimmerViewManager: RCTViewManager {
+	
   override func view() -> UIView! {
-	let shimmer = ShimmerLinesView()
-	return shimmer
+	return ShimmerContainerView()
   }
 
   override class func requiresMainQueueSetup() -> Bool {

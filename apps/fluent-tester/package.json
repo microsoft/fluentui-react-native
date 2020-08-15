@@ -33,7 +33,7 @@
     "@fluentui-react-native/persona-coin": ">=0.3.78 <1.0.0",
     "@fluentui-react-native/persona": ">=0.5.75 <1.0.0",
     "@fluentui-react-native/contextual-menu": ">=0.3.3 <1.0.0",
-    "@fluentui-react-native/experimental-shimmer": "*",
+    "@fluentui-react-native/shimmer": "*",
     "@uifabricshared/theming-react-native": ">=0.7.71 <1.0.0",
     "@uifabricshared/themed-stylesheet": ">=0.3.67 <1.0.0",
     "react-native-svg": "^11.0.0"

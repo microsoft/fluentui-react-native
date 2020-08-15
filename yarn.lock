@@ -1223,6 +1223,21 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@fluentui-react-native/experimental-framework@0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/experimental-framework/-/experimental-framework-0.2.2.tgz#0bcf0be1a78e3144accd9d1cc5ee31feeddfb5b3"
+  integrity sha512-yCWNUfn9BBMOZlR5Ws4SNChEoLpxnunkrMGPyW4bl9vdn6v5ZvQ2j6lYf8DMhTBUkZkSld7HqfeGmgNKEyQZJQ==
+  dependencies:
+    "@fluentui-react-native/composition" ">=0.3.0 <1.0.0"
+    "@fluentui-react-native/memo-cache" ">=0.2.10 <1.0.0"
+    "@fluentui-react-native/tokens" ">=0.5.1 <1.0.0"
+    "@fluentui-react-native/use-slots" ">=0.3.0 <1.0.0"
+    "@fluentui-react-native/use-styling" ">=0.2.1 <1.0.0"
+    "@uifabricshared/foundation-settings" ">=0.6.1 <1.0.0"
+    "@uifabricshared/immutable-merge" ">=0.5.67 <1.0.0"
+    "@uifabricshared/theming-ramp" ">=0.10.0 <1.0.0"
+    "@uifabricshared/theming-react-native" ">=0.7.70 <1.0.0"
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
