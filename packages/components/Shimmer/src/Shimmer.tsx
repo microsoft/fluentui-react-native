@@ -1,14 +1,27 @@
-import { requireNativeComponent, View, ViewProps, processColor } from 'react-native';
+/** @jsx withSlots */
+import {
+  compose,
+  UseSlots,
+  buildProps,
+  mergeProps,
+  withSlots,
+  ITheme
+} from '@fluentui-react-native/experimental-framework';
+import { requireNativeComponent } from 'react-native';
+import { IViewProps } from '@fluentui-react-native/adapters';
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 
-const COMPONENT_NAME = 'MSFShimmerView';
+const shimmerName = "Shimmer"
+
+const NativeShimmerView = requireNativeComponent('MSFShimmerView');
+
+export interface ShimmerTokens {
+
+}
 
 /**
- * Native view wrapper
+ * Appearance of the Shimmer View
  */
-const NativeShimmerView = requireNativeComponent(COMPONENT_NAME);
-
 export interface IShimmerViewAppearance {
   /**
    * Color to tint the shimmer boxes. Defaults to the Fabric default color.
@@ -39,54 +52,66 @@ export interface IShimmerViewAppearance {
   labelHeight?: number;
 }
 
+export interface IShimmerAppearance {
+
+  alpha?: number;
+  width?: number;
+
+  /**
+   * Angle of the direction of the gradient, in radian. 0 means horizontal, Pi/2 means vertical.
+   */
+  angle?: number;
+
+  /**
+   * Speed of the animation, in point/seconds.
+   */
+  speed?: number;
+
+  /**
+   * Delay between the end of a shimmering animation and the beginning of the next one, in seconds
+   */
+  delay?: number;
+}
+
 export interface IShimmerViewProps {
   /**
    * Appearance of the views that are shimmered. If not passed, the default will be used.
    */
-  appearance?: IShimmerViewAppearance;
+  viewAppearance?: IShimmerViewAppearance;
+
+  /**
+   * Appearance of the shimmer itself (the animation appearance)
+   */
+  appearance?: IShimmerAppearance;
 }
 
 /**
- * Shimmering view (loading state).
- *
- * @discussion Wrap an arbitrary number of subviews with Shimmer to have them all shimmer together.
- * Multiple shimmers added to a page (eg as cells in a FlatList) will all be synchronized so they move together. See the
- * example app for a more advanced demo.
- *
- * @note Only non-hidden leaf views will be considered for shimmering so that views wrapped for a flexbox layout will not
- * overshadow children. (see example)
- *
- * @example
-```
-<Shimmer style={{ flex: 1 }}>
-    <View style={{ width: 40, height: 40 }} /> // <--- This will be shimmered
-    <View style={{ flex: 2, flex-direction: 'column' }} > // <-- This will be ignored (not a leaf)
-      <Text style={{ width: 100 }}/> // <--- This will be shimmered
-      <Text style={{ width: 70 }}/> // <--- This will be shimmered
-    </View>
-</Shimmer>
-```
+ * ViewProps props, based off of the standard react-native ViewProps with some new extensions
  */
-export class Shimmer extends React.PureComponent<ViewProps & IShimmerViewProps> {
-  // tslint:disable-next-line:no-any
-  public static propTypes: any = {
-    tintColor: PropTypes.object
-  };
+export type ShimmerProps<TBase = IViewProps> = TBase & {
 
-  public render(): JSX.Element | null {
-    if (NativeShimmerView === undefined) {
-      return <View {...this.props} />;
-    }
+};
 
-    const appearance = this.props.appearance;
-    return (
-      <NativeShimmerView
-        {...this.props}
-        appearance={{
-          ...appearance,
-          tintColor: appearance && appearance.tintColor ? processColor(appearance.tintColor) : undefined
-        }}
-      />
-    );
-  }
+interface ShimmerType {
+  // No current props
+  slotProps: { root: IShimmerViewProps };
+  tokens: ShimmerTokens
 }
+
+export const Shimmer = compose<ShimmerType>({
+  displayName: shimmerName,
+  tokens: [
+    t => ({}),
+    shimmerName
+  ],
+  slotProps: {
+    root: buildProps<IShimmerViewProps, ShimmerTokens>(() => ({}))
+  },
+  slots: { root: NativeShimmerView },
+  render: (props: IShimmerViewProps, useSlots: UseSlots<ShimmerType>) => {
+    // stage one, execute any hooks, styling lookups to build the styled slot
+    const Root = useSlots(props).root;
+    // return a function used to complete the render
+    return (rest: IShimmerViewProps, children: React.ReactNode) => <Root {...mergeProps(props, rest)}>{children}</Root>;
+  }
+})
