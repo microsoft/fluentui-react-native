@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Fri, 07 Aug 2020 22:08:03 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Aug 2020 17:52:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.74
+
+Fri, 14 Aug 2020 17:52:16 GMT
+
+### Patches
+
+- Set "WhiteColors" as palette id if no id is provided (krsiler@microsoft.com)
 
 ## 0.7.71
 

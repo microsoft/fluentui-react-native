@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 11 Aug 2020 19:53:33 GMT and should not be manually modified.
+This log was last generated on Thu, 13 Aug 2020 19:49:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.3
+
+Thu, 13 Aug 2020 19:49:20 GMT
+
+### Patches
+
+- change text color (email not defined)
 
 ## 0.3.0
 

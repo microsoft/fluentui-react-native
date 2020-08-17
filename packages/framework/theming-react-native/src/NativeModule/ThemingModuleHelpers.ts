@@ -32,8 +32,12 @@ function updatePaletteInCache(module: IOfficeThemingModule, cache: PaletteCache,
   }
 }
 
+const getPaletteCacheKey = (palette?: string) => {
+  return useFakePalette ? 'debug' : palette || 'WhiteColors';
+};
+
 function translatePalette(module: IOfficeThemingModule, paletteCache: PaletteCache, palette?: string): IPartialPalette {
-  const key = useFakePalette ? 'debug' : palette || 'WhiteColors';
+  const key = getPaletteCacheKey(palette);
   if (!paletteCache[key]) {
     updatePaletteInCache(module, paletteCache, key);
   }
@@ -52,7 +56,7 @@ export function translateOfficeTheme(module: IOfficeThemingModule, cache: Palett
     },
     typography: module.fluentTypography,
     host: {
-      palette: cache[id]
+      palette: cache[getPaletteCacheKey(id)]
     }
   };
 }
