@@ -1,8 +1,0 @@
-{
-  "type": "none",
-  "comment": "fix dependency errors",
-  "packageName": "@fluentui-react-native/memo-cache",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "none",
-  "date": "2020-08-13T06:43:20.227Z"
-}

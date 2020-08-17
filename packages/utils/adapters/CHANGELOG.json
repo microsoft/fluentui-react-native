@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Mon, 17 Aug 2020 22:08:34 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.3.35",
+      "version": "0.3.35",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix dependency errors",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2216954b9e0efadc5223c2346b4cb31e20c8bc12",
+            "package": "@fluentui-react-native/adapters"
+          }
+        ],
+        "none": [
+          {
+            "comment": "fix dependency errors",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2216954b9e0efadc5223c2346b4cb31e20c8bc12",
+            "package": "@fluentui-react-native/adapters"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 13 Aug 2020 19:49:20 GMT",
       "tag": "@fluentui-react-native/adapters_v0.3.34",
       "version": "0.3.34",

@@ -22,8 +22,8 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": ">=0.3.34 <1.0.0",
-    "@fluentui-react-native/experimental-framework": "0.2.7"
+    "@fluentui-react-native/adapters": ">=0.3.35 <1.0.0",
+    "@fluentui-react-native/experimental-framework": "0.2.8"
   },
   "devDependencies": {
     "@types/react-native": "^0.62.0",

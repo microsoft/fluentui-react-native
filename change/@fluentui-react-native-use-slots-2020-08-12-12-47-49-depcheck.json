@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix dependency errors",
-  "packageName": "@fluentui-react-native/use-slots",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-08-12T19:47:11.550Z"
-}

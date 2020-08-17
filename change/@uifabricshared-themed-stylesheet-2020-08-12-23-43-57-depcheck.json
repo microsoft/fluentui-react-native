@@ -1,8 +1,0 @@
-{
-  "type": "none",
-  "comment": "fix dependency errors",
-  "packageName": "@uifabricshared/themed-stylesheet",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "none",
-  "date": "2020-08-13T06:43:36.108Z"
-}

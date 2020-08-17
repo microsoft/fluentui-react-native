@@ -1,8 +1,0 @@
-{
-  "type": "none",
-  "comment": "fix dependency errors",
-  "packageName": "@uifabricshared/foundation-composable",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "none",
-  "date": "2020-08-13T06:42:55.002Z"
-}

@@ -1,8 +1,0 @@
-{
-  "type": "none",
-  "comment": "fix dependency errors",
-  "packageName": "@uifabricshared/foundation-tokens",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "none",
-  "date": "2020-08-13T06:43:07.371Z"
-}
