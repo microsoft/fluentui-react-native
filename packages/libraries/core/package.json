@@ -14,6 +14,7 @@
     "bundle": "fluentui-scripts bundle",
     "clean": "fluentui-scripts clean",
     "code-style": "fluentui-scripts code-style",
+    "depcheck": "fluentui-scripts depcheck",
     "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
     "start:tester": "react-native start --projectRoot ./src",
@@ -24,14 +25,6 @@
     "verify-api": "fluentui-scripts verify-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-composable": ">=0.6.71 <1.0.0",
-    "@uifabricshared/foundation-compose": "^1.6.78",
-    "@uifabricshared/foundation-settings": ">=0.6.3 <1.0.0",
-    "@uifabricshared/foundation-tokens": ">=0.7.2 <1.0.0",
-    "@fluentui-react-native/immutable-merge": "^1.0.1",
-    "@uifabricshared/theming-ramp": ">=0.10.3 <1.0.0",
-    "@uifabricshared/theming-react-native": ">=0.7.74 <1.0.0",
-    "@fluentui-react-native/adapters": ">=0.3.34 <1.0.0",
     "@fluentui-react-native/interactive-hooks": ">=0.5.0 <1.0.0",
     "@fluentui-react-native/button": ">=0.10.7 <1.0.0",
     "@fluentui-react-native/callout": ">=0.11.7 <1.0.0",
@@ -44,12 +37,9 @@
     "@fluentui-react-native/pressable": ">=0.3.83 <1.0.0",
     "@fluentui-react-native/radio-group": ">=0.4.4 <1.0.0",
     "@fluentui-react-native/separator": ">=0.4.6 <1.0.0",
-    "@fluentui-react-native/text": ">=0.6.6 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.5.4 <1.0.0"
+    "@fluentui-react-native/text": ">=0.6.6 <1.0.0"
   },
   "devDependencies": {
-    "@types/prop-types": "15.5.1",
-    "@types/react": "^16.9.34",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",

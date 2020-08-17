@@ -1,0 +1,8 @@
+{
+  "type": "none",
+  "comment": "fix dependency errors",
+  "packageName": "@uifabricshared/themed-settings",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "none",
+  "date": "2020-08-13T06:43:30.658Z"
+}

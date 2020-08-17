@@ -18,6 +18,7 @@
     "bundle": "fluentui-scripts bundle",
     "clean": "fluentui-scripts clean",
     "code-style": "fluentui-scripts code-style",
+    "depcheck": "fluentui-scripts depcheck",
     "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
     "start": "fluentui-scripts dev",
@@ -31,13 +32,16 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/memo-cache": "^1.0.1",
-    "@fluentui-react-native/immutable-merge": "^1.0.1",
-    "@fluentui-react-native/use-styling": ">=0.2.3 <1.0.0",
     "@uifabricshared/foundation-settings": ">=0.6.3 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",
-    "@uifabricshared/build-native": "^0.1.1"
+    "@uifabricshared/build-native": "^0.1.1",
+    "react": "16.11.0",
+    "react-native": "^0.62.2"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-native": ">0.60.0"
   }
 }

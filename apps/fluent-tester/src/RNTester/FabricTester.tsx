@@ -1,5 +1,4 @@
-import { StealthButton } from '@fluentui-react-native/button';
-import { Separator } from '@fluentui-react-native/separator';
+import { StealthButton, Separator } from '@fluentui/react-native';
 import { useTheme } from '@uifabricshared/theming-react-native';
 import * as React from 'react';
 import { Picker, ScrollView, View, Text } from 'react-native';
@@ -106,12 +105,11 @@ const Header: React.FunctionComponent<{}> = () => {
 }
 
 export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props: IFabricTesterProps) => {
-
   // sort tests alphabetically by name
   const sortedTestComponents = props.enabledTests.sort((a, b) => a.name.localeCompare(b.name));
 
   const { initialTest } = props;
-  const initialSelectedTestIndex = sortedTestComponents.findIndex(description => {
+  const initialSelectedTestIndex = sortedTestComponents.findIndex((description) => {
     return description.name === initialTest;
   });
 
@@ -122,8 +120,8 @@ export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props:
   const TestListSeparator = Separator.customize({
     tokens: {
       color: useTheme().colors.inputBorder,
-      separatorWidth: 2
-    }
+      separatorWidth: 2,
+    },
   });
 
   return (

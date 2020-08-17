@@ -1,6 +1,7 @@
 // @ts-check
 
 const { task, series, parallel, option, argv, tscTask, cleanTask, eslintTask } = require('just-scripts');
+const { depcheckTask } = require('@uifabricshared/build-native/tasks/depcheck');
 
 const path = require('path');
 
@@ -26,4 +27,5 @@ module.exports = function preset() {
   task('build', series('cleanlib', parallel('lint', 'ts')));
   task('no-op', () => {});
   task('clean', 'no-op');
+  task('depcheck', depcheckTask);
 };

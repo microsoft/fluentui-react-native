@@ -1,7 +1,6 @@
-import { FocusTrapZone, IFocusTrapZoneProps } from '@fluentui-react-native/focus-trap-zone';
+import { FocusTrapZone, IFocusTrapZoneProps, Text } from '@fluentui/react-native';
 import { KeyPressEvent, useFocusState } from '@fluentui-react-native/interactive-hooks';
 import { Stack } from '@fluentui-react-native/stack';
-import { Text } from '@fluentui-react-native/text';
 import * as React from 'react';
 import { TouchableHighlight, TouchableHighlightProps, View, ViewProps } from 'react-native';
 import { stackStyle } from '../Common/styles';
@@ -12,14 +11,14 @@ const trapZoneStyle: IFocusTrapZoneProps['style'] = {
   padding: 10,
   borderWidth: 2,
   borderColor: '#ababab',
-  borderStyle: 'dashed'
+  borderStyle: 'dashed',
 };
 
 const activeTrapZoneStyle: IFocusTrapZoneProps['style'] = {
   padding: 10,
   borderColor: '#ababab',
   borderWidth: 2,
-  borderStyle: 'solid'
+  borderStyle: 'solid',
 };
 
 const componentTwiddlerStyle: ViewProps['style'] = {
@@ -27,13 +26,13 @@ const componentTwiddlerStyle: ViewProps['style'] = {
   padding: 8,
   margin: 4,
   borderColor: '#ababab',
-  borderStyle: 'solid'
+  borderStyle: 'solid',
 };
 
 const focusedComponentTwiddlerStyle: ViewProps['style'] = {
   ...componentTwiddlerStyle,
   borderColor: 'black',
-  backgroundColor: 'lightblue'
+  backgroundColor: 'lightblue',
 };
 
 interface IComponentTwiddlerProps {
@@ -47,7 +46,7 @@ const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps> = (pro
   return (
     <TouchableHighlight {...{ acceptsKeyboardFocus: false }} onPress={props.onPress}>
       <View
-        {...{ acceptsKeyboardFocus: true, ...focusProps } as any}
+        {...({ acceptsKeyboardFocus: true, ...focusProps } as any)}
         style={focusState.focused ? focusedComponentTwiddlerStyle : componentTwiddlerStyle}
       >
         <Text>{props.label}</Text>
@@ -57,13 +56,12 @@ const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps> = (pro
 };
 
 const basicFocusTrapZone: React.FunctionComponent<{}> = () => {
-
   const [state, setState] = React.useState({
     useTrapZone: false,
     renderTrapZone: true,
     disableFirstFocus: false,
     ignoreExternalFocusing: false,
-    focusPreviouslyFocusedInnerElement: false
+    focusPreviouslyFocusedInnerElement: false,
   });
 
   const ftzRef = React.useRef<View>(null);
@@ -132,29 +130,27 @@ const basicFocusTrapZone: React.FunctionComponent<{}> = () => {
       </Stack>
     </View>
   );
-}
+};
 
 const focusTrapZoneSections: TestSection[] = [
   {
     name: 'Basic FocusTrapZone Usage',
     testID: FOCUSTRAPZONE_TESTPAGE,
-    component: basicFocusTrapZone
+    component: basicFocusTrapZone,
   },
 ];
 
 export const FocusTrapTest: React.FunctionComponent<{}> = () => {
-
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Backlog',
     iosStatus: 'N/A',
     macosStatus: 'N/A',
-    androidStatus: 'N/A'
-  }
+    androidStatus: 'N/A',
+  };
 
-  const description = 'FocusTrapZone is used to trap the focus in any html element. Pressing tab will circle focus within the inner focusable elements of the FocusTrapZone.'
+  const description =
+    'FocusTrapZone is used to trap the focus in any html element. Pressing tab will circle focus within the inner focusable elements of the FocusTrapZone.';
 
-  return (
-    <Test name="Focus Trap Zone Test" description={description} sections={focusTrapZoneSections} status={status}></Test>
-  );
+  return <Test name="Focus Trap Zone Test" description={description} sections={focusTrapZoneSections} status={status}></Test>;
 };

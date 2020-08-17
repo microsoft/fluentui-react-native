@@ -12,6 +12,7 @@
   "scripts": {
     "build": "fluentui-scripts build",
     "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
     "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
     "test": "fluentui-scripts jest",
@@ -23,7 +24,6 @@
     "@uifabricshared/foundation-compose": "^1.6.78",
     "@fluentui-react-native/adapters": ">=0.3.34 <1.0.0",
     "@fluentui-react-native/interactive-hooks": ">=0.5.0 <1.0.0",
-    "@fluentui-react-native/pressable": ">=0.3.83 <1.0.0",
     "@fluentui-react-native/text": ">=0.6.6 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.5.4 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.6.71 <1.0.0",
