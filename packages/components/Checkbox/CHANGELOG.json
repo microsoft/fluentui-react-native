@@ -2,6 +2,59 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Fri, 14 Aug 2020 17:26:00 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Aligning checkbox text centered vertically",
+            "author": "safreibe@microsoft.com",
+            "commit": "dac663b7d74d60f3c71911e8c4b395ac89e8acc6",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 Aug 2020 19:49:20 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.4.8",
+      "version": "0.4.8",
+      "comments": {
+        "none": [
+          {
+            "comment": "change text color",
+            "author": "email not defined",
+            "commit": "690dc0f91728c471e6d0207c30414416f8cd71d5",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 11 Aug 2020 19:53:33 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.4.6",
+      "version": "0.4.6",
+      "comments": {
+        "none": [
+          {
+            "comment": "status definitions",
+            "author": "email not defined",
+            "commit": "f01a0671daa0512a18cd6343518160e5ffc3a409",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Add missing deps",
+            "author": "rezha@microsoft.com",
+            "commit": "0ad6470d8cbaec3db23deea5d3fa4b9f9bae0895",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 08 Aug 2020 05:35:23 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.4.5",
       "version": "0.4.5",

@@ -2,6 +2,44 @@
   "name": "@fluentui-react-native/persona",
   "entries": [
     {
+      "date": "Thu, 13 Aug 2020 19:49:20 GMT",
+      "tag": "@fluentui-react-native/persona_v0.5.78",
+      "version": "0.5.78",
+      "comments": {
+        "none": [
+          {
+            "comment": "change text color",
+            "author": "email not defined",
+            "commit": "690dc0f91728c471e6d0207c30414416f8cd71d5",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 11 Aug 2020 19:53:33 GMT",
+      "tag": "@fluentui-react-native/persona_v0.5.76",
+      "version": "0.5.76",
+      "comments": {
+        "none": [
+          {
+            "comment": "status definitions",
+            "author": "email not defined",
+            "commit": "f01a0671daa0512a18cd6343518160e5ffc3a409",
+            "package": "@fluentui-react-native/persona"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Add missing deps",
+            "author": "rezha@microsoft.com",
+            "commit": "0ad6470d8cbaec3db23deea5d3fa4b9f9bae0895",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 08 Aug 2020 05:35:23 GMT",
       "tag": "@fluentui-react-native/persona_v0.5.75",
       "version": "0.5.75",

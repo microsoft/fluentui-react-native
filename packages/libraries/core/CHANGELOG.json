@@ -2,6 +2,51 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Thu, 13 Aug 2020 19:49:20 GMT",
+      "tag": "@fluentui/react-native_v0.15.83",
+      "version": "0.15.83",
+      "comments": {
+        "none": [
+          {
+            "comment": "change text color",
+            "author": "email not defined",
+            "commit": "690dc0f91728c471e6d0207c30414416f8cd71d5",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 Aug 2020 23:52:15 GMT",
+      "tag": "@fluentui/react-native_v0.15.82",
+      "version": "0.15.82",
+      "comments": {
+        "patch": [
+          {
+            "comment": "release @fluentui-react-native/immutable-merge",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b0ac4360b79b4286e2a4ea9fe768c96568e954fa",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 11 Aug 2020 19:53:33 GMT",
+      "tag": "@fluentui/react-native_v0.15.81",
+      "version": "0.15.81",
+      "comments": {
+        "none": [
+          {
+            "comment": "status definitions",
+            "author": "email not defined",
+            "commit": "f01a0671daa0512a18cd6343518160e5ffc3a409",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 08 Aug 2020 05:35:23 GMT",
       "tag": "@fluentui/react-native_v0.15.80",
       "version": "0.15.80",

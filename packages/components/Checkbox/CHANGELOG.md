@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Tue, 28 Jul 2020 18:21:12 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Aug 2020 17:26:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.0
+
+Fri, 14 Aug 2020 17:26:00 GMT
+
+### Minor changes
+
+- Aligning checkbox text centered vertically (safreibe@microsoft.com)
+
+## 0.4.6
+
+Tue, 11 Aug 2020 19:53:33 GMT
+
+### Patches
+
+- Add missing deps (rezha@microsoft.com)
 
 ## 0.4.1
 

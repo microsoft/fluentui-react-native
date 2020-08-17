@@ -1,5 +1,5 @@
 import { GetMemoValue } from '@fluentui-react-native/memo-cache';
-import { immutableMerge } from '@uifabricshared/immutable-merge';
+import { immutableMerge } from '@fluentui-react-native/immutable-merge';
 
 /**
  * alternatively look them up with a passed in function
