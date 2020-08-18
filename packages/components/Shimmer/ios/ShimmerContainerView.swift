@@ -11,6 +11,12 @@ class ShimmerContainerView: UIView {
 		}
 	}
 	
+	@objc var shimmerAppearance: NSDictionary = NSDictionary() {
+		didSet {
+			updateShimmerAppearance()
+		}
+	}
+	
 	var excludedViews: [UIView]? {
 		didSet {
 			assert(Thread.isMainThread)
@@ -21,6 +27,7 @@ class ShimmerContainerView: UIView {
 			addSubview(newShimmerView)
 			shimmerView = newShimmerView
 			updateShimmerViewAppearance()
+			updateShimmerAppearance()
 		}
 	}
 	
@@ -100,19 +107,38 @@ class ShimmerContainerView: UIView {
 		
 		let oldAppearance = shimmerView.appearance
 		
-//		let tintColor = RCTConvert.uiColor("tintColor") ?? oldAppearance.tintColor
-		let tintColor = UIColor.systemBlue
-		let cornerRadius = CGFloat(exactly: appearance["cornerRadius"] as! NSNumber) ?? oldAppearance.cornerRadius
-		let labelCornerRadius = CGFloat(exactly: appearance["labelCornerRadius"] as! NSNumber) ?? oldAppearance.labelCornerRadius
-		let usesTextHeightForLabels = Bool(exactly: appearance["usesTextHeightForLabels"] as! NSNumber) ?? oldAppearance.usesTextHeightForLabels
-		let labelHeight = CGFloat(exactly: appearance["labelHeight"] as! NSNumber) ?? oldAppearance.labelHeight
+		let tintColor = RCTConvert.uiColor(appearance["tintColor"] as? NSNumber) ?? oldAppearance.tintColor
+		let cornerRadius = appearance["cornerRadius"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldAppearance.cornerRadius))
+		let labelCornerRadius = appearance["labelCornerRadius"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldAppearance.labelCornerRadius))
+		let usesTextHeightForLabels = appearance["usesTextHeightForLabels"] as? NSNumber ?? NSNumber(booleanLiteral: oldAppearance.usesTextHeightForLabels)
+		let labelHeight = appearance["labelHeight"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldAppearance.labelHeight))
 
 		shimmerView.appearance = ShimmerViewAppearance(
 			tintColor: tintColor,
-			cornerRadius: cornerRadius,
-			labelCornerRadius: labelCornerRadius,
-			usesTextHeightForLabels: usesTextHeightForLabels,
-			labelHeight: labelHeight
+			cornerRadius: CGFloat(truncating: cornerRadius),
+			labelCornerRadius: CGFloat(truncating: labelCornerRadius),
+			usesTextHeightForLabels: Bool(truncating: usesTextHeightForLabels),
+			labelHeight: CGFloat(truncating: labelHeight)
+		)
+	}
+	
+	private func updateShimmerAppearance() {
+		assert(Thread.isMainThread)
+		
+		let oldShimmerAppearance = shimmerView.shimmerAppearance
+		
+		let alpha = shimmerAppearance["alpha"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldShimmerAppearance.alpha))
+		let width = shimmerAppearance["width"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldShimmerAppearance.width))
+		let angle = shimmerAppearance["angle"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldShimmerAppearance.angle))
+		let speed = shimmerAppearance["speed"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldShimmerAppearance.speed))
+		let delay = shimmerAppearance["delay"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldShimmerAppearance.delay))
+
+		shimmerView.shimmerAppearance = ShimmerAppearance(
+			alpha: CGFloat(truncating: alpha),
+			width: CGFloat(truncating: width),
+			angle: CGFloat(truncating: angle),
+			speed: CGFloat(truncating: speed),
+			delay: TimeInterval(truncating: delay)
 		)
 	}
 }

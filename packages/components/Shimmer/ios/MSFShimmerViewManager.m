@@ -4,5 +4,6 @@
 @interface RCT_EXTERN_MODULE(MSFShimmerViewManager, RCTViewManager)
 
 RCT_EXPORT_VIEW_PROPERTY(appearance, NSDictionary)
+RCT_EXPORT_VIEW_PROPERTY(shimmerAppearance, NSDictionary)
 
 @end
