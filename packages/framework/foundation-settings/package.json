@@ -33,7 +33,8 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui-react-native/immutable-merge": "^1.0.1",
-    "@fluentui-react-native/memo-cache": "^1.0.2"
+    "@fluentui-react-native/memo-cache": "^1.0.2",
+    "@fluentui-react-native/merge-props": ">=0.1.0 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

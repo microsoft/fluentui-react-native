@@ -1,5 +1,5 @@
 {
-  "name": "@uifabricshared/merge-props",
+  "name": "@fluentui-react-native/merge-props",
   "version": "0.1.0",
   "description": "Utility for merging props with styles and caching style combinations",
   "repository": {

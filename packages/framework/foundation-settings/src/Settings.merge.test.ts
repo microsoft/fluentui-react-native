@@ -1,12 +1,12 @@
 import { IComponentSettings } from './Settings.types';
 import { mergeSettings } from './Settings';
-import { IStyleProp } from './Styles.types';
+import { StyleProp } from '@fluentui-react-native/merge-props';
 
 interface IProps {
   root: {
     prop1: string;
     className?: string;
-    style: IStyleProp<{
+    style: StyleProp<{
       fontFamily?: string;
       fontWeight?: 'light' | 'normal' | 'bold';
       fontSize?: number;
@@ -25,9 +25,9 @@ const settingsDefault: IComponentSettings<IProps> = {
       fontFamily: 'Calibri',
       fontWeight: 'normal',
       fontSize: 12,
-      textColor: 'black'
-    }
-  }
+      textColor: 'black',
+    },
+  },
 };
 
 const settingsBase: IComponentSettings<IProps> = {
@@ -36,41 +36,41 @@ const settingsBase: IComponentSettings<IProps> = {
     style: {
       fontWeight: 'bold',
       fontSize: 16,
-      textColor: 'blue'
-    }
+      textColor: 'blue',
+    },
   },
   _overrides: {
     hover: {
       root: {
         style: {
-          textColor: 'lightblue'
-        }
-      }
-    }
-  }
+          textColor: 'lightblue',
+        },
+      },
+    },
+  },
 };
 
 const settingsNormal: IComponentSettings<IProps> = {
   root: {
     style: [
       {
-        fontFamily: 'Calibri Body'
+        fontFamily: 'Calibri Body',
       },
       {
         fontSize: 10,
-        textColor: 'darkgray'
-      }
-    ]
+        textColor: 'darkgray',
+      },
+    ],
   },
   _overrides: {
     hover: {
       root: {
         style: {
-          fontWeight: 'bold'
-        }
-      }
-    }
-  }
+          fontWeight: 'bold',
+        },
+      },
+    },
+  },
 };
 
 describe('Merge settings tests', () => {
@@ -113,18 +113,18 @@ describe('Merge settings tests', () => {
           fontFamily: 'Calibri',
           fontWeight: 'bold',
           fontSize: 16,
-          textColor: 'blue'
-        }
+          textColor: 'blue',
+        },
       },
       _overrides: {
         hover: {
           root: {
             style: {
-              textColor: 'lightblue'
-            }
-          }
-        }
-      }
+              textColor: 'lightblue',
+            },
+          },
+        },
+      },
     });
   });
 
@@ -134,7 +134,7 @@ describe('Merge settings tests', () => {
     () => {
       const merged = mergeSettings(settingsDefault, settingsBase);
       expect(merged._overrides).toBe(settingsBase._overrides);
-    }
+    },
   );
 
   test('merging two settings, both with overrides, produces a blended object', () => {
@@ -146,19 +146,19 @@ describe('Merge settings tests', () => {
           fontFamily: 'Calibri Body',
           fontWeight: 'bold',
           fontSize: 10,
-          textColor: 'darkgray'
-        }
+          textColor: 'darkgray',
+        },
       },
       _overrides: {
         hover: {
           root: {
             style: {
               textColor: 'lightblue',
-              fontWeight: 'bold'
-            }
-          }
-        }
-      }
+              fontWeight: 'bold',
+            },
+          },
+        },
+      },
     });
   });
 
@@ -171,19 +171,19 @@ describe('Merge settings tests', () => {
           fontFamily: 'Calibri Body',
           fontWeight: 'bold',
           fontSize: 10,
-          textColor: 'darkgray'
-        }
+          textColor: 'darkgray',
+        },
       },
       _overrides: {
         hover: {
           root: {
             style: {
               textColor: 'lightblue',
-              fontWeight: 'bold'
-            }
-          }
-        }
-      }
+              fontWeight: 'bold',
+            },
+          },
+        },
+      },
     });
   });
 });

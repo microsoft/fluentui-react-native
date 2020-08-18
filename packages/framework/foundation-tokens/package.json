@@ -32,6 +32,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@fluentui-react-native/merge-props": ">=0.1.0 <1.0.0",
     "@uifabricshared/foundation-settings": ">=0.6.4 <1.0.0"
   },
   "devDependencies": {
