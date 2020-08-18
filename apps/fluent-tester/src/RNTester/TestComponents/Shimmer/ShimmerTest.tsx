@@ -14,7 +14,13 @@ export const ShimmerTest: React.FunctionComponent<{}> = () => {
       </Text>
       <Separator />
       <Stack style={stackStyle}>
-        <Shimmer style={{ flex: 1, alignItems: 'center' }} appearance={{ cornerRadius: 10 }} >
+        <Shimmer style={{ flex: 1, alignItems: 'center' }} appearance={{
+          tintColor: 'blue',
+          cornerRadius: 10,
+          labelCornerRadius: 10,
+          usesTextHeightForLabels: false,
+          labelHeight: 18
+        }} >
           <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row', marginStart: 16, marginEnd: 16 }}>
             <View style={{ width: 40, height: 40 }} />
             <View style={{ flexDirection: 'column', flex: 2, marginLeft: 16 }} >

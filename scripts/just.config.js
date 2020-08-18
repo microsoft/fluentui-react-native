@@ -14,6 +14,7 @@ const { webpack, webpackDevServer } = require('./tasks/webpack');
 const { metroTask } = require('@fluentui-react-native/build-tools');
 const { verifyApiExtractor, updateApiExtractor } = require('./tasks/api-extractor');
 const checkForModifiedFiles = require('./tasks/check-for-modified-files');
+const { depcheckTask } = require('./tasks/depcheck');
 
 function fileExists(path) {
   try {
@@ -87,6 +88,8 @@ module.exports = function preset() {
   task('bundle', series(condition('metro', () => !!argv().useMetro), condition('webpack', () => !argv().useMetro)));
 
   task('build', series('clean', 'copy', 'ts'));
+
+  task('depcheck', depcheckTask);
 
   task('no-op', () => {});
 };

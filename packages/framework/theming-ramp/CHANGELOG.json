@@ -2,6 +2,29 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Mon, 17 Aug 2020 22:08:34 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.4",
+      "version": "0.10.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix dependency errors",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2216954b9e0efadc5223c2346b4cb31e20c8bc12",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ],
+        "none": [
+          {
+            "comment": "fix dependency errors",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2216954b9e0efadc5223c2346b4cb31e20c8bc12",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 13 Aug 2020 19:49:20 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.10.3",
       "version": "0.10.3",

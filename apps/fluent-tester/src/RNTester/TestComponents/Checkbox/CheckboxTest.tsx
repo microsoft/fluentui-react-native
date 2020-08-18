@@ -1,4 +1,4 @@
-import { Checkbox } from '@fluentui-react-native/checkbox';
+import { Checkbox } from '@fluentui/react-native';
 import { useTheme } from '@uifabricshared/theming-react-native';
 import * as React from 'react';
 import { View, TextInput } from 'react-native';
@@ -11,7 +11,6 @@ function onChangeUncontrolled(isChecked: boolean) {
 }
 
 const basicCheckbox: React.FunctionComponent<{}> = () => {
-
   return (
     <View>
       <Checkbox label="Unchecked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked={false} />
@@ -20,10 +19,9 @@ const basicCheckbox: React.FunctionComponent<{}> = () => {
       <Checkbox label="Disabled checked checkbox" onChange={onChangeUncontrolled} defaultChecked={true} disabled={true} />
     </View>
   );
-}
+};
 
 const otherCheckbox: React.FunctionComponent<{}> = () => {
-
   const [isCheckedControlled1, setCheckedControlled1] = React.useState(false);
   const onChangeControlled1 = React.useCallback((checked) => {
     setCheckedControlled1(checked);
@@ -45,10 +43,9 @@ const otherCheckbox: React.FunctionComponent<{}> = () => {
       />
     </View>
   );
-}
+};
 
 const tokenCheckbox: React.FunctionComponent<{}> = () => {
-
   const CircularCheckbox = Checkbox.customize({ tokens: { borderRadius: 50 } });
 
   const CircleColorCheckbox = Checkbox.customize({
@@ -58,13 +55,13 @@ const tokenCheckbox: React.FunctionComponent<{}> = () => {
         tokens: {
           checkboxBackgroundColor: 'green',
           checkboxBorderColor: 'green',
-          checkmarkColor: 'white'
-        }
+          checkmarkColor: 'white',
+        },
       },
       focused: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
       hovered: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
-      pressed: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundPressed' } }
-    }
+      pressed: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundPressed' } },
+    },
   });
 
   const HoverCheckbox = Checkbox.customize({
@@ -72,15 +69,15 @@ const tokenCheckbox: React.FunctionComponent<{}> = () => {
       checked: {
         tokens: {
           checkboxBackgroundColor: 'black',
-          checkmarkColor: 'white'
-        }
+          checkmarkColor: 'white',
+        },
       },
       hovered: {
         tokens: {
-          checkmarkVisibility: 1
-        }
-      }
-    }
+          checkmarkVisibility: 1,
+        },
+      },
+    },
   });
 
   const [checkboxColor, setCheckboxColor] = React.useState('blue');
@@ -93,18 +90,18 @@ const tokenCheckbox: React.FunctionComponent<{}> = () => {
         tokens: {
           checkboxBackgroundColor: checkboxColor,
           checkboxBorderColor: checkboxColor,
-          checkmarkColor: checkmarkColor
-        }
+          checkmarkColor: checkmarkColor,
+        },
       },
       focused: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
       hovered: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
-      pressed: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundPressed' } }
-    }
+      pressed: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundPressed' } },
+    },
   });
 
   const theme = useTheme();
   const textBoxBorderStyle = {
-    borderColor: theme.colors.inputBorder
+    borderColor: theme.colors.inputBorder,
   };
 
   return (
@@ -123,7 +120,7 @@ const tokenCheckbox: React.FunctionComponent<{}> = () => {
         style={[commonStyles.textBox, textBoxBorderStyle]}
         placeholder="Background color"
         blurOnSubmit={true}
-        onSubmitEditing={e => {
+        onSubmitEditing={(e) => {
           setCheckboxColor(e.nativeEvent.text);
         }}
       />
@@ -132,43 +129,41 @@ const tokenCheckbox: React.FunctionComponent<{}> = () => {
         style={[commonStyles.textBox, textBoxBorderStyle]}
         placeholder="Checkmark color"
         blurOnSubmit={true}
-        onSubmitEditing={e => {
+        onSubmitEditing={(e) => {
           setCheckmarkColor(e.nativeEvent.text);
         }}
       />
     </View>
   );
-}
+};
 
 const checkboxSections: TestSection[] = [
   {
     name: 'Basic Checkboxes',
     testID: CHECKBOX_TESTPAGE,
-    component: basicCheckbox
+    component: basicCheckbox,
   },
   {
     name: 'Other Implementations',
-    component: otherCheckbox
+    component: otherCheckbox,
   },
   {
     name: 'Token Customized Checkboxes',
-    component: tokenCheckbox
-  }
+    component: tokenCheckbox,
+  },
 ];
 
 export const CheckboxTest: React.FunctionComponent<{}> = () => {
-
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',
     iosStatus: 'N/A',
     macosStatus: 'Experimental',
-    androidStatus: 'N/A'
-  }
+    androidStatus: 'N/A',
+  };
 
-  const description = 'Checkboxes give people a way to select one or more items from a group, or switch between two mutually exclusive options (checked or unchecked, on or off).'
+  const description =
+    'Checkboxes give people a way to select one or more items from a group, or switch between two mutually exclusive options (checked or unchecked, on or off).';
 
-  return (
-    <Test name="Checkbox Test" description={description} sections={checkboxSections} status={status}></Test>
-  );
+  return <Test name="Checkbox Test" description={description} sections={checkboxSections} status={status}></Test>;
 };

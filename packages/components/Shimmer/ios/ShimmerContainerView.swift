@@ -5,25 +5,9 @@ import FluentUI
 @objc(MSFShimmerContainerView)
 class ShimmerContainerView: UIView {
 	
-	@objc var appearance: Dictionary<AnyHashable, Any> = [:] {
+	@objc var appearance: NSDictionary = NSDictionary() {
 		didSet {
-			assert(Thread.isMainThread)
-			
-			let oldAppearance = shimmerView.appearance
-			
-			let tintColor = RCTConvert.uiColor("tintColor") ?? oldAppearance.tintColor
-			let cornerRadius = RCTConvert.nsNumber("cornerRadius") ?? NSNumber(value: Float(oldAppearance.cornerRadius))
-			let labelCornerRadius = RCTConvert.nsNumber("labelCornerRadius") ?? NSNumber(value: Float(oldAppearance.labelCornerRadius))
-			let usesTextHeightForLabels = RCTConvert.nsNumber("usesTextHeightForLabels") ?? NSNumber(booleanLiteral: oldAppearance.usesTextHeightForLabels)
-			let labelHeight = RCTConvert.nsNumber("labelHeight") ?? NSNumber(value: Float(oldAppearance.labelHeight))
-
-			shimmerView.appearance = ShimmerViewAppearance(
-				tintColor: tintColor,
-				cornerRadius: cornerRadius as! CGFloat,
-				labelCornerRadius: labelCornerRadius as! CGFloat,
-				usesTextHeightForLabels: usesTextHeightForLabels.boolValue,
-				labelHeight: labelHeight as! CGFloat
-			)
+			updateShimmerViewAppearance()
 		}
 	}
 	
@@ -36,6 +20,7 @@ class ShimmerContainerView: UIView {
 			newShimmerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 			addSubview(newShimmerView)
 			shimmerView = newShimmerView
+			updateShimmerViewAppearance()
 		}
 	}
 	
@@ -110,4 +95,24 @@ class ShimmerContainerView: UIView {
 		return leaves
 	}
 	
+	private func updateShimmerViewAppearance() {
+		assert(Thread.isMainThread)
+		
+		let oldAppearance = shimmerView.appearance
+		
+//		let tintColor = RCTConvert.uiColor("tintColor") ?? oldAppearance.tintColor
+		let tintColor = UIColor.systemBlue
+		let cornerRadius = CGFloat(exactly: appearance["cornerRadius"] as! NSNumber) ?? oldAppearance.cornerRadius
+		let labelCornerRadius = CGFloat(exactly: appearance["labelCornerRadius"] as! NSNumber) ?? oldAppearance.labelCornerRadius
+		let usesTextHeightForLabels = Bool(exactly: appearance["usesTextHeightForLabels"] as! NSNumber) ?? oldAppearance.usesTextHeightForLabels
+		let labelHeight = CGFloat(exactly: appearance["labelHeight"] as! NSNumber) ?? oldAppearance.labelHeight
+
+		shimmerView.appearance = ShimmerViewAppearance(
+			tintColor: tintColor,
+			cornerRadius: cornerRadius,
+			labelCornerRadius: labelCornerRadius,
+			usesTextHeightForLabels: usesTextHeightForLabels,
+			labelHeight: labelHeight
+		)
+	}
 }

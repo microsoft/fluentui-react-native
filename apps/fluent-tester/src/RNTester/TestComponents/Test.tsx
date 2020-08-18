@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Separator } from '@fluentui-react-native/separator';
+import { Separator } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from './Common/styles';
 import { app } from '../FabricTester';
@@ -18,7 +18,7 @@ export type PlatformStatus = {
   iosStatus: Status;
   macosStatus: Status;
   androidStatus: Status;
-}
+};
 
 export interface TestProps {
   name: string;
@@ -32,28 +32,28 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#0B6A0B',
-    marginTop: 4
+    marginTop: 4,
   },
   description: {
     alignItems: 'flex-start',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   section: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#0B6A0B',
-    marginTop: 12
+    marginTop: 12,
   },
   statusView: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   statusHeader: {
     fontSize: 14,
     fontWeight: 'bold',
     color: '#0B6A0B',
-    marginBottom: 6
+    marginBottom: 6,
   },
   statusLabel: {
     fontSize: 12,
@@ -65,13 +65,11 @@ const styles = StyleSheet.create({
   status: {
     color: 'black',
     fontWeight: 'normal',
-  }
+  },
 });
 
 export const Test = (props: TestProps) => {
-
   const themeColor = () => {
-
     let color = 'black'; // default: office (black)
 
     if (app == 'office') color = 'black';
@@ -81,7 +79,7 @@ export const Test = (props: TestProps) => {
     if (app == 'outlook') color = '#106EBE';
 
     return { color: color };
-  }
+  };
 
   return (
     <View>
@@ -92,28 +90,22 @@ export const Test = (props: TestProps) => {
       </Stack>
       <Stack style={stackStyle}>
         <View style={styles.statusView}>
-
           <Stack>
             <Text style={[styles.statusHeader, themeColor()]}>Platform Status</Text>
             <Text style={[styles.statusLabel, themeColor()]}>
-              Win32:{' '}
-              <Text style={styles.status}>{props.status.win32Status}</Text>
+              Win32: <Text style={styles.status}>{props.status.win32Status}</Text>
             </Text>
             <Text style={[styles.statusLabel, themeColor()]}>
-              UWP:{' '}
-              <Text style={styles.status}>{props.status.uwpStatus}</Text>
+              UWP: <Text style={styles.status}>{props.status.uwpStatus}</Text>
             </Text>
             <Text style={[styles.statusLabel, themeColor()]}>
-              iOS:{' '}
-              <Text style={styles.status}>{props.status.iosStatus}</Text>
+              iOS: <Text style={styles.status}>{props.status.iosStatus}</Text>
             </Text>
             <Text style={[styles.statusLabel, themeColor()]}>
-              macOS:{' '}
-              <Text style={styles.status}>{props.status.macosStatus}</Text>
+              macOS: <Text style={styles.status}>{props.status.macosStatus}</Text>
             </Text>
             <Text style={[styles.statusLabel, themeColor()]}>
-              Android:{' '}
-              <Text style={styles.status}>{props.status.androidStatus}</Text>
+              Android: <Text style={styles.status}>{props.status.androidStatus}</Text>
             </Text>
           </Stack>
 
@@ -125,29 +117,29 @@ export const Test = (props: TestProps) => {
             </Text>
             <Text style={[styles.statusLabel, themeColor()]}>
               Beta:{' '}
-              <Text style={styles.status}>Control is ready for partner consumption, but not ready for production release (e.g. fixing bugs).</Text>
+              <Text style={styles.status}>
+                Control is ready for partner consumption, but not ready for production release (e.g. fixing bugs).
+              </Text>
             </Text>
             <Text style={[styles.statusLabel, themeColor()]}>
-              Experimental:{' '}
-              <Text style={styles.status}>Control code checked into repo, but not ready for partner use.</Text>
+              Experimental: <Text style={styles.status}>Control code checked into repo, but not ready for partner use.</Text>
             </Text>
             <Text style={[styles.statusLabel, themeColor()]}>
-              Backlog:{' '}
-              <Text style={styles.status}>Control is in plan and on our backlog to deliver.</Text>
+              Backlog: <Text style={styles.status}>Control is in plan and on our backlog to deliver.</Text>
             </Text>
             <Text style={[styles.statusLabel, themeColor()]}>
-              N/A:{' '}
-              <Text style={styles.status}>Control is not in current plan.</Text>
+              N/A: <Text style={styles.status}>Control is not in current plan.</Text>
             </Text>
           </Stack>
-
         </View>
       </Stack>
       {props.sections.map((section, index) => {
         const TestComponent = section.component;
         return (
           <View key={index}>
-            <Text style={[styles.section, themeColor()]} testID={section.testID}>{section.name}</Text>
+            <Text style={[styles.section, themeColor()]} testID={section.testID}>
+              {section.name}
+            </Text>
             <Separator />
             <TestComponent />
           </View>

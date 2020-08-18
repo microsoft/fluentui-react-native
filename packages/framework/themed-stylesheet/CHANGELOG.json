@@ -2,6 +2,29 @@
   "name": "@uifabricshared/themed-stylesheet",
   "entries": [
     {
+      "date": "Mon, 17 Aug 2020 22:08:34 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.3.68",
+      "version": "0.3.68",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix dependency errors",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2216954b9e0efadc5223c2346b4cb31e20c8bc12",
+            "package": "@uifabricshared/themed-stylesheet"
+          }
+        ],
+        "none": [
+          {
+            "comment": "fix dependency errors",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2216954b9e0efadc5223c2346b4cb31e20c8bc12",
+            "package": "@uifabricshared/themed-stylesheet"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 13 Aug 2020 19:49:20 GMT",
       "tag": "@uifabricshared/themed-stylesheet_v0.3.67",
       "version": "0.3.67",

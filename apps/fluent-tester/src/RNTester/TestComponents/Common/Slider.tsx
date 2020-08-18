@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { ViewProps, StyleSheet, StyleProp, ViewStyle, UIManager, Text, findNodeHandle, View } from 'react-native';
-import { Separator } from '@fluentui-react-native/separator';
-import { Pressable } from '@fluentui-react-native/pressable';
+import { Separator, Pressable } from '@fluentui/react-native';
 import { IPressableState } from '@fluentui-react-native/interactive-hooks';
 
 const thumbSize = 20;
@@ -18,7 +17,7 @@ interface ISliderProps extends ViewProps {
 const styles = StyleSheet.create({
   root: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   slider: {
     minWidth: thumbSize * 2,
@@ -26,10 +25,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'stretch',
     height: thumbSize,
-    width: 200
+    width: 200,
   },
   track: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   thumb: {
     width: thumbSize,
@@ -38,12 +37,12 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#7A7574',
     backgroundColor: '#FFFFFF',
-    position: 'absolute'
+    position: 'absolute',
   },
   label: {
     margin: 8,
-    fontSize: 12
-  }
+    fontSize: 12,
+  },
 });
 
 const Track = Separator.customize({ tokens: { separatorWidth: 4 } });
@@ -52,7 +51,7 @@ function onThumbRenderStyle(state: IPressableState, thumbLocation: number): Styl
   return {
     ...styles.thumb,
     borderColor: state.pressed ? 'black' : state.hovered ? 'red' : '#7A7574',
-    marginLeft: thumbLocation
+    marginLeft: thumbLocation,
   };
 }
 
@@ -130,13 +129,13 @@ export const Slider: React.FunctionComponent<ISliderProps> = (props: ISliderProp
         <Track style={styles.track} />
         {trackLength.current > 0 && (
           <Pressable
-            renderStyle={state => onThumbRenderStyle(state, thumbLocation)}
+            renderStyle={(state) => onThumbRenderStyle(state, thumbLocation)}
             onStartShouldSetResponder={() => trackLength.current > 0}
-            onResponderStart={e => {
+            onResponderStart={(e) => {
               startTouchPosition.current = e.nativeEvent.pageX;
               startTouchThumbLocation.current = thumbLocation;
             }}
-            onResponderMove={e => {
+            onResponderMove={(e) => {
               if (startTouchPosition.current !== -1 && trackLength.current > 0) {
                 const [newThumbLocation, newValue] = calculateThumbLocationAndValue(
                   startTouchThumbLocation.current,

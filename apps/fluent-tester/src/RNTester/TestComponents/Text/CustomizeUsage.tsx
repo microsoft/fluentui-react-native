@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Stack } from '@fluentui-react-native/stack';
-import { Text } from '@fluentui-react-native/text';
+import { Text } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 
 export const CustomizeUsage: React.FunctionComponent<{}> = () => {
