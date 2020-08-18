@@ -41,10 +41,10 @@ module.exports = function preset() {
   // use Metro for bundling task instead of the default webpack
   option('useMetro');
   option('dev');
-  option('platform', { type: 'string' });
-  option('bundleName', { type: 'string' });
+  option('platform', { string: true });
+  option('bundleName', { string: true });
   option('server');
-  option('port', { type: 'number' });
+  option('port', { number: true });
   option('cli');
 
   // for options that have a check/fix switch this puts them into fix mode
@@ -81,8 +81,8 @@ module.exports = function preset() {
       ...(argv().platform && { platform: argv().platform }),
       ...(argv().bundleName && { bundleName: argv().bundleName }),
       ...(argv().server && { server: true }),
-      ...(argv().server && argv().port && { port: argv().port })
-    })
+      ...(argv().server && argv().port && { port: argv().port }),
+    }),
   );
 
   task('bundle', series(condition('metro', () => !!argv().useMetro), condition('webpack', () => !argv().useMetro)));

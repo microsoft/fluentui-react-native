@@ -4,12 +4,11 @@
   "private": true,
   "main": "./index.js",
   "bin": {
-    "fluentui-scripts": "./just-scripts.js"
+    "fluentui-scripts": "./lib/just-scripts.js"
   },
   "scripts": {
-    "build": "node ./just-scripts.js no-op",
+    "build-tools": "tsc --allowJs --target es6",
     "bundlesize": "bundlesize --debug",
-    "clean": "node ./just-scripts.js no-op",
     "code-style": "node ./just-scripts.js code-style",
     "prettier": "node ./just-scripts.js prettier",
     "verify-api": "echo no api to verify",
