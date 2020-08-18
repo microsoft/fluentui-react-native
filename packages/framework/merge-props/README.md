@@ -1,104 +1,43 @@
-# Theme Settings
+# @fluentui-react-native/merge-props
 
-Theme settings represent the configuration data for a component and can be used for both simple components as well as higher order components. There are a few main concepts that get combined in this package.
+Utilities for merging styles and props (which contain styles)
 
-## ISlotProps
+## Merging Props
 
-    export interface ISlotProps<TProps extends object = object> {
-      root: TProps;
-    }
+The `mergeProps` routine handles merging props together. Generally this is a standard per property merge identical to the behavior of `Object.assign` with the following two exceptions:
 
-Slot props or `ISlotProps` represent one or more sets of properties that correspond to the parts of a component. The pattern establishes that there must be an entry called root for the main component, then there can be additional named components. Consider the following two examples:
+- Objects under `props.style` will be merged using `mergeStyle` above, including caching the resolved styles
+- Strings contained in `props.className` will be joined together using spaces as a delimiter.
 
-### Simple Label Example
+## Merging Styles
 
-In react.js, this might be a `div` wrapping a string, in native it might wrap the native text control. Let's consider the native scenario where simple label adds a labelStyle prop to the base text control. The interface and slot props might look as follows:
+Styles are defined using the standard react-native pattern and will be merged in a way that maintains object identity where possible.
 
-    interface ISimpleLabelProps extends TextProps {
-      labelStyle?: string;
-    }
+### StyleProp
 
-    interface ISimpleLabelSlotProps {
-      root: ISimpleLabelProps;
-    }
+This is a copy of the StyleProp definition from `react-native`. This is copied primarily in the case where it is used in web code where adding a dependency on the `react-native` package itself is not desireable.
 
-### Two Line Button Example
+The StyleProp pattern itself is allows a style to be provided as a style or a recursive array of styles. So the following pattern is allowed:
 
-As a second example consider a button that has two lines of text. The structure of the button will have an outer container and then two simple label controls arranged vertically. In this case the control has three slots: the outer container, and the two labels. The props and slot props might look as follows:
+```ts
+props = {
+  style: [{ ...style1 }, [{ ...style2 }, { ...style3 }, [{ ...style4 }]], { ...style5 }],
+};
+```
 
-    interface ITwoLineButtonProps extends ViewProps {
-      topText: string;
-      bottomText: string;
-    }
+In this model merging styles can be effectively deferred by the following:
 
-    interface ITwoLineButtonSlotProps {
-      root: ITwoLineButtonProps;
-      topText: ISimpleLabelProps;
-      bottomText: ISimpleLabelProps;
-    }
+```ts
+const styleToMerge = { ...values };
+props.style = [props.style, styleToMerge];
+```
 
-### Why the Slot Props Pattern?
+### mergeStyles
 
-The slot props pattern was chosen for a number of reasons.
+This routine merges one or more react-native styles together. The inputs are styles in the `StyleProp` format referenced above. The various input styles will be flattened and merged together to produce a single non-flattened output style.
 
-- It creates a standard way of handling strongly typed named collections of props.
-- It allows framework code to process both simple and higher order components without special casing.
-- It allows the sub-objects, including root, to be passed directly to components as props without needing to strip values.
-- It is agnostic to what is in each entry, avoiding name collisions.
+```ts
+function mergeStyles<T>(...styles: StyleProp<T>[]): T;
+```
 
-## IComponentSettings
-
-The IComponentSettings interface is an extension of ISlotProps which is designed to allow authoring settings for a component. It has the following form:
-
-    export type IComponentSettings<TSlotProps extends ISlotProps = ISlotProps> =
-      IPartialSlotProps<TSlotProps> & {
-        _parent?: string | string[];
-        _precedence?: string[];
-        _overrides?: {
-          [key: string]: IComponentSettings<TSlotProps>
-        };
-      };
-
-### Partial ISlotProps
-
-Props interfaces have a mix of required and optional parameters. When defining settings in places such as theme definitions this is not desireable as those values will need to be filled from the actual props passed into the component. As a result `IComponentSettings<IMySlotProps>` will make the slot props into a partial object.
-
-### \_overrides and \_precedence
-
-The overrides define recursive IComponentSettings that will be applied to the root in the order defined by \_precedence. These will be merged one by one, supplanting values at the root level and potentially supplying additional overrides.
-
-For the simple label example above this might work as follows:
-
-    const labelSettings: IComponentSettings<ISimpleLabelSlotProps> = {
-      root: {
-        style: { color: 'black' }
-      },
-      _precedence: ['primary', 'hovered', 'disabled'],
-      _overrides: {
-        disabled: { root: { style: { color: '#a3a3a3' } } },
-        hovered: { root: { style: { color: '#c2c2c2' } } },
-        primary: {
-          root: { style: { color: 'white' } },
-          _overrides: {
-            disabled: { root: { style: { color: '#1d1d1d' } } },
-            hovered: { root: { style: { color: 'white' } } }
-          }
-        }
-      }
-    }
-
-The resulting color value would be:
-
-- _no overrides_ - black
-- _disabled_ - #a3a3a3
-- _hovered_ - #c2c2c2
-- _primary_ - white
-- _primary disabled_ - #1d1d1d
-- _primary hovered_ - white
-- _primary disabled hovered_ - #1d1d1d
-
-The ability to mix in layers of overrides in a recursive manner allows the overrides to be used to provide both alternate styles and states for a component.
-
-## Styling
-
-Style handling is described in [Styles.md](./Styles.md)
+This routine has a built-in caching layer that will attempt to ensure that object identity remains consistent. This means that style A + style B, where the references to A and B are the same, will always produce object C, where the reference will also be the same.
