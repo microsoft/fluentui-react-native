@@ -1,6 +1,21 @@
 {
-  "name": "@fluentui-react-native/experimental-framework",
+  "name": "@fluentui-react-native/framework",
   "entries": [
+    {
+      "date": "Wed, 19 Aug 2020 19:19:35 GMT",
+      "tag": "@fluentui-react-native/framework_v0.2.9",
+      "version": "0.2.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "remove existing (unused) framework package and rename experimental-framework to framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "3ece39b4521752b3ddb438bf13e08c6fc5011de3",
+            "package": "@fluentui-react-native/framework"
+          }
+        ]
+      }
+    },
     {
       "date": "Mon, 17 Aug 2020 22:08:34 GMT",
       "tag": "@fluentui-react-native/experimental-framework_v0.2.8",

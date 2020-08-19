@@ -1,5 +1,5 @@
 import { ButtonTokens } from '../Button.types';
-import { TokenSettings } from '@fluentui-react-native/experimental-framework';
+import { TokenSettings } from '@fluentui-react-native/framework';
 
 export const settings: TokenSettings<ButtonTokens>[] = [
   t => ({
@@ -9,23 +9,23 @@ export const settings: TokenSettings<ButtonTokens>[] = [
     disabled: {
       backgroundColor: t.colors.primaryButtonBackgroundDisabled,
       color: t.colors.primaryButtonTextDisabled,
-      borderColor: t.colors.primaryButtonBackgroundDisabled
+      borderColor: t.colors.primaryButtonBackgroundDisabled,
     },
     hovered: {
       backgroundColor: t.colors.primaryButtonBackgroundHovered,
       color: t.colors.primaryButtonTextHovered,
-      borderColor: t.colors.primaryButtonBorderHovered as string
+      borderColor: t.colors.primaryButtonBorderHovered as string,
     },
     pressed: {
       backgroundColor: t.colors.primaryButtonBackgroundPressed,
       color: t.colors.primaryButtonTextPressed,
-      borderColor: t.colors.primaryButtonBorderPressed as string
+      borderColor: t.colors.primaryButtonBorderPressed as string,
     },
     focused: {
       borderColor: t.colors.primaryButtonBorderFocused,
       backgroundColor: t.colors.primaryButtonBackgroundHovered,
-      color: t.colors.primaryButtonTextHovered
-    }
+      color: t.colors.primaryButtonTextHovered,
+    },
   }),
-  'PrimaryButton'
+  'PrimaryButton',
 ];
