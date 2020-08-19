@@ -1,5 +1,5 @@
 {
-  "name": "@fluentui-react-native/experimental-framework",
+  "name": "@fluentui-react-native/framework",
   "version": "0.2.8",
   "description": "Component framework used by fluentui react native controls",
   "main": "src/index.ts",

@@ -1,5 +1,5 @@
 import { StackItemTokens, StackItemProps, StackItemSlotProps, stackItemName } from './StackItem.types';
-import { UseStylingOptions, getMemoCache } from '@fluentui-react-native/experimental-framework';
+import { UseStylingOptions, getMemoCache } from '@fluentui-react-native/framework';
 import { ViewStyle, ViewProps } from 'react-native';
 
 // styles are keyed on token values and are independent of themes or variants so just use a common cache
@@ -7,7 +7,7 @@ const localCache = getMemoCache<ViewProps>();
 
 const alignMap: { [key: string]: ViewStyle['alignSelf'] } = {
   start: 'flex-start',
-  end: 'flex-end'
+  end: 'flex-end',
 };
 
 export const stylingSettings: UseStylingOptions<StackItemProps, StackItemSlotProps, StackItemTokens> = {
@@ -26,11 +26,11 @@ export const stylingSettings: UseStylingOptions<StackItemProps, StackItemSlotPro
             height: verticalFill ? '100%' : 'auto',
             flexShrink: disableShrink || (!grow && !shrink) ? 0 : 1,
             flexGrow: typeof grow === 'number' ? grow : grow ? 1 : undefined,
-            alignSelf: (align && alignMap[align]) || undefined
-          }
+            alignSelf: (align && alignMap[align]) || undefined,
+          },
         }),
-        [grow, shrink, disableShrink, align, verticalFill, margin]
+        [grow, shrink, disableShrink, align, verticalFill, margin],
       )[0];
-    }
-  }
+    },
+  },
 };

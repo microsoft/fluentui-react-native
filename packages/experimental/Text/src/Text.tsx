@@ -8,8 +8,8 @@ import {
   fontStyles,
   mergeProps,
   withSlots,
-  ITheme
-} from '@fluentui-react-native/experimental-framework';
+  ITheme,
+} from '@fluentui-react-native/framework';
 import { Text as RNText } from 'react-native';
 import { filterTextProps, ITextProps } from '@fluentui-react-native/adapters';
 
@@ -60,10 +60,10 @@ export const Text = compose<TextType>({
       variant: 'secondaryStandard',
       color: t.colors.bodyText,
       disabled: {
-        color: t.colors.disabledText
-      }
+        color: t.colors.disabledText,
+      },
     }),
-    textName
+    textName,
   ],
   states: ['disabled'],
   tokenProps,
@@ -73,11 +73,11 @@ export const Text = compose<TextType>({
         style: {
           margin: 0,
           color: tokens.color,
-          ...fontStyles.from(tokens, theme)
-        }
+          ...fontStyles.from(tokens, theme),
+        },
       }),
-      ['color', ...fontStyles.keys]
-    )
+      ['color', ...fontStyles.keys],
+    ),
   },
   /** Settings for the useSlots that will be passed on */
   slots: { root: RNText },
@@ -88,7 +88,7 @@ export const Text = compose<TextType>({
     const Root = useSlots(props).root;
     // return a function used to complete the render
     return (rest: TextProps, children: React.ReactNode) => <Root {...mergeProps(props, rest)}>{children}</Root>;
-  }
+  },
 });
 
 export default Text;
