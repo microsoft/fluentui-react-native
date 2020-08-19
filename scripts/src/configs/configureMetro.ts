@@ -2,8 +2,8 @@
 'use strict';
 
 import path from 'path';
-import { resolveModule, resolveFile } from './resolvePaths';
-import { getRNVersion, getAllPlatforms, getAllReactNativePaths, PlatformValue, findPlatformFromArgv } from './platforms';
+import { resolveModule, resolveFile } from '../utils/resolvePaths';
+import { getRNVersion, getAllPlatforms, getAllReactNativePaths, PlatformValue, findPlatformFromArgv } from '../utils/platforms';
 import { getPackageInfo, findGitRoot } from 'just-repo-utils';
 import blacklist from 'metro-config/src/defaults/blacklist';
 import { mergeConfigs } from './mergeConfigs';
@@ -23,7 +23,7 @@ function getBlacklistRE(rnPath: string): RegExp {
   return blacklist([
     ...getAllReactNativePaths()
       .filter(loc => loc !== thisLocation)
-      .map(p => prepareRegex(p))
+      .map(p => prepareRegex(p)),
   ]);
 }
 
@@ -35,7 +35,7 @@ export function getWatchFolders(): string[] {
     path.resolve(findGitRoot(), 'node_modules'),
     ...getPackageInfo()
       .dependencies()
-      .paths()
+      .paths(),
   ];
 }
 
@@ -64,7 +64,7 @@ export function addPlatformMetroConfig(platform: PlatformValue, base: any = {}):
     return [
       resolveFile(rnName + '/Libraries/polyfills/console.js'),
       resolveFile(rnName + '/Libraries/polyfills/error-guard.js'),
-      resolveFile(rnName + '/Libraries/polyfills/Object.es7.js')
+      resolveFile(rnName + '/Libraries/polyfills/Object.es7.js'),
     ];
   };
 
@@ -81,7 +81,7 @@ export function addPlatformMetroConfig(platform: PlatformValue, base: any = {}):
  */
 export async function configureMetro(optionsToMerge?: object) {
   const {
-    resolver: { sourceExts, assetExts }
+    resolver: { sourceExts, assetExts },
   } = await getDefaultConfig();
 
   const options = {
@@ -90,7 +90,7 @@ export async function configureMetro(optionsToMerge?: object) {
     resolver: {
       resolverMainFields: ['react-native', 'browser', 'main'],
       assetExts: assetExts.filter(ext => ext !== 'svg'),
-      sourceExts: [...sourceExts, 'svg']
+      sourceExts: [...sourceExts, 'svg'],
     },
     transformer: {
       babelTransformerPath: require.resolve('./transform-selector'),
@@ -98,11 +98,11 @@ export async function configureMetro(optionsToMerge?: object) {
       getTransformOptions: async () => ({
         transform: {
           experimentalImportSupport: false,
-          inlineRequires: false
-        }
-      })
+          inlineRequires: false,
+        },
+      }),
     },
-    resetCache: false
+    resetCache: false,
   };
 
   // decorate with platform bits if the cmd line has the platform info

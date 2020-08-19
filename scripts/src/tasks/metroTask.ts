@@ -4,8 +4,8 @@ import path from 'path';
 import fs from 'fs';
 import os from 'os';
 import { logger, TaskFunction } from 'just-task';
-import { AllPlatforms } from './platforms';
-import { addPlatformMetroConfig } from './configureMetro';
+import { AllPlatforms } from '../utils/platforms';
+import { addPlatformMetroConfig } from '../configs/configureMetro';
 import { spawnSync } from 'child_process';
 
 export interface BundleDetails {
@@ -138,9 +138,9 @@ function runMetroFromCli(platform: AllPlatforms, entry: string, out: string, dev
         out,
         '--dev',
         devValue,
-        ...((sourceMap && ['--sourcemap-output', sourceMap]) || [])
+        ...((sourceMap && ['--sourcemap-output', sourceMap]) || []),
       ],
-      options
+      options,
     );
   }
 }
@@ -151,7 +151,7 @@ async function runMetroDirect(
   out: string,
   dev: boolean,
   server: boolean,
-  port?: number
+  port?: number,
 ): Promise<void> {
   // get the config file, checking if there is a platform specific override
   let configName = `metro.config.${platform}.js`;
@@ -184,7 +184,7 @@ async function runMetroDirect(
       minify: !dev,
       out,
       optimize: !dev,
-      sourceMap
+      sourceMap,
     });
   }
 
