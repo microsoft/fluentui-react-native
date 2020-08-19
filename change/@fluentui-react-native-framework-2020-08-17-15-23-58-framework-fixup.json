@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "remove existing (unused) framework package and rename experimental-framework to framework",
-  "packageName": "@fluentui-react-native/framework",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-08-17T22:23:58.938Z"
-}
