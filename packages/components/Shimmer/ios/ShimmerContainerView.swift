@@ -4,7 +4,7 @@ import FluentUI
 
 @objc(MSFShimmerContainerView)
 class ShimmerContainerView: UIView {
-	
+
 	@objc var appearance: NSDictionary = NSDictionary() {
 		didSet {
 			updateShimmerViewAppearance()
@@ -16,63 +16,39 @@ class ShimmerContainerView: UIView {
 			updateShimmerAppearance()
 		}
 	}
-	
-	var excludedViews: [UIView]? {
-		didSet {
-			assert(Thread.isMainThread)
-			
-			shimmerView.removeFromSuperview()
-			let newShimmerView = ShimmerView(containerView: self, excludedViews: excludedViews ?? [], animationSynchronizer: AnimationSynchronizer())
-			newShimmerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-			addSubview(newShimmerView)
-			shimmerView = newShimmerView
-			updateShimmerViewAppearance()
-			updateShimmerAppearance()
-		}
-	}
-	
-	var shimmerView: ShimmerView = ShimmerView()
-	
-	private var mirrors: [UIView] = []
-	
-	override init(frame: CGRect) {
-		super.init(frame: frame)
-	}
-	
-	required init?(coder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-	
+
 // MARK: - UIView
-	
-    /// Shimmer, by default, only consider top-level views when shimmering. This is
-    /// incompatible with Flexbox, which wants you to wrap everything in more views to achieve
-    /// a specific layout. The solution is to get a list of all the leaves of the subview tree
-    /// and shimmer those by creating "mirror" views to mirror the RCTViews in a flat heirarchy in
-    /// the shimmer container.
-	override func layoutSubviews() {
+
+	override public func layoutSubviews() {
 		super.layoutSubviews()
-		
-		for mirror in mirrors {
-			mirror.removeFromSuperview()
-		}
+
+		// Shimmer, by default, only consider top-level views when shimmering. This is
+		// incompatible with Flexbox, which wants you to wrap everything in more views to achieve
+		// a specific layout. The solution is to get a list of all the leaves of the subview tree
+		// and shimmer those by creating "mirror" views to mirror the RCTViews in a flat heirarchy in
+		// the shimmer container.
+		mirrors.forEach { $0.removeFromSuperview() }
 		mirrors = []
-		
-		let leaves = containerLeaves(in: self)
-		
+
+		var leaves = [UIView]()
+		containerLeaves(view: self, leaves: &leaves)
+
 		for leaf in leaves {
-			if (leaf.superview == nil || leaf == self.shimmerView) {
+			guard let superview = leaf.superview, leaf != currentShimmerView else {
 				continue
 			}
-			
-			let frame = leaf.superview?.convert(leaf.frame, to: self.subviews.first) ?? CGRect.zero
-			let mirror = leaf.isKind(of: RCTTextView.self) ? UILabel(frame: frame): UIView(frame: frame)
-			
+
+			let frame = superview.convert(leaf.frame, to: self.subviews.first)
+
+			let mirror = leaf is RCTTextView ? UILabel(frame: frame) : UIView(frame: frame)
 			mirrors.append(mirror)
-			addSubview(mirror)
+
+			self.addSubview(mirror)
 		}
-		
-		bringSubviewToFront(shimmerView)
+
+		if let shimmer = currentShimmerView {
+			self.bringSubviewToFront(shimmer)
+		}
 	}
 	
 // MARK: - UIView+React
@@ -86,59 +62,83 @@ class ShimmerContainerView: UIView {
 	
 // MARK: - Private
 	
-	private func containerLeaves(in view: UIView) -> [UIView] {
-		assert(Thread.isMainThread)
-		
-		var leaves: [UIView] = []
-		
-		for view in view.subviews {
-			if (view.subviews.count == 0 && view != shimmerView) {
-				leaves.append(view)
-			} else if (!view.isHidden) {
-				leaves.append(contentsOf: containerLeaves(in: view))
+	private func updateShimmerView(excludedViews: [UIView] = []) {
+		currentShimmerView?.removeFromSuperview()
+		let shimmerView = MSShimmerView(containerView: self,
+										excludedViews: excludedViews,
+										animationSynchronizer: Self.animationSynchronizer)
+		shimmerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+		currentShimmerView = shimmerView
+		self.addSubview(shimmerView)
+	}
+	
+	private func containerLeaves(view: UIView, leaves: inout [UIView]) {
+		for v in view.subviews {
+			if v.subviews.isEmpty && v != currentShimmerView {
+				leaves.append(v)
+			} else if !v.isHidden {
+				containerLeaves(view: v, leaves: &leaves)
 			}
 		}
-
-		return leaves
 	}
 	
 	private func updateShimmerViewAppearance() {
 		assert(Thread.isMainThread)
 		
-		let oldAppearance = shimmerView.appearance
-		
-		let tintColor = RCTConvert.uiColor(appearance["tintColor"] as? NSNumber) ?? oldAppearance.tintColor
-		let cornerRadius = appearance["cornerRadius"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldAppearance.cornerRadius))
-		let labelCornerRadius = appearance["labelCornerRadius"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldAppearance.labelCornerRadius))
-		let usesTextHeightForLabels = appearance["usesTextHeightForLabels"] as? NSNumber ?? NSNumber(booleanLiteral: oldAppearance.usesTextHeightForLabels)
-		let labelHeight = appearance["labelHeight"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldAppearance.labelHeight))
+		if let currentShimmerView = currentShimmerView {
+			let oldAppearance = currentShimmerView.appearance
+			
+			let tintColor = RCTConvert.uiColor(appearance["tintColor"] as? NSNumber) ?? oldAppearance.tintColor
+			let cornerRadius = appearance["cornerRadius"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldAppearance.cornerRadius))
+			let labelCornerRadius = appearance["labelCornerRadius"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldAppearance.labelCornerRadius))
+			let usesTextHeightForLabels = appearance["usesTextHeightForLabels"] as? NSNumber ?? NSNumber(booleanLiteral: oldAppearance.usesTextHeightForLabels)
+			let labelHeight = appearance["labelHeight"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldAppearance.labelHeight))
 
-		shimmerView.appearance = ShimmerViewAppearance(
-			tintColor: tintColor,
-			cornerRadius: CGFloat(truncating: cornerRadius),
-			labelCornerRadius: CGFloat(truncating: labelCornerRadius),
-			usesTextHeightForLabels: Bool(truncating: usesTextHeightForLabels),
-			labelHeight: CGFloat(truncating: labelHeight)
-		)
+			currentShimmerView.appearance = ShimmerViewAppearance(
+				tintColor: tintColor,
+				cornerRadius: CGFloat(truncating: cornerRadius),
+				labelCornerRadius: CGFloat(truncating: labelCornerRadius),
+				usesTextHeightForLabels: Bool(truncating: usesTextHeightForLabels),
+				labelHeight: CGFloat(truncating: labelHeight)
+			)
+		}
 	}
 	
 	private func updateShimmerAppearance() {
 		assert(Thread.isMainThread)
 		
-		let oldShimmerAppearance = shimmerView.shimmerAppearance
-		
-		let alpha = shimmerAppearance["alpha"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldShimmerAppearance.alpha))
-		let width = shimmerAppearance["width"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldShimmerAppearance.width))
-		let angle = shimmerAppearance["angle"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldShimmerAppearance.angle))
-		let speed = shimmerAppearance["speed"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldShimmerAppearance.speed))
-		let delay = shimmerAppearance["delay"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldShimmerAppearance.delay))
+		if let currentShimmerView = currentShimmerView {
+			let oldShimmerAppearance = currentShimmerView.shimmerAppearance
+			
+			let alpha = shimmerAppearance["alpha"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldShimmerAppearance.alpha))
+			let width = shimmerAppearance["width"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldShimmerAppearance.width))
+			let angle = shimmerAppearance["angle"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldShimmerAppearance.angle))
+			let speed = shimmerAppearance["speed"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldShimmerAppearance.speed))
+			let delay = shimmerAppearance["delay"] as? NSNumber ?? NSNumber(floatLiteral: Double(oldShimmerAppearance.delay))
 
-		shimmerView.shimmerAppearance = ShimmerAppearance(
-			alpha: CGFloat(truncating: alpha),
-			width: CGFloat(truncating: width),
-			angle: CGFloat(truncating: angle),
-			speed: CGFloat(truncating: speed),
-			delay: TimeInterval(truncating: delay)
-		)
+			currentShimmerView.shimmerAppearance = ShimmerAppearance(
+				alpha: CGFloat(truncating: alpha),
+				width: CGFloat(truncating: width),
+				angle: CGFloat(truncating: angle),
+				speed: CGFloat(truncating: speed),
+				delay: TimeInterval(truncating: delay)
+			)
+		}
 	}
+
+	/// Views excluded from shimmer consideration (updating will re-create the shimmer view)
+	private var excludedViews: [UIView]? {
+		didSet {
+			assert(Thread.isMainThread)
+			updateShimmerView(excludedViews: excludedViews ?? [])
+		}
+	}
+
+	private var currentShimmerView: ShimmerView?
+
+	/// Array of views that are currently mirroring the react subviews
+	private var mirrors: [UIView] = []
+	
+	private static let animationSynchronizer = AnimationSynchronizer()
+
 }
