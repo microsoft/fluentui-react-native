@@ -1,4 +1,5 @@
 module.exports = {
+  npmClient: 'yarn',
   pipeline: {
     ['build-tools']: ['^build-tools'],
     build: ['build-tools', '^build'],
@@ -9,6 +10,6 @@ module.exports = {
     lint: ['build-tools'],
     ['verify-api']: [],
     ['update-api']: [],
-    test: ['build-tools', 'lint', 'build']
-  }
+    test: ['build-tools', 'lint', 'build'],
+  },
 };
