@@ -1,16 +1,10 @@
 /** @jsx withSlots */
-import {
-  compose,
-  UseSlots,
-  buildProps,
-  mergeProps,
-  withSlots
-} from '@fluentui-react-native/experimental-framework';
+import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-react-native/experimental-framework';
 import { requireNativeComponent } from 'react-native';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import * as React from 'react';
 
-const shimmerName = "Shimmer"
+const shimmerName = 'Shimmer';
 
 const NativeShimmerView = requireNativeComponent('MSFShimmerView');
 
@@ -18,7 +12,7 @@ export interface IShimmerViewAppearance {
   /**
    * Color to tint the shimmer boxes. Defaults to the Fabric default color.
    */
-  tintColor: string;
+  tintColor: number;
 
   /**
    * Corner radius on each view.
@@ -33,7 +27,7 @@ export interface IShimmerViewAppearance {
   /**
    * usesTextHeightForLabels: True to enable shimmers to auto-adjust to font height for a UILabel -- this
    * will more accurately reflect the text in the label rect rather than using the bounding box. `labelHeight`
-   * will take precendence over this property.
+   * will take precedence over this property.
    */
   usesTextHeightForLabels: boolean;
 
@@ -45,7 +39,6 @@ export interface IShimmerViewAppearance {
 }
 
 export interface IShimmerAppearance {
-
   alpha: number;
   width: number;
 
@@ -65,9 +58,7 @@ export interface IShimmerAppearance {
   delay: number;
 }
 
-export interface ShimmerTokens {
-
-}
+export interface ShimmerTokens {}
 
 /**
  * ViewProps props, based off of the standard react-native ViewProps with some new extensions
@@ -85,15 +76,15 @@ export type ShimmerProps<TBase = IViewProps> = TBase & {
 };
 
 interface ShimmerType {
-  props: ShimmerProps
+  props: ShimmerProps;
   slotProps: { root: ShimmerProps };
-  tokens: ShimmerTokens
+  tokens: ShimmerTokens;
 }
 
 export const Shimmer = compose<ShimmerType>({
   displayName: shimmerName,
   slotProps: {
-    root: buildProps<ShimmerProps, ShimmerTokens>(() => ({}))
+    root: buildProps<ShimmerProps, ShimmerTokens>(() => ({})),
   },
   slots: { root: NativeShimmerView },
   render: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
@@ -101,5 +92,5 @@ export const Shimmer = compose<ShimmerType>({
     const Root = useSlots(props).root;
     // return a function used to complete the render
     return (rest: ShimmerProps, children: React.ReactNode) => <Root {...mergeProps(props, rest)}>{children}</Root>;
-  }
-})
+  },
+});

@@ -22,7 +22,7 @@ class ShimmerContainerView: UIView {
 	override public func layoutSubviews() {
 		super.layoutSubviews()
 
-		// Shimmer, by default, only consider top-level views when shimmering. This is
+		// Shimmer, by default, only considers top-level views when shimmering. This is
 		// incompatible with Flexbox, which wants you to wrap everything in more views to achieve
 		// a specific layout. The solution is to get a list of all the leaves of the subview tree
 		// and shimmer those by creating "mirror" views to mirror the RCTViews in a flat heirarchy in
@@ -64,9 +64,9 @@ class ShimmerContainerView: UIView {
 	
 	private func updateShimmerView(excludedViews: [UIView] = []) {
 		currentShimmerView?.removeFromSuperview()
-		let shimmerView = MSShimmerView(containerView: self,
-										excludedViews: excludedViews,
-										animationSynchronizer: Self.animationSynchronizer)
+		let shimmerView = ShimmerView(containerView: self,
+									  excludedViews: excludedViews,
+									  animationSynchronizer: Self.animationSynchronizer)
 		shimmerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 		currentShimmerView = shimmerView
 		self.addSubview(shimmerView)
