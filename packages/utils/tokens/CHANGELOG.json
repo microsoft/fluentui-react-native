@@ -2,6 +2,44 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Mon, 17 Aug 2020 22:08:34 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.5.5",
+      "version": "0.5.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix dependency errors",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2216954b9e0efadc5223c2346b4cb31e20c8bc12",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ],
+        "none": [
+          {
+            "comment": "fix dependency errors",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2216954b9e0efadc5223c2346b4cb31e20c8bc12",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 Aug 2020 19:49:20 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.5.4",
+      "version": "0.5.4",
+      "comments": {
+        "none": [
+          {
+            "comment": "change text color",
+            "author": "email not defined",
+            "commit": "690dc0f91728c471e6d0207c30414416f8cd71d5",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 11 Aug 2020 19:53:33 GMT",
       "tag": "@fluentui-react-native/tokens_v0.5.2",
       "version": "0.5.2",

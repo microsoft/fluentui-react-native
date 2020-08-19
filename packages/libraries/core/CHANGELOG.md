@@ -1,8 +1,24 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Fri, 07 Aug 2020 22:08:03 GMT and should not be manually modified.
+This log was last generated on Mon, 17 Aug 2020 22:08:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.86
+
+Mon, 17 Aug 2020 22:08:34 GMT
+
+### Patches
+
+- fix dependency errors (jasonmo@microsoft.com)
+
+## 0.15.82
+
+Wed, 12 Aug 2020 23:52:15 GMT
+
+### Patches
+
+- release @fluentui-react-native/immutable-merge (jasonmo@microsoft.com)
 
 ## 0.15.79
 

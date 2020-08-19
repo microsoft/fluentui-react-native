@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Text } from '@fluentui-react-native/text';
+import { Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { TEXT_TESTPAGE } from './consts';

@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/use-slots",
   "entries": [
     {
+      "date": "Mon, 17 Aug 2020 22:08:34 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.3.5",
+      "version": "0.3.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix dependency errors",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2216954b9e0efadc5223c2346b4cb31e20c8bc12",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 Aug 2020 19:49:20 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.3.4",
+      "version": "0.3.4",
+      "comments": {
+        "none": [
+          {
+            "comment": "change text color",
+            "author": "email not defined",
+            "commit": "690dc0f91728c471e6d0207c30414416f8cd71d5",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 Aug 2020 04:48:19 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.3.4",
+      "version": "0.3.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "release @fluentui-react-native/memo-cache",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b490c9915260a055b2f3c044f06263be0be42216",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 Aug 2020 23:52:15 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.3.3",
+      "version": "0.3.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "release @fluentui-react-native/immutable-merge",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b0ac4360b79b4286e2a4ea9fe768c96568e954fa",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 11 Aug 2020 19:53:33 GMT",
       "tag": "@fluentui-react-native/use-slots_v0.3.2",
       "version": "0.3.2",

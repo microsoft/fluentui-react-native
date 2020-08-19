@@ -1,8 +1,32 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Wed, 17 Jun 2020 05:00:56 GMT and should not be manually modified.
+This log was last generated on Mon, 17 Aug 2020 22:08:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.6.79
+
+Mon, 17 Aug 2020 22:08:34 GMT
+
+### Patches
+
+- fix dependency errors (jasonmo@microsoft.com)
+
+## 1.6.77
+
+Thu, 13 Aug 2020 04:48:19 GMT
+
+### Patches
+
+- release @fluentui-react-native/memo-cache (jasonmo@microsoft.com)
+
+## 1.6.76
+
+Wed, 12 Aug 2020 23:52:15 GMT
+
+### Patches
+
+- release @fluentui-react-native/immutable-merge (jasonmo@microsoft.com)
 
 ## 1.6.60
 

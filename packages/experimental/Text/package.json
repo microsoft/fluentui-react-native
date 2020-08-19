@@ -13,6 +13,7 @@
   "scripts": {
     "build": "fluentui-scripts build",
     "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
     "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
     "test": "fluentui-scripts jest",
@@ -21,9 +22,8 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": ">=0.3.34 <1.0.0",
-    "@fluentui-react-native/experimental-framework": "0.2.4",
-    "@fluentui-react-native/tokens": ">=0.5.2 <1.0.0"
+    "@fluentui-react-native/adapters": ">=0.3.35 <1.0.0",
+    "@fluentui-react-native/experimental-framework": "0.2.8"
   },
   "devDependencies": {
     "@types/react-native": "^0.62.0",
@@ -32,6 +32,7 @@
     "react-native": "0.62.2"
   },
   "peerDependencies": {
+    "react": "^16.8.0",
     "react-native": ">=0.60.0"
   },
   "author": "",

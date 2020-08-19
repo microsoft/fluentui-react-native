@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Persona } from '@fluentui-react-native/persona';
-import { PersonaSize } from '@fluentui-react-native/persona-coin';
+import { Persona, PersonaSize } from '@fluentui/react-native';
 import { rajeshImageUrl } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { View, Text, Switch, Picker } from 'react-native';
@@ -18,7 +17,7 @@ const allSizes: WithUndefined<PersonaSize>[] = [
   'size56',
   'size72',
   'size100',
-  'size120'
+  'size120',
 ];
 
 interface ISwitchWithLabelProps {
@@ -59,7 +58,7 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
           prompt="Size"
           style={commonStyles.header}
           selectedValue={imageSize || undefinedText}
-          onValueChange={size => setImageSize(size === undefinedText ? undefined : size)}
+          onValueChange={(size) => setImageSize(size === undefinedText ? undefined : size)}
         >
           {allSizes.map((size, index) => (
             <Picker.Item label={size} key={index} value={size} />
