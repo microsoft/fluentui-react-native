@@ -4,8 +4,7 @@ import {
   UseSlots,
   buildProps,
   mergeProps,
-  withSlots,
-  ITheme
+  withSlots
 } from '@fluentui-react-native/experimental-framework';
 import { requireNativeComponent } from 'react-native';
 import { IViewProps } from '@fluentui-react-native/adapters';
@@ -93,10 +92,6 @@ interface ShimmerType {
 
 export const Shimmer = compose<ShimmerType>({
   displayName: shimmerName,
-  tokens: [
-    //t => ({}),
-    shimmerName
-  ],
   slotProps: {
     root: buildProps<ShimmerProps, ShimmerTokens>(() => ({}))
   },
