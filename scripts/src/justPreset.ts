@@ -11,20 +11,13 @@ const { jest } = require('./tasks/jest');
 const { ts } = require('./tasks/ts');
 const { eslint } = require('./tasks/eslint');
 const { webpack, webpackDevServer } = require('./tasks/webpack');
-const { metroTask } = require('@fluentui-react-native/build-tools');
+const { depcheckTask } = require('./tasks/depcheck');
 const { verifyApiExtractor, updateApiExtractor } = require('./tasks/api-extractor');
 const checkForModifiedFiles = require('./tasks/check-for-modified-files');
-const { depcheckTask } = require('./tasks/depcheck');
 
-function fileExists(path) {
-  try {
-    return fs.existsSync(path);
-  } catch {
-    return false;
-  }
-}
+import { metroTask } from '@fluentui-react-native/build-tools';
 
-module.exports = function preset() {
+export function preset() {
   // this add s a resolve path for the build tooling deps like TS from the scripts folder
   addResolvePath(__dirname);
 
@@ -66,7 +59,7 @@ module.exports = function preset() {
   task('tsall', parallel('ts:commonjs', 'ts:esm'));
   task('ts', series(condition('ts:commonjs-only', () => !!argv().commonjs), condition('tsall', () => !argv().commonjs)));
 
-  task('validate', parallel('eslint', condition('jest', () => fileExists(path.join(process.cwd(), 'jest.config.js')))));
+  task('validate', parallel('eslint', condition('jest', () => fs.existsSync(path.join(process.cwd(), 'jest.config.js')))));
 
   task('code-style', series('prettier', 'eslint'));
   task('update-api', series('clean', 'copy', 'ts', 'update-api-extractor'));
@@ -92,4 +85,4 @@ module.exports = function preset() {
   task('depcheck', depcheckTask);
 
   task('no-op', () => {});
-};
+}

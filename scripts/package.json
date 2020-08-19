@@ -2,15 +2,15 @@
   "name": "@uifabricshared/build-native",
   "version": "0.1.1",
   "private": true,
-  "main": "./index.js",
+  "main": "./lib/index.js",
   "bin": {
-    "fluentui-scripts": "./lib/just-scripts.js"
+    "fluentui-scripts": "./just-scripts.js"
   },
   "scripts": {
-    "build-tools": "tsc --allowJs --target es6",
+    "build-tools": "just-scripts build",
     "bundlesize": "bundlesize --debug",
-    "code-style": "node ./just-scripts.js code-style",
-    "prettier": "node ./just-scripts.js prettier",
+    "code-style": "node ./lib/just-scripts.js code-style",
+    "prettier": "node ./lib/just-scripts.js prettier",
     "verify-api": "echo no api to verify",
     "update-api": "echo no api to update"
   },
