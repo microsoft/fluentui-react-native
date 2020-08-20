@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "update code to use split out merge-props package",
+  "packageName": "@fluentui-react-native/use-slots",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-08-18T17:49:34.808Z"
+}

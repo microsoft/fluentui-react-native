@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { SlotFn, NativeReactType } from './renderSlot';
-import { mergeProps } from '@uifabricshared/foundation-settings';
+import { mergeProps } from '@fluentui-react-native/merge-props';
 import { ComposableFunction, StagedRender } from './stagedComponent';
+
+// type AsObject<T> = T extends object ? T : never
 
 export type Slots<TSlotProps> = { [K in keyof TSlotProps]: SlotFn<TSlotProps[K]> };
 
