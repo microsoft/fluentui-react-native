@@ -94,3 +94,5 @@ export const Shimmer = compose<ShimmerType>({
     return (rest: ShimmerProps, children: React.ReactNode) => <Root {...mergeProps(props, rest)}>{children}</Root>;
   },
 });
+
+export default Shimmer;
