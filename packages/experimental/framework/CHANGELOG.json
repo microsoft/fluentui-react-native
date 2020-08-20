@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/framework",
   "entries": [
     {
+      "date": "Thu, 20 Aug 2020 00:14:01 GMT",
+      "tag": "@fluentui-react-native/framework_v0.2.10",
+      "version": "0.2.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "update code to use split out merge-props package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f75e45ede85b8ebc6cd11cc66fbb1baedaea39b9",
+            "package": "@fluentui-react-native/framework"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 19 Aug 2020 19:19:35 GMT",
       "tag": "@fluentui-react-native/framework_v0.2.9",
       "version": "0.2.9",

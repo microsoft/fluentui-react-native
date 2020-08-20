@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "update code to use split out merge-props package",
-  "packageName": "@uifabricshared/foundation-tokens",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-08-18T17:50:13.162Z"
-}

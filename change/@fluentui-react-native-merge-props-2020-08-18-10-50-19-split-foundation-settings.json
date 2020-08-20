@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "split mergeProps and mergeStyles out of foundation-settings",
-  "packageName": "@fluentui-react-native/merge-props",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-08-18T17:50:19.506Z"
-}
