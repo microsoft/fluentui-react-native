@@ -28,11 +28,11 @@ const stylizedShimmer: React.FunctionComponent<{}> = () => {
       <Shimmer
         style={{ flex: 1, alignItems: 'center' }}
         appearance={{
-          tintColor: processColor('#FF0000'),
+          tintColor: processColor('#F0F0FF'),
           cornerRadius: 10,
           labelCornerRadius: 10,
           usesTextHeightForLabels: false,
-          labelHeight: 20,
+          labelHeight: 15,
         }}
         shimmerAppearance={{
           alpha: 0,

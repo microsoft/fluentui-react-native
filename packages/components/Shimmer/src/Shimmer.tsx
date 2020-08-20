@@ -83,14 +83,9 @@ interface ShimmerType {
 
 export const Shimmer = compose<ShimmerType>({
   displayName: shimmerName,
-  slotProps: {
-    root: buildProps<ShimmerProps, ShimmerTokens>(() => ({})),
-  },
   slots: { root: NativeShimmerView },
   render: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
-    // stage one, execute any hooks, styling lookups to build the styled slot
     const Root = useSlots(props).root;
-    // return a function used to complete the render
     return (rest: ShimmerProps, children: React.ReactNode) => <Root {...mergeProps(props, rest)}>{children}</Root>;
   },
 });

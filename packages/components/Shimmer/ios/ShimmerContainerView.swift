@@ -133,7 +133,12 @@ class ShimmerContainerView: UIView {
 		}
 	}
 
-	private var currentShimmerView: ShimmerView?
+	private var currentShimmerView: ShimmerView? {
+		didSet {
+			updateShimmerAppearance()
+			updateShimmerViewAppearance()
+		}
+	}
 
 	/// Array of views that are currently mirroring the react subviews
 	private var mirrors: [UIView] = []
