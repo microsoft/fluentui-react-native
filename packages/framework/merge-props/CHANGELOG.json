@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/merge-props",
+  "entries": [
+    {
+      "date": "Thu, 20 Aug 2020 00:14:01 GMT",
+      "tag": "@fluentui-react-native/merge-props_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "split mergeProps and mergeStyles out of foundation-settings",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f75e45ede85b8ebc6cd11cc66fbb1baedaea39b9",
+            "package": "@fluentui-react-native/merge-props"
+          }
+        ]
+      }
+    }
+  ]
+}

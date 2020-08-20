@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-settings",
   "entries": [
     {
+      "date": "Thu, 20 Aug 2020 00:14:01 GMT",
+      "tag": "@uifabricshared/foundation-settings_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "split mergeProps and mergeStyles out of foundation-settings",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f75e45ede85b8ebc6cd11cc66fbb1baedaea39b9",
+            "package": "@uifabricshared/foundation-settings"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 17 Aug 2020 22:08:34 GMT",
       "tag": "@uifabricshared/foundation-settings_v0.6.4",
       "version": "0.6.4",

@@ -1,6 +1,6 @@
 module.exports = {
-  preset: require('./just.config'),
+  preset: require('./lib/justPreset'),
   just: require('just-scripts'),
-  eslintPreset: require('./eslintrc'),
-  ...require('@fluentui-react-native/build-tools')
+  eslintPreset: require('./lib/eslintrc'),
+  ...require('@fluentui-react-native/build-tools'),
 };

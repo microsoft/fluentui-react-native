@@ -1,6 +1,6 @@
 import { immutableMerge } from '@fluentui-react-native/immutable-merge';
-import { IStyleProp } from './Styles.types';
 import { getMemoCache } from '@fluentui-react-native/memo-cache';
+import { StyleProp } from './mergeStyles.types';
 
 /**
  * Take a react-native style, which may be a recursive array, and return as a flattened
@@ -8,15 +8,8 @@ import { getMemoCache } from '@fluentui-react-native/memo-cache';
  *
  * @param style - StyleProp<TStyle> to flatten, this can be a TStyle or an array
  */
-export function flattenStyle(style: IStyleProp<object>): object {
-  if (style === null || typeof style !== 'object') {
-    return {};
-  }
-
-  if (!Array.isArray(style)) {
-    return style;
-  }
-  return immutableMerge(...style.map(v => flattenStyle(v)));
+export function flattenStyle(style: StyleProp<object>): object {
+  return Array.isArray(style) ? immutableMerge(...style.map(v => flattenStyle(v))) : style || {};
 }
 
 /**
@@ -24,18 +17,18 @@ export function flattenStyle(style: IStyleProp<object>): object {
  *
  * @param styles - array of styles to merge together.  The styles will be flattened as part of the process
  */
-export function mergeAndFlattenStyles(...styles: IStyleProp<object>[]): object | undefined {
+export function mergeAndFlattenStyles(...styles: StyleProp<object>[]): object | undefined {
   // baseline merge and flatten the objects
   return immutableMerge(
-    ...styles.map((styleProp: IStyleProp<object>) => {
+    ...styles.map((styleProp: StyleProp<object>) => {
       return flattenStyle(styleProp);
-    })
+    }),
   );
 }
 
 const _styleCache = getMemoCache();
 
-export function mergeStyles(...styles: IStyleProp<object>[]): object | undefined {
+export function mergeStyles(...styles: StyleProp<object>[]): object | undefined {
   // filter the style set to just objects (which might be arrays or plain style objects)
   const inputs = styles.filter(s => typeof s === 'object') as object[];
 

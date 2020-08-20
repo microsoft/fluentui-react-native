@@ -47,7 +47,10 @@ export type IOperationSet<TTokens, TTheme> = IStyleFactoryOperation<TTokens, TTh
  *
  * _keys - should specify the token keys the function is dependent on, required to cache properly
  */
-export type IStyleFactoryFunctionRaw<TProps, TTokens, TTheme> = (tokenProps: TTokens, theme: TTheme) => TProps;
+export type IStyleFactoryFunctionRaw<TProps, TTokens, TTheme> = (
+  tokenProps: TTokens,
+  theme: TTheme,
+) => TProps extends object ? TProps : never;
 export type IStyleFactoryFunction<TProps, TTokens, TTheme> = IStyleFactoryFunctionRaw<TProps, TTokens, TTheme> & {
   _keys: (keyof TTokens)[];
 };

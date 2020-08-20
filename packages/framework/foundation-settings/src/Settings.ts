@@ -1,18 +1,6 @@
 import { MergeOptions, immutableMergeCore } from '@fluentui-react-native/immutable-merge';
 import { IComponentSettingsCollection, IComponentSettings, ISlotProps, IOverrideLookup } from './Settings.types';
-import { mergeStyles } from './Styles';
-
-function _mergeClassName(...names: any[]): string | undefined {
-  return names.filter(v => v && typeof v === 'string').join(' ');
-}
-
-/**
- * Props will not deeply merge with the exception of a style property.  Also className needs to be handled specially.
- */
-const _mergePropsOptions: MergeOptions = {
-  className: _mergeClassName,
-  style: mergeStyles
-};
+import { mergeProps } from '@fluentui-react-native/merge-props';
 
 /**
  * an individual settings block is a set of slotProps, with an additional collection of tokens.
@@ -22,29 +10,20 @@ const _mergeSettingsOptions: MergeOptions = {
   tokens: 0,
 
   // all other objects should be treated as props
-  object: _mergePropsOptions,
+  object: mergeProps,
 
   // overrides have a collection of objects which each are treated as settings
   get _overrides() {
     return { object: this };
-  }
+  },
 };
 
 /**
  * A collection of settings simply applies settings down one level
  */
 const _mergeCollectionOptions: MergeOptions = {
-  object: _mergeSettingsOptions
+  object: _mergeSettingsOptions,
 };
-
-/**
- * Typescript can't always inference types that are actually objects correctly.  This helper effectively
- * coerces types that aren't based on objects into objects for purposes of merging
- * @param inputs - array of inputs of a given type
- */
-function _filterToObjectArray<T>(inputs: T[]): object[] {
-  return (inputs.filter(input => typeof input === 'object') as unknown) as object[];
-}
 
 /**
  * Merge settings together.  This routine should work for IComponentSettings types or ISlotProps
@@ -52,14 +31,6 @@ function _filterToObjectArray<T>(inputs: T[]): object[] {
  */
 export function mergeSettings<TSettings extends IComponentSettings = IComponentSettings>(...settings: (object | undefined)[]): TSettings {
   return immutableMergeCore(_mergeSettingsOptions, ...settings) as TSettings;
-}
-
-/**
- * Merge props together, flattening and merging styles as appropriate
- * @param props - props to merge together
- */
-export function mergeProps<TProps>(...props: (TProps | undefined)[]): TProps {
-  return (immutableMergeCore(_mergePropsOptions, ..._filterToObjectArray(props)) as unknown) as TProps;
 }
 
 /**

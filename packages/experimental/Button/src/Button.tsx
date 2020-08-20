@@ -6,7 +6,7 @@ import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './Button.styling';
 import { filterViewProps, filterImageProps } from '@fluentui-react-native/adapters';
 import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/experimental-framework';
+import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 
 export const Button = compose<ButtonType>({
   displayName: buttonName,
@@ -15,11 +15,11 @@ export const Button = compose<ButtonType>({
     root: View,
     stack: View,
     icon: Image,
-    content: Text
+    content: Text,
   },
   filters: {
     stack: filterViewProps,
-    icon: filterImageProps
+    icon: filterImageProps,
   },
   render: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
     const {
@@ -41,7 +41,7 @@ export const Button = compose<ButtonType>({
           e.stopPropagation();
         }
       },
-      [onClick]
+      [onClick],
     );
 
     const buttonRef = useViewCommandFocus(userProps.componentRef);
@@ -58,10 +58,10 @@ export const Button = compose<ButtonType>({
           accessibilityRole: 'button',
           onAccessibilityTap,
           accessibilityLabel,
-          onKeyUp
+          onKeyUp,
         } as ViewProps,
         pressable.props,
-        final
+        final,
       );
 
       return (
@@ -78,7 +78,7 @@ export const Button = compose<ButtonType>({
         </Slots.root>
       );
     };
-  }
+  },
 });
 
 export default Button;
