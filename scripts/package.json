@@ -10,6 +10,7 @@
     "build-tools": "just-scripts build",
     "bundlesize": "bundlesize --debug",
     "code-style": "node ./lib/just-scripts.js code-style",
+    "depcheck": "just-scripts depcheck",
     "prettier": "node ./lib/just-scripts.js prettier",
     "verify-api": "echo no api to verify",
     "update-api": "echo no api to update"
@@ -65,7 +66,8 @@
     "webpack-bundle-analyzer": "^3.0.4",
     "webpack-cli": "3.2.3",
     "webpack-dev-server": "3.1.14",
-    "webpack-notifier": "^1.6.0"
+    "webpack-notifier": "^1.6.0",
+    "workspace-tools": "^0.9.3"
   },
   "bundlesize": [
     {
