@@ -1,45 +1,46 @@
 import * as React from 'react';
-import { Shimmer, Separator } from '@fluentui/react-native';
+import { Shimmer } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { SHIMMER_TESTPAGE } from './consts';
-import { Text, View, processColor } from 'react-native';
-import { commonTestStyles as commonStyles } from '../Common/styles';
+import { Test, TestSection, PlatformStatus } from '../Test';
+import { Text, View } from 'react-native';
 
-export const ShimmerTest: React.FunctionComponent<{}> = () => {
+const shimmer: React.FunctionComponent<{}> = () => {
   return (
-    <View>
-      <Text style={commonStyles.section} testID={SHIMMER_TESTPAGE}>
-        Shimmer Test Page
-      </Text>
-      <Separator />
-      <Stack style={stackStyle}>
-        <Shimmer
-          style={{ flex: 1, alignItems: 'center' }}
-          appearance={{
-            tintColor: processColor('#FF0000'),
-            cornerRadius: 10,
-            labelCornerRadius: 10,
-            usesTextHeightForLabels: false,
-            labelHeight: 20
-          }}
-          shimmerAppearance={{
-            alpha: 0,
-            width: 180,
-            angle: 0,
-            speed: 400,
-            delay: 0.1
-          }}
-        >
-          <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row', marginStart: 16, marginEnd: 16 }}>
-            <View style={{ width: 40, height: 40 }} />
-            <View style={{ flexDirection: 'column', flex: 2, marginLeft: 16 }} >
-              <Text style={{ marginBottom: 3, width: '40%' }}>{''}</Text>
-              <Text style={{ marginTop: 3, width: '30%' }} >{''}</Text>
-            </View>
+    <Stack style={stackStyle}>
+      <Shimmer>
+        <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row', marginStart: 16, marginEnd: 16 }}>
+          <View style={{ width: 40, height: 40 }} />
+          <View style={{ flexDirection: 'column', flex: 2, marginLeft: 16 }}>
+            <Text style={{ marginBottom: 3, width: '40%' }}>{''}</Text>
+            <Text style={{ marginTop: 3, width: '30%' }}>{''}</Text>
           </View>
-        </Shimmer>
-      </Stack>
-    </View >
+        </View>
+      </Shimmer>
+    </Stack>
   );
+};
+
+const shimmerSections: TestSection[] = [
+  {
+    name: 'Basic Shimmer',
+    testID: SHIMMER_TESTPAGE,
+    component: shimmer,
+  },
+];
+
+export const LinkTest: React.FunctionComponent<{}> = () => {
+  const status: PlatformStatus = {
+    win32Status: 'Backlog',
+    uwpStatus: 'Backlog',
+    iosStatus: 'Beta',
+    macosStatus: 'Backlog',
+    androidStatus: 'Backlog',
+  };
+
+  const description =
+    'Shimmer is a temporary animation placeholder for when a service call takes time to return data but the rest of the UI should continue rendering.';
+
+  return <Test name="Shimmer Test" description={description} sections={shimmerSections} status={status}></Test>;
 };
