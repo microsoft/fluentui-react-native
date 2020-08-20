@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-react-native/experimental-framework';
+import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { requireNativeComponent } from 'react-native';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import * as React from 'react';

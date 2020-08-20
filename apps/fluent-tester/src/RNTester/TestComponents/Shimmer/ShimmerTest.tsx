@@ -30,7 +30,7 @@ const shimmerSections: TestSection[] = [
   },
 ];
 
-export const LinkTest: React.FunctionComponent<{}> = () => {
+export const ShimmerTest: React.FunctionComponent<{}> = () => {
   const status: PlatformStatus = {
     win32Status: 'Backlog',
     uwpStatus: 'Backlog',
