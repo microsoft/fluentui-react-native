@@ -8,6 +8,9 @@ const shimmerName = 'Shimmer';
 
 const NativeShimmerView = requireNativeComponent('MSFShimmerView');
 
+/**
+ * Appearance of the views that are shimmered
+ */
 export interface IShimmerViewAppearance {
   /**
    * Color to tint the shimmer boxes. Defaults to the Fabric default color.
@@ -38,6 +41,9 @@ export interface IShimmerViewAppearance {
   labelHeight: number;
 }
 
+/**
+ * Appearance of the shimmer itself (the animation appearance)
+ */
 export interface IShimmerAppearance {
   alpha: number;
   width: number;

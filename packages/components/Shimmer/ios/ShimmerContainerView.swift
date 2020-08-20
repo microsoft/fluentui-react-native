@@ -4,12 +4,14 @@ import FluentUI
 @objc(MSFShimmerContainerView)
 class ShimmerContainerView: UIView {
 
+	/// Dictionary that maps the React Native "appearance" prop to the ShimmerView property "appearance"
 	@objc var appearance: NSDictionary = NSDictionary() {
 		didSet {
 			updateShimmerViewAppearance()
 		}
 	}
 	
+	/// Dictionary that maps the React Native "appearance" prop to the ShimmerView property "appearance"
 	@objc var shimmerAppearance: NSDictionary = NSDictionary() {
 		didSet {
 			updateShimmerAppearance()
