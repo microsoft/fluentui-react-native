@@ -16,6 +16,7 @@ const { verifyApiExtractor, updateApiExtractor } = require('./tasks/api-extracto
 const checkForModifiedFiles = require('./tasks/check-for-modified-files');
 
 import { metroTask } from '@fluentui-react-native/build-tools';
+import { checkPublishingTask } from './tasks/checkPublishingTask';
 
 export function preset() {
   // this add s a resolve path for the build tooling deps like TS from the scripts folder
@@ -82,7 +83,9 @@ export function preset() {
 
   task('build', series('clean', 'copy', 'ts'));
 
-  task('depcheck', depcheckTask);
+  task('depcheck-files', depcheckTask);
+  task('check-publishing', checkPublishingTask);
+  task('depcheck', parallel('depcheck-files', 'check-publishing'));
 
   task('no-op', () => {});
 }
