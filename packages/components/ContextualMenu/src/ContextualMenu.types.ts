@@ -48,7 +48,7 @@ export interface ContextualMenuProps extends Omit<ICalloutProps, 'setInitialFocu
 
 export type ContextualMenuSlotProps = {
   root: ContextualMenuProps;
-  container: ViewProps
+  container: ViewProps;
 };
 
 export type ContextualMenuRenderData = IRenderData<ContextualMenuSlotProps, ContextualMenuState>;
