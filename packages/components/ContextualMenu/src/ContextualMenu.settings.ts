@@ -13,7 +13,7 @@ export const settings: IComposeSettings<ContextualMenuType> = [
       minPadding: 0
     },
     root: {
-      accessibilityRole: 'menu'
+      accessibilityRole: 'menu',
     }
   },
   contextualMenuName

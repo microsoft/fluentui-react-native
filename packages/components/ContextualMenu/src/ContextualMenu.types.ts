@@ -1,4 +1,5 @@
 import { ICalloutProps, ICalloutTokens } from '@fluentui-react-native/callout';
+import { ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const contextualMenuName = 'ContextualMenu';
@@ -39,11 +40,15 @@ export interface ContextualMenuProps extends Omit<ICalloutProps, 'setInitialFocu
    ** Callback for when menu item is clicked
    */
   onItemClick?: (key: string) => void;
+  /*
+   ** Callback to toggle showContextualMenu to false and close menu on item click
+   */
   setShowMenu?: (showMenu: boolean) => void;
 }
 
 export type ContextualMenuSlotProps = {
   root: ContextualMenuProps;
+  container: ViewProps
 };
 
 export type ContextualMenuRenderData = IRenderData<ContextualMenuSlotProps, ContextualMenuState>;

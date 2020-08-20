@@ -11,6 +11,7 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
     root: {
       accessible: true,
       accessibilityRole: 'menuitem',
+      ...{ acceptsKeyboardFocus: true },
       style: {
         display: 'flex',
         alignItems: 'flex-start',
@@ -60,7 +61,8 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
       focused: {
         tokens: {
           borderColor: 'buttonBorderFocused',
-          color: 'buttonTextHovered'
+          color: 'buttonTextHovered',
+          backgroundColor: 'buttonBackgroundHovered'
         }
       }
     }
