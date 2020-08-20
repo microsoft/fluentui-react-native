@@ -4,7 +4,7 @@ import StackItem from './StackItem/StackItem';
 import { StackProps, stackName, StackType, StackTokens } from './Stack.types';
 import { View, ViewProps } from 'react-native';
 import { filterViewProps } from '@fluentui-react-native/adapters';
-import { compose, withSlots, mergeProps, UseSlots, getMemoCache } from '@fluentui-react-native/experimental-framework';
+import { compose, withSlots, mergeProps, UseSlots, getMemoCache } from '@fluentui-react-native/framework';
 import { stylingSettings } from './Stack.styling';
 
 const mixinCache = getMemoCache<ViewProps>();
@@ -17,10 +17,10 @@ function getMixinProps(horizontal: boolean, gap: StackTokens['gap']): ViewProps 
   return mixinCache(
     () => ({
       style: {
-        ...(horizontal ? { marginLeft: gap } : { marginTop: gap })
-      }
+        ...(horizontal ? { marginLeft: gap } : { marginTop: gap }),
+      },
     }),
-    [horizontal, gap]
+    [horizontal, gap],
   )[0];
 }
 
@@ -28,14 +28,14 @@ export const Stack = compose<StackType>({
   displayName: stackName,
   ...stylingSettings,
   statics: {
-    Item: StackItem
+    Item: StackItem,
   },
   slots: {
     root: View,
-    inner: View
+    inner: View,
   },
   filters: {
-    root: filterViewProps
+    root: filterViewProps,
   },
   render: (props: StackProps, useSlots: UseSlots<StackType>) => {
     const { gap, horizontal, wrap, ...rest } = props;
@@ -63,7 +63,7 @@ export const Stack = compose<StackType>({
       }
       return <Slots.root {...mergeProps(rest, final)}>{children}</Slots.root>;
     };
-  }
+  },
 });
 
 export default Stack;

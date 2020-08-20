@@ -1,5 +1,5 @@
-import { flattenStyle, mergeAndFlattenStyles, mergeStyles } from './Styles';
-import { IStyleProp } from './Styles.types';
+import { flattenStyle, mergeAndFlattenStyles, mergeStyles } from './mergeStyles';
+import { StyleProp } from './mergeStyles.types';
 
 interface IFakeStyle {
   backgroundColor?: string;
@@ -9,47 +9,47 @@ interface IFakeStyle {
   ':hover'?: IFakeStyle;
 }
 
-type IFakeStyleProp = IStyleProp<IFakeStyle>;
+type IFakeStyleProp = StyleProp<IFakeStyle>;
 
 const s1: IFakeStyleProp = [
   { backgroundColor: 'blue' },
-  [{ color: 'red', borderWidth: 1 }, { fontFamily: 'segoe' }, [{ backgroundColor: 'bodyBackground' }]]
+  [{ color: 'red', borderWidth: 1 }, { fontFamily: 'segoe' }, [{ backgroundColor: 'bodyBackground' }]],
 ];
 
 const s1flatten: IFakeStyleProp = {
   backgroundColor: 'bodyBackground',
   color: 'red',
   borderWidth: 1,
-  fontFamily: 'segoe'
+  fontFamily: 'segoe',
 };
 
 const s2: IFakeStyleProp = {
   borderWidth: 2,
   fontFamily: 'primary',
-  color: 'bodyText'
+  color: 'bodyText',
 };
 
 const sMerged: IFakeStyleProp = {
   backgroundColor: 'bodyBackground',
   borderWidth: 2,
   fontFamily: 'primary',
-  color: 'bodyText'
+  color: 'bodyText',
 };
 
 const sSelector: IFakeStyleProp = {
   borderWidth: 1,
   ':hover': {
     borderWidth: 2,
-    fontFamily: 'primary'
-  }
+    fontFamily: 'primary',
+  },
 };
 
 const sSelector2: IFakeStyleProp = {
   backgroundColor: 'white',
   ':hover': {
     backgroundColor: 'black',
-    borderWidth: 3
-  }
+    borderWidth: 3,
+  },
 };
 
 const sArraySelector: IFakeStyleProp = [[sSelector]];
@@ -62,8 +62,8 @@ const sMergedSelectors: IFakeStyleProp = {
   ':hover': {
     borderWidth: 3,
     fontFamily: 'primary',
-    backgroundColor: 'black'
-  }
+    backgroundColor: 'black',
+  },
 };
 
 describe('Style flatten and merge tests', () => {

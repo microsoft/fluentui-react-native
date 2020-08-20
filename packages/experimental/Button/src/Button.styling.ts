@@ -1,5 +1,5 @@
 import { buttonName, ButtonTokens, ButtonSlotProps, ButtonProps } from './Button.types';
-import { ITheme, UseStylingOptions, buildProps } from '@fluentui-react-native/experimental-framework';
+import { ITheme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
 
 export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, ButtonTokens> = {
@@ -13,24 +13,24 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
       disabled: {
         backgroundColor: t.colors.buttonBackgroundDisabled,
         color: t.colors.buttonTextDisabled,
-        borderColor: t.colors.buttonBorderDisabled
+        borderColor: t.colors.buttonBorderDisabled,
       },
       hovered: {
         backgroundColor: t.colors.buttonBackgroundHovered,
         color: t.colors.buttonTextHovered,
-        borderColor: t.colors.buttonBorderHovered as string
+        borderColor: t.colors.buttonBorderHovered as string,
       },
       pressed: {
         backgroundColor: t.colors.buttonBackgroundPressed,
         color: t.colors.buttonTextPressed,
-        borderColor: t.colors.buttonBorderPressed as string
+        borderColor: t.colors.buttonBorderPressed as string,
       },
       focused: {
         borderColor: t.colors.buttonBorderFocused,
-        color: t.colors.buttonTextHovered
-      }
+        color: t.colors.buttonTextHovered,
+      },
     }),
-    buttonName
+    buttonName,
   ],
   states: ['hovered', 'focused', 'pressed', 'disabled'],
   slotProps: {
@@ -42,10 +42,10 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
           flexDirection: 'row',
           alignSelf: 'flex-start',
           backgroundColor: tokens.backgroundColor,
-          ...borderStyles.from(tokens, theme)
-        }
+          ...borderStyles.from(tokens, theme),
+        },
       }),
-      ['backgroundColor', ...borderStyles.keys]
+      ['backgroundColor', ...borderStyles.keys],
     ),
     stack: {
       style: {
@@ -57,26 +57,26 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
         alignSelf: 'flex-start',
         minHeight: 32,
         minWidth: 80,
-        justifyContent: 'center'
-      }
+        justifyContent: 'center',
+      },
     },
     content: buildProps(
       (tokens: ButtonTokens, theme: ITheme) => ({
         style: {
           color: tokens.color,
-          ...fontStyles.from(tokens, theme)
-        }
+          ...fontStyles.from(tokens, theme),
+        },
       }),
-      ['color', ...fontStyles.keys]
+      ['color', ...fontStyles.keys],
     ),
     icon: buildProps(
       (tokens: ButtonTokens) => ({
         style: {
           color: tokens.iconColor || tokens.color,
-          overlayColor: tokens.iconColor
-        }
+          overlayColor: tokens.iconColor,
+        },
       }),
-      ['color', 'iconColor']
-    )
-  }
+      ['color', 'iconColor'],
+    ),
+  },
 };
