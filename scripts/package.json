@@ -14,9 +14,6 @@
     "verify-api": "echo no api to verify",
     "update-api": "echo no api to update"
   },
-  "dependencies": {
-    "@fluentui-react-native/build-tools": "0.3.0"
-  },
   "peerDependencies": {
     "@babel/core": "^7.8.0",
     "just-scripts": ">=0.36.1"
