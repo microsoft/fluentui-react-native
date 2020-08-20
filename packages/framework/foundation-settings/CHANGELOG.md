@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/foundation-settings
 
-This log was last generated on Mon, 17 Aug 2020 22:08:34 GMT and should not be manually modified.
+This log was last generated on Thu, 20 Aug 2020 00:14:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Thu, 20 Aug 2020 00:14:01 GMT
+
+### Minor changes
+
+- split mergeProps and mergeStyles out of foundation-settings (jasonmo@microsoft.com)
 
 ## 0.6.4
 

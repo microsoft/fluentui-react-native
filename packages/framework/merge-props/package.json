@@ -1,7 +1,7 @@
 {
-  "name": "@fluentui-react-native/composition",
-  "version": "0.3.5",
-  "description": "Composition factories for building HOCs",
+  "name": "@fluentui-react-native/merge-props",
+  "version": "0.1.1",
+  "description": "Utility for merging props with styles and caching style combinations",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/ui-fabric-react-native"
@@ -16,14 +16,14 @@
   "scripts": {
     "build": "fluentui-scripts build",
     "bundle": "fluentui-scripts bundle",
+    "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
+    "test": "fluentui-scripts jest",
     "code-style": "fluentui-scripts code-style",
-    "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
-    "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
     "verify-api": "fluentui-scripts verify-api-extractor",
     "update-api": "fluentui-scripts update-api-extractor"
@@ -33,14 +33,11 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui-react-native/immutable-merge": "^1.0.1",
-    "@fluentui-react-native/use-slots": ">=0.3.6 <1.0.0",
-    "@fluentui-react-native/use-styling": ">=0.2.4 <1.0.0"
+    "@fluentui-react-native/memo-cache": "^1.0.2"
   },
   "devDependencies": {
+    "@types/jest": "^19.2.2",
     "@uifabricshared/build-native": "^0.1.1",
-    "react-native": "^0.62.2"
-  },
-  "peerDependencies": {
-    "react-native": ">=0.60.0"
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
   }
 }

@@ -1,4 +1,5 @@
-import { mergeProps, ISlotProps } from '@uifabricshared/foundation-settings';
+import { ISlotProps } from '@uifabricshared/foundation-settings';
+import { mergeProps } from '@fluentui-react-native/merge-props';
 import {
   ITargetHasToken,
   IStyleFactoryOperation,
@@ -6,7 +7,7 @@ import {
   IStyleFactories,
   IStyleFinalizer,
   IStyleFactoryFunction,
-  IStyleFactoryFunctionRaw
+  IStyleFactoryFunctionRaw,
 } from './Token.types';
 import { ITokenPropInfo, ICachedPropHandlers } from './Token.internal';
 import { GetMemoValue } from '@fluentui-react-native/memo-cache';
@@ -20,7 +21,7 @@ import { GetMemoValue } from '@fluentui-react-native/memo-cache';
  */
 export function styleFunction<TProps, TTokens, TTheme>(
   fn: IStyleFactoryFunctionRaw<TProps, TTokens, TTheme>,
-  keys: (keyof TTokens)[]
+  keys: (keyof TTokens)[],
 ): IStyleFactoryFunction<TProps, TTokens, TTheme> {
   (fn as IStyleFactoryFunction<TProps, TTokens, TTheme>)._keys = keys;
   return fn as IStyleFactoryFunction<TProps, TTokens, TTheme>;
@@ -42,7 +43,7 @@ function _lookupOrCopyToken<TTokens, TTheme>(
   props: TTokens,
   theme: TTheme,
   entry: IStyleFactoryOperation<TTokens, TTheme>,
-  style: object
+  style: object,
 ): void {
   const { source: key, lookup } = entry;
   if (props[key] !== undefined) {
@@ -58,7 +59,7 @@ function _lookupOrCopyToken<TTokens, TTheme>(
 function _processSlotEntries<TProps, TTokens, TTheme>(
   props: TTokens,
   theme: TTheme,
-  mapping: ITokensForSlot<TProps, TTokens, TTheme>
+  mapping: ITokensForSlot<TProps, TTokens, TTheme>,
 ): TProps {
   const slotProps: { style?: object } = {};
   if (mapping.toStyle.length > 0) {
@@ -79,7 +80,7 @@ function _processSlotEntries<TProps, TTokens, TTheme>(
 function _processStyleFunctions<TProps, TTokens, TTheme>(
   functions: IStyleFactoryFunction<TProps, TTokens, TTheme>[],
   tokenProps: TTokens,
-  theme: TTheme
+  theme: TTheme,
 ): TProps | undefined {
   if (functions && functions.length > 0) {
     return mergeProps(...functions.map(fn => fn(tokenProps, theme)));
@@ -99,7 +100,7 @@ function _getCachedPropsForSlot<TProps, TTokens, TTheme>(
   getMemoValue: GetMemoValue<TProps>,
   keys: string[],
   mappings: ITokensForSlot<TProps, TTokens, TTheme>,
-  finalizer?: IStyleFinalizer<TProps>
+  finalizer?: IStyleFinalizer<TProps>,
 ): TProps {
   // get the cache key for this entry
   const { tokens, tokenKeys, deltas } = tokenProps;
@@ -108,7 +109,7 @@ function _getCachedPropsForSlot<TProps, TTokens, TTheme>(
       (props as unknown) as object,
       slotName === 'root' ? tokenKeys : undefined,
       (_processSlotEntries(tokens, theme, mappings) as unknown) as object,
-      _processStyleFunctions(mappings.functions, tokens, theme)
+      _processStyleFunctions(mappings.functions, tokens, theme),
     );
     if (finalizer) {
       newProps = finalizer(newProps, slotName);
@@ -127,7 +128,7 @@ function _getCachedPropsForSlot<TProps, TTokens, TTheme>(
  */
 export function buildComponentTokens<TSlotProps extends ISlotProps, TTokens, TTheme>(
   factories: IStyleFactories<TSlotProps, TTokens, TTheme>,
-  hasToken?: ITargetHasToken
+  hasToken?: ITargetHasToken,
 ): IComponentTokens<TSlotProps, TTokens, TTheme> {
   const tokenKeys: { [key: string]: undefined } = {};
   const handlers: ICachedPropHandlers<TSlotProps, TTokens, TTheme> = {} as ICachedPropHandlers<TSlotProps, TTokens, TTheme>;
@@ -174,7 +175,7 @@ export function buildComponentTokens<TSlotProps extends ISlotProps, TTokens, TTh
       tokenProps: ITokenPropInfo<TTokens>,
       theme: TTheme,
       slotName: string,
-      getValue: GetMemoValue<IPropsForSlot>
+      getValue: GetMemoValue<IPropsForSlot>,
     ) => {
       const keys = Object.getOwnPropertyNames(slotKeys);
       return _getCachedPropsForSlot<IPropsForSlot, TTokens, TTheme>(props, tokenProps, theme, slotName, getValue, keys, mappings);
