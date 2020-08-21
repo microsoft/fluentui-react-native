@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "support shouldFocusOnMount and shouldFocusOnContainer props",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "lehon@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-08-20T17:43:13.138Z"
+}
