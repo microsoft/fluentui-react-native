@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import { Button, ContextualMenu, ContextualMenuItem } from '@fluentui/react-native';
+import { Text, View, Switch } from 'react-native';
+import { Button, ContextualMenu, ContextualMenuItem, Separator } from '@fluentui/react-native';
 import { CONTEXTUALMENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
@@ -9,8 +9,13 @@ const contextualMenu: React.FunctionComponent<{}> = () => {
 
   const [showContextualMenu, setShowContextualMenu] = React.useState(false);
   const [isContextualMenuVisible, setIsContextualMenuVisible] = React.useState(false);
-
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
+
+  const [focusOnMount, setShouldFocusOnMount] = React.useState(true);
+  const toggleFocusOnMount = React.useCallback((value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
+
+  const [focusOnContainer, setShouldFocusOnContainer] = React.useState(false);
+  const toggleFocusOnContainer = React.useCallback((value) => setShouldFocusOnContainer(value), [setShouldFocusOnContainer]);
 
   const toggleShowContextualMenu = React.useCallback(() => {
     setShowContextualMenu(!showContextualMenu);
@@ -35,21 +40,39 @@ const contextualMenu: React.FunctionComponent<{}> = () => {
 
   return (
     <View>
-      <View style={{ flexDirection: 'column', paddingVertical: 5 }}>
-        <Text>
-          <Text>Menu Visibility: </Text>
-          {isContextualMenuVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
-        </Text>
-        <Text>
-          <Text>Last Menu Item Clicked: </Text>
-          {lastMenuItemClicked > 0 ? (
-            <Text style={{ color: 'blue' }}>{lastMenuItemClicked}</Text>
-          ) : (
-            <Text style={{ color: 'blue' }}>none</Text>
-          )}
-        </Text>
-        <Button content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
+      <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
+
+        <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
+          <View style={{ flexDirection: 'row' }}>
+            <Text>Should Focus on Mount</Text>
+            <Switch value={focusOnMount} onValueChange={toggleFocusOnMount} />
+          </View>
+
+          <View style={{ flexDirection: 'row' }}>
+            <Text>Should Focus on Container</Text>
+            <Switch value={focusOnContainer} onValueChange={toggleFocusOnContainer} />
+          </View>
+        </View>
+
+        <Separator vertical />
+
+        <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
+          <Text>
+            <Text>Menu Visibility: </Text>
+            {isContextualMenuVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
+          </Text>
+          <Text>
+            <Text>Last Menu Item Clicked: </Text>
+            {lastMenuItemClicked > 0 ? (
+              <Text style={{ color: 'blue' }}>{lastMenuItemClicked}</Text>
+            ) : (
+                <Text style={{ color: 'blue' }}>none</Text>
+              )}
+          </Text>
+          <Button content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
+        </View>
       </View>
+
       {showContextualMenu && (
         <ContextualMenu
           target={stdBtnRef}
@@ -57,9 +80,11 @@ const contextualMenu: React.FunctionComponent<{}> = () => {
           onShow={onShowContextualMenu}
           accessibilityLabel="Standard ContextualMenu"
           onItemClick={onItemClick}
-          setShowMenu={setShowContextualMenu}
+          setShowMenu={toggleShowContextualMenu}
+          shouldFocusOnMount={focusOnMount}
+          shouldFocusOnContainer={focusOnContainer}
         >
-          <ContextualMenuItem text="MenuItem 1" itemKey="1" accessibilityLabel="First Menu Item" />
+          <ContextualMenuItem text="MenuItem 1" itemKey="1" />
           <ContextualMenuItem text="MenuItem 2" itemKey="2" />
           <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
           <ContextualMenuItem text="MenuItem 4" itemKey="4" />
@@ -68,7 +93,7 @@ const contextualMenu: React.FunctionComponent<{}> = () => {
       )}
     </View>
   );
-};
+}
 
 const contextualMenuSections: TestSection[] = [
   {
@@ -90,5 +115,5 @@ export const ContextualMenuTest: React.FunctionComponent<{}> = () => {
   const description =
     'ContextualMenus are lists of commands that are based on the context of selection, mouse hover or keyboard focus. They are one of the most effective and highly used command surfaces, and can be used in a variety of places.\n\nThere are variants that originate from a command bar, or from cursor or focus. Those that come from CommandBars use a beak that is horizontally centered on the button. Ones that come from right click and menu button do not have a beak, but appear to the right and below the cursor. ContextualMenus can have submenus from commands, show selection checks, and icons.\n\nOrganize commands in groups divided by rules. This helps users remember command locations, or find less used commands based on proximity to others. One should also group sets of mutually exclusive or multiple selectable options. Use icons sparingly, for high value commands, and don’t mix icons with selection checks, as it makes parsing commands difficult. Avoid submenus of submenus as they can be difficult to invoke or remember.';
 
-  return <Test name="Checkbox Test" description={description} sections={contextualMenuSections} status={status}></Test>;
+  return <Test name="ContextualMenu Test" description={description} sections={contextualMenuSections} status={status}></Test>;
 };
