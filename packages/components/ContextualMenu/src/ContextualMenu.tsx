@@ -63,7 +63,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
       },
       container: {
         accessible: shouldFocusOnContainer,
-        ... { acceptsKeyboardFocus: shouldFocusOnContainer },
+        acceptsKeyboardFocus: shouldFocusOnContainer,
       }
 
     });
