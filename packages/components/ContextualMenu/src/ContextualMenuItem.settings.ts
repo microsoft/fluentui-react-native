@@ -11,6 +11,7 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
     root: {
       accessible: true,
       accessibilityRole: 'menuitem',
+      // Since ViewProps does not support this prop, force the prop against type checking
       ...{ acceptsKeyboardFocus: true },
       style: {
         display: 'flex',
