@@ -23,25 +23,25 @@ const shimmer: React.FunctionComponent<{}> = () => {
 };
 
 const stylizedShimmer: React.FunctionComponent<{}> = () => {
+
+  const CustomizedShimmer = Shimmer.customize({
+    tokens: {
+      tintColor: processColor('#F0F0FF'),
+      cornerRadius: 10,
+      labelCornerRadius: 10,
+      usesTextHeightForLabels: false,
+      labelHeight: 15,
+      alpha: 0,
+      width: 180,
+      angle: 0,
+      speed: 400,
+      delay: 0.1,
+    },
+  });
+
   return (
     <Stack style={stackStyle}>
-      <Shimmer
-        style={{ flex: 1, alignItems: 'center' }}
-        appearance={{
-          tintColor: processColor('#F0F0FF'),
-          cornerRadius: 10,
-          labelCornerRadius: 10,
-          usesTextHeightForLabels: false,
-          labelHeight: 15,
-        }}
-        shimmerAppearance={{
-          alpha: 0,
-          width: 180,
-          angle: 0,
-          speed: 400,
-          delay: 0.1,
-        }}
-      >
+      <CustomizedShimmer style={{ flex: 1, alignItems: 'center' }}>
         <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row', marginStart: 16, marginEnd: 16 }}>
           <View style={{ width: 40, height: 40 }} />
           <View style={{ flexDirection: 'column', flex: 2, marginLeft: 16 }}>
@@ -49,7 +49,7 @@ const stylizedShimmer: React.FunctionComponent<{}> = () => {
             <Text style={{ marginTop: 3, width: '30%' }}>{''}</Text>
           </View>
         </View>
-      </Shimmer>
+      </CustomizedShimmer>
     </Stack>
   );
 };
