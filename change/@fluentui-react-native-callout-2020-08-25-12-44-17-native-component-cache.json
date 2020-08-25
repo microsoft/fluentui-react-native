@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "add native component cache for consolidating requireNativeComponent calls",
-  "packageName": "@fluentui-react-native/callout",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-08-25T19:44:10.040Z"
-}

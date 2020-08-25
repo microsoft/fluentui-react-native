@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/focus-trap-zone",
   "entries": [
     {
+      "date": "Tue, 25 Aug 2020 21:17:13 GMT",
+      "tag": "@fluentui-react-native/focus-trap-zone_v0.4.10",
+      "version": "0.4.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add native component cache for consolidating requireNativeComponent calls",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f0cae19d5a52acc208b485e34dcf4cd3dc3444c2",
+            "package": "@fluentui-react-native/focus-trap-zone"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 17 Aug 2020 22:08:34 GMT",
       "tag": "@fluentui-react-native/focus-trap-zone_v0.4.8",
       "version": "0.4.8",
