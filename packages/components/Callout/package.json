@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@uifabricshared/foundation-compose": "^1.6.80",
+    "@fluentui-react-native/component-cache": "^1.0.0",
     "@fluentui-react-native/interactive-hooks": ">=0.5.1 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.5.6 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.6.73 <1.0.0",
