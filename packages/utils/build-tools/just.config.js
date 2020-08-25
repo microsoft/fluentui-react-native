@@ -18,8 +18,8 @@ module.exports = function preset() {
       target: 'es6',
       outDir: 'lib',
       module: 'commonjs',
-      ...(argv().production && { inlineSources: true, sourceRoot: path.relative(libPath, srcPath) })
-    })
+      ...(argv().production && { inlineSources: true, sourceRoot: path.relative(libPath, srcPath) }),
+    }),
   );
 
   task('lint', eslintTask({ files: ['src/.'] }));

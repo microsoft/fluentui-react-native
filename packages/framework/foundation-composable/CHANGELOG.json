@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Thu, 20 Aug 2020 00:14:01 GMT",
+      "tag": "@uifabricshared/foundation-composable_v0.6.73",
+      "version": "0.6.73",
+      "comments": {
+        "patch": [
+          {
+            "comment": "update code to use split out merge-props package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f75e45ede85b8ebc6cd11cc66fbb1baedaea39b9",
+            "package": "@uifabricshared/foundation-composable"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 17 Aug 2020 22:08:34 GMT",
       "tag": "@uifabricshared/foundation-composable_v0.6.72",
       "version": "0.6.72",

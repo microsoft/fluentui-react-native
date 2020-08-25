@@ -1,6 +1,6 @@
 {
   "name": "@fluentui/react-native",
-  "version": "0.15.86",
+  "version": "0.15.88",
   "description": "A react-native component library that implements the Fluent Design System.",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,18 +26,18 @@
   },
   "dependencies": {
     "@fluentui-react-native/interactive-hooks": ">=0.5.1 <1.0.0",
-    "@fluentui-react-native/button": ">=0.10.8 <1.0.0",
-    "@fluentui-react-native/callout": ">=0.11.8 <1.0.0",
-    "@fluentui-react-native/checkbox": ">=0.5.2 <1.0.0",
-    "@fluentui-react-native/contextual-menu": "0.3.8",
-    "@fluentui-react-native/focus-trap-zone": ">=0.4.8 <1.0.0",
-    "@fluentui-react-native/link": ">=0.8.9 <1.0.0",
-    "@fluentui-react-native/persona": ">=0.5.80 <1.0.0",
-    "@fluentui-react-native/persona-coin": ">=0.3.83 <1.0.0",
-    "@fluentui-react-native/pressable": ">=0.3.84 <1.0.0",
-    "@fluentui-react-native/radio-group": ">=0.4.5 <1.0.0",
-    "@fluentui-react-native/separator": ">=0.4.7 <1.0.0",
-    "@fluentui-react-native/text": ">=0.6.7 <1.0.0"
+    "@fluentui-react-native/button": ">=0.10.9 <1.0.0",
+    "@fluentui-react-native/callout": ">=0.11.9 <1.0.0",
+    "@fluentui-react-native/checkbox": ">=0.5.3 <1.0.0",
+    "@fluentui-react-native/contextual-menu": "0.3.10",
+    "@fluentui-react-native/focus-trap-zone": ">=0.4.9 <1.0.0",
+    "@fluentui-react-native/link": ">=0.8.10 <1.0.0",
+    "@fluentui-react-native/persona": ">=0.5.81 <1.0.0",
+    "@fluentui-react-native/persona-coin": ">=0.3.84 <1.0.0",
+    "@fluentui-react-native/pressable": ">=0.3.85 <1.0.0",
+    "@fluentui-react-native/radio-group": ">=0.4.6 <1.0.0",
+    "@fluentui-react-native/separator": ">=0.4.8 <1.0.0",
+    "@fluentui-react-native/text": ">=0.6.8 <1.0.0"
   },
   "devDependencies": {
     "@types/react-native": "^0.62.0",
