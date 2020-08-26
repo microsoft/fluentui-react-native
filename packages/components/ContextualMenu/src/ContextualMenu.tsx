@@ -46,6 +46,11 @@ export const ContextualMenu = compose<ContextualMenuType>({
         setShowMenu(false);
       }, [setShowMenu]);
 
+    const [containerFocus, setContainerFocus] = React.useState(true);
+    const toggleContainerFocus = React.useCallback(() => {
+      setContainerFocus(false);
+    }, [setContainerFocus]);
+
     const state: ContextualMenuState = {
       context: {
         selectedKey: data.selectedKey,
@@ -63,7 +68,8 @@ export const ContextualMenu = compose<ContextualMenuType>({
       },
       container: {
         accessible: shouldFocusOnContainer,
-        acceptsKeyboardFocus: shouldFocusOnContainer,
+        acceptsKeyboardFocus: shouldFocusOnContainer && containerFocus,
+        onBlur: toggleContainerFocus
       }
 
     });
