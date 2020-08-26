@@ -1,0 +1,8 @@
+{
+  "type": "none",
+  "comment": "only allow menu container to focus on mount",
+  "packageName": "@fluentui-react-native/tokens",
+  "email": "lehon@microsoft.com",
+  "dependentChangeType": "none",
+  "date": "2020-08-26T19:01:32.548Z"
+}
