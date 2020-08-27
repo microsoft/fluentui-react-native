@@ -1,4 +1,4 @@
-import { Button } from '@fluentui-react-native/button';
+import { Button } from '@fluentui/react-native';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
@@ -7,7 +7,7 @@ import { stackStyle } from '../Common/styles';
 
 export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
   const [state, setState] = React.useState({
-    focused: false
+    focused: false,
   });
   const buttonRef = React.useRef<IFocusable>(null);
 
@@ -17,7 +17,6 @@ export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
       const node = findNodeHandle(buttonRef.current);
       console.log(node);
       buttonRef.current.focus();
-
     }
   }, [state, setState]);
 

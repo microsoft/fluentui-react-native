@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { IRenderData, ISlotWithFilter, IComposable, IWithComposable, ISlots, IPropFilter, INativeSlotType } from './Composable.types';
-import { mergeSettings, mergeProps, ISlotProps } from '@uifabricshared/foundation-settings';
+import { mergeSettings, ISlotProps } from '@uifabricshared/foundation-settings';
+import { mergeProps } from '@fluentui-react-native/merge-props';
 
 export type ISlotFn<TProps> = React.FunctionComponent<TProps> & {
   _canCompose?: boolean;
@@ -40,7 +41,7 @@ function _createSlotRenderFunction<TProps>(fn: React.FunctionComponent<TProps>):
 
 function createSlotRenderInfo<TProps, TSlotProps extends ISlotProps, TState>(
   composable: IComposable<TProps, TSlotProps, TState>,
-  slotInfo?: ISlotWithFilter
+  slotInfo?: ISlotWithFilter,
 ): ISlotRenderInfo<TProps, TSlotProps, TState> {
   const renderInfo: ISlotRenderInfo<TProps, TSlotProps, TState> = { composable, slotInfo };
   const slots = composable && composable.slots;
@@ -78,7 +79,7 @@ function createSlotRenderInfo<TProps, TSlotProps extends ISlotProps, TState>(
 
 function useUpdateRenderData<TProps, TSlotProps, TState>(
   props: TProps,
-  info: ISlotRenderInfo<TProps, TSlotProps, TState>
+  info: ISlotRenderInfo<TProps, TSlotProps, TState>,
 ): { renderData: IRenderData<TSlotProps, TState>; Slots: ISlots<TSlotProps> } {
   // update the render data for this level of the hierarchy
   if (info.composable) {
@@ -109,7 +110,7 @@ function useUpdateRenderData<TProps, TSlotProps, TState>(
  */
 export function useCompoundPrepare<TProps, TSlotProps extends ISlotProps, TState>(
   props: TProps,
-  composable: IComposable<TProps, TSlotProps, TState>
+  composable: IComposable<TProps, TSlotProps, TState>,
 ): { renderData: IRenderData<TSlotProps, TState>; Slots: ISlots<TSlotProps> } {
   // create the slot render info (which may be a tree) and store it into state once.  Note that this will also create any
   // needed closures for the slots to ensure they don't get recreated over the lifetime of the component

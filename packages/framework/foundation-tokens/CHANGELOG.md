@@ -1,8 +1,32 @@
 # Change Log - @uifabricshared/foundation-tokens
 
-This log was last generated on Sat, 01 Aug 2020 00:34:34 GMT and should not be manually modified.
+This log was last generated on Thu, 20 Aug 2020 00:14:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.4
+
+Thu, 20 Aug 2020 00:14:01 GMT
+
+### Patches
+
+- update code to use split out merge-props package (jasonmo@microsoft.com)
+
+## 0.7.3
+
+Mon, 17 Aug 2020 22:08:34 GMT
+
+### Patches
+
+- fix dependency errors (jasonmo@microsoft.com)
+
+## 0.7.2
+
+Thu, 13 Aug 2020 04:48:19 GMT
+
+### Patches
+
+- release @fluentui-react-native/memo-cache (jasonmo@microsoft.com)
 
 ## 0.7.0
 

@@ -1,6 +1,7 @@
 import { IMockTheme } from './MockTheme';
 import { ITargetHasToken, IComponentTokens, IStyleFactories } from './Token.types';
-import { IStyleProp, mergeSettings, ISlotProps, IComponentSettings } from '@uifabricshared/foundation-settings';
+import { mergeSettings, ISlotProps, IComponentSettings } from '@uifabricshared/foundation-settings';
+import { StyleProp } from '@fluentui-react-native/merge-props';
 import { processTokens } from './Token';
 import { buildComponentTokens } from './Token.function';
 import { GetMemoValue } from '@fluentui-react-native/memo-cache';
@@ -8,7 +9,7 @@ import { GetMemoValue } from '@fluentui-react-native/memo-cache';
 export type ICSSStyle = React.CSSProperties;
 
 export interface IMockBaseProps {
-  style?: IStyleProp<ICSSStyle>;
+  style?: StyleProp<ICSSStyle>;
 }
 
 export type IMockComponentFn<TProps, TSlotProps extends ISlotProps, TTokens> = (
@@ -16,7 +17,7 @@ export type IMockComponentFn<TProps, TSlotProps extends ISlotProps, TTokens> = (
   settings: IComponentSettings<TSlotProps> & { tokens?: TTokens },
   theme: IMockTheme,
   cache: GetMemoValue<any>,
-  recurse?: boolean
+  recurse?: boolean,
 ) => TSlotProps | TProps;
 
 export type IMockComponent<TProps, TSlotProps extends ISlotProps, TTokens> = IMockComponentFn<TProps, TSlotProps, TTokens> & {
@@ -35,13 +36,13 @@ export function stockFakeComponent(
   _settings: ISlotProps,
   _theme: IMockTheme,
   _cache: GetMemoValue<any>,
-  _recurse: boolean
+  _recurse: boolean,
 ): IMockBaseProps {
   return props;
 }
 
 export function mockCreate<TProps extends object, TSlotProps extends ISlotProps, TTokens extends object>(
-  options: IMockComponentOptions<TSlotProps, TTokens>
+  options: IMockComponentOptions<TSlotProps, TTokens>,
 ): IMockComponent<TProps, TSlotProps, TTokens> {
   const slots = options.slots;
   const hasTokens: ITargetHasToken = slots
@@ -52,14 +53,14 @@ export function mockCreate<TProps extends object, TSlotProps extends ISlotProps,
     : undefined;
   const resolvedTokens: IComponentTokens<TSlotProps, TTokens, IMockTheme> = buildComponentTokens<TSlotProps, TTokens, IMockTheme>(
     options.styles,
-    hasTokens
+    hasTokens,
   );
   const fn = (
     props: TProps,
     settings: TSlotProps & { tokens?: TTokens },
     theme: IMockTheme,
     cache: GetMemoValue<any>,
-    recurse?: boolean
+    recurse?: boolean,
   ) => {
     let newSettings = processTokens(props as any, theme, settings as any, resolvedTokens, cache);
     if (recurse) {

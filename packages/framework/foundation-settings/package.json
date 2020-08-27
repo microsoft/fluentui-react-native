@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-settings",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "Settings and style definitions and helpers",
   "repository": {
     "type": "git",
@@ -18,6 +18,7 @@
     "bundle": "fluentui-scripts bundle",
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
     "test": "fluentui-scripts jest",
     "code-style": "fluentui-scripts code-style",
     "lint": "fluentui-scripts eslint",
@@ -32,7 +33,7 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui-react-native/immutable-merge": "^1.0.1",
-    "@fluentui-react-native/memo-cache": ">=0.2.10 <1.0.0"
+    "@fluentui-react-native/merge-props": ">=0.1.1 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

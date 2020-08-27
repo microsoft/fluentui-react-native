@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-compose",
-  "version": "1.6.76",
+  "version": "1.6.80",
   "description": "Compose infrastructure",
   "repository": {
     "type": "git",
@@ -18,6 +18,7 @@
     "bundle": "fluentui-scripts bundle",
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
     "test": "fluentui-scripts jest",
     "code-style": "fluentui-scripts code-style",
     "lint": "fluentui-scripts eslint",
@@ -32,15 +33,23 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui-react-native/immutable-merge": "^1.0.1",
-    "@fluentui-react-native/memo-cache": ">=0.2.10 <1.0.0",
-    "@uifabricshared/themed-settings": ">=0.4.69 <1.0.0",
-    "@uifabricshared/foundation-composable": ">=0.6.70 <1.0.0",
-    "@uifabricshared/foundation-tokens": ">=0.7.1 <1.0.0",
-    "@uifabricshared/theming-react-native": ">=0.7.72 <1.0.0",
-    "@uifabricshared/theming-ramp": ">=0.10.2 <1.0.0"
+    "@uifabricshared/themed-settings": ">=0.4.72 <1.0.0",
+    "@uifabricshared/foundation-composable": ">=0.6.73 <1.0.0",
+    "@uifabricshared/foundation-settings": ">=0.7.0 <1.0.0",
+    "@uifabricshared/foundation-tokens": ">=0.7.4 <1.0.0",
+    "@uifabricshared/theming-react-native": ">=0.7.76 <1.0.0",
+    "@uifabricshared/theming-ramp": ">=0.10.5 <1.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^19.2.2",
-    "@uifabricshared/eslint-config-rules": "^0.1.1"
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "react": "16.11.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0"
+  },
+  "depcheck": {
+    "ignoreMatches": [
+      "@uifabricshared/theming-react-native"
+    ]
   }
 }

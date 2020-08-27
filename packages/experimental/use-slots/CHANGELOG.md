@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/use-slots
 
-This log was last generated on Wed, 12 Aug 2020 23:52:15 GMT and should not be manually modified.
+This log was last generated on Thu, 20 Aug 2020 00:14:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.6
+
+Thu, 20 Aug 2020 00:14:01 GMT
+
+### Patches
+
+- update code to use split out merge-props package (jasonmo@microsoft.com)
+
+## 0.3.5
+
+Mon, 17 Aug 2020 22:08:34 GMT
+
+### Patches
+
+- fix dependency errors (jasonmo@microsoft.com)
+
+## 0.3.4
+
+Thu, 13 Aug 2020 04:48:19 GMT
+
+### Patches
+
+- release @fluentui-react-native/memo-cache (jasonmo@microsoft.com)
 
 ## 0.3.3
 

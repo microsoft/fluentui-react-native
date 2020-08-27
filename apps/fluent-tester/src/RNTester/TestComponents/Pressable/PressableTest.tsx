@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IPressableState, useFocusState, useHoverState, usePressState } from '@fluentui-react-native/interactive-hooks';
-import { Pressable } from '@fluentui-react-native/pressable';
+import { Pressable } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { Square } from '../Common/Square';
 import { Alert, GestureResponderEvent, StyleSheet, View, ViewProps, ViewStyle, Text } from 'react-native';
@@ -13,21 +13,21 @@ const styles = StyleSheet.create({
     padding: 8,
     margin: 4,
     borderStyle: 'dotted',
-    borderColor: 'red'
+    borderColor: 'red',
   },
   solidBorder: {
     borderWidth: 1,
     padding: 8,
     margin: 4,
     borderStyle: 'solid',
-    borderColor: 'black'
+    borderColor: 'black',
   },
   notfocused: {
     borderWidth: 1,
     padding: 8,
     margin: 4,
     borderColor: '#ababab',
-    borderStyle: 'solid'
+    borderStyle: 'solid',
   },
   focused: {
     borderWidth: 1,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     margin: 4,
     borderStyle: 'solid',
     borderColor: 'black',
-    backgroundColor: 'lightblue'
+    backgroundColor: 'lightblue',
   },
   notPressed: {
     borderWidth: 1,
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderColor: '#ababab',
-    borderStyle: 'solid'
+    borderStyle: 'solid',
   },
   pressed: {
     borderWidth: 1,
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     height: 30,
     borderStyle: 'dashed',
     borderColor: 'black',
-    backgroundColor: 'lightgreen'
+    backgroundColor: 'lightgreen',
   },
 });
 
@@ -68,7 +68,7 @@ const FocusComponent: React.FunctionComponent<ViewProps> = () => {
 
   return (
     <Stack {...{ acceptsKeyboardFocus: false }}>
-      <View {...{ acceptsKeyboardFocus: true, ...focusProps } as any} style={focusState.focused ? styles.focused : styles.notfocused} />
+      <View {...({ acceptsKeyboardFocus: true, ...focusProps } as any)} style={focusState.focused ? styles.focused : styles.notfocused} />
     </Stack>
   );
 };
@@ -96,7 +96,6 @@ const PressComponent: React.FunctionComponent<ViewProps> = (props: ViewProps) =>
 };
 
 const pressable: React.FunctionComponent<{}> = () => {
-
   const [hoverProps, hoverState] = useHoverState({});
 
   return (
@@ -124,29 +123,26 @@ const pressable: React.FunctionComponent<{}> = () => {
       </Stack>
     </Stack>
   );
-}
+};
 
 const pressableSections: TestSection[] = [
   {
     name: 'Pressable Components',
     testID: PRESSABLE_TESTPAGE,
-    component: pressable
-  }
+    component: pressable,
+  },
 ];
 
 export const PressableTest: React.FunctionComponent<{}> = () => {
-
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',
-    androidStatus: 'Backlog'
-  }
+    androidStatus: 'Backlog',
+  };
 
-  const description = 'No description.'
+  const description = 'No description.';
 
-  return (
-    <Test name="Pressable Test" description={description} sections={pressableSections} status={status}></Test>
-  );
+  return <Test name="Pressable Test" description={description} sections={pressableSections} status={status}></Test>;
 };

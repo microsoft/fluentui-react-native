@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "./lib",
     "target": "es2015",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -23,5 +24,6 @@
   "baseUrl": ".",
   "paths": {
     "*": ["src/*"]
-  }
+  },
+  "include": ["src"]
 }

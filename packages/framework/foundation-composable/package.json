@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-composable",
-  "version": "0.6.70",
+  "version": "0.6.73",
   "description": "Composable component building blocks",
   "repository": {
     "type": "git",
@@ -18,6 +18,7 @@
     "bundle": "fluentui-scripts bundle",
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
     "test": "fluentui-scripts jest",
     "code-style": "fluentui-scripts code-style",
     "lint": "fluentui-scripts eslint",
@@ -31,7 +32,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": ">=0.6.2 <1.0.0"
+    "@fluentui-react-native/merge-props": ">=0.1.1 <1.0.0",
+    "@uifabricshared/foundation-settings": ">=0.7.0 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^19.2.2",

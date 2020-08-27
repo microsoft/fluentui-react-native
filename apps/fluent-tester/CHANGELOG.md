@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 11 Aug 2020 19:53:33 GMT and should not be manually modified.
+This log was last generated on Fri, 21 Aug 2020 03:35:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.0
+
+Fri, 21 Aug 2020 03:35:36 GMT
+
+### Minor changes
+
+- support shouldFocusOnMount and shouldFocusOnContainer props (lehon@microsoft.com)
+
+## 0.3.6
+
+Mon, 17 Aug 2020 22:08:34 GMT
+
+### Patches
+
+- fix dependency errors (jasonmo@microsoft.com)
+
+## 0.3.3
+
+Thu, 13 Aug 2020 19:49:20 GMT
+
+### Patches
+
+- change text color (email not defined)
 
 ## 0.3.0
 

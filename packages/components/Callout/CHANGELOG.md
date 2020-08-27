@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Tue, 11 Aug 2020 19:53:33 GMT and should not be manually modified.
+This log was last generated on Tue, 25 Aug 2020 21:17:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.10
+
+Tue, 25 Aug 2020 21:17:13 GMT
+
+### Patches
+
+- add native component cache for consolidating requireNativeComponent calls (jasonmo@microsoft.com)
+
+## 0.11.8
+
+Mon, 17 Aug 2020 22:08:34 GMT
+
+### Patches
+
+- fix dependency errors (jasonmo@microsoft.com)
 
 ## 0.11.4
 

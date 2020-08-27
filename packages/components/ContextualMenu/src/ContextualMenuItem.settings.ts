@@ -11,6 +11,8 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
     root: {
       accessible: true,
       accessibilityRole: 'menuitem',
+      // Since ViewProps does not support this prop, force the prop against type checking
+      ...{ acceptsKeyboardFocus: true },
       style: {
         display: 'flex',
         alignItems: 'flex-start',
@@ -60,7 +62,8 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
       focused: {
         tokens: {
           borderColor: 'buttonBorderFocused',
-          color: 'buttonTextHovered'
+          color: 'buttonTextHovered',
+          backgroundColor: 'buttonBackgroundHovered'
         }
       }
     }
