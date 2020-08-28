@@ -1,8 +1,0 @@
-{
-  "type": "none",
-  "comment": "only allow menu container to focus on mount",
-  "packageName": "@uifabricshared/themed-settings",
-  "email": "lehon@microsoft.com",
-  "dependentChangeType": "none",
-  "date": "2020-08-26T19:01:26.497Z"
-}
