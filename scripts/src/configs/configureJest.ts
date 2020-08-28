@@ -3,8 +3,8 @@
 import path from 'path';
 import { mergeConfigs } from './mergeConfigs';
 import { getPackageInfo } from 'just-repo-utils';
-import { nodeModulesToRoot, resolveModule } from './resolvePaths';
-import { ensurePlatform, PlatformValue, getRNVersion, getAllPlatforms } from './platforms';
+import { nodeModulesToRoot, resolveModule } from '../utils/resolvePaths';
+import { ensurePlatform, PlatformValue, getRNVersion, getAllPlatforms } from '../utils/platforms';
 
 const moduleFileExtensions = ['ts', 'tsx', 'js', 'jsx', 'json'];
 
@@ -18,7 +18,7 @@ export function configureJest(customConfig?: object): object {
       // map specific modules to the appropriate mocks
       moduleNameMapper: {
         '\\.(scss)$': path.resolve(__dirname, 'jest/jest-style-mock.js'),
-        KeyCodes: path.resolve(__dirname, 'jest/jest-mock.js')
+        KeyCodes: path.resolve(__dirname, 'jest/jest-mock.js'),
       },
       moduleFileExtensions,
       moduleDirectories: nodeModulesToRoot(),
@@ -27,7 +27,7 @@ export function configureJest(customConfig?: object): object {
 
       // use babel-jest to transform files including typescript
       transform: {
-        '^.+\\.(js|ts|tsx)?$': 'babel-jest'
+        '^.+\\.(js|ts|tsx)?$': 'babel-jest',
       },
 
       // ignore our own packages in node_modules
@@ -37,12 +37,12 @@ export function configureJest(customConfig?: object): object {
       testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$',
       testURL: 'http://localhost',
 
-      verbose: false
+      verbose: false,
 
       // some options which have been removed (but saved here for posterity/easy re-adding)
       // setupFiles: [path.resolve(__dirname, 'jest-setup.js')],
     },
-    customConfig
+    customConfig,
   );
 }
 
@@ -59,22 +59,22 @@ export function configureReactNativeJest(platform?: PlatformValue, customConfig?
       roots: ['<rootDir>/src', rnPath],
       moduleFileExtensions,
       transform: {
-        '^.+\\.(js|ts|tsx)?$': ['babel-jest', { cwd: __dirname, presets: ['module:metro-react-native-babel-preset'] }]
+        '^.+\\.(js|ts|tsx)?$': ['babel-jest', { cwd: __dirname, presets: ['module:metro-react-native-babel-preset'] }],
       },
       preset: 'react-native',
       moduleNameMapper: {
         '^react-native$': require.resolve(rnPackage),
-        '^react-native/(.*)': rnPath + '$1'
+        '^react-native/(.*)': rnPath + '$1',
       },
       haste: {
         defaultPlatform: platform,
         platforms: getAllPlatforms(),
         // hasteImplModulePath: rnPath + 'jest/hasteImpl.js',
-        providesModuleNodeModules: [rnPackage]
+        providesModuleNodeModules: [rnPackage],
       },
       transformIgnorePatterns: ['node_modules/(?!(react-native)/)'],
-      verbose: false
+      verbose: false,
     },
-    customConfig
+    customConfig,
   );
 }

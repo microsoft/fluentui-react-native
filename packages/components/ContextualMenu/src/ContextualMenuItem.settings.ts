@@ -4,9 +4,10 @@ import { IComposeSettings } from '@uifabricshared/foundation-compose';
 export const settings: IComposeSettings<ContextualMenuItemType> = [
   {
     tokens: {
-      backgroundColor: 'buttonBackground',
-      color: 'buttonText',
-      borderColor: 'buttonBorder'
+      backgroundColor: 'menuBackground',
+      color: 'menuItemText',
+      borderColor: 'transparent',
+      borderWidth: 1
     },
     root: {
       accessible: true,
@@ -40,30 +41,33 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
     _overrides: {
       disabled: {
         tokens: {
-          backgroundColor: 'buttonBackgroundDisabled',
-          color: 'buttonTextDisabled',
-          borderColor: 'buttonBorderDisabled'
+          backgroundColor: 'menuBackground',
+          color: 'disabledText',
         }
       },
       hovered: {
         tokens: {
-          backgroundColor: 'buttonBackgroundHovered',
-          color: 'buttonTextHovered',
-          borderColor: 'buttonBorderHovered'
+          backgroundColor: 'menuItemBackgroundHovered',
+          color: 'menuItemTextHovered',
         }
       },
       pressed: {
         tokens: {
-          backgroundColor: 'buttonBackgroundPressed',
-          color: 'buttonTextPressed',
-          borderColor: 'buttonBorderPressed'
+          backgroundColor: 'menuItemBackgroundHovered',
+          color: 'menuItemTextHovered',
         }
       },
       focused: {
         tokens: {
-          borderColor: 'buttonBorderFocused',
-          color: 'buttonTextHovered',
-          backgroundColor: 'buttonBackgroundHovered'
+          color: 'menuItemTextHovered',
+          backgroundColor: 'menuItemBackgroundHovered'
+        },
+        _overrides: {
+          disabled: {
+            tokens: {
+              borderColor: 'focusBorder'
+            }
+          }
         }
       }
     }
