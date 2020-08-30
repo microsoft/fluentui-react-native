@@ -44,15 +44,15 @@ export type PersonaSizeConfig = {
 };
 
 const sizeTable: {[P in PersonaSize]: PersonaSizeConfig} = {
-  size8: {physicalSize: 8, iconSize: 0, iconStrokeWidth: 0, initialsSize: 4},
-  size24: {physicalSize: 24, iconSize: 8, iconStrokeWidth: 2, initialsSize: 10},
-  size32: {physicalSize: 32, iconSize: 8, iconStrokeWidth: 2, initialsSize: 12},
-  size40: {physicalSize: 40, iconSize: 12, iconStrokeWidth: 2, initialsSize: 14},
-  size48: {physicalSize: 48, iconSize: 12, iconStrokeWidth: 2, initialsSize: 16},
-  size56: {physicalSize: 56, iconSize: 16, iconStrokeWidth: 3, initialsSize: 18},
-  size72: {physicalSize: 72, iconSize: 20, iconStrokeWidth: 3, initialsSize: 20},
-  size100: {physicalSize: 100, iconSize: 28, iconStrokeWidth: 4, initialsSize: 36},
-  size120: {physicalSize: 120, iconSize: 32, iconStrokeWidth: 4, initialsSize: 40}
+  size8: { physicalSize: 8, iconSize: 0, iconStrokeWidth: 0, initialsSize: 4 },
+  size24: { physicalSize: 24, iconSize: 8, iconStrokeWidth: 2, initialsSize: 10 },
+  size32: { physicalSize: 32, iconSize: 8, iconStrokeWidth: 2, initialsSize: 12 },
+  size40: { physicalSize: 40, iconSize: 12, iconStrokeWidth: 2, initialsSize: 14 },
+  size48: { physicalSize: 48, iconSize: 12, iconStrokeWidth: 2, initialsSize: 16 },
+  size56: { physicalSize: 56, iconSize: 16, iconStrokeWidth: 3, initialsSize: 18 },
+  size72: { physicalSize: 72, iconSize: 20, iconStrokeWidth: 3, initialsSize: 20 },
+  size100: { physicalSize: 100, iconSize: 28, iconStrokeWidth: 4, initialsSize: 36 },
+  size120: { physicalSize: 120, iconSize: 32, iconStrokeWidth: 4, initialsSize: 40 }
 };
 
 export function getSizeConfig(size: PersonaSize): PersonaSizeConfig {
