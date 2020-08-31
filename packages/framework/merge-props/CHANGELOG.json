@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/merge-props",
   "entries": [
     {
+      "date": "Fri, 28 Aug 2020 05:03:51 GMT",
+      "tag": "@fluentui-react-native/merge-props_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "only allow menu container to focus on mount",
+            "author": "lehon@microsoft.com",
+            "commit": "9c93388527af2ea3ba60336c56a3da0ce65e3688",
+            "package": "@fluentui-react-native/merge-props"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 20 Aug 2020 00:14:01 GMT",
       "tag": "@fluentui-react-native/merge-props_v0.1.1",
       "version": "0.1.1",
