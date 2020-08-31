@@ -14023,23 +14023,10 @@ react-native-svg@^11.0.0:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
 
-react-native-test-app@0.1.27:
-  version "0.1.27"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.1.27.tgz#90d93e2b687f449a890d9a7a2906a8f3d4c9e477"
-  integrity sha512-BB0hXgoHAFyrJlfWz/pvA6ESVn+5rFuDjcqSbfj+ED655nrV4JsuF/OpnD4bo26LLrdhK4GLcislUybQjYRfIw==
-  dependencies:
-    "@babel/core" "^7.0.0"
-    "@babel/runtime" "^7.0.0"
-    "@react-native-community/cli" "^3.0.0"
-    "@react-native-community/cli-platform-android" "^3.0.0"
-    "@react-native-community/cli-platform-ios" "^3.0.0"
-    chalk "^1.1.3"
-    plop "^2.6.0"
-
-react-native-test-app@0.1.37:
-  version "0.1.37"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.1.37.tgz#bbd5ef35419525385bae073e6d50bf7a32c91589"
-  integrity sha512-GfXyNrqLWm1PSzsrsZDVK1qpOgsDcy1GKuKs49SwsUtfrUPN/znhHMkM3KX7vgnqJ6auwP1cShjehVcMr7Q0Vw==
+react-native-test-app@0.1.38:
+  version "0.1.38"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.1.38.tgz#5e5d498a6e9c7f92f73703ca5e645de8fe472b94"
+  integrity sha512-4SB3nCMmmbsJ9PtZ4QuPhz3Q9TZ6cPw9+cr8jg0pd6TIFxRe4QqoCtUw26qb7Mow9YbJv569wjSH97lKvBeVqw==
   dependencies:
     "@babel/core" "^7.0.0"
     "@babel/runtime" "^7.0.0"
