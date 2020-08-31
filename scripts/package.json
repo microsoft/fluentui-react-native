@@ -10,12 +10,10 @@
     "build-tools": "just-scripts build",
     "bundlesize": "bundlesize --debug",
     "code-style": "node ./lib/just-scripts.js code-style",
+    "depcheck": "just-scripts depcheck",
     "prettier": "node ./lib/just-scripts.js prettier",
     "verify-api": "echo no api to verify",
     "update-api": "echo no api to update"
-  },
-  "dependencies": {
-    "@fluentui-react-native/build-tools": "0.3.0"
   },
   "peerDependencies": {
     "@babel/core": "^7.8.0",
@@ -57,7 +55,12 @@
     "jest-environment-jsdom": "^24.9.0",
     "just-repo-utils": "^0.2.0",
     "just-scripts": "^0.38.0",
+    "just-task": "^0.14.3",
+    "metro": "^0.58.0",
+    "metro-config": "^0.58.0",
+    "metro-react-native-babel-transformer": "^0.58.0",
     "prettier": "~1.17.0",
+    "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "~16.11.0",
     "rimraf": "^3.0.2",
     "typescript": "3.8.3",
@@ -65,7 +68,8 @@
     "webpack-bundle-analyzer": "^3.0.4",
     "webpack-cli": "3.2.3",
     "webpack-dev-server": "3.1.14",
-    "webpack-notifier": "^1.6.0"
+    "webpack-notifier": "^1.6.0",
+    "workspace-tools": "^0.9.3"
   },
   "bundlesize": [
     {

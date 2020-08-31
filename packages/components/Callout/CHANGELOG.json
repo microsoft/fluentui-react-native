@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Fri, 28 Aug 2020 05:03:51 GMT",
+      "tag": "@fluentui-react-native/callout_v0.11.10",
+      "version": "0.11.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "only allow menu container to focus on mount",
+            "author": "lehon@microsoft.com",
+            "commit": "9c93388527af2ea3ba60336c56a3da0ce65e3688",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 25 Aug 2020 21:17:13 GMT",
+      "tag": "@fluentui-react-native/callout_v0.11.10",
+      "version": "0.11.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add native component cache for consolidating requireNativeComponent calls",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f0cae19d5a52acc208b485e34dcf4cd3dc3444c2",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 17 Aug 2020 22:08:34 GMT",
       "tag": "@fluentui-react-native/callout_v0.11.8",
       "version": "0.11.8",

@@ -48,4 +48,5 @@ buck-out/
 *.jsbundle
 
 # CocoaPods
-/ios/Pods/
+/src/Pods/
+/src/*.xcworkspace/

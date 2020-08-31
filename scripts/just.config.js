@@ -7,6 +7,11 @@ const path = require('path');
 const srcPath = path.join(process.cwd(), 'src');
 const libPath = path.join(process.cwd(), 'lib');
 
+const checkPublishing = () => {
+  const { checkPublishingTask } = require('./lib/tasks/checkPublishingTask');
+  return checkPublishingTask();
+};
+
 module.exports = function preset() {
   option('production');
 
@@ -22,6 +27,7 @@ module.exports = function preset() {
     }),
   );
 
+  task('depcheck', checkPublishing);
   task('lint', eslintTask({ files: ['src/.'] }));
   task('cleanlib', cleanTask([libPath]));
   task('build', series('cleanlib', parallel('lint', 'ts')));

@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Mon, 17 Aug 2020 22:08:34 GMT and should not be manually modified.
+This log was last generated on Fri, 28 Aug 2020 05:03:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.12
+
+Fri, 28 Aug 2020 05:03:51 GMT
+
+### Patches
+
+- only allow menu container to focus on mount (lehon@microsoft.com)
+
+## 0.3.10
+
+Fri, 21 Aug 2020 03:35:36 GMT
+
+### Patches
+
+- support shouldFocusOnMount and shouldFocusOnContainer props (lehon@microsoft.com)
 
 ## 0.3.8
 
