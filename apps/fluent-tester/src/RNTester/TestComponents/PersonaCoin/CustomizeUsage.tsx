@@ -14,7 +14,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [physicalSize, setPhysicalSize] = React.useState<number>(80);
   const [iconSize, setIconSize] = React.useState<number>(24);
   const [iconStrokeWidth, setIconStrokeWidth] = React.useState<number>(2);
-  const [iconStrokeColor, setIconStrokeColor] = React.useState<string>('white');
+  const [iconStrokeColor, setIconStrokeColor] = React.useState<string>(undefined);
   const [initialsSize, setInitialsSize] = React.useState<number>(14);
   const [horizontalAlignment, setHorizontalAlignment] = React.useState<IconAlignment>();
   const [verticalAlignment, setVerticalAlignment] = React.useState<IconAlignment>();
