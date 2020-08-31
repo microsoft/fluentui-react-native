@@ -6,10 +6,10 @@ import { calculateEffectiveSizes } from './PersonaCoin.helpers';
 
 const _iconKeyProps: (keyof IPersonaCoinTokens)[] = ['iconSize', 'size', 'coinSize'];
 
-function _buildIconStyles(tokenProps: IPersonaCoinTokens /*, theme: ITheme */): ImageProps {
+function _buildIconStyles(tokenProps: IPersonaCoinTokens, theme: ITheme): ImageProps {
   const { iconSize, iconStrokeWidth } = calculateEffectiveSizes(tokenProps);
   const iconSizeAdjusted = iconSize + iconStrokeWidth * 2;
-  const iconStrokeColor = tokenProps.iconStrokeColor || 'white';
+  const iconStrokeColor = tokenProps.iconStrokeColor || theme.colors.background;
 
   return {
     source: {},
