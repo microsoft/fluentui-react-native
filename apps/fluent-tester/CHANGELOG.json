@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 01 Sep 2020 06:53:40 GMT",
+      "tag": "@fluentui-react-native/tester_v0.5.1",
+      "version": "0.5.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Implement iconSizeStrokeWidth and iconSizeStrokeColor tokens for PersonaCoin",
+            "author": "tomun@microsoft.com",
+            "commit": "2b264304206e267089e78c91de66e6ab34f87592",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Aug 2020 05:03:51 GMT",
       "tag": "@fluentui-react-native/tester_v0.5.0",
       "version": "0.5.0",
