@@ -55,24 +55,15 @@ export const Checkbox = compose<ICheckboxType>({
       [toggleChecked, userProps, state, pressable.props]
     );
 
-    let accessibilityStates: string[] = [];
-    if (state.disabled) {
-      accessibilityStates = ['disabled'];
-    } else if (state.checked) {
-      accessibilityStates = ['checked'];
-    } else {
-      accessibilityStates = ['unchecked'];
-    }
-
     const slotProps = mergeSettings<ICheckboxSlotProps>(styleProps, {
       root: {
         rest,
         ref: buttonRef,
         ...pressable.props,
         accessibilityRole: 'checkbox',
-        accessibilityLabel: ariaLabel || label,
-        accessibilityStates: accessibilityStates,
+        accessibilityState: {disabled: state.disabled, checked: state.checked },
         accessibilityActions: [{ name: 'Toggle', label: checkboxSelectActionLabel }],
+        accessibilityLabel: ariaLabel ? ariaLabel : label,
         onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUpSpace
       },

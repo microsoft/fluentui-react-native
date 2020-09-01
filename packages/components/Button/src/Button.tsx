@@ -29,10 +29,10 @@ export const Button = compose<IButtonType>({
       e => {
         if (onClick && (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ')) {
           onClick();
-          e.stopPropagation()
+          e.stopPropagation();
         }
       },
-      [onClick]
+      [onClick],
     );
     // set up state
     const state: IButtonState = {
@@ -40,8 +40,8 @@ export const Button = compose<IButtonType>({
         ...pressable.state,
         disabled: userProps.disabled,
         content: !!content,
-        icon: !!icon
-      }
+        icon: !!icon,
+      },
     };
 
     const buttonRef = useViewCommandFocus(userProps.componentRef);
@@ -54,10 +54,11 @@ export const Button = compose<IButtonType>({
         ref: buttonRef,
         onAccessibilityTap: onAccessibilityTap,
         accessibilityLabel: accessibilityLabel,
-        onKeyUp: onKeyUp
+        accessibilityState: { disabled: state.info.disabled },
+        onKeyUp: onKeyUp,
       },
       content: { children: content, testID },
-      icon: { source: icon }
+      icon: { source: icon },
     });
 
     return { slotProps, state };
@@ -81,14 +82,14 @@ export const Button = compose<IButtonType>({
     root: View,
     stack: { slotType: View, filter: filterViewProps },
     icon: { slotType: Image as React.ComponentType<object>, filter: filterImageProps },
-    content: Text
+    content: Text,
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
     stack: [],
     icon: [foregroundColorTokens, [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'overlayColor' }]],
-    content: [textTokens, foregroundColorTokens]
-  }
+    content: [textTokens, foregroundColorTokens],
+  },
 });
 
 export default Button;
