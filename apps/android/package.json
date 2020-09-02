@@ -23,7 +23,7 @@
     "@uifabricshared/theming-react-native": "0.7.75",
     "react": "16.11.0",
     "react-native": "0.62.2",
-    "react-native-test-app": "0.1.27"
+    "react-native-test-app": "0.1.38"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
