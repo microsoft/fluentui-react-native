@@ -6,15 +6,22 @@ import { calculateEffectiveSizes } from './PersonaCoin.helpers';
 
 const _iconKeyProps: (keyof IPersonaCoinTokens)[] = ['iconSize', 'size', 'coinSize'];
 
-function _buildIconStyles(tokenProps: IPersonaCoinTokens /*, theme: ITheme */): ImageProps {
-  const { iconSize } = calculateEffectiveSizes(tokenProps);
+function _buildIconStyles(tokenProps: IPersonaCoinTokens, theme: ITheme): ImageProps {
+  const { iconSize, iconStrokeWidth } = calculateEffectiveSizes(tokenProps);
+  const iconSizeAdjusted = iconSize + iconStrokeWidth * 2;
+  const iconStrokeColor = tokenProps.iconStrokeColor || theme.colors.background;
 
   return {
     source: {},
     style: {
       position: 'absolute',
-      width: iconSize,
-      height: iconSize
+      width: iconSizeAdjusted,
+      height: iconSizeAdjusted,
+      bottom: -iconStrokeWidth,
+      end: -iconStrokeWidth,
+      borderRadius: iconSizeAdjusted / 2,
+      borderWidth: iconStrokeWidth,
+      borderColor: iconStrokeColor,
     }
   };
 }
