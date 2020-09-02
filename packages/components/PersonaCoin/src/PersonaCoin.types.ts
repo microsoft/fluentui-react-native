@@ -57,6 +57,8 @@ export type IconAlignment = 'start' | 'center' | 'end';
 export interface IPersonaCoinTokens extends IBackgroundColorTokens, IForegroundColorTokens, IPersonaConfigurableProps {
   coinSize?: number;
   iconSize?: number;
+  iconStrokeWidth?: number;
+  iconStrokeColor?: string;
   initialsSize?: number;
   horizontalIconAlignment?: IconAlignment;
   verticalIconAlignment?: IconAlignment;

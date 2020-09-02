@@ -2,8 +2,36 @@ require_relative '../../../node_modules/react-native-test-app/macos/test_app.rb'
 
 workspace 'FluentUITester.xcworkspace'
 
+react_native_path = "#{__dir__}/../../../node_modules/react-native-macos"
+
+bundle_script = %{
+export NODE_BINARY=node
+#{react_native_path}/scripts/react-native-xcode.sh
+}
+
+start_packager_script = %{
+export RCT_METRO_PORT="${RCT_METRO_PORT:=8081}"
+echo "export RCT_METRO_PORT=${RCT_METRO_PORT}" > "#{react_native_path}/scripts/.packager.env"
+if [ -z "${RCT_NO_LAUNCH_PACKAGER+xxx}" ] ; then
+  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then
+    if ! curl -s "http://localhost:${RCT_METRO_PORT}/status" | grep -q "packager-status:running" ; then
+      echo "Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly"
+      exit 2
+    fi
+  else
+    open "#{__dir__}/../launchPackager.command" || echo "Can't start packager automatically"
+  fi
+fi
+}
+
+use_flipper!(false)
 use_test_app! do |target|
   target.app do
+    script_phase name: 'Start Packager',
+                 script: start_packager_script,
+                 execution_position: :before_compile
+    script_phase name: 'Bundle React Native code and images',
+                 script: bundle_script
   end
 
   target.tests do
