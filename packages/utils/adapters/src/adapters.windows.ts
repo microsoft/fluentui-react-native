@@ -112,7 +112,7 @@ const _textMask: IFilterMask<ITextProps> = {
   suppressHighlighting: true,
   selectable: true,
   selectionColor: true,
-  textBreakStrategy: true,
+  textBreakStrategy: true
 };
 
 const _imageMask: IFilterMask<IImageProps> = {
