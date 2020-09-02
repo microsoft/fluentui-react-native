@@ -3,14 +3,10 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { Icon, IRasterImageIconProps, ISvgIconProps, IFontIconProps } from '@fluentui/react-native';
-//import { Icon, IFontIconProps } from '@fluentui/react-native';
-//import { ICON_TESTPAGE } from './consts';
-//Sconst path = require('path')
 
 const testImage = require('./assets/testicon.png');
 const testTtf = require('./assets/Font Awesome 5 Free-Solid-900.otf');
 import TestSvg from './assets/test.svg';
-//import * as assetRegistry from 'react-native/Libraries/Image/AssetRegistry';
 
 export const IconTest: React.FunctionComponent<{}> = () => {
   const rasterProps: IRasterImageIconProps = { src: testImage };
