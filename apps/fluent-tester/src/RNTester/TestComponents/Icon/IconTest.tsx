@@ -38,7 +38,6 @@ export const IconTest: React.FunctionComponent<{}> = () => {
       <Icon fontSource={fontProps} width={100} height={100} />
       <Text>Svg icons</Text>
       <Icon svgSource={svgProps} width={100} height={100} />
-
       <Icon svgSource={svgUriProps} width={100} height={100} />
       <Text>Raster icon</Text>
       <Icon rasterImageSource={rasterProps} width={100} height={100} />
