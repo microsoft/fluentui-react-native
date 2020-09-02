@@ -10,6 +10,7 @@ export type ITextProps<TBase = INativeTextProps> = TBase &
   FontVariantTokens &
   IForegroundColorTokens & {
     disabled?: boolean;
+    fontSrcFile?: object;
   };
 
 export type ITextType<TBase = INativeTextProps> = {

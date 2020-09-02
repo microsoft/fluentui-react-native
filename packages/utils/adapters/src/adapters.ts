@@ -157,6 +157,8 @@ export function filterViewProps(propName: string): boolean {
 }
 
 export function filterTextProps(propName: string): boolean {
+  if (propName == 'fontSrcFile')
+    return true;
   return _textMask[propName];
 }
 

@@ -10,6 +10,7 @@ import { HOMEPAGE_PRESSABLE_BUTTON, PressableTest } from '../../fluent-tester/sr
 import { HOMEPAGE_RADIOGROUP_BUTTON, RadioGroupTest } from '../../fluent-tester/src/RNTester/TestComponents/RadioGroup';
 import { HOMEPAGE_SEPARATOR_BUTTON, SeparatorTest } from '../../fluent-tester/src/RNTester/TestComponents/Separator';
 import { HOMEPAGE_SVG_BUTTON, SvgTest } from '../../fluent-tester/src/RNTester/TestComponents/Svg';
+import { HOMEPAGE_ICON_BUTTON, IconTest } from '../../fluent-tester/src/RNTester/TestComponents/Icon';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from '../../fluent-tester/src/RNTester/TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from '../../fluent-tester/src/RNTester/TestComponents/Theme';
 import { TestDescription } from '@fluentui-react-native/tester/src/RNTester/TestComponents';
@@ -84,5 +85,10 @@ export const windowsTests: TestDescription[] = [
     name: 'Svg Test',
     component: SvgTest,
     testPage: HOMEPAGE_SVG_BUTTON
+  },
+  {
+    name: 'Icon Test',
+    component: IconTest,
+    testPage: HOMEPAGE_ICON_BUTTON
   }
 ];

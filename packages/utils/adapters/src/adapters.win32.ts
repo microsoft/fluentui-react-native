@@ -90,7 +90,7 @@ const _textMask: IFilterMask<ITextProps> = {
   nativeID: true,
   maxFontSizeMultiplier: true,
   textStyle: true,
-  tooltip: true
+  tooltip: true,
 };
 
 const _imageMask: IFilterMask<IImageProps> = {

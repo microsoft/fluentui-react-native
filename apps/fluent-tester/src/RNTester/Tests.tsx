@@ -11,6 +11,7 @@ import { HOMEPAGE_SEPARATOR_BUTTON, SeparatorTest } from './TestComponents/Separ
 import { HOMEPAGE_SVG_BUTTON, SvgTest } from './TestComponents/Svg';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
+import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 
 export const Tests: TestDescription[] = [
   {
@@ -72,5 +73,10 @@ export const Tests: TestDescription[] = [
     name: 'Svg Test',
     component: SvgTest,
     testPage: HOMEPAGE_SVG_BUTTON
+  },
+  {
+    name: 'Icon Test',
+    component: IconTest,
+    testPage: HOMEPAGE_ICON_BUTTON
   }
 ];
