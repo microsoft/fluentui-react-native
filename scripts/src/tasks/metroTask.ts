@@ -114,7 +114,7 @@ export interface MetroTaskOptions {
   cli?: boolean;
 }
 
-function runMetroFromCli(platform: AllPlatforms, entry: string, out: string, dev: boolean, server: boolean, port?: number): void {
+function runMetroFromCli(platform: AllPlatforms, entry: string, out: string, assetsOut: string, dev: boolean, server: boolean, port?: number): void {
   const options = { cwd: process.cwd(), stdio: 'inherit' } as any;
   const yarnCmd = os.platform() === 'win32' ? 'yarn.cmd' : 'yarn';
   if (server) {
@@ -139,7 +139,7 @@ function runMetroFromCli(platform: AllPlatforms, entry: string, out: string, dev
         '--dev',
         devValue,
         '--assets-dest',
-        'dist/',
+        assetsOut,
         ...((sourceMap && ['--sourcemap-output', sourceMap]) || []),
       ],
       options,
@@ -235,7 +235,7 @@ export function metroTask(options: MetroTaskOptions = {}): TaskFunction {
       }
 
       if (cli) {
-        runMetroFromCli(targetPlatform, entry, out, !!dev, server, port);
+        runMetroFromCli(targetPlatform, entry, out, outputPath, !!dev, server, port);
       } else {
         await runMetroDirect(targetPlatform, entry, out, !!dev, server, port);
       }
