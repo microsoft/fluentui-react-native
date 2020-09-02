@@ -23,7 +23,7 @@ module.exports = (async () => {
           assetExts: [assetExts.filter(ext => ext !== 'svg'), 'ttf', 'otf', 'png'],
           sourceExts: [
               ...sourceExts,
-              'svg',
+              'svg'
           ],
           resolveRequest: require('@office-iss/react-native-win32/metro-react-native-platform').reactNativePlatformResolver(
               {win32: '@office-iss/react-native-win32'}
@@ -32,8 +32,8 @@ module.exports = (async () => {
               // This stops "react-native run-windows" from causing the metro server to crash if its already running
               new RegExp(`${path.resolve(__dirname, 'windows').replace(/[/\\]/g, '/')}.*`),
           ])
-      },
-      transformer: {
+        },
+        transformer: {
           // The cli defaults this to a full path to react-native, which bypasses the reactNativePlatformResolver above
           // Hopefully we can fix the default in the future
           assetRegistryPath: 'react-native/Libraries/Image/AssetRegistry',
