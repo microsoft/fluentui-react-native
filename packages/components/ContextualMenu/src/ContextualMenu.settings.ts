@@ -4,9 +4,9 @@ import { IComposeSettings } from '@uifabricshared/foundation-compose';
 export const settings: IComposeSettings<ContextualMenuType> = [
   {
     tokens: {
-      backgroundColor: 'bodyStandoutBackground',
+      backgroundColor: 'menuBackground',
       beakWidth: 20,
-      borderColor: 'bodyFrameBackground',
+      borderColor: 'buttonBorder',
       borderWidth: 1,
       directionalHint: 'bottonLeftEdge',
       gapSpace: 0,
@@ -14,6 +14,11 @@ export const settings: IComposeSettings<ContextualMenuType> = [
     },
     root: {
       accessibilityRole: 'menu'
+    },
+    container: {
+      style: {
+        padding: 1
+      }
     }
   },
   contextualMenuName
