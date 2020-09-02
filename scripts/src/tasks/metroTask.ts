@@ -58,7 +58,7 @@ function loadBundleDefinition(bundleName?: string): BundleDefinition {
 
   const metroBundles = asArray<BundleDefinition>(packageConfig.metroBundles);
   if (bundleName) {
-    return metroBundles.find(bundle => bundle.name === bundleName) || {};
+    return metroBundles.find((bundle) => bundle.name === bundleName) || {};
   }
 
   if (metroBundles.length > 1) {
@@ -138,6 +138,8 @@ function runMetroFromCli(platform: AllPlatforms, entry: string, out: string, dev
         out,
         '--dev',
         devValue,
+        '--assets-dest',
+        'dist/',
         ...((sourceMap && ['--sourcemap-output', sourceMap]) || []),
       ],
       options,
