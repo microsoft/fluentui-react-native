@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester-win32",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/framework": "0.2.10",
-    "@fluentui-react-native/tester": "^0.4.1",
+    "@fluentui-react-native/tester": "^0.5.1",
     "@uifabricshared/theming-react-native": "0.7.76",
     "react": "16.11.0",
     "react-native": "0.62.2",
