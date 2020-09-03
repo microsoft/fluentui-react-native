@@ -23,6 +23,7 @@
     "@fluentui/react-native": ">=0.15.89 <1.0.0",
     "@fluentui-react-native/stack": ">=0.2.8 <1.0.0",
     "@fluentui-react-native/interactive-hooks": ">=0.5.1 <1.0.0",
+    "@fluentui-react-native/text": ">=0.6.8 <1.0.0",
     "@uifabricshared/theming-react-native": ">=0.7.76 <1.0.0",
     "@uifabricshared/theme-registry": ">=0.3.69 <1.0.0",
     "@uifabricshared/themed-stylesheet": ">=0.3.68 <1.0.0",
