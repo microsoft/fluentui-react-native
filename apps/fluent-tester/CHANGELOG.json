@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 01 Sep 2020 06:53:40 GMT",
+      "tag": "@fluentui-react-native/tester_v0.5.1",
+      "version": "0.5.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Implement iconSizeStrokeWidth and iconSizeStrokeColor tokens for PersonaCoin",
+            "author": "tomun@microsoft.com",
+            "commit": "2b264304206e267089e78c91de66e6ab34f87592",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 28 Aug 2020 05:03:51 GMT",
+      "tag": "@fluentui-react-native/tester_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "only allow menu container to focus on mount",
+            "author": "lehon@microsoft.com",
+            "commit": "9c93388527af2ea3ba60336c56a3da0ce65e3688",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 21 Aug 2020 03:35:36 GMT",
       "tag": "@fluentui-react-native/tester_v0.4.0",
       "version": "0.4.0",

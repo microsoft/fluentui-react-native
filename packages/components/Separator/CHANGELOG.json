@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/separator",
   "entries": [
     {
+      "date": "Fri, 28 Aug 2020 05:03:51 GMT",
+      "tag": "@fluentui-react-native/separator_v0.4.8",
+      "version": "0.4.8",
+      "comments": {
+        "none": [
+          {
+            "comment": "only allow menu container to focus on mount",
+            "author": "lehon@microsoft.com",
+            "commit": "9c93388527af2ea3ba60336c56a3da0ce65e3688",
+            "package": "@fluentui-react-native/separator"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 17 Aug 2020 22:08:34 GMT",
       "tag": "@fluentui-react-native/separator_v0.4.7",
       "version": "0.4.7",

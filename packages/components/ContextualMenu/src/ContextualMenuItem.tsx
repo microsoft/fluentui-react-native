@@ -15,6 +15,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
   displayName: contextualMenuItemName,
   usePrepareProps: (userProps: ContextualMenuItemProps, useStyling: IUseComposeStyling<ContextualMenuItemType>) => {
     const {
+      disabled,
       itemKey,
       icon,
       text,
@@ -29,15 +30,17 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
 
     const onItemClick = React.useCallback(
       e => {
-        context?.onDismissMenu();
-        if (onClick) {
-          onClick();
+        if (!disabled) {
+          context ?.onDismissMenu();
+          if (onClick) {
+            onClick();
+          }
+          else {
+            context.onItemClick && context.onItemClick(itemKey);
+          }
+          e.stopPropagation();
         }
-        else {
-          context.onItemClick && context.onItemClick(itemKey);
-        }
-        e.stopPropagation();
-      }, [context, itemKey, onClick]
+      }, [context, disabled, itemKey, onClick]
     );
 
     const onKeyUp = React.useCallback(
