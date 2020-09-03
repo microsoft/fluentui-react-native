@@ -27,7 +27,6 @@
     "generate-report": "allure generate allure-results --clean && allure open"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.2.10",
     "@fluentui-react-native/tester": "^0.5.1",
     "@uifabricshared/theming-react-native": "0.7.76",
     "react": "16.11.0",
