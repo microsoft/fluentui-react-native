@@ -62,13 +62,17 @@ function RenderSvg(iconProps: IIconProps) {
   }
 }
 
+const memoCache = getMemoCache<IIconProps>();
+
 export const Icon = stagedComponent((props: IIconProps) => {
 
   return (rest: IIconProps) => {
     const theme = useTheme();
-    const style = {
-      color: theme.colors.buttonText
-    };
+    const color = props.color || theme.colors.buttonText ;
+
+    const style = memoCache({
+      color: color
+    }, [theme, color])[0];
 
     const newProps = mergeProps<IIconProps>(style, props, rest);
 
