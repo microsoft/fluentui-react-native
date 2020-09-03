@@ -1,8 +1,4 @@
-import { IRenderData } from '@uifabricshared/foundation-composable';
 import { SvgProps } from 'react-native-svg';
-import { IColorTokens } from '@fluentui-react-native/tokens';
-import { ViewProps } from 'react-native';
-
 export const iconName = 'Icon';
 
 export interface IFontIconProps
