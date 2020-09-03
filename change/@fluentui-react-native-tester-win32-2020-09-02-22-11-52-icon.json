@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Saving icon work",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "warleu@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-09-03T05:11:36.443Z"
+}
