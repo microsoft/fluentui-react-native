@@ -8,13 +8,14 @@ export const ButtonIconTest: React.FunctionComponent<{}> = () => {
   if (Platform.OS !== ('win32' as any)) {
     const CustomizedIconButton = Button.customize({
       tokens: { iconColor: 'red' },
+      content: { style: { marginStart: 5 } },
     });
 
     return (
       <View>
         <Stack style={stackStyle}>
           <Button icon={require('./icon_24x24.png')} content="Button with Icon" tooltip="button tooltip" />
-          <CustomizedIconButton icon={require('./icon_24x24.png')} content="Button with Customized Icon" tooltip="button tooltip"/>
+          <CustomizedIconButton icon={require('./icon_24x24.png')} content="Button with Customized Icon" tooltip="button tooltip" />
         </Stack>
       </View>
     );
