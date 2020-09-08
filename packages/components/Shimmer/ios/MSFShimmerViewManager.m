@@ -1,12 +1,15 @@
 #import <React/RCTViewManager.h>
-#import <React/RCTConvert.h>
+
 
 @interface RCT_EXTERN_MODULE(MSFShimmerViewManager, RCTViewManager)
 
-/// Dictionary that maps the React Native "appearance" prop to the ShimmerView property "appearance"
-RCT_EXPORT_VIEW_PROPERTY(appearance, NSDictionary)
+RCT_EXPORT_VIEW_PROPERTY(shimmerAlpha, CGFloat)
+RCT_EXPORT_VIEW_PROPERTY(shimmerWidth, CGFloat)
+RCT_EXPORT_VIEW_PROPERTY(shimmerAngle, CGFloat)
+RCT_EXPORT_VIEW_PROPERTY(shimmerSpeed, CGFloat)
+RCT_EXPORT_VIEW_PROPERTY(shimmerDelay, double)
 
-/// Dictionary that maps the React Native "shimmerAppearance" prop to the ShimmerView property "shimmerAppearance"
-RCT_EXPORT_VIEW_PROPERTY(shimmerAppearance, NSDictionary)
+RCT_EXPORT_VIEW_PROPERTY(viewTintColor, UIColor)
+RCT_EXPORT_VIEW_PROPERTY(cornerRadius, CGFloat)
 
 @end

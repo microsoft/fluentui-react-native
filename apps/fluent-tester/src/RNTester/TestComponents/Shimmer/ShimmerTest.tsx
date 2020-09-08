@@ -23,18 +23,14 @@ const shimmer: React.FunctionComponent<{}> = () => {
 };
 
 const stylizedShimmer: React.FunctionComponent<{}> = () => {
-
   const CustomizedShimmer = Shimmer.customize({
-    tintColor: processColor('#F0F0FF'),
-    cornerRadius: 10,
-    labelCornerRadius: 10,
-    usesTextHeightForLabels: false,
-    labelHeight: 15,
-    alpha: 0,
-    width: 180,
-    angle: 0,
-    speed: 400,
-    delay: 0.1,
+    shimmerAlpha: 0,
+    shimmerWidth: 180,
+    shimmerAngle: 0,
+    shimmerSpeed: 400,
+    shimmerDelay: 0.1,
+    viewTintColor: 'rgb(100, 100, 100)',
+    cornerRadius: 15,
   });
 
   return (
