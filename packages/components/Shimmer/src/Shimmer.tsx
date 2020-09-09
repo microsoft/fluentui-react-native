@@ -75,7 +75,6 @@ export const Shimmer = compose<ShimmerType>({
     },
     shimmerName,
   ],
-  tokenProps: true,
   slotProps: {
     root: buildProps(tokens => ({ ...tokens }), []),
   },
