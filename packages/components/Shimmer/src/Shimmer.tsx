@@ -1,7 +1,6 @@
 /** @jsx withSlots */
 import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { ViewProps } from 'react-native';
-import { IViewProps } from '@fluentui-react-native/adapters';
 import * as React from 'react';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
@@ -10,9 +9,9 @@ const shimmerName = 'Shimmer';
 const NativeShimmerView = ensureNativeComponent('MSFShimmerView');
 
 /**
- * ViewProps props, based off of the standard react-native ViewProps with some new extensions
+ * Shimmer Tokens are a 1:1 list of the native properties we can set on the native component
  */
-export type NativeShimmerViewProps<TBase = IViewProps> = TBase & {
+export type ShimmerTokens = {
   /**
    * The alpha value of the center of the gradient in the animation
    */
@@ -50,14 +49,16 @@ export type NativeShimmerViewProps<TBase = IViewProps> = TBase & {
 };
 
 /**
- * Shimmer Token is a flat list of all the properties we can set on the native view
+ * All of the base native view props, plus the props the native shimmer control needs to receive
  */
-export type ShimmerToken = NativeShimmerViewProps;
+export type NativeShimmerViewProps = ViewProps & ShimmerTokens;
+
+export type ShimmerProps = ViewProps;
 
 interface ShimmerType {
-  props: ViewProps;
+  props: ShimmerProps;
   slotProps: { root: NativeShimmerViewProps };
-  tokens: ShimmerToken;
+  tokens: ShimmerTokens;
 }
 
 export const Shimmer = compose<ShimmerType>({
@@ -74,19 +75,9 @@ export const Shimmer = compose<ShimmerType>({
     },
     shimmerName,
   ],
+  tokenProps: true,
   slotProps: {
-    root: buildProps<NativeShimmerViewProps, ShimmerToken>(
-      (tokens: ShimmerToken) => ({
-        shimmerAlpha: tokens.shimmerAlpha,
-        shimmerWidth: tokens.shimmerWidth,
-        shimmerAngle: tokens.shimmerAngle,
-        shimmerSpeed: tokens.shimmerSpeed,
-        shimmerDelay: tokens.shimmerDelay,
-        viewTintColor: tokens.viewTintColor,
-        cornerRadius: tokens.cornerRadius,
-      }),
-      ['shimmerAlpha', 'shimmerWidth', 'shimmerAngle', 'shimmerSpeed', 'shimmerDelay', 'viewTintColor', 'cornerRadius'],
-    ),
+    root: buildProps(tokens => ({ ...tokens }), []),
   },
   slots: { root: NativeShimmerView },
   render: (props: NativeShimmerViewProps, useSlots: UseSlots<ShimmerType>) => {
