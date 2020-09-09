@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useSlots sample code test suite Render the two bold text components 1`] = `
+<View>
+  <Text
+    style={
+      Object {
+        "color": "black",
+        "fontWeight": "900",
+      }
+    }
+  >
+    Staged
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "black",
+        "fontWeight": "900",
+      }
+    }
+  >
+    Unstaged
+  </Text>
+</View>
+`;
+
+exports[`useSlots sample code test suite Render the two header components 1`] = `
+<View>
+  <Text
+    style={
+      Object {
+        "color": "blue",
+        "fontSize": 20,
+        "fontWeight": "900",
+      }
+    }
+  >
+    Staged
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "blue",
+        "fontSize": 20,
+        "fontWeight": "900",
+      }
+    }
+  >
+    Unstaged
+  </Text>
+</View>
+`;
