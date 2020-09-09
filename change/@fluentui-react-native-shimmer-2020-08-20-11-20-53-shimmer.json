@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Shimmer initial creation",
+  "packageName": "@fluentui-react-native/shimmer",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2020-08-20T18:20:37.391Z"
+}

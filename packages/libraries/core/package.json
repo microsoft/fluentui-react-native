@@ -37,7 +37,8 @@
     "@fluentui-react-native/pressable": ">=0.3.85 <1.0.0",
     "@fluentui-react-native/radio-group": ">=0.4.6 <1.0.0",
     "@fluentui-react-native/separator": ">=0.4.8 <1.0.0",
-    "@fluentui-react-native/text": ">=0.6.8 <1.0.0"
+    "@fluentui-react-native/text": ">=0.6.8 <1.0.0",
+    "@fluentui-react-native/shimmer": ">=0.1.0 <1.0.0"
   },
   "devDependencies": {
     "@types/react-native": "^0.62.0",
