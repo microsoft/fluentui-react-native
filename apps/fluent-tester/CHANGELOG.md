@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 28 Aug 2020 05:03:51 GMT and should not be manually modified.
+This log was last generated on Tue, 01 Sep 2020 06:53:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.1
+
+Tue, 01 Sep 2020 06:53:40 GMT
+
+### Patches
+
+- Implement iconSizeStrokeWidth and iconSizeStrokeColor tokens for PersonaCoin (tomun@microsoft.com)
 
 ## 0.5.0
 
