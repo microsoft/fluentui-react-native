@@ -22,7 +22,7 @@ function _mapAlignment(horizontal: boolean, horizontalAlign: Alignment, vertical
   }
 }
 
-const tokenProps: (keyof StackTokenProps)[] = [
+const tokensThatAreAlsoProps: (keyof StackTokenProps)[] = [
   'childrenGap',
   'disableShrink',
   'gap',
@@ -122,7 +122,7 @@ const buildRootProps = buildProps<ViewProps, StackTokens>(
 
 export const stylingSettings: UseStylingOptions<StackProps, StackSlotProps, StackTokens> = {
   tokens: [stackName],
-  tokenProps,
+  tokensThatAreAlsoProps,
   slotProps: {
     root: buildRootProps,
     inner: buildInnerProps,
