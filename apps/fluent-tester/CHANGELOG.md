@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 09 Sep 2020 07:28:42 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Sep 2020 08:18:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.0
+
+Wed, 09 Sep 2020 08:18:37 GMT
+
+### Minor changes
+
+- Added new test (saadnajmi2@gmail.com)
 
 ## 0.5.2
 

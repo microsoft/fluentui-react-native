@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 09 Sep 2020 08:18:37 GMT",
+      "tag": "@fluentui-react-native/tester_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Added new test",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "0c35ad1f0b2c9bfc0456f885c3e2f75645288de5",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 09 Sep 2020 07:28:42 GMT",
       "tag": "@fluentui-react-native/tester_v0.5.2",
       "version": "0.5.2",

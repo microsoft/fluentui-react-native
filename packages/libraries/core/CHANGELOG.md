@@ -1,8 +1,16 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Mon, 17 Aug 2020 22:08:34 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Sep 2020 08:18:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.0
+
+Wed, 09 Sep 2020 08:18:37 GMT
+
+### Minor changes
+
+- New shimmer control (saadnajmi2@gmail.com)
 
 ## 0.15.86
 

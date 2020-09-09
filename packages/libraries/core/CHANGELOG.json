@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Wed, 09 Sep 2020 08:18:37 GMT",
+      "tag": "@fluentui/react-native_v0.16.0",
+      "version": "0.16.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "New shimmer control",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "0c35ad1f0b2c9bfc0456f885c3e2f75645288de5",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Aug 2020 05:03:51 GMT",
       "tag": "@fluentui/react-native_v0.15.89",
       "version": "0.15.89",
