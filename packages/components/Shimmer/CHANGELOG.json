@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/shimmer",
+  "entries": [
+    {
+      "date": "Wed, 09 Sep 2020 08:18:37 GMT",
+      "tag": "@fluentui-react-native/shimmer_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Shimmer initial creation",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "0c35ad1f0b2c9bfc0456f885c3e2f75645288de5",
+            "package": "@fluentui-react-native/shimmer"
+          }
+        ]
+      }
+    }
+  ]
+}
