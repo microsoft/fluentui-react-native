@@ -35,7 +35,6 @@
     "@fluentui-react-native/merge-props": ">=0.1.1 <1.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^19.2.2",
     "@uifabricshared/build-native": "^0.1.1",
     "react": "16.11.0",
     "react-native": "^0.62.2"
