@@ -9,8 +9,8 @@ PODS:
     - React-Core (= 0.62.2)
     - React-jsi (= 0.62.2)
     - ReactCommon/turbomodule/core (= 0.62.2)
-  - FluentUI-ReactNative-Shimmer (0.1.0):
-    - MicrosoftFluentUI (~> 0.1.0)
+  - FluentUI-React-Native-Shimmer (0.1.0):
+    - MicrosoftFluentUI (~> 0.1.12)
     - React
   - Folly (2018.10.22.00):
     - boost-for-react-native
@@ -22,7 +22,7 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - MicrosoftFluentUI (0.1.1)
+  - MicrosoftFluentUI (0.1.12)
   - QRCodeReader.swift (10.1.0)
   - RCTRequired (0.62.2)
   - RCTTypeSafety (0.62.2):
@@ -248,14 +248,14 @@ PODS:
     - ReactCommon/callinvoker (= 0.62.2)
   - ReactTestApp-DevSupport (0.1.38)
   - ReactTestApp-Resources (1.0.0-dev)
-  - SwiftLint (0.39.2)
+  - SwiftLint (0.40.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
   - DoubleConversion (from `../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../../../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native/Libraries/FBReactNativeSpec`)
-  - FluentUI-ReactNative-Shimmer (from `../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec`)
+  - FluentUI-React-Native-Shimmer (from `../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec`)
   - Folly (from `../../../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - QRCodeReader.swift
@@ -300,7 +300,7 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/Libraries/FBLazyVector"
   FBReactNativeSpec:
     :path: "../../../node_modules/react-native/Libraries/FBReactNativeSpec"
-  FluentUI-ReactNative-Shimmer:
+  FluentUI-React-Native-Shimmer:
     :path: "../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec"
   Folly:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/Folly.podspec"
@@ -356,10 +356,10 @@ SPEC CHECKSUMS:
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e
-  FluentUI-ReactNative-Shimmer: ddc2f627058ad4a7c820af59484f7f8f53fab183
+  FluentUI-React-Native-Shimmer: 50eef0f4a3cb4f4e27d83f8aad4cd6223560825b
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
-  MicrosoftFluentUI: d6ba568291a12f41e00d27cd2065f0284eb76412
+  MicrosoftFluentUI: 6800fd4c017a5c5b946a24851ac2218748da45d2
   QRCodeReader.swift: 373a389fe9a22d513c879a32a6f647c58f4ef572
   RCTRequired: cec6a34b3ac8a9915c37e7e4ad3aa74726ce4035
   RCTTypeSafety: 93006131180074cffa227a1075802c89a49dd4ce
@@ -382,9 +382,9 @@ SPEC CHECKSUMS:
   ReactCommon: ed4e11d27609d571e7eee8b65548efc191116eb3
   ReactTestApp-DevSupport: a3c112badc52749c73db490520d3caea5336076e
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
-  SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
+  SwiftLint: bbfed21bf4451dcbd0f5cdbee44a18e06cf91b12
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
 
-PODFILE CHECKSUM: bd913ea50525ea69d4a099b0b091f9b1edca9040
+PODFILE CHECKSUM: 42dde6a3630fe1498f92905782bda6387e25596e
 
 COCOAPODS: 1.9.3

@@ -4,7 +4,7 @@ package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 version = package['version']
 
 Pod::Spec.new do |s|
-  s.name             = 'FluentUI-ReactNative-Shimmer'
+  s.name             = 'FluentUI-React-Native-Shimmer'
   s.version          = "#{version}"
   s.summary          = 'Fluent UI React Native Shimmer Control'
   s.homepage         = "https://www.microsoft.com/design/fluent/#/"
@@ -13,9 +13,8 @@ Pod::Spec.new do |s|
   s.swift_version    = "5"
   s.module_name      = 'FluentUIReactNative'
 
-  s.ios.deployment_target = "11.0"
   s.ios.source_files      = "ios/*.{swift,h,m}"
 
   s.dependency 'React'
-  s.dependency 'MicrosoftFluentUI', '~> 0.1.0'
+  s.dependency 'MicrosoftFluentUI', '~> 0.1.12'
 end

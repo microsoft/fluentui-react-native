@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
-import { processColor, ViewProps } from 'react-native';
+import { ViewProps } from 'react-native';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import * as React from 'react';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
@@ -41,7 +41,7 @@ export type NativeShimmerViewProps<TBase = IViewProps> = TBase & {
   /**
    * Color to tint the shimmer boxes. Defaults to the Fabric default color.
    */
-  viewTintColor?: number;
+  viewTintColor?: string;
 
   /**
    * Corner radius on each view.
@@ -69,7 +69,7 @@ export const Shimmer = compose<ShimmerType>({
       shimmerAngle: -(Math.PI / 45.0),
       shimmerSpeed: 350,
       shimmerDelay: 0.4,
-      viewTintColor: '#F1F1F1',
+      viewTintColor: 'rgb(241,241,241)',
       cornerRadius: 4,
     },
     shimmerName,

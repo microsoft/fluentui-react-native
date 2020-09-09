@@ -4,7 +4,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { SHIMMER_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { Text, View, processColor } from 'react-native';
+import { Text, View } from 'react-native';
 
 const shimmer: React.FunctionComponent<{}> = () => {
   return (
@@ -30,7 +30,7 @@ const stylizedShimmer: React.FunctionComponent<{}> = () => {
     shimmerSpeed: 400,
     shimmerDelay: 0.1,
     viewTintColor: 'rgb(100, 100, 100)',
-    cornerRadius: 15,
+    cornerRadius: 10,
   });
 
   return (
