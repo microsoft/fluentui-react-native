@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Wed, 09 Sep 2020 07:28:42 GMT",
+      "tag": "@fluentui-react-native/button_v0.10.10",
+      "version": "0.10.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix Button icon color props",
+            "author": "tomun@microsoft.com",
+            "commit": "3524ba90c46e005eff7b1d2ebeafb59ed07533d4",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Aug 2020 05:03:51 GMT",
       "tag": "@fluentui-react-native/button_v0.10.9",
       "version": "0.10.9",

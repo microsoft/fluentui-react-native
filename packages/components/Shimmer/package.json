@@ -1,7 +1,7 @@
 {
-  "name": "@fluentui-react-native/button",
-  "version": "0.10.10",
-  "description": "A cross-platform Button component using the Fluent Design System",
+  "name": "@fluentui-react-native/shimmer",
+  "version": "0.1.0",
+  "description": "A shimmer view",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -11,7 +11,6 @@
   },
   "scripts": {
     "build": "fluentui-scripts build",
-    "depcheck": "fluentui-scripts depcheck",
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
     "lint": "fluentui-scripts eslint",
@@ -21,24 +20,17 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.6.80",
-    "@fluentui-react-native/adapters": ">=0.3.35 <1.0.0",
-    "@fluentui-react-native/interactive-hooks": ">=0.5.1 <1.0.0",
-    "@fluentui-react-native/pressable": ">=0.3.85 <1.0.0",
-    "@fluentui-react-native/text": ">=0.6.8 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.5.6 <1.0.0",
-    "@uifabricshared/foundation-composable": ">=0.6.73 <1.0.0",
-    "@uifabricshared/foundation-settings": ">=0.7.0 <1.0.0"
+    "@fluentui-react-native/framework": "0.2.10",
+    "@fluentui-react-native/adapters": ">=0.3.32 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.4.67 <1.0.0"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.62.0-preview.3",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "react-native": "0.62.2"
   },
   "peerDependencies": {
-    "react": "^16.8.0",
     "react-native": ">=0.60.0"
   },
   "author": "",

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 09 Sep 2020 07:28:42 GMT",
+      "tag": "@fluentui-react-native/tester_v0.5.2",
+      "version": "0.5.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix Button icon color props",
+            "author": "tomun@microsoft.com",
+            "commit": "3524ba90c46e005eff7b1d2ebeafb59ed07533d4",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 01 Sep 2020 06:53:40 GMT",
       "tag": "@fluentui-react-native/tester_v0.5.1",
       "version": "0.5.1",
