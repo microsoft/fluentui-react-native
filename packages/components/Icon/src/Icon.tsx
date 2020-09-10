@@ -6,7 +6,7 @@ import {SvgUri} from 'react-native-svg'
 import * as assetRegistry from 'react-native/Libraries/Image/AssetRegistry';
 import { stagedComponent, useTheme, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
 
-function RenderRasterImage(iconProps: IIconProps) {
+function renderRasterImage(iconProps: IIconProps) {
   const { width, height } = iconProps;
   return (
     <ReactNative.Image
@@ -16,7 +16,7 @@ function RenderRasterImage(iconProps: IIconProps) {
   )
 }
 
-function RenderFontIcon(iconProps: IIconProps) {
+function renderFontIcon(iconProps: IIconProps) {
   const fontSource: IFontIconProps = iconProps.fontSource;
   const style = {...fontSource };
 
@@ -31,7 +31,7 @@ function RenderFontIcon(iconProps: IIconProps) {
   );
 }
 
-function RenderSvg(iconProps: IIconProps) {
+function renderSvg(iconProps: IIconProps) {
   const svgIconProps: ISvgIconProps = iconProps.svgSource;
   const { width, height } = iconProps;
   const viewBox = iconProps.svgSource.viewBox;
@@ -65,25 +65,25 @@ function RenderSvg(iconProps: IIconProps) {
 const memoCache = getMemoCache<IIconProps>();
 
 export const Icon = stagedComponent((props: IIconProps) => {
+  const theme = useTheme();
 
   return (rest: IIconProps) => {
-    const theme = useTheme();
     const color = props.color || theme.colors.buttonText ;
 
     const style = memoCache({
       color: color
-    }, [theme, color])[0];
+    }, [color])[0];
 
     const newProps = mergeProps<IIconProps>(style, props, rest);
 
      if (newProps.svgSource) {
-      return RenderSvg(newProps);
+      return renderSvg(newProps);
     }
     else if (newProps.fontSource) {
-      return RenderFontIcon(newProps);
+      return renderFontIcon(newProps);
     }
     else if (newProps.rasterImageSource) {
-      return RenderRasterImage(newProps);
+      return renderRasterImage(newProps);
     }
     else {
       return null;
