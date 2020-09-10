@@ -1,8 +1,9 @@
 import { ThemeHelper, buildUseStyling, UseStylingOptions } from './buildUseStyling';
 import { TextProps, Text, View } from 'react-native';
 import { buildProps } from './buildProps';
-import * as renderer from 'react-test-renderer';
+import toJson from 'enzyme-to-json';
 import * as React from 'react';
+import { mount } from 'enzyme';
 
 /**
  * Sample super simple theming implementation, shared by all the samples. This is intended to be illustrative,
@@ -40,6 +41,13 @@ const baseTheme: Theme = {
 };
 
 const current = { theme: baseTheme };
+
+/**
+ * this wrapper solves the (so-far) inexplicable type errors from the matchers in typescript
+ */
+function snapshotTestTree(tree: any) {
+  (expect(toJson(tree)) as any).toMatchSnapshot();
+}
 
 /**
  * Because the buildUseStyling utility is not opinionated about theming, the theming is injected via
@@ -117,7 +125,7 @@ describe('useStyling samples', () => {
   const useStylingSample1 = buildUseStyling(sample1StylingOptions, themeHelper);
 
   // now the sample 1 component becomes simple to build, just merge the styled props with the input props
-  const Sample1Text: React.FunctionComponent<Sample1Props> = props => {
+  const Sample1Text: React.FunctionComponent<Sample1Props> = (props) => {
     const styledProps = useStylingSample1(props).content;
     const merged = { ...props, ...styledProps };
     return <Text {...merged}>{props.children}</Text>;
@@ -125,8 +133,8 @@ describe('useStyling samples', () => {
 
   /** first render the component with no updates */
   it('Sample1Text rendering with no overrides', () => {
-    const tree = renderer.create(<Sample1Text>Sample1a</Sample1Text>).toJSON();
-    expect(tree).toMatchSnapshot();
+    const tree = mount(<Sample1Text>Sample1a</Sample1Text>);
+    snapshotTestTree(tree);
   });
 
   /** now re-theme the component via the components in the theme */
@@ -139,8 +147,8 @@ describe('useStyling samples', () => {
         },
       },
     });
-    const tree = renderer.create(<Sample1Text>Sample1b</Sample1Text>).toJSON();
-    expect(tree).toMatchSnapshot();
+    const tree = mount(<Sample1Text>Sample1b</Sample1Text>);
+    snapshotTestTree(tree);
   });
 
   /**
@@ -188,13 +196,13 @@ describe('useStyling samples', () => {
        * the component props we add a list of the props which need to be passed into tokens. If all props should be spread into the
        * tokens then this value can be set to 'all'. If none should be passed it can be omitted or set to 'none'
        */
-      tokenProps: ['color'],
+      tokensThatAreAlsoProps: ['color'],
     },
     themeHelper,
   );
 
   // the Sample2Text component is built the same way as sample1, just using the new hook that has been created
-  const Sample2Text: React.FunctionComponent<Sample2Props> = props => {
+  const Sample2Text: React.FunctionComponent<Sample2Props> = (props) => {
     const styledProps = useStylingSample2(props).content;
     const merged = { ...props, ...styledProps };
     // delete the color key to not pass it through to the text props, could be done via destructuring, filtering, or any number of ways
@@ -206,15 +214,13 @@ describe('useStyling samples', () => {
   /** rendering the Sample2 component with the base theme */
   it('Sample2Text rendering with defaults and a color override', () => {
     themeHelper.setActive();
-    const tree = renderer
-      .create(
-        <View>
-          <Sample2Text>Sample2 with defaults</Sample2Text>
-          <Sample2Text color="green">Sample2 with color override via prop</Sample2Text>
-        </View>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    const tree = mount(
+      <View>
+        <Sample2Text>Sample2 with defaults</Sample2Text>
+        <Sample2Text color="green">Sample2 with color override via prop</Sample2Text>
+      </View>,
+    );
+    snapshotTestTree(tree);
   });
 
   /** now re-theme the component via the components in the theme */
@@ -231,14 +237,12 @@ describe('useStyling samples', () => {
         },
       },
     });
-    const tree = renderer
-      .create(
-        <View>
-          <Sample2Text>Sample2 with theme overrides set</Sample2Text>
-          <Sample2Text color="purple">Sample2 with theme and color prop override</Sample2Text>
-        </View>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    const tree = mount(
+      <View>
+        <Sample2Text>Sample2 with theme overrides set</Sample2Text>
+        <Sample2Text color="purple">Sample2 with theme and color prop override</Sample2Text>
+      </View>,
+    );
+    snapshotTestTree(tree);
   });
 });
