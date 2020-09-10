@@ -86,7 +86,7 @@ export const Button = compose<IButtonType>({
   styles: {
     root: [backgroundColorTokens, borderTokens],
     stack: [],
-    icon: [foregroundColorTokens, [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'overlayColor' }]],
+    icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'tintColor' }],
     content: [textTokens, foregroundColorTokens]
   }
 });

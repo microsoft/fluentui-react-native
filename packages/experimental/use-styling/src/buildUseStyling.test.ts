@@ -17,11 +17,11 @@ const baseTokens: Tokens = {
   b: 'b-base',
   c: 'c-base',
   hover: {
-    c: 'c-base-hover'
+    c: 'c-base-hover',
   },
   press: {
-    c: 'c-base-press'
-  }
+    c: 'c-base-press',
+  },
 };
 
 interface Theme {
@@ -37,23 +37,23 @@ interface Theme {
 const defaultTheme: Theme = {
   vals: {
     foo: 'foo',
-    bar: 'bar'
+    bar: 'bar',
   },
   components: {
     uno: {
       a: 'uno-a',
-      c: 'uno-c'
+      c: 'uno-c',
     },
     dos: {
       b: 'dos-b',
-      c: 'dos-c'
-    }
-  }
+      c: 'dos-c',
+    },
+  },
 };
 
 const themeHelper: ThemeHelper<Theme> = {
   useTheme: () => defaultTheme,
-  getComponentInfo: (theme: Theme, name: string) => theme.components[name]
+  getComponentInfo: (theme: Theme, name: string) => theme.components[name],
 };
 
 interface Props {
@@ -75,8 +75,8 @@ const slotFn1 = (tokens: Tokens, theme: Theme) => {
       b: tokens.b,
       c: tokens.c,
       ...theme.vals,
-      instance: lastInstance++
-    }
+      instance: lastInstance++,
+    },
   } as Props;
 };
 
@@ -88,10 +88,10 @@ const slotFn2 = (tokens: Tokens) => {
       style: {
         a: tokens.a,
         b: tokens.b,
-        instance: lastInstance++
-      }
+        instance: lastInstance++,
+      },
     }),
-    [tokens.a, tokens.b]
+    [tokens.a, tokens.b],
   )[0];
 };
 
@@ -106,20 +106,20 @@ const baseOptions: UseStylingOptions<Props, TestSlotProps, Tokens, Theme> = {
     baseTokens,
     'uno',
     (theme: Theme) => ({
-      b: theme.vals.foo
-    })
+      b: theme.vals.foo,
+    }),
   ],
   states: ['hover', 'press'],
   slotProps: {
     slot1: {
       style: {
-        instance: lastInstance++
-      }
+        instance: lastInstance++,
+      },
     },
     slot2: buildProps(slotFn1, ['a', 'b', 'c']),
-    slot3: slotFn2
+    slot3: slotFn2,
   },
-  tokenProps: ['b']
+  tokensThatAreAlsoProps: ['b'],
 };
 
 describe('useStyling test suite', () => {
