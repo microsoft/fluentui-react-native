@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/use-styling
 
-This log was last generated on Mon, 17 Aug 2020 22:08:34 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Sep 2020 21:36:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Wed, 09 Sep 2020 21:36:19 GMT
+
+### Minor changes
+
+- rename tokenProps to tokensThatAreAlsoProps in new framework (jasonmo@microsoft.com)
 
 ## 0.2.4
 

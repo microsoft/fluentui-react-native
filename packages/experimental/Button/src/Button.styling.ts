@@ -72,11 +72,10 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
     icon: buildProps(
       (tokens: ButtonTokens) => ({
         style: {
-          color: tokens.iconColor || tokens.color,
-          overlayColor: tokens.iconColor,
+          tintColor: tokens.iconColor,
         },
       }),
-      ['color', 'iconColor'],
+      ['iconColor'],
     ),
   },
 };

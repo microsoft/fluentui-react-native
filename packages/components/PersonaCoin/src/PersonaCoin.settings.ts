@@ -8,6 +8,7 @@ export const settings: IComposeSettings<IPersonaCoinType> = [
       horizontalIconAlignment: 'end',
       verticalIconAlignment: 'end',
       color: 'white', // initials is always 'white', unless overriden by token
+      iconStrokeColor: 'white', // icon stroke color is always 'white', unless overriden by token
       backgroundColor: convertCoinColor('lightBlue')
     }
   },

@@ -32,7 +32,15 @@ Now this example isn't particularly useful but demonstrates the basic role that 
 
 ## Quick Reference
 
-At the core of this system is the idea that: **`Tokens + Theme ==> Styles`**. The overall signature of the method is as follows:
+At the core of this system is the idea that: **`Tokens + Theme ==> Styles`**. This can be thought of as:
+
+- Your styles are produced via a recipe, defined as a function in `slotProps`
+- The tokens are the ingredients for your recipe
+- Some of those tokens come from constants
+- Some of those tokens come from the theme
+- Some tokens could even come from props but this is not the default and needs to be declared in `tokensThatAreAlsoProps`
+
+The overall signature of the method is as follows:
 
 ```ts
 const useStyling = buildUseStyling(
@@ -52,9 +60,9 @@ const useStyling = buildUseStyling(
     states?: ['hovered', 'pressed', 'disabled'],
 
     /* Step 3: Copy some/none/all props to Tokens */
-    tokenProps?: true /* all props are tokens */
-              | false /* no props are tokens */
-              | ['token1', 'token2'] /* list of tokens */,
+    tokensThatAreAlsoProps?: 'all' /* all props are tokens */
+              | 'none' | undefined /* no props are tokens */
+              | ['token1', 'token2'] /* list of tokens which also appear in props */,
 
     /* Step 4: Create props for child components from Tokens and Theme */
     slotProps?: {
@@ -106,16 +114,16 @@ const useStyling = buildUseStyling({
     /* fixed object */
     {
       borderWidth: 1,
-      borderRadius: 2
+      borderRadius: 2,
     },
     /* theme function */
     (theme: Theme) => {
       backgroundColor: theme.palette.bodyBackground || 'white';
     },
     /* name lookup */
-    'MyComponentName'
+    'MyComponentName',
   ],
-  ...otherSettings
+  ...otherSettings,
 });
 ```
 
@@ -170,7 +178,7 @@ const useStyling = buildUseStyling({
     /* token settings */
   ],
   states: ['hovered', 'pressed'],
-  ...otherSettings
+  ...otherSettings,
 });
 ```
 
@@ -209,17 +217,17 @@ const Button = (props: ButtonProps) => {
 };
 ```
 
-## Token Props
+## Tokens and Props
 
 The ideal scenario from a caching perspective, is for tokens and props to be completely separate. This keeps variability very low and reduces the need for frequent style recalculations. From the perspective of someone using the components this sharply limits flexibility. As a result it may be useful for some tokens to be surfaced as props on the component.
 
-Because props are not provided to the final stage of the `useStyling` workflow, if any props are also tokens, they need to be declared so that they can override the token values coming from the theme or constants. This is done via the `tokenProps` property. This has three behaviors:
+Because props are not provided to the final stage of the `useStyling` workflow, if any props are also tokens, they need to be declared so that they can override the token values coming from the theme or constants. This is done via the `tokensThatAreAlsoProps` property. This has three behaviors:
 
-| Value                  | Behavior                                                                                        |
-| ---------------------- | ----------------------------------------------------------------------------------------------- |
-| `false` or `undefined` | No properties are tokens and tokens will be left as is.                                         |
-| `true`                 | All properties should be considered tokens. This equates to: `tokens = { ...tokens, ...props }` |
-| `(keyof Tokens)[]`     | Provides a discrete list of values to copy from props to tokens (if present)                    |
+| Value                   | Behavior                                                                                        |
+| ----------------------- | ----------------------------------------------------------------------------------------------- |
+| `'none'` or `undefined` | No properties are tokens and tokens will be left as is.                                         |
+| `'all'`                 | All properties should be considered tokens. This equates to: `tokens = { ...tokens, ...props }` |
+| `(keyof Tokens)[]`      | Provides a discrete list of values to copy from props to tokens (if present)                    |
 
 ## Slot Props
 
@@ -239,8 +247,8 @@ The simplest way to provide props for a slot is by providing an object directly.
 const useStyling = buildUseStyling({
   ...precedingOptions,
   slotProps: {
-    slot1: { style: { display: 'flex' } }
-  }
+    slot1: { style: { display: 'flex' } },
+  },
 });
 ```
 
@@ -265,9 +273,9 @@ const slotFn = (tokens: Tokens, theme: Theme, cache: GetMemoValue<Props>) =>
   cache(() => {
     return {
       style: {
-        backgroundColor: tokens.backgroundColor
+        backgroundColor: tokens.backgroundColor,
         // etc.
-      }
+      },
     };
   }, [
     /* no keys, just direct cache the function result*/
@@ -281,9 +289,9 @@ const slotFn = (tokens: Tokens, theme: Theme, cache: GetMemoValue<Props>) => {
   const { backgroundColor, color, borderRadius } = tokens;
   return cache(
     () => ({
-      style: { backgroundColor, color, borderRadius }
+      style: { backgroundColor, color, borderRadius },
     }),
-    [backgroundColor, color, borderRadius]
+    [backgroundColor, color, borderRadius],
   )[0];
 };
 ```
@@ -298,10 +306,10 @@ const slotFn = buildProps(
     style: {
       backgroundColor: tokens.backgroundColor,
       color: tokens.color,
-      borderRadius: tokens.borderRadius
-    }
+      borderRadius: tokens.borderRadius,
+    },
   }),
-  ['backgroundColor', 'color', 'borderRadius']
+  ['backgroundColor', 'color', 'borderRadius'],
 );
 ```
 

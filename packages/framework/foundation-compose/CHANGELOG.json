@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Fri, 28 Aug 2020 05:03:51 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.80",
+      "version": "1.6.80",
+      "comments": {
+        "none": [
+          {
+            "comment": "only allow menu container to focus on mount",
+            "author": "lehon@microsoft.com",
+            "commit": "9c93388527af2ea3ba60336c56a3da0ce65e3688",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 17 Aug 2020 22:08:34 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.6.79",
       "version": "1.6.79",
