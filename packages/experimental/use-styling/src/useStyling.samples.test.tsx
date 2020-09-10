@@ -1,5 +1,5 @@
 import { ThemeHelper, buildUseStyling, UseStylingOptions } from './buildUseStyling';
-import { TextProps, Text } from 'react-native';
+import { TextProps, Text, View } from 'react-native';
 import { buildProps } from './buildProps';
 import * as renderer from 'react-test-renderer';
 import * as React from 'react';
@@ -140,6 +140,105 @@ describe('useStyling samples', () => {
       },
     });
     const tree = renderer.create(<Sample1Text>Sample1b</Sample1Text>).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  /**
+   * Sample 2 - take the styled text component from the first example and allow color to be set in props as well. This is
+   * effectively saying that all other styles come from the theme except that color can be overriden via props.
+   *
+   * This will start with the definition from sample 1 and then extend it.
+   */
+
+  /** use the props from the first sample and just add a color setting */
+  type Sample2Props = Sample1Props & { color?: string };
+
+  /**
+   * Build the styling hook for sample2. Because this isn't being recombined this is being specified inline rather
+   * than using a separate options object. Both are fine.
+   */
+  const useStylingSample2 = buildUseStyling<Sample2Props, Sample1SlotProps, Sample1Tokens, Theme>(
+    {
+      /**
+       * This just starts with the baseline styling from sample1, in particular we are using the recipes of how to turn
+       * token values into the props for the internal sub-components. While this example is not super complex, for real-world
+       * components, re-using these can be extremely valuable.
+       *
+       * With that in mind, this copies over the recipes for how to turn tokens into props, the customizations that
+       * will be made are about how to ensure the tokens are set up correctly.
+       */
+      ...sample1StylingOptions,
+      /**
+       * In sample1 tokens are set to defaults from the global theme section, then patched with any values looked up with
+       * the string 'Sample1'
+       *
+       * We want to maintain the logic of setting up the globals, but add an additional lookup for 'Sample2'. This might correspond
+       * to saying that if we were making a variant of a 'Text' component called 'HeaderText', we might want to look up
+       * customizations from 'Text' first, then override those customizations with those from 'HeaderText'
+       *
+       * If we didn't want to add the extra 'Sample2' lookup this line would be omitted. If we didn't want to look up 'Sample1' first
+       * that could be filtered out of the array that is being copied
+       */
+      tokens: [...sample1StylingOptions.tokens, 'Sample2'],
+      /**
+       * This is the final bit of magic. The tokens will already have values set from the global theme, they will then be patched with
+       * any customizations set into Sample1 and/or Sample2.
+       *
+       * If this value was omitted then the tokens would be passed to the slotProps recipies as is. To have those values patched from
+       * the component props we add a list of the props which need to be passed into tokens. If all props should be spread into the
+       * tokens then this value can be set to 'all'. If none should be passed it can be omitted or set to 'none'
+       */
+      tokenProps: ['color'],
+    },
+    themeHelper,
+  );
+
+  // the Sample2Text component is built the same way as sample1, just using the new hook that has been created
+  const Sample2Text: React.FunctionComponent<Sample2Props> = props => {
+    const styledProps = useStylingSample2(props).content;
+    const merged = { ...props, ...styledProps };
+    // delete the color key to not pass it through to the text props, could be done via destructuring, filtering, or any number of ways
+    delete merged.color;
+    // render the text
+    return <Text {...merged}>{props.children}</Text>;
+  };
+
+  /** rendering the Sample2 component with the base theme */
+  it('Sample2Text rendering with defaults and a color override', () => {
+    themeHelper.setActive();
+    const tree = renderer
+      .create(
+        <View>
+          <Sample2Text>Sample2 with defaults</Sample2Text>
+          <Sample2Text color="green">Sample2 with color override via prop</Sample2Text>
+        </View>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  /** now re-theme the component via the components in the theme */
+  it('Sample2Text rendering with some custom settings in the theme', () => {
+    themeHelper.setActive({
+      components: {
+        Sample1: {
+          color: 'pink',
+          fontSize: 24,
+        },
+        Sample2: {
+          fontSize: 18,
+          fontFamily: 'Helvetica',
+        },
+      },
+    });
+    const tree = renderer
+      .create(
+        <View>
+          <Sample2Text>Sample2 with theme overrides set</Sample2Text>
+          <Sample2Text color="purple">Sample2 with theme and color prop override</Sample2Text>
+        </View>,
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
