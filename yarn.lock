@@ -1151,20 +1151,6 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@fluentui-react-native/tester@^0.3.6":
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/tester/-/tester-0.3.7.tgz#8e8b890435da1ed7c3a0a2fbe1e53330754d0f56"
-  integrity sha512-fQVHSyfPfQY11dbrZ+C5eSXXHi04ANKxmD1jcUMByuGbgkoKuCjI+0Y6/B1D5ipXlB0OhaJjloJvZv0T1hSaWg==
-  dependencies:
-    "@fluentui-react-native/interactive-hooks" ">=0.5.1 <1.0.0"
-    "@fluentui-react-native/stack" ">=0.2.8 <1.0.0"
-    "@fluentui/react-native" ">=0.15.87 <1.0.0"
-    "@uifabricshared/theme-registry" ">=0.3.69 <1.0.0"
-    "@uifabricshared/themed-stylesheet" ">=0.3.68 <1.0.0"
-    "@uifabricshared/theming-ramp" ">=0.10.5 <1.0.0"
-    "@uifabricshared/theming-react-native" ">=0.7.76 <1.0.0"
-    react-native-svg "^11.0.0"
-
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -2849,14 +2835,6 @@
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/@uifabric/prettier-rules/-/prettier-rules-7.0.4.tgz#03082a6cc4b586104738a24892c56e0f1d3df1b6"
   integrity sha512-PK60wLAjPrG2l93r1l/VY2BmnC1la0oxIXYBuln5DOAFJcSXMea9RxoNjuqhhqZGZo6aLjO7lW070MeVOvkABQ==
-
-"@uifabricshared/theming-react-native@0.7.75":
-  version "0.7.75"
-  resolved "https://registry.yarnpkg.com/@uifabricshared/theming-react-native/-/theming-react-native-0.7.75.tgz#68f6ff2a7c4ea04ed8e9f1e4bd6f04e763462754"
-  integrity sha512-wB6gW6/Gs0hsZb4rnlRLhquUvijhGc5CJM/ee/AqJmFV74qTWRUCpBEjzb/Ye9qKI4JAJZka3QASqWIMEgr/vw==
-  dependencies:
-    "@uifabricshared/theme-registry" ">=0.3.69 <1.0.0"
-    "@uifabricshared/theming-ramp" ">=0.10.4 <1.0.0"
 
 "@wdio/allure-reporter@5.22.4":
   version "5.22.4"
