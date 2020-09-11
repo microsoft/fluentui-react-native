@@ -7,7 +7,6 @@ export interface IFontIconProps
   fontSrcFile?: string;
   codepoint: number;
   fontSize?: number;
-  color?: string;
 }
 
 export interface ISvgIconProps
@@ -15,7 +14,6 @@ export interface ISvgIconProps
   uri?: string;
   src?: React.FC<SvgProps>;
   viewBox?: string;
-  color?: string;
 }
 
 export interface IRasterImageIconProps

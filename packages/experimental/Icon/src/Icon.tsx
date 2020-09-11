@@ -18,7 +18,7 @@ function renderRasterImage(iconProps: IIconProps) {
 
 function renderFontIcon(iconProps: IIconProps) {
   const fontSource: IFontIconProps = iconProps.fontSource;
-  const style = {...fontSource };
+  const style = {...fontSource, color: iconProps.color };
 
   if (style.fontSrcFile != undefined) {
     const asset = assetRegistry.getAssetByID(style.fontSrcFile);
@@ -42,7 +42,7 @@ function renderSvg(iconProps: IIconProps) {
           viewBox = {viewBox}
           width = {width}
           height = {height}
-          color = {svgIconProps.color}
+          color = {iconProps.color}
         />
     );
   }
@@ -53,7 +53,7 @@ function renderSvg(iconProps: IIconProps) {
           viewBox = {viewBox}
           width = {width}
           height = {height}
-          color = {svgIconProps.color}
+          color = {iconProps.color}
         />
     )
   }
@@ -68,7 +68,7 @@ export const Icon = stagedComponent((props: IIconProps) => {
   const theme = useTheme();
 
   return (rest: IIconProps) => {
-    const color = props.color || theme.colors.buttonText ;
+    const color = props.color || theme.colors.buttonText;
 
     const style = memoCache({
       color: color
@@ -76,7 +76,7 @@ export const Icon = stagedComponent((props: IIconProps) => {
 
     const newProps = mergeProps<IIconProps>(style, props, rest);
 
-     if (newProps.svgSource) {
+    if (newProps.svgSource) {
       return renderSvg(newProps);
     }
     else if (newProps.fontSource) {

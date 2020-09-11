@@ -12,14 +12,12 @@ export const IconTest: React.FunctionComponent<{}> = () => {
 
   const svgProps: ISvgIconProps = {
     src: TestSvg,
-    viewBox: '0 0 500 500',
-    color: 'purple',
+    viewBox: '0 0 500 500'
   };
 
   const svgUriProps: ISvgIconProps = {
     uri: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Example.svg',
-    viewBox: '0 0 100 100',
-    color: 'purple',
+    viewBox: '0 0 100 100'
   };
 
   const fontProps: IFontIconProps = {
@@ -27,18 +25,17 @@ export const IconTest: React.FunctionComponent<{}> = () => {
     fontSrcFile: testTtf,
     codepoint: 0xf083,
     fontSize: 32,
-    color: 'green',
   };
 
   return (
     <View>
       <Text>Font icon</Text>
-      <Icon fontSource={fontProps} width={100} height={100} />
+      <Icon fontSource={fontProps} width={100} height={100} color='purple'/>
       <Text>Svg icons</Text>
-      <Icon svgSource={svgProps} width={100} height={100} />
-      <Icon svgSource={svgUriProps} width={100} height={100} />
+      <Icon svgSource={svgProps} width={100} height={100} color="yellow" />
+      <Icon svgSource={svgUriProps} width={100} height={100}  color="red"/>
       <Text>Raster icon</Text>
-      <Icon rasterImageSource={rasterProps} width={100} height={100} />
+      <Icon rasterImageSource={rasterProps} width={100} height={100}  color="green"/>
     </View>
   );
 };
