@@ -1,11 +1,17 @@
 /** @jsx withSlots */
 import { withSlots } from './withSlots';
 import { stagedComponent } from './stagedComponent';
-import { TextProps, Text, TextStyle, View } from 'react-native';
 import { mergeProps } from '@fluentui-react-native/merge-props';
 import { buildUseSlots } from './buildUseSlots';
 import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
+import { CSSProperties } from 'react';
+
+// types for web
+type TextProps = { style?: CSSProperties };
+type ViewProps = { style?: CSSProperties };
+type ViewStyle = CSSProperties;
+type TextStyle = CSSProperties;
 
 /**
  * This file contains samples and description to help explain what the useSlots hook does and why it is useful
@@ -19,11 +25,13 @@ describe('useSlots sample code test suite', () => {
    */
 
   /**
+   * Example #1: Single level simple component ----------------------------------------
+   *
    * First we are going to create a wrapped text component that bolds all text. One component will be authored as a staged
    * component and one as a regular component.
    */
 
-  const boldBaseProps: TextProps = { style: { fontWeight: '900' } };
+  const boldBaseProps: TextProps = { style: { fontWeight: 900 } };
 
   /**
    * First create the bold text in the standard way. This is just a function component.
@@ -38,7 +46,7 @@ describe('useSlots sample code test suite', () => {
      * Now render the text, merging the baseProps with the style updates with the rest param. Note that this leverages the fact
      * that mergeProps will reliably produce style objects with the same reference, given the same inputs.
      */
-    return <Text {...mergeProps(boldBaseProps, rest)}>{children}</Text>;
+    return <span {...mergeProps(boldBaseProps, rest)}>{children}</span>;
   };
   BoldTextStandard.displayName = 'BoldTextStandard';
 
@@ -58,7 +66,7 @@ describe('useSlots sample code test suite', () => {
        * extra are additional props that may be filled in by a higher order component. They should not include styling and are only props the
        * enclosing component are passing to the JSX elements
        */
-      return <Text {...mergeProps(boldBaseProps, props, extra)}>{children}</Text>;
+      return <span {...mergeProps(boldBaseProps, props, extra)}>{children}</span>;
     };
   });
   BoldTextStaged.displayName = 'BoldTextStaged';
@@ -67,23 +75,24 @@ describe('useSlots sample code test suite', () => {
    * The demos of the code use enzyme with JSDom to show the full tree. This has the side effect of doubling up primitive elements in the output
    * JSON. This is an issue with rendering react-native with enzyme but in real usage the nodes only render once.
    */
-  it('renders the two types of basic bold text components', () => {
+  it('renders sample 1 - the two types of basic bold text components', () => {
     const styleToMerge: TextStyle = { color: 'black' };
 
     /**
      * First render the staged component. This invokes the wrapper that was built by the stagedComponent function
      */
-    const wrapper = mount(<BoldTextStaged style={styleToMerge}>Staged component at one level</BoldTextStaged>);
+    const wrapper = mount(
+      <div>
+        <BoldTextStaged style={styleToMerge}>Staged component at one level</BoldTextStaged>
+        <BoldTextStandard style={styleToMerge}>Standard component of a single level</BoldTextStandard>
+      </div>,
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
-
-    /**
-     * Render the standard version of the component. Output is pretty much identical to the staged component (if you look at the snapshot)
-     */
-    const wrapper2 = mount(<BoldTextStandard style={styleToMerge}>Standard component of a single level</BoldTextStandard>);
-    expect(toJson(wrapper2)).toMatchSnapshot();
   });
 
   /**
+   * Example #2 - Simple component containing another simple component -------------------------------------
+   *
    * Next we will build a layer on top of the previously authored components to turn the bold text components into header components. This is
    * to illustrate the way in which components can be commonly built on top of other simpler components.
    */
@@ -139,22 +148,137 @@ describe('useSlots sample code test suite', () => {
   HeaderStaged.displayName = 'HeaderStaged';
 
   /**
-   * The demos of the code use enzyme with JSDom to show the full tree. This has the side effect of doubling up primitive elements in the output
-   * JSON. This is an issue with rendering react-native with enzyme but in real usage the nodes only render once.
+   * Look at the snapshots to compare the rendered output. The staged component will skip the intermediate levels of the react hieararchy while
+   * still rendering to the correct primitives.
    */
-  it('renders the two types of two level header components', () => {
+  it('renders sample 2 = the two types of two level header components', () => {
     const styleToMerge: TextStyle = { color: 'black' };
 
     /**
      * First render the staged component. This invokes the wrapper that was built by the stagedComponent function
      */
-    const wrapper = mount(<HeaderStaged style={styleToMerge}>Staged component with two levels</HeaderStaged>);
+    const wrapper = mount(
+      <div>
+        <HeaderStaged style={styleToMerge}>Staged component with two levels</HeaderStaged>
+        <HeaderStandard style={styleToMerge}>Standard component with two levels</HeaderStandard>
+      </div>,
+    );
     expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
+  /**
+   * Example #3: Complex components built using useSlots --------------------------------------------------------------------
+   *
+   * We'll build a component that shows two labels, a header and a caption, embedded inside a view
+   */
+
+  type HeaderWithCaptionProps = ViewProps & { headerColor?: string; captionColor?: string; captionText?: string };
+
+  /** standard props for the container */
+  const containerProps: ViewProps = { style: { display: 'flex', flexDirection: 'column' } };
+
+  /**
+   * add a quick cache to ensure that we don't thrash the styles. This is a danger any time a value from a style is added as
+   * a prop on a component
+   */
+  const colorProps = {};
+  const getColorProps = (value?: string) => {
+    if (value !== undefined) {
+      colorProps[value] = colorProps[value] || { style: { color: value } };
+      return colorProps[value];
+    }
+    return {};
+  };
+
+  /**
+   * now just create the component like a standard react functional component
+   */
+  const CaptionedHeaderStandard: React.FunctionComponent<HeaderWithCaptionProps> = (props) => {
+    const { headerColor, captionColor, captionText, children, ...rest } = props;
+    const headerColorProps = getColorProps(headerColor);
+    const captionColorProps = getColorProps(captionColor);
+    return (
+      <div {...mergeProps(containerProps, rest)}>
+        <HeaderStandard {...headerColorProps}>{children}</HeaderStandard>
+        {captionText && <BoldTextStandard {...captionColorProps}>{captionText}</BoldTextStandard>}
+      </div>
+    );
+  };
+  CaptionedHeaderStandard.displayName = `CaptionedHeaderStandard';`;
+
+  /**
+   * now build the same component using slots hook. This will also add use of the style injection pattern
+   */
+  const useCaptionedHeaderSlots = buildUseSlots({
+    /** Slots are just like above, this component will have three sub-components */
+    slots: {
+      container: 'div',
+      header: HeaderStaged,
+      caption: BoldTextStaged,
+    },
+    /** useStyling is an optional function that turns props into props for the sub-components */
+    useStyling: (props: HeaderWithCaptionProps) => ({
+      container: containerProps,
+      header: getColorProps(props.headerColor),
+      caption: getColorProps(props.captionColor),
+    }),
+  });
+
+  /** a mask to clear props that we don't want to pass to the inner view */
+  const clearCustomProps = { headerColor: undefined, captionColor: undefined };
+
+  /**
+   * now use the hook to implement it as a staged component
+   */
+  const CaptionedHeaderStaged = stagedComponent<HeaderWithCaptionProps>((props) => {
+    // At the point where this is called the slots are initialized with the initial prop values from useStyling above
+    const Slots = useCaptionedHeaderSlots(props);
+    return (extra: HeaderWithCaptionProps, children: React.ReactNode) => {
+      // merge the props together, picking out the caption text and clearing any custom values we don't want forwarded to the view
+      const { captionText, ...rest } = mergeProps(props, extra, clearCustomProps);
+
+      // now render using the slots. Any values passed in via JSX will be merged with values from the slot hook above
+      return (
+        <Slots.container {...rest}>
+          <Slots.header>{children}</Slots.header>
+          {captionText && <Slots.caption>{captionText}</Slots.caption>}
+        </Slots.container>
+      );
+    };
+  });
+  CaptionedHeaderStaged.displayName = 'CaptionedHeaderStaged';
+
+  /**
+   * Render to enzyme snapshots
+   */
+  it('renders sample 3 - the two types of higher order header components', () => {
+    const styleToMerge: ViewStyle = { backgroundColor: 'gray', borderColor: 'purple', borderWidth: 1 };
 
     /**
-     * Render the standard version of the component. Output is pretty much identical to the staged component (if you look at the snapshot)
+     * Render the two sets of components. Note in the snapshots how the render tree layers for the standard approach are starting
+     * to add up.
      */
-    const wrapper2 = mount(<HeaderStandard style={styleToMerge}>Standard component with two levels</HeaderStandard>);
-    expect(toJson(wrapper2)).toMatchSnapshot();
+    const wrapper = mount(
+      <div>
+        <span>--- SIMPLE USAGE COMPARISON ---</span>
+        <CaptionedHeaderStandard style={styleToMerge}>Standard HOC</CaptionedHeaderStandard>
+        <CaptionedHeaderStaged style={styleToMerge}>Staged HOC</CaptionedHeaderStaged>
+        <span>--- COMPARISON WITH CAPTIONS ---</span>
+        <CaptionedHeaderStandard style={styleToMerge} captionText="Caption text">
+          Standard HOC with Caption
+        </CaptionedHeaderStandard>
+        <CaptionedHeaderStaged style={styleToMerge} captionText="Caption text">
+          Staged HOC with Caption
+        </CaptionedHeaderStaged>
+        <span>--- COMPARISON WITH CAPTIONS AND CUSTOMIZATIONS ---</span>
+        <CaptionedHeaderStandard style={styleToMerge} captionText="Caption text" captionColor="yellow" headerColor="red">
+          Standard HOC with caption and customizations
+        </CaptionedHeaderStandard>
+        <CaptionedHeaderStaged style={styleToMerge} captionText="Caption text" captionColor="yellow" headerColor="red">
+          Staged HOC with caption and customizations
+        </CaptionedHeaderStaged>
+      </div>,
+    );
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
 });
