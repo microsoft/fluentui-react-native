@@ -1,7 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`useSlots sample code test suite Render the two bold text components 1`] = `
-<View>
+exports[`useSlots sample code test suite renders the two types of basic bold text components 1`] = `
+<BoldTextStaged
+  style={
+    Object {
+      "color": "black",
+    }
+  }
+>
   <Text
     style={
       Object {
@@ -10,44 +16,119 @@ exports[`useSlots sample code test suite Render the two bold text components 1`]
       }
     }
   >
-    Staged
-  </Text>
-  <Text
-    style={
-      Object {
-        "color": "black",
-        "fontWeight": "900",
+    <Text
+      style={
+        Object {
+          "color": "black",
+          "fontWeight": "900",
+        }
       }
-    }
-  >
-    Unstaged
+    >
+      Staged component at one level
+    </Text>
   </Text>
-</View>
+</BoldTextStaged>
 `;
 
-exports[`useSlots sample code test suite Render the two header components 1`] = `
-<View>
+exports[`useSlots sample code test suite renders the two types of basic bold text components 2`] = `
+<BoldTextStandard
+  style={
+    Object {
+      "color": "black",
+    }
+  }
+>
   <Text
     style={
       Object {
-        "color": "blue",
+        "color": "black",
+        "fontWeight": "900",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "black",
+          "fontWeight": "900",
+        }
+      }
+    >
+      Standard component of a single level
+    </Text>
+  </Text>
+</BoldTextStandard>
+`;
+
+exports[`useSlots sample code test suite renders the two types of two level header components 1`] = `
+<HeaderStaged
+  style={
+    Object {
+      "color": "black",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "black",
         "fontSize": 20,
         "fontWeight": "900",
       }
     }
   >
-    Staged
+    <Text
+      style={
+        Object {
+          "color": "black",
+          "fontSize": 20,
+          "fontWeight": "900",
+        }
+      }
+    >
+      Staged component with two levels
+    </Text>
   </Text>
-  <Text
+</HeaderStaged>
+`;
+
+exports[`useSlots sample code test suite renders the two types of two level header components 2`] = `
+<HeaderStandard
+  style={
+    Object {
+      "color": "black",
+    }
+  }
+>
+  <BoldTextStandard
     style={
       Object {
-        "color": "blue",
+        "color": "black",
         "fontSize": 20,
-        "fontWeight": "900",
       }
     }
   >
-    Unstaged
-  </Text>
-</View>
+    <Text
+      style={
+        Object {
+          "color": "black",
+          "fontSize": 20,
+          "fontWeight": "900",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "black",
+            "fontSize": 20,
+            "fontWeight": "900",
+          }
+        }
+      >
+        Standard component with two levels
+      </Text>
+    </Text>
+  </BoldTextStandard>
+</HeaderStandard>
 `;
