@@ -13678,9 +13678,9 @@ react-is@^16.12.0, react-is@^16.13.1, react-is@^16.8.1, react-is@^16.8.4, react-
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
 react-native-macos@^0.62.0-0:
-  version "0.62.1"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.62.1.tgz#59896385f1ec38df13bfd59e8b67a10a66af5f67"
-  integrity sha512-igf2SplEbZ7/YbGOeA6xI4W9fo3e+3vdKfZ3bpOZLdw30NRVBBIlM3lHFYVK0pMnZ78EdrpNwPNrLgnwlw5Tfg==
+  version "0.62.10"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.62.10.tgz#302d7f66c272eccc81f16cbbbc2f30b5db5c6233"
+  integrity sha512-/Da+D/wPWm7eZ2nWaloreylLegW84ZJBJCmwXLVvxM0h1FrVGc84a8oyfndxzDDX8BMh+0GWTUZmYBaRQjxbgw==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@react-native-community/cli" "^4.5.1"
