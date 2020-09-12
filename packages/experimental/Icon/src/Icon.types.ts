@@ -1,5 +1,5 @@
 import { SvgProps } from 'react-native-svg';
-import { ImageProps } from 'react-native';
+import { AccessibilityProps } from 'react-native';
 export const iconName = 'Icon';
 
 export interface IFontIconProps
@@ -22,7 +22,7 @@ export interface IRasterImageIconProps
   src: object;
 }
 
-export interface IIconProps extends ImageProps
+export interface IIconProps extends AccessibilityProps
 {
   fontSource?: IFontIconProps;
   svgSource?: ISvgIconProps;
