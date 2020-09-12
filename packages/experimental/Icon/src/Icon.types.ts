@@ -1,4 +1,5 @@
 import { SvgProps } from 'react-native-svg';
+import { ImageProps } from 'react-native';
 export const iconName = 'Icon';
 
 export interface IFontIconProps
@@ -21,9 +22,8 @@ export interface IRasterImageIconProps
   src: object;
 }
 
-export interface IIconProps
+export interface IIconProps extends ImageProps
 {
-  ariaLabel?: string;
   fontSource?: IFontIconProps;
   svgSource?: ISvgIconProps;
   rasterImageSource?: IRasterImageIconProps;
