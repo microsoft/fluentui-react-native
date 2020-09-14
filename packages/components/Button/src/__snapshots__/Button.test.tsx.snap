@@ -7,7 +7,7 @@ exports[`Button default 1`] = `
   accessibilityRole="button"
   accessibilityState={
     Object {
-      "disabled": undefined,
+      "disabled": false,
     }
   }
   accessible={true}

@@ -38,7 +38,7 @@ export const Button = compose<IButtonType>({
     const state: IButtonState = {
       info: {
         ...pressable.state,
-        disabled: userProps.disabled,
+        disabled: !!userProps.disabled,
         content: !!content,
         icon: !!icon,
       },
