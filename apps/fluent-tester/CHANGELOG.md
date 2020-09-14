@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 28 Aug 2020 05:03:51 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Sep 2020 21:36:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.1
+
+Wed, 09 Sep 2020 21:36:19 GMT
+
+### Patches
+
+- Disabled prop-types validation rule (saadnajmi2@gmail.com)
+
+## 0.6.0
+
+Wed, 09 Sep 2020 08:18:37 GMT
+
+### Minor changes
+
+- Added new test (saadnajmi2@gmail.com)
+
+## 0.5.2
+
+Wed, 09 Sep 2020 07:28:42 GMT
+
+### Patches
+
+- Fix Button icon color props (tomun@microsoft.com)
+
+## 0.5.1
+
+Tue, 01 Sep 2020 06:53:40 GMT
+
+### Patches
+
+- Implement iconSizeStrokeWidth and iconSizeStrokeColor tokens for PersonaCoin (tomun@microsoft.com)
 
 ## 0.5.0
 

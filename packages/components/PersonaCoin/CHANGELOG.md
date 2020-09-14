@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/persona-coin
 
-This log was last generated on Mon, 17 Aug 2020 22:08:34 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Sep 2020 21:36:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.86
+
+Wed, 09 Sep 2020 21:36:19 GMT
+
+### Patches
+
+- Disabled prop-types validation rule (saadnajmi2@gmail.com)
+
+## 0.3.85
+
+Tue, 01 Sep 2020 06:53:40 GMT
+
+### Patches
+
+- Implement iconSizeStrokeWidth and iconSizeStrokeColor tokens for PersonaCoin (tomun@microsoft.com)
 
 ## 0.3.83
 

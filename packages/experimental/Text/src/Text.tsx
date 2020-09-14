@@ -43,7 +43,7 @@ export type TextProps<TBase = ITextProps> = TBase &
  * These are the tokens which are also present in props. If specified in props this will override the values
  * from tokens.
  */
-const tokenProps: (keyof TextTokens)[] = ['variant', 'color'];
+const tokensThatAreAlsoProps: (keyof TextTokens)[] = ['variant', 'color'];
 
 /** Type to use for compose */
 interface TextType {
@@ -66,7 +66,7 @@ export const Text = compose<TextType>({
     textName,
   ],
   states: ['disabled'],
-  tokenProps,
+  tokensThatAreAlsoProps,
   slotProps: {
     root: buildProps<ITextProps, TextTokens>(
       (tokens: TextTokens, theme: ITheme) => ({

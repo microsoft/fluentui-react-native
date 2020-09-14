@@ -39,19 +39,20 @@ export function getPresenceIconSource(presence: PersonaPresence, isOutOfOffice: 
 export type PersonaSizeConfig = {
   physicalSize: number;
   iconSize: number;
+  iconStrokeWidth: number;
   initialsSize: number;
 };
 
-const sizeTable: { [P in PersonaSize]: PersonaSizeConfig } = {
-  size8: { physicalSize: 8, iconSize: 0, initialsSize: 4 },
-  size24: { physicalSize: 24, iconSize: 8, initialsSize: 10 },
-  size32: { physicalSize: 32, iconSize: 8, initialsSize: 12 },
-  size40: { physicalSize: 40, iconSize: 12, initialsSize: 14 },
-  size48: { physicalSize: 48, iconSize: 12, initialsSize: 16 },
-  size56: { physicalSize: 56, iconSize: 16, initialsSize: 18 },
-  size72: { physicalSize: 72, iconSize: 20, initialsSize: 20 },
-  size100: { physicalSize: 100, iconSize: 28, initialsSize: 36 },
-  size120: { physicalSize: 120, iconSize: 32, initialsSize: 40 }
+const sizeTable: {[P in PersonaSize]: PersonaSizeConfig} = {
+  size8: { physicalSize: 8, iconSize: 0, iconStrokeWidth: 0, initialsSize: 4 },
+  size24: { physicalSize: 24, iconSize: 8, iconStrokeWidth: 2, initialsSize: 10 },
+  size32: { physicalSize: 32, iconSize: 8, iconStrokeWidth: 2, initialsSize: 12 },
+  size40: { physicalSize: 40, iconSize: 12, iconStrokeWidth: 2, initialsSize: 14 },
+  size48: { physicalSize: 48, iconSize: 12, iconStrokeWidth: 2, initialsSize: 16 },
+  size56: { physicalSize: 56, iconSize: 16, iconStrokeWidth: 3, initialsSize: 18 },
+  size72: { physicalSize: 72, iconSize: 20, iconStrokeWidth: 3, initialsSize: 20 },
+  size100: { physicalSize: 100, iconSize: 28, iconStrokeWidth: 4, initialsSize: 36 },
+  size120: { physicalSize: 120, iconSize: 32, iconStrokeWidth: 4, initialsSize: 40 }
 };
 
 export function getSizeConfig(size: PersonaSize): PersonaSizeConfig {
@@ -86,16 +87,22 @@ export function convertCoinColor(coinColor: PersonaCoinColor): string {
 }
 
 export function calculateEffectiveSizes(tokens: IPersonaCoinTokens): PersonaSizeConfig {
-  const { size, coinSize, iconSize, initialsSize } = tokens;
+  const { size, coinSize, iconSize, iconStrokeWidth, initialsSize } = tokens;
 
   if (size) {
     return sizeTable[size];
   } else {
-    const { physicalSize: defaultPhysicalSize, iconSize: defaultIconSize, initialsSize: defaultInitialsSize } = sizeTable['size40'];
+    const {
+      physicalSize: defaultPhysicalSize,
+      iconSize: defaultIconSize,
+      iconStrokeWidth: defaultIconStrokeWidth,
+      initialsSize: defaultInitialsSize
+    } = sizeTable['size40'];
 
     return {
       physicalSize: coinSize || defaultPhysicalSize,
       iconSize: iconSize || defaultIconSize,
+      iconStrokeWidth: iconStrokeWidth || defaultIconStrokeWidth,
       initialsSize: initialsSize || defaultInitialsSize
     };
   }

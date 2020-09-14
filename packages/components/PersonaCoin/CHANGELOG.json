@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/persona-coin",
   "entries": [
     {
+      "date": "Wed, 09 Sep 2020 21:36:19 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.86",
+      "version": "0.3.86",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Disabled prop-types validation rule",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "6042d1bbb538eb130b3fb4ecae360e467379e6ed",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 01 Sep 2020 06:53:40 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.85",
+      "version": "0.3.85",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Implement iconSizeStrokeWidth and iconSizeStrokeColor tokens for PersonaCoin",
+            "author": "tomun@microsoft.com",
+            "commit": "2b264304206e267089e78c91de66e6ab34f87592",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Aug 2020 05:03:51 GMT",
       "tag": "@fluentui-react-native/persona-coin_v0.3.84",
       "version": "0.3.84",

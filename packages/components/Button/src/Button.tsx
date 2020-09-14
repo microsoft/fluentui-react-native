@@ -26,7 +26,7 @@ export const Button = compose<IButtonType>({
     // attach the pressable state handlers
     const pressable = useAsPressable({ ...rest, onPress: onClick });
     const onKeyUp = React.useCallback(
-      e => {
+      (e) => {
         if (onClick && (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ')) {
           onClick();
           e.stopPropagation();
@@ -87,7 +87,7 @@ export const Button = compose<IButtonType>({
   styles: {
     root: [backgroundColorTokens, borderTokens],
     stack: [],
-    icon: [foregroundColorTokens, [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'overlayColor' }]],
+    icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'tintColor' }],
     content: [textTokens, foregroundColorTokens],
   },
 });
