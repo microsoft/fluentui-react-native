@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Update button snapshot and test",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-09-01T21:30:56.458Z"
+}
