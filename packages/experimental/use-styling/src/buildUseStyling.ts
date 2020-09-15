@@ -1,6 +1,6 @@
 import { getMemoCache, GetMemoValue } from '@fluentui-react-native/memo-cache';
 import { immutableMerge } from '@fluentui-react-native/immutable-merge';
-import { TokenPropMask, BuildSlotProps, refinePropsFunctions } from './buildProps';
+import { TokensThatAreAlsoProps, BuildSlotProps, refinePropsFunctions } from './buildProps';
 import { HasLayer, applyTokenLayers } from './applyTokenLayers';
 
 /** A function to generate tokens based on a theme */
@@ -24,7 +24,8 @@ export type UseStylingOptions<TProps, TSlotProps, TTokens, TTheme> = {
   tokens?: TokenSettings<TTokens, TTheme>[];
 
   /**
-   * States that might be applied for the component like disabled or hovered
+   * States that might be applied for the component like disabled or hovered, these should be listed
+   * in the order that they should be applied
    */
   states?: (keyof TTokens)[];
 
@@ -38,7 +39,7 @@ export type UseStylingOptions<TProps, TSlotProps, TTokens, TTheme> = {
    * - If an array of keys this will ensure these props are promoted to tokens
    * - If true all props will be added to tokens, if false or not specified no props will be treated as tokens
    */
-  tokenProps?: TokenPropMask<TTokens>;
+  tokensThatAreAlsoProps?: TokensThatAreAlsoProps<TTokens>;
 
   /** purely used to make type inferencing work correctly so the hook builder can pick up TProps from this type */
   _propsType?: TProps;
@@ -69,13 +70,13 @@ export type ThemeHelper<TTheme> = {
  * @param tokenProps - how to merge props into tokens. If true all props will be merged, false: no props, an array of keys will
  *                     be treated as an include mask
  */
-function promotePropsToTokens<TTokens, TProps>(tokens: TTokens, props: TProps, tokenProps?: TokenPropMask<TTokens>): TTokens {
-  return tokenProps
+function promotePropsToTokens<TTokens, TProps>(tokens: TTokens, props: TProps, tokenProps?: TokensThatAreAlsoProps<TTokens>): TTokens {
+  return tokenProps && tokenProps !== 'none'
     ? {
         ...tokens,
         ...(typeof tokenProps === 'object' && Array.isArray(tokenProps)
           ? Object.assign({}, ...tokenProps.filter(key => props[key as string] !== undefined).map(key => ({ [key]: props[key as string] })))
-          : props)
+          : props),
       }
     : tokens;
 }
@@ -96,7 +97,7 @@ function promotePropsToTokens<TTokens, TProps>(tokens: TTokens, props: TProps, t
 function mapToTokens<TTokens, TTheme>(
   tokenEntry: TTokens | string | TokensFromTheme<TTokens, TTheme>,
   theme: TTheme,
-  getComponentInfo: ThemeHelper<TTheme>['getComponentInfo']
+  getComponentInfo: ThemeHelper<TTheme>['getComponentInfo'],
 ): object {
   if (typeof tokenEntry === 'string') {
     tokenEntry = getComponentInfo(theme, tokenEntry);
@@ -119,7 +120,7 @@ function resolveToSlotProps<TSlotProps, TTokens, TTheme>(
   styles: BuildSlotProps<TSlotProps, TTokens, TTheme>,
   tokens: TTokens,
   theme: TTheme,
-  cache: GetMemoValue<TTokens>
+  cache: GetMemoValue<TTokens>,
 ): TSlotProps {
   const slotProps = {};
   Object.keys(styles).forEach(key => {
@@ -137,12 +138,12 @@ function resolveToSlotProps<TSlotProps, TTokens, TTheme>(
  */
 export function buildUseStyling<TProps, TSlotProps, TTokens, TTheme>(
   options: UseStylingOptions<TProps, TSlotProps, TTokens, TTheme>,
-  themeHelper: ThemeHelper<TTheme>
+  themeHelper: ThemeHelper<TTheme>,
 ): UseStyling<TProps, TSlotProps> {
   // create a cache instance for this use styling implementation
   const cache = getMemoCache();
   const { useTheme, getComponentInfo } = themeHelper;
-  const { tokens, tokenProps } = options;
+  const { tokens, tokensThatAreAlsoProps: tokenProps } = options;
   const styles = refinePropsFunctions(options.slotProps || {}, tokenProps);
 
   return (props: TProps, lookup?: HasLayer) => {

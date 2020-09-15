@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/framework",
   "entries": [
     {
+      "date": "Fri, 11 Sep 2020 20:25:42 GMT",
+      "tag": "@fluentui-react-native/framework_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add samples and some README text to use-slots and use-styling packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2566347850eff4ed67bfad2a85134481e088cba6",
+            "package": "@fluentui-react-native/framework"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 09 Sep 2020 21:36:19 GMT",
+      "tag": "@fluentui-react-native/framework_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "rename tokenProps to tokensThatAreAlsoProps in new framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "bfa93c02bfaffb8b645568a7b1e74b29bfb06c78",
+            "package": "@fluentui-react-native/framework"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Aug 2020 05:03:51 GMT",
       "tag": "@fluentui-react-native/framework_v0.2.10",
       "version": "0.2.10",

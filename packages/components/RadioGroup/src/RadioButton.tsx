@@ -33,13 +33,13 @@ export const RadioButton = compose<IRadioButtonType>({
             break;
         }
       },
-      [info, buttonKey]
+      [info, buttonKey],
     );
 
     const state = {
       ...pressable.state,
       selected: info.selectedKey === userProps.buttonKey,
-      disabled: disabled || false
+      disabled: disabled || false,
     };
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
@@ -56,13 +56,6 @@ export const RadioButton = compose<IRadioButtonType>({
       }
     }, [state, pressable.props, info, buttonKey]);
 
-    let accessibilityStates: string[] = [];
-    if (state.disabled) {
-      accessibilityStates = ['disabled'];
-    } else if (state.selected) {
-      accessibilityStates = ['selected'];
-    }
-
     const slotProps = mergeSettings<IRadioButtonSlotProps>(styleProps, {
       root: {
         rest,
@@ -70,11 +63,11 @@ export const RadioButton = compose<IRadioButtonType>({
         onFocus: onFocusChange,
         accessibilityRole: 'radio',
         accessibilityLabel: ariaLabel ? ariaLabel : content,
-        accessibilityStates: accessibilityStates,
+        accessibilityState: { disabled: state.disabled, selected: state.selected },
         accessibilityActions: [{ name: 'Select', label: radioButtonSelectActionLabel }],
-        onAccessibilityAction: onAccessibilityAction
+        onAccessibilityAction: onAccessibilityAction,
       },
-      content: { children: content }
+      content: { children: content },
     });
 
     return { slotProps };
@@ -97,14 +90,14 @@ export const RadioButton = compose<IRadioButtonType>({
     root: View,
     button: { slotType: View, filter: filterViewProps },
     innerCircle: { slotType: View, filter: filterViewProps },
-    content: Text
+    content: Text,
   },
   styles: {
     root: [],
     button: [borderTokens],
     innerCircle: [backgroundColorTokens],
-    content: [foregroundColorTokens, textTokens]
-  }
+    content: [foregroundColorTokens, textTokens],
+  },
 });
 
 export default RadioButton;

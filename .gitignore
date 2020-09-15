@@ -20,8 +20,7 @@ pids
 **/.DS_Store
 
 # CocoaPods
-/apps/macos/src/Pods/*
-/apps/ios/src/Pods/*
+**/Pods/*
 **/project.xcworkspace/contents.xcworkspacedata
 **/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
 **/*.xcuserdatad/xcschemes
