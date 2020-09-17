@@ -32,4 +32,4 @@ steps:
       yarn test
     displayName: 'yarn test'
 
-  - template: templates/publish-nuget-job.yml
+  #- template: templates/publish-nuget-job.yml
