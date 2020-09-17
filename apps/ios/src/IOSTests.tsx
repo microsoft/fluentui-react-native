@@ -1,5 +1,9 @@
 import {TestDescription} from '../../fluent-tester/src/RNTester/TestComponents';
 import {
+  HOMEPAGE_ACTIVITYINDICATOR_BUTTON,
+  ActivityIndicatorTest,
+} from '../../fluent-tester/src/RNTester/TestComponents/ActivityIndicator';
+import {
   ButtonTest,
   HOMEPAGE_BUTTON_BUTTON,
 } from '../../fluent-tester/src/RNTester/TestComponents/Button';
@@ -24,10 +28,6 @@ import {
   LinkTest,
 } from '../../fluent-tester/src/RNTester/TestComponents/Link';
 import {
-  HOMEPAGE_SHIMMER_BUTTON,
-  ShimmerTest,
-} from '../../fluent-tester/src/RNTester/TestComponents/Shimmer';
-import {
   HOMEPAGE_PERSONA_BUTTON,
   PersonaTest,
 } from '../../fluent-tester/src/RNTester/TestComponents/Persona';
@@ -48,6 +48,10 @@ import {
   SeparatorTest,
 } from '../../fluent-tester/src/RNTester/TestComponents/Separator';
 import {
+  HOMEPAGE_SHIMMER_BUTTON,
+  ShimmerTest,
+} from '../../fluent-tester/src/RNTester/TestComponents/Shimmer';
+import {
   HOMEPAGE_SVG_BUTTON,
   SvgTest,
 } from '../../fluent-tester/src/RNTester/TestComponents/Svg';
@@ -61,6 +65,11 @@ import {
 } from '../../fluent-tester/src/RNTester/TestComponents/Theme';
 
 export const iosTests: TestDescription[] = [
+  {
+    name: 'Activity Indicator Test',
+    component: ActivityIndicatorTest,
+    testPage: HOMEPAGE_ACTIVITYINDICATOR_BUTTON,
+  },
   {
     name: 'Button Test',
     component: ButtonTest,
@@ -92,14 +101,14 @@ export const iosTests: TestDescription[] = [
     testPage: HOMEPAGE_LINK_BUTTON,
   },
   {
-    name: 'Shimmer Test',
-    component: ShimmerTest,
-    testPage: HOMEPAGE_SHIMMER_BUTTON,
-  },
-  {
     name: 'Separator Test',
     component: SeparatorTest,
     testPage: HOMEPAGE_SEPARATOR_BUTTON,
+  },
+  {
+    name: 'Shimmer Test',
+    component: ShimmerTest,
+    testPage: HOMEPAGE_SHIMMER_BUTTON,
   },
   {
     name: 'Text Test',

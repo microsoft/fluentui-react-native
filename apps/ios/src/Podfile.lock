@@ -9,7 +9,10 @@ PODS:
     - React-Core (= 0.62.2)
     - React-jsi (= 0.62.2)
     - ReactCommon/turbomodule/core (= 0.62.2)
-  - FluentUI-React-Native-Shimmer (0.1.0):
+  - FluentUI-React-Native-ActivityIndicator (0.1.0):
+    - MicrosoftFluentUI (~> 0.1.12)
+    - React
+  - FluentUI-React-Native-Shimmer (0.2.1):
     - MicrosoftFluentUI (~> 0.1.12)
     - React
   - Folly (2018.10.22.00):
@@ -255,6 +258,7 @@ DEPENDENCIES:
   - DoubleConversion (from `../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../../../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native/Libraries/FBReactNativeSpec`)
+  - FluentUI-React-Native-ActivityIndicator (from `../../../packages/components/ActivityIndicator/FluentUIReactNativeActivityIndicator.podspec`)
   - FluentUI-React-Native-Shimmer (from `../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec`)
   - Folly (from `../../../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
@@ -300,6 +304,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/Libraries/FBLazyVector"
   FBReactNativeSpec:
     :path: "../../../node_modules/react-native/Libraries/FBReactNativeSpec"
+  FluentUI-React-Native-ActivityIndicator:
+    :path: "../../../packages/components/ActivityIndicator/FluentUIReactNativeActivityIndicator.podspec"
   FluentUI-React-Native-Shimmer:
     :path: "../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec"
   Folly:
@@ -356,7 +362,8 @@ SPEC CHECKSUMS:
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e
-  FluentUI-React-Native-Shimmer: 611b1acab275198279a4c6cd6f63146c32a03189
+  FluentUI-React-Native-ActivityIndicator: 529ca3d89bdb8601c5592f5af3b95437d8aba5c6
+  FluentUI-React-Native-Shimmer: a9ddfcf1eba023d6c9be6e3ac34aece88cc40cf4
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   MicrosoftFluentUI: 6800fd4c017a5c5b946a24851ac2218748da45d2
@@ -385,6 +392,6 @@ SPEC CHECKSUMS:
   SwiftLint: bbfed21bf4451dcbd0f5cdbee44a18e06cf91b12
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
 
-PODFILE CHECKSUM: 42dde6a3630fe1498f92905782bda6387e25596e
+PODFILE CHECKSUM: cc60434993c24fb69e759db0a1977b9634e93512
 
 COCOAPODS: 1.9.3
