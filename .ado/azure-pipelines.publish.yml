@@ -29,9 +29,15 @@ steps:
   - template: templates/yarn-install.yml
 
   - script: |
+      git config user.name "UI-Fabric-RN-Bot"
+      git config user.email "uifrnbot@microsoft.com"
+      git remote set-url origin https://$(githubUser):$(githubPAT)@github.com/microsoft/ui-fabric-react-native.git
+    displayName: Git Authentication
+
+  - template: templates/yarn-install.yml
+
+  - script: |
       yarn test
     displayName: 'yarn test'
 
-  - script: |
-      yarn publish:beachball -- -b origin/master -n $(npmAuth) --access public -y
-    displayName: 'Publish NPM Packages'
+  - template: templates/publish-nuget-job.yml
