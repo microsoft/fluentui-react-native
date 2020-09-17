@@ -1,4 +1,3 @@
-export * from '@fluentui-react-native/activity-indicator';
 export * from '@fluentui-react-native/button';
 export * from '@fluentui-react-native/callout';
 export * from '@fluentui-react-native/checkbox';
@@ -11,5 +10,6 @@ export * from '@fluentui-react-native/pressable';
 export * from '@fluentui-react-native/radio-group';
 export * from '@fluentui-react-native/separator';
 export * from '@fluentui-react-native/shimmer';
+export * from '@fluentui-react-native/spinner';
 export * from '@fluentui-react-native/text';
 export * from '@fluentui-react-native/interactive-hooks';

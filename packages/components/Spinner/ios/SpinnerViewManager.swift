@@ -1,8 +1,8 @@
 import Foundation
 import FluentUI
 
-@objc(MSFActivityIndicatorViewManager)
-class ActivityIndicatorViewManager: RCTViewManager {
+@objc(MSFSpinnerViewManager)
+class SpinnerViewManager: RCTViewManager {
 	override func view()->UIView! {
 		let activityIndicatorView = ActivityIndicatorView(size: .small)
 		activityIndicatorView.startAnimating()
@@ -12,7 +12,7 @@ class ActivityIndicatorViewManager: RCTViewManager {
 	override class func requiresMainQueueSetup() -> Bool {
 		return true
 	}
-	
+
 	override func constantsToExport() -> [AnyHashable : Any]! {
 		return [
 			"sizes" : [
@@ -24,6 +24,6 @@ class ActivityIndicatorViewManager: RCTViewManager {
 			]
 		]
 	}
-	
-	
+
+
 }

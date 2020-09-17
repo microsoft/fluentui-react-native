@@ -1,5 +1,5 @@
 import { TestDescription } from './TestComponents';
-import { HOMEPAGE_ACTIVITYINDICATOR_BUTTON, ActivityIndicatorTest } from './TestComponents/ActivityIndicator';
+import { HOMEPAGE_SPINNER_BUTTON, SpinnerTest } from './TestComponents/Spinner';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './TestComponents/FocusTrapZone';
@@ -15,11 +15,6 @@ import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 
 export const Tests: TestDescription[] = [
-  {
-    name: 'Activity Indicator Test',
-    component: ActivityIndicatorTest,
-    testPage: HOMEPAGE_ACTIVITYINDICATOR_BUTTON,
-  },
   {
     name: 'Button Test',
     component: ButtonTest,
@@ -49,6 +44,11 @@ export const Tests: TestDescription[] = [
     name: 'Shimmer Test',
     component: ShimmerTest,
     testPage: HOMEPAGE_SHIMMER_BUTTON,
+  },
+  {
+    name: 'SpinnerTest',
+    component: SpinnerTest,
+    testPage: HOMEPAGE_SPINNER_BUTTON,
   },
   {
     name: 'Text Test',

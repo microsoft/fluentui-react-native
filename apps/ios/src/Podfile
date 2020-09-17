@@ -29,7 +29,7 @@ use_test_app! do |target|
   target.app do
 
     pod 'FluentUI-React-Native-Shimmer', :path => '../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec'
-    pod 'FluentUI-React-Native-ActivityIndicator', :path => '../../../packages/components/ActivityIndicator/FluentUIReactNativeActivityIndicator.podspec'
+    pod 'FluentUI-React-Native-Spinner', :path => '../../../packages/components/Spinner/FluentUIReactNativeSpinner.podspec'
 
 
     script_phase name: 'Start Packager',

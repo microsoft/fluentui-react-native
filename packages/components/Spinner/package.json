@@ -1,7 +1,7 @@
 {
-  "name": "@fluentui-react-native/activity-indicator",
+  "name": "@fluentui-react-native/spinner",
   "version": "0.1.0",
-  "description": "An activity indicator view",
+  "description": "A spinner view",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",

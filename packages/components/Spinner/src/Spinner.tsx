@@ -4,9 +4,9 @@ import { NativeModules, ViewProps } from 'react-native';
 import * as React from 'react';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
-const activityIndicatorName = 'MSFActivityIndicatorView';
+const spinnerName = 'MSFSpinnerView';
 
-const NativeActivityIndicatorView = ensureNativeComponent(activityIndicatorName);
+const NativeSpinnerView = ensureNativeComponent(spinnerName);
 
 export type Size = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
 
@@ -14,16 +14,16 @@ interface ExportedConstants {
   sizes: { [key in Size]: number };
 }
 
-const ExportedNativeConstants: ExportedConstants = NativeModules.MSFActivityIndicatorViewManager;
+const ExportedNativeConstants: ExportedConstants = NativeModules.MSFSpinnerViewManager;
 
-export type ActivityIndicatorTokens = {
+export type SpinnerTokens = {
   /**
    * Color of spinner
    */
   color?: string;
 };
 
-export type ActivityIndicatorProps = ViewProps & {
+export type SpinnerProps = ViewProps & {
   /**
    * True if the spinner should stop animating when its not visible
    */
@@ -40,30 +40,30 @@ export type ActivityIndicatorProps = ViewProps & {
   size?: Size;
 };
 
-export type NativeActivityIndicatorViewProps = ViewProps & ActivityIndicatorProps & ActivityIndicatorTokens;
+export type NativeSpinnerViewProps = ViewProps & SpinnerProps & SpinnerTokens;
 
-interface ActivityIndicatorType {
-  props: ActivityIndicatorProps;
-  slotProps: { root: NativeActivityIndicatorViewProps };
-  tokens: ActivityIndicatorTokens;
+interface SpinnerType {
+  props: SpinnerProps;
+  slotProps: { root: NativeSpinnerViewProps };
+  tokens: SpinnerTokens;
 }
 
-export const ActivityIndicator = compose<ActivityIndicatorType>({
-  displayName: activityIndicatorName,
+export const Spinner = compose<SpinnerType>({
+  displayName: spinnerName,
   tokens: [
     {
       color: 'rgb(145,145,145)',
     },
-    activityIndicatorName,
+    spinnerName,
   ],
   slotProps: {
     root: buildProps((tokens) => ({ ...tokens }), []),
   },
-  slots: { root: NativeActivityIndicatorView },
-  render: (props: NativeActivityIndicatorViewProps, useSlots: UseSlots<ActivityIndicatorType>) => {
+  slots: { root: NativeSpinnerView },
+  render: (props: NativeSpinnerViewProps, useSlots: UseSlots<SpinnerType>) => {
     const size = ExportedNativeConstants.sizes[props.size || 'small'];
     const Root = useSlots(props).root;
-    return (rest: NativeActivityIndicatorViewProps, children: React.ReactNode) => (
+    return (rest: NativeSpinnerViewProps, children: React.ReactNode) => (
       <Root {...mergeProps(props, rest)} style={[props.style, { height: size, width: size }]}>
         {children}
       </Root>

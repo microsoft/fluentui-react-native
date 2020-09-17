@@ -1,9 +1,5 @@
 import {TestDescription} from '../../fluent-tester/src/RNTester/TestComponents';
 import {
-  HOMEPAGE_ACTIVITYINDICATOR_BUTTON,
-  ActivityIndicatorTest,
-} from '../../fluent-tester/src/RNTester/TestComponents/ActivityIndicator';
-import {
   ButtonTest,
   HOMEPAGE_BUTTON_BUTTON,
 } from '../../fluent-tester/src/RNTester/TestComponents/Button';
@@ -52,6 +48,10 @@ import {
   ShimmerTest,
 } from '../../fluent-tester/src/RNTester/TestComponents/Shimmer';
 import {
+  HOMEPAGE_SPINNER_BUTTON,
+  SpinnerTest,
+} from '../../fluent-tester/src/RNTester/TestComponents/Spinner';
+import {
   HOMEPAGE_SVG_BUTTON,
   SvgTest,
 } from '../../fluent-tester/src/RNTester/TestComponents/Svg';
@@ -65,11 +65,6 @@ import {
 } from '../../fluent-tester/src/RNTester/TestComponents/Theme';
 
 export const iosTests: TestDescription[] = [
-  {
-    name: 'Activity Indicator Test',
-    component: ActivityIndicatorTest,
-    testPage: HOMEPAGE_ACTIVITYINDICATOR_BUTTON,
-  },
   {
     name: 'Button Test',
     component: ButtonTest,
@@ -109,6 +104,11 @@ export const iosTests: TestDescription[] = [
     name: 'Shimmer Test',
     component: ShimmerTest,
     testPage: HOMEPAGE_SHIMMER_BUTTON,
+  },
+  {
+    name: 'Spinner Test',
+    component: SpinnerTest,
+    testPage: HOMEPAGE_SPINNER_BUTTON,
   },
   {
     name: 'Text Test',
