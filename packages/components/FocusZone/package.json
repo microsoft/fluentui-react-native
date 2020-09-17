@@ -1,0 +1,42 @@
+{
+  "name": "@fluentui-react-native/focus-zone",
+  "version": "0.1.1",
+  "description": "A cross-platform FocusZone component using the Fluent Design System",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "depcheck": "fluentui-scripts depcheck",
+    "just": "fluentui-scripts",
+    "clean": "fluentui-scripts clean",
+    "lint": "fluentui-scripts eslint",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "verify-api": "fluentui-scripts verify-api-extractor",
+    "update-api": "fluentui-scripts update-api-extractor"
+  },
+  "dependencies": {
+    "@fluentui-react-native/adapters": ">=0.3.35 <1.0.0",
+    "@fluentui-react-native/component-cache": "^1.0.1",
+    "@fluentui-react-native/interactive-hooks": ">=0.5.1 <1.0.0",
+    "@uifabricshared/foundation-composable": ">=0.6.73 <1.0.0",
+    "@uifabricshared/foundation-settings": ">=0.7.0 <1.0.0"
+  },
+  "devDependencies": {
+    "@types/react-native": "^0.62.0",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "react-native": "0.62.2"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-native": ">=0.60.0"
+  },
+  "author": "",
+  "license": "MIT"
+}
