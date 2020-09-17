@@ -13,11 +13,28 @@ const activityIndicator: React.FunctionComponent<{}> = () => {
   );
 };
 
+const stylizedActivityIndicator: React.FunctionComponent<{}> = () => {
+  const CustomizedActivityIndicator = ActivityIndicator.customize({
+    color: 'blue',
+  });
+
+  return (
+    <Stack style={stackStyle}>
+      <CustomizedActivityIndicator />
+    </Stack>
+  );
+};
+
 const activityIndicatorSections: TestSection[] = [
   {
     name: 'Basic Activity Indicator',
     testID: ACTIVITYINDICATOR_TESTPAGE,
     component: activityIndicator,
+  },
+  {
+    name: 'Stylized Activity Indicator',
+    testID: ACTIVITYINDICATOR_TESTPAGE,
+    component: stylizedActivityIndicator,
   },
 ];
 

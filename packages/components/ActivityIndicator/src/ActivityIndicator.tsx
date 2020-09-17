@@ -1,19 +1,43 @@
-import { requireNativeComponent, Platform, View, ViewProps } from 'react-native';
+/** @jsx withSlots */
+import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import { ViewProps } from 'react-native';
 import * as React from 'react';
+import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
-const COMPONENT_NAME = 'MSFActivityIndicatorView';
+const activityIndicatorName = 'MSFActivityIndicatorView';
 
-/**
- * Native view wrapper
- */
-const NativeActivityIndicator = Platform.OS === 'ios' ? requireNativeComponent(COMPONENT_NAME) : undefined;
+const NativeActivityIndicatorView = ensureNativeComponent(activityIndicatorName);
 
-export class ActivityIndicator extends React.PureComponent<ViewProps> {
-  public render(): JSX.Element | null {
-    if (NativeActivityIndicator === undefined) {
-      return <View {...this.props} />;
-    }
+export type ActivityIndicatorTokens = {
+  color?: string;
+};
 
-    return <NativeActivityIndicator {...this.props} />;
-  }
+export type NativeActivityIndicatorViewProps = ViewProps & ActivityIndicatorTokens;
+
+export type ActivityIndicatorProps = ViewProps & {
+  hidesWhenStopped?: boolean;
+};
+
+interface ActivityIndicatorType {
+  props: ActivityIndicatorProps;
+  slotProps: { root: NativeActivityIndicatorViewProps };
+  tokens: ActivityIndicatorTokens;
 }
+
+export const ActivityIndicator = compose<ActivityIndicatorType>({
+  displayName: activityIndicatorName,
+  tokens: [
+    {
+      color: 'rgb(145,145,145)',
+    },
+    activityIndicatorName,
+  ],
+  slotProps: {
+    root: buildProps((tokens) => ({ ...tokens }), []),
+  },
+  slots: { root: NativeActivityIndicatorView },
+  render: (props: NativeActivityIndicatorViewProps, useSlots: UseSlots<ActivityIndicatorType>) => {
+    const Root = useSlots(props).root;
+    return (rest: NativeActivityIndicatorViewProps, ...children: React.ReactNode[]) => <Root {...mergeProps(props, rest)}>{children}</Root>;
+  },
+});
