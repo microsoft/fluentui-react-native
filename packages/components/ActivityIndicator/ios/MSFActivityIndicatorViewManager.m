@@ -27,4 +27,16 @@ RCT_EXPORT_VIEW_PROPERTY(hidesWhenStopped, BOOL);
 RCT_EXPORT_VIEW_PROPERTY(color, UIColor);
 RCT_EXPORT_VIEW_PROPERTY(size, MSFActivityIndicatorViewSize);
 
+RCT_CUSTOM_VIEW_PROPERTY(animating, BOOL, MSFActivityIndicatorView)
+{
+	BOOL animating = json ? [RCTConvert BOOL:json] : [defaultView isAnimating];
+	if (animating != [view isAnimating]) {
+		if (animating) {
+			[view startAnimating];
+		} else {
+			[view stopAnimating];
+		}
+	}
+}
+
 @end

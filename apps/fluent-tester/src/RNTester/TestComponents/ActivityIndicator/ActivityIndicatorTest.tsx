@@ -25,9 +25,9 @@ const stylizedActivityIndicator: React.FunctionComponent<{}> = () => {
   return (
     <Stack style={stackStyle}>
       <CustomizedActivityIndicator size="xSmall" />
-      <CustomizedActivityIndicator size="small" />
+      <CustomizedActivityIndicator size="small" animating={false} />
       <CustomizedActivityIndicator size="medium" />
-      <CustomizedActivityIndicator size="large" />
+      <CustomizedActivityIndicator size="large" animating={false} />
       <CustomizedActivityIndicator size="xLarge" />
     </Stack>
   );

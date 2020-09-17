@@ -64,7 +64,7 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
     const size = ExportedNativeConstants.sizes[props.size || 'small'];
     const Root = useSlots(props).root;
     return (rest: NativeActivityIndicatorViewProps, children: React.ReactNode) => (
-      <Root {...mergeProps(props, rest)} style={{ height: size, width: size }}>
+      <Root {...mergeProps(props, rest)} style={[props.style, { height: size, width: size }]}>
         {children}
       </Root>
     );
