@@ -32,5 +32,5 @@ export const ActivityIndicatorTest: React.FunctionComponent<{}> = () => {
 
   const description = 'An Activity Indicator';
 
-  return <Test name="ACtivity Indicator Test" description={description} sections={activityIndicatorSections} status={status}></Test>;
+  return <Test name="Activity Indicator Test" description={description} sections={activityIndicatorSections} status={status}></Test>;
 };
