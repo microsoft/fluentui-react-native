@@ -1,7 +1,8 @@
 import { StealthButton, Separator } from '@fluentui/react-native';
 import { useTheme } from '@uifabricshared/theming-react-native';
 import * as React from 'react';
-import { Picker, ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
+import { Picker } from '@react-native-community/picker';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fabricTesterStyles } from './TestComponents/Common/styles';
@@ -27,13 +28,11 @@ export interface IFabricTesterProps {
 export let app = 'office';
 
 const Header: React.FunctionComponent<{}> = () => {
-
-  const [selectedPlatform, setSelectedPlatform] = React.useState('win32');
-  const [selectedApp, setSelectedApp] = React.useState('office');
-  const [selectedTheme, setSelectedTheme] = React.useState('default');
+  const [selectedPlatform, setSelectedPlatform] = React.useState<string>('win32');
+  const [selectedApp, setSelectedApp] = React.useState<string>('office');
+  const [selectedTheme, setSelectedTheme] = React.useState<string>('default');
 
   const themeColor = () => {
-
     let color = 'black'; // default: office (black)
 
     if (selectedApp == 'office') color = 'black';
@@ -43,7 +42,7 @@ const Header: React.FunctionComponent<{}> = () => {
     if (selectedApp == 'outlook') color = '#106EBE';
 
     return { color: color };
-  }
+  };
 
   const onAppChange = React.useCallback((appValue: string) => {
     app = appValue;
@@ -58,11 +57,11 @@ const Header: React.FunctionComponent<{}> = () => {
 
       <View style={fabricTesterStyles.pickerRoot}>
         <View style={fabricTesterStyles.picker}>
-          <Text style={fabricTesterStyles.pickerLabel}>Platform:  </Text>
+          <Text style={fabricTesterStyles.pickerLabel}>Platform: </Text>
           <Picker
             selectedValue={selectedPlatform}
             style={fabricTesterStyles.dropdown}
-            onValueChange={(platformValue) => setSelectedPlatform(platformValue)}
+            onValueChange={(platformValue) => setSelectedPlatform(platformValue.toString())}
           >
             <Picker.Item label="Win32" value="win32" />
             <Picker.Item label="UWP" value="uwp" />
@@ -73,11 +72,11 @@ const Header: React.FunctionComponent<{}> = () => {
         </View>
 
         <View style={fabricTesterStyles.picker}>
-          <Text style={fabricTesterStyles.pickerLabel}>App:  </Text>
+          <Text style={fabricTesterStyles.pickerLabel}>App: </Text>
           <Picker
             selectedValue={selectedApp}
             style={fabricTesterStyles.dropdown}
-            onValueChange={(appValue) => onAppChange(appValue)}
+            onValueChange={(appValue) => onAppChange(appValue.toString())}
           >
             <Picker.Item label="Office" value="office" />
             <Picker.Item label="Word" value="word" />
@@ -88,11 +87,11 @@ const Header: React.FunctionComponent<{}> = () => {
         </View>
 
         <View style={fabricTesterStyles.picker}>
-          <Text style={fabricTesterStyles.pickerLabel}>Theme:  </Text>
+          <Text style={fabricTesterStyles.pickerLabel}>Theme: </Text>
           <Picker
             selectedValue={selectedTheme}
             style={fabricTesterStyles.dropdown}
-            onValueChange={(themeValue) => setSelectedTheme(themeValue)}
+            onValueChange={(themeValue) => setSelectedTheme(themeValue.toString())}
           >
             <Picker.Item label="Default" value="default" />
             <Picker.Item label="Caterpillar" value="caterpillar" />
@@ -102,7 +101,7 @@ const Header: React.FunctionComponent<{}> = () => {
       </View>
     </View>
   );
-}
+};
 
 export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props: IFabricTesterProps) => {
   // sort tests alphabetically by name

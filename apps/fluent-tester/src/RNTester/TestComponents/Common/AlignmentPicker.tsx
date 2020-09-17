@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { undefinedText } from '../PersonaCoin/styles';
 import { IconAlignment } from '@fluentui/react-native';
-import { Picker, StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, ViewStyle } from 'react-native';
+import { Picker } from '@react-native-community/picker';
 
 const alignmentValues: Array<typeof undefinedText | IconAlignment> = [undefinedText, 'start', 'center', 'end'];
 
@@ -18,7 +19,7 @@ export const AlignmentPicker: React.FunctionComponent<IAlignmentPickerProps> = (
       style={style}
       prompt={label}
       selectedValue={undefinedText}
-      onValueChange={(value, index) => onSelectionChange(index == 0 ? undefined : value)}
+      onValueChange={(value, index) => onSelectionChange(index == 0 ? undefined : (value as IconAlignment))}
     >
       {alignmentValues.map((alignment, index) => (
         <Picker.Item label={alignment} key={index} value={alignment} />

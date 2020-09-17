@@ -27,7 +27,8 @@
     "@uifabricshared/theme-registry": ">=0.3.69 <1.0.0",
     "@uifabricshared/themed-stylesheet": ">=0.3.68 <1.0.0",
     "@uifabricshared/theming-ramp": ">=0.10.5 <1.0.0",
-    "react-native-svg": "^11.0.0"
+    "react-native-svg": "^11.0.0",
+    "@react-native-community/picker": ">=1.7.1 <2.0.0"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "^1.1.0",

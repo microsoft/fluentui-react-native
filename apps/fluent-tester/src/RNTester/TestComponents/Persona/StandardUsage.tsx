@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Persona, PersonaSize } from '@fluentui/react-native';
 import { rajeshImageUrl } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
-import { View, Text, Switch, Picker } from 'react-native';
+import { View, Text, Switch } from 'react-native';
+import { Picker } from '@react-native-community/picker';
 import { undefinedText } from '../PersonaCoin/styles';
 
 type WithUndefined<T> = T | typeof undefinedText;
