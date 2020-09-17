@@ -8,7 +8,11 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 const activityIndicator: React.FunctionComponent<{}> = () => {
   return (
     <Stack style={stackStyle}>
-      <ActivityIndicator />
+      <ActivityIndicator size="xSmall" />
+      <ActivityIndicator size="small" />
+      <ActivityIndicator size="medium" />
+      <ActivityIndicator size="large" />
+      <ActivityIndicator size="xLarge" />
     </Stack>
   );
 };
@@ -20,7 +24,11 @@ const stylizedActivityIndicator: React.FunctionComponent<{}> = () => {
 
   return (
     <Stack style={stackStyle}>
-      <CustomizedActivityIndicator />
+      <CustomizedActivityIndicator size="xSmall" />
+      <CustomizedActivityIndicator size="small" />
+      <CustomizedActivityIndicator size="medium" />
+      <CustomizedActivityIndicator size="large" />
+      <CustomizedActivityIndicator size="xLarge" />
     </Stack>
   );
 };

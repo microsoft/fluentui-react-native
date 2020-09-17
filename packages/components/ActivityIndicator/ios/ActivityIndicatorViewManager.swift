@@ -4,7 +4,7 @@ import FluentUI
 @objc(MSFActivityIndicatorViewManager)
 class ActivityIndicatorViewManager: RCTViewManager {
 	override func view()->UIView! {
-		let activityIndicatorView = ActivityIndicatorView(size: .medium)
+		let activityIndicatorView = ActivityIndicatorView(size: .small)
 		activityIndicatorView.startAnimating()
 		return activityIndicatorView
 	}
