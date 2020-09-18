@@ -1,6 +1,5 @@
 import { IThemeColorDefinition } from './Color.types';
 import { ITypography, IPartialTypography } from './Typography.types';
-import { IComponentSettingsCollection } from '@uifabricshared/foundation-settings';
 
 export interface ISpacing {
   s2: string;
@@ -17,7 +16,7 @@ export interface ITheme {
   name?: string;
   colors: IThemeColorDefinition;
   typography: ITypography;
-  components: IComponentSettingsCollection;
+  components: { [key: string]: object };
   componentTokens?: object;
   spacing: ISpacing;
   host: object; // platform specific host settings
@@ -32,7 +31,7 @@ export interface IPartialTheme {
   name?: string;
   colors?: Partial<IThemeColorDefinition>;
   typography?: IPartialTypography;
-  components?: IComponentSettingsCollection;
+  components?: { [key: string]: object };
   componentTokens?: object;
   spacing?: ISpacing;
   host?: object;

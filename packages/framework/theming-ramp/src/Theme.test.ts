@@ -1,53 +1,51 @@
-import { ITheme, IPartialTheme } from './Theme.types';
+import { ITheme, IPartialTheme, IThemeColorDefinition, ITypography } from '@fluentui-react-native/theme-types';
 import { resolvePartialTheme } from './Theme';
-import { IThemeColorDefinition } from './Color.types';
-import { ITypography } from './Typography.types';
 
 const theme: ITheme = {
   colors: {
-    background: '#ff0000'
+    background: '#ff0000',
   } as IThemeColorDefinition,
   typography: {
     families: {
-      primary: 'Arial'
+      primary: 'Arial',
     },
     sizes: {
-      secondary: 14
+      secondary: 14,
     },
     weights: {
-      regular: '400'
+      regular: '400',
     },
     variants: {
       secondaryStandard: {
         face: 'Arial',
         size: 14,
-        weight: '400'
-      }
-    }
+        weight: '400',
+      },
+    },
   } as ITypography,
   spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
   components: {
     View: {
       tokens: {
         backgroundColor: 'bodyBackground',
-        fontFamily: 'primary'
-      }
-    }
+        fontFamily: 'primary',
+      },
+    },
   },
-  host: {}
+  host: {},
 };
 
 const partialTheme: IPartialTheme = {
   colors: {
-    bodySubtext: 'rgb(100,100,100)'
+    bodySubtext: 'rgb(100,100,100)',
   },
   components: {
     Text: {
       tokens: {
-        backgroundColor: 'cyan'
-      }
-    }
-  }
+        backgroundColor: 'cyan',
+      },
+    },
+  },
 };
 
 describe('Theme tests', () => {
@@ -71,40 +69,40 @@ describe('Theme tests', () => {
     expect(resolved).toEqual({
       colors: ({
         background: '#ff0000',
-        bodySubtext: 'rgb(100,100,100)'
+        bodySubtext: 'rgb(100,100,100)',
       } as unknown) as IThemeColorDefinition,
       typography: {
         families: {
-          primary: 'Arial'
+          primary: 'Arial',
         },
         sizes: {
-          secondary: 14
+          secondary: 14,
         },
         weights: {
-          regular: '400'
+          regular: '400',
         },
         variants: {
           secondaryStandard: {
             face: 'Arial',
             size: 14,
-            weight: '400'
-          }
-        }
+            weight: '400',
+          },
+        },
       } as ITypography,
       spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
       components: {
         View: {
           tokens: {
             backgroundColor: 'bodyBackground',
-            fontFamily: 'primary'
-          }
+            fontFamily: 'primary',
+          },
         },
         Text: {
           tokens: {
-            backgroundColor: 'cyan'
-          }
-        }
-      }
+            backgroundColor: 'cyan',
+          },
+        },
+      },
     });
   });
 });

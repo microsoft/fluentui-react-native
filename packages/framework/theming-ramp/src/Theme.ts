@@ -1,4 +1,4 @@
-import { ITheme, IPartialTheme } from './Theme.types';
+import { ITheme, IPartialTheme } from '@fluentui-react-native/theme-types';
 import { mergeSettingsCollection } from '@uifabricshared/foundation-settings';
 import { MergeOptions, immutableMergeCore } from '@fluentui-react-native/immutable-merge';
 
@@ -8,7 +8,7 @@ function _settingsHandler(...objs: (object | undefined)[]): object | undefined {
 
 const _themeMergeOptions: MergeOptions = {
   object: true,
-  settings: _settingsHandler
+  settings: _settingsHandler,
 };
 
 /**

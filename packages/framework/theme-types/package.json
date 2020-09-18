@@ -1,7 +1,7 @@
 {
-  "name": "@uifabricshared/theming-ramp",
-  "version": "0.10.5",
-  "description": "Theming Library",
+  "name": "@fluentui-react-native/theme-types",
+  "version": "0.1.1",
+  "description": "Typing only package for fluentui-react-native theme types",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/just"
@@ -31,13 +31,8 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {
-    "@uifabricshared/foundation-settings": ">=0.7.0 <1.0.0",
-    "@fluentui-react-native/immutable-merge": "^1.0.1",
-    "@fluentui-react-native/theme-types": ">=0.1.1 <1.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@types/jest": "^25.1.4",
     "@types/react": "^16.9.34",
     "react": "16.11.0",
     "@uifabricshared/build-native": "^0.1.1",
