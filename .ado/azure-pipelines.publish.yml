@@ -26,10 +26,10 @@ steps:
   #    git remote set-url origin https://$(githubUser):$(githubPAT)@github.com/microsoft/ui-fabric-react-native.git
   #  displayName: Git Authentication
 
-  - template: templates/yarn-install.yml
+  #- template: templates/yarn-install.yml
 
-  - script: |
-      yarn test
-    displayName: 'yarn test'
+  # - script: |
+  #    yarn test
+  #  displayName: 'yarn test'
 
   - template: templates/publish-nuget-job.yml
