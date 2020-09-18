@@ -52,4 +52,5 @@ steps:
     inputs:
       command: push
       packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.ReactNative.*.nupkg'
+      nuGetFeedType: external
       publishFeedCredentials: Office
