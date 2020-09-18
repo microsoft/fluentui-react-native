@@ -15,7 +15,7 @@ Prereq: FluentUI Tester on iOS can only run on a Mac.
     cd apps/ios/src
     pod install
 ```
-Note: if you get the error: "CocoaPods could not find compatible versions for pod "MicrosoftFluentUI"," you will need to run `pod repo update` and then run `pod install` again.
+Note: if you get the error: "CocoaPods could not find compatible versions for pod "MicrosoftFluentUI"," you may need to run `pod install --repo-update`.
 
 3. Return to the ios directory and run yarn ios to launch the FluentUI Tester app:
 
