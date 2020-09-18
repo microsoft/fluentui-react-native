@@ -8,9 +8,6 @@ trigger:
 
 pr: none
 
-variables:
-  - group: 'NPM and Github Secrets'
-
 pool:
   vmImage: 'ubuntu-latest'
 
