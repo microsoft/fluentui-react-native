@@ -28,8 +28,8 @@ use_flipper!(false)
 use_test_app! do |target|
   target.app do
 
-    #pod 'FluentUI-React-Native-Shimmer', :path => '../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec'
-    #pod 'RNCPicker', :path => '../../../node_modules/@react-native-community/picker/RNCPicker.podspec'
+    pod 'FluentUI-React-Native-Shimmer', :path => '../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec'
+    pod 'RNCPicker', :path => '../../../node_modules/@react-native-community/picker/RNCPicker.podspec'
 
     script_phase name: 'Start Packager',
                  script: start_packager_script,

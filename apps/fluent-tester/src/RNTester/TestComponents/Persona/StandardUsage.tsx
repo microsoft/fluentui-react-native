@@ -59,7 +59,7 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
           prompt="Size"
           style={commonStyles.header}
           selectedValue={imageSize || undefinedText}
-          onValueChange={(size) => setImageSize(size === undefinedText ? undefined : size)}
+          onValueChange={(size) => setImageSize(size === undefinedText ? undefined : (size as PersonaSize))}
         >
           {allSizes.map((size, index) => (
             <Picker.Item label={size} key={index} value={size} />

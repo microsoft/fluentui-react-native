@@ -27,6 +27,9 @@ fi
 use_flipper!(false)
 use_test_app! do |target|
   target.app do
+
+    pod 'RNCPicker', :path => '../../../node_modules/@react-native-community/picker/RNCPicker.podspec'
+
     script_phase name: 'Start Packager',
                  script: start_packager_script,
                  execution_position: :before_compile
