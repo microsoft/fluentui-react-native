@@ -9,7 +9,4 @@
     <repository type="git" url="$repoUri$" commit="$commitId$" />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
   </metadata>
-  <files>
-    <file src="package.json" target="package.json"/>
-  </files>
 </package>
