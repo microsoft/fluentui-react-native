@@ -1,4 +1,4 @@
-import { ITheme } from './Theme.types';
+import { ITheme } from '@fluentui-react-native/theme-types';
 import { IComponentSettings } from '@uifabricshared/foundation-settings';
 
 /** helper to strip out the component settings specific bits from the returned structure */

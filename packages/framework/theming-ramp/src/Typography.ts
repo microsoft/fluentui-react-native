@@ -1,4 +1,12 @@
-import { FontFamilyValue, FontFamily, FontSizeValuePoints, FontSize, FontWeightValue, FontWeight, ITypography } from './Typography.types';
+import {
+  FontFamilyValue,
+  FontFamily,
+  FontSizeValuePoints,
+  FontSize,
+  FontWeightValue,
+  FontWeight,
+  ITypography,
+} from '@fluentui-react-native/theme-types';
 
 export function resolveFontFamily(typography: ITypography, family: FontFamily): FontFamilyValue {
   if (typography.families.hasOwnProperty(family)) {
