@@ -12,7 +12,7 @@ export interface ISpacing {
 /**
  * A fully specified theme.
  */
-export interface ITheme {
+export interface Theme {
   name?: string;
   colors: IThemeColorDefinition;
   typography: ITypography;
@@ -27,7 +27,7 @@ export interface ITheme {
  *
  * Useful for overriding specific visual elements in a fully specified theme.
  */
-export interface IPartialTheme {
+export interface PartialTheme {
   name?: string;
   colors?: Partial<IThemeColorDefinition>;
   typography?: IPartialTypography;

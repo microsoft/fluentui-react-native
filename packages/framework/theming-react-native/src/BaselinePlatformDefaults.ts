@@ -1,6 +1,6 @@
 import { ITheme } from '@uifabricshared/theming-ramp';
-import { fluentDefaultTheme } from '@fluentui-react-native/default-theme';
+import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
 
 export function getBaselinePlatformTheme(): ITheme {
-  return fluentDefaultTheme;
+  return defaultFluentTheme;
 }
