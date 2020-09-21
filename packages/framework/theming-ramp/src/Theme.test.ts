@@ -1,10 +1,10 @@
-import { ITheme, IPartialTheme, IThemeColorDefinition, ITypography } from '@fluentui-react-native/theme-types';
+import { Theme, PartialTheme, ThemeColorDefinition, Typography } from '@fluentui-react-native/theme-types';
 import { resolvePartialTheme } from './Theme';
 
-const theme: ITheme = {
+const theme: Theme = {
   colors: {
     background: '#ff0000',
-  } as IThemeColorDefinition,
+  } as ThemeColorDefinition,
   typography: {
     families: {
       primary: 'Arial',
@@ -22,7 +22,7 @@ const theme: ITheme = {
         weight: '400',
       },
     },
-  } as ITypography,
+  } as Typography,
   spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
   components: {
     View: {
@@ -35,7 +35,7 @@ const theme: ITheme = {
   host: {},
 };
 
-const partialTheme: IPartialTheme = {
+const partialTheme: PartialTheme = {
   colors: {
     bodySubtext: 'rgb(100,100,100)',
   },
@@ -70,7 +70,7 @@ describe('Theme tests', () => {
       colors: ({
         background: '#ff0000',
         bodySubtext: 'rgb(100,100,100)',
-      } as unknown) as IThemeColorDefinition,
+      } as unknown) as ThemeColorDefinition,
       typography: {
         families: {
           primary: 'Arial',
@@ -88,7 +88,7 @@ describe('Theme tests', () => {
             weight: '400',
           },
         },
-      } as ITypography,
+      } as Typography,
       spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
       components: {
         View: {

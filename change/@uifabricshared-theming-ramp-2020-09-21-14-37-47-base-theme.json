@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "add default theme package",
+  "packageName": "@uifabricshared/theming-ramp",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-09-21T21:37:29.366Z"
+}

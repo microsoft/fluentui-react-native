@@ -1,7 +1,11 @@
 {
-  "name": "@uifabricshared/theming-react-native",
-  "version": "0.7.76",
-  "description": "A library of functions which produce React Native styles from a Theme",
+  "name": "@fluentui-react-native/default-theme",
+  "version": "0.1.1",
+  "description": "Typing only package for fluentui-react-native theme types",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/just"
+  },
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -28,18 +32,14 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/default-theme": ">=0.1.1 <1.0.0",
-    "@uifabricshared/theme-registry": ">=0.3.69 <1.0.0",
-    "@uifabricshared/theming-ramp": ">=0.10.5 <1.0.0"
+    "@fluentui-react-native/theme-types": ">=0.1.1 <1.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^25.1.4",
     "@types/react": "^16.9.34",
     "react": "16.11.0",
-    "react-native": "^0.62.2",
-    "typescript": "3.8.3",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1"
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "react-native": "0.62.2"
   },
   "peerDependencies": {
     "react": "^16.8.0",
