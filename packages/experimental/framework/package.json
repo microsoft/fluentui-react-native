@@ -26,12 +26,12 @@
   },
   "dependencies": {
     "@fluentui-react-native/composition": ">=0.3.6 <1.0.0",
+    "@fluentui-react-native/default-theme": ">=0.1.1 <1.0.0",
     "@fluentui-react-native/immutable-merge": "^1.0.1",
     "@fluentui-react-native/merge-props": ">=0.1.1 <1.0.0",
+    "@fluentui-react-native/theme-types": ">=0.1.1 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.3.0 <1.0.0",
     "@fluentui-react-native/use-slots": ">=0.3.6 <1.0.0",
-    "@uifabricshared/theming-ramp": ">=0.10.5 <1.0.0",
-    "@uifabricshared/theming-react-native": ">=0.7.76 <1.0.0",
     "@fluentui-react-native/memo-cache": "^1.0.2",
     "@fluentui-react-native/tokens": ">=0.5.6 <1.0.0"
   },

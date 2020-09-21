@@ -1,7 +1,7 @@
-import { IThemeColorDefinition } from './Color.types';
-import { ITypography, IPartialTypography } from './Typography.types';
+import { ThemeColorDefinition } from './Color.types';
+import { Typography, PartialTypography } from './Typography.types';
 
-export interface ISpacing {
+export interface Spacing {
   s2: string;
   s1: string;
   m: string;
@@ -14,11 +14,11 @@ export interface ISpacing {
  */
 export interface Theme {
   name?: string;
-  colors: IThemeColorDefinition;
-  typography: ITypography;
+  colors: ThemeColorDefinition;
+  typography: Typography;
   components: { [key: string]: object };
   componentTokens?: object;
-  spacing: ISpacing;
+  spacing: Spacing;
   host: object; // platform specific host settings
 }
 
@@ -29,10 +29,10 @@ export interface Theme {
  */
 export interface PartialTheme {
   name?: string;
-  colors?: Partial<IThemeColorDefinition>;
-  typography?: IPartialTypography;
+  colors?: Partial<ThemeColorDefinition>;
+  typography?: PartialTypography;
   components?: { [key: string]: object };
   componentTokens?: object;
-  spacing?: ISpacing;
+  spacing?: Spacing;
   host?: object;
 }

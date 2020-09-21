@@ -21,7 +21,7 @@ export type FontFamilyValue = string;
  *
  * **NOTE:** `primary` and `secondary` are both meant to be assigned a 'normal' family.
  */
-export interface IFontFamilies {
+export interface FontFamilies {
   primary: FontFamilyValue;
   secondary: FontFamilyValue;
   cursive: FontFamilyValue;
@@ -33,7 +33,7 @@ export interface IFontFamilies {
 /**
  * A font family, used when defining a visual element in a theme.
  */
-export type FontFamily = keyof IFontFamilies | FontFamilyValue;
+export type FontFamily = keyof FontFamilies | FontFamilyValue;
 
 /**
  * A font size value, specified in CSS pixels (px).
@@ -49,7 +49,7 @@ export type FontSizeValuePoints = number;
  *
  * These names should be used when defining a theme.
  */
-export interface IFontSizes {
+export interface FontSizes {
   caption: FontSizeValuePoints;
   secondary: FontSizeValuePoints;
   body: FontSizeValuePoints;
@@ -62,7 +62,7 @@ export interface IFontSizes {
 /**
  * A font size, used when defining a visual element in a theme.
  */
-export type FontSize = keyof IFontSizes | FontSizeValuePoints;
+export type FontSize = keyof FontSizes | FontSizeValuePoints;
 
 /**
  * A font weight value.
@@ -81,7 +81,7 @@ export type FontWeightValue = '100' | '200' | '300' | '400' | '500' | '600' | '7
  *
  * These names should be used when defining a theme.
  */
-export interface IFontWeights {
+export interface FontWeights {
   regular: FontWeightValue;
   semiBold: FontWeightValue;
 }
@@ -89,7 +89,7 @@ export interface IFontWeights {
 /**
  * A font weight, used when defining a visual element in a theme.
  */
-export type FontWeight = keyof IFontWeights | FontWeightValue;
+export type FontWeight = keyof FontWeights | FontWeightValue;
 
 /**
  * A font variant value.
@@ -103,7 +103,7 @@ export type VariantValue = {
 /**
  * A collection of named font variants.
  */
-export interface IVariants {
+export interface Variants {
   captionStandard: VariantValue;
   secondaryStandard: VariantValue;
   secondarySemibold: VariantValue;
@@ -122,7 +122,7 @@ export interface IVariants {
 /**
  * A font variant, used when defining a visual element in a theme.
  */
-export type Variant = keyof IVariants | VariantValue;
+export type Variant = keyof Variants | VariantValue;
 
 /**
  * A collection of typographic (font) information.
@@ -131,16 +131,16 @@ export type Variant = keyof IVariants | VariantValue;
  * this collection.
  */
 
-export interface ITextStyle {
-  families: IFontFamilies;
-  sizes: IFontSizes;
-  weights: IFontWeights;
-  variants: IVariants;
+export interface TextStyling {
+  families: FontFamilies;
+  sizes: FontSizes;
+  weights: FontWeights;
+  variants: Variants;
 }
 
-export type ITypography = ITextStyle;
+export type Typography = TextStyling;
 
 /**
  * A partially specified typography.
  */
-export type IPartialTypography = { [P in keyof ITypography]?: Partial<ITypography[P]> };
+export type PartialTypography = { [P in keyof Typography]?: Partial<Typography[P]> };

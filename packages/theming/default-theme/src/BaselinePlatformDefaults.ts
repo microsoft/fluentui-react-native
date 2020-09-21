@@ -1,8 +1,8 @@
-import { ITheme, ITypography, ISpacing, FontWeightValue, FontSize, IFontSizes, IVariants } from '@fluentui-react-native/theme-types';
+import { Theme, Typography, Spacing, FontWeightValue, FontSize, FontSizes, Variants } from '@fluentui-react-native/theme-types';
 import { Platform } from 'react-native';
 import { getStockWebPalette } from './Color';
 
-function _defaultTypography(): ITypography {
+function _defaultTypography(): Typography {
   const defaultsDict = {
     sizes: {
       caption: 10 as FontSize,
@@ -12,7 +12,7 @@ function _defaultTypography(): ITypography {
       header: 20 as FontSize,
       hero: 28 as FontSize,
       heroLarge: 42 as FontSize,
-    } as IFontSizes,
+    } as FontSizes,
     weights: {
       regular: '400' as FontWeightValue,
       semiBold: '600' as FontWeightValue,
@@ -39,7 +39,7 @@ function _defaultTypography(): ITypography {
       heroSemibold: { face: 'primary', size: 'hero', weight: 'semiBold' },
       heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: 'regular' },
       heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: 'semiBold' },
-    } as IVariants,
+    } as Variants,
   };
 
   if (Platform.OS === 'macos' || Platform.OS === 'ios') {
@@ -57,11 +57,11 @@ function _defaultTypography(): ITypography {
   return defaultsDict;
 }
 
-export function defaultSpacing(): ISpacing {
+export function defaultSpacing(): Spacing {
   return { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' };
 }
 
-export const defaultFluentTheme: ITheme = {
+export const defaultFluentTheme: Theme = {
   colors: getStockWebPalette(),
   typography: _defaultTypography(),
   spacing: defaultSpacing(),

@@ -1,3 +1,13 @@
 export * from './SettingsWorker';
 export * from './Theme';
-export * from '@fluentui-react-native/theme-types';
+export {
+  ColorRamp as IColorRamp,
+  ColorValue,
+  Palette as IPalette,
+  PartialPalette as IPartialPalette,
+  PartialTheme as IPartialTheme,
+  Theme as ITheme,
+  ThemeColorDefinition as IThemeColorDefinition,
+  ThemeContext,
+  Typography as ITypography,
+} from '@fluentui-react-native/theme-types';
