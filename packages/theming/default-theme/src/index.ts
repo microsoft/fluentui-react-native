@@ -1,1 +1,1 @@
-export { defaultFluentTheme } from './BaselinePlatformDefaults';
+export { defaultFluentTheme } from './defaultTheme';
