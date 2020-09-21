@@ -1,10 +1,14 @@
 import { Button } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
-import { Platform, View, Text } from 'react-native';
+import { Alert, Platform, View, Text } from 'react-native';
 import { stackStyle } from '../Common/styles';
 
 export const ButtonIconTest: React.FunctionComponent<{}> = () => {
+  const onClick = () => {
+    Alert.alert('Button pressed');
+  }
+
   if (Platform.OS !== ('win32' as any)) {
     const CustomizedIconButton = Button.customize({
       tokens: { iconColor: 'red' },
@@ -14,7 +18,7 @@ export const ButtonIconTest: React.FunctionComponent<{}> = () => {
     return (
       <View>
         <Stack style={stackStyle}>
-          <Button icon={require('./icon_24x24.png')} content="Button with Icon" tooltip="button tooltip" />
+          <Button icon={require('./icon_24x24.png')} content="Button with Icon" tooltip="button tooltip" onClick={onClick} />
           <CustomizedIconButton icon={require('./icon_24x24.png')} content="Button with Customized Icon" tooltip="button tooltip" />
         </Stack>
       </View>

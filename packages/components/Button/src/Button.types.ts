@@ -1,11 +1,11 @@
+import {IFocusable, IPressableState} from '@fluentui-react-native/interactive-hooks';
+import {IPressableProps} from '@fluentui-react-native/pressable';
+import {ITextProps} from '@fluentui-react-native/text';
+import {FontTokens, IBackgroundColorTokens, IBorderTokens, IForegroundColorTokens} from '@fluentui-react-native/tokens';
+import {IViewWin32Props} from '@office-iss/react-native-win32';
+import {IRenderData} from '@uifabricshared/foundation-composable';
 import * as React from 'react';
-import { ViewProps, ImageProps } from 'react-native';
-import { IRenderData } from '@uifabricshared/foundation-composable';
-import { ITextProps } from '@fluentui-react-native/text';
-import { IPressableProps } from '@fluentui-react-native/pressable';
-import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
-import { IViewWin32Props } from '@office-iss/react-native-win32';
+import {ImageProps, TouchableNativeFeedbackProps, ViewProps} from 'react-native';
 
 export const buttonName = 'Button';
 
@@ -29,24 +29,27 @@ export interface IButtonInfo extends IPressableState {
 }
 
 /**
- * Because state updates are coming from the touchable and will cause a child render the button doesn't use
- * changes in state value to trigger re-render.  The values inside inner are effectively mutable and are used
- * for per-component storage
+ * Because state updates are coming from the touchable and will cause a child
+ * render the button doesn't use changes in state value to trigger re-render.
+ * The values inside inner are effectively mutable and are used for
+ * per-component storage
  */
 export interface IButtonState {
   info: IButtonInfo;
 }
 
-export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
+export interface IButtonTokens extends FontTokens, IForegroundColorTokens,
+                                       IBackgroundColorTokens, IBorderTokens {
   /**
    * The amount of padding between the border and the contents.
    */
-  contentPadding?: number | string;
+  contentPadding?: number|string;
 
   /**
-   * The amount of padding between the border and the contents when the Button has focus.
+   * The amount of padding between the border and the contents when the Button
+   * has focus.
    */
-  contentPaddingFocused?: number | string;
+  contentPaddingFocused?: number|string;
 
   /**
    * The icon color.
@@ -66,7 +69,7 @@ export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBack
   /**
    * The size of the icon.
    */
-  iconSize?: number | string;
+  iconSize?: number|string;
 
   /**
    * The weight of the lines used when drawing the icon.
@@ -82,6 +85,11 @@ export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBack
    * Source URL or name of the icon to show on the Button.
    */
   icon?: string;
+
+  /**
+   * Android specific: the ripple color to use for ripple effects.
+   */
+  androidRippleColor?: string;
 }
 
 export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
@@ -95,7 +103,8 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
    */
   icon?: string;
   /**
-   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
+   * A RefObject to access the IButton interface. Use this to access the public
+   * methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
   /**
@@ -108,6 +117,7 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
 }
 
 export interface IButtonSlotProps {
+  touchable: TouchableNativeFeedbackProps;
   root: React.PropsWithRef<IViewWin32Props>;
   stack: ViewProps;
   icon: ImageProps;

@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Image, View } from 'react-native';
+import { Image, TouchableNativeFeedback, Platform, View } from 'react-native';
 import { IButtonSlotProps, IButtonState, IButtonProps, IButtonRenderData, buttonName, IButtonType } from './Button.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
@@ -49,6 +49,10 @@ export const Button = compose<IButtonType>({
     const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
     // create the merged slot props
     const slotProps = mergeSettings<IButtonSlotProps>(styleProps, {
+      touchable: {
+        onPress: onClick,
+        background: TouchableNativeFeedback.Ripple(styleProps.tokens.androidRippleColor),
+      },
       root: {
         ...pressable.props,
         ref: buttonRef,
@@ -69,22 +73,26 @@ export const Button = compose<IButtonType>({
 
     // We shouldn't have to specify the source prop on Slots.icon, here, but we need another drop from @uifabricshared
     return (
-      <Slots.root>
-        <Slots.stack>
-          {info.icon && <Slots.icon source={renderData.slotProps!.icon.source} />}
-          {info.content && <Slots.content />}
-          {children}
-        </Slots.stack>
-      </Slots.root>
+      <Slots.touchable>
+        <Slots.root>
+          <Slots.stack>
+            {info.icon && <Slots.icon source={renderData.slotProps!.icon.source} />}
+            {info.content && <Slots.content />}
+            {children}
+          </Slots.stack>
+        </Slots.root>
+      </Slots.touchable>
     );
   },
   slots: {
+    touchable: Platform.OS === 'android' ? TouchableNativeFeedback : View,
     root: View,
     stack: { slotType: View, filter: filterViewProps },
     icon: { slotType: Image as React.ComponentType<object>, filter: filterImageProps },
     content: Text,
   },
   styles: {
+    touchable: [],
     root: [backgroundColorTokens, borderTokens],
     stack: [],
     icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'tintColor' }],
