@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "remove I preface on theme types, add context",
+  "packageName": "@fluentui-react-native/theme-types",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-09-21T21:37:47.289Z"
+}
