@@ -28,6 +28,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@fluentui-react-native/default-theme": ">=0.1.1 <1.0.0",
     "@uifabricshared/theme-registry": ">=0.3.69 <1.0.0",
     "@uifabricshared/theming-ramp": ">=0.10.5 <1.0.0"
   },
