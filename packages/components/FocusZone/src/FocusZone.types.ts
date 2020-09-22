@@ -38,7 +38,7 @@ export interface IFocusZoneProps {
    *Allows for 2D navigation. This navigation strategy takes into account the position of elements
    on screen, and navigates in the direction the user selects to the nearest element.
    */
-  is2DNavigation?: boolean;
+  use2DNavigation?: boolean;
 
   /**
    * Callback called when “focus” event triggered in FocusZone
@@ -46,31 +46,16 @@ export interface IFocusZoneProps {
   onFocus?: (e?: any) => void;
 }
 
-export enum FocusZoneDirection {
-  /** React to all arrows. */
-  bidirectional = 0,
+export type FocusZoneDirection =
+  | 'bidirectional' /** React to all arrows. */
+  | 'vertical'      /** Only react to up/down arrows. */
+  | 'horizontal'    /** Only react to left/right arrows. */
+  | 'none';         /** Doesn't respond to any arrow keys. */
 
-  /** Only react to up/down arrows. */
-  vertical = 1,
-
-  /** Only react to left/right arrows. */
-  horizontal = 2,
-
-  /** Doesn't respond to any arrow keys. */
-  none = 3
-}
-
-export enum NavigateAtEnd {
-  /* At the last element of the FocusZone, focus will move to the first focusable element outside the FocusZone */
-  NavigateNormal = 0,
-
-  /* Focus will stay on the last element in the FocusZone. Only way to navigate out is Tab */
-  NavigateStopAtEnds = 1,
-
-  /* Wll cycle to the beginning of the targets once the user navigates to the next target
-   * while at the end, and to the end when navigate to the previous at the beginning */
-  NavigateWrap = 2
-}
+export type NavigateAtEnd =
+  | 'NavigateStopAtEnds'  /* Focus will stay on the last element in the FocusZone. Only way to navigate out is Tab */
+  | 'NavigateWrap'        /* Circular Navigation Functionality */
+  | 'NavigateContinue';   /* At the last element of the FocusZone, focus will move to the first focusable element outside the FocusZone */
 
 export interface IFocusZoneTokens { }
 

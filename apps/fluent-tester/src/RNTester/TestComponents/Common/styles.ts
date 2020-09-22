@@ -50,7 +50,7 @@ export const commonTestStyles = StyleSheet.create({
     minHeight: 200,
     justifyContent: 'space-between'
   },
-  focusZoneStyle1: {
+  focusZoneViewStyle: {
     flexDirection: 'row',
     alignContent: 'flex-start',
     alignItems: 'flex-start',
@@ -69,18 +69,6 @@ export const commonTestStyles = StyleSheet.create({
   focusZoneButton0: {
     height: 50,
     width: 50,
-  },
-  focusZoneButton2: {
-    height: 75,
-    width: 75,
-  },
-  focusZoneButton3: {
-    marginTop: 6,
-    height: 100,
-    width: 100,
-  },
-  testView: {
-    marginTop: 10
   }
 });
 

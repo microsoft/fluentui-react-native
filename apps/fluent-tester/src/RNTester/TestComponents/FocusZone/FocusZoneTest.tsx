@@ -9,27 +9,31 @@ import { Stack } from '@fluentui-react-native/stack';
 const navigation2DFocusZone: React.FunctionComponent<{}> = () => {
   const buttonRef = React.useRef<View>(null);
 
+  // const onFocus = () => {
+  //   console.group('hu');
+  // }
+
   return (
     <View>
       <View>
         <Button content="Outside FocusZone" />
       </View>
-      <FocusZone is2DNavigation={true} navigateAtEnd={NavigateAtEnd.NavigateWrap} defaultTabbableElement={buttonRef}>
+      <FocusZone use2DNavigation={true} defaultTabbableElement={buttonRef} navigateAtEnd='NavigateWrap'>
         <View style={commonTestStyles.focusZoneContainer}>
-          <View style={commonTestStyles.focusZoneStyle1}>
+          <View style={commonTestStyles.focusZoneViewStyle}>
             <Button content="#1" style={commonTestStyles.focusZoneButton} />
             <Button content="#5" style={commonTestStyles.focusZoneButton} />
-            <Button content="#5" style={commonTestStyles.focusZoneButton0} />
+            <Button content="#5" style={commonTestStyles.focusZoneButton} />
           </View>
-          <View style={commonTestStyles.focusZoneStyle1}>
+          <View style={commonTestStyles.focusZoneViewStyle}>
             <Button style={commonTestStyles.focusZoneButton} content="#2" />
             <Button componentRef={buttonRef} style={commonTestStyles.focusZoneButton} content="Test" />
-            <Button content="#5" style={commonTestStyles.focusZoneButton0} />
+            <Button content="#5" style={commonTestStyles.focusZoneButton} />
           </View>
-          <View style={commonTestStyles.focusZoneStyle1}>
+          <View style={commonTestStyles.focusZoneViewStyle}>
             <Button style={commonTestStyles.focusZoneButton} content="#3" />
             <Button style={commonTestStyles.focusZoneButton} content="Test" />
-            <Button content="#5" style={commonTestStyles.focusZoneButton0} />
+            <Button content="#5" style={commonTestStyles.focusZoneButton} />
           </View>
         </View>
       </FocusZone>
@@ -44,7 +48,7 @@ const commonUsageFocusZone: React.FunctionComponent<{}> = () => {
   return (
     <View>
       <Button content="Outside FocusZone" />
-      <FocusZone navigateAtEnd={NavigateAtEnd.NavigateWrap}>
+      <FocusZone navigateAtEnd='NavigateWrap'>
         <RadioGroup label="FocusZone RadioGroup with Circular Navigation" defaultSelectedKey="A">
           <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
           <RadioButton content="Option B" buttonKey="B" />
@@ -53,8 +57,26 @@ const commonUsageFocusZone: React.FunctionComponent<{}> = () => {
         </RadioGroup>
       </FocusZone>
       <Button content="Outside FocusZone" />
-      <FocusZone navigateAtEnd={NavigateAtEnd.NavigateStopAtEnds}>
+      <FocusZone navigateAtEnd='NavigateStopAtEnds'>
         <RadioGroup label="FocusZone RadioGroup with Navigation stopAtEnd" defaultSelectedKey="A">
+          <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
+          <RadioButton content="Option B" buttonKey="B" />
+          <RadioButton content="Option C" buttonKey="C" disabled={true} />
+          <RadioButton content="Option D" buttonKey="D" />
+        </RadioGroup>
+      </FocusZone>
+      <Button content="Outside FocusZone" />
+      <FocusZone disabled={true}>
+        <RadioGroup label="Disabled" defaultSelectedKey="A">
+          <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
+          <RadioButton content="Option B" buttonKey="B" />
+          <RadioButton content="Option C" buttonKey="C" disabled={true} />
+          <RadioButton content="Option D" buttonKey="D" />
+        </RadioGroup>
+      </FocusZone>
+      <Button content="Outside FocusZone" />
+      <FocusZone focusZoneDirection="none">
+        <RadioGroup label="No arrow keys" defaultSelectedKey="A">
           <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
           <RadioButton content="Option B" buttonKey="B" />
           <RadioButton content="Option C" buttonKey="C" disabled={true} />
@@ -70,7 +92,7 @@ const directionalFocusZone: React.FunctionComponent<{}> = () => {
   return (
     <View>
       <Button content="Outside FocusZone" />
-      <FocusZone focusZoneDirection={FocusZoneDirection.bidirectional}>
+      <FocusZone disabled={null} focusZoneDirection='bidirectional'>
         <RadioGroup label="FocusZone RadioGroup with Bidirectional arrow key navigation" defaultSelectedKey="A">
           <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
           <RadioButton content="Option B" buttonKey="B" />
@@ -79,7 +101,7 @@ const directionalFocusZone: React.FunctionComponent<{}> = () => {
         </RadioGroup>
       </FocusZone>
       <Button content="Outside FocusZone" />
-      <FocusZone focusZoneDirection={FocusZoneDirection.vertical}>
+      <FocusZone focusZoneDirection='vertical'>
         <RadioGroup label="FocusZone RadioGroup with Vertical arrow key navigation" defaultSelectedKey="A">
           <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
           <RadioButton content="Option B" buttonKey="B" />
@@ -88,7 +110,7 @@ const directionalFocusZone: React.FunctionComponent<{}> = () => {
         </RadioGroup>
       </FocusZone>
       <Button content="Outside FocusZone" />
-      <FocusZone focusZoneDirection={FocusZoneDirection.horizontal}>
+      <FocusZone focusZoneDirection='horizontal'>
         <RadioGroup label="FocusZone RadioGroup with Horizontal arrow key navigation" defaultSelectedKey="A">
           <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
           <RadioButton content="Option B" buttonKey="B" />
@@ -125,17 +147,17 @@ const focusZoneDirectionStrings = [
 ];
 
 const navigateAtEndStrings = [
-  'Normal',
   'StopAtEnds',
   'Wrap',
+  'Continue',
 ];
 
 
 const customizableFocusZone: React.FunctionComponent<{}> = () => {
   const [is2DNav, set2dNav] = React.useState(false);
   const [isDisabled, setDisabled] = React.useState(false);
-  const [isFocusZoneDirection, setFocusZoneDirection] = React.useState<FocusZoneDirection>(FocusZoneDirection.bidirectional);
-  const [isNavigateAtEnd, setNavigateAtEnd] = React.useState<NavigateAtEnd>(NavigateAtEnd.NavigateStopAtEnds);
+  const [isFocusZoneDirection, setFocusZoneDirection] = React.useState<FocusZoneDirection>('bidirectional');
+  const [isNavigateAtEnd, setNavigateAtEnd] = React.useState<NavigateAtEnd>('NavigateStopAtEnds');
 
   return (
     <View style={commonTestStyles.root}>
@@ -150,16 +172,16 @@ const customizableFocusZone: React.FunctionComponent<{}> = () => {
             onValueChange={(direction) => {
               switch (direction) {
                 case 'Bidirectional':
-                  setFocusZoneDirection(FocusZoneDirection.bidirectional);
+                  setFocusZoneDirection('bidirectional');
                   break;
                 case 'Horizontal':
-                  setFocusZoneDirection(FocusZoneDirection.horizontal);
+                  setFocusZoneDirection('horizontal');
                   break;
                 case 'Vertical':
-                  setFocusZoneDirection(FocusZoneDirection.vertical);
+                  setFocusZoneDirection('vertical');
                   break;
                 case 'None':
-                  setFocusZoneDirection(FocusZoneDirection.none);
+                  setFocusZoneDirection('none');
                   break;
               }
             }}
@@ -174,14 +196,14 @@ const customizableFocusZone: React.FunctionComponent<{}> = () => {
             selectedValue="StopAtEnds"
             onValueChange={(direction) => {
               switch (direction) {
-                case 'Normal':
-                  setNavigateAtEnd(NavigateAtEnd.NavigateNormal);
+                case 'Continue':
+                  setNavigateAtEnd('NavigateContinue');
                   break;
                 case 'StopAtEnds':
-                  setNavigateAtEnd(NavigateAtEnd.NavigateStopAtEnds);
+                  setNavigateAtEnd('NavigateStopAtEnds');
                   break;
                 case 'Wrap':
-                  setNavigateAtEnd(NavigateAtEnd.NavigateWrap);
+                  setNavigateAtEnd('NavigateWrap');
                   break;
               }
             }}
@@ -195,22 +217,22 @@ const customizableFocusZone: React.FunctionComponent<{}> = () => {
         <View>
           <Button content="Outside FocusZone" />
         </View>
-        <FocusZone disabled={isDisabled} is2DNavigation={is2DNav} focusZoneDirection={isFocusZoneDirection} navigateAtEnd={isNavigateAtEnd} >
+        <FocusZone disabled={isDisabled} use2DNavigation={is2DNav} focusZoneDirection={isFocusZoneDirection} navigateAtEnd={isNavigateAtEnd} >
           <View style={commonTestStyles.focusZoneContainer}>
-            <View style={commonTestStyles.focusZoneStyle1}>
+            <View style={commonTestStyles.focusZoneViewStyle}>
               <Button content="#1" style={commonTestStyles.focusZoneButton} />
               <Button content="#5" style={commonTestStyles.focusZoneButton} />
-              <Button content="#5" style={commonTestStyles.focusZoneButton0} />
+              <Button content="#5" style={commonTestStyles.focusZoneButton} />
             </View>
-            <View style={commonTestStyles.focusZoneStyle1}>
+            <View style={commonTestStyles.focusZoneViewStyle}>
               <Button style={commonTestStyles.focusZoneButton} content="#2" />
               <Button style={commonTestStyles.focusZoneButton} content="Test" />
-              <Button content="#5" style={commonTestStyles.focusZoneButton0} />
+              <Button content="#5" style={commonTestStyles.focusZoneButton} />
             </View>
-            <View style={commonTestStyles.focusZoneStyle1}>
+            <View style={commonTestStyles.focusZoneViewStyle}>
               <Button style={commonTestStyles.focusZoneButton} content="#3" />
               <Button style={commonTestStyles.focusZoneButton} content="Test" />
-              <Button content="#5" style={commonTestStyles.focusZoneButton0} />
+              <Button content="#5" style={commonTestStyles.focusZoneButton} />
             </View>
           </View>
         </FocusZone>
