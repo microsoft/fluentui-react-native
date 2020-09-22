@@ -111,11 +111,6 @@ export const iosTests: TestDescription[] = [
     testPage: HOMEPAGE_SPINNER_BUTTON,
   },
   {
-    name: 'Shimmer Test',
-    component: ShimmerTest,
-    testPage: HOMEPAGE_SHIMMER_BUTTON,
-  },
-  {
     name: 'Text Test',
     component: TextTest,
     testPage: HOMEPAGE_TEXT_BUTTON,

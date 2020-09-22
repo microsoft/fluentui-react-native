@@ -1151,6 +1151,21 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@fluentui-react-native/framework@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.3.0.tgz#dff9a330136db795b67bef805f57c6bb72c251b3"
+  integrity sha512-BAKOf0lX241Zy5G4qrACXcBjgVIWEYWPaQXo+7p7Ausc0/OD9Q/t9K6ndu2MeQkDz8O6lObd6mNs3uXee6YOfA==
+  dependencies:
+    "@fluentui-react-native/composition" ">=0.3.6 <1.0.0"
+    "@fluentui-react-native/immutable-merge" "^1.0.1"
+    "@fluentui-react-native/memo-cache" "^1.0.2"
+    "@fluentui-react-native/merge-props" ">=0.1.1 <1.0.0"
+    "@fluentui-react-native/tokens" ">=0.5.6 <1.0.0"
+    "@fluentui-react-native/use-slots" ">=0.3.6 <1.0.0"
+    "@fluentui-react-native/use-styling" ">=0.3.0 <1.0.0"
+    "@uifabricshared/theming-ramp" ">=0.10.5 <1.0.0"
+    "@uifabricshared/theming-react-native" ">=0.7.76 <1.0.0"
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
