@@ -10,9 +10,6 @@ export * from '@fluentui-react-native/pressable';
 export * from '@fluentui-react-native/radio-group';
 export * from '@fluentui-react-native/separator';
 export * from '@fluentui-react-native/shimmer';
-<<<<<<< HEAD
 export * from '@fluentui-react-native/spinner';
-=======
->>>>>>> 901b3a534df10a1d471c815349651500d0237575
 export * from '@fluentui-react-native/text';
 export * from '@fluentui-react-native/interactive-hooks';
