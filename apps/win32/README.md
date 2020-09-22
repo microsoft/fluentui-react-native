@@ -1,15 +1,10 @@
-`FluentUI Tester` is the test app that we use to test our FluentUI components during development.
+# Running the FluentUI Tester on Win32
 
-## Prerequisites
+`FluentUI Tester` is the test app that we use to test our FluentUI components during development. It uses the [react-native-test app](https://github.com/microsoft/react-native-test-app) under the covers, and loads the fluent-tester bundle.
 
-- [Node.js](https://nodejs.org/en/download/)
-- [React Native Windows Development Dependencies](https://microsoft.github.io/react-native-windows/docs/rnw-dependencies#manual-setup)
-  - **NOTE:** Please make sure you grab all of the items listed there and the appropriate versions.
-- Enable [Developer Mode](https://docs.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development) in Windows settings
+## Launch `FluentUI Tester` app on Win32
 
-## Launch `FluentUI Tester` app
-
-1. Make sure you have followed the Getting Started instructions [here](../../README.md) to install packages and build the entire repository.
+1. Make sure you have followed the [Getting Started](../../README.md) instructions to install packages and build the entire FluentUI React Native repository. I.e. from the root of the repo:
 
 2. Then go into `apps\win32` folder:
 
@@ -28,9 +23,10 @@
 ```
     yarn run-win32
 ```
+
 5. You will see FluentUI Tester show up in a new window.
 
-![ReactTest image debug menu location](./../../docs/pages/images/fluent_tester_radiogroup.png)
+![ReactTest image debug menu location](./../../assets/fluent_tester_radiogroup.png)
 
 ## Debug `FluentUI Tester` app with direct debugging
 
@@ -53,11 +49,11 @@ Note: we recommend using [Visual Studio Code](https://code.visualstudio.com/down
 
 5. Inside ReactTest, open the debug option menu and select the checkbox `Use Direct Debugger`
 
-![ReactTest image debug menu location](./../../docs/pages/images/fluent_tester_debug_menu.png)
+![ReactTest image debug menu location](./../../assets/fluent_tester_debug_menu.png)
 
 6. In Visual Studio Code, open the debug pane and select `Debug Fabric Tester` option from the "Run And Debug" dropdown.
 
-![ReactTest image debug menu location](./../../docs/pages/images/fluent_tester_vscode_debug.png)
+![ReactTest image debug menu location](./../../assets/fluent_tester_vscode_debug.png)
 
 7. At this time, VS Code will attach to the JS runtime and you can start debugging. For more information on debugging in VS Code, please see [Visual Studio Code documentation](https://code.visualstudio.com/docs/editor/debugging).
 
