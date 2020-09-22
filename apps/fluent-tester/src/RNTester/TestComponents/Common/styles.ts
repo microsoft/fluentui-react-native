@@ -49,26 +49,6 @@ export const commonTestStyles = StyleSheet.create({
   view: {
     minHeight: 200,
     justifyContent: 'space-between'
-  },
-  focusZoneViewStyle: {
-    flexDirection: 'row',
-    alignContent: 'flex-start',
-    alignItems: 'flex-start',
-    marginTop: 10
-  },
-  focusZoneContainer: {
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    padding: 4,
-  },
-  focusZoneButton: {
-    marginRight: 60,
-    height: 50,
-    width: 50,
-  },
-  focusZoneButton0: {
-    height: 50,
-    width: 50,
   }
 });
 
@@ -163,9 +143,4 @@ export const separatorStackStyle: IStackProps['style'] = {
   height: 200,
   flexDirection: 'row',
   justifyContent: 'space-evenly'
-};
-
-export const stackStyleFocusZone: IStackProps['style'] = {
-  flexDirection: 'column',
-  marginBottom: 40
 };
