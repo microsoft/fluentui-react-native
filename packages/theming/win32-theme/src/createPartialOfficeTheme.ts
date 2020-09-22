@@ -1,5 +1,5 @@
 import { ColorRamp, OfficePalette, PartialTheme } from '@fluentui-react-native/theme-types';
-import { OfficeThemingModule } from './officeThemingModule';
+import { OfficeThemingModule } from './NativeModule/officeThemingModule';
 import { paletteFromOfficeColors } from './paletteFromOfficeColors';
 
 const createColorRamp = ({ values, index = -1 }: Partial<ColorRamp>) => ({

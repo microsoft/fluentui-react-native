@@ -1,7 +1,7 @@
 import { ThemeReference } from '@fluentui-react-native/theme';
 import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
-import { getThemingModule } from './getThemingModule';
-import { CxxException, PlatformDefaultsChangedArgs } from './officeThemingModule';
+import { getThemingModule } from './NativeModule/getThemingModule';
+import { CxxException, PlatformDefaultsChangedArgs } from './NativeModule/officeThemingModule';
 import { OfficePalette } from '@fluentui-react-native/theme-types';
 import { createPartialOfficeTheme } from './createPartialOfficeTheme';
 
