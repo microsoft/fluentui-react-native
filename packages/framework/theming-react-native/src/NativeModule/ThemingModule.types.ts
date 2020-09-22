@@ -1,6 +1,5 @@
 import { ITypography, ColorValue } from '@uifabricshared/theming-ramp';
-import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
-import { IOfficePalette } from './office';
+import { ITheme, IPartialTheme, OfficePalette as IOfficePalette } from '@uifabricshared/theming-ramp';
 import { IProcessTheme } from '@uifabricshared/theme-registry';
 
 export type PlatformDefaultsChangedArgs = { hostThemeSetting: string };

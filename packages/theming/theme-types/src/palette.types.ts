@@ -1,6 +1,6 @@
 import { ColorValue } from '@uifabricshared/theming-ramp';
 
-export interface IOfficePalette {
+export interface OfficePalette {
   /**
    * Background Colors
    *

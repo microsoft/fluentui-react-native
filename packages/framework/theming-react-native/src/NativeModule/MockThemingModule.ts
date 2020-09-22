@@ -1,6 +1,6 @@
 import { IOfficeThemingModule, IThemingModuleHelper, IEventEmitter } from './ThemingModule.types';
 import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
-import { IOfficePalette } from './office';
+import { OfficePalette as IOfficePalette } from '@uifabricshared/theming-ramp';
 import { createThemingModuleHelper } from './ThemingModuleHelpers';
 
 const whiteColorsPalette: IOfficePalette = {
@@ -114,14 +114,14 @@ const whiteColorsPalette: IOfficePalette = {
   AccentOutline: 'pink',
 
   BkgHeader: 'pink',
-  TextHeader: 'pink'
+  TextHeader: 'pink',
 };
 
 const taskPanePalette: IOfficePalette = {
   ...whiteColorsPalette,
   Bkg: '#E6E6E6',
   BkgCtlEmphasis: 'green',
-  TextCtlEmphasis: 'white'
+  TextCtlEmphasis: 'white',
 };
 
 const baseline = getBaselinePlatformTheme();
@@ -135,11 +135,11 @@ const mockModule: IOfficeThemingModule = {
     App: ['#F8F8F8', '#EFF6FC', '#BBDAF3', '#55A4E2', '#359EDD', '#0078d7', '#283E4A', '#030C13'],
     FluentGrays: ['#FAF9F8', '#797775', '#11100F'],
     ClassicGrays: ['#FFFFFF', '#737373', '#000000'],
-    Sepias: ['#ECE6DE']
+    Sepias: ['#ECE6DE'],
   },
   getPalette: mockGetPaletteImpl,
   typography: baseline.typography,
-  fluentTypography: baseline.typography
+  fluentTypography: baseline.typography,
 };
 
 export function createMockThemingModule(module?: Partial<IOfficeThemingModule>) {
@@ -149,10 +149,10 @@ export function createMockThemingModule(module?: Partial<IOfficeThemingModule>) 
 export function createMockThemingModuleHelper(
   module?: Partial<IOfficeThemingModule>,
   emitter?: IEventEmitter,
-  behaviorOverrides?: Partial<IThemingModuleHelper>
+  behaviorOverrides?: Partial<IThemingModuleHelper>,
 ): IThemingModuleHelper {
   return {
     ...createThemingModuleHelper(createMockThemingModule(module), emitter),
-    ...behaviorOverrides
+    ...behaviorOverrides,
   };
 }

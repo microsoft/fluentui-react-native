@@ -1,7 +1,6 @@
-import { IOfficePalette } from './palette.types';
-import { IPalette } from '@uifabricshared/theming-ramp';
+import { IPalette, OfficePalette } from '@uifabricshared/theming-ramp';
 
-export function paletteFromOfficeColors(p: IOfficePalette): IPalette {
+export function paletteFromOfficeColors(p: OfficePalette): IPalette {
   return {
     background: p.Bkg,
     bodyStandoutBackground: p.Bkg,
@@ -95,6 +94,6 @@ export function paletteFromOfficeColors(p: IOfficePalette): IPalette {
     actionLinkHovered: p.TextActiveHover,
     link: p.TextHyperlink,
     linkHovered: p.TextHyperlinkHover,
-    linkPressed: p.TextHyperlinkPressed
+    linkPressed: p.TextHyperlinkPressed,
   };
 }

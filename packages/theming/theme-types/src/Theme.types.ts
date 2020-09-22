@@ -1,5 +1,6 @@
-import { ThemeColorDefinition } from './Color.types';
-import { Typography, PartialTypography } from './Typography.types';
+import { ThemeColorDefinition } from './color.types';
+import { OfficePalette } from './palette.types';
+import { Typography, PartialTypography } from './typography.types';
 
 export interface Spacing {
   s2: string;
@@ -19,7 +20,10 @@ export interface Theme {
   components: { [key: string]: object };
   componentTokens?: object;
   spacing: Spacing;
-  host: object; // platform specific host settings
+  host: {
+    // Office palette, if running in Office with the native module connected in the theme
+    palette?: OfficePalette;
+  };
 }
 
 /**

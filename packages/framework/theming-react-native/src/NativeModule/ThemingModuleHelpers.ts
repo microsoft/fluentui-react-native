@@ -1,14 +1,14 @@
-import { ITheme, IPartialPalette, IColorRamp, resolvePartialTheme } from '@uifabricshared/theming-ramp';
+import { ITheme, IPartialPalette, IColorRamp, resolvePartialTheme, OfficePalette } from '@uifabricshared/theming-ramp';
 import {
   IOfficeThemingModule,
   ICxxException,
   PlatformDefaultsChangedCallback,
   IThemingModuleHelper,
   IEventEmitter,
-  PlatformDefaultsChangedArgs
+  PlatformDefaultsChangedArgs,
 } from './ThemingModule.types';
 import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
-import { IOfficePalette, paletteFromOfficeColors } from './office';
+import { paletteFromOfficeColors } from './office';
 import { useFakePalette } from './useFakePalette';
 
 const createColorRamp = ({ values, index = -1 }: Partial<IColorRamp>) => ({
@@ -16,12 +16,12 @@ const createColorRamp = ({ values, index = -1 }: Partial<IColorRamp>) => ({
   index,
   toString() {
     return this.values[Math.round(values.length / 2)];
-  }
+  },
 });
 
-type PaletteCache = { [key: string]: IOfficePalette };
+type PaletteCache = { [key: string]: OfficePalette };
 
-function isException(palette: IOfficePalette | ICxxException): palette is ICxxException {
+function isException(palette: OfficePalette | ICxxException): palette is ICxxException {
   return (palette as ICxxException).message !== undefined;
 }
 
@@ -52,12 +52,12 @@ export function translateOfficeTheme(module: IOfficeThemingModule, cache: Palett
       neutrals: createColorRamp({ values: module.ramps.FluentGrays }),
       warning: createColorRamp({ values: module.ramps.Sepias }),
       neutrals2: createColorRamp({ values: module.ramps.ClassicGrays }),
-      ...palette
+      ...palette,
     },
     typography: module.fluentTypography,
     host: {
-      palette: cache[getPaletteCacheKey(id)]
-    }
+      palette: cache[getPaletteCacheKey(id)],
+    },
   };
 }
 
@@ -74,7 +74,7 @@ export function createThemingModuleHelper(themingModule?: IOfficeThemingModule, 
     getPlatformDefaults: (themeId?: string) => {
       return resolvePartialTheme(
         getBaselinePlatformTheme(),
-        Object.assign(translateOfficeTheme(themingModule, paletteCache, themeId), { name: _hostTheme })
+        Object.assign(translateOfficeTheme(themingModule, paletteCache, themeId), { name: _hostTheme }),
       );
     },
     getPlatformThemeDefinition: (themeId?: string) => {
@@ -85,6 +85,6 @@ export function createThemingModuleHelper(themingModule?: IOfficeThemingModule, 
     },
     addListener: (callback: PlatformDefaultsChangedCallback) => {
       emitter && emitter.addListener('onPlatformDefaultsChanged', callback);
-    }
+    },
   };
 }
