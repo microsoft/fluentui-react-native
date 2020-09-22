@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Updated Shimmer to not have a module name",
-  "packageName": "@fluentui/react-native",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2020-09-22T20:33:35.773Z"
-}

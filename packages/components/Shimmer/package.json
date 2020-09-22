@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/shimmer",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A shimmer view",
   "main": "src/index.ts",
   "module": "src/index.ts",

@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -20,7 +20,7 @@
     "bundle": "fluentui-scripts bundle"
   },
   "dependencies": {
-    "@fluentui/react-native": ">=0.16.2 <1.0.0",
+    "@fluentui/react-native": ">=0.16.3 <1.0.0",
     "@fluentui-react-native/stack": ">=0.2.9 <1.0.0",
     "@fluentui-react-native/interactive-hooks": ">=0.5.1 <1.0.0",
     "@uifabricshared/theming-react-native": ">=0.7.77 <1.0.0",
