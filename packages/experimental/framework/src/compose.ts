@@ -1,4 +1,4 @@
-import { ITheme } from '@uifabricshared/theming-ramp';
+import { Theme } from '@fluentui-react-native/theme-types';
 import { composeFactory, ComposeFactoryOptions, ComposeFactoryComponent, UseStyledSlots } from '@fluentui-react-native/composition';
 import { themeHelper } from './themeHelper';
 
@@ -29,14 +29,14 @@ export type ComposeOptions<TProps, TSlotProps, TTokens, TStatics extends object>
   TProps,
   TSlotProps,
   TTokens,
-  ITheme,
+  Theme,
   TStatics
 >;
 export type ComposableComponent<TProps, TSlotProps, TTokens, TStatics extends object> = ComposeFactoryComponent<
   TProps,
   TSlotProps,
   TTokens,
-  ITheme,
+  Theme,
   TStatics
 >;
 
@@ -44,7 +44,7 @@ export type UseSlots<T> = UseStyledSlots<ExtractProps<T>, ExtractSlotProps<T>>;
 
 export function compose<T>(
   options: ComposeOptions<ExtractProps<T>, ExtractSlotProps<T>, ExtractTokens<T>, ExtractStatics<T>>,
-  base?: ComposableComponent<ExtractProps<T>, ExtractSlotProps<T>, ExtractTokens<T>, ExtractStatics<T>>
+  base?: ComposableComponent<ExtractProps<T>, ExtractSlotProps<T>, ExtractTokens<T>, ExtractStatics<T>>,
 ): ComposableComponent<ExtractProps<T>, ExtractSlotProps<T>, ExtractTokens<T>, ExtractStatics<T>> {
   return composeFactory(options, themeHelper, base);
 }

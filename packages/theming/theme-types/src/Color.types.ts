@@ -14,35 +14,35 @@
 export type ColorValue = string;
 
 /** @public */
-export interface ICastableToString {
+export interface CastableToString {
   toString: () => string;
 }
 
 /** @public */
-export interface IColorRamp extends ICastableToString {
+export interface ColorRamp extends CastableToString {
   values: string[];
   index: number;
 }
 
-export type IThemeColorDefinition = IPalette & {
+export type ThemeColorDefinition = Palette & {
   background: ColorValue;
   bodyText: ColorValue;
   subText: ColorValue;
   disabledText: ColorValue;
 
-  brand: IColorRamp;
+  brand: ColorRamp;
   // accent: IColorRamp;
 
-  neutral: IColorRamp;
+  neutral: ColorRamp;
 
   // success: IColorRamp;
-  warning: IColorRamp;
+  warning: ColorRamp;
   // danger: IColorRamp;
 
-  [key: string]: IColorRamp | string;
+  [key: string]: ColorRamp | string;
 };
 
-export interface IFabricWebPalette {
+export interface FabricWebPalette {
   // ROLE: Themed text
   // linkHovered
   themeDarker: ColorValue;
@@ -150,7 +150,7 @@ export interface IFabricWebPalette {
 /**
  * semantic color definitions for text colors.  These match ISemanticTextColors in fabric.
  */
-export interface IPaletteTextColors {
+export interface PaletteTextColors {
   /** The default color for text. */
   bodyText: ColorValue;
   /** Checked text color, e.g. selected menu item text. */
@@ -227,7 +227,7 @@ export interface IPaletteTextColors {
  * Background and divider colors, separated by semantic role.  These names and roles match
  * those in ISemanticColors in fabric
  */
-export interface IPaletteBackgroundColors {
+export interface PaletteBackgroundColors {
   //// Base slots
 
   /** The default color for backgrounds. */
@@ -360,14 +360,14 @@ export interface IPaletteBackgroundColors {
  *
  * Palette names describe the role of a color within the application.
  */
-export type IPalette = IPaletteTextColors & IPaletteBackgroundColors;
+export type Palette = PaletteTextColors & PaletteBackgroundColors;
 
 /**
  * A partially specified color palette.
  */
-export type IPartialPalette = Partial<IPalette>;
+export type PartialPalette = Partial<Palette>;
 
 /**
  * A color, used when defining a visual element in a theme.
  */
-export type Color = keyof IPalette | ColorValue;
+export type Color = keyof Palette | ColorValue;

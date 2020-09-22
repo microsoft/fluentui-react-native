@@ -1,4 +1,4 @@
-import { IPalette, IFabricWebPalette, IThemeColorDefinition, IColorRamp } from '@fluentui-react-native/theme-types';
+import { Palette, FabricWebPalette, ThemeColorDefinition, ColorRamp } from '@fluentui-react-native/theme-types';
 
 /**
  * Generate a palette from a set of fabric web colors, like those output from the theme designer.
@@ -6,7 +6,7 @@ import { IPalette, IFabricWebPalette, IThemeColorDefinition, IColorRamp } from '
  * @param palette - fabric web palette definition.  This allows initializing our color values in the same
  * manner the fabric web does it
  */
-export function paletteFromFabricColors(p: IFabricWebPalette, isInverted?: boolean): IPalette {
+export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolean): Palette {
   return {
     background: p.white,
     bodyStandoutBackground: p.neutralLighterAlt,
@@ -104,12 +104,12 @@ export function paletteFromFabricColors(p: IFabricWebPalette, isInverted?: boole
   };
 }
 
-const defaultColorRamp: IColorRamp = {
+const defaultColorRamp: ColorRamp = {
   values: [],
   index: -1,
 };
 
-export function getStockWebPalette(): IThemeColorDefinition {
+export function getStockWebPalette(): ThemeColorDefinition {
   return {
     brand: defaultColorRamp,
     neutral: defaultColorRamp,
