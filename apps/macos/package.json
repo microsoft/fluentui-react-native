@@ -18,8 +18,8 @@
     "macos": "react-native run-macos --scheme ReactTestApp --project-path src"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.6.1",
-    "@uifabricshared/theming-react-native": "0.7.76",
+    "@fluentui-react-native/tester": "^0.7.0",
+    "@uifabricshared/theming-react-native": "0.7.77",
     "react-native-macos": "^0.62.0-0",
     "react-native-test-app": "0.2.1"
   },
