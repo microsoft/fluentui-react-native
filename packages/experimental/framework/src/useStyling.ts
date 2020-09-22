@@ -12,7 +12,7 @@ import {
   buildProps as buildPropsBase,
   BuildPropsBase,
 } from '@fluentui-react-native/use-styling';
-import { ITheme } from '@uifabricshared/theming-ramp';
+import { ITheme } from '@fluentui-react-native/theme-types';
 import { themeHelper } from './themeHelper';
 
 export type BuildProps<TProps, TTokens> = BuildPropsBase<TProps, TTokens, ITheme>;
