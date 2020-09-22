@@ -49,14 +49,14 @@ const commonUsageFocusZone: React.FunctionComponent<{}> = () => {
   return (
     <View>
       <Button content="Outside FocusZone" />
-      <FocusZone navigateAtEnd='NavigateWrap'>
-        <RadioGroup label="FocusZone RadioGroup with Circular Navigation" defaultSelectedKey="A">
+      <RadioGroup label="FocusZone RadioGroup with Circular Navigation" defaultSelectedKey="A">
+        <FocusZone navigateAtEnd='NavigateWrap'>
           <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
           <RadioButton content="Option B" buttonKey="B" />
           <RadioButton content="Option C" buttonKey="C" disabled={true} />
           <RadioButton content="Option D" buttonKey="D" />
-        </RadioGroup>
-      </FocusZone>
+        </FocusZone>
+      </RadioGroup>
       <Button content="Outside FocusZone" />
       <FocusZone navigateAtEnd='NavigateStopAtEnds'>
         <RadioGroup label="FocusZone RadioGroup with Navigation stopAtEnd" defaultSelectedKey="A">
