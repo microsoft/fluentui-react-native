@@ -33,7 +33,7 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui-react-native/immutable-merge": "^1.0.1",
-    "@fluentui-react-native/theme-types": ">=0.1.1 <1.0.0"
+    "@fluentui-react-native/theme-types": ">=0.1.2 <1.0.0"
   },
   "devDependencies": {
     "@uifabricshared/build-native": "^0.1.1",

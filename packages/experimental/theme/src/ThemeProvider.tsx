@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ThemeReference } from './themeReference';
-import { ITheme } from '@fluentui-react-native/theme-types';
+import { ThemeContext } from '@fluentui-react-native/theme-types';
 
 export interface ThemeProviderProps extends React.PropsWithChildren<{}> {
   /**
@@ -8,12 +8,6 @@ export interface ThemeProviderProps extends React.PropsWithChildren<{}> {
    */
   theme: ThemeReference;
 }
-
-/**
- * TODO: Currently copied from theming-react-native package, this should be shared as both old and new still use the same type of theme object
- */
-export const ThemeContext = React.createContext<ITheme>(undefined);
-export const useTheme = () => React.useContext(ThemeContext);
 
 export const ThemeProvider: React.FunctionComponent<ThemeProviderProps> = (props: ThemeProviderProps) => {
   const { theme: themeRef, children } = props;

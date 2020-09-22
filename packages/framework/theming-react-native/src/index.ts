@@ -6,4 +6,3 @@ export * from './ThemeProvider';
 export * from './ThemeProvider.types';
 export * from './ThemeContext';
 export * from './NativeModule';
-export { ThemeContext, useTheme } from '@uifabricshared/theming-ramp';

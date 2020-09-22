@@ -1,4 +1,4 @@
-import { ITheme, IPartialTheme } from '@fluentui-react-native/theme-types';
+import { Theme, PartialTheme } from '@fluentui-react-native/theme-types';
 import { mergeTheme } from './mergeTheme';
 
 /**
@@ -10,14 +10,14 @@ export type OnThemeChange = () => void;
  * A function that takes in a parent theme, then returns a partial set of changes to be merged with the parent theme to update
  * it.
  */
-export type ThemeTransform<TTheme extends ITheme, TPartial extends IPartialTheme> = (parent: TTheme) => TPartial;
+export type ThemeTransform<TTheme extends Theme, TPartial extends PartialTheme> = (parent: TTheme) => TPartial;
 
 /**
  * A theme recipe is either a partial theme to merge on top of a base theme, or a function that returns the same kind of
  * partial to merge. These are recipes because they are cached as distinct steps so that they can be reapplied if the
  * base theme changes
  */
-export type ThemeRecipe<TTheme extends ITheme, TPartial extends IPartialTheme> = TPartial | ThemeTransform<TTheme, TPartial>;
+export type ThemeRecipe<TTheme extends Theme, TPartial extends PartialTheme> = TPartial | ThemeTransform<TTheme, TPartial>;
 
 /**
  * Provides a wrapper around a theme object, allowing the ability to create a theme from another theme, to listen to theme
@@ -26,7 +26,7 @@ export type ThemeRecipe<TTheme extends ITheme, TPartial extends IPartialTheme> =
  * This is the object that is designed to be handed to a theme provider, such that it can listen for changes and set the
  * value into context again.
  */
-export class ThemeReference<TTheme extends ITheme = ITheme, TPartial extends IPartialTheme = IPartialTheme> {
+export class ThemeReference<TTheme extends Theme = Theme, TPartial extends PartialTheme = PartialTheme> {
   private themeData: TTheme | undefined = undefined;
   private recipes: ThemeRecipe<TTheme, TPartial>[];
   private listeners: OnThemeChange[] = [];
