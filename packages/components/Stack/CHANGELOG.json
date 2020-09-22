@@ -1,0 +1,118 @@
+{
+  "name": "@fluentui-react-native/stack",
+  "entries": [
+    {
+      "date": "Fri, 28 Aug 2020 05:03:51 GMT",
+      "tag": "@fluentui-react-native/stack_v0.2.8",
+      "version": "0.2.8",
+      "comments": {
+        "none": [
+          {
+            "comment": "only allow menu container to focus on mount",
+            "author": "lehon@microsoft.com",
+            "commit": "9c93388527af2ea3ba60336c56a3da0ce65e3688",
+            "package": "@fluentui-react-native/stack"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 17 Aug 2020 22:08:34 GMT",
+      "tag": "@fluentui-react-native/stack_v0.2.7",
+      "version": "0.2.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix dependency errors",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2216954b9e0efadc5223c2346b4cb31e20c8bc12",
+            "package": "@fluentui-react-native/stack"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 Aug 2020 19:49:20 GMT",
+      "tag": "@fluentui-react-native/stack_v0.2.5",
+      "version": "0.2.5",
+      "comments": {
+        "none": [
+          {
+            "comment": "change text color",
+            "author": "email not defined",
+            "commit": "690dc0f91728c471e6d0207c30414416f8cd71d5",
+            "package": "@fluentui-react-native/stack"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 11 Aug 2020 19:53:33 GMT",
+      "tag": "@fluentui-react-native/stack_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "none": [
+          {
+            "comment": "status definitions",
+            "author": "email not defined",
+            "commit": "f01a0671daa0512a18cd6343518160e5ffc3a409",
+            "package": "@fluentui-react-native/stack"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Add missing deps",
+            "author": "rezha@microsoft.com",
+            "commit": "0ad6470d8cbaec3db23deea5d3fa4b9f9bae0895",
+            "package": "@fluentui-react-native/stack"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 08 Aug 2020 05:35:23 GMT",
+      "tag": "@fluentui-react-native/stack_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "f5a45d2505d1ae6a89e98480544245091d2bfbbd",
+            "package": "@fluentui-react-native/stack"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 05 Aug 2020 22:50:11 GMT",
+      "tag": "@fluentui-react-native/stack_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "added descriptions",
+            "author": "email not defined",
+            "commit": "eb607f63531821f1b20b27081418045927b0f130",
+            "package": "@fluentui-react-native/stack"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 01 Aug 2020 00:34:34 GMT",
+      "tag": "@fluentui-react-native/stack_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "publish 🚀",
+            "author": "adrum@microsoft.com",
+            "commit": "0142fab55fb905d439ab97c15bbb492f8a82de0d",
+            "package": "@fluentui-react-native/stack"
+          }
+        ]
+      }
+    }
+  ]
+}

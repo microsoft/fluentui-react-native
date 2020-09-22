@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ScreenRect } from 'react-native';
+import { ScreenRect, ViewStyle } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
@@ -26,7 +26,23 @@ export type DirectionalHint =
   | 'bottomCenter'
   | 'bottomRightEdge';
 
-export interface ICalloutTokens extends IBackgroundColorTokens, IBorderTokens {
+export interface RestoreFocusEvent {
+  nativeEvent: {
+    /**
+     * containsFocus is true if the Callout had focus while being dismissed.
+     */
+    containsFocus: boolean;
+  };
+}
+
+interface OmittedBorderTokens {
+  borderRadius?: number | string;
+  borderStyle?: ViewStyle['borderStyle'];
+}
+
+type CalloutBorderTokens = Omit<IBorderTokens, keyof OmittedBorderTokens>;
+
+export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTokens {
   /**
    * AnchorRect arbitrary anchor rectangle; coordinate system is in DIPs, relative
    * to the React surface origin.
@@ -88,14 +104,40 @@ export interface ICalloutProps extends ICalloutTokens {
   componentRef?: React.RefObject<IFocusable>;
 
   /**
+   * Adds a beak to the Callout, pointing to the anchor target.
+   * Notable Win32 limitation: Beak rendering currently limits the border width to its default, and the
+   * border width prop will not be honored.
+   */
+  isBeakVisible?: boolean;
+
+  /**
    * Callback invoked when the callout has been dismissed.
    */
   onDismiss?: () => void;
 
   /**
+   * Callback invoked during callout dismissal; if set, focus will not be restored by the callout and onRestoreFocus must
+   * result in focus being moved to the appropriate focusable target.
+   *
+   * The callee should carefully consider their scenarios to avoid dropping focus, or inappropriately
+   * moving focus from another component.  Focus is not guaranteed to have entered the React-Native surface at all, and
+   * this callback is most appropriate for components strictly controlling focus.
+   *
+   * restoreFocusEvent.nativeEvent.containsFocus is true if the Callout had focus while being dismissed.
+   */
+  onRestoreFocus?: (restoreFocusEvent: RestoreFocusEvent) => void;
+
+  /**
    * Callback invoked when the callout has been shown.
    */
   onShow?: () => void;
+
+  /**
+   * If true then the callout will attempt to focus the first focusable element that it contains.
+   * If it doesn't find an element, no focus will be set. This means that it's the contents responsibility
+   * to either set focus or have focusable items.
+   */
+  setInitialFocus?: boolean;
 
   /**
    * Target node the callout uses for relative positioning; the anchor of the callout.

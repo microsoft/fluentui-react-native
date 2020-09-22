@@ -1,0 +1,38 @@
+{
+  "name": "@fluentui-react-native/shimmer",
+  "version": "0.2.2",
+  "description": "A shimmer view",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "just": "fluentui-scripts",
+    "clean": "fluentui-scripts clean",
+    "lint": "fluentui-scripts eslint",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "verify-api": "fluentui-scripts verify-api-extractor",
+    "update-api": "fluentui-scripts update-api-extractor"
+  },
+  "dependencies": {
+    "@fluentui-react-native/framework": "0.3.1",
+    "@fluentui-react-native/adapters": ">=0.3.35 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.5.7 <1.0.0"
+  },
+  "devDependencies": {
+    "@types/react-native": "^0.62.0",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "react-native": "0.62.2"
+  },
+  "peerDependencies": {
+    "react-native": ">=0.60.0"
+  },
+  "author": "",
+  "license": "MIT"
+}

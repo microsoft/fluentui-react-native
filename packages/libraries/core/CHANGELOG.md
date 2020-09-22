@@ -1,8 +1,72 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Tue, 19 May 2020 20:06:57 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Sep 2020 21:36:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.1
+
+Wed, 09 Sep 2020 21:36:19 GMT
+
+### Patches
+
+- Disabled prop-types validation rule (saadnajmi2@gmail.com)
+
+## 0.16.0
+
+Wed, 09 Sep 2020 08:18:37 GMT
+
+### Minor changes
+
+- New shimmer control (saadnajmi2@gmail.com)
+
+## 0.15.86
+
+Mon, 17 Aug 2020 22:08:34 GMT
+
+### Patches
+
+- fix dependency errors (jasonmo@microsoft.com)
+
+## 0.15.82
+
+Wed, 12 Aug 2020 23:52:15 GMT
+
+### Patches
+
+- release @fluentui-react-native/immutable-merge (jasonmo@microsoft.com)
+
+## 0.15.79
+
+Fri, 07 Aug 2020 22:08:03 GMT
+
+### Patches
+
+- update react peer dep to be more flexible (jasonmo@microsoft.com)
+
+## 0.15.75
+
+Thu, 23 Jul 2020 21:28:55 GMT
+
+### Patches
+
+- Add new component ContextualMenu to FURN (lehon@microsoft.com)
+
+## 0.15.62
+
+Wed, 17 Jun 2020 05:00:56 GMT
+
+### Patches
+
+- add memo-cache package and consume it in the core framework (jasonmo@microsoft.com)
+
+## 0.15.44
+
+Tue, 09 Jun 2020 17:39:01 GMT
+
+### Patches
+
+- switch dependencies to use greater than semver until we reach 1.0.0 (jasonmo@microsoft.com)
 
 ## 0.15.27
 

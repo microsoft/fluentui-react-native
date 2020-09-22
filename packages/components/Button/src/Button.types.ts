@@ -3,7 +3,7 @@ import { ViewProps, ImageProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
 import { IPressableProps } from '@fluentui-react-native/pressable';
-import { ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 
@@ -37,7 +37,7 @@ export interface IButtonState {
   info: IButtonInfo;
 }
 
-export interface IButtonTokens extends ITextTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
+export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
   /**
    * The amount of padding between the border and the contents.
    */
@@ -104,6 +104,7 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
   onClick?: () => void;
 
   testID?: string;
+  tooltip?: string;
 }
 
 export interface IButtonSlotProps {

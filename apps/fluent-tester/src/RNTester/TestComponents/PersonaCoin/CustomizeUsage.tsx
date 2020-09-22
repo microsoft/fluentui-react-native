@@ -13,13 +13,15 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [textColor, setTextColor] = React.useState<string>();
   const [physicalSize, setPhysicalSize] = React.useState<number>(80);
   const [iconSize, setIconSize] = React.useState<number>(24);
+  const [iconStrokeWidth, setIconStrokeWidth] = React.useState<number>(2);
+  const [iconStrokeColor, setIconStrokeColor] = React.useState<string>(undefined);
   const [initialsSize, setInitialsSize] = React.useState<number>(14);
   const [horizontalAlignment, setHorizontalAlignment] = React.useState<IconAlignment>();
   const [verticalAlignment, setVerticalAlignment] = React.useState<IconAlignment>();
 
   const theme = useTheme();
   const textBoxBorderStyle = {
-    borderColor: theme.colors.inputBorder
+    borderColor: theme.colors.inputBorder,
   };
 
   const tokens: Partial<IPersonaCoinTokens> = {};
@@ -37,6 +39,12 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   }
   if (iconSize) {
     tokens.iconSize = iconSize;
+  }
+  if (iconStrokeWidth) {
+    tokens.iconStrokeWidth = iconStrokeWidth;
+  }
+  if (iconStrokeColor) {
+    tokens.iconStrokeColor = iconStrokeColor;
   }
   if (initialsSize) {
     tokens.initialsSize = initialsSize;
@@ -60,7 +68,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Background color"
           blurOnSubmit={true}
-          onSubmitEditing={e => {
+          onSubmitEditing={(e) => {
             setCoinColor(e.nativeEvent.text);
           }}
         />
@@ -69,8 +77,17 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Initials text color"
           blurOnSubmit={true}
-          onSubmitEditing={e => {
+          onSubmitEditing={(e) => {
             setTextColor(e.nativeEvent.text);
+          }}
+        />
+
+        <TextInput
+          style={[commonStyles.textBox, textBoxBorderStyle]}
+          placeholder="Icon stroke color"
+          blurOnSubmit={true}
+          onSubmitEditing={(e) => {
+            setIconStrokeColor(e.nativeEvent.text);
           }}
         />
 
@@ -82,6 +99,9 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
 
         <Text>Icon size</Text>
         <Slider minimum={8} maximum={100} initialValue={24} style={commonStyles.slider} onChange={setIconSize} />
+
+        <Text>Icon stroke width</Text>
+        <Slider minimum={0} maximum={8} initialValue={2} style={commonStyles.slider} onChange={setIconStrokeWidth} />
 
         <Text>Font size</Text>
         <Slider minimum={5} maximum={50} initialValue={14} style={commonStyles.slider} onChange={setInitialsSize} />

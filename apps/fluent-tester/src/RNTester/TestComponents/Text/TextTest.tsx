@@ -1,21 +1,32 @@
 import * as React from 'react';
-import { View } from 'react-native';
-import { Separator } from '@fluentui-react-native/separator';
 import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';
-import { styles } from './styles';
-import { Text } from '@fluentui-react-native/text';
+import { Test, TestSection, PlatformStatus } from '../Test';
+
+const textSections: TestSection[] = [
+  {
+    name: 'Standard Usage',
+    component: StandardUsage
+  },
+  {
+    name: 'Customize Usage',
+    component: CustomizeUsage
+  }
+];
 
 export const TextTest: React.FunctionComponent<{}> = () => {
-  return (
-    <View>
-      <Text style={styles.section}>Standard Usage</Text>
-      <Separator />
-      <StandardUsage />
 
-      <Text style={styles.section}>Customize Usage</Text>
-      <Separator />
-      <CustomizeUsage />
-    </View>
+  const status: PlatformStatus = {
+    win32Status: 'Experimental',
+    uwpStatus: 'Experimental',
+    iosStatus: 'Experimental',
+    macosStatus: 'Experimental',
+    androidStatus: 'Beta'
+  }
+
+  const description = 'Text is a component for displaying text. You can use Text to standardize text across your app.'
+
+  return (
+    <Test name="Text Test" description={description} sections={textSections} status={status}></Test>
   );
 };

@@ -1,6 +1,7 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import { Text } from '@fluentui-react-native/text';
 import {
   radioGroupName,
   IRadioGroupType,
@@ -16,7 +17,7 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { settings } from './RadioGroup.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
-import { useAsRadioGroupSelection } from '@fluentui-react-native/interactive-hooks';
+import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
 export const RadioGroupContext = React.createContext<IRadioGroupContext>({
   selectedKey: null,
@@ -32,12 +33,12 @@ export const RadioGroup = compose<IRadioGroupType>({
     const { label, ariaLabel, ...rest } = userProps;
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
-    const data = useAsRadioGroupSelection(userProps.defaultSelectedKey || null, userProps.onChange);
+    const data = useSelectedKey(userProps.defaultSelectedKey || null, userProps.onChange);
 
     const state: IRadioGroupState = {
       context: {
         selectedKey: data.selectedKey,
-        onChange: data.onChange
+        onChange: data.onKeySelect
       }
     };
 

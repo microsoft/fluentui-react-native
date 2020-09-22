@@ -1,8 +1,81 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Fri, 24 Apr 2020 19:41:08 GMT and should not be manually modified.
+This log was last generated on Tue, 22 Sep 2020 04:57:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.6
+
+Tue, 22 Sep 2020 04:57:02 GMT
+
+### Patches
+
+- add theme-types package (jasonmo@microsoft.com)
+- add default theme package (jasonmo@microsoft.com)
+
+## 0.10.4
+
+Mon, 17 Aug 2020 22:08:34 GMT
+
+### Patches
+
+- fix dependency errors (jasonmo@microsoft.com)
+
+## 0.10.2
+
+Wed, 12 Aug 2020 23:52:15 GMT
+
+### Patches
+
+- release @fluentui-react-native/immutable-merge (jasonmo@microsoft.com)
+
+## 0.10.1
+
+Fri, 07 Aug 2020 22:08:03 GMT
+
+### Patches
+
+- update react peer dep to be more flexible (jasonmo@microsoft.com)
+
+## 0.10.0
+
+Sat, 01 Aug 2020 00:34:34 GMT
+
+### Minor changes
+
+- specify types for tests (krsiler@microsoft.com)
+
+## 0.9.68
+
+Tue, 28 Jul 2020 18:21:12 GMT
+
+### Patches
+
+- rename some token types and update Text (jasonmo@microsoft.com)
+
+## 0.9.56
+
+Wed, 17 Jun 2020 05:00:56 GMT
+
+### Patches
+
+- add memo-cache package and consume it in the core framework (jasonmo@microsoft.com)
+
+## 0.9.38
+
+Tue, 09 Jun 2020 17:39:01 GMT
+
+### Patches
+
+- switch dependencies to use greater than semver until we reach 1.0.0 (jasonmo@microsoft.com)
+
+## 0.9.33
+
+Thu, 04 Jun 2020 22:15:30 GMT
+
+### Patches
+
+- Update comment to reflect fontSize is specified in CSS pixels (krsiler@microsoft.com)
 
 ## 0.9.2
 

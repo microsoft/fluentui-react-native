@@ -1,0 +1,50 @@
+{
+  "name": "@fluentui-react-native/merge-props",
+  "entries": [
+    {
+      "date": "Fri, 11 Sep 2020 20:25:42 GMT",
+      "tag": "@fluentui-react-native/merge-props_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add samples and some README text to use-slots and use-styling packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2566347850eff4ed67bfad2a85134481e088cba6",
+            "package": "@fluentui-react-native/merge-props"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 28 Aug 2020 05:03:51 GMT",
+      "tag": "@fluentui-react-native/merge-props_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "only allow menu container to focus on mount",
+            "author": "lehon@microsoft.com",
+            "commit": "9c93388527af2ea3ba60336c56a3da0ce65e3688",
+            "package": "@fluentui-react-native/merge-props"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 20 Aug 2020 00:14:01 GMT",
+      "tag": "@fluentui-react-native/merge-props_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "split mergeProps and mergeStyles out of foundation-settings",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f75e45ede85b8ebc6cd11cc66fbb1baedaea39b9",
+            "package": "@fluentui-react-native/merge-props"
+          }
+        ]
+      }
+    }
+  ]
+}

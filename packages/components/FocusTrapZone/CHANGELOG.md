@@ -1,8 +1,64 @@
 # Change Log - @fluentui-react-native/focus-trap-zone
 
-This log was last generated on Tue, 19 May 2020 23:37:15 GMT and should not be manually modified.
+This log was last generated on Tue, 25 Aug 2020 21:17:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.10
+
+Tue, 25 Aug 2020 21:17:13 GMT
+
+### Patches
+
+- add native component cache for consolidating requireNativeComponent calls (jasonmo@microsoft.com)
+
+## 0.4.8
+
+Mon, 17 Aug 2020 22:08:34 GMT
+
+### Patches
+
+- fix dependency errors (jasonmo@microsoft.com)
+
+## 0.4.4
+
+Tue, 11 Aug 2020 19:53:33 GMT
+
+### Patches
+
+- Add missing deps (rezha@microsoft.com)
+
+## 0.4.0
+
+Sat, 01 Aug 2020 00:34:34 GMT
+
+### Minor changes
+
+- specify types for tests (krsiler@microsoft.com)
+
+## 0.3.74
+
+Thu, 23 Jul 2020 21:28:55 GMT
+
+### Patches
+
+- manually update versions (taamireh@microsoft.com)
+
+## 0.3.61
+
+Wed, 17 Jun 2020 05:00:56 GMT
+
+### Patches
+
+- add memo-cache package and consume it in the core framework (jasonmo@microsoft.com)
+
+## 0.3.43
+
+Tue, 09 Jun 2020 17:39:01 GMT
+
+### Patches
+
+- switch dependencies to use greater than semver until we reach 1.0.0 (jasonmo@microsoft.com)
 
 ## 0.3.28
 

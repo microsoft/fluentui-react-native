@@ -1,0 +1,185 @@
+{
+  "name": "@fluentui-react-native/tester-win32",
+  "entries": [
+    {
+      "date": "Fri, 11 Sep 2020 20:25:42 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.3.13",
+      "version": "0.3.13",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add samples and some README text to use-slots and use-styling packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2566347850eff4ed67bfad2a85134481e088cba6",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 09 Sep 2020 21:36:19 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.3.13",
+      "version": "0.3.13",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Disabled prop-types validation rule",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "6042d1bbb538eb130b3fb4ecae360e467379e6ed",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 28 Aug 2020 05:03:51 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.3.9",
+      "version": "0.3.9",
+      "comments": {
+        "none": [
+          {
+            "comment": "only allow menu container to focus on mount",
+            "author": "lehon@microsoft.com",
+            "commit": "9c93388527af2ea3ba60336c56a3da0ce65e3688",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 17 Aug 2020 22:08:34 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.3.6",
+      "version": "0.3.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix dependency errors",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2216954b9e0efadc5223c2346b4cb31e20c8bc12",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 Aug 2020 19:49:20 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.3.3",
+      "version": "0.3.3",
+      "comments": {
+        "none": [
+          {
+            "comment": "change text color",
+            "author": "email not defined",
+            "commit": "690dc0f91728c471e6d0207c30414416f8cd71d5",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 11 Aug 2020 19:53:33 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "status definitions",
+            "author": "email not defined",
+            "commit": "f01a0671daa0512a18cd6343518160e5ffc3a409",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 10 Aug 2020 18:04:46 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Remove dist folder from exluded folders",
+            "author": "krsiler@microsoft.com",
+            "commit": "c4472c72cedd953adf28978c8b3b60c8f451513f",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 08 Aug 2020 20:13:19 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' of https://github.com/microsoft/fluentui-react-native",
+            "author": "safreibe@microsoft.com",
+            "commit": "045ffb6012ce4b69a1d4e910e5065885bb9ecd2d",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 08 Aug 2020 05:35:23 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add item click indicator in ContextualMenuTest",
+            "author": "lehon@microsoft.com",
+            "commit": "f5a45d2505d1ae6a89e98480544245091d2bfbbd",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 05 Aug 2020 22:50:11 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "added descriptions",
+            "author": "email not defined",
+            "commit": "eb607f63531821f1b20b27081418045927b0f130",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 05 Aug 2020 20:48:11 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix bundler to bundle svgs",
+            "author": "warleu@microsoft.com",
+            "commit": "cfcf11504798b56ab6043c03041db202317af9fb",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 01 Aug 2020 00:34:34 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "publish @fluentui-react-native/tester-win32",
+            "author": "krsiler@microsoft.com",
+            "commit": "f0021e6d95a1fa68c946a2dab2c797f32705fb9e",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    }
+  ]
+}

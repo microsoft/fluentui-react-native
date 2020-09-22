@@ -2,6 +2,307 @@
   "name": "@fluentui-react-native/persona-coin",
   "entries": [
     {
+      "date": "Fri, 11 Sep 2020 20:25:42 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.86",
+      "version": "0.3.86",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add samples and some README text to use-slots and use-styling packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2566347850eff4ed67bfad2a85134481e088cba6",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 09 Sep 2020 21:36:19 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.86",
+      "version": "0.3.86",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Disabled prop-types validation rule",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "6042d1bbb538eb130b3fb4ecae360e467379e6ed",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 01 Sep 2020 06:53:40 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.85",
+      "version": "0.3.85",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Implement iconSizeStrokeWidth and iconSizeStrokeColor tokens for PersonaCoin",
+            "author": "tomun@microsoft.com",
+            "commit": "2b264304206e267089e78c91de66e6ab34f87592",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 28 Aug 2020 05:03:51 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.84",
+      "version": "0.3.84",
+      "comments": {
+        "none": [
+          {
+            "comment": "only allow menu container to focus on mount",
+            "author": "lehon@microsoft.com",
+            "commit": "9c93388527af2ea3ba60336c56a3da0ce65e3688",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 17 Aug 2020 22:08:34 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.83",
+      "version": "0.3.83",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix dependency errors",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2216954b9e0efadc5223c2346b4cb31e20c8bc12",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 Aug 2020 19:49:20 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.81",
+      "version": "0.3.81",
+      "comments": {
+        "none": [
+          {
+            "comment": "change text color",
+            "author": "email not defined",
+            "commit": "690dc0f91728c471e6d0207c30414416f8cd71d5",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 11 Aug 2020 19:53:33 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.79",
+      "version": "0.3.79",
+      "comments": {
+        "none": [
+          {
+            "comment": "status definitions",
+            "author": "email not defined",
+            "commit": "f01a0671daa0512a18cd6343518160e5ffc3a409",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Add missing deps",
+            "author": "rezha@microsoft.com",
+            "commit": "0ad6470d8cbaec3db23deea5d3fa4b9f9bae0895",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 08 Aug 2020 05:35:23 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.78",
+      "version": "0.3.78",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "f5a45d2505d1ae6a89e98480544245091d2bfbbd",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 05 Aug 2020 22:50:11 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.76",
+      "version": "0.3.76",
+      "comments": {
+        "none": [
+          {
+            "comment": "added descriptions",
+            "author": "email not defined",
+            "commit": "eb607f63531821f1b20b27081418045927b0f130",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jul 2020 22:38:20 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.75",
+      "version": "0.3.75",
+      "comments": {
+        "none": [
+          {
+            "comment": "switch to using Lage for build sequencing",
+            "author": "jasonmo@microsoft.com",
+            "commit": "79677c8f3260dbf55e053db5983fb161c6fb44b5",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 23 Jul 2020 21:28:55 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.74",
+      "version": "0.3.74",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Change files\"",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "manually update versions",
+            "author": "taamireh@microsoft.com",
+            "commit": "72781079a1c236bdc2f8d9aa54bb2a904f8310f5",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 02 Jul 2020 21:06:06 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.70",
+      "version": "0.3.70",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Change files\"",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 17 Jun 2020 05:00:56 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.61",
+      "version": "0.3.61",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add memo-cache package and consume it in the core framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "27b5fc6790369ab629dcf7f93d6091d4913915fa",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Jun 2020 23:53:15 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.48",
+      "version": "0.3.48",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' into button-tooltip",
+            "author": "lehon@microsoft.com",
+            "commit": "70f7d6d5972b384f2e8d4dd2626adda762c59206",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 09 Jun 2020 17:39:01 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.43",
+      "version": "0.3.43",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch dependencies to use greater than semver until we reach 1.0.0",
+            "author": "jasonmo@microsoft.com",
+            "commit": "8461668e0387928c0831846b219188a6d4408295",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 06 Jun 2020 03:03:17 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.41",
+      "version": "0.3.41",
+      "comments": {
+        "none": [
+          {
+            "comment": "support keyboardFocus for Link and add focus visuals",
+            "author": "lehon@microsoft.com",
+            "commit": "effb17ada2fd26c6ba8f7cbb4ab7d7ddf8d74c49",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 01 Jun 2020 22:06:07 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.37",
+      "version": "0.3.37",
+      "comments": {
+        "none": [
+          {
+            "comment": "Support enter key for calling onClick on Button",
+            "author": "lehon@microsoft.com",
+            "commit": "399cead569e120926521d01c13a49088fe96036b",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 21 May 2020 20:00:42 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.32",
+      "version": "0.3.32",
+      "comments": {
+        "none": [
+          {
+            "comment": "none",
+            "author": "lehon@microsoft.com",
+            "commit": "5ba3ac570ae17a0d3138302ad12807362dea06c1",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 May 2020 03:37:41 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.3.29",
+      "version": "0.3.29",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "4867e1dde6f8c5cdb3fe894e60f5bcbe8f3c2817",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 19 May 2020 23:37:15 GMT",
       "tag": "@fluentui-react-native/persona-coin_v0.3.28",
       "version": "0.3.28",

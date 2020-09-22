@@ -1,0 +1,40 @@
+{
+  "name": "@fluentui-react-native/experimental-text",
+  "version": "0.1.0",
+  "description": "A cross-platform Text component using the Fluent Design System",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "private": true,
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "just": "fluentui-scripts",
+    "lint": "fluentui-scripts eslint",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "verify-api": "fluentui-scripts verify-api-extractor",
+    "update-api": "fluentui-scripts update-api-extractor"
+  },
+  "dependencies": {
+    "@fluentui-react-native/adapters": ">=0.3.35 <1.0.0",
+    "@fluentui-react-native/framework": "0.3.1"
+  },
+  "devDependencies": {
+    "@types/react-native": "^0.62.0",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "react-native": "0.62.2"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-native": ">=0.60.0"
+  },
+  "author": "",
+  "license": "MIT"
+}

@@ -1,8 +1,96 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Tue, 19 May 2020 23:37:15 GMT and should not be manually modified.
+This log was last generated on Tue, 25 Aug 2020 21:17:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.10
+
+Tue, 25 Aug 2020 21:17:13 GMT
+
+### Patches
+
+- add native component cache for consolidating requireNativeComponent calls (jasonmo@microsoft.com)
+
+## 0.11.8
+
+Mon, 17 Aug 2020 22:08:34 GMT
+
+### Patches
+
+- fix dependency errors (jasonmo@microsoft.com)
+
+## 0.11.4
+
+Tue, 11 Aug 2020 19:53:33 GMT
+
+### Patches
+
+- Add missing deps (rezha@microsoft.com)
+
+## 0.11.0
+
+Sat, 01 Aug 2020 00:34:34 GMT
+
+### Minor changes
+
+- specify types for tests (krsiler@microsoft.com)
+
+## 0.10.5
+
+Thu, 23 Jul 2020 21:28:55 GMT
+
+### Patches
+
+- manually update versions (taamireh@microsoft.com)
+
+## 0.10.0
+
+Fri, 26 Jun 2020 18:58:23 GMT
+
+### Minor changes
+
+- Expose Callout property isBeakVisible (ppatboyd@outlook.com)
+
+## 0.9.2
+
+Wed, 17 Jun 2020 05:00:56 GMT
+
+### Patches
+
+- add memo-cache package and consume it in the core framework (jasonmo@microsoft.com)
+
+## 0.9.0
+
+Tue, 16 Jun 2020 23:13:19 GMT
+
+### Minor changes
+
+- Add onRestoreFocus callback and improve test page capabilities (ppatboyd@outlook.com)
+
+## 0.8.0
+
+Fri, 12 Jun 2020 03:17:59 GMT
+
+### Minor changes
+
+- use findNodeHandle to avoid serializing refobject (ppatboyd@outlook.com)
+
+## 0.7.3
+
+Tue, 09 Jun 2020 17:39:01 GMT
+
+### Patches
+
+- switch dependencies to use greater than semver until we reach 1.0.0 (jasonmo@microsoft.com)
+
+## 0.7.0
+
+Fri, 05 Jun 2020 22:02:58 GMT
+
+### Minor changes
+
+- Add setInitialFocus prop (ppatboyd@outlook.com)
 
 ## 0.6.13
 

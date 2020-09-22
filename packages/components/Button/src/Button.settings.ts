@@ -8,7 +8,8 @@ export const settings: IComposeSettings<IButtonType> = [
       backgroundColor: 'buttonBackground',
       color: 'buttonText',
       borderColor: 'buttonBorder',
-      borderWidth: 1
+      borderWidth: 1,
+      borderRadius: 2
     },
     root: {
       accessible: true,
@@ -57,8 +58,8 @@ export const settings: IComposeSettings<IButtonType> = [
       focused: {
         tokens: {
           borderColor: 'buttonBorderFocused',
-          backgroundColor: 'buttonBackgroundHovered',
-          color: 'buttonTextHovered'
+          color: 'buttonTextHovered',
+          backgroundColor: 'buttonBackgroundHovered'
         }
       }
     }

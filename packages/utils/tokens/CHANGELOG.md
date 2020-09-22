@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Mon, 11 May 2020 20:15:56 GMT and should not be manually modified.
+This log was last generated on Mon, 17 Aug 2020 22:08:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.5
+
+Mon, 17 Aug 2020 22:08:34 GMT
+
+### Patches
+
+- fix dependency errors (jasonmo@microsoft.com)
+
+## 0.5.0
+
+Tue, 28 Jul 2020 18:21:12 GMT
+
+### Minor changes
+
+- rename some token types and update Text (jasonmo@microsoft.com)
+
+## 0.4.57
+
+Wed, 17 Jun 2020 05:00:56 GMT
+
+### Patches
+
+- add memo-cache package and consume it in the core framework (jasonmo@microsoft.com)
+
+## 0.4.39
+
+Tue, 09 Jun 2020 17:39:01 GMT
+
+### Patches
+
+- switch dependencies to use greater than semver until we reach 1.0.0 (jasonmo@microsoft.com)
 
 ## 0.4.14
 

@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/themed-stylesheet",
-  "version": "0.3.25",
+  "version": "0.3.68",
   "description": "Helper for using react-native StyleSheets with themes",
   "repository": {
     "type": "git",
@@ -19,9 +19,11 @@
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
     "code-style": "fluentui-scripts code-style",
+    "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
+    "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u"
   },
   "keywords": [],

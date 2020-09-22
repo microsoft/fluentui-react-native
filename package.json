@@ -12,28 +12,31 @@
     "url": "https://github.com/Microsoft/ui-fabric-react-native.git"
   },
   "scripts": {
-    "preinstall": "node ./scripts/use-yarn-please.js",
-    "postinstall": "node ./scripts/postinstall.js",
+    "build": "lage build",
+    "build-tools": "lage build-tools",
+    "buildci": "lage buildci",
+    "bump-versions": "beachball bump",
     "clean-all": "node ./scripts/clean-all.js",
-    "start": "cd apps && cd demo && npm start",
     "docs": "yarn workspace fluent-rn-website start",
-    "build": "lerna run build --stream -- --production --lint --color",
-    "bundle": "lerna run bundle --stream -- --production --lint --color",
-    "clean": "lerna run clean --stream",
+    "bundle": "lage bundle",
+    "clean": "lage clean",
     "change": "beachball change",
     "check-for-changed-files": "cd scripts && yarn fluentui-scripts check-for-modified-files",
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
+    "depcheck": "lage depcheck",
+    "lint": "lage lint",
+    "preinstall": "node ./scripts/use-yarn-please.js",
     "prettier": "cd scripts && yarn prettier",
+    "postinstall": "node ./scripts/postinstall.js",
     "publish:beachball": "beachball publish --bump-deps -m\"📦 applying package updates ***NO_CI***\"",
-    "bump-versions": "beachball bump",
-    "lint": "lerna run lint",
-    "verify-api": "lerna run verify-api",
-    "update-api": "lerna run update-api",
-    "e2etest": "cd apps/win32 && yarn run e2etest"
+    "test": "lage test",
+    "verify-api": "lage verify-api",
+    "update-api": "lage update-api"
   },
   "devDependencies": {
-    "beachball": "^1.30.2",
-    "lerna": "^3.16.4"
+    "beachball": "^1.35.0",
+    "lage": ">=0.17.4 <1.0.0",
+    "react-dom": "^16.13.1"
   },
   "workspaces": {
     "packages": [

@@ -1,0 +1,238 @@
+{
+  "name": "@fluentui-react-native/tester",
+  "entries": [
+    {
+      "date": "Tue, 22 Sep 2020 04:57:02 GMT",
+      "tag": "@fluentui-react-native/tester_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update button snapshot and test",
+            "author": "krsiler@microsoft.com",
+            "commit": "4cd56e09bb5a447f7945f22024da1eeda16b6bf0",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 11 Sep 2020 20:25:42 GMT",
+      "tag": "@fluentui-react-native/tester_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add samples and some README text to use-slots and use-styling packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2566347850eff4ed67bfad2a85134481e088cba6",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 09 Sep 2020 21:36:19 GMT",
+      "tag": "@fluentui-react-native/tester_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Disabled prop-types validation rule",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "6042d1bbb538eb130b3fb4ecae360e467379e6ed",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 09 Sep 2020 08:18:37 GMT",
+      "tag": "@fluentui-react-native/tester_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Added new test",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "0c35ad1f0b2c9bfc0456f885c3e2f75645288de5",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 09 Sep 2020 07:28:42 GMT",
+      "tag": "@fluentui-react-native/tester_v0.5.2",
+      "version": "0.5.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix Button icon color props",
+            "author": "tomun@microsoft.com",
+            "commit": "3524ba90c46e005eff7b1d2ebeafb59ed07533d4",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 01 Sep 2020 06:53:40 GMT",
+      "tag": "@fluentui-react-native/tester_v0.5.1",
+      "version": "0.5.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Implement iconSizeStrokeWidth and iconSizeStrokeColor tokens for PersonaCoin",
+            "author": "tomun@microsoft.com",
+            "commit": "2b264304206e267089e78c91de66e6ab34f87592",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 28 Aug 2020 05:03:51 GMT",
+      "tag": "@fluentui-react-native/tester_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "only allow menu container to focus on mount",
+            "author": "lehon@microsoft.com",
+            "commit": "9c93388527af2ea3ba60336c56a3da0ce65e3688",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 21 Aug 2020 03:35:36 GMT",
+      "tag": "@fluentui-react-native/tester_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "support shouldFocusOnMount and shouldFocusOnContainer props",
+            "author": "lehon@microsoft.com",
+            "commit": "9427fe4f6c3eaa661d35e5b860f64a3ff83ffb2e",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 17 Aug 2020 22:08:34 GMT",
+      "tag": "@fluentui-react-native/tester_v0.3.6",
+      "version": "0.3.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix dependency errors",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2216954b9e0efadc5223c2346b4cb31e20c8bc12",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 Aug 2020 19:49:20 GMT",
+      "tag": "@fluentui-react-native/tester_v0.3.3",
+      "version": "0.3.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "change text color",
+            "author": "email not defined",
+            "commit": "690dc0f91728c471e6d0207c30414416f8cd71d5",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 11 Aug 2020 19:53:33 GMT",
+      "tag": "@fluentui-react-native/tester_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "status definitions",
+            "author": "email not defined",
+            "commit": "f01a0671daa0512a18cd6343518160e5ffc3a409",
+            "package": "@fluentui-react-native/tester"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Removing from UWP because it doesn't work",
+            "author": "safreibe@microsoft.com",
+            "commit": "691dd42d01719a8e7f043b3354a6c44a0a29e8a1",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 08 Aug 2020 20:13:19 GMT",
+      "tag": "@fluentui-react-native/tester_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' of https://github.com/microsoft/fluentui-react-native",
+            "author": "safreibe@microsoft.com",
+            "commit": "045ffb6012ce4b69a1d4e910e5065885bb9ecd2d",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 08 Aug 2020 05:35:23 GMT",
+      "tag": "@fluentui-react-native/tester_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add item click indicator in ContextualMenuTest",
+            "author": "lehon@microsoft.com",
+            "commit": "f5a45d2505d1ae6a89e98480544245091d2bfbbd",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 05 Aug 2020 22:50:11 GMT",
+      "tag": "@fluentui-react-native/tester_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "added descriptions",
+            "author": "email not defined",
+            "commit": "eb607f63531821f1b20b27081418045927b0f130",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 01 Aug 2020 00:34:34 GMT",
+      "tag": "@fluentui-react-native/tester_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Make FLURN tester package public",
+            "author": "krsiler@microsoft.com",
+            "commit": "7094bcfe0291e86796bf1d4706490f3fb96fc7a6",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    }
+  ]
+}

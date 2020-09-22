@@ -1,43 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Link all props 1`] = `
-<Text
-  onBlur={[Function]}
-  onFocus={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
-  onPress={[Function]}
-  onTouchCancel={[Function]}
-  onTouchEnd={[Function]}
-  onTouchStart={[Function]}
-  style={
-    Object {
-      "color": "pink",
-      "fontFamily": "Segoe UI",
-      "fontSize": 12,
-      "fontWeight": "500",
-      "margin": 0,
-      "textDecorationLine": "underline",
-    }
-  }
-  url="https://www.bing.com"
->
-  Link all props
-</Text>
-`;
-
-exports[`Link with child 1`] = `
 <View
+  acceptsKeyboardFocus={true}
+  accessibilityRole="link"
+  accessible={true}
+  onAccessibilityTap={[Function]}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
+  onKeyUp={[Function]}
   onPress={[Function]}
-  onTouchCancel={[Function]}
-  onTouchEnd={[Function]}
-  onTouchStart={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
+      "alignItems": "flex-start",
+      "display": "flex",
       "margin": 0,
       "textDecorationLine": "underline",
     }
@@ -47,10 +30,62 @@ exports[`Link with child 1`] = `
   <Text
     style={
       Object {
-        "color": "pink",
+        "borderColor": "transparent",
+        "borderStyle": "dotted",
+        "borderWidth": 1,
+        "color": "#0078d4",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
-        "fontWeight": "500",
+        "fontWeight": "400",
+        "margin": 0,
+        "textDecorationLine": "underline",
+      }
+    }
+  >
+    Link all props
+  </Text>
+</View>
+`;
+
+exports[`Link with child 1`] = `
+<View
+  acceptsKeyboardFocus={true}
+  accessibilityRole="link"
+  accessible={true}
+  onAccessibilityTap={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onKeyUp={[Function]}
+  onPress={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "display": "flex",
+      "margin": 0,
+      "textDecorationLine": "underline",
+    }
+  }
+  url="https://www.bing.com"
+>
+  <Text
+    style={
+      Object {
+        "borderColor": "transparent",
+        "borderStyle": "dotted",
+        "borderWidth": 1,
+        "color": "#0078d4",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
+        "textDecorationLine": "underline",
       }
     }
   >

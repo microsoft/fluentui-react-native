@@ -1,9 +1,9 @@
 import * as React from 'react';
+import { ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { IForegroundColorTokens, ITextTokens } from '@fluentui-react-native/tokens';
+import { IForegroundColorTokens, FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { ITextProps } from '@fluentui-react-native/text';
 import { IFocusable, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
-import { IViewProps } from '@fluentui-react-native/adapters';
 
 export const linkName = 'RNFLink';
 
@@ -11,7 +11,7 @@ export const linkName = 'RNFLink';
  * Properties for fabric native Link
  */
 
-export type ILinkTokens = IForegroundColorTokens & ITextTokens;
+export type ILinkTokens = IForegroundColorTokens & FontTokens & IBorderTokens;
 
 /**
  * Because style state updates are coming from the touchable and will cause a child render the link doesn't use
@@ -57,7 +57,7 @@ export interface ILinkProps extends IWithLinkOptions<ITextProps> {
 }
 
 export type ILinkSlotProps = {
-  root: React.PropsWithRef<IViewProps>;
+  root: React.PropsWithRef<ViewProps>;
   content: ITextProps;
 };
 

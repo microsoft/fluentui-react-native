@@ -25,14 +25,23 @@ export const Button = compose<IButtonType>({
     } = userProps;
     // attach the pressable state handlers
     const pressable = useAsPressable({ ...rest, onPress: onClick });
+    const onKeyUp = React.useCallback(
+      (e) => {
+        if (onClick && (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ')) {
+          onClick();
+          e.stopPropagation();
+        }
+      },
+      [onClick],
+    );
     // set up state
     const state: IButtonState = {
       info: {
         ...pressable.state,
-        disabled: userProps.disabled,
+        disabled: !!userProps.disabled,
         content: !!content,
-        icon: !!icon
-      }
+        icon: !!icon,
+      },
     };
 
     const buttonRef = useViewCommandFocus(userProps.componentRef);
@@ -41,14 +50,15 @@ export const Button = compose<IButtonType>({
     // create the merged slot props
     const slotProps = mergeSettings<IButtonSlotProps>(styleProps, {
       root: {
-        testID,
         ...pressable.props,
         ref: buttonRef,
         onAccessibilityTap: onAccessibilityTap,
-        accessibilityLabel: accessibilityLabel
+        accessibilityLabel: accessibilityLabel,
+        accessibilityState: { disabled: state.info.disabled },
+        onKeyUp: onKeyUp,
       },
-      content: { children: content },
-      icon: { source: icon }
+      content: { children: content, testID },
+      icon: { source: icon },
     });
 
     return { slotProps, state };
@@ -72,14 +82,14 @@ export const Button = compose<IButtonType>({
     root: View,
     stack: { slotType: View, filter: filterViewProps },
     icon: { slotType: Image as React.ComponentType<object>, filter: filterImageProps },
-    content: Text
+    content: Text,
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
     stack: [],
-    icon: [foregroundColorTokens, [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'overlayColor' }]],
-    content: [textTokens, foregroundColorTokens]
-  }
+    icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'tintColor' }],
+    content: [textTokens, foregroundColorTokens],
+  },
 });
 
 export default Button;

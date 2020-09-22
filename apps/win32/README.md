@@ -1,13 +1,20 @@
 `FluentUI Tester` is the test app that we use to test our FluentUI components during development.
 
+## Prerequisites
+
+- [Node.js](https://nodejs.org/en/download/)
+- [React Native Windows Development Dependencies](https://microsoft.github.io/react-native-windows/docs/rnw-dependencies#manual-setup)
+  - **NOTE:** Please make sure you grab all of the items listed there and the appropriate versions.
+- Enable [Developer Mode](https://docs.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development) in Windows settings
+
 ## Launch `FluentUI Tester` app
 
 1. Make sure you have followed the Getting Started instructions [here](../../README.md) to install packages and build the entire repository.
 
-2. Then go into `apps\fluent-tester` folder:
+2. Then go into `apps\win32` folder:
 
 ```
-    cd apps\fluent-tester
+    cd apps\win32
 ```
 
 3. Build the FluentUI Tester bundle:

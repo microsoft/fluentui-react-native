@@ -1,8 +1,40 @@
 # Change Log - @uifabricshared/theme-registry
 
-This log was last generated on Tue, 21 Apr 2020 00:41:10 GMT and should not be manually modified.
+This log was last generated on Mon, 17 Aug 2020 22:08:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.69
+
+Mon, 17 Aug 2020 22:08:34 GMT
+
+### Patches
+
+- fix dependency errors (jasonmo@microsoft.com)
+
+## 0.3.68
+
+Wed, 12 Aug 2020 23:52:15 GMT
+
+### Patches
+
+- release @fluentui-react-native/immutable-merge (jasonmo@microsoft.com)
+
+## 0.3.57
+
+Wed, 17 Jun 2020 05:00:56 GMT
+
+### Patches
+
+- add memo-cache package and consume it in the core framework (jasonmo@microsoft.com)
+
+## 0.3.39
+
+Tue, 09 Jun 2020 17:39:01 GMT
+
+### Patches
+
+- switch dependencies to use greater than semver until we reach 1.0.0 (jasonmo@microsoft.com)
 
 ## 0.3.1
 

@@ -1,8 +1,58 @@
 # Change Log - @fluentui-react-native/adapters
 
-This log was last generated on Mon, 11 May 2020 20:15:56 GMT and should not be manually modified.
+This log was last generated on Mon, 17 Aug 2020 22:08:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.35
+
+Mon, 17 Aug 2020 22:08:34 GMT
+
+### Patches
+
+- fix dependency errors (jasonmo@microsoft.com)
+
+## 0.3.34
+
+Thu, 23 Jul 2020 21:28:55 GMT
+
+### Patches
+
+- move rnw version to 0.62 (jasonmo@microsoft.com)
+- bump rnw version to 0.62.1 (jasonmo@microsoft.com)
+- bump adapters (taamireh@microsoft.com)
+
+## 0.3.32
+
+Thu, 02 Jul 2020 23:50:34 GMT
+
+### Patches
+
+- add framework package to roll up internal packages (jasonmo@microsoft.com)
+
+## 0.3.22
+
+Wed, 17 Jun 2020 05:00:56 GMT
+
+### Patches
+
+- add memo-cache package and consume it in the core framework (jasonmo@microsoft.com)
+
+## 0.3.4
+
+Tue, 09 Jun 2020 17:39:01 GMT
+
+### Patches
+
+- switch dependencies to use greater than semver until we reach 1.0.0 (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Thu, 04 Jun 2020 23:23:26 GMT
+
+### Minor changes
+
+- Updating package (safreibe@microsoft.com)
 
 ## 0.2.15
 

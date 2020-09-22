@@ -1,8 +1,40 @@
-# Change Log - @uifabricshared/immutable-merge
+# Change Log - @fluentui-react-native/immutable-merge
 
-This log was last generated on Tue, 21 Apr 2020 05:58:24 GMT and should not be manually modified.
+This log was last generated on Wed, 12 Aug 2020 23:52:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.1
+
+Wed, 12 Aug 2020 23:52:15 GMT
+
+### Patches
+
+- release @fluentui-react-native/immutable-merge (jasonmo@microsoft.com)
+
+## 0.5.67
+
+Thu, 23 Jul 2020 21:28:55 GMT
+
+### Patches
+
+- fix comment (taamireh@microsoft.com)
+
+## 0.5.57
+
+Wed, 17 Jun 2020 05:00:56 GMT
+
+### Patches
+
+- add memo-cache package and consume it in the core framework (jasonmo@microsoft.com)
+
+## 0.5.39
+
+Tue, 09 Jun 2020 17:39:01 GMT
+
+### Patches
+
+- switch dependencies to use greater than semver until we reach 1.0.0 (jasonmo@microsoft.com)
 
 ## 0.5.2
 

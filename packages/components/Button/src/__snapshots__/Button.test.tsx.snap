@@ -5,10 +5,16 @@ exports[`Button default 1`] = `
   acceptsKeyboardFocus={true}
   accessibilityLabel="Default Button"
   accessibilityRole="button"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
   accessible={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onKeyUp={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -21,6 +27,7 @@ exports[`Button default 1`] = `
       "alignSelf": "flex-start",
       "backgroundColor": "#f3f2f1",
       "borderColor": "#8a8886",
+      "borderRadius": 2,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
@@ -47,7 +54,7 @@ exports[`Button default 1`] = `
         Object {
           "color": "#323130",
           "fontFamily": "Segoe UI",
-          "fontSize": 9,
+          "fontSize": 12,
           "fontWeight": "400",
           "margin": 0,
         }

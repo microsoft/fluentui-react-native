@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { FlatList, View, ViewStyle, TextStyle, StyleSheet } from 'react-native';
+import { FlatList, View, ViewStyle, TextStyle, Text, StyleSheet } from 'react-native';
 import { getHostSettingsWin32, ThemeProvider, useTheme, IThemeDefinition, ThemingModuleHelper } from '@uifabricshared/theming-react-native';
 import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
 import { commonTestStyles } from '../Common/styles';
-import { Button, PrimaryButton, Separator, StealthButton, Text, RadioGroup, RadioButton } from '@fluentui/react-native';
+import { Button, PrimaryButton, StealthButton, Separator, RadioGroup, RadioButton } from '@fluentui/react-native';
 import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
 import { customRegistry } from './CustomThemes';
-import { THEME_TESTPAGE } from '../../Consts';
+import { THEME_TESTPAGE } from './consts';
+import { Test, TestSection, PlatformStatus } from '../Test';
 
 let brand = 'Office';
 
@@ -14,7 +15,7 @@ const brandColors = {
   Word: ['#E3ECFA', '#A5B9D1', '#7DA3C6', '#4A78B0', '#3C65A4', '#2B579A', '#124078', '#002050'],
   Excel: ['#E9F5EE', '#9FCDB3', '#6EB38A', '#4E9668', '#3F8159', '#217346', '#0E5C2F', '#004B1C'],
   Powerpoint: ['#FCF0ED', '#FDC9B5', '#ED9583', '#E86E58', '#C75033', '#B7472A', '#A92B1A', '#740912'],
-  Outlook: ['#CCE3F5', '#B3D6F2', '#69AFE5', '#2488D8', '#0078D7', '#106EBE', '#1664A7', '#135995']
+  Outlook: ['#CCE3F5', '#B3D6F2', '#69AFE5', '#2488D8', '#0078D7', '#106EBE', '#1664A7', '#135995'],
 };
 
 // This IProcessTheme takes the parent theme and shims in the brand colors selected in the RadioGroup
@@ -57,28 +58,28 @@ const getThemedStyles = themedStyleSheet((theme: ITheme) => {
       height: 20,
       marginRight: 5,
       borderWidth: 2,
-      borderColor: theme.colors.bodyText
+      borderColor: theme.colors.bodyText,
     },
     extraLargeStandardEmphasis: {
       color: hostSettings ? hostSettings.palette.TextEmphasis : theme.colors.bodyText,
       fontSize: theme.typography.sizes.header,
       fontWeight: theme.typography.weights.regular,
-      fontFamily: theme.typography.families.primary
+      fontFamily: theme.typography.families.primary,
     } as TextStyle,
     largeStandard: {
       color: theme.colors.bodyText,
       fontSize: theme.typography.sizes.body,
       fontWeight: theme.typography.weights.regular,
       fontFamily: theme.typography.families.primary,
-      marginBottom: 5
+      marginBottom: 5,
     } as TextStyle,
     stackStyle: {
       borderWidth: 2,
       borderColor: theme.colors.focusBorder,
       padding: 12,
       margin: 8,
-      backgroundColor: theme.colors.background
-    }
+      backgroundColor: theme.colors.background,
+    },
   };
 });
 
@@ -86,12 +87,12 @@ const styles = StyleSheet.create({
   swatchItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 5
+    marginVertical: 5,
   },
   pickerContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly'
-  }
+    justifyContent: 'space-evenly',
+  },
 });
 
 const Panel: React.FunctionComponent = () => {
@@ -139,9 +140,7 @@ const SwatchList: React.FunctionComponent = () => {
   );
 
   const flattenArray = React.useCallback(() => {
-    return Object.keys(hostSettings.palette)
-      .sort()
-      .map(aggregator);
+    return Object.keys(hostSettings.palette).sort().map(aggregator);
   }, [hostSettings.palette, aggregator]);
 
   const paletteAsArray = React.useMemo(flattenArray, [flattenArray]);
@@ -189,11 +188,13 @@ const ThemeTestInner: React.FunctionComponent = () => {
           <RadioButton buttonKey="WhiteColors" content="WhiteColors (Platform Theme)" />
         </RadioGroup>
       </View>
+
       <Text style={themedStyles.extraLargeStandardEmphasis}>{theme + ' Theme'}</Text>
       <Separator />
       <ThemeProvider theme={theme}>
         <Panel />
       </ThemeProvider>
+
       <Text style={themedStyles.extraLargeStandardEmphasis}>Host-specific Theme Settings</Text>
       <Separator />
       <SwatchList />
@@ -201,10 +202,28 @@ const ThemeTestInner: React.FunctionComponent = () => {
   );
 };
 
+const themeSections: TestSection[] = [
+  {
+    name: 'Theme Test',
+    component: ThemeTestInner,
+  },
+];
+
 export const ThemeTest: React.FunctionComponent = () => {
+  const status: PlatformStatus = {
+    win32Status: 'Beta',
+    uwpStatus: 'Experimental',
+    iosStatus: 'Experimental',
+    macosStatus: 'Experimental',
+    androidStatus: 'Backlog',
+  };
+
+  const description =
+    'The entire color palette of the controls is themeable. We provide a set of sensible defaults, but you can override all colors individually.';
+
   return (
     <ThemeProvider theme="Default">
-      <ThemeTestInner />
+      <Test name="Theme Test" description={description} sections={themeSections} status={status}></Test>
     </ThemeProvider>
   );
 };

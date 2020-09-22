@@ -1,26 +1,33 @@
-import { linkName, ILinkType } from './Link.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
-// import { IViewWin32Props } from '@office-iss/react-native-win32';
+import { linkName, ILinkType } from './Link.types';
 import { IViewProps } from '@fluentui-react-native/adapters';
 
 export const settings: IComposeSettings<ILinkType> = [
   {
     tokens: {
       variant: 'secondaryStandard',
-      color: 'link'
+      color: 'link',
+      borderColor: 'transparent',
+      borderStyle: 'dotted',
+      borderWidth: 1,
     },
     root: {
+      accessible: true,
+      ...{ acceptsKeyboardFocus: true },
+      accessibilityRole: 'link',
       style: {
         margin: 0,
-        textDecorationLine: 'underline'
+        textDecorationLine: 'underline',
+        display: 'flex',
+        alignItems: 'flex-start',
       } as IViewProps['style']
     },
     content: {
       style: {
-        textDecorationLine: 'underline'
+        textDecorationLine: 'underline',
       }
     },
-    _precedence: ['visited', 'hovered', 'pressed', 'disabled'],
+    _precedence: ['visited', 'hovered', 'focused', 'pressed', 'disabled'],
     _overrides: {
       disabled: {
         tokens: {
@@ -40,6 +47,11 @@ export const settings: IComposeSettings<ILinkType> = [
       visited: {
         tokens: {
           color: 'link'
+        }
+      },
+      focused: {
+        tokens: {
+          borderColor: 'focusBorder'
         }
       }
     }

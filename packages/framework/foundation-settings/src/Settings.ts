@@ -1,23 +1,6 @@
-import { MergeOptions, immutableMergeCore } from '@uifabricshared/immutable-merge';
+import { MergeOptions, immutableMergeCore } from '@fluentui-react-native/immutable-merge';
 import { IComponentSettingsCollection, IComponentSettings, ISlotProps, IOverrideLookup } from './Settings.types';
-import { mergeAndFlattenStyles } from './Styles';
-import { IStyleProp } from './Styles.types';
-
-function _mergeStyles(...objs: IStyleProp<object>[]): object | undefined {
-  return mergeAndFlattenStyles(undefined, undefined, ...objs);
-}
-
-function _mergeClassName(...names: any[]): string | undefined {
-  return names.filter(v => v && typeof v === 'string').join(' ');
-}
-
-/**
- * Props will not deeply merge with the exception of a style property.  Also className needs to be handled specially.
- */
-const _mergePropsOptions: MergeOptions = {
-  className: _mergeClassName,
-  style: _mergeStyles
-};
+import { mergeProps } from '@fluentui-react-native/merge-props';
 
 /**
  * an individual settings block is a set of slotProps, with an additional collection of tokens.
@@ -27,19 +10,19 @@ const _mergeSettingsOptions: MergeOptions = {
   tokens: 0,
 
   // all other objects should be treated as props
-  object: _mergePropsOptions,
+  object: mergeProps,
 
   // overrides have a collection of objects which each are treated as settings
   get _overrides() {
     return { object: this };
-  }
+  },
 };
 
 /**
  * A collection of settings simply applies settings down one level
  */
 const _mergeCollectionOptions: MergeOptions = {
-  object: _mergeSettingsOptions
+  object: _mergeSettingsOptions,
 };
 
 /**
@@ -48,14 +31,6 @@ const _mergeCollectionOptions: MergeOptions = {
  */
 export function mergeSettings<TSettings extends IComponentSettings = IComponentSettings>(...settings: (object | undefined)[]): TSettings {
   return immutableMergeCore(_mergeSettingsOptions, ...settings) as TSettings;
-}
-
-/**
- * Merge props together, flattening and merging styles as appropriate
- * @param props - props to merge together
- */
-export function mergeProps<TProps extends object>(...props: (object | undefined)[]): TProps {
-  return immutableMergeCore(_mergePropsOptions, ...props) as TProps;
 }
 
 /**

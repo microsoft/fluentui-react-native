@@ -1,6 +1,7 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import { Text } from '@fluentui-react-native/text';
 import { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData, ICheckboxType, checkboxName } from './Checkbox.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
@@ -54,15 +55,6 @@ export const Checkbox = compose<ICheckboxType>({
       [toggleChecked, userProps, state, pressable.props]
     );
 
-    let accessibilityStates: string[] = [];
-    if (state.disabled) {
-      accessibilityStates = ['disabled'];
-    } else if (state.checked) {
-      accessibilityStates = ['checked'];
-    } else {
-      accessibilityStates = ['unchecked'];
-    }
-
     const slotProps = mergeSettings<ICheckboxSlotProps>(styleProps, {
       root: {
         rest,
@@ -70,7 +62,7 @@ export const Checkbox = compose<ICheckboxType>({
         ...pressable.props,
         accessibilityRole: 'checkbox',
         accessibilityLabel: ariaLabel || label,
-        accessibilityStates: accessibilityStates,
+        accessibilityState: {disabled: state.disabled, checked: state.checked },
         accessibilityActions: [{ name: 'Toggle', label: checkboxSelectActionLabel }],
         onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUpSpace
@@ -117,10 +109,16 @@ export const Checkbox = compose<ICheckboxType>({
       foregroundColorTokens,
       [
         { source: 'checkmarkColor', lookup: getPaletteFromTheme, target: 'color' },
-        { source: 'checkmarkVisibility', target: 'opacity'}
+        { source: 'checkmarkVisibility', target: 'opacity' }
       ]
     ],
-    content: [foregroundColorTokens, textTokens]
+    content: [
+      foregroundColorTokens,
+      textTokens,
+      [
+        { source: 'textBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }
+      ]
+    ]
   }
 });
 

@@ -17,7 +17,7 @@ const allSizes: WithUndefined<PersonaSize>[] = [
   'size56',
   'size72',
   'size100',
-  'size120'
+  'size120',
 ];
 
 interface ISwitchWithLabelProps {
@@ -58,7 +58,7 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
           prompt="Size"
           style={commonStyles.header}
           selectedValue={imageSize || undefinedText}
-          onValueChange={size => setImageSize(size === undefinedText ? undefined : size)}
+          onValueChange={(size) => setImageSize(size === undefinedText ? undefined : size)}
         >
           {allSizes.map((size, index) => (
             <Picker.Item label={size} key={index} value={size} />

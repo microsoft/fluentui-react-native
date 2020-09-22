@@ -2,6 +2,276 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Fri, 28 Aug 2020 05:03:51 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.80",
+      "version": "1.6.80",
+      "comments": {
+        "none": [
+          {
+            "comment": "only allow menu container to focus on mount",
+            "author": "lehon@microsoft.com",
+            "commit": "9c93388527af2ea3ba60336c56a3da0ce65e3688",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 17 Aug 2020 22:08:34 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.79",
+      "version": "1.6.79",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix dependency errors",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2216954b9e0efadc5223c2346b4cb31e20c8bc12",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 Aug 2020 19:49:20 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.77",
+      "version": "1.6.77",
+      "comments": {
+        "none": [
+          {
+            "comment": "change text color",
+            "author": "email not defined",
+            "commit": "690dc0f91728c471e6d0207c30414416f8cd71d5",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 Aug 2020 04:48:19 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.77",
+      "version": "1.6.77",
+      "comments": {
+        "patch": [
+          {
+            "comment": "release @fluentui-react-native/memo-cache",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b490c9915260a055b2f3c044f06263be0be42216",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 Aug 2020 23:52:15 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.76",
+      "version": "1.6.76",
+      "comments": {
+        "patch": [
+          {
+            "comment": "release @fluentui-react-native/immutable-merge",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b0ac4360b79b4286e2a4ea9fe768c96568e954fa",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 11 Aug 2020 19:53:33 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.75",
+      "version": "1.6.75",
+      "comments": {
+        "none": [
+          {
+            "comment": "status definitions",
+            "author": "email not defined",
+            "commit": "f01a0671daa0512a18cd6343518160e5ffc3a409",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 08 Aug 2020 05:35:23 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.75",
+      "version": "1.6.75",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "f5a45d2505d1ae6a89e98480544245091d2bfbbd",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 05 Aug 2020 22:50:11 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.73",
+      "version": "1.6.73",
+      "comments": {
+        "none": [
+          {
+            "comment": "added descriptions",
+            "author": "email not defined",
+            "commit": "eb607f63531821f1b20b27081418045927b0f130",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jul 2020 22:38:20 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.72",
+      "version": "1.6.72",
+      "comments": {
+        "none": [
+          {
+            "comment": "switch to using Lage for build sequencing",
+            "author": "jasonmo@microsoft.com",
+            "commit": "79677c8f3260dbf55e053db5983fb161c6fb44b5",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 23 Jul 2020 21:28:55 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.71",
+      "version": "1.6.71",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Change files\"",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 02 Jul 2020 21:06:06 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.69",
+      "version": "1.6.69",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Change files\"",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 17 Jun 2020 05:00:56 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.60",
+      "version": "1.6.60",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add memo-cache package and consume it in the core framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "27b5fc6790369ab629dcf7f93d6091d4913915fa",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Jun 2020 23:53:15 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.47",
+      "version": "1.6.47",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' into button-tooltip",
+            "author": "lehon@microsoft.com",
+            "commit": "70f7d6d5972b384f2e8d4dd2626adda762c59206",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 09 Jun 2020 17:39:01 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.42",
+      "version": "1.6.42",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch dependencies to use greater than semver until we reach 1.0.0",
+            "author": "jasonmo@microsoft.com",
+            "commit": "8461668e0387928c0831846b219188a6d4408295",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 06 Jun 2020 03:03:17 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.40",
+      "version": "1.6.40",
+      "comments": {
+        "none": [
+          {
+            "comment": "support keyboardFocus for Link and add focus visuals",
+            "author": "lehon@microsoft.com",
+            "commit": "effb17ada2fd26c6ba8f7cbb4ab7d7ddf8d74c49",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 01 Jun 2020 22:06:07 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.36",
+      "version": "1.6.36",
+      "comments": {
+        "none": [
+          {
+            "comment": "Support enter key for calling onClick on Button",
+            "author": "lehon@microsoft.com",
+            "commit": "399cead569e120926521d01c13a49088fe96036b",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 21 May 2020 20:00:42 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.31",
+      "version": "1.6.31",
+      "comments": {
+        "none": [
+          {
+            "comment": "none",
+            "author": "lehon@microsoft.com",
+            "commit": "5ba3ac570ae17a0d3138302ad12807362dea06c1",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 May 2020 03:37:41 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.28",
+      "version": "1.6.28",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "4867e1dde6f8c5cdb3fe894e60f5bcbe8f3c2817",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 19 May 2020 20:06:57 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.6.25",
       "version": "1.6.25",

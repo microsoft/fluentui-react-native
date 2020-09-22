@@ -1,6 +1,6 @@
-import { ITheme, IPartialTheme } from './Theme.types';
+import { Theme, PartialTheme } from '@fluentui-react-native/theme-types';
 import { mergeSettingsCollection } from '@uifabricshared/foundation-settings';
-import { MergeOptions, immutableMergeCore } from '@uifabricshared/immutable-merge';
+import { MergeOptions, immutableMergeCore } from '@fluentui-react-native/immutable-merge';
 
 function _settingsHandler(...objs: (object | undefined)[]): object | undefined {
   return mergeSettingsCollection(...objs);
@@ -8,15 +8,15 @@ function _settingsHandler(...objs: (object | undefined)[]): object | undefined {
 
 const _themeMergeOptions: MergeOptions = {
   object: true,
-  settings: _settingsHandler
+  settings: _settingsHandler,
 };
 
 /**
  * Resolve `partialTheme` into a fully specified theme, using `theme` to fill
  * in any missing values.
  */
-export function resolvePartialTheme(theme: ITheme, partialTheme?: IPartialTheme): ITheme {
-  let newTheme = immutableMergeCore(_themeMergeOptions, theme, partialTheme) as ITheme;
+export function resolvePartialTheme(theme: Theme, partialTheme?: PartialTheme): Theme {
+  let newTheme = immutableMergeCore(_themeMergeOptions, theme, partialTheme) as Theme;
   if (newTheme === theme) {
     newTheme = { ...newTheme };
   }

@@ -2,6 +2,352 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Fri, 28 Aug 2020 05:03:51 GMT",
+      "tag": "@fluentui-react-native/callout_v0.11.10",
+      "version": "0.11.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "only allow menu container to focus on mount",
+            "author": "lehon@microsoft.com",
+            "commit": "9c93388527af2ea3ba60336c56a3da0ce65e3688",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 25 Aug 2020 21:17:13 GMT",
+      "tag": "@fluentui-react-native/callout_v0.11.10",
+      "version": "0.11.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add native component cache for consolidating requireNativeComponent calls",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f0cae19d5a52acc208b485e34dcf4cd3dc3444c2",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 17 Aug 2020 22:08:34 GMT",
+      "tag": "@fluentui-react-native/callout_v0.11.8",
+      "version": "0.11.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix dependency errors",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2216954b9e0efadc5223c2346b4cb31e20c8bc12",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 Aug 2020 19:49:20 GMT",
+      "tag": "@fluentui-react-native/callout_v0.11.6",
+      "version": "0.11.6",
+      "comments": {
+        "none": [
+          {
+            "comment": "change text color",
+            "author": "email not defined",
+            "commit": "690dc0f91728c471e6d0207c30414416f8cd71d5",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 11 Aug 2020 19:53:33 GMT",
+      "tag": "@fluentui-react-native/callout_v0.11.4",
+      "version": "0.11.4",
+      "comments": {
+        "none": [
+          {
+            "comment": "status definitions",
+            "author": "email not defined",
+            "commit": "f01a0671daa0512a18cd6343518160e5ffc3a409",
+            "package": "@fluentui-react-native/callout"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Add missing deps",
+            "author": "rezha@microsoft.com",
+            "commit": "0ad6470d8cbaec3db23deea5d3fa4b9f9bae0895",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 08 Aug 2020 05:35:23 GMT",
+      "tag": "@fluentui-react-native/callout_v0.11.3",
+      "version": "0.11.3",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "f5a45d2505d1ae6a89e98480544245091d2bfbbd",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 05 Aug 2020 22:50:11 GMT",
+      "tag": "@fluentui-react-native/callout_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "added descriptions",
+            "author": "email not defined",
+            "commit": "eb607f63531821f1b20b27081418045927b0f130",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 01 Aug 2020 00:34:34 GMT",
+      "tag": "@fluentui-react-native/callout_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "specify types for tests",
+            "author": "krsiler@microsoft.com",
+            "commit": "f0021e6d95a1fa68c946a2dab2c797f32705fb9e",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jul 2020 22:38:20 GMT",
+      "tag": "@fluentui-react-native/callout_v0.10.6",
+      "version": "0.10.6",
+      "comments": {
+        "none": [
+          {
+            "comment": "switch to using Lage for build sequencing",
+            "author": "jasonmo@microsoft.com",
+            "commit": "79677c8f3260dbf55e053db5983fb161c6fb44b5",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 23 Jul 2020 21:28:55 GMT",
+      "tag": "@fluentui-react-native/callout_v0.10.5",
+      "version": "0.10.5",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Change files\"",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@fluentui-react-native/callout"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "manually update versions",
+            "author": "taamireh@microsoft.com",
+            "commit": "72781079a1c236bdc2f8d9aa54bb2a904f8310f5",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 02 Jul 2020 21:06:06 GMT",
+      "tag": "@fluentui-react-native/callout_v0.10.1",
+      "version": "0.10.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Change files\"",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 26 Jun 2020 18:58:23 GMT",
+      "tag": "@fluentui-react-native/callout_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Expose Callout property isBeakVisible",
+            "author": "ppatboyd@outlook.com",
+            "commit": "467e250d2df187f9df16beac8e55cad26fb4736f",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 17 Jun 2020 05:00:56 GMT",
+      "tag": "@fluentui-react-native/callout_v0.9.2",
+      "version": "0.9.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add memo-cache package and consume it in the core framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "27b5fc6790369ab629dcf7f93d6091d4913915fa",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 16 Jun 2020 23:13:19 GMT",
+      "tag": "@fluentui-react-native/callout_v0.9.0",
+      "version": "0.9.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add onRestoreFocus callback and improve test page capabilities",
+            "author": "ppatboyd@outlook.com",
+            "commit": "e5962b1c8940f376a023b38fe9563369dc7e6a0b",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 12 Jun 2020 03:17:59 GMT",
+      "tag": "@fluentui-react-native/callout_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "use findNodeHandle to avoid serializing refobject",
+            "author": "ppatboyd@outlook.com",
+            "commit": "f59a701b9ae9558bde8058a5a7199bf1a45313d8",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Jun 2020 23:53:15 GMT",
+      "tag": "@fluentui-react-native/callout_v0.7.8",
+      "version": "0.7.8",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' into button-tooltip",
+            "author": "lehon@microsoft.com",
+            "commit": "70f7d6d5972b384f2e8d4dd2626adda762c59206",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 09 Jun 2020 17:39:01 GMT",
+      "tag": "@fluentui-react-native/callout_v0.7.3",
+      "version": "0.7.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch dependencies to use greater than semver until we reach 1.0.0",
+            "author": "jasonmo@microsoft.com",
+            "commit": "8461668e0387928c0831846b219188a6d4408295",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 06 Jun 2020 03:03:17 GMT",
+      "tag": "@fluentui-react-native/callout_v0.7.1",
+      "version": "0.7.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "support keyboardFocus for Link and add focus visuals",
+            "author": "lehon@microsoft.com",
+            "commit": "effb17ada2fd26c6ba8f7cbb4ab7d7ddf8d74c49",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 05 Jun 2020 22:02:58 GMT",
+      "tag": "@fluentui-react-native/callout_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add setInitialFocus prop",
+            "author": "ppatboyd@outlook.com",
+            "commit": "55c14c9a1e77b2dc6f39b67a4540916f4d3ba0f0",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 01 Jun 2020 22:06:07 GMT",
+      "tag": "@fluentui-react-native/callout_v0.6.22",
+      "version": "0.6.22",
+      "comments": {
+        "none": [
+          {
+            "comment": "Support enter key for calling onClick on Button",
+            "author": "lehon@microsoft.com",
+            "commit": "399cead569e120926521d01c13a49088fe96036b",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 21 May 2020 20:00:42 GMT",
+      "tag": "@fluentui-react-native/callout_v0.6.17",
+      "version": "0.6.17",
+      "comments": {
+        "none": [
+          {
+            "comment": "none",
+            "author": "lehon@microsoft.com",
+            "commit": "5ba3ac570ae17a0d3138302ad12807362dea06c1",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 May 2020 03:37:41 GMT",
+      "tag": "@fluentui-react-native/callout_v0.6.14",
+      "version": "0.6.14",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "4867e1dde6f8c5cdb3fe894e60f5bcbe8f3c2817",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 19 May 2020 23:37:15 GMT",
       "tag": "@fluentui-react-native/callout_v0.6.13",
       "version": "0.6.13",

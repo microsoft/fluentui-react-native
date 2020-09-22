@@ -1,0 +1,50 @@
+{
+  "name": "@fluentui-react-native/component-cache",
+  "entries": [
+    {
+      "date": "Fri, 11 Sep 2020 20:25:42 GMT",
+      "tag": "@fluentui-react-native/component-cache_v1.0.1",
+      "version": "1.0.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add samples and some README text to use-slots and use-styling packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2566347850eff4ed67bfad2a85134481e088cba6",
+            "package": "@fluentui-react-native/component-cache"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 28 Aug 2020 05:03:51 GMT",
+      "tag": "@fluentui-react-native/component-cache_v1.0.1",
+      "version": "1.0.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "only allow menu container to focus on mount",
+            "author": "lehon@microsoft.com",
+            "commit": "9c93388527af2ea3ba60336c56a3da0ce65e3688",
+            "package": "@fluentui-react-native/component-cache"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 25 Aug 2020 21:17:13 GMT",
+      "tag": "@fluentui-react-native/component-cache_v1.0.1",
+      "version": "1.0.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add native component cache for consolidating requireNativeComponent calls",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f0cae19d5a52acc208b485e34dcf4cd3dc3444c2",
+            "package": "@fluentui-react-native/component-cache"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { IRenderData, ISlotWithFilter, IComposable, IWithComposable, ISlots, IPropFilter, INativeSlotType } from './Composable.types';
-import { mergeSettings, mergeProps, ISlotProps } from '@uifabricshared/foundation-settings';
+import { mergeSettings, ISlotProps } from '@uifabricshared/foundation-settings';
+import { mergeProps } from '@fluentui-react-native/merge-props';
 
 export type ISlotFn<TProps> = React.FunctionComponent<TProps> & {
   _canCompose?: boolean;
@@ -14,7 +15,7 @@ interface ISlotRenderInfo<TProps, TSlotProps, TState> {
   Slots?: ISlots<TSlotProps>;
 }
 
-function _mergeAndFilterProps<TProps extends object>(propsBase: TProps, propsExtra: TProps, filter?: IPropFilter): TProps {
+function _mergeAndFilterProps<TProps>(propsBase: TProps, propsExtra: TProps, filter?: IPropFilter): TProps {
   // do a basic merge, not mutating if nothing changed
   let props = mergeProps<TProps>(propsBase, propsExtra);
   if (filter && props) {
@@ -24,7 +25,7 @@ function _mergeAndFilterProps<TProps extends object>(propsBase: TProps, propsExt
         removeMask[key] = undefined;
       }
     });
-    props = mergeProps(props, removeMask);
+    props = mergeProps<TProps>(props, removeMask as TProps);
   }
   return props;
 }
@@ -40,7 +41,7 @@ function _createSlotRenderFunction<TProps>(fn: React.FunctionComponent<TProps>):
 
 function createSlotRenderInfo<TProps, TSlotProps extends ISlotProps, TState>(
   composable: IComposable<TProps, TSlotProps, TState>,
-  slotInfo?: ISlotWithFilter
+  slotInfo?: ISlotWithFilter,
 ): ISlotRenderInfo<TProps, TSlotProps, TState> {
   const renderInfo: ISlotRenderInfo<TProps, TSlotProps, TState> = { composable, slotInfo };
   const slots = composable && composable.slots;
@@ -60,7 +61,7 @@ function createSlotRenderInfo<TProps, TSlotProps extends ISlotProps, TState>(
           const { renderData, Slots } = childRenderInfo;
           if (filter || extraProps) {
             const toMerge = { root: _mergeAndFilterProps(renderData.slotProps.root, extraProps, filter) };
-            renderData.slotProps = mergeSettings(renderData.slotProps, toMerge);
+            renderData.slotProps = mergeSettings<TSlotProps>(renderData.slotProps, toMerge as TSlotProps);
           }
           return composable.render(Slots, renderData, ...children);
         });
@@ -78,7 +79,7 @@ function createSlotRenderInfo<TProps, TSlotProps extends ISlotProps, TState>(
 
 function useUpdateRenderData<TProps, TSlotProps, TState>(
   props: TProps,
-  info: ISlotRenderInfo<TProps, TSlotProps, TState>
+  info: ISlotRenderInfo<TProps, TSlotProps, TState>,
 ): { renderData: IRenderData<TSlotProps, TState>; Slots: ISlots<TSlotProps> } {
   // update the render data for this level of the hierarchy
   if (info.composable) {
@@ -109,11 +110,11 @@ function useUpdateRenderData<TProps, TSlotProps, TState>(
  */
 export function useCompoundPrepare<TProps, TSlotProps extends ISlotProps, TState>(
   props: TProps,
-  composable: IComposable<TProps, TSlotProps, TState>
+  composable: IComposable<TProps, TSlotProps, TState>,
 ): { renderData: IRenderData<TSlotProps, TState>; Slots: ISlots<TSlotProps> } {
   // create the slot render info (which may be a tree) and store it into state once.  Note that this will also create any
   // needed closures for the slots to ensure they don't get recreated over the lifetime of the component
-  const [renderInfo] = React.useState(createSlotRenderInfo<TProps, TSlotProps, TState>(composable));
+  const renderInfo = React.useMemo(() => createSlotRenderInfo<TProps, TSlotProps, TState>(composable), []);
 
   // process the props of the tree using the created/retrieved renderInfo
   return useUpdateRenderData<TProps, TSlotProps, TState>(props, renderInfo);

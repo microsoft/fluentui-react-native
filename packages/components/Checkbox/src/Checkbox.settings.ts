@@ -8,7 +8,8 @@ export const settings: IComposeSettings<ICheckboxType> = [
     tokens: {
       borderColor: 'menuItemText',
       color: 'menuItemText',
-      backgroundColor: 'menuBackground'
+      backgroundColor: 'menuBackground',
+      textBorderColor: 'transparent'
     },
     root: {
       accessible: true,
@@ -16,7 +17,7 @@ export const settings: IComposeSettings<ICheckboxType> = [
       accessibilityRole: 'checkbox',
       style: {
         display: 'flex',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         flexDirection: 'row',
         minHeight: 14,
         marginTop: 0,
@@ -27,40 +28,34 @@ export const settings: IComposeSettings<ICheckboxType> = [
       style: {
         height: 14,
         width: 14,
-        marginRight: 4,
+        marginEnd: 4,
         borderStyle: 'solid',
-        borderWidth: 1,
-        marginTop: 5
+        borderWidth: 1
       }
     },
     checkmark: {
       style: {
         position: 'relative',
         opacity: 0,
-        fontSize: 8,
-        left: 2,
+        fontSize: 10,
+        marginStart: 2,
         top: -1
       }
     },
     content: {
+      variant: 'bodyStandard',
       style: {
-        fontSize: 11,
-        marginTop: 1,
-        borderStyle: 'dashed',
-        borderColor: 'transparent',
-        borderWidth: 1
+        borderStyle: 'dotted',
+        borderWidth: 1,
+        marginTop: 3
       }
     },
     _precedence: ['disabled', 'boxAtEnd', 'hovered', 'focused', 'pressed', 'checked'],
     _overrides: {
       focused: {
         tokens: {
-          backgroundColor: 'menuItemBackgroundHovered'
-        },
-        content: {
-          style: {
-            borderColor: 'rgba(128, 128, 128, 1)'
-          }
+          backgroundColor: 'menuItemBackgroundHovered',
+          textBorderColor: 'focusBorder'
         }
       },
       checked: {
@@ -85,8 +80,8 @@ export const settings: IComposeSettings<ICheckboxType> = [
       boxAtEnd: {
         checkbox: {
           style: {
-            marginLeft: 4,
-            marginRight: 0
+            marginStart: 4,
+            marginEnd: 0
           }
         }
       },

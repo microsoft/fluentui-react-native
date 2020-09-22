@@ -10,10 +10,10 @@ export const commonTestStyles = StyleSheet.create({
   },
   header: {
     marginVertical: 6,
-    fontSize: 12
+    fontSize: 16
   },
   section: {
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#0B6A0B',
     marginTop: 12
@@ -56,6 +56,17 @@ export const fabricTesterStyles = StyleSheet.create({
   root: {
     flex: 1,
     flexGrow: 1,
+    flexDirection: 'column',
+    minHeight: 550,
+    minWidth: 300,
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
+    padding: 4
+  },
+
+  testRoot: {
+    flex: 1,
+    flexGrow: 1,
     flexDirection: 'row',
     minHeight: 550,
     minWidth: 300,
@@ -64,9 +75,36 @@ export const fabricTesterStyles = StyleSheet.create({
     padding: 4
   },
 
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+
+  pickerRoot: {
+    flexDirection: 'row',
+  },
+
+  picker: {
+    flexDirection: 'row',
+    padding: 4
+  },
+
+  pickerLabel: {
+    fontSize: 12,
+    marginTop: 6,
+    fontWeight: 'bold'
+  },
+
+  dropdown: {
+    height: 30,
+    width: 90,
+    fontSize: 12,
+  },
+
   testHeader: {
     marginBottom: 8,
-    fontSize: 14,
+    marginTop: 4,
+    fontSize: 18,
     fontWeight: 'bold'
   },
 
@@ -84,20 +122,12 @@ export const fabricTesterStyles = StyleSheet.create({
   },
 
   testSection: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: '#0B6A0B',
-    marginTop: 12
-  },
-
-  separator: {
-    marginHorizontal: 8,
-    width: 2
+    width: '85%'
   },
 
   noTest: {
     alignSelf: 'center',
-    fontSize: 14
+    fontSize: 18
   }
 });
 

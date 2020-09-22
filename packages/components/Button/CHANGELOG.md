@@ -1,8 +1,138 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Tue, 19 May 2020 23:37:15 GMT and should not be manually modified.
+This log was last generated on Tue, 22 Sep 2020 04:57:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.13
+
+Tue, 22 Sep 2020 04:57:02 GMT
+
+### Patches
+
+- Update a11y properties (krsiler@microsoft.com)
+- manually bump button version (taamireh@microsoft.com)
+
+## 0.10.11
+
+Wed, 09 Sep 2020 21:36:19 GMT
+
+### Patches
+
+- Disabled prop-types validation rule (saadnajmi2@gmail.com)
+
+## 0.10.10
+
+Wed, 09 Sep 2020 07:28:42 GMT
+
+### Patches
+
+- Fix Button icon color props (tomun@microsoft.com)
+
+## 0.10.8
+
+Mon, 17 Aug 2020 22:08:34 GMT
+
+### Patches
+
+- fix dependency errors (jasonmo@microsoft.com)
+
+## 0.10.4
+
+Tue, 11 Aug 2020 19:53:33 GMT
+
+### Patches
+
+- Add missing deps (rezha@microsoft.com)
+
+## 0.10.0
+
+Sat, 01 Aug 2020 00:34:34 GMT
+
+### Minor changes
+
+- specify types for tests (krsiler@microsoft.com)
+
+## 0.9.27
+
+Tue, 28 Jul 2020 18:21:12 GMT
+
+### Patches
+
+- rename some token types and update Text (jasonmo@microsoft.com)
+
+## 0.9.26
+
+Thu, 23 Jul 2020 21:28:55 GMT
+
+### Patches
+
+- set backgroundColor on focus (lehon@microsoft.com)
+- manually update versions (taamireh@microsoft.com)
+
+## 0.9.13
+
+Wed, 17 Jun 2020 05:00:56 GMT
+
+### Patches
+
+- add memo-cache package and consume it in the core framework (jasonmo@microsoft.com)
+
+## 0.9.0
+
+Thu, 11 Jun 2020 23:53:15 GMT
+
+### Minor changes
+
+- add tooltip prop to Button (lehon@microsoft.com)
+
+## 0.8.4
+
+Tue, 09 Jun 2020 17:39:01 GMT
+
+### Patches
+
+- switch dependencies to use greater than semver until we reach 1.0.0 (jasonmo@microsoft.com)
+
+## 0.8.0
+
+Thu, 04 Jun 2020 23:23:26 GMT
+
+### Minor changes
+
+- Changing location of testID (safreibe@microsoft.com)
+
+## 0.7.1
+
+Thu, 04 Jun 2020 22:15:30 GMT
+
+### Patches
+
+- Update snapshots to reflect fontSize in CSS pixels (krsiler@microsoft.com)
+
+## 0.7.0
+
+Mon, 01 Jun 2020 22:06:07 GMT
+
+### Minor changes
+
+- Support enter key for calling onClick on Button (lehon@microsoft.com)
+
+## 0.6.0
+
+Thu, 21 May 2020 20:00:42 GMT
+
+### Minor changes
+
+- add findNodeHandle in ButtonFocusTest (lehon@microsoft.com)
+
+## 0.5.26
+
+Wed, 20 May 2020 03:37:41 GMT
+
+### Patches
+
+- remove backgroundColor from focused _override setting to let hovered setting take precedence (lehon@microsoft.com)
 
 ## 0.5.25
 

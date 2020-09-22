@@ -1,0 +1,186 @@
+{
+  "name": "@fluentui-react-native/memo-cache",
+  "entries": [
+    {
+      "date": "Fri, 11 Sep 2020 20:25:42 GMT",
+      "tag": "@fluentui-react-native/memo-cache_v1.0.2",
+      "version": "1.0.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add samples and some README text to use-slots and use-styling packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2566347850eff4ed67bfad2a85134481e088cba6",
+            "package": "@fluentui-react-native/memo-cache"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 17 Aug 2020 22:08:34 GMT",
+      "tag": "@fluentui-react-native/memo-cache_v1.0.2",
+      "version": "1.0.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix dependency errors",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2216954b9e0efadc5223c2346b4cb31e20c8bc12",
+            "package": "@fluentui-react-native/memo-cache"
+          }
+        ],
+        "none": [
+          {
+            "comment": "fix dependency errors",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2216954b9e0efadc5223c2346b4cb31e20c8bc12",
+            "package": "@fluentui-react-native/memo-cache"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 Aug 2020 19:49:20 GMT",
+      "tag": "@fluentui-react-native/memo-cache_v1.0.1",
+      "version": "1.0.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "change text color",
+            "author": "email not defined",
+            "commit": "690dc0f91728c471e6d0207c30414416f8cd71d5",
+            "package": "@fluentui-react-native/memo-cache"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 Aug 2020 04:48:19 GMT",
+      "tag": "@fluentui-react-native/memo-cache_v1.0.1",
+      "version": "1.0.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "release @fluentui-react-native/memo-cache",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b490c9915260a055b2f3c044f06263be0be42216",
+            "package": "@fluentui-react-native/memo-cache"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 11 Aug 2020 19:53:33 GMT",
+      "tag": "@fluentui-react-native/memo-cache_v0.2.10",
+      "version": "0.2.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "replaced svg test",
+            "author": "email not defined",
+            "commit": "f01a0671daa0512a18cd6343518160e5ffc3a409",
+            "package": "@fluentui-react-native/memo-cache"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 08 Aug 2020 05:35:23 GMT",
+      "tag": "@fluentui-react-native/memo-cache_v0.2.10",
+      "version": "0.2.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "lehon@microsoft.com",
+            "commit": "f5a45d2505d1ae6a89e98480544245091d2bfbbd",
+            "package": "@fluentui-react-native/memo-cache"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 05 Aug 2020 22:50:11 GMT",
+      "tag": "@fluentui-react-native/memo-cache_v0.2.10",
+      "version": "0.2.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "added descriptions",
+            "author": "email not defined",
+            "commit": "eb607f63531821f1b20b27081418045927b0f130",
+            "package": "@fluentui-react-native/memo-cache"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jul 2020 22:38:20 GMT",
+      "tag": "@fluentui-react-native/memo-cache_v0.2.10",
+      "version": "0.2.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "switch to using Lage for build sequencing",
+            "author": "jasonmo@microsoft.com",
+            "commit": "79677c8f3260dbf55e053db5983fb161c6fb44b5",
+            "package": "@fluentui-react-native/memo-cache"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 23 Jul 2020 21:28:55 GMT",
+      "tag": "@fluentui-react-native/memo-cache_v0.2.10",
+      "version": "0.2.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Change files\"",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@fluentui-react-native/memo-cache"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "comment",
+            "author": "taamireh@microsoft.com",
+            "commit": "72781079a1c236bdc2f8d9aa54bb2a904f8310f5",
+            "package": "@fluentui-react-native/memo-cache"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 02 Jul 2020 21:06:06 GMT",
+      "tag": "@fluentui-react-native/memo-cache_v0.2.9",
+      "version": "0.2.9",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Change files\"",
+            "author": "email not defined",
+            "commit": "bac059cfd36f5a43185f3624e60bdda2d318c1b9",
+            "package": "@fluentui-react-native/memo-cache"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 17 Jun 2020 05:00:56 GMT",
+      "tag": "@fluentui-react-native/memo-cache_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "add memo-cache package and consume it in the core framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "27b5fc6790369ab629dcf7f93d6091d4913915fa",
+            "package": "@fluentui-react-native/memo-cache"
+          }
+        ]
+      }
+    }
+  ]
+}

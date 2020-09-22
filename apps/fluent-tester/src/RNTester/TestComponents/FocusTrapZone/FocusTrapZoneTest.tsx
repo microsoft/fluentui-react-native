@@ -1,23 +1,24 @@
-import { IFocusTrapZoneProps, Text, FocusTrapZone, KeyPressEvent } from '@fluentui/react-native';
+import { FocusTrapZone, IFocusTrapZoneProps, Text } from '@fluentui/react-native';
+import { KeyPressEvent, useFocusState } from '@fluentui-react-native/interactive-hooks';
 import { Stack } from '@fluentui-react-native/stack';
-import { TouchableHighlight, TouchableHighlightProps, View, ViewProps } from 'react-native';
-import { useFocusState } from '@fluentui/react-native';
 import * as React from 'react';
+import { TouchableHighlight, TouchableHighlightProps, View, ViewProps } from 'react-native';
 import { stackStyle } from '../Common/styles';
-import { FOCUSTRAPZONE_TESTPAGE } from '../../Consts';
+import { FOCUSTRAPZONE_TESTPAGE } from './consts';
+import { Test, TestSection, PlatformStatus } from '../Test';
 
 const trapZoneStyle: IFocusTrapZoneProps['style'] = {
   padding: 10,
   borderWidth: 2,
   borderColor: '#ababab',
-  borderStyle: 'dashed'
+  borderStyle: 'dashed',
 };
 
 const activeTrapZoneStyle: IFocusTrapZoneProps['style'] = {
   padding: 10,
   borderColor: '#ababab',
   borderWidth: 2,
-  borderStyle: 'solid'
+  borderStyle: 'solid',
 };
 
 const componentTwiddlerStyle: ViewProps['style'] = {
@@ -25,13 +26,13 @@ const componentTwiddlerStyle: ViewProps['style'] = {
   padding: 8,
   margin: 4,
   borderColor: '#ababab',
-  borderStyle: 'solid'
+  borderStyle: 'solid',
 };
 
 const focusedComponentTwiddlerStyle: ViewProps['style'] = {
   ...componentTwiddlerStyle,
   borderColor: 'black',
-  backgroundColor: 'lightblue'
+  backgroundColor: 'lightblue',
 };
 
 interface IComponentTwiddlerProps {
@@ -45,7 +46,7 @@ const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps> = (pro
   return (
     <TouchableHighlight {...{ acceptsKeyboardFocus: false }} onPress={props.onPress}>
       <View
-        {...{ acceptsKeyboardFocus: true, ...focusProps } as any}
+        {...({ acceptsKeyboardFocus: true, ...focusProps } as any)}
         style={focusState.focused ? focusedComponentTwiddlerStyle : componentTwiddlerStyle}
       >
         <Text>{props.label}</Text>
@@ -54,13 +55,13 @@ const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps> = (pro
   );
 };
 
-export const FocusTrapTest: React.FunctionComponent<{}> = () => {
+const basicFocusTrapZone: React.FunctionComponent<{}> = () => {
   const [state, setState] = React.useState({
     useTrapZone: false,
     renderTrapZone: true,
     disableFirstFocus: false,
     ignoreExternalFocusing: false,
-    focusPreviouslyFocusedInnerElement: false
+    focusPreviouslyFocusedInnerElement: false,
   });
 
   const ftzRef = React.useRef<View>(null);
@@ -119,7 +120,7 @@ export const FocusTrapTest: React.FunctionComponent<{}> = () => {
             disabled={!state.useTrapZone}
             style={state.useTrapZone ? activeTrapZoneStyle : trapZoneStyle}
           >
-            <Text testID={FOCUSTRAPZONE_TESTPAGE}>{state.useTrapZone ? 'Trap Active' : 'Trap Active'}</Text>
+            <Text>{state.useTrapZone ? 'Trap Active' : 'Trap Active'}</Text>
             <ComponentTwiddler label="trapped" />
             <ComponentTwiddler label="trapped" />
             <ComponentTwiddler label="trapped" />
@@ -129,4 +130,27 @@ export const FocusTrapTest: React.FunctionComponent<{}> = () => {
       </Stack>
     </View>
   );
+};
+
+const focusTrapZoneSections: TestSection[] = [
+  {
+    name: 'Basic FocusTrapZone Usage',
+    testID: FOCUSTRAPZONE_TESTPAGE,
+    component: basicFocusTrapZone,
+  },
+];
+
+export const FocusTrapTest: React.FunctionComponent<{}> = () => {
+  const status: PlatformStatus = {
+    win32Status: 'Beta',
+    uwpStatus: 'Backlog',
+    iosStatus: 'N/A',
+    macosStatus: 'N/A',
+    androidStatus: 'N/A',
+  };
+
+  const description =
+    'FocusTrapZone is used to trap the focus in any html element. Pressing tab will circle focus within the inner focusable elements of the FocusTrapZone.';
+
+  return <Test name="Focus Trap Zone Test" description={description} sections={focusTrapZoneSections} status={status}></Test>;
 };

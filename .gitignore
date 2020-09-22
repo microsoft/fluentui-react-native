@@ -4,7 +4,10 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-/apps/win32/src/reports/
+**/reports/
+**/errorShots/
+**/allure-results/
+**/allure-report/
 
 # Runtime data
 pids
@@ -17,8 +20,7 @@ pids
 **/.DS_Store
 
 # CocoaPods
-/apps/apple/FluentUITester/macos/Pods/*
-/apps/apple/FluentUITester/ios/Pods/*
+**/Pods/*
 **/project.xcworkspace/contents.xcworkspacedata
 **/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
 **/*.xcuserdatad/xcschemes

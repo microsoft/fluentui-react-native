@@ -1,8 +1,92 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Tue, 19 May 2020 23:37:15 GMT and should not be manually modified.
+This log was last generated on Mon, 17 Aug 2020 22:08:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.9
+
+Mon, 17 Aug 2020 22:08:34 GMT
+
+### Patches
+
+- fix dependency errors (jasonmo@microsoft.com)
+
+## 0.8.5
+
+Tue, 11 Aug 2020 19:53:33 GMT
+
+### Patches
+
+- Add missing deps (rezha@microsoft.com)
+
+## 0.8.4
+
+Mon, 10 Aug 2020 19:05:49 GMT
+
+### Patches
+
+- Fix invoke issue for Link (lehon@microsoft.com)
+
+## 0.8.0
+
+Sat, 01 Aug 2020 00:34:34 GMT
+
+### Minor changes
+
+- specify types for tests (krsiler@microsoft.com)
+
+## 0.7.1
+
+Tue, 28 Jul 2020 18:21:12 GMT
+
+### Patches
+
+- rename some token types and update Text (jasonmo@microsoft.com)
+
+## 0.7.0
+
+Thu, 23 Jul 2020 21:28:55 GMT
+
+### Minor changes
+
+- Set Focus props during initial render to avoid shifting other components (lehon@microsoft.com)
+
+### Patches
+
+- Add text borderColor as a token for Link and Checkbox to allow theming (lehon@microsoft.com)
+
+## 0.6.20
+
+Wed, 17 Jun 2020 05:00:56 GMT
+
+### Patches
+
+- add memo-cache package and consume it in the core framework (jasonmo@microsoft.com)
+
+## 0.6.2
+
+Tue, 09 Jun 2020 17:39:01 GMT
+
+### Patches
+
+- switch dependencies to use greater than semver until we reach 1.0.0 (jasonmo@microsoft.com)
+
+## 0.6.0
+
+Sat, 06 Jun 2020 03:03:17 GMT
+
+### Minor changes
+
+- support keyboardFocus for Link and add focus visuals (lehon@microsoft.com)
+
+## 0.5.36
+
+Thu, 04 Jun 2020 22:15:30 GMT
+
+### Patches
+
+- Update control to use fluentui-react-native text (krsiler@microsoft.com)
 
 ## 0.5.26
 

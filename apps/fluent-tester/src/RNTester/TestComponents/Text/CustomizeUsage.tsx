@@ -1,18 +1,17 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Stack } from '@fluentui-react-native/stack';
-import { Text } from '@fluentui-react-native/text';
+import { Text } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
-import { styles } from './styles';
 
 export const CustomizeUsage: React.FunctionComponent<{}> = () => {
-  const RedCaptionBold = Text.customize({ tokens: { variant: 'captionStandard', fontWeight: 'semiBold', color: '#ff0000' } });
-  const OrangeSecondaryBold = Text.customize({ tokens: { variant: 'secondaryStandard', fontWeight: 'semiBold', color: '#ff9900' } });
-  const YellowBodyBold = Text.customize({ tokens: { variant: 'bodyStandard', fontWeight: 'semiBold', color: '#f3ce00' } });
-  const GreenSubheaderBold = Text.customize({ tokens: { variant: 'subheaderStandard', fontWeight: 'semiBold', color: '#02c440' } });
-  const BlueHeaderBold = Text.customize({ tokens: { variant: 'headerStandard', fontWeight: 'semiBold', color: '#0229c4' } });
-  const IndigoHeroBold = Text.customize({ tokens: { variant: 'heroStandard', fontWeight: 'semiBold', color: '#4b0082' } });
-  const PurpleHeroLargeBold = Text.customize({ tokens: { variant: 'heroLargeStandard', fontWeight: 'semiBold', color: '#8402c4' } });
+  const RedCaptionBold = Text.customize({ tokens: { variant: 'captionStandard', fontWeight: '700', color: '#ff0000' } });
+  const OrangeSecondaryBold = Text.customize({ tokens: { variant: 'secondaryStandard', fontWeight: '700', color: '#ff9900' } });
+  const YellowBodyBold = Text.customize({ tokens: { variant: 'bodyStandard', fontWeight: '700', color: '#f3ce00' } });
+  const GreenSubheaderBold = Text.customize({ tokens: { variant: 'subheaderStandard', fontWeight: '700', color: '#02c440' } });
+  const BlueHeaderBold = Text.customize({ tokens: { variant: 'headerStandard', fontWeight: '700', color: '#0229c4' } });
+  const IndigoHeroBold = Text.customize({ tokens: { variant: 'heroStandard', fontWeight: '700', color: '#4b0082' } });
+  const PurpleHeroLargeBold = Text.customize({ tokens: { variant: 'heroLargeStandard', fontWeight: '700', color: '#8402c4' } });
 
   const ArialBlack = Text.customize({ tokens: { variant: 'heroLargeStandard', fontFamily: 'Arial Black' } });
   const BrushScriptMT = Text.customize({ tokens: { variant: 'heroStandard', fontFamily: 'Brush Script MT' } });
@@ -23,7 +22,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const Wingdings = Text.customize({ tokens: { variant: 'captionStandard', fontFamily: 'Wingdings' } });
 
   return (
-    <View style={styles.root}>
+    <View>
       <Stack style={stackStyle} gap={5}>
         <RedCaptionBold>RedCaptionBold</RedCaptionBold>
         <OrangeSecondaryBold>OrangeSecondaryBold</OrangeSecondaryBold>

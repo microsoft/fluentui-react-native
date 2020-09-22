@@ -1,8 +1,56 @@
 # Change Log - @uifabricshared/foundation-composable
 
-This log was last generated on Fri, 24 Apr 2020 19:41:08 GMT and should not be manually modified.
+This log was last generated on Thu, 20 Aug 2020 00:14:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.73
+
+Thu, 20 Aug 2020 00:14:01 GMT
+
+### Patches
+
+- update code to use split out merge-props package (jasonmo@microsoft.com)
+
+## 0.6.72
+
+Mon, 17 Aug 2020 22:08:34 GMT
+
+### Patches
+
+- fix dependency errors (jasonmo@microsoft.com)
+
+## 0.6.69
+
+Fri, 07 Aug 2020 21:50:55 GMT
+
+### Patches
+
+- Remove unnecessary calls to slot data factories (jasonmo@microsoft.com)
+
+## 0.6.67
+
+Sat, 04 Jul 2020 06:24:16 GMT
+
+### Patches
+
+- make all style merging use caching, get rid of unused finalizer (jasonmo@microsoft.com)
+
+## 0.6.57
+
+Wed, 17 Jun 2020 05:00:56 GMT
+
+### Patches
+
+- add memo-cache package and consume it in the core framework (jasonmo@microsoft.com)
+
+## 0.6.39
+
+Tue, 09 Jun 2020 17:39:01 GMT
+
+### Patches
+
+- switch dependencies to use greater than semver until we reach 1.0.0 (jasonmo@microsoft.com)
 
 ## 0.6.3
 

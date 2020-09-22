@@ -1,5 +1,4 @@
-import { ICacheInfo, ICachedPropHandlers } from './Token.internal';
-import { ISlotProps } from '@uifabricshared/foundation-settings';
+import { ICachedPropHandlers } from './Token.internal';
 
 /**
  * STYLE FACTORY OPERATIONS (PARTIAL TOKEN PROCESSORS)
@@ -48,7 +47,10 @@ export type IOperationSet<TTokens, TTheme> = IStyleFactoryOperation<TTokens, TTh
  *
  * _keys - should specify the token keys the function is dependent on, required to cache properly
  */
-export type IStyleFactoryFunctionRaw<TProps, TTokens, TTheme> = (tokenProps: TTokens, theme: TTheme) => TProps;
+export type IStyleFactoryFunctionRaw<TProps, TTokens, TTheme> = (
+  tokenProps: TTokens,
+  theme: TTheme,
+) => TProps extends object ? TProps : never;
 export type IStyleFactoryFunction<TProps, TTokens, TTheme> = IStyleFactoryFunctionRaw<TProps, TTokens, TTheme> & {
   _keys: (keyof TTokens)[];
 };
@@ -64,8 +66,8 @@ export type IStyleFactoryEntry<TProps, TTokens, TTheme> =
 /**
  * This is the collection of style factories corresponding to the slots
  */
-export type IStyleFactories<TSlotProps extends ISlotProps, TTokens, TTheme> = {
-  [K in keyof TSlotProps]?: IStyleFactoryEntry<TSlotProps[K], TTokens, TTheme> | IStyleFactoryEntry<TSlotProps[K], TTokens, TTheme>[];
+export type IStyleFactories<TSlotProps extends object, TTokens, TTheme> = {
+  [K in keyof TSlotProps]?: IStyleFactoryEntry<TSlotProps[K], TTokens, TTheme> | IStyleFactoryEntry<TSlotProps[K], TTokens, TTheme>[]
 };
 
 /**
@@ -79,12 +81,12 @@ export type ITargetHasToken = (target: string, key: string) => boolean;
  * Style finalizer function.  Allows transforming props and styles before they are cached.  This could be used
  * to create css rules for the styles and changing the reference to be by class name
  */
-export type IStyleFinalizer<TProps> = (props: TProps, slotName: string, cacheInfo: ICacheInfo) => TProps;
+export type IStyleFinalizer<TProps> = (props: TProps, slotName: string) => TProps;
 
 /**
  * Resolved token definitions, ready to be rendered
  */
-export interface IComponentTokens<TSlotProps extends ISlotProps, TTokens, TTheme> {
+export interface IComponentTokens<TSlotProps extends object, TTokens, TTheme> {
   /** handlers to process the props of each slot */
   handlers: ICachedPropHandlers<TSlotProps, TTokens, TTheme>;
 

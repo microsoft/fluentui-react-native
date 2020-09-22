@@ -1,8 +1,102 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Tue, 19 May 2020 23:37:15 GMT and should not be manually modified.
+This log was last generated on Tue, 22 Sep 2020 04:57:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.5
+
+Tue, 22 Sep 2020 04:57:02 GMT
+
+### Patches
+
+- Update a11y properties (krsiler@microsoft.com)
+- manual version bump on Checkbox (taamireh@microsoft.com)
+
+## 0.5.2
+
+Mon, 17 Aug 2020 22:08:34 GMT
+
+### Patches
+
+- fix dependency errors (jasonmo@microsoft.com)
+
+## 0.5.0
+
+Fri, 14 Aug 2020 17:26:00 GMT
+
+### Minor changes
+
+- Aligning checkbox text centered vertically (safreibe@microsoft.com)
+
+## 0.4.6
+
+Tue, 11 Aug 2020 19:53:33 GMT
+
+### Patches
+
+- Add missing deps (rezha@microsoft.com)
+
+## 0.4.1
+
+Tue, 28 Jul 2020 18:21:12 GMT
+
+### Patches
+
+- rename some token types and update Text (jasonmo@microsoft.com)
+
+## 0.4.0
+
+Thu, 23 Jul 2020 21:28:55 GMT
+
+### Minor changes
+
+- RTL/LTR for boxAtEnd (safreibe@microsoft.com)
+- Set Focus props during initial render to avoid shifting other components (lehon@microsoft.com)
+
+### Patches
+
+- Add text borderColor as a token for Link and Checkbox to allow theming (lehon@microsoft.com)
+
+## 0.3.71
+
+Wed, 01 Jul 2020 19:54:46 GMT
+
+### Patches
+
+- Adding marginEnd for rtl/ltf support (safreibe@microsoft.com)
+
+## 0.3.61
+
+Wed, 17 Jun 2020 05:00:56 GMT
+
+### Patches
+
+- add memo-cache package and consume it in the core framework (jasonmo@microsoft.com)
+
+## 0.3.50
+
+Fri, 12 Jun 2020 03:17:59 GMT
+
+### Patches
+
+- Move findNodeHandle into useLayoutEffect (ppatboyd@outlook.com)
+
+## 0.3.43
+
+Tue, 09 Jun 2020 17:39:01 GMT
+
+### Patches
+
+- switch dependencies to use greater than semver until we reach 1.0.0 (jasonmo@microsoft.com)
+
+## 0.3.38
+
+Thu, 04 Jun 2020 22:15:30 GMT
+
+### Patches
+
+- Update control to use fluentui-react-native text and CSS pixels for fontSize (krsiler@microsoft.com)
 
 ## 0.3.28
 
