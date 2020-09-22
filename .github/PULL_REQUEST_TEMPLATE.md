@@ -1,7 +1,7 @@
 ### Platforms Impacted
 - [ ] iOS
 - [ ] macOS
-- [ ] win32
+- [ ] win32 (Office)
 - [ ] windows
 - [ ] android
 
