@@ -1,0 +1,8 @@
+{
+  "type": "none",
+  "comment": "added android documentation for fluentui tester, and updated top level page to point to platform specific docs.",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "ejlayne@microsoft.com",
+  "dependentChangeType": "none",
+  "date": "2020-09-22T19:35:00.684Z"
+}
