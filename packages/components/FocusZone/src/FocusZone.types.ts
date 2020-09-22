@@ -5,9 +5,9 @@ import { IViewWin32Props } from '@office-iss/react-native-win32';
 
 export const focusZoneName = 'FocusZone';
 
-export interface IFocusZoneState { }
+export interface FocusZoneState { }
 
-export interface IFocusZoneProps {
+export interface FocusZoneProps {
 
   /**
   * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
@@ -57,17 +57,17 @@ export type NavigateAtEnd =
   | 'NavigateWrap'        /* Circular Navigation Functionality */
   | 'NavigateContinue';   /* At the last element of the FocusZone, focus will move to the first focusable element outside the FocusZone */
 
-export interface IFocusZoneTokens { }
+export interface FocusZoneTokens { }
 
-export interface IFocusZoneSlotProps {
+export interface FocusZoneSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
 }
 
-export type IFocusZoneRenderData = IRenderData<IFocusZoneSlotProps, IFocusZoneState>;
+export type FocusZoneRenderData = IRenderData<FocusZoneSlotProps, FocusZoneState>;
 
-export interface IFocusZoneType {
-  props: IFocusZoneProps;
-  tokens: IFocusZoneTokens;
-  slotProps: IFocusZoneSlotProps;
-  state: IFocusZoneState;
+export interface FocusZoneType {
+  props: FocusZoneProps;
+  tokens: FocusZoneTokens;
+  slotProps: FocusZoneSlotProps;
+  state: FocusZoneState;
 }
