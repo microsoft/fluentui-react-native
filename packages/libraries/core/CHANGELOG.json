@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Tue, 22 Sep 2020 21:42:19 GMT",
+      "tag": "@fluentui/react-native_v0.16.3",
+      "version": "0.16.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Updated Shimmer to not have a module name",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "901b3a534df10a1d471c815349651500d0237575",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 11 Sep 2020 20:25:42 GMT",
       "tag": "@fluentui/react-native_v0.16.1",
       "version": "0.16.1",
