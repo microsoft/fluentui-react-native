@@ -23,7 +23,6 @@ RCT_ENUM_CONVERTER(MSFActivityIndicatorViewSize, (@{
 @interface RCT_EXTERN_MODULE(MSFSpinnerViewManager, RCTViewManager)
 
 RCT_EXPORT_VIEW_PROPERTY(hidesWhenStopped, BOOL);
-
 RCT_EXPORT_VIEW_PROPERTY(color, UIColor);
 RCT_EXPORT_VIEW_PROPERTY(size, MSFActivityIndicatorViewSize);
 

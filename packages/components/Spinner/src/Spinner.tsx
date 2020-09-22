@@ -21,6 +21,11 @@ export type SpinnerTokens = {
    * Color of spinner
    */
   color?: string;
+
+  /**
+   * Supported spinner sizes
+   */
+  size?: Size;
 };
 
 export type SpinnerProps = ViewProps & {
@@ -35,10 +40,12 @@ export type SpinnerProps = ViewProps & {
   animating?: boolean;
 
   /**
-   * Supported spinner sizes (default small)
+   * Supported spinner sizes
    */
   size?: Size;
 };
+
+const tokensThatAreAlsoProps: (keyof SpinnerTokens)[] = ['size'];
 
 export type NativeSpinnerViewProps = ViewProps & SpinnerProps & SpinnerTokens;
 
@@ -53,13 +60,22 @@ export const Spinner = compose<SpinnerType>({
   tokens: [
     {
       color: 'rgb(145,145,145)',
+      size: 'small',
     },
     spinnerName,
   ],
-  slotProps: {
-    root: buildProps((tokens) => ({ ...tokens }), []),
-  },
+  tokensThatAreAlsoProps,
   slots: { root: NativeSpinnerView },
+  slotProps: {
+    root: buildProps(
+      (tokens) => ({
+        color: tokens.color,
+        style: { height: tokens.size, width: tokens.size },
+        animating: true,
+      }),
+      ['color', 'size'],
+    ),
+  },
   render: (props: NativeSpinnerViewProps, useSlots: UseSlots<SpinnerType>) => {
     const size = ExportedNativeConstants.sizes[props.size || 'small'];
     const Root = useSlots(props).root;

@@ -5,7 +5,6 @@ import FluentUI
 class SpinnerViewManager: RCTViewManager {
 	override func view()->UIView! {
 		let activityIndicatorView = ActivityIndicatorView(size: .small)
-		activityIndicatorView.startAnimating()
 		return activityIndicatorView
 	}
 
