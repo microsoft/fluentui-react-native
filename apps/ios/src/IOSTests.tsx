@@ -24,10 +24,6 @@ import {
   LinkTest,
 } from '../../fluent-tester/src/RNTester/TestComponents/Link';
 import {
-  HOMEPAGE_SHIMMER_BUTTON,
-  ShimmerTest,
-} from '../../fluent-tester/src/RNTester/TestComponents/Shimmer';
-import {
   HOMEPAGE_PERSONA_BUTTON,
   PersonaTest,
 } from '../../fluent-tester/src/RNTester/TestComponents/Persona';
@@ -47,6 +43,10 @@ import {
   HOMEPAGE_SEPARATOR_BUTTON,
   SeparatorTest,
 } from '../../fluent-tester/src/RNTester/TestComponents/Separator';
+import {
+  HOMEPAGE_SHIMMER_BUTTON,
+  ShimmerTest,
+} from '../../fluent-tester/src/RNTester/TestComponents/Shimmer';
 import {
   HOMEPAGE_SVG_BUTTON,
   SvgTest,
@@ -92,14 +92,14 @@ export const iosTests: TestDescription[] = [
     testPage: HOMEPAGE_LINK_BUTTON,
   },
   {
-    name: 'Shimmer Test',
-    component: ShimmerTest,
-    testPage: HOMEPAGE_SHIMMER_BUTTON,
-  },
-  {
     name: 'Separator Test',
     component: SeparatorTest,
     testPage: HOMEPAGE_SEPARATOR_BUTTON,
+  },
+  {
+    name: 'Shimmer Test',
+    component: ShimmerTest,
+    testPage: HOMEPAGE_SHIMMER_BUTTON,
   },
   {
     name: 'Text Test',
