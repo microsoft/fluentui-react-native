@@ -1,5 +1,5 @@
 import { IOfficeThemingModule, IThemingModuleHelper, IEventEmitter } from './ThemingModule.types';
-import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
+import { getBaselinePlatformTheme } from '../../../../framework/theming-react-native/src/BaselinePlatformDefaults';
 import { OfficePalette as IOfficePalette } from '@uifabricshared/theming-ramp';
 import { createThemingModuleHelper } from './ThemingModuleHelpers';
 
