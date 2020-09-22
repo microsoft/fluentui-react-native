@@ -1,9 +1,7 @@
-import { IOfficeThemingModule, IThemingModuleHelper, IEventEmitter } from './ThemingModule.types';
-import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
-import { OfficePalette as IOfficePalette } from '@uifabricshared/theming-ramp';
-import { createThemingModuleHelper } from './ThemingModuleHelpers';
+import { OfficePalette } from '@fluentui-react-native/theme-types';
+import { OfficeThemingModule } from './officeThemingModule';
 
-const whiteColorsPalette: IOfficePalette = {
+const whiteColorsPalette: OfficePalette = {
   Bkg: 'antiquewhite',
   BkgHover: '#E6E6E6',
   BkgPressed: '#969696',
@@ -117,42 +115,23 @@ const whiteColorsPalette: IOfficePalette = {
   TextHeader: 'pink',
 };
 
-const taskPanePalette: IOfficePalette = {
-  ...whiteColorsPalette,
-  Bkg: '#E6E6E6',
-  BkgCtlEmphasis: 'green',
-  TextCtlEmphasis: 'white',
-};
-
-const baseline = getBaselinePlatformTheme();
-
-export const mockGetPaletteImpl = (pal?: string) => {
-  return (pal === 'TaskPane' && taskPanePalette) || whiteColorsPalette;
-};
-
-const mockModule: IOfficeThemingModule = {
+export const fallbackOfficeModule: OfficeThemingModule = {
   ramps: {
     App: ['#F8F8F8', '#EFF6FC', '#BBDAF3', '#55A4E2', '#359EDD', '#0078d7', '#283E4A', '#030C13'],
     FluentGrays: ['#FAF9F8', '#797775', '#11100F'],
     ClassicGrays: ['#FFFFFF', '#737373', '#000000'],
     Sepias: ['#ECE6DE'],
   },
-  getPalette: mockGetPaletteImpl,
-  typography: baseline.typography,
-  fluentTypography: baseline.typography,
-};
-
-export function createMockThemingModule(module?: Partial<IOfficeThemingModule>) {
-  return { ...mockModule, ...module };
-}
-
-export function createMockThemingModuleHelper(
-  module?: Partial<IOfficeThemingModule>,
-  emitter?: IEventEmitter,
-  behaviorOverrides?: Partial<IThemingModuleHelper>,
-): IThemingModuleHelper {
-  return {
-    ...createThemingModuleHelper(createMockThemingModule(module), emitter),
-    ...behaviorOverrides,
-  };
-}
+  getPalette: (pal?: string) => {
+    return pal === 'TaskPane'
+      ? {
+          ...whiteColorsPalette,
+          Bkg: '#E6E6E6',
+          BkgCtlEmphasis: 'green',
+          TextCtlEmphasis: 'white',
+        }
+      : whiteColorsPalette;
+  },
+  typography: {},
+  fluentTypography: {},
+} as OfficeThemingModule;

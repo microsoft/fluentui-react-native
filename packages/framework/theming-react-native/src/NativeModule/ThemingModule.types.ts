@@ -1,29 +1,6 @@
-import { ITypography, ColorValue } from '@uifabricshared/theming-ramp';
 import { ITheme, IPartialTheme, OfficePalette as IOfficePalette } from '@uifabricshared/theming-ramp';
 import { IProcessTheme } from '@uifabricshared/theme-registry';
-
-export type PlatformDefaultsChangedArgs = { hostThemeSetting: string };
-export type PlatformDefaultsChangedCallback = (args?: PlatformDefaultsChangedArgs) => void;
-
-export interface ICxxException {
-  message: string;
-}
-
-export interface INativeColorRamps {
-  FluentGrays: ColorValue[];
-  ClassicGrays: ColorValue[];
-  App: ColorValue[];
-  Sepias: ColorValue[];
-  [key: string]: ColorValue[];
-}
-
-export interface IOfficeThemingModule {
-  getPalette(palette?: string): IOfficePalette | ICxxException;
-  typography: object;
-  fluentTypography: ITypography;
-  ramps: INativeColorRamps;
-  initialHostThemeSetting?: string;
-}
+import { PlatformDefaultsChangedCallback } from '@fluentui-react-native/win32-theme';
 
 export interface IEventEmitter {
   addListener: (event: string, PlatformDefaultsChangedCallback) => void;

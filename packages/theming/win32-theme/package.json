@@ -32,6 +32,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@fluentui-react-native/default-theme": ">=0.1.2 <1.0.0",
     "@fluentui-react-native/theme-types": ">=0.1.2 <1.0.0",
     "@fluentui-react-native/theme": ">=0.1.1 <1.0.0"
   },
