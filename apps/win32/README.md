@@ -1,6 +1,6 @@
 # Running the FluentUI Tester on Win32
 
-`FluentUI Tester` is the test app that we use to test our FluentUI components during development. It uses the [react-native-test app](https://github.com/microsoft/react-native-test-app) under the covers, and loads the fluent-tester bundle.
+`FluentUI Tester` is the test app that we use to test our FluentUI components during development.
 
 ## Launch `FluentUI Tester` app on Win32
 
