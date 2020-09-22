@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Tue, 22 Sep 2020 20:14:25 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.3.14",
+      "version": "0.3.14",
+      "comments": {
+        "none": [
+          {
+            "comment": "added android documentation for fluentui tester, and updated top level page to point to platform specific docs.",
+            "author": "ejlayne@microsoft.com",
+            "commit": "4b420148323603021c055d50f5415a27ca44f023",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 11 Sep 2020 20:25:42 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.3.13",
       "version": "0.3.13",

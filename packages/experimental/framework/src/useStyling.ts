@@ -12,21 +12,21 @@ import {
   buildProps as buildPropsBase,
   BuildPropsBase,
 } from '@fluentui-react-native/use-styling';
-import { ITheme } from '@uifabricshared/theming-ramp';
+import { Theme } from '@fluentui-react-native/theme-types';
 import { themeHelper } from './themeHelper';
 
-export type BuildProps<TProps, TTokens> = BuildPropsBase<TProps, TTokens, ITheme>;
+export type BuildProps<TProps, TTokens> = BuildPropsBase<TProps, TTokens, Theme>;
 
 export function buildProps<TProps, TTokens>(
-  fn: (tokens: TTokens, theme: ITheme) => TProps,
+  fn: (tokens: TTokens, theme: Theme) => TProps,
   keys?: (keyof TTokens)[],
 ): BuildProps<TProps, TTokens> {
-  return buildPropsBase<TProps, TTokens, ITheme>(fn, keys);
+  return buildPropsBase<TProps, TTokens, Theme>(fn, keys);
 }
 
-export type TokensFromTheme<TTokens> = TokensFromThemeBase<TTokens, ITheme>;
-export type TokenSettings<TTokens> = TokenSettingsBase<TTokens, ITheme>;
-export type UseStylingOptions<TProps, TSlotProps, TTokens> = UseStylingOptionsBase<TProps, TSlotProps, TTokens, ITheme>;
+export type TokensFromTheme<TTokens> = TokensFromThemeBase<TTokens, Theme>;
+export type TokenSettings<TTokens> = TokenSettingsBase<TTokens, Theme>;
+export type UseStylingOptions<TProps, TSlotProps, TTokens> = UseStylingOptionsBase<TProps, TSlotProps, TTokens, Theme>;
 
 /**
  * Construct a useStyling hook which returns styled slot props based on props and tokens defined in options and in the theme
