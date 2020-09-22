@@ -1,44 +1,44 @@
-import { IFontFamilies, IFontSizes, IFontWeights, IVariants, ITypography } from './Typography.types';
+import { FontFamilies, FontSizes, FontWeights, Variants, Typography } from '@fluentui-react-native/theme-types';
 import { resolveFontFamily, resolveFontSize, resolveFontWeight } from './Typography';
 
 const families = {
   primary: 'Verdana',
-  monospace: 'Courier New'
-} as IFontFamilies;
+  monospace: 'Courier New',
+} as FontFamilies;
 
 const sizes = {
   caption: 8,
-  subheader: 16
-} as IFontSizes;
+  subheader: 16,
+} as FontSizes;
 
 const weights = {
   regular: '500',
-  semiBold: '700'
-} as IFontWeights;
+  semiBold: '700',
+} as FontWeights;
 
 const variants = {
   captionStandard: {
     face: 'Verdana',
     size: 8,
-    weight: '500'
+    weight: '500',
   },
   subheaderStandard: {
     face: 'Verdana',
     size: 16,
-    weight: '500'
+    weight: '500',
   },
   subheaderSemibold: {
     face: 'Verdana',
     size: 16,
-    weight: '700'
-  }
-} as IVariants;
+    weight: '700',
+  },
+} as Variants;
 
-const typography: ITypography = {
+const typography: Typography = {
   families,
   sizes,
   weights,
-  variants
+  variants,
 };
 
 describe('Typography tests', () => {

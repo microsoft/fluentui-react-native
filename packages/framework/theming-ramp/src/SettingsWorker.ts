@@ -1,4 +1,4 @@
-import { ITheme } from './Theme.types';
+import { Theme } from '@fluentui-react-native/theme-types';
 import { IComponentSettings } from '@uifabricshared/foundation-settings';
 
 /** helper to strip out the component settings specific bits from the returned structure */
@@ -17,6 +17,6 @@ export function returnAsSlotProps(target: IComponentSettings): IComponentSetting
  * @param name - name of the settings entry to retrieve
  * @param overrides - optional override lookup object to conditionally apply overrides
  */
-export function getSettings(theme: ITheme, name: string): IComponentSettings {
+export function getSettings(theme: Theme, name: string): IComponentSettings {
   return (theme.components && theme.components[name]) || undefined;
 }

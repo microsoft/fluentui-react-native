@@ -2,6 +2,27 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Tue, 22 Sep 2020 04:57:02 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.6",
+      "version": "0.10.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add theme-types package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "988fdbce67d0fcf65401bb1717d37dca8d002d8a",
+            "package": "@uifabricshared/theming-ramp"
+          },
+          {
+            "comment": "add default theme package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "abd2752a90e12cf67dec5d80337fd9abb8478c2c",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 11 Sep 2020 20:25:42 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.10.5",
       "version": "0.10.5",

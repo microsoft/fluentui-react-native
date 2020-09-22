@@ -48,10 +48,13 @@ import {
   ShimmerTest,
 } from '../../fluent-tester/src/RNTester/TestComponents/Shimmer';
 import {
+<<<<<<< HEAD
   HOMEPAGE_SPINNER_BUTTON,
   SpinnerTest,
 } from '../../fluent-tester/src/RNTester/TestComponents/Spinner';
 import {
+=======
+>>>>>>> 901b3a534df10a1d471c815349651500d0237575
   HOMEPAGE_SVG_BUTTON,
   SvgTest,
 } from '../../fluent-tester/src/RNTester/TestComponents/Svg';
@@ -109,6 +112,11 @@ export const iosTests: TestDescription[] = [
     name: 'Spinner Test',
     component: SpinnerTest,
     testPage: HOMEPAGE_SPINNER_BUTTON,
+  },
+  {
+    name: 'Shimmer Test',
+    component: ShimmerTest,
+    testPage: HOMEPAGE_SHIMMER_BUTTON,
   },
   {
     name: 'Text Test',

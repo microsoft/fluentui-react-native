@@ -11,7 +11,10 @@ Pod::Spec.new do |s|
   s.author           = { "Microsoft" => "fluentuinativeowners@microsoft.com"}
   s.source           = { :git => "https://github.com/microsoft/fluentui-react-native.git", :tag => "#{s.version}" }
   s.swift_version    = "5"
+<<<<<<< HEAD
   s.module_name      = 'FluentUIReactNativeShimmer'
+=======
+>>>>>>> 901b3a534df10a1d471c815349651500d0237575
 
   s.ios.deployment_target = "11.0"
   s.ios.source_files      = "ios/*.{swift,h,m}"

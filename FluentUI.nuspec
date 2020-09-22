@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.FluentUI.ReactNative</id>
+    <version>$buildNumber$</version>
+    <description>A react-native component library that implements the Fluent Design System.</description>
+    <authors>Microsoft</authors>
+    <projectUrl>https://github.com/microsoft/fluentui-react-native</projectUrl>
+    <repository type="git" url="$repoUri$" commit="$commitId$" />
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+  </metadata>
+</package>
