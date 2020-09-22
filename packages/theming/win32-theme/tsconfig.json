@@ -4,5 +4,5 @@
     "outDir": "lib",
     "types": ["node", "jest"]
   },
-  "include": ["src"]
+  "include": ["src", "../../framework/theming-react-native/src/NativeModule"]
 }
