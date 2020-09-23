@@ -1,4 +1,4 @@
-import { ColorValue } from '@uifabricshared/theming-ramp';
+import { ColorValue } from './Color.types';
 
 export interface OfficePalette {
   /**
