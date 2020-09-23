@@ -1,14 +1,14 @@
 import * as React from 'react';
-import {IIconProps, ISvgIconProps, IFontIconProps} from './Icon.types';
+import {IconProps, SvgIconProps, FontIconProps} from './Icon.types';
 import * as ReactNative from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import {SvgUri} from 'react-native-svg'
 import * as assetRegistry from 'react-native/Libraries/Image/AssetRegistry';
 import { stagedComponent, useTheme, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
 
-const rasterImageStyleCache = getMemoCache<ImageStyle>();
+const rasterImageStyleCache = getMemoCache<ReactNative.ImageStyle>();
 
-function renderRasterImage(iconProps: IIconProps) {
+function renderRasterImage(iconProps: IconProps) {
   const { width, height } = iconProps;
   const style = rasterImageStyleCache({
     width: width,
@@ -25,8 +25,8 @@ function renderRasterImage(iconProps: IIconProps) {
 
 const fontStyleMemoCache = getMemoCache();
 
-function renderFontIcon(iconProps: IIconProps) {
-  const fontSource: IFontIconProps = iconProps.fontSource;
+function renderFontIcon(iconProps: IconProps) {
+  const fontSource: FontIconProps = iconProps.fontSource;
 
   const style = fontStyleMemoCache({
       fontSrcFile: fontSource.fontSrcFile,
@@ -47,8 +47,8 @@ function renderFontIcon(iconProps: IIconProps) {
   );
 }
 
-function renderSvg(iconProps: IIconProps) {
-  const svgIconProps: ISvgIconProps = iconProps.svgSource;
+function renderSvg(iconProps: IconProps) {
+  const svgIconProps: SvgIconProps = iconProps.svgSource;
   const { width, height } = iconProps;
   const viewBox = iconProps.svgSource.viewBox;
 
@@ -79,17 +79,17 @@ function renderSvg(iconProps: IIconProps) {
 }
 
 
-export const Icon = stagedComponent((props: IIconProps) => {
+export const Icon = stagedComponent((props: IconProps) => {
   const theme = useTheme();
 
-  return (rest: IIconProps) => {
+  return (rest: IconProps) => {
     const color = props.color || theme.colors.buttonText;
 
     const style = {
       color: color
     };
 
-    const newProps = mergeProps<IIconProps>(style, props, rest);
+    const newProps = mergeProps<IconProps>(style, props, rest);
 
     if (newProps.svgSource) {
       return renderSvg(newProps);

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui/react-native';
-import { Icon, IRasterImageIconProps, ISvgIconProps, IFontIconProps} from '@fluentui-react-native/icon';
+import { Icon, RasterImageIconProps, SvgIconProps, FontIconProps} from '@fluentui-react-native/icon';
 
 
 const testImage = require('./assets/testicon.png');
@@ -10,19 +10,19 @@ const testTtf = require('./assets/Font Awesome 5 Free-Solid-900.otf');
 import TestSvg from './assets/test.svg';
 
 export const IconTest: React.FunctionComponent<{}> = () => {
-  const rasterProps: IRasterImageIconProps = { src: testImage };
+  const rasterProps: RasterImageIconProps = { src: testImage };
 
-  const svgProps: ISvgIconProps = {
+  const svgProps: SvgIconProps = {
     src: TestSvg,
     viewBox: '0 0 500 500'
   };
 
-  const svgUriProps: ISvgIconProps = {
+  const svgUriProps: SvgIconProps = {
     uri: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Example.svg',
     viewBox: '0 0 100 100'
   };
 
-  const fontProps: IFontIconProps = {
+  const fontProps: FontIconProps = {
     fontFamily: `Font Awesome 5 Free`,
     fontSrcFile: testTtf,
     codepoint: 0xf083,

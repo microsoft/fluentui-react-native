@@ -1,8 +1,8 @@
 import { SvgProps } from 'react-native-svg';
-import { AccessibilityProps, ImageProps, ImageStyle, TextStyle } from 'react-native';
+import { AccessibilityProps, ImageProps, ImageStyle, StyleProp, TextStyle } from 'react-native';
 export const iconName = 'Icon';
 
-export interface IFontIconProps
+export interface FontIconProps
 {
   fontFamily?: string;
   fontSrcFile?: string;
@@ -10,23 +10,23 @@ export interface IFontIconProps
   fontSize?: number;
 }
 
-export interface ISvgIconProps
+export interface SvgIconProps
 {
   uri?: string;
   src?: React.FC<SvgProps>;
   viewBox?: string;
 }
 
-export interface IRasterImageIconProps
+export interface RasterImageIconProps
 {
   src: ImageProps['source'];
 }
 
-export interface IIconProps extends AccessibilityProps
+export interface IconProps extends AccessibilityProps
 {
-  fontSource?: IFontIconProps;
-  svgSource?: ISvgIconProps;
-  rasterImageSource?: IRasterImageIconProps;
+  fontSource?: FontIconProps;
+  svgSource?: SvgIconProps;
+  rasterImageSource?: RasterImageIconProps;
   style?: StyleProp<ImageStyle | TextStyle>;
   width?: number;
   height?: number;
