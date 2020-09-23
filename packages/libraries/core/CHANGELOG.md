@@ -1,8 +1,16 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Tue, 22 Sep 2020 21:42:19 GMT and should not be manually modified.
+This log was last generated on Wed, 23 Sep 2020 18:31:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.4
+
+Wed, 23 Sep 2020 18:31:48 GMT
+
+### Patches
+
+- start publishing src to fix customer source maps (jasonmo@microsoft.com)
 
 ## 0.16.3
 

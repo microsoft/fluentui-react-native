@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/use-styling
 
-This log was last generated on Wed, 09 Sep 2020 21:36:19 GMT and should not be manually modified.
+This log was last generated on Wed, 23 Sep 2020 18:31:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.1
+
+Wed, 23 Sep 2020 18:31:48 GMT
+
+### Patches
+
+- start publishing src to fix customer source maps (jasonmo@microsoft.com)
 
 ## 0.3.0
 
