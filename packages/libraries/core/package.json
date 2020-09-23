@@ -32,7 +32,6 @@
     "@fluentui-react-native/contextual-menu": "0.4.1",
     "@fluentui-react-native/focus-trap-zone": ">=0.4.13 <1.0.0",
     "@fluentui-react-native/focus-zone": ">=0.2.2 <1.0.0",
-    "@fluentui-react-native/icon": "0.1.0",
     "@fluentui-react-native/link": ">=0.9.0 <1.0.0",
     "@fluentui-react-native/persona": ">=0.6.0 <1.0.0",
     "@fluentui-react-native/persona-coin": ">=0.4.0 <1.0.0",

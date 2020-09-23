@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
 import { View } from 'react-native';
-import { Icon, IRasterImageIconProps, ISvgIconProps, IFontIconProps, Text } from '@fluentui/react-native';
+import { Text } from '@fluentui/react-native';
+import { Icon, IRasterImageIconProps, ISvgIconProps, IFontIconProps} from '@fluentui-react-native/icon';
+
 
 const testImage = require('./assets/testicon.png');
 const testTtf = require('./assets/Font Awesome 5 Free-Solid-900.otf');
