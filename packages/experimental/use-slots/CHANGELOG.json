@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/use-slots",
   "entries": [
     {
+      "date": "Wed, 23 Sep 2020 18:31:48 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.3.7",
+      "version": "0.3.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "start publishing src to fix customer source maps",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b3d7b5ba710bc581a6f4db91c91e4ffc185fc427",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 11 Sep 2020 20:25:42 GMT",
       "tag": "@fluentui-react-native/use-slots_v0.3.6",
       "version": "0.3.6",

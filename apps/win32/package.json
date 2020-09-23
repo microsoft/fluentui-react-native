@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester-win32",
-  "version": "0.3.14",
+  "version": "0.3.16",
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
@@ -27,8 +27,8 @@
     "generate-report": "allure generate allure-results --clean && allure open"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.7.0",
-    "@uifabricshared/theming-react-native": "0.7.77",
+    "@fluentui-react-native/tester": "^0.7.2",
+    "@uifabricshared/theming-react-native": "0.7.78",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-svg": "^11.0.0"

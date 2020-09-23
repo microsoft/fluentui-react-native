@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-settings",
   "entries": [
     {
+      "date": "Wed, 23 Sep 2020 18:31:48 GMT",
+      "tag": "@uifabricshared/foundation-settings_v0.7.1",
+      "version": "0.7.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "start publishing src to fix customer source maps",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b3d7b5ba710bc581a6f4db91c91e4ffc185fc427",
+            "package": "@uifabricshared/foundation-settings"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 11 Sep 2020 20:25:42 GMT",
       "tag": "@uifabricshared/foundation-settings_v0.7.0",
       "version": "0.7.0",
