@@ -2,7 +2,7 @@ import { ITheme, resolvePartialTheme, OfficePalette } from '@uifabricshared/them
 import { IThemingModuleHelper, IEventEmitter } from './ThemingModule.types';
 import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
 import {
-  enableThemingModule,
+  enableNativeModule,
   OfficeThemingModule,
   createPartialOfficeTheme,
   CxxException,
@@ -24,7 +24,7 @@ function updatePaletteInCache(module: OfficeThemingModule, cache: PaletteCache, 
 }
 
 const getPaletteCacheKey = (palette?: string) => {
-  return !enableThemingModule() ? 'debug' : palette || 'WhiteColors';
+  return !enableNativeModule() ? 'debug' : palette || 'WhiteColors';
 };
 
 function ensurePalette(module: OfficeThemingModule, paletteCache: PaletteCache, palette?: string): OfficePalette {

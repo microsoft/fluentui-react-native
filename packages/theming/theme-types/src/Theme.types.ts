@@ -1,6 +1,6 @@
-import { ThemeColorDefinition } from './color.types';
+import { ThemeColorDefinition } from './Color.types';
 import { OfficePalette } from './palette.types';
-import { Typography, PartialTypography } from './typography.types';
+import { Typography, PartialTypography } from './Typography.types';
 
 export interface Spacing {
   s2: string;

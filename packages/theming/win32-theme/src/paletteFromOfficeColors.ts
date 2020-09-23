@@ -1,6 +1,6 @@
-import { IPalette, OfficePalette } from '@uifabricshared/theming-ramp';
+import { Palette, OfficePalette } from '@fluentui-react-native/theme-types';
 
-export function paletteFromOfficeColors(p: OfficePalette): IPalette {
+export function paletteFromOfficeColors(p: OfficePalette): Palette {
   return {
     background: p.Bkg,
     bodyStandoutBackground: p.Bkg,
