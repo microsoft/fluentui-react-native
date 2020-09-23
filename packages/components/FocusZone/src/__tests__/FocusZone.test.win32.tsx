@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { FocusZone } from '..';
-import { Button } from '../../../Button/src';
+import { Button } from 'react-native';
 import * as renderer from 'react-test-renderer';
+
+const onPress = () => {
+  return;
+}
 
 describe('FocusZone No Props', () => {
   it('No children', () => {
@@ -12,7 +16,7 @@ describe('FocusZone No Props', () => {
   it('One child', () => {
     const tree = renderer.create(
       <FocusZone>
-        <Button />
+        <Button title="button" onPress={onPress} />
       </FocusZone>
     ).toJSON();
     expect(tree).toMatchSnapshot();
@@ -21,8 +25,8 @@ describe('FocusZone No Props', () => {
   it('Two children', () => {
     const tree = renderer.create(
       <FocusZone>
-        <Button />
-        <Button />
+        <Button title="button" onPress={onPress} />
+        <Button title="button" onPress={onPress} />
       </FocusZone>
     ).toJSON();
     expect(tree).toMatchSnapshot();
@@ -31,9 +35,9 @@ describe('FocusZone No Props', () => {
   it('Three children', () => {
     const tree = renderer.create(
       <FocusZone>
-        <Button />
-        <Button />
-        <Button />
+        <Button title="button" onPress={onPress} />
+        <Button title="button" onPress={onPress} />
+        <Button title="button" onPress={onPress} />
       </FocusZone>
     ).toJSON();
     expect(tree).toMatchSnapshot();
@@ -44,9 +48,9 @@ describe('FocusZone With Props', () => {
   it('defaultTabbableElement Prop', () => {
     const tree = renderer.create(
       <FocusZone defaultTabbableElement={null}>
-        <Button />
-        <Button />
-        <Button />
+        <Button title="button" onPress={onPress} />
+        <Button title="button" onPress={onPress} />
+        <Button title="button" onPress={onPress} />
       </FocusZone>
     ).toJSON();
     expect(tree).toMatchSnapshot();
@@ -55,9 +59,9 @@ describe('FocusZone With Props', () => {
   it('focusZoneDirection Prop', () => {
     const tree = renderer.create(
       <FocusZone focusZoneDirection='bidirectional'>
-        <Button />
-        <Button />
-        <Button />
+        <Button title="button" onPress={onPress} />
+        <Button title="button" onPress={onPress} />
+        <Button title="button" onPress={onPress} />
       </FocusZone>
     ).toJSON();
     expect(tree).toMatchSnapshot();
@@ -66,9 +70,9 @@ describe('FocusZone With Props', () => {
   it('disabled Prop', () => {
     const tree = renderer.create(
       <FocusZone disabled={true}>
-        <Button />
-        <Button />
-        <Button />
+        <Button title="button" onPress={onPress} />
+        <Button title="button" onPress={onPress} />
+        <Button title="button" onPress={onPress} />
       </FocusZone>
     ).toJSON();
     expect(tree).toMatchSnapshot();
@@ -77,9 +81,9 @@ describe('FocusZone With Props', () => {
   it('navigateAtEnd Prop', () => {
     const tree = renderer.create(
       <FocusZone navigateAtEnd='NavigateWrap'>
-        <Button />
-        <Button />
-        <Button />
+        <Button title="button" onPress={onPress} />
+        <Button title="button" onPress={onPress} />
+        <Button title="button" onPress={onPress} />
       </FocusZone>
     ).toJSON();
     expect(tree).toMatchSnapshot();
@@ -88,9 +92,9 @@ describe('FocusZone With Props', () => {
   it('use2DNavigation Prop', () => {
     const tree = renderer.create(
       <FocusZone use2DNavigation={true}>
-        <Button />
-        <Button />
-        <Button />
+        <Button title="button" onPress={onPress} />
+        <Button title="button" onPress={onPress} />
+        <Button title="button" onPress={onPress} />
       </FocusZone>
     ).toJSON();
     expect(tree).toMatchSnapshot();
@@ -99,9 +103,9 @@ describe('FocusZone With Props', () => {
   it('All Props', () => {
     const tree = renderer.create(
       <FocusZone disabled={false} use2DNavigation={true} defaultTabbableElement={null} navigateAtEnd='NavigateStopAtEnds' focusZoneDirection='vertical' >
-        <Button />
-        <Button />
-        <Button />
+        <Button title="button" onPress={onPress} />
+        <Button title="button" onPress={onPress} />
+        <Button title="button" onPress={onPress} />
       </FocusZone>
     ).toJSON();
     expect(tree).toMatchSnapshot();

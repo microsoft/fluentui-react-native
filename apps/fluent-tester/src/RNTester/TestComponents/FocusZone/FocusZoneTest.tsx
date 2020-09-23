@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Picker, Switch } from 'react-native';
-import { FocusZone, Button, Text, RadioGroup, RadioButton, FocusZoneDirection, NavigateAtEnd } from '@fluentui/react-native';
+import { FocusZone, Button, Text, RadioGroup, RadioButton, FocusZoneDirection, NavigateAtEnd, Checkbox } from '@fluentui/react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { FOCUSZONE_TESTPAGE } from './consts';
 import { focusZoneTestStyles, stackStyleFocusZone } from './styles';
@@ -48,6 +48,12 @@ const navigation2DFocusZone: React.FunctionComponent<{}> = () => {
 const commonUsageFocusZone: React.FunctionComponent<{}> = () => {
   return (
     <View>
+      <Button content="Outside FocusZone" />
+      <FocusZone disabled={true}>
+        <Checkbox label="disabled" />
+        <Checkbox label="disabled" />
+        <Checkbox label="disabled" />
+      </FocusZone>
       <Button content="Outside FocusZone" />
       <RadioGroup label="FocusZone RadioGroup with Circular Navigation" defaultSelectedKey="A">
         <FocusZone navigateAtEnd='NavigateWrap'>
