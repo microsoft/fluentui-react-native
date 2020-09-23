@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FocusZone } from '..';
-import { Button } from '@fluentui/react-native';
+import { Button } from '../../../Button';
 import * as renderer from 'react-test-renderer';
 
 describe('FocusZone No Props', () => {
