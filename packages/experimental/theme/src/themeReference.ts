@@ -39,10 +39,14 @@ export class ThemeReference<TTheme extends Theme = Theme, TPartial extends Parti
    * @param recipes - any number of recipies to be applied on top of the theme object
    */
   constructor(base: TTheme | ThemeReference<TTheme, TPartial>, ...recipes: ThemeRecipe<TTheme, TPartial>[]) {
+    this.listeners = [];
     this.recipes = recipes;
     this.parentRef = base instanceof ThemeReference ? base : undefined;
     if (this.parentRef) {
-      this.parentRef.addOnThemeChanged(this.invalidate);
+      const onChanged = () => {
+        this.invalidate();
+      };
+      this.parentRef.addOnThemeChanged(onChanged);
     }
     this.getParent = () => (this.parentRef ? this.parentRef.theme : (base as TTheme));
   }
@@ -54,7 +58,7 @@ export class ThemeReference<TTheme extends Theme = Theme, TPartial extends Parti
     if (!this.themeData) {
       let theme = this.getParent();
       for (const recipe of this.recipes) {
-        theme = mergeTheme(theme, typeof recipe === 'function' ? recipe(theme) : theme);
+        theme = mergeTheme(theme, typeof recipe === 'function' ? recipe(theme) : recipe);
       }
       this.themeData = theme;
     }
@@ -91,7 +95,7 @@ export class ThemeReference<TTheme extends Theme = Theme, TPartial extends Parti
    * since the recipes changed.
    */
   public update(...recipes: ThemeRecipe<TTheme, TPartial>[]): void {
-    this.recipes = recipes;
+    this.recipes = recipes || [];
     this.invalidate();
   }
 }
