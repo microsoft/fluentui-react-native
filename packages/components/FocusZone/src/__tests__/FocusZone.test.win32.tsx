@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FocusZone } from '..';
-import { Button } from '../../../Button';
+import { Button } from '../../../Button/src';
 import * as renderer from 'react-test-renderer';
 
 describe('FocusZone No Props', () => {
