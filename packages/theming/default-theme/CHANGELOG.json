@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/default-theme",
+  "entries": [
+    {
+      "date": "Tue, 22 Sep 2020 04:57:02 GMT",
+      "tag": "@fluentui-react-native/default-theme_v0.1.2",
+      "version": "0.1.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add default theme package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "abd2752a90e12cf67dec5d80337fd9abb8478c2c",
+            "package": "@fluentui-react-native/default-theme"
+          }
+        ]
+      }
+    }
+  ]
+}

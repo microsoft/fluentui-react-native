@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update a11y properties",
-  "packageName": "@fluentui-react-native/button",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-09-01T20:03:49.488Z"
-}
