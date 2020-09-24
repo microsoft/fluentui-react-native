@@ -9,7 +9,7 @@ PODS:
     - React-Core (= 0.62.2)
     - React-jsi (= 0.62.2)
     - ReactCommon/turbomodule/core (= 0.62.2)
-  - FluentUI-React-Native-Shimmer (0.2.2):
+  - FluentUI-React-Native-Shimmer (0.2.4):
     - MicrosoftFluentUI (~> 0.1.12)
     - React
   - FluentUI-React-Native-Spinner (0.1.0):
@@ -362,7 +362,7 @@ SPEC CHECKSUMS:
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e
-  FluentUI-React-Native-Shimmer: 44fe634da0f1a4b0a865d4d08253ca4bf354d80a
+  FluentUI-React-Native-Shimmer: e45d8125fe9e40cd173d4ab59fc1b784c839f3ba
   FluentUI-React-Native-Spinner: ef9bf223c7a8c37609e26e20321fa2d81f5a7203
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28

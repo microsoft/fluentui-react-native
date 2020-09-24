@@ -70,19 +70,17 @@ export const Spinner = compose<SpinnerType>({
     root: buildProps(
       (tokens) => ({
         color: tokens.color,
-        style: { height: tokens.size, width: tokens.size },
+        style: {
+          height: ExportedNativeConstants.sizes[tokens.size],
+          width: ExportedNativeConstants.sizes[tokens.size],
+        },
         animating: true,
       }),
       ['color', 'size'],
     ),
   },
   render: (props: NativeSpinnerViewProps, useSlots: UseSlots<SpinnerType>) => {
-    const size = ExportedNativeConstants.sizes[props.size || 'small'];
     const Root = useSlots(props).root;
-    return (rest: NativeSpinnerViewProps, children: React.ReactNode) => (
-      <Root {...mergeProps(props, rest)} style={[props.style, { height: size, width: size }]}>
-        {children}
-      </Root>
-    );
+    return (rest: NativeSpinnerViewProps, children: React.ReactNode) => <Root {...mergeProps(props, rest)}>{children}</Root>;
   },
 });
