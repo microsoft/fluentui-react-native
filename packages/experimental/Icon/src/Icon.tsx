@@ -1,19 +1,18 @@
 import * as React from 'react';
-import {IconProps, SvgIconProps, FontIconProps} from './Icon.types';
+import { IconProps, SvgIconProps, FontIconProps } from './Icon.types';
 import * as ReactNative from 'react-native';
 import { Text } from '@fluentui-react-native/text';
-import {SvgUri} from 'react-native-svg'
+import { SvgUri } from 'react-native-svg'
+import { mergeStyles } from '@fluentui-react-native/framework';
 import * as assetRegistry from 'react-native/Libraries/Image/AssetRegistry';
-import { stagedComponent, useTheme, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
+import { stagedComponent, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
+import { useTheme } from '@uifabricshared/theming-react-native';
 
 const rasterImageStyleCache = getMemoCache<ReactNative.ImageStyle>();
 
 function renderRasterImage(iconProps: IconProps) {
   const { width, height } = iconProps;
-  const style = rasterImageStyleCache({
-    width: width,
-    height:height
-  }, [width, height])[0];
+  const style = mergeStyles(iconProps.style, rasterImageStyleCache({ width: width, height: height }, [width, height])[0]);
 
   return (
     <ReactNative.Image
@@ -23,6 +22,12 @@ function renderRasterImage(iconProps: IconProps) {
   )
 }
 
+function fontFamilyFromFontSrcFile(fontSrcFile: string, fontFamily: string): string
+{
+  const asset = assetRegistry.getAssetByID(fontSrcFile);
+  return `${fontFamily}#${asset.httpServerLocation}/${asset.name}.${asset.type}`;
+}
+
 const fontStyleMemoCache = getMemoCache();
 
 function renderFontIcon(iconProps: IconProps) {
@@ -30,16 +35,11 @@ function renderFontIcon(iconProps: IconProps) {
 
   const style = fontStyleMemoCache({
       fontSrcFile: fontSource.fontSrcFile,
-      fontFamily: fontSource.fontFamily,
+      fontFamily: fontSource.fontSrcFile != undefined ? fontFamilyFromFontSrcFile(fontSource.fontSrcFile, fontSource.fontFamily) : fontSource.fontFamily,
       codepoint: fontSource.codepoint,
       fontSize: fontSource.fontSize,
       color: iconProps.color
   }, [iconProps.color, fontSource.fontSrcFile, fontSource.fontFamily, fontSource.codepoint, fontSource.codepoint])[0];
-
-  if (style.fontSrcFile != undefined) {
-    const asset = assetRegistry.getAssetByID(style.fontSrcFile);
-    style.fontFamily = `${style.fontFamily}#${asset.httpServerLocation}/${asset.name}.${asset.type}`;
-  }
 
   const char = String.fromCharCode(fontSource.codepoint);
   return(
@@ -85,11 +85,11 @@ export const Icon = stagedComponent((props: IconProps) => {
   return (rest: IconProps) => {
     const color = props.color || theme.colors.buttonText;
 
-    const style = {
+    const baseProps = {
       color: color
     };
 
-    const newProps = mergeProps<IconProps>(style, props, rest);
+    const newProps = mergeProps<IconProps>(baseProps, props, rest);
 
     if (newProps.svgSource) {
       return renderSvg(newProps);
