@@ -20,20 +20,20 @@ function handlePaletteCall(palette: OfficePalette | CxxException): OfficePalette
  */
 export function createOfficeTheme(paletteName?: string): ThemeReference {
   const [module, emitter] = getThemingModule();
-  const ref = { module, emitter, defaultPalette: module.initialHostThemeSetting || '' };
+  const ref = { module, emitter, themeName: module.initialHostThemeSetting || '' };
 
   const themeRef = new ThemeReference(defaultFluentTheme, () => {
-    const name = paletteName || ref.defaultPalette;
+    const name = paletteName || '';
     const palette = handlePaletteCall(ref.module.getPalette(name));
-    return createPartialOfficeTheme(module, palette);
+    return createPartialOfficeTheme(module, ref.themeName, palette);
   });
 
   // set up the callback for theme changes on the native side
   const onPlatformDefaultsChanged = (args: PlatformDefaultsChangedArgs) => {
-    ref.defaultPalette = (args && args.hostThemeSetting) || ref.defaultPalette;
+    ref.themeName = (args && args.hostThemeName) || ref.themeName;
     themeRef.invalidate();
   };
-  emitter.addListener('onPlatformDefaultsChanged', onPlatformDefaultsChanged);
+  emitter && emitter.addListener('onPlatformDefaultsChanged', onPlatformDefaultsChanged);
 
   // now return the theme reference
   return themeRef;

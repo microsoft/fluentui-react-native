@@ -1,20 +1,10 @@
-import { OfficeThemingModule } from './officeThemingModule';
-import { NativeEventEmitter, NativeModules } from 'react-native';
-import { enableNativeModule } from './enableNativeModule';
+import { NativeEventEmitter } from 'react-native';
 import { fallbackOfficeModule } from './fallbackOfficeModule';
+import { OfficeThemingModule } from './officeThemingModule';
 
-declare module 'react-native' {
-  interface NativeModulesStatic {
-    Theming: OfficeThemingModule & EventSubscriptionVendor;
-  }
-}
-
+/**
+ * implementations for react-native-web, where the native module will not exist. In this case just use the full fallback implementation
+ */
 export function getThemingModule(): [OfficeThemingModule, NativeEventEmitter | undefined] {
-  // if the native module exists and we are cleared to use it return the module + an emitter for it
-  if (enableNativeModule() && NativeModules && NativeModules.Theming) {
-    return [NativeModules.Theming, new NativeEventEmitter(NativeModules.Theming)];
-  }
-
-  // otherwise use the fallback module
   return [fallbackOfficeModule, undefined];
 }

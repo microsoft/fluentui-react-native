@@ -115,6 +115,17 @@ const whiteColorsPalette: OfficePalette = {
   TextHeader: 'pink',
 };
 
+export function fallbackGetPalette(pal?: string): OfficePalette {
+  return pal === 'TaskPane'
+    ? {
+        ...whiteColorsPalette,
+        Bkg: '#E6E6E6',
+        BkgCtlEmphasis: 'green',
+        TextCtlEmphasis: 'white',
+      }
+    : whiteColorsPalette;
+}
+
 export const fallbackOfficeModule: OfficeThemingModule = {
   ramps: {
     App: ['#F8F8F8', '#EFF6FC', '#BBDAF3', '#55A4E2', '#359EDD', '#0078d7', '#283E4A', '#030C13'],
@@ -122,16 +133,7 @@ export const fallbackOfficeModule: OfficeThemingModule = {
     ClassicGrays: ['#FFFFFF', '#737373', '#000000'],
     Sepias: ['#ECE6DE'],
   },
-  getPalette: (pal?: string) => {
-    return pal === 'TaskPane'
-      ? {
-          ...whiteColorsPalette,
-          Bkg: '#E6E6E6',
-          BkgCtlEmphasis: 'green',
-          TextCtlEmphasis: 'white',
-        }
-      : whiteColorsPalette;
-  },
+  getPalette: fallbackGetPalette,
   typography: {},
   fluentTypography: {},
 } as OfficeThemingModule;

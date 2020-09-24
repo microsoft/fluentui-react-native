@@ -16,7 +16,7 @@ const createColorRamp = ({ values, index = -1 }: Partial<ColorRamp>) => ({
  * @param module - theming native module, either the real one or a mock implementation
  * @param palette - Office palette colors, if they have been sucessfully retrieved
  */
-export function createPartialOfficeTheme(module: OfficeThemingModule, palette?: OfficePalette): PartialTheme {
+export function createPartialOfficeTheme(module: OfficeThemingModule, themeName?: string, palette?: OfficePalette): PartialTheme {
   return {
     colors: {
       brand: createColorRamp({ values: module.ramps.App }),
@@ -29,5 +29,6 @@ export function createPartialOfficeTheme(module: OfficeThemingModule, palette?: 
     host: {
       palette: palette || {},
     },
+    ...(themeName && { name: themeName }),
   };
 }

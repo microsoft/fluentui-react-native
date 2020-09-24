@@ -2,7 +2,6 @@ import { ITheme, resolvePartialTheme, OfficePalette } from '@uifabricshared/them
 import { IThemingModuleHelper, IEventEmitter } from './ThemingModule.types';
 import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
 import {
-  enableNativeModule,
   OfficeThemingModule,
   createPartialOfficeTheme,
   CxxException,
@@ -24,7 +23,7 @@ function updatePaletteInCache(module: OfficeThemingModule, cache: PaletteCache, 
 }
 
 const getPaletteCacheKey = (palette?: string) => {
-  return !enableNativeModule() ? 'debug' : palette || 'WhiteColors';
+  return palette || 'WhiteColors';
 };
 
 function ensurePalette(module: OfficeThemingModule, paletteCache: PaletteCache, palette?: string): OfficePalette {
@@ -35,9 +34,9 @@ function ensurePalette(module: OfficeThemingModule, paletteCache: PaletteCache, 
   return paletteCache[key] || ({} as OfficePalette);
 }
 
-export function translateOfficeTheme(module: OfficeThemingModule, cache: PaletteCache, id?: string) {
+export function translateOfficeTheme(module: OfficeThemingModule, cache: PaletteCache, id?: string, themeName?: string) {
   const palette = ensurePalette(module, cache, id);
-  return createPartialOfficeTheme(module, palette);
+  return createPartialOfficeTheme(module, themeName, palette);
 }
 
 export function createThemingModuleHelper(themingModule?: OfficeThemingModule, emitter?: IEventEmitter): IThemingModuleHelper {
@@ -46,15 +45,12 @@ export function createThemingModuleHelper(themingModule?: OfficeThemingModule, e
   let _hostTheme = themingModule.initialHostThemeSetting || '';
   emitter &&
     emitter.addListener('onPlatformDefaultsChanged', (args: PlatformDefaultsChangedArgs) => {
-      _hostTheme = (args && args.hostThemeSetting) || _hostTheme;
+      _hostTheme = (args && args.hostThemeName) || _hostTheme;
       Object.keys(paletteCache).forEach((key: string) => delete paletteCache[key]);
     });
   return {
     getPlatformDefaults: (themeId?: string) => {
-      return resolvePartialTheme(
-        getBaselinePlatformTheme(),
-        Object.assign(translateOfficeTheme(themingModule, paletteCache, themeId), { name: _hostTheme }),
-      );
+      return resolvePartialTheme(getBaselinePlatformTheme(), translateOfficeTheme(themingModule, paletteCache, themeId, _hostTheme));
     },
     getPlatformThemeDefinition: (themeId?: string) => {
       return (_parent: ITheme) => {
