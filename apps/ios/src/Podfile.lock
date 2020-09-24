@@ -9,7 +9,10 @@ PODS:
     - React-Core (= 0.62.2)
     - React-jsi (= 0.62.2)
     - ReactCommon/turbomodule/core (= 0.62.2)
-  - FluentUI-React-Native-Shimmer (0.2.1):
+  - FluentUI-React-Native-Avatar (0.1.0):
+    - MicrosoftFluentUI (~> 0.1.12)
+    - React
+  - FluentUI-React-Native-Shimmer (0.2.4):
     - MicrosoftFluentUI (~> 0.1.12)
     - React
   - Folly (2018.10.22.00):
@@ -255,6 +258,7 @@ DEPENDENCIES:
   - DoubleConversion (from `../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../../../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native/Libraries/FBReactNativeSpec`)
+  - FluentUI-React-Native-Avatar (from `../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec`)
   - FluentUI-React-Native-Shimmer (from `../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec`)
   - Folly (from `../../../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
@@ -300,6 +304,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/Libraries/FBLazyVector"
   FBReactNativeSpec:
     :path: "../../../node_modules/react-native/Libraries/FBReactNativeSpec"
+  FluentUI-React-Native-Avatar:
+    :path: "../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec"
   FluentUI-React-Native-Shimmer:
     :path: "../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec"
   Folly:
@@ -356,7 +362,8 @@ SPEC CHECKSUMS:
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e
-  FluentUI-React-Native-Shimmer: a0a9a2f085ccdf3297cba44a3fba435546aa0e4b
+  FluentUI-React-Native-Avatar: 4043d10df5dad8107a2a71f9ea627fd62811ff34
+  FluentUI-React-Native-Shimmer: e45d8125fe9e40cd173d4ab59fc1b784c839f3ba
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   MicrosoftFluentUI: 6800fd4c017a5c5b946a24851ac2218748da45d2
@@ -385,6 +392,6 @@ SPEC CHECKSUMS:
   SwiftLint: bbfed21bf4451dcbd0f5cdbee44a18e06cf91b12
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
 
-PODFILE CHECKSUM: 42dde6a3630fe1498f92905782bda6387e25596e
+PODFILE CHECKSUM: 92b58eb5d35bda5732fd91cad06be75b94e8f6b1
 
 COCOAPODS: 1.9.3

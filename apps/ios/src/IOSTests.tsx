@@ -1,5 +1,9 @@
 import {TestDescription} from '../../fluent-tester/src/RNTester/TestComponents';
 import {
+  AvatarTest,
+  HOMEPAGE_AVATAR_BUTTON,
+} from '../../fluent-tester/src/RNTester/TestComponents/Avatar';
+import {
   ButtonTest,
   HOMEPAGE_BUTTON_BUTTON,
 } from '../../fluent-tester/src/RNTester/TestComponents/Button';
@@ -61,6 +65,11 @@ import {
 } from '../../fluent-tester/src/RNTester/TestComponents/Theme';
 
 export const iosTests: TestDescription[] = [
+  {
+    name: 'Avatar Test',
+    component: AvatarTest,
+    testPage: HOMEPAGE_AVATAR_BUTTON,
+  },
   {
     name: 'Button Test',
     component: ButtonTest,
