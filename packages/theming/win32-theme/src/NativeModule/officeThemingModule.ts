@@ -1,6 +1,6 @@
 import { ColorValue, OfficePalette, Typography } from '@fluentui-react-native/theme-types';
 
-export type PlatformDefaultsChangedArgs = { hostThemeName: string };
+export type PlatformDefaultsChangedArgs = { hostThemeSetting: string };
 export type PlatformDefaultsChangedCallback = (args?: PlatformDefaultsChangedArgs) => void;
 
 export interface CxxException {

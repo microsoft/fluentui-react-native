@@ -45,7 +45,7 @@ export function createThemingModuleHelper(themingModule?: OfficeThemingModule, e
   let _hostTheme = themingModule.initialHostThemeSetting || '';
   emitter &&
     emitter.addListener('onPlatformDefaultsChanged', (args: PlatformDefaultsChangedArgs) => {
-      _hostTheme = (args && args.hostThemeName) || _hostTheme;
+      _hostTheme = (args && args.hostThemeSetting) || _hostTheme;
       Object.keys(paletteCache).forEach((key: string) => delete paletteCache[key]);
     });
   return {

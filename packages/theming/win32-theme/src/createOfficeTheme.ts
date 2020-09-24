@@ -30,7 +30,7 @@ export function createOfficeTheme(paletteName?: string): ThemeReference {
 
   // set up the callback for theme changes on the native side
   const onPlatformDefaultsChanged = (args: PlatformDefaultsChangedArgs) => {
-    ref.themeName = (args && args.hostThemeName) || ref.themeName;
+    ref.themeName = (args && args.hostThemeSetting) || ref.themeName;
     themeRef.invalidate();
   };
   emitter && emitter.addListener('onPlatformDefaultsChanged', onPlatformDefaultsChanged);
