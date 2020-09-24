@@ -11,6 +11,7 @@ export interface OfficePalette {
   BkgPressed: ColorValue;
   BkgSelected: ColorValue;
   BkgSelectionHighlight: ColorValue;
+  BkgSubtle: ColorValue;
 
   /**
    * Transparent Control Colors
@@ -133,6 +134,11 @@ export interface OfficePalette {
   StrokeCtlSubtleDisabled: ColorValue;
   StrokeCtlSubtleKeyboard: ColorValue;
 
+  // standalone stroke colors
+  StrokeOnlyHover: ColorValue;
+  StrokeOnlyPressed: ColorValue;
+  StrokeOnlySelected: ColorValue;
+
   /**
    * Hyperlinks
    */
@@ -173,4 +179,65 @@ export interface OfficePalette {
    */
   BkgHeader: ColorValue;
   TextHeader: ColorValue;
+
+  /**
+   * Thumb toggle colors
+   */
+  ThumbToggleSwitchOff: ColorValue;
+  ThumbToggleSwitchOffHover: ColorValue;
+  ThumbToggleSwitchOffPressed: ColorValue;
+  ThumbToggleSwitchOffDisabled: ColorValue;
+  ThumbToggleSwitchOn: ColorValue;
+  ThumbToggleSwitchOnHover: ColorValue;
+  ThumbToggleSwitchOnPressed: ColorValue;
+  ThumbToggleSwitchOnDisabled: ColorValue;
+
+  /**
+   * Background values for toggle switches
+   */
+  BkgToggleSwitchOff: ColorValue;
+  BkgToggleSwitchOffHover: ColorValue;
+  BkgToggleSwitchOffPressed: ColorValue;
+  BkgToggleSwitchOffDisabled: ColorValue;
+  BkgToggleSwitchOn: ColorValue;
+  BkgToggleSwitchOnHover: ColorValue;
+  BkgToggleSwitchOnPressed: ColorValue;
+  BkgToggleSwitchOnDisabled: ColorValue;
+
+  /**
+   * Stroke values for toggle switches
+   */
+  StrokeToggleSwitchOff: ColorValue;
+  StrokeToggleSwitchOffHover: ColorValue;
+  StrokeToggleSwitchOffPressed: ColorValue;
+  StrokeToggleSwitchOffDisabled: ColorValue;
+  StrokeToggleSwitchOn: ColorValue;
+  StrokeToggleSwitchOnHover: ColorValue;
+  StrokeToggleSwitchOnPressed: ColorValue;
+  StrokeToggleSwitchOnDisabled: ColorValue;
+
+  /**
+   * Slider colors
+   */
+  SliderPrimary: ColorValue;
+  SliderPrimaryHover: ColorValue;
+  SliderPrimaryPressed: ColorValue;
+  SliderPrimaryDisabled: ColorValue;
+  SliderSecondary: ColorValue;
+  SliderBuffer: ColorValue;
+  SliderKeyboard: ColorValue;
+  SliderToolTipBorder: ColorValue;
+  SliderToolTipLabel: ColorValue;
+  SliderToolTipBkg: ColorValue;
+
+  /**
+   * Assorted other colors
+   */
+  TextEmphasis2: ColorValue;
+  BkgCtlSubtleSelected: ColorValue;
+  TextCtlSubtleSelected: ColorValue;
+  BkgCtlEmphasisFocus: ColorValue;
+  BkgCtlSubtleFocus: ColorValue;
+  BkgCtlSubtleHoverDisabled: ColorValue;
+  BkgCtlSubtleSelectedDisabled: ColorValue;
 }

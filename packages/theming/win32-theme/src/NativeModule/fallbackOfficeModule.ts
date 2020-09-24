@@ -7,6 +7,7 @@ const whiteColorsPalette: OfficePalette = {
   BkgPressed: '#969696',
   BkgSelected: '#D2D2D2',
   BkgSelectionHighlight: '#737373',
+  BkgSubtle: '#F3F3F3',
 
   Text: '#505050',
   TextRest: '#505050',
@@ -37,6 +38,15 @@ const whiteColorsPalette: OfficePalette = {
   StrokeOverlaySelectedRest: 'transparent',
   StrokeOverlaySelectedHover: '#969696',
   StrokeOverlaySelectedPressed: 'transparent',
+
+  /*
+  StrokeOverRest: '#00000000',
+  StrokeOverHover: '#00000000',
+  StrokeOverPressed: '#00000000',
+  StrokeOverSelectedRest: '#00000000',
+  StrokeOverSelectedHover: '#969696',
+  StrokeOverSelectedPressed: '#00000000',
+  */
 
   BkgCtl: '#D2D2D2',
   BkgCtlHover: '#E6E6E6',
@@ -113,6 +123,53 @@ const whiteColorsPalette: OfficePalette = {
 
   BkgHeader: 'pink',
   TextHeader: 'pink',
+
+  StrokeOnlyHover: '#B1B1B1',
+  StrokeOnlyPressed: '#737373',
+  StrokeOnlySelected: '#969696',
+
+  ThumbToggleSwitchOff: '#505050',
+  ThumbToggleSwitchOffHover: '#505050',
+  ThumbToggleSwitchOffPressed: '#505050',
+  ThumbToggleSwitchOffDisabled: '#D2D2D2',
+  ThumbToggleSwitchOn: '#FFFFFF',
+  ThumbToggleSwitchOnHover: '#FFFFFF',
+  ThumbToggleSwitchOnPressed: '#FFFFFF',
+  ThumbToggleSwitchOnDisabled: '#FFFFFF',
+  BkgToggleSwitchOff: '#FFFFFF',
+  BkgToggleSwitchOffHover: '#D2D2D2',
+  BkgToggleSwitchOffPressed: '#B1B1B1',
+  BkgToggleSwitchOffDisabled: '#FFFFFF',
+  BkgToggleSwitchOn: '#D83B01',
+  BkgToggleSwitchOnHover: '#EA6115',
+  BkgToggleSwitchOnPressed: '#A22C01',
+  BkgToggleSwitchOnDisabled: '#D2D2D2',
+  StrokeToggleSwitchOff: '#505050',
+  StrokeToggleSwitchOffHover: '#505050',
+  StrokeToggleSwitchOffPressed: '#505050',
+  StrokeToggleSwitchOffDisabled: '#D2D2D2',
+  StrokeToggleSwitchOn: '#D83B01',
+  StrokeToggleSwitchOnHover: '#EA6115',
+  StrokeToggleSwitchOnPressed: '#A22C01',
+  StrokeToggleSwitchOnDisabled: '#D2D2D2',
+  SliderPrimary: '#444444',
+  SliderPrimaryHover: '#D2D2D2',
+  SliderPrimaryPressed: '#262626',
+  SliderPrimaryDisabled: '#969696',
+  SliderSecondary: '#D2D2D2',
+  SliderBuffer: '#262626',
+  SliderKeyboard: '#444444',
+  SliderToolTipBorder: '#C6C6C6',
+  SliderToolTipLabel: '#262626',
+  SliderToolTipBkg: '#FFFFFF',
+
+  TextEmphasis2: '#D83B01',
+  BkgCtlSubtleSelected: '#F3F3F3',
+  TextCtlSubtleSelected: '#262626',
+  BkgCtlEmphasisFocus: '#F3F3F3',
+  BkgCtlSubtleFocus: '#F3F3F3',
+  BkgCtlSubtleHoverDisabled: '#F3F3F3',
+  BkgCtlSubtleSelectedDisabled: '#F3F3F3',
 };
 
 export function fallbackGetPalette(pal?: string): OfficePalette {
