@@ -4,8 +4,7 @@ import FluentUI
 @objc(MSFAvatarViewManager)
 class AvatarViewManager: RCTViewManager {
 	override func view()->UIView! {
-		let avatarView = AvatarView(avatarSize: .large)
-		avatarView.setup(primaryText: "Saad Najmi", secondaryText: "Software Engineer", image: nil, presence: .none, convertTextToInitials: true)
+		let avatarView = AvatarView(avatarSize: .small)
 		return avatarView
 	}
 
@@ -16,12 +15,12 @@ class AvatarViewManager: RCTViewManager {
 	override func constantsToExport() -> [AnyHashable : Any]! {
 			return [
 				"sizes" : [
-					"xSmall" :	AvatarSize.extraSmall.size,
-					"small" : AvatarSize.small.size,
-					"medium" : AvatarSize.medium.size,
-					"large" : AvatarSize.large.size,
-					"xLarge" : AvatarSize.extraLarge.size,
-					"xxLarge" : AvatarSize.extraExtraLarge.size
+					"xSmall" :	AvatarSize.extraSmall.size.width,
+					"small" : AvatarSize.small.size.width,
+					"medium" : AvatarSize.medium.size.width,
+					"large" : AvatarSize.large.size.width,
+					"xLarge" : AvatarSize.extraLarge.size.width,
+					"xxLarge" : AvatarSize.extraExtraLarge.size.width
 				]
 			]
 		}

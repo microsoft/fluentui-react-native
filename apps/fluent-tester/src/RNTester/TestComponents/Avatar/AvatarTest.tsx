@@ -8,23 +8,27 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 const avatar: React.FunctionComponent<{}> = () => {
   return (
     <Stack style={stackStyle}>
-      <Avatar style={{ width: 40, height: 40 }} />
-      <Avatar style={{ width: 40, height: 40 }} presence="available" />
-      <Avatar style={{ width: 40, height: 40 }} primaryText="John Smith" presence="outOfOffice" />
-      <Avatar style={{ width: 40, height: 40 }} primaryText="John Smith" secondaryText="johnsmith@microsoft.com" presence="outOfOffice" />
-      <Avatar style={{ width: 40, height: 40 }} secondaryText="johnsmith@microsoft.com" presence="outOfOffice" />
+      <Avatar avatarData={{ primaryText: 'John Smith' }} />
+      <Avatar avatarData={{ primaryText: 'John Smith' }} avatarStyle="square" />
+      <Avatar avatarData={{ primaryText: 'John Smith', presence: 'available' }} />
+      <Avatar avatarData={{ primaryText: 'John Smith', secondaryText: 'johnsmith@microsoft.com', presence: 'outOfOffice' }} />
+      <Avatar avatarData={{ secondaryText: 'johnsmith@microsoft.com', presence: 'outOfOffice' }} />
     </Stack>
   );
 };
 
 const stylizedAvatar: React.FunctionComponent<{}> = () => {
   const CustomizedAvatar = Avatar.customize({
-    size: 'xxLarge',
+    size: 'large',
   });
 
   return (
     <Stack style={stackStyle}>
-      <CustomizedAvatar style={{ width: 40, height: 40 }} />
+      <CustomizedAvatar avatarData={{ primaryText: 'John Smith' }} />
+      <CustomizedAvatar avatarData={{ primaryText: 'John Smith' }} avatarStyle="square" />
+      <CustomizedAvatar avatarData={{ primaryText: 'John Smith', presence: 'available' }} />
+      <CustomizedAvatar avatarData={{ primaryText: 'John Smith', secondaryText: 'johnsmith@microsoft.com', presence: 'outOfOffice' }} />
+      <CustomizedAvatar avatarData={{ secondaryText: 'johnsmith@microsoft.com', presence: 'outOfOffice' }} />
     </Stack>
   );
 };

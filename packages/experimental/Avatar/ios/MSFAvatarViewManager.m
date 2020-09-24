@@ -38,6 +38,15 @@ RCT_ENUM_CONVERTER(MSFPresence, (@{
 	@"blocked": @(MSFPresenceBlocked),
 }), MSFPresenceNone, integerValue);
 
++ (MSFAvatarData *)MSFAvatarData:(id)json
+{
+	return [[MSFAvatarData alloc]initWithPrimaryText:[RCTConvert NSString:json[@"primaryText"]]
+									   secondaryText:[RCTConvert NSString:json[@"secondaryText"]]
+												image:[RCTConvert UIImage:json[@"image"]]
+											presence:[RCTConvert MSFPresence:json[@"presence"]]
+											   color:[RCTConvert UIColor:json[@"color"]]];
+}
+
 @end
 
 @interface MSFAvatarView(RCTComponent)
@@ -49,44 +58,23 @@ RCT_ENUM_CONVERTER(MSFPresence, (@{
 RCT_EXPORT_VIEW_PROPERTY(avatarSize, MSFAvatarSize);
 RCT_EXPORT_VIEW_PROPERTY(avatarBackgroundColor, UIColor);
 RCT_EXPORT_VIEW_PROPERTY(customBorderImage, UIImage);
-//TODO RCT_EXPORT_VIEW_PROPERTY(style, MSFAvatarSize); 
+
+RCT_REMAP_VIEW_PROPERTY(avatarStyle, style, MSFAvatarStyle)
+
 RCT_EXPORT_VIEW_PROPERTY(borderColor, UIColor);
 RCT_EXPORT_VIEW_PROPERTY(presence, MSFPresence);
 RCT_EXPORT_VIEW_PROPERTY(useOpaquePresenceBorder, bool);
-//TODO RCT_EXPORT_VIEW_PROPERTY(NSString, overrideAccessibilityLabel);
+
+//TODO Remap this
+// RCT_EXPORT_VIEW_PROPERTY(NSString, overrideAccessibilityLabel);
+
 RCT_EXPORT_VIEW_PROPERTY(preferredFallbackImageStyle, MSFAvatarFallbackImageStyle);
 RCT_EXPORT_VIEW_PROPERTY(hasPointerInteraction, bool);
 
-
-RCT_CUSTOM_VIEW_PROPERTY(primaryText, NSString, MSFAvatarView)
+RCT_CUSTOM_VIEW_PROPERTY(avatarData, MSFAvatarData, MSFAvatarView)
 {
-	// TODO Preserve values so we don't nil it out each time
-	NSString *primaryText = json ? [RCTConvert NSString:json] : @"";
-	[view setupWithPrimaryText:primaryText
-				 secondaryText:nil
-						 image:nil
-					  presence:MSFPresenceUnknown
-		 convertTextToInitials:YES];
+	MSFAvatarData *avatarData = [RCTConvert MSFAvatarData:json];
+	[view setupWithAvatar:avatarData];
 }
-
-RCT_CUSTOM_VIEW_PROPERTY(secondaryText, NSString, MSFAvatarView)
-{
-	// TODO Preserve values so we don't nil it out each time
-	NSString *secondaryText = json ? [RCTConvert NSString:json] : @"";
-	[view setupWithPrimaryText:nil
-				 secondaryText:secondaryText
-						 image:nil
-					  presence:MSFPresenceUnknown
-		 convertTextToInitials:YES];
-}
-
-RCT_CUSTOM_VIEW_PROPERTY(image, UIImage, MSFAvatarView)
-{
-	// TODO Preserve values so we don't nil it out each time
-	UIImage *image = json ? [RCTConvert UIImage:json] : [UIImage new];
-	[view setupWithImage:image presence:MSFPresenceUnknown];
-}
-
-
 
 @end
