@@ -35,13 +35,12 @@ const contextualMenu: React.FunctionComponent<{}> = () => {
     (key) => {
       setLastMenuItemClicked(key);
     },
-    [setLastMenuItemClicked]
+    [setLastMenuItemClicked],
   );
 
   return (
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
-
         <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
           <View style={{ flexDirection: 'row' }}>
             <Text>Should Focus on Mount</Text>
@@ -66,8 +65,8 @@ const contextualMenu: React.FunctionComponent<{}> = () => {
             {lastMenuItemClicked > 0 ? (
               <Text style={{ color: 'blue' }}>{lastMenuItemClicked}</Text>
             ) : (
-                <Text style={{ color: 'blue' }}>none</Text>
-              )}
+              <Text style={{ color: 'blue' }}>none</Text>
+            )}
           </Text>
           <Button content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
         </View>
@@ -93,7 +92,7 @@ const contextualMenu: React.FunctionComponent<{}> = () => {
       )}
     </View>
   );
-}
+};
 
 const contextualMenuSections: TestSection[] = [
   {
