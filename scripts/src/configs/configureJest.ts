@@ -38,9 +38,6 @@ export function configureJest(customConfig?: object): object {
       testURL: 'http://localhost',
 
       verbose: false,
-
-      // some options which have been removed (but saved here for posterity/easy re-adding)
-      // setupFiles: [path.resolve(__dirname, 'jest-setup.js')],
     },
     customConfig,
   );
@@ -74,6 +71,7 @@ export function configureReactNativeJest(platform?: PlatformValue, customConfig?
       },
       transformIgnorePatterns: ['node_modules/(?!(react-native)/)'],
       verbose: false,
+      setupFilesAfterEnv: [path.join(__dirname, './jest/setupEnzyme.js')],
     },
     customConfig,
   );

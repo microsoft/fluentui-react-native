@@ -1,4 +1,4 @@
-# Running the FluentUI Tester in UWP
+# Running the FluentUI Tester on Windows
 
 ## Prerequisites
 

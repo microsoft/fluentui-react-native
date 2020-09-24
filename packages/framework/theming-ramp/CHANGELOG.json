@@ -2,6 +2,57 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Wed, 23 Sep 2020 18:31:48 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.7",
+      "version": "0.10.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "start publishing src to fix customer source maps",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b3d7b5ba710bc581a6f4db91c91e4ffc185fc427",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 22 Sep 2020 04:57:02 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.6",
+      "version": "0.10.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add theme-types package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "988fdbce67d0fcf65401bb1717d37dca8d002d8a",
+            "package": "@uifabricshared/theming-ramp"
+          },
+          {
+            "comment": "add default theme package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "abd2752a90e12cf67dec5d80337fd9abb8478c2c",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 11 Sep 2020 20:25:42 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.5",
+      "version": "0.10.5",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add samples and some README text to use-slots and use-styling packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2566347850eff4ed67bfad2a85134481e088cba6",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Aug 2020 05:03:51 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.10.5",
       "version": "0.10.5",
