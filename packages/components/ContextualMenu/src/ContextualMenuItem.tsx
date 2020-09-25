@@ -44,23 +44,15 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       }, [context, disabled, itemKey, onClick]
     );
 
-    const onKeyUp = React.useCallback(
-      e => {
-        if (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ') {
-          onItemClick(e);
-        }
-      }, [onItemClick]);
-
-
     const cmRef = useViewCommandFocus(componentRef);
     //const cmRef = React.useRef(null);
     const onItemHoverIn = React.useCallback(
-      e => {
+      () => {
         componentRef.current.focus();
       }, [componentRef]);
 
     const onItemHoverOut = React.useCallback(
-      e => {
+      () => {
         componentRef.current.blur();
       }, [componentRef]);
 
@@ -74,6 +66,13 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       content: !!text,
       icon: !!icon
     };
+
+    const onKeyUp = React.useCallback(
+      e => {
+        if ((e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ') && pressable.state.focused) {
+          onItemClick(e);
+        }
+      }, [onItemClick, pressable.state]);
 
     const onMouseEnter = React.useCallback(
       e => {
