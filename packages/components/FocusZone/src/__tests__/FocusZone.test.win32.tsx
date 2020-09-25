@@ -78,9 +78,9 @@ describe('FocusZone With Props', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('navigateAtEnd Prop', () => {
+  it('isCircularNavigation Prop', () => {
     const tree = renderer.create(
-      <FocusZone navigateAtEnd='NavigateWrap'>
+      <FocusZone isCircularNavigation={true}>
         <Button title="button" onPress={onPress} />
         <Button title="button" onPress={onPress} />
         <Button title="button" onPress={onPress} />
@@ -102,7 +102,7 @@ describe('FocusZone With Props', () => {
 
   it('All Props', () => {
     const tree = renderer.create(
-      <FocusZone disabled={false} use2DNavigation={true} defaultTabbableElement={null} navigateAtEnd='NavigateStopAtEnds' focusZoneDirection='vertical' >
+      <FocusZone disabled={false} use2DNavigation={true} defaultTabbableElement={null} isCircularNavigation={false} focusZoneDirection='vertical' >
         <Button title="button" onPress={onPress} />
         <Button title="button" onPress={onPress} />
         <Button title="button" onPress={onPress} />

@@ -279,7 +279,6 @@ exports[`FocusZone With Props All Props 1`] = `
 <RCTFocusZone
   disabled={false}
   focusZoneDirection="vertical"
-  navigateAtEnd="NavigateStopAtEnds"
   use2DNavigation={true}
 >
   <View
@@ -820,10 +819,8 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
 </RCTFocusZone>
 `;
 
-exports[`FocusZone With Props navigateAtEnd Prop 1`] = `
-<RCTFocusZone
-  navigateAtEnd="NavigateWrap"
->
+exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
+<RCTFocusZone>
   <View
     accessibilityRole="button"
     accessibilityState={Object {}}

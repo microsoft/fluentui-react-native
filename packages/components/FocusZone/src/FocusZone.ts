@@ -1,18 +1,22 @@
 import * as React from 'react';
 import { findNodeHandle } from 'react-native';
-import { FocusZoneProps, FocusZoneSlotProps, FocusZoneType } from './FocusZone.types';
+import { FocusZoneProps, FocusZoneSlotProps, FocusZoneType, NativeProps } from './FocusZone.types';
 import { IUseStyling, composable } from '@uifabricshared/foundation-composable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import { filterOutComponentRef } from '../../FocusTrapZone';
 
-
 const RCTFocusZone = ensureNativeComponent('RCTFocusZone');
 
 export const FocusZone = composable<FocusZoneType>({
   usePrepareProps: (userProps: FocusZoneProps, useStyling: IUseStyling<FocusZoneType>) => {
-    const { componentRef, defaultTabbableElement, ...rest } = userProps;
+    const { componentRef, defaultTabbableElement, isCircularNavigation, ...rest } = userProps;
+
+    const props: NativeProps = {
+      ...userProps,
+      navigateAtEnd: isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds'
+    }
 
     const ftzRef = useViewCommandFocus(componentRef);
 
@@ -24,7 +28,7 @@ export const FocusZone = composable<FocusZoneType>({
     }, [defaultTabbableElement]);
 
     return {
-      slotProps: mergeSettings<FocusZoneSlotProps>(useStyling(userProps), { root: { ...rest, defaultTabbableElement: targetNativeTag, ref: ftzRef } }),
+      slotProps: mergeSettings<FocusZoneSlotProps>(useStyling(props), { root: { ...rest, defaultTabbableElement: targetNativeTag, ref: ftzRef } }),
     };
   },
   slots: {

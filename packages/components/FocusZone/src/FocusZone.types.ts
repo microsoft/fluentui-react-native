@@ -29,10 +29,8 @@ export interface FocusZoneProps {
    */
   disabled?: boolean;
 
-  /**
-   * Determines navigation at beginning/end of FocusZone
-   */
-  navigateAtEnd?: NavigateAtEnd;
+  /* Circular Navigation prop */
+  isCircularNavigation?: boolean;
 
   /**
    *Allows for 2D navigation. This navigation strategy takes into account the position of elements
@@ -44,6 +42,10 @@ export interface FocusZoneProps {
    * Callback called when “focus” event triggered in FocusZone
    */
   onFocus?: (e?: any) => void;
+}
+
+export interface NativeProps extends FocusZoneProps {
+  navigateAtEnd?: NavigateAtEnd;
 }
 
 export type FocusZoneDirection =
