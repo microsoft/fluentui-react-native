@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { IThemeProviderProps } from './ThemeProvider.types';
-import { useThemeRegistry, ThemeRegistryContext, ThemeContext } from './ThemeContext';
+import { useThemeRegistry, ThemeRegistryContext } from './ThemeContext';
 import { IThemeEventListener } from '@uifabricshared/theme-registry';
 import { getThemeRegistry } from './Global';
+import { ThemeContext } from '@uifabricshared/theming-ramp';
 
 export const ThemeProvider: React.FunctionComponent<IThemeProviderProps> = (props: IThemeProviderProps) => {
   const { registry: registryFromProps, theme: themeName = '', children } = props;
@@ -13,7 +14,7 @@ export const ThemeProvider: React.FunctionComponent<IThemeProviderProps> = (prop
     const themeInvalidater: IThemeEventListener = {
       onInvalidate: (name: string) => {
         name === themeName && setThemeState(registryToUse.getTheme(themeName));
-      }
+      },
     };
 
     registryToUse.addEventListener(themeInvalidater);

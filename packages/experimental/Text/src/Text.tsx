@@ -8,7 +8,7 @@ import {
   fontStyles,
   mergeProps,
   withSlots,
-  ITheme,
+  Theme,
 } from '@fluentui-react-native/framework';
 import { Text as RNText } from 'react-native';
 import { filterTextProps, ITextProps } from '@fluentui-react-native/adapters';
@@ -56,7 +56,7 @@ export const Text = compose<TextType>({
   displayName: textName,
   /** Settings for the use-styling hook */
   tokens: [
-    t => ({
+    (t) => ({
       variant: 'secondaryStandard',
       color: t.colors.bodyText,
       disabled: {
@@ -69,7 +69,7 @@ export const Text = compose<TextType>({
   tokensThatAreAlsoProps,
   slotProps: {
     root: buildProps<ITextProps, TextTokens>(
-      (tokens: TextTokens, theme: ITheme) => ({
+      (tokens: TextTokens, theme: Theme) => ({
         style: {
           margin: 0,
           color: tokens.color,

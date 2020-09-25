@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/shimmer",
   "entries": [
     {
+      "date": "Tue, 22 Sep 2020 21:42:19 GMT",
+      "tag": "@fluentui-react-native/shimmer_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Updated Shimmer to not have a module name",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "901b3a534df10a1d471c815349651500d0237575",
+            "package": "@fluentui-react-native/shimmer"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 11 Sep 2020 20:25:42 GMT",
+      "tag": "@fluentui-react-native/shimmer_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add samples and some README text to use-slots and use-styling packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2566347850eff4ed67bfad2a85134481e088cba6",
+            "package": "@fluentui-react-native/shimmer"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 09 Sep 2020 21:36:19 GMT",
       "tag": "@fluentui-react-native/shimmer_v0.2.1",
       "version": "0.2.1",

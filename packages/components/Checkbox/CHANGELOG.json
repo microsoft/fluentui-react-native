@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Tue, 22 Sep 2020 04:57:02 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.5.5",
+      "version": "0.5.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update a11y properties",
+            "author": "krsiler@microsoft.com",
+            "commit": "4cd56e09bb5a447f7945f22024da1eeda16b6bf0",
+            "package": "@fluentui-react-native/checkbox"
+          },
+          {
+            "comment": "manual version bump on Checkbox",
+            "author": "taamireh@microsoft.com",
+            "commit": "96230c6d335fc70a507dabfb2d2541d59e2904f5",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Aug 2020 05:03:51 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.5.3",
       "version": "0.5.3",
