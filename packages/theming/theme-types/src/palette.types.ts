@@ -46,12 +46,12 @@ export interface OfficePalette {
   StrokeKeyboard: ColorValue;
 
   // stroke overlay colors (typically borders, outlines or underlines)
-  StrokeOverlayRest: ColorValue;
-  StrokeOverlayHover: ColorValue;
-  StrokeOverlayPressed: ColorValue;
-  StrokeOverlaySelectedRest: ColorValue;
-  StrokeOverlaySelectedHover: ColorValue;
-  StrokeOverlaySelectedPressed: ColorValue;
+  StrokeOverRest: ColorValue;
+  StrokeOverHover: ColorValue;
+  StrokeOverPressed: ColorValue;
+  StrokeOverSelectedRest: ColorValue;
+  StrokeOverSelectedHover: ColorValue;
+  StrokeOverSelectedPressed: ColorValue;
 
   /**
    * Push Button Controls

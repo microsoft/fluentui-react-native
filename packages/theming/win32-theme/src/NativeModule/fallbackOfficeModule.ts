@@ -32,21 +32,12 @@ const whiteColorsPalette: OfficePalette = {
   StrokeSelectedHover: '#969696',
   StrokeKeyboard: '#505050',
 
-  StrokeOverlayRest: 'transparent',
-  StrokeOverlayHover: 'transparent',
-  StrokeOverlayPressed: 'transparent',
-  StrokeOverlaySelectedRest: 'transparent',
-  StrokeOverlaySelectedHover: '#969696',
-  StrokeOverlaySelectedPressed: 'transparent',
-
-  /*
-  StrokeOverRest: '#00000000',
-  StrokeOverHover: '#00000000',
-  StrokeOverPressed: '#00000000',
-  StrokeOverSelectedRest: '#00000000',
+  StrokeOverRest: 'transparent',
+  StrokeOverHover: 'transparent',
+  StrokeOverPressed: 'transparent',
+  StrokeOverSelectedRest: 'transparent',
   StrokeOverSelectedHover: '#969696',
-  StrokeOverSelectedPressed: '#00000000',
-  */
+  StrokeOverSelectedPressed: 'transparent',
 
   BkgCtl: '#D2D2D2',
   BkgCtlHover: '#E6E6E6',
