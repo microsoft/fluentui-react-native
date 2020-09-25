@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/win32-theme",
+  "entries": [
+    {
+      "date": "Fri, 25 Sep 2020 18:01:57 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.1.2",
+      "version": "0.1.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add experimental theme package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "59d0857d4244fb6b35fb2c9ca7d01cf2a073f461",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ]
+      }
+    }
+  ]
+}

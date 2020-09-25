@@ -8,7 +8,7 @@ steps:
     displayName: 'NuGet pack'
     inputs:
       command: pack
-      packagesToPack: 'FluentUI.nuspec'
+      packagesToPack: 'package.nuspec'
       buildProperties: buildNumber=$(sanitizedBuildNumber);commitId=$(Build.SourceVersion);repoUri=$(Build.Repository.Uri)
 
   # push the package package

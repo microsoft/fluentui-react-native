@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-types",
   "entries": [
     {
+      "date": "Fri, 25 Sep 2020 18:01:57 GMT",
+      "tag": "@fluentui-react-native/theme-types_v0.1.4",
+      "version": "0.1.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add experimental theme package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "59d0857d4244fb6b35fb2c9ca7d01cf2a073f461",
+            "package": "@fluentui-react-native/theme-types"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Sep 2020 18:31:48 GMT",
       "tag": "@fluentui-react-native/theme-types_v0.1.3",
       "version": "0.1.3",
