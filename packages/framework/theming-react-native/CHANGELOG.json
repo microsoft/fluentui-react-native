@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Fri, 25 Sep 2020 18:01:57 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.7.79",
+      "version": "0.7.79",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add experimental theme package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "59d0857d4244fb6b35fb2c9ca7d01cf2a073f461",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Sep 2020 18:31:48 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.7.78",
       "version": "0.7.78",
