@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { findNodeHandle } from 'react-native';
-import { FocusZoneProps, FocusZoneSlotProps, FocusZoneType, NativeProps } from './FocusZone.types';
+import { FocusZoneProps, FocusZoneSlotProps, FocusZoneType } from './FocusZone.types';
 import { IUseStyling, composable } from '@uifabricshared/foundation-composable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
