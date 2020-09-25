@@ -1,0 +1,8 @@
+{
+  "type": "none",
+  "comment": "add focused state condition to onKeyUp callback",
+  "packageName": "@fluentui-react-native/merge-props",
+  "email": "lehon@microsoft.com",
+  "dependentChangeType": "none",
+  "date": "2020-09-25T18:37:49.266Z"
+}
