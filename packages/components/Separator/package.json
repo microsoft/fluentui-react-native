@@ -28,7 +28,7 @@
     "@uifabricshared/theming-ramp": ">=0.10.8 <1.0.0"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.62.0-preview.3",
+    "@office-iss/react-native-win32": "0.62.3",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
