@@ -1,9 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FocusZone No Props No children 1`] = `<RCTFocusZone />`;
+exports[`FocusZone No Props No children 1`] = `
+<RCTFocusZone
+  navigateAtEnd="NavigateStopAtEnds"
+/>
+`;
 
 exports[`FocusZone No Props One child 1`] = `
-<RCTFocusZone>
+<RCTFocusZone
+  navigateAtEnd="NavigateStopAtEnds"
+>
   <View
     accessibilityRole="button"
     accessibilityState={Object {}}
@@ -51,7 +57,9 @@ exports[`FocusZone No Props One child 1`] = `
 `;
 
 exports[`FocusZone No Props Three children 1`] = `
-<RCTFocusZone>
+<RCTFocusZone
+  navigateAtEnd="NavigateStopAtEnds"
+>
   <View
     accessibilityRole="button"
     accessibilityState={Object {}}
@@ -185,7 +193,9 @@ exports[`FocusZone No Props Three children 1`] = `
 `;
 
 exports[`FocusZone No Props Two children 1`] = `
-<RCTFocusZone>
+<RCTFocusZone
+  navigateAtEnd="NavigateStopAtEnds"
+>
   <View
     accessibilityRole="button"
     accessibilityState={Object {}}
@@ -279,6 +289,7 @@ exports[`FocusZone With Props All Props 1`] = `
 <RCTFocusZone
   disabled={false}
   focusZoneDirection="vertical"
+  navigateAtEnd="NavigateStopAtEnds"
   use2DNavigation={true}
 >
   <View
@@ -414,7 +425,9 @@ exports[`FocusZone With Props All Props 1`] = `
 `;
 
 exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
-<RCTFocusZone>
+<RCTFocusZone
+  navigateAtEnd="NavigateStopAtEnds"
+>
   <View
     accessibilityRole="button"
     accessibilityState={Object {}}
@@ -550,6 +563,7 @@ exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
 exports[`FocusZone With Props disabled Prop 1`] = `
 <RCTFocusZone
   disabled={true}
+  navigateAtEnd="NavigateStopAtEnds"
 >
   <View
     accessibilityRole="button"
@@ -686,6 +700,7 @@ exports[`FocusZone With Props disabled Prop 1`] = `
 exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
 <RCTFocusZone
   focusZoneDirection="bidirectional"
+  navigateAtEnd="NavigateStopAtEnds"
 >
   <View
     accessibilityRole="button"
@@ -820,7 +835,9 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
 `;
 
 exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
-<RCTFocusZone>
+<RCTFocusZone
+  navigateAtEnd="NavigateWrap"
+>
   <View
     accessibilityRole="button"
     accessibilityState={Object {}}
@@ -955,6 +972,7 @@ exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
 
 exports[`FocusZone With Props use2DNavigation Prop 1`] = `
 <RCTFocusZone
+  navigateAtEnd="NavigateStopAtEnds"
   use2DNavigation={true}
 >
   <View
