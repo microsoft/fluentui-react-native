@@ -14,7 +14,7 @@
     "windows": "react-native run-windows"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.7.2",
+    "@fluentui-react-native/tester": "^0.7.3",
     "@uifabricshared/theming-react-native": "0.7.78",
     "react": "16.11.0",
     "react-native": "0.62.2",

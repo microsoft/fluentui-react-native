@@ -91,3 +91,6 @@ typings/
 
 # macOS
 .DS_Store
+
+# Generated Nuget Package
+*.nupkg
