@@ -26,19 +26,17 @@ export interface ThemeOptions {
   paletteName?: string;
 }
 
-function getCurrentAppearance(fallback: AppearanceOptions): AppearanceOptions {
-  return (Appearance && Appearance.getColorScheme()) || fallback;
+function getCurrentAppearance(appearance: ThemeOptions['appearance'], fallback: AppearanceOptions): AppearanceOptions {
+  return appearance === 'dynamic' ? (Appearance && Appearance.getColorScheme()) || fallback : appearance;
 }
 
 export function createDefaultTheme(options: ThemeOptions = {}): ThemeReference {
-  const { defaultAppearance = 'light', appearance = 'light' } = options;
-
   const themeRef = new ThemeReference({} as Theme, () => {
-    const current = getCurrentAppearance(defaultAppearance);
+    const current = getCurrentAppearance(options.appearance, options.defaultAppearance || 'light');
     return current === 'light' ? defaultFluentTheme : defaultFluentDarkTheme;
   });
 
-  if (Appearance && appearance === 'dynamic') {
+  if (Appearance && options.appearance === 'dynamic') {
     Appearance.addChangeListener(() => {
       themeRef.invalidate();
     });

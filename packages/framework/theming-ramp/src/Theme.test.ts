@@ -105,6 +105,9 @@ describe('Theme tests', () => {
           },
         },
       },
+      host: {
+        appearance: 'light',
+      },
     });
   });
 });
