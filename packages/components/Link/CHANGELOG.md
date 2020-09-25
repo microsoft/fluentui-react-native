@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Mon, 17 Aug 2020 22:08:34 GMT and should not be manually modified.
+This log was last generated on Thu, 24 Sep 2020 23:44:53 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.13
+
+Thu, 24 Sep 2020 23:44:53 GMT
+
+### Patches
+
+- 👆 Add hand pointer to link (adrum@microsoft.com)
 
 ## 0.8.9
 
