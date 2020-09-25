@@ -22,6 +22,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       accessibilityLabel = userProps.text,
       onClick,
       testID,
+      componentRef = React.useRef(null),
       ...rest
     } = userProps;
 
@@ -50,8 +51,20 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         }
       }, [onItemClick]);
 
-    // attach the pressable state handlers
-    const pressable = useAsPressable({ ...rest, onPress: onItemClick });
+
+    const cmRef = useViewCommandFocus(componentRef);
+    //const cmRef = React.useRef(null);
+    const onItemHoverIn = React.useCallback(
+      e => {
+        componentRef.current.focus();
+      }, [componentRef]);
+
+    const onItemHoverOut = React.useCallback(
+      e => {
+        componentRef.current.blur();
+      }, [componentRef]);
+
+    const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn, onHoverOut: onItemHoverOut });
 
     // set up state
     const state: ContextualMenuItemState = {
@@ -62,7 +75,22 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       icon: !!icon
     };
 
-    const cmRef = useViewCommandFocus(userProps.componentRef);
+    const onMouseEnter = React.useCallback(
+      e => {
+        pressable.props.onMouseEnter && pressable.props.onMouseEnter(e);
+        pressable.props.onFocus && pressable.props.onFocus(e);
+        e.stopPropagation();
+      },
+      [pressable]);
+
+    const onMouseLeave = React.useCallback(
+      e => {
+        pressable.props.onMouseLeave && pressable.props.onMouseLeave(e);
+        pressable.props.onBlur && pressable.props.onBlur(e);
+        e.stopPropagation();
+      },
+      [pressable]);
+
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
     // create the merged slot props
@@ -71,6 +99,8 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         ...pressable.props,
         ref: cmRef,
         onKeyUp: onKeyUp,
+        onMouseEnter: onMouseEnter,
+        onMouseLeave: onMouseLeave,
         accessibilityLabel: accessibilityLabel
       },
       content: { children: text, testID },
