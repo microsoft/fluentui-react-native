@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { IViewWin32Props } from '@office-iss/react-native-win32';
 
 export const focusZoneName = 'FocusZone';
 
@@ -44,7 +43,7 @@ export interface FocusZoneProps {
   onFocus?: (e?: any) => void;
 }
 
-export interface NativeProps extends FocusZoneProps {
+export interface NativeProps extends Omit<FocusZoneProps, 'isCircularNavigation'> {
   navigateAtEnd?: NavigateAtEnd;
 }
 
@@ -62,7 +61,7 @@ export type NavigateAtEnd =
 export interface FocusZoneTokens { }
 
 export interface FocusZoneSlotProps {
-  root: React.PropsWithRef<IViewWin32Props>;
+  root: NativeProps;
 }
 
 export type FocusZoneRenderData = IRenderData<FocusZoneSlotProps, FocusZoneState>;

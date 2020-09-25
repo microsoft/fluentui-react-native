@@ -13,11 +13,6 @@ export const FocusZone = composable<FocusZoneType>({
   usePrepareProps: (userProps: FocusZoneProps, useStyling: IUseStyling<FocusZoneType>) => {
     const { componentRef, defaultTabbableElement, isCircularNavigation, ...rest } = userProps;
 
-    const props: NativeProps = {
-      ...userProps,
-      navigateAtEnd: isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds'
-    }
-
     const ftzRef = useViewCommandFocus(componentRef);
 
     const [targetNativeTag, setTargetNativeTag] = React.useState<number>(undefined);
@@ -28,7 +23,7 @@ export const FocusZone = composable<FocusZoneType>({
     }, [defaultTabbableElement]);
 
     return {
-      slotProps: mergeSettings<FocusZoneSlotProps>(useStyling(props), { root: { ...rest, defaultTabbableElement: targetNativeTag, ref: ftzRef } }),
+      slotProps: mergeSettings<FocusZoneSlotProps>(useStyling(userProps), { root: { ...rest, defaultTabbableElement: targetNativeTag, ref: ftzRef, navigateAtEnd: isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds' } }),
     };
   },
   slots: {

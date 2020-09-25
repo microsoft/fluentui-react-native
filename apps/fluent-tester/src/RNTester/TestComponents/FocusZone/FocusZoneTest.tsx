@@ -11,7 +11,7 @@ const directionalFocusZone: React.FunctionComponent<{}> = () => {
   return (
     <View>
       <Button content="Outside FocusZone" />
-      <FocusZone disabled={null} focusZoneDirection='bidirectional'>
+      <FocusZone focusZoneDirection='bidirectional'>
         <RadioGroup label="FocusZone RadioGroup with Bidirectional arrow key navigation" defaultSelectedKey="A">
           <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
           <RadioButton content="Option B" buttonKey="B" />
@@ -104,10 +104,6 @@ const commonUsageFocusZone: React.FunctionComponent<{}> = () => {
 
 const navigation2DFocusZone: React.FunctionComponent<{}> = () => {
   const buttonRef = React.useRef<View>(null);
-
-  // const onFocus = () => {
-  //   console.group('hu');
-  // }
 
   return (
     <View>
