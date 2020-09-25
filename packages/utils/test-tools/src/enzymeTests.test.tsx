@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { checkRenderConsistency } from './enzymeTests';
+import { checkRenderConsistency, checkReRender } from './enzymeTests';
 
 const fixedStyle = {
   backgroundColor: 'blue',
@@ -39,6 +39,18 @@ const MultiLevelBroken = (props) => {
   );
 };
 
+const SimpleWithHook = (props) => {
+  const { children, ...rest } = props;
+  const onKeyUp = React.useMemo(() => {
+    console.log('something');
+  }, []);
+  return (
+    <span {...rest} {...{ onKeyUp }} style={fixedStyle}>
+      {children}
+    </span>
+  );
+};
+
 describe('enzyme component test validation', () => {
   it('renders the simple control twice', () => {
     checkRenderConsistency(() => <Simple>Hello</Simple>);
@@ -46,6 +58,10 @@ describe('enzyme component test validation', () => {
 
   it('recurses into multi-level control correctly', () => {
     checkRenderConsistency(() => <MultiLevel>World</MultiLevel>, 2);
+  });
+
+  it('handles memoed functions', () => {
+    checkReRender(() => <SimpleWithHook>ReRender</SimpleWithHook>);
   });
 
   it('catches a deep error for a broken multi-level component', () => {
