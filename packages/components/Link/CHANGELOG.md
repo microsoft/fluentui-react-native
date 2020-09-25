@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Thu, 24 Sep 2020 23:44:53 GMT and should not be manually modified.
+This log was last generated on Fri, 25 Sep 2020 19:21:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.15
+
+Fri, 25 Sep 2020 19:21:43 GMT
+
+### Patches
+
+- Update react-native-win32 versions - enable logbox (acoates-ms@noreply.github.com)
 
 ## 0.8.13
 

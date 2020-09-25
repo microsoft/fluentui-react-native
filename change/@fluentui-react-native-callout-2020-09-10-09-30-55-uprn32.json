@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update react-native-win32 versions - enable logbox",
-  "packageName": "@fluentui-react-native/callout",
-  "email": "acoates-ms@noreply.github.com",
-  "dependentChangeType": "patch",
-  "date": "2020-09-10T16:30:33.136Z"
-}
