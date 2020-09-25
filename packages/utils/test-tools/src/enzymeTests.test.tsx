@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { renderTwiceAndCompare } from './enzymeTests';
+import { checkRenderConsistency } from './enzymeTests';
 
 const fixedStyle = {
   backgroundColor: 'blue',
@@ -41,16 +41,16 @@ const MultiLevelBroken = (props) => {
 
 describe('enzyme component test validation', () => {
   it('renders the simple control twice', () => {
-    renderTwiceAndCompare(() => <Simple>Hello</Simple>);
+    checkRenderConsistency(() => <Simple>Hello</Simple>);
   });
 
   it('recurses into multi-level control correctly', () => {
-    renderTwiceAndCompare(() => <MultiLevel>World</MultiLevel>, 2);
+    checkRenderConsistency(() => <MultiLevel>World</MultiLevel>, 2);
   });
 
   it('catches a deep error for a broken multi-level component', () => {
     try {
-      renderTwiceAndCompare(() => <MultiLevelBroken>Broken</MultiLevelBroken>, 2);
+      checkRenderConsistency(() => <MultiLevelBroken>Broken</MultiLevelBroken>, 2);
       expect('This should have detected an error').toBeFalse();
     } catch (e) {
       expect(e.message).toContain('Shallow compare');
