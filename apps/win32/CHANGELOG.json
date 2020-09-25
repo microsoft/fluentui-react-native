@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Tue, 22 Sep 2020 20:41:53 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.3.14",
+      "version": "0.3.14",
+      "comments": {
+        "none": [
+          {
+            "comment": "added android documentation for fluentui tester, and updated top level page to point to platform specific docs.",
+            "author": "ejlayne@microsoft.com",
+            "commit": "4b420148323603021c055d50f5415a27ca44f023",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 22 Sep 2020 20:14:25 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.3.14",
+      "version": "0.3.14",
+      "comments": {
+        "none": [
+          {
+            "comment": "added android documentation for fluentui tester, and updated top level page to point to platform specific docs.",
+            "author": "ejlayne@microsoft.com",
+            "commit": "4b420148323603021c055d50f5415a27ca44f023",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 11 Sep 2020 20:25:42 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.3.13",
+      "version": "0.3.13",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add samples and some README text to use-slots and use-styling packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2566347850eff4ed67bfad2a85134481e088cba6",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 09 Sep 2020 21:36:19 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.3.13",
+      "version": "0.3.13",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Disabled prop-types validation rule",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "6042d1bbb538eb130b3fb4ecae360e467379e6ed",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Aug 2020 05:03:51 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.3.9",
       "version": "0.3.9",

@@ -19,19 +19,19 @@
     "ios": "react-native run-ios --scheme ReactTestApp --project-path src"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.5.1",
-    "@uifabricshared/theming-react-native": "0.7.76",
+    "@fluentui-react-native/tester": "^0.7.4",
+    "@uifabricshared/theming-react-native": "0.7.79",
     "react": "16.11.0",
     "react-native": "0.62.2",
-    "react-native-test-app": "0.1.38"
+    "react-native-test-app": "0.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
-    "@react-native-community/eslint-config": "^0.0.5",
-    "@uifabricshared/build-native": "0.1.1",
+    "@react-native-community/eslint-config": "^1.1.0",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
     "babel-jest": "^24.9.0",
-    "eslint": "^6.5.1",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.58.0",
     "react-test-renderer": "~16.11.0"

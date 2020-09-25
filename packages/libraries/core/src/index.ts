@@ -9,5 +9,6 @@ export * from '@fluentui-react-native/persona-coin';
 export * from '@fluentui-react-native/pressable';
 export * from '@fluentui-react-native/radio-group';
 export * from '@fluentui-react-native/separator';
+export * from '@fluentui-react-native/shimmer';
 export * from '@fluentui-react-native/text';
 export * from '@fluentui-react-native/interactive-hooks';

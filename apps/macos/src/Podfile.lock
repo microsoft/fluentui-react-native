@@ -241,7 +241,7 @@ PODS:
     - React-cxxreact (= 0.62.1)
     - React-jsi (= 0.62.1)
     - ReactCommon/callinvoker (= 0.62.1)
-  - ReactTestApp-DevSupport (0.1.38)
+  - ReactTestApp-DevSupport (0.2.1)
   - ReactTestApp-Resources (1.0.0-dev)
   - SwiftLint (0.39.2)
   - Yoga (1.14.0)
@@ -368,11 +368,11 @@ SPEC CHECKSUMS:
   React-RCTText: 74947882a3d7632add1490f29f5be0aba6cc2587
   React-RCTVibration: 2bb1044cc49aba5810d09fcb658b18f4df69aec9
   ReactCommon: 5832dcdbcccc6bdc11f99181df74ed5f2b47789a
-  ReactTestApp-DevSupport: a3c112badc52749c73db490520d3caea5336076e
+  ReactTestApp-DevSupport: f69711ff52c61dc6622ba2ae512ca06143070a56
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
   Yoga: af4be6a73a3dfa9f8108031e617610931101b809
 
 PODFILE CHECKSUM: b8260e89765fe64a76f2ab9a33e724b2dbe0124d
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.9.1

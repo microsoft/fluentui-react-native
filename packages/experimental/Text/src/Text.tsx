@@ -8,7 +8,7 @@ import {
   fontStyles,
   mergeProps,
   withSlots,
-  ITheme,
+  Theme,
 } from '@fluentui-react-native/framework';
 import { Text as RNText } from 'react-native';
 import { filterTextProps, ITextProps } from '@fluentui-react-native/adapters';
@@ -43,7 +43,7 @@ export type TextProps<TBase = ITextProps> = TBase &
  * These are the tokens which are also present in props. If specified in props this will override the values
  * from tokens.
  */
-const tokenProps: (keyof TextTokens)[] = ['variant', 'color'];
+const tokensThatAreAlsoProps: (keyof TextTokens)[] = ['variant', 'color'];
 
 /** Type to use for compose */
 interface TextType {
@@ -56,7 +56,7 @@ export const Text = compose<TextType>({
   displayName: textName,
   /** Settings for the use-styling hook */
   tokens: [
-    t => ({
+    (t) => ({
       variant: 'secondaryStandard',
       color: t.colors.bodyText,
       disabled: {
@@ -66,10 +66,10 @@ export const Text = compose<TextType>({
     textName,
   ],
   states: ['disabled'],
-  tokenProps,
+  tokensThatAreAlsoProps,
   slotProps: {
     root: buildProps<ITextProps, TextTokens>(
-      (tokens: TextTokens, theme: ITheme) => ({
+      (tokens: TextTokens, theme: Theme) => ({
         style: {
           margin: 0,
           color: tokens.color,

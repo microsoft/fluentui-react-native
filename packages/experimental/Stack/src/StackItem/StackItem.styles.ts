@@ -14,7 +14,7 @@ export const stylingSettings: UseStylingOptions<StackItemProps, StackItemSlotPro
   /** no real defaults, just look up the name in the settings in case someone decides to set them */
   tokens: [stackItemName],
   /** all tokens are also props, so just copy props onto tokens */
-  tokenProps: true,
+  tokensThatAreAlsoProps: 'all',
   slotProps: {
     root: (tokenProps: StackItemTokens) => {
       const { grow, shrink, disableShrink, align, verticalFill, margin } = tokenProps;

@@ -1,8 +1,33 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Mon, 17 Aug 2020 22:08:34 GMT and should not be manually modified.
+This log was last generated on Tue, 22 Sep 2020 04:57:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.13
+
+Tue, 22 Sep 2020 04:57:02 GMT
+
+### Patches
+
+- Update a11y properties (krsiler@microsoft.com)
+- manually bump button version (taamireh@microsoft.com)
+
+## 0.10.11
+
+Wed, 09 Sep 2020 21:36:19 GMT
+
+### Patches
+
+- Disabled prop-types validation rule (saadnajmi2@gmail.com)
+
+## 0.10.10
+
+Wed, 09 Sep 2020 07:28:42 GMT
+
+### Patches
+
+- Fix Button icon color props (tomun@microsoft.com)
 
 ## 0.10.8
 

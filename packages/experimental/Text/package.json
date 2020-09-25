@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.3.35 <1.0.0",
-    "@fluentui-react-native/framework": "0.2.10"
+    "@fluentui-react-native/framework": "0.3.3"
   },
   "devDependencies": {
     "@types/react-native": "^0.62.0",

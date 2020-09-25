@@ -2,6 +2,81 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Wed, 23 Sep 2020 18:31:48 GMT",
+      "tag": "@fluentui/react-native_v0.16.4",
+      "version": "0.16.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "start publishing src to fix customer source maps",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b3d7b5ba710bc581a6f4db91c91e4ffc185fc427",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 22 Sep 2020 21:42:19 GMT",
+      "tag": "@fluentui/react-native_v0.16.3",
+      "version": "0.16.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Updated Shimmer to not have a module name",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "901b3a534df10a1d471c815349651500d0237575",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 11 Sep 2020 20:25:42 GMT",
+      "tag": "@fluentui/react-native_v0.16.1",
+      "version": "0.16.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add samples and some README text to use-slots and use-styling packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2566347850eff4ed67bfad2a85134481e088cba6",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 09 Sep 2020 21:36:19 GMT",
+      "tag": "@fluentui/react-native_v0.16.1",
+      "version": "0.16.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Disabled prop-types validation rule",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "6042d1bbb538eb130b3fb4ecae360e467379e6ed",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 09 Sep 2020 08:18:37 GMT",
+      "tag": "@fluentui/react-native_v0.16.0",
+      "version": "0.16.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "New shimmer control",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "0c35ad1f0b2c9bfc0456f885c3e2f75645288de5",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Aug 2020 05:03:51 GMT",
       "tag": "@fluentui/react-native_v0.15.89",
       "version": "0.15.89",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/persona
 
-This log was last generated on Mon, 17 Aug 2020 22:08:34 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Sep 2020 21:36:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.83
+
+Wed, 09 Sep 2020 21:36:19 GMT
+
+### Patches
+
+- Disabled prop-types validation rule (saadnajmi2@gmail.com)
 
 ## 0.5.80
 

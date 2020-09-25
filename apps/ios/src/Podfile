@@ -27,6 +27,9 @@ fi
 use_flipper!(false)
 use_test_app! do |target|
   target.app do
+
+    pod 'FluentUI-React-Native-Shimmer', :path => '../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec'
+
     script_phase name: 'Start Packager',
                  script: start_packager_script,
                  execution_position: :before_compile
