@@ -2,6 +2,36 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Fri, 25 Sep 2020 19:21:43 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.9",
+      "version": "0.10.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update react-native-win32 versions - enable logbox",
+            "author": "acoates-ms@noreply.github.com",
+            "commit": "a95ab1b66822cceacc74e24094f85c6917f58086",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Sep 2020 18:01:57 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.8",
+      "version": "0.10.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add experimental theme package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "59d0857d4244fb6b35fb2c9ca7d01cf2a073f461",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Sep 2020 18:31:48 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.10.7",
       "version": "0.10.7",

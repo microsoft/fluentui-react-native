@@ -1,6 +1,4 @@
-import { getBaselinePlatformTheme } from '../BaselinePlatformDefaults';
-import { createMockThemingModuleHelper } from './MockThemingModule';
+import { createThemingModuleHelper } from './ThemingModuleHelpers';
+import { getThemingModule } from '@fluentui-react-native/win32-theme';
 
-export const ThemingModuleHelper = createMockThemingModuleHelper(undefined, undefined, {
-  getPlatformDefaults: getBaselinePlatformTheme
-});
+export const ThemingModuleHelper = createThemingModuleHelper(...getThemingModule());
