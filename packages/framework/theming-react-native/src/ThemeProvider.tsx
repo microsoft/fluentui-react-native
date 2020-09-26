@@ -11,6 +11,8 @@ export const ThemeProvider: React.FunctionComponent<IThemeProviderProps> = (prop
   const [theme, setThemeState] = React.useState(registryToUse.getTheme(themeName));
 
   React.useEffect(() => {
+    setThemeState(registryToUse.getTheme(themeName));
+
     const themeInvalidater: IThemeEventListener = {
       onInvalidate: (name: string) => {
         name === themeName && setThemeState(registryToUse.getTheme(themeName));

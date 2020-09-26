@@ -1,4 +1,4 @@
-import { CHECKBOX_TESTPAGE } from '../../../RNTester/TestComponents/Checkbox/consts';
+import { CHECKBOX_TESTPAGE } from '../../../FluentTester/TestComponents/Checkbox/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class CheckboxTestPage extends BasePage {

@@ -56,12 +56,13 @@ const styles = StyleSheet.create({
 });
 
 export const Test = (props: TestProps) => {
-
   const hostColors = getHostSettingsWin32(useTheme())?.palette;
 
   return (
     <View>
-      <Text style={[styles.name]} variant="heroLargeSemibold" color={hostColors?.TextEmphasis}>{props.name}</Text>
+      <Text style={[styles.name]} variant="heroSemibold">
+        {props.name}
+      </Text>
       <Separator />
       <Stack style={stackStyle}>
         <Text style={styles.description}>{props.description}</Text>
@@ -69,7 +70,9 @@ export const Test = (props: TestProps) => {
       <Stack style={stackStyle}>
         <View style={styles.statusView}>
           <Stack>
-            <Text style={[styles.statusHeader]} variant="headerSemibold">Platform Status</Text>
+            <Text style={[styles.statusHeader]} variant="headerStandard">
+              Platform Status
+            </Text>
             <Text style={[styles.statusLabel]} variant="bodySemibold">
               Win32: <Text style={styles.status}>{props.status.win32Status}</Text>
             </Text>
@@ -88,7 +91,9 @@ export const Test = (props: TestProps) => {
           </Stack>
 
           <Stack style={stackStyle}>
-            <Text style={[styles.statusHeader]} variant="headerSemibold">Status Definitions</Text>
+            <Text style={[styles.statusHeader]} variant="headerStandard">
+              Status Definitions
+            </Text>
             <Text style={[styles.statusLabel]} variant="bodySemibold">
               Production:{' '}
               <Text style={styles.status}>Control is ready for broad partner use and to be used in production-ready scenarios.</Text>
@@ -115,7 +120,7 @@ export const Test = (props: TestProps) => {
         const TestComponent = section.component;
         return (
           <View key={index}>
-            <Text style={[styles.section]} variant="heroStandard" testID={section.testID}>
+            <Text style={[styles.section]} variant="headerSemibold" testID={section.testID}>
               {section.name}
             </Text>
             <Separator />

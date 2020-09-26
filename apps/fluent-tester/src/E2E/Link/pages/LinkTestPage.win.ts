@@ -1,4 +1,4 @@
-import { LINK_TESTPAGE } from '../../../RNTester/TestComponents/Link/consts';
+import { LINK_TESTPAGE } from '../../../FluentTester/TestComponents/Link/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class LinkTestPage extends BasePage {

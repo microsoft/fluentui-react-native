@@ -144,11 +144,9 @@ const whiteColorsPalette: OfficePalette = {
 export function fallbackGetPalette(pal?: string): OfficePalette {
   return pal === 'TaskPane'
     ? {
-      ...whiteColorsPalette,
-      Bkg: '#E6E6E6',
-      BkgCtlEmphasis: 'green',
-      TextCtlEmphasis: 'white',
-    }
+        ...whiteColorsPalette,
+        Bkg: 'antiquewhite',
+      }
     : whiteColorsPalette;
 }
 

@@ -18,8 +18,7 @@ export type ThemeColorDefinition = Palette & {
   bodyText: ColorValue;
   subText: ColorValue;
   disabledText: ColorValue;
-
-  [key: string]: ColorValue | string;
+  [key: string]: ColorValue;
 };
 
 export interface FabricWebPalette {

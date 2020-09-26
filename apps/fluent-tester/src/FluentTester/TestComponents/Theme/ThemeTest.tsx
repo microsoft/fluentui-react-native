@@ -8,9 +8,7 @@ import { ITheme } from '@uifabricshared/theming-ramp';
 import { THEME_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
-
 const getThemedStyles = themedStyleSheet((theme: ITheme) => {
-  const hostSettings = getHostSettingsWin32(theme);
   return {
     swatch: {
       width: 80,
@@ -19,25 +17,10 @@ const getThemedStyles = themedStyleSheet((theme: ITheme) => {
       borderWidth: 2,
       borderColor: theme.colors.bodyText,
     },
-    extraLargeStandardEmphasis: {
-      color: hostSettings ? hostSettings.palette.TextEmphasis : theme.colors.bodyText,
-      fontSize: theme.typography.sizes.header,
-      fontWeight: theme.typography.weights.regular,
-      fontFamily: theme.typography.families.primary,
-    } as TextStyle,
-    largeStandard: {
-      color: theme.colors.bodyText,
-      fontSize: theme.typography.sizes.body,
-      fontWeight: theme.typography.weights.regular,
-      fontFamily: theme.typography.families.primary,
-      marginBottom: 5,
-    } as TextStyle,
     stackStyle: {
       borderWidth: 2,
-      borderColor: theme.colors.focusBorder,
       padding: 12,
       margin: 8,
-      backgroundColor: theme.colors.background,
     },
   };
 });
@@ -59,7 +42,7 @@ const Panel: React.FunctionComponent = () => {
   const onClick = React.useCallback(() => setDisabled(!disabled), [disabled, setDisabled]);
   const themedStyles = getThemedStyles(useTheme());
   return (
-    <View style={[commonTestStyles.view, themedStyles.stackStyle]}>
+    <View testID={THEME_TESTPAGE} style={[commonTestStyles.view, themedStyles.stackStyle]}>
       <PrimaryButton onClick={onClick} content="Primary Button" disabled={disabled} />
       <Button onClick={onClick} content="Default Button" disabled={disabled} />
       <StealthButton onClick={onClick} content="Stealth Button" disabled={disabled} />
@@ -95,7 +78,7 @@ const SwatchList: React.FunctionComponent<{ hostKey: string }> = ({ hostKey }: {
     (key: string) => {
       return { name: key + ' (' + hostSettings[hostKey][key] + ')', color: hostSettings[hostKey][key] };
     },
-    [hostSettings[hostKey]]
+    [hostSettings[hostKey]],
   );
 
   const flattenArray = React.useCallback(() => {
@@ -109,7 +92,7 @@ const SwatchList: React.FunctionComponent<{ hostKey: string }> = ({ hostKey }: {
   }, []);
   return (
     <View style={[commonTestStyles.view]}>
-      <Text style={themedStyles.largeStandard}>getHostSettingsWin32(theme: ITheme).{hostKey}</Text>
+      <Text variant="bodySemibold">getHostSettingsWin32(theme: ITheme).{hostKey}</Text>
       <View style={themedStyles.stackStyle}>
         <FlatList data={paletteAsArray} renderItem={renderSwatch} />
       </View>
@@ -117,23 +100,18 @@ const SwatchList: React.FunctionComponent<{ hostKey: string }> = ({ hostKey }: {
   );
 };
 
-const ThemeTestInner: React.FunctionComponent = () => {
-  const themedStyles = getThemedStyles(useTheme());
-  return (
-    <View testID={THEME_TESTPAGE}>
-      <Panel />
-      <Text style={themedStyles.extraLargeStandardEmphasis}>Host-specific Theme Settings</Text>
-      <Separator />
-      <SwatchList hostKey="palette" />
-      <SwatchList hostKey="colors" />
-    </View>
-  );
-};
-
 const themeSections: TestSection[] = [
   {
-    name: 'Theme Test',
-    component: ThemeTestInner,
+    name: 'Component Examples',
+    component: Panel,
+  },
+  {
+    name: 'Theme.host.palette',
+    component: () => <SwatchList hostKey="palette" />,
+  },
+  {
+    name: 'Theme.host.colors',
+    component: () => <SwatchList hostKey="colors" />,
   },
 ];
 
@@ -149,7 +127,5 @@ export const ThemeTest: React.FunctionComponent = () => {
   const description =
     'The entire color palette of the controls is themeable. We provide a set of sensible defaults, but you can override all colors individually.';
 
-  return (
-    <Test name="Theme Test" description={description} sections={themeSections} status={status}></Test>
-  );
+  return <Test name="Theme Test" description={description} sections={themeSections} status={status}></Test>;
 };

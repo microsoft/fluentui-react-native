@@ -1,4 +1,4 @@
-import { PERSONACOIN_TESTPAGE } from '../../../RNTester/TestComponents/PersonaCoin/consts';
+import { PERSONACOIN_TESTPAGE } from '../../../FluentTester/TestComponents/PersonaCoin/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class PersonaCoinTestPage extends BasePage {
