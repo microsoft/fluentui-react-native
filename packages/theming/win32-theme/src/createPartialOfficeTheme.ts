@@ -1,14 +1,7 @@
-import { ColorRamp, OfficePalette, PartialTheme } from '@fluentui-react-native/theme-types';
+import { OfficePalette, PartialTheme } from '@fluentui-react-native/theme-types';
 import { OfficeThemingModule } from './NativeModule/officeThemingModule';
 import { paletteFromOfficeColors } from './paletteFromOfficeColors';
 
-const createColorRamp = ({ values, index = -1 }: Partial<ColorRamp>) => ({
-  values,
-  index,
-  toString() {
-    return this.values[Math.round(values.length / 2)];
-  },
-});
 
 /**
  * create a partial theme with overrides from the office native module
@@ -19,10 +12,6 @@ const createColorRamp = ({ values, index = -1 }: Partial<ColorRamp>) => ({
 export function createPartialOfficeTheme(module: OfficeThemingModule, themeName?: string, palette?: OfficePalette): PartialTheme {
   return {
     colors: {
-      brand: createColorRamp({ values: module.ramps.App }),
-      neutral: createColorRamp({ values: module.ramps.FluentGrays }),
-      ...{ neutrals2: createColorRamp({ values: module.ramps.ClassicGrays }) },
-      warning: createColorRamp({ values: module.ramps.Sepias }),
       ...(palette && paletteFromOfficeColors(palette)),
     },
     typography: module.fluentTypography,

@@ -12,6 +12,7 @@ import { HOMEPAGE_SHIMMER_BUTTON, ShimmerTest } from './TestComponents/Shimmer';
 import { HOMEPAGE_SVG_BUTTON, SvgTest } from './TestComponents/Svg';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
+import { HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL, ExperimentalButtonTest } from './TestComponents/ButtonExperimental';
 
 export const Tests: TestDescription[] = [
   {
@@ -79,4 +80,9 @@ export const Tests: TestDescription[] = [
     component: SvgTest,
     testPage: HOMEPAGE_SVG_BUTTON,
   },
+  {
+    name: 'Experimental Button',
+    component: ExperimentalButtonTest,
+    testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL
+  }
 ];

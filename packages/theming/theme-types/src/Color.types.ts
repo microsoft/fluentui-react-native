@@ -13,33 +13,13 @@
  */
 export type ColorValue = string;
 
-/** @public */
-export interface CastableToString {
-  toString: () => string;
-}
-
-/** @public */
-export interface ColorRamp extends CastableToString {
-  values: string[];
-  index: number;
-}
-
 export type ThemeColorDefinition = Palette & {
   background: ColorValue;
   bodyText: ColorValue;
   subText: ColorValue;
   disabledText: ColorValue;
 
-  brand: ColorRamp;
-  // accent: IColorRamp;
-
-  neutral: ColorRamp;
-
-  // success: IColorRamp;
-  warning: ColorRamp;
-  // danger: IColorRamp;
-
-  [key: string]: ColorRamp | string;
+  [key: string]: ColorValue | string;
 };
 
 export interface FabricWebPalette {

@@ -70,6 +70,8 @@ export interface ButtonTokens extends FontTokens, IBorderTokens {
   focused?: ButtonTokens;
   pressed?: ButtonTokens;
   disabled?: ButtonTokens;
+  primary?: ButtonTokens;
+  ghost?: ButtonTokens;
 }
 
 export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
@@ -93,6 +95,12 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
 
   testID?: string;
   tooltip?: string;
+
+  /** A button can emphasize that it represents the primary action. */
+  primary?: boolean;
+
+  /** A button can blend into its background to become less emphasized. */
+  ghost?: boolean;
 }
 
 export interface ButtonSlotProps {

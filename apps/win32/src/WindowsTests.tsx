@@ -13,6 +13,7 @@ import { HOMEPAGE_SVG_BUTTON, SvgTest } from '../../fluent-tester/src/RNTester/T
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from '../../fluent-tester/src/RNTester/TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from '../../fluent-tester/src/RNTester/TestComponents/Theme';
 import { TestDescription } from '@fluentui-react-native/tester/src/RNTester/TestComponents';
+import { HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL, ExperimentalButtonTest } from '../../fluent-tester/src/RNTester/TestComponents/ButtonExperimental';
 
 export const windowsTests: TestDescription[] = [
   {
@@ -84,5 +85,10 @@ export const windowsTests: TestDescription[] = [
     name: 'Svg Test',
     component: SvgTest,
     testPage: HOMEPAGE_SVG_BUTTON
+  },
+  {
+    name: 'Experimental Button',
+    component: ExperimentalButtonTest,
+    testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL
   }
 ];
