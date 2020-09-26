@@ -1,7 +1,8 @@
-import { StealthButton, Separator } from '@fluentui/react-native';
-import { useTheme } from '@uifabricshared/theming-react-native';
+import { StealthButton, Separator, Text } from '@fluentui/react-native';
+import { getHostSettingsWin32, useTheme } from '@uifabricshared/theming-react-native';
 import * as React from 'react';
-import { Picker, ScrollView, View, Text } from 'react-native';
+import { Picker, ScrollView, View, Text as RNText } from 'react-native';
+import { setAppColors } from './CustomThemes';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fabricTesterStyles } from './TestComponents/Common/styles';
@@ -16,7 +17,7 @@ MessageQueue.spy(true);
 registerThemes();
 
 const EmptyComponent: React.FunctionComponent = () => {
-  return <Text style={fabricTesterStyles.noTest}>Select a component from the left.</Text>;
+  return <RNText style={fabricTesterStyles.noTest}>Select a component from the left.</RNText>;
 };
 
 export interface IFabricTesterProps {
@@ -24,41 +25,28 @@ export interface IFabricTesterProps {
   enabledTests: TestDescription[];
 }
 
-export let app = 'office';
-
 const Header: React.FunctionComponent<{}> = () => {
 
   const [selectedPlatform, setSelectedPlatform] = React.useState('win32');
-  const [selectedApp, setSelectedApp] = React.useState('office');
+  const [selectedApp, setSelectedApp] = React.useState('Office');
   const [selectedTheme, setSelectedTheme] = React.useState('default');
 
-  const themeColor = () => {
-
-    let color = 'black'; // default: office (black)
-
-    if (selectedApp == 'office') color = 'black';
-    if (selectedApp == 'word') color = '#2B579A';
-    if (selectedApp == 'excel') color = '#217346';
-    if (selectedApp == 'powerpoint') color = '#B7472A';
-    if (selectedApp == 'outlook') color = '#106EBE';
-
-    return { color: color };
-  }
-
   const onAppChange = React.useCallback((appValue: string) => {
-    app = appValue;
     setSelectedApp(appValue);
+    setAppColors(appValue);
   }, []);
+
+  const hostColors = getHostSettingsWin32(useTheme())?.palette;
 
   return (
     <View style={fabricTesterStyles.header}>
-      <Text style={[fabricTesterStyles.testHeader, themeColor()]} testID={BASE_TESTPAGE}>
+      <Text style={[fabricTesterStyles.testHeader]} variant="heroSemibold" color={hostColors?.TextEmphasis} testID={BASE_TESTPAGE}>
         ⚛ FluentUI Tests
       </Text>
 
       <View style={fabricTesterStyles.pickerRoot}>
         <View style={fabricTesterStyles.picker}>
-          <Text style={fabricTesterStyles.pickerLabel}>Platform:  </Text>
+          <RNText style={fabricTesterStyles.pickerLabel}>Platform:  </RNText>
           <Picker
             selectedValue={selectedPlatform}
             style={fabricTesterStyles.dropdown}
@@ -73,22 +61,22 @@ const Header: React.FunctionComponent<{}> = () => {
         </View>
 
         <View style={fabricTesterStyles.picker}>
-          <Text style={fabricTesterStyles.pickerLabel}>App:  </Text>
+          <RNText style={fabricTesterStyles.pickerLabel}>App:  </RNText>
           <Picker
             selectedValue={selectedApp}
             style={fabricTesterStyles.dropdown}
             onValueChange={(appValue) => onAppChange(appValue)}
           >
-            <Picker.Item label="Office" value="office" />
-            <Picker.Item label="Word" value="word" />
-            <Picker.Item label="Excel" value="excel" />
-            <Picker.Item label="Powerpoint" value="powerpoint" />
-            <Picker.Item label="Outlook" value="outlook" />
+            <Picker.Item label="Office" value="Office" />
+            <Picker.Item label="Word" value="Word" />
+            <Picker.Item label="Excel" value="Excel" />
+            <Picker.Item label="Powerpoint" value="Powerpoint" />
+            <Picker.Item label="Outlook" value="Outlook" />
           </Picker>
         </View>
 
         <View style={fabricTesterStyles.picker}>
-          <Text style={fabricTesterStyles.pickerLabel}>Theme:  </Text>
+          <RNText style={fabricTesterStyles.pickerLabel}>Theme:  </RNText>
           <Picker
             selectedValue={selectedTheme}
             style={fabricTesterStyles.dropdown}

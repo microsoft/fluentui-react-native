@@ -15,11 +15,19 @@ export interface NativeColorRamps {
   [key: string]: ColorValue[];
 }
 
+export interface NativeColorNames {
+  FluentGrays: string[];
+  ClassicGrays: string[];
+  App: string[];
+  Sepias: string[];
+}
+
 export interface OfficeThemingModule {
   getPalette(palette?: string): OfficePalette | CxxException;
   typography: object;
   fluentTypography: Typography;
   ramps: NativeColorRamps;
+  rampNames: NativeColorNames;
   initialHostThemeSetting?: string;
 }
 

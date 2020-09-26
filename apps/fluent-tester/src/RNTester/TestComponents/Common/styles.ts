@@ -104,8 +104,6 @@ export const fabricTesterStyles = StyleSheet.create({
   testHeader: {
     marginBottom: 8,
     marginTop: 4,
-    fontSize: 18,
-    fontWeight: 'bold'
   },
 
   testList: {

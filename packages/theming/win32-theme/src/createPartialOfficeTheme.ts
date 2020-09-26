@@ -3,6 +3,16 @@ import { OfficeThemingModule } from './NativeModule/officeThemingModule';
 import { paletteFromOfficeColors } from './paletteFromOfficeColors';
 
 
+type Colors = { [key: string]: string };
+
+const getRamps = (module: OfficeThemingModule): Colors => {
+  return Object.keys(module.ramps).reduce<Colors>((total: Colors, colorRamp: string) => {
+    return Object.assign(total, ...module.rampNames[colorRamp].map((rampValueName: string, index: number) => {
+      return { [rampValueName]: module.ramps[colorRamp][index] };
+    }));
+  }, {});
+}
+
 /**
  * create a partial theme with overrides from the office native module
  *
@@ -16,7 +26,10 @@ export function createPartialOfficeTheme(module: OfficeThemingModule, themeName?
     },
     typography: module.fluentTypography,
     host: {
+      // Office Semantic Colors
       palette: palette || {},
+      // Office Branding Colors
+      colors: getRamps(module),
     },
     ...(themeName && { name: themeName }),
   };
