@@ -64,6 +64,7 @@ export function checkReRender(render: JSXProducer, depth: number = 1) {
   const filter = { children: true };
   const w1 = mount(render());
   const t1 = snapshotPropTree(w1, depth, filter);
+  w1.setProps({});
   const w2 = w1.update();
   const t2 = snapshotPropTree(w2, depth, filter);
   compareTrees(t1, t2, []);

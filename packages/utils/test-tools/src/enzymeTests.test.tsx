@@ -39,11 +39,14 @@ const MultiLevelBroken = (props) => {
   );
 };
 
+let renderCount = 0;
+
 const SimpleWithHook = (props) => {
   const { children, ...rest } = props;
   const onKeyUp = React.useMemo(() => {
     console.log('something');
   }, []);
+  renderCount++;
   return (
     <span {...rest} {...{ onKeyUp }} style={fixedStyle}>
       {children}
@@ -61,7 +64,9 @@ describe('enzyme component test validation', () => {
   });
 
   it('handles memoed functions', () => {
+    const initialCount = renderCount;
     checkReRender(() => <SimpleWithHook>ReRender</SimpleWithHook>);
+    expect(renderCount).toEqual(initialCount + 2);
   });
 
   it('catches a deep error for a broken multi-level component', () => {
