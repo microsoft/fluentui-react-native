@@ -9,9 +9,10 @@ import { tests } from './testPages';
 registerThemes();
 
 export const FluentTesterApp: React.FunctionComponent<FluentTesterProps> = (props) => {
+  const [theme, setTheme] = React.useState('');
   return (
-    <ThemeProvider registry={customRegistry}>
-      <FluentTester enabledTests={tests} {...props} />
+    <ThemeProvider registry={customRegistry} theme={theme}>
+      <FluentTester theme={theme} setSelectedTheme={setTheme} enabledTests={tests} {...props} />
     </ThemeProvider>
   );
 };

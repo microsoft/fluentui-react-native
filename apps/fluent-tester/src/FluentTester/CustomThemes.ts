@@ -6,6 +6,7 @@ import {
   ThemingModuleHelper,
 } from '@uifabricshared/theming-react-native';
 import { IProcessTheme } from '@uifabricshared/theme-registry';
+import { Theme } from '@fluentui-react-native/framework';
 
 const caterpillarBlackTheme: IPartialTheme = {
   // colors: {
@@ -135,20 +136,26 @@ const brandColors = {
 
 // This IProcessTheme takes the parent theme and shims in the brand colors selected in the RadioGroup
 const getFakeBrandTheme = (brand: string) => {
-  return (theme: ITheme) => {
+  return (theme: Theme) => {
     if (brand === 'Office') {
       return {};
     }
 
-    const brandedTheme = { colors: {}, host: { palette: {} } };
+    const brandedTheme = { colors: {}, host: { palette: {}, colors: {} } };
     Object.keys(theme.colors).forEach((value: string) => {
       const brandKey = brandColors.Office[theme.colors[value]];
       if (brandKey) brandedTheme.colors[value] = brandColors[brand][brandKey];
     });
 
     Object.keys(theme.host.palette).forEach((value: string) => {
-      const brandKey = brandColors.Office[theme.host.palette[value]];
+      const colorVal = theme.host.palette[value].toLowerCase();
+      const brandKey = brandColors.Office[colorVal];
       if (brandKey) brandedTheme.host.palette[value] = brandColors[brand][brandKey];
+    });
+
+    Object.keys(theme.host.colors).forEach((value: string) => {
+      const brandKey = brandColors.Office[theme.host.colors[value]];
+      if (brandKey) brandedTheme.host.colors[value] = brandColors[brand][brandKey];
     });
     return brandedTheme;
   };
