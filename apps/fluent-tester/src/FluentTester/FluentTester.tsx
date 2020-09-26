@@ -6,7 +6,6 @@ import { setAppColors } from './CustomThemes';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fabricTesterStyles } from './TestComponents/Common/styles';
-import { registerThemes } from './TestComponents/Theme/CustomThemes';
 
 // uncomment the below lines to enable message spy
 /*
@@ -14,19 +13,16 @@ import MessageQueue from 'react-native/Libraries/BatchedBridge/MessageQueue';
 MessageQueue.spy(true);
 */
 
-registerThemes();
-
 const EmptyComponent: React.FunctionComponent = () => {
   return <RNText style={fabricTesterStyles.noTest}>Select a component from the left.</RNText>;
 };
 
-export interface IFabricTesterProps {
+export interface FluentTesterProps {
   initialTest?: string;
   enabledTests: TestDescription[];
 }
 
 const Header: React.FunctionComponent<{}> = () => {
-
   const [selectedPlatform, setSelectedPlatform] = React.useState('win32');
   const [selectedApp, setSelectedApp] = React.useState('Office');
   const [selectedTheme, setSelectedTheme] = React.useState('default');
@@ -46,7 +42,7 @@ const Header: React.FunctionComponent<{}> = () => {
 
       <View style={fabricTesterStyles.pickerRoot}>
         <View style={fabricTesterStyles.picker}>
-          <RNText style={fabricTesterStyles.pickerLabel}>Platform:  </RNText>
+          <RNText style={fabricTesterStyles.pickerLabel}>Platform: </RNText>
           <Picker
             selectedValue={selectedPlatform}
             style={fabricTesterStyles.dropdown}
@@ -61,12 +57,8 @@ const Header: React.FunctionComponent<{}> = () => {
         </View>
 
         <View style={fabricTesterStyles.picker}>
-          <RNText style={fabricTesterStyles.pickerLabel}>App:  </RNText>
-          <Picker
-            selectedValue={selectedApp}
-            style={fabricTesterStyles.dropdown}
-            onValueChange={(appValue) => onAppChange(appValue)}
-          >
+          <RNText style={fabricTesterStyles.pickerLabel}>App: </RNText>
+          <Picker selectedValue={selectedApp} style={fabricTesterStyles.dropdown} onValueChange={(appValue) => onAppChange(appValue)}>
             <Picker.Item label="Office" value="Office" />
             <Picker.Item label="Word" value="Word" />
             <Picker.Item label="Excel" value="Excel" />
@@ -76,7 +68,7 @@ const Header: React.FunctionComponent<{}> = () => {
         </View>
 
         <View style={fabricTesterStyles.picker}>
-          <RNText style={fabricTesterStyles.pickerLabel}>Theme:  </RNText>
+          <RNText style={fabricTesterStyles.pickerLabel}>Theme: </RNText>
           <Picker
             selectedValue={selectedTheme}
             style={fabricTesterStyles.dropdown}
@@ -90,9 +82,9 @@ const Header: React.FunctionComponent<{}> = () => {
       </View>
     </View>
   );
-}
+};
 
-export const FabricTester: React.FunctionComponent<IFabricTesterProps> = (props: IFabricTesterProps) => {
+export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: FluentTesterProps) => {
   // sort tests alphabetically by name
   const sortedTestComponents = props.enabledTests.sort((a, b) => a.name.localeCompare(b.name));
 

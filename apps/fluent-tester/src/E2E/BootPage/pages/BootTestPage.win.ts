@@ -1,17 +1,17 @@
-import { HOMEPAGE_CHECKBOX_BUTTON } from '../../../RNTester/TestComponents/Checkbox/consts';
-import { HOMEPAGE_BUTTON_BUTTON } from '../../../RNTester/TestComponents/Button/consts';
-import { HOMEPAGE_CALLOUT_BUTTON } from '../../../RNTester/TestComponents/Callout/consts';
-import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../../RNTester/TestComponents/FocusTrapZone/consts';
-import { HOMEPAGE_LINK_BUTTON } from '../../../RNTester/TestComponents/Link/consts';
-import { HOMEPAGE_PERSONA_BUTTON } from '../../../RNTester/TestComponents/Persona/consts';
-import { HOMEPAGE_PERSONACOIN_BUTTON } from '../../../RNTester/TestComponents/PersonaCoin/consts';
-import { HOMEPAGE_PRESSABLE_BUTTON } from '../../../RNTester/TestComponents/Pressable/consts';
-import { HOMEPAGE_RADIOGROUP_BUTTON } from '../../../RNTester/TestComponents/RadioGroup/consts';
-import { HOMEPAGE_SEPARATOR_BUTTON } from '../../../RNTester/TestComponents/Separator/consts';
-import { HOMEPAGE_SVG_BUTTON } from '../../../RNTester/TestComponents/Svg/consts';
-import { HOMEPAGE_TEXT_BUTTON } from '../../../RNTester/TestComponents/Text/consts';
-import { HOMEPAGE_THEME_BUTTON } from '../../../RNTester/TestComponents/Theme/consts';
-import { BASE_TESTPAGE } from '../../../RNTester/TestComponents/Common/consts';
+import { HOMEPAGE_CHECKBOX_BUTTON } from '../../../FluentTester/TestComponents/Checkbox/consts';
+import { HOMEPAGE_BUTTON_BUTTON } from '../../../FluentTester/TestComponents/Button/consts';
+import { HOMEPAGE_CALLOUT_BUTTON } from '../../../FluentTester/TestComponents/Callout/consts';
+import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../../FluentTester/TestComponents/FocusTrapZone/consts';
+import { HOMEPAGE_LINK_BUTTON } from '../../../FluentTester/TestComponents/Link/consts';
+import { HOMEPAGE_PERSONA_BUTTON } from '../../../FluentTester/TestComponents/Persona/consts';
+import { HOMEPAGE_PERSONACOIN_BUTTON } from '../../../FluentTester/TestComponents/PersonaCoin/consts';
+import { HOMEPAGE_PRESSABLE_BUTTON } from '../../../FluentTester/TestComponents/Pressable/consts';
+import { HOMEPAGE_RADIOGROUP_BUTTON } from '../../../FluentTester/TestComponents/RadioGroup/consts';
+import { HOMEPAGE_SEPARATOR_BUTTON } from '../../../FluentTester/TestComponents/Separator/consts';
+import { HOMEPAGE_SVG_BUTTON } from '../../../FluentTester/TestComponents/Svg/consts';
+import { HOMEPAGE_TEXT_BUTTON } from '../../../FluentTester/TestComponents/Text/consts';
+import { HOMEPAGE_THEME_BUTTON } from '../../../FluentTester/TestComponents/Theme/consts';
+import { BASE_TESTPAGE } from '../../../FluentTester/TestComponents/Common/consts';
 import { By, BasePage } from '../../common/BasePage';
 
 class BootTestPage extends BasePage {

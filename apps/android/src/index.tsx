@@ -1,17 +1,13 @@
 'use strict';
 
-import { customRegistry, FabricTester, IFabricTesterProps } from '@fluentui-react-native/tester';
-import { ThemeProvider } from '@uifabricshared/theming-react-native';
+import {FluentTesterApp} from '@fluentui-react-native/tester';
 import * as React from 'react';
-import { AppRegistry, SafeAreaView } from 'react-native';
-import { androidTests } from './androidTests';
+import {AppRegistry, SafeAreaView} from 'react-native';
 
-const FluentTester: React.FunctionComponent<IFabricTesterProps> = props => {
+const FluentTester: React.FunctionComponent = () => {
   return (
     <SafeAreaView>
-      <ThemeProvider registry={customRegistry}>
-        <FabricTester enabledTests={androidTests} {...props} />
-      </ThemeProvider>
+      <FluentTesterApp />
     </SafeAreaView>
   );
 };

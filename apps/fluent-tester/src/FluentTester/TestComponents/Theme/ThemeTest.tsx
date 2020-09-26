@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { FlatList, View, ViewStyle, TextStyle, Text, StyleSheet } from 'react-native';
-import { getHostSettingsWin32, ThemeProvider, useTheme } from '@uifabricshared/theming-react-native';
+import { getHostSettingsWin32, useTheme } from '@uifabricshared/theming-react-native';
 import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
 import { commonTestStyles } from '../Common/styles';
 import { Button, PrimaryButton, StealthButton, Separator } from '@fluentui/react-native';
 import { ITheme } from '@uifabricshared/theming-ramp';
 import { THEME_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-
 
 const getThemedStyles = themedStyleSheet((theme: ITheme) => {
   const hostSettings = getHostSettingsWin32(theme);
@@ -95,7 +94,7 @@ const SwatchList: React.FunctionComponent<{ hostKey: string }> = ({ hostKey }: {
     (key: string) => {
       return { name: key + ' (' + hostSettings[hostKey][key] + ')', color: hostSettings[hostKey][key] };
     },
-    [hostSettings[hostKey]]
+    [hostSettings[hostKey]],
   );
 
   const flattenArray = React.useCallback(() => {
@@ -149,7 +148,5 @@ export const ThemeTest: React.FunctionComponent = () => {
   const description =
     'The entire color palette of the controls is themeable. We provide a set of sensible defaults, but you can override all colors individually.';
 
-  return (
-    <Test name="Theme Test" description={description} sections={themeSections} status={status}></Test>
-  );
+  return <Test name="Theme Test" description={description} sections={themeSections} status={status}></Test>;
 };
