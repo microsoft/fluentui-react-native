@@ -81,7 +81,7 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
     }),
     buttonName,
   ],
-  states: ['hovered', 'focused', 'pressed', 'disabled'],
+  states: ['primary', 'ghost', 'hovered', 'focused', 'pressed', 'disabled'],
   slotProps: {
     root: buildProps(
       (tokens: ButtonTokens, theme: Theme) => ({

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FlatList, View, ViewStyle, TextStyle, Text, StyleSheet } from 'react-native';
-import { getHostSettingsWin32, ThemeProvider, useTheme } from '@uifabricshared/theming-react-native';
+import { getHostSettingsWin32, useTheme } from '@uifabricshared/theming-react-native';
 import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
 import { commonTestStyles } from '../Common/styles';
 import { Button, PrimaryButton, StealthButton, Separator } from '@fluentui/react-native';

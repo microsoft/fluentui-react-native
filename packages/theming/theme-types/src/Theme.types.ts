@@ -1,4 +1,4 @@
-import { ThemeColorDefinition } from './Color.types';
+import { ColorValue, ThemeColorDefinition } from './Color.types';
 import { OfficePalette } from './palette.types';
 import { Typography, PartialTypography } from './Typography.types';
 
@@ -23,6 +23,7 @@ export interface Theme {
   host: {
     // Office palette, if running in Office with the native module connected in the theme
     palette?: OfficePalette;
+    colors?: { [key: string]: ColorValue };
   };
 }
 

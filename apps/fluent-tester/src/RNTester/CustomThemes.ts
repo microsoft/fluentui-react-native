@@ -1,4 +1,4 @@
-import { IPartialTheme, ITheme, createPlatformThemeRegistry, ThemeRegistry, getHostSettingsWin32, ThemingModuleHelper } from '@uifabricshared/theming-react-native';
+import { IPartialTheme, ITheme, createPlatformThemeRegistry, ThemeRegistry, ThemingModuleHelper } from '@uifabricshared/theming-react-native';
 import { IProcessTheme } from '@uifabricshared/theme-registry';
 
 const caterpillarBlackTheme: IPartialTheme = {
@@ -74,37 +74,37 @@ const caterpillarTheme: IProcessTheme<ITheme, IPartialTheme> = (t: ITheme) => {
   }
 };
 
-const brandColors = {
-  Word: ['#E3ECFA', '#A5B9D1', '#7DA3C6', '#4A78B0', '#3C65A4', '#2B579A', '#124078', '#002050'],
-  Excel: ['#E9F5EE', '#9FCDB3', '#6EB38A', '#4E9668', '#3F8159', '#217346', '#0E5C2F', '#004B1C'],
-  Powerpoint: ['#FCF0ED', '#FDC9B5', '#ED9583', '#E86E58', '#C75033', '#B7472A', '#A92B1A', '#740912'],
-  Outlook: ['#CCE3F5', '#B3D6F2', '#69AFE5', '#2488D8', '#0078D7', '#106EBE', '#1664A7', '#135995'],
-};
+// const brandColors = {
+//   Word: { App1: '#E3ECFA', App2: '#A5B9D1', App3: '#7DA3C6', App4: '#4A78B0', App5: '#3C65A4', App6: '#2B579A', App7: '#124078', App8: '#002050' },
+//   Excel: { App1: '#E9F5EE', App2: '#9FCDB3', App3: '#6EB38A', App4: '#4E9668', App5: '#3F8159', App6: '#217346', App7: '#0E5C2F', App8: '#004B1C' },
+//   Powerpoint: { App1: '#FCF0ED', App2: '#FDC9B5', App3: '#ED9583', App4: '#E86E58', App5: '#C75033', App6: '#B7472A', App7: '#A92B1A', App8: '#740912' },
+//   Outlook: { App1: '#CCE3F5', App2: '#B3D6F2', App3: '#69AFE5', App4: '#2488D8', App5: '#0078D7', App6: '#106EBE', App7: '#1664A7', App8: '#135995' },
+// };
 
 // This IProcessTheme takes the parent theme and shims in the brand colors selected in the RadioGroup
 const getFakeBrandTheme = (brand: string) => {
   return (theme: ITheme) => {
-    if (brand === 'Office') {
+    if (brand === 'Office' || theme === undefined) {
       return {};
     }
 
-    const brandValues = theme.colors.brand.values;
-    const brandedTheme = { colors: {}, host: { palette: {} } };
-    Object.keys(theme.colors).forEach((value: string) => {
-      if (typeof theme.colors[value] === 'string') {
-        const index = brandValues.indexOf(theme.colors[value].toString());
-        if (index !== -1) brandedTheme.colors[value] = brandColors[brand][index];
-      }
-    });
+    // const brandValues = Object.values(theme.host.colors);
+    // const brandedTheme = { colors: {}, host: { palette: {} } };
+    // Object.keys(theme.colors).forEach((value: string) => {
+    //   if (typeof theme.colors[value] === 'string') {
+    //     const index = brandValues.indexOf(theme.colors[value].toString());
+    //     if (index !== -1) brandedTheme.colors[value] = brandColors[brand][index];
+    //   }
+    // });
 
-    const hostThemeSettings = getHostSettingsWin32(theme);
-    if (hostThemeSettings === undefined) return brandedTheme;
+    // const hostThemeSettings = getHostSettingsWin32(theme);
+    // if (hostThemeSettings === undefined) return brandedTheme;
 
-    Object.keys(hostThemeSettings.palette).forEach((value: string) => {
-      const index = brandValues.indexOf(hostThemeSettings.palette[value].toString());
-      if (index !== -1) brandedTheme.host.palette[value] = brandColors[brand][index];
-    });
-    return brandedTheme;
+    // Object.keys(hostThemeSettings.palette).forEach((value: string) => {
+    //   const index = brandValues.indexOf(hostThemeSettings.palette[value].toString());
+    //   if (index !== -1) brandedTheme.host.palette[value] = brandColors[brand][index];
+    // });
+    return {};//brandedTheme;
   };
 }
 
