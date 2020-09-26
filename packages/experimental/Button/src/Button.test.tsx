@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from './Button';
 import * as renderer from 'react-test-renderer';
-import { checkRenderConsistency } from '@fluentui-react-native/test-tools';
+import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 
 describe('Button component tests', () => {
   it('Button default', () => {
@@ -11,5 +11,19 @@ describe('Button component tests', () => {
 
   it('Button simple rendering does not invalidate styling', () => {
     checkRenderConsistency(() => <Button content="Default button" />, 2);
+  });
+
+  it('Button re-renders correctly', () => {
+    checkReRender(() => <Button content="Render twice" />, 2);
+  });
+
+  it('Button shares produced styles across multiple renders', () => {
+    const style = { backgroundColor: 'black' };
+    checkRenderConsistency(() => <Button content="Shared styles" style={style} />, 2);
+  });
+
+  it('Button re-renders correctly with style', () => {
+    const style = { borderColor: 'blue' };
+    checkReRender(() => <Button content="Shared Style Render" style={style} />, 2);
   });
 });
