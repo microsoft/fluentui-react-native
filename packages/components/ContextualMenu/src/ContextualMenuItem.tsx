@@ -8,7 +8,7 @@ import { Text } from '@fluentui-react-native/text';
 import { settings } from './ContextualMenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useViewCommandFocus, useKeyCallback } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
 
 export const ContextualMenuItem = compose<ContextualMenuItemType>({
@@ -51,12 +51,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         componentRef.current.focus();
       }, [componentRef]);
 
-    const onItemHoverOut = React.useCallback(
-      () => {
-        componentRef.current.blur();
-      }, [componentRef]);
-
-    const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn, onHoverOut: onItemHoverOut });
+    const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn });
 
     // set up state
     const state: ContextualMenuItemState = {
