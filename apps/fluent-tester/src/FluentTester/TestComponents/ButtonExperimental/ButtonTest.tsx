@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { ButtonVariantTest } from './ButtonVariantTest';
+import { ButtonVariantTest } from './ButtonVariantTestSection';
+import { ToggleButtonTest } from './ToggleButtonTestSection';
 import { ExperimentalButtonTestPageId } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
@@ -8,6 +9,10 @@ const buttonSections: TestSection[] = [
     name: 'Button Variants',
     testID: ExperimentalButtonTestPageId,
     component: ButtonVariantTest,
+  },
+  {
+    name: 'Toggle Button',
+    component: ToggleButtonTest,
   },
 ];
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export type OnToggleCallback = (value: boolean) => void;
+export type OnToggleCallback = (value?: boolean) => void;
 export type OnChangeCallback = () => void;
 
 /* Re-usable hook for toggle components.

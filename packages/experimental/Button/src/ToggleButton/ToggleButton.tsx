@@ -7,6 +7,7 @@ import { stylingSettings } from './ToggleButton.styling';
 import { filterImageProps } from '@fluentui-react-native/adapters';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from '../useButton';
+import { useAsToggle } from '@fluentui-react-native/interactive-hooks';
 
 export const ToggleButton = compose<ToggleButtonType>({
   displayName: toggleButtonName,
@@ -20,12 +21,17 @@ export const ToggleButton = compose<ToggleButtonType>({
     icon: filterImageProps,
   },
   render: (userProps: ToggleButtonProps, useSlots: UseSlots<ToggleButtonType>) => {
-    const { icon, content, ...rest } = userProps;
+    const { icon, content, defaultChecked, checked, onClick, ...rest } = userProps;
 
-    const button = useButton(rest);
+    // Warns defaultChecked and checked being mutually exclusive.
+    if (defaultChecked != undefined && checked != undefined) {
+      console.warn('defaultChecked and checked are mutually exclusive to one another. Use one or the other.');
+    }
+    const [checkedValue, toggle] = useAsToggle(defaultChecked, checked, onClick);
+    const button = useButton({ onClick: toggle, ...rest });
 
     // grab the styled slots
-    const Slots = useSlots(userProps, (layer) => button.state[layer] || userProps[layer]);
+    const Slots = useSlots(userProps, (layer) => (layer === 'checked' && checkedValue) || button.state[layer] || userProps[layer]);
 
     // now return the handler for finishing render
     return (final: ToggleButtonProps, ...children: React.ReactNode[]) => {

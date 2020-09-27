@@ -15,9 +15,6 @@ export const ButtonVariantTest: React.FunctionComponent<{}> = () => {
       <CompoundButton content="Default" secondaryContent="Compound" style={commonTestStyles.vmargin} />
       <CompoundButton primary content="Primary" secondaryContent="Compound" style={commonTestStyles.vmargin} />
       <CompoundButton ghost content="Ghost" secondaryContent="Compound" style={commonTestStyles.vmargin} />
-      <ToggleButton content="Default Toggle" />
-      <ToggleButton primary content="Primary Toggle" />
-      <ToggleButton ghost content="Ghost Toggle" />
     </View>
   );
 };
