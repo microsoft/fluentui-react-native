@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { FlatList, View, ViewStyle, TextStyle, Text, StyleSheet } from 'react-native';
+import { FlatList, View, ViewStyle, StyleSheet } from 'react-native';
 import { getHostSettingsWin32, useTheme } from '@uifabricshared/theming-react-native';
 import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
 import { commonTestStyles } from '../Common/styles';
-import { Button, PrimaryButton, StealthButton, Separator } from '@fluentui/react-native';
+import { Button, PrimaryButton, Text, StealthButton } from '@fluentui/react-native';
 import { ITheme } from '@uifabricshared/theming-ramp';
 import { THEME_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
