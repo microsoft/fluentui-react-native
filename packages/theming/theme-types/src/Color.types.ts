@@ -334,6 +334,83 @@ export interface PaletteBackgroundColors {
   listHeaderBackgroundPressed: ColorValue;
 }
 
+export interface ControlColorTokens {
+  buttonBackground: ColorValue;
+  buttonContent: ColorValue;
+  buttonBorder: ColorValue;
+  buttonIcon: ColorValue;
+
+  buttonHoveredBackground: ColorValue;
+  buttonHoveredBorder: ColorValue;
+  buttonHoveredContent: ColorValue;
+  buttonHoveredIcon: ColorValue;
+
+  buttonFocusedBackground: ColorValue;
+  buttonFocusedBorder: ColorValue;
+  buttonFocusedContent: ColorValue;
+  buttonFocusedIcon: ColorValue;
+
+  buttonPressedBackground: ColorValue;
+  buttonPressedBorder: ColorValue;
+  buttonPressedContent: ColorValue;
+  buttonPressedIcon: ColorValue;
+
+  buttonDisabledBackground: ColorValue;
+  buttonDisabledBorder: ColorValue;
+  buttonDisabledContent: ColorValue;
+  buttonDisabledIcon: ColorValue;
+
+  ghostButtonBackground: ColorValue;
+  ghostButtonContent: ColorValue;
+  ghostButtonBorder: ColorValue;
+  ghostButtonIcon: ColorValue;
+
+  ghostButtonHoveredBackground: ColorValue;
+  ghostButtonHoveredBorder: ColorValue;
+  ghostButtonHoveredContent: ColorValue;
+  ghostButtonHoveredIcon: ColorValue;
+
+  ghostButtonFocusedBackground: ColorValue;
+  ghostButtonFocusedBorder: ColorValue;
+  ghostButtonFocusedContent: ColorValue;
+  ghostButtonFocusedIcon: ColorValue;
+
+  ghostButtonPressedBackground: ColorValue;
+  ghostButtonPressedBorder: ColorValue;
+  ghostButtonPressedContent: ColorValue;
+  ghostButtonPressedIcon: ColorValue;
+
+  ghostButtonDisabledBackground: ColorValue;
+  ghostButtonDisabledBorder: ColorValue;
+  ghostButtonDisabledContent: ColorValue;
+  ghostButtonDisabledIcon: ColorValue;
+
+  primaryButtonBackground: ColorValue;
+  primaryButtonContent: ColorValue;
+  primaryButtonBorder: ColorValue;
+  primaryButtonIcon: ColorValue;
+
+  primaryButtonHoveredBackground: ColorValue;
+  primaryButtonHoveredBorder: ColorValue;
+  primaryButtonHoveredContent: ColorValue;
+  primaryButtonHoveredIcon: ColorValue;
+
+  primaryButtonFocusedBackground: ColorValue;
+  primaryButtonFocusedBorder: ColorValue;
+  primaryButtonFocusedContent: ColorValue;
+  primaryButtonFocusedIcon: ColorValue;
+
+  primaryButtonPressedBackground: ColorValue;
+  primaryButtonPressedBorder: ColorValue;
+  primaryButtonPressedContent: ColorValue;
+  primaryButtonPressedIcon: ColorValue;
+
+  primaryButtonDisabledBackground: ColorValue;
+  primaryButtonDisabledBorder: ColorValue;
+  primaryButtonDisabledContent: ColorValue;
+  primaryButtonDisabledIcon: ColorValue;
+}
+
 /**
  * A collection of named palette colors.
  *
