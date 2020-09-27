@@ -14,6 +14,7 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
           alignItems: 'center',
           flexDirection: 'row',
           alignSelf: 'flex-start',
+          justifyContent: 'center',
           minHeight: 32,
           minWidth: 80,
           width: tokens.width,
