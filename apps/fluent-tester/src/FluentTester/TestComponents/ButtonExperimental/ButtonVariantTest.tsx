@@ -1,4 +1,4 @@
-import { Button, CompoundButton } from '@fluentui-react-native/experimental-button';
+import { Button, CompoundButton, ToggleButton } from '@fluentui-react-native/experimental-button';
 import * as React from 'react';
 import { View } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
@@ -15,6 +15,9 @@ export const ButtonVariantTest: React.FunctionComponent<{}> = () => {
       <CompoundButton content="Default" secondaryContent="Compound" style={commonTestStyles.vmargin} />
       <CompoundButton primary content="Primary" secondaryContent="Compound" style={commonTestStyles.vmargin} />
       <CompoundButton ghost content="Ghost" secondaryContent="Compound" style={commonTestStyles.vmargin} />
+      <ToggleButton content="Default Toggle" />
+      <ToggleButton primary content="Primary Toggle" />
+      <ToggleButton ghost content="Ghost Toggle" />
     </View>
   );
 };

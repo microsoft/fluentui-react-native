@@ -142,9 +142,6 @@ export function getStockWebPalette(): ThemeColorDefinition {
 
 export function getStockWebDarkPalette(): ThemeColorDefinition {
   return {
-    brand: defaultColorRamp,
-    neutral: defaultColorRamp,
-    warning: defaultColorRamp,
     ...paletteFromFabricColors(
       {
         // colors takesn from fluentui DarkCustomizations.ts

@@ -3,7 +3,6 @@ import { StyleSheet, View } from 'react-native';
 import { Text, Separator } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from './Common/styles';
-import { getHostSettingsWin32, useTheme } from '@uifabricshared/theming-react-native';
 
 export type TestSection = {
   name: string;
@@ -56,8 +55,6 @@ const styles = StyleSheet.create({
 });
 
 export const Test = (props: TestProps) => {
-  const hostColors = getHostSettingsWin32(useTheme())?.palette;
-
   return (
     <View>
       <Text style={[styles.name]} variant="heroSemibold">

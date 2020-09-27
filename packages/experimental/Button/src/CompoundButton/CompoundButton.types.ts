@@ -10,6 +10,9 @@ export interface CompoundButtonTokens extends ButtonTokens {
 }
 
 export interface CompoundButtonProps extends ButtonProps {
+  /**
+   * Second line of text that describes the action this button takes.
+   */
   secondaryContent?: string;
 }
 
