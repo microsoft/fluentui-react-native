@@ -42,11 +42,11 @@ const Panel: React.FunctionComponent = () => {
   const onClick = React.useCallback(() => setDisabled(!disabled), [disabled, setDisabled]);
   const themedStyles = getThemedStyles(useTheme());
   return (
-    <View testID={THEME_TESTPAGE} style={[commonTestStyles.view, themedStyles.stackStyle]}>
+    <View style={[commonTestStyles.view, themedStyles.stackStyle]}>
       <PrimaryButton onClick={onClick} content="Primary Button" disabled={disabled} />
       <Button onClick={onClick} content="Default Button" disabled={disabled} />
       <StealthButton onClick={onClick} content="Stealth Button" disabled={disabled} />
-      <Text>This is a text element</Text>
+      <Text testID={THEME_TESTPAGE}>This is a text element</Text>
       <Button onClick={onClick} content="This button has longer text" disabled={disabled} />
     </View>
   );

@@ -160,4 +160,10 @@ export const fallbackOfficeModule: OfficeThemingModule = {
   getPalette: fallbackGetPalette,
   typography: {},
   fluentTypography: {},
+  rampNames: {
+    App: ['FakeApp1', 'App2', 'App3', 'App4', 'App5', 'App6', 'App7', 'App8'],
+    FluentGrays: ['FakeGray1', 'Gray2', 'Gray3'],
+    ClassicGrays: ['FakeGray4', 'Gray5', 'Gray6'],
+    Sepias: ['FakeSepia'],
+  },
 } as OfficeThemingModule;
