@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ViewProps, ImageProps } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 
 export const buttonName = 'Button';
@@ -102,6 +102,8 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   /** A button can blend into its background to become less emphasized. */
   ghost?: boolean;
 }
+
+export type ButtonState = IPressableHooks<ButtonProps & React.ElementRef<any>>;
 
 export interface ButtonSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;

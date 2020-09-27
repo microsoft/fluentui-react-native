@@ -1,14 +1,14 @@
-import { buttonName, ButtonTokens, ButtonSlotProps, ButtonProps } from './Button.types';
+import { compoundButtonName, CompoundButtonTokens, CompoundButtonSlotProps, CompoundButtonProps } from './CompoundButton.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
-import { defaultButtonTokens } from './ButtonTokens';
+import { defaultButtonTokens } from '../ButtonTokens';
 
-export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, ButtonTokens> = {
-  tokens: [defaultButtonTokens, buttonName],
+export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundButtonSlotProps, CompoundButtonTokens> = {
+  tokens: [defaultButtonTokens, compoundButtonName],
   states: ['primary', 'ghost', 'hovered', 'focused', 'pressed', 'disabled'],
   slotProps: {
     root: buildProps(
-      (tokens: ButtonTokens, theme: Theme) => ({
+      (tokens: CompoundButtonTokens, theme: Theme) => ({
         style: {
           display: 'flex',
           alignItems: 'flex-start',
@@ -33,8 +33,23 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
         justifyContent: 'center',
       },
     },
+    contentContainer: {
+      style: {
+        display: 'flex',
+        flexDirection: 'column',
+      },
+    },
     content: buildProps(
-      (tokens: ButtonTokens, theme: Theme) => ({
+      (tokens: CompoundButtonTokens, theme: Theme) => ({
+        style: {
+          color: tokens.color,
+          ...fontStyles.from(tokens, theme),
+        },
+      }),
+      ['color', ...fontStyles.keys],
+    ),
+    secondaryContent: buildProps(
+      (tokens: CompoundButtonTokens, theme: Theme) => ({
         style: {
           color: tokens.color,
           ...fontStyles.from(tokens, theme),
@@ -43,7 +58,7 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
       ['color', ...fontStyles.keys],
     ),
     icon: buildProps(
-      (tokens: ButtonTokens) => ({
+      (tokens: CompoundButtonTokens) => ({
         style: {
           tintColor: tokens.iconColor,
         },

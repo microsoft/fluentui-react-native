@@ -14,15 +14,7 @@ import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/inte
 export const Button = compose<IButtonType>({
   displayName: buttonName,
   usePrepareProps: (userProps: IButtonProps, useStyling: IUseComposeStyling<IButtonType>) => {
-    const {
-      icon,
-      content,
-      onAccessibilityTap = userProps.onClick,
-      accessibilityLabel = userProps.content,
-      onClick,
-      testID,
-      ...rest
-    } = userProps;
+    const { icon, content, onAccessibilityTap = userProps.onClick, accessibilityLabel = userProps.content, onClick, ...rest } = userProps;
     // attach the pressable state handlers
     const pressable = useAsPressable({ ...rest, onPress: onClick });
     const onKeyUp = React.useCallback(
@@ -57,7 +49,7 @@ export const Button = compose<IButtonType>({
         accessibilityState: { disabled: state.info.disabled },
         onKeyUp: onKeyUp,
       },
-      content: { children: content, testID },
+      content: { children: content },
       icon: { source: icon },
     });
 
