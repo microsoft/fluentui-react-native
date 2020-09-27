@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "🚚Move files around, rename things.  Makes FluentTester more canonical",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "aliciakds88@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2020-09-27T23:08:51.456Z"
+}
