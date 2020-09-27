@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "add light and dark awareness to default themes",
+  "packageName": "@fluentui-react-native/win32-theme",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-09-25T19:33:55.506Z"
+}

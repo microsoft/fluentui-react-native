@@ -32,7 +32,9 @@ const theme: Theme = {
       },
     },
   },
-  host: {},
+  host: {
+    appearance: 'light',
+  },
 };
 
 const partialTheme: PartialTheme = {
@@ -102,6 +104,9 @@ describe('Theme tests', () => {
             backgroundColor: 'cyan',
           },
         },
+      },
+      host: {
+        appearance: 'light',
       },
     });
   });
