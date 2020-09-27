@@ -19,7 +19,7 @@ export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonS
           hovered: {
             color: t.colors.ghostCheckedHoveredContent,
             backgroundColor: t.colors.ghostCheckedHoveredBackground,
-            borderColor: t.host?.palette?.StrokeSelectedHover,
+            borderColor: t.colors.ghostCheckedHoveredBorder,
           },
         },
       },

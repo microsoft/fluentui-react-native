@@ -183,6 +183,7 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     ghostCheckedContent: p.TextSelected,
     ghostCheckedHoveredBackground: p.BkgHover,
     ghostCheckedHoveredContent: p.TextHover,
+    ghostCheckedHoveredBorder: p.StrokeSelectedHover,
 
     ghostSecondaryContent: p.TextSecondary,
     ghostFocusedSecondaryContent: p.TextSecondaryHover,
