@@ -6,7 +6,7 @@ import { commonTestStyles as commonStyles } from '../Common/styles';
 import { CHECKBOX_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
-function onChangeUncontrolled(_ev: any, isChecked: boolean) {
+function onChangeUncontrolled(isChecked: boolean) {
   console.log(isChecked);
 }
 

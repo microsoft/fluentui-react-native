@@ -3,7 +3,7 @@ export * from './useAsPressable';
 export * from './usePressability';
 export * from './useViewCommandFocus';
 export * from './useSelectedKey.hooks';
-export * from './useControllableValue';
+export * from './Checkbox.hooks';
 export * from './Pressability/Pressability.types';
 export * from './Pressability/InternalTypes';
 export * from './Pressability/CoreEventTypes';
