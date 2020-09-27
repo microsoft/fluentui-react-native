@@ -360,55 +360,84 @@ export interface ControlColorTokens {
   buttonDisabledContent: ColorValue;
   buttonDisabledIcon: ColorValue;
 
-  ghostButtonBackground: ColorValue;
-  ghostButtonContent: ColorValue;
-  ghostButtonBorder: ColorValue;
-  ghostButtonIcon: ColorValue;
+  ghostBackground: ColorValue;
+  ghostContent: ColorValue;
+  ghostBorder: ColorValue;
+  ghostIcon: ColorValue;
 
-  ghostButtonHoveredBackground: ColorValue;
-  ghostButtonHoveredBorder: ColorValue;
-  ghostButtonHoveredContent: ColorValue;
-  ghostButtonHoveredIcon: ColorValue;
+  ghostHoveredBackground: ColorValue;
+  ghostHoveredBorder: ColorValue;
+  ghostHoveredContent: ColorValue;
+  ghostHoveredIcon: ColorValue;
 
-  ghostButtonFocusedBackground: ColorValue;
-  ghostButtonFocusedBorder: ColorValue;
-  ghostButtonFocusedContent: ColorValue;
-  ghostButtonFocusedIcon: ColorValue;
+  ghostFocusedBackground: ColorValue;
+  ghostFocusedBorder: ColorValue;
+  ghostFocusedContent: ColorValue;
+  ghostFocusedIcon: ColorValue;
 
-  ghostButtonPressedBackground: ColorValue;
-  ghostButtonPressedBorder: ColorValue;
-  ghostButtonPressedContent: ColorValue;
-  ghostButtonPressedIcon: ColorValue;
+  ghostPressedBackground: ColorValue;
+  ghostPressedBorder: ColorValue;
+  ghostPressedContent: ColorValue;
+  ghostPressedIcon: ColorValue;
 
-  ghostButtonDisabledBackground: ColorValue;
-  ghostButtonDisabledBorder: ColorValue;
-  ghostButtonDisabledContent: ColorValue;
-  ghostButtonDisabledIcon: ColorValue;
+  ghostDisabledBackground: ColorValue;
+  ghostDisabledBorder: ColorValue;
+  ghostDisabledContent: ColorValue;
+  ghostDisabledIcon: ColorValue;
 
-  primaryButtonBackground: ColorValue;
-  primaryButtonContent: ColorValue;
-  primaryButtonBorder: ColorValue;
-  primaryButtonIcon: ColorValue;
+  brandBackground: ColorValue;
+  brandContent: ColorValue;
+  brandBorder: ColorValue;
+  brandIcon: ColorValue;
 
-  primaryButtonHoveredBackground: ColorValue;
-  primaryButtonHoveredBorder: ColorValue;
-  primaryButtonHoveredContent: ColorValue;
-  primaryButtonHoveredIcon: ColorValue;
+  brandHoveredBackground: ColorValue;
+  brandHoveredBorder: ColorValue;
+  brandHoveredContent: ColorValue;
+  brandHoveredIcon: ColorValue;
 
-  primaryButtonFocusedBackground: ColorValue;
-  primaryButtonFocusedBorder: ColorValue;
-  primaryButtonFocusedContent: ColorValue;
-  primaryButtonFocusedIcon: ColorValue;
+  brandFocusedBackground: ColorValue;
+  brandFocusedBorder: ColorValue;
+  brandFocusedContent: ColorValue;
+  brandFocusedIcon: ColorValue;
 
-  primaryButtonPressedBackground: ColorValue;
-  primaryButtonPressedBorder: ColorValue;
-  primaryButtonPressedContent: ColorValue;
-  primaryButtonPressedIcon: ColorValue;
+  brandPressedBackground: ColorValue;
+  brandPressedBorder: ColorValue;
+  brandPressedContent: ColorValue;
+  brandPressedIcon: ColorValue;
 
-  primaryButtonDisabledBackground: ColorValue;
-  primaryButtonDisabledBorder: ColorValue;
-  primaryButtonDisabledContent: ColorValue;
-  primaryButtonDisabledIcon: ColorValue;
+  brandDisabledBackground: ColorValue;
+  brandDisabledBorder: ColorValue;
+  brandDisabledContent: ColorValue;
+  brandDisabledIcon: ColorValue;
+
+  buttonCheckedBackground: ColorValue;
+  buttonCheckedContent: ColorValue;
+  buttonCheckedHoveredBackground: ColorValue;
+  buttonCheckedHoveredContent: ColorValue;
+
+  brandCheckedBackground: ColorValue;
+  brandCheckedContent: ColorValue;
+  brandCheckedHoveredBackground: ColorValue;
+  brandCheckedHoveredContent: ColorValue;
+
+  ghostCheckedBackground: ColorValue;
+  ghostCheckedContent: ColorValue;
+  ghostCheckedHoveredBackground: ColorValue;
+  ghostCheckedHoveredContent: ColorValue;
+
+  ghostSecondaryContent: ColorValue;
+  ghostFocusedSecondaryContent: ColorValue;
+  ghostHoveredSecondaryContent: ColorValue;
+  ghostPressedSecondaryContent: ColorValue;
+
+  brandSecondaryContent: ColorValue;
+  brandFocusedSecondaryContent: ColorValue;
+  brandHoveredSecondaryContent: ColorValue;
+  brandPressedSecondaryContent: ColorValue;
+
+  buttonDisabledSecondaryContent: ColorValue;
+  buttonHoveredSecondaryContent: ColorValue;
+  buttonPressedSecondaryContent: ColorValue;
 }
 
 /**
@@ -416,7 +445,7 @@ export interface ControlColorTokens {
  *
  * Palette names describe the role of a color within the application.
  */
-export type Palette = PaletteTextColors & PaletteBackgroundColors;
+export type Palette = PaletteTextColors & PaletteBackgroundColors & Partial<ControlColorTokens>;
 
 /**
  * A partially specified color palette.

@@ -2,14 +2,26 @@ import { compoundButtonName, CompoundButtonTokens, CompoundButtonSlotProps, Comp
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { buttonStates, defaultButtonTokens } from '../ButtonTokens';
+import { ButtonTokens } from '../Button.types';
 
 export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundButtonSlotProps, CompoundButtonTokens> = {
   tokens: [
     (t: Theme) => ({
-      secondaryContentTokens: {
-        variant: 'secondaryStandard',
-        color: t.colors.subText,
-      },
+      ghost: {
+        secondaryContentTokens: {
+          variant: 'secondaryStandard',
+          color: t.colors.ghostSecondaryContent,
+          hovered: {
+            color: t.colors.ghostHoveredSecondaryContent,
+          },
+          focused: {
+            color: t.colors.ghostFocusedSecondaryContent,
+          },
+          pressed: {
+            color: t.colors.ghostPressedSecondaryContent,
+          },
+        },
+      } as ButtonTokens,
     }),
     defaultButtonTokens,
     compoundButtonName,

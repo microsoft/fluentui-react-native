@@ -4,7 +4,29 @@ import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { buttonStates, defaultButtonTokens } from '../ButtonTokens';
 
 export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonSlotProps, ToggleButtonTokens> = {
-  tokens: [defaultButtonTokens, toggleButtonName],
+  tokens: [
+    (t: Theme) => ({
+      checked: {
+        color: t.colors.buttonCheckedContent,
+        backgroundColor: t.colors.buttonCheckedBackground,
+        hovered: {
+          color: t.colors.buttonCheckedHoveredContent,
+          backgroundColor: t.colors.buttonCheckedHoveredBackground,
+        },
+        ghost: {
+          color: t.colors.ghostCheckedContent,
+          backgroundColor: t.colors.ghostCheckedBackground,
+          hovered: {
+            color: t.colors.ghostCheckedHoveredContent,
+            backgroundColor: t.colors.ghostCheckedHoveredBackground,
+            borderColor: t.host?.palette?.StrokeSelectedHover,
+          },
+        },
+      },
+    }),
+    defaultButtonTokens,
+    toggleButtonName,
+  ],
   states: ['checked', ...buttonStates],
   slotProps: {
     root: buildProps(
