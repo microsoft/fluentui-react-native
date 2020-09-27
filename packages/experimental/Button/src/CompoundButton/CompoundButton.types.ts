@@ -1,10 +1,13 @@
 import { ViewProps } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { ButtonSlotProps, ButtonTokens, ButtonProps } from '../Button.types';
+import { FontTokens } from '@fluentui-react-native/tokens';
 
 export const compoundButtonName = 'CompoundButton';
 
-export type CompoundButtonTokens = ButtonTokens;
+export interface CompoundButtonTokens extends ButtonTokens {
+  secondaryContentTokens?: FontTokens & { color?: string };
+}
 
 export interface CompoundButtonProps extends ButtonProps {
   secondaryContent?: string;

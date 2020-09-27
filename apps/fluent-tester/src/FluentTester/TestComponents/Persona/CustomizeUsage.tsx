@@ -79,24 +79,24 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
         />
 
         <Text>Primary text size</Text>
-        <Slider maximum={50} minimum={5} initialValue={textSize} style={commonStyles.slider} onChange={setTextSize} />
+        <Slider maximum={50} minimum={5} initialValue={textSize} style={commonStyles.vmargin} onChange={setTextSize} />
 
         <Text>Secondary text size</Text>
-        <Slider maximum={50} minimum={5} initialValue={secondarySize} style={commonStyles.slider} onChange={setSecondarySize} />
+        <Slider maximum={50} minimum={5} initialValue={secondarySize} style={commonStyles.vmargin} onChange={setSecondarySize} />
 
         <Text>Tertiary text size</Text>
-        <Slider maximum={50} minimum={5} initialValue={tertiarySize} style={commonStyles.slider} onChange={setTertiarySize} />
+        <Slider maximum={50} minimum={5} initialValue={tertiarySize} style={commonStyles.vmargin} onChange={setTertiarySize} />
 
         <Text>Optional text size</Text>
-        <Slider maximum={50} minimum={5} initialValue={optionalSize} style={commonStyles.slider} onChange={setOptionalSize} />
+        <Slider maximum={50} minimum={5} initialValue={optionalSize} style={commonStyles.vmargin} onChange={setOptionalSize} />
 
         <Text>Horizontal gap</Text>
-        <Slider maximum={100} initialValue={5} minimum={0} style={commonStyles.slider} onChange={setHorizontalGap} />
+        <Slider maximum={100} initialValue={5} minimum={0} style={commonStyles.vmargin} onChange={setHorizontalGap} />
 
         <Text>Vertical gap</Text>
-        <Slider maximum={20} initialValue={5} minimum={0} style={commonStyles.slider} onChange={setVerticalGap} />
+        <Slider maximum={20} initialValue={5} minimum={0} style={commonStyles.vmargin} onChange={setVerticalGap} />
       </View>
-
+      vmargin
       {/* component under test */}
       <CustomizedPersona
         initials="MJ"
