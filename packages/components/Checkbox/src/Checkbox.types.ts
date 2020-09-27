@@ -1,6 +1,6 @@
 import * as React from 'react';
-// import { IPressableProps } from '@fluentui-react-native/pressable';
-import { IPressableState, IFocusable } from '@fluentui-react-native/interactive-hooks';
+import * as RN from 'react-native';
+import { IPressableState, IFocusable, ChangeCallback } from '@fluentui-react-native/interactive-hooks';
 import { ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
@@ -67,7 +67,7 @@ export interface ICheckboxProps {
   /**
    * Callback that is called when the checked value has changed.
    */
-  onChange?: (isChecked: boolean) => void;
+  onChange?: ChangeCallback<boolean, RN.NativeSyntheticEvent<any>>;
 
   testID?: string;
 }
