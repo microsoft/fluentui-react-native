@@ -3,6 +3,7 @@ import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './TestComponents/FocusTrapZone';
+import { FocusZoneTest, HOMEPAGE_FOCUSZONE_BUTTON } from './TestComponents/FocusZone';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from './TestComponents/Persona';
 import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from './TestComponents/PersonaCoin';
