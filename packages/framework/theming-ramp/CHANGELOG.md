@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Sun, 27 Sep 2020 04:08:27 GMT and should not be manually modified.
+This log was last generated on Mon, 28 Sep 2020 20:32:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.11
+
+Mon, 28 Sep 2020 20:32:21 GMT
+
+### Patches
+
+- add more host colors (aliciakds88@gmail.com)
 
 ## 0.10.10
 

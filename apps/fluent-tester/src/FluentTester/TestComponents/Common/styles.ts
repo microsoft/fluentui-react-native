@@ -6,64 +6,53 @@ export const commonTestStyles = StyleSheet.create({
     marginTop: 16,
     marginRight: 32,
     flexDirection: 'row',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   header: {
     marginVertical: 6,
-    fontSize: 16
+    fontSize: 16,
   },
   section: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#0B6A0B',
-    marginTop: 12
+    marginTop: 12,
   },
   separatorStack: {
     height: 200,
     flexDirection: 'row',
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
   },
   settings: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   slider: {
-    marginVertical: 6
+    marginVertical: 6,
   },
   stack: {
     borderWidth: 2,
     borderColor: '#bdbdbd',
     padding: 12,
-    margin: 8
+    margin: 8,
   },
   switch: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   textBox: {
     borderWidth: 1,
     height: 25,
     fontSize: 12,
     width: 150,
-    marginBottom: 8
+    marginBottom: 8,
   },
   view: {
     minHeight: 200,
-    justifyContent: 'space-between'
-  }
+    justifyContent: 'space-between',
+  },
 });
 
 export const fabricTesterStyles = StyleSheet.create({
-  root: {
-    flex: 1,
-    flexGrow: 1,
-    flexDirection: 'column',
-    minHeight: 550,
-    minWidth: 300,
-    justifyContent: 'flex-start',
-    alignItems: 'stretch',
-    padding: 4
-  },
-
   testRoot: {
     flex: 1,
     flexGrow: 1,
@@ -72,12 +61,12 @@ export const fabricTesterStyles = StyleSheet.create({
     minWidth: 300,
     justifyContent: 'flex-start',
     alignItems: 'stretch',
-    padding: 4
+    padding: 4,
   },
 
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
 
   pickerRoot: {
@@ -86,13 +75,13 @@ export const fabricTesterStyles = StyleSheet.create({
 
   picker: {
     flexDirection: 'row',
-    padding: 4
+    padding: 4,
   },
 
   pickerLabel: {
     fontSize: 12,
     marginTop: 6,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
 
   dropdown: {
@@ -104,31 +93,29 @@ export const fabricTesterStyles = StyleSheet.create({
   testHeader: {
     marginBottom: 8,
     marginTop: 4,
-    fontSize: 18,
-    fontWeight: 'bold'
   },
 
   testList: {
-    width: 160
+    width: 160,
   },
 
   testListContainerStyle: {
     flexDirection: 'column',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
   },
 
   testListItem: {
-    width: 150
+    width: 150,
   },
 
   testSection: {
-    width: '85%'
+    width: '85%',
   },
 
   noTest: {
     alignSelf: 'center',
-    fontSize: 18
-  }
+    fontSize: 18,
+  },
 });
 
 export const stackStyle: IStackProps['style'] = {
@@ -136,11 +123,11 @@ export const stackStyle: IStackProps['style'] = {
   borderColor: '#bdbdbd',
   paddingVertical: 8,
   paddingHorizontal: 12,
-  margin: 8
+  margin: 8,
 };
 
 export const separatorStackStyle: IStackProps['style'] = {
   height: 200,
   flexDirection: 'row',
-  justifyContent: 'space-evenly'
+  justifyContent: 'space-evenly',
 };

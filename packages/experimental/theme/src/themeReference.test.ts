@@ -1,16 +1,8 @@
-import { Theme, ColorRamp, Spacing, PartialTheme } from '@fluentui-react-native/theme-types';
+import { Theme, Spacing, PartialTheme } from '@fluentui-react-native/theme-types';
 import { ThemeReference } from './themeReference';
-
-const defaultColorRamp: ColorRamp = {
-  values: [],
-  index: -1,
-};
 
 const themeBase: Theme = {
   colors: ({
-    brand: defaultColorRamp,
-    neutral: defaultColorRamp,
-    warning: defaultColorRamp,
     black: '#000000',
     neutralDark: '#201f1e',
     neutralPrimary: '#323130',

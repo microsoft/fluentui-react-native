@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Mon, 28 Sep 2020 20:32:21 GMT",
+      "tag": "@fluentui-react-native/link_v0.8.17",
+      "version": "0.8.17",
+      "comments": {
+        "none": [
+          {
+            "comment": "move test pages",
+            "author": "aliciakds88@gmail.com",
+            "commit": "8338baf6918f763b3ba3b3a7169d1f390ad0557d",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Sep 2020 19:21:43 GMT",
       "tag": "@fluentui-react-native/link_v0.8.15",
       "version": "0.8.15",
