@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme",
   "entries": [
     {
+      "date": "Sun, 27 Sep 2020 04:08:27 GMT",
+      "tag": "@fluentui-react-native/theme_v0.1.4",
+      "version": "0.1.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add light and dark awareness to default themes",
+            "author": "jasonmo@microsoft.com",
+            "commit": "0c1e3af0cdf38aea289cc61e5b047837c5e2fb84",
+            "package": "@fluentui-react-native/theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Sep 2020 18:01:57 GMT",
       "tag": "@fluentui-react-native/theme_v0.1.2",
       "version": "0.1.2",
