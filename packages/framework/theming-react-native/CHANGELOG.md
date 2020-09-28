@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Fri, 25 Sep 2020 19:21:43 GMT and should not be manually modified.
+This log was last generated on Mon, 28 Sep 2020 20:32:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.0
+
+Mon, 28 Sep 2020 20:32:21 GMT
+
+### Minor changes
+
+- 🎨 Map brand colors into host settings, fix up fluent-tester theming (aliciakds88@gmail.com)
 
 ## 0.7.80
 
