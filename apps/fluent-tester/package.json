@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@fluentui/react-native": ">=0.17.0 <1.0.0",
+    "@fluentui-react-native/framework": ">=0.3.4 <1.0.0",
     "@fluentui-react-native/stack": ">=0.2.13 <1.0.0",
     "@fluentui-react-native/interactive-hooks": ">=0.5.2 <1.0.0",
     "@uifabricshared/theming-react-native": ">=0.7.81 <1.0.0",

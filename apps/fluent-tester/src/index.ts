@@ -1,1 +1,1 @@
-export * from './RNTester/index';
+export * from './FluentTester';
