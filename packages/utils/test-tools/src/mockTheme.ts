@@ -1,9 +1,4 @@
-import { Theme, ColorRamp } from '@fluentui-react-native/theme-types';
-
-const defaultColorRamp: ColorRamp = {
-  values: [],
-  index: -1,
-};
+import { Theme } from '@fluentui-react-native/theme-types';
 
 const black = 'black';
 const neutralDark = '#201f1e';
@@ -36,9 +31,6 @@ const blackTranslucent40 = 'rgba(0,0,0,.4)';
 
 export const mockTheme: Theme = {
   colors: {
-    brand: defaultColorRamp,
-    neutral: defaultColorRamp,
-    warning: defaultColorRamp,
     black,
     neutralDark,
     neutralPrimary,
