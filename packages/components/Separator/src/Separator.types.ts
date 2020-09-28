@@ -1,7 +1,4 @@
 import { ViewProps } from 'react-native';
-import { IForegroundColorTokens } from '@fluentui-react-native/tokens';
-
-export const separatorName = 'Separator';
 
 interface SeparatorPropTokens {
   /**
@@ -11,12 +8,17 @@ interface SeparatorPropTokens {
   vertical?: boolean;
 }
 
-export interface SeparatorTokens extends IForegroundColorTokens, SeparatorPropTokens {
+export interface SeparatorTokens extends SeparatorPropTokens {
   /**
    * Specifies the width of the separator. This will be interpreted as DIPs on Windows and Android, but as points on Mac and iOS.
    * @defaultValue 1
    */
   separatorWidth?: number;
+
+  /**
+   * Specifies the color of the separator
+   */
+  color?: string;
 }
 
 export interface SeparatorProps extends ViewProps, SeparatorPropTokens {

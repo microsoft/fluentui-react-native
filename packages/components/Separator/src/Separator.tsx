@@ -1,23 +1,36 @@
+/** @jsx withSlots */
 import { View } from 'react-native';
-import { separatorName, ISeparatorType } from './Separator.types';
-import { compose } from '@uifabricshared/foundation-compose';
-import { filterViewProps } from '@fluentui-react-native/adapters';
-import { separatorTokenProcessor } from './Separator.helpers';
-import { settings } from './Separator.settings';
-import { getPaletteFromTheme } from '@fluentui-react-native/tokens';
+import { SeparatorProps, SeparatorTokens, SeparatorType } from './Separator.types';
+import { compose, mergeProps, UseSlots, withSlots } from '@fluentui-react-native/framework';
 
-export const Separator = compose<ISeparatorType>({
+import { buildProps } from '@fluentui-react-native/use-styling';
+
+export const separatorName = 'Separator';
+
+export const Separator = compose<SeparatorType>({
   displayName: separatorName,
-  settings: settings,
-  slots: {
-    root: {
-      slotType: View,
-      filter: filterViewProps
-    }
+  tokens: [{ separatorWidth: 1 }, separatorName],
+  tokensThatAreAlsoProps: ['vertical'],
+  slotProps: {
+    root: buildProps(
+      (tokens: SeparatorTokens) => ({
+        style: {
+          borderLeftWidth: (tokens.vertical && tokens.separatorWidth) || undefined,
+          borderTopWidth: (!tokens.vertical && tokens.separatorWidth) || undefined,
+          ...(tokens.color && { borderColor: tokens.color }),
+        },
+      }),
+      ['color', 'vertical', 'separatorWidth'],
+    ),
   },
-  styles: {
-    root: [separatorTokenProcessor, [{ source: 'color', lookup: getPaletteFromTheme, target: 'borderColor' }]]
-  }
+  slots: { root: View },
+  render: (props: SeparatorProps, useSlots: UseSlots<SeparatorType>) => {
+    const Root = useSlots(props).root;
+    return (extra: SeparatorProps, ...children: React.ReactNode[]) => {
+      const merged = mergeProps(props, extra, { vertical: undefined });
+      return <Root {...merged}>{children}</Root>;
+    };
+  },
 });
 
 export default Separator;
