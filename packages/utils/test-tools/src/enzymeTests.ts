@@ -41,7 +41,10 @@ export function compareTrees(a: PropTreeSnapshot, b: PropTreeSnapshot, paths: st
     throw new Error(`Shallow compare found two nodes with different names at ${paths.join(': ')}`);
   }
   if (a.children.length !== b.children.length) {
-    throw new Error(`Shallow compare found two nodes at ${paths.join(': ')} with different property counts`);
+    throw new Error(`Shallow compare found two nodes at ${paths.join(': ')} with different children counts`);
+  }
+  if (Object.keys(a.props).length !== Object.keys(b.props).length) {
+    throw new Error(`Shallow compare found props at ${paths.join(': ')} with different property counts`);
   }
   Object.keys(a.props).forEach((key) => {
     if (a.props[key] !== b.props[key]) {
