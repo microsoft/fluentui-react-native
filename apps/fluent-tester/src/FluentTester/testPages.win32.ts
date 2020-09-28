@@ -85,4 +85,9 @@ export const tests: TestDescription[] = [
     component: SvgTest,
     testPage: HOMEPAGE_SVG_BUTTON,
   },
+  {
+    name: 'FocusZone Test',
+    component: FocusZoneTest,
+    testPage: HOMEPAGE_FOCUSZONE_BUTTON,
+  },
 ];
