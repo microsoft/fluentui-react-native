@@ -1,9 +1,7 @@
 /** @jsx withSlots */
 import { View } from 'react-native';
 import { SeparatorProps, SeparatorTokens, SeparatorType } from './Separator.types';
-import { compose, mergeProps, UseSlots, withSlots } from '@fluentui-react-native/framework';
-
-import { buildProps } from '@fluentui-react-native/use-styling';
+import { compose, mergeProps, UseSlots, withSlots, buildProps } from '@fluentui-react-native/framework';
 
 export const separatorName = 'Separator';
 
@@ -15,8 +13,7 @@ export const Separator = compose<SeparatorType>({
     root: buildProps(
       (tokens: SeparatorTokens) => ({
         style: {
-          borderLeftWidth: (tokens.vertical && tokens.separatorWidth) || undefined,
-          borderTopWidth: (!tokens.vertical && tokens.separatorWidth) || undefined,
+          ...(tokens.vertical ? { borderLeftWidth: tokens.separatorWidth } : { borderTopWidth: tokens.separatorWidth }),
           ...(tokens.color && { borderColor: tokens.color }),
         },
       }),
