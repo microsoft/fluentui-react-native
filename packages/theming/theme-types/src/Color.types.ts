@@ -424,6 +424,7 @@ export interface ControlColorTokens {
   ghostCheckedContent: ColorValue;
   ghostCheckedHoveredBackground: ColorValue;
   ghostCheckedHoveredContent: ColorValue;
+  ghostCheckedHoveredBorder: ColorValue;
 
   ghostSecondaryContent: ColorValue;
   ghostFocusedSecondaryContent: ColorValue;
