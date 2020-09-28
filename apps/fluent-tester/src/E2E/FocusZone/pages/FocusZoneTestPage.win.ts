@@ -1,4 +1,4 @@
-import { FOCUSZONE_TESTPAGE } from '../../../RNTester/TestComponents/FocusZone/consts';
+import { FOCUSZONE_TESTPAGE } from '../../../FluentTester/TestComponents/FocusZone/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class FocusZoneTestPage extends BasePage {
