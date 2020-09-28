@@ -2,6 +2,36 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Sun, 27 Sep 2020 04:08:27 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.10",
+      "version": "0.10.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add light and dark awareness to default themes",
+            "author": "jasonmo@microsoft.com",
+            "commit": "0c1e3af0cdf38aea289cc61e5b047837c5e2fb84",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Sep 2020 19:21:43 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.9",
+      "version": "0.10.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update react-native-win32 versions - enable logbox",
+            "author": "acoates-ms@noreply.github.com",
+            "commit": "a95ab1b66822cceacc74e24094f85c6917f58086",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Sep 2020 18:01:57 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.10.8",
       "version": "0.10.8",

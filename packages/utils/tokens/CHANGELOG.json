@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Fri, 25 Sep 2020 19:21:43 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.5.10",
+      "version": "0.5.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update react-native-win32 versions - enable logbox",
+            "author": "acoates-ms@noreply.github.com",
+            "commit": "a95ab1b66822cceacc74e24094f85c6917f58086",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Aug 2020 05:03:51 GMT",
       "tag": "@fluentui-react-native/tokens_v0.5.6",
       "version": "0.5.6",

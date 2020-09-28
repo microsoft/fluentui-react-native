@@ -1,5 +1,5 @@
 import { ThemeReference } from '@fluentui-react-native/theme';
-import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
+import { createDefaultTheme, ThemeOptions } from '@fluentui-react-native/default-theme';
 import { getThemingModule } from './NativeModule/getThemingModule';
 import { CxxException, PlatformDefaultsChangedArgs } from './NativeModule/officeThemingModule';
 import { OfficePalette } from '@fluentui-react-native/theme-types';
@@ -18,11 +18,12 @@ function handlePaletteCall(palette: OfficePalette | CxxException): OfficePalette
  *
  * @param paletteName - optional specifier for the currently active office palette
  */
-export function createOfficeTheme(paletteName?: string): ThemeReference {
+export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
   const [module, emitter] = getThemingModule();
   const ref = { module, emitter, themeName: module.initialHostThemeSetting || '' };
+  const { paletteName } = options;
 
-  const themeRef = new ThemeReference(defaultFluentTheme, () => {
+  const themeRef = new ThemeReference(createDefaultTheme(options), () => {
     const name = paletteName || '';
     const palette = handlePaletteCall(ref.module.getPalette(name));
     return createPartialOfficeTheme(module, ref.themeName, palette);

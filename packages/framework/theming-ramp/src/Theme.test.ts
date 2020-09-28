@@ -58,6 +58,9 @@ describe('Theme tests', () => {
           backgroundColor: 'cyan',
         },
       },
+      host: {
+        appearance: 'light',
+      },
     });
   });
 });

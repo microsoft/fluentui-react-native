@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Fri, 25 Sep 2020 19:21:43 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.7.6",
+      "version": "0.7.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update react-native-win32 versions - enable logbox",
+            "author": "acoates-ms@noreply.github.com",
+            "commit": "a95ab1b66822cceacc74e24094f85c6917f58086",
+            "package": "@uifabricshared/foundation-tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Sep 2020 18:31:48 GMT",
       "tag": "@uifabricshared/foundation-tokens_v0.7.5",
       "version": "0.7.5",

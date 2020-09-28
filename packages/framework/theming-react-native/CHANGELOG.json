@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Fri, 25 Sep 2020 19:21:43 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.7.80",
+      "version": "0.7.80",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update react-native-win32 versions - enable logbox",
+            "author": "acoates-ms@noreply.github.com",
+            "commit": "a95ab1b66822cceacc74e24094f85c6917f58086",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Sep 2020 18:01:57 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.7.79",
       "version": "0.7.79",

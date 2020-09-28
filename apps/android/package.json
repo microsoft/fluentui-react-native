@@ -19,8 +19,8 @@
     "android": "npx react-native run-android "
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.7.4",
-    "@uifabricshared/theming-react-native": "0.7.79",
+    "@fluentui-react-native/tester": "^0.7.6",
+    "@uifabricshared/theming-react-native": "0.7.81",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-test-app": "0.2.1"

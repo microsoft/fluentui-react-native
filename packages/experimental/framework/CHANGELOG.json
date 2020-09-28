@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/framework",
   "entries": [
     {
+      "date": "Fri, 25 Sep 2020 19:21:43 GMT",
+      "tag": "@fluentui-react-native/framework_v0.3.4",
+      "version": "0.3.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update react-native-win32 versions - enable logbox",
+            "author": "acoates-ms@noreply.github.com",
+            "commit": "a95ab1b66822cceacc74e24094f85c6917f58086",
+            "package": "@fluentui-react-native/framework"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Sep 2020 18:31:48 GMT",
       "tag": "@fluentui-react-native/framework_v0.3.2",
       "version": "0.3.2",
