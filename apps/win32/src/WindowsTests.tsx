@@ -12,6 +12,7 @@ import { HOMEPAGE_SEPARATOR_BUTTON, SeparatorTest } from '../../fluent-tester/sr
 import { HOMEPAGE_SVG_BUTTON, SvgTest } from '../../fluent-tester/src/RNTester/TestComponents/Svg';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from '../../fluent-tester/src/RNTester/TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from '../../fluent-tester/src/RNTester/TestComponents/Theme';
+import { HOMEPAGE_FOCUSZONE_BUTTON, FocusZoneTest } from '../../fluent-tester/src/RNTester/TestComponents/FocusZone';
 import { TestDescription } from '@fluentui-react-native/tester/src/RNTester/TestComponents';
 
 export const windowsTests: TestDescription[] = [
@@ -84,5 +85,10 @@ export const windowsTests: TestDescription[] = [
     name: 'Svg Test',
     component: SvgTest,
     testPage: HOMEPAGE_SVG_BUTTON
-  }
+  },
+  {
+    name: 'FocusZone Test',
+    component: FocusZoneTest,
+    testPage: HOMEPAGE_FOCUSZONE_BUTTON,
+  },
 ];
