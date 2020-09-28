@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 25 Sep 2020 19:21:43 GMT and should not be manually modified.
+This log was last generated on Mon, 28 Sep 2020 20:32:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.0
+
+Mon, 28 Sep 2020 20:32:21 GMT
+
+### Minor changes
+
+- 🎨 Apply theme shim to host.colors, fix theme picker (aliciakds88@gmail.com)
+
+## 0.8.0
+
+Mon, 28 Sep 2020 19:03:01 GMT
+
+### Minor changes
+
+- Adding FocusZone Tests (safreibe@microsoft.com)
 
 ## 0.7.5
 

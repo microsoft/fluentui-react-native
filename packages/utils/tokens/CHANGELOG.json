@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Mon, 28 Sep 2020 20:32:21 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.5.12",
+      "version": "0.5.12",
+      "comments": {
+        "none": [
+          {
+            "comment": "no change",
+            "author": "aliciakds88@gmail.com",
+            "commit": "8338baf6918f763b3ba3b3a7169d1f390ad0557d",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Sep 2020 19:21:43 GMT",
       "tag": "@fluentui-react-native/tokens_v0.5.10",
       "version": "0.5.10",

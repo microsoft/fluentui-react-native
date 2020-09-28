@@ -1,4 +1,4 @@
-import { Palette, FabricWebPalette, ThemeColorDefinition, ColorRamp } from '@fluentui-react-native/theme-types';
+import { Palette, FabricWebPalette, ThemeColorDefinition } from '@fluentui-react-native/theme-types';
 
 /**
  * Generate a palette from a set of fabric web colors, like those output from the theme designer.
@@ -104,16 +104,8 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
   };
 }
 
-const defaultColorRamp: ColorRamp = {
-  values: [],
-  index: -1,
-};
-
 export function getStockWebPalette(): ThemeColorDefinition {
   return {
-    brand: defaultColorRamp,
-    neutral: defaultColorRamp,
-    warning: defaultColorRamp,
     ...paletteFromFabricColors({
       black: '#000000',
       neutralDark: '#201f1e',
@@ -150,9 +142,6 @@ export function getStockWebPalette(): ThemeColorDefinition {
 
 export function getStockWebDarkPalette(): ThemeColorDefinition {
   return {
-    brand: defaultColorRamp,
-    neutral: defaultColorRamp,
-    warning: defaultColorRamp,
     ...paletteFromFabricColors(
       {
         // colors takesn from fluentui DarkCustomizations.ts
