@@ -1,6 +1,6 @@
 import { Theme, Typography, Spacing, FontWeightValue, FontSize, FontSizes, Variants } from '@fluentui-react-native/theme-types';
 import { Platform } from 'react-native';
-import { getStockWebPalette } from './defaultColors';
+import { getStockWebPalette, getStockWebDarkPalette } from './defaultColors';
 
 function _defaultTypography(): Typography {
   const defaultsDict = {
@@ -66,5 +66,13 @@ export const defaultFluentTheme: Theme = {
   typography: _defaultTypography(),
   spacing: defaultSpacing(),
   components: {},
-  host: {},
+  host: { appearance: 'light' },
+};
+
+export const defaultFluentDarkTheme: Theme = {
+  colors: getStockWebDarkPalette(),
+  typography: defaultFluentTheme.typography,
+  spacing: defaultFluentTheme.spacing,
+  components: {},
+  host: { appearance: 'dark' },
 };

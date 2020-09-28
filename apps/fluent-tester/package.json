@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester",
-  "version": "0.7.2",
+  "version": "0.7.6",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -20,13 +20,13 @@
     "bundle": "fluentui-scripts bundle"
   },
   "dependencies": {
-    "@fluentui/react-native": ">=0.16.4 <1.0.0",
-    "@fluentui-react-native/stack": ">=0.2.10 <1.0.0",
-    "@fluentui-react-native/interactive-hooks": ">=0.5.1 <1.0.0",
-    "@uifabricshared/theming-react-native": ">=0.7.78 <1.0.0",
-    "@uifabricshared/theme-registry": ">=0.3.70 <1.0.0",
-    "@uifabricshared/themed-stylesheet": ">=0.3.69 <1.0.0",
-    "@uifabricshared/theming-ramp": ">=0.10.7 <1.0.0",
+    "@fluentui/react-native": ">=0.16.8 <1.0.0",
+    "@fluentui-react-native/stack": ">=0.2.13 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.5.2 <1.0.0",
+    "@uifabricshared/theming-react-native": ">=0.7.81 <1.0.0",
+    "@uifabricshared/theme-registry": ">=0.3.71 <1.0.0",
+    "@uifabricshared/themed-stylesheet": ">=0.3.70 <1.0.0",
+    "@uifabricshared/theming-ramp": ">=0.10.10 <1.0.0",
     "react-native-svg": "^11.0.0"
   },
   "devDependencies": {

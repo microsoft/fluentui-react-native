@@ -2,6 +2,7 @@ import { HOMEPAGE_CHECKBOX_BUTTON } from '../../../RNTester/TestComponents/Check
 import { HOMEPAGE_BUTTON_BUTTON } from '../../../RNTester/TestComponents/Button/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../../../RNTester/TestComponents/Callout/consts';
 import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../../RNTester/TestComponents/FocusTrapZone/consts';
+import { HOMEPAGE_FOCUSZONE_BUTTON } from '../../../RNTester/TestComponents/FocusZone/consts';
 import { HOMEPAGE_LINK_BUTTON } from '../../../RNTester/TestComponents/Link/consts';
 import { HOMEPAGE_PERSONA_BUTTON } from '../../../RNTester/TestComponents/Persona/consts';
 import { HOMEPAGE_PERSONACOIN_BUTTON } from '../../../RNTester/TestComponents/PersonaCoin/consts';
@@ -29,6 +30,10 @@ class BootTestPage extends BasePage {
 
   clickAndGoToFocusTrapZonePage() {
     this.focusTrapZonePage.click();
+  }
+
+  clickAndGoToFocusZonePage() {
+    this.focusZonePage.click();
   }
 
   clickAndGoToLinkPage() {
@@ -89,6 +94,10 @@ class BootTestPage extends BasePage {
 
   private get focusTrapZonePage() {
     return By(HOMEPAGE_FOCUSTRAPZONE_BUTTON);
+  }
+
+  private get focusZonePage() {
+    return By(HOMEPAGE_FOCUSZONE_BUTTON);
   }
 
   private get linkPage() {

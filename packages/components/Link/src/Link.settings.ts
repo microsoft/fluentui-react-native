@@ -13,48 +13,48 @@ export const settings: IComposeSettings<ILinkType> = [
     },
     root: {
       accessible: true,
-      ...{ acceptsKeyboardFocus: true },
+      ...{ acceptsKeyboardFocus: true, cursor: 'pointer' },
       accessibilityRole: 'link',
       style: {
         margin: 0,
         textDecorationLine: 'underline',
         display: 'flex',
         alignItems: 'flex-start',
-      } as IViewProps['style']
+      } as IViewProps['style'],
     },
     content: {
       style: {
         textDecorationLine: 'underline',
-      }
+      },
     },
     _precedence: ['visited', 'hovered', 'focused', 'pressed', 'disabled'],
     _overrides: {
       disabled: {
         tokens: {
-          color: 'link'
-        }
+          color: 'link',
+        },
       },
       hovered: {
         tokens: {
-          color: 'linkHovered'
-        }
+          color: 'linkHovered',
+        },
       },
       pressed: {
         tokens: {
-          color: 'linkPressed'
-        }
+          color: 'linkPressed',
+        },
       },
       visited: {
         tokens: {
-          color: 'link'
-        }
+          color: 'link',
+        },
       },
       focused: {
         tokens: {
-          borderColor: 'focusBorder'
-        }
-      }
-    }
+          borderColor: 'focusBorder',
+        },
+      },
+    },
   },
-  linkName
+  linkName,
 ];

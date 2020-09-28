@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Adding FocusZone COmponent",
+  "packageName": "@fluentui-react-native/focus-zone",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-09-24T01:55:41.016Z"
+}
