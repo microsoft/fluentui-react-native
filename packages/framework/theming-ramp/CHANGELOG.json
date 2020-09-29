@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Sun, 27 Sep 2020 04:08:27 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.10",
+      "version": "0.10.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add light and dark awareness to default themes",
+            "author": "jasonmo@microsoft.com",
+            "commit": "0c1e3af0cdf38aea289cc61e5b047837c5e2fb84",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Sep 2020 19:21:43 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.10.9",
       "version": "0.10.9",

@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "🎨 Apply theme shim to host.colors, fix theme picker",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "aliciakds88@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2020-09-27T23:08:37.762Z"
+}

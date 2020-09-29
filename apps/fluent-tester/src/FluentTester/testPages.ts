@@ -13,6 +13,7 @@ import { HOMEPAGE_SVG_BUTTON, SvgTest } from './TestComponents/Svg';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 import { HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL, ExperimentalButtonTest } from './TestComponents/ButtonExperimental';
+import { HOMEPAGE_FOCUSZONE_BUTTON, FocusZoneTest } from './TestComponents/FocusZone';
 
 export const tests: TestDescription[] = [
   {
@@ -24,6 +25,11 @@ export const tests: TestDescription[] = [
     name: 'Focus Trap Zone Test',
     component: FocusTrapTest,
     testPage: HOMEPAGE_FOCUSTRAPZONE_BUTTON,
+  },
+  {
+    name: 'FocusZone Test',
+    component: FocusZoneTest,
+    testPage: HOMEPAGE_FOCUSZONE_BUTTON,
   },
   {
     name: 'Pressable Test',

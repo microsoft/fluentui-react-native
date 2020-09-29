@@ -1,8 +1,8 @@
 {
   "type": "patch",
-  "comment": "add light and dark awareness to default themes",
+  "comment": "remove extra componentTokens reference and route everything to components",
   "packageName": "@fluentui-react-native/theme-types",
   "email": "jasonmo@microsoft.com",
   "dependentChangeType": "patch",
-  "date": "2020-09-25T19:33:51.997Z"
+  "date": "2020-09-28T19:46:01.922Z"
 }
