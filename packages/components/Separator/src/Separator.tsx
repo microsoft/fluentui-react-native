@@ -1,9 +1,10 @@
 /** @jsx withSlots */
 import { View } from 'react-native';
 import { SeparatorProps, SeparatorTokens, SeparatorType } from './Separator.types';
-import { compose, mergeProps, UseSlots, withSlots, buildProps } from '@fluentui-react-native/framework';
+import { compose, UseSlots, buildProps, withSlots, mergeProps } from '@fluentui-react-native/framework';
 
 export const separatorName = 'Separator';
+const propMask = { vertical: undefined };
 
 export const Separator = compose<SeparatorType>({
   displayName: separatorName,
@@ -23,10 +24,7 @@ export const Separator = compose<SeparatorType>({
   slots: { root: View },
   render: (props: SeparatorProps, useSlots: UseSlots<SeparatorType>) => {
     const Root = useSlots(props).root;
-    return (extra: SeparatorProps, ...children: React.ReactNode[]) => {
-      const merged = mergeProps(props, extra, { vertical: undefined });
-      return <Root {...merged}>{children}</Root>;
-    };
+    return (rest: SeparatorProps, children: React.ReactNode) => <Root {...mergeProps(props, rest, propMask)}>{children}</Root>;
   },
 });
 
