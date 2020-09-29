@@ -1,8 +1,0 @@
-{
-  "type": "none",
-  "comment": "remove extra componentTokens reference and route everything to components",
-  "packageName": "@fluentui-react-native/focus-zone",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "none",
-  "date": "2020-09-28T19:45:37.778Z"
-}

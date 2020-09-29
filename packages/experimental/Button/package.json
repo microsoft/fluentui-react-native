@@ -23,10 +23,10 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.3.36 <1.0.0",
-    "@fluentui-react-native/framework": "0.3.6",
+    "@fluentui-react-native/framework": "0.3.7",
     "@fluentui-react-native/interactive-hooks": ">=0.5.2 <1.0.0",
     "@fluentui-react-native/experimental-text": ">=0.1.0 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.5.12 <1.0.0"
+    "@fluentui-react-native/tokens": ">=0.5.13 <1.0.0"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.62.3",
