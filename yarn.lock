@@ -2038,10 +2038,10 @@
     stacktrace-parser "^0.1.3"
     whatwg-fetch "^3.0.0"
 
-"@office-iss/rex-win32@0.62.12-tenantreactnativewin-13323":
-  version "0.62.12-tenantreactnativewin-13323"
-  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.62.12-tenantreactnativewin-13323.tgz#f30be8885c7d93b35e96f0e5ab4605209c1f2eb3"
-  integrity sha512-VcDaWtykmS43N1PZVUXhGVa/uwleXkS5VqLrLBJ7SZgTGgLou9cKrgQo0nHBKrS7akh8bhVWWqmW/EpokJMPIg==
+"@office-iss/rex-win32@0.62.12-tenantreactnativewin-13326":
+  version "0.62.12-tenantreactnativewin-13326"
+  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.62.12-tenantreactnativewin-13326.tgz#99fd09ca94a6731496386510a221609187418b73"
+  integrity sha512-HPFgEXvqRPHyn24ENcMyaq0PzM5/Q5MVbo+S0vzM3JwKvbIZJJhM0ecsmmx73tEwmdKDi8zyWVIdohEJcqxLiw==
   dependencies:
     command-line-args "^5.0.2"
     command-line-usage "^5.0.5"
