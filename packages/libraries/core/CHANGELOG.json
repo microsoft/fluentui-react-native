@@ -2,6 +2,36 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Tue, 29 Sep 2020 18:14:46 GMT",
+      "tag": "@fluentui/react-native_v0.18.1",
+      "version": "0.18.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "remove extra componentTokens reference and route everything to components",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f481a7179d21204e0a89bc91e462b7ace0c3f753",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 28 Sep 2020 20:32:21 GMT",
+      "tag": "@fluentui/react-native_v0.18.0",
+      "version": "0.18.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "add more host colors",
+            "author": "aliciakds88@gmail.com",
+            "commit": "8338baf6918f763b3ba3b3a7169d1f390ad0557d",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 28 Sep 2020 19:03:01 GMT",
       "tag": "@fluentui/react-native_v0.17.0",
       "version": "0.17.0",

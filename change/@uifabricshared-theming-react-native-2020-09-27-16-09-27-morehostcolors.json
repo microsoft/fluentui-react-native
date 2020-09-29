@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "🎨 Map brand colors into host settings, fix up fluent-tester theming",
-  "packageName": "@uifabricshared/theming-react-native",
-  "email": "aliciakds88@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2020-09-27T23:09:27.404Z"
-}

@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/focus-zone",
   "entries": [
     {
+      "date": "Tue, 29 Sep 2020 18:14:46 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "remove extra componentTokens reference and route everything to components",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f481a7179d21204e0a89bc91e462b7ace0c3f753",
+            "package": "@fluentui-react-native/focus-zone"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "remove reference from FocusZone to FocusTrapZone",
+            "author": "jasonmo@microsoft.com",
+            "commit": "a2a5fe4696335703db9f9f79db46935d5b9ee3c4",
+            "package": "@fluentui-react-native/focus-zone"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 28 Sep 2020 19:03:01 GMT",
       "tag": "@fluentui-react-native/focus-zone_v0.2.0",
       "version": "0.2.0",
