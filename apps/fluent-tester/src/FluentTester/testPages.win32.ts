@@ -92,6 +92,7 @@ export const tests: TestDescription[] = [
     component: ExperimentalButtonTest,
     testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
   },
+  {
     name: 'FocusZone Test',
     component: FocusZoneTest,
     testPage: HOMEPAGE_FOCUSZONE_BUTTON,
