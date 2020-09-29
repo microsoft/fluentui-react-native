@@ -5,9 +5,10 @@ import { IUseStyling, composable } from '@uifabricshared/foundation-composable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
-import { filterOutComponentRef } from '../../FocusTrapZone';
 
 const RCTFocusZone = ensureNativeComponent('RCTFocusZone');
+
+const filterOutComponentRef = (propName) => propName !== 'componentRef';
 
 export const FocusZone = composable<FocusZoneType>({
   usePrepareProps: (userProps: FocusZoneProps, useStyling: IUseStyling<FocusZoneType>) => {
@@ -23,7 +24,14 @@ export const FocusZone = composable<FocusZoneType>({
     }, [defaultTabbableElement]);
 
     return {
-      slotProps: mergeSettings<FocusZoneSlotProps>(useStyling(userProps), { root: { ...rest, defaultTabbableElement: targetNativeTag, ref: ftzRef, navigateAtEnd: isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds' } }),
+      slotProps: mergeSettings<FocusZoneSlotProps>(useStyling(userProps), {
+        root: {
+          ...rest,
+          defaultTabbableElement: targetNativeTag,
+          ref: ftzRef,
+          navigateAtEnd: isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds',
+        },
+      }),
     };
   },
   slots: {
