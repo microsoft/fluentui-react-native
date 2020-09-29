@@ -1,8 +1,0 @@
-{
-  "type": "none",
-  "comment": "add test-tools package with mock theme",
-  "packageName": "@fluentui-react-native/theme",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "none",
-  "date": "2020-09-28T16:34:57.096Z"
-}

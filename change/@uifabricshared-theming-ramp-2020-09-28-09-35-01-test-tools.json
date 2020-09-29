@@ -1,8 +1,0 @@
-{
-  "type": "none",
-  "comment": "add test-tools package with mock theme",
-  "packageName": "@uifabricshared/theming-ramp",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "none",
-  "date": "2020-09-28T16:35:01.863Z"
-}

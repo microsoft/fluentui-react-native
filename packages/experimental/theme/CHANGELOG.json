@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme",
   "entries": [
     {
+      "date": "Tue, 29 Sep 2020 18:34:10 GMT",
+      "tag": "@fluentui-react-native/theme_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "add test-tools package with mock theme",
+            "author": "jasonmo@microsoft.com",
+            "commit": "01dcf3ba988bebd5cab620f5e78f40ff1a7a55f6",
+            "package": "@fluentui-react-native/theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 28 Sep 2020 20:32:21 GMT",
       "tag": "@fluentui-react-native/theme_v0.2.0",
       "version": "0.2.0",
