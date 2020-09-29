@@ -1,20 +1,16 @@
 {
-  "name": "@fluentui-react-native/experimental-text",
-  "version": "0.1.0",
-  "description": "A cross-platform Text component using the Fluent Design System",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
+  "name": "@fluentui-react-native/test-tools",
+  "version": "0.1.1",
+  "description": "Tools and mocks for testing components using jest and enzyme",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
   "typings": "lib/index.d.ts",
   "private": true,
-  "onPublish": {
-    "main": "lib-commonjs/index.js",
-    "module": "lib/index.js"
-  },
   "scripts": {
     "build": "fluentui-scripts build",
+    "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
-    "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
@@ -22,14 +18,14 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": ">=0.3.36 <1.0.0",
-    "@fluentui-react-native/framework": "0.3.7"
+    "@fluentui-react-native/theme-types": ">=0.1.3 <1.0.0"
   },
   "devDependencies": {
-    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
+    "@types/react": "^16.9.34",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "react": "16.11.0",
     "react-native": "0.62.2"
   },
   "peerDependencies": {
