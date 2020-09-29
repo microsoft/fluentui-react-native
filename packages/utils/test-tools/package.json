@@ -1,19 +1,16 @@
 {
-  "name": "@fluentui-react-native/focus-zone",
-  "version": "0.2.1",
-  "description": "A cross-platform FocusZone component using the Fluent Design System",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
+  "name": "@fluentui-react-native/test-tools",
+  "version": "0.1.1",
+  "description": "Tools and mocks for testing components using jest and enzyme",
+  "main": "lib-commonjs/index.js",
+  "module": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "onPublish": {
-    "main": "lib-commonjs/index.js",
-    "module": "lib/index.js"
-  },
+  "private": true,
   "scripts": {
     "build": "fluentui-scripts build",
-    "depcheck": "fluentui-scripts depcheck",
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
@@ -21,16 +18,14 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@fluentui-react-native/component-cache": "^1.0.3",
-    "@fluentui-react-native/interactive-hooks": ">=0.5.2 <1.0.0",
-    "@uifabricshared/foundation-composable": ">=0.6.75 <1.0.0",
-    "@uifabricshared/foundation-settings": ">=0.7.2 <1.0.0"
+    "@fluentui-react-native/theme-types": ">=0.2.1 <1.0.0"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.62.0-preview.3",
+    "@types/react": "^16.9.34",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "react": "16.11.0",
     "react-native": "0.62.2"
   },
   "peerDependencies": {

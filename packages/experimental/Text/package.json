@@ -23,9 +23,10 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.3.36 <1.0.0",
-    "@fluentui-react-native/framework": "0.3.6"
+    "@fluentui-react-native/framework": "0.3.7"
   },
   "devDependencies": {
+    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
