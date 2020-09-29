@@ -92,18 +92,18 @@ const navigation2DFocusZone: React.FunctionComponent<{}> = () => {
         <View style={focusZoneTestStyles.focusZoneContainer}>
           <View style={focusZoneTestStyles.focusZoneViewStyle}>
             <Button content="#1" style={focusZoneTestStyles.focusZoneButton} />
-            <Button content="#5" style={focusZoneTestStyles.focusZoneButton} />
-            <Button content="#5" style={focusZoneTestStyles.focusZoneButton} />
+            <Button content="#2" style={focusZoneTestStyles.focusZoneButton} />
+            <Button content="#3" style={focusZoneTestStyles.focusZoneButton} />
           </View>
           <View style={focusZoneTestStyles.focusZoneViewStyle}>
-            <Button style={focusZoneTestStyles.focusZoneButton} content="#2" />
-            <Button componentRef={buttonRef} style={focusZoneTestStyles.focusZoneButton} content="Test" />
-            <Button content="#5" style={focusZoneTestStyles.focusZoneButton} />
+            <Button content="#4" style={focusZoneTestStyles.focusZoneButton} />
+            <Button content="#5" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRef} />
+            <Button content="#6" style={focusZoneTestStyles.focusZoneButton} />
           </View>
           <View style={focusZoneTestStyles.focusZoneViewStyle}>
-            <Button style={focusZoneTestStyles.focusZoneButton} content="#3" />
-            <Button style={focusZoneTestStyles.focusZoneButton} content="Test" />
-            <Button content="#5" style={focusZoneTestStyles.focusZoneButton} />
+            <Button content="#7" style={focusZoneTestStyles.focusZoneButton} />
+            <Button content="#8" style={focusZoneTestStyles.focusZoneButton} />
+            <Button content="#9" style={focusZoneTestStyles.focusZoneButton} />
           </View>
         </View>
       </FocusZone>
@@ -185,18 +185,18 @@ const customizableFocusZone: React.FunctionComponent<{}> = () => {
           <View style={focusZoneTestStyles.focusZoneContainer}>
             <View style={focusZoneTestStyles.focusZoneViewStyle}>
               <Button content="#1" style={focusZoneTestStyles.focusZoneButton} />
-              <Button content="#5" style={focusZoneTestStyles.focusZoneButton} />
-              <Button content="#5" style={focusZoneTestStyles.focusZoneButton} />
+              <Button content="#2" style={focusZoneTestStyles.focusZoneButton} />
+              <Button content="#3" style={focusZoneTestStyles.focusZoneButton} />
             </View>
             <View style={focusZoneTestStyles.focusZoneViewStyle}>
-              <Button style={focusZoneTestStyles.focusZoneButton} content="#2" />
-              <Button style={focusZoneTestStyles.focusZoneButton} content="Test" />
+              <Button content="#4" style={focusZoneTestStyles.focusZoneButton} />
               <Button content="#5" style={focusZoneTestStyles.focusZoneButton} />
+              <Button content="#6" style={focusZoneTestStyles.focusZoneButton} />
             </View>
             <View style={focusZoneTestStyles.focusZoneViewStyle}>
-              <Button style={focusZoneTestStyles.focusZoneButton} content="#3" />
-              <Button style={focusZoneTestStyles.focusZoneButton} content="Test" />
-              <Button content="#5" style={focusZoneTestStyles.focusZoneButton} />
+              <Button content="#7" style={focusZoneTestStyles.focusZoneButton} />
+              <Button content="#8" style={focusZoneTestStyles.focusZoneButton} />
+              <Button content="#9" style={focusZoneTestStyles.focusZoneButton} />
             </View>
           </View>
         </FocusZone>
@@ -220,7 +220,7 @@ const focusZoneSections: TestSection[] = [
     component: commonUsageFocusZone
   },
   {
-    name: '2D Navigation with Default Tabbable Element FocusZone Usage',
+    name: '2D Navigation with Default Tabbable Element (#5) FocusZone Usage',
     component: navigation2DFocusZone
   },
   {
