@@ -127,10 +127,10 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const TestComponent = selectedTestIndex == -1 ? EmptyComponent : sortedTestComponents[selectedTestIndex].component;
 
-  const TestListSeparator = Separator.customize({
-    color: useTheme().colors.inputBorder,
+  const TestListSeparator = Separator.customize((t) => ({
+    color: t.colors.inputBorder,
     separatorWidth: 2,
-  });
+  }));
 
   const themedStyles = getThemedStyles(useTheme());
 
