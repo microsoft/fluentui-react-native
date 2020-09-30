@@ -1,15 +1,12 @@
 import * as React from 'react';
 // import { IPressableProps } from '@fluentui-react-native/pressable';
 import { IPressableState, IFocusable } from '@fluentui-react-native/interactive-hooks';
-import { ViewProps } from 'react-native';
-import { IRenderData } from '@uifabricshared/foundation-composable';
-import { ITextProps } from '@fluentui-react-native/text';
-import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { IViewWin32Props } from '@office-iss/react-native-win32';
+import { ViewProps, TextProps } from 'react-native';
+import { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 
 export const checkboxName = 'Checkbox';
 
-export interface ICheckboxState extends IPressableState {
+export interface CheckboxState extends IPressableState {
   /**
    * Whether the Checkbox is checked or not
    */
@@ -26,7 +23,7 @@ export interface ICheckboxState extends IPressableState {
   boxAtEnd?: boolean;
 }
 
-export interface ICheckboxProps {
+export interface CheckboxProps {
   /**
    * An optional string for the Narrator to read. If not provided, this will be set to the Checkbox label
    */
@@ -72,26 +69,33 @@ export interface ICheckboxProps {
   testID?: string;
 }
 
-export interface ICheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
+export interface CheckboxTokens extends FontTokens, IBorderTokens {
+  color?: string;
+  backgroundColor?: string;
   checkboxBackgroundColor?: string;
   checkboxBorderColor?: string;
   checkmarkColor?: string;
   checkmarkVisibility?: number;
   textBorderColor?: string;
+
+  // various states which can be applied to the checkbox
+  disabled?: CheckboxTokens;
+  boxAtEnd?: CheckboxTokens;
+  hovered?: CheckboxTokens;
+  focused?: CheckboxTokens;
+  pressed?: CheckboxTokens;
+  checked?: CheckboxTokens;
 }
 
-export interface ICheckboxSlotProps {
-  root: React.PropsWithRef<IViewWin32Props>;
+export interface CheckboxSlotProps {
+  root: React.PropsWithRef<ViewProps>;
   checkbox: ViewProps;
-  checkmark: ITextProps;
-  content: ITextProps;
+  checkmark: TextProps;
+  content: TextProps;
 }
 
-export type ICheckboxRenderData = IRenderData<ICheckboxSlotProps, ICheckboxState>;
-
-export interface ICheckboxType {
-  props: ICheckboxProps;
-  tokens: ICheckboxTokens;
-  slotProps: ICheckboxSlotProps;
-  state: ICheckboxState;
+export interface CheckboxType {
+  props: CheckboxProps;
+  tokens: CheckboxTokens;
+  slotProps: CheckboxSlotProps;
 }
