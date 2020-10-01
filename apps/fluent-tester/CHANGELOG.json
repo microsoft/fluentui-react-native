@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 01 Oct 2020 16:54:19 GMT",
+      "tag": "@fluentui-react-native/tester_v0.9.2",
+      "version": "0.9.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch Separator to new framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "8aeba690cb213dd628748e1c1b41c3ecfea5f547",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 29 Sep 2020 18:14:46 GMT",
       "tag": "@fluentui-react-native/tester_v0.9.1",
       "version": "0.9.1",
