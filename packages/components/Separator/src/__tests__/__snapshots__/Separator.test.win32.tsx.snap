@@ -15,7 +15,6 @@ exports[`Separator default 1`] = `
 <View
   style={
     Object {
-      "borderLeftWidth": undefined,
       "borderTopWidth": 1,
     }
   }

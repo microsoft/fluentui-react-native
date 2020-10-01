@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "switch Separator to new framework",
+  "packageName": "@fluentui-react-native/separator",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-09-29T20:57:28.438Z"
+}
