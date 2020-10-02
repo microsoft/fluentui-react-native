@@ -1,14 +1,9 @@
-import {
-  IPartialTheme,
-  ITheme,
-  createPlatformThemeRegistry,
-  ThemeRegistry,
-  ThemingModuleHelper,
-} from '@uifabricshared/theming-react-native';
-import { IProcessTheme } from '@uifabricshared/theme-registry';
-import { Theme } from '@fluentui-react-native/framework';
+import { OfficePalette, PartialTheme, Theme } from '@fluentui-react-native/framework';
+import { ThemeRecipe, ThemeReference } from '@fluentui-react-native/theme';
+import { createFluentTheme, usingOfficeTheme } from './createFluentTheme';
+import { createPartialOfficeTheme, fallbackOfficeModule } from '@fluentui-react-native/win32-theme';
 
-const caterpillarBlackTheme: IPartialTheme = {
+const caterpillarBlackTheme: PartialTheme = {
   // colors: {
   //   buttonBackground: '#ffcd11',
   //   buttonBackgroundHovered: '#111',
@@ -42,7 +37,7 @@ const caterpillarBlackTheme: IPartialTheme = {
   },
 };
 
-const caterpillarColorfulTheme: IPartialTheme = {
+const caterpillarColorfulTheme: PartialTheme = {
   components: {
     Button: {
       tokens: {
@@ -68,7 +63,7 @@ const caterpillarColorfulTheme: IPartialTheme = {
   },
 };
 
-const caterpillarTheme: IProcessTheme<ITheme, IPartialTheme> = (t: ITheme) => {
+const caterpillarTheme = (t: Theme) => {
   switch (t.name) {
     case 'Black':
       return caterpillarBlackTheme;
@@ -81,16 +76,20 @@ const caterpillarTheme: IProcessTheme<ITheme, IPartialTheme> = (t: ITheme) => {
   }
 };
 
-const brandColors = {
+export type OfficeBrand = 'Office' | 'Word' | 'Excel' | 'Powerpoint' | 'Outlook';
+type BrandRampKey = 'App1' | 'App2' | 'App3' | 'App4' | 'App5' | 'App6' | 'App7' | 'App8';
+type BrandRamps = { [K in OfficeBrand]: { [J in BrandRampKey]: string } };
+
+const brandColors: BrandRamps = {
   Office: {
-    '#fff7f0': 'App1',
-    '#fbdfd0': 'App2',
-    '#f7bfa0': 'App3',
-    '#f29f71': 'App4',
-    '#ea6115': 'App5',
-    '#d83b01': 'App6',
-    '#a22c01': 'App7',
-    '#6c1e01': 'App8',
+    App1: '#fff7f0',
+    App2: '#fbdfd0',
+    App3: '#f7bfa0',
+    App4: '#f29f71',
+    App5: '#ea6115',
+    App6: '#d83b01',
+    App7: '#a22c01',
+    App8: '#6c1e01',
   },
   Word: {
     App1: '#E3ECFA',
@@ -134,46 +133,52 @@ const brandColors = {
   },
 };
 
+const themingModule = usingOfficeTheme ? fallbackOfficeModule : undefined;
+const officeBase = themingModule
+  ? createPartialOfficeTheme(themingModule, 'WhiteColors', themingModule.getPalette('RealWhiteColors') as OfficePalette)
+  : {};
+
 // This IProcessTheme takes the parent theme and shims in the brand colors selected in the RadioGroup
-const getFakeBrandTheme = (brand: string) => {
-  return (theme: Theme) => {
-    if (brand === 'Office') {
-      return {};
-    }
-
-    const brandedTheme = { colors: {}, host: { palette: {}, colors: {} } };
-    Object.keys(theme.colors).forEach((value: string) => {
-      const brandKey = brandColors.Office[theme.colors[value]];
-      if (brandKey) brandedTheme.colors[value] = brandColors[brand][brandKey];
-    });
-
-    Object.keys(theme.host.palette).forEach((value: string) => {
-      const colorVal = theme.host.palette[value].toLowerCase();
-      const brandKey = brandColors.Office[colorVal];
-      if (brandKey) brandedTheme.host.palette[value] = brandColors[brand][brandKey];
-    });
-
-    Object.keys(theme.host.colors).forEach((value: string) => {
-      const brandKey = brandColors.Office[theme.host.colors[value]];
-      if (brandKey) brandedTheme.host.colors[value] = brandColors[brand][brandKey];
-    });
-    return brandedTheme;
-  };
-};
-
-export const customRegistry: ThemeRegistry = createPlatformThemeRegistry('TaskPane');
-
-export function setAppColors(app: string) {
-  customRegistry.setTheme(getFakeBrandTheme(app));
-  customRegistry.setTheme(getFakeBrandTheme(app), 'WhiteColors', 'RealWhiteColors');
+export function getOfficeThemeRecipes(brand?: OfficeBrand): ThemeRecipe<Theme, PartialTheme>[] {
+  return [
+    officeBase,
+    () => {
+      const ramp = brand && brandColors[brand];
+      return ramp
+        ? {
+            colors: {
+              successBackground: ramp.App6,
+              buttonBackgroundHovered: ramp.App1,
+              buttonBackgroundPressed: ramp.App2,
+              buttonBorderFocused: ramp.App2,
+              primaryButtonBackground: ramp.App6,
+              primaryButtonBackgroundHovered: ramp.App4,
+              primaryButtonBackgroundPressed: ramp.App7,
+              primaryButtonBorder: ramp.App7,
+              primaryButtonBorderFocused: ramp.App7,
+              accentButtonBackground: ramp.App6,
+              actionLinkHovered: ramp.App5,
+              link: ramp.App6,
+              linkHovered: ramp.App7,
+              linkPressed: ramp.App8,
+            },
+          }
+        : {};
+    },
+  ];
 }
 
-export function registerThemes(): void {
-  // this applies the shim to the default theme
-  customRegistry.setTheme(getFakeBrandTheme('Office'));
-  customRegistry.setTheme(caterpillarTheme, 'Caterpillar');
-  // this registers platform white colors
-  customRegistry.setTheme(ThemingModuleHelper.getPlatformThemeDefinition('WhiteColors'), 'RealWhiteColors');
-  // this applies the shim to the white colors theme
-  customRegistry.setTheme(getFakeBrandTheme('Office'), 'WhiteColors', 'RealWhiteColors');
+export const testerTheme = new ThemeReference(createFluentTheme(), {});
+
+export function switchTestTheme(primary?: string, sub?: string): void {
+  switch (primary) {
+    case 'Office':
+      testerTheme.update(...getOfficeThemeRecipes(sub as OfficeBrand));
+      break;
+    case 'Caterpillar':
+      testerTheme.update(caterpillarTheme);
+      break;
+    default:
+      testerTheme.update({});
+  }
 }

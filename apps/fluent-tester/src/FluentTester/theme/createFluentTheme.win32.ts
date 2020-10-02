@@ -5,3 +5,5 @@ import { createOfficeTheme } from '@fluentui-react-native/win32-theme';
 export function createFluentTheme(options?: ThemeOptions): ThemeReference {
   return createOfficeTheme(options);
 }
+
+export const usingOfficeTheme = true;

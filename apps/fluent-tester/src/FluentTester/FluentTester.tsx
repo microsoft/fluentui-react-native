@@ -1,13 +1,13 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { StealthButton, Separator, Text } from '@fluentui/react-native';
 import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
-import { getHostSettingsWin32, useTheme } from '@uifabricshared/theming-react-native';
 import * as React from 'react';
 import { Picker, ScrollView, View, Text as RNText } from 'react-native';
-import { setAppColors } from './CustomThemes';
+import { OfficeBrand, switchTestTheme } from './theme/CustomThemes';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fabricTesterStyles } from './TestComponents/Common/styles';
+import { useTheme } from '@fluentui-react-native/theme-types';
 
 // uncomment the below lines to enable message spy
 /*
@@ -19,42 +19,41 @@ const EmptyComponent: React.FunctionComponent = () => {
   return <RNText style={fabricTesterStyles.noTest}>Select a component from the left.</RNText>;
 };
 
-export interface HeaderProps {
-  setSelectedTheme: (theme?: string) => void;
-  theme?: string;
-}
-
-export interface FluentTesterProps extends HeaderProps {
+export interface FluentTesterProps {
   initialTest?: string;
   enabledTests: TestDescription[];
 }
 
-const Header: React.FunctionComponent<HeaderProps> = (props: HeaderProps) => {
+const Header: React.FunctionComponent<{}> = () => {
+  const theme = useTheme();
   const [selectedPlatform, setSelectedPlatform] = React.useState('win32');
-  const [selectedApp, setSelectedApp] = React.useState('Office');
-  const [selectedTheme, setSelectedTheme] = React.useState(props.theme === '' ? 'Default' : props.theme);
+  const [selectedTheme, setSelectedTheme] = React.useState('Default');
+  const [selectedBrand, setSelectedBrand] = React.useState('Office');
 
-  const onAppChange = React.useCallback((appValue: string) => {
-    setSelectedApp(appValue);
-    setAppColors(appValue);
-  }, []);
-
-  const onThemeSelected = React.useCallback(
-    (themeVal: string) => {
-      if (themeVal !== null) {
-        const val = themeVal === 'Default' ? '' : themeVal;
-        props.setSelectedTheme(val);
-        setSelectedTheme(themeVal);
-      }
+  const onAppChange = React.useCallback(
+    (newBrand: OfficeBrand) => {
+      setSelectedBrand(newBrand);
+      switchTestTheme(selectedTheme, newBrand);
     },
-    [props.setSelectedTheme, setSelectedTheme],
+    [selectedTheme, setSelectedBrand],
   );
 
-  const hostColors = getHostSettingsWin32(useTheme())?.palette;
+  const onThemeSelected = React.useCallback(
+    (newTheme: string) => {
+      setSelectedTheme(newTheme);
+      switchTestTheme(newTheme, selectedBrand);
+    },
+    [selectedBrand, setSelectedTheme],
+  );
 
   return (
     <View style={fabricTesterStyles.header}>
-      <Text style={[fabricTesterStyles.testHeader]} variant="heroLargeSemibold" color={hostColors?.TextEmphasis} testID={BASE_TESTPAGE}>
+      <Text
+        style={[fabricTesterStyles.testHeader]}
+        variant="heroLargeSemibold"
+        color={theme.host.palette?.TextEmphasis}
+        testID={BASE_TESTPAGE}
+      >
         ⚛ FluentUI Tests
       </Text>
 
@@ -76,7 +75,7 @@ const Header: React.FunctionComponent<HeaderProps> = (props: HeaderProps) => {
 
         <View style={fabricTesterStyles.picker}>
           <RNText style={fabricTesterStyles.pickerLabel}>App: </RNText>
-          <Picker selectedValue={selectedApp} style={fabricTesterStyles.dropdown} onValueChange={(appValue) => onAppChange(appValue)}>
+          <Picker selectedValue={selectedBrand} style={fabricTesterStyles.dropdown} onValueChange={(appValue) => onAppChange(appValue)}>
             <Picker.Item label="Office" value="Office" />
             <Picker.Item label="Word" value="Word" />
             <Picker.Item label="Excel" value="Excel" />
@@ -118,7 +117,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   // sort tests alphabetically by name
   const sortedTestComponents = props.enabledTests.sort((a, b) => a.name.localeCompare(b.name));
 
-  const { initialTest, setSelectedTheme, theme } = props;
+  const { initialTest } = props;
   const initialSelectedTestIndex = sortedTestComponents.findIndex((description) => {
     return description.name === initialTest;
   });
@@ -136,7 +135,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   return (
     <View style={themedStyles.root}>
-      <Header setSelectedTheme={setSelectedTheme} theme={theme} />
+      <Header />
 
       <Separator />
 

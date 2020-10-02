@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { FlatList, View, ViewStyle, StyleSheet } from 'react-native';
-import { getHostSettingsWin32, useTheme } from '@uifabricshared/theming-react-native';
+import { useTheme, Theme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
 import { commonTestStyles } from '../Common/styles';
 import { Button, PrimaryButton, Text, StealthButton } from '@fluentui/react-native';
-import { ITheme } from '@uifabricshared/theming-ramp';
 import { THEME_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
-const getThemedStyles = themedStyleSheet((theme: ITheme) => {
+const getThemedStyles = themedStyleSheet((theme: Theme) => {
   return {
     swatch: {
       width: 80,
@@ -69,8 +68,9 @@ const SemanticColor: React.FunctionComponent<SemanticColorProps> = (p: SemanticC
 };
 
 const SwatchList: React.FunctionComponent<{ hostKey: string }> = ({ hostKey }: { hostKey: string }) => {
-  const hostSettings = getHostSettingsWin32(useTheme());
-  const themedStyles = getThemedStyles(useTheme());
+  const theme = useTheme();
+  const hostSettings = theme.host;
+  const themedStyles = getThemedStyles(theme);
 
   if (hostSettings === undefined) return <Text>Error</Text>;
 
