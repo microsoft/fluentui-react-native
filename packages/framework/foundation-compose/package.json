@@ -47,5 +47,11 @@
   },
   "peerDependencies": {
     "react": "^16.8.0"
+  },
+  "depcheck": {
+    "ignoreMatches": [
+      "@fluentui-react-native/default-theme",
+      "@fluentui-react-native/theme-types"
+    ]
   }
 }
