@@ -1,7 +1,5 @@
 import { checkboxName, CheckboxProps, CheckboxSlotProps, CheckboxTokens } from './Checkbox.types';
-
-import { borderStyles, fontStyles, Theme, UseStylingOptions } from '@fluentui-react-native/framework';
-import { buildProps } from '@fluentui-react-native/use-styling';
+import { borderStyles, fontStyles, Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 
 export const checkboxSelectActionLabel = 'Toggle the Checkbox';
 

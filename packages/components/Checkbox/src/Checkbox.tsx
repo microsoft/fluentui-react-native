@@ -6,7 +6,6 @@ import { stylingSettings, checkboxSelectActionLabel } from './Checkbox.settings'
 import { useAsToggle, useAsPressable, useViewCommandFocus, useKeyCallback } from '@fluentui-react-native/interactive-hooks';
 import { compose, mergeProps, UseSlots, withSlots, UseStylingParam } from '@fluentui-react-native/framework';
 import { filterViewProps } from '@fluentui-react-native/adapters';
-import {} from '@fluentui-react-native/use-styling';
 
 const accessibilityActions = [{ name: 'Toggle', label: checkboxSelectActionLabel }];
 
