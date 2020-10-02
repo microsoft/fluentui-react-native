@@ -35,7 +35,7 @@ export type UseStylingOptions<TProps, TSlotProps, TTokens> = UseStylingOptionsBa
  */
 export function buildUseStyling<TProps, TSlotProps, TTokens>(
   options: UseStylingOptions<TProps, TSlotProps, TTokens>,
-): UseStyling<TProps, TSlotProps> {
+): UseStyling<TProps, TSlotProps, TTokens> {
   // create a cache instance for this use styling implementation
   return buildUseStylingBase(options, themeHelper);
 }

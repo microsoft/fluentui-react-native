@@ -46,9 +46,24 @@ export type UseStylingOptions<TProps, TSlotProps, TTokens, TTheme> = {
 };
 
 /**
+ * Allow additional options to be retrieved from use styling
+ */
+export type UseStylingParam<TTokens> = {
+  /**
+   * optional lookup funciton to use for determining which states to apply
+   */
+  hasState?: HasLayer;
+
+  /**
+   * out param to retrieve the generated tokens if they need to be retrieved
+   */
+  tokens?: TTokens;
+};
+
+/**
  * Signature for the use styling hook
  */
-export type UseStyling<TProps, TSlotProps> = (props: TProps, lookup?: HasLayer) => TSlotProps;
+export type UseStyling<TProps, TSlotProps, TTokens> = (props: TProps, lookup?: HasLayer | UseStylingParam<TTokens>) => TSlotProps;
 
 /**
  * Helper object which injects theme specific functionality
@@ -75,7 +90,10 @@ function promotePropsToTokens<TTokens, TProps>(tokens: TTokens, props: TProps, t
     ? {
         ...tokens,
         ...(typeof tokenProps === 'object' && Array.isArray(tokenProps)
-          ? Object.assign({}, ...tokenProps.filter(key => props[key as string] !== undefined).map(key => ({ [key]: props[key as string] })))
+          ? Object.assign(
+              {},
+              ...tokenProps.filter((key) => props[key as string] !== undefined).map((key) => ({ [key]: props[key as string] })),
+            )
           : props),
       }
     : tokens;
@@ -123,7 +141,7 @@ function resolveToSlotProps<TSlotProps, TTokens, TTheme>(
   cache: GetMemoValue<TTokens>,
 ): TSlotProps {
   const slotProps = {};
-  Object.keys(styles).forEach(key => {
+  Object.keys(styles).forEach((key) => {
     const style = styles[key];
     slotProps[key] = typeof style === 'function' ? style(tokens, theme, cache(null, [key])[1]) : style;
   });
@@ -139,27 +157,33 @@ function resolveToSlotProps<TSlotProps, TTokens, TTheme>(
 export function buildUseStyling<TProps, TSlotProps, TTokens, TTheme>(
   options: UseStylingOptions<TProps, TSlotProps, TTokens, TTheme>,
   themeHelper: ThemeHelper<TTheme>,
-): UseStyling<TProps, TSlotProps> {
+): UseStyling<TProps, TSlotProps, TTokens> {
   // create a cache instance for this use styling implementation
   const cache = getMemoCache();
   const { useTheme, getComponentInfo } = themeHelper;
   const { tokens, tokensThatAreAlsoProps: tokenProps } = options;
   const styles = refinePropsFunctions(options.slotProps || {}, tokenProps);
 
-  return (props: TProps, lookup?: HasLayer) => {
+  return (props: TProps, param?: HasLayer | UseStylingParam<TTokens>) => {
     // query the theme
     const theme = useTheme();
+    const lookup = typeof param === 'object' ? param.hasState : param;
 
     // get the base styles all merged together, these will only depend on internal tokens and theme
-    const [merged, subCache] = cache(() => immutableMerge(...tokens.map(value => mapToTokens(value, theme, getComponentInfo))), [theme]);
+    const [merged, subCache] = cache(() => immutableMerge(...tokens.map((value) => mapToTokens(value, theme, getComponentInfo))), [theme]);
 
     // resolve overrides as appropriate
     const [layered, cacheBase] = options.states
-      ? applyTokenLayers(merged, options.states as string[], subCache, lookup || (val => props[val]))
+      ? applyTokenLayers(merged, options.states as string[], subCache, lookup || ((val) => props[val]))
       : [merged, subCache];
 
     // now resolve tokens
     const finalTokens = promotePropsToTokens(layered, props, tokenProps);
+
+    // if tokens need to be returned go ahead and do that
+    if (typeof param === 'object') {
+      param.tokens = finalTokens;
+    }
 
     // finally produce slotProps from calling the style functions on each entry
     return resolveToSlotProps(styles, finalTokens, theme, cacheBase);
