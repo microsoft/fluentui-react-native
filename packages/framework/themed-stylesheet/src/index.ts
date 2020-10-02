@@ -1,1 +1,1 @@
-export * from './StyleSheet';
+export * from './themedStyleSheet';

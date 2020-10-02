@@ -1,4 +1,4 @@
-import { themedStyleSheet } from './StyleSheet';
+import { themedStyleSheet } from './themedStyleSheet';
 
 interface IFakeTheme {
   color1?: string;
@@ -10,7 +10,7 @@ function _createTheme1(): IFakeTheme {
   return {
     color1: 'blue',
     color2: 'red',
-    fontSize: 10
+    fontSize: 10,
   };
 }
 
@@ -18,7 +18,7 @@ function _createTheme2(): IFakeTheme {
   return {
     color1: 'green',
     color2: 'black',
-    fontSize: 12
+    fontSize: 12,
   };
 }
 
@@ -27,13 +27,13 @@ const getStyles1 = themedStyleSheet((t: IFakeTheme) => {
     style1: {
       backgroundColor: t.color1,
       color: t.color2,
-      fontSize: t.fontSize
+      fontSize: t.fontSize,
     },
     style2: {
       color: t.color1,
       backgroundColor: 'purple',
-      fontSize: 50
-    }
+      fontSize: 50,
+    },
   };
 });
 
@@ -42,8 +42,8 @@ const getThemeOptionalStyles = themedStyleSheet((t: IFakeTheme) => {
     style3: {
       backgroundColor: (t && t.color1) || 'white',
       color: (t && t.color2) || 'black',
-      fontSize: (t && t.fontSize) || 8
-    }
+      fontSize: (t && t.fontSize) || 8,
+    },
   };
 });
 
@@ -53,7 +53,7 @@ describe('Themed style sheet tests', () => {
     expect(styles.style3).toEqual({
       backgroundColor: 'white',
       color: 'black',
-      fontSize: 8
+      fontSize: 8,
     });
   });
 
@@ -69,7 +69,7 @@ describe('Themed style sheet tests', () => {
     expect(styles.style3).toEqual({
       backgroundColor: 'blue',
       color: 'red',
-      fontSize: 10
+      fontSize: 10,
     });
   });
 
@@ -79,12 +79,12 @@ describe('Themed style sheet tests', () => {
     expect(styles.style1).toEqual({
       backgroundColor: 'blue',
       color: 'red',
-      fontSize: 10
+      fontSize: 10,
     });
     expect(styles.style2).toEqual({
       color: 'blue',
       backgroundColor: 'purple',
-      fontSize: 50
+      fontSize: 50,
     });
   });
 
