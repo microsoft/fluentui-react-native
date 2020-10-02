@@ -24,6 +24,9 @@
     "@fluentui-react-native/framework": ">=0.3.7 <1.0.0",
     "@fluentui-react-native/stack": ">=0.2.15 <1.0.0",
     "@fluentui-react-native/interactive-hooks": ">=0.5.2 <1.0.0",
+    "@fluentui-react-native/default-theme": ">=0.1.5 <1.0.0",
+    "@fluentui-react-native/theme": ">=0.2.1 <1.0.0",
+    "@fluentui-react-native/theme-types": ">=0.1.5 <1.0.0",
     "@uifabricshared/theming-react-native": ">=0.8.1 <1.0.0",
     "@uifabricshared/theme-registry": ">=0.3.71 <1.0.0",
     "@uifabricshared/themed-stylesheet": ">=0.3.70 <1.0.0",
@@ -31,6 +34,7 @@
     "react-native-svg": "^11.0.0"
   },
   "devDependencies": {
+    "@fluentui-react-native/win32-theme": ">=0.2.0 <1.0.0",
     "@react-native-community/eslint-config": "^1.1.0",
     "@types/react": "^16.9.34",
     "@types/react-native": "^0.62.0",

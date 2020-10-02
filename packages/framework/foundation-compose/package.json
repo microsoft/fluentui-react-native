@@ -47,10 +47,5 @@
   },
   "peerDependencies": {
     "react": "^16.8.0"
-  },
-  "depcheck": {
-    "ignoreMatches": [
-      "@uifabricshared/theming-react-native"
-    ]
   }
 }

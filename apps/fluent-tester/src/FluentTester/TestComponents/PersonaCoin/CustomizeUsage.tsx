@@ -3,7 +3,7 @@ import { PersonaCoin, IconAlignment, IPersonaCoinTokens } from '@fluentui/react-
 import { Switch, View, Text, TextInput } from 'react-native';
 import { Slider } from '../Common/Slider';
 import { steveBallmerPhotoUrl } from './styles';
-import { useTheme } from '@uifabricshared/theming-react-native';
+import { useTheme } from '@fluentui-react-native/theme-types';
 import { AlignmentPicker } from '../Common/AlignmentPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
