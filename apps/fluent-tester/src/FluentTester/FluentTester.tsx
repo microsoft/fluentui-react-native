@@ -1,6 +1,6 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { StealthButton, Separator, Text } from '@fluentui/react-native';
-import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
+import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { getHostSettingsWin32, useTheme } from '@uifabricshared/theming-react-native';
 import * as React from 'react';
 import { Picker, ScrollView, View, Text as RNText } from 'react-native';
