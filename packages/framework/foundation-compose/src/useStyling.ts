@@ -3,7 +3,8 @@ import { ISlotProps, IComponentSettings, IOverrideLookup, IWithTokens } from '@u
 import { getThemedSettings } from '@uifabricshared/themed-settings';
 import { ITheme, getSettings, returnAsSlotProps } from '@uifabricshared/theming-ramp';
 import { IComponentTokens, processTokens, ITargetHasToken, buildComponentTokens } from '@uifabricshared/foundation-tokens';
-import { getTheme, ThemeContext } from '@uifabricshared/theming-react-native';
+import { ThemeContext } from '@fluentui-react-native/theme-types';
+import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
 import { IWithComposable, AsObject, IComposableDefinition, INativeSlotType } from '@uifabricshared/foundation-composable';
 import { IComposeOptions, IStylingSettings, IDefineUseComposeStyling } from './compose.types';
 import { getMemoCache, GetMemoValue } from '@fluentui-react-native/memo-cache';
@@ -19,10 +20,10 @@ function _getSettingsFromTheme(theme: ITheme, name: string): IComponentSettings 
 }
 
 function _getHasToken<TProps, TSlotProps extends ISlotProps, TTokens extends object, TState>(
-  slots: IComposableDefinition<TProps, TSlotProps, TState>['slots']
+  slots: IComposableDefinition<TProps, TSlotProps, TState>['slots'],
 ): ITargetHasToken {
   const slotTokens: { [key: string]: IComponentTokens<TSlotProps, TTokens, ITheme>['tokenKeys'] | undefined } = {};
-  Object.keys(slots).forEach(slotName => {
+  Object.keys(slots).forEach((slotName) => {
     const slot = slots[slotName];
     const slotType = (typeof slot !== 'object' ? slot : slot.slotType) as INativeSlotType;
     const options = <IComposeOptions<AsObject<TProps>, TSlotProps>>getOptionsFromObj(slotType);
@@ -37,10 +38,10 @@ function useStylingCore<TProps, TSlotProps extends ISlotProps, TTokens extends o
   props: TProps,
   options: IStylingSettings<TSlotProps, TTokens>,
   instanceMemoCache: GetMemoValue<TSlotProps, TSlotProps>,
-  lookupOverride?: IOverrideLookup
+  lookupOverride?: IOverrideLookup,
 ): IWithTokens<TSlotProps, TTokens> {
   // get the theme value from the context (or the default theme if it is not set)
-  const theme = React.useContext(ThemeContext) || getTheme();
+  const theme = React.useContext(ThemeContext) || defaultFluentTheme;
 
   // resolve the array of settings for these options
   lookupOverride = lookupOverride || props;
@@ -50,7 +51,7 @@ function useStylingCore<TProps, TSlotProps extends ISlotProps, TTokens extends o
     theme,
     instanceMemoCache as GetMemoValue<any>,
     lookupOverride,
-    _getSettingsFromTheme as any
+    _getSettingsFromTheme as any,
   );
 
   // finish by processing the tokens and turning IComponentSettings into ISlotProps (this removes things like _overrides)
@@ -60,8 +61,8 @@ function useStylingCore<TProps, TSlotProps extends ISlotProps, TTokens extends o
       theme,
       settings as any,
       options.resolvedTokens,
-      getMemoValue as GetMemoValue<any>
-    )
+      getMemoValue as GetMemoValue<any>,
+    ),
   ) as IWithTokens<TSlotProps, TTokens>;
 }
 
