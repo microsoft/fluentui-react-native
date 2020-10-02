@@ -1,9 +1,8 @@
-import * as React from 'react';
 import { ISlotProps, IComponentSettings, IOverrideLookup, IWithTokens } from '@uifabricshared/foundation-settings';
 import { getThemedSettings } from '@uifabricshared/themed-settings';
 import { ITheme, getSettings, returnAsSlotProps } from '@uifabricshared/theming-ramp';
 import { IComponentTokens, processTokens, ITargetHasToken, buildComponentTokens } from '@uifabricshared/foundation-tokens';
-import { ThemeContext } from '@fluentui-react-native/theme-types';
+import { useTheme } from '@fluentui-react-native/theme-types';
 import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
 import { IWithComposable, AsObject, IComposableDefinition, INativeSlotType } from '@uifabricshared/foundation-composable';
 import { IComposeOptions, IStylingSettings, IDefineUseComposeStyling } from './compose.types';
@@ -41,7 +40,7 @@ function useStylingCore<TProps, TSlotProps extends ISlotProps, TTokens extends o
   lookupOverride?: IOverrideLookup,
 ): IWithTokens<TSlotProps, TTokens> {
   // get the theme value from the context (or the default theme if it is not set)
-  const theme = React.useContext(ThemeContext) || defaultFluentTheme;
+  const theme = useTheme() || defaultFluentTheme;
 
   // resolve the array of settings for these options
   lookupOverride = lookupOverride || props;

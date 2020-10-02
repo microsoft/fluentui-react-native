@@ -3,11 +3,12 @@ import { StealthButton, Separator, Text } from '@fluentui/react-native';
 import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
 import * as React from 'react';
 import { Picker, ScrollView, View, Text as RNText } from 'react-native';
-import { OfficeBrand, switchTestTheme } from './theme/CustomThemes';
+import { switchTestTheme } from './theme/CustomThemes';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fabricTesterStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
+import { OfficeBrand } from './theme/getOfficeTheme';
 
 // uncomment the below lines to enable message spy
 /*
@@ -75,7 +76,7 @@ const Header: React.FunctionComponent<{}> = () => {
 
         <View style={fabricTesterStyles.picker}>
           <RNText style={fabricTesterStyles.pickerLabel}>App: </RNText>
-          <Picker selectedValue={selectedBrand} style={fabricTesterStyles.dropdown} onValueChange={(appValue) => onAppChange(appValue)}>
+          <Picker selectedValue={selectedBrand} style={fabricTesterStyles.dropdown} onValueChange={onAppChange}>
             <Picker.Item label="Office" value="Office" />
             <Picker.Item label="Word" value="Word" />
             <Picker.Item label="Excel" value="Excel" />
