@@ -67,23 +67,21 @@ const SemanticColor: React.FunctionComponent<SemanticColorProps> = (p: SemanticC
   );
 };
 
-const SwatchList: React.FunctionComponent<{ hostKey: string }> = ({ hostKey }: { hostKey: string }) => {
+const SwatchList: React.FunctionComponent = () => {
   const theme = useTheme();
-  const hostSettings = theme.host;
   const themedStyles = getThemedStyles(theme);
-
-  if (hostSettings === undefined) return <Text>Error</Text>;
+  const palette = theme.colors;
 
   const aggregator = React.useCallback(
     (key: string) => {
-      return { name: key + ' (' + hostSettings[hostKey][key] + ')', color: hostSettings[hostKey][key] };
+      return { name: key + ' (' + palette[key] + ')', color: palette[key] };
     },
-    [hostSettings[hostKey]],
+    [palette],
   );
 
   const flattenArray = React.useCallback(() => {
-    return Object.keys(hostSettings[hostKey]).sort().map(aggregator);
-  }, [hostSettings[hostKey], aggregator]);
+    return Object.keys(palette).sort().map(aggregator);
+  }, [palette, aggregator]);
 
   const paletteAsArray = React.useMemo(flattenArray, [flattenArray]);
   const renderSwatch = React.useCallback(({ item }) => {
@@ -92,7 +90,7 @@ const SwatchList: React.FunctionComponent<{ hostKey: string }> = ({ hostKey }: {
   }, []);
   return (
     <View style={[commonTestStyles.view]}>
-      <Text variant="bodySemibold">getHostSettingsWin32(theme: ITheme).{hostKey}</Text>
+      <Text>getHostSettingsWin32(theme: ITheme).palette</Text>
       <View style={themedStyles.stackStyle}>
         <FlatList data={paletteAsArray} renderItem={renderSwatch} />
       </View>
@@ -107,11 +105,11 @@ const themeSections: TestSection[] = [
   },
   {
     name: 'Theme.host.palette',
-    component: () => <SwatchList hostKey="palette" />,
+    component: () => <SwatchList />,
   },
   {
     name: 'Theme.host.colors',
-    component: () => <SwatchList hostKey="colors" />,
+    component: () => <SwatchList />,
   },
 ];
 

@@ -1,3 +1,4 @@
+import { ThemeOptions } from '@fluentui-react-native/default-theme';
 import { PartialTheme, Theme } from '@fluentui-react-native/framework';
 import { ThemeReference } from '@fluentui-react-native/theme';
 import { createFluentTheme } from './createFluentTheme';
@@ -76,7 +77,9 @@ const caterpillarTheme = (t: Theme) => {
   }
 };
 
-export const testerTheme = new ThemeReference(createFluentTheme({ paletteName: 'TaskPane' }), {});
+const themeOptions: ThemeOptions = { paletteName: 'TaskPane', appearance: 'dynamic' };
+const fluentTheme = createFluentTheme(themeOptions);
+export const testerTheme = new ThemeReference(fluentTheme, {});
 
 export function switchTestTheme(primary?: string, sub?: string): void {
   switch (primary) {
@@ -89,4 +92,9 @@ export function switchTestTheme(primary?: string, sub?: string): void {
     default:
       testerTheme.update({});
   }
+}
+
+export function updateThemeAppearance(appearance: ThemeOptions['appearance']) {
+  themeOptions.appearance = appearance;
+  fluentTheme.invalidate();
 }

@@ -1,9 +1,10 @@
 import { Theme } from '@fluentui-react-native/framework';
-import { StealthButton, Separator, Text } from '@fluentui/react-native';
+import { StealthButton, Separator } from '@fluentui/react-native';
+import { Text } from '@fluentui-react-native/experimental-text';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
 import { Picker, ScrollView, View, Text as RNText } from 'react-native';
-import { switchTestTheme } from './theme/CustomThemes';
+import { switchTestTheme, updateThemeAppearance } from './theme/CustomThemes';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fabricTesterStyles } from './TestComponents/Common/styles';
@@ -27,7 +28,7 @@ export interface FluentTesterProps {
 
 const Header: React.FunctionComponent<{}> = () => {
   const theme = useTheme();
-  const [selectedPlatform, setSelectedPlatform] = React.useState('win32');
+  const [appearance, setAppearance] = React.useState('dynamic');
   const [selectedTheme, setSelectedTheme] = React.useState('Default');
   const [selectedBrand, setSelectedBrand] = React.useState('Office');
 
@@ -47,6 +48,14 @@ const Header: React.FunctionComponent<{}> = () => {
     [selectedBrand, setSelectedTheme],
   );
 
+  const onAppearanceChange = React.useCallback(
+    (newAppearance: 'dynamic' | 'dark' | 'light') => {
+      setAppearance(newAppearance);
+      updateThemeAppearance(newAppearance);
+    },
+    [setAppearance],
+  );
+
   return (
     <View style={fabricTesterStyles.header}>
       <Text
@@ -60,22 +69,16 @@ const Header: React.FunctionComponent<{}> = () => {
 
       <View style={fabricTesterStyles.pickerRoot}>
         <View style={fabricTesterStyles.picker}>
-          <RNText style={fabricTesterStyles.pickerLabel}>Platform: </RNText>
-          <Picker
-            selectedValue={selectedPlatform}
-            style={fabricTesterStyles.dropdown}
-            onValueChange={(platformValue) => setSelectedPlatform(platformValue)}
-          >
-            <Picker.Item label="Win32" value="win32" />
-            <Picker.Item label="UWP" value="uwp" />
-            <Picker.Item label="iOS" value="ios" />
-            <Picker.Item label="macOS" value="mac" />
-            <Picker.Item label="Android" value="android" />
+          <Text style={fabricTesterStyles.pickerLabel}>Lightness: </Text>
+          <Picker selectedValue={appearance} style={fabricTesterStyles.dropdown} onValueChange={onAppearanceChange}>
+            <Picker.Item label="Auto" value="dynamic" />
+            <Picker.Item label="Light" value="light" />
+            <Picker.Item label="Dark" value="dark" />
           </Picker>
         </View>
 
         <View style={fabricTesterStyles.picker}>
-          <RNText style={fabricTesterStyles.pickerLabel}>App: </RNText>
+          <Text style={fabricTesterStyles.pickerLabel}>Brand: </Text>
           <Picker selectedValue={selectedBrand} style={fabricTesterStyles.dropdown} onValueChange={onAppChange}>
             <Picker.Item label="Office" value="Office" />
             <Picker.Item label="Word" value="Word" />
@@ -86,11 +89,11 @@ const Header: React.FunctionComponent<{}> = () => {
         </View>
 
         <View style={fabricTesterStyles.picker}>
-          <RNText style={fabricTesterStyles.pickerLabel}>Theme: </RNText>
+          <Text style={fabricTesterStyles.pickerLabel}>Theme: </Text>
           <Picker selectedValue={selectedTheme} style={fabricTesterStyles.dropdown} onValueChange={onThemeSelected}>
-            <Picker.Item label="TaskPane" value="Default" />
+            <Picker.Item label="Fluent" value="Fluent" />
+            <Picker.Item label="Office" value="Office" />
             <Picker.Item label="Caterpillar" value="Caterpillar" />
-            <Picker.Item label="WhiteColors" value="WhiteColors" />
           </Picker>
         </View>
       </View>
