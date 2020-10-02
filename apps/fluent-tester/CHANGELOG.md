@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 02 Oct 2020 22:17:48 GMT and should not be manually modified.
+This log was last generated on Fri, 02 Oct 2020 22:37:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.4
+
+Fri, 02 Oct 2020 22:37:51 GMT
+
+### Patches
+
+- convert themed stylesheet to use memo-cache (jasonmo@microsoft.com)
 
 ## 0.9.3
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 02 Oct 2020 22:37:51 GMT",
+      "tag": "@fluentui-react-native/tester_v0.9.4",
+      "version": "0.9.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "convert themed stylesheet to use memo-cache",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4022a4f0b8376144dba528e418ece2f503a9a5d7",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 02 Oct 2020 22:17:48 GMT",
       "tag": "@fluentui-react-native/tester_v0.9.3",
       "version": "0.9.3",
