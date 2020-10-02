@@ -11,7 +11,7 @@ const directionalFocusZone: React.FunctionComponent<{}> = () => {
   return (
     <View>
       <Button content="Outside FocusZone" />
-      <Text variant="headerSemibold" accessible={false}>FocusZone with Bidirectional arrow key navigation</Text>
+      <Text variant="headerSemibold">FocusZone with Bidirectional arrow key navigation</Text>
       <FocusZone focusZoneDirection='bidirectional'>
         <Checkbox label="Option A" />
         <Checkbox label="Option B" />
@@ -19,7 +19,7 @@ const directionalFocusZone: React.FunctionComponent<{}> = () => {
         <Checkbox label="Option D" />
       </FocusZone>
       <Button content="Outside FocusZone" />
-      <Text variant="headerSemibold" accessible={false}>FocusZone with Vertical arrow key navigation</Text>
+      <Text variant="headerSemibold">FocusZone with Vertical arrow key navigation</Text>
       <FocusZone focusZoneDirection='vertical'>
         <Checkbox label="Option A" />
         <Checkbox label="Option B" />
@@ -27,7 +27,7 @@ const directionalFocusZone: React.FunctionComponent<{}> = () => {
         <Checkbox label="Option D" />
       </FocusZone>
       <Button content="Outside FocusZone" />
-      <Text variant="headerSemibold" accessible={false}>FocusZone with Horizontal arrow key navigation</Text>
+      <Text variant="headerSemibold">FocusZone with Horizontal arrow key navigation</Text>
       <FocusZone focusZoneDirection='horizontal'>
         <Checkbox label="Option A" />
         <Checkbox label="Option B" />
@@ -35,7 +35,7 @@ const directionalFocusZone: React.FunctionComponent<{}> = () => {
         <Checkbox label="Option D" />
       </FocusZone>
       <Button content="Outside FocusZone" />
-      <Text variant="headerSemibold" accessible={false}>FocusZone with No arrow key navigation</Text>
+      <Text variant="headerSemibold">FocusZone with No arrow key navigation</Text>
       <FocusZone focusZoneDirection="none">
         <Checkbox label="Option A" />
         <Checkbox label="Option B" />
@@ -43,7 +43,7 @@ const directionalFocusZone: React.FunctionComponent<{}> = () => {
         <Checkbox label="Option D" />
       </FocusZone>
       <Button content="Outside FocusZone" />
-      <Text variant="headerSemibold" accessible={false}>FocusZone with no props set</Text>
+      <Text variant="headerSemibold">FocusZone with no props set</Text>
       <FocusZone>
         <Checkbox label="Option A" />
         <Checkbox label="Option B" />
@@ -59,7 +59,7 @@ const commonUsageFocusZone: React.FunctionComponent<{}> = () => {
   return (
     <View>
       <Button content="Outside FocusZone" />
-      <Text variant="headerSemibold" accessible={false}>FocusZone with Circular Navigation</Text>
+      <Text variant="headerSemibold">FocusZone with Circular Navigation</Text>
       <FocusZone isCircularNavigation={true}>
         <Checkbox label="Option A" />
         <Checkbox label="Option B" />
@@ -67,7 +67,7 @@ const commonUsageFocusZone: React.FunctionComponent<{}> = () => {
         <Checkbox label="Option D" />
       </FocusZone>
       <Button content="Outside FocusZone" />
-      <Text variant="headerSemibold" accessible={false}>Disabled FocusZone</Text>
+      <Text variant="headerSemibold">Disabled FocusZone</Text>
       <FocusZone disabled={true}>
         <Checkbox label="Option A" />
         <Checkbox label="Option B" />
