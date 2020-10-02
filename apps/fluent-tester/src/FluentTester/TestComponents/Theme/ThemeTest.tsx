@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FlatList, View, ViewStyle, StyleSheet } from 'react-native';
 import { getHostSettingsWin32, useTheme } from '@uifabricshared/theming-react-native';
-import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
+import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { commonTestStyles } from '../Common/styles';
 import { Button, PrimaryButton, Text, StealthButton } from '@fluentui/react-native';
 import { ITheme } from '@uifabricshared/theming-ramp';
