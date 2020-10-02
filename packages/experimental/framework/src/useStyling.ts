@@ -2,7 +2,7 @@
  * Many of the types from use-styling take a theme as a type parameter. This re-exports them in such a way
  * as to be dependent on the core theme type
  */
-export { TokensThatAreAlsoProps, HasLayer, applyTokenLayers, UseStyling } from '@fluentui-react-native/use-styling';
+export { TokensThatAreAlsoProps, HasLayer, applyTokenLayers, UseStyling, UseStylingParam } from '@fluentui-react-native/use-styling';
 import {
   TokensFromTheme as TokensFromThemeBase,
   TokenSettings as TokenSettingsBase,

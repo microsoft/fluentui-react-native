@@ -2,7 +2,7 @@ import * as React from 'react';
 // import { IPressableProps } from '@fluentui-react-native/pressable';
 import { IPressableState, IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { ViewProps, TextProps } from 'react-native';
-import { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import { BackgroundColorTokenSet, BorderTokenSet, FontTokenSet, ForegroundColorTokenSet } from '@fluentui-react-native/framework';
 
 export const checkboxName = 'Checkbox';
 
@@ -16,14 +16,24 @@ export interface CheckboxState extends IPressableState {
    * Whether the Checkbox is disabled or not
    */
   disabled?: boolean;
-
-  /**
-   * Determines position of Checkbox. True if boxSide='end'
-   */
-  boxAtEnd?: boolean;
 }
 
-export interface CheckboxProps {
+/**
+ * Values that can be set via props or via tokens
+ */
+export interface CheckboxTokenProps {
+  /**
+   * Allows you to set the checkbox to be at the before (start) or after (end) the label
+   */
+  boxSide?: 'start' | 'end';
+}
+
+/**
+ * List of tokens that are also props, should include values in the above type
+ */
+export const tokensThatAreAlsoProps: (keyof CheckboxTokenProps)[] = ['boxSide'];
+
+export interface CheckboxProps extends CheckboxTokenProps {
   /**
    * An optional string for the Narrator to read. If not provided, this will be set to the Checkbox label
    */
@@ -40,11 +50,6 @@ export interface CheckboxProps {
    ** want the Checkbox instance to maintain its own state.
    */
   defaultChecked?: boolean;
-
-  /**
-   * Allows you to set the checkbox to be at the before (start) or after (end) the label
-   */
-  boxSide?: 'start' | 'end';
 
   /**
    * Disabled state of the checkbox.
@@ -69,18 +74,19 @@ export interface CheckboxProps {
   testID?: string;
 }
 
-export interface CheckboxTokens extends FontTokens, IBorderTokens {
-  color?: string;
-  backgroundColor?: string;
+/**
+ * Checkbox tokens mix in standard font customizations, border customizations, foreground and background color customizations
+ */
+export interface CheckboxTokens extends CheckboxTokenProps, FontTokenSet, BorderTokenSet, ForegroundColorTokenSet, BackgroundColorTokenSet {
   checkboxBackgroundColor?: string;
   checkboxBorderColor?: string;
   checkmarkColor?: string;
   checkmarkVisibility?: number;
+  checkmarkText?: string;
   textBorderColor?: string;
 
-  // various states which can be applied to the checkbox
+  // various visual states which can be applied to the checkbox
   disabled?: CheckboxTokens;
-  boxAtEnd?: CheckboxTokens;
   hovered?: CheckboxTokens;
   focused?: CheckboxTokens;
   pressed?: CheckboxTokens;

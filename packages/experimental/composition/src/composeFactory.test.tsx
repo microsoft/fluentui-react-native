@@ -13,15 +13,15 @@ type Theme = {
   components: {
     [key: string]: object;
   };
-}
+};
 
 const theme: Theme = {
   values: {
     backgroundColor: 'black',
-    color: 'white'
+    color: 'white',
   },
-  components: {}
-}
+  components: {},
+};
 
 type SlotProps = {
   outer: ViewProps;
@@ -31,45 +31,55 @@ type SlotProps = {
 type Tokens = {
   backgroundColor?: string;
   color?: string;
-}
+};
 
 const themeHelper: ThemeHelper<Theme> = {
   useTheme: () => theme,
-  getComponentInfo: (theme: Theme, name: string) => { return theme?.components ?? theme.components[name]; }
-}
+  getComponentInfo: (theme: Theme, name: string) => {
+    return theme?.components ?? theme.components[name];
+  },
+};
 
 function mergeProps<T>(p1: T, p2: T): T {
   return { ...p1, ...p2 };
 }
 
-const Base = composeFactory<ViewProps, SlotProps, Tokens, Theme>({
-  tokens: [t => ({
-    backgroundColor: t.values.backgroundColor,
-    color: t.values.color
-  })],
-  slotProps: {
-    outer: tokens => ({ style: { backgroundColor: tokens.backgroundColor }}),
-    content: tokens => ({ style: { color: tokens.color }})
+const Base = composeFactory<ViewProps, SlotProps, Tokens, Theme>(
+  {
+    tokens: [
+      (t) => ({
+        backgroundColor: t.values.backgroundColor,
+        color: t.values.color,
+      }),
+    ],
+    slotProps: {
+      outer: (tokens) => ({ style: { backgroundColor: tokens.backgroundColor } }),
+      content: (tokens) => ({ style: { color: tokens.color } }),
+    },
+    slots: {
+      outer: View,
+      content: Text,
+    },
+    render: (props: ViewProps, useSlots: UseStyledSlots<ViewProps, SlotProps, Tokens>) => {
+      const Slots = useSlots(props);
+      return (extra: ViewProps) => (
+        <Slots.outer {...mergeProps(props, extra)}>
+          <Slots.content>Hello</Slots.content>
+        </Slots.outer>
+      );
+    },
   },
-  slots: {
-    outer: View,
-    content: Text
-  },
-  render: (props: ViewProps, useSlots: UseStyledSlots<ViewProps, SlotProps>) => {
-    const Slots = useSlots(props);
-    return (extra: ViewProps) => (
-      <Slots.outer {...mergeProps(props, extra)}>
-        <Slots.content>Hello</Slots.content>
-      </Slots.outer>
-    )
-  }
-}, themeHelper);
+  themeHelper,
+);
 
 const Customized = Base.customize({ backgroundColor: 'pink' });
 
 const mixinStyle = {
-  width: 30, height: 20, borderColor: 'green', borderWidth: 1
-}
+  width: 30,
+  height: 20,
+  borderColor: 'green',
+  borderWidth: 1,
+};
 
 describe('composeFactory test suite', () => {
   it('Base component render', () => {

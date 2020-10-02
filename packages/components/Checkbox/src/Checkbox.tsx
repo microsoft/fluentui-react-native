@@ -1,22 +1,29 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
-import { Text } from '@fluentui-react-native/text';
-import { CheckboxState, CheckboxProps, CheckboxSlotProps, ICheckboxRenderData, CheckboxType, checkboxName } from './Checkbox.types';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { filterViewProps } from '@fluentui-react-native/adapters';
-import { settings, checkboxSelectActionLabel } from './Checkbox.settings';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
+import { View, Text, ViewProps } from 'react-native';
+import { CheckboxState, CheckboxProps, CheckboxType, checkboxName, CheckboxTokens } from './Checkbox.types';
+import { stylingSettings, checkboxSelectActionLabel } from './Checkbox.settings';
 import { useAsToggle, useAsPressable, useViewCommandFocus, useKeyCallback } from '@fluentui-react-native/interactive-hooks';
-import { backgroundColorTokens } from '@fluentui-react-native/tokens';
+import { compose, mergeProps, UseSlots, withSlots, UseStylingParam } from '@fluentui-react-native/framework';
+import { filterViewProps } from '@fluentui-react-native/adapters';
+import {} from '@fluentui-react-native/use-styling';
+
+const accessibilityActions = [{ name: 'Toggle', label: checkboxSelectActionLabel }];
 
 export const Checkbox = compose<CheckboxType>({
   displayName: checkboxName,
-
-  usePrepareProps: (userProps: CheckboxProps, useStyling: IUseComposeStyling<CheckboxType>) => {
-    const { ariaLabel, checked, defaultChecked, boxSide, disabled, label, onChange, ...rest } = userProps;
+  ...stylingSettings,
+  slots: {
+    root: View,
+    checkbox: View,
+    checkmark: Text,
+    content: Text,
+  },
+  filters: {
+    root: filterViewProps,
+  },
+  render: (userProps: CheckboxProps, useSlots: UseSlots<CheckboxType>) => {
+    const { checked, defaultChecked, boxSide, disabled, onChange, ...rest } = userProps;
 
     // Warns defaultChecked and checked being mutually exclusive.
     if (defaultChecked != undefined && checked != undefined) {
@@ -25,23 +32,20 @@ export const Checkbox = compose<CheckboxType>({
 
     // Re-usable hook for toggle components.
     const [isChecked, toggleChecked] = useAsToggle(defaultChecked, checked, onChange);
-
     const pressable = useAsPressable({ onPress: toggleChecked, ...rest });
-
     const buttonRef = useViewCommandFocus(userProps.componentRef);
 
     // Handles the "Space" key toggling the Checkbox
     const onKeyUpSpace = useKeyCallback(' ', toggleChecked);
 
-    const state: CheckboxState = {
-      ...pressable.state,
-      disabled,
-      checked: isChecked,
-      boxAtEnd: boxSide == undefined || boxSide == 'start' ? false : true,
-    };
+    const state: CheckboxState = { ...pressable.state, disabled, checked: isChecked };
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
-    const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
+    const useSlotsParam: UseStylingParam<CheckboxTokens> = { hasState: (override: string) => state[override] };
+    const Slots = useSlots(userProps, useSlotsParam);
+
+    // grab the value for checkmark text from the tokens
+    const checkmarkText = useSlotsParam.tokens.checkmarkText;
 
     // Used when creating accessibility properties in mergeSettings below
     const onAccessibilityAction = React.useCallback(
@@ -55,64 +59,30 @@ export const Checkbox = compose<CheckboxType>({
       [toggleChecked, userProps, state, pressable.props],
     );
 
-    const slotProps = mergeSettings<CheckboxSlotProps>(styleProps, {
-      root: {
-        rest,
-        ref: buttonRef,
-        ...pressable.props,
-        accessibilityRole: 'checkbox',
-        accessibilityLabel: ariaLabel || label,
-        accessibilityState: { disabled: state.disabled, checked: state.checked },
-        accessibilityActions: [{ name: 'Toggle', label: checkboxSelectActionLabel }],
-        onAccessibilityAction: onAccessibilityAction,
-        onKeyUp: onKeyUpSpace,
-      },
-      // Temporary checkmark until SVG functionality
-      checkmark: { children: '✓' },
-      content: { children: label },
-    });
+    // create the accessibility state, it's an object so memo it
+    const accessibilityState = React.useMemo(() => ({ disabled, checked }), [disabled, checked]);
 
-    return { slotProps, state };
-  },
-
-  render: (Slots: ISlots<CheckboxSlotProps>, renderData: ICheckboxRenderData, ...children: React.ReactNode[]) => {
-    return (
-      <Slots.root>
-        {renderData?.state.boxAtEnd && <Slots.content />}
-        <Slots.checkbox>
-          <Slots.checkmark />
-        </Slots.checkbox>
-        {!renderData?.state.boxAtEnd && <Slots.content />}
-        {children}
-      </Slots.root>
-    );
-  },
-
-  settings,
-  slots: {
-    root: View,
-    checkbox: { slotType: View, filter: filterViewProps },
-    checkmark: Text,
-    content: Text,
-  },
-  styles: {
-    root: [],
-    checkbox: [
-      backgroundColorTokens,
-      borderTokens,
-      [
-        { source: 'checkboxBackgroundColor', lookup: getPaletteFromTheme, target: 'backgroundColor' },
-        { source: 'checkboxBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' },
-      ],
-    ],
-    checkmark: [
-      foregroundColorTokens,
-      [
-        { source: 'checkmarkColor', lookup: getPaletteFromTheme, target: 'color' },
-        { source: 'checkmarkVisibility', target: 'opacity' },
-      ],
-    ],
-    content: [foregroundColorTokens, textTokens, [{ source: 'textBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }]],
+    return (extra: CheckboxProps, children: React.ReactNode) => {
+      const { ariaLabel, label, ...final } = mergeProps(userProps, extra, pressable.props);
+      return (
+        <Slots.root
+          {...{ ref: buttonRef, onKeyUp: onKeyUpSpace }}
+          accessibilityRole="checkbox"
+          accessibilityLabel={ariaLabel || label}
+          accessibilityState={accessibilityState}
+          accessibilityActions={accessibilityActions as ViewProps['accessibilityActions']}
+          onAccessibilityAction={onAccessibilityAction}
+          {...final}
+        >
+          {boxSide === 'end' && <Slots.content>{label}</Slots.content>}
+          <Slots.checkbox>
+            <Slots.checkmark>{checkmarkText}</Slots.checkmark>
+          </Slots.checkbox>
+          {boxSide !== 'end' && <Slots.content>{label}</Slots.content>}
+          {children}
+        </Slots.root>
+      );
+    };
   },
 });
 

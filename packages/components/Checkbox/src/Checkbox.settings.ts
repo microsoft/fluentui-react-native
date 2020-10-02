@@ -1,7 +1,6 @@
-import { IComposeSettings } from '@uifabricshared/foundation-compose';
-import { checkboxName, CheckboxProps, CheckboxSlotProps, CheckboxTokens, CheckboxType } from './Checkbox.types';
+import { checkboxName, CheckboxProps, CheckboxSlotProps, CheckboxTokens } from './Checkbox.types';
 
-import { StylingSettings, Theme, UseStylingOptions } from '@fluentui-react-native/framework';
+import { borderStyles, fontStyles, Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { buildProps } from '@fluentui-react-native/use-styling';
 
 export const checkboxSelectActionLabel = 'Toggle the Checkbox';
@@ -9,32 +8,47 @@ export const checkboxSelectActionLabel = 'Toggle the Checkbox';
 export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps, CheckboxTokens> = {
   tokens: [
     (t) => ({
-      borderColor: t.colors.menuItemText,
-      color: t.colors.menuItemText,
+      /** base values for the checkbox */
       backgroundColor: t.colors.menuBackground,
+      borderColor: t.colors.menuItemText,
+      borderStyle: 'solid',
+      borderWidth: 1,
+      checkmarkVisibility: 0,
+      checkmarkText: '✓',
+      color: t.colors.menuItemText,
       textBorderColor: 'transparent',
+      variant: 'bodyStandard',
+
+      /** additional values for when the component is focused */
       focused: {
         backgroundColor: t.colors.menuItemBackgroundHovered,
         textBorderColor: t.colors.focusBorder,
       },
+      /** additional values for when it is hovered */
       hovered: {
         backgroundColor: t.colors.menuItemBackgroundHovered,
       },
+      /** override values for when the component is disabled */
       disabled: {
         borderColor: t.colors.buttonBorderDisabled,
         color: t.colors.disabledBodyText,
         backgroundColor: t.colors.background,
       },
+      /** pressed state token values */
       pressed: {
         backgroundColor: t.colors.menuItemBackgroundPressed,
+      },
+      /** checked state token values */
+      checked: {
+        checkmarkVisibility: 1,
       },
     }),
     checkboxName,
   ],
-  states: ['disabled', 'boxAtEnd', 'hovered', 'focused', 'pressed', 'checked'],
+  states: ['disabled', 'hovered', 'focused', 'pressed', 'checked'],
   slotProps: {
     root: buildProps(
-      (tokens: CheckboxTokens, theme: Theme) => ({
+      () => ({
         accessible: true,
         acceptsKeyboardFocus: true,
         accessibilityRole: 'checkbox',
@@ -49,142 +63,45 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
       }),
       [],
     ),
-    checkbox: buildProps((t) => ({}), []),
-    checkmark: buildProps((t) => ({}), []),
-    content: buildProps((t) => ({}), []),
+    checkbox: buildProps(
+      (tokens: CheckboxTokens, theme: Theme) => ({
+        style: {
+          height: 14,
+          width: 14,
+          marginStart: tokens.boxSide === 'end' ? 4 : 0,
+          marginEnd: tokens.boxSide === 'end' ? 0 : 4,
+          backgroundColor: tokens.checkboxBackgroundColor || tokens.backgroundColor,
+          ...borderStyles.from(tokens, theme),
+          ...(tokens.checkboxBorderColor && { borderColor: tokens.checkboxBorderColor }),
+        },
+      }),
+      ['boxSide', 'backgroundColor', 'checkboxBorderColor', 'checkboxBackgroundColor', ...borderStyles.keys],
+    ),
+    checkmark: buildProps(
+      (tokens: CheckboxTokens) => ({
+        style: {
+          position: 'relative',
+          opacity: tokens.checkmarkVisibility,
+          fontSize: 10,
+          marginStart: 2,
+          top: -1,
+          color: tokens.checkmarkColor || tokens.color,
+        },
+      }),
+      ['color', 'checkmarkVisibility', 'checkmarkColor'],
+    ),
+    content: buildProps(
+      (tokens: CheckboxTokens, theme: Theme) => ({
+        style: {
+          borderStyle: 'dotted',
+          borderWidth: 1,
+          marginTop: 3,
+          color: tokens.color,
+          borderColor: tokens.textBorderColor,
+          ...fontStyles.from(tokens, theme),
+        },
+      }),
+      [...fontStyles.keys, 'color'],
+    ),
   },
 };
-
-/*
-focused: {
-  tokens: {
-    backgroundColor: 'menuItemBackgroundHovered',
-    textBorderColor: 'focusBorder'
-  }
-},
-checked: {
-  checkmark: {
-    style: {
-      opacity: 1
-    }
-  }
-},
-hovered: {
-  tokens: {
-    backgroundColor: 'menuItemBackgroundHovered'
-  }
-},
-disabled: {
-  tokens: {
-    borderColor: 'buttonBorderDisabled',
-    color: 'disabledBodyText',
-    backgroundColor: 'background'
-  }
-},
-boxAtEnd: {
-  checkbox: {
-    style: {
-      marginStart: 4,
-      marginEnd: 0
-    }
-  }
-},
-pressed: {
-  tokens: {
-    backgroundColor: 'menuItemBackgroundPressed'
-  }
-}
-}
-*/
-
-export const settings: IComposeSettings<CheckboxType> = [
-  {
-    tokens: {
-      borderColor: 'menuItemText',
-      color: 'menuItemText',
-      backgroundColor: 'menuBackground',
-      textBorderColor: 'transparent',
-    },
-    root: {
-      accessible: true,
-      acceptsKeyboardFocus: true,
-      accessibilityRole: 'checkbox',
-      style: {
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'row',
-        minHeight: 14,
-        marginTop: 0,
-        position: 'relative',
-      },
-    },
-    checkbox: {
-      style: {
-        height: 14,
-        width: 14,
-        marginEnd: 4,
-        borderStyle: 'solid',
-        borderWidth: 1,
-      },
-    },
-    checkmark: {
-      style: {
-        position: 'relative',
-        opacity: 0,
-        fontSize: 10,
-        marginStart: 2,
-        top: -1,
-      },
-    },
-    content: {
-      variant: 'bodyStandard',
-      style: {
-        borderStyle: 'dotted',
-        borderWidth: 1,
-        marginTop: 3,
-      },
-    },
-    _precedence: ['disabled', 'boxAtEnd', 'hovered', 'focused', 'pressed', 'checked'],
-    _overrides: {
-      focused: {
-        tokens: {
-          backgroundColor: 'menuItemBackgroundHovered',
-          textBorderColor: 'focusBorder',
-        },
-      },
-      checked: {
-        checkmark: {
-          style: {
-            opacity: 1,
-          },
-        },
-      },
-      hovered: {
-        tokens: {
-          backgroundColor: 'menuItemBackgroundHovered',
-        },
-      },
-      disabled: {
-        tokens: {
-          borderColor: 'buttonBorderDisabled',
-          color: 'disabledBodyText',
-          backgroundColor: 'background',
-        },
-      },
-      boxAtEnd: {
-        checkbox: {
-          style: {
-            marginStart: 4,
-            marginEnd: 0,
-          },
-        },
-      },
-      pressed: {
-        tokens: {
-          backgroundColor: 'menuItemBackgroundPressed',
-        },
-      },
-    },
-  },
-  checkboxName,
-];
