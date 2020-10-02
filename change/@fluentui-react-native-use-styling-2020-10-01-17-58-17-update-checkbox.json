@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "allow use-styling to return tokens with optional parameter",
+  "packageName": "@fluentui-react-native/use-styling",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-10-02T00:57:55.974Z"
+}
