@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { RadioButton, RadioGroup } from '@fluentui/react-native';
+import { View } from 'react-native';
+import { RadioButton, RadioGroup, Button } from '@fluentui/react-native';
 import { RADIOGROUP_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
@@ -9,13 +10,42 @@ const basicRadioGroup: React.FunctionComponent<{}> = () => {
     console.log(key);
   };
 
+  const [selectedKey, setSelectedKey] = React.useState('B');
+  const onChange2 = React.useCallback(
+    (key: string) => {
+      if (key == 'A') {
+        setSelectedKey('B');
+      }
+      else {
+        setSelectedKey('D');
+      }
+    },
+    []
+  );
+
   return (
-    <RadioGroup label="This is a test RadioGroup" defaultSelectedKey="A" onChange={onChange}>
-      <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
-      <RadioButton content="Option B" buttonKey="B" />
-      <RadioButton content="Option C" buttonKey="C" disabled={true} />
-      <RadioButton content="Option D" buttonKey="D" />
-    </RadioGroup>
+    <View>
+      <RadioGroup label="This is a test RadioGroup" defaultSelectedKey="A" onChange={onChange}>
+        <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
+        <RadioButton content="Option B" buttonKey="B" />
+        <RadioButton content="Option C" buttonKey="C" disabled={true} />
+        <RadioButton content="Option D" buttonKey="D" />
+      </RadioGroup>
+      <Button content="Separate" />
+      <RadioGroup label="SelectedKey Set" selectedKey={selectedKey} onChange={onChange2}>
+        <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
+        <RadioButton content="Option B" buttonKey="B" />
+        <RadioButton content="Option C" buttonKey="C" disabled={true} />
+        <RadioButton content="Option D" buttonKey="D" />
+      </RadioGroup>
+      <RadioGroup label="SelectedKey Set" selectedKey={selectedKey} defaultSelectedKey="C" onChange={onChange2}>
+        <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
+        <RadioButton content="Option B" buttonKey="B" />
+        <RadioButton content="Option C" buttonKey="C" disabled={true} />
+        <RadioButton content="Option D" buttonKey="D" />
+      </RadioGroup>
+    </View>
+
   );
 };
 
