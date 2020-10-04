@@ -104,11 +104,7 @@ const themeSections: TestSection[] = [
     component: Panel,
   },
   {
-    name: 'Theme.host.palette',
-    component: () => <SwatchList />,
-  },
-  {
-    name: 'Theme.host.colors',
+    name: 'Theme.colors',
     component: () => <SwatchList />,
   },
 ];

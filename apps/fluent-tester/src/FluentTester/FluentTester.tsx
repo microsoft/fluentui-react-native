@@ -3,13 +3,12 @@ import { StealthButton, Separator } from '@fluentui/react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
-import { Picker, ScrollView, View, Text as RNText } from 'react-native';
-import { switchTestTheme, updateThemeAppearance } from './theme/CustomThemes';
+import { ScrollView, View, Text as RNText } from 'react-native';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fabricTesterStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
-import { OfficeBrand } from './theme/getOfficeTheme';
+import { ThemePickers } from './theme/ThemePickers';
 
 // uncomment the below lines to enable message spy
 /*
@@ -28,33 +27,6 @@ export interface FluentTesterProps {
 
 const Header: React.FunctionComponent<{}> = () => {
   const theme = useTheme();
-  const [appearance, setAppearance] = React.useState('dynamic');
-  const [selectedTheme, setSelectedTheme] = React.useState('Default');
-  const [selectedBrand, setSelectedBrand] = React.useState('Office');
-
-  const onAppChange = React.useCallback(
-    (newBrand: OfficeBrand) => {
-      setSelectedBrand(newBrand);
-      switchTestTheme(selectedTheme, newBrand);
-    },
-    [selectedTheme, setSelectedBrand],
-  );
-
-  const onThemeSelected = React.useCallback(
-    (newTheme: string) => {
-      setSelectedTheme(newTheme);
-      switchTestTheme(newTheme, selectedBrand);
-    },
-    [selectedBrand, setSelectedTheme],
-  );
-
-  const onAppearanceChange = React.useCallback(
-    (newAppearance: 'dynamic' | 'dark' | 'light') => {
-      setAppearance(newAppearance);
-      updateThemeAppearance(newAppearance);
-    },
-    [setAppearance],
-  );
 
   return (
     <View style={fabricTesterStyles.header}>
@@ -67,36 +39,7 @@ const Header: React.FunctionComponent<{}> = () => {
         ⚛ FluentUI Tests
       </Text>
 
-      <View style={fabricTesterStyles.pickerRoot}>
-        <View style={fabricTesterStyles.picker}>
-          <Text style={fabricTesterStyles.pickerLabel}>Lightness: </Text>
-          <Picker selectedValue={appearance} style={fabricTesterStyles.dropdown} onValueChange={onAppearanceChange}>
-            <Picker.Item label="Auto" value="dynamic" />
-            <Picker.Item label="Light" value="light" />
-            <Picker.Item label="Dark" value="dark" />
-          </Picker>
-        </View>
-
-        <View style={fabricTesterStyles.picker}>
-          <Text style={fabricTesterStyles.pickerLabel}>Brand: </Text>
-          <Picker selectedValue={selectedBrand} style={fabricTesterStyles.dropdown} onValueChange={onAppChange}>
-            <Picker.Item label="Office" value="Office" />
-            <Picker.Item label="Word" value="Word" />
-            <Picker.Item label="Excel" value="Excel" />
-            <Picker.Item label="Powerpoint" value="Powerpoint" />
-            <Picker.Item label="Outlook" value="Outlook" />
-          </Picker>
-        </View>
-
-        <View style={fabricTesterStyles.picker}>
-          <Text style={fabricTesterStyles.pickerLabel}>Theme: </Text>
-          <Picker selectedValue={selectedTheme} style={fabricTesterStyles.dropdown} onValueChange={onThemeSelected}>
-            <Picker.Item label="Fluent" value="Fluent" />
-            <Picker.Item label="Office" value="Office" />
-            <Picker.Item label="Caterpillar" value="Caterpillar" />
-          </Picker>
-        </View>
-      </View>
+      <ThemePickers />
     </View>
   );
 };

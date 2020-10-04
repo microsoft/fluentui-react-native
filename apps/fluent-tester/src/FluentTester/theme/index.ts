@@ -1,2 +1,2 @@
-export * from './createFluentTheme';
 export * from './CustomThemes';
+export * from './ThemePickers';
