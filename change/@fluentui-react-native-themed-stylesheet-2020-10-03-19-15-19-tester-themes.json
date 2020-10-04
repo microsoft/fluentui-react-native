@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "rework theme usage in tester",
+  "packageName": "@fluentui-react-native/themed-stylesheet",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-10-04T02:15:11.707Z"
+}
