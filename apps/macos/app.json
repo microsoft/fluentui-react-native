@@ -1,6 +1,6 @@
 {
-  "name": "FluentTester-macos",
-  "displayName": "FluentTester-macos",
+  "name": "FluentTester",
+  "displayName": "FluentTester",
   "components": [
     { "appKey": "FluentTester" }
   ]

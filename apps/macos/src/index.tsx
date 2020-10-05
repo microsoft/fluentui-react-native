@@ -1,8 +1,17 @@
 'use strict';
 
 import {FluentTesterApp} from '@fluentui-react-native/tester';
-import {AppRegistry} from 'react-native-macos';
+import * as React from 'react';
+import {AppRegistry, SafeAreaView} from 'react-native-macos';
 
-AppRegistry.registerComponent('FluentTester', () => FluentTesterApp);
+const FluentTester: React.FunctionComponent = () => {
+  return (
+    <SafeAreaView>
+      <FluentTesterApp />
+    </SafeAreaView>
+  );
+};
+
+AppRegistry.registerComponent('FluentTester', () => FluentTester);
 
 export default FluentTester;
