@@ -22,16 +22,14 @@ export const CompoundButton = compose<CompoundButtonType>({
     icon: filterImageProps,
   },
   render: (userProps: CompoundButtonProps, useSlots: UseSlots<CompoundButtonType>) => {
-    const { icon, content, secondaryContent, ...rest } = userProps;
-
-    const button = useButton(rest);
+    const button = useButton(userProps);
 
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => button.state[layer] || userProps[layer]);
 
     // now return the handler for finishing render
     return (final: CompoundButtonProps, ...children: React.ReactNode[]) => {
-      const mergedProps = mergeProps(button.props, final);
+      const { icon, content, secondaryContent, ...mergedProps } = mergeProps(button.props, final);
 
       return (
         <Slots.root {...mergedProps}>

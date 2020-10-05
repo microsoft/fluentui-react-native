@@ -1,6 +1,6 @@
 import { buttonName, ButtonTokens, ButtonSlotProps, ButtonProps } from './Button.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { buttonStates, defaultButtonTokens } from './ButtonTokens';
 
 export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, ButtonTokens> = {
@@ -15,16 +15,15 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
           flexDirection: 'row',
           alignSelf: 'flex-start',
           justifyContent: 'center',
-          minHeight: 32,
-          minWidth: 80,
           width: tokens.width,
           paddingStart: 16,
           paddingEnd: 16,
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
+          ...layoutStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', 'width', ...borderStyles.keys],
+      ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     content: buildProps(
       (tokens: ButtonTokens, theme: Theme) => ({

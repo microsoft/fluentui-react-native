@@ -64,6 +64,8 @@ export interface ButtonTokens extends FontTokens, IBorderTokens {
   icon?: string;
 
   width?: ViewStyle['width'];
+  minHeight?: ViewStyle['minHeight'];
+  minWidth?: ViewStyle['minWidth'];
 
   /**
    * States that can be applied to a button

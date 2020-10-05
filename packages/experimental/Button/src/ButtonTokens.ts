@@ -9,6 +9,8 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
   color: t.colors.buttonText,
   borderColor: t.colors.buttonBorder,
   iconColor: t.colors.buttonIcon,
+  minHeight: 32,
+  minWidth: 80,
   borderWidth: 1,
   borderRadius: 2,
   fluid: {
