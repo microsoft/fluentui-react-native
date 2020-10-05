@@ -4,6 +4,7 @@ export * from '@fluentui-react-native/checkbox';
 export * from '@fluentui-react-native/contextual-menu';
 export * from '@fluentui-react-native/experimental-avatar';
 export * from '@fluentui-react-native/focus-trap-zone';
+export * from '@fluentui-react-native/focus-zone';
 export * from '@fluentui-react-native/link';
 export * from '@fluentui-react-native/persona';
 export * from '@fluentui-react-native/persona-coin';

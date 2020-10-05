@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/shimmer",
   "entries": [
     {
+      "date": "Mon, 28 Sep 2020 20:32:21 GMT",
+      "tag": "@fluentui-react-native/shimmer_v0.2.8",
+      "version": "0.2.8",
+      "comments": {
+        "none": [
+          {
+            "comment": "move test pages",
+            "author": "aliciakds88@gmail.com",
+            "commit": "8338baf6918f763b3ba3b3a7169d1f390ad0557d",
+            "package": "@fluentui-react-native/shimmer"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 22 Sep 2020 21:42:19 GMT",
       "tag": "@fluentui-react-native/shimmer_v0.2.3",
       "version": "0.2.3",

@@ -1,6 +1,36 @@
 {
-  "name": "@uifabricshared/themed-stylesheet",
+  "name": "@fluentui-react-native/themed-stylesheet",
   "entries": [
+    {
+      "date": "Fri, 02 Oct 2020 22:37:51 GMT",
+      "tag": "@fluentui-react-native/themed-stylesheet_v1.0.1",
+      "version": "1.0.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "convert themed stylesheet to use memo-cache",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4022a4f0b8376144dba528e418ece2f503a9a5d7",
+            "package": "@fluentui-react-native/themed-stylesheet"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Sep 2020 19:21:43 GMT",
+      "tag": "@uifabricshared/themed-stylesheet_v0.3.70",
+      "version": "0.3.70",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update react-native-win32 versions - enable logbox",
+            "author": "acoates-ms@noreply.github.com",
+            "commit": "a95ab1b66822cceacc74e24094f85c6917f58086",
+            "package": "@uifabricshared/themed-stylesheet"
+          }
+        ]
+      }
+    },
     {
       "date": "Wed, 23 Sep 2020 18:31:48 GMT",
       "tag": "@uifabricshared/themed-stylesheet_v0.3.69",

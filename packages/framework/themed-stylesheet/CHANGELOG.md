@@ -1,8 +1,24 @@
-# Change Log - @uifabricshared/themed-stylesheet
+# Change Log - @fluentui-react-native/themed-stylesheet
 
-This log was last generated on Wed, 23 Sep 2020 18:31:48 GMT and should not be manually modified.
+This log was last generated on Fri, 02 Oct 2020 22:37:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.1
+
+Fri, 02 Oct 2020 22:37:51 GMT
+
+### Patches
+
+- convert themed stylesheet to use memo-cache (jasonmo@microsoft.com)
+
+## 0.3.70
+
+Fri, 25 Sep 2020 19:21:43 GMT
+
+### Patches
+
+- Update react-native-win32 versions - enable logbox (acoates-ms@noreply.github.com)
 
 ## 0.3.69
 

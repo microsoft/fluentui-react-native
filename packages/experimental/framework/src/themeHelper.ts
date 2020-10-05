@@ -8,7 +8,7 @@ export const themeHelper: ThemeHelper<Theme> = {
     return React.useContext(ThemeContext) || defaultFluentTheme;
   },
   getComponentInfo: (theme: Theme, name: string) => {
-    const components = theme.componentTokens || {};
+    const components = theme.components || {};
     return components[name];
   },
 };

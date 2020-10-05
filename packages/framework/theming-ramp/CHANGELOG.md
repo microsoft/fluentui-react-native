@@ -1,8 +1,40 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Wed, 23 Sep 2020 18:31:48 GMT and should not be manually modified.
+This log was last generated on Mon, 28 Sep 2020 20:32:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.11
+
+Mon, 28 Sep 2020 20:32:21 GMT
+
+### Patches
+
+- add more host colors (aliciakds88@gmail.com)
+
+## 0.10.10
+
+Sun, 27 Sep 2020 04:08:27 GMT
+
+### Patches
+
+- add light and dark awareness to default themes (jasonmo@microsoft.com)
+
+## 0.10.9
+
+Fri, 25 Sep 2020 19:21:43 GMT
+
+### Patches
+
+- Update react-native-win32 versions - enable logbox (acoates-ms@noreply.github.com)
+
+## 0.10.8
+
+Fri, 25 Sep 2020 18:01:57 GMT
+
+### Patches
+
+- add experimental theme package (jasonmo@microsoft.com)
 
 ## 0.10.7
 
