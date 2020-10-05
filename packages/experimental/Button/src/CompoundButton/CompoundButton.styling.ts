@@ -64,7 +64,7 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
     secondaryContent: buildProps(
       (tokens: CompoundButtonTokens, theme: Theme) => ({
         style: {
-          color: tokens.secondaryContentTokens.color,
+          color: tokens.secondaryContentTokens?.color,
           ...fontStyles.from(tokens.secondaryContentTokens, theme),
         },
       }),
