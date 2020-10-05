@@ -1,6 +1,6 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { StealthButton, Separator, Text } from '@fluentui/react-native';
-import { themedStyleSheet } from '@uifabricshared/themed-stylesheet';
+import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { getHostSettingsWin32, useTheme } from '@uifabricshared/theming-react-native';
 import * as React from 'react';
 import { Picker, ScrollView, View, Text as RNText } from 'react-native';
@@ -127,12 +127,10 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const TestComponent = selectedTestIndex == -1 ? EmptyComponent : sortedTestComponents[selectedTestIndex].component;
 
-  const TestListSeparator = Separator.customize({
-    tokens: {
-      color: useTheme().colors.inputBorder,
-      separatorWidth: 2,
-    },
-  });
+  const TestListSeparator = Separator.customize((t) => ({
+    color: t.colors.inputBorder,
+    separatorWidth: 2,
+  }));
 
   const themedStyles = getThemedStyles(useTheme());
 
