@@ -1,4 +1,4 @@
-import { CALLOUT_TESTPAGE } from '../../../RNTester/TestComponents/Callout/consts';
+import { CALLOUT_TESTPAGE } from '../../../FluentTester/TestComponents/Callout/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class CalloutTestPage extends BasePage {

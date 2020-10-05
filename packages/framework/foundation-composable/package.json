@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-composable",
-  "version": "0.6.73",
+  "version": "0.6.75",
   "description": "Composable component building blocks",
   "repository": {
     "type": "git",
@@ -32,8 +32,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/merge-props": ">=0.1.1 <1.0.0",
-    "@uifabricshared/foundation-settings": ">=0.7.0 <1.0.0"
+    "@fluentui-react-native/merge-props": ">=0.1.3 <1.0.0",
+    "@uifabricshared/foundation-settings": ">=0.7.2 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^25.1.4",

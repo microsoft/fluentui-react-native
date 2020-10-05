@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/separator",
   "entries": [
     {
+      "date": "Thu, 01 Oct 2020 16:54:19 GMT",
+      "tag": "@fluentui-react-native/separator_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "switch Separator to new framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "8aeba690cb213dd628748e1c1b41c3ecfea5f547",
+            "package": "@fluentui-react-native/separator"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 28 Sep 2020 20:32:21 GMT",
+      "tag": "@fluentui-react-native/separator_v0.4.14",
+      "version": "0.4.14",
+      "comments": {
+        "none": [
+          {
+            "comment": "move test pages",
+            "author": "aliciakds88@gmail.com",
+            "commit": "8338baf6918f763b3ba3b3a7169d1f390ad0557d",
+            "package": "@fluentui-react-native/separator"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Sep 2020 19:21:43 GMT",
+      "tag": "@fluentui-react-native/separator_v0.4.12",
+      "version": "0.4.12",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update react-native-win32 versions - enable logbox",
+            "author": "acoates-ms@noreply.github.com",
+            "commit": "a95ab1b66822cceacc74e24094f85c6917f58086",
+            "package": "@fluentui-react-native/separator"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Aug 2020 05:03:51 GMT",
       "tag": "@fluentui-react-native/separator_v0.4.8",
       "version": "0.4.8",

@@ -1,4 +1,4 @@
-import { PERSONA_TESTPAGE } from '../../../RNTester/TestComponents/Persona/consts';
+import { PERSONA_TESTPAGE } from '../../../FluentTester/TestComponents/Persona/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class PersonaTestPage extends BasePage {

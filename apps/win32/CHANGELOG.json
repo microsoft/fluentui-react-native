@@ -2,6 +2,102 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Tue, 29 Sep 2020 18:14:46 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.5.1",
+      "version": "0.5.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "remove extra componentTokens reference and route everything to components",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f481a7179d21204e0a89bc91e462b7ace0c3f753",
+            "package": "@fluentui-react-native/tester-win32"
+          },
+          {
+            "comment": "Bumping tenantreactnativewin",
+            "author": "safreibe@microsoft.com",
+            "commit": "40a6a0e85102beda0cc6043fcddead32626de50c",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 28 Sep 2020 20:32:21 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "🚚Move files around, rename things.  Makes FluentTester more canonical",
+            "author": "aliciakds88@gmail.com",
+            "commit": "8338baf6918f763b3ba3b3a7169d1f390ad0557d",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 28 Sep 2020 19:03:01 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Adding FocusZone Tests",
+            "author": "safreibe@microsoft.com",
+            "commit": "81ff48f47f1a86683abf2f33859007b2f861d591",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Sep 2020 19:21:43 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.3.19",
+      "version": "0.3.19",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update react-native-win32 versions - enable logbox",
+            "author": "acoates-ms@noreply.github.com",
+            "commit": "a95ab1b66822cceacc74e24094f85c6917f58086",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 22 Sep 2020 20:41:53 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.3.14",
+      "version": "0.3.14",
+      "comments": {
+        "none": [
+          {
+            "comment": "added android documentation for fluentui tester, and updated top level page to point to platform specific docs.",
+            "author": "ejlayne@microsoft.com",
+            "commit": "4b420148323603021c055d50f5415a27ca44f023",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 22 Sep 2020 20:14:25 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.3.14",
+      "version": "0.3.14",
+      "comments": {
+        "none": [
+          {
+            "comment": "added android documentation for fluentui tester, and updated top level page to point to platform specific docs.",
+            "author": "ejlayne@microsoft.com",
+            "commit": "4b420148323603021c055d50f5415a27ca44f023",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 11 Sep 2020 20:25:42 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.3.13",
       "version": "0.3.13",

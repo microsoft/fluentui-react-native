@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/immutable-merge
 
-This log was last generated on Wed, 12 Aug 2020 23:52:15 GMT and should not be manually modified.
+This log was last generated on Fri, 25 Sep 2020 19:21:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.3
+
+Fri, 25 Sep 2020 19:21:43 GMT
+
+### Patches
+
+- Update react-native-win32 versions - enable logbox (acoates-ms@noreply.github.com)
+
+## 1.0.2
+
+Wed, 23 Sep 2020 18:31:48 GMT
+
+### Patches
+
+- start publishing src to fix customer source maps (jasonmo@microsoft.com)
 
 ## 1.0.1
 

@@ -1,8 +1,72 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 09 Sep 2020 21:36:19 GMT and should not be manually modified.
+This log was last generated on Fri, 02 Oct 2020 22:37:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.4
+
+Fri, 02 Oct 2020 22:37:51 GMT
+
+### Patches
+
+- convert themed stylesheet to use memo-cache (jasonmo@microsoft.com)
+
+## 0.9.3
+
+Fri, 02 Oct 2020 22:17:48 GMT
+
+### Patches
+
+- fix web tester (jasonmo@microsoft.com)
+
+## 0.9.2
+
+Thu, 01 Oct 2020 16:54:19 GMT
+
+### Patches
+
+- switch Separator to new framework (jasonmo@microsoft.com)
+
+## 0.9.1
+
+Tue, 29 Sep 2020 18:14:46 GMT
+
+### Patches
+
+- remove extra componentTokens reference and route everything to components (jasonmo@microsoft.com)
+
+## 0.9.0
+
+Mon, 28 Sep 2020 20:32:21 GMT
+
+### Minor changes
+
+- 🎨 Apply theme shim to host.colors, fix theme picker (aliciakds88@gmail.com)
+
+## 0.8.0
+
+Mon, 28 Sep 2020 19:03:01 GMT
+
+### Minor changes
+
+- Adding FocusZone Tests (safreibe@microsoft.com)
+
+## 0.7.5
+
+Fri, 25 Sep 2020 19:21:43 GMT
+
+### Patches
+
+- Update react-native-win32 versions - enable logbox (acoates-ms@noreply.github.com)
+
+## 0.7.0
+
+Tue, 22 Sep 2020 04:57:02 GMT
+
+### Minor changes
+
+- Update button snapshot and test (krsiler@microsoft.com)
 
 ## 0.6.1
 

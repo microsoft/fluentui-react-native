@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button default 1`] = `
+exports[`Button component tests Button default 1`] = `
 <View
   acceptsKeyboardFocus={true}
   accessibilityLabel="Default Button"

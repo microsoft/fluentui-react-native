@@ -1,0 +1,48 @@
+{
+  "name": "@fluentui-react-native/theme",
+  "version": "0.2.1",
+  "description": "Experimental version of fluentui-react-native theme framework",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/ui-fabric-react-native"
+  },
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "bundle": "fluentui-scripts bundle",
+    "clean": "fluentui-scripts clean",
+    "code-style": "fluentui-scripts code-style",
+    "depcheck": "fluentui-scripts depcheck",
+    "just": "fluentui-scripts",
+    "lint": "fluentui-scripts eslint",
+    "start": "fluentui-scripts dev",
+    "start-test": "fluentui-scripts jest-watch",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "verify-api": "fluentui-scripts verify-api-extractor",
+    "update-api": "fluentui-scripts update-api-extractor"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@fluentui-react-native/immutable-merge": "^1.0.3",
+    "@fluentui-react-native/theme-types": ">=0.2.1 <1.0.0"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
+    "@uifabricshared/build-native": "^0.1.1",
+    "react": "16.11.0",
+    "react-native": "^0.62.2"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-native": ">0.60.0"
+  }
+}
