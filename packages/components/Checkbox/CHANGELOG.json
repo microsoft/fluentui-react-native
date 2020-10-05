@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Mon, 28 Sep 2020 20:32:21 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.5.10",
+      "version": "0.5.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "move test pages",
+            "author": "aliciakds88@gmail.com",
+            "commit": "8338baf6918f763b3ba3b3a7169d1f390ad0557d",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Sep 2020 19:21:43 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.5.8",
+      "version": "0.5.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update react-native-win32 versions - enable logbox",
+            "author": "acoates-ms@noreply.github.com",
+            "commit": "a95ab1b66822cceacc74e24094f85c6917f58086",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 22 Sep 2020 04:57:02 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.5.5",
       "version": "0.5.5",

@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Wed, 23 Sep 2020 18:31:48 GMT and should not be manually modified.
+This log was last generated on Tue, 29 Sep 2020 18:14:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.7
+
+Tue, 29 Sep 2020 18:14:46 GMT
+
+### Patches
+
+- remove extra componentTokens reference and route everything to components (jasonmo@microsoft.com)
+
+## 0.3.6
+
+Mon, 28 Sep 2020 20:32:21 GMT
+
+### Patches
+
+- add more host colors (aliciakds88@gmail.com)
+
+## 0.3.4
+
+Fri, 25 Sep 2020 19:21:43 GMT
+
+### Patches
+
+- Update react-native-win32 versions - enable logbox (acoates-ms@noreply.github.com)
 
 ## 0.3.2
 

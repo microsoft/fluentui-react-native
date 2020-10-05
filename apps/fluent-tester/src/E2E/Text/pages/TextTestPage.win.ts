@@ -1,4 +1,4 @@
-import { TEXT_TESTPAGE } from '../../../RNTester/TestComponents/Text/consts';
+import { TEXT_TESTPAGE } from '../../../FluentTester/TestComponents/Text/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class TextTestPage extends BasePage {
