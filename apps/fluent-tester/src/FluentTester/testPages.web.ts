@@ -10,7 +10,7 @@ import { HOMEPAGE_SEPARATOR_BUTTON, SeparatorTest } from './TestComponents/Separ
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 
-export const test: TestDescription[] = [
+export const tests: TestDescription[] = [
   {
     name: 'Button Test',
     component: ButtonTest,
