@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "@fluentui/react-native": ">=0.18.3 <1.0.0",
-    "@fluentui-react-native/experimental-button": ">=0.1.0 <1.0.0",
     "@fluentui-react-native/experimental-text": ">=0.1.0 <1.0.0",
     "@fluentui-react-native/framework": ">=0.3.7 <1.0.0",
     "@fluentui-react-native/stack": ">=0.2.16 <1.0.0",
