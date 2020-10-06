@@ -23,6 +23,7 @@
   "dependencies": {
     "@uifabricshared/foundation-compose": "^1.6.88",
     "@fluentui-react-native/adapters": ">=0.3.36 <1.0.0",
+    "@fluentui-react-native/focus-zone": ">=0.2.1 <1.0.0",
     "@fluentui-react-native/interactive-hooks": ">=0.5.2 <1.0.0",
     "@fluentui-react-native/pressable": ">=0.3.87 <1.0.0",
     "@fluentui-react-native/text": ">=0.6.16 <1.0.0",
