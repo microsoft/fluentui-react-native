@@ -18,7 +18,7 @@
     "macos": "react-native run-macos --scheme ReactTestApp --project-path src"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.9.0",
+    "@fluentui-react-native/tester": "^0.9.4",
     "react-native-macos": "^0.62.0-0",
     "react-native-test-app": "0.2.1"
   },

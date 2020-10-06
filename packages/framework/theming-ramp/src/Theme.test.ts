@@ -1,29 +1,9 @@
-import { Theme, PartialTheme, ThemeColorDefinition, Typography } from '@fluentui-react-native/theme-types';
+import { Theme, PartialTheme } from '@fluentui-react-native/theme-types';
 import { resolvePartialTheme } from './Theme';
+import { mockTheme } from '@fluentui-react-native/test-tools';
 
 const theme: Theme = {
-  colors: {
-    background: '#ff0000',
-  } as ThemeColorDefinition,
-  typography: {
-    families: {
-      primary: 'Arial',
-    },
-    sizes: {
-      secondary: 14,
-    },
-    weights: {
-      regular: '400',
-    },
-    variants: {
-      secondaryStandard: {
-        face: 'Arial',
-        size: 14,
-        weight: '400',
-      },
-    },
-  } as Typography,
-  spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
+  ...mockTheme,
   components: {
     View: {
       tokens: {
@@ -31,9 +11,6 @@ const theme: Theme = {
         fontFamily: 'primary',
       },
     },
-  },
-  host: {
-    appearance: 'light',
   },
 };
 
@@ -68,45 +45,18 @@ describe('Theme tests', () => {
 
   test('resolvePartialTheme returns a blend of the partial theme and the full theme', () => {
     const resolved = resolvePartialTheme(theme, partialTheme);
-    expect(resolved).toEqual({
-      colors: ({
-        background: '#ff0000',
-        bodySubtext: 'rgb(100,100,100)',
-      } as unknown) as ThemeColorDefinition,
-      typography: {
-        families: {
-          primary: 'Arial',
-        },
-        sizes: {
-          secondary: 14,
-        },
-        weights: {
-          regular: '400',
-        },
-        variants: {
-          secondaryStandard: {
-            face: 'Arial',
-            size: 14,
-            weight: '400',
-          },
-        },
-      } as Typography,
-      spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
-      components: {
-        View: {
-          tokens: {
-            backgroundColor: 'bodyBackground',
-            fontFamily: 'primary',
-          },
-        },
-        Text: {
-          tokens: {
-            backgroundColor: 'cyan',
-          },
+    expect(resolved.colors.bodySubtext).toEqual(partialTheme.colors.bodySubtext);
+    expect(resolved.components).toEqual({
+      View: {
+        tokens: {
+          backgroundColor: 'bodyBackground',
+          fontFamily: 'primary',
         },
       },
-      host: {
-        appearance: 'light',
+      Text: {
+        tokens: {
+          backgroundColor: 'cyan',
+        },
       },
     });
   });

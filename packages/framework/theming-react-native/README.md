@@ -9,7 +9,7 @@ This package serves as an entry point which aggregates and re-exports some of th
 You may want a few different packages from this repo. Let's start with the following:
 
 - `@uifabricshared/theming-react-native`
-- `@uifabricshared/themed-stylesheets` for styling react-native's primitives components.
+- `@fluentui-react-native/themed-stylesheets` for styling react-native's primitives components.
 
 E.g. In your package.json file:
 
@@ -21,7 +21,7 @@ E.g. In your package.json file:
   "main": "lib/index.js",
   "dependencies": {
     "@uifabricshared/theming-react-native": "^0.2.0",
-    "@uifabricshared/themed-stylesheet": "^0.2.0"
+    "@fluentui-react-native/themed-stylesheet": "^0.2.0"
   }
 }
 ```
