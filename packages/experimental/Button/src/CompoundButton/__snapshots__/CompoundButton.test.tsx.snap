@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Button component tests Button default 1`] = `
+exports[`CompoundButton default 1`] = `
 <View
   acceptsKeyboardFocus={true}
   accessibilityLabel="Default Button"
@@ -31,22 +31,42 @@ exports[`Button component tests Button default 1`] = `
       "minWidth": 80,
       "paddingEnd": 16,
       "paddingStart": 16,
-      "width": undefined,
     }
   }
 >
-  <Text
+  <View
     style={
       Object {
-        "color": "#323130",
-        "fontFamily": "Segoe UI",
-        "fontSize": 12,
-        "fontWeight": "400",
-        "margin": 0,
+        "display": "flex",
+        "flexDirection": "column",
       }
     }
   >
-    Default Button
-  </Text>
+    <Text
+      style={
+        Object {
+          "color": "#323130",
+          "fontFamily": "Segoe UI",
+          "fontSize": 12,
+          "fontWeight": "400",
+          "margin": 0,
+        }
+      }
+    >
+      Default Button
+    </Text>
+    <Text
+      style={
+        Object {
+          "fontFamily": "Segoe UI",
+          "fontSize": 12,
+          "fontWeight": "400",
+          "margin": 0,
+        }
+      }
+    >
+      sublabel
+    </Text>
+  </View>
 </View>
 `;

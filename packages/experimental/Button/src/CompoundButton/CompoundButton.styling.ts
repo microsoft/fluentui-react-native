@@ -8,19 +8,19 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
   tokens: [
     (t: Theme) => ({
       minHeight: 72,
+      secondaryContentFont: {
+        variant: 'secondaryStandard',
+      },
       ghost: {
-        secondaryContentTokens: {
-          variant: 'secondaryStandard',
-          color: t.colors.ghostSecondaryContent,
-          hovered: {
-            color: t.colors.ghostHoveredSecondaryContent,
-          },
-          focused: {
-            color: t.colors.ghostFocusedSecondaryContent,
-          },
-          pressed: {
-            color: t.colors.ghostPressedSecondaryContent,
-          },
+        secondaryContentColor: t.colors.ghostSecondaryContent,
+        hovered: {
+          secondaryContentColor: t.colors.ghostHoveredSecondaryContent,
+        },
+        focused: {
+          secondaryContentColor: t.colors.ghostFocusedSecondaryContent,
+        },
+        pressed: {
+          secondaryContentColor: t.colors.ghostPressedSecondaryContent,
         },
       } as ButtonTokens,
     }),
@@ -64,11 +64,11 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
     secondaryContent: buildProps(
       (tokens: CompoundButtonTokens, theme: Theme) => ({
         style: {
-          color: tokens.secondaryContentTokens?.color,
-          ...fontStyles.from(tokens.secondaryContentTokens, theme),
+          color: tokens.secondaryContentColor,
+          ...fontStyles.from(tokens.secondaryContentFont, theme),
         },
       }),
-      ['color', ...fontStyles.keys],
+      ['secondaryContentColor', 'secondaryContentFont'],
     ),
     icon: buildProps(
       (tokens: CompoundButtonTokens) => ({
