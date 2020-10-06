@@ -33,6 +33,6 @@ export function createPartialOfficeTheme(module: OfficeThemingModule, themeName?
       // Office Branding Colors
       colors: getRamps(module),
     },
-    ...(themeName && { name: themeName }),
+    ...(!!themeName ? { name: themeName } : undefined),
   };
 }
