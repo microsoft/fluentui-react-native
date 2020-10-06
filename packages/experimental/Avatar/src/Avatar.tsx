@@ -1,8 +1,10 @@
 /** @jsx withSlots */
 import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { Image, NativeModules, ViewProps } from 'react-native';
-import * as React from 'react';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
+import { getMemoCache } from '@fluentui-react-native/framework';
+
+const cache = getMemoCache();
 
 const avatarName = 'MSFAvatarView';
 
@@ -58,14 +60,7 @@ export type AvatarData = {
   presence?: Presence;
 };
 
-export type AvatarTokens = {
-  /**
-   * Supported Avatar sizes
-   */
-  size?: Size;
-};
-
-export type AvatarProps = ViewProps & {
+export type otherAvatarProps = {
   /**
    * Supported Avatar sizes
    */
@@ -90,13 +85,10 @@ export type AvatarProps = ViewProps & {
    */
   avatarStyle?: AvatarStyle;
 
-  borderColor?: string;
-
   /**
-   * The avatar view's presence state.
-   * The presence state is only shown when the style is set to AvatarStyle.circle.
+   * The color of the border of the avatar view
    */
-  presence?: Presence;
+  borderColor?: string;
 
   /**
    * When true, the presence status border is opaque. Otherwise, it is transparent.
@@ -116,16 +108,25 @@ export type AvatarProps = ViewProps & {
    * TODO Figure out how to make iOS only
    */
   hasPointerInteraction?: boolean;
+};
 
-  // TODO Figure out how to make this a flat list at the AvatarProps level,
-  // and map to the inner custom property in the native view
-  // https://github.com/microsoft/fluentui-react-native/pull/372#discussion_r474326015
-  avatarData?: AvatarData;
+export type AvatarTokens = {
+  /**
+   * Supported Avatar sizes
+   */
+  size?: Size;
 };
 
 const tokensThatAreAlsoProps: (keyof AvatarTokens)[] = ['size'];
 
-export type NativeAvatarViewProps = ViewProps & AvatarProps & AvatarTokens;
+// The Javascript API is a flat list for all the props we can set on our component
+export type AvatarProps = ViewProps & otherAvatarProps & AvatarData;
+
+// The Native component API has a sub object that we flattened out in AvatarProps
+export type NativeAvatarViewProps = ViewProps &
+  otherAvatarProps & {
+    avatarData?: AvatarData;
+  };
 
 interface AvatarType {
   props: AvatarProps;
@@ -144,7 +145,7 @@ export const Avatar = compose<AvatarType>({
   tokensThatAreAlsoProps,
   slots: { root: NativeAvatarView },
   slotProps: {
-    root: buildProps<AvatarProps, AvatarTokens>(
+    root: buildProps<NativeAvatarViewProps, AvatarTokens>(
       (tokens) => ({
         size: tokens.size,
         style: {
@@ -155,8 +156,21 @@ export const Avatar = compose<AvatarType>({
       ['size'],
     ),
   },
-  render: (props: NativeAvatarViewProps, useSlots: UseSlots<AvatarType>) => {
+  render: (props: AvatarProps, useSlots: UseSlots<AvatarType>) => {
     const Root = useSlots(props).root;
-    return (rest: NativeAvatarViewProps, children: React.ReactNode) => <Root {...mergeProps(props, rest)}>{children}</Root>;
+
+    const cachedAvatarDataProp = cache(
+      () => ({
+        primaryText: props.primaryText,
+        secondaryText: props.secondaryText,
+        image: props.image,
+        color: props.color,
+        customBorderImage: props.customBorderImage,
+        presence: props.presence,
+      }),
+      [props.primaryText, props.secondaryText, props.image, props.color, props.customBorderImage, props.presence],
+    )[0];
+
+    return (rest: AvatarProps) => <Root {...mergeProps(props, rest)} avatarData={cachedAvatarDataProp} />;
   },
 });

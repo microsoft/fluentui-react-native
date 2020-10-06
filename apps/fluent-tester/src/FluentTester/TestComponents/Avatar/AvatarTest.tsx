@@ -8,11 +8,11 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 const avatar: React.FunctionComponent<{}> = () => {
   return (
     <Stack style={stackStyle}>
-      <Avatar avatarData={{ primaryText: 'John Smith' }} />
-      <Avatar avatarData={{ primaryText: 'John Smith' }} avatarStyle="square" />
-      <Avatar avatarData={{ primaryText: 'John Smith', presence: 'available' }} />
-      <Avatar avatarData={{ primaryText: 'John Smith', secondaryText: 'johnsmith@microsoft.com', presence: 'outOfOffice' }} />
-      <Avatar avatarData={{ secondaryText: 'johnsmith@microsoft.com', presence: 'outOfOffice' }} />
+      <Avatar primaryText="John Smith" />
+      <Avatar primaryText="John Smith" avatarStyle="square" />
+      <Avatar primaryText="John Smith" presence="available" />
+      <Avatar primaryText="John Smith" secondaryText="johnsmith@microsoft.com" presence="outOfOffice" />
+      <Avatar secondaryText="johnsmith@microsoft.com" presence="outOfOffice" />
     </Stack>
   );
 };
@@ -24,11 +24,11 @@ const stylizedAvatar: React.FunctionComponent<{}> = () => {
 
   return (
     <Stack style={stackStyle}>
-      <CustomizedAvatar avatarData={{ primaryText: 'John Smith' }} />
-      <CustomizedAvatar avatarData={{ primaryText: 'John Smith' }} avatarStyle="square" />
-      <CustomizedAvatar avatarData={{ primaryText: 'John Smith', presence: 'available' }} />
-      <CustomizedAvatar avatarData={{ primaryText: 'John Smith', secondaryText: 'johnsmith@microsoft.com', presence: 'outOfOffice' }} />
-      <CustomizedAvatar avatarData={{ secondaryText: 'johnsmith@microsoft.com', presence: 'outOfOffice' }} />
+      <CustomizedAvatar primaryText="John Smith" />
+      <CustomizedAvatar primaryText="John Smith" avatarStyle="square" />
+      <CustomizedAvatar primaryText="John Smith" presence="available" />
+      <CustomizedAvatar primaryText="John Smith" secondaryText="johnsmith@microsoft.com" presence="outOfOffice" />
+      <CustomizedAvatar secondaryText="johnsmith@microsoft.com" presence="outOfOffice" />
     </Stack>
   );
 };

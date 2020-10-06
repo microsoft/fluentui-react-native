@@ -3,7 +3,7 @@
 
 @import FluentUI;
 
-@implementation RCTConvert (MSFAvatarSize)
+ @implementation RCTConvert (MSFAvatarView)
 
 RCT_ENUM_CONVERTER(MSFAvatarSize, (@{
 	@"xSmall": @(MSFAvatarSizeExtraSmall),
@@ -47,11 +47,11 @@ RCT_ENUM_CONVERTER(MSFPresence, (@{
 											   color:[RCTConvert UIColor:json[@"color"]]];
 }
 
-@end
+ @end
 
-@interface MSFAvatarView(RCTComponent)
+ @interface MSFAvatarView(RCTComponent)
 
-@end
+ @end
 
 @interface RCT_EXTERN_MODULE(MSFAvatarViewManager, RCTViewManager)
 
