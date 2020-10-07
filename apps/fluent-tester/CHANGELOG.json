@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 07 Oct 2020 17:29:29 GMT",
+      "tag": "@fluentui-react-native/tester_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Fixing up RadioGroup/FocusZone test pages",
+            "author": "safreibe@microsoft.com",
+            "commit": "1bc38fbd92b1c5fa39ee2914c0c7e8991eb28701",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 02 Oct 2020 22:37:51 GMT",
       "tag": "@fluentui-react-native/tester_v0.9.4",
       "version": "0.9.4",
