@@ -7,7 +7,7 @@ import { Picker, ScrollView, View, Text as RNText } from 'react-native';
 import { setAppColors } from './CustomThemes';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
-import { fabricTesterStyles } from './TestComponents/Common/styles';
+import { fluentTesterStyles } from './TestComponents/Common/styles';
 
 // uncomment the below lines to enable message spy
 /*
@@ -16,7 +16,7 @@ MessageQueue.spy(true);
 */
 
 const EmptyComponent: React.FunctionComponent = () => {
-  return <RNText style={fabricTesterStyles.noTest}>Select a component from the left.</RNText>;
+  return <RNText style={fluentTesterStyles.noTest}>Select a component from the left.</RNText>;
 };
 
 export interface HeaderProps {
@@ -53,17 +53,17 @@ const Header: React.FunctionComponent<HeaderProps> = (props: HeaderProps) => {
   const hostColors = getHostSettingsWin32(useTheme())?.palette;
 
   return (
-    <View style={fabricTesterStyles.header}>
-      <Text style={[fabricTesterStyles.testHeader]} variant="heroLargeSemibold" color={hostColors?.TextEmphasis} testID={BASE_TESTPAGE}>
+    <View style={fluentTesterStyles.header}>
+      <Text style={[fluentTesterStyles.testHeader]} variant="heroLargeSemibold" color={hostColors?.TextEmphasis} testID={BASE_TESTPAGE}>
         ⚛ FluentUI Tests
       </Text>
 
-      <View style={fabricTesterStyles.pickerRoot}>
-        <View style={fabricTesterStyles.picker}>
-          <RNText style={fabricTesterStyles.pickerLabel}>Platform: </RNText>
+      <View style={fluentTesterStyles.pickerRoot}>
+        <View style={fluentTesterStyles.picker}>
+          <RNText style={fluentTesterStyles.pickerLabel}>Platform: </RNText>
           <Picker
             selectedValue={selectedPlatform}
-            style={fabricTesterStyles.dropdown}
+            style={fluentTesterStyles.dropdown}
             onValueChange={(platformValue) => setSelectedPlatform(platformValue)}
           >
             <Picker.Item label="Win32" value="win32" />
@@ -74,9 +74,9 @@ const Header: React.FunctionComponent<HeaderProps> = (props: HeaderProps) => {
           </Picker>
         </View>
 
-        <View style={fabricTesterStyles.picker}>
-          <RNText style={fabricTesterStyles.pickerLabel}>App: </RNText>
-          <Picker selectedValue={selectedApp} style={fabricTesterStyles.dropdown} onValueChange={(appValue) => onAppChange(appValue)}>
+        <View style={fluentTesterStyles.picker}>
+          <RNText style={fluentTesterStyles.pickerLabel}>App: </RNText>
+          <Picker selectedValue={selectedApp} style={fluentTesterStyles.dropdown} onValueChange={(appValue) => onAppChange(appValue)}>
             <Picker.Item label="Office" value="Office" />
             <Picker.Item label="Word" value="Word" />
             <Picker.Item label="Excel" value="Excel" />
@@ -85,9 +85,9 @@ const Header: React.FunctionComponent<HeaderProps> = (props: HeaderProps) => {
           </Picker>
         </View>
 
-        <View style={fabricTesterStyles.picker}>
-          <RNText style={fabricTesterStyles.pickerLabel}>Theme: </RNText>
-          <Picker selectedValue={selectedTheme} style={fabricTesterStyles.dropdown} onValueChange={onThemeSelected}>
+        <View style={fluentTesterStyles.picker}>
+          <RNText style={fluentTesterStyles.pickerLabel}>Theme: </RNText>
+          <Picker selectedValue={selectedTheme} style={fluentTesterStyles.dropdown} onValueChange={onThemeSelected}>
             <Picker.Item label="TaskPane" value="Default" />
             <Picker.Item label="Caterpillar" value="Caterpillar" />
             <Picker.Item label="WhiteColors" value="WhiteColors" />
@@ -140,8 +140,8 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
       <Separator />
 
-      <View style={fabricTesterStyles.testRoot}>
-        <ScrollView style={fabricTesterStyles.testList} contentContainerStyle={fabricTesterStyles.testListContainerStyle}>
+      <View style={fluentTesterStyles.testRoot}>
+        <ScrollView style={fluentTesterStyles.testList} contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
           {sortedTestComponents.map((description, index) => {
             return (
               <StealthButton
@@ -149,7 +149,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                 disabled={index == selectedTestIndex}
                 content={description.name}
                 onClick={() => setSelectedTestIndex(index)}
-                style={fabricTesterStyles.testListItem}
+                style={fluentTesterStyles.testListItem}
                 testID={description.testPage}
               />
             );
@@ -158,7 +158,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
         <TestListSeparator vertical style={{ marginHorizontal: 8, width: 2 }} />
 
-        <View style={fabricTesterStyles.testSection}>
+        <View style={fluentTesterStyles.testSection}>
           <ScrollView>
             <TestComponent />
           </ScrollView>

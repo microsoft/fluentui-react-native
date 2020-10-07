@@ -5,4 +5,4 @@ import {AppRegistry} from 'react-native-macos';
 
 AppRegistry.registerComponent('FluentTester', () => FluentTesterApp);
 
-export default FluentTester;
+export default FluentTesterApp;

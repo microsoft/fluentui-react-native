@@ -25,7 +25,7 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - MicrosoftFluentUI (0.1.12)
+  - MicrosoftFluentUI (0.1.13)
   - QRCodeReader.swift (10.1.0)
   - RCTRequired (0.62.2)
   - RCTTypeSafety (0.62.2):
@@ -249,9 +249,9 @@ PODS:
     - React-cxxreact (= 0.62.2)
     - React-jsi (= 0.62.2)
     - ReactCommon/callinvoker (= 0.62.2)
-  - ReactTestApp-DevSupport (0.2.1)
+  - ReactTestApp-DevSupport (0.2.9)
   - ReactTestApp-Resources (1.0.0-dev)
-  - SwiftLint (0.40.1)
+  - SwiftLint (0.40.3)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -366,7 +366,7 @@ SPEC CHECKSUMS:
   FluentUI-React-Native-Spinner: ef9bf223c7a8c37609e26e20321fa2d81f5a7203
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
-  MicrosoftFluentUI: 6800fd4c017a5c5b946a24851ac2218748da45d2
+  MicrosoftFluentUI: dbebf152cd2e7864ace2d5079d509ec1fee19cbf
   QRCodeReader.swift: 373a389fe9a22d513c879a32a6f647c58f4ef572
   RCTRequired: cec6a34b3ac8a9915c37e7e4ad3aa74726ce4035
   RCTTypeSafety: 93006131180074cffa227a1075802c89a49dd4ce
@@ -387,9 +387,9 @@ SPEC CHECKSUMS:
   React-RCTText: fae545b10cfdb3d247c36c56f61a94cfd6dba41d
   React-RCTVibration: 4356114dbcba4ce66991096e51a66e61eda51256
   ReactCommon: ed4e11d27609d571e7eee8b65548efc191116eb3
-  ReactTestApp-DevSupport: f69711ff52c61dc6622ba2ae512ca06143070a56
+  ReactTestApp-DevSupport: 9a0663d12f90115e646ddbf070566c646a7b9fd1
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
-  SwiftLint: bbfed21bf4451dcbd0f5cdbee44a18e06cf91b12
+  SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
 
 PODFILE CHECKSUM: 3f17aa41832a0afde58a23487c8940f8619257ef
