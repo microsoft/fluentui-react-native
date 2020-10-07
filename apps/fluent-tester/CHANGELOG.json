@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 07 Oct 2020 18:52:49 GMT",
+      "tag": "@fluentui-react-native/tester_v0.10.1",
+      "version": "0.10.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Removed references to fabric tester",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "b7a9e169e10402e2d8ee83519999a8cf5c3926d5",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 07 Oct 2020 17:29:29 GMT",
       "tag": "@fluentui-react-native/tester_v0.10.0",
       "version": "0.10.0",
