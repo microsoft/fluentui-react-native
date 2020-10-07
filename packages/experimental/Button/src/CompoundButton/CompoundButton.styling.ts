@@ -6,6 +6,7 @@ import { ButtonTokens } from '../Button.types';
 
 export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundButtonSlotProps, CompoundButtonTokens> = {
   tokens: [
+    defaultButtonTokens,
     (t: Theme) => ({
       minHeight: 72,
       secondaryContentFont: {
@@ -24,7 +25,6 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
         },
       } as ButtonTokens,
     }),
-    defaultButtonTokens,
     compoundButtonName,
   ],
   states: buttonStates,
@@ -40,7 +40,6 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
           paddingStart: 16,
           paddingEnd: 16,
           backgroundColor: tokens.backgroundColor,
-          ...layoutStyles.from(tokens, theme),
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
         },

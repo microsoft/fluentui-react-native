@@ -5,6 +5,7 @@ import { buttonStates, defaultButtonTokens } from '../ButtonTokens';
 
 export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonSlotProps, ToggleButtonTokens> = {
   tokens: [
+    defaultButtonTokens,
     (t: Theme) => ({
       checked: {
         color: t.colors.buttonCheckedContent,
@@ -24,7 +25,6 @@ export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonS
         },
       },
     }),
-    defaultButtonTokens,
     toggleButtonName,
   ],
   states: ['checked', ...buttonStates],
