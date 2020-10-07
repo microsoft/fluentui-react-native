@@ -96,7 +96,6 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
         <Text>Vertical gap</Text>
         <Slider maximum={20} initialValue={5} minimum={0} style={commonStyles.vmargin} onChange={setVerticalGap} />
       </View>
-      vmargin
       {/* component under test */}
       <CustomizedPersona
         initials="MJ"
