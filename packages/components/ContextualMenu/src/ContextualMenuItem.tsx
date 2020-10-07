@@ -69,6 +69,10 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         }
       }, [onItemClick, pressable.state]);
 
+    /*
+    * On Desktop, focus gets moved to the root of the menu, so hovering off the menu does not automatically call onBlur as we expect it to.
+    * OnMouseEnter and onMouseLeave are overridden with the below callbacks that calls onFocus and onBlur explicitly
+    */
     const onMouseEnter = React.useCallback(
       e => {
         pressable.props.onMouseEnter && pressable.props.onMouseEnter(e);
