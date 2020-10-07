@@ -27,7 +27,7 @@ exports[`CompoundButton default 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minHeight": 32,
+      "minHeight": 72,
       "minWidth": 80,
       "paddingEnd": 16,
       "paddingStart": 16,
