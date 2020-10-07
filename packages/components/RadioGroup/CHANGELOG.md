@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Fri, 25 Sep 2020 19:21:43 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Oct 2020 17:29:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.15
+
+Wed, 07 Oct 2020 17:29:29 GMT
+
+### Patches
+
+- Adding FocusZone to RadioGroup (safreibe@microsoft.com)
 
 ## 0.4.10
 

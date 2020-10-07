@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Adding FocusZone to RadioGroup",
-  "packageName": "@fluentui-react-native/radio-group",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-09-30T17:20:28.589Z"
-}
