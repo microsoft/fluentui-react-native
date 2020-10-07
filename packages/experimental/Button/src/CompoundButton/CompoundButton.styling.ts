@@ -40,6 +40,7 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
           paddingStart: 16,
           paddingEnd: 16,
           backgroundColor: tokens.backgroundColor,
+          ...layoutStyles.from(tokens, theme),
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
         },
