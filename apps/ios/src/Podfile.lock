@@ -9,9 +9,6 @@ PODS:
     - React-Core (= 0.62.2)
     - React-jsi (= 0.62.2)
     - ReactCommon/turbomodule/core (= 0.62.2)
-  - FluentUI-React-Native-Shimmer (0.2.9):
-    - MicrosoftFluentUI (~> 0.1.12)
-    - React
   - Folly (2018.10.22.00):
     - boost-for-react-native
     - DoubleConversion
@@ -22,7 +19,6 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - MicrosoftFluentUI (0.1.12)
   - QRCodeReader.swift (10.1.0)
   - RCTRequired (0.62.2)
   - RCTTypeSafety (0.62.2):
@@ -255,7 +251,6 @@ DEPENDENCIES:
   - DoubleConversion (from `../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../../../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native/Libraries/FBReactNativeSpec`)
-  - FluentUI-React-Native-Shimmer (from `../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec`)
   - Folly (from `../../../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - QRCodeReader.swift
@@ -289,7 +284,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - boost-for-react-native
-    - MicrosoftFluentUI
     - QRCodeReader.swift
     - SwiftLint
 
@@ -300,8 +294,6 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/Libraries/FBLazyVector"
   FBReactNativeSpec:
     :path: "../../../node_modules/react-native/Libraries/FBReactNativeSpec"
-  FluentUI-React-Native-Shimmer:
-    :path: "../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec"
   Folly:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:
@@ -356,10 +348,8 @@ SPEC CHECKSUMS:
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e
-  FluentUI-React-Native-Shimmer: 74b1e66f2672d4351b16ec36904f20fb1b41713c
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
-  MicrosoftFluentUI: 6800fd4c017a5c5b946a24851ac2218748da45d2
   QRCodeReader.swift: 373a389fe9a22d513c879a32a6f647c58f4ef572
   RCTRequired: cec6a34b3ac8a9915c37e7e4ad3aa74726ce4035
   RCTTypeSafety: 93006131180074cffa227a1075802c89a49dd4ce
@@ -385,6 +375,6 @@ SPEC CHECKSUMS:
   SwiftLint: bbfed21bf4451dcbd0f5cdbee44a18e06cf91b12
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
 
-PODFILE CHECKSUM: 42dde6a3630fe1498f92905782bda6387e25596e
+PODFILE CHECKSUM: a019ed86d5d71413af026d0e85255ae48c1385ee
 
 COCOAPODS: 1.9.3
