@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Use React Native Community Picker",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2020-10-08T04:16:42.642Z"
+}
