@@ -21,6 +21,7 @@
   "dependencies": {
     "@fluentui-react-native/tester": "^0.10.1",
     "@react-native-community/cli-platform-ios": "^4.13.0",
+    "@react-native-community/picker": "^1.8.0",
     "@uifabricshared/theming-react-native": "0.7.76",
     "react": "16.11.0",
     "react-native": "0.62.2",

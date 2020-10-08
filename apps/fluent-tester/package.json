@@ -29,7 +29,7 @@
     "@fluentui-react-native/themed-stylesheet": "^1.0.1",
     "@uifabricshared/theming-ramp": ">=0.10.12 <1.0.0",
     "react-native-svg": "^11.0.0",
-    "@react-native-community/picker": ">=1.7.1 <2.0.0"
+    "@react-native-community/picker": "^1.8.0"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "^1.1.0",
