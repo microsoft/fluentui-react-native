@@ -2,6 +2,36 @@
   "name": "@uifabricshared/theme-registry",
   "entries": [
     {
+      "date": "Fri, 25 Sep 2020 19:21:43 GMT",
+      "tag": "@uifabricshared/theme-registry_v0.3.71",
+      "version": "0.3.71",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update react-native-win32 versions - enable logbox",
+            "author": "acoates-ms@noreply.github.com",
+            "commit": "a95ab1b66822cceacc74e24094f85c6917f58086",
+            "package": "@uifabricshared/theme-registry"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 23 Sep 2020 18:31:48 GMT",
+      "tag": "@uifabricshared/theme-registry_v0.3.70",
+      "version": "0.3.70",
+      "comments": {
+        "patch": [
+          {
+            "comment": "start publishing src to fix customer source maps",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b3d7b5ba710bc581a6f4db91c91e4ffc185fc427",
+            "package": "@uifabricshared/theme-registry"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 11 Sep 2020 20:25:42 GMT",
       "tag": "@uifabricshared/theme-registry_v0.3.69",
       "version": "0.3.69",

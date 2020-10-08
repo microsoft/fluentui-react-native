@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Fri, 28 Aug 2020 05:03:51 GMT and should not be manually modified.
+This log was last generated on Mon, 28 Sep 2020 20:32:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.18
+
+Mon, 28 Sep 2020 20:32:21 GMT
+
+### Patches
+
+- move test pages (aliciakds88@gmail.com)
+
+## 0.3.16
+
+Fri, 25 Sep 2020 19:21:43 GMT
+
+### Patches
+
+- Update react-native-win32 versions - enable logbox (acoates-ms@noreply.github.com)
 
 ## 0.3.12
 

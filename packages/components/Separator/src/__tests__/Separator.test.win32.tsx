@@ -8,7 +8,7 @@ it('Separator default', () => {
 });
 
 it('Separator all props & tokens', () => {
-  const CustomSeparator = Separator.customize({ tokens: { separatorWidth: 15, color: 'red' } });
+  const CustomSeparator = Separator.customize({ separatorWidth: 15, color: 'red' });
   const tree = renderer.create(<CustomSeparator vertical />).toJSON();
   expect(tree).toMatchSnapshot();
 });

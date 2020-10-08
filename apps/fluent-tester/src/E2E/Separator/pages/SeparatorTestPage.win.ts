@@ -1,4 +1,4 @@
-import { SEPARATOR_TESTPAGE } from '../../../RNTester/TestComponents/Separator/consts';
+import { SEPARATOR_TESTPAGE } from '../../../FluentTester/TestComponents/Separator/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class SeparatorTestPage extends BasePage {

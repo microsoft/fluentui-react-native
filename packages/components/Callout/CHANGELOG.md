@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Tue, 25 Aug 2020 21:17:13 GMT and should not be manually modified.
+This log was last generated on Fri, 25 Sep 2020 19:21:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.14
+
+Fri, 25 Sep 2020 19:21:43 GMT
+
+### Patches
+
+- Update react-native-win32 versions - enable logbox (acoates-ms@noreply.github.com)
 
 ## 0.11.10
 

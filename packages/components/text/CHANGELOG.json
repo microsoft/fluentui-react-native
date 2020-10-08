@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Tue, 29 Sep 2020 18:34:10 GMT",
+      "tag": "@fluentui-react-native/text_v0.6.15",
+      "version": "0.6.15",
+      "comments": {
+        "none": [
+          {
+            "comment": "add test-tools package with mock theme",
+            "author": "jasonmo@microsoft.com",
+            "commit": "01dcf3ba988bebd5cab620f5e78f40ff1a7a55f6",
+            "package": "@fluentui-react-native/text"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 28 Sep 2020 20:32:21 GMT",
+      "tag": "@fluentui-react-native/text_v0.6.14",
+      "version": "0.6.14",
+      "comments": {
+        "none": [
+          {
+            "comment": "move test pages",
+            "author": "aliciakds88@gmail.com",
+            "commit": "8338baf6918f763b3ba3b3a7169d1f390ad0557d",
+            "package": "@fluentui-react-native/text"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Sep 2020 19:21:43 GMT",
+      "tag": "@fluentui-react-native/text_v0.6.12",
+      "version": "0.6.12",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update react-native-win32 versions - enable logbox",
+            "author": "acoates-ms@noreply.github.com",
+            "commit": "a95ab1b66822cceacc74e24094f85c6917f58086",
+            "package": "@fluentui-react-native/text"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Aug 2020 05:03:51 GMT",
       "tag": "@fluentui-react-native/text_v0.6.8",
       "version": "0.6.8",

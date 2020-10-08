@@ -1,4 +1,4 @@
-import { SVG_TESTPAGE } from '../../../RNTester/TestComponents/Svg/consts';
+import { SVG_TESTPAGE } from '../../../FluentTester/TestComponents/Svg/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class SvgTestPage extends BasePage {

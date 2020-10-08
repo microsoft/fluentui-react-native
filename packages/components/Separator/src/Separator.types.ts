@@ -1,10 +1,6 @@
 import { ViewProps } from 'react-native';
-import { IForegroundColorTokens } from '@fluentui-react-native/tokens';
-import { IViewWin32Props } from '@office-iss/react-native-win32';
 
-export const separatorName = 'RNFSeparator';
-
-interface ISeparatorPropTokens {
+interface SeparatorPropTokens {
   /**
    * Specifies whether the separator is vertical or horizontal. If true, then it's vertical.
    * @defaultValue 'false'
@@ -12,15 +8,20 @@ interface ISeparatorPropTokens {
   vertical?: boolean;
 }
 
-export interface ISeparatorTokens extends IForegroundColorTokens, ISeparatorPropTokens {
+export interface SeparatorTokens extends SeparatorPropTokens {
   /**
    * Specifies the width of the separator. This will be interpreted as DIPs on Windows and Android, but as points on Mac and iOS.
    * @defaultValue 1
    */
   separatorWidth?: number;
+
+  /**
+   * Specifies the color of the separator
+   */
+  color?: string;
 }
 
-export interface ISeparatorProps extends ViewProps, ISeparatorPropTokens {
+export interface SeparatorProps extends ViewProps, SeparatorPropTokens {
   /**
    * Specifies where the text or image should be aligned in the separator, when the separator has a text or image label.
    * @defaultValue 'center'
@@ -29,10 +30,10 @@ export interface ISeparatorProps extends ViewProps, ISeparatorPropTokens {
   // alignContent?: 'start' | 'center' | 'end';
 }
 
-export interface ISeparatorType {
-  props: ISeparatorProps;
+export interface SeparatorType {
+  props: SeparatorProps;
   slotProps: {
-    root: IViewWin32Props;
+    root: ViewProps;
   };
-  tokens: ISeparatorTokens;
+  tokens: SeparatorTokens;
 }

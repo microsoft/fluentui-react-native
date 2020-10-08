@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
+import { FocusZone } from '@fluentui-react-native/focus-zone';
 import {
   radioGroupName,
   IRadioGroupType,
@@ -13,7 +14,6 @@ import {
 } from './RadioGroup.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { filterViewProps } from '@fluentui-react-native/adapters';
 import { settings } from './RadioGroup.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
@@ -51,7 +51,8 @@ export const RadioGroup = compose<IRadioGroupType>({
 
     const slotProps = mergeSettings<IRadioGroupSlotProps>(styleProps, {
       root: { rest, ...ariaRoles },
-      label: { children: label }
+      label: { children: label },
+      container: { isCircularNavigation: true }
     });
 
     return { slotProps, state };
@@ -79,7 +80,7 @@ export const RadioGroup = compose<IRadioGroupType>({
   slots: {
     root: View,
     label: Text,
-    container: { slotType: View, filter: filterViewProps }
+    container: FocusZone
   },
   styles: {
     root: [],
