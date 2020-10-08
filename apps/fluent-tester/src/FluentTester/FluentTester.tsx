@@ -3,7 +3,8 @@ import { StealthButton, Separator, Text } from '@fluentui/react-native';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { getHostSettingsWin32, useTheme } from '@uifabricshared/theming-react-native';
 import * as React from 'react';
-import { Picker, ScrollView, View, Text as RNText } from 'react-native';
+import { ScrollView, View, Text as RNText } from 'react-native';
+import { Picker } from '@react-native-community/picker';
 import { setAppColors } from './CustomThemes';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
@@ -64,7 +65,7 @@ const Header: React.FunctionComponent<HeaderProps> = (props: HeaderProps) => {
           <Picker
             selectedValue={selectedPlatform}
             style={fluentTesterStyles.dropdown}
-            onValueChange={(platformValue) => setSelectedPlatform(platformValue)}
+            onValueChange={(platformValue) => setSelectedPlatform(platformValue.toString())}
           >
             <Picker.Item label="Win32" value="win32" />
             <Picker.Item label="UWP" value="uwp" />
@@ -76,18 +77,26 @@ const Header: React.FunctionComponent<HeaderProps> = (props: HeaderProps) => {
 
         <View style={fluentTesterStyles.picker}>
           <RNText style={fluentTesterStyles.pickerLabel}>App: </RNText>
-          <Picker selectedValue={selectedApp} style={fluentTesterStyles.dropdown} onValueChange={(appValue) => onAppChange(appValue)}>
+          <Picker
+            selectedValue={selectedApp}
+            style={fluentTesterStyles.dropdown}
+            onValueChange={(appValue) => onAppChange(appValue.toString())}
+          >
             <Picker.Item label="Office" value="Office" />
             <Picker.Item label="Word" value="Word" />
             <Picker.Item label="Excel" value="Excel" />
-            <Picker.Item label="Powerpoint" value="Powerpoint" />
+            <Picker.Item label="PowerPoint" value="PowerPoint" />
             <Picker.Item label="Outlook" value="Outlook" />
           </Picker>
         </View>
 
         <View style={fluentTesterStyles.picker}>
           <RNText style={fluentTesterStyles.pickerLabel}>Theme: </RNText>
-          <Picker selectedValue={selectedTheme} style={fluentTesterStyles.dropdown} onValueChange={onThemeSelected}>
+          <Picker
+            selectedValue={selectedTheme}
+            style={fluentTesterStyles.dropdown}
+            onValueChange={(themeValue) => onThemeSelected(themeValue.toString())}
+          >
             <Picker.Item label="TaskPane" value="Default" />
             <Picker.Item label="Caterpillar" value="Caterpillar" />
             <Picker.Item label="WhiteColors" value="WhiteColors" />

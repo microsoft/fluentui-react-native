@@ -112,7 +112,7 @@ const brandColors = {
     App7: '#0E5C2F',
     App8: '#004B1C',
   },
-  Powerpoint: {
+  PowerPoint: {
     App1: '#FCF0ED',
     App2: '#FDC9B5',
     App3: '#ED9583',

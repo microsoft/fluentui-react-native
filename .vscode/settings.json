@@ -62,8 +62,5 @@
   "[handlebars]": {
     "editor.formatOnSave": false
   },
-  "cSpell.words": [
-    "beachball",
-    "nuget"
-  ]
+  "cSpell.words": ["beachball", "nuget"]
 }

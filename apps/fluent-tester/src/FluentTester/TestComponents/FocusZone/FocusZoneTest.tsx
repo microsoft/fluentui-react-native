@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { View, Picker, Switch } from 'react-native';
+import { View, Switch } from 'react-native';
+import { Picker } from '@react-native-community/picker';
 import { FocusZone, Button, Text, FocusZoneDirection, Checkbox } from '@fluentui/react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { FOCUSZONE_TESTPAGE } from './consts';
 import { focusZoneTestStyles, stackStyleFocusZone } from './styles';
-import { commonTestStyles } from '../Common/styles'
+import { commonTestStyles } from '../Common/styles';
 import { Stack } from '@fluentui-react-native/stack';
 
 const directionalFocusZone: React.FunctionComponent<{}> = () => {
@@ -12,7 +13,7 @@ const directionalFocusZone: React.FunctionComponent<{}> = () => {
     <View>
       <Button content="Outside FocusZone" />
       <Text variant="headerSemibold">FocusZone with Bidirectional arrow key navigation</Text>
-      <FocusZone focusZoneDirection='bidirectional'>
+      <FocusZone focusZoneDirection="bidirectional">
         <Checkbox label="Option A" />
         <Checkbox label="Option B" />
         <Checkbox label="Option C" />
@@ -20,7 +21,7 @@ const directionalFocusZone: React.FunctionComponent<{}> = () => {
       </FocusZone>
       <Button content="Outside FocusZone" />
       <Text variant="headerSemibold">FocusZone with Vertical arrow key navigation</Text>
-      <FocusZone focusZoneDirection='vertical'>
+      <FocusZone focusZoneDirection="vertical">
         <Checkbox label="Option A" />
         <Checkbox label="Option B" />
         <Checkbox label="Option C" />
@@ -28,7 +29,7 @@ const directionalFocusZone: React.FunctionComponent<{}> = () => {
       </FocusZone>
       <Button content="Outside FocusZone" />
       <Text variant="headerSemibold">FocusZone with Horizontal arrow key navigation</Text>
-      <FocusZone focusZoneDirection='horizontal'>
+      <FocusZone focusZoneDirection="horizontal">
         <Checkbox label="Option A" />
         <Checkbox label="Option B" />
         <Checkbox label="Option C" />
@@ -51,8 +52,8 @@ const directionalFocusZone: React.FunctionComponent<{}> = () => {
         <Checkbox label="Option D" />
       </FocusZone>
       <Button content="Outside FocusZone" />
-    </View >
-  )
+    </View>
+  );
 };
 
 const commonUsageFocusZone: React.FunctionComponent<{}> = () => {
@@ -76,9 +77,8 @@ const commonUsageFocusZone: React.FunctionComponent<{}> = () => {
       </FocusZone>
       <Button content="Outside FocusZone" />
     </View>
-  )
+  );
 };
-
 
 const navigation2DFocusZone: React.FunctionComponent<{}> = () => {
   const buttonRef = React.useRef<View>(null);
@@ -110,7 +110,7 @@ const navigation2DFocusZone: React.FunctionComponent<{}> = () => {
       <View>
         <Button content="Outside FocusZone" />
       </View>
-    </View >
+    </View>
   );
 };
 
@@ -130,12 +130,7 @@ function SwitchWithLabel(props: ISwitchWithLabelProps): React.ReactElement {
   );
 }
 
-const focusZoneDirectionStrings = [
-  'Bidirectional',
-  'Horizontal',
-  'Vertical',
-  'None'
-];
+const focusZoneDirectionStrings = ['Bidirectional', 'Horizontal', 'Vertical', 'None'];
 
 const customizableFocusZone: React.FunctionComponent<{}> = () => {
   const [is2DNav, set2dNav] = React.useState(false);
@@ -181,7 +176,12 @@ const customizableFocusZone: React.FunctionComponent<{}> = () => {
         <View>
           <Button content="Outside FocusZone" />
         </View>
-        <FocusZone disabled={isDisabled} use2DNavigation={is2DNav} focusZoneDirection={isFocusZoneDirection} isCircularNavigation={isCircularNav} >
+        <FocusZone
+          disabled={isDisabled}
+          use2DNavigation={is2DNav}
+          focusZoneDirection={isFocusZoneDirection}
+          isCircularNavigation={isCircularNav}
+        >
           <View style={focusZoneTestStyles.focusZoneContainer}>
             <View style={focusZoneTestStyles.focusZoneViewStyle}>
               <Button content="#1" style={focusZoneTestStyles.focusZoneButton} />
@@ -205,9 +205,8 @@ const customizableFocusZone: React.FunctionComponent<{}> = () => {
         </View>
       </Stack>
     </View>
-  )
-}
-
+  );
+};
 
 const focusZoneSections: TestSection[] = [
   {
@@ -217,16 +216,16 @@ const focusZoneSections: TestSection[] = [
   },
   {
     name: 'Common FocusZone Usage',
-    component: commonUsageFocusZone
+    component: commonUsageFocusZone,
   },
   {
     name: '2D Navigation with Default Tabbable Element (#5) FocusZone Usage',
-    component: navigation2DFocusZone
+    component: navigation2DFocusZone,
   },
   {
     name: 'Customizable FocusZone',
-    component: customizableFocusZone
-  }
+    component: customizableFocusZone,
+  },
 ];
 
 export const FocusZoneTest: React.FunctionComponent<{}> = () => {
