@@ -46,37 +46,28 @@ const otherCheckbox: React.FunctionComponent<{}> = () => {
 };
 
 const tokenCheckbox: React.FunctionComponent<{}> = () => {
-  const CircularCheckbox = Checkbox.customize({ tokens: { borderRadius: 50 } });
+  const CircularCheckbox = Checkbox.customize({ borderRadius: 50 });
 
   const CircleColorCheckbox = Checkbox.customize({
-    tokens: { borderRadius: 50, checkboxBackgroundColor: 'white' },
-    _overrides: {
-      checked: {
-        tokens: {
-          checkboxBackgroundColor: 'green',
-          checkboxBorderColor: 'green',
-          checkmarkColor: 'white',
-        },
-      },
-      focused: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
-      hovered: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
-      pressed: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundPressed' } },
+    borderRadius: 50,
+    checkboxBackgroundColor: 'white',
+    checked: {
+      checkboxBackgroundColor: 'green',
+      checkboxBorderColor: 'green',
+      checkmarkColor: 'white',
     },
+    focused: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
+    hovered: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
+    pressed: { checkboxBackgroundColor: 'menuItemBackgroundPressed' },
   });
 
   const HoverCheckbox = Checkbox.customize({
-    _overrides: {
-      checked: {
-        tokens: {
-          checkboxBackgroundColor: 'black',
-          checkmarkColor: 'white',
-        },
-      },
-      hovered: {
-        tokens: {
-          checkmarkVisibility: 1,
-        },
-      },
+    checked: {
+      checkboxBackgroundColor: 'black',
+      checkmarkColor: 'white',
+    },
+    hovered: {
+      checkmarkVisibility: 1,
     },
   });
 
@@ -84,19 +75,15 @@ const tokenCheckbox: React.FunctionComponent<{}> = () => {
   const [checkmarkColor, setCheckmarkColor] = React.useState('white');
 
   const BlueCheckbox = Checkbox.customize({
-    tokens: { checkboxBackgroundColor: 'white' },
-    _overrides: {
-      checked: {
-        tokens: {
-          checkboxBackgroundColor: checkboxColor,
-          checkboxBorderColor: checkboxColor,
-          checkmarkColor: checkmarkColor,
-        },
-      },
-      focused: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
-      hovered: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
-      pressed: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundPressed' } },
+    checkboxBackgroundColor: 'white',
+    checked: {
+      checkboxBackgroundColor: checkboxColor,
+      checkboxBorderColor: checkboxColor,
+      checkmarkColor: checkmarkColor,
     },
+    focused: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
+    hovered: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
+    pressed: { checkboxBackgroundColor: 'menuItemBackgroundPressed' },
   });
 
   const theme = useTheme();

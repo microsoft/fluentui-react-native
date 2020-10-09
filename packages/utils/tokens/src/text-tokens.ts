@@ -1,19 +1,13 @@
-import { TextStyle, TextProps } from 'react-native';
-import { ITheme, ITypography } from '@uifabricshared/theming-ramp';
+import { TextProps } from 'react-native';
+import { ITheme } from '@uifabricshared/theming-ramp';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 import { TokenBuilder } from './tokenBuilder';
+import { FontStyleTokenSet, FontTokenSet, FontVariantTokenSet } from '@fluentui-react-native/theme-types';
 
-export interface FontVariantTokens {
-  variant?: keyof ITypography['variants'];
-}
+export type FontVariantTokens = FontVariantTokenSet;
 
-export interface FontStyleTokens {
-  fontFamily?: keyof ITypography['families'] | TextStyle['fontFamily'];
-  fontSize?: keyof ITypography['sizes'] | TextStyle['fontSize'];
-  fontWeight?: keyof ITypography['weights'] | TextStyle['fontWeight'];
-}
-
-export type FontTokens = FontStyleTokens & FontVariantTokens;
+export type FontStyleTokens = FontStyleTokenSet;
+export type FontTokens = FontTokenSet;
 
 export const fontStyles: TokenBuilder<FontTokens> = {
   from: ({ fontFamily, fontSize, fontWeight, variant }: FontTokens, { typography }: ITheme) => {
@@ -22,18 +16,18 @@ export const fontStyles: TokenBuilder<FontTokens> = {
       return {
         fontFamily: families[fontFamily] || fontFamily || families[variants[variant].face] || variants[variant].face,
         fontSize: sizes[fontSize] || fontSize || sizes[variants[variant].size] || variants[variant].size,
-        fontWeight: weights[fontWeight] || fontWeight || weights[variants[variant].weight] || variants[variant].weight
+        fontWeight: weights[fontWeight] || fontWeight || weights[variants[variant].weight] || variants[variant].weight,
       };
     }
 
     return {};
   },
-  keys: ['fontFamily', 'fontSize', 'fontWeight', 'variant']
+  keys: ['fontFamily', 'fontSize', 'fontWeight', 'variant'],
 };
 
 function _buildTextStyles(tokens: FontTokens, theme: ITheme): TextProps {
   return {
-    style: fontStyles.from(tokens, theme)
+    style: fontStyles.from(tokens, theme),
   };
 }
 

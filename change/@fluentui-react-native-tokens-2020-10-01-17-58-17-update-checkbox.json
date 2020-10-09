@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "move Checkbox to new component framework",
+  "packageName": "@fluentui-react-native/tokens",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-10-02T00:58:17.205Z"
+}

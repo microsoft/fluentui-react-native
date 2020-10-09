@@ -40,7 +40,7 @@ export type ComposableComponent<TProps, TSlotProps, TTokens, TStatics extends ob
   TStatics
 >;
 
-export type UseSlots<T> = UseStyledSlots<ExtractProps<T>, ExtractSlotProps<T>>;
+export type UseSlots<T> = UseStyledSlots<ExtractProps<T>, ExtractSlotProps<T>, ExtractTokens<T>>;
 
 export function compose<T>(
   options: ComposeOptions<ExtractProps<T>, ExtractSlotProps<T>, ExtractTokens<T>, ExtractStatics<T>>,
