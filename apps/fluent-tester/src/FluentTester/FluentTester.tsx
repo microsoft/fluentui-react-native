@@ -6,7 +6,7 @@ import * as React from 'react';
 import { ScrollView, View, Text as RNText } from 'react-native';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
-import { fabricTesterStyles } from './TestComponents/Common/styles';
+import { fluentTesterStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
 
@@ -17,7 +17,7 @@ MessageQueue.spy(true);
 */
 
 const EmptyComponent: React.FunctionComponent = () => {
-  return <RNText style={fabricTesterStyles.noTest}>Select a component from the left.</RNText>;
+  return <RNText style={fluentTesterStyles.noTest}>Select a component from the left.</RNText>;
 };
 
 export interface FluentTesterProps {
@@ -29,9 +29,9 @@ const Header: React.FunctionComponent<{}> = () => {
   const theme = useTheme();
 
   return (
-    <View style={fabricTesterStyles.header}>
+    <View style={fluentTesterStyles.header}>
       <Text
-        style={[fabricTesterStyles.testHeader]}
+        style={[fluentTesterStyles.testHeader]}
         variant="heroLargeSemibold"
         color={theme.host.palette?.TextEmphasis}
         testID={BASE_TESTPAGE}
@@ -86,8 +86,8 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
       <Separator />
 
-      <View style={fabricTesterStyles.testRoot}>
-        <ScrollView style={fabricTesterStyles.testList} contentContainerStyle={fabricTesterStyles.testListContainerStyle}>
+      <View style={fluentTesterStyles.testRoot}>
+        <ScrollView style={fluentTesterStyles.testList} contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
           {sortedTestComponents.map((description, index) => {
             return (
               <StealthButton
@@ -95,7 +95,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                 disabled={index == selectedTestIndex}
                 content={description.name}
                 onClick={() => setSelectedTestIndex(index)}
-                style={fabricTesterStyles.testListItem}
+                style={fluentTesterStyles.testListItem}
                 testID={description.testPage}
               />
             );
@@ -104,7 +104,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
         <TestListSeparator vertical style={{ marginHorizontal: 8, width: 2 }} />
 
-        <View style={fabricTesterStyles.testSection}>
+        <View style={fluentTesterStyles.testSection}>
           <ScrollView>
             <TestComponent />
           </ScrollView>
