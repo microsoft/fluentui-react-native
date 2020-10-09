@@ -18,7 +18,11 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
+  - FRNShimmer (0.2.9):
+    - MicrosoftFluentUI (~> 0.1.12)
+    - React
   - glog (0.3.5)
+  - MicrosoftFluentUI (0.1.13)
   - QRCodeReader.swift (10.1.0)
   - RCTRequired (0.62.2)
   - RCTTypeSafety (0.62.2):
@@ -252,6 +256,7 @@ DEPENDENCIES:
   - FBLazyVector (from `../../../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Folly (from `../../../node_modules/react-native/third-party-podspecs/Folly.podspec`)
+  - FRNShimmer (from `../../../packages/components/Shimmer`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - QRCodeReader.swift
   - RCTRequired (from `../../../node_modules/react-native/Libraries/RCTRequired`)
@@ -284,6 +289,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - boost-for-react-native
+    - MicrosoftFluentUI
     - QRCodeReader.swift
     - SwiftLint
 
@@ -296,6 +302,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/Libraries/FBReactNativeSpec"
   Folly:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/Folly.podspec"
+  FRNShimmer:
+    :path: "../../../packages/components/Shimmer"
   glog:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/glog.podspec"
   RCTRequired:
@@ -349,7 +357,9 @@ SPEC CHECKSUMS:
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
+  FRNShimmer: 6ff529e7c5f0dfdc16c4ad61cd534c9608dd931a
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
+  MicrosoftFluentUI: dbebf152cd2e7864ace2d5079d509ec1fee19cbf
   QRCodeReader.swift: 373a389fe9a22d513c879a32a6f647c58f4ef572
   RCTRequired: cec6a34b3ac8a9915c37e7e4ad3aa74726ce4035
   RCTTypeSafety: 93006131180074cffa227a1075802c89a49dd4ce

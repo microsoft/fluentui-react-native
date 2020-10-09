@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Add a static library for Shimmer",
+  "packageName": "@fluentui-react-native/shimmer",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2020-10-09T00:01:35.152Z"
+}
