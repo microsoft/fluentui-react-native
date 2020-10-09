@@ -95,7 +95,7 @@ export type otherAvatarProps = {
    */
   usesOpaquePresenceBorder?: boolean;
 
-  // TODO Map the viewProp AccessibilityLabel to this
+  // TODO Github#512, Map the viewProp AccessibilityLabel to this
   // overrideAccessibilityLabel? : string;
 
   /**

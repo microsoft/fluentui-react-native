@@ -3,7 +3,7 @@
 
 @import FluentUI;
 
- @implementation RCTConvert (MSFAvatarView)
+@implementation RCTConvert (MSFAvatarViewAdditions)
 
 RCT_ENUM_CONVERTER(MSFAvatarSize, (@{
 	@"xSmall": @(MSFAvatarSizeExtraSmall),
@@ -41,17 +41,13 @@ RCT_ENUM_CONVERTER(MSFPresence, (@{
 + (MSFAvatarData *)MSFAvatarData:(id)json
 {
 	return [[MSFAvatarData alloc]initWithPrimaryText:[RCTConvert NSString:json[@"primaryText"]]
-									   secondaryText:[RCTConvert NSString:json[@"secondaryText"]]
-												image:[RCTConvert UIImage:json[@"image"]]
-											presence:[RCTConvert MSFPresence:json[@"presence"]]
-											   color:[RCTConvert UIColor:json[@"color"]]];
+                                     secondaryText:[RCTConvert NSString:json[@"secondaryText"]]
+                                             image:[RCTConvert UIImage:json[@"image"]]
+                                          presence:[RCTConvert MSFPresence:json[@"presence"]]
+                                             color:[RCTConvert UIColor:json[@"color"]]];
 }
 
- @end
-
- @interface MSFAvatarView(RCTComponent)
-
- @end
+@end
 
 @interface RCT_EXTERN_MODULE(MSFAvatarViewManager, RCTViewManager)
 
@@ -65,7 +61,7 @@ RCT_EXPORT_VIEW_PROPERTY(borderColor, UIColor);
 RCT_EXPORT_VIEW_PROPERTY(presence, MSFPresence);
 RCT_EXPORT_VIEW_PROPERTY(useOpaquePresenceBorder, bool);
 
-//TODO Remap this
+// TODO Github#512
 // RCT_EXPORT_VIEW_PROPERTY(NSString, overrideAccessibilityLabel);
 
 RCT_EXPORT_VIEW_PROPERTY(preferredFallbackImageStyle, MSFAvatarFallbackImageStyle);

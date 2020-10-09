@@ -11,11 +11,11 @@ class AvatarViewManager: RCTViewManager {
 	override class func requiresMainQueueSetup() -> Bool {
 		return true
 	}
-	
+
 	override func constantsToExport() -> [AnyHashable : Any]! {
 			return [
 				"sizes" : [
-					"xSmall" :	AvatarSize.extraSmall.size.width,
+					"xSmall" : AvatarSize.extraSmall.size.width,
 					"small" : AvatarSize.small.size.width,
 					"medium" : AvatarSize.medium.size.width,
 					"large" : AvatarSize.large.size.width,
