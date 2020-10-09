@@ -4,7 +4,6 @@ import CheckboxTestPage from '../../Checkbox/pages/CheckboxTestPage.win';
 import LinkTestPage from '../../Link/pages/LinkTestPage.win';
 import PersonaCoinTestPage from '../../PersonaCoin/pages/PersonaCoinTestPage.win';
 import PressableTestPage from '../../Pressable/pages/PressableTestPage.win';
-import RadioGroupTestPage from '../../RadioGroup/pages/RadioGroupTestPage.win';
 import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
 import TextTestPage from '../../Text/pages/TextTestPage.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
@@ -57,12 +56,6 @@ describe('Click on each test page and check if it renders', function() {
     BootTestPage.clickAndGoToPressablePage();
     PressableTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(PressableTestPage.isPageLoaded()).toBeTruthy();
-  });
-
-  it('RadioGroup Test Page', () => {
-    BootTestPage.clickAndGoToRadioGroupPage();
-    RadioGroupTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
-    expect(RadioGroupTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Separator Test Page', () => {
