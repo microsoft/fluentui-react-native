@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Avatar } from '@fluentui/react-native';
+import { Avatar } from '@fluentui-react-native/experimental-avatar';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { AVATAR_TESTPAGE } from './consts';
