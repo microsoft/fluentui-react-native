@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Mon, 12 Oct 2020 04:09:31 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.9.0",
+      "version": "0.9.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "added button semantic colors",
+            "author": "email not defined",
+            "commit": "d1c543f21301b22a84fb6968a2c2612bb487be39",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 02 Oct 2020 22:37:51 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.8.2",
       "version": "0.8.2",

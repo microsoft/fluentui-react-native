@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { RadioButton, RadioGroup } from '@fluentui/react-native';
+import { View } from 'react-native';
+import { RadioButton, RadioGroup, Separator } from '@fluentui/react-native';
 import { RADIOGROUP_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
@@ -10,12 +11,28 @@ const basicRadioGroup: React.FunctionComponent<{}> = () => {
   };
 
   return (
-    <RadioGroup label="This is a test RadioGroup" defaultSelectedKey="A" onChange={onChange}>
-      <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
-      <RadioButton content="Option B" buttonKey="B" />
-      <RadioButton content="Option C" buttonKey="C" disabled={true} />
-      <RadioButton content="Option D" buttonKey="D" />
-    </RadioGroup>
+    <View>
+      <RadioGroup label="Default RadioGroup" onChange={onChange}>
+        <RadioButton content="Option A" buttonKey="A" ariaLabel="AriaLabel of RadioButton" />
+        <RadioButton content="Option B" buttonKey="B" />
+        <RadioButton content="Option C" buttonKey="C" />
+        <RadioButton content="Option D" buttonKey="D" />
+      </RadioGroup>
+      <Separator />
+      <RadioGroup label="RadioGroup with B as defaultSelectedKey" defaultSelectedKey="B" onChange={onChange}>
+        <RadioButton content="Option A" buttonKey="A" />
+        <RadioButton content="Option B" buttonKey="B" />
+        <RadioButton content="Option C" buttonKey="C" />
+        <RadioButton content="Option D" buttonKey="D" />
+      </RadioGroup>
+      <Separator />
+      <RadioGroup label="RadioGroup with RadioButton C disabled" onChange={onChange}>
+        <RadioButton content="Option A" buttonKey="A" />
+        <RadioButton content="Option B" buttonKey="B" />
+        <RadioButton content="Option C" buttonKey="C" disabled={true} />
+        <RadioButton content="Option D" buttonKey="D" />
+      </RadioGroup>
+    </View>
   );
 };
 

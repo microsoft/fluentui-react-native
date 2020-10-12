@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Mon, 12 Oct 2020 04:09:31 GMT",
+      "tag": "@fluentui/react-native_v0.19.0",
+      "version": "0.19.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "shared hooks",
+            "author": "email not defined",
+            "commit": "d1c543f21301b22a84fb6968a2c2612bb487be39",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 29 Sep 2020 18:14:46 GMT",
       "tag": "@fluentui/react-native_v0.18.1",
       "version": "0.18.1",
