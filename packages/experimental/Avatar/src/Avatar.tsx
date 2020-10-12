@@ -2,13 +2,14 @@
 import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { Image, NativeModules, ViewProps } from 'react-native';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
-import { getMemoCache } from '@fluentui-react-native/framework';
+// import { getMemoCache } from '@fluentui-react-native/framework';
+import { useMemo } from 'react';
 
-const cache = getMemoCache();
+// const cache = getMemoCache();
 
-const avatarName = 'MSFAvatarView';
+const avatarName = 'Avatar';
 
-const NativeAvatarView = ensureNativeComponent(avatarName);
+const NativeAvatarView = ensureNativeComponent('MSFAvatarView');
 
 export type Size = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge' | 'xxLarge';
 
@@ -95,19 +96,15 @@ export type otherAvatarProps = {
    */
   usesOpaquePresenceBorder?: boolean;
 
-  // TODO Github#512, Map the viewProp AccessibilityLabel to this
-  // overrideAccessibilityLabel? : string;
-
   /**
    * Used when avatarView doesn't have image or can't generate initials string
    */
   preferredFallBackImageStyle?: string;
 
   /**
-   * Set to true to enable the pointer interaction on the avatar view, false by default.
-   * TODO Figure out how to make iOS only
+   * Set to true to enable the iPadOS pointer interactions on the avatar view, false by default.
    */
-  hasPointerInteraction?: boolean;
+  hasPointerInteractionIOS?: boolean;
 };
 
 export type AvatarTokens = {
@@ -159,7 +156,19 @@ export const Avatar = compose<AvatarType>({
   render: (props: AvatarProps, useSlots: UseSlots<AvatarType>) => {
     const Root = useSlots(props).root;
 
-    const cachedAvatarDataProp = cache(
+    // const cachedAvatarDataProp = cache(
+    //   () => ({
+    //     primaryText: props.primaryText,
+    //     secondaryText: props.secondaryText,
+    //     image: props.image,
+    //     color: props.color,
+    //     customBorderImage: props.customBorderImage,
+    //     presence: props.presence,
+    //   }),
+    //   [props.primaryText, props.secondaryText, props.image, props.color, props.customBorderImage, props.presence],
+    // )[0];
+
+    const memoizedAvatarData = useMemo(
       () => ({
         primaryText: props.primaryText,
         secondaryText: props.secondaryText,
@@ -169,8 +178,8 @@ export const Avatar = compose<AvatarType>({
         presence: props.presence,
       }),
       [props.primaryText, props.secondaryText, props.image, props.color, props.customBorderImage, props.presence],
-    )[0];
+    );
 
-    return (rest: AvatarProps) => <Root {...mergeProps(props, rest)} avatarData={cachedAvatarDataProp} />;
+    return (rest: AvatarProps) => <Root {...mergeProps(props, rest)} avatarData={memoizedAvatarData} />;
   },
 });

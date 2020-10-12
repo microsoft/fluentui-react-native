@@ -61,11 +61,11 @@ RCT_EXPORT_VIEW_PROPERTY(borderColor, UIColor);
 RCT_EXPORT_VIEW_PROPERTY(presence, MSFPresence);
 RCT_EXPORT_VIEW_PROPERTY(useOpaquePresenceBorder, bool);
 
-// TODO Github#512
-// RCT_EXPORT_VIEW_PROPERTY(NSString, overrideAccessibilityLabel);
+RCT_REMAP_VIEW_PROPERTY(accessibilityLabel, overrideAccessibilityLabel, NSString);
 
 RCT_EXPORT_VIEW_PROPERTY(preferredFallbackImageStyle, MSFAvatarFallbackImageStyle);
-RCT_EXPORT_VIEW_PROPERTY(hasPointerInteraction, bool);
+
+RCT_REMAP_VIEW_PROPERTY(hasPointerInteractionIOS, hasPointerInteraction, bool)
 
 RCT_CUSTOM_VIEW_PROPERTY(avatarData, MSFAvatarData, MSFAvatarView)
 {
