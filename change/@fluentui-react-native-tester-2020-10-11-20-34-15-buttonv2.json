@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "new test pages",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "email not defined",
+  "dependentChangeType": "patch",
+  "date": "2020-10-12T03:30:29.813Z"
+}
