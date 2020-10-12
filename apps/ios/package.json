@@ -20,7 +20,6 @@
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.10.2",
-    "@fluentui-react-native/experimental-avatar": ">=0.1.0 <1.0.0",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-test-app": "^0.2.1"
