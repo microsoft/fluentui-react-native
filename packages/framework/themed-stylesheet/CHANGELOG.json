@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/themed-stylesheet",
   "entries": [
     {
+      "date": "Mon, 12 Oct 2020 04:09:31 GMT",
+      "tag": "@fluentui-react-native/themed-stylesheet_v1.0.1",
+      "version": "1.0.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "update snapshots",
+            "author": "email not defined",
+            "commit": "d1c543f21301b22a84fb6968a2c2612bb487be39",
+            "package": "@fluentui-react-native/themed-stylesheet"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 02 Oct 2020 22:37:51 GMT",
       "tag": "@fluentui-react-native/themed-stylesheet_v1.0.1",
       "version": "1.0.1",

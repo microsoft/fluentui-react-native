@@ -9,7 +9,7 @@ import { settings } from './Button.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { filterViewProps, filterImageProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyCallback, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 
 export const Button = compose<IButtonType>({
   displayName: buttonName,
@@ -19,21 +19,13 @@ export const Button = compose<IButtonType>({
       content,
       onAccessibilityTap = userProps.onClick,
       accessibilityLabel = userProps.content,
-      onClick,
       testID,
+      onClick,
       ...rest
     } = userProps;
     // attach the pressable state handlers
     const pressable = useAsPressable({ ...rest, onPress: onClick });
-    const onKeyUp = React.useCallback(
-      (e) => {
-        if (onClick && (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ')) {
-          onClick();
-          e.stopPropagation();
-        }
-      },
-      [onClick],
-    );
+    const onKeyUp = useKeyCallback(onClick, ' ', 'Enter');
     // set up state
     const state: IButtonState = {
       info: {
@@ -48,6 +40,7 @@ export const Button = compose<IButtonType>({
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
     // create the merged slot props
+
     const slotProps = mergeSettings<IButtonSlotProps>(styleProps, {
       root: {
         ...pressable.props,
@@ -57,7 +50,7 @@ export const Button = compose<IButtonType>({
         accessibilityState: { disabled: state.info.disabled },
         onKeyUp: onKeyUp,
       },
-      content: { children: content, testID },
+      content: { children: content, testID: testID },
       icon: { source: icon },
     });
 
