@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Mon, 12 Oct 2020 04:09:31 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "shared useKeyCallback",
+            "author": "email not defined",
+            "commit": "d1c543f21301b22a84fb6968a2c2612bb487be39",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 07 Oct 2020 17:29:29 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.4.15",
+      "version": "0.4.15",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Adding FocusZone to RadioGroup",
+            "author": "safreibe@microsoft.com",
+            "commit": "1bc38fbd92b1c5fa39ee2914c0c7e8991eb28701",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 28 Sep 2020 20:32:21 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.4.12",
       "version": "0.4.12",

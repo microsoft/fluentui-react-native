@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Fixing up RadioGroup/FocusZone test pages",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-09-30T17:20:14.981Z"
-}
