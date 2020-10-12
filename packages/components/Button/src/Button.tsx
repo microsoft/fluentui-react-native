@@ -14,7 +14,15 @@ import { useAsPressable, useKeyCallback, useViewCommandFocus } from '@fluentui-r
 export const Button = compose<IButtonType>({
   displayName: buttonName,
   usePrepareProps: (userProps: IButtonProps, useStyling: IUseComposeStyling<IButtonType>) => {
-    const { icon, content, onAccessibilityTap = userProps.onClick, accessibilityLabel = userProps.content, onClick, ...rest } = userProps;
+    const {
+      icon,
+      content,
+      onAccessibilityTap = userProps.onClick,
+      accessibilityLabel = userProps.content,
+      testID,
+      onClick,
+      ...rest
+    } = userProps;
     // attach the pressable state handlers
     const pressable = useAsPressable({ ...rest, onPress: onClick });
     const onKeyUp = useKeyCallback(onClick, ' ', 'Enter');
@@ -32,6 +40,7 @@ export const Button = compose<IButtonType>({
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
     // create the merged slot props
+
     const slotProps = mergeSettings<IButtonSlotProps>(styleProps, {
       root: {
         ...pressable.props,
@@ -41,7 +50,7 @@ export const Button = compose<IButtonType>({
         accessibilityState: { disabled: state.info.disabled },
         onKeyUp: onKeyUp,
       },
-      content: { children: content },
+      content: { children: content, testID: testID },
       icon: { source: icon },
     });
 

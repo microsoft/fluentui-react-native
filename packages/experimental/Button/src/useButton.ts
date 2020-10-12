@@ -15,6 +15,7 @@ export const useButton = (props: ButtonProps): ButtonState => {
       accessibilityRole: 'button',
       onAccessibilityTap: props.onAccessibilityTap || props.onClick,
       accessibilityLabel: props.accessibilityLabel || props.content,
+      focusable: true,
       ref: useViewCommandFocus(props.componentRef),
       onKeyUp: onKeyUp,
     },

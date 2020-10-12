@@ -5,6 +5,7 @@ exports[`ToggleButton default 1`] = `
   acceptsKeyboardFocus={true}
   accessibilityRole="button"
   accessible={true}
+  focusable={true}
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}

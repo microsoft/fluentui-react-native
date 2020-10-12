@@ -6,6 +6,7 @@ exports[`CompoundButton default 1`] = `
   accessibilityLabel="Default Button"
   accessibilityRole="button"
   accessible={true}
+  focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
