@@ -13804,9 +13804,9 @@ react-native-web@0.12.3, react-native-web@^0.12.3:
     react-timer-mixin "^0.13.4"
 
 react-native-windows@^0.62.1:
-  version "0.62.11"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.62.11.tgz#a94bd6a6895886c64b0a4c80e75e9f491d7474ba"
-  integrity sha512-aIPLwpC3Iy0sty2Cw6yVSQo6zjODdU1yZTdkMRxz2AGSc58oKcckThbLQjZui/KX2Den8Pyjo22Ii5I5Py1HKg==
+  version "0.62.12"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.62.12.tgz#84baa0619532546ef63f2276c2f74ee02819c4ca"
+  integrity sha512-QjBhvYEVWAuGT1I9XC/KVTSHIMYIitVpNQYcmUKAFfgF1SA4JV7PHJJGqE04lmrmQh2Z1eB/ONRVOtmsVa/EQQ==
   dependencies:
     "@babel/runtime" "^7.8.4"
     cli-spinners "^2.2.0"
