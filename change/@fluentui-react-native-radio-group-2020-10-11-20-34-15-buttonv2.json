@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "shared useKeyCallback",
-  "packageName": "@fluentui-react-native/radio-group",
-  "email": "email not defined",
-  "dependentChangeType": "patch",
-  "date": "2020-10-12T03:32:07.355Z"
-}

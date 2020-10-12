@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "shared useKeyCallback",
-  "packageName": "@fluentui-react-native/separator",
-  "email": "email not defined",
-  "dependentChangeType": "patch",
-  "date": "2020-10-12T03:32:12.996Z"
-}

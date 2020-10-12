@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "shared useKeyCallback",
-  "packageName": "@fluentui-react-native/contextual-menu",
-  "email": "email not defined",
-  "dependentChangeType": "patch",
-  "date": "2020-10-12T03:31:24.519Z"
-}

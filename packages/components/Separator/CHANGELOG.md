@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/separator
 
-This log was last generated on Thu, 01 Oct 2020 16:54:19 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Oct 2020 04:09:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.0
+
+Mon, 12 Oct 2020 04:09:31 GMT
+
+### Minor changes
+
+- shared useKeyCallback (email not defined)
 
 ## 0.5.0
 

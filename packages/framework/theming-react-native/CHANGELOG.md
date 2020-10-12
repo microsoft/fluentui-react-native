@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Fri, 02 Oct 2020 22:37:51 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Oct 2020 04:09:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.0
+
+Mon, 12 Oct 2020 04:09:31 GMT
+
+### Minor changes
+
+- added button semantic colors (email not defined)
 
 ## 0.8.2
 

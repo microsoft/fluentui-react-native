@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "added semantic colors for button",
-  "packageName": "@fluentui-react-native/theme",
-  "email": "email not defined",
-  "dependentChangeType": "patch",
-  "date": "2020-10-12T03:32:58.601Z"
-}
