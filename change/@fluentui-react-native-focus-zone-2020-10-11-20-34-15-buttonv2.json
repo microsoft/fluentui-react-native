@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "shared useKeyCallback",
+  "packageName": "@fluentui-react-native/focus-zone",
+  "email": "email not defined",
+  "dependentChangeType": "patch",
+  "date": "2020-10-12T03:31:45.368Z"
+}

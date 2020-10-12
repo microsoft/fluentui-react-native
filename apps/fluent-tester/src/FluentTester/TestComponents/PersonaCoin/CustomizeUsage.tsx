@@ -95,16 +95,16 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
         <AlignmentPicker style={commonStyles.header} label="Vertical icon alignment" onSelectionChange={setVerticalAlignment} />
 
         <Text>Coin size</Text>
-        <Slider minimum={8} maximum={200} initialValue={80} style={commonStyles.slider} onChange={setPhysicalSize} />
+        <Slider minimum={8} maximum={200} initialValue={80} style={commonStyles.vmargin} onChange={setPhysicalSize} />
 
         <Text>Icon size</Text>
-        <Slider minimum={8} maximum={100} initialValue={24} style={commonStyles.slider} onChange={setIconSize} />
+        <Slider minimum={8} maximum={100} initialValue={24} style={commonStyles.vmargin} onChange={setIconSize} />
 
         <Text>Icon stroke width</Text>
-        <Slider minimum={0} maximum={8} initialValue={2} style={commonStyles.slider} onChange={setIconStrokeWidth} />
+        <Slider minimum={0} maximum={8} initialValue={2} style={commonStyles.vmargin} onChange={setIconStrokeWidth} />
 
         <Text>Font size</Text>
-        <Slider minimum={5} maximum={50} initialValue={14} style={commonStyles.slider} onChange={setInitialsSize} />
+        <Slider minimum={5} maximum={50} initialValue={14} style={commonStyles.vmargin} onChange={setInitialsSize} />
       </View>
 
       {/* component under test */}
