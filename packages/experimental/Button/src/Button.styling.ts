@@ -28,7 +28,6 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
     content: buildProps(
       (tokens: ButtonTokens, theme: Theme) => ({
         style: {
-          accessible: false,
           color: tokens.color,
           ...fontStyles.from(tokens, theme),
         },
