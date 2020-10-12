@@ -2,10 +2,7 @@
 import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { Image, NativeModules, ViewProps } from 'react-native';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
-// import { getMemoCache } from '@fluentui-react-native/framework';
 import { useMemo } from 'react';
-
-// const cache = getMemoCache();
 
 const avatarName = 'Avatar';
 
@@ -155,18 +152,6 @@ export const Avatar = compose<AvatarType>({
   },
   render: (props: AvatarProps, useSlots: UseSlots<AvatarType>) => {
     const Root = useSlots(props).root;
-
-    // const cachedAvatarDataProp = cache(
-    //   () => ({
-    //     primaryText: props.primaryText,
-    //     secondaryText: props.secondaryText,
-    //     image: props.image,
-    //     color: props.color,
-    //     customBorderImage: props.customBorderImage,
-    //     presence: props.presence,
-    //   }),
-    //   [props.primaryText, props.secondaryText, props.image, props.color, props.customBorderImage, props.presence],
-    // )[0];
 
     const memoizedAvatarData = useMemo(
       () => ({
