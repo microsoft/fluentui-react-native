@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "add focused state condition to onKeyUp callback",
-  "packageName": "@fluentui-react-native/contextual-menu",
-  "email": "lehon@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-09-25T18:37:00.235Z"
-}

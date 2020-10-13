@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Mon, 12 Oct 2020 04:09:31 GMT and should not be manually modified.
+This log was last generated on Tue, 13 Oct 2020 01:39:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Tue, 13 Oct 2020 01:39:45 GMT
+
+### Minor changes
+
+- remove useKeyCallback import (lehon@microsoft.com)
 
 ## 0.6.0
 
