@@ -1,8 +1,64 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 28 Sep 2020 20:32:21 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Oct 2020 04:09:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.2
+
+Mon, 12 Oct 2020 04:09:31 GMT
+
+### Patches
+
+- new test pages (email not defined)
+
+## 0.10.1
+
+Wed, 07 Oct 2020 18:52:49 GMT
+
+### Patches
+
+- Removed references to fabric tester (saadnajmi2@gmail.com)
+
+## 0.10.0
+
+Wed, 07 Oct 2020 17:29:29 GMT
+
+### Minor changes
+
+- Fixing up RadioGroup/FocusZone test pages (safreibe@microsoft.com)
+
+## 0.9.4
+
+Fri, 02 Oct 2020 22:37:51 GMT
+
+### Patches
+
+- convert themed stylesheet to use memo-cache (jasonmo@microsoft.com)
+
+## 0.9.3
+
+Fri, 02 Oct 2020 22:17:48 GMT
+
+### Patches
+
+- fix web tester (jasonmo@microsoft.com)
+
+## 0.9.2
+
+Thu, 01 Oct 2020 16:54:19 GMT
+
+### Patches
+
+- switch Separator to new framework (jasonmo@microsoft.com)
+
+## 0.9.1
+
+Tue, 29 Sep 2020 18:14:46 GMT
+
+### Patches
+
+- remove extra componentTokens reference and route everything to components (jasonmo@microsoft.com)
 
 ## 0.9.0
 

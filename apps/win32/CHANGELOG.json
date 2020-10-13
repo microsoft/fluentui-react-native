@@ -2,6 +2,57 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Tue, 13 Oct 2020 01:39:45 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "add focused state condition to onKeyUp callback",
+            "author": "lehon@microsoft.com",
+            "commit": "7a9cef9d56db7ad154e542b4ac5547458dfc604d",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 12 Oct 2020 04:09:31 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "new test pages",
+            "author": "email not defined",
+            "commit": "d1c543f21301b22a84fb6968a2c2612bb487be39",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 29 Sep 2020 18:14:46 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.5.1",
+      "version": "0.5.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "remove extra componentTokens reference and route everything to components",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f481a7179d21204e0a89bc91e462b7ace0c3f753",
+            "package": "@fluentui-react-native/tester-win32"
+          },
+          {
+            "comment": "Bumping tenantreactnativewin",
+            "author": "safreibe@microsoft.com",
+            "commit": "40a6a0e85102beda0cc6043fcddead32626de50c",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 28 Sep 2020 20:32:21 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.5.0",
       "version": "0.5.0",

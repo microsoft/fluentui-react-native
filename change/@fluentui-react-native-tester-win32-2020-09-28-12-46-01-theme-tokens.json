@@ -1,8 +1,0 @@
-{
-  "type": "none",
-  "comment": "remove extra componentTokens reference and route everything to components",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "none",
-  "date": "2020-09-28T19:45:34.388Z"
-}

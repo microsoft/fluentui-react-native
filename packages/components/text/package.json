@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/text",
-  "version": "0.6.14",
+  "version": "0.6.18",
   "description": "A cross-platform Text component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -21,11 +21,12 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.6.86",
+    "@uifabricshared/foundation-compose": "^1.6.90",
     "@fluentui-react-native/adapters": ">=0.3.36 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.5.12 <1.0.0"
+    "@fluentui-react-native/tokens": ">=0.6.0 <1.0.0"
   },
   "devDependencies": {
+    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",

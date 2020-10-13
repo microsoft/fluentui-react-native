@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Track = Separator.customize({ tokens: { separatorWidth: 4 } });
+const Track = Separator.customize({ separatorWidth: 4 });
 
 function onThumbRenderStyle(state: IPressableState, thumbLocation: number): StyleProp<ViewStyle> {
   return {
@@ -61,7 +61,7 @@ function calculateThumbLocationAndValue(
   currentTouchPosition: number,
   trackLength: number,
   minimum: number,
-  maximum: number
+  maximum: number,
 ): [number, number] {
   let newThumbLocation = startTouchThumbLocation + currentTouchPosition - startTouchPosition;
   newThumbLocation = Math.max(0, newThumbLocation);
@@ -143,7 +143,7 @@ export const Slider: React.FunctionComponent<ISliderProps> = (props: ISliderProp
                   e.nativeEvent.pageX,
                   trackLength.current,
                   minimum || defaultMinimumValue,
-                  maximum || defaultMaximumValue
+                  maximum || defaultMaximumValue,
                 );
 
                 sliderValue.current = newValue;

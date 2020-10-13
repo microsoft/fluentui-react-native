@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/experimental-text",
+  "entries": [
+    {
+      "date": "Mon, 12 Oct 2020 04:09:31 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "new variants",
+            "author": "email not defined",
+            "commit": "d1c543f21301b22a84fb6968a2c2612bb487be39",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    }
+  ]
+}

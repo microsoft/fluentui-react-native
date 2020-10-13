@@ -1,11 +1,10 @@
 {
   "name": "@fluentui-react-native/experimental-text",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A cross-platform Text component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
-  "private": true,
   "onPublish": {
     "main": "lib-commonjs/index.js",
     "module": "lib/index.js"
@@ -23,9 +22,10 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.3.36 <1.0.0",
-    "@fluentui-react-native/framework": "0.3.6"
+    "@fluentui-react-native/framework": "0.3.8"
   },
   "devDependencies": {
+    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",

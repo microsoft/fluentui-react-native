@@ -2,6 +2,126 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 13 Oct 2020 01:39:45 GMT",
+      "tag": "@fluentui-react-native/tester_v0.10.2",
+      "version": "0.10.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' into checkbox-focus",
+            "author": "lehon@microsoft.com",
+            "commit": "7a9cef9d56db7ad154e542b4ac5547458dfc604d",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 12 Oct 2020 04:09:31 GMT",
+      "tag": "@fluentui-react-native/tester_v0.10.2",
+      "version": "0.10.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "new test pages",
+            "author": "email not defined",
+            "commit": "d1c543f21301b22a84fb6968a2c2612bb487be39",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 07 Oct 2020 18:52:49 GMT",
+      "tag": "@fluentui-react-native/tester_v0.10.1",
+      "version": "0.10.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Removed references to fabric tester",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "b7a9e169e10402e2d8ee83519999a8cf5c3926d5",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 07 Oct 2020 17:29:29 GMT",
+      "tag": "@fluentui-react-native/tester_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Fixing up RadioGroup/FocusZone test pages",
+            "author": "safreibe@microsoft.com",
+            "commit": "1bc38fbd92b1c5fa39ee2914c0c7e8991eb28701",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 02 Oct 2020 22:37:51 GMT",
+      "tag": "@fluentui-react-native/tester_v0.9.4",
+      "version": "0.9.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "convert themed stylesheet to use memo-cache",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4022a4f0b8376144dba528e418ece2f503a9a5d7",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 02 Oct 2020 22:17:48 GMT",
+      "tag": "@fluentui-react-native/tester_v0.9.3",
+      "version": "0.9.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix web tester",
+            "author": "jasonmo@microsoft.com",
+            "commit": "6214d9eeaf59e3462d1c77fc658486786ec12268",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 01 Oct 2020 16:54:19 GMT",
+      "tag": "@fluentui-react-native/tester_v0.9.2",
+      "version": "0.9.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch Separator to new framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "8aeba690cb213dd628748e1c1b41c3ecfea5f547",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 29 Sep 2020 18:14:46 GMT",
+      "tag": "@fluentui-react-native/tester_v0.9.1",
+      "version": "0.9.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "remove extra componentTokens reference and route everything to components",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f481a7179d21204e0a89bc91e462b7ace0c3f753",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 28 Sep 2020 20:32:21 GMT",
       "tag": "@fluentui-react-native/tester_v0.9.0",
       "version": "0.9.0",

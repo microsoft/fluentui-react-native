@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Picker, Switch } from 'react-native';
-import { FocusZone, Button, Text, RadioGroup, RadioButton, FocusZoneDirection, Checkbox } from '@fluentui/react-native';
+import { FocusZone, Button, Text, FocusZoneDirection, Checkbox } from '@fluentui/react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { FOCUSZONE_TESTPAGE } from './consts';
 import { focusZoneTestStyles, stackStyleFocusZone } from './styles';
@@ -11,52 +11,47 @@ const directionalFocusZone: React.FunctionComponent<{}> = () => {
   return (
     <View>
       <Button content="Outside FocusZone" />
+      <Text variant="headerSemibold">FocusZone with Bidirectional arrow key navigation</Text>
       <FocusZone focusZoneDirection='bidirectional'>
-        <RadioGroup label="FocusZone RadioGroup with Bidirectional arrow key navigation" defaultSelectedKey="A">
-          <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
-          <RadioButton content="Option B" buttonKey="B" />
-          <RadioButton content="Option C" buttonKey="C" disabled={true} />
-          <RadioButton content="Option D" buttonKey="D" />
-        </RadioGroup>
+        <Checkbox label="Option A" />
+        <Checkbox label="Option B" />
+        <Checkbox label="Option C" />
+        <Checkbox label="Option D" />
       </FocusZone>
       <Button content="Outside FocusZone" />
+      <Text variant="headerSemibold">FocusZone with Vertical arrow key navigation</Text>
       <FocusZone focusZoneDirection='vertical'>
-        <RadioGroup label="FocusZone RadioGroup with Vertical arrow key navigation" defaultSelectedKey="A">
-          <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
-          <RadioButton content="Option B" buttonKey="B" />
-          <RadioButton content="Option C" buttonKey="C" disabled={true} />
-          <RadioButton content="Option D" buttonKey="D" />
-        </RadioGroup>
+        <Checkbox label="Option A" />
+        <Checkbox label="Option B" />
+        <Checkbox label="Option C" />
+        <Checkbox label="Option D" />
       </FocusZone>
       <Button content="Outside FocusZone" />
+      <Text variant="headerSemibold">FocusZone with Horizontal arrow key navigation</Text>
       <FocusZone focusZoneDirection='horizontal'>
-        <RadioGroup label="FocusZone RadioGroup with Horizontal arrow key navigation" defaultSelectedKey="A">
-          <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
-          <RadioButton content="Option B" buttonKey="B" />
-          <RadioButton content="Option C" buttonKey="C" disabled={true} />
-          <RadioButton content="Option D" buttonKey="D" />
-        </RadioGroup>
+        <Checkbox label="Option A" />
+        <Checkbox label="Option B" />
+        <Checkbox label="Option C" />
+        <Checkbox label="Option D" />
       </FocusZone>
       <Button content="Outside FocusZone" />
+      <Text variant="headerSemibold">FocusZone with No arrow key navigation</Text>
       <FocusZone focusZoneDirection="none">
-        <RadioGroup label="No arrow keys" defaultSelectedKey="A">
-          <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
-          <RadioButton content="Option B" buttonKey="B" />
-          <RadioButton content="Option C" buttonKey="C" disabled={true} />
-          <RadioButton content="Option D" buttonKey="D" />
-        </RadioGroup>
+        <Checkbox label="Option A" />
+        <Checkbox label="Option B" />
+        <Checkbox label="Option C" />
+        <Checkbox label="Option D" />
       </FocusZone>
       <Button content="Outside FocusZone" />
+      <Text variant="headerSemibold">FocusZone with no props set</Text>
       <FocusZone>
-        <RadioGroup label="No props set" defaultSelectedKey="A">
-          <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
-          <RadioButton content="Option B" buttonKey="B" />
-          <RadioButton content="Option C" buttonKey="C" disabled={true} />
-          <RadioButton content="Option D" buttonKey="D" />
-        </RadioGroup>
+        <Checkbox label="Option A" />
+        <Checkbox label="Option B" />
+        <Checkbox label="Option C" />
+        <Checkbox label="Option D" />
       </FocusZone>
       <Button content="Outside FocusZone" />
-    </View>
+    </View >
   )
 };
 
@@ -64,37 +59,20 @@ const commonUsageFocusZone: React.FunctionComponent<{}> = () => {
   return (
     <View>
       <Button content="Outside FocusZone" />
-      <RadioGroup label="FocusZone RadioGroup with Circular Navigation" defaultSelectedKey="A">
-        <FocusZone isCircularNavigation={true}>
-          <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
-          <RadioButton content="Option B" buttonKey="B" />
-          <RadioButton content="Option C" buttonKey="C" disabled={true} />
-          <RadioButton content="Option D" buttonKey="D" />
-        </FocusZone>
-      </RadioGroup>
-      <Button content="Outside FocusZone" />
-      <FocusZone isCircularNavigation={false}>
-        <RadioGroup label="FocusZone RadioGroup with no Circular Navigation" defaultSelectedKey="A">
-          <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
-          <RadioButton content="Option B" buttonKey="B" />
-          <RadioButton content="Option C" buttonKey="C" disabled={true} />
-          <RadioButton content="Option D" buttonKey="D" />
-        </RadioGroup>
+      <Text variant="headerSemibold">FocusZone with Circular Navigation</Text>
+      <FocusZone isCircularNavigation={true}>
+        <Checkbox label="Option A" />
+        <Checkbox label="Option B" />
+        <Checkbox label="Option C" />
+        <Checkbox label="Option D" />
       </FocusZone>
       <Button content="Outside FocusZone" />
+      <Text variant="headerSemibold">Disabled FocusZone</Text>
       <FocusZone disabled={true}>
-        <RadioGroup label="Disabled" defaultSelectedKey="A">
-          <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
-          <RadioButton content="Option B" buttonKey="B" />
-          <RadioButton content="Option C" buttonKey="C" disabled={true} />
-          <RadioButton content="Option D" buttonKey="D" />
-        </RadioGroup>
-      </FocusZone>
-      <Button content="Outside FocusZone" />
-      <FocusZone disabled={true}>
-        <Checkbox label="disabled" />
-        <Checkbox label="disabled" />
-        <Checkbox label="disabled" />
+        <Checkbox label="Option A" />
+        <Checkbox label="Option B" />
+        <Checkbox label="Option C" />
+        <Checkbox label="Option D" />
       </FocusZone>
       <Button content="Outside FocusZone" />
     </View>
@@ -114,18 +92,18 @@ const navigation2DFocusZone: React.FunctionComponent<{}> = () => {
         <View style={focusZoneTestStyles.focusZoneContainer}>
           <View style={focusZoneTestStyles.focusZoneViewStyle}>
             <Button content="#1" style={focusZoneTestStyles.focusZoneButton} />
-            <Button content="#5" style={focusZoneTestStyles.focusZoneButton} />
-            <Button content="#5" style={focusZoneTestStyles.focusZoneButton} />
+            <Button content="#2" style={focusZoneTestStyles.focusZoneButton} />
+            <Button content="#3" style={focusZoneTestStyles.focusZoneButton} />
           </View>
           <View style={focusZoneTestStyles.focusZoneViewStyle}>
-            <Button style={focusZoneTestStyles.focusZoneButton} content="#2" />
-            <Button componentRef={buttonRef} style={focusZoneTestStyles.focusZoneButton} content="Test" />
-            <Button content="#5" style={focusZoneTestStyles.focusZoneButton} />
+            <Button content="#4" style={focusZoneTestStyles.focusZoneButton} />
+            <Button content="#5" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRef} />
+            <Button content="#6" style={focusZoneTestStyles.focusZoneButton} />
           </View>
           <View style={focusZoneTestStyles.focusZoneViewStyle}>
-            <Button style={focusZoneTestStyles.focusZoneButton} content="#3" />
-            <Button style={focusZoneTestStyles.focusZoneButton} content="Test" />
-            <Button content="#5" style={focusZoneTestStyles.focusZoneButton} />
+            <Button content="#7" style={focusZoneTestStyles.focusZoneButton} />
+            <Button content="#8" style={focusZoneTestStyles.focusZoneButton} />
+            <Button content="#9" style={focusZoneTestStyles.focusZoneButton} />
           </View>
         </View>
       </FocusZone>
@@ -207,18 +185,18 @@ const customizableFocusZone: React.FunctionComponent<{}> = () => {
           <View style={focusZoneTestStyles.focusZoneContainer}>
             <View style={focusZoneTestStyles.focusZoneViewStyle}>
               <Button content="#1" style={focusZoneTestStyles.focusZoneButton} />
-              <Button content="#5" style={focusZoneTestStyles.focusZoneButton} />
-              <Button content="#5" style={focusZoneTestStyles.focusZoneButton} />
+              <Button content="#2" style={focusZoneTestStyles.focusZoneButton} />
+              <Button content="#3" style={focusZoneTestStyles.focusZoneButton} />
             </View>
             <View style={focusZoneTestStyles.focusZoneViewStyle}>
-              <Button style={focusZoneTestStyles.focusZoneButton} content="#2" />
-              <Button style={focusZoneTestStyles.focusZoneButton} content="Test" />
+              <Button content="#4" style={focusZoneTestStyles.focusZoneButton} />
               <Button content="#5" style={focusZoneTestStyles.focusZoneButton} />
+              <Button content="#6" style={focusZoneTestStyles.focusZoneButton} />
             </View>
             <View style={focusZoneTestStyles.focusZoneViewStyle}>
-              <Button style={focusZoneTestStyles.focusZoneButton} content="#3" />
-              <Button style={focusZoneTestStyles.focusZoneButton} content="Test" />
-              <Button content="#5" style={focusZoneTestStyles.focusZoneButton} />
+              <Button content="#7" style={focusZoneTestStyles.focusZoneButton} />
+              <Button content="#8" style={focusZoneTestStyles.focusZoneButton} />
+              <Button content="#9" style={focusZoneTestStyles.focusZoneButton} />
             </View>
           </View>
         </FocusZone>
@@ -242,7 +220,7 @@ const focusZoneSections: TestSection[] = [
     component: commonUsageFocusZone
   },
   {
-    name: '2D Navigation with Default Tabbable Element FocusZone Usage',
+    name: '2D Navigation with Default Tabbable Element (#5) FocusZone Usage',
     component: navigation2DFocusZone
   },
   {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { RadioButton, RadioGroup, Button } from '@fluentui/react-native';
+import { RadioButton, RadioGroup, Separator, Button } from '@fluentui/react-native';
 import { RADIOGROUP_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
@@ -31,6 +31,7 @@ const basicRadioGroup: React.FunctionComponent<{}> = () => {
         <RadioButton content="Option C" buttonKey="C" disabled={true} />
         <RadioButton content="Option D" buttonKey="D" />
       </RadioGroup>
+      <Separator />
       <Button content="Separate" />
       <RadioGroup label="SelectedKey Set" selectedKey={selectedKey} onChange={onChange2}>
         <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
@@ -38,6 +39,7 @@ const basicRadioGroup: React.FunctionComponent<{}> = () => {
         <RadioButton content="Option C" buttonKey="C" disabled={true} />
         <RadioButton content="Option D" buttonKey="D" />
       </RadioGroup>
+      <Separator />
       <RadioGroup label="SelectedKey Set" selectedKey={selectedKey} defaultSelectedKey="C" onChange={onChange2}>
         <RadioButton content="Option A" buttonKey="A" ariaLabel="Cool" />
         <RadioButton content="Option B" buttonKey="B" />

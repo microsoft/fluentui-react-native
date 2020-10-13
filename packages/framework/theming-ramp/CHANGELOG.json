@@ -2,6 +2,51 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Tue, 13 Oct 2020 01:39:45 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "add focused state condition to onKeyUp callback",
+            "author": "lehon@microsoft.com",
+            "commit": "7a9cef9d56db7ad154e542b4ac5547458dfc604d",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 12 Oct 2020 04:09:31 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "added button semantic colors",
+            "author": "email not defined",
+            "commit": "d1c543f21301b22a84fb6968a2c2612bb487be39",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 29 Sep 2020 18:34:10 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.12",
+      "version": "0.10.12",
+      "comments": {
+        "none": [
+          {
+            "comment": "add test-tools package with mock theme",
+            "author": "jasonmo@microsoft.com",
+            "commit": "01dcf3ba988bebd5cab620f5e78f40ff1a7a55f6",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 28 Sep 2020 20:32:21 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.10.11",
       "version": "0.10.11",

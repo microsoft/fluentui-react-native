@@ -9,15 +9,18 @@ export const settings: IComposeSettings<IButtonType> = [
       color: 'buttonText',
       borderColor: 'buttonBorder',
       borderWidth: 1,
-      borderRadius: 2
+      borderRadius: 2,
     },
     root: {
       accessible: true,
       acceptsKeyboardFocus: true,
+      focusable: true,
       accessibilityRole: 'button',
-      style: { display: 'flex', alignItems: 'flex-start', flexDirection: 'row', alignSelf: 'flex-start' }
+      style: { display: 'flex', alignItems: 'flex-start', flexDirection: 'row', alignSelf: 'flex-start' },
     } as ViewProps,
-    content: {},
+    content: {
+      // accessible: false,
+    },
     icon: {},
     stack: {
       style: {
@@ -29,8 +32,8 @@ export const settings: IComposeSettings<IButtonType> = [
         alignSelf: 'flex-start',
         minHeight: 32,
         minWidth: 80,
-        justifyContent: 'center'
-      }
+        justifyContent: 'center',
+      },
     },
     _precedence: ['hovered', 'focused', 'pressed', 'disabled'],
     _overrides: {
@@ -38,31 +41,31 @@ export const settings: IComposeSettings<IButtonType> = [
         tokens: {
           backgroundColor: 'buttonBackgroundDisabled',
           color: 'buttonTextDisabled',
-          borderColor: 'buttonBorderDisabled'
-        }
+          borderColor: 'buttonBorderDisabled',
+        },
       },
       hovered: {
         tokens: {
           backgroundColor: 'buttonBackgroundHovered',
           color: 'buttonTextHovered',
-          borderColor: 'buttonBorderHovered'
-        }
+          borderColor: 'buttonBorderHovered',
+        },
       },
       pressed: {
         tokens: {
           backgroundColor: 'buttonBackgroundPressed',
           color: 'buttonTextPressed',
-          borderColor: 'buttonBorderPressed'
-        }
+          borderColor: 'buttonBorderPressed',
+        },
       },
       focused: {
         tokens: {
           borderColor: 'buttonBorderFocused',
           color: 'buttonTextHovered',
-          backgroundColor: 'buttonBackgroundHovered'
-        }
-      }
-    }
+          backgroundColor: 'buttonBackgroundHovered',
+        },
+      },
+    },
   },
-  buttonName
+  buttonName,
 ];

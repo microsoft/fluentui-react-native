@@ -6,8 +6,8 @@ import { Stack } from '@fluentui-react-native/stack';
 import { SEPARATOR_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
-const BlueSeparator = Separator.customize({ tokens: { color: 'blue' } });
-const RedSeparator = Separator.customize({ tokens: { color: 'red' } });
+const BlueSeparator = Separator.customize({ color: 'blue' });
+const RedSeparator = Separator.customize({ color: 'red' });
 
 const separator: React.FunctionComponent<{}> = () => {
   return (

@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Mon, 28 Sep 2020 20:32:21 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Oct 2020 04:09:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Mon, 12 Oct 2020 04:09:31 GMT
+
+### Minor changes
+
+- button semantic colors (email not defined)
+
+## 0.2.1
+
+Tue, 29 Sep 2020 18:14:46 GMT
+
+### Patches
+
+- remove extra componentTokens reference and route everything to components (jasonmo@microsoft.com)
 
 ## 0.2.0
 

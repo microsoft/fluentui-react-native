@@ -2,6 +2,7 @@ import ButtonTestPage from '../../Button/pages/ButtonTestPage.win';
 import CalloutTestPage from '../../Callout/pages/CalloutTestPage.win';
 import CheckboxTestPage from '../../Checkbox/pages/CheckboxTestPage.win';
 import FocusTrapZoneTestPage from '../../FocusTrapZone/pages/FocusTrapZonePage.win';
+import FocusZoneTestPage from '../../FocusZone/pages/FocusZoneTestPage.win';
 import LinkTestPage from '../../Link/pages/LinkTestPage.win';
 import PersonaTestPage from '../../Persona/pages/PersonaTestPage.win';
 import PersonaCoinTestPage from '../../PersonaCoin/pages/PersonaCoinTestPage.win';
@@ -17,14 +18,14 @@ const BOOT_APP_TIMEOUT = 60000;
 const PAGE_TIMEOUT = 3000;
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Open the app', function() {
+describe('Open the app', function () {
   it('Boot app', () => {
     BootTestPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     expect(BootTestPage.isPageLoaded()).toBeTruthy();
   });
 });
 
-describe('Click on each test page and check if it renders', function() {
+describe('Click on each test page and check if it renders', function () {
   it('Button Test Page', () => {
     BootTestPage.clickAndGoToButtonPage();
     ButtonTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
@@ -47,6 +48,12 @@ describe('Click on each test page and check if it renders', function() {
     BootTestPage.clickAndGoToFocusTrapZonePage();
     FocusTrapZoneTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(FocusTrapZoneTestPage.isPageLoaded()).toBeTruthy();
+  });
+
+  it('FocusZone Test Page', () => {
+    BootTestPage.clickAndGoToFocusZonePage();
+    FocusZoneTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+    expect(FocusZoneTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Link Test Page', () => {
