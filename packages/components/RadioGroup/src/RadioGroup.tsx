@@ -30,10 +30,10 @@ export const RadioGroup = compose<IRadioGroupType>({
   displayName: radioGroupName,
 
   usePrepareProps: (userProps: IRadioGroupProps, useStyling: IUseComposeStyling<IRadioGroupType>) => {
-    const { label, ariaLabel, selectedKey, ...rest } = userProps;
+    const { label, ariaLabel, selectedKey, defaultSelectedKey, ...rest } = userProps;
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
-    const data = useSelectedKey(selectedKey || userProps.defaultSelectedKey || null, userProps.onChange);
+    const data = useSelectedKey(selectedKey || defaultSelectedKey || null, userProps.onChange);
 
     const state: IRadioGroupState = {
       context: {
