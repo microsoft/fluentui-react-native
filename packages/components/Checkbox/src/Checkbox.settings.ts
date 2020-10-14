@@ -45,8 +45,8 @@ export const settings: IComposeSettings<ICheckboxType> = [
     content: {
       variant: 'bodyStandard',
       style: {
-        borderStyle: 'dotted',
-        borderWidth: 1,
+        borderStyle: 'solid',
+        borderWidth: 2,
         marginTop: 3
       }
     },
