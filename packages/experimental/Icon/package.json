@@ -18,7 +18,7 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.3.1",
+    "@fluentui-react-native/framework": "0.3.8",
     "@uifabricshared/foundation-compose": "^1.6.73",
     "@fluentui-react-native/text": "^0.6.0 < 1.0.0",
     "@fluentui-react-native/tokens": ">=0.5.1 <1.0.0"
