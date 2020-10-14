@@ -89,5 +89,6 @@ export const tests: TestDescription[] = [
   {
     name: 'Icon Test',
     component: IconTest,
-    testPage: HOMEPAGE_ICON_BUTTON
+    testPage: HOMEPAGE_ICON_BUTTON,
+  },
 ];
