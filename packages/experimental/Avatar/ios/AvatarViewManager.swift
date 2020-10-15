@@ -13,15 +13,15 @@ class AvatarViewManager: RCTViewManager {
 	}
 
 	override func constantsToExport() -> [AnyHashable : Any]! {
-			return [
-				"sizes" : [
-					"xSmall" : AvatarSize.extraSmall.size.width,
-					"small" : AvatarSize.small.size.width,
-					"medium" : AvatarSize.medium.size.width,
-					"large" : AvatarSize.large.size.width,
-					"xLarge" : AvatarSize.extraLarge.size.width,
-					"xxLarge" : AvatarSize.extraExtraLarge.size.width
-				]
+		return [
+			"sizes" : [
+				"xSmall" : AvatarSize.extraSmall.size.width,
+				"small" : AvatarSize.small.size.width,
+				"medium" : AvatarSize.medium.size.width,
+				"large" : AvatarSize.large.size.width,
+				"xLarge" : AvatarSize.extraLarge.size.width,
+				"xxLarge" : AvatarSize.extraExtraLarge.size.width
 			]
-		}
+		]
+	}
 }
