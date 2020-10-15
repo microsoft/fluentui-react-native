@@ -17,16 +17,18 @@ export const RadioButton = compose<IRadioButtonType>({
   displayName: radioButtonName,
 
   usePrepareProps: (userProps: IRadioButtonProps, useStyling: IUseComposeStyling<IRadioButtonType>) => {
-    const { content, buttonKey, disabled, ariaLabel, ...rest } = userProps;
+    const { content, buttonKey, disabled, ariaLabel, componentRef, ...rest } = userProps;
+
+    // Since we're overriding pressable's onFocus below, pressable.state.focused does not get updated.
+    // We need to track whether the RadioButton is focused or not manually.
+    const [isButtonFocused, setIsFocused] = React.useState(false);
 
     // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
     const info = React.useContext(RadioGroupContext);
 
     const pressable = useAsPressable(rest);
 
-    const buttonRef = useViewCommandFocus(userProps.componentRef);
-
-    const [isButtonFocused, setIsFocused] = React.useState(false);
+    const buttonRef = useViewCommandFocus(componentRef);
 
     // Used when creating accessibility properties in mergeSettings below
     const onAccessibilityAction = React.useCallback(
@@ -62,17 +64,13 @@ export const RadioButton = compose<IRadioButtonType>({
       setIsFocused(true);
     }, [state, pressable.props, info, buttonKey]);
 
-    const removeFocus = () => {
-      setIsFocused(false);
-    };
-
     const slotProps = mergeSettings<IRadioButtonSlotProps>(styleProps, {
       root: {
         rest,
         ref: buttonRef,
         ...pressable.props,
         onFocus: onFocusChange,
-        onBlur: removeFocus,
+        onBlur: () => setIsFocused(false),
         accessibilityRole: 'radio',
         accessibilityLabel: ariaLabel ? ariaLabel : content,
         accessibilityState: { disabled: state.disabled, selected: state.selected },
