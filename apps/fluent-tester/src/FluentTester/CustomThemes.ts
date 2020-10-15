@@ -173,7 +173,7 @@ export function registerThemes(): void {
   customRegistry.setTheme(getFakeBrandTheme('Office'));
   customRegistry.setTheme(caterpillarTheme, 'Caterpillar');
   // this registers platform white colors
-  customRegistry.setTheme(ThemingModuleHelper.getPlatformThemeDefinition('WhiteColors'), 'RealWhiteColors');
+  customRegistry.setTheme(ThemingModuleHelper.getPlatformThemeDefinition('TaskPaneCard_VisualRefresh'), 'RealWhiteColors');
   // this applies the shim to the white colors theme
   customRegistry.setTheme(getFakeBrandTheme('Office'), 'WhiteColors', 'RealWhiteColors');
 }

@@ -26,7 +26,7 @@ export const commonTestStyles = StyleSheet.create({
   settings: {
     flexGrow: 1,
   },
-  slider: {
+  vmargin: {
     marginVertical: 6,
   },
   stack: {
