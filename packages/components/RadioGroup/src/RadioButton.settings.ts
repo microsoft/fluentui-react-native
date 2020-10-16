@@ -65,7 +65,6 @@ export const settings: IComposeSettings<IRadioButtonType> = [
         borderWidth: 1
       }
     },
-    // This still uses the innerCircle's 'hover' style instead of the 'focused' style when need be. I'm commenting out
     _precedence: ['disabled', 'hovered', 'focused', 'selected'],
     _overrides: {
       selected: {
