@@ -1,14 +1,16 @@
 require 'json'
 
 package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
-version = package['version']
 
 Pod::Spec.new do |s|
-  s.name             = 'FRNShimmer'
-  s.version          = "#{version}"
-  s.summary          = 'Fluent UI React Native Shimmer Component'
-  s.homepage         = "https://www.microsoft.com/design/fluent/#/"
-  s.author           = { "Microsoft" => "fluentuinativeowners@microsoft.com"}
+  s.name         = 'FRNShimmer'
+  s.version      = package['version']
+  s.summary      = package['description']
+  s.license      = package['license']
+
+  s.authors      = package['author']
+  s.homepage     = package['homepage']
+
   s.source           = { :git => "https://github.com/microsoft/fluentui-react-native.git", :tag => "#{s.version}" }
   s.swift_version    = "5"
 
