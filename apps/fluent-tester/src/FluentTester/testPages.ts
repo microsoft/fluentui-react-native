@@ -1,4 +1,5 @@
 import { TestDescription } from './TestComponents';
+import { AvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './TestComponents/FocusTrapZone';
@@ -16,6 +17,11 @@ import { HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL, ExperimentalButtonTest } from './Te
 import { HOMEPAGE_FOCUSZONE_BUTTON, FocusZoneTest } from './TestComponents/FocusZone';
 
 export const tests: TestDescription[] = [
+  {
+    name: 'Avatar Test',
+    component: AvatarTest,
+    testPage: HOMEPAGE_AVATAR_BUTTON,
+  },
   {
     name: 'Button Test',
     component: ButtonTest,

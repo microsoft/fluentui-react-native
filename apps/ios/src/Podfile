@@ -29,6 +29,7 @@ use_test_app! do |target|
   target.app do
 
     pod 'FRNShimmer', :path => '../../../packages/components/Shimmer/FRNShimmer.podspec'
+    pod 'FRNAvatar', :path => '../../../packages/experimental/Avatar/FRNAvatar.podspec'
 
     script_phase name: 'Start Packager',
                  script: start_packager_script,

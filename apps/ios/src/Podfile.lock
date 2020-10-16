@@ -18,6 +18,9 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
+  - FRNAvatar (0.1.0):
+    - MicrosoftFluentUI (~> 0.1.12)
+    - React
   - FRNShimmer (0.2.10):
     - MicrosoftFluentUI (~> 0.1.12)
     - React
@@ -248,7 +251,7 @@ PODS:
     - ReactCommon/callinvoker (= 0.62.2)
   - ReactTestApp-DevSupport (0.2.9)
   - ReactTestApp-Resources (1.0.0-dev)
-  - SwiftLint (0.40.1)
+  - SwiftLint (0.40.3)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -256,6 +259,7 @@ DEPENDENCIES:
   - FBLazyVector (from `../../../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Folly (from `../../../node_modules/react-native/third-party-podspecs/Folly.podspec`)
+  - FRNAvatar (from `../../../packages/experimental/Avatar/FRNAvatar.podspec`)
   - FRNShimmer (from `../../../packages/components/Shimmer/FRNShimmer.podspec`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - QRCodeReader.swift
@@ -302,6 +306,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/Libraries/FBReactNativeSpec"
   Folly:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/Folly.podspec"
+  FRNAvatar:
+    :path: "../../../packages/experimental/Avatar/FRNAvatar.podspec"
   FRNShimmer:
     :path: "../../../packages/components/Shimmer/FRNShimmer.podspec"
   glog:
@@ -357,6 +363,7 @@ SPEC CHECKSUMS:
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
+  FRNAvatar: e94fbee038f68a012c040be68de8ffa8b10cbcd6
   FRNShimmer: 7a5670128a5f431caea54b28ae8fcb71781f7598
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   MicrosoftFluentUI: dbebf152cd2e7864ace2d5079d509ec1fee19cbf
@@ -382,9 +389,9 @@ SPEC CHECKSUMS:
   ReactCommon: ed4e11d27609d571e7eee8b65548efc191116eb3
   ReactTestApp-DevSupport: 9a0663d12f90115e646ddbf070566c646a7b9fd1
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
-  SwiftLint: bbfed21bf4451dcbd0f5cdbee44a18e06cf91b12
+  SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
 
-PODFILE CHECKSUM: a2d68742475a23dd487e682a3b64e137eec2917f
+PODFILE CHECKSUM: 3725ac6a58a68a30363bc972891a9ea72b385b2c
 
 COCOAPODS: 1.9.3
