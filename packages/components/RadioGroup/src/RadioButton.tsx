@@ -46,7 +46,7 @@ export const RadioButton = compose<IRadioButtonType>({
       ...pressable.state,
       selected: info.selectedKey === userProps.buttonKey,
       disabled: disabled || false,
-      isFocused: isButtonFocused
+      focused: isButtonFocused
     };
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
