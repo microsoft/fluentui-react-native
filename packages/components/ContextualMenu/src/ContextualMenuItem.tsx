@@ -1,14 +1,21 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { Image, View } from 'react-native';
-import { ContextualMenuItemSlotProps, ContextualMenuItemState, ContextualMenuItemProps, ContextualMenuItemRenderData, contextualMenuItemName, ContextualMenuItemType } from './ContextualMenuItem.types';
+import {
+  ContextualMenuItemSlotProps,
+  ContextualMenuItemState,
+  ContextualMenuItemProps,
+  ContextualMenuItemRenderData,
+  contextualMenuItemName,
+  ContextualMenuItemType,
+} from './ContextualMenuItem.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
 import { settings } from './ContextualMenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyCallback, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
 
 export const ContextualMenuItem = compose<ContextualMenuItemType>({
@@ -22,6 +29,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       accessibilityLabel = userProps.text,
       onClick,
       testID,
+      componentRef = React.useRef(null),
       ...rest
     } = userProps;
 
@@ -29,29 +37,30 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     const context = React.useContext(CMContext);
 
     const onItemClick = React.useCallback(
-      e => {
+      (e) => {
         if (!disabled) {
           context ?.onDismissMenu();
           if (onClick) {
             onClick();
-          }
-          else {
+          } else {
             context.onItemClick && context.onItemClick(itemKey);
           }
           e.stopPropagation();
         }
-      }, [context, disabled, itemKey, onClick]
+      },
+      [context, disabled, itemKey, onClick],
     );
 
-    const onKeyUp = React.useCallback(
-      e => {
-        if (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ') {
-          onItemClick(e);
-        }
-      }, [onItemClick]);
+    const cmRef = useViewCommandFocus(componentRef);
+    //const cmRef = React.useRef(null);
+    const onItemHoverIn = React.useCallback(
+      () => {
+        componentRef.current.focus();
+      }, [componentRef]);
 
-    // attach the pressable state handlers
-    const pressable = useAsPressable({ ...rest, onPress: onItemClick });
+    const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn });
+
+    const onKeyUp = useKeyCallback(onItemClick, ' ', 'Enter');
 
     // set up state
     const state: ContextualMenuItemState = {
@@ -59,10 +68,29 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       selected: context.selectedKey === userProps.itemKey,
       disabled: userProps.disabled,
       content: !!text,
-      icon: !!icon
+      icon: !!icon,
     };
 
-    const cmRef = useViewCommandFocus(userProps.componentRef);
+    /*
+    * On Desktop, focus gets moved to the root of the menu, so hovering off the menu does not automatically call onBlur as we expect it to.
+    * OnMouseEnter and onMouseLeave are overridden with the below callbacks that calls onFocus and onBlur explicitly
+    */
+    const onMouseEnter = React.useCallback(
+      e => {
+        pressable.props.onMouseEnter && pressable.props.onMouseEnter(e);
+        pressable.props.onFocus && pressable.props.onFocus(e);
+        e.stopPropagation();
+      },
+      [pressable]);
+
+    const onMouseLeave = React.useCallback(
+      e => {
+        pressable.props.onMouseLeave && pressable.props.onMouseLeave(e);
+        pressable.props.onBlur && pressable.props.onBlur(e);
+        e.stopPropagation();
+      },
+      [pressable]);
+
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
     // create the merged slot props
@@ -71,17 +99,18 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         ...pressable.props,
         ref: cmRef,
         onKeyUp: onKeyUp,
+        onMouseEnter: onMouseEnter,
+        onMouseLeave: onMouseLeave,
         accessibilityLabel: accessibilityLabel
       },
       content: { children: text, testID },
-      icon: { source: icon }
+      icon: { source: icon },
     });
 
     return { slotProps, state };
   },
   settings,
   render: (Slots: ISlots<ContextualMenuItemSlotProps>, renderData: ContextualMenuItemRenderData, ...children: React.ReactNode[]) => {
-
     // We shouldn't have to specify the source prop on Slots.icon, here, but we need another drop from @uifabricshared
     return (
       <Slots.root>
@@ -97,14 +126,14 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     root: View,
     stack: { slotType: View },
     icon: { slotType: Image as React.ComponentType<object> },
-    content: Text
+    content: Text,
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
     stack: [],
     icon: [foregroundColorTokens],
-    content: [textTokens, foregroundColorTokens]
-  }
+    content: [textTokens, foregroundColorTokens],
+  },
 });
 
 export default ContextualMenuItem;

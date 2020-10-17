@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 02 Oct 2020 22:37:51 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Oct 2020 04:09:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.2
+
+Mon, 12 Oct 2020 04:09:31 GMT
+
+### Patches
+
+- new test pages (email not defined)
+
+## 0.10.1
+
+Wed, 07 Oct 2020 18:52:49 GMT
+
+### Patches
+
+- Removed references to fabric tester (saadnajmi2@gmail.com)
+
+## 0.10.0
+
+Wed, 07 Oct 2020 17:29:29 GMT
+
+### Minor changes
+
+- Fixing up RadioGroup/FocusZone test pages (safreibe@microsoft.com)
 
 ## 0.9.4
 

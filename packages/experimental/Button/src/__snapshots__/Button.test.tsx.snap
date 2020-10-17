@@ -6,6 +6,7 @@ exports[`Button component tests Button default 1`] = `
   accessibilityLabel="Default Button"
   accessibilityRole="button"
   accessible={true}
+  focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -18,7 +19,7 @@ exports[`Button component tests Button default 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "alignItems": "flex-start",
+      "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#f3f2f1",
       "borderColor": "#8a8886",
@@ -26,37 +27,27 @@ exports[`Button component tests Button default 1`] = `
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 32,
+      "minWidth": 80,
+      "paddingEnd": 16,
+      "paddingStart": 16,
+      "width": undefined,
     }
   }
 >
-  <View
+  <Text
     style={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "minHeight": 32,
-        "minWidth": 80,
-        "paddingEnd": 16,
-        "paddingStart": 16,
+        "color": "#323130",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
       }
     }
   >
-    <Text
-      style={
-        Object {
-          "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 12,
-          "fontWeight": "400",
-          "margin": 0,
-        }
-      }
-    >
-      Default Button
-    </Text>
-  </View>
+    Default Button
+  </Text>
 </View>
 `;

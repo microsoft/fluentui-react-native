@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-settings",
   "entries": [
     {
+      "date": "Tue, 13 Oct 2020 01:39:45 GMT",
+      "tag": "@uifabricshared/foundation-settings_v0.7.2",
+      "version": "0.7.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "add focused state condition to onKeyUp callback",
+            "author": "lehon@microsoft.com",
+            "commit": "7a9cef9d56db7ad154e542b4ac5547458dfc604d",
+            "package": "@uifabricshared/foundation-settings"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Sep 2020 19:21:43 GMT",
       "tag": "@uifabricshared/foundation-settings_v0.7.2",
       "version": "0.7.2",
