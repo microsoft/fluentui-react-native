@@ -26,6 +26,8 @@
     "@fluentui-react-native/interactive-hooks": ">=0.6.0 <1.0.0",
     "@fluentui-react-native/experimental-avatar": ">=0.2.0 <1.0.0",
     "@fluentui-react-native/experimental-button": "0.2.0",
+    "@fluentui-react-native/experimental-text": ">=0.1.1 <1.0.0",
+    "@fluentui-react-native/default-theme": ">=0.1.5 <1.0.0",
     "@fluentui-react-native/theme": ">=0.3.0 <1.0.0",
     "@fluentui-react-native/theme-types": ">=0.3.0 <1.0.0",
     "@fluentui-react-native/win32-theme": ">=0.4.0 <1.0.0",
