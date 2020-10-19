@@ -1,4 +1,5 @@
 import { TestDescription } from './TestComponents';
+import { AvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './TestComponents/FocusTrapZone';
@@ -12,9 +13,15 @@ import { HOMEPAGE_SHIMMER_BUTTON, ShimmerTest } from './TestComponents/Shimmer';
 import { HOMEPAGE_SVG_BUTTON, SvgTest } from './TestComponents/Svg';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
+import { HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL, ExperimentalButtonTest } from './TestComponents/ButtonExperimental';
 import { HOMEPAGE_FOCUSZONE_BUTTON, FocusZoneTest } from './TestComponents/FocusZone';
 
 export const tests: TestDescription[] = [
+  {
+    name: 'Avatar Test',
+    component: AvatarTest,
+    testPage: HOMEPAGE_AVATAR_BUTTON,
+  },
   {
     name: 'Button Test',
     component: ButtonTest,
@@ -85,4 +92,9 @@ export const tests: TestDescription[] = [
     component: SvgTest,
     testPage: HOMEPAGE_SVG_BUTTON,
   },
+  {
+    name: 'Experimental Button',
+    component: ExperimentalButtonTest,
+    testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL
+  }
 ];

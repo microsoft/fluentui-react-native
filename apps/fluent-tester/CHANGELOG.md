@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 07 Oct 2020 18:52:49 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Oct 2020 18:16:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.0
+
+Mon, 19 Oct 2020 18:16:36 GMT
+
+### Minor changes
+
+- New experimental component avatar (saadnajmi2@gmail.com)
+
+## 0.10.2
+
+Mon, 12 Oct 2020 04:09:31 GMT
+
+### Patches
+
+- new test pages (email not defined)
 
 ## 0.10.1
 
