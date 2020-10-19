@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { View, Picker, StyleSheet } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
-import { getLightness, lightnessOptions, updateThemeAppearance } from './CustomThemes';
-import { getCurrentTheme, setCurrentTheme, themeChoices, ThemeNames } from './applyTheme';
-import { brandOptions, getBrand, OfficeBrand, setBrand } from './applyBrand';
+import { lightnessOptions, testerTheme } from './CustomThemes';
+import { themeChoices, ThemeNames } from './applyTheme';
+import { brandOptions, OfficeBrand } from './applyBrand';
 
 export const themePickerStyles = StyleSheet.create({
   pickerRoot: {
@@ -54,32 +54,32 @@ const PickerLabel = Text.customize({ variant: 'bodySemibold' });
 
 export const ThemePickers: React.FunctionComponent<{}> = () => {
   const onBrandChange = React.useCallback((newBrand: string) => {
-    setBrand(newBrand as OfficeBrand);
+    testerTheme.brand = newBrand as OfficeBrand;
   }, []);
 
   const onThemeSelected = React.useCallback((newTheme: string) => {
-    setCurrentTheme(newTheme as ThemeNames);
+    testerTheme.themeName = newTheme as ThemeNames;
   }, []);
 
   const onAppearanceChange = React.useCallback((newAppearance: string) => {
-    updateThemeAppearance(newAppearance as 'light' | 'dark' | 'dynamic');
+    testerTheme.appearance = newAppearance as 'light' | 'dark' | 'dynamic';
   }, []);
 
   return (
     <View style={themePickerStyles.pickerRoot}>
       <View style={themePickerStyles.picker}>
         <PickerLabel>Theme: </PickerLabel>
-        <PartPicker initial={getCurrentTheme()} onChange={onThemeSelected} contents={themeChoices} />
+        <PartPicker initial={testerTheme.themeName} onChange={onThemeSelected} contents={themeChoices} />
       </View>
 
       <View style={themePickerStyles.picker}>
         <PickerLabel>Light/Dark: </PickerLabel>
-        <PartPicker initial={getLightness()} onChange={onAppearanceChange} contents={lightnessOptions} />
+        <PartPicker initial={testerTheme.appearance} onChange={onAppearanceChange} contents={lightnessOptions} />
       </View>
 
       <View style={themePickerStyles.picker}>
         <PickerLabel>Brand: </PickerLabel>
-        <PartPicker initial={getBrand()} onChange={onBrandChange} contents={brandOptions} />
+        <PartPicker initial={testerTheme.brand} onChange={onBrandChange} contents={brandOptions} />
       </View>
     </View>
   );

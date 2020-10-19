@@ -1,6 +1,5 @@
 import { OfficePalette, PartialTheme, Theme } from '@fluentui-react-native/framework';
 import { createPartialOfficeTheme, getThemingModule } from '@fluentui-react-native/win32-theme';
-import { testerTheme } from './CustomThemes';
 
 export type ThemeNames = 'Fluent' | 'Office' | 'Caterpillar';
 
@@ -10,7 +9,7 @@ export const themeChoices = [
   { label: 'Caterpillar', value: 'Caterpillar' },
 ];
 
-export function applyCaterpillarTheme(parent: Theme): PartialTheme {
+function applyCaterpillarTheme(parent: Theme): PartialTheme {
   return parent.host?.appearance === 'dark'
     ? {
         colors: {
@@ -50,24 +49,14 @@ export function applyCaterpillarTheme(parent: Theme): PartialTheme {
       };
 }
 
-let currentTheme: ThemeNames = 'Fluent';
-
 const themingModule = getThemingModule()[0];
 const officeBase = themingModule
   ? createPartialOfficeTheme(themingModule, 'WhiteColors', themingModule.getPalette('WhiteColors') as OfficePalette)
   : {};
 
-export function setCurrentTheme(newTheme: ThemeNames): void {
-  currentTheme = newTheme;
-  testerTheme.invalidate();
-}
-
-export function getCurrentTheme(): ThemeNames {
-  return currentTheme;
-}
-
-export function applyTheme(parent: Theme): PartialTheme {
-  switch (currentTheme) {
+/** apply the currently active theme layering */
+export function applyTheme(parent: Theme, name: ThemeNames): PartialTheme {
+  switch (name) {
     case 'Office':
       return officeBase;
     case 'Caterpillar':

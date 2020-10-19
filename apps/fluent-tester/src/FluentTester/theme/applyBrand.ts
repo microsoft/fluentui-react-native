@@ -1,5 +1,3 @@
-import { testerTheme } from './CustomThemes';
-
 export type OfficeBrand = 'Default' | 'Office' | 'Word' | 'Excel' | 'Powerpoint' | 'Outlook';
 type BrandRampKey = 'App1' | 'App2' | 'App3' | 'App4' | 'App5' | 'App6' | 'App7' | 'App8';
 type BrandRamps = { [K in OfficeBrand]: { [J in BrandRampKey]: string } };
@@ -64,20 +62,9 @@ const brandColors: BrandRamps = {
   },
 };
 
-let currentBrand: OfficeBrand = 'Default';
-
 export const brandOptions = Object.keys(brandColors).map((brand) => ({ label: brand, value: brand }));
 
-export function setBrand(newBrand: OfficeBrand): void {
-  currentBrand = newBrand;
-  testerTheme.invalidate();
-}
-
-export function getBrand(): string {
-  return currentBrand;
-}
-
-export const applyBrand = () => {
+export const applyBrand = (currentBrand: string) => {
   const ramp = brandColors[currentBrand];
   return ramp
     ? {
