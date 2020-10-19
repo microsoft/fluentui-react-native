@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { FlatList, View, ViewStyle, StyleSheet } from 'react-native';
-import { getHostSettingsWin32, useTheme } from '@uifabricshared/theming-react-native';
+import { useTheme, Theme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { commonTestStyles } from '../Common/styles';
 import { Button, PrimaryButton, Text, StealthButton } from '@fluentui/react-native';
-import { ITheme } from '@uifabricshared/theming-ramp';
 import { THEME_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
-const getThemedStyles = themedStyleSheet((theme: ITheme) => {
+const getThemedStyles = themedStyleSheet((theme: Theme) => {
   return {
     swatch: {
       width: 80,
@@ -68,22 +67,21 @@ const SemanticColor: React.FunctionComponent<SemanticColorProps> = (p: SemanticC
   );
 };
 
-const SwatchList: React.FunctionComponent<{ hostKey: string }> = ({ hostKey }: { hostKey: string }) => {
-  const hostSettings = getHostSettingsWin32(useTheme());
-  const themedStyles = getThemedStyles(useTheme());
-
-  if (hostSettings === undefined) return <Text>Error</Text>;
+const SwatchList: React.FunctionComponent = () => {
+  const theme = useTheme();
+  const themedStyles = getThemedStyles(theme);
+  const palette = theme.colors;
 
   const aggregator = React.useCallback(
     (key: string) => {
-      return { name: key + ' (' + hostSettings[hostKey][key] + ')', color: hostSettings[hostKey][key] };
+      return { name: key + ' (' + palette[key] + ')', color: palette[key] };
     },
-    [hostSettings[hostKey]],
+    [palette],
   );
 
   const flattenArray = React.useCallback(() => {
-    return Object.keys(hostSettings[hostKey]).sort().map(aggregator);
-  }, [hostSettings[hostKey], aggregator]);
+    return Object.keys(palette).sort().map(aggregator);
+  }, [palette, aggregator]);
 
   const paletteAsArray = React.useMemo(flattenArray, [flattenArray]);
   const renderSwatch = React.useCallback(({ item }) => {
@@ -92,7 +90,7 @@ const SwatchList: React.FunctionComponent<{ hostKey: string }> = ({ hostKey }: {
   }, []);
   return (
     <View style={[commonTestStyles.view]}>
-      <Text variant="bodySemibold">getHostSettingsWin32(theme: ITheme).{hostKey}</Text>
+      <Text>getHostSettingsWin32(theme: ITheme).palette</Text>
       <View style={themedStyles.stackStyle}>
         <FlatList data={paletteAsArray} renderItem={renderSwatch} />
       </View>
@@ -106,12 +104,8 @@ const themeSections: TestSection[] = [
     component: Panel,
   },
   {
-    name: 'Theme.host.palette',
-    component: () => <SwatchList hostKey="palette" />,
-  },
-  {
-    name: 'Theme.host.colors',
-    component: () => <SwatchList hostKey="colors" />,
+    name: 'Theme.colors',
+    component: () => <SwatchList />,
   },
 ];
 
