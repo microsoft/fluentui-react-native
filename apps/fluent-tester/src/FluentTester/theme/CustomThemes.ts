@@ -44,7 +44,7 @@ export class TesterThemeReference extends ThemeReference {
   }
   public set appearance(lightness: ThemeOptions['appearance']) {
     this.options.appearance = lightness;
-    this.baseTheme.invalidate;
+    this.baseTheme.invalidate();
   }
 
   /** get/set the applied brand */
