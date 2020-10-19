@@ -18,7 +18,7 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
-  - FRNAvatar (0.1.0):
+  - FRNAvatar (0.2.0):
     - MicrosoftFluentUI (~> 0.1.12)
     - React
   - FRNShimmer (0.2.10):
@@ -363,7 +363,7 @@ SPEC CHECKSUMS:
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
-  FRNAvatar: e94fbee038f68a012c040be68de8ffa8b10cbcd6
+  FRNAvatar: e21a28b9b4ed69948c47414ad4b8a23050bb46e6
   FRNShimmer: 7a5670128a5f431caea54b28ae8fcb71781f7598
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   MicrosoftFluentUI: dbebf152cd2e7864ace2d5079d509ec1fee19cbf
