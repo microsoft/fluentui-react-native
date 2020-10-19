@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 19 Oct 2020 18:16:36 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Oct 2020 22:06:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.1
+
+Mon, 19 Oct 2020 22:06:02 GMT
+
+### Patches
+
+- rework theme usage in tester (jasonmo@microsoft.com)
 
 ## 0.11.0
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Tue, 13 Oct 2020 01:39:45 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Oct 2020 22:06:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.1
+
+Mon, 19 Oct 2020 22:06:02 GMT
+
+### Patches
+
+- rework theme usage in tester (jasonmo@microsoft.com)
 
 ## 0.7.0
 

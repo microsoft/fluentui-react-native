@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-button",
   "entries": [
     {
+      "date": "Mon, 19 Oct 2020 22:06:02 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "rework theme usage in tester",
+            "author": "jasonmo@microsoft.com",
+            "commit": "5657a340608ad2e1fb6b7e61f92d706e350847b1",
+            "package": "@fluentui-react-native/experimental-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 12 Oct 2020 04:09:31 GMT",
       "tag": "@fluentui-react-native/experimental-button_v0.2.0",
       "version": "0.2.0",

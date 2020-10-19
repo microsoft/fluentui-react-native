@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "rework theme usage in tester",
-  "packageName": "@fluentui-react-native/stack",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-10-04T02:14:57.423Z"
-}

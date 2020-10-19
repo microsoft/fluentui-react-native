@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-text",
   "entries": [
     {
+      "date": "Mon, 19 Oct 2020 22:06:02 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.1.2",
+      "version": "0.1.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "rework theme usage in tester",
+            "author": "jasonmo@microsoft.com",
+            "commit": "5657a340608ad2e1fb6b7e61f92d706e350847b1",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 12 Oct 2020 04:09:31 GMT",
       "tag": "@fluentui-react-native/experimental-text_v0.1.1",
       "version": "0.1.1",
