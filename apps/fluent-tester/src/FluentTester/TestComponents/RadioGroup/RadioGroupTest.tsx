@@ -39,7 +39,7 @@ const basicRadioGroup: React.FunctionComponent<{}> = () => {
         <RadioButton content="Option D" buttonKey="D" />
       </RadioGroup>
       <Separator />
-      <RadioGroup label="Controlled RadioGroup" selectedKey={selectedKey} defaultSelectedKey="D" onChange={onChange2}>
+      <RadioGroup label="Controlled RadioGroup" selectedKey={selectedKey} onChange={onChange2}>
         <RadioButton content="Option A" buttonKey="A" ariaLabel="Test Aria Label" />
         <RadioButton content="Option B" buttonKey="B" />
         <RadioButton content="Option C" buttonKey="C" />
