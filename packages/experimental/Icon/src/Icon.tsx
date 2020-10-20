@@ -2,7 +2,7 @@ import * as React from 'react';
 import { IconProps, SvgIconProps, FontIconProps } from './Icon.types';
 import * as ReactNative from 'react-native';
 import { Text } from '@fluentui-react-native/text';
-import { SvgUri } from 'react-native-svg'
+import { SvgUri } from 'react-native-svg';
 import { mergeStyles } from '@fluentui-react-native/framework';
 import * as assetRegistry from 'react-native/Libraries/Image/AssetRegistry';
 import { stagedComponent, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
@@ -14,16 +14,10 @@ function renderRasterImage(iconProps: IconProps) {
   const { width, height } = iconProps;
   const style = mergeStyles(iconProps.style, rasterImageStyleCache({ width: width, height: height }, [width, height])[0]);
 
-  return (
-    <ReactNative.Image
-      source = {iconProps.rasterImageSource.src}
-      style = {style}
-    />
-  )
+  return <ReactNative.Image source={iconProps.rasterImageSource.src} style={style} />;
 }
 
-function fontFamilyFromFontSrcFile(fontSrcFile: string, fontFamily: string): string
-{
+function fontFamilyFromFontSrcFile(fontSrcFile: string, fontFamily: string): string {
   const asset = assetRegistry.getAssetByID(fontSrcFile);
   return `${fontFamily}#${asset.httpServerLocation}/${asset.name}.${asset.type}`;
 }
@@ -33,18 +27,22 @@ const fontStyleMemoCache = getMemoCache();
 function renderFontIcon(iconProps: IconProps) {
   const fontSource: FontIconProps = iconProps.fontSource;
 
-  const style = fontStyleMemoCache({
+  const style = fontStyleMemoCache(
+    {
       fontSrcFile: fontSource.fontSrcFile,
-      fontFamily: fontSource.fontSrcFile != undefined ? fontFamilyFromFontSrcFile(fontSource.fontSrcFile, fontSource.fontFamily) : fontSource.fontFamily,
+      fontFamily:
+        fontSource.fontSrcFile != undefined
+          ? fontFamilyFromFontSrcFile(fontSource.fontSrcFile, fontSource.fontFamily)
+          : fontSource.fontFamily,
       codepoint: fontSource.codepoint,
       fontSize: fontSource.fontSize,
-      color: iconProps.color
-  }, [iconProps.color, fontSource.fontSrcFile, fontSource.fontFamily, fontSource.codepoint, fontSource.codepoint])[0];
+      color: iconProps.color,
+    },
+    [iconProps.color, fontSource.fontSrcFile, fontSource.fontFamily, fontSource.codepoint, fontSource.codepoint],
+  )[0];
 
   const char = String.fromCharCode(fontSource.codepoint);
-  return(
-    <Text style={style}>{char}</Text>
-  );
+  return <Text style={style}>{char}</Text>;
 }
 
 function renderSvg(iconProps: IconProps) {
@@ -53,31 +51,13 @@ function renderSvg(iconProps: IconProps) {
   const viewBox = iconProps.svgSource.viewBox;
 
   if (svgIconProps.src) {
-    return (
-        <svgIconProps.src
-          viewBox = {viewBox}
-          width = {width}
-          height = {height}
-          color = {iconProps.color}
-        />
-    );
-  }
-  else if (svgIconProps.uri)
-  {
-    return (
-        <SvgUri uri = {svgIconProps.uri}
-          viewBox = {viewBox}
-          width = {width}
-          height = {height}
-          color = {iconProps.color}
-        />
-    )
-  }
-  else {
+    return <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconProps.color} />;
+  } else if (svgIconProps.uri) {
+    return <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconProps.color} />;
+  } else {
     return null;
   }
 }
-
 
 export const Icon = stagedComponent((props: IconProps) => {
   const theme = useTheme();
@@ -86,24 +66,21 @@ export const Icon = stagedComponent((props: IconProps) => {
     const color = props.color || theme.colors.buttonText;
 
     const baseProps = {
-      color: color
+      color: color,
     };
 
     const newProps = mergeProps<IconProps>(baseProps, props, rest);
 
     if (newProps.svgSource) {
       return renderSvg(newProps);
-    }
-    else if (newProps.fontSource) {
+    } else if (newProps.fontSource) {
       return renderFontIcon(newProps);
-    }
-    else if (newProps.rasterImageSource) {
+    } else if (newProps.rasterImageSource) {
       return renderRasterImage(newProps);
-    }
-    else {
+    } else {
       return null;
     }
-  }
+  };
 });
 
 export default Icon;
