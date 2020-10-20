@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/themed-stylesheet
 
-This log was last generated on Fri, 02 Oct 2020 22:37:51 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Oct 2020 22:06:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.2
+
+Mon, 19 Oct 2020 22:06:02 GMT
+
+### Patches
+
+- rework theme usage in tester (jasonmo@microsoft.com)
 
 ## 1.0.1
 

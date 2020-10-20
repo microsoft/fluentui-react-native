@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Mon, 19 Oct 2020 22:06:02 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.6.91",
+      "version": "1.6.91",
+      "comments": {
+        "patch": [
+          {
+            "comment": "rework theme usage in tester",
+            "author": "jasonmo@microsoft.com",
+            "commit": "5657a340608ad2e1fb6b7e61f92d706e350847b1",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 13 Oct 2020 01:39:45 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.6.90",
       "version": "1.6.90",
