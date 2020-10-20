@@ -1,6 +1,10 @@
 {
   "name": "@fluentui-react-native/tester",
   "version": "0.11.1",
+  "description": "A test app to test FluentUI React Native Components during development",
+  "license": "MIT",
+  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
+  "homepage": "https://github.com/microsoft/fluentui-react-native",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -26,7 +30,6 @@
     "@fluentui-react-native/experimental-text": ">=0.1.2 <1.0.0",
     "@fluentui-react-native/framework": ">=0.3.9 <1.0.0",
     "@fluentui-react-native/interactive-hooks": ">=0.6.0 <1.0.0",
-    "@fluentui-react-native/shimmer": "^0.2.9",
     "@fluentui-react-native/stack": ">=0.2.19 <1.0.0",
     "@fluentui-react-native/theme": ">=0.3.1 <1.0.0",
     "@fluentui-react-native/theme-types": ">=0.3.1 <1.0.0",
