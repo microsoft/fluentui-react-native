@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "Add Shimmer dependency to package.json\"",
+  "comment": "Add Shimmer dependency to package.json",
   "packageName": "@fluentui-react-native/tester",
   "email": "saadnajmi2@gmail.com",
   "dependentChangeType": "patch",
