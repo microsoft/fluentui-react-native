@@ -1,0 +1,8 @@
+{
+  "type": "none",
+  "comment": "onDismiss not called when contextual menu is dismissed with item click",
+  "packageName": "@uifabricshared/theme-registry",
+  "email": "lehon@microsoft.com",
+  "dependentChangeType": "none",
+  "date": "2020-10-21T06:16:35.803Z"
+}
