@@ -3,6 +3,14 @@ steps:
   - bash: 'scripts/generate_build_number.sh'
     displayName: 'Generate Build Number'
 
+  # Bundle the Javascript code
+  - script: |
+    yarn bundle
+  displayName: 'yarn bundle'
+
+  # Build the Apple Static Libraries
+  - template: templates/apple-xcode-build-static-libs.yml
+
   # pack the nuspec
   - task: NuGetCommand@2
     displayName: 'NuGet pack'

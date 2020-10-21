@@ -1,4 +1,3 @@
-
 # Build pipeline for publishing
 
 trigger:
@@ -13,7 +12,8 @@ variables:
   - group: 'NPM and Github Secrets'
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'macos-10.15'
+  demands: ['xcode', 'sh', 'npm']
 
 steps:
   - task: NodeTool@0

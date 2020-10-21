@@ -82,22 +82,8 @@ jobs:
       matrix:
         ios:
           relative_directory: 'ios'
-          xcode_sdx: 'ios'
-          xcode_configuration: 'Debug'
-          xcode_workspacePath: 'apps/ios/src/FluentUITester.xcworkspace'
-          xcode_scheme: 'FluentUITester'
-          xcode_actions: 'build'
-          xcode_useXcpretty: true
-          xcode_destination: 'platform=iOS Simulator,OS=latest,name=iPhone 11'
         macos:
           relative_directory: 'macos'
-          xcode_sdx: 'macosx'
-          xcode_configuration: 'Debug'
-          xcode_workspacePath: 'apps/macos/src/FluentUITester.xcworkspace'
-          xcode_scheme: 'FluentUITester-macOS'
-          xcode_actions: 'build'
-          xcode_useXcpretty: true
-          xcode_destination: 'platform=macOS,arch=x86_64'
 
     steps:
       - checkout: self
@@ -122,13 +108,6 @@ jobs:
       # Select proper XCode version
       - template: templates/apple-xcode-select.yml
 
-      - template: templates/apple-xcode-build.yml
+      - template: templates/apple-yarn-build.yml
         parameters:
           relative_directory: $(relative_directory)
-          xcode_sdx: $(xcode_sdx)
-          xcode_configuration: $(xcode_configuration)
-          xcode_workspacePath: $(xcode_workspacePath)
-          xcode_scheme: $(xcode_scheme)
-          xcode_actions: $(xcode_actions)
-          xcode_useXcpretty: $(xcode_useXcpretty)
-          xcode_destination: $(xcode_destination)

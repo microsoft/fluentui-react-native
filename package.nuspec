@@ -9,8 +9,23 @@
         <repository type="git" url="$repoUri$" commit="$commitId$"/>
     </metadata>
     <files>
-        <file src="packages/**/*.*" />
-        <file src="scripts/**/*.*" />
-        <file src="*.*" />
+      <!-- iOS device debug -->
+      <file src="DerivedData\polyester\Build\Products\Debug-iphoneos\libFRN*.a" target="Debug-iphoneos"/>
+      <!-- iOS device ship -->
+      <file src="DerivedData\polyester\Build\Products\Release-iphoneos\libFRN*.a" target="Ship-iphoneos"/>
+      <!-- iOS simulator debug -->
+      <file src="DerivedData\polyester\Build\Products\Debug-iphonesimulator\libFRN*.a" target="Debug-iphonesimulator"/>
+      <!-- iOS simulator ship -->
+      <file src="DerivedData\polyester\Build\Products\Release-iphonesimulator\libFRN*.a" target="Ship-iphonesimulator"/>
+      <!-- macOS debug -->
+      <file src="\DerivedData\polyester\Build\Products\Debug\libFRN*.a" target="Debug-macosx"/>
+      <!-- macOS ship -->
+      <file src="DerivedData\polyester\Build\Products\Release\libFRN*.a" target="Ship-macosx"/>
+
+      <!-- iOS jsbundle -->
+      <file src="apps\ios\dist\index.bundle" target="ios"/>
+
+      <!-- macOS jsbundle -->
+      <file src="apps\macos\dist\index.bundle" target="macos"/>
     </files>
 </package>
