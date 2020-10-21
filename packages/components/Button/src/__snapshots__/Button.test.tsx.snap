@@ -11,6 +11,7 @@ exports[`Button default 1`] = `
     }
   }
   accessible={true}
+  focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}

@@ -1,4 +1,4 @@
-import { RADIOGROUP_TESTPAGE } from '../../../RNTester/TestComponents/RadioGroup/consts';
+import { RADIOGROUP_TESTPAGE } from '../../../FluentTester/TestComponents/RadioGroup/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class RadioGroupPage extends BasePage {

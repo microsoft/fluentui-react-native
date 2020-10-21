@@ -1,4 +1,4 @@
-import { Palette, FabricWebPalette, ThemeColorDefinition, ColorRamp } from '@fluentui-react-native/theme-types';
+import { Palette, FabricWebPalette, ThemeColorDefinition } from '@fluentui-react-native/theme-types';
 
 /**
  * Generate a palette from a set of fabric web colors, like those output from the theme designer.
@@ -17,7 +17,7 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     subText: p.neutralSecondary,
     bodyDivider: p.neutralLight,
 
-    disabledBackground: p.neutralLighter,
+    disabledBackground: isInverted ? p.neutralQuaternaryAlt : p.neutralLighter,
     disabledText: p.neutralTertiary,
     disabledBodyText: p.neutralTertiary,
     disabledSubtext: p.neutralQuaternary,
@@ -55,8 +55,8 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     buttonBackgroundPressed: p.neutralLight,
     buttonBackgroundDisabled: p.neutralLighter,
     buttonBorder: p.neutralSecondaryAlt,
-    buttonText: p.neutralPrimary,
-    buttonTextHovered: p.neutralDark,
+    buttonText: isInverted ? p.black : p.neutralPrimary,
+    buttonTextHovered: isInverted ? p.neutralPrimary : p.neutralDark,
     buttonTextChecked: p.neutralDark,
     buttonTextCheckedHovered: p.black,
     buttonTextPressed: p.neutralDark,
@@ -78,12 +78,12 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     accentButtonBackground: p.accent,
     accentButtonText: p.white,
 
-    menuBackground: p.white,
-    menuDivider: p.neutralTertiaryAlt,
-    menuIcon: p.themePrimary,
-    menuHeader: p.themePrimary,
-    menuItemBackgroundHovered: p.neutralLighter,
-    menuItemBackgroundPressed: p.neutralLight,
+    menuBackground: isInverted ? p.neutralLighter : p.white,
+    menuDivider: isInverted ? p.neutralTertiaryAlt : p.neutralTertiaryAlt,
+    menuIcon: isInverted ? p.themeDarkAlt : p.themePrimary,
+    menuHeader: isInverted ? p.black : p.themePrimary,
+    menuItemBackgroundHovered: isInverted ? p.neutralQuaternaryAlt : p.neutralLighter,
+    menuItemBackgroundPressed: isInverted ? p.neutralQuaternary : p.neutralLight,
     menuItemText: p.neutralPrimary,
     menuItemTextHovered: p.neutralDark,
 
@@ -104,16 +104,8 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
   };
 }
 
-const defaultColorRamp: ColorRamp = {
-  values: [],
-  index: -1,
-};
-
 export function getStockWebPalette(): ThemeColorDefinition {
   return {
-    brand: defaultColorRamp,
-    neutral: defaultColorRamp,
-    warning: defaultColorRamp,
     ...paletteFromFabricColors({
       black: '#000000',
       neutralDark: '#201f1e',
@@ -145,5 +137,43 @@ export function getStockWebPalette(): ThemeColorDefinition {
       accent: '#0078d4',
       blackTranslucent40: 'rgba(0,0,0,.4)',
     }),
+  };
+}
+
+export function getStockWebDarkPalette(): ThemeColorDefinition {
+  return {
+    ...paletteFromFabricColors(
+      {
+        // colors takesn from fluentui DarkCustomizations.ts
+        themeDarker: '#82c7ff',
+        themeDark: '#6cb8f6',
+        themeDarkAlt: '#3aa0f3',
+        themePrimary: '#2899f5',
+        themeSecondary: '#0078d4',
+        themeTertiary: '#235a85',
+        themeLight: '#004c87',
+        themeLighter: '#043862',
+        themeLighterAlt: '#092c47',
+        black: '#ffffff',
+        neutralDark: '#faf9f8',
+        neutralPrimary: '#f3f2f1',
+        neutralPrimaryAlt: '#c8c6c4',
+        neutralSecondary: '#a19f9d',
+        neutralSecondaryAlt: '#979693',
+        neutralTertiary: '#797775',
+        neutralTertiaryAlt: '#484644',
+        neutralQuaternary: '#3b3a39',
+        neutralQuaternaryAlt: '#323130',
+        neutralLight: '#292827',
+        neutralLighter: '#252423',
+        neutralLighterAlt: '#201f1e',
+        white: '#1b1a19',
+        red: '#d13438',
+        accent: '#0078d4',
+        redDark: '#F1707B',
+        blackTranslucent40: 'rgba(0,0,0,.4)',
+      },
+      true,
+    ),
   };
 }

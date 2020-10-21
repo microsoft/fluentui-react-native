@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Fri, 25 Sep 2020 19:21:43 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Oct 2020 22:06:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.23
+
+Mon, 19 Oct 2020 22:06:02 GMT
+
+### Patches
+
+- rework theme usage in tester (jasonmo@microsoft.com)
+
+## 0.10.22
+
+Mon, 12 Oct 2020 04:09:31 GMT
+
+### Patches
+
+- tweaking accessibility (email not defined)
+
+## 0.10.18
+
+Mon, 28 Sep 2020 20:32:21 GMT
+
+### Patches
+
+- move test pages (aliciakds88@gmail.com)
 
 ## 0.10.16
 

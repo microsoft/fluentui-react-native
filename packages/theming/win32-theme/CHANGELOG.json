@@ -2,6 +2,81 @@
   "name": "@fluentui-react-native/win32-theme",
   "entries": [
     {
+      "date": "Tue, 13 Oct 2020 01:39:45 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' into checkbox-focus",
+            "author": "lehon@microsoft.com",
+            "commit": "7a9cef9d56db7ad154e542b4ac5547458dfc604d",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 12 Oct 2020 04:09:31 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "button semantic colors",
+            "author": "email not defined",
+            "commit": "d1c543f21301b22a84fb6968a2c2612bb487be39",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 07 Oct 2020 18:52:49 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.3.2",
+      "version": "0.3.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixing redbox on macOS from theming module",
+            "author": "nakambo@microsoft.com",
+            "commit": "596b95996c66579f66e02be4599a0c26941170d0",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 28 Sep 2020 20:32:21 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "add more host colors",
+            "author": "aliciakds88@gmail.com",
+            "commit": "8338baf6918f763b3ba3b3a7169d1f390ad0557d",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sun, 27 Sep 2020 04:08:27 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "add light and dark awareness to default themes",
+            "author": "jasonmo@microsoft.com",
+            "commit": "0c1e3af0cdf38aea289cc61e5b047837c5e2fb84",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Sep 2020 18:01:57 GMT",
       "tag": "@fluentui-react-native/win32-theme_v0.1.2",
       "version": "0.1.2",

@@ -1,8 +1,40 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Fri, 25 Sep 2020 19:21:43 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Oct 2020 22:06:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.1
+
+Mon, 19 Oct 2020 22:06:02 GMT
+
+### Patches
+
+- rework theme usage in tester (jasonmo@microsoft.com)
+
+## 0.11.0
+
+Mon, 12 Oct 2020 04:09:31 GMT
+
+### Minor changes
+
+- added button semantic colors (email not defined)
+
+## 0.10.11
+
+Mon, 28 Sep 2020 20:32:21 GMT
+
+### Patches
+
+- add more host colors (aliciakds88@gmail.com)
+
+## 0.10.10
+
+Sun, 27 Sep 2020 04:08:27 GMT
+
+### Patches
+
+- add light and dark awareness to default themes (jasonmo@microsoft.com)
 
 ## 0.10.9
 

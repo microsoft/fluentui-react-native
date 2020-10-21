@@ -1,7 +1,6 @@
 export * from './SettingsWorker';
 export * from './Theme';
 export {
-  ColorRamp as IColorRamp,
   ColorValue,
   OfficePalette,
   Palette as IPalette,
@@ -11,4 +10,5 @@ export {
   ThemeColorDefinition as IThemeColorDefinition,
   ThemeContext,
   Typography as ITypography,
+  useTheme,
 } from '@fluentui-react-native/theme-types';

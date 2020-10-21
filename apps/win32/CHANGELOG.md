@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Fri, 25 Sep 2020 19:21:43 GMT and should not be manually modified.
+This log was last generated on Mon, 19 Oct 2020 22:06:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.2
+
+Mon, 19 Oct 2020 22:06:02 GMT
+
+### Patches
+
+- rework theme usage in tester (jasonmo@microsoft.com)
+
+## 0.6.0
+
+Mon, 12 Oct 2020 04:09:31 GMT
+
+### Minor changes
+
+- new test pages (email not defined)
+
+## 0.5.0
+
+Mon, 28 Sep 2020 20:32:21 GMT
+
+### Minor changes
+
+- 🚚Move files around, rename things.  Makes FluentTester more canonical (aliciakds88@gmail.com)
+
+## 0.4.0
+
+Mon, 28 Sep 2020 19:03:01 GMT
+
+### Minor changes
+
+- Adding FocusZone Tests (safreibe@microsoft.com)
 
 ## 0.3.19
 

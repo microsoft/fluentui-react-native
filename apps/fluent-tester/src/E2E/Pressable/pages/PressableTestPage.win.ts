@@ -1,4 +1,4 @@
-import { PRESSABLE_TESTPAGE } from '../../../RNTester/TestComponents/Pressable/consts';
+import { PRESSABLE_TESTPAGE } from '../../../FluentTester/TestComponents/Pressable/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class PressableTestPage extends BasePage {
