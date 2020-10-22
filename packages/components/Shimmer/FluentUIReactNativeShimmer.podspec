@@ -3,7 +3,7 @@ require 'json'
 package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 
 Pod::Spec.new do |s|
-  s.name         = 'FRNShimmer'
+  s.name         = 'FluentUI-React-Native-Shimmer'
   s.version      = package['version']
   s.summary      = package['description']
   s.license      = package['license']
@@ -18,5 +18,5 @@ Pod::Spec.new do |s|
   s.ios.source_files      = "ios/*.{swift,h,m}"
 
   s.dependency 'React'
-  s.dependency 'MicrosoftFluentUI', '~> 0.1.12'
+  s.dependency 'MicrosoftFluentUI', '~> 0.1.16'
 end

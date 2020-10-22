@@ -28,8 +28,8 @@ use_flipper!(false)
 use_test_app! do |target|
   target.app do
 
-    pod 'FRNShimmer', :path => '../../../packages/components/Shimmer/FRNShimmer.podspec'
-    pod 'FRNAvatar', :path => '../../../packages/experimental/Avatar/FRNAvatar.podspec'
+    pod 'FluentUI-React-Native-Avatar', :path => '../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec'
+    pod 'FluentUI-React-Native-Shimmer', :path => '../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec'
 
     script_phase name: 'Start Packager',
                  script: start_packager_script,
