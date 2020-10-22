@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Enhancing RadioGroup test page",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-10-14T17:19:51.657Z"
-}

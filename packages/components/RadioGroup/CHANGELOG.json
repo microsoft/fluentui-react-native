@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Thu, 22 Oct 2020 00:57:39 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Adding SelectedKey Prop",
+            "author": "safreibe@microsoft.com",
+            "commit": "48fbce53f99e356282bb677b9dcd26626b01397d",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 19 Oct 2020 22:06:02 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.5.1",
       "version": "0.5.1",
