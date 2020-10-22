@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "0.62.3",
-    "@office-iss/rex-win32": "0.62.12-tenantreactnativewin-13326",
+    "@office-iss/rex-win32": "0.62.12-devmain.13420.10000",
     "@react-native-community/eslint-config": "^1.1.0",
     "@types/jasmine": "3.5.10",
     "@types/react": "^16.9.34",
