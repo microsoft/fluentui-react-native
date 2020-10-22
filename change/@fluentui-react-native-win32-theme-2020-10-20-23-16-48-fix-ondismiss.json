@@ -1,8 +1,0 @@
-{
-  "type": "none",
-  "comment": "onDismiss not called when contextual menu is dismissed with item click",
-  "packageName": "@fluentui-react-native/win32-theme",
-  "email": "lehon@microsoft.com",
-  "dependentChangeType": "none",
-  "date": "2020-10-21T06:16:45.110Z"
-}

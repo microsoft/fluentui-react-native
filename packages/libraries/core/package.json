@@ -29,7 +29,7 @@
     "@fluentui-react-native/button": ">=0.10.23 <1.0.0",
     "@fluentui-react-native/callout": ">=0.11.21 <1.0.0",
     "@fluentui-react-native/checkbox": ">=0.7.1 <1.0.0",
-    "@fluentui-react-native/contextual-menu": "0.4.2",
+    "@fluentui-react-native/contextual-menu": "0.4.3",
     "@fluentui-react-native/focus-trap-zone": ">=0.4.13 <1.0.0",
     "@fluentui-react-native/focus-zone": ">=0.2.2 <1.0.0",
     "@fluentui-react-native/link": ">=0.9.1 <1.0.0",
