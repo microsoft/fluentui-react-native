@@ -4,7 +4,7 @@ steps:
     displayName: 'Generate Build Number'
 
   # Bundle the Javascript code
-  - script: |
+  - bash: |
     'yarn bundle'
   displayName: 'yarn bundle'
 
