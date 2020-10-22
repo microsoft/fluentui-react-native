@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 'use strict';
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, NativeSyntheticEvent } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { radioButtonName, IRadioButtonType, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonRenderData } from './RadioButton.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
@@ -10,7 +10,7 @@ import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings, radioButtonSelectActionLabel } from './RadioButton.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens, getPaletteFromTheme} from '@fluentui-react-native/tokens';
-import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useViewCommandFocus, FocusEvent } from '@fluentui-react-native/interactive-hooks';
 import { RadioGroupContext } from './RadioGroup';
 
 export const RadioButton = compose<IRadioButtonType>({
@@ -18,10 +18,6 @@ export const RadioButton = compose<IRadioButtonType>({
 
   usePrepareProps: (userProps: IRadioButtonProps, useStyling: IUseComposeStyling<IRadioButtonType>) => {
     const { content, buttonKey, disabled, ariaLabel, componentRef, ...rest } = userProps;
-
-    // Since we're overriding pressable's onFocus below, pressable.state.focused does not get updated.
-    // We need to track whether the RadioButton is focused or not manually.
-    const [isButtonFocused, setIsFocused] = React.useState(false);
 
     // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
     const info = React.useContext(RadioGroupContext);
@@ -45,8 +41,7 @@ export const RadioButton = compose<IRadioButtonType>({
     const state = {
       ...pressable.state,
       selected: info.selectedKey === userProps.buttonKey,
-      disabled: disabled || false,
-      focused: isButtonFocused
+      disabled: disabled || false
     };
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
@@ -56,12 +51,12 @@ export const RadioButton = compose<IRadioButtonType>({
     // 1) Calls pressable's onFocus in order to keep track of our state's focus variable. It is dependent on pressable's
     //    focus variable. Without this, it wouldn't stay updated because we're overriding it's onFocus below for the rootProps.
     // 2) Selects the currently focused button by calling the RadioGroup's callback function.
-    const onFocusChange = React.useCallback((/* ev: NativeSyntheticEvent<{}> */) => {
-      // This check is necessary because this func gets called even when a button loses focus (not sure why?) which then calls the client's onChange multiple times
+    const onFocusChange = React.useCallback((ev: NativeSyntheticEvent<{}>) => {
+      // This check is necessary because this onFocus gets called multiple times, causing the user's onFocus to be called multiple times (not good)
       if (!state.selected) {
         info.onChange && info.onChange(buttonKey);
       }
-      setIsFocused(true);
+      pressable.props.onFocus(ev as FocusEvent);
     }, [state, pressable.props, info, buttonKey]);
 
     const slotProps = mergeSettings<IRadioButtonSlotProps>(styleProps, {
@@ -70,7 +65,6 @@ export const RadioButton = compose<IRadioButtonType>({
         ref: buttonRef,
         ...pressable.props,
         onFocus: onFocusChange,
-        onBlur: () => setIsFocused(false),
         accessibilityRole: 'radio',
         accessibilityLabel: ariaLabel ? ariaLabel : content,
         accessibilityState: { disabled: state.disabled, selected: state.selected },
