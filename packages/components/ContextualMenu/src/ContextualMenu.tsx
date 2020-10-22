@@ -43,8 +43,9 @@ export const ContextualMenu = compose<ContextualMenuType>({
 
     const dismissCallback = React.useCallback(
       () => {
+        userProps.onDismiss();
         setShowMenu(false);
-      }, [setShowMenu]);
+      }, [setShowMenu, userProps.onDismiss]);
 
     const [containerFocus, setContainerFocus] = React.useState(true);
     const toggleContainerFocus = React.useCallback(() => {
