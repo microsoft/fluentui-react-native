@@ -4,8 +4,8 @@ steps:
     displayName: 'Generate Build Number'
 
   # Bundle the Javascript code
-  - script: |
-    yarn bundle
+  - bash: |
+    'yarn bundle'
   displayName: 'yarn bundle'
 
   # Build the Apple Static Libraries
