@@ -5,7 +5,7 @@ steps:
 
   # Bundle the Javascript code
   - script: |
-    yarn bundle
+    'yarn bundle'
   displayName: 'yarn bundle'
 
   # Build the Apple Static Libraries
