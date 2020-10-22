@@ -28,17 +28,17 @@ function _defaultTypography(): Typography {
     variants: {
       captionStandard: { face: 'primary', size: 'caption', weight: 'regular' },
       secondaryStandard: { face: 'primary', size: 'secondary', weight: 'regular' },
-      secondarySemibold: { face: 'primary', size: 'secondary', weight: 'semiBold' },
+      secondarySemibold: { face: 'Segoe UI Semibold', size: 'secondary', weight: 'semiBold' },
       bodyStandard: { face: 'primary', size: 'body', weight: 'regular' },
-      bodySemibold: { face: 'primary', size: 'body', weight: 'semiBold' },
+      bodySemibold: { face: 'Segoe UI Semibold', size: 'body', weight: 'semiBold' },
       subheaderStandard: { face: 'primary', size: 'subheader', weight: 'regular' },
-      subheaderSemibold: { face: 'primary', size: 'subheader', weight: 'semiBold' },
+      subheaderSemibold: { face: 'Segoe UI Semibold', size: 'subheader', weight: 'semiBold' },
       headerStandard: { face: 'primary', size: 'header', weight: 'regular' },
-      headerSemibold: { face: 'primary', size: 'header', weight: 'semiBold' },
+      headerSemibold: { face: 'Segoe UI Semibold', size: 'header', weight: 'semiBold' },
       heroStandard: { face: 'primary', size: 'hero', weight: 'regular' },
-      heroSemibold: { face: 'primary', size: 'hero', weight: 'semiBold' },
+      heroSemibold: { face: 'Segoe UI Semibold', size: 'hero', weight: 'semiBold' },
       heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: 'regular' },
-      heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: 'semiBold' },
+      heroLargeSemibold: { face: 'Segoe UI Semibold', size: 'heroLarge', weight: 'semiBold' },
     } as Variants,
   };
 
