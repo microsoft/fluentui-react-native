@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Adding SelectedKey Prop",
+  "packageName": "@fluentui-react-native/radio-group",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-10-14T17:20:04.849Z"
+}

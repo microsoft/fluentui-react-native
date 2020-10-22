@@ -40,6 +40,13 @@ export interface IRadioGroupProps {
   ariaLabel?: string;
 
   /*
+  ** The key of the selected option. If you provide this, you must maintain selection state by observing
+  ** onChange events and passing a new value in when changed. This overrides defaultSelectedKey
+  ** and makes the RadioGroup a controlled component.
+  */
+  selectedKey?: string;
+
+  /*
    ** Callback for receiving a notification when the choice has been changed
    */
   onChange?: (key: string) => void;
