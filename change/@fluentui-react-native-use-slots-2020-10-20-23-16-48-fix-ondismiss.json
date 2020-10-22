@@ -1,0 +1,8 @@
+{
+  "type": "none",
+  "comment": "onDismiss not called when contextual menu is dismissed with item click",
+  "packageName": "@fluentui-react-native/use-slots",
+  "email": "lehon@microsoft.com",
+  "dependentChangeType": "none",
+  "date": "2020-10-21T06:16:23.974Z"
+}

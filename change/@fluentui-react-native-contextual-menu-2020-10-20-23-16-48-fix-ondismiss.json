@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "onDismiss not called when contextual menu is dismissed with item click",
+  "packageName": "@fluentui-react-native/contextual-menu",
+  "email": "lehon@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-10-21T06:16:00.381Z"
+}
