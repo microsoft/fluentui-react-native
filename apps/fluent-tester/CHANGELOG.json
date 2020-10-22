@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 22 Oct 2020 21:21:59 GMT",
+      "tag": "@fluentui-react-native/tester_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "onDismiss not called when contextual menu is dismissed with item click",
+            "author": "lehon@microsoft.com",
+            "commit": "4f3ed9d5555e86a6017901aa2f010732d6d6fe5a",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Oct 2020 00:57:39 GMT",
+      "tag": "@fluentui-react-native/tester_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Enhancing RadioGroup test page",
+            "author": "safreibe@microsoft.com",
+            "commit": "48fbce53f99e356282bb677b9dcd26626b01397d",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 19 Oct 2020 22:06:02 GMT",
       "tag": "@fluentui-react-native/tester_v0.11.1",
       "version": "0.11.1",

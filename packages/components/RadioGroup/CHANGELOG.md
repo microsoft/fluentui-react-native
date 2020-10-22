@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Mon, 19 Oct 2020 22:06:02 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Oct 2020 00:57:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.0
+
+Thu, 22 Oct 2020 00:57:39 GMT
+
+### Minor changes
+
+- Adding SelectedKey Prop (safreibe@microsoft.com)
 
 ## 0.5.1
 
