@@ -31,8 +31,8 @@ steps:
   - script: |
       yarn test
     displayName: 'yarn test'
-  - script: |
-      yarn publish:beachball -- -b origin/master -n $(npmAuth) --access public -y
-    displayName: 'Publish NPM Packages'
+#  - script: |
+#      yarn publish:beachball -- -b origin/master -n $(npmAuth) --access public -y
+#    displayName: 'Publish NPM Packages'
 
   - template: templates/publish-nuget-job.yml
