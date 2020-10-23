@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "RNIcon feature",
-  "packageName": "@fluentui-react-native/stack",
-  "email": "warleu@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-10-14T12:06:14.775Z"
-}

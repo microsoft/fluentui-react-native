@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-avatar",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "An Avatar view",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -21,8 +21,8 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@fluentui-react-native/component-cache": "^1.0.3",
-    "@fluentui-react-native/framework": "0.3.9"
+    "@fluentui-react-native/component-cache": "^1.1.0",
+    "@fluentui-react-native/framework": "0.4.0"
   },
   "devDependencies": {
     "@types/react-native": "^0.62.0",

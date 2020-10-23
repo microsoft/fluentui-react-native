@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/icon",
+  "entries": [
+    {
+      "date": "Fri, 23 Oct 2020 22:27:37 GMT",
+      "tag": "@fluentui-react-native/icon_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Saving icon work",
+            "author": "warleu@microsoft.com",
+            "commit": "83a0f448bf9ee9dddece08e7c277304dcef96388",
+            "package": "@fluentui-react-native/icon"
+          }
+        ]
+      }
+    }
+  ]
+}

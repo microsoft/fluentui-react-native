@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "RNIcon feature",
-  "packageName": "@fluentui-react-native/focus-zone",
-  "email": "warleu@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-10-14T12:05:54.120Z"
-}
