@@ -54,8 +54,8 @@ jobs:
         inputs:
           versionSpec: '12.x'
         displayName: 'Install Node.js'
-
-     - template: templates/yarn-install.yml
+  
+      - template: templates/yarn-install.yml
 
       # Clean Derived Data
       - script: |
@@ -80,16 +80,16 @@ jobs:
       - template: templates/apple-xcode-select.yml
 
       - bash: |
-        echo "pod install --project-directory=src"
-        pod install --project-directory=src
-      workingDirectory: apps/ios
-      displayName: 'pod install iOS'
+          echo "pod install --project-directory=src"
+          pod install --project-directory=src
+        workingDirectory: apps/ios
+        displayName: 'pod install iOS'
 
       - bash: |
-        echo "pod install --project-directory=src"
-        pod install --project-directory=src
-      workingDirectory: apps/macos
-      displayName: 'pod install macOS'
+          echo "pod install --project-directory=src"
+          pod install --project-directory=src
+        workingDirectory: apps/macos
+        displayName: 'pod install macOS'
 
       - template: templates/apple-xcode-build-static-libs.yml
 
