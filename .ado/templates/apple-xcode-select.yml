@@ -3,6 +3,6 @@
 #
 steps:
   - bash: |
-      sudo xcode-select --switch '/Applications/Xcode_12.0.app'
-    displayName: 'Switch to XCode 12.0'
+      sudo xcode-select --switch '/Applications/Xcode_12.app'
+    displayName: 'Switch to XCode 12'
     failOnStderr: true
