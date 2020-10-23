@@ -61,7 +61,6 @@ jobs:
           yarn test
         displayName: 'yarn test'
 
-
       # Clean Derived Data
       - script: |
           rm -rf $(Build.Repository.LocalPath)/DerivedData
