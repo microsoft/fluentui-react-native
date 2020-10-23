@@ -3,14 +3,12 @@ steps:
   # Pod Install iOS
   - task: CocoaPods@0
     inputs:
-      forceRepoUpdate: true
       projectDirectory: '$(Build.Repository.LocalPath)/apps/ios/src'
     displayName: 'pod install iOS'
 
   # Pod Install macOS
   - task: CocoaPods@0
     inputs:
-      forceRepoUpdate: true
       projectDirectory: '$(Build.Repository.LocalPath)/apps/macos/src'
     displayName: 'pod install macOS'
 
