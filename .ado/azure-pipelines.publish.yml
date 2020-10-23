@@ -49,6 +49,18 @@ jobs:
     steps:
       - checkout: self
         persistCredentials: true
+      
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '12.x'
+        displayName: 'Install Node.js'
+
+      - template: templates/yarn-install.yml
+
+      - script: |
+          yarn test
+        displayName: 'yarn test'
+
 
       # Clean Derived Data
       - script: |
