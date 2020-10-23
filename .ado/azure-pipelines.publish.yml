@@ -50,12 +50,7 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      - task: NodeTool@0
-        inputs:
-          versionSpec: '12.x'
-        displayName: 'Install Node.js'
-  
-      - template: templates/yarn-install.yml
+      - template: templates/setup-repo-min-build.yml
 
       # Clean Derived Data
       - script: |
@@ -68,12 +63,12 @@ jobs:
 
       - script: |
           yarn bundle ios
-        workingDirectory: apps/ios
+        workingDirectory: $(Build.Repository.LocalPath)/apps/ios
         displayName: 'yarn bundle iOS'
 
       - script: |
           yarn bundle macos
-        workingDirectory: apps/macos
+        workingDirectory: $(Build.Repository.LocalPath)/apps/macos
         displayName: 'yarn bundle macOS'
 
       # Select proper XCode version
@@ -82,13 +77,13 @@ jobs:
       - bash: |
           echo "pod install --project-directory=src"
           pod install --project-directory=src
-        workingDirectory: apps/ios
+        workingDirectory: $(Build.Repository.LocalPath)/apps/ios
         displayName: 'pod install iOS'
 
       - bash: |
           echo "pod install --project-directory=src"
           pod install --project-directory=src
-        workingDirectory: apps/macos
+        workingDirectory: $(Build.Repository.LocalPath)/apps/macos
         displayName: 'pod install macOS'
 
       - template: templates/apple-xcode-build-static-libs.yml
