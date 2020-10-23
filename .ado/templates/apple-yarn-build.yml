@@ -3,11 +3,11 @@ parameters:
 
 steps:
   # Install any pods necessary for the project
-  - task: CocoaPods@0
-    inputs:
-      forceRepoUpdate: true
-      projectDirectory: '$(Build.Repository.LocalPath)/apps/${{ parameters.relative_directory }}/src'
-    displayName: 'pod install ${{ parameters.relative_directory }}'
+  - bash: |
+      echo "pod install --project-directory=src"
+      pod install --project-directory=src
+    workingDirectory: apps/${{ parameters.relative_directory }}
+    displayName: 'pod install'
 
   - bash: |
       echo "yarn $platform_directory"

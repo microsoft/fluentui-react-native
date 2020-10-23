@@ -1,15 +1,17 @@
 # Build the FluentUI React Native Test App in different configurations
 steps:
   # Pod Install iOS
-  - task: CocoaPods@0
-    inputs:
-      projectDirectory: '$(Build.Repository.LocalPath)/apps/ios/src'
-    displayName: 'pod install iOS'
+  - bash: |
+      echo "pod install --project-directory=src"
+      pod install --project-directory=src
+    workingDirectory: apps/ios
+    displayName: 'pod install'
 
   # Pod Install macOS
-  - task: CocoaPods@0
-    inputs:
-      projectDirectory: '$(Build.Repository.LocalPath)/apps/macos/src'
+  - bash: |
+      echo "pod install --project-directory=src"
+      pod install --project-directory=src
+    workingDirectory: apps/macOS
     displayName: 'pod install macOS'
 
   # iPhone Simulator Debug
