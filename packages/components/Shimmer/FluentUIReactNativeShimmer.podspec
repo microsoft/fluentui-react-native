@@ -11,7 +11,6 @@ Pod::Spec.new do |s|
   s.author           = { "Microsoft" => "fluentuinativeowners@microsoft.com"}
   s.source           = { :git => "https://github.com/microsoft/fluentui-react-native.git", :tag => "#{s.version}" }
   s.swift_version    = "5"
-  s.xcconfig = { 'SWIFT_OBJC_BRIDGING_HEADER' => '${POD_ROOT}/ios/ShimmerView-Bridging-Header.h' }
 
   s.ios.deployment_target = "11.0"
   s.ios.source_files      = "ios/*.{swift,h,m}"
