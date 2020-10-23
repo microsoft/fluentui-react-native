@@ -46,7 +46,7 @@ jobs:
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
     strategy:
-      maxParallel: 4
+      maxParallel: 1
       matrix:
         ios:
           relative_directory: 'ios'
