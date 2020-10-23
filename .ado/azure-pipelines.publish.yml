@@ -49,17 +49,13 @@ jobs:
     steps:
       - checkout: self
         persistCredentials: true
-      
+
       - task: NodeTool@0
         inputs:
           versionSpec: '12.x'
         displayName: 'Install Node.js'
 
-      - template: templates/yarn-install.yml
-
-      - script: |
-          yarn test
-        displayName: 'yarn test'
+     - template: templates/setup-repo-min-build.yml
 
       # Clean Derived Data
       - script: |
@@ -70,20 +66,30 @@ jobs:
           sudo gem install cocoapods
         displayName: 'Install CocoaPods Environment'
 
-      - template: templates/setup-repo-min-build.yml
-
-      - script: |
-          yarn bundle macOS
-        workingDirectory: apps/macos
-        displayName: 'yarn bundle macOS'
-
       - script: |
           yarn bundle iOS
         workingDirectory: apps/ios
         displayName: 'yarn bundle iOS'
 
+      - script: |
+          yarn bundle macos
+        workingDirectory: apps/macos
+        displayName: 'yarn bundle macOS'
+
       # Select proper XCode version
       - template: templates/apple-xcode-select.yml
+
+      - bash: |
+        echo "pod install --project-directory=src"
+        pod install --project-directory=src
+      workingDirectory: apps/ios
+      displayName: 'pod install iOS'
+
+      - bash: |
+        echo "pod install --project-directory=src"
+        pod install --project-directory=src
+      workingDirectory: apps/macos
+      displayName: 'pod install macOS'
 
       - template: templates/apple-xcode-build-static-libs.yml
 

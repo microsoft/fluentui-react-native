@@ -8,12 +8,6 @@ parameters:
   xcode_extraArgs: ''
 
 steps:
-  - bash: |
-      echo "pod install --project-directory=src"
-      pod install --project-directory=src
-    workingDirectory: apps/${{ parameters.relative_directory }}
-    displayName: 'pod install'
-
   - task: Xcode@5
     displayName: 'Xcode ${{ parameters.xcode_actions }} ${{ parameters.xcode_configuration }} ${{ parameters.xcode_sdk }} ${{ parameters.xcode_scheme }}'
     inputs:
