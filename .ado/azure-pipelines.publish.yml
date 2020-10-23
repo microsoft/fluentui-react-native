@@ -74,37 +74,6 @@ jobs:
       # Select proper XCode version
       - template: templates/apple-xcode-select.yml
 
-      - bash: |
-          echo "pod install --project-directory=src"
-          pod install --project-directory=src
-        workingDirectory: $(Build.Repository.LocalPath)/apps/ios
-        displayName: 'pod install iOS'
-
-      - bash: |
-          echo "pod install --project-directory=src"
-          pod install --project-directory=src
-        workingDirectory: $(Build.Repository.LocalPath)/apps/macos
-        displayName: 'pod install macOS'
-
       - template: templates/apple-xcode-build-static-libs.yml
 
-      # generate the sanitizedBuildNumber environment variable
-      - bash: 'scripts/generate_build_number.sh'
-        displayName: 'Generate Build Number'
-
-      # pack the nuspec
-      - task: NuGetCommand@2
-        displayName: 'NuGet pack'
-        inputs:
-          command: pack
-          packagesToPack: 'package.nuspec'
-          buildProperties: buildNumber=$(sanitizedBuildNumber);commitId=$(Build.SourceVersion);repoUri=$(Build.Repository.Uri)
-
-      # push the package package
-      - task: NuGetCommand@2
-        displayName: 'NuGet push'
-        inputs:
-          command: push
-          packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.ReactNative.*.nupkg'
-          nuGetFeedType: external
-          publishFeedCredentials: Office
+      - template: templates/nuget-publish.yml

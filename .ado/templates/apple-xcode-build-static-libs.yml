@@ -1,24 +1,18 @@
 # Build the FluentUI React Native Test App in different configurations
 steps:
-  # macOS Debug
-  - template: apple-xcode-build.yml
-    parameters:
-      xcode_sdk: 'macosx'
-      xcode_workspacePath: 'apps/macos/src/FluentUITester.xcworkspace'
-      xcode_actions: 'build'
-      xcode_scheme: 'ReactTestApp'
-      xcode_configuration: 'Debug'
-      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
+  # Pod Install iOS
+  - task: CocoaPods@0
+    inputs:
+      forceRepoUpdate: true
+      projectDirectory: '$(Build.Repository.LocalPath)/apps/ios/src'
+    displayName: 'pod install iOS'
 
-  # macOS Release
-  - template: apple-xcode-build.yml
-    parameters:
-      xcode_sdk: 'macosx'
-      xcode_workspacePath: 'apps/macos/src/FluentUITester.xcworkspace'
-      xcode_actions: 'build'
-      xcode_scheme: 'ReactTestApp'
-      xcode_configuration: 'Release'
-      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
+  # Pod Install macOS
+  - task: CocoaPods@0
+    inputs:
+      forceRepoUpdate: true
+      projectDirectory: '$(Build.Repository.LocalPath)/apps/macos/src'
+    displayName: 'pod install macOS'
 
   # iPhone Simulator Debug
   - template: apple-xcode-build.yml
@@ -59,3 +53,23 @@ steps:
       xcode_scheme: 'ReactTestApp'
       xcode_configuration: 'Release'
       xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides_ios_device.xcconfig'
+
+    # macOS Debug
+  - template: apple-xcode-build.yml
+    parameters:
+      xcode_sdk: 'macosx'
+      xcode_workspacePath: 'apps/macos/src/FluentUITester.xcworkspace'
+      xcode_actions: 'build'
+      xcode_scheme: 'ReactTestApp'
+      xcode_configuration: 'Debug'
+      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
+
+  # macOS Release
+  - template: apple-xcode-build.yml
+    parameters:
+      xcode_sdk: 'macosx'
+      xcode_workspacePath: 'apps/macos/src/FluentUITester.xcworkspace'
+      xcode_actions: 'build'
+      xcode_scheme: 'ReactTestApp'
+      xcode_configuration: 'Release'
+      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
