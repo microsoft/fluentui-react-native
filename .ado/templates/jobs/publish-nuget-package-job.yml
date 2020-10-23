@@ -1,0 +1,70 @@
+- job: Apple Publish
+  displayName: Apple Publish
+  pool:
+    vmImage: 'macos-10.15'
+    demands: ['xcode', 'sh', 'npm']
+  timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+  cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+  strategy:
+    maxParallel: 4
+    matrix:
+      ios:
+        relative_directory: 'ios'
+        xcode_sdk: 'iphoneos'
+      macos:
+        relative_directory: 'macos'
+        xcode_sdk: 'macosx'
+
+  steps:
+    - checkout: self
+      persistCredentials: true
+
+    # Bundle the Javascript code
+    - bash: |
+      'yarn bundle'
+    displayName: 'yarn bundle'
+
+    # Clean Derived Data
+    - script: |
+        rm -rf $(Build.Repository.LocalPath)/DerivedData
+      displayName: 'Clean DerivedData'
+
+    - script: |
+        sudo gem install cocoapods
+      displayName: 'Install Cocoapods Environment'
+
+    - template: templates/setup-repo-min-build.yml
+
+    # Select proper XCode version
+    - template: templates/apple-xcode-select.yml
+
+    # Build the Apple Static Libraries
+    - template: apple-xcode-build.yml
+    parameters:
+      xcode_sdk: $(xcode_sdk)
+      xcode_workspacePath: 'apps/$(relative_directory)/src/FluentUITester.xcworkspace'
+      xcode_actions: 'build'
+      xcode_scheme: 'ReactTestApp'
+      xcode_configuration: 'Debug'
+      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
+
+    # generate the sanitizedBuildNumber environment variable
+    - bash: 'scripts/generate_build_number.sh'
+      displayName: 'Generate Build Number'
+
+    # pack the nuspec
+    - task: NuGetCommand@2
+      displayName: 'NuGet pack'
+      inputs:
+        command: pack
+        packagesToPack: 'package.nuspec'
+        buildProperties: buildNumber=$(sanitizedBuildNumber);commitId=$(Build.SourceVersion);repoUri=$(Build.Repository.Uri)
+
+    # push the package package
+    - task: NuGetCommand@2
+      displayName: 'NuGet push'
+      inputs:
+        command: push
+        packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.ReactNative.*.nupkg'
+        nuGetFeedType: external
+        publishFeedCredentials: Office
