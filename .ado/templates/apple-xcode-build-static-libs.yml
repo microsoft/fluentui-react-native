@@ -5,7 +5,7 @@ steps:
       echo "pod install --project-directory=src"
       pod install --project-directory=src
     workingDirectory: apps/ios
-    displayName: 'pod install'
+    displayName: 'pod install iOS'
 
   # Pod Install macOS
   - bash: |
