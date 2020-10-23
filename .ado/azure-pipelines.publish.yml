@@ -67,7 +67,7 @@ jobs:
         displayName: 'Install CocoaPods Environment'
 
       - script: |
-          yarn bundle iOS
+          yarn bundle ios
         workingDirectory: apps/ios
         displayName: 'yarn bundle iOS'
 
