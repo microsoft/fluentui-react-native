@@ -16,7 +16,7 @@ module.exports = (async () => {
   return {
     watchFolders: getWatchFolders(),
     resolver: {
-      assetExts: assetExts.filter((ext) => ext !== 'svg'),
+      assetExts: [assetExts.filter((ext) => ext !== 'svg'), 'ttf', 'otf', 'png'],
       sourceExts: [...sourceExts, 'svg'],
       blacklistRE: blacklist([
         // This stops "react-native run-windows" from causing the metro server to crash if its already running
