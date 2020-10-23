@@ -39,30 +39,16 @@ jobs:
         displayName: 'Publish NPM Packages'
 
   - job: NuGetPublish
-    displayName: Apple Publish
+    displayName: NuGet Publish
     pool:
       vmImage: 'macos-10.15'
       demands: ['xcode', 'sh', 'npm']
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
-    strategy:
-      maxParallel: 1
-      matrix:
-        ios:
-          relative_directory: 'ios'
-          xcode_sdk: 'iphoneos'
-        macos:
-          relative_directory: 'macos'
-          xcode_sdk: 'macosx'
 
     steps:
       - checkout: self
         persistCredentials: true
-
-      # Bundle the Javascript code
-      - script: |
-          yarn bundle
-        displayName: 'yarn bundle'
 
       # Clean Derived Data
       - script: |
@@ -71,22 +57,24 @@ jobs:
 
       - script: |
           sudo gem install cocoapods
-        displayName: 'Install Cocoapods Environment'
+        displayName: 'Install CocoaPods Environment'
 
       - template: templates/setup-repo-min-build.yml
+
+      - script: |
+          yarn bundle macOS
+        workingDirectory: apps/macos
+        displayName: 'yarn bundle macOS'
+
+      - script: |
+          yarn bundle iOS
+        workingDirectory: apps/ios
+        displayName: 'yarn bundle iOS'
 
       # Select proper XCode version
       - template: templates/apple-xcode-select.yml
 
-      # Build the Apple Static Libraries
-      - template: templates/apple-xcode-build.yml
-        parameters:
-          xcode_sdk: $(xcode_sdk)
-          xcode_workspacePath: 'apps/$(relative_directory)/src/FluentUITester.xcworkspace'
-          xcode_actions: 'build'
-          xcode_scheme: 'ReactTestApp'
-          xcode_configuration: 'Debug'
-          xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
+      - template: templates/apple-xcode-build-static-libs.yml
 
       # generate the sanitizedBuildNumber environment variable
       - bash: 'scripts/generate_build_number.sh'

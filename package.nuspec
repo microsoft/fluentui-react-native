@@ -10,17 +10,21 @@
     </metadata>
     <files>
       <!-- iOS device debug -->
-      <file src="DerivedData\polyester\Build\Products\Debug-iphoneos\libFRN*.a" target="Debug-iphoneos"/>
+      <file src="DerivedData\polyester\Build\Products\Debug-iphoneos\libFluentUI-React-Native-Avatar.a" target="Debug-iphoneos"/>
+      <file src="DerivedData\polyester\Build\Products\Debug-iphoneos\libFluentUI-React-Native-Shimmer.a" target="Debug-iphoneos"/>
       <!-- iOS device ship -->
-      <file src="DerivedData\polyester\Build\Products\Release-iphoneos\libFRN*.a" target="Ship-iphoneos"/>
+      <file src="DerivedData\polyester\Build\Products\Release-iphoneos\libFluentUI-React-Native-Avatar.a" target="Ship-iphoneos"/>
+      <file src="DerivedData\polyester\Build\Products\Release-iphoneos\libFluentUI-React-Native-Shimmer.a" target="Ship-iphoneos"/>
       <!-- iOS simulator debug -->
-      <file src="DerivedData\polyester\Build\Products\Debug-iphonesimulator\libFRN*.a" target="Debug-iphonesimulator"/>
+      <file src="DerivedData\polyester\Build\Products\Debug-iphonesimulator\libFluentUI-React-Native-Avatar.a" target="Debug-iphonesimulator"/>
+      <file src="DerivedData\polyester\Build\Products\Debug-iphonesimulator\libFluentUI-React-Native-Shimmer.a" target="Debug-iphonesimulator"/>
       <!-- iOS simulator ship -->
-      <file src="DerivedData\polyester\Build\Products\Release-iphonesimulator\libFRN*.a" target="Ship-iphonesimulator"/>
+      <file src="DerivedData\polyester\Build\Products\Release-iphonesimulator\libFluentUI-React-Native-Avatar.a" target="Ship-iphonesimulator"/>
+      <file src="DerivedData\polyester\Build\Products\Release-iphonesimulator\libFluentUI-React-Native-Shimmer.a" target="Ship-iphonesimulator"/>
       <!-- macOS debug -->
-      <file src="\DerivedData\polyester\Build\Products\Debug\libFRN*.a" target="Debug-macosx"/>
+
       <!-- macOS ship -->
-      <file src="DerivedData\polyester\Build\Products\Release\libFRN*.a" target="Ship-macosx"/>
+
 
       <!-- iOS jsbundle -->
       <file src="apps\ios\dist\index.bundle" target="ios"/>
