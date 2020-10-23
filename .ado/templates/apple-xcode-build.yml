@@ -3,8 +3,6 @@ parameters:
   xcode_configuration: ''
   xcode_workspacePath: ''
   xcode_scheme: ''
-  xcode_actions: ''
-  xcode_useXcpretty: false
   xcode_extraArgs: ''
 
 steps:
