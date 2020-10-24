@@ -19,6 +19,3 @@ steps:
       xcodebuild -workspace ${{ parameters.xcode_workspacePath }} -sdk ${{ parameters.xcode_sdk }} -configuration ${{ parameters.xcode_configuration }} -scheme ${{ parameters.xcode_scheme }} -derivedDataPath DerivedData ${{ parameters.xcode_extraArgs }}  -verbose
     displayName: 'xcodebuild ${{ parameters.xcode_sdk }} ${{ parameters.xcode_configuration }}'
     failOnStderr: true
-
-
-xcodebuild -sdk iphoneos -configuration Release -workspace FluentUITester.xcworkspace -scheme ReactTestApp build -verbose -derivedDataPath DerivedData
