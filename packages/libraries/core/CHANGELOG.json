@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Fri, 23 Oct 2020 22:27:37 GMT",
+      "tag": "@fluentui/react-native_v0.21.0",
+      "version": "0.21.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Saving icon work",
+            "author": "warleu@microsoft.com",
+            "commit": "83a0f448bf9ee9dddece08e7c277304dcef96388",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 22 Oct 2020 21:21:59 GMT",
       "tag": "@fluentui/react-native_v0.20.2",
       "version": "0.20.2",

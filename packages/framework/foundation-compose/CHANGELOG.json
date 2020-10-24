@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Fri, 23 Oct 2020 22:27:37 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.7.0",
+      "version": "1.7.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "RNIcon feature",
+            "author": "warleu@microsoft.com",
+            "commit": "83a0f448bf9ee9dddece08e7c277304dcef96388",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 22 Oct 2020 21:21:59 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.6.91",
       "version": "1.6.91",

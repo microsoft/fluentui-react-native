@@ -1,0 +1,39 @@
+{
+  "name": "@fluentui-react-native/icon",
+  "version": "0.2.0",
+  "description": "A cross-platform opinionated Fluent Icon component",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "just": "fluentui-scripts",
+    "clean": "fluentui-scripts clean",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "verify-api": "fluentui-scripts verify-api-extractor",
+    "update-api": "fluentui-scripts update-api-extractor"
+  },
+  "dependencies": {
+    "@fluentui-react-native/framework": "0.4.0",
+    "@uifabricshared/foundation-compose": "^1.7.0",
+    "@fluentui-react-native/text": "^0.7.0",
+    "@fluentui-react-native/theme-types": ">=0.4.0 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.7.0 <1.0.0"
+  },
+  "devDependencies": {
+    "@office-iss/react-native-win32": "0.62.3",
+    "@types/react-native": "^0.62.0",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "react-native": "0.62.2"
+  },
+  "peerDependencies": {
+    "react-native": "^0.59.0"
+  },
+  "author": "",
+  "license": "MIT"
+}
