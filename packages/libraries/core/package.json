@@ -38,12 +38,8 @@
     "@fluentui-react-native/pressable": ">=0.4.0 <1.0.0",
     "@fluentui-react-native/radio-group": ">=0.7.0 <1.0.0",
     "@fluentui-react-native/separator": ">=0.7.0 <1.0.0",
-<<<<<<< HEAD
-    "@fluentui-react-native/shimmer": ">=0.3.0 <1.0.0",
-    "@fluentui-react-native/spinner": ">=0.1.0 <1.0.0",
-=======
     "@fluentui-react-native/shimmer": ">=0.3.1 <1.0.0",
->>>>>>> 133ffc8b0da3f1a8e2814bff662d248e4fc5c08f
+    "@fluentui-react-native/spinner": ">=0.1.0 <1.0.0",
     "@fluentui-react-native/text": ">=0.7.0 <1.0.0"
   },
   "devDependencies": {
