@@ -2,6 +2,81 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 23 Oct 2020 22:27:37 GMT",
+      "tag": "@fluentui-react-native/tester_v0.13.0",
+      "version": "0.13.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Saving icon work",
+            "author": "warleu@microsoft.com",
+            "commit": "83a0f448bf9ee9dddece08e7c277304dcef96388",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Oct 2020 21:21:59 GMT",
+      "tag": "@fluentui-react-native/tester_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "onDismiss not called when contextual menu is dismissed with item click",
+            "author": "lehon@microsoft.com",
+            "commit": "4f3ed9d5555e86a6017901aa2f010732d6d6fe5a",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Oct 2020 00:57:39 GMT",
+      "tag": "@fluentui-react-native/tester_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Enhancing RadioGroup test page",
+            "author": "safreibe@microsoft.com",
+            "commit": "48fbce53f99e356282bb677b9dcd26626b01397d",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 19 Oct 2020 22:06:02 GMT",
+      "tag": "@fluentui-react-native/tester_v0.11.1",
+      "version": "0.11.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "rework theme usage in tester",
+            "author": "jasonmo@microsoft.com",
+            "commit": "5657a340608ad2e1fb6b7e61f92d706e350847b1",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 19 Oct 2020 18:16:36 GMT",
+      "tag": "@fluentui-react-native/tester_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "New experimental component avatar",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "6a48956ff1f79ed666cf2810af00be7474c39740",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 13 Oct 2020 01:39:45 GMT",
       "tag": "@fluentui-react-native/tester_v0.10.2",
       "version": "0.10.2",

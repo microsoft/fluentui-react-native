@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Updated Shimmer metadata in podspec and package.json",
+  "packageName": "@fluentui-react-native/shimmer",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2020-10-19T21:05:52.090Z"
+}

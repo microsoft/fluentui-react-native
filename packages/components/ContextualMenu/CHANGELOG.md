@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Tue, 13 Oct 2020 01:39:45 GMT and should not be manually modified.
+This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.0
+
+Fri, 23 Oct 2020 22:27:37 GMT
+
+### Minor changes
+
+- RNIcon feature (warleu@microsoft.com)
+
+## 0.4.3
+
+Thu, 22 Oct 2020 21:21:59 GMT
+
+### Patches
+
+- onDismiss not called when contextual menu is dismissed with item click (lehon@microsoft.com)
+
+## 0.4.2
+
+Mon, 19 Oct 2020 22:06:02 GMT
+
+### Patches
+
+- rework theme usage in tester (jasonmo@microsoft.com)
 
 ## 0.4.1
 

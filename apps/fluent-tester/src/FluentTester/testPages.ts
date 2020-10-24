@@ -1,4 +1,5 @@
 import { TestDescription } from './TestComponents';
+import { AvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './TestComponents/FocusTrapZone';
@@ -15,8 +16,14 @@ import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 import { HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL, ExperimentalButtonTest } from './TestComponents/ButtonExperimental';
 import { HOMEPAGE_FOCUSZONE_BUTTON, FocusZoneTest } from './TestComponents/FocusZone';
+import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 
 export const tests: TestDescription[] = [
+  {
+    name: 'Avatar Test',
+    component: AvatarTest,
+    testPage: HOMEPAGE_AVATAR_BUTTON,
+  },
   {
     name: 'Button Test',
     component: ButtonTest,
@@ -31,6 +38,11 @@ export const tests: TestDescription[] = [
     name: 'FocusZone Test',
     component: FocusZoneTest,
     testPage: HOMEPAGE_FOCUSZONE_BUTTON,
+  },
+  {
+    name: 'Icon Test',
+    component: IconTest,
+    testPage: HOMEPAGE_ICON_BUTTON,
   },
   {
     name: 'Pressable Test',
@@ -95,6 +107,6 @@ export const tests: TestDescription[] = [
   {
     name: 'Experimental Button',
     component: ExperimentalButtonTest,
-    testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL
-  }
+    testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
+  },
 ];
