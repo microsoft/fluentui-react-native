@@ -16,6 +16,6 @@ steps:
   #     args: '-verbose -derivedDataPath DerivedData ${{ parameters.xcode_extraArgs }}'
 
   - bash: |
-      xcodebuild -workspace ${{ parameters.xcode_workspacePath }} -sdk ${{ parameters.xcode_sdk }} -configuration ${{ parameters.xcode_configuration }} -scheme ${{ parameters.xcode_scheme }} -derivedDataPath DerivedData ${{ parameters.xcode_extraArgs }}  -verbose
+      xcodebuild -workspace ${{ parameters.xcode_workspacePath }} -sdk ${{ parameters.xcode_sdk }} -configuration ${{ parameters.xcode_configuration }} -scheme ${{ parameters.xcode_scheme }} -derivedDataPath DerivedData -verbose
     displayName: 'xcodebuild ${{ parameters.xcode_sdk }} ${{ parameters.xcode_configuration }}'
     failOnStderr: true
