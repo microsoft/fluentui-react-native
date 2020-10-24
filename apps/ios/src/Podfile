@@ -33,8 +33,8 @@ use_test_app! do |target|
     script_phase name: 'Start Packager',
                  script: start_packager_script,
                  execution_position: :before_compile
-    script_phase name: 'Bundle React Native code and images',
-                 script: bundle_script
+    # script_phase name: 'Bundle React Native code and images',open
+    #              script: bundle_script
   end
 
   target.tests do
