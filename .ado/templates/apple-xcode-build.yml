@@ -15,4 +15,4 @@ steps:
       xcWorkspacePath: ${{ parameters.xcode_workspacePath }}
       signingOption: auto
       teamId: '$(XCodeSigningMicrosoftTeamID)'
-      args: '-verbose -derivedDataPath DerivedData'
+      args: '-verbose -derivedDataPath (Build.Repository.LocalPath)/DerivedData'
