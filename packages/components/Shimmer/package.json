@@ -1,7 +1,10 @@
 {
   "name": "@fluentui-react-native/shimmer",
   "version": "0.3.0",
-  "description": "A shimmer view",
+  "description": "A cross-platform Shimmer component using the Fluent Design System",
+  "license": "MIT",
+  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
+  "homepage": "https://github.com/microsoft/fluentui-react-native",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -32,7 +35,5 @@
   },
   "peerDependencies": {
     "react-native": ">=0.60.0"
-  },
-  "author": "",
-  "license": "MIT"
+  }
 }
