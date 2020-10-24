@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Sat, 24 Oct 2020 06:35:04 GMT",
+      "tag": "@fluentui-react-native/tester_v0.13.1",
+      "version": "0.13.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add Shimmer dependency to package.json",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "046031640c02dcd301c1c140131193e9c59d573f",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Oct 2020 22:27:37 GMT",
       "tag": "@fluentui-react-native/tester_v0.13.0",
       "version": "0.13.0",

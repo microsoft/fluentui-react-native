@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
+This log was last generated on Sat, 24 Oct 2020 06:35:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.1
+
+Sat, 24 Oct 2020 06:35:04 GMT
+
+### Patches
+
+- Add Shimmer dependency to package.json (saadnajmi2@gmail.com)
 
 ## 0.13.0
 

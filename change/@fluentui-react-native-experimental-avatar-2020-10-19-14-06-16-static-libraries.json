@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Updated Avatar metadata in podspec and package.json",
-  "packageName": "@fluentui-react-native/experimental-avatar",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2020-10-19T21:06:16.750Z"
-}
