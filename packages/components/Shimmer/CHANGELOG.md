@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/shimmer
 
-This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
+This log was last generated on Sat, 24 Oct 2020 06:35:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.1
+
+Sat, 24 Oct 2020 06:35:04 GMT
+
+### Patches
+
+- Updated Shimmer metadata in podspec and package.json (saadnajmi2@gmail.com)
 
 ## 0.3.0
 
