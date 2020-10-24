@@ -14,25 +14,25 @@ steps:
     workingDirectory: apps/macOS
     displayName: 'pod install macOS'
 
-  # # iPhone Simulator Debug
-  # - template: apple-xcode-build.yml
-  #   parameters:
-  #     xcode_sdk: 'iphonesimulator'
-  #     xcode_workspacePath: 'apps/ios/src/FluentUITester.xcworkspace'
-  #     xcode_actions: 'build'
-  #     xcode_scheme: 'ReactTestApp'
-  #     xcode_configuration: 'Debug'
-  #     xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
+  # iPhone Simulator Debug
+  - template: apple-xcode-build.yml
+    parameters:
+      xcode_sdk: 'iphonesimulator'
+      xcode_workspacePath: 'apps/ios/src/FluentUITester.xcworkspace'
+      xcode_actions: 'build'
+      xcode_scheme: 'ReactTestApp'
+      xcode_configuration: 'Debug'
+      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
 
-  # # iPhone Simulator Release
-  # - template: apple-xcode-build.yml
-  #   parameters:
-  #     xcode_sdk: 'iphonesimulator'
-  #     xcode_workspacePath: 'apps/ios/src/FluentUITester.xcworkspace'
-  #     xcode_actions: 'build'
-  #     xcode_scheme: 'ReactTestApp'
-  #     xcode_configuration: 'Release'
-  #     xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
+  # iPhone Simulator Release
+  - template: apple-xcode-build.yml
+    parameters:
+      xcode_sdk: 'iphonesimulator'
+      xcode_workspacePath: 'apps/ios/src/FluentUITester.xcworkspace'
+      xcode_actions: 'build'
+      xcode_scheme: 'ReactTestApp'
+      xcode_configuration: 'Release'
+      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
 
   # # iPhone Device Debug
   # - template: apple-xcode-build.yml
