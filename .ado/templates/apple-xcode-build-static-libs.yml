@@ -34,26 +34,6 @@ steps:
       xcode_configuration: 'Release'
       xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
 
-  # macOS Debug
-  - template: apple-xcode-build.yml
-    parameters:
-      xcode_sdk: 'macosx'
-      xcode_workspacePath: 'apps/macos/src/FluentUITester.xcworkspace'
-      xcode_actions: 'build'
-      xcode_scheme: 'ReactTestApp'
-      xcode_configuration: 'Debug'
-      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
-
-  # macOS Release
-  - template: apple-xcode-build.yml
-    parameters:
-      xcode_sdk: 'macosx'
-      xcode_workspacePath: 'apps/macos/src/FluentUITester.xcworkspace'
-      xcode_actions: 'build'
-      xcode_scheme: 'ReactTestApp'
-      xcode_configuration: 'Release'
-      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
-
   # iPhone Device Debug
   - template: apple-xcode-build.yml
     parameters:
@@ -73,3 +53,23 @@ steps:
       xcode_scheme: 'ReactTestApp'
       xcode_configuration: 'Release'
       xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides_ios_device.xcconfig'
+
+  # macOS Debug
+  - template: apple-xcode-build.yml
+    parameters:
+      xcode_sdk: 'macosx'
+      xcode_workspacePath: 'apps/macos/src/FluentUITester.xcworkspace'
+      xcode_actions: 'build'
+      xcode_scheme: 'ReactTestApp'
+      xcode_configuration: 'Debug'
+      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
+
+  # macOS Release
+  - template: apple-xcode-build.yml
+    parameters:
+      xcode_sdk: 'macosx'
+      xcode_workspacePath: 'apps/macos/src/FluentUITester.xcworkspace'
+      xcode_actions: 'build'
+      xcode_scheme: 'ReactTestApp'
+      xcode_configuration: 'Release'
+      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'

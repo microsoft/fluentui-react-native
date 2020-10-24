@@ -14,5 +14,4 @@ steps:
       configuration: ${{ parameters.xcode_configuration }}
       xcWorkspacePath: ${{ parameters.xcode_workspacePath }}
       signingOption: nosign
-      # teamId: '$(XCodeSigningMicrosoftTeamID)'
-      args: '-verbose -derivedDataPath (Build.Repository.LocalPath)/DerivedData'
+      args: '-verbose -derivedDataPath DerivedData'
