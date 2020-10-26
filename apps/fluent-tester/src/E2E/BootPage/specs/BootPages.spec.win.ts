@@ -3,6 +3,7 @@ import CalloutTestPage from '../../Callout/pages/CalloutTestPage.win';
 import CheckboxTestPage from '../../Checkbox/pages/CheckboxTestPage.win';
 import FocusTrapZoneTestPage from '../../FocusTrapZone/pages/FocusTrapZonePage.win';
 import FocusZoneTestPage from '../../FocusZone/pages/FocusZoneTestPage.win';
+import IconTestPage from '../../Icon/pages/IconTestPage.win';
 import LinkTestPage from '../../Link/pages/LinkTestPage.win';
 import PersonaTestPage from '../../Persona/pages/PersonaTestPage.win';
 import PersonaCoinTestPage from '../../PersonaCoin/pages/PersonaCoinTestPage.win';
@@ -54,6 +55,12 @@ describe('Click on each test page and check if it renders', function () {
     BootTestPage.clickAndGoToFocusZonePage();
     FocusZoneTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(FocusZoneTestPage.isPageLoaded()).toBeTruthy();
+  });
+
+  it('Icon Test Page', () => {
+    BootTestPage.clickAndGoToIconPage();
+    IconTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+    expect(IconTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Link Test Page', () => {

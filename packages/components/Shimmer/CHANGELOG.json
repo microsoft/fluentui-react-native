@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/shimmer",
   "entries": [
     {
+      "date": "Sat, 24 Oct 2020 06:35:04 GMT",
+      "tag": "@fluentui-react-native/shimmer_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Updated Shimmer metadata in podspec and package.json",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "046031640c02dcd301c1c140131193e9c59d573f",
+            "package": "@fluentui-react-native/shimmer"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 23 Oct 2020 22:27:37 GMT",
+      "tag": "@fluentui-react-native/shimmer_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "RNIcon feature",
+            "author": "warleu@microsoft.com",
+            "commit": "83a0f448bf9ee9dddece08e7c277304dcef96388",
+            "package": "@fluentui-react-native/shimmer"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 22 Oct 2020 21:21:59 GMT",
       "tag": "@fluentui-react-native/shimmer_v0.2.11",
       "version": "0.2.11",
