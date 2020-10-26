@@ -2084,10 +2084,10 @@
     stacktrace-parser "^0.1.3"
     whatwg-fetch "^3.0.0"
 
-"@office-iss/rex-win32@0.62.12-tenantreactnativewin-13326":
-  version "0.62.12-tenantreactnativewin-13326"
-  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.62.12-tenantreactnativewin-13326.tgz#99fd09ca94a6731496386510a221609187418b73"
-  integrity sha512-HPFgEXvqRPHyn24ENcMyaq0PzM5/Q5MVbo+S0vzM3JwKvbIZJJhM0ecsmmx73tEwmdKDi8zyWVIdohEJcqxLiw==
+"@office-iss/rex-win32@0.62.12-devmain.13420.10000":
+  version "0.62.12-devmain.13420.10000"
+  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.62.12-devmain.13420.10000.tgz#fdf448ab220822ebe32ebba318aa693018ef6962"
+  integrity sha512-M2Bdg+G2O0AJhAVlvJ2io8mVd5Zj90SG8ew6OPjIXs0TGhsRP+OVE40hH9St1JeFomT6zC+0PpsMogTCAvy8AQ==
   dependencies:
     command-line-args "^5.0.2"
     command-line-usage "^5.0.5"
@@ -17094,9 +17094,9 @@ workspace-tools@^0.10.1:
     read-yaml-file "^2.0.0"
 
 workspace-tools@^0.9.0, workspace-tools@^0.9.3:
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.9.4.tgz#5d74592a380710177cd82b9806e6df7aedf9abf7"
-  integrity sha512-gjH0yIVYAXeYHRzH5IUCGzntZehTWFA3wejLpsROcWKAEliLtZvddrucRPq8fH2CQC52PsrInWKUapcQv1g7Lw==
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.9.8.tgz#fe53254bf56da289a8e9a6d9e8a0647f69bd964e"
+  integrity sha512-Vbyuc8fRLnbkE/n7Qb8wKEwexGEujTQamEGNFd/1RmgANCFk1u4FBI2PVoF/Tf32JbbtAlw/JkWtxmemRG4b8g==
   dependencies:
     "@pnpm/lockfile-file" "^3.0.7"
     "@pnpm/logger" "^3.2.2"
