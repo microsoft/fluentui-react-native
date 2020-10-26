@@ -5,7 +5,7 @@ parameters:
   xcode_path_override: '' # Leaving this blank results in the repo default being applied
 
 steps:
-  - bash: scripts/xcode_select_current_version.sh
+  - bash: .ado/scripts/xcode_select_current_version.sh
     displayName: 'Switch to current version of Xcode'
     failOnStderr: true
     env:

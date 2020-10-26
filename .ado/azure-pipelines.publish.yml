@@ -71,7 +71,7 @@ jobs:
         workingDirectory: $(Build.Repository.LocalPath)/apps/macos
         displayName: 'yarn bundle macOS'
 
-      # Select proper XCode version
+      # Select proper Xcode version
       - template: templates/apple-xcode-select.yml
 
       - template: templates/apple-xcode-build-static-libs.yml

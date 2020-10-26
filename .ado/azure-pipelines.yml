@@ -105,7 +105,7 @@ jobs:
         workingDirectory: apps/$(relative_directory)
         displayName: 'yarn bundle $(relative_directory)'
 
-      # Select proper XCode version
+      # Select proper Xcode version
       - template: templates/apple-xcode-select.yml
 
       - template: templates/apple-yarn-build.yml
