@@ -2084,10 +2084,10 @@
     stacktrace-parser "^0.1.3"
     whatwg-fetch "^3.0.0"
 
-"@office-iss/rex-win32@0.62.12-tenantreactnativewin-13326":
-  version "0.62.12-tenantreactnativewin-13326"
-  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.62.12-tenantreactnativewin-13326.tgz#99fd09ca94a6731496386510a221609187418b73"
-  integrity sha512-HPFgEXvqRPHyn24ENcMyaq0PzM5/Q5MVbo+S0vzM3JwKvbIZJJhM0ecsmmx73tEwmdKDi8zyWVIdohEJcqxLiw==
+"@office-iss/rex-win32@0.62.12-devmain.13420.10000":
+  version "0.62.12-devmain.13420.10000"
+  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.62.12-devmain.13420.10000.tgz#fdf448ab220822ebe32ebba318aa693018ef6962"
+  integrity sha512-M2Bdg+G2O0AJhAVlvJ2io8mVd5Zj90SG8ew6OPjIXs0TGhsRP+OVE40hH9St1JeFomT6zC+0PpsMogTCAvy8AQ==
   dependencies:
     command-line-args "^5.0.2"
     command-line-usage "^5.0.5"
@@ -7503,9 +7503,9 @@ eslint-plugin-relay@1.4.1:
     graphql "^14.0.0"
 
 eslint-plugin-standard@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-standard/-/eslint-plugin-standard-4.0.1.tgz#ff0519f7ffaff114f76d1bd7c3996eef0f6e20b4"
-  integrity sha512-v/KBnfyaOMPmZc/dmc6ozOdWqekGp7bBGq4jLAecEfPGmfKiWS4sA8sC0LqiV9w5qmXAtXVn4M3p1jSyhY85SQ==
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-standard/-/eslint-plugin-standard-4.0.2.tgz#021211a9f077e63a6847e7bb9ab4247327ac8e0c"
+  integrity sha512-nKptN8l7jksXkwFk++PhJB3cCDTcXOEyhISIN86Ue2feJ1LFyY3PrY3/xT2keXlJSY5bpmbiTG0f885/YKAvTA==
 
 eslint-scope@^4.0.3:
   version "4.0.3"
