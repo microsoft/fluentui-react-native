@@ -10,8 +10,8 @@ steps:
     displayName: 'pod install'
 
   - bash: |
-      echo "yarn $platform_directory"
-      yarn $platform_directory
+      echo "yarn ${{ parameters.relative_directory }}"
+      yarn ${{ parameters.relative_directory }}
     workingDirectory: apps/${{ parameters.relative_directory }}
     displayName: 'yarn ${{ parameters.relative_directory }}'
     env:
