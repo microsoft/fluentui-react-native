@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/default-theme
 
-This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Oct 2020 00:28:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.1
+
+Tue, 27 Oct 2020 00:28:29 GMT
+
+### Patches
+
+- Update default theme with semibold font (krsiler@microsoft.com)
 
 ## 0.4.0
 

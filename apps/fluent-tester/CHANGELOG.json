@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 27 Oct 2020 00:28:29 GMT",
+      "tag": "@fluentui-react-native/tester_v0.13.2",
+      "version": "0.13.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Remove Segoe Script from customized text examples",
+            "author": "email not defined",
+            "commit": "dca7ad98fea1ddc827a9bb1e7e6fdf7bdba47659",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 24 Oct 2020 06:35:04 GMT",
       "tag": "@fluentui-react-native/tester_v0.13.1",
       "version": "0.13.1",

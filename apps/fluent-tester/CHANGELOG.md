@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Sat, 24 Oct 2020 06:35:04 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Oct 2020 00:28:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.2
+
+Tue, 27 Oct 2020 00:28:29 GMT
+
+### Patches
+
+- Remove Segoe Script from customized text examples (email not defined)
 
 ## 0.13.1
 
