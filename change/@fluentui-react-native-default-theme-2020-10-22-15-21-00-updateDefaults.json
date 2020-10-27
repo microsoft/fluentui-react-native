@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Update default theme with semibold font",
+  "packageName": "@fluentui-react-native/default-theme",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-10-22T22:21:00.494Z"
+}

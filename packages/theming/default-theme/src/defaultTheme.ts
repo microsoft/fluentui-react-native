@@ -54,6 +54,36 @@ function _defaultTypography(): Typography {
     defaultsDict.families = familiesDictApple;
   }
 
+  // In certain cases on win32, semibold font renders incorrectly so 'Segoe UI Semibold' is used
+  if (Platform.OS === ('win32' as any)) {
+    const familiesDictWin32 = {
+      primary: 'Segoe UI',
+      secondary: 'Segoe UI Semibold',
+      cursive: 'System',
+      monospace: 'System',
+      sansSerif: 'System',
+      serif: 'System',
+    };
+    defaultsDict.families = familiesDictWin32;
+
+    const variantsDictWin32 = {
+      captionStandard: { face: 'primary', size: 'caption', weight: 'regular' },
+      secondaryStandard: { face: 'primary', size: 'secondary', weight: 'regular' },
+      secondarySemibold: { face: 'secondary', size: 'secondary', weight: 'semiBold' },
+      bodyStandard: { face: 'primary', size: 'body', weight: 'regular' },
+      bodySemibold: { face: 'secondary', size: 'body', weight: 'semiBold' },
+      subheaderStandard: { face: 'primary', size: 'subheader', weight: 'regular' },
+      subheaderSemibold: { face: 'secondary', size: 'subheader', weight: 'semiBold' },
+      headerStandard: { face: 'primary', size: 'header', weight: 'regular' },
+      headerSemibold: { face: 'secondary', size: 'header', weight: 'semiBold' },
+      heroStandard: { face: 'primary', size: 'hero', weight: 'regular' },
+      heroSemibold: { face: 'secondary', size: 'hero', weight: 'semiBold' },
+      heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: 'regular' },
+      heroLargeSemibold: { face: 'secondary', size: 'heroLarge', weight: 'semiBold' },
+    } as Variants;
+    defaultsDict.variants = variantsDictWin32;
+  }
+
   return defaultsDict;
 }
 
