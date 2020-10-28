@@ -10,29 +10,43 @@ const basicRadioGroup: React.FunctionComponent<{}> = () => {
     console.log(key);
   };
 
+  const [selectedKey, setSelectedKey] = React.useState('C');
+
+  const onChange2 = React.useCallback(
+    (key: string) => {
+      if(key == 'A') {
+        setSelectedKey('A')
+      }
+      else if(key == 'B') {
+        setSelectedKey('B')
+      }
+      else if(key == 'C') {
+        setSelectedKey('C')
+      }
+      else if(key == 'D') {
+        setSelectedKey('D')
+      }
+    },
+    []
+  );
+
   return (
     <View>
-      <RadioGroup label="Default RadioGroup" onChange={onChange}>
-        <RadioButton content="Option A" buttonKey="A" ariaLabel="AriaLabel of RadioButton" />
+      <RadioGroup label="Uncontrolled RadioGroup" defaultSelectedKey="B" onChange={onChange}>
+        <RadioButton content="Option A" buttonKey="A" ariaLabel="Test Aria Label" />
         <RadioButton content="Option B" buttonKey="B" />
-        <RadioButton content="Option C" buttonKey="C" />
+        <RadioButton content="Option C (disabled)" buttonKey="C" disabled={true} />
         <RadioButton content="Option D" buttonKey="D" />
       </RadioGroup>
       <Separator />
-      <RadioGroup label="RadioGroup with B as defaultSelectedKey" defaultSelectedKey="B" onChange={onChange}>
-        <RadioButton content="Option A" buttonKey="A" />
+      <RadioGroup label="Controlled RadioGroup" selectedKey={selectedKey} onChange={onChange2}>
+        <RadioButton content="Option A" buttonKey="A" ariaLabel="Test Aria Label" />
         <RadioButton content="Option B" buttonKey="B" />
         <RadioButton content="Option C" buttonKey="C" />
-        <RadioButton content="Option D" buttonKey="D" />
-      </RadioGroup>
-      <Separator />
-      <RadioGroup label="RadioGroup with RadioButton C disabled" onChange={onChange}>
-        <RadioButton content="Option A" buttonKey="A" />
-        <RadioButton content="Option B" buttonKey="B" />
-        <RadioButton content="Option C" buttonKey="C" disabled={true} />
         <RadioButton content="Option D" buttonKey="D" />
       </RadioGroup>
     </View>
+
   );
 };
 

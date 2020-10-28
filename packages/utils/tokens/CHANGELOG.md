@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Mon, 12 Oct 2020 04:09:31 GMT and should not be manually modified.
+This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Fri, 23 Oct 2020 22:27:37 GMT
+
+### Minor changes
+
+- RNIcon feature (warleu@microsoft.com)
 
 ## 0.6.0
 

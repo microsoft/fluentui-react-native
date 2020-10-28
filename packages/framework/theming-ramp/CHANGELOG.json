@@ -2,6 +2,51 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Fri, 23 Oct 2020 22:27:37 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "RNIcon feature",
+            "author": "warleu@microsoft.com",
+            "commit": "83a0f448bf9ee9dddece08e7c277304dcef96388",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Oct 2020 21:21:59 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.11.1",
+      "version": "0.11.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "onDismiss not called when contextual menu is dismissed with item click",
+            "author": "lehon@microsoft.com",
+            "commit": "4f3ed9d5555e86a6017901aa2f010732d6d6fe5a",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 19 Oct 2020 22:06:02 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.11.1",
+      "version": "0.11.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "rework theme usage in tester",
+            "author": "jasonmo@microsoft.com",
+            "commit": "5657a340608ad2e1fb6b7e61f92d706e350847b1",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 13 Oct 2020 01:39:45 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.11.0",
       "version": "0.11.0",

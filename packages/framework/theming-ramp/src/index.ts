@@ -10,4 +10,5 @@ export {
   ThemeColorDefinition as IThemeColorDefinition,
   ThemeContext,
   Typography as ITypography,
+  useTheme,
 } from '@fluentui-react-native/theme-types';

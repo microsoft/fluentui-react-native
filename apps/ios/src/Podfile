@@ -4,11 +4,6 @@ workspace 'FluentUITester.xcworkspace'
 
 react_native_path = "#{__dir__}/../../../node_modules/react-native"
 
-bundle_script = %{
-export NODE_BINARY=node
-#{react_native_path}/scripts/react-native-xcode.sh
-}
-
 start_packager_script = %{
 export RCT_METRO_PORT="${RCT_METRO_PORT:=8081}"
 echo "export RCT_METRO_PORT=${RCT_METRO_PORT}" > "#{react_native_path}/scripts/.packager.env"
@@ -28,13 +23,12 @@ use_flipper!(false)
 use_test_app! do |target|
   target.app do
 
+    pod 'FluentUI-React-Native-Avatar', :path => '../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec'
     pod 'FluentUI-React-Native-Shimmer', :path => '../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec'
 
     script_phase name: 'Start Packager',
                  script: start_packager_script,
                  execution_position: :before_compile
-    script_phase name: 'Bundle React Native code and images',
-                 script: bundle_script
   end
 
   target.tests do

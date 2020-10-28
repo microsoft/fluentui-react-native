@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Tue, 29 Sep 2020 18:14:46 GMT and should not be manually modified.
+This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.0
+
+Fri, 23 Oct 2020 22:27:37 GMT
+
+### Minor changes
+
+- RNIcon feature (warleu@microsoft.com)
+
+## 0.3.9
+
+Mon, 19 Oct 2020 22:06:02 GMT
+
+### Patches
+
+- rework theme usage in tester (jasonmo@microsoft.com)
 
 ## 0.3.7
 

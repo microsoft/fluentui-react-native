@@ -2,6 +2,36 @@
   "name": "@uifabricshared/theme-registry",
   "entries": [
     {
+      "date": "Fri, 23 Oct 2020 22:27:37 GMT",
+      "tag": "@uifabricshared/theme-registry_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "RNIcon feature",
+            "author": "warleu@microsoft.com",
+            "commit": "83a0f448bf9ee9dddece08e7c277304dcef96388",
+            "package": "@uifabricshared/theme-registry"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Oct 2020 21:21:59 GMT",
+      "tag": "@uifabricshared/theme-registry_v0.3.71",
+      "version": "0.3.71",
+      "comments": {
+        "none": [
+          {
+            "comment": "onDismiss not called when contextual menu is dismissed with item click",
+            "author": "lehon@microsoft.com",
+            "commit": "4f3ed9d5555e86a6017901aa2f010732d6d6fe5a",
+            "package": "@uifabricshared/theme-registry"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 13 Oct 2020 01:39:45 GMT",
       "tag": "@uifabricshared/theme-registry_v0.3.71",
       "version": "0.3.71",

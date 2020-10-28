@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/component-cache",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Simple caching package to avoid duplicate requireNativeComponent calls",
   "repository": {
     "type": "git",

@@ -1,8 +1,56 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 12 Oct 2020 04:09:31 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Oct 2020 00:28:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.2
+
+Tue, 27 Oct 2020 00:28:29 GMT
+
+### Patches
+
+- Remove Segoe Script from customized text examples (email not defined)
+
+## 0.13.1
+
+Sat, 24 Oct 2020 06:35:04 GMT
+
+### Patches
+
+- Add Shimmer dependency to package.json (saadnajmi2@gmail.com)
+
+## 0.13.0
+
+Fri, 23 Oct 2020 22:27:37 GMT
+
+### Minor changes
+
+- Saving icon work (warleu@microsoft.com)
+
+## 0.12.0
+
+Thu, 22 Oct 2020 00:57:39 GMT
+
+### Minor changes
+
+- Enhancing RadioGroup test page (safreibe@microsoft.com)
+
+## 0.11.1
+
+Mon, 19 Oct 2020 22:06:02 GMT
+
+### Patches
+
+- rework theme usage in tester (jasonmo@microsoft.com)
+
+## 0.11.0
+
+Mon, 19 Oct 2020 18:16:36 GMT
+
+### Minor changes
+
+- New experimental component avatar (saadnajmi2@gmail.com)
 
 ## 0.10.2
 
