@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 'use strict';
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, NativeSyntheticEvent } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { radioButtonName, IRadioButtonType, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonRenderData } from './RadioButton.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
@@ -9,20 +9,22 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings, radioButtonSelectActionLabel } from './RadioButton.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
-import { useAsPressable } from '@fluentui-react-native/interactive-hooks';
+import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens, getPaletteFromTheme} from '@fluentui-react-native/tokens';
+import { useAsPressable, useViewCommandFocus, FocusEvent } from '@fluentui-react-native/interactive-hooks';
 import { RadioGroupContext } from './RadioGroup';
 
 export const RadioButton = compose<IRadioButtonType>({
   displayName: radioButtonName,
 
   usePrepareProps: (userProps: IRadioButtonProps, useStyling: IUseComposeStyling<IRadioButtonType>) => {
-    const { content, buttonKey, disabled, ariaLabel, ...rest } = userProps;
+    const { content, buttonKey, disabled, ariaLabel, componentRef, ...rest } = userProps;
 
     // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
     const info = React.useContext(RadioGroupContext);
 
     const pressable = useAsPressable(rest);
+
+    const buttonRef = useViewCommandFocus(componentRef);
 
     // Used when creating accessibility properties in mergeSettings below
     const onAccessibilityAction = React.useCallback(
@@ -39,7 +41,7 @@ export const RadioButton = compose<IRadioButtonType>({
     const state = {
       ...pressable.state,
       selected: info.selectedKey === userProps.buttonKey,
-      disabled: disabled || false,
+      disabled: disabled || false
     };
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
@@ -49,16 +51,18 @@ export const RadioButton = compose<IRadioButtonType>({
     // 1) Calls pressable's onFocus in order to keep track of our state's focus variable. It is dependent on pressable's
     //    focus variable. Without this, it wouldn't stay updated because we're overriding it's onFocus below for the rootProps.
     // 2) Selects the currently focused button by calling the RadioGroup's callback function.
-    const onFocusChange = React.useCallback((/* ev: NativeSyntheticEvent<{}> */) => {
-      // This check is necessary because this func gets called even when a button loses focus (not sure why?) which then calls the client's onChange multiple times
+    const onFocusChange = React.useCallback((ev: NativeSyntheticEvent<{}>) => {
+      // This check is necessary because this onFocus gets called multiple times, causing the user's onFocus to be called multiple times (not good)
       if (!state.selected) {
         info.onChange && info.onChange(buttonKey);
       }
+      pressable.props.onFocus(ev as FocusEvent);
     }, [state, pressable.props, info, buttonKey]);
 
     const slotProps = mergeSettings<IRadioButtonSlotProps>(styleProps, {
       root: {
         rest,
+        ref: buttonRef,
         ...pressable.props,
         onFocus: onFocusChange,
         accessibilityRole: 'radio',
@@ -96,7 +100,7 @@ export const RadioButton = compose<IRadioButtonType>({
     root: [],
     button: [borderTokens],
     innerCircle: [backgroundColorTokens],
-    content: [foregroundColorTokens, textTokens],
+    content: [foregroundColorTokens, textTokens, [{ source: 'textBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }]],
   },
 });
 
