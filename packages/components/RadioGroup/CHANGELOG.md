@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
+This log was last generated on Thu, 29 Oct 2020 17:13:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.2
+
+Thu, 29 Oct 2020 17:13:48 GMT
+
+### Patches
+
+- Fixing FocusRect bug (safreibe@microsoft.com)
 
 ## 0.7.0
 

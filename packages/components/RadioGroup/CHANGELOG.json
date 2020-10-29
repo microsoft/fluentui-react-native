@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Thu, 29 Oct 2020 17:13:48 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.7.2",
+      "version": "0.7.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixing FocusRect bug",
+            "author": "safreibe@microsoft.com",
+            "commit": "51a36320b3288280e2fa62f010404c069a911971",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Oct 2020 22:27:37 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.7.0",
       "version": "0.7.0",
