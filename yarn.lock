@@ -1955,30 +1955,30 @@
   dependencies:
     core-js "^2.5.7"
 
-"@microsoft/api-extractor-model@7.10.3":
-  version "7.10.3"
-  resolved "https://registry.yarnpkg.com/@microsoft/api-extractor-model/-/api-extractor-model-7.10.3.tgz#f687f324e940bd71e3e73b5b262a54594b0ea61c"
-  integrity sha512-etP4NbZpj+zPCuO3YYigIYXkXq5zYhfE3vo/hrCj1OOd/159HDbSHnEQrNWRVy5TR79RAzHvkYAwtLYKeYP8Ag==
+"@microsoft/api-extractor-model@7.10.6":
+  version "7.10.6"
+  resolved "https://registry.yarnpkg.com/@microsoft/api-extractor-model/-/api-extractor-model-7.10.6.tgz#2d20a5fffefd4063dfda747504ce3c810a3d78b5"
+  integrity sha512-kOhL5fjRIRJYKX5tQcijPcyejA3l29Lg+sbnpM+4owngdbM91O4PcysS6MrzKEvZrLN6+v8LkOlNre8n/sDZPA==
   dependencies:
     "@microsoft/tsdoc" "0.12.19"
-    "@rushstack/node-core-library" "3.34.3"
+    "@rushstack/node-core-library" "3.34.5"
 
 "@microsoft/api-extractor@^7.3.7":
-  version "7.10.4"
-  resolved "https://registry.yarnpkg.com/@microsoft/api-extractor/-/api-extractor-7.10.4.tgz#9055fab0a702d2d74eba05ff369c50012cf41176"
-  integrity sha512-vod9Y8IHhBtB3hcKiOe4OLi/hNeWtgRh/mxGrye5SeHaJpu5urAAA9CxLxBT8fDe+pyr1ipzlaiM/eMm2vXKgw==
+  version "7.11.0"
+  resolved "https://registry.yarnpkg.com/@microsoft/api-extractor/-/api-extractor-7.11.0.tgz#5f1355c1152035c177081eb4127371fa7ade4531"
+  integrity sha512-VZ77kHn0CNWiPqe/yVY2XxL9AvDSy/Pvc7RqhVxy9OHiWV3Qkwh9gRssz+Wf5XLLWylduwg/Ikl9sneUJ2FVVw==
   dependencies:
-    "@microsoft/api-extractor-model" "7.10.3"
+    "@microsoft/api-extractor-model" "7.10.6"
     "@microsoft/tsdoc" "0.12.19"
-    "@rushstack/node-core-library" "3.34.3"
-    "@rushstack/rig-package" "0.2.4"
-    "@rushstack/ts-command-line" "4.7.3"
+    "@rushstack/node-core-library" "3.34.5"
+    "@rushstack/rig-package" "0.2.5"
+    "@rushstack/ts-command-line" "4.7.4"
     colors "~1.2.1"
     lodash "~4.17.15"
     resolve "~1.17.0"
     semver "~7.3.0"
     source-map "~0.6.1"
-    typescript "~3.9.7"
+    typescript "~4.0.5"
 
 "@microsoft/node-core-library@3.19.3":
   version "3.19.3"
@@ -2310,10 +2310,10 @@
     timsort "~0.3.0"
     z-schema "~3.18.3"
 
-"@rushstack/node-core-library@3.34.3":
-  version "3.34.3"
-  resolved "https://registry.yarnpkg.com/@rushstack/node-core-library/-/node-core-library-3.34.3.tgz#a59a1e452dcc79bd4e5f0840b4e9603551668f85"
-  integrity sha512-WNXHEk5/uoZsbrKzGpYUzDDymJvZarRkByab4uS1fbEcTSDFSVB9e0rREzCkU9yDAQlRutbFwiTXLu3LVR5F6w==
+"@rushstack/node-core-library@3.34.5":
+  version "3.34.5"
+  resolved "https://registry.yarnpkg.com/@rushstack/node-core-library/-/node-core-library-3.34.5.tgz#ccd4316aed1651742b9bee97fc18b4236f4722b4"
+  integrity sha512-mbJxkrmtcIYH0DPVwPdt6RY27GUbIWG+5/6LPj3SJCF/TA45L0n7AL6cN90PrzdOUWOQV+41vxluLVcY9Ak3aw==
   dependencies:
     "@types/node" "10.17.13"
     colors "~1.2.1"
@@ -2332,19 +2332,19 @@
   dependencies:
     "@rushstack/node-core-library" "3.25.0"
 
-"@rushstack/rig-package@0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@rushstack/rig-package/-/rig-package-0.2.4.tgz#259feb6637bedbfdc130d3a188ce85370e048743"
-  integrity sha512-/UXb6N0m0l+5kU4mLmRxyw3we+/w1fesgvfg96xllty5LyQxKDvkscmjlvCU/Yx55WO1tVxN4/7YlNEB2DcHyA==
+"@rushstack/rig-package@0.2.5":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@rushstack/rig-package/-/rig-package-0.2.5.tgz#241465ae97867bbdfb6a4467107fad309ae7981a"
+  integrity sha512-8f/NVb1BO5ZJPKTFVqsEikbznnY5qxOLoqayux5OaqxTyGY8YG3d7xqHJSKMUJhIUhSzgwVjT2WNNipD2/S7sw==
   dependencies:
     "@types/node" "10.17.13"
     resolve "~1.17.0"
     strip-json-comments "~3.1.1"
 
-"@rushstack/ts-command-line@4.7.3":
-  version "4.7.3"
-  resolved "https://registry.yarnpkg.com/@rushstack/ts-command-line/-/ts-command-line-4.7.3.tgz#fa72c637d70aa29c201f8f016f7db626f2d23a2c"
-  integrity sha512-8FNrUSbMgKLgRVcsg1STsIC2xAdyes7qJtVwg36hSnBAMZgCCIM+Z36nnxyrnYTS/6qwiXv7fwVaUxXH+SyiAQ==
+"@rushstack/ts-command-line@4.7.4":
+  version "4.7.4"
+  resolved "https://registry.yarnpkg.com/@rushstack/ts-command-line/-/ts-command-line-4.7.4.tgz#71b785aea62b3cb71547a1c8a51e8948c8a26b87"
+  integrity sha512-x2ZQjE5ss5nnGRceAIRe16VNZNFoS4v/RJH9+Em/yYOIwPJr0TZ93xTXQQE2uQVTgBBw06I/BUOdfMpJK/vDUQ==
   dependencies:
     "@types/argparse" "1.0.38"
     argparse "~1.0.9"
@@ -16176,10 +16176,10 @@ typescript@3.8.3:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.8.3.tgz#409eb8544ea0335711205869ec458ab109ee1061"
   integrity sha512-MYlEfn5VrLNsgudQTVJeNaQFUAI7DkhnOjdpAp4T+ku1TfQClewlbSuTVHiA+8skNBgaf02TL/kLOvig4y3G8w==
 
-typescript@~3.9.7:
-  version "3.9.7"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
-  integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
+typescript@~4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.5.tgz#ae9dddfd1069f1cb5beb3ef3b2170dd7c1332389"
+  integrity sha512-ywmr/VrTVCmNTJ6iV2LwIrfG1P+lv6luD8sUJs+2eI9NLGigaN+nUQc13iHqisq7bra9lnmUSYqbJvegraBOPQ==
 
 typical@^2.6.1:
   version "2.6.1"
