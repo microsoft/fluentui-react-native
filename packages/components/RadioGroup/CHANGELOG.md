@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Thu, 29 Oct 2020 17:13:48 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Oct 2020 18:32:53 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.0
+
+Fri, 30 Oct 2020 18:32:53 GMT
+
+### Minor changes
+
+- Using pressable onFocus (safreibe@microsoft.com)
 
 ## 0.7.2
 
