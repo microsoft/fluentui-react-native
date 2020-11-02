@@ -66,6 +66,7 @@
   },
   "depcheck": {
     "ignoreMatches": [
+      "react-native-test-app",
       "react-native-windows"
     ]
   }
