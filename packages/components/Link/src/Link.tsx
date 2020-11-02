@@ -7,7 +7,7 @@ import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose'
 import { ILinkProps, ILinkSlotProps, ILinkState, ILinkRenderData, IWithLinkOptions, linkName, ILinkType } from './Link.types';
 import { settings } from './Link.settings';
 import { foregroundColorTokens, textTokens, borderTokens } from '@fluentui-react-native/tokens';
-import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyCallback, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { IViewProps } from '@fluentui-react-native/adapters';
@@ -19,7 +19,7 @@ export function useAsLink(userProps: IWithLinkOptions<IViewProps>): ILinkHooks {
 
   const [linkState, setLinkState] = React.useState({ visited: false });
   const linkOnPress = React.useCallback(
-    e => {
+    (e) => {
       setLinkState({ visited: true });
       if (url) {
         Linking.openURL(url as string);
@@ -27,28 +27,20 @@ export function useAsLink(userProps: IWithLinkOptions<IViewProps>): ILinkHooks {
         onPress(e);
       }
     },
-    [setLinkState, url, onPress]
+    [setLinkState, url, onPress],
   );
   const pressable = useAsPressable({ onPress: linkOnPress, ...rest });
-  const onKeyUp = React.useCallback(
-    e => {
-      if (linkOnPress && (e.nativeEvent.key === 'Enter' || e.nativeEvent.key === ' ')) {
-        linkOnPress(e);
-        e.stopPropagation()
-      }
-    },
-    [linkOnPress]
-  );
+  const onKeyUp = useKeyCallback(linkOnPress, ' ', 'Enter');
 
   const newState = {
     ...pressable.state,
-    ...linkState
+    ...linkState,
   };
 
   const newProps = {
     ...userProps,
     ...pressable.props,
-    onKeyUp
+    onKeyUp,
   };
 
   return [newProps, newState];
@@ -73,7 +65,7 @@ export const Link = compose<ILinkType>({
     // create the merged slot props
     const slotProps = mergeSettings<ILinkSlotProps>(styleProps, {
       root: { ...linkProps, ref: linkRef, onAccessibilityTap: onAccTap },
-      content: { children: content }
+      content: { children: content },
     });
 
     return { slotProps, state: { ...linkState, ...info } };
@@ -87,17 +79,17 @@ export const Link = compose<ILinkType>({
         {children}
       </Slots.root>
     ) : (
-        <Slots.root>{content && <Slots.content />}</Slots.root>
-      );
+      <Slots.root>{content && <Slots.content />}</Slots.root>
+    );
   },
   slots: {
     root: View,
-    content: Text
+    content: Text,
   },
   styles: {
     root: [],
-    content: [foregroundColorTokens, textTokens, borderTokens]
-  }
+    content: [foregroundColorTokens, textTokens, borderTokens],
+  },
 });
 
 export default Link;

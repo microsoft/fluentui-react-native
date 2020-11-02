@@ -1,14 +1,11 @@
-import * as React from 'react';
 import { ThemeHelper } from '@fluentui-react-native/use-styling';
-import { ITheme } from '@uifabricshared/theming-ramp';
-import { ThemeContext, getTheme } from '@uifabricshared/theming-react-native';
+import { Theme, useTheme } from '@fluentui-react-native/theme-types';
+import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
 
-export const themeHelper: ThemeHelper<ITheme> = {
-  useTheme: () => {
-    return React.useContext(ThemeContext) || getTheme();
-  },
-  getComponentInfo: (theme: ITheme, name: string) => {
-    const components = theme.componentTokens || {};
+export const themeHelper: ThemeHelper<Theme> = {
+  useTheme: () => useTheme() || defaultFluentTheme,
+  getComponentInfo: (theme: Theme, name: string) => {
+    const components = theme.components || {};
     return components[name];
-  }
+  },
 };

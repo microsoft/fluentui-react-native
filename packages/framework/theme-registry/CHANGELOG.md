@@ -1,8 +1,32 @@
 # Change Log - @uifabricshared/theme-registry
 
-This log was last generated on Mon, 17 Aug 2020 22:08:34 GMT and should not be manually modified.
+This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.0
+
+Fri, 23 Oct 2020 22:27:37 GMT
+
+### Minor changes
+
+- RNIcon feature (warleu@microsoft.com)
+
+## 0.3.71
+
+Fri, 25 Sep 2020 19:21:43 GMT
+
+### Patches
+
+- Update react-native-win32 versions - enable logbox (acoates-ms@noreply.github.com)
+
+## 0.3.70
+
+Wed, 23 Sep 2020 18:31:48 GMT
+
+### Patches
+
+- start publishing src to fix customer source maps (jasonmo@microsoft.com)
 
 ## 0.3.69
 

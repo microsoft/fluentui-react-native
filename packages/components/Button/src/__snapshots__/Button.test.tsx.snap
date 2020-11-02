@@ -5,7 +5,13 @@ exports[`Button default 1`] = `
   acceptsKeyboardFocus={true}
   accessibilityLabel="Default Button"
   accessibilityRole="button"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
   accessible={true}
+  focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}

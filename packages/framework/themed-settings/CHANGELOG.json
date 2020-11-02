@@ -2,6 +2,96 @@
   "name": "@uifabricshared/themed-settings",
   "entries": [
     {
+      "date": "Fri, 23 Oct 2020 22:27:37 GMT",
+      "tag": "@uifabricshared/themed-settings_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "RNIcon feature",
+            "author": "warleu@microsoft.com",
+            "commit": "83a0f448bf9ee9dddece08e7c277304dcef96388",
+            "package": "@uifabricshared/themed-settings"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Oct 2020 21:21:59 GMT",
+      "tag": "@uifabricshared/themed-settings_v0.4.74",
+      "version": "0.4.74",
+      "comments": {
+        "none": [
+          {
+            "comment": "onDismiss not called when contextual menu is dismissed with item click",
+            "author": "lehon@microsoft.com",
+            "commit": "4f3ed9d5555e86a6017901aa2f010732d6d6fe5a",
+            "package": "@uifabricshared/themed-settings"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 13 Oct 2020 01:39:45 GMT",
+      "tag": "@uifabricshared/themed-settings_v0.4.74",
+      "version": "0.4.74",
+      "comments": {
+        "none": [
+          {
+            "comment": "add focused state condition to onKeyUp callback",
+            "author": "lehon@microsoft.com",
+            "commit": "7a9cef9d56db7ad154e542b4ac5547458dfc604d",
+            "package": "@uifabricshared/themed-settings"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Sep 2020 19:21:43 GMT",
+      "tag": "@uifabricshared/themed-settings_v0.4.74",
+      "version": "0.4.74",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update react-native-win32 versions - enable logbox",
+            "author": "acoates-ms@noreply.github.com",
+            "commit": "a95ab1b66822cceacc74e24094f85c6917f58086",
+            "package": "@uifabricshared/themed-settings"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 23 Sep 2020 18:31:48 GMT",
+      "tag": "@uifabricshared/themed-settings_v0.4.73",
+      "version": "0.4.73",
+      "comments": {
+        "patch": [
+          {
+            "comment": "start publishing src to fix customer source maps",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b3d7b5ba710bc581a6f4db91c91e4ffc185fc427",
+            "package": "@uifabricshared/themed-settings"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 11 Sep 2020 20:25:42 GMT",
+      "tag": "@uifabricshared/themed-settings_v0.4.72",
+      "version": "0.4.72",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add samples and some README text to use-slots and use-styling packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2566347850eff4ed67bfad2a85134481e088cba6",
+            "package": "@uifabricshared/themed-settings"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Aug 2020 05:03:51 GMT",
       "tag": "@uifabricshared/themed-settings_v0.4.72",
       "version": "0.4.72",

@@ -1,8 +1,48 @@
-# Change Log - @uifabricshared/themed-stylesheet
+# Change Log - @fluentui-react-native/themed-stylesheet
 
-This log was last generated on Mon, 17 Aug 2020 22:08:34 GMT and should not be manually modified.
+This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.0
+
+Fri, 23 Oct 2020 22:27:37 GMT
+
+### Minor changes
+
+- RNIcon feature (warleu@microsoft.com)
+
+## 1.0.2
+
+Mon, 19 Oct 2020 22:06:02 GMT
+
+### Patches
+
+- rework theme usage in tester (jasonmo@microsoft.com)
+
+## 1.0.1
+
+Fri, 02 Oct 2020 22:37:51 GMT
+
+### Patches
+
+- convert themed stylesheet to use memo-cache (jasonmo@microsoft.com)
+
+## 0.3.70
+
+Fri, 25 Sep 2020 19:21:43 GMT
+
+### Patches
+
+- Update react-native-win32 versions - enable logbox (acoates-ms@noreply.github.com)
+
+## 0.3.69
+
+Wed, 23 Sep 2020 18:31:48 GMT
+
+### Patches
+
+- start publishing src to fix customer source maps (jasonmo@microsoft.com)
 
 ## 0.3.68
 

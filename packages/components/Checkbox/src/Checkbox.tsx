@@ -31,13 +31,13 @@ export const Checkbox = compose<ICheckboxType>({
     const buttonRef = useViewCommandFocus(userProps.componentRef);
 
     // Handles the "Space" key toggling the Checkbox
-    const onKeyUpSpace = useKeyCallback(' ', toggleChecked);
+    const onKeyUpSpace = useKeyCallback(toggleChecked, ' ');
 
     const state: ICheckboxState = {
       ...pressable.state,
       disabled,
       checked: isChecked,
-      boxAtEnd: boxSide == undefined || boxSide == 'start' ? false : true
+      boxAtEnd: boxSide == undefined || boxSide == 'start' ? false : true,
     };
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
@@ -52,17 +52,8 @@ export const Checkbox = compose<ICheckboxType>({
             break;
         }
       },
-      [toggleChecked, userProps, state, pressable.props]
+      [toggleChecked, userProps, state, pressable.props],
     );
-
-    let accessibilityStates: string[] = [];
-    if (state.disabled) {
-      accessibilityStates = ['disabled'];
-    } else if (state.checked) {
-      accessibilityStates = ['checked'];
-    } else {
-      accessibilityStates = ['unchecked'];
-    }
 
     const slotProps = mergeSettings<ICheckboxSlotProps>(styleProps, {
       root: {
@@ -71,14 +62,14 @@ export const Checkbox = compose<ICheckboxType>({
         ...pressable.props,
         accessibilityRole: 'checkbox',
         accessibilityLabel: ariaLabel || label,
-        accessibilityStates: accessibilityStates,
+        accessibilityState: { disabled: state.disabled, checked: state.checked },
         accessibilityActions: [{ name: 'Toggle', label: checkboxSelectActionLabel }],
         onAccessibilityAction: onAccessibilityAction,
-        onKeyUp: onKeyUpSpace
+        onKeyUp: onKeyUpSpace,
       },
       // Temporary checkmark until SVG functionality
       checkmark: { children: '✓' },
-      content: { children: label }
+      content: { children: label },
     });
 
     return { slotProps, state };
@@ -102,7 +93,7 @@ export const Checkbox = compose<ICheckboxType>({
     root: View,
     checkbox: { slotType: View, filter: filterViewProps },
     checkmark: Text,
-    content: Text
+    content: Text,
   },
   styles: {
     root: [],
@@ -111,24 +102,18 @@ export const Checkbox = compose<ICheckboxType>({
       borderTokens,
       [
         { source: 'checkboxBackgroundColor', lookup: getPaletteFromTheme, target: 'backgroundColor' },
-        { source: 'checkboxBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }
-      ]
+        { source: 'checkboxBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' },
+      ],
     ],
     checkmark: [
       foregroundColorTokens,
       [
         { source: 'checkmarkColor', lookup: getPaletteFromTheme, target: 'color' },
-        { source: 'checkmarkVisibility', target: 'opacity' }
-      ]
+        { source: 'checkmarkVisibility', target: 'opacity' },
+      ],
     ],
-    content: [
-      foregroundColorTokens,
-      textTokens,
-      [
-        { source: 'textBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }
-      ]
-    ]
-  }
+    content: [foregroundColorTokens, textTokens, [{ source: 'textBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }]],
+  },
 });
 
 export default Checkbox;

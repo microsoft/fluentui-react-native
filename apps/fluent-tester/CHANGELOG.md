@@ -1,8 +1,144 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 09 Sep 2020 21:36:19 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Oct 2020 00:28:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.2
+
+Tue, 27 Oct 2020 00:28:29 GMT
+
+### Patches
+
+- Remove Segoe Script from customized text examples (email not defined)
+
+## 0.13.1
+
+Sat, 24 Oct 2020 06:35:04 GMT
+
+### Patches
+
+- Add Shimmer dependency to package.json (saadnajmi2@gmail.com)
+
+## 0.13.0
+
+Fri, 23 Oct 2020 22:27:37 GMT
+
+### Minor changes
+
+- Saving icon work (warleu@microsoft.com)
+
+## 0.12.0
+
+Thu, 22 Oct 2020 00:57:39 GMT
+
+### Minor changes
+
+- Enhancing RadioGroup test page (safreibe@microsoft.com)
+
+## 0.11.1
+
+Mon, 19 Oct 2020 22:06:02 GMT
+
+### Patches
+
+- rework theme usage in tester (jasonmo@microsoft.com)
+
+## 0.11.0
+
+Mon, 19 Oct 2020 18:16:36 GMT
+
+### Minor changes
+
+- New experimental component avatar (saadnajmi2@gmail.com)
+
+## 0.10.2
+
+Mon, 12 Oct 2020 04:09:31 GMT
+
+### Patches
+
+- new test pages (email not defined)
+
+## 0.10.1
+
+Wed, 07 Oct 2020 18:52:49 GMT
+
+### Patches
+
+- Removed references to fabric tester (saadnajmi2@gmail.com)
+
+## 0.10.0
+
+Wed, 07 Oct 2020 17:29:29 GMT
+
+### Minor changes
+
+- Fixing up RadioGroup/FocusZone test pages (safreibe@microsoft.com)
+
+## 0.9.4
+
+Fri, 02 Oct 2020 22:37:51 GMT
+
+### Patches
+
+- convert themed stylesheet to use memo-cache (jasonmo@microsoft.com)
+
+## 0.9.3
+
+Fri, 02 Oct 2020 22:17:48 GMT
+
+### Patches
+
+- fix web tester (jasonmo@microsoft.com)
+
+## 0.9.2
+
+Thu, 01 Oct 2020 16:54:19 GMT
+
+### Patches
+
+- switch Separator to new framework (jasonmo@microsoft.com)
+
+## 0.9.1
+
+Tue, 29 Sep 2020 18:14:46 GMT
+
+### Patches
+
+- remove extra componentTokens reference and route everything to components (jasonmo@microsoft.com)
+
+## 0.9.0
+
+Mon, 28 Sep 2020 20:32:21 GMT
+
+### Minor changes
+
+- 🎨 Apply theme shim to host.colors, fix theme picker (aliciakds88@gmail.com)
+
+## 0.8.0
+
+Mon, 28 Sep 2020 19:03:01 GMT
+
+### Minor changes
+
+- Adding FocusZone Tests (safreibe@microsoft.com)
+
+## 0.7.5
+
+Fri, 25 Sep 2020 19:21:43 GMT
+
+### Patches
+
+- Update react-native-win32 versions - enable logbox (acoates-ms@noreply.github.com)
+
+## 0.7.0
+
+Tue, 22 Sep 2020 04:57:02 GMT
+
+### Minor changes
+
+- Update button snapshot and test (krsiler@microsoft.com)
 
 ## 0.6.1
 

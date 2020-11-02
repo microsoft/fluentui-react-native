@@ -2,6 +2,351 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 27 Oct 2020 00:28:29 GMT",
+      "tag": "@fluentui-react-native/tester_v0.13.2",
+      "version": "0.13.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Remove Segoe Script from customized text examples",
+            "author": "email not defined",
+            "commit": "dca7ad98fea1ddc827a9bb1e7e6fdf7bdba47659",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 24 Oct 2020 06:35:04 GMT",
+      "tag": "@fluentui-react-native/tester_v0.13.1",
+      "version": "0.13.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add Shimmer dependency to package.json",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "046031640c02dcd301c1c140131193e9c59d573f",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 23 Oct 2020 22:27:37 GMT",
+      "tag": "@fluentui-react-native/tester_v0.13.0",
+      "version": "0.13.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Saving icon work",
+            "author": "warleu@microsoft.com",
+            "commit": "83a0f448bf9ee9dddece08e7c277304dcef96388",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Oct 2020 21:21:59 GMT",
+      "tag": "@fluentui-react-native/tester_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "onDismiss not called when contextual menu is dismissed with item click",
+            "author": "lehon@microsoft.com",
+            "commit": "4f3ed9d5555e86a6017901aa2f010732d6d6fe5a",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Oct 2020 00:57:39 GMT",
+      "tag": "@fluentui-react-native/tester_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Enhancing RadioGroup test page",
+            "author": "safreibe@microsoft.com",
+            "commit": "48fbce53f99e356282bb677b9dcd26626b01397d",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 19 Oct 2020 22:06:02 GMT",
+      "tag": "@fluentui-react-native/tester_v0.11.1",
+      "version": "0.11.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "rework theme usage in tester",
+            "author": "jasonmo@microsoft.com",
+            "commit": "5657a340608ad2e1fb6b7e61f92d706e350847b1",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 19 Oct 2020 18:16:36 GMT",
+      "tag": "@fluentui-react-native/tester_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "New experimental component avatar",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "6a48956ff1f79ed666cf2810af00be7474c39740",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 13 Oct 2020 01:39:45 GMT",
+      "tag": "@fluentui-react-native/tester_v0.10.2",
+      "version": "0.10.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' into checkbox-focus",
+            "author": "lehon@microsoft.com",
+            "commit": "7a9cef9d56db7ad154e542b4ac5547458dfc604d",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 12 Oct 2020 04:09:31 GMT",
+      "tag": "@fluentui-react-native/tester_v0.10.2",
+      "version": "0.10.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "new test pages",
+            "author": "email not defined",
+            "commit": "d1c543f21301b22a84fb6968a2c2612bb487be39",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 07 Oct 2020 18:52:49 GMT",
+      "tag": "@fluentui-react-native/tester_v0.10.1",
+      "version": "0.10.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Removed references to fabric tester",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "b7a9e169e10402e2d8ee83519999a8cf5c3926d5",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 07 Oct 2020 17:29:29 GMT",
+      "tag": "@fluentui-react-native/tester_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Fixing up RadioGroup/FocusZone test pages",
+            "author": "safreibe@microsoft.com",
+            "commit": "1bc38fbd92b1c5fa39ee2914c0c7e8991eb28701",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 02 Oct 2020 22:37:51 GMT",
+      "tag": "@fluentui-react-native/tester_v0.9.4",
+      "version": "0.9.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "convert themed stylesheet to use memo-cache",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4022a4f0b8376144dba528e418ece2f503a9a5d7",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 02 Oct 2020 22:17:48 GMT",
+      "tag": "@fluentui-react-native/tester_v0.9.3",
+      "version": "0.9.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix web tester",
+            "author": "jasonmo@microsoft.com",
+            "commit": "6214d9eeaf59e3462d1c77fc658486786ec12268",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 01 Oct 2020 16:54:19 GMT",
+      "tag": "@fluentui-react-native/tester_v0.9.2",
+      "version": "0.9.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "switch Separator to new framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "8aeba690cb213dd628748e1c1b41c3ecfea5f547",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 29 Sep 2020 18:14:46 GMT",
+      "tag": "@fluentui-react-native/tester_v0.9.1",
+      "version": "0.9.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "remove extra componentTokens reference and route everything to components",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f481a7179d21204e0a89bc91e462b7ace0c3f753",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 28 Sep 2020 20:32:21 GMT",
+      "tag": "@fluentui-react-native/tester_v0.9.0",
+      "version": "0.9.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "🎨 Apply theme shim to host.colors, fix theme picker",
+            "author": "aliciakds88@gmail.com",
+            "commit": "8338baf6918f763b3ba3b3a7169d1f390ad0557d",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 28 Sep 2020 19:03:01 GMT",
+      "tag": "@fluentui-react-native/tester_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Adding FocusZone Tests",
+            "author": "safreibe@microsoft.com",
+            "commit": "81ff48f47f1a86683abf2f33859007b2f861d591",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Sep 2020 19:21:43 GMT",
+      "tag": "@fluentui-react-native/tester_v0.7.5",
+      "version": "0.7.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update react-native-win32 versions - enable logbox",
+            "author": "acoates-ms@noreply.github.com",
+            "commit": "a95ab1b66822cceacc74e24094f85c6917f58086",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 22 Sep 2020 21:42:19 GMT",
+      "tag": "@fluentui-react-native/tester_v0.7.1",
+      "version": "0.7.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Updated Shimmer to not have a module name",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "901b3a534df10a1d471c815349651500d0237575",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 22 Sep 2020 20:41:53 GMT",
+      "tag": "@fluentui-react-native/tester_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "added android documentation for fluentui tester, and updated top level page to point to platform specific docs.",
+            "author": "ejlayne@microsoft.com",
+            "commit": "4b420148323603021c055d50f5415a27ca44f023",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 22 Sep 2020 20:14:25 GMT",
+      "tag": "@fluentui-react-native/tester_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "added android documentation for fluentui tester, and updated top level page to point to platform specific docs.",
+            "author": "ejlayne@microsoft.com",
+            "commit": "4b420148323603021c055d50f5415a27ca44f023",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 22 Sep 2020 04:57:02 GMT",
+      "tag": "@fluentui-react-native/tester_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update button snapshot and test",
+            "author": "krsiler@microsoft.com",
+            "commit": "4cd56e09bb5a447f7945f22024da1eeda16b6bf0",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 11 Sep 2020 20:25:42 GMT",
+      "tag": "@fluentui-react-native/tester_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add samples and some README text to use-slots and use-styling packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2566347850eff4ed67bfad2a85134481e088cba6",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 09 Sep 2020 21:36:19 GMT",
       "tag": "@fluentui-react-native/tester_v0.6.1",
       "version": "0.6.1",

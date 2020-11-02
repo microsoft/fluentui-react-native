@@ -2,6 +2,81 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Fri, 23 Oct 2020 22:27:37 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "RNIcon feature",
+            "author": "warleu@microsoft.com",
+            "commit": "83a0f448bf9ee9dddece08e7c277304dcef96388",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Oct 2020 21:21:59 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "onDismiss not called when contextual menu is dismissed with item click",
+            "author": "lehon@microsoft.com",
+            "commit": "4f3ed9d5555e86a6017901aa2f010732d6d6fe5a",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 13 Oct 2020 01:39:45 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge branch 'master' into checkbox-focus",
+            "author": "lehon@microsoft.com",
+            "commit": "7a9cef9d56db7ad154e542b4ac5547458dfc604d",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 12 Oct 2020 04:09:31 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "shared useKeyCallback",
+            "author": "email not defined",
+            "commit": "d1c543f21301b22a84fb6968a2c2612bb487be39",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Sep 2020 19:21:43 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.5.2",
+      "version": "0.5.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update react-native-win32 versions - enable logbox",
+            "author": "acoates-ms@noreply.github.com",
+            "commit": "a95ab1b66822cceacc74e24094f85c6917f58086",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 17 Aug 2020 22:08:34 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.5.1",
       "version": "0.5.1",

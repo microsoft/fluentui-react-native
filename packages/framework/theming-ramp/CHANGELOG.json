@@ -2,6 +2,207 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Fri, 23 Oct 2020 22:27:37 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "RNIcon feature",
+            "author": "warleu@microsoft.com",
+            "commit": "83a0f448bf9ee9dddece08e7c277304dcef96388",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Oct 2020 21:21:59 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.11.1",
+      "version": "0.11.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "onDismiss not called when contextual menu is dismissed with item click",
+            "author": "lehon@microsoft.com",
+            "commit": "4f3ed9d5555e86a6017901aa2f010732d6d6fe5a",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 19 Oct 2020 22:06:02 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.11.1",
+      "version": "0.11.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "rework theme usage in tester",
+            "author": "jasonmo@microsoft.com",
+            "commit": "5657a340608ad2e1fb6b7e61f92d706e350847b1",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 13 Oct 2020 01:39:45 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "add focused state condition to onKeyUp callback",
+            "author": "lehon@microsoft.com",
+            "commit": "7a9cef9d56db7ad154e542b4ac5547458dfc604d",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 12 Oct 2020 04:09:31 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "added button semantic colors",
+            "author": "email not defined",
+            "commit": "d1c543f21301b22a84fb6968a2c2612bb487be39",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 29 Sep 2020 18:34:10 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.12",
+      "version": "0.10.12",
+      "comments": {
+        "none": [
+          {
+            "comment": "add test-tools package with mock theme",
+            "author": "jasonmo@microsoft.com",
+            "commit": "01dcf3ba988bebd5cab620f5e78f40ff1a7a55f6",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 28 Sep 2020 20:32:21 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.11",
+      "version": "0.10.11",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add more host colors",
+            "author": "aliciakds88@gmail.com",
+            "commit": "8338baf6918f763b3ba3b3a7169d1f390ad0557d",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sun, 27 Sep 2020 04:08:27 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.10",
+      "version": "0.10.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add light and dark awareness to default themes",
+            "author": "jasonmo@microsoft.com",
+            "commit": "0c1e3af0cdf38aea289cc61e5b047837c5e2fb84",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Sep 2020 19:21:43 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.9",
+      "version": "0.10.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update react-native-win32 versions - enable logbox",
+            "author": "acoates-ms@noreply.github.com",
+            "commit": "a95ab1b66822cceacc74e24094f85c6917f58086",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Sep 2020 18:01:57 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.8",
+      "version": "0.10.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add experimental theme package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "59d0857d4244fb6b35fb2c9ca7d01cf2a073f461",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 23 Sep 2020 18:31:48 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.7",
+      "version": "0.10.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "start publishing src to fix customer source maps",
+            "author": "jasonmo@microsoft.com",
+            "commit": "b3d7b5ba710bc581a6f4db91c91e4ffc185fc427",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 22 Sep 2020 04:57:02 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.6",
+      "version": "0.10.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add theme-types package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "988fdbce67d0fcf65401bb1717d37dca8d002d8a",
+            "package": "@uifabricshared/theming-ramp"
+          },
+          {
+            "comment": "add default theme package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "abd2752a90e12cf67dec5d80337fd9abb8478c2c",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 11 Sep 2020 20:25:42 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.10.5",
+      "version": "0.10.5",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add samples and some README text to use-slots and use-styling packages",
+            "author": "jasonmo@microsoft.com",
+            "commit": "2566347850eff4ed67bfad2a85134481e088cba6",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Aug 2020 05:03:51 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.10.5",
       "version": "0.10.5",

@@ -1,0 +1,50 @@
+{
+  "name": "@fluentui-react-native/experimental-avatar",
+  "entries": [
+    {
+      "date": "Sat, 24 Oct 2020 06:35:04 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Updated Avatar metadata in podspec and package.json",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "046031640c02dcd301c1c140131193e9c59d573f",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Oct 2020 21:21:59 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "onDismiss not called when contextual menu is dismissed with item click",
+            "author": "lehon@microsoft.com",
+            "commit": "4f3ed9d5555e86a6017901aa2f010732d6d6fe5a",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 19 Oct 2020 18:16:36 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "New experimental component avatar",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "6a48956ff1f79ed666cf2810af00be7474c39740",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    }
+  ]
+}

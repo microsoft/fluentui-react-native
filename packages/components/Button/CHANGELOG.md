@@ -1,8 +1,57 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Wed, 09 Sep 2020 21:36:19 GMT and should not be manually modified.
+This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.0
+
+Fri, 23 Oct 2020 22:27:37 GMT
+
+### Minor changes
+
+- RNIcon feature (warleu@microsoft.com)
+
+## 0.10.23
+
+Mon, 19 Oct 2020 22:06:02 GMT
+
+### Patches
+
+- rework theme usage in tester (jasonmo@microsoft.com)
+
+## 0.10.22
+
+Mon, 12 Oct 2020 04:09:31 GMT
+
+### Patches
+
+- tweaking accessibility (email not defined)
+
+## 0.10.18
+
+Mon, 28 Sep 2020 20:32:21 GMT
+
+### Patches
+
+- move test pages (aliciakds88@gmail.com)
+
+## 0.10.16
+
+Fri, 25 Sep 2020 19:21:43 GMT
+
+### Patches
+
+- Update react-native-win32 versions - enable logbox (acoates-ms@noreply.github.com)
+
+## 0.10.13
+
+Tue, 22 Sep 2020 04:57:02 GMT
+
+### Patches
+
+- Update a11y properties (krsiler@microsoft.com)
+- manually bump button version (taamireh@microsoft.com)
 
 ## 0.10.11
 

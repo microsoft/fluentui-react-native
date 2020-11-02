@@ -61,5 +61,13 @@
   },
   "[handlebars]": {
     "editor.formatOnSave": false
-  }
+  },
+  "cSpell.words": [
+    "TESTPAGE",
+    "beachball",
+    "consts",
+    "fluentui",
+    "macos",
+    "nuget"
+  ]
 }

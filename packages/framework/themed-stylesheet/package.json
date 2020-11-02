@@ -1,6 +1,6 @@
 {
-  "name": "@uifabricshared/themed-stylesheet",
-  "version": "0.3.68",
+  "name": "@fluentui-react-native/themed-stylesheet",
+  "version": "1.1.0",
   "description": "Helper for using react-native StyleSheets with themes",
   "repository": {
     "type": "git",
@@ -29,6 +29,9 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "@fluentui-react-native/memo-cache": "^1.1.0"
+  },
   "devDependencies": {
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",

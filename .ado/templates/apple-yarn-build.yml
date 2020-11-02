@@ -1,0 +1,18 @@
+parameters:
+  relative_directory: ''
+
+steps:
+  # Install any pods necessary for the project
+  - bash: |
+      echo "pod install --project-directory=src"
+      pod install --project-directory=src
+    workingDirectory: apps/${{ parameters.relative_directory }}
+    displayName: 'pod install'
+
+  - bash: |
+      echo "yarn ${{ parameters.relative_directory }}"
+      yarn ${{ parameters.relative_directory }}
+    workingDirectory: apps/${{ parameters.relative_directory }}
+    displayName: 'yarn ${{ parameters.relative_directory }}'
+    env:
+      platform_directory: ${{ parameters.relative_directory }}

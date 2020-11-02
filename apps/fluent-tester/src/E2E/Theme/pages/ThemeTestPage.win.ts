@@ -1,4 +1,4 @@
-import { THEME_TESTPAGE } from '../../../RNTester/TestComponents/Theme/consts';
+import { THEME_TESTPAGE } from '../../../FluentTester/TestComponents/Theme/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class ThemeTestPage extends BasePage {
