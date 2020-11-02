@@ -17,7 +17,6 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const BrushScriptMT = Text.customize({ tokens: { variant: 'heroStandard', fontFamily: 'Brush Script MT' } });
   const CourierNew = Text.customize({ tokens: { variant: 'headerStandard', fontFamily: 'Courier New' } });
   const Georgia = Text.customize({ tokens: { variant: 'subheaderStandard', fontFamily: 'Georgia' } });
-  const SegoeScript = Text.customize({ tokens: { variant: 'bodyStandard', fontFamily: 'Segoe Script' } });
   const TimesNewRoman = Text.customize({ tokens: { variant: 'secondaryStandard', fontFamily: 'Times New Roman' } });
   const Wingdings = Text.customize({ tokens: { variant: 'captionStandard', fontFamily: 'Wingdings' } });
 
@@ -38,7 +37,6 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
         <BrushScriptMT>Brush Script MT</BrushScriptMT>
         <CourierNew>Courier New</CourierNew>
         <Georgia>Georgia</Georgia>
-        <SegoeScript>Segoe Script</SegoeScript>
         <TimesNewRoman>TimesNewRoman</TimesNewRoman>
         <Wingdings>Wingdings</Wingdings>
       </Stack>

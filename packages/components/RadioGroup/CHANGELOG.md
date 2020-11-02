@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Mon, 19 Oct 2020 22:06:02 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Oct 2020 18:32:53 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.0
+
+Fri, 30 Oct 2020 18:32:53 GMT
+
+### Minor changes
+
+- Using pressable onFocus (safreibe@microsoft.com)
+
+## 0.7.2
+
+Thu, 29 Oct 2020 17:13:48 GMT
+
+### Patches
+
+- Fixing FocusRect bug (safreibe@microsoft.com)
+
+## 0.7.0
+
+Fri, 23 Oct 2020 22:27:37 GMT
+
+### Minor changes
+
+- RNIcon feature (warleu@microsoft.com)
+
+## 0.6.0
+
+Thu, 22 Oct 2020 00:57:39 GMT
+
+### Minor changes
+
+- Adding SelectedKey Prop (safreibe@microsoft.com)
 
 ## 0.5.1
 

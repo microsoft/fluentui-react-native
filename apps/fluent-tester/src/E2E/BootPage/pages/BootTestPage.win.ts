@@ -3,6 +3,7 @@ import { HOMEPAGE_BUTTON_BUTTON } from '../../../FluentTester/TestComponents/But
 import { HOMEPAGE_CALLOUT_BUTTON } from '../../../FluentTester/TestComponents/Callout/consts';
 import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../../FluentTester/TestComponents/FocusTrapZone/consts';
 import { HOMEPAGE_FOCUSZONE_BUTTON } from '../../../FluentTester/TestComponents/FocusZone/consts';
+import { HOMEPAGE_ICON_BUTTON } from '../../../FluentTester/TestComponents/Icon/consts';
 import { HOMEPAGE_LINK_BUTTON } from '../../../FluentTester/TestComponents/Link/consts';
 import { HOMEPAGE_PERSONA_BUTTON } from '../../../FluentTester/TestComponents/Persona/consts';
 import { HOMEPAGE_PERSONACOIN_BUTTON } from '../../../FluentTester/TestComponents/PersonaCoin/consts';
@@ -34,6 +35,10 @@ class BootTestPage extends BasePage {
 
   clickAndGoToFocusZonePage() {
     this.focusZonePage.click();
+  }
+
+  clickAndGoToIconPage() {
+    this.iconPage.click();
   }
 
   clickAndGoToLinkPage() {
@@ -98,6 +103,10 @@ class BootTestPage extends BasePage {
 
   private get focusZonePage() {
     return By(HOMEPAGE_FOCUSZONE_BUTTON);
+  }
+
+  private get iconPage() {
+    return By(HOMEPAGE_ICON_BUTTON);
   }
 
   private get linkPage() {

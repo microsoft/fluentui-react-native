@@ -1,4 +1,3 @@
-
 # Build pipeline for publishing
 
 trigger:
@@ -12,27 +11,69 @@ pr: none
 variables:
   - group: 'NPM and Github Secrets'
 
-pool:
-  vmImage: 'ubuntu-latest'
+jobs:
+  - job: NPMPublish
+    displayName: NPM Publish
+    pool:
+      vmImage: 'ubuntu-latest'
 
-steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: '12.x'
-    displayName: 'Install Node.js'
+    steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '12.x'
+        displayName: 'Install Node.js'
 
-  - script: |
-      git config user.name "UI-Fabric-RN-Bot"
-      git config user.email "uifrnbot@microsoft.com"
-      git remote set-url origin https://$(githubUser):$(githubPAT)@github.com/microsoft/ui-fabric-react-native.git
-    displayName: Git Authentication
-  - template: templates/yarn-install.yml
+      - script: |
+          git config user.name "UI-Fabric-RN-Bot"
+          git config user.email "uifrnbot@microsoft.com"
+          git remote set-url origin https://$(githubUser):$(githubPAT)@github.com/microsoft/ui-fabric-react-native.git
+        displayName: Git Authentication
+      - template: templates/yarn-install.yml
 
-  - script: |
-      yarn test
-    displayName: 'yarn test'
-  - script: |
-      yarn publish:beachball -- -b origin/master -n $(npmAuth) --access public -y
-    displayName: 'Publish NPM Packages'
+      - script: |
+          yarn test
+        displayName: 'yarn test'
 
-  - template: templates/publish-nuget-job.yml
+      - script: |
+          yarn publish:beachball -- -b origin/master -n $(npmAuth) --access public -y
+        displayName: 'Publish NPM Packages'
+
+  - job: NuGetPublish
+    displayName: NuGet Publish
+    pool:
+      vmImage: 'macos-10.15'
+      demands: ['xcode', 'sh', 'npm']
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+
+    steps:
+      - checkout: self
+        persistCredentials: true
+
+      - template: templates/setup-repo-min-build.yml
+
+      # Clean Derived Data
+      - script: |
+          rm -rf $(Build.Repository.LocalPath)/DerivedData
+        displayName: 'Clean DerivedData'
+
+      - script: |
+          sudo gem install cocoapods
+        displayName: 'Install CocoaPods Environment'
+
+      - script: |
+          yarn bundle ios
+        workingDirectory: $(Build.Repository.LocalPath)/apps/ios
+        displayName: 'yarn bundle iOS'
+
+      - script: |
+          yarn bundle macos
+        workingDirectory: $(Build.Repository.LocalPath)/apps/macos
+        displayName: 'yarn bundle macOS'
+
+      # Select proper Xcode version
+      - template: templates/apple-xcode-select.yml
+
+      - template: templates/apple-xcode-build-static-libs.yml
+
+      - template: templates/nuget-publish.yml

@@ -1,7 +1,10 @@
 {
   "name": "@fluentui-react-native/experimental-avatar",
-  "version": "0.2.1",
-  "description": "An Avatar view",
+  "version": "0.2.4",
+  "description": "A cross-platform Avatar component using the Fluent Design System. Currently only implemented on iOS",
+  "license": "MIT",
+  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
+  "homepage": "https://github.com/microsoft/fluentui-react-native",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -21,8 +24,8 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@fluentui-react-native/component-cache": "^1.0.3",
-    "@fluentui-react-native/framework": "0.3.9"
+    "@fluentui-react-native/component-cache": "^1.1.0",
+    "@fluentui-react-native/framework": "0.4.1"
   },
   "devDependencies": {
     "@types/react-native": "^0.62.0",
@@ -34,7 +37,5 @@
   "peerDependencies": {
     "react-native": ">=0.60.0",
     "react": "16.11.0"
-  },
-  "author": "",
-  "license": "MIT"
+  }
 }
