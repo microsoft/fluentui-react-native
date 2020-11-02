@@ -51,7 +51,6 @@
     "react-native-svg": "^12.1.1"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "^0.63.7",
     "@react-native-community/eslint-config": "^1.1.0",
     "@rnx-kit/cli": "^0.5.27",
     "@types/jasmine": "3.5.10",
@@ -67,10 +66,7 @@
     "@wdio/sync": "5.20.1",
     "appium": "1.17.1",
     "metro-react-native-babel-preset": "^0.59.0",
-    "react": "16.13.1",
-    "react-native": "^0.63.4",
     "react-native-svg-transformer": "^0.14.3",
-    "react-native-windows": "^0.62.1",
     "react-test-renderer": "~16.13.1",
     "rnpm-plugin-windows": "^0.5.1-0",
     "ts-node": "^8.10.1",
@@ -79,8 +75,11 @@
     "webdriverio": "5.22.4"
   },
   "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.63.7",
     "react": "16.13.1",
-    "react-native": "^0.63.4"
+    "react-native": "^0.63.4",
+    "react-native-macos": "^0.63.0",
+    "react-native-windows": "^0.63.0"
   },
   "jest": {
     "preset": "react-native"

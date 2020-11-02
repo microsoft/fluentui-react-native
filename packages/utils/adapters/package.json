@@ -24,14 +24,16 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@office-iss/react-native-win32": "^0.63.7",
     "@types/jest": "^25.1.4",
     "@types/react-native": "^0.63.0",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
+  },
+  "peerDependencies": {
+    "@office-iss/react-native-win32": "^0.63.7",
     "react-native": "^0.63.4",
     "react-native-web": "0.12.3",
-    "react-native-windows": "^0.62.1"
+    "react-native-windows": "^0.63.0"
   },
   "author": "",
   "license": "MIT"
