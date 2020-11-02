@@ -1,4 +1,5 @@
 {
   "name": "FluentTester",
-  "displayName": "FluentTester"
+  "displayName": "FluentTester",
+  "components": [{"appKey": "FluentTester"}]
 }
