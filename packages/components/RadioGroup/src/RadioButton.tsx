@@ -28,9 +28,7 @@ export const RadioButton = compose<IRadioButtonType>({
         info.onChange && info.onChange(buttonKey);
     };
 
-    /* We're changing selection on both onPress and onFocus to integrate better with NetUI. For example, for TaskPanes, if focus isn't already landed
-    ** on the TaskPane and you click inside, keyboard focus does not get moved there, and thus no onFocus is called. This is where we need onPress functionality.
-    */
+    /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
     const pressable = useAsPressable({...rest,
       onPress: () => {
         changeSelection();
