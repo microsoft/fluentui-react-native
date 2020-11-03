@@ -11,7 +11,7 @@
     "report": "allure generate allure-results --clean",
     "start": "react-native start",
     "test": "jest",
-    "windows": "react-native run-windows"
+    "windows": "install-windows-test-app && react-native run-windows"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.13.5",
