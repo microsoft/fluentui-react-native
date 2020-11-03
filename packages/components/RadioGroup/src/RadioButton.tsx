@@ -22,11 +22,21 @@ export const RadioButton = compose<IRadioButtonType>({
     // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
     const info = React.useContext(RadioGroupContext);
 
+    /* We don't want to call the user's onChange multiple times on the same selection. */
+    const changeSelection = () => {
+      if(buttonKey != info.selectedKey)
+        info.onChange && info.onChange(buttonKey);
+    };
+
+    /* We're changing selection on both onPress and onFocus to integrate better with NetUI. For example, for TaskPanes, if focus isn't already landed
+    ** on the TaskPane and you click inside, keyboard focus does not get moved there, and thus no onFocus is called. This is where we need onPress functionality.
+    */
     const pressable = useAsPressable({...rest,
+      onPress: () => {
+        changeSelection();
+      },
       onFocus: () => {
-        /* We don't want to call the user's onChange multiple times on the same selection */
-        if(buttonKey != info.selectedKey)
-          info.onChange && info.onChange(buttonKey);
+        changeSelection();
       }});
 
     const buttonRef = useViewCommandFocus(componentRef);
