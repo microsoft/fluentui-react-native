@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/composition",
   "entries": [
     {
+      "date": "Mon, 02 Nov 2020 19:16:23 GMT",
+      "tag": "@fluentui-react-native/composition_v0.4.1",
+      "version": "0.4.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update type of the tokens parameter to make TSC happy.",
+            "author": "kinhln@microsoft.com",
+            "commit": "1aa06417fdea7697e42d144fac16c656ab3ea9a4",
+            "package": "@fluentui-react-native/composition"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Oct 2020 22:27:37 GMT",
       "tag": "@fluentui-react-native/composition_v0.4.0",
       "version": "0.4.0",

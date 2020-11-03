@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 'use strict';
 import * as React from 'react';
-import { View, NativeSyntheticEvent } from 'react-native';
+import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { radioButtonName, IRadioButtonType, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonRenderData } from './RadioButton.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
@@ -10,7 +10,7 @@ import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings, radioButtonSelectActionLabel } from './RadioButton.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens, getPaletteFromTheme} from '@fluentui-react-native/tokens';
-import { useAsPressable, useViewCommandFocus, FocusEvent } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { RadioGroupContext } from './RadioGroup';
 
 export const RadioButton = compose<IRadioButtonType>({
@@ -22,7 +22,12 @@ export const RadioButton = compose<IRadioButtonType>({
     // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
     const info = React.useContext(RadioGroupContext);
 
-    const pressable = useAsPressable(rest);
+    const pressable = useAsPressable({...rest,
+      onFocus: () => {
+        /* We don't want to call the user's onChange multiple times on the same selection */
+        if(buttonKey != info.selectedKey)
+          info.onChange && info.onChange(buttonKey);
+      }});
 
     const buttonRef = useViewCommandFocus(componentRef);
 
@@ -47,24 +52,11 @@ export const RadioButton = compose<IRadioButtonType>({
     // Grab the styling information from the userProps, referencing the state as well as the props.
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
-    // This function is called every time a RadioButton gains focus. It does two things:
-    // 1) Calls pressable's onFocus in order to keep track of our state's focus variable. It is dependent on pressable's
-    //    focus variable. Without this, it wouldn't stay updated because we're overriding it's onFocus below for the rootProps.
-    // 2) Selects the currently focused button by calling the RadioGroup's callback function.
-    const onFocusChange = React.useCallback((ev: NativeSyntheticEvent<{}>) => {
-      // This check is necessary because this onFocus gets called multiple times, causing the user's onFocus to be called multiple times (not good)
-      if (!state.selected) {
-        info.onChange && info.onChange(buttonKey);
-      }
-      pressable.props.onFocus(ev as FocusEvent);
-    }, [state, pressable.props, info, buttonKey]);
-
     const slotProps = mergeSettings<IRadioButtonSlotProps>(styleProps, {
       root: {
-        rest,
+        ...rest,
         ref: buttonRef,
         ...pressable.props,
-        onFocus: onFocusChange,
         accessibilityRole: 'radio',
         accessibilityLabel: ariaLabel ? ariaLabel : content,
         accessibilityState: { disabled: state.disabled, selected: state.selected },
