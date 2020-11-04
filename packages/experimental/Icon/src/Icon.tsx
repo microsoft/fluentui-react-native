@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IconProps, SvgIconProps, FontIconProps } from './Icon.types';
-import * as ReactNative from 'react-native';
+import { Image, ImageStyle } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { SvgUri } from 'react-native-svg';
 import { mergeStyles } from '@fluentui-react-native/framework';
@@ -8,13 +8,13 @@ import * as assetRegistry from 'react-native/Libraries/Image/AssetRegistry';
 import { stagedComponent, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
 import { useTheme } from '@fluentui-react-native/theme-types';
 
-const rasterImageStyleCache = getMemoCache<ReactNative.ImageStyle>();
+const rasterImageStyleCache = getMemoCache<ImageStyle>();
 
 function renderRasterImage(iconProps: IconProps) {
   const { width, height } = iconProps;
   const style = mergeStyles(iconProps.style, rasterImageStyleCache({ width: width, height: height }, [width, height])[0]);
 
-  return <ReactNative.Image source={iconProps.rasterImageSource.src} style={style} />;
+  return <Image source={iconProps.rasterImageSource.src} style={style} />;
 }
 
 function fontFamilyFromFontSrcFile(fontSrcFile: string, fontFamily: string): string {
