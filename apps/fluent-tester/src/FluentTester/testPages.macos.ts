@@ -1,5 +1,5 @@
 import { TestDescription } from './TestComponents';
-import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
+import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/ButtonExperimental';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
@@ -17,7 +17,7 @@ import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 export const tests: TestDescription[] = [
   {
     name: 'Button Test',
-    component: ButtonTest,
+    component: ExperimentalButtonTest,
     testPage: HOMEPAGE_BUTTON_BUTTON,
   },
   {

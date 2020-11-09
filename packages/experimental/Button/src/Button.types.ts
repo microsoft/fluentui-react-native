@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ViewProps, ImageProps, ViewStyle } from 'react-native';
+import { ViewProps, ImageProps, ViewStyle, Image } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
@@ -111,7 +111,33 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   fluid?: boolean;
 }
 
+export interface ButtonMacProps {
+  /*
+   * Name of the icon to show on the Button.
+   */
+  image?: Image;
+  /*
+   * Text to show on the Button.
+   */
+  title?: string;
+  /*
+   * ButtonStyle wrapped enum
+   */
+  buttonStyle?: ButtonMacStyle;
+  /*
+   * A button can be enabled or disabled.
+   */
+  isEnabled?: boolean;
+}
+
+export interface ButtonMacTokens {
+  imageTitle?: string;
+  cornerRadius?: number;
+}
+
 export type ButtonState = IPressableHooks<ButtonProps & React.ElementRef<any>>;
+export type ButtonMacStyle = 'primaryFilled' | 'primaryOutline' | 'secondaryOutline' | 'tertiaryOutline' | 'borderless';
+export type NativeButtonProps = ButtonMacProps & ButtonMacTokens;
 
 export interface ButtonSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
@@ -119,8 +145,18 @@ export interface ButtonSlotProps {
   content: TextProps;
 }
 
+export interface MacButtonSlotProps {
+  root: NativeButtonProps;
+}
+
 export interface ButtonType {
   props: ButtonProps;
   tokens: ButtonTokens;
   slotProps: ButtonSlotProps;
+}
+
+export interface ButtonTypeMac {
+  props: ButtonMacProps;
+  tokens: ButtonMacTokens;
+  slotProps: MacButtonSlotProps;
 }
