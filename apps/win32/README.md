@@ -4,7 +4,7 @@
 
 ## Launch `FluentUI Tester` app on Win32
 
-1. Make sure you have followed the [Getting Started](../../README.md) instructions to install packages and build the entire FluentUI React Native repository. I.e. from the root of the repo:
+1. Make sure you have followed the [Getting Started](../../README.md#setup-your-development-environment) instructions to install packages and build the entire FluentUI React Native repository. I.e. from the root of the repo:
 
 2. Then go into `apps\win32` folder:
 
