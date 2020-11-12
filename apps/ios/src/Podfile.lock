@@ -9,10 +9,10 @@ PODS:
     - React-Core (= 0.62.2)
     - React-jsi (= 0.62.2)
     - ReactCommon/turbomodule/core (= 0.62.2)
-  - FluentUI-React-Native-Avatar (0.2.1):
+  - FluentUI-React-Native-Avatar (0.2.5):
     - MicrosoftFluentUI (~> 0.1.16)
     - React
-  - FluentUI-React-Native-Shimmer (0.2.11):
+  - FluentUI-React-Native-Shimmer (0.3.3):
     - MicrosoftFluentUI (~> 0.1.16)
     - React
   - Folly (2018.10.22.00):
@@ -296,8 +296,10 @@ PODS:
     - React-cxxreact (= 0.62.2)
     - React-jsi (= 0.62.2)
     - ReactCommon/callinvoker (= 0.62.2)
-  - ReactTestApp-DevSupport (0.2.12)
+  - ReactTestApp-DevSupport (0.2.14)
   - ReactTestApp-Resources (1.0.0-dev)
+  - RNSVG (11.0.1):
+    - React
   - SwiftLint (0.40.3)
   - Yoga (1.14.0)
 
@@ -334,6 +336,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../../../node_modules/react-native/ReactCommon`)
   - ReactTestApp-DevSupport (from `../../../node_modules/react-native-test-app`)
   - ReactTestApp-Resources (from `..`)
+  - RNSVG (from `../../../node_modules/react-native-svg`)
   - SwiftLint
   - Yoga (from `../../../node_modules/react-native/ReactCommon/yoga`)
 
@@ -401,6 +404,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-test-app"
   ReactTestApp-Resources:
     :path: ".."
+  RNSVG:
+    :path: "../../../node_modules/react-native-svg"
   Yoga:
     :path: "../../../node_modules/react-native/ReactCommon/yoga"
 
@@ -409,8 +414,8 @@ SPEC CHECKSUMS:
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e
-  FluentUI-React-Native-Avatar: 60209611a9adc615965b1f3962c9510b1e654cf1
-  FluentUI-React-Native-Shimmer: 25b922153954f388b08ab900f909653361b47051
+  FluentUI-React-Native-Avatar: b2d40d426a6d3e4d627c2d30e1f2885caff20768
+  FluentUI-React-Native-Shimmer: 504dd3c43aea2d84855bdd369621069fab0274b2
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   MicrosoftFluentUI: deaa7c0f669b934e8fb8b73532ee8340812af01c
@@ -434,11 +439,12 @@ SPEC CHECKSUMS:
   React-RCTText: fae545b10cfdb3d247c36c56f61a94cfd6dba41d
   React-RCTVibration: 4356114dbcba4ce66991096e51a66e61eda51256
   ReactCommon: ed4e11d27609d571e7eee8b65548efc191116eb3
-  ReactTestApp-DevSupport: 187c3bc9645243f254ca33914a2863c41f6cdaba
+  ReactTestApp-DevSupport: d3671526b8bfa3617b472b3a2404c1fe72fcdc1a
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
+  RNSVG: 67f1f12dae2cef6ed59a42cae74a6b8f5a9e7b46
   SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
 
-PODFILE CHECKSUM: 3a3cf581e03c52d37721123cf80933d11664e591
+PODFILE CHECKSUM: 1dccc092e62ae5174feebca7d62988e9581b410e
 
 COCOAPODS: 1.9.3
