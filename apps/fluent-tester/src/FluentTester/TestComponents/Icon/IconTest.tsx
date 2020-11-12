@@ -88,7 +88,7 @@ export const IconTest: React.FunctionComponent<{}> = () => {
   const status: PlatformStatus = {
     win32Status: 'Experimental',
     uwpStatus: 'Backlog',
-    iosStatus: 'Backlog',
+    iosStatus: 'Experimental',
     macosStatus: 'Backlog',
     androidStatus: 'Backlog',
   };
