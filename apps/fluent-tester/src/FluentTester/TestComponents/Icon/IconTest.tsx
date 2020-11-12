@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Text } from '@fluentui/react-native';
 import { Icon, RasterImageIconProps, SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -11,10 +11,16 @@ const testTtf = require('./assets/Font Awesome 5 Free-Solid-900.otf');
 import TestSvg from './assets/test.svg';
 
 const icons: React.FunctionComponent<{}> = () => {
-  const fontProps: FontIconProps = {
+  const fontCustomFontProps: FontIconProps = {
     fontFamily: 'Font Awesome 5 Free',
     fontSrcFile: testTtf,
     codepoint: 0xf083,
+    fontSize: 32,
+  };
+
+  const fontBuiltInProps = {
+    fontFamily: 'Arial',
+    codepoint: 0x2663,
     fontSize: 32,
   };
 
@@ -42,17 +48,20 @@ const icons: React.FunctionComponent<{}> = () => {
   // https://thenounproject.com/search/?q=chess&i=2960386
   const rasterChessProps: RasterImageIconProps = { src: { uri: 'https://static.thenounproject.com/png/2960386-200.png' } };
 
-  const showFontIcon = true;
+  const showFontIcons = true;
   const showSvgIcons = true;
   const showRasterIcons = true;
 
   return (
     <View>
       {
-        showFontIcon ?
+        showFontIcons ?
           <View>
-            <Text>Font icon</Text>
-            <Icon fontSource={fontProps} width={100} height={100} color="purple" />
+            <Text>Font icons</Text>
+            {
+              Platform.OS == 'windows' ? <Icon fontSource={fontCustomFontProps} width={100} height={100} color="purple" /> : null
+            }
+            <Icon fontSource={fontBuiltInProps} width={100} height={100} color="#060" />
           </View> : null
       }
       {
