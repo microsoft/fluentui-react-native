@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Wed, 04 Nov 2020 18:56:53 GMT",
+      "tag": "@fluentui-react-native/icon_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix import statement",
+            "author": "kinhln@microsoft.com",
+            "commit": "3fc828bdb8eaf4f61d4416da6026567675b15680",
+            "package": "@fluentui-react-native/icon"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Oct 2020 22:27:37 GMT",
       "tag": "@fluentui-react-native/icon_v0.2.0",
       "version": "0.2.0",
