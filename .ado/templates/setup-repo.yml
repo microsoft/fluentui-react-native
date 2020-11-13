@@ -10,4 +10,13 @@ steps:
       versionSpec: "5.6.0"
     displayName: "Install Nuget"
 
+  # WinAppDriver 1.2 is being deployed across MS hosted agents. appium-windows-driver is tied to a specific version of WinAppDriver,
+  # failing if a hash is mismatched. The latest current available package supports 1.2rc.
+  # Uninstall WinAppDriver 1.2.1 if installed and instead install WinAppDriver 1.1 for now
+  - powershell: |
+      Invoke-WebRequest https://github.com/microsoft/WinAppDriver/releases/download/v1.1/WindowsApplicationDriver.msi -OutFile $(Agent.TempDirectory)\WinAppDriver.msi
+      Start-Process msiexec -ArgumentList "/quiet","/x","{087BBF93-D9E3-4D27-BDBE-9C702E0066FC}" -Verb runAs -Wait
+      Start-Process msiexec -ArgumentList "/quiet","/i","$(Agent.TempDirectory)\WinAppDriver.msi" -Verb runAs -Wait
+    displayName: Replace WinAppDriver 1.2.1 with WinAppDriver 1.1
+
   - template: yarn-install.yml
