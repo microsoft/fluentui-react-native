@@ -18,5 +18,5 @@ Pod::Spec.new do |s|
   s.osx.source_files      = "macos/*.{swift,h,m}"
 
   s.dependency 'React'
-  s.dependency 'MicrosoftFluentUI', '~> 0.1.16'
+  s.dependency 'MicrosoftFluentUI/Button_mac'
 end

@@ -9,42 +9,13 @@ PODS:
     - React-Core (= 0.62.16)
     - React-jsi (= 0.62.16)
     - ReactCommon/turbomodule/core (= 0.62.16)
-  - FluentUI-React-Native-Button (0.3.2):
-    - MicrosoftFluentUI (~> 0.1.16)
+  - FluentUI-React-Native-Button (0.3.1):
+    - MicrosoftFluentUI/Button_mac
     - React
   - glog (0.3.5)
-  - MicrosoftFluentUI (0.1.17):
-    - MicrosoftFluentUI/AvatarView_mac (= 0.1.17)
-    - MicrosoftFluentUI/Button_mac (= 0.1.17)
-    - MicrosoftFluentUI/Calendar_ios (= 0.1.17)
-    - MicrosoftFluentUI/Card_ios (= 0.1.17)
-    - MicrosoftFluentUI/Controls_ios (= 0.1.17)
-    - MicrosoftFluentUI/Core_ios (= 0.1.17)
-    - MicrosoftFluentUI/Core_mac (= 0.1.17)
-    - MicrosoftFluentUI/DatePicker_mac (= 0.1.17)
-    - MicrosoftFluentUI/Drawer_ios (= 0.1.17)
-    - MicrosoftFluentUI/HUD_ios (= 0.1.17)
-    - MicrosoftFluentUI/Link_mac (= 0.1.17)
-    - MicrosoftFluentUI/Notification_ios (= 0.1.17)
-    - MicrosoftFluentUI/PillButtonBar_ios (= 0.1.17)
-    - MicrosoftFluentUI/PopupMenu_ios (= 0.1.17)
-    - MicrosoftFluentUI/Presenters_ios (= 0.1.17)
-    - MicrosoftFluentUI/Separator_mac (= 0.1.17)
-    - MicrosoftFluentUI/Shimmer_ios (= 0.1.17)
-    - MicrosoftFluentUI/TabBar_ios (= 0.1.17)
-    - MicrosoftFluentUI/Tooltip_ios (= 0.1.17)
-    - MicrosoftFluentUI/Utilities_ios (= 0.1.17)
-  - MicrosoftFluentUI/AvatarView_mac (0.1.17):
-    - MicrosoftFluentUI/Core_mac
   - MicrosoftFluentUI/Button_mac (0.1.17):
     - MicrosoftFluentUI/Core_mac
   - MicrosoftFluentUI/Core_mac (0.1.17)
-  - MicrosoftFluentUI/DatePicker_mac (0.1.17):
-    - MicrosoftFluentUI/Core_mac
-  - MicrosoftFluentUI/Link_mac (0.1.17):
-    - MicrosoftFluentUI/Core_mac
-  - MicrosoftFluentUI/Separator_mac (0.1.17):
-    - MicrosoftFluentUI/Core_mac
   - RCT-Folly (2018.10.22.00):
     - boost-for-react-native
     - DoubleConversion
@@ -386,7 +357,7 @@ SPEC CHECKSUMS:
   DoubleConversion: 681b789128e5512811c81706e9b361209f40d21e
   FBLazyVector: f7ecc4fb8e76a380e4bac28fe4773c30b2bc7b2e
   FBReactNativeSpec: f1a34d51179ade22df30b9fb09bdd52578f2734a
-  FluentUI-React-Native-Button: 05662943dbb4a31e4a8934206d890d120038f9dd
+  FluentUI-React-Native-Button: ab33ef0be4a5e97060c1815628ef880850654c77
   glog: d86cb3634e15ec6d8cd9a1c7c1b9d6fa295beb37
   MicrosoftFluentUI: a02501bff34c44bb0fb2a61f624f69cd42495eea
   RCT-Folly: 71ece0166f9c96c1ec9279eeb0317baf533c020f
