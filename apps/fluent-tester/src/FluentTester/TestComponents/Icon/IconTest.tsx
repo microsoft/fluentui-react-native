@@ -48,6 +48,7 @@ const icons: React.FunctionComponent<{}> = () => {
   // https://thenounproject.com/search/?q=chess&i=2960386
   const rasterChessProps: RasterImageIconProps = { src: { uri: 'https://static.thenounproject.com/png/2960386-200.png' } };
 
+  // These flags can be adjusted for debugging purposes
   const showFontIcons = true;
   const showSvgIcons = true;
   const showRasterIcons = true;
@@ -59,6 +60,9 @@ const icons: React.FunctionComponent<{}> = () => {
           <View>
             <Text>Font icons</Text>
             {
+              // We've seen some issues getting Font Awesome to link properly on Apple platforms in the FURN test app specifically.
+              // This shouldn't be an issue in other apps, though, so keeping this icon Windows-only for now is an easy workaround.
+              // When Android support comes, the platform check can be adjusted accordingly.
               Platform.OS == 'windows' ? <Icon fontSource={fontCustomFontProps} width={100} height={100} color="purple" /> : null
             }
             <Icon fontSource={fontBuiltInProps} width={100} height={100} color="#060" />

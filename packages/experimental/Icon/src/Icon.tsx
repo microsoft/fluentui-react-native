@@ -19,6 +19,7 @@ function renderRasterImage(iconProps: IconProps) {
 
 function fontFamilyFromFontSrcFile(fontSrcFile: string, fontFamily: string): string {
   if (Platform.OS == 'windows') {
+    // This `${family}#${path}` notation is specific to WPF
     const asset = assetRegistry.getAssetByID(fontSrcFile);
     return `${fontFamily}#${asset.httpServerLocation}/${asset.name}.${asset.type}`;
   } else {
