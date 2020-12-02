@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Bump @office-iss/react-native-win32",
+  "packageName": "@fluentui/react-native",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-12-02T18:50:56.914Z"
+}
