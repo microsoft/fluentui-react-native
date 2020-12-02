@@ -13,7 +13,6 @@ export const settings: IComposeSettings<IButtonType> = [
     },
     root: {
       accessible: true,
-      acceptsKeyboardFocus: true,
       focusable: true,
       accessibilityRole: 'button',
       style: { display: 'flex', alignItems: 'flex-start', flexDirection: 'row', alignSelf: 'flex-start' },

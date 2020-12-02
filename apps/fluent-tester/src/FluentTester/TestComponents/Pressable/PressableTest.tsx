@@ -67,8 +67,8 @@ const FocusComponent: React.FunctionComponent<ViewProps> = () => {
   const [focusProps, focusState] = useFocusState({});
 
   return (
-    <Stack {...{ acceptsKeyboardFocus: false }}>
-      <View {...({ acceptsKeyboardFocus: true, ...focusProps } as any)} style={focusState.focused ? styles.focused : styles.notfocused} />
+    <Stack {...{ focusable: false }}>
+      <View {...({ focusable: true, ...focusProps } as any)} style={focusState.focused ? styles.focused : styles.notfocused} />
     </Stack>
   );
 };
@@ -82,13 +82,13 @@ const PressComponent: React.FunctionComponent<ViewProps> = (props: ViewProps) =>
       pressProps.onTouchEnd && pressProps.onTouchEnd(e);
       Alert.alert('Alert.', 'Object has been pressed.');
     },
-    [pressProps]
+    [pressProps],
   );
 
   return (
-    <Stack {...{ acceptsKeyboardFocus: false }}>
+    <Stack {...{ focusable: false }}>
       <View
-        {...{ acceptsKeyboardFocus: true, ...pressProps, onTouchEnd: onTouchEnd }}
+        {...{ focusable: true, ...pressProps, onTouchEnd: onTouchEnd }}
         style={pressState.pressed ? styles.pressed : styles.notPressed}
       />
     </Stack>
