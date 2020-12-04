@@ -126,7 +126,7 @@ jobs:
       - template: templates/setup-repo-min-build.yml
 
       - bash: |
-          echo "yarn android
+          echo "yarn android"
           yarn android
         workingDirectory: apps/android
         displayName: 'yarn android'
