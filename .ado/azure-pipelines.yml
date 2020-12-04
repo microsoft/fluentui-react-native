@@ -111,3 +111,22 @@ jobs:
       - template: templates/apple-yarn-build.yml
         parameters:
           relative_directory: $(relative_directory)
+
+    - job: AndroidPR
+    displayName: Build, test, and bundle JavaScript
+    pool:
+      vmImage: 'ubuntu-latest'
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+
+    steps:
+      - checkout: self
+        persistCredentials: true
+
+      - template: templates/setup-repo-min-build.yml
+
+      - bash: |
+          echo "yarn android
+          yarn android
+        workingDirectory: apps/android
+        displayName: 'yarn android'
