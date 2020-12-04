@@ -112,8 +112,8 @@ jobs:
         parameters:
           relative_directory: $(relative_directory)
 
-    - job: AndroidPR
-    displayName: Build, test, and bundle JavaScript
+  - job: AndroidPR
+    displayName: Android PR
     pool:
       vmImage: 'ubuntu-latest'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
