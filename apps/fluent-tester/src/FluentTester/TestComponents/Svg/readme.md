@@ -62,7 +62,7 @@ use: [
 
 ### Typescript configuration for the .svg file extension
 
-To allow Typescript to import files with the .svg extension, add a declarations.d.ts file in the root of your project with the following:
+To allow Typescript to import files with the .svg extension, add a declarations.d.ts file in a @types/<pkg name> directory under the source root of your project with the following:
 
 ```
 declare module "*.svg" {
