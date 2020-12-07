@@ -9,7 +9,7 @@ PODS:
     - React-Core (= 0.62.16)
     - React-jsi (= 0.62.16)
     - ReactCommon/turbomodule/core (= 0.62.16)
-  - FluentUI-React-Native-Button (0.3.1):
+  - FluentUI-React-Native-Button (0.3.2):
     - MicrosoftFluentUI/Button_mac
     - React
   - glog (0.3.5)
@@ -357,7 +357,7 @@ SPEC CHECKSUMS:
   DoubleConversion: 681b789128e5512811c81706e9b361209f40d21e
   FBLazyVector: f7ecc4fb8e76a380e4bac28fe4773c30b2bc7b2e
   FBReactNativeSpec: f1a34d51179ade22df30b9fb09bdd52578f2734a
-  FluentUI-React-Native-Button: ab33ef0be4a5e97060c1815628ef880850654c77
+  FluentUI-React-Native-Button: 31e7208ad4b2b9dc591de9e50d5eb8c599e6c858
   glog: d86cb3634e15ec6d8cd9a1c7c1b9d6fa295beb37
   MicrosoftFluentUI: a02501bff34c44bb0fb2a61f624f69cd42495eea
   RCT-Folly: 71ece0166f9c96c1ec9279eeb0317baf533c020f

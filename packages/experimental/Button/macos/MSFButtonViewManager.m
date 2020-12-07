@@ -1,6 +1,5 @@
 #import <React/RCTComponent.h>
 #import <React/RCTViewManager.h>
-#import "RCTEventEmitter.h"
 #import "RCTBridgeModule.h"
 
 @import FluentUI;
@@ -19,7 +18,9 @@ RCT_ENUM_CONVERTER(MSFButtonStyle, (@{
 RCT_EXPORT_VIEW_PROPERTY(title, NSString);
 RCT_EXPORT_VIEW_PROPERTY(image, NSImage);
 RCT_EXPORT_VIEW_PROPERTY(isEnabled, bool);
-RCT_EXPORT_VIEW_PROPERTY(cornerRadius, CGFloat);
+RCT_EXPORT_VIEW_PROPERTY(contentTintColor, NSColor);
+RCT_EXPORT_VIEW_PROPERTY(restBackgroundColor, NSColor);
+RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock);
 
 RCT_REMAP_VIEW_PROPERTY(buttonStyle, style, MSFButtonStyle);
 

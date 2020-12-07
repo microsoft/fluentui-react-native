@@ -5,7 +5,7 @@ import { buttonName, ButtonType, ButtonTypeMac, ButtonMacProps, NativeButtonProp
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './Button.styling';
 import { filterImageProps } from '@fluentui-react-native/adapters';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots, UseSlots, buildProps } from '@fluentui-react-native/framework';
 import { useButton } from './useButton';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import { Platform } from 'react-native';
@@ -16,6 +16,10 @@ export const Button =
   Platform.OS === 'macos'
     ? compose<ButtonTypeMac>({
         displayName: buttonName,
+        tokens: [{}, buttonName],
+        slotProps: {
+          root: buildProps((tokens) => ({ ...tokens }), []),
+        },
         slots: { root: NativeButton },
         render: (userProps: ButtonMacProps, useSlots: UseSlots<ButtonTypeMac>) => {
           const Root = useSlots(userProps).root;

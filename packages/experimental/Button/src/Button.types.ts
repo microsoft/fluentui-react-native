@@ -128,11 +128,21 @@ export interface ButtonMacProps {
    * A button can be enabled or disabled.
    */
   isEnabled?: boolean;
+  /*
+   * A callback to call on button click event
+   */
+  onPress?: () => void;
 }
 
 export interface ButtonMacTokens {
-  imageTitle?: string;
-  cornerRadius?: number;
+  /*
+   * Button content tint color
+   */
+  contentTintColor?: number;
+  /*
+   * Button background color for rest state
+   */
+  restBackgroundColor?: number;
 }
 
 export type ButtonState = IPressableHooks<ButtonProps & React.ElementRef<any>>;

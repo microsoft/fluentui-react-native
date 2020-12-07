@@ -1,38 +1,40 @@
 import { Button, CompoundButton } from '@fluentui-react-native/experimental-button';
 import * as React from 'react';
-import { View, Platform, TouchableOpacity } from 'react-native';
+import { View, Platform, processColor } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
 
 export const ButtonVariantTest: React.FunctionComponent<{}> = () => {
-  const [buttonTitle1, setTitle1] = React.useState('Mac Native Button');
-  const onPress1 = () => setTitle1('Native Button Clicked');
-
-  const [buttonTitle2, setTitle2] = React.useState('Mac Native Button');
-  const onPress2 = () => setTitle2('Native Button Clicked');
-
-  const [buttonTitle3, setTitle3] = React.useState('Mac Native Button');
-  const onPress3 = () => setTitle3('Native Button Clicked');
-
   if (Platform.OS == 'macos') {
+    const CustomizedNativeButton = Button.customize({
+      contentTintColor: processColor('white'),
+      restBackgroundColor: processColor('orange'),
+    });
     return (
       <View style={[stackStyle, commonTestStyles.view]}>
-        <TouchableOpacity onPress={onPress1}>
-          <Button
-            title={'PrimaryFilled ' + buttonTitle1}
-            buttonStyle="primaryFilled"
-            style={{ width: 250, height: 30, marginBottom: 15 }}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={onPress2}>
-          <Button
-            title={'PrimaryOutline ' + buttonTitle2}
-            buttonStyle="primaryOutline"
-            style={{ width: 250, height: 30, marginBottom: 15 }}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={onPress3}>
-          <Button title={'Borderless ' + buttonTitle3} buttonStyle="borderless" style={{ width: 250, height: 30, marginBottom: 15 }} />
-        </TouchableOpacity>
+        <Button
+          title="PrimaryFilled"
+          buttonStyle="primaryFilled"
+          style={{ width: 250, height: 30, marginBottom: 15 }}
+          onPress={() => alert('PrimaryFilled button clicked!')}
+        />
+        <Button
+          title="PrimaryOutline"
+          buttonStyle="primaryOutline"
+          style={{ width: 250, height: 30, marginBottom: 15 }}
+          onPress={() => alert('PrimaryOutline button clicked!')}
+        />
+        <Button
+          title="Borderless"
+          buttonStyle="borderless"
+          style={{ width: 250, height: 30, marginBottom: 15 }}
+          onPress={() => alert('Borderless button clicked!')}
+        />
+        <CustomizedNativeButton
+          title="Customized Button"
+          buttonStyle="primaryFilled"
+          style={{ width: 250, height: 30, marginBottom: 15 }}
+          onPress={() => alert('Custom button clicked!')}
+        />
         <CompoundButton ghost content="Ghost" secondaryContent="Compound" style={commonTestStyles.vmargin} />
         <CompoundButton content="Default" secondaryContent="Compound" style={commonTestStyles.vmargin} />
         <CompoundButton primary content="Primary" secondaryContent="Compound" style={commonTestStyles.vmargin} />
