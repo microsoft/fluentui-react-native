@@ -22,9 +22,10 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.4.0 <1.0.0",
+    "@fluentui-react-native/component-cache": "^1.1.0",
+    "@fluentui-react-native/experimental-text": ">=0.2.2 <1.0.0",
     "@fluentui-react-native/framework": "0.4.2",
     "@fluentui-react-native/interactive-hooks": ">=0.7.0 <1.0.0",
-    "@fluentui-react-native/experimental-text": ">=0.2.2 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.7.0 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.4.0 <1.0.0"
   },
