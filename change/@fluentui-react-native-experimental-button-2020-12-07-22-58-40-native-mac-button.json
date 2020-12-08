@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "fix depcheck error by adding component-cache dependency for experimental button",
+  "packageName": "@fluentui-react-native/experimental-button",
+  "email": "67026167+chiuam@users.noreply.github.com",
+  "dependentChangeType": "patch",
+  "date": "2020-12-08T03:58:16.104Z"
+}
