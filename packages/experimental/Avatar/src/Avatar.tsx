@@ -49,7 +49,7 @@ export type AvatarData = {
    * but It will be scaled to fit the avatar size. If set, the hasBorder initializer value will be ignored,
    * since it's assumed that the client intends to have a custom border.
    */
-  customBorderImage?: Image;
+  customBorderImageSource?: ImageURISource;
 
   /**
    * The avatar view's presence state.
@@ -74,7 +74,7 @@ export type otherAvatarProps = {
    * but It will be scaled to fit the avatar size. If set, the hasBorder initializer value will be ignored,
    * since it's assumed that the client intends to have a custom border.
    */
-  customBorderImage?: Image;
+  customBorderImageSource?: ImageURISource;
 
   /**
    * Shape of the AvatarView
@@ -159,7 +159,7 @@ export const Avatar = compose<AvatarType>({
         secondaryText: props.secondaryText,
         image: Image.resolveAssetSource(props.imageSource),
         color: props.color,
-        customBorderImage: props.customBorderImage,
+        customBorderImage: Image.resolveAssetSource(props.customBorderImageSource),
         presence: props.presence,
       }),
       [props.primaryText, props.secondaryText, props.imageSource, props.color, props.customBorderImage, props.presence],

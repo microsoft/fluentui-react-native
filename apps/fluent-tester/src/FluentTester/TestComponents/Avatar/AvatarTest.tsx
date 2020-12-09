@@ -5,7 +5,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { AVATAR_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { ImageURISource } from 'react-native';
+import { ImageURISource, Image } from 'react-native';
 
 const testImageSource: ImageURISource = {
   uri:
@@ -25,6 +25,14 @@ const avatar: React.FunctionComponent<{}> = () => {
       <Avatar primaryText="Kat Larrson" secondaryText="Kat.Larrson@example.com" imageSource={testImageSource} presence="available" />
       <Text>Square Style</Text>
       <Avatar primaryText="FluentUI" avatarStyle="square" />
+      <Text>Image</Text>
+      <Image
+        style={{ width: 50, height: 50 }}
+        source={{
+          uri:
+            'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
+        }}
+      />
     </Stack>
   );
 };
