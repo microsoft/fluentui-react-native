@@ -26,13 +26,6 @@ const avatar: React.FunctionComponent<{}> = () => {
       <Text>Square Style</Text>
       <Avatar primaryText="FluentUI" avatarStyle="square" />
       <Text>Image</Text>
-      <Image
-        style={{ width: 50, height: 50 }}
-        source={{
-          uri:
-            'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
-        }}
-      />
     </Stack>
   );
 };
