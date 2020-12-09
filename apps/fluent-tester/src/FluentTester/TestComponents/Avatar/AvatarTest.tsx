@@ -16,7 +16,7 @@ const avatar: React.FunctionComponent<{}> = () => {
   return (
     <Stack style={stackStyle}>
       <Text>Name</Text>
-      <Avatar primaryText="Kat Larson" />
+      <Avatar primaryText="Kat Larrson" />
       <Text>Name and Email</Text>
       <Avatar primaryText="Kat Larrson" secondaryText="Kat.Larrson@example.com" />
       <Text>Name, Email, and Image</Text>
@@ -37,7 +37,7 @@ const stylizedAvatar: React.FunctionComponent<{}> = () => {
   return (
     <Stack style={stackStyle}>
       <Text>Name</Text>
-      <CustomizedAvatar primaryText="Kat Larsson" />
+      <CustomizedAvatar primaryText="Kat Larrson" />
       <Text>Name and Email</Text>
       <CustomizedAvatar primaryText="Kat Larrson" secondaryText="Kat.Larrson@example.com" />
       <Text>Name, Email, and Image</Text>
