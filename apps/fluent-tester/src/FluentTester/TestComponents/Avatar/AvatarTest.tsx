@@ -25,7 +25,6 @@ const avatar: React.FunctionComponent<{}> = () => {
       <Avatar primaryText="Kat Larrson" secondaryText="Kat.Larrson@example.com" imageSource={testImageSource} presence="available" />
       <Text>Square Style</Text>
       <Avatar primaryText="FluentUI" avatarStyle="square" />
-      <Text>Image</Text>
     </Stack>
   );
 };
