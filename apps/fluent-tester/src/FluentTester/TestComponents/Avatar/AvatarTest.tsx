@@ -37,7 +37,7 @@ const stylizedAvatar: React.FunctionComponent<{}> = () => {
   return (
     <Stack style={stackStyle}>
       <Text>Name</Text>
-      <CustomizedAvatar primaryText="Kat Larson" />
+      <CustomizedAvatar primaryText="Kat Larsson" />
       <Text>Name and Email</Text>
       <CustomizedAvatar primaryText="Kat Larrson" secondaryText="Kat.Larrson@example.com" />
       <Text>Name, Email, and Image</Text>
