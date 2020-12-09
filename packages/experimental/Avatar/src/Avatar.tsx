@@ -162,7 +162,7 @@ export const Avatar = compose<AvatarType>({
         customBorderImage: Image.resolveAssetSource(props.customBorderImageSource),
         presence: props.presence,
       }),
-      [props.primaryText, props.secondaryText, props.imageSource, props.color, props.customBorderImage, props.presence],
+      [props.primaryText, props.secondaryText, props.imageSource, props.color, props.customBorderImageSource, props.presence],
     );
 
     return (rest: AvatarProps) => <Root {...mergeProps(props, rest)} avatarData={memoizedAvatarData} />;
