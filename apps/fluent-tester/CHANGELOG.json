@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 10 Dec 2020 08:37:43 GMT",
+      "tag": "@fluentui-react-native/tester_v0.13.8",
+      "version": "0.13.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Updated experimental avatar test",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "6d83b73ad8ad16fe3119e8f43f47cd3dc8df8650",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 27 Oct 2020 00:28:29 GMT",
       "tag": "@fluentui-react-native/tester_v0.13.2",
       "version": "0.13.2",
