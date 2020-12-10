@@ -5,7 +5,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { AVATAR_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { ImageURISource, Image } from 'react-native';
+import { ImageURISource } from 'react-native';
 
 const testImageSource: ImageURISource = {
   uri:
@@ -16,7 +16,7 @@ const avatar: React.FunctionComponent<{}> = () => {
   return (
     <Stack style={stackStyle}>
       <Text>Name</Text>
-      <Avatar primaryText="Kat Larrson" />
+      <Avatar primaryText="Kat Larson" />
       <Text>Name and Email</Text>
       <Avatar primaryText="Kat Larrson" secondaryText="Kat.Larrson@example.com" />
       <Text>Name, Email, and Image</Text>
