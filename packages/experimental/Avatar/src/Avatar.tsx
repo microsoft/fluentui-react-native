@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
-import { Image, NativeModules, ViewProps } from 'react-native';
+import { Image, ImageURISource, NativeModules, ViewProps } from 'react-native';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import { useMemo } from 'react';
 
@@ -34,7 +34,7 @@ export type AvatarData = {
   /**
    * The image to be displayed
    */
-  image?: Image;
+  imageSource?: ImageURISource;
 
   /**
    * The color that represents this avatar.
@@ -49,7 +49,7 @@ export type AvatarData = {
    * but It will be scaled to fit the avatar size. If set, the hasBorder initializer value will be ignored,
    * since it's assumed that the client intends to have a custom border.
    */
-  customBorderImage?: Image;
+  customBorderImageSource?: ImageURISource;
 
   /**
    * The avatar view's presence state.
@@ -74,7 +74,7 @@ export type otherAvatarProps = {
    * but It will be scaled to fit the avatar size. If set, the hasBorder initializer value will be ignored,
    * since it's assumed that the client intends to have a custom border.
    */
-  customBorderImage?: Image;
+  customBorderImageSource?: ImageURISource;
 
   /**
    * Shape of the AvatarView
@@ -157,12 +157,12 @@ export const Avatar = compose<AvatarType>({
       () => ({
         primaryText: props.primaryText,
         secondaryText: props.secondaryText,
-        image: props.image,
+        image: Image.resolveAssetSource(props.imageSource),
         color: props.color,
-        customBorderImage: props.customBorderImage,
+        customBorderImage: Image.resolveAssetSource(props.customBorderImageSource),
         presence: props.presence,
       }),
-      [props.primaryText, props.secondaryText, props.image, props.color, props.customBorderImage, props.presence],
+      [props.primaryText, props.secondaryText, props.imageSource, props.color, props.customBorderImageSource, props.presence],
     );
 
     return (rest: AvatarProps) => <Root {...mergeProps(props, rest)} avatarData={memoizedAvatarData} />;
