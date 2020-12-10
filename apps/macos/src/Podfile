@@ -1,6 +1,6 @@
 require_relative '../../../node_modules/react-native-test-app/macos/test_app.rb'
 
-workspace 'FluentUITester.xcworkspace'
+workspace 'FluentTester.xcworkspace'
 
 react_native_path = "#{__dir__}/../../../node_modules/react-native-macos"
 

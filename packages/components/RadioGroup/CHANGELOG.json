@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Wed, 04 Nov 2020 17:44:39 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.8.1",
+      "version": "0.8.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Selection now changes on a click as well as focus",
+            "author": "safreibe@microsoft.com",
+            "commit": "35fd7d2496ce50a94587305d2e76e2af885ba15f",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Oct 2020 18:32:53 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.8.0",
       "version": "0.8.0",

@@ -19,10 +19,10 @@
     "ios": "react-native run-ios --scheme ReactTestApp --project-path src"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.13.5",
+    "@fluentui-react-native/tester": "^0.13.8",
     "react": "16.11.0",
     "react-native": "0.62.2",
-    "react-native-test-app": "^0.2.1"
+    "react-native-test-app": "^0.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
