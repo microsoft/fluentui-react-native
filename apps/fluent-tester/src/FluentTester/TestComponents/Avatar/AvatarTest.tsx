@@ -31,7 +31,7 @@ const avatar: React.FunctionComponent<{}> = () => {
 
 const stylizedAvatar: React.FunctionComponent<{}> = () => {
   const CustomizedAvatar = Avatar.customize({
-    size: 'large',
+    size: 'xxLarge',
   });
 
   return (
