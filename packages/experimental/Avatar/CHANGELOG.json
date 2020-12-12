@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Sat, 12 Dec 2020 04:27:11 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixed bug where AvatarSize was not properly set",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "0298941e07ca23f56f407bd50f061a128a491b17",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 10 Dec 2020 08:37:43 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.3.0",
       "version": "0.3.0",

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Sat, 12 Dec 2020 04:27:11 GMT",
+      "tag": "@fluentui-react-native/tester_v0.13.9",
+      "version": "0.13.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Updated Avatar test to use xxLarge size",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "0298941e07ca23f56f407bd50f061a128a491b17",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 10 Dec 2020 08:37:43 GMT",
       "tag": "@fluentui-react-native/tester_v0.13.8",
       "version": "0.13.8",
