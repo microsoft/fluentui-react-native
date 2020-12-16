@@ -11,7 +11,7 @@ const testTtf = require('./assets/Font Awesome 5 Free-Solid-900.otf');
 import TestSvg from './assets/test.svg';
 
 const icons: React.FunctionComponent<{}> = () => {
-  const rasterProps: RasterImageIconProps = { src: testImage };
+  const rasterProps: RasterImageIconProps = { src: testImage  };
 
   const svgProps: SvgIconProps = {
     src: TestSvg,

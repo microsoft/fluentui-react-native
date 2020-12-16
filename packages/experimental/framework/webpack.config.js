@@ -5,11 +5,11 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 module.exports = {
   mode: webpackEnv,
   entry: {
-    app: path.join(__dirname, './src/index.ts')
+    app: path.join(__dirname, './src/index.ts'),
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'experimental.bundle.js'
+    filename: 'experimental.bundle.js',
   },
   target: 'node',
   devtool: 'source-map',
@@ -20,13 +20,23 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'ts-loader',
         options: {
-          transpileOnly: true
-        }
-      }
-    ]
+          transpileOnly: true,
+        },
+      },
+      {
+        test: /\.(png|jpe?g|gif|ttf|otf)$/i,
+        exclude: /node_modules/,
+        loader: 'file-loader',
+      },
+      {
+        test: /\.(svg)$/i,
+        exclude: /node_modules/,
+        loader: 'react-native-svg-loader',
+      },
+    ],
   },
   optimization: {
-    minimize: true
+    minimize: true,
   },
   plugins: [
     new BundleAnalyzerPlugin({
@@ -37,16 +47,16 @@ module.exports = {
       statsOptions: {
         source: false,
         reasons: false,
-        chunks: false
+        chunks: false,
       },
       statsFilename: 'experimental.stats.json',
-      logLevel: 'warn'
-    })
+      logLevel: 'warn',
+    }),
   ],
   resolve: {
     extensions: ['.web.tsx', '.web.ts', '.tsx', '.ts', '.web.jsx', '.web.js', '.jsx', '.js'], // read files in following order
     alias: Object.assign({
-      'react-native$': 'react-native-web'
-    })
-  }
+      'react-native$': 'react-native-web',
+    }),
+  },
 };

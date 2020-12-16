@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { ViewProps, ImageProps } from 'react-native';
+import { ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
 import { IPressableProps } from '@fluentui-react-native/pressable';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
+import { IconProps } from '@fluentui-react-native/icon';
 
 export const buttonName = 'Button';
 
@@ -81,7 +82,7 @@ export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBack
   /**
    * Source URL or name of the icon to show on the Button.
    */
-  icon?: string;
+  icon?: number | string | IconProps;
 }
 
 export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
@@ -93,7 +94,7 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
   /*
    * Source URL or name of the icon to show on the Button.
    */
-  icon?: string;
+  icon?: number | string |IconProps;
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
@@ -110,7 +111,7 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
 export interface IButtonSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
   stack: ViewProps;
-  icon: ImageProps;
+  icon: string | number | IconProps;
   content: ITextProps;
 }
 
