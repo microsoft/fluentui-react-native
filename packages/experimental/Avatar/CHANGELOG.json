@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Thu, 17 Dec 2020 00:09:27 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add readme for svg",
+            "author": "warleu@microsoft.com",
+            "commit": "c2c28c356aabbd3e74a8d085015a3f4507fbdbe9",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 12 Dec 2020 04:27:11 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.3.1",
       "version": "0.3.1",

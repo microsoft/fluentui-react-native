@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 17 Dec 2020 00:09:27 GMT",
+      "tag": "@fluentui-react-native/tester_v0.13.9",
+      "version": "0.13.9",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add readme for svg",
+            "author": "warleu@microsoft.com",
+            "commit": "c2c28c356aabbd3e74a8d085015a3f4507fbdbe9",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Add readme for svg",
+            "author": "warleu@microsoft.com",
+            "commit": "c2c28c356aabbd3e74a8d085015a3f4507fbdbe9",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 12 Dec 2020 04:27:11 GMT",
       "tag": "@fluentui-react-native/tester_v0.13.9",
       "version": "0.13.9",
