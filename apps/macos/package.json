@@ -15,12 +15,12 @@
     "lint": "fluentui-scripts eslint",
     "start": "react-native start",
     "test": "fluentui-scripts jest",
-    "macos": "react-native run-macos --scheme ReactTestApp --project-path src"
+    "macos": "react-native run-macos --scheme FluentTester --project-path src"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.13.7",
-    "react-native-macos": "^0.62.0-0",
-    "react-native-test-app": "^0.2.1"
+    "@fluentui-react-native/tester": "^0.13.9",
+    "react-native-macos": "0.63.1",
+    "react-native-test-app": "^0.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
@@ -32,11 +32,11 @@
     "jest": "^24.9.0",
     "metro-config": "^0.58.0",
     "metro-react-native-babel-preset": "^0.58.0",
-    "react-native": "^0.62.2",
+    "react-native": "0.63.3",
     "react-test-renderer": "~16.11.0"
   },
   "peerDependencies": {
-    "react": "^16.11.0"
+    "react": "^16.13.1"
   },
   "jest": {
     "preset": "react-native"
