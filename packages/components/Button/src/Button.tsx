@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import { IButtonSlotProps, IButtonState, IButtonProps, IButtonRenderData, buttonName, IButtonType } from './Button.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
@@ -10,28 +10,24 @@ import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens,
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useAsPressable, useKeyCallback, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import * as assetRegistry from 'react-native/Libraries/Image/AssetRegistry';
 import { Icon, RasterImageIconProps, IconProps } from '@fluentui-react-native/icon';
 
 function createIconProps(src: number | string | IconProps) {
-  if (src === undefined)
-    return null;
+  if (src === undefined) return null;
 
   if (typeof src === 'number') {
     const rasterProps: RasterImageIconProps = { src: src };
-    const asset = assetRegistry.getAssetByID(src);
+    const asset = Image.resolveAssetSource(+src);
 
     return {
       rasterImageSource: rasterProps,
       width: asset.width,
-      height: asset.height
+      height: asset.height,
     };
-  }
-  else if (typeof src === 'string') {
+  } else if (typeof src === 'string') {
     const rasterProps: RasterImageIconProps = { src: { uri: src as string } };
-    return {rasterImageSource: rasterProps}
-  }
-  else {
+    return { rasterImageSource: rasterProps };
+  } else {
     const iconProps = src as IconProps;
     return iconProps;
   }
@@ -88,8 +84,8 @@ export const Button = compose<IButtonType>({
     return (
       <Slots.root>
         <Slots.stack>
-          {info.icon && <Slots.icon/>}
-          {info.content && <Slots.content/>}
+          {info.icon && <Slots.icon />}
+          {info.content && <Slots.content />}
           {children}
         </Slots.stack>
       </Slots.root>
