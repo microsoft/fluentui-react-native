@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
   svg: {
     backgroundColor: 'green',
     color: 'purple'
-  },
-});
+  }
+})
 
 const rect: React.FunctionComponent<{}> = () => {
   return (
@@ -64,7 +64,7 @@ const linearGradient: React.FunctionComponent<{}> = () => {
       <Line x1="0" y1="0" x2="10" y2="10" fill="red" stroke="url(#grad)" strokeWidth="5" />
     </Svg>
   );
-};
+}
 
 const radialGradient: React.FunctionComponent<{}> = () => {
   return (
@@ -95,11 +95,11 @@ const rectCircle: React.FunctionComponent<{}> = () => {
       <Use href="#shape" x="170" y="0" />
     </Svg>
   );
-};
+}
 
 const bundledSvg: React.FunctionComponent<{}> = () => {
   return <TestSvg width={200} height={200} color="red" />;
-};
+}
 
 const remoteSvg: React.FunctionComponent<{}> = () => {
   return (
@@ -175,9 +175,9 @@ export const SvgTest: React.FunctionComponent<{}> = () => {
     iosStatus: 'Backlog',
     macosStatus: 'Backlog',
     androidStatus: 'Backlog'
-  };
+  }
 
   const description = 'No description.';
 
   return <Test name="Svg Test" description={description} sections={svgSections} status={status}></Test>;
-};
+}
