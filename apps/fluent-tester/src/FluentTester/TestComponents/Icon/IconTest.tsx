@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
 import { Text } from '@fluentui/react-native';
 import { Icon, RasterImageIconProps, SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -30,10 +30,9 @@ const icons: React.FunctionComponent<{}> = () => {
     fontSize: 32,
   };
 
-const assetInfo = Image.resolveAssetSource(testImage);
   return (
     <View>
-      <Text>Font icon {JSON.stringify(assetInfo, null, 2)}</Text>
+      <Text>Font icon</Text>
       <Icon fontSource={fontProps} width={100} height={100} color="purple" />
       <Text>Svg icons</Text>
       <Icon svgSource={svgProps} width={100} height={100} color="yellow" />
