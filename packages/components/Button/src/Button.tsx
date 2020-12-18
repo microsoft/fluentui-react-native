@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View, Image } from 'react-native';
+import { Image, View } from 'react-native';
 import { IButtonSlotProps, IButtonState, IButtonProps, IButtonRenderData, buttonName, IButtonType } from './Button.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
@@ -24,12 +24,13 @@ function createIconProps(src: number | string | IconProps) {
       width: asset.width,
       height: asset.height,
     };
-  } else if (typeof src === 'string') {
+  }
+  else if (typeof src === 'string') {
     const rasterProps: RasterImageIconProps = { src: { uri: src as string } };
     return { rasterImageSource: rasterProps };
-  } else {
-    const iconProps = src as IconProps;
-    return iconProps;
+  }
+  else {
+    return src as IconProps;
   }
 }
 
