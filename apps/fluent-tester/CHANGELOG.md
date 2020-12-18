@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 27 Oct 2020 00:28:29 GMT and should not be manually modified.
+This log was last generated on Sat, 12 Dec 2020 04:27:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.9
+
+Sat, 12 Dec 2020 04:27:11 GMT
+
+### Patches
+
+- Updated Avatar test to use xxLarge size (saadnajmi2@gmail.com)
+
+## 0.13.8
+
+Thu, 10 Dec 2020 08:37:43 GMT
+
+### Patches
+
+- Updated experimental avatar test (saadnajmi2@gmail.com)
 
 ## 0.13.2
 

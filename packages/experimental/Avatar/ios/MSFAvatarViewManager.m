@@ -51,7 +51,8 @@ RCT_ENUM_CONVERTER(MSFPresence, (@{
 
 @interface RCT_EXTERN_MODULE(MSFAvatarViewManager, RCTViewManager)
 
-RCT_EXPORT_VIEW_PROPERTY(avatarSize, MSFAvatarSize);
+RCT_REMAP_VIEW_PROPERTY(size, avatarSize, MSFAvatarSize);
+
 RCT_EXPORT_VIEW_PROPERTY(avatarBackgroundColor, UIColor);
 RCT_EXPORT_VIEW_PROPERTY(customBorderImage, UIImage);
 

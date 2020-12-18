@@ -1,4 +1,4 @@
-import { UseStylingOptions, ThemeHelper, HasLayer, buildUseStyling } from '@fluentui-react-native/use-styling';
+import { UseStylingOptions, TokenSettings, ThemeHelper, HasLayer, buildUseStyling } from '@fluentui-react-native/use-styling';
 import { UseSlotOptions, ComposableFunction, buildUseSlots, Slots, stagedComponent } from '@fluentui-react-native/use-slots';
 import { immutableMergeCore, MergeOptions } from '@fluentui-react-native/immutable-merge';
 
@@ -26,7 +26,7 @@ export type ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics 
 export type ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics extends object = object> = ComposableFunction<TProps> & {
   __options: ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics>;
   customize: (
-    ...tokens: UseStylingOptions<TProps, TSlotProps, TTokens, TTheme>['tokens']
+    ...tokens: TokenSettings<TTokens, TTheme>[]
   ) => ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics>;
   compose: (options: Partial<ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics>>) => ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics>;
 } & TStatics;

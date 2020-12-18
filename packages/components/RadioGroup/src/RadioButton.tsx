@@ -22,11 +22,19 @@ export const RadioButton = compose<IRadioButtonType>({
     // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
     const info = React.useContext(RadioGroupContext);
 
+    /* We don't want to call the user's onChange multiple times on the same selection. */
+    const changeSelection = () => {
+      if(buttonKey != info.selectedKey)
+        info.onChange && info.onChange(buttonKey);
+    };
+
+    /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
     const pressable = useAsPressable({...rest,
+      onPress: () => {
+        changeSelection();
+      },
       onFocus: () => {
-        /* We don't want to call the user's onChange multiple times on the same selection */
-        if(buttonKey != info.selectedKey)
-          info.onChange && info.onChange(buttonKey);
+        changeSelection();
       }});
 
     const buttonRef = useViewCommandFocus(componentRef);
