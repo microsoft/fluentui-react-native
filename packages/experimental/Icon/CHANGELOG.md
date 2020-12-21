@@ -12,7 +12,6 @@ Wed, 04 Nov 2020 18:56:53 GMT
 
 - Fix import statement (kinhln@microsoft.com)
 
-
 ## 0.2.0
 
 Fri, 23 Oct 2020 22:27:37 GMT
