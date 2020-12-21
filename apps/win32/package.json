@@ -33,7 +33,7 @@
     "react-native-svg": "^11.0.0"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.0.0-canary.63",
+    "@office-iss/react-native-win32": "0.63.4",
     "@office-iss/rex-win32": "0.62.12-devmain.13420.10000",
     "@react-native-community/eslint-config": "^1.1.0",
     "@types/jasmine": "3.5.10",
