@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/composition
 
-This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
+This log was last generated on Mon, 02 Nov 2020 19:16:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.1
+
+Mon, 02 Nov 2020 19:16:23 GMT
+
+### Patches
+
+- Update type of the tokens parameter to make TSC happy. (kinhln@microsoft.com)
 
 ## 0.4.0
 

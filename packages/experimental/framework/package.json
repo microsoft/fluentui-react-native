@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/framework",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "description": "Component framework used by fluentui react native controls",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -25,8 +25,8 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@fluentui-react-native/composition": ">=0.4.0 <1.0.0",
-    "@fluentui-react-native/default-theme": ">=0.4.0 <1.0.0",
+    "@fluentui-react-native/composition": ">=0.4.1 <1.0.0",
+    "@fluentui-react-native/default-theme": ">=0.4.1 <1.0.0",
     "@fluentui-react-native/immutable-merge": "^1.1.0",
     "@fluentui-react-native/merge-props": ">=0.2.0 <1.0.0",
     "@fluentui-react-native/theme-types": ">=0.4.0 <1.0.0",

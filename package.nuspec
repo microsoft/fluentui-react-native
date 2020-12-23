@@ -9,8 +9,27 @@
         <repository type="git" url="$repoUri$" commit="$commitId$"/>
     </metadata>
     <files>
-        <file src="packages/**/*.*" />
-        <file src="scripts/**/*.*" />
-        <file src="*.*" />
+      <!-- iOS device debug -->
+      <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Debug-iphoneos"/>
+      <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Shimmer\libFluentUI-React-Native-Shimmer.a" target="Debug-iphoneos"/>
+      <!-- iOS device ship -->
+      <file src="DerivedData\Build\Products\Release-iphoneos\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Ship-iphoneos"/>
+      <file src="DerivedData\Build\Products\Release-iphoneos\FluentUI-React-Native-Shimmer\libFluentUI-React-Native-Shimmer.a" target="Ship-iphoneos"/>
+      <!-- iOS simulator debug -->
+      <file src="DerivedData\Build\Products\Debug-iphonesimulator\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Debug-iphonesimulator"/>
+      <file src="DerivedData\Build\Products\Debug-iphonesimulator\FluentUI-React-Native-Shimmer\libFluentUI-React-Native-Shimmer.a" target="Debug-iphonesimulator"/>
+      <!-- iOS simulator ship -->
+      <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Ship-iphonesimulator"/>
+      <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Shimmer\libFluentUI-React-Native-Shimmer.a" target="Ship-iphonesimulator"/>
+      <!-- macOS debug -->
+
+      <!-- macOS ship -->
+
+
+      <!-- iOS Release jsbundle -->
+      <file src="apps\ios\dist\index.bundle" target="ios"/>
+
+      <!-- macOS Release jsbundle -->
+      <file src="apps\macos\dist\index.bundle" target="macos"/>
     </files>
 </package>

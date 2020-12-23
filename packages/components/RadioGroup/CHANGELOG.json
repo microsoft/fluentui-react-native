@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Thu, 17 Dec 2020 00:09:27 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.8.1",
+      "version": "0.8.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add readme for svg",
+            "author": "warleu@microsoft.com",
+            "commit": "c2c28c356aabbd3e74a8d085015a3f4507fbdbe9",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 Nov 2020 17:44:39 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.8.1",
+      "version": "0.8.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Selection now changes on a click as well as focus",
+            "author": "safreibe@microsoft.com",
+            "commit": "35fd7d2496ce50a94587305d2e76e2af885ba15f",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Oct 2020 18:32:53 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Using pressable onFocus",
+            "author": "safreibe@microsoft.com",
+            "commit": "70681b014d0b51f6ad6a528ebc48d37d569bd62f",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 29 Oct 2020 17:13:48 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.7.2",
+      "version": "0.7.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixing FocusRect bug",
+            "author": "safreibe@microsoft.com",
+            "commit": "51a36320b3288280e2fa62f010404c069a911971",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Oct 2020 22:27:37 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.7.0",
       "version": "0.7.0",

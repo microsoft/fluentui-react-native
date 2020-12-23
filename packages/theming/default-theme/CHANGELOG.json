@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/default-theme",
   "entries": [
     {
+      "date": "Tue, 27 Oct 2020 00:28:29 GMT",
+      "tag": "@fluentui-react-native/default-theme_v0.4.1",
+      "version": "0.4.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update default theme with semibold font",
+            "author": "krsiler@microsoft.com",
+            "commit": "dca7ad98fea1ddc827a9bb1e7e6fdf7bdba47659",
+            "package": "@fluentui-react-native/default-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Oct 2020 22:27:37 GMT",
       "tag": "@fluentui-react-native/default-theme_v0.4.0",
       "version": "0.4.0",

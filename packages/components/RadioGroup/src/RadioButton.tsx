@@ -9,20 +9,35 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings, radioButtonSelectActionLabel } from './RadioButton.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
-import { useAsPressable } from '@fluentui-react-native/interactive-hooks';
+import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens, getPaletteFromTheme} from '@fluentui-react-native/tokens';
+import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { RadioGroupContext } from './RadioGroup';
 
 export const RadioButton = compose<IRadioButtonType>({
   displayName: radioButtonName,
 
   usePrepareProps: (userProps: IRadioButtonProps, useStyling: IUseComposeStyling<IRadioButtonType>) => {
-    const { content, buttonKey, disabled, ariaLabel, ...rest } = userProps;
+    const { content, buttonKey, disabled, ariaLabel, componentRef, ...rest } = userProps;
 
     // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
     const info = React.useContext(RadioGroupContext);
 
-    const pressable = useAsPressable(rest);
+    /* We don't want to call the user's onChange multiple times on the same selection. */
+    const changeSelection = () => {
+      if(buttonKey != info.selectedKey)
+        info.onChange && info.onChange(buttonKey);
+    };
+
+    /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
+    const pressable = useAsPressable({...rest,
+      onPress: () => {
+        changeSelection();
+      },
+      onFocus: () => {
+        changeSelection();
+      }});
+
+    const buttonRef = useViewCommandFocus(componentRef);
 
     // Used when creating accessibility properties in mergeSettings below
     const onAccessibilityAction = React.useCallback(
@@ -39,28 +54,17 @@ export const RadioButton = compose<IRadioButtonType>({
     const state = {
       ...pressable.state,
       selected: info.selectedKey === userProps.buttonKey,
-      disabled: disabled || false,
+      disabled: disabled || false
     };
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
-    // This function is called every time a RadioButton gains focus. It does two things:
-    // 1) Calls pressable's onFocus in order to keep track of our state's focus variable. It is dependent on pressable's
-    //    focus variable. Without this, it wouldn't stay updated because we're overriding it's onFocus below for the rootProps.
-    // 2) Selects the currently focused button by calling the RadioGroup's callback function.
-    const onFocusChange = React.useCallback((/* ev: NativeSyntheticEvent<{}> */) => {
-      // This check is necessary because this func gets called even when a button loses focus (not sure why?) which then calls the client's onChange multiple times
-      if (!state.selected) {
-        info.onChange && info.onChange(buttonKey);
-      }
-    }, [state, pressable.props, info, buttonKey]);
-
     const slotProps = mergeSettings<IRadioButtonSlotProps>(styleProps, {
       root: {
-        rest,
+        ...rest,
+        ref: buttonRef,
         ...pressable.props,
-        onFocus: onFocusChange,
         accessibilityRole: 'radio',
         accessibilityLabel: ariaLabel ? ariaLabel : content,
         accessibilityState: { disabled: state.disabled, selected: state.selected },
@@ -96,7 +100,7 @@ export const RadioButton = compose<IRadioButtonType>({
     root: [],
     button: [borderTokens],
     innerCircle: [backgroundColorTokens],
-    content: [foregroundColorTokens, textTokens],
+    content: [foregroundColorTokens, textTokens, [{ source: 'textBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }]],
   },
 });
 

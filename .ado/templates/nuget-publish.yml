@@ -1,6 +1,6 @@
 steps:
   # generate the sanitizedBuildNumber environment variable
-  - bash: 'scripts/generate_build_number.sh'
+  - bash: '.ado/scripts/generate_build_number.sh'
     displayName: 'Generate Build Number'
 
   # pack the nuspec
