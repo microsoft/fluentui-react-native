@@ -28,13 +28,13 @@
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.13.10",
-    "@office-iss/react-native-win32": "0.62.6",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-svg": "^11.0.0"
   },
   "devDependencies": {
     "@office-iss/rex-win32": "0.62.12-devmain.13420.10000",
+    "@office-iss/react-native-win32": "0.62.6",
     "@react-native-community/eslint-config": "^1.1.0",
     "@types/jasmine": "3.5.10",
     "@types/react": "^16.9.34",
