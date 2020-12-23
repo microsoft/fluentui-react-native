@@ -16,7 +16,7 @@ const avatar: React.FunctionComponent<{}> = () => {
   return (
     <Stack style={stackStyle}>
       <Text>Name</Text>
-      <Avatar primaryText="Kat Larson" />
+      <Avatar primaryText="Kat Larrson" />
       <Text>Name and Email</Text>
       <Avatar primaryText="Kat Larrson" secondaryText="Kat.Larrson@example.com" />
       <Text>Name, Email, and Image</Text>
@@ -30,27 +30,44 @@ const avatar: React.FunctionComponent<{}> = () => {
 };
 
 const stylizedAvatar: React.FunctionComponent<{}> = () => {
-  const CustomizedAvatar = Avatar.customize({
+  const ExtraSmallAvatar = Avatar.customize({
+    size: 'xSmall',
+  });
+
+  const SmallAvatar = Avatar.customize({
+    size: 'small',
+  });
+
+  const MediumAvatar = Avatar.customize({
+    size: 'medium',
+  });
+
+  const LargeAvatar = Avatar.customize({
     size: 'large',
+  });
+
+  const ExtraLargeAvatar = Avatar.customize({
+    size: 'xLarge',
+  });
+
+  const ExtraExtraLargeAvatar = Avatar.customize({
+    size: 'xxLarge',
   });
 
   return (
     <Stack style={stackStyle}>
-      <Text>Name</Text>
-      <CustomizedAvatar primaryText="Kat Larrson" />
-      <Text>Name and Email</Text>
-      <CustomizedAvatar primaryText="Kat Larrson" secondaryText="Kat.Larrson@example.com" />
-      <Text>Name, Email, and Image</Text>
-      <CustomizedAvatar primaryText="Kat Larrson" secondaryText="Kat.Larrson@example.com" imageSource={testImageSource} />
-      <Text>Name, Email, Image, and Presence</Text>
-      <CustomizedAvatar
-        primaryText="Kat Larrson"
-        secondaryText="Kat.Larrson@example.com"
-        imageSource={testImageSource}
-        presence="available"
-      />
-      <Text>Square Style</Text>
-      <CustomizedAvatar primaryText="FluentUI" avatarStyle="square" />
+      <Text>Extra Small</Text>
+      <ExtraSmallAvatar primaryText="Kat Larrson" />
+      <Text>Small</Text>
+      <SmallAvatar primaryText="Kat Larrson" />
+      <Text>Medium</Text>
+      <MediumAvatar primaryText="Kat Larrson" />
+      <Text>Large</Text>
+      <LargeAvatar primaryText="Kat Larrson" />
+      <Text>Extra Large</Text>
+      <ExtraLargeAvatar primaryText="Kat Larrson" />
+      <Text>Extra Extra Large</Text>
+      <ExtraExtraLargeAvatar primaryText="Kat Larrson" />
     </Stack>
   );
 };

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/composition",
   "entries": [
     {
+      "date": "Thu, 17 Dec 2020 00:09:27 GMT",
+      "tag": "@fluentui-react-native/composition_v0.4.1",
+      "version": "0.4.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add readme for svg",
+            "author": "warleu@microsoft.com",
+            "commit": "c2c28c356aabbd3e74a8d085015a3f4507fbdbe9",
+            "package": "@fluentui-react-native/composition"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 02 Nov 2020 19:16:23 GMT",
       "tag": "@fluentui-react-native/composition_v0.4.1",
       "version": "0.4.1",
