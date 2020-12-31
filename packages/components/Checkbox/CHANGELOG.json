@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Tue, 22 Dec 2020 01:36:23 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.8.2",
+      "version": "0.8.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Changing hover/focused color for Checkmark",
+            "author": "safreibe@microsoft.com",
+            "commit": "d5115987a4a6fafc9b26d09cadd8ab8c271ec773",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Oct 2020 22:27:37 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.8.0",
       "version": "0.8.0",

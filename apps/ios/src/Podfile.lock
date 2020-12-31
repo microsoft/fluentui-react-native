@@ -9,7 +9,7 @@ PODS:
     - React-Core (= 0.62.2)
     - React-jsi (= 0.62.2)
     - ReactCommon/turbomodule/core (= 0.62.2)
-  - FluentUI-React-Native-Avatar (0.2.5):
+  - FluentUI-React-Native-Avatar (0.3.1):
     - MicrosoftFluentUI (~> 0.1.16)
     - React
   - FluentUI-React-Native-Button-iOS (0.3.2):
@@ -299,7 +299,7 @@ PODS:
     - React-cxxreact (= 0.62.2)
     - React-jsi (= 0.62.2)
     - ReactCommon/callinvoker (= 0.62.2)
-  - ReactTestApp-DevSupport (0.2.14)
+  - ReactTestApp-DevSupport (0.3.2)
   - ReactTestApp-Resources (1.0.0-dev)
   - SwiftLint (0.42.0)
   - Yoga (1.14.0)
@@ -415,7 +415,7 @@ SPEC CHECKSUMS:
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e
-  FluentUI-React-Native-Avatar: b2d40d426a6d3e4d627c2d30e1f2885caff20768
+  FluentUI-React-Native-Avatar: d843c5e01a4bdcd136300deb92ef2d800bdcb8fe
   FluentUI-React-Native-Button-iOS: 77f2eda0f11e2bd5ea26f1f616169dc076c1c605
   FluentUI-React-Native-Shimmer: 504dd3c43aea2d84855bdd369621069fab0274b2
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
@@ -441,11 +441,11 @@ SPEC CHECKSUMS:
   React-RCTText: fae545b10cfdb3d247c36c56f61a94cfd6dba41d
   React-RCTVibration: 4356114dbcba4ce66991096e51a66e61eda51256
   ReactCommon: ed4e11d27609d571e7eee8b65548efc191116eb3
-  ReactTestApp-DevSupport: d3671526b8bfa3617b472b3a2404c1fe72fcdc1a
+  ReactTestApp-DevSupport: fac724ea8817d3874faf6c70a7cb65e383bbf2db
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
 
-PODFILE CHECKSUM: fc6391f0ccfe7ae16d46d7f1391924344dc42a78
+PODFILE CHECKSUM: 41517d9f873f8eefb0bb822c3dae22a3da7a21f8
 
 COCOAPODS: 1.9.3
