@@ -12,6 +12,9 @@ PODS:
   - FluentUI-React-Native-Avatar (0.2.5):
     - MicrosoftFluentUI (~> 0.1.16)
     - React
+  - FluentUI-React-Native-Button-iOS (0.3.2):
+    - MicrosoftFluentUI (~> 0.1.23)
+    - React
   - FluentUI-React-Native-Shimmer (0.3.3):
     - MicrosoftFluentUI (~> 0.1.16)
     - React
@@ -25,54 +28,54 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - MicrosoftFluentUI (0.1.16):
-    - MicrosoftFluentUI/AvatarView_mac (= 0.1.16)
-    - MicrosoftFluentUI/Button_mac (= 0.1.16)
-    - MicrosoftFluentUI/Calendar_ios (= 0.1.16)
-    - MicrosoftFluentUI/Card_ios (= 0.1.16)
-    - MicrosoftFluentUI/Controls_ios (= 0.1.16)
-    - MicrosoftFluentUI/Core_ios (= 0.1.16)
-    - MicrosoftFluentUI/Core_mac (= 0.1.16)
-    - MicrosoftFluentUI/DatePicker_mac (= 0.1.16)
-    - MicrosoftFluentUI/Drawer_ios (= 0.1.16)
-    - MicrosoftFluentUI/HUD_ios (= 0.1.16)
-    - MicrosoftFluentUI/Link_mac (= 0.1.16)
-    - MicrosoftFluentUI/Notification_ios (= 0.1.16)
-    - MicrosoftFluentUI/PillButtonBar_ios (= 0.1.16)
-    - MicrosoftFluentUI/PopupMenu_ios (= 0.1.16)
-    - MicrosoftFluentUI/Presenters_ios (= 0.1.16)
-    - MicrosoftFluentUI/Separator_mac (= 0.1.16)
-    - MicrosoftFluentUI/Shimmer_ios (= 0.1.16)
-    - MicrosoftFluentUI/TabBar_ios (= 0.1.16)
-    - MicrosoftFluentUI/Tooltip_ios (= 0.1.16)
-    - MicrosoftFluentUI/Utilities_ios (= 0.1.16)
-  - MicrosoftFluentUI/Calendar_ios (0.1.16):
+  - MicrosoftFluentUI (0.1.23):
+    - MicrosoftFluentUI/AvatarView_mac (= 0.1.23)
+    - MicrosoftFluentUI/Button_mac (= 0.1.23)
+    - MicrosoftFluentUI/Calendar_ios (= 0.1.23)
+    - MicrosoftFluentUI/Card_ios (= 0.1.23)
+    - MicrosoftFluentUI/Controls_ios (= 0.1.23)
+    - MicrosoftFluentUI/Core_ios (= 0.1.23)
+    - MicrosoftFluentUI/Core_mac (= 0.1.23)
+    - MicrosoftFluentUI/DatePicker_mac (= 0.1.23)
+    - MicrosoftFluentUI/Drawer_ios (= 0.1.23)
+    - MicrosoftFluentUI/HUD_ios (= 0.1.23)
+    - MicrosoftFluentUI/Link_mac (= 0.1.23)
+    - MicrosoftFluentUI/Notification_ios (= 0.1.23)
+    - MicrosoftFluentUI/PillButtonBar_ios (= 0.1.23)
+    - MicrosoftFluentUI/PopupMenu_ios (= 0.1.23)
+    - MicrosoftFluentUI/Presenters_ios (= 0.1.23)
+    - MicrosoftFluentUI/Separator_mac (= 0.1.23)
+    - MicrosoftFluentUI/Shimmer_ios (= 0.1.23)
+    - MicrosoftFluentUI/TabBar_ios (= 0.1.23)
+    - MicrosoftFluentUI/Tooltip_ios (= 0.1.23)
+    - MicrosoftFluentUI/Utilities_ios (= 0.1.23)
+  - MicrosoftFluentUI/Calendar_ios (0.1.23):
     - MicrosoftFluentUI/Presenters_ios
-  - MicrosoftFluentUI/Card_ios (0.1.16):
+  - MicrosoftFluentUI/Card_ios (0.1.23):
     - MicrosoftFluentUI/Controls_ios
-  - MicrosoftFluentUI/Controls_ios (0.1.16):
+  - MicrosoftFluentUI/Controls_ios (0.1.23):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/Core_ios (0.1.16)
-  - MicrosoftFluentUI/Drawer_ios (0.1.16):
+  - MicrosoftFluentUI/Core_ios (0.1.23)
+  - MicrosoftFluentUI/Drawer_ios (0.1.23):
     - MicrosoftFluentUI/Controls_ios
-  - MicrosoftFluentUI/HUD_ios (0.1.16):
+  - MicrosoftFluentUI/HUD_ios (0.1.23):
     - MicrosoftFluentUI/Controls_ios
-  - MicrosoftFluentUI/Notification_ios (0.1.16):
+  - MicrosoftFluentUI/Notification_ios (0.1.23):
     - MicrosoftFluentUI/Controls_ios
-  - MicrosoftFluentUI/PillButtonBar_ios (0.1.16):
+  - MicrosoftFluentUI/PillButtonBar_ios (0.1.23):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/PopupMenu_ios (0.1.16):
+  - MicrosoftFluentUI/PopupMenu_ios (0.1.23):
     - MicrosoftFluentUI/Drawer_ios
-  - MicrosoftFluentUI/Presenters_ios (0.1.16):
+  - MicrosoftFluentUI/Presenters_ios (0.1.23):
     - MicrosoftFluentUI/Controls_ios
-  - MicrosoftFluentUI/Shimmer_ios (0.1.16):
+  - MicrosoftFluentUI/Shimmer_ios (0.1.23):
     - MicrosoftFluentUI/Core_ios
     - MicrosoftFluentUI/Utilities_ios
-  - MicrosoftFluentUI/TabBar_ios (0.1.16):
+  - MicrosoftFluentUI/TabBar_ios (0.1.23):
     - MicrosoftFluentUI/Controls_ios
-  - MicrosoftFluentUI/Tooltip_ios (0.1.16):
+  - MicrosoftFluentUI/Tooltip_ios (0.1.23):
     - MicrosoftFluentUI/Controls_ios
-  - MicrosoftFluentUI/Utilities_ios (0.1.16)
+  - MicrosoftFluentUI/Utilities_ios (0.1.23)
   - QRCodeReader.swift (10.1.0)
   - RCTRequired (0.62.2)
   - RCTTypeSafety (0.62.2):
@@ -298,7 +301,7 @@ PODS:
     - ReactCommon/callinvoker (= 0.62.2)
   - ReactTestApp-DevSupport (0.2.14)
   - ReactTestApp-Resources (1.0.0-dev)
-  - SwiftLint (0.40.3)
+  - SwiftLint (0.42.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -306,6 +309,7 @@ DEPENDENCIES:
   - FBLazyVector (from `../../../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - FluentUI-React-Native-Avatar (from `../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec`)
+  - FluentUI-React-Native-Button-iOS (from `../../../packages/experimental/Button/FluentUIReactNativeButtoniOS.podspec`)
   - FluentUI-React-Native-Shimmer (from `../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec`)
   - Folly (from `../../../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
@@ -353,6 +357,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/Libraries/FBReactNativeSpec"
   FluentUI-React-Native-Avatar:
     :path: "../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec"
+  FluentUI-React-Native-Button-iOS:
+    :path: "../../../packages/experimental/Button/FluentUIReactNativeButtoniOS.podspec"
   FluentUI-React-Native-Shimmer:
     :path: "../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec"
   Folly:
@@ -410,10 +416,11 @@ SPEC CHECKSUMS:
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e
   FluentUI-React-Native-Avatar: b2d40d426a6d3e4d627c2d30e1f2885caff20768
+  FluentUI-React-Native-Button-iOS: 77f2eda0f11e2bd5ea26f1f616169dc076c1c605
   FluentUI-React-Native-Shimmer: 504dd3c43aea2d84855bdd369621069fab0274b2
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
-  MicrosoftFluentUI: deaa7c0f669b934e8fb8b73532ee8340812af01c
+  MicrosoftFluentUI: 4cbf18c57d5d0257b3b47b56b80dcb82c18acca9
   QRCodeReader.swift: 373a389fe9a22d513c879a32a6f647c58f4ef572
   RCTRequired: cec6a34b3ac8a9915c37e7e4ad3aa74726ce4035
   RCTTypeSafety: 93006131180074cffa227a1075802c89a49dd4ce
@@ -436,9 +443,9 @@ SPEC CHECKSUMS:
   ReactCommon: ed4e11d27609d571e7eee8b65548efc191116eb3
   ReactTestApp-DevSupport: d3671526b8bfa3617b472b3a2404c1fe72fcdc1a
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
-  SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
+  SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
 
-PODFILE CHECKSUM: 92ce3c3f4e11d78eff4c07027f8d9ba46255f05e
+PODFILE CHECKSUM: fc6391f0ccfe7ae16d46d7f1391924344dc42a78
 
 COCOAPODS: 1.9.3

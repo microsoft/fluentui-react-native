@@ -3,7 +3,7 @@ require 'json'
 package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 
 Pod::Spec.new do |s|
-  s.name         = 'FluentUI-React-Native-Button'
+  s.name         = 'FluentUI-React-Native-Button-Mac'
   s.version      = package['version']
   s.summary      = package['description']
   s.license      = package['license']
@@ -14,9 +14,9 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/microsoft/fluentui-react-native.git", :tag => "#{s.version}" }
   s.swift_version    = "5"
 
-  s.osx.deployment_target = "10.13"
+  s.osx.deployment_target = "10.14"
   s.osx.source_files      = "macos/*.{swift,h,m}"
 
   s.dependency 'React'
-  s.dependency 'MicrosoftFluentUI/Button_mac'
+  s.dependency 'MicrosoftFluentUI/Button_mac', '~> 0.1.17'
 end

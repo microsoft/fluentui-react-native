@@ -25,6 +25,7 @@ use_test_app! do |target|
 
     pod 'FluentUI-React-Native-Avatar', :path => '../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec'
     pod 'FluentUI-React-Native-Shimmer', :path => '../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec'
+    pod 'FluentUI-React-Native-Button-iOS', :path => '../../../packages/experimental/Button/FluentUIReactNativeButtoniOS.podspec'
 
     script_phase name: 'Start Packager',
                  script: start_packager_script,

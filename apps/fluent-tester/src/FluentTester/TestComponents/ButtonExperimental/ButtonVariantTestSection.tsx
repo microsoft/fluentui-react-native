@@ -4,35 +4,36 @@ import { View, Platform, processColor } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
 
 export const ButtonVariantTest: React.FunctionComponent<{}> = () => {
-  if (Platform.OS == 'macos') {
+  if (Platform.OS == 'macos' || Platform.OS == 'ios') {
     const CustomizedNativeButton = Button.customize({
       contentTintColor: processColor('white'),
-      restBackgroundColor: processColor('orange'),
+      accentColor: processColor('orange'),
     });
     return (
       <View style={[stackStyle, commonTestStyles.view]}>
         <Button
           title="PrimaryFilled"
-          buttonStyle="primaryFilled"
-          style={{ width: 250, height: 30, marginBottom: 15 }}
+          buttonStyle="primary"
+          style={{ width: 150, height: 40, marginBottom: 15 }}
           onPress={() => alert('PrimaryFilled button clicked!')}
         />
         <Button
           title="PrimaryOutline"
-          buttonStyle="primaryOutline"
-          style={{ width: 250, height: 30, marginBottom: 15 }}
+          buttonStyle="secondary"
+          isEnabled={false}
+          style={{ width: 150, height: 40, marginBottom: 15 }}
           onPress={() => alert('PrimaryOutline button clicked!')}
         />
         <Button
           title="Borderless"
           buttonStyle="borderless"
-          style={{ width: 250, height: 30, marginBottom: 15 }}
+          style={{ width: 150, height: 40, marginBottom: 15 }}
           onPress={() => alert('Borderless button clicked!')}
         />
         <CustomizedNativeButton
           title="Customized Button"
-          buttonStyle="primaryFilled"
-          style={{ width: 250, height: 30, marginBottom: 15 }}
+          style={{ width: 200, height: 40, marginBottom: 15 }}
+          isEnabled={false}
           onPress={() => alert('Custom button clicked!')}
         />
         <CompoundButton ghost content="Ghost" secondaryContent="Compound" style={commonTestStyles.vmargin} />

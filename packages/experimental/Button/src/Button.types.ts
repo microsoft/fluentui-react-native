@@ -111,7 +111,7 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   fluid?: boolean;
 }
 
-export interface ButtonMacProps {
+export interface ButtonPropsApple {
   /*
    * Name of the icon to show on the Button.
    */
@@ -134,7 +134,7 @@ export interface ButtonMacProps {
   onPress?: () => void;
 }
 
-export interface ButtonMacTokens {
+export interface ButtonTokensApple {
   /*
    * Button content tint color
    */
@@ -142,12 +142,12 @@ export interface ButtonMacTokens {
   /*
    * Button background color for rest state
    */
-  restBackgroundColor?: number;
+  accentColor?: number;
 }
 
 export type ButtonState = IPressableHooks<ButtonProps & React.ElementRef<any>>;
-export type ButtonMacStyle = 'primaryFilled' | 'primaryOutline' | 'secondaryOutline' | 'tertiaryOutline' | 'borderless';
-export type NativeButtonProps = ButtonMacProps & ButtonMacTokens;
+export type ButtonMacStyle = 'primary' | 'secondary' | 'borderless';
+export type NativeButtonProps = ButtonPropsApple & ButtonTokensApple;
 
 export interface ButtonSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
@@ -155,7 +155,7 @@ export interface ButtonSlotProps {
   content: TextProps;
 }
 
-export interface MacButtonSlotProps {
+export interface ButtonSlotPropsApple {
   root: NativeButtonProps;
 }
 
@@ -165,8 +165,8 @@ export interface ButtonType {
   slotProps: ButtonSlotProps;
 }
 
-export interface ButtonTypeMac {
-  props: ButtonMacProps;
-  tokens: ButtonMacTokens;
-  slotProps: MacButtonSlotProps;
+export interface ButtonTypeApple {
+  props: ButtonPropsApple;
+  tokens: ButtonTokensApple;
+  slotProps: ButtonSlotPropsApple;
 }

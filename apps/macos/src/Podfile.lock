@@ -9,13 +9,13 @@ PODS:
     - React-Core (= 0.62.16)
     - React-jsi (= 0.62.16)
     - ReactCommon/turbomodule/core (= 0.62.16)
-  - FluentUI-React-Native-Button (0.3.2):
-    - MicrosoftFluentUI/Button_mac
+  - FluentUI-React-Native-Button-Mac (0.3.2):
+    - MicrosoftFluentUI/Button_mac (~> 0.1.17)
     - React
   - glog (0.3.5)
-  - MicrosoftFluentUI/Button_mac (0.1.17):
+  - MicrosoftFluentUI/Button_mac (0.1.23):
     - MicrosoftFluentUI/Core_mac
-  - MicrosoftFluentUI/Core_mac (0.1.17)
+  - MicrosoftFluentUI/Core_mac (0.1.23)
   - RCT-Folly (2018.10.22.00):
     - boost-for-react-native
     - DoubleConversion
@@ -257,7 +257,7 @@ DEPENDENCIES:
   - DoubleConversion (from `../../../node_modules/react-native-macos/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../../../node_modules/react-native-macos/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec`)
-  - FluentUI-React-Native-Button (from `../../../packages/experimental/Button/FluentUIReactNativeButton.podspec`)
+  - FluentUI-React-Native-Button-Mac (from `../../../packages/experimental/Button/FluentUIReactNativeButtonMac.podspec`)
   - glog (from `../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
   - RCT-Folly (from `../../../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../../../node_modules/react-native-macos/Libraries/RCTRequired`)
@@ -301,8 +301,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-macos/Libraries/FBLazyVector"
   FBReactNativeSpec:
     :path: "../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec"
-  FluentUI-React-Native-Button:
-    :path: "../../../packages/experimental/Button/FluentUIReactNativeButton.podspec"
+  FluentUI-React-Native-Button-Mac:
+    :path: "../../../packages/experimental/Button/FluentUIReactNativeButtonMac.podspec"
   glog:
     :podspec: "../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec"
   RCT-Folly:
@@ -357,9 +357,9 @@ SPEC CHECKSUMS:
   DoubleConversion: 681b789128e5512811c81706e9b361209f40d21e
   FBLazyVector: f7ecc4fb8e76a380e4bac28fe4773c30b2bc7b2e
   FBReactNativeSpec: f1a34d51179ade22df30b9fb09bdd52578f2734a
-  FluentUI-React-Native-Button: 31e7208ad4b2b9dc591de9e50d5eb8c599e6c858
+  FluentUI-React-Native-Button-Mac: 400dc14e5d35583a2f9ea35501cffff242edb4f4
   glog: d86cb3634e15ec6d8cd9a1c7c1b9d6fa295beb37
-  MicrosoftFluentUI: a02501bff34c44bb0fb2a61f624f69cd42495eea
+  MicrosoftFluentUI: 4cbf18c57d5d0257b3b47b56b80dcb82c18acca9
   RCT-Folly: 71ece0166f9c96c1ec9279eeb0317baf533c020f
   RCTRequired: e3780ba29155206352b1ea54d4f98c5afd86a326
   RCTTypeSafety: 797c0250e3117bb435c80c732929f03e2557eaa4
@@ -385,6 +385,6 @@ SPEC CHECKSUMS:
   SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
   Yoga: 0f98dd1219266759167df8e5c7ae102d4a2ae4c5
 
-PODFILE CHECKSUM: b3fde5cbca570e71b4b64a45f23e08b0f4c31ed2
+PODFILE CHECKSUM: 7b67a96cc9f188f2230dcc8e5a0ad07157246ed3
 
 COCOAPODS: 1.9.3
