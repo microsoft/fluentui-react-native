@@ -1,4 +1,4 @@
-import { Image, ViewProps } from 'react-native';
+import { ImageURISource, ViewProps } from 'react-native';
 
 export const nativeButtonName = 'NativeButton';
 
@@ -6,7 +6,7 @@ export interface NativeButtonProps {
   /*
    * Name of the icon to show on the Button.
    */
-  image?: Image;
+  image?: ImageURISource;
   /*
    * Text to show on the Button.
    */
@@ -27,16 +27,12 @@ export interface NativeButtonProps {
 
 export interface NativeButtonTokens {
   /*
-   * Button content tint color
-   */
-  contentTintColor?: string;
-  /*
    * Button background color for rest state
    */
   accentColor?: string;
 }
 
-export type NativeButtonStyle = 'primary' | 'secondary' | 'borderless' | 'acrylic' | 'iOSTertiaryOutline';
+export type NativeButtonStyle = 'primary' | 'secondary' | 'borderless' | 'acrylic';
 export type NativeButtonViewProps = NativeButtonProps & NativeButtonTokens & ViewProps;
 
 export interface NativeButtonSlotProps {

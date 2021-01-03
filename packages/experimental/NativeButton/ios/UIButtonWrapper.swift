@@ -4,11 +4,11 @@ class UIButtonWrapper: Button {
 	/// button event block
 	@objc public var onPress:RCTBubblingEventBlock?
 
-	@objc public override init(style: ButtonStyle = .primaryFilled) {
-		super.init(style: .primaryFilled)
+	@objc public override init(frame: CGRect = .zero) {
+		super.init(frame: frame)
 		self.addTarget(self, action: #selector(sendCallback), for: .touchUpInside)
 	}
-	
+
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}

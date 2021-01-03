@@ -5,7 +5,7 @@ class ButtonWrapper: Button {
 	@objc public var onPress:RCTBubblingEventBlock?
 
 	@objc public init() {
-		super.init(title: nil, image: nil, imagePosition: .imageLeading	, format: ButtonFormat())
+		super.init(title: nil, image: nil, imagePosition: .imageLeading, format: ButtonFormat())
 		self.target = self
 		self.action = #selector(sendCallback)
 	}
