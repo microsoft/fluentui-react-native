@@ -1,10 +1,11 @@
 import { TestDescription } from './TestComponents';
-import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
+import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './TestComponents/FocusTrapZone';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
+import { NativeButtonTest, HOMEPAGE_NATIVEBUTTON_BUTTON } from './TestComponents/NativeButton';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from './TestComponents/Persona';
 import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from './TestComponents/PersonaCoin';
 import { HOMEPAGE_PRESSABLE_BUTTON, PressableTest } from './TestComponents/Pressable';
@@ -17,8 +18,8 @@ import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 export const tests: TestDescription[] = [
   {
     name: 'Button Test',
-    component: ExperimentalButtonTest,
-    testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
+    component: ButtonTest,
+    testPage: HOMEPAGE_BUTTON_BUTTON,
   },
   {
     name: 'Callout Test',
@@ -44,6 +45,11 @@ export const tests: TestDescription[] = [
     name: 'Link Test',
     component: LinkTest,
     testPage: HOMEPAGE_LINK_BUTTON,
+  },
+  {
+    name: 'Native Button Test',
+    component: NativeButtonTest,
+    testPage: HOMEPAGE_NATIVEBUTTON_BUTTON,
   },
   {
     name: 'Separator Test',

@@ -18,12 +18,13 @@ RCT_ENUM_CONVERTER(MSFButtonStyle, (@{
 
 RCT_EXPORT_VIEW_PROPERTY(title, NSString);
 RCT_EXPORT_VIEW_PROPERTY(image, NSImage);
-RCT_EXPORT_VIEW_PROPERTY(isEnabled, bool);
 RCT_EXPORT_VIEW_PROPERTY(contentTintColor, NSColor);
 RCT_EXPORT_VIEW_PROPERTY(accentColor, NSColor);
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock);
 
 RCT_REMAP_VIEW_PROPERTY(buttonStyle, style, MSFButtonStyle);
-
+RCT_CUSTOM_VIEW_PROPERTY(isEnabled, BOOL, MSFButton) {
+	[view setEnabled:[RCTConvert BOOL:json]];
+}
 @end
 
