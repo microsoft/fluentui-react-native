@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/component-cache": "^1.1.0",
+    "@fluentui-react-native/experimental-button": "0.3.2",
     "@fluentui-react-native/framework": "0.4.2"
   },
   "devDependencies": {
