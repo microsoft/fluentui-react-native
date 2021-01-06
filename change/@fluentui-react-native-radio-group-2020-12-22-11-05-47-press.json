@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Bump react-native-win32",
+  "packageName": "@fluentui-react-native/radio-group",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2020-12-22T19:05:35.616Z"
+}
