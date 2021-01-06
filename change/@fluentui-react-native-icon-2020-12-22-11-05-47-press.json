@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Bump react-native-win32",
-  "packageName": "@fluentui-react-native/icon",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2020-12-22T19:05:42.636Z"
-}

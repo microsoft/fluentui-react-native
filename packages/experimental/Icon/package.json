@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/icon",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A cross-platform opinionated Fluent Icon component",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -20,7 +20,7 @@
   "dependencies": {
     "@fluentui-react-native/framework": "0.4.2",
     "@uifabricshared/foundation-compose": "^1.7.1",
-    "@fluentui-react-native/text": "^0.7.1",
+    "@fluentui-react-native/text": "^0.7.2",
     "@fluentui-react-native/theme-types": ">=0.4.0 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.7.0 <1.0.0"
   },
