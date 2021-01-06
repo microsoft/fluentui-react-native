@@ -7,11 +7,11 @@ import { IKeyboardEvent, IHandledKeyboardEvent } from '@office-iss/react-native-
 
 export const PressableUsage: React.FunctionComponent<{}> = () => {
   const _onPress = (): void => {
-    Linking.openURL('www.microsoft.com');
+    Linking.openURL('https://www.microsoft.com');
   };
 
   const _onKeyDown = (ev: IKeyboardEvent) => {
-    if (ev.nativeEvent.key === 'Enter' || ev.nativeEvent.key == 'Space') Linking.openURL('www.microsoft.com');
+    if (ev.nativeEvent.key === 'Enter' || ev.nativeEvent.key == 'Space') Linking.openURL('https://www.microsoft.com');
   };
 
   const _onPress2 = (): void => {
