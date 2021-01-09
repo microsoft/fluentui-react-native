@@ -12,6 +12,7 @@ steps:
       sdk: ${{ parameters.xcode_sdk }}
       scheme: ${{ parameters.xcode_scheme }}
       configuration: ${{ parameters.xcode_configuration }}
+      destinationDevices: 'Any Mac'
       xcWorkspacePath: ${{ parameters.xcode_workspacePath }}
       signingOption: nosign
       args: '-verbose -derivedDataPath DerivedData'
