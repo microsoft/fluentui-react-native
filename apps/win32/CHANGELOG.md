@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Sat, 12 Dec 2020 04:27:11 GMT and should not be manually modified.
+This log was last generated on Wed, 06 Jan 2021 18:41:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.11
+
+Wed, 06 Jan 2021 18:41:50 GMT
+
+### Patches
+
+- remove react-native-win32 dep in tester-win32 (krsiler@microsoft.com)
 
 ## 0.7.9
 
