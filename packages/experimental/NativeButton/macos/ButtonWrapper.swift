@@ -10,7 +10,7 @@ class ButtonWrapper: Button {
 		}
 	}
 	@objc public init() {
-		super.init(title: nil, image: nil, imagePosition: .imageLeading, format: ButtonFormat())
+		super.init(title: "", image: nil, imagePosition: .imageLeading, format: ButtonFormat())
 		self.target = self
 		self.action = #selector(sendCallback)
 	}
