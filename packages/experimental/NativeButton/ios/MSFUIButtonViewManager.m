@@ -9,6 +9,7 @@ RCT_ENUM_CONVERTER(MSFButtonStyle, (@{
 	@"primary": @(MSFButtonStylePrimaryFilled),
 	@"secondary": @(MSFButtonStyleSecondaryOutline),
 	@"borderless": @(MSFButtonStyleBorderless),
+  @"acrylic": @(MSFButtonStylePrimaryFilled), // mac specific button style
 }), MSFButtonStylePrimaryFilled, integerValue);
 
 @end

@@ -12,7 +12,17 @@ export const NativeButton = compose<NativeButtonType>({
   displayName: nativeButtonName,
   tokens: [{}, nativeButtonName],
   slotProps: {
-    root: buildProps((tokens) => ({ ...tokens }), []),
+    root: buildProps(
+      (tokens) => ({
+        style: {
+          height: 35,
+          width: 200,
+          margin: 10,
+        },
+        ...tokens,
+      }),
+      [],
+    ),
   },
   slots: { root: NativeButtonComponent },
   render: (userProps: NativeButtonProps, useSlots: UseSlots<NativeButtonType>) => {

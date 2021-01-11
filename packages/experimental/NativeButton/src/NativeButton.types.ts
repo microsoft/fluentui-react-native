@@ -1,16 +1,20 @@
-import { ImageURISource, ViewProps } from 'react-native';
+import { ImageURISource } from 'react-native';
 
 export const nativeButtonName = 'NativeButton';
 
 export interface NativeButtonProps {
   /*
+   * Text to show on the Button.
+   */
+  title?: string;
+  /*
    * Name of the icon to show on the Button.
    */
   image?: ImageURISource;
   /*
-   * Text to show on the Button.
+   * Should the button image be tinted
    */
-  title?: string;
+  isImageTinted?: boolean;
   /*
    * ButtonStyle wrapped enum
    */
@@ -27,20 +31,18 @@ export interface NativeButtonProps {
 
 export interface NativeButtonTokens {
   /*
-   * Button background color for rest state
+   * Button background color
    */
-  accentColor?: string;
+  accentColor?: number;
 }
 
 export type NativeButtonStyle = 'primary' | 'secondary' | 'borderless' | 'acrylic';
-export type NativeButtonViewProps = NativeButtonProps & NativeButtonTokens & ViewProps;
-
-export interface NativeButtonSlotProps {
-  root: NativeButtonViewProps;
-}
+export type NativeButtonViewProps = NativeButtonProps & NativeButtonTokens;
 
 export interface NativeButtonType {
   props: NativeButtonProps;
   tokens: NativeButtonTokens;
-  slotProps: NativeButtonSlotProps;
+  slotProps: {
+    root: NativeButtonViewProps;
+  };
 }

@@ -19,6 +19,7 @@ RCT_ENUM_CONVERTER(MSFButtonStyle, (@{
 RCT_EXPORT_VIEW_PROPERTY(title, NSString);
 RCT_EXPORT_VIEW_PROPERTY(accentColor, NSColor);
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(isImageTinted, BOOL);
 RCT_REMAP_VIEW_PROPERTY(buttonStyle, style, MSFButtonStyle);
 RCT_CUSTOM_VIEW_PROPERTY(isEnabled, BOOL, MSFButton) {
 	[view setEnabled:[RCTConvert BOOL:json]];
