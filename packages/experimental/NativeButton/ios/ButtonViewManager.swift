@@ -1,12 +1,12 @@
 import Foundation
 import FluentUI
 
-@objc(MSFUIButtonViewManager)
-class UIButtonViewManager: RCTViewManager {
+@objc(MSFButtonViewManager)
+class ButtonViewManager: RCTViewManager {
 
 	override func view() -> UIView! {
-		let button = UIButtonWrapper()
-	return button
+		let button = ButtonWrapper()
+	  return button
 	}
 
 	override class func requiresMainQueueSetup() -> Bool {

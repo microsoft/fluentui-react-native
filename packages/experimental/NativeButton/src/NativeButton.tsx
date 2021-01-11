@@ -4,9 +4,8 @@ import { nativeButtonName, NativeButtonType, NativeButtonProps, NativeButtonView
 import { Button } from '@fluentui-react-native/experimental-button';
 import { compose, mergeProps, withSlots, UseSlots, buildProps } from '@fluentui-react-native/framework';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
-import { Platform } from 'react-native';
 
-const NativeButtonComponent = Platform.OS === 'macos' ? ensureNativeComponent('MSFButtonView') : ensureNativeComponent('MSFUIButtonView');
+const NativeButtonComponent = ensureNativeComponent('MSFButtonView');
 
 export const NativeButton = compose<NativeButtonType>({
   displayName: nativeButtonName,
