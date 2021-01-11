@@ -1,7 +1,7 @@
 import { NativeButton } from '@fluentui-react-native/experimental-native-button';
 import { NATIVEBUTTON_TESTPAGE } from './consts';
 import * as React from 'react';
-import { ImageURISource, processColor } from 'react-native';
+import { ImageURISource } from 'react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { PlatformStatus, Test, TestSection } from '../Test';
@@ -13,7 +13,7 @@ const icon: ImageURISource = {
 
 const nativeButton: React.FunctionComponent<{}> = () => {
   const CustomNativeButton = NativeButton.customize({
-    accentColor: processColor('#fca905'),
+    accentColor: '#fca905',
   });
   return (
     <Stack style={stackStyle}>

@@ -33,7 +33,7 @@ export interface NativeButtonTokens {
   /*
    * Button background color
    */
-  accentColor?: number;
+  accentColor?: string;
 }
 
 export type NativeButtonStyle = 'primary' | 'secondary' | 'borderless' | 'acrylic';
