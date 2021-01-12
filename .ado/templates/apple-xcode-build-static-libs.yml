@@ -62,7 +62,7 @@ steps:
       xcode_actions: 'build'
       xcode_scheme: 'FluentTester'
       xcode_configuration: 'Debug'
-      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
+      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig' ONLY_ACTIVE_ARCH=NO
 
   # macOS Release
   - template: apple-xcode-build.yml
@@ -72,4 +72,4 @@ steps:
       xcode_actions: 'build'
       xcode_scheme: 'FluentTester'
       xcode_configuration: 'Release'
-      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
+      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig' ONLY_ACTIVE_ARCH=NO
