@@ -22,7 +22,7 @@ export interface NativeButtonProps {
   /*
    * A button can be enabled or disabled.
    */
-  isEnabled?: boolean;
+  enabled?: boolean;
   /*
    * A callback to call on button click event
    */
@@ -32,10 +32,12 @@ export interface NativeButtonProps {
 export interface NativeButtonTokens {
   /*
    * Button background color
+   * (only works for macOS)
    */
   accentColor?: string;
 }
 
+// iOS maps acrylic to primary style since it's a mac specifc style
 export type NativeButtonStyle = 'primary' | 'secondary' | 'borderless' | 'acrylic';
 export type NativeButtonViewProps = NativeButtonProps & NativeButtonTokens;
 

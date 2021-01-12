@@ -5,7 +5,7 @@ import FluentUI
 class ButtonViewManager: RCTViewManager {
 
 	override func view() -> UIView! {
-		let button = ButtonWrapper()
+	  let button = ButtonWrapper()
 	  return button
 	}
 

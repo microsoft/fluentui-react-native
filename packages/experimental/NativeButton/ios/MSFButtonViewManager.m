@@ -6,10 +6,10 @@
 
 @implementation RCTConvert (MSFButtonAdditions)
 RCT_ENUM_CONVERTER(MSFButtonStyle, (@{
-	@"primary": @(MSFButtonStylePrimaryFilled),
-	@"secondary": @(MSFButtonStyleSecondaryOutline),
-	@"borderless": @(MSFButtonStyleBorderless),
-  @"acrylic": @(MSFButtonStylePrimaryFilled), // mac specific button style
+  @"primary": @(MSFButtonStylePrimaryFilled),
+  @"secondary": @(MSFButtonStyleSecondaryOutline),
+  @"borderless": @(MSFButtonStyleBorderless),
+  @"acrylic": @(MSFButtonStylePrimaryFilled),
 }), MSFButtonStylePrimaryFilled, integerValue);
 
 @end
@@ -18,13 +18,11 @@ RCT_ENUM_CONVERTER(MSFButtonStyle, (@{
 
 RCT_EXPORT_VIEW_PROPERTY(image, UIImage);
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(enabled, BOOL);
 RCT_REMAP_VIEW_PROPERTY(buttonStyle, style, MSFButtonStyle);
 RCT_CUSTOM_VIEW_PROPERTY(title, String, MSFButton) {
 	// for simplicity only normal state is supported
 	[view setTitle:[RCTConvert NSString:json] forState:normal];
-}
-RCT_CUSTOM_VIEW_PROPERTY(isEnabled, BOOL, MSFButton) {
-	[view setEnabled:[RCTConvert BOOL:json]];
 }
 
 @end

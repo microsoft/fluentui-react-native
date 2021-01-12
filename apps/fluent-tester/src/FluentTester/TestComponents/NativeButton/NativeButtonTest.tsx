@@ -28,7 +28,7 @@ const nativeButton: React.FunctionComponent<{}> = () => {
         isImageTinted={false}
         onPress={() => alert('Custom button clicked!')}
       />
-      <NativeButton title="Primary disabled" buttonStyle="primary" isEnabled={false} />
+      <NativeButton title="Primary disabled" buttonStyle="primary" enabled={false} />
       <NativeButton image={icon} buttonStyle="acrylic" onPress={() => alert('Icon button clicked!')} />
     </Stack>
   );

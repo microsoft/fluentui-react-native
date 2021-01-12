@@ -22,8 +22,6 @@ RCT_EXPORT_VIEW_PROPERTY(accentColor, UIColor);
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(isImageTinted, BOOL);
 RCT_REMAP_VIEW_PROPERTY(buttonStyle, style, MSFButtonStyle);
-RCT_CUSTOM_VIEW_PROPERTY(isEnabled, BOOL, MSFButton) {
-	[view setEnabled:[RCTConvert BOOL:json]];
-}
+RCT_EXPORT_VIEW_PROPERTY(enabled, BOOL);
 @end
 
