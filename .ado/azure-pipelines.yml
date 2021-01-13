@@ -112,7 +112,7 @@ jobs:
         parameters:
           relative_directory: $(relative_directory)
 
-  - job: Test Build Static Libs
+  - job: StaticLibBuild
     displayName: NuGet Publish
     pool:
       vmImage: 'macos-10.15'
