@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 13 Jan 2021 16:44:06 GMT and should not be manually modified.
+This log was last generated on Wed, 13 Jan 2021 20:04:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.0
+
+Wed, 13 Jan 2021 20:04:26 GMT
+
+### Minor changes
+
+- mac native button (67026167+chiuam@users.noreply.github.com)
 
 ## 0.13.12
 
