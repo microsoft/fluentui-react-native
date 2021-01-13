@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "update FUA version for button",
+  "packageName": "@fluentui-react-native/persona",
+  "email": "67026167+chiuam@users.noreply.github.com",
+  "dependentChangeType": "patch",
+  "date": "2021-01-13T05:32:10.121Z"
+}
