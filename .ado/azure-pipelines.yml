@@ -111,3 +111,5 @@ jobs:
       - template: templates/apple-yarn-build.yml
         parameters:
           relative_directory: $(relative_directory)
+
+      - template: templates/apple-xcode-build-static-libs.yml
