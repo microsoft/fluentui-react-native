@@ -4,7 +4,6 @@ parameters:
   xcode_workspacePath: ''
   xcode_scheme: ''
   xcode_actions: ''
-  xcode_useXcpretty: false
   xcode_extraArgs: ''
 
 steps:
@@ -12,15 +11,9 @@ steps:
     displayName: 'Xcode ${{ parameters.xcode_actions }} ${{ parameters.xcode_configuration }} ${{ parameters.xcode_sdk }} ${{ parameters.xcode_scheme }}'
     inputs:
       actions: '${{ parameters.xcode_actions }}'
-      configuration: ${{ parameters.xcode_configuration }}
       sdk: ${{ parameters.xcode_sdk }}
-      xcWorkspacePath: ${{ parameters.xcode_workspacePath }}
       scheme: ${{ parameters.xcode_scheme }}
-      xcodeVersion: default
-      signingOption: auto
-      packageApp: false
-      teamId: '$(XCodeSigningMicrosoftTeamID)'
+      configuration: ${{ parameters.xcode_configuration }}
+      xcWorkspacePath: ${{ parameters.xcode_workspacePath }}
+      signingOption: nosign
       args: '-verbose -derivedDataPath DerivedData ${{ parameters.xcode_extraArgs }}'
-      useXcpretty: ${{ parameters.xcode_useXcpretty }}
-      publishJUnitResults: ${{ parameters.xcode_useXcpretty }}
-      xctoolReporter: 'junit:test-results.xml'
