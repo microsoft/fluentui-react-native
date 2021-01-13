@@ -9,11 +9,17 @@ PODS:
     - React-Core (= 0.63.1)
     - React-jsi (= 0.63.1)
     - ReactCommon/turbomodule/core (= 0.63.1)
+  - FluentUI-React-Native-Avatar (0.3.1):
+    - MicrosoftFluentUI/AvatarView_mac (~> 0.1.16)
+    - MicrosoftFluentUI/Controls_ios (~> 0.1.16)
+    - React
   - FluentUI-React-Native-Button (0.1.0):
     - MicrosoftFluentUI/Button_mac (~> 0.1.25)
     - MicrosoftFluentUI/Controls_ios (~> 0.1.25)
     - React
   - glog (0.3.5)
+  - MicrosoftFluentUI/AvatarView_mac (0.1.25):
+    - MicrosoftFluentUI/Core_mac
   - MicrosoftFluentUI/Button_mac (0.1.25):
     - MicrosoftFluentUI/Core_mac
   - MicrosoftFluentUI/Core_mac (0.1.25)
@@ -262,6 +268,7 @@ DEPENDENCIES:
   - DoubleConversion (from `../../../node_modules/react-native-macos/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../../../node_modules/react-native-macos/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec`)
+  - FluentUI-React-Native-Avatar (from `../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec`)
   - FluentUI-React-Native-Button (from `../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec`)
   - glog (from `../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
   - RCT-Folly (from `../../../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
@@ -306,6 +313,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-macos/Libraries/FBLazyVector"
   FBReactNativeSpec:
     :path: "../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec"
+  FluentUI-React-Native-Avatar:
+    :path: "../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec"
   FluentUI-React-Native-Button:
     :path: "../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec"
   glog:
@@ -364,6 +373,7 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 87ca368919ae0ec70816fb8a42252ef59dc05c94
   FBReactNativeSpec: 7c0591658d85effad209fc4f45b6c9760f9e5842
+  FluentUI-React-Native-Avatar: e124b19dd5213759670f0edfac7af87df12b48f8
   FluentUI-React-Native-Button: 30dedea13def00e23cb4c6a9b5d7f1728a257289
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: 9fc0e7af0b061c6a0d0bd1b674b93657cd6db5e1
@@ -393,6 +403,6 @@ SPEC CHECKSUMS:
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
   Yoga: 6f6f412e10cf9acb93bb0e290613784603d2f0c9
 
-PODFILE CHECKSUM: c7276a6cf3194b004ac7a3a9a775d37fb8e2e8ad
+PODFILE CHECKSUM: 737120059192afd160feba8d3732b96e2f459bd2
 
 COCOAPODS: 1.9.3
