@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
+This log was last generated on Wed, 06 Jan 2021 18:41:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.3
+
+Wed, 06 Jan 2021 18:41:50 GMT
+
+### Patches
+
+- Bump react-native-win32 (krsiler@microsoft.com)
+
+## 0.8.2
+
+Tue, 22 Dec 2020 01:36:23 GMT
+
+### Patches
+
+- Changing hover/focused color for Checkmark (safreibe@microsoft.com)
 
 ## 0.8.0
 

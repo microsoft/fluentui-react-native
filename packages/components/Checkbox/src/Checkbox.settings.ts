@@ -55,7 +55,8 @@ export const settings: IComposeSettings<ICheckboxType> = [
       focused: {
         tokens: {
           backgroundColor: 'menuItemBackgroundHovered',
-          textBorderColor: 'focusBorder'
+          textBorderColor: 'focusBorder',
+          checkmarkColor: 'menuItemTextHovered',
         }
       },
       checked: {
@@ -67,7 +68,8 @@ export const settings: IComposeSettings<ICheckboxType> = [
       },
       hovered: {
         tokens: {
-          backgroundColor: 'menuItemBackgroundHovered'
+          backgroundColor: 'menuItemBackgroundHovered',
+          checkmarkColor: 'menuItemTextHovered',
         }
       },
       disabled: {
