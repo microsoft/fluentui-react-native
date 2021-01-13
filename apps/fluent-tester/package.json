@@ -28,6 +28,7 @@
     "@fluentui-react-native/experimental-avatar": ">=0.4.0 <1.0.0",
     "@fluentui-react-native/experimental-button": "0.3.3",
     "@fluentui-react-native/experimental-text": ">=0.2.3 <1.0.0",
+    "@fluentui-react-native/experimental-native-button": ">=0.1.0 <1.0.0",
     "@fluentui-react-native/framework": ">=0.4.2 <1.0.0",
     "@fluentui-react-native/icon": "0.2.4",
     "@fluentui-react-native/interactive-hooks": ">=0.7.1 <1.0.0",

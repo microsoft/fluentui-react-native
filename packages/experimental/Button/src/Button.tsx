@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { Image, View } from 'react-native';
-import { ButtonProps, buttonName, ButtonType } from './Button.types';
+import { buttonName, ButtonType, ButtonProps } from './Button.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './Button.styling';
 import { filterImageProps } from '@fluentui-react-native/adapters';
