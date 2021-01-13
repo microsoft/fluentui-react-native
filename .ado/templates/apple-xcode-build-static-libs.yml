@@ -14,6 +14,26 @@ steps:
     workingDirectory: apps/macOS
     displayName: 'pod install macOS'
 
+  # macOS Debug
+  - template: apple-xcode-build.yml
+    parameters:
+      xcode_sdk: 'macosx'
+      xcode_workspacePath: 'apps/macos/src/FluentTester.xcworkspace'
+      xcode_actions: 'build'
+      xcode_scheme: 'FluentTester'
+      xcode_configuration: 'Debug'
+      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
+
+  # macOS Release
+  - template: apple-xcode-build.yml
+    parameters:
+      xcode_sdk: 'macosx'
+      xcode_workspacePath: 'apps/macos/src/FluentTester.xcworkspace'
+      xcode_actions: 'build'
+      xcode_scheme: 'FluentTester'
+      xcode_configuration: 'Release'
+      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
+
   # iPhone Simulator Debug
   - template: apple-xcode-build.yml
     parameters:
@@ -53,23 +73,3 @@ steps:
       xcode_scheme: 'FluentTester'
       xcode_configuration: 'Release'
       xcode_extraArgs: ''
-
-  # macOS Debug
-  - template: apple-xcode-build.yml
-    parameters:
-      xcode_sdk: 'macosx'
-      xcode_workspacePath: 'apps/macos/src/FluentTester.xcworkspace'
-      xcode_actions: 'build'
-      xcode_scheme: 'FluentTester'
-      xcode_configuration: 'Debug'
-      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
-
-  # macOS Release
-  - template: apple-xcode-build.yml
-    parameters:
-      xcode_sdk: 'macosx'
-      xcode_workspacePath: 'apps/macos/src/FluentTester.xcworkspace'
-      xcode_actions: 'build'
-      xcode_scheme: 'FluentTester'
-      xcode_configuration: 'Release'
-      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
