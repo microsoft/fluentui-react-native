@@ -25,24 +25,9 @@ Our framework has a few key concepts that you should be familiar with.
 
 ### Slots
 
-React likes to have higher order components where the one big "outer" component is composed of a a bunch of inner components. FluentUI React Native decided to handle the creation of components like this with the concept of Slots, where each slot is an abstract representation of one inner component.
+The "Slot" pattern is an abstraction pattern used to compose higher order components. The pattern allows us to divide the props of one component into multiple "slots". An individual slot represents your inner component, in essence the actual entries that you will put in your render tree. Using the slot pattern lets you abstract away specifically what gets rendered in the tree and in advanced user scenarios allow you to switch out or flatten slots. For example, you might choose to replace whatever we put in the default "icon" slot for a button with a SVG, or a spinner. You could replace the root slot of a radio group with a focus trapzone if the radio button is a required part of the form. The props are assigned to whatever happens to get rendered for that slot. It is also built to help with style creation for the slots to help keep object references to the produced style objects consistent and use cached results where possible.
 
-When I asked Alicia and Jason "What are Slots?" I got these answers
-
-```
-Alicia:
-I guess the way I'd explain it is that they abstract away specifically what gets rendered in the tree and in advanced user scenarios allow you to switch out or flatten slots.  For example, you might choose to replace whatever we put in the default "icon" slot for a button with a SVG, or a spinner.  You could replace the root slot of a radio group with a focus trapzone if the radio button is a required part of the form.  The props are assigned to whatever happens to get rendered for that slot.
-
-Jason:
-In terms of slots, that is a concept adapted from Fabric/Fluent.
-The slots represent your inner components, in essence the actual entries that you will put in your render tree
-This means if all you have is a component that wraps a single native component, then it only has one slot.
- - The framework allows for these components to be customized and swapped out one to one without fully rewriting the control
-  - It is also built to help with style creation for the slots to help keep object references to the produced style objects consistent and use cached results where possible.
-Is this component simply wrapping the native component 1 for 1? If so you might only want to use part of the framework. If this is a direct native component wrapper you may want to emulate what I do for Callout.
-```
-
-Currently, we have only explored having one slot that represents the native component for wrapped FluentUI Apple components. Shimmer is an example of only having one slot ("root") that is the native view, and the minimum set of things you need to do to get that working.
+One caveat is that if a component simply wraps a single native component, then it only has one slot.
 
 ### Tokens
 
