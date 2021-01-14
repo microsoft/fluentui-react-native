@@ -1,4 +1,4 @@
-export * from './createOfficeTheme';
-export * from './createPartialOfficeTheme';
+export * from './createAppleTheme';
+export * from './createPartialAppleTheme';
 export * from './NativeModule/index';
-export * from './paletteFromOfficeColors';
+export * from './paletteFromAppleColors';

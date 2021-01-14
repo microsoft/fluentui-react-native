@@ -3,7 +3,7 @@ import { createDefaultTheme, ThemeOptions } from '@fluentui-react-native/default
 import { getThemingModule } from './NativeModule/getThemingModule';
 import { CxxException, PlatformDefaultsChangedArgs } from './NativeModule/officeThemingModule';
 import { OfficePalette } from '@fluentui-react-native/theme-types';
-import { createPartialOfficeTheme } from './createPartialOfficeTheme';
+import { createPartialOfficeTheme } from './createPartialAppleTheme';
 
 function handlePaletteCall(palette: OfficePalette | CxxException): OfficePalette | undefined {
   return (palette as CxxException).message !== undefined ? undefined : (palette as OfficePalette);
