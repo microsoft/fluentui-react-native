@@ -5,16 +5,20 @@ function _appleTypography(): Typography {
   const appleDict = {
     sizes: {
       caption: 10 as FontSize,
-      secondary: 12 as FontSize,
-      body: 14 as FontSize,
-      subheader: 16 as FontSize,
-      header: 20 as FontSize,
-      hero: 28 as FontSize,
-      heroLarge: 42 as FontSize,
+      secondary: 11 as FontSize, // Callout
+      body: 13 as FontSize, // Body
+      subheader: 16 as FontSize, // Subheadline
+      header: 20 as FontSize, // Headline
+      hero: 22 as FontSize, ///Title 1
+      heroLarge: 26 as FontSize, //Large Title,
     } as FontSizes,
     weights: {
+      // ultralight: '100'
+      // this: '200'
+      // semibold: ???
       regular: '400' as FontWeightValue,
       semiBold: '600' as FontWeightValue,
+      Bold: '800' as FontWeightValue,
     },
     families: {
       primary: 'System',
