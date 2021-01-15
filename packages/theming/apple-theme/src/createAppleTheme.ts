@@ -1,41 +1,46 @@
 import { ThemeReference } from '@fluentui-react-native/theme';
-import { createDefaultTheme, ThemeOptions } from '@fluentui-react-native/default-theme';
-import { getThemingModule } from './NativeModule/getThemingModule';
-import { CxxException, PlatformDefaultsChangedArgs } from './NativeModule/officeThemingModule';
-import { OfficePalette } from '@fluentui-react-native/theme-types';
-import { createPartialOfficeTheme } from './createPartialAppleTheme';
+import { defaultAppleTheme, defaultAppleDarkTheme } from './appleTheme';
+import { Appearance } from 'react-native';
+import { Theme } from '@fluentui-react-native/theme-types';
 
-function handlePaletteCall(palette: OfficePalette | CxxException): OfficePalette | undefined {
-  return (palette as CxxException).message !== undefined ? undefined : (palette as OfficePalette);
+export type AppearanceOptions = 'light' | 'dark';
+
+export interface ThemeOptions {
+  /**
+   * Should the baseline colors be light, dark, or use the values from the Appearance API from react-native.
+   */
+  appearance?: AppearanceOptions | 'dynamic';
+
+  /**
+   * Default appearance should the library to request this from native not be available
+   */
+  defaultAppearance?: AppearanceOptions;
+
+  /**
+   * If in a host that supports multiple areas within the app that use different palettes, this specifies the palette name to
+   * load.
+   *
+   * In Office this corresponds to regions like taskpanes, the ribbon, left navigation, and so on, but that concept could be extended
+   * to any host that wants to support this.
+   */
+  paletteName?: string;
 }
 
-/**
- * create a theme reference for an Office win32 theme. This will be based upon the standard
- * fluent defaults but will attempt to use the theming native module to get information about
- * the office palette.
- *
- * This theme will also listen for native changes and reload itself when things change on the native side of things
- *
- * @param paletteName - optional specifier for the currently active office palette
- */
-export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
-  const [module, emitter] = getThemingModule();
-  const ref = { module, emitter, themeName: module.initialHostThemeSetting || '' };
-  const { paletteName } = options;
+function getCurrentAppearance(appearance: ThemeOptions['appearance'], fallback: AppearanceOptions): AppearanceOptions {
+  return appearance === 'dynamic' ? (Appearance && Appearance.getColorScheme()) || fallback : appearance;
+}
 
-  const themeRef = new ThemeReference(createDefaultTheme(options), () => {
-    const name = paletteName || '';
-    const palette = handlePaletteCall(ref.module.getPalette(name));
-    return createPartialOfficeTheme(module, ref.themeName, palette);
+export function createAppleTheme(options: ThemeOptions = {}): ThemeReference {
+  const themeRef = new ThemeReference({} as Theme, () => {
+    const current = getCurrentAppearance(options.appearance, options.defaultAppearance || 'light');
+    return current === 'light' ? defaultAppleTheme : defaultAppleDarkTheme;
   });
 
-  // set up the callback for theme changes on the native side
-  const onPlatformDefaultsChanged = (args: PlatformDefaultsChangedArgs) => {
-    ref.themeName = (args && args.hostThemeSetting) || ref.themeName;
-    themeRef.invalidate();
-  };
-  emitter && emitter.addListener('onPlatformDefaultsChanged', onPlatformDefaultsChanged);
+  if (Appearance && options.appearance === 'dynamic') {
+    Appearance.addChangeListener(() => {
+      themeRef.invalidate();
+    });
+  }
 
-  // now return the theme reference
   return themeRef;
 }
