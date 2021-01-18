@@ -44,7 +44,7 @@
     ],
     "entry": "index.js",
     "outputPath": "./dist",
-    "bundleName": "index.bundle",
+    "bundleName": "index.android.bundle",
     "noPlatformSuffix": true
   },
   "depcheck": {
