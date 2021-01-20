@@ -115,19 +115,19 @@ export function paletteFromAppleColors(p: ApplePalette, as: AppleSemanticPalette
     /* ControlColorTokens */
 
     // Default values without any style
-    buttonBackground: as.controlBackgroundColor,
+    buttonBackground: p.communicationBlue,
     buttonBorder: 'transparent',
     buttonContent: as.controlTextColor,
     buttonIcon: as.controlTextColor,
 
     // macOS Button has no hover effect
-    buttonHoveredBackground: as.controlBackgroundColor,
+    buttonHoveredBackground: p.communicationBlue,
     buttonHoveredBorder: 'transparent',
     buttonHoveredContent: as.controlTextColor,
     buttonHoveredIcon: as.controlTextColor,
 
     // TODO what does focus even mean on macOS?
-    buttonFocusedBackground: as.controlBackgroundColor,
+    buttonFocusedBackground: p.communicationBlue,
     buttonFocusedBorder: 'transparent',
     buttonFocusedContent: as.controlTextColor,
     buttonFocusedIcon: as.controlTextColor,
@@ -234,44 +234,47 @@ export function paletteFromAppleColors(p: ApplePalette, as: AppleSemanticPalette
 function _appleTypography(): Typography {
   const appleDict = {
     sizes: {
-      caption: 10 as FontSize,
+      caption: 10 as FontSize, // Caption 1
       secondary: 11 as FontSize, // Callout
       body: 13 as FontSize, // Body
       subheader: 16 as FontSize, // Subheadline
       header: 20 as FontSize, // Headline
-      hero: 22 as FontSize, ///Title 1
-      heroLarge: 26 as FontSize, //Large Title,
+      hero: 22 as FontSize, /// Title 1
+      heroLarge: 26 as FontSize, // Large Title,
     } as FontSizes,
     weights: {
-      // ultralight: '100'
-      // this: '200'
-      // semibold: ???
+      ultralight: '100' as FontWeightValue,
+      thin: '200' as FontWeightValue,
+      light: '300' as FontWeightValue,
       regular: '400' as FontWeightValue,
-      semiBold: '600' as FontWeightValue,
-      Bold: '800' as FontWeightValue,
+      medium: '500' as FontWeightValue,
+      semibold: '600' as FontWeightValue,
+      bold: '700' as FontWeightValue,
+      heavy: '800' as FontWeightValue,
+      black: '900' as FontWeightValue,
     },
     families: {
-      primary: 'System',
+      primary: 'SF Pro',
       secondary: 'System',
       cursive: 'System',
-      monospace: 'System',
-      sansSerif: 'System',
-      serif: 'System',
+      monospace: 'SF Mono',
+      sansSerif: 'SF Pro',
+      serif: 'New York',
     },
     variants: {
-      captionStandard: { face: 'primary', size: 'caption', weight: 'regular' },
+      captionStandard: { face: 'primary', size: 'caption', weight: 'Medium' },
       secondaryStandard: { face: 'primary', size: 'secondary', weight: 'regular' },
       secondarySemibold: { face: 'primary', size: 'secondary', weight: 'semiBold' },
       bodyStandard: { face: 'primary', size: 'body', weight: 'regular' },
       bodySemibold: { face: 'primary', size: 'body', weight: 'semiBold' },
       subheaderStandard: { face: 'primary', size: 'subheader', weight: 'regular' },
-      subheaderSemibold: { face: 'primary', size: 'subheader', weight: 'semiBold' },
-      headerStandard: { face: 'primary', size: 'header', weight: 'regular' },
-      headerSemibold: { face: 'primary', size: 'header', weight: 'semiBold' },
+      subheaderSemibold: { face: 'primary', size: 'subheader', weight: 'semibold' },
+      headerStandard: { face: 'primary', size: 'header', weight: 'bold' },
+      headerSemibold: { face: 'primary', size: 'header', weight: 'heavy' },
       heroStandard: { face: 'primary', size: 'hero', weight: 'regular' },
-      heroSemibold: { face: 'primary', size: 'hero', weight: 'semiBold' },
+      heroSemibold: { face: 'primary', size: 'hero', weight: 'bold' },
       heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: 'regular' },
-      heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: 'semiBold' },
+      heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: 'bold' },
     } as Variants,
   };
 
