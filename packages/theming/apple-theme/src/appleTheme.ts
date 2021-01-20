@@ -14,6 +14,8 @@ import { AppleSemanticPalette, getAppleSemanticLightPalette, getAppleSemanticDar
 // Instantiates the Palette with colors from FluentUI Apple and the platform semantic colors
 export function paletteFromAppleColors(p: ApplePalette, as: AppleSemanticPalette): PartialPalette {
   return {
+    /* PaletteBackgroundColors & PaletteTextColors */
+
     background: as.windowBackgroundColor,
     bodyStandoutBackground: as.underPageBackgroundColor,
     bodyFrameBackground: as.windowBackgroundColor,
@@ -24,11 +26,11 @@ export function paletteFromAppleColors(p: ApplePalette, as: AppleSemanticPalette
     bodyDivider: as.separatorColor,
 
     // TODO
-    disabledBackground: p.blue10,
-    disabledText: p.blue10,
-    disabledBodyText: p.blue10,
-    disabledSubtext: p.blue10,
-    disabledBodySubtext: p.blue10,
+    disabledBackground: p.gray100,
+    disabledText: as.tertiaryLabelColor,
+    disabledBodyText: as.tertiaryLabelColor,
+    disabledSubtext: as.quaternaryLabelColor,
+    disabledBodySubtext: as.quaternaryLabelColor,
 
     focusBorder: as.keyboardFocusIndicatorColor,
     variantBorder: as.separatorColor,
@@ -110,7 +112,7 @@ export function paletteFromAppleColors(p: ApplePalette, as: AppleSemanticPalette
     linkHovered: as.linkColor,
     linkPressed: as.selectedControlColor,
 
-    /* Control Color Tokens */
+    /* ControlColorTokens */
 
     // Default values without any style
     buttonBackground: as.controlBackgroundColor,
