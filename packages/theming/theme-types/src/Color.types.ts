@@ -336,8 +336,8 @@ export interface PaletteBackgroundColors {
 
 export interface ControlColorTokens {
   buttonBackground: ColorValue;
-  buttonContent: ColorValue;
   buttonBorder: ColorValue;
+  buttonContent: ColorValue;
   buttonIcon: ColorValue;
 
   buttonHoveredBackground: ColorValue;
@@ -361,8 +361,8 @@ export interface ControlColorTokens {
   buttonDisabledIcon: ColorValue;
 
   ghostBackground: ColorValue;
-  ghostContent: ColorValue;
   ghostBorder: ColorValue;
+  ghostContent: ColorValue;
   ghostIcon: ColorValue;
 
   ghostHoveredBackground: ColorValue;
@@ -386,8 +386,8 @@ export interface ControlColorTokens {
   ghostDisabledIcon: ColorValue;
 
   brandBackground: ColorValue;
-  brandContent: ColorValue;
   brandBorder: ColorValue;
+  brandContent: ColorValue;
   brandIcon: ColorValue;
 
   brandHoveredBackground: ColorValue;

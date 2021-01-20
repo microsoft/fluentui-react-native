@@ -1,9 +1,7 @@
-import { Palette, ThemeColorDefinition } from '@fluentui-react-native/theme-types';
-
 import { ColorValue } from '@fluentui-react-native/theme-types';
 
 // Palette of FluentUI Apple Colors
-export interface ApplePalette {
+export interface FluentApplePalette {
   blue10: ColorValue;
   blueMagenta20: ColorValue;
   blueMagenta30: ColorValue;
@@ -79,7 +77,20 @@ export interface ApplePalette {
   warningTint40: ColorValue;
 }
 
-export function getStockApplePalette(): ApplePalette {
+export interface FluentAppleButtonTokens {
+  brandBackgroundDisabled: ColorValue;
+  brandForegroundDisabled: ColorValue;
+  neutralBackground2: ColorValue;
+  neutralBackground3: ColorValue;
+  neutralForeground2: ColorValue;
+  neutralForeground3: ColorValue;
+  neutralInverted: ColorValue;
+  neutralStroke2: ColorValue;
+}
+
+export type ApplePalette = FluentApplePalette & FluentAppleButtonTokens;
+
+export function getStockAppleLightPalette(): ApplePalette {
   return {
     blue10: '#4F6BED',
     blueMagenta20: '#8764B8',
@@ -154,6 +165,15 @@ export function getStockApplePalette(): ApplePalette {
     warningTint20: '#FFE586',
     warningTint30: '#FFF2C3',
     warningTint40: '#FFF8DF',
+
+    brandBackgroundDisabled: '#252525',
+    brandForegroundDisabled: '#252525',
+    neutralBackground2: '#FFFFFF',
+    neutralBackground3: '#000000',
+    neutralForeground2: '#000000',
+    neutralForeground3: '#272727',
+    neutralInverted: '#FFFFFF',
+    neutralStroke2: '#000000',
   };
 }
 
@@ -232,5 +252,14 @@ export function getStockAppleDarkPalette(): ApplePalette {
     warningTint20: '#997518',
     warningTint30: '#4D3A0C',
     warningTint40: '#291F07',
+
+    brandBackgroundDisabled: '#565656',
+    brandForegroundDisabled: '#FFFFFF',
+    neutralBackground2: '#555555',
+    neutralBackground3: '#555555',
+    neutralForeground2: '#000000',
+    neutralForeground3: '#FFFFFF',
+    neutralInverted: '#FFFFFF',
+    neutralStroke2: '#000000',
   };
 }

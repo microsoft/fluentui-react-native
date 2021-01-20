@@ -12,7 +12,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
   minHeight: 32,
   minWidth: 80,
   borderWidth: 1,
-  borderRadius: 2,
+  borderRadius: 5,
   fluid: {
     width: '100%',
   },
