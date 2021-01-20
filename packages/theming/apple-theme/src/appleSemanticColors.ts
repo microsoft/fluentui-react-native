@@ -1,49 +1,155 @@
 import { ColorValue } from '@fluentui-react-native/theme-types';
 
 export interface AppleSemanticPalette {
-  labelColor: ColorValue;
-  secondaryLabelColor: ColorValue;
-  tertiaryLabelColor: ColorValue;
-  quaternaryLabelColor: ColorValue;
+  /* Adaptable System Colors */
 
-  systemRedColor: ColorValue;
-  systemGreenColor: ColorValue;
+  /** Returns a color object for blue that automatically adapts to vibrancy and accessibility settings */
   systemBlueColor: ColorValue;
-  systemOrangeColor: ColorValue;
-  systemYellowColor: ColorValue;
+
+  /** Returns a color object for brown that automatically adapts to vibrancy and accessibility settings */
   systemBrownColor: ColorValue;
-  systemPinkColor: ColorValue;
-  systemPurpleColor: ColorValue;
+
+  /** Returns a color object for gray that automatically adapts to vibrancy and accessibility settings */
   systemGrayColor: ColorValue;
 
-  linkColor: ColorValue;
-  placeholderTextColor: ColorValue;
-  windowFrameTextColor: ColorValue;
-  selectedMenuItemTextColor: ColorValue;
-  alternateSelectedControlTextColor: ColorValue;
-  headerTextColor: ColorValue;
-  separatorColor: ColorValue;
-  gridColor: ColorValue;
+  /** Returns a color object for green that automatically adapts to vibrancy and accessibility settings */
+  systemGreenColor: ColorValue;
+
+  /** Returns a color object for orange that automatically adapts to vibrancy and accessibility settings */
+  systemOrangeColor: ColorValue;
+
+  /** Returns a color object for pink that automatically adapts to vibrancy and accessibility settings */
+  systemPinkColor: ColorValue;
+
+  /** Returns a color object for purple that automatically adapts to vibrancy and accessibility settings */
+  systemPurpleColor: ColorValue;
+
+  /** Returns a color object for red that automatically adapts to vibrancy and accessibility settings */
+  systemRedColor: ColorValue;
+
+  /** Returns a color object for yellow that automatically adapts to vibrancy and accessibility settings */
+  systemYellowColor: ColorValue;
+
+  /* Label Colors */
+
+  /** The primary color to use for text labels */
+  labelColor: ColorValue;
+
+  /** The secondary color to use for text labels */
+  secondaryLabelColor: ColorValue;
+
+  /** The tertiary color to use for text labels */
+  tertiaryLabelColor: ColorValue;
+
+  /** The quaternary color to use for text labels and separators */
+  quaternaryLabelColor: ColorValue;
+
+  /* Text Colors */
+
+  /** The color to use for text */
   textColor: ColorValue;
-  textBackgroundColor: ColorValue;
+
+  /** The color to use for placeholder text in controls or text views */
+  placeholderTextColor: ColorValue;
+
+  /** The color to use for selected text */
   selectedTextColor: ColorValue;
+
+  /** The color to use for the background area behind text */
+  textBackgroundColor: ColorValue;
+
+  /** The color to use for the background of selected text */
   selectedTextBackgroundColor: ColorValue;
-  unemphasizedSelectedTextBackgroundColor: ColorValue;
-  unemphasizedSelectedTextColor: ColorValue;
-  windowBackgroundColor: ColorValue;
-  underPageBackgroundColor: ColorValue;
-  controlBackgroundColor: ColorValue;
-  selectedContentBackgroundColor: ColorValue;
-  unemphasizedSelectedContentBackgroundColor: ColorValue;
-  alternatingContentBackgroundColor: ColorValue;
-  findHighlightColor: ColorValue;
-  controlColor: ColorValue;
-  controlTextColor: ColorValue;
-  selectedControlColor: ColorValue;
-  selectedControlTextColor: ColorValue;
-  disabledControlTextColor: ColorValue;
+
+  /** The color to use for the keyboard focus ring around controls */
   keyboardFocusIndicatorColor: ColorValue;
+
+  /** The color to use for selected text in an unemphasized context */
+  unemphasizedSelectedTextColor: ColorValue;
+
+  /** The color to use for the text background in an unemphasized context */
+  unemphasizedSelectedTextBackgroundColor: ColorValue;
+
+  /* Content Colors */
+
+  /** The color to use for links */
+  linkColor: ColorValue;
+
+  /** The color to use for separators between different sections of content */
+  separatorColor: ColorValue;
+
+  /** The color to use for the background of selected and emphasized content */
+  selectedContentBackgroundColor: ColorValue;
+
+  /** The color to use for selected and unemphasized content */
+  unemphasizedSelectedContentBackgroundColor: ColorValue;
+
+  /* Menu Colors */
+
+  /** The color to use for the text in menu items */
+  selectedMenuItemTextColor: ColorValue;
+
+  /* Table Colors */
+
+  /** The color to use for the optional gridlines, such as those in a table view */
+  gridColor: ColorValue;
+
+  /** The color to use for text in header cells in table views and outline views */
+  headerTextColor: ColorValue;
+
+  /** The colors to use for alternating content, typically found in table views and collection views */
+  alternatingContentBackgroundColor: ColorValue;
+
+  /* Control Colors */
+
+  /** The user's current accent color preference */
   controlAccentColor: ColorValue;
+
+  /** The color to use for the flat surfaces of a control */
+  controlColor: ColorValue;
+
+  /** The color to use for the background of large controls, such as scroll views or table views */
+  controlBackgroundColor: ColorValue;
+
+  /** The color to use for text on enabled controls */
+  controlTextColor: ColorValue;
+
+  /** The color to use for text on disabled controls */
+  disabledControlTextColor: ColorValue;
+
+  /** The color to use for the face of a selected control—that is, a control that has been clicked or is being dragged */
+  selectedControlColor: ColorValue;
+
+  /** The color to use for text in a selected control—that is, a control being clicked or dragged */
+  selectedControlTextColor: ColorValue;
+
+  /** The color to use for text in a selected control */
+  alternateSelectedControlTextColor: ColorValue;
+
+  /** The patterned color to use for the background of a scrubber control */
+  // scrubberTexturedBackground: ColorValue;
+
+  /* Windows Colors */
+
+  /** The color to use for the window background */
+  windowBackgroundColor: ColorValue;
+
+  /** The color to use for text in a window's frame */
+  windowFrameTextColor: ColorValue;
+
+  /** The color to use in the area beneath your window's views */
+  underPageBackgroundColor: ColorValue;
+
+  /* Highlights and Shadows */
+
+  /** The highlight color to use for the bubble that shows inline search result values */
+  findHighlightColor: ColorValue;
+
+  /** The color to use as a virtual light source on the screen */
+  // highlightColor: ColorValue;
+
+  /** The color to use for virtual shadows cast by raised objects on the screen */
+  // shadowColor: ColorValue;
 }
 
 export function getAppleSemanticLightPalette(): AppleSemanticPalette {

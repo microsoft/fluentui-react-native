@@ -5,8 +5,8 @@ import { createAppleTheme } from '@fluentui-react-native/apple-theme';
 export type ThemeNames = 'Fluent' | 'Office' | 'Caterpillar' | 'Apple';
 
 export const themeChoices = [
-  { label: 'Fluent', value: 'Fluent' },
   { label: 'Apple', value: 'Apple' },
+  { label: 'Fluent', value: 'Fluent' },
   { label: 'Office', value: 'Office' },
   { label: 'Caterpillar', value: 'Caterpillar' },
 ];

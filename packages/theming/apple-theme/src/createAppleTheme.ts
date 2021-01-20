@@ -33,7 +33,7 @@ function getCurrentAppearance(appearance: ThemeOptions['appearance'], fallback: 
 export function createAppleTheme(options: ThemeOptions = {}): ThemeReference {
   const themeRef = new ThemeReference({} as Theme, () => {
     const current = getCurrentAppearance(options.appearance, options.defaultAppearance || 'light');
-    return current === 'light' ? defaultAppleTheme : defaultAppleDarkTheme;
+    return current === 'dark' ? defaultAppleDarkTheme : defaultAppleTheme;
   });
 
   if (Appearance && options.appearance === 'dynamic') {
