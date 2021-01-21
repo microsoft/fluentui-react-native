@@ -1,7 +1,7 @@
 import { ColorValue } from '@fluentui-react-native/theme-types';
-import { DynamicColorMacOS } from 'react-native';
+import { DynamicColorIOS } from 'react-native';
 
-// Palette of FluentUI Apple Colors
+/** Palette of colors defined in FluentUI Apple */
 export interface FluentApplePalette {
   blue10: ColorValue;
   blueMagenta20: ColorValue;
@@ -78,6 +78,7 @@ export interface FluentApplePalette {
   warningTint40: ColorValue;
 }
 
+/** A set of control tokens used on the FluentUI Apple macOS button */
 export interface FluentAppleButtonTokens {
   brandBackgroundDisabled: ColorValue;
   brandForegroundDisabled: ColorValue;
@@ -96,35 +97,35 @@ export function getStockAppleDynamicPalette(): ApplePalette {
     blue10: '#4F6BED',
     blueMagenta20: '#8764B8',
     blueMagenta30: '#5C2E91',
-    communicationBlue: DynamicColorMacOS({
+    communicationBlue: DynamicColorIOS({
       light: '#0078D4',
       dark: '#1890F1',
     }),
-    communicationBlueShade10: DynamicColorMacOS({
+    communicationBlueShade10: DynamicColorIOS({
       light: '#106EBE',
       dark: '#1890F1',
     }),
-    communicationBlueShade20: DynamicColorMacOS({
+    communicationBlueShade20: DynamicColorIOS({
       light: '#005A9E',
       dark: '#3AA0F3',
     }),
-    communicationBlueShade30: DynamicColorMacOS({
+    communicationBlueShade30: DynamicColorIOS({
       light: '#004578',
       dark: '#6CB8F6',
     }),
-    communicationBlueTint10: DynamicColorMacOS({
+    communicationBlueTint10: DynamicColorIOS({
       light: '#2B88D8',
       dark: '#0078D4',
     }),
-    communicationBlueTint20: DynamicColorMacOS({
+    communicationBlueTint20: DynamicColorIOS({
       light: '#C7E0F4',
       dark: '#004C87',
     }),
-    communicationBlueTint30: DynamicColorMacOS({
+    communicationBlueTint30: DynamicColorIOS({
       light: '#DEECF9',
       dark: '#043862',
     }),
-    communicationBlueTint40: DynamicColorMacOS({
+    communicationBlueTint40: DynamicColorIOS({
       light: '#EFF6FC',
       dark: '#092C47',
     }),
@@ -133,35 +134,35 @@ export function getStockAppleDynamicPalette(): ApplePalette {
     cyan30: '#005B70',
     cyanBlue10: '#0078D4',
     cyanBlue20: '#004E8C',
-    dangerPrimary: DynamicColorMacOS({
+    dangerPrimary: DynamicColorIOS({
       light: '#D92C2C',
       dark: '#clear',
     }),
-    dangerShade10: DynamicColorMacOS({
+    dangerShade10: DynamicColorIOS({
       light: '#C32727',
       dark: '#clear',
     }),
-    dangerShade20: DynamicColorMacOS({
+    dangerShade20: DynamicColorIOS({
       light: '#A52121',
       dark: '#clear',
     }),
-    dangerShade30: DynamicColorMacOS({
+    dangerShade30: DynamicColorIOS({
       light: '#791818',
       dark: '#clear',
     }),
-    dangerTint10: DynamicColorMacOS({
+    dangerTint10: DynamicColorIOS({
       light: '#DD4242',
       dark: '#clear',
     }),
-    dangerTint20: DynamicColorMacOS({
+    dangerTint20: DynamicColorIOS({
       light: '#E87979',
       dark: '#clear',
     }),
-    dangerTint30: DynamicColorMacOS({
+    dangerTint30: DynamicColorIOS({
       light: '#F4B9B9',
       dark: '#clear',
     }),
-    dangerTint40: DynamicColorMacOS({
+    dangerTint40: DynamicColorIOS({
       light: '#F9D9D9',
       dark: '#clear',
     }),
@@ -189,123 +190,123 @@ export function getStockAppleDynamicPalette(): ApplePalette {
     orange30: '#8E562E',
     orangeYellow20: '#986F0B',
     pinkRed10: '#750B1C',
-    presenceAvailable: DynamicColorMacOS({
+    presenceAvailable: DynamicColorIOS({
       light: '#6BB700',
       dark: '#92C353',
     }),
-    presenceAway: DynamicColorMacOS({
+    presenceAway: DynamicColorIOS({
       light: '#FFAA44',
       dark: '#F8D22A',
     }),
-    presenceBlocked: DynamicColorMacOS({
+    presenceBlocked: DynamicColorIOS({
       light: '#C50F1F',
       dark: '#D74553',
     }),
-    presenceBusy: DynamicColorMacOS({
+    presenceBusy: DynamicColorIOS({
       light: '#C50F1F',
       dark: '#D74553',
     }),
-    presenceDnd: DynamicColorMacOS({
+    presenceDnd: DynamicColorIOS({
       light: '#C50F1F',
       dark: '#D74553',
     }),
-    presenceOffline: DynamicColorMacOS({
+    presenceOffline: DynamicColorIOS({
       light: '#8A8886',
       dark: '#979593',
     }),
-    presenceOof: DynamicColorMacOS({
+    presenceOof: DynamicColorIOS({
       light: '#B4009E',
       dark: '#E959D9',
     }),
-    presenceUnknown: DynamicColorMacOS({
+    presenceUnknown: DynamicColorIOS({
       light: '#8A8886',
       dark: '#979593',
     }),
     red10: '#D13438',
     red20: '#A4262C',
-    successPrimary: DynamicColorMacOS({
+    successPrimary: DynamicColorIOS({
       light: '#13A10E',
       dark: '#979593',
     }),
-    successShade10: DynamicColorMacOS({
+    successShade10: DynamicColorIOS({
       light: '#11910D',
       dark: '#20BA53',
     }),
-    successShade20: DynamicColorMacOS({
+    successShade20: DynamicColorIOS({
       light: '#0F7A0B',
       dark: '#3BC569',
     }),
-    successShade30: DynamicColorMacOS({
+    successShade30: DynamicColorIOS({
       light: '#0B5A08',
       dark: '#67D48B',
     }),
-    successTint10: DynamicColorMacOS({
+    successTint10: DynamicColorIOS({
       light: '#27AC22',
       dark: '#0D9D3D',
     }),
-    successTint20: DynamicColorMacOS({
+    successTint20: DynamicColorIOS({
       light: '#5EC65A',
       dark: '#096B29',
     }),
-    successTint30: DynamicColorMacOS({
+    successTint30: DynamicColorIOS({
       light: '#A7E3A5',
       dark: '#043615',
     }),
-    successTint40: DynamicColorMacOS({
+    successTint40: DynamicColorIOS({
       light: '#CEF0CD',
       dark: '#021D0B',
     }),
-    warningPrimary: DynamicColorMacOS({
+    warningPrimary: DynamicColorIOS({
       light: '#FFD335',
       dark: '#FFC328',
     }),
-    warningShade10: DynamicColorMacOS({
+    warningShade10: DynamicColorIOS({
       light: '#E6BE30',
       dark: '#FFC83E',
     }),
-    warningShade20: DynamicColorMacOS({
+    warningShade20: DynamicColorIOS({
       light: '#C2A129',
       dark: '#FFDD15',
     }),
-    warningShade30: DynamicColorMacOS({
+    warningShade30: DynamicColorIOS({
       light: '#8F761E',
       dark: '#FFDD87',
     }),
-    warningTint10: DynamicColorMacOS({
+    warningTint10: DynamicColorIOS({
       light: '#FFD94E',
       dark: '#E0AB24',
     }),
-    warningTint20: DynamicColorMacOS({
+    warningTint20: DynamicColorIOS({
       light: '#FFE586',
       dark: '#997518',
     }),
-    warningTint30: DynamicColorMacOS({
+    warningTint30: DynamicColorIOS({
       light: '#FFF2C3',
       dark: '#4D3A0C',
     }),
-    warningTint40: DynamicColorMacOS({
+    warningTint40: DynamicColorIOS({
       light: '#FFF8DF',
       dark: '#291F07',
     }),
 
-    brandBackgroundDisabled: DynamicColorMacOS({
+    brandBackgroundDisabled: DynamicColorIOS({
       light: '#252525',
       dark: '#565656',
     }),
-    brandForegroundDisabled: DynamicColorMacOS({
+    brandForegroundDisabled: DynamicColorIOS({
       light: '#252525',
       dark: '#FFFFFF',
     }),
-    neutralBackground2: DynamicColorMacOS({
+    neutralBackground2: DynamicColorIOS({
       light: '#FFFFFF',
       dark: '#555555',
     }),
-    neutralBackground3: DynamicColorMacOS({
+    neutralBackground3: DynamicColorIOS({
       light: '#000000',
       dark: '#555555',
     }),
     neutralForeground2: '#000000',
-    neutralForeground3: DynamicColorMacOS({
+    neutralForeground3: DynamicColorIOS({
       light: '#272727',
       dark: '#FFFFFF',
     }),
