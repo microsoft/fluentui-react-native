@@ -1,5 +1,5 @@
 import { ThemeReference } from '@fluentui-react-native/theme';
-import { defaultAppleTheme, defaultAppleDarkTheme } from './appleTheme';
+import { defaultAppleLightTheme, defaultAppleDarkTheme } from './appleTheme';
 import { Appearance } from 'react-native';
 import { Theme } from '@fluentui-react-native/theme-types';
 
@@ -33,7 +33,7 @@ function getCurrentAppearance(appearance: ThemeOptions['appearance'], fallback: 
 export function createAppleTheme(options: ThemeOptions = {}): ThemeReference {
   const themeRef = new ThemeReference({} as Theme, () => {
     const current = getCurrentAppearance(options.appearance, options.defaultAppearance || 'light');
-    return current === 'dark' ? defaultAppleDarkTheme : defaultAppleTheme;
+    return current === 'dark' ? defaultAppleDarkTheme : defaultAppleLightTheme;
   });
 
   if (Appearance && options.appearance === 'dynamic') {

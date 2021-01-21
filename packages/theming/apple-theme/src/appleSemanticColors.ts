@@ -1,4 +1,5 @@
 import { ColorValue } from '@fluentui-react-native/theme-types';
+import { PlatformColor } from 'react-native';
 
 export interface AppleSemanticPalette {
   /* Adaptable System Colors */
@@ -150,6 +151,54 @@ export interface AppleSemanticPalette {
 
   /** The color to use for virtual shadows cast by raised objects on the screen */
   // shadowColor: ColorValue;
+}
+
+export function getAppleSemanticPaletteWithPlatformColor(): AppleSemanticPalette {
+  return {
+    labelColor: PlatformColor('label', '#272727'),
+    secondaryLabelColor: PlatformColor('secondaryLabel', '#808080'),
+    tertiaryLabelColor: PlatformColor('tertiaryLabel', '#C0C0C0'),
+    quaternaryLabelColor: PlatformColor('quaternaryLabel', '#E7E7E7'),
+
+    systemRedColor: PlatformColor('systemRedC', '#FF3C31'),
+    systemGreenColor: PlatformColor('systemGreen', '#29CD41'),
+    systemBlueColor: PlatformColor('systemBlue', '#007AFF'),
+    systemOrangeColor: PlatformColor('systemOrange', '#FF9602'),
+    systemYellowColor: PlatformColor('systemYellow', '#FFCC01'),
+    systemBrownColor: PlatformColor('systemBrown', '#A2835E'),
+    systemPinkColor: PlatformColor('systemPink', '#FF2E55'),
+    systemPurpleColor: PlatformColor('systemPurple', '#AF51DE'),
+    systemGrayColor: PlatformColor(' systemGray', '#8D8F91'),
+
+    linkColor: PlatformColor('link', '#0069DA'),
+    placeholderTextColor: PlatformColor('placeholder', '#BFBFBF'),
+    windowFrameTextColor: PlatformColor('windowFrameText', '#272727'),
+    selectedMenuItemTextColor: PlatformColor('selectedMenuItemText', '#FFFFFF'),
+    alternateSelectedControlTextColor: PlatformColor('alternateSelectedControlText', '#FFFFFF'),
+    headerTextColor: PlatformColor('headerText', '#282828'),
+    separatorColor: PlatformColor('separator', '#E6E6E6'),
+    gridColor: PlatformColor('grid', '#CCCCCC'),
+    textColor: PlatformColor('text', '#000000'),
+    textBackgroundColor: PlatformColor('textBackground', '#FFFFFF'),
+    selectedTextColor: PlatformColor('selectedText', '#000000'),
+    selectedTextBackgroundColor: PlatformColor('selectedTextBackground', '#B3D7FF'),
+    unemphasizedSelectedTextBackgroundColor: PlatformColor('unemphasizedSelectedTextBackground', '#DCDCDC'),
+    unemphasizedSelectedTextColor: PlatformColor('unemphasizedSelectedText', '#000000'),
+    windowBackgroundColor: PlatformColor('windowBackground', '#ECECEC'),
+    underPageBackgroundColor: PlatformColor(' underPageBackground', '#A0A0A0'),
+    controlBackgroundColor: PlatformColor('controlBackground', '#FFFFFF'),
+    selectedContentBackgroundColor: PlatformColor('selectedContentBackground', '#0163E1'),
+    unemphasizedSelectedContentBackgroundColor: PlatformColor('unemphasizedSelectedContentBackground', '#DCDCDC'),
+    alternatingContentBackgroundColor: PlatformColor('alternatingOddContentBackground', '#F5F5F5'),
+    findHighlightColor: PlatformColor('findHighlight', '#FEFF00'),
+    controlColor: PlatformColor('control', '#FFFFFF'),
+    controlTextColor: PlatformColor('controlText', '#272727'),
+    selectedControlColor: PlatformColor('selectedControl', '##B3D7FF'),
+    selectedControlTextColor: PlatformColor('selectedControlText', '##282828'),
+    disabledControlTextColor: PlatformColor('disabledControlText', '#C0C0C0'),
+    keyboardFocusIndicatorColor: PlatformColor('keyboardFocusIndicator', '#C5DAFE'),
+    controlAccentColor: PlatformColor('controlAccent', '#007AFF'),
+  };
 }
 
 export function getAppleSemanticLightPalette(): AppleSemanticPalette {

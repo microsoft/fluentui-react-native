@@ -1,2 +1,2 @@
-export { defaultAppleTheme, defaultAppleDarkTheme } from './appleTheme';
+export { defaultAppleLightTheme, defaultAppleDarkTheme, defaultApplePlatformTheme } from './appleTheme';
 export * from './createAppleTheme';

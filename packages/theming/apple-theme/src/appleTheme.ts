@@ -8,8 +8,13 @@ import {
   Typography,
   Variants,
 } from '@fluentui-react-native/theme-types';
-import { ApplePalette, getStockAppleLightPalette, getStockAppleDarkPalette } from './fluentAppleColors';
-import { AppleSemanticPalette, getAppleSemanticLightPalette, getAppleSemanticDarkPalette } from './appleSemanticColors';
+import { ApplePalette, getStockAppleDynamicPalette, getStockAppleLightPalette, getStockAppleDarkPalette } from './fluentAppleColors';
+import {
+  AppleSemanticPalette,
+  getAppleSemanticLightPalette,
+  getAppleSemanticDarkPalette,
+  getAppleSemanticPaletteWithPlatformColor,
+} from './appleSemanticColors';
 
 // Instantiates the Palette with colors from FluentUI Apple and the platform semantic colors
 export function paletteFromAppleColors(p: ApplePalette, as: AppleSemanticPalette): PartialPalette {
@@ -248,7 +253,7 @@ function _appleTypography(): Typography {
       light: '300' as FontWeightValue,
       regular: '400' as FontWeightValue,
       medium: '500' as FontWeightValue,
-      semibold: '600' as FontWeightValue,
+      semiBold: '600' as FontWeightValue,
       bold: '700' as FontWeightValue,
       heavy: '800' as FontWeightValue,
       black: '900' as FontWeightValue,
@@ -262,19 +267,19 @@ function _appleTypography(): Typography {
       serif: 'New York',
     },
     variants: {
-      captionStandard: { face: 'primary', size: 'caption', weight: 'Medium' },
-      secondaryStandard: { face: 'primary', size: 'secondary', weight: 'regular' },
-      secondarySemibold: { face: 'primary', size: 'secondary', weight: 'semiBold' },
-      bodyStandard: { face: 'primary', size: 'body', weight: 'regular' },
-      bodySemibold: { face: 'primary', size: 'body', weight: 'semiBold' },
-      subheaderStandard: { face: 'primary', size: 'subheader', weight: 'regular' },
-      subheaderSemibold: { face: 'primary', size: 'subheader', weight: 'semibold' },
-      headerStandard: { face: 'primary', size: 'header', weight: 'bold' },
-      headerSemibold: { face: 'primary', size: 'header', weight: 'heavy' },
-      heroStandard: { face: 'primary', size: 'hero', weight: 'regular' },
-      heroSemibold: { face: 'primary', size: 'hero', weight: 'bold' },
-      heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: 'regular' },
-      heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: 'bold' },
+      captionStandard: { face: 'primary', size: 'caption', weight: '500' },
+      secondaryStandard: { face: 'primary', size: 'secondary', weight: '400' },
+      secondarySemibold: { face: 'primary', size: 'secondary', weight: '600' },
+      bodyStandard: { face: 'primary', size: 'body', weight: '400' },
+      bodySemibold: { face: 'primary', size: 'body', weight: '600' },
+      subheaderStandard: { face: 'primary', size: 'subheader', weight: '400' },
+      subheaderSemibold: { face: 'primary', size: 'subheader', weight: '600' },
+      headerStandard: { face: 'primary', size: 'header', weight: '700' },
+      headerSemibold: { face: 'primary', size: 'header', weight: '800' },
+      heroStandard: { face: 'primary', size: 'hero', weight: '400' },
+      heroSemibold: { face: 'primary', size: 'hero', weight: '700' },
+      heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: '400' },
+      heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: '700' },
     } as Variants,
   };
 
@@ -296,7 +301,15 @@ export const appleComponents = {
   },
 };
 
-export const defaultAppleTheme: PartialTheme = {
+export const defaultApplePlatformTheme: PartialTheme = {
+  colors: paletteFromAppleColors(getStockAppleDynamicPalette(), getAppleSemanticPaletteWithPlatformColor()),
+  typography: _appleTypography(),
+  spacing: appleSpacing(),
+  components: appleComponents,
+  host: { appearance: 'auto' },
+};
+
+export const defaultAppleLightTheme: PartialTheme = {
   colors: paletteFromAppleColors(getStockAppleLightPalette(), getAppleSemanticLightPalette()),
   typography: _appleTypography(),
   spacing: appleSpacing(),
@@ -306,8 +319,8 @@ export const defaultAppleTheme: PartialTheme = {
 
 export const defaultAppleDarkTheme: PartialTheme = {
   colors: paletteFromAppleColors(getStockAppleDarkPalette(), getAppleSemanticDarkPalette()),
-  typography: defaultAppleTheme.typography,
-  spacing: defaultAppleTheme.spacing,
-  components: defaultAppleTheme.components,
+  typography: defaultAppleLightTheme.typography,
+  spacing: defaultAppleLightTheme.spacing,
+  components: defaultAppleLightTheme.components,
   host: { appearance: 'dark' },
 };
