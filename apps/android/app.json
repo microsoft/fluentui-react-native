@@ -1,6 +1,6 @@
 {
   "name": "FluentTester",
-  "displayName": "FluentTesterAndroid",
+  "displayName": "FluentTester",
   "components": [{"appKey": "FluentTester"}],
   "resources": ["dist/res", "dist/index.android.bundle"]
 }
