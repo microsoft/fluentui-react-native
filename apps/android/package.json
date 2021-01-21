@@ -12,7 +12,8 @@
     "code-style": "fluentui-scripts code-style",
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
-    "start": "react-native start",
+    "start": "react-native start --reset-cache",
+    "start --reset-cache": "react-native start --reset-cache",
     "test": "fluentui-scripts jest",
     "bundle": "fluentui-scripts metro --cli",
     "bundle-dev": "fluentui-scripts metro --dev --cli",
@@ -44,7 +45,7 @@
     ],
     "entry": "index.js",
     "outputPath": "./dist",
-    "bundleName": "index.android.bundle",
+    "bundleName": "index.bundle",
     "noPlatformSuffix": true
   },
   "depcheck": {
