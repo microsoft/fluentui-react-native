@@ -28,7 +28,7 @@ export function appleTypography(): Typography {
       cursive: 'System',
       monospace: 'SF Mono',
       sansSerif: 'SF Pro',
-      serif: 'New York',
+      serif: 'System',
     },
     variants: {
       captionStandard: { face: 'primary', size: 'caption', weight: '500' },
