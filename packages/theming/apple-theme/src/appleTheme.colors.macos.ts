@@ -1,6 +1,6 @@
 import { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
-import { ApplePalette } from './fluentAppleColors';
-import { AppleSemanticPalette } from './appleSemanticColors';
+import { ApplePalette } from './fluentAppleColors.macos';
+import { AppleSemanticPalette } from './appleSemanticColors.macos';
 
 /** creates a palette of colors for the apple theme, given the FluentUI Apple Palette and Apple Semantic Palette */
 export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic: AppleSemanticPalette): ThemeColorDefinition {
