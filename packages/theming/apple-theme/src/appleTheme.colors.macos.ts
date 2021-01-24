@@ -82,14 +82,14 @@ export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic:
     menuDivider: appleSemantic.separatorColor,
     menuIcon: appleSemantic.textColor,
     menuHeader: appleSemantic.headerTextColor,
-    menuItemBackgroundHovered: appleSemantic.alternatingContentBackgroundColor,
+    menuItemBackgroundHovered: appleSemantic.alternatingOddContentBackgroundColor,
     menuItemBackgroundPressed: appleSemantic.selectedContentBackgroundColor,
     menuItemText: appleSemantic.textColor,
     menuItemTextHovered: appleSemantic.textColor,
 
-    listBackground: appleSemantic.alternatingContentBackgroundColor,
+    listBackground: appleSemantic.alternatingOddContentBackgroundColor,
     listText: appleSemantic.textColor,
-    listItemBackgroundHovered: appleSemantic.alternatingContentBackgroundColor,
+    listItemBackgroundHovered: appleSemantic.alternatingOddContentBackgroundColor,
     listItemBackgroundChecked: appleSemantic.selectedContentBackgroundColor,
     listItemBackgroundCheckedHovered: appleSemantic.selectedContentBackgroundColor,
 
