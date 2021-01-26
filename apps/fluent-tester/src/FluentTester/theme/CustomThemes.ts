@@ -1,5 +1,4 @@
 import { createDefaultTheme, ThemeOptions } from '@fluentui-react-native/default-theme';
-// import { createAppleTheme } from '@fluentui-react-native/apple-theme';
 import { ThemeReference } from '@fluentui-react-native/theme';
 import { applyBrand, OfficeBrand } from './applyBrand';
 import { applyTheme, ThemeNames } from './applyTheme';
