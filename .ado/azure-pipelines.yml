@@ -151,10 +151,9 @@ jobs:
       # build android app
       - task: Gradle@2
         inputs:
-          gradleWrapperFile: 'gradlew'
+          gradleWrapperFile: 'apps/$(relative_directory)/src/gradlew'
           workingDirectory: 'apps/$(relative_directory)/src'
           tasks: 'assembleRelease'
-          publishJUnitResults: true
-          testResultsFiles: '**/TEST-*.xml'
+          publishJUnitResults: false
           javaHomeOption: 'JDKVersion'
           sonarQubeRunAnalysis: false
