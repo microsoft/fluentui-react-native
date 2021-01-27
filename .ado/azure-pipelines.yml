@@ -140,8 +140,39 @@ jobs:
         workingDirectory: apps/$(relative_directory)
         displayName: 'yarn bundle $(relative_directory)'
 
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: |
+            #!/usr/bin/env bash
+            # install NDK
+            echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install '21.0.6113669'
+            
+            # Install AVD files
+            echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;android-27;google_apis;x86'
+            
+            # Create emulator
+            echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n xamarin_android_emulator -k 'system-images;android-27;google_apis;x86' --force
+            
+            $ANDROID_HOME/emulator/emulator -list-avds
+            
+            echo "Starting emulator"
+            
+            # Start emulator in background
+            nohup $ANDROID_HOME/emulator/emulator -avd xamarin_android_emulator -no-snapshot > /dev/null 2>&1 &
+            $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
+            
+            $ANDROID_HOME/platform-tools/adb devices
+            
+            echo "Emulator started"
+    
       # build android app
-      - script: |
-          yarn android
-        workingDirectory: apps/$(relative_directory)
-        displayName: 'yarn $(relative_directory)' 
+      - task: Gradle@2
+        inputs:
+          gradleWrapperFile: 'gradlew'
+          workingDirectory: 'apps/$(relative_directory)'
+          tasks: 'installRelease'
+          publishJUnitResults: true
+          testResultsFiles: '**/TEST-*.xml'
+          javaHomeOption: 'JDKVersion'
+          sonarQubeRunAnalysis: false
