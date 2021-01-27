@@ -140,5 +140,8 @@ jobs:
         workingDirectory: apps/$(relative_directory)
         displayName: 'yarn bundle $(relative_directory)'
 
-      # Run gradlew android
-
+      # build android app
+      - script: |
+          yarn android
+        workingDirectory: apps/$(relative_directory)
+        displayName: 'yarn $(relative_directory)' 
