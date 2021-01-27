@@ -146,7 +146,7 @@ jobs:
           script: |
             #!/usr/bin/env bash
             # install NDK
-            echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install '21.0.6113669'
+            echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'ndk;21.0.6113669'
             
             # Install AVD files
             echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'system-images;android-27;google_apis;x86'
