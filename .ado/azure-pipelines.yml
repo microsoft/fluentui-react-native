@@ -152,8 +152,8 @@ jobs:
       - task: Gradle@2
         inputs:
           gradleWrapperFile: 'gradlew'
-          workingDirectory: 'apps/$(relative_directory)'
-          tasks: 'installRelease'
+          workingDirectory: 'apps/$(relative_directory)/src'
+          tasks: 'assembleRelease'
           publishJUnitResults: true
           testResultsFiles: '**/TEST-*.xml'
           javaHomeOption: 'JDKVersion'
