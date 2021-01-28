@@ -140,13 +140,7 @@ jobs:
         workingDirectory: apps/$(relative_directory)
         displayName: 'yarn bundle $(relative_directory)'
 
-      - task: Bash@3
-        inputs:
-          targetType: 'inline'
-          script: |
-            #!/usr/bin/env bash
-            # install NDK
-            echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'ndk;21.0.6113669'
+      - template: templates/android-dep-setup.yml
     
       # build android app
       - task: Gradle@2
@@ -157,3 +151,4 @@ jobs:
           publishJUnitResults: false
           javaHomeOption: 'JDKVersion'
           sonarQubeRunAnalysis: false
+      
