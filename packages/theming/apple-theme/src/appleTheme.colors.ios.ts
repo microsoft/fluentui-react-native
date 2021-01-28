@@ -16,7 +16,6 @@ export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic:
     subText: appleSemantic.secondaryLabel,
     bodyDivider: appleSemantic.separator,
 
-    // TODO
     disabledBackground: fluentApple.gray100,
     disabledText: appleSemantic.tertiaryLabel,
     disabledBodyText: appleSemantic.quaternaryLabel,
@@ -28,7 +27,6 @@ export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic:
     variantBorderHovered: appleSemantic.separator,
     defaultStateBackground: appleSemantic.systemFill,
 
-    // TODO
     errorText: fluentApple.dangerPrimary,
     warningText: fluentApple.warningPrimary,
     errorBackground: fluentApple.dangerTint10,
@@ -77,7 +75,6 @@ export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic:
     accentButtonBackground: fluentApple.communicationBlueTint10,
     accentButtonText: appleSemantic.label,
 
-    //TODO Differentiate Menu and List?
     menuBackground: appleSemantic.systemGroupedBackground,
     menuDivider: appleSemantic.separator,
     menuIcon: appleSemantic.label,
@@ -96,7 +93,6 @@ export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic:
     listHeaderBackgroundHovered: appleSemantic.label,
     listHeaderBackgroundPressed: appleSemantic.label,
 
-    // TODO ActionLink vs Link?
     actionLink: appleSemantic.link,
     actionLinkHovered: appleSemantic.link,
     link: appleSemantic.link,
@@ -111,25 +107,21 @@ export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic:
     buttonContent: appleSemantic.label,
     buttonIcon: appleSemantic.label,
 
-    // macOS Button has no hover effect
     buttonHoveredBackground: fluentApple.communicationBlue,
     buttonHoveredBorder: 'transparent',
     buttonHoveredContent: appleSemantic.label,
     buttonHoveredIcon: appleSemantic.label,
 
-    // TODO what does focus even mean on macOS?
     buttonFocusedBackground: fluentApple.communicationBlue,
     buttonFocusedBorder: 'transparent',
     buttonFocusedContent: appleSemantic.label,
     buttonFocusedIcon: appleSemantic.label,
 
-    // TODO Native Module for withSystemEffect(.pressed)
     buttonPressedBackground: fluentApple.communicationBlueTint10,
     buttonPressedBorder: 'transparent',
     buttonPressedContent: appleSemantic.label,
     buttonPressedIcon: appleSemantic.label,
 
-    // TODO Native Module for withSystemEffect(.disabled)
     buttonDisabledBackground: fluentApple.gray100,
     buttonDisabledBorder: 'transparent',
     buttonDisabledContent: appleSemantic.label,
@@ -150,13 +142,11 @@ export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic:
     ghostFocusedContent: appleSemantic.label,
     ghostFocusedIcon: appleSemantic.label,
 
-    // TODO System Effect(.pressed)
     ghostPressedBackground: 'transparent',
     ghostPressedBorder: 'transparent',
     ghostPressedContent: fluentApple.communicationBlueTint20,
     ghostPressedIcon: fluentApple.communicationBlueTint20,
 
-    // TODO Native Module for withSystemEffect(.disabled)
     ghostDisabledBackground: 'transparent',
     ghostDisabledBorder: 'transparent',
     ghostDisabledContent: fluentApple.communicationBlueTint20,
@@ -182,13 +172,11 @@ export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic:
     brandPressedContent: appleSemantic.label,
     brandPressedIcon: appleSemantic.label,
 
-    // TODO System Effect
     brandDisabledBackground: fluentApple.gray100,
     brandDisabledBorder: 'transparent',
     brandDisabledContent: appleSemantic.label,
     brandDisabledIcon: appleSemantic.label,
 
-    // TODO What is checked?
     buttonCheckedBackground: appleSemantic.systemFill,
     buttonCheckedContent: appleSemantic.label,
     buttonCheckedHoveredBackground: appleSemantic.systemFill,
@@ -205,7 +193,6 @@ export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic:
     ghostCheckedHoveredContent: fluentApple.communicationBlueTint20,
     ghostCheckedHoveredBorder: 'transparent',
 
-    // TODO What to do with secondary?
     ghostSecondaryContent: appleSemantic.secondaryLabel,
     ghostFocusedSecondaryContent: appleSemantic.secondaryLabel,
     ghostHoveredSecondaryContent: appleSemantic.secondaryLabel,

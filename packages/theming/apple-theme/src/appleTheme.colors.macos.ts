@@ -16,7 +16,6 @@ export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic:
     subText: appleSemantic.placeholderTextColor,
     bodyDivider: appleSemantic.separatorColor,
 
-    // TODO
     disabledBackground: fluentApple.gray100,
     disabledText: appleSemantic.tertiaryLabelColor,
     disabledBodyText: appleSemantic.tertiaryLabelColor,
@@ -28,7 +27,6 @@ export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic:
     variantBorderHovered: appleSemantic.separatorColor,
     defaultStateBackground: appleSemantic.controlBackgroundColor,
 
-    // TODO
     errorText: fluentApple.dangerPrimary,
     warningText: fluentApple.warningPrimary,
     errorBackground: fluentApple.dangerTint10,
@@ -77,7 +75,6 @@ export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic:
     accentButtonBackground: fluentApple.communicationBlueTint10,
     accentButtonText: appleSemantic.controlTextColor,
 
-    //TODO Differentiate Menu and List?
     menuBackground: appleSemantic.alternatingEvenContentBackgroundColor,
     menuDivider: appleSemantic.separatorColor,
     menuIcon: appleSemantic.textColor,
@@ -96,7 +93,6 @@ export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic:
     listHeaderBackgroundHovered: appleSemantic.headerTextColor,
     listHeaderBackgroundPressed: appleSemantic.headerTextColor,
 
-    // TODO ActionLink vs Link?
     actionLink: appleSemantic.linkColor,
     actionLinkHovered: appleSemantic.linkColor,
     link: appleSemantic.linkColor,
@@ -105,31 +101,26 @@ export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic:
 
     /* ControlColorTokens */
 
-    // Default values without any style
     buttonBackground: fluentApple.communicationBlue,
     buttonBorder: 'transparent',
     buttonContent: appleSemantic.controlTextColor,
     buttonIcon: appleSemantic.controlTextColor,
 
-    // macOS Button has no hover effect
     buttonHoveredBackground: fluentApple.communicationBlue,
     buttonHoveredBorder: 'transparent',
     buttonHoveredContent: appleSemantic.controlTextColor,
     buttonHoveredIcon: appleSemantic.controlTextColor,
 
-    // TODO what does focus even mean on macOS?
     buttonFocusedBackground: fluentApple.communicationBlue,
     buttonFocusedBorder: 'transparent',
     buttonFocusedContent: appleSemantic.controlTextColor,
     buttonFocusedIcon: appleSemantic.controlTextColor,
 
-    // TODO Native Module for withSystemEffect(.pressed)
     buttonPressedBackground: fluentApple.communicationBlueTint10,
     buttonPressedBorder: 'transparent',
     buttonPressedContent: appleSemantic.controlTextColor,
     buttonPressedIcon: appleSemantic.controlTextColor,
 
-    // TODO Native Module for withSystemEffect(.disabled)
     buttonDisabledBackground: fluentApple.gray100,
     buttonDisabledBorder: 'transparent',
     buttonDisabledContent: appleSemantic.controlTextColor,
@@ -150,13 +141,11 @@ export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic:
     ghostFocusedContent: appleSemantic.controlTextColor,
     ghostFocusedIcon: appleSemantic.controlTextColor,
 
-    // TODO System Effect(.pressed)
     ghostPressedBackground: 'transparent',
     ghostPressedBorder: 'transparent',
     ghostPressedContent: fluentApple.communicationBlueTint20,
     ghostPressedIcon: fluentApple.communicationBlueTint20,
 
-    // TODO Native Module for withSystemEffect(.disabled)
     ghostDisabledBackground: 'transparent',
     ghostDisabledBorder: 'transparent',
     ghostDisabledContent: fluentApple.communicationBlueTint20,
@@ -182,13 +171,11 @@ export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic:
     brandPressedContent: appleSemantic.controlTextColor,
     brandPressedIcon: appleSemantic.controlTextColor,
 
-    // TODO System Effect
     brandDisabledBackground: fluentApple.gray100,
     brandDisabledBorder: 'transparent',
     brandDisabledContent: appleSemantic.controlTextColor,
     brandDisabledIcon: appleSemantic.controlTextColor,
 
-    // TODO What is checked?
     buttonCheckedBackground: appleSemantic.selectedContentBackgroundColor,
     buttonCheckedContent: appleSemantic.controlTextColor,
     buttonCheckedHoveredBackground: appleSemantic.selectedContentBackgroundColor,
@@ -205,7 +192,6 @@ export function paletteFromAppleColors(fluentApple: ApplePalette, appleSemantic:
     ghostCheckedHoveredContent: fluentApple.communicationBlueTint20,
     ghostCheckedHoveredBorder: 'transparent',
 
-    // TODO What to do with secondary?
     ghostSecondaryContent: appleSemantic.secondaryLabelColor,
     ghostFocusedSecondaryContent: appleSemantic.secondaryLabelColor,
     ghostHoveredSecondaryContent: appleSemantic.secondaryLabelColor,
