@@ -19,22 +19,21 @@
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.14.0",
-    "react-native-macos": "0.63.4",
-    "react-native-test-app": "^0.3.8"
+    "react-native-macos": "0.63.1",
+    "react-native-test-app": "^0.3.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.4",
-    "@babel/runtime": "^7.8.4",
+    "@babel/core": "^7.6.2",
+    "@babel/runtime": "^7.6.2",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "@react-native-community/eslint-config": "^1.1.0",
-    "babel-jest": "^25.1.0",
-    "eslint": "^6.5.1",
-    "jest": "^25.1.0",
+    "babel-jest": "^24.9.0",
+    "jest": "^24.9.0",
     "metro-config": "^0.58.0",
-    "metro-react-native-babel-preset": "^0.59.0",
-    "react-native": "0.63.4",
-    "react-test-renderer": "~16.13.1"
+    "metro-react-native-babel-preset": "^0.58.0",
+    "react-native": "0.63.3",
+    "react-test-renderer": "~16.11.0"
   },
   "peerDependencies": {
     "react": "^16.13.1"
