@@ -1,7 +1,5 @@
 steps:
   - task: Bash@3
     inputs:
-    targetType: 'inline'
-    script: |
-      # install NDK
-      echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'ndk;21.0.6113669'
+      targetType: 'inline'
+      script: echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'ndk;21.0.6113669'
