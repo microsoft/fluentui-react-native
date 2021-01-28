@@ -1,15 +1,16 @@
 import { FontSize, FontSizes, FontWeightValue, Spacing, Typography, Variants } from '@fluentui-react-native/theme-types';
 
+// The sizes are taken for the Dynamic Type Size "Large", which is the system default
 export function appleTypography(): Typography {
   const appleDict = {
     sizes: {
-      caption: 10 as FontSize, // Caption 1
-      secondary: 11 as FontSize, // Callout
-      body: 13 as FontSize, // Body
-      subheader: 16 as FontSize, // Subheadline
-      header: 20 as FontSize, // Headline
-      hero: 22 as FontSize, /// Title 1
-      heroLarge: 26 as FontSize, // Large Title,
+      caption: 12 as FontSize, // Caption 1
+      secondary: 16 as FontSize, // Callout
+      body: 17 as FontSize, // Body
+      subheader: 15 as FontSize, // Subhead
+      header: 17 as FontSize, // Headline
+      hero: 28 as FontSize, /// Title 1
+      heroLarge: 34 as FontSize, // Large Title,
     } as FontSizes,
     weights: {
       ultralight: '100' as FontWeightValue,
@@ -24,7 +25,7 @@ export function appleTypography(): Typography {
     },
     families: {
       primary: 'SF Pro',
-      secondary: 'System',
+      secondary: 'SF Pro',
       cursive: 'System',
       monospace: 'SF Mono',
       sansSerif: 'SF Pro',
@@ -38,12 +39,12 @@ export function appleTypography(): Typography {
       bodySemibold: { face: 'primary', size: 'body', weight: '600' },
       subheaderStandard: { face: 'primary', size: 'subheader', weight: '400' },
       subheaderSemibold: { face: 'primary', size: 'subheader', weight: '600' },
-      headerStandard: { face: 'primary', size: 'header', weight: '700' },
-      headerSemibold: { face: 'primary', size: 'header', weight: '800' },
+      headerStandard: { face: 'primary', size: 'header', weight: '400' },
+      headerSemibold: { face: 'primary', size: 'header', weight: '600' },
       heroStandard: { face: 'primary', size: 'hero', weight: '400' },
-      heroSemibold: { face: 'primary', size: 'hero', weight: '700' },
+      heroSemibold: { face: 'primary', size: 'hero', weight: '600' },
       heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: '400' },
-      heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: '700' },
+      heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: '600' },
     } as Variants,
   };
 
