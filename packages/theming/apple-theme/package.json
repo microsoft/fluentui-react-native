@@ -40,11 +40,11 @@
     "@types/react": "^16.9.34",
     "react": "16.11.0",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "react-native": "0.63.4"
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
   },
   "peerDependencies": {
-    "react": "^16.8.0",
-    "react-native": ">=0.63.0"
+    "react": "^16.13.1",
+    "react-native": "^0.63.0",
+    "react-native-macos": "^0.63.0"
   }
 }

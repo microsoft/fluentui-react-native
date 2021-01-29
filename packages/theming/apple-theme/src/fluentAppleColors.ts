@@ -2,7 +2,7 @@ import { ColorValue } from '@fluentui-react-native/theme-types';
 import { DynamicColorMacOS } from 'react-native-macos';
 
 /** Palette of colors defined in FluentUI Apple */
-export interface FluentApplePalette {
+export interface FluentUIAppleBasePalette {
   blue10: ColorValue;
   blueMagenta20: ColorValue;
   blueMagenta30: ColorValue;
@@ -90,9 +90,9 @@ export interface FluentAppleButtonTokens {
   neutralStroke2: ColorValue;
 }
 
-export type ApplePalette = FluentApplePalette & FluentAppleButtonTokens;
+export type FluentUIApplePalette = FluentUIAppleBasePalette & FluentAppleButtonTokens;
 
-export function getStockAppleDynamicPalette(): ApplePalette {
+export function getFluentUIApplePalette(): FluentUIApplePalette {
   return {
     blue10: '#4F6BED',
     blueMagenta20: '#8764B8',

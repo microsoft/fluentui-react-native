@@ -9,11 +9,11 @@ PODS:
     - React-Core (= 0.63.1)
     - React-jsi (= 0.63.1)
     - ReactCommon/turbomodule/core (= 0.63.1)
-  - FluentUI-React-Native-Avatar (0.3.1):
+  - FluentUI-React-Native-Avatar (0.4.0):
     - MicrosoftFluentUI/AvatarView_mac (~> 0.1.16)
     - MicrosoftFluentUI/Controls_ios (~> 0.1.16)
     - React
-  - FluentUI-React-Native-Button (0.1.0):
+  - FluentUI-React-Native-Button (0.2.0):
     - MicrosoftFluentUI/Button_mac (~> 0.1.25)
     - MicrosoftFluentUI/Controls_ios (~> 0.1.25)
     - React
@@ -373,8 +373,8 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 87ca368919ae0ec70816fb8a42252ef59dc05c94
   FBReactNativeSpec: 7c0591658d85effad209fc4f45b6c9760f9e5842
-  FluentUI-React-Native-Avatar: e124b19dd5213759670f0edfac7af87df12b48f8
-  FluentUI-React-Native-Button: 30dedea13def00e23cb4c6a9b5d7f1728a257289
+  FluentUI-React-Native-Avatar: 5fc002da29cbaefa24ae5ada44fa73033b0e77bc
+  FluentUI-React-Native-Button: b950f1e02f37a6c764f8cf9ce9e12c5f5f844746
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: 9fc0e7af0b061c6a0d0bd1b674b93657cd6db5e1
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
@@ -405,4 +405,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 737120059192afd160feba8d3732b96e2f459bd2
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1

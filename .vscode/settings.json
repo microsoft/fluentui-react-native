@@ -72,6 +72,8 @@
     "fluentui",
     "macos",
     "monospace",
-    "nuget"
+    "nuget",
+    "uifabricshared",
+    "unemphasized"
   ]
 }

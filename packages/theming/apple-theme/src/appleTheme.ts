@@ -1,8 +1,8 @@
-import { PartialTheme, Spacing } from '@fluentui-react-native/theme-types';
-import { getStockAppleDynamicPalette } from './fluentAppleColors.macos';
-import { getAppleSemanticPalette } from './appleSemanticColors.macos';
+import { Spacing, Theme } from '@fluentui-react-native/theme-types';
+import { getFluentUIApplePalette } from './fluentAppleColors';
+import { getAppleSemanticPalette } from './applePlatformColors';
 
-import { paletteFromAppleColors } from './appleTheme.colors.macos';
+import { paletteFromAppleColors } from './appleTheme.colors';
 
 import { appleTypography } from './appleTheme.typography';
 
@@ -21,8 +21,8 @@ export const appleComponents = {
   },
 };
 
-export const defaultAppleThemeMacOS: PartialTheme = {
-  colors: paletteFromAppleColors(getStockAppleDynamicPalette(), getAppleSemanticPalette()),
+export const defaultAppleThemeMacOS: Theme = {
+  colors: paletteFromAppleColors(getFluentUIApplePalette(), getAppleSemanticPalette()),
   typography: appleTypography(),
   spacing: appleSpacing(),
   components: appleComponents,

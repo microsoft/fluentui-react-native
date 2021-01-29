@@ -1,5 +1,5 @@
 import { ColorValue } from '@fluentui-react-native/theme-types';
-import { PlatformColor } from 'react-native';
+import { PlatformColor } from 'react-native-macos';
 
 /** Palette of Apple Platform Colors, defined at https://developer.apple.com/documentation/appkit/nscolor/ui_element_colors */
 export interface AppleSemanticPalette {

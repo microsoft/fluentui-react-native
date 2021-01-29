@@ -1,3 +1,2 @@
-export { defaultAppleThemeIOS } from './appleTheme.ios';
-export { defaultAppleThemeMacOS } from './appleTheme.macos';
+export { defaultAppleThemeMacOS } from './appleTheme';
 export * from './createAppleTheme';
