@@ -123,30 +123,34 @@ jobs:
       matrix:
         android:
           relative_directory: 'android'
-
+          
     steps:
       - checkout: self
         persistCredentials: true
 
+     # setup repo
       - template: templates/setup-repo-min-build.yml
 
+    # package android bundle for apk
       - script: |
           yarn bundle
         workingDirectory: apps/$(relative_directory)
         displayName: 'yarn bundle $(relative_directory)'
 
+    # sets-up specifics for android dependency like NDK/emulator
       - template: templates/android-dep-setup.yml
     
-      # build android app
+      # build android apk and run Intrumented test
       - task: Gradle@2
         inputs:
           gradleWrapperFile: 'apps/$(relative_directory)/src/gradlew'
           workingDirectory: 'apps/$(relative_directory)/src'
-          tasks: 'installDebug'
+          tasks: 'installDebug cAT'
           publishJUnitResults: false
           javaHomeOption: 'JDKVersion'
           sonarQubeRunAnalysis: false
-      
+
+      # publish apk as well
       - task: PublishBuildArtifacts@1
         inputs:
           PathtoPublish: '$(Build.ArtifactStagingDirectory)'
