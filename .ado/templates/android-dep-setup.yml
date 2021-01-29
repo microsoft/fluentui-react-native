@@ -1,8 +1,12 @@
+variables:
+  # latest gradlew use this NDK version, which is not avaialble with any recent agents in azure
+  ndkVersion : '21.0.6113669'
 steps:
   - task: Bash@3
     inputs:
       targetType: 'inline'
-      script: echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'ndk;21.0.6113669'
+      # install a compatible version of NDK for gradle
+      script: echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'ndk;$(ndkVersion)'
   
   - task: Bash@3
     inputs:
@@ -26,6 +30,7 @@ steps:
         nohup $ANDROID_HOME/emulator/emulator -avd android_emulator -no-snapshot > /dev/null 2>&1 &
         $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
         
+        #list online device/emulator
         $ANDROID_HOME/platform-tools/adb devices
         
         echo "Emulator started"
