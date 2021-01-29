@@ -16,6 +16,8 @@ steps:
         # Create emulator
         echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n android_emulator -k 'system-images;android-27;google_apis;x86' --force
         
+         # list emulator
+        echo "Available emulator"
         $ANDROID_HOME/emulator/emulator -list-avds
         
         echo "Starting emulator"
