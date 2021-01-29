@@ -1,7 +1,7 @@
-variables:
+parameters:
   # latest gradlew use this NDK version, which is not avaialble with any recent agents in azure
 - name: ndkVersion
-  type: string;
+  type: string
   default: '21.0.6113669'
 steps:
   - task: Bash@3
