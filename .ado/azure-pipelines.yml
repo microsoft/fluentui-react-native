@@ -137,7 +137,7 @@ jobs:
     # sets-up specifics for android dependency like NDK & emulator
       - template: templates/android-dep-setup.yml
     
-      # build android apk and run Intrumented test
+      # build android apk and run available Intrumented test
       - task: Gradle@2
         inputs:
           gradleWrapperFile: 'apps/$(relative_directory)/src/gradlew'
@@ -146,8 +146,4 @@ jobs:
           publishJUnitResults: false
           javaHomeOption: 'JDKVersion'
           sonarQubeRunAnalysis: false
-      
-
-
-
       
