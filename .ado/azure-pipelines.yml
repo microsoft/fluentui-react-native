@@ -145,7 +145,7 @@ jobs:
         inputs:
           gradleWrapperFile: 'apps/$(relative_directory)/src/gradlew'
           workingDirectory: 'apps/$(relative_directory)/src'
-          tasks: 'installDebug cAT'
+          tasks: 'assembleDebug cAT'
           publishJUnitResults: false
           javaHomeOption: 'JDKVersion'
           sonarQubeRunAnalysis: false
