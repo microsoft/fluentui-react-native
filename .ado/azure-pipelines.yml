@@ -128,11 +128,6 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      # Clean Derived Data
-      - script: |
-          rm -rf $(Build.Repository.LocalPath)/DerivedData
-        displayName: 'Clean DerivedData'
-
       - template: templates/setup-repo-min-build.yml
 
       - script: |
@@ -147,8 +142,18 @@ jobs:
         inputs:
           gradleWrapperFile: 'apps/$(relative_directory)/src/gradlew'
           workingDirectory: 'apps/$(relative_directory)/src'
-          tasks: 'assembleRelease'
+          tasks: 'installDebug'
           publishJUnitResults: false
           javaHomeOption: 'JDKVersion'
           sonarQubeRunAnalysis: false
+      
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          ArtifactName: 'output'
+          publishLocation: 'Container'
+      
+
+
+
       
