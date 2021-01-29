@@ -26,5 +26,5 @@ export const defaultAppleThemeMacOS: Theme = {
   typography: appleTypography(),
   spacing: appleSpacing(),
   components: appleComponents,
-  host: { appearance: 'light' }, // TODO should be 'dynamic'
+  host: { appearance: 'auto' },
 };

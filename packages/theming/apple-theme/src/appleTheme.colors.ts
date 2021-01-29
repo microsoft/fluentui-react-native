@@ -57,7 +57,7 @@ export function paletteFromAppleColors(fluentUIApple: FluentUIApplePalette, appl
     buttonTextChecked: applePlatform.controlTextColor,
     buttonTextCheckedHovered: applePlatform.controlTextColor,
     buttonTextPressed: applePlatform.controlTextColor,
-    buttonTextDisabled: applePlatform.controlTextColor,
+    buttonTextDisabled: applePlatform.disabledControlTextColor,
     buttonBorderDisabled: 'transparent',
     buttonBorderFocused: 'transparent',
 
@@ -173,7 +173,7 @@ export function paletteFromAppleColors(fluentUIApple: FluentUIApplePalette, appl
 
     brandDisabledBackground: fluentUIApple.gray100,
     brandDisabledBorder: 'transparent',
-    brandDisabledContent: applePlatform.controlTextColor,
+    brandDisabledContent: applePlatform.disabledControlTextColor,
     brandDisabledIcon: applePlatform.controlTextColor,
 
     buttonCheckedBackground: applePlatform.selectedContentBackgroundColor,
@@ -202,7 +202,7 @@ export function paletteFromAppleColors(fluentUIApple: FluentUIApplePalette, appl
     brandHoveredSecondaryContent: applePlatform.secondaryLabelColor,
     brandPressedSecondaryContent: applePlatform.secondaryLabelColor,
 
-    buttonDisabledSecondaryContent: applePlatform.tertiaryLabelColor,
+    buttonDisabledSecondaryContent: applePlatform.disabledControlTextColor,
     buttonHoveredSecondaryContent: applePlatform.tertiaryLabelColor,
     buttonPressedSecondaryContent: applePlatform.tertiaryLabelColor,
   };
