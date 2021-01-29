@@ -115,39 +115,34 @@ jobs:
   - job: AndroidPR
     displayName: Android PR
     pool:
-      vmImage: 'ubuntu-latest'
+      vmImage: 'macos-10.15'
+    variables:
+      relative_directory: 'android'  
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
-    strategy:
-      maxParallel: 4
-      matrix:
-        android:
-          relative_directory: 'android'
-
+    
     steps:
       - checkout: self
         persistCredentials: true
 
-      # Clean Derived Data
-      - script: |
-          rm -rf $(Build.Repository.LocalPath)/DerivedData
-        displayName: 'Clean DerivedData'
-
+     # setup repo basics
       - template: templates/setup-repo-min-build.yml
 
+    # package android bundle
       - script: |
           yarn bundle
         workingDirectory: apps/$(relative_directory)
         displayName: 'yarn bundle $(relative_directory)'
 
+    # sets-up specifics for android dependency like NDK & emulator
       - template: templates/android-dep-setup.yml
     
-      # build android app
+      # build android apk and run available Intrumented test
       - task: Gradle@2
         inputs:
           gradleWrapperFile: 'apps/$(relative_directory)/src/gradlew'
           workingDirectory: 'apps/$(relative_directory)/src'
-          tasks: 'assembleRelease'
+          tasks: 'assembleDebug cAT'
           publishJUnitResults: false
           javaHomeOption: 'JDKVersion'
           sonarQubeRunAnalysis: false
