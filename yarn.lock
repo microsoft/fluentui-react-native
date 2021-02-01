@@ -1137,18 +1137,6 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@fluentui-react-native/experimental-button@0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/experimental-button/-/experimental-button-0.3.2.tgz#d2c038905ca85735bffa0821d8f306958e5a9d38"
-  integrity sha512-utqNZMC0at+hnu08wmudp5yngqi/4WoLfcmUTzrN8bvKnFiseY/Sh8ouLGET0hGirbxUlLL6l0Jw5wBk9QmiVQ==
-  dependencies:
-    "@fluentui-react-native/adapters" ">=0.4.0 <1.0.0"
-    "@fluentui-react-native/experimental-text" ">=0.2.2 <1.0.0"
-    "@fluentui-react-native/framework" "0.4.2"
-    "@fluentui-react-native/interactive-hooks" ">=0.7.0 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.7.0 <1.0.0"
-    "@fluentui-react-native/use-styling" ">=0.4.0 <1.0.0"
-
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -2699,21 +2687,13 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.9.34":
-  version "16.9.35"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.35.tgz#a0830d172e8aadd9bd41709ba2281a3124bbd368"
-  integrity sha512-q0n0SsWcGc8nDqH2GJfWQWUOmZSJhXV64CjVN5SvcNti3TdEaA3AH0D8DwNmMdzjMAC/78tB8nAZIlV8yTz+zQ==
+"@types/react@*", "@types/react@^16.9.0", "@types/react@^16.9.34":
+  version "16.14.2"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.14.2.tgz#85dcc0947d0645349923c04ccef6018a1ab7538c"
+  integrity sha512-BzzcAlyDxXl2nANlabtT4thtvbbnhee8hMmH/CcJrISDBVcJS1iOsP1f0OAgSdGE0MsY9tqcrb9YoZcOFv9dbQ==
   dependencies:
     "@types/prop-types" "*"
-    csstype "^2.2.0"
-
-"@types/react@^16.9.0":
-  version "16.9.36"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.36.tgz#ade589ff51e2a903e34ee4669e05dbfa0c1ce849"
-  integrity sha512-mGgUb/Rk/vGx4NCvquRuSH0GHBQKb1OqpGS9cT9lFxlTLHZgkksgI60TuIxubmn7JuCb+sENHhQciqa0npm0AQ==
-  dependencies:
-    "@types/prop-types" "*"
-    csstype "^2.2.0"
+    csstype "^3.0.2"
 
 "@types/request@^2.48.4":
   version "2.48.4"
@@ -6285,10 +6265,10 @@ cssstyle@^2.2.0:
   dependencies:
     cssom "~0.3.6"
 
-csstype@^2.2.0:
-  version "2.6.10"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.10.tgz#e63af50e66d7c266edb6b32909cfd0aabe03928b"
-  integrity sha512-D34BqZU4cIlMCY93rZHbrq9pjTAQJ3U8S8rfBqjwHxkGPThWFjzZDQpgMJY0QViLxth6ZKYiwFBo14RdN44U/w==
+csstype@^3.0.2:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.6.tgz#865d0b5833d7d8d40f4e5b8a6d76aea3de4725ef"
+  integrity sha512-+ZAmfyWMT7TiIlzdqJgjMb7S4f1beorDbWbsocyK4RaiqA5RTX3K14bnBWmmA9QEM0gRdsjyyrEmcyga8Zsxmw==
 
 cyclist@^1.0.1:
   version "1.0.1"
@@ -7313,7 +7293,7 @@ eslint-config-standard@^14.1.0:
   resolved "https://registry.yarnpkg.com/eslint-config-standard/-/eslint-config-standard-14.1.1.tgz#830a8e44e7aef7de67464979ad06b406026c56ea"
   integrity sha512-Z9B+VR+JIXRxz21udPTL9HpFMyoMUEeX1G251EQ6e05WD9aPVtVBn09XUmZ259wCMlCDmYDSZG62Hhm+ZTJcUg==
 
-eslint-import-resolver-node@^0.3.3:
+eslint-import-resolver-node@^0.3.4:
   version "0.3.4"
   resolved "https://registry.yarnpkg.com/eslint-import-resolver-node/-/eslint-import-resolver-node-0.3.4.tgz#85ffa81942c25012d8231096ddf679c03042c717"
   integrity sha512-ogtf+5AB/O+nM6DIeBUNr2fuT7ot9Qg/1harBfBtaP13ekEWFQEEMP94BCB7zaNW3gyY+8SHYF00rnqYwXKWOA==
@@ -7353,16 +7333,16 @@ eslint-plugin-flowtype@2.50.3:
     lodash "^4.17.10"
 
 eslint-plugin-import@^2.18.2:
-  version "2.22.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.22.0.tgz#92f7736fe1fde3e2de77623c838dd992ff5ffb7e"
-  integrity sha512-66Fpf1Ln6aIS5Gr/55ts19eUuoDhAbZgnr6UxK5hbDx6l/QgQgx61AePq+BV4PP2uXQFClgMVzep5zZ94qqsxg==
+  version "2.22.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.22.1.tgz#0896c7e6a0cf44109a2d97b95903c2bb689d7702"
+  integrity sha512-8K7JjINHOpH64ozkAhpT3sd+FswIZTfMZTjdx052pnWrgRCVfp8op9tbjpAk3DdUeI/Ba4C8OjdC0r90erHEOw==
   dependencies:
     array-includes "^3.1.1"
     array.prototype.flat "^1.2.3"
     contains-path "^0.1.0"
     debug "^2.6.9"
     doctrine "1.5.0"
-    eslint-import-resolver-node "^0.3.3"
+    eslint-import-resolver-node "^0.3.4"
     eslint-module-utils "^2.6.0"
     has "^1.0.3"
     minimatch "^3.0.4"
