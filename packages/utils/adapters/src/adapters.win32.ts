@@ -14,6 +14,7 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessibilityActions: true,
   accessibilityAnnotation: true,
   accessibilityDescribedBy: true,
+  accessibilityDescription: true,
   accessibilityLabel: true,
   accessibilityLabeledBy: true,
   accessibilityLevel: true,

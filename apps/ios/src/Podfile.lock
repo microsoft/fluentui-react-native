@@ -342,7 +342,7 @@ DEPENDENCIES:
   - React-RCTText (from `../../../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../../../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule/core (from `../../../node_modules/react-native/ReactCommon`)
-  - ReactTestApp-DevSupport (from `../node_modules/react-native-test-app`)
+  - ReactTestApp-DevSupport (from `../../../node_modules/react-native-test-app`)
   - ReactTestApp-Resources (from `..`)
   - SwiftLint
   - Yoga (from `../../../node_modules/react-native/ReactCommon/yoga`)
@@ -412,7 +412,7 @@ EXTERNAL SOURCES:
   ReactCommon:
     :path: "../../../node_modules/react-native/ReactCommon"
   ReactTestApp-DevSupport:
-    :path: "../node_modules/react-native-test-app"
+    :path: "../../../node_modules/react-native-test-app"
   ReactTestApp-Resources:
     :path: ".."
   Yoga:
