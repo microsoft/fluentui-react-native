@@ -9,15 +9,15 @@ PODS:
     - React-Core (= 0.62.2)
     - React-jsi (= 0.62.2)
     - ReactCommon/turbomodule/core (= 0.62.2)
-  - FluentUI-React-Native-Avatar (0.3.1):
+  - FluentUI-React-Native-Avatar (0.4.0):
     - MicrosoftFluentUI/AvatarView_mac (~> 0.1.16)
     - MicrosoftFluentUI/Controls_ios (~> 0.1.16)
     - React
-  - FluentUI-React-Native-Button (0.1.0):
+  - FluentUI-React-Native-Button (0.2.0):
     - MicrosoftFluentUI/Button_mac (~> 0.1.25)
     - MicrosoftFluentUI/Controls_ios (~> 0.1.25)
     - React
-  - FluentUI-React-Native-Shimmer (0.3.4):
+  - FluentUI-React-Native-Shimmer (0.4.0):
     - MicrosoftFluentUI (~> 0.1.16)
     - React
   - Folly (2018.10.22.00):
@@ -301,7 +301,7 @@ PODS:
     - React-cxxreact (= 0.62.2)
     - React-jsi (= 0.62.2)
     - ReactCommon/callinvoker (= 0.62.2)
-  - ReactTestApp-DevSupport (0.3.2)
+  - ReactTestApp-DevSupport (0.3.8)
   - ReactTestApp-Resources (1.0.0-dev)
   - SwiftLint (0.42.0)
   - Yoga (1.14.0)
@@ -417,9 +417,9 @@ SPEC CHECKSUMS:
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e
-  FluentUI-React-Native-Avatar: e124b19dd5213759670f0edfac7af87df12b48f8
-  FluentUI-React-Native-Button: 30dedea13def00e23cb4c6a9b5d7f1728a257289
-  FluentUI-React-Native-Shimmer: 7b2cc5411cde91654618b20fef0238e528e98932
+  FluentUI-React-Native-Avatar: 5fc002da29cbaefa24ae5ada44fa73033b0e77bc
+  FluentUI-React-Native-Button: b950f1e02f37a6c764f8cf9ce9e12c5f5f844746
+  FluentUI-React-Native-Shimmer: 790cb67b08e7f2ce4057cbd91c38f323afe75e39
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   MicrosoftFluentUI: 9fc0e7af0b061c6a0d0bd1b674b93657cd6db5e1
@@ -443,11 +443,11 @@ SPEC CHECKSUMS:
   React-RCTText: fae545b10cfdb3d247c36c56f61a94cfd6dba41d
   React-RCTVibration: 4356114dbcba4ce66991096e51a66e61eda51256
   ReactCommon: ed4e11d27609d571e7eee8b65548efc191116eb3
-  ReactTestApp-DevSupport: fac724ea8817d3874faf6c70a7cb65e383bbf2db
+  ReactTestApp-DevSupport: c0311d0c47b1a39b6cac39b0211ec708aacb7437
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
 
 PODFILE CHECKSUM: 92ad496f45726c3f2dfe3835c607a1b6ca267da8
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0
