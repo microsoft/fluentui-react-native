@@ -21,10 +21,10 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.7.1",
     "@fluentui-react-native/component-cache": "^1.1.0",
     "@fluentui-react-native/interactive-hooks": ">=0.8.0 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.7.0 <1.0.0",
+    "@uifabricshared/foundation-compose": "^1.7.1",
     "@uifabricshared/foundation-composable": ">=0.7.0 <1.0.0",
     "@uifabricshared/foundation-settings": ">=0.8.0 <1.0.0"
   },

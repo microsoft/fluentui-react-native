@@ -40,13 +40,12 @@
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "react": "16.11.0",
-    "react-dom": "16.11.0",
-    "react-native-web": "0.12.3"
+    "react-dom": "^16.11.0"
   },
   "peerDependencies": {
     "react": "^16.11.0",
-    "react-native": "^0.62.2"
+    "react-native": "^0.62.2",
+    "react-native-web": "^0.12.3"
   },
   "author": "",
   "license": "MIT"

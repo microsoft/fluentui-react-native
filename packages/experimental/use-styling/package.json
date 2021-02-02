@@ -40,7 +40,7 @@
     "@uifabricshared/build-native": "^0.1.1"
   },
   "peerDependencies": {
-    "react": "16.11.0",
+    "react": "^16.11.0",
     "react-native": "^0.62.2"
   }
 }

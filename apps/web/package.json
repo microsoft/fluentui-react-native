@@ -15,7 +15,7 @@
     "react": "^16.13.1",
     "react-art": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-native-web": "^0.14.0"
+    "react-native-web": "^0.12.3"
   },
   "devDependencies": {
     "@uifabricshared/build-native": "^0.1.1",

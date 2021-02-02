@@ -28,10 +28,10 @@
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.14.0",
-    "@office-iss/react-native-win32": "0.62.6",
+    "@office-iss/react-native-win32": "0.63.5",
     "@office-iss/rex-win32": "0.62.12-devmain.13420.10000",
     "react": "16.13.1",
-    "react-native": "^0.63.5",
+    "react-native": "^0.63.4",
     "react-native-svg": "^11.0.0"
   },
   "devDependencies": {
@@ -42,7 +42,7 @@
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "metro-config": "^0.59.0",
-    "metro-react-native-babel-preset": "^0.58.0",
+    "metro-react-native-babel-preset": "^0.59.0",
     "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "~16.13.1",
     "ts-node": "^8.10.1",
