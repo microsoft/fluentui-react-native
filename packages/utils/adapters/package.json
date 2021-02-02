@@ -20,17 +20,19 @@
     "verify-api": "fluentui-scripts verify-api-extractor",
     "update-api": "fluentui-scripts update-api-extractor"
   },
-  "dependencies": {},
+  "dependencies": {
+    "react-native": "^0.62",
+    "react-native-web": "^0.12",
+    "react-native-windows": "^0.62.1"
+  },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.62.6",
+    "@office-iss/react-native-win32": "^0.62.6",
     "@types/jest": "^25.1.4",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "react-native": "0.62.2",
-    "react-native-web": "0.12.3",
-    "react-native-windows": "^0.62.1"
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
   },
+  "peerDependencies": {},
   "author": "",
   "license": "MIT"
 }

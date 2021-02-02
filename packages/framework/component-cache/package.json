@@ -35,11 +35,10 @@
     "@types/jest": "^25.1.4",
     "@types/node": "^10.3.5",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "react": "16.11.0",
-    "react-native": "^0.62.2"
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
   },
   "peerDependencies": {
+    "react": "^16.11.0",
     "react-native": ">=0.60.0"
   }
 }

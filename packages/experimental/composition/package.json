@@ -37,8 +37,7 @@
     "@fluentui-react-native/use-styling": ">=0.4.0 <1.0.0"
   },
   "devDependencies": {
-    "@uifabricshared/build-native": "^0.1.1",
-    "react-native": "^0.62.2"
+    "@uifabricshared/build-native": "^0.1.1"
   },
   "peerDependencies": {
     "react-native": ">=0.60.0"

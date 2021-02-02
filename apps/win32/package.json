@@ -28,23 +28,23 @@
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.14.0",
-    "react": "16.11.0",
-    "react-native": "0.62.2",
+    "@office-iss/react-native-win32": "0.62.6",
+    "@office-iss/rex-win32": "0.62.12-devmain.13420.10000",
+    "react": "16.13.1",
+    "react-native": "^0.63.5",
     "react-native-svg": "^11.0.0"
   },
   "devDependencies": {
-    "@office-iss/rex-win32": "0.62.12-devmain.13420.10000",
-    "@office-iss/react-native-win32": "0.62.6",
-    "@react-native-community/eslint-config": "^1.1.0",
+    "@react-native-community/eslint-config": "^2.0.0",
     "@types/jasmine": "3.5.10",
     "@types/react": "^16.9.34",
     "@types/react-native": "^0.62.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "metro-config": "^0.58.0",
+    "metro-config": "^0.59.0",
     "metro-react-native-babel-preset": "^0.58.0",
     "react-native-svg-transformer": "^0.14.3",
-    "react-test-renderer": "~16.11.0",
+    "react-test-renderer": "~16.13.1",
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
     "typescript": "3.8.3",
@@ -58,10 +58,6 @@
     "@wdio/local-runner": "5.23.0",
     "@wdio/spec-reporter": "5.22.4",
     "@wdio/sync": "5.20.1"
-  },
-  "peerDependencies": {
-    "react": "16.11.0",
-    "react-native": "0.62.2"
   },
   "jest": {
     "preset": "react-native"

@@ -35,8 +35,7 @@
   },
   "devDependencies": {
     "beachball": "^1.35.0",
-    "lage": ">=0.17.4 <1.0.0",
-    "react-dom": "^16.13.1"
+    "lage": ">=0.17.4 <1.0.0"
   },
   "workspaces": {
     "packages": [
