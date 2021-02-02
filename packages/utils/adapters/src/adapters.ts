@@ -1,8 +1,9 @@
 import { TextProps, ViewProps, ImageProps } from 'react-native';
 import { IFilterMask } from './filter.types';
+import { ITextWin32Props } from '@office-iss/react-native-win32';
 
 // export core interface types
-export type ITextProps = TextProps;
+export type ITextProps = TextProps & Partial<ITextWin32Props>;
 export type IViewProps = ViewProps;
 export type IImageProps = ImageProps;
 
@@ -102,6 +103,16 @@ const _textMask: IFilterMask<ITextProps> = {
   selectable: true,
   selectionColor: true,
   suppressHighlighting: true,
+  accessibilityDescribedBy: true,
+  accessibilityLabeledBy: true,
+  keyDownEvents: true,
+  keyUpEvents: true,
+  onKeyDown: true,
+  onKeyDownCapture: true,
+  onKeyUp: true,
+  onKeyUpCapture: true,
+  textStyle: true,
+  tooltip: true,
 };
 
 const _imageMask: IFilterMask<IImageProps> = {

@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Wed, 13 Jan 2021 20:04:26 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.9.0",
+      "version": "0.9.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "update FUA version for button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "a0b6666ced16ccb8d06e7f91dc3136294d209de7",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 06 Jan 2021 18:41:50 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.8.3",
+      "version": "0.8.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump react-native-win32",
+            "author": "krsiler@microsoft.com",
+            "commit": "07395b1141d73a37a8d9ccd09bafadd205b5a528",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 22 Dec 2020 01:36:23 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.8.2",
       "version": "0.8.2",

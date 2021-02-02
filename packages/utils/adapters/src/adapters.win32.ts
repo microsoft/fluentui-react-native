@@ -87,14 +87,21 @@ const _textMask: IFilterMask<ITextProps> = {
   ellipsizeMode: true,
   lineBreakMode: true,
   numberOfLines: true,
+  keyDownEvents: true,
+  keyUpEvents: true,
+  onKeyDown: true,
+  onKeyDownCapture: true,
+  onKeyUp: true,
+  onKeyUpCapture: true,
   onLayout: true,
   onLongPress: true,
   onPress: true,
   style: true,
+  selectable: true,
   nativeID: true,
   maxFontSizeMultiplier: true,
   textStyle: true,
-  tooltip: true
+  tooltip: true,
 };
 
 const _imageMask: IFilterMask<IImageProps> = {

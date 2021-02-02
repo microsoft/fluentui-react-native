@@ -146,4 +146,3 @@ jobs:
           publishJUnitResults: false
           javaHomeOption: 'JDKVersion'
           sonarQubeRunAnalysis: false
-      
