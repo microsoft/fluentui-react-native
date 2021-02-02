@@ -1063,11 +1063,12 @@
     "@babel/plugin-transform-react-pure-annotations" "^7.12.1"
 
 "@babel/preset-typescript@^7.8.0":
-  version "7.12.1"
-  resolved "https://registry.yarnpkg.com/@babel/preset-typescript/-/preset-typescript-7.12.1.tgz#86480b483bb97f75036e8864fe404cc782cc311b"
-  integrity sha512-hNK/DhmoJPsksdHuI/RVrcEws7GN5eamhi28JkO52MqIxU8Z0QpmiSOQxZHWOHV7I3P4UjHV97ay4TcamMA6Kw==
+  version "7.12.7"
+  resolved "https://registry.yarnpkg.com/@babel/preset-typescript/-/preset-typescript-7.12.7.tgz#fc7df8199d6aae747896f1e6c61fc872056632a3"
+  integrity sha512-nOoIqIqBmHBSEgBXWR4Dv/XBehtIFcw9PqZw6rFYuKrzsZmOQm3PR5siLBnKZFEsDb03IegG8nSjU/iXXXYRmw==
   dependencies:
     "@babel/helper-plugin-utils" "^7.10.4"
+    "@babel/helper-validator-option" "^7.12.1"
     "@babel/plugin-transform-typescript" "^7.12.1"
 
 "@babel/register@^7.0.0":
@@ -1136,18 +1137,6 @@
   dependencies:
     exec-sh "^0.3.2"
     minimist "^1.2.0"
-
-"@fluentui-react-native/experimental-button@0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/experimental-button/-/experimental-button-0.3.2.tgz#d2c038905ca85735bffa0821d8f306958e5a9d38"
-  integrity sha512-utqNZMC0at+hnu08wmudp5yngqi/4WoLfcmUTzrN8bvKnFiseY/Sh8ouLGET0hGirbxUlLL6l0Jw5wBk9QmiVQ==
-  dependencies:
-    "@fluentui-react-native/adapters" ">=0.4.0 <1.0.0"
-    "@fluentui-react-native/experimental-text" ">=0.2.2 <1.0.0"
-    "@fluentui-react-native/framework" "0.4.2"
-    "@fluentui-react-native/interactive-hooks" ">=0.7.0 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.7.0 <1.0.0"
-    "@fluentui-react-native/use-styling" ">=0.4.0 <1.0.0"
 
 "@hapi/address@2.x.x":
   version "2.1.4"
@@ -7460,9 +7449,9 @@ eslint-plugin-relay@1.4.1:
     graphql "^14.0.0"
 
 eslint-plugin-standard@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-standard/-/eslint-plugin-standard-4.0.1.tgz#ff0519f7ffaff114f76d1bd7c3996eef0f6e20b4"
-  integrity sha512-v/KBnfyaOMPmZc/dmc6ozOdWqekGp7bBGq4jLAecEfPGmfKiWS4sA8sC0LqiV9w5qmXAtXVn4M3p1jSyhY85SQ==
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-standard/-/eslint-plugin-standard-4.1.0.tgz#0c3bf3a67e853f8bbbc580fb4945fbf16f41b7c5"
+  integrity sha512-ZL7+QRixjTR6/528YNGyDotyffm5OQst/sGxKDwGb9Uqs4In5Egi4+jbobhqJoyoCM6/7v/1A5fhQ7ScMtDjaQ==
 
 eslint-scope@^4.0.3:
   version "4.0.3"
