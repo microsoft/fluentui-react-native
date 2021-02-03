@@ -18,6 +18,7 @@ exports[`FocusZone No Props One child 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -68,6 +69,7 @@ exports[`FocusZone No Props Three children 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -111,6 +113,7 @@ exports[`FocusZone No Props Three children 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -154,6 +157,7 @@ exports[`FocusZone No Props Three children 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -204,6 +208,7 @@ exports[`FocusZone No Props Two children 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -247,6 +252,7 @@ exports[`FocusZone No Props Two children 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -300,6 +306,7 @@ exports[`FocusZone With Props All Props 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -343,6 +350,7 @@ exports[`FocusZone With Props All Props 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -386,6 +394,7 @@ exports[`FocusZone With Props All Props 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -436,6 +445,7 @@ exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -479,6 +489,7 @@ exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -522,6 +533,7 @@ exports[`FocusZone With Props defaultTabbableElement Prop 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -573,6 +585,7 @@ exports[`FocusZone With Props disabled Prop 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -616,6 +629,7 @@ exports[`FocusZone With Props disabled Prop 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -659,6 +673,7 @@ exports[`FocusZone With Props disabled Prop 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -710,6 +725,7 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -753,6 +769,7 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -796,6 +813,7 @@ exports[`FocusZone With Props focusZoneDirection Prop 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -846,6 +864,7 @@ exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -889,6 +908,7 @@ exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -932,6 +952,7 @@ exports[`FocusZone With Props isCircularNavigation Prop 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -983,6 +1004,7 @@ exports[`FocusZone With Props use2DNavigation Prop 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -1026,6 +1048,7 @@ exports[`FocusZone With Props use2DNavigation Prop 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
@@ -1069,6 +1092,7 @@ exports[`FocusZone With Props use2DNavigation Prop 1`] = `
     nativeBackgroundAndroid={
       Object {
         "attribute": "selectableItemBackground",
+        "rippleRadius": undefined,
         "type": "ThemeAttrAndroid",
       }
     }
