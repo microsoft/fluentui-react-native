@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Update dependency specification",
+  "packageName": "@fluentui-react-native/win32-theme",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-02-03T21:12:58.942Z"
+}

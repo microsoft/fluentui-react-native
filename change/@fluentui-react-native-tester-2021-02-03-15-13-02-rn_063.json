@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Update dependencies, remove unsupported ios and macos tests",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-02-03T21:10:21.832Z"
+}

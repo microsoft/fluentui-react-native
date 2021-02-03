@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Update dependency specification",
+  "packageName": "@uifabricshared/theming-react-native",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-02-03T21:12:08.338Z"
+}

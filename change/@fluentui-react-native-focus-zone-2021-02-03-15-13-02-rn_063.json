@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Update dependency specification",
+  "packageName": "@fluentui-react-native/focus-zone",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-02-03T21:11:22.234Z"
+}
