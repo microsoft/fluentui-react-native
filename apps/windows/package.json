@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.14.0",
-    "react-native": "0.63.4",
-    "react-native-windows": "^0.63.20"
+    "react-native": "0.62.2",
+    "react-native-windows": "^0.62.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
@@ -47,7 +47,9 @@
   },
   "workspaces": {
     "nohoist": [
-      "@types/jasmine"
+      "@types/jasmine",
+      "react-native",
+      "react-native/**"
     ]
   },
   "jest": {
