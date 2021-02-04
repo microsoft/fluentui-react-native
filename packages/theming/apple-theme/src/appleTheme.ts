@@ -1,9 +1,7 @@
 import { Spacing, Theme } from '@fluentui-react-native/theme-types';
 import { getFluentUIApplePalette } from './fluentAppleColors';
 import { getAppleSemanticPalette } from './applePlatformColors';
-
 import { paletteFromAppleColors } from './appleTheme.colors';
-
 import { appleTypography } from './appleTheme.typography';
 
 export function appleSpacing(): Spacing {

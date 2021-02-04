@@ -2,11 +2,11 @@ import { OfficePalette, PartialTheme, Theme } from '@fluentui-react-native/frame
 import { createPartialOfficeTheme, getThemingModule } from '@fluentui-react-native/win32-theme';
 import { createAppleTheme } from '@fluentui-react-native/apple-theme';
 
-export type ThemeNames = 'Fluent' | 'Office' | 'Caterpillar' | 'Apple';
+export type ThemeNames = 'Default' | 'Office' | 'Caterpillar' | 'Apple';
 
 export const themeChoices = [
   { label: 'Apple', value: 'Apple' },
-  { label: 'Fluent', value: 'Fluent' },
+  { label: 'Default', value: 'Default' },
   { label: 'Office', value: 'Office' },
   { label: 'Caterpillar', value: 'Caterpillar' },
 ];
