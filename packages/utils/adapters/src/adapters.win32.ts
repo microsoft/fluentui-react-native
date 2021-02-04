@@ -9,7 +9,6 @@ export type IImageProps = ImageProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
   children: true,
-  acceptsKeyboardFocus: true,
   accessible: true,
   accessibilityActions: true,
   accessibilityAnnotation: true,
@@ -22,7 +21,6 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessibilityRole: true,
   accessibilitySetSize: true,
   accessibilityState: true,
-  accessibilityStates: true,
   accessibilityHint: true,
   accessibilityValue: true,
   animationClass: true,
@@ -67,6 +65,7 @@ const _viewMask: IFilterMask<IViewProps> = {
   onTouchStart: true,
   tooltip: true,
   type: true,
+  focusable: true,
 };
 
 const _textMask: IFilterMask<ITextProps> = {
@@ -78,7 +77,6 @@ const _textMask: IFilterMask<ITextProps> = {
   accessibilityLabeledBy: true,
   accessibilityRole: true,
   accessibilityState: true,
-  accessibilityStates: true,
   accessibilityValue: true,
   accessible: true,
   onAccessibilityAction: true,
@@ -116,7 +114,6 @@ const _imageMask: IFilterMask<IImageProps> = {
   accessibilityLiveRegion: true,
   accessibilityRole: true,
   accessibilityState: true,
-  accessibilityStates: true,
   accessibilityTraits: true,
   accessibilityValue: true,
   accessibilityViewIsModal: true,

@@ -12,7 +12,6 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessibilityLabel: true,
   accessibilityRole: true,
   accessibilityState: true,
-  accessibilityStates: true,
   accessibilityValue: true,
   accessibilityHint: true,
   collapsable: true,
@@ -54,6 +53,7 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessibilityLiveRegion: true,
   accessibilityTraits: true,
   accessibilityViewIsModal: true,
+  focusable: true,
 };
 
 const _textMask: IFilterMask<ITextProps> = {
@@ -67,7 +67,6 @@ const _textMask: IFilterMask<ITextProps> = {
   accessibilityLiveRegion: true,
   accessibilityRole: true,
   accessibilityState: true,
-  accessibilityStates: true,
   accessibilityTraits: true,
   accessibilityValue: true,
   accessibilityViewIsModal: true,
@@ -104,7 +103,6 @@ const _imageMask: IFilterMask<IImageProps> = {
   accessibilityLiveRegion: true,
   accessibilityRole: true,
   accessibilityState: true,
-  accessibilityStates: true,
   accessibilityTraits: true,
   accessibilityValue: true,
   accessibilityViewIsModal: true,
