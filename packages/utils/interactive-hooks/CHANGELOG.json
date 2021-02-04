@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Wed, 13 Jan 2021 20:04:26 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "update FUA version for button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "a0b6666ced16ccb8d06e7f91dc3136294d209de7",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 06 Jan 2021 18:41:50 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.7.1",
       "version": "0.7.1",

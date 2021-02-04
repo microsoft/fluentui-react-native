@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Added macOS implementation of experimental avatar",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-01-11T21:28:30.919Z"
-}

@@ -6,6 +6,7 @@ import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbo
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './TestComponents/FocusTrapZone';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
+import { NativeButtonTest, HOMEPAGE_NATIVEBUTTON_BUTTON } from './TestComponents/NativeButton';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from './TestComponents/Persona';
 import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from './TestComponents/PersonaCoin';
 import { HOMEPAGE_PRESSABLE_BUTTON, PressableTest } from './TestComponents/Pressable';
@@ -50,6 +51,11 @@ export const tests: TestDescription[] = [
     name: 'Link Test',
     component: LinkTest,
     testPage: HOMEPAGE_LINK_BUTTON,
+  },
+  {
+    name: 'Native Button Test',
+    component: NativeButtonTest,
+    testPage: HOMEPAGE_NATIVEBUTTON_BUTTON,
   },
   {
     name: 'Separator Test',

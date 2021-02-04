@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-button",
   "entries": [
     {
+      "date": "Wed, 13 Jan 2021 20:04:26 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "fix depcheck error by adding component-cache dependency for experimental button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "a0b6666ced16ccb8d06e7f91dc3136294d209de7",
+            "package": "@fluentui-react-native/experimental-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 06 Jan 2021 18:41:50 GMT",
       "tag": "@fluentui-react-native/experimental-button_v0.3.3",
       "version": "0.3.3",
