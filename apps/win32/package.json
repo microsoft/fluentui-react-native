@@ -37,8 +37,8 @@
   "devDependencies": {
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/jasmine": "3.5.10",
-    "@types/react": "^16.9.34",
-    "@types/react-native": "^0.62.0",
+    "@types/react": "^16.13.1",
+    "@types/react-native": "^0.63.4",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "metro-config": "^0.59.0",

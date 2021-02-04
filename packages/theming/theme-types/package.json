@@ -33,7 +33,7 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "@types/react": "^16.9.34",
+    "@types/react": "^16.11.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
   },

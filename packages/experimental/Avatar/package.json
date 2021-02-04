@@ -28,7 +28,7 @@
     "@fluentui-react-native/framework": "0.4.2"
   },
   "devDependencies": {
-    "@types/react-native": "^0.62.0",
+    "@types/react-native": "^0.62.2",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
   },

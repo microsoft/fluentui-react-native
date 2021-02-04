@@ -31,7 +31,7 @@
     "@types/es6-promise": "0.0.32",
     "@types/jest": "^25.1.4",
     "@types/node": "^12.11.2",
-    "@types/react-native": "^0.62.0",
+    "@types/react-native": "^0.62.2",
     "@types/react-test-renderer": "16.9.0",
     "@types/webpack-env": "1.13.6",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
