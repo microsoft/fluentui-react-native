@@ -101,30 +101,30 @@ export function paletteFromAppleColors(fluentUIApple: FluentUIApplePalette, appl
 
     /* ControlColorTokens */
 
-    buttonBackground: fluentUIApple.communicationBlue,
+    buttonBackground: applePlatform.controlColor,
     buttonBorder: 'transparent',
     buttonContent: applePlatform.controlTextColor,
     buttonIcon: applePlatform.controlTextColor,
 
-    buttonHoveredBackground: fluentUIApple.communicationBlue,
+    buttonHoveredBackground: applePlatform.controlColor,
     buttonHoveredBorder: 'transparent',
     buttonHoveredContent: applePlatform.controlTextColor,
     buttonHoveredIcon: applePlatform.controlTextColor,
 
-    buttonFocusedBackground: fluentUIApple.communicationBlue,
+    buttonFocusedBackground: applePlatform.controlColor,
     buttonFocusedBorder: 'transparent',
     buttonFocusedContent: applePlatform.controlTextColor,
     buttonFocusedIcon: applePlatform.controlTextColor,
 
-    buttonPressedBackground: fluentUIApple.communicationBlueTint10,
+    buttonPressedBackground: applePlatform.selectedControlColor,
     buttonPressedBorder: 'transparent',
-    buttonPressedContent: applePlatform.controlTextColor,
-    buttonPressedIcon: applePlatform.controlTextColor,
+    buttonPressedContent: applePlatform.selectedControlTextColor,
+    buttonPressedIcon: applePlatform.selectedControlTextColor,
 
-    buttonDisabledBackground: fluentUIApple.gray100,
+    buttonDisabledBackground: applePlatform.controlColor,
     buttonDisabledBorder: 'transparent',
-    buttonDisabledContent: applePlatform.controlTextColor,
-    buttonDisabledIcon: applePlatform.controlTextColor,
+    buttonDisabledContent: applePlatform.disabledControlTextColor,
+    buttonDisabledIcon: applePlatform.disabledControlTextColor,
 
     ghostBackground: 'transparent',
     ghostBorder: 'transparent',
@@ -148,8 +148,8 @@ export function paletteFromAppleColors(fluentUIApple: FluentUIApplePalette, appl
 
     ghostDisabledBackground: 'transparent',
     ghostDisabledBorder: 'transparent',
-    ghostDisabledContent: fluentUIApple.communicationBlueTint20,
-    ghostDisabledIcon: fluentUIApple.communicationBlueTint20,
+    ghostDisabledContent: applePlatform.disabledControlTextColor,
+    ghostDisabledIcon: applePlatform.disabledControlTextColor,
 
     brandBackground: fluentUIApple.communicationBlue,
     brandBorder: 'transparent',
@@ -176,9 +176,9 @@ export function paletteFromAppleColors(fluentUIApple: FluentUIApplePalette, appl
     brandDisabledContent: applePlatform.disabledControlTextColor,
     brandDisabledIcon: applePlatform.controlTextColor,
 
-    buttonCheckedBackground: applePlatform.selectedContentBackgroundColor,
+    buttonCheckedBackground: fluentUIApple.communicationBlueTint10,
     buttonCheckedContent: applePlatform.controlTextColor,
-    buttonCheckedHoveredBackground: applePlatform.selectedContentBackgroundColor,
+    buttonCheckedHoveredBackground: fluentUIApple.communicationBlueTint10,
     buttonCheckedHoveredContent: applePlatform.controlTextColor,
 
     brandCheckedBackground: fluentUIApple.communicationBlueTint10,
@@ -200,10 +200,10 @@ export function paletteFromAppleColors(fluentUIApple: FluentUIApplePalette, appl
     brandSecondaryContent: applePlatform.secondaryLabelColor,
     brandFocusedSecondaryContent: applePlatform.secondaryLabelColor,
     brandHoveredSecondaryContent: applePlatform.secondaryLabelColor,
-    brandPressedSecondaryContent: applePlatform.secondaryLabelColor,
+    brandPressedSecondaryContent: applePlatform.tertiaryLabelColor,
 
     buttonDisabledSecondaryContent: applePlatform.disabledControlTextColor,
-    buttonHoveredSecondaryContent: applePlatform.tertiaryLabelColor,
+    buttonHoveredSecondaryContent: applePlatform.secondaryLabelColor,
     buttonPressedSecondaryContent: applePlatform.tertiaryLabelColor,
   };
 }
