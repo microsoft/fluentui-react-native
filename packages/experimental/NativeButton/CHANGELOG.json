@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/experimental-native-button",
+  "entries": [
+    {
+      "date": "Wed, 13 Jan 2021 20:04:26 GMT",
+      "tag": "@fluentui-react-native/experimental-native-button_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "update FUA version for button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "a0b6666ced16ccb8d06e7f91dc3136294d209de7",
+            "package": "@fluentui-react-native/experimental-native-button"
+          }
+        ]
+      }
+    }
+  ]
+}
