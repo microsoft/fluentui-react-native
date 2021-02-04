@@ -48,7 +48,7 @@ steps:
     displayName: 'generate UWP app'
 
   - script: |
-      yarn windows --logging --release --arch x64
+      yarn windows --logging --arch x64
     workingDirectory: apps\windows
     displayName: 'run UWP app'
 
