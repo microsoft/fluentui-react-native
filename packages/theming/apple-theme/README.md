@@ -1,6 +1,6 @@
 # Apple-theme
 
-Code and definitions for creating an Apple Theme for FluentUI React Native. Currently only implemented for macOS.
+Code and definitions for creating an Apple Theme for FluentUI React Native. Currently only implemented for macOS. iOS Apple theme progress is tracked at Github #596
 
 Some heuristics followed in this theme:
 
