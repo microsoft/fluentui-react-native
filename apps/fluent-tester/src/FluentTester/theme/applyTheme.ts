@@ -5,8 +5,8 @@ import { createAppleTheme } from '@fluentui-react-native/apple-theme';
 export type ThemeNames = 'Default' | 'Office' | 'Caterpillar' | 'Apple';
 
 export const themeChoices = [
-  { label: 'Apple', value: 'Apple' },
   { label: 'Default', value: 'Default' },
+  { label: 'Apple', value: 'Apple' },
   { label: 'Office', value: 'Office' },
   { label: 'Caterpillar', value: 'Caterpillar' },
 ];
@@ -59,12 +59,12 @@ const officeBase = themingModule
 /** apply the currently active theme layering */
 export function applyTheme(parent: Theme, name: ThemeNames): PartialTheme {
   switch (name) {
+    case 'Apple':
+      return createAppleTheme().theme;
     case 'Office':
       return officeBase;
     case 'Caterpillar':
       return applyCaterpillarTheme(parent);
-    case 'Apple':
-      return createAppleTheme().theme;
     default:
       return {};
   }

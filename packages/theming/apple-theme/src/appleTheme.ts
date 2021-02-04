@@ -5,7 +5,13 @@ import { paletteFromAppleColors } from './appleTheme.colors';
 import { appleTypography } from './appleTheme.typography';
 
 export function appleSpacing(): Spacing {
-  return { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' };
+  return {
+    s2: '8px',
+    s1: '12px',
+    m: '16px',
+    l1: '20px',
+    l2: '24px',
+  };
 }
 
 export const appleComponents = {
@@ -24,5 +30,5 @@ export const defaultAppleThemeMacOS: Theme = {
   typography: appleTypography(),
   spacing: appleSpacing(),
   components: appleComponents,
-  host: { appearance: 'auto' },
+  host: { appearance: 'dynamic' },
 };

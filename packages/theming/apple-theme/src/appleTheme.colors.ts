@@ -75,18 +75,18 @@ export function paletteFromAppleColors(fluentUIApple: FluentUIApplePalette, appl
     accentButtonBackground: fluentUIApple.communicationBlueTint10,
     accentButtonText: applePlatform.controlTextColor,
 
-    menuBackground: applePlatform.alternatingEvenContentBackgroundColor,
+    menuBackground: 'transparent',
     menuDivider: applePlatform.separatorColor,
     menuIcon: applePlatform.textColor,
     menuHeader: applePlatform.headerTextColor,
-    menuItemBackgroundHovered: applePlatform.alternatingOddContentBackgroundColor,
+    menuItemBackgroundHovered: 'transparent',
     menuItemBackgroundPressed: applePlatform.selectedContentBackgroundColor,
     menuItemText: applePlatform.textColor,
     menuItemTextHovered: applePlatform.textColor,
 
-    listBackground: applePlatform.alternatingOddContentBackgroundColor,
+    listBackground: 'transparent',
     listText: applePlatform.textColor,
-    listItemBackgroundHovered: applePlatform.alternatingOddContentBackgroundColor,
+    listItemBackgroundHovered: 'transparent',
     listItemBackgroundChecked: applePlatform.selectedContentBackgroundColor,
     listItemBackgroundCheckedHovered: applePlatform.selectedContentBackgroundColor,
 
