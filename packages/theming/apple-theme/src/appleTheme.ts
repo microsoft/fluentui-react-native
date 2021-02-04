@@ -23,6 +23,11 @@ export const appleComponents = {
       minWidth: 72,
     },
   },
+  RNFText: {
+    tokens: {
+      variant: 'bodyStandard',
+    },
+  },
 };
 
 export const defaultAppleThemeMacOS: Theme = {
