@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Created a macOS Apple theme for FluentUI React Native",
+  "packageName": "@fluentui-react-native/apple-theme",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-02-04T01:13:58.652Z"
+}

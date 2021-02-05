@@ -12,12 +12,13 @@ export const NativeButton = compose<NativeButtonType>({
   tokens: [{}, nativeButtonName],
   slotProps: {
     root: buildProps(
-      (tokens) => ({
+      (tokens, theme) => ({
         style: {
           height: 35,
           width: 200,
           margin: 10,
         },
+        accentColor: theme.colors.accentButtonBackground,
         ...tokens,
       }),
       [],
