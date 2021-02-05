@@ -5,7 +5,7 @@ import { ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { IViewWin32Props } from '@office-iss/react-native-win32';
+import { IViewProps } from '@fluentui-react-native/adapters';
 
 export const checkboxName = 'Checkbox';
 
@@ -81,7 +81,7 @@ export interface ICheckboxTokens extends FontTokens, IForegroundColorTokens, IBa
 }
 
 export interface ICheckboxSlotProps {
-  root: React.PropsWithRef<IViewWin32Props>;
+  root: React.PropsWithRef<IViewProps>;
   checkbox: ViewProps;
   checkmark: ITextProps;
   content: ITextProps;

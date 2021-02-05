@@ -5,7 +5,7 @@ import { ITextProps } from '@fluentui-react-native/text';
 import { IPressableProps } from '@fluentui-react-native/pressable';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
-import { IViewWin32Props } from '@office-iss/react-native-win32';
+import { IViewProps } from '@fluentui-react-native/adapters';
 
 export const buttonName = 'Button';
 
@@ -108,7 +108,7 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
 }
 
 export interface IButtonSlotProps {
-  root: React.PropsWithRef<IViewWin32Props>;
+  root: React.PropsWithRef<IViewProps>;
   stack: ViewProps;
   icon: ImageProps;
   content: ITextProps;

@@ -64,12 +64,16 @@
   },
   "cSpell.words": [
     "Larrson",
+    "Pressability",
+    "Pressable",
     "TESTPAGE",
     "beachball",
+    "checkmark",
     "consts",
     "fluentui",
     "focusable",
     "macos",
-    "nuget"
+    "nuget",
+    "uifabricshared"
   ]
 }

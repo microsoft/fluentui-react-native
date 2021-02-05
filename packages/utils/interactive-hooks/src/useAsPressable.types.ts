@@ -1,4 +1,4 @@
-import { PressabilityConfig, PressabilityEventHandlers } from './Pressability/Pressability.types';
+import { PressabilityConfig, EventHandlers } from 'react-native/Libraries/Pressability/Pressability';
 
 export type IPressState = {
   pressed?: boolean;
@@ -20,7 +20,7 @@ export type IPressableOptions = PressabilityConfig & {
 
 export type IWithPressableOptions<T extends object> = T & IPressableOptions;
 
-export type IWithPressableEvents<T extends object> = T & PressabilityEventHandlers;
+export type IWithPressableEvents<T extends object> = T & EventHandlers;
 
 export type IPressableHooks<T extends object> = {
   props: IWithPressableEvents<T>;

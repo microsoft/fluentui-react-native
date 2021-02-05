@@ -1,5 +1,5 @@
 import { FocusTrapZone, IFocusTrapZoneProps, Text } from '@fluentui/react-native';
-import { KeyPressEvent, useFocusState } from '@fluentui-react-native/interactive-hooks';
+import { useFocusState, useKeyCallback } from '@fluentui-react-native/interactive-hooks';
 import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { TouchableHighlight, TouchableHighlightProps, View, ViewProps } from 'react-native';
@@ -66,8 +66,8 @@ const basicFocusTrapZone: React.FunctionComponent<{}> = () => {
 
   const ftzRef = React.useRef<View>(null);
 
-  const onKeyDown = React.useCallback(
-    (ev: KeyPressEvent) => {
+  const onKeyDown = useKeyCallback(
+    (ev) => {
       if (ev.nativeEvent.key === 'Enter') {
         setState({ ...state, useTrapZone: !state.useTrapZone });
       } else if (ev.nativeEvent.key === ' ') {
@@ -76,7 +76,9 @@ const basicFocusTrapZone: React.FunctionComponent<{}> = () => {
         ftzRef.current!.focus();
       }
     },
-    [state, setState]
+    'Enter',
+    ' ',
+    'f',
   );
 
   const onTwiddleExternalFocusing = React.useCallback(() => {
