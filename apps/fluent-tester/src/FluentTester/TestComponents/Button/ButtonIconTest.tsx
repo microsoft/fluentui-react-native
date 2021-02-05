@@ -8,7 +8,7 @@ import { SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
 
 import * as testImage from './icon_24x24.png';
 import TestSvg from './test.svg';
-const testTtf = require('./Font Awesome 5 Free-Solid-900.otf');
+import * as testTtf from './Font Awesome 5 Free-Solid-900.otf';
 
 const fontProps: FontIconProps = {
   fontFamily: `Font Awesome 5 Free`,
