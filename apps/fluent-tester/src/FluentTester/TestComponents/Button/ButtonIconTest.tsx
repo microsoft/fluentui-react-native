@@ -6,7 +6,7 @@ import { stackStyle } from '../Common/styles';
 
 import { SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
 
-const testImage = require('./icon_24x24.png');
+import * as testImage from './icon_24x24.png';
 import TestSvg from './test.svg';
 const testTtf = require('./Font Awesome 5 Free-Solid-900.otf');
 
