@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fixed a typo",
-  "packageName": "@fluentui-react-native/win32-theme",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-02-04T01:15:50.676Z"
-}

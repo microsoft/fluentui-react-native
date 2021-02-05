@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Added an Apple Theme",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-02-04T01:13:12.774Z"
-}

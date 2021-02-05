@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 13 Jan 2021 20:04:26 GMT and should not be manually modified.
+This log was last generated on Fri, 05 Feb 2021 08:02:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.0
+
+Fri, 05 Feb 2021 08:02:13 GMT
+
+### Minor changes
+
+- Added an Apple Theme (saadnajmi2@gmail.com)
 
 ## 0.14.0
 

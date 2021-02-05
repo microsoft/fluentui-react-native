@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Added an auto type for appearance",
-  "packageName": "@fluentui-react-native/theme-types",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-02-04T01:15:34.125Z"
-}
