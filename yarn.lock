@@ -2695,6 +2695,14 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/react@^16.13.1":
+  version "16.14.3"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.14.3.tgz#f5210f5deecf35d8794845549c93c2c3ad63aa9c"
+  integrity sha512-zPrXn03hmPYqh9DznqSFQsoRtrQ4aHgnZDO+hMGvsE/PORvDTdJCHQ6XvJV31ic+0LzF73huPFXUb++W6Kri0Q==
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^3.0.2"
+
 "@types/react@^16.9.0":
   version "16.9.36"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.36.tgz#ade589ff51e2a903e34ee4669e05dbfa0c1ce849"
@@ -6277,6 +6285,11 @@ csstype@^2.2.0:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.10.tgz#e63af50e66d7c266edb6b32909cfd0aabe03928b"
   integrity sha512-D34BqZU4cIlMCY93rZHbrq9pjTAQJ3U8S8rfBqjwHxkGPThWFjzZDQpgMJY0QViLxth6ZKYiwFBo14RdN44U/w==
+
+csstype@^3.0.2:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.6.tgz#865d0b5833d7d8d40f4e5b8a6d76aea3de4725ef"
+  integrity sha512-+ZAmfyWMT7TiIlzdqJgjMb7S4f1beorDbWbsocyK4RaiqA5RTX3K14bnBWmmA9QEM0gRdsjyyrEmcyga8Zsxmw==
 
 cyclist@^1.0.1:
   version "1.0.1"
@@ -13977,9 +13990,9 @@ react-native-svg@^11.0.0:
     css-tree "^1.0.0-alpha.39"
 
 react-native-test-app@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.3.2.tgz#8f567f139cc3c8ea0671fa8f5182ef54f051f823"
-  integrity sha512-xfWtA+qEZxV2Md6cULUTboRrhN9FKy/D3QTmxXUPul2PR+HAxlaMtFqU4BDhP8iS+CC2H/wEYFlQH1qbEOLq6Q==
+  version "0.3.13"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.3.13.tgz#ec4cd2d35110b4dbb079b4df91fb8127af359bb6"
+  integrity sha512-b+QoP3Wt+2XKvwQx1l6OqF17KhBQOvFoj+WVGNzFs+gVDumNUInFdzjKXo4G3ZTXJqTmGoBKYRpIuWEKoNJK9Q==
   dependencies:
     "@react-native-community/cli" "^4.10.0"
     "@react-native-community/cli-platform-android" "^4.10.0"

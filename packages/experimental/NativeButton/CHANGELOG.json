@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-native-button",
   "entries": [
     {
+      "date": "Fri, 05 Feb 2021 08:02:13 GMT",
+      "tag": "@fluentui-react-native/experimental-native-button_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Mapped the theme token for accent color",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "bea2f01718bfab795b09d18fb8372d23c25a830b",
+            "package": "@fluentui-react-native/experimental-native-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 13 Jan 2021 20:04:26 GMT",
       "tag": "@fluentui-react-native/experimental-native-button_v0.2.0",
       "version": "0.2.0",
