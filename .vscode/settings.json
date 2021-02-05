@@ -63,17 +63,21 @@
     "editor.formatOnSave": false
   },
   "cSpell.words": [
-    "Larrson",
-    "Pressability",
-    "Pressable",
-    "TESTPAGE",
     "beachball",
     "checkmark",
     "consts",
     "fluentui",
     "focusable",
+    "Larrson",
     "macos",
+    "monospace",
     "nuget",
-    "uifabricshared"
+    "Pressability",
+    "Pressable",
+    "Semibold",
+    "Subheadline",
+    "TESTPAGE",
+    "uifabricshared",
+    "unemphasized"
   ]
 }

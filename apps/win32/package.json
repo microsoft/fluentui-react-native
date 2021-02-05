@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester-win32",
-  "version": "0.7.13",
+  "version": "0.7.14",
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
@@ -27,7 +27,7 @@
     "generate-report": "allure generate allure-results --clean && allure open"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.14.0",
+    "@fluentui-react-native/tester": "^0.15.0",
     "@office-iss/react-native-win32": "0.63.5",
     "@office-iss/rex-win32": "0.62.21-devmain.13802.10000",
     "react": "^16.13.1",
