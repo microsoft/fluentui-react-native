@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { Button } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
@@ -6,9 +7,9 @@ import { stackStyle } from '../Common/styles';
 
 import { SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
 
-import * as testImage from './icon_24x24.png';
+const testImage = require('./icon_24x24.png');
 import TestSvg from './test.svg';
-import * as testTtf from './Font Awesome 5 Free-Solid-900.otf';
+const testTtf = require('./Font Awesome 5 Free-Solid-900.otf');
 
 const fontProps: FontIconProps = {
   fontFamily: `Font Awesome 5 Free`,
