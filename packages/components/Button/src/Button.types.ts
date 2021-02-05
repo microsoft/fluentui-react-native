@@ -94,7 +94,7 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
   /*
    * Source URL or name of the icon to show on the Button.
    */
-  icon?: number | string |IconProps;
+  icon?: number | string | IconProps;
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
@@ -111,7 +111,7 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
 export interface IButtonSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
   stack: ViewProps;
-  icon: string | number | IconProps;
+  icon: IconProps;
   content: ITextProps;
 }
 
