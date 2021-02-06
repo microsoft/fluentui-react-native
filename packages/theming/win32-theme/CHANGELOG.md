@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
+This log was last generated on Fri, 05 Feb 2021 08:02:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.2
+
+Fri, 05 Feb 2021 08:02:13 GMT
+
+### Patches
+
+- fixed a typo (saadnajmi2@gmail.com)
 
 ## 0.5.0
 
