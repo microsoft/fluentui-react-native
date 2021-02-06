@@ -38,6 +38,8 @@ export interface IButtonState {
   info: IButtonInfo;
 }
 
+type IconSourcesType = number | string | IconProps;
+
 export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
   /**
    * The amount of padding between the border and the contents.
@@ -82,7 +84,7 @@ export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBack
   /**
    * Source URL or name of the icon to show on the Button.
    */
-  icon?: number | string | IconProps;
+  icon?: IconSourcesType;
 }
 
 export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
@@ -94,7 +96,7 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
   /*
    * Source URL or name of the icon to show on the Button.
    */
-  icon?: number | string | IconProps;
+  icon?: IconSourcesType;
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
