@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { KeyPressEvent } from 'react-native/Libraries/Components/TextInput/TextInput';
+import { KeyPressEvent } from './Pressability/CoreEventTypes';
 
 export type KeyUpCallback = (args?: KeyPressEvent) => void;
 

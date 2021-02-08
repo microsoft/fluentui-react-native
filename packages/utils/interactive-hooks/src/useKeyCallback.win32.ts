@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { KeyPressEvent } from 'react-native/Libraries/Components/TextInput/TextInput';
+import { KeyPressEvent } from './Pressability/CoreEventTypes';
 
 export type KeyUpCallback = (args?: KeyPressEvent) => void;
 
