@@ -35,7 +35,7 @@ export const ToggleButton = compose<ToggleButtonType>({
 
     // now return the handler for finishing render
     return (final: ToggleButtonProps, ...children: React.ReactNode[]) => {
-      const mergedProps = mergeProps(button.props, final);
+      const mergedProps = mergeProps<ToggleButtonProps>(button.props, final);
 
       return (
         <Slots.root {...mergedProps}>

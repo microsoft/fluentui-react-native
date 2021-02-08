@@ -29,7 +29,7 @@ export const CompoundButton = compose<CompoundButtonType>({
 
     // now return the handler for finishing render
     return (final: CompoundButtonProps, ...children: React.ReactNode[]) => {
-      const { icon, content, secondaryContent, ...mergedProps } = mergeProps(button.props, final);
+      const { icon, content, secondaryContent, ...mergedProps } = mergeProps<CompoundButtonProps>(button.props, final);
 
       return (
         <Slots.root {...mergedProps}>
