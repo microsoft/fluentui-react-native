@@ -65,10 +65,10 @@
     "webdriverio": "5.22.4"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.62.6",
+    "@office-iss/react-native-win32": ">=0.62.6",
     "react": "^16.13.1",
-    "react-native": "^0.63.4",
-    "react-native-windows": "^0.63.0"
+    "react-native": ">=0.63.4",
+    "react-native-windows": ">=0.62.1"
   },
   "jest": {
     "preset": "react-native"

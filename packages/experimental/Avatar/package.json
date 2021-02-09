@@ -33,7 +33,7 @@
     "@uifabricshared/eslint-config-rules": "^0.1.1"
   },
   "peerDependencies": {
-    "react-native": "^0.62.2",
+    "react-native": ">=0.62.2",
     "react": "^16.11.0"
   }
 }
