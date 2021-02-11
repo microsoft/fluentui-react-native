@@ -2,8 +2,7 @@ import Foundation
 
 @objc(MSFAppleThemeModule)
 class AppleThemeModule: NSObject {
-	
-	
+
 	func fontFamilies() -> [AnyHashable : Any] {
 		return [
 			"primary" : NSFont.systemFont(ofSize: 0).familyName!,
@@ -31,7 +30,7 @@ class AppleThemeModule: NSObject {
 				"heroLarge" : NSFont.preferredFont(forTextStyle: .largeTitle, options: [:]).pointSize
 			]
 		} else {
-			// Fallback on earlier versions
+			// Fallback on earlier versions of macOS
 			return [
 				"caption" : 10,
 				"secondary" : 11,
@@ -44,18 +43,19 @@ class AppleThemeModule: NSObject {
 		}
 	}
 	
-	func fontWeights() -> [AnyHashable : Any] {
-		// Will probably need to hardcode these
+	func fontWeights() -> [NSFont.Weight : Any] {
+		/// Assume that the 9 values of Apples NSFont.Weight ramp map to the W3C font-weight ramp in the css-fonts spec
+		/// https://www.w3.org/TR/css-fonts-4/#font-weight-prop
 		return [
-			"ultralight" : "100",
-			"thin" : "200",
-			"light" : "300",
-			"regular" : "400",
-			"medium" : "500",
-			"semiBold" : "600",
-			"bold" : "700",
-			"heavy" : "800",
-			"black" : "900",
+			.ultraLight : "100",
+			.thin : "200",
+			.light : "300",
+			.regular : "400",
+			.medium : "500",
+			.semibold : "600",
+			.bold : "700",
+			.heavy : "800",
+			.black : "900",
 		]
 	}
 	
@@ -67,82 +67,83 @@ class AppleThemeModule: NSObject {
 			"captionStandard": [
 				"face" : families["primary"],
 				"size" : sizes["caption"],
-				"weight" : weights["medium"],
+				"weight" : weights[.medium],
 			],
 			"secondaryStandard": [
 				"face" : families["primary"],
 				"size" : sizes["secondary"],
-				"weight" : weights["regular"],
+				"weight" : weights[.regular],
 			],
 			"secondarySemibold": [
 				"face" : families["primary"],
 				"size" : sizes["secondary"],
-				"weight" : weights["semiBold"],
+				"weight" : weights[.semibold],
 			],
 			"bodyStandard": [
 				"face" : families["primary"],
 				"size" : sizes["body"],
-				"weight" : weights["regular"],
+				"weight" : weights[.regular],
 			],
 			"bodySemibold": [
 				"face" : families["primary"],
 				"size" : sizes["body"],
-				"weight" : weights["semiBold"],
+				"weight" : weights[.semibold],
 			],
 			"subheaderStandard": [
 				"face" : families["primary"],
 				"size" : sizes["subheader"],
-				"weight" : weights["regular"],
+				"weight" : weights[.regular],
 			],
 			"subheaderSemibold": [
 				"face" : families["primary"],
 				"size" : sizes["subheader"],
-				"weight" : weights["semiBold"],
+				"weight" : weights[.semibold],
 			],
 			"headerStandard": [
 				"face" : families["primary"],
 				"size" : sizes["header"],
-				"weight" : weights["bold"],
+				"weight" : weights[.bold],
 			],
 			"headerSemibold": [
 				"face" : families["primary"],
 				"size" : sizes["header"],
-				"weight" : weights["heavy"],
+				"weight" : weights[.heavy],
 			],
 			"heroStandard": [
 				"face" : families["primary"],
 				"size" : sizes["hero"],
-				"weight" : weights["regular"],
+				"weight" : weights[.regular],
 			],
 			"heroSemibold": [
 				"face" : families["primary"],
 				"size" : sizes["hero"],
-				"weight" : weights["bold"],
+				"weight" : weights[.bold],
 			],
 			"heroLargeStandard": [
 				"face" : families["primary"],
 				"size" : sizes["heroLarge"],
-				"weight" : weights["regular"],
+				"weight" : weights[.regular],
 			],
 			"heroLargeSemibold": [
 				"face" : families["primary"],
 				"size" : sizes["heroLarge"],
-				"weight" : weights["bold"],
+				"weight" : weights[.bold],
 			],
 		]
 	}
 	
-	func constantsToExport() -> [AnyHashable : Any]! {
+	@objc func constantsToExport() -> [String : Any]! {
 		return [
-			"typography" : [
+			"macosTypography" : [
 				"sizes" : fontSizes(),
 				"weights" : fontWeights(),
-				"families" : fontFamilies()
-			]
+				"families" : fontFamilies(),
+				"variants" : fontVariants()
+			],
 		]
 	}
 	
-	class func requiresMainQueueSetup() -> Bool {
+	@objc class func requiresMainQueueSetup() -> Bool {
 		return true
 	}
 }
