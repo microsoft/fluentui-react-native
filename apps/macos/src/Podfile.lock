@@ -9,20 +9,20 @@ PODS:
     - React-Core (= 0.63.1)
     - React-jsi (= 0.63.1)
     - ReactCommon/turbomodule/core (= 0.63.1)
-  - FluentUI-React-Native-Avatar (0.4.0):
-    - MicrosoftFluentUI/AvatarView_mac (~> 0.1.16)
-    - MicrosoftFluentUI/Controls_ios (~> 0.1.16)
+  - FluentUI-React-Native-Avatar (0.4.1):
+    - MicrosoftFluentUI/AvatarView_mac (~> 0.1.28)
+    - MicrosoftFluentUI/Controls_ios (~> 0.1.28)
     - React
-  - FluentUI-React-Native-Button (0.2.0):
-    - MicrosoftFluentUI/Button_mac (~> 0.1.25)
-    - MicrosoftFluentUI/Controls_ios (~> 0.1.25)
+  - FluentUI-React-Native-Button (0.2.1):
+    - MicrosoftFluentUI/Button_mac (~> 0.1.28)
+    - MicrosoftFluentUI/Controls_ios (~> 0.1.28)
     - React
   - glog (0.3.5)
-  - MicrosoftFluentUI/AvatarView_mac (0.1.25):
+  - MicrosoftFluentUI/AvatarView_mac (0.1.28):
     - MicrosoftFluentUI/Core_mac
-  - MicrosoftFluentUI/Button_mac (0.1.25):
+  - MicrosoftFluentUI/Button_mac (0.1.28):
     - MicrosoftFluentUI/Core_mac
-  - MicrosoftFluentUI/Core_mac (0.1.25)
+  - MicrosoftFluentUI/Core_mac (0.1.28)
   - RCT-Folly (2020.01.13.00):
     - boost-for-react-native
     - DoubleConversion
@@ -258,7 +258,7 @@ PODS:
     - React-Core (= 0.63.1)
     - React-cxxreact (= 0.63.1)
     - React-jsi (= 0.63.1)
-  - ReactTestApp-DevSupport (0.3.2)
+  - ReactTestApp-DevSupport (0.3.13)
   - ReactTestApp-Resources (1.0.0-dev)
   - SwiftLint (0.42.0)
   - Yoga (1.14.0)
@@ -373,10 +373,10 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 87ca368919ae0ec70816fb8a42252ef59dc05c94
   FBReactNativeSpec: 7c0591658d85effad209fc4f45b6c9760f9e5842
-  FluentUI-React-Native-Avatar: 5fc002da29cbaefa24ae5ada44fa73033b0e77bc
-  FluentUI-React-Native-Button: b950f1e02f37a6c764f8cf9ce9e12c5f5f844746
+  FluentUI-React-Native-Avatar: 9804dde24e78b83149452568f5928a754d174a94
+  FluentUI-React-Native-Button: 96692ca721233577a491e824b5a11bf64faa3c1f
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
-  MicrosoftFluentUI: 9fc0e7af0b061c6a0d0bd1b674b93657cd6db5e1
+  MicrosoftFluentUI: 2dfff618a4fed9d1539a568449323da2bedcccae
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
   RCTRequired: f0ba811ba36bbe463b0151cbda362853106c13ac
   RCTTypeSafety: 10f774586f2956b7cf547cc97f2261eb22ee2a25
@@ -398,7 +398,7 @@ SPEC CHECKSUMS:
   React-RCTText: fa6a04a850612aab9a26044c21cd468d305acfbf
   React-RCTVibration: 76c90b5321d7a29beac4167f570f61752e886ff9
   ReactCommon: 2b36aa7cd56bc9a0376b013db964e8b17a6a18f9
-  ReactTestApp-DevSupport: fac724ea8817d3874faf6c70a7cb65e383bbf2db
+  ReactTestApp-DevSupport: 12d9f285a44ff0cb7962a213621f87d3e6de9288
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
   Yoga: 6f6f412e10cf9acb93bb0e290613784603d2f0c9
