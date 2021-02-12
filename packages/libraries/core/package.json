@@ -1,6 +1,6 @@
 {
   "name": "@fluentui/react-native",
-  "version": "0.21.10",
+  "version": "0.21.11",
   "description": "A react-native component library that implements the Fluent Design System.",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -38,7 +38,7 @@
     "@fluentui-react-native/pressable": ">=0.5.0 <1.0.0",
     "@fluentui-react-native/radio-group": ">=0.8.4 <1.0.0",
     "@fluentui-react-native/separator": ">=0.8.1 <1.0.0",
-    "@fluentui-react-native/shimmer": ">=0.4.1 <1.0.0",
+    "@fluentui-react-native/shimmer": ">=0.4.2 <1.0.0",
     "@fluentui-react-native/text": ">=0.8.1 <1.0.0"
   },
   "devDependencies": {
