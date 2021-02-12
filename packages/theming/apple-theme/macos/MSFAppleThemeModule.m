@@ -2,19 +2,18 @@
 
 @interface RCT_EXTERN_MODULE(MSFAppleThemeModule, NSObject)
 
-RCT_EXTERN_METHOD(multiply:(float)a withB:(float)b
-				 withResolver:(RCTPromiseResolveBlock)resolve
-				 withRejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXTERN_METHOD(hoverColorForColor:(NSColor)color
+				  withResolver:(RCTPromiseResolveBlock)resolve
+				  withRejecter:(RCTPromiseRejectBlock)reject)
 
-+ (BOOL)requiresMainQueueSetup
-{
-	return YES;
-}
+RCT_EXTERN_METHOD(pressedColorForColor:(NSColor)color
+				  withResolver:(RCTPromiseResolveBlock)resolve
+				  withRejecter:(RCTPromiseRejectBlock)reject)
 
-//- (NSDictionary *)constantsToExport
-//{
-// return @{ @"DEFAULT_EVENT_NAME": @"New Event" };
-//}
+RCT_EXTERN_METHOD(disabledColorForColor:(NSColor)color
+				  withResolver:(RCTPromiseResolveBlock)resolve
+				  withRejecter:(RCTPromiseRejectBlock)reject)
+
 
 
 @end

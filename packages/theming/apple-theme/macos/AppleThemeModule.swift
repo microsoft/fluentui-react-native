@@ -3,6 +3,25 @@ import Foundation
 @objc(MSFAppleThemeModule)
 class AppleThemeModule: NSObject {
 
+	// MARK: - Colors
+
+	@objc(hoverColorForColor:withResolver:withRejecter:)
+	func hoverColor(for color: NSColor, resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
+		resolve(color.withSystemEffect(.rollover))
+	}
+	
+	@objc(pressedColorForColor:withResolver:withRejecter:)
+	func pressedColor(for color: NSColor, resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
+		resolve(color.withSystemEffect(.pressed))
+	}
+	
+	@objc(disabledColorForColor:withResolver:withRejecter:)
+	func disabledColor(for color: NSColor, resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
+		resolve(color.withSystemEffect(.disabled))
+	}
+	
+	// MARK: - Typography
+	
 	func fontFamilies() -> [AnyHashable : Any] {
 		return [
 			"primary" : NSFont.systemFont(ofSize: 0).familyName!,
