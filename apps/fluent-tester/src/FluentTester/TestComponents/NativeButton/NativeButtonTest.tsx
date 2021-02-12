@@ -17,7 +17,13 @@ const nativeButton: React.FunctionComponent<{}> = () => {
   });
   return (
     <Stack style={stackStyle}>
-      <NativeButton title="Primary" image={icon} buttonStyle="primary" onPress={() => alert('Primary button clicked!')} />
+      <NativeButton
+        title="Primary"
+        image={icon}
+        buttonStyle="primary"
+        toolTip="Native Tooltip"
+        onPress={() => alert('Primary button clicked!')}
+      />
       <NativeButton title="Secondary" buttonStyle="secondary" image={icon} onPress={() => alert('Secondary button clicked! ')} />
       <NativeButton title="Borderless" buttonStyle="borderless" image={icon} onPress={() => alert('Borderless button clicked!')} />
       <NativeButton title="Acrylic" buttonStyle="acrylic" onPress={() => alert('Acrylic button clicked!')} />

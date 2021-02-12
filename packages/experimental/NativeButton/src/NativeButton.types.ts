@@ -24,6 +24,10 @@ export interface NativeButtonProps {
    */
   enabled?: boolean;
   /*
+   * Shows the native tooltip when hovered.
+   */
+  toolTip?: string;
+  /*
    * A callback to call on button click event
    */
   onPress?: () => void;
