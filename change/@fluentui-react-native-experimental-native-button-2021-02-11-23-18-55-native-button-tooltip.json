@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "add tooltip support for native button",
+  "packageName": "@fluentui-react-native/experimental-native-button",
+  "email": "67026167+chiuam@users.noreply.github.com",
+  "dependentChangeType": "patch",
+  "date": "2021-02-12T04:18:55.558Z"
+}
