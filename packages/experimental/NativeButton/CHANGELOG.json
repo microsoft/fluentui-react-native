@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-native-button",
   "entries": [
     {
+      "date": "Fri, 19 Feb 2021 18:36:13 GMT",
+      "tag": "@fluentui-react-native/experimental-native-button_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "add tooltip support for native button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "171b7344a318a11ffb7c04fa6ac69a485381be3b",
+            "package": "@fluentui-react-native/experimental-native-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Feb 2021 19:45:36 GMT",
       "tag": "@fluentui-react-native/experimental-native-button_v0.2.2",
       "version": "0.2.2",

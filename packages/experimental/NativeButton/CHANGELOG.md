@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-native-button
 
-This log was last generated on Fri, 12 Feb 2021 19:45:36 GMT and should not be manually modified.
+This log was last generated on Fri, 19 Feb 2021 18:36:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Fri, 19 Feb 2021 18:36:13 GMT
+
+### Minor changes
+
+- add tooltip support for native button (67026167+chiuam@users.noreply.github.com)
 
 ## 0.2.2
 
