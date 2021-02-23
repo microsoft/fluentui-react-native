@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Correct text scaled rendering of win32 checkbox with aspect ratio, alignment, and min-dimension changes",
+  "packageName": "@fluentui-react-native/checkbox",
+  "email": "ppatboyd@outlook.com",
+  "dependentChangeType": "patch",
+  "date": "2021-02-23T19:24:22.949Z"
+}
