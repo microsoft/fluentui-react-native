@@ -1,23 +1,42 @@
 import Foundation
 
+extension NSColor {
+	var hexString: String {
+		let red = Int(round(self.redComponent * 0xFF))
+		let green = Int(round(self.greenComponent * 0xFF))
+		let blue = Int(round(self.blueComponent * 0xFF))
+		let hexString = NSString(format: "#%02X%02X%02X", red, green, blue).lowercased
+		return hexString as String
+	}
+}
+
 @objc(MSFAppleThemeModule)
 class AppleThemeModule: NSObject {
 
 	// MARK: - Colors
-
-	@objc(hoverColorForColor:withResolver:withRejecter:)
-	func hoverColor(for color: NSColor, resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
-		resolve(color.withSystemEffect(.rollover))
-	}
 	
-	@objc(pressedColorForColor:withResolver:withRejecter:)
-	func pressedColor(for color: NSColor, resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
-		resolve(color.withSystemEffect(.pressed))
-	}
+	let stateToSystemEffectDictionary: [NSString : NSColor.SystemEffect] = [
+		"hover": .rollover,
+		"pressed": .pressed,
+		"disabled": .disabled
+	]
 	
-	@objc(disabledColorForColor:withResolver:withRejecter:)
-	func disabledColor(for color: NSColor, resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
-		resolve(color.withSystemEffect(.disabled))
+	@objc(colorWithEffect:effect:errorCallback:successCallback:)
+	func colorWithEffect(color: NSColor?,
+						 effect: NSString,
+						 errorCallback: RCTResponseSenderBlock,
+						 successCallback: RCTResponseSenderBlock
+	) {
+		guard color != nil else {
+			return errorCallback([RCTMakeError("Nil color passed to colorWithEffect", nil, nil)])
+		}
+		
+		if let color = color {
+//			let systemEffect = stateToSystemEffectDictionary[effect];
+//			let colorWithAppliedEffect = color.withSystemEffect(systemEffect!).usingColorSpace(.sRGB)!.hexString
+//			successCallback([colorWithAppliedEffect])
+			successCallback(["orangered"])
+		}
 	}
 	
 	// MARK: - Typography
@@ -164,5 +183,10 @@ class AppleThemeModule: NSObject {
 	
 	@objc class func requiresMainQueueSetup() -> Bool {
 		return true
+	}
+	
+	@objc func methodQueue() -> Dispatch.DispatchQueue
+	{
+		return DispatchQueue.main;
 	}
 }

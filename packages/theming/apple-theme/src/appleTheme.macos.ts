@@ -1,6 +1,5 @@
 import { Spacing, Theme } from '@fluentui-react-native/theme-types';
-import { getFluentUIApplePalette } from './fluentAppleColors.macos';
-import { getAppleSemanticPalette } from './applePlatformColors.macos';
+
 import { paletteFromAppleColors } from './appleTheme.colors.macos';
 import { appleTypography } from './appleTypography.macos';
 
@@ -31,7 +30,7 @@ export const appleComponents = {
 };
 
 export const defaultAppleThemeMacOS: Theme = {
-  colors: paletteFromAppleColors(getFluentUIApplePalette(), getAppleSemanticPalette()),
+  colors: paletteFromAppleColors(),
   typography: appleTypography(),
   spacing: appleSpacing(),
   components: appleComponents,
