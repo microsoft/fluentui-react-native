@@ -131,3 +131,16 @@ export const separatorStackStyle: IStackProps['style'] = {
   flexDirection: 'row',
   justifyContent: 'space-evenly',
 };
+
+export const mobileStyles = StyleSheet.create({
+  testListItems: {
+    width: '100%',
+    height: 'auto',
+    fontSize: 18,
+    paddingVertical: 8,
+  },
+  testListSeparator: {
+    borderColor: '#e1e1e1',
+    borderWidth: 0.1,
+  },
+});

@@ -1,12 +1,12 @@
 import { Theme } from '@fluentui-react-native/framework';
-import { StealthButton, Separator } from '@fluentui/react-native';
+import { Separator } from '@fluentui/react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
 import { ScrollView, View, BackHandler } from 'react-native';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
-import { fluentTesterStyles } from './TestComponents/Common/styles';
+import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
 
@@ -31,8 +31,9 @@ const Header: React.FunctionComponent<{}> = () => {
       <Text style={[fluentTesterStyles.testHeader]} variant="heroSemibold" color={theme.host.palette?.TextEmphasis} testID={BASE_TESTPAGE}>
         ⚛ FluentUI Tests
       </Text>
-
-      <ThemePickers />
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <ThemePickers />
+      </ScrollView>
     </View>
   );
 };
@@ -73,21 +74,25 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
         <View style={themedStyles.root}>
           <Header />
           <Separator />
-          <View style={fluentTesterStyles.testRoot}>
+          <View style={{ ...fluentTesterStyles.testRoot, marginTop: 10 }}>
             <ScrollView style={fluentTesterStyles.testList} contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
               {sortedTestComponents.map((description, index) => {
                 return (
-                  <StealthButton
-                    key={index}
-                    content={description.name}
-                    onClick={() => {
-                      setSelectedTestIndex(index);
-                      setOnMainScreen(false);
-                      BackHandler.addEventListener('hardwareBackPress', onBackPress);
-                    }}
-                    style={{ ...fluentTesterStyles.testListItem, width: '100%' }}
-                    testID={description.testPage}
-                  />
+                  <View key={index}>
+                    <Text
+                      key={index}
+                      onPress={() => {
+                        setOnMainScreen(false);
+                        setSelectedTestIndex(index);
+                        BackHandler.addEventListener('hardwareBackPress', onBackPress);
+                      }}
+                      style={mobileStyles.testListItems}
+                      testID={description.testPage}
+                    >
+                      {description.name}
+                    </Text>
+                    <Separator style={mobileStyles.testListSeparator} />
+                  </View>
                 );
               })}
             </ScrollView>
