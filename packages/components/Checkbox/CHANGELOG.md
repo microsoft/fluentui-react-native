@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Wed, 13 Jan 2021 20:04:26 GMT and should not be manually modified.
+This log was last generated on Tue, 23 Feb 2021 19:59:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.2
+
+Tue, 23 Feb 2021 19:59:26 GMT
+
+### Patches
+
+- Correct text scaled rendering of win32 checkbox with aspect ratio, alignment, and min-dimension changes (ppatboyd@outlook.com)
 
 ## 0.9.0
 
