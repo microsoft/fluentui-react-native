@@ -24,6 +24,7 @@
     "bundle": "fluentui-scripts bundle"
   },
   "dependencies": {
+    "@fluentui-react-native/android-theme": ">=0.0.1 <1.0.00",
     "@fluentui-react-native/apple-theme": ">=0.1.1 <1.0.0",
     "@fluentui-react-native/default-theme": ">=0.4.2 <1.0.0",
     "@fluentui-react-native/experimental-avatar": ">=0.4.2 <1.0.0",

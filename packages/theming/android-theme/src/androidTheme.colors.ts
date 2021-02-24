@@ -1,23 +1,23 @@
 import { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
-import { FluentUIAndroidPalette } from './fluentAndroidColors';
+import { FluentUIAndroidPalette } from './androidPalette';
 
 /** creates a palette of colors for the android theme, given the FluentUI Android Palette */
-export function paletteFromAndroidColors(p: FluentUIAndroidPalette, isInverted: boolean): ThemeColorDefinition {
+export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorDefinition {
   return {
     /* PaletteBackgroundColors & PaletteTextColors */
 
-    background: isInverted ? p.black : p.white, // Surfaces.Primary
-    bodyStandoutBackground: isInverted ? p.gray950 : p.gray25, //Surfaces.Secondary
-    bodyFrameBackground: isInverted ? p.gray900 : p.gray50, //Surfaces.Tertiary
-    bodyFrameDivider: isInverted ? p.gray700 : p.gray200, //Dividers.onSecondary
-    bodyText: isInverted ? p.gray100 : p.gray900, //Texts.Primary
+    background: p.surfacesPrimary,
+    bodyStandoutBackground: p.surfacesSecondary,
+    bodyFrameBackground: p.surfacesTertiary,
+    bodyFrameDivider: p.dividersSecondary,
+    bodyText: p.textPrimary,
     bodyTextChecked: p.gray950, //TODO
-    subText: isInverted ? p.gray400 : p.gray500, //Texts.Secondary
-    bodyDivider: isInverted ? p.gray800 : p.gray100, //Dividers.onPrimary
+    subText: p.textSecondary,
+    bodyDivider: p.dividersPrimary,
 
-    disabledBackground: isInverted ? p.gray900 : p.gray50, //Surfaces.Tertiary
-    disabledText: isInverted ? p.gray400 : p.gray500, //Texts.Disabled.HighContrast
-    disabledBodyText: isInverted ? p.gray600 : p.gray300, //Texts.Disabled.Base
+    disabledBackground: p.surfacesTertiary,
+    disabledText: p.textDisabledHighContrast,
+    disabledBodyText: p.textDisabled,
     disabledSubtext: p.gray200, //TODO
     disabledBodySubtext: p.gray300, //TODO
 
@@ -42,49 +42,49 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette, isInverted: 
     inputForegroundChecked: p.communicationBlue,
     inputFocusBorderAlt: 'transparent',
     smallInputBorder: 'transparent',
-    inputText: isInverted ? p.gray100 : p.gray900, //Texts.Primary
-    inputTextHovered: isInverted ? p.gray100 : p.gray900, //Texts.Primary
-    inputPlaceholderText: isInverted ? p.gray400 : p.gray500, //Texts.Secondary
+    inputText: p.textPrimary,
+    inputTextHovered: p.textPrimary,
+    inputPlaceholderText: p.textSecondary,
 
-    buttonBackgroundChecked: p.communicationBlueTint10,
-    buttonBackgroundHovered: p.communicationBlue,
-    buttonBackgroundCheckedHovered: p.communicationBlueTint10,
-    buttonBackgroundPressed: p.communicationBlueTint10,
-    buttonBackgroundDisabled: isInverted ? p.communicationBlue : p.gray50,
-    buttonText: isInverted ? p.black : p.white,
+    buttonBackgroundChecked: p.buttonBackground,
+    buttonBackgroundHovered: p.buttonBackground,
+    buttonBackgroundCheckedHovered: p.buttonBackground,
+    buttonBackgroundPressed: p.buttonBackgroundPressed,
+    buttonBackgroundDisabled: p.buttonBackgroundDisabled,
+    buttonText: p.textOnAccent,
     buttonTextHovered: '#ffffff', //TODO
     buttonTextChecked: '#ffffff', //TODO
     buttonTextCheckedHovered: '#ffffff', //TODO
-    buttonTextPressed: isInverted ? p.black : p.white,
-    buttonTextDisabled: isInverted ? p.communicationBlueTint20 : p.gray300,
+    buttonTextPressed: p.textOnAccent,
+    buttonTextDisabled: p.buttonTextDisabled,
     buttonBorderDisabled: 'transparent', //TODO
     buttonBorderFocused: 'transparent', //TODO
 
-    primaryButtonBackground: p.communicationBlue,
-    primaryButtonBackgroundHovered: p.communicationBlue,
-    primaryButtonBackgroundPressed: p.communicationBlueTint10,
-    primaryButtonBackgroundDisabled: isInverted ? p.communicationBlue : p.gray50,
+    primaryButtonBackground: p.buttonBackground,
+    primaryButtonBackgroundHovered: p.buttonBackground,
+    primaryButtonBackgroundPressed: p.buttonBackgroundPressed,
+    primaryButtonBackgroundDisabled: p.buttonBackgroundDisabled,
     primaryButtonBorder: 'transparent',
     primaryButtonBorderFocused: 'transparent',
-    primaryButtonText: isInverted ? p.black : p.white,
+    primaryButtonText: p.textOnAccent,
     primaryButtonTextHovered: '#ffffff', //TODO
     primaryButtonTextPressed: '#ffffff', //TODO
-    primaryButtonTextDisabled: isInverted ? p.communicationBlueTint20 : p.gray300,
+    primaryButtonTextDisabled: p.buttonTextDisabled,
 
-    accentButtonBackground: p.communicationBlueTint10,
-    accentButtonText: isInverted ? p.black : p.white,
+    accentButtonBackground: p.buttonBackground,
+    accentButtonText: p.textOnAccent,
 
-    menuBackground: isInverted ? p.gray800 : p.white,
+    menuBackground: p.menuBackground,
     menuDivider: 'transparent',
-    menuIcon: isInverted ? p.gray500 : p.gray400,
+    menuIcon: p.menuIcon,
     menuHeader: 'transparent', //TODO
     menuItemBackgroundHovered: 'transparent', //TODO
     menuItemBackgroundPressed: 'transparent', //TODO
-    menuItemText: isInverted ? p.gray100 : p.gray900,
+    menuItemText: p.menuItemText,
     menuItemTextHovered: p.gray900, //TODO
 
-    listBackground: isInverted ? p.gray950 : p.white,
-    listText: isInverted ? p.gray100 : p.gray900,
+    listBackground: p.listBackground,
+    listText: p.menuItemText,
     listItemBackgroundHovered: 'transparent', //TODO
     listItemBackgroundChecked: 'transparent', //TODO
     listItemBackgroundCheckedHovered: 'transparent', //TODO
@@ -100,35 +100,35 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette, isInverted: 
 
     /* ControlColorTokens */
 
-    buttonBackground: p.communicationBlue,
+    buttonBackground: p.buttonBackground,
     buttonBorder: 'transparent',
-    buttonContent: isInverted ? p.gray900 : p.white,
-    buttonIcon: isInverted ? p.gray500 : p.gray400,
+    buttonContent: p.textPrimary,
+    buttonIcon: p.iconsSecondary,
 
-    buttonPressedBackground: p.communicationBlueShade20,
+    buttonPressedBackground: p.buttonBackgroundPressed,
     buttonPressedBorder: 'transparent',
-    buttonPressedContent: isInverted ? p.black : p.white,
-    buttonPressedIcon: isInverted ? p.black : p.white,
+    buttonPressedContent: p.textOnAccent,
+    buttonPressedIcon: p.iconsOnAccent,
 
-    buttonDisabledBackground: isInverted ? p.communicationBlueTint10 : p.gray50,
+    buttonDisabledBackground: p.buttonBackgroundDisabled,
     buttonDisabledBorder: 'transparent',
-    buttonDisabledContent: isInverted ? p.communicationBlueTint20 : p.gray300,
-    buttonDisabledIcon: isInverted ? p.communicationBlueTint20 : p.gray300,
+    buttonDisabledContent: p.buttonTextDisabled,
+    buttonDisabledIcon: p.buttonTextDisabled,
 
     ghostBackground: 'transparent',
     ghostBorder: 'transparent',
-    ghostContent: isInverted ? p.white : p.gray900,
-    ghostIcon: isInverted ? p.white : p.gray900,
+    ghostContent: p.textDominant,
+    ghostIcon: p.textDominant,
 
     ghostHoveredBackground: 'transparent',
     ghostHoveredBorder: 'transparent',
-    ghostHoveredContent: isInverted ? p.white : p.gray900,
-    ghostHoveredIcon: isInverted ? p.white : p.gray900,
+    ghostHoveredContent: p.textDominant,
+    ghostHoveredIcon: p.textDominant,
 
     ghostFocusedBackground: 'transparent',
     ghostFocusedBorder: 'transparent',
-    ghostFocusedContent: isInverted ? p.white : p.gray900,
-    ghostFocusedIcon: isInverted ? p.white : p.gray900,
+    ghostFocusedContent: p.textDominant,
+    ghostFocusedIcon: p.textDominant,
 
     ghostPressedBackground: 'transparent',
     ghostPressedBorder: 'transparent',
@@ -137,43 +137,43 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette, isInverted: 
 
     ghostDisabledBackground: 'transparent',
     ghostDisabledBorder: 'transparent',
-    ghostDisabledContent: isInverted ? p.gray600 : p.gray300,
-    ghostDisabledIcon: isInverted ? p.gray600 : p.gray300,
+    ghostDisabledContent: p.iconsDisabled,
+    ghostDisabledIcon: p.iconsDisabled,
 
     brandBackground: p.communicationBlue,
     brandBorder: 'transparent',
-    brandContent: isInverted ? p.white : p.gray900,
-    brandIcon: isInverted ? p.white : p.gray900,
+    brandContent: p.textDominant,
+    brandIcon: p.textDominant,
 
     brandHoveredBackground: p.communicationBlue,
     brandHoveredBorder: 'transparent',
-    brandHoveredContent: isInverted ? p.white : p.gray900,
-    brandHoveredIcon: isInverted ? p.white : p.gray900,
+    brandHoveredContent: p.textDominant,
+    brandHoveredIcon: p.textDominant,
 
     brandFocusedBackground: p.communicationBlue,
     brandFocusedBorder: 'transparent',
-    brandFocusedContent: isInverted ? p.white : p.gray900,
-    brandFocusedIcon: isInverted ? p.white : p.gray900,
+    brandFocusedContent: p.textDominant,
+    brandFocusedIcon: p.textDominant,
 
     brandPressedBackground: p.communicationBlueTint10,
     brandPressedBorder: 'transparent',
-    brandPressedContent: isInverted ? p.white : p.gray900,
-    brandPressedIcon: isInverted ? p.white : p.gray900,
+    brandPressedContent: p.textDominant,
+    brandPressedIcon: p.textDominant,
 
     brandDisabledBackground: p.gray100,
     brandDisabledBorder: 'transparent',
-    brandDisabledContent: isInverted ? p.gray600 : p.gray300,
-    brandDisabledIcon: isInverted ? p.gray600 : p.gray300,
+    brandDisabledContent: p.textDisabled,
+    brandDisabledIcon: p.textDisabled,
 
     buttonCheckedBackground: p.communicationBlueTint10,
-    buttonCheckedContent: isInverted ? p.white : p.gray900,
+    buttonCheckedContent: p.textDominant,
     buttonCheckedHoveredBackground: p.communicationBlueTint10,
-    buttonCheckedHoveredContent: isInverted ? p.white : p.gray900,
+    buttonCheckedHoveredContent: p.textDominant,
 
     brandCheckedBackground: p.communicationBlueTint10,
-    brandCheckedContent: isInverted ? p.white : p.gray900,
+    brandCheckedContent: p.textDominant,
     brandCheckedHoveredBackground: p.communicationBlueTint10,
-    brandCheckedHoveredContent: isInverted ? p.white : p.gray900,
+    brandCheckedHoveredContent: p.textDominant,
 
     ghostCheckedBackground: 'transparent',
     ghostCheckedContent: p.communicationBlueTint20,
@@ -181,18 +181,18 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette, isInverted: 
     ghostCheckedHoveredContent: p.communicationBlueTint20,
     ghostCheckedHoveredBorder: 'transparent',
 
-    ghostSecondaryContent: isInverted ? p.gray400 : p.gray500,
-    ghostFocusedSecondaryContent: isInverted ? p.gray400 : p.gray500,
-    ghostHoveredSecondaryContent: isInverted ? p.gray400 : p.gray500,
-    ghostPressedSecondaryContent: isInverted ? p.gray400 : p.gray500,
+    ghostSecondaryContent: p.iconsSecondary,
+    ghostFocusedSecondaryContent: p.iconsSecondary,
+    ghostHoveredSecondaryContent: p.iconsSecondary,
+    ghostPressedSecondaryContent: p.iconsSecondary,
 
-    brandSecondaryContent: isInverted ? p.gray400 : p.gray500,
-    brandFocusedSecondaryContent: isInverted ? p.gray400 : p.gray500,
-    brandHoveredSecondaryContent: isInverted ? p.gray400 : p.gray500,
-    brandPressedSecondaryContent: isInverted ? p.gray400 : p.gray500,
+    brandSecondaryContent: p.iconsSecondary,
+    brandFocusedSecondaryContent: p.iconsSecondary,
+    brandHoveredSecondaryContent: p.iconsSecondary,
+    brandPressedSecondaryContent: p.iconsSecondary,
 
-    buttonDisabledSecondaryContent: isInverted ? p.gray600 : p.gray300,
-    buttonHoveredSecondaryContent: isInverted ? p.gray400 : p.gray500,
-    buttonPressedSecondaryContent: isInverted ? p.gray400 : p.gray500,
+    buttonDisabledSecondaryContent: p.textSecondary,
+    buttonHoveredSecondaryContent: p.iconsSecondary,
+    buttonPressedSecondaryContent: p.iconsSecondary,
   };
 }

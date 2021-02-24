@@ -3,13 +3,13 @@ import { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@flu
 export function androidTypography(): Typography {
   const androidDict = {
     sizes: {
-      caption: 12 as FontSize, // Caption
-      secondary: 11 as FontSize, // Callout
-      body: 13 as FontSize, // Body
-      subheader: 16 as FontSize, // Subheading 2
-      header: 20 as FontSize, // Headline
-      hero: 22 as FontSize, /// Title 1
-      heroLarge: 26 as FontSize, // Large Title,
+      caption: 12 as FontSize,
+      secondary: 11 as FontSize,
+      body: 13 as FontSize,
+      subheader: 16 as FontSize,
+      header: 20 as FontSize,
+      hero: 22 as FontSize,
+      heroLarge: 26 as FontSize,
     } as FontSizes,
     weights: {
       ultralight: '100' as FontWeightValue,
