@@ -21,7 +21,6 @@ export const settings: IComposeSettings<IButtonType> = [
         alignItems: 'flex-start',
         flexDirection: 'row',
         alignSelf: 'flex-start',
-        margin: 8,
       },
     } as ViewProps,
     content: {

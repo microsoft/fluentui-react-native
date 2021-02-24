@@ -16,7 +16,7 @@ export const NativeButton = compose<NativeButtonType>({
         style: {
           height: 35,
           width: 200,
-          margin: 10,
+          margin: 8,
         },
         accentColor: theme.colors.accentButtonBackground,
         ...tokens,

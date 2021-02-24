@@ -2,11 +2,7 @@ import { Spacing, Theme } from '@fluentui-react-native/theme-types';
 import { NativeModules } from 'react-native';
 
 const { MSFAppleThemeModule } = NativeModules;
-
 const { macosTypography, macosPalette } = MSFAppleThemeModule.getConstants();
-console.log(MSFAppleThemeModule.getConstants());
-console.log('Saad typography = ' + macosTypography.families.primary);
-console.log('Saad palette = ' + macosPalette.background);
 
 export function appleSpacing(): Spacing {
   return {
@@ -29,6 +25,11 @@ export const appleComponents = {
     content: {
       style: {
         marginStart: 10, //spacing between icon and content
+      },
+    },
+    root: {
+      style: {
+        margin: 8,
       },
     },
   },
