@@ -10,6 +10,7 @@ PODS:
     - React-jsi (= 0.63.1)
     - ReactCommon/turbomodule/core (= 0.63.1)
   - FluentUI-React-Native-Apple-Theme (0.1.1):
+    - MicrosoftFluentUI (~> 0.1.28)
     - React
   - FluentUI-React-Native-Avatar (0.4.2):
     - MicrosoftFluentUI/AvatarView_mac (~> 0.1.28)
@@ -20,11 +21,39 @@ PODS:
     - MicrosoftFluentUI/Controls_ios (~> 0.1.28)
     - React
   - glog (0.3.5)
+  - MicrosoftFluentUI (0.1.28):
+    - MicrosoftFluentUI/AvatarView_mac (= 0.1.28)
+    - MicrosoftFluentUI/Button_mac (= 0.1.28)
+    - MicrosoftFluentUI/Calendar_ios (= 0.1.28)
+    - MicrosoftFluentUI/Card_ios (= 0.1.28)
+    - MicrosoftFluentUI/CommandBar_ios (= 0.1.28)
+    - MicrosoftFluentUI/Controls_ios (= 0.1.28)
+    - MicrosoftFluentUI/Core_ios (= 0.1.28)
+    - MicrosoftFluentUI/Core_mac (= 0.1.28)
+    - MicrosoftFluentUI/DatePicker_mac (= 0.1.28)
+    - MicrosoftFluentUI/Drawer_ios (= 0.1.28)
+    - MicrosoftFluentUI/HUD_ios (= 0.1.28)
+    - MicrosoftFluentUI/Link_mac (= 0.1.28)
+    - MicrosoftFluentUI/Notification_ios (= 0.1.28)
+    - MicrosoftFluentUI/PillButtonBar_ios (= 0.1.28)
+    - MicrosoftFluentUI/PopupMenu_ios (= 0.1.28)
+    - MicrosoftFluentUI/Presenters_ios (= 0.1.28)
+    - MicrosoftFluentUI/Separator_mac (= 0.1.28)
+    - MicrosoftFluentUI/Shimmer_ios (= 0.1.28)
+    - MicrosoftFluentUI/TabBar_ios (= 0.1.28)
+    - MicrosoftFluentUI/Tooltip_ios (= 0.1.28)
+    - MicrosoftFluentUI/Utilities_ios (= 0.1.28)
   - MicrosoftFluentUI/AvatarView_mac (0.1.28):
     - MicrosoftFluentUI/Core_mac
   - MicrosoftFluentUI/Button_mac (0.1.28):
     - MicrosoftFluentUI/Core_mac
   - MicrosoftFluentUI/Core_mac (0.1.28)
+  - MicrosoftFluentUI/DatePicker_mac (0.1.28):
+    - MicrosoftFluentUI/Core_mac
+  - MicrosoftFluentUI/Link_mac (0.1.28):
+    - MicrosoftFluentUI/Core_mac
+  - MicrosoftFluentUI/Separator_mac (0.1.28):
+    - MicrosoftFluentUI/Core_mac
   - RCT-Folly (2020.01.13.00):
     - boost-for-react-native
     - DoubleConversion
@@ -378,7 +407,7 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 87ca368919ae0ec70816fb8a42252ef59dc05c94
   FBReactNativeSpec: 7c0591658d85effad209fc4f45b6c9760f9e5842
-  FluentUI-React-Native-Apple-Theme: 7e58a850555739024e2ac1c09ebb1657cd0eedcc
+  FluentUI-React-Native-Apple-Theme: d05c13f08eb78c2ee8c311e91c240bcbaa603f8f
   FluentUI-React-Native-Avatar: 8efbdb32205a4fb7c667005082e254403ac84a56
   FluentUI-React-Native-Button: 43e6518f08916218875ab9e006a02154d0eb1300
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1

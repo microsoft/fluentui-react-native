@@ -9,8 +9,9 @@ import { NativeModules } from 'react-native';
 
 const { MSFAppleThemeModule } = NativeModules;
 
-const { macosTypography, name } = MSFAppleThemeModule.getConstants();
-console.warn('Look at:  ' + name, 'and: ' + macosTypography.families.primary);
+const { macosTypography, macosPalette } = MSFAppleThemeModule.getConstants();
+console.warn('Look at: ' + macosTypography.families.primary);
+console.warn('SAAD background: ' + String(macosPalette));
 
 export function appleTypography(): Typography {
   return macosTypography;

@@ -17,6 +17,7 @@ function colorWithEffect(color: ColorValue, effect: string): ColorValue {
       return colorWithAppliedEffect;
     },
   );
+  console.log('Do we ever get here?');
 }
 
 /** creates a palette of colors for the apple theme, given the FluentUI Apple Palette and Apple Semantic Palette */
@@ -24,8 +25,9 @@ export function paletteFromAppleColors(): ThemeColorDefinition {
   const fluentUIApple = getFluentUIApplePalette();
   const applePlatform = getAppleSemanticPalette();
 
-  const pressedBlue: ColorValue = colorWithEffect('blue', 'pressed');
-  console.warn('Pressed Blue: ' + pressedBlue);
+  // const pressedBlue: ColorValue = colorWithEffect('blue', 'pressed');
+  // await MSFAppleThemeModule.nothing();
+  // console.warn('Pressed Blue: ' + pressedBlue);
 
   return {
     /* PaletteBackgroundColors & PaletteTextColors */

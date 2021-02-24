@@ -1,7 +1,12 @@
 import { Spacing, Theme } from '@fluentui-react-native/theme-types';
+import { NativeModules } from 'react-native';
 
-import { paletteFromAppleColors } from './appleTheme.colors.macos';
-import { appleTypography } from './appleTypography.macos';
+const { MSFAppleThemeModule } = NativeModules;
+
+const { macosTypography, macosPalette } = MSFAppleThemeModule.getConstants();
+console.log(MSFAppleThemeModule.getConstants());
+console.log('Saad typography = ' + macosTypography.families.primary);
+console.log('Saad palette = ' + macosPalette.background);
 
 export function appleSpacing(): Spacing {
   return {
@@ -21,6 +26,11 @@ export const appleComponents = {
       minHeight: 28,
       minWidth: 72,
     },
+    content: {
+      style: {
+        marginStart: 10, //spacing between icon and content
+      },
+    },
   },
   RNFText: {
     tokens: {
@@ -30,8 +40,8 @@ export const appleComponents = {
 };
 
 export const defaultAppleThemeMacOS: Theme = {
-  colors: paletteFromAppleColors(),
-  typography: appleTypography(),
+  colors: macosPalette,
+  typography: macosTypography,
   spacing: appleSpacing(),
   components: appleComponents,
   host: { appearance: 'dynamic' },
