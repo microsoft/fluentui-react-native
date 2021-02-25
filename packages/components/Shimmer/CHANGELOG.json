@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/shimmer",
   "entries": [
     {
+      "date": "Fri, 12 Feb 2021 19:45:36 GMT",
+      "tag": "@fluentui-react-native/shimmer_v0.4.2",
+      "version": "0.4.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update FluentUI Apple version",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "73a55fb4635adc8be808fff2dc6312763011977d",
+            "package": "@fluentui-react-native/shimmer"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 13 Jan 2021 20:04:26 GMT",
+      "tag": "@fluentui-react-native/shimmer_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "update FUA version for button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "a0b6666ced16ccb8d06e7f91dc3136294d209de7",
+            "package": "@fluentui-react-native/shimmer"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 17 Dec 2020 00:09:27 GMT",
       "tag": "@fluentui-react-native/shimmer_v0.3.3",
       "version": "0.3.3",

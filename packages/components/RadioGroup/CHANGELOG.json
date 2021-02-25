@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Wed, 13 Jan 2021 20:04:26 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.8.3",
+      "version": "0.8.3",
+      "comments": {
+        "none": [
+          {
+            "comment": "update packages",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "a0b6666ced16ccb8d06e7f91dc3136294d209de7",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 06 Jan 2021 18:41:50 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.8.2",
       "version": "0.8.2",

@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 19 Feb 2021 18:36:13 GMT",
+      "tag": "@fluentui-react-native/tester_v0.16.0",
+      "version": "0.16.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "add tooltip support for native button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "171b7344a318a11ffb7c04fa6ac69a485381be3b",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 05 Feb 2021 08:02:13 GMT",
+      "tag": "@fluentui-react-native/tester_v0.15.0",
+      "version": "0.15.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Added an Apple Theme",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "bea2f01718bfab795b09d18fb8372d23c25a830b",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 13 Jan 2021 20:04:26 GMT",
+      "tag": "@fluentui-react-native/tester_v0.14.0",
+      "version": "0.14.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "mac native button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "a0b6666ced16ccb8d06e7f91dc3136294d209de7",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 13 Jan 2021 16:44:06 GMT",
+      "tag": "@fluentui-react-native/tester_v0.13.12",
+      "version": "0.13.12",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added macOS implementation of experimental avatar",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "4b8fb620a3a0525f744b47c77367aa51f5176b57",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 06 Jan 2021 18:41:50 GMT",
       "tag": "@fluentui-react-native/tester_v0.13.11",
       "version": "0.13.11",

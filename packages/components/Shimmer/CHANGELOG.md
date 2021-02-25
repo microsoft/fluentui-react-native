@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/shimmer
 
-This log was last generated on Sat, 24 Oct 2020 06:35:04 GMT and should not be manually modified.
+This log was last generated on Fri, 12 Feb 2021 19:45:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.2
+
+Fri, 12 Feb 2021 19:45:36 GMT
+
+### Patches
+
+- Update FluentUI Apple version (saadnajmi2@gmail.com)
+
+## 0.4.0
+
+Wed, 13 Jan 2021 20:04:26 GMT
+
+### Minor changes
+
+- update FUA version for button (67026167+chiuam@users.noreply.github.com)
 
 ## 0.3.1
 

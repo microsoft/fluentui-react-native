@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Sat, 12 Dec 2020 04:27:11 GMT and should not be manually modified.
+This log was last generated on Fri, 12 Feb 2021 19:45:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.2
+
+Fri, 12 Feb 2021 19:45:36 GMT
+
+### Patches
+
+- Update FluentUI Apple version (saadnajmi2@gmail.com)
+
+## 0.4.0
+
+Wed, 13 Jan 2021 16:44:06 GMT
+
+### Minor changes
+
+- Added macOS implementation of experimental avatar (saadnajmi2@gmail.com)
 
 ## 0.3.1
 
