@@ -15,7 +15,7 @@
     "code-style": "fluentui-scripts code-style",
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
-    "start": "react-native rnx-bundle --server --port 8081",
+    "start": "react-native rnx-start --server --port 8081",
     "test": "fluentui-scripts jest",
     "bundle": "react-native rnx-bundle --dev false",
     "bundle-dev": "react-native rnx-bundle",
@@ -70,7 +70,7 @@
   "rnx-kit": {
     "bundle": {
       "targets": [
-        "windows"
+        "win32"
       ],
       "entryPath": "index.js"
     }
