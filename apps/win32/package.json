@@ -68,7 +68,7 @@
     "preset": "react-native"
   },
   "rnx-kit": {
-    "bundles": {
+    "bundle": {
       "targets": [
         "windows"
       ],
