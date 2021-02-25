@@ -15,8 +15,6 @@ const { depcheckTask } = require('./tasks/depcheck');
 const { verifyApiExtractor, updateApiExtractor } = require('./tasks/api-extractor');
 const checkForModifiedFiles = require('./tasks/check-for-modified-files');
 
-import { metroTask } from './tasks/metroTask';
-
 export function preset() {
   // this add s a resolve path for the build tooling deps like TS from the scripts folder
   addResolvePath(__dirname);
@@ -30,15 +28,6 @@ export function preset() {
 
   // Build only commonjs (not other TS variants) but still run other tasks
   option('commonjs');
-
-  // use Metro for bundling task instead of the default webpack
-  option('useMetro');
-  option('dev');
-  option('platform', { string: true });
-  option('bundleName', { string: true });
-  option('server');
-  option('port', { number: true });
-  option('cli');
 
   // for options that have a check/fix switch this puts them into fix mode
   option('fix');
@@ -67,18 +56,7 @@ export function preset() {
 
   task('build:node-lib', series('clean', 'copy', series(condition('validate', () => !argv().min), 'ts:commonjs-only')));
 
-  task('metro', () =>
-    metroTask({
-      dev: !!argv().dev,
-      ...(argv().cli && { cli: true }),
-      ...(argv().platform && { platform: argv().platform }),
-      ...(argv().bundleName && { bundleName: argv().bundleName }),
-      ...(argv().server && { server: true }),
-      ...(argv().server && argv().port && { port: argv().port }),
-    }),
-  );
-
-  task('bundle', series(condition('metro', () => !!argv().useMetro), condition('webpack', () => !argv().useMetro)));
+  task('bundle', series('webpack'));
 
   task('build', series('clean', 'copy', 'ts'));
 
