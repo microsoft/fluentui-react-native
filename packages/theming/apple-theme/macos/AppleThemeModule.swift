@@ -374,10 +374,10 @@ class AppleThemeModule: NSObject {
 			"ghostCheckedHoveredContent" : RCTColorToHexString(FluentUI.Colors.primary.withSystemEffect(.deepPressed).cgColor),
 			"ghostCheckedHoveredBorder" : "transparent",
 
-			"ghostSecondaryContent" : RCTColorToHexString(neutralInverted.cgColor),
-			"ghostFocusedSecondaryContent" :RCTColorToHexString(neutralInverted.cgColor),
-			"ghostHoveredSecondaryContent" : RCTColorToHexString(neutralInverted.cgColor),
-			"ghostPressedSecondaryContent" : RCTColorToHexString(neutralInverted.withSystemEffect(.deepPressed).cgColor),
+			"ghostSecondaryContent" : RCTColorToHexString(FluentUI.Colors.primary.cgColor),
+			"ghostFocusedSecondaryContent" :RCTColorToHexString(FluentUI.Colors.primary.cgColor),
+			"ghostHoveredSecondaryContent" : RCTColorToHexString(FluentUI.Colors.primary.cgColor),
+			"ghostPressedSecondaryContent" : RCTColorToHexString(FluentUI.Colors.primary.withSystemEffect(.deepPressed).cgColor),
 
 			"brandSecondaryContent" : RCTColorToHexString(neutralInverted.cgColor),
 			"brandFocusedSecondaryContent" : RCTColorToHexString(neutralInverted.cgColor),
