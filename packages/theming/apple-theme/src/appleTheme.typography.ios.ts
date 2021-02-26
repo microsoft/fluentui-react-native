@@ -24,11 +24,11 @@ export function appleTypography(): Typography {
       black: '900' as FontWeightValue,
     },
     families: {
-      primary: 'SF Pro',
-      secondary: 'SF Pro',
+      primary: 'System',
+      secondary: 'System',
       cursive: 'System',
-      monospace: 'SF Mono',
-      sansSerif: 'SF Pro',
+      monospace: 'System',
+      sansSerif: 'System',
       serif: 'System',
     },
     variants: {

@@ -1,6 +1,17 @@
 import { ThemeReference } from '@fluentui-react-native/theme';
-import { BaseAppleThemeIOS } from './appleTheme.ios';
+import { Theme } from '@fluentui-react-native/theme-types';
+import { Appearance } from 'react-native';
+import { BaseAppleDarkThemeIOS, BaseAppleLightThemeIOS } from './appleTheme.ios';
 
 export function createAppleTheme(): ThemeReference {
-  return new ThemeReference(BaseAppleThemeIOS);
+  const themeRef = new ThemeReference({} as Theme, () => {
+    const current = Appearance.getColorScheme();
+    return current === 'light' ? BaseAppleLightThemeIOS : BaseAppleDarkThemeIOS;
+  });
+
+  Appearance.addChangeListener(() => {
+    themeRef.invalidate();
+  });
+
+  return themeRef;
 }
