@@ -1,7 +1,6 @@
 import { ThemeReference } from '@fluentui-react-native/theme';
-import { createDefaultTheme } from '@fluentui-react-native/default-theme';
+import { BaseAppleThemeIOS } from './appleTheme.ios';
 
 export function createAppleTheme(): ThemeReference {
-  console.warn('iOS Theme not currently implemented, using default theme');
-  return new ThemeReference(createDefaultTheme());
+  return new ThemeReference(BaseAppleThemeIOS);
 }
