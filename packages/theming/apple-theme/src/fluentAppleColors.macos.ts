@@ -93,13 +93,6 @@ export interface FluentAppleButtonTokens {
 export type FluentUIApplePalette = FluentUIAppleBasePalette & FluentAppleButtonTokens;
 
 export function getFluentUIApplePalette(): FluentUIApplePalette {
-  // try {
-  //   const pressedColor = MSFAppleThemeModule.pressedColorForColor('blue');
-  //   console.log(`Created a new color: ${pressedColor}`);
-  // } catch (e) {
-  //   console.error(e);
-  // }
-
   return {
     blue10: '#4F6BED',
     blueMagenta20: '#8764B8',
