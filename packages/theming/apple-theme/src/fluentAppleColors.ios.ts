@@ -108,7 +108,7 @@ export interface FluentAppleSemanticColors {
   iconOnAccent: ColorValue; //= UIColor(light: .white, dark: .black)
 
   /**
-   * In Darkmode, our system use two sets of background colors -- called base and elevated -- to enhance the perception of depath when one dark interface is layered above another.
+   * In Dark mode, our system use two sets of background colors -- called base and elevated -- to enhance the perception of depth when one dark interface is layered above another.
    * The dark base colors are darker, making background interface appear to recede, and the elevate colors are lighter, making foreground interfaces appear to advance
    */
 
