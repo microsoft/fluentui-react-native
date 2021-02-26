@@ -27,7 +27,6 @@ class AppleThemeModule: RCTEventEmitter {
 	static func themingModule() -> [AnyHashable : Any] {
 		return [
 			"colors": palette(),
-			
 			"typography" : [
 				"sizes" : fontSizes(),
 				"weights" : fontWeights(),
@@ -54,19 +53,6 @@ class AppleThemeModule: RCTEventEmitter {
 		let brandForegroundDisabled = NSColor(named: "ButtonColors/brandForegroundDisabled", bundle: FluentUIResources.resourceBundle)!
 		let brandBackgroundDisabled = NSColor(named: "ButtonColors/brandBackgroundDisabled", bundle: FluentUIResources.resourceBundle)!
 		let neutralInverted = NSColor(named: "ButtonColors/neutralInverted", bundle: FluentUIResources.resourceBundle)!
-
-		switch NSApplication.shared.effectiveAppearance.name {
-		case .aqua:
-			NSLog("Native effective appearance: aqua")
-			break
-		case .darkAqua:
-			NSLog("Native effective appearance: darkAqua")
-			break
-		default:
-			NSLog("Native effective appearance: other")
-		}
-
-		NSLog("Native background color: " + RCTColorToHexString(NSColor.windowBackgroundColor.cgColor))
 
 		return [
 			/* PaletteBackgroundColors & PaletteTextColors */

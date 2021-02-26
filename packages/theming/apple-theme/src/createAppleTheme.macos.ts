@@ -15,14 +15,11 @@ export function createAppleTheme(): ThemeReference {
         if (error) {
           console.error(`Error retrieving apple theming module! ${error}`);
         }
-        console.log('Loaded apple theming module');
-        console.log(applePartialTheme.colors.background);
-
         // Layer the native apple theming module values on top of the base Apple theme
 
         // TODO this doesn't work. Why?
         // appleThemeReference.update(applePartialTheme);
-
+        // Set the individual properties instead
         appleThemeReference.theme.colors = applePartialTheme.colors;
         appleThemeReference.theme.typography = applePartialTheme.typography;
         appleThemeReference.invalidate();
@@ -31,7 +28,6 @@ export function createAppleTheme(): ThemeReference {
       const emitter = new NativeEventEmitter(module);
 
       const onAppleThemeChanged = () => {
-        console.log('Received apple theming module native event');
         appleThemeReference.invalidate();
       };
 
