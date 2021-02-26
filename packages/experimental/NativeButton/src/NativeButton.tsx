@@ -14,7 +14,7 @@ export const NativeButton = compose<NativeButtonType>({
     root: buildProps(
       (tokens, theme) => ({
         style: {
-          height: 35,
+          height: 36,
           width: 200,
           margin: 8,
         },

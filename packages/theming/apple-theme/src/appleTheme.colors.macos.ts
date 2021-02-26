@@ -1,33 +1,11 @@
-import { ThemeColorDefinition, ColorValue } from '@fluentui-react-native/theme-types';
+import { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
 import { getFluentUIApplePalette } from './fluentAppleColors.macos';
 import { getAppleSemanticPalette } from './applePlatformColors.macos';
-import { NativeModules, processColor } from 'react-native';
-
-const { MSFAppleThemeModule } = NativeModules;
-
-function colorWithEffect(color: ColorValue, effect: string): ColorValue {
-  MSFAppleThemeModule.colorWithEffect(
-    processColor(color),
-    effect,
-    (error) => {
-      console.error(`Error found! ${error}`);
-    },
-    (colorWithAppliedEffect: ColorValue) => {
-      console.log('color with applied effect: ' + colorWithAppliedEffect);
-      return colorWithAppliedEffect;
-    },
-  );
-  console.log('Do we ever get here?');
-}
 
 /** creates a palette of colors for the apple theme, given the FluentUI Apple Palette and Apple Semantic Palette */
-export function paletteFromAppleColors(): ThemeColorDefinition {
+export function fallbackApplePalette(): ThemeColorDefinition {
   const fluentUIApple = getFluentUIApplePalette();
   const applePlatform = getAppleSemanticPalette();
-
-  // const pressedBlue: ColorValue = colorWithEffect('blue', 'pressed');
-  // await MSFAppleThemeModule.nothing();
-  // console.warn('Pressed Blue: ' + pressedBlue);
 
   return {
     /* PaletteBackgroundColors & PaletteTextColors */
@@ -72,33 +50,33 @@ export function paletteFromAppleColors(): ThemeColorDefinition {
     inputTextHovered: applePlatform.textColor,
     inputPlaceholderText: applePlatform.placeholderTextColor,
 
-    buttonBackgroundChecked: colorWithEffect(fluentUIApple.communicationBlue, 'pressed'),
+    buttonBackgroundChecked: fluentUIApple.communicationBlueShade20,
     buttonBackgroundHovered: fluentUIApple.communicationBlue,
-    buttonBackgroundCheckedHovered: colorWithEffect(fluentUIApple.communicationBlue, 'pressed'),
-    buttonBackgroundPressed: colorWithEffect(fluentUIApple.communicationBlue, 'pressed'),
-    buttonBackgroundDisabled: colorWithEffect(fluentUIApple.communicationBlue, 'disabled'),
+    buttonBackgroundCheckedHovered: fluentUIApple.communicationBlueShade20,
+    buttonBackgroundPressed: fluentUIApple.communicationBlueShade20,
+    buttonBackgroundDisabled: fluentUIApple.gray100,
     buttonText: fluentUIApple.neutralInverted,
     buttonTextHovered: fluentUIApple.neutralInverted,
-    buttonTextChecked: colorWithEffect(fluentUIApple.neutralInverted, 'pressed'),
-    buttonTextCheckedHovered: colorWithEffect(fluentUIApple.neutralInverted, 'pressed'),
-    buttonTextPressed: colorWithEffect(fluentUIApple.neutralInverted, 'pressed'),
-    buttonTextDisabled: colorWithEffect(fluentUIApple.neutralInverted, 'disabled'),
+    buttonTextChecked: fluentUIApple.neutralInverted,
+    buttonTextCheckedHovered: fluentUIApple.neutralInverted,
+    buttonTextPressed: fluentUIApple.neutralInverted,
+    buttonTextDisabled: fluentUIApple.brandForegroundDisabled,
     buttonBorderDisabled: 'transparent',
     buttonBorderFocused: 'transparent',
 
     primaryButtonBackground: fluentUIApple.communicationBlue,
     primaryButtonBackgroundHovered: fluentUIApple.communicationBlue,
-    primaryButtonBackgroundPressed: colorWithEffect(fluentUIApple.communicationBlue, 'pressed'),
-    primaryButtonBackgroundDisabled: colorWithEffect(fluentUIApple.communicationBlue, 'disabled'),
+    primaryButtonBackgroundPressed: fluentUIApple.communicationBlueShade20,
+    primaryButtonBackgroundDisabled: fluentUIApple.brandBackgroundDisabled,
     primaryButtonBorder: 'transparent',
     primaryButtonBorderFocused: 'transparent',
     primaryButtonText: fluentUIApple.neutralInverted,
     primaryButtonTextHovered: fluentUIApple.neutralInverted,
-    primaryButtonTextPressed: colorWithEffect(fluentUIApple.neutralInverted, 'pressed'),
-    primaryButtonTextDisabled: colorWithEffect(fluentUIApple.neutralInverted, 'disabled'),
+    primaryButtonTextPressed: fluentUIApple.neutralInverted,
+    primaryButtonTextDisabled: fluentUIApple.brandForegroundDisabled,
 
-    accentButtonBackground: fluentUIApple.communicationBlueTint10,
-    accentButtonText: applePlatform.controlTextColor,
+    accentButtonBackground: fluentUIApple.communicationBlue,
+    accentButtonText: fluentUIApple.neutralInverted,
 
     menuBackground: 'transparent',
     menuDivider: applePlatform.separatorColor,
@@ -133,102 +111,102 @@ export function paletteFromAppleColors(): ThemeColorDefinition {
 
     buttonHoveredBackground: fluentUIApple.communicationBlue,
     buttonHoveredBorder: 'transparent',
-    buttonHoveredContent: applePlatform.controlTextColor,
-    buttonHoveredIcon: applePlatform.controlTextColor,
+    buttonHoveredContent: fluentUIApple.neutralInverted,
+    buttonHoveredIcon: fluentUIApple.neutralInverted,
 
     buttonFocusedBackground: fluentUIApple.communicationBlue,
     buttonFocusedBorder: 'transparent',
-    buttonFocusedContent: applePlatform.controlTextColor,
-    buttonFocusedIcon: applePlatform.controlTextColor,
+    buttonFocusedContent: fluentUIApple.neutralInverted,
+    buttonFocusedIcon: fluentUIApple.neutralInverted,
 
-    buttonPressedBackground: colorWithEffect(fluentUIApple.communicationBlue, 'pressed'),
+    buttonPressedBackground: fluentUIApple.communicationBlueShade20,
     buttonPressedBorder: 'transparent',
-    buttonPressedContent: applePlatform.selectedControlTextColor,
-    buttonPressedIcon: applePlatform.selectedControlTextColor,
+    buttonPressedContent: fluentUIApple.neutralInverted,
+    buttonPressedIcon: fluentUIApple.neutralInverted,
 
-    buttonDisabledBackground: colorWithEffect(fluentUIApple.communicationBlue, 'disabled'),
+    buttonDisabledBackground: fluentUIApple.gray100,
     buttonDisabledBorder: 'transparent',
-    buttonDisabledContent: applePlatform.disabledControlTextColor,
-    buttonDisabledIcon: applePlatform.disabledControlTextColor,
+    buttonDisabledContent: fluentUIApple.brandForegroundDisabled,
+    buttonDisabledIcon: fluentUIApple.brandForegroundDisabled,
 
     ghostBackground: 'transparent',
     ghostBorder: 'transparent',
-    ghostContent: applePlatform.controlTextColor,
-    ghostIcon: applePlatform.controlTextColor,
+    ghostContent: fluentUIApple.communicationBlue,
+    ghostIcon: fluentUIApple.communicationBlue,
 
     ghostHoveredBackground: 'transparent',
     ghostHoveredBorder: 'transparent',
-    ghostHoveredContent: applePlatform.controlTextColor,
-    ghostHoveredIcon: applePlatform.controlTextColor,
+    ghostHoveredContent: fluentUIApple.communicationBlue,
+    ghostHoveredIcon: fluentUIApple.communicationBlue,
 
     ghostFocusedBackground: 'transparent',
     ghostFocusedBorder: 'transparent',
-    ghostFocusedContent: applePlatform.controlTextColor,
-    ghostFocusedIcon: applePlatform.controlTextColor,
+    ghostFocusedContent: fluentUIApple.communicationBlue,
+    ghostFocusedIcon: fluentUIApple.communicationBlue,
 
     ghostPressedBackground: 'transparent',
     ghostPressedBorder: 'transparent',
-    ghostPressedContent: colorWithEffect(fluentUIApple.communicationBlue, 'pressed'),
-    ghostPressedIcon: colorWithEffect(fluentUIApple.communicationBlue, 'pressed'),
+    ghostPressedContent: fluentUIApple.communicationBlueShade30,
+    ghostPressedIcon: fluentUIApple.communicationBlueShade30,
 
     ghostDisabledBackground: 'transparent',
     ghostDisabledBorder: 'transparent',
-    ghostDisabledContent: colorWithEffect(fluentUIApple.communicationBlue, 'disabled'),
-    ghostDisabledIcon: colorWithEffect(fluentUIApple.communicationBlue, 'disabled'),
+    ghostDisabledContent: fluentUIApple.brandForegroundDisabled,
+    ghostDisabledIcon: fluentUIApple.brandForegroundDisabled,
 
     brandBackground: fluentUIApple.communicationBlue,
     brandBorder: 'transparent',
-    brandContent: applePlatform.controlTextColor,
-    brandIcon: applePlatform.controlTextColor,
+    brandContent: fluentUIApple.neutralInverted,
+    brandIcon: fluentUIApple.neutralInverted,
 
     brandHoveredBackground: fluentUIApple.communicationBlue,
     brandHoveredBorder: 'transparent',
-    brandHoveredContent: applePlatform.controlTextColor,
-    brandHoveredIcon: applePlatform.controlTextColor,
+    brandHoveredContent: fluentUIApple.neutralInverted,
+    brandHoveredIcon: fluentUIApple.neutralInverted,
 
     brandFocusedBackground: fluentUIApple.communicationBlue,
     brandFocusedBorder: 'transparent',
-    brandFocusedContent: applePlatform.controlTextColor,
-    brandFocusedIcon: applePlatform.controlTextColor,
+    brandFocusedContent: fluentUIApple.neutralInverted,
+    brandFocusedIcon: fluentUIApple.neutralInverted,
 
-    brandPressedBackground: colorWithEffect(fluentUIApple.communicationBlue, 'pressed'),
+    brandPressedBackground: fluentUIApple.communicationBlueShade20,
     brandPressedBorder: 'transparent',
-    brandPressedContent: applePlatform.controlTextColor,
-    brandPressedIcon: applePlatform.controlTextColor,
+    brandPressedContent: fluentUIApple.neutralInverted,
+    brandPressedIcon: fluentUIApple.neutralInverted,
 
-    brandDisabledBackground: colorWithEffect(fluentUIApple.communicationBlue, 'disabled'),
+    brandDisabledBackground: fluentUIApple.brandBackgroundDisabled,
     brandDisabledBorder: 'transparent',
-    brandDisabledContent: applePlatform.disabledControlTextColor,
-    brandDisabledIcon: applePlatform.disabledControlTextColor,
+    brandDisabledContent: fluentUIApple.brandForegroundDisabled,
+    brandDisabledIcon: fluentUIApple.brandForegroundDisabled,
 
-    buttonCheckedBackground: colorWithEffect(fluentUIApple.communicationBlue, 'pressed'),
-    buttonCheckedContent: applePlatform.controlTextColor,
-    buttonCheckedHoveredBackground: colorWithEffect(fluentUIApple.communicationBlue, 'pressed'),
-    buttonCheckedHoveredContent: applePlatform.controlTextColor,
+    buttonCheckedBackground: fluentUIApple.communicationBlueShade20,
+    buttonCheckedContent: fluentUIApple.neutralInverted,
+    buttonCheckedHoveredBackground: fluentUIApple.communicationBlueShade20,
+    buttonCheckedHoveredContent: fluentUIApple.neutralInverted,
 
-    brandCheckedBackground: colorWithEffect(fluentUIApple.communicationBlue, 'pressed'),
-    brandCheckedContent: applePlatform.controlTextColor,
-    brandCheckedHoveredBackground: colorWithEffect(fluentUIApple.communicationBlue, 'pressed'),
-    brandCheckedHoveredContent: applePlatform.controlTextColor,
+    brandCheckedBackground: fluentUIApple.communicationBlueShade20,
+    brandCheckedContent: fluentUIApple.neutralInverted,
+    brandCheckedHoveredBackground: fluentUIApple.communicationBlueShade20,
+    brandCheckedHoveredContent: fluentUIApple.neutralInverted,
 
     ghostCheckedBackground: 'transparent',
-    ghostCheckedContent: colorWithEffect(fluentUIApple.communicationBlue, 'pressed'),
+    ghostCheckedContent: fluentUIApple.communicationBlueShade30,
     ghostCheckedHoveredBackground: 'transparent',
-    ghostCheckedHoveredContent: colorWithEffect(fluentUIApple.communicationBlue, 'pressed'),
+    ghostCheckedHoveredContent: fluentUIApple.communicationBlueShade30,
     ghostCheckedHoveredBorder: 'transparent',
 
-    ghostSecondaryContent: applePlatform.secondaryLabelColor,
-    ghostFocusedSecondaryContent: applePlatform.secondaryLabelColor,
-    ghostHoveredSecondaryContent: applePlatform.secondaryLabelColor,
-    ghostPressedSecondaryContent: applePlatform.secondaryLabelColor,
+    ghostSecondaryContent: fluentUIApple.communicationBlue,
+    ghostFocusedSecondaryContent: fluentUIApple.communicationBlue,
+    ghostHoveredSecondaryContent: fluentUIApple.communicationBlue,
+    ghostPressedSecondaryContent: fluentUIApple.communicationBlue,
 
-    brandSecondaryContent: applePlatform.secondaryLabelColor,
-    brandFocusedSecondaryContent: applePlatform.secondaryLabelColor,
-    brandHoveredSecondaryContent: applePlatform.secondaryLabelColor,
-    brandPressedSecondaryContent: applePlatform.tertiaryLabelColor,
+    brandSecondaryContent: fluentUIApple.neutralInverted,
+    brandFocusedSecondaryContent: fluentUIApple.neutralInverted,
+    brandHoveredSecondaryContent: fluentUIApple.neutralInverted,
+    brandPressedSecondaryContent: fluentUIApple.neutralInverted,
 
-    buttonDisabledSecondaryContent: applePlatform.disabledControlTextColor,
-    buttonHoveredSecondaryContent: applePlatform.secondaryLabelColor,
-    buttonPressedSecondaryContent: applePlatform.tertiaryLabelColor,
+    buttonDisabledSecondaryContent: fluentUIApple.brandForegroundDisabled,
+    buttonHoveredSecondaryContent: fluentUIApple.neutralInverted,
+    buttonPressedSecondaryContent: fluentUIApple.neutralInverted,
   };
 }
