@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Update deps",
+  "packageName": "@fluentui-react-native/experimental-text",
+  "email": "warleu@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-02-05T05:06:40.722Z"
+}

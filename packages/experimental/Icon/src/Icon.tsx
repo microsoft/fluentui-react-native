@@ -4,7 +4,6 @@ import { Image, ImageStyle } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { SvgUri } from 'react-native-svg';
 import { mergeStyles } from '@fluentui-react-native/framework';
-import * as assetRegistry from 'react-native/Libraries/Image/AssetRegistry';
 import { stagedComponent, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
 import { useTheme } from '@fluentui-react-native/theme-types';
 
@@ -18,8 +17,8 @@ function renderRasterImage(iconProps: IconProps) {
 }
 
 function fontFamilyFromFontSrcFile(fontSrcFile: string, fontFamily: string): string {
-  const asset = assetRegistry.getAssetByID(fontSrcFile);
-  return `${fontFamily}#${asset.httpServerLocation}/${asset.name}.${asset.type}`;
+  const asset = Image.resolveAssetSource(+fontSrcFile);
+  return `${fontFamily}#${asset.uri}`;
 }
 
 const fontStyleMemoCache = getMemoCache();
