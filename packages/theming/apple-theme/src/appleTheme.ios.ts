@@ -25,6 +25,7 @@ export const appleComponents = {
       style: {
         paddingVertical: 4.5,
         minHeight: 28,
+        padding: 20,
       },
     },
     icon: {
@@ -39,6 +40,12 @@ export const appleComponents = {
   RNFText: {
     tokens: {
       variant: 'bodyStandard',
+    },
+  },
+  Separator: {
+    tokens: {
+      color: 'red',
+      separatorWidth: 10,
     },
   },
 };

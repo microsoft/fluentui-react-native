@@ -50,13 +50,13 @@ export function paletteFromAppleColors(fluentApple: ApplePalette): ThemeColorDef
     buttonBackgroundHovered: fluentApple.communicationBlue,
     buttonBackgroundCheckedHovered: fluentApple.communicationBlueTint10,
     buttonBackgroundPressed: fluentApple.communicationBlueTint10,
-    buttonBackgroundDisabled: fluentApple.gray100,
+    buttonBackgroundDisabled: fluentApple.gray600,
     buttonText: fluentApple.textOnAccent,
     buttonTextHovered: fluentApple.textOnAccent,
     buttonTextChecked: fluentApple.textOnAccent,
     buttonTextCheckedHovered: fluentApple.textOnAccent,
     buttonTextPressed: fluentApple.textOnAccent,
-    buttonTextDisabled: fluentApple.textDisabled,
+    buttonTextDisabled: fluentApple.textOnAccent,
     buttonBorderDisabled: 'transparent',
     buttonBorderFocused: 'transparent',
 
@@ -68,8 +68,8 @@ export function paletteFromAppleColors(fluentApple: ApplePalette): ThemeColorDef
     primaryButtonBorderFocused: 'transparent',
     primaryButtonText: fluentApple.textOnAccent,
     primaryButtonTextHovered: fluentApple.textOnAccent,
-    primaryButtonTextPressed: fluentApple.textDisabled,
-    primaryButtonTextDisabled: fluentApple.textDisabled,
+    primaryButtonTextPressed: fluentApple.textOnAccent,
+    primaryButtonTextDisabled: fluentApple.textOnAccent,
 
     accentButtonBackground: fluentApple.communicationBlue,
     accentButtonText: fluentApple.textOnAccent,
@@ -121,10 +121,10 @@ export function paletteFromAppleColors(fluentApple: ApplePalette): ThemeColorDef
     buttonPressedContent: fluentApple.textOnAccent,
     buttonPressedIcon: fluentApple.iconPrimary,
 
-    buttonDisabledBackground: fluentApple.gray100,
+    buttonDisabledBackground: fluentApple.gray600,
     buttonDisabledBorder: 'transparent',
-    buttonDisabledContent: fluentApple.textDisabled,
-    buttonDisabledIcon: fluentApple.iconDisabled,
+    buttonDisabledContent: fluentApple.textOnAccent,
+    buttonDisabledIcon: fluentApple.textOnAccent,
 
     ghostBackground: 'transparent',
     ghostBorder: 'transparent',
@@ -173,7 +173,7 @@ export function paletteFromAppleColors(fluentApple: ApplePalette): ThemeColorDef
 
     brandDisabledBackground: fluentApple.gray100,
     brandDisabledBorder: 'transparent',
-    brandDisabledContent: fluentApple.textDisabled,
+    brandDisabledContent: fluentApple.textOnAccent,
     brandDisabledIcon: fluentApple.iconDisabled,
 
     buttonCheckedBackground: fluentApple.communicationBlueTint10,
@@ -202,7 +202,7 @@ export function paletteFromAppleColors(fluentApple: ApplePalette): ThemeColorDef
     brandHoveredSecondaryContent: fluentApple.textPrimary,
     brandPressedSecondaryContent: fluentApple.textPrimary,
 
-    buttonDisabledSecondaryContent: fluentApple.textDisabled,
+    buttonDisabledSecondaryContent: fluentApple.textOnAccent,
     buttonHoveredSecondaryContent: fluentApple.textPrimary,
     buttonPressedSecondaryContent: fluentApple.textPrimary,
   };
