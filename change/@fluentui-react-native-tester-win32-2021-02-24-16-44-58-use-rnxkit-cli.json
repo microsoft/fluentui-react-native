@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Remove metro logic from FURN, replacing it with calls to the @rnx-kit CLI. Use rnx-bundle for bundling, and rnx-start for running a bundle server.",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "afoxman@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-02-25T00:44:58.938Z"
+}
