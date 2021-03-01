@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/shimmer
 
-This log was last generated on Fri, 12 Feb 2021 19:45:36 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Mar 2021 22:53:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.3
+
+Mon, 01 Mar 2021 22:53:12 GMT
+
+### Patches
+
+- Update deps (warleu@microsoft.com)
 
 ## 0.4.2
 

@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update deps",
-  "packageName": "@fluentui-react-native/checkbox",
-  "email": "warleu@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-02-05T05:05:13.762Z"
-}
