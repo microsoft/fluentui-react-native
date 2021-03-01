@@ -23,5 +23,6 @@ RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(isImageTinted, BOOL);
 RCT_REMAP_VIEW_PROPERTY(buttonStyle, style, MSFButtonStyle);
 RCT_EXPORT_VIEW_PROPERTY(enabled, BOOL);
+RCT_EXPORT_VIEW_PROPERTY(toolTip, NSString);
 @end
 

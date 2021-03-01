@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "fluentui-scripts build",
-    "bundle": "fluentui-scripts metro --cli",
+    "bundle": "react-native rnx-bundle --dev false",
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
     "code-style": "fluentui-scripts code-style",
@@ -13,12 +13,12 @@
     "generate-report": "allure generate allure-results --clean && allure open",
     "lint": "eslint .",
     "report": "allure generate allure-results --clean",
-    "start": "react-native start",
+    "start": "react-native rnx-start",
     "test": "jest",
     "windows": "install-windows-test-app && react-native run-windows"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.15.0",
+    "@fluentui-react-native/tester": "^0.16.2",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-test-app": "^0.3.2",
@@ -28,6 +28,7 @@
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^1.1.0",
+    "@rnx-kit/cli": "^0.0.3",
     "@types/jasmine": "3.5.10",
     "@uifabricshared/build-native": "0.1.1",
     "@wdio/allure-reporter": "5.22.4",
@@ -59,14 +60,13 @@
   "jest": {
     "preset": "react-native"
   },
-  "metroBundles": {
-    "targets": [
-      "windows"
-    ],
-    "entry": "index.js",
-    "outputPath": "./dist",
-    "bundleName": "index.bundle",
-    "noPlatformSuffix": true
+  "rnx-kit": {
+    "bundle": {
+      "targets": [
+        "windows"
+      ],
+      "entryPath": "index.js"
+    }
   },
   "depcheck": {
     "ignoreMatches": [
