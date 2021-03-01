@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Mon, 01 Mar 2021 22:53:12 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.9.3",
+      "version": "0.9.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update deps",
+            "author": "warleu@microsoft.com",
+            "commit": "23cd3d437e63e105f5feee16a1b8ef8e769b61c1",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 23 Feb 2021 19:59:26 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.9.2",
       "version": "0.9.2",
