@@ -9,8 +9,8 @@ export function appleTypography(): Typography {
       body: 17 as FontSize, // Body
       subheader: 15 as FontSize, // Subhead
       header: 17 as FontSize, // Headline
-      hero: 28 as FontSize, /// Title 1
-      heroLarge: 34 as FontSize, // Large Title,
+      hero: 26 as FontSize, /// Title 1
+      heroLarge: 30 as FontSize, // Large Title,
     } as FontSizes,
     weights: {
       ultralight: '100' as FontWeightValue,
@@ -32,15 +32,15 @@ export function appleTypography(): Typography {
       serif: 'System',
     },
     variants: {
-      captionStandard: { face: 'primary', size: 'caption', weight: '500' },
+      captionStandard: { face: 'primary', size: 'caption', weight: '400' },
       secondaryStandard: { face: 'primary', size: 'secondary', weight: '400' },
       secondarySemibold: { face: 'primary', size: 'secondary', weight: '600' },
       bodyStandard: { face: 'primary', size: 'body', weight: '400' },
       bodySemibold: { face: 'primary', size: 'body', weight: '600' },
       subheaderStandard: { face: 'primary', size: 'subheader', weight: '400' },
       subheaderSemibold: { face: 'primary', size: 'subheader', weight: '600' },
-      headerStandard: { face: 'primary', size: 'header', weight: '400' },
-      headerSemibold: { face: 'primary', size: 'header', weight: '600' },
+      headerStandard: { face: 'primary', size: 'header', weight: '600' },
+      headerSemibold: { face: 'primary', size: 'header', weight: '800' },
       heroStandard: { face: 'primary', size: 'hero', weight: '400' },
       heroSemibold: { face: 'primary', size: 'hero', weight: '600' },
       heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: '400' },
