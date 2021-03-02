@@ -147,7 +147,8 @@ class AppleThemeModule: NSObject {
 			],
 			"heroLargeSemibold": [
 				"face" : families["primary"],
-				"size" : sizes["heroLarge"],
+//				"size" : sizes["heroLarge"],
+				"size" : 72,
 				"weight" : weights[.bold],
 			],
 		]
