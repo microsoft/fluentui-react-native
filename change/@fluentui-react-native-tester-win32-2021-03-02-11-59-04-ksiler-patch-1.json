@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update path under 'FluentUI Tester' web debugging",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-03-02T16:59:04.616Z"
-}
