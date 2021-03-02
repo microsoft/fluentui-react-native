@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Wed, 06 Jan 2021 18:41:50 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Mar 2021 22:53:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.19
+
+Mon, 01 Mar 2021 22:53:12 GMT
+
+### Patches
+
+- Update deps (warleu@microsoft.com)
+
+## 0.7.18
+
+Mon, 01 Mar 2021 17:28:32 GMT
+
+### Patches
+
+- Remove metro logic from FURN, replacing it with calls to the @rnx-kit CLI. Use rnx-bundle for bundling, and rnx-start for running a bundle server. (afoxman@microsoft.com)
 
 ## 0.7.11
 
