@@ -3,7 +3,7 @@ import { StealthButton, Separator } from '@fluentui/react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
-import { useWindowDimensions, ScrollView, View, Text as RNText } from 'react-native';
+import { ScrollView, View, Text as RNText } from 'react-native';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fluentTesterStyles } from './TestComponents/Common/styles';
@@ -52,8 +52,8 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
       flex: 1,
       flexGrow: 1,
       flexDirection: 'column',
-      minHeight: 1200,
-      minWidth: 1000,
+      minHeight: 550,
+      minWidth: 300,
       justifyContent: 'flex-start',
       alignItems: 'stretch',
       padding: 4,
@@ -74,13 +74,8 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const TestComponent = selectedTestIndex == -1 ? EmptyComponent : sortedTestComponents[selectedTestIndex].component;
 
-  const HeaderSeparator = Separator.customize((t) => ({
-    color: t.colors.menuDivider,
-    separatorWidth: 2,
-  }));
-
   const TestListSeparator = Separator.customize((t) => ({
-    color: t.colors.bodyFrameDivider,
+    color: t.colors.inputBorder,
     separatorWidth: 2,
   }));
 
@@ -90,7 +85,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     <View style={themedStyles.root}>
       <Header />
 
-      <HeaderSeparator />
+      <Separator />
 
       <View style={fluentTesterStyles.testRoot}>
         <ScrollView style={fluentTesterStyles.testList} contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
@@ -108,7 +103,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
           })}
         </ScrollView>
 
-        <TestListSeparator vertical />
+        <TestListSeparator vertical style={{ marginHorizontal: 8, width: 2 }} />
 
         <View style={fluentTesterStyles.testSection}>
           <ScrollView>

@@ -8,13 +8,11 @@ export function appleSpacing(): Spacing {
 }
 
 export const appleComponents = {
-  // These values correspond to the "Large"  Button Size values of the FluentUI Apple Button
+  // These values correspond to the Primary style of the FluentUI Apple Button
   Button: {
     tokens: {
-      borderRadius: 5,
+      borderRadius: 8,
       borderWidth: 1,
-      minHeight: 28,
-      minWidth: 72,
     },
     root: {
       style: {
@@ -23,9 +21,8 @@ export const appleComponents = {
     },
     stack: {
       style: {
-        paddingVertical: 4.5,
-        minHeight: 28,
-        padding: 20,
+        paddingVertical: 16,
+        paddingHorizontal: 20,
       },
     },
     icon: {
@@ -35,17 +32,12 @@ export const appleComponents = {
     },
     content: {
       fontSize: 15,
+      height: 20,
     },
   },
   RNFText: {
     tokens: {
       variant: 'bodyStandard',
-    },
-  },
-  Separator: {
-    tokens: {
-      color: 'red',
-      separatorWidth: 10,
     },
   },
 };
