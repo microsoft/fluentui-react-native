@@ -32,11 +32,6 @@ export function fallbackAppleTypography(): Typography {
     },
     families: {
       primary: 'System',
-      secondary: 'System',
-      cursive: 'System',
-      monospace: 'System',
-      sansSerif: 'System',
-      serif: 'System',
     },
     variants: {
       captionStandard: { face: 'primary', size: 'caption', weight: '500' },
