@@ -54,7 +54,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     buttonBackgroundHovered: fluentUIApple.communicationBlue,
     buttonBackgroundCheckedHovered: fluentUIApple.communicationBlueShade20,
     buttonBackgroundPressed: fluentUIApple.communicationBlueShade20,
-    buttonBackgroundDisabled: fluentUIApple.gray100,
+    buttonBackgroundDisabled: fluentUIApple.brandBackgroundDisabled,
     buttonText: fluentUIApple.neutralInverted,
     buttonTextHovered: fluentUIApple.neutralInverted,
     buttonTextChecked: fluentUIApple.neutralInverted,
