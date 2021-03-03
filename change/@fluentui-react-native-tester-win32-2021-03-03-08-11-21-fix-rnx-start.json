@@ -1,0 +1,8 @@
+{
+  "type": "none",
+  "comment": "Fix rnx-start command line in tester-win32 package.",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "afoxman@microsoft.com",
+  "dependentChangeType": "none",
+  "date": "2021-03-03T16:11:21.360Z"
+}
