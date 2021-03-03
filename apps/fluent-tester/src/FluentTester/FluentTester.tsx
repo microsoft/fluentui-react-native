@@ -78,18 +78,13 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     separatorWidth: 2,
   }));
 
-  const HeaderSeparator = Separator.customize((t) => ({
-    color: t.colors.bodyFrameDivider,
-    separatorWidth: 2,
-  }));
-
   const themedStyles = getThemedStyles(useTheme());
 
   return (
     <View style={themedStyles.root}>
       <Header />
 
-      <HeaderSeparator />
+      <Separator />
 
       <View style={fluentTesterStyles.testRoot}>
         <ScrollView style={fluentTesterStyles.testList} contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
