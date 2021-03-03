@@ -288,10 +288,19 @@ class AppleThemeModule: RCTEventEmitter {
 			return [
 				"primary" : NSFont.systemFont(ofSize: 0).familyName ?? "System",
 				"monospace" : NSFont.monospacedSystemFont(ofSize: 0, weight: .regular).familyName ?? "System",
+				"secondary": NSFont.systemFont(ofSize: 0).familyName ?? "System",
+				"cursive": NSFont.systemFont(ofSize: 0).familyName ?? "System",
+				"sansSerif": NSFont.systemFont(ofSize: 0).familyName ?? "System",
+				"serif": NSFont.systemFont(ofSize: 0).familyName ?? "System"
 			]
 		} else {
 			return [
 				"primary" : NSFont.systemFont(ofSize: 0).familyName ?? "System",
+				"monospace" :  NSFont.systemFont(ofSize: 0).familyName ?? "System",
+				"secondary": NSFont.systemFont(ofSize: 0).familyName ?? "System",
+				"cursive": NSFont.systemFont(ofSize: 0).familyName ?? "System",
+				"sansSerif": NSFont.systemFont(ofSize: 0).familyName ?? "System",
+				"serif": NSFont.systemFont(ofSize: 0).familyName ?? "System"
 			]
 		}
 	}
