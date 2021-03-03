@@ -1,8 +1,0 @@
-{
-  "type": "none",
-  "comment": "Fix bundle file name in tester-win32 script commands. Update yarn lockfile (deps from a previous change were not recorded).",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "adam@thefoxmans.net",
-  "dependentChangeType": "none",
-  "date": "2021-03-03T17:58:48.598Z"
-}
