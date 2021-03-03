@@ -56,7 +56,7 @@ class AppleThemeModule: RCTEventEmitter {
 				"variants" : fontVariants()
 			],
 			"host" : [
-				"appearance" : isDarkMode ? "dark" : "Light"
+				"appearance" : isDarkMode ? "dark" : "light"
 			]
 		]
 	}
