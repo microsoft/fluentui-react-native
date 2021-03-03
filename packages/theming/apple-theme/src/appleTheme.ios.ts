@@ -47,7 +47,7 @@ export const BaseAppleLightThemeIOS: Theme = {
   typography: appleTypography(),
   spacing: appleSpacing(),
   components: appleComponents,
-  host: { appearance: 'light' }, // TODO should be 'dynamic'
+  host: { appearance: 'light' },
 };
 
 export const BaseAppleDarkThemeIOS: Theme = {
@@ -55,5 +55,5 @@ export const BaseAppleDarkThemeIOS: Theme = {
   typography: appleTypography(),
   spacing: appleSpacing(),
   components: appleComponents,
-  host: { appearance: 'light' }, // TODO should be 'dynamic'
+  host: { appearance: 'dark' },
 };
