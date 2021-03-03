@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Wed, 03 Mar 2021 17:27:13 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.7.20",
+      "version": "0.7.20",
+      "comments": {
+        "none": [
+          {
+            "comment": "Fix rnx-start command line in tester-win32 package.",
+            "author": "afoxman@microsoft.com",
+            "commit": "26048ed9d7ce9b6d1294e5aaa5845517dd31302f",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 02 Mar 2021 17:28:32 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.7.20",
       "version": "0.7.20",
