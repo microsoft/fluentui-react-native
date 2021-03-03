@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Add Experimental Button to iOS tests",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-03-03T21:33:42.213Z"
+}
