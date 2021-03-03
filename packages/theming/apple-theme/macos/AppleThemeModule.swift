@@ -30,8 +30,6 @@ class AppleThemeModule: RCTEventEmitter {
 			// Due to some weirdness in how macOS handles appearance changes, we need this extra logic in order to convert
 			// the system colors to their corrent hex strings at the time of this method invokation.
 			let appearance = NSApp.effectiveAppearance
-			let isDarkMode = NSApplication.shared.effectiveAppearance.bestMatch(from: [.darkAqua]) == .darkAqua
-			NSLog(isDarkMode ? "Dark": "Light")
 			var _theme: [AnyHashable: Any]  = [:]
 			if #available(OSX 11.0, *) {
 				appearance.performAsCurrentDrawingAppearance({
@@ -78,8 +76,6 @@ class AppleThemeModule: RCTEventEmitter {
 		let brandForegroundDisabled = NSColor(named: "ButtonColors/brandForegroundDisabled", bundle: FluentUIResources.resourceBundle)!
 		let brandBackgroundDisabled = NSColor(named: "ButtonColors/brandBackgroundDisabled", bundle: FluentUIResources.resourceBundle)!
 		let neutralInverted = NSColor(named: "ButtonColors/neutralInverted", bundle: FluentUIResources.resourceBundle)!
-
-		NSLog(RCTColorToHexString(NSColor.windowBackgroundColor.cgColor) == "#ececec" ? "SAAD Native Light" : "SAAD Native Dark")
 		
 		return [
 			/* PaletteBackgroundColors & PaletteTextColors */

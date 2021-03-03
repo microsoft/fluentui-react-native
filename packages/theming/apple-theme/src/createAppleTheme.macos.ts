@@ -15,8 +15,9 @@ export function createAppleTheme(): ThemeReference {
       if (error) {
         console.error(`Error retrieving apple theming module! ${error}`);
       }
-      // Layer the native apple theming module values on top of the base Apple theme
       partialThemeFromNativeModule = applePartialTheme;
+
+      // Layer the native apple theming module values on top of the base Apple theme
       appleThemeReference.update(applePartialTheme);
     });
 
