@@ -54,7 +54,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     buttonBackgroundHovered: fluentUIApple.communicationBlue,
     buttonBackgroundCheckedHovered: fluentUIApple.communicationBlueShade20,
     buttonBackgroundPressed: fluentUIApple.communicationBlueShade20,
-    buttonBackgroundDisabled: fluentUIApple.gray100,
+    buttonBackgroundDisabled: fluentUIApple.brandBackgroundDisabled,
     buttonText: fluentUIApple.neutralInverted,
     buttonTextHovered: fluentUIApple.neutralInverted,
     buttonTextChecked: fluentUIApple.neutralInverted,
@@ -124,7 +124,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     buttonPressedContent: fluentUIApple.neutralInverted,
     buttonPressedIcon: fluentUIApple.neutralInverted,
 
-    buttonDisabledBackground: fluentUIApple.gray100,
+    buttonDisabledBackground: fluentUIApple.brandBackgroundDisabled,
     buttonDisabledBorder: 'transparent',
     buttonDisabledContent: fluentUIApple.brandForegroundDisabled,
     buttonDisabledIcon: fluentUIApple.brandForegroundDisabled,

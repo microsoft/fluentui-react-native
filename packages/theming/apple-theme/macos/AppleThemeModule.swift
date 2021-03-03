@@ -23,8 +23,30 @@ class AppleThemeModule: RCTEventEmitter {
 			return DispatchQueue.main
 		}
 	}
+	
+	static var theme: [AnyHashable: Any] {
+		get {
+			// https://stackoverflow.com/questions/56968587/nscolor-systemcolor-not-changing-when-dark-light-mode-switched
+			// Due to some weirdness in how macOS handles appearance changes, we need this extra logic in order to convert
+			// the system colors to their corrent hex strings at the time of this method invokation.
+			let appearance = NSApp.effectiveAppearance
+			let isDarkMode = NSApplication.shared.effectiveAppearance.bestMatch(from: [.darkAqua]) == .darkAqua
+			NSLog(isDarkMode ? "Dark": "Light")
+			var _theme: [AnyHashable: Any]  = [:]
+			if #available(OSX 11.0, *) {
+				appearance.performAsCurrentDrawingAppearance({
+					_theme = calculateTheme()
+				})
+			} else {
+				NSAppearance.current = appearance
+				_theme = calculateTheme()
+			}
+			return _theme
+		}
+	}
 
-	static func themingModule() -> [AnyHashable : Any] {
+	static private func calculateTheme() -> [AnyHashable : Any] {
+		let isDarkMode = NSApplication.shared.effectiveAppearance.bestMatch(from: [.darkAqua]) == .darkAqua
 		return [
 			"colors": palette(),
 			"typography" : [
@@ -33,6 +55,9 @@ class AppleThemeModule: RCTEventEmitter {
 				"families" : fontFamilies(),
 				"variants" : fontVariants()
 			],
+			"host" : [
+				"appearance" : isDarkMode ? "dark" : "Light"
+			]
 		]
 	}
 
@@ -42,7 +67,7 @@ class AppleThemeModule: RCTEventEmitter {
 
 	@objc(getApplePartialThemeWithCallback:)
 	func getApplePartialTheme(callback: RCTResponseSenderBlock) {
-		callback([NSNull(), AppleThemeModule.themingModule()])
+		callback([NSNull(), AppleThemeModule.theme])
 	}
 	
 	// MARK: - Colors
@@ -54,6 +79,8 @@ class AppleThemeModule: RCTEventEmitter {
 		let brandBackgroundDisabled = NSColor(named: "ButtonColors/brandBackgroundDisabled", bundle: FluentUIResources.resourceBundle)!
 		let neutralInverted = NSColor(named: "ButtonColors/neutralInverted", bundle: FluentUIResources.resourceBundle)!
 
+		NSLog(RCTColorToHexString(NSColor.windowBackgroundColor.cgColor) == "#ececec" ? "SAAD Native Light" : "SAAD Native Dark")
+		
 		return [
 			/* PaletteBackgroundColors & PaletteTextColors */
 
@@ -261,14 +288,16 @@ class AppleThemeModule: RCTEventEmitter {
 	// MARK: - Typography
 
 	static func fontFamilies() -> [AnyHashable : Any] {
-		return [
-			"primary" : NSFont.systemFont(ofSize: 0).familyName!,
-			"secondary" : NSFont.systemFont(ofSize: 0).familyName!,
-			"cursive" : NSFont.systemFont(ofSize: 0).familyName!,
-			"monospace" : NSFont.systemFont(ofSize: 0).familyName!,
-			"sansSerif" : NSFont.systemFont(ofSize: 0).familyName!,
-			"serif" : NSFont.systemFont(ofSize: 0).familyName!,
-		]
+		if #available(OSX 10.15, *) {
+			return [
+				"primary" : NSFont.systemFont(ofSize: 0).familyName ?? "System",
+				"monospace" : NSFont.monospacedSystemFont(ofSize: 0, weight: .regular).familyName ?? "System",
+			]
+		} else {
+			return [
+				"primary" : NSFont.systemFont(ofSize: 0).familyName ?? "System",
+			]
+		}
 	}
 
 	/// Map the current FluentUI React Native font sizes approximately to their corresponding apple text style,
@@ -398,30 +427,36 @@ class AppleThemeModule: RCTEventEmitter {
 	override func startObserving() {
 		hasListeners = true;
 		
+			
+		kvoToken = NSApplication.shared.observe(\.effectiveAppearance) { (application, change) in
+			guard self.bridge != nil else {
+				return
+			}
+			self.sendEvent(withName: Events.AppleInterfaceThemeChanged.name, body: AppleThemeModule.theme)
+		}
+		
+		// Observe changes to control accent color
 		let notificationCenter = DistributedNotificationCenter.default()
-		notificationCenter.addObserver(forName: .AppleInterfaceThemeChangedNotification, object: nil, queue: OperationQueue.main) { (notification) in
+		notificationCenter.addObserver(forName: NSColor.systemColorsDidChangeNotification, object: nil, queue: OperationQueue.main) { (notification) in
 			if (self.hasListeners) {
-				self.sendEvent(withName: Events.AppleInterfaceThemeChanged.name, body: nil)
+				guard self.bridge != nil else {
+					return
+				}
+				self.sendEvent(withName: Events.AppleInterfaceThemeChanged.name, body: AppleThemeModule.theme)
 			}
 		}
-		notificationCenter.addObserver(forName: .AppleColorPreferencesChangedNotification, object: nil, queue: OperationQueue.main) { (notification) in
-			if (self.hasListeners) {
-				self.sendEvent(withName: Events.AppleColorPreferencesChanged.name, body: nil)
-			}
-		}
+
 		
 	}
 
 	override func stopObserving() {
 		let notificationCenter = DistributedNotificationCenter.default()
 		notificationCenter.removeObserver(self)
+		kvoToken?.invalidate()
 		hasListeners = false;
 	}
 
 	private var hasListeners = false
-}
-
-extension NSNotification.Name {
-	public static let AppleInterfaceThemeChangedNotification = NSNotification.Name("AppleInterfaceThemeChangedNotification")
-	public static let AppleColorPreferencesChangedNotification = NSNotification.Name("AppleColorPreferencesChangedNotification")
+	
+	private var kvoToken: NSKeyValueObservation?
 }
