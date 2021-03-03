@@ -3,7 +3,7 @@ import { StealthButton, Separator } from '@fluentui/react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
-import { ScrollView, View, Text as RNText } from 'react-native';
+import { ScrollView, View, Text as RNText, useColorScheme } from 'react-native';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fluentTesterStyles } from './TestComponents/Common/styles';
@@ -45,7 +45,6 @@ const Header: React.FunctionComponent<{}> = () => {
 };
 
 const getThemedStyles = themedStyleSheet((t: Theme) => {
-  // const window = useWindowDimensions();
   return {
     root: {
       backgroundColor: t.colors.background,
@@ -79,13 +78,18 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     separatorWidth: 2,
   }));
 
+  const HeaderSeparator = Separator.customize((t) => ({
+    color: t.colors.bodyFrameDivider,
+    separatorWidth: 2,
+  }));
+
   const themedStyles = getThemedStyles(useTheme());
 
   return (
     <View style={themedStyles.root}>
       <Header />
 
-      <Separator />
+      <HeaderSeparator />
 
       <View style={fluentTesterStyles.testRoot}>
         <ScrollView style={fluentTesterStyles.testList} contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
