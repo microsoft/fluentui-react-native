@@ -1,8 +1,0 @@
-{
-  "type": "none",
-  "comment": "Add button icon tests specific to win32",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "warleu@microsoft.com",
-  "dependentChangeType": "none",
-  "date": "2021-03-04T04:27:08.692Z"
-}
