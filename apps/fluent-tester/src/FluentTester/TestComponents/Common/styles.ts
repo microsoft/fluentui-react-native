@@ -97,7 +97,7 @@ export const fluentTesterStyles = StyleSheet.create({
 
   testList: {
     flexShrink: 0,
-    flexGrow: 1,
+    flexGrow: 0,
     flexDirection: 'row',
   },
 
