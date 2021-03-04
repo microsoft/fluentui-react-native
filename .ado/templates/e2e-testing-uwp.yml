@@ -56,11 +56,11 @@ steps:
       Get-Process
     displayName: 'Get List of processes'
 
-  # Kill FluentTester, leave server up and running. This was the only way I could get the server continuously running
+  # Kill ReactTestApp, leave server up and running. This was the only way I could get the server continuously running
   # as a separate process.
   - powershell: |
-      Stop-Process -Name FluentTester
-    displayName: 'Kill FluentTester Process'
+      Stop-Process -Name ReactTestApp
+    displayName: 'Kill ReactTestApp Process'
 
   # Creates a variable that determines whether the previous build tasks succeeded.
   # Usage: We want the tasks that generate reports to run for both passing/failing E2E testing tasks. In order to do so, we need to make
