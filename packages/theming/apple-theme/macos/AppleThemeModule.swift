@@ -76,6 +76,8 @@ class AppleThemeModule: RCTEventEmitter {
 		let brandForegroundDisabled = NSColor(named: "ButtonColors/brandForegroundDisabled", bundle: FluentUIResources.resourceBundle)!
 		let brandBackgroundDisabled = NSColor(named: "ButtonColors/brandBackgroundDisabled", bundle: FluentUIResources.resourceBundle)!
 		let neutralInverted = NSColor(named: "ButtonColors/neutralInverted", bundle: FluentUIResources.resourceBundle)!
+		let neutralForeground3 = NSColor(named: "ButtonColors/neutralForeground3", bundle: FluentUIResources.resourceBundle)!
+		let neutralBackground3 = NSColor(named: "ButtonColors/neutralBackground3", bundle: FluentUIResources.resourceBundle)!
 		
 		return [
 			/* PaletteBackgroundColors & PaletteTextColors */
@@ -120,17 +122,18 @@ class AppleThemeModule: RCTEventEmitter {
 			"inputTextHovered" : RCTColorToHexString(NSColor.textColor.cgColor),
 			"inputPlaceholderText" : RCTColorToHexString(NSColor.placeholderTextColor.cgColor),
 
-			"buttonBackgroundChecked" : RCTColorToHexString(NSColor.controlAccentColor.withSystemEffect(.pressed).cgColor),
-			"buttonBackgroundHovered" : RCTColorToHexString(NSColor.controlAccentColor.cgColor),
-			"buttonBackgroundCheckedHovered" : RCTColorToHexString(NSColor.controlAccentColor.withSystemEffect(.pressed).cgColor),
-			"buttonBackgroundPressed" : RCTColorToHexString(NSColor.controlAccentColor.withSystemEffect(.pressed).cgColor),
-			"buttonBackgroundDisabled" : RCTColorToHexString(NSColor.controlAccentColor.withSystemEffect(.disabled).cgColor),
-			"buttonText" : RCTColorToHexString(neutralInverted.cgColor),
-			"buttonTextHovered" : RCTColorToHexString(neutralInverted.cgColor),
-			"buttonTextChecked" : RCTColorToHexString(neutralInverted.withSystemEffect(.pressed).cgColor),
-			"buttonTextCheckedHovered" : RCTColorToHexString(neutralInverted.withSystemEffect(.pressed).cgColor),
-			"buttonTextPressed" : RCTColorToHexString(neutralInverted.withSystemEffect(.pressed).cgColor),
-			"buttonTextDisabled" : RCTColorToHexString(brandForegroundDisabled.cgColor),
+			// Set the default button tokens to match the Acrylic Button style
+			"buttonBackgroundChecked" : RCTColorToHexString(neutralBackground3.withSystemEffect(.pressed).cgColor),
+			"buttonBackgroundHovered" : RCTColorToHexString(neutralBackground3.cgColor),
+			"buttonBackgroundCheckedHovered" : RCTColorToHexString(neutralBackground3.withSystemEffect(.pressed).cgColor),
+			"buttonBackgroundPressed" : RCTColorToHexString(neutralBackground3.withSystemEffect(.pressed).cgColor),
+			"buttonBackgroundDisabled" : RCTColorToHexString(neutralBackground3.withSystemEffect(.disabled).cgColor),
+			"buttonText" : RCTColorToHexString(neutralForeground3.cgColor),
+			"buttonTextHovered" : RCTColorToHexString(neutralForeground3.cgColor),
+			"buttonTextChecked" : RCTColorToHexString(neutralForeground3.withSystemEffect(.pressed).cgColor),
+			"buttonTextCheckedHovered" : RCTColorToHexString(neutralForeground3.withSystemEffect(.pressed).cgColor),
+			"buttonTextPressed" : RCTColorToHexString(neutralForeground3.withSystemEffect(.pressed).cgColor),
+			"buttonTextDisabled" : RCTColorToHexString(neutralForeground3.withSystemEffect(.disabled).cgColor),
 			"buttonBorderDisabled" : "transparent",
 			"buttonBorderFocused" : "transparent",
 
@@ -174,30 +177,31 @@ class AppleThemeModule: RCTEventEmitter {
 
 			/* ControlColorTokens */
 
-			"buttonBackground" : RCTColorToHexString(NSColor.controlAccentColor.cgColor),
+			// Set the default button tokens to match the Acrylic Button style
+			"buttonBackground" : RCTColorToHexString(neutralBackground3.cgColor),
 			"buttonBorder" : "transparent",
-			"buttonContent" : RCTColorToHexString(neutralInverted.cgColor),
-			"buttonIcon" : RCTColorToHexString(neutralInverted.cgColor),
+			"buttonContent" : RCTColorToHexString(neutralForeground3.cgColor),
+			"buttonIcon" : RCTColorToHexString(neutralForeground3.cgColor),
 
-			"buttonHoveredBackground" : RCTColorToHexString(NSColor.controlAccentColor.cgColor),
+			"buttonHoveredBackground" : RCTColorToHexString(neutralBackground3.cgColor),
 			"buttonHoveredBorder" : "transparent",
-			"buttonHoveredContent" : RCTColorToHexString(neutralInverted.cgColor),
-			"buttonHoveredIcon" : RCTColorToHexString(neutralInverted.cgColor),
+			"buttonHoveredContent" : RCTColorToHexString(neutralForeground3.cgColor),
+			"buttonHoveredIcon" : RCTColorToHexString(neutralForeground3.cgColor),
 
-			"buttonFocusedBackground" : RCTColorToHexString(NSColor.controlAccentColor.cgColor),
+			"buttonFocusedBackground" : RCTColorToHexString(neutralForeground3.cgColor),
 			"buttonFocusedBorder" : "transparent",
-			"buttonFocusedContent" : RCTColorToHexString(neutralInverted.cgColor),
-			"buttonFocusedIcon" : RCTColorToHexString(neutralInverted.cgColor),
+			"buttonFocusedContent" : RCTColorToHexString(neutralForeground3.cgColor),
+			"buttonFocusedIcon" : RCTColorToHexString(neutralForeground3.cgColor),
 
-			"buttonPressedBackground" : RCTColorToHexString(NSColor.controlAccentColor.withSystemEffect(.pressed).cgColor),
+			"buttonPressedBackground" : RCTColorToHexString(neutralBackground3.withSystemEffect(.pressed).cgColor),
 			"buttonPressedBorder" : "transparent",
-			"buttonPressedContent" : RCTColorToHexString(neutralInverted.withSystemEffect(.pressed).cgColor),
-			"buttonPressedIcon" : RCTColorToHexString(neutralInverted.withSystemEffect(.pressed).cgColor),
+			"buttonPressedContent" : RCTColorToHexString(neutralForeground3.withSystemEffect(.pressed).cgColor),
+			"buttonPressedIcon" : RCTColorToHexString(neutralForeground3.withSystemEffect(.pressed).cgColor),
 
-			"buttonDisabledBackground" : RCTColorToHexString(NSColor.controlAccentColor.withSystemEffect(.disabled).cgColor),
+			"buttonDisabledBackground" : RCTColorToHexString(neutralBackground3.withSystemEffect(.disabled).cgColor),
 			"buttonDisabledBorder" : "transparent",
-			"buttonDisabledContent" : RCTColorToHexString(brandForegroundDisabled.cgColor),
-			"buttonDisabledIcon" : RCTColorToHexString(brandForegroundDisabled.cgColor),
+			"buttonDisabledContent" : RCTColorToHexString(neutralForeground3.withSystemEffect(.disabled).cgColor),
+			"buttonDisabledIcon" : RCTColorToHexString(neutralForeground3.withSystemEffect(.disabled).cgColor),
 
 			"ghostBackground" : "transparent",
 			"ghostBorder" : "transparent",

@@ -50,6 +50,8 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     inputTextHovered: applePlatform.textColor,
     inputPlaceholderText: applePlatform.placeholderTextColor,
 
+    // Set the fallback default button palette to communicationBlue,
+    // and use communicationBlueShade20 to emulate the NSColor pressed system effect
     buttonBackgroundChecked: fluentUIApple.communicationBlueShade20,
     buttonBackgroundHovered: fluentUIApple.communicationBlue,
     buttonBackgroundCheckedHovered: fluentUIApple.communicationBlueShade20,
