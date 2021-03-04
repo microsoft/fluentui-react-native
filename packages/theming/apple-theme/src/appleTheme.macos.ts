@@ -1,5 +1,5 @@
 import { Spacing, Theme } from '@fluentui-react-native/theme-types';
-import { fallbackApplePalette } from './appleTheme.colors.macos';
+import { fallbackApplePalette } from './appleColors.macos';
 import { fallbackAppleTypography } from './appleTypography.macos';
 
 export function appleSpacing(): Spacing {
@@ -48,7 +48,9 @@ export const appleComponents = {
   },
 };
 
-// The apple theme defined entirely in JS, intended as a fallback while the native module loads
+/** The apple theme defined entirely in JS, intended as a fallback while the native module loads
+ * or if the native module is not found
+ */
 export const BaseAppleThemeMacOS: Theme = {
   colors: fallbackApplePalette(),
   typography: fallbackAppleTypography(),
