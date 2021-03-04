@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Thu, 04 Mar 2021 22:22:33 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.7.20",
+      "version": "0.7.20",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add button icon tests specific to win32",
+            "author": "warleu@microsoft.com",
+            "commit": "acedf34f3fa9000885e5a2ab4cc27eb3b43e9190",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 03 Mar 2021 18:35:59 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.7.20",
       "version": "0.7.20",
