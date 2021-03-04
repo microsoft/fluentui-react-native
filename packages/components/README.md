@@ -121,7 +121,7 @@ export const settings: IComposeSettings<IButtonType> = [
     },
     root: {
       accessible: true,
-      acceptsKeyboardFocus: true,
+      focusable: true,
       accessibilityRole: 'button',
     } as ViewProps,
     content: {},
