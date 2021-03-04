@@ -2028,10 +2028,10 @@
     stacktrace-parser "^0.1.3"
     whatwg-fetch "^3.0.0"
 
-"@office-iss/rex-win32@0.62.12-devmain.13420.10000":
-  version "0.62.12-devmain.13420.10000"
-  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.62.12-devmain.13420.10000.tgz#fdf448ab220822ebe32ebba318aa693018ef6962"
-  integrity sha512-M2Bdg+G2O0AJhAVlvJ2io8mVd5Zj90SG8ew6OPjIXs0TGhsRP+OVE40hH9St1JeFomT6zC+0PpsMogTCAvy8AQ==
+"@office-iss/rex-win32@0.62.22-devmain.13806.10000":
+  version "0.62.22-devmain.13806.10000"
+  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.62.22-devmain.13806.10000.tgz#0348ae4fbb94a805a1d35cb215d667040c729828"
+  integrity sha512-sG/eyFotSWUcbEraILbMALgNJ/2eWfMAjhVZWxCvBSe5OneLJjoaCmWgzs4JI/WvXbExBw3Dgfvhaz/Xj53LVg==
   dependencies:
     command-line-args "^5.0.2"
     command-line-usage "^5.0.5"
@@ -14021,6 +14021,13 @@ react-native-macos@0.63.1:
     use-subscription "^1.0.0"
     whatwg-fetch "^3.0.0"
 
+react-native-svg-loader@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-svg-loader/-/react-native-svg-loader-1.0.0.tgz#bde024157df58bc13434a4a1a3a0848bcbf2fa63"
+  integrity sha512-FcFuOtGie+rz5W7qO6stwD0fZfW9xomVCDIHrOxx7pT9/seXoq36VCDdHY8QsLC7FelhAbAq76aKfX6x/NR3Ww==
+  dependencies:
+    xmldom "^0.1.27"
+
 react-native-svg-transformer@^0.14.3:
   version "0.14.3"
   resolved "https://registry.yarnpkg.com/react-native-svg-transformer/-/react-native-svg-transformer-0.14.3.tgz#43c8e176f5a11f16f39b87a64018e0ac090ffbdb"
@@ -17476,7 +17483,7 @@ xmldoc@^1.1.2:
   dependencies:
     sax "^1.2.1"
 
-xmldom@0.1.x:
+xmldom@0.1.x, xmldom@^0.1.27:
   version "0.1.31"
   resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.1.31.tgz#b76c9a1bd9f0a9737e5a72dc37231cf38375e2ff"
   integrity sha512-yS2uJflVQs6n+CyjHoaBmVSqIDevTAWrzMmjG1Gc7h1qQ7uVozNhEPJAwZXWyGQ/Gafo3fCwrcaokezLPupVyQ==
