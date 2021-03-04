@@ -79,6 +79,7 @@ class AppleThemeModule: RCTEventEmitter {
 		let neutralForeground3 = NSColor(named: "ButtonColors/neutralForeground3", bundle: FluentUIResources.resourceBundle)!
 		let neutralBackground3 = NSColor(named: "ButtonColors/neutralBackground3", bundle: FluentUIResources.resourceBundle)!
 		
+		
 		return [
 			/* PaletteBackgroundColors & PaletteTextColors */
 
@@ -113,8 +114,8 @@ class AppleThemeModule: RCTEventEmitter {
 			"inputBorder" : RCTColorToHexString(NSColor.separatorColor.cgColor),
 			"inputBorderHovered" : RCTColorToHexString(NSColor.separatorColor.cgColor),
 			"inputBackground" : RCTColorToHexString(NSColor.textBackgroundColor.cgColor),
-			"inputBackgroundChecked" : RCTColorToHexString(NSColor.selectedContentBackgroundColor.cgColor),
-			"inputBackgroundCheckedHovered" : RCTColorToHexString(NSColor.selectedContentBackgroundColor.cgColor),
+			"inputBackgroundChecked" : RCTColorToHexString(NSColor.textBackgroundColor.cgColor),
+			"inputBackgroundCheckedHovered" : RCTColorToHexString(NSColor.textBackgroundColor.cgColor),
 			"inputForegroundChecked" : RCTColorToHexString(FluentUI.Colors.color(from: FluentUI.Colors.Palette.communicationBlue).cgColor),
 			"inputFocusBorderAlt" : RCTColorToHexString(NSColor.keyboardFocusIndicatorColor.cgColor),
 			"smallInputBorder" : RCTColorToHexString(NSColor.separatorColor.cgColor),
@@ -123,15 +124,15 @@ class AppleThemeModule: RCTEventEmitter {
 			"inputPlaceholderText" : RCTColorToHexString(NSColor.placeholderTextColor.cgColor),
 
 			// Set the default button tokens to match the Acrylic Button style
-			"buttonBackgroundChecked" : RCTColorToHexString(neutralBackground3.withSystemEffect(.pressed).cgColor),
+			"buttonBackgroundChecked" : RCTColorToHexString(neutralBackground3.cgColor),
 			"buttonBackgroundHovered" : RCTColorToHexString(neutralBackground3.cgColor),
-			"buttonBackgroundCheckedHovered" : RCTColorToHexString(neutralBackground3.withSystemEffect(.pressed).cgColor),
+			"buttonBackgroundCheckedHovered" : RCTColorToHexString(neutralBackground3.cgColor),
 			"buttonBackgroundPressed" : RCTColorToHexString(neutralBackground3.withSystemEffect(.pressed).cgColor),
 			"buttonBackgroundDisabled" : RCTColorToHexString(neutralBackground3.withSystemEffect(.disabled).cgColor),
 			"buttonText" : RCTColorToHexString(neutralForeground3.cgColor),
 			"buttonTextHovered" : RCTColorToHexString(neutralForeground3.cgColor),
-			"buttonTextChecked" : RCTColorToHexString(neutralForeground3.withSystemEffect(.pressed).cgColor),
-			"buttonTextCheckedHovered" : RCTColorToHexString(neutralForeground3.withSystemEffect(.pressed).cgColor),
+			"buttonTextChecked" : RCTColorToHexString(neutralForeground3.cgColor),
+			"buttonTextCheckedHovered" : RCTColorToHexString(neutralForeground3.cgColor),
 			"buttonTextPressed" : RCTColorToHexString(neutralForeground3.withSystemEffect(.pressed).cgColor),
 			"buttonTextDisabled" : RCTColorToHexString(neutralForeground3.withSystemEffect(.disabled).cgColor),
 			"buttonBorderDisabled" : "transparent",
@@ -163,8 +164,8 @@ class AppleThemeModule: RCTEventEmitter {
 			"listBackground" : "transparent",
 			"listText" : RCTColorToHexString(NSColor.textColor.cgColor),
 			"listItemBackgroundHovered" : "transparent",
-			"listItemBackgroundChecked" : RCTColorToHexString(NSColor.selectedContentBackgroundColor.cgColor),
-			"listItemBackgroundCheckedHovered" : RCTColorToHexString(NSColor.selectedContentBackgroundColor.cgColor),
+			"listItemBackgroundChecked" : "transparent",
+			"listItemBackgroundCheckedHovered" : "transparent",
 
 			"listHeaderBackgroundHovered" : RCTColorToHexString(NSColor.headerTextColor.cgColor),
 			"listHeaderBackgroundPressed" : RCTColorToHexString(NSColor.headerTextColor.cgColor),
@@ -253,20 +254,20 @@ class AppleThemeModule: RCTEventEmitter {
 			"brandDisabledContent" : RCTColorToHexString(brandForegroundDisabled.cgColor),
 			"brandDisabledIcon" : RCTColorToHexString(brandForegroundDisabled.cgColor),
 
-			"buttonCheckedBackground" : RCTColorToHexString(FluentUI.Colors.primary.withSystemEffect(.pressed).cgColor),
-			"buttonCheckedContent" : RCTColorToHexString(neutralInverted.withSystemEffect(.pressed).cgColor),
-			"buttonCheckedHoveredBackground" : RCTColorToHexString(FluentUI.Colors.primary.withSystemEffect(.pressed).cgColor),
+			"buttonCheckedBackground" : RCTColorToHexString(FluentUI.Colors.primary.cgColor),
+			"buttonCheckedContent" : RCTColorToHexString(neutralInverted.cgColor),
+			"buttonCheckedHoveredBackground" : RCTColorToHexString(FluentUI.Colors.primary.cgColor),
 			"buttonCheckedHoveredContent" : RCTColorToHexString(neutralInverted.cgColor),
 
-			"brandCheckedBackground" : RCTColorToHexString(FluentUI.Colors.primary.withSystemEffect(.pressed).cgColor),
-			"brandCheckedContent" : RCTColorToHexString(neutralInverted.withSystemEffect(.pressed).cgColor),
-			"brandCheckedHoveredBackground" : RCTColorToHexString(FluentUI.Colors.primary.withSystemEffect(.pressed).cgColor),
+			"brandCheckedBackground" : RCTColorToHexString(FluentUI.Colors.primary.cgColor),
+			"brandCheckedContent" : RCTColorToHexString(neutralInverted.cgColor),
+			"brandCheckedHoveredBackground" : RCTColorToHexString(FluentUI.Colors.primary.cgColor),
 			"brandCheckedHoveredContent" : RCTColorToHexString(neutralInverted.cgColor),
 
 			"ghostCheckedBackground" : "transparent",
-			"ghostCheckedContent" : RCTColorToHexString(FluentUI.Colors.primary.withSystemEffect(.deepPressed).cgColor),
+			"ghostCheckedContent" : RCTColorToHexString(FluentUI.Colors.primary.cgColor),
 			"ghostCheckedHoveredBackground" : "transparent",
-			"ghostCheckedHoveredContent" : RCTColorToHexString(FluentUI.Colors.primary.withSystemEffect(.deepPressed).cgColor),
+			"ghostCheckedHoveredContent" : RCTColorToHexString(FluentUI.Colors.primary.cgColor),
 			"ghostCheckedHoveredBorder" : "transparent",
 
 			"ghostSecondaryContent" : RCTColorToHexString(FluentUI.Colors.primary.cgColor),
