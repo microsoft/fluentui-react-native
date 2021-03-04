@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/shimmer",
   "entries": [
     {
+      "date": "Mon, 01 Mar 2021 22:53:12 GMT",
+      "tag": "@fluentui-react-native/shimmer_v0.4.3",
+      "version": "0.4.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update deps",
+            "author": "warleu@microsoft.com",
+            "commit": "23cd3d437e63e105f5feee16a1b8ef8e769b61c1",
+            "package": "@fluentui-react-native/shimmer"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Feb 2021 19:45:36 GMT",
       "tag": "@fluentui-react-native/shimmer_v0.4.2",
       "version": "0.4.2",
