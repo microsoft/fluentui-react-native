@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Alert, Modal, View, StyleSheet, Button } from 'react-native';
+import { Modal, View } from 'react-native';
+import { StealthButton } from '@fluentui/react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { Picker } from '@react-native-picker/picker';
 import { lightnessOptionsApple, testerTheme } from './CustomThemes';
@@ -100,38 +101,31 @@ const ThemePickerRoot: React.FunctionComponent<{}> = () => {
 };
 
 export const ThemePickers: React.FunctionComponent<{}> = () => {
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={{ marginTop: 22 }}>
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={modalVisible}
-        onRequestClose={() => {
-          alert('Modal has been closed.');
-        }}
-      >
-        <View style={{ marginTop: 22 }}>
+      <Modal presentationStyle="pageSheet" animationType="slide" transparent={false} visible={modalVisible}>
+        <View style={{ alignItems: 'center', padding: 16 }}>
           <View>
             <ThemePickerRoot />
 
-            <Button
-              title="Close"
-              onPress={() => {
+            <StealthButton
+              content="Close"
+              onClick={() => {
                 setModalVisible(!modalVisible);
               }}
-            ></Button>
+            />
           </View>
         </View>
       </Modal>
 
-      <Button
-        title="Show Modal"
-        onPress={() => {
+      <StealthButton
+        content="⚙️"
+        onClick={() => {
           setModalVisible(true);
         }}
-      ></Button>
+      />
     </View>
   );
 };

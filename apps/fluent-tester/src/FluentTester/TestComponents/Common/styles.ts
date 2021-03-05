@@ -69,27 +69,6 @@ export const fluentTesterStyles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 
-  pickerRoot: {
-    flexDirection: 'row',
-  },
-
-  picker: {
-    flexDirection: 'row',
-    padding: 4,
-  },
-
-  pickerLabel: {
-    fontSize: 12,
-    marginTop: 6,
-    fontWeight: 'bold',
-  },
-
-  dropdown: {
-    height: 30,
-    width: 90,
-    fontSize: 12,
-  },
-
   testHeader: {
     marginBottom: 8,
     marginTop: 4,
