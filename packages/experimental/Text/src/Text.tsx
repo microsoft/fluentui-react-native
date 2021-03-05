@@ -10,7 +10,7 @@ import {
   withSlots,
   Theme,
 } from '@fluentui-react-native/framework';
-import { Text as RNText } from 'react-native';
+import { Text as RNText, ColorValue } from 'react-native';
 import { filterTextProps, ITextProps } from '@fluentui-react-native/adapters';
 
 const textName = 'Text';
@@ -21,7 +21,7 @@ const textName = 'Text';
  */
 export interface TextTokens extends FontTokens {
   /** foreground text color */
-  color?: string;
+  color?: ColorValue;
 
   /** alternate mode for disabled look and feel */
   disabled?: TextTokens;
@@ -33,7 +33,7 @@ export interface TextTokens extends FontTokens {
 export type TextProps<TBase = ITextProps> = TBase &
   FontVariantTokens & {
     /** foreground text color */
-    color?: string;
+    color?: ColorValue;
 
     /** whether or not this text should be presented as disabled */
     disabled?: boolean;

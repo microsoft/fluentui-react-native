@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ViewProps, ImageProps, ViewStyle } from 'react-native';
+import { ViewProps, ImageProps, ViewStyle, ColorValue } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
@@ -11,12 +11,12 @@ export interface ButtonTokens extends FontTokens, IBorderTokens {
   /**
    * Background color for the button
    */
-  backgroundColor?: string;
+  backgroundColor?: ColorValue;
 
   /**
    * Foreground color for the text and/or icon of the button
    */
-  color?: string;
+  color?: ColorValue;
 
   /**
    * The amount of padding between the border and the contents.
@@ -31,17 +31,17 @@ export interface ButtonTokens extends FontTokens, IBorderTokens {
   /**
    * The icon color.
    */
-  iconColor?: string;
+  iconColor?: ColorValue;
 
   /**
    * The icon color when hovering over the Button.
    */
-  iconColorHovered?: string;
+  iconColorHovered?: ColorValue;
 
   /**
    * The icon color when the Button is being pressed.
    */
-  iconColorPressed?: string;
+  iconColorPressed?: ColorValue;
 
   /**
    * The size of the icon.
