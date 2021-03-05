@@ -2,6 +2,126 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Wed, 03 Mar 2021 18:35:59 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.7.20",
+      "version": "0.7.20",
+      "comments": {
+        "none": [
+          {
+            "comment": "Fix bundle file name in tester-win32 script commands. Update yarn lockfile (deps from a previous change were not recorded).",
+            "author": "adam@thefoxmans.net",
+            "commit": "92fa274186970b2504cb3c6c5124c7cc03b28f78",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 03 Mar 2021 17:27:13 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.7.20",
+      "version": "0.7.20",
+      "comments": {
+        "none": [
+          {
+            "comment": "Fix rnx-start command line in tester-win32 package.",
+            "author": "afoxman@microsoft.com",
+            "commit": "26048ed9d7ce9b6d1294e5aaa5845517dd31302f",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 02 Mar 2021 17:28:32 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.7.20",
+      "version": "0.7.20",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update path under 'FluentUI Tester' web debugging",
+            "author": "krsiler@microsoft.com",
+            "commit": "77206c5ad0a148948ffc61870c61d8acce37f265",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 01 Mar 2021 22:53:12 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.7.19",
+      "version": "0.7.19",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update deps",
+            "author": "warleu@microsoft.com",
+            "commit": "23cd3d437e63e105f5feee16a1b8ef8e769b61c1",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 01 Mar 2021 17:28:32 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.7.18",
+      "version": "0.7.18",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Remove metro logic from FURN, replacing it with calls to the @rnx-kit CLI. Use rnx-bundle for bundling, and rnx-start for running a bundle server.",
+            "author": "afoxman@microsoft.com",
+            "commit": "5300d6216a2375d11810f1e4762774b48a922e04",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 13 Jan 2021 20:04:26 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.7.13",
+      "version": "0.7.13",
+      "comments": {
+        "none": [
+          {
+            "comment": "fix depcheck error by adding component-cache dependency for experimental button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "a0b6666ced16ccb8d06e7f91dc3136294d209de7",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 06 Jan 2021 18:41:50 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.7.11",
+      "version": "0.7.11",
+      "comments": {
+        "patch": [
+          {
+            "comment": "remove react-native-win32 dep in tester-win32",
+            "author": "krsiler@microsoft.com",
+            "commit": "07395b1141d73a37a8d9ccd09bafadd205b5a528",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 17 Dec 2020 00:09:27 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.7.9",
+      "version": "0.7.9",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add readme for svg",
+            "author": "warleu@microsoft.com",
+            "commit": "c2c28c356aabbd3e74a8d085015a3f4507fbdbe9",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 12 Dec 2020 04:27:11 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.7.9",
       "version": "0.7.9",

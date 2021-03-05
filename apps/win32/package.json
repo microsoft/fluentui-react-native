@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester-win32",
-  "version": "0.7.9",
+  "version": "0.7.20",
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
@@ -15,27 +15,28 @@
     "code-style": "fluentui-scripts code-style",
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
-    "start": "fluentui-scripts metro --server --cli --port 8081",
+    "start": "react-native rnx-start --port 8081",
     "test": "fluentui-scripts jest",
-    "bundle": "fluentui-scripts metro --platform win32 --cli",
-    "bundle-dev": "fluentui-scripts metro -platform win32 --dev --cli",
-    "run-win32": "rex-win32 --bundle index --component FluentTester --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
+    "bundle": "react-native rnx-bundle --dev false",
+    "bundle-dev": "react-native rnx-bundle",
+    "run-win32": "rex-win32 --bundle index.win32 --component FluentTester --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
     "run-win32-web": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useFastRefresh --pluginProps",
-    "run-win32-devmain": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps",
+    "run-win32-devmain": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps",
     "e2etest": "rimraf reports/* && wdio",
     "report": "allure generate allure-results --clean",
     "generate-report": "allure generate allure-results --clean && allure open"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.13.9",
+    "@fluentui-react-native/tester": "^0.16.3",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-svg": "^11.0.0"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "0.62.3",
-    "@office-iss/rex-win32": "0.62.12-devmain.13420.10000",
+    "@office-iss/rex-win32": "0.62.22-devmain.13806.10000",
+    "@office-iss/react-native-win32": "0.62.6",
     "@react-native-community/eslint-config": "^1.1.0",
+    "@rnx-kit/cli": "^0.0.3",
     "@types/jasmine": "3.5.10",
     "@types/react": "^16.9.34",
     "@types/react-native": "^0.62.0",
@@ -60,20 +61,18 @@
     "@wdio/sync": "5.20.1"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "0.62.3",
     "react": "16.11.0",
     "react-native": "0.62.2"
   },
   "jest": {
     "preset": "react-native"
   },
-  "metroBundles": {
-    "targets": [
-      "win32"
-    ],
-    "entry": "index.js",
-    "outputPath": "./dist",
-    "bundleName": "index.bundle",
-    "noPlatformSuffix": true
+  "rnx-kit": {
+    "bundle": {
+      "targets": [
+        "win32"
+      ],
+      "entryPath": "index.js"
+    }
   }
 }

@@ -1,0 +1,2 @@
+// Build for all architectures, not just the active one
+ONLY_ACTIVE_ARCH=NO

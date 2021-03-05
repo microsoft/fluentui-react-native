@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Mon, 01 Mar 2021 22:53:12 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.4.3",
+      "version": "0.4.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update deps",
+            "author": "warleu@microsoft.com",
+            "commit": "23cd3d437e63e105f5feee16a1b8ef8e769b61c1",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 12 Feb 2021 19:45:36 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.4.2",
+      "version": "0.4.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update FluentUI Apple version",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "73a55fb4635adc8be808fff2dc6312763011977d",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 13 Jan 2021 16:44:06 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Added macOS implementation of experimental avatar",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "4b8fb620a3a0525f744b47c77367aa51f5176b57",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 17 Dec 2020 00:09:27 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add readme for svg",
+            "author": "warleu@microsoft.com",
+            "commit": "c2c28c356aabbd3e74a8d085015a3f4507fbdbe9",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 12 Dec 2020 04:27:11 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.3.1",
       "version": "0.3.1",

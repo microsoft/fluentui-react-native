@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/adapters
 
-This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Mar 2021 22:53:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.1
+
+Mon, 01 Mar 2021 22:53:12 GMT
+
+### Patches
+
+- Update deps (warleu@microsoft.com)
+
+## 0.5.0
+
+Wed, 13 Jan 2021 20:04:26 GMT
+
+### Minor changes
+
+- update FUA version for button (67026167+chiuam@users.noreply.github.com)
+
+## 0.4.1
+
+Wed, 06 Jan 2021 18:41:50 GMT
+
+### Patches
+
+- Bump react-native-win32 (krsiler@microsoft.com)
 
 ## 0.4.0
 

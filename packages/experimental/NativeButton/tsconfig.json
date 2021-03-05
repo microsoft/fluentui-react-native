@@ -1,0 +1,7 @@
+{
+  "extends": "@uifabricshared/build-native/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "lib"
+  },
+  "include": ["src"]
+}

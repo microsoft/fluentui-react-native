@@ -19,7 +19,7 @@ const getRamps = (module: OfficeThemingModule): Colors => {
  * create a partial theme with overrides from the office native module
  *
  * @param module - theming native module, either the real one or a mock implementation
- * @param palette - Office palette colors, if they have been sucessfully retrieved
+ * @param palette - Office palette colors, if they have been successfully retrieved
  */
 export function createPartialOfficeTheme(module: OfficeThemingModule, themeName?: string, palette?: OfficePalette): PartialTheme {
   return {
