@@ -1,5 +1,3 @@
-import { ColorValue as RNColorValue } from 'react-native';
-
 /**
  * A color value.
  *
@@ -13,7 +11,7 @@ import { ColorValue as RNColorValue } from 'react-native';
  *
  * `{semantic: "windowBackgroundColor"}`
  */
-export type ColorValue = RNColorValue;
+export type ColorValue = string;
 
 export type ThemeColorDefinition = Palette & {
   background: ColorValue;

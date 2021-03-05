@@ -41,10 +41,18 @@ const appleComponents = {
   },
 };
 
-export const BaseAppleThemeIOS: Theme = {
-  colors: paletteFromAppleColors(),
+export const BaseAppleLightThemeIOS: Theme = {
+  colors: paletteFromAppleColors(false),
   typography: appleTypography(),
   spacing: appleSpacing(),
   components: appleComponents,
-  host: { appearance: 'dynamic' },
+  host: { appearance: 'light' },
+};
+
+export const BaseAppleDarkThemeIOS: Theme = {
+  colors: paletteFromAppleColors(true),
+  typography: appleTypography(),
+  spacing: appleSpacing(),
+  components: appleComponents,
+  host: { appearance: 'dark' },
 };
