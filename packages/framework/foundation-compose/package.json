@@ -43,10 +43,10 @@
   },
   "devDependencies": {
     "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "react": "16.11.0"
+    "react": "16.13.1"
   },
   "peerDependencies": {
-    "react": "^16.8.0"
+    "react": ">=16.13.1"
   },
   "depcheck": {
     "ignoreMatches": [

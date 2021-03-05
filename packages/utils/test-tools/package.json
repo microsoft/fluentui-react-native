@@ -22,15 +22,15 @@
   },
   "devDependencies": {
     "@types/react": "^16.9.34",
-    "@types/react-native": "^0.62.0",
+    "@types/react-native": "^0.63.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "react": "16.11.0",
-    "react-native": "0.62.2"
+    "react": "16.13.1",
+    "react-native": "^0.63.4"
   },
   "peerDependencies": {
-    "react": "^16.8.0",
-    "react-native": ">=0.60.0"
+    "react": ">=16.13.1",
+    "react-native": ">=0.63.4"
   },
   "author": "",
   "license": "MIT"
