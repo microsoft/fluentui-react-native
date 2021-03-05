@@ -7,7 +7,7 @@ import { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@flu
  * Github #598 also tracks pulling these values from a Native Module rather than hardcoding the numbers in JS.
  */
 
-export function appleTypography(): Typography {
+export function fallbackAppleTypography(): Typography {
   const appleDict = {
     sizes: {
       caption: 10 as FontSize, // Caption 1
@@ -30,11 +30,11 @@ export function appleTypography(): Typography {
       black: '900' as FontWeightValue,
     },
     families: {
-      primary: 'SF Pro',
+      primary: 'System',
       secondary: 'System',
       cursive: 'System',
-      monospace: 'SF Mono',
-      sansSerif: 'SF Pro',
+      monospace: 'System',
+      sansSerif: 'System',
       serif: 'System',
     },
     variants: {
