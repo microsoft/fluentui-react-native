@@ -20,7 +20,6 @@ export const themePickerStyles = themedStyleSheet((t: Theme) => {
     picker: {
       flexDirection: 'column',
       alignItems: 'center',
-      // alignItems: 'stretch',
       padding: 4,
       flexShrink: 0,
     },
