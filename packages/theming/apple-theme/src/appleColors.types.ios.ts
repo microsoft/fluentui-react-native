@@ -1,4 +1,4 @@
-import { ColorValue } from 'react-native';
+import { ColorValue } from '@fluentui-react-native/theme-types';
 
 /** Palette of colors defined in FluentUI Apple */
 interface FluentUIApplePalette {
