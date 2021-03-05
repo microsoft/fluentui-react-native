@@ -2,11 +2,11 @@ import { Theme, Spacing } from '@fluentui-react-native/theme-types';
 import { paletteFromAppleColors } from './appleColors.ios';
 import { appleTypography } from './appleTypography.ios';
 
-export function appleSpacing(): Spacing {
+function appleSpacing(): Spacing {
   return { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' };
 }
 
-export const appleComponents = {
+const appleComponents = {
   // These values correspond to the Primary style of the FluentUI Apple Button
   Button: {
     tokens: {

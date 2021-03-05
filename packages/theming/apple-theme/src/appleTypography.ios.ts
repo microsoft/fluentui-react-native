@@ -50,7 +50,3 @@ export function appleTypography(): Typography {
 
   return appleDict;
 }
-
-export function appleSpacing(): Spacing {
-  return { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' };
-}
