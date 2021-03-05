@@ -291,6 +291,8 @@ PODS:
     - React-jsi (= 0.63.1)
   - ReactTestApp-DevSupport (0.3.13)
   - ReactTestApp-Resources (1.0.0-dev)
+  - RNCPicker (1.9.11):
+    - React-Core
   - SwiftLint (0.42.0)
   - Yoga (1.14.0)
 
@@ -328,6 +330,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../../../node_modules/react-native-macos/ReactCommon`)
   - ReactTestApp-DevSupport (from `../../../node_modules/react-native-test-app`)
   - ReactTestApp-Resources (from `..`)
+  - "RNCPicker (from `../../../node_modules/@react-native-picker/picker`)"
   - SwiftLint
   - Yoga (from `../../../node_modules/react-native-macos/ReactCommon/yoga`)
 
@@ -399,6 +402,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-test-app"
   ReactTestApp-Resources:
     :path: ".."
+  RNCPicker:
+    :path: "../../../node_modules/@react-native-picker/picker"
   Yoga:
     :path: "../../../node_modules/react-native-macos/ReactCommon/yoga"
 
@@ -435,9 +440,10 @@ SPEC CHECKSUMS:
   ReactCommon: 2b36aa7cd56bc9a0376b013db964e8b17a6a18f9
   ReactTestApp-DevSupport: 12d9f285a44ff0cb7962a213621f87d3e6de9288
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
+  RNCPicker: 6780c753e9e674065db90d9c965920516402579d
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
   Yoga: 6f6f412e10cf9acb93bb0e290613784603d2f0c9
 
-PODFILE CHECKSUM: 5d9a9585f42b172ddf51a902df243a9eacc188ff
+PODFILE CHECKSUM: 4da08bad32118568e5a5dd8b4bdf6567d32ad14d
 
 COCOAPODS: 1.10.1

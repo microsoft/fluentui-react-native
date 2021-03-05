@@ -28,8 +28,8 @@
     "@fluentui-react-native/default-theme": ">=0.4.2 <1.0.0",
     "@fluentui-react-native/experimental-avatar": ">=0.4.3 <1.0.0",
     "@fluentui-react-native/experimental-button": "0.4.2",
-    "@fluentui-react-native/experimental-text": ">=0.3.2 <1.0.0",
     "@fluentui-react-native/experimental-native-button": ">=0.3.1 <1.0.0",
+    "@fluentui-react-native/experimental-text": ">=0.3.2 <1.0.0",
     "@fluentui-react-native/framework": ">=0.4.4 <1.0.0",
     "@fluentui-react-native/icon": "0.2.7",
     "@fluentui-react-native/interactive-hooks": ">=0.8.1 <1.0.0",
@@ -40,6 +40,7 @@
     "@fluentui-react-native/win32-theme": ">=0.5.2 <1.0.0",
     "@fluentui/react-native": ">=0.21.13 <1.0.0",
     "@office-iss/react-native-win32": "^0.62.6",
+    "@react-native-picker/picker": "^1.9.11",
     "react-native-svg": "^11.0.0"
   },
   "devDependencies": {
