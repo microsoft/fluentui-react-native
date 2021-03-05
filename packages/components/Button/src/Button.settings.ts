@@ -15,7 +15,12 @@ export const settings: IComposeSettings<IButtonType> = [
       accessible: true,
       focusable: true,
       accessibilityRole: 'button',
-      style: { display: 'flex', alignItems: 'flex-start', flexDirection: 'row', alignSelf: 'flex-start' },
+      style: {
+        display: 'flex',
+        alignItems: 'flex-start',
+        flexDirection: 'row',
+        alignSelf: 'flex-start',
+      },
     } as IViewProps,
     content: {
       // accessible: false,

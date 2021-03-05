@@ -9,6 +9,9 @@ PODS:
     - React-Core (= 0.63.1)
     - React-jsi (= 0.63.1)
     - ReactCommon/turbomodule/core (= 0.63.1)
+  - FluentUI-React-Native-Apple-Theme (0.1.1):
+    - MicrosoftFluentUI (~> 0.1.28)
+    - React
   - FluentUI-React-Native-Avatar (0.4.3):
     - MicrosoftFluentUI/AvatarView_mac (~> 0.1.28)
     - MicrosoftFluentUI/Controls_ios (~> 0.1.28)
@@ -18,11 +21,39 @@ PODS:
     - MicrosoftFluentUI/Controls_ios (~> 0.1.28)
     - React
   - glog (0.3.5)
+  - MicrosoftFluentUI (0.1.28):
+    - MicrosoftFluentUI/AvatarView_mac (= 0.1.28)
+    - MicrosoftFluentUI/Button_mac (= 0.1.28)
+    - MicrosoftFluentUI/Calendar_ios (= 0.1.28)
+    - MicrosoftFluentUI/Card_ios (= 0.1.28)
+    - MicrosoftFluentUI/CommandBar_ios (= 0.1.28)
+    - MicrosoftFluentUI/Controls_ios (= 0.1.28)
+    - MicrosoftFluentUI/Core_ios (= 0.1.28)
+    - MicrosoftFluentUI/Core_mac (= 0.1.28)
+    - MicrosoftFluentUI/DatePicker_mac (= 0.1.28)
+    - MicrosoftFluentUI/Drawer_ios (= 0.1.28)
+    - MicrosoftFluentUI/HUD_ios (= 0.1.28)
+    - MicrosoftFluentUI/Link_mac (= 0.1.28)
+    - MicrosoftFluentUI/Notification_ios (= 0.1.28)
+    - MicrosoftFluentUI/PillButtonBar_ios (= 0.1.28)
+    - MicrosoftFluentUI/PopupMenu_ios (= 0.1.28)
+    - MicrosoftFluentUI/Presenters_ios (= 0.1.28)
+    - MicrosoftFluentUI/Separator_mac (= 0.1.28)
+    - MicrosoftFluentUI/Shimmer_ios (= 0.1.28)
+    - MicrosoftFluentUI/TabBar_ios (= 0.1.28)
+    - MicrosoftFluentUI/Tooltip_ios (= 0.1.28)
+    - MicrosoftFluentUI/Utilities_ios (= 0.1.28)
   - MicrosoftFluentUI/AvatarView_mac (0.1.28):
     - MicrosoftFluentUI/Core_mac
   - MicrosoftFluentUI/Button_mac (0.1.28):
     - MicrosoftFluentUI/Core_mac
   - MicrosoftFluentUI/Core_mac (0.1.28)
+  - MicrosoftFluentUI/DatePicker_mac (0.1.28):
+    - MicrosoftFluentUI/Core_mac
+  - MicrosoftFluentUI/Link_mac (0.1.28):
+    - MicrosoftFluentUI/Core_mac
+  - MicrosoftFluentUI/Separator_mac (0.1.28):
+    - MicrosoftFluentUI/Core_mac
   - RCT-Folly (2020.01.13.00):
     - boost-for-react-native
     - DoubleConversion
@@ -268,6 +299,7 @@ DEPENDENCIES:
   - DoubleConversion (from `../../../node_modules/react-native-macos/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../../../node_modules/react-native-macos/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec`)
+  - FluentUI-React-Native-Apple-Theme (from `../../../packages/theming/apple-theme/FluentUIReactNativeAppleTheme.podspec`)
   - FluentUI-React-Native-Avatar (from `../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec`)
   - FluentUI-React-Native-Button (from `../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec`)
   - glog (from `../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
@@ -313,6 +345,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-macos/Libraries/FBLazyVector"
   FBReactNativeSpec:
     :path: "../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec"
+  FluentUI-React-Native-Apple-Theme:
+    :path: "../../../packages/theming/apple-theme/FluentUIReactNativeAppleTheme.podspec"
   FluentUI-React-Native-Avatar:
     :path: "../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec"
   FluentUI-React-Native-Button:
@@ -373,6 +407,7 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 87ca368919ae0ec70816fb8a42252ef59dc05c94
   FBReactNativeSpec: 7c0591658d85effad209fc4f45b6c9760f9e5842
+  FluentUI-React-Native-Apple-Theme: d05c13f08eb78c2ee8c311e91c240bcbaa603f8f
   FluentUI-React-Native-Avatar: f43459273f21935f033da1f73c310a11bfb7302b
   FluentUI-React-Native-Button: 8006a5f286d58d9f41d8f969038bea01ae508760
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
@@ -403,6 +438,6 @@ SPEC CHECKSUMS:
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
   Yoga: 6f6f412e10cf9acb93bb0e290613784603d2f0c9
 
-PODFILE CHECKSUM: 737120059192afd160feba8d3732b96e2f459bd2
+PODFILE CHECKSUM: 5d9a9585f42b172ddf51a902df243a9eacc188ff
 
 COCOAPODS: 1.10.0
