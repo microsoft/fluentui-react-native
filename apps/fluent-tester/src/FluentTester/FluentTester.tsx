@@ -27,9 +27,14 @@ export interface FluentTesterProps {
 
 const Header: React.FunctionComponent<{}> = () => {
   const theme = useTheme();
+  const headerStyle = Platform.select({
+    ios: fluentTesterStyles.headerMobile,
+    android: fluentTesterStyles.headerMobile,
+    default: fluentTesterStyles.header,
+  });
 
   return (
-    <View style={fluentTesterStyles.header}>
+    <View style={headerStyle}>
       <Text
         style={[fluentTesterStyles.testHeader]}
         variant="heroLargeSemibold"

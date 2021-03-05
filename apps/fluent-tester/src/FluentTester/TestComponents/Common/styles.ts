@@ -65,7 +65,11 @@ export const fluentTesterStyles = StyleSheet.create({
   },
 
   header: {
-    flexDirection: 'row',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  headerMobile: {
+    flexDirection: 'column',
     justifyContent: 'space-between',
   },
 
