@@ -2,10 +2,9 @@
   "name": "@fluentui-react-native/apple-theme",
   "version": "0.1.1",
   "description": "A FluentUI React Native theme that pulls constants from FluentUI Apple",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/microsoft/just"
-  },
+  "license": "MIT",
+  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
+  "homepage": "https://github.com/microsoft/fluentui-react-native",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -28,9 +27,6 @@
     "verify-api": "fluentui-scripts verify-api-extractor",
     "update-api": "fluentui-scripts update-api-extractor"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
   "dependencies": {
     "@fluentui-react-native/default-theme": ">=0.4.2 <1.0.0",
     "@fluentui-react-native/theme-types": ">=0.5.0 <1.0.0",
