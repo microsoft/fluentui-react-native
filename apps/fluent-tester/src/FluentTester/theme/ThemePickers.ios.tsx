@@ -63,7 +63,7 @@ export const PartPicker: React.FunctionComponent<PartPickerProps> = (props: Part
   );
 };
 
-const PickerLabel = Text.customize({ variant: 'bodySemibold' });
+const PickerLabel = Text.customize({ variant: 'headerSemibold' });
 
 const ThemePickerRoot: React.FunctionComponent<{}> = () => {
   const themedStyles = themePickerStyles(useTheme());
