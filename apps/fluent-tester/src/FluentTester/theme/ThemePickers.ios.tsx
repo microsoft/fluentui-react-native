@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { Alert, Modal, View, StyleSheet, Button } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { Picker } from '@react-native-picker/picker';
 import { lightnessOptionsApple, testerTheme } from './CustomThemes';
@@ -7,23 +7,26 @@ import { themeChoices, ThemeNames } from './applyTheme';
 import { brandOptions, OfficeBrand } from './applyBrand';
 import { Theme, useTheme } from '@fluentui-react-native/framework';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import { useState } from 'react';
 
 export const themePickerStyles = themedStyleSheet((t: Theme) => {
   return {
     pickerRoot: {
-      flexDirection: 'row',
+      flexDirection: 'column',
+      alignContent: 'center',
     },
     picker: {
-      flexDirection: 'row',
+      flexDirection: 'column',
       alignItems: 'center',
       padding: 4,
+      flexShrink: 0,
     },
     pickerItem: {
       color: t.colors.bodyText,
     },
 
     dropdown: {
-      height: 30,
+      height: 200,
       width: 90,
       fontSize: 12,
     },
@@ -61,7 +64,7 @@ export const PartPicker: React.FunctionComponent<PartPickerProps> = (props: Part
 
 const PickerLabel = Text.customize({ variant: 'bodySemibold' });
 
-export const ThemePickers: React.FunctionComponent<{}> = () => {
+const ThemePickerRoot: React.FunctionComponent<{}> = () => {
   const themedStyles = themePickerStyles(useTheme());
 
   const onBrandChange = React.useCallback((newBrand: string) => {
@@ -92,6 +95,43 @@ export const ThemePickers: React.FunctionComponent<{}> = () => {
         <PickerLabel>Brand: </PickerLabel>
         <PartPicker initial={testerTheme.brand} onChange={onBrandChange} contents={brandOptions} />
       </View>
+    </View>
+  );
+};
+
+export const ThemePickers: React.FunctionComponent<{}> = () => {
+  const [modalVisible, setModalVisible] = useState(true);
+
+  return (
+    <View style={{ marginTop: 22 }}>
+      <Modal
+        animationType="slide"
+        transparent={false}
+        visible={modalVisible}
+        onRequestClose={() => {
+          alert('Modal has been closed.');
+        }}
+      >
+        <View style={{ marginTop: 22 }}>
+          <View>
+            <ThemePickerRoot />
+
+            <Button
+              title="Close"
+              onPress={() => {
+                setModalVisible(!modalVisible);
+              }}
+            ></Button>
+          </View>
+        </View>
+      </Modal>
+
+      <Button
+        title="Show Modal"
+        onPress={() => {
+          setModalVisible(true);
+        }}
+      ></Button>
     </View>
   );
 };
