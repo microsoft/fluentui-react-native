@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { Picker } from '@react-native-picker/picker';
-import { lightnessOptions, testerTheme } from './CustomThemes';
+import { testerTheme } from './CustomThemes';
 import { themeChoices, ThemeNames } from './applyTheme';
 import { brandOptions, OfficeBrand } from './applyBrand';
 
@@ -62,20 +62,11 @@ export const ThemePickers: React.FunctionComponent<{}> = () => {
     testerTheme.themeName = newTheme as ThemeNames;
   }, []);
 
-  const onAppearanceChange = React.useCallback((newAppearance: string) => {
-    testerTheme.appearance = newAppearance as 'light' | 'dark' | 'dynamic';
-  }, []);
-
   return (
     <View style={themePickerStyles.pickerRoot}>
       <View style={themePickerStyles.picker}>
         <PickerLabel>Theme: </PickerLabel>
         <PartPicker initial={testerTheme.themeName} onChange={onThemeSelected} contents={themeChoices} />
-      </View>
-
-      <View style={themePickerStyles.picker}>
-        <PickerLabel>Light/Dark: </PickerLabel>
-        <PartPicker initial={testerTheme.appearance} onChange={onAppearanceChange} contents={lightnessOptions} />
       </View>
 
       <View style={themePickerStyles.picker}>
