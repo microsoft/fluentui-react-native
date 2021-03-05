@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { ViewProps, ImageProps, ViewStyle, ColorValue } from 'react-native';
+import { ViewProps, ImageProps, ViewStyle } from 'react-native';
+import { ColorValue } from '@fluentui-react-native/theme-types';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
