@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Base theme on macOS changed to apple theme",
+  "packageName": "@fluentui-react-native/experimental-text",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-03-03T04:57:48.689Z"
+}

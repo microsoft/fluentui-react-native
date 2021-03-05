@@ -1,8 +1,6 @@
 import { Spacing, Theme } from '@fluentui-react-native/theme-types';
-import { getFluentUIApplePalette } from './fluentAppleColors.macos';
-import { getAppleSemanticPalette } from './applePlatformColors.macos';
-import { paletteFromAppleColors } from './appleTheme.colors.macos';
-import { appleTypography } from './appleTypography.macos';
+import { fallbackApplePalette } from './appleColors.macos';
+import { fallbackAppleTypography } from './appleTypography.macos';
 
 export function appleSpacing(): Spacing {
   return {
@@ -15,12 +13,32 @@ export function appleSpacing(): Spacing {
 }
 
 export const appleComponents = {
+  // These values correspond to the "Large"  Button Size values of the FluentUI Apple Button
   Button: {
     tokens: {
-      borderRadius: 5,
+      borderRadius: 6,
       borderWidth: 1,
       minHeight: 28,
       minWidth: 72,
+    },
+    root: {
+      style: {
+        margin: 8, // Padding around the outside of the button
+      },
+    },
+    stack: {
+      style: {
+        paddingVertical: 4.5,
+        minHeight: 28,
+      },
+    },
+    icon: {
+      style: {
+        marginEnd: 10,
+      },
+    },
+    content: {
+      fontSize: 15,
     },
   },
   RNFText: {
@@ -30,9 +48,12 @@ export const appleComponents = {
   },
 };
 
-export const defaultAppleThemeMacOS: Theme = {
-  colors: paletteFromAppleColors(getFluentUIApplePalette(), getAppleSemanticPalette()),
-  typography: appleTypography(),
+/** The apple theme defined entirely in JS, intended as a fallback while the native module loads
+ * or if the native module is not found
+ */
+export const BaseAppleThemeMacOS: Theme = {
+  colors: fallbackApplePalette(),
+  typography: fallbackAppleTypography(),
   spacing: appleSpacing(),
   components: appleComponents,
   host: { appearance: 'dynamic' },
