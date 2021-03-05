@@ -1,4 +1,5 @@
-import { TextStyle, TextProps } from 'react-native';
+import { TextStyle } from 'react-native';
+import type { ITextProps } from '@fluentui-react-native/adapters';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 import { IPersonaTokens } from './Persona.types';
 import { ITheme } from '@uifabricshared/theming-ramp';
@@ -11,7 +12,7 @@ function buildTextStyleHelper(
   size: PersonaSize | undefined,
   getFontAttributes: (size: PersonaSize) => FontTokens,
   fontTokens: FontTokens | undefined,
-  theme: ITheme
+  theme: ITheme,
 ) {
   const textStyle: TextStyle = {};
 
@@ -31,35 +32,35 @@ function buildTextStyleHelper(
   return textStyle;
 }
 
-function _buildTextStyle(tokenProps: IPersonaTokens, theme: ITheme): TextProps {
+function _buildTextStyle(tokenProps: IPersonaTokens, theme: ITheme): ITextProps {
   const { verticalGap, textFont, size } = tokenProps;
   return { style: buildTextStyleHelper(verticalGap, size, getTextFont, textFont, theme) };
 }
 
-function _buildSecondaryStyle(tokenProps: IPersonaTokens, theme: ITheme): TextProps {
+function _buildSecondaryStyle(tokenProps: IPersonaTokens, theme: ITheme): ITextProps {
   const { verticalGap, secondaryFont, size } = tokenProps;
   return { style: buildTextStyleHelper(verticalGap, size, getSecondaryFont, secondaryFont, theme) };
 }
 
-function _buildTertiaryStyle(tokenProps: IPersonaTokens, theme: ITheme): TextProps {
+function _buildTertiaryStyle(tokenProps: IPersonaTokens, theme: ITheme): ITextProps {
   const { verticalGap, tertiaryFont, size } = tokenProps;
   return { style: buildTextStyleHelper(verticalGap, size, getTertiaryFont, tertiaryFont, theme) };
 }
 
-function _buildOptionalStyle(tokenProps: IPersonaTokens, theme: ITheme): TextProps {
+function _buildOptionalStyle(tokenProps: IPersonaTokens, theme: ITheme): ITextProps {
   const { optionalFont, size } = tokenProps;
   return { style: buildTextStyleHelper(undefined, size, getOptionalFont, optionalFont, theme) };
 }
 
-export const buildTextStyle = styleFunction<TextProps, IPersonaTokens, ITheme>(_buildTextStyle, ['size', 'textFont', 'verticalGap']);
-export const buildSecondaryStyle = styleFunction<TextProps, IPersonaTokens, ITheme>(_buildSecondaryStyle, [
+export const buildTextStyle = styleFunction<ITextProps, IPersonaTokens, ITheme>(_buildTextStyle, ['size', 'textFont', 'verticalGap']);
+export const buildSecondaryStyle = styleFunction<ITextProps, IPersonaTokens, ITheme>(_buildSecondaryStyle, [
   'size',
   'secondaryFont',
-  'verticalGap'
+  'verticalGap',
 ]);
-export const buildTertiaryStyle = styleFunction<TextProps, IPersonaTokens, ITheme>(_buildTertiaryStyle, [
+export const buildTertiaryStyle = styleFunction<ITextProps, IPersonaTokens, ITheme>(_buildTertiaryStyle, [
   'size',
   'tertiaryFont',
-  'verticalGap'
+  'verticalGap',
 ]);
-export const buildOptionalStyle = styleFunction<TextProps, IPersonaTokens, ITheme>(_buildOptionalStyle, ['size', 'optionalFont']);
+export const buildOptionalStyle = styleFunction<ITextProps, IPersonaTokens, ITheme>(_buildOptionalStyle, ['size', 'optionalFont']);
