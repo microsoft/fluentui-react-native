@@ -28,8 +28,7 @@ export interface FluentTesterProps {
 const Header: React.FunctionComponent<{}> = () => {
   const theme = useTheme();
   const headerStyle = Platform.select({
-    ios: fluentTesterStyles.headerMobile,
-    android: fluentTesterStyles.headerMobile,
+    ios: fluentTesterStyles.headerIOS,
     default: fluentTesterStyles.header,
   });
 
