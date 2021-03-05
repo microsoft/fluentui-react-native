@@ -2,7 +2,6 @@
 
 exports[`Button component tests Button default 1`] = `
 <View
-  acceptsKeyboardFocus={true}
   accessibilityLabel="Default Button"
   accessibilityRole="button"
   accessible={true}

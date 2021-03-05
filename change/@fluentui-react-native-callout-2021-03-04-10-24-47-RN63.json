@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Update to react-native 0.63",
+  "packageName": "@fluentui-react-native/callout",
+  "email": "30809111+acoates-ms@users.noreply.github.com",
+  "dependentChangeType": "patch",
+  "date": "2021-03-04T18:24:14.271Z"
+}

@@ -13,7 +13,7 @@ export const settings: IComposeSettings<ICheckboxType> = [
     },
     root: {
       accessible: true,
-      acceptsKeyboardFocus: true,
+      focusable: true,
       accessibilityRole: 'checkbox',
       style: {
         display: 'flex',

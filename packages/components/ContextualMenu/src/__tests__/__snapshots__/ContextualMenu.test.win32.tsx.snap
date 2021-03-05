@@ -16,8 +16,8 @@ exports[`ContextualMenu default props 1`] = `
   }
 >
   <View
-    acceptsKeyboardFocus={false}
     accessible={false}
+    focusable={false}
     onBlur={[Function]}
     style={
       Object {
