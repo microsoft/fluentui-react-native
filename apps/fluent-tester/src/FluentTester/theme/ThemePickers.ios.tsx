@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Button } from '@fluentui/react-native';
+import { StealthButton } from '@fluentui/react-native';
 import { MenuAction, MenuView } from '@react-native-menu/menu';
 import { testerTheme } from './CustomThemes';
 import { themeChoices, ThemeNames } from './applyTheme';
@@ -64,7 +64,7 @@ const ThemePickerRoot: React.FunctionComponent<{}> = () => {
         }}
         actions={themeMenuOptions}
       >
-        <Button content="Theme" />
+        <StealthButton content="Theme" />
       </MenuView>
       <MenuView
         style={{ alignSelf: 'flex-end' }}
@@ -74,7 +74,7 @@ const ThemePickerRoot: React.FunctionComponent<{}> = () => {
         }}
         actions={brandMenuOptions}
       >
-        <Button content="Brand" />
+        <StealthButton content="Brand" />
       </MenuView>
     </View>
   );
