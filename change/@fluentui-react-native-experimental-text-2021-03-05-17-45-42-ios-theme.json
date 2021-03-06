@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Use ColorValue from @fluentui-react-native/theme-types",
-  "packageName": "@fluentui-react-native/experimental-text",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-03-05T23:45:35.993Z"
-}
