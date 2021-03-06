@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Mon, 01 Mar 2021 22:53:12 GMT and should not be manually modified.
+This log was last generated on Sat, 06 Mar 2021 00:20:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.0
+
+Sat, 06 Mar 2021 00:20:05 GMT
+
+### Minor changes
+
+- Update to react-native 0.63 (30809111+acoates-ms@users.noreply.github.com)
+
+### Patches
+
+- Base theme on macOS changed to apple theme (saadnajmi2@gmail.com)
 
 ## 0.13.2
 

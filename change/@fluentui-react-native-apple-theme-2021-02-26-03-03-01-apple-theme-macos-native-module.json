@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Added a native module, off by default",
-  "packageName": "@fluentui-react-native/apple-theme",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-02-26T09:02:34.364Z"
-}

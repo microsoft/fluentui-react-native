@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Mon, 01 Mar 2021 22:53:12 GMT and should not be manually modified.
+This log was last generated on Sat, 06 Mar 2021 00:20:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.0
+
+Sat, 06 Mar 2021 00:20:05 GMT
+
+### Minor changes
+
+- Update to react-native 0.63 (30809111+acoates-ms@users.noreply.github.com)
+
+### Patches
+
+- Formatted some code (saadnajmi2@gmail.com)
 
 ## 0.12.2
 

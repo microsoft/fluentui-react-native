@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fixed a typo",
-  "packageName": "@fluentui-react-native/theme-types",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-02-26T09:03:01.655Z"
-}
