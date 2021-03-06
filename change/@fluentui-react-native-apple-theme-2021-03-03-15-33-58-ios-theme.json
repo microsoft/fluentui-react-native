@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Add a base iOS theme",
+  "packageName": "@fluentui-react-native/apple-theme",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-03-03T21:33:58.751Z"
+}
