@@ -4,8 +4,8 @@ import { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@flu
 export function appleTypography(): Typography {
   const appleDict = {
     sizes: {
-      caption: 12 as FontSize, // Caption 1
-      secondary: 16 as FontSize, // Callout
+      caption: 12 as FontSize, // Caption 2
+      secondary: 16 as FontSize, // Caption 1
       body: 17 as FontSize, // Body
       subheader: 15 as FontSize, // Subhead
       header: 17 as FontSize, // Headline
