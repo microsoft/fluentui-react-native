@@ -1,6 +1,6 @@
 import { buttonName, IButtonType } from './Button.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
-import { ViewProps } from 'react-native';
+import type { IViewProps } from '@fluentui-react-native/adapters';
 
 export const settings: IComposeSettings<IButtonType> = [
   {
@@ -13,11 +13,15 @@ export const settings: IComposeSettings<IButtonType> = [
     },
     root: {
       accessible: true,
-      acceptsKeyboardFocus: true,
       focusable: true,
       accessibilityRole: 'button',
-      style: { display: 'flex', alignItems: 'flex-start', flexDirection: 'row', alignSelf: 'flex-start' },
-    } as ViewProps,
+      style: {
+        display: 'flex',
+        alignItems: 'flex-start',
+        flexDirection: 'row',
+        alignSelf: 'flex-start',
+      },
+    } as IViewProps,
     content: {
       // accessible: false,
     },

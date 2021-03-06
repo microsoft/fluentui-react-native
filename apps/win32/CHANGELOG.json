@@ -2,6 +2,44 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Sat, 06 Mar 2021 00:20:05 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Base theme on macOS changed to apple theme",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "1b3d9f6ef10c1138b6f9701b5edf9ef52be623e6",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Update to react-native 0.63",
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "commit": "d35d3b45f12a670648edaa7143b210ed43360996",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 04 Mar 2021 22:22:33 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.7.20",
+      "version": "0.7.20",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add button icon tests specific to win32",
+            "author": "warleu@microsoft.com",
+            "commit": "acedf34f3fa9000885e5a2ab4cc27eb3b43e9190",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 03 Mar 2021 18:35:59 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.7.20",
       "version": "0.7.20",

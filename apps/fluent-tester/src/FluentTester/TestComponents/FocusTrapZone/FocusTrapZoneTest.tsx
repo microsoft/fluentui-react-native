@@ -44,9 +44,10 @@ const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps> = (pro
   const [focusProps, focusState] = useFocusState({});
 
   return (
-    <TouchableHighlight {...{ acceptsKeyboardFocus: false }} onPress={props.onPress}>
+    <TouchableHighlight {...{ focusable: false }} onPress={props.onPress}>
       <View
-        {...({ acceptsKeyboardFocus: true, ...focusProps } as any)}
+        focusable={true}
+        {...(focusProps as any)}
         style={focusState.focused ? focusedComponentTwiddlerStyle : componentTwiddlerStyle}
       >
         <Text>{props.label}</Text>

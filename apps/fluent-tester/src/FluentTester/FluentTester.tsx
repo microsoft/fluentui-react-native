@@ -3,7 +3,7 @@ import { StealthButton, Separator } from '@fluentui/react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
-import { ScrollView, View, Text as RNText } from 'react-native';
+import { ScrollView, View, Text as RNText, Platform, SafeAreaView } from 'react-native';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fluentTesterStyles } from './TestComponents/Common/styles';
@@ -51,8 +51,6 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
       flex: 1,
       flexGrow: 1,
       flexDirection: 'column',
-      minHeight: 550,
-      minWidth: 300,
       justifyContent: 'flex-start',
       alignItems: 'stretch',
       padding: 4,
@@ -73,18 +71,28 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const TestComponent = selectedTestIndex == -1 ? EmptyComponent : sortedTestComponents[selectedTestIndex].component;
 
+  const HeaderSeparator = Separator.customize((t) => ({
+    color: t.colors.bodyFrameDivider,
+    separatorWidth: 2,
+  }));
+
   const TestListSeparator = Separator.customize((t) => ({
-    color: t.colors.inputBorder,
+    color: t.colors.menuDivider,
     separatorWidth: 2,
   }));
 
   const themedStyles = getThemedStyles(useTheme());
 
+  const RootView = Platform.select({
+    ios: SafeAreaView,
+    default: View,
+  });
+
   return (
-    <View style={themedStyles.root}>
+    <RootView style={themedStyles.root}>
       <Header />
 
-      <Separator />
+      <HeaderSeparator />
 
       <View style={fluentTesterStyles.testRoot}>
         <ScrollView style={fluentTesterStyles.testList} contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
@@ -110,6 +118,6 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
           </ScrollView>
         </View>
       </View>
-    </View>
+    </RootView>
   );
 };

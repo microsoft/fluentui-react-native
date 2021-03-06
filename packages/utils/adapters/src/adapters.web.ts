@@ -12,7 +12,6 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessibilityLabel: true,
   accessibilityRole: true,
   accessibilityState: true,
-  accessibilityStates: true,
   accessibilityHint: true,
   hitSlop: true,
   onLayout: true,
@@ -59,7 +58,7 @@ const _viewMask: IFilterMask<IViewProps> = {
   tvParallaxProperties: true,
   tvParallaxShiftDistanceX: true,
   tvParallaxShiftDistanceY: true,
-  tvParallaxTiltAngle: true
+  tvParallaxTiltAngle: true,
 };
 
 const _textMask: IFilterMask<ITextProps> = {
@@ -73,7 +72,6 @@ const _textMask: IFilterMask<ITextProps> = {
   accessibilityLiveRegion: true,
   accessibilityRole: true,
   accessibilityState: true,
-  accessibilityStates: true,
   accessibilityTraits: true,
   accessibilityViewIsModal: true,
   accessible: true,
@@ -97,7 +95,7 @@ const _textMask: IFilterMask<ITextProps> = {
   minimumFontScale: true,
   selectable: true,
   selectionColor: true,
-  suppressHighlighting: true
+  suppressHighlighting: true,
 };
 
 const _imageMask: IFilterMask<IImageProps> = {
@@ -111,7 +109,6 @@ const _imageMask: IFilterMask<IImageProps> = {
   accessibilityLiveRegion: true,
   accessibilityRole: true,
   accessibilityState: true,
-  accessibilityStates: true,
   accessibilityTraits: true,
   accessibilityViewIsModal: true,
   accessible: true,
@@ -143,7 +140,7 @@ const _imageMask: IFilterMask<IImageProps> = {
   capInsets: true,
   width: true,
   height: true,
-  fadeDuration: true
+  fadeDuration: true,
 };
 
 export function filterViewProps(propName: string): boolean {
