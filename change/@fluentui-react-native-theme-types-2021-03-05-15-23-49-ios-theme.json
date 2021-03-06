@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Use React Native ColorValue type as our ColorValue type",
+  "packageName": "@fluentui-react-native/theme-types",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-03-05T21:23:49.581Z"
+}

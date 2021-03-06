@@ -8,6 +8,7 @@ import { applyTheme, ThemeNames } from './applyTheme';
 const themeOptions: ThemeOptions = { paletteName: 'TaskPane', appearance: 'dynamic' };
 
 const baseTheme = Platform.select({
+  ios: createAppleTheme(),
   macos: createAppleTheme(),
   default: createDefaultTheme(themeOptions),
 });
