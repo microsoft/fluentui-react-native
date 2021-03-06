@@ -3,7 +3,7 @@ import { StealthButton, Separator } from '@fluentui/react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
-import { ScrollView, View, Text as RNText, Platform, SafeAreaView, StyleSheet, StyleProp } from 'react-native';
+import { ScrollView, View, Text as RNText, Platform, SafeAreaView } from 'react-native';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fluentTesterStyles } from './TestComponents/Common/styles';
