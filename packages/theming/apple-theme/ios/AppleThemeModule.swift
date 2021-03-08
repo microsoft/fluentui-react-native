@@ -433,8 +433,9 @@ class AppleThemeModule: RCTEventEmitter, UITraitEnvironment {
 
 	override func startObserving() {
 		hasListeners = true;
-		if #available(iOS 12.0, *) {
-			kvoToken = traitCollection.observe(\.userInterfaceStyle) {(traitCollection, change) in
+		
+		if #available(iOS 13.0, *) {
+			kvoToken = UITraitCollection.current.observe(\.userInterfaceStyle) {(traitCollection, change) in
 				guard self.bridge != nil else {
 					return
 				}
@@ -443,6 +444,20 @@ class AppleThemeModule: RCTEventEmitter, UITraitEnvironment {
 		} else {
 			// Fallback on earlier versions
 		}
+		
+//		if #available(iOS 12.0, *) {
+//			kvoToken = traitCollection.observe(\.userInterfaceStyle) {(traitCollection, change) in
+//				guard self.bridge != nil else {
+//					return
+//				}
+//				self.sendEvent(withName: Events.traitCollectionDidChange.name, body: self.theme)
+//			}
+//		} else {
+//			// Fallback on earlier versions
+//		}
+		
+		
+		
 	}
 
 	override func stopObserving() {
