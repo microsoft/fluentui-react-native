@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/shimmer",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A cross-platform Shimmer component using the Fluent Design System",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
