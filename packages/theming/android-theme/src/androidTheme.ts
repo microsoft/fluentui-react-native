@@ -24,11 +24,6 @@ export const androidComponents = {
       minWidth: 92,
     },
   },
-  RNFText: {
-    tokens: {
-      variant: 'bodyStandard',
-    },
-  },
 };
 
 export function getAndroidTheme(appearance: AppearanceOptions): Theme {
