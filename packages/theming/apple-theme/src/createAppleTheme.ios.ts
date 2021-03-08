@@ -8,7 +8,6 @@ let partialThemeFromNativeModule: PartialTheme;
 
 export function createAppleTheme(): ThemeReference {
   const baseAppleTheme = () => {
-    console.log('creating theme');
     const current = Appearance.getColorScheme();
     return current === 'light' ? BaseAppleLightThemeIOS : BaseAppleDarkThemeIOS;
   };
@@ -16,7 +15,6 @@ export function createAppleTheme(): ThemeReference {
   const loadNativeTheme = (appleThemeReference: ThemeReference) => {
     const module = NativeModules && NativeModules.MSFAppleThemeModule;
     if (module) {
-      console.log('Calling Native module once more');
       module.getApplePartialThemeWithCallback((error, applePartialTheme) => {
         if (error) {
           console.error(`Error retrieving apple theming module! ${error}`);
@@ -34,7 +32,6 @@ export function createAppleTheme(): ThemeReference {
   loadNativeTheme(appleThemeReference);
 
   Appearance.addChangeListener(() => {
-    console.log('Appearance changed!');
     loadNativeTheme(appleThemeReference);
   });
 
