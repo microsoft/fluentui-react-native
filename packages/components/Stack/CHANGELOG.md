@@ -1,8 +1,28 @@
 # Change Log - @fluentui-react-native/stack
 
-This log was last generated on Wed, 13 Jan 2021 20:04:26 GMT and should not be manually modified.
+This log was last generated on Sat, 06 Mar 2021 00:20:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.0
+
+Sat, 06 Mar 2021 00:20:05 GMT
+
+### Minor changes
+
+- Update to react-native 0.63 (30809111+acoates-ms@users.noreply.github.com)
+
+### Patches
+
+- Base theme on macOS changed to apple theme (saadnajmi2@gmail.com)
+
+## 0.4.2
+
+Mon, 01 Mar 2021 22:53:12 GMT
+
+### Patches
+
+- Update deps (warleu@microsoft.com)
 
 ## 0.4.0
 

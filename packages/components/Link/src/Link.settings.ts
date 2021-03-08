@@ -13,7 +13,8 @@ export const settings: IComposeSettings<ILinkType> = [
     },
     root: {
       accessible: true,
-      ...{ acceptsKeyboardFocus: true, cursor: 'pointer' },
+      focusable: true,
+      ...{ cursor: 'pointer' },
       accessibilityRole: 'link',
       style: {
         margin: 0,

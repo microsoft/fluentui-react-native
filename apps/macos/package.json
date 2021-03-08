@@ -7,18 +7,18 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
-    "bundle": "fluentui-scripts metro --cli",
+    "bundle": "react-native rnx-bundle --dev false",
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
     "code-style": "fluentui-scripts code-style",
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
-    "start": "react-native start",
+    "start": "react-native rnx-start",
     "test": "fluentui-scripts jest",
     "macos": "react-native run-macos --scheme FluentTester --project-path src"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.16.0",
+    "@fluentui-react-native/tester": "^0.17.0",
     "react-native-macos": "0.63.1",
     "react-native-test-app": "^0.3.2"
   },
@@ -28,12 +28,13 @@
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "@react-native-community/eslint-config": "^1.1.0",
+    "@rnx-kit/cli": "^0.0.3",
     "babel-jest": "^24.9.0",
     "jest": "^24.9.0",
     "metro-config": "^0.58.0",
-    "metro-react-native-babel-preset": "^0.58.0",
-    "react-native": "0.63.3",
-    "react-test-renderer": "~16.11.0"
+    "metro-react-native-babel-preset": "^0.59.0",
+    "react-native": "^0.63.4",
+    "react-test-renderer": "~16.13.1"
   },
   "peerDependencies": {
     "react": "^16.13.1"
@@ -41,14 +42,13 @@
   "jest": {
     "preset": "react-native"
   },
-  "metroBundles": {
-    "targets": [
-      "macos"
-    ],
-    "entry": "index.js",
-    "outputPath": "./dist",
-    "bundleName": "index.bundle",
-    "noPlatformSuffix": true
+  "rnx-kit": {
+    "bundle": {
+      "targets": [
+        "macos"
+      ],
+      "entryPath": "index.js"
+    }
   },
   "depcheck": {
     "ignoreMatches": [

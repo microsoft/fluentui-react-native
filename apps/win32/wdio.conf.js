@@ -3,7 +3,7 @@ const fs = require('fs');
 const rimraf = require('rimraf');
 
 const appPath = path.resolve(path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js')), 'ReactTest.exe');
-const appArgs = 'basePath ' + path.resolve('dist') + ' plugin defaultplugin bundle index component FluentTester';
+const appArgs = 'basePath ' + path.resolve('dist') + ' plugin defaultplugin bundle index.win32 component FluentTester';
 const appDir = path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js'));
 
 const defaultWaitForTimeout = 10000;
@@ -123,7 +123,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  before: function() {
+  before: function () {
     // not needed for Cucumber
     require('ts-node').register({ files: true });
     browser.maximizeWindow();
@@ -217,7 +217,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function(exitCode, config, capabilities, results) {
+  onComplete: function (exitCode, config, capabilities, results) {
     console.log('<<< TESTING FINISHED >>>');
   },
   /**

@@ -69,7 +69,7 @@ Our component documentation is hosted on the [FluentUI documentation](https://de
 
 #### Expanding Component documentation
 
-The FluentUI website is built out of the [FluentUI repository](https://github.com/microsoft/fluentui/tree/master/apps/fabric-website). React-Native components and controls are documented in a 'cross' (cross-platform) directory in each component page directory, e.g. [Button 'cross' directory](https://github.com/microsoft/fluentui/tree/master/apps/fabric-website/src/pages/Controls/ButtonPage/docs/cross). The FluentUI website can be run locally to verify changes, and should reflect the current state of controls that have established the _v1_ set of properties on any one platform.
+The FluentUI website is built out of the [FluentUI repository](https://github.com/microsoft/fluentui/tree/master/apps/public-docsite). React-Native components and controls are documented in a 'cross' (cross-platform) directory in each component page directory, e.g. [Button 'cross' directory](https://github.com/microsoft/fluentui/tree/master/apps/public-docsite/src/pages/Controls/ButtonPage/docs/cross). The FluentUI website can be run locally to verify changes, and should reflect the current state of controls that have established the _v1_ set of properties on any one platform.
 
 Since the FluentUI React Native controls are cross-platform, but represented by a single page, it's important to distinguish platform differences and limitations. Examples include:
 

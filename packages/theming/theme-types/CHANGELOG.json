@@ -2,6 +2,35 @@
   "name": "@fluentui-react-native/theme-types",
   "entries": [
     {
+      "date": "Sat, 06 Mar 2021 00:20:05 GMT",
+      "tag": "@fluentui-react-native/theme-types_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixed a typo",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "1b3d9f6ef10c1138b6f9701b5edf9ef52be623e6",
+            "package": "@fluentui-react-native/theme-types"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Update to react-native 0.63",
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "commit": "d35d3b45f12a670648edaa7143b210ed43360996",
+            "package": "@fluentui-react-native/theme-types"
+          },
+          {
+            "comment": "Use React Native ColorValue type as our ColorValue type",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "71b29ea2c7c28d3cdadbade15f2b2c60127e48ec",
+            "package": "@fluentui-react-native/theme-types"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 05 Feb 2021 08:02:13 GMT",
       "tag": "@fluentui-react-native/theme-types_v0.5.0",
       "version": "0.5.0",

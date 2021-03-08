@@ -1,8 +1,44 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Wed, 06 Jan 2021 18:41:50 GMT and should not be manually modified.
+This log was last generated on Sat, 06 Mar 2021 00:20:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.0
+
+Sat, 06 Mar 2021 00:20:05 GMT
+
+### Minor changes
+
+- Update to react-native 0.63 (30809111+acoates-ms@users.noreply.github.com)
+
+### Patches
+
+- Base theme on macOS changed to apple theme (saadnajmi2@gmail.com)
+
+## 0.7.20
+
+Tue, 02 Mar 2021 17:28:32 GMT
+
+### Patches
+
+- Update path under 'FluentUI Tester' web debugging (krsiler@microsoft.com)
+
+## 0.7.19
+
+Mon, 01 Mar 2021 22:53:12 GMT
+
+### Patches
+
+- Update deps (warleu@microsoft.com)
+
+## 0.7.18
+
+Mon, 01 Mar 2021 17:28:32 GMT
+
+### Patches
+
+- Remove metro logic from FURN, replacing it with calls to the @rnx-kit CLI. Use rnx-bundle for bundling, and rnx-start for running a bundle server. (afoxman@microsoft.com)
 
 ## 0.7.11
 

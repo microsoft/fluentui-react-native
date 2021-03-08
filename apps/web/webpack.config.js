@@ -22,9 +22,14 @@ module.exports = {
         loader: 'ts-loader',
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|ttf|otf)$/i,
         exclude: /node_modules/,
         loader: 'file-loader',
+      },
+      {
+        test: /\.(svg)$/i,
+        exclude: /node_modules/,
+        loader: 'react-native-svg-loader',
       },
     ],
   },
@@ -35,16 +40,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
   ],
   resolve: {
-    extensions: [
-      '.web.tsx',
-      '.web.ts',
-      '.tsx',
-      '.ts',
-      '.web.jsx',
-      '.web.js',
-      '.jsx',
-      '.js',
-    ], // read files in following order
+    extensions: ['.web.tsx', '.web.ts', '.tsx', '.ts', '.web.jsx', '.web.js', '.jsx', '.js'], // read files in following order
     alias: Object.assign({
       'react-native$': 'react-native-web',
     }),
