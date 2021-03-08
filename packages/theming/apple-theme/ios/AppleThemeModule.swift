@@ -2,7 +2,7 @@ import Foundation
 import FluentUI
 
 @objc(MSFAppleThemeModule)
-class AppleThemeModule: RCTEventEmitter {
+class AppleThemeModule: NSObject {
 
 	public enum Events: CaseIterable {
 		case traitCollectionDidChange
@@ -15,57 +15,42 @@ class AppleThemeModule: RCTEventEmitter {
 		}
 	}
 
-	override var methodQueue: DispatchQueue {
+	@objc var methodQueue: DispatchQueue {
 		get {
 			return DispatchQueue.main
 		}
 	}
 	
-	var theme: [AnyHashable: Any] {
+	static var theme: [AnyHashable: Any] {
 		get {
-			if #available(iOS 12.0, *) {
-				let isDarkMode = UITraitCollection.current.userInterfaceStyle == .dark
-				return [
-					"colors": palette(),
-					"typography" : [
-						"sizes" : fontSizes(),
-						"weights" : fontWeights(),
-						"families" : fontFamilies(),
-						"variants" : fontVariants()
-					],
-					"host" : [
-						"appearance" : isDarkMode ? "dark" : "light"
-					]
+			let isDarkMode = UITraitCollection.current.userInterfaceStyle == .dark
+			return [
+				"colors": palette(),
+				"typography" : [
+					"sizes" : fontSizes(),
+					"weights" : fontWeights(),
+					"families" : fontFamilies(),
+					"variants" : fontVariants()
+				],
+				"host" : [
+					"appearance" : isDarkMode ? "dark" : "light"
 				]
-			} else {
-				return [
-					"colors": palette(),
-					"typography" : [
-						"sizes" : fontSizes(),
-						"weights" : fontWeights(),
-						"families" : fontFamilies(),
-						"variants" : fontVariants()
-					],
-					"host" : [
-						"appearance" : "light"
-					]
-				]
-			}
+			]
 		}
 	}
 
-	override class func requiresMainQueueSetup() -> Bool {
+	@objc class func requiresMainQueueSetup() -> Bool {
 		return true
 	}
 
 	@objc(getApplePartialThemeWithCallback:)
 	func getApplePartialTheme(callback: RCTResponseSenderBlock) {
-		callback([NSNull(), theme])
+		callback([NSNull(), AppleThemeModule.theme])
 	}
 	
 	// MARK: - Colors
 
-	func palette() -> [AnyHashable : Any] {
+	static func palette() -> [AnyHashable : Any] {
 
 		return [
 			/* PaletteBackgroundColors & PaletteTextColors */
@@ -274,7 +259,7 @@ class AppleThemeModule: RCTEventEmitter {
 
 	// MARK: - Typography
 
-	func fontFamilies() -> [AnyHashable : Any] {
+	static func fontFamilies() -> [AnyHashable : Any] {
 			
 		let systemFontFamilyName = UIFont.systemFont(ofSize: 0).familyName
 		let monospaceFontFamilyName = UIFont.monospacedSystemFont(ofSize: 0, weight: .regular).familyName
@@ -289,11 +274,9 @@ class AppleThemeModule: RCTEventEmitter {
 
 	}
 
-	/// Map the current FluentUI React Native font sizes approximately to their corresponding apple text style,
-	/// For older vesrions of macOS, fallback to the values described in the apple HIG:
-	/// https://developer.apple.com/design/human-interface-guidelines/macos/visual-design/typography/
+	/// Map the current FluentUI React Native font sizes approximately to their corresponding FluentUI Apple  text style,
 	/// These mappings and variants are subject to change as we moved to a unified cross platform Fluent typography ramp
-	func fontSizes() -> [AnyHashable : Any] {
+	static func fontSizes() -> [AnyHashable : Any] {
 			return [
 				"caption" : FluentUI.Fonts.caption2.pointSize,
 				"secondary" : FluentUI.Fonts.caption1.pointSize,
@@ -305,7 +288,7 @@ class AppleThemeModule: RCTEventEmitter {
 			]
 	}
 
-	func fontWeights() -> [UIFont.Weight : Any] {
+	static func fontWeights() -> [UIFont.Weight : Any] {
 		/// Assume that the 9 values of Apples NSFont.Weight ramp map to the W3C font-weight ramp in the css-fonts spec
 		/// https://www.w3.org/TR/css-fonts-4/#font-weight-prop
 		return [
@@ -321,7 +304,7 @@ class AppleThemeModule: RCTEventEmitter {
 		]
 	}
 
-	func fontVariants() -> [AnyHashable : Any] {
+	static func fontVariants() -> [AnyHashable : Any] {
 		let families = fontFamilies()
 		let sizes = fontSizes()
 		let weights = fontWeights()
@@ -393,30 +376,4 @@ class AppleThemeModule: RCTEventEmitter {
 			],
 		]
 	}
-
-	// MARK: - Event Emitter
-
-	override func supportedEvents() -> [String]! {
-		return Events.allCases.map { $0.name }
-	}
-
-	override func startObserving() {
-		hasListeners = true;
-		
-		kvoToken = UITraitCollection.current.observe(\.userInterfaceStyle) {(traitCollection, change) in
-			guard self.bridge != nil else {
-				return
-			}
-			self.sendEvent(withName: Events.traitCollectionDidChange.name, body: self.theme)
-		}
-	}
-
-	override func stopObserving() {
-		hasListeners = false;
-		kvoToken?.invalidate()
-	}
-
-	private var hasListeners = false
-	
-	private var kvoToken: NSKeyValueObservation?
 }

@@ -21,7 +21,6 @@ export function createAppleTheme(): ThemeReference {
         }
         partialThemeFromNativeModule = applePartialTheme;
         appleThemeReference.update(baseAppleTheme, partialThemeFromNativeModule);
-        console.log('Native Module loaded, themeRef invalidated, appearance: ' + partialThemeFromNativeModule.host.appearance);
       });
     } else {
       console.warn('Apple native theming module not found');
