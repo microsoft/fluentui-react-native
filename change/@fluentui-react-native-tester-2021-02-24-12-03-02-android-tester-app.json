@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "initial two pager layout",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "tamasane@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-02-24T06:33:02.155Z"
+}
