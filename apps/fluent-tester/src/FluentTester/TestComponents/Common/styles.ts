@@ -145,12 +145,7 @@ export const mobileStyles = StyleSheet.create({
     fontSize: 18,
     paddingVertical: 8,
   },
-  testListSeparator: {
-    borderColor: '#e1e1e1',
-    borderWidth: 0.1,
-  },
   testSection: {
-    flex: 1,
     width: '100%',
   },
 });

@@ -58,6 +58,10 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
       alignItems: 'stretch',
       padding: 4,
     },
+    testListSeparator: {
+      borderColor: t.colors.menuDivider,
+      borderWidth: 0.1,
+    },
   };
 });
 
@@ -105,39 +109,35 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
       <HeaderSeparator />
 
       {enableSinglePaneView ? (
-        <View>
+        <View style={themedStyles.root}>
           <DisplayIfVisible isVisible={onTestListView}>
-            <View style={themedStyles.root}>
-              <ScrollView style={mobileStyles.testList} contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
-                {sortedTestComponents.map((description, index) => {
-                  return (
-                    <View key={index}>
-                      <Text
-                        key={index}
-                        onPress={() => {
-                          setOnTestListView(false);
-                          setSelectedTestIndex(index);
-                          BackHandler.addEventListener('hardwareBackPress', onBackPress);
-                        }}
-                        style={mobileStyles.testListItems}
-                        testID={description.testPage}
-                      >
-                        {description.name}
-                      </Text>
-                      <Separator style={mobileStyles.testListSeparator} />
-                    </View>
-                  );
-                })}
-              </ScrollView>
-            </View>
+            <ScrollView style={mobileStyles.testList} contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
+              {sortedTestComponents.map((description, index) => {
+                return (
+                  <View key={index}>
+                    <Text
+                      key={index}
+                      onPress={() => {
+                        setOnTestListView(false);
+                        setSelectedTestIndex(index);
+                        BackHandler.addEventListener('hardwareBackPress', onBackPress);
+                      }}
+                      style={mobileStyles.testListItems}
+                      testID={description.testPage}
+                    >
+                      {description.name}
+                    </Text>
+                    <Separator style={themedStyles.testListSeparator} />
+                  </View>
+                );
+              })}
+            </ScrollView>
           </DisplayIfVisible>
           <DisplayIfVisible isVisible={!onTestListView}>
-            <View style={themedStyles.root}>
-              <View style={mobileStyles.testSection}>
-                <ScrollView>
-                  <TestComponent />
-                </ScrollView>
-              </View>
+            <View style={mobileStyles.testSection}>
+              <ScrollView>
+                <TestComponent />
+              </ScrollView>
             </View>
           </DisplayIfVisible>
         </View>
@@ -166,7 +166,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
             </ScrollView>
           </View>
         </View>
-       )}
+      )}
     </RootView>
   );
 };
