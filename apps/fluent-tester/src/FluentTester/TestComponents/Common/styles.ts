@@ -133,6 +133,9 @@ export const separatorStackStyle: IStackProps['style'] = {
 };
 
 export const mobileStyles = StyleSheet.create({
+  testList: {
+    width: '100%',
+  },
   testListItems: {
     width: '100%',
     height: 'auto',
@@ -142,5 +145,9 @@ export const mobileStyles = StyleSheet.create({
   testListSeparator: {
     borderColor: '#e1e1e1',
     borderWidth: 0.1,
+  },
+  testSection: {
+    flex: 1,
+    width: '100%',
   },
 });
