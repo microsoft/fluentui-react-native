@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Update FluentUI Apple dependency to 0.2.2, set minimum iOS to 13",
-  "packageName": "@fluentui-react-native/apple-theme",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-03-06T21:47:24.326Z"
-}
