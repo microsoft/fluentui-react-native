@@ -289,7 +289,7 @@ class AppleThemeModule: NSObject {
 	}
 
 	static func fontWeights() -> [UIFont.Weight : Any] {
-		/// Assume that the 9 values of Apples NSFont.Weight ramp map to the W3C font-weight ramp in the css-fonts spec
+		/// Assume that the 9 values of Apples UIFont.Weight ramp map to the W3C font-weight ramp in the css-fonts spec
 		/// https://www.w3.org/TR/css-fonts-4/#font-weight-prop
 		return [
 			.ultraLight : "100",
@@ -312,7 +312,7 @@ class AppleThemeModule: NSObject {
 			"captionStandard": [
 				"face" : families["primary"],
 				"size" : sizes["caption"],
-				"weight" : weights[.medium],
+				"weight" : weights[.regular],
 			],
 			"secondaryStandard": [
 				"face" : families["primary"],
@@ -347,7 +347,7 @@ class AppleThemeModule: NSObject {
 			"headerStandard": [
 				"face" : families["primary"],
 				"size" : sizes["header"],
-				"weight" : weights[.bold],
+				"weight" : weights[.semibold],
 			],
 			"headerSemibold": [
 				"face" : families["primary"],
@@ -362,7 +362,7 @@ class AppleThemeModule: NSObject {
 			"heroSemibold": [
 				"face" : families["primary"],
 				"size" : sizes["hero"],
-				"weight" : weights[.bold],
+				"weight" : weights[.semibold],
 			],
 			"heroLargeStandard": [
 				"face" : families["primary"],
@@ -372,7 +372,7 @@ class AppleThemeModule: NSObject {
 			"heroLargeSemibold": [
 				"face" : families["primary"],
 				"size" : sizes["heroLarge"],
-				"weight" : weights[.bold],
+				"weight" : weights[.semibold],
 			],
 		]
 	}
