@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const isMobile = Platform.OS == 'android';
+// mobile platform check to not render status components.
+const isMobile = Platform.OS == 'android' || (Platform.OS == 'ios' && !Platform.isPad);
 
 export const Test = (props: TestProps) => {
   return (
@@ -66,7 +67,7 @@ export const Test = (props: TestProps) => {
       <Stack style={stackStyle}>
         <Text style={styles.description}>{props.description}</Text>
       </Stack>
-      {isMobile ? null : (
+      {!isMobile && (
         <Stack style={stackStyle}>
           <View style={styles.statusView}>
             <Stack>
