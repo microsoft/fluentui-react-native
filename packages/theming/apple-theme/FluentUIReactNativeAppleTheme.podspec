@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/microsoft/fluentui-react-native.git", :tag => "#{s.version}" }
   s.swift_version    = "5"
 
-  s.ios.deployment_target = "11"
+  s.ios.deployment_target = "13.0"
   s.ios.source_files      = "ios/*.{swift,h,m}"
   s.ios.dependency 'MicrosoftFluentUI', '~> 0.2.2'
 

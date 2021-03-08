@@ -2,27 +2,7 @@ import Foundation
 import FluentUI
 
 @objc(MSFAppleThemeModule)
-class AppleThemeModule: RCTEventEmitter, UITraitEnvironment {
-	
-	override init() {
-
-		if #available(iOS 13.0, *) {
-			traitCollection = UITraitCollection.current
-		} else {
-			// Fallback on earlier versions
-			traitCollection = UIScreen.main.traitCollection
-		}
-		super.init()
-	}
-	
-	// MARK: - UITraitEnvironment
-	
-	var traitCollection: UITraitCollection
-	
-	func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-		self.sendEvent(withName: Events.traitCollectionDidChange.name, body: theme)
-	}
-	
+class AppleThemeModule: RCTEventEmitter {
 
 	public enum Events: CaseIterable {
 		case traitCollectionDidChange
@@ -44,7 +24,7 @@ class AppleThemeModule: RCTEventEmitter, UITraitEnvironment {
 	var theme: [AnyHashable: Any] {
 		get {
 			if #available(iOS 12.0, *) {
-				let isDarkMode = traitCollection.userInterfaceStyle == .dark
+				let isDarkMode = UITraitCollection.current.userInterfaceStyle == .dark
 				return [
 					"colors": palette(),
 					"typography" : [
@@ -297,27 +277,16 @@ class AppleThemeModule: RCTEventEmitter, UITraitEnvironment {
 	func fontFamilies() -> [AnyHashable : Any] {
 			
 		let systemFontFamilyName = UIFont.systemFont(ofSize: 0).familyName
-			
-		if #available(iOS 13.0, *) {
-			let monospaceFontFamilyName = UIFont.monospacedSystemFont(ofSize: 0, weight: .regular).familyName
-			return [
-				"primary" : systemFontFamilyName,
-				"monospace" : monospaceFontFamilyName,
-				"secondary": systemFontFamilyName,
-				"cursive": systemFontFamilyName,
-				"sansSerif": systemFontFamilyName,
-				"serif": systemFontFamilyName
-			]
-		} else {
-			return [
-				"primary" : systemFontFamilyName,
-				"monospace" : systemFontFamilyName,
-				"secondary": systemFontFamilyName,
-				"cursive": systemFontFamilyName,
-				"sansSerif": systemFontFamilyName,
-				"serif": systemFontFamilyName
-			]
-		}
+		let monospaceFontFamilyName = UIFont.monospacedSystemFont(ofSize: 0, weight: .regular).familyName
+		return [
+			"primary" : systemFontFamilyName,
+			"monospace" : monospaceFontFamilyName,
+			"secondary": systemFontFamilyName,
+			"cursive": systemFontFamilyName,
+			"sansSerif": systemFontFamilyName,
+			"serif": systemFontFamilyName
+		]
+
 	}
 
 	/// Map the current FluentUI React Native font sizes approximately to their corresponding apple text style,
@@ -434,30 +403,12 @@ class AppleThemeModule: RCTEventEmitter, UITraitEnvironment {
 	override func startObserving() {
 		hasListeners = true;
 		
-		if #available(iOS 13.0, *) {
-			kvoToken = UITraitCollection.current.observe(\.userInterfaceStyle) {(traitCollection, change) in
-				guard self.bridge != nil else {
-					return
-				}
-				self.sendEvent(withName: Events.traitCollectionDidChange.name, body: self.theme)
+		kvoToken = UITraitCollection.current.observe(\.userInterfaceStyle) {(traitCollection, change) in
+			guard self.bridge != nil else {
+				return
 			}
-		} else {
-			// Fallback on earlier versions
+			self.sendEvent(withName: Events.traitCollectionDidChange.name, body: self.theme)
 		}
-		
-//		if #available(iOS 12.0, *) {
-//			kvoToken = traitCollection.observe(\.userInterfaceStyle) {(traitCollection, change) in
-//				guard self.bridge != nil else {
-//					return
-//				}
-//				self.sendEvent(withName: Events.traitCollectionDidChange.name, body: self.theme)
-//			}
-//		} else {
-//			// Fallback on earlier versions
-//		}
-		
-		
-		
 	}
 
 	override func stopObserving() {

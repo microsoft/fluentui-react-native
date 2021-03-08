@@ -44,7 +44,7 @@ export function appleTypography(): Typography {
       heroStandard: { face: 'primary', size: 'hero', weight: '400' },
       heroSemibold: { face: 'primary', size: 'hero', weight: '600' },
       heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: '400' },
-      heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: '600' },
+      heroLargeSemibold: { face: 'primary', size: 100, weight: '600' },
     } as Variants,
   };
 
