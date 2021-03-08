@@ -7,7 +7,7 @@ import { FluentTester, FluentTesterProps } from './FluentTester';
 import { tests } from './testPages';
 import { testerTheme } from './theme/index';
 
-const isMobile = Platform.OS == 'android' || (Platform.OS == 'ios' && !Platform.isPad);
+const isMobile = Platform.OS == 'android';
 
 export const FluentTesterApp: React.FunctionComponent<FluentTesterProps> = (props) => {
   return (
