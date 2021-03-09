@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Add a native theming module for iOS",
+  "packageName": "@fluentui-react-native/experimental-avatar",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-03-09T19:16:45.075Z"
+}
