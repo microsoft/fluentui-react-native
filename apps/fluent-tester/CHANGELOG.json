@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 08 Mar 2021 21:55:00 GMT",
+      "tag": "@fluentui-react-native/tester_v0.18.0",
+      "version": "0.18.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "initial two pager layout",
+            "author": "tamasane@gmail.com",
+            "commit": "0108552fcf0f855a9a6680414910e07e4c93f489",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 06 Mar 2021 00:20:05 GMT",
       "tag": "@fluentui-react-native/tester_v0.17.0",
       "version": "0.17.0",
