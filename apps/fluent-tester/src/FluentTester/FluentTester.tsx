@@ -1,5 +1,6 @@
 import { Theme } from '@fluentui-react-native/framework';
-import { StealthButton, Separator } from '@fluentui/react-native';
+import { Separator } from '@fluentui/react-native';
+import { Button } from '@fluentui-react-native/experimental-button';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
@@ -20,32 +21,13 @@ const EmptyComponent: React.FunctionComponent = () => {
   return <RNText style={fluentTesterStyles.noTest}>Select a component from the left.</RNText>;
 };
 
-const DisplayIfVisible = ({ isVisible, children }) => (isVisible ? <View>{children}</View> : null);
+const DisplayIfVisible = ({ isVisible, children }) => (isVisible ? <View style={{ flex: 1 }}>{children}</View> : null);
 
 export interface FluentTesterProps {
   initialTest?: string;
   enableSinglePaneView?: boolean;
   enabledTests: TestDescription[];
 }
-
-const Header: React.FunctionComponent<{}> = () => {
-  const theme = useTheme();
-
-  return (
-    <View style={Platform.OS === 'ios' ? fluentTesterStyles.headerIOS : fluentTesterStyles.header}>
-      <Text
-        style={[fluentTesterStyles.testHeader]}
-        variant="heroLargeSemibold"
-        color={theme.host.palette?.TextEmphasis}
-        testID={BASE_TESTPAGE}
-      >
-        ⚛ FluentUI Tests
-      </Text>
-
-      <ThemePickers />
-    </View>
-  );
-};
 
 const getThemedStyles = themedStyleSheet((t: Theme) => {
   return {
@@ -79,7 +61,9 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const onBackPress = () => {
     setOnTestListView(true);
-    BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    if (Platform.OS === 'android') {
+      BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }
     return true;
   };
 
@@ -102,71 +86,103 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     default: View,
   });
 
+  const Header: React.FunctionComponent<{}> = () => {
+    const theme = useTheme();
+
+    return (
+      <View style={fluentTesterStyles.header}>
+        <Text
+          style={[fluentTesterStyles.testHeader]}
+          variant="heroLargeSemibold"
+          color={theme.host.palette?.TextEmphasis}
+          testID={BASE_TESTPAGE}
+        >
+          ⚛ FluentUI Tests
+        </Text>
+        <ThemePickers />
+      </View>
+    );
+  };
+
+  // iOS needs a software back button, which is shown on a newline along with the ThemePickers
+  const HeaderIOS: React.FunctionComponent<{}> = () => {
+    const theme = useTheme();
+
+    return (
+      <View style={fluentTesterStyles.headerIOS}>
+        <Text
+          style={[fluentTesterStyles.testHeader]}
+          variant="heroLargeSemibold"
+          color={theme.host.palette?.TextEmphasis}
+          testID={BASE_TESTPAGE}
+        >
+          ⚛ FluentUI Tests
+        </Text>
+        <View style={fluentTesterStyles.header}>
+          <Button ghost content="‹ Back" style={{ alignSelf: 'flex-start' }} onClick={onBackPress} disabled={onTestListView} />
+          <ThemePickers />
+        </View>
+      </View>
+    );
+  };
+
+  const TestPane: React.FunctionComponent<{}> = () => {
+    return (
+      <ScrollView
+        style={enableSinglePaneView ? mobileStyles.testList : fluentTesterStyles.testList}
+        contentContainerStyle={fluentTesterStyles.testListContainerStyle}
+      >
+        {sortedTestComponents.map((description, index) => {
+          return (
+            <View key={index}>
+              <Text
+                key={index}
+                onPress={() => {
+                  setOnTestListView(false);
+                  setSelectedTestIndex(index);
+                  if (Platform.OS === 'android') {
+                    BackHandler.addEventListener('hardwareBackPress', onBackPress);
+                  }
+                }}
+                style={enableSinglePaneView ? mobileStyles.testListItems : fluentTesterStyles.testListItem}
+                testID={description.testPage}
+              >
+                {description.name}
+              </Text>
+              <Separator style={themedStyles.testListSeparator} />
+            </View>
+          );
+        })}
+      </ScrollView>
+    );
+  };
+
+  const TestComponentView: React.FunctionComponent<{}> = () => {
+    return (
+      <View style={enableSinglePaneView ? mobileStyles.testSection : fluentTesterStyles.testSection}>
+        <ScrollView>
+          <TestComponent />
+        </ScrollView>
+      </View>
+    );
+  };
+
   return (
     <RootView style={themedStyles.root}>
-      <Header />
+      {Platform.OS === 'ios' ? <HeaderIOS /> : <Header />}
 
       <HeaderSeparator />
 
-      {enableSinglePaneView ? (
-        <View style={themedStyles.root}>
-          <DisplayIfVisible isVisible={onTestListView}>
-            <ScrollView style={mobileStyles.testList} contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
-              {sortedTestComponents.map((description, index) => {
-                return (
-                  <View key={index}>
-                    <Text
-                      key={index}
-                      onPress={() => {
-                        setOnTestListView(false);
-                        setSelectedTestIndex(index);
-                        BackHandler.addEventListener('hardwareBackPress', onBackPress);
-                      }}
-                      style={mobileStyles.testListItems}
-                      testID={description.testPage}
-                    >
-                      {description.name}
-                    </Text>
-                    <Separator style={themedStyles.testListSeparator} />
-                  </View>
-                );
-              })}
-            </ScrollView>
-          </DisplayIfVisible>
-          <DisplayIfVisible isVisible={!onTestListView}>
-            <View style={mobileStyles.testSection}>
-              <ScrollView>
-                <TestComponent />
-              </ScrollView>
-            </View>
-          </DisplayIfVisible>
-        </View>
-      ) : (
-        <View style={fluentTesterStyles.testRoot}>
-          <ScrollView style={fluentTesterStyles.testList} contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
-            {sortedTestComponents.map((description, index) => {
-              return (
-                <StealthButton
-                  key={index}
-                  disabled={index == selectedTestIndex}
-                  content={description.name}
-                  onClick={() => setSelectedTestIndex(index)}
-                  style={fluentTesterStyles.testListItem}
-                  testID={description.testPage}
-                />
-              );
-            })}
-          </ScrollView>
+      <View style={enableSinglePaneView ? themedStyles.root : fluentTesterStyles.testRoot}>
+        <DisplayIfVisible isVisible={enableSinglePaneView || onTestListView}>
+          <TestPane />
+        </DisplayIfVisible>
 
+        <DisplayIfVisible isVisible={!enableSinglePaneView || (enableSinglePaneView && !onTestListView)}>
           <TestListSeparator vertical style={{ marginHorizontal: 8, width: 2 }} />
-
-          <View style={fluentTesterStyles.testSection}>
-            <ScrollView>
-              <TestComponent />
-            </ScrollView>
-          </View>
-        </View>
-      )}
+          <TestComponentView />
+        </DisplayIfVisible>
+      </View>
     </RootView>
   );
 };
