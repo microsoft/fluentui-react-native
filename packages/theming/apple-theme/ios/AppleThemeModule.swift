@@ -172,8 +172,8 @@ class AppleThemeModule: NSObject {
 
 			"buttonDisabledBackground" : RCTColorToHexString(FluentUI.Colors.gray600.cgColor),
 			"buttonDisabledBorder" : "transparent",
-			"buttonDisabledContent" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"buttonDisabledIcon" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
+			"buttonDisabledContent" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
+			"buttonDisabledIcon" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
 
 			"ghostBackground" : "transparent",
 			"ghostBorder" : "transparent",
@@ -197,8 +197,8 @@ class AppleThemeModule: NSObject {
 
 			"ghostDisabledBackground" : "transparent",
 			"ghostDisabledBorder" : "transparent",
-			"ghostDisabledContent" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint20.color.cgColor),
-			"ghostDisabledIcon" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint20.color.cgColor),
+			"ghostDisabledContent" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
+			"ghostDisabledIcon" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
 
 			"brandBackground" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 			"brandBorder" : "transparent",

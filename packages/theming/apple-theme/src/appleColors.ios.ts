@@ -321,8 +321,8 @@ export function paletteFromAppleColors(isDark: boolean): ThemeColorDefinition {
 
     buttonDisabledBackground: fluentApple.gray600,
     buttonDisabledBorder: 'transparent',
-    buttonDisabledContent: fluentApple.textOnAccent,
-    buttonDisabledIcon: fluentApple.textOnAccent,
+    buttonDisabledContent: fluentApple.textDisabled,
+    buttonDisabledIcon: fluentApple.textDisabled,
 
     ghostBackground: 'transparent',
     ghostBorder: 'transparent',
@@ -346,8 +346,8 @@ export function paletteFromAppleColors(isDark: boolean): ThemeColorDefinition {
 
     ghostDisabledBackground: 'transparent',
     ghostDisabledBorder: 'transparent',
-    ghostDisabledContent: fluentApple.communicationBlueTint20,
-    ghostDisabledIcon: fluentApple.communicationBlueTint20,
+    ghostDisabledContent: fluentApple.textDisabled,
+    ghostDisabledIcon: fluentApple.textDisabled,
 
     brandBackground: fluentApple.communicationBlue,
     brandBorder: 'transparent',
