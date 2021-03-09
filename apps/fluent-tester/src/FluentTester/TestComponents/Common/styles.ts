@@ -68,10 +68,6 @@ export const fluentTesterStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  headerIOS: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-  },
 
   testHeader: {
     marginBottom: 8,
@@ -119,6 +115,11 @@ export const separatorStackStyle: IStackProps['style'] = {
 };
 
 export const mobileStyles = StyleSheet.create({
+  header: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+
   testList: {
     width: '100%',
   },

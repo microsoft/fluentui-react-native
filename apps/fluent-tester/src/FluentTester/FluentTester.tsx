@@ -105,11 +105,11 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   };
 
   // iOS needs a software back button, which is shown on a newline along with the ThemePickers
-  const HeaderIOS: React.FunctionComponent<{}> = () => {
+  const MobileHeader: React.FunctionComponent<{}> = () => {
     const theme = useTheme();
 
     return (
-      <View style={fluentTesterStyles.headerIOS}>
+      <View style={mobileStyles.header}>
         <Text
           style={[fluentTesterStyles.testHeader]}
           variant="heroLargeSemibold"
@@ -119,7 +119,14 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
           ⚛ FluentUI Tests
         </Text>
         <View style={fluentTesterStyles.header}>
-          <Button ghost content="‹ Back" style={{ alignSelf: 'flex-start' }} onClick={onBackPress} disabled={onTestListView} />
+          {/* on iOS, display a back Button */}
+          <Button
+            ghost
+            content="‹ Back"
+            style={{ alignSelf: 'flex-start', display: Platform.OS === 'ios' ? 'flex' : 'none' }}
+            onClick={onBackPress}
+            disabled={onTestListView}
+          />
           <ThemePickers />
         </View>
       </View>
@@ -127,6 +134,37 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   };
 
   const TestPane: React.FunctionComponent<{}> = () => {
+    return (
+      <ScrollView
+        style={enableSinglePaneView ? mobileStyles.testList : fluentTesterStyles.testList}
+        contentContainerStyle={fluentTesterStyles.testListContainerStyle}
+      >
+        {sortedTestComponents.map((description, index) => {
+          return (
+            <View key={index}>
+              <Text
+                key={index}
+                onPress={() => {
+                  setOnTestListView(false);
+                  setSelectedTestIndex(index);
+                  if (Platform.OS === 'android') {
+                    BackHandler.addEventListener('hardwareBackPress', onBackPress);
+                  }
+                }}
+                style={enableSinglePaneView ? mobileStyles.testListItems : fluentTesterStyles.testListItem}
+                testID={description.testPage}
+              >
+                {description.name}
+              </Text>
+              <Separator style={themedStyles.testListSeparator} />
+            </View>
+          );
+        })}
+      </ScrollView>
+    );
+  };
+
+  const MobileTestPane: React.FunctionComponent<{}> = () => {
     return (
       <ScrollView
         style={enableSinglePaneView ? mobileStyles.testList : fluentTesterStyles.testList}
@@ -169,13 +207,13 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   return (
     <RootView style={themedStyles.root}>
-      {Platform.OS === 'ios' ? <HeaderIOS /> : <Header />}
+      {enableSinglePaneView ? <MobileHeader /> : <Header />}
 
       <HeaderSeparator />
 
       <View style={enableSinglePaneView ? themedStyles.root : fluentTesterStyles.testRoot}>
-        <DisplayIfVisible isVisible={enableSinglePaneView || onTestListView}>
-          <TestPane />
+        <DisplayIfVisible isVisible={!enableSinglePaneView || (enableSinglePaneView && onTestListView)}>
+          {enableSinglePaneView ? <MobileTestPane /> : <TestPane />}
         </DisplayIfVisible>
 
         <DisplayIfVisible isVisible={!enableSinglePaneView || (enableSinglePaneView && !onTestListView)}>
