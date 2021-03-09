@@ -1,8 +1,28 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Mon, 01 Mar 2021 22:53:12 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Mar 2021 18:43:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.0
+
+Mon, 08 Mar 2021 18:43:59 GMT
+
+### Minor changes
+
+- Update FluentUI Apple dependency to 0.2.2, set minimum iOS to 13 (saadnajmi2@gmail.com)
+
+## 0.5.0
+
+Sat, 06 Mar 2021 00:20:05 GMT
+
+### Minor changes
+
+- Update to react-native 0.63 (30809111+acoates-ms@users.noreply.github.com)
+
+### Patches
+
+- Base theme on macOS changed to apple theme (saadnajmi2@gmail.com)
 
 ## 0.4.3
 

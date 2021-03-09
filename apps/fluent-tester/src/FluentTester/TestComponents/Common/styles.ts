@@ -117,3 +117,18 @@ export const separatorStackStyle: IStackProps['style'] = {
   flexDirection: 'row',
   justifyContent: 'space-evenly',
 };
+
+export const mobileStyles = StyleSheet.create({
+  testList: {
+    width: '100%',
+  },
+  testListItems: {
+    width: '100%',
+    height: 'auto',
+    fontSize: 18,
+    paddingVertical: 8,
+  },
+  testSection: {
+    width: '100%',
+  },
+});
