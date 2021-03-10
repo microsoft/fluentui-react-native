@@ -59,7 +59,7 @@ export const settings: IComposeSettings<IButtonType> = [
         tokens: {
           backgroundColor: 'buttonBackgroundPressed',
           color: 'buttonTextPressed',
-          borderColor: 'buttonBorderPressed',
+          borderColor: 'buttonPressedBorder',
         },
       },
       focused: {

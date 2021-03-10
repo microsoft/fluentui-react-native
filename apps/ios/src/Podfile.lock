@@ -9,13 +9,16 @@ PODS:
     - React-Core (= 0.63.4)
     - React-jsi (= 0.63.4)
     - ReactCommon/turbomodule/core (= 0.63.4)
-  - FluentUI-React-Native-Avatar (0.5.0):
+  - FluentUI-React-Native-Apple-Theme (0.3.0):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
-  - FluentUI-React-Native-Button (0.4.0):
+  - FluentUI-React-Native-Avatar (0.6.0):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
-  - FluentUI-React-Native-Shimmer (0.5.0):
+  - FluentUI-React-Native-Button (0.5.0):
+    - MicrosoftFluentUI (~> 0.2.2)
+    - React
+  - FluentUI-React-Native-Shimmer (0.6.0):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
   - Folly (2020.01.13.00):
@@ -320,6 +323,7 @@ DEPENDENCIES:
   - DoubleConversion (from `../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../../../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native/Libraries/FBReactNativeSpec`)
+  - FluentUI-React-Native-Apple-Theme (from `../../../packages/theming/apple-theme/FluentUIReactNativeAppleTheme.podspec`)
   - FluentUI-React-Native-Avatar (from `../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec`)
   - FluentUI-React-Native-Button (from `../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec`)
   - FluentUI-React-Native-Shimmer (from `../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec`)
@@ -367,6 +371,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/Libraries/FBLazyVector"
   FBReactNativeSpec:
     :path: "../../../node_modules/react-native/Libraries/FBReactNativeSpec"
+  FluentUI-React-Native-Apple-Theme:
+    :path: "../../../packages/theming/apple-theme/FluentUIReactNativeAppleTheme.podspec"
   FluentUI-React-Native-Avatar:
     :path: "../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec"
   FluentUI-React-Native-Button:
@@ -429,9 +435,10 @@ SPEC CHECKSUMS:
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
-  FluentUI-React-Native-Avatar: b8c0be6e3cb27281c652aa1b1a3f117d763d64d5
-  FluentUI-React-Native-Button: e783548d3949e6f3bbd50143acb1b8229e04fe81
-  FluentUI-React-Native-Shimmer: 73d75d2ddf338ff75c15c1af81ccb2de4b22ed92
+  FluentUI-React-Native-Apple-Theme: 6e49bd84476c8cdd49e205fb1d791e8f009ef024
+  FluentUI-React-Native-Avatar: 2eee15cc5a43322668b61e1a214927974b555adc
+  FluentUI-React-Native-Button: 9485eb3b3ac48fe9ff7c8201cedc8a6302605acc
+  FluentUI-React-Native-Shimmer: b1c87c072238a69fe0fdf10b79cdeb2299968330
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   MicrosoftFluentUI: 8a1ef14a8479106c33822d05b774e04051bb33f2
@@ -461,6 +468,6 @@ SPEC CHECKSUMS:
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: a3155f67c06aeb3775b5449bc80a4a738902fe6c
+PODFILE CHECKSUM: 1236c39b2a369c6c27478060127c88ce50cbe405
 
 COCOAPODS: 1.10.1

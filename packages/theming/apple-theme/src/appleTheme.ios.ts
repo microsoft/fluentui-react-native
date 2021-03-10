@@ -7,8 +7,35 @@ function appleSpacing(): Spacing {
 }
 
 const appleComponents = {
-  // These values correspond to the Primary style of the FluentUI Apple Button
+  // The Default Button corresponds to the "secondary outline" button style on iOS
   Button: {
+    tokens: {
+      borderRadius: 8,
+      borderWidth: 1,
+    },
+    root: {
+      style: {
+        margin: 8, // Padding around the outside of the button
+      },
+    },
+    stack: {
+      style: {
+        paddingVertical: 10,
+        paddingHorizontal: 14,
+      },
+    },
+    icon: {
+      style: {
+        marginEnd: 8,
+      },
+    },
+    content: {
+      fontSize: 12,
+      height: 18,
+    },
+  },
+
+  PrimaryButton: {
     tokens: {
       borderRadius: 8,
       borderWidth: 1,
@@ -34,6 +61,34 @@ const appleComponents = {
       height: 20,
     },
   },
+
+  StealthButton: {
+    tokens: {
+      borderRadius: 8,
+      borderWidth: 1,
+    },
+    root: {
+      style: {
+        margin: 8, // Padding around the outside of the button
+      },
+    },
+    stack: {
+      style: {
+        paddingVertical: 7,
+        paddingHorizontal: 12,
+      },
+    },
+    icon: {
+      style: {
+        display: 'none',
+      },
+    },
+    content: {
+      fontSize: 15,
+      height: 20,
+    },
+  },
+
   RNFText: {
     tokens: {
       variant: 'bodyStandard',

@@ -96,6 +96,13 @@ function getFluentUIAppleLightPalette(): ApplePalette {
     dividerOnPrimary: '#E1E1E1', //= UIColor(light: gray100, dark: gray800, darkElevated: gray700)
     dividerOnSecondary: '#C8C8C8', //= UIColor(light: gray200, dark: gray700, darkElevated: gray600)
     dividerOnTertiary: '#C8C8C8', //= UIColor(light: gray200, dark: gray700, darkElevated: gray600)
+
+    buttonBackground: 'transparent',
+    buttonBackgroundFilledPressed: '#2B88D8', //UIColor(light: Colors.primaryTint10(for: window), dark: Colors.primaryTint20(for: window))
+    buttonBackgroundFilledDisabled: '#E1E1E1', //surfaceQuaternary
+    buttonBorderDisabled: '#E1E1E1', //surfaceQuaternary
+    buttonTitleDisabled: '#ACACAC', //textDisabled
+    buttonTitleWithFilledBackground: 'white', //textOnAccent
   };
 }
 
@@ -194,6 +201,13 @@ function getFluentUIAppleDarkPalette(): ApplePalette {
     dividerOnPrimary: '#292929', //= UIColor(light: gray100, dark: gray800, darkElevated: gray700)
     dividerOnSecondary: '#303030', //= UIColor(light: gray200, dark: gray700, darkElevated: gray600)
     dividerOnTertiary: '#303030', //= UIColor(light: gray200, dark: gray700, darkElevated: gray600)
+
+    buttonBackground: 'transparent',
+    buttonBackgroundFilledPressed: '#004C87', //UIColor(light: Colors.primaryTint10(for: window), dark: Colors.primaryTint20(for: window))
+    buttonBackgroundFilledDisabled: '#404040', //surfaceQuaternary
+    buttonBorderDisabled: '#404040', //surfaceQuaternary
+    buttonTitleDisabled: '#404040', //textDisabled
+    buttonTitleWithFilledBackground: 'black', //textOnAccent
   };
 }
 
@@ -244,33 +258,35 @@ export function paletteFromAppleColors(isDark: boolean): ThemeColorDefinition {
     inputTextHovered: fluentApple.textPrimary,
     inputPlaceholderText: fluentApple.textSecondary,
 
-    buttonBackgroundChecked: fluentApple.communicationBlueTint10,
-    buttonBackgroundHovered: fluentApple.communicationBlue,
-    buttonBackgroundCheckedHovered: fluentApple.communicationBlueTint10,
-    buttonBackgroundPressed: fluentApple.communicationBlueTint10,
-    buttonBackgroundDisabled: fluentApple.gray600,
-    buttonText: fluentApple.textOnAccent,
-    buttonTextHovered: fluentApple.textOnAccent,
-    buttonTextChecked: fluentApple.textOnAccent,
-    buttonTextCheckedHovered: fluentApple.textOnAccent,
-    buttonTextPressed: fluentApple.textOnAccent,
-    buttonTextDisabled: fluentApple.textOnAccent,
-    buttonBorderDisabled: 'transparent',
-    buttonBorderFocused: 'transparent',
+    // Default values without any style
+    // on FluentUI Apple iOS, this is the buttonStyle "Secondary Outline"
+    buttonBackgroundChecked: 'transparent',
+    buttonBackgroundHovered: 'transparent',
+    buttonBackgroundCheckedHovered: 'transparent',
+    buttonBackgroundPressed: 'transparent',
+    buttonBackgroundDisabled: 'transparent',
+    buttonText: fluentApple.communicationBlue,
+    buttonTextHovered: fluentApple.communicationBlue,
+    buttonTextChecked: fluentApple.communicationBlue,
+    buttonTextCheckedHovered: fluentApple.communicationBlue,
+    buttonTextPressed: fluentApple.communicationBlueTint20,
+    buttonTextDisabled: fluentApple.buttonTitleDisabled,
+    buttonBorderDisabled: fluentApple.buttonBorderDisabled,
+    buttonBorderFocused: fluentApple.communicationBlueTint10,
 
     primaryButtonBackground: fluentApple.communicationBlue,
     primaryButtonBackgroundHovered: fluentApple.communicationBlue,
-    primaryButtonBackgroundPressed: fluentApple.communicationBlueTint10,
-    primaryButtonBackgroundDisabled: fluentApple.gray100,
+    primaryButtonBackgroundPressed: fluentApple.buttonBackgroundFilledPressed,
+    primaryButtonBackgroundDisabled: fluentApple.buttonBackgroundFilledDisabled,
     primaryButtonBorder: 'transparent',
     primaryButtonBorderFocused: 'transparent',
-    primaryButtonText: fluentApple.textOnAccent,
-    primaryButtonTextHovered: fluentApple.textOnAccent,
-    primaryButtonTextPressed: fluentApple.textOnAccent,
-    primaryButtonTextDisabled: fluentApple.textOnAccent,
+    primaryButtonText: fluentApple.buttonTitleWithFilledBackground,
+    primaryButtonTextHovered: fluentApple.buttonTitleWithFilledBackground,
+    primaryButtonTextPressed: fluentApple.buttonTitleWithFilledBackground,
+    primaryButtonTextDisabled: fluentApple.buttonTitleWithFilledBackground,
 
     accentButtonBackground: fluentApple.communicationBlue,
-    accentButtonText: fluentApple.textOnAccent,
+    accentButtonText: fluentApple.buttonTitleWithFilledBackground,
 
     menuBackground: fluentApple.surfacePrimary,
     menuDivider: fluentApple.dividerOnPrimary,
@@ -299,45 +315,46 @@ export function paletteFromAppleColors(isDark: boolean): ThemeColorDefinition {
     /* ControlColorTokens */
 
     // Default values without any style
-    buttonBackground: fluentApple.communicationBlue,
-    buttonBorder: 'transparent',
-    buttonContent: fluentApple.textOnAccent,
-    buttonIcon: fluentApple.iconPrimary,
+    // on FluentUI Apple iOS, this is the buttonStyle "Secondary Outline"
+    buttonBackground: 'transparent',
+    buttonBorder: fluentApple.communicationBlueTint10,
+    buttonContent: fluentApple.communicationBlue,
+    buttonIcon: fluentApple.communicationBlue,
 
-    buttonHoveredBackground: fluentApple.communicationBlue,
-    buttonHoveredBorder: 'transparent',
-    buttonHoveredContent: fluentApple.textOnAccent,
-    buttonHoveredIcon: fluentApple.iconPrimary,
+    buttonHoveredBackground: 'transparent',
+    buttonHoveredBorder: fluentApple.communicationBlueTint10,
+    buttonHoveredContent: fluentApple.communicationBlue,
+    buttonHoveredIcon: fluentApple.communicationBlue,
 
-    buttonFocusedBackground: fluentApple.communicationBlue,
-    buttonFocusedBorder: 'transparent',
-    buttonFocusedContent: fluentApple.textOnAccent,
-    buttonFocusedIcon: fluentApple.iconPrimary,
+    buttonFocusedBackground: 'transparent',
+    buttonFocusedBorder: fluentApple.communicationBlueTint10,
+    buttonFocusedContent: fluentApple.communicationBlue,
+    buttonFocusedIcon: fluentApple.communicationBlue,
 
-    buttonPressedBackground: fluentApple.communicationBlueTint10,
-    buttonPressedBorder: 'transparent',
-    buttonPressedContent: fluentApple.textOnAccent,
-    buttonPressedIcon: fluentApple.iconPrimary,
+    buttonPressedBackground: 'transparent',
+    buttonPressedBorder: fluentApple.communicationBlueTint30,
+    buttonPressedContent: fluentApple.communicationBlueTint20,
+    buttonPressedIcon: fluentApple.communicationBlueTint20,
 
-    buttonDisabledBackground: fluentApple.gray600,
-    buttonDisabledBorder: 'transparent',
-    buttonDisabledContent: fluentApple.textOnAccent,
-    buttonDisabledIcon: fluentApple.textOnAccent,
+    buttonDisabledBackground: 'transparent',
+    buttonDisabledBorder: fluentApple.buttonBorderDisabled,
+    buttonDisabledContent: fluentApple.buttonTitleDisabled,
+    buttonDisabledIcon: fluentApple.buttonTitleDisabled,
 
     ghostBackground: 'transparent',
     ghostBorder: 'transparent',
     ghostContent: fluentApple.communicationBlue,
-    ghostIcon: fluentApple.iconPrimary,
+    ghostIcon: fluentApple.communicationBlue,
 
     ghostHoveredBackground: 'transparent',
     ghostHoveredBorder: 'transparent',
     ghostHoveredContent: fluentApple.communicationBlue,
-    ghostHoveredIcon: fluentApple.iconPrimary,
+    ghostHoveredIcon: fluentApple.communicationBlue,
 
     ghostFocusedBackground: 'transparent',
     ghostFocusedBorder: 'transparent',
     ghostFocusedContent: fluentApple.communicationBlue,
-    ghostFocusedIcon: fluentApple.iconPrimary,
+    ghostFocusedIcon: fluentApple.communicationBlue,
 
     ghostPressedBackground: 'transparent',
     ghostPressedBorder: 'transparent',
@@ -346,62 +363,63 @@ export function paletteFromAppleColors(isDark: boolean): ThemeColorDefinition {
 
     ghostDisabledBackground: 'transparent',
     ghostDisabledBorder: 'transparent',
-    ghostDisabledContent: fluentApple.communicationBlueTint20,
-    ghostDisabledIcon: fluentApple.communicationBlueTint20,
+    ghostDisabledContent: fluentApple.buttonTitleDisabled,
+    ghostDisabledIcon: fluentApple.buttonTitleDisabled,
 
     brandBackground: fluentApple.communicationBlue,
     brandBorder: 'transparent',
-    brandContent: fluentApple.textOnAccent,
-    brandIcon: fluentApple.iconPrimary,
+    brandContent: fluentApple.buttonTitleWithFilledBackground,
+    brandIcon: fluentApple.buttonTitleWithFilledBackground,
 
     brandHoveredBackground: fluentApple.communicationBlue,
     brandHoveredBorder: 'transparent',
-    brandHoveredContent: fluentApple.textOnAccent,
-    brandHoveredIcon: fluentApple.iconPrimary,
+    brandHoveredContent: fluentApple.buttonTitleWithFilledBackground,
+    brandHoveredIcon: fluentApple.buttonTitleWithFilledBackground,
 
     brandFocusedBackground: fluentApple.communicationBlue,
     brandFocusedBorder: 'transparent',
-    brandFocusedContent: fluentApple.textOnAccent,
-    brandFocusedIcon: fluentApple.iconPrimary,
+    brandFocusedContent: fluentApple.buttonTitleWithFilledBackground,
+    brandFocusedIcon: fluentApple.buttonTitleWithFilledBackground,
 
-    brandPressedBackground: fluentApple.communicationBlueTint10,
+    brandPressedBackground: fluentApple.buttonBackgroundFilledPressed,
     brandPressedBorder: 'transparent',
-    brandPressedContent: fluentApple.textOnAccent,
-    brandPressedIcon: fluentApple.iconPrimary,
+    brandPressedContent: fluentApple.buttonTitleWithFilledBackground,
+    brandPressedIcon: fluentApple.buttonTitleWithFilledBackground,
 
-    brandDisabledBackground: fluentApple.gray100,
+    brandDisabledBackground: fluentApple.buttonBackgroundFilledDisabled,
     brandDisabledBorder: 'transparent',
-    brandDisabledContent: fluentApple.textOnAccent,
-    brandDisabledIcon: fluentApple.iconDisabled,
+    brandDisabledContent: fluentApple.buttonTitleWithFilledBackground,
+    brandDisabledIcon: fluentApple.buttonTitleWithFilledBackground,
 
-    buttonCheckedBackground: fluentApple.communicationBlueTint10,
-    buttonCheckedContent: fluentApple.textPrimary,
-    buttonCheckedHoveredBackground: fluentApple.communicationBlueTint10,
-    buttonCheckedHoveredContent: fluentApple.textPrimary,
+    buttonCheckedBackground: 'transparent',
+    buttonCheckedContent: fluentApple.communicationBlue,
+    buttonCheckedHoveredBackground: 'transparent',
+    buttonCheckedHoveredContent: fluentApple.communicationBlue,
 
-    brandCheckedBackground: fluentApple.communicationBlueTint10,
-    brandCheckedContent: fluentApple.textOnAccent,
-    brandCheckedHoveredBackground: fluentApple.communicationBlueTint10,
-    brandCheckedHoveredContent: fluentApple.textOnAccent,
+    brandCheckedBackground: fluentApple.communicationBlue,
+    brandCheckedContent: fluentApple.buttonTitleWithFilledBackground,
+    brandCheckedHoveredBackground: fluentApple.buttonTitleWithFilledBackground,
+    brandCheckedHoveredContent: fluentApple.buttonTitleWithFilledBackground,
 
     ghostCheckedBackground: 'transparent',
-    ghostCheckedContent: fluentApple.communicationBlueTint20,
+    ghostCheckedContent: fluentApple.communicationBlue,
     ghostCheckedHoveredBackground: 'transparent',
-    ghostCheckedHoveredContent: fluentApple.communicationBlueTint20,
+    ghostCheckedHoveredContent: fluentApple.communicationBlue,
     ghostCheckedHoveredBorder: 'transparent',
 
+    // Buttons on iOS don't have secondary text, so map these to be the same as the normal content
     ghostSecondaryContent: fluentApple.communicationBlue,
     ghostFocusedSecondaryContent: fluentApple.communicationBlue,
     ghostHoveredSecondaryContent: fluentApple.communicationBlue,
-    ghostPressedSecondaryContent: fluentApple.communicationBlue,
+    ghostPressedSecondaryContent: fluentApple.communicationBlueTint20,
 
-    brandSecondaryContent: fluentApple.textPrimary,
-    brandFocusedSecondaryContent: fluentApple.textPrimary,
-    brandHoveredSecondaryContent: fluentApple.textPrimary,
-    brandPressedSecondaryContent: fluentApple.textPrimary,
+    brandSecondaryContent: fluentApple.buttonTitleWithFilledBackground,
+    brandFocusedSecondaryContent: fluentApple.buttonTitleWithFilledBackground,
+    brandHoveredSecondaryContent: fluentApple.buttonTitleWithFilledBackground,
+    brandPressedSecondaryContent: fluentApple.buttonTitleWithFilledBackground,
 
-    buttonDisabledSecondaryContent: fluentApple.textOnAccent,
-    buttonHoveredSecondaryContent: fluentApple.textPrimary,
-    buttonPressedSecondaryContent: fluentApple.textPrimary,
+    buttonDisabledSecondaryContent: fluentApple.buttonTitleDisabled,
+    buttonHoveredSecondaryContent: fluentApple.communicationBlue,
+    buttonPressedSecondaryContent: fluentApple.communicationBlueTint20,
   };
 }
