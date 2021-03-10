@@ -51,6 +51,9 @@ class AppleThemeModule: NSObject {
 	// MARK: - Colors
 
 	static func palette() -> [AnyHashable : Any] {
+		
+		// Lifted from Button.Swift's "updateBackgroundColor" method as this isn't available publicly
+		let buttonBackgroundFilledPressed = UIColor(light: Colors.Palette.communicationBlueTint10.color, dark: Colors.Palette.communicationBlueTint20.color)
 
 		return [
 			/* PaletteBackgroundColors & PaletteTextColors */
@@ -95,33 +98,33 @@ class AppleThemeModule: NSObject {
 			"inputTextHovered" : RCTColorToHexString(FluentUI.Colors.textPrimary.cgColor),
 			"inputPlaceholderText" : RCTColorToHexString(FluentUI.Colors.textSecondary.cgColor),
 
-			"buttonBackgroundChecked" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint10.color.cgColor),
-			"buttonBackgroundHovered" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
-			"buttonBackgroundCheckedHovered" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint10.color.cgColor),
-			"buttonBackgroundPressed" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint10.color.cgColor),
-			"buttonBackgroundDisabled" : RCTColorToHexString(FluentUI.Colors.gray600.cgColor),
-			"buttonText" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"buttonTextHovered" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"buttonTextChecked" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"buttonTextCheckedHovered" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"buttonTextPressed" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"buttonTextDisabled" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"buttonBorderDisabled" : "transparent",
-			"buttonBorderFocused" : "transparent",
+			"buttonBackgroundChecked" : "transparent",
+			"buttonBackgroundHovered" : "transparent",
+			"buttonBackgroundCheckedHovered" : "transparent",
+			"buttonBackgroundPressed" : "transparent",
+			"buttonBackgroundDisabled" : "transparent",
+			"buttonText" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
+			"buttonTextHovered" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
+			"buttonTextChecked" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
+			"buttonTextCheckedHovered" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
+			"buttonTextPressed" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint20.color.cgColor),
+			"buttonTextDisabled" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
+			"buttonBorderDisabled" : RCTColorToHexString(FluentUI.Colors.Button.borderDisabled.cgColor),
+			"buttonBorderFocused" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint10.color.cgColor),
 
 			"primaryButtonBackground" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 			"primaryButtonBackgroundHovered" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
-			"primaryButtonBackgroundPressed" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint10.color.cgColor),
-			"primaryButtonBackgroundDisabled" : RCTColorToHexString(FluentUI.Colors.gray100.cgColor),
+			"primaryButtonBackgroundPressed" : RCTColorToHexString(buttonBackgroundFilledPressed.cgColor),
+			"primaryButtonBackgroundDisabled" : RCTColorToHexString(FluentUI.Colors.Button.backgroundFilledDisabled.cgColor),
 			"primaryButtonBorder" : "transparent",
 			"primaryButtonBorderFocused" : "transparent",
-			"primaryButtonText" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"primaryButtonTextHovered" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"primaryButtonTextPressed" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"primaryButtonTextDisabled" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
+			"primaryButtonText" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
+			"primaryButtonTextHovered" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
+			"primaryButtonTextPressed" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
+			"primaryButtonTextDisabled" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
 
 			"accentButtonBackground" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
-			"accentButtonText" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
+			"accentButtonText" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
 
 			"menuBackground" : RCTColorToHexString(FluentUI.Colors.surfacePrimary.cgColor),
 			"menuDivider" : RCTColorToHexString(FluentUI.Colors.dividerOnPrimary.cgColor),
@@ -149,46 +152,46 @@ class AppleThemeModule: NSObject {
 
 			/* ControlColorTokens */
 
-			// Set the default button tokens to match the Acrylic Button style
-			"buttonBackground" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
-			"buttonBorder" : "transparent",
-			"buttonContent" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"buttonIcon" : RCTColorToHexString(FluentUI.Colors.iconPrimary.cgColor),
+			// Set the default button tokens to match the "secondary outline" button style
+			"buttonBackground" : "transparent",
+			"buttonBorder" :  RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint10.color.cgColor),
+			"buttonContent" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
+			"buttonIcon" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 
-			"buttonHoveredBackground" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
-			"buttonHoveredBorder" : "transparent",
-			"buttonHoveredContent" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"buttonHoveredIcon" : RCTColorToHexString(FluentUI.Colors.iconPrimary.cgColor),
+			"buttonHoveredBackground" :"transparent",
+			"buttonHoveredBorder" :  RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint10.color.cgColor),
+			"buttonHoveredContent" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
+			"buttonHoveredIcon" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 
-			"buttonFocusedBackground" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
-			"buttonFocusedBorder" : "transparent",
-			"buttonFocusedContent" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"buttonFocusedIcon" : RCTColorToHexString(FluentUI.Colors.iconPrimary.cgColor),
+			"buttonFocusedBackground" : "transparent",
+			"buttonFocusedBorder" :  RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint10.color.cgColor),
+			"buttonFocusedContent" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
+			"buttonFocusedIcon" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 
-			"buttonPressedBackground" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint10.color.cgColor),
-			"buttonPressedBorder" : "transparent",
-			"buttonPressedContent" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"buttonPressedIcon" : RCTColorToHexString(FluentUI.Colors.iconPrimary.cgColor),
+			"buttonPressedBackground" : "transparent",
+			"buttonPressedBorder" :  RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint30.color.cgColor),
+			"buttonPressedContent" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint20.color.cgColor),
+			"buttonPressedIcon" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint20.color.cgColor),
 
-			"buttonDisabledBackground" : RCTColorToHexString(FluentUI.Colors.gray600.cgColor),
-			"buttonDisabledBorder" : "transparent",
+			"buttonDisabledBackground" : "transparent",
+			"buttonDisabledBorder" :  RCTColorToHexString(FluentUI.Colors.Button.borderDisabled.cgColor),
 			"buttonDisabledContent" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
 			"buttonDisabledIcon" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
 
 			"ghostBackground" : "transparent",
 			"ghostBorder" : "transparent",
 			"ghostContent" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
-			"ghostIcon" : RCTColorToHexString(FluentUI.Colors.iconPrimary.cgColor),
+			"ghostIcon" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 
 			"ghostHoveredBackground" : "transparent",
 			"ghostHoveredBorder" : "transparent",
 			"ghostHoveredContent" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
-			"ghostHoveredIcon" : RCTColorToHexString(FluentUI.Colors.iconPrimary.cgColor),
+			"ghostHoveredIcon" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 
 			"ghostFocusedBackground" : "transparent",
 			"ghostFocusedBorder" : "transparent",
 			"ghostFocusedContent" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
-			"ghostFocusedIcon" : RCTColorToHexString(FluentUI.Colors.iconPrimary.cgColor),
+			"ghostFocusedIcon" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 
 			"ghostPressedBackground" : "transparent",
 			"ghostPressedBorder" : "transparent",
@@ -202,58 +205,58 @@ class AppleThemeModule: NSObject {
 
 			"brandBackground" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 			"brandBorder" : "transparent",
-			"brandContent" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"brandIcon" : RCTColorToHexString(FluentUI.Colors.iconPrimary.cgColor),
+			"brandContent" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
+			"brandIcon" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
 
 			"brandHoveredBackground" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 			"brandHoveredBorder" : "transparent",
-			"brandHoveredContent" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"brandHoveredIcon" : RCTColorToHexString(FluentUI.Colors.iconPrimary.cgColor),
+			"brandHoveredContent" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
+			"brandHoveredIcon" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
 
 			"brandFocusedBackground" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 			"brandFocusedBorder" : "transparent",
-			"brandFocusedContent" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"brandFocusedIcon" : RCTColorToHexString(FluentUI.Colors.iconPrimary.cgColor),
+			"brandFocusedContent" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
+			"brandFocusedIcon" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
 
 			"brandPressedBackground" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint10.color.cgColor),
 			"brandPressedBorder" : "transparent",
-			"brandPressedContent" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"brandPressedIcon" : RCTColorToHexString(FluentUI.Colors.iconPrimary.cgColor),
+			"brandPressedContent" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
+			"brandPressedIcon" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
 
-			"brandDisabledBackground" : RCTColorToHexString(FluentUI.Colors.gray100.cgColor),
+			"brandDisabledBackground" : RCTColorToHexString(FluentUI.Colors.Button.backgroundFilledDisabled.cgColor),
 			"brandDisabledBorder" : "transparent",
-			"brandDisabledContent" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"brandDisabledIcon" : RCTColorToHexString(FluentUI.Colors.iconDisabled.cgColor),
+			"brandDisabledContent" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
+			"brandDisabledIcon" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
 
-			"buttonCheckedBackground" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint10.color.cgColor),
-			"buttonCheckedContent" : RCTColorToHexString(FluentUI.Colors.surfacePrimary.cgColor),
-			"buttonCheckedHoveredBackground" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint10.color.cgColor),
-			"buttonCheckedHoveredContent" : RCTColorToHexString(FluentUI.Colors.surfacePrimary.cgColor),
+			"buttonCheckedBackground" : "transparent",
+			"buttonCheckedContent" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
+			"buttonCheckedHoveredBackground" : "transparent",
+			"buttonCheckedHoveredContent" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 
-			"brandCheckedBackground" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint10.color.cgColor),
-			"brandCheckedContent" : RCTColorToHexString(FluentUI.Colors.textPrimary.cgColor),
-			"brandCheckedHoveredBackground" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint10.color.cgColor),
-			"brandCheckedHoveredContent" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
+			"brandCheckedBackground" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
+			"brandCheckedContent" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
+			"brandCheckedHoveredBackground" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
+			"brandCheckedHoveredContent" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
 
 			"ghostCheckedBackground" : "transparent",
-			"ghostCheckedContent" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint20.color.cgColor),
+			"ghostCheckedContent" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 			"ghostCheckedHoveredBackground" : "transparent",
-			"ghostCheckedHoveredContent" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint20.color.cgColor),
+			"ghostCheckedHoveredContent" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 			"ghostCheckedHoveredBorder" : "transparent",
 
 			"ghostSecondaryContent" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 			"ghostFocusedSecondaryContent" :RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 			"ghostHoveredSecondaryContent" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
-			"ghostPressedSecondaryContent" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
+			"ghostPressedSecondaryContent" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint20.color.cgColor),
 
-			"brandSecondaryContent" : RCTColorToHexString(FluentUI.Colors.textPrimary.cgColor),
-			"brandFocusedSecondaryContent" : RCTColorToHexString(FluentUI.Colors.textPrimary.cgColor),
-			"brandHoveredSecondaryContent" : RCTColorToHexString(FluentUI.Colors.textPrimary.cgColor),
-			"brandPressedSecondaryContent" : RCTColorToHexString(FluentUI.Colors.textPrimary.cgColor),
+			"brandSecondaryContent" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
+			"brandFocusedSecondaryContent" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
+			"brandHoveredSecondaryContent" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
+			"brandPressedSecondaryContent" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
 
-			"buttonDisabledSecondaryContent" : RCTColorToHexString(FluentUI.Colors.textOnAccent.cgColor),
-			"buttonHoveredSecondaryContent" : RCTColorToHexString(FluentUI.Colors.textPrimary.cgColor),
-			"buttonPressedSecondaryContent" : RCTColorToHexString(FluentUI.Colors.textPrimary.cgColor),
+			"buttonDisabledSecondaryContent" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
+			"buttonHoveredSecondaryContent" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
+			"buttonPressedSecondaryContent" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint20.color.cgColor),
 		]
 	}
 

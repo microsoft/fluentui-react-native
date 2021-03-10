@@ -6,38 +6,38 @@ export const settings: IComposeSettings<IButtonType> = [
     tokens: {
       backgroundColor: 'primaryButtonBackground',
       color: 'primaryButtonText',
-      borderColor: 'primaryButtonBorder'
+      borderColor: 'primaryButtonBorder',
     },
     _overrides: {
       disabled: {
         tokens: {
           backgroundColor: 'primaryButtonBackgroundDisabled',
           color: 'primaryButtonTextDisabled',
-          borderColor: 'primaryButtonBackgroundDisabled'
-        }
+          borderColor: 'primaryButtonBackgroundDisabled',
+        },
       },
       hovered: {
         tokens: {
           backgroundColor: 'primaryButtonBackgroundHovered',
           color: 'primaryButtonTextHovered',
-          borderColor: 'primaryButtonBorderHovered'
-        }
+          borderColor: 'primaryButtonBorderHovered',
+        },
       },
       pressed: {
         tokens: {
           backgroundColor: 'primaryButtonBackgroundPressed',
           color: 'primaryButtonTextPressed',
-          borderColor: 'primaryButtonBorderPressed'
-        }
+          borderColor: 'primaryButtonBorderPressed',
+        },
       },
       focused: {
         tokens: {
           borderColor: 'primaryButtonBorderFocused',
           backgroundColor: 'primaryButtonBackgroundHovered',
-          color: 'primaryButtonTextHovered'
-        }
-      }
-    }
+          color: 'primaryButtonTextHovered',
+        },
+      },
+    },
   },
-  'PrimaryButton'
+  'PrimaryButton',
 ];
