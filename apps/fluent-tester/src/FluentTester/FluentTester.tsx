@@ -20,9 +20,6 @@ MessageQueue.spy(true);
 const EmptyComponent: React.FunctionComponent = () => {
   return <RNText style={fluentTesterStyles.noTest}>Select a component from the left.</RNText>;
 };
-
-const DisplayIfVisible = ({ isVisible, children }) => <View style={{ flex: 1, display: isVisible ? 'flex' : 'none' }}>{children}</View>;
-
 export interface FluentTesterProps {
   initialTest?: string;
   enableSinglePaneView?: boolean;
@@ -137,7 +134,6 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const isTestSectionVisible = !enableSinglePaneView || (enableSinglePaneView && !onTestListView);
 
   const TestPane: React.FunctionComponent<{}> = () => {
-    console.log('Using Desktop Test Pane');
     return (
       <View style={fluentTesterStyles.testList}>
         <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
@@ -161,7 +157,6 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   };
 
   const MobileTestPane: React.FunctionComponent<{}> = () => {
-    console.log('Using Mobile Test Pane');
     return (
       <View style={{ ...mobileStyles.testList, display: isTestListVisible ? 'flex' : 'none' }}>
         <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
@@ -219,7 +214,6 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
       <View style={fluentTesterStyles.testRoot}>
         {enableSinglePaneView ? <MobileTestPane /> : <TestPane />}
-
         {enableSinglePaneView ? <MobileTestComponentView /> : <TestComponentView />}
       </View>
     </RootView>
