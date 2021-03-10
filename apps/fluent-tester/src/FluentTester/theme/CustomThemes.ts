@@ -19,10 +19,6 @@ export const lightnessOptions = [
   { label: 'Dark', value: 'dark' },
 ];
 
-// On Apple platforms, we cannot easily override the appearance,
-// so only allow the dynamic option
-export const lightnessOptionsApple = [{ label: 'Auto', value: 'dynamic' }];
-
 export class TesterThemeReference extends ThemeReference {
   private _themeName: ThemeNames = 'Default';
   private _brand: OfficeBrand = 'Default';

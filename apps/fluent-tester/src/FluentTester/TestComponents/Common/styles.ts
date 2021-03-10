@@ -91,7 +91,6 @@ export const fluentTesterStyles = StyleSheet.create({
   },
 
   testSection: {
-    // width: '85%',
     flexGrow: 1,
   },
 

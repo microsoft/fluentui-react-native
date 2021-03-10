@@ -31,7 +31,7 @@ export const themePickerStyles = themedStyleSheet((t: Theme) => {
   };
 });
 
-const ThemePickerRoot: React.FunctionComponent<{}> = () => {
+export const ThemePickers: React.FunctionComponent<{}> = () => {
   const themedStyles = themePickerStyles(useTheme());
 
   const onBrandChange = React.useCallback((newBrand: string) => {
@@ -76,8 +76,4 @@ const ThemePickerRoot: React.FunctionComponent<{}> = () => {
       </MenuView>
     </View>
   );
-};
-
-export const ThemePickers: React.FunctionComponent<{}> = () => {
-  return <ThemePickerRoot />;
 };

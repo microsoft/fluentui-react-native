@@ -37,7 +37,7 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
       alignItems: 'stretch',
       padding: 4,
     },
-    testListSeparator: {
+    testSeparator: {
       borderColor: t.colors.menuDivider,
       borderWidth: 0.1,
     },
@@ -133,7 +133,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const isTestListVisible = !enableSinglePaneView || (enableSinglePaneView && onTestListView);
   const isTestSectionVisible = !enableSinglePaneView || (enableSinglePaneView && !onTestListView);
 
-  const TestPane: React.FunctionComponent<{}> = () => {
+  const TestList: React.FunctionComponent<{}> = () => {
     return (
       <View style={fluentTesterStyles.testList}>
         <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
@@ -156,7 +156,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     );
   };
 
-  const MobileTestPane: React.FunctionComponent<{}> = () => {
+  const MobileTestList: React.FunctionComponent<{}> = () => {
     return (
       <View style={{ ...mobileStyles.testList, display: isTestListVisible ? 'flex' : 'none' }}>
         <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
@@ -177,7 +177,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                 >
                   {description.name}
                 </Text>
-                <Separator style={themedStyles.testListSeparator} />
+                <Separator style={themedStyles.testSeparator} />
               </View>
             );
           })}
@@ -211,7 +211,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
       <HeaderSeparator />
 
       <View style={fluentTesterStyles.testRoot}>
-        {enableSinglePaneView ? <MobileTestPane /> : <TestPane />}
+        {enableSinglePaneView ? <MobileTestList /> : <TestList />}
         {enableSinglePaneView ? <MobileTestComponentView /> : <TestComponentView />}
       </View>
     </RootView>
