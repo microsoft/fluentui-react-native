@@ -188,11 +188,9 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const TestComponentView: React.FunctionComponent<{}> = () => {
     return (
-      <View style={fluentTesterStyles.testSection}>
-        <ScrollView>
-          <TestComponent />
-        </ScrollView>
-      </View>
+      <ScrollView style={fluentTesterStyles.testSection}>
+        <TestComponent />
+      </ScrollView>
     );
   };
 

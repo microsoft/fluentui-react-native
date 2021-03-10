@@ -8,18 +8,6 @@ import { brandOptions, OfficeBrand } from './applyBrand';
 import { Theme, useTheme } from '@fluentui-react-native/framework';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 
-const themeMenuOptions: MenuAction[] = themeChoices.map((themeChoice) => ({
-  id: themeChoice.value,
-  title: themeChoice.label,
-  state: testerTheme.themeName === themeChoice.value ? 'on' : 'off',
-}));
-
-const brandMenuOptions: MenuAction[] = brandOptions.map((brandOption) => ({
-  id: brandOption.value,
-  title: brandOption.label,
-  state: testerTheme.brand === brandOption.value ? 'on' : 'off',
-}));
-
 export const themePickerStyles = themedStyleSheet((t: Theme) => {
   return {
     pickerRoot: {
@@ -53,6 +41,18 @@ const ThemePickerRoot: React.FunctionComponent<{}> = () => {
   const onThemeSelected = React.useCallback((newTheme: string) => {
     testerTheme.themeName = newTheme as ThemeNames;
   }, []);
+
+  const themeMenuOptions: MenuAction[] = themeChoices.map((themeChoice) => ({
+    id: themeChoice.value,
+    title: themeChoice.label,
+    state: testerTheme.themeName === themeChoice.value ? 'on' : 'off',
+  }));
+
+  const brandMenuOptions: MenuAction[] = brandOptions.map((brandOption) => ({
+    id: brandOption.value,
+    title: brandOption.label,
+    state: testerTheme.brand === brandOption.value ? 'on' : 'off',
+  }));
 
   return (
     <View style={themedStyles.pickerRoot}>
