@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Fix typos in button settings",
-  "packageName": "@fluentui-react-native/button",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-03-10T03:45:28.833Z"
-}
