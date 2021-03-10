@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-native-button
 
-This log was last generated on Mon, 08 Mar 2021 18:43:59 GMT and should not be manually modified.
+This log was last generated on Wed, 10 Mar 2021 04:33:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.1
+
+Wed, 10 Mar 2021 04:33:26 GMT
+
+### Patches
+
+- Add a native theming module for iOS (saadnajmi2@gmail.com)
 
 ## 0.5.0
 

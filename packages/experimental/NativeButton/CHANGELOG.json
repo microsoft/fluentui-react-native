@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-native-button",
   "entries": [
     {
+      "date": "Wed, 10 Mar 2021 04:33:26 GMT",
+      "tag": "@fluentui-react-native/experimental-native-button_v0.5.1",
+      "version": "0.5.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add a native theming module for iOS",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "35117f9c9d72fc6ecd1ed74fc0facc07fab8d18f",
+            "package": "@fluentui-react-native/experimental-native-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 08 Mar 2021 18:43:59 GMT",
       "tag": "@fluentui-react-native/experimental-native-button_v0.5.0",
       "version": "0.5.0",
