@@ -122,4 +122,14 @@ interface FluentAppleSemanticColors {
   dividerOnTertiary: ColorValue; //= UIColor(light: gray200, dark: gray700, darkElevated: gray600)
 }
 
-export type ApplePalette = FluentUIApplePalette & FluentAppleSemanticColors;
+/** FluentUI Apple Colors defined for the iOS Button */
+interface FluentAppleButtonColors {
+  buttonBackground: ColorValue;
+  buttonBackgroundFilledPressed: ColorValue;
+  buttonBackgroundFilledDisabled: ColorValue;
+  buttonBorderDisabled: ColorValue;
+  buttonTitleDisabled: ColorValue;
+  buttonTitleWithFilledBackground: ColorValue;
+}
+
+export type ApplePalette = FluentUIApplePalette & FluentAppleSemanticColors & FluentAppleButtonColors;

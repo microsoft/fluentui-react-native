@@ -438,15 +438,14 @@ class AppleThemeModule: RCTEventEmitter {
 
 	override func startObserving() {
 		hasListeners = true;
-		
-			
+
 		kvoToken = NSApplication.shared.observe(\.effectiveAppearance) { (application, change) in
 			guard self.bridge != nil else {
 				return
 			}
 			self.sendEvent(withName: Events.AppleInterfaceThemeChanged.name, body: AppleThemeModule.theme)
 		}
-		
+
 		// Observe changes to control accent color
 		let notificationCenter = DistributedNotificationCenter.default()
 		notificationCenter.addObserver(forName: NSColor.systemColorsDidChangeNotification, object: nil, queue: OperationQueue.main) { (notification) in
@@ -457,8 +456,6 @@ class AppleThemeModule: RCTEventEmitter {
 				self.sendEvent(withName: Events.AppleInterfaceThemeChanged.name, body: AppleThemeModule.theme)
 			}
 		}
-
-		
 	}
 
 	override func stopObserving() {

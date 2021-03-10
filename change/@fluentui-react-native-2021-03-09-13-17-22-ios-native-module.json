@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Add a native theming module for iOS",
+  "packageName": "@fluentui/react-native",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-03-09T19:17:19.012Z"
+}
