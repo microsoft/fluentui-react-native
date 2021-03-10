@@ -36,7 +36,7 @@ export class ThemeReference<TTheme extends Theme = Theme, TPartial extends Parti
   /**
    * Create the theme reference, either as a plain wrapper, or a wrapper with additional transforms and/or merging
    * @param base - can be either another ThemeReference object, or a fully specified theme
-   * @param recipes - any number of recipies to be applied on top of the theme object
+   * @param recipes - any number of recipes to be applied on top of the theme object
    */
   constructor(base: TTheme | ThemeReference<TTheme, TPartial>, ...recipes: ThemeRecipe<TTheme, TPartial>[]) {
     this.listeners = [];

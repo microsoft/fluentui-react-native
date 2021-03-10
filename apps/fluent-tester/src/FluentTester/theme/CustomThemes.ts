@@ -1,3 +1,4 @@
+import { createAppleTheme } from '@fluentui-react-native/apple-theme';
 import { createDefaultTheme, ThemeOptions } from '@fluentui-react-native/default-theme';
 import { ThemeReference } from '@fluentui-react-native/theme';
 import { Platform } from 'react-native';
@@ -9,8 +10,11 @@ const themeOptions: ThemeOptions = Platform.select({
   android: { appearance: 'dynamic' },
   default: { paletteName: 'TaskPane', appearance: 'dynamic' },
 });
+
 const baseTheme = Platform.select({
   android: createAndroidTheme(themeOptions),
+  ios: createAppleTheme(),
+  macos: createAppleTheme(),
   default: createDefaultTheme(themeOptions),
 });
 

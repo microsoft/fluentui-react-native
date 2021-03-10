@@ -1,8 +1,36 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
+This log was last generated on Wed, 10 Mar 2021 04:33:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.23.0
+
+Wed, 10 Mar 2021 04:33:26 GMT
+
+### Minor changes
+
+- Add a native theming module for iOS (saadnajmi2@gmail.com)
+
+## 0.22.0
+
+Sat, 06 Mar 2021 00:20:05 GMT
+
+### Minor changes
+
+- Update to react-native 0.63 (30809111+acoates-ms@users.noreply.github.com)
+
+### Patches
+
+- Base theme on macOS changed to apple theme (saadnajmi2@gmail.com)
+
+## 0.21.13
+
+Mon, 01 Mar 2021 22:53:12 GMT
+
+### Patches
+
+- Update deps (warleu@microsoft.com)
 
 ## 0.21.0
 

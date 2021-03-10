@@ -69,7 +69,7 @@ Note: we recommend using [Visual Studio Code](https://code.visualstudio.com/down
 
 4. Open Edge or Chrome and navigate to http://localhost:8081/debugger-ui
 
-5. Open another command prompt and go into the same location `experiments\tester` and run:
+5. Open another command prompt and go into the same location `apps\win32` and run:
 
 ```
     yarn run-win32-web

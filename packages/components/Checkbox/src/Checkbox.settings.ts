@@ -9,11 +9,11 @@ export const settings: IComposeSettings<ICheckboxType> = [
       borderColor: 'menuItemText',
       color: 'menuItemText',
       backgroundColor: 'menuBackground',
-      textBorderColor: 'transparent'
+      textBorderColor: 'transparent',
     },
     root: {
       accessible: true,
-      acceptsKeyboardFocus: true,
+      focusable: true,
       accessibilityRole: 'checkbox',
       style: {
         display: 'flex',
@@ -21,34 +21,36 @@ export const settings: IComposeSettings<ICheckboxType> = [
         flexDirection: 'row',
         minHeight: 14,
         marginTop: 0,
-        position: 'relative'
-      }
+        position: 'relative',
+      },
     },
     checkbox: {
       style: {
-        height: 14,
-        width: 14,
-        marginEnd: 4,
         borderStyle: 'solid',
-        borderWidth: 1
-      }
+        borderWidth: 1,
+        minHeight: 14,
+        minWidth: 14,
+        marginEnd: 4,
+      },
     },
     checkmark: {
       style: {
+        aspectRatio: 1,
         position: 'relative',
         opacity: 0,
         fontSize: 10,
-        marginStart: 2,
-        top: -1
-      }
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        top: -1,
+      },
     },
     content: {
       variant: 'bodyStandard',
       style: {
         borderStyle: 'solid',
         borderWidth: 2,
-        marginTop: 3
-      }
+        marginTop: 3,
+      },
     },
     _precedence: ['disabled', 'boxAtEnd', 'hovered', 'focused', 'pressed', 'checked'],
     _overrides: {
@@ -57,42 +59,42 @@ export const settings: IComposeSettings<ICheckboxType> = [
           backgroundColor: 'menuItemBackgroundHovered',
           textBorderColor: 'focusBorder',
           checkmarkColor: 'menuItemTextHovered',
-        }
+        },
       },
       checked: {
         checkmark: {
           style: {
-            opacity: 1
-          }
-        }
+            opacity: 1,
+          },
+        },
       },
       hovered: {
         tokens: {
           backgroundColor: 'menuItemBackgroundHovered',
           checkmarkColor: 'menuItemTextHovered',
-        }
+        },
       },
       disabled: {
         tokens: {
           borderColor: 'buttonBorderDisabled',
           color: 'disabledBodyText',
-          backgroundColor: 'background'
-        }
+          backgroundColor: 'background',
+        },
       },
       boxAtEnd: {
         checkbox: {
           style: {
             marginStart: 4,
-            marginEnd: 0
-          }
-        }
+            marginEnd: 0,
+          },
+        },
       },
       pressed: {
         tokens: {
-          backgroundColor: 'menuItemBackgroundPressed'
-        }
-      }
-    }
+          backgroundColor: 'menuItemBackgroundPressed',
+        },
+      },
+    },
   },
-  checkboxName
+  checkboxName,
 ];

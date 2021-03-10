@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Sat, 06 Mar 2021 00:20:05 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update to react-native 0.63",
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "commit": "d35d3b45f12a670648edaa7143b210ed43360996",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Use ColorValue from @fluentui-react-native/theme-types",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "71b29ea2c7c28d3cdadbade15f2b2c60127e48ec",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Oct 2020 22:27:37 GMT",
       "tag": "@fluentui-react-native/tokens_v0.7.0",
       "version": "0.7.0",
