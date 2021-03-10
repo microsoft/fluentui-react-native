@@ -91,7 +91,8 @@ export const fluentTesterStyles = StyleSheet.create({
   },
 
   testSection: {
-    width: '85%',
+    // width: '85%',
+    flexGrow: 1,
   },
 
   noTest: {
@@ -123,7 +124,7 @@ export const mobileStyles = StyleSheet.create({
   testList: {
     width: '100%',
   },
-  testListItems: {
+  testListItem: {
     width: '100%',
     height: 'auto',
     fontSize: 18,

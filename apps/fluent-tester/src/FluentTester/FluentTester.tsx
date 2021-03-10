@@ -1,5 +1,5 @@
 import { Theme } from '@fluentui-react-native/framework';
-import { Separator } from '@fluentui/react-native';
+import { Separator, StealthButton } from '@fluentui/react-native';
 import { Button } from '@fluentui-react-native/experimental-button';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
@@ -21,7 +21,7 @@ const EmptyComponent: React.FunctionComponent = () => {
   return <RNText style={fluentTesterStyles.noTest}>Select a component from the left.</RNText>;
 };
 
-const DisplayIfVisible = ({ isVisible, children }) => (isVisible ? <View style={{ flex: 1 }}>{children}</View> : null);
+const DisplayIfVisible = ({ isVisible, children }) => <View style={{ flex: 1, display: isVisible ? 'flex' : 'none' }}>{children}</View>;
 
 export interface FluentTesterProps {
   initialTest?: string;
@@ -133,71 +133,77 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     );
   };
 
+  const isTestListVisible = !enableSinglePaneView || (enableSinglePaneView && onTestListView);
+  const isTestSectionVisible = !enableSinglePaneView || (enableSinglePaneView && !onTestListView);
+
   const TestPane: React.FunctionComponent<{}> = () => {
+    console.log('Using Desktop Test Pane');
     return (
-      <ScrollView
-        style={enableSinglePaneView ? mobileStyles.testList : fluentTesterStyles.testList}
-        contentContainerStyle={fluentTesterStyles.testListContainerStyle}
-      >
-        {sortedTestComponents.map((description, index) => {
-          return (
-            <View key={index}>
-              <Text
+      <View style={fluentTesterStyles.testList}>
+        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
+          {sortedTestComponents.map((description, index) => {
+            return (
+              <StealthButton
                 key={index}
-                onPress={() => {
-                  setOnTestListView(false);
-                  setSelectedTestIndex(index);
-                  if (Platform.OS === 'android') {
-                    BackHandler.addEventListener('hardwareBackPress', onBackPress);
-                  }
-                }}
-                style={enableSinglePaneView ? mobileStyles.testListItems : fluentTesterStyles.testListItem}
+                disabled={index == selectedTestIndex}
+                content={description.name}
+                onClick={() => setSelectedTestIndex(index)}
+                style={fluentTesterStyles.testListItem}
                 testID={description.testPage}
-              >
-                {description.name}
-              </Text>
-              <Separator style={themedStyles.testListSeparator} />
-            </View>
-          );
-        })}
-      </ScrollView>
+              />
+            );
+          })}
+        </ScrollView>
+
+        <TestListSeparator vertical style={{ marginHorizontal: 8 }} />
+      </View>
     );
   };
 
   const MobileTestPane: React.FunctionComponent<{}> = () => {
+    console.log('Using Mobile Test Pane');
     return (
-      <ScrollView
-        style={enableSinglePaneView ? mobileStyles.testList : fluentTesterStyles.testList}
-        contentContainerStyle={fluentTesterStyles.testListContainerStyle}
-      >
-        {sortedTestComponents.map((description, index) => {
-          return (
-            <View key={index}>
-              <Text
-                key={index}
-                onPress={() => {
-                  setOnTestListView(false);
-                  setSelectedTestIndex(index);
-                  if (Platform.OS === 'android') {
-                    BackHandler.addEventListener('hardwareBackPress', onBackPress);
-                  }
-                }}
-                style={enableSinglePaneView ? mobileStyles.testListItems : fluentTesterStyles.testListItem}
-                testID={description.testPage}
-              >
-                {description.name}
-              </Text>
-              <Separator style={themedStyles.testListSeparator} />
-            </View>
-          );
-        })}
-      </ScrollView>
+      <View style={{ ...mobileStyles.testList, display: isTestListVisible ? 'flex' : 'none' }}>
+        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
+          {sortedTestComponents.map((description, index) => {
+            return (
+              <View key={index}>
+                <Text
+                  key={index}
+                  onPress={() => {
+                    setOnTestListView(false);
+                    setSelectedTestIndex(index);
+                    if (Platform.OS === 'android') {
+                      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+                    }
+                  }}
+                  style={mobileStyles.testListItem}
+                  testID={description.testPage}
+                >
+                  {description.name}
+                </Text>
+                <Separator style={themedStyles.testListSeparator} />
+              </View>
+            );
+          })}
+        </ScrollView>
+      </View>
     );
   };
 
   const TestComponentView: React.FunctionComponent<{}> = () => {
     return (
-      <View style={enableSinglePaneView ? mobileStyles.testSection : fluentTesterStyles.testSection}>
+      <View style={fluentTesterStyles.testSection}>
+        <ScrollView>
+          <TestComponent />
+        </ScrollView>
+      </View>
+    );
+  };
+
+  const MobileTestComponentView: React.FunctionComponent<{}> = () => {
+    return (
+      <View style={{ ...mobileStyles.testSection, display: isTestSectionVisible ? 'flex' : 'none' }}>
         <ScrollView>
           <TestComponent />
         </ScrollView>
@@ -211,15 +217,10 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
       <HeaderSeparator />
 
-      <View style={enableSinglePaneView ? themedStyles.root : fluentTesterStyles.testRoot}>
-        <DisplayIfVisible isVisible={!enableSinglePaneView || (enableSinglePaneView && onTestListView)}>
-          {enableSinglePaneView ? <MobileTestPane /> : <TestPane />}
-        </DisplayIfVisible>
+      <View style={fluentTesterStyles.testRoot}>
+        {enableSinglePaneView ? <MobileTestPane /> : <TestPane />}
 
-        <DisplayIfVisible isVisible={!enableSinglePaneView || (enableSinglePaneView && !onTestListView)}>
-          <TestListSeparator vertical style={{ marginHorizontal: 8, width: 2 }} />
-          <TestComponentView />
-        </DisplayIfVisible>
+        {enableSinglePaneView ? <MobileTestComponentView /> : <TestComponentView />}
       </View>
     </RootView>
   );
