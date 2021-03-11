@@ -135,6 +135,6 @@ To add a native module that wraps a FluentUI Apple control:
    1. `<new-component>-Bridging-Header.h`
       - This file allows your swift files to import/read React Native objective C headers. At a minimum, we need `<React/RCTViewManager.h>`
    1. `<new-component>ViewManager.swift`
-      - This Swift file imports FluentUI Apple, and creates a subclass of RCTViewManager to instantiate and return your FluentUI Apple control. Objective C methods like `requiresMainQueueSetup` and `constantsToExport` can be overridden here. It's important to note that in order for properties and methods to be available to react native, they must add the `@objc` decorator to it's declaration.
+      - This Swift file imports FluentUI Apple, and creates a subclass of RCTViewManager to instantiate and return your FluentUI Apple control. Objective-C methods like `requiresMainQueueSetup` and `constantsToExport` can be overridden here. It's important to note that in order for properties and methods to be available to React Native, they must add the `@objc` decorator to it's declaration.
    1. `MSF<new-component>ViewManager.m`
-      - This is an extra objective c file needed because Swift does not support macros, and React Native requires them to map JS props to the native properties of the control. (Macros like `RCT_EXPORT_VIEW_PROPERTY` and `RCT_EXPORT_METHOD`)/
+      - This is an extra Objective-C file needed because Swift does not support macros and React Native requires them to map JS props to the native properties of the control. (Macros like `RCT_EXPORT_VIEW_PROPERTY` and `RCT_EXPORT_METHOD`)/
