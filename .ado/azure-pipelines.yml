@@ -75,8 +75,15 @@ jobs:
     pool:
       vmImage: 'macos-10.15'
       demands: ['xcode', 'sh', 'npm']
-    timeoutInMinutes: 90 # how long to run the job before automatically cancelling
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+    strategy:
+      maxParallel: 4
+      matrix:
+        ios:
+          relative_directory: 'ios'
+        macos:
+          relative_directory: 'macos'
 
     steps:
       - checkout: self
@@ -95,38 +102,15 @@ jobs:
 
       - script: |
           yarn bundle
-        workingDirectory: apps/ios
-        displayName: 'yarn bundle ios'
-
-      - script: |
-          yarn bundle
-        workingDirectory: apps/macos
-        displayName: 'yarn bundle macos'
+        workingDirectory: apps/$(relative_directory)
+        displayName: 'yarn bundle $(relative_directory)'
 
       # Select proper Xcode version
       - template: templates/apple-xcode-select.yml
 
       - template: templates/apple-yarn-build.yml
         parameters:
-          relative_directory: ios
-
-      - template: templates/apple-yarn-build.yml
-        parameters:
-          relative_directory: macos
-
-      - template: templates/apple-xcode-build-static-libs.yml
-
-      # generate the sanitizedBuildNumber environment variable
-      - bash: '.ado/scripts/generate_build_number.sh'
-        displayName: 'Generate Build Number'
-
-      # pack the nuspec
-      - task: NuGetCommand@2
-        displayName: 'NuGet pack'
-        inputs:
-          command: pack
-          packagesToPack: 'package.nuspec'
-          buildProperties: buildNumber=$(sanitizedBuildNumber);commitId=$(Build.SourceVersion);repoUri=$(Build.Repository.Uri)
+          relative_directory: $(relative_directory)
 
   - job: AndroidPR
     displayName: Android PR
