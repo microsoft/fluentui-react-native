@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update FluentTester to be mobile friendly on iOS",
-  "packageName": "@fluentui-react-native/button",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-03-10T08:05:15.892Z"
-}

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Thu, 11 Mar 2021 19:48:16 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.4.1",
+      "version": "0.4.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update FluentTester to be mobile friendly on iOS",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "78158ad0818a26320974a12797d2b9fc757649f0",
+            "package": "@fluentui-react-native/apple-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 10 Mar 2021 04:33:26 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.4.0",
       "version": "0.4.0",

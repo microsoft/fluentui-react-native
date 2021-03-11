@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Revamp ThemePickers in Header",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-03-05T20:37:47.969Z"
-}
