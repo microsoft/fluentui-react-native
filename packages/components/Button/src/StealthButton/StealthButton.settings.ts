@@ -6,37 +6,37 @@ export const settings: IComposeSettings<IButtonType> = [
     tokens: {
       backgroundColor: 'menuBackground',
       color: 'menuItemText',
-      borderColor: 'menuBackground'
+      borderColor: 'menuBackground',
     },
     _overrides: {
       disabled: {
         tokens: {
           color: 'disabledBodyText',
           borderColor: 'menuBackground',
-          backgroundColor: 'background'
-        }
+          backgroundColor: 'background',
+        },
       },
       hovered: {
         tokens: {
           backgroundColor: 'menuItemBackgroundHovered',
           color: 'menuItemTextHovered',
-          borderColor: 'menuItemBackgroundHovered'
-        }
+          borderColor: 'menuItemBackgroundHovered',
+        },
       },
       pressed: {
         tokens: {
           backgroundColor: 'menuItemBackgroundPressed',
-          borderColor: 'menuItemBackgroundPressed'
-        }
+          borderColor: 'menuItemBackgroundPressed',
+        },
       },
       focused: {
         tokens: {
           borderColor: 'focusBorder',
           backgroundColor: 'menuItemBackgroundHovered',
-          color: 'menuItemTextHovered'
-        }
-      }
-    }
+          color: 'menuItemTextHovered',
+        },
+      },
+    },
   },
-  'PrimaryButton'
+  'StealthButton',
 ];

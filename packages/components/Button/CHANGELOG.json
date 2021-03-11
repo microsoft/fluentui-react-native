@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Wed, 10 Mar 2021 04:33:26 GMT",
+      "tag": "@fluentui-react-native/button_v0.14.0",
+      "version": "0.14.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Fix typos in button settings",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "35117f9c9d72fc6ecd1ed74fc0facc07fab8d18f",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 06 Mar 2021 00:20:05 GMT",
       "tag": "@fluentui-react-native/button_v0.13.0",
       "version": "0.13.0",

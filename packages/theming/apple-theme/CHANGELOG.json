@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Wed, 10 Mar 2021 04:33:26 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add a native theming module for iOS",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "35117f9c9d72fc6ecd1ed74fc0facc07fab8d18f",
+            "package": "@fluentui-react-native/apple-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 08 Mar 2021 18:43:59 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.3.0",
       "version": "0.3.0",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Mon, 08 Mar 2021 18:43:59 GMT and should not be manually modified.
+This log was last generated on Wed, 10 Mar 2021 04:33:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.0
+
+Wed, 10 Mar 2021 04:33:26 GMT
+
+### Minor changes
+
+- Add a native theming module for iOS (saadnajmi2@gmail.com)
 
 ## 0.3.0
 
