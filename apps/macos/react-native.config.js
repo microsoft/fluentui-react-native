@@ -20,8 +20,10 @@ const path = require('path');
 module.exports = {
   project: {
     ios: {
-      project: 'src/FluentUITester.xcworkspace'
-    }
+      project: 'src/FluentTester.xcworkspace',
+    },
   },
-  reactNativePath: path.dirname(require.resolve('react-native-macos/package.json'))
+  reactNativePath: path.dirname(
+    require.resolve('react-native-macos/package.json'),
+  ),
 };

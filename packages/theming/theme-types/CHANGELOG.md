@@ -1,8 +1,29 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
+This log was last generated on Sat, 06 Mar 2021 00:20:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.0
+
+Sat, 06 Mar 2021 00:20:05 GMT
+
+### Minor changes
+
+- Update to react-native 0.63 (30809111+acoates-ms@users.noreply.github.com)
+- Use React Native ColorValue type as our ColorValue type (saadnajmi2@gmail.com)
+
+### Patches
+
+- Fixed a typo (saadnajmi2@gmail.com)
+
+## 0.5.0
+
+Fri, 05 Feb 2021 08:02:13 GMT
+
+### Minor changes
+
+- Added an auto type for appearance (saadnajmi2@gmail.com)
 
 ## 0.4.0
 

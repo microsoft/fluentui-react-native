@@ -14,53 +14,13 @@ steps:
     workingDirectory: apps/macOS
     displayName: 'pod install macOS'
 
-  # iPhone Simulator Debug
-  - template: apple-xcode-build.yml
-    parameters:
-      xcode_sdk: 'iphonesimulator'
-      xcode_workspacePath: 'apps/ios/src/FluentUITester.xcworkspace'
-      xcode_actions: 'build'
-      xcode_scheme: 'ReactTestApp'
-      xcode_configuration: 'Debug'
-      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
-
-  # iPhone Simulator Release
-  - template: apple-xcode-build.yml
-    parameters:
-      xcode_sdk: 'iphonesimulator'
-      xcode_workspacePath: 'apps/ios/src/FluentUITester.xcworkspace'
-      xcode_actions: 'build'
-      xcode_scheme: 'ReactTestApp'
-      xcode_configuration: 'Release'
-      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
-
-  # iPhone Device Debug
-  - template: apple-xcode-build.yml
-    parameters:
-      xcode_sdk: 'iphoneos'
-      xcode_workspacePath: 'apps/ios/src/FluentUITester.xcworkspace'
-      xcode_actions: 'build'
-      xcode_scheme: 'ReactTestApp'
-      xcode_configuration: 'Debug'
-      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides_ios_device.xcconfig'
-
-  # iPhone Device Release
-  - template: apple-xcode-build.yml
-    parameters:
-      xcode_sdk: 'iphoneos'
-      xcode_workspacePath: 'apps/ios/src/FluentUITester.xcworkspace'
-      xcode_actions: 'build'
-      xcode_scheme: 'ReactTestApp'
-      xcode_configuration: 'Release'
-      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides_ios_device.xcconfig'
-
   # macOS Debug
   - template: apple-xcode-build.yml
     parameters:
       xcode_sdk: 'macosx'
-      xcode_workspacePath: 'apps/macos/src/FluentUITester.xcworkspace'
+      xcode_workspacePath: 'apps/macos/src/FluentTester.xcworkspace'
       xcode_actions: 'build'
-      xcode_scheme: 'ReactTestApp'
+      xcode_scheme: 'FluentTester'
       xcode_configuration: 'Debug'
       xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
 
@@ -68,8 +28,48 @@ steps:
   - template: apple-xcode-build.yml
     parameters:
       xcode_sdk: 'macosx'
-      xcode_workspacePath: 'apps/macos/src/FluentUITester.xcworkspace'
+      xcode_workspacePath: 'apps/macos/src/FluentTester.xcworkspace'
       xcode_actions: 'build'
-      xcode_scheme: 'ReactTestApp'
+      xcode_scheme: 'FluentTester'
       xcode_configuration: 'Release'
       xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides.xcconfig'
+
+  # iPhone Simulator Debug
+  - template: apple-xcode-build.yml
+    parameters:
+      xcode_sdk: 'iphonesimulator'
+      xcode_workspacePath: 'apps/ios/src/FluentTester.xcworkspace'
+      xcode_actions: 'build'
+      xcode_scheme: 'FluentTester'
+      xcode_configuration: 'Debug'
+      xcode_extraArgs: ''
+
+  # iPhone Simulator Release
+  - template: apple-xcode-build.yml
+    parameters:
+      xcode_sdk: 'iphonesimulator'
+      xcode_workspacePath: 'apps/ios/src/FluentTester.xcworkspace'
+      xcode_actions: 'build'
+      xcode_scheme: 'FluentTester'
+      xcode_configuration: 'Release'
+      xcode_extraArgs: ''
+
+  # iPhone Device Debug
+  - template: apple-xcode-build.yml
+    parameters:
+      xcode_sdk: 'iphoneos'
+      xcode_workspacePath: 'apps/ios/src/FluentTester.xcworkspace'
+      xcode_actions: 'build'
+      xcode_scheme: 'FluentTester'
+      xcode_configuration: 'Debug'
+      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides_ios_device.xcconfig'
+
+  # iPhone Device Release
+  - template: apple-xcode-build.yml
+    parameters:
+      xcode_sdk: 'iphoneos'
+      xcode_workspacePath: 'apps/ios/src/FluentTester.xcworkspace'
+      xcode_actions: 'build'
+      xcode_scheme: 'FluentTester'
+      xcode_configuration: 'Release'
+      xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides_ios_device.xcconfig'

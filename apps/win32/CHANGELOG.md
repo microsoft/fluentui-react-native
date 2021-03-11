@@ -1,8 +1,76 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Mar 2021 19:48:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.4
+
+Thu, 11 Mar 2021 19:48:16 GMT
+
+### Patches
+
+- Update FluentTester to be mobile friendly on iOS (saadnajmi2@gmail.com)
+
+## 0.8.3
+
+Wed, 10 Mar 2021 04:33:26 GMT
+
+### Patches
+
+- Add a native theming module for iOS (saadnajmi2@gmail.com)
+
+## 0.8.0
+
+Sat, 06 Mar 2021 00:20:05 GMT
+
+### Minor changes
+
+- Update to react-native 0.63 (30809111+acoates-ms@users.noreply.github.com)
+
+### Patches
+
+- Base theme on macOS changed to apple theme (saadnajmi2@gmail.com)
+
+## 0.7.20
+
+Tue, 02 Mar 2021 17:28:32 GMT
+
+### Patches
+
+- Update path under 'FluentUI Tester' web debugging (krsiler@microsoft.com)
+
+## 0.7.19
+
+Mon, 01 Mar 2021 22:53:12 GMT
+
+### Patches
+
+- Update deps (warleu@microsoft.com)
+
+## 0.7.18
+
+Mon, 01 Mar 2021 17:28:32 GMT
+
+### Patches
+
+- Remove metro logic from FURN, replacing it with calls to the @rnx-kit CLI. Use rnx-bundle for bundling, and rnx-start for running a bundle server. (afoxman@microsoft.com)
+
+## 0.7.11
+
+Wed, 06 Jan 2021 18:41:50 GMT
+
+### Patches
+
+- remove react-native-win32 dep in tester-win32 (krsiler@microsoft.com)
+
+## 0.7.9
+
+Sat, 12 Dec 2020 04:27:11 GMT
+
+### Patches
+
+- Updated Avatar test to use xxLarge size (saadnajmi2@gmail.com)
 
 ## 0.7.0
 

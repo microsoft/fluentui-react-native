@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/default-theme",
   "entries": [
     {
+      "date": "Sat, 06 Mar 2021 00:20:05 GMT",
+      "tag": "@fluentui-react-native/default-theme_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update to react-native 0.63",
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "commit": "d35d3b45f12a670648edaa7143b210ed43360996",
+            "package": "@fluentui-react-native/default-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 05 Feb 2021 08:02:13 GMT",
+      "tag": "@fluentui-react-native/default-theme_v0.4.2",
+      "version": "0.4.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixed a typo",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "bea2f01718bfab795b09d18fb8372d23c25a830b",
+            "package": "@fluentui-react-native/default-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 27 Oct 2020 00:28:29 GMT",
       "tag": "@fluentui-react-native/default-theme_v0.4.1",
       "version": "0.4.1",

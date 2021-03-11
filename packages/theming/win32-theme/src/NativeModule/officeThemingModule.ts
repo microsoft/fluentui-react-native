@@ -1,3 +1,4 @@
+import type { NativeModule } from 'react-native';
 import { ColorValue, OfficePalette, Typography } from '@fluentui-react-native/theme-types';
 
 export type PlatformDefaultsChangedArgs = { hostThemeSetting: string };
@@ -22,7 +23,7 @@ export interface NativeColorNames {
   Sepias: string[];
 }
 
-export interface OfficeThemingModule {
+export interface OfficeThemingModule extends NativeModule {
   getPalette(palette?: string): OfficePalette | CxxException;
   typography: object;
   fluentTypography: Typography;

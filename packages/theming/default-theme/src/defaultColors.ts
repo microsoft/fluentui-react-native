@@ -144,7 +144,7 @@ export function getStockWebDarkPalette(): ThemeColorDefinition {
   return {
     ...paletteFromFabricColors(
       {
-        // colors takesn from fluentui DarkCustomizations.ts
+        // colors taken from fluentui DarkCustomizations.ts
         themeDarker: '#82c7ff',
         themeDark: '#6cb8f6',
         themeDarkAlt: '#3aa0f3',

@@ -1,8 +1,60 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
+This log was last generated on Sat, 06 Mar 2021 00:20:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.0
+
+Sat, 06 Mar 2021 00:20:05 GMT
+
+### Minor changes
+
+- Update to react-native 0.63 (30809111+acoates-ms@users.noreply.github.com)
+
+### Patches
+
+- Base theme on macOS changed to apple theme (saadnajmi2@gmail.com)
+
+## 0.9.3
+
+Mon, 01 Mar 2021 22:53:12 GMT
+
+### Patches
+
+- Update deps (warleu@microsoft.com)
+
+## 0.9.2
+
+Tue, 23 Feb 2021 19:59:26 GMT
+
+### Patches
+
+- Correct text scaled rendering of win32 checkbox with aspect ratio, alignment, and min-dimension changes (ppatboyd@outlook.com)
+
+## 0.9.0
+
+Wed, 13 Jan 2021 20:04:26 GMT
+
+### Minor changes
+
+- update FUA version for button (67026167+chiuam@users.noreply.github.com)
+
+## 0.8.3
+
+Wed, 06 Jan 2021 18:41:50 GMT
+
+### Patches
+
+- Bump react-native-win32 (krsiler@microsoft.com)
+
+## 0.8.2
+
+Tue, 22 Dec 2020 01:36:23 GMT
+
+### Patches
+
+- Changing hover/focused color for Checkmark (safreibe@microsoft.com)
 
 ## 0.8.0
 

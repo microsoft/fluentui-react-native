@@ -1,11 +1,6 @@
 {
   "name": "FluentTester",
   "displayName": "FluentTester",
-  "components": [
-    { "appKey": "FluentTester" }
-  ],
-  "resources": [
-    "dist/res",
-    "dist/main.jsbundle"
-  ]
+  "components": [{"appKey": "FluentTester"}],
+  "resources": ["dist/res", "dist/index.bundle"]
 }
