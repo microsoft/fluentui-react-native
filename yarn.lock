@@ -2219,6 +2219,16 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/eslint-plugin/-/eslint-plugin-1.1.0.tgz#e42b1bef12d2415411519fd528e64b593b1363dc"
   integrity sha512-W/J0fNYVO01tioHjvYWQ9m6RgndVtbElzYozBq1ZPrHO/iCzlqoySHl4gO/fpCl9QEFjvJfjPgtPMTMlsoq5DQ==
 
+"@react-native-menu/menu@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@react-native-menu/menu/-/menu-0.1.2.tgz#2a3a9c8c3d142649b89a5c710eafa8ec3f0d7596"
+  integrity sha512-3jgCWoZY31s/cjtTCAbGN0VqapwM7WiGZonb5KSkRT6egkwR1QAWBxe8Pe216u6R5EY/AGC8Z4Bf9wASYpz/1A==
+
+"@react-native-picker/picker@^1.9.11":
+  version "1.9.11"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.9.11.tgz#490c752417c17d687e2941659b3c0bff9cb79b83"
+  integrity sha512-E7whvvMIl9Ln1sxgug7OAEVWQ69n82iV0d2OWWp5VV52+RW3azKh1IFm4rxdW5/oByMfl7FFL0eHNelGgY4BMQ==
+
 "@rnx-kit/cli@^0.0.3":
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/@rnx-kit/cli/-/cli-0.0.3.tgz#4802437bcfd9ef598080e1e7a12d387df0334ecb"

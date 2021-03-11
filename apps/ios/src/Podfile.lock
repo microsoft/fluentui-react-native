@@ -9,16 +9,16 @@ PODS:
     - React-Core (= 0.63.4)
     - React-jsi (= 0.63.4)
     - ReactCommon/turbomodule/core (= 0.63.4)
-  - FluentUI-React-Native-Apple-Theme (0.3.0):
+  - FluentUI-React-Native-Apple-Theme (0.4.0):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
-  - FluentUI-React-Native-Avatar (0.6.0):
+  - FluentUI-React-Native-Avatar (0.6.1):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
-  - FluentUI-React-Native-Button (0.5.0):
+  - FluentUI-React-Native-Button (0.5.1):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
-  - FluentUI-React-Native-Shimmer (0.6.0):
+  - FluentUI-React-Native-Shimmer (0.6.1):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
   - Folly (2020.01.13.00):
@@ -254,6 +254,8 @@ PODS:
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
   - React-jsinspector (0.63.4)
+  - react-native-menu (0.1.2):
+    - React
   - React-RCTActionSheet (0.63.4):
     - React-Core/RCTActionSheetHeaders (= 0.63.4)
   - React-RCTAnimation (0.63.4):
@@ -342,6 +344,7 @@ DEPENDENCIES:
   - React-jsi (from `../../../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../../../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../../../node_modules/react-native/ReactCommon/jsinspector`)
+  - "react-native-menu (from `../../../node_modules/@react-native-menu/menu`)"
   - React-RCTActionSheet (from `../../../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../../../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../../../node_modules/react-native/Libraries/Blob`)
@@ -403,6 +406,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../../../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-menu:
+    :path: "../../../node_modules/@react-native-menu/menu"
   React-RCTActionSheet:
     :path: "../../../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -435,10 +440,10 @@ SPEC CHECKSUMS:
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
-  FluentUI-React-Native-Apple-Theme: 6e49bd84476c8cdd49e205fb1d791e8f009ef024
-  FluentUI-React-Native-Avatar: 2eee15cc5a43322668b61e1a214927974b555adc
-  FluentUI-React-Native-Button: 9485eb3b3ac48fe9ff7c8201cedc8a6302605acc
-  FluentUI-React-Native-Shimmer: b1c87c072238a69fe0fdf10b79cdeb2299968330
+  FluentUI-React-Native-Apple-Theme: cb23903e77760527bcda56506a8b2d795789b432
+  FluentUI-React-Native-Avatar: a3de9c856424439e0446c7db9f8e03bb0afccd3d
+  FluentUI-React-Native-Button: 0ea3402fe5403a8d0ab57c49c986c1de64ec900f
+  FluentUI-React-Native-Shimmer: abc14008cf700193b941622e5d0e5bb33e452b3f
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   MicrosoftFluentUI: 8a1ef14a8479106c33822d05b774e04051bb33f2
@@ -453,6 +458,7 @@ SPEC CHECKSUMS:
   React-jsi: a0418934cf48f25b485631deb27c64dc40fb4c31
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
+  react-native-menu: 9fe07f72e075b250295eeae25425490cc9608951
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0
@@ -468,6 +474,6 @@ SPEC CHECKSUMS:
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: 1236c39b2a369c6c27478060127c88ce50cbe405
+PODFILE CHECKSUM: ced6a59a49df8f93943b0d8c83ff32da91c2746f
 
 COCOAPODS: 1.10.1
