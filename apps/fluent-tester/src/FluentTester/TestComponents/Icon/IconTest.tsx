@@ -72,7 +72,11 @@ const icons: React.FunctionComponent<{}> = () => {
         showSvgIcons ?
           <View>
             <Text>SVG icons</Text>
-            <Icon svgSource={svgProps} width={100} height={100} color="orange" />
+            {
+              // TODO: Enable on iOS once we get react-native-svg-transformer working properly
+              Platform.OS == 'ios' ? null :
+              <Icon svgSource={svgProps} width={100} height={100} color="orange" />
+            }
             <Icon svgSource={svgD20DataUriProps} width={100} height={100} color="#7a7" />
             <Icon svgSource={svgUriProps} width={100} height={100} color="red" />
           </View> : null
