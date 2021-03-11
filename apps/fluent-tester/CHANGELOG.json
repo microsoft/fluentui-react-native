@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 11 Mar 2021 19:48:16 GMT",
+      "tag": "@fluentui-react-native/tester_v0.19.0",
+      "version": "0.19.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Revamp ThemePickers in Header",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "78158ad0818a26320974a12797d2b9fc757649f0",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 10 Mar 2021 04:33:26 GMT",
       "tag": "@fluentui-react-native/tester_v0.18.1",
       "version": "0.18.1",
