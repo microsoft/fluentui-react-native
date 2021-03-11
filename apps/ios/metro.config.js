@@ -4,6 +4,7 @@
  *
  * @format
  */
+
 const {getWatchFolders} = require('@uifabricshared/build-native');
 
 module.exports = {
