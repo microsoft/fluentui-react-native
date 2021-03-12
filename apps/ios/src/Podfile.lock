@@ -9,16 +9,16 @@ PODS:
     - React-Core (= 0.63.4)
     - React-jsi (= 0.63.4)
     - ReactCommon/turbomodule/core (= 0.63.4)
-  - FluentUI-React-Native-Apple-Theme (0.4.0):
+  - FluentUI-React-Native-Apple-Theme (0.4.1):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
-  - FluentUI-React-Native-Avatar (0.6.1):
+  - FluentUI-React-Native-Avatar (0.6.2):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
-  - FluentUI-React-Native-Button (0.5.1):
+  - FluentUI-React-Native-Button (0.5.2):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
-  - FluentUI-React-Native-Shimmer (0.6.1):
+  - FluentUI-React-Native-Shimmer (0.6.2):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
   - Folly (2020.01.13.00):
@@ -318,6 +318,8 @@ PODS:
     - React-jsi (= 0.63.4)
   - ReactTestApp-DevSupport (0.3.13)
   - ReactTestApp-Resources (1.0.0-dev)
+  - RNSVG (11.0.1):
+    - React
   - SwiftLint (0.43.0)
   - Yoga (1.14.0)
 
@@ -357,6 +359,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../../../node_modules/react-native/ReactCommon`)
   - ReactTestApp-DevSupport (from `../../../node_modules/react-native-test-app`)
   - ReactTestApp-Resources (from `..`)
+  - RNSVG (from `../../../node_modules/react-native-svg`)
   - SwiftLint
   - Yoga (from `../../../node_modules/react-native/ReactCommon/yoga`)
 
@@ -432,20 +435,22 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-test-app"
   ReactTestApp-Resources:
     :path: ".."
+  RNSVG:
+    :path: "../../../node_modules/react-native-svg"
   Yoga:
     :path: "../../../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
-  DoubleConversion: cde416483dac037923206447da6e1454df403714
+  DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
-  FluentUI-React-Native-Apple-Theme: cb23903e77760527bcda56506a8b2d795789b432
-  FluentUI-React-Native-Avatar: a3de9c856424439e0446c7db9f8e03bb0afccd3d
-  FluentUI-React-Native-Button: 0ea3402fe5403a8d0ab57c49c986c1de64ec900f
-  FluentUI-React-Native-Shimmer: abc14008cf700193b941622e5d0e5bb33e452b3f
+  FluentUI-React-Native-Apple-Theme: 8cb97ccc0072dff5436884ea8838da0f772186b4
+  FluentUI-React-Native-Avatar: 0ff639466867066a1f2ba1074e166b0190402f20
+  FluentUI-React-Native-Button: 67a38324ca749cffba64a015d7d2a9f3e02e3cc8
+  FluentUI-React-Native-Shimmer: 0e4b1415c1d13eda2310c2b43c570eccbf5b7e93
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
-  glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
+  glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   MicrosoftFluentUI: 8a1ef14a8479106c33822d05b774e04051bb33f2
   QRCodeReader.swift: 373a389fe9a22d513c879a32a6f647c58f4ef572
   RCTRequired: 082f10cd3f905d6c124597fd1c14f6f2655ff65e
@@ -471,9 +476,10 @@ SPEC CHECKSUMS:
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
   ReactTestApp-DevSupport: 12d9f285a44ff0cb7962a213621f87d3e6de9288
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
+  RNSVG: 67f1f12dae2cef6ed59a42cae74a6b8f5a9e7b46
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: ced6a59a49df8f93943b0d8c83ff32da91c2746f
+PODFILE CHECKSUM: ef19e12dd10aa6a43e8b448486be35e9c6396e28
 
 COCOAPODS: 1.10.1
