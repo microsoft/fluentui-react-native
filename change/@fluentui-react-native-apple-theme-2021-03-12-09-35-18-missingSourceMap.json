@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Public source files that are needed for source map",
+  "packageName": "@fluentui-react-native/apple-theme",
+  "email": "30809111+acoates-ms@users.noreply.github.com",
+  "dependentChangeType": "patch",
+  "date": "2021-03-12T17:35:17.215Z"
+}
