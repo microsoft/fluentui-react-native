@@ -1944,6 +1944,14 @@
   dependencies:
     "@microsoft/node-core-library" "3.19.3"
 
+"@microsoft/react-native-svg-desktop@^12.1.1":
+  version "12.1.1"
+  resolved "https://registry.yarnpkg.com/@microsoft/react-native-svg-desktop/-/react-native-svg-desktop-12.1.1.tgz#5d4be2d4bfa0bbf6755ff5eaebd3f06c78f66c65"
+  integrity sha512-KBAlcTDbqIZPYBs5emsJnBvhVqEeqB2nJuDodw0/nOp7d009Zd+pu5BOkrOJbqEQxBv4eqPvN9UOZ+eUQJNzvg==
+  dependencies:
+    css-select "^2.1.0"
+    css-tree "^1.0.0-alpha.39"
+
 "@microsoft/task-scheduler@^2.7.0":
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/@microsoft/task-scheduler/-/task-scheduler-2.7.0.tgz#ec08645bbf708299a2d13bfd56a1a928189cd33c"
