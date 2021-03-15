@@ -2,6 +2,50 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Fri, 12 Mar 2021 01:25:13 GMT",
+      "tag": "@fluentui-react-native/icon_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Get FURN Icon working on iOS",
+            "author": "adam.gleitman@gmail.com",
+            "commit": "c4f7dc842c01a32b9edf287d2b43aa017f3d71e3",
+            "package": "@fluentui-react-native/icon"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 06 Mar 2021 00:20:05 GMT",
+      "tag": "@fluentui-react-native/icon_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Base theme on macOS changed to apple theme",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "1b3d9f6ef10c1138b6f9701b5edf9ef52be623e6",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Use ColorValue from @fluentui-react-native/theme-types",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "71b29ea2c7c28d3cdadbade15f2b2c60127e48ec",
+            "package": "@fluentui-react-native/icon"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Update to react-native 0.63",
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "commit": "d35d3b45f12a670648edaa7143b210ed43360996",
+            "package": "@fluentui-react-native/icon"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Mar 2021 22:53:12 GMT",
       "tag": "@fluentui-react-native/icon_v0.2.7",
       "version": "0.2.7",

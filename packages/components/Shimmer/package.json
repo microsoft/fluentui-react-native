@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/shimmer",
-  "version": "0.4.3",
+  "version": "0.6.2",
   "description": "A cross-platform Shimmer component using the Fluent Design System",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -23,17 +23,17 @@
     "update-api": "fluentui-scripts update-api-extractor"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.4.4",
-    "@fluentui-react-native/adapters": ">=0.5.1 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.7.1 <1.0.0"
+    "@fluentui-react-native/framework": "0.5.0",
+    "@fluentui-react-native/adapters": ">=0.6.0 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.8.0 <1.0.0"
   },
   "devDependencies": {
-    "@types/react-native": "^0.62.0",
+    "@types/react-native": "^0.63.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "react-native": "0.62.2"
+    "react-native": "^0.63.4"
   },
   "peerDependencies": {
-    "react-native": ">=0.60.0"
+    "react-native": ">=0.63.4"
   }
 }

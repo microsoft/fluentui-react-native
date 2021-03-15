@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester-win32",
-  "version": "0.7.20",
+  "version": "0.8.5",
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
@@ -27,25 +27,25 @@
     "generate-report": "allure generate allure-results --clean && allure open"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.16.3",
-    "react": "16.11.0",
-    "react-native": "0.62.2",
+    "@fluentui-react-native/tester": "^0.20.0",
+    "react": "16.13.1",
+    "react-native": "^0.63.4",
     "react-native-svg": "^11.0.0"
   },
   "devDependencies": {
-    "@office-iss/rex-win32": "0.62.22-devmain.13806.10000",
-    "@office-iss/react-native-win32": "0.62.6",
+    "@office-iss/rex-win32": "0.63.22-devmain.13903.10000",
+    "@office-iss/react-native-win32": "^0.63.7",
     "@react-native-community/eslint-config": "^1.1.0",
     "@rnx-kit/cli": "^0.0.3",
     "@types/jasmine": "3.5.10",
     "@types/react": "^16.9.34",
-    "@types/react-native": "^0.62.0",
+    "@types/react-native": "^0.63.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "metro-config": "^0.58.0",
-    "metro-react-native-babel-preset": "^0.58.0",
+    "metro-react-native-babel-preset": "^0.59.0",
     "react-native-svg-transformer": "^0.14.3",
-    "react-test-renderer": "~16.11.0",
+    "react-test-renderer": "~16.13.1",
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
     "typescript": "3.8.3",
@@ -61,8 +61,8 @@
     "@wdio/sync": "5.20.1"
   },
   "peerDependencies": {
-    "react": "16.11.0",
-    "react-native": "0.62.2"
+    "react": "16.13.1",
+    "react-native": "^0.63.4"
   },
   "jest": {
     "preset": "react-native"

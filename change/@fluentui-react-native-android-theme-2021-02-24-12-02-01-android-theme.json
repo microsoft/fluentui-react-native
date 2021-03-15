@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "mapped a lot of colors, updated readme, added to fluent-tester-app",
+  "packageName": "@fluentui-react-native/android-theme",
+  "email": "tamasane@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-02-24T06:32:01.735Z"
+}

@@ -1,8 +1,54 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 01 Mar 2021 22:53:12 GMT and should not be manually modified.
+This log was last generated on Fri, 12 Mar 2021 01:25:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.0
+
+Fri, 12 Mar 2021 01:25:13 GMT
+
+### Minor changes
+
+- Get FURN Icon working on iOS (adam.gleitman@gmail.com)
+
+## 0.19.0
+
+Thu, 11 Mar 2021 19:48:16 GMT
+
+### Minor changes
+
+- Revamp ThemePickers in Header (saadnajmi2@gmail.com)
+
+## 0.18.1
+
+Wed, 10 Mar 2021 04:33:26 GMT
+
+### Patches
+
+- Add a native theming module for iOS (saadnajmi2@gmail.com)
+
+## 0.18.0
+
+Mon, 08 Mar 2021 21:55:00 GMT
+
+### Minor changes
+
+- initial two pager layout (tamasane@gmail.com)
+
+## 0.17.0
+
+Sat, 06 Mar 2021 00:20:05 GMT
+
+### Minor changes
+
+- Base theme on macOS changed to apple theme (saadnajmi2@gmail.com)
+- Fixed a lot of layout bugs (saadnajmi2@gmail.com)
+- Update to react-native 0.63 (30809111+acoates-ms@users.noreply.github.com)
+
+### Patches
+
+- Add Experimental Button to iOS tests (saadnajmi2@gmail.com)
 
 ## 0.16.3
 

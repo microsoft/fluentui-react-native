@@ -1,4 +1,4 @@
-import { ITextWin32Props, IViewWin32Props } from '@office-iss/react-native-win32';
+import type { ITextWin32Props, IViewWin32Props } from '@office-iss/react-native-win32';
 import { ImageProps } from 'react-native';
 import { IFilterMask } from './filter.types';
 
@@ -9,10 +9,10 @@ export type IImageProps = ImageProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
   children: true,
-  acceptsKeyboardFocus: true,
   accessible: true,
   accessibilityActions: true,
   accessibilityAnnotation: true,
+  accessibilityDescription: true,
   accessibilityDescribedBy: true,
   accessibilityLabel: true,
   accessibilityLabeledBy: true,
@@ -21,7 +21,6 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessibilityRole: true,
   accessibilitySetSize: true,
   accessibilityState: true,
-  accessibilityStates: true,
   accessibilityHint: true,
   accessibilityValue: true,
   animationClass: true,
@@ -66,6 +65,7 @@ const _viewMask: IFilterMask<IViewProps> = {
   onTouchStart: true,
   tooltip: true,
   type: true,
+  focusable: true,
 };
 
 const _textMask: IFilterMask<ITextProps> = {
@@ -77,7 +77,6 @@ const _textMask: IFilterMask<ITextProps> = {
   accessibilityLabeledBy: true,
   accessibilityRole: true,
   accessibilityState: true,
-  accessibilityStates: true,
   accessibilityValue: true,
   accessible: true,
   onAccessibilityAction: true,
@@ -96,18 +95,23 @@ const _textMask: IFilterMask<ITextProps> = {
   onLayout: true,
   onLongPress: true,
   onPress: true,
+  onTextLayout: true,
   style: true,
   selectable: true,
   nativeID: true,
   maxFontSizeMultiplier: true,
   textStyle: true,
   tooltip: true,
+  focusable: true,
+  onBlur: true,
+  onBlurCapture: true,
+  onFocus: true,
+  onFocusCapture: true,
 };
 
 const _imageMask: IFilterMask<IImageProps> = {
   children: true,
   accessibilityActions: true,
-  accessibilityComponentType: true,
   accessibilityElementsHidden: true,
   accessibilityHint: true,
   accessibilityIgnoresInvertColors: true,
@@ -115,8 +119,6 @@ const _imageMask: IFilterMask<IImageProps> = {
   accessibilityLiveRegion: true,
   accessibilityRole: true,
   accessibilityState: true,
-  accessibilityStates: true,
-  accessibilityTraits: true,
   accessibilityValue: true,
   accessibilityViewIsModal: true,
   accessible: true,

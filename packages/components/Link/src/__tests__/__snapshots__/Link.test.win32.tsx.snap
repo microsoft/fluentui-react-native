@@ -2,10 +2,10 @@
 
 exports[`Link all props 1`] = `
 <View
-  acceptsKeyboardFocus={true}
   accessibilityRole="link"
   accessible={true}
   cursor="pointer"
+  focusable={true}
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
@@ -50,10 +50,10 @@ exports[`Link all props 1`] = `
 
 exports[`Link with child 1`] = `
 <View
-  acceptsKeyboardFocus={true}
   accessibilityRole="link"
   accessible={true}
   cursor="pointer"
+  focusable={true}
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}

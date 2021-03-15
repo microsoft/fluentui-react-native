@@ -1,8 +1,9 @@
 import { ITheme, IThemeColorDefinition } from '@uifabricshared/theming-ramp';
 import { IOperationSet } from '@uifabricshared/foundation-tokens';
+import { ColorValue } from 'react-native';
 
 export interface IForegroundColorTokens {
-  color?: string;
+  color?: ColorValue;
 }
 
 export const getPaletteFromTheme = (theme: ITheme): IThemeColorDefinition => {
@@ -12,11 +13,11 @@ export const getPaletteFromTheme = (theme: ITheme): IThemeColorDefinition => {
 export const foregroundColorTokens: IOperationSet<IForegroundColorTokens, ITheme> = [{ source: 'color', lookup: getPaletteFromTheme }];
 
 export interface IBackgroundColorTokens {
-  backgroundColor?: string;
+  backgroundColor?: ColorValue;
 }
 
 export const backgroundColorTokens: IOperationSet<IBackgroundColorTokens, ITheme> = [
-  { source: 'backgroundColor', lookup: getPaletteFromTheme }
+  { source: 'backgroundColor', lookup: getPaletteFromTheme },
 ];
 
 export type IColorTokens = IForegroundColorTokens & IBackgroundColorTokens;

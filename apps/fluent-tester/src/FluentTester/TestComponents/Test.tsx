@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Platform } from 'react-native';
 import { Text, Separator } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from './Common/styles';
@@ -54,6 +54,9 @@ const styles = StyleSheet.create({
   },
 });
 
+// mobile platform check to not render status components.
+const isMobile = Platform.OS == 'android' || (Platform.OS == 'ios' && !Platform.isPad);
+
 export const Test = (props: TestProps) => {
   return (
     <View>
@@ -64,55 +67,57 @@ export const Test = (props: TestProps) => {
       <Stack style={stackStyle}>
         <Text style={styles.description}>{props.description}</Text>
       </Stack>
-      <Stack style={stackStyle}>
-        <View style={styles.statusView}>
-          <Stack>
-            <Text style={[styles.statusHeader]} variant="headerStandard">
-              Platform Status
-            </Text>
-            <Text style={[styles.statusLabel]} variant="bodySemibold">
-              Win32: <Text style={styles.status}>{props.status.win32Status}</Text>
-            </Text>
-            <Text style={[styles.statusLabel]} variant="bodySemibold">
-              UWP: <Text style={styles.status}>{props.status.uwpStatus}</Text>
-            </Text>
-            <Text style={[styles.statusLabel]} variant="bodySemibold">
-              iOS: <Text style={styles.status}>{props.status.iosStatus}</Text>
-            </Text>
-            <Text style={[styles.statusLabel]} variant="bodySemibold">
-              macOS: <Text style={styles.status}>{props.status.macosStatus}</Text>
-            </Text>
-            <Text style={[styles.statusLabel]} variant="bodySemibold">
-              Android: <Text style={styles.status}>{props.status.androidStatus}</Text>
-            </Text>
-          </Stack>
-
-          <Stack style={stackStyle}>
-            <Text style={[styles.statusHeader]} variant="headerStandard">
-              Status Definitions
-            </Text>
-            <Text style={[styles.statusLabel]} variant="bodySemibold">
-              Production:{' '}
-              <Text style={styles.status}>Control is ready for broad partner use and to be used in production-ready scenarios.</Text>
-            </Text>
-            <Text style={[styles.statusLabel]} variant="bodySemibold">
-              Beta:{' '}
-              <Text style={styles.status}>
-                Control is ready for partner consumption, but not ready for production release (e.g. fixing bugs).
+      {!isMobile && (
+        <Stack style={stackStyle}>
+          <View style={styles.statusView}>
+            <Stack>
+              <Text style={[styles.statusHeader]} variant="headerStandard">
+                Platform Status
               </Text>
-            </Text>
-            <Text style={[styles.statusLabel]} variant="bodySemibold">
-              Experimental: <Text style={styles.status}>Control code checked into repo, but not ready for partner use.</Text>
-            </Text>
-            <Text style={[styles.statusLabel]} variant="bodySemibold">
-              Backlog: <Text style={styles.status}>Control is in plan and on our backlog to deliver.</Text>
-            </Text>
-            <Text style={[styles.statusLabel]} variant="bodySemibold">
-              N/A: <Text style={styles.status}>Control is not in current plan.</Text>
-            </Text>
-          </Stack>
-        </View>
-      </Stack>
+              <Text style={[styles.statusLabel]} variant="bodySemibold">
+                Win32: <Text style={styles.status}>{props.status.win32Status}</Text>
+              </Text>
+              <Text style={[styles.statusLabel]} variant="bodySemibold">
+                UWP: <Text style={styles.status}>{props.status.uwpStatus}</Text>
+              </Text>
+              <Text style={[styles.statusLabel]} variant="bodySemibold">
+                iOS: <Text style={styles.status}>{props.status.iosStatus}</Text>
+              </Text>
+              <Text style={[styles.statusLabel]} variant="bodySemibold">
+                macOS: <Text style={styles.status}>{props.status.macosStatus}</Text>
+              </Text>
+              <Text style={[styles.statusLabel]} variant="bodySemibold">
+                Android: <Text style={styles.status}>{props.status.androidStatus}</Text>
+              </Text>
+            </Stack>
+
+            <Stack style={stackStyle}>
+              <Text style={[styles.statusHeader]} variant="headerStandard">
+                Status Definitions
+              </Text>
+              <Text style={[styles.statusLabel]} variant="bodySemibold">
+                Production:{' '}
+                <Text style={styles.status}>Control is ready for broad partner use and to be used in production-ready scenarios.</Text>
+              </Text>
+              <Text style={[styles.statusLabel]} variant="bodySemibold">
+                Beta:{' '}
+                <Text style={styles.status}>
+                  Control is ready for partner consumption, but not ready for production release (e.g. fixing bugs).
+                </Text>
+              </Text>
+              <Text style={[styles.statusLabel]} variant="bodySemibold">
+                Experimental: <Text style={styles.status}>Control code checked into repo, but not ready for partner use.</Text>
+              </Text>
+              <Text style={[styles.statusLabel]} variant="bodySemibold">
+                Backlog: <Text style={styles.status}>Control is in plan and on our backlog to deliver.</Text>
+              </Text>
+              <Text style={[styles.statusLabel]} variant="bodySemibold">
+                N/A: <Text style={styles.status}>Control is not in current plan.</Text>
+              </Text>
+            </Stack>
+          </View>
+        </Stack>
+      )}
       {props.sections.map((section, index) => {
         const TestComponent = section.component;
         return (

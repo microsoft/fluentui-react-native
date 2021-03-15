@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ITextProps } from '@fluentui-react-native/text';
-import { IViewWin32Props } from '@office-iss/react-native-win32';
+import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
 import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
@@ -40,10 +40,10 @@ export interface IRadioGroupProps {
   ariaLabel?: string;
 
   /*
-  ** The key of the selected option. If you provide this, you must maintain selection state by observing
-  ** onChange events and passing a new value in when changed. This overrides defaultSelectedKey
-  ** and makes the RadioGroup a controlled component.
-  */
+   ** The key of the selected option. If you provide this, you must maintain selection state by observing
+   ** onChange events and passing a new value in when changed. This overrides defaultSelectedKey
+   ** and makes the RadioGroup a controlled component.
+   */
   selectedKey?: string;
 
   /*
@@ -54,7 +54,7 @@ export interface IRadioGroupProps {
   testID?: string;
 }
 
-export interface IRadioGroupTokens extends IForegroundColorTokens, FontTokens { }
+export interface IRadioGroupTokens extends IForegroundColorTokens, FontTokens {}
 
 export interface IRadioGroupSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
