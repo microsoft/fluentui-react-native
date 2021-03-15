@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 12 Mar 2021 01:25:13 GMT and should not be manually modified.
+This log was last generated on Mon, 15 Mar 2021 06:53:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.0
+
+Mon, 15 Mar 2021 06:53:17 GMT
+
+### Minor changes
+
+- initial android theme (tamasane@gmail.com)
 
 ## 0.20.0
 
