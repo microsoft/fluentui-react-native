@@ -48,6 +48,9 @@ export interface SemanticPalette {
 
   //List
   listBackground: ColorValue;
+
+  //HyperLink
+  textHyperLink: ColorValue;
 }
 
 export type FluentUIAndroidPalette = AndroidBaseColorsPalette & SemanticPalette;
@@ -89,6 +92,7 @@ export function getFluentUIAndroidPalette(p: AndroidBaseColorsPalette): FluentUI
         menuIcon: p.gray400,
         menuItemText: p.gray900,
         listBackground: p.white,
+        textHyperLink: '#D83B01',
       }
     : {
         ...p,
@@ -125,5 +129,6 @@ export function getFluentUIAndroidPalette(p: AndroidBaseColorsPalette): FluentUI
         menuIcon: p.gray500,
         menuItemText: p.gray100,
         listBackground: p.gray950,
+        textHyperLink: '#D83B01',
       };
 }

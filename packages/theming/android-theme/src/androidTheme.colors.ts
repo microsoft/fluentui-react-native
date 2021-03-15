@@ -92,11 +92,11 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     listHeaderBackgroundHovered: 'transparent',
     listHeaderBackgroundPressed: 'transparent',
 
-    actionLink: 'todo',
-    actionLinkHovered: 'todo',
-    link: 'todo',
-    linkHovered: 'todo',
-    linkPressed: 'todo',
+    actionLink: p.textPrimary,
+    actionLinkHovered: p.textPrimary,
+    link: p.textHyperLink,
+    linkHovered: p.textHyperLink,
+    linkPressed: p.textHyperLink,
 
     /* ControlColorTokens */
 
