@@ -1,5 +1,4 @@
 import { ColorValue } from '@fluentui-react-native/theme-types';
-import { AppearanceOptions } from './createAndroidTheme';
 
 export interface BaseColors {
   white: ColorValue;
@@ -188,6 +187,6 @@ export const androidPaletteDark: AndroidBaseColorsPalette = {
   warningTint40: '#021D0B',
 };
 
-export function getAndroidPalette(appearance: AppearanceOptions) {
+export function getAndroidPalette(appearance: 'light' | 'dark') {
   return appearance == 'dark' ? androidPaletteDark : androidPaletteLight;
 }

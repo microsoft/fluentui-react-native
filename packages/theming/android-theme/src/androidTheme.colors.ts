@@ -11,20 +11,20 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     bodyFrameBackground: p.surfacesTertiary,
     bodyFrameDivider: p.dividersSecondary,
     bodyText: p.textPrimary,
-    bodyTextChecked: p.gray950, //TODO
+    bodyTextChecked: p.gray950,
     subText: p.textSecondary,
     bodyDivider: p.dividersPrimary,
 
     disabledBackground: p.surfacesTertiary,
     disabledText: p.textDisabledHighContrast,
     disabledBodyText: p.textDisabled,
-    disabledSubtext: p.gray200, //TODO
-    disabledBodySubtext: p.gray300, //TODO
+    disabledSubtext: p.gray200,
+    disabledBodySubtext: p.gray300,
 
-    focusBorder: 'transparent', //TODO
-    variantBorder: 'transparent', //TODO
-    variantBorderHovered: 'transparent', //TODO
-    defaultStateBackground: 'transparent', //TODO
+    focusBorder: 'transparent',
+    variantBorder: 'transparent',
+    variantBorderHovered: 'transparent',
+    defaultStateBackground: 'transparent',
 
     errorText: p.dangerPrimary,
     warningText: p.warningPrimary,
@@ -52,13 +52,13 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     buttonBackgroundPressed: p.buttonBackgroundPressed,
     buttonBackgroundDisabled: p.buttonBackgroundDisabled,
     buttonText: p.textOnAccent,
-    buttonTextHovered: '#ffffff', //TODO
-    buttonTextChecked: '#ffffff', //TODO
-    buttonTextCheckedHovered: '#ffffff', //TODO
+    buttonTextHovered: '#ffffff',
+    buttonTextChecked: '#ffffff',
+    buttonTextCheckedHovered: '#ffffff',
     buttonTextPressed: p.textOnAccent,
     buttonTextDisabled: p.buttonTextDisabled,
-    buttonBorderDisabled: 'transparent', //TODO
-    buttonBorderFocused: 'transparent', //TODO
+    buttonBorderDisabled: 'transparent',
+    buttonBorderFocused: 'transparent',
 
     primaryButtonBackground: p.buttonBackground,
     primaryButtonBackgroundHovered: p.buttonBackground,
@@ -67,8 +67,8 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     primaryButtonBorder: 'transparent',
     primaryButtonBorderFocused: 'transparent',
     primaryButtonText: p.textOnAccent,
-    primaryButtonTextHovered: '#ffffff', //TODO
-    primaryButtonTextPressed: '#ffffff', //TODO
+    primaryButtonTextHovered: '#ffffff',
+    primaryButtonTextPressed: '#ffffff',
     primaryButtonTextDisabled: p.buttonTextDisabled,
 
     accentButtonBackground: p.buttonBackground,
@@ -77,20 +77,20 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     menuBackground: p.menuBackground,
     menuDivider: 'transparent',
     menuIcon: p.menuIcon,
-    menuHeader: 'transparent', //TODO
-    menuItemBackgroundHovered: 'transparent', //TODO
-    menuItemBackgroundPressed: 'transparent', //TODO
+    menuHeader: 'transparent',
+    menuItemBackgroundHovered: 'transparent',
+    menuItemBackgroundPressed: 'transparent',
     menuItemText: p.menuItemText,
-    menuItemTextHovered: p.gray900, //TODO
+    menuItemTextHovered: p.gray900,
 
     listBackground: p.listBackground,
     listText: p.menuItemText,
-    listItemBackgroundHovered: 'transparent', //TODO
-    listItemBackgroundChecked: 'transparent', //TODO
-    listItemBackgroundCheckedHovered: 'transparent', //TODO
+    listItemBackgroundHovered: 'transparent',
+    listItemBackgroundChecked: 'transparent',
+    listItemBackgroundCheckedHovered: 'transparent',
 
-    listHeaderBackgroundHovered: 'transparent', //TODO
-    listHeaderBackgroundPressed: 'transparent', //TODO
+    listHeaderBackgroundHovered: 'transparent',
+    listHeaderBackgroundPressed: 'transparent',
 
     actionLink: 'todo',
     actionLinkHovered: 'todo',

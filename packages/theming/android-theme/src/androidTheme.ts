@@ -3,7 +3,6 @@ import { getFluentUIAndroidPalette } from './androidPalette';
 import { paletteFromAndroidColors } from './androidTheme.colors';
 import { androidTypography } from './androidTypography';
 import { getAndroidPalette } from './androidBaseColors';
-import { AppearanceOptions } from './createAndroidTheme';
 
 export function androidSpacing(): Spacing {
   return {
@@ -26,7 +25,7 @@ export const androidComponents = {
   },
 };
 
-export function getAndroidTheme(appearance: AppearanceOptions): Theme {
+export function getAndroidTheme(appearance: 'light' | 'dark'): Theme {
   return {
     colors: paletteFromAndroidColors(getFluentUIAndroidPalette(getAndroidPalette(appearance))),
     typography: androidTypography(),

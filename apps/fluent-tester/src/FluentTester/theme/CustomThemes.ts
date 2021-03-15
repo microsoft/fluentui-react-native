@@ -6,10 +6,7 @@ import { applyBrand, OfficeBrand } from './applyBrand';
 import { applyTheme, ThemeNames } from './applyTheme';
 import { createAndroidTheme } from '@fluentui-react-native/android-theme';
 
-const themeOptions: ThemeOptions = Platform.select({
-  android: { appearance: 'dynamic' },
-  default: { paletteName: 'TaskPane', appearance: 'dynamic' },
-});
+const themeOptions: ThemeOptions = { paletteName: 'TaskPane', appearance: 'dynamic' };
 
 const baseTheme = Platform.select({
   android: createAndroidTheme(themeOptions),
