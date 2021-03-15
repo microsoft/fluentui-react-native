@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 12 Mar 2021 01:25:13 GMT",
+      "tag": "@fluentui-react-native/tester_v0.20.0",
+      "version": "0.20.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Get FURN Icon working on iOS",
+            "author": "adam.gleitman@gmail.com",
+            "commit": "c4f7dc842c01a32b9edf287d2b43aa017f3d71e3",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Mar 2021 19:48:16 GMT",
+      "tag": "@fluentui-react-native/tester_v0.19.0",
+      "version": "0.19.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Revamp ThemePickers in Header",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "78158ad0818a26320974a12797d2b9fc757649f0",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 10 Mar 2021 04:33:26 GMT",
       "tag": "@fluentui-react-native/tester_v0.18.1",
       "version": "0.18.1",
