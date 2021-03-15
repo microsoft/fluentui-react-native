@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 15 Mar 2021 06:53:17 GMT",
+      "tag": "@fluentui-react-native/tester_v0.21.0",
+      "version": "0.21.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "initial android theme",
+            "author": "tamasane@gmail.com",
+            "commit": "e3dafb74267c72ee5dd789a8f4496f6693b3c55d",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Mar 2021 01:25:13 GMT",
       "tag": "@fluentui-react-native/tester_v0.20.0",
       "version": "0.20.0",
