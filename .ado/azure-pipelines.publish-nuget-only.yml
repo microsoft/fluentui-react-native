@@ -36,6 +36,10 @@ jobs:
         displayName: 'Install CocoaPods Environment'
 
       - script: |
+          pod repo add rdeassis git@github.com:rdeassis/cocoapods-repo.git
+        displayName: 'Add Private Pod Source'
+
+      - script: |
           yarn bundle ios
         workingDirectory: $(Build.Repository.LocalPath)/apps/ios
         displayName: 'yarn bundle iOS'
