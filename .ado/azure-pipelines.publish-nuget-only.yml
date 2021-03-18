@@ -24,7 +24,13 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      - template: templates/setup-repo-min-build.yml
+      - script: |
+          git config user.name "UI-Fabric-RN-Bot"
+          git config user.email "uifrnbot@microsoft.com"
+          git remote set-url origin https://$(githubUser):$(githubPAT)@github.com/microsoft/ui-fabric-react-native.git
+        displayName: Git Authentication
+
+      - template: templates/yarn-install.yml
 
       # Clean Derived Data
       - script: |
@@ -36,7 +42,7 @@ jobs:
         displayName: 'Install CocoaPods Environment'
 
       - script: |
-          pod repo add rdeassis git@github.com:rdeassis/cocoapods-repo.git
+          pod repo add rdeassis https://github.com/rdeassis/cocoapods-repo.git
         displayName: 'Add Private Pod Source'
 
       - script: |
