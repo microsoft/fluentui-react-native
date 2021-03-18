@@ -108,8 +108,8 @@ class AppleThemeModule: NSObject {
 			"buttonTextChecked" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 			"buttonTextCheckedHovered" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 			"buttonTextPressed" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint20.color.cgColor),
-			"buttonTextDisabled" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
-			"buttonBorderDisabled" : RCTColorToHexString(FluentUI.Colors.Button.borderDisabled.cgColor),
+//			"buttonTextDisabled" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
+//			"buttonBorderDisabled" : RCTColorToHexString(FluentUI.Colors.Button.borderDisabled.cgColor),
 			"buttonBorderFocused" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint10.color.cgColor),
 
 			"primaryButtonBackground" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
@@ -174,9 +174,9 @@ class AppleThemeModule: NSObject {
 			"buttonPressedIcon" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint20.color.cgColor),
 
 			"buttonDisabledBackground" : "transparent",
-			"buttonDisabledBorder" :  RCTColorToHexString(FluentUI.Colors.Button.borderDisabled.cgColor),
-			"buttonDisabledContent" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
-			"buttonDisabledIcon" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
+//			"buttonDisabledBorder" :  RCTColorToHexString(FluentUI.Colors.Button.borderDisabled.cgColor),
+//			"buttonDisabledContent" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
+//			"buttonDisabledIcon" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
 
 			"ghostBackground" : "transparent",
 			"ghostBorder" : "transparent",
@@ -200,8 +200,8 @@ class AppleThemeModule: NSObject {
 
 			"ghostDisabledBackground" : "transparent",
 			"ghostDisabledBorder" : "transparent",
-			"ghostDisabledContent" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
-			"ghostDisabledIcon" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
+//			"ghostDisabledContent" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
+//			"ghostDisabledIcon" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
 
 			"brandBackground" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 			"brandBorder" : "transparent",
@@ -254,7 +254,7 @@ class AppleThemeModule: NSObject {
 			"brandHoveredSecondaryContent" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
 			"brandPressedSecondaryContent" : RCTColorToHexString(FluentUI.Colors.Button.titleWithFilledBackground.cgColor),
 
-			"buttonDisabledSecondaryContent" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
+//			"buttonDisabledSecondaryContent" : RCTColorToHexString(FluentUI.Colors.Button.titleDisabled.cgColor),
 			"buttonHoveredSecondaryContent" : RCTColorToHexString(FluentUI.Colors.communicationBlue.cgColor),
 			"buttonPressedSecondaryContent" : RCTColorToHexString(FluentUI.Colors.Palette.communicationBlueTint20.color.cgColor),
 		]

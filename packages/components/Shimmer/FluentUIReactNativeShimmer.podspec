@@ -18,5 +18,5 @@ Pod::Spec.new do |s|
   s.ios.source_files      = "ios/*.{swift,h,m}"
 
   s.dependency 'React'
-  s.dependency 'MicrosoftFluentUI', '~> 0.2.2'
+  s.dependency 'MicrosoftFluentUI', '0.0.2'
 end

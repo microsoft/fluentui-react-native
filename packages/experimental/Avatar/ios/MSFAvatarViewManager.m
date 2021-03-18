@@ -5,26 +5,26 @@
 
 @implementation RCTConvert (MSFAvatarViewAdditions)
 
-RCT_ENUM_CONVERTER(MSFAvatarSize, (@{
-	@"xSmall": @(MSFAvatarSizeExtraSmall),
-	@"small": @(MSFAvatarSizeSmall),
-	@"medium": @(MSFAvatarSizeMedium),
-	@"large": @(MSFAvatarSizeLarge),
-	@"xLarge": @(MSFAvatarSizeExtraLarge),
-	@"xxLarge": @(MSFAvatarSizeExtraExtraLarge),
-}), MSFAvatarSizeSmall, integerValue);
+RCT_ENUM_CONVERTER(MSFAvatarLegacySize, (@{
+	@"xSmall": @(MSFAvatarLegacySizeExtraSmall),
+	@"small": @(MSFAvatarLegacySizeSmall),
+	@"medium": @(MSFAvatarLegacySizeMedium),
+	@"large": @(MSFAvatarLegacySizeLarge),
+	@"xLarge": @(MSFAvatarLegacySizeExtraLarge),
+	@"xxLarge": @(MSFAvatarLegacySizeExtraExtraLarge),
+}), MSFAvatarLegacySizeSmall, integerValue);
 
-RCT_ENUM_CONVERTER(MSFAvatarStyle, (@{
-	@"circle": @(MSFAvatarStyleCircle),
-	@"square": @(MSFAvatarStyleSquare),
-}), MSFAvatarStyleCircle, integerValue);
+RCT_ENUM_CONVERTER(MSFAvatarLegacyStyle, (@{
+	@"circle": @(MSFAvatarLegacyStyleCircle),
+	@"square": @(MSFAvatarLegacyStyleSquare),
+}), MSFAvatarLegacyStyleCircle, integerValue);
 
-RCT_ENUM_CONVERTER(MSFAvatarFallbackImageStyle, (@{
-	@"onAccentFilled": @(MSFAvatarFallbackImageStyleOnAccentFilled),
-	@"outlined": @(MSFAvatarFallbackImageStyleOutlined),
-	@"primaryFilled": @(MSFAvatarFallbackImageStylePrimaryFilled),
-	@"primaryOutlined": @(MSFAvatarFallbackImageStylePrimaryOutlined),
-}), MSFAvatarFallbackImageStyleOutlined, integerValue);
+RCT_ENUM_CONVERTER(MSFAvatarLegacyFallbackImageStyle, (@{
+	@"onAccentFilled": @(MSFAvatarLegacyFallbackImageStyleOnAccentFilled),
+    @"outlined": @(MSFAvatarLegacyFallbackImageStyleOutlined),
+	@"primaryFilled": @(MSFAvatarLegacyFallbackImageStylePrimaryFilled),
+	@"primaryOutlined": @(MSFAvatarLegacyFallbackImageStylePrimaryOutlined),
+}), MSFAvatarLegacyFallbackImageStyleOutlined, integerValue);
 
 RCT_ENUM_CONVERTER(MSFPresence, (@{
 	@"none": @(MSFPresenceNone),
@@ -51,12 +51,12 @@ RCT_ENUM_CONVERTER(MSFPresence, (@{
 
 @interface RCT_EXTERN_MODULE(MSFAvatarViewManager, RCTViewManager)
 
-RCT_REMAP_VIEW_PROPERTY(size, avatarSize, MSFAvatarSize);
+RCT_REMAP_VIEW_PROPERTY(size, avatarSize, MSFAvatarLegacySize);
 RCT_REMAP_VIEW_PROPERTY(backgroundColor, avatarBackgroundColor, UIColor);
 
 RCT_EXPORT_VIEW_PROPERTY(customBorderImage, UIImage);
 
-RCT_REMAP_VIEW_PROPERTY(avatarStyle, style, MSFAvatarStyle)
+RCT_REMAP_VIEW_PROPERTY(avatarStyle, style, MSFAvatarLegacyStyle)
 
 RCT_EXPORT_VIEW_PROPERTY(borderColor, UIColor);
 RCT_EXPORT_VIEW_PROPERTY(presence, MSFPresence);
@@ -64,11 +64,11 @@ RCT_EXPORT_VIEW_PROPERTY(useOpaquePresenceBorder, bool);
 
 RCT_REMAP_VIEW_PROPERTY(accessibilityLabel, overrideAccessibilityLabel, NSString);
 
-RCT_EXPORT_VIEW_PROPERTY(preferredFallbackImageStyle, MSFAvatarFallbackImageStyle);
+RCT_EXPORT_VIEW_PROPERTY(preferredFallbackImageStyle, MSFAvatarLegacyFallbackImageStyle);
 
 RCT_REMAP_VIEW_PROPERTY(hasPointerInteractionIOS, hasPointerInteraction, bool)
 
-RCT_CUSTOM_VIEW_PROPERTY(avatarData, MSFAvatarData, MSFAvatarView)
+RCT_CUSTOM_VIEW_PROPERTY(avatarData, MSFAvatarData, MSFAvatarLegacyView)
 {
 	MSFAvatarData *avatarData = [RCTConvert MSFAvatarData:json];
 	[view setupWithAvatar:avatarData];

@@ -1,6 +1,6 @@
 import FluentUI
 
-class ButtonWrapper: Button {
+class ButtonWrapper: MSFButtonLegacy {
 	/// button event block
 	@objc public var onPress:RCTBubblingEventBlock?
 
