@@ -24,8 +24,7 @@ use_test_app! do |target|
   target.app do
     platform :ios, '13.0'
 
-    source 'git@github.com:rdeassis/cocoapods-repo.git'
-
+    source 'https://github.com/rdeassis/cocoapods-repo.git'
     pod 'MicrosoftFluentUI', '0.0.2'
 
     pod 'FluentUI-React-Native-Apple-Theme', :path => '../../../packages/theming/apple-theme/FluentUIReactNativeAppleTheme.podspec'
