@@ -3,7 +3,7 @@ steps:
   # Pod Install iOS
   - bash: |
       echo "pod install --project-directory=src"
-      pod install --project-directory=src
+      pod install --project-directory=src --repo-update
     workingDirectory: apps/ios
     displayName: 'pod install iOS'
 
