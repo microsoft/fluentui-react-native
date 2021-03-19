@@ -30,7 +30,7 @@ jobs:
           git remote set-url origin https://$(githubUser):$(githubPAT)@github.com/microsoft/ui-fabric-react-native.git
         displayName: Git Authentication
 
-      - template: templates/yarn-install.yml
+      - template: templates/setup-repo-min-build.yml
 
       # Clean Derived Data
       - script: |
