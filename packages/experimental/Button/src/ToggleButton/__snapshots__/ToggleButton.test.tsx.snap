@@ -2,7 +2,6 @@
 
 exports[`ToggleButton default 1`] = `
 <View
-  acceptsKeyboardFocus={true}
   accessibilityRole="button"
   accessible={true}
   focusable={true}

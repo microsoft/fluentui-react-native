@@ -1,6 +1,6 @@
 import { TextProps, ViewProps, ImageProps } from 'react-native';
 import { IFilterMask } from './filter.types';
-import { ITextWin32Props } from '@office-iss/react-native-win32';
+import type { ITextWin32Props } from '@office-iss/react-native-win32';
 
 // export core interface types
 export type ITextProps = TextProps & Partial<ITextWin32Props>;
@@ -13,7 +13,6 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessibilityLabel: true,
   accessibilityRole: true,
   accessibilityState: true,
-  accessibilityStates: true,
   accessibilityHint: true,
   accessibilityValue: true,
   hitSlop: true,
@@ -46,11 +45,9 @@ const _viewMask: IFilterMask<IViewProps> = {
   onTouchStart: true,
   importantForAccessibility: true,
   accessibilityActions: true,
-  accessibilityComponentType: true,
   accessibilityElementsHidden: true,
   accessibilityIgnoresInvertColors: true,
   accessibilityLiveRegion: true,
-  accessibilityTraits: true,
   accessibilityViewIsModal: true,
   collapsable: true,
   needsOffscreenAlphaCompositing: true,
@@ -63,12 +60,12 @@ const _viewMask: IFilterMask<IViewProps> = {
   tvParallaxShiftDistanceX: true,
   tvParallaxShiftDistanceY: true,
   tvParallaxTiltAngle: true,
+  focusable: true,
 };
 
 const _textMask: IFilterMask<ITextProps> = {
   children: true,
   accessibilityActions: true,
-  accessibilityComponentType: true,
   accessibilityElementsHidden: true,
   accessibilityHint: true,
   accessibilityIgnoresInvertColors: true,
@@ -76,8 +73,6 @@ const _textMask: IFilterMask<ITextProps> = {
   accessibilityLiveRegion: true,
   accessibilityRole: true,
   accessibilityState: true,
-  accessibilityStates: true,
-  accessibilityTraits: true,
   accessibilityValue: true,
   accessibilityViewIsModal: true,
   accessible: true,
@@ -113,12 +108,18 @@ const _textMask: IFilterMask<ITextProps> = {
   onKeyUpCapture: true,
   textStyle: true,
   tooltip: true,
+  onTextLayout: true,
+  dataDetectorType: true,
+  focusable: true,
+  onBlur: true,
+  onBlurCapture: true,
+  onFocus: true,
+  onFocusCapture: true,
 };
 
 const _imageMask: IFilterMask<IImageProps> = {
   children: true,
   accessibilityActions: true,
-  accessibilityComponentType: true,
   accessibilityElementsHidden: true,
   accessibilityHint: true,
   accessibilityIgnoresInvertColors: true,
@@ -126,8 +127,6 @@ const _imageMask: IFilterMask<IImageProps> = {
   accessibilityLiveRegion: true,
   accessibilityRole: true,
   accessibilityState: true,
-  accessibilityStates: true,
-  accessibilityTraits: true,
   accessibilityValue: true,
   accessibilityViewIsModal: true,
   accessible: true,

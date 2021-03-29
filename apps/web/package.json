@@ -11,11 +11,11 @@
     "extends": "react-app"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": ">=0.16.3 <1.0.0",
-    "react": "16.11.0",
+    "@fluentui-react-native/tester": ">=0.21.0 <1.0.0",
+    "react": "16.13.1",
     "react-art": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-native": "0.62.2",
+    "react-native": "^0.63.4",
     "react-native-svg-loader": "^1.0.0",
     "react-native-web": "^0.12.3"
   },
@@ -24,7 +24,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
-    "@types/react-native": "0.62.2",
+    "@types/react-native": "^0.63.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "file-loader": "^6.0.0",

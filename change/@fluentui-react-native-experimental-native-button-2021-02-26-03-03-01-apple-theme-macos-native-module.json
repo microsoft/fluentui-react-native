@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Made some constants multiple of 4",
-  "packageName": "@fluentui-react-native/experimental-native-button",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-02-26T09:01:57.283Z"
-}

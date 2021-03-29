@@ -69,27 +69,6 @@ export const fluentTesterStyles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 
-  pickerRoot: {
-    flexDirection: 'row',
-  },
-
-  picker: {
-    flexDirection: 'row',
-    padding: 4,
-  },
-
-  pickerLabel: {
-    fontSize: 12,
-    marginTop: 6,
-    fontWeight: 'bold',
-  },
-
-  dropdown: {
-    height: 30,
-    width: 90,
-    fontSize: 12,
-  },
-
   testHeader: {
     marginBottom: 8,
     marginTop: 4,
@@ -112,7 +91,7 @@ export const fluentTesterStyles = StyleSheet.create({
   },
 
   testSection: {
-    width: '85%',
+    flexGrow: 1,
   },
 
   noTest: {
@@ -134,3 +113,23 @@ export const separatorStackStyle: IStackProps['style'] = {
   flexDirection: 'row',
   justifyContent: 'space-evenly',
 };
+
+export const mobileStyles = StyleSheet.create({
+  header: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+
+  testList: {
+    width: '100%',
+  },
+  testListItem: {
+    width: '100%',
+    height: 'auto',
+    fontSize: 18,
+    paddingVertical: 8,
+  },
+  testSection: {
+    width: '100%',
+  },
+});

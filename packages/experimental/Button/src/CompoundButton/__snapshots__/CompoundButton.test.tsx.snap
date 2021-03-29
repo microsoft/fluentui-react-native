@@ -2,7 +2,6 @@
 
 exports[`CompoundButton default 1`] = `
 <View
-  acceptsKeyboardFocus={true}
   accessibilityLabel="Default Button"
   accessibilityRole="button"
   accessible={true}

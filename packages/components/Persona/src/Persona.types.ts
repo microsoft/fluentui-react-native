@@ -1,5 +1,5 @@
 import { IPersonaCoinProps, IPersonaCoinTokens } from '@fluentui-react-native/persona-coin';
-import { ViewProps, TextProps } from 'react-native';
+import type { IViewProps, ITextProps } from '@fluentui-react-native/adapters';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { FontTokens } from '@fluentui-react-native/tokens';
 
@@ -15,13 +15,13 @@ export interface IPersonaState {
 export interface IPersonaProps extends IPersonaCoinProps, IPersonaState {}
 
 export interface IPersonaSlotProps {
-  root: ViewProps;
+  root: IViewProps;
   coin: IPersonaCoinProps;
-  stack: ViewProps;
-  text: TextProps;
-  secondary: TextProps;
-  tertiary: TextProps;
-  optional: TextProps;
+  stack: IViewProps;
+  text: ITextProps;
+  secondary: ITextProps;
+  tertiary: ITextProps;
+  optional: ITextProps;
 }
 
 export interface IPersonaTokens extends Omit<IPersonaCoinTokens, 'backgroundColor'> {
