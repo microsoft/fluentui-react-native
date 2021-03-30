@@ -28,6 +28,7 @@ use_test_app! do |target|
     pod 'FluentUI-React-Native-Button', :path => '../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec'
     pod 'FluentUI-React-Native-Avatar', :path => '../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec'
     pod 'RNCPicker', :path => '../../../node_modules/@react-native-picker/picker'
+    pod 'RNSVG', :path => '../../../node_modules/@microsoft/react-native-svg-desktop'
 
     script_phase name: 'Start Packager',
                  script: start_packager_script,

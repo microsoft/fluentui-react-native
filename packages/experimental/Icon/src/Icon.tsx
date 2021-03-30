@@ -2,7 +2,7 @@ import * as React from 'react';
 import { IconProps, SvgIconProps, FontIconProps } from './Icon.types';
 import { Image, ImageStyle, Platform } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
-import { SvgUri } from 'react-native-svg';
+import { SvgUri } from '@microsoft/react-native-svg-desktop';
 import { mergeStyles } from '@fluentui-react-native/framework';
 import { stagedComponent, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
 import { useTheme } from '@fluentui-react-native/theme-types';

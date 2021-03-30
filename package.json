@@ -44,5 +44,8 @@
       "packages/**",
       "scripts"
     ]
+  },
+  "dependencies": {
+    "@microsoft/react-native-svg-desktop": "^12.1.1"
   }
 }
