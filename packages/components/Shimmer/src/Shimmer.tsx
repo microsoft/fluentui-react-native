@@ -1,87 +1,50 @@
-/** @jsx withSlots */
-import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
-import { ViewProps } from 'react-native';
-import * as React from 'react';
-import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
+import React, {useState, useEffect } from "react";
+import {
+  View,
+  StyleSheet,
+  Animated,
+} from "react-native";
+import { LinearGradient, Svg, Defs,Stop, Rect, Circle} from '@microsoft/react-native-svg-desktop';
 
-const shimmerName = 'Shimmer';
+const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
+export function Shimmer() {
+  const leftValue = useState(new Animated.Value(0))[0]
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+      Animated.timing(leftValue, {
+     toValue: 30,
+     duration: 4000,
+     useNativeDriver:false
+   })]),
+  ).start()
+  })
+    return (
+      <View style={styles.container}>
+          <View>
+            <Svg height="150" width="350" fill="url(#gradient)">
+              <Defs>
+                <AnimatedLinearGradient id="gradient" x1={leftValue} y1="-1" x2="-1" y2="-1" >
+                  <Stop offset="10%" stopColor="#c1c4be" stopOpacity="1" />
+                  <Stop offset="20%" stopColor="#f9faf7" stopOpacity="1" />
+                  <Stop offset="30%" stopColor="#c1c4be" stopOpacity="1" />
+                </AnimatedLinearGradient>
+              </Defs>
+              <Circle cx="50" cy="50" r="35 "/>
+              <Rect x="100" y="15" width="250" height="15" rx="3" ry="3" />
+              <Rect x="100" y="40" width="200" height="15" rx="3" ry="3"/>
+              <Rect x="100" y="65" width="150" height="15" rx="3" ry="3"/>
+            </Svg>
 
-const NativeShimmerView = ensureNativeComponent('MSFShimmerView');
+          </View>
 
-/**
- * Shimmer Tokens are a 1:1 list of the native properties we can set on the native component
- */
-export type ShimmerTokens = {
-  /**
-   * The alpha value of the center of the gradient in the animation
-   */
-  shimmerAlpha?: number;
-
-  /**
-   * The width of the gradient in the animation
-   */
-  shimmerWidth?: number;
-
-  /**
-   * Angle of the direction of the gradient, in radian. 0 means horizontal, Pi/2 means vertical.
-   */
-  shimmerAngle?: number;
-
-  /**
-   * Speed of the animation, in point/seconds.
-   */
-  shimmerSpeed?: number;
-
-  /**
-   * Delay between the end of a shimmering animation and the beginning of the next one, in seconds
-   */
-  shimmerDelay?: number;
-
-  /**
-   * Color to tint the shimmer boxes. Defaults to the Fabric default color.
-   */
-  viewTintColor?: string;
-
-  /**
-   * Corner radius on each view.
-   */
-  cornerRadius?: number;
+      </View>
+    );
 };
 
-/**
- * All of the base native view props, plus the props the native shimmer control needs to receive
- */
-export type NativeShimmerViewProps = ViewProps & ShimmerTokens;
-
-export type ShimmerProps = ViewProps;
-
-interface ShimmerType {
-  props: ShimmerProps;
-  slotProps: { root: NativeShimmerViewProps };
-  tokens: ShimmerTokens;
-}
-
-export const Shimmer = compose<ShimmerType>({
-  displayName: shimmerName,
-  tokens: [
-    {
-      shimmerAlpha: 0.4,
-      shimmerWidth: 180,
-      shimmerAngle: -(Math.PI / 45.0),
-      shimmerSpeed: 350,
-      shimmerDelay: 0.4,
-      viewTintColor: 'rgb(241,241,241)',
-      cornerRadius: 4,
-    },
-    shimmerName,
-  ],
-  slotProps: {
-    root: buildProps(tokens => ({ ...tokens }), []),
-  },
-  slots: { root: NativeShimmerView },
-  render: (props: NativeShimmerViewProps, useSlots: UseSlots<ShimmerType>) => {
-    const Root = useSlots(props).root;
-    return (rest: NativeShimmerViewProps, ...children: React.ReactNode[]) => <Root {...mergeProps(props, rest)}>{children}</Root>;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
   },
 });
 

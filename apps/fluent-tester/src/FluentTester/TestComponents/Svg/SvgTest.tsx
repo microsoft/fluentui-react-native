@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Circle, Defs, G, Line, Path, Polygon, LinearGradient, RadialGradient, Rect, Stop, Svg, SvgCssUri, Use } from 'react-native-svg';
+import { Circle, Defs, G, Line, Path, Polygon, LinearGradient, RadialGradient, Rect, Stop, Svg, SvgCssUri, Use } from '@microsoft/react-native-svg-desktop';
 import TestSvg from './Assets/accessible-icon-brands.svg';
 import { SVG_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
