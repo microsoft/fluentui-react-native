@@ -64,11 +64,19 @@
   },
   "cSpell.words": [
     "Larrson",
+    "Pressable",
+    "Semibold",
+    "Subheadline",
     "TESTPAGE",
     "beachball",
     "consts",
     "fluentui",
+    "focusable",
     "macos",
-    "nuget"
+    "monospace",
+    "nuget",
+    "stylesheet",
+    "uifabricshared",
+    "unemphasized"
   ]
 }

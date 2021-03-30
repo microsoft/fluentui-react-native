@@ -2,6 +2,44 @@
   "name": "@fluentui-react-native/theme",
   "entries": [
     {
+      "date": "Mon, 15 Mar 2021 06:53:17 GMT",
+      "tag": "@fluentui-react-native/theme_v0.5.1",
+      "version": "0.5.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Public source files that are needed for source map",
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "commit": "22b97b9ac5c6a6ba387ce2e0ce8632b211c335cc",
+            "package": "@fluentui-react-native/theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 06 Mar 2021 00:20:05 GMT",
+      "tag": "@fluentui-react-native/theme_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixed a typo",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "1b3d9f6ef10c1138b6f9701b5edf9ef52be623e6",
+            "package": "@fluentui-react-native/theme"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Update to react-native 0.63",
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "commit": "d35d3b45f12a670648edaa7143b210ed43360996",
+            "package": "@fluentui-react-native/theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Oct 2020 22:27:37 GMT",
       "tag": "@fluentui-react-native/theme_v0.4.0",
       "version": "0.4.0",

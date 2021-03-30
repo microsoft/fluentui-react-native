@@ -7,9 +7,32 @@ import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
 import { settings } from './Button.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
-import { filterViewProps, filterImageProps } from '@fluentui-react-native/adapters';
+import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useAsPressable, useKeyCallback, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { Icon, RasterImageIconProps, IconProps } from '@fluentui-react-native/icon';
+
+function createIconProps(src: number | string | IconProps) {
+  if (src === undefined) return null;
+
+  if (typeof src === 'number') {
+    const rasterProps: RasterImageIconProps = { src: src };
+    const asset = Image.resolveAssetSource(+src);
+
+    return {
+      rasterImageSource: rasterProps,
+      width: asset.width,
+      height: asset.height,
+    };
+  }
+  else if (typeof src === 'string') {
+    const rasterProps: RasterImageIconProps = { src: { uri: src as string } };
+    return { rasterImageSource: rasterProps };
+  }
+  else {
+    return src as IconProps;
+  }
+}
 
 export const Button = compose<IButtonType>({
   displayName: buttonName,
@@ -51,7 +74,7 @@ export const Button = compose<IButtonType>({
         onKeyUp: onKeyUp,
       },
       content: { children: content, testID: testID },
-      icon: { source: icon },
+      icon: createIconProps(icon)
     });
 
     return { slotProps, state };
@@ -59,12 +82,10 @@ export const Button = compose<IButtonType>({
   settings,
   render: (Slots: ISlots<IButtonSlotProps>, renderData: IButtonRenderData, ...children: React.ReactNode[]) => {
     const info = renderData.state!.info;
-
-    // We shouldn't have to specify the source prop on Slots.icon, here, but we need another drop from @uifabricshared
     return (
       <Slots.root>
         <Slots.stack>
-          {info.icon && <Slots.icon source={renderData.slotProps!.icon.source} />}
+          {info.icon && <Slots.icon />}
           {info.content && <Slots.content />}
           {children}
         </Slots.stack>
@@ -74,13 +95,13 @@ export const Button = compose<IButtonType>({
   slots: {
     root: View,
     stack: { slotType: View, filter: filterViewProps },
-    icon: { slotType: Image as React.ComponentType<object>, filter: filterImageProps },
+    icon: { slotType: Icon as React.ComponentType<object> },
     content: Text,
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
     stack: [],
-    icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'tintColor' }],
+    icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
     content: [textTokens, foregroundColorTokens],
   },
 });

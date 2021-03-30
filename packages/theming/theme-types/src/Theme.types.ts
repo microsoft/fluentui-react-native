@@ -25,7 +25,8 @@ export interface Theme {
   spacing: Spacing;
   host: {
     // appearance of the theme, this corresponds to the react-native Appearance library values, though can be overwritten
-    appearance: 'light' | 'dark';
+    // dynamic refers to a theme that handles it's own appearance switching, such as one that uses the PlatformColor API
+    appearance: 'light' | 'dark' | 'dynamic';
 
     // Office palette, if running in Office with the native module connected in the theme
     palette?: OfficePalette;

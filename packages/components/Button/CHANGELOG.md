@@ -1,8 +1,60 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Mar 2021 19:48:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.1
+
+Thu, 11 Mar 2021 19:48:16 GMT
+
+### Patches
+
+- Update FluentTester to be mobile friendly on iOS (saadnajmi2@gmail.com)
+
+## 0.14.0
+
+Wed, 10 Mar 2021 04:33:26 GMT
+
+### Minor changes
+
+- Fix typos in button settings (saadnajmi2@gmail.com)
+
+## 0.13.0
+
+Sat, 06 Mar 2021 00:20:05 GMT
+
+### Minor changes
+
+- Update to react-native 0.63 (30809111+acoates-ms@users.noreply.github.com)
+
+### Patches
+
+- Formatted some code (saadnajmi2@gmail.com)
+
+## 0.12.2
+
+Mon, 01 Mar 2021 22:53:12 GMT
+
+### Patches
+
+- Update deps (warleu@microsoft.com)
+
+## 0.12.0
+
+Wed, 13 Jan 2021 20:04:26 GMT
+
+### Minor changes
+
+- update FUA version for button (67026167+chiuam@users.noreply.github.com)
+
+## 0.11.2
+
+Wed, 06 Jan 2021 18:41:50 GMT
+
+### Patches
+
+- Bump react-native-win32 (krsiler@microsoft.com)
 
 ## 0.11.0
 

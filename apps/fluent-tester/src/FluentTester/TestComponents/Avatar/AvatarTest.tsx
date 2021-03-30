@@ -25,6 +25,8 @@ const avatar: React.FunctionComponent<{}> = () => {
       <Avatar primaryText="Kat Larrson" secondaryText="Kat.Larrson@example.com" imageSource={testImageSource} presence="available" />
       <Text>Square Style</Text>
       <Avatar primaryText="FluentUI" avatarStyle="square" />
+      <Text>Custom Background Color</Text>
+      <Avatar primaryText="Kat Larrson" backgroundColor="teal" />
     </Stack>
   );
 };
@@ -89,7 +91,7 @@ export const AvatarTest: React.FunctionComponent<{}> = () => {
     win32Status: 'Backlog',
     uwpStatus: 'Backlog',
     iosStatus: 'Beta',
-    macosStatus: 'Backlog',
+    macosStatus: 'Experimental',
     androidStatus: 'Backlog',
   };
 

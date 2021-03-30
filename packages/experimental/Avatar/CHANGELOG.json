@@ -2,6 +2,119 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Thu, 11 Mar 2021 19:48:16 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.6.2",
+      "version": "0.6.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update FluentTester to be mobile friendly on iOS",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "78158ad0818a26320974a12797d2b9fc757649f0",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 10 Mar 2021 04:33:26 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add a native theming module for iOS",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "35117f9c9d72fc6ecd1ed74fc0facc07fab8d18f",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 08 Mar 2021 18:43:59 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update FluentUI Apple dependency to 0.2.2, set minimum iOS to 13",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "b67f9fe5e0aaaf1c145a68ab1878655678715248",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 06 Mar 2021 00:20:05 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Base theme on macOS changed to apple theme",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "1b3d9f6ef10c1138b6f9701b5edf9ef52be623e6",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Update to react-native 0.63",
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "commit": "d35d3b45f12a670648edaa7143b210ed43360996",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 01 Mar 2021 22:53:12 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.4.3",
+      "version": "0.4.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update deps",
+            "author": "warleu@microsoft.com",
+            "commit": "23cd3d437e63e105f5feee16a1b8ef8e769b61c1",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 12 Feb 2021 19:45:36 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.4.2",
+      "version": "0.4.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update FluentUI Apple version",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "73a55fb4635adc8be808fff2dc6312763011977d",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 13 Jan 2021 16:44:06 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Added macOS implementation of experimental avatar",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "4b8fb620a3a0525f744b47c77367aa51f5176b57",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 17 Dec 2020 00:09:27 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.3.1",
       "version": "0.3.1",

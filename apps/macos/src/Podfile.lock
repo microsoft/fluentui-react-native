@@ -9,7 +9,50 @@ PODS:
     - React-Core (= 0.63.1)
     - React-jsi (= 0.63.1)
     - ReactCommon/turbomodule/core (= 0.63.1)
+  - FluentUI-React-Native-Apple-Theme (0.4.0):
+    - MicrosoftFluentUI (~> 0.2.2)
+    - React
+  - FluentUI-React-Native-Avatar (0.6.1):
+    - MicrosoftFluentUI (~> 0.2.2)
+    - React
+  - FluentUI-React-Native-Button (0.5.1):
+    - MicrosoftFluentUI (~> 0.2.2)
+    - React
   - glog (0.3.5)
+  - MicrosoftFluentUI (0.2.2):
+    - MicrosoftFluentUI/AvatarView_mac (= 0.2.2)
+    - MicrosoftFluentUI/Button_mac (= 0.2.2)
+    - MicrosoftFluentUI/Calendar_ios (= 0.2.2)
+    - MicrosoftFluentUI/Card_ios (= 0.2.2)
+    - MicrosoftFluentUI/CommandBar_ios (= 0.2.2)
+    - MicrosoftFluentUI/Controls_ios (= 0.2.2)
+    - MicrosoftFluentUI/Core_ios (= 0.2.2)
+    - MicrosoftFluentUI/Core_mac (= 0.2.2)
+    - MicrosoftFluentUI/DatePicker_mac (= 0.2.2)
+    - MicrosoftFluentUI/Drawer_ios (= 0.2.2)
+    - MicrosoftFluentUI/HUD_ios (= 0.2.2)
+    - MicrosoftFluentUI/Link_mac (= 0.2.2)
+    - MicrosoftFluentUI/Notification_ios (= 0.2.2)
+    - MicrosoftFluentUI/PillButtonBar_ios (= 0.2.2)
+    - MicrosoftFluentUI/PopupMenu_ios (= 0.2.2)
+    - MicrosoftFluentUI/Presenters_ios (= 0.2.2)
+    - MicrosoftFluentUI/SegmentedControl_ios (= 0.2.2)
+    - MicrosoftFluentUI/Separator_mac (= 0.2.2)
+    - MicrosoftFluentUI/Shimmer_ios (= 0.2.2)
+    - MicrosoftFluentUI/TabBar_ios (= 0.2.2)
+    - MicrosoftFluentUI/Tooltip_ios (= 0.2.2)
+    - MicrosoftFluentUI/Utilities_ios (= 0.2.2)
+  - MicrosoftFluentUI/AvatarView_mac (0.2.2):
+    - MicrosoftFluentUI/Core_mac
+  - MicrosoftFluentUI/Button_mac (0.2.2):
+    - MicrosoftFluentUI/Core_mac
+  - MicrosoftFluentUI/Core_mac (0.2.2)
+  - MicrosoftFluentUI/DatePicker_mac (0.2.2):
+    - MicrosoftFluentUI/Core_mac
+  - MicrosoftFluentUI/Link_mac (0.2.2):
+    - MicrosoftFluentUI/Core_mac
+  - MicrosoftFluentUI/Separator_mac (0.2.2):
+    - MicrosoftFluentUI/Core_mac
   - RCT-Folly (2020.01.13.00):
     - boost-for-react-native
     - DoubleConversion
@@ -245,9 +288,11 @@ PODS:
     - React-Core (= 0.63.1)
     - React-cxxreact (= 0.63.1)
     - React-jsi (= 0.63.1)
-  - ReactTestApp-DevSupport (0.3.2)
+  - ReactTestApp-DevSupport (0.3.13)
   - ReactTestApp-Resources (1.0.0-dev)
-  - SwiftLint (0.41.0)
+  - RNCPicker (1.9.11):
+    - React-Core
+  - SwiftLint (0.43.0)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -255,6 +300,9 @@ DEPENDENCIES:
   - DoubleConversion (from `../../../node_modules/react-native-macos/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../../../node_modules/react-native-macos/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec`)
+  - FluentUI-React-Native-Apple-Theme (from `../../../packages/theming/apple-theme/FluentUIReactNativeAppleTheme.podspec`)
+  - FluentUI-React-Native-Avatar (from `../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec`)
+  - FluentUI-React-Native-Button (from `../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec`)
   - glog (from `../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
   - RCT-Folly (from `../../../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../../../node_modules/react-native-macos/Libraries/RCTRequired`)
@@ -281,11 +329,13 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../../../node_modules/react-native-macos/ReactCommon`)
   - ReactTestApp-DevSupport (from `../../../node_modules/react-native-test-app`)
   - ReactTestApp-Resources (from `..`)
+  - "RNCPicker (from `../../../node_modules/@react-native-picker/picker`)"
   - SwiftLint
   - Yoga (from `../../../node_modules/react-native-macos/ReactCommon/yoga`)
 
 SPEC REPOS:
   trunk:
+    - MicrosoftFluentUI
     - SwiftLint
 
 EXTERNAL SOURCES:
@@ -297,6 +347,12 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-macos/Libraries/FBLazyVector"
   FBReactNativeSpec:
     :path: "../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec"
+  FluentUI-React-Native-Apple-Theme:
+    :path: "../../../packages/theming/apple-theme/FluentUIReactNativeAppleTheme.podspec"
+  FluentUI-React-Native-Avatar:
+    :path: "../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec"
+  FluentUI-React-Native-Button:
+    :path: "../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec"
   glog:
     :podspec: "../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec"
   RCT-Folly:
@@ -345,6 +401,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-test-app"
   ReactTestApp-Resources:
     :path: ".."
+  RNCPicker:
+    :path: "../../../node_modules/@react-native-picker/picker"
   Yoga:
     :path: "../../../node_modules/react-native-macos/ReactCommon/yoga"
 
@@ -353,7 +411,11 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 87ca368919ae0ec70816fb8a42252ef59dc05c94
   FBReactNativeSpec: 7c0591658d85effad209fc4f45b6c9760f9e5842
+  FluentUI-React-Native-Apple-Theme: cb23903e77760527bcda56506a8b2d795789b432
+  FluentUI-React-Native-Avatar: a3de9c856424439e0446c7db9f8e03bb0afccd3d
+  FluentUI-React-Native-Button: 0ea3402fe5403a8d0ab57c49c986c1de64ec900f
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
+  MicrosoftFluentUI: 8a1ef14a8479106c33822d05b774e04051bb33f2
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
   RCTRequired: f0ba811ba36bbe463b0151cbda362853106c13ac
   RCTTypeSafety: 10f774586f2956b7cf547cc97f2261eb22ee2a25
@@ -375,11 +437,12 @@ SPEC CHECKSUMS:
   React-RCTText: fa6a04a850612aab9a26044c21cd468d305acfbf
   React-RCTVibration: 76c90b5321d7a29beac4167f570f61752e886ff9
   ReactCommon: 2b36aa7cd56bc9a0376b013db964e8b17a6a18f9
-  ReactTestApp-DevSupport: fac724ea8817d3874faf6c70a7cb65e383bbf2db
+  ReactTestApp-DevSupport: 12d9f285a44ff0cb7962a213621f87d3e6de9288
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
-  SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
+  RNCPicker: 6780c753e9e674065db90d9c965920516402579d
+  SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   Yoga: 6f6f412e10cf9acb93bb0e290613784603d2f0c9
 
-PODFILE CHECKSUM: ca628e6b1bb596fd87c049f88eafa200d60995e5
+PODFILE CHECKSUM: ee017c1f20907cc14fb6752c327c0c0fc04bbde0
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1
