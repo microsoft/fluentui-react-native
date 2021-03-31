@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Animated,
 } from "react-native";
-import { LinearGradient, Svg, Defs,Stop, Rect, Circle} from '@microsoft/react-native-svg-desktop';
+import { LinearGradient, Svg, Defs, Stop, Rect, Circle, ClipPath} from '@microsoft/react-native-svg-desktop';
 
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
 export function Shimmer() {
@@ -14,7 +14,8 @@ export function Shimmer() {
       Animated.sequence([
       Animated.timing(leftValue, {
      toValue: 30,
-     duration: 4000,
+     duration: 9000,
+     delay:0,
      useNativeDriver:false
    })]),
   ).start()
@@ -22,22 +23,30 @@ export function Shimmer() {
     return (
       <View style={styles.container}>
           <View>
-            <Svg height="150" width="350" fill="url(#gradient)">
+            <Svg height="500" width="850" >
               <Defs>
-                <AnimatedLinearGradient id="gradient" x1={leftValue} y1="-1" x2="-1" y2="-1" >
-                  <Stop offset="10%" stopColor="#c1c4be" stopOpacity="1" />
-                  <Stop offset="20%" stopColor="#f9faf7" stopOpacity="1" />
-                  <Stop offset="30%" stopColor="#c1c4be" stopOpacity="1" />
+                <AnimatedLinearGradient id="gradient" x1={leftValue} y1="0" x2="-1" y2="-1" >
+                  <Stop offset="10%" stopColor="#E1E1E1" stopOpacity="1" />
+                  <Stop offset="20%" stopColor="white" stopOpacity="1" />
+                  <Stop offset="30%" stopColor="#E1E1E1" stopOpacity="1" />
                 </AnimatedLinearGradient>
+                <ClipPath id="shimmerView">
+                <Circle cx="80" cy="80" r="55"/>
+                <Rect x="150" y="30" width="450" height="25" rx="3" ry="3" />
+                <Rect x="150" y="68" width="300" height="25" rx="3" ry="3"/>
+                <Rect x="150" y="105" width="250" height="25" rx="3" ry="3"/>
+                </ClipPath>
               </Defs>
-              <Circle cx="50" cy="50" r="35 "/>
-              <Rect x="100" y="15" width="250" height="15" rx="3" ry="3" />
-              <Rect x="100" y="40" width="200" height="15" rx="3" ry="3"/>
-              <Rect x="100" y="65" width="150" height="15" rx="3" ry="3"/>
+              <Rect
+                x="0"
+                y="0"
+                width="700"
+                height="500"
+                fill="url(#gradient)"
+                clipPath="url(#shimmerView)"
+              />
             </Svg>
-
           </View>
-
       </View>
     );
 };
