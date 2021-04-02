@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme",
   "entries": [
     {
+      "date": "Mon, 15 Mar 2021 06:53:17 GMT",
+      "tag": "@fluentui-react-native/theme_v0.5.1",
+      "version": "0.5.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Public source files that are needed for source map",
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "commit": "22b97b9ac5c6a6ba387ce2e0ce8632b211c335cc",
+            "package": "@fluentui-react-native/theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 06 Mar 2021 00:20:05 GMT",
       "tag": "@fluentui-react-native/theme_v0.5.0",
       "version": "0.5.0",
