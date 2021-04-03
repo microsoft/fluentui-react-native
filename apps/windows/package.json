@@ -12,16 +12,17 @@
     "e2etest": "rimraf reports/* && wdio",
     "generate-report": "allure generate allure-results --clean && allure open",
     "lint": "eslint .",
+    "prewindows": "install-windows-test-app",
     "report": "allure generate allure-results --clean",
     "start": "react-native rnx-start",
     "test": "jest",
-    "windows": "install-windows-test-app && react-native run-windows"
+    "windows": "react-native run-windows"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.21.0",
     "react": "16.13.1",
     "react-native": "^0.63.4",
-    "react-native-test-app": "^0.4.3",
+    "react-native-test-app": "^0.5.3",
     "react-native-windows": "^0.62.1"
   },
   "devDependencies": {
