@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "upgrade react-native-svg",
+  "packageName": "@fluentui/react-native",
+  "email": "tamasane@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-04-07T22:56:51.842Z"
+}

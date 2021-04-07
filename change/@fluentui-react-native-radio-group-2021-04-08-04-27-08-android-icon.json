@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Update Radio Button focus border style to be WCAG 2.1 compliant (#653)",
+  "packageName": "@fluentui-react-native/radio-group",
+  "email": "tamasane@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-04-07T22:56:22.212Z"
+}
