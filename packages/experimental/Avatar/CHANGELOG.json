@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Wed, 07 Apr 2021 22:19:35 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add an NSNull check to the image property",
+            "author": "sanajmi@microsoft.com",
+            "commit": "ef2f33032f73046d8a661df5b8a95f4219c7dec5",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "add test case for custom border image",
+            "author": "sanajmi@microsoft.com",
+            "commit": "3c0f5496f0daeb748c6b2daac8d0465a1d58a672",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Mar 2021 19:48:16 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.6.2",
       "version": "0.6.2",
