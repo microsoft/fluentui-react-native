@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Wed, 07 Apr 2021 22:19:35 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Apr 2021 23:41:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.2
+
+Wed, 07 Apr 2021 23:41:02 GMT
+
+### Patches
+
+- upgrade react-native-svg (tamasane@gmail.com)
 
 ## 0.2.1
 

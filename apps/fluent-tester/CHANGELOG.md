@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 07 Apr 2021 22:19:35 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Apr 2021 23:41:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.22.0
+
+Wed, 07 Apr 2021 23:41:02 GMT
+
+### Minor changes
+
+- added svg, transformer to android (tamasane@gmail.com)
 
 ## 0.21.1
 
