@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "add test case for custom border image",
+  "packageName": "@fluentui-react-native/experimental-avatar",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-04-02T02:53:59.759Z"
+}

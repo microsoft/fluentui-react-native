@@ -9,16 +9,16 @@ PODS:
     - React-Core (= 0.63.4)
     - React-jsi (= 0.63.4)
     - ReactCommon/turbomodule/core (= 0.63.4)
-  - FluentUI-React-Native-Apple-Theme (0.4.1):
+  - FluentUI-React-Native-Apple-Theme (0.4.2):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
-  - FluentUI-React-Native-Avatar (0.6.2):
+  - FluentUI-React-Native-Avatar (0.6.3):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
-  - FluentUI-React-Native-Button (0.5.2):
+  - FluentUI-React-Native-Button (0.5.3):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
-  - FluentUI-React-Native-Shimmer (0.6.2):
+  - FluentUI-React-Native-Shimmer (0.6.3):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
   - Folly (2020.01.13.00):
@@ -442,15 +442,15 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
-  DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
+  DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
-  FluentUI-React-Native-Apple-Theme: 8cb97ccc0072dff5436884ea8838da0f772186b4
-  FluentUI-React-Native-Avatar: 0ff639466867066a1f2ba1074e166b0190402f20
-  FluentUI-React-Native-Button: 67a38324ca749cffba64a015d7d2a9f3e02e3cc8
-  FluentUI-React-Native-Shimmer: 0e4b1415c1d13eda2310c2b43c570eccbf5b7e93
+  FluentUI-React-Native-Apple-Theme: 5096ba1ccdce75cac6af8dfb6f43880828d6a8e1
+  FluentUI-React-Native-Avatar: 1a463d15fe9cef99c18dcec0516ebd5459fe2e25
+  FluentUI-React-Native-Button: b882911504fd4b8ad21b6391b6fb49d908276f5e
+  FluentUI-React-Native-Shimmer: 73e604318cff67e942b04ac6b7f3908ce4fa6b38
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
-  glog: 1f3da668190260b06b429bb211bfbee5cd790c28
+  glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   MicrosoftFluentUI: 8a1ef14a8479106c33822d05b774e04051bb33f2
   QRCodeReader.swift: 373a389fe9a22d513c879a32a6f647c58f4ef572
   RCTRequired: 082f10cd3f905d6c124597fd1c14f6f2655ff65e
