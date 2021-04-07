@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Thu, 11 Mar 2021 19:48:16 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Apr 2021 22:19:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Wed, 07 Apr 2021 22:19:35 GMT
+
+### Minor changes
+
+- add test case for custom border image (sanajmi@microsoft.com)
+
+### Patches
+
+- Add an NSNull check to the image property (sanajmi@microsoft.com)
 
 ## 0.6.2
 

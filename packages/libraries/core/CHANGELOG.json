@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Wed, 07 Apr 2021 22:19:35 GMT",
+      "tag": "@fluentui/react-native_v0.23.4",
+      "version": "0.23.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add repository link",
+            "author": "krsiler@microsoft.com",
+            "commit": "41364a1197981372ed0954951f367dd8cfd535e5",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Mar 2021 19:48:16 GMT",
       "tag": "@fluentui/react-native_v0.23.1",
       "version": "0.23.1",
