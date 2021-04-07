@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Wed, 07 Apr 2021 22:19:35 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Apr 2021 23:41:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.1
+
+Wed, 07 Apr 2021 23:41:02 GMT
+
+### Patches
+
+- Add the rainbow gradient border image test case to experimental avatar (#654) (tamasane@gmail.com)
 
 ## 0.7.0
 

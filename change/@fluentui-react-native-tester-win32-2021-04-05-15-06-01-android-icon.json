@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "upgrade react-native-svg",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "tamasane@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-04-05T09:36:01.397Z"
-}

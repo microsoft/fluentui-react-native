@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "added svg, transformer to android",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "tamasane@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-04-01T08:11:56.684Z"
-}

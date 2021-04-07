@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add the rainbow gradient border image test case to experimental avatar (#654)",
-  "packageName": "@fluentui-react-native/experimental-avatar",
-  "email": "tamasane@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-04-07T22:56:31.314Z"
-}
