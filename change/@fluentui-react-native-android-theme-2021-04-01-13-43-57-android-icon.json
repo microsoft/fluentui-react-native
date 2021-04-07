@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "bump package versions manually",
-  "packageName": "@fluentui-react-native/android-theme",
-  "email": "tamasane@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-04-01T08:13:57.489Z"
-}
