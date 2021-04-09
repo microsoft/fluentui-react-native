@@ -31,11 +31,11 @@
     <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Shimmer\libFluentUI-React-Native-Shimmer.a" target="Ship-iphonesimulator"/>
 
     <!-- macOS debug -->
-    <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Apple-Theme\libFluentUI-React-Native-Apple-Theme.a" target="Debug-macosx"/>
+    <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Apple-Theme\libFluentUI-React-Native-Apple-Theme.a" target="Debug-macosx"/>
     <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Debug-macosx"/>
     <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Debug-macosx"/>
     <!-- macOS ship -->
-    <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Apple-Theme\libFluentUI-React-Native-Apple-Theme.a" target="Ship-macosx"/>
+    <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Apple-Theme\libFluentUI-React-Native-Apple-Theme.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Ship-macosx"/>
 
