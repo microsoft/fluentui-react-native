@@ -9,13 +9,13 @@ PODS:
     - React-Core (= 0.63.1)
     - React-jsi (= 0.63.1)
     - ReactCommon/turbomodule/core (= 0.63.1)
-  - FluentUI-React-Native-Apple-Theme (0.4.1):
+  - FluentUI-React-Native-Apple-Theme (0.4.2):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
-  - FluentUI-React-Native-Avatar (0.6.2):
+  - FluentUI-React-Native-Avatar (0.6.3):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
-  - FluentUI-React-Native-Button (0.5.2):
+  - FluentUI-React-Native-Button (0.5.3):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
   - glog (0.3.5)
@@ -292,7 +292,7 @@ PODS:
   - ReactTestApp-Resources (1.0.0-dev)
   - RNCPicker (1.9.11):
     - React-Core
-  - RNSVG (12.1.1):
+  - RNSVG (12.1.1-0):
     - React
   - SwiftLint (0.43.0)
   - Yoga (1.14.0)
@@ -332,7 +332,7 @@ DEPENDENCIES:
   - ReactTestApp-DevSupport (from `../../../node_modules/react-native-test-app`)
   - ReactTestApp-Resources (from `..`)
   - "RNCPicker (from `../../../node_modules/@react-native-picker/picker`)"
-  - "RNSVG (from `../../../node_modules/@microsoft/react-native-svg-desktop`)"
+  - RNSVG (from `../../../node_modules/react-native-svg`)
   - SwiftLint
   - Yoga (from `../../../node_modules/react-native-macos/ReactCommon/yoga`)
 
@@ -407,7 +407,7 @@ EXTERNAL SOURCES:
   RNCPicker:
     :path: "../../../node_modules/@react-native-picker/picker"
   RNSVG:
-    :path: "../../../node_modules/@microsoft/react-native-svg-desktop"
+    :path: "../../../node_modules/react-native-svg"
   Yoga:
     :path: "../../../node_modules/react-native-macos/ReactCommon/yoga"
 
@@ -416,9 +416,9 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 87ca368919ae0ec70816fb8a42252ef59dc05c94
   FBReactNativeSpec: 7c0591658d85effad209fc4f45b6c9760f9e5842
-  FluentUI-React-Native-Apple-Theme: 8cb97ccc0072dff5436884ea8838da0f772186b4
-  FluentUI-React-Native-Avatar: 0ff639466867066a1f2ba1074e166b0190402f20
-  FluentUI-React-Native-Button: 67a38324ca749cffba64a015d7d2a9f3e02e3cc8
+  FluentUI-React-Native-Apple-Theme: 5096ba1ccdce75cac6af8dfb6f43880828d6a8e1
+  FluentUI-React-Native-Avatar: 1a463d15fe9cef99c18dcec0516ebd5459fe2e25
+  FluentUI-React-Native-Button: b882911504fd4b8ad21b6391b6fb49d908276f5e
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: 8a1ef14a8479106c33822d05b774e04051bb33f2
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
@@ -445,10 +445,10 @@ SPEC CHECKSUMS:
   ReactTestApp-DevSupport: 12d9f285a44ff0cb7962a213621f87d3e6de9288
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
   RNCPicker: 6780c753e9e674065db90d9c965920516402579d
-  RNSVG: 369f5b1a64dea3abfda8f5e1f547c01357caedcc
+  RNSVG: 1a8855adeb20c5beb0a808281608315fc1092d15
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   Yoga: 6f6f412e10cf9acb93bb0e290613784603d2f0c9
 
-PODFILE CHECKSUM: 8778c8f647aad7f1b541fc31fc11921f8e02d8a7
+PODFILE CHECKSUM: 601a04a4aafaf36828a33238273b0ee9dc566464
 
 COCOAPODS: 1.10.1

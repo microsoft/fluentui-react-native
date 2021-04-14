@@ -66,7 +66,7 @@ To allow Typescript to import files with the .svg extension, add a declarations.
 
 ```
 declare module "*.svg" {
-  import { SvgProps } from "@microsoft/react-native-svg-desktop";
+  import { SvgProps } from "react-native-svg";
   const content: React.FC<SvgProps>;
   export default content;
 }
@@ -80,7 +80,7 @@ import TestSvg from './assets/test.svg';
 
 ## Using SVG elements
 
-We have implemented native support for [react-native-svg](https://github.com/react-native-svg/react-native-svg) so most of the documentation there should apply. (For macOS, check out [this fork](https://github.com/microsoft/react-native-svg-desktop) of react-native-svg.)
+We have implemented native support for [react-native-svg](https://github.com/react-native-svg/react-native-svg) so most of the documentation there should apply.
 
 There is support for displaying svgs from these kinds of sources:
 

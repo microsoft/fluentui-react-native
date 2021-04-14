@@ -1944,14 +1944,6 @@
   dependencies:
     "@microsoft/node-core-library" "3.19.3"
 
-"@microsoft/react-native-svg-desktop@^12.1.1":
-  version "12.1.1"
-  resolved "https://registry.yarnpkg.com/@microsoft/react-native-svg-desktop/-/react-native-svg-desktop-12.1.1.tgz#5d4be2d4bfa0bbf6755ff5eaebd3f06c78f66c65"
-  integrity sha512-KBAlcTDbqIZPYBs5emsJnBvhVqEeqB2nJuDodw0/nOp7d009Zd+pu5BOkrOJbqEQxBv4eqPvN9UOZ+eUQJNzvg==
-  dependencies:
-    css-select "^2.1.0"
-    css-tree "^1.0.0-alpha.39"
-
 "@microsoft/task-scheduler@^2.7.0":
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/@microsoft/task-scheduler/-/task-scheduler-2.7.0.tgz#ec08645bbf708299a2d13bfd56a1a928189cd33c"
@@ -13980,6 +13972,14 @@ react-native-svg@^11.0.0:
   version "11.0.1"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-11.0.1.tgz#e92e7e9f9cb2604333fd5014fd4edcf62fea6496"
   integrity sha512-XriIwSoe9eTtKyqxpNC6POSOqmXAB9mZQOm5tMoaimEqQOMfzgYrBoF9nY6VPGmaH5dRlWBqnnBf389APiZFcQ==
+  dependencies:
+    css-select "^2.1.0"
+    css-tree "^1.0.0-alpha.39"
+
+react-native-svg@^12.1.1-0:
+  version "12.1.1-0"
+  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-12.1.1-0.tgz#e453d33d0d464d60a03cf44463557a75ce54915e"
+  integrity sha512-fj4R5yQWNgSLKO4umOLEeMYWE6QQ90OSzXPeh8kQIFDd2k6RDo8i9tbNNeGWMobQ83LexYgsE3j5B5cWIBx5Pg==
   dependencies:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
