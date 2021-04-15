@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add macOS support",
-  "packageName": "@fluentui-react-native/icon",
-  "email": "adam.gleitman@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-04-15T17:42:22.667Z"
-}

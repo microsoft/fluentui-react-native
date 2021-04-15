@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Wed, 07 Apr 2021 23:41:02 GMT and should not be manually modified.
+This log was last generated on Thu, 15 Apr 2021 20:08:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.0
+
+Thu, 15 Apr 2021 20:08:17 GMT
+
+### Minor changes
+
+- Upgrade react-native-svg to 12.1.1-0 everywhere (adam.gleitman@gmail.com)
 
 ## 0.8.8
 
