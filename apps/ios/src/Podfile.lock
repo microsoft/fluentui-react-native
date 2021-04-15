@@ -403,7 +403,11 @@ PODS:
     - React-jsi (= 0.63.4)
   - ReactTestApp-DevSupport (0.3.13)
   - ReactTestApp-Resources (1.0.0-dev)
+<<<<<<< HEAD
   - RNSVG (12.1.1):
+=======
+  - RNSVG (12.1.1-0):
+>>>>>>> Add Icon support for macOS (#645)
     - React
   - SwiftLint (0.43.0)
   - Yoga (1.14.0)
@@ -527,7 +531,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
-  DoubleConversion: cde416483dac037923206447da6e1454df403714
+  DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
   FluentUI-React-Native-Apple-Theme: 5096ba1ccdce75cac6af8dfb6f43880828d6a8e1
@@ -535,7 +539,7 @@ SPEC CHECKSUMS:
   FluentUI-React-Native-Button: b882911504fd4b8ad21b6391b6fb49d908276f5e
   FluentUI-React-Native-Shimmer: 73e604318cff67e942b04ac6b7f3908ce4fa6b38
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
-  glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
+  glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   MicrosoftFluentUI: 8a1ef14a8479106c33822d05b774e04051bb33f2
   QRCodeReader.swift: 373a389fe9a22d513c879a32a6f647c58f4ef572
   RCTRequired: 082f10cd3f905d6c124597fd1c14f6f2655ff65e
@@ -561,7 +565,11 @@ SPEC CHECKSUMS:
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
   ReactTestApp-DevSupport: 12d9f285a44ff0cb7962a213621f87d3e6de9288
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
+<<<<<<< HEAD
   RNSVG: 369f5b1a64dea3abfda8f5e1f547c01357caedcc
+=======
+  RNSVG: 1a8855adeb20c5beb0a808281608315fc1092d15
+>>>>>>> Add Icon support for macOS (#645)
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
