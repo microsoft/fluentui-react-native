@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 15 Mar 2021 06:53:17 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Apr 2021 23:41:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.22.0
+
+Wed, 07 Apr 2021 23:41:02 GMT
+
+### Minor changes
+
+- added svg, transformer to android (tamasane@gmail.com)
+
+## 0.21.1
+
+Wed, 07 Apr 2021 22:19:35 GMT
+
+### Patches
+
+- Add test case for custom border image (sanajmi@microsoft.com)
 
 ## 0.21.0
 

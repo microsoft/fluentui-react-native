@@ -2,6 +2,36 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Wed, 07 Apr 2021 23:41:02 GMT",
+      "tag": "@fluentui/react-native_v0.23.5",
+      "version": "0.23.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "upgrade react-native-svg",
+            "author": "tamasane@gmail.com",
+            "commit": "b8f260a8b9ebfb579c059a5c9dd73ed6a90d558c",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 07 Apr 2021 22:19:35 GMT",
+      "tag": "@fluentui/react-native_v0.23.4",
+      "version": "0.23.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add repository link",
+            "author": "krsiler@microsoft.com",
+            "commit": "41364a1197981372ed0954951f367dd8cfd535e5",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Mar 2021 19:48:16 GMT",
       "tag": "@fluentui/react-native_v0.23.1",
       "version": "0.23.1",

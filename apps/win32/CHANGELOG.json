@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Wed, 07 Apr 2021 23:41:02 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.8.8",
+      "version": "0.8.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "upgrade react-native-svg",
+            "author": "tamasane@gmail.com",
+            "commit": "b8f260a8b9ebfb579c059a5c9dd73ed6a90d558c",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Mar 2021 19:48:16 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.8.4",
       "version": "0.8.4",
