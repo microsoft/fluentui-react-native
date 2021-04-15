@@ -12,7 +12,7 @@ PODS:
   - FluentUI-React-Native-Apple-Theme (0.4.2):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
-  - FluentUI-React-Native-Avatar (0.6.3):
+  - FluentUI-React-Native-Avatar (0.7.1):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
   - FluentUI-React-Native-Button (0.5.3):
@@ -417,7 +417,7 @@ SPEC CHECKSUMS:
   FBLazyVector: 87ca368919ae0ec70816fb8a42252ef59dc05c94
   FBReactNativeSpec: 7c0591658d85effad209fc4f45b6c9760f9e5842
   FluentUI-React-Native-Apple-Theme: 5096ba1ccdce75cac6af8dfb6f43880828d6a8e1
-  FluentUI-React-Native-Avatar: 1a463d15fe9cef99c18dcec0516ebd5459fe2e25
+  FluentUI-React-Native-Avatar: 20e879a5477bf6a32510796d139d699dad5f7f5f
   FluentUI-React-Native-Button: b882911504fd4b8ad21b6391b6fb49d908276f5e
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: 8a1ef14a8479106c33822d05b774e04051bb33f2
