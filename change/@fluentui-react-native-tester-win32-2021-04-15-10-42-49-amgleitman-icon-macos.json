@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Upgrade react-native-svg to 12.1.1-0 everywhere",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "adam.gleitman@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-04-15T17:41:08.254Z"
+}
