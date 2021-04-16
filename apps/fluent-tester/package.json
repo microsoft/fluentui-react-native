@@ -19,7 +19,7 @@
     "code-style": "fluentui-scripts code-style",
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
-    "start": "react-native rnx-start",
+    "start": "react-native start",
     "test": "fluentui-scripts jest",
     "bundle": "react-native rnx-bundle --dev false"
   },
