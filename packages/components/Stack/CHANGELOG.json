@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/stack",
   "entries": [
     {
+      "date": "Thu, 15 Apr 2021 20:08:17 GMT",
+      "tag": "@fluentui-react-native/stack_v0.5.1",
+      "version": "0.5.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge remote-tracking branch 'upstream/master' into amgleitman/icon-macos",
+            "author": "adam.gleitman@gmail.com",
+            "commit": "06834001f0f0238d2a7ad99a51a430b28eaa8daa",
+            "package": "@fluentui-react-native/stack"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 06 Mar 2021 00:20:05 GMT",
       "tag": "@fluentui-react-native/stack_v0.5.0",
       "version": "0.5.0",
