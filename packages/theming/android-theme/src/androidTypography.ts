@@ -24,10 +24,10 @@ export function androidTypography(): Typography {
     },
     families: {
       primary: 'sans-serif', // sans-serif, weight=400
-      primaryBold: 'sans-serif-medium', // sans-serif, weight=500
+      primarySemibold: 'sans-serif-medium', // sans-serif, weight=500
       primaryLight: 'sans-serif-light', // sans-serif, weight=300
       secondary: 'System',
-      cursive: 'System',
+      cursive: 'cursive',
       monospace: 'monospace',
       sansSerif: 'sans-serif',
       serif: 'serif',
@@ -35,17 +35,17 @@ export function androidTypography(): Typography {
     variants: {
       captionStandard: { face: 'primary', size: 'caption' },
       secondaryStandard: { face: 'primary', size: 'secondary' },
-      secondarySemibold: { face: 'primaryBold', size: 'secondary' },
+      secondarySemibold: { face: 'primarySemibold', size: 'secondary' },
       bodyStandard: { face: 'primary', size: 'body' },
-      bodySemibold: { face: 'primaryBold', size: 'body' },
+      bodySemibold: { face: 'primarySemibold', size: 'body' },
       subheaderStandard: { face: 'primary', size: 'subheader' },
-      subheaderSemibold: { face: 'primaryBold', size: 'subheader' },
+      subheaderSemibold: { face: 'primarySemibold', size: 'subheader' },
       headerStandard: { face: 'primary', size: 'header' },
-      headerSemibold: { face: 'primaryBold', size: 'header' },
+      headerSemibold: { face: 'primarySemibold', size: 'header' },
       heroStandard: { face: 'primary', size: 'hero' },
-      heroSemibold: { face: 'primaryBold', size: 'hero' },
+      heroSemibold: { face: 'primarySemibold', size: 'hero' },
       heroLargeStandard: { face: 'primary', size: 'heroLarge' },
-      heroLargeSemibold: { face: 'primaryBold', size: 'heroLarge' },
+      heroLargeSemibold: { face: 'primarySemibold', size: 'heroLarge' },
     } as Variants,
   };
 
