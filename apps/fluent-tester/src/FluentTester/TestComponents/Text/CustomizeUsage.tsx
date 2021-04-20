@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
@@ -13,11 +13,31 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const IndigoHeroBold = Text.customize({ tokens: { variant: 'heroStandard', fontWeight: '700', color: '#4b0082' } });
   const PurpleHeroLargeBold = Text.customize({ tokens: { variant: 'heroLargeStandard', fontWeight: '700', color: '#8402c4' } });
 
-  const ArialBlack = Text.customize({ tokens: { variant: 'heroLargeStandard', fontFamily: 'Arial Black' } });
+  // Android has a limited fontFamily support and unknown fonts fallback to sans-serif (Roboto).
+  // Custom fonts (ttf, otf) are supported but need to be linked using 'react-native link'
+  // The supported font families can be found as <aliases> at https://android.googlesource.com/platform/frameworks/base/+/master/data/fonts/fonts.xml
+  const CustomFontNames = {
+    ...Platform.select({
+      android: {
+        ArialBlack: 'arial',
+        CourierNew: 'courier new',
+        Georgia: 'georgia',
+        TimesNewRoman: 'times new roman',
+      },
+      default: {
+        ArialBlack: 'Arial Black',
+        CourierNew: 'Courier New',
+        Georgia: 'Georgia',
+        TimesNewRoman: 'Times New Roman',
+      },
+    }),
+  };
+
+  const ArialBlack = Text.customize({ tokens: { variant: 'heroLargeStandard', fontFamily: CustomFontNames.ArialBlack } });
   const BrushScriptMT = Text.customize({ tokens: { variant: 'heroStandard', fontFamily: 'Brush Script MT' } });
-  const CourierNew = Text.customize({ tokens: { variant: 'headerStandard', fontFamily: 'Courier New' } });
-  const Georgia = Text.customize({ tokens: { variant: 'subheaderStandard', fontFamily: 'Georgia' } });
-  const TimesNewRoman = Text.customize({ tokens: { variant: 'secondaryStandard', fontFamily: 'Times New Roman' } });
+  const CourierNew = Text.customize({ tokens: { variant: 'headerStandard', fontFamily: CustomFontNames.CourierNew } });
+  const Georgia = Text.customize({ tokens: { variant: 'subheaderStandard', fontFamily: CustomFontNames.Georgia } });
+  const TimesNewRoman = Text.customize({ tokens: { variant: 'secondaryStandard', fontFamily: CustomFontNames.TimesNewRoman } });
   const Wingdings = Text.customize({ tokens: { variant: 'captionStandard', fontFamily: 'Wingdings' } });
 
   return (
