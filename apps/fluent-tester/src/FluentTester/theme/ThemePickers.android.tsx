@@ -24,6 +24,11 @@ const getThemedDropdownStyles = themedStyleSheet((t: Theme) => {
       fontSize: 12,
       color: t.colors.bodyText,
     },
+    dropdownBorder: {
+      borderStyle: 'solid',
+      borderColor: t.colors.disabledBodyText,
+      borderWidth: 1,
+    },
   };
 });
 
@@ -43,40 +48,41 @@ export const ThemePickers: React.FunctionComponent<{}> = () => {
   }, []);
 
   const theme = useTheme();
-  const themePickerStyles = getThemedDropdownStyles(theme);
+  const themedPickerStyles = getThemedDropdownStyles(theme);
   const dropdownProps: PickerPropsAndroid & { dropdownIconColor: string } = {
-    style: themePickerStyles.dropdown,
+    style: themedPickerStyles.dropdown,
     mode: 'dropdown',
     dropdownIconColor: theme.colors.buttonIcon,
   };
 
+  const Dropdown = (props) => {
+    const { initial, onValueChange, options } = props;
+    return (
+      <View style={themedPickerStyles.dropdownBorder}>
+        <Picker selectedValue={initial} onValueChange={onValueChange} {...dropdownProps}>
+          {options.map((entry, index) => (
+            <Picker.Item label={entry.label} value={entry.value} key={`entry${index}`} />
+          ))}
+        </Picker>
+      </View>
+    );
+  };
+
   return (
-    <View style={themePickerStyles.pickerRoot}>
-      <View style={themePickerStyles.picker}>
+    <View style={themedPickerStyles.pickerRoot}>
+      <View style={themedPickerStyles.picker}>
         <PickerLabel>Theme: </PickerLabel>
-        <Picker selectedValue={testerTheme.themeName} onValueChange={onThemeSelected} {...dropdownProps}>
-          {themeChoices.map((entry, index) => (
-            <Picker.Item label={entry.label} value={entry.value} key={`entry${index}`} />
-          ))}
-        </Picker>
+        <Dropdown initial={testerTheme.themeName} onValueChange={onThemeSelected} options={themeChoices} />
       </View>
 
-      <View style={themePickerStyles.picker}>
+      <View style={themedPickerStyles.picker}>
         <PickerLabel>Light/Dark: </PickerLabel>
-        <Picker selectedValue={testerTheme.appearance} onValueChange={onAppearanceChange} {...dropdownProps}>
-          {lightnessOptions.map((entry, index) => (
-            <Picker.Item label={entry.label} value={entry.value} key={`entry${index}`} />
-          ))}
-        </Picker>
+        <Dropdown initial={testerTheme.appearance} onValueChange={onAppearanceChange} options={lightnessOptions} />
       </View>
 
-      <View style={themePickerStyles.picker}>
+      <View style={themedPickerStyles.picker}>
         <PickerLabel>Brand: </PickerLabel>
-        <Picker selectedValue={testerTheme.brand} onValueChange={onBrandChange} {...dropdownProps}>
-          {brandOptions.map((entry, index) => (
-            <Picker.Item label={entry.label} value={entry.value} key={`entry${index}`} />
-          ))}
-        </Picker>
+        <Dropdown initial={testerTheme.brand} onValueChange={onBrandChange} options={brandOptions} />
       </View>
     </View>
   );
