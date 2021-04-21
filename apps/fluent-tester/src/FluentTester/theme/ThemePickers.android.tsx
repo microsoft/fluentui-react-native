@@ -55,12 +55,15 @@ export const ThemePickers: React.FunctionComponent<{}> = () => {
     dropdownIconColor: theme.colors.buttonIcon,
   };
 
-  const Dropdown = (props) => {
+  type DropdownEntry = { label: string; value: string };
+  type DropdownProps = { initial: string; onValueChange: (value: string) => void; options: DropdownEntry[] };
+
+  const Dropdown = (props: DropdownProps) => {
     const { initial, onValueChange, options } = props;
     return (
       <View style={themedPickerStyles.dropdownBorder}>
         <Picker selectedValue={initial} onValueChange={onValueChange} {...dropdownProps}>
-          {options.map((entry, index) => (
+          {options.map((entry: DropdownEntry, index: number) => (
             <Picker.Item label={entry.label} value={entry.value} key={`entry${index}`} />
           ))}
         </Picker>
