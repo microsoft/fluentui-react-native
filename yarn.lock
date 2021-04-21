@@ -2224,7 +2224,7 @@
   resolved "https://registry.yarnpkg.com/@react-native-menu/menu/-/menu-0.1.2.tgz#2a3a9c8c3d142649b89a5c710eafa8ec3f0d7596"
   integrity sha512-3jgCWoZY31s/cjtTCAbGN0VqapwM7WiGZonb5KSkRT6egkwR1QAWBxe8Pe216u6R5EY/AGC8Z4Bf9wASYpz/1A==
 
-"@react-native-picker/picker@1.9.11", "@react-native-picker/picker@^1.9.11":
+"@react-native-picker/picker@^1.9.11":
   version "1.9.11"
   resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.9.11.tgz#490c752417c17d687e2941659b3c0bff9cb79b83"
   integrity sha512-E7whvvMIl9Ln1sxgug7OAEVWQ69n82iV0d2OWWp5VV52+RW3azKh1IFm4rxdW5/oByMfl7FFL0eHNelGgY4BMQ==
