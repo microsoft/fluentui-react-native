@@ -50,12 +50,12 @@ This section covers creating and adding a new component package to FluentUI Reac
    - `fluentui-react-native/packages/experimental/<new-component>`
 
 1. Copy the files from the top level of another component (A good example of this is the Shimmer). Make sure to empty the changelog file, and modify the name of the component where appropriate.
-1. Update your `package.json` file. This defines the name / fields of the npm package that will be published for this component.
+1. Update your `package.json` file. This defines the name, fields, and dependencies of the npm package that will be published for this component.
 1. As a pattern, we prefix `experimental` components with the word "experimental". For example, we have `@fluentui-react-native/experimental-button`.
 
 ### Adding the JS source code to your component
 
-1. Create a `src/` subdirectory in your component directory, with a minimum of two files. You may optionally choose to subdivide your code however you wish, there are plenty of examples in the other components of fluentui-react-native.
+1. Create a `src/` subdirectory in your component directory with a minimum of two files (listed below). You may optionally choose to subdivide your code however you wish; there are plenty of examples in the other components of FluentUI React Native.
 
    1. `index.ts`
       - This is the file listed as `main` inside your package.json and simply exports other files.
