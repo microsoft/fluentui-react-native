@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Thu, 15 Apr 2021 20:08:17 GMT",
+      "tag": "@fluentui-react-native/icon_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add macOS support",
+            "author": "adam.gleitman@gmail.com",
+            "commit": "06834001f0f0238d2a7ad99a51a430b28eaa8daa",
+            "package": "@fluentui-react-native/icon"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 12 Mar 2021 01:25:13 GMT",
+      "tag": "@fluentui-react-native/icon_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Get FURN Icon working on iOS",
+            "author": "adam.gleitman@gmail.com",
+            "commit": "c4f7dc842c01a32b9edf287d2b43aa017f3d71e3",
+            "package": "@fluentui-react-native/icon"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 06 Mar 2021 00:20:05 GMT",
       "tag": "@fluentui-react-native/icon_v0.3.0",
       "version": "0.3.0",
