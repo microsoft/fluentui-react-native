@@ -20,7 +20,7 @@
   "dependencies": {
     "@fluentui-react-native/tester": "^0.23.0",
     "react-native-macos": "0.63.1",
-    "react-native-test-app": "^0.3.2"
+    "react-native-test-app": "^0.5.5"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
