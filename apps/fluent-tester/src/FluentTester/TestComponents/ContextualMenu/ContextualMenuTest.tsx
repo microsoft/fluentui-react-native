@@ -145,7 +145,7 @@ const nestedContextualMenu: React.FunctionComponent<{}> = () => {
 
   const onClick = React.useCallback(
     () => {
-      console.log("submenu item clicked");
+      console.log('submenu item clicked');
     }, []
   );
 
