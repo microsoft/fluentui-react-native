@@ -67,7 +67,7 @@ export type FontSize = keyof FontSizes | FontSizeValuePoints;
 /**
  * A font weight value.
  *
- * Smaller numbers yield a thinner, lighter font. Larger numbers yield a thicker, farker
+ * Smaller numbers yield a thinner, lighter font. Larger numbers yield a thicker, darker
  * font.
  */
 export type FontWeightValue = '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';

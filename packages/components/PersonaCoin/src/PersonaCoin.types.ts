@@ -1,4 +1,4 @@
-import { IViewWin32Props } from '@office-iss/react-native-win32';
+import type { IViewProps } from '@fluentui-react-native/adapters';
 import { ImageProps, ViewProps, ImageURISource, TextProps } from 'react-native';
 import { IBackgroundColorTokens, IForegroundColorTokens } from '@fluentui-react-native/tokens';
 import { IRenderData } from '@uifabricshared/foundation-composable';
@@ -36,7 +36,7 @@ export interface IPersonaConfigurableProps {
   coinColor?: PersonaCoinColor;
 }
 
-export interface IPersonaCoinProps extends IViewWin32Props, IPersonaConfigurableProps {
+export interface IPersonaCoinProps extends IViewProps, IPersonaConfigurableProps {
   imageUrl?: string;
   imageDescription?: string;
   initials?: string;

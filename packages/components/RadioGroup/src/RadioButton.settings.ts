@@ -15,11 +15,11 @@ export const settings: IComposeSettings<IRadioButtonType> = [
       borderColor: 'menuItemText',
       color: 'menuItemText',
       backgroundColor: 'menuItemText',
-      textBorderColor: 'transparent'
+      textBorderColor: 'transparent',
     },
     root: {
       accessible: true,
-      acceptsKeyboardFocus: true,
+      focusable: true,
       accessibilityRole: 'radio',
       style: {
         display: 'flex',
@@ -27,8 +27,8 @@ export const settings: IComposeSettings<IRadioButtonType> = [
         flexDirection: 'row',
         minHeight: 20,
         marginTop: 0,
-        position: 'relative'
-      }
+        position: 'relative',
+      },
     },
     button: {
       style: {
@@ -43,8 +43,8 @@ export const settings: IComposeSettings<IRadioButtonType> = [
         marginTop: 4,
         marginRight: 6,
         marginBottom: 6,
-        marginLeft: 6
-      }
+        marginLeft: 6,
+      },
     },
     innerCircle: {
       style: {
@@ -54,46 +54,46 @@ export const settings: IComposeSettings<IRadioButtonType> = [
         height: radioButtonInnerCircleSize,
         width: radioButtonInnerCircleSize,
         left: 4,
-        top: 4
-      }
+        top: 4,
+      },
     },
     content: {
       variant: 'subheaderStandard',
       style: {
         marginTop: 3,
-        borderStyle: 'dashed',
-        borderWidth: 1
-      }
+        borderStyle: 'solid',
+        borderWidth: 2,
+      },
     },
     _precedence: ['disabled', 'hovered', 'focused', 'selected'],
     _overrides: {
       selected: {
         innerCircle: {
           style: {
-            opacity: 1
-          }
-        }
+            opacity: 1,
+          },
+        },
       },
       focused: {
         tokens: {
-          textBorderColor: 'focusBorder'
-        }
+          textBorderColor: 'focusBorder',
+        },
       },
       hovered: {
         innerCircle: {
           style: {
-            opacity: 0.5
-          }
-        }
+            opacity: 0.5,
+          },
+        },
       },
       disabled: {
         tokens: {
           borderColor: 'buttonBorderDisabled',
           color: 'disabledBodyText',
-          backgroundColor: 'background'
-        }
-      }
-    }
+          backgroundColor: 'background',
+        },
+      },
+    },
   },
-  radioButtonName
+  radioButtonName,
 ];

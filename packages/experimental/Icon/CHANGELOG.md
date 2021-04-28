@@ -1,8 +1,37 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Mon, 01 Mar 2021 22:53:12 GMT and should not be manually modified.
+This log was last generated on Thu, 15 Apr 2021 20:08:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.0
+
+Thu, 15 Apr 2021 20:08:17 GMT
+
+### Minor changes
+
+- Add macOS support (adam.gleitman@gmail.com)
+
+## 0.4.0
+
+Fri, 12 Mar 2021 01:25:13 GMT
+
+### Minor changes
+
+- Get FURN Icon working on iOS (adam.gleitman@gmail.com)
+
+## 0.3.0
+
+Sat, 06 Mar 2021 00:20:05 GMT
+
+### Minor changes
+
+- Update to react-native 0.63 (30809111+acoates-ms@users.noreply.github.com)
+
+### Patches
+
+- Base theme on macOS changed to apple theme (saadnajmi2@gmail.com)
+- Use ColorValue from @fluentui-react-native/theme-types (saadnajmi2@gmail.com)
 
 ## 0.2.7
 

@@ -18,7 +18,7 @@ export const themePickerStyles = StyleSheet.create({
 
   dropdown: {
     height: 30,
-    width: 90,
+    width: 120,
     fontSize: 12,
   },
 });
