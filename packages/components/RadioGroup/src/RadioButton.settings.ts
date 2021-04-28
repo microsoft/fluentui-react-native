@@ -61,8 +61,8 @@ export const settings: IComposeSettings<IRadioButtonType> = [
       variant: 'subheaderStandard',
       style: {
         marginTop: 3,
-        borderStyle: 'dashed',
-        borderWidth: 1,
+        borderStyle: 'solid',
+        borderWidth: 2,
       },
     },
     _precedence: ['disabled', 'hovered', 'focused', 'selected'],
