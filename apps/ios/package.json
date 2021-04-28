@@ -12,16 +12,17 @@
     "code-style": "fluentui-scripts code-style",
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
-    "start": "react-native rnx-start",
+    "start": "react-native start",
     "test": "fluentui-scripts jest",
     "bundle": "react-native rnx-bundle --dev false",
     "bundle-dev": "react-native rnx-bundle",
     "ios": "react-native run-ios --scheme ReactTestApp --project-path src"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.20.0",
+    "@fluentui-react-native/tester": "^0.23.0",
     "react": "16.13.1",
     "react-native": "^0.63.4",
+    "react-native-svg": "^12.1.1",
     "react-native-test-app": "^0.3.2"
   },
   "devDependencies": {
@@ -49,7 +50,8 @@
   },
   "depcheck": {
     "ignoreMatches": [
-      "react-native-test-app"
+      "react-native-test-app",
+      "react-native-svg"
     ]
   }
 }
