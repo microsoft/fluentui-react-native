@@ -27,13 +27,13 @@ const useStyling = buildUseStyling(stylingSettings);
 export const Shimmer = compose<ShimmerType>({
   displayName: shimmerName,
   ...stylingSettings,
-  tokensThatAreAlsoProps: ['duration', 'shimmerTintColor', 'gradientTintColor', 'toValue'],
-  /** Settings for the useSlots that will be passed on */
+  tokensThatAreAlsoProps: ['duration', 'shimmerTintColor', 'gradientTintColor', 'toValue', 'delay'],
   slots: { root: Svg },
   render: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
     const Root = useSlots(props).root;
     let AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
     const tokens = useStyling(props).root.style;
+
     const memoizedShimmerData = useMemo(
       () => ({
         gradientTintColor: props.gradientTintColor ? props.gradientTintColor : tokens['gradientTintColor'],
@@ -44,7 +44,7 @@ export const Shimmer = compose<ShimmerType>({
         delay: props.delay ? props.delay : tokens['delay'],
         duration: props.duration ? props.duration : tokens['duration'],
       }),
-      [props.gradientTintColor, props.shimmerTintColor],
+      [props.gradientTintColor, props.shimmerTintColor, props.width, props.height, props.toValue, props.delay, props.duration],
     );
 
     let startValue = renderAnimations(memoizedShimmerData);

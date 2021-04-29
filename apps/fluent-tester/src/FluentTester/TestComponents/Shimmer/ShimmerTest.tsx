@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Shimmer } from '@fluentui/react-native';
+import { Shimmer } from '@fluentui-react-native/experimental-shimmer'
 import { SHIMMER_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Stack } from '@fluentui-react-native/stack';

@@ -28,15 +28,7 @@ use_test_app! do |target|
     pod 'FluentUI-React-Native-Button', :path => '../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec'
     pod 'FluentUI-React-Native-Avatar', :path => '../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec'
     pod 'RNCPicker', :path => '../../../node_modules/@react-native-picker/picker'
-<<<<<<< HEAD
-<<<<<<< HEAD
-    pod 'RNSVG', :path => '../../../node_modules/@microsoft/react-native-svg-desktop'
-=======
     pod 'RNSVG', :path => '../../../node_modules/react-native-svg'
->>>>>>> Add Icon support for macOS (#645)
-=======
-    pod 'RNSVG', :path => '../../../node_modules/react-native-svg'
->>>>>>> 1874f74f04fad4c6d6f47fe6f10e3d6a54527bd6
 
     script_phase name: 'Start Packager',
                  script: start_packager_script,

@@ -30,6 +30,7 @@
     "@fluentui-react-native/experimental-avatar": ">=0.7.1 <1.0.0",
     "@fluentui-react-native/experimental-button": "0.5.1",
     "@fluentui-react-native/experimental-native-button": ">=0.5.3 <1.0.0",
+    "@fluentui-react-native/experimental-shimmer": "0.1.0",
     "@fluentui-react-native/experimental-text": ">=0.4.1 <1.0.0",
     "@fluentui-react-native/framework": ">=0.5.1 <1.0.0",
     "@fluentui-react-native/icon": "0.5.0",

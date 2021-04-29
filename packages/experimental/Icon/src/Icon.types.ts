@@ -1,4 +1,4 @@
-import { SvgProps } from '@microsoft/react-native-svg-desktop';
+import { SvgProps } from 'react-native-svg';
 import { AccessibilityProps, ImageProps, ImageStyle, StyleProp, TextStyle } from 'react-native';
 import { ColorValue } from '@fluentui-react-native/theme-types';
 export const iconName = 'Icon';
