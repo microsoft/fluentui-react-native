@@ -1,6 +1,7 @@
 import ButtonTestPage from '../../Button/pages/ButtonTestPage.win';
 import CalloutTestPage from '../../Callout/pages/CalloutTestPage.win';
 import CheckboxTestPage from '../../Checkbox/pages/CheckboxTestPage.win';
+import ContextualMenuTestPage from '../../ContextualMenu/pages/ContextualMenuTestPage.win';
 import FocusTrapZoneTestPage from '../../FocusTrapZone/pages/FocusTrapZonePage.win';
 import FocusZoneTestPage from '../../FocusZone/pages/FocusZoneTestPage.win';
 import IconTestPage from '../../Icon/pages/IconTestPage.win';
@@ -43,6 +44,12 @@ describe('Click on each test page and check if it renders', function () {
     BootTestPage.clickAndGoToCheckboxPage();
     CheckboxTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(CheckboxTestPage.isPageLoaded()).toBeTruthy();
+  });
+
+  it('ContextualMenu Test Page', () => {
+    BootTestPage.clickAndGoToContextualMenuPage();
+    ContextualMenuTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+    expect(ContextualMenuTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('FocusTrapZone Test Page', () => {
