@@ -2,8 +2,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg, Image } from 'react-native-svg';
 import { shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types';
-import { mergeProps } from '../../../framework/merge-props/lib/mergeProps';
-import { buildUseStyling, compose, UseSlots, withSlots } from '../../../experimental/framework/lib';
+import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import { Animated } from 'react-native';
 import { stylingSettings } from './Shimmer.styling';
 
@@ -32,12 +31,13 @@ export const Shimmer = compose<ShimmerType>({
     root: Svg,
     rect: Rect,
     circle: Circle,
+    image: Image,
   },
   render: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
-    const Root = useSlots(props).root;
-    const SvgRect = useSlots(props).rect;
+    const Slots = useSlots(props);
     let AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
     const tokens = useStyling(props).root;
+
     const memoizedShimmerData = useMemo(
       () => ({
         gradientTintColor: props.gradientTintColor ? props.gradientTintColor : tokens['gradientTintColor'],
@@ -53,47 +53,32 @@ export const Shimmer = compose<ShimmerType>({
 
     let startValue = renderAnimations(memoizedShimmerData);
 
-
-    if(props.uri != null) {
-      return (rest: ShimmerProps) => <Root {...mergeProps(props, rest)}>
-      <Defs>
-        <AnimatedLinearGradient id="gradient" x1={startValue} y1="0" x2="-1" y2="-1" >
-        <Stop offset="10%" stopColor={memoizedShimmerData.gradientTintColor} stopOpacity="0" />
-        <Stop offset="20%" stopColor={memoizedShimmerData.gradientTintColor} stopOpacity=".7"/>
-        <Stop offset="30%" stopColor={memoizedShimmerData.gradientTintColor} stopOpacity="0" />
-      </AnimatedLinearGradient>
-     </Defs>
-     <Image href={props.uri} />
-     <Rect
-        x="0"
-        y="0"
-        width={memoizedShimmerData.containerWidth}
-        height={memoizedShimmerData.containerHeight}
-        fill="url(#gradient)"
-     />
-     </Root>
-    }
-    else {
-      return (rest: ShimmerProps) => <Root {...mergeProps(props, rest)}>
-        <Defs>
-          <AnimatedLinearGradient id="gradient" x1={startValue} y1="0" x2="-1" y2="-1" >
-            <Stop offset="10%" stopColor={memoizedShimmerData.shimmerTintColor} stopOpacity="1" />
-            <Stop offset="20%" stopColor={memoizedShimmerData.gradientTintColor} stopOpacity="1" />
-            <Stop offset="30%" stopColor={memoizedShimmerData.shimmerTintColor} stopOpacity="1" />
-          </AnimatedLinearGradient>
-         <ClipPath id="shimmerView">
-        <SvgRect></SvgRect>
-        </ClipPath>
-        </Defs>
-        <Rect
-          x="0"
-          y="0"
-          width={memoizedShimmerData.containerWidth}
-          height={memoizedShimmerData.containerHeight}
-          fill="url(#gradient)"
-          clipPath="url(#shimmerView)"
-        />
-      </Root>
+    return (rest: ShimmerProps) => {
+      const { circle, rect, uri, ...mergedProps } = mergeProps(props, rest);
+          return (
+            <Slots.root {...mergedProps}>
+              <Defs>
+                <AnimatedLinearGradient id="gradient" x1={startValue} y1="0" x2="-1" y2="-1" >
+                  <Stop offset="10%" stopColor={uri ? memoizedShimmerData.gradientTintColor: memoizedShimmerData.shimmerTintColor } stopOpacity={uri ? "0" : "1"} />
+                  <Stop offset="20%" stopColor={memoizedShimmerData.gradientTintColor} stopOpacity={uri ? "0.7" : "1"} />
+                  <Stop offset="30%" stopColor={uri ? memoizedShimmerData.gradientTintColor : memoizedShimmerData.shimmerTintColor} stopOpacity={uri ? "0" : "1"} />
+              </AnimatedLinearGradient>
+              </Defs>
+              {uri && <Slots.image href={props.uri} />}
+            <ClipPath id="shimmerView">
+              {rect && <Slots.rect width={props.rect.width} x={props.rect.x}  y={props.rect.y}/> }
+              {circle && <Slots.circle cx={props.circle.cx} cy={props.circle.cy}  r={props.circle.r}/> }
+            </ClipPath>
+            <Rect
+              x="0"
+              y="0"
+              width={memoizedShimmerData.containerWidth}
+              height={memoizedShimmerData.containerHeight}
+              fill="url(#gradient)"
+              clipPath="url(#shimmerView)"
+            />
+          </Slots.root>
+          );
     }
   },
 });

@@ -5,7 +5,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { Stack } from '@fluentui-react-native/stack';
 import { ImageURISource } from 'react-native';
 import { stackStyle } from '../Common/styles';
-import { RectProps} from 'react-native-svg'
+import { CircleProps, RectProps} from 'react-native-svg'
 
 const icon: ImageURISource = {
   uri:
@@ -14,16 +14,23 @@ const icon: ImageURISource = {
 
 const shimmer: React.FunctionComponent<{}> = () => {
 const rectProp: RectProps = {
-  width:400,
-  height: 500,
+  width:200,
+  height: 200,
   rx: 3,
-  ry: 3,
+  ry: 7,
+  x:170,
+  y:30,
+}
+const circleProp: CircleProps = {
+  cx:70,
+  cy:70,
+  r:60,
+
 }
   return (
         <Stack style={stackStyle}>
           <Shimmer uri={icon} width={200} height={200}/>
-          <Shimmer element='lines' width={200} height={200}/>
-          <Shimmer element='lines' shape={rectProp} />
+          <Shimmer circle={circleProp} rect={rectProp}/>
         </Stack>
   );
 };

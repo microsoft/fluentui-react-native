@@ -30,8 +30,23 @@ export const stylingSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, 
     rect: buildProps(
       (_tokens: ShimmerTokens) => ({
         width: 300,
-        height: 50,
+        height: 30,
+        rx:5,
+        ry:5,
+        x:170,
+        y:30,
       }),
+
+    ),
+    circle: buildProps((_tokens: ShimmerTokens) => ({
+      cx:75,
+      cy:75,
+      r:50,
+    }),
+    ),
+    image: buildProps((_tokens: ShimmerTokens) => ({
+      href: null,
+    }),
     ),
   },
 

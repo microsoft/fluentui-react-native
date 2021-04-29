@@ -1,6 +1,5 @@
-import { SvgProps, RectProps, CircleProps } from 'react-native-svg';
+import { SvgProps, RectProps, CircleProps, ImageProps } from 'react-native-svg';
 import { ImageURISource } from 'react-native';
-
 
 export const shimmerName = 'Shimmer';
 
@@ -22,15 +21,17 @@ export interface ShimmerSlotProps extends  ShimmerPropTokens {
   root: SvgProps;
   rect: RectProps;
   circle: CircleProps;
+  image: ImageProps;
 }
 
 export interface ShimmerProps extends ShimmerPropTokens {
-  element?: 'lines' | 'circle' | 'gap';
   uri?:ImageURISource;
-  shape?: RectProps | CircleProps;
+  rect?: RectProps;
+  circle?: CircleProps;
   width?: number;
   height?: number;
 }
+
 export interface ShimmerType {
   props: ShimmerProps;
   slotProps: ShimmerSlotProps
