@@ -5,6 +5,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { Stack } from '@fluentui-react-native/stack';
 import { ImageURISource } from 'react-native';
 import { stackStyle } from '../Common/styles';
+import { RectProps} from 'react-native-svg'
 
 const icon: ImageURISource = {
   uri:
@@ -12,11 +13,17 @@ const icon: ImageURISource = {
 };
 
 const shimmer: React.FunctionComponent<{}> = () => {
+const rectProp: RectProps = {
+  width:400,
+  height: 500,
+  rx: 3,
+  ry: 3,
+}
   return (
         <Stack style={stackStyle}>
-        <Shimmer uri={icon}  width={200} height={200}/>
-        <Shimmer uri={icon} gradientTintColor='pink' width={200} height={200}/>
-        <Shimmer element='lines'/>
+          <Shimmer uri={icon} width={200} height={200}/>
+          <Shimmer element='lines' width={200} height={200}/>
+          <Shimmer element='lines' shape={rectProp} />
         </Stack>
   );
 };
