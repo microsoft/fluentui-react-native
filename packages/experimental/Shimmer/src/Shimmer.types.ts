@@ -16,33 +16,28 @@ export interface ShimmerElement {
   yPos?: number;
 }
 
-interface ShimmerPropTokens {
+export interface ShimmerTokens {
   gradientTintColor?: string;
   toValue?: number;
   duration?: number;
   delay?: number;
   shimmerTintColor?: string;
-  containerWidth?: number | string;
-  containerHeight?: number | string;
+  width?: number;
+  height?: number;
+  rect?: RectProps;
+  angle?: number;
 }
 
-export interface ShimmerTokens extends ShimmerPropTokens {
-  viewBox?: string;
-}
-
-export interface ShimmerSlotProps extends  ShimmerPropTokens {
+export interface ShimmerSlotProps extends ShimmerProps {
   root: SvgProps;
   rect: RectProps;
   circle: CircleProps;
   image: ImageProps;
 }
 
-export interface ShimmerProps extends ShimmerPropTokens {
-  uri?:ImageURISource;
-  rect?: RectProps;
+export interface ShimmerProps extends ShimmerTokens {
+  uri?: ImageURISource;
   circle?: CircleProps;
-  width?: number;
-  height?: number;
   elements?: Array<ShimmerElement>;
 }
 

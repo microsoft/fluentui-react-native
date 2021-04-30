@@ -5,6 +5,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { Stack } from '@fluentui-react-native/stack';
 import { ImageURISource } from 'react-native';
 import { stackStyle } from '../Common/styles';
+import { CircleProps, RectProps } from 'react-native-svg';
 
 const icon: ImageURISource = {
   uri:
@@ -12,44 +13,59 @@ const icon: ImageURISource = {
 };
 
 const shimmer: React.FunctionComponent<{}> = () => {
-const elements: Array<ShimmerElement> = [
-  {
+  const elements: Array<ShimmerElement> = [
+    {
       type: ShimmerElementType.rect,
       width: 250,
       height: 25,
       cornerRadius: 3,
       xPos: 150,
       yPos: 130,
-  },
-  {
-    type: ShimmerElementType.rect,
-    width: 320,
-    height: 25,
-    cornerRadius: 3,
-    xPos: 150,
-    yPos: 85,
-  },
-  {
-    type: ShimmerElementType.rect,
-    width: 400,
-    height: 25,
-    cornerRadius: 3,
-    xPos: 150,
-    yPos: 40,
-  },
-  {
-    type: ShimmerElementType.circle,
-    height: 120,
-    xPos: 70,
-    yPos: 100,
+    },
+    {
+      type: ShimmerElementType.rect,
+      width: 320,
+      height: 25,
+      cornerRadius: 3,
+      xPos: 150,
+      yPos: 85,
+    },
+    {
+      type: ShimmerElementType.rect,
+      width: 400,
+      height: 25,
+      cornerRadius: 3,
+      xPos: 150,
+      yPos: 40,
+    },
+    {
+      type: ShimmerElementType.circle,
+      height: 120,
+      xPos: 70,
+      yPos: 100,
+    }
+  ];
+
+  const rectProp: RectProps = {
+    width: 200,
+    height: 100,
   }
-]
+  const circleProp: CircleProps = {
+    r: 40,
+    cx: 50,
+    cy: 50,
+  }
 
   return (
-      <Stack style={stackStyle}>
-        <Shimmer uri={icon} width={200} height={200} />
-        <Shimmer elements={elements} />
-      </Stack>
+
+    <Stack style={stackStyle}>
+      <Shimmer uri={icon} width={200} height={200} />
+      <Shimmer elements={elements} width={600} />
+      <Shimmer elements={elements} width={600} gradientTintColor="pink" duration={3000} />
+      <Shimmer rect={rectProp} height={50} />
+      <Shimmer circle={circleProp} />
+    </Stack>
+
   );
 };
 
