@@ -49,5 +49,4 @@ export const stylingSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, 
     }),
     ),
   },
-
 };

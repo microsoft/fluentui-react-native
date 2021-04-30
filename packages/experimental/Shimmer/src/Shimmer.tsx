@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import { useState, useEffect, useMemo } from "react";
-import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg, Image } from 'react-native-svg';
-import { shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types';
+import { Circle, ClipPath, Defs, Image, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
+import { ShimmerElementType, shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import { Animated } from 'react-native';
 import { stylingSettings } from './Shimmer.styling';
@@ -54,7 +54,18 @@ export const Shimmer = compose<ShimmerType>({
     let startValue = renderAnimations(memoizedShimmerData);
 
     return (rest: ShimmerProps) => {
-      const { circle, rect, uri, ...mergedProps } = mergeProps(props, rest);
+      const { circle, rect, uri, elements, ...mergedProps } = mergeProps(props, rest);
+      if (elements) {
+        var rows = [];
+        for (var i = 0; i < elements.length; i++) {
+          const element = elements[i];
+          if (element.type == ShimmerElementType.rect) {
+            rows.push(<Slots.rect width={element.width} x={element.xPos}  y={element.yPos}/>);
+          } else if (element.type == ShimmerElementType.circle) {
+            rows.push(<Slots.circle r={element.height/2} cx={element.xPos}  cy={element.yPos}/>);
+          }
+        }
+      }
           return (
             <Slots.root {...mergedProps}>
               <Defs>
@@ -66,14 +77,15 @@ export const Shimmer = compose<ShimmerType>({
               </Defs>
               {uri && <Slots.image href={props.uri} />}
             <ClipPath id="shimmerView">
+              {rows}
               {rect && <Slots.rect width={props.rect.width} x={props.rect.x}  y={props.rect.y}/> }
               {circle && <Slots.circle cx={props.circle.cx} cy={props.circle.cy}  r={props.circle.r}/> }
             </ClipPath>
             <Rect
               x="0"
               y="0"
-              width={memoizedShimmerData.containerWidth}
-              height={memoizedShimmerData.containerHeight}
+              width="100%"
+              height="100%"
               fill="url(#gradient)"
               clipPath="url(#shimmerView)"
             />

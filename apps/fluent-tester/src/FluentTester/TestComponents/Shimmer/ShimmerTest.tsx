@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { Shimmer } from '@fluentui-react-native/experimental-shimmer'
+import { Shimmer, ShimmerElement, ShimmerElementType } from '@fluentui-react-native/experimental-shimmer'
 import { SHIMMER_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Stack } from '@fluentui-react-native/stack';
 import { ImageURISource } from 'react-native';
 import { stackStyle } from '../Common/styles';
-import { CircleProps, RectProps} from 'react-native-svg'
 
 const icon: ImageURISource = {
   uri:
@@ -13,25 +12,44 @@ const icon: ImageURISource = {
 };
 
 const shimmer: React.FunctionComponent<{}> = () => {
-const rectProp: RectProps = {
-  width:200,
-  height: 200,
-  rx: 3,
-  ry: 7,
-  x:170,
-  y:30,
-}
-const circleProp: CircleProps = {
-  cx:70,
-  cy:70,
-  r:60,
+const elements: Array<ShimmerElement> = [
+  {
+      type: ShimmerElementType.rect,
+      width: 250,
+      height: 25,
+      cornerRadius: 3,
+      xPos: 150,
+      yPos: 130,
+  },
+  {
+    type: ShimmerElementType.rect,
+    width: 320,
+    height: 25,
+    cornerRadius: 3,
+    xPos: 150,
+    yPos: 85,
+  },
+  {
+    type: ShimmerElementType.rect,
+    width: 400,
+    height: 25,
+    cornerRadius: 3,
+    xPos: 150,
+    yPos: 40,
+  },
+  {
+    type: ShimmerElementType.circle,
+    height: 120,
+    xPos: 70,
+    yPos: 100,
+  }
+]
 
-}
   return (
-        <Stack style={stackStyle}>
-          <Shimmer uri={icon} width={200} height={200}/>
-          <Shimmer circle={circleProp} rect={rectProp}/>
-        </Stack>
+      <Stack style={stackStyle}>
+        <Shimmer uri={icon} width={200} height={200} />
+        <Shimmer elements={elements} />
+      </Stack>
   );
 };
 

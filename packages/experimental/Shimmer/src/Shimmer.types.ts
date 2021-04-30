@@ -2,6 +2,19 @@ import { SvgProps, RectProps, CircleProps, ImageProps } from 'react-native-svg';
 import { ImageURISource } from 'react-native';
 
 export const shimmerName = 'Shimmer';
+export enum ShimmerElementType {
+  rect = 1,
+  circle = 2,
+}
+
+export interface ShimmerElement {
+  type?: ShimmerElementType;
+  width?: number;
+  height?: number;
+  cornerRadius?: number;
+  xPos?: number;
+  yPos?: number;
+}
 
 interface ShimmerPropTokens {
   gradientTintColor?: string;
@@ -30,6 +43,7 @@ export interface ShimmerProps extends ShimmerPropTokens {
   circle?: CircleProps;
   width?: number;
   height?: number;
+  elements?: Array<ShimmerElement>;
 }
 
 export interface ShimmerType {
