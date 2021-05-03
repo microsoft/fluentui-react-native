@@ -15,7 +15,7 @@
     "code-style": "fluentui-scripts code-style",
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
-    "start": "react-native rnx-start --port 8081",
+    "start": "react-native start --port 8081",
     "test": "fluentui-scripts jest",
     "bundle": "react-native rnx-bundle --dev false",
     "bundle-dev": "react-native rnx-bundle",
@@ -30,7 +30,7 @@
     "@fluentui-react-native/tester": "^0.23.0",
     "react": "16.13.1",
     "react-native": "^0.63.4",
-    "react-native-svg": "^12.1.1-0"
+    "react-native-svg": "^12.1.1"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "^0.63.7",

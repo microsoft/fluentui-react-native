@@ -9,7 +9,7 @@
     "generate-report": "allure generate allure-results --clean && allure open",
     "lint": "eslint .",
     "report": "allure generate allure-results --clean",
-    "start": "react-native rnx-start",
+    "start": "react-native start",
     "test": "jest",
     "windows": "react-native run-windows"
   },
