@@ -9,34 +9,39 @@ export const stylingSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, 
       gradientTintColor: t.host?.appearance === 'light' ? 'white' : 'black',
       shimmerTintColor: t.host?.appearance === 'light' ? "#E1E1E1" : '#404040',
       width: 200,
-      height: 200,
+      height: 100,
       angle: 0,
+      gradientOpacity: .7,
     }),
     shimmerName,
   ],
   slotProps: {
     root: buildProps(
       (tokens: ShimmerTokens) => ({
-        gradientTintColor:tokens.gradientTintColor,
-        toValue:tokens.toValue,
+        gradientTintColor: tokens.gradientTintColor,
+        toValue: tokens.toValue,
         duration: tokens.duration,
         delay: tokens.delay,
-        shimmerTintColor:tokens.shimmerTintColor,
+        shimmerTintColor: tokens.shimmerTintColor,
         width: tokens.width,
         height: tokens.height,
         angle: tokens.angle,
+        gradientOpacity: tokens.gradientOpacity,
+        accessibilityRole: 'progressbar',
+        accessibilityLabel: "Loading content",
+        accessible: true,
       }),
-      ['toValue', 'duration', 'delay', 'gradientTintColor', 'shimmerTintColor', 'width', 'height'],
+      ['gradientTintColor', 'toValue', 'duration', 'delay', 'shimmerTintColor', 'width', 'height', 'angle', 'gradientOpacity'],
     ),
     rect: buildProps(
-      (_tokens: ShimmerTokens) => ({
-        width: 300,
+      (tokens: ShimmerTokens) => ({
+        width: tokens.width,
         height: 30,
       }),
-
     ),
-    circle: buildProps((_tokens: ShimmerTokens) => ({
-      r:50,
+    circle: buildProps((tokens: ShimmerTokens) => ({
+      r: tokens.height / 2,
+
     }),
     ),
     image: buildProps((_tokens: ShimmerTokens) => ({

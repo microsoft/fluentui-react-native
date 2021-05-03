@@ -15,7 +15,7 @@ export function useShimmerAnimation(memoData: any) {
           toValue: memoData.toValue,
           duration: memoData.duration,
           delay: memoData.delay,
-          useNativeDriver: false
+          useNativeDriver: false,
         })]),
     ).start()
   })
@@ -47,21 +47,21 @@ export const Shimmer = compose<ShimmerType>({
         delay: props.delay ? props.delay : tokens['delay'],
         duration: props.duration ? props.duration : tokens['duration'],
         angle: props.angle ? props.angle : tokens['angle'],
+        gradientOpacity: tokens['gradientOpacity'],
       }),
-      [props.gradientTintColor, props.shimmerTintColor, props.width, props.height, props.toValue, props.delay, props.duration],
+      [props.gradientTintColor, props.shimmerTintColor, props.width, props.height, props.toValue, props.delay, props.duration, props.angle, props.gradientOpacity],
     );
 
     let startValue = useShimmerAnimation(memoizedShimmerData);
 
     return (rest: ShimmerProps) => {
       const { circle, rect, uri, elements, ...mergedProps } = mergeProps(props, rest);
-      console.log(memoizedShimmerData.angle);
       if (elements) {
         var rows = [];
         for (var i = 0; i < elements.length; i++) {
           const element = elements[i];
           if (element.type == ShimmerElementType.rect) {
-            rows.push(<Slots.rect key={i} width={element.width} x={element.xPos} y={element.yPos} rx={element.cornerRadius} ry={element.cornerRadius} />);
+            rows.push(<Slots.rect key={i} width={element.width} height={element.height} x={element.xPos} y={element.yPos} rx={element.borderRadius} ry={element.borderRadius} />);
           } else if (element.type == ShimmerElementType.circle) {
             rows.push(<Slots.circle key={i} r={element.height / 2} cx={element.xPos} cy={element.yPos} />);
           }
@@ -72,7 +72,7 @@ export const Shimmer = compose<ShimmerType>({
           <Defs>
             <AnimatedLinearGradient id="gradient" x1={startValue} y1={memoizedShimmerData.angle} x2="-1" y2="-1" >
               <Stop offset="10%" stopColor={uri ? memoizedShimmerData.gradientTintColor : memoizedShimmerData.shimmerTintColor} stopOpacity={uri ? "0" : "1"} />
-              <Stop offset="20%" stopColor={memoizedShimmerData.gradientTintColor} stopOpacity=".7" />
+              <Stop offset="20%" stopColor={memoizedShimmerData.gradientTintColor} stopOpacity={memoizedShimmerData.gradientOpacity} />
               <Stop offset="30%" stopColor={uri ? memoizedShimmerData.gradientTintColor : memoizedShimmerData.shimmerTintColor} stopOpacity={uri ? "0" : "1"} />
             </AnimatedLinearGradient>
           </Defs>
@@ -88,7 +88,7 @@ export const Shimmer = compose<ShimmerType>({
             width="100%"
             height="100%"
             fill="url(#gradient)"
-            clipPath="url(#shimmerView)"
+            clipPath={!uri ? "url(#shimmerView)" : null}
           />
         </Slots.root>
       );

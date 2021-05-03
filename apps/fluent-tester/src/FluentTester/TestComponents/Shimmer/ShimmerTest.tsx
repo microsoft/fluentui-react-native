@@ -13,57 +13,59 @@ const icon: ImageURISource = {
 };
 
 const shimmer: React.FunctionComponent<{}> = () => {
-  const elements: Array<ShimmerElement> = [
+  const lines: Array<ShimmerElement> = [
     {
       type: ShimmerElementType.rect,
-      width: 250,
-      height: 25,
-      cornerRadius: 3,
-      xPos: 150,
-      yPos: 130,
+      width: 100,
+      height: 20,
+      borderRadius: 3,
+      xPos: 90,
+      yPos: 70,
     },
     {
       type: ShimmerElementType.rect,
-      width: 320,
-      height: 25,
-      cornerRadius: 3,
-      xPos: 150,
-      yPos: 85,
+      width: 150,
+      height: 20,
+      borderRadius: 3,
+      xPos: 90,
+      yPos: 42,
     },
     {
       type: ShimmerElementType.rect,
-      width: 400,
-      height: 25,
-      cornerRadius: 3,
-      xPos: 150,
-      yPos: 40,
+      width: 200,
+      height: 20,
+      borderRadius: 3,
+      xPos: 90,
+      yPos: 15,
     },
-    {
-      type: ShimmerElementType.circle,
-      height: 120,
-      xPos: 70,
-      yPos: 100,
-    }
   ];
+  const circle = lines.slice();
+  circle.push({ type: ShimmerElementType.circle, height: 70, xPos: 40, yPos: 55 });
+  const rect = lines.slice();
+  rect.push({ type: ShimmerElementType.rect, height: 60, width: 60, xPos: 10, yPos: 25, borderRadius: 3 });
 
   const rectProp: RectProps = {
     width: 200,
     height: 100,
+    y: 30,
   }
   const circleProp: CircleProps = {
     r: 40,
     cx: 50,
     cy: 50,
   }
-
+  const CustomizedShimmer = Shimmer.customize({
+    gradientTintColor: "pink",
+  });
   return (
 
     <Stack style={stackStyle}>
-      <Shimmer uri={icon} width={200} height={200} />
-      <Shimmer elements={elements} width={600} />
-      <Shimmer elements={elements} width={600} gradientTintColor="pink" duration={3000} />
-      <Shimmer rect={rectProp} height={50} />
+      <CustomizedShimmer uri={icon} height={200} />
+      <Shimmer elements={circle} width={500} />
+      <Shimmer elements={rect} width={500} />
+      <Shimmer rect={rectProp} />
       <Shimmer circle={circleProp} />
+      <Shimmer height={10} />
     </Stack>
 
   );
