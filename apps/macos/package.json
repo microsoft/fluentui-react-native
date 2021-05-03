@@ -20,6 +20,7 @@
   "dependencies": {
     "@fluentui-react-native/tester": "^0.23.0",
     "react-native-macos": "0.63.1",
+    "react-native-svg": "^12.1.1",
     "react-native-test-app": "^0.3.2"
   },
   "devDependencies": {
@@ -52,7 +53,8 @@
   },
   "depcheck": {
     "ignoreMatches": [
-      "react-native-test-app"
+      "react-native-test-app",
+      "react-native-svg"
     ]
   }
 }
