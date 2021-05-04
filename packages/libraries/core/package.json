@@ -1,7 +1,12 @@
 {
   "name": "@fluentui/react-native",
-  "version": "0.23.3",
+  "version": "0.23.5",
   "description": "A react-native component library that implements the Fluent Design System.",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:microsoft/fluentui-react-native.git",
+    "directory": "packages/libraries/core"
+  },
   "main": "src/index.ts",
   "module": "src/index.ts",
   "onPublish": {
@@ -36,7 +41,7 @@
     "@fluentui-react-native/persona": ">=0.9.1 <1.0.0",
     "@fluentui-react-native/persona-coin": ">=0.7.1 <1.0.0",
     "@fluentui-react-native/pressable": ">=0.6.0 <1.0.0",
-    "@fluentui-react-native/radio-group": ">=0.9.1 <1.0.0",
+    "@fluentui-react-native/radio-group": ">=0.9.3 <1.0.0",
     "@fluentui-react-native/separator": ">=0.9.1 <1.0.0",
     "@fluentui-react-native/shimmer": ">=0.6.3 <1.0.0",
     "@fluentui-react-native/text": ">=0.9.1 <1.0.0"

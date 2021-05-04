@@ -10,16 +10,16 @@ PODS:
     - React-jsi (= 0.63.4)
     - ReactCommon/turbomodule/core (= 0.63.4)
   - FluentUI-React-Native-Apple-Theme (0.4.2):
-    - MicrosoftFluentUI (= 0.0.2)
+    - MicrosoftFluentUI (~> 0.2.2)
     - React
   - FluentUI-React-Native-Avatar (0.6.3):
-    - MicrosoftFluentUI (= 0.0.2)
+    - MicrosoftFluentUI (~> 0.2.2)
     - React
   - FluentUI-React-Native-Button (0.5.3):
-    - MicrosoftFluentUI (= 0.0.2)
+    - MicrosoftFluentUI (~> 0.2.2)
     - React
   - FluentUI-React-Native-Shimmer (0.6.3):
-    - MicrosoftFluentUI (= 0.0.2)
+    - MicrosoftFluentUI (~> 0.2.2)
     - React
   - Folly (2020.01.13.00):
     - boost-for-react-native
@@ -403,7 +403,7 @@ PODS:
     - React-jsi (= 0.63.4)
   - ReactTestApp-DevSupport (0.3.13)
   - ReactTestApp-Resources (1.0.0-dev)
-  - RNSVG (11.0.1):
+  - RNSVG (12.1.1-0):
     - React
   - SwiftLint (0.43.1)
   - Yoga (1.14.0)
@@ -532,10 +532,10 @@ SPEC CHECKSUMS:
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
-  FluentUI-React-Native-Apple-Theme: 3e1975ff6f28aa90538eac5d946bd4eb480a97c2
-  FluentUI-React-Native-Avatar: 4c1381017e56907c3c87338a8503acbae0538c4a
-  FluentUI-React-Native-Button: 7b79d61000a2a37a51635bffe023eec201761f6e
-  FluentUI-React-Native-Shimmer: 252d688d40fd00dacff6406ae5ff20de57f2da2d
+  FluentUI-React-Native-Apple-Theme: 5096ba1ccdce75cac6af8dfb6f43880828d6a8e1
+  FluentUI-React-Native-Avatar: 1a463d15fe9cef99c18dcec0516ebd5459fe2e25
+  FluentUI-React-Native-Button: b882911504fd4b8ad21b6391b6fb49d908276f5e
+  FluentUI-React-Native-Shimmer: 73e604318cff67e942b04ac6b7f3908ce4fa6b38
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   MicrosoftFluentUI: 35e22e4a6a09c57d93b0054319f87cd1b5b15e89
@@ -563,8 +563,8 @@ SPEC CHECKSUMS:
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
   ReactTestApp-DevSupport: 12d9f285a44ff0cb7962a213621f87d3e6de9288
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
-  RNSVG: 67f1f12dae2cef6ed59a42cae74a6b8f5a9e7b46
-  SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
+  RNSVG: 1a8855adeb20c5beb0a808281608315fc1092d15
+  SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
 PODFILE CHECKSUM: f540782acb25001163f017d379f2d2c627e076b0
