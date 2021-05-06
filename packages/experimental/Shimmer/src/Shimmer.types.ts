@@ -3,19 +3,10 @@ import { ImageURISource } from 'react-native';
 
 export const shimmerName = 'Shimmer';
 /**
- * Specifies the possible type of the shimmer elements.
+ * Specifies the possible type of the shimmer elements: Rect, Circle.
  * Required when building more than one element at a time.
  */
-export enum ShimmerElementType {
-  /**
-   * Rect element type
-   */
-  rect = 1,
-  /**
-   * Circle element type
-   */
-  circle = 2,
-}
+export type ShimmerElementType = 'rect' | 'circle';
 /**
  * Represents the shimmer element
  */

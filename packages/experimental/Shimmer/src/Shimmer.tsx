@@ -1,13 +1,13 @@
 /** @jsx withSlots */
-import { useState, useEffect, useMemo } from "react";
+import { useRef, useEffect, useMemo } from "react";
 import { Circle, ClipPath, Defs, Image, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
-import { ShimmerElementType, shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types';
+import { shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import { Animated } from 'react-native';
 import { stylingSettings } from './Shimmer.styling';
 
 export function useShimmerAnimation(memoData: any) {
-  let startValue = useState(new Animated.Value(0))[0]
+  let startValue = useRef(new Animated.Value(0)).current
   useEffect(() => {
     Animated.loop(
       Animated.sequence([
@@ -60,9 +60,9 @@ export const Shimmer = compose<ShimmerType>({
         var rows = [];
         for (var i = 0; i < elements.length; i++) {
           const element = elements[i];
-          if (element.type == ShimmerElementType.rect) {
+          if (element.type == 'rect') {
             rows.push(<Slots.rect key={i} width={element.width} height={element.height} x={element.xPos} y={element.yPos} rx={element.borderRadius} ry={element.borderRadius} />);
-          } else if (element.type == ShimmerElementType.circle) {
+          } else if (element.type == 'circle') {
             rows.push(<Slots.circle key={i} r={element.height / 2} cx={element.xPos} cy={element.yPos} />);
           }
         }

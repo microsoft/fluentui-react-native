@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Shimmer, ShimmerElement, ShimmerElementType } from '@fluentui-react-native/experimental-shimmer'
+import { Shimmer, ShimmerElement } from '@fluentui-react-native/experimental-shimmer'
 import { SHIMMER_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Stack } from '@fluentui-react-native/stack';
@@ -15,7 +15,7 @@ const icon: ImageURISource = {
 const shimmer: React.FunctionComponent<{}> = () => {
   const lines: Array<ShimmerElement> = [
     {
-      type: ShimmerElementType.rect,
+      type: 'rect',
       width: 100,
       height: 20,
       borderRadius: 3,
@@ -23,7 +23,7 @@ const shimmer: React.FunctionComponent<{}> = () => {
       yPos: 70,
     },
     {
-      type: ShimmerElementType.rect,
+      type: 'rect',
       width: 150,
       height: 20,
       borderRadius: 3,
@@ -31,7 +31,7 @@ const shimmer: React.FunctionComponent<{}> = () => {
       yPos: 42,
     },
     {
-      type: ShimmerElementType.rect,
+      type: 'rect',
       width: 200,
       height: 20,
       borderRadius: 3,
@@ -40,9 +40,9 @@ const shimmer: React.FunctionComponent<{}> = () => {
     },
   ];
   const circle = lines.slice();
-  circle.push({ type: ShimmerElementType.circle, height: 70, xPos: 40, yPos: 55 });
+  circle.push({ type: 'circle', height: 70, xPos: 40, yPos: 55 });
   const rect = lines.slice();
-  rect.push({ type: ShimmerElementType.rect, height: 60, width: 60, xPos: 10, yPos: 25, borderRadius: 3 });
+  rect.push({ type: 'rect', height: 60, width: 60, xPos: 10, yPos: 25, borderRadius: 3 });
 
   const rectProp: RectProps = {
     width: 200,
@@ -55,7 +55,7 @@ const shimmer: React.FunctionComponent<{}> = () => {
     cy: 50,
   }
   const CustomizedShimmer = Shimmer.customize({
-    gradientTintColor: "pink",
+    gradientTintColor: 'pink',
   });
   return (
 
