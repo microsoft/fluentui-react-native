@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add direct dependency on RNSVG in FURN Icon",
-  "packageName": "@fluentui-react-native/icon",
-  "email": "adam.gleitman@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-04-26T22:50:21.656Z"
-}
