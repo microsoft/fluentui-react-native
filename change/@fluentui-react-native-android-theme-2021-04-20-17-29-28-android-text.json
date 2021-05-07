@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "update android-text theme and test",
+  "packageName": "@fluentui-react-native/android-theme",
+  "email": "tamasane@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-04-20T11:59:28.927Z"
+}
