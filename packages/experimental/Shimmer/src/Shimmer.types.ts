@@ -92,8 +92,6 @@ export interface ShimmerTokens {
 
 export interface ShimmerSlotProps extends ShimmerProps {
   root: SvgProps;
-  rect: RectProps;
-  circle: CircleProps;
   image: ImageProps;
 }
 
@@ -103,14 +101,6 @@ export interface ShimmerProps extends ShimmerTokens {
    * @defaultValue 'null'
    */
   uri?: ImageURISource;
-  /**
-   * Svg Rect element
-   */
-  rect?: RectProps;
-  /**
-   * Svg Circle element
-   */
-  circle?: CircleProps;
   /**
    * Array of ShimmerElement in a single view
    */

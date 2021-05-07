@@ -28,8 +28,6 @@ export const Shimmer = compose<ShimmerType>({
   ...stylingSettings,
   slots: {
     root: Svg,
-    rect: Rect,
-    circle: Circle,
     image: Image,
   },
   render: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
@@ -55,15 +53,15 @@ export const Shimmer = compose<ShimmerType>({
     let startValue = useShimmerAnimation(memoizedShimmerData);
 
     return (rest: ShimmerProps) => {
-      const { circle, rect, uri, elements, ...mergedProps } = mergeProps(props, rest);
+      const { uri, elements, ...mergedProps } = mergeProps(props, rest);
       if (elements) {
         var rows = [];
         for (var i = 0; i < elements.length; i++) {
           const element = elements[i];
           if (element.type == 'rect') {
-            rows.push(<Slots.rect key={i} width={element.width} height={element.height} x={element.xPos} y={element.yPos} rx={element.borderRadius} ry={element.borderRadius} />);
+            rows.push(<Rect key={i} width={element.width} height={element.height} x={element.xPos} y={element.yPos} rx={element.borderRadius} ry={element.borderRadius} />);
           } else if (element.type == 'circle') {
-            rows.push(<Slots.circle key={i} r={element.height / 2} cx={element.xPos} cy={element.yPos} />);
+            rows.push(<Circle key={i} r={element.height / 2} cx={element.xPos} cy={element.yPos} />);
           }
         }
       }
@@ -79,8 +77,6 @@ export const Shimmer = compose<ShimmerType>({
           {uri && <Slots.image href={props.uri} />}
           <ClipPath id="shimmerView">
             {rows}
-            {rect && <Slots.rect width={props.rect.width} x={props.rect.x} y={props.rect.y} />}
-            {circle && <Slots.circle cx={props.circle.cx} cy={props.circle.cy} r={props.circle.r} />}
           </ClipPath>
           <Rect
             x="0"

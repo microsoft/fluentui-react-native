@@ -32,17 +32,6 @@ export const stylingSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, 
       }),
       ['gradientTintColor', 'toValue', 'duration', 'delay', 'shimmerTintColor', 'width', 'height', 'angle', 'gradientOpacity'],
     ),
-    rect: buildProps(
-      (tokens: ShimmerTokens) => ({
-        width: tokens.width,
-        height: 30,
-      }),
-    ),
-    circle: buildProps((tokens: ShimmerTokens) => ({
-      r: tokens.height / 2,
-
-    }),
-    ),
     image: buildProps((_tokens: ShimmerTokens) => ({
       href: null,
     }),
