@@ -1,4 +1,4 @@
-import { SvgProps, RectProps, CircleProps, ImageProps } from 'react-native-svg';
+import { SvgProps, ImageProps } from 'react-native-svg';
 import { ImageURISource } from 'react-native';
 
 export const shimmerName = 'Shimmer';
@@ -44,12 +44,15 @@ export interface ShimmerElement {
 
 export interface ShimmerTokens {
   /**
-   * The final value for the animation to reach the end
+   * Specifies the distance traveled from starting position.
+   * By default, the animation will animate from 0 to 30 over the course of 7000ms, since speed = distance / time, so
+   * speed ≈ 0.004 (higher the speed, faster it moves).
    * @defaultValue '30'
    */
   toValue?: number;
   /**
-   * The time it'll take for the ref to reach the toValue property in milliseconds
+   * Specifies the time required to travel a given distance in milliseconds
+   *
    * @defaultValue '7000'
    */
   duration?: number;
@@ -79,7 +82,8 @@ export interface ShimmerTokens {
    */
   height?: number;
   /**
-   * Specifies the gradient angle, value should be less than 1
+   * Specifies the gradient angle, value should be anywhere between -1 and 1
+   * -1 to 1 maps to 90 degrees horizontally to ≈ 120 degrees
    * @defaultValue '0'
    */
   angle?: number;
