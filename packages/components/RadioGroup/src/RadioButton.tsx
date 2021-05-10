@@ -45,12 +45,8 @@ export const RadioButton = compose<IRadioButtonType>({
     /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
     const pressable = useAsPressable({
       ...rest,
-      onPress: () => {
-        changeSelection();
-      },
-      onFocus: () => {
-        changeSelection();
-      },
+      onPress: changeSelection,
+      onFocus: changeSelection,
     });
 
     // Used when creating accessibility properties in mergeSettings below
