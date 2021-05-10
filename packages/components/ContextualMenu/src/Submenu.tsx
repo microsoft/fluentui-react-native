@@ -84,7 +84,11 @@ export const Submenu = compose<SubmenuType>({
     if (renderData.state == undefined) {
       return null;
     }
-    return <CMContext.Provider value={renderData.state.context}><Slots.root><Slots.container>{children}</Slots.container></Slots.root></CMContext.Provider>;
+    return<CMContext.Provider value={renderData.state.context}>
+      <Slots.root>
+        <Slots.container>{children}</Slots.container>
+      </Slots.root>
+    </CMContext.Provider>;
   }
 });
 
