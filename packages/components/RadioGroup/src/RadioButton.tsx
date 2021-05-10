@@ -29,7 +29,6 @@ export const RadioButton = compose<IRadioButtonType>({
       if (buttonKey != info.selectedKey) {
         info.onChange && info.onChange(buttonKey);
         info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
-        componentRef?.current?.focus();
       }
     };
 
