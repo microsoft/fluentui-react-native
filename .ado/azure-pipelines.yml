@@ -170,7 +170,7 @@ jobs:
         displayName: 'yarn test'
 
       - script: |
-          yarn publish:beachball -- -b origin/master -n $(npmAuth) --access public -y --no-publish --no-push
+          yarn publish:beachball -- -b origin/master -n $(npmAuth) --access public -y
         displayName: 'Publish NPM Packages'
 
   - job: NuGetPublishDryRun
