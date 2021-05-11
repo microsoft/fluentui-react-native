@@ -1,11 +1,35 @@
 import Foundation
 import FluentUI
 
+@objc(MSFAvatarStorage)
+class AvatarStorage: NSObject {
+	
+	static let SharedInstance = AvatarStorage()
+	
+	private init() {
+		super.init()
+	}
+	
+	@objc static var viewToControllerMap: [UIView:MSFAvatar] = [:]
+
+	
+	func addControllerViewMapping(controller: MSFAvatar) {
+		let view = controller.view
+		AvatarStorage.viewToControllerMap[view] = controller
+	}
+	
+	func controllerForView(view: UIView) -> MSFAvatar {
+		return AvatarStorage.viewToControllerMap[view] ?? nil
+	}
+}
+
 @objc(MSFAvatarViewManager)
 class AvatarViewManager: RCTViewManager {
+	
 	override func view()->UIView! {
-		let avatarView = AvatarLegacyView(avatarSize: .small)
-		return avatarView
+		let avatarHostingController = MSFAvatar()
+		AvatarStorage.SharedInstance.addControllerViewMapping(controller: avatarHostingController)
+		return avatarHostingController.view
 	}
 
 	override class func requiresMainQueueSetup() -> Bool {
@@ -15,12 +39,12 @@ class AvatarViewManager: RCTViewManager {
 	override func constantsToExport() -> [AnyHashable : Any]! {
 		return [
 			"sizes" : [
-				"xSmall" : AvatarLegacySize.extraSmall.size.width,
-				"small" : AvatarLegacySize.small.size.width,
-				"medium" : AvatarLegacySize.medium.size.width,
-				"large" : AvatarLegacySize.large.size.width,
-				"xLarge" : AvatarLegacySize.extraLarge.size.width,
-				"xxLarge" : AvatarLegacySize.extraExtraLarge.size.width
+				"xSmall" : 16,
+				"small" : 24,
+				"medium" : 32,
+				"large" : 42,
+				"xLarge" : 52,
+				"xxLarge" : 72,
 			]
 		]
 	}

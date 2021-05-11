@@ -10,13 +10,13 @@ PODS:
     - React-jsi (= 0.63.1)
     - ReactCommon/turbomodule/core (= 0.63.1)
   - FluentUI-React-Native-Apple-Theme (0.4.2):
-    - MicrosoftFluentUI (~> 0.2.2)
+    - MicrosoftFluentUI (= 0.0.2)
     - React
   - FluentUI-React-Native-Avatar (0.7.1):
-    - MicrosoftFluentUI (~> 0.2.2)
+    - MicrosoftFluentUI (= 0.0.2)
     - React
   - FluentUI-React-Native-Button (0.5.3):
-    - MicrosoftFluentUI (~> 0.2.2)
+    - MicrosoftFluentUI (= 0.0.2)
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.0.2):
@@ -318,7 +318,7 @@ PODS:
   - ReactTestApp-Resources (1.0.0-dev)
   - RNCPicker (1.9.11):
     - React-Core
-  - RNSVG (12.1.1-0):
+  - RNSVG (12.1.1):
     - React
   - SwiftLint (0.43.0)
   - Yoga (1.14.0)
@@ -444,9 +444,9 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 87ca368919ae0ec70816fb8a42252ef59dc05c94
   FBReactNativeSpec: 7c0591658d85effad209fc4f45b6c9760f9e5842
-  FluentUI-React-Native-Apple-Theme: 5096ba1ccdce75cac6af8dfb6f43880828d6a8e1
-  FluentUI-React-Native-Avatar: 20e879a5477bf6a32510796d139d699dad5f7f5f
-  FluentUI-React-Native-Button: b882911504fd4b8ad21b6391b6fb49d908276f5e
+  FluentUI-React-Native-Apple-Theme: 3e1975ff6f28aa90538eac5d946bd4eb480a97c2
+  FluentUI-React-Native-Avatar: 7c9e95ea3f1aead2deec29c8586cb033612e7478
+  FluentUI-React-Native-Button: 7b79d61000a2a37a51635bffe023eec201761f6e
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: 35e22e4a6a09c57d93b0054319f87cd1b5b15e89
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
@@ -473,10 +473,10 @@ SPEC CHECKSUMS:
   ReactTestApp-DevSupport: 12d9f285a44ff0cb7962a213621f87d3e6de9288
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
   RNCPicker: 6780c753e9e674065db90d9c965920516402579d
-  RNSVG: 1a8855adeb20c5beb0a808281608315fc1092d15
+  RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   Yoga: 6f6f412e10cf9acb93bb0e290613784603d2f0c9
 
-PODFILE CHECKSUM: 601a04a4aafaf36828a33238273b0ee9dc566464
+PODFILE CHECKSUM: 922252b4a744011153a7463ae34c178165d31b49
 
 COCOAPODS: 1.10.1
