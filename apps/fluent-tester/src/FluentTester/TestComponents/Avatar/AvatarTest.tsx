@@ -12,8 +12,6 @@ export const BasicAvatar: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [showPresence, setShowPresence] = React.useState(false);
 
-  // Add Text fields for primary/Secondary Text
-
   return (
     <View style={commonStyles.root}>
       {/* settings */}

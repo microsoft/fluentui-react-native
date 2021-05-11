@@ -92,7 +92,7 @@ RCT_CUSTOM_VIEW_PROPERTY(ringColor, UIColor, UIView)
     }
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(backgroundColor, UIColor, UIView)
+RCT_CUSTOM_VIEW_PROPERTY(foregroundColor, UIColor, UIView)
 {
     MSFAvatarStorage *storage = [MSFAvatarStorage sharedInstance];
     MSFAvatar *controller = [storage getHostingController:view];
@@ -104,7 +104,7 @@ RCT_CUSTOM_VIEW_PROPERTY(backgroundColor, UIColor, UIView)
     }
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(foregroundColor, UIColor, UIView)
+RCT_CUSTOM_VIEW_PROPERTY(backgroundColor, UIColor, UIView)
 {
     MSFAvatarStorage *storage = [MSFAvatarStorage sharedInstance];
     MSFAvatar *controller = [storage getHostingController:view];

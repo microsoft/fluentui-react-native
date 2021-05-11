@@ -35,10 +35,19 @@ export type AvatarProps = {
    */
   secondaryText?: string;
 
+  /**
+   * A custom color for the ring around the Avatar
+   */
   ringColor?: ColorValue;
 
+  /**
+   * A custom color for the avatar initials when no image is shown
+   */
   foregroundColor?: ColorValue;
 
+  /**
+   * A custom color for the avatar background when no image is shown
+   */
   backgroundColor?: ColorValue;
 
   /**
@@ -46,10 +55,19 @@ export type AvatarProps = {
    */
   presence?: Presence;
 
+  /**
+   * A boolean inidicating whether the ring is visible
+   */
   isRingVisible?: boolean;
 
+  /**
+   * TODO
+   */
   isTransparent?: boolean;
 
+  /**
+   * A boolean indicating out of office status
+   */
   isOutOfOffice?: boolean;
 };
 
