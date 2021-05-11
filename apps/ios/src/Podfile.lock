@@ -424,7 +424,6 @@ DEPENDENCIES:
   - FluentUI-React-Native-Apple-Theme (from `../../../packages/theming/apple-theme/FluentUIReactNativeAppleTheme.podspec`)
   - FluentUI-React-Native-Avatar (from `../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec`)
   - FluentUI-React-Native-Button (from `../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec`)
-  - FluentUI-React-Native-Shimmer (from `../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec`)
   - Folly (from `../../../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - MicrosoftFluentUI (= 0.0.18)
@@ -479,8 +478,6 @@ EXTERNAL SOURCES:
     :path: "../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec"
   FluentUI-React-Native-Button:
     :path: "../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec"
-  FluentUI-React-Native-Shimmer:
-    :path: "../../../packages/components/Shimmer/FluentUIReactNativeShimmer.podspec"
   Folly:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:

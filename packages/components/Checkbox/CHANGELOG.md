@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Sat, 06 Mar 2021 00:20:05 GMT and should not be manually modified.
+This log was last generated on Fri, 07 May 2021 18:12:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.2
+
+Fri, 07 May 2021 18:12:16 GMT
+
+### Patches
+
+- Adding tooltip to Checkbox (safreibe@microsoft.com)
 
 ## 0.10.0
 

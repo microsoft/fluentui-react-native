@@ -2,6 +2,47 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 07 May 2021 18:12:16 GMT",
+      "tag": "@fluentui-react-native/tester_v0.23.1",
+      "version": "0.23.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add button icon tests specific to win32",
+            "author": "warleu@microsoft.com",
+            "commit": "acedf34f3fa9000885e5a2ab4cc27eb3b43e9190",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Use start instead of rnx-start",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "88428c744d3101d3e09dd7fa74cd88656dee5389",
+            "package": "@fluentui-react-native/tester"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "update android-text theme and test",
+            "author": "tamasane@gmail.com",
+            "commit": "dc164d70e8eccfc64e4b1005b79f6ed8aa5f1c2e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "updated themepicker for android",
+            "author": "tamasane@gmail.com",
+            "commit": "e3bb204f4b9e17cecf8dc6b87df70903e08e4948",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Adding tooltip to Checkbox",
+            "author": "safreibe@microsoft.com",
+            "commit": "b4ab5dea649502893433675fdb65d222cc0499c0",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 15 Apr 2021 20:08:17 GMT",
       "tag": "@fluentui-react-native/tester_v0.23.0",
       "version": "0.23.0",
