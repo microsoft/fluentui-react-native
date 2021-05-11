@@ -24,12 +24,10 @@ function createIconProps(src: number | string | IconProps) {
       width: asset.width,
       height: asset.height,
     };
-  }
-  else if (typeof src === 'string') {
+  } else if (typeof src === 'string') {
     const rasterProps: RasterImageIconProps = { src: { uri: src as string } };
     return { rasterImageSource: rasterProps };
-  }
-  else {
+  } else {
     return src as IconProps;
   }
 }
@@ -64,6 +62,13 @@ export const Button = compose<IButtonType>({
     const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
     // create the merged slot props
 
+    // Set key focus on the button if it's been pressed.
+    React.useEffect(() => {
+      if (pressable.state.pressed) {
+        userProps.componentRef?.current?.focus();
+      }
+    }, [pressable.state.pressed]);
+
     const slotProps = mergeSettings<IButtonSlotProps>(styleProps, {
       root: {
         ...pressable.props,
@@ -74,7 +79,7 @@ export const Button = compose<IButtonType>({
         onKeyUp: onKeyUp,
       },
       content: { children: content, testID: testID },
-      icon: createIconProps(icon)
+      icon: createIconProps(icon),
     });
 
     return { slotProps, state };
