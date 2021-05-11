@@ -1,22 +1,17 @@
 import Foundation
 import FluentUI
 
-// TODO Add Macro
-extension MSFAvatar {
-    var storage: NSMutableDictionary {
-        return MSFAvatarStorage.sharedInstance().viewToControllerMapping
-    }
-}
-
 @objc(MSFAvatarViewManager)
 class AvatarViewManager: RCTViewManager {
 	
 	override func view()->UIView! {
-		let controller = MSFAvatar()
-        let view = controller.view
+		let viewWrapper = MSFAvatar()
+        let view = viewWrapper.view
         
-        let avatarStorage = MSFAvatarStorage.sharedInstance()
-        avatarStorage.addNewHostingController(controller)
+        // Store the key value pair for lookup when we set props
+        let storage = MSFAvatar.storage()
+        let key = NSValue(nonretainedObject: view)
+        storage[key] = viewWrapper
         
 		return view
 	}

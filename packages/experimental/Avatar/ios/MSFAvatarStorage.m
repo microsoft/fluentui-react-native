@@ -6,34 +6,23 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import "MSFAvatarStorage.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation MSFAvatarStorage
+@implementation MSFAvatar (MSFAvatarViewManagerAdditons)
 
-static MSFAvatarStorage *s_sharedInstance;
+static NSMutableDictionary *s_sharedInstance;
 
-+ (instancetype) sharedInstance {
++(NSMutableDictionary *)storage
+{
     if (s_sharedInstance == nil) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            s_sharedInstance = [MSFAvatarStorage new];
-            [s_sharedInstance setViewToControllerMapping:[NSMutableDictionary new]];
+            s_sharedInstance = [NSMutableDictionary new];
         });
     }
     return s_sharedInstance;
-}
-
--(void)addNewHostingController:(MSFAvatar *)hostingController {
-    NSValue *key = [NSValue valueWithNonretainedObject:[hostingController view]]; //Try with Pointer Value
-    [[self viewToControllerMapping] setObject:hostingController forKey:key];
-}
-
--(MSFAvatar *)getHostingController:(UIView *)view {
-    NSValue *key = [NSValue valueWithNonretainedObject:view];
-    return [[self viewToControllerMapping] objectForKey:key];
 }
 
 @end

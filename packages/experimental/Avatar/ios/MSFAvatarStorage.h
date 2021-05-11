@@ -12,15 +12,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MSFAvatarStorage : NSObject
+@interface MSFAvatar (MSFAvatarViewManagerAdditons)
 
-@property NSMutableDictionary<UIView *, MSFAvatar *> *viewToControllerMapping;
-
-+ (instancetype)sharedInstance;
-
--(void)addNewHostingController:(MSFAvatar *)hostingController; // Not actually a hosting controller "UIKitWrapper" <-- The Name
-
--(id)getHostingController:(UIView *)view;
++ (NSMutableDictionary *)storage;
 
 @end
 

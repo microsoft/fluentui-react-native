@@ -1,9 +1,32 @@
-#import <React/RCTComponent.h>
 #import <React/RCTViewManager.h>
 
 #import "MSFAvatarStorage.h"
 
 @import FluentUI;
+
+// Macros inspired by https://betterprogramming.pub/react-native-meets-swiftui-d1606a8e1681
+
+#define RCT_EXPORT_SWIFTUI_PROPERTY(name, type, proxyClass) \
+RCT_REMAP_VIEW_PROPERTY(name, __custom__, type)  \
+- (void)set_##name:(id)json forView:(UIView *)view withDefaultView:(UIView *)defaultView RCT_DYNAMIC { \
+    NSMutableDictionary *storage = [proxyClass storage]; \
+    proxyClass *proxy = storage[[NSValue valueWithNonretainedObject:view]];  \
+    proxy.state.name = [RCTConvert type:json]; \
+}
+
+#define RCT_REMAP_SWIFTUI_PROPERTY(name, keyPath, type, proxyClass) \
+RCT_REMAP_VIEW_PROPERTY(name, __custom__, type)  \
+- (void)set_##name:(id)json forView:(UIView *)view withDefaultView:(UIView *)defaultView RCT_DYNAMIC { \
+    NSMutableDictionary *storage = [proxyClass storage]; \
+    proxyClass *proxy = storage[[NSValue valueWithNonretainedObject:view]];  \
+    proxy.state.keyPath = [RCTConvert type:json]; \
+}
+
+#define RCT_EXPORT_CUSTOM_SWIFTUI_PROPERTY(name, type, proxyClass) \
+RCT_REMAP_VIEW_PROPERTY(name, __custom__, type)  \
+- (void)set_##name:(id)json forView:(UIView *)view withDefaultView:(UIView *)defaultView RCT_DYNAMIC
+
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -42,148 +65,42 @@ RCT_ENUM_CONVERTER(MSFAvatarStyle, (@{
 
 @interface RCT_EXTERN_MODULE(MSFAvatarViewManager, RCTViewManager)
 
-RCT_CUSTOM_VIEW_PROPERTY(primaryText, NSString, UIView)
+RCT_EXPORT_SWIFTUI_PROPERTY(primaryText, NSString, MSFAvatar)
+
+RCT_EXPORT_SWIFTUI_PROPERTY(secondaryText, NSString, MSFAvatar)
+
+RCT_REMAP_SWIFTUI_PROPERTY(imageSource, image, UIImage, MSFAvatar)
+
+RCT_EXPORT_SWIFTUI_PROPERTY(ringColor, UIColor, MSFAvatar)
+
+RCT_EXPORT_SWIFTUI_PROPERTY(foregroundColor, UIColor, MSFAvatar)
+
+RCT_EXPORT_SWIFTUI_PROPERTY(backgroundColor, UIColor, MSFAvatar)
+
+RCT_EXPORT_SWIFTUI_PROPERTY(presence, MSFAvatarPresence, MSFAvatar)
+
+RCT_EXPORT_SWIFTUI_PROPERTY(isRingVisible, BOOL, MSFAvatar)
+
+RCT_EXPORT_SWIFTUI_PROPERTY(isTransparent, BOOL, MSFAvatar)
+
+
+RCT_EXPORT_SWIFTUI_PROPERTY(isOutOfOffice, BOOL, MSFAvatar)
+
+
+RCT_EXPORT_CUSTOM_SWIFTUI_PROPERTY(size, MSFAvatarSize, MSFAvatar)
 {
-    MSFAvatarStorage *storage = [MSFAvatarStorage sharedInstance];
-    id controller = [storage getHostingController:view];
-    if (controller) {
-        NSString *primaryText = [RCTConvert NSString:json];
-        [[(MSFAvatar *)controller state] setPrimaryText:primaryText];
-    } else {
-        RCTLogError(@"Corresponding UIHostingController not found");
-    }
+    NSMutableDictionary *storage = [MSFAvatar storage];
+    MSFAvatar *viewWrapper = storage[[NSValue valueWithNonretainedObject:view]];
+    MSFAvatarSize size = [RCTConvert MSFAvatarSize:json];
+    [viewWrapper setSizeWithSize:size];
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(secondaryText, NSString, UIView)
+RCT_EXPORT_CUSTOM_SWIFTUI_PROPERTY(style, MSFAvatarStyle, MSFAvatar)
 {
-    MSFAvatarStorage *storage = [MSFAvatarStorage sharedInstance];
-    MSFAvatar *controller = [storage getHostingController:view];
-    if (controller) {
-        NSString *secondaryText = [RCTConvert NSString:json];
-        [[controller state] setSecondaryText:secondaryText];
-    } else {
-        RCTLogError(@"Corresponding UIHostingController not found");
-    }
-}
-
-RCT_CUSTOM_VIEW_PROPERTY(imageSource, UIImage, UIView)
-{
-    MSFAvatarStorage *storage = [MSFAvatarStorage sharedInstance];
-    MSFAvatar *controller = [storage getHostingController:view];
-    if (controller) {
-        UIImage *image = [RCTConvert UIImage:json];
-        [[controller state] setImage:image];
-    } else {
-        RCTLogError(@"Corresponding UIHostingController not found");
-    }
-}
-
-RCT_CUSTOM_VIEW_PROPERTY(ringColor, UIColor, UIView)
-{
-    MSFAvatarStorage *storage = [MSFAvatarStorage sharedInstance];
-    MSFAvatar *controller = [storage getHostingController:view];
-    if (controller) {
-        UIColor *ringColor = [RCTConvert UIColor:json];
-        [[controller state] setRingColor:ringColor];
-    } else {
-        RCTLogError(@"Corresponding UIHostingController not found");
-    }
-}
-
-RCT_CUSTOM_VIEW_PROPERTY(foregroundColor, UIColor, UIView)
-{
-    MSFAvatarStorage *storage = [MSFAvatarStorage sharedInstance];
-    MSFAvatar *controller = [storage getHostingController:view];
-    if (controller) {
-        UIColor *foregroundColor = [RCTConvert UIColor:json];
-        [[controller state] setForegroundColor:foregroundColor];
-    } else {
-        RCTLogError(@"Corresponding UIHostingController not found");
-    }
-}
-
-RCT_CUSTOM_VIEW_PROPERTY(backgroundColor, UIColor, UIView)
-{
-    MSFAvatarStorage *storage = [MSFAvatarStorage sharedInstance];
-    MSFAvatar *controller = [storage getHostingController:view];
-    if (controller) {
-        UIColor *backgroundColor = [RCTConvert UIColor:json];
-        [[controller state] setBackgroundColor:backgroundColor];
-    } else {
-        RCTLogError(@"Corresponding UIHostingController not found");
-    }
-}
-
-RCT_CUSTOM_VIEW_PROPERTY(presence, MSFAvatarPresence, UIView)
-{
-    MSFAvatarStorage *storage = [MSFAvatarStorage sharedInstance];
-    MSFAvatar *controller = [storage getHostingController:view];
-    if (controller) {
-        MSFAvatarPresence presence = [RCTConvert MSFAvatarPresence:json];
-        [[controller state] setPresence:presence];
-    } else {
-        RCTLogError(@"Corresponding UIHostingController not found");
-    }
-}
-
-RCT_CUSTOM_VIEW_PROPERTY(isRingVisible, bool, UIView)
-{
-    MSFAvatarStorage *storage = [MSFAvatarStorage sharedInstance];
-    MSFAvatar *controller = [storage getHostingController:view];
-    if (controller) {
-        bool isRingVisible = [RCTConvert BOOL:json];
-        [[controller state] setIsRingVisible:isRingVisible];
-    } else {
-        RCTLogError(@"Corresponding UIHostingController not found");
-    }
-}
-
-RCT_CUSTOM_VIEW_PROPERTY(isTransparent, bool, UIView)
-{
-    MSFAvatarStorage *storage = [MSFAvatarStorage sharedInstance];
-    MSFAvatar *controller = [storage getHostingController:view];
-    if (controller) {
-        bool isTransparent = [RCTConvert BOOL:json];
-        [[controller state] setIsTransparent:isTransparent];
-    } else {
-        RCTLogError(@"Corresponding UIHostingController not found");
-    }
-}
-
-RCT_CUSTOM_VIEW_PROPERTY(isOutOfOffice, bool, UIView)
-{
-    MSFAvatarStorage *storage = [MSFAvatarStorage sharedInstance];
-    MSFAvatar *controller = [storage getHostingController:view];
-    if (controller) {
-        bool isOutOfOffice = [RCTConvert BOOL:json];
-        [[controller state] setIsOutOfOffice:isOutOfOffice];
-    } else {
-        RCTLogError(@"Corresponding UIHostingController not found");
-    }
-}
-
-RCT_CUSTOM_VIEW_PROPERTY(size, MSFAvatarSize, UIView)
-{
-    MSFAvatarStorage *storage = [MSFAvatarStorage sharedInstance];
-    MSFAvatar *controller = [storage getHostingController:view];
-    if (controller) {
-        MSFAvatarSize size = [RCTConvert MSFAvatarSize:json];
-        [controller setSizeWithSize:size];
-    } else {
-        RCTLogError(@"Corresponding UIHostingController not found");
-    }
-}
-
-RCT_CUSTOM_VIEW_PROPERTY(style, MSFAvatarStyle, UIView)
-{
-    MSFAvatarStorage *storage = [MSFAvatarStorage sharedInstance];
-    MSFAvatar *controller = [storage getHostingController:view];
-    if (controller) {
-        MSFAvatarStyle style = [RCTConvert MSFAvatarStyle:json];
-        [controller setStyleWithStyle:style];
-    } else {
-        RCTLogError(@"Corresponding UIHostingController not found");
-    }
+    NSMutableDictionary *storage = [MSFAvatar storage];
+    MSFAvatar *viewWrapper = storage[[NSValue valueWithNonretainedObject:view]];
+    MSFAvatarStyle style = [RCTConvert MSFAvatarStyle:json];
+    [viewWrapper setStyleWithStyle:style];
 }
 
 @end

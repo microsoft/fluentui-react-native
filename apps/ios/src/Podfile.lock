@@ -18,9 +18,6 @@ PODS:
   - FluentUI-React-Native-Button (0.5.3):
     - MicrosoftFluentUI (= 0.0.18)
     - React
-  - FluentUI-React-Native-Shimmer (0.6.3):
-    - MicrosoftFluentUI (= 0.0.18)
-    - React
   - Folly (2020.01.13.00):
     - boost-for-react-native
     - DoubleConversion
@@ -541,7 +538,6 @@ SPEC CHECKSUMS:
   FluentUI-React-Native-Apple-Theme: f3dbcf4c2425a43d9659c39afa8cb78b38e52e2b
   FluentUI-React-Native-Avatar: 5b2ece8873de5161df41d633f1eaafd6f65c889f
   FluentUI-React-Native-Button: 4ee5cf661e92a2e9a9a9382779eeacd50455622a
-  FluentUI-React-Native-Shimmer: e205dbb88585af90abd85bfca0e98f55fd29f4e6
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   MicrosoftFluentUI: 22838222ee96487f2ad768d70520c827d0ab31e5
@@ -573,6 +569,6 @@ SPEC CHECKSUMS:
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: 36929fcc98456dff1d0f0c326e740a6b90b016ce
+PODFILE CHECKSUM: 89d3b819f9f92fe304c0c0b44799b2981acc8d3f
 
 COCOAPODS: 1.10.1
