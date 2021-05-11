@@ -26,12 +26,12 @@ static MSFAvatarStorage *s_sharedInstance;
     return s_sharedInstance;
 }
 
--(void)addNewHostingController:(id)hostingController {
-    NSValue *key = [NSValue valueWithNonretainedObject:[hostingController view]];
+-(void)addNewHostingController:(MSFAvatar *)hostingController {
+    NSValue *key = [NSValue valueWithNonretainedObject:[hostingController view]]; //Try with Pointer Value
     [[self viewToControllerMapping] setObject:hostingController forKey:key];
 }
 
--(id)getHostingController:(id)view {
+-(MSFAvatar *)getHostingController:(UIView *)view {
     NSValue *key = [NSValue valueWithNonretainedObject:view];
     return [[self viewToControllerMapping] objectForKey:key];
 }

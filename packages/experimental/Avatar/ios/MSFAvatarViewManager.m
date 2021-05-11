@@ -42,7 +42,6 @@ RCT_ENUM_CONVERTER(MSFAvatarStyle, (@{
 
 @interface RCT_EXTERN_MODULE(MSFAvatarViewManager, RCTViewManager)
 
-
 RCT_CUSTOM_VIEW_PROPERTY(primaryText, NSString, UIView)
 {
     MSFAvatarStorage *storage = [MSFAvatarStorage sharedInstance];
@@ -57,7 +56,6 @@ RCT_CUSTOM_VIEW_PROPERTY(primaryText, NSString, UIView)
 
 RCT_CUSTOM_VIEW_PROPERTY(secondaryText, NSString, UIView)
 {
-
     MSFAvatarStorage *storage = [MSFAvatarStorage sharedInstance];
     MSFAvatar *controller = [storage getHostingController:view];
     if (controller) {

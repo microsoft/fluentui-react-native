@@ -8,17 +8,19 @@
 #ifndef MSFAvatarStorage_h
 #define MSFAvatarStorage_h
 
+@import FluentUI;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MSFAvatarStorage : NSObject
 
-@property NSMutableDictionary *viewToControllerMapping;
+@property NSMutableDictionary<UIView *, MSFAvatar *> *viewToControllerMapping;
 
 + (instancetype)sharedInstance;
 
--(void)addNewHostingController:(id)hostingController;
+-(void)addNewHostingController:(MSFAvatar *)hostingController; // Not actually a hosting controller "UIKitWrapper" <-- The Name
 
--(id)getHostingController:(id)view;
+-(id)getHostingController:(UIView *)view;
 
 @end
 

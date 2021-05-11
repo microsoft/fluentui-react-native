@@ -1,6 +1,13 @@
 import Foundation
 import FluentUI
 
+// TODO Add Macro
+extension MSFAvatar {
+    var storage: NSMutableDictionary {
+        return MSFAvatarStorage.sharedInstance().viewToControllerMapping
+    }
+}
+
 @objc(MSFAvatarViewManager)
 class AvatarViewManager: RCTViewManager {
 	
@@ -9,8 +16,6 @@ class AvatarViewManager: RCTViewManager {
         let view = controller.view
         
         let avatarStorage = MSFAvatarStorage.sharedInstance()
-//        avatarStorage.viewToControllerMapping.setObject(controller, forKey: NSValue(nonretainedObject: view))
-//        avatarStorage.viewToControllerMapping[NSValue(nonretainedObject: view)] = controller
         avatarStorage.addNewHostingController(controller)
         
 		return view
