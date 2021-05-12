@@ -19,7 +19,7 @@
     "android": "react-native run-android "
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.23.2",
+    "@fluentui-react-native/tester": "^0.23.3",
     "@react-native-picker/picker": "^1.9.11",
     "react": "16.13.1",
     "react-native": "^0.63.4",
