@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "no-op change to fix pipeline",
+  "packageName": "@fluentui-react-native/android-theme",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-05-12T06:59:48.129Z"
+}

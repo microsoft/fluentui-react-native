@@ -1137,15 +1137,6 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@fluentui-react-native/shimmer@>=0.6.3 <1.0.0":
-  version "0.6.3"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/shimmer/-/shimmer-0.6.3.tgz#12458d360b6f8709a269fb4ea7ca5b28846e1b9b"
-  integrity sha512-/X3pBg6FKGEJuYpmeiCzvoXzbUEv+5UrIPazvhi5jLWfcbCpGef/Fry/RM5pSCGBOEeJb6QRSc5WChzuqyut5w==
-  dependencies:
-    "@fluentui-react-native/adapters" ">=0.6.0 <1.0.0"
-    "@fluentui-react-native/framework" "0.5.1"
-    "@fluentui-react-native/tokens" ">=0.8.0 <1.0.0"
-
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"

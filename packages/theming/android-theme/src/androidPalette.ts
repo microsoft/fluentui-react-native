@@ -1,6 +1,5 @@
 import { ColorValue } from '@fluentui-react-native/theme-types';
 import { AndroidBaseColorsPalette } from './androidBaseColors';
-
 export interface SemanticPalette {
   //Texts
   textDominant: ColorValue;
@@ -92,7 +91,7 @@ export function getFluentUIAndroidPalette(p: AndroidBaseColorsPalette): FluentUI
         menuIcon: p.gray400,
         menuItemText: p.gray900,
         listBackground: p.white,
-        textHyperLink: '#D83B01',
+        textHyperLink: '#DD3B01',
       }
     : {
         ...p,
