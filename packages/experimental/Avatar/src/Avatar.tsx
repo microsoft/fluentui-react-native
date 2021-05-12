@@ -154,14 +154,15 @@ export const Avatar = compose<AvatarType>({
     const Root = useSlots(props).root;
 
     const memoizedAvatarData = useMemo(
-      () => ({
-        primaryText: props.primaryText,
-        secondaryText: props.secondaryText,
-        image: Image.resolveAssetSource(props.imageSource),
-        color: props.color,
-        customBorderImage: Image.resolveAssetSource(props.customBorderImageSource),
-        presence: props.presence,
-      }),
+      () =>
+        ({
+          primaryText: props.primaryText,
+          secondaryText: props.secondaryText,
+          image: Image.resolveAssetSource(props.imageSource),
+          color: props.color,
+          customBorderImage: Image.resolveAssetSource(props.customBorderImageSource),
+          presence: props.presence,
+        } as AvatarData),
       [props.primaryText, props.secondaryText, props.imageSource, props.color, props.customBorderImageSource, props.presence],
     );
 

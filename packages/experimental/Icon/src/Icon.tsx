@@ -5,7 +5,7 @@ import { Text } from '@fluentui-react-native/text';
 import { SvgUri } from 'react-native-svg';
 import { mergeStyles } from '@fluentui-react-native/framework';
 import { stagedComponent, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import { ColorValue, useTheme } from '@fluentui-react-native/theme-types';
 
 const rasterImageStyleCache = getMemoCache<ImageStyle>();
 
@@ -70,7 +70,7 @@ export const Icon = stagedComponent((props: IconProps) => {
     const color = props.color || theme.colors.buttonText;
 
     const baseProps = {
-      color: color,
+      color: color as ColorValue,
     };
 
     const newProps = mergeProps<IconProps>(baseProps, props, rest);
