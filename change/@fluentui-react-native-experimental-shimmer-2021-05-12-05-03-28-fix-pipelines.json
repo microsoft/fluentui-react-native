@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "minor changes to force package update",
+  "packageName": "@fluentui-react-native/experimental-shimmer",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-05-12T10:03:23.745Z"
+}
