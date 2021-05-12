@@ -44,7 +44,9 @@
   "devDependencies": {
     "@office-iss/react-native-win32": "^0.63.7",
     "@react-native-community/eslint-config": "^1.1.0",
-    "@rnx-kit/cli": "^0.0.3",
+    "@rnx-kit/cli": "^0.5.7",
+    "@rnx-kit/metro-plugin-typescript-validation": "^1.0.2",
+    "@rnx-kit/metro-serializer": "^1.0.0",
     "@types/jasmine": "3.5.10",
     "@types/react": "^16.9.34",
     "@types/react-native": "^0.63.0",

@@ -8,6 +8,8 @@ const path = require('path');
 const blacklist = require('metro-config/src/defaults/blacklist');
 const { getWatchFolders } = require('@uifabricshared/build-native');
 const { getDefaultConfig } = require('metro-config');
+const { TypeScriptValidation } = require('@rnx-kit/metro-plugin-typescript-validation');
+const { MetroSerializer } = require('@rnx-kit/metro-serializer');
 
 module.exports = (async () => {
   const {
@@ -49,6 +51,9 @@ module.exports = (async () => {
           inlineRequires: false,
         },
       }),
+    },
+    serializer: {
+      customSerializer: MetroSerializer([TypeScriptValidation()]),
     },
   };
 })();
