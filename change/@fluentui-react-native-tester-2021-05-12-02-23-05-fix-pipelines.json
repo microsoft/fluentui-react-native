@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "refactor base64 image to separate file",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-05-12T07:23:05.361Z"
+}
