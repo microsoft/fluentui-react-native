@@ -7,6 +7,7 @@ import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderToke
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { IconProps } from '@fluentui-react-native/icon';
+import { ColorValue } from '@fluentui-react-native/theme-types';
 
 export const buttonName = 'Button';
 
@@ -54,17 +55,17 @@ export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBack
   /**
    * The icon color.
    */
-  iconColor?: string;
+  iconColor?: ColorValue;
 
   /**
    * The icon color when hovering over the Button.
    */
-  iconColorHovered?: string;
+  iconColorHovered?: ColorValue;
 
   /**
    * The icon color when the Button is being pressed.
    */
-  iconColorPressed?: string;
+  iconColorPressed?: ColorValue;
 
   /**
    * The size of the icon.
