@@ -6,5 +6,3 @@ import {AppRegistry} from 'react-native';
 AppRegistry.registerComponent('FluentTester', () => FluentTesterApp);
 
 export default FluentTesterApp;
-
-// no op
