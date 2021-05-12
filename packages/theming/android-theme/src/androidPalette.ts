@@ -91,7 +91,7 @@ export function getFluentUIAndroidPalette(p: AndroidBaseColorsPalette): FluentUI
         menuIcon: p.gray400,
         menuItemText: p.gray900,
         listBackground: p.white,
-        textHyperLink: '#DD3B01',
+        textHyperLink: '#D83B01',
       }
     : {
         ...p,
