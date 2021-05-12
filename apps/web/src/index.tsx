@@ -8,3 +8,5 @@ AppRegistry.registerComponent('FluentTester', () => FluentTesterApp);
 AppRegistry.runApplication('FluentTester', { rootTag: document.getElementById('FluentTester') });
 
 export default FluentTesterApp;
+
+// no op
