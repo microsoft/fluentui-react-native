@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "change let to const",
+  "packageName": "@fluentui-react-native/experimental-shimmer",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-05-12T07:20:26.149Z"
+}
