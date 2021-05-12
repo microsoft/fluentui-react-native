@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Wed, 12 May 2021 10:18:25 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.9.4",
+      "version": "0.9.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add logic to mantain selected button's ref",
+            "author": "krsiler@microsoft.com",
+            "commit": "2dfcaf643629fd3d222fd3b8c718bc8f11d779d2",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 15 Apr 2021 20:08:17 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.9.3",
       "version": "0.9.3",

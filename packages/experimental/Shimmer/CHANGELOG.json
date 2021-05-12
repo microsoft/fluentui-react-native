@@ -1,4 +1,20 @@
 {
   "name": "@fluentui-react-native/experimental-shimmer",
-  "entries": []
+  "entries": [
+    {
+      "date": "Wed, 12 May 2021 10:18:25 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "minor changes to force package update",
+            "author": "sanajmi@microsoft.com",
+            "commit": "905611de5d4abf60504f6bfc4f2dadaffd37c9de",
+            "package": "@fluentui-react-native/experimental-shimmer"
+          }
+        ]
+      }
+    }
+  ]
 }

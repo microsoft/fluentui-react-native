@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Wed, 12 May 2021 10:18:25 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.9.2",
+      "version": "0.9.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "remove call to unstable_logbox that isn't necessary",
+            "author": "sanajmi@microsoft.com",
+            "commit": "15f17d21a336b23bf8223abf881480a078d0ab94",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 07 May 2021 18:12:16 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.9.1",
       "version": "0.9.1",
