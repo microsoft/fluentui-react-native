@@ -1,0 +1,8 @@
+{
+  "type": "none",
+  "comment": "Add TypeScript validation during Metro bundling",
+  "packageName": "@fluentui-react-native/apple-theme",
+  "email": "afoxman@microsoft.com",
+  "dependentChangeType": "none",
+  "date": "2021-05-12T21:25:06.113Z"
+}

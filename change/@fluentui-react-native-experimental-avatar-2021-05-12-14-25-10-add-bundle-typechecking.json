@@ -1,0 +1,8 @@
+{
+  "type": "none",
+  "comment": "Add TypeScript validation during Metro bundling",
+  "packageName": "@fluentui-react-native/experimental-avatar",
+  "email": "afoxman@microsoft.com",
+  "dependentChangeType": "none",
+  "date": "2021-05-12T21:24:34.750Z"
+}
