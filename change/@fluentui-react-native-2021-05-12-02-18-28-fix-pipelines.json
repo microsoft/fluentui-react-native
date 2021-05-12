@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "no-op to force package update",
+  "packageName": "@fluentui/react-native",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-05-12T07:18:28.887Z"
+}
