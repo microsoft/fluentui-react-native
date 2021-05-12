@@ -1,8 +1,82 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 10 Mar 2021 04:33:26 GMT and should not be manually modified.
+This log was last generated on Wed, 12 May 2021 10:34:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.23.3
+
+Wed, 12 May 2021 10:34:05 GMT
+
+### Patches
+
+- patch (sanajmi@microsoft.com)
+
+## 0.23.2
+
+Wed, 12 May 2021 10:18:25 GMT
+
+### Patches
+
+- patch (sanajmi@microsoft.com)
+
+## 0.23.1
+
+Fri, 07 May 2021 18:12:16 GMT
+
+### Patches
+
+- update android-text theme and test (tamasane@gmail.com)
+- updated themepicker for android (tamasane@gmail.com)
+- Adding tooltip to Checkbox (safreibe@microsoft.com)
+
+## 0.23.0
+
+Thu, 15 Apr 2021 20:08:17 GMT
+
+### Minor changes
+
+- Upgrade react-native-svg to 12.1.1-0 everywhere (adam.gleitman@gmail.com)
+
+## 0.22.0
+
+Wed, 07 Apr 2021 23:41:02 GMT
+
+### Minor changes
+
+- added svg, transformer to android (tamasane@gmail.com)
+
+## 0.21.1
+
+Wed, 07 Apr 2021 22:19:35 GMT
+
+### Patches
+
+- Add test case for custom border image (sanajmi@microsoft.com)
+
+## 0.21.0
+
+Mon, 15 Mar 2021 06:53:17 GMT
+
+### Minor changes
+
+- initial android theme (tamasane@gmail.com)
+
+## 0.20.0
+
+Fri, 12 Mar 2021 01:25:13 GMT
+
+### Minor changes
+
+- Get FURN Icon working on iOS (adam.gleitman@gmail.com)
+
+## 0.19.0
+
+Thu, 11 Mar 2021 19:48:16 GMT
+
+### Minor changes
+
+- Revamp ThemePickers in Header (saadnajmi2@gmail.com)
 
 ## 0.18.1
 

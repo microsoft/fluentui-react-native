@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Wed, 10 Mar 2021 04:33:26 GMT and should not be manually modified.
+This log was last generated on Wed, 12 May 2021 10:34:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.3
+
+Wed, 12 May 2021 10:34:05 GMT
+
+### Patches
+
+- patch (sanajmi@microsoft.com)
+
+## 0.9.2
+
+Wed, 12 May 2021 10:18:25 GMT
+
+### Patches
+
+- remove call to unstable_logbox that isn't necessary (sanajmi@microsoft.com)
+
+## 0.9.0
+
+Thu, 15 Apr 2021 20:08:17 GMT
+
+### Minor changes
+
+- Upgrade react-native-svg to 12.1.1-0 everywhere (adam.gleitman@gmail.com)
+
+## 0.8.8
+
+Wed, 07 Apr 2021 23:41:02 GMT
+
+### Patches
+
+- upgrade react-native-svg (tamasane@gmail.com)
+
+## 0.8.4
+
+Thu, 11 Mar 2021 19:48:16 GMT
+
+### Patches
+
+- Update FluentTester to be mobile friendly on iOS (saadnajmi2@gmail.com)
 
 ## 0.8.3
 

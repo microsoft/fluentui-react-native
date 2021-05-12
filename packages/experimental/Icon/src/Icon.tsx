@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IconProps, SvgIconProps, FontIconProps } from './Icon.types';
-import { Image, ImageStyle } from 'react-native';
+import { Image, ImageStyle, Platform } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { SvgUri } from 'react-native-svg';
 import { mergeStyles } from '@fluentui-react-native/framework';
@@ -17,8 +17,13 @@ function renderRasterImage(iconProps: IconProps) {
 }
 
 function fontFamilyFromFontSrcFile(fontSrcFile: string, fontFamily: string): string {
-  const asset = Image.resolveAssetSource(+fontSrcFile);
-  return `${fontFamily}#${asset.uri}`;
+  if (Platform.OS == 'windows') {
+    // This `${family}#${path}` notation is specific to WPF
+    const asset = Image.resolveAssetSource(+fontSrcFile);
+    return `${fontFamily}#${asset.uri}`;
+  } else {
+    return fontFamily;
+  }
 }
 
 const fontStyleMemoCache = getMemoCache();

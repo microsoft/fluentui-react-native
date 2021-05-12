@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Sat, 06 Mar 2021 00:20:05 GMT and should not be manually modified.
+This log was last generated on Fri, 07 May 2021 18:12:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.1
+
+Fri, 07 May 2021 18:12:16 GMT
+
+### Patches
+
+- Add direct dependency on RNSVG in FURN Icon (adam.gleitman@gmail.com)
+
+## 0.5.0
+
+Thu, 15 Apr 2021 20:08:17 GMT
+
+### Minor changes
+
+- Add macOS support (adam.gleitman@gmail.com)
+
+## 0.4.0
+
+Fri, 12 Mar 2021 01:25:13 GMT
+
+### Minor changes
+
+- Get FURN Icon working on iOS (adam.gleitman@gmail.com)
 
 ## 0.3.0
 

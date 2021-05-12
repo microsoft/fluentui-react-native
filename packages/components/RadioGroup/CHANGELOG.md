@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Sat, 06 Mar 2021 00:20:05 GMT and should not be manually modified.
+This log was last generated on Wed, 12 May 2021 10:34:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.5
+
+Wed, 12 May 2021 10:34:05 GMT
+
+### Patches
+
+- patch (sanajmi@microsoft.com)
+
+## 0.9.4
+
+Wed, 12 May 2021 10:18:25 GMT
+
+### Patches
+
+- Add logic to mantain selected button's ref (krsiler@microsoft.com)
+
+## 0.9.3
+
+Wed, 07 Apr 2021 23:41:02 GMT
+
+### Patches
+
+- Update Radio Button focus border style to be WCAG 2.1 compliant (#653) (tamasane@gmail.com)
+
+## 0.9.2
+
+Wed, 07 Apr 2021 22:19:35 GMT
+
+### Patches
+
+- Update radio button focus border style (krsiler@microsoft.com)
 
 ## 0.9.0
 

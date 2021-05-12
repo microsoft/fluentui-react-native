@@ -1,8 +1,40 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Wed, 10 Mar 2021 04:33:26 GMT and should not be manually modified.
+This log was last generated on Wed, 12 May 2021 10:34:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.23.8
+
+Wed, 12 May 2021 10:34:05 GMT
+
+### Patches
+
+- patch (sanajmi@microsoft.com)
+
+## 0.23.5
+
+Wed, 07 Apr 2021 23:41:02 GMT
+
+### Patches
+
+- upgrade react-native-svg (tamasane@gmail.com)
+
+## 0.23.4
+
+Wed, 07 Apr 2021 22:19:35 GMT
+
+### Patches
+
+- Add repository link (krsiler@microsoft.com)
+
+## 0.23.1
+
+Thu, 11 Mar 2021 19:48:16 GMT
+
+### Patches
+
+- Update FluentTester to be mobile friendly on iOS (saadnajmi2@gmail.com)
 
 ## 0.23.0
 

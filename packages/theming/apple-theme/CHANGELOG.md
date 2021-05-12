@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Wed, 10 Mar 2021 04:33:26 GMT and should not be manually modified.
+This log was last generated on Mon, 15 Mar 2021 06:53:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.2
+
+Mon, 15 Mar 2021 06:53:17 GMT
+
+### Patches
+
+- Public source files that are needed for source map (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.4.1
+
+Thu, 11 Mar 2021 19:48:16 GMT
+
+### Patches
+
+- Update FluentTester to be mobile friendly on iOS (saadnajmi2@gmail.com)
 
 ## 0.4.0
 
