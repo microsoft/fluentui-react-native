@@ -12,8 +12,10 @@ const CustomizedIconButton = Button.customize({
   content: { style: { marginStart: 5 } },
 });
 
+const isAndroid = Platform.OS == 'android';
+
 export const ButtonIconTest: React.FunctionComponent<{}> = () => {
-  if (Platform.OS == ('win32' as any)) {
+  if (Platform.OS == ('win32' as any) || isAndroid) {
     const testImage = require('./icon_24x24.png');
     const testTtf = require('./Font Awesome 5 Free-Solid-900.otf');
 
@@ -33,7 +35,9 @@ export const ButtonIconTest: React.FunctionComponent<{}> = () => {
       <View>
         <Stack style={stackStyle}>
           <Button icon={testImage} content="Button with png Icon" tooltip="button tooltip" />
-          <Button icon={{ fontSource: fontProps, color: 'blue' }} content="Button with font Icon" tooltip="button tooltip" />
+          {!isAndroid && (
+            <Button icon={{ fontSource: fontProps, color: 'blue' }} content="Button with font Icon" tooltip="button tooltip" />
+          )}
           <Button
             icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }}
             content="Button with svg Icon"
