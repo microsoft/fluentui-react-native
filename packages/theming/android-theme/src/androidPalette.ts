@@ -1,6 +1,5 @@
 import { ColorValue } from '@fluentui-react-native/theme-types';
 import { AndroidBaseColorsPalette } from './androidBaseColors';
-
 export interface SemanticPalette {
   //Texts
   textDominant: ColorValue;
