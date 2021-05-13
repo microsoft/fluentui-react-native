@@ -6,7 +6,6 @@ import { commonTestStyles } from '../Common/styles';
 import { Button, PrimaryButton, Text, StealthButton } from '@fluentui/react-native';
 import { THEME_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { getStringFromColorValue } from '@fluentui-react-native/tokens';
 
 const getThemedStyles = themedStyleSheet((theme: Theme) => {
   return {
@@ -75,7 +74,7 @@ const SwatchList: React.FunctionComponent = () => {
 
   const aggregator = React.useCallback(
     (key: string) => {
-      return { name: key + ' (' + getStringFromColorValue(palette[key]) + ')', color: palette[key] };
+      return { name: key + ' (' + (palette[key] as string) + ')', color: palette[key] };
     },
     [palette],
   );

@@ -9,14 +9,6 @@ export const getPaletteFromTheme = (theme: ITheme): IThemeColorDefinition => {
   return theme.colors;
 };
 
-export const getStringFromColorValue = (colorValue: ColorValue | undefined): string => {
-  if (typeof colorValue !== 'symbol') {
-    return colorValue;
-  }
-
-  return colorValue.toString();
-};
-
 export const foregroundColorTokens: IOperationSet<IForegroundColorTokens, ITheme> = [{ source: 'color', lookup: getPaletteFromTheme }];
 
 export interface IBackgroundColorTokens {
