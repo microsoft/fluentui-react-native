@@ -1,5 +1,6 @@
 import { SvgProps, ImageProps } from 'react-native-svg';
 import { ImageURISource } from 'react-native';
+import { ColorValue } from '@uifabricshared/theming-ramp';
 
 export const shimmerName = 'Shimmer';
 /**
@@ -65,12 +66,12 @@ export interface ShimmerTokens {
    * Gradient tint color
    * @defaultValue 'white'
    */
-  gradientTintColor?: string;
+  gradientTintColor?: ColorValue;
   /**
    * Shimmer element tint color, no-op for image based shimmer
    * @defaultValue 'E1E1E1' for light mode, '404040' for dark mode
    */
-  shimmerTintColor?: string;
+  shimmerTintColor?: ColorValue;
   /**
    * Width of the shimmer view
    * @defaultValue '200'
@@ -113,8 +114,6 @@ export interface ShimmerProps extends ShimmerTokens {
 
 export interface ShimmerType {
   props: ShimmerProps;
-  slotProps: ShimmerSlotProps
+  slotProps: ShimmerSlotProps;
   tokens: ShimmerTokens;
 }
-
-
