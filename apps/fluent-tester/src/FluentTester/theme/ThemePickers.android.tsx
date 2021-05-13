@@ -7,6 +7,7 @@ import { brandOptions, OfficeBrand } from './applyBrand';
 import { Theme, useTheme } from '@fluentui-react-native/framework';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { Picker } from '@react-native-picker/picker';
+import { getStringFromColorValue } from '@fluentui-react-native/tokens';
 
 const getThemedDropdownStyles = themedStyleSheet((t: Theme) => {
   return {
@@ -49,8 +50,10 @@ export const ThemePickers: React.FunctionComponent<{}> = () => {
 
   const theme = useTheme();
   const themedPickerStyles = getThemedDropdownStyles(theme);
-  const dropdownIconColor =
-    theme.colors.buttonIcon && typeof theme.colors.buttonIcon === 'string' ? theme.colors.buttonIcon : theme.colors.buttonIcon.toString();
+
+  // react-native-picker is still on 0.61, and their color prop doesn't handle ColorValue
+  const dropdownIconColor = getStringFromColorValue(theme.colors.buttonIcon);
+
   const dropdownProps: PickerPropsAndroid & { dropdownIconColor: string } = {
     style: themedPickerStyles.dropdown,
     mode: 'dropdown',

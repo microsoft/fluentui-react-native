@@ -6,6 +6,7 @@ import { SvgUri } from 'react-native-svg';
 import { mergeStyles } from '@fluentui-react-native/framework';
 import { stagedComponent, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
 import { ColorValue, useTheme } from '@fluentui-react-native/theme-types';
+import { getStringFromColorValue } from '@fluentui-react-native/tokens';
 
 const rasterImageStyleCache = getMemoCache<ImageStyle>();
 
@@ -55,7 +56,7 @@ function renderSvg(iconProps: IconProps) {
   const viewBox = iconProps.svgSource.viewBox;
 
   // react-native-svg is still on 0.61, and their color prop doesn't handle ColorValue
-  const iconColor = iconProps.color && typeof iconProps.color === 'string' ? iconProps.color : iconProps.color.toString();
+  const iconColor = getStringFromColorValue(iconProps.color);
 
   if (svgIconProps.src) {
     return <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconColor} />;
