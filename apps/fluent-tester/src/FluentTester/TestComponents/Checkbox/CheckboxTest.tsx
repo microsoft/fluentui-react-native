@@ -1,5 +1,5 @@
 import { Checkbox } from '@fluentui/react-native';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import { ColorValue, useTheme } from '@fluentui-react-native/theme-types';
 import * as React from 'react';
 import { View, TextInput } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
@@ -103,7 +103,7 @@ const tokenCheckbox: React.FunctionComponent<{}> = () => {
 
   const theme = useTheme();
   const textBoxBorderStyle = {
-    borderColor: theme.colors.inputBorder,
+    borderColor: theme.colors.inputBorder as ColorValue,
   };
 
   return (

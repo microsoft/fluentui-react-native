@@ -3,7 +3,7 @@ import { View, Text, Switch, TextInput } from 'react-native';
 import { IPersonaTokens, Persona } from '@fluentui/react-native';
 import { michaelImageUrl } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import { ColorValue, useTheme } from '@fluentui-react-native/theme-types';
 import { Slider } from '../Common/Slider';
 
 export const CustomizeUsage: React.FunctionComponent<{}> = () => {
@@ -47,7 +47,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
 
   const theme = useTheme();
   const textBoxBorderStyle = {
-    borderColor: theme.colors.inputBorder,
+    borderColor: theme.colors.inputBorder as ColorValue,
   };
 
   const CustomizedPersona = Persona.customize({ tokens });

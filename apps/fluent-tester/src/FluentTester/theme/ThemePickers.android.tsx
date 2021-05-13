@@ -49,10 +49,12 @@ export const ThemePickers: React.FunctionComponent<{}> = () => {
 
   const theme = useTheme();
   const themedPickerStyles = getThemedDropdownStyles(theme);
+  const dropdownIconColor =
+    theme.colors.buttonIcon && typeof theme.colors.buttonIcon === 'string' ? theme.colors.buttonIcon : theme.colors.buttonIcon.toString();
   const dropdownProps: PickerPropsAndroid & { dropdownIconColor: string } = {
     style: themedPickerStyles.dropdown,
     mode: 'dropdown',
-    dropdownIconColor: theme.colors.buttonIcon,
+    dropdownIconColor: dropdownIconColor,
   };
 
   type DropdownEntry = { label: string; value: string };

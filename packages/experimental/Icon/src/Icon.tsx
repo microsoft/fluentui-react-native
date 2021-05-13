@@ -54,10 +54,13 @@ function renderSvg(iconProps: IconProps) {
   const { width, height } = iconProps;
   const viewBox = iconProps.svgSource.viewBox;
 
+  // react-native-svg is still on 0.61, and their color prop doesn't handle ColorValue
+  const iconColor = iconProps.color && typeof iconProps.color === 'string' ? iconProps.color : iconProps.color.toString();
+
   if (svgIconProps.src) {
-    return <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconProps.color} />;
+    return <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconColor} />;
   } else if (svgIconProps.uri) {
-    return <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconProps.color} />;
+    return <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconColor} />;
   } else {
     return null;
   }
