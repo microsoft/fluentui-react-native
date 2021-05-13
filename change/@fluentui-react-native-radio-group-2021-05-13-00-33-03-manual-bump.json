@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Force a package update to sync npm version and repo version",
-  "packageName": "@fluentui-react-native/radio-group",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-05-13T05:32:54.803Z"
-}

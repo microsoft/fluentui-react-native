@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Force a package update to sync npm version and repo version",
-  "packageName": "@fluentui-react-native/android-theme",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-05-13T05:33:03.350Z"
-}
