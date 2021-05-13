@@ -14,16 +14,7 @@ export function androidSpacing(): Spacing {
   };
 }
 
-export const androidComponents = {
-  Button: {
-    tokens: {
-      borderRadius: 4,
-      borderWidth: 1,
-      minHeight: 48,
-      minWidth: 92,
-    },
-  },
-};
+export const androidComponents = {};
 
 export function getAndroidTheme(appearance: 'light' | 'dark'): Theme {
   return {

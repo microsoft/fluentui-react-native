@@ -41,8 +41,8 @@ export const settings: IComposeSettings<IButtonType> = [
     stack: {
       style: {
         display: 'flex',
-        paddingVertical: 20,
-        paddingHorizontal: 14,
+        paddingVertical: 14,
+        paddingHorizontal: 20,
         alignItems: 'center',
         flexDirection: 'row',
         alignSelf: 'flex-start',
