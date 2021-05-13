@@ -1,8 +1,9 @@
+import { ColorValue } from '@uifabricshared/theming-ramp';
 import * as React from 'react';
-import { ViewProps, View } from 'react-native';
+import { StyleProp, ViewProps, ViewStyle, View } from 'react-native';
 
 export interface ISquareProps extends ViewProps {
-  color?: string;
+  color?: ColorValue;
 }
 
 export const Square: React.FunctionComponent<ISquareProps> = (props: ISquareProps) => {
@@ -11,10 +12,10 @@ export const Square: React.FunctionComponent<ISquareProps> = (props: ISquareProp
     borderColor: '#c3c3c3',
     borderWidth: 1,
     height: 40,
-    width: 40
-  };
+    width: 40,
+  } as StyleProp<ViewStyle>;
 
   const style = props.style ? [props.style, newStyle] : newStyle;
 
-  return <View {...props} style={style} />;
+  return <View {...(props as ISquareProps)} style={style} />;
 };

@@ -4,6 +4,7 @@ import { buildProps } from './buildProps';
 import toJson from 'enzyme-to-json';
 import * as React from 'react';
 import { mount } from 'enzyme';
+import { ColorValue } from '@fluentui-react-native/theme-types';
 
 /**
  * Sample super simple theming implementation, shared by all the samples. This is intended to be illustrative,
@@ -15,9 +16,9 @@ import { mount } from 'enzyme';
  */
 type Theme = {
   globals: {
-    backgroundColor: string;
-    color: string;
-    borderColor: string;
+    backgroundColor: ColorValue;
+    color: ColorValue;
+    borderColor: ColorValue;
     fontFamily: string;
     fontSize: number;
   };
@@ -78,7 +79,7 @@ describe('useStyling samples', () => {
 
   // the tokens for customization are just the color and font props from the theme
   type Sample1Tokens = {
-    color?: string;
+    color?: ColorValue;
     fontFamily?: string;
     fontSize?: number;
   };

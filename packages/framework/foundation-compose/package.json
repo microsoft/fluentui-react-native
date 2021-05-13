@@ -42,6 +42,7 @@
     "@uifabricshared/theming-ramp": ">=0.13.0 <1.0.0"
   },
   "devDependencies": {
+    "@fluentui-react-native/theme-types": "^0.6.0",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "react": "16.13.1"
   },

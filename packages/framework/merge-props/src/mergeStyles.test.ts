@@ -1,9 +1,10 @@
 import { flattenStyle, mergeAndFlattenStyles, mergeStyles } from './mergeStyles';
 import { StyleProp } from './mergeStyles.types';
+import { ColorValue } from '@fluentui-react-native/theme-types';
 
 interface IFakeStyle {
-  backgroundColor?: string;
-  color?: string;
+  backgroundColor?: ColorValue;
+  color?: ColorValue;
   fontFamily?: string;
   borderWidth?: number;
   ':hover'?: IFakeStyle;
