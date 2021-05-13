@@ -1,8 +1,8 @@
 import { Spacing, Theme } from '@fluentui-react-native/theme-types';
-import { getFluentUIAndroidPalette } from './androidPalette';
-import { paletteFromAndroidColors } from './androidTheme.colors';
+import { getFluentUIAndroidPalette } from './colorsSemantic';
+import { paletteFromAndroidColors } from './colorsTokens';
 import { androidTypography } from './androidTypography';
-import { getAndroidPalette } from './androidBaseColors';
+import { getAndroidPalette } from './colorsBase';
 
 export function androidSpacing(): Spacing {
   return {
