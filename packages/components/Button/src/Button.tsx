@@ -9,7 +9,7 @@ import { settings } from './Button.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable, useKeyCallback, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyCallback, useViewCommandFocus, useOnPressWithFocus } from '@fluentui-react-native/interactive-hooks';
 import { Icon, RasterImageIconProps, IconProps } from '@fluentui-react-native/icon';
 
 function createIconProps(src: number | string | IconProps) {
@@ -24,12 +24,10 @@ function createIconProps(src: number | string | IconProps) {
       width: asset.width,
       height: asset.height,
     };
-  }
-  else if (typeof src === 'string') {
+  } else if (typeof src === 'string') {
     const rasterProps: RasterImageIconProps = { src: { uri: src as string } };
     return { rasterImageSource: rasterProps };
-  }
-  else {
+  } else {
     return src as IconProps;
   }
 }
@@ -42,12 +40,19 @@ export const Button = compose<IButtonType>({
       content,
       onAccessibilityTap = userProps.onClick,
       accessibilityLabel = userProps.content,
+      componentRef = userProps.componentRef != undefined ? userProps.componentRef : React.useRef(null),
       testID,
       onClick,
       ...rest
     } = userProps;
+
+    const buttonRef = useViewCommandFocus(componentRef);
+
+    // Ensure focus is placed on button after click
+    const onPressWithFocus = useOnPressWithFocus(componentRef, onClick);
+
     // attach the pressable state handlers
-    const pressable = useAsPressable({ ...rest, onPress: onClick });
+    const pressable = useAsPressable({ ...rest, onPress: onPressWithFocus });
     const onKeyUp = useKeyCallback(onClick, ' ', 'Enter');
     // set up state
     const state: IButtonState = {
@@ -59,7 +64,6 @@ export const Button = compose<IButtonType>({
       },
     };
 
-    const buttonRef = useViewCommandFocus(userProps.componentRef);
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
     // create the merged slot props
@@ -74,7 +78,7 @@ export const Button = compose<IButtonType>({
         onKeyUp: onKeyUp,
       },
       content: { children: content, testID: testID },
-      icon: createIconProps(icon)
+      icon: createIconProps(icon),
     });
 
     return { slotProps, state };
