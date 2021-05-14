@@ -5,7 +5,7 @@ import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { stackStyle } from '../Common/styles';
 import { SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
-import TestSvg from './test.svg';
+const TestSvg = require('./test.svg');
 
 const CustomizedIconButton = Button.customize({
   tokens: { iconColor: 'red' },

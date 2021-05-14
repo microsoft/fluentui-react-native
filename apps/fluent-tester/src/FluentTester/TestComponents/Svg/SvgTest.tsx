@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Circle, Defs, G, Line, Path, Polygon, LinearGradient, RadialGradient, Rect, Stop, Svg, SvgCssUri, Use } from 'react-native-svg';
-import TestSvg from './Assets/accessible-icon-brands.svg';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const TestSvg = require('./Assets/accessible-icon-brands.svg');
 import { SVG_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 

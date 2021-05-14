@@ -8,7 +8,7 @@ import { ICON_TESTPAGE } from './consts';
 
 const testImage = require('./assets/testicon.png');
 const testTtf = require('./assets/Font Awesome 5 Free-Solid-900.otf');
-import TestSvg from './assets/test.svg';
+const TestSvg = require('./assets/test.svg');
 
 const icons: React.FunctionComponent<{}> = () => {
   const fontCustomFontProps: FontIconProps = {
