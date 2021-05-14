@@ -36,6 +36,7 @@
     "@fluentui-react-native/merge-props": ">=0.2.0 <1.0.0"
   },
   "devDependencies": {
+    "@fluentui-react-native/theme-types": "^0.6.0",
     "@types/jest": "^25.1.4",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
