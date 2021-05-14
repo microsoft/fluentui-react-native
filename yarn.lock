@@ -2287,12 +2287,13 @@
     semver "^7.0.0"
     yargs "^16.0.0"
 
-"@rnx-kit/metro-plugin-typescript-validation@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-plugin-typescript-validation/-/metro-plugin-typescript-validation-1.0.2.tgz#0b2bef55390446f7568fad18a4589227486c2dca"
-  integrity sha512-waq6pbyupcqOPNY0i6vhjcimkYU+naorXBaCJJcfiwsNKS6OxkeySLuZ9JOq5Nix8b+5eaZVjKazV1uxHfsg7A==
+"@rnx-kit/metro-plugin-typescript-validation@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-plugin-typescript-validation/-/metro-plugin-typescript-validation-1.0.3.tgz#07749470e33ddd6610910b3735dd1c13c14363de"
+  integrity sha512-2xwblIFs4xYbAKsK5S7v2qF5zpNfCiUVLSTfzA1IBxwuvJPs/ZTmz0JXGGIxf9MoiFYXPnrAfNaw9jUc1lBEZQ==
   dependencies:
     "@msfast/typescript-platform-resolution" "^4.2.4-midgard.0"
+    workspace-tools "^0.15.0"
     yargs "^16.2.0"
 
 "@rnx-kit/metro-serializer@^1.0.0":

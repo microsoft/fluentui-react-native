@@ -37,7 +37,7 @@
     "@office-iss/rex-win32": "0.63.22-devmain.13903.10000",
     "@react-native-community/eslint-config": "^1.1.0",
     "@rnx-kit/cli": "^0.5.7",
-    "@rnx-kit/metro-plugin-typescript-validation": "^1.0.2",
+    "@rnx-kit/metro-plugin-typescript-validation": "^1.0.3",
     "@rnx-kit/metro-serializer": "^1.0.0",
     "@types/jasmine": "3.5.10",
     "@types/react": "^16.9.34",
