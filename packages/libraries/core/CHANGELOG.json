@@ -2,6 +2,36 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Thu, 13 May 2021 06:18:23 GMT",
+      "tag": "@fluentui/react-native_v0.23.9",
+      "version": "0.23.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Force a package update to sync npm version and repo version",
+            "author": "sanajmi@microsoft.com",
+            "commit": "1602018b21b6952917210547dbc05ea07f4ba2b6",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 May 2021 10:34:05 GMT",
+      "tag": "@fluentui/react-native_v0.23.8",
+      "version": "0.23.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "patch",
+            "author": "sanajmi@microsoft.com",
+            "commit": "60fb1e08cb5785023b05333a8c0373a4aa5a6aa3",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 15 Apr 2021 20:08:17 GMT",
       "tag": "@fluentui/react-native_v0.23.5",
       "version": "0.23.5",
