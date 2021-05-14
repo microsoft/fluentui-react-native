@@ -15,7 +15,7 @@ const getThemedStyles = themedStyleSheet((theme: Theme) => {
       marginRight: 5,
       borderWidth: 2,
       borderColor: theme.colors.bodyText,
-    },
+    } as ViewStyle,
     stackStyle: {
       borderWidth: 2,
       padding: 12,

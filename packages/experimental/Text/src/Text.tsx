@@ -70,13 +70,14 @@ export const Text = compose<TextType>({
   tokensThatAreAlsoProps,
   slotProps: {
     root: buildProps<ITextProps, TextTokens>(
-      (tokens: TextTokens, theme: Theme) => ({
-        style: {
-          margin: 0,
-          color: tokens.color,
-          ...fontStyles.from(tokens, theme),
-        },
-      }),
+      (tokens: TextTokens, theme: Theme) =>
+        ({
+          style: {
+            margin: 0,
+            color: tokens.color,
+            ...fontStyles.from(tokens, theme),
+          },
+        } as TextProps),
       ['color', ...fontStyles.keys],
     ),
   },

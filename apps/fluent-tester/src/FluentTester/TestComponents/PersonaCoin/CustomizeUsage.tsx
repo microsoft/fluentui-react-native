@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { PersonaCoin, IconAlignment, IPersonaCoinTokens } from '@fluentui/react-native';
-import { Switch, View, Text, TextInput } from 'react-native';
+import { Switch, View, Text, TextInput, TextStyle } from 'react-native';
 import { Slider } from '../Common/Slider';
 import { steveBallmerPhotoUrl } from './styles';
-import { ColorValue, useTheme } from '@fluentui-react-native/theme-types';
+import { useTheme } from '@fluentui-react-native/theme-types';
 import { AlignmentPicker } from '../Common/AlignmentPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
@@ -21,8 +21,8 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
 
   const theme = useTheme();
   const textBoxBorderStyle = {
-    borderColor: theme.colors.inputBorder as ColorValue,
-  };
+    borderColor: theme.colors.inputBorder,
+  } as TextStyle;
 
   const tokens: Partial<IPersonaCoinTokens> = {};
   if (coinColor) {

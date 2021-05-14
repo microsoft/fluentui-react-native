@@ -1,5 +1,5 @@
 import { styleFunction } from '@uifabricshared/foundation-tokens';
-import { ViewProps } from 'react-native';
+import { StyleProp, ViewProps, ViewStyle } from 'react-native';
 import { IPersonaCoinTokens } from './PersonaCoin.types';
 import { ITheme } from '@uifabricshared/theming-ramp';
 import { convertCoinColor, calculateEffectiveSizes } from './PersonaCoin.helpers';
@@ -21,12 +21,12 @@ function _buildInitialsBackgroundStyles(tokenProps: IPersonaCoinTokens /*, theme
       alignSelf: 'stretch',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: effectiveBackgroundColor
-    }
+      backgroundColor: effectiveBackgroundColor,
+    } as StyleProp<ViewStyle>,
   };
 }
 
 export const buildInitialsBackgroundStyles = styleFunction<ViewProps, IPersonaCoinTokens, ITheme>(
   _buildInitialsBackgroundStyles,
-  _initialsBackgroundKeyProps
+  _initialsBackgroundKeyProps,
 );

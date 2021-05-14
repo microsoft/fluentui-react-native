@@ -1,7 +1,7 @@
 import { Checkbox } from '@fluentui/react-native';
-import { ColorValue, useTheme } from '@fluentui-react-native/theme-types';
+import { useTheme } from '@fluentui-react-native/theme-types';
 import * as React from 'react';
-import { View, TextInput } from 'react-native';
+import { View, TextInput, TextStyle } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { CHECKBOX_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -103,9 +103,8 @@ const tokenCheckbox: React.FunctionComponent<{}> = () => {
 
   const theme = useTheme();
   const textBoxBorderStyle = {
-    borderColor: theme.colors.inputBorder as ColorValue,
-  };
-
+    borderColor: theme.colors.inputBorder,
+  } as TextStyle;
   return (
     <View>
       <CircularCheckbox label="A circular checkbox" onChange={onChangeUncontrolled} defaultChecked={false} />

@@ -8,6 +8,7 @@ import { Theme, useTheme } from '@fluentui-react-native/framework';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { Picker } from '@react-native-picker/picker';
 import { PickerProps } from '@react-native-picker/picker/typings/Picker';
+import { ViewStyle } from 'react-native';
 
 const getThemedDropdownStyles = themedStyleSheet((t: Theme) => {
   return {
@@ -29,7 +30,7 @@ const getThemedDropdownStyles = themedStyleSheet((t: Theme) => {
       borderStyle: 'solid',
       borderColor: t.colors.disabledBodyText,
       borderWidth: 1,
-    },
+    } as ViewStyle,
   };
 });
 

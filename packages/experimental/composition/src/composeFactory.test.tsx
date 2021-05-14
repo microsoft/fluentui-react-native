@@ -48,14 +48,15 @@ function mergeProps<T>(p1: T, p2: T): T {
 const Base = composeFactory<ViewProps, SlotProps, Tokens, Theme>(
   {
     tokens: [
-      (t) => ({
-        backgroundColor: t.values.backgroundColor,
-        color: t.values.color,
-      }),
+      (t) =>
+        ({
+          backgroundColor: t.values.backgroundColor,
+          color: t.values.color,
+        } as Tokens),
     ],
     slotProps: {
-      outer: (tokens) => ({ style: { backgroundColor: tokens.backgroundColor } }),
-      content: (tokens) => ({ style: { color: tokens.color } }),
+      outer: (tokens) => ({ style: { backgroundColor: tokens.backgroundColor } } as ViewProps),
+      content: (tokens) => ({ style: { color: tokens.color } } as TextProps),
     },
     slots: {
       outer: View,
