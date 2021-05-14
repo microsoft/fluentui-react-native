@@ -26,6 +26,16 @@ export const Checkbox = compose<ICheckboxType>({
     // Re-usable hook for toggle components.
     const [isChecked, toggleChecked] = useAsToggle(defaultChecked, checked, onChange);
 
+    // There's a type mismatch between NativeSyntheticEvent (@types/react-native) and
+    // SyntheticEvent (interactive-hooks package: CoreEventTypes.ts). These types are
+    // used for pressable handlers, such as onBlur().
+    //
+    // The mismatch happens in the currentTarget prop. NativeSyntheticEvent defines it
+    // as number, while SyntheticEvent defines it as
+    // number | (Readonly<NativeMethods> & ComponentMethods<any>).
+    //
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     const pressable = useAsPressable({ onPress: toggleChecked, ...rest });
 
     const buttonRef = useViewCommandFocus(userProps.componentRef);

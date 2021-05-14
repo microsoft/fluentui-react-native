@@ -82,12 +82,24 @@ export const Persona = compose<IPersonaType>({
     optional: Text
   },
   styles: {
+    // There's a type mismatch here which is Windows-specific.
+    // buildRootStyle is normally ViewProps, but on Windows is IViewWin32Props.
+    // TypeScript cannot coerce one to the other.
+    //
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     root: [buildRootStyle],
     coin: [foregroundColorTokens, { source: 'coinBackgroundColor', target: 'backgroundColor' }, buildCoinStyle],
     text: [buildTextStyle],
     secondary: [buildSecondaryStyle],
     tertiary: [buildTertiaryStyle],
     optional: [buildOptionalStyle],
+    // There's a type mismatch here which is Windows-specific.
+    // buildStackStyle is normally ViewProps, but on Windows is IViewWin32Props.
+    // TypeScript cannot coerce one to the other.
+    //
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     stack: [buildStackStyle]
   }
 });

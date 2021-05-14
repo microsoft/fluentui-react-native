@@ -43,6 +43,19 @@ export function useAsLink(userProps: IWithLinkOptions<IViewProps>): ILinkHooks {
     onKeyUp,
   };
 
+  // There's a type mismatch in newProps which appears to be Windows-specific.
+  // newProps cannot be coerced to IWithLinkOptions<IViewWin32Props> because
+  // the onKeyUp function doesn't match with the generic react-native type.
+  //
+  // In the published react-native types, onKeyUp takes an input param with a
+  // required property named dispatchConfig. However, in IViewWin32Props, onKeyUp's
+  // input param is type IKeyboardEvent, which does NOT have dispatchConfig.
+  //
+  // On a related note, dispatchConfig is defined in SyntheticEvent
+  // (interactive-hooks package, CoreEventTypes.ts).
+  //
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
   return [newProps, newState];
 }
 

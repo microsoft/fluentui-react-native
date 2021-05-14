@@ -14,6 +14,11 @@ export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
   const onFocus = React.useCallback(() => {
     setState({ focused: !state.focused });
     if (buttonRef.current && !state.focused) {
+      // On windows, buttonRef.current is an IViewWin32 which doesn't fit the first arg
+      // to findNodeHandle. Disable type-checking for this call.
+      //
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       const node = findNodeHandle(buttonRef.current);
       console.log(node);
       buttonRef.current.focus();
