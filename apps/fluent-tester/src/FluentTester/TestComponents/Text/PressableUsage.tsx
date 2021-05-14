@@ -29,7 +29,18 @@ export const PressableUsage: React.FunctionComponent<{}> = () => {
       <Stack style={stackStyle} gap={5}>
         <Text variant={'bodyStandard'}>
           To learn more about microsoft, visit this{' '}
-          <Text variant={'bodyStandard'} color="blue" keyDownEvents={handledNativeKeyboardEvents} onPress={_onPress} onKeyDown={_onKeyDown}>
+          <Text
+            variant={'bodyStandard'}
+            color="blue"
+            // keyDownEvents is only available on macOS and win32. On all other platforms,
+            // its presence causes a type mismatch.
+            //
+            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+            // @ts-ignore
+            keyDownEvents={handledNativeKeyboardEvents}
+            onPress={_onPress}
+            onKeyDown={_onKeyDown}
+          >
             webpage
           </Text>{' '}
           for more details.
@@ -39,6 +50,11 @@ export const PressableUsage: React.FunctionComponent<{}> = () => {
           <Text
             variant={'bodyStandard'}
             color="blue"
+            // keyDownEvents is only available on macOS and win32. On all other platforms,
+            // its presence causes a type mismatch.
+            //
+            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+            // @ts-ignore
             keyDownEvents={handledNativeKeyboardEvents}
             onPress={_onPress2}
             onKeyDown={_onKeyDown2}

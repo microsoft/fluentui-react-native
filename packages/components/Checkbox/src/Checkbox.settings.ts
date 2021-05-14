@@ -13,6 +13,12 @@ export const settings: IComposeSettings<ICheckboxType> = [
     },
     root: {
       accessible: true,
+      // focusable is causing a type mismatch. root is type ViewProps
+      // which doesn't have a focusable prop. However, on win32,
+      // ViewProps becomes IViewWin32Props which does have focusable.
+      //
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
       focusable: true,
       accessibilityRole: 'checkbox',
       style: {
