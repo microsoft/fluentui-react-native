@@ -1,0 +1,12 @@
+steps:
+  # generate the sanitizedBuildNumber environment variable
+  - bash: '.ado/scripts/generate_build_number.sh'
+    displayName: 'Generate Build Number'
+
+  # pack the nuspec
+  - task: NuGetCommand@2
+    displayName: 'NuGet pack'
+    inputs:
+      command: pack
+      packagesToPack: 'package.nuspec'
+      buildProperties: buildNumber=$(sanitizedBuildNumber);commitId=$(Build.SourceVersion);repoUri=$(Build.Repository.Uri)
