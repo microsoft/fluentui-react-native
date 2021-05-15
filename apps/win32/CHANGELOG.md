@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Thu, 15 Apr 2021 20:08:17 GMT and should not be manually modified.
+This log was last generated on Thu, 13 May 2021 06:18:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.4
+
+Thu, 13 May 2021 06:18:23 GMT
+
+### Patches
+
+- remove comment from win32 test app to force a change file (sanajmi@microsoft.com)
+
+## 0.9.3
+
+Wed, 12 May 2021 10:34:05 GMT
+
+### Patches
+
+- patch (sanajmi@microsoft.com)
+
+## 0.9.2
+
+Wed, 12 May 2021 10:18:25 GMT
+
+### Patches
+
+- remove call to unstable_logbox that isn't necessary (sanajmi@microsoft.com)
 
 ## 0.9.0
 

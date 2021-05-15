@@ -17,6 +17,11 @@ export interface IRadioGroupContext {
    ** Updates the selected button and calls the client’s onChange callback
    */
   onChange?: (key: string) => void;
+
+  /*
+   ** Updates the selected button's ref to set as the default tabbable element
+   */
+  updateSelectedButtonRef?: (ref: React.RefObject<any>) => void;
 }
 
 export interface IRadioGroupState {

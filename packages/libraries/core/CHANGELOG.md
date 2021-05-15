@@ -1,8 +1,24 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Wed, 07 Apr 2021 23:41:02 GMT and should not be manually modified.
+This log was last generated on Thu, 13 May 2021 06:18:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.23.9
+
+Thu, 13 May 2021 06:18:23 GMT
+
+### Patches
+
+- Force a package update to sync npm version and repo version (sanajmi@microsoft.com)
+
+## 0.23.8
+
+Wed, 12 May 2021 10:34:05 GMT
+
+### Patches
+
+- patch (sanajmi@microsoft.com)
 
 ## 0.23.5
 
