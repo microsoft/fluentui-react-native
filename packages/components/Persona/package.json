@@ -24,6 +24,7 @@
     "@uifabricshared/foundation-compose": "^1.8.1",
     "@fluentui-react-native/adapters": ">=0.6.0 <1.0.0",
     "@fluentui-react-native/persona-coin": ">=0.7.1 <1.0.0",
+    "@fluentui-react-native/theme-types": "^0.6.0",
     "@fluentui-react-native/tokens": ">=0.8.0 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.8.0 <1.0.0",
     "@uifabricshared/foundation-settings": ">=0.8.0 <1.0.0",
