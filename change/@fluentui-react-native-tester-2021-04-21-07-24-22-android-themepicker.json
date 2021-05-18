@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "updated themepicker for android",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "tamasane@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-04-21T01:54:22.990Z"
-}
