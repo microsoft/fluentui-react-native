@@ -1,23 +1,21 @@
 import * as React from 'react';
-import { ViewProps, ImageProps } from 'react-native';
+import { ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
 import { ContextualMenuItemProps, ContextualMenuItemTokens, ContextualMenuItemState } from './ContextualMenuItem.types';
+import { IconProps } from '@fluentui-react-native/icon';
 
 export const submenuItemName = 'submenuItem';
 export type SubmenuItemTokens = ContextualMenuItemTokens;
 export type SubmenuItemProps = ContextualMenuItemProps;
-
-export interface SubmenuItemState extends ContextualMenuItemState {
-  menuOpen?: boolean;
-}
+export type SubmenuItemState = ContextualMenuItemState;
 
 export interface SubmenuItemSlotProps {
   root: React.PropsWithRef<ViewProps>;
   stack: ViewProps;
-  icon: ImageProps;
+  icon: IconProps;
   content: ITextProps;
-  dropArrow: ImageProps;
+  dropArrow: IconProps;
 }
 
 export type SubmenuItemRenderData = IRenderData<SubmenuItemSlotProps, SubmenuItemState>;

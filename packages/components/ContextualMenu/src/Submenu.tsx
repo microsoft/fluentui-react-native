@@ -25,6 +25,7 @@ export const Submenu = compose<SubmenuType>({
       setShowMenu,
       shouldFocusOnMount = true,
       shouldFocusOnContainer = true,
+      componentRef = React.useRef(null),
       ...rest
     } = userProps;
 
@@ -34,12 +35,26 @@ export const Submenu = compose<SubmenuType>({
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
     const data = useSelectedKey(null, userProps.onItemClick);
 
+    const onShow = React.useCallback(
+      () => {
+        userProps ?.onShow();
+        context.isSubmenuOpen = true;
+      }, [context]
+    )
+    const onDismiss = React.useCallback(
+      () => {
+        userProps ?.onDismiss();
+        setShowMenu(false);
+        context.isSubmenuOpen = false;
+      }, [context, setShowMenu]
+    )
     const dismissCallback = React.useCallback(
       () => {
-        userProps.onDismiss();
+        onDismiss();
         context ?.onDismissMenu();
-        setShowMenu(false);
-      }, [setShowMenu, userProps.onDismiss, context]);
+      }, [, onDismiss, context]);
+
+    context.dismissSubmenu = onDismiss;
 
     const [containerFocus, setContainerFocus] = React.useState(true);
     const toggleContainerFocus = React.useCallback(() => {
@@ -59,12 +74,14 @@ export const Submenu = compose<SubmenuType>({
     const slotProps = mergeSettings<SubmenuSlotProps>(styleProps, {
       root: {
         ...rest,
+        onShow: onShow,
+        onDismiss: onDismiss,
         setInitialFocus: shouldFocusOnMount
       },
       container: {
         accessible: shouldFocusOnContainer,
         focusable: shouldFocusOnContainer && containerFocus,
-        onBlur: toggleContainerFocus
+        onBlur: toggleContainerFocus,
       }
 
     });

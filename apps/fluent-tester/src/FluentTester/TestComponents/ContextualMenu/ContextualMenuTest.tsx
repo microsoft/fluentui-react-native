@@ -3,6 +3,8 @@ import { Text, View, Switch } from 'react-native';
 import { Button, ContextualMenu, ContextualMenuItem, Submenu, SubmenuItem, Separator } from '@fluentui/react-native';
 import { CONTEXTUALMENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
+import TestSvg from '../Button/test.svg';
 
 const contextualMenu: React.FunctionComponent<{}> = () => {
   const stdBtnRef = React.useRef(null);
@@ -96,11 +98,25 @@ const contextualMenu: React.FunctionComponent<{}> = () => {
 }
 
 const nestedContextualMenu: React.FunctionComponent<{}> = () => {
+  const testImage = require('../Button/icon_24x24.png');
+    const testTtf = require('../Button/Font Awesome 5 Free-Solid-900.otf');
+
+    const fontProps: FontIconProps = {
+      fontFamily: `Font Awesome 5 Free`,
+      fontSrcFile: testTtf,
+      codepoint: 0xf083,
+      fontSize: 16,
+    };
+
+    const svgProps: SvgIconProps = {
+      src: TestSvg,
+      viewBox: '0 0 500 500',
+    };
+
   const stdBtnRef = React.useRef(null);
 
   const [showContextualMenu, setShowContextualMenu] = React.useState(false);
   const [isContextualMenuVisible, setIsContextualMenuVisible] = React.useState(false);
-  //const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
 
   const [focusOnMount, setShouldFocusOnMount] = React.useState(true);
   const toggleFocusOnMount = React.useCallback((value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
@@ -109,10 +125,9 @@ const nestedContextualMenu: React.FunctionComponent<{}> = () => {
   const toggleFocusOnContainer = React.useCallback((value) => setShouldFocusOnContainer(value), [setShouldFocusOnContainer]);
 
   const toggleShowContextualMenu = React.useCallback(() => {
-    console.log('show toggled');
     setShowContextualMenu(!showContextualMenu);
-    setIsContextualMenuVisible(false);
-  }, [showContextualMenu, setShowContextualMenu, setIsContextualMenuVisible]);
+    setIsContextualMenuVisible(!isContextualMenuVisible);
+  }, [showContextualMenu, isContextualMenuVisible, setShowContextualMenu, setIsContextualMenuVisible]);
 
   const onShowContextualMenu = React.useCallback(() => {
     setIsContextualMenuVisible(true);
@@ -129,10 +144,9 @@ const nestedContextualMenu: React.FunctionComponent<{}> = () => {
   const [isSubmenuVisible, setIsSubmenuVisible] = React.useState(false);
 
   const toggleShowSubmenu = React.useCallback(() => {
-    console.log('hovered');
     setShowSubmenu(!showSubmenu);
-    setIsSubmenuVisible(false);
-  }, [showSubmenu, setShowSubmenu, setIsSubmenuVisible]);
+    setIsSubmenuVisible(!isSubmenuVisible);
+  }, [showSubmenu, isSubmenuVisible, setShowSubmenu, setIsSubmenuVisible]);
 
   const onShowSubmenu = React.useCallback(() => {
     setIsSubmenuVisible(true);
@@ -140,7 +154,6 @@ const nestedContextualMenu: React.FunctionComponent<{}> = () => {
 
   const onDismissSubmenu = React.useCallback(() => {
     setShowSubmenu(false);
-    setIsSubmenuVisible(false);
   }, [setShowSubmenu]);
 
   const onClick = React.useCallback(
@@ -188,13 +201,12 @@ const nestedContextualMenu: React.FunctionComponent<{}> = () => {
           onDismiss={onDismissContextualMenu}
           onShow={onShowContextualMenu}
           accessibilityLabel="Standard ContextualMenu"
-          //onItemClick={onItemClick}
           setShowMenu={toggleShowContextualMenu}
           shouldFocusOnMount={focusOnMount}
           shouldFocusOnContainer={focusOnContainer}
         >
-          <ContextualMenuItem text="MenuItem 1" itemKey="1" />
-          <ContextualMenuItem text="MenuItem 2" itemKey="2" />
+          <ContextualMenuItem icon={testImage} text="Menu item with png Icon" itemKey="1" />
+          <ContextualMenuItem icon={{ fontSource: fontProps, color: 'blue' }} text="Menu item with font icon" itemKey="2" />
           <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
           <SubmenuItem text="Nested Menu" itemKey="4" onHoverIn={toggleShowSubmenu} componentRef={stdMenuItemRef} />
           {showSubmenu && (
@@ -202,19 +214,19 @@ const nestedContextualMenu: React.FunctionComponent<{}> = () => {
               target={stdMenuItemRef}
               onDismiss={onDismissSubmenu}
               onShow={onShowSubmenu}
-              // onItemClick={onSubmenuItemClick}
               setShowMenu={toggleShowSubmenu}
             >
-              <ContextualMenuItem text="SubmenuItem 1" itemKey="4" onClick={onClick} />
+              <ContextualMenuItem icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }} text="SubmenuItem svg icon" itemKey="4" onClick={onClick} />
               <ContextualMenuItem text="SubmenuItem 2" itemKey="2" />
               <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
             </Submenu>
           )}
-          <ContextualMenuItem text="MenuItem 5" itemKey="5" />
+          <ContextualMenuItem text="Menuitem 5" itemKey="5" />
         </ContextualMenu>
       )}
     </View>
   );
+
 }
 
 const contextualMenuSections: TestSection[] = [
