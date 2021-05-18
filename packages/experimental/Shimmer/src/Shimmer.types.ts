@@ -1,6 +1,6 @@
 import { SvgProps, ImageProps } from 'react-native-svg';
 import { ImageURISource } from 'react-native';
-import { ColorValue } from '@uifabricshared/theming-ramp';
+import { ColorValue } from '@fluentui-react-native/theme-types';
 
 export const shimmerName = 'Shimmer';
 /**

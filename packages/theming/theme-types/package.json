@@ -31,10 +31,11 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@types/react-native": "^0.63.4"
+  },
   "devDependencies": {
     "@types/react": "^16.9.34",
-    "@types/react-native": "^0.63.4",
     "react": "16.13.1",
     "react-native": "^0.63.4",
     "@uifabricshared/build-native": "^0.1.1",

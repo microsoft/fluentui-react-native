@@ -1,5 +1,6 @@
-import { ColorValue, ITheme, IThemeColorDefinition } from '@uifabricshared/theming-ramp';
+import { ITheme, IThemeColorDefinition } from '@uifabricshared/theming-ramp';
 import { IOperationSet } from '@uifabricshared/foundation-tokens';
+import { ColorValue } from '@fluentui-react-native/theme-types';
 
 export interface IForegroundColorTokens {
   color?: ColorValue;
