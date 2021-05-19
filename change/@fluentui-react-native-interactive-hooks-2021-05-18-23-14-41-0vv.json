@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "add iconProps hook",
+  "packageName": "@fluentui-react-native/interactive-hooks",
+  "email": "lehon@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-05-19T06:14:41.137Z"
+}

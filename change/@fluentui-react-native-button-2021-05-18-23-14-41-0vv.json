@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "create iconProps hook",
+  "packageName": "@fluentui-react-native/button",
+  "email": "lehon@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-05-19T06:13:49.828Z"
+}
