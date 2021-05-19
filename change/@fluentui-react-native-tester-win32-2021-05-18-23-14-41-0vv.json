@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "fix hover behavior on submenu items",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "lehon@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-05-19T06:13:22.066Z"
-}

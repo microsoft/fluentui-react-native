@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Thu, 13 May 2021 06:18:23 GMT and should not be manually modified.
+This log was last generated on Wed, 19 May 2021 07:04:54 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.0
+
+Wed, 19 May 2021 07:04:54 GMT
+
+### Minor changes
+
+- fix hover behavior on submenu items (lehon@microsoft.com)
 
 ## 0.9.4
 
