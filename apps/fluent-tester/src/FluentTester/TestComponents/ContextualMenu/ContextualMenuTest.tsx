@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
 import { Button, ContextualMenu, ContextualMenuItem, Submenu, SubmenuItem, Separator } from '@fluentui/react-native';
@@ -99,7 +100,7 @@ const contextualMenu: React.FunctionComponent<{}> = () => {
 
 const nestedContextualMenu: React.FunctionComponent<{}> = () => {
   const testImage = require('../Button/icon_24x24.png');
-    const testTtf = require('../Button/Font Awesome 5 Free-Solid-900.otf');
+  const testTtf = require('../Button/Font Awesome 5 Free-Solid-900.otf');
 
     const fontProps: FontIconProps = {
       fontFamily: `Font Awesome 5 Free`,
