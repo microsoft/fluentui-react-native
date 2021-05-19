@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "add submenu component to menu",
+  "packageName": "@fluentui-react-native/contextual-menu",
+  "email": "lehon@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-04-27T11:41:17.601Z"
+}

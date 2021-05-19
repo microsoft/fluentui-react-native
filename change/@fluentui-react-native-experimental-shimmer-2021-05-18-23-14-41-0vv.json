@@ -1,0 +1,8 @@
+{
+  "type": "none",
+  "comment": "disable no-var-requires",
+  "packageName": "@fluentui-react-native/experimental-shimmer",
+  "email": "lehon@microsoft.com",
+  "dependentChangeType": "none",
+  "date": "2021-05-19T06:13:59.973Z"
+}
