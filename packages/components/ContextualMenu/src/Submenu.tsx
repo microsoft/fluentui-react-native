@@ -25,7 +25,6 @@ export const Submenu = compose<SubmenuType>({
       setShowMenu,
       shouldFocusOnMount = true,
       shouldFocusOnContainer = true,
-      componentRef = React.useRef(null),
       ...rest
     } = userProps;
 
@@ -52,7 +51,7 @@ export const Submenu = compose<SubmenuType>({
       () => {
         onDismiss();
         context ?.onDismissMenu();
-      }, [, onDismiss, context]);
+      }, [onDismiss, context]);
 
     context.dismissSubmenu = onDismiss;
 
