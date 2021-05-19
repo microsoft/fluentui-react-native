@@ -23,6 +23,7 @@
   "dependencies": {
     "@uifabricshared/foundation-compose": "^1.8.1",
     "@fluentui-react-native/callout": ">=0.14.1 <1.0.0",
+    "@fluentui-react-native/icon": "0.5.1",
     "@fluentui-react-native/interactive-hooks": ">=0.9.0 <1.0.0",
     "@fluentui-react-native/text": ">=0.9.1 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.8.0 <1.0.0",
