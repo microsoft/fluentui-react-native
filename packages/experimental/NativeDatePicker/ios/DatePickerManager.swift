@@ -2,7 +2,7 @@ import FluentUI
 
 @objc(MSFDatePickerManager)
 class DatePickerManager: NSObject {
-    @objc public func requiresMainQueueSetup() -> Bool {
+    @objc public class func requiresMainQueueSetup() -> Bool {
         return true
     }
 
