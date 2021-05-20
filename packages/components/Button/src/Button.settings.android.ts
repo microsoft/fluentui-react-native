@@ -32,13 +32,13 @@ export const settings: IComposeSettings<IButtonType> = [
       },
     },
     content: {
-      // accessible: false,
-      style: {
-        marginStart: 10,
-      },
       variant: 'bodySemibold',
     },
-    icon: {},
+    icon: {
+      style: {
+        marginEnd: 10,
+      },
+    },
     stack: {
       style: {
         display: 'flex',
