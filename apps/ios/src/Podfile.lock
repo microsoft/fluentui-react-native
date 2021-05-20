@@ -18,6 +18,9 @@ PODS:
   - FluentUI-React-Native-Button (0.5.3):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
+  - FluentUI-React-Native-Date-Picker (0.0.1):
+    - MicrosoftFluentUI (~> 0.2.2)
+    - React
   - Folly (2020.01.13.00):
     - boost-for-react-native
     - DoubleConversion
@@ -412,6 +415,7 @@ DEPENDENCIES:
   - FluentUI-React-Native-Apple-Theme (from `../../../packages/theming/apple-theme/FluentUIReactNativeAppleTheme.podspec`)
   - FluentUI-React-Native-Avatar (from `../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec`)
   - FluentUI-React-Native-Button (from `../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec`)
+  - FluentUI-React-Native-Date-Picker (from `../../../packages/experimental/NativeDatePicker/FluentUIReactNativeDatePicker.podspec`)
   - Folly (from `../../../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - QRCodeReader.swift
@@ -464,6 +468,8 @@ EXTERNAL SOURCES:
     :path: "../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec"
   FluentUI-React-Native-Button:
     :path: "../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec"
+  FluentUI-React-Native-Date-Picker:
+    :path: "../../../packages/experimental/NativeDatePicker/FluentUIReactNativeDatePicker.podspec"
   Folly:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:
@@ -527,6 +533,7 @@ SPEC CHECKSUMS:
   FluentUI-React-Native-Apple-Theme: 5096ba1ccdce75cac6af8dfb6f43880828d6a8e1
   FluentUI-React-Native-Avatar: 20e879a5477bf6a32510796d139d699dad5f7f5f
   FluentUI-React-Native-Button: b882911504fd4b8ad21b6391b6fb49d908276f5e
+  FluentUI-React-Native-Date-Picker: b17611775b0b4fa894e429d49765be5f3514d9b7
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   MicrosoftFluentUI: 416cab05ebcf05dcaea0a1babc4de2ba69928026
@@ -558,6 +565,6 @@ SPEC CHECKSUMS:
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: 94ab61973ec6b63575edbb7ea6de57d5f0fb622c
+PODFILE CHECKSUM: 5eb38fbe9705e055751cd05b56d1f34d5a0a820b
 
 COCOAPODS: 1.10.1
