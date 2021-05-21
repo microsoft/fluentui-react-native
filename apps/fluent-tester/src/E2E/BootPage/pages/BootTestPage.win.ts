@@ -1,6 +1,7 @@
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../../../FluentTester/TestComponents/Checkbox/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../../../FluentTester/TestComponents/Button/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../../../FluentTester/TestComponents/Callout/consts';
+import { HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../../../FluentTester/TestComponents/ContextualMenu/consts';
 import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../../FluentTester/TestComponents/FocusTrapZone/consts';
 import { HOMEPAGE_FOCUSZONE_BUTTON } from '../../../FluentTester/TestComponents/FocusZone/consts';
 import { HOMEPAGE_ICON_BUTTON } from '../../../FluentTester/TestComponents/Icon/consts';
@@ -27,6 +28,10 @@ class BootTestPage extends BasePage {
 
   clickAndGoToCheckboxPage() {
     this.checkboxPage.click();
+  }
+
+  clickAndGoToContextualMenuPage() {
+    this.contextualMenuPage.click();
   }
 
   clickAndGoToFocusTrapZonePage() {
@@ -95,6 +100,10 @@ class BootTestPage extends BasePage {
 
   private get checkboxPage() {
     return By(HOMEPAGE_CHECKBOX_BUTTON);
+  }
+
+  private get contextualMenuPage() {
+    return By(HOMEPAGE_CONTEXTUALMENU_BUTTON);
   }
 
   private get focusTrapZonePage() {

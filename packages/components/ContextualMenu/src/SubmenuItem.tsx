@@ -2,17 +2,17 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import {
-  ContextualMenuItemSlotProps,
-  ContextualMenuItemState,
-  ContextualMenuItemProps,
-  ContextualMenuItemRenderData,
-  contextualMenuItemName,
-  ContextualMenuItemType,
-} from './ContextualMenuItem.types';
+  SubmenuItemSlotProps,
+  SubmenuItemState,
+  SubmenuItemProps,
+  SubmenuItemRenderData,
+  submenuItemName,
+  SubmenuItemType,
+} from './SubmenuItem.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
-import { settings } from './ContextualMenuItem.settings';
+import { settings } from './SubmenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useAsPressable, useKeyCallback, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
@@ -20,9 +20,9 @@ import { CMContext } from './ContextualMenu';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 
-export const ContextualMenuItem = compose<ContextualMenuItemType>({
-  displayName: contextualMenuItemName,
-  usePrepareProps: (userProps: ContextualMenuItemProps, useStyling: IUseComposeStyling<ContextualMenuItemType>) => {
+export const SubmenuItem = compose<SubmenuItemType>({
+  displayName: submenuItemName,
+  usePrepareProps: (userProps: SubmenuItemProps, useStyling: IUseComposeStyling<SubmenuItemType>) => {
     const {
       disabled,
       itemKey,
@@ -35,12 +35,12 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       ...rest
     } = userProps;
 
-    // Grabs the context information from ContextualMenu (currently selected menuItem and client's onItemClick callback)
+    // Grabs the context information from Submenu (currently selected menuItem and client's onItemClick callback)
     const context = React.useContext(CMContext);
 
     const onItemClick = React.useCallback(
       (e) => {
-        if (!disabled) {
+        if (!disabled ) {
           context ?.onDismissMenu();
           onClick ? onClick() : context.onItemClick(itemKey);
           e.stopPropagation();
@@ -52,21 +52,15 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     const cmRef = useViewCommandFocus(componentRef);
 
     const onItemHoverIn = React.useCallback(
-      () => {
+      (e) => {
         componentRef.current.focus();
-        // dismiss submenu
-        if (!disabled && context.isSubmenuOpen)
-        {
-          context.dismissSubmenu();
-        }
-      }, [componentRef, disabled, context]);
+        userProps.onHoverIn(e);
+      }, [componentRef]);
 
-    const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn });
-
-    const onKeyUp = useKeyCallback(onItemClick, ' ', 'Enter');
+    const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn});
 
     // set up state
-    const state: ContextualMenuItemState = {
+    const state: SubmenuItemState = {
       ...pressable.state,
       selected: context.selectedKey === userProps.itemKey,
       disabled: userProps.disabled,
@@ -74,36 +68,19 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       icon: !!icon,
     };
 
-    /*
-    * On Desktop, focus gets moved to the root of the menu, so hovering off the menu does not automatically call onBlur as we expect it to.
-    * OnMouseEnter and onMouseLeave are overridden with the below callbacks that calls onFocus and onBlur explicitly
+      /*
+    * For SubmenuItem, menu is shown on hover.
     */
-    const onMouseEnter = React.useCallback(
-      e => {
-        pressable.props.onMouseEnter && pressable.props.onMouseEnter(e);
-        pressable.props.onFocus && pressable.props.onFocus(e);
-        e.stopPropagation();
-      },
-      [pressable]);
-
-    const onMouseLeave = React.useCallback(
-      e => {
-        pressable.props.onMouseLeave && pressable.props.onMouseLeave(e);
-        pressable.props.onBlur && pressable.props.onBlur(e);
-        e.stopPropagation();
-      },
-      [pressable]);
+    const onKeyUp = useKeyCallback(onItemHoverIn, ' ', 'Enter', 'ArrowRight');
 
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
     // create the merged slot props
-    const slotProps = mergeSettings<ContextualMenuItemSlotProps>(styleProps, {
+    const slotProps = mergeSettings<SubmenuItemSlotProps>(styleProps, {
       root: {
         ...pressable.props,
         ref: cmRef,
         onKeyUp: onKeyUp,
-        onMouseEnter: onMouseEnter,
-        onMouseLeave: onMouseLeave,
         accessibilityLabel: accessibilityLabel
       },
       content: { children: text, testID },
@@ -113,7 +90,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     return { slotProps, state };
   },
   settings,
-  render: (Slots: ISlots<ContextualMenuItemSlotProps>, renderData: ContextualMenuItemRenderData, ...children: React.ReactNode[]) => {
+  render: (Slots: ISlots<SubmenuItemSlotProps>, renderData: SubmenuItemRenderData, ...children: React.ReactNode[]) => {
     // We shouldn't have to specify the source prop on Slots.icon, here, but we need another drop from @uifabricshared
     return (
       <Slots.root>
@@ -139,4 +116,4 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
   },
 });
 
-export default ContextualMenuItem;
+export default SubmenuItem;
