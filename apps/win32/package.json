@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester-win32",
-  "version": "0.9.3",
+  "version": "0.10.0",
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
@@ -19,22 +19,22 @@
     "test": "fluentui-scripts jest",
     "bundle": "react-native rnx-bundle --dev false",
     "bundle-dev": "react-native rnx-bundle",
-    "run-win32": "rex-win32 --bundle index.win32 --component FluentTester --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps",
-    "run-win32-web": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useFastRefresh --pluginProps",
-    "run-win32-devmain": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps",
+    "run-win32": "rex-win32 --bundle index.win32 --component FluentTester --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps --debugBundlePath index --jsEngine v8",
+    "run-win32-web": "rex-win32 --bundle index --component FluentTester --basePath ./dist --useWebDebugger --windowTitle \"FluentUI Tester\" --useFastRefresh --pluginProps --debugBundlePath index --jsEngine v8",
+    "run-win32-devmain": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8",
     "e2etest": "rimraf reports/* && wdio",
     "report": "allure generate allure-results --clean",
     "generate-report": "allure generate allure-results --clean && allure open"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.23.3",
+    "@fluentui-react-native/tester": "^0.24.0",
     "react": "16.13.1",
     "react-native": "^0.63.4",
     "react-native-svg": "^12.1.1"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "^0.63.7",
-    "@office-iss/rex-win32": "0.63.22-devmain.13903.10000",
+    "@office-iss/rex-win32": "0.63.28-devmain.14119.10000",
     "@react-native-community/eslint-config": "^1.1.0",
     "@rnx-kit/cli": "^0.0.3",
     "@types/jasmine": "3.5.10",

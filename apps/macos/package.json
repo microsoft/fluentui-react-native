@@ -18,7 +18,7 @@
     "macos": "react-native run-macos --scheme FluentTester --project-path src"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.23.3",
+    "@fluentui-react-native/tester": "^0.24.0",
     "react-native-macos": "0.63.1",
     "react-native-svg": "^12.1.1",
     "react-native-test-app": "^0.3.2"
@@ -35,6 +35,7 @@
     "metro-config": "^0.58.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-native": "^0.63.4",
+    "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "~16.13.1"
   },
   "peerDependencies": {

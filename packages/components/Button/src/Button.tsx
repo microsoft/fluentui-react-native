@@ -11,7 +11,7 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useAsPressable, useKeyCallback, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { Icon } from '@fluentui-react-native/icon';
-import { createIconProps } from './Button.icon';
+import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 
 export const Button = compose<IButtonType>({
   displayName: buttonName,

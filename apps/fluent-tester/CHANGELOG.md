@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 12 May 2021 10:34:05 GMT and should not be manually modified.
+This log was last generated on Wed, 19 May 2021 07:04:54 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.0
+
+Wed, 19 May 2021 07:04:54 GMT
+
+### Minor changes
+
+- add submenu component to menu (lehon@microsoft.com)
+
+## 0.23.4
+
+Thu, 13 May 2021 06:18:23 GMT
+
+### Patches
+
+- Force a package update to sync npm version and repo version (sanajmi@microsoft.com)
 
 ## 0.23.3
 
