@@ -61,7 +61,6 @@ exports[`Button default 1`] = `
             "fontSize": 14,
             "fontWeight": "600",
             "margin": 0,
-            "marginStart": 10,
           }
         }
       >
