@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Wrap renderSvg with View",
+  "packageName": "@fluentui-react-native/icon",
+  "email": "tamasane@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-05-23T11:23:22.995Z"
+}

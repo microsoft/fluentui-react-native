@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Fixed ButtonIconTest",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "tamasane@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-05-13T11:34:55.405Z"
+}

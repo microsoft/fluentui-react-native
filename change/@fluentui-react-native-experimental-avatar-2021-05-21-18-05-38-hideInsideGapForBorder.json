@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Add hideInsideGapForBorder prop to experimental avatar",
+  "packageName": "@fluentui-react-native/experimental-avatar",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-05-21T23:05:38.916Z"
+}
