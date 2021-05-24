@@ -34,6 +34,8 @@ const avatar: React.FunctionComponent<{}> = () => {
       <Avatar primaryText="Kat Larrson" backgroundColor="teal" />
       <Text>Custom Border Image</Text>
       <Avatar primaryText="Kat Larrson" customBorderImageSource={rainbowGradientSource} />
+      <Text>Custom Border Image without gap</Text>
+      <Avatar primaryText="Kat Larrson" customBorderImageSource={rainbowGradientSource} hideInsideGapForBorder={true} />
     </Stack>
   );
 };
