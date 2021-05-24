@@ -19,7 +19,7 @@
     "ios": "react-native run-ios --scheme ReactTestApp --project-path src"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.23.1",
+    "@fluentui-react-native/tester": "^0.24.0",
     "react": "16.13.1",
     "react-native": "^0.63.4",
     "react-native-svg": "^12.1.1",
@@ -34,7 +34,9 @@
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "babel-jest": "^24.9.0",
     "jest": "^24.9.0",
+    "metro-config": "^0.58.0",
     "metro-react-native-babel-preset": "^0.59.0",
+    "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "~16.13.1"
   },
   "jest": {
