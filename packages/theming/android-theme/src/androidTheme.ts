@@ -1,8 +1,8 @@
 import { Spacing, Theme } from '@fluentui-react-native/theme-types';
-import { getFluentUIAndroidPalette } from './androidPalette';
-import { paletteFromAndroidColors } from './androidTheme.colors';
+import { getFluentUIAndroidPalette } from './colorsSemantic';
+import { paletteFromAndroidColors } from './colorsTokens';
 import { androidTypography } from './androidTypography';
-import { getAndroidPalette } from './androidBaseColors';
+import { getAndroidPalette } from './colorsBase';
 
 export function androidSpacing(): Spacing {
   return {
@@ -14,16 +14,7 @@ export function androidSpacing(): Spacing {
   };
 }
 
-export const androidComponents = {
-  Button: {
-    tokens: {
-      borderRadius: 4,
-      borderWidth: 1,
-      minHeight: 48,
-      minWidth: 92,
-    },
-  },
-};
+export const androidComponents = {};
 
 export function getAndroidTheme(appearance: 'light' | 'dark'): Theme {
   return {

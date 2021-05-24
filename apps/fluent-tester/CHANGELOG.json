@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 19 May 2021 07:04:54 GMT",
+      "tag": "@fluentui-react-native/tester_v0.24.0",
+      "version": "0.24.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "add submenu component to menu",
+            "author": "lehon@microsoft.com",
+            "commit": "06aa14bd6c448e2b16afc81e76a99f9788c4fc13",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 13 May 2021 06:18:23 GMT",
       "tag": "@fluentui-react-native/tester_v0.23.4",
       "version": "0.23.4",

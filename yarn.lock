@@ -2140,10 +2140,10 @@
     use-subscription "^1.0.0"
     whatwg-fetch "^3.0.0"
 
-"@office-iss/rex-win32@0.63.22-devmain.13903.10000":
-  version "0.63.22-devmain.13903.10000"
-  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.63.22-devmain.13903.10000.tgz#65a2b84db099ca0be45b3e78236ce4432fd3fcfa"
-  integrity sha512-878IRGru03fqSoUc0vq4SnYimX2k2aIcCqjjyJbKaQKpJNe4QUtBU60sPVCDI8EkWOVaqJTpvhwS4nKjmqgNLg==
+"@office-iss/rex-win32@0.63.28-devmain.14119.10000":
+  version "0.63.28-devmain.14119.10000"
+  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.63.28-devmain.14119.10000.tgz#f926c653f0807ff44cd9203a1730ace60141fdfb"
+  integrity sha512-cSFOBapadpAw7HxgCSuzxXDPOT77GJXQrY095v+KtD9wBApmKdo9xBmB1HoOfey4nbaQHIQjSUfkMyz7HkRpgQ==
   dependencies:
     command-line-args "^5.0.2"
     command-line-usage "^5.0.5"
