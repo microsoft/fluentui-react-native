@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IconProps, SvgIconProps, FontIconProps } from './Icon.types';
-import { Image, ImageStyle, Platform } from 'react-native';
+import { Image, ImageStyle, Platform, View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { SvgUri } from 'react-native-svg';
 import { mergeStyles } from '@fluentui-react-native/framework';
@@ -53,11 +53,20 @@ function renderSvg(iconProps: IconProps) {
   const svgIconProps: SvgIconProps = iconProps.svgSource;
   const { width, height } = iconProps;
   const viewBox = iconProps.svgSource.viewBox;
+  const style = mergeStyles(iconProps.style, rasterImageStyleCache({ width: width, height: height }, [width, height])[0]);
 
   if (svgIconProps.src) {
-    return <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconProps.color} />;
+    return (
+      <View style={style}>
+        <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconProps.color} />
+      </View>
+    );
   } else if (svgIconProps.uri) {
-    return <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconProps.color} />;
+    return (
+      <View style={style}>
+        <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconProps.color} />
+      </View>
+    );
   } else {
     return null;
   }
