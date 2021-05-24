@@ -112,7 +112,7 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
 
 export interface IButtonSlotProps {
   root: React.PropsWithRef<IViewProps>;
-  ripple?: PressableProps;
+  ripple?: PressableProps; // This slot exists to enable ripple-effect in android. It does not affect other platforms.
   stack: ViewProps;
   icon: IconProps;
   content: ITextProps;
