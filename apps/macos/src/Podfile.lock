@@ -19,6 +19,9 @@ PODS:
   - FluentUI-React-Native-Button (0.5.4):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
+  - FluentUI-React-Native-Callout (0.14.2):
+    - MicrosoftFluentUI (~> 0.2.6)
+    - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.2.7):
     - MicrosoftFluentUI/ActivityIndicator_ios (= 0.2.7)
@@ -332,6 +335,7 @@ DEPENDENCIES:
   - FluentUI-React-Native-Apple-Theme (from `../../../packages/theming/apple-theme/FluentUIReactNativeAppleTheme.podspec`)
   - FluentUI-React-Native-Avatar (from `../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec`)
   - FluentUI-React-Native-Button (from `../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec`)
+  - FluentUI-React-Native-Callout (from `../../../packages/components/Callout/FluentUIReactNativeCallout.podspec`)
   - glog (from `../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
   - RCT-Folly (from `../../../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../../../node_modules/react-native-macos/Libraries/RCTRequired`)
@@ -383,6 +387,8 @@ EXTERNAL SOURCES:
     :path: "../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec"
   FluentUI-React-Native-Button:
     :path: "../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec"
+  FluentUI-React-Native-Callout:
+    :path: "../../../packages/components/Callout/FluentUIReactNativeCallout.podspec"
   glog:
     :podspec: "../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec"
   RCT-Folly:
@@ -446,6 +452,7 @@ SPEC CHECKSUMS:
   FluentUI-React-Native-Apple-Theme: 5096ba1ccdce75cac6af8dfb6f43880828d6a8e1
   FluentUI-React-Native-Avatar: dd54c12eafc90f3919238892bc6482a498947946
   FluentUI-React-Native-Button: d6086871439748464c31c569feaa783001155228
+  FluentUI-React-Native-Callout: d4f6d6013174dd68faba2febbe4cfddae951169a
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: 6b3bfd52b232e9abc5cb228b9761a5f42869f4d3
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
@@ -476,6 +483,6 @@ SPEC CHECKSUMS:
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   Yoga: 6f6f412e10cf9acb93bb0e290613784603d2f0c9
 
-PODFILE CHECKSUM: 601a04a4aafaf36828a33238273b0ee9dc566464
+PODFILE CHECKSUM: 757a1ff7df8ec0ec2c574b31bd8154c2f32853b1
 
 COCOAPODS: 1.10.1
