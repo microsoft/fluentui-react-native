@@ -17,5 +17,5 @@ export const Square: React.FunctionComponent<ISquareProps> = (props: ISquareProp
 
   const style: StyleProp<ViewStyle> = props.style ? [props.style, newStyle] : newStyle;
 
-  return <View {...(props as ISquareProps)} style={style} />;
+  return <View {...props} style={style} />;
 };
