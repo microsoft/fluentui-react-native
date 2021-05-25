@@ -102,6 +102,11 @@ export type otherAvatarProps = {
    * Set to true to enable the iPadOS pointer interactions on the avatar view, false by default.
    */
   hasPointerInteractionIOS?: boolean;
+
+  /**
+   * Set to true to not have inside gap between content of the avatarView to its border
+   */
+  hideInsideGapForBorder?: boolean;
 };
 
 export type AvatarTokens = {

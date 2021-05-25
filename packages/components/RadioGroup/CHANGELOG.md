@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Wed, 12 May 2021 10:34:05 GMT and should not be manually modified.
+This log was last generated on Tue, 25 May 2021 00:42:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.0
+
+Tue, 25 May 2021 00:42:50 GMT
+
+### Minor changes
+
+- Small changes to center the RadioButton text better with the RadioButton (safreibe@microsoft.com)
+
+## 0.9.6
+
+Thu, 13 May 2021 06:18:23 GMT
+
+### Patches
+
+- Force a package update to sync npm version and repo version (sanajmi@microsoft.com)
 
 ## 0.9.5
 
