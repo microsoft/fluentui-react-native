@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix livereload in win32 tester app",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "30809111+acoates-ms@users.noreply.github.com",
-  "dependentChangeType": "patch",
-  "date": "2021-05-20T00:48:30.585Z"
-}

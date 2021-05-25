@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add react-native-svg-transformer to iOS and macOS",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "adam.gleitman@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-05-20T01:05:38.730Z"
-}

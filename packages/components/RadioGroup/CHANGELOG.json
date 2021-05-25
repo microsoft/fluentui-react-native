@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Tue, 25 May 2021 00:42:50 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add very basic jest snapshots for RadioGroup",
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "commit": "3aa5c6b7f9d6862521370e324016b888639a5631",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Small changes to center the RadioButton text better with the RadioButton",
+            "author": "safreibe@microsoft.com",
+            "commit": "e178544b500af52e9821f2fae7988a5c6c45ea32",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 19 May 2021 07:04:54 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.9.7",
       "version": "0.9.7",
