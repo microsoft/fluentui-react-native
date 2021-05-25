@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TextStyle, View } from 'react-native';
+import { View } from 'react-native';
 import { Button } from '@fluentui-react-native/experimental-button';
 import { MenuAction, MenuView } from '@react-native-menu/menu';
 import { testerTheme } from './CustomThemes';
@@ -22,7 +22,7 @@ export const themePickerStyles = themedStyleSheet((t: Theme) => {
     },
     pickerItem: {
       color: t.colors.bodyText,
-    } as TextStyle,
+    },
     dropdown: {
       height: 200,
       width: 90,

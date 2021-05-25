@@ -111,7 +111,7 @@ describe('useStyling samples', () => {
         (tokens: Sample1Tokens /*, theme: Theme */) => {
           return {
             style: { ...tokens },
-          } as TextProps;
+          };
         },
         /**
          * The second input are the tokens used as inputs for the above function. This is similar to the way the useEffect hook

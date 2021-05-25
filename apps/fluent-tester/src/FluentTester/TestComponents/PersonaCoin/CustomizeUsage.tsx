@@ -20,9 +20,9 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [verticalAlignment, setVerticalAlignment] = React.useState<IconAlignment>();
 
   const theme = useTheme();
-  const textBoxBorderStyle = {
+  const textBoxBorderStyle: TextStyle = {
     borderColor: theme.colors.inputBorder,
-  } as TextStyle;
+  };
 
   const tokens: Partial<IPersonaCoinTokens> = {};
   if (coinColor) {

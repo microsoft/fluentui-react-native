@@ -4,7 +4,7 @@ import { Button } from '@fluentui-react-native/experimental-button';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
-import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler, ViewStyle } from 'react-native';
+import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler } from 'react-native';
 import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
@@ -36,11 +36,11 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
       justifyContent: 'flex-start',
       alignItems: 'stretch',
       padding: 4,
-    } as ViewStyle,
+    },
     testSeparator: {
       borderColor: t.colors.menuDivider,
       borderWidth: 0.1,
-    } as ViewStyle,
+    },
   };
 });
 

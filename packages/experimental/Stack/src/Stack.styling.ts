@@ -93,7 +93,7 @@ const buildRootProps = buildProps<ViewProps, StackTokens>(
       ...(wrap && { flexWrap: 'wrap', height: '100%', overflow: 'visible' }),
       ...(verticalFill && { height: '100%' }),
       ...borderStyles.from(tokenProps, theme),
-    } as ViewStyle;
+    };
     _mapAlignment(!!horizontal, horizontalAlign, verticalAlign, rootStyle);
     if (grow && !wrap) {
       rootStyle.flexGrow = typeof grow === 'boolean' ? (grow ? 1 : 0) : grow;

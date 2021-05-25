@@ -102,9 +102,9 @@ const tokenCheckbox: React.FunctionComponent<{}> = () => {
   });
 
   const theme = useTheme();
-  const textBoxBorderStyle = {
+  const textBoxBorderStyle: TextStyle = {
     borderColor: theme.colors.inputBorder,
-  } as TextStyle;
+  };
   return (
     <View>
       <CircularCheckbox label="A circular checkbox" onChange={onChangeUncontrolled} defaultChecked={false} />

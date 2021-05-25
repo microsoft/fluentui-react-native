@@ -1,7 +1,7 @@
 import { styleFunction } from '@uifabricshared/foundation-tokens';
-import { ImageProps, ImageStyle, StyleProp } from 'react-native';
+import { ImageProps } from 'react-native';
 import { IPersonaCoinTokens } from './PersonaCoin.types';
-import { ColorValue, ITheme } from '@uifabricshared/theming-ramp';
+import { ITheme } from '@uifabricshared/theming-ramp';
 import { calculateEffectiveSizes } from './PersonaCoin.helpers';
 
 const _iconKeyProps: (keyof IPersonaCoinTokens)[] = ['iconSize', 'size', 'coinSize'];
@@ -9,7 +9,7 @@ const _iconKeyProps: (keyof IPersonaCoinTokens)[] = ['iconSize', 'size', 'coinSi
 function _buildIconStyles(tokenProps: IPersonaCoinTokens, theme: ITheme): ImageProps {
   const { iconSize, iconStrokeWidth } = calculateEffectiveSizes(tokenProps);
   const iconSizeAdjusted = iconSize + iconStrokeWidth * 2;
-  const iconStrokeColor: ColorValue = tokenProps.iconStrokeColor || theme.colors.background;
+  const iconStrokeColor = tokenProps.iconStrokeColor || theme.colors.background;
 
   return {
     source: {},
@@ -22,7 +22,7 @@ function _buildIconStyles(tokenProps: IPersonaCoinTokens, theme: ITheme): ImageP
       borderRadius: iconSizeAdjusted / 2,
       borderWidth: iconStrokeWidth,
       borderColor: iconStrokeColor,
-    } as StyleProp<ImageStyle>,
+    },
   };
 }
 

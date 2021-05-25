@@ -46,9 +46,9 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   }
 
   const theme = useTheme();
-  const textBoxBorderStyle = {
+  const textBoxBorderStyle: TextStyle = {
     borderColor: theme.colors.inputBorder,
-  } as TextStyle;
+  };
 
   const CustomizedPersona = Persona.customize({ tokens });
   return (
