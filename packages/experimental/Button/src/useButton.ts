@@ -4,7 +4,7 @@ import { ButtonProps, ButtonState } from './Button.types';
 
 export const useButton = (props: ButtonProps): ButtonState => {
   // attach the pressable state handlers
-  const { onClick, componentRef = props.componentRef != undefined ? props.componentRef : React.useRef(null), ...rest } = props;
+  const { onClick, componentRef = props.componentRef ?? React.useRef(null), ...rest } = props;
   const onClickWithFocus = useOnPressWithFocus(componentRef, onClick);
   const pressable = useAsPressable({ ...rest, onPress: onClickWithFocus });
   const onKeyUp = useKeyCallback(onClick, ' ', 'Enter');

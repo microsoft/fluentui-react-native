@@ -26,7 +26,7 @@ export const Button = compose<IButtonType>({
       content,
       onAccessibilityTap = userProps.onClick,
       accessibilityLabel = userProps.content,
-      componentRef = userProps.componentRef != undefined ? userProps.componentRef : React.useRef(null),
+      componentRef = userProps.componentRef ?? React.useRef(null),
       testID,
       onClick,
       ...rest
