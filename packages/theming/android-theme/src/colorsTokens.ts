@@ -1,5 +1,5 @@
 import { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
-import { FluentUIAndroidPalette } from './androidPalette';
+import { FluentUIAndroidPalette } from './colorsSemantic';
 
 /** creates a palette of colors for the android theme, given the FluentUI Android Palette */
 export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorDefinition {

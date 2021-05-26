@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 import {
   ContextualMenuItemSlotProps,
   ContextualMenuItemState,
@@ -13,10 +13,12 @@ import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose'
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
 import { settings } from './ContextualMenuItem.settings';
-import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens } from '@fluentui-react-native/tokens';
+import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useAsPressable, useKeyCallback, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
+import { Icon } from '@fluentui-react-native/icon';
+import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 
 export const ContextualMenuItem = compose<ContextualMenuItemType>({
   displayName: contextualMenuItemName,
@@ -40,11 +42,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       (e) => {
         if (!disabled) {
           context ?.onDismissMenu();
-          if (onClick) {
-            onClick();
-          } else {
-            context.onItemClick && context.onItemClick(itemKey);
-          }
+          onClick ? onClick() : context.onItemClick(itemKey);
           e.stopPropagation();
         }
       },
@@ -52,11 +50,16 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     );
 
     const cmRef = useViewCommandFocus(componentRef);
-    //const cmRef = React.useRef(null);
+
     const onItemHoverIn = React.useCallback(
       () => {
         componentRef.current.focus();
-      }, [componentRef]);
+        // dismiss submenu
+        if (!disabled && context.isSubmenuOpen)
+        {
+          context.dismissSubmenu();
+        }
+      }, [componentRef, disabled, context]);
 
     const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn });
 
@@ -104,7 +107,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         accessibilityLabel: accessibilityLabel
       },
       content: { children: text, testID },
-      icon: { source: icon },
+      icon: createIconProps(icon),
     });
 
     return { slotProps, state };
@@ -115,7 +118,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     return (
       <Slots.root>
         <Slots.stack>
-          {renderData!.state.icon && <Slots.icon source={renderData.slotProps!.icon.source} />}
+          {renderData!.state.icon && <Slots.icon />}
           {renderData!.state.content && <Slots.content />}
           {children}
         </Slots.stack>
@@ -125,13 +128,13 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
   slots: {
     root: View,
     stack: { slotType: View },
-    icon: { slotType: Image as React.ComponentType<object> },
+    icon: { slotType: Icon as React.ComponentType<object> },
     content: Text,
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
     stack: [],
-    icon: [foregroundColorTokens],
+    icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
     content: [textTokens, foregroundColorTokens],
   },
 });

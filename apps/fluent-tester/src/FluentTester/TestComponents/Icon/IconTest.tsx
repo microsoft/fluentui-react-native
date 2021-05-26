@@ -71,11 +71,7 @@ const icons: React.FunctionComponent<{}> = () => {
       {showSvgIcons ? (
         <View>
           <Text>SVG icons</Text>
-          {
-            // TODO: Enable on macOS and iOS once we get react-native-svg-transformer working properly
-            // See https://github.com/microsoft/fluentui-react-native/issues/644
-            (Platform.OS == 'ios' || Platform.OS == 'macos') ? null : <Icon svgSource={svgProps} width={100} height={100} color="orange" />
-          }
+          <Icon svgSource={svgProps} width={100} height={100} color="orange" />
           {
             // TODO: Causes TypeError: Network request failed on Android
             Platform.OS == 'android' ? null : <Icon svgSource={svgD20DataUriProps} width={100} height={100} color="#7a7" />
