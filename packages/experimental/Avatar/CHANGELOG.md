@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Wed, 07 Apr 2021 23:41:02 GMT and should not be manually modified.
+This log was last generated on Tue, 25 May 2021 00:42:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.0
+
+Tue, 25 May 2021 00:42:50 GMT
+
+### Minor changes
+
+- Add hideInsideGapForBorder prop to experimental avatar (sanajmi@microsoft.com)
 
 ## 0.7.1
 

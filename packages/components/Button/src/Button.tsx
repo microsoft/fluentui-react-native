@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 import { IButtonSlotProps, IButtonState, IButtonProps, IButtonRenderData, buttonName, IButtonType } from './Button.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
@@ -9,30 +9,8 @@ import { settings } from './Button.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable, useKeyCallback, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { Icon, RasterImageIconProps, IconProps } from '@fluentui-react-native/icon';
-
-function createIconProps(src: number | string | IconProps) {
-  if (src === undefined) return null;
-
-  if (typeof src === 'number') {
-    const rasterProps: RasterImageIconProps = { src: src };
-    const asset = Image.resolveAssetSource(+src);
-
-    return {
-      rasterImageSource: rasterProps,
-      width: asset.width,
-      height: asset.height,
-    };
-  }
-  else if (typeof src === 'string') {
-    const rasterProps: RasterImageIconProps = { src: { uri: src as string } };
-    return { rasterImageSource: rasterProps };
-  }
-  else {
-    return src as IconProps;
-  }
-}
+import { useAsPressable, useKeyCallback, useViewCommandFocus, createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { Icon } from '@fluentui-react-native/icon';
 
 export const Button = compose<IButtonType>({
   displayName: buttonName,
@@ -74,7 +52,7 @@ export const Button = compose<IButtonType>({
         onKeyUp: onKeyUp,
       },
       content: { children: content, testID: testID },
-      icon: createIconProps(icon)
+      icon: createIconProps(icon),
     });
 
     return { slotProps, state };

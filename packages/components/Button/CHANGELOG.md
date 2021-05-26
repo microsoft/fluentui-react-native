@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Thu, 11 Mar 2021 19:48:16 GMT and should not be manually modified.
+This log was last generated on Tue, 25 May 2021 00:42:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.0
+
+Tue, 25 May 2021 00:42:50 GMT
+
+### Minor changes
+
+- Add ripple effect to android-button (tamasane@gmail.com)
+
+## 0.15.0
+
+Wed, 19 May 2021 07:04:54 GMT
+
+### Minor changes
+
+- create iconProps hook (lehon@microsoft.com)
 
 ## 0.14.1
 
