@@ -35,7 +35,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
         // The callout window root view will contain the proxy react view.
         // It will be offset within the window to align with the callout target rect
         // The callout window root view controller manages device rotation callbacks.
-        calloutWindowRootViewController = CalloutWindowRootViewController( //NSViewController(nibName: nil, bundle: nil)
+        calloutWindowRootViewController = CalloutWindowRootViewController()
         
         if let windowRootViewController = calloutWindowRootViewController {
             // The callout window hosts the callout root view which hosts the proxy view.
@@ -168,7 +168,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
         if (rect.origin.y + maxHeight + targetRect.size.height < screenFrame.size.height) {
             rect.origin.y -= maxHeight
             // TODO RCTAssert not available for some reason
-            precondition(rect.origin.y >= 0, "Callout currently extends off the lower end of the screen.")
+//            precondition(rect.origin.y >= 0, "Callout currently extends off the lower end of the screen.")
         }
         // 2. Else if space above, callout is above
         else if (rect.origin.y > maxHeight) {

@@ -12,14 +12,12 @@ class CalloutWindowRootViewController: UIViewController {
     required init?(coder: NSCoder) {
         preconditionFailure()
     }
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    override func loadView() {
+        view = NSView()
+    }
 }
-
-
-
-
-//@interface PLYCalloutWindowRootViewController : UIViewController
-//
-//- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
-//- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
-//
-//@end
