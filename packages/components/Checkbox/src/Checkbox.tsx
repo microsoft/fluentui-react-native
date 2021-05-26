@@ -39,8 +39,6 @@ export const Checkbox = compose<ICheckboxType>({
       console.warn('defaultChecked and checked are mutually exclusive to one another. Use one or the other.');
     }
 
-    const buttonRef = useViewCommandFocus(componentRef);
-
     // Re-usable hook for toggle components.
     const [isChecked, toggleChecked] = useAsToggle(defaultChecked, checked, onChange);
 
@@ -48,6 +46,8 @@ export const Checkbox = compose<ICheckboxType>({
     const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleChecked);
 
     const pressable = useAsPressable({ onPress: toggleCheckedWithFocus, ...rest });
+
+    const buttonRef = useViewCommandFocus(componentRef);
 
     // Handles the "Space" key toggling the Checkbox
     const onKeyUpSpace = useKeyCallback(toggleChecked, ' ');

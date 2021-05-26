@@ -32,11 +32,8 @@ export const Button = compose<IButtonType>({
       ...rest
     } = userProps;
 
-    const buttonRef = useViewCommandFocus(componentRef);
-
     // Ensure focus is placed on button after click
     const onPressWithFocus = useOnPressWithFocus(componentRef, onClick);
-
     // attach the pressable state handlers
     const pressable = useAsPressable({ ...rest, onPress: onPressWithFocus });
     const onKeyUp = useKeyCallback(onClick, ' ', 'Enter');
@@ -50,6 +47,7 @@ export const Button = compose<IButtonType>({
       },
     };
 
+    const buttonRef = useViewCommandFocus(componentRef);
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
     // create the merged slot props

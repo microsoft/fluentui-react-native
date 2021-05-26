@@ -61,12 +61,12 @@ export const Link = compose<ILinkType>({
       ...rest
     } = userProps;
 
-    const linkRef = useViewCommandFocus(componentRef);
-
     const [linkProps, linkState] = useAsLink(rest, componentRef);
     const onAccTap = onAccessibilityTap ? onAccessibilityTap : linkProps.onPress;
 
     const info = { content: !!content };
+
+    const linkRef = useViewCommandFocus(componentRef);
 
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => linkState[override] || userProps[override]);
