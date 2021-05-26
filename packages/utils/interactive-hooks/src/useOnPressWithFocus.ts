@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export type OnPressCallback = () => void;
+export type OnPressCallback = (args?: any) => void;
 export type OnPressWithFocusCallback = () => void;
 
 /* Re-usable hook for pressable components.
@@ -12,10 +12,13 @@ export type OnPressWithFocusCallback = () => void;
  *         onPressWithFocus() - Callback to set focus after calling the userCallback for onPress
  */
 export function useOnPressWithFocus(focusRef: React.RefObject<any>, userCallback: OnPressCallback): OnPressWithFocusCallback {
-  const onPressWithFocus = React.useCallback(() => {
-    userCallback && userCallback();
-    focusRef?.current?.focus();
-  }, []);
+  const onPressWithFocus = React.useCallback(
+    (args?: any) => {
+      userCallback && userCallback(args);
+      focusRef?.current?.focus();
+    },
+    [userCallback, focusRef],
+  );
 
   return onPressWithFocus;
 }
