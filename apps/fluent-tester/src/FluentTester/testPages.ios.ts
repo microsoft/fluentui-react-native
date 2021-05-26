@@ -35,26 +35,26 @@ export const tests: TestDescription[] = [
     component: NativeButtonTest,
     testPage: HOMEPAGE_NATIVEBUTTON_BUTTON,
   },
-  {
-    name: 'Callout Test',
-    component: CalloutTest,
-    testPage: HOMEPAGE_CALLOUT_BUTTON,
-  },
-  {
-    name: 'ContextualMenu Test',
-    component: ContextualMenuTest,
-    testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON,
-  },
+  // {
+  //   name: 'Callout Test',
+  //   component: CalloutTest,
+  //   testPage: HOMEPAGE_CALLOUT_BUTTON,
+  // },
+  // {
+  //   name: 'ContextualMenu Test',
+  //   component: ContextualMenuTest,
+  //   testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON,
+  // },
   {
     name: 'Experimental Button',
     component: ExperimentalButtonTest,
     testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
   },
-  {
-    name: 'Focus Trap Zone Test',
-    component: FocusTrapTest,
-    testPage: HOMEPAGE_FOCUSTRAPZONE_BUTTON,
-  },
+  // {
+  //   name: 'Focus Trap Zone Test',
+  //   component: FocusTrapTest,
+  //   testPage: HOMEPAGE_FOCUSTRAPZONE_BUTTON,
+  // },
   {
     name: 'Pressable Test',
     component: PressableTest,
