@@ -28,6 +28,23 @@ RCT_ENUM_CONVERTER(MSFDateTimePickerDateRangePresentation, (@{
 
 @interface RCT_EXTERN_MODULE(MSFDatePickerManager, NSObject)
 
+//- (NSDictionary *)constantsToExport
+//{
+//  return @{ @"date" : @(MSFDateTimePickerModeDate),
+//            @"statusBarAnimationFade" : @(UIStatusBarAnimationFade),
+//            @"statusBarAnimationSlide" : @(UIStatusBarAnimationSlide) };
+//};
+
+// Properties used directly by the `DateTimePicker.present` method
+RCT_EXPORT_VIEW_PROPERTY(mode, MSFDateTimePickerMode);
+RCT_EXPORT_VIEW_PROPERTY(startDate, nonnull NSDate);
+RCT_EXPORT_VIEW_PROPERTY(endDate, nullable NSDate);
+RCT_EXPORT_VIEW_PROPERTY(type, MSFDateTimePickerDatePickerType);
+RCT_EXPORT_VIEW_PROPERTY(dateRangePresentation, MSFDateTimePickerDateRangePresentation);
+
+// Properties of `DateTimePicker.Titles`
+//RCT_REMAP_VIEW_PROPERTY(buttonStyle, style, MSFButtonStyle);
+
 RCT_EXTERN_METHOD(present)
 
 @end

@@ -5,14 +5,24 @@ import * as React from 'react';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { PlatformStatus, Test, TestSection } from '../Test';
+import { Text } from '@fluentui/react-native';
 
 const nativeDatePicker: React.FunctionComponent<{}> = () => {
-  return (
+  const [date, setDate] = React.useState('Foo')
+
+return (
     <Stack style={stackStyle}>
-      <Button content="1" onClick={() => MSFDatePickerManager.present()}/>
-      <Button content="2" />
+      <Text>{date}</Text>
+      <Button content="Get Date" onClick={() => setDate(MSFDatePickerManager.startDate)} />
+      <Button content="Show date picker" onClick={() => MSFDatePickerManager.present()} />
+      <Button content="Show date time picker" onClick={() => {
+        var dp = MSFDatePickerManager
+        dp.mode = "dateTime"
+        dp.present()
+      }} />
       <Button content="3" />
       <Button content="4" />
+      <Text>{ MSFDatePickerManager.date }</Text>
     </Stack>
   );
 };
