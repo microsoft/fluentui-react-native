@@ -34,16 +34,6 @@ export const settings: IComposeSettings<ICheckboxType> = [
         marginEnd: 4,
       },
     },
-    checkmark: {
-      style: {
-        aspectRatio: 1,
-        minHeight: 18,
-        minWidth: 18,
-        fontSize: 12,
-        textAlign: 'center',
-        textAlignVertical: 'center',
-      },
-    },
     content: {
       variant: 'bodyStandard',
       style: {
@@ -81,7 +71,7 @@ export const settings: IComposeSettings<ICheckboxType> = [
         tokens: {
           borderColor: 'buttonDisabledContent',
           backgroundColor: 'buttonBackgroundDisabled',
-          checkmarkColor: 'buttonPressedContent',
+          checkmarkColor: 'buttonDisabledContent',
         },
         checkbox: {
           style: {

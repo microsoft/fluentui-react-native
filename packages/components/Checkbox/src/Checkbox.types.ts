@@ -5,6 +5,7 @@ import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import type { IViewProps } from '@fluentui-react-native/adapters';
+import { IconProps } from '@fluentui-react-native/icon';
 
 export const checkboxName = 'Checkbox';
 
@@ -87,7 +88,7 @@ export interface ICheckboxTokens extends FontTokens, IForegroundColorTokens, IBa
 export interface ICheckboxSlotProps {
   root: React.PropsWithRef<IViewProps>;
   checkbox: IViewProps;
-  checkmark: ITextProps;
+  checkmark: IconProps;
   content: ITextProps;
 }
 

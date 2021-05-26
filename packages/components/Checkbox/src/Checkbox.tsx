@@ -11,6 +11,8 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { useAsToggle, useAsPressable, useViewCommandFocus, useKeyCallback } from '@fluentui-react-native/interactive-hooks';
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
+import { Icon } from '@fluentui-react-native/icon';
+import checkmarkSvg from './checkmark/checkmark';
 
 export const Checkbox = compose<ICheckboxType>({
   displayName: checkboxName,
@@ -68,7 +70,16 @@ export const Checkbox = compose<ICheckboxType>({
         onKeyUp: onKeyUpSpace,
       },
       // Temporary checkmark until SVG functionality
-      checkmark: { children: '✓' },
+      checkmark: {
+        svgSource: {
+          src: checkmarkSvg,
+        },
+        width: 14,
+        height: 10,
+        style: {
+          marginVertical: 2,
+        },
+      },
       content: { children: label },
     });
 
@@ -92,7 +103,7 @@ export const Checkbox = compose<ICheckboxType>({
   slots: {
     root: View,
     checkbox: { slotType: View, filter: filterViewProps },
-    checkmark: Text,
+    checkmark: Icon,
     content: Text,
   },
   styles: {
@@ -108,7 +119,7 @@ export const Checkbox = compose<ICheckboxType>({
     checkmark: [
       foregroundColorTokens,
       [
-        { source: 'checkmarkColor', lookup: getPaletteFromTheme, target: 'color' },
+        { source: 'checkmarkColor', target: 'color' },
         { source: 'checkmarkVisibility', target: 'opacity' },
       ],
     ],
