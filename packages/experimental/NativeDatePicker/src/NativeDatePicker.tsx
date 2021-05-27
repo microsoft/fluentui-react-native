@@ -1,9 +1,6 @@
 /** @jsx withSlots */
-import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
-import { nativeDatePickerName, NativeDatePickerProps, NativeDatePickerViewProps, NativeDatePickerComponentType } from './types';
+import { nativeDatePickerName, NativeDatePickerComponent, NativeDatePickerProps, NativeDatePickerViewProps, NativeDatePickerComponentType } from './types';
 import { compose, mergeProps, withSlots, UseSlots, buildProps } from '@fluentui-react-native/framework';
-
-const NativeDatePickerComponent = ensureNativeComponent('MSFDatePickerManager');
 
 export const NativeDatePicker = compose<NativeDatePickerComponentType>({
   displayName: nativeDatePickerName,
