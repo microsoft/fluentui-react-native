@@ -5,7 +5,7 @@ import { compose, mergeProps, withSlots, UseSlots, buildProps } from '@fluentui-
 
 const NativeDatePickerComponent = ensureNativeComponent('MSFDatePickerManager');
 
-const NativeDatePicker = compose<NativeDatePickerComponentType>({
+export const NativeDatePicker = compose<NativeDatePickerComponentType>({
   displayName: nativeDatePickerName,
   tokens: [{}, nativeDatePickerName],
   slotProps: {
@@ -21,5 +21,3 @@ const NativeDatePicker = compose<NativeDatePickerComponentType>({
     return (rest: NativeDatePickerViewProps, ...children: React.ReactNode[]) => <Root {...mergeProps(userProps, rest)}>{children}</Root>;
   },
 });
-
-export default NativeDatePicker;
