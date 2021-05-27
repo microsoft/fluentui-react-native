@@ -6,10 +6,10 @@ export const checkboxSelectActionLabel = 'Toggle the Checkbox';
 export const settings: IComposeSettings<ICheckboxType> = [
   {
     tokens: {
-      borderColor: 'menuItemText',
-      color: 'menuItemText',
-      backgroundColor: 'menuBackground',
+      backgroundColor: 'transparent',
       textBorderColor: 'transparent',
+      borderColor: 'checkboxBorderColor',
+      checkmarkVisibility: 0,
     },
     root: {
       accessible: true,
@@ -19,7 +19,7 @@ export const settings: IComposeSettings<ICheckboxType> = [
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'row',
-        minHeight: 14,
+        minHeight: 18,
         marginTop: 0,
         position: 'relative',
       },
@@ -27,13 +27,20 @@ export const settings: IComposeSettings<ICheckboxType> = [
     checkbox: {
       style: {
         borderStyle: 'solid',
-        borderWidth: 1,
-        minHeight: 14,
-        minWidth: 14,
+        borderWidth: 2,
+        borderRadius: 2,
+        minHeight: 18,
+        minWidth: 18,
         marginEnd: 4,
       },
     },
-    checkmark: {},
+    checkmark: {
+      width: 14,
+      height: 10,
+      style: {
+        marginVertical: 2,
+      },
+    },
     content: {
       variant: 'bodyStandard',
       style: {
@@ -46,29 +53,31 @@ export const settings: IComposeSettings<ICheckboxType> = [
     _overrides: {
       focused: {
         tokens: {
-          backgroundColor: 'menuItemBackgroundHovered',
-          textBorderColor: 'focusBorder',
-          checkmarkColor: 'menuItemTextHovered',
+          backgroundColor: 'checkboxBackground',
+          checkmarkColor: 'checkboxBackground',
         },
       },
       checked: {
-        checkmark: {
-          style: {
-            opacity: 1,
-          },
+        tokens: {
+          borderColor: 'checkboxBackground',
+          backgroundColor: 'checkboxBackground',
+          checkmarkVisibility: 1,
         },
       },
       hovered: {
         tokens: {
-          backgroundColor: 'menuItemBackgroundHovered',
-          checkmarkColor: 'menuItemTextHovered',
+          backgroundColor: 'checkboxBackground',
+          checkmarkColor: 'checkboxBackground',
         },
       },
       disabled: {
         tokens: {
-          borderColor: 'buttonBorderDisabled',
-          color: 'disabledBodyText',
-          backgroundColor: 'background',
+          backgroundColor: 'checkboxBackgroundDisabled',
+        },
+        checkbox: {
+          style: {
+            opacity: 0.38,
+          },
         },
       },
       boxAtEnd: {
@@ -81,7 +90,7 @@ export const settings: IComposeSettings<ICheckboxType> = [
       },
       pressed: {
         tokens: {
-          backgroundColor: 'menuItemBackgroundPressed',
+          backgroundColor: 'checkboxBackground',
         },
       },
     },

@@ -37,7 +37,7 @@ export const Checkbox = compose<ICheckboxType>({
 
     const state: ICheckboxState = {
       ...pressable.state,
-      disabled,
+      disabled: !!disabled,
       checked: isChecked,
       boxAtEnd: boxSide == undefined || boxSide == 'start' ? false : true,
     };
