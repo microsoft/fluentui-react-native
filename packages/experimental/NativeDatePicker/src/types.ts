@@ -3,7 +3,7 @@ import { NativeModules } from 'react-native';
 
 export const nativeDatePickerName = 'NativeDatePicker';
 
-export const NativeDatePickerComponent = ensureNativeComponent('MSFDatePickerManager');
+export const NativeDatePickerComponent = ensureNativeComponent('MSFDatePicker');
 
 export const { MSFDateTimePickerMode, MSFDateTimePickerDatePickerType, MSFDateTimePickerDateRangePresentation } = NativeModules.MSFDatePickerManager.getConstants();
 
