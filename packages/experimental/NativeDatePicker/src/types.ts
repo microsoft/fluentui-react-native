@@ -5,8 +5,7 @@ export const nativeDatePickerName = 'NativeDatePicker';
 
 export const NativeDatePickerComponent = ensureNativeComponent('MSFDatePickerManager');
 
-export const { MSFDatePickerManager } = NativeModules;
-export const { MSFDateTimePickerMode, MSFDateTimePickerDatePickerType, MSFDateTimePickerDateRangePresentation } = MSFDatePickerManager.getConstants();
+export const { MSFDateTimePickerMode, MSFDateTimePickerDatePickerType, MSFDateTimePickerDateRangePresentation } = NativeModules.MSFDatePickerManager.getConstants();
 
 export type NativeDatePickerMode = keyof typeof MSFDateTimePickerMode;
 export type NativeDatePickerType = keyof typeof MSFDateTimePickerDatePickerType;
