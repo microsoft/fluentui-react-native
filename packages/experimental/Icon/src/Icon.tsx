@@ -2,7 +2,7 @@ import * as React from 'react';
 import { IconProps, SvgIconProps, FontIconProps } from './Icon.types';
 import { Image, ImageStyle, Platform, View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
-import { SvgUri } from 'react-native-svg';
+import { Color, SvgUri } from 'react-native-svg';
 import { mergeStyles } from '@fluentui-react-native/framework';
 import { stagedComponent, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -55,16 +55,20 @@ function renderSvg(iconProps: IconProps) {
   const viewBox = iconProps.svgSource.viewBox;
   const style = mergeStyles(iconProps.style, rasterImageStyleCache({ width: width, height: height }, [width, height])[0]);
 
+  // The svg color can be set using either style.color or iconProps.color, where style.color is preferred in case both are set.
+  const getColor = (color1: Color, color2: Color) => (color1 === undefined ? color2 : color1);
+  const color = getColor((style as any).color, iconProps.color);
+
   if (svgIconProps.src) {
     return (
       <View style={style}>
-        <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconProps.color} />
+        <svgIconProps.src viewBox={viewBox} width={width} height={height} color={color} />
       </View>
     );
   } else if (svgIconProps.uri) {
     return (
       <View style={style}>
-        <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconProps.color} />
+        <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={color} />
       </View>
     );
   } else {

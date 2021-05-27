@@ -74,11 +74,6 @@ export const Checkbox = compose<ICheckboxType>({
         svgSource: {
           src: checkmarkSvg,
         },
-        width: 14,
-        height: 10,
-        style: {
-          marginVertical: 2,
-        },
       },
       content: { children: label },
     });
@@ -119,7 +114,7 @@ export const Checkbox = compose<ICheckboxType>({
     checkmark: [
       foregroundColorTokens,
       [
-        { source: 'checkmarkColor', target: 'color' },
+        { source: 'checkmarkColor', lookup: getPaletteFromTheme, target: 'color' },
         { source: 'checkmarkVisibility', target: 'opacity' },
       ],
     ],
