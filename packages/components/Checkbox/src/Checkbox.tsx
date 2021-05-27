@@ -30,7 +30,7 @@ export const Checkbox = compose<ICheckboxType>({
       disabled,
       label,
       onChange,
-      componentRef = userProps.componentRef ?? React.useRef(null),
+      componentRef = React.useRef(null),
       ...rest
     } = userProps;
 
