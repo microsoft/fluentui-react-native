@@ -4,9 +4,17 @@ import AppKit
 @objc(RCTCalloutView)
 class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
     
-    @objc public var target: NSNumber?
+    @objc public var target: NSNumber? {
+        didSet {
+            updateCalloutFrameToTargetFrame() // SAAD Addition
+        }
+    }
     
-    public var anchorPosition: CGRect?
+    public var anchorRect: CGRect? {
+        didSet {
+            updateCalloutFrameToTargetFrame() // SAAD Addition
+        }
+    }
     
     @objc public var onDismiss: RCTDirectEventBlock?
     
@@ -93,7 +101,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
             // no op
         }
         get {
-            return false
+            return true
         }
     }
     
@@ -118,6 +126,8 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
             let event: [AnyHashable: Any] = ["target": reactTag]
             onDismiss(event)
         }
+        calloutWindow?.close() // SAAD Addition
+        
     }
     
     private func updateCalloutFrameToTargetFrame() {
