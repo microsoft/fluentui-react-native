@@ -11,13 +11,11 @@ PODS:
     - ReactCommon/turbomodule/core (= 0.63.1)
   - FluentUI-React-Native-Apple-Theme (0.4.2):
     - MicrosoftFluentUI (= 0.0.18)
+    - MicrosoftFluentUIVnext (= 0.0.4)
     - React
   - FluentUI-React-Native-Avatar (0.8.0):
     - MicrosoftFluentUI (= 0.0.18)
     - MicrosoftFluentUIVnext/Avatar_ios (= 0.0.4)
-    - React
-  - FluentUI-React-Native-Button (0.5.5):
-    - MicrosoftFluentUI (= 0.0.18)
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.0.18):
@@ -334,7 +332,6 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec`)
   - FluentUI-React-Native-Apple-Theme (from `../../../packages/theming/apple-theme/FluentUIReactNativeAppleTheme.podspec`)
   - FluentUI-React-Native-Avatar (from `../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec`)
-  - FluentUI-React-Native-Button (from `../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec`)
   - glog (from `../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
   - RCT-Folly (from `../../../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../../../node_modules/react-native-macos/Libraries/RCTRequired`)
@@ -385,8 +382,6 @@ EXTERNAL SOURCES:
     :path: "../../../packages/theming/apple-theme/FluentUIReactNativeAppleTheme.podspec"
   FluentUI-React-Native-Avatar:
     :path: "../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec"
-  FluentUI-React-Native-Button:
-    :path: "../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec"
   glog:
     :podspec: "../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec"
   RCT-Folly:
@@ -447,9 +442,8 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 87ca368919ae0ec70816fb8a42252ef59dc05c94
   FBReactNativeSpec: 7c0591658d85effad209fc4f45b6c9760f9e5842
-  FluentUI-React-Native-Apple-Theme: f3dbcf4c2425a43d9659c39afa8cb78b38e52e2b
+  FluentUI-React-Native-Apple-Theme: 7712b60887da8ae0b82fae104155dbc12f107b28
   FluentUI-React-Native-Avatar: efcd520e7d831c9d910be976f489b6ee679c6634
-  FluentUI-React-Native-Button: 512446f7d2103f0c56f10d0fbf58c2e1e2f37c31
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: 22838222ee96487f2ad768d70520c827d0ab31e5
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
@@ -480,6 +474,6 @@ SPEC CHECKSUMS:
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   Yoga: 6f6f412e10cf9acb93bb0e290613784603d2f0c9
 
-PODFILE CHECKSUM: 072b83d83341f0881ec8a2592b4100f8e81b2746
+PODFILE CHECKSUM: fdf2187c4424b0530e54671f14de185bfe4f6e1e
 
 COCOAPODS: 1.10.1

@@ -19,7 +19,19 @@ interface ExportedConstants {
 
 const ExportedNativeConstants: ExportedConstants = NativeModules.MSFAvatarViewManager;
 
-export type AvatarProps = {
+export type AvatarTokens = {
+  /**
+   * Supported Avatar sizes
+   */
+  size?: Size;
+
+  /**
+   * Supported Avatar styles
+   */
+  avatarStyle?: AvatarStyle;
+};
+
+export type AvatarProps = AvatarTokens & {
   /**
    * The image to be displayed
    */
@@ -61,7 +73,7 @@ export type AvatarProps = {
   isRingVisible?: boolean;
 
   /**
-   * TODO
+   * A boolean indicating whether the Inner Ring Gap is transparent
    */
   isTransparent?: boolean;
 
@@ -69,21 +81,20 @@ export type AvatarProps = {
    * A boolean indicating out of office status
    */
   isOutOfOffice?: boolean;
-};
-
-export type AvatarTokens = {
-  /**
-   * Supported Avatar sizes
-   */
-  size?: Size;
 
   /**
-   * Supported Avatar styles
+   * A boolean indicating whether the gap between the avatar and ring is visible.
    */
-  style: AvatarStyle;
+  hasRingInnerGap?: boolean;
+
+  /**
+   * An image to be shown as the backdrop of the ring, rather then a solid color.
+   * Takes precendence over `ringColor`
+   */
+  customBorderImageSource?: ImageURISource;
 };
 
-const tokensThatAreAlsoProps: (keyof AvatarTokens)[] = ['size', 'style'];
+const tokensThatAreAlsoProps: (keyof AvatarTokens)[] = ['size', 'avatarStyle'];
 
 export type NativeAvatarViewProps = ViewProps & AvatarProps;
 interface AvatarType {
@@ -97,7 +108,7 @@ export const Avatar = compose<AvatarType>({
   tokens: [
     {
       size: 'small',
-      style: 'default',
+      avatarStyle: 'default',
     },
     avatarName,
   ],

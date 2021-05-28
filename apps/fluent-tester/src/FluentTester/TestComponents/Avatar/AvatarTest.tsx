@@ -11,6 +11,7 @@ import { Switch, View } from 'react-native';
 export const BasicAvatar: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [showPresence, setShowPresence] = React.useState(false);
+  const [showRing, setShowRing] = React.useState(false);
 
   return (
     <View style={commonStyles.root}>
@@ -20,10 +21,13 @@ export const BasicAvatar: React.FunctionComponent<{}> = () => {
           <Text>Show image</Text>
           <Switch value={showImage} onValueChange={setShowImage} />
         </View>
-
         <View style={commonStyles.switch}>
           <Text>Show presence</Text>
           <Switch value={showPresence} onValueChange={setShowPresence} />
+        </View>
+        <View style={commonStyles.switch}>
+          <Text>Show Ring</Text>
+          <Switch value={showRing} onValueChange={setShowRing} />
         </View>
       </View>
       {/* component under test */}
@@ -32,6 +36,7 @@ export const BasicAvatar: React.FunctionComponent<{}> = () => {
         secondaryText="Kat.Larrson@example.com"
         imageSource={showImage ? testImageSource : undefined}
         presence={showPresence ? 'available' : null}
+        isRingVisible={showRing}
         size={'xxLarge'}
       />
     </View>
@@ -42,24 +47,32 @@ export const CustomizeColors: React.FunctionComponent<{}> = () => {
   const [showCustomRingColor, setShowCustomRingColor] = React.useState(false);
   const [showCustomForeground, setShowCustomForeground] = React.useState(false);
   const [showCustomBackground, setShowCustomBackground] = React.useState(false);
+  const [showCustomBorderImage, setShowCustomBorderImage] = React.useState(false);
+  const [showRingGap, setShowRingGap] = React.useState(false);
 
   return (
     <View style={commonStyles.root}>
       {/* settings */}
       <View style={commonStyles.settings}>
         <View style={commonStyles.switch}>
-          <Text>Custom ring color</Text>
-          <Switch value={showCustomRingColor} onValueChange={setShowCustomRingColor} />
-        </View>
-
-        <View style={commonStyles.switch}>
           <Text>Custom foreground</Text>
           <Switch value={showCustomForeground} onValueChange={setShowCustomForeground} />
         </View>
-
         <View style={commonStyles.switch}>
           <Text>Custom background</Text>
           <Switch value={showCustomBackground} onValueChange={setShowCustomBackground} />
+        </View>
+        <View style={commonStyles.switch}>
+          <Text>Custom ring color</Text>
+          <Switch value={showCustomRingColor} onValueChange={setShowCustomRingColor} />
+        </View>
+        <View style={commonStyles.switch}>
+          <Text>Custom Border Image</Text>
+          <Switch value={showCustomBorderImage} onValueChange={setShowCustomBorderImage} />
+        </View>
+        <View style={commonStyles.switch}>
+          <Text>Show Ring Gap</Text>
+          <Switch value={showRingGap} onValueChange={setShowRingGap} />
         </View>
       </View>
       {/* component under test */}
@@ -69,7 +82,9 @@ export const CustomizeColors: React.FunctionComponent<{}> = () => {
         ringColor={showCustomRingColor ? 'red' : null}
         foregroundColor={showCustomForeground ? 'green' : null}
         backgroundColor={showCustomBackground ? 'blue' : null}
+        customBorderImageSource={showCustomBorderImage ? rainbowGradientSource : null}
         isRingVisible={true}
+        hasRingInnerGap={showRingGap}
         size={'xxLarge'}
       />
     </View>
