@@ -143,10 +143,10 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
             }
             
             // if the optional anchorPos is supplied, offset the target frame by the anchorPos
-            if let anchorPosition = anchorPosition, (!anchorPosition.equalTo(.zero))  {
-                targetFrameInWindowCoordinates.origin.x += anchorPosition.origin.x
-                targetFrameInWindowCoordinates.origin.y += anchorPosition.origin.y
-                targetFrameInWindowCoordinates.size = anchorPosition.size
+            if let anchorRect = anchorRect, (!anchorRect.equalTo(.zero))  {
+                targetFrameInWindowCoordinates.origin.x += anchorRect.origin.x
+                targetFrameInWindowCoordinates.origin.y += anchorRect.origin.y
+                targetFrameInWindowCoordinates.size = anchorRect.size
             }
             
             var calloutRect = bestRectRelativeToTargetFrame(targetRect: targetFrameInWindowCoordinates)
