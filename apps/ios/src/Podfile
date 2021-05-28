@@ -27,11 +27,9 @@ use_test_app! do |target|
     source 'https://github.com/rdeassis/cocoapods-repo.git'
     source 'https://cdn.cocoapods.org/'
 
-    pod 'MicrosoftFluentUI', '0.0.18'
-
     pod 'FluentUI-React-Native-Apple-Theme', :path => '../../../packages/theming/apple-theme/FluentUIReactNativeAppleTheme.podspec'
     pod 'FluentUI-React-Native-Avatar', :path => '../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec'
-    pod 'FluentUI-React-Native-Button', :path => '../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec'
+    # pod 'FluentUI-React-Native-Button', :path => '../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec'
     pod 'react-native-menu', :path => '../../../node_modules/@react-native-menu/menu'
     pod 'RNSVG', :path => '../../../node_modules/react-native-svg'
 
