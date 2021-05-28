@@ -21,7 +21,7 @@ export const ButtonIconTest: React.FunctionComponent<{}> = () => {
   };
 
   // SVG-based icons are not available on all platforms yet
-  const svgIconsEnabled = ['ios', 'macos', 'win32'].includes(Platform.OS as string);
+  const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 
   return (
     <View>

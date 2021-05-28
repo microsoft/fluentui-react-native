@@ -23,7 +23,7 @@ export const settings: IComposeSettings<IRadioButtonType> = [
       accessibilityRole: 'radio',
       style: {
         display: 'flex',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         flexDirection: 'row',
         minHeight: 20,
         marginTop: 0,
@@ -60,7 +60,7 @@ export const settings: IComposeSettings<IRadioButtonType> = [
     content: {
       variant: 'subheaderStandard',
       style: {
-        marginTop: 3,
+        marginTop: 2,
         borderStyle: 'solid',
         borderWidth: 2,
       },
