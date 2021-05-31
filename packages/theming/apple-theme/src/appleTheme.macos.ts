@@ -46,6 +46,26 @@ export const appleComponents = {
       variant: 'bodyStandard',
     },
   },
+  Checkbox: {
+    checkbox: {
+      style: {
+        borderStyle: 'solid',
+        borderWidth: 0.5,
+        borderRadius: 3,
+        minHeight: 14,
+        minWidth: 14,
+        marginEnd: 5,
+      },
+    },
+    checkmark: {
+      width: 10,
+      height: 10,
+      style: {
+        marginVertical: 2,
+        marginHorizontal: 2,
+      },
+    },
+  },
 };
 
 /** The apple theme defined entirely in JS, intended as a fallback while the native module loads
