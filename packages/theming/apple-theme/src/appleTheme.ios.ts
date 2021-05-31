@@ -94,6 +94,28 @@ const appleComponents = {
       variant: 'bodyStandard',
     },
   },
+
+  Checkbox: {
+    checkbox: {
+      style: {
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderRadius: 100,
+        minHeight: 24,
+        minWidth: 24,
+        marginEnd: 4,
+      },
+    },
+    checkmark: {
+      width: 8.5,
+      height: 7,
+      style: {
+        marginVertical: 8.5,
+        marginLeft: 8,
+        marginRight: 7,
+      },
+    },
+  },
 };
 
 export const BaseAppleLightThemeIOS: Theme = {
