@@ -2,12 +2,12 @@ import FluentUI
 
 @objc(MSFDatePickerWrapper)
 class DatePickerWrapper: UIControl {
-    @objc public var mode: DateTimePickerMode = .date
-    @objc public var startDate: Date? = nil
-    @objc public var endDate: Date? = nil
-    @objc public var type: DateTimePicker.DatePickerType = .calendar
-    @objc public var dateRangePresentation: DateTimePicker.DateRangePresentation = .paged
-    @objc public let titles = DateTimePicker.Titles()
+    public var mode: DateTimePickerMode = .date
+    public var startDate: Date? = nil
+    public var endDate: Date? = nil
+    public var type: DateTimePicker.DatePickerType = .calendar
+    public var dateRangePresentation: DateTimePicker.DateRangePresentation = .paged
+    public let titles = DateTimePicker.Titles()
 
     public init() {
         super.init(frame: .zero)
