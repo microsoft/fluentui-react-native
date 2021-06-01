@@ -1,9 +1,7 @@
-import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
+// import { ImageURISource } from 'react-native';
 import { NativeModules } from 'react-native';
 
 export const nativeDatePickerName = 'NativeDatePicker';
-
-export const NativeDatePickerComponent = ensureNativeComponent('MSFDatePickerManager');
 
 export const { MSFDatePickerManager } = NativeModules;
 export const { MSFDateTimePickerMode, MSFDateTimePickerDatePickerType, MSFDateTimePickerDateRangePresentation } = MSFDatePickerManager.getConstants();
