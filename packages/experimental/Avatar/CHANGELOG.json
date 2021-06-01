@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Tue, 25 May 2021 00:42:50 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add hideInsideGapForBorder prop to experimental avatar",
+            "author": "sanajmi@microsoft.com",
+            "commit": "0767317b2c3dbfb3bf7e754b1246d91bfb2cd87b",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 15 Apr 2021 20:08:17 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.7.1",
       "version": "0.7.1",

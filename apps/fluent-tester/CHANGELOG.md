@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 19 May 2021 07:04:54 GMT and should not be manually modified.
+This log was last generated on Tue, 25 May 2021 00:42:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.1
+
+Tue, 25 May 2021 00:42:50 GMT
+
+### Patches
+
+- Fixed ButtonIconTest (tamasane@gmail.com)
+- Add react-native-svg-transformer to iOS and macOS (adam.gleitman@gmail.com)
+- Add hideInsideGapForBorder prop to experimental avatar (sanajmi@microsoft.com)
 
 ## 0.24.0
 

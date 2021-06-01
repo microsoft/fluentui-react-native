@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 25 May 2021 00:42:50 GMT",
+      "tag": "@fluentui-react-native/tester_v0.24.1",
+      "version": "0.24.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixed ButtonIconTest",
+            "author": "tamasane@gmail.com",
+            "commit": "d3953da403a118f3086dfde2529bca76d30ad235",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Add react-native-svg-transformer to iOS and macOS",
+            "author": "adam.gleitman@gmail.com",
+            "commit": "1700c9e4c3056821f38ba752c3949c08998aee10",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Add hideInsideGapForBorder prop to experimental avatar",
+            "author": "sanajmi@microsoft.com",
+            "commit": "0767317b2c3dbfb3bf7e754b1246d91bfb2cd87b",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 19 May 2021 07:04:54 GMT",
       "tag": "@fluentui-react-native/tester_v0.24.0",
       "version": "0.24.0",

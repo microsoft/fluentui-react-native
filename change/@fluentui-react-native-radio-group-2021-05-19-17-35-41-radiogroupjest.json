@@ -1,8 +1,0 @@
-{
-  "type": "none",
-  "comment": "Add very basic jest snapshots for RadioGroup",
-  "packageName": "@fluentui-react-native/radio-group",
-  "email": "30809111+acoates-ms@users.noreply.github.com",
-  "dependentChangeType": "none",
-  "date": "2021-05-20T00:35:41.482Z"
-}
