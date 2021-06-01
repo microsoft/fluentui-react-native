@@ -1,5 +1,5 @@
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
-import { NativeModules, ViewProps } from 'react-native';
+import { NativeModules } from 'react-native';
 
 export const nativeDatePickerName = 'NativeDatePicker';
 
@@ -41,7 +41,7 @@ export type NativeDatePickerProps = NativeDatePickerBasicProps & NativeDatePicke
 export interface NativeDatePickerTokens {
 }
 
-export type NativeDatePickerViewProps = NativeDatePickerProps & NativeDatePickerTokens & ViewProps;
+export type NativeDatePickerViewProps = NativeDatePickerProps & NativeDatePickerTokens;
 
 export interface NativeDatePickerComponentType {
   props: NativeDatePickerProps;
