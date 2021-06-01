@@ -26,9 +26,11 @@ static NSDictionary<NSString *, NSDictionary<NSString *, NSNumber *> *> *MSFDate
 
 @implementation RCTConvert (MSFDatePickerAdditions)
 
-RCT_ENUM_CONVERTER(MSFDateTimePickerMode, MSFDatePickerGetEnumMaps()[@"MSFDateTimePickerMode"], MSFDateTimePickerModeDate, integerValue)
-RCT_ENUM_CONVERTER(MSFDateTimePickerDatePickerType, MSFDatePickerGetEnumMaps()[@"MSFDateTimePickerDatePickerType"], MSFDateTimePickerDatePickerTypeCalendar, integerValue)
-RCT_ENUM_CONVERTER(MSFDateTimePickerDateRangePresentation, MSFDatePickerGetEnumMaps()[@"MSFDateTimePickerDateRangePresentation"], MSFDateTimePickerDateRangePresentationPaged, integerValue)
+RCT_ENUM_CONVERTER(MSFDateTimePickerMode, MSFDatePickerGetEnumMaps()[@"MSFDateTimePickerMode"], MSFDateTimePickerModeDate, integerValue);
+
+RCT_ENUM_CONVERTER(MSFDateTimePickerDatePickerType, MSFDatePickerGetEnumMaps()[@"MSFDateTimePickerDatePickerType"], MSFDateTimePickerDatePickerTypeCalendar, integerValue);
+
+RCT_ENUM_CONVERTER(MSFDateTimePickerDateRangePresentation, MSFDatePickerGetEnumMaps()[@"MSFDateTimePickerDateRangePresentation"], MSFDateTimePickerDateRangePresentationPaged, integerValue);
 
 @end
 
