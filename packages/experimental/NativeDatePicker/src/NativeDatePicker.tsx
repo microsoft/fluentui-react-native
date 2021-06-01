@@ -1,25 +1,24 @@
 /** @jsx withSlots */
-import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
-import { nativeDatePickerName, NativeDatePickerProps, NativeDatePickerViewProps, NativeDatePickerComponentType } from './types';
-import { compose, mergeProps, withSlots, UseSlots, buildProps } from '@fluentui-react-native/framework';
+// import * as React from 'react';
+import { NativeModules } from 'react-native';
+// import { nativeDatePickerName, NativeDatePickerType, NativeDatePickerProps, NativeDatePickerViewProps } from './NativeDatePicker.types';
+// import { compose, mergeProps, withSlots, UseSlots, buildProps } from '@fluentui-react-native/framework';
 
-const NativeDatePickerComponent = ensureNativeComponent('MSFDatePickerManager');
+export const { MSFDatePickerManager } = NativeModules;
 
-const NativeDatePicker = compose<NativeDatePickerComponentType>({
-  displayName: nativeDatePickerName,
-  tokens: [{}, nativeDatePickerName],
-  slotProps: {
-    root: buildProps(
-      (tokens) => ({
-        ...tokens,
-      }),
-    ),
-  },
-  slots: { root: NativeDatePickerComponent },
-  render: (userProps: NativeDatePickerProps, useSlots: UseSlots<NativeDatePickerComponentType>) => {
-    const Root = useSlots(userProps).root;
-    return (rest: NativeDatePickerViewProps, ...children: React.ReactNode[]) => <Root {...mergeProps(userProps, rest)}>{children}</Root>;
-  },
-});
+// const NativeDatePickerComponent = NativeModules.MSFDatePickerManager;
 
-export default NativeDatePicker;
+// export const NativeDatePicker = compose<NativeDatePickerType>({
+//   displayName: nativeDatePickerName,
+//   tokens: [{}, nativeDatePickerName],
+//   slotProps: {
+//     root: buildProps(
+//       () => ({}),
+//     ),
+//   },
+//   slots: { root: NativeDatePickerComponent },
+//   render: (userProps: NativeDatePickerProps, useSlots: UseSlots<NativeDatePickerType>) => {
+//     const Root = useSlots(userProps).root;
+//     return (rest: NativeDatePickerViewProps, ...children: React.ReactNode[]) => <Root {...mergeProps(userProps, rest)}>{children}</Root>;
+//   },
+// });

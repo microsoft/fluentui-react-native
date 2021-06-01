@@ -1,2 +1,2 @@
 export * from './NativeDatePicker';
-// export * from './types';
+// export * from './NativeDatePicker.types';
