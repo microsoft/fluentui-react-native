@@ -1,6 +1,5 @@
 import FluentUI
 
-@objc(MSFDatePickerWrapper)
 class DatePickerWrapper: UIControl {
     public var mode: DateTimePickerMode = .date
     public var startDate: Date? = nil
