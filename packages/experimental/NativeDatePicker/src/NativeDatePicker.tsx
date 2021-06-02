@@ -1,24 +1,39 @@
-/** @jsx withSlots */
-// import * as React from 'react';
 import { NativeModules } from 'react-native';
-// import { nativeDatePickerName, NativeDatePickerType, NativeDatePickerProps, NativeDatePickerViewProps } from './NativeDatePicker.types';
-// import { compose, mergeProps, withSlots, UseSlots, buildProps } from '@fluentui-react-native/framework';
+export const NativeDatePicker = NativeModules.MSFDatePickerManager;
+export const { MSFDateTimePickerMode, MSFDateTimePickerDatePickerType, MSFDateTimePickerDateRangePresentation } = NativeDatePicker.getConstants();
 
-export const { MSFDatePickerManager } = NativeModules;
+type NativeDatePickerMode = keyof typeof MSFDateTimePickerMode;
+type NativeDatePickerType = keyof typeof MSFDateTimePickerDatePickerType;
+type NativeDatePickerDateRangePresentation = keyof typeof MSFDateTimePickerDateRangePresentation;
+type NullableDate = Date | null;
+type NullableString = String | null;
 
-// const NativeDatePickerComponent = NativeModules.MSFDatePickerManager;
+interface NativeDatePickerInterface {
+    present(): void;
+    presentWithMode(mode: NativeDatePickerMode): void;
+    presentWithStartDate(startDate: NullableDate, endDate: NullableDate): void;
+    presentWithMode(
+        mode: NativeDatePickerMode,
+        startDate: NullableDate,
+        endDate: NullableDate,
+        datePickerType: NativeDatePickerType,
+        dateRangePresentation: NativeDatePickerDateRangePresentation): void;
+    presentWithMode(
+        mode: NativeDatePickerMode,
+        startDate: NullableDate,
+        endDate: NullableDate,
+        datePickerType: NativeDatePickerType,
+        dateRangePresentation: NativeDatePickerDateRangePresentation,
+        startTitle: NullableString, 
+        startSubtitle: NullableString, 
+        startTab: NullableString, 
+        endTitle: NullableString, 
+        endSubtitle: NullableString, 
+        endTab: NullableString, 
+        dateTitle: NullableString, 
+        dateSubtitle: NullableString, 
+        dateTimeTitle: NullableString, 
+        dateTimeSubtitle: NullableString): void;
+ }
 
-// export const NativeDatePicker = compose<NativeDatePickerType>({
-//   displayName: nativeDatePickerName,
-//   tokens: [{}, nativeDatePickerName],
-//   slotProps: {
-//     root: buildProps(
-//       () => ({}),
-//     ),
-//   },
-//   slots: { root: NativeDatePickerComponent },
-//   render: (userProps: NativeDatePickerProps, useSlots: UseSlots<NativeDatePickerType>) => {
-//     const Root = useSlots(userProps).root;
-//     return (rest: NativeDatePickerViewProps, ...children: React.ReactNode[]) => <Root {...mergeProps(userProps, rest)}>{children}</Root>;
-//   },
-// });
+ export default NativeDatePicker as NativeDatePickerInterface;

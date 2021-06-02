@@ -1,5 +1,5 @@
 import { Button } from '@fluentui-react-native/button';
-import { MSFDatePickerManager } from '@fluentui-react-native/experimental-native-date-picker';
+import { NativeDatePicker } from '@fluentui-react-native/experimental-native-date-picker';
 import { NATIVEDATEPICKER_TESTPAGE } from './consts';
 import * as React from 'react';
 import { Stack } from '@fluentui-react-native/stack';
@@ -9,8 +9,8 @@ import { PlatformStatus, Test, TestSection } from '../Test';
 const nativeDatePicker: React.FunctionComponent<{}> = () => {
   return (
     <Stack style={stackStyle}>
-      <Button content="1" onClick={() => MSFDatePickerManager.present()}/>
-      <Button content="2" />
+      <Button content="1" onClick={() => NativeDatePicker.present()}/>
+      <Button content="2" onClick={() => NativeDatePicker.presentWithMode(0)}/>
       <Button content="3" />
       <Button content="4" />
     </Stack>
