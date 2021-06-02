@@ -14,13 +14,13 @@
 		"strokeWidth": 1
 	},
 	"brandBackground": {
-		"fillColorRest": "#106ebe",
+		"fillColorRest": "#0078d4",
 		"fillColorHover": "#106ebe",
 		"fillColorPressed": "#004578",
 		"fillColorDisabled": "#f0f0f0"
 	},
 	"brandBackgroundSelected": {
-		"fillColorRest": "#106ebe",
+		"fillColorRest": "#0078d4",
 		"fillColorHover": "#106ebe",
 		"fillColorPressed": "#004578",
 		"fillColorDisabled": "#f0f0f0"
@@ -112,13 +112,13 @@
 	},
 	"neutralForeground2Brand": {
 		"fillColorRest": "#424242",
-		"fillColorHover": "#106ebe",
+		"fillColorHover": "#0078d4",
 		"fillColorPressed": "#106ebe",
 		"fillColorDisabled": "#242424"
 	},
 	"neutralForeground2BrandSelected": {
 		"fillColorRest": "#424242",
-		"fillColorHover": "#106ebe",
+		"fillColorHover": "#0078d4",
 		"fillColorPressed": "#106ebe",
 		"fillColorDisabled": "#242424"
 	},
