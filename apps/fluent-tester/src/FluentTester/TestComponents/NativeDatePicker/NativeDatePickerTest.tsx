@@ -9,10 +9,9 @@ import { PlatformStatus, Test, TestSection } from '../Test';
 const nativeDatePicker: React.FunctionComponent<{}> = () => {
   return (
     <Stack style={stackStyle}>
-      <Button content="1" onClick={() => NativeDatePicker.present()}/>
-      <Button content="2" onClick={() => NativeDatePicker.presentWithMode(0)}/>
-      <Button content="3" />
-      <Button content="4" />
+      <Button content="Date picker" onClick={() => NativeDatePicker.present()}/>
+      <Button content="Date time picker" onClick={() => NativeDatePicker.presentWithMode("dateTime")}/>
+      <Button content="Custom start and end dates" onClick={() => NativeDatePicker.presentWithStartDate(null, null)}/>
     </Stack>
   );
 };
