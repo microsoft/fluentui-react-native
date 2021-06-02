@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Comment fix to generate package update",
+  "packageName": "@fluentui-react-native/android-theme",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-06-02T12:41:58.552Z"
+}
