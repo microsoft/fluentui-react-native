@@ -1,0 +1,714 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/fluentui-token-pipeline/main/docs/token.schema.json",
+  "Meta": {
+    "FluentUITokensVersion": 0
+  },
+  "Global": {
+    "Color": {
+      "Brand": {
+        "Shade": {
+          "60": { "value": "#092c47" },
+          "50": { "value": "#043862" },
+          "40": { "value": "#004578" },
+          "30": { "value": "#004c87" },
+          "20": { "value": "#005a9e" },
+          "10": { "value": "#106ebe" }
+        },
+        "Primary": { "value": "#106ebe" },
+        "Tint": {
+          "10": { "value": "#2899f5" },
+          "20": { "value": "#3aa0f3" },
+          "30": { "value": "#6cb8f6" },
+          "40": { "value": "#c7e0f4" },
+          "50": { "value": "#deecf9" },
+          "60": { "value": "#eff6fc" }
+        }
+      },
+      "Grey": { "generate": { "type": "lightness0to100by2", "value": "grey" } },
+      "HC": {
+        "Canvas": { "value": "Canvas" },
+        "CanvasText": { "value": "CanvasText" },
+        "Hyperlink": { "value": "LinkText" },
+        "Disabled": { "value": "GrayText" },
+        "Highlight": { "value": "Highlight" },
+        "HighlightText": { "value": "HighlightText" },
+        "ButtonFace": { "value": "ButtonFace" },
+        "ButtonText": { "value": "ButtonText" }
+      },
+      "DarkRed": { "generate": { "type": "fluentsharedcolors", "value": "#750b1c" } },
+      "Burgundy": { "generate": { "type": "fluentsharedcolors", "value": "#a4262c" } },
+      "Cranberry": { "generate": { "type": "fluentsharedcolors", "value": "#c50f1f" } },
+      "Red": { "generate": { "type": "fluentsharedcolors", "value": "#d13438" } },
+      "DarkOrange": { "generate": { "type": "fluentsharedcolors", "value": "#da3b01" } },
+      "Bronze": { "generate": { "type": "fluentsharedcolors", "value": "#a74109" } },
+      "Pumpkin": { "generate": { "type": "fluentsharedcolors", "value": "#ca5010" } },
+      "Orange": { "generate": { "type": "fluentsharedcolors", "value": "#f7630c" } },
+      "Peach": { "generate": { "type": "fluentsharedcolors", "value": "#ff8c00" } },
+      "Marigold": { "generate": { "type": "fluentsharedcolors", "value": "#eaa300" } },
+      "Yellow": { "generate": { "type": "fluentsharedcolors", "value": "#fde300" } },
+      "Gold": { "generate": { "type": "fluentsharedcolors", "value": "#c19c00" } },
+      "Brass": { "generate": { "type": "fluentsharedcolors", "value": "#986f0b" } },
+      "Brown": { "generate": { "type": "fluentsharedcolors", "value": "#8e562e" } },
+      "DarkBrown": { "generate": { "type": "fluentsharedcolors", "value": "#4d291c" } },
+      "Lime": { "generate": { "type": "fluentsharedcolors", "value": "#73aa24" } },
+      "Forest": { "generate": { "type": "fluentsharedcolors", "value": "#498205" } },
+      "Seafoam": { "generate": { "type": "fluentsharedcolors", "value": "#00cc6a" } },
+      "LightGreen": { "generate": { "type": "fluentsharedcolors", "value": "#13a10e" } },
+      "Green": { "generate": { "type": "fluentsharedcolors", "value": "#107c10" } },
+      "DarkGreen": { "generate": { "type": "fluentsharedcolors", "value": "#0b6a0b" } },
+      "LightTeal": { "generate": { "type": "fluentsharedcolors", "value": "#00b7c3" } },
+      "Teal": { "generate": { "type": "fluentsharedcolors", "value": "#038387" } },
+      "DarkTeal": { "generate": { "type": "fluentsharedcolors", "value": "#006666" } },
+      "Cyan": { "generate": { "type": "fluentsharedcolors", "value": "#0099bc" } },
+      "Steel": { "generate": { "type": "fluentsharedcolors", "value": "#005b70" } },
+      "LightBlue": { "generate": { "type": "fluentsharedcolors", "value": "#3a96dd" } },
+      "Blue": { "generate": { "type": "fluentsharedcolors", "value": "#0078d4" } },
+      "RoyalBlue": { "generate": { "type": "fluentsharedcolors", "value": "#004e8c" } },
+      "DarkBlue": { "generate": { "type": "fluentsharedcolors", "value": "#003966" } },
+      "Cornflower": { "generate": { "type": "fluentsharedcolors", "value": "#4f6bed" } },
+      "Navy": { "generate": { "type": "fluentsharedcolors", "value": "#0027b4" } },
+      "Lavender": { "generate": { "type": "fluentsharedcolors", "value": "#7160e8" } },
+      "Purple": { "generate": { "type": "fluentsharedcolors", "value": "#5c2e91" } },
+      "DarkPurple": { "generate": { "type": "fluentsharedcolors", "value": "#401b6c" } },
+      "Orchid": { "generate": { "type": "fluentsharedcolors", "value": "#8764b8" } },
+      "Grape": { "generate": { "type": "fluentsharedcolors", "value": "#881798" } },
+      "Berry": { "generate": { "type": "fluentsharedcolors", "value": "#c239b3" } },
+      "Lilac": { "generate": { "type": "fluentsharedcolors", "value": "#b146c2" } },
+      "Pink": { "generate": { "type": "fluentsharedcolors", "value": "#e43ba6" } },
+      "HotPink": { "generate": { "type": "fluentsharedcolors", "value": "#e3008c" } },
+      "Magenta": { "generate": { "type": "fluentsharedcolors", "value": "#bf0077" } },
+      "Plum": { "generate": { "type": "fluentsharedcolors", "value": "#77004d" } },
+      "Beige": { "generate": { "type": "fluentsharedcolors", "value": "#7a7574" } },
+      "Mink": { "generate": { "type": "fluentsharedcolors", "value": "#5d5a58" } },
+      "Silver": { "generate": { "type": "fluentsharedcolors", "value": "#859599" } },
+      "Platinum": { "generate": { "type": "fluentsharedcolors", "value": "#69797e" } },
+      "Anchor": { "generate": { "type": "fluentsharedcolors", "value": "#394146" } },
+      "Charcoal": { "generate": { "type": "fluentsharedcolors", "value": "#750b1c" } },
+      "White": { "value": "#ffffff" },
+      "Black": { "value": "#000000" }
+    },
+    "Stroke": {
+      "Width": {
+        "Thin": { "value": 1 },
+        "Thick": { "value": 2 },
+        "Thicker": { "value": 3, "platform": { "ios": { "value": 4 } } },
+        "Thickest": { "value": 4, "platform": { "ios": { "value": 6 } } }
+      }
+    },
+    "Corner": {
+      "Radius": {
+        "None": { "value": 0 },
+        "Small": { "value": 2 },
+        "Medium": { "value": 4 },
+        "Large": { "value": 6, "platform": { "ios": { "value": 8 } } },
+        "ExtraLarge": { "value": 8, "platform": { "ios": { "value": 12 } } },
+        "Circle": { "value": 9999, "platform": { "winui": { "value": 18 } } }
+      }
+    },
+    "Padding": {
+      "400": {
+        "value": [7, 15, 7, 15]
+      }
+    },
+    "Font": {
+      "Family": {
+        "Default": { "value": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif" },
+        "Monospace": { "value": "Consolas, \"Courier New\", monospace" },
+        "Numeric": { "value": "\"Bahnschrift\", \"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif" }
+      },
+      "Size": {
+        "100": { "value": 10, "platform": { "ios": { "value": 12 } } },
+        "200": { "value": 12, "platform": { "ios": { "value": 13 } } },
+        "300": { "value": 14, "platform": { "ios": { "value": 15 } } },
+        "400": { "value": 16, "platform": { "ios": { "value": 17 } } },
+        "500": { "value": 20 },
+        "600": { "value": 24, "platform": { "ios": { "value": 22 } } },
+        "700": { "value": 28 },
+        "800": { "value": 32, "platform": { "ios": { "value": 34 } } },
+        "900": { "value": 40, "platform": { "ios": { "value": 60 } } },
+        "1000": { "value": 68 }
+      },
+      "LineHeight": {
+        "100": { "value": 14, "platform": { "ios": { "value": 16 } } },
+        "200": { "value": 16 },
+        "300": { "value": 20 },
+        "400": { "value": 22, "platform": { "ios": { "value": 24 } } },
+        "500": { "value": 28, "platform": { "ios": { "value": 24 } } },
+        "600": { "value": 32, "platform": { "ios": { "value": 28 } } },
+        "700": { "value": 36 },
+        "800": { "value": 40, "platform": { "ios": { "value": 44 } } },
+        "900": { "value": 52, "platform": { "ios": { "value": 72 } } },
+        "1000": { "value": 92 }
+      },
+      "Weight": {
+        "Regular": { "value": 400 },
+        "Medium": { "value": 500 },
+        "Semibold": { "value": 600 },
+        "Bold": { "value": 700 }
+      }
+    }
+  },
+  "Set": {
+    "Caption": {
+      "Font": {
+        "Family": { "aliasOf": "Global.Font.Family.Default" },
+        "Size": { "aliasOf": "Global.Font.Size.200" },
+        "Weight": { "aliasOf": "Global.Font.Weight.Regular" },
+        "LineHeight": { "aliasOf": "Global.Font.LineHeight.200" }
+      }
+    },
+    "Body": {
+      "Font": {
+        "Family": { "aliasOf": "Global.Font.Family.Default" },
+        "Size": { "aliasOf": "Global.Font.Size.300" },
+        "Weight": { "aliasOf": "Global.Font.Weight.Regular" },
+        "LineHeight": { "aliasOf": "Global.Font.LineHeight.300" }
+      }
+    },
+    "Subheadline": {
+      "Font": {
+        "Family": { "aliasOf": "Global.Font.Family.Default" },
+        "Size": { "aliasOf": "Global.Font.Size.400" },
+        "Weight": { "aliasOf": "Global.Font.Weight.Semibold" },
+        "LineHeight": { "aliasOf": "Global.Font.LineHeight.400" }
+      }
+    },
+    "Headline": {
+      "Font": {
+        "Family": { "aliasOf": "Global.Font.Family.Default" },
+        "Size": { "aliasOf": "Global.Font.Size.500" },
+        "Weight": { "aliasOf": "Global.Font.Weight.Semibold" },
+        "LineHeight": { "aliasOf": "Global.Font.LineHeight.500" }
+      }
+    },
+    "Title3": {
+      "Font": {
+        "Family": { "aliasOf": "Global.Font.Family.Default" },
+        "Size": { "aliasOf": "Global.Font.Size.600" },
+        "Weight": { "aliasOf": "Global.Font.Weight.Semibold" },
+        "LineHeight": { "aliasOf": "Global.Font.LineHeight.600" }
+      }
+    },
+    "Title2": {
+      "Font": {
+        "Family": { "aliasOf": "Global.Font.Family.Default" },
+        "Size": { "aliasOf": "Global.Font.Size.700" },
+        "Weight": { "aliasOf": "Global.Font.Weight.Semibold" },
+        "LineHeight": { "aliasOf": "Global.Font.LineHeight.700" }
+      }
+    },
+    "Title1": {
+      "Font": {
+        "Family": { "aliasOf": "Global.Font.Family.Default" },
+        "Size": { "aliasOf": "Global.Font.Size.800" },
+        "Weight": { "aliasOf": "Global.Font.Weight.Semibold" },
+        "LineHeight": { "aliasOf": "Global.Font.LineHeight.800" }
+      }
+    },
+    "LargeTitle": {
+      "Font": {
+        "Family": { "aliasOf": "Global.Font.Family.Default" },
+        "Size": { "aliasOf": "Global.Font.Size.900" },
+        "Weight": { "aliasOf": "Global.Font.Weight.Semibold" },
+        "LineHeight": { "aliasOf": "Global.Font.LineHeight.900" }
+      }
+    },
+    "Display": {
+      "Font": {
+        "Family": { "aliasOf": "Global.Font.Family.Default" },
+        "Size": { "aliasOf": "Global.Font.Size.1000" },
+        "Weight": { "aliasOf": "Global.Font.Weight.Semibold" },
+        "LineHeight": { "aliasOf": "Global.Font.LineHeight.1000" }
+      }
+    },
+
+    "Square": {
+      "Corner": {
+        "Radius": { "aliasOf": "Global.Corner.Radius.None" }
+      }
+    },
+    "Icon": {
+      "Corner": {
+        "Radius": { "aliasOf": "Global.Corner.Radius.Medium" }
+      }
+    },
+    "Control": {
+      "Corner": {
+        "Radius": { "aliasOf": "Global.Corner.Radius.Medium" }
+      },
+      "Font": {
+        "Family": { "aliasOf": "Global.Font.Family.Default" },
+        "Size": { "aliasOf": "Global.Font.Size.300" },
+        "Weight": { "aliasOf": "Global.Font.Weight.Semibold" },
+        "LineHeight": { "aliasOf": "Global.Font.LineHeight.300" }
+      }
+    },
+    "Surface": {
+      "Corner": {
+        "Radius": { "aliasOf": "Global.Corner.Radius.Medium" }
+      }
+    },
+    "Illustration": {
+      "Corner": {
+        "Radius": { "aliasOf": "Global.Corner.Radius.ExtraLarge" }
+      }
+    },
+    "Round": {
+      "Corner": {
+        "Radius": { "aliasOf": "Global.Corner.Radius.Circle" }
+      }
+    },
+
+    "Borderless": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "value": "transparent" },
+          "Hover": { "value": "transparent" },
+          "Pressed": { "value": "transparent" },
+          "Disabled": { "value": "transparent" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" },
+        "Alignment": { "value": "inner" }
+      }
+    },
+    "TransparentBackground": {
+      "Fill": {
+        "Color": {
+          "Rest": { "value": "transparent" },
+          "Hover": { "value": "transparent" },
+          "Pressed": { "value": "transparent" },
+          "Disabled": { "value": "transparent" }
+        }
+      }
+    },
+    "TransparentBackgroundSelected": { "aliasOf": "Set.TransparentBackground" },
+    "GhostBackground": {
+      "Fill": {
+        "Color": {
+          "Rest": { "value": "transparent" },
+          "Hover": { "aliasOf": "Global.Color.Grey.96" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.88" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.94" }
+        }
+      }
+    },
+    "GhostBackgroundSelected": { "aliasOf": "Set.GhostBackground" },
+
+    "NeutralForeground1": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.14" },
+          "Hover": { "aliasOf": "Global.Color.Grey.14" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.14" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.14" }
+        }
+      }
+    },
+    "NeutralForeground1Selected": { "aliasOf": "Set.NeutralForeground1" },
+    "NeutralBackground1": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.100" },
+          "Hover": { "aliasOf": "Global.Color.Grey.96" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.88" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.94" }
+        }
+      }
+    },
+    "NeutralBackground1Selected": { "aliasOf": "Set.NeutralBackground1" },
+    "NeutralStroke1": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.82" },
+          "Hover": { "aliasOf": "Global.Color.Grey.78" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.70" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.88" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
+      }
+    },
+    "NeutralStroke1Selected": { "aliasOf": "Set.NeutralStroke1" },
+
+    "NeutralForeground2": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.26" },
+          "Hover": { "aliasOf": "Global.Color.Grey.14" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.14" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.14" }
+        }
+      }
+    },
+    "NeutralForeground2Selected": { "aliasOf": "Set.NeutralForeground2" },
+    "NeutralForeground2Brand": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.26" },
+          "Hover": { "aliasOf": "Global.Color.Brand.Primary" },
+          "Pressed": { "aliasOf": "Global.Color.Brand.Shade.10" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.14" }
+        }
+      }
+    },
+    "NeutralForeground2BrandSelected": { "aliasOf": "Set.NeutralForeground2Brand" },
+    "NeutralBackground2": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.98" },
+          "Hover": { "aliasOf": "Global.Color.Grey.94" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.86" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.94" }
+        }
+      }
+    },
+    "NeutralBackground2Selected": { "aliasOf": "Set.NeutralBackground2" },
+    "NeutralStroke2": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.88" },
+          "Hover": { "aliasOf": "Global.Color.Grey.88" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.88" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.88" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
+      }
+    },
+    "NeutralStroke2Selected": { "aliasOf": "Set.NeutralStroke2" },
+    "NeutralForegroundInverted": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.White" },
+          "Hover": { "aliasOf": "Global.Color.White" },
+          "Pressed": { "aliasOf": "Global.Color.White" },
+          "Disabled": { "aliasOf": "Global.Color.White" }
+        }
+      }
+    },
+    "NeutralForegroundInvertedSelected": { "aliasOf": "Set.NeutralForegroundInverted" },
+    "NeutralForegroundInvertedAccessible": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.White" },
+          "Hover": { "aliasOf": "Global.Color.White" },
+          "Pressed": { "aliasOf": "Global.Color.White" },
+          "Disabled": { "aliasOf": "Global.Color.White" }
+        }
+      }
+    },
+    "NeutralForegroundInvertedAccessibleSelected": { "aliasOf": "Set.NeutralForegroundInvertedAccessible" },
+    "BrandBackground": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Brand.Primary" },
+          "Hover": { "aliasOf": "Global.Color.Brand.Shade.10" },
+          "Pressed": { "aliasOf": "Global.Color.Brand.Shade.40" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.94" }
+        }
+      }
+    },
+    "BrandBackgroundSelected": { "aliasOf": "Set.BrandBackground" }
+  },
+
+  "Button": {
+    "Content": {
+      "Font": { "aliasOf": "Set.Control.Font" },
+      "Fill": {
+        "Color": { "aliasOf": "Set.NeutralForeground1.Fill.Color", "Selected": { "aliasOf": "Set.NeutralForeground1Selected.Fill.Color" } }
+      }
+    },
+    "Icon": {
+      "Fill": {
+        "Color": { "aliasOf": "Set.NeutralForeground1.Fill.Color", "Selected": { "aliasOf": "Set.NeutralForeground1Selected.Fill.Color" } }
+      }
+    },
+    "Base": {
+      "Fill": {
+        "Color": { "aliasOf": "Set.NeutralBackground1.Fill.Color", "Selected": { "aliasOf": "Set.NeutralBackground1Selected.Fill.Color" } }
+      },
+      "Stroke": {
+        "Color": { "aliasOf": "Set.NeutralStroke1.Stroke.Color", "Selected": { "aliasOf": "Set.NeutralStroke1Selected.Stroke.Color" } },
+        "Width": { "aliasOf": "Set.NeutralStroke1.Stroke.Width", "Selected": { "aliasOf": "Set.NeutralStroke1Selected.Stroke.Width" } }
+      },
+      "Corner": { "aliasOf": "Set.Control.Corner" },
+      "Layout": { "Padding": { "value": [7, 15, 7, 15] } }
+    }
+  },
+
+  "ButtonPrimary": {
+    "Content": {
+      "Font": { "aliasOf": "Set.Control.Font" },
+      "Fill": {
+        "Color": {
+          "aliasOf": "Set.NeutralForegroundInvertedAccessible.Fill.Color",
+          "Selected": { "aliasOf": "Set.NeutralForegroundInvertedAccessibleSelected.Fill.Color" }
+        }
+      }
+    },
+    "Icon": {
+      "Fill": {
+        "Color": {
+          "aliasOf": "Set.NeutralForegroundInvertedAccessible.Fill.Color",
+          "Selected": { "aliasOf": "Set.NeutralForegroundInvertedAccessibleSelected.Fill.Color" }
+        }
+      }
+    },
+    "Base": {
+      "Fill": {
+        "Color": { "aliasOf": "Set.BrandBackground.Fill.Color", "Selected": { "aliasOf": "Set.BrandBackgroundSelected.Fill.Color" } }
+      },
+      "Stroke": {
+        "Color": { "aliasOf": "Set.Borderless.Stroke.Color", "Selected": { "aliasOf": "Set.Borderless.Stroke.Color" } },
+        "Width": { "aliasOf": "Set.Borderless.Stroke.Width", "Selected": { "aliasOf": "Set.Borderless.Stroke.Width" } }
+      },
+      "Corner": { "aliasOf": "Set.Control.Corner" },
+      "Layout": { "Padding": { "value": [7, 15, 7, 15] } }
+    }
+  },
+
+  "ButtonOutline": {
+    "Content": {
+      "Font": { "aliasOf": "Set.Control.Font" },
+      "Fill": {
+        "Color": { "aliasOf": "Set.NeutralForeground1.Fill.Color", "Selected": { "aliasOf": "Set.NeutralForeground1Selected.Fill.Color" } }
+      }
+    },
+    "Icon": {
+      "Fill": {
+        "Color": { "aliasOf": "Set.NeutralForeground1.Fill.Color", "Selected": { "aliasOf": "Set.NeutralForeground1Selected.Fill.Color" } }
+      }
+    },
+    "Base": {
+      "Fill": {
+        "Color": {
+          "aliasOf": "Set.TransparentBackground.Fill.Color",
+          "Selected": { "aliasOf": "Set.TransparentBackgroundSelected.Fill.Color" }
+        }
+      },
+      "Stroke": {
+        "Color": { "aliasOf": "Set.NeutralStroke1.Stroke.Color", "Selected": { "aliasOf": "Set.NeutralStroke1.Stroke.Color" } },
+        "Width": { "aliasOf": "Set.NeutralStroke1.Stroke.Width", "Selected": { "aliasOf": "Set.NeutralStroke1.Stroke.Width" } }
+      },
+      "Corner": { "aliasOf": "Set.Control.Corner" },
+      "Layout": { "Padding": { "value": [7, 15, 7, 15] } }
+    }
+  },
+
+  "ButtonGhost": {
+    "Content": {
+      "Font": { "aliasOf": "Set.Body.Font" },
+      "Fill": {
+        "Color": {
+          "aliasOf": "Set.NeutralForeground2Brand.Fill.Color",
+          "Selected": { "aliasOf": "Set.NeutralForeground2BrandSelected.Fill.Color" }
+        }
+      }
+    },
+    "Icon": {
+      "Fill": {
+        "Color": {
+          "aliasOf": "Set.NeutralForeground2Brand.Fill.Color",
+          "Selected": { "aliasOf": "Set.NeutralForeground2BrandSelected.Fill.Color" }
+        }
+      }
+    },
+    "Base": {
+      "Fill": {
+        "Color": { "aliasOf": "Set.GhostBackground.Fill.Color", "Selected": { "aliasOf": "Set.GhostBackgroundSelected.Fill.Color" } }
+      },
+      "Stroke": {
+        "Color": { "aliasOf": "Set.Borderless.Stroke.Color", "Selected": { "aliasOf": "Set.Borderless.Stroke.Color" } },
+        "Width": { "aliasOf": "Set.Borderless.Stroke.Width", "Selected": { "aliasOf": "Set.Borderless.Stroke.Width" } }
+      },
+      "Corner": { "aliasOf": "Set.Control.Corner" },
+      "Layout": { "Padding": { "value": [7, 15, 7, 15] } }
+    }
+  },
+
+  "CheckBox": {
+    "Text": {
+      "Font": { "aliasOf": "Set.Body.Font" },
+      "Fill": {
+        "Color": {
+          "aliasOf": "Set.NeutralForegroundInvertedAccessible.Fill.Color",
+          "platform": {
+            "winui": {
+              "Rest": { "fullName": "CheckBoxForegroundUnchecked" },
+              "Hover": { "fullName": "CheckBoxForegroundUncheckedPointerOver" },
+              "Press": { "fullName": "CheckBoxForegroundUncheckedPressed" },
+              "Disabled": { "fullName": "CheckBoxForegroundUncheckedDisabled" }
+            }
+          },
+          "Selected": {
+            "aliasOf": "Set.NeutralForegroundInvertedAccessible.Fill.Color",
+            "platform": {
+              "winui": {
+                "Rest": { "fullName": "CheckBoxForegroundChecked" },
+                "Hover": { "fullName": "CheckBoxForegroundCheckedPointerOver" },
+                "Press": { "fullName": "CheckBoxForegroundCheckedPressed" },
+                "Disabled": { "fullName": "CheckBoxForegroundCheckedDisabled" }
+              }
+            }
+          },
+          "Indeterminate": {
+            "aliasOf": "Set.NeutralForegroundInvertedAccessible.Fill.Color",
+            "platform": {
+              "winui": {
+                "Rest": { "fullName": "CheckBoxForegroundIndeterminate" },
+                "Hover": { "fullName": "CheckBoxForegroundIndeterminatePointerOver" },
+                "Press": { "fullName": "CheckBoxForegroundIndeterminatePressed" },
+                "Disabled": { "fullName": "CheckBoxForegroundIndeterminateDisabled" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Check": {
+      "Fill": {
+        "Color": {
+          "aliasOf": "Set.NeutralForegroundInvertedAccessible.Fill.Color",
+          "platform": {
+            "winui": {
+              "Rest": { "fullName": "CheckBoxCheckGlyphForegroundUnchecked" },
+              "Hover": { "fullName": "CheckBoxCheckGlyphForegroundUncheckedPointerOver" },
+              "Press": { "fullName": "CheckBoxCheckGlyphForegroundUncheckedPressed" },
+              "Disabled": { "fullName": "CheckBoxCheckGlyphForegroundUncheckedDisabled" }
+            }
+          },
+          "Selected": {
+            "aliasOf": "Set.NeutralForegroundInvertedAccessible.Fill.Color",
+            "platform": {
+              "winui": {
+                "Rest": { "fullName": "CheckBoxCheckGlyphForegroundChecked" },
+                "Hover": { "fullName": "CheckBoxCheckGlyphForegroundCheckedPointerOver" },
+                "Press": { "fullName": "CheckBoxCheckGlyphForegroundCheckedPressed" },
+                "Disabled": { "fullName": "CheckBoxCheckGlyphForegroundCheckedDisabled" }
+              }
+            }
+          },
+          "Indeterminate": {
+            "aliasOf": "Set.NeutralForegroundInvertedAccessible.Fill.Color",
+            "platform": {
+              "winui": {
+                "Rest": { "fullName": "CheckBoxCheckGlyphForegroundIndeterminate" },
+                "Hover": { "fullName": "CheckBoxCheckGlyphForegroundIndeterminatePointerOver" },
+                "Press": { "fullName": "CheckBoxCheckGlyphForegroundIndeterminatePressed" },
+                "Disabled": { "fullName": "CheckBoxCheckGlyphForegroundIndeterminateDisabled" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Box": {
+      "Fill": {
+        "Color": {
+          "aliasOf": "Set.TransparentBackground.Fill.Color",
+          "platform": {
+            "winui": {
+              "Rest": { "fullName": "CheckBoxCheckBackgroundFillUnchecked" },
+              "Hover": { "fullName": "CheckBoxCheckBackgroundFillUncheckedPointerOver" },
+              "Press": { "fullName": "CheckBoxCheckBackgroundFillUncheckedPressed" },
+              "Disabled": { "fullName": "CheckBoxCheckBackgroundFillUncheckedDisabled" }
+            }
+          },
+          "Selected": {
+            "aliasOf": "Set.BrandBackground.Fill.Color",
+            "platform": {
+              "winui": {
+                "Rest": { "fullName": "CheckBoxCheckBackgroundFillChecked" },
+                "Hover": { "fullName": "CheckBoxCheckBackgroundFillCheckedPointerOver" },
+                "Press": { "fullName": "CheckBoxCheckBackgroundFillCheckedPressed" },
+                "Disabled": { "fullName": "CheckBoxCheckBackgroundFillCheckedDisabled" }
+              }
+            }
+          },
+          "Indeterminate": {
+            "aliasOf": "Set.BrandBackground.Fill.Color",
+            "platform": {
+              "winui": {
+                "Rest": { "fullName": "CheckBoxCheckBackgroundFillIndeterminate" },
+                "Hover": { "fullName": "CheckBoxCheckBackgroundFillIndeterminatePointerOver" },
+                "Press": { "fullName": "CheckBoxCheckBackgroundFillIndeterminatePressed" },
+                "Disabled": { "fullName": "CheckBoxCheckBackgroundFillIndeterminateDisabled" }
+              }
+            }
+          }
+        }
+      },
+      "Stroke": {
+        "Color": {
+          "aliasOf": "Set.NeutralStroke1.Stroke.Color",
+          "platform": {
+            "winui": {
+              "Rest": { "fullName": "CheckBoxCheckBackgroundStrokeUnchecked" },
+              "Hover": { "fullName": "CheckBoxCheckBackgroundStrokeUncheckedPointerOver" },
+              "Press": { "fullName": "CheckBoxCheckBackgroundStrokeUncheckedPressed" },
+              "Disabled": { "fullName": "CheckBoxCheckBackgroundStrokeUncheckedDisabled" }
+            }
+          },
+          "Selected": {
+            "aliasOf": "Set.Borderless.Stroke.Color",
+            "platform": {
+              "winui": {
+                "Rest": { "fullName": "CheckBoxCheckBackgroundStrokeChecked" },
+                "Hover": { "fullName": "CheckBoxCheckBackgroundStrokeCheckedPointerOver" },
+                "Press": { "fullName": "CheckBoxCheckBackgroundStrokeCheckedPressed" },
+                "Disabled": { "fullName": "CheckBoxCheckBackgroundStrokeCheckedDisabled" }
+              }
+            }
+          },
+          "Indeterminate": {
+            "aliasOf": "Set.Borderless.Stroke.Color",
+            "platform": {
+              "winui": {
+                "Rest": { "fullName": "CheckBoxCheckBackgroundStrokeIndeterminate" },
+                "Hover": { "fullName": "CheckBoxCheckBackgroundStrokeIndeterminatePointerOver" },
+                "Press": { "fullName": "CheckBoxCheckBackgroundStrokeIndeterminatePressed" },
+                "Disabled": { "fullName": "CheckBoxCheckBackgroundStrokeIndeterminateDisabled" }
+              }
+            }
+          }
+        },
+        "Width": {
+          "aliasOf": "Set.NeutralStroke1.Stroke.Width",
+          "platform": {
+            "winui": {
+              "fullName": "CheckBoxBorderThemeThickness"
+            }
+          }
+        }
+      },
+      "Corner": { "aliasOf": "Set.Control.Corner" }
+    }
+  },
+
+  "Slider": {
+    "Thumb": {
+      "Fill": {
+        "Color": { "aliasOf": "Set.BrandBackground.Fill.Color" }
+      },
+      "Stroke": {
+        "Color": { "aliasOf": "Set.Borderless.Stroke.Color" },
+        "Width": { "aliasOf": "Set.Borderless.Stroke.Width" }
+      },
+      "Layout": {
+        "Width": { "value": 20 },
+        "Height": { "value": 20 }
+      },
+      "Corner": { "aliasOf": "Set.Round.Corner" }
+    },
+    "Track": {
+      "Fill": {
+        "Color": { "Empty": { "aliasOf": "Set.NeutralBackground2.Fill.Color" }, "Full": { "aliasOf": "Set.NeutralStroke2.Stroke.Color" } }
+      },
+      "Layout": { "Height": { "value": 2 } }
+    },
+    "Ticks": {
+      "Fill": {
+        "Color": { "aliasOf": "Set.NeutralForegroundInvertedAccessible.Fill.Color" }
+      },
+      "Layout": { "Height": { "value": 4 } }
+    }
+  }
+}
