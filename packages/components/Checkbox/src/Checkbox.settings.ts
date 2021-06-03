@@ -9,6 +9,7 @@ export const settings: IComposeSettings<ICheckboxType> = [
       backgroundColor: 'transparent',
       textBorderColor: 'transparent',
       borderColor: 'checkboxBorderColor',
+      checkmarkColor: 'checkmarkColor',
       checkmarkVisibility: 0,
     },
     root: {

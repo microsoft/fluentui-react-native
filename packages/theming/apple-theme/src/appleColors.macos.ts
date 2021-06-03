@@ -489,5 +489,6 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     checkboxBackground: fluentUIApple.communicationBlue,
     checkboxBackgroundDisabled: fluentUIApple.brandBackgroundDisabled,
     checkboxBorderColor: fluentUIApple.gray600,
+    checkmarkColor: fluentUIApple.gray200,
   };
 }
