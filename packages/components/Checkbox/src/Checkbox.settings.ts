@@ -36,6 +36,15 @@ export const settings: IComposeSettings<ICheckboxType> = [
       },
     },
     checkmark: {
+      style: {
+        position: 'relative',
+        opacity: 0,
+        fontSize: 10,
+        marginStart: 2,
+        top: -1,
+      },
+    },
+    checkmarkSvg: {
       width: 8,
       height: 7,
       style: {
@@ -64,6 +73,11 @@ export const settings: IComposeSettings<ICheckboxType> = [
           borderColor: 'checkboxBackground',
           backgroundColor: 'checkboxBackground',
           checkmarkVisibility: 1,
+        },
+        checkmark: {
+          style: {
+            opacity: 1,
+          },
         },
       },
       hovered: {

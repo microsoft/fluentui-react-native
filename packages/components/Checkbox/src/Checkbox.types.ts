@@ -88,7 +88,8 @@ export interface ICheckboxTokens extends FontTokens, IForegroundColorTokens, IBa
 export interface ICheckboxSlotProps {
   root: React.PropsWithRef<IViewProps>;
   checkbox: IViewProps;
-  checkmark: IconProps;
+  checkmark?: ITextProps;
+  checkmarkSvg?: IconProps;
   content: ITextProps;
 }
 

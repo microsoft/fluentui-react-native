@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData, ICheckboxType, checkboxName } from './Checkbox.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
@@ -70,7 +70,8 @@ export const Checkbox = compose<ICheckboxType>({
         onKeyUp: onKeyUpSpace,
       },
       // Temporary checkmark until SVG functionality
-      checkmark: {
+      checkmark: { children: '✓' },
+      checkmarkSvg: {
         svgSource: {
           src: checkmarkSvg,
         },
@@ -82,12 +83,12 @@ export const Checkbox = compose<ICheckboxType>({
   },
 
   render: (Slots: ISlots<ICheckboxSlotProps>, renderData: ICheckboxRenderData, ...children: React.ReactNode[]) => {
+    // SVG-based icons are not available on all platforms yet
+    const svgIconsEnabled = ['ios', 'macos', 'web', 'android'].includes(Platform.OS as string);
     return (
       <Slots.root>
         {renderData?.state.boxAtEnd && <Slots.content />}
-        <Slots.checkbox>
-          <Slots.checkmark />
-        </Slots.checkbox>
+        <Slots.checkbox>{svgIconsEnabled ? <Slots.checkmarkSvg /> : <Slots.checkmark />}</Slots.checkbox>
         {!renderData?.state.boxAtEnd && <Slots.content />}
         {children}
       </Slots.root>
@@ -98,7 +99,8 @@ export const Checkbox = compose<ICheckboxType>({
   slots: {
     root: View,
     checkbox: { slotType: View, filter: filterViewProps },
-    checkmark: Icon,
+    checkmark: Text,
+    checkmarkSvg: Icon,
     content: Text,
   },
   styles: {
@@ -112,6 +114,13 @@ export const Checkbox = compose<ICheckboxType>({
       ],
     ],
     checkmark: [
+      foregroundColorTokens,
+      [
+        { source: 'checkmarkColor', lookup: getPaletteFromTheme, target: 'color' },
+        { source: 'checkmarkVisibility', target: 'opacity' },
+      ],
+    ],
+    checkmarkSvg: [
       foregroundColorTokens,
       [
         { source: 'checkmarkColor', lookup: getPaletteFromTheme, target: 'color' },
