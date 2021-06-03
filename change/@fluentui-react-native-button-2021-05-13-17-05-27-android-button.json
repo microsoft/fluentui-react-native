@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add ripple effect to android-button",
-  "packageName": "@fluentui-react-native/button",
-  "email": "tamasane@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-05-13T11:35:09.919Z"
-}

@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/android-theme",
   "entries": [
     {
+      "date": "Wed, 02 Jun 2021 17:30:36 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.2.8",
+      "version": "0.2.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Comment fix to generate package update",
+            "author": "krsiler@microsoft.com",
+            "commit": "207385ecb8ec4210fa6de8f23767f7547489706d",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 25 May 2021 00:42:50 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.2.7",
+      "version": "0.2.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add ripple effect to android-button",
+            "author": "tamasane@gmail.com",
+            "commit": "d3953da403a118f3086dfde2529bca76d30ad235",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 19 May 2021 07:04:54 GMT",
       "tag": "@fluentui-react-native/android-theme_v0.2.6",
       "version": "0.2.6",
