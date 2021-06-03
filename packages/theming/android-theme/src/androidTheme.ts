@@ -30,7 +30,8 @@ export const androidComponents = {
       width: 14,
       height: 10,
       style: {
-        marginVertical: 2,
+        marginVertical: 4,
+        marginHorizontal: 2,
       },
     },
   },
