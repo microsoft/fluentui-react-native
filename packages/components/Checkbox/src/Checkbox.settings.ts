@@ -29,16 +29,17 @@ export const settings: IComposeSettings<ICheckboxType> = [
         borderStyle: 'solid',
         borderWidth: 2,
         borderRadius: 2,
-        minHeight: 18,
-        minWidth: 18,
+        minHeight: 16,
+        minWidth: 16,
         marginEnd: 4,
       },
     },
     checkmark: {
-      width: 14,
-      height: 10,
+      width: 8,
+      height: 7,
       style: {
-        marginVertical: 2,
+        marginVertical: 4.5,
+        marginHorizontal: 4,
       },
     },
     content: {
