@@ -39,10 +39,6 @@ RCT_ENUM_CONVERTER(MSFDateTimePickerDateRangePresentation, MSFDatePickerGetEnumM
     return MSFDatePickerGetEnumMaps();
 }
 
-RCT_EXTERN_METHOD(presentWithOptionsAndTitles:(MSFDateTimePickerMode)mode dateRangePresentation: (MSFDateTimePickerDateRangePresentation)dateRangePresentation datePickerType:(MSFDateTimePickerDatePickerType)datePickerType startDate:(nullable NSDate *)startDate endDate:(nullable NSDate *)endDate startTitle:(nullable NSString *)startTitle startSubtitle:(nullable NSString *)startSubtitle startTab:(nullable NSString *)startTab endTitle:(nullable NSString *)endTitle endSubtitle:(nullable NSString *)endSubtitle endTab:(nullable NSString *)endTab dateTitle:(nullable NSString *)dateTitle dateSubtitle:(nullable NSString *)dateSubtitle timeTitle:(nullable NSString *)timeTitle timeSubtitle:(nullable NSString *)timeSubtitle)
-
-RCT_EXTERN_METHOD(presentWithOptions:(MSFDateTimePickerMode)mode dateRangePresentation: (MSFDateTimePickerDateRangePresentation)dateRangePresentation datePickerType:(MSFDateTimePickerDatePickerType)datePickerType startDate:(nullable NSDate *)startDate endDate:(nullable NSDate *)endDate)
-
-RCT_EXTERN_METHOD(present)
+RCT_EXTERN_METHOD(presentWithOptions:(MSFDateTimePickerMode)mode dateRangePresentation: (MSFDateTimePickerDateRangePresentation)dateRangePresentation datePickerType:(MSFDateTimePickerDatePickerType)datePickerType startDate:(nullable NSDate *)startDate endDate:(nullable NSDate *)endDate startTitle:(nullable NSString *)startTitle startSubtitle:(nullable NSString *)startSubtitle startTab:(nullable NSString *)startTab endTitle:(nullable NSString *)endTitle endSubtitle:(nullable NSString *)endSubtitle endTab:(nullable NSString *)endTab dateTitle:(nullable NSString *)dateTitle dateSubtitle:(nullable NSString *)dateSubtitle timeTitle:(nullable NSString *)timeTitle timeSubtitle:(nullable NSString *)timeSubtitle)
 
 @end

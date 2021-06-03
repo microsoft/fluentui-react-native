@@ -26,7 +26,7 @@ interface DatePickerParameterObject {
     timeSubtitle?: NullableString;
 }
 
-function presentWithParameterObject({
+NativeDatePicker.present = ({
     mode = "date",
     dateRangePresentation = "tabbed",
     datePickerType = "calendar",
@@ -42,8 +42,8 @@ function presentWithParameterObject({
     dateSubtitle = null,
     timeTitle = null,
     timeSubtitle = null,
-}: DatePickerParameterObject) {
-    NativeDatePicker.presentWithOptionsAndTitles(
+}: DatePickerParameterObject) => {
+    NativeDatePicker.presentWithOptions(
         mode,
         dateRangePresentation,
         datePickerType,
@@ -62,34 +62,8 @@ function presentWithParameterObject({
     );
 }
 
-NativeDatePicker.presentWithParameterObject = presentWithParameterObject;
-
 interface NativeDatePickerInterface {
-    present(): void;
-    presentWithOptions(
-        mode: NativeDatePickerMode,
-        dateRangePresentation: NativeDatePickerDateRangePresentation,
-        datePickerType: NativeDatePickerType,
-        startDate: NullableDate,
-        endDate: NullableDate): void;
-    presentWithOptionsAndTitles(
-        mode: NativeDatePickerMode,
-        dateRangePresentation: NativeDatePickerDateRangePresentation,
-        datePickerType: NativeDatePickerType,
-        startDate: NullableDate,
-        endDate: NullableDate,
-        startTitle: NullableString, 
-        startSubtitle: NullableString, 
-        startTab: NullableString, 
-        endTitle: NullableString, 
-        endSubtitle: NullableString, 
-        endTab: NullableString, 
-        dateTitle: NullableString, 
-        dateSubtitle: NullableString, 
-        timeTitle: NullableString, 
-        timeSubtitle: NullableString): void;
-    presentWithParameterObject(object: DatePickerParameterObject): void;
-
- }
+    present(object: DatePickerParameterObject): void;
+}
 
  export default NativeDatePicker as NativeDatePickerInterface;
