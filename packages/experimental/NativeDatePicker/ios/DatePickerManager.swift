@@ -6,62 +6,40 @@ public class DatePickerManager: NSObject {
         return true
     }
 
-    @objc public func present()
-    {
+    @objc public func present() {
         self.present(
             with: .date,
+            dateRangePresentation: .paged,
+            datePickerType: .calendar,
             startDate: nil,
             endDate: nil,
-            datePickerType: .calendar,
-            dateRangePresentation: .paged,
             titles: nil)
     }
 
-    @objc public func present(with startDate: Date?, endDate: Date?)
-    {
-        self.present(
-            with: .date,
-            startDate: startDate,
-            endDate: endDate,
-            datePickerType: .calendar,
-            dateRangePresentation: .paged,
-            titles: nil)
-    }
-
-    @objc public func present(
-        with mode: DateTimePickerMode
-    ) {
-        self.present(
-            with: mode,
-            startDate: nil,
-            endDate: nil,
-            datePickerType: .calendar,
-            dateRangePresentation: .paged,
-            titles: nil)
-    }
-
-    @objc public func present(
+    @objc(presentWithOptions:dateRangePresentation:datePickerType:startDate:endDate:)
+    public func present(
         with mode: DateTimePickerMode,
-        startDate: Date?,
-        endDate: Date?,
-        datePickerType: DateTimePicker.DatePickerType,
-        dateRangePresentation: DateTimePicker.DateRangePresentation
-    ) {
-        self.present(
-            with: mode,
-            startDate: startDate,
-            endDate: endDate,
-            datePickerType: datePickerType,
-            dateRangePresentation: dateRangePresentation,
-            titles: nil)
-    }
-
-    @objc public func present(
-        with mode: DateTimePickerMode,
-        startDate: Date?,
-        endDate: Date?,
-        datePickerType: DateTimePicker.DatePickerType,
         dateRangePresentation: DateTimePicker.DateRangePresentation,
+        datePickerType: DateTimePicker.DatePickerType,
+        startDate: Date?,
+        endDate: Date?
+    ) {
+        self.present(
+            with: mode,
+            dateRangePresentation: dateRangePresentation,
+            datePickerType: datePickerType,
+            startDate: startDate,
+            endDate: endDate,
+            titles: nil)
+    }
+
+    @objc(presentWithOptionsAndTitles:dateRangePresentation:datePickerType:startDate:endDate:startTitle:startSubtitle:startTab:endTitle:endSubtitle:endTab:dateTitle:dateSubtitle:timeTitle:timeSubtitle:)
+    public func present(
+        with mode: DateTimePickerMode,
+        dateRangePresentation: DateTimePicker.DateRangePresentation,
+        datePickerType: DateTimePicker.DatePickerType,
+        startDate: Date?,
+        endDate: Date?,
         startTitle: String?,
         startSubtitle: String?,
         startTab: String?,
@@ -70,8 +48,8 @@ public class DatePickerManager: NSObject {
         endTab: String?,
         dateTitle: String?,
         dateSubtitle: String?,
-        dateTimeTitle: String?,
-        dateTimeSubtitle: String?
+        timeTitle: String?,
+        timeSubtitle: String?
     ) {
         let titles = DateTimePicker.Titles.with(
             startTitle: startTitle,
@@ -82,23 +60,23 @@ public class DatePickerManager: NSObject {
             endTab: endTab,
             dateTitle: dateTitle,
             dateSubtitle: dateSubtitle,
-            dateTimeTitle: dateTimeTitle,
-            dateTimeSubtitle: dateTimeSubtitle)
+            dateTimeTitle: timeTitle,
+            dateTimeSubtitle: timeSubtitle)
         self.present(
             with: mode,
+            dateRangePresentation: dateRangePresentation,
+            datePickerType: datePickerType,
             startDate: startDate,
             endDate: endDate,
-            datePickerType: datePickerType,
-            dateRangePresentation: dateRangePresentation,
             titles: titles)
     }
 
     private func present(
         with mode: DateTimePickerMode,
+        dateRangePresentation: DateTimePicker.DateRangePresentation,
+        datePickerType: DateTimePicker.DatePickerType,
         startDate: Date?,
         endDate: Date?,
-        datePickerType: DateTimePicker.DatePickerType,
-        dateRangePresentation: DateTimePicker.DateRangePresentation,
         titles: DateTimePicker.Titles?
     ) {
         DispatchQueue.main.async {

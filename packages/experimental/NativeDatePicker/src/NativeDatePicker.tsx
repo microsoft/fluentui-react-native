@@ -10,20 +10,18 @@ type NullableString = String | null;
 
 interface NativeDatePickerInterface {
     present(): void;
-    presentWithMode(mode: NativeDatePickerMode): void;
-    presentWithStartDate(startDate: NullableDate, endDate: NullableDate): void;
-    presentWithMode(
+    presentWithOptions(
         mode: NativeDatePickerMode,
-        startDate: NullableDate,
-        endDate: NullableDate,
-        datePickerType: NativeDatePickerType,
-        dateRangePresentation: NativeDatePickerDateRangePresentation): void;
-    presentWithMode(
-        mode: NativeDatePickerMode,
-        startDate: NullableDate,
-        endDate: NullableDate,
-        datePickerType: NativeDatePickerType,
         dateRangePresentation: NativeDatePickerDateRangePresentation,
+        datePickerType: NativeDatePickerType,
+        startDate: NullableDate,
+        endDate: NullableDate): void;
+    presentWithOptionsAndTitles(
+        mode: NativeDatePickerMode,
+        dateRangePresentation: NativeDatePickerDateRangePresentation,
+        datePickerType: NativeDatePickerType,
+        startDate: NullableDate,
+        endDate: NullableDate,
         startTitle: NullableString, 
         startSubtitle: NullableString, 
         startTab: NullableString, 
@@ -32,8 +30,8 @@ interface NativeDatePickerInterface {
         endTab: NullableString, 
         dateTitle: NullableString, 
         dateSubtitle: NullableString, 
-        dateTimeTitle: NullableString, 
-        dateTimeSubtitle: NullableString): void;
+        timeTitle: NullableString, 
+        timeSubtitle: NullableString): void;
  }
 
  export default NativeDatePicker as NativeDatePickerInterface;
