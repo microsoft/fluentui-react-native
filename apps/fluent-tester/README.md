@@ -5,5 +5,5 @@
 - [iOS](./../ios/README.md)
 - [Android](./../android/README.md)
 - [macOS](./../macos/README.md)
-- [Windows](./../windows/readme.md)
+- [Windows](./../windows/README.md)
 - [Win32](./../win32/README.md)
