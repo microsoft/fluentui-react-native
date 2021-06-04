@@ -96,14 +96,17 @@ const appleComponents = {
   },
 
   Checkbox: {
+    root: {
+      style: {
+        minHeight: 20,
+        marginVertical: 2,
+      },
+    },
     checkbox: {
       style: {
-        borderStyle: 'solid',
-        borderWidth: 2,
         borderRadius: 100,
         minHeight: 24,
         minWidth: 24,
-        marginEnd: 4,
       },
     },
     checkmarkIcon: {

@@ -18,12 +18,9 @@ export const androidComponents = {
   Checkbox: {
     checkbox: {
       style: {
-        borderStyle: 'solid',
         borderWidth: 2,
-        borderRadius: 2,
         minHeight: 18,
         minWidth: 18,
-        marginEnd: 4,
       },
     },
     checkmarkIcon: {
