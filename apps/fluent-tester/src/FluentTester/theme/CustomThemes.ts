@@ -21,10 +21,8 @@ export const lightnessOptions = [
   { label: 'Dark', value: 'dark' },
 ];
 
-const officeAsThemeName = ['win32'].includes(Platform.OS as string);
-
 export class TesterThemeReference extends ThemeReference {
-  private _themeName: ThemeNames = officeAsThemeName ? 'Office' : 'Default';
+  private _themeName: ThemeNames = Platform.OS == ('win32' as any) ? 'Office' : 'Default';
   private _brand: OfficeBrand = 'Default';
 
   private options: ThemeOptions;
