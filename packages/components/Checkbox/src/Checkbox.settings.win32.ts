@@ -1,1 +1,1 @@
-export * from './Checkbox.settings.old';
+export * from './Checkbox.settings.windows';
