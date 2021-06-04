@@ -60,7 +60,7 @@ export const settings: IComposeSettings<ICheckboxType> = [
         marginTop: 3,
       },
     },
-    _precedence: ['disabled', 'boxAtEnd', 'hovered', 'focused', 'pressed', 'checked'],
+    _precedence: ['disabled', 'boxAtEnd', 'checked', 'hovered', 'focused', 'pressed'],
     _overrides: {
       focused: {
         tokens: {

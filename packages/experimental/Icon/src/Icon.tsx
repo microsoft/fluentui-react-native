@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IconProps, SvgIconProps, FontIconProps } from './Icon.types';
-import { Image, ImageStyle, Platform, View } from 'react-native';
+import { ColorValue, Image, ImageStyle, Platform, processColor, View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { Color, SvgUri } from 'react-native-svg';
 import { mergeStyles } from '@fluentui-react-native/framework';
@@ -57,7 +57,8 @@ function renderSvg(iconProps: IconProps) {
 
   // The svg color can be set using either style.color or iconProps.color, where style.color is preferred in case both are set.
   const getColor = (color1: Color, color2: Color) => (color1 === undefined ? color2 : color1);
-  const color = getColor((style as any).color, iconProps.color);
+  const colorString = getColor((style as any).color, iconProps.color);
+  const color = (Platform.OS == 'macos' ? processColor(colorString as ColorValue) : colorString) as Color;
 
   if (svgIconProps.src) {
     return (
