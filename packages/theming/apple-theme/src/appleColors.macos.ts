@@ -325,18 +325,18 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     inputTextHovered: applePlatform.textColor,
     inputPlaceholderText: applePlatform.placeholderTextColor,
 
-    // Set the fallback default button palette to communicationBlue,
-    buttonBackgroundChecked: fluentUIApple.communicationBlue,
-    buttonBackgroundHovered: fluentUIApple.communicationBlue,
-    buttonBackgroundCheckedHovered: fluentUIApple.communicationBlue,
-    buttonBackgroundPressed: ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'pressed'),
-    buttonBackgroundDisabled: fluentUIApple.brandBackgroundDisabled,
-    buttonText: fluentUIApple.neutralInverted,
-    buttonTextHovered: fluentUIApple.neutralInverted,
-    buttonTextChecked: fluentUIApple.neutralInverted,
-    buttonTextCheckedHovered: fluentUIApple.neutralInverted,
-    buttonTextPressed: fluentUIApple.neutralInverted,
-    buttonTextDisabled: fluentUIApple.brandForegroundDisabled,
+    // Set the default button tokens to match the Acrylic Button style
+    buttonBackgroundChecked: fluentUIApple.neutralBackground3,
+    buttonBackgroundHovered: fluentUIApple.neutralBackground3,
+    buttonBackgroundCheckedHovered: fluentUIApple.neutralBackground3,
+    buttonBackgroundPressed: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'pressed'),
+    buttonBackgroundDisabled: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'disabled'),
+    buttonText: fluentUIApple.neutralForeground3,
+    buttonTextHovered: fluentUIApple.neutralForeground3,
+    buttonTextChecked: fluentUIApple.neutralForeground3,
+    buttonTextCheckedHovered: fluentUIApple.neutralForeground3,
+    buttonTextPressed: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
+    buttonTextDisabled: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'disabled'),
     buttonBorderDisabled: 'transparent',
     buttonBorderFocused: 'transparent',
 
@@ -348,7 +348,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     primaryButtonBorderFocused: 'transparent',
     primaryButtonText: fluentUIApple.neutralInverted,
     primaryButtonTextHovered: fluentUIApple.neutralInverted,
-    primaryButtonTextPressed: fluentUIApple.neutralInverted,
+    primaryButtonTextPressed: ColorWithSystemEffectMacOS(fluentUIApple.neutralInverted, 'pressed'),
     primaryButtonTextDisabled: fluentUIApple.brandForegroundDisabled,
 
     accentButtonBackground: fluentUIApple.communicationBlue,
@@ -380,30 +380,31 @@ export function fallbackApplePalette(): ThemeColorDefinition {
 
     /* ControlColorTokens */
 
-    buttonBackground: fluentUIApple.communicationBlue,
+    // Set the default button tokens to match the Acrylic Button style
+    buttonBackground: fluentUIApple.neutralBackground3,
     buttonBorder: 'transparent',
-    buttonContent: fluentUIApple.neutralInverted,
-    buttonIcon: fluentUIApple.neutralInverted,
+    buttonContent: fluentUIApple.neutralForeground3,
+    buttonIcon: fluentUIApple.neutralForeground3,
 
-    buttonHoveredBackground: fluentUIApple.communicationBlue,
+    buttonHoveredBackground: fluentUIApple.neutralBackground3,
     buttonHoveredBorder: 'transparent',
-    buttonHoveredContent: fluentUIApple.neutralInverted,
-    buttonHoveredIcon: fluentUIApple.neutralInverted,
+    buttonHoveredContent: fluentUIApple.neutralForeground3,
+    buttonHoveredIcon: fluentUIApple.neutralForeground3,
 
-    buttonFocusedBackground: fluentUIApple.communicationBlue,
+    buttonFocusedBackground: fluentUIApple.neutralBackground3,
     buttonFocusedBorder: 'transparent',
-    buttonFocusedContent: fluentUIApple.neutralInverted,
-    buttonFocusedIcon: fluentUIApple.neutralInverted,
+    buttonFocusedContent: fluentUIApple.neutralForeground3,
+    buttonFocusedIcon: fluentUIApple.neutralForeground3,
 
-    buttonPressedBackground: ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'pressed'),
+    buttonPressedBackground: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'pressed'),
     buttonPressedBorder: 'transparent',
-    buttonPressedContent: fluentUIApple.neutralInverted,
-    buttonPressedIcon: fluentUIApple.neutralInverted,
+    buttonPressedContent: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
+    buttonPressedIcon: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
 
-    buttonDisabledBackground: fluentUIApple.brandBackgroundDisabled,
+    buttonDisabledBackground: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'disabled'),
     buttonDisabledBorder: 'transparent',
-    buttonDisabledContent: fluentUIApple.brandForegroundDisabled,
-    buttonDisabledIcon: fluentUIApple.brandForegroundDisabled,
+    buttonDisabledContent: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
+    buttonDisabledIcon: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
 
     ghostBackground: 'transparent',
     ghostBorder: 'transparent',
@@ -422,8 +423,8 @@ export function fallbackApplePalette(): ThemeColorDefinition {
 
     ghostPressedBackground: 'transparent',
     ghostPressedBorder: 'transparent',
-    ghostPressedContent: fluentUIApple.communicationBlueShade30,
-    ghostPressedIcon: fluentUIApple.communicationBlueShade30,
+    ghostPressedContent: ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'deepPressed'),
+    ghostPressedIcon: ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'deepPressed'),
 
     ghostDisabledBackground: 'transparent',
     ghostDisabledBorder: 'transparent',
@@ -474,12 +475,12 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     ghostSecondaryContent: fluentUIApple.communicationBlue,
     ghostFocusedSecondaryContent: fluentUIApple.communicationBlue,
     ghostHoveredSecondaryContent: fluentUIApple.communicationBlue,
-    ghostPressedSecondaryContent: fluentUIApple.communicationBlue,
+    ghostPressedSecondaryContent: ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'deepPressed'),
 
     brandSecondaryContent: fluentUIApple.neutralInverted,
     brandFocusedSecondaryContent: fluentUIApple.neutralInverted,
     brandHoveredSecondaryContent: fluentUIApple.neutralInverted,
-    brandPressedSecondaryContent: fluentUIApple.neutralInverted,
+    brandPressedSecondaryContent: ColorWithSystemEffectMacOS(fluentUIApple.neutralInverted, 'pressed'),
 
     buttonDisabledSecondaryContent: fluentUIApple.brandForegroundDisabled,
     buttonHoveredSecondaryContent: fluentUIApple.neutralInverted,
