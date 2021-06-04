@@ -89,7 +89,7 @@ export interface ICheckboxSlotProps {
   root: React.PropsWithRef<IViewProps>;
   checkbox: IViewProps;
   checkmark?: ITextProps;
-  checkmarkSvg?: IconProps;
+  checkmarkIcon?: IconProps;
   content: ITextProps;
 }
 

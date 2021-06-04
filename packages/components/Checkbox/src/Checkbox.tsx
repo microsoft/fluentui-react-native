@@ -90,7 +90,7 @@ export const Checkbox = compose<ICheckboxType>({
       },
       // Temporary checkmark until SVG functionality
       checkmark: { children: '✓' },
-      checkmarkSvg: {
+      checkmarkIcon: {
         svgSource: {
           src: checkmarkSvg,
         },
@@ -107,7 +107,7 @@ export const Checkbox = compose<ICheckboxType>({
     return (
       <Slots.root>
         {renderData?.state.boxAtEnd && <Slots.content />}
-        <Slots.checkbox>{svgIconsEnabled ? <Slots.checkmarkSvg /> : <Slots.checkmark />}</Slots.checkbox>
+        <Slots.checkbox>{svgIconsEnabled ? <Slots.checkmarkIcon /> : <Slots.checkmark />}</Slots.checkbox>
         {!renderData?.state.boxAtEnd && <Slots.content />}
         {children}
       </Slots.root>
@@ -119,7 +119,7 @@ export const Checkbox = compose<ICheckboxType>({
     root: View,
     checkbox: { slotType: View, filter: filterViewProps },
     checkmark: Text,
-    checkmarkSvg: Icon,
+    checkmarkIcon: Icon,
     content: Text,
   },
   styles: {
@@ -139,7 +139,7 @@ export const Checkbox = compose<ICheckboxType>({
         { source: 'checkmarkVisibility', target: 'opacity' },
       ],
     ],
-    checkmarkSvg: [
+    checkmarkIcon: [
       foregroundColorTokens,
       [
         { source: 'checkmarkColor', lookup: getPaletteFromTheme, target: 'color' },
