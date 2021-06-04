@@ -106,7 +106,7 @@ const appleComponents = {
         marginEnd: 4,
       },
     },
-    checkmarkSvg: {
+    checkmarkIcon: {
       width: 8.5,
       height: 7,
       style: {

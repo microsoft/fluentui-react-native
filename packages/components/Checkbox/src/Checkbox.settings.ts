@@ -44,7 +44,7 @@ export const settings: IComposeSettings<ICheckboxType> = [
         top: -1,
       },
     },
-    checkmarkSvg: {
+    checkmarkIcon: {
       width: 8,
       height: 7,
       style: {

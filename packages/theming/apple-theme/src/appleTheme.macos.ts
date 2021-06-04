@@ -57,7 +57,7 @@ export const appleComponents = {
         marginEnd: 5,
       },
     },
-    checkmarkSvg: {
+    checkmarkIcon: {
       width: 10,
       height: 10,
       style: {

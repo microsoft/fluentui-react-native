@@ -26,7 +26,7 @@ export const androidComponents = {
         marginEnd: 4,
       },
     },
-    checkmarkSvg: {
+    checkmarkIcon: {
       width: 14,
       height: 10,
       style: {

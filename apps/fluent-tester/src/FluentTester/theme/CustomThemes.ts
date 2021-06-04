@@ -21,8 +21,10 @@ export const lightnessOptions = [
   { label: 'Dark', value: 'dark' },
 ];
 
+const defaultAsThemeName = ['android', 'ios', 'macos', 'web'].includes(Platform.OS as string);
+
 export class TesterThemeReference extends ThemeReference {
-  private _themeName: ThemeNames = 'Office';
+  private _themeName: ThemeNames = defaultAsThemeName ? 'Default' : 'Office';
   private _brand: OfficeBrand = 'Default';
 
   private options: ThemeOptions;
