@@ -20,7 +20,7 @@ export const settings: IComposeSettings<ICheckboxType> = [
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'row',
-        minHeight: 18,
+        minHeight: 20,
         marginTop: 0,
         position: 'relative',
       },
@@ -28,7 +28,7 @@ export const settings: IComposeSettings<ICheckboxType> = [
     checkbox: {
       style: {
         borderStyle: 'solid',
-        borderWidth: 2,
+        borderWidth: 1,
         borderRadius: 2,
         minHeight: 16,
         minWidth: 16,
@@ -56,11 +56,11 @@ export const settings: IComposeSettings<ICheckboxType> = [
       variant: 'bodyStandard',
       style: {
         borderStyle: 'solid',
-        borderWidth: 2,
+        borderWidth: 1,
         marginTop: 3,
       },
     },
-    _precedence: ['disabled', 'boxAtEnd', 'checked', 'hovered', 'focused', 'pressed'],
+    _precedence: ['disabled', 'boxAtEnd', 'hovered', 'focused', 'pressed', 'checked'],
     _overrides: {
       focused: {
         tokens: {

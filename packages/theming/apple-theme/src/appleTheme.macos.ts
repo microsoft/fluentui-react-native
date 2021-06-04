@@ -65,6 +65,8 @@ export const appleComponents = {
         marginHorizontal: 2,
       },
     },
+    // This disables other available states like: hovered, focused, pressed.
+    _precedence: ['disabled', 'boxAtEnd', 'checked'],
   },
 };
 
