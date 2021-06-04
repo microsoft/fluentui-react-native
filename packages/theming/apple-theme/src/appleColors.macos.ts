@@ -1,6 +1,6 @@
 import { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
 import { AppleSemanticPalette, FluentUIApplePalette } from './appleColors.types.macos';
-import { PlatformColor, DynamicColorMacOS } from 'react-native-macos';
+import { PlatformColor, DynamicColorMacOS, ColorWithSystemEffectMacOS } from 'react-native-macos';
 
 /** Creates a Palette of PlatformColors defined for macOS */
 export function getAppleSemanticPalette(): AppleSemanticPalette {
@@ -326,11 +326,10 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     inputPlaceholderText: applePlatform.placeholderTextColor,
 
     // Set the fallback default button palette to communicationBlue,
-    // and use communicationBlueShade20 to emulate the NSColor pressed system effect
     buttonBackgroundChecked: fluentUIApple.communicationBlue,
     buttonBackgroundHovered: fluentUIApple.communicationBlue,
     buttonBackgroundCheckedHovered: fluentUIApple.communicationBlue,
-    buttonBackgroundPressed: fluentUIApple.communicationBlueShade20,
+    buttonBackgroundPressed: ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'pressed'),
     buttonBackgroundDisabled: fluentUIApple.brandBackgroundDisabled,
     buttonText: fluentUIApple.neutralInverted,
     buttonTextHovered: fluentUIApple.neutralInverted,
@@ -343,7 +342,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
 
     primaryButtonBackground: fluentUIApple.communicationBlue,
     primaryButtonBackgroundHovered: fluentUIApple.communicationBlue,
-    primaryButtonBackgroundPressed: fluentUIApple.communicationBlueShade20,
+    primaryButtonBackgroundPressed: ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'pressed'),
     primaryButtonBackgroundDisabled: fluentUIApple.brandBackgroundDisabled,
     primaryButtonBorder: 'transparent',
     primaryButtonBorderFocused: 'transparent',
@@ -396,7 +395,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     buttonFocusedContent: fluentUIApple.neutralInverted,
     buttonFocusedIcon: fluentUIApple.neutralInverted,
 
-    buttonPressedBackground: fluentUIApple.communicationBlueShade20,
+    buttonPressedBackground: ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'pressed'),
     buttonPressedBorder: 'transparent',
     buttonPressedContent: fluentUIApple.neutralInverted,
     buttonPressedIcon: fluentUIApple.neutralInverted,
@@ -446,7 +445,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     brandFocusedContent: fluentUIApple.neutralInverted,
     brandFocusedIcon: fluentUIApple.neutralInverted,
 
-    brandPressedBackground: fluentUIApple.communicationBlueShade20,
+    brandPressedBackground: ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'pressed'),
     brandPressedBorder: 'transparent',
     brandPressedContent: fluentUIApple.neutralInverted,
     brandPressedIcon: fluentUIApple.neutralInverted,
