@@ -40,9 +40,9 @@ function renderFontIcon(iconProps: IconProps) {
           : fontSource.fontFamily,
       codepoint: fontSource.codepoint,
       fontSize: fontSource.fontSize,
-      color: iconProps.color,
+      color: iconProps.iconColor,
     },
-    [iconProps.color, fontSource.fontSrcFile, fontSource.fontFamily, fontSource.codepoint, fontSource.codepoint],
+    [iconProps.iconColor, fontSource.fontSrcFile, fontSource.fontFamily, fontSource.codepoint, fontSource.codepoint],
   )[0];
 
   const char = String.fromCharCode(fontSource.codepoint);
@@ -58,13 +58,13 @@ function renderSvg(iconProps: IconProps) {
   if (svgIconProps.src) {
     return (
       <View style={style}>
-        <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconProps.color} />
+        <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconProps.iconColor} />
       </View>
     );
   } else if (svgIconProps.uri) {
     return (
       <View style={style}>
-        <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconProps.color} />
+        <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconProps.iconColor} />
       </View>
     );
   } else {
@@ -76,10 +76,10 @@ export const Icon = stagedComponent((props: IconProps) => {
   const theme = useTheme();
 
   return (rest: IconProps) => {
-    const color = props.color || theme.colors.buttonText;
+    const color = props.iconColor || theme.colors.buttonContent;
 
     const baseProps = {
-      color: color,
+      iconColor: color,
     };
 
     const newProps = mergeProps<IconProps>(baseProps, props, rest);
