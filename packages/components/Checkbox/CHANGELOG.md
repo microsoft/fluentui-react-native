@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Fri, 07 May 2021 18:12:16 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Jun 2021 17:30:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.5
+
+Wed, 02 Jun 2021 17:30:36 GMT
+
+### Patches
+
+- add useOnPressWithFocus hook (krsiler@microsoft.com)
 
 ## 0.10.2
 
