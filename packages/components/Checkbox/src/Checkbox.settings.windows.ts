@@ -3,6 +3,7 @@ import { checkboxName, ICheckboxType } from './Checkbox.types';
 
 export const checkboxSelectActionLabel = 'Toggle the Checkbox';
 
+// This file exists as SVGs are not supported on windows platform.
 export const settings: IComposeSettings<ICheckboxType> = [
   {
     tokens: {

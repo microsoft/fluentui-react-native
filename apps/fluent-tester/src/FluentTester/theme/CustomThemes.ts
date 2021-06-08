@@ -22,7 +22,7 @@ export const lightnessOptions = [
 ];
 
 export class TesterThemeReference extends ThemeReference {
-  private _themeName: ThemeNames = Platform.OS == ('win32' as any) ? 'Office' : 'Default';
+  private _themeName: ThemeNames = 'Default';
   private _brand: OfficeBrand = 'Default';
 
   private options: ThemeOptions;
