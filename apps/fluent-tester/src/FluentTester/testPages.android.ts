@@ -10,9 +10,11 @@ import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from './TestComponents/P
 import { HOMEPAGE_PRESSABLE_BUTTON, PressableTest } from './TestComponents/Pressable';
 import { HOMEPAGE_RADIOGROUP_BUTTON, RadioGroupTest } from './TestComponents/RadioGroup';
 import { HOMEPAGE_SEPARATOR_BUTTON, SeparatorTest } from './TestComponents/Separator';
+import { HOMEPAGE_SHIMMER_BUTTON, ShimmerTest } from './TestComponents/Shimmer';
 import { HOMEPAGE_SVG_BUTTON, SvgTest } from './TestComponents/Svg';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
+import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 
 export const tests: TestDescription[] = [
   {
@@ -51,6 +53,11 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_SEPARATOR_BUTTON,
   },
   {
+    name: 'Shimmer Test',
+    component: ShimmerTest,
+    testPage: HOMEPAGE_SHIMMER_BUTTON,
+  },
+  {
     name: 'Text Test',
     component: TextTest,
     testPage: HOMEPAGE_TEXT_BUTTON,
@@ -84,5 +91,10 @@ export const tests: TestDescription[] = [
     name: 'Svg Test',
     component: SvgTest,
     testPage: HOMEPAGE_SVG_BUTTON,
+  },
+  {
+    name: 'Icon Test',
+    component: IconTest,
+    testPage: HOMEPAGE_ICON_BUTTON,
   },
 ];

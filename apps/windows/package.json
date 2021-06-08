@@ -9,12 +9,12 @@
     "generate-report": "allure generate allure-results --clean && allure open",
     "lint": "eslint .",
     "report": "allure generate allure-results --clean",
-    "start": "react-native rnx-start",
+    "start": "react-native start",
     "test": "jest",
     "windows": "react-native run-windows"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.21.0",
+    "@fluentui-react-native/tester": "^0.24.2",
     "react": "16.13.1",
     "react-native": "^0.63.4",
     "react-native-windows": "^0.62.1"

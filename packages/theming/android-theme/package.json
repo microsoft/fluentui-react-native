@@ -1,10 +1,10 @@
 {
   "name": "@fluentui-react-native/android-theme",
-  "version": "0.2.0",
+  "version": "0.2.8",
   "description": "A FluentUI React Native theme that pulls constants from FluentUI Android",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/just"
+    "url": "https://github.com/microsoft/fluentui-react-native"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",

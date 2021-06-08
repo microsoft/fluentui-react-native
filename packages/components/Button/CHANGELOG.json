@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Wed, 02 Jun 2021 17:30:36 GMT",
+      "tag": "@fluentui-react-native/button_v0.16.1",
+      "version": "0.16.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add useOnPressWithFocus hook",
+            "author": "krsiler@microsoft.com",
+            "commit": "1d9f21958a7c94c0ca3d57856f060662ae34796e",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 25 May 2021 00:42:50 GMT",
+      "tag": "@fluentui-react-native/button_v0.16.0",
+      "version": "0.16.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add ripple effect to android-button",
+            "author": "tamasane@gmail.com",
+            "commit": "d3953da403a118f3086dfde2529bca76d30ad235",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 19 May 2021 07:04:54 GMT",
+      "tag": "@fluentui-react-native/button_v0.15.0",
+      "version": "0.15.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "create iconProps hook",
+            "author": "lehon@microsoft.com",
+            "commit": "06aa14bd6c448e2b16afc81e76a99f9788c4fc13",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 15 Apr 2021 20:08:17 GMT",
+      "tag": "@fluentui-react-native/button_v0.14.3",
+      "version": "0.14.3",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge remote-tracking branch 'upstream/master' into amgleitman/icon-macos",
+            "author": "adam.gleitman@gmail.com",
+            "commit": "06834001f0f0238d2a7ad99a51a430b28eaa8daa",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Mar 2021 19:48:16 GMT",
       "tag": "@fluentui-react-native/button_v0.14.1",
       "version": "0.14.1",

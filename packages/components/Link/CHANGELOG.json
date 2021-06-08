@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Wed, 02 Jun 2021 17:30:36 GMT",
+      "tag": "@fluentui-react-native/link_v0.12.4",
+      "version": "0.12.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add useOnPressWithFocus hook",
+            "author": "krsiler@microsoft.com",
+            "commit": "1d9f21958a7c94c0ca3d57856f060662ae34796e",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 15 Apr 2021 20:08:17 GMT",
+      "tag": "@fluentui-react-native/link_v0.12.1",
+      "version": "0.12.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge remote-tracking branch 'upstream/master' into amgleitman/icon-macos",
+            "author": "adam.gleitman@gmail.com",
+            "commit": "06834001f0f0238d2a7ad99a51a430b28eaa8daa",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 06 Mar 2021 00:20:05 GMT",
       "tag": "@fluentui-react-native/link_v0.12.0",
       "version": "0.12.0",

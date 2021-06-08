@@ -1,8 +1,36 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Thu, 11 Mar 2021 19:48:16 GMT and should not be manually modified.
+This log was last generated on Tue, 25 May 2021 00:42:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.0
+
+Tue, 25 May 2021 00:42:50 GMT
+
+### Minor changes
+
+- Add hideInsideGapForBorder prop to experimental avatar (sanajmi@microsoft.com)
+
+## 0.7.1
+
+Wed, 07 Apr 2021 23:41:02 GMT
+
+### Patches
+
+- Add the rainbow gradient border image test case to experimental avatar (#654) (tamasane@gmail.com)
+
+## 0.7.0
+
+Wed, 07 Apr 2021 22:19:35 GMT
+
+### Minor changes
+
+- add test case for custom border image (sanajmi@microsoft.com)
+
+### Patches
+
+- Add an NSNull check to the image property (sanajmi@microsoft.com)
 
 ## 0.6.2
 

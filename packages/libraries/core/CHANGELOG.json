@@ -2,6 +2,96 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Wed, 19 May 2021 07:04:54 GMT",
+      "tag": "@fluentui/react-native_v0.23.10",
+      "version": "0.23.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "disable no-var-requires",
+            "author": "lehon@microsoft.com",
+            "commit": "06aa14bd6c448e2b16afc81e76a99f9788c4fc13",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 May 2021 06:18:23 GMT",
+      "tag": "@fluentui/react-native_v0.23.9",
+      "version": "0.23.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Force a package update to sync npm version and repo version",
+            "author": "sanajmi@microsoft.com",
+            "commit": "1602018b21b6952917210547dbc05ea07f4ba2b6",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 May 2021 10:34:05 GMT",
+      "tag": "@fluentui/react-native_v0.23.8",
+      "version": "0.23.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "patch",
+            "author": "sanajmi@microsoft.com",
+            "commit": "60fb1e08cb5785023b05333a8c0373a4aa5a6aa3",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 15 Apr 2021 20:08:17 GMT",
+      "tag": "@fluentui/react-native_v0.23.5",
+      "version": "0.23.5",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge remote-tracking branch 'upstream/master' into amgleitman/icon-macos",
+            "author": "adam.gleitman@gmail.com",
+            "commit": "06834001f0f0238d2a7ad99a51a430b28eaa8daa",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 07 Apr 2021 23:41:02 GMT",
+      "tag": "@fluentui/react-native_v0.23.5",
+      "version": "0.23.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "upgrade react-native-svg",
+            "author": "tamasane@gmail.com",
+            "commit": "b8f260a8b9ebfb579c059a5c9dd73ed6a90d558c",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 07 Apr 2021 22:19:35 GMT",
+      "tag": "@fluentui/react-native_v0.23.4",
+      "version": "0.23.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add repository link",
+            "author": "krsiler@microsoft.com",
+            "commit": "41364a1197981372ed0954951f367dd8cfd535e5",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Mar 2021 19:48:16 GMT",
       "tag": "@fluentui/react-native_v0.23.1",
       "version": "0.23.1",
