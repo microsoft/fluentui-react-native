@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Wed, 02 Jun 2021 17:30:36 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.10.1",
+      "version": "0.10.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add useOnPressWithFocus hook",
+            "author": "krsiler@microsoft.com",
+            "commit": "1d9f21958a7c94c0ca3d57856f060662ae34796e",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 25 May 2021 00:42:50 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.10.0",
       "version": "0.10.0",

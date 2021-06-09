@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix theme picker on FURN tester",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-06-01T20:51:55.498Z"
-}

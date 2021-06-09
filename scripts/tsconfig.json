@@ -19,7 +19,8 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "sourceMap": true,
-    "jsx": "react"
+    "jsx": "react",
+    "resolveJsonModule": true
   },
   "baseUrl": ".",
   "paths": {

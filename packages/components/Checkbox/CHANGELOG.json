@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Wed, 02 Jun 2021 17:30:36 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.10.5",
+      "version": "0.10.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add useOnPressWithFocus hook",
+            "author": "krsiler@microsoft.com",
+            "commit": "1d9f21958a7c94c0ca3d57856f060662ae34796e",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 07 May 2021 18:12:16 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.10.2",
       "version": "0.10.2",
