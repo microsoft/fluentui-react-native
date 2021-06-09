@@ -13829,14 +13829,11 @@ react-native-svg@^12.1.1:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
 
-react-native-test-app@^0.5.5:
-  version "0.5.5"
-  resolved "https://registry.npmjs.org/react-native-test-app/-/react-native-test-app-0.5.5.tgz#43bcd5294ae1f5966145e215d6137e3a2283bbb4"
-  integrity sha512-eed6tgqq8R6y0urs1+lLvOOCrg0X8QcE0PACnuFxKQ7chOTHYp/Z9tz3x0VGy8X3HqxeVF7e7Q+Pb9gwvMdKRw==
+react-native-test-app@^0.5.10:
+  version "0.5.10"
+  resolved "https://registry.npmjs.org/react-native-test-app/-/react-native-test-app-0.5.10.tgz#a9e9f675501d84bfb6a454ddf8129938926b4c23"
+  integrity sha512-2tJ79IhJopV5j2YAl8umDfQHS0boqgD57Jy/X6BpQXKZ6HR8kWgsmUogeGGNLGQ7zkYhjfiIE0xmLsESUYpU1A==
   dependencies:
-    "@react-native-community/cli" "^4.10.0"
-    "@react-native-community/cli-platform-android" "^4.10.0"
-    "@react-native-community/cli-platform-ios" "^4.10.0"
     chalk "^4.1.0"
     prompts "^2.4.0"
     rimraf "^3.0.0"

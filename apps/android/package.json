@@ -24,7 +24,7 @@
     "react": "16.13.1",
     "react-native": "^0.63.4",
     "react-native-svg": "^12.1.1",
-    "react-native-test-app": "^0.5.5"
+    "react-native-test-app": "^0.5.10"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
