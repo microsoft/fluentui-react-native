@@ -14,8 +14,6 @@
 
 import { ColorValue } from 'react-native';
 
-export { ColorValue } from 'react-native';
-
 export type ThemeColorDefinition = Palette & {
   background: ColorValue;
   bodyText: ColorValue;
