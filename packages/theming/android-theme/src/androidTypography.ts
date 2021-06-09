@@ -17,33 +17,35 @@ export function androidTypography(): Typography {
       heroLarge: 28 as FontSize, // Headline
     } as FontSizes,
     weights: {
-      light: '300' as FontWeightValue,
+      // The font weights do not work for Android since RN 0.60 (https://github.com/facebook/react-native/issues/25696)
+      // The workaround is to use font aliases from android source (https://android.googlesource.com/platform/frameworks/base/+/master/data/fonts/fonts.xml)
       regular: '400' as FontWeightValue,
-      medium: '500' as FontWeightValue,
       semiBold: '500' as FontWeightValue,
     },
     families: {
-      primary: 'Roboto',
+      primary: 'sans-serif', // sans-serif, weight=400
+      primarySemibold: 'sans-serif-medium', // sans-serif, weight=500
+      primaryLight: 'sans-serif-light', // sans-serif, weight=300
       secondary: 'System',
-      cursive: 'System',
+      cursive: 'cursive',
       monospace: 'monospace',
       sansSerif: 'sans-serif',
       serif: 'serif',
     },
     variants: {
-      captionStandard: { face: 'primary', size: 'caption', weight: '400' },
-      secondaryStandard: { face: 'primary', size: 'secondary', weight: '400' },
-      secondarySemibold: { face: 'primary', size: 'secondary', weight: '500' },
-      bodyStandard: { face: 'primary', size: 'body', weight: '400' },
-      bodySemibold: { face: 'primary', size: 'body', weight: '500' },
-      subheaderStandard: { face: 'primary', size: 'subheader', weight: '400' },
-      subheaderSemibold: { face: 'primary', size: 'subheader', weight: '500' },
-      headerStandard: { face: 'primary', size: 'header', weight: '400' },
-      headerSemibold: { face: 'primary', size: 'header', weight: '500' },
-      heroStandard: { face: 'primary', size: 'hero', weight: '400' },
-      heroSemibold: { face: 'primary', size: 'hero', weight: '500' },
-      heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: '400' },
-      heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: '500' },
+      captionStandard: { face: 'primary', size: 'caption' },
+      secondaryStandard: { face: 'primary', size: 'secondary' },
+      secondarySemibold: { face: 'primarySemibold', size: 'secondary' },
+      bodyStandard: { face: 'primary', size: 'body' },
+      bodySemibold: { face: 'primarySemibold', size: 'body' },
+      subheaderStandard: { face: 'primary', size: 'subheader' },
+      subheaderSemibold: { face: 'primarySemibold', size: 'subheader' },
+      headerStandard: { face: 'primary', size: 'header' },
+      headerSemibold: { face: 'primarySemibold', size: 'header' },
+      heroStandard: { face: 'primary', size: 'hero' },
+      heroSemibold: { face: 'primarySemibold', size: 'hero' },
+      heroLargeStandard: { face: 'primary', size: 'heroLarge' },
+      heroLargeSemibold: { face: 'primarySemibold', size: 'heroLarge' },
     } as Variants,
   };
 

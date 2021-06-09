@@ -1,8 +1,7 @@
 import { ColorValue } from '@fluentui-react-native/theme-types';
-import { AndroidBaseColorsPalette } from './androidBaseColors';
-
+import { AndroidBaseColorsPalette } from './colorsBase';
 export interface SemanticPalette {
-  //Texts
+  // Texts
   textDominant: ColorValue;
   textPrimary: ColorValue;
   textSecondary: ColorValue;
@@ -14,7 +13,7 @@ export interface SemanticPalette {
   textDisabledHighContrast: ColorValue;
   textOnAccentHighContrast: ColorValue;
 
-  //Icons
+  //  Icons
   iconsPrimary: ColorValue;
   iconsSecondary: ColorValue;
   iconsDisabled: ColorValue;
@@ -24,32 +23,32 @@ export interface SemanticPalette {
   iconsDisabledHighContrast: ColorValue;
   iconsOnAccentHighContrast: ColorValue;
 
-  //Surfaces
+  // Surfaces
   surfacesPrimary: ColorValue;
   surfacesSecondary: ColorValue;
   surfacesTertiary: ColorValue;
   surfacesQuaternary: ColorValue;
 
-  //Dividers
+  // Dividers
   dividersPrimary: ColorValue;
   dividersSecondary: ColorValue;
   dividersTertiary: ColorValue;
 
-  //Button
+  // Button
   buttonBackground: ColorValue;
   buttonBackgroundPressed: ColorValue;
   buttonBackgroundDisabled: ColorValue;
   buttonTextDisabled: ColorValue;
 
-  //Menu
+  // Menu
   menuBackground: ColorValue;
   menuIcon: ColorValue;
   menuItemText: ColorValue;
 
-  //List
+  // List
   listBackground: ColorValue;
 
-  //HyperLink
+  // HyperLink
   textHyperLink: ColorValue;
 }
 

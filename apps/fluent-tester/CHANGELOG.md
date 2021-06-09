@@ -1,8 +1,69 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 15 Apr 2021 20:08:17 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Jun 2021 17:30:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.2
+
+Wed, 02 Jun 2021 17:30:36 GMT
+
+### Patches
+
+- Comment out tests that crash the app for iOS and macOS (t-lindaweng@microsoft.com)
+- Fix theme picker on FURN tester (ruaraki@microsoft.com)
+
+## 0.24.1
+
+Tue, 25 May 2021 00:42:50 GMT
+
+### Patches
+
+- Fixed ButtonIconTest (tamasane@gmail.com)
+- Add react-native-svg-transformer to iOS and macOS (adam.gleitman@gmail.com)
+- Add hideInsideGapForBorder prop to experimental avatar (sanajmi@microsoft.com)
+
+## 0.24.0
+
+Wed, 19 May 2021 07:04:54 GMT
+
+### Minor changes
+
+- add submenu component to menu (lehon@microsoft.com)
+
+## 0.23.4
+
+Thu, 13 May 2021 06:18:23 GMT
+
+### Patches
+
+- Force a package update to sync npm version and repo version (sanajmi@microsoft.com)
+
+## 0.23.3
+
+Wed, 12 May 2021 10:34:05 GMT
+
+### Patches
+
+- patch (sanajmi@microsoft.com)
+
+## 0.23.2
+
+Wed, 12 May 2021 10:18:25 GMT
+
+### Patches
+
+- patch (sanajmi@microsoft.com)
+
+## 0.23.1
+
+Fri, 07 May 2021 18:12:16 GMT
+
+### Patches
+
+- update android-text theme and test (tamasane@gmail.com)
+- updated themepicker for android (tamasane@gmail.com)
+- Adding tooltip to Checkbox (safreibe@microsoft.com)
 
 ## 0.23.0
 

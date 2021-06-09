@@ -22,7 +22,7 @@ export const lightnessOptions = [
 ];
 
 export class TesterThemeReference extends ThemeReference {
-  private _themeName: ThemeNames = 'Default';
+  private _themeName: ThemeNames = 'Office';
   private _brand: OfficeBrand = 'Default';
 
   private options: ThemeOptions;
@@ -43,8 +43,10 @@ export class TesterThemeReference extends ThemeReference {
     return this._themeName;
   }
   public set themeName(newTheme: ThemeNames) {
-    this._themeName = newTheme;
-    this.invalidate();
+    if (newTheme !== this._themeName) {
+      this._themeName = newTheme;
+      this.invalidate();
+    }
   }
 
   /** get/set the theme appearance */
@@ -52,8 +54,10 @@ export class TesterThemeReference extends ThemeReference {
     return this.options.appearance;
   }
   public set appearance(lightness: ThemeOptions['appearance']) {
-    this.options.appearance = lightness;
-    this.baseTheme.invalidate();
+    if (lightness !== this.options.appearance) {
+      this.options.appearance = lightness;
+      this.baseTheme.invalidate();
+    }
   }
 
   /** get/set the applied brand */
@@ -61,8 +65,10 @@ export class TesterThemeReference extends ThemeReference {
     return this._brand;
   }
   public set brand(newBrand: OfficeBrand) {
-    this._brand = newBrand;
-    this.invalidate();
+    if (newBrand !== this._brand) {
+      this._brand = newBrand;
+      this.invalidate();
+    }
   }
 }
 

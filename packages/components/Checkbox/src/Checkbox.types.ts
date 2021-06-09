@@ -69,6 +69,11 @@ export interface ICheckboxProps extends IViewProps {
   onChange?: (isChecked: boolean) => void;
 
   testID?: string;
+
+  /**
+   * Provides a tooltip while hovering over Checkbox component
+   */
+  tooltip?: string;
 }
 
 export interface ICheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
