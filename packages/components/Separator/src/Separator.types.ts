@@ -1,5 +1,4 @@
-import { ColorValue } from '@fluentui-react-native/theme-types';
-import { ViewProps } from 'react-native';
+import { ViewProps, ColorValue } from 'react-native';
 
 interface SeparatorPropTokens {
   /**

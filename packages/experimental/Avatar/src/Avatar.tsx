@@ -1,6 +1,6 @@
 /** @jsx withSlots */
-import { compose, UseSlots, buildProps, mergeProps, withSlots, ColorValue } from '@fluentui-react-native/framework';
-import { Image, ImageURISource, NativeModules, ViewProps } from 'react-native';
+import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
+import { Image, ImageURISource, NativeModules, ViewProps, ColorValue } from 'react-native';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import { useMemo } from 'react';
 

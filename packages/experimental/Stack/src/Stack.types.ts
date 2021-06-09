@@ -1,7 +1,6 @@
 import { StackItemProps } from './StackItem/StackItem.types';
-import { ViewStyle, ViewProps } from 'react-native';
+import { ViewStyle, ViewProps, ColorValue } from 'react-native';
 import { IBorderTokens, FontTokens } from '@fluentui-react-native/tokens';
-import { ColorValue } from '@fluentui-react-native/theme-types';
 
 export const stackName = 'Stack';
 

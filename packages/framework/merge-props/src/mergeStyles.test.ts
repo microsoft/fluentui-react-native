@@ -1,6 +1,6 @@
 import { flattenStyle, mergeAndFlattenStyles, mergeStyles } from './mergeStyles';
 import { StyleProp } from './mergeStyles.types';
-import { ColorValue } from '@fluentui-react-native/theme-types';
+import { ColorValue } from 'react-native';
 
 interface IFakeStyle {
   backgroundColor?: ColorValue;

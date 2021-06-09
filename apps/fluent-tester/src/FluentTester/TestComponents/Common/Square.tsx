@@ -1,6 +1,5 @@
-import { ColorValue } from '@uifabricshared/theming-ramp';
 import * as React from 'react';
-import { ViewProps, View, StyleProp, ViewStyle } from 'react-native';
+import { ViewProps, View, StyleProp, ViewStyle, ColorValue } from 'react-native';
 
 export interface ISquareProps extends ViewProps {
   color?: ColorValue;

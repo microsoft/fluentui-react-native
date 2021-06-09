@@ -1,5 +1,4 @@
-import { ColorValue } from '@fluentui-react-native/theme-types';
-import { ImageURISource } from 'react-native';
+import { ImageURISource, ColorValue } from 'react-native';
 
 export const nativeButtonName = 'NativeButton';
 

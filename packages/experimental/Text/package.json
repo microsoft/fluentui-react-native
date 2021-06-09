@@ -22,8 +22,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.6.0 <1.0.0",
-    "@fluentui-react-native/framework": "0.5.1",
-    "@fluentui-react-native/theme-types": ">=0.6.0 <1.0.0"
+    "@fluentui-react-native/framework": "0.5.1"
   },
   "devDependencies": {
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PressableProps, ViewProps } from 'react-native';
+import { PressableProps, ViewProps, ColorValue } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
 import { IPressableProps } from '@fluentui-react-native/pressable';
@@ -7,7 +7,6 @@ import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderToke
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { IconProps } from '@fluentui-react-native/icon';
-import { ColorValue } from '@fluentui-react-native/theme-types';
 
 export const buttonName = 'Button';
 

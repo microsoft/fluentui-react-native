@@ -43,7 +43,6 @@
     "@fluentui/react-native": ">=0.23.11 <1.0.0",
     "@react-native-menu/menu": "^0.1.2",
     "@react-native-picker/picker": "^1.9.11",
-    "@uifabricshared/theming-ramp": ">=0.13.0 <1.0.0",
     "react-native-svg": "^12.1.1"
   },
   "devDependencies": {

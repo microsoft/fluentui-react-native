@@ -1,9 +1,8 @@
-import { ViewStyle } from 'react-native';
+import { ViewStyle, ColorValue } from 'react-native';
 import { IOperationSet } from '@uifabricshared/foundation-tokens';
 import { ITheme } from '@uifabricshared/theming-ramp';
 import { getPaletteFromTheme } from './color-tokens';
 import { tokenBuilder } from './tokenBuilder';
-import { ColorValue } from '@fluentui-react-native/theme-types';
 
 export interface IBorderTokens {
   borderColor?: ColorValue;
