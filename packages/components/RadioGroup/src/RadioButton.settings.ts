@@ -76,7 +76,7 @@ export const settings: IComposeSettings<IRadioButtonType> = [
       },
       focused: {
         tokens: {
-          textBorderColor: 'focusBorder',
+          textBorderColor: 'transparent',
         },
       },
       hovered: {

@@ -1,4 +1,5 @@
 import { Spacing, Theme } from '@fluentui-react-native/theme-types';
+import { PlatformColor } from 'react-native';
 import { fallbackApplePalette } from './appleColors.macos';
 import { fallbackAppleTypography } from './appleTypography.macos';
 
@@ -44,6 +45,70 @@ export const appleComponents = {
   RNFText: {
     tokens: {
       variant: 'bodyStandard',
+    },
+  },
+  RadioButton: {
+    tokens: {
+      borderColor: 'rgba(0, 0, 0, 0.15)',
+      backgroundColor: 'white',
+    },
+    root: {
+      accessible: false,
+      focusable: false,
+    },
+    button: {
+      style: {
+        backgroundColor: 'rgba(255, 255, 255, 1)',
+        width: 14,
+        height: 14,
+        borderRadius: 7,
+      },
+      accessible: true,
+      focusable: true,
+    },
+    innerCircle: {
+      style: {
+        height: 6.5,
+        borderRadius: 3.5,
+        width: 6.5,
+        left: 3,
+        top: 2.5,
+      },
+    },
+    content: {
+      variant: 'bodyStandard',
+    },
+    _overrides: {
+      selected: {
+        innerCircle: {
+          style: {
+            opacity: 1,
+          },
+        },
+        hovered: {
+          innerCircle: {
+            style: {
+              opacity: 0,
+            },
+          },
+        },
+        button: {
+          backgroundColor: PlatformColor('controlAccentColor'),
+        },
+      },
+      focused: {
+        button: {
+          enableFocusRing: true,
+        },
+      },
+      disabled: {
+        focusable: false,
+        accessible: false,
+        tokens: {
+          borderColor: 'rgba(0, 0, 0, 0.15)',
+          backgroundColor: 'rgba(255, 255, 255, 1)',
+        },
+      },
     },
   },
 };

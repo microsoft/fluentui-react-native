@@ -104,7 +104,7 @@ export const RadioButton = compose<IRadioButtonType>({
   settings,
   slots: {
     root: View,
-    button: { slotType: View, filter: filterViewProps },
+    button: { slotType: View },
     innerCircle: { slotType: View, filter: filterViewProps },
     content: Text,
   },
