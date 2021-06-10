@@ -221,18 +221,16 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const Win32TesterContent: React.FunctionComponent<{}> = () => {
     return (
-      <RootView style={themedStyles.root}>
-        <FocusTrapZone>
-          {enableSinglePaneView ? <MobileHeader /> : <Header />}
+      <FocusTrapZone style={themedStyles.root}>
+        {enableSinglePaneView ? <MobileHeader /> : <Header />}
 
-          <HeaderSeparator />
+        <HeaderSeparator />
 
-          <View style={fluentTesterStyles.testRoot}>
-            {enableSinglePaneView ? <MobileTestList /> : <TestList />}
-            {enableSinglePaneView ? <MobileTestComponentView /> : <TestComponentView />}
-          </View>
-        </FocusTrapZone>
-      </RootView>
+        <View style={fluentTesterStyles.testRoot}>
+          {enableSinglePaneView ? <MobileTestList /> : <TestList />}
+          {enableSinglePaneView ? <MobileTestComponentView /> : <TestComponentView />}
+        </View>
+      </FocusTrapZone>
     );
   };
 
