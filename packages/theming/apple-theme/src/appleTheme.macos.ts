@@ -96,16 +96,20 @@ export const appleComponents = {
         },
       },
       focused: {
+        tokens: {
+          textBorderColor: 'transparent',
+        },
         button: {
           enableFocusRing: true,
         },
       },
       disabled: {
-        focusable: false,
-        accessible: false,
         tokens: {
           borderColor: 'rgba(0, 0, 0, 0.15)',
           backgroundColor: 'rgba(255, 255, 255, 1)',
+        },
+        button: {
+          focusable: false,
         },
       },
     },
