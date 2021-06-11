@@ -194,5 +194,8 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     buttonDisabledSecondaryContent: p.textSecondary,
     buttonHoveredSecondaryContent: p.iconsSecondary,
     buttonPressedSecondaryContent: p.iconsSecondary,
+
+    personaActivityRing: p.surfacesPrimary,
+    personaActivityGlow: p.buttonBackground,
   };
 }

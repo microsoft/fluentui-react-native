@@ -439,6 +439,9 @@ export interface ControlColorTokens {
   buttonDisabledSecondaryContent: ColorValue;
   buttonHoveredSecondaryContent: ColorValue;
   buttonPressedSecondaryContent: ColorValue;
+
+  personaActivityRing: ColorValue;
+  personaActivityGlow: ColorValue;
 }
 
 /**
