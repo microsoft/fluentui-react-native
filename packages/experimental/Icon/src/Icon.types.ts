@@ -13,6 +13,7 @@ export interface SvgIconProps {
   uri?: string;
   src?: React.FC<SvgProps>;
   viewBox?: string;
+  color?: string;
 }
 
 export interface RasterImageIconProps {

@@ -4,7 +4,7 @@ import { immutableMerge } from '@fluentui-react-native/immutable-merge';
 import { ColorValue } from 'react-native';
 
 interface IFakeStyle {
-  textColor?: ColorValue;
+  textColor?: string;
   backgroundColor?: ColorValue;
   fontFamily?: string;
   fontSize?: string | number;
@@ -107,7 +107,7 @@ function processor(parent: IFakeTheme): Partial<IFakeTheme> {
     settings: {
       base: {
         root: {
-          textColor: 'light' + (parent.settings.base.root as IFakeStyle).textColor.toString(),
+          textColor: 'light' + (parent.settings.base.root as IFakeStyle).textColor,
           fontFamily: (parent.settings.base.root as IFakeStyle).fontFamily + ' Light',
           fontSize: <number>(parent.settings.base.root as IFakeStyle).fontSize - 2,
         },
