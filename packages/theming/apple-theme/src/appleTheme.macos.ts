@@ -1,5 +1,4 @@
 import { Spacing, Theme } from '@fluentui-react-native/theme-types';
-import { PlatformColor } from 'react-native';
 import { fallbackApplePalette } from './appleColors.macos';
 import { fallbackAppleTypography } from './appleTypography.macos';
 
@@ -68,11 +67,11 @@ export const appleComponents = {
     },
     innerCircle: {
       style: {
-        height: 6.5,
-        borderRadius: 3.5,
-        width: 6.5,
-        left: 3,
-        top: 2.5,
+        height: 5.5,
+        borderRadius: 2.75,
+        width: 5.5,
+        left: 3.25,
+        top: 3,
       },
     },
     content: {
@@ -93,7 +92,7 @@ export const appleComponents = {
           },
         },
         button: {
-          backgroundColor: PlatformColor('controlAccentColor'),
+          backgroundColor: 'rgba(75, 145, 247, 1)',
         },
       },
       focused: {
