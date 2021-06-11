@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Initial tokens file, tokens integrated into default theme",
+  "packageName": "@fluentui-react-native/theme-tokens",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-05-28T18:46:51.641Z"
+}
