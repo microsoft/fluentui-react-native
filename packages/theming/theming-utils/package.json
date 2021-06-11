@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/theming-utils",
   "version": "0.1.0",
-  "description": "Tools and mocks for testing components using jest and enzyme",
+  "description": "Utils for dealing with theming",
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
