@@ -26,7 +26,7 @@ export interface ThemeOptions {
   paletteName?: string;
 }
 
-function getCurrentAppearance(appearance: ThemeOptions['appearance'], fallback: AppearanceOptions): AppearanceOptions {
+export function getCurrentAppearance(appearance: ThemeOptions['appearance'], fallback: AppearanceOptions): AppearanceOptions {
   return appearance === 'dynamic' ? (Appearance && Appearance.getColorScheme()) || fallback : appearance;
 }
 
