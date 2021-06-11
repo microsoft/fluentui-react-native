@@ -6,7 +6,7 @@ import { SvgUri } from 'react-native-svg';
 import { mergeStyles } from '@fluentui-react-native/framework';
 import { stagedComponent, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
 import { useTheme } from '@fluentui-react-native/theme-types';
-import { getCurrentAppearance } from '@fluentui-react-native/default-theme';
+import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 
 const rasterImageStyleCache = getMemoCache<ImageStyle>();
 

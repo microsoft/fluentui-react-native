@@ -22,6 +22,7 @@
     "@fluentui-react-native/framework": "0.5.1",
     "@fluentui-react-native/text": "^0.9.1",
     "@fluentui-react-native/theme-types": ">=0.6.0 <1.0.0",
+    "@fluentui-react-native/theming-utils": ">=0.1.0 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.8.0 <1.0.0",
     "@uifabricshared/foundation-compose": "^1.8.1",
     "react-native-svg": "^12.1.1"
