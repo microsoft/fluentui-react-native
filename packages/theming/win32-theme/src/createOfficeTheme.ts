@@ -6,7 +6,8 @@ import { OfficePalette } from '@fluentui-react-native/theme-types';
 import { createPartialOfficeTheme } from './createPartialOfficeTheme';
 
 function handlePaletteCall(palette: OfficePalette | CxxException): OfficePalette | undefined {
-  return (palette as CxxException).message !== undefined ? undefined : (palette as OfficePalette);
+  const exception = palette as CxxException;
+  return exception && exception.message !== undefined ? undefined : (palette as OfficePalette);
 }
 
 /**
