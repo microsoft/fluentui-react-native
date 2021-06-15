@@ -1,5 +1,5 @@
 import { ThemeHelper, buildUseStyling, UseStylingOptions } from './buildUseStyling';
-import { TextProps, Text, View } from 'react-native';
+import { TextProps, Text, View, ColorValue } from 'react-native';
 import { buildProps } from './buildProps';
 import toJson from 'enzyme-to-json';
 import * as React from 'react';
@@ -15,9 +15,9 @@ import { mount } from 'enzyme';
  */
 type Theme = {
   globals: {
-    backgroundColor: string;
-    color: string;
-    borderColor: string;
+    backgroundColor: ColorValue;
+    color: ColorValue;
+    borderColor: ColorValue;
     fontFamily: string;
     fontSize: number;
   };
@@ -78,7 +78,7 @@ describe('useStyling samples', () => {
 
   // the tokens for customization are just the color and font props from the theme
   type Sample1Tokens = {
-    color?: string;
+    color?: ColorValue;
     fontFamily?: string;
     fontSize?: number;
   };
