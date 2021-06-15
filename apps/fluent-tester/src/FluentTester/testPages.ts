@@ -18,6 +18,8 @@ import { HOMEPAGE_FOCUSZONE_BUTTON, FocusZoneTest } from './TestComponents/Focus
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
+import { ActivityIndicatorTest, HOMEPAGE_ACTIVITYINDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
+import { ActivityIndicatorSvgTest, HOMEPAGE_ACTIVITYINDICATORSVG_BUTTON } from './TestComponents/ActivityIndicatorSvg';
 
 export const tests: TestDescription[] = [
   {
@@ -114,5 +116,15 @@ export const tests: TestDescription[] = [
     name: 'ContextualMenu Test',
     component: ContextualMenuTest,
     testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON,
+  },
+  {
+    name: 'ActivityIndicator Test',
+    component: ActivityIndicatorTest,
+    testPage: HOMEPAGE_ACTIVITYINDICATOR_BUTTON,
+  },
+  {
+    name: 'ActivityIndicatorSvg Test',
+    component: ActivityIndicatorSvgTest,
+    testPage: HOMEPAGE_ACTIVITYINDICATORSVG_BUTTON,
   },
 ];

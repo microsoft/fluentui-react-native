@@ -1,0 +1,2 @@
+export const HOMEPAGE_ACTIVITYINDICATORSVG_BUTTON = 'Homepage_ActivityIndicatorSvg_Button';
+export const ACTIVITYINDICATORSVG_TESTPAGE = 'ActivityIndicatorSvg_TestPage';
