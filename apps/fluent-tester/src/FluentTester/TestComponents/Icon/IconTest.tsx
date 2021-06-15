@@ -63,27 +63,27 @@ const icons: React.FunctionComponent<{}> = () => {
             // We've seen some issues getting Font Awesome to link properly on Apple platforms in the FURN test app specifically.
             // This shouldn't be an issue in other apps, though, so keeping this icon Windows-only for now is an easy workaround.
             // When Android support comes, the platform check can be adjusted accordingly.
-            Platform.OS == 'windows' ? <Icon fontSource={fontCustomFontProps} width={100} height={100} iconColor="purple" /> : null
+            Platform.OS == 'windows' ? <Icon fontSource={fontCustomFontProps} width={100} height={100} color="purple" /> : null
           }
-          <Icon fontSource={fontBuiltInProps} width={100} height={100} iconColor="#060" />
+          <Icon fontSource={fontBuiltInProps} width={100} height={100} color="#060" />
         </View>
       ) : null}
       {showSvgIcons ? (
         <View>
           <Text>SVG icons</Text>
-          <Icon svgSource={svgProps} width={100} height={100} iconColor="orange" />
+          <Icon svgSource={svgProps} width={100} height={100} color="orange" />
           {
             // TODO: Causes TypeError: Network request failed on Android
-            Platform.OS == 'android' ? null : <Icon svgSource={svgD20DataUriProps} width={100} height={100} iconColor="#7a7" />
+            Platform.OS == 'android' ? null : <Icon svgSource={svgD20DataUriProps} width={100} height={100} color="#7a7" />
           }
-          <Icon svgSource={svgUriProps} width={100} height={100} iconColor="red" />
+          <Icon svgSource={svgUriProps} width={100} height={100} color="red" />
         </View>
       ) : null}
       {showRasterIcons ? (
         <View>
           <Text>Raster icons</Text>
-          <Icon rasterImageSource={rasterRainbowSpectrumProps} width={100} height={100} iconColor="green" />
-          <Icon rasterImageSource={rasterChessProps} width={100} height={100} iconColor="blue" />
+          <Icon rasterImageSource={rasterRainbowSpectrumProps} width={100} height={100} color="green" />
+          <Icon rasterImageSource={rasterChessProps} width={100} height={100} color="blue" />
         </View>
       ) : null}
     </View>
