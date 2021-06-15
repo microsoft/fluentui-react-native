@@ -1,5 +1,5 @@
 import { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
-import { getCurrentAppearace } from '@fluentui-react-native/theming-utils';
+import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { AppleSemanticPalette, FluentUIApplePalette } from './appleColors.types.macos';
 import { PlatformColor, DynamicColorMacOS, ColorWithSystemEffectMacOS } from 'react-native-macos';
 
@@ -284,7 +284,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
   const applePlatform = getAppleSemanticPalette();
 
   // GH:728 Until RN-SVG Supports PlatformColor, we need this workaround
-  const neutralForeground3 = getCurrentAppearace() === 'light' ? '#272727' : '#FFFFFF';
+  const neutralForeground3 = getCurrentAppearance() === 'light' ? '#272727' : '#FFFFFF';
 
   return {
     /* PaletteBackgroundColors & PaletteTextColors */
