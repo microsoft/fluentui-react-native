@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add support for ColorValue",
-  "packageName": "@uifabricshared/foundation-settings",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-05-13T23:20:53.088Z"
-}

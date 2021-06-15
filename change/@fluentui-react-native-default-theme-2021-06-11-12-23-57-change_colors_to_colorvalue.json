@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Move getCurrentAppearence out",
-  "packageName": "@fluentui-react-native/default-theme",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-06-11T19:23:56.799Z"
-}

@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Sat, 06 Mar 2021 00:20:05 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Jun 2021 00:55:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.9.0
+
+Tue, 15 Jun 2021 00:55:36 GMT
+
+### Minor changes
+
+- Add support for ColorValue (ruaraki@microsoft.com)
 
 ## 1.8.0
 

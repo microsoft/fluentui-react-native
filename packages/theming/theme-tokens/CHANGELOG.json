@@ -1,0 +1,26 @@
+{
+  "name": "@fluentui-react-native/theme-tokens",
+  "entries": [
+    {
+      "date": "Tue, 15 Jun 2021 00:55:36 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Initial tokens file, tokens integrated into default theme",
+            "author": "ruaraki@microsoft.com",
+            "commit": "d857262c784f905c3882bd2b3a15c62b80ed4c89",
+            "package": "@fluentui-react-native/theme-tokens"
+          },
+          {
+            "comment": "Integrate token pipeline",
+            "author": "ruaraki@microsoft.com",
+            "commit": "08c72c76fc6183ea8c7ccb1564b86deebb3b0d1a",
+            "package": "@fluentui-react-native/theme-tokens"
+          }
+        ]
+      }
+    }
+  ]
+}

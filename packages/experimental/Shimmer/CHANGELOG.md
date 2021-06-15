@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-This log was last generated on Thu, 13 May 2021 06:18:23 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Jun 2021 00:55:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Tue, 15 Jun 2021 00:55:36 GMT
+
+### Minor changes
+
+- Add support for ColorValue (ruaraki@microsoft.com)
 
 ## 0.2.2
 
