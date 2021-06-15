@@ -208,7 +208,7 @@ const nestedContextualMenu: React.FunctionComponent<{}> = () => {
           {showSubmenu && (
             <Submenu target={stdMenuItemRef} onDismiss={onDismissSubmenu} onShow={onShowSubmenu} setShowMenu={toggleShowSubmenu}>
               <ContextualMenuItem
-                icon={{ svgSource: svgProps, width: 20, height: 20, iconColor: 'red' }}
+                icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }}
                 text="SubmenuItem svg icon"
                 itemKey="4"
                 onClick={onClick}
