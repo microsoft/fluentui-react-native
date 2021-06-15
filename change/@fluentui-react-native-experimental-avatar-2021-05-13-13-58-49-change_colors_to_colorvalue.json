@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Handle ColorValue instead of string as color type",
+  "packageName": "@fluentui-react-native/experimental-avatar",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-05-13T20:57:56.866Z"
+}

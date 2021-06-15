@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "@types/jest": "^25.1.4",
+    "@types/react-native": "^0.63.0",
     "@uifabricshared/build-native": "^0.1.1",
     "react": "16.13.1",
     "react-native": "^0.63.4"

@@ -1,6 +1,7 @@
-import { ColorValue, ThemeColorDefinition } from './Color.types';
+import { ThemeColorDefinition } from './Color.types';
 import { OfficePalette } from './palette.types';
 import { Typography, PartialTypography } from './Typography.types';
+import { ColorValue } from 'react-native';
 
 type TwoLevelPartial<T> = {
   [K in keyof T]?: Partial<T[K]>;
@@ -42,3 +43,26 @@ export type PartialTheme = Omit<TwoLevelPartial<Theme>, 'typography' | 'host'> &
   typography?: PartialTypography;
   host?: TwoLevelPartial<Theme['host']>;
 };
+
+export type AppearanceOptions = 'light' | 'dark';
+
+export interface ThemeOptions {
+  /**
+   * Should the baseline colors be light, dark, or use the values from the Appearance API from react-native.
+   */
+  appearance?: AppearanceOptions | 'dynamic';
+
+  /**
+   * Default appearance should the library to request this from native not be available
+   */
+  defaultAppearance?: AppearanceOptions;
+
+  /**
+   * If in a host that supports multiple areas within the app that use different palettes, this specifies the palette name to
+   * load.
+   *
+   * In Office this corresponds to regions like taskpanes, the ribbon, left navigation, and so on, but that concept could be extended
+   * to any host that wants to support this.
+   */
+  paletteName?: string;
+}

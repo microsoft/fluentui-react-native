@@ -1,4 +1,4 @@
-import { ViewProps } from 'react-native';
+import { ViewProps, ColorValue } from 'react-native';
 
 interface SeparatorPropTokens {
   /**
@@ -18,7 +18,7 @@ export interface SeparatorTokens extends SeparatorPropTokens {
   /**
    * Specifies the color of the separator
    */
-  color?: string;
+  color?: ColorValue;
 }
 
 export interface SeparatorProps extends ViewProps, SeparatorPropTokens {

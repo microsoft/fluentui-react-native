@@ -10,9 +10,8 @@ import {
   withSlots,
   Theme,
 } from '@fluentui-react-native/framework';
-import { Text as RNText } from 'react-native';
+import { Text as RNText, ColorValue } from 'react-native';
 import { filterTextProps, ITextProps } from '@fluentui-react-native/adapters';
-import { ColorValue } from '@fluentui-react-native/theme-types';
 
 const textName = 'Text';
 

@@ -1,18 +1,19 @@
 import { createThemeRegistry } from './Registry';
 import { IThemeRegistry } from './Registry.types';
 import { immutableMerge } from '@fluentui-react-native/immutable-merge';
+import { ColorValue } from 'react-native';
 
 interface IFakeStyle {
   textColor?: string;
-  backgroundColor?: string;
+  backgroundColor?: ColorValue;
   fontFamily?: string;
   fontSize?: string | number;
 }
 
 interface IFakeTheme {
   palette: {
-    bodyBackground?: string;
-    bodyText?: string;
+    bodyBackground?: ColorValue;
+    bodyText?: ColorValue;
   };
   typography: {
     families?: {
@@ -37,13 +38,13 @@ interface IFakeTheme {
 const _platformDefaults: IFakeTheme = {
   palette: {
     bodyBackground: '#000000',
-    bodyText: '#ffffff'
+    bodyText: '#ffffff',
   },
   typography: {
     families: {
       primary: 'Platform Font Primary',
-      monospace: 'Platform Font Monospace'
-    }
+      monospace: 'Platform Font Monospace',
+    },
   },
   spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
   settings: {
@@ -51,10 +52,10 @@ const _platformDefaults: IFakeTheme = {
       root: {
         textColor: 'black',
         fontFamily: 'Verdana',
-        fontSize: 10
-      }
-    }
-  }
+        fontSize: 10,
+      },
+    },
+  },
 };
 
 const _ocean: Partial<IFakeTheme> = {
@@ -62,27 +63,27 @@ const _ocean: Partial<IFakeTheme> = {
     base: {
       root: {
         textColor: 'blue',
-        fontFamily: 'Arial'
-      }
+        fontFamily: 'Arial',
+      },
     },
     MyButton: {
       root: {
-        fontSize: 12
-      }
-    }
-  }
+        fontSize: 12,
+      },
+    },
+  },
 };
 
 const _platformDefaultsMergedWithOcean: IFakeTheme = {
   palette: {
     bodyBackground: '#000000',
-    bodyText: '#ffffff'
+    bodyText: '#ffffff',
   },
   typography: {
     families: {
       primary: 'Platform Font Primary',
-      monospace: 'Platform Font Monospace'
-    }
+      monospace: 'Platform Font Monospace',
+    },
   },
   spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
   settings: {
@@ -90,15 +91,15 @@ const _platformDefaultsMergedWithOcean: IFakeTheme = {
       root: {
         textColor: 'blue',
         fontFamily: 'Arial',
-        fontSize: 10
-      }
+        fontSize: 10,
+      },
     },
     MyButton: {
       root: {
-        fontSize: 12
-      }
-    }
-  }
+        fontSize: 12,
+      },
+    },
+  },
 };
 
 function processor(parent: IFakeTheme): Partial<IFakeTheme> {
@@ -108,23 +109,23 @@ function processor(parent: IFakeTheme): Partial<IFakeTheme> {
         root: {
           textColor: 'light' + (parent.settings.base.root as IFakeStyle).textColor,
           fontFamily: (parent.settings.base.root as IFakeStyle).fontFamily + ' Light',
-          fontSize: <number>(parent.settings.base.root as IFakeStyle).fontSize - 2
-        }
-      }
-    }
+          fontSize: <number>(parent.settings.base.root as IFakeStyle).fontSize - 2,
+        },
+      },
+    },
   };
 }
 
 const _platformDefaultsMergedWithProcessor: IFakeTheme = {
   palette: {
     bodyBackground: '#000000',
-    bodyText: '#ffffff'
+    bodyText: '#ffffff',
   },
   typography: {
     families: {
       primary: 'Platform Font Primary',
-      monospace: 'Platform Font Monospace'
-    }
+      monospace: 'Platform Font Monospace',
+    },
   },
   spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
   settings: {
@@ -132,10 +133,10 @@ const _platformDefaultsMergedWithProcessor: IFakeTheme = {
       root: {
         textColor: 'lightblack',
         fontFamily: 'Verdana Light',
-        fontSize: 8
-      }
-    }
-  }
+        fontSize: 8,
+      },
+    },
+  },
 };
 
 function fakeThemeResolver(parent: IFakeTheme, partial?: Partial<IFakeTheme>): IFakeTheme {

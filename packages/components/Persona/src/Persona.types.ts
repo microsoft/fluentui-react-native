@@ -2,6 +2,7 @@ import { IPersonaCoinProps, IPersonaCoinTokens } from '@fluentui-react-native/pe
 import type { IViewProps, ITextProps } from '@fluentui-react-native/adapters';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { FontTokens } from '@fluentui-react-native/tokens';
+import { ColorValue } from 'react-native';
 
 export const personaName = 'RNFPersona';
 
@@ -28,7 +29,7 @@ export interface IPersonaTokens extends Omit<IPersonaCoinTokens, 'backgroundColo
   verticalGap?: number;
   horizontalGap?: number;
 
-  coinBackgroundColor?: string;
+  coinBackgroundColor?: ColorValue;
 
   textFont?: FontTokens;
   secondaryFont?: FontTokens;
