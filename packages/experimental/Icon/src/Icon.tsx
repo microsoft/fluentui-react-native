@@ -86,7 +86,7 @@ export const Icon = stagedComponent((props: IconProps) => {
   const theme = useTheme();
 
   return (rest: IconProps) => {
-    const color = props.color || theme.colors.buttonContent;
+    const color = props.color || theme.colors.buttonText;
 
     const baseProps: IconProps = {
       color: color,

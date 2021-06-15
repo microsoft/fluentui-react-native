@@ -1,7 +1,7 @@
 import { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
+import { getCurrentAppearace } from '@fluentui-react-native/theming-utils';
 import { AppleSemanticPalette, FluentUIApplePalette } from './appleColors.types.macos';
 import { PlatformColor, DynamicColorMacOS, ColorWithSystemEffectMacOS } from 'react-native-macos';
-import { Appearance } from 'react-native';
 
 /** Creates a Palette of PlatformColors defined for macOS */
 export function getAppleSemanticPalette(): AppleSemanticPalette {
@@ -283,8 +283,8 @@ export function fallbackApplePalette(): ThemeColorDefinition {
   const fluentUIApple = getFluentUIApplePalette();
   const applePlatform = getAppleSemanticPalette();
 
-  // GH:## Until RN-SVG Supports PlatformColor, we need this workaround
-  const neutralForeground3 = Appearance.getColorScheme() === 'light' ? '#272727' : '#FFFFFF';
+  // GH:728 Until RN-SVG Supports PlatformColor, we need this workaround
+  const neutralForeground3 = getCurrentAppearace() === 'light' ? '#272727' : '#FFFFFF';
 
   return {
     /* PaletteBackgroundColors & PaletteTextColors */
@@ -389,27 +389,27 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     buttonBackground: fluentUIApple.neutralBackground3,
     buttonBorder: 'transparent',
     buttonContent: fluentUIApple.neutralForeground3,
-    buttonIcon: neutralForeground3, //GH:### Icon doesn't support PlatformColor
+    buttonIcon: neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     buttonHoveredBackground: fluentUIApple.neutralBackground3,
     buttonHoveredBorder: 'transparent',
     buttonHoveredContent: fluentUIApple.neutralForeground3,
-    buttonHoveredIcon: neutralForeground3, //GH:### Icon doesn't support PlatformColor
+    buttonHoveredIcon: neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     buttonFocusedBackground: fluentUIApple.neutralBackground3,
     buttonFocusedBorder: 'transparent',
     buttonFocusedContent: fluentUIApple.neutralForeground3,
-    buttonFocusedIcon: neutralForeground3, //GH:### Icon doesn't support PlatformColor
+    buttonFocusedIcon: neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     buttonPressedBackground: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'pressed'),
     buttonPressedBorder: 'transparent',
     buttonPressedContent: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
-    buttonPressedIcon: neutralForeground3, //GH:### Icon doesn't support PlatformColor
+    buttonPressedIcon: neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     buttonDisabledBackground: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'disabled'),
     buttonDisabledBorder: 'transparent',
     buttonDisabledContent: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
-    buttonDisabledIcon: neutralForeground3, //GH:### Icon doesn't support PlatformColor
+    buttonDisabledIcon: neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     ghostBackground: 'transparent',
     ghostBorder: 'transparent',
@@ -429,7 +429,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     ghostPressedBackground: 'transparent',
     ghostPressedBorder: 'transparent',
     ghostPressedContent: ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'deepPressed'),
-    ghostPressedIcon: neutralForeground3, //GH:### Icon doesn't support PlatformColor
+    ghostPressedIcon: neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     ghostDisabledBackground: 'transparent',
     ghostDisabledBorder: 'transparent',
@@ -459,7 +459,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     brandDisabledBackground: fluentUIApple.brandBackgroundDisabled,
     brandDisabledBorder: 'transparent',
     brandDisabledContent: fluentUIApple.brandForegroundDisabled,
-    brandDisabledIcon: neutralForeground3, //GH:### Icon doesn't support PlatformColor
+    brandDisabledIcon: neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     buttonCheckedBackground: fluentUIApple.communicationBlue,
     buttonCheckedContent: fluentUIApple.neutralInverted,
