@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Tue, 15 Jun 2021 00:55:36 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Jun 2021 17:13:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.1
+
+Tue, 15 Jun 2021 17:13:57 GMT
+
+### Patches
+
+- Fix a case where the exception can be undefined/null because cast fails (ruaraki@microsoft.com)
 
 ## 0.7.0
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 15 Jun 2021 00:55:36 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Jun 2021 17:13:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.25.1
+
+Tue, 15 Jun 2021 17:13:57 GMT
+
+### Patches
+
+- Return default theme of tester to Default (ruaraki@microsoft.com)
 
 ## 0.25.0
 

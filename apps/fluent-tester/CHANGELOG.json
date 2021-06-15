@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 15 Jun 2021 17:13:57 GMT",
+      "tag": "@fluentui-react-native/tester_v0.25.1",
+      "version": "0.25.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Return default theme of tester to Default",
+            "author": "ruaraki@microsoft.com",
+            "commit": "3f15e3f58fa7b7c43d1b2e9bfc9f164fa770fbe1",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Jun 2021 00:55:36 GMT",
       "tag": "@fluentui-react-native/tester_v0.25.0",
       "version": "0.25.0",
