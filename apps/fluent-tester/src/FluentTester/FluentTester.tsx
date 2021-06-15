@@ -206,7 +206,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const TesterContent: React.FunctionComponent<{}> = () => {
     return (
-      <RootView style={themedStyles.root}>
+      <View style={{ flex: 1 }}>
         {enableSinglePaneView ? <MobileHeader /> : <Header />}
 
         <HeaderSeparator />
@@ -215,24 +215,21 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
           {enableSinglePaneView ? <MobileTestList /> : <TestList />}
           {enableSinglePaneView ? <MobileTestComponentView /> : <TestComponentView />}
         </View>
-      </RootView>
+      </View>
     );
   };
 
-  const Win32TesterContent: React.FunctionComponent<{}> = () => {
-    return (
-      <FocusTrapZone style={themedStyles.root}>
-        {enableSinglePaneView ? <MobileHeader /> : <Header />}
-
-        <HeaderSeparator />
-
-        <View style={fluentTesterStyles.testRoot}>
-          {enableSinglePaneView ? <MobileTestList /> : <TestList />}
-          {enableSinglePaneView ? <MobileTestComponentView /> : <TestComponentView />}
-        </View>
-      </FocusTrapZone>
-    );
-  };
-
-  return Platform.OS === ('win32' as any) ? <Win32TesterContent /> : <TesterContent />;
+  return (
+    <View style={{ flex: 1 }}>
+      {Platform.OS === ('win32' as any) ? (
+        <FocusTrapZone style={themedStyles.root}>
+          <TesterContent />
+        </FocusTrapZone>
+      ) : (
+        <RootView style={themedStyles.root}>
+          <TesterContent />
+        </RootView>
+      )}
+    </View>
+  );
 };
