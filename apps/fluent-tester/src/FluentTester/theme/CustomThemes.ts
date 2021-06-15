@@ -23,7 +23,7 @@ export const lightnessOptions = [
 ];
 
 export class TesterThemeReference extends ThemeReference {
-  private _themeName: ThemeNames = 'Office';
+  private _themeName: ThemeNames = 'Default';
   private _brand: OfficeBrand = 'Default';
 
   private options: ThemeOptions;
