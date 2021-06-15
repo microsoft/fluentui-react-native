@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "add useOnPressWithFocus hook",
-  "packageName": "@fluentui-react-native/radio-group",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-05-28T21:33:17.067Z"
-}

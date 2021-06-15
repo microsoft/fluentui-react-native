@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Tue, 15 Jun 2021 00:55:36 GMT",
+      "tag": "@fluentui-react-native/button_v0.17.0",
+      "version": "0.17.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Handle ColorValue instead of string as color type",
+            "author": "ruaraki@microsoft.com",
+            "commit": "90e0dcb92a4ea4ee5ea5373f2c54defa127749bf",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 02 Jun 2021 17:30:36 GMT",
+      "tag": "@fluentui-react-native/button_v0.16.1",
+      "version": "0.16.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add useOnPressWithFocus hook",
+            "author": "krsiler@microsoft.com",
+            "commit": "1d9f21958a7c94c0ca3d57856f060662ae34796e",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 25 May 2021 00:42:50 GMT",
       "tag": "@fluentui-react-native/button_v0.16.0",
       "version": "0.16.0",

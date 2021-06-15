@@ -1,6 +1,7 @@
 import { IComponentSettings } from './Settings.types';
 import { mergeSettings } from './Settings';
 import { StyleProp } from '@fluentui-react-native/merge-props';
+import { ColorValue } from 'react-native';
 
 interface IProps {
   root: {
@@ -10,7 +11,7 @@ interface IProps {
       fontFamily?: string;
       fontWeight?: 'light' | 'normal' | 'bold';
       fontSize?: number;
-      textColor?: string;
+      textColor?: ColorValue;
     }>;
   };
   slot1: {

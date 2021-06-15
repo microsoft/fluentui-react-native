@@ -1,4 +1,4 @@
-import { ImageURISource } from 'react-native';
+import { ImageURISource, ColorValue } from 'react-native';
 
 export const nativeButtonName = 'NativeButton';
 
@@ -38,7 +38,7 @@ export interface NativeButtonTokens {
    * Button background color
    * (only works for macOS)
    */
-  accentColor?: string;
+  accentColor?: ColorValue;
 }
 
 // iOS maps acrylic to primary style since it's a mac specifc style

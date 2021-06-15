@@ -14,7 +14,7 @@ An extremely simple example might look like:
 const useSyling = buildUseStyling(myComponentOptions, themeHelper);
 
 // component implementation, consuming the styling hook
-const MyComponent = props => {
+const MyComponent = (props) => {
   // get some default/styled props for the container and content child components
   const { container, content } = useStyling(props);
   // render as normal but mixin those values to pass the props to the sub-components
@@ -103,7 +103,7 @@ A token is simply a setting that informs the styling of the component. These can
 ```ts
 /** Tokens interface for this component */
 interface Tokens {
-  backgroundColor?: string;
+  backgroundColor?: ColorValue;
   borderWidth?: number;
   borderRadius?: number;
 }
@@ -160,9 +160,9 @@ Some components may have additional states or modes that can be applied to them.
 ```ts
 interface ButtonTokens {
   // base values
-  backgroundColor?: string;
-  color?: string;
-  borderColor?: string;
+  backgroundColor?: ColorValue;
+  color?: ColorValue;
+  borderColor?: ColorValue;
 
   // states
   hovered?: ButtonTokens;
@@ -205,7 +205,7 @@ const Button = (props: ButtonProps) => {
   // get some state value that figures out whether the button is pressed and/or hovered
   const buttonState: ButtonState = useButtonState(props);
   // get styling values based on props and the current state
-  const { container, icon, label } = useStyling(props, stateName => buttonState[stateName]);
+  const { container, icon, label } = useStyling(props, (stateName) => buttonState[stateName]);
 
   const buttonProps = useButtonMagic(props, container);
   return (
@@ -270,16 +270,19 @@ If there are no tokens which are also props, i.e. if `tokensProps` is falsy, thi
 
 ```ts
 const slotFn = (tokens: Tokens, theme: Theme, cache: GetMemoValue<Props>) =>
-  cache(() => {
-    return {
-      style: {
-        backgroundColor: tokens.backgroundColor,
-        // etc.
-      },
-    };
-  }, [
-    /* no keys, just direct cache the function result*/
-  ])[0];
+  cache(
+    () => {
+      return {
+        style: {
+          backgroundColor: tokens.backgroundColor,
+          // etc.
+        },
+      };
+    },
+    [
+      /* no keys, just direct cache the function result*/
+    ],
+  )[0];
 ```
 
 If some all props are tokens then those keys should be considered in the caching. This would then turn into:

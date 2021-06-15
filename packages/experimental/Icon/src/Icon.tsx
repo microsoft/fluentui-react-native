@@ -6,6 +6,7 @@ import { SvgUri } from 'react-native-svg';
 import { mergeStyles } from '@fluentui-react-native/framework';
 import { stagedComponent, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
 import { useTheme } from '@fluentui-react-native/theme-types';
+import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 
 const rasterImageStyleCache = getMemoCache<ImageStyle>();
 
@@ -55,16 +56,25 @@ function renderSvg(iconProps: IconProps) {
   const viewBox = iconProps.svgSource.viewBox;
   const style = mergeStyles(iconProps.style, rasterImageStyleCache({ width: width, height: height }, [width, height])[0]);
 
+  // react-native-svg is still on 0.61, and their color prop doesn't handle ColorValue
+  // If a color for the icon is not supplied, fall back to white or black depending on appearance
+  const theme = useTheme();
+  const iconColor = svgIconProps.color
+    ? svgIconProps.color
+    : getCurrentAppearance(theme.host.appearance, 'light') === 'dark'
+    ? '#FFFFFF'
+    : '#000000';
+
   if (svgIconProps.src) {
     return (
       <View style={style}>
-        <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconProps.color} />
+        <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconColor} />
       </View>
     );
   } else if (svgIconProps.uri) {
     return (
       <View style={style}>
-        <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconProps.color} />
+        <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconColor} />
       </View>
     );
   } else {
@@ -78,7 +88,7 @@ export const Icon = stagedComponent((props: IconProps) => {
   return (rest: IconProps) => {
     const color = props.color || theme.colors.buttonText;
 
-    const baseProps = {
+    const baseProps: IconProps = {
       color: color,
     };
 

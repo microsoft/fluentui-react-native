@@ -2,16 +2,17 @@ import { IComponentSettings, mergeSettings } from '@uifabricshared/foundation-se
 import { ISettingsEntry, ISettingsFromTheme } from './CustomSettings.types';
 import { mergeBaseSettings, getThemedSettings } from './CustomSettings';
 import { getMemoCache } from '@fluentui-react-native/memo-cache';
+import { ColorValue } from 'react-native';
 
 interface IMockTheme {
   palette: {
-    buttonBackground?: string;
-    buttonText?: string;
-    buttonBorder?: string;
-    buttonBackgroundHovered?: string;
-    buttonTextHovered?: string;
-    windowText?: string;
-    windowBackground?: string;
+    buttonBackground?: ColorValue;
+    buttonText?: ColorValue;
+    buttonBorder?: ColorValue;
+    buttonBackgroundHovered?: ColorValue;
+    buttonTextHovered?: ColorValue;
+    windowText?: ColorValue;
+    windowBackground?: ColorValue;
   };
   typography: {
     fontSizes: {
@@ -30,23 +31,23 @@ const _theme: IMockTheme = {
     buttonBorder: 'bb',
     buttonText: 'bt',
     windowBackground: 'wb',
-    windowText: 'wt'
+    windowText: 'wt',
   },
   typography: {
     fontSizes: {
       large: 14,
       medium: 12,
-      small: 10
-    }
-  }
+      small: 10,
+    },
+  },
 };
 
 interface IMockProps {
-  backgroundColor?: string;
-  color?: string;
+  backgroundColor?: ColorValue;
+  color?: ColorValue;
   fontSize?: number;
   borderWidth?: number;
-  borderColor?: string;
+  borderColor?: ColorValue;
   value?: string;
 }
 
@@ -62,67 +63,67 @@ const _lookup: { [key: string]: IMockButtonSettings } = {
       value: 'foo',
       backgroundColor: 'red',
       color: 'val1',
-      borderWidth: 2
+      borderWidth: 2,
     },
     content: {
       color: 'green',
       value: 'val1',
-      fontSize: 10
+      fontSize: 10,
     },
     icon: {
-      color: 'black'
+      color: 'black',
     },
     _precedence: ['primary', 'hovered', 'pressed'],
     _overrides: {
       primary: {
         root: {
-          backgroundColor: 'purple'
+          backgroundColor: 'purple',
         },
         _overrides: {
           hovered: {
             root: {
-              backgroundColor: 'pink'
-            }
+              backgroundColor: 'pink',
+            },
           },
           pressed: {
             root: {
-              backgroundColor: 'orange'
-            }
-          }
-        }
+              backgroundColor: 'orange',
+            },
+          },
+        },
       },
       hovered: {
         root: {
-          backgroundColor: 'gray'
-        }
+          backgroundColor: 'gray',
+        },
       },
       pressed: {
         root: {
-          backgroundColor: 'white'
-        }
-      }
-    }
+          backgroundColor: 'white',
+        },
+      },
+    },
   },
   val2: {
     root: {
       color: '#1c1c1c',
-      value: 'val2'
-    }
-  }
+      value: 'val2',
+    },
+  },
 };
 
 const val1rootHovered: IMockButtonSettings['root'] = {
   value: 'foo',
   backgroundColor: 'gray',
   color: 'val1',
-  borderWidth: 2
+  borderWidth: 2,
 };
 
 const val1primaryHovered: IMockButtonSettings['root'] = {
   value: 'foo',
   backgroundColor: 'pink',
   color: 'val1',
-  borderWidth: 2
+  borderWidth: 2,
 };
 
 function getSettings(_t: IMockTheme, name: string) {
@@ -137,25 +138,25 @@ const result1 = _lookup.val1;
 const fragment2: IMockButtonSettings = {
   root: { borderWidth: 3, backgroundColor: 'yellow' },
   content: { value: 'cs1' },
-  _precedence: ['hovered', 'pressed']
+  _precedence: ['hovered', 'pressed'],
 };
 
-const themeFn2: ISettingsFromTheme<IMockButtonSettings, IMockTheme> = t => ({
+const themeFn2: ISettingsFromTheme<IMockButtonSettings, IMockTheme> = (t) => ({
   root: {
     color: t.palette.buttonText,
-    borderColor: t.palette.buttonBackground
+    borderColor: t.palette.buttonBackground,
   },
   content: {
-    color: t.palette.buttonText
+    color: t.palette.buttonText,
   },
   _overrides: {
     hovered: {
       root: {
         color: t.palette.buttonTextHovered,
-        backgroundColor: t.palette.buttonBackgroundHovered
-      }
-    }
-  }
+        backgroundColor: t.palette.buttonBackgroundHovered,
+      },
+    },
+  },
 });
 
 const customSettings2: ICustomSettingsBlock = [fragment2, 'val2', themeFn2];

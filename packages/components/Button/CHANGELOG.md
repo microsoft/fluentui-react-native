@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Tue, 25 May 2021 00:42:50 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Jun 2021 00:55:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.0
+
+Tue, 15 Jun 2021 00:55:36 GMT
+
+### Minor changes
+
+- Handle ColorValue instead of string as color type (ruaraki@microsoft.com)
+
+## 0.16.1
+
+Wed, 02 Jun 2021 17:30:36 GMT
+
+### Patches
+
+- add useOnPressWithFocus hook (krsiler@microsoft.com)
 
 ## 0.16.0
 
