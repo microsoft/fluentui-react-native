@@ -58,7 +58,7 @@
 			"tint60": "#f3f9fd"
 		},
 		"brand": {
-			"primary": "#106ebe",
+			"primary": "#0078d4",
 			"shade10": "#106ebe",
 			"shade20": "#005a9e",
 			"shade30": "#004c87",
@@ -808,10 +808,10 @@
 			"1000": 68
 		},
 		"weight": {
-			"bold": 700,
-			"medium": 500,
-			"regular": 400,
-			"semibold": 600
+			"bold": "700",
+			"medium": "500",
+			"regular": "400",
+			"semibold": "600"
 		}
 	},
 	"padding": {

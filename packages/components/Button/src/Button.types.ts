@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PressableProps, ViewProps } from 'react-native';
+import { PressableProps, ViewProps, ColorValue } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
 import { IPressableProps } from '@fluentui-react-native/pressable';
@@ -54,17 +54,17 @@ export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBack
   /**
    * The icon color.
    */
-  iconColor?: string;
+  iconColor?: ColorValue;
 
   /**
    * The icon color when hovering over the Button.
    */
-  iconColorHovered?: string;
+  iconColorHovered?: ColorValue;
 
   /**
    * The icon color when the Button is being pressed.
    */
-  iconColorPressed?: string;
+  iconColorPressed?: ColorValue;
 
   /**
    * The size of the icon.

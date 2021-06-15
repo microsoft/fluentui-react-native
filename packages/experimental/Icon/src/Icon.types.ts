@@ -1,6 +1,5 @@
 import { SvgProps } from 'react-native-svg';
-import { AccessibilityProps, ImageProps, ImageStyle, StyleProp, TextStyle } from 'react-native';
-import { ColorValue } from '@fluentui-react-native/theme-types';
+import { AccessibilityProps, ImageProps, ImageStyle, StyleProp, TextStyle, ColorValue } from 'react-native';
 export const iconName = 'Icon';
 
 export interface FontIconProps {
@@ -14,6 +13,7 @@ export interface SvgIconProps {
   uri?: string;
   src?: React.FC<SvgProps>;
   viewBox?: string;
+  color?: string;
 }
 
 export interface RasterImageIconProps {
