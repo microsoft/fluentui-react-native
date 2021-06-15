@@ -40,6 +40,7 @@ export interface IActivityRingConfig {
   ringColor?: Color; // glow
   ringBackgroundColor?: Color; // inner/outer rings
   ringThickness?: RingThickness;
+  innerGap?: RingThickness;
 }
 
 export interface IPersonaConfigurableProps {

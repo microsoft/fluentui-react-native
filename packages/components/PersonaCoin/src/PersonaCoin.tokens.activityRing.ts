@@ -12,7 +12,12 @@ function _buildActivityRingStyles(tokenProps: IPersonaCoinTokens, theme: ITheme)
 
   if (!activityRing) return {};
 
-  const effectiveRingThickness = 3 * getRingThickness(activityRing.ringThickness || 'xxlarge');
+  const innerGap =
+    activityRing.innerGap != undefined
+      ? getRingThickness(activityRing.innerGap)
+      : getRingThickness(activityRing.ringThickness || 'xxlarge');
+
+  const effectiveRingThickness = 2 * getRingThickness(activityRing.ringThickness || 'xxlarge') + innerGap;
   const effectiveSize = physicalSize + 2 * effectiveRingThickness;
   const ringColor = activityRing.transparent ? 'transparent' : activityRing.ringBackgroundColor || theme.colors.personaActivityRing;
 
@@ -37,7 +42,12 @@ function _buildActivityGlowStyles(tokenProps: IPersonaCoinTokens, theme: ITheme)
 
   if (!activityRing) return {};
 
-  const effectiveRingThickness = 2 * getRingThickness(activityRing.ringThickness || 'xxlarge');
+  const innerGap =
+    activityRing.innerGap != undefined
+      ? getRingThickness(activityRing.innerGap)
+      : getRingThickness(activityRing.ringThickness || 'xxlarge');
+
+  const effectiveRingThickness = getRingThickness(activityRing.ringThickness || 'xxlarge') + innerGap;
   const effectiveSize = physicalSize + 2 * effectiveRingThickness;
   const glowColor = activityRing.accent ? theme.colors.accentButtonBackground : activityRing.ringColor || theme.colors.personaActivityGlow;
 
@@ -45,7 +55,7 @@ function _buildActivityGlowStyles(tokenProps: IPersonaCoinTokens, theme: ITheme)
     style: {
       borderStyle: 'solid',
       borderColor: glowColor,
-      borderWidth: effectiveRingThickness / 2,
+      borderWidth: effectiveRingThickness - innerGap,
       borderRadius: effectiveSize / 2,
       width: effectiveSize,
       height: effectiveSize,

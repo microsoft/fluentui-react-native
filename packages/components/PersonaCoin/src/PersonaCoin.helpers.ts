@@ -123,6 +123,6 @@ export function getRingThickness(thickness: RingThickness): number {
     case 'xxlarge':
       return 4;
     default:
-      return 4;
+      return thickness < 0 ? 4 : thickness;
   }
 }
