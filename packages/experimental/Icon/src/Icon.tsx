@@ -41,9 +41,9 @@ function renderFontIcon(iconProps: IconProps) {
           : fontSource.fontFamily,
       codepoint: fontSource.codepoint,
       fontSize: fontSource.fontSize,
-      color: iconProps.iconColor,
+      color: iconProps.color,
     },
-    [iconProps.iconColor, fontSource.fontSrcFile, fontSource.fontFamily, fontSource.codepoint, fontSource.codepoint],
+    [iconProps.color, fontSource.fontSrcFile, fontSource.fontFamily, fontSource.codepoint, fontSource.codepoint],
   )[0];
 
   const char = String.fromCharCode(fontSource.codepoint);
@@ -86,7 +86,7 @@ export const Icon = stagedComponent((props: IconProps) => {
   const theme = useTheme();
 
   return (rest: IconProps) => {
-    const color = props.iconColor || theme.colors.buttonContent;
+    const color = props.color || theme.colors.buttonContent;
 
     const baseProps: IconProps = {
       color: color,

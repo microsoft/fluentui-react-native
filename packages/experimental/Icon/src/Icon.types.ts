@@ -27,5 +27,5 @@ export interface IconProps extends AccessibilityProps {
   style?: StyleProp<ImageStyle | TextStyle>;
   width?: number;
   height?: number;
-  iconColor?: ColorValue;
+  color?: ColorValue;
 }
