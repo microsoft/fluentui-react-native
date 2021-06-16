@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/foundation-tokens
 
-This log was last generated on Fri, 23 Oct 2020 22:27:37 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Jun 2021 00:55:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.0
+
+Tue, 15 Jun 2021 00:55:36 GMT
+
+### Minor changes
+
+- Add support for ColorValue (ruaraki@microsoft.com)
 
 ## 0.8.0
 
