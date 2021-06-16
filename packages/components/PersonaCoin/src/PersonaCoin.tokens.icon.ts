@@ -22,7 +22,7 @@ function _buildIconStyles(tokenProps: IPersonaCoinTokens, theme: ITheme): ImageP
       borderRadius: iconSizeAdjusted / 2,
       borderWidth: iconStrokeWidth,
       borderColor: iconStrokeColor,
-    }
+    },
   };
 }
 

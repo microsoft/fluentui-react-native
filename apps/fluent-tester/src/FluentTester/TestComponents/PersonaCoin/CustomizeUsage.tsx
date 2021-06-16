@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { PersonaCoin, IconAlignment, IPersonaCoinTokens } from '@fluentui/react-native';
-import { Switch, View, Text, TextInput } from 'react-native';
+import { Switch, View, Text, TextInput, TextStyle } from 'react-native';
 import { Slider } from '../Common/Slider';
 import { steveBallmerPhotoUrl } from './styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -20,7 +20,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [verticalAlignment, setVerticalAlignment] = React.useState<IconAlignment>();
 
   const theme = useTheme();
-  const textBoxBorderStyle = {
+  const textBoxBorderStyle: TextStyle = {
     borderColor: theme.colors.inputBorder,
   };
 
