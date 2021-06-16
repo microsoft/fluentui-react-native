@@ -6,8 +6,7 @@ export const settings: IComposeSettings<IButtonType> = [
   {
     tokens: {
       backgroundColor: 'buttonBackground',
-      color: 'buttonContent',
-      iconColor: 'buttonIcon',
+      color: 'buttonText',
       borderColor: 'buttonBorder',
       borderWidth: 1,
       borderRadius: 12,
