@@ -3,6 +3,7 @@ import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { AppleSemanticPalette, FluentUIApplePalette } from './appleColors.types.macos';
 import { PlatformColor, DynamicColorMacOS, ColorWithSystemEffectMacOS } from 'react-native-macos';
 import { Appearance } from 'react-native';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 /** Creates a Palette of PlatformColors defined for macOS */
 export function getAppleSemanticPalette(): AppleSemanticPalette {
@@ -56,46 +57,46 @@ export function getAppleSemanticPalette(): AppleSemanticPalette {
 
 function getFluentUIApplePalette(): FluentUIApplePalette {
   return {
-    blue10: '#4F6BED',
-    blueMagenta20: '#8764B8',
-    blueMagenta30: '#5C2E91',
+    blue10: globalTokens.color.cornflower.primary,
+    blueMagenta20: globalTokens.color.orchid.primary,
+    blueMagenta30: globalTokens.color.purple.primary,
     communicationBlue: DynamicColorMacOS({
-      light: '#0078D4',
+      light: globalTokens.color.brand.primary,
       dark: '#1890F1',
     }),
     communicationBlueShade10: DynamicColorMacOS({
-      light: '#106EBE',
+      light: globalTokens.color.brand.shade10,
       dark: '#1890F1',
     }),
     communicationBlueShade20: DynamicColorMacOS({
-      light: '#005A9E',
-      dark: '#3AA0F3',
+      light: globalTokens.color.brand.shade20,
+      dark: globalTokens.color.brand.tint20,
     }),
     communicationBlueShade30: DynamicColorMacOS({
-      light: '#004578',
-      dark: '#6CB8F6',
+      light: globalTokens.color.brand.shade40,
+      dark: globalTokens.color.brand.tint30,
     }),
     communicationBlueTint10: DynamicColorMacOS({
       light: '#2B88D8',
-      dark: '#0078D4',
+      dark: globalTokens.color.brand.primary,
     }),
     communicationBlueTint20: DynamicColorMacOS({
-      light: '#C7E0F4',
-      dark: '#004C87',
+      light: globalTokens.color.brand.tint40,
+      dark: globalTokens.color.brand.shade30,
     }),
     communicationBlueTint30: DynamicColorMacOS({
-      light: '#DEECF9',
-      dark: '#043862',
+      light: globalTokens.color.brand.tint50,
+      dark: globalTokens.color.brand.shade50,
     }),
     communicationBlueTint40: DynamicColorMacOS({
-      light: '#EFF6FC',
-      dark: '#092C47',
+      light: globalTokens.color.brand.tint60,
+      dark: globalTokens.color.brand.shade60,
     }),
 
-    cyan20: '#038387',
-    cyan30: '#005B70',
-    cyanBlue10: '#0078D4',
-    cyanBlue20: '#004E8C',
+    cyan20: globalTokens.color.teal.primary,
+    cyan30: globalTokens.color.steel.primary,
+    cyanBlue10: globalTokens.color.blue.primary,
+    cyanBlue20: globalTokens.color.royalBlue.primary,
     dangerPrimary: DynamicColorMacOS({
       light: '#D92C2C',
       dark: '#clear',
@@ -128,10 +129,10 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
       light: '#F9D9D9',
       dark: '#clear',
     }),
-    gray20: '#69797E',
+    gray20: globalTokens.color.platinum.primary,
     gray25: '#F8F8F8',
-    gray30: '#7A7574',
-    gray40: '#393939',
+    gray30: globalTokens.color.beige.primary,
+    gray40: globalTokens.color.charcoal.primary,
     gray50: '#F1F1F1',
     gray100: '#E1E1E1',
     gray200: '#C8C8C8',
@@ -143,15 +144,15 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
     gray800: '#292929',
     gray900: '#212121',
     gray950: '#141414',
-    green10: '#498205',
-    green20: '#0B6A0B',
-    magenta10: '#C239B3',
-    magenta20: '#881798',
-    magentaPink10: '#E3008C',
-    orange20: '#CA5010',
-    orange30: '#8E562E',
-    orangeYellow20: '#986F0B',
-    pinkRed10: '#750B1C',
+    green10: globalTokens.color.forest.primary,
+    green20: globalTokens.color.darkGreen.primary,
+    magenta10: globalTokens.color.berry.primary,
+    magenta20: globalTokens.color.grape.primary,
+    magentaPink10: globalTokens.color.hotPink.primary,
+    orange20: globalTokens.color.pumpkin.primary,
+    orange30: globalTokens.color.brown.primary,
+    orangeYellow20: globalTokens.color.brass.primary,
+    pinkRed10: globalTokens.color.darkRed.primary,
     presenceAvailable: DynamicColorMacOS({
       light: '#6BB700',
       dark: '#92C353',
@@ -161,15 +162,15 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
       dark: '#F8D22A',
     }),
     presenceBlocked: DynamicColorMacOS({
-      light: '#C50F1F',
+      light: globalTokens.color.cranberry.primary,
       dark: '#D74553',
     }),
     presenceBusy: DynamicColorMacOS({
-      light: '#C50F1F',
+      light: globalTokens.color.cranberry.primary,
       dark: '#D74553',
     }),
     presenceDnd: DynamicColorMacOS({
-      light: '#C50F1F',
+      light: globalTokens.color.cranberry.primary,
       dark: '#D74553',
     }),
     presenceOffline: DynamicColorMacOS({
@@ -184,38 +185,38 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
       light: '#8A8886',
       dark: '#979593',
     }),
-    red10: '#D13438',
-    red20: '#A4262C',
+    red10: globalTokens.color.red.primary,
+    red20: globalTokens.color.burgundy.primary,
     successPrimary: DynamicColorMacOS({
-      light: '#13A10E',
+      light: globalTokens.color.lightGreen.primary,
       dark: '#979593',
     }),
     successShade10: DynamicColorMacOS({
-      light: '#11910D',
+      light: globalTokens.color.lightGreen.shade10,
       dark: '#20BA53',
     }),
     successShade20: DynamicColorMacOS({
-      light: '#0F7A0B',
+      light: globalTokens.color.lightGreen.shade20,
       dark: '#3BC569',
     }),
     successShade30: DynamicColorMacOS({
-      light: '#0B5A08',
+      light: globalTokens.color.lightGreen.shade30,
       dark: '#67D48B',
     }),
     successTint10: DynamicColorMacOS({
-      light: '#27AC22',
+      light: globalTokens.color.lightGreen.tint10,
       dark: '#0D9D3D',
     }),
     successTint20: DynamicColorMacOS({
-      light: '#5EC65A',
+      light: globalTokens.color.lightGreen.tint30,
       dark: '#096B29',
     }),
     successTint30: DynamicColorMacOS({
-      light: '#A7E3A5',
+      light: globalTokens.color.lightGreen.tint40,
       dark: '#043615',
     }),
     successTint40: DynamicColorMacOS({
-      light: '#CEF0CD',
+      light: globalTokens.color.lightGreen.tint50,
       dark: '#021D0B',
     }),
     warningPrimary: DynamicColorMacOS({
@@ -253,25 +254,25 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
 
     brandForegroundDisabled: DynamicColorMacOS({
       light: '#2525253F',
-      dark: '#FFFFFF3F',
+      dark: globalTokens.color.white + '3F',
     }),
     brandBackgroundDisabled: DynamicColorMacOS({
       light: '#2525253F',
       dark: '#5656567F',
     }),
-    neutralInverted: '#FFFFFF',
-    neutralForeground2: '#000000D8',
+    neutralInverted: globalTokens.color.white,
+    neutralForeground2: globalTokens.color.black + 'D8',
     neutralBackground2: DynamicColorMacOS({
-      light: '#FFFFFF',
+      light: globalTokens.color.white,
       dark: '#555555',
     }),
-    neutralStroke2: '#00000026',
+    neutralStroke2: globalTokens.color.black + '26',
     neutralForeground3: DynamicColorMacOS({
       light: '#272727',
-      dark: '#FFFFFF',
+      dark: globalTokens.color.white,
     }),
     neutralBackground3: DynamicColorMacOS({
-      light: '#0000000C',
+      light: globalTokens.color.black + '0C',
       dark: '#555555',
     }),
   };
@@ -286,7 +287,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
 
   // GH:728 Until RN-SVG Supports PlatformColor, we need this workaround
   const appearance = Appearance.getColorScheme();
-  const neutralForeground3 = getCurrentAppearance(appearance, 'light') === 'light' ? '#272727' : '#FFFFFF';
+  const neutralForeground3 = getCurrentAppearance(appearance, 'light') === 'light' ? '#272727' : globalTokens.color.white;
 
   return {
     /* PaletteBackgroundColors & PaletteTextColors */
