@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Tue, 15 Jun 2021 00:55:36 GMT and should not be manually modified.
+This log was last generated on Wed, 16 Jun 2021 04:20:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.0
+
+Wed, 16 Jun 2021 04:20:49 GMT
+
+### Minor changes
+
+- Remove apple theme native module (sanajmi@microsoft.com)
 
 ## 0.5.0
 

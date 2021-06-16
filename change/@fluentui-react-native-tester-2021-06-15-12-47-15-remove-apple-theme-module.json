@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Remove apple theme native module",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-06-15T19:47:03.943Z"
-}
