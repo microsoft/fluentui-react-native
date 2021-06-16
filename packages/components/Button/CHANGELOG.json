@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Wed, 16 Jun 2021 04:20:49 GMT",
+      "tag": "@fluentui-react-native/button_v0.17.1",
+      "version": "0.17.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Remove apple theme native module",
+            "author": "sanajmi@microsoft.com",
+            "commit": "0bd7e7c7b6b2a4581265300a01ad6c054c2674b7",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Jun 2021 00:55:36 GMT",
       "tag": "@fluentui-react-native/button_v0.17.0",
       "version": "0.17.0",
