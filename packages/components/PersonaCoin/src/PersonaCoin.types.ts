@@ -7,6 +7,10 @@ export const personaCoinName = 'RNFPersonaCoin';
 
 export type PersonaSize = 'size8' | 'size24' | 'size32' | 'size40' | 'size48' | 'size56' | 'size72' | 'size100' | 'size120';
 
+/*
+ * Sets color of the coin when there is no picture
+ * @deprecated
+ */
 export type PersonaCoinColor =
   | 'lightBlue'
   | 'blue'
@@ -29,11 +33,42 @@ export type PersonaCoinColor =
   | 'cyan'
   | 'rust';
 
+/*
+ * Sets color of the coin when there is no picture. Uses fluent color names
+ */
+export type PersonaCoinFluentColor =
+  | 'cornflower'
+  | 'blue'
+  | 'royalBlue'
+  | 'teal'
+  | 'forest'
+  | 'darkGreen'
+  | 'berry'
+  | 'hotPink'
+  | 'grape'
+  | 'purple'
+  | 'pumpkin'
+  | 'red'
+  | 'burgundy'
+  | 'orchid'
+  | 'brass'
+  | 'darkRed'
+  | 'beige'
+  | 'platinum'
+  | 'steel'
+  | 'brown';
+
 export type PersonaPresence = 'none' | 'offline' | 'online' | 'away' | 'dnd' | 'blocked' | 'busy';
 
 export interface IPersonaConfigurableProps {
   size?: PersonaSize;
+
+  /*
+   * Sets color of the coin when there is no picture
+   * @deprecated
+   */
   coinColor?: PersonaCoinColor;
+  coinColorFluent?: PersonaCoinFluentColor;
 }
 
 export interface IPersonaCoinProps extends IViewProps, IPersonaConfigurableProps {

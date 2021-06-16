@@ -1,4 +1,4 @@
-import { PersonaSize, PersonaCoinColor, PersonaPresence, IPersonaCoinTokens } from './PersonaCoin.types';
+import { PersonaSize, PersonaCoinColor, PersonaCoinFluentColor, PersonaPresence, IPersonaCoinTokens } from './PersonaCoin.types';
 import { ImageURISource } from 'react-native';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
@@ -83,8 +83,42 @@ const colorTable: { [P in PersonaCoinColor]: string } = {
   coolGray: globalTokens.color.platinum.primary,
 };
 
+/*
+ * Converts the PersonaCoinColor into a hex color value
+ * @deprecated
+ */
 export function convertCoinColor(coinColor: PersonaCoinColor): string {
   return colorTable[coinColor];
+}
+
+const colorTableFluent: { [P in PersonaCoinFluentColor]: string } = {
+  cornflower: globalTokens.color.cornflower.primary,
+  blue: globalTokens.color.blue.primary,
+  royalBlue: globalTokens.color.royalBlue.primary,
+  teal: globalTokens.color.teal.primary,
+  forest: globalTokens.color.forest.primary,
+  darkGreen: globalTokens.color.darkGreen.primary,
+  berry: globalTokens.color.berry.primary,
+  hotPink: globalTokens.color.hotPink.primary,
+  grape: globalTokens.color.grape.primary,
+  purple: globalTokens.color.purple.primary,
+  pumpkin: globalTokens.color.pumpkin.primary,
+  red: globalTokens.color.red.primary,
+  burgundy: globalTokens.color.burgundy.primary,
+  orchid: globalTokens.color.orchid.primary,
+  brass: globalTokens.color.brass.primary,
+  darkRed: globalTokens.color.darkRed.primary,
+  beige: globalTokens.color.beige.primary,
+  platinum: globalTokens.color.platinum.primary,
+  steel: globalTokens.color.steel.primary,
+  brown: globalTokens.color.brown.primary,
+};
+
+/*
+ * Converts the PersonaCoinFluentColor into a hex color value
+ */
+export function convertCoinColorFluent(coinColor: PersonaCoinFluentColor): string {
+  return colorTableFluent[coinColor];
 }
 
 export function calculateEffectiveSizes(tokens: IPersonaCoinTokens): PersonaSizeConfig {

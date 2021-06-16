@@ -42,6 +42,7 @@ const allColors: WithUndefined<PersonaCoinColor>[] = [
   'cyan',
   'rust',
 ];
+
 const allPresences: WithUndefined<PersonaPresence>[] = [undefinedText, 'none', 'online', 'offline', 'busy', 'dnd', 'blocked', 'away'];
 
 export const StandardUsage: React.FunctionComponent<{}> = () => {
