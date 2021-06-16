@@ -11,25 +11,25 @@ import { IconProps } from '@fluentui-react-native/icon';
 export const buttonName = 'Button';
 
 export interface IButtonInfo extends IPressableState {
-  /*
+  /**
    * Disables the button.
    * @default false
    * @deprecated
    */
   disabled?: boolean;
 
-  /*
+  /**
    * Button icon.
    */
   icon?: boolean;
 
-  /*
+  /**
    * Button text.
    */
   content?: boolean;
 }
 
-/**
+/*
  * Because state updates are coming from the touchable and will cause a child render the button doesn't use
  * changes in state value to trigger re-render.  The values inside inner are effectively mutable and are used
  * for per-component storage
@@ -88,12 +88,12 @@ export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBack
 }
 
 export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
-  /*
+  /**
    * Text to show on the Button.
    */
   content?: string;
 
-  /*
+  /**
    * Source URL or name of the icon to show on the Button.
    */
   icon?: IconSourcesType;

@@ -83,9 +83,9 @@ const colorTable: { [P in PersonaCoinColor]: string } = {
   coolGray: globalTokens.color.platinum.primary,
 };
 
-/*
+/**
  * Converts the PersonaCoinColor into a hex color value
- * @deprecated
+ * @deprecated Use convertCoinColorFluent instead.
  */
 export function convertCoinColor(coinColor: PersonaCoinColor): string {
   return colorTable[coinColor];
@@ -114,7 +114,7 @@ const colorTableFluent: { [P in PersonaCoinFluentColor]: string } = {
   brown: globalTokens.color.brown.primary,
 };
 
-/*
+/**
  * Converts the PersonaCoinFluentColor into a hex color value
  */
 export function convertCoinColorFluent(coinColor: PersonaCoinFluentColor): string {
