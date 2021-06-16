@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 16 Jun 2021 21:31:58 GMT",
+      "tag": "@fluentui-react-native/tester_v0.25.3",
+      "version": "0.25.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add FTZ underneath root view to set initial focus",
+            "author": "krsiler@microsoft.com",
+            "commit": "e12c9d8dfb07958b365f2924a647c58f7c13a148",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Jun 2021 04:20:49 GMT",
       "tag": "@fluentui-react-native/tester_v0.25.2",
       "version": "0.25.2",

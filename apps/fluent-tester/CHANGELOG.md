@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 16 Jun 2021 04:20:49 GMT and should not be manually modified.
+This log was last generated on Wed, 16 Jun 2021 21:31:58 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.25.3
+
+Wed, 16 Jun 2021 21:31:58 GMT
+
+### Patches
+
+- Add FTZ underneath root view to set initial focus (krsiler@microsoft.com)
 
 ## 0.25.2
 
