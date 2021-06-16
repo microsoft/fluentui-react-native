@@ -11,19 +11,21 @@ const radius = 40; // from center to halfway border
 const border = 10; // line thickness
 const xydist = Math.sqrt(2)/2 * radius;
 
-// let R = big circle radius, from middle of circle to middle of border width = (width - borderRadius) / 2
-// borderRadius only refers to big circle radius
-// D = sqrt(2)/2 * R is distance from center to the middle of end circle
-// Top end circle:
-  // top: R - D - borderRadius
-    // top edge is already 1 borderRadius below the big circle
-  // left: R - D - borderRadius
-    // left edge is already 1 borderRadius to the right
-// Bottom end circle:
-  // top: R + D - 2 * borderRadius
-    // 1 borderRadius explained same as top end circle. Extra borderRadius since bottom end circle is 1 borderRadius below top end circle already.
-  // left: R - D - borderRadius
-    // same explanation as above
+/*
+let R = big circle radius, from middle of circle to middle of border width = (width - borderRadius) / 2
+borderRadius only refers to big circle radius
+D = sqrt(2)/2 * R is distance from center to the middle of end circle
+Top end circle:
+  top: R - D - borderRadius
+    top edge is already 1 borderRadius below the big circle
+  left: R - D - borderRadius
+    left edge is already 1 borderRadius to the right
+Bottom end circle:
+  top: R + D - 2 * borderRadius
+    1 borderRadius explained same as top end circle. Extra borderRadius since bottom end circle is 1 borderRadius below top end circle already.
+  left: R - D - borderRadius
+    same explanation as above
+*/
 
 const styles = StyleSheet.create({
   semicircle: {
