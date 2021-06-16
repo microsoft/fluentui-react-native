@@ -24,7 +24,6 @@ use_test_app! do |target|
   target.app do
     platform :osx, '10.14'
 
-    pod 'FluentUI-React-Native-Apple-Theme', :path => '../../../packages/theming/apple-theme/FluentUIReactNativeAppleTheme.podspec'
     pod 'FluentUI-React-Native-Button', :path => '../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec'
     pod 'FluentUI-React-Native-Avatar', :path => '../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec'
     pod 'RNCPicker', :path => '../../../node_modules/@react-native-picker/picker'

@@ -29,8 +29,9 @@
   },
   "dependencies": {
     "@fluentui-react-native/default-theme": ">=0.6.0 <1.0.0",
-    "@fluentui-react-native/theme-types": ">=0.7.0 <1.0.0",
     "@fluentui-react-native/theme": ">=0.5.2 <1.0.0",
+    "@fluentui-react-native/theme-types": ">=0.7.0 <1.0.0",
+    "@fluentui-react-native/theming-utils": "^0.2.0",
     "react-native": "^0.63.4"
   },
   "devDependencies": {
@@ -42,6 +43,6 @@
   "peerDependencies": {
     "react": ">=16.13.1",
     "react-native": ">=0.63.4",
-    "react-native-macos": ">=0.63.21"
+    "react-native-macos": ">=0.63.33"
   }
 }

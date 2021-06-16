@@ -14121,10 +14121,10 @@ react-is@^16.12.0, react-is@^16.13.1, react-is@^16.8.1, react-is@^16.8.4, react-
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-native-macos@0.63.1:
-  version "0.63.1"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.63.1.tgz#adb6e1bc46bf4aaef51f1548a29a3daae8084cee"
-  integrity sha512-kEVLGeuTILNh+yCNRfqla9zjeNBA5c62jdM8Xy0Ltj0ypRd/IVrj3eVLqd7BriFzAucczYdbbwGDyygZvZ5rLQ==
+react-native-macos@0.63.33:
+  version "0.63.33"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.63.33.tgz#0f501a4168fcf3924543b119d1c49f59d95eb090"
+  integrity sha512-0KHkk41hICadUrfgtTE0o8SYa9Ro+XfxAqx6BMCJsiv4PprrPqluKwSmYMkNwJJNWGNQX2rgZIB85ZuSyHEm+g==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@react-native-community/cli" "^4.10.0"
