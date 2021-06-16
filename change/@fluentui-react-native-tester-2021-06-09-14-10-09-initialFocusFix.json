@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Add FTZ underneath root view to set initial focus",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-06-09T18:10:09.472Z"
+}
