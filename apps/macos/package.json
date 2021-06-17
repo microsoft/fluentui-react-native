@@ -15,7 +15,9 @@
     "lint": "fluentui-scripts eslint",
     "start": "react-native start",
     "test": "fluentui-scripts jest",
-    "macos": "react-native run-macos --scheme FluentTester --project-path src"
+    "macos": "react-native run-macos --scheme FluentTester --project-path src",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.25.2",

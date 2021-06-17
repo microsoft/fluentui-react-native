@@ -24,7 +24,9 @@
     "run-win32-devmain": "rex-win32 --bundle index.win32 --component FluentTester --basePath ./dist --useDevMain --windowTitle \"FluentUI Tester\" --pluginProps --debugBundlePath index --jsEngine v8",
     "e2etest": "rimraf reports/* && wdio",
     "report": "allure generate allure-results --clean",
-    "generate-report": "allure generate allure-results --clean && allure open"
+    "generate-report": "allure generate allure-results --clean && allure open",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.25.2",
