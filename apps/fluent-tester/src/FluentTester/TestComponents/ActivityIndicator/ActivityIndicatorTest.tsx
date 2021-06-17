@@ -7,52 +7,53 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { ACTIVITYINDICATOR_TESTPAGE } from './consts';
 import { View, StyleSheet, Animated, Easing, ViewProps } from 'react-native';
 
-const radius = 40; // from center to halfway border
-const border = 10; // line thickness
-const xydist = Math.sqrt(2)/2 * radius;
+/**
+ * let R = big circle radius, from middle of circle to middle of border width = (width - borderRadius) / 2
+ * borderRadius only refers to big circle radius
+ * D = sqrt(2)/2 * R is distance from center to the middle of end circle
+ * Top end circle:
+ *   top: R - D - borderRadius
+ *     top edge is already 1 borderRadius below the big circle
+ *   left: R - D - borderRadius
+ *     left edge is already 1 borderRadius to the right
+ * Bottom end circle:
+ *   top: R + D - 2 * borderRadius
+ *     1 borderRadius explained same as top end circle.
+ *     Extra borderRadius since bottom end circle is 1 borderRadius below top end circle already.
+ *   left: R - D - borderRadius
+ *     same explanation as above
+ */
+// radius is from center to halfway border, border is line thickness
+const getActivityIndicatorStyle = (radius: number, border: number) => {
+  const xydist = Math.sqrt(2)/2 * radius;
 
-/*
-let R = big circle radius, from middle of circle to middle of border width = (width - borderRadius) / 2
-borderRadius only refers to big circle radius
-D = sqrt(2)/2 * R is distance from center to the middle of end circle
-Top end circle:
-  top: R - D - borderRadius
-    top edge is already 1 borderRadius below the big circle
-  left: R - D - borderRadius
-    left edge is already 1 borderRadius to the right
-Bottom end circle:
-  top: R + D - 2 * borderRadius
-    1 borderRadius explained same as top end circle. Extra borderRadius since bottom end circle is 1 borderRadius below top end circle already.
-  left: R - D - borderRadius
-    same explanation as above
-*/
-
-const styles = StyleSheet.create({
-  semicircle: {
-    width: radius*2 + border, // from outside edge of circle on one side to the opposite side
-    height: radius*2 + border,
-    borderWidth: border,
-    borderColor: '#919191',
-    borderRadius: radius + border/2,
-    borderLeftColor: 'transparent',
-  },
-  endTop: {
-    width: border,
-    height: border,
-    borderRadius: border/2,
-    backgroundColor: '#919191',
-    top: radius - xydist - border,
-    left: radius - xydist - border,
-  },
-  endBottom: {
-    width: border,
-    height: border,
-    borderRadius: border/2,
-    backgroundColor: '#919191',
-    top: radius + xydist - 2*border,
-    left: radius - xydist - border,
+  return {
+    semicircle: {
+      width: radius*2 + border, // from outside edge of circle on one side to the opposite side
+      height: radius*2 + border,
+      borderWidth: border,
+      borderColor: '#919191',
+      borderRadius: radius + border/2,
+      borderLeftColor: 'transparent',
+    },
+    endTop: {
+      width: border,
+      height: border,
+      borderRadius: border/2,
+      backgroundColor: '#919191',
+      top: radius - xydist - border,
+      left: radius - xydist - border,
+    },
+    endBottom: {
+      width: border,
+      height: border,
+      borderRadius: border/2,
+      backgroundColor: '#919191',
+      top: radius + xydist - 2*border,
+      left: radius - xydist - border,
+    }
   }
-});
+}
 
 
 export type ActivityIndicatorProps = ViewProps & {
@@ -84,9 +85,9 @@ const ActivityIndicator = (props: ActivityIndicatorProps) => {
     hideOpacity = 0;
   }
   return (
-    <Animated.View style={[styles.semicircle, { transform: [{rotateZ: interpolateSpin}, {perspective: 10}] }, {opacity: hideOpacity}]}>
-      <View style={styles.endTop}></View>
-      <View style={styles.endBottom}></View>
+    <Animated.View style={[getActivityIndicatorStyle(40, 10).semicircle, { transform: [{rotateZ: interpolateSpin}, {perspective: 10}] }, {opacity: hideOpacity}]}>
+      <View style={getActivityIndicatorStyle(40, 10).endTop}></View>
+      <View style={getActivityIndicatorStyle(40, 10).endBottom}></View>
     </Animated.View>
   )
 };
