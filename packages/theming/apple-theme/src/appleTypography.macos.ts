@@ -1,4 +1,5 @@
 import { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@fluentui-react-native/theme-types';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 /**
  * The Typography is designed to match the styles defined in the Apple HIG:
@@ -10,11 +11,11 @@ import { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@flu
 export function fallbackAppleTypography(): Typography {
   const appleDict = {
     sizes: {
-      caption: 10 as FontSize, // Caption 1
+      caption: globalTokens.font.size[100] as FontSize, // Caption 1
       secondary: 11 as FontSize, // Callout
       body: 13 as FontSize, // Body
-      subheader: 16 as FontSize, // Subheadline
-      header: 20 as FontSize, // Headline
+      subheader: globalTokens.font.size[400] as FontSize, // Subheadline
+      header: globalTokens.font.size[500] as FontSize, // Headline
       hero: 22 as FontSize, /// Title 1
       heroLarge: 26 as FontSize, // Large Title,
     } as FontSizes,
@@ -22,10 +23,10 @@ export function fallbackAppleTypography(): Typography {
       ultralight: '100' as FontWeightValue,
       thin: '200' as FontWeightValue,
       light: '300' as FontWeightValue,
-      regular: '400' as FontWeightValue,
-      medium: '500' as FontWeightValue,
-      semiBold: '600' as FontWeightValue,
-      bold: '700' as FontWeightValue,
+      regular: globalTokens.font.weight.regular as FontWeightValue,
+      medium: globalTokens.font.weight.medium as FontWeightValue,
+      semiBold: globalTokens.font.weight.semibold as FontWeightValue,
+      bold: globalTokens.font.weight.bold as FontWeightValue,
       heavy: '800' as FontWeightValue,
       black: '900' as FontWeightValue,
     },

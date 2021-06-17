@@ -1,11 +1,12 @@
 import { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@fluentui-react-native/theme-types';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 // The sizes are taken for the Dynamic Type Size "Large", which is the system default
 export function appleTypography(): Typography {
   const appleDict = {
     sizes: {
-      caption: 12 as FontSize, // Caption 2
-      secondary: 16 as FontSize, // Caption 1
+      caption: globalTokens.font.size[200] as FontSize, // Caption 2
+      secondary: globalTokens.font.size[400] as FontSize, // Caption 1
       body: 17 as FontSize, // Body
       subheader: 15 as FontSize, // Subhead
       header: 17 as FontSize, // Headline
@@ -16,10 +17,10 @@ export function appleTypography(): Typography {
       ultralight: '100' as FontWeightValue,
       thin: '200' as FontWeightValue,
       light: '300' as FontWeightValue,
-      regular: '400' as FontWeightValue,
-      medium: '500' as FontWeightValue,
-      semiBold: '600' as FontWeightValue,
-      bold: '700' as FontWeightValue,
+      regular: globalTokens.font.weight.regular as FontWeightValue,
+      medium: globalTokens.font.weight.medium as FontWeightValue,
+      semiBold: globalTokens.font.weight.semibold as FontWeightValue,
+      bold: globalTokens.font.weight.bold as FontWeightValue,
       heavy: '800' as FontWeightValue,
       black: '900' as FontWeightValue,
     },

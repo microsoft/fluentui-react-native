@@ -1,4 +1,5 @@
 import { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@fluentui-react-native/theme-types';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 /**
  * The primary font used in Fluent Android is Roboto as in [Figma](https://www.figma.com/file/MkkE13z6zALstwLlbczIMXrA/Fluent-Android?node-id=7455%3A94)
@@ -8,19 +9,19 @@ import { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@flu
 export function androidTypography(): Typography {
   const androidDict = {
     sizes: {
-      caption: 12 as FontSize, // Caption
-      secondary: 12 as FontSize, // Caption
-      body: 14 as FontSize, // Body 1
-      subheader: 16 as FontSize, // Subheading 1
+      caption: globalTokens.font.size[200] as FontSize, // Caption
+      secondary: globalTokens.font.size[200] as FontSize, // Caption
+      body: globalTokens.font.size[300] as FontSize, // Body 1
+      subheader: globalTokens.font.size[400] as FontSize, // Subheading 1
       header: 18 as FontSize, // Heading
-      hero: 20 as FontSize, // Title 1
-      heroLarge: 28 as FontSize, // Headline
+      hero: globalTokens.font.size[500] as FontSize, // Title 1
+      heroLarge: globalTokens.font.size[700] as FontSize, // Headline
     } as FontSizes,
     weights: {
       // The font weights do not work for Android since RN 0.60 (https://github.com/facebook/react-native/issues/25696)
       // The workaround is to use font aliases from android source (https://android.googlesource.com/platform/frameworks/base/+/master/data/fonts/fonts.xml)
-      regular: '400' as FontWeightValue,
-      semiBold: '500' as FontWeightValue,
+      regular: globalTokens.font.weight.regular as FontWeightValue,
+      semiBold: globalTokens.font.weight.medium as FontWeightValue,
     },
     families: {
       primary: 'sans-serif', // sans-serif, weight=400

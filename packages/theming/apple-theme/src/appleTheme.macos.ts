@@ -1,6 +1,7 @@
 import { Spacing, Theme } from '@fluentui-react-native/theme-types';
 import { fallbackApplePalette } from './appleColors.macos';
 import { fallbackAppleTypography } from './appleTypography.macos';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 export function appleSpacing(): Spacing {
   return {
@@ -16,8 +17,8 @@ export const appleComponents = {
   // These values correspond to the "Large"  Button Size values of the FluentUI Apple Button
   Button: {
     tokens: {
-      borderRadius: 6,
-      borderWidth: 1,
+      borderRadius: globalTokens.corner.radius.large,
+      borderWidth: globalTokens.stroke.width.thin,
       minHeight: 28,
       minWidth: 72,
     },
