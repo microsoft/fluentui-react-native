@@ -7,6 +7,7 @@ module.exports = {
     bundle: ['build-tools'],
     clean: [],
     depcheck: ['build-tools'],
+    just: ['build-tools'],
     lint: ['build-tools'],
     ['verify-api']: [],
     ['update-api']: [],
