@@ -54,7 +54,8 @@
   "depcheck": {
     "ignoreMatches": [
       "react-native-test-app",
-      "@react-native-picker/picker"
+      "@react-native-picker/picker",
+      "@react-native-community/slider"
     ]
   }
 }
