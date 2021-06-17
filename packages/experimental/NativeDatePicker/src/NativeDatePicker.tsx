@@ -9,7 +9,6 @@ type NullableDate = Date | null;
 type NullableString = String | null;
 
 interface DatePickerParameterObject {
-    callback: Function;
     mode?: NativeDatePickerMode;
     dateRangePresentation?: NativeDatePickerDateRangePresentation;
     datePickerType?: NativeDatePickerType;
@@ -25,10 +24,10 @@ interface DatePickerParameterObject {
     dateSubtitle?: NullableString;
     timeTitle?: NullableString;
     timeSubtitle?: NullableString;
+    callback: Function;
 }
 
 NativeDatePicker.present = ({
-    callback,
     mode = "date",
     dateRangePresentation = "tabbed",
     datePickerType = "calendar",
@@ -44,9 +43,9 @@ NativeDatePicker.present = ({
     dateSubtitle = null,
     timeTitle = null,
     timeSubtitle = null,
+    callback,
 }: DatePickerParameterObject) => {
-    NativeDatePicker.presentWithOptions(
-        callback,
+    NativeDatePicker.presentWithMode(
         mode,
         dateRangePresentation,
         datePickerType,
@@ -61,13 +60,13 @@ NativeDatePicker.present = ({
         dateTitle,
         dateSubtitle,
         timeTitle,
-        timeSubtitle
+        timeSubtitle,
+        callback,
     );
 }
 
 interface NativeDatePickerInterface {
     present(object: DatePickerParameterObject): void;
-    presentSimple(callback: any): void;
 }
 
  export default NativeDatePicker as NativeDatePickerInterface;

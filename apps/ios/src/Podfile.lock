@@ -13,10 +13,10 @@ PODS:
     - MicrosoftFluentUI (~> 0.2.2)
     - MicrosoftFluentUI (~> 0.2.6)
     - React
-  - FluentUI-React-Native-Date-Picker (0.0.1):
-    - MicrosoftFluentUI (~> 0.2.7)
-    - React
   - FluentUI-React-Native-Button (0.6.0):
+    - MicrosoftFluentUI (~> 0.2.2)
+    - React
+  - FluentUI-React-Native-Date-Picker (0.0.1):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
   - Folly (2020.01.13.00):
@@ -559,6 +559,6 @@ SPEC CHECKSUMS:
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: b7cc7feed5be0b00a6e5d7a4c4d454da5a533057
+PODFILE CHECKSUM: de5bccaab7c68f57623bc444e67eeb9333b48355
 
 COCOAPODS: 1.10.1
