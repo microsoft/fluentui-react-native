@@ -29,7 +29,7 @@ export const Callout = compose<ICalloutType>({
     const slotProps = mergeSettings<ICalloutSlotProps>(useStyling(props), {
       root: {
         ref: calloutRef,
-        target: nativeTarget,
+        ...(nativeTarget && { target: nativeTarget }),
         ...rest,
       },
     });
