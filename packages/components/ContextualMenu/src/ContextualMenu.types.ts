@@ -20,11 +20,11 @@ export interface ContextualMenuContext {
   onDismissMenu?: () => void;
   /*
    ** Checks if any child menus are open
-  */
+   */
   isSubmenuOpen?: boolean;
   /*
    ** ContextualMenuItems will call this submenu dismissal when they are hovered
-  */
+   */
   dismissSubmenu?: () => void;
 }
 
@@ -39,13 +39,13 @@ export type ContextualMenuTokens = ICalloutTokens;
 
 export interface ContextualMenuProps extends Omit<ICalloutProps, 'setInitialFocus'> {
   /*
-  * Whether to set initial focus on the contextual menu container, as opposed to the first menu item.
-  */
+   * Whether to set initial focus on the contextual menu container, as opposed to the first menu item.
+   */
   shouldFocusOnContainer?: boolean;
 
   /*
-  * Whether to focus on the menu when mounted
-  */
+   * Whether to focus on the menu when mounted
+   */
   shouldFocusOnMount?: boolean;
   /*
    ** Callback for when menu item is clicked
