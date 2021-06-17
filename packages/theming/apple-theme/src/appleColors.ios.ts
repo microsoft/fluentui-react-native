@@ -1,23 +1,24 @@
 import { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
 import { ApplePalette } from './appleColors.types.ios';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 function getFluentUIAppleLightPalette(): ApplePalette {
   return {
-    blue10: '#4F6BED',
-    blueMagenta20: '#8764B8',
-    blueMagenta30: '#5C2E91',
-    communicationBlue: '#0078D4',
-    communicationBlueShade10: '#106EBE',
-    communicationBlueShade20: '#005A9E',
-    communicationBlueShade30: '#004578',
+    blue10: globalTokens.color.cornflower.primary,
+    blueMagenta20: globalTokens.color.orchid.primary,
+    blueMagenta30: globalTokens.color.purple.primary,
+    communicationBlue: globalTokens.color.brand.primary,
+    communicationBlueShade10: globalTokens.color.brand.shade10,
+    communicationBlueShade20: globalTokens.color.brand.shade20,
+    communicationBlueShade30: globalTokens.color.brand.shade40,
     communicationBlueTint10: '#2B88D8',
-    communicationBlueTint20: '#C7E0F4',
-    communicationBlueTint30: '#DEECF9',
-    communicationBlueTint40: '#EFF6FC',
-    cyan20: '#038387',
-    cyan30: '#005B70',
-    cyanBlue10: '#0078D4',
-    cyanBlue20: '#004E8C',
+    communicationBlueTint20: globalTokens.color.brand.tint40,
+    communicationBlueTint30: globalTokens.color.brand.tint50,
+    communicationBlueTint40: globalTokens.color.brand.tint60,
+    cyan20: globalTokens.color.teal.primary,
+    cyan30: globalTokens.color.steel.primary,
+    cyanBlue10: globalTokens.color.blue.primary,
+    cyanBlue20: globalTokens.color.royalBlue.primary,
     dangerPrimary: '#D92C2C',
     dangerShade10: '#C32727',
     dangerShade20: '#A52121',
@@ -26,10 +27,10 @@ function getFluentUIAppleLightPalette(): ApplePalette {
     dangerTint20: '#E87979',
     dangerTint30: '#F4B9B9',
     dangerTint40: '#F9D9D9',
-    gray20: '#69797E',
-    gray25: '#F8F8F8',
-    gray30: '#7A7574',
-    gray40: '#393939',
+    gray20: globalTokens.color.platinum.primary,
+    gray25: globalTokens.color.mink.tint60,
+    gray30: globalTokens.color.beige.primary,
+    gray40: globalTokens.color.charcoal.primary,
     gray50: '#F1F1F1',
     gray100: '#E1E1E1',
     gray200: '#C8C8C8',
@@ -38,36 +39,36 @@ function getFluentUIAppleLightPalette(): ApplePalette {
     gray500: '#6E6E6E',
     gray600: '#404040',
     gray700: '#303030',
-    gray800: '#292929',
+    gray800: globalTokens.color.grey[16],
     gray900: '#212121',
-    gray950: '#141414',
-    green10: '#498205',
-    green20: '#0B6A0B',
-    magenta10: '#C239B3',
-    magenta20: '#881798',
-    magentaPink10: '#E3008C',
-    orange20: '#CA5010',
-    orange30: '#8E562E',
-    orangeYellow20: '#986F0B',
-    pinkRed10: '#750B1C',
+    gray950: globalTokens.color.grey[8],
+    green10: globalTokens.color.forest.primary,
+    green20: globalTokens.color.darkGreen.primary,
+    magenta10: globalTokens.color.berry.primary,
+    magenta20: globalTokens.color.grape.primary,
+    magentaPink10: globalTokens.color.hotPink.primary,
+    orange20: globalTokens.color.pumpkin.primary,
+    orange30: globalTokens.color.brown.primary,
+    orangeYellow20: globalTokens.color.brass.primary,
+    pinkRed10: globalTokens.color.darkRed.primary,
     presenceAvailable: '#6BB700',
     presenceAway: '#FFAA44',
-    presenceBlocked: '#C50F1F',
-    presenceBusy: '#C50F1F',
-    presenceDnd: '#C50F1F',
+    presenceBlocked: globalTokens.color.cranberry.primary,
+    presenceBusy: globalTokens.color.cranberry.primary,
+    presenceDnd: globalTokens.color.cranberry.primary,
     presenceOffline: '#8A8886',
     presenceOof: '#B4009E',
     presenceUnknown: '#8A8886',
-    red10: '#D13438',
-    red20: '#A4262C',
-    successPrimary: '#13A10E',
-    successShade10: '#11910D',
+    red10: globalTokens.color.red.primary,
+    red20: globalTokens.color.burgundy.primary,
+    successPrimary: globalTokens.color.lightGreen.primary,
+    successShade10: globalTokens.color.lightGreen.shade10,
     successShade20: '#0F7A0B',
-    successShade30: '#0B5A08',
-    successTint10: '#27AC22',
+    successShade30: globalTokens.color.lightGreen.shade30,
+    successTint10: globalTokens.color.lightGreen.tint10,
     successTint20: '#5EC65A',
-    successTint30: '#A7E3A5',
-    successTint40: '#CEF0CD',
+    successTint30: globalTokens.color.lightGreen.tint40,
+    successTint40: globalTokens.color.lightGreen.tint50,
     warningPrimary: '#FFD335',
     warningShade10: '#E6BE30',
     warningShade20: '#C2A129',
@@ -81,15 +82,15 @@ function getFluentUIAppleLightPalette(): ApplePalette {
     textPrimary: '#212121', //= UIColor(light: gray900, lightHighContrast: .black, dark: gray100, darkHighContrast: .white)
     textSecondary: '#6E6E6E', //= UIColor(light: gray500, lightHighContrast: gray700, dark: gray400, darkHighContrast: gray200)
     textDisabled: '#ACACAC', //= UIColor(light: gray300, lightHighContrast: gray500, dark: gray600, darkHighContrast: gray400)
-    textOnAccent: 'white', //= UIColor(light: .white, dark: .black)
+    textOnAccent: globalTokens.color.white, //= UIColor(light: .white, dark: .black)
 
     iconPrimary: '#6E6E6E', //= UIColor(light: gray500, lightHighContrast: gray700, dark: .white)
     iconSecondary: '#919191', //= UIColor(light: gray400, lightHighContrast: gray600, dark: gray500, darkHighContrast: gray300, darkElevated: gray400)
     iconDisabled: '#ACACAC', //= UIColor(light: gray300, lightHighContrast: gray500, dark: gray600, darkHighContrast: gray400)
-    iconOnAccent: 'white', //= UIColor(light: .white, dark: .black)
+    iconOnAccent: globalTokens.color.white, //= UIColor(light: .white, dark: .black)
 
-    surfacePrimary: 'white', //= UIColor(light: .white, dark: .black, darkElevated: gray950)
-    surfaceSecondary: '#F8F8F8', //= UIColor(light: gray25, dark: gray950, darkElevated: gray900)
+    surfacePrimary: globalTokens.color.white, //= UIColor(light: .white, dark: .black, darkElevated: gray950)
+    surfaceSecondary: globalTokens.color.mink.tint60, //= UIColor(light: gray25, dark: gray950, darkElevated: gray900)
     surfaceTertiary: '#F1F1F1', //= UIColor(light: gray50, dark: gray900, darkElevated: gray800)
     surfaceQuaternary: '#E1E1E1', //= UIColor(light: gray100, dark: gray600)
 
@@ -102,27 +103,27 @@ function getFluentUIAppleLightPalette(): ApplePalette {
     buttonBackgroundFilledDisabled: '#E1E1E1', //surfaceQuaternary
     buttonBorderDisabled: '#E1E1E1', //surfaceQuaternary
     buttonTitleDisabled: '#ACACAC', //textDisabled
-    buttonTitleWithFilledBackground: 'white', //textOnAccent
+    buttonTitleWithFilledBackground: globalTokens.color.white, //textOnAccent
   };
 }
 
 function getFluentUIAppleDarkPalette(): ApplePalette {
   return {
-    blue10: '#4F6BED',
-    blueMagenta20: '#8764B8',
-    blueMagenta30: '#5C2E91',
+    blue10: globalTokens.color.cornflower.primary,
+    blueMagenta20: globalTokens.color.orchid.primary,
+    blueMagenta30: globalTokens.color.purple.primary,
     communicationBlue: '#0086F0',
     communicationBlueShade10: '#1890F1',
-    communicationBlueShade20: '#3AA0F3',
-    communicationBlueShade30: '#6CB8F6',
-    communicationBlueTint10: '#0078D4',
-    communicationBlueTint20: '#004C87',
-    communicationBlueTint30: '#043862',
-    communicationBlueTint40: '#092C47',
-    cyan20: '#038387',
-    cyan30: '#005B70',
-    cyanBlue10: '#0078D4',
-    cyanBlue20: '#004E8C',
+    communicationBlueShade20: globalTokens.color.brand.tint20,
+    communicationBlueShade30: globalTokens.color.brand.tint30,
+    communicationBlueTint10: globalTokens.color.brand.primary,
+    communicationBlueTint20: globalTokens.color.brand.shade30,
+    communicationBlueTint30: globalTokens.color.brand.shade50,
+    communicationBlueTint40: globalTokens.color.brand.shade60,
+    cyan20: globalTokens.color.teal.primary,
+    cyan30: globalTokens.color.steel.primary,
+    cyanBlue10: globalTokens.color.blue.primary,
+    cyanBlue20: globalTokens.color.royalBlue.primary,
     dangerPrimary: '#E83A3A',
     dangerShade10: '#EA4C4C',
     dangerShade20: '#EE6666',
@@ -131,10 +132,10 @@ function getFluentUIAppleDarkPalette(): ApplePalette {
     dangerTint20: '#8B2323',
     dangerTint30: '#461111',
     dangerTint40: '#250909',
-    gray20: '#69797E',
-    gray25: '#F8F8F8',
-    gray30: '#7A7574',
-    gray40: '#393939',
+    gray20: globalTokens.color.platinum.primary,
+    gray25: globalTokens.color.mink.tint60,
+    gray30: globalTokens.color.beige.primary,
+    gray40: globalTokens.color.charcoal.primary,
     gray50: '#F1F1F1',
     gray100: '#E1E1E1',
     gray200: '#C8C8C8',
@@ -143,18 +144,18 @@ function getFluentUIAppleDarkPalette(): ApplePalette {
     gray500: '#6E6E6E',
     gray600: '#404040',
     gray700: '#303030',
-    gray800: '#292929',
+    gray800: globalTokens.color.grey[16],
     gray900: '#212121',
-    gray950: '#141414',
-    green10: '#498205',
-    green20: '#0B6A0B',
-    magenta10: '#C239B3',
-    magenta20: '#881798',
-    magentaPink10: '#E3008C',
-    orange20: '#CA5010',
-    orange30: '#8E562E',
-    orangeYellow20: '#986F0B',
-    pinkRed10: '#750B1C',
+    gray950: globalTokens.color.grey[8],
+    green10: globalTokens.color.forest.primary,
+    green20: globalTokens.color.darkGreen.primary,
+    magenta10: globalTokens.color.berry.primary,
+    magenta20: globalTokens.color.grape.primary,
+    magentaPink10: globalTokens.color.hotPink.primary,
+    orange20: globalTokens.color.pumpkin.primary,
+    orange30: globalTokens.color.brown.primary,
+    orangeYellow20: globalTokens.color.brass.primary,
+    pinkRed10: globalTokens.color.darkRed.primary,
     presenceAvailable: '#92C353',
     presenceAway: '#F8D22A',
     presenceBlocked: '#D74553',
@@ -163,8 +164,8 @@ function getFluentUIAppleDarkPalette(): ApplePalette {
     presenceOffline: '#979593',
     presenceOof: '#E959D9',
     presenceUnknown: '#979593',
-    red10: '#D13438',
-    red20: '#A4262C',
+    red10: globalTokens.color.red.primary,
+    red20: globalTokens.color.burgundy.primary,
     successPrimary: '#979593',
     successShade10: '#20BA53',
     successShade20: '#3BC569',
@@ -182,23 +183,23 @@ function getFluentUIAppleDarkPalette(): ApplePalette {
     warningTint30: '#4D3A0C',
     warningTint40: '#291F07',
 
-    textDominant: 'white', //= UIColor(light: gray900, lightHighContrast: .black, dark: .white)
+    textDominant: globalTokens.color.white, //= UIColor(light: gray900, lightHighContrast: .black, dark: .white)
     textPrimary: '#E1E1E1', //= UIColor(light: gray900, lightHighContrast: .black, dark: gray100, darkHighContrast: .white)
     textSecondary: '#919191', //= UIColor(light: gray500, lightHighContrast: gray700, dark: gray400, darkHighContrast: gray200)
     textDisabled: '#404040', //= UIColor(light: gray300, lightHighContrast: gray500, dark: gray600, darkHighContrast: gray400)
-    textOnAccent: 'black', //= UIColor(light: .white, dark: .black)
+    textOnAccent: globalTokens.color.black, //= UIColor(light: .white, dark: .black)
 
     iconPrimary: '#303030', //= UIColor(light: gray500, lightHighContrast: gray700, dark: .white)
     iconSecondary: '#404040', //= UIColor(light: gray400, lightHighContrast: gray600, dark: gray500, darkHighContrast: gray300, darkElevated: gray400)
     iconDisabled: '#6E6E6E', //= UIColor(light: gray300, lightHighContrast: gray500, dark: gray600, darkHighContrast: gray400)
-    iconOnAccent: 'black', //= UIColor(light: .white, dark: .black)
+    iconOnAccent: globalTokens.color.black, //= UIColor(light: .white, dark: .black)
 
-    surfacePrimary: 'black', //= UIColor(light: .white, dark: .black, darkElevated: gray950)
-    surfaceSecondary: '#141414', //= UIColor(light: gray25, dark: gray950, darkElevated: gray900)
+    surfacePrimary: globalTokens.color.black, //= UIColor(light: .white, dark: .black, darkElevated: gray950)
+    surfaceSecondary: globalTokens.color.grey[8], //= UIColor(light: gray25, dark: gray950, darkElevated: gray900)
     surfaceTertiary: '#212121', //= UIColor(light: gray50, dark: gray900, darkElevated: gray800)
     surfaceQuaternary: '#404040', //= UIColor(light: gray100, dark: gray600)
 
-    dividerOnPrimary: '#292929', //= UIColor(light: gray100, dark: gray800, darkElevated: gray700)
+    dividerOnPrimary: globalTokens.color.grey[16], //= UIColor(light: gray100, dark: gray800, darkElevated: gray700)
     dividerOnSecondary: '#303030', //= UIColor(light: gray200, dark: gray700, darkElevated: gray600)
     dividerOnTertiary: '#303030', //= UIColor(light: gray200, dark: gray700, darkElevated: gray600)
 
@@ -207,7 +208,7 @@ function getFluentUIAppleDarkPalette(): ApplePalette {
     buttonBackgroundFilledDisabled: '#404040', //surfaceQuaternary
     buttonBorderDisabled: '#404040', //surfaceQuaternary
     buttonTitleDisabled: '#404040', //textDisabled
-    buttonTitleWithFilledBackground: 'black', //textOnAccent
+    buttonTitleWithFilledBackground: globalTokens.color.black, //textOnAccent
   };
 }
 
