@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Improved test page on Android.",
+  "packageName": "@fluentui-react-native/android-theme",
+  "email": "tamasane@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-06-17T10:42:43.327Z"
+}
