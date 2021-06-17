@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Apply prettier to libraries core and theming, run",
+  "packageName": "@fluentui-react-native/theme-types",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-06-17T00:41:38.434Z"
+}
