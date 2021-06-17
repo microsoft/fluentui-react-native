@@ -1,131 +1,130 @@
-import { ColorValue } from '@fluentui-react-native/theme-types';
-import { PlatformColor } from 'react-native-macos';
+import { ColorValue } from 'react-native';
 
 /** Palette of Apple Platform Colors, defined at https://developer.apple.com/documentation/appkit/nscolor/ui_element_colors */
 export interface AppleSemanticPalette {
   /* Label Colors */
 
   /** The primary color to use for text labels */
-  labelColor: PlatformColor;
+  labelColor: ColorValue;
 
   /** The secondary color to use for text labels */
-  secondaryLabelColor: PlatformColor;
+  secondaryLabelColor: ColorValue;
 
   /** The tertiary color to use for text labels */
-  tertiaryLabelColor: PlatformColor;
+  tertiaryLabelColor: ColorValue;
 
   /** The quaternary color to use for text labels and separators */
-  quaternaryLabelColor: PlatformColor;
+  quaternaryLabelColor: ColorValue;
 
   /* Text Colors */
 
   /** The color to use for text */
-  textColor: PlatformColor;
+  textColor: ColorValue;
 
   /** The color to use for placeholder text in controls or text views */
-  placeholderTextColor: PlatformColor;
+  placeholderTextColor: ColorValue;
 
   /** The color to use for selected text */
-  selectedTextColor: PlatformColor;
+  selectedTextColor: ColorValue;
 
   /** The color to use for the background area behind text */
-  textBackgroundColor: PlatformColor;
+  textBackgroundColor: ColorValue;
 
   /** The color to use for the background of selected text */
-  selectedTextBackgroundColor: PlatformColor;
+  selectedTextBackgroundColor: ColorValue;
 
   /** The color to use for the keyboard focus ring around controls */
-  keyboardFocusIndicatorColor: PlatformColor;
+  keyboardFocusIndicatorColor: ColorValue;
 
   /** The color to use for selected text in an unemphasized context */
-  unemphasizedSelectedTextColor: PlatformColor;
+  unemphasizedSelectedTextColor: ColorValue;
 
   /** The color to use for the text background in an unemphasized context */
-  unemphasizedSelectedTextBackgroundColor: PlatformColor;
+  unemphasizedSelectedTextBackgroundColor: ColorValue;
 
   /* Content Colors */
 
   /** The color to use for links */
-  linkColor: PlatformColor;
+  linkColor: ColorValue;
 
   /** The color to use for separators between different sections of content */
-  separatorColor: PlatformColor;
+  separatorColor: ColorValue;
 
   /** The color to use for the background of selected and emphasized content */
-  selectedContentBackgroundColor: PlatformColor;
+  selectedContentBackgroundColor: ColorValue;
 
   /** The color to use for selected and unemphasized content */
-  unemphasizedSelectedContentBackgroundColor: PlatformColor;
+  unemphasizedSelectedContentBackgroundColor: ColorValue;
 
   /* Menu Colors */
 
   /** The color to use for the text in menu items */
-  selectedMenuItemTextColor: PlatformColor;
+  selectedMenuItemTextColor: ColorValue;
 
   /* Table Colors */
 
   /** The color to use for the optional gridlines, such as those in a table view */
-  gridColor: PlatformColor;
+  gridColor: ColorValue;
 
   /** The color to use for text in header cells in table views and outline views */
-  headerTextColor: PlatformColor;
+  headerTextColor: ColorValue;
 
   /** The colors to use for alternating (odd Rows) content, typically found in table views and collection views */
-  alternatingOddContentBackgroundColor: PlatformColor;
+  alternatingOddContentBackgroundColor: ColorValue;
 
   /** The colors to use for alternating (even Rows)content, typically found in table views and collection views */
-  alternatingEvenContentBackgroundColor: PlatformColor;
+  alternatingEvenContentBackgroundColor: ColorValue;
 
   /* Control Colors */
 
   /** The user's current accent color preference */
-  controlAccentColor: PlatformColor;
+  controlAccentColor: ColorValue;
 
   /** The color to use for the flat surfaces of a control */
-  controlColor: PlatformColor;
+  controlColor: ColorValue;
 
   /** The color to use for the background of large controls, such as scroll views or table views */
-  controlBackgroundColor: PlatformColor;
+  controlBackgroundColor: ColorValue;
 
   /** The color to use for text on enabled controls */
-  controlTextColor: PlatformColor;
+  controlTextColor: ColorValue;
 
   /** The color to use for text on disabled controls */
-  disabledControlTextColor: PlatformColor;
+  disabledControlTextColor: ColorValue;
 
   /** The color to use for the face of a selected control—that is, a control that has been clicked or is being dragged */
-  selectedControlColor: PlatformColor;
+  selectedControlColor: ColorValue;
 
   /** The color to use for text in a selected control—that is, a control being clicked or dragged */
-  selectedControlTextColor: PlatformColor;
+  selectedControlTextColor: ColorValue;
 
   /** The color to use for text in a selected control */
-  alternateSelectedControlTextColor: PlatformColor;
+  alternateSelectedControlTextColor: ColorValue;
 
   /** The patterned color to use for the background of a scrubber control */
-  scrubberTexturedBackground: PlatformColor;
+  scrubberTexturedBackground: ColorValue;
 
   /* Windows Colors */
 
   /** The color to use for the window background */
-  windowBackgroundColor: PlatformColor;
+  windowBackgroundColor: ColorValue;
 
   /** The color to use for text in a window's frame */
-  windowFrameTextColor: PlatformColor;
+  windowFrameTextColor: ColorValue;
 
   /** The color to use in the area beneath your window's views */
-  underPageBackgroundColor: PlatformColor;
+  underPageBackgroundColor: ColorValue;
 
   /* Highlights and Shadows */
 
   /** The highlight color to use for the bubble that shows inline search result values */
-  findHighlightColor: PlatformColor;
+  findHighlightColor: ColorValue;
 
   /** The color to use as a virtual light source on the screen */
-  highlightColor: PlatformColor;
+  highlightColor: ColorValue;
 
   /** The color to use for virtual shadows cast by raised objects on the screen */
-  shadowColor: PlatformColor;
+  shadowColor: ColorValue;
 }
 
 /** Palette of colors defined in FluentUI Apple */

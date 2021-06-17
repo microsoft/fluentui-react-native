@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/theming-utils",
+  "entries": [
+    {
+      "date": "Tue, 15 Jun 2021 00:55:36 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Move getCurrentAppearence out",
+            "author": "ruaraki@microsoft.com",
+            "commit": "90e0dcb92a4ea4ee5ea5373f2c54defa127749bf",
+            "package": "@fluentui-react-native/theming-utils"
+          }
+        ]
+      }
+    }
+  ]
+}

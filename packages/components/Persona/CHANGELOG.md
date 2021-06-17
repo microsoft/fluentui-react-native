@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/persona
 
-This log was last generated on Sat, 06 Mar 2021 00:20:05 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Jun 2021 00:55:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.0
+
+Tue, 15 Jun 2021 00:55:36 GMT
+
+### Minor changes
+
+- Handle ColorValue instad of string as color type (ruaraki@microsoft.com)
 
 ## 0.9.0
 

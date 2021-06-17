@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/android-theme",
   "entries": [
     {
+      "date": "Tue, 15 Jun 2021 00:55:36 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Get everything to pull ColorValue from react-native",
+            "author": "ruaraki@microsoft.com",
+            "commit": "90e0dcb92a4ea4ee5ea5373f2c54defa127749bf",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 02 Jun 2021 17:30:36 GMT",
       "tag": "@fluentui-react-native/android-theme_v0.2.8",
       "version": "0.2.8",
