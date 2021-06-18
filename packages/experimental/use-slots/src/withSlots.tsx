@@ -16,7 +16,7 @@ import { NativeReactType, renderSlot } from './renderSlot';
 // Can't use typeof on React.createElement since it's overloaded. Approximate createElement's signature for now and widen as needed.
 export function withSlots<P>(
   reactType: NativeReactType,
-  props?: React.Attributes & P | null,
+  props?: (React.Attributes & P) | null,
   ...children: React.ReactNode[]
 ): ReturnType<React.FunctionComponent<P>> {
   // if it is a non-string type with _canCompose set just call the function directly, otherwise call createElement as normal

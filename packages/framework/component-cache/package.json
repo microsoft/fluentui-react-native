@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/component-cache",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Simple caching package to avoid duplicate requireNativeComponent calls",
   "repository": {
     "type": "git",
@@ -26,7 +26,9 @@
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
     "verify-api": "fluentui-scripts verify-api-extractor",
-    "update-api": "fluentui-scripts update-api-extractor"
+    "update-api": "fluentui-scripts update-api-extractor",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "keywords": [],
   "author": "",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Thu, 13 May 2021 06:18:23 GMT and should not be manually modified.
+This log was last generated on Fri, 18 Jun 2021 00:38:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.23.15
+
+Fri, 18 Jun 2021 00:38:19 GMT
+
+### Patches
+
+- Apply prettier to libraries core and theming, run (ruaraki@microsoft.com)
 
 ## 0.23.9
 

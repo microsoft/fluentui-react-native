@@ -1,5 +1,5 @@
 import { StackItemProps } from './StackItem/StackItem.types';
-import { ViewStyle, ViewProps } from 'react-native';
+import { ViewStyle, ViewProps, ColorValue } from 'react-native';
 import { IBorderTokens, FontTokens } from '@fluentui-react-native/tokens';
 
 export const stackName = 'Stack';
@@ -100,7 +100,7 @@ export interface StackTokens extends FontTokens, IBorderTokens, StackTokenProps 
   /**
    * background color for the stack
    */
-  backgroundColor?: string;
+  backgroundColor?: ColorValue;
 }
 
 /**

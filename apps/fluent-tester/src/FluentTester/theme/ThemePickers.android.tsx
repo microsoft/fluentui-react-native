@@ -49,13 +49,21 @@ export const ThemePickers: React.FunctionComponent<{}> = () => {
 
   const theme = useTheme();
   const themedPickerStyles = getThemedDropdownStyles(theme);
+
+  type DropdownEntry = { label: string; value: string };
+
+  // react-native-picker is still on 0.61, and their color prop doesn't handle ColorValue
+  let dropdownIconColor = theme.colors.buttonIcon;
+  if (typeof dropdownIconColor !== 'string') {
+    dropdownIconColor = theme.host.appearance === 'dark' ? '#FFFFFF' : '#000000';
+  }
+
   const dropdownProps: PickerPropsAndroid & { dropdownIconColor: string } = {
     style: themedPickerStyles.dropdown,
     mode: 'dropdown',
-    dropdownIconColor: theme.colors.buttonIcon,
+    dropdownIconColor: dropdownIconColor,
   };
 
-  type DropdownEntry = { label: string; value: string };
   type DropdownProps = { initial: string; onValueChange: (value: string) => void; options: DropdownEntry[] };
 
   const Dropdown = (props: DropdownProps) => {

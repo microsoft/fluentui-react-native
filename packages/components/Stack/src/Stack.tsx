@@ -31,7 +31,7 @@ const render = (Slots: ISlots<IStackSlotProps>, renderData: IStackRenderData, ..
         const extraProps = { style: _mixinStyle(childProps[_styleKey], extraStyle) };
         return React.cloneElement(child, {
           ...childProps,
-          ...extraProps
+          ...extraProps,
         });
       }
       return child;
@@ -52,24 +52,24 @@ export const Stack = compose<IStackType>({
   displayName: stackName,
   settings,
   statics: {
-    Item: StackItem
+    Item: StackItem,
   },
   usePrepareProps: (props: IStackProps, useStyling: IUseComposeStyling<IStackType>) => {
     const { gap, horizontal, wrap, ...rest } = props;
     return {
       slotProps: mergeSettings<IStackType['slotProps']>(useStyling(props), { root: rest }),
-      state: { gap, horizontal, wrap }
+      state: { gap, horizontal, wrap },
     };
   },
   render: render,
   slots: {
     root: { slotType: View, filter: filterViewProps },
-    inner: { slotType: View, filter: filterViewProps }
+    inner: { slotType: View, filter: filterViewProps },
   },
   styles: {
     root: [buildStackRootStyles, backgroundColorTokens, borderTokens],
-    inner: [buildStackInnerStyles]
-  }
+    inner: [buildStackInnerStyles],
+  },
 });
 
 export default Stack;

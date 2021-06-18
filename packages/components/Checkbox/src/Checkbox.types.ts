@@ -6,6 +6,7 @@ import { ITextProps } from '@fluentui-react-native/text';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { IconProps } from '@fluentui-react-native/icon';
+import { ColorValue } from 'react-native';
 
 export const checkboxName = 'Checkbox';
 
@@ -78,11 +79,11 @@ export interface ICheckboxProps extends IViewProps {
 }
 
 export interface ICheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
-  checkboxBackgroundColor?: string;
-  checkboxBorderColor?: string;
-  checkmarkColor?: string;
+  checkboxBackgroundColor?: ColorValue;
+  checkboxBorderColor?: ColorValue;
+  checkmarkColor?: ColorValue;
   checkmarkVisibility?: number;
-  textBorderColor?: string;
+  textBorderColor?: ColorValue;
 }
 
 export interface ICheckboxSlotProps {

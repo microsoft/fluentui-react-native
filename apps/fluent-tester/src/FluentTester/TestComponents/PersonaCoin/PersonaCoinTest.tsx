@@ -8,27 +8,24 @@ const personaCoinSections: TestSection[] = [
   {
     name: 'Standard Usage',
     testID: PERSONACOIN_TESTPAGE,
-    component: StandardUsage
+    component: StandardUsage,
   },
   {
     name: 'Customize Usage',
-    component: CustomizeUsage
-  }
+    component: CustomizeUsage,
+  },
 ];
 
 export const PersonaCoinTest: React.FunctionComponent<{}> = () => {
-
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',
-    androidStatus: 'Backlog'
-  }
+    androidStatus: 'Backlog',
+  };
 
-  const description = 'PersonaCoins are used for rendering an individual\'s avatar. PersonaCoin renders the circular image component.'
+  const description = "PersonaCoins are used for rendering an individual's avatar. PersonaCoin renders the circular image component.";
 
-  return (
-    <Test name="PersonaCoin Test" description={description} sections={personaCoinSections} status={status}></Test>
-  );
+  return <Test name="PersonaCoin Test" description={description} sections={personaCoinSections} status={status}></Test>;
 };

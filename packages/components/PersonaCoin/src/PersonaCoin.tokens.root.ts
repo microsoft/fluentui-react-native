@@ -7,14 +7,14 @@ import { ITheme } from '@uifabricshared/theming-ramp';
 const nameMap: { [key: string]: string } = {
   start: 'flex-start',
   center: 'center',
-  end: 'flex-end'
+  end: 'flex-end',
 };
 
 const _rootKeyProps: (keyof IPersonaCoinTokens)[] = ['coinSize', 'size', 'horizontalIconAlignment', 'verticalIconAlignment'];
 
 function _buildRootStyles(tokenProps: IPersonaCoinTokens /*, theme: ITheme */): ViewProps {
   const rootStyle: ViewStyle = {
-    flexDirection: 'row'
+    flexDirection: 'row',
   };
 
   const { physicalSize } = calculateEffectiveSizes(tokenProps);

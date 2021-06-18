@@ -5,13 +5,15 @@
   "scripts": {
     "bundle": "fluentui-scripts webpack",
     "web": "start http://localhost:8080/ & webpack-dev-server",
-    "test": "fluentui-scripts jest"
+    "test": "fluentui-scripts jest",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": ">=0.24.2 <1.0.0",
+    "@fluentui-react-native/tester": ">=0.25.4 <1.0.0",
     "react": "16.13.1",
     "react-art": "^16.13.1",
     "react-dom": "^16.13.1",

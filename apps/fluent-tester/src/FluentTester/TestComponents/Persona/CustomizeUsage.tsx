@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Switch, TextInput } from 'react-native';
+import { View, Text, Switch, TextInput, TextStyle } from 'react-native';
 import { IPersonaTokens, Persona } from '@fluentui/react-native';
 import { michaelImageUrl } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
@@ -46,7 +46,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   }
 
   const theme = useTheme();
-  const textBoxBorderStyle = {
+  const textBoxBorderStyle: TextStyle = {
     borderColor: theme.colors.inputBorder,
   };
 

@@ -2,6 +2,89 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@fluentui-react-native/tester_v0.25.4",
+      "version": "0.25.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Enable on Fluent Tester directory and run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 16 Jun 2021 21:31:58 GMT",
+      "tag": "@fluentui-react-native/tester_v0.25.3",
+      "version": "0.25.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add FTZ underneath root view to set initial focus",
+            "author": "krsiler@microsoft.com",
+            "commit": "e12c9d8dfb07958b365f2924a647c58f7c13a148",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 16 Jun 2021 04:20:49 GMT",
+      "tag": "@fluentui-react-native/tester_v0.25.2",
+      "version": "0.25.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Remove apple theme native module",
+            "author": "sanajmi@microsoft.com",
+            "commit": "0bd7e7c7b6b2a4581265300a01ad6c054c2674b7",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 15 Jun 2021 17:13:57 GMT",
+      "tag": "@fluentui-react-native/tester_v0.25.1",
+      "version": "0.25.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Return default theme of tester to Default",
+            "author": "ruaraki@microsoft.com",
+            "commit": "3f15e3f58fa7b7c43d1b2e9bfc9f164fa770fbe1",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 15 Jun 2021 00:55:36 GMT",
+      "tag": "@fluentui-react-native/tester_v0.25.0",
+      "version": "0.25.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Allow ThemePicker in Android to handle ColorValue",
+            "author": "ruaraki@microsoft.com",
+            "commit": "90e0dcb92a4ea4ee5ea5373f2c54defa127749bf",
+            "package": "@fluentui-react-native/tester"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Update README.md",
+            "author": "amdingler694@gmail.com",
+            "commit": "1db31d192872719852d7720a61f580d4eada498b",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 02 Jun 2021 17:30:36 GMT",
       "tag": "@fluentui-react-native/tester_v0.24.2",
       "version": "0.24.2",

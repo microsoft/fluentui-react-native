@@ -3,7 +3,7 @@ import {
   mergeSettings,
   IOverrideLookup,
   getActiveOverrides,
-  resolveSettingsOverrides
+  resolveSettingsOverrides,
 } from '@uifabricshared/foundation-settings';
 import { IGetSettingsFromTheme, ISettingsEntry } from './CustomSettings.types';
 import { GetMemoValue } from '@fluentui-react-native/memo-cache';
@@ -17,18 +17,18 @@ import { GetMemoValue } from '@fluentui-react-native/memo-cache';
 export function mergeBaseSettings<TSettings extends IComponentSettings, TTheme>(
   customSettings: ISettingsEntry<TSettings, TTheme>[],
   theme: TTheme,
-  getFromTheme?: IGetSettingsFromTheme<TSettings, TTheme>
+  getFromTheme?: IGetSettingsFromTheme<TSettings, TTheme>,
 ): TSettings {
   return customSettings
     ? mergeSettings(
-        ...customSettings.map(entry => {
+        ...customSettings.map((entry) => {
           if (typeof entry === 'string') {
             return (getFromTheme && getFromTheme(theme, entry)) || undefined;
           } else if (typeof entry === 'function') {
             return entry(theme);
           }
           return entry;
-        })
+        }),
       )
     : undefined;
 }
@@ -48,7 +48,7 @@ export function getThemedSettings<TSettings extends IComponentSettings, TTheme>(
   theme: TTheme,
   memoValue: GetMemoValue<TSettings, TSettings>,
   hasOverride?: IOverrideLookup,
-  getFromTheme?: IGetSettingsFromTheme<TSettings, TTheme>
+  getFromTheme?: IGetSettingsFromTheme<TSettings, TTheme>,
 ): { settings: TSettings | undefined; getMemoValue: GetMemoValue<TSettings, TSettings> } {
   // resolve the settings for this component, keyed on the theme
   let [settings, getMemoValue] = memoValue(() => mergeBaseSettings(customSettings, theme, getFromTheme), [theme]);
