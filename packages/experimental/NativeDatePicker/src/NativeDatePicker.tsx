@@ -5,25 +5,23 @@ export const { MSFDateTimePickerMode, MSFDateTimePickerDatePickerType, MSFDateTi
 type NativeDatePickerMode = keyof typeof MSFDateTimePickerMode;
 type NativeDatePickerType = keyof typeof MSFDateTimePickerDatePickerType;
 type NativeDatePickerDateRangePresentation = keyof typeof MSFDateTimePickerDateRangePresentation;
-type NullableDate = Date | null;
-type NullableString = String | null;
 
 interface DatePickerParameterObject {
     mode?: NativeDatePickerMode;
     dateRangePresentation?: NativeDatePickerDateRangePresentation;
     datePickerType?: NativeDatePickerType;
-    startDate?: NullableDate;
-    endDate?: NullableDate;
-    startTitle?: NullableString;
-    startSubtitle?: NullableString;
-    startTab?: NullableString;
-    endTitle?: NullableString;
-    endSubtitle?: NullableString;
-    endTab?: NullableString;
-    dateTitle?: NullableString;
-    dateSubtitle?: NullableString;
-    timeTitle?: NullableString;
-    timeSubtitle?: NullableString;
+    startDate?: Date;
+    endDate?: Date;
+    startTitle?: string;
+    startSubtitle?: string;
+    startTab?: string;
+    endTitle?: string;
+    endSubtitle?: string;
+    endTab?: string;
+    dateTitle?: string;
+    dateSubtitle?: string;
+    timeTitle?: string;
+    timeSubtitle?: string;
     callback: Function;
 }
 
@@ -49,8 +47,8 @@ NativeDatePicker.present = ({
         mode,
         dateRangePresentation,
         datePickerType,
-        startDate,
-        endDate,
+        startDate?.toISOString(),
+        endDate?.toISOString(),
         startTitle,
         startSubtitle,
         startTab,
@@ -65,8 +63,21 @@ NativeDatePicker.present = ({
     );
 }
 
+// We get date values back from the native side as strings in ISO 8601 format and UTC.
+// We want to immediately put them back into `Date` objects in local time.
+NativeDatePicker.parseISOString = (dateISOString: string): Date => {
+    if (dateISOString == null) {
+        return null
+    }
+    var dateParts: number[] = dateISOString.split(/\D+/).map(x => parseInt(x, 10));
+    dateParts[1]--; // Date.UTC's `month` arg is zero-based
+    var dateUTC = Date.UTC.apply(null, dateParts);
+    return new Date(dateUTC);
+}
+
 interface NativeDatePickerInterface {
     present(object: DatePickerParameterObject): void;
+    parseISOString(dateISOString: string): Date;
 }
 
  export default NativeDatePicker as NativeDatePickerInterface;

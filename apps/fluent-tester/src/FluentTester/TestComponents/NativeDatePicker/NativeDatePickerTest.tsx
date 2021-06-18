@@ -8,19 +8,18 @@ import { stackStyle } from '../Common/styles';
 import { Text } from '@fluentui/react-native';
 
 const nativeDatePicker: React.FunctionComponent<{}> = () => {
-  const currentDate = new Date();
-  const [startDate, setStartDate] = React.useState(currentDate.toISOString())
-  const [endDate, setEndDate] = React.useState(null)
+  const [startDate, setStartDate] = React.useState<Date>(new Date())
+  const [endDate, setEndDate] = React.useState<Date>(null)
 
   function didPickDates(pickedStartDate: string, pickedEndDate: string) {
-    setStartDate(pickedStartDate)
-    setEndDate(pickedEndDate)
+    setStartDate(NativeDatePicker.parseISOString(pickedStartDate));
+    setEndDate(NativeDatePicker.parseISOString(pickedEndDate));
   }
 
   // Here we set up some common options and use the spread operator to copy them repeatedly into examples.
   const fixedDates = {
-    startDate: "2020-02-28T12:00:00.000Z",
-    endDate: "2020-03-07T12:00:00.000Z",
+    startDate: NativeDatePicker.parseISOString("2020-02-29T12:25:00.000Z"),
+    endDate: NativeDatePicker.parseISOString("2020-03-07T11:55:00.000Z"),
   };
   const currentDates = {
     startDate: startDate,
@@ -41,8 +40,11 @@ const nativeDatePicker: React.FunctionComponent<{}> = () => {
 
     return (
     <Stack style={stackStyle}>
-      <Text>Start Date: {startDate}</Text>
-      <Text>End Date: {endDate}</Text>
+      <Text variant="headerStandard">Start Date/Time</Text>
+      <Text variant="subheaderStandard">{startDate?.toString()} {"\n"}</Text>
+
+      <Text variant="headerStandard">End Date/Time</Text>
+      <Text variant="subheaderStandard">{endDate?.toString()} {"\n"}</Text>
 
       <Button
         content="Date picker"
