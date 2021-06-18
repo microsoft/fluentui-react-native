@@ -2,7 +2,7 @@ import FluentUI
 
 @objc(MSFDatePickerManager)
 public class DatePickerManager: NSObject {
-    var delegates: Array<DatePickerDelegate> = []
+    var lastDelegate: DatePickerDelegate?
 
     @objc public class func requiresMainQueueSetup() -> Bool {
         return true
@@ -34,7 +34,7 @@ public class DatePickerManager: NSObject {
             let picker = DateTimePicker()
             let delegate = DatePickerDelegate(manager: self, picker: picker, didPickBlock: callback)
             picker.delegate = delegate
-            self.delegates.append(delegate)
+            self.lastDelegate = delegate
 
             let titles = DateTimePicker.Titles.with(
                 startTitle: startTitle,
@@ -48,7 +48,7 @@ public class DatePickerManager: NSObject {
                 dateTimeTitle: timeTitle,
                 dateTimeSubtitle: timeSubtitle)
 
-            delegate.picker.present(
+            picker.present(
                 from: viewController,
                 with: mode,
                 startDate: startDate ?? Date(),
@@ -59,9 +59,8 @@ public class DatePickerManager: NSObject {
         }
     }
 
-    func remove(delegate: DatePickerDelegate) {
-        if let index = delegates.firstIndex(of: delegate) {
-            delegates.remove(at: index)
-        }
+    func release(delegate: DatePickerDelegate) {
+        precondition(delegate === lastDelegate, "DatePickerDelegate requested to be released should match the last one initialized.")
+        lastDelegate = nil
     }
 }
