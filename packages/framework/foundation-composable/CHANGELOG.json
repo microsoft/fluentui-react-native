@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@uifabricshared/foundation-composable_v0.8.2",
+      "version": "0.8.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Apply prettier to framework, run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@uifabricshared/foundation-composable"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 06 Mar 2021 00:20:05 GMT",
       "tag": "@uifabricshared/foundation-composable_v0.8.0",
       "version": "0.8.0",

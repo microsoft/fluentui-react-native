@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theme-registry",
   "entries": [
     {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@uifabricshared/theme-registry_v0.5.1",
+      "version": "0.5.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Apply prettier to framework, run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@uifabricshared/theme-registry"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Jun 2021 00:55:36 GMT",
       "tag": "@uifabricshared/theme-registry_v0.5.0",
       "version": "0.5.0",

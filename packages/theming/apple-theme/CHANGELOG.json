@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Apply prettier to libraries core and theming, run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@fluentui-react-native/apple-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Jun 2021 04:20:49 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.6.0",
       "version": "0.6.0",
