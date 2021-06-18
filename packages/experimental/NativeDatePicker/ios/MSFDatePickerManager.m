@@ -26,9 +26,18 @@ static NSDictionary<NSString *, NSDictionary<NSString *, NSNumber *> *> *MSFDate
 
 @implementation RCTConvert (MSFDatePickerAdditions)
 
-RCT_ENUM_CONVERTER(MSFDateTimePickerMode, MSFDatePickerGetEnumMaps()[@"MSFDateTimePickerMode"], MSFDateTimePickerModeDate, integerValue)
-RCT_ENUM_CONVERTER(MSFDateTimePickerDatePickerType, MSFDatePickerGetEnumMaps()[@"MSFDateTimePickerDatePickerType"], MSFDateTimePickerDatePickerTypeCalendar, integerValue)
-RCT_ENUM_CONVERTER(MSFDateTimePickerDateRangePresentation, MSFDatePickerGetEnumMaps()[@"MSFDateTimePickerDateRangePresentation"], MSFDateTimePickerDateRangePresentationPaged, integerValue)
+RCT_ENUM_CONVERTER(MSFDateTimePickerMode,
+                   MSFDatePickerGetEnumMaps()[@"MSFDateTimePickerMode"],
+                   MSFDateTimePickerModeDate,
+                   integerValue)
+RCT_ENUM_CONVERTER(MSFDateTimePickerDatePickerType,
+                   MSFDatePickerGetEnumMaps()[@"MSFDateTimePickerDatePickerType"],
+                   MSFDateTimePickerDatePickerTypeCalendar,
+                   integerValue)
+RCT_ENUM_CONVERTER(MSFDateTimePickerDateRangePresentation,
+                   MSFDatePickerGetEnumMaps()[@"MSFDateTimePickerDateRangePresentation"],
+                   MSFDateTimePickerDateRangePresentationPaged,
+                   integerValue)
 
 @end
 
@@ -39,6 +48,21 @@ RCT_ENUM_CONVERTER(MSFDateTimePickerDateRangePresentation, MSFDatePickerGetEnumM
     return MSFDatePickerGetEnumMaps();
 }
 
-RCT_EXTERN_METHOD(presentWithMode:(MSFDateTimePickerMode)mode dateRangePresentation: (MSFDateTimePickerDateRangePresentation)dateRangePresentation datePickerType:(MSFDateTimePickerDatePickerType)datePickerType startDate:(nullable NSDate *)startDate endDate:(nullable NSDate *)endDate startTitle:(nullable NSString *)startTitle startSubtitle:(nullable NSString *)startSubtitle startTab:(nullable NSString *)startTab endTitle:(nullable NSString *)endTitle endSubtitle:(nullable NSString *)endSubtitle endTab:(nullable NSString *)endTab dateTitle:(nullable NSString *)dateTitle dateSubtitle:(nullable NSString *)dateSubtitle timeTitle:(nullable NSString *)timeTitle timeSubtitle:(nullable NSString *)timeSubtitle callback:(RCTResponseSenderBlock)callback)
+RCT_EXTERN_METHOD(presentWithMode:(MSFDateTimePickerMode)mode
+                  dateRangePresentation:(MSFDateTimePickerDateRangePresentation)dateRangePresentation
+                  datePickerType:(MSFDateTimePickerDatePickerType)datePickerType
+                  startDate:(nullable NSDate *)startDate
+                  endDate:(nullable NSDate *)endDate
+                  startTitle:(nullable NSString *)startTitle
+                  startSubtitle:(nullable NSString *)startSubtitle
+                  startTab:(nullable NSString *)startTab
+                  endTitle:(nullable NSString *)endTitle
+                  endSubtitle:(nullable NSString *)endSubtitle
+                  endTab:(nullable NSString *)endTab
+                  dateTitle:(nullable NSString *)dateTitle
+                  dateSubtitle:(nullable NSString *)dateSubtitle
+                  timeTitle:(nullable NSString *)timeTitle
+                  timeSubtitle:(nullable NSString *)timeSubtitle
+                  callback:(RCTResponseSenderBlock)callback)
 
 @end
