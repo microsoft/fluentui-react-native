@@ -15,10 +15,12 @@
     "lint": "fluentui-scripts eslint",
     "start": "react-native start",
     "test": "fluentui-scripts jest",
-    "macos": "react-native run-macos --scheme FluentTester --project-path src"
+    "macos": "react-native run-macos --scheme FluentTester --project-path src",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.25.3",
+    "@fluentui-react-native/tester": "^0.25.4",
     "react-native-macos": "0.63.33",
     "react-native-svg": "^12.1.1",
     "react-native-test-app": "^0.3.2"

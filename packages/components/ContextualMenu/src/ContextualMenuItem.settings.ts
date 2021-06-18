@@ -7,7 +7,7 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
       backgroundColor: 'menuBackground',
       color: 'menuItemText',
       borderColor: 'transparent',
-      borderWidth: 1
+      borderWidth: 1,
     },
     root: {
       accessible: true,
@@ -18,8 +18,8 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
         alignItems: 'flex-start',
         flexDirection: 'row',
         alignSelf: 'flex-start',
-        width: '100%'
-      }
+        width: '100%',
+      },
     },
     content: {},
     icon: {},
@@ -33,8 +33,8 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
         alignSelf: 'flex-start',
         minHeight: 32,
         minWidth: 80,
-        justifyContent: 'center'
-      }
+        justifyContent: 'center',
+      },
     },
     _precedence: ['focused', 'hovered', 'pressed', 'disabled'],
     _overrides: {
@@ -42,13 +42,13 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
         tokens: {
           backgroundColor: 'menuBackground',
           color: 'disabledText',
-        }
+        },
       },
       pressed: {
         tokens: {
           backgroundColor: 'menuItemBackgroundHovered',
           color: 'menuItemTextHovered',
-        }
+        },
       },
       focused: {
         tokens: {
@@ -58,21 +58,21 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
         _overrides: {
           disabled: {
             tokens: {
-              borderColor: 'focusBorder'
-            }
+              borderColor: 'focusBorder',
+            },
           },
           hovered: {
             _overrides: {
               disabled: {
                 tokens: {
-                  borderColor: 'transparent'
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+                  borderColor: 'transparent',
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
-  contextualMenuItemName
+  contextualMenuItemName,
 ];

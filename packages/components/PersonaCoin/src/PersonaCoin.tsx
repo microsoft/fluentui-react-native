@@ -6,7 +6,7 @@ import {
   IPersonaCoinSlotProps,
   IPersonaCoinRenderData,
   IPersonaCoinState,
-  personaCoinName
+  personaCoinName,
 } from './PersonaCoin.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { filterViewProps, filterImageProps } from '@fluentui-react-native/adapters';
@@ -23,7 +23,7 @@ import { buildIconStyles } from './PersonaCoin.tokens.icon';
 
 function usePrepareForProps(
   props: IPersonaCoinProps,
-  useStyling: IUseComposeStyling<IPersonaCoinType>
+  useStyling: IUseComposeStyling<IPersonaCoinType>,
 ): IRenderData<IPersonaCoinSlotProps, IPersonaCoinState> {
   const { imageUrl, imageDescription, initials, presence, isOutOfOffice, ...rest } = props;
 
@@ -31,7 +31,7 @@ function usePrepareForProps(
     imageUrl === undefined
       ? undefined
       : {
-          uri: imageUrl
+          uri: imageUrl,
         };
 
   const iconSource = presence === undefined ? undefined : getPresenceIconSource(presence, isOutOfOffice || false);
@@ -40,16 +40,16 @@ function usePrepareForProps(
     slotProps: mergeSettings<IPersonaCoinType['slotProps']>(useStyling(props), {
       root: { ...rest },
       initials: {
-        children: initials
+        children: initials,
       },
       photo: {
-        accessibilityLabel: imageDescription
-      }
+        accessibilityLabel: imageDescription,
+      },
     }),
     state: {
       iconSource,
-      personaPhotoSource
-    }
+      personaPhotoSource,
+    },
   };
 }
 
@@ -81,21 +81,21 @@ export const PersonaCoin = compose<IPersonaCoinType>({
   slots: {
     root: {
       slotType: View,
-      filter: filterViewProps
+      filter: filterViewProps,
     },
     photo: {
       slotType: Image,
-      filter: filterImageProps
+      filter: filterImageProps,
     },
     initials: Text,
     initialsBackground: {
       slotType: View,
-      filter: filterViewProps
+      filter: filterViewProps,
     },
     icon: {
       slotType: Image,
-      filter: filterImageProps
-    }
+      filter: filterImageProps,
+    },
   },
   render: render,
   styles: {
@@ -103,6 +103,6 @@ export const PersonaCoin = compose<IPersonaCoinType>({
     initials: [foregroundColorTokens, buildInitialsStyles],
     initialsBackground: [buildInitialsBackgroundStyles],
     photo: [buildPhotoStyles],
-    icon: [buildIconStyles]
-  }
+    icon: [buildIconStyles],
+  },
 });

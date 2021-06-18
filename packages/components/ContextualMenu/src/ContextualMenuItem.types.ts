@@ -24,27 +24,27 @@ export interface ContextualMenuItemTokens extends FontTokens, IForegroundColorTo
   /**
    * The icon color.
    */
-   iconColor?: string;
+  iconColor?: string;
 
-   /**
-    * The icon color when hovering over the Button.
-    */
-   iconColorHovered?: string;
+  /**
+   * The icon color when hovering over the Button.
+   */
+  iconColorHovered?: string;
 
-   /**
-    * The icon color when the Button is being pressed.
-    */
-   iconColorPressed?: string;
+  /**
+   * The icon color when the Button is being pressed.
+   */
+  iconColorPressed?: string;
 
-   /**
-    * The size of the icon.
-    */
-   iconSize?: number | string;
+  /**
+   * The size of the icon.
+   */
+  iconSize?: number | string;
 
-   /**
-    * The weight of the lines used when drawing the icon.
-    */
-   iconWeight?: number;
+  /**
+   * The weight of the lines used when drawing the icon.
+   */
+  iconWeight?: number;
 }
 
 export interface ContextualMenuItemProps extends Omit<IPressableProps, 'onPress'> {

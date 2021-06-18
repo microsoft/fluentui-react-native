@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@fluentui-react-native/tester_v0.25.4",
+      "version": "0.25.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Enable on Fluent Tester directory and run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Jun 2021 21:31:58 GMT",
       "tag": "@fluentui-react-native/tester_v0.25.3",
       "version": "0.25.3",

@@ -11,7 +11,7 @@ export function useSelectedKey(defaultSelectedKey: string | null, userCallback?:
       setSelectedKey(key);
       userCallback && userCallback(key);
     },
-    [setSelectedKey, userCallback]
+    [setSelectedKey, userCallback],
   );
 
   return { onKeySelect, selectedKey };

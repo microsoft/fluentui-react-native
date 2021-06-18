@@ -12,7 +12,7 @@ import {
   IExtractState,
   IDefineUseStyling,
   IComposableType,
-  ISlotWithFilter
+  ISlotWithFilter,
 } from './Composable.types';
 import { useCompoundPrepare } from './Composable.slots';
 import { renderSlot } from './slots';
@@ -28,7 +28,7 @@ export function atomicRender<TProps extends object, TState = object>(
 
 export function atomicUsePrepareProps<TProps extends object, TSlotProps extends ISlotProps = ISlotProps<TProps>, TState = object>(
   props: TProps,
-  useStyling: IDefineUseStyling<TProps, TSlotProps>
+  useStyling: IDefineUseStyling<TProps, TSlotProps>,
 ): IRenderData<TSlotProps, TState> {
   const slotProps = mergeSettings<TSlotProps>(useStyling(props), ({ root: props } as unknown) as TSlotProps);
   return { slotProps };
@@ -41,7 +41,7 @@ export function atomicUsePrepareProps<TProps extends object, TSlotProps extends 
  * @param options - partial options definition to turn into full options
  */
 function _validateOptions<TProps extends object, TSlotProps extends ISlotProps, TState>(
-  options: IComposableDefinition<TProps, TSlotProps, TState>
+  options: IComposableDefinition<TProps, TSlotProps, TState>,
 ): IComposable<TProps, TSlotProps, TState> {
   const numSlots = (options.slots && Object.getOwnPropertyNames(options.slots).length) || 0;
   if (!numSlots) {
@@ -77,7 +77,7 @@ function _validateOptions<TProps extends object, TSlotProps extends ISlotProps, 
  * @param options - composable options which define the behavior of the component
  */
 export function composable<TType>(
-  definition: IComposableDefinition<IExtractProps<TType>, IExtractSlotProps<TType>, IExtractState<TType>>
+  definition: IComposableDefinition<IExtractProps<TType>, IExtractSlotProps<TType>, IExtractState<TType>>,
 ): IWithComposable<
   React.FunctionComponent<IExtractProps<TType>>,
   IComposable<IExtractProps<TType>, IExtractSlotProps<TType>, IExtractState<TType>>
@@ -98,7 +98,7 @@ export function composable<TType>(
     // prepare the props, all the way down the tree, also build the slots
     const { renderData, Slots } = useCompoundPrepare<IProps, IThisSlotProps, IState>(
       props as IProps,
-      options as IComposable<IProps, IThisSlotProps, IState>
+      options as IComposable<IProps, IThisSlotProps, IState>,
     );
 
     // now do the render, adding the children back in
@@ -122,11 +122,11 @@ export function composable<TType>(
 export function atomic<TProps extends object, TState extends object = object>(
   target: INativeSlotType,
   usePrepareProps: IComposable<TProps, ISlotProps<TProps>, TState>['usePrepareProps'],
-  filter?: IPropFilter
+  filter?: IPropFilter,
 ): React.FunctionComponent<TProps> {
   return composable<IComposableType<TProps, ISlotProps<TProps>, TState>>({
     usePrepareProps,
     slots: { root: { slotType: target, filter } },
-    render: atomicRender
+    render: atomicRender,
   });
 }
