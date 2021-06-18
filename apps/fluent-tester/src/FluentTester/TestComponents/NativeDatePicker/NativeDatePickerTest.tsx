@@ -21,10 +21,6 @@ const nativeDatePicker: React.FunctionComponent<{}> = () => {
     startDate: NativeDatePicker.parseISOString('2020-02-29T12:25:00.000Z'),
     endDate: NativeDatePicker.parseISOString('2020-03-07T11:55:00.000Z'),
   };
-  const currentDates = {
-    startDate: startDate,
-    endDate: endDate,
-  }
   const titles = {
     startTitle: 'Start Title',
     startSubitle: 'Start Subtitle',
@@ -64,7 +60,7 @@ const nativeDatePicker: React.FunctionComponent<{}> = () => {
       />
       <Button
         content='Date range (tabbed) remembering last selection'
-        onClick={() => NativeDatePicker.present({mode: 'dateRange', ...currentDates, callback: didPickDates})}
+        onClick={() => NativeDatePicker.present({mode: 'dateRange', startDate: startDate, endDate: endDate, callback: didPickDates})}
       />
 
       {/* Shows 'Date Title' and 'Date Subtitle' only.  Other titles are ignored. */}
