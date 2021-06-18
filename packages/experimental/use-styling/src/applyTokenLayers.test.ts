@@ -20,18 +20,18 @@ const tokens1: Tokens = {
     a: 'a-hover',
     b: 'b-hover',
     press: {
-      a: 'a-hover-press'
-    }
+      a: 'a-hover-press',
+    },
   },
   press: {
     a: 'a-press',
-    b: 'b-press'
+    b: 'b-press',
   },
   disabled: {
     a: 'disabled',
     b: 'disabled',
-    c: 'disabled'
-  }
+    c: 'disabled',
+  },
 };
 
 function stripLayers(tokens: Tokens): Tokens {
@@ -51,7 +51,7 @@ describe('applyLayers tests', () => {
 
   test('apply hover works', () => {
     const cache = getMemoCache();
-    const lookup = layer => layer === 'hover';
+    const lookup = (layer) => layer === 'hover';
     const result1 = applyTokenLayers(tokens1, stateOrder, cache, lookup)[0];
     expect(applyTokenLayers(tokens1, stateOrder, cache, lookup)[0]).toBe(result1);
     expect(stripLayers(result1)).toEqual({ a: 'a-hover', b: 'b-hover', c: 'c' });
@@ -59,7 +59,7 @@ describe('applyLayers tests', () => {
 
   test('apply hover and press layer correctly', () => {
     const cache = getMemoCache();
-    const lookup = layer => layer === 'hover' || layer === 'press';
+    const lookup = (layer) => layer === 'hover' || layer === 'press';
     const result1 = applyTokenLayers(tokens1, stateOrder, cache, lookup)[0];
     expect(applyTokenLayers(tokens1, stateOrder, cache, lookup)[0]).toBe(result1);
     expect(stripLayers(result1)).toEqual({ a: 'a-hover-press', b: 'b-press', c: 'c' });

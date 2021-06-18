@@ -12,7 +12,7 @@ const textFontTable: IPersonaFontTable = {
   size56: { fontSize: 'subheader' },
   size72: { fontSize: 'subheader' },
   size100: { fontSize: 'subheader' },
-  size120: { fontSize: 'subheader' }
+  size120: { fontSize: 'subheader' },
 };
 
 const secondaryFontTable: IPersonaFontTable = {
@@ -24,7 +24,7 @@ const secondaryFontTable: IPersonaFontTable = {
   size56: { fontSize: 'secondary' },
   size72: { fontSize: 'secondary' },
   size100: { fontSize: 'secondary' },
-  size120: { fontSize: 'secondary' }
+  size120: { fontSize: 'secondary' },
 };
 
 const tertiaryFontTable: IPersonaFontTable = {
@@ -36,7 +36,7 @@ const tertiaryFontTable: IPersonaFontTable = {
   size56: { fontSize: 0 },
   size72: { fontSize: 'secondary' },
   size100: { fontSize: 'secondary' },
-  size120: { fontSize: 'secondary' }
+  size120: { fontSize: 'secondary' },
 };
 
 const optionalFontTable: IPersonaFontTable = {
@@ -48,7 +48,7 @@ const optionalFontTable: IPersonaFontTable = {
   size56: { fontSize: 0 },
   size72: { fontSize: 0 },
   size100: { fontSize: 'secondary' },
-  size120: { fontSize: 'secondary' }
+  size120: { fontSize: 'secondary' },
 };
 
 export function getTextFont(size: PersonaSize): FontTokens {
@@ -76,7 +76,7 @@ const horizontalGapTable: { [P in PersonaSize]: number } = {
   size56: 16,
   size72: 16,
   size100: 16,
-  size120: 16
+  size120: 16,
 };
 
 export function getHorizontalGap(size: PersonaSize | undefined): number {

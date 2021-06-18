@@ -27,19 +27,19 @@ export const Callout = compose<ICalloutType>({
       root: {
         ref: calloutRef,
         target: targetNativeTag,
-        ...rest
-      }
+        ...rest,
+      },
     });
 
     return { slotProps };
   },
   settings: settings,
   slots: {
-    root: RCTCallout
+    root: RCTCallout,
   },
   styles: {
-    root: [backgroundColorTokens, borderTokens]
-  }
+    root: [backgroundColorTokens, borderTokens],
+  },
 });
 
 export default Callout;

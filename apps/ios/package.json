@@ -16,7 +16,9 @@
     "test": "fluentui-scripts jest",
     "bundle": "react-native rnx-bundle --dev false",
     "bundle-dev": "react-native rnx-bundle",
-    "ios": "react-native run-ios --scheme ReactTestApp --project-path src"
+    "ios": "react-native run-ios --scheme ReactTestApp --project-path src",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.25.3",

@@ -27,7 +27,9 @@
     "test": "fluentui-scripts jest",
     "update-api": "fluentui-scripts update-api-extractor",
     "update-snapshots": "fluentui-scripts jest -u",
-    "verify-api": "fluentui-scripts verify-api-extractor"
+    "verify-api": "fluentui-scripts verify-api-extractor",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
     "@fluentui-react-native/interactive-hooks": ">=0.10.3 <1.0.0",

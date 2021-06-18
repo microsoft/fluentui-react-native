@@ -9,17 +9,17 @@ export const settings: IComposeSettings<SubmenuType> = [
       borderColor: 'buttonBorder',
       borderWidth: 1,
       gapSpace: 0,
-      minPadding: 0
+      minPadding: 0,
     },
     root: {
       accessibilityRole: 'menu',
-      directionalHint: 'rightTopEdge'
+      directionalHint: 'rightTopEdge',
     },
     container: {
       style: {
-        padding: 1
-      }
-    }
+        padding: 1,
+      },
+    },
   },
-  submenuName
+  submenuName,
 ];
