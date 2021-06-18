@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Add tests for NativeDatePicker",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "chripear@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-06-18T20:55:07.552Z"
+}
