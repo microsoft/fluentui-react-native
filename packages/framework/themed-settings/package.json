@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/themed-settings",
-  "version": "0.5.0",
+  "version": "0.6.1",
   "description": "Package which drives custom cacheable settings for a component",
   "repository": {
     "type": "git",
@@ -26,19 +26,26 @@
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
     "verify-api": "fluentui-scripts verify-api-extractor",
-    "update-api": "fluentui-scripts update-api-extractor"
+    "update-api": "fluentui-scripts update-api-extractor",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": ">=0.8.0 <1.0.0"
+    "@uifabricshared/foundation-settings": ">=0.9.1 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^25.1.4",
     "@types/node": "^10.3.5",
+    "@types/react-native": "^0.63.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/memo-cache": "^1.1.0"
+    "@fluentui-react-native/memo-cache": "^1.1.1",
+    "react-native": "^0.63.4"
+  },
+  "peerDependencies": {
+    "react-native": ">=0.63.4"
   }
 }

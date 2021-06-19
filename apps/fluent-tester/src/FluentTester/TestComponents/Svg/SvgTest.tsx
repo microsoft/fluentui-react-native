@@ -8,9 +8,9 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 const styles = StyleSheet.create({
   svg: {
     backgroundColor: 'green',
-    color: 'purple'
-  }
-})
+    color: 'purple',
+  },
+});
 
 const rect: React.FunctionComponent<{}> = () => {
   return (
@@ -18,7 +18,7 @@ const rect: React.FunctionComponent<{}> = () => {
       <Rect x="10" y="10" width="20" height="20" fill="red" stroke="black" />
     </Svg>
   );
-}
+};
 
 const circle: React.FunctionComponent<{}> = () => {
   return (
@@ -26,7 +26,7 @@ const circle: React.FunctionComponent<{}> = () => {
       <Circle cx="25" cy="25" r="20" fill="red" stroke="black" />
     </Svg>
   );
-}
+};
 
 const line: React.FunctionComponent<{}> = () => {
   return (
@@ -34,7 +34,7 @@ const line: React.FunctionComponent<{}> = () => {
       <Line x1="10" y1="10" x2="20" y2="20" fill="red" stroke="black" />
     </Svg>
   );
-}
+};
 
 const path: React.FunctionComponent<{}> = () => {
   return (
@@ -42,7 +42,7 @@ const path: React.FunctionComponent<{}> = () => {
       <Path d="M 0 0 A 10 10 0 0,1 0 100" fill="magenta" stroke="purple" id="path" />
     </Svg>
   );
-}
+};
 
 const polygon: React.FunctionComponent<{}> = () => {
   return (
@@ -50,7 +50,7 @@ const polygon: React.FunctionComponent<{}> = () => {
       <Polygon points="40,5 70,80 25,95" fill="lime" stroke="purple" strokeWidth="1" />
     </Svg>
   );
-}
+};
 
 const linearGradient: React.FunctionComponent<{}> = () => {
   return (
@@ -64,7 +64,7 @@ const linearGradient: React.FunctionComponent<{}> = () => {
       <Line x1="0" y1="0" x2="10" y2="10" fill="red" stroke="url(#grad)" strokeWidth="5" />
     </Svg>
   );
-}
+};
 
 const radialGradient: React.FunctionComponent<{}> = () => {
   return (
@@ -78,7 +78,7 @@ const radialGradient: React.FunctionComponent<{}> = () => {
       <Line x1="0" y1="0" x2="9" y2="9" stroke="url(#grad2)" strokeWidth="5" />
     </Svg>
   );
-}
+};
 
 const rectCircle: React.FunctionComponent<{}> = () => {
   return (
@@ -95,11 +95,11 @@ const rectCircle: React.FunctionComponent<{}> = () => {
       <Use href="#shape" x="170" y="0" />
     </Svg>
   );
-}
+};
 
 const bundledSvg: React.FunctionComponent<{}> = () => {
   return <TestSvg width={200} height={200} color="red" />;
-}
+};
 
 const remoteSvg: React.FunctionComponent<{}> = () => {
   return (
@@ -122,50 +122,50 @@ const remoteSvg: React.FunctionComponent<{}> = () => {
       />
     </View>
   );
-}
+};
 
 const svgSections: TestSection[] = [
   {
     name: 'Rect',
     testID: SVG_TESTPAGE,
-    component: rect
+    component: rect,
   },
   {
     name: 'Circle',
-    component: circle
+    component: circle,
   },
   {
     name: 'Line',
-    component: line
+    component: line,
   },
   {
     name: 'Path',
-    component: path
+    component: path,
   },
   {
     name: 'Polygon',
-    component: polygon
+    component: polygon,
   },
   {
     name: 'Linear Gradient',
-    component: linearGradient
+    component: linearGradient,
   },
   {
     name: 'Radial Gradient',
-    component: radialGradient
+    component: radialGradient,
   },
   {
     name: 'Rect and Circle via Defs and Use',
-    component: rectCircle
+    component: rectCircle,
   },
   {
     name: 'Bundled Svg',
-    component: bundledSvg
+    component: bundledSvg,
   },
   {
     name: 'Remotely Retrieved Svgs',
-    component: remoteSvg
-  }
+    component: remoteSvg,
+  },
 ];
 
 export const SvgTest: React.FunctionComponent<{}> = () => {
@@ -174,10 +174,10 @@ export const SvgTest: React.FunctionComponent<{}> = () => {
     uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
     macosStatus: 'Backlog',
-    androidStatus: 'Backlog'
-  }
+    androidStatus: 'Backlog',
+  };
 
   const description = 'No description.';
 
   return <Test name="Svg Test" description={description} sections={svgSections} status={status}></Test>;
-}
+};

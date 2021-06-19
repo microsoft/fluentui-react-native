@@ -20,7 +20,7 @@ function _mergeAndFilterProps<TProps>(propsBase: TProps, propsExtra: TProps, fil
   let props = mergeProps<TProps>(propsBase, propsExtra);
   if (filter && props) {
     const removeMask = {};
-    Object.getOwnPropertyNames(props).forEach(key => {
+    Object.getOwnPropertyNames(props).forEach((key) => {
       if (!filter(key)) {
         removeMask[key] = undefined;
       }
@@ -93,7 +93,7 @@ function useUpdateRenderData<TProps, TSlotProps, TState>(
   const childInfo = info.childInfo;
   if (childInfo) {
     const slotProps = info.renderData.slotProps || {};
-    Object.getOwnPropertyNames(childInfo).forEach(child => {
+    Object.getOwnPropertyNames(childInfo).forEach((child) => {
       useUpdateRenderData(slotProps[child], childInfo[child]);
     });
   }

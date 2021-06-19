@@ -1,8 +1,24 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Sat, 06 Mar 2021 00:20:05 GMT and should not be manually modified.
+This log was last generated on Fri, 18 Jun 2021 00:38:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.1
+
+Fri, 18 Jun 2021 00:38:19 GMT
+
+### Patches
+
+- Apply prettier to framework, run (ruaraki@microsoft.com)
+
+## 0.14.0
+
+Tue, 15 Jun 2021 00:55:36 GMT
+
+### Minor changes
+
+- Remove ColorValue export (ruaraki@microsoft.com)
 
 ## 0.13.0
 

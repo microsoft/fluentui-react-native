@@ -41,7 +41,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     const onItemClick = React.useCallback(
       (e) => {
         if (!disabled) {
-          context ?.onDismissMenu();
+          context?.onDismissMenu();
           onClick ? onClick() : context.onItemClick(itemKey);
           e.stopPropagation();
         }
@@ -51,15 +51,13 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
 
     const cmRef = useViewCommandFocus(componentRef);
 
-    const onItemHoverIn = React.useCallback(
-      () => {
-        componentRef.current.focus();
-        // dismiss submenu
-        if (!disabled && context.isSubmenuOpen)
-        {
-          context.dismissSubmenu();
-        }
-      }, [componentRef, disabled, context]);
+    const onItemHoverIn = React.useCallback(() => {
+      componentRef.current.focus();
+      // dismiss submenu
+      if (!disabled && context.isSubmenuOpen) {
+        context.dismissSubmenu();
+      }
+    }, [componentRef, disabled, context]);
 
     const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn });
 
@@ -75,24 +73,26 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     };
 
     /*
-    * On Desktop, focus gets moved to the root of the menu, so hovering off the menu does not automatically call onBlur as we expect it to.
-    * OnMouseEnter and onMouseLeave are overridden with the below callbacks that calls onFocus and onBlur explicitly
-    */
+     * On Desktop, focus gets moved to the root of the menu, so hovering off the menu does not automatically call onBlur as we expect it to.
+     * OnMouseEnter and onMouseLeave are overridden with the below callbacks that calls onFocus and onBlur explicitly
+     */
     const onMouseEnter = React.useCallback(
-      e => {
+      (e) => {
         pressable.props.onMouseEnter && pressable.props.onMouseEnter(e);
         pressable.props.onFocus && pressable.props.onFocus(e);
         e.stopPropagation();
       },
-      [pressable]);
+      [pressable],
+    );
 
     const onMouseLeave = React.useCallback(
-      e => {
+      (e) => {
         pressable.props.onMouseLeave && pressable.props.onMouseLeave(e);
         pressable.props.onBlur && pressable.props.onBlur(e);
         e.stopPropagation();
       },
-      [pressable]);
+      [pressable],
+    );
 
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
@@ -104,7 +104,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         onKeyUp: onKeyUp,
         onMouseEnter: onMouseEnter,
         onMouseLeave: onMouseLeave,
-        accessibilityLabel: accessibilityLabel
+        accessibilityLabel: accessibilityLabel,
       },
       content: { children: text, testID },
       icon: createIconProps(icon),

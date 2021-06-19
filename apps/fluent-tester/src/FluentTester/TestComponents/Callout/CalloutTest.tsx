@@ -5,7 +5,6 @@ import { CALLOUT_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const standardCallout: React.FunctionComponent<{}> = () => {
-
   const [showStandardCallout, setShowStandardCallout] = React.useState(false);
   const [isStandardCalloutVisible, setIsStandardCalloutVisible] = React.useState(false);
 
@@ -59,7 +58,7 @@ const standardCallout: React.FunctionComponent<{}> = () => {
         decoyBtn2Ref?.current?.focus?.();
       }
     },
-    [decoyBtn1Ref, decoyBtn2Ref]
+    [decoyBtn1Ref, decoyBtn2Ref],
   );
 
   const colorDefault: string = 'default';
@@ -170,10 +169,9 @@ const standardCallout: React.FunctionComponent<{}> = () => {
       )}
     </View>
   );
-}
+};
 
 const customCallout: React.FunctionComponent<{}> = () => {
-
   const [showCustomizedCallout, setShowCustomizedCallout] = React.useState(false);
   const [isCustomizedCalloutVisible, setIsCustomizedCalloutVisible] = React.useState(false);
 
@@ -226,33 +224,30 @@ const customCallout: React.FunctionComponent<{}> = () => {
       )}
     </View>
   );
-}
+};
 
 const calloutSections: TestSection[] = [
   {
     name: 'Standard Usage',
     testID: CALLOUT_TESTPAGE,
-    component: standardCallout
+    component: standardCallout,
   },
   {
     name: 'Customized Usage',
-    component: customCallout
+    component: customCallout,
   },
 ];
 
 export const CalloutTest: React.FunctionComponent<{}> = () => {
-
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
     macosStatus: 'Backlog',
-    androidStatus: 'Backlog'
-  }
+    androidStatus: 'Backlog',
+  };
 
-  const description = 'A callout is an anchored tip that can be used to teach people or guide them through the app without blocking them.'
+  const description = 'A callout is an anchored tip that can be used to teach people or guide them through the app without blocking them.';
 
-  return (
-    <Test name="Callout Test" description={description} sections={calloutSections} status={status}></Test>
-  );
+  return <Test name="Callout Test" description={description} sections={calloutSections} status={status}></Test>;
 };

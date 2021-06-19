@@ -2,6 +2,36 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.14.1",
+      "version": "0.14.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Apply prettier to framework, run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 15 Jun 2021 00:55:36 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.14.0",
+      "version": "0.14.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Remove ColorValue export",
+            "author": "ruaraki@microsoft.com",
+            "commit": "90e0dcb92a4ea4ee5ea5373f2c54defa127749bf",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 06 Mar 2021 00:20:05 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.13.0",
       "version": "0.13.0",

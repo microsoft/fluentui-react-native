@@ -16,10 +16,12 @@
     "test": "fluentui-scripts jest",
     "bundle": "react-native rnx-bundle --dev false",
     "bundle-dev": "react-native rnx-bundle",
-    "android": "react-native run-android "
+    "android": "react-native run-android ",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.24.2",
+    "@fluentui-react-native/tester": "^0.25.4",
     "@react-native-picker/picker": "^1.9.11",
     "react": "16.13.1",
     "react-native": "^0.63.4",

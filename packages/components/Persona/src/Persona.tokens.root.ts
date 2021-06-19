@@ -8,7 +8,7 @@ const _rootKeyProps: (keyof IPersonaTokens)[] = ['coinSize', 'size'];
 function _buildRootStyle(tokenProps: IPersonaTokens): ViewProps {
   const rootStyle: ViewStyle = {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   };
 
   const { coinSize } = tokenProps;
