@@ -19,9 +19,10 @@ export const Callout = compose<ICalloutType>({
 
     React.useLayoutEffect(() => {
       if (typeof target === 'string') {
+        // Pass string type `target` directly
         setNativeTarget(target);
-      }
-      if (typeof target !== 'string' && target?.current) {
+      } else if (target?.current) {
+        // Pass the tagID for a valid ref `target`
         setNativeTarget(findNodeHandle(target.current));
       }
     }, [target]);
