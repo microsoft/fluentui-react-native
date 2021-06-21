@@ -26,7 +26,7 @@ export const RadioButton = compose<IRadioButtonType>({
 
     /* We don't want to call the user's onChange multiple times on the same selection. */
     const changeSelection = () => {
-      if (buttonKey != info.selectedKey) {
+      if (buttonKey != info.selectedKey && !disabled) {
         info.onChange && info.onChange(buttonKey);
         info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
       }
