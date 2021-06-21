@@ -18,17 +18,20 @@ import { View, Animated, Easing, ViewProps } from 'react-native';
  *   left: R - D - borderRadius
  *     same explanation as above
  */
-// This will be a token later
 // radius is from center to halfway border, border is line thickness
 export const getActivityIndicatorStyle = (radius: number, border: number) => {
   const xydist = Math.sqrt(2)/2 * radius;
+  // from outside edge of circle on one side to the opposite side
+  const totalDiameter = radius*2 + border;
+  // from Figma
+  const activityIndicatorColor = '#919191';
 
   return {
     semicircle: {
-      width: radius*2 + border, // from outside edge of circle on one side to the opposite side
-      height: radius*2 + border,
+      width: totalDiameter,
+      height: totalDiameter,
       borderWidth: border,
-      borderColor: '#919191',
+      borderColor: activityIndicatorColor,
       borderRadius: radius + border/2,
       borderLeftColor: 'transparent',
     },
@@ -36,7 +39,7 @@ export const getActivityIndicatorStyle = (radius: number, border: number) => {
       width: border,
       height: border,
       borderRadius: border/2,
-      backgroundColor: '#919191',
+      backgroundColor: activityIndicatorColor,
       top: radius - xydist - border,
       left: radius - xydist - border,
     },
@@ -44,7 +47,7 @@ export const getActivityIndicatorStyle = (radius: number, border: number) => {
       width: border,
       height: border,
       borderRadius: border/2,
-      backgroundColor: '#919191',
+      backgroundColor: activityIndicatorColor,
       top: radius + xydist - 2*border,
       left: radius - xydist - border,
     }
@@ -56,6 +59,7 @@ export type ActivityIndicatorProps = ViewProps & {
     animating?: boolean;
     hidesWhenStopped?: boolean;
 }
+
 export const ActivityIndicator = (props: ActivityIndicatorProps) => {
   const spinAnimation = useRef(new Animated.Value(0)).current;
   if (props.animating) {
@@ -75,15 +79,19 @@ export const ActivityIndicator = (props: ActivityIndicatorProps) => {
     outputRange: ['0deg', '359deg'],
   });
 
-  // or display: none, but since React Native ActivityIndicator still takes up space when hidden, using opacity
-  let hideOpacity = 1;
+  // React Native ActivityIndicator still takes up space when hidden, so to perfectly match would use opacity
+  // using display: 'none' because screen reader might still read it when hidden with opacity
+  let displayValue = 'flex';
   if (props.animating == false && props.hidesWhenStopped == true) {
-    hideOpacity = 0;
+    displayValue = 'none';
   }
+
+  const activityIndicatorStyles = getActivityIndicatorStyle(40, 10);
+
   return (
-    <Animated.View style={[getActivityIndicatorStyle(40, 10).semicircle, { transform: [{rotateZ: interpolateSpin}, {perspective: 10}] }, {opacity: hideOpacity}]}>
-      <View style={getActivityIndicatorStyle(40, 10).endTop}></View>
-      <View style={getActivityIndicatorStyle(40, 10).endBottom}></View>
+    <Animated.View style={[activityIndicatorStyles.semicircle, { transform: [{rotateZ: interpolateSpin}, {perspective: 10}] }, {display: displayValue as 'flex'|'none'}]}>
+      <View style={activityIndicatorStyles.endTop}></View>
+      <View style={activityIndicatorStyles.endBottom}></View>
     </Animated.View>
   )
 };
