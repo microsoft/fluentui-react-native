@@ -25,11 +25,13 @@
   "dependencies": {
     "@uifabricshared/foundation-compose": "^1.9.1",
     "@fluentui-react-native/adapters": ">=0.6.1 <1.0.0",
+    "@fluentui-react-native/icon": ">=0.5.1 <1.0.0",
     "@fluentui-react-native/interactive-hooks": ">=0.10.4 <1.0.0",
     "@fluentui-react-native/text": ">=0.9.3 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.9.1 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.8.2 <1.0.0",
-    "@uifabricshared/foundation-settings": ">=0.9.1 <1.0.0"
+    "@uifabricshared/foundation-settings": ">=0.9.1 <1.0.0",
+    "react-native-svg": "^12.1.1"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "^0.63.7",

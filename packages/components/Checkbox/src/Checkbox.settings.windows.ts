@@ -3,36 +3,34 @@ import { checkboxName, ICheckboxType } from './Checkbox.types';
 
 export const checkboxSelectActionLabel = 'Toggle the Checkbox';
 
+// This file exists as SVGs are not supported on windows platform.
 export const settings: IComposeSettings<ICheckboxType> = [
   {
     tokens: {
-      backgroundColor: 'transparent',
+      borderColor: 'menuItemText',
+      color: 'menuItemText',
+      backgroundColor: 'menuBackground',
       textBorderColor: 'transparent',
-      borderColor: 'checkboxBorderColor',
-      checkmarkColor: 'checkmarkColor',
-      checkmarkVisibility: 0,
     },
     root: {
       accessible: true,
-      focusable: true,
       accessibilityRole: 'checkbox',
       style: {
         display: 'flex',
         alignItems: 'center',
         flexDirection: 'row',
-        minHeight: 20,
+        minHeight: 14,
         marginTop: 0,
         position: 'relative',
       },
     },
     checkbox: {
       style: {
+        height: 14,
+        width: 14,
+        marginEnd: 4,
         borderStyle: 'solid',
         borderWidth: 1,
-        borderRadius: 2,
-        minHeight: 16,
-        minWidth: 16,
-        marginEnd: 4,
       },
     },
     checkmark: {
@@ -44,18 +42,10 @@ export const settings: IComposeSettings<ICheckboxType> = [
         top: -1,
       },
     },
-    checkmarkIcon: {
-      width: 8,
-      height: 7,
-      style: {
-        marginVertical: 4.5,
-        marginHorizontal: 4,
-      },
-    },
     content: {
       variant: 'bodyStandard',
       style: {
-        borderStyle: 'solid',
+        borderStyle: 'dotted',
         borderWidth: 1,
         marginTop: 3,
       },
@@ -64,16 +54,11 @@ export const settings: IComposeSettings<ICheckboxType> = [
     _overrides: {
       focused: {
         tokens: {
-          backgroundColor: 'checkboxBackground',
-          checkmarkColor: 'checkboxBackground',
+          backgroundColor: 'menuItemBackgroundHovered',
+          textBorderColor: 'focusBorder',
         },
       },
       checked: {
-        tokens: {
-          borderColor: 'checkboxBackground',
-          backgroundColor: 'checkboxBackground',
-          checkmarkVisibility: 1,
-        },
         checkmark: {
           style: {
             opacity: 1,
@@ -82,18 +67,14 @@ export const settings: IComposeSettings<ICheckboxType> = [
       },
       hovered: {
         tokens: {
-          backgroundColor: 'checkboxBackground',
-          checkmarkColor: 'checkboxBackground',
+          backgroundColor: 'menuItemBackgroundHovered',
         },
       },
       disabled: {
         tokens: {
-          backgroundColor: 'checkboxBackgroundDisabled',
-        },
-        checkbox: {
-          style: {
-            opacity: 0.38,
-          },
+          borderColor: 'buttonBorderDisabled',
+          color: 'disabledBodyText',
+          backgroundColor: 'background',
         },
       },
       boxAtEnd: {
@@ -106,7 +87,7 @@ export const settings: IComposeSettings<ICheckboxType> = [
       },
       pressed: {
         tokens: {
-          backgroundColor: 'checkboxBackground',
+          backgroundColor: 'menuItemBackgroundPressed',
         },
       },
     },

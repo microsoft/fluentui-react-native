@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Update checkbox settings/theme for android",
+  "packageName": "@fluentui-react-native/icon",
+  "email": "tamasane@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-06-03T13:40:59.803Z"
+}
