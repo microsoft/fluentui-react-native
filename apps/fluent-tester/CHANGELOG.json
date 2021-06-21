@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 21 Jun 2021 11:19:28 GMT",
+      "tag": "@fluentui-react-native/tester_v0.25.5",
+      "version": "0.25.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Comment out tests that crash the app for iOS and macOS (#706)",
+            "author": "tamasane@gmail.com",
+            "commit": "e6f863599192ecdc71887712094638831e4a0548",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 18 Jun 2021 00:38:19 GMT",
       "tag": "@fluentui-react-native/tester_v0.25.4",
       "version": "0.25.4",

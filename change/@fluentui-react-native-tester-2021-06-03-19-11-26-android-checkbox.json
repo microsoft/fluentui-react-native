@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Comment out tests that crash the app for iOS and macOS (#706)",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "tamasane@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-06-03T13:40:20.204Z"
-}

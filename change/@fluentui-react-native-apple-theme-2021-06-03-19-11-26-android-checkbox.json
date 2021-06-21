@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add checkmarkColor to apple theme",
-  "packageName": "@fluentui-react-native/apple-theme",
-  "email": "tamasane@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-06-03T13:41:20.996Z"
-}

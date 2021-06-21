@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/focus-trap-zone",
-  "version": "0.7.5",
+  "version": "0.7.6",
   "description": "A cross-platform FocusTrapZone component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -25,7 +25,7 @@
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.6.1 <1.0.0",
     "@fluentui-react-native/component-cache": "^1.2.1",
-    "@fluentui-react-native/interactive-hooks": ">=0.10.4 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.10.5 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.8.2 <1.0.0",
     "@uifabricshared/foundation-settings": ">=0.9.1 <1.0.0"
   },
