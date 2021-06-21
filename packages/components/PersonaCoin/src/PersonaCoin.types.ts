@@ -2,7 +2,7 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 import { ImageProps, ViewProps, ImageURISource, TextProps } from 'react-native';
 import { IBackgroundColorTokens, IForegroundColorTokens } from '@fluentui-react-native/tokens';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { Color } from '../../../theming/theme-types/lib';
+import { Color } from '@fluentui-react-native/theme-types';
 
 export const personaCoinName = 'RNFPersonaCoin';
 

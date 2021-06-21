@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { PersonaSize, PersonaCoinColor, PersonaCoin, PersonaPresence } from '@fluentui/react-native';
-import { Switch, View, Text, Picker } from 'react-native';
+import { Switch, View, Text, Picker, ColorValue } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -48,7 +48,7 @@ const allPresences: WithUndefined<PersonaPresence>[] = [undefinedText, 'none', '
 const StyledPicker = (props) => {
   const { prompt, selected, onChange, collection } = props;
   const theme = useTheme();
-  const pickerStyles = [commonStyles.header, { color: theme.colors.inputText }];
+  const pickerStyles = { color: theme.colors.inputText as ColorValue, ...commonStyles.header };
   return (
     <Picker prompt={prompt} style={pickerStyles} selectedValue={selected} onValueChange={onChange}>
       {collection.map((value, index) => (
@@ -69,7 +69,7 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
   const onPresenceChange = React.useCallback((value) => setPresence(value), []);
 
   const theme = useTheme();
-  const textStyles = { color: theme.colors.inputText };
+  const textStyles = { color: theme.colors.inputText as ColorValue };
 
   return (
     <View style={commonStyles.root}>
