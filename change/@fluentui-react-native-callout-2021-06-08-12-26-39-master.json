@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Callout anchoring: add string as a property type for the target property",
+  "packageName": "@fluentui-react-native/callout",
+  "email": "ppatboyd@outlook.com",
+  "dependentChangeType": "patch",
+  "date": "2021-06-08T19:26:38.999Z"
+}
