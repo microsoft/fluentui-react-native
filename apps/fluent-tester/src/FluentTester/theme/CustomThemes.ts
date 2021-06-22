@@ -1,10 +1,11 @@
 import { createAppleTheme } from '@fluentui-react-native/apple-theme';
-import { createDefaultTheme, ThemeOptions } from '@fluentui-react-native/default-theme';
+import { createDefaultTheme } from '@fluentui-react-native/default-theme';
 import { ThemeReference } from '@fluentui-react-native/theme';
 import { Platform } from 'react-native';
 import { applyBrand, OfficeBrand } from './applyBrand';
 import { applyTheme, ThemeNames } from './applyTheme';
 import { createAndroidTheme } from '@fluentui-react-native/android-theme';
+import { ThemeOptions } from '@fluentui-react-native/theme-types';
 
 const themeOptions: ThemeOptions = { paletteName: 'TaskPane', appearance: 'dynamic' };
 
@@ -22,7 +23,7 @@ export const lightnessOptions = [
 ];
 
 export class TesterThemeReference extends ThemeReference {
-  private _themeName: ThemeNames = 'Office';
+  private _themeName: ThemeNames = 'Default';
   private _brand: OfficeBrand = 'Default';
 
   private options: ThemeOptions;

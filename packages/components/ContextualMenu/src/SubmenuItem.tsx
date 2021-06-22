@@ -40,8 +40,8 @@ export const SubmenuItem = compose<SubmenuItemType>({
 
     const onItemClick = React.useCallback(
       (e) => {
-        if (!disabled ) {
-          context ?.onDismissMenu();
+        if (!disabled) {
+          context?.onDismissMenu();
           onClick ? onClick() : context.onItemClick(itemKey);
           e.stopPropagation();
         }
@@ -55,9 +55,11 @@ export const SubmenuItem = compose<SubmenuItemType>({
       (e) => {
         componentRef.current.focus();
         userProps.onHoverIn(e);
-      }, [componentRef]);
+      },
+      [componentRef],
+    );
 
-    const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn});
+    const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn });
 
     // set up state
     const state: SubmenuItemState = {
@@ -68,9 +70,9 @@ export const SubmenuItem = compose<SubmenuItemType>({
       icon: !!icon,
     };
 
-      /*
-    * For SubmenuItem, menu is shown on hover.
-    */
+    /*
+     * For SubmenuItem, menu is shown on hover.
+     */
     const onKeyUp = useKeyCallback(onItemHoverIn, ' ', 'Enter', 'ArrowRight');
 
     // grab the styling information, referencing the state as well as the props
@@ -81,7 +83,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
         ...pressable.props,
         ref: cmRef,
         onKeyUp: onKeyUp,
-        accessibilityLabel: accessibilityLabel
+        accessibilityLabel: accessibilityLabel,
       },
       content: { children: text, testID },
       icon: createIconProps(icon),

@@ -11,7 +11,8 @@
     "bundlesize": "bundlesize --debug",
     "code-style": "node ./lib/just-scripts.js code-style",
     "depcheck": "just-scripts depcheck",
-    "prettier": "node ./lib/just-scripts.js prettier",
+    "prettier": "node ./just-scripts.js prettier",
+    "prettier-fix": "node ./just-scripts.js prettier --fix true",
     "verify-api": "echo no api to verify",
     "update-api": "echo no api to update"
   },

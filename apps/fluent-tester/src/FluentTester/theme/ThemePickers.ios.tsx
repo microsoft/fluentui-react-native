@@ -9,6 +9,7 @@ import { Theme, useTheme } from '@fluentui-react-native/framework';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 
 export const themePickerStyles = themedStyleSheet((t: Theme) => {
+  // picker, pickerItem, dropdown used in iOS dark mode
   return {
     pickerRoot: {
       flexDirection: 'row',
@@ -22,7 +23,6 @@ export const themePickerStyles = themedStyleSheet((t: Theme) => {
     pickerItem: {
       color: t.colors.bodyText,
     },
-
     dropdown: {
       height: 200,
       width: 90,

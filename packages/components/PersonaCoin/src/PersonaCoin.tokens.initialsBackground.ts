@@ -21,12 +21,12 @@ function _buildInitialsBackgroundStyles(tokenProps: IPersonaCoinTokens /*, theme
       alignSelf: 'stretch',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: effectiveBackgroundColor
-    }
+      backgroundColor: effectiveBackgroundColor,
+    },
   };
 }
 
 export const buildInitialsBackgroundStyles = styleFunction<ViewProps, IPersonaCoinTokens, ITheme>(
   _buildInitialsBackgroundStyles,
-  _initialsBackgroundKeyProps
+  _initialsBackgroundKeyProps,
 );
