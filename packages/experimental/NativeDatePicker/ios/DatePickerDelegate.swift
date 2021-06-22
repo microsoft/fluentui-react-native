@@ -16,7 +16,7 @@ class DatePickerDelegate: DateTimePickerDelegate {
         formatter.formatOptions.insert(.withFractionalSeconds)
         self.didPickBlock([formatter.string(from: startDate), formatter.string(from: endDate)])
         if let manager = manager {
-            manager.release(delegate: self)
+            manager.releaseLastDelegate(self)
         }
     }
 }

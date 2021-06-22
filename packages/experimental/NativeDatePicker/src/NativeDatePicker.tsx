@@ -2,6 +2,7 @@ import { NativeModules } from 'react-native';
 export const NativeDatePicker = NativeModules.MSFDatePickerManager;
 export const { MSFDateTimePickerMode, MSFDateTimePickerDatePickerType, MSFDateTimePickerDateRangePresentation } = NativeDatePicker.getConstants();
 
+// Enums from the iOS DateTimePicker in FluentUI-Apple
 type NativeDatePickerMode = keyof typeof MSFDateTimePickerMode;
 type NativeDatePickerType = keyof typeof MSFDateTimePickerDatePickerType;
 type NativeDatePickerDateRangePresentation = keyof typeof MSFDateTimePickerDateRangePresentation;
