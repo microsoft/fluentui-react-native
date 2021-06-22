@@ -113,6 +113,7 @@ export const appleComponents = {
         },
       },
     },
+  },
   Checkbox: {
     checkbox: {
       style: {
