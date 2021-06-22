@@ -64,6 +64,11 @@ export const appleComponents = {
         width: 14,
         height: 14,
         borderRadius: 7,
+
+        shadowOffset: {
+          width: 3,
+          height: -3,
+        },
       },
       accessible: true,
       focusable: true,
@@ -87,13 +92,13 @@ export const appleComponents = {
       selected: {
         innerCircle: {
           style: {
-            opacity: 1,
+            backgroundColor: 'transparent',
           },
         },
         hovered: {
           innerCircle: {
             style: {
-              opacity: 0,
+              backgroundColor: 'transparent',
             },
           },
         },
