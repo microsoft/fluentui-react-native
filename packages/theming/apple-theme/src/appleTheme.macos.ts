@@ -54,6 +54,9 @@ export const appleComponents = {
     root: {
       accessible: false,
       focusable: false,
+      style: {
+        alignItems: 'flex-start',
+      },
     },
     button: {
       style: {
@@ -76,6 +79,9 @@ export const appleComponents = {
     },
     content: {
       variant: 'bodyStandard',
+      style: {
+        marginTop: 0,
+      },
     },
     _overrides: {
       selected: {
@@ -96,9 +102,6 @@ export const appleComponents = {
         },
       },
       focused: {
-        tokens: {
-          textBorderColor: 'transparent',
-        },
         button: {
           enableFocusRing: true,
         },
@@ -106,7 +109,6 @@ export const appleComponents = {
       disabled: {
         tokens: {
           borderColor: 'rgba(0, 0, 0, 0.15)',
-          backgroundColor: 'rgba(255, 255, 255, 1)',
         },
         button: {
           focusable: false,
