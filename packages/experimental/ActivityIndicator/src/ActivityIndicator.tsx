@@ -20,9 +20,9 @@ import { View, Animated, Easing, ViewProps } from 'react-native';
  */
 // radius is from center to halfway border, border is line thickness
 export const getActivityIndicatorStyle = (radius: number, border: number) => {
-  const xydist = Math.sqrt(2)/2 * radius;
+  const xydist = (Math.sqrt(2) / 2) * radius;
   // from outside edge of circle on one side to the opposite side
-  const totalDiameter = radius*2 + border;
+  const totalDiameter = radius * 2 + border;
   // from Figma
   const activityIndicatorColor = '#919191';
 
@@ -32,13 +32,13 @@ export const getActivityIndicatorStyle = (radius: number, border: number) => {
       height: totalDiameter,
       borderWidth: border,
       borderColor: activityIndicatorColor,
-      borderRadius: radius + border/2,
+      borderRadius: radius + border / 2,
       borderLeftColor: 'transparent',
     },
     endTop: {
       width: border,
       height: border,
-      borderRadius: border/2,
+      borderRadius: border / 2,
       backgroundColor: activityIndicatorColor,
       top: radius - xydist - border,
       left: radius - xydist - border,
@@ -46,31 +46,30 @@ export const getActivityIndicatorStyle = (radius: number, border: number) => {
     endBottom: {
       width: border,
       height: border,
-      borderRadius: border/2,
+      borderRadius: border / 2,
       backgroundColor: activityIndicatorColor,
-      top: radius + xydist - 2*border,
+      top: radius + xydist - 2 * border,
       left: radius - xydist - border,
-    }
-  }
-}
-
+    },
+  };
+};
 
 export type ActivityIndicatorProps = ViewProps & {
-    animating?: boolean;
-    hidesWhenStopped?: boolean;
-}
+  animating?: boolean;
+  hidesWhenStopped?: boolean;
+};
 
 export const ActivityIndicator = (props: ActivityIndicatorProps) => {
   const spinAnimation = useRef(new Animated.Value(0)).current;
   React.useEffect(() => {
     if (props.animating) {
       Animated.loop(
-          Animated.timing(spinAnimation, {
-            toValue: 359,
-            duration: 750,
-            useNativeDriver: true,
-            easing: Easing.linear
-          })
+        Animated.timing(spinAnimation, {
+          toValue: 359,
+          duration: 750,
+          useNativeDriver: true,
+          easing: Easing.linear,
+        }),
       ).start();
     }
   });
@@ -81,28 +80,28 @@ export const ActivityIndicator = (props: ActivityIndicatorProps) => {
 
   // React Native ActivityIndicator still takes up space when hidden, so to perfectly match would use opacity
   // using display: 'none' because screen reader might still read it when hidden with opacity
-  const displayValue = (props.animating == false && props.hidesWhenStopped == true) ? 'none' : 'flex';
+  // const displayValue = props.animating == false && props.hidesWhenStopped == true ? 'none' : 'flex';
+
   // just tested opacity with accessibility inspector. It does not read the hidden opacity activity indicator
-  const hideOpacity = (props.animating == false && props.hidesWhenStopped == true) ? 0 : 1;
+  const hideOpacity = props.animating == false && props.hidesWhenStopped == true ? 0 : 1;
 
   const activityIndicatorStyles = getActivityIndicatorStyle(40, 10);
+  const rootViewStyle = [
+    activityIndicatorStyles.circleArc,
+    { transform: [{ rotateZ: interpolateSpin }, { perspective: 10 }] },
+    { opacity: hideOpacity },
+  ];
 
   return (
-    <Animated.View
-      style={[activityIndicatorStyles.circleArc, { transform: [{rotateZ: interpolateSpin}, {perspective: 10}] }, {opacity: hideOpacity}]}
-      accessible={true}
-      // progressbar should be descriptive enough, I don't see the need to have another label specifically say 'activity indicator'
-      accessibilityRole='progressbar'
-      accessibilityState={{busy: props.animating}}
-    >
+    <Animated.View style={rootViewStyle} accessible={true} accessibilityRole="progressbar" accessibilityState={{ busy: props.animating }}>
       <View style={activityIndicatorStyles.endTop}></View>
       <View style={activityIndicatorStyles.endBottom}></View>
     </Animated.View>
-  )
+  );
 };
 
 // Default props mimic the React Native ActivityIndicator
 ActivityIndicator.defaultProps = {
   animating: true,
-  hidesWhenStopped: true
-}
+  hidesWhenStopped: true,
+};
