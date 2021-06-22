@@ -492,5 +492,10 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     buttonDisabledSecondaryContent: fluentUIApple.brandForegroundDisabled,
     buttonHoveredSecondaryContent: fluentUIApple.neutralInverted,
     buttonPressedSecondaryContent: fluentUIApple.neutralInverted,
+
+    checkboxBackground: fluentUIApple.communicationBlue,
+    checkboxBackgroundDisabled: fluentUIApple.brandBackgroundDisabled,
+    checkboxBorderColor: fluentUIApple.gray600,
+    checkmarkColor: fluentUIApple.neutralInverted,
   };
 }

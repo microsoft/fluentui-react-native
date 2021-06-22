@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Mon, 21 Jun 2021 20:20:18 GMT",
+      "tag": "@fluentui-react-native/callout_v0.15.0",
+      "version": "0.15.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Callout anchoring: add string as a property type for the target property",
+            "author": "ppatboyd@outlook.com",
+            "commit": "2bdef996447a702e4644d53d32bf8b5c4ca2bfbf",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 18 Jun 2021 00:38:19 GMT",
       "tag": "@fluentui-react-native/callout_v0.14.6",
       "version": "0.14.6",

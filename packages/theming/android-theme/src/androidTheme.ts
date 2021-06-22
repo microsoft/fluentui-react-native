@@ -14,7 +14,25 @@ export function androidSpacing(): Spacing {
   };
 }
 
-export const androidComponents = {};
+export const androidComponents = {
+  Checkbox: {
+    checkbox: {
+      style: {
+        borderWidth: 2,
+        minHeight: 18,
+        minWidth: 18,
+      },
+    },
+    checkmarkIcon: {
+      width: 14,
+      height: 10,
+      style: {
+        marginVertical: 4,
+        marginHorizontal: 2,
+      },
+    },
+  },
+};
 
 export function getAndroidTheme(appearance: 'light' | 'dark'): Theme {
   return {

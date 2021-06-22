@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Fri, 18 Jun 2021 00:38:19 GMT and should not be manually modified.
+This log was last generated on Mon, 21 Jun 2021 11:19:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.2
+
+Mon, 21 Jun 2021 11:19:28 GMT
+
+### Patches
+
+- Add checkmarkColor to apple theme (tamasane@gmail.com)
 
 ## 0.6.1
 

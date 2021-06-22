@@ -46,6 +46,28 @@ export const appleComponents = {
       variant: 'bodyStandard',
     },
   },
+  Checkbox: {
+    checkbox: {
+      style: {
+        borderStyle: 'solid',
+        borderWidth: 0.5,
+        borderRadius: 3,
+        minHeight: 14,
+        minWidth: 14,
+        marginEnd: 5,
+      },
+    },
+    checkmarkIcon: {
+      width: 10,
+      height: 10,
+      style: {
+        marginVertical: 2,
+        marginHorizontal: 2,
+      },
+    },
+    // This disables other available states like: hovered, focused, pressed.
+    _precedence: ['disabled', 'boxAtEnd', 'checked'],
+  },
 };
 
 /** The apple theme defined entirely in JS, intended as a fallback while the native module loads
