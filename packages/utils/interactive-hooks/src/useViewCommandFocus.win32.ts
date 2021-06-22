@@ -17,13 +17,13 @@ export function useViewCommandFocus(
   // initialValue?: React.Component
 ): (ref: React.ElementRef<any>) => void {
   /**
-  * Set up the forwarding ref to enable adding the focus method.
-  */
+   * Set up the forwarding ref to enable adding the focus method.
+   */
   const focusRef = React.useRef<React.Component>();
 
   const _setNativeRef = setAndForwardRef({
     getForwardedRef: () => forwardedRef,
-    setLocalRef: localRef => {
+    setLocalRef: (localRef) => {
       focusRef.current = localRef;
 
       /**
@@ -34,7 +34,7 @@ export function useViewCommandFocus(
           NativeModules.UIManager.dispatchViewManagerCommand(
             findNodeHandle(localRef),
             NativeModules.UIManager.getViewManagerConfig('RCTView').Commands.focus,
-            null
+            null,
           );
         };
       }
@@ -42,4 +42,3 @@ export function useViewCommandFocus(
   });
   return _setNativeRef;
 }
-

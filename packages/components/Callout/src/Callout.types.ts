@@ -141,8 +141,10 @@ export interface ICalloutProps extends ICalloutTokens {
 
   /**
    * Target node the callout uses for relative positioning; the anchor of the callout.
+   * A ref is the typical usage; certain components may proffer a string as an anchor target, such as
+   * anchoring to a point inside the component.
    */
-  target?: React.RefObject<React.Component>;
+  target?: React.RefObject<React.Component> | string;
 }
 
 export type ICalloutSlotProps = {

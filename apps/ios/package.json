@@ -16,10 +16,12 @@
     "test": "fluentui-scripts jest",
     "bundle": "react-native rnx-bundle --dev false",
     "bundle-dev": "react-native rnx-bundle",
-    "ios": "react-native run-ios --scheme ReactTestApp --project-path src"
+    "ios": "react-native run-ios --scheme ReactTestApp --project-path src",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.25.1",
+    "@fluentui-react-native/tester": "^0.25.6",
     "react": "16.13.1",
     "react-native": "^0.63.4",
     "react-native-svg": "^12.1.1",

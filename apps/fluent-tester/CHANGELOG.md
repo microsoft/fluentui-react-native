@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 15 Jun 2021 17:13:57 GMT and should not be manually modified.
+This log was last generated on Mon, 21 Jun 2021 11:19:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.25.5
+
+Mon, 21 Jun 2021 11:19:28 GMT
+
+### Patches
+
+- Comment out tests that crash the app for iOS and macOS (#706) (tamasane@gmail.com)
+
+## 0.25.4
+
+Fri, 18 Jun 2021 00:38:19 GMT
+
+### Patches
+
+- Enable on Fluent Tester directory and run (ruaraki@microsoft.com)
+
+## 0.25.3
+
+Wed, 16 Jun 2021 21:31:58 GMT
+
+### Patches
+
+- Add FTZ underneath root view to set initial focus (krsiler@microsoft.com)
+
+## 0.25.2
+
+Wed, 16 Jun 2021 04:20:49 GMT
+
+### Patches
+
+- Remove apple theme native module (sanajmi@microsoft.com)
 
 ## 0.25.1
 

@@ -19,19 +19,19 @@ export function applyTokenLayers<TTokens>(
   tokens: TTokens,
   states: string[],
   subCache: GetMemoValue<TTokens>,
-  hasLayer: HasLayer
+  hasLayer: HasLayer,
 ): [TTokens, GetMemoValue<TTokens>] {
   type TokensAndCache = { tokens: TTokens; subCache: GetMemoValue<TTokens> };
   let final: TokensAndCache = { tokens, subCache };
   if (states && states.length > 0) {
     // now walk the overrides that are set, merging in props, caching results, and getting a new sub cache
     final = states
-      .filter(val => hasLayer(val))
+      .filter((val) => hasLayer(val))
       .reduce((previous: TokensAndCache, layerName: string) => {
         const layer = previous.tokens[layerName];
         const [tokens, subCache] = previous.subCache(
           () => (layer && typeof layer === 'object' ? immutableMerge(previous.tokens, layer) : previous.tokens),
-          [layer]
+          [layer],
         );
         return { tokens, subCache };
       }, final);
