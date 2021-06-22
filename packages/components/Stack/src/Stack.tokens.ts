@@ -6,7 +6,7 @@ import { styleFunction } from '@uifabricshared/foundation-tokens';
 
 const nameMap: { [key: string]: Alignment } = {
   start: 'flex-start',
-  end: 'flex-end'
+  end: 'flex-end',
 };
 
 function _mapAlignment(horizontal: boolean, horizontalAlign: Alignment, verticalAlign: Alignment, style: ViewStyle): void {
@@ -29,7 +29,7 @@ const _innerKeyProps: (keyof IStackTokens)[] = [
   'verticalAlign',
   // 'disableShrink',
   'childrenGap',
-  'padding'
+  'padding',
 ];
 
 function _buildInnerStyles(tokenProps: IStackTokens, theme: ITheme): ViewProps {
@@ -48,7 +48,7 @@ function _buildInnerStyles(tokenProps: IStackTokens, theme: ITheme): ViewProps {
       marginTop: verticalMargin,
       marginBottom: verticalMargin,
       padding: parsePadding(padding, theme),
-      width: columnGap.value === 0 ? '100%' : `calc(100% + ${columnGap.value}${columnGap.unit})`
+      width: columnGap.value === 0 ? '100%' : `calc(100% + ${columnGap.value}${columnGap.unit})`,
     };
     _mapAlignment(!!horizontal, horizontalAlign, verticalAlign, innerStyle);
     const heightToSet = rowGap.value === 0 ? '100%' : `calc(100% + ${rowGap.value}${rowGap.unit})`;
@@ -71,7 +71,7 @@ function _buildRootStyles(tokenProps: IStackTokens, theme: ITheme): ViewProps {
 
   const rootStyle: ViewStyle = {
     maxHeight,
-    maxWidth
+    maxWidth,
   };
   _mapAlignment(!!horizontal, horizontalAlign, verticalAlign, rootStyle);
   if (grow && !wrap) {
@@ -100,7 +100,7 @@ const _keyProps: (keyof IStackTokens)[] = [
   // 'childrenGap',
   'maxHeight',
   'maxWidth',
-  'padding'
+  'padding',
 ];
 
 export const buildStackRootStyles = styleFunction<ViewProps, IStackTokens, ITheme>(_buildRootStyles, _keyProps);

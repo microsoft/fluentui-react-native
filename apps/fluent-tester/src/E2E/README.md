@@ -96,7 +96,6 @@ describe('Click on each test page and check if it renders', function() {
 });
 ```
 
-
 # Debugging E2E Failures (Locally)
 
 If one tests fails, it will cause every subsequent test to fail as well. Due to this structure, if you get a failing E2E run, you should find the **first** failing test and focus on fixing that one.

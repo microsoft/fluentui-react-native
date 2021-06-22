@@ -75,7 +75,10 @@ function promotePropsToTokens<TTokens, TProps>(tokens: TTokens, props: TProps, t
     ? {
         ...tokens,
         ...(typeof tokenProps === 'object' && Array.isArray(tokenProps)
-          ? Object.assign({}, ...tokenProps.filter(key => props[key as string] !== undefined).map(key => ({ [key]: props[key as string] })))
+          ? Object.assign(
+              {},
+              ...tokenProps.filter((key) => props[key as string] !== undefined).map((key) => ({ [key]: props[key as string] })),
+            )
           : props),
       }
     : tokens;
@@ -123,7 +126,7 @@ function resolveToSlotProps<TSlotProps, TTokens, TTheme>(
   cache: GetMemoValue<TTokens>,
 ): TSlotProps {
   const slotProps = {};
-  Object.keys(styles).forEach(key => {
+  Object.keys(styles).forEach((key) => {
     const style = styles[key];
     slotProps[key] = typeof style === 'function' ? style(tokens, theme, cache(null, [key])[1]) : style;
   });
@@ -151,11 +154,11 @@ export function buildUseStyling<TProps, TSlotProps, TTokens, TTheme>(
     const theme = useTheme();
 
     // get the base styles all merged together, these will only depend on internal tokens and theme
-    const [merged, subCache] = cache(() => immutableMerge(...tokens.map(value => mapToTokens(value, theme, getComponentInfo))), [theme]);
+    const [merged, subCache] = cache(() => immutableMerge(...tokens.map((value) => mapToTokens(value, theme, getComponentInfo))), [theme]);
 
     // resolve overrides as appropriate
     const [layered, cacheBase] = options.states
-      ? applyTokenLayers(merged, options.states as string[], subCache, lookup || (val => props[val]))
+      ? applyTokenLayers(merged, options.states as string[], subCache, lookup || ((val) => props[val]))
       : [merged, subCache];
 
     // now resolve tokens

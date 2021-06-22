@@ -15,8 +15,8 @@ function _defaultTypography(): Typography {
       heroLarge: 42 as FontSize,
     } as FontSizes,
     weights: {
-      regular: globalTokens.font.weight.regular.toString() as FontWeightValue,
-      semiBold: globalTokens.font.weight.semibold.toString() as FontWeightValue,
+      regular: globalTokens.font.weight.regular as FontWeightValue,
+      semiBold: globalTokens.font.weight.semibold as FontWeightValue,
     },
     families: {
       primary: 'Segoe UI',

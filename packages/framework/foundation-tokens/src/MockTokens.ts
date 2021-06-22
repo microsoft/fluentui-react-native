@@ -1,5 +1,6 @@
 import { IMockTheme } from './MockTheme';
 import { IStyleFactoryOperation, ILookupThemePart } from './Token.types';
+import { ColorValue } from 'react-native';
 
 export interface IMockTextTokens {
   fontSize?: string | number;
@@ -7,36 +8,36 @@ export interface IMockTextTokens {
 }
 
 export interface IMockForegroundColorTokens {
-  color?: string;
+  color?: ColorValue;
 }
 
 export interface IMockBackgroundColorTokens {
-  backgroundColor?: string;
+  backgroundColor?: ColorValue;
 }
 
 export type IMockColorTokens = IMockForegroundColorTokens & IMockBackgroundColorTokens;
 
 export interface IMockCaptionTextTokens {
-  captionColor?: string;
+  captionColor?: ColorValue;
 }
 
 export interface IMockBorderTokens {
   borderWidth?: number;
   borderRadius?: number;
-  borderColor?: string;
+  borderColor?: ColorValue;
 }
 
 type ITokenParts<T> = IStyleFactoryOperation<T, IMockTheme>[];
 
 export const standardTextTokens: ITokenParts<IMockTextTokens> = [
-  { source: 'fontSize', lookup: t => t.textSizes },
-  { source: 'fontWeight', lookup: t => t.textWeights }
+  { source: 'fontSize', lookup: (t) => t.textSizes },
+  { source: 'fontWeight', lookup: (t) => t.textWeights },
 ];
 
-const getPalette: ILookupThemePart<IMockTheme> = t => t.colors;
+const getPalette: ILookupThemePart<IMockTheme> = (t) => t.colors;
 export const standardColorTokens: ITokenParts<IMockColorTokens> = [
   { source: 'backgroundColor', lookup: getPalette },
-  { source: 'color', lookup: getPalette }
+  { source: 'color', lookup: getPalette },
 ];
 
 export const standardForegroundColorTokens: ITokenParts<IMockColorTokens> = [{ source: 'color', lookup: getPalette }];
@@ -48,5 +49,5 @@ export const standardCaptionTokens: ITokenParts<IMockCaptionTextTokens> = [{ sou
 export const standardBorderTokens: ITokenParts<IMockBorderTokens> = [
   { source: 'borderColor', lookup: getPalette },
   { source: 'borderRadius' },
-  { source: 'borderWidth' }
+  { source: 'borderWidth' },
 ];

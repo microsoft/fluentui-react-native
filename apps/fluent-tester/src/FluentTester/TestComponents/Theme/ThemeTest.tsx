@@ -74,7 +74,7 @@ const SwatchList: React.FunctionComponent = () => {
 
   const aggregator = React.useCallback(
     (key: string) => {
-      return { name: key + ' (' + palette[key] + ')', color: palette[key] };
+      return { name: key + ' (' + (palette[key] as string) + ')', color: palette[key] };
     },
     [palette],
   );

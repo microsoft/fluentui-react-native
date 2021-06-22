@@ -2,6 +2,48 @@
   "name": "@fluentui-react-native/default-theme",
   "entries": [
     {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@fluentui-react-native/default-theme_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Apply prettier to libraries core and theming, run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@fluentui-react-native/default-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 15 Jun 2021 00:55:36 GMT",
+      "tag": "@fluentui-react-native/default-theme_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Initial tokens file, tokens integrated into default theme",
+            "author": "ruaraki@microsoft.com",
+            "commit": "d857262c784f905c3882bd2b3a15c62b80ed4c89",
+            "package": "@fluentui-react-native/default-theme"
+          },
+          {
+            "comment": "Fix up some imports",
+            "author": "ruaraki@microsoft.com",
+            "commit": "08c72c76fc6183ea8c7ccb1564b86deebb3b0d1a",
+            "package": "@fluentui-react-native/default-theme"
+          },
+          {
+            "comment": "Move getCurrentAppearence out",
+            "author": "ruaraki@microsoft.com",
+            "commit": "90e0dcb92a4ea4ee5ea5373f2c54defa127749bf",
+            "package": "@fluentui-react-native/default-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 15 Apr 2021 20:08:17 GMT",
       "tag": "@fluentui-react-native/default-theme_v0.5.1",
       "version": "0.5.1",
