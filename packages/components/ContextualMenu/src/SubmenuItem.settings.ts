@@ -22,18 +22,28 @@ export const settings: IComposeSettings<SubmenuItemType> = [
       }
     },
     content: {},
-    icon: {},
-    stack: {
+    icon: {style: { marginEnd: 5 }},
+    leftstack: {
       style: {
         display: 'flex',
-        paddingStart: 16,
-        paddingEnd: 16,
+        paddingStart: 5,
         alignItems: 'center',
         flexDirection: 'row',
         alignSelf: 'flex-start',
         minHeight: 32,
-        minWidth: 80,
-        justifyContent: 'center'
+        width: '80%',
+        justifyContent: 'flex-start',
+      }
+    },
+    rightstack: {
+      style: {
+        display: 'flex',
+        paddingEnd: 5,
+        alignItems: 'center',
+        flexDirection: 'row',
+        minHeight: 32,
+        width: '20%',
+        justifyContent: 'flex-end',
       }
     },
     _precedence: ['focused', 'hovered', 'pressed', 'disabled'],
