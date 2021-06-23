@@ -12,23 +12,17 @@ const basicRadioGroup: React.FunctionComponent<{}> = () => {
 
   const [selectedKey, setSelectedKey] = React.useState('C');
 
-  const onChange2 = React.useCallback(
-    (key: string) => {
-      if(key == 'A') {
-        setSelectedKey('A')
-      }
-      else if(key == 'B') {
-        setSelectedKey('B')
-      }
-      else if(key == 'C') {
-        setSelectedKey('C')
-      }
-      else if(key == 'D') {
-        setSelectedKey('D')
-      }
-    },
-    []
-  );
+  const onChange2 = React.useCallback((key: string) => {
+    if (key == 'A') {
+      setSelectedKey('A');
+    } else if (key == 'B') {
+      setSelectedKey('B');
+    } else if (key == 'C') {
+      setSelectedKey('C');
+    } else if (key == 'D') {
+      setSelectedKey('D');
+    }
+  }, []);
 
   return (
     <View>
@@ -46,7 +40,6 @@ const basicRadioGroup: React.FunctionComponent<{}> = () => {
         <RadioButton content="Option D" buttonKey="D" />
       </RadioGroup>
     </View>
-
   );
 };
 

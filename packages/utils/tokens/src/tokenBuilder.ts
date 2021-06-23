@@ -10,8 +10,8 @@ export function tokenBuilder<TTokens>(...keys: (keyof TTokens)[]): TokenBuilder<
   const from = (tokens: TTokens) => {
     const style = {};
     keys
-      .filter(key => tokens[key] !== undefined)
-      .forEach(key => {
+      .filter((key) => tokens[key] !== undefined)
+      .forEach((key) => {
         style[key as string] = tokens[key];
       });
     return style;

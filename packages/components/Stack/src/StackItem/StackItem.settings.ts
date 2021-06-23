@@ -5,9 +5,9 @@ export const settings: IComposeSettings<IStackItemType> = [
   {
     root: {
       style: {
-        width: 'auto'
-      }
-    }
+        width: 'auto',
+      },
+    },
   },
-  stackItemName
+  stackItemName,
 ];

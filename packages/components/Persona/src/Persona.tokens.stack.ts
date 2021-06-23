@@ -12,7 +12,7 @@ function _buildStackStyle(tokenProps: IPersonaTokens): ViewProps {
   const stackStyle: ViewStyle = {
     flexDirection: 'column',
     justifyContent: 'space-around',
-    paddingLeft: horizontalGap || getHorizontalGap(size)
+    paddingLeft: horizontalGap || getHorizontalGap(size),
   };
 
   return { style: stackStyle };

@@ -7,7 +7,7 @@ interface TestObj {
 function getObjFactory() {
   const obj: TestObj = { id: 0 };
   return () => ({
-    id: obj.id++
+    id: obj.id++,
   });
 }
 

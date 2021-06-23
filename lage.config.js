@@ -8,6 +8,8 @@ module.exports = {
     clean: [],
     depcheck: ['build-tools'],
     lint: ['build-tools'],
+    prettier: ['build-tools'],
+    ['prettier-fix']: ['build-tools'],
     ['verify-api']: [],
     ['update-api']: [],
     test: ['build-tools', 'lint', 'build'],

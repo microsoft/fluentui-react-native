@@ -1,4 +1,4 @@
-import { ColorValue } from '@fluentui-react-native/theme-types';
+import { ColorValue } from 'react-native';
 import { AndroidBaseColorsPalette } from './colorsBase';
 export interface SemanticPalette {
   // Texts
@@ -50,6 +50,10 @@ export interface SemanticPalette {
 
   // HyperLink
   textHyperLink: ColorValue;
+
+  //Checkbox
+  checkboxDisabled: ColorValue;
+  checkboxBorder: ColorValue;
 }
 
 export type FluentUIAndroidPalette = AndroidBaseColorsPalette & SemanticPalette;
@@ -92,6 +96,8 @@ export function getFluentUIAndroidPalette(p: AndroidBaseColorsPalette): FluentUI
         menuItemText: p.gray900,
         listBackground: p.white,
         textHyperLink: '#D83B01',
+        checkboxDisabled: p.white,
+        checkboxBorder: '#808080',
       }
     : {
         ...p,
@@ -129,5 +135,7 @@ export function getFluentUIAndroidPalette(p: AndroidBaseColorsPalette): FluentUI
         menuItemText: p.gray100,
         listBackground: p.gray950,
         textHyperLink: '#D83B01',
+        checkboxDisabled: p.black,
+        checkboxBorder: '#808080',
       };
 }

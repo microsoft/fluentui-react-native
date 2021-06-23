@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/merge-props",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "description": "Utility for merging props with styles and caching style combinations",
   "repository": {
     "type": "git",
@@ -26,18 +26,25 @@
     "start-test": "fluentui-scripts jest-watch",
     "update-snapshots": "fluentui-scripts jest -u",
     "verify-api": "fluentui-scripts verify-api-extractor",
-    "update-api": "fluentui-scripts update-api-extractor"
+    "update-api": "fluentui-scripts update-api-extractor",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/immutable-merge": "^1.1.0",
-    "@fluentui-react-native/memo-cache": "^1.1.0"
+    "@fluentui-react-native/immutable-merge": "^1.1.1",
+    "@fluentui-react-native/memo-cache": "^1.1.1"
   },
   "devDependencies": {
     "@types/jest": "^25.1.4",
+    "@types/react-native": "^0.63.0",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1"
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "react-native": "^0.63.4"
+  },
+  "peerDependencies": {
+    "react-native": ">=0.63.4"
   }
 }

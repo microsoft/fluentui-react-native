@@ -1,12 +1,13 @@
 import { ThemeReference } from '@fluentui-react-native/theme';
-import { createDefaultTheme, ThemeOptions } from '@fluentui-react-native/default-theme';
+import { createDefaultTheme } from '@fluentui-react-native/default-theme';
 import { getThemingModule } from './NativeModule/getThemingModule';
 import { CxxException, PlatformDefaultsChangedArgs } from './NativeModule/officeThemingModule';
-import { OfficePalette } from '@fluentui-react-native/theme-types';
+import { OfficePalette, ThemeOptions } from '@fluentui-react-native/theme-types';
 import { createPartialOfficeTheme } from './createPartialOfficeTheme';
 
 function handlePaletteCall(palette: OfficePalette | CxxException): OfficePalette | undefined {
-  return (palette as CxxException).message !== undefined ? undefined : (palette as OfficePalette);
+  const exception = palette as CxxException;
+  return exception && exception.message !== undefined ? undefined : (palette as OfficePalette);
 }
 
 /**

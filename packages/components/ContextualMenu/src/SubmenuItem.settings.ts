@@ -7,7 +7,7 @@ export const settings: IComposeSettings<SubmenuItemType> = [
       backgroundColor: 'menuBackground',
       color: 'menuItemText',
       borderColor: 'transparent',
-      borderWidth: 1
+      borderWidth: 1,
     },
     root: {
       accessible: true,
@@ -18,8 +18,8 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         alignItems: 'flex-start',
         flexDirection: 'row',
         alignSelf: 'flex-start',
-        width: '100%'
-      }
+        width: '100%',
+      },
     },
     content: {},
     icon: {style: { marginEnd: 5 }},
@@ -31,7 +31,6 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         flexDirection: 'row',
         alignSelf: 'flex-start',
         minHeight: 32,
-        width: '80%',
         justifyContent: 'flex-start',
       }
     },
@@ -42,7 +41,7 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         alignItems: 'center',
         flexDirection: 'row',
         minHeight: 32,
-        width: '20%',
+        width: '20px',
         justifyContent: 'flex-end',
       }
     },
@@ -52,13 +51,13 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         tokens: {
           backgroundColor: 'menuBackground',
           color: 'disabledText',
-        }
+        },
       },
       pressed: {
         tokens: {
           backgroundColor: 'menuItemBackgroundHovered',
           color: 'menuItemTextHovered',
-        }
+        },
       },
       focused: {
         tokens: {
@@ -68,21 +67,21 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         _overrides: {
           disabled: {
             tokens: {
-              borderColor: 'focusBorder'
-            }
+              borderColor: 'focusBorder',
+            },
           },
           hovered: {
             _overrides: {
               disabled: {
                 tokens: {
-                  borderColor: 'transparent'
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+                  borderColor: 'transparent',
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
-  submenuItemName
+  submenuItemName,
 ];
