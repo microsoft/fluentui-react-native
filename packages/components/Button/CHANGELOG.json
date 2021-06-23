@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Wed, 23 Jun 2021 18:53:56 GMT",
+      "tag": "@fluentui-react-native/button_v0.17.4",
+      "version": "0.17.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add new PersonaCoinFluentColor prop",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5563744f1fc49402e83636855b65c6f04e19255a",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 18 Jun 2021 00:38:19 GMT",
       "tag": "@fluentui-react-native/button_v0.17.2",
       "version": "0.17.2",
