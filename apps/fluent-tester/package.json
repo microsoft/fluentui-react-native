@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester",
-  "version": "0.25.6",
+  "version": "0.26.0",
   "description": "A test app to test FluentUI React Native Components during development",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -33,7 +33,7 @@
     "@fluentui-react-native/experimental-avatar": ">=0.9.2 <1.0.0",
     "@fluentui-react-native/experimental-button": "0.6.2",
     "@fluentui-react-native/experimental-native-button": ">=0.6.2 <1.0.0",
-    "@fluentui-react-native/experimental-native-date-picker": ">=0.0.1 <1.0.0",
+    "@fluentui-react-native/experimental-native-date-picker": ">=0.2.0 <1.0.0",
     "@fluentui-react-native/experimental-shimmer": "0.3.2",
     "@fluentui-react-native/experimental-text": ">=0.5.2 <1.0.0",
     "@fluentui-react-native/framework": ">=0.5.4 <1.0.0",
