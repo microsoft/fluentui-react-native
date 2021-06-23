@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Wrap FluentUI DateTimePicker (iOS) for React Native",
+  "packageName": "@fluentui-react-native/experimental-native-date-picker",
+  "email": "chripear@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-06-18T20:55:19.607Z"
+}
