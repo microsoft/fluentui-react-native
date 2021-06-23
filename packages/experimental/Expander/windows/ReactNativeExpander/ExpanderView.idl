@@ -1,0 +1,9 @@
+namespace ReactNativeExpander{
+
+    [default_interface]
+    runtimeclass ExpanderView : Windows.UI.Xaml.Controls.ContentPresenter {
+        ExpanderView(Microsoft.ReactNative.IReactContext context);
+        void UpdateProperties(Microsoft.ReactNative.IJSValueReader reader);
+    };
+
+}
