@@ -65,10 +65,6 @@ function renderSvg(iconProps: IconProps) {
     ? '#FFFFFF'
     : '#000000';
 
-  // The svg color can be set using either style.color or iconProps.color, where style.color is preferred in case both are set.
-  const colorString = (style as any).color !== undefined ? (style as any).color : iconColor;
-  const color = (Platform.OS == 'macos' ? processColor(colorString as ColorValue) : colorString) as Color;
-
   if (svgIconProps.src) {
     return (
       <View style={style}>
