@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Fixing Focus for Checkbox and fixing Folder structure",
+  "packageName": "@fluentui-react-native/checkbox",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-06-24T17:30:35.820Z"
+}
