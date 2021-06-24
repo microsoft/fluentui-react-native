@@ -15,10 +15,10 @@ export const settings: IComposeSettings<SubmenuItemType> = [
       focusable: true,
       style: {
         display: 'flex',
-        alignItems: 'flex-start',
         flexDirection: 'row',
         alignSelf: 'flex-start',
         width: '100%',
+        justifyContent: 'space-between',
       },
     },
     content: {},
@@ -41,7 +41,7 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         alignItems: 'center',
         flexDirection: 'row',
         minHeight: 32,
-        width: '20px',
+        width: 12,
         justifyContent: 'flex-end',
       }
     },
