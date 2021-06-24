@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 23 Jun 2021 18:53:56 GMT",
+      "tag": "@fluentui-react-native/tester_v0.27.0",
+      "version": "0.27.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add new PersonaCoinFluentColor prop",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5563744f1fc49402e83636855b65c6f04e19255a",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 23 Jun 2021 17:46:02 GMT",
+      "tag": "@fluentui-react-native/tester_v0.26.0",
+      "version": "0.26.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add tests for NativeDatePicker",
+            "author": "chripear@microsoft.com",
+            "commit": "badba8a548272ea4b9df848bc9328c3e3f17f8ef",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 21 Jun 2021 11:19:28 GMT",
       "tag": "@fluentui-react-native/tester_v0.25.5",
       "version": "0.25.5",
