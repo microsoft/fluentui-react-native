@@ -51,7 +51,7 @@ export type IUseStyling<TComponent> = IDefineUseStyling<IExtractProps<TComponent
  */
 export type IDefineUsePrepareProps<TProps, TSlotProps, TState> = (
   props: TProps,
-  useStyling: IDefineUseStyling<TProps, TSlotProps>
+  useStyling: IDefineUseStyling<TProps, TSlotProps>,
 ) => IRenderData<TSlotProps, TState>;
 export type IUsePrepareProps<TComponent> = IDefineUsePrepareProps<
   IExtractProps<TComponent>,

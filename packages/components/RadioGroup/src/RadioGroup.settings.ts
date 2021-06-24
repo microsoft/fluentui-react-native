@@ -4,7 +4,7 @@ import { IRadioGroupType, radioGroupName } from './RadioGroup.types';
 export const settings: IComposeSettings<IRadioGroupType> = [
   {
     tokens: {
-      color: 'menuItemText'
+      color: 'menuItemText',
     },
     root: {
       accessible: true,
@@ -12,16 +12,16 @@ export const settings: IComposeSettings<IRadioGroupType> = [
       style: {
         display: 'flex',
         alignItems: 'flex-start',
-        flexDirection: 'column'
-      }
+        flexDirection: 'column',
+      },
     },
     label: {
       style: {
         fontFamily: 'inherit',
         fontSize: 16,
-        fontWeight: '600'
-      }
-    }
+        fontWeight: '600',
+      },
+    },
   },
-  radioGroupName
+  radioGroupName,
 ];

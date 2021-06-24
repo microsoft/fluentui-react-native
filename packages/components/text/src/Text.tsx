@@ -9,11 +9,11 @@ export const Text = compose<ITextType>({
   displayName: textName,
   settings,
   slots: {
-    root: { slotType: RNText, filter: filterTextProps }
+    root: { slotType: RNText, filter: filterTextProps },
   },
   styles: {
-    root: [textTokens, foregroundColorTokens]
-  }
+    root: [textTokens, foregroundColorTokens],
+  },
 });
 
 export default Text;

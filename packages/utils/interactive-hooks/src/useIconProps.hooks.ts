@@ -14,12 +14,10 @@ export function createIconProps(src: number | string | IconProps) {
       width: asset.width,
       height: asset.height,
     };
-  }
-  else if (typeof src === 'string') {
+  } else if (typeof src === 'string') {
     const rasterProps: RasterImageIconProps = { src: { uri: src as string } };
     return { rasterImageSource: rasterProps };
-  }
-  else {
+  } else {
     return src as IconProps;
   }
 }

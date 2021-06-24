@@ -195,6 +195,11 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
     buttonHoveredSecondaryContent: p.iconsSecondary,
     buttonPressedSecondaryContent: p.iconsSecondary,
 
+    checkmarkColor: p.iconsOnAccent,
+    checkboxBackground: p.buttonBackground,
+    checkboxBackgroundDisabled: p.checkboxDisabled,
+    checkboxBorderColor: p.checkboxBorder,
+
     personaActivityRing: p.surfacesPrimary,
     personaActivityGlow: p.buttonBackground,
   };

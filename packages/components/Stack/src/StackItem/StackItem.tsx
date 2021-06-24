@@ -10,7 +10,7 @@ export const StackItem: React.FunctionComponent<IStackItemProps> = compose<IStac
   displayName: stackItemName,
   settings: settings,
   slots: { root: { slotType: View, filter: filterViewProps } },
-  styles: { root: [stackItemTokenProcessor] }
+  styles: { root: [stackItemTokenProcessor] },
 });
 
 export default StackItem;

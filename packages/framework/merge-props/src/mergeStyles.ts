@@ -9,7 +9,7 @@ import { StyleProp } from './mergeStyles.types';
  * @param style - StyleProp<TStyle> to flatten, this can be a TStyle or an array
  */
 export function flattenStyle(style: StyleProp<object>): object {
-  return Array.isArray(style) ? immutableMerge(...style.map(v => flattenStyle(v))) : style || {};
+  return Array.isArray(style) ? immutableMerge(...style.map((v) => flattenStyle(v))) : style || {};
 }
 
 /**
@@ -30,7 +30,7 @@ const _styleCache = getMemoCache();
 
 export function mergeStyles(...styles: StyleProp<object>[]): object | undefined {
   // filter the style set to just objects (which might be arrays or plain style objects)
-  const inputs = styles.filter(s => typeof s === 'object') as object[];
+  const inputs = styles.filter((s) => typeof s === 'object') as object[];
 
   // now memo the results if there is more than one element or if the one element is an array
   return inputs.length > 1 || (inputs.length === 1 && Array.isArray(inputs[0]))

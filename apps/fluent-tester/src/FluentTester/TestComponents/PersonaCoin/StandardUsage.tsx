@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PersonaSize, PersonaCoinColor, PersonaCoin, PersonaPresence } from '@fluentui/react-native';
+import { PersonaSize, PersonaCoinFluentColor, PersonaCoin, PersonaPresence } from '@fluentui/react-native';
 import { Switch, View, Text, Picker, ColorValue } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
@@ -20,29 +20,30 @@ const allSizes: WithUndefined<PersonaSize>[] = [
   'size120',
 ];
 
-const allColors: WithUndefined<PersonaCoinColor>[] = [
+const allColors: WithUndefined<PersonaCoinFluentColor>[] = [
   undefinedText,
-  'lightBlue',
+  'cornflower',
   'blue',
-  'darkBlue',
+  'royalBlue',
   'teal',
-  'green',
+  'forest',
   'darkGreen',
-  'lightPink',
-  'pink',
-  'magenta',
+  'berry',
+  'hotPink',
+  'grape',
   'purple',
-  'orange',
-  'darkRed',
-  'violet',
-  'lightRed',
-  'gold',
+  'pumpkin',
+  'red',
   'burgundy',
-  'warmGray',
-  'coolGray',
-  'cyan',
-  'rust',
+  'orchid',
+  'brass',
+  'darkRed',
+  'beige',
+  'platinum',
+  'steel',
+  'brown',
 ];
+
 const allPresences: WithUndefined<PersonaPresence>[] = [undefinedText, 'none', 'online', 'offline', 'busy', 'dnd', 'blocked', 'away'];
 
 const StyledPicker = (props) => {
@@ -61,7 +62,7 @@ const StyledPicker = (props) => {
 export const StandardUsage: React.FunctionComponent<{}> = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [imageSize, setImageSize] = React.useState<WithUndefined<PersonaSize>>('size72');
-  const [coinColor, setCoinColor] = React.useState<WithUndefined<PersonaCoinColor>>('gold');
+  const [coinColor, setCoinColor] = React.useState<WithUndefined<PersonaCoinFluentColor>>('brass');
   const [presence, setPresence] = React.useState<WithUndefined<PersonaPresence>>('online');
 
   const onSizeChange = React.useCallback((value) => setImageSize(value), []);
@@ -92,7 +93,7 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
         imageDescription="Photo of Satya Nadella"
         presence={presence === undefinedText ? undefined : presence}
         imageUrl={showImage ? satyaPhotoUrl : undefined}
-        coinColor={coinColor === undefinedText ? undefined : coinColor}
+        coinColorFluent={coinColor === undefinedText ? undefined : coinColor}
       />
     </View>
   );

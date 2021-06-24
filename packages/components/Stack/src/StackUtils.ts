@@ -28,7 +28,7 @@ const _getValueUnitGap = (gap: string): { value: number; unit: string } => {
 
   return {
     value: numericalValue,
-    unit: unitPart || 'px'
+    unit: unitPart || 'px',
   };
 };
 
@@ -46,7 +46,7 @@ export interface IParseGapResult {
 export function parseGap(gap: number | string | undefined, theme: ITheme): IParseGapResult {
   const result: IParseGapResult = {
     rowGap: { value: 0, unit: 'px' },
-    columnGap: { value: 0, unit: 'px' }
+    columnGap: { value: 0, unit: 'px' },
   };
   if (gap) {
     if (typeof gap === 'number') {

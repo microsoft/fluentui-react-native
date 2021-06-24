@@ -10,7 +10,7 @@ export type IFocusable = View;
  */
 export function useViewCommandFocus<T>(
   _: React.Ref<T | null> | undefined,
-  initialValue?: React.Component
+  initialValue?: React.Component,
 ): React.RefObject<React.Component> {
   const innerRef = React.useRef<React.Component>(initialValue || null);
   return innerRef;

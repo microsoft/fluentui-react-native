@@ -87,12 +87,7 @@ const PressComponent: React.FunctionComponent<ViewProps> = (props: ViewProps) =>
 
   return (
     <Stack focusable={false}>
-      <View 
-        focusable={true}
-        {...pressProps}
-        onTouchEnd={onTouchEnd}
-        style={pressState.pressed ? styles.pressed : styles.notPressed}
-      />
+      <View focusable={true} {...pressProps} onTouchEnd={onTouchEnd} style={pressState.pressed ? styles.pressed : styles.notPressed} />
     </Stack>
   );
 };

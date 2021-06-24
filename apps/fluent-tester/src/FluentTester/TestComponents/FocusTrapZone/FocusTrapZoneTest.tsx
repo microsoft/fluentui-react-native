@@ -45,11 +45,7 @@ const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps> = (pro
 
   return (
     <TouchableHighlight {...{ focusable: false }} onPress={props.onPress}>
-      <View
-        focusable={true}
-        {...(focusProps as any)}
-        style={focusState.focused ? focusedComponentTwiddlerStyle : componentTwiddlerStyle}
-      >
+      <View focusable={true} {...(focusProps as any)} style={focusState.focused ? focusedComponentTwiddlerStyle : componentTwiddlerStyle}>
         <Text>{props.label}</Text>
       </View>
     </TouchableHighlight>
@@ -77,7 +73,7 @@ const basicFocusTrapZone: React.FunctionComponent<{}> = () => {
         ftzRef.current!.focus();
       }
     },
-    [state, setState]
+    [state, setState],
   );
 
   const onTwiddleExternalFocusing = React.useCallback(() => {

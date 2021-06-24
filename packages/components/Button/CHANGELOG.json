@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Wed, 23 Jun 2021 18:53:56 GMT",
+      "tag": "@fluentui-react-native/button_v0.17.4",
+      "version": "0.17.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add new PersonaCoinFluentColor prop",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5563744f1fc49402e83636855b65c6f04e19255a",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@fluentui-react-native/button_v0.17.2",
+      "version": "0.17.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Apply prettier to components, run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Jun 2021 04:20:49 GMT",
       "tag": "@fluentui-react-native/button_v0.17.1",
       "version": "0.17.1",

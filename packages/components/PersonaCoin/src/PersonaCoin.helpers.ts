@@ -1,5 +1,6 @@
-import { PersonaSize, PersonaCoinColor, PersonaPresence, IPersonaCoinTokens, RingThickness } from './PersonaCoin.types';
+import { PersonaSize, PersonaCoinColor, PersonaCoinFluentColor, PersonaPresence, IPersonaCoinTokens } from './PersonaCoin.types';
 import { ImageURISource } from 'react-native';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 const presenceIconCache: { [key in PersonaPresence]: ImageURISource } = {
   none: { uri: '' },
@@ -60,30 +61,64 @@ export function getSizeConfig(size: PersonaSize): PersonaSizeConfig {
 }
 
 const colorTable: { [P in PersonaCoinColor]: string } = {
-  lightBlue: '#4F6BED',
-  blue: '#0078D4',
-  darkBlue: '#004E8C',
-  teal: '#038387',
-  green: '#498205',
-  darkGreen: '#0B6A0B',
-  lightPink: '#C239B3',
-  pink: '#E3008C',
-  magenta: '#881798',
-  purple: '#5C2E91',
-  orange: '#CA5010',
-  lightRed: '#D13438',
-  darkRed: '#A4262C',
-  violet: '#8764B8',
-  gold: '#986F0B',
-  burgundy: '#750B1C',
-  warmGray: '#7A7574',
-  cyan: '#005B70',
-  rust: '#8E562E',
-  coolGray: '#69797E',
+  lightBlue: globalTokens.color.cornflower.primary,
+  blue: globalTokens.color.blue.primary,
+  darkBlue: globalTokens.color.royalBlue.primary,
+  teal: globalTokens.color.teal.primary,
+  green: globalTokens.color.forest.primary,
+  darkGreen: globalTokens.color.darkGreen.primary,
+  lightPink: globalTokens.color.berry.primary,
+  pink: globalTokens.color.hotPink.primary,
+  magenta: globalTokens.color.grape.primary,
+  purple: globalTokens.color.purple.primary,
+  orange: globalTokens.color.pumpkin.primary,
+  lightRed: globalTokens.color.red.primary,
+  darkRed: globalTokens.color.burgundy.primary,
+  violet: globalTokens.color.orchid.primary,
+  gold: globalTokens.color.brass.primary,
+  burgundy: globalTokens.color.darkRed.primary,
+  warmGray: globalTokens.color.beige.primary,
+  cyan: globalTokens.color.steel.primary,
+  rust: globalTokens.color.brown.primary,
+  coolGray: globalTokens.color.platinum.primary,
 };
 
+/**
+ * Converts the PersonaCoinColor into a hex color value
+ * @deprecated Use convertCoinColorFluent instead.
+ */
 export function convertCoinColor(coinColor: PersonaCoinColor): string {
   return colorTable[coinColor];
+}
+
+const colorTableFluent: { [P in PersonaCoinFluentColor]: string } = {
+  cornflower: globalTokens.color.cornflower.primary,
+  blue: globalTokens.color.blue.primary,
+  royalBlue: globalTokens.color.royalBlue.primary,
+  teal: globalTokens.color.teal.primary,
+  forest: globalTokens.color.forest.primary,
+  darkGreen: globalTokens.color.darkGreen.primary,
+  berry: globalTokens.color.berry.primary,
+  hotPink: globalTokens.color.hotPink.primary,
+  grape: globalTokens.color.grape.primary,
+  purple: globalTokens.color.purple.primary,
+  pumpkin: globalTokens.color.pumpkin.primary,
+  red: globalTokens.color.red.primary,
+  burgundy: globalTokens.color.burgundy.primary,
+  orchid: globalTokens.color.orchid.primary,
+  brass: globalTokens.color.brass.primary,
+  darkRed: globalTokens.color.darkRed.primary,
+  beige: globalTokens.color.beige.primary,
+  platinum: globalTokens.color.platinum.primary,
+  steel: globalTokens.color.steel.primary,
+  brown: globalTokens.color.brown.primary,
+};
+
+/**
+ * Converts the PersonaCoinFluentColor into a hex color value
+ */
+export function convertCoinColorFluent(coinColor: PersonaCoinFluentColor): string {
+  return colorTableFluent[coinColor];
 }
 
 export function calculateEffectiveSizes(tokens: IPersonaCoinTokens): PersonaSizeConfig {

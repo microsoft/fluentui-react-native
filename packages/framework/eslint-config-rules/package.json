@@ -9,7 +9,9 @@
   "main": "./eslintrc.js",
   "scripts": {
     "verify-api": "echo no api to verify",
-    "update-api": "echo no api to update"
+    "update-api": "echo no api to update",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "license": "MIT",
   "devDependencies": {

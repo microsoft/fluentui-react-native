@@ -11,33 +11,33 @@ interface IProps {
 
 const settingsBase: IComponentSettings<IProps> = {
   root: {
-    fontFamily: 'Arial'
+    fontFamily: 'Arial',
   },
   _precedence: ['primary', 'hover', 'hover2'],
   _overrides: {
     primary: {
       root: {
-        fontFamily: 'primary'
+        fontFamily: 'primary',
       },
       _overrides: {
         hover: {
-          root: { fontSize: 15 }
-        }
-      }
+          root: { fontSize: 15 },
+        },
+      },
     },
     hover: {
       root: {
         fontWeight: 'bold',
-        fontSize: 20
-      }
+        fontSize: 20,
+      },
     },
     hover2: {
       root: {
         fontWeight: 'light',
-        fontSize: 5
-      }
-    }
-  }
+        fontSize: 5,
+      },
+    },
+  },
 };
 
 describe('Override settings tests', () => {
@@ -56,7 +56,7 @@ describe('Override settings tests', () => {
     expect(overridden.root).toEqual({
       fontFamily: 'Arial',
       fontWeight: 'light',
-      fontSize: 5
+      fontSize: 5,
     });
   });
 
@@ -65,7 +65,7 @@ describe('Override settings tests', () => {
     expect(overridden.root).toEqual({
       fontFamily: 'Arial',
       fontWeight: 'light',
-      fontSize: 5
+      fontSize: 5,
     });
   });
 
@@ -74,7 +74,7 @@ describe('Override settings tests', () => {
     expect(overridden.root).toEqual({
       fontFamily: 'primary',
       fontWeight: 'bold',
-      fontSize: 15
+      fontSize: 15,
     });
   });
 });

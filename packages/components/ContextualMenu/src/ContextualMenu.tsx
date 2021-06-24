@@ -8,7 +8,7 @@ import {
   ContextualMenuType,
   ContextualMenuRenderData,
   ContextualMenuContext,
-  ContextualMenuState
+  ContextualMenuState,
 } from './ContextualMenu.types';
 import { settings } from './ContextualMenu.settings';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
@@ -25,27 +25,21 @@ export const CMContext = React.createContext<ContextualMenuContext>({
   },
   onDismissMenu: () => {
     return;
-  }
+  },
 });
 
 export const ContextualMenu = compose<ContextualMenuType>({
   displayName: contextualMenuName,
   usePrepareProps: (userProps: ContextualMenuProps, useStyling: IUseComposeStyling<ContextualMenuType>) => {
-    const {
-      setShowMenu,
-      shouldFocusOnMount = true,
-      shouldFocusOnContainer = false,
-      ...rest
-    } = userProps;
+    const { setShowMenu, shouldFocusOnMount = true, shouldFocusOnContainer = false, ...rest } = userProps;
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
     const data = useSelectedKey(null, userProps.onItemClick);
 
-    const dismissCallback = React.useCallback(
-      () => {
-        userProps.onDismiss();
-        setShowMenu(false);
-      }, [setShowMenu, userProps.onDismiss]);
+    const dismissCallback = React.useCallback(() => {
+      userProps.onDismiss();
+      setShowMenu(false);
+    }, [setShowMenu, userProps.onDismiss]);
 
     const [containerFocus, setContainerFocus] = React.useState(true);
     const toggleContainerFocus = React.useCallback(() => {
@@ -56,8 +50,8 @@ export const ContextualMenu = compose<ContextualMenuType>({
       context: {
         selectedKey: data.selectedKey,
         onItemClick: data.onKeySelect,
-        onDismissMenu: dismissCallback
-      }
+        onDismissMenu: dismissCallback,
+      },
     };
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
@@ -65,14 +59,13 @@ export const ContextualMenu = compose<ContextualMenuType>({
     const slotProps = mergeSettings<ContextualMenuSlotProps>(styleProps, {
       root: {
         ...rest,
-        setInitialFocus: shouldFocusOnMount
+        setInitialFocus: shouldFocusOnMount,
       },
       container: {
         accessible: shouldFocusOnContainer,
         focusable: shouldFocusOnContainer && containerFocus,
-        onBlur: toggleContainerFocus
-      }
-
+        onBlur: toggleContainerFocus,
+      },
     });
 
     return { slotProps, state };
@@ -80,18 +73,24 @@ export const ContextualMenu = compose<ContextualMenuType>({
   settings: settings,
   slots: {
     root: Callout,
-    container: View
+    container: View,
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
-    container: []
+    container: [],
   },
   render: (Slots: ISlots<ContextualMenuSlotProps>, renderData: ContextualMenuRenderData, ...children: React.ReactNode[]) => {
     if (renderData.state == undefined) {
       return null;
     }
-    return <CMContext.Provider value={renderData.state.context}><Slots.root><Slots.container>{children}</Slots.container></Slots.root></CMContext.Provider>;
-  }
+    return (
+      <CMContext.Provider value={renderData.state.context}>
+        <Slots.root>
+          <Slots.container>{children}</Slots.container>
+        </Slots.root>
+      </CMContext.Provider>
+    );
+  },
 });
 
 export default ContextualMenu;
