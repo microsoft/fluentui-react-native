@@ -1,4 +1,11 @@
-import { PersonaSize, PersonaCoinColor, PersonaCoinFluentColor, PersonaPresence, IPersonaCoinTokens } from './PersonaCoin.types';
+import {
+  PersonaSize,
+  PersonaCoinColor,
+  PersonaCoinFluentColor,
+  PersonaPresence,
+  IPersonaCoinTokens,
+  RingThickness,
+} from './PersonaCoin.types';
 import { ImageURISource } from 'react-native';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 

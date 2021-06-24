@@ -20,13 +20,13 @@ import { buildInitialsStyles } from './PersonaCoin.tokens.initials';
 import { buildInitialsBackgroundStyles } from './PersonaCoin.tokens.initialsBackground';
 import { buildPhotoStyles } from './PersonaCoin.tokens.photo';
 import { buildIconStyles } from './PersonaCoin.tokens.icon';
-import { buildActivityGlowStyles, buildActivityRingStyles } from './PersonaCoin.tokens.activityRing';
+import { buildGlowStyles, buildRingStyles } from './PersonaCoin.tokens.ring';
 
 function usePrepareForProps(
   props: IPersonaCoinProps,
   useStyling: IUseComposeStyling<IPersonaCoinType>,
 ): IRenderData<IPersonaCoinSlotProps, IPersonaCoinState> {
-  const { imageUrl, imageDescription, initials, presence, isOutOfOffice, activityRing, ...rest } = props;
+  const { imageUrl, imageDescription, initials, presence, isOutOfOffice, ring, ...rest } = props;
 
   const personaPhotoSource =
     imageUrl === undefined
@@ -36,7 +36,7 @@ function usePrepareForProps(
         };
 
   const iconSource = presence === undefined ? undefined : getPresenceIconSource(presence, isOutOfOffice || false);
-  const showActivityRing = !!activityRing;
+  const showRing = !!ring;
 
   return {
     slotProps: mergeSettings<IPersonaCoinType['slotProps']>(useStyling(props), {
@@ -51,7 +51,7 @@ function usePrepareForProps(
     state: {
       iconSource,
       personaPhotoSource,
-      showActivityRing,
+      showRing,
     },
   };
 }
@@ -61,7 +61,7 @@ const render = (Slots: ISlots<IPersonaCoinSlotProps>, renderData: IPersonaCoinRe
     return null;
   }
 
-  const { personaPhotoSource, iconSource, showActivityRing } = renderData.state;
+  const { personaPhotoSource, iconSource, showRing } = renderData.state;
 
   return (
     <Slots.root>
@@ -72,10 +72,10 @@ const render = (Slots: ISlots<IPersonaCoinSlotProps>, renderData: IPersonaCoinRe
           <Slots.initials />
         </Slots.initialsBackground>
       )}
-      {showActivityRing && (
-        <Slots.activityRing>
-          <Slots.activityGlow />
-        </Slots.activityRing>
+      {showRing && (
+        <Slots.ring>
+          <Slots.glow />
+        </Slots.ring>
       )}
       {!!iconSource && !!iconSource.uri && <Slots.icon source={iconSource} />}
     </Slots.root>
@@ -104,11 +104,11 @@ export const PersonaCoin = compose<IPersonaCoinType>({
       slotType: Image,
       filter: filterImageProps,
     },
-    activityRing: {
+    ring: {
       slotType: View,
       filter: filterViewProps,
     },
-    activityGlow: {
+    glow: {
       slotType: View,
       filter: filterViewProps,
     },
@@ -120,7 +120,7 @@ export const PersonaCoin = compose<IPersonaCoinType>({
     initialsBackground: [buildInitialsBackgroundStyles],
     photo: [buildPhotoStyles],
     icon: [buildIconStyles],
-    activityRing: [buildActivityRingStyles],
-    activityGlow: [buildActivityGlowStyles],
+    ring: [buildRingStyles],
+    glow: [buildGlowStyles],
   },
 });

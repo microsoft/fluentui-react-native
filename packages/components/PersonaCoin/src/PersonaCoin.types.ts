@@ -63,7 +63,7 @@ export type PersonaPresence = 'none' | 'offline' | 'online' | 'away' | 'dnd' | '
 
 export type RingThickness = number | 'xSmall' | 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge';
 
-export interface IActivityRingConfig {
+export interface IRingConfig {
   accent?: boolean;
   transparent?: boolean;
   ringColor?: Color; // glow
@@ -80,7 +80,7 @@ export interface IPersonaConfigurableProps {
    * @deprecated Use coinColorFluent instead
    */
   coinColor?: PersonaCoinColor;
-  activityRing?: IActivityRingConfig;
+  ring?: IRingConfig;
   coinColorFluent?: PersonaCoinFluentColor;
 }
 
@@ -98,8 +98,8 @@ export interface IPersonaCoinSlotProps {
   initials: TextProps;
   initialsBackground: ViewProps;
   icon: ImageProps;
-  activityRing: ViewProps;
-  activityGlow: ViewProps;
+  ring: ViewProps;
+  glow: ViewProps;
 }
 
 export type IconAlignment = 'start' | 'center' | 'end';
@@ -117,7 +117,7 @@ export interface IPersonaCoinTokens extends IBackgroundColorTokens, IForegroundC
 export interface IPersonaCoinState {
   personaPhotoSource: ImageURISource | undefined;
   iconSource: ImageURISource | undefined;
-  showActivityRing: boolean;
+  showRing: boolean;
 }
 
 export interface IPersonaCoinType {

@@ -73,7 +73,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
     tokens.color = textColor;
   }
   if (showRings) {
-    tokens.activityRing = { ringColor: 'red' };
+    tokens.ring = { ringColor: 'red' };
   }
   if (coinSize) {
     tokens.coinSize = coinSize;
@@ -95,7 +95,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
             imageDescription="Photo of Satya Nadella"
             imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
             presence={showPresence && iconSize ? 'away' : undefined}
-            activityRing={
+            ring={
               showRings && ringThickness
                 ? {
                     ringColor,
