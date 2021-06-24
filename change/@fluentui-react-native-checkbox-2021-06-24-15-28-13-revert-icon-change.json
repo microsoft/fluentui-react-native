@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Add a README",
+  "packageName": "@fluentui-react-native/checkbox",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-06-24T20:28:13.154Z"
+}
