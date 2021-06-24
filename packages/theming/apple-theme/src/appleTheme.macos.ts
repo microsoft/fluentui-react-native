@@ -46,6 +46,81 @@ export const appleComponents = {
       variant: 'bodyStandard',
     },
   },
+  RadioButton: {
+    tokens: {
+      borderColor: 'rgba(0, 0, 0, 0.15)',
+      backgroundColor: 'white',
+    },
+    root: {
+      accessible: false,
+      focusable: false,
+      style: {
+        alignItems: 'flex-start',
+      },
+    },
+    button: {
+      style: {
+        backgroundColor: 'rgba(255, 255, 255, 1)',
+        width: 14,
+        height: 14,
+        borderRadius: 7,
+
+        shadowOffset: {
+          width: 3,
+          height: -3,
+        },
+      },
+      accessible: true,
+      focusable: true,
+    },
+    innerCircle: {
+      style: {
+        height: 5.5,
+        borderRadius: 2.75,
+        width: 5.5,
+        left: 3.25,
+        top: 3,
+      },
+    },
+    content: {
+      variant: 'bodyStandard',
+      style: {
+        marginTop: 0,
+      },
+    },
+    _overrides: {
+      selected: {
+        innerCircle: {
+          style: {
+            backgroundColor: 'transparent',
+          },
+        },
+        hovered: {
+          innerCircle: {
+            style: {
+              backgroundColor: 'transparent',
+            },
+          },
+        },
+        button: {
+          backgroundColor: 'rgba(75, 145, 247, 1)',
+        },
+      },
+      focused: {
+        button: {
+          enableFocusRing: true,
+        },
+      },
+      disabled: {
+        tokens: {
+          borderColor: 'rgba(0, 0, 0, 0.15)',
+        },
+        button: {
+          focusable: false,
+        },
+      },
+    },
+  },
   Checkbox: {
     checkbox: {
       style: {

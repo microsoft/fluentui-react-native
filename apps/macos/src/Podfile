@@ -26,6 +26,7 @@ use_test_app! do |target|
 
     pod 'FluentUI-React-Native-Button', :path => '../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec'
     pod 'FluentUI-React-Native-Avatar', :path => '../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec'
+    pod 'FluentUI-React-Native-FocusZone', :path => '../../../packages/components/FocusZone/FluentUIReactNativeFocusZone.podspec'
     pod 'RNCPicker', :path => '../../../node_modules/@react-native-picker/picker'
     pod 'RNSVG', :path => '../../../node_modules/react-native-svg'
 
