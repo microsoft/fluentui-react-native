@@ -2392,13 +2392,13 @@
   resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.9.11.tgz#490c752417c17d687e2941659b3c0bff9cb79b83"
   integrity sha512-E7whvvMIl9Ln1sxgug7OAEVWQ69n82iV0d2OWWp5VV52+RW3azKh1IFm4rxdW5/oByMfl7FFL0eHNelGgY4BMQ==
 
-"@rnx-kit/cli@^0.5.26":
-  version "0.5.26"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/cli/-/cli-0.5.26.tgz#db39cfd4faaa413bbedd75652854c1eef8d22223"
-  integrity sha512-2W5htmskLZHPCsDBP3QeCDLrqVk7mjohOF5qThGFlCQax0PhzNZ/aGlcsnvl0ePZbPCXseNQJKaaerWmG5Y9qg==
+"@rnx-kit/cli@^0.5.27":
+  version "0.5.27"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/cli/-/cli-0.5.27.tgz#0edcee5081e4901f012b812de5ec9a0c0b05d53e"
+  integrity sha512-ce+4MOlscGxEHzhATLJMZJ0Kiole6WII8rL4ub92GLvtVnemhh3Hh5SVFPDYgAsTUe2K78qM9J4K7BiefVLpLA==
   dependencies:
     "@rnx-kit/config" "0.2.9"
-    "@rnx-kit/dep-check" "^1.5.7"
+    "@rnx-kit/dep-check" "^1.5.8"
     "@rnx-kit/third-party-notices" "1.0.1"
     chalk "^4.1.0"
 
@@ -2417,10 +2417,10 @@
   dependencies:
     chalk "^4.1.0"
 
-"@rnx-kit/dep-check@^1.5.7":
-  version "1.5.7"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.5.7.tgz#3371757f556fcd8e8a192fa14c9e60a6fe838042"
-  integrity sha512-uufJ2vWWZHscWPG8ncMFf692yu18KmT86QAmkVkIF2mSqM8nn7FLjkyNkBHU7ZWAgyb9GqtnHwjYXQKqP67d5g==
+"@rnx-kit/dep-check@^1.5.8":
+  version "1.5.8"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.5.8.tgz#569187c41176b934ce59b5fa55bd9895aa7d0e84"
+  integrity sha512-1wVgCV3aIFHSGqO2oGBnz35vqJjYCPEV5mVIXPSUU3lFse0KsTrlseV7Phl6QWJFa66YRx1XrqFkHOH4FNPOZw==
   dependencies:
     "@rnx-kit/config" "^0.2.9"
     "@rnx-kit/console" "^1.0.0"

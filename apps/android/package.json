@@ -33,7 +33,7 @@
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^1.1.0",
-    "@rnx-kit/cli": "^0.5.26",
+    "@rnx-kit/cli": "^0.5.27",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "babel-jest": "^24.9.0",
