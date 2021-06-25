@@ -25,14 +25,7 @@ As with normal UWP app development, the UWP test harness that loads the JS bundl
 ## Running the App
 
 1. Run `yarn` from the root of the repo
-2. From the test app folder, generate the test app from `react-native-test-app`
-
-```
-    cd apps/windows
-    yarn install-windows-test-app
-```
-
-3. From this directory, simply `yarn windows`
+2. From this directory, simply `yarn windows`
 
 ## Troubleshooting
 

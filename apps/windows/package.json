@@ -12,7 +12,7 @@
     "e2etest": "rimraf reports/* && wdio",
     "generate-report": "allure generate allure-results --clean && allure open",
     "lint": "eslint .",
-    "prewindows": "install-windows-test-app",
+    "prewindows": "install-windows-test-app --use-nuget",
     "report": "allure generate allure-results --clean",
     "start": "react-native start",
     "test": "jest",

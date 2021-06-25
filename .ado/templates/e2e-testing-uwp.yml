@@ -43,7 +43,7 @@ steps:
     displayName: 'Workaround RNW CLI bug'
 
   - script: |
-      yarn install-windows-test-app
+      yarn install-windows-test-app --use-nuget
     workingDirectory: apps\windows
     displayName: 'generate UWP app'
 
