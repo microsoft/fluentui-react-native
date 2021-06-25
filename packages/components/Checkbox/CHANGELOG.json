@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Fri, 25 Jun 2021 00:13:47 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.11.5",
+      "version": "0.11.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixing Focus for Checkbox and fixing Folder structure",
+            "author": "safreibe@microsoft.com",
+            "commit": "25ddf9e5ba2d2790c27982cbc1fbf8dc32892a20",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 24 Jun 2021 21:55:11 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.11.4",
       "version": "0.11.4",
