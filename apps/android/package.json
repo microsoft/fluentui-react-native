@@ -64,9 +64,10 @@
   },
   "depcheck": {
     "ignoreMatches": [
-      "react-native-test-app",
+      "@react-native-community/slider",
       "@react-native-picker/picker",
-      "@react-native-community/slider"
+      "hermes-engine",
+      "react-native-test-app"
     ]
   }
 }
