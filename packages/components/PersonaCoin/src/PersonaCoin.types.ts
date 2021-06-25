@@ -1,10 +1,11 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import { ImageProps, ViewProps, ImageURISource, TextProps } from 'react-native';
+import { ImageProps, ViewProps, ImageURISource, TextProps, ColorValue } from 'react-native';
 import { IBackgroundColorTokens, IForegroundColorTokens } from '@fluentui-react-native/tokens';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { Color } from '@fluentui-react-native/theme-types';
+import { Palette } from '@fluentui-react-native/theme-types';
 
 export const personaCoinName = 'RNFPersonaCoin';
+export type Color = keyof Palette | ColorValue;
 
 export type PersonaSize = 'size8' | 'size24' | 'size32' | 'size40' | 'size48' | 'size56' | 'size72' | 'size100' | 'size120';
 
