@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/persona-coin
 
-This log was last generated on Wed, 23 Jun 2021 18:53:56 GMT and should not be manually modified.
+This log was last generated on Fri, 25 Jun 2021 06:21:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.4
+
+Fri, 25 Jun 2021 06:21:11 GMT
+
+### Patches
+
+- Add activity ring to PersonaCoin (tamasane@gmail.com)
 
 ## 0.8.3
 

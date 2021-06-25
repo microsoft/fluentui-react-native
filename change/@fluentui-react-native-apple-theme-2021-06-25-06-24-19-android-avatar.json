@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Merge remote-tracking branch 'master' into android-avatar",
-  "packageName": "@fluentui-react-native/apple-theme",
-  "email": "tamasane@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-06-25T00:54:19.782Z"
-}
