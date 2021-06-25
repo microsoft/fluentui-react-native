@@ -54,7 +54,7 @@ You can read more about this tool here:
 - If you would like to debug in Android Studio, you can do the following to open the project there:
 
 ```sh
-# Android
+# macOS
 open -a "Android Studio" .
 
 # Windows
