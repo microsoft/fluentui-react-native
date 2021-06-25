@@ -22,8 +22,8 @@
     "@fluentui-react-native/tester": "^0.28.0",
     "react": "16.13.1",
     "react-native": "^0.63.4",
-    "react-native-test-app": "^0.5.3",
-    "react-native-windows": "^0.62.1"
+    "react-native-test-app": "^0.6.3",
+    "react-native-windows": " ^0.63.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
