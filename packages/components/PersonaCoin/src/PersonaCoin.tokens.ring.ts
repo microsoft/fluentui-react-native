@@ -16,7 +16,7 @@ function _buildRingStyles(tokenProps: IPersonaCoinTokens, theme: ITheme): ViewPr
 
   const effectiveRingThickness = 2 * getRingThickness(ring.ringThickness || 'xxlarge') + innerGap;
   const effectiveSize = physicalSize + 2 * effectiveRingThickness;
-  const ringColor = ring.ringBackgroundColor || theme.colors.personaring;
+  const ringColor = ring.ringBackgroundColor || theme.colors.personaActivityRing;
 
   return {
     style: {
