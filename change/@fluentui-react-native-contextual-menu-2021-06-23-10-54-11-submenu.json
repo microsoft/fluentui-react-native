@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add chevron to submenu",
-  "packageName": "@fluentui-react-native/contextual-menu",
-  "email": "lehon@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-06-23T17:53:51.258Z"
-}
