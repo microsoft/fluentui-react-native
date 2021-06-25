@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PersonaCoinColor, PersonaCoin, IPersonaCoinTokens } from '@fluentui/react-native';
+import { PersonaCoin, IPersonaCoinTokens } from '@fluentui/react-native';
 import { Switch, View, Text, TextInput } from 'react-native';
 import Slider from '@react-native-community/slider';
 import { steveBallmerPhotoUrl, undefinedText } from './styles';
@@ -53,8 +53,8 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [showPresence, setShowPresence] = React.useState(true);
   const [showColoredBackground, setShowColoredBackground] = React.useState(false);
   const [transparent, setTransparent] = React.useState(false);
-  const [coinColor, setCoinColor] = React.useState<WithUndefined<PersonaCoinColor | string>>('green');
-  const [textColor, setTextColor] = React.useState<WithUndefined<PersonaCoinColor | string>>('white');
+  const [coinColor, setCoinColor] = React.useState<WithUndefined<string>>('green');
+  const [textColor, setTextColor] = React.useState<WithUndefined<string>>('white');
   const [coinSize, setCoinsize] = React.useState<number>(88);
   const [ringThickness, setRingThickness] = React.useState<number>(4);
   const [innerGap, setInnerGap] = React.useState<number>(4);

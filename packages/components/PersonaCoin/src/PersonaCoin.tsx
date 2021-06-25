@@ -37,6 +37,7 @@ function usePrepareForProps(
 
   const iconSource = presence === undefined ? undefined : getPresenceIconSource(presence, isOutOfOffice || false);
   const showRing = !!ring;
+  const transparentRing = !!ring?.transparent;
 
   return {
     slotProps: mergeSettings<IPersonaCoinType['slotProps']>(useStyling(props), {
@@ -52,6 +53,7 @@ function usePrepareForProps(
       iconSource,
       personaPhotoSource,
       showRing,
+      transparentRing,
     },
   };
 }
@@ -61,7 +63,7 @@ const render = (Slots: ISlots<IPersonaCoinSlotProps>, renderData: IPersonaCoinRe
     return null;
   }
 
-  const { personaPhotoSource, iconSource, showRing } = renderData.state;
+  const { personaPhotoSource, iconSource, showRing, transparentRing } = renderData.state;
 
   return (
     <Slots.root>
@@ -72,11 +74,8 @@ const render = (Slots: ISlots<IPersonaCoinSlotProps>, renderData: IPersonaCoinRe
           <Slots.initials />
         </Slots.initialsBackground>
       )}
-      {showRing && (
-        <Slots.ring>
-          <Slots.glow />
-        </Slots.ring>
-      )}
+      {showRing && !transparentRing && <Slots.ring />}
+      {showRing && <Slots.glow />}
       {!!iconSource && !!iconSource.uri && <Slots.icon source={iconSource} />}
     </Slots.root>
   );

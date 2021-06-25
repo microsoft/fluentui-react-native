@@ -118,6 +118,7 @@ export interface IPersonaCoinState {
   personaPhotoSource: ImageURISource | undefined;
   iconSource: ImageURISource | undefined;
   showRing: boolean;
+  transparentRing: boolean;
 }
 
 export interface IPersonaCoinType {
