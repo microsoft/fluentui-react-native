@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Fri, 25 Jun 2021 21:11:46 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.10.15",
+      "version": "0.10.15",
+      "comments": {
+        "none": [
+          {
+            "comment": "Added how to bump react-native and where to find dep-check docs",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "8df298f64e9caa0db800c357a455ec61129a66da",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Jun 2021 19:39:16 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.10.15",
       "version": "0.10.15",
