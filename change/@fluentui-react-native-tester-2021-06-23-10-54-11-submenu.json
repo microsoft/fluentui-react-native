@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Add chevron to submenu",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "lehon@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-06-23T17:53:28.329Z"
+}
