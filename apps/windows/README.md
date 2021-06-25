@@ -25,6 +25,30 @@ As with normal UWP app development, the UWP test harness that loads the JS bundl
 1. Run `yarn` from the root of the repo
 2. From this directory, simply `yarn windows`
 
+## Dependencies
+
+Dependencies are managed by
+[`@rnx-kit/dep-check`](https://github.com/microsoft/rnx-kit/tree/main/packages/dep-check).
+If you're looking to upgrade `react-native`, look for the `rnx-kit` section in
+`/apps/windows/package.json`:
+
+```json
+{
+  ...
+  "rnx-kit": {
+    "reactNativeVersion": "^0.63",
+    "kitType": "app",
+    "bundle": {
+  ...
+}
+```
+
+Bump `reactNativeVersion`, and run `yarn rnx-dep-check --write`. This command
+will ensure that all relevant packages are bumped correctly.
+
+You can read more about this tool here:
+[`@rnx-kit/dep-check` design document](https://github.com/microsoft/rnx-kit/blob/main/packages/dep-check/DESIGN.md)
+
 ## Troubleshooting
 
 ### EPERM restoring NuGet packages
