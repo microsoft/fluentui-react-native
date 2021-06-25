@@ -4,30 +4,30 @@
  *
  * @format
  */
-const path = require('path');
-const blacklist = require('metro-config/src/defaults/blacklist');
-const {getWatchFolders} = require('@uifabricshared/build-native');
+
+const exclusionList = (() => {
+  try {
+    return require("metro-config/src/defaults/exclusionList");
+  } catch (_) {
+    // `blacklist` was renamed to `exclusionList` in 0.60
+    return require("metro-config/src/defaults/blacklist");
+  }
+})();
+
+const blockList = exclusionList([
+  /node_modules\/.*\/node_modules\/react-native\/.*/,
+
+  // Workaround for `EBUSY: resource busy or locked, open '~\msbuild.ProjectImports.zip'`
+  // when building with `yarn windows --release`
+  /.*\.ProjectImports\.zip/,
+]);
 
 module.exports = {
-  watchFolders: getWatchFolders(),
   resolver: {
-    blacklistRE: blacklist([
-      // This stops "react-native run-windows" from causing the metro server to crash if its already running
-      new RegExp(
-        `${path.resolve(__dirname, 'windows').replace(/[/\\]/g, '/')}.*`,
-      ),
-      // This prevents "react-native run-windows" from hitting: EBUSY: resource busy or locked, open msbuild.ProjectImports.zip
-      new RegExp(
-        `${path
-          .resolve(__dirname, 'msbuild.ProjectImports.zip')
-          .replace(/[/\\]/g, '/')}.*`,
-      ),
-    ]),
+    blacklistRE: blockList,
+    blockList,
   },
   transformer: {
-    // The cli defaults this to a full path to react-native, which bypasses the reactNativePlatformResolver above
-    // Hopefully we can fix the default in the future
-    assetRegistryPath: 'react-native/Libraries/Image/AssetRegistry',
     getTransformOptions: async () => ({
       transform: {
         experimentalImportSupport: false,
