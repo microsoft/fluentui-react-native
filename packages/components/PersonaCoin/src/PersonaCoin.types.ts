@@ -2,10 +2,8 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 import { ImageProps, ViewProps, ImageURISource, TextProps, ColorValue } from 'react-native';
 import { IBackgroundColorTokens, IForegroundColorTokens } from '@fluentui-react-native/tokens';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { Palette } from '@fluentui-react-native/theme-types';
 
 export const personaCoinName = 'RNFPersonaCoin';
-export type Color = keyof Palette | ColorValue;
 
 export type PersonaSize = 'size8' | 'size24' | 'size32' | 'size40' | 'size48' | 'size56' | 'size72' | 'size100' | 'size120';
 
@@ -64,11 +62,11 @@ export type PersonaPresence = 'none' | 'offline' | 'online' | 'away' | 'dnd' | '
 
 export type RingThickness = number | 'xSmall' | 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge';
 
-export interface IRingConfig {
+export interface RingConfig {
   accent?: boolean;
   transparent?: boolean;
-  ringColor?: Color; // glow
-  ringBackgroundColor?: Color; // inner/outer rings
+  ringColor?: ColorValue; // glow
+  ringBackgroundColor?: ColorValue; // inner/outer rings
   ringThickness?: RingThickness;
   innerGap?: RingThickness;
 }
@@ -81,7 +79,7 @@ export interface IPersonaConfigurableProps {
    * @deprecated Use coinColorFluent instead
    */
   coinColor?: PersonaCoinColor;
-  ring?: IRingConfig;
+  ring?: RingConfig;
   coinColorFluent?: PersonaCoinFluentColor;
 }
 
