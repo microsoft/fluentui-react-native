@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Add activity ring to PersonaCoin",
+  "packageName": "@fluentui-react-native/theme-types",
+  "email": "tamasane@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-06-17T10:42:51.797Z"
+}
