@@ -13,7 +13,7 @@ PODS:
     - MicrosoftFluentUI (~> 0.2.2)
     - MicrosoftFluentUI (~> 0.2.6)
     - React
-  - FluentUI-React-Native-Button (0.6.3):
+  - FluentUI-React-Native-Button (0.6.4):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
   - FluentUI-React-Native-Date-Picker (0.2.0):
@@ -339,6 +339,8 @@ PODS:
   - React-jsinspector (0.63.4)
   - react-native-menu (0.1.2):
     - React
+  - react-native-slider (3.0.3):
+    - React
   - React-RCTActionSheet (0.63.4):
     - React-Core/RCTActionSheetHeaders (= 0.63.4)
   - React-RCTAnimation (0.63.4):
@@ -429,6 +431,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../../../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../../../node_modules/react-native/ReactCommon/jsinspector`)
   - "react-native-menu (from `../../../node_modules/@react-native-menu/menu`)"
+  - "react-native-slider (from `../../../node_modules/@react-native-community/slider`)"
   - React-RCTActionSheet (from `../../../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../../../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../../../node_modules/react-native/Libraries/Blob`)
@@ -491,6 +494,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/ReactCommon/jsinspector"
   react-native-menu:
     :path: "../../../node_modules/@react-native-menu/menu"
+  react-native-slider:
+    :path: "../../../node_modules/@react-native-community/slider"
   React-RCTActionSheet:
     :path: "../../../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -526,7 +531,7 @@ SPEC CHECKSUMS:
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
   FluentUI-React-Native-Avatar: 18822625d046e70f51c4c74e8f7e7221ca921b56
-  FluentUI-React-Native-Button: 3e04e8ed44ed357103fdc81eb37c496e82686916
+  FluentUI-React-Native-Button: e203e44a9e855bd5194b25a794bd0f544815341f
   FluentUI-React-Native-Date-Picker: af57505cfeaf1b97a0d2b12c46af26a189d892e8
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
@@ -543,6 +548,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
   react-native-menu: 9fe07f72e075b250295eeae25425490cc9608951
+  react-native-slider: e99fc201cefe81270fc9d81714a7a0f5e566b168
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0
@@ -559,6 +565,6 @@ SPEC CHECKSUMS:
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: de5bccaab7c68f57623bc444e67eeb9333b48355
+PODFILE CHECKSUM: 31571d5ec37b56ac776b1881c6312a1cb1860de1
 
 COCOAPODS: 1.10.1

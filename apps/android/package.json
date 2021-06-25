@@ -21,7 +21,8 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.27.2",
+    "@fluentui-react-native/tester": "^0.28.0",
+    "@react-native-community/slider": "^3.0.3",
     "@react-native-picker/picker": "^1.9.11",
     "react": "16.13.1",
     "react-native": "^0.63.4",
@@ -55,7 +56,8 @@
   "depcheck": {
     "ignoreMatches": [
       "react-native-test-app",
-      "@react-native-picker/picker"
+      "@react-native-picker/picker",
+      "@react-native-community/slider"
     ]
   }
 }
