@@ -85,7 +85,6 @@ export const SubmenuItem = compose<SubmenuItemType>({
       svgSource: svgProps,
       width: 12,
       height: 12,
-      color: 'red'
     }
 
     // grab the styling information, referencing the state as well as the props
