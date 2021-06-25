@@ -57,7 +57,7 @@ RCT_ENUM_CONVERTER(MSFPresence, (@{
 RCT_REMAP_VIEW_PROPERTY(size, avatarSize, MSFAvatarSize);
 RCT_REMAP_VIEW_PROPERTY(backgroundColor, avatarBackgroundColor, UIColor);
 
-RCT_EXPORT_VIEW_PROPERTY(customBorderImage, UIImage);
+RCT_REMAP_VIEW_PROPERTY(customBorderImageSource, customBorderImage, UIImage);
 
 RCT_REMAP_VIEW_PROPERTY(avatarStyle, style, MSFAvatarStyle)
 
@@ -69,7 +69,9 @@ RCT_REMAP_VIEW_PROPERTY(accessibilityLabel, overrideAccessibilityLabel, NSString
 
 RCT_EXPORT_VIEW_PROPERTY(preferredFallbackImageStyle, MSFAvatarFallbackImageStyle);
 
-RCT_REMAP_VIEW_PROPERTY(hasPointerInteractionIOS, hasPointerInteraction, bool)
+RCT_REMAP_VIEW_PROPERTY(hasPointerInteractionIOS, hasPointerInteraction, bool);
+
+RCT_EXPORT_VIEW_PROPERTY(hideInsideGapForBorder, BOOL);
 
 RCT_CUSTOM_VIEW_PROPERTY(avatarData, MSFAvatarData, MSFAvatarView)
 {

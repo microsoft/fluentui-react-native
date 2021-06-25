@@ -5,7 +5,7 @@ import {
   IPressState,
   IHoverState,
   IFocusState,
-  IWithPressableEvents
+  IWithPressableEvents,
 } from './useAsPressable.types';
 import { usePressability } from './usePressability';
 
@@ -15,23 +15,23 @@ import { usePressability } from './usePressability';
 function useHoverHelper<T extends object>(props: IWithPressableOptions<T>): [IWithPressableOptions<object>, IHoverState] {
   const [hoverState, setHoverState] = React.useState({ hovered: false });
   const onHoverIn = React.useCallback(
-    e => {
+    (e) => {
       setHoverState({ hovered: true });
       if (props.onHoverIn) {
         props.onHoverIn(e);
       }
     },
-    [setHoverState, props.onHoverIn]
+    [setHoverState, props.onHoverIn],
   );
 
   const onHoverOut = React.useCallback(
-    e => {
+    (e) => {
       setHoverState({ hovered: false });
       if (props.onHoverOut) {
         props.onHoverOut(e);
       }
     },
-    [setHoverState, props.onHoverOut]
+    [setHoverState, props.onHoverOut],
   );
   return [{ onHoverIn, onHoverOut }, hoverState];
 }
@@ -42,23 +42,23 @@ function useHoverHelper<T extends object>(props: IWithPressableOptions<T>): [IWi
 function useFocusHelper<T extends object>(props: IWithPressableOptions<T>): [IWithPressableOptions<object>, IFocusState] {
   const [focusState, setFocusState] = React.useState({ focused: false });
   const onFocus = React.useCallback(
-    e => {
+    (e) => {
       setFocusState({ focused: true });
       if (props.onFocus) {
         props.onFocus(e);
       }
     },
-    [setFocusState, props.onFocus]
+    [setFocusState, props.onFocus],
   );
 
   const onBlur = React.useCallback(
-    e => {
+    (e) => {
       setFocusState({ focused: false });
       if (props.onBlur) {
         props.onBlur(e);
       }
     },
-    [setFocusState, props.onBlur]
+    [setFocusState, props.onBlur],
   );
   return [{ onFocus, onBlur }, focusState];
 }
@@ -70,23 +70,23 @@ function usePressHelper<T extends object>(props: IWithPressableOptions<T>): [IWi
   const [pressState, setPressState] = React.useState({ pressed: false });
 
   const onPressIn = React.useCallback(
-    e => {
+    (e) => {
       setPressState({ pressed: true });
       if (props.onPressIn) {
         props.onPressIn(e);
       }
     },
-    [setPressState, props.onPressIn]
+    [setPressState, props.onPressIn],
   );
 
   const onPressOut = React.useCallback(
-    e => {
+    (e) => {
       setPressState({ pressed: false });
       if (props.onPressOut) {
         props.onPressOut(e);
       }
     },
-    [setPressState, props.onPressOut]
+    [setPressState, props.onPressOut],
   );
   return [{ onPressIn, onPressOut }, pressState];
 }
@@ -106,7 +106,7 @@ export function useAsPressable<T extends object>(props: IWithPressableOptions<T>
 
   return {
     props: { ...props, ...pressabilityProps },
-    state: { ...hoverState, ...pressState, ...focusState }
+    state: { ...hoverState, ...pressState, ...focusState },
   };
 }
 

@@ -6,7 +6,7 @@ export const focusZoneTestStyles = StyleSheet.create({
     flexDirection: 'row',
     alignContent: 'flex-start',
     alignItems: 'flex-start',
-    marginTop: 10
+    marginTop: 10,
   },
   focusZoneContainer: {
     flexDirection: 'column',
@@ -21,10 +21,10 @@ export const focusZoneTestStyles = StyleSheet.create({
   focusZoneButton0: {
     height: 50,
     width: 50,
-  }
+  },
 });
 
 export const stackStyleFocusZone: IStackProps['style'] = {
   flexDirection: 'column',
-  marginBottom: 40
+  marginBottom: 40,
 };

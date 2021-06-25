@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add repository link",
-  "packageName": "@fluentui/react-native",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-03-29T18:11:41.876Z"
-}

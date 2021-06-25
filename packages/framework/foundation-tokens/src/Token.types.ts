@@ -67,7 +67,7 @@ export type IStyleFactoryEntry<TProps, TTokens, TTheme> =
  * This is the collection of style factories corresponding to the slots
  */
 export type IStyleFactories<TSlotProps extends object, TTokens, TTheme> = {
-  [K in keyof TSlotProps]?: IStyleFactoryEntry<TSlotProps[K], TTokens, TTheme> | IStyleFactoryEntry<TSlotProps[K], TTokens, TTheme>[]
+  [K in keyof TSlotProps]?: IStyleFactoryEntry<TSlotProps[K], TTokens, TTheme> | IStyleFactoryEntry<TSlotProps[K], TTokens, TTheme>[];
 };
 
 /**

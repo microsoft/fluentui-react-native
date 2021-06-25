@@ -14,12 +14,12 @@
     "lint": "eslint .",
     "prewindows": "install-windows-test-app",
     "report": "allure generate allure-results --clean",
-    "start": "react-native rnx-start",
+    "start": "react-native start",
     "test": "jest",
     "windows": "react-native run-windows"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.21.0",
+    "@fluentui-react-native/tester": "^0.28.0",
     "react": "16.13.1",
     "react-native": "^0.63.4",
     "react-native-test-app": "^0.5.3",

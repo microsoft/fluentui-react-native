@@ -10,7 +10,7 @@ it('Stack with tokens', () => {
         <Text>Hello</Text>
         <Text>Hello</Text>
         <Text>Hello</Text>
-      </Stack>
+      </Stack>,
     )
     .toJSON();
   expect(tree).toMatchSnapshot();

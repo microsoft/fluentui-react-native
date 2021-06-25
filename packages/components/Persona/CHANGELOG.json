@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/persona",
   "entries": [
     {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@fluentui-react-native/persona_v0.10.1",
+      "version": "0.10.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Apply prettier to components, run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 15 Jun 2021 00:55:36 GMT",
+      "tag": "@fluentui-react-native/persona_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Handle ColorValue instad of string as color type",
+            "author": "ruaraki@microsoft.com",
+            "commit": "90e0dcb92a4ea4ee5ea5373f2c54defa127749bf",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 15 Apr 2021 20:08:17 GMT",
+      "tag": "@fluentui-react-native/persona_v0.9.1",
+      "version": "0.9.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge remote-tracking branch 'upstream/master' into amgleitman/icon-macos",
+            "author": "adam.gleitman@gmail.com",
+            "commit": "06834001f0f0238d2a7ad99a51a430b28eaa8daa",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 06 Mar 2021 00:20:05 GMT",
       "tag": "@fluentui-react-native/persona_v0.9.0",
       "version": "0.9.0",

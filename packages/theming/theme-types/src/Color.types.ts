@@ -11,7 +11,8 @@
  *
  * `{semantic: "windowBackgroundColor"}`
  */
-export type ColorValue = string;
+
+import { ColorValue } from 'react-native';
 
 export type ThemeColorDefinition = Palette & {
   background: ColorValue;
@@ -439,6 +440,13 @@ export interface ControlColorTokens {
   buttonDisabledSecondaryContent: ColorValue;
   buttonHoveredSecondaryContent: ColorValue;
   buttonPressedSecondaryContent: ColorValue;
+
+  checkboxBackground: ColorValue;
+  checkboxBackgroundDisabled: ColorValue;
+  checkmarkColor: ColorValue;
+
+  personaActivityRing: ColorValue;
+  personaActivityGlow: ColorValue;
 }
 
 /**

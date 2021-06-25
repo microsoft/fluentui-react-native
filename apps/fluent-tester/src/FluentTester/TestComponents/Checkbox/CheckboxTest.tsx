@@ -1,7 +1,7 @@
 import { Checkbox } from '@fluentui/react-native';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import * as React from 'react';
-import { View, TextInput } from 'react-native';
+import { View, TextInput, TextStyle } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { CHECKBOX_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -18,6 +18,7 @@ const basicCheckbox: React.FunctionComponent<{}> = () => {
       <Checkbox label="Checked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked={true} ariaLabel="Hello there" />
       <Checkbox label="Disabled checkbox" onChange={onChangeUncontrolled} defaultChecked={false} disabled={true} />
       <Checkbox label="Disabled checked checkbox" onChange={onChangeUncontrolled} defaultChecked={true} disabled={true} />
+      <Checkbox label="Checkbox will display a tooltip" onChange={onChangeUncontrolled} tooltip="This is a tooltip" />
     </View>
   );
 };
@@ -101,10 +102,9 @@ const tokenCheckbox: React.FunctionComponent<{}> = () => {
   });
 
   const theme = useTheme();
-  const textBoxBorderStyle = {
+  const textBoxBorderStyle: TextStyle = {
     borderColor: theme.colors.inputBorder,
   };
-
   return (
     <View>
       <CircularCheckbox label="A circular checkbox" onChange={onChangeUncontrolled} defaultChecked={false} />

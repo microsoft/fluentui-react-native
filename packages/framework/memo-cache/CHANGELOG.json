@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/memo-cache",
   "entries": [
     {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@fluentui-react-native/memo-cache_v1.1.1",
+      "version": "1.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Apply prettier to framework, run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@fluentui-react-native/memo-cache"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Oct 2020 22:27:37 GMT",
       "tag": "@fluentui-react-native/memo-cache_v1.1.0",
       "version": "1.1.0",

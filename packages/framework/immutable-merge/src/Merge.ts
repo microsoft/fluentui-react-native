@@ -44,7 +44,7 @@ export interface MergeOptions {
 const _builtinHandlers: { [K in BuiltinRecursionHandlers]: CustomRecursionHandler } = {
   appendArray: (...objs: any[]) => {
     return [].concat(...objs);
-  }
+  },
 };
 
 /**
@@ -99,7 +99,7 @@ function resolveForObject(option: RecursionHandler | RecursionOption | MergeOpti
 function getHandlerForPropertyOfType(
   config: MergeOptions,
   propKey: string,
-  propType: string
+  propType: string,
 ): CustomRecursionHandler | MergeOptions | undefined {
   let result: CustomRecursionHandler | MergeOptions | undefined = undefined;
   const option = config[propKey] !== undefined ? config[propKey] : config[propType] !== undefined ? config[propType] : undefined;
@@ -131,7 +131,7 @@ function getHandlerForPropertyOfType(
  * @param objs - an array of objects to merge together
  */
 function immutableMergeWorker<T extends object>(mergeOptions: RecursionOption | MergeOptions, singleMode: boolean, ...objs: T[]): T {
-  const setToMerge = objs.filter(v => v && getEntityType(v) === 'object' && Object.getOwnPropertyNames(v).length > 0);
+  const setToMerge = objs.filter((v) => v && getEntityType(v) === 'object' && Object.getOwnPropertyNames(v).length > 0);
   const [options, mightRecurse] = normalizeOptions(mergeOptions);
   const processSingle = singleMode && setToMerge.length === 1;
 
@@ -149,7 +149,7 @@ function immutableMergeWorker<T extends object>(mergeOptions: RecursionOption | 
           const entityType = getEntityType(originalVal);
           const handler = getHandlerForPropertyOfType(options, key, entityType);
           if (handler !== undefined) {
-            const values = setToMerge.map(set => set[key]).filter(v => v !== undefined);
+            const values = setToMerge.map((set) => set[key]).filter((v) => v !== undefined);
             const updatedVal = typeof handler === 'function' ? handler(...values) : immutableMergeWorker(handler, singleMode, ...values);
             if (updatedVal !== originalVal) {
               result = result || Object.assign({}, ...setToMerge);

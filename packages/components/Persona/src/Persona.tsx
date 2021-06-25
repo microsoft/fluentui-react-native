@@ -31,7 +31,7 @@ function usePrepareForProps(props: IPersonaProps, useStyling: IUseComposeStyling
 
   const slotProps = mergeSettings<IPersonaType['slotProps']>(useStyling(props), {
     root: { ...rootProps },
-    coin: { size, coinColor, imageUrl, imageDescription, initials, presence, isOutOfOffice }
+    coin: { size, coinColor, imageUrl, imageDescription, initials, presence, isOutOfOffice },
   });
 
   return {
@@ -40,8 +40,8 @@ function usePrepareForProps(props: IPersonaProps, useStyling: IUseComposeStyling
       text,
       secondaryText,
       tertiaryText,
-      optionalText
-    }
+      optionalText,
+    },
   };
 }
 
@@ -72,14 +72,14 @@ export const Persona = compose<IPersonaType>({
   slots: {
     root: {
       slotType: View,
-      filter: filterViewProps
+      filter: filterViewProps,
     },
     coin: PersonaCoin,
     stack: View,
     text: Text,
     secondary: Text,
     tertiary: Text,
-    optional: Text
+    optional: Text,
   },
   styles: {
     root: [buildRootStyle],
@@ -88,6 +88,6 @@ export const Persona = compose<IPersonaType>({
     secondary: [buildSecondaryStyle],
     tertiary: [buildTertiaryStyle],
     optional: [buildOptionalStyle],
-    stack: [buildStackStyle]
-  }
+    stack: [buildStackStyle],
+  },
 });

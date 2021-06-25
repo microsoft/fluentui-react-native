@@ -7,14 +7,14 @@ import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose'
 import { ILinkProps, ILinkSlotProps, ILinkState, ILinkRenderData, IWithLinkOptions, linkName, ILinkType } from './Link.types';
 import { settings } from './Link.settings';
 import { foregroundColorTokens, textTokens, borderTokens } from '@fluentui-react-native/tokens';
-import { useAsPressable, useKeyCallback, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyCallback, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { IViewProps } from '@fluentui-react-native/adapters';
 
 export type ILinkHooks = [IWithLinkOptions<IViewProps>, ILinkState];
 
-export function useAsLink(userProps: IWithLinkOptions<IViewProps>): ILinkHooks {
+export function useAsLink(userProps: IWithLinkOptions<IViewProps>, ref: React.RefObject<any>): ILinkHooks {
   const { url, onPress, ...rest } = userProps;
 
   const [linkState, setLinkState] = React.useState({ visited: false });
@@ -29,7 +29,11 @@ export function useAsLink(userProps: IWithLinkOptions<IViewProps>): ILinkHooks {
     },
     [setLinkState, url, onPress],
   );
-  const pressable = useAsPressable({ onPress: linkOnPress, ...rest });
+
+  // Ensure focus is placed on link after click
+  const linkOnPressWithFocus = useOnPressWithFocus(ref, linkOnPress);
+
+  const pressable = useAsPressable({ onPress: linkOnPressWithFocus, ...rest });
   const onKeyUp = useKeyCallback(linkOnPress, ' ', 'Enter');
 
   const newState = {
@@ -50,14 +54,14 @@ export const Link = compose<ILinkType>({
   displayName: linkName,
   settings,
   usePrepareProps: (userProps: ILinkProps, useStyling: IUseComposeStyling<ILinkType>): ILinkRenderData => {
-    const { content, onAccessibilityTap, ...rest } = userProps;
+    const { content, onAccessibilityTap, componentRef = React.useRef(null), ...rest } = userProps;
 
-    const [linkProps, linkState] = useAsLink(rest);
+    const [linkProps, linkState] = useAsLink(rest, componentRef);
     const onAccTap = onAccessibilityTap ? onAccessibilityTap : linkProps.onPress;
 
     const info = { content: !!content };
 
-    const linkRef = useViewCommandFocus(userProps.componentRef);
+    const linkRef = useViewCommandFocus(componentRef);
 
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => linkState[override] || userProps[override]);

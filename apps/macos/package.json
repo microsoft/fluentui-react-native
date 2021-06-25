@@ -13,13 +13,16 @@
     "code-style": "fluentui-scripts code-style",
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
-    "start": "react-native rnx-start",
+    "start": "react-native start",
     "test": "fluentui-scripts jest",
-    "macos": "react-native run-macos --scheme FluentTester --project-path src"
+    "macos": "react-native run-macos --scheme FluentTester --project-path src",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.21.0",
-    "react-native-macos": "0.63.1",
+    "@fluentui-react-native/tester": "^0.28.0",
+    "react-native-macos": "0.63.33",
+    "react-native-svg": "^12.1.1",
     "react-native-test-app": "^0.3.2"
   },
   "devDependencies": {
@@ -34,6 +37,7 @@
     "metro-config": "^0.58.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-native": "^0.63.4",
+    "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "~16.13.1"
   },
   "peerDependencies": {
@@ -52,7 +56,8 @@
   },
   "depcheck": {
     "ignoreMatches": [
-      "react-native-test-app"
+      "react-native-test-app",
+      "react-native-svg"
     ]
   }
 }

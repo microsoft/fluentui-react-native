@@ -4,13 +4,12 @@ import { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const focusZoneName = 'FocusZone';
 
-export interface FocusZoneState { }
+export interface FocusZoneState {}
 
 export interface FocusZoneProps {
-
   /**
-  * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
-  */
+   * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
+   */
   componentRef?: React.RefObject<IFocusable>;
 
   /**
@@ -49,16 +48,16 @@ export interface NativeProps extends Omit<FocusZoneProps, 'isCircularNavigation'
 
 export type FocusZoneDirection =
   | 'bidirectional' /** React to all arrows. */
-  | 'vertical'      /** Only react to up/down arrows. */
-  | 'horizontal'    /** Only react to left/right arrows. */
-  | 'none';         /** Doesn't respond to any arrow keys. */
+  | 'vertical' /** Only react to up/down arrows. */
+  | 'horizontal' /** Only react to left/right arrows. */
+  | 'none'; /** Doesn't respond to any arrow keys. */
 
 export type NavigateAtEnd =
-  | 'NavigateStopAtEnds'  /* Focus will stay on the last element in the FocusZone. Only way to navigate out is Tab */
-  | 'NavigateWrap'        /* Circular Navigation Functionality */
-  | 'NavigateContinue';   /* At the last element of the FocusZone, focus will move to the first focusable element outside the FocusZone */
+  | 'NavigateStopAtEnds' /* Focus will stay on the last element in the FocusZone. Only way to navigate out is Tab */
+  | 'NavigateWrap' /* Circular Navigation Functionality */
+  | 'NavigateContinue'; /* At the last element of the FocusZone, focus will move to the first focusable element outside the FocusZone */
 
-export interface FocusZoneTokens { }
+export interface FocusZoneTokens {}
 
 export interface FocusZoneSlotProps {
   root: NativeProps;

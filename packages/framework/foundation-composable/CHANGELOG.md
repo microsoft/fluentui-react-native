@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/foundation-composable
 
-This log was last generated on Sat, 06 Mar 2021 00:20:05 GMT and should not be manually modified.
+This log was last generated on Fri, 18 Jun 2021 00:38:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.2
+
+Fri, 18 Jun 2021 00:38:19 GMT
+
+### Patches
+
+- Apply prettier to framework, run (ruaraki@microsoft.com)
 
 ## 0.8.0
 

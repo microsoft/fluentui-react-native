@@ -13,7 +13,7 @@ function munge(tokens: ITokens, theme: ITheme): IProps {
   return {
     ...theme,
     ...tokens,
-    instance: instanceCount++
+    instance: instanceCount++,
   };
 }
 

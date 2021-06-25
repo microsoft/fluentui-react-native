@@ -1,8 +1,8 @@
 import { Spacing, Theme } from '@fluentui-react-native/theme-types';
-import { getFluentUIAndroidPalette } from './androidPalette';
-import { paletteFromAndroidColors } from './androidTheme.colors';
+import { getFluentUIAndroidPalette } from './colorsSemantic';
+import { paletteFromAndroidColors } from './colorsTokens';
 import { androidTypography } from './androidTypography';
-import { getAndroidPalette } from './androidBaseColors';
+import { getAndroidPalette } from './colorsBase';
 
 export function androidSpacing(): Spacing {
   return {
@@ -15,12 +15,21 @@ export function androidSpacing(): Spacing {
 }
 
 export const androidComponents = {
-  Button: {
-    tokens: {
-      borderRadius: 4,
-      borderWidth: 1,
-      minHeight: 48,
-      minWidth: 92,
+  Checkbox: {
+    checkbox: {
+      style: {
+        borderWidth: 2,
+        minHeight: 18,
+        minWidth: 18,
+      },
+    },
+    checkmarkIcon: {
+      width: 14,
+      height: 10,
+      style: {
+        marginVertical: 4,
+        marginHorizontal: 2,
+      },
     },
   },
 };

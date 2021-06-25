@@ -9,42 +9,54 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings, radioButtonSelectActionLabel } from './RadioButton.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens, getPaletteFromTheme} from '@fluentui-react-native/tokens';
-import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
+import { useAsPressable, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { RadioGroupContext } from './RadioGroup';
 
 export const RadioButton = compose<IRadioButtonType>({
   displayName: radioButtonName,
 
   usePrepareProps: (userProps: IRadioButtonProps, useStyling: IUseComposeStyling<IRadioButtonType>) => {
-    const { content, buttonKey, disabled, ariaLabel, componentRef, ...rest } = userProps;
+    const { content, buttonKey, disabled, ariaLabel, componentRef = React.useRef(null), ...rest } = userProps;
 
     // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
     const info = React.useContext(RadioGroupContext);
 
+    const buttonRef = useViewCommandFocus(componentRef);
+
     /* We don't want to call the user's onChange multiple times on the same selection. */
     const changeSelection = () => {
-      if(buttonKey != info.selectedKey)
+      if (buttonKey != info.selectedKey) {
         info.onChange && info.onChange(buttonKey);
+        info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
+      }
     };
 
-    /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
-    const pressable = useAsPressable({...rest,
-      onPress: () => {
-        changeSelection();
-      },
-      onFocus: () => {
-        changeSelection();
-      }});
+    /* We use the componentRef of the currently selected button to maintain the default tabbable
+    element in a RadioGroup. Since the componentRef isn't generated until after initial render,
+    we must update it once here. */
+    React.useEffect(() => {
+      if (buttonKey == info.selectedKey) {
+        info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
+      }
+    }, []);
 
-    const buttonRef = useViewCommandFocus(componentRef);
+    // Ensure focus is placed on button after click
+    const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
+
+    /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
+    const pressable = useAsPressable({
+      ...rest,
+      onPress: changeSelectionWithFocus,
+      onFocus: changeSelection,
+    });
 
     // Used when creating accessibility properties in mergeSettings below
     const onAccessibilityAction = React.useCallback(
       (event: { nativeEvent: { actionName: any } }) => {
         switch (event.nativeEvent.actionName) {
           case 'Select':
-            info.onChange && info.onChange(buttonKey);
+            changeSelection();
             break;
         }
       },
@@ -54,7 +66,7 @@ export const RadioButton = compose<IRadioButtonType>({
     const state = {
       ...pressable.state,
       selected: info.selectedKey === userProps.buttonKey,
-      disabled: disabled || false
+      disabled: disabled || false,
     };
 
     // Grab the styling information from the userProps, referencing the state as well as the props.

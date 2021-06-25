@@ -64,7 +64,7 @@ function _updateEntry(entryName: string, entry: IEntry, entries: IEntries, liste
   entries[entryName] = entry;
 
   _clearChildEntries(entryName, toInvalidate, entries);
-  toInvalidate.map(invalidateEntryName => {
+  toInvalidate.map((invalidateEntryName) => {
     const invalidateThemeName = invalidateEntryName === _defaultEntryName ? '' : invalidateEntryName;
     for (const listener of listeners) {
       listener.onInvalidate(invalidateThemeName);
@@ -131,7 +131,7 @@ function _setTheme(
   entries: IEntries,
   listeners: IThemeEventListener[],
   name?: string,
-  parent?: string
+  parent?: string,
 ): void {
   const entryName = _getEntryName(name);
   const parentEntryName = entryName === _defaultEntryName ? _platformEntryName : _getEntryName(parent);
@@ -177,11 +177,11 @@ interface IEntries {
 
 export function createThemeRegistry<T extends object, TPartial extends object>(
   initial: T,
-  baseResolver: IResolveTheme<T, TPartial>
+  baseResolver: IResolveTheme<T, TPartial>,
 ): IThemeRegistry<T, TPartial> {
   const entries: IEntries = {
     [_platformEntryName]: { resolved: initial as object },
-    [_defaultEntryName]: { parentEntryName: _platformEntryName }
+    [_defaultEntryName]: { parentEntryName: _platformEntryName },
   };
   const listeners: IThemeEventListener[] = [];
   const resolver: IResolveTheme<object, object> = (baseResolver as unknown) as IResolveTheme<object, object>;
@@ -208,11 +208,11 @@ export function createThemeRegistry<T extends object, TPartial extends object>(
       _updateEntry(
         _platformEntryName,
         {
-          resolved: newPlatformTheme
+          resolved: newPlatformTheme,
         },
         entries,
-        listeners
+        listeners,
       );
-    }
+    },
   };
 }

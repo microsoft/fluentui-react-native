@@ -83,7 +83,7 @@ function _processStyleFunctions<TProps, TTokens, TTheme>(
   theme: TTheme,
 ): TProps | undefined {
   if (functions && functions.length > 0) {
-    return mergeProps(...functions.map(fn => fn(tokenProps, theme)));
+    return mergeProps(...functions.map((fn) => fn(tokenProps, theme)));
   }
   return undefined;
 }
@@ -115,7 +115,7 @@ function _getCachedPropsForSlot<TProps, TTokens, TTheme>(
       newProps = finalizer(newProps, slotName);
     }
     return newProps;
-  }, [slotName, ...keys.map(val => (deltas[val] !== undefined ? deltas[val] : ''))])[0];
+  }, [slotName, ...keys.map((val) => (deltas[val] !== undefined ? deltas[val] : ''))])[0];
 }
 
 /**
@@ -135,7 +135,7 @@ export function buildComponentTokens<TSlotProps extends ISlotProps, TTokens, TTh
 
   // iterate through each factory and generate a handler for it.  Note that even if no styleFactories
   // are provided within it will still generate the handler to do style caching and finalization
-  Object.getOwnPropertyNames(factories).forEach(slot => {
+  Object.getOwnPropertyNames(factories).forEach((slot) => {
     type IPropsForSlot = TSlotProps[keyof TSlotProps];
     const factoriesBase = factories[slot];
     const mappings: ITokensForSlot<IPropsForSlot, TTokens, TTheme> = { toStyle: [], toTokens: [], functions: [] };
@@ -148,7 +148,7 @@ export function buildComponentTokens<TSlotProps extends ISlotProps, TTokens, TTh
       for (const set of factorySet) {
         if (typeof set === 'function') {
           functions.push(set);
-          set._keys.forEach(key => {
+          set._keys.forEach((key) => {
             slotKeys[key as string] = undefined;
           });
         } else {

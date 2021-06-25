@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/experimental-native-date-picker",
+  "entries": [
+    {
+      "date": "Wed, 23 Jun 2021 17:46:02 GMT",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Wrap FluentUI DateTimePicker (iOS) for React Native",
+            "author": "chripear@microsoft.com",
+            "commit": "badba8a548272ea4b9df848bc9328c3e3f17f8ef",
+            "package": "@fluentui-react-native/experimental-native-date-picker"
+          }
+        ]
+      }
+    }
+  ]
+}

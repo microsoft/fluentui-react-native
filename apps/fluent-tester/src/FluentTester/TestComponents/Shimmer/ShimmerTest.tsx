@@ -1,49 +1,52 @@
 import * as React from 'react';
-import { Shimmer } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle } from '../Common/styles';
+import { Shimmer, ShimmerElement } from '@fluentui-react-native/experimental-shimmer';
 import { SHIMMER_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { Text, View } from 'react-native';
+import { Stack } from '@fluentui-react-native/stack';
+import { icon } from './iconImageSource';
+import { stackStyle } from '../Common/styles';
 
 const shimmer: React.FunctionComponent<{}> = () => {
-  return (
-    <Stack style={stackStyle}>
-      <Shimmer style={{ flex: 1, alignItems: 'center' }}>
-        <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row', marginStart: 16, marginEnd: 16 }}>
-          <View style={{ width: 40, height: 40 }} />
-          <View style={{ flexDirection: 'column', flex: 2, marginLeft: 16 }}>
-            <Text style={{ marginBottom: 3, width: '40%' }}>{''}</Text>
-            <Text style={{ marginTop: 3, width: '30%' }}>{''}</Text>
-          </View>
-        </View>
-      </Shimmer>
-    </Stack>
-  );
-};
+  const lines: Array<ShimmerElement> = [
+    {
+      type: 'rect',
+      width: 100,
+      height: 20,
+      borderRadius: 3,
+      xPos: 90,
+      yPos: 70,
+    },
+    {
+      type: 'rect',
+      width: 150,
+      height: 20,
+      borderRadius: 3,
+      xPos: 90,
+      yPos: 42,
+    },
+    {
+      type: 'rect',
+      width: 200,
+      height: 20,
+      borderRadius: 3,
+      xPos: 90,
+      yPos: 15,
+    },
+  ];
+  const circle = lines.slice();
+  circle.push({ type: 'circle', height: 70, xPos: 40, yPos: 55 });
+  const rect = lines.slice();
+  rect.push({ type: 'rect', height: 60, width: 60, xPos: 10, yPos: 25, borderRadius: 3 });
 
-const stylizedShimmer: React.FunctionComponent<{}> = () => {
   const CustomizedShimmer = Shimmer.customize({
-    shimmerAlpha: 0,
-    shimmerWidth: 180,
-    shimmerAngle: 0,
-    shimmerSpeed: 400,
-    shimmerDelay: 0.1,
-    viewTintColor: 'rgb(100, 100, 100)',
-    cornerRadius: 10,
+    gradientTintColor: 'pink',
   });
-
   return (
     <Stack style={stackStyle}>
-      <CustomizedShimmer style={{ flex: 1, alignItems: 'center' }}>
-        <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row', marginStart: 16, marginEnd: 16 }}>
-          <View style={{ width: 40, height: 40 }} />
-          <View style={{ flexDirection: 'column', flex: 2, marginLeft: 16 }}>
-            <Text style={{ marginBottom: 3, width: '40%' }}>{''}</Text>
-            <Text style={{ marginTop: 3, width: '30%' }}>{''}</Text>
-          </View>
-        </View>
-      </CustomizedShimmer>
+      <CustomizedShimmer uri={icon} height={200} />
+      <Shimmer elements={circle} width={500} />
+      <Shimmer elements={rect} width={500} />
+      <Shimmer height={10} />
     </Stack>
   );
 };
@@ -53,10 +56,6 @@ const shimmerSections: TestSection[] = [
     name: 'Basic Shimmer',
     testID: SHIMMER_TESTPAGE,
     component: shimmer,
-  },
-  {
-    name: 'Stylized Shimmer',
-    component: stylizedShimmer,
   },
 ];
 
