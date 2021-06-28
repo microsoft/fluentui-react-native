@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/persona-coin",
   "entries": [
     {
+      "date": "Fri, 25 Jun 2021 06:21:11 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.8.4",
+      "version": "0.8.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add activity ring to PersonaCoin",
+            "author": "tamasane@gmail.com",
+            "commit": "592cd8a40cc814696cbb59b93d5801089cec276f",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 23 Jun 2021 18:53:56 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.8.3",
+      "version": "0.8.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Change persona coin to pull colors from tokens",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5563744f1fc49402e83636855b65c6f04e19255a",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.8.1",
+      "version": "0.8.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Apply prettier to components, run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Jun 2021 00:55:36 GMT",
       "tag": "@fluentui-react-native/persona-coin_v0.8.0",
       "version": "0.8.0",

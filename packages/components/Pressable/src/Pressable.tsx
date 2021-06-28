@@ -25,9 +25,9 @@ export const Pressable = composable<IPressableType>({
     renderStyle && (props.style = renderStyle(state));
     return {
       slotProps: mergeSettings<IPressableType['slotProps']>(styleProps, { root: props }),
-      state: { state }
+      state: { state },
     };
-  }
+  },
 });
 
 export default Pressable;

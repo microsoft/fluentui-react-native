@@ -4,7 +4,7 @@ import {
   IComposableType,
   IExtractSlotProps,
   IExtractProps,
-  IExtractState
+  IExtractState,
 } from '@uifabricshared/foundation-composable';
 import { ISlotProps, IComponentSettings, IWithTokens, IOverrideLookup } from '@uifabricshared/foundation-settings';
 import { ISettingsEntry } from '@uifabricshared/themed-settings';
@@ -44,7 +44,7 @@ export type IExtractTokens<T> = T extends ITokensFragment<infer U> ? U : object;
  */
 export type IDefineUseComposeStyling<TProps, TSlotProps extends ISlotProps, TTokens extends object> = (
   props: TProps,
-  lookup?: IOverrideLookup
+  lookup?: IOverrideLookup,
 ) => IWithTokens<TSlotProps, TTokens>;
 export type IUseComposeStyling<T> = IDefineUseComposeStyling<IExtractProps<T>, IExtractSlotProps<T>, IExtractTokens<T>>;
 
@@ -141,7 +141,7 @@ export type IComposeReturnType<
      * this is strongly typed for the component type which avoids needing to pass all the type parameters correctly.
      */
     compose: (
-      newOptions: Partial<IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics>>
+      newOptions: Partial<IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics>>,
     ) => IComposeReturnType<TProps, TSlotProps, TTokens, TState, TStatics>;
   };
 

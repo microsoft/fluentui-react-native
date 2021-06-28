@@ -4,7 +4,12 @@ import { immutableMergeCore, MergeOptions } from '@fluentui-react-native/immutab
 
 export type UseStyledSlots<TProps, TSlotProps> = (props: TProps, lookup?: HasLayer) => Slots<TSlotProps>;
 
-export type ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics extends object = object> = UseStylingOptions<TProps, TSlotProps, TTokens, TTheme> &
+export type ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics extends object = object> = UseStylingOptions<
+  TProps,
+  TSlotProps,
+  TTokens,
+  TTheme
+> &
   UseSlotOptions<TSlotProps> & {
     /**
      * Includes from UseStylingOptions:
@@ -25,10 +30,10 @@ export type ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics 
 
 export type ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics extends object = object> = ComposableFunction<TProps> & {
   __options: ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics>;
-  customize: (
-    ...tokens: TokenSettings<TTokens, TTheme>[]
+  customize: (...tokens: TokenSettings<TTokens, TTheme>[]) => ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics>;
+  compose: (
+    options: Partial<ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics>>,
   ) => ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics>;
-  compose: (options: Partial<ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics>>) => ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics>;
 } & TStatics;
 
 /**
@@ -36,13 +41,13 @@ export type ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatic
  */
 const mergeOptions: MergeOptions = {
   tokens: 'appendArray',
-  object: true
+  object: true,
 };
 
 export function composeFactory<TProps, TSlotProps, TTokens, TTheme, TStatics extends object = object>(
   options: ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics>,
   themeHelper: ThemeHelper<TTheme>,
-  base?: ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics>
+  base?: ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics>,
 ): ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics> {
   type LocalComponent = ComposeFactoryComponent<TProps, TSlotProps, TTokens, TTheme, TStatics>;
   type LocalOptions = ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics>;
@@ -58,7 +63,7 @@ export function composeFactory<TProps, TSlotProps, TTokens, TTheme, TStatics ext
   const useSlots = buildUseSlots(options) as UseStyledSlots<TProps, TSlotProps>;
 
   // build the staged component
-  const component = stagedComponent<TProps>(props => options.render(props, useSlots)) as LocalComponent;
+  const component = stagedComponent<TProps>((props) => options.render(props, useSlots)) as LocalComponent;
 
   // attach additional props to the returned component
   component.displayName = options.displayName;
@@ -66,13 +71,14 @@ export function composeFactory<TProps, TSlotProps, TTokens, TTheme, TStatics ext
   component.customize = (...tokens: LocalOptions['tokens']) =>
     composeFactory<TProps, TSlotProps, TTokens, TTheme, TStatics>(
       immutableMergeCore(mergeOptions, options, { tokens: tokens } as LocalOptions),
-      themeHelper
+      themeHelper,
     );
 
-  component.compose = (customOptions: Partial<LocalOptions>) => composeFactory<TProps, TSlotProps, TTokens, TTheme, TStatics>(
-    immutableMergeCore(mergeOptions, options, customOptions) as LocalOptions,
-    themeHelper
-  )
+  component.compose = (customOptions: Partial<LocalOptions>) =>
+    composeFactory<TProps, TSlotProps, TTokens, TTheme, TStatics>(
+      immutableMergeCore(mergeOptions, options, customOptions) as LocalOptions,
+      themeHelper,
+    );
 
   // attach statics if specified
   if (options.statics) {

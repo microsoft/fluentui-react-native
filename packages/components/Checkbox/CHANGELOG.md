@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Tue, 15 Jun 2021 00:55:36 GMT and should not be manually modified.
+This log was last generated on Fri, 25 Jun 2021 00:13:47 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.5
+
+Fri, 25 Jun 2021 00:13:47 GMT
+
+### Patches
+
+- Fixing Focus for Checkbox and fixing Folder structure (safreibe@microsoft.com)
+
+## 0.11.4
+
+Thu, 24 Jun 2021 21:55:11 GMT
+
+### Patches
+
+- Add a README (sanajmi@microsoft.com)
+
+## 0.11.2
+
+Mon, 21 Jun 2021 11:19:28 GMT
+
+### Patches
+
+- Update checkbox settings/theme for android (tamasane@gmail.com)
+
+## 0.11.1
+
+Fri, 18 Jun 2021 00:38:19 GMT
+
+### Patches
+
+- Apply prettier to components, run (ruaraki@microsoft.com)
 
 ## 0.11.0
 

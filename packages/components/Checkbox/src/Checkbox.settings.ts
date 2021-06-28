@@ -3,6 +3,7 @@ import { checkboxName, ICheckboxType } from './Checkbox.types';
 
 export const checkboxSelectActionLabel = 'Toggle the Checkbox';
 
+/* Default values for Win32/Windows */
 export const settings: IComposeSettings<ICheckboxType> = [
   {
     tokens: {

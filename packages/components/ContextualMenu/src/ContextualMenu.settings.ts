@@ -10,16 +10,16 @@ export const settings: IComposeSettings<ContextualMenuType> = [
       borderWidth: 1,
       directionalHint: 'bottonLeftEdge',
       gapSpace: 0,
-      minPadding: 0
+      minPadding: 0,
     },
     root: {
-      accessibilityRole: 'menu'
+      accessibilityRole: 'menu',
     },
     container: {
       style: {
-        padding: 1
-      }
-    }
+        padding: 1,
+      },
+    },
   },
-  contextualMenuName
+  contextualMenuName,
 ];

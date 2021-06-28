@@ -12,10 +12,11 @@ export type SubmenuItemState = ContextualMenuItemState;
 
 export interface SubmenuItemSlotProps {
   root: React.PropsWithRef<ViewProps>;
-  stack: ViewProps;
+  leftstack: ViewProps;
   icon: IconProps;
   content: ITextProps;
-  dropArrow: IconProps;
+  rightstack: ViewProps;
+  chevron: IconProps;
 }
 
 export type SubmenuItemRenderData = IRenderData<SubmenuItemSlotProps, SubmenuItemState>;

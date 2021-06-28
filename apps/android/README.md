@@ -12,28 +12,53 @@ Prereqs:
 
 1. Make sure you have followed the [Getting Started](../../README.md) instructions to install packages and build the entire FluentUI React Native repository. I.e. from the root of the repo:
 
-```
-    yarn && yarn build
+```sh
+yarn
+yarn build
 ```
 
 2. Then go into `apps/android` folder and simply run the the following
 
-```
+```sh
 yarn android
 ```
 
-Troubleshooting
+## Dependencies
+
+Dependencies are managed by
+[`@rnx-kit/dep-check`](https://github.com/microsoft/rnx-kit/tree/main/packages/dep-check).
+If you're looking to upgrade `react-native`, look for the `rnx-kit` section in
+`/apps/android/package.json`:
+
+```json
+{
+  ...
+  "rnx-kit": {
+    "reactNativeVersion": "^0.63",
+    "kitType": "app",
+    "bundle": {
+  ...
+}
+```
+
+Bump `reactNativeVersion`, and run `yarn rnx-dep-check --write`. This command
+will ensure that all relevant packages are bumped correctly.
+
+You can read more about this tool here:
+[`@rnx-kit/dep-check` design document](https://github.com/microsoft/rnx-kit/blob/main/packages/dep-check/DESIGN.md)
+
+## Troubleshooting
 
 - The first time you run your project, you may get errors about missing SDKs. Android Studio usually provides quick options to resolve these issues, but you can also go to Tools->SDK Manager to manually install or update SDK platforms or tools for your project.
 
 - If you would like to debug in Android Studio, you can do the following to open the project there:
 
-```
-    # Android
-    open -a "Android Studio" .
+```sh
+# macOS
+open -a "Android Studio" .
 
-    # Windows
-    # Easiest to open from within Android Studio - see picture below
+# Windows
+# Easiest to open from within Android Studio - see picture below
 ```
 
 ![On Windows, it is easiest to open from within Android Studio, and the folder will show an Android Studio icon.](./../../assets/fluent_tester_android_windows_open.png)

@@ -15,8 +15,8 @@ const useSlotsBase = buildUseSlots<SlotProps1>({
   slots: {
     outer: View,
     inner: View,
-    content: Text
-  }
+    content: Text,
+  },
 });
 
 const CompBase = stagedComponent((props: ViewProps) => {

@@ -45,6 +45,7 @@ export const commonTestStyles = StyleSheet.create({
     fontSize: 12,
     width: 150,
     marginBottom: 8,
+    paddingVertical: 0,
   },
   view: {
     minHeight: 200,

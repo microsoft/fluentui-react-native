@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Fri, 25 Jun 2021 19:39:16 GMT",
+      "tag": "@fluentui-react-native/link_v0.12.10",
+      "version": "0.12.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add chevron to submenu",
+            "author": "lehon@microsoft.com",
+            "commit": "c02e69f9e9ac03db75d410794beaa2cd0ab644a6",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@fluentui-react-native/link_v0.12.6",
+      "version": "0.12.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Apply prettier to components, run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 02 Jun 2021 17:30:36 GMT",
       "tag": "@fluentui-react-native/link_v0.12.4",
       "version": "0.12.4",
