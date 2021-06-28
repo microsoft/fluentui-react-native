@@ -49,9 +49,9 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
             // The window is responsible for hit testing and dismissing the callout if taps happen outside of the callout root view.
             calloutWindow = CalloutWindow(contentViewController: windowRootViewController)
             if let window = calloutWindow {
-                window.windowLifeCycleDelegate = self as CalloutWindowLifeCycleDelegate // TODO
+                window.windowLifeCycleDelegate = self
                 window.styleMask = .borderless
-                window.level = .statusBar
+                window.level = .statusBar //.floating?? TODO
                 window.setIsVisible(true)
                 window.backgroundColor = .windowBackgroundColor
             }
@@ -89,8 +89,8 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
     }
 
     override func reactSetFrame(_ frame: CGRect) {
-        super.reactSetFrame(frame)
-        updateCalloutFrameToTargetFrame()
+      super.reactSetFrame(frame)
+      updateCalloutFrameToTargetFrame()
     }
 
     /// We never want this view to be visible, its a placeholder for the react component hierarchy.
@@ -108,11 +108,11 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
     // MARK: WindowLifeCycleDelegate
 
     func didDetectHitOutsideCallout(calloutWindow: CalloutWindow) {
-        dismissCallout()
+       dismissCallout()
     }
 
     func applicationDidResignActiveForCalloutWindow(calloutWindow: CalloutWindow) {
-        dismissCallout()
+       dismissCallout()
     }
 
     // MARK: Private methods
@@ -141,7 +141,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
                 }
             }
 
-            // if the optional anchorPos is supplied, offset the target frame by the anchorPos
+            // if the optional anchorRect is supplied, offset the target frame by the anchorRect
             if let anchorRect = anchorRect, (!anchorRect.equalTo(.zero))  {
                 targetFrameInWindowCoordinates.origin.x += anchorRect.origin.x
                 targetFrameInWindowCoordinates.origin.y += anchorRect.origin.y

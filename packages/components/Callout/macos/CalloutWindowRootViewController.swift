@@ -1,7 +1,7 @@
 import Foundation
 import AppKit
 
-class CalloutWindowRootViewController: UIViewController {
+class CalloutWindowRootViewController: NSViewController {
 
     @available(*, unavailable)
     required init(NibName: NSString?, bundle: Bundle?) {
