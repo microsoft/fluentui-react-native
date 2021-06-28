@@ -44,8 +44,8 @@ export function mergeSettingsCollection<TCollection extends IComponentSettingsCo
 }
 
 export function getActiveOverrides(target: IComponentSettings, lookup?: IOverrideLookup): string[] {
-  const hasOverride = typeof lookup === 'function' ? lookup : o => lookup[o];
-  return (target && target._precedence && target._precedence.filter(o => hasOverride(o))) || [];
+  const hasOverride = typeof lookup === 'function' ? lookup : (o) => lookup[o];
+  return (target && target._precedence && target._precedence.filter((o) => hasOverride(o))) || [];
 }
 
 /**

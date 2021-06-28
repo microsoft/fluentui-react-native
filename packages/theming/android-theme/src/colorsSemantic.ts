@@ -1,7 +1,7 @@
-import { ColorValue } from '@fluentui-react-native/theme-types';
+import { ColorValue } from 'react-native';
 import { AndroidBaseColorsPalette } from './colorsBase';
 export interface SemanticPalette {
-  //Texts
+  // Texts
   textDominant: ColorValue;
   textPrimary: ColorValue;
   textSecondary: ColorValue;
@@ -13,7 +13,7 @@ export interface SemanticPalette {
   textDisabledHighContrast: ColorValue;
   textOnAccentHighContrast: ColorValue;
 
-  //Icons
+  //  Icons
   iconsPrimary: ColorValue;
   iconsSecondary: ColorValue;
   iconsDisabled: ColorValue;
@@ -23,33 +23,37 @@ export interface SemanticPalette {
   iconsDisabledHighContrast: ColorValue;
   iconsOnAccentHighContrast: ColorValue;
 
-  //Surfaces
+  // Surfaces
   surfacesPrimary: ColorValue;
   surfacesSecondary: ColorValue;
   surfacesTertiary: ColorValue;
   surfacesQuaternary: ColorValue;
 
-  //Dividers
+  // Dividers
   dividersPrimary: ColorValue;
   dividersSecondary: ColorValue;
   dividersTertiary: ColorValue;
 
-  //Button
+  // Button
   buttonBackground: ColorValue;
   buttonBackgroundPressed: ColorValue;
   buttonBackgroundDisabled: ColorValue;
   buttonTextDisabled: ColorValue;
 
-  //Menu
+  // Menu
   menuBackground: ColorValue;
   menuIcon: ColorValue;
   menuItemText: ColorValue;
 
-  //List
+  // List
   listBackground: ColorValue;
 
-  //HyperLink
+  // HyperLink
   textHyperLink: ColorValue;
+
+  //Checkbox
+  checkboxDisabled: ColorValue;
+  checkboxBorder: ColorValue;
 }
 
 export type FluentUIAndroidPalette = AndroidBaseColorsPalette & SemanticPalette;
@@ -92,6 +96,8 @@ export function getFluentUIAndroidPalette(p: AndroidBaseColorsPalette): FluentUI
         menuItemText: p.gray900,
         listBackground: p.white,
         textHyperLink: '#D83B01',
+        checkboxDisabled: p.white,
+        checkboxBorder: '#808080',
       }
     : {
         ...p,
@@ -129,5 +135,7 @@ export function getFluentUIAndroidPalette(p: AndroidBaseColorsPalette): FluentUI
         menuItemText: p.gray100,
         listBackground: p.gray950,
         textHyperLink: '#D83B01',
+        checkboxDisabled: p.black,
+        checkboxBorder: '#808080',
       };
 }

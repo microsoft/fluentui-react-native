@@ -85,7 +85,6 @@ export const ContextualMenu = compose<ContextualMenuType>({
     }
     return (
       <CMContext.Provider value={renderData.state.context}>
-        {' '}
         <Slots.root>
           <Slots.container>{children}</Slots.container>
         </Slots.root>

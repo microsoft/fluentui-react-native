@@ -4,8 +4,8 @@ import { IPersonaType, personaName } from './Persona.types';
 export const settings: IComposeSettings<IPersonaType> = [
   {
     tokens: {
-      verticalGap: 4
-    }
+      verticalGap: 4,
+    },
   },
-  personaName
+  personaName,
 ];

@@ -43,7 +43,7 @@ export function preset() {
   task('webpack-dev-server', webpackDevServer);
   task('verify-api-extractor', verifyApiExtractor);
   task('update-api-extractor', updateApiExtractor);
-  task('prettier', () => (argv().fix ? prettierTask : prettierCheckTask));
+  task('prettier', () => (argv().fix ? prettierTask({ files: ['src/.'] }) : prettierCheckTask({ files: ['src/.'] })));
   task('check-for-modified-files', checkForModifiedFiles);
   task('tsall', parallel('ts:commonjs', 'ts:esm'));
   task('ts', series(condition('ts:commonjs-only', () => !!argv().commonjs), condition('tsall', () => !argv().commonjs)));

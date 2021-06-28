@@ -1,8 +1,107 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 19 May 2021 07:04:54 GMT and should not be manually modified.
+This log was last generated on Fri, 25 Jun 2021 19:39:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.29.0
+
+Fri, 25 Jun 2021 19:39:16 GMT
+
+### Minor changes
+
+- Add chevron to submenu (lehon@microsoft.com)
+
+## 0.28.0
+
+Fri, 25 Jun 2021 06:21:11 GMT
+
+### Minor changes
+
+- 📦 applying package updates ***NO_CI*** (tamasane@gmail.com)
+
+## 0.27.0
+
+Wed, 23 Jun 2021 18:53:56 GMT
+
+### Minor changes
+
+- Add new PersonaCoinFluentColor prop (ruaraki@microsoft.com)
+
+## 0.26.0
+
+Wed, 23 Jun 2021 17:46:02 GMT
+
+### Minor changes
+
+- Add tests for NativeDatePicker (chripear@microsoft.com)
+
+## 0.25.5
+
+Mon, 21 Jun 2021 11:19:28 GMT
+
+### Patches
+
+- Comment out tests that crash the app for iOS and macOS (#706) (tamasane@gmail.com)
+
+## 0.25.4
+
+Fri, 18 Jun 2021 00:38:19 GMT
+
+### Patches
+
+- Enable on Fluent Tester directory and run (ruaraki@microsoft.com)
+
+## 0.25.3
+
+Wed, 16 Jun 2021 21:31:58 GMT
+
+### Patches
+
+- Add FTZ underneath root view to set initial focus (krsiler@microsoft.com)
+
+## 0.25.2
+
+Wed, 16 Jun 2021 04:20:49 GMT
+
+### Patches
+
+- Remove apple theme native module (sanajmi@microsoft.com)
+
+## 0.25.1
+
+Tue, 15 Jun 2021 17:13:57 GMT
+
+### Patches
+
+- Return default theme of tester to Default (ruaraki@microsoft.com)
+
+## 0.25.0
+
+Tue, 15 Jun 2021 00:55:36 GMT
+
+### Minor changes
+
+- Allow ThemePicker in Android to handle ColorValue (ruaraki@microsoft.com)
+
+## 0.24.2
+
+Wed, 02 Jun 2021 17:30:36 GMT
+
+### Patches
+
+- Comment out tests that crash the app for iOS and macOS (t-lindaweng@microsoft.com)
+- Fix theme picker on FURN tester (ruaraki@microsoft.com)
+
+## 0.24.1
+
+Tue, 25 May 2021 00:42:50 GMT
+
+### Patches
+
+- Fixed ButtonIconTest (tamasane@gmail.com)
+- Add react-native-svg-transformer to iOS and macOS (adam.gleitman@gmail.com)
+- Add hideInsideGapForBorder prop to experimental avatar (sanajmi@microsoft.com)
 
 ## 0.24.0
 

@@ -1,7 +1,6 @@
 export * from './SettingsWorker';
 export * from './Theme';
 export {
-  ColorValue,
   OfficePalette,
   Palette as IPalette,
   PartialPalette as IPartialPalette,

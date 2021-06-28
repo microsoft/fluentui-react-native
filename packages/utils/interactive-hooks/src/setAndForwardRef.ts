@@ -15,7 +15,7 @@ import type { ElementRef, MutableRefObject, RefCallback } from 'react';
 type Args = {
   getForwardedRef: () => RefCallback<any> | MutableRefObject<any> | null | undefined;
   setLocalRef: (ref: ElementRef<any>) => unknown;
-}
+};
 
 /**
  * This is a helper function for when a component needs to be able to forward a ref
@@ -48,10 +48,7 @@ type Args = {
  *   module.exports = MyViewWithRef;
  */
 
-function setAndForwardRef({
-  getForwardedRef,
-  setLocalRef,
-}: Args): (ref: ElementRef<any>) => void {
+function setAndForwardRef({ getForwardedRef, setLocalRef }: Args): (ref: ElementRef<any>) => void {
   return function forwardRef(ref: ElementRef<any>) {
     const forwardedRef = getForwardedRef();
 

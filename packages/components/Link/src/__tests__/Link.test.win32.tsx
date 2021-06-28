@@ -13,7 +13,7 @@ it('Link with child', () => {
     .create(
       <Link content="Link with child" url="https://www.bing.com">
         <View />
-      </Link>
+      </Link>,
     )
     .toJSON();
   expect(tree).toMatchSnapshot();
