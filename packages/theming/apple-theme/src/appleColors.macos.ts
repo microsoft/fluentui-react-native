@@ -46,7 +46,7 @@ export function getAppleSemanticPalette(): AppleSemanticPalette {
 
     windowBackgroundColor: PlatformColor('windowBackgroundColor'),
     windowFrameTextColor: PlatformColor('windowFrameTextColor'),
-    underPageBackgroundColor: PlatformColor(' underPageBackgroundColor'),
+    underPageBackgroundColor: PlatformColor('underPageBackgroundColor'),
 
     findHighlightColor: PlatformColor('findHighlightColor'),
     highlightColor: PlatformColor('highlightColor'),

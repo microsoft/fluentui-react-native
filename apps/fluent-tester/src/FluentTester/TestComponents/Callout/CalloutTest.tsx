@@ -163,7 +163,7 @@ const standardCallout: React.FunctionComponent<{}> = () => {
           }}
         >
           <View style={{ padding: 20 }}>
-            <Button content="click to change anchor" onClick={toggleCalloutRef} enableFocusRing={true} focusable={true} />
+            <Button content="click to change anchor" onClick={toggleCalloutRef} focusable={true} />
           </View>
         </Callout>
       )}

@@ -3,21 +3,21 @@ import AppKit
 
 @objc(RCTCalloutView)
 class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
-    
+
     @objc public var target: NSNumber? {
         didSet {
             updateCalloutFrameToTargetFrame() // SAAD Addition
         }
     }
-    
+
     public var anchorRect: CGRect? {
         didSet {
             updateCalloutFrameToTargetFrame() // SAAD Addition
         }
     }
-    
+
     @objc public var onDismiss: RCTDirectEventBlock?
-    
+
     public weak var bridge: RCTBridge?
 
     // MARK: Initialization
@@ -25,26 +25,25 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
     private init() {
         super.init(frame: .zero)
     }
-    
+
     required init?(coder: NSCoder) {
         preconditionFailure()
     }
-    
+
     convenience init(bridge: RCTBridge) {
         self.init()
         self.bridge = bridge
-        
+
         // The proxy view is a React view that will be hosted in a seperate window.
         // The child react views added to this view will actually be added to the proxy view.
         calloutProxyView = RCTView()
         calloutProxyTouchHandler = RCTTouchHandler(bridge: bridge)
 
-        
         // The callout window root view will contain the proxy react view.
         // It will be offset within the window to align with the callout target rect
         // The callout window root view controller manages device rotation callbacks.
         calloutWindowRootViewController = CalloutWindowRootViewController()
-        
+
         if let windowRootViewController = calloutWindowRootViewController {
             // The callout window hosts the callout root view which hosts the proxy view.
             // The window is responsible for hit testing and dismissing the callout if taps happen outside of the callout root view.
@@ -63,9 +62,9 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
             }
         }
     }
-    
+
     // MARK: RCTComponent Overrides
-    
+
     override func insertReactSubview(_ subview: NSView!, at atIndex: Int) {
         // Do not want to call super (despite NS_REQUIRES_SUPER on base class) since this will cause the Callout's children to appear within the main component.
         // Instead we want to add the react subviews to the proxy callout view which is in its own callout window.
@@ -75,9 +74,9 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
         }
 
     }
-    
+
     override func removeFromSuperview() {
-        
+
         if let proxyView = calloutProxyView {
             for subview in proxyView.subviews {
                 subview.removeFromSuperview()
@@ -88,12 +87,12 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
         }
         super.removeFromSuperview()
     }
-    
+
     override func reactSetFrame(_ frame: CGRect) {
         super.reactSetFrame(frame)
         updateCalloutFrameToTargetFrame()
     }
-    
+
     /// We never want this view to be visible, its a placeholder for the react component hierarchy.
     /// Only its react children will be visible inside the callout view in the callout window
     override var isHidden: Bool {
@@ -104,20 +103,20 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
             return true
         }
     }
-    
+
 
     // MARK: WindowLifeCycleDelegate
 
     func didDetectHitOutsideCallout(calloutWindow: CalloutWindow) {
         dismissCallout()
     }
-    
+
     func applicationDidResignActiveForCalloutWindow(calloutWindow: CalloutWindow) {
         dismissCallout()
     }
-    
+
     // MARK: Private methods
-    
+
     private func dismissCallout() {
         if let onDismiss = onDismiss {
             guard let reactTag = reactTag else {
@@ -127,13 +126,13 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
             onDismiss(event)
         }
         calloutWindow?.close() // SAAD Addition
-        
+
     }
-    
+
     private func updateCalloutFrameToTargetFrame() {
         if let bridge = bridge {
             var targetFrameInWindowCoordinates: CGRect = .zero
-            
+
             if let targetView = bridge.uiManager.view(forReactTag: target) {
                 let targetFrameInWindow = targetView.convert(targetView.frame, to: nil)
                 if let window = targetView.window {
@@ -141,39 +140,39 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
                 }
             }
-            
+
             // if the optional anchorPos is supplied, offset the target frame by the anchorPos
             if let anchorRect = anchorRect, (!anchorRect.equalTo(.zero))  {
                 targetFrameInWindowCoordinates.origin.x += anchorRect.origin.x
                 targetFrameInWindowCoordinates.origin.y += anchorRect.origin.y
                 targetFrameInWindowCoordinates.size = anchorRect.size
             }
-            
+
             var calloutRect = bestRectRelativeToTargetFrame(targetRect: targetFrameInWindowCoordinates)
             calloutWindow?.setFrame(calloutRect, display: true)
             calloutRect.origin.x = 0
             calloutRect.origin.y = 0
             calloutProxyView?.frame = calloutRect
-            
+
             calloutWindowRootViewController?.view.frame = calloutRect
         }
     }
-    
+
     private func bestRectRelativeToTargetFrame(targetRect:CGRect) -> CGRect {
         let calloutFrame = frame
         maxCalloutHeight = max(maxCalloutHeight ?? 0, NSInteger(calloutFrame.size.height))
         maxCalloutWidth = max(maxCalloutWidth ?? 0, NSInteger(calloutFrame.size.width))
         let maxHeight = CGFloat(maxCalloutHeight!)
         let maxWidth = CGFloat(maxCalloutWidth!)
-        
+
         // Use the screen the anchor view is on, not necessarily the main screen
         // TODO: VSO#2339406, don't use mainScreen. Mirror CUIMenuWindow
         guard let screenFrame = NSScreen.main?.visibleFrame else {
             preconditionFailure("No Screen Available")
         }
-        
+
         var rect = CGRect(origin: CGPoint(x: targetRect.origin.x, y: targetRect.origin.y), size: CGSize(width: maxWidth, height: maxHeight))
-        
+
         // 1. If space below, callout is below
         if (rect.origin.y + maxHeight + targetRect.size.height < screenFrame.size.height) {
             rect.origin.y -= maxHeight
@@ -209,12 +208,12 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
         }
 
         return rect
-        
+
 
     }
-    
+
     // MARK: Private variables
-    
+
     private var calloutWindow: CalloutWindow?
     private var calloutWindowRootViewController: NSViewController?
     private var calloutProxyView: RCTView?
