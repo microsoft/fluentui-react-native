@@ -13,7 +13,7 @@ PODS:
     - MicrosoftFluentUI (~> 0.2.2)
     - MicrosoftFluentUI (~> 0.2.6)
     - React
-  - FluentUI-React-Native-Button (0.6.5):
+  - FluentUI-React-Native-Button (0.6.6):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
   - glog (0.3.5)
@@ -312,7 +312,7 @@ PODS:
     - React-Core (= 0.63.36)
     - React-cxxreact (= 0.63.36)
     - React-jsi (= 0.63.36)
-  - ReactTestApp-DevSupport (0.5.15)
+  - ReactTestApp-DevSupport (0.6.3)
   - ReactTestApp-Resources (1.0.0-dev)
   - RNCPicker (1.9.11):
     - React-Core
@@ -438,7 +438,7 @@ SPEC CHECKSUMS:
   FBLazyVector: 0a9070829baaf7af315d4b85e992f24315ee0588
   FBReactNativeSpec: e41705afe0a17d636081a7c077d34caf205ca13d
   FluentUI-React-Native-Avatar: 470009fedabda6b7f004a0226ea9367b8f889a3f
-  FluentUI-React-Native-Button: 1534f86aab1760aa74e74520b85dfd113aabbb35
+  FluentUI-React-Native-Button: 545650797683b791f6818d856cddf96c0b4d091a
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: 6b3bfd52b232e9abc5cb228b9761a5f42869f4d3
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
@@ -462,7 +462,7 @@ SPEC CHECKSUMS:
   React-RCTText: b5613f3b26ce07497fbcb0f4c8496c1c4fcb3405
   React-RCTVibration: e5464e5e9dd67b4f5c6983046be2e941708343f8
   ReactCommon: 85b3897abcb25a478b26cda3154a51fb56f405d2
-  ReactTestApp-DevSupport: ac5141ca453772cd5ede75b4d2d0d16c3fcb5faf
+  ReactTestApp-DevSupport: 9f0b81965c46840c5410ccc4e7f5a4d6cd224ece
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
   RNCPicker: 6780c753e9e674065db90d9c965920516402579d
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
