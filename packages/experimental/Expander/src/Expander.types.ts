@@ -2,6 +2,12 @@ import { ColorValue } from 'react-native';
 
 export const expanderName = 'Expander';
 
+/*
+  * General notes:
+  * The Expander header has been limited to hold an image and a title
+  * The Expander content will be consumed as child elements of the Expander component
+  */
+
 export interface ExpanderProps {
   /*
    * Direction to expand the Expander.
@@ -12,15 +18,13 @@ export interface ExpanderProps {
    */
   expanded?: boolean;
   /*
-   * Content for the header
-   * TODO: what types of content etc.
+   * Title for the header
    */
-  header?: string;
+  headerTitle?: string;
   /*
-   * Content displayed after expanded
-   * TODO: what types of content etc.
+   * Image for the header
    */
-  content?: string;
+  headerImage?: string;
   /*
    * Is Expander control enabled for the user
    */

@@ -4,7 +4,7 @@
 #include "ReactPackageProvider.g.cpp"
 #endif
 
-#include "ReactNativeModule.h"
+#include "ExpanderViewManager.h"
 
 using namespace winrt::Microsoft::ReactNative;
 
@@ -13,7 +13,7 @@ namespace winrt::ReactNativeExpander::implementation
 
 void ReactPackageProvider::CreatePackage(IReactPackageBuilder const &packageBuilder) noexcept
 {
-    AddAttributedModules(packageBuilder);
+    packageBuilder.AddViewManager(L"ExpanderViewManager", []() { return winrt::make<ExpanderViewManager>(); });
 }
 
 } // namespace winrt::ReactNativeExpander::implementation

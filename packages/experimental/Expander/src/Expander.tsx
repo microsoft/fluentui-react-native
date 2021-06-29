@@ -13,8 +13,8 @@ export const Expander = compose<ExpanderType>({
     root: buildProps(
       (tokens, theme) => ({
         style: {
-          height: 36,
-          width: 200,
+          height: 500,
+          width: 500,
           margin: 8,
         },
         accentColor: theme.colors.accentButtonBackground,

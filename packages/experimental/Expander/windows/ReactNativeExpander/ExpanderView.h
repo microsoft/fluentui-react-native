@@ -17,14 +17,11 @@ namespace winrt::ReactNativeExpander::implementation {
 
         Microsoft::UI::Xaml::Controls::Expander::Collapsed_revoker m_expanderCollapsedRevoker{};
         Microsoft::UI::Xaml::Controls::Expander::Expanding_revoker m_expanderExpandingRevoker{};
-        // Microsoft::UI::Xaml::Controls::Expander m_expander{ nullptr };
 
         void OnCollapsed(winrt::Windows::Foundation::IInspectable const& sender,
-                          Microsoft::UI::Xaml::Controls::ExpanderCollapsedEventArgs const& args,
-                          Microsoft::UI::Xaml::Controls::Expander const& expander);
+                          Microsoft::UI::Xaml::Controls::ExpanderCollapsedEventArgs const& args);
         void OnExpanding(winrt::Windows::Foundation::IInspectable const& sender,
-                          Microsoft::UI::Xaml::Controls::ExpanderExpandingEventArgs const& args,
-                          Microsoft::UI::Xaml::Controls::Expander const& expander);
+                          Microsoft::UI::Xaml::Controls::ExpanderExpandingEventArgs const& args);
 
         void RegisterEvents();
     };

@@ -34,7 +34,7 @@
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "react": "16.13.1",
     "react-native": "^0.63.4",
-    "react-native-windows": "^0.64.11"
+    "react-native-windows": "^0.63.0-0"
   },
   "peerDependencies": {
     "react": "16.13.1",

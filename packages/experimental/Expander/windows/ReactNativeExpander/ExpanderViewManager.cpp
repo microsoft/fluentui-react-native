@@ -38,8 +38,8 @@ namespace winrt::ReactNativeExpander::implementation {
         // TODO: specifically, need to update header and content
         nativeProps.Insert(L"expandDirection", ViewManagerPropertyType::String);
         nativeProps.Insert(L"expanded", ViewManagerPropertyType::Boolean);
-        nativeProps.Insert(L"header", ViewManagerPropertyType::String);
-        nativeProps.Insert(L"content", ViewManagerPropertyType::String);
+        nativeProps.Insert(L"headerTitle", ViewManagerPropertyType::String);
+        nativeProps.Insert(L"headerImage", ViewManagerPropertyType::String);
         nativeProps.Insert(L"enabled", ViewManagerPropertyType::Boolean);
         nativeProps.Insert(L"expanderStyle", ViewManagerPropertyType::String);
         nativeProps.Insert(L"accentColor", ViewManagerPropertyType::String);
@@ -68,6 +68,39 @@ namespace winrt::ReactNativeExpander::implementation {
             WriteCustomDirectEventTypeConstant(constantWriter, L"topCollapsed");
             WriteCustomDirectEventTypeConstant(constantWriter, L"topExpanding");
         };
+    }
+
+    int32_t ExpanderViewManager::ReplaceChild(winrt::Windows::UI::Xaml::FrameworkElement const& parent, winrt::Windows::UI::Xaml::UIElement const& oldChild, winrt::Windows::UI::Xaml::UIElement const& newChild) noexcept {
+        return 0;
+    }
+
+    void ExpanderViewManager::AddView(winrt::Windows::UI::Xaml::FrameworkElement const& parent, winrt::Windows::UI::Xaml::UIElement const& child, int64_t index) noexcept {
+        auto contentPresenter = parent.try_as<winrt::Windows::UI::Xaml::Controls::ContentPresenter>();
+        auto expanderWrapper = contentPresenter.Content();
+        auto expander = expanderWrapper.try_as<Microsoft::UI::Xaml::Controls::Expander>();
+
+        if (auto content = child.try_as<winrt::Windows::UI::Xaml::FrameworkElement>()) {
+            expander.Content(content);
+        }
+    //else {
+    //    // #6315 Text can embed non-text elements. Fail gracefully instead of crashing if that happens
+    //    textBlock.Inlines().InsertAt(static_cast<uint32_t>(index), winrt::Run());
+    //    GetReactContext().CallJSFunction(
+    //        "RCTLog",
+    //        "logToConsole",
+    //        folly::dynamic::array(
+    //            "warn", "React Native for Windows does not yet support nesting non-Text components under <Text>"));
+    //}
+
+        return;
+    }
+
+    void ExpanderViewManager::RemoveAllChildren(winrt::Windows::UI::Xaml::FrameworkElement const& parent) noexcept {
+        return;
+    }
+
+    void ExpanderViewManager::RemoveChildAt(winrt::Windows::UI::Xaml::FrameworkElement const& parent, int64_t index) noexcept {
+        return;
     }
 
 }
