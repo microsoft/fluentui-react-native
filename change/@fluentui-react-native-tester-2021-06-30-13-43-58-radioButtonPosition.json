@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Add ariaPosInSet and ariaSetSize to RadioButton",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-06-30T17:43:52.016Z"
+}
