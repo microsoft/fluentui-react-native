@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Wed, 30 Jun 2021 05:42:19 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.7.1",
+      "version": "0.7.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix bug where Shimmer didn't update with appearance changes",
+            "author": "sanajmi@microsoft.com",
+            "commit": "6a3c8570d00c35fcd9aa5a135f28eef3e4213eb6",
+            "package": "@fluentui-react-native/apple-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Jun 2021 06:21:11 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.7.0",
       "version": "0.7.0",

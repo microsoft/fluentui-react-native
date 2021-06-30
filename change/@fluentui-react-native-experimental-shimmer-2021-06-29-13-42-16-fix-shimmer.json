@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix bug where Shimmer didn't update with appearance changes",
-  "packageName": "@fluentui-react-native/experimental-shimmer",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-06-29T18:42:03.792Z"
-}
