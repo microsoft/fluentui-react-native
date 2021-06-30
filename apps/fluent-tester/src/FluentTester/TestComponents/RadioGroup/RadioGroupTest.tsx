@@ -35,6 +35,7 @@ const basicRadioGroup: React.FunctionComponent<{}> = () => {
       <Separator />
       <RadioGroup label="Controlled RadioGroup" selectedKey={selectedKey} onChange={onChange2}>
         <RadioButton content="Option A" buttonKey="A" ariaLabel="Test Aria Label" />
+        {/* The values for ariaPosInSet and ariaSetSize show someone can override the auto-generated values */}
         <RadioButton content="Option B" buttonKey="B" ariaPosInSet={57} />
         <RadioButton content="Option C" buttonKey="C" ariaSetSize={18} />
         <RadioButton content="Option D" buttonKey="D" />
