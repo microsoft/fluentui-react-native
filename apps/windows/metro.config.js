@@ -5,6 +5,8 @@
  * @format
  */
 
+const path = require("path");
+
 const exclusionList = (() => {
   try {
     return require("metro-config/src/defaults/exclusionList");
@@ -16,6 +18,10 @@ const exclusionList = (() => {
 
 const blockList = exclusionList([
   /node_modules\/.*\/node_modules\/react-native\/.*/,
+
+  // This stops "react-native run-windows" from causing the metro server to
+  // crash if its already running
+  new RegExp(`${path.join(__dirname, "windows").replace(/[/\\]+/g, "/")}.*`),
 
   // Workaround for `EBUSY: resource busy or locked, open '~\msbuild.ProjectImports.zip'`
   // when building with `yarn windows --release`

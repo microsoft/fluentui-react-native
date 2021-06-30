@@ -1,24 +1,24 @@
+const fs = require("fs");
 const path = require("path");
 
-const sourceDir = "windows";
+const windowsProjectFile = path.relative(
+  path.join(__dirname, "windows"),
+  path.join(
+    "node_modules",
+    ".generated",
+    "windows",
+    "ReactTestApp",
+    "ReactTestApp.vcxproj"
+  )
+);
+
 module.exports = {
-  project: {
-    windows: {
-      sourceDir,
+    windows: fs.existsSync(windowsProjectFile) && {
+      sourceDir: "windows",
       solutionFile: "FluentTester.sln",
       project: {
-        projectFile: path.relative(
-          path.join(__dirname, sourceDir),
-          path.join(
-            "node_modules",
-            ".generated",
-            "windows",
-            "ReactTestApp",
-            "ReactTestApp.vcxproj"
-          )
-        ),
+        projectFile: windowsProjectFile,
       },
     },
   },
-  reactNativePath: "node_modules/react-native-windows",
 };
