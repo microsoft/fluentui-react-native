@@ -29,8 +29,6 @@ export interface ActivityIndicatorTokens {
 
 export interface ActivityIndicatorSlotProps extends ActivityIndicatorProps {
   root: ViewProps;
-  end1: ViewProps;
-  end2: ViewProps;
 }
 
 export interface ActivityIndicatorProps extends ActivityIndicatorTokens {

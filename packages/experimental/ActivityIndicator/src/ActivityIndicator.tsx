@@ -124,8 +124,6 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
   ...stylingSettings,
   slots: {
     root: View,
-    end1: View,
-    end2: View,
   },
   render: (props: ActivityIndicatorProps /* what user is passing in */, useSlots: UseSlots<ActivityIndicatorType>) => {
     const Slots = useSlots(props);
@@ -177,19 +175,12 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
         { opacity: hideOpacity },
       ];
 
-      var test = [];
-      // test.push(<Animated.View style={rootViewStyle}></Animated.View>);
-      test.push(<View style={activityIndicatorStyles.endTop} />);
-      test.push(<View style={activityIndicatorStyles.endBottom} />);
-
       return (
         <Slots.root>
-          <Slots.end1></Slots.end1>
-          <Slots.end2></Slots.end2>
-          {/* <Animated.View style={rootViewStyle} {...mergedProps}>
+          <Animated.View style={rootViewStyle} {...mergedProps}>
             <View style={activityIndicatorStyles.endTop} />
             <View style={activityIndicatorStyles.endBottom} />
-          </Animated.View> */}
+          </Animated.View>
         </Slots.root>
       );
     };
