@@ -76,6 +76,30 @@ export const RadioGroup = compose<IRadioGroupType>({
       return null;
     }
 
+    if (children) {
+      let size = 0;
+
+      /* eslint-disable @typescript-eslint/ban-ts-ignore */
+      // @ts-ignore - TODO, fix typing error
+      React.Children.map(children, () => {
+        size++;
+      });
+
+      /* eslint-disable @typescript-eslint/ban-ts-ignore */
+      // @ts-ignore - TODO, fix typing error
+      children = React.Children.map(children, (child: React.ReactChild, index: number) => {
+        if (React.isValidElement(child)) {
+          const childProps = child.props;
+          const extraProps = { ariaSetSize: size, ariaPosInSet: index + 1 };
+          return React.cloneElement(child, {
+            ...childProps,
+            ...extraProps,
+          });
+        }
+        return child;
+      });
+    }
+
     return (
       <RadioGroupContext.Provider
         // Passes in the selected key and a hook function to update the newly selected button and call the client's onChange callback
