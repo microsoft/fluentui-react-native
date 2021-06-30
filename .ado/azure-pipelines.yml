@@ -146,9 +146,10 @@ jobs:
           publishJUnitResults: false
           javaHomeOption: 'JDKVersion'
           sonarQubeRunAnalysis: false
-
-  - job: NuGetPublishDryRun
-    displayName: NuGet Publish Dry Run
+  # Uncomment this job to test changes to changes to the NuGet package
+  # We keep it commented out by default because this job is much longer than the other PR jobs
+  - job: NuGetPublish
+    displayName: NuGet Publish
     pool:
       vmImage: 'macos-10.15'
       demands: ['xcode', 'sh', 'npm']
@@ -183,5 +184,4 @@ jobs:
       - template: templates/apple-xcode-select.yml
 
       - template: templates/apple-xcode-build-static-libs.yml
-
-      - template: templates/nuget-publish-dry-run.yml
+      - template: templates/nuget-publish.yml

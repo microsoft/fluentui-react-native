@@ -27,11 +27,8 @@ use_test_app! do |target|
     source 'https://github.com/rdeassis/cocoapods-repo.git'
     source 'https://cdn.cocoapods.org/'
 
-    pod 'MicrosoftFluentUI', '0.0.18'
-
     pod 'FluentUI-React-Native-Avatar', :path => '../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec'
-    pod 'FluentUI-React-Native-Button', :path => '../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec'
-    pod 'FluentUI-React-Native-Date-Picker', :path => '../../../packages/experimental/NativeDatePicker/FluentUIReactNativeDatePicker.podspec'
+    # pod 'FluentUI-React-Native-Button', :path => '../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec'
     pod 'react-native-menu', :path => '../../../node_modules/@react-native-menu/menu'
     pod 'RNSVG', :path => '../../../node_modules/react-native-svg'
     pod 'react-native-slider', :path => '../../../node_modules/@react-native-community/slider'

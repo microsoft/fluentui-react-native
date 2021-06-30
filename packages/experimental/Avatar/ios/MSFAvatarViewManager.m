@@ -83,25 +83,22 @@ RCT_EXPORT_SWIFTUI_PROPERTY(isRingVisible, BOOL, MSFAvatar)
 
 RCT_EXPORT_SWIFTUI_PROPERTY(isTransparent, BOOL, MSFAvatar)
 
-
 RCT_EXPORT_SWIFTUI_PROPERTY(isOutOfOffice, BOOL, MSFAvatar)
 
+RCT_EXPORT_SWIFTUI_PROPERTY(size, MSFAvatarSize, MSFAvatar)
 
-RCT_EXPORT_CUSTOM_SWIFTUI_PROPERTY(size, MSFAvatarSize, MSFAvatar)
+RCT_REMAP_SWIFTUI_PROPERTY(avatarStyle, style, MSFAvatarStyle, MSFAvatar)
+
+RCT_EXPORT_SWIFTUI_PROPERTY(hasRingInnerGap, BOOL, MSFAvatar)
+
+RCT_EXPORT_CUSTOM_SWIFTUI_PROPERTY(customBorderImageSource, UIImage, MSFAvatar)
 {
     NSMutableDictionary *storage = [MSFAvatar storage];
     MSFAvatar *viewWrapper = storage[[NSValue valueWithNonretainedObject:view]];
-    MSFAvatarSize size = [RCTConvert MSFAvatarSize:json];
-    [viewWrapper setSizeWithSize:size];
+    UIImage *customBorderImage = [RCTConvert UIImage:json];
+    [[viewWrapper state] setImageBasedRingColor:customBorderImage];
 }
 
-RCT_EXPORT_CUSTOM_SWIFTUI_PROPERTY(style, MSFAvatarStyle, MSFAvatar)
-{
-    NSMutableDictionary *storage = [MSFAvatar storage];
-    MSFAvatar *viewWrapper = storage[[NSValue valueWithNonretainedObject:view]];
-    MSFAvatarStyle style = [RCTConvert MSFAvatarStyle:json];
-    [viewWrapper setStyleWithStyle:style];
-}
 
 @end
 
