@@ -14513,16 +14513,6 @@ react-native-svg@^12.1.1:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
 
-react-native-test-app@^0.6.3:
-  version "0.6.3"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.6.3.tgz#b5f395d670915e1f0cf865e083a920609ce34365"
-  integrity sha512-irOx+V2mlwX65QZaXQmEk79cMaC0p9gtQ/EM8ZXe8UuMtfO3EsIx8fmuQ8fQuuF+bcJQLVpFoCh3DvrurkC7fw==
-  dependencies:
-    chalk "^4.1.0"
-    prompts "^2.4.0"
-    rimraf "^3.0.0"
-    yargs "^16.0.0"
-
 react-native-test-app@^0.6.8:
   version "0.6.8"
   resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.6.8.tgz#f29728751171f356357a771d9dc924248ff2b0ac"
@@ -14550,7 +14540,26 @@ react-native-web@0.12.3, react-native-web@^0.12.3:
     prop-types "^15.6.0"
     react-timer-mixin "^0.13.4"
 
-"react-native-windows@ ^0.63.0":
+react-native-windows@^0.62.1:
+  version "0.62.13"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.62.13.tgz#0908186aa77c6cd64808540124c26c802770c42a"
+  integrity sha512-zydA1hVB0LHiD3X6SDmxW7WxGXJ4tKcRaS+gRNjVRyiRjWF5h4JqV9TSd2RoviTj/QG+ZonnaJiXx55NogTu7g==
+  dependencies:
+    "@babel/runtime" "^7.8.4"
+    cli-spinners "^2.2.0"
+    create-react-class "^15.6.3"
+    envinfo "^7.5.0"
+    fbjs "^1.0.0"
+    glob "^7.1.1"
+    ora "^3.4.0"
+    prop-types "^15.7.2"
+    regenerator-runtime "^0.13.2"
+    shelljs "^0.7.8"
+    username "^5.1.0"
+    uuid "^3.3.2"
+    xml-parser "^1.2.1"
+
+react-native-windows@^0.63.0:
   version "0.63.35"
   resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.63.35.tgz#ff32412bd4c567a44a698b01f13844323f321c03"
   integrity sha512-E4J4PQbBV68c95ZZzjotuWOXfrHYJ1Npju9BxQjfvZFwE31cS6963LfSXc/MUeO2fEbyyJFE0CYoOv7B6FzZsg==
@@ -14574,25 +14583,6 @@ react-native-web@0.12.3, react-native-web@^0.12.3:
     stacktrace-parser "^0.1.3"
     use-subscription "^1.0.0"
     whatwg-fetch "^3.0.0"
-
-react-native-windows@^0.62.1:
-  version "0.62.13"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.62.13.tgz#0908186aa77c6cd64808540124c26c802770c42a"
-  integrity sha512-zydA1hVB0LHiD3X6SDmxW7WxGXJ4tKcRaS+gRNjVRyiRjWF5h4JqV9TSd2RoviTj/QG+ZonnaJiXx55NogTu7g==
-  dependencies:
-    "@babel/runtime" "^7.8.4"
-    cli-spinners "^2.2.0"
-    create-react-class "^15.6.3"
-    envinfo "^7.5.0"
-    fbjs "^1.0.0"
-    glob "^7.1.1"
-    ora "^3.4.0"
-    prop-types "^15.7.2"
-    regenerator-runtime "^0.13.2"
-    shelljs "^0.7.8"
-    username "^5.1.0"
-    uuid "^3.3.2"
-    xml-parser "^1.2.1"
 
 react-native@^0.63.2, react-native@^0.63.4:
   version "0.63.4"
