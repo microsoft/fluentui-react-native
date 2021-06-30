@@ -7,26 +7,24 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { ACTIVITYINDICATOR_TESTPAGE } from './consts';
 
 const activityIndicatorTest: React.FunctionComponent<{}> = () => {
-
   return (
     <Stack style={stackStyle}>
       <Text>No Props</Text>
-      <ActivityIndicator />
+      <ActivityIndicator size="large" />
       <Text>Animating: False, hidesWhenStopped: False</Text>
-      <ActivityIndicator animating={false} hidesWhenStopped={false}/>
+      <ActivityIndicator animating={false} hidesWhenStopped={false} />
       <Text>Animating: False</Text>
       <ActivityIndicator animating={false} />
     </Stack>
   );
 };
 
-
 const activityIndicatorSections: TestSection[] = [
   {
     name: 'ActivityIndicator',
     testID: ACTIVITYINDICATOR_TESTPAGE,
     component: activityIndicatorTest,
-  }
+  },
 ];
 
 export const ActivityIndicatorTest: React.FunctionComponent<{}> = () => {
