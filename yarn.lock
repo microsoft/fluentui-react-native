@@ -2549,6 +2549,36 @@
   resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.9.11.tgz#490c752417c17d687e2941659b3c0bff9cb79b83"
   integrity sha512-E7whvvMIl9Ln1sxgug7OAEVWQ69n82iV0d2OWWp5VV52+RW3azKh1IFm4rxdW5/oByMfl7FFL0eHNelGgY4BMQ==
 
+"@react-native-windows/cli@0.63.12":
+  version "0.63.12"
+  resolved "https://registry.yarnpkg.com/@react-native-windows/cli/-/cli-0.63.12.tgz#fff41cb8e0e039e133a8e3a29a25927fe77d5856"
+  integrity sha512-N8cD2SpDqJl8H4z+IvlYIibMEBlcA+KO/2fT80Qz3c303FibPJjxcz2OAYoXMwYXhSsfzJf5mSrCOrmFXTbw0g==
+  dependencies:
+    "@react-native-windows/telemetry" "^0.63.5"
+    chalk "^3.0.0"
+    cli-spinners "^2.2.0"
+    envinfo "^7.5.0"
+    find-up "^4.1.0"
+    glob "^7.1.1"
+    inquirer "^3.0.6"
+    mustache "^4.0.1"
+    nuget-exe "5.8.0"
+    ora "^3.4.0"
+    semver "^7.1.3"
+    shelljs "^0.8.4"
+    username "^5.1.0"
+    uuid "^3.3.2"
+    xml-parser "^1.2.1"
+    xmldom "^0.5.0"
+    xpath "^0.0.27"
+
+"@react-native-windows/telemetry@^0.63.5":
+  version "0.63.5"
+  resolved "https://registry.yarnpkg.com/@react-native-windows/telemetry/-/telemetry-0.63.5.tgz#77d3a490b26490a642e7d7ce21cd5c06b768f4be"
+  integrity sha512-Ifd54IIcGbPjwAGfjJkRfdk5+SNtc9oCWgKMrJszIrlJ1REYVUXBo+6Xw3taKyA1Jf1eCB7DWlb98/NbqdLgcg==
+  dependencies:
+    applicationinsights "^1.8.8"
+
 "@rnx-kit/cli@^0.5.27":
   version "0.5.27"
   resolved "https://registry.yarnpkg.com/@rnx-kit/cli/-/cli-0.5.27.tgz#0edcee5081e4901f012b812de5ec9a0c0b05d53e"
