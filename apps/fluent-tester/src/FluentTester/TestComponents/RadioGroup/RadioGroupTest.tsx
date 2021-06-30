@@ -35,8 +35,8 @@ const basicRadioGroup: React.FunctionComponent<{}> = () => {
       <Separator />
       <RadioGroup label="Controlled RadioGroup" selectedKey={selectedKey} onChange={onChange2}>
         <RadioButton content="Option A" buttonKey="A" ariaLabel="Test Aria Label" />
-        <RadioButton content="Option B" buttonKey="B" />
-        <RadioButton content="Option C" buttonKey="C" />
+        <RadioButton content="Option B" buttonKey="B" ariaPosInSet={57} />
+        <RadioButton content="Option C" buttonKey="C" ariaSetSize={18} />
         <RadioButton content="Option D" buttonKey="D" />
       </RadioGroup>
     </View>
