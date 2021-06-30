@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/experimental-native-button",
   "entries": [
     {
+      "date": "Fri, 25 Jun 2021 19:39:16 GMT",
+      "tag": "@fluentui-react-native/experimental-native-button_v0.6.6",
+      "version": "0.6.6",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add chevron to submenu",
+            "author": "lehon@microsoft.com",
+            "commit": "c02e69f9e9ac03db75d410794beaa2cd0ab644a6",
+            "package": "@fluentui-react-native/experimental-native-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@fluentui-react-native/experimental-native-button_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Apply prettier to experimental, run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@fluentui-react-native/experimental-native-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 15 Jun 2021 00:55:36 GMT",
+      "tag": "@fluentui-react-native/experimental-native-button_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add support for ColorValue",
+            "author": "ruaraki@microsoft.com",
+            "commit": "90e0dcb92a4ea4ee5ea5373f2c54defa127749bf",
+            "package": "@fluentui-react-native/experimental-native-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 15 Apr 2021 20:08:17 GMT",
       "tag": "@fluentui-react-native/experimental-native-button_v0.5.3",
       "version": "0.5.3",

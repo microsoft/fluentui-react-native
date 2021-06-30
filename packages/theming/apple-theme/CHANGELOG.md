@@ -1,8 +1,56 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Mon, 15 Mar 2021 06:53:17 GMT and should not be manually modified.
+This log was last generated on Wed, 30 Jun 2021 05:42:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.1
+
+Wed, 30 Jun 2021 05:42:19 GMT
+
+### Patches
+
+- Fix bug where Shimmer didn't update with appearance changes (sanajmi@microsoft.com)
+
+## 0.7.0
+
+Fri, 25 Jun 2021 06:21:11 GMT
+
+### Minor changes
+
+- Merge remote-tracking branch 'master' into android-avatar (tamasane@gmail.com)
+
+## 0.6.2
+
+Mon, 21 Jun 2021 11:19:28 GMT
+
+### Patches
+
+- Add checkmarkColor to apple theme (tamasane@gmail.com)
+
+## 0.6.1
+
+Fri, 18 Jun 2021 00:38:19 GMT
+
+### Patches
+
+- Apply prettier to libraries core and theming, run (ruaraki@microsoft.com)
+
+## 0.6.0
+
+Wed, 16 Jun 2021 04:20:49 GMT
+
+### Minor changes
+
+- Remove apple theme native module (sanajmi@microsoft.com)
+
+## 0.5.0
+
+Tue, 15 Jun 2021 00:55:36 GMT
+
+### Minor changes
+
+- Get everything to pull ColorValue from react-native (ruaraki@microsoft.com)
 
 ## 0.4.2
 

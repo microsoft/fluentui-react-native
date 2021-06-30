@@ -1,10 +1,11 @@
 import { createAppleTheme } from '@fluentui-react-native/apple-theme';
-import { createDefaultTheme, ThemeOptions } from '@fluentui-react-native/default-theme';
+import { createDefaultTheme } from '@fluentui-react-native/default-theme';
 import { ThemeReference } from '@fluentui-react-native/theme';
 import { Platform } from 'react-native';
 import { applyBrand, OfficeBrand } from './applyBrand';
 import { applyTheme, ThemeNames } from './applyTheme';
 import { createAndroidTheme } from '@fluentui-react-native/android-theme';
+import { ThemeOptions } from '@fluentui-react-native/theme-types';
 
 const themeOptions: ThemeOptions = { paletteName: 'TaskPane', appearance: 'dynamic' };
 
@@ -43,8 +44,10 @@ export class TesterThemeReference extends ThemeReference {
     return this._themeName;
   }
   public set themeName(newTheme: ThemeNames) {
-    this._themeName = newTheme;
-    this.invalidate();
+    if (newTheme !== this._themeName) {
+      this._themeName = newTheme;
+      this.invalidate();
+    }
   }
 
   /** get/set the theme appearance */
@@ -52,8 +55,10 @@ export class TesterThemeReference extends ThemeReference {
     return this.options.appearance;
   }
   public set appearance(lightness: ThemeOptions['appearance']) {
-    this.options.appearance = lightness;
-    this.baseTheme.invalidate();
+    if (lightness !== this.options.appearance) {
+      this.options.appearance = lightness;
+      this.baseTheme.invalidate();
+    }
   }
 
   /** get/set the applied brand */
@@ -61,8 +66,10 @@ export class TesterThemeReference extends ThemeReference {
     return this._brand;
   }
   public set brand(newBrand: OfficeBrand) {
-    this._brand = newBrand;
-    this.invalidate();
+    if (newBrand !== this._brand) {
+      this._brand = newBrand;
+      this.invalidate();
+    }
   }
 }
 

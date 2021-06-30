@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Sat, 06 Mar 2021 00:20:05 GMT and should not be manually modified.
+This log was last generated on Mon, 21 Jun 2021 20:20:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.0
+
+Mon, 21 Jun 2021 20:20:18 GMT
+
+### Minor changes
+
+- Callout anchoring: add string as a property type for the target property (ppatboyd@outlook.com)
+
+## 0.14.6
+
+Fri, 18 Jun 2021 00:38:19 GMT
+
+### Patches
+
+- Apply prettier to components, run (ruaraki@microsoft.com)
 
 ## 0.14.0
 

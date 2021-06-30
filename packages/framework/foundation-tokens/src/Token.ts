@@ -41,7 +41,7 @@ export function processTokens<TSlotProps extends ISlotProps, TTokens extends obj
   theme: TTheme,
   slotProps: IComponentSettings<TSlotProps & { tokens?: TTokens }>,
   tokenInfo: IComponentTokens<TSlotProps, TTokens, TTheme>,
-  cache: GetMemoValue<TSlotProps>
+  cache: GetMemoValue<TSlotProps>,
 ): ISlotProps {
   // merge in tokens and build up the cache key which are the tokens overridden by the user
   slotProps = slotProps || {};
@@ -50,7 +50,7 @@ export function processTokens<TSlotProps extends ISlotProps, TTokens extends obj
   const tokenPropInfo = _getTokenPropInfo(props, rootSlotProps, tokenKeys);
   const resolvedSlotProps = { tokens: tokenPropInfo.tokens || {} };
 
-  Object.getOwnPropertyNames(handlers).forEach(slotName => {
+  Object.getOwnPropertyNames(handlers).forEach((slotName) => {
     const handler = handlers[slotName];
     resolvedSlotProps[slotName] = handler(slotProps[slotName] || {}, tokenPropInfo as any, theme, slotName, cache);
   });

@@ -24,5 +24,5 @@ describe('iOS filter tests', () => {
     expect(filterImageProps('children')).toBeTruthy();
     expect(filterImageProps('style')).toBeTruthy();
     expect(filterImageProps('accessible')).toBeTruthy();
-  })
+  });
 });

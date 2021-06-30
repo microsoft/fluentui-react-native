@@ -39,7 +39,7 @@ export type RefinableBuildPropsBase<TProps, TTokens, TTheme> = BuildPropsBase<TP
  * Style functions can be plain functions, refinable functions, or just raw props
  */
 export type BuildSlotProps<TSlotProps, TTokens, TTheme> = {
-  [K in keyof TSlotProps]?: RefinableBuildPropsBase<TSlotProps[K], TTokens, TTheme> | TSlotProps[K]
+  [K in keyof TSlotProps]?: RefinableBuildPropsBase<TSlotProps[K], TTokens, TTheme> | TSlotProps[K];
 };
 
 function cacheStyleClosure<TProps, TTokens, TTheme>(
@@ -47,11 +47,18 @@ function cacheStyleClosure<TProps, TTokens, TTheme>(
   keys?: (keyof TTokens)[],
 ): RefinableBuildPropsBase<TProps, TTokens, TTheme> {
   return (tokens: TTokens, theme: TTheme, cache: GetMemoValue<TProps>) =>
-    cache(() => fn(tokens, theme), (keys || []).map(key => tokens[key]))[0];
+    cache(
+      () => fn(tokens, theme),
+      (keys || []).map((key) => tokens[key]),
+    )[0];
 }
 
 function refineKeys<TTokens>(keys: (keyof TTokens)[], mask?: TokensThatAreAlsoProps<TTokens>): (keyof TTokens)[] {
-  return typeof mask === 'object' && Array.isArray(mask) ? keys.filter(key => mask.findIndex(val => val === key) !== -1) : mask ? keys : [];
+  return typeof mask === 'object' && Array.isArray(mask)
+    ? keys.filter((key) => mask.findIndex((val) => val === key) !== -1)
+    : mask
+    ? keys
+    : [];
 }
 
 /**
@@ -90,7 +97,7 @@ export function refinePropsFunctions<TSlotProps, TTokens, TTheme>(
   mask: TokensThatAreAlsoProps<TTokens>,
 ): BuildSlotProps<TSlotProps, TTokens, TTheme> {
   const result = {};
-  Object.keys(styles).forEach(key => {
+  Object.keys(styles).forEach((key) => {
     const refine =
       typeof styles[key] === 'function' && (styles[key] as RefinableBuildPropsBase<TSlotProps[keyof TSlotProps], TTokens, TTheme>).refine;
     result[key] = refine ? refine(mask) : styles[key];

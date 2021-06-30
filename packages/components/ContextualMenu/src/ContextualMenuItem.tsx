@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 import {
   ContextualMenuItemSlotProps,
   ContextualMenuItemState,
@@ -13,10 +13,12 @@ import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose'
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
 import { settings } from './ContextualMenuItem.settings';
-import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens } from '@fluentui-react-native/tokens';
+import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useAsPressable, useKeyCallback, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
+import { Icon } from '@fluentui-react-native/icon';
+import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 
 export const ContextualMenuItem = compose<ContextualMenuItemType>({
   displayName: contextualMenuItemName,
@@ -39,12 +41,8 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     const onItemClick = React.useCallback(
       (e) => {
         if (!disabled) {
-          context ?.onDismissMenu();
-          if (onClick) {
-            onClick();
-          } else {
-            context.onItemClick && context.onItemClick(itemKey);
-          }
+          context?.onDismissMenu();
+          onClick ? onClick() : context.onItemClick(itemKey);
           e.stopPropagation();
         }
       },
@@ -52,11 +50,14 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     );
 
     const cmRef = useViewCommandFocus(componentRef);
-    //const cmRef = React.useRef(null);
-    const onItemHoverIn = React.useCallback(
-      () => {
-        componentRef.current.focus();
-      }, [componentRef]);
+
+    const onItemHoverIn = React.useCallback(() => {
+      componentRef.current.focus();
+      // dismiss submenu
+      if (!disabled && context.isSubmenuOpen) {
+        context.dismissSubmenu();
+      }
+    }, [componentRef, disabled, context]);
 
     const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn });
 
@@ -72,24 +73,26 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     };
 
     /*
-    * On Desktop, focus gets moved to the root of the menu, so hovering off the menu does not automatically call onBlur as we expect it to.
-    * OnMouseEnter and onMouseLeave are overridden with the below callbacks that calls onFocus and onBlur explicitly
-    */
+     * On Desktop, focus gets moved to the root of the menu, so hovering off the menu does not automatically call onBlur as we expect it to.
+     * OnMouseEnter and onMouseLeave are overridden with the below callbacks that calls onFocus and onBlur explicitly
+     */
     const onMouseEnter = React.useCallback(
-      e => {
+      (e) => {
         pressable.props.onMouseEnter && pressable.props.onMouseEnter(e);
         pressable.props.onFocus && pressable.props.onFocus(e);
         e.stopPropagation();
       },
-      [pressable]);
+      [pressable],
+    );
 
     const onMouseLeave = React.useCallback(
-      e => {
+      (e) => {
         pressable.props.onMouseLeave && pressable.props.onMouseLeave(e);
         pressable.props.onBlur && pressable.props.onBlur(e);
         e.stopPropagation();
       },
-      [pressable]);
+      [pressable],
+    );
 
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
@@ -101,10 +104,10 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         onKeyUp: onKeyUp,
         onMouseEnter: onMouseEnter,
         onMouseLeave: onMouseLeave,
-        accessibilityLabel: accessibilityLabel
+        accessibilityLabel: accessibilityLabel,
       },
       content: { children: text, testID },
-      icon: { source: icon },
+      icon: createIconProps(icon),
     });
 
     return { slotProps, state };
@@ -115,7 +118,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     return (
       <Slots.root>
         <Slots.stack>
-          {renderData!.state.icon && <Slots.icon source={renderData.slotProps!.icon.source} />}
+          {renderData!.state.icon && <Slots.icon />}
           {renderData!.state.content && <Slots.content />}
           {children}
         </Slots.stack>
@@ -125,13 +128,13 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
   slots: {
     root: View,
     stack: { slotType: View },
-    icon: { slotType: Image as React.ComponentType<object> },
+    icon: { slotType: Icon as React.ComponentType<object> },
     content: Text,
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
     stack: [],
-    icon: [foregroundColorTokens],
+    icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
     content: [textTokens, foregroundColorTokens],
   },
 });

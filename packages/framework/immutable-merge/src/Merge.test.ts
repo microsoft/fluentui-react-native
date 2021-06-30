@@ -29,22 +29,22 @@ const sett1: IFakeSettings = {
   root: {
     p2: 1,
     nm: { nm1: 1 },
-    style: { s1: 'foo', s2: 2, nm: { nm1: 1 } }
+    style: { s1: 'foo', s2: 2, nm: { nm1: 1 } },
   },
   fakeSlot: {
-    ps2: 2
-  }
+    ps2: 2,
+  },
 };
 
 const sett2: IFakeSettings = {
   root: {
     p1: 'sett2',
     p2: 2,
-    nm: { nm2: 2 }
+    nm: { nm2: 2 },
   },
   fakeSlot: {
-    style: { s1: 'sett2' }
-  }
+    style: { s1: 'sett2' },
+  },
 };
 
 const sett1plus2: IFakeSettings = {
@@ -52,19 +52,19 @@ const sett1plus2: IFakeSettings = {
     p1: 'sett2',
     p2: 2,
     nm: { nm2: 2 },
-    style: { s1: 'foo', s2: 2, nm: { nm1: 1 } }
+    style: { s1: 'foo', s2: 2, nm: { nm1: 1 } },
   },
   fakeSlot: {
     ps2: 2,
-    style: { s1: 'sett2' }
-  }
+    style: { s1: 'sett2' },
+  },
 };
 
 const sett3: IFakeSettings = {
   root: {
     p1: 'sett3',
-    style: { s2: 3, nm: { nm2: 2 } }
-  }
+    style: { s2: 3, nm: { nm2: 2 } },
+  },
 };
 
 const sett1plus3: IFakeSettings = {
@@ -72,11 +72,11 @@ const sett1plus3: IFakeSettings = {
     p1: 'sett3',
     p2: 1,
     nm: { nm1: 1 },
-    style: { s1: 'foo', s2: 3, nm: { nm2: 2 } }
+    style: { s1: 'foo', s2: 3, nm: { nm2: 2 } },
   },
   fakeSlot: {
-    ps2: 2
-  }
+    ps2: 2,
+  },
 };
 
 const sett1plus2plus3: IFakeSettings = {
@@ -84,18 +84,18 @@ const sett1plus2plus3: IFakeSettings = {
     p1: 'sett3',
     p2: 2,
     nm: { nm2: 2 },
-    style: { s1: 'foo', s2: 3, nm: { nm2: 2 } }
+    style: { s1: 'foo', s2: 3, nm: { nm2: 2 } },
   },
   fakeSlot: {
     ps2: 2,
-    style: { s1: 'sett2' }
-  }
+    style: { s1: 'sett2' },
+  },
 };
 
 const mergeOptions: MergeOptions = {
   object: {
-    style: 0
-  }
+    style: 0,
+  },
 };
 
 interface IDeepObj {
@@ -106,29 +106,29 @@ interface IDeepObj {
 const deep1 = {
   a: { b: { c: 1 } },
   b: { c: { d: { d: 'foo' } } },
-  c: { e: 4 }
+  c: { e: 4 },
 };
 
 const deep2 = {
   a: { b1: 3, b: { c: 2 } },
   b: { c: { d2: 'bar' } },
-  c: { e2: { f: 'baz' } }
+  c: { e2: { f: 'baz' } },
 };
 
 const deepMerged = {
   a: { b1: 3, b: { c: 2 } },
   b: { c: { d: { d: 'foo' }, d2: 'bar' } },
-  c: { e: 4, e2: { f: 'baz' } }
+  c: { e: 4, e2: { f: 'baz' } },
 };
 
 const singleToChange = {
   a: { b: { c: { changeMe: { color: 'blue' } } } },
-  b: { d: { changeMe: { font: 'fixed' } } }
+  b: { d: { changeMe: { font: 'fixed' } } },
 };
 
 const singleWithChanges = {
   a: { b: { c: { changeMe: { color: 'changed' } } } },
-  b: { d: { changeMe: { font: 'fixed' } } }
+  b: { d: { changeMe: { font: 'fixed' } } },
 };
 
 const _colorKey = 'color';
@@ -151,28 +151,28 @@ const changeMeOption1: MergeOptions = {
   a: {
     b: {
       c: {
-        changeMe: changeMeHandler
-      }
-    }
-  }
+        changeMe: changeMeHandler,
+      },
+    },
+  },
 };
 
 const changeMeOption2: MergeOptions = {
   object: {
     object: {
       object: {
-        changeMe: changeMeHandler
+        changeMe: changeMeHandler,
       },
-      changeMe: changeMeHandler
-    }
-  }
+      changeMe: changeMeHandler,
+    },
+  },
 };
 
 describe('Immutable merge unit tests', () => {
   test('merge one returns same object', () => {
     const obj = {
       a: 'a',
-      b: 2
+      b: 2,
     };
     expect(immutableMerge(obj, undefined)).toBe(obj);
     expect(immutableMerge(undefined, obj)).toBe(obj);
@@ -189,18 +189,18 @@ describe('Immutable merge unit tests', () => {
 
   const dm1 = {
     a: { b: { c: { foo: 'foo', bar: 'bar' } } },
-    d: { e: 1, f: { g: 'hello', h: 2 } }
+    d: { e: 1, f: { g: 'hello', h: 2 } },
   };
 
   const dm2 = {
     a: { b: { c: { bar: 'bar2', baz: 'baz' } }, i: 'world' },
-    d: { j: 4 }
+    d: { j: 4 },
   };
 
   test('deep merge', () => {
     expect(immutableMerge<any>(dm1, dm2)).toEqual({
       a: { b: { c: { foo: 'foo', bar: 'bar2', baz: 'baz' } }, i: 'world' },
-      d: { e: 1, f: { g: 'hello', h: 2 }, j: 4 }
+      d: { e: 1, f: { g: 'hello', h: 2 }, j: 4 },
     });
   });
 
@@ -211,7 +211,7 @@ describe('Immutable merge unit tests', () => {
   test('merge one level deep', () => {
     const result = {
       a: dm2.a,
-      d: { ...dm1.d, ...dm2.d }
+      d: { ...dm1.d, ...dm2.d },
     };
     expect(immutableMergeCore<any>(1, dm1, dm2)).toEqual(result);
     expect(immutableMergeCore<any>({ object: 0 }, dm1, dm2)).toEqual(result);
@@ -270,12 +270,12 @@ describe('Immutable merge unit tests', () => {
 
   const withArray1 = {
     baseArray: [1, 2, 3],
-    sub: { subArray: ['a', 'b', 'c'] }
+    sub: { subArray: ['a', 'b', 'c'] },
   };
 
   const withArray2 = {
     baseArray: [4, 5, 6],
-    sub: { subArray: ['d', 'e', 'f'] }
+    sub: { subArray: ['d', 'e', 'f'] },
   };
 
   test('arrays overwrite each other', () => {
@@ -286,12 +286,12 @@ describe('Immutable merge unit tests', () => {
 
   const withObj = {
     a: { foo: 'bar' },
-    b: 2
+    b: 2,
   };
 
   const withNonObj = {
     a: 'hello',
-    b: 3
+    b: 3,
   };
 
   test('last writer wins for objects and non-objects', () => {
@@ -302,9 +302,9 @@ describe('Immutable merge unit tests', () => {
   });
 
   const arrayMerger = (...targets: any[]) => {
-    const arrays = targets.filter(t => Array.isArray(t));
+    const arrays = targets.filter((t) => Array.isArray(t));
     let result = [];
-    arrays.forEach(v => (result = result.concat(...v)));
+    arrays.forEach((v) => (result = result.concat(...v)));
     return result;
   };
 
@@ -312,15 +312,15 @@ describe('Immutable merge unit tests', () => {
     const merged = immutableMergeCore(
       {
         object: {
-          subArray: arrayMerger
-        }
+          subArray: arrayMerger,
+        },
       },
       withArray1,
-      withArray2
+      withArray2,
     );
     expect(merged).toEqual({
       baseArray: [4, 5, 6],
-      sub: { subArray: ['a', 'b', 'c', 'd', 'e', 'f'] }
+      sub: { subArray: ['a', 'b', 'c', 'd', 'e', 'f'] },
     });
   });
 
@@ -328,14 +328,14 @@ describe('Immutable merge unit tests', () => {
     const merged = immutableMergeCore(
       {
         object: true,
-        array: 'appendArray'
+        array: 'appendArray',
       },
       withArray1,
-      withArray2
+      withArray2,
     );
     expect(merged).toEqual({
       baseArray: [1, 2, 3, 4, 5, 6],
-      sub: { subArray: ['a', 'b', 'c', 'd', 'e', 'f'] }
+      sub: { subArray: ['a', 'b', 'c', 'd', 'e', 'f'] },
     });
   });
 });

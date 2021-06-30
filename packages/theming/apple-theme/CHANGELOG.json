@@ -2,6 +2,96 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Wed, 30 Jun 2021 05:42:19 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.7.1",
+      "version": "0.7.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix bug where Shimmer didn't update with appearance changes",
+            "author": "sanajmi@microsoft.com",
+            "commit": "6a3c8570d00c35fcd9aa5a135f28eef3e4213eb6",
+            "package": "@fluentui-react-native/apple-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Jun 2021 06:21:11 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Merge remote-tracking branch 'master' into android-avatar",
+            "author": "tamasane@gmail.com",
+            "commit": "592cd8a40cc814696cbb59b93d5801089cec276f",
+            "package": "@fluentui-react-native/apple-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 21 Jun 2021 11:19:28 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.6.2",
+      "version": "0.6.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add checkmarkColor to apple theme",
+            "author": "tamasane@gmail.com",
+            "commit": "e6f863599192ecdc71887712094638831e4a0548",
+            "package": "@fluentui-react-native/apple-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Apply prettier to libraries core and theming, run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@fluentui-react-native/apple-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 16 Jun 2021 04:20:49 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Remove apple theme native module",
+            "author": "sanajmi@microsoft.com",
+            "commit": "0bd7e7c7b6b2a4581265300a01ad6c054c2674b7",
+            "package": "@fluentui-react-native/apple-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 15 Jun 2021 00:55:36 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Get everything to pull ColorValue from react-native",
+            "author": "ruaraki@microsoft.com",
+            "commit": "90e0dcb92a4ea4ee5ea5373f2c54defa127749bf",
+            "package": "@fluentui-react-native/apple-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 15 Apr 2021 20:08:17 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.4.2",
       "version": "0.4.2",

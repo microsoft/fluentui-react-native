@@ -1,4 +1,5 @@
 import { Palette, FabricWebPalette, ThemeColorDefinition } from '@fluentui-react-native/theme-types';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 /**
  * Generate a palette from a set of fabric web colors, like those output from the theme designer.
@@ -29,7 +30,7 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     defaultStateBackground: p.neutralLighterAlt,
 
     errorText: !isInverted ? p.redDark : '#ff5f5f',
-    warningText: !isInverted ? '#333333' : '#ffffff',
+    warningText: !isInverted ? globalTokens.color.grey['20'] : globalTokens.color.white,
     errorBackground: !isInverted ? 'rgba(245, 135, 145, .2)' : 'rgba(232, 17, 35, .5)',
     blockingBackground: !isInverted ? 'rgba(250, 65, 0, .2)' : 'rgba(234, 67, 0, .5)',
     warningBackground: !isInverted ? 'rgba(255, 200, 10, .2)' : 'rgba(255, 251, 0, .6)',
@@ -107,7 +108,7 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
 export function getStockWebPalette(): ThemeColorDefinition {
   return {
     ...paletteFromFabricColors({
-      black: '#000000',
+      black: globalTokens.color.black,
       neutralDark: '#201f1e',
       neutralPrimary: '#323130',
       neutralPrimaryAlt: '#3b3a39',
@@ -120,21 +121,21 @@ export function getStockWebPalette(): ThemeColorDefinition {
       neutralLight: '#edebe9',
       neutralLighter: '#f3f2f1',
       neutralLighterAlt: '#faf9f8',
-      white: '#ffffff',
+      white: globalTokens.color.white,
       // Shared Colors
-      red: '#d13438',
-      redDark: '#a4262c',
+      red: globalTokens.color.red.primary,
+      redDark: globalTokens.color.burgundy.primary,
 
-      themeDarker: '#004578',
-      themeDark: '#005a9e',
-      themeDarkAlt: '#106ebe',
-      themePrimary: '#0078d4',
+      themeDarker: globalTokens.color.brand.shade40,
+      themeDark: globalTokens.color.brand.shade20,
+      themeDarkAlt: globalTokens.color.brand.shade10,
+      themePrimary: globalTokens.color.brand.primary,
       themeSecondary: '#2b88d8',
       themeTertiary: '#71afe5',
-      themeLight: '#c7e0f4',
-      themeLighter: '#deecf9',
-      themeLighterAlt: '#eff6fc',
-      accent: '#0078d4',
+      themeLight: globalTokens.color.brand.tint40,
+      themeLighter: globalTokens.color.brand.tint50,
+      themeLighterAlt: globalTokens.color.brand.tint60,
+      accent: globalTokens.color.brand.primary,
       blackTranslucent40: 'rgba(0,0,0,.4)',
     }),
   };
@@ -146,15 +147,15 @@ export function getStockWebDarkPalette(): ThemeColorDefinition {
       {
         // colors taken from fluentui DarkCustomizations.ts
         themeDarker: '#82c7ff',
-        themeDark: '#6cb8f6',
-        themeDarkAlt: '#3aa0f3',
-        themePrimary: '#2899f5',
-        themeSecondary: '#0078d4',
+        themeDark: globalTokens.color.brand.tint30,
+        themeDarkAlt: globalTokens.color.brand.tint20,
+        themePrimary: globalTokens.color.brand.tint10,
+        themeSecondary: globalTokens.color.brand.primary,
         themeTertiary: '#235a85',
-        themeLight: '#004c87',
-        themeLighter: '#043862',
-        themeLighterAlt: '#092c47',
-        black: '#ffffff',
+        themeLight: globalTokens.color.brand.shade30,
+        themeLighter: globalTokens.color.brand.shade50,
+        themeLighterAlt: globalTokens.color.brand.shade60,
+        black: globalTokens.color.white,
         neutralDark: '#faf9f8',
         neutralPrimary: '#f3f2f1',
         neutralPrimaryAlt: '#c8c6c4',
@@ -168,9 +169,9 @@ export function getStockWebDarkPalette(): ThemeColorDefinition {
         neutralLighter: '#252423',
         neutralLighterAlt: '#201f1e',
         white: '#1b1a19',
-        red: '#d13438',
-        accent: '#0078d4',
-        redDark: '#F1707B',
+        red: globalTokens.color.red.primary,
+        accent: globalTokens.color.brand.primary,
+        redDark: '#f1707b',
         blackTranslucent40: 'rgba(0,0,0,.4)',
       },
       true,

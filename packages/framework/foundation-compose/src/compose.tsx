@@ -5,7 +5,7 @@ import {
   IComposableType,
   IExtractProps,
   IExtractSlotProps,
-  IExtractState
+  IExtractState,
 } from '@uifabricshared/foundation-composable';
 import { initializeStyling, getOptionsFromObj } from './useStyling';
 import { immutableMerge } from '@fluentui-react-native/immutable-merge';
@@ -26,10 +26,10 @@ function _getComponentOptions<
   TStatics extends object
 >(
   inputComponent: Partial<IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics>>,
-  base?: IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics>
+  base?: IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics>,
 ): IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics> {
   if (base) {
-    const mergedSettings = { settings: [].concat(base.settings || [], inputComponent.settings || []).filter(v => v) };
+    const mergedSettings = { settings: [].concat(base.settings || [], inputComponent.settings || []).filter((v) => v) };
     return immutableMerge(base, inputComponent, mergedSettings) as IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics>;
   }
   return inputComponent as IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics>;
@@ -47,7 +47,7 @@ export function compose<TType>(
   inputComponent: Partial<
     IComposeOptions<IExtractProps<TType>, IExtractSlotProps<TType>, IExtractTokens<TType>, IExtractState<TType>, IExtractStatics<TType>>
   >,
-  base?: INativeSlotType
+  base?: INativeSlotType,
 ): IComposeReturnType<IExtractProps<TType>, IExtractSlotProps<TType>, IExtractTokens<TType>, IExtractState<TType>, IExtractStatics<TType>> {
   // extract the real types from TType
   type ITProps = IExtractProps<TType>;
@@ -72,18 +72,12 @@ export function compose<TType>(
 
   // set up the customize handler
   Component.customize = (...settings: IDefineComposeSettings<ITSlotProps, ITTokens>) => {
-    return compose(
-      { settings },
-      Component
-    );
+    return compose({ settings }, Component);
   };
 
   // set up the compose handler
   Component.compose = (newOptions: Partial<IComposeOptions<ITProps, ITSlotProps, ITTokens, ITState, ITStatics>>) => {
-    return compose<TType>(
-      newOptions,
-      Component
-    );
+    return compose<TType>(newOptions, Component);
   };
 
   // now return the newly created component

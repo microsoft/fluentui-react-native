@@ -2,6 +2,287 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 25 Jun 2021 19:39:16 GMT",
+      "tag": "@fluentui-react-native/tester_v0.29.0",
+      "version": "0.29.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add chevron to submenu",
+            "author": "lehon@microsoft.com",
+            "commit": "c02e69f9e9ac03db75d410794beaa2cd0ab644a6",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Jun 2021 18:34:06 GMT",
+      "tag": "@fluentui-react-native/tester_v0.28.0",
+      "version": "0.28.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @rnx-kit/cli to 0.5.27",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "e5870bb5f489a449043c227c6f4efd42ae6649b0",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Jun 2021 06:21:11 GMT",
+      "tag": "@fluentui-react-native/tester_v0.28.0",
+      "version": "0.28.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "tamasane@gmail.com",
+            "commit": "592cd8a40cc814696cbb59b93d5801089cec276f",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 23 Jun 2021 18:53:56 GMT",
+      "tag": "@fluentui-react-native/tester_v0.27.0",
+      "version": "0.27.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add new PersonaCoinFluentColor prop",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5563744f1fc49402e83636855b65c6f04e19255a",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 23 Jun 2021 17:46:02 GMT",
+      "tag": "@fluentui-react-native/tester_v0.26.0",
+      "version": "0.26.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add tests for NativeDatePicker",
+            "author": "chripear@microsoft.com",
+            "commit": "badba8a548272ea4b9df848bc9328c3e3f17f8ef",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 21 Jun 2021 11:19:28 GMT",
+      "tag": "@fluentui-react-native/tester_v0.25.5",
+      "version": "0.25.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Comment out tests that crash the app for iOS and macOS (#706)",
+            "author": "tamasane@gmail.com",
+            "commit": "e6f863599192ecdc71887712094638831e4a0548",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@fluentui-react-native/tester_v0.25.4",
+      "version": "0.25.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Enable on Fluent Tester directory and run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 16 Jun 2021 21:31:58 GMT",
+      "tag": "@fluentui-react-native/tester_v0.25.3",
+      "version": "0.25.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add FTZ underneath root view to set initial focus",
+            "author": "krsiler@microsoft.com",
+            "commit": "e12c9d8dfb07958b365f2924a647c58f7c13a148",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 16 Jun 2021 04:20:49 GMT",
+      "tag": "@fluentui-react-native/tester_v0.25.2",
+      "version": "0.25.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Remove apple theme native module",
+            "author": "sanajmi@microsoft.com",
+            "commit": "0bd7e7c7b6b2a4581265300a01ad6c054c2674b7",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 15 Jun 2021 17:13:57 GMT",
+      "tag": "@fluentui-react-native/tester_v0.25.1",
+      "version": "0.25.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Return default theme of tester to Default",
+            "author": "ruaraki@microsoft.com",
+            "commit": "3f15e3f58fa7b7c43d1b2e9bfc9f164fa770fbe1",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 15 Jun 2021 00:55:36 GMT",
+      "tag": "@fluentui-react-native/tester_v0.25.0",
+      "version": "0.25.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Allow ThemePicker in Android to handle ColorValue",
+            "author": "ruaraki@microsoft.com",
+            "commit": "90e0dcb92a4ea4ee5ea5373f2c54defa127749bf",
+            "package": "@fluentui-react-native/tester"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Update README.md",
+            "author": "amdingler694@gmail.com",
+            "commit": "1db31d192872719852d7720a61f580d4eada498b",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 02 Jun 2021 17:30:36 GMT",
+      "tag": "@fluentui-react-native/tester_v0.24.2",
+      "version": "0.24.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Comment out tests that crash the app for iOS and macOS",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "6bfe2255ded52f117fae41427400eaa61a60f5d6",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Fix theme picker on FURN tester",
+            "author": "ruaraki@microsoft.com",
+            "commit": "c106a8e1034cf35486b9368d229a01a27421252c",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 25 May 2021 00:42:50 GMT",
+      "tag": "@fluentui-react-native/tester_v0.24.1",
+      "version": "0.24.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixed ButtonIconTest",
+            "author": "tamasane@gmail.com",
+            "commit": "d3953da403a118f3086dfde2529bca76d30ad235",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Add react-native-svg-transformer to iOS and macOS",
+            "author": "adam.gleitman@gmail.com",
+            "commit": "1700c9e4c3056821f38ba752c3949c08998aee10",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Add hideInsideGapForBorder prop to experimental avatar",
+            "author": "sanajmi@microsoft.com",
+            "commit": "0767317b2c3dbfb3bf7e754b1246d91bfb2cd87b",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 19 May 2021 07:04:54 GMT",
+      "tag": "@fluentui-react-native/tester_v0.24.0",
+      "version": "0.24.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "add submenu component to menu",
+            "author": "lehon@microsoft.com",
+            "commit": "06aa14bd6c448e2b16afc81e76a99f9788c4fc13",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 May 2021 06:18:23 GMT",
+      "tag": "@fluentui-react-native/tester_v0.23.4",
+      "version": "0.23.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Force a package update to sync npm version and repo version",
+            "author": "sanajmi@microsoft.com",
+            "commit": "1602018b21b6952917210547dbc05ea07f4ba2b6",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 May 2021 10:34:05 GMT",
+      "tag": "@fluentui-react-native/tester_v0.23.3",
+      "version": "0.23.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "patch",
+            "author": "sanajmi@microsoft.com",
+            "commit": "60fb1e08cb5785023b05333a8c0373a4aa5a6aa3",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 May 2021 10:18:25 GMT",
+      "tag": "@fluentui-react-native/tester_v0.23.2",
+      "version": "0.23.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "patch",
+            "author": "sanajmi@microsoft.com",
+            "commit": "905611de5d4abf60504f6bfc4f2dadaffd37c9de",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 07 May 2021 18:12:16 GMT",
       "tag": "@fluentui-react-native/tester_v0.23.1",
       "version": "0.23.1",

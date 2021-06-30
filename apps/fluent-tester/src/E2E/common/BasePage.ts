@@ -17,7 +17,7 @@ export class BasePage {
       },
       timeout ?? this.waitForPageTimeout,
       this._pageName + ' did not render correctly. Please see /errorShots of the first failed test for more information.',
-      1000
+      1000,
     );
   }
 

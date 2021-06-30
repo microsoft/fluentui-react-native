@@ -10,7 +10,7 @@ import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings, radioButtonSelectActionLabel } from './RadioButton.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
-import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { RadioGroupContext } from './RadioGroup';
 
 export const RadioButton = compose<IRadioButtonType>({
@@ -41,10 +41,13 @@ export const RadioButton = compose<IRadioButtonType>({
       }
     }, []);
 
+    // Ensure focus is placed on button after click
+    const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
+
     /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
     const pressable = useAsPressable({
       ...rest,
-      onPress: changeSelection,
+      onPress: changeSelectionWithFocus,
       onFocus: changeSelection,
     });
 
