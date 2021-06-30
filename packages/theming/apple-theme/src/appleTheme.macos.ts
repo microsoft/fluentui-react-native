@@ -70,13 +70,12 @@ export const appleComponents = {
   },
 };
 
-/** The apple theme defined entirely in JS, intended as a fallback while the native module loads
- * or if the native module is not found
- */
-export const BaseAppleThemeMacOS: Theme = {
-  colors: fallbackApplePalette(),
-  typography: fallbackAppleTypography(),
-  spacing: appleSpacing(),
-  components: appleComponents,
-  host: { appearance: 'dynamic' },
-};
+export function getBaseAppleThemeMacOS(): Theme {
+  return {
+    colors: fallbackApplePalette(),
+    typography: fallbackAppleTypography(),
+    spacing: appleSpacing(),
+    components: appleComponents,
+    host: { appearance: 'dynamic' },
+  };
+}
