@@ -76,14 +76,11 @@ export const RadioGroup = compose<IRadioGroupType>({
       return null;
     }
 
+    // Generate ariaSetSize and ariaPosInSet for radio buttons
     if (children) {
-      let size = 0;
-
       /* eslint-disable @typescript-eslint/ban-ts-ignore */
       // @ts-ignore - TODO, fix typing error
-      React.Children.map(children, () => {
-        size++;
-      });
+      const size = React.Children.count(children);
 
       /* eslint-disable @typescript-eslint/ban-ts-ignore */
       // @ts-ignore - TODO, fix typing error
