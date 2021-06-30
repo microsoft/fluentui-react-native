@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Fri, 25 Jun 2021 19:39:16 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.9.0",
+      "version": "0.9.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add chevron to submenu",
+            "author": "lehon@microsoft.com",
+            "commit": "c02e69f9e9ac03db75d410794beaa2cd0ab644a6",
+            "package": "@fluentui-react-native/contextual-menu"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 18 Jun 2021 00:38:19 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.8.4",
       "version": "0.8.4",

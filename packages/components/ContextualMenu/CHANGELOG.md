@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Fri, 18 Jun 2021 00:38:19 GMT and should not be manually modified.
+This log was last generated on Fri, 25 Jun 2021 19:39:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.0
+
+Fri, 25 Jun 2021 19:39:16 GMT
+
+### Minor changes
+
+- Add chevron to submenu (lehon@microsoft.com)
 
 ## 0.8.4
 
