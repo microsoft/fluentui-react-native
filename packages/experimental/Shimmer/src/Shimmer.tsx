@@ -33,7 +33,7 @@ export const Shimmer = compose<ShimmerType>({
   },
   render: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
     const Slots = useSlots(props);
-    let AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
+    const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
     const tokens = useStyling(props).root;
 
     const memoizedShimmerData = useMemo(
@@ -61,13 +61,14 @@ export const Shimmer = compose<ShimmerType>({
       ],
     );
 
-    let startValue = useShimmerAnimation(memoizedShimmerData);
+    const startValue = useShimmerAnimation(memoizedShimmerData);
 
     return (rest: ShimmerProps) => {
       const { uri, elements, ...mergedProps } = mergeProps(props, rest);
+      const rows = [];
+
       if (elements) {
-        var rows = [];
-        for (var i = 0; i < elements.length; i++) {
+        for (let i = 0; i < elements.length; i++) {
           const element = elements[i];
           if (element.type == 'rect') {
             rows.push(

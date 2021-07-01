@@ -4,7 +4,7 @@ import { shimmerName, ShimmerProps, ShimmerSlotProps, ShimmerTokens } from './Sh
 
 export const stylingSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, ShimmerTokens> = {
   tokens: [
-    (t) => ({
+    () => ({
       toValue: 30,
       duration: 7000,
       delay: 0,
