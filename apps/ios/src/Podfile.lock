@@ -9,11 +9,7 @@ PODS:
     - React-Core (= 0.63.4)
     - React-jsi (= 0.63.4)
     - ReactCommon/turbomodule/core (= 0.63.4)
-  - FluentUI-React-Native-Apple-Theme (0.4.2):
-    - MicrosoftFluentUI (= 0.0.18)
-    - MicrosoftFluentUIVnext (= 0.0.4)
-    - React
-  - FluentUI-React-Native-Avatar (0.8.0):
+  - FluentUI-React-Native-Avatar (0.9.4):
     - MicrosoftFluentUI (= 0.0.18)
     - MicrosoftFluentUIVnext/Avatar_ios (= 0.0.4)
     - React
@@ -27,43 +23,9 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - MicrosoftFluentUIVnext (0.0.4):
-    - MicrosoftFluentUIVnext/ActivityIndicator_ios (= 0.0.4)
-    - MicrosoftFluentUIVnext/Avatar_ios (= 0.0.4)
-    - MicrosoftFluentUIVnext/Button_ios (= 0.0.4)
-    - MicrosoftFluentUIVnext/Core_ios (= 0.0.4)
-    - MicrosoftFluentUIVnext/Drawer_ios (= 0.0.4)
-    - MicrosoftFluentUIVnext/List_ios (= 0.0.4)
-    - MicrosoftFluentUIVnext/Obscurable_ios (= 0.0.4)
-    - MicrosoftFluentUIVnext/PersonaView_ios (= 0.0.4)
-    - MicrosoftFluentUIVnext/ResizingHandleView_ios (= 0.0.4)
-    - MicrosoftFluentUIVnext/Separator_ios (= 0.0.4)
-    - MicrosoftFluentUIVnext/TouchForwardingView_ios (= 0.0.4)
-  - MicrosoftFluentUIVnext/ActivityIndicator_ios (0.0.4):
-    - MicrosoftFluentUIVnext/Core_ios
   - MicrosoftFluentUIVnext/Avatar_ios (0.0.4):
     - MicrosoftFluentUIVnext/Core_ios
-  - MicrosoftFluentUIVnext/Button_ios (0.0.4):
-    - MicrosoftFluentUIVnext/Core_ios
   - MicrosoftFluentUIVnext/Core_ios (0.0.4)
-  - MicrosoftFluentUIVnext/Drawer_ios (0.0.4):
-    - MicrosoftFluentUIVnext/Obscurable_ios
-    - MicrosoftFluentUIVnext/ResizingHandleView_ios
-    - MicrosoftFluentUIVnext/Separator_ios
-    - MicrosoftFluentUIVnext/TouchForwardingView_ios
-  - MicrosoftFluentUIVnext/List_ios (0.0.4):
-    - MicrosoftFluentUIVnext/Core_ios
-  - MicrosoftFluentUIVnext/Obscurable_ios (0.0.4):
-    - MicrosoftFluentUIVnext/Core_ios
-  - MicrosoftFluentUIVnext/PersonaView_ios (0.0.4):
-    - MicrosoftFluentUIVnext/Avatar_ios
-    - MicrosoftFluentUIVnext/List_ios
-  - MicrosoftFluentUIVnext/ResizingHandleView_ios (0.0.4):
-    - MicrosoftFluentUIVnext/Core_ios
-  - MicrosoftFluentUIVnext/Separator_ios (0.0.4):
-    - MicrosoftFluentUIVnext/Core_ios
-  - MicrosoftFluentUIVnext/TouchForwardingView_ios (0.0.4):
-    - MicrosoftFluentUIVnext/Core_ios
   - QRCodeReader.swift (10.1.0)
   - RCTRequired (0.63.4)
   - RCTTypeSafety (0.63.4):
@@ -295,7 +257,7 @@ PODS:
     - React-Core (= 0.63.4)
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
-  - ReactTestApp-DevSupport (0.5.15)
+  - ReactTestApp-DevSupport (0.6.3)
   - ReactTestApp-Resources (1.0.0-dev)
   - RNSVG (12.1.1):
     - React
@@ -419,8 +381,7 @@ SPEC CHECKSUMS:
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
-  FluentUI-React-Native-Apple-Theme: 7712b60887da8ae0b82fae104155dbc12f107b28
-  FluentUI-React-Native-Avatar: efcd520e7d831c9d910be976f489b6ee679c6634
+  FluentUI-React-Native-Avatar: 37a0379c3e2943055f695230a532063fcc85165d
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   MicrosoftFluentUIVnext: 00bcbaeaf9d719bc8ea29cf9ce340a02c982a7a8
@@ -447,12 +408,12 @@ SPEC CHECKSUMS:
   React-RCTText: 5c51df3f08cb9dedc6e790161195d12bac06101c
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
-  ReactTestApp-DevSupport: ac5141ca453772cd5ede75b4d2d0d16c3fcb5faf
+  ReactTestApp-DevSupport: 9f0b81965c46840c5410ccc4e7f5a4d6cd224ece
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: 6c063682096bd17934496493070216147e5d710a
+PODFILE CHECKSUM: a6f11b2f4da31c25a0685ab981e38f7e61c539d0
 
 COCOAPODS: 1.10.1
