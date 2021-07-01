@@ -1137,6 +1137,24 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@fluentui-react-native/immutable-merge@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/@fluentui-react-native/immutable-merge/-/immutable-merge-1.1.1.tgz#f83b364155bed853578da5fb9c1daa06e2405e46"
+  integrity sha512-/fT+wpMM9o3V4qWx9ETU9jGib+1XOxguKD2G0o8JiKZrKAgiSSKcSmJtiM8Y8MjjFZE2kNEa/BaXTFy193j27Q==
+
+"@fluentui-react-native/memo-cache@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/@fluentui-react-native/memo-cache/-/memo-cache-1.1.1.tgz#c5296b6ab86f3e8bdf81ad9c8b1da47b6e35fda8"
+  integrity sha512-zvtHkxyZ1TLxDYDneAm6iNINqilGsa+VDXPAwcTcZj/7v8SAMYPGaGbe8Mg2+b0F+LW0XgFttHC1AxQoPHpTHg==
+
+"@fluentui-react-native/merge-props@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.npmjs.org/@fluentui-react-native/merge-props/-/merge-props-0.3.1.tgz#80e249e7dbcdcbd7e49677d302f5c89bcb56e47a"
+  integrity sha512-KBGOIxVA3KWr/1SIN8jbdFbkqu7+OxscAajPybCYcwjofvOnV0Qfvb+MHgD4+6I34zEE8UWKVLo+vmt6YVevqw==
+  dependencies:
+    "@fluentui-react-native/immutable-merge" "^1.1.1"
+    "@fluentui-react-native/memo-cache" "^1.1.1"
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
