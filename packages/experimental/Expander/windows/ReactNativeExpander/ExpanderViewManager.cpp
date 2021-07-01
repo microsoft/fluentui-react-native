@@ -34,8 +34,7 @@ namespace winrt::ReactNativeExpander::implementation {
     IMapView<hstring, ViewManagerPropertyType> ExpanderViewManager::NativeProps() noexcept {
         auto nativeProps = winrt::single_threaded_map<hstring, ViewManagerPropertyType>();
 
-        // TODO: finish updating props when Expander.types are furhter defined
-        // TODO: specifically, need to update header and content
+        // TODO: finish updating props when Expander.types are further defined
         nativeProps.Insert(L"expandDirection", ViewManagerPropertyType::String);
         nativeProps.Insert(L"expanded", ViewManagerPropertyType::Boolean);
         nativeProps.Insert(L"headerTitle", ViewManagerPropertyType::String);
