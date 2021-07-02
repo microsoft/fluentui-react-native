@@ -1,21 +1,22 @@
 import { Theme, Typography, Spacing, FontWeightValue, FontSize, FontSizes, Variants } from '@fluentui-react-native/theme-types';
 import { Platform } from 'react-native';
 import { getStockWebPalette, getStockWebDarkPalette } from './defaultColors';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 function _defaultTypography(): Typography {
   const defaultsDict = {
     sizes: {
-      caption: 10 as FontSize,
-      secondary: 12 as FontSize,
-      body: 14 as FontSize,
-      subheader: 16 as FontSize,
-      header: 20 as FontSize,
-      hero: 28 as FontSize,
+      caption: globalTokens.font.size['100'] as FontSize,
+      secondary: globalTokens.font.size['200'] as FontSize,
+      body: globalTokens.font.size['300'] as FontSize,
+      subheader: globalTokens.font.size['400'] as FontSize,
+      header: globalTokens.font.size['500'] as FontSize,
+      hero: globalTokens.font.size['700'] as FontSize,
       heroLarge: 42 as FontSize,
     } as FontSizes,
     weights: {
-      regular: '400' as FontWeightValue,
-      semiBold: '600' as FontWeightValue,
+      regular: globalTokens.font.weight.regular as FontWeightValue,
+      semiBold: globalTokens.font.weight.semibold as FontWeightValue,
     },
     families: {
       primary: 'Segoe UI',

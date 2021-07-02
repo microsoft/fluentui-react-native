@@ -2,6 +2,162 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Fri, 25 Jun 2021 21:11:46 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.10.15",
+      "version": "0.10.15",
+      "comments": {
+        "none": [
+          {
+            "comment": "Added how to bump react-native and where to find dep-check docs",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "8df298f64e9caa0db800c357a455ec61129a66da",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Jun 2021 19:39:16 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.10.15",
+      "version": "0.10.15",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add chevron to submenu",
+            "author": "lehon@microsoft.com",
+            "commit": "c02e69f9e9ac03db75d410794beaa2cd0ab644a6",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Jun 2021 18:34:06 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.10.14",
+      "version": "0.10.14",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @rnx-kit/cli to 0.5.27",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "e5870bb5f489a449043c227c6f4efd42ae6649b0",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.10.7",
+      "version": "0.10.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Apply prettier to other platforms, run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 25 May 2021 00:42:50 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.10.1",
+      "version": "0.10.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix livereload in win32 tester app",
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "commit": "1f1163033591ab452e3ab1132674f42eeb0d5566",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 19 May 2021 07:04:54 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "fix hover behavior on submenu items",
+            "author": "lehon@microsoft.com",
+            "commit": "06aa14bd6c448e2b16afc81e76a99f9788c4fc13",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 May 2021 06:18:23 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.9.4",
+      "version": "0.9.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "remove comment from win32 test app to force a change file",
+            "author": "sanajmi@microsoft.com",
+            "commit": "1602018b21b6952917210547dbc05ea07f4ba2b6",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 May 2021 10:34:05 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.9.3",
+      "version": "0.9.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "patch",
+            "author": "sanajmi@microsoft.com",
+            "commit": "60fb1e08cb5785023b05333a8c0373a4aa5a6aa3",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 May 2021 10:18:25 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.9.2",
+      "version": "0.9.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "remove call to unstable_logbox that isn't necessary",
+            "author": "sanajmi@microsoft.com",
+            "commit": "15f17d21a336b23bf8223abf881480a078d0ab94",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 07 May 2021 18:12:16 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.9.1",
+      "version": "0.9.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add button icon tests specific to win32",
+            "author": "warleu@microsoft.com",
+            "commit": "acedf34f3fa9000885e5a2ab4cc27eb3b43e9190",
+            "package": "@fluentui-react-native/tester-win32"
+          },
+          {
+            "comment": "Use start instead of rnx-start",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "88428c744d3101d3e09dd7fa74cd88656dee5389",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 15 Apr 2021 20:08:17 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.9.0",
       "version": "0.9.0",

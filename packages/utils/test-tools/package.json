@@ -15,10 +15,12 @@
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
     "verify-api": "fluentui-scripts verify-api-extractor",
-    "update-api": "fluentui-scripts update-api-extractor"
+    "update-api": "fluentui-scripts update-api-extractor",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/theme-types": ">=0.6.0 <1.0.0"
+    "@fluentui-react-native/theme-types": ">=0.8.0 <1.0.0"
   },
   "devDependencies": {
     "@types/react": "^16.9.34",

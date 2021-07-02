@@ -14,9 +14,9 @@ function _buildPhotoStyles(tokenProps: IPersonaCoinTokens /*, theme: ITheme */):
     style: {
       borderRadius: physicalSize / 2,
       width: physicalSize,
-      height: physicalSize
+      height: physicalSize,
     },
-    resizeMode: 'cover'
+    resizeMode: 'cover',
   };
 }
 

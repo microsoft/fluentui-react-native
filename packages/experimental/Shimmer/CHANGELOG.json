@@ -1,0 +1,110 @@
+{
+  "name": "@fluentui-react-native/experimental-shimmer",
+  "entries": [
+    {
+      "date": "Wed, 30 Jun 2021 05:42:19 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.3.5",
+      "version": "0.3.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix bug where Shimmer didn't update with appearance changes",
+            "author": "sanajmi@microsoft.com",
+            "commit": "6a3c8570d00c35fcd9aa5a135f28eef3e4213eb6",
+            "package": "@fluentui-react-native/experimental-shimmer"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Apply prettier to experimental, run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@fluentui-react-native/experimental-shimmer"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 15 Jun 2021 00:55:36 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add support for ColorValue",
+            "author": "ruaraki@microsoft.com",
+            "commit": "90e0dcb92a4ea4ee5ea5373f2c54defa127749bf",
+            "package": "@fluentui-react-native/experimental-shimmer"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 19 May 2021 07:04:54 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "disable no-var-requires",
+            "author": "lehon@microsoft.com",
+            "commit": "06aa14bd6c448e2b16afc81e76a99f9788c4fc13",
+            "package": "@fluentui-react-native/experimental-shimmer"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 May 2021 06:18:23 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Force a package update to sync npm version and repo version",
+            "author": "sanajmi@microsoft.com",
+            "commit": "1602018b21b6952917210547dbc05ea07f4ba2b6",
+            "package": "@fluentui-react-native/experimental-shimmer"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 May 2021 10:34:05 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "patch",
+            "author": "sanajmi@microsoft.com",
+            "commit": "60fb1e08cb5785023b05333a8c0373a4aa5a6aa3",
+            "package": "@fluentui-react-native/experimental-shimmer"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 May 2021 10:18:25 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "minor changes to force package update",
+            "author": "sanajmi@microsoft.com",
+            "commit": "905611de5d4abf60504f6bfc4f2dadaffd37c9de",
+            "package": "@fluentui-react-native/experimental-shimmer"
+          }
+        ]
+      }
+    }
+  ]
+}

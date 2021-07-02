@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/android-theme",
-  "version": "0.2.2",
+  "version": "0.4.0",
   "description": "A FluentUI React Native theme that pulls constants from FluentUI Android",
   "repository": {
     "type": "git",
@@ -26,16 +26,20 @@
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
     "verify-api": "fluentui-scripts verify-api-extractor",
-    "update-api": "fluentui-scripts update-api-extractor"
+    "update-api": "fluentui-scripts update-api-extractor",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/theme-types": ">=0.5.0 <1.0.0",
-    "@fluentui-react-native/theme": ">=0.5.1 <1.0.0"
+    "@fluentui-react-native/theme-types": ">=0.8.0 <1.0.0",
+    "@fluentui-react-native/theme": ">=0.5.5 <1.0.0",
+    "react-native": "^0.63.4"
   },
   "devDependencies": {
+    "@types/react-native": "^0.63.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
   },

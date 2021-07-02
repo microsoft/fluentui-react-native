@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Apply prettier to utils, run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@fluentui-react-native/adapters"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 06 Mar 2021 00:20:05 GMT",
       "tag": "@fluentui-react-native/adapters_v0.6.0",
       "version": "0.6.0",

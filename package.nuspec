@@ -10,39 +10,33 @@
   </metadata>
   <files>
     <!-- iOS device debug -->
-    <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Apple-Theme\libFluentUI-React-Native-Apple-Theme.a" target="Debug-iphoneos"/>
     <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Debug-iphoneos"/>
     <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Debug-iphoneos"/>
-    <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Shimmer\libFluentUI-React-Native-Shimmer.a" target="Debug-iphoneos"/>
+    <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Date-Picker\libFluentUI-React-Native-Date-Picker.a" target="Debug-iphoneos"/>
     <!-- iOS device ship -->
-    <file src="DerivedData\Build\Products\Release-iphoneos\FluentUI-React-Native-Apple-Theme\libFluentUI-React-Native-Apple-Theme.a" target="Ship-iphoneos"/>
     <file src="DerivedData\Build\Products\Release-iphoneos\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Ship-iphoneos"/>
     <file src="DerivedData\Build\Products\Release-iphoneos\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Ship-iphoneos"/>
-    <file src="DerivedData\Build\Products\Release-iphoneos\FluentUI-React-Native-Shimmer\libFluentUI-React-Native-Shimmer.a" target="Ship-iphoneos"/>
+    <file src="DerivedData\Build\Products\Release-iphoneos\FluentUI-React-Native-Date-Picker\libFluentUI-React-Native-Date-Picker.a" target="Ship-iphoneos"/>
     <!-- iOS simulator debug -->
-    <file src="DerivedData\Build\Products\Debug-iphonesimulator\FluentUI-React-Native-Apple-Theme\libFluentUI-React-Native-Apple-Theme.a" target="Debug-iphonesimulator"/>
     <file src="DerivedData\Build\Products\Debug-iphonesimulator\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Debug-iphonesimulator"/>
     <file src="DerivedData\Build\Products\Debug-iphonesimulator\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Debug-iphonesimulator"/>
-    <file src="DerivedData\Build\Products\Debug-iphonesimulator\FluentUI-React-Native-Shimmer\libFluentUI-React-Native-Shimmer.a" target="Debug-iphonesimulator"/>
+    <file src="DerivedData\Build\Products\Debug-iphonesimulator\FluentUI-React-Native-Date-Picker\libFluentUI-React-Native-Date-Picker.a" target="Debug-iphonesimulator"/>
     <!-- iOS simulator ship -->
-    <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Apple-Theme\libFluentUI-React-Native-Apple-Theme.a" target="Ship-iphonesimulator"/>
     <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Ship-iphonesimulator"/>
     <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Ship-iphonesimulator"/>
-    <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Shimmer\libFluentUI-React-Native-Shimmer.a" target="Ship-iphonesimulator"/>
+    <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Date-Picker\libFluentUI-React-Native-Date-Picker.a" target="Ship-iphonesimulator"/>
 
     <!-- macOS debug -->
-    <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Apple-Theme\libFluentUI-React-Native-Apple-Theme.a" target="Debug-macosx"/>
     <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Debug-macosx"/>
     <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Debug-macosx"/>
     <!-- macOS ship -->
-    <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Apple-Theme\libFluentUI-React-Native-Apple-Theme.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Ship-macosx"/>
 
     <!-- iOS Release jsbundle -->
-    <file src="apps\ios\dist\index.ios.jsbundle" target="ios\index.bundle"/>
+    <file src="apps\ios\dist\index.ios.jsbundle" />
 
     <!-- macOS Release jsbundle -->
-    <file src="apps\macos\dist\index.macos.jsbundle" target="macos\index.bundle"/>
+    <file src="apps\macos\dist\index.macos.jsbundle" />
   </files>
 </package>

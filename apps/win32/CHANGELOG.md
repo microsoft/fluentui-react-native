@@ -1,8 +1,56 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Thu, 15 Apr 2021 20:08:17 GMT and should not be manually modified.
+This log was last generated on Fri, 18 Jun 2021 00:38:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.7
+
+Fri, 18 Jun 2021 00:38:19 GMT
+
+### Patches
+
+- Apply prettier to other platforms, run (ruaraki@microsoft.com)
+
+## 0.10.1
+
+Tue, 25 May 2021 00:42:50 GMT
+
+### Patches
+
+- Fix livereload in win32 tester app (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.10.0
+
+Wed, 19 May 2021 07:04:54 GMT
+
+### Minor changes
+
+- fix hover behavior on submenu items (lehon@microsoft.com)
+
+## 0.9.4
+
+Thu, 13 May 2021 06:18:23 GMT
+
+### Patches
+
+- remove comment from win32 test app to force a change file (sanajmi@microsoft.com)
+
+## 0.9.3
+
+Wed, 12 May 2021 10:34:05 GMT
+
+### Patches
+
+- patch (sanajmi@microsoft.com)
+
+## 0.9.2
+
+Wed, 12 May 2021 10:18:25 GMT
+
+### Patches
+
+- remove call to unstable_logbox that isn't necessary (sanajmi@microsoft.com)
 
 ## 0.9.0
 

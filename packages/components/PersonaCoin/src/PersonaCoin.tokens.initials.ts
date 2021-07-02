@@ -11,8 +11,8 @@ function _buildInitialsStyles(tokenProps: IPersonaCoinTokens /*, theme: ITheme *
 
   return {
     style: {
-      fontSize: initialsSize
-    }
+      fontSize: initialsSize,
+    },
   };
 }
 

@@ -1,0 +1,44 @@
+{
+  "name": "@fluentui-react-native/theming-utils",
+  "version": "0.2.3",
+  "description": "Utils for dealing with theming",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native"
+  },
+  "main": "src/index.ts",
+  "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "just": "fluentui-scripts",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "lint": "fluentui-scripts eslint",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "verify-api": "fluentui-scripts verify-api-extractor",
+    "update-api": "fluentui-scripts update-api-extractor",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
+  },
+  "dependencies": {
+    "@fluentui-react-native/theme-types": ">=0.8.0 <1.0.0",
+    "react-native": "^0.63.4"
+  },
+  "devDependencies": {
+    "@types/react-native": "^0.63.0",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
+  },
+  "peerDependencies": {
+    "react": ">=16.13.1",
+    "react-native": ">=0.63.4"
+  },
+  "author": "",
+  "license": "MIT"
+}

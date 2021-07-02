@@ -44,6 +44,8 @@ Tokens help us achieve simpler customization for complex higher order components
 
 This section covers creating and adding a new component package to FluentUI React Native's monorepo. If you are instead working on an existing component and adding a native module, skip to the next two sections.
 
+Most components should use the compose framework as it offers the comprehensive set of patterns like tokens and slots, but if you're creating a simple component that doesn't require those patterns, there's a lighter pattern called [stagedComponent](https://github.com/microsoft/fluentui-react-native/blob/master/packages/experimental/use-slots/src/stagedComponent.ts). The stagedComponent pattern splits up the render function into two stages. Stage 1 handles building props and hook calls (best to separate the hook calls from the render tree since they rely on call order). Stage 2 returns the actual element tree, any conditional branching should happen here (Icon is a good example of using stagedCompoenent).
+
 1. Create a new directory in of these two locations, depending on your component:
 
    - `fluentui-react-native/packages/components/<new-component>`
@@ -138,3 +140,50 @@ To add a native module that wraps a FluentUI Apple control:
       - This Swift file imports FluentUI Apple, and creates a subclass of RCTViewManager to instantiate and return your FluentUI Apple control. Objective-C methods like `requiresMainQueueSetup` and `constantsToExport` can be overridden here. It's important to note that in order for properties and methods to be available to React Native, they must add the `@objc` decorator to it's declaration.
    1. `MSF<new-component>ViewManager.m`
       - This is an extra Objective-C file needed because Swift does not support macros and React Native requires them to map JS props to the native properties of the control. (Macros like `RCT_EXPORT_VIEW_PROPERTY` and `RCT_EXPORT_METHOD`)/
+
+## Creating a pull request
+
+Thanks for your interest in contributing to the fluentui-react-native! We welcome all contributions. Here's information on how to prepare your change for a pull request.
+
+### Code of Conduct
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+### Prerequisites
+
+#### Beachball
+
+This repo manages semantic versioning and publishing using [Beachball](https://github.com/microsoft/beachball). When contributing, make sure to run the following before making a pull request:
+
+1. `yarn change` will take you through a command line wizard to generate change files
+2. Make sure to push the newly generated change file
+
+#### Testing changes
+
+Before you create a pull request, test your changes with the FluentUI Tester on the platforms that are affected by your change. For more information on the FluentUI Tester, please follow instructions in the [FluentUI Tester readme](./apps/fluent-tester/README.md).
+
+#### Contributor License Agreement
+
+This project welcomes contributions and suggestions. Most contributions require you to agree to a
+Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
+the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+
+When you submit a pull request, a CLA bot will automatically determine whether you need to provide
+a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
+provided by the bot. You will only need to do this once across all repos using our CLA.
+
+### Additional Considerations
+
+#### Update Documentation
+
+We welcome having documentation for our packages and components! Please add or update any relevant documentation for your changes.
+
+#### Accessibility
+
+Please test your change for keyboard navigation as well as compatibility with Voiceover and screen readers.
+
+#### Internationalization
+
+Consider if your change needs to have special handling for right-to-left languages, or other internationalization considerations.

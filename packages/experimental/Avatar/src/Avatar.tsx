@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
-import { Image, ImageURISource, NativeModules, ViewProps } from 'react-native';
+import { Image, ImageURISource, NativeModules, ViewProps, ColorValue } from 'react-native';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import { useMemo } from 'react';
 
@@ -42,7 +42,7 @@ export type AvatarData = {
    * If the avatar view is configured to display a border, this will be the border's color.
    * The colored border will not be displayed if a custom border image is provided.
    */
-  color?: string;
+  color?: ColorValue;
 
   /**
    * Image to be used as border around the avatar. It will be used as a pattern image color,
@@ -67,7 +67,7 @@ export type otherAvatarProps = {
   /**
    * Background Color of initials
    */
-  backgroundColor?: string;
+  backgroundColor?: ColorValue;
 
   /**
    * Image to be used as border around the avatar. It will be used as a pattern image color,
@@ -86,7 +86,7 @@ export type otherAvatarProps = {
   /**
    * The color of the border of the avatar view
    */
-  borderColor?: string;
+  borderColor?: ColorValue;
 
   /**
    * When true, the presence status border is opaque. Otherwise, it is transparent.
@@ -102,6 +102,11 @@ export type otherAvatarProps = {
    * Set to true to enable the iPadOS pointer interactions on the avatar view, false by default.
    */
   hasPointerInteractionIOS?: boolean;
+
+  /**
+   * Set to true to not have inside gap between content of the avatarView to its border
+   */
+  hideInsideGapForBorder?: boolean;
 };
 
 export type AvatarTokens = {
@@ -153,7 +158,7 @@ export const Avatar = compose<AvatarType>({
   render: (props: AvatarProps, useSlots: UseSlots<AvatarType>) => {
     const Root = useSlots(props).root;
 
-    const memoizedAvatarData = useMemo(
+    const memoizedAvatarData: AvatarData = useMemo(
       () => ({
         primaryText: props.primaryText,
         secondaryText: props.secondaryText,

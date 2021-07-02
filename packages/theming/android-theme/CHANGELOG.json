@@ -2,6 +2,201 @@
   "name": "@fluentui-react-native/android-theme",
   "entries": [
     {
+      "date": "Fri, 25 Jun 2021 19:39:16 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add chevron to submenu",
+            "author": "lehon@microsoft.com",
+            "commit": "c02e69f9e9ac03db75d410794beaa2cd0ab644a6",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Jun 2021 06:21:11 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Improved test page on Android.",
+            "author": "tamasane@gmail.com",
+            "commit": "592cd8a40cc814696cbb59b93d5801089cec276f",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 21 Jun 2021 11:19:28 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.3.2",
+      "version": "0.3.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update checkbox settings/theme for android",
+            "author": "tamasane@gmail.com",
+            "commit": "e6f863599192ecdc71887712094638831e4a0548",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Apply prettier to libraries core and theming, run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 15 Jun 2021 00:55:36 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Get everything to pull ColorValue from react-native",
+            "author": "ruaraki@microsoft.com",
+            "commit": "90e0dcb92a4ea4ee5ea5373f2c54defa127749bf",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 02 Jun 2021 17:30:36 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.2.8",
+      "version": "0.2.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Comment fix to generate package update",
+            "author": "krsiler@microsoft.com",
+            "commit": "207385ecb8ec4210fa6de8f23767f7547489706d",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 25 May 2021 00:42:50 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.2.7",
+      "version": "0.2.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add ripple effect to android-button",
+            "author": "tamasane@gmail.com",
+            "commit": "d3953da403a118f3086dfde2529bca76d30ad235",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 19 May 2021 07:04:54 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.2.6",
+      "version": "0.2.6",
+      "comments": {
+        "none": [
+          {
+            "comment": "disable no-var-requires",
+            "author": "lehon@microsoft.com",
+            "commit": "06aa14bd6c448e2b16afc81e76a99f9788c4fc13",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 May 2021 06:18:23 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.2.6",
+      "version": "0.2.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Force a package update to sync npm version and repo version",
+            "author": "sanajmi@microsoft.com",
+            "commit": "1602018b21b6952917210547dbc05ea07f4ba2b6",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 May 2021 16:09:56 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.2.5",
+      "version": "0.2.5",
+      "comments": {
+        "none": [
+          {
+            "comment": "Change files",
+            "author": "sanajmi@microsoft.com",
+            "commit": "92780c317d066b598800b74115abe227ace7f5ad",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 May 2021 10:34:05 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.2.5",
+      "version": "0.2.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "patch",
+            "author": "sanajmi@microsoft.com",
+            "commit": "60fb1e08cb5785023b05333a8c0373a4aa5a6aa3",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 May 2021 10:18:25 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.2.4",
+      "version": "0.2.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "patch",
+            "author": "sanajmi@microsoft.com",
+            "commit": "905611de5d4abf60504f6bfc4f2dadaffd37c9de",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 07 May 2021 18:12:16 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "update android-text theme and test",
+            "author": "tamasane@gmail.com",
+            "commit": "dc164d70e8eccfc64e4b1005b79f6ed8aa5f1c2e",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 15 Apr 2021 20:08:17 GMT",
       "tag": "@fluentui-react-native/android-theme_v0.2.2",
       "version": "0.2.2",

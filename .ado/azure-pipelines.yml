@@ -146,35 +146,43 @@ jobs:
           publishJUnitResults: false
           javaHomeOption: 'JDKVersion'
           sonarQubeRunAnalysis: false
-  # Uncomment this job to test changes to changes to the NuGet package
-  # We keep it commented out by default because this job is much longer than the other PR jobs
-  # - job: NuGetPublish
-  #   displayName: NuGet Publish
-  #   pool:
-  #     vmImage: 'macos-10.15'
-  #     demands: ['xcode', 'sh', 'npm']
-  #   timeoutInMinutes: 90 # how long to run the job before automatically cancelling
-  #   cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
-  #   steps:
-  #     - checkout: self
-  #       persistCredentials: true
-  #     - template: templates/setup-repo-min-build.yml
-  #     # Clean Derived Data
-  #     - script: |
-  #         rm -rf $(Build.Repository.LocalPath)/DerivedData
-  #       displayName: 'Clean DerivedData'
-  #     - script: |
-  #         sudo gem install cocoapods
-  #       displayName: 'Install CocoaPods Environment'
-  #     - script: |
-  #         yarn bundle ios
-  #       workingDirectory: $(Build.Repository.LocalPath)/apps/ios
-  #       displayName: 'yarn bundle iOS'
-  #     - script: |
-  #         yarn bundle macos
-  #       workingDirectory: $(Build.Repository.LocalPath)/apps/macos
-  #       displayName: 'yarn bundle macOS'
-  #     # Select proper Xcode version
-  #     - template: templates/apple-xcode-select.yml
-  #     - template: templates/apple-xcode-build-static-libs.yml
-  #     - template: templates/nuget-publish.yml
+
+  - job: NuGetPublishDryRun
+    displayName: NuGet Publish Dry Run
+    pool:
+      vmImage: 'macos-10.15'
+      demands: ['xcode', 'sh', 'npm']
+    timeoutInMinutes: 90 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+
+    steps:
+      - checkout: self
+        persistCredentials: true
+
+      - template: templates/setup-repo-min-build.yml
+
+      # Clean Derived Data
+      - script: |
+          rm -rf $(Build.Repository.LocalPath)/DerivedData
+        displayName: 'Clean DerivedData'
+
+      - script: |
+          sudo gem install cocoapods
+        displayName: 'Install CocoaPods Environment'
+
+      - script: |
+          yarn bundle ios
+        workingDirectory: $(Build.Repository.LocalPath)/apps/ios
+        displayName: 'yarn bundle iOS'
+
+      - script: |
+          yarn bundle macos
+        workingDirectory: $(Build.Repository.LocalPath)/apps/macos
+        displayName: 'yarn bundle macOS'
+
+      # Select proper Xcode version
+      - template: templates/apple-xcode-select.yml
+
+      - template: templates/apple-xcode-build-static-libs.yml
+
+      - template: templates/nuget-publish-dry-run.yml

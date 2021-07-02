@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData, ICheckboxType, checkboxName } from './Checkbox.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
@@ -9,14 +9,32 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { settings, checkboxSelectActionLabel } from './Checkbox.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
-import { useAsToggle, useAsPressable, useViewCommandFocus, useKeyCallback } from '@fluentui-react-native/interactive-hooks';
+import {
+  useAsToggle,
+  useAsPressable,
+  useViewCommandFocus,
+  useKeyCallback,
+  useOnPressWithFocus,
+} from '@fluentui-react-native/interactive-hooks';
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
+import { Icon } from '@fluentui-react-native/icon';
+import checkmarkSvg from './checkmark/checkmark';
 
 export const Checkbox = compose<ICheckboxType>({
   displayName: checkboxName,
 
   usePrepareProps: (userProps: ICheckboxProps, useStyling: IUseComposeStyling<ICheckboxType>) => {
-    const { ariaLabel, checked, defaultChecked, boxSide, disabled, label, onChange, ...rest } = userProps;
+    const {
+      ariaLabel,
+      checked,
+      defaultChecked,
+      boxSide,
+      disabled,
+      label,
+      onChange,
+      componentRef = React.useRef(null),
+      ...rest
+    } = userProps;
 
     // Warns defaultChecked and checked being mutually exclusive.
     if (defaultChecked != undefined && checked != undefined) {
@@ -26,16 +44,19 @@ export const Checkbox = compose<ICheckboxType>({
     // Re-usable hook for toggle components.
     const [isChecked, toggleChecked] = useAsToggle(defaultChecked, checked, onChange);
 
-    const pressable = useAsPressable({ onPress: toggleChecked, ...rest });
+    // Ensure focus is placed on checkbox after click
+    const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleChecked);
 
-    const buttonRef = useViewCommandFocus(userProps.componentRef);
+    const pressable = useAsPressable({ onPress: toggleCheckedWithFocus, ...rest });
+
+    const buttonRef = useViewCommandFocus(componentRef);
 
     // Handles the "Space" key toggling the Checkbox
     const onKeyUpSpace = useKeyCallback(toggleChecked, ' ');
 
     const state: ICheckboxState = {
       ...pressable.state,
-      disabled,
+      disabled: !!disabled,
       checked: isChecked,
       boxAtEnd: boxSide == undefined || boxSide == 'start' ? false : true,
     };
@@ -69,6 +90,11 @@ export const Checkbox = compose<ICheckboxType>({
       },
       // Temporary checkmark until SVG functionality
       checkmark: { children: '✓' },
+      checkmarkIcon: {
+        svgSource: {
+          src: checkmarkSvg,
+        },
+      },
       content: { children: label },
     });
 
@@ -76,12 +102,12 @@ export const Checkbox = compose<ICheckboxType>({
   },
 
   render: (Slots: ISlots<ICheckboxSlotProps>, renderData: ICheckboxRenderData, ...children: React.ReactNode[]) => {
+    // SVG-based icons are not available on all platforms yet
+    const svgIconsEnabled = ['ios', 'macos', 'web', 'android'].includes(Platform.OS as string);
     return (
       <Slots.root>
         {renderData?.state.boxAtEnd && <Slots.content />}
-        <Slots.checkbox>
-          <Slots.checkmark />
-        </Slots.checkbox>
+        <Slots.checkbox>{svgIconsEnabled ? <Slots.checkmarkIcon /> : <Slots.checkmark />}</Slots.checkbox>
         {!renderData?.state.boxAtEnd && <Slots.content />}
         {children}
       </Slots.root>
@@ -93,6 +119,7 @@ export const Checkbox = compose<ICheckboxType>({
     root: View,
     checkbox: { slotType: View, filter: filterViewProps },
     checkmark: Text,
+    checkmarkIcon: Icon,
     content: Text,
   },
   styles: {
@@ -106,6 +133,13 @@ export const Checkbox = compose<ICheckboxType>({
       ],
     ],
     checkmark: [
+      foregroundColorTokens,
+      [
+        { source: 'checkmarkColor', lookup: getPaletteFromTheme, target: 'color' },
+        { source: 'checkmarkVisibility', target: 'opacity' },
+      ],
+    ],
+    checkmarkIcon: [
       foregroundColorTokens,
       [
         { source: 'checkmarkColor', lookup: getPaletteFromTheme, target: 'color' },

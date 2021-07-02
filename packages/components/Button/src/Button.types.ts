@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ViewProps } from 'react-native';
+import { PressableProps, ViewProps, ColorValue } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
 import { IPressableProps } from '@fluentui-react-native/pressable';
@@ -11,25 +11,25 @@ import { IconProps } from '@fluentui-react-native/icon';
 export const buttonName = 'Button';
 
 export interface IButtonInfo extends IPressableState {
-  /*
+  /**
    * Disables the button.
    * @default false
    * @deprecated
    */
   disabled?: boolean;
 
-  /*
+  /**
    * Button icon.
    */
   icon?: boolean;
 
-  /*
+  /**
    * Button text.
    */
   content?: boolean;
 }
 
-/**
+/*
  * Because state updates are coming from the touchable and will cause a child render the button doesn't use
  * changes in state value to trigger re-render.  The values inside inner are effectively mutable and are used
  * for per-component storage
@@ -54,17 +54,17 @@ export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBack
   /**
    * The icon color.
    */
-  iconColor?: string;
+  iconColor?: ColorValue;
 
   /**
    * The icon color when hovering over the Button.
    */
-  iconColorHovered?: string;
+  iconColorHovered?: ColorValue;
 
   /**
    * The icon color when the Button is being pressed.
    */
-  iconColorPressed?: string;
+  iconColorPressed?: ColorValue;
 
   /**
    * The size of the icon.
@@ -88,12 +88,12 @@ export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBack
 }
 
 export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
-  /*
+  /**
    * Text to show on the Button.
    */
   content?: string;
 
-  /*
+  /**
    * Source URL or name of the icon to show on the Button.
    */
   icon?: IconSourcesType;
@@ -112,6 +112,7 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
 
 export interface IButtonSlotProps {
   root: React.PropsWithRef<IViewProps>;
+  ripple?: PressableProps; // This slot exists to enable ripple-effect in android. It does not affect other platforms.
   stack: ViewProps;
   icon: IconProps;
   content: ITextProps;
