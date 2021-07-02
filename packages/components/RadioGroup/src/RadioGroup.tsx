@@ -27,7 +27,7 @@ export const RadioGroupContext = React.createContext<IRadioGroupContext>({
   updateSelectedButtonRef: (/* ref: React.RefObject<any>*/) => {
     return;
   },
-  buttonKeys: null,
+  buttonKeys: [],
 });
 
 export const RadioGroup = compose<IRadioGroupType>({
