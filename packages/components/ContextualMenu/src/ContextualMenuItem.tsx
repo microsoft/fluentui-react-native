@@ -119,7 +119,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       <Slots.root>
         <Slots.stack>
           {renderData!.state.icon && <Slots.icon />}
-          {/* {renderData!.state.content && <Slots.content />} */}
+          {renderData!.state.content && <Slots.content />}
           {children}
         </Slots.stack>
       </Slots.root>
