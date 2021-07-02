@@ -34,6 +34,7 @@
     "@fluentui-react-native/theme-types": ">=0.8.0 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.6.1 <1.0.0",
     "@fluentui-react-native/use-slots": ">=0.5.2 <1.0.0",
+    "@fluentui-react-native/use-tokens": ">=0.1.0 <1.0.0",
     "@fluentui-react-native/memo-cache": "^1.1.1",
     "@fluentui-react-native/tokens": ">=0.9.3 <1.0.0"
   },
