@@ -59,6 +59,5 @@ describe('applyPropsToTokens tests', () => {
     const cache = getMemoCache();
     const [tokens, subCache] = applyPropsToTokens({}, themeTokens, cache, tokenProps);
     expect(tokens).toBe(themeTokens);
-    expect(subCache).toBe(cache);
   });
 });

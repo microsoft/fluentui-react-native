@@ -71,9 +71,9 @@ const resolvedTokens: Tokens = {
 };
 
 const variantTokens: Tokens = {
-  a: 'uno-a',
+  a: 'a-base',
   b: 'variant',
-  c: 'uno-c',
+  c: 'c-base',
   hover: {
     c: 'c-base-hover',
   },
