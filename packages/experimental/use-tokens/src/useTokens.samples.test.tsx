@@ -86,10 +86,10 @@ describe('useTokens samples', () => {
       fontSize: t.globals.fontSize,
     }),
     /** next we should look for a component reference to overlay */
-    'Sample1',
+    'SampleText',
   );
 
-  const Sample1Text: React.FunctionComponent<TextProps> = (props) => {
+  const SampleText1: React.FunctionComponent<TextProps> = (props) => {
     // standard props splitting
     const { style, children, ...rest } = props;
 
@@ -136,7 +136,7 @@ describe('useTokens samples', () => {
 
   /** first render the component with no updates */
   it('Sample1Text rendering with no overrides', () => {
-    const tree = mount(<Sample1Text>Sample1a</Sample1Text>);
+    const tree = mount(<SampleText1>Sample1a</SampleText1>);
     snapshotTestTree(tree);
   });
 
@@ -144,13 +144,13 @@ describe('useTokens samples', () => {
   it('Sample1Text rendering with some custom settings in the theme', () => {
     setActiveTheme({
       components: {
-        Sample1: {
+        SampleText: {
           color: 'pink',
           fontSize: 24,
         },
       },
     });
-    const tree = mount(<Sample1Text>Sample1b</Sample1Text>);
+    const tree = mount(<SampleText1>Sample1b</SampleText1>);
     snapshotTestTree(tree);
   });
 
@@ -163,7 +163,7 @@ describe('useTokens samples', () => {
   type Sample2Props = TextProps & { color?: string };
 
   // the Sample2Text component is built the same way as sample1, just using the new hook that has been created
-  const Sample2Text: React.FunctionComponent<Sample2Props> = (props) => {
+  const SampleText2: React.FunctionComponent<Sample2Props> = (props) => {
     const { color, style, children, ...rest } = props;
     const theme = useTheme();
 
@@ -191,8 +191,8 @@ describe('useTokens samples', () => {
   it('Sample2Text rendering with defaults and a color override', () => {
     const tree = mount(
       <View>
-        <Sample2Text>Sample2 with defaults</Sample2Text>
-        <Sample2Text color="green">Sample2 with color override via prop</Sample2Text>
+        <SampleText2>Sample2 with defaults</SampleText2>
+        <SampleText2 color="green">Sample2 with color override via prop</SampleText2>
       </View>,
     );
     snapshotTestTree(tree);
@@ -202,11 +202,7 @@ describe('useTokens samples', () => {
   it('Sample2Text rendering with some custom settings in the theme', () => {
     setActiveTheme({
       components: {
-        Sample1: {
-          color: 'pink',
-          fontSize: 24,
-        },
-        Sample2: {
+        SampleText: {
           fontSize: 18,
           fontFamily: 'Helvetica',
         },
@@ -214,8 +210,8 @@ describe('useTokens samples', () => {
     });
     const tree = mount(
       <View>
-        <Sample2Text>Sample2 with theme overrides set</Sample2Text>
-        <Sample2Text color="purple">Sample2 with theme and color prop override</Sample2Text>
+        <SampleText2>Sample2 with theme overrides set</SampleText2>
+        <SampleText2 color="purple">Sample2 with theme and color prop override</SampleText2>
       </View>,
     );
     snapshotTestTree(tree);

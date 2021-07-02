@@ -29,22 +29,6 @@ const props1: Props = { dos: 'two', quatro: 'four', cinco: false, foo: 'foo', ba
 // const props2: Props = { dos: 'two' };
 // const props3: Props = { foo: 'foo', bar: 'bar' };
 
-/*
-export function applyPropsToTokens<TProps, TTokens>(
-  props: TProps,
-  tokens: TTokens,
-  cache: GetMemoValue<TTokens>,
-  keys: (keyof TTokens)[],
-): [TTokens, GetMemoValue<TTokens>] {
-  for (const key of keys) {
-    const sourceValue = props[key as string];
-    const setValue = sourceValue === tokens[key] ? undefined : sourceValue;
-    [tokens, cache] = cache(() => (setValue === undefined ? tokens : { ...tokens, [key]: setValue }), [setValue]);
-  }
-  return [tokens, cache];
-}
-*/
-
 describe('applyPropsToTokens tests', () => {
   test('props get copied', () => {
     const cache = getMemoCache();
@@ -57,7 +41,7 @@ describe('applyPropsToTokens tests', () => {
 
   test('no copied props does not change tokens', () => {
     const cache = getMemoCache();
-    const [tokens, subCache] = applyPropsToTokens({}, themeTokens, cache, tokenProps);
+    const [tokens] = applyPropsToTokens({}, themeTokens, cache, tokenProps);
     expect(tokens).toBe(themeTokens);
   });
 });
