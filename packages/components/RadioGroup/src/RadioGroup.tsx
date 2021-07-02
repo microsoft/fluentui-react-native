@@ -27,6 +27,7 @@ export const RadioGroupContext = React.createContext<IRadioGroupContext>({
   updateSelectedButtonRef: (/* ref: React.RefObject<any>*/) => {
     return;
   },
+  buttonKeys: null,
 });
 
 export const RadioGroup = compose<IRadioGroupType>({
@@ -76,23 +77,14 @@ export const RadioGroup = compose<IRadioGroupType>({
       return null;
     }
 
-    // Generate ariaSetSize and ariaPosInSet for radio buttons if props are undefined
+    // Populate the buttonKeys array
     if (children) {
       /* eslint-disable @typescript-eslint/ban-ts-ignore */
       // @ts-ignore - TODO, fix typing error
-      children = React.Children.map(children, (child: React.ReactChild, index: number) => {
+      renderData.state.context.buttonKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
-          const childProps = child.props;
-          const extraProps = {
-            ariaSetSize: childProps.ariaSetSize ?? React.Children.count(children),
-            ariaPosInSet: childProps.ariaPosInSet ?? index + 1,
-          };
-          return React.cloneElement(child, {
-            ...childProps,
-            ...extraProps,
-          });
+          return child.props.buttonKey;
         }
-        return child;
       });
     }
 
