@@ -426,5 +426,8 @@ export function paletteFromAppleColors(isDark: boolean): ThemeColorDefinition {
     checkboxBackgroundDisabled: fluentApple.surfacePrimary,
     checkboxBorderColor: fluentApple.gray600,
     checkmarkColor: fluentApple.iconOnAccent,
+
+    personaActivityGlow: fluentApple.buttonBackground,
+    personaActivityRing: fluentApple.surfacePrimary,
   };
 }

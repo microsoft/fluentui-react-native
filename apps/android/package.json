@@ -21,41 +21,53 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.27.0",
+    "@fluentui-react-native/tester": "^0.29.1",
+    "@react-native-community/slider": "^3.0.3",
     "@react-native-picker/picker": "^1.9.11",
+    "hermes-engine": "~0.5.0",
     "react": "16.13.1",
-    "react-native": "^0.63.4",
-    "react-native-svg": "^12.1.1",
-    "react-native-test-app": "^0.3.2"
+    "react-native": "^0.63.2",
+    "react-native-svg": "^12.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^1.1.0",
-    "@rnx-kit/cli": "^0.0.3",
+    "@rnx-kit/cli": "^0.5.27",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "babel-jest": "^24.9.0",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-native-svg-transformer": "^0.14.3",
+    "react-native-test-app": "^0.6.3",
     "react-test-renderer": "~16.13.1"
   },
   "jest": {
     "preset": "react-native"
   },
   "rnx-kit": {
+    "reactNativeVersion": "^0.63",
+    "kitType": "app",
     "bundle": {
       "targets": [
         "android"
       ],
       "entryPath": "index.js"
-    }
+    },
+    "capabilities": [
+      "core-android",
+      "hermes",
+      "react",
+      "test-app"
+    ]
   },
   "depcheck": {
     "ignoreMatches": [
-      "react-native-test-app",
-      "@react-native-picker/picker"
+      "@react-native-community/slider",
+      "@react-native-picker/picker",
+      "hermes-engine",
+      "react-native-test-app"
     ]
   }
 }

@@ -19,6 +19,11 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
   const [horizontalAlignment, setHorizontalAlignment] = React.useState<IconAlignment>();
   const [verticalAlignment, setVerticalAlignment] = React.useState<IconAlignment>();
 
+  const [ringColor, setRingColor] = React.useState<string>('red');
+  const [ringBackgroundColor, setRingBackgroundColor] = React.useState<string>(undefined);
+  const [showRing, setShowRing] = React.useState<boolean>(true);
+  const [transparent, setTransparent] = React.useState<boolean>(false);
+
   const theme = useTheme();
   const textBoxBorderStyle: TextStyle = {
     borderColor: theme.colors.inputBorder,
@@ -64,6 +69,16 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           <Switch value={showImage} onValueChange={setShowImage} />
         </View>
 
+        <View style={commonStyles.switch}>
+          <Text>Show rings</Text>
+          <Switch value={showRing} onValueChange={setShowRing} />
+        </View>
+
+        <View style={commonStyles.switch}>
+          <Text>Transparent Ring</Text>
+          <Switch value={transparent} onValueChange={setTransparent} />
+        </View>
+
         <TextInput
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Background color"
@@ -91,6 +106,24 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           }}
         />
 
+        <TextInput
+          style={[commonStyles.textBox, textBoxBorderStyle]}
+          placeholder="Ring color"
+          blurOnSubmit={true}
+          onSubmitEditing={(e) => {
+            setRingColor(e.nativeEvent.text);
+          }}
+        />
+
+        <TextInput
+          style={[commonStyles.textBox, textBoxBorderStyle]}
+          placeholder="Ring background color"
+          blurOnSubmit={true}
+          onSubmitEditing={(e) => {
+            setRingBackgroundColor(e.nativeEvent.text);
+          }}
+        />
+
         <AlignmentPicker style={commonStyles.header} label="Horizontal icon alignment" onSelectionChange={setHorizontalAlignment} />
         <AlignmentPicker style={commonStyles.header} label="Vertical icon alignment" onSelectionChange={setVerticalAlignment} />
 
@@ -113,6 +146,17 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
         imageDescription="Former CEO of Microsoft"
         presence="blocked"
         imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
+        ring={
+          showRing
+            ? {
+                ringColor,
+                ringBackgroundColor,
+                ringThickness: 4,
+                innerGap: 4,
+                transparent,
+              }
+            : undefined
+        }
       />
     </View>
   );

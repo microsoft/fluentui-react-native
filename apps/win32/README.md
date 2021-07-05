@@ -9,19 +9,19 @@
 2. Then go into `apps\win32` folder:
 
 ```
-    cd apps\win32
+cd apps\win32
 ```
 
 3. Build the FluentUI Tester bundle:
 
 ```
-    yarn bundle
+yarn bundle
 ```
 
 4. Launch the FluentUI Tester app:
 
 ```
-    yarn run-win32
+yarn run-win32
 ```
 
 5. You will see FluentUI Tester show up in a new window.
@@ -38,13 +38,13 @@ Note: we recommend using [Visual Studio Code](https://code.visualstudio.com/down
 3. Build the FluentUI Tester bundle with dev option. This will ensure source map is included in the bundle.
 
 ```
-    yarn bundle-dev
+yarn bundle-dev
 ```
 
 4. Launch the FluentUI Tester app:
 
 ```
-    yarn run-win32
+yarn run-win32
 ```
 
 5. Inside ReactTest, open the debug option menu and select the checkbox `Use Direct Debugger`
@@ -64,7 +64,7 @@ Note: we recommend using [Visual Studio Code](https://code.visualstudio.com/down
 3. Start the debug server:
 
 ```
-    yarn start
+yarn start
 ```
 
 4. Open Edge or Chrome and navigate to http://localhost:8081/debugger-ui
@@ -72,5 +72,29 @@ Note: we recommend using [Visual Studio Code](https://code.visualstudio.com/down
 5. Open another command prompt and go into the same location `apps\win32` and run:
 
 ```
-    yarn run-win32-web
+yarn run-win32-web
 ```
+
+## Dependencies
+
+Dependencies are managed by
+[`@rnx-kit/dep-check`](https://github.com/microsoft/rnx-kit/tree/main/packages/dep-check).
+If you're looking to upgrade `react-native`, look for the `rnx-kit` section in
+`/apps/win32/package.json`:
+
+```json
+{
+  ...
+  "rnx-kit": {
+    "reactNativeVersion": "^0.63",
+    "kitType": "app",
+    "bundle": {
+  ...
+}
+```
+
+Bump `reactNativeVersion`, and run `yarn rnx-dep-check --write`. This command
+will ensure that all relevant packages are bumped correctly.
+
+You can read more about this tool here:
+[`@rnx-kit/dep-check` design document](https://github.com/microsoft/rnx-kit/blob/main/packages/dep-check/DESIGN.md)

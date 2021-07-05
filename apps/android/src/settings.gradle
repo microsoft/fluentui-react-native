@@ -1,3 +1,11 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenLocal()
+        google()
+    }
+}
+
 rootProject.name = 'FluentTester'
 
 apply from: file("../../../node_modules/react-native-test-app/test-app.gradle")

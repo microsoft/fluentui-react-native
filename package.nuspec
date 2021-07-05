@@ -34,9 +34,9 @@
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Ship-macosx"/>
 
     <!-- iOS Release jsbundle -->
-    <file src="apps\ios\dist\index.ios.jsbundle" target="ios\index.bundle"/>
+    <file src="apps\ios\dist\index.ios.jsbundle" />
 
     <!-- macOS Release jsbundle -->
-    <file src="apps\macos\dist\index.macos.jsbundle" target="macos\index.bundle"/>
+    <file src="apps\macos\dist\index.macos.jsbundle" />
   </files>
 </package>

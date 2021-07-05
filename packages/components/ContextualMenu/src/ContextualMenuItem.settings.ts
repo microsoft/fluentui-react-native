@@ -22,19 +22,19 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
       },
     },
     content: {},
-    icon: {},
+    icon: {style: { marginEnd: 5 }},
     stack: {
       style: {
         display: 'flex',
-        paddingStart: 16,
-        paddingEnd: 16,
+        paddingStart: 7,
+        paddingEnd: 7,
         alignItems: 'center',
         flexDirection: 'row',
         alignSelf: 'flex-start',
         minHeight: 32,
         minWidth: 80,
-        justifyContent: 'center',
-      },
+        justifyContent: 'flex-start'
+      }
     },
     _precedence: ['focused', 'hovered', 'pressed', 'disabled'],
     _overrides: {

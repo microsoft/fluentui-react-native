@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 25 Jun 2021 19:39:16 GMT",
+      "tag": "@fluentui-react-native/tester_v0.29.0",
+      "version": "0.29.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add chevron to submenu",
+            "author": "lehon@microsoft.com",
+            "commit": "c02e69f9e9ac03db75d410794beaa2cd0ab644a6",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Jun 2021 18:34:06 GMT",
+      "tag": "@fluentui-react-native/tester_v0.28.0",
+      "version": "0.28.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @rnx-kit/cli to 0.5.27",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "e5870bb5f489a449043c227c6f4efd42ae6649b0",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Jun 2021 06:21:11 GMT",
+      "tag": "@fluentui-react-native/tester_v0.28.0",
+      "version": "0.28.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "📦 applying package updates ***NO_CI***",
+            "author": "tamasane@gmail.com",
+            "commit": "592cd8a40cc814696cbb59b93d5801089cec276f",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Jun 2021 18:53:56 GMT",
       "tag": "@fluentui-react-native/tester_v0.27.0",
       "version": "0.27.0",

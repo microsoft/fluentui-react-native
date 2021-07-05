@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-shimmer",
   "entries": [
     {
+      "date": "Wed, 30 Jun 2021 05:42:19 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.3.5",
+      "version": "0.3.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix bug where Shimmer didn't update with appearance changes",
+            "author": "sanajmi@microsoft.com",
+            "commit": "6a3c8570d00c35fcd9aa5a135f28eef3e4213eb6",
+            "package": "@fluentui-react-native/experimental-shimmer"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 18 Jun 2021 00:38:19 GMT",
       "tag": "@fluentui-react-native/experimental-shimmer_v0.3.1",
       "version": "0.3.1",
