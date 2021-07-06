@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Tue, 06 Jul 2021 16:17:14 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.11.7",
+      "version": "0.11.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Removing Web SVG references for Checkbox",
+            "author": "safreibe@microsoft.com",
+            "commit": "3fb8d8f85d92199f387499ed23e69fa93b469dc1",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Jun 2021 19:39:16 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.11.6",
       "version": "0.11.6",

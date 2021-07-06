@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Fri, 18 Jun 2021 00:38:19 GMT and should not be manually modified.
+This log was last generated on Tue, 06 Jul 2021 14:30:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.8
+
+Tue, 06 Jul 2021 14:30:28 GMT
+
+### Patches
+
+- Define size of group and position of buttons for a11y (krsiler@microsoft.com)
 
 ## 0.10.3
 
