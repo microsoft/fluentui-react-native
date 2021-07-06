@@ -18,6 +18,7 @@ import { HOMEPAGE_FOCUSZONE_BUTTON, FocusZoneTest } from './TestComponents/Focus
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
+import { MenuButtonTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/MenuButton';
 
 export const tests: TestDescription[] = [
   {
@@ -114,5 +115,10 @@ export const tests: TestDescription[] = [
     name: 'ContextualMenu Test',
     component: ContextualMenuTest,
     testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON,
+  },
+  {
+    name: 'MenuButton Test',
+    component: MenuButtonTest,
+    testPage: HOMEPAGE_MENU_BUTTON
   },
 ];
