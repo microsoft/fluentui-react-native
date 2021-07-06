@@ -40,7 +40,9 @@ exports[`RadioButton component tests RadioButton default 1`] = `
         ]
       }
       accessibilityLabel="RadioButton1"
+      accessibilityPositionInSet={1}
       accessibilityRole="radio"
+      accessibilitySetSize={2}
       accessibilityState={
         Object {
           "disabled": false,
@@ -133,7 +135,9 @@ exports[`RadioButton component tests RadioButton default 1`] = `
         ]
       }
       accessibilityLabel="RadioButton2"
+      accessibilityPositionInSet={2}
       accessibilityRole="radio"
+      accessibilitySetSize={2}
       accessibilityState={
         Object {
           "disabled": false,

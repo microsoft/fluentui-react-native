@@ -11,7 +11,9 @@ exports[`RadioButton component tests RadioButton default 1`] = `
     ]
   }
   accessibilityLabel="Default Button"
+  accessibilityPositionInSet={0}
   accessibilityRole="radio"
+  accessibilitySetSize={0}
   accessibilityState={
     Object {
       "disabled": false,

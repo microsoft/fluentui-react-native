@@ -103,7 +103,7 @@ export const Checkbox = compose<ICheckboxType>({
 
   render: (Slots: ISlots<ICheckboxSlotProps>, renderData: ICheckboxRenderData, ...children: React.ReactNode[]) => {
     // SVG-based icons are not available on all platforms yet
-    const svgIconsEnabled = ['ios', 'macos', 'web', 'android'].includes(Platform.OS as string);
+    const svgIconsEnabled = ['ios', 'macos', 'android'].includes(Platform.OS as string);
     return (
       <Slots.root>
         {renderData?.state.boxAtEnd && <Slots.content />}
