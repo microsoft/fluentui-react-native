@@ -11,7 +11,7 @@ PODS:
     - ReactCommon/turbomodule/core (= 0.63.36)
   - FluentUI-React-Native-Avatar (0.9.4):
     - MicrosoftFluentUI (= 0.0.19)
-    - MicrosoftFluentUIVnext/Avatar_ios (= 0.0.4)
+    - MicrosoftFluentUI/Avatar_ios (= 0.0.19)
     - React
   - FluentUI-React-Native-Button (0.6.6):
     - MicrosoftFluentUI (= 0.0.19)
@@ -440,7 +440,7 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 0a9070829baaf7af315d4b85e992f24315ee0588
   FBReactNativeSpec: e41705afe0a17d636081a7c077d34caf205ca13d
-  FluentUI-React-Native-Avatar: 71c1b690452977792ee70f3f91ec584a61fea99c
+  FluentUI-React-Native-Avatar: 84f5536a51050bf5dec172ad3534fc09d24ff116
   FluentUI-React-Native-Button: 7625be63f6f5903c398a0cc7b34d45fdf156be25
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: 1cd5ab01ac09a35978694130710ac317bdcbaed1

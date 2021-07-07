@@ -11,7 +11,7 @@ PODS:
     - ReactCommon/turbomodule/core (= 0.63.4)
   - FluentUI-React-Native-Avatar (0.9.4):
     - MicrosoftFluentUI (= 0.0.19)
-    - MicrosoftFluentUIVnext/Avatar_ios (= 0.0.4)
+    - MicrosoftFluentUI/Avatar_ios (= 0.0.19)
     - React
   - FluentUI-React-Native-Button (0.6.6):
     - MicrosoftFluentUI (= 0.0.19)
@@ -181,9 +181,6 @@ PODS:
     - MicrosoftFluentUI/EasyTapButton_ios
     - MicrosoftFluentUI/Label_ios
   - MicrosoftFluentUI/Utilities_ios (0.0.19)
-  - MicrosoftFluentUIVnext/Avatar_ios (0.0.4):
-    - MicrosoftFluentUIVnext/Core_ios
-  - MicrosoftFluentUIVnext/Core_ios (0.0.4)
   - QRCodeReader.swift (10.1.0)
   - RCTRequired (0.63.4)
   - RCTTypeSafety (0.63.4):
@@ -465,7 +462,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/rdeassis/cocoapods-repo.git:
     - MicrosoftFluentUI
-    - MicrosoftFluentUIVnext
   trunk:
     - boost-for-react-native
     - QRCodeReader.swift
@@ -546,13 +542,12 @@ SPEC CHECKSUMS:
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
-  FluentUI-React-Native-Avatar: 71c1b690452977792ee70f3f91ec584a61fea99c
+  FluentUI-React-Native-Avatar: 84f5536a51050bf5dec172ad3534fc09d24ff116
   FluentUI-React-Native-Button: 7625be63f6f5903c398a0cc7b34d45fdf156be25
   FluentUI-React-Native-Date-Picker: 0495297af8ee1383a43f8c5d890b8a5c6abd1cf9
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   MicrosoftFluentUI: 1cd5ab01ac09a35978694130710ac317bdcbaed1
-  MicrosoftFluentUIVnext: 00bcbaeaf9d719bc8ea29cf9ce340a02c982a7a8
   QRCodeReader.swift: 373a389fe9a22d513c879a32a6f647c58f4ef572
   RCTRequired: 082f10cd3f905d6c124597fd1c14f6f2655ff65e
   RCTTypeSafety: 8c9c544ecbf20337d069e4ae7fd9a377aadf504b
