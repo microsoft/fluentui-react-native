@@ -31,7 +31,8 @@
     "@fluentui-react-native/tokens": ">=0.9.3 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.8.2 <1.0.0",
     "@uifabricshared/foundation-settings": ">=0.9.1 <1.0.0",
-    "react-native-svg": "^12.1.1"
+    "react-native-svg": "^12.1.1",
+    "@fluentui-react-native/pressable": ">=0.6.9 <1.0.0"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "^0.63.7",
