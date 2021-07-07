@@ -53,7 +53,7 @@
     "@wdio/sync": "5.20.1",
     "allure-commandline": "2.13.0",
     "appium": "1.17.1",
-    "metro-config": "^0.58.0",
+    "metro-config": "^0.59.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "~16.13.1",
