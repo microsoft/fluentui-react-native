@@ -7,18 +7,18 @@ it('ContextualMenu default props', () => {
   const menuItems: ContextualMenuItemProps[] = [
     {
       itemKey: '1',
-      text: 'MenuItem 1'
+      text: 'MenuItem 1',
     },
     {
       itemKey: '2',
-      text: 'MenuItem 2'
+      text: 'MenuItem 2',
     },
     {
       itemKey: '3',
       text: 'MenuItem 3',
-      disabled: true
-    }
-  ]
+      disabled: true,
+    },
+  ];
   const tree = renderer.create(<MenuButton content="Standard MenuButton" menuItems={menuItems} />).toJSON();
   expect(tree).toMatchSnapshot();
 });

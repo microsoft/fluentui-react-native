@@ -26,24 +26,24 @@ const menuButton: React.FunctionComponent<{}> = () => {
     {
       itemKey: '1',
       text: 'MenuItem 1',
-      icon: testImage
+      icon: testImage,
     },
     {
       itemKey: '2',
-      text: 'MenuItem 2'
+      text: 'MenuItem 2',
     },
     {
       itemKey: '3',
       text: 'MenuItem 3',
-      disabled: true
-    }
-  ]
+      disabled: true,
+    },
+  ];
 
   const contextualMenuProps: ContextualMenuProps = {
     accessibilityLabel: 'MenuButton',
     shouldFocusOnMount: focusOnMount,
-    shouldFocusOnContainer: focusOnContainer
-  }
+    shouldFocusOnContainer: focusOnContainer,
+  };
 
   return (
     <View>
@@ -71,7 +71,7 @@ const menuButton: React.FunctionComponent<{}> = () => {
               <Text style={{ color: 'blue' }}>none</Text>
             )}
           </Text>
-          <MenuButton content="Standard MenuButton" menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps}/>
+          <MenuButton content="Standard MenuButton" menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps} />
           <Text>Disabled MenuButton</Text>
           <MenuButton disabled content="Disabled MenuButton" menuItems={menuItems} />
         </View>
@@ -85,7 +85,7 @@ const menuButtonSections: TestSection[] = [
     name: 'Standard MenuButton',
     testID: MENU_BUTTON_TESTPAGE,
     component: menuButton,
-  }
+  },
 ];
 
 export const MenuButtonTest: React.FunctionComponent<{}> = () => {

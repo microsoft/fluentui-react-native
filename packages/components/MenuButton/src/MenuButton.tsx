@@ -1,11 +1,10 @@
 /** @jsx withSlots */
-import React, {useRef, useState, useCallback} from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import { Button } from '@fluentui-react-native/button';
 import { ContextualMenu, ContextualMenuItem } from '@fluentui-react-native/contextual-menu';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { View } from 'react-native';
 
 import {
   MenuButtonName,
@@ -34,7 +33,7 @@ export const MenuButton = compose<MenuButtonType>({
 
     const state: MenuButtonState = {
       context: {
-        showContextualMenu: !!showContextualMenu
+        showContextualMenu: !!showContextualMenu,
       },
     };
 
@@ -47,19 +46,19 @@ export const MenuButton = compose<MenuButtonType>({
         disabled,
         icon,
         componentRef: stdBtnRef,
-        onClick: toggleShowContextualMenu
+        onClick: toggleShowContextualMenu,
       },
       contextualMenu: {
         onItemClick,
         target: stdBtnRef,
         onDismiss,
         setShowMenu: toggleShowContextualMenu,
-        ...contextualMenu
+        ...contextualMenu,
       },
       contextualMenuItems: {
-        menuItems
+        menuItems,
       },
-      ContextualMenuItem
+      ContextualMenuItem,
     });
 
     return { slotProps, state };
@@ -68,7 +67,7 @@ export const MenuButton = compose<MenuButtonType>({
     root: React.Fragment,
     button: { slotType: Button as React.ComponentType<object> },
     contextualMenu: { slotType: ContextualMenu as React.ComponentType<object> },
-    contextualMenuItems: View
+    contextualMenuItems: React.Fragment,
   },
   styles: {},
   render: (Slots: ISlots<MenuButtonSlotProps>, renderData: MenuButtonRenderData) => {
@@ -76,21 +75,21 @@ export const MenuButton = compose<MenuButtonType>({
       return null;
     }
     const context = renderData.state!.context;
-    const menuItems = renderData.slotProps!.contextualMenuItems && renderData.slotProps.contextualMenuItems.menuItems || [];
+    const menuItems = (renderData.slotProps!.contextualMenuItems && renderData.slotProps.contextualMenuItems.menuItems) || [];
 
     return (
       <Slots.root>
         <Slots.button />
-        {
-          context.showContextualMenu && (
-            <Slots.contextualMenu>
-              {menuItems.map(menuItem => <ContextualMenuItem key={menuItem.itemKey} {...menuItem} />)}
-            </Slots.contextualMenu>
-          )
-        }
+        {context.showContextualMenu && (
+          <Slots.contextualMenu>
+            {menuItems.map((menuItem) => (
+              <ContextualMenuItem key={menuItem.itemKey} {...menuItem} />
+            ))}
+          </Slots.contextualMenu>
+        )}
       </Slots.root>
     );
   },
 });
 
-export default MenuButton
+export default MenuButton;
