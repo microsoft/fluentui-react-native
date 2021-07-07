@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Set fontsize to undefined if the fontSize is zero",
+  "packageName": "@fluentui-react-native/persona",
+  "email": "email not defined",
+  "dependentChangeType": "patch",
+  "date": "2021-07-07T22:45:35.680Z"
+}
