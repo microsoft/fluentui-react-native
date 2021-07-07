@@ -1,6 +1,7 @@
 /** @jsx withSlots */
 import React, {useRef, useState, useCallback} from 'react';
-import { Button, ContextualMenu, ContextualMenuItem } from '@fluentui/react-native';
+import { Button } from '@fluentui-react-native/button';
+import { ContextualMenu, ContextualMenuItem } from '@fluentui-react-native/contextual-menu';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';

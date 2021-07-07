@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ContextualMenuItemProps } from '@fluentui/react-native';
+import { ContextualMenuItemProps } from '@fluentui-react-native/contextual-menu';
 import { MenuButton } from '..';
 import * as renderer from 'react-test-renderer';
 
