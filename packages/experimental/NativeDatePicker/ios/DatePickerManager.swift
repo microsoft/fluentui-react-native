@@ -32,8 +32,8 @@ public class DatePickerManager: NSObject {
             // use UIApplication.shared.keyWindow?.rootViewController, because
             // keyWindow is deprecated.  We need to pick one of what could be
             // multiple key windows.
-            guard let viewController = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController else {
-                fatalError("Unable to get a UIViewController from current shared application context.")
+			guard let viewController = RCTPresentedViewController() else {
+                fatalError("Unable to get a UIViewController from React Native.")
             }
 
             let picker = DateTimePicker()
