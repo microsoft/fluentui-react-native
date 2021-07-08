@@ -27,7 +27,6 @@ RCT_CUSTOM_VIEW_PROPERTY(focusZoneDirection, NSString, RCTFocusZone)
 	}
 	else
 	{
-		AssertTag(json == nil, 0x228146d8 /* tag_86u1y */);
 		[view setFocusZoneDirection:[defaultView focusZoneDirection]];
 	}
 }
@@ -40,19 +39,17 @@ RCT_CUSTOM_VIEW_PROPERTY(navigateAtEnd, NSString, RCTFocusZone)
 	}
 	else if ([json isEqualToString:@"NavigateWrap"] || [json isEqualToString:@"NavigateContinue"])
 	{
-		AssertTag(false, 0x228146d7 /* tag_86u1x */);	// NYI
 		[view setNavigateAtEnd:NavigateStopAtEnds];
 	}
 	else
 	{
-		AssertTag(json == nil, 0x228146d6 /* tag_86u1w */);
 		[view setNavigateAtEnd:[defaultView navigateAtEnd]];
 	}
 }
 
 - (RCTView *)view
 {
-  return [[RCTFocusZone new] autorelease];
+  return [RCTFocusZone new];
 }
 
 @end

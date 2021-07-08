@@ -23,12 +23,6 @@ static const CGFloat FocusZoneBuffer = 3;
 
 @implementation RCTFocusZone
 
-static bool ConsiderSubviewsInFocusZone()
-{
-	static const Mso::AB::Optimized::ChangeGate considerSubviewsInFocusZone { Mso::AB::TeamEnum::Word, "ConsiderSubviewsInFocusZone"_S };
-	return considerSubviewsInFocusZone;
-}
-
 static inline CGFloat GetDistanceBetweenPoints(NSPoint point1, NSPoint point2)
 {
 	NSPoint delta = NSMakePoint(point1.x - point2.x, point1.y - point2.y);
@@ -65,7 +59,7 @@ static NSView *GetFirstResponder(NSWindow *window)
 
 static void EnumerateFocusableViews(NSView *root, void (^block)(NSView *, BOOL *))
 {
-	NSMutableArray<NSView *> *queue = [[NSMutableArray new] autorelease];
+	NSMutableArray<NSView *> *queue = [NSMutableArray array];
 	[queue addObject:root];
 
 	while ([queue count] > 0)
@@ -82,17 +76,7 @@ static void EnumerateFocusableViews(NSView *root, void (^block)(NSView *, BOOL *
 				break;
 			}
 		}
-		else
-		{
-			if (!ConsiderSubviewsInFocusZone())
-			{
-				[queue addObjectsFromArray:[view subviews]];
-			}
-		}
-		if (ConsiderSubviewsInFocusZone())
-		{
-			[queue addObjectsFromArray:[view subviews]];
-		}
+		[queue addObjectsFromArray:[view subviews]];
 	}
 }
 
@@ -154,7 +138,7 @@ static FocusZoneAction GetActionForEvent(NSEvent *event)
 
 		if (horizontal)
 		{
-			if (ConsiderSubviewsInFocusZone() && subviewRelationExists)
+			if (subviewRelationExists)
 			{
 				skip = skip
 					|| (next && NSMinX(candidateRect) < NSMinX(firstResponderRect))
@@ -173,7 +157,7 @@ static FocusZoneAction GetActionForEvent(NSEvent *event)
 		}
 		else
 		{
-			if (ConsiderSubviewsInFocusZone() && subviewRelationExists)
+			if (subviewRelationExists)
 			{
 				skip = skip
 					|| (next && NSMinY(candidateRect) < NSMinY(firstResponderRect))
