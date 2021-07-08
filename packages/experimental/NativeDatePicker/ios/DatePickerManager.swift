@@ -29,7 +29,7 @@ public class DatePickerManager: NSObject {
         DispatchQueue.main.async {
             // We need a UIViewController to present the actual DateTimePicker view.
 			guard let viewController = RCTPresentedViewController() else {
-                fatalError("Unable to get the current UIViewController from React Native.")
+                preconditionFailure("Unable to get the current UIViewController from React Native.")
             }
 
             let picker = DateTimePicker()
