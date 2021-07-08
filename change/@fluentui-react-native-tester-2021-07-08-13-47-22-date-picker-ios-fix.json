@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Possible fix for wrong UIViewController in Excel card view",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "chripear@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-07-08T20:47:22.211Z"
+}
