@@ -6,5 +6,11 @@
       "appKey": "FluentTester",
       "displayName": "FluentTester"
     }
-  ]
+  ],
+  "resources": {
+    "windows": [
+      "dist/assets",
+      "dist/index.windows.bundle"
+    ]
+  }
 }
