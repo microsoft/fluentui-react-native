@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Making the default adapters a union of all the platforms",
+  "packageName": "@fluentui-react-native/adapters",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-07-08T02:47:52.662Z"
+}
