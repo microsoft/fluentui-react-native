@@ -16,6 +16,7 @@ namespace winrt::ReactNativeExpander::implementation {
     ExpanderView::ExpanderView(winrt::IReactContext const& reactContext) : m_reactContext(reactContext) {
 
         auto expander = Microsoft::UI::Xaml::Controls::Expander();
+        this->VerticalContentAlignment(Windows::UI::Xaml::VerticalAlignment::Top);
         this->Content(expander);
 
         RegisterEvents();
@@ -106,18 +107,6 @@ namespace winrt::ReactNativeExpander::implementation {
                     expander.Width(propertyValue.AsDouble());
                 }
             }
-            //else if (propertyName == "collapsedHeight") {
-            //    if (!propertyValue.IsNull()) {
-            //        m_collapsedHeight = propertyValue.AsInt64();
-
-            //        this->Height(m_collapsedHeight);
-            //    }
-            //}
-            //else if (propertyName == "expandedHeight") {
-            //    if (!propertyValue.IsNull()) {
-            //        m_expandedHeight = propertyValue.AsInt64();
-            //    }
-            //}
         }
 
         m_updating = false;

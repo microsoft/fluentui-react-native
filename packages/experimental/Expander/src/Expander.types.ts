@@ -5,8 +5,9 @@ export const expanderName = 'Expander';
 
 /*
   * General notes:
-  * The Expander header has been limited to hold an image and a title
-  * The Expander content will be consumed as child elements of the Expander component
+  * The Expander header will be consumed as the first child element of the Expander
+  * The Expander content will be consumed as the second child element of the Expander
+  * To include more complex layouts for the header or content, wrap multiple header/content elements inside of a <View>
   */
 
 export interface ExpanderProps {
@@ -19,11 +20,11 @@ export interface ExpanderProps {
    */
   expanded?: boolean;
   /*
-   * temp
+   * TODO: reference id for the header component
    */
   headerRef?: number;
   /*
-   * temp
+   * TODO: reference id for the content component
    */
   contentRef?: number;
   /*
@@ -36,11 +37,11 @@ export interface ExpanderProps {
    */
   expanderStyle?: string;
   /*
-   * temp
+   * Height for the Expander when expanded
    */
   expandedHeight?: number;
   /*
-   * temp
+   * Height for the Expander when collapsed
    */
   collapsedHeight?: number;
   /*
@@ -51,7 +52,6 @@ export interface ExpanderProps {
    * A callback to call on Expander expanding event
    */
   onExpanding?: () => void;
-  onChange: (expanded: boolean) => void;
 }
 
 export interface ExpanderTokens {

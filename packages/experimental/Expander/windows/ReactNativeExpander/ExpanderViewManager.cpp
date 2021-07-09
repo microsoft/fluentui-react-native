@@ -84,19 +84,22 @@ namespace winrt::ReactNativeExpander::implementation {
             if (index == 0) {
                 expander.Header(content);
             }
-            else {
+            else if (index == 1) {
                 expander.Content(content);
             }
+            else {
+                m_reactContext.CallJSFunction(
+                    L"RCTLog",
+                    L"logToConsole",
+                    MakeJSValueArgWriter("warn", "React Native for Windows does not yet support nesting more than two components under <Expander>.\nThe first component will be the Expander header, and the second will be the Expander content."));
+            }
         }
-        //else {
-        //    // #6315 Text can embed non-text elements. Fail gracefully instead of crashing if that happens
-        //    textBlock.Inlines().InsertAt(static_cast<uint32_t>(index), winrt::Run());
-        //    GetReactContext().CallJSFunction(
-        //        "RCTLog",
-        //        "logToConsole",
-        //        folly::dynamic::array(
-        //            "warn", "React Native for Windows does not yet support nesting non-Text components under <Text>"));
-        //}
+        else {
+            m_reactContext.CallJSFunction(
+                L"RCTLog",
+                L"logToConsole",
+                MakeJSValueArgWriter("warn", "React Native for Windows does not yet support nesting non-FrameworkElement components under <Expander>"));
+        }
 
         return;
     }
