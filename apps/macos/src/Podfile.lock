@@ -435,18 +435,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost-for-react-native: dabda8622e76020607c2ae1e65cc0cda8b61479d
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
-<<<<<<< HEAD
-  FBLazyVector: 87ca368919ae0ec70816fb8a42252ef59dc05c94
-  FBReactNativeSpec: 7c0591658d85effad209fc4f45b6c9760f9e5842
-  FluentUI-React-Native-Apple-Theme: a1a28c2ddcc16b279b01a2731da6337b3982bc16
-  FluentUI-React-Native-Avatar: 5d5bcc8bd58079d32f82c398fd032cd77d43cddc
-  FluentUI-React-Native-Button: 3576b2637ae9f2dc45db1f03f5fadd2d8431dfa2
-=======
   FBLazyVector: 0a9070829baaf7af315d4b85e992f24315ee0588
   FBReactNativeSpec: e41705afe0a17d636081a7c077d34caf205ca13d
   FluentUI-React-Native-Avatar: 470009fedabda6b7f004a0226ea9367b8f889a3f
   FluentUI-React-Native-Button: 545650797683b791f6818d856cddf96c0b4d091a
->>>>>>> 6d448c7db02afaf988ace4d49681982d9a564812
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: 6b3bfd52b232e9abc5cb228b9761a5f42869f4d3
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa

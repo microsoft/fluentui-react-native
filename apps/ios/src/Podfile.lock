@@ -530,15 +530,9 @@ SPEC CHECKSUMS:
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
-<<<<<<< HEAD
-  FluentUI-React-Native-Apple-Theme: a1a28c2ddcc16b279b01a2731da6337b3982bc16
-  FluentUI-React-Native-Avatar: 5d5bcc8bd58079d32f82c398fd032cd77d43cddc
-  FluentUI-React-Native-Button: 3576b2637ae9f2dc45db1f03f5fadd2d8431dfa2
-=======
   FluentUI-React-Native-Avatar: 470009fedabda6b7f004a0226ea9367b8f889a3f
   FluentUI-React-Native-Button: 1534f86aab1760aa74e74520b85dfd113aabbb35
   FluentUI-React-Native-Date-Picker: af57505cfeaf1b97a0d2b12c46af26a189d892e8
->>>>>>> 6d448c7db02afaf988ace4d49681982d9a564812
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   MicrosoftFluentUI: 6b3bfd52b232e9abc5cb228b9761a5f42869f4d3
