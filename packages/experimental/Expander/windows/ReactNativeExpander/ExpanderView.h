@@ -15,6 +15,8 @@ namespace winrt::ReactNativeExpander::implementation {
         Microsoft::ReactNative::IReactContext m_reactContext{ nullptr };
         bool m_updating{ false };
 
+        bool m_expanded{ false };
+
         Microsoft::UI::Xaml::Controls::Expander::Collapsed_revoker m_expanderCollapsedRevoker{};
         Microsoft::UI::Xaml::Controls::Expander::Expanding_revoker m_expanderExpandingRevoker{};
 

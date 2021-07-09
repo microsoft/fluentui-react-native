@@ -37,11 +37,13 @@ namespace winrt::ReactNativeExpander::implementation {
         // TODO: finish updating props when Expander.types are further defined
         nativeProps.Insert(L"expandDirection", ViewManagerPropertyType::String);
         nativeProps.Insert(L"expanded", ViewManagerPropertyType::Boolean);
-        nativeProps.Insert(L"headerTitle", ViewManagerPropertyType::String);
-        nativeProps.Insert(L"headerImage", ViewManagerPropertyType::String);
+        nativeProps.Insert(L"headerRef", ViewManagerPropertyType::Number);
+        nativeProps.Insert(L"contentRef", ViewManagerPropertyType::Number);
         nativeProps.Insert(L"enabled", ViewManagerPropertyType::Boolean);
         nativeProps.Insert(L"expanderStyle", ViewManagerPropertyType::String);
         nativeProps.Insert(L"accentColor", ViewManagerPropertyType::String);
+        nativeProps.Insert(L"expandedHeight", ViewManagerPropertyType::Number);
+        nativeProps.Insert(L"collapsedHeight", ViewManagerPropertyType::Number);
 
         return nativeProps.GetView();
     }
@@ -64,8 +66,8 @@ namespace winrt::ReactNativeExpander::implementation {
     ConstantProviderDelegate ExpanderViewManager::ExportedCustomDirectEventTypeConstants() noexcept {
         return [](winrt::IJSValueWriter const& constantWriter) {
             WriteCustomDirectEventTypeConstant(constantWriter, "onChange");
-            WriteCustomDirectEventTypeConstant(constantWriter, L"topCollapsed");
-            WriteCustomDirectEventTypeConstant(constantWriter, L"topExpanding");
+            WriteCustomDirectEventTypeConstant(constantWriter, L"Collapsed");
+            WriteCustomDirectEventTypeConstant(constantWriter, L"Expanding");
         };
     }
 
@@ -79,17 +81,22 @@ namespace winrt::ReactNativeExpander::implementation {
         auto expander = expanderWrapper.try_as<Microsoft::UI::Xaml::Controls::Expander>();
 
         if (auto content = child.try_as<winrt::Windows::UI::Xaml::FrameworkElement>()) {
-            expander.Content(content);
+            if (index == 0) {
+                expander.Header(content);
+            }
+            else {
+                expander.Content(content);
+            }
         }
-    //else {
-    //    // #6315 Text can embed non-text elements. Fail gracefully instead of crashing if that happens
-    //    textBlock.Inlines().InsertAt(static_cast<uint32_t>(index), winrt::Run());
-    //    GetReactContext().CallJSFunction(
-    //        "RCTLog",
-    //        "logToConsole",
-    //        folly::dynamic::array(
-    //            "warn", "React Native for Windows does not yet support nesting non-Text components under <Text>"));
-    //}
+        //else {
+        //    // #6315 Text can embed non-text elements. Fail gracefully instead of crashing if that happens
+        //    textBlock.Inlines().InsertAt(static_cast<uint32_t>(index), winrt::Run());
+        //    GetReactContext().CallJSFunction(
+        //        "RCTLog",
+        //        "logToConsole",
+        //        folly::dynamic::array(
+        //            "warn", "React Native for Windows does not yet support nesting non-Text components under <Text>"));
+        //}
 
         return;
     }
@@ -101,5 +108,4 @@ namespace winrt::ReactNativeExpander::implementation {
     void ExpanderViewManager::RemoveChildAt(winrt::Windows::UI::Xaml::FrameworkElement const& parent, int64_t index) noexcept {
         return;
     }
-
 }

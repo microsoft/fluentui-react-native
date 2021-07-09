@@ -22,24 +22,22 @@ namespace winrt::ReactNativeExpander::implementation {
     }
 
     void ExpanderView::RegisterEvents() {
-        // TODO: this might now work, need to access the content here (Expander)
+
         auto expander = (this->Content()).try_as<Microsoft::UI::Xaml::Controls::Expander>();
 
-        //m_expanderCollapsedRevoker = expander.Collapsed(winrt::auto_revoke,
-        //    [ref = get_weak()](auto const& sender, auto const& args) {
-        //    if (auto self = ref.get()) {
-        //        // TODO: issue here - pass in self as an argument to the OnCollapsed method
-        //        self->OnCollapsed(sender, args);
-        //    }
-        //});
+        m_expanderCollapsedRevoker = expander.Collapsed(winrt::auto_revoke,
+            [ref = get_weak()](auto const& sender, auto const& args) {
+            if (auto self = ref.get()) {
+                self->OnCollapsed(sender, args);
+            }
+        });
 
-        //m_expanderExpandingRevoker = expander.Expanding(winrt::auto_revoke,
-        //    [ref = get_weak()](auto const& sender, auto const& args) {
-        //    if (auto self = ref.get()) {
-        //        // TODO: issue here - pass in self as an argument to the OnExpanding method
-        //        self->OnExpanding(sender, args);
-        //    }
-        //});
+        m_expanderExpandingRevoker = expander.Expanding(winrt::auto_revoke,
+            [ref = get_weak()](auto const& sender, auto const& args) {
+            if (auto self = ref.get()) {
+                self->OnExpanding(sender, args);
+            }
+        });
     }
 
     void ExpanderView::UpdateProperties(winrt::IJSValueReader const& reader) {
@@ -71,22 +69,24 @@ namespace winrt::ReactNativeExpander::implementation {
             else if (propertyName == "expanded") {
                 if (propertyValue.IsNull()) {
                     expander.ClearValue(Microsoft::UI::Xaml::Controls::Expander::IsExpandedProperty());
+
+                    m_expanded = false;
                 }
-                else {
-                    expander.IsExpanded(propertyValue.AsBoolean());
+                else if (expander.IsExpanded() != propertyValue.AsBoolean()) {
+
+                    m_expanded = propertyValue.AsBoolean();
+
+                    expander.IsExpanded(m_expanded);
                 }
             }
-            else if (propertyName == "headerTitle") {
+            /*else if (propertyName == "headerRef") {
                 if (propertyValue.IsNull()) {
                     expander.ClearValue(Microsoft::UI::Xaml::Controls::Expander::HeaderProperty());
                 }
                 else {
                     expander.Header(winrt::box_value(to_hstring(propertyValue.AsString())));
                 }
-            }
-            else if (propertyName == "headerImage") {
-                // do stuff
-            }
+            }*/
             else if (propertyName == "enabled") {
                 if (propertyValue.IsNull()) {
                     expander.IsEnabled(true);
@@ -101,6 +101,23 @@ namespace winrt::ReactNativeExpander::implementation {
             else if (propertyName == "accentColor") {
                 // do stuff
             }
+            else if (propertyName == "width") {
+                if (!propertyValue.IsNull()) {
+                    expander.Width(propertyValue.AsDouble());
+                }
+            }
+            //else if (propertyName == "collapsedHeight") {
+            //    if (!propertyValue.IsNull()) {
+            //        m_collapsedHeight = propertyValue.AsInt64();
+
+            //        this->Height(m_collapsedHeight);
+            //    }
+            //}
+            //else if (propertyName == "expandedHeight") {
+            //    if (!propertyValue.IsNull()) {
+            //        m_expandedHeight = propertyValue.AsInt64();
+            //    }
+            //}
         }
 
         m_updating = false;
@@ -112,6 +129,17 @@ namespace winrt::ReactNativeExpander::implementation {
 
             m_reactContext.DispatchEvent(
                 *this,
+                L"topChange",
+                [&](winrt::Microsoft::ReactNative::IJSValueWriter const& eventDataWriter) noexcept {
+                    eventDataWriter.WriteObjectBegin();
+                    {
+                        WriteProperty(eventDataWriter, L"expanded", false);
+                    }
+                    eventDataWriter.WriteObjectEnd();
+                });
+
+            m_reactContext.DispatchEvent(
+                *this,
                 L"topCollapsed",
                 [&](winrt::Microsoft::ReactNative::IJSValueWriter const& eventDataWriter) noexcept {});
         }
@@ -120,6 +148,17 @@ namespace winrt::ReactNativeExpander::implementation {
     void ExpanderView::OnExpanding(winrt::Windows::Foundation::IInspectable const& sender,
                           Microsoft::UI::Xaml::Controls::ExpanderExpandingEventArgs const& args) {
         if (!m_updating) {
+
+            m_reactContext.DispatchEvent(
+                *this,
+                L"topChange",
+                [&](winrt::Microsoft::ReactNative::IJSValueWriter const& eventDataWriter) noexcept {
+                    eventDataWriter.WriteObjectBegin();
+                    {
+                        WriteProperty(eventDataWriter, L"expanded", true);
+                    }
+                    eventDataWriter.WriteObjectEnd();
+                });
 
             m_reactContext.DispatchEvent(
                 *this,
