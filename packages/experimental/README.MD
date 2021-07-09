@@ -3,3 +3,4 @@
 [@fluentui-react-native/use-slots](https://github.com/microsoft/fluentui-react-native/blob/master/packages/experimental/use-slots/README.md)  
 [@fluentui-react-native/theme](https://github.com/microsoft/fluentui-react-native/blob/master/packages/experimental/theme/README.md)  
 [@fluentui-react-native/merge-props](https://github.com/microsoft/fluentui-react-native/blob/master/packages/framework/merge-props/README.md)  
+[@fluentui-react-native/memo-cache](https://github.com/microsoft/fluentui-react-native/blob/master/packages/framework/memo-cache/README.md)
