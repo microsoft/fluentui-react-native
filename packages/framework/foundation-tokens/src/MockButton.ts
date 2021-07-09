@@ -8,7 +8,7 @@ import {
   standardForegroundColorTokens,
   standardBackgroundColorTokens,
   standardBorderTokens,
-  standardCaptionTokens
+  standardCaptionTokens,
 } from './MockTokens';
 import { IMockBaseProps, mockCreate, stockFakeComponent } from './MockComponent';
 import { IComponentSettings } from '@uifabricshared/foundation-settings';
@@ -43,11 +43,11 @@ export type IButtonSettings = IComponentSettings<IMockButtonSlotProps> & { token
  */
 export const MockText = mockCreate<IMockTextProps, IMockTextSlotProps, IMockTextTokens & IMockForegroundColorTokens>({
   slots: {
-    root: stockFakeComponent
+    root: stockFakeComponent,
   },
   styles: {
-    root: [standardTextTokens, standardForegroundColorTokens]
-  }
+    root: [standardTextTokens, standardForegroundColorTokens],
+  },
 });
 
 /**
@@ -59,12 +59,12 @@ export const MockButton = mockCreate<IMockButtonCustomProps, IMockButtonSlotProp
     root: stockFakeComponent,
     content: MockText,
     subContent: stockFakeComponent,
-    icon: stockFakeComponent
+    icon: stockFakeComponent,
   },
   styles: {
     root: [standardBackgroundColorTokens, standardBorderTokens],
     content: [standardTextTokens, standardForegroundColorTokens],
     subContent: [standardTextTokens, standardCaptionTokens],
-    icon: [standardForegroundColorTokens]
-  }
+    icon: [standardForegroundColorTokens],
+  },
 });

@@ -58,7 +58,7 @@ export type NativeMethods = {
   measureLayout(
     relativeToNativeNode: number | React.ElementRef<HostComponent<any>>,
     onSuccess: MeasureLayoutOnSuccessCallback,
-    onFail?: () => void
+    onFail?: () => void,
   ): void;
   setNativeProps(nativeProps: object): void;
 };

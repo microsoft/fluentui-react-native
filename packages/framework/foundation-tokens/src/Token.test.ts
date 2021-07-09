@@ -11,8 +11,8 @@ const b1: IButtonSettings = {
     borderWidth: 1,
     borderRadius: 2,
     borderColor: '#c1c1c1',
-    captionColor: 'blue'
-  }
+    captionColor: 'blue',
+  },
 };
 
 const b1resolved: IButtonSettings = {
@@ -21,26 +21,26 @@ const b1resolved: IButtonSettings = {
       borderColor: '#c1c1c1',
       borderWidth: 1,
       borderRadius: 2,
-      backgroundColor: 'blue'
-    }
+      backgroundColor: 'blue',
+    },
   },
   content: {
     fontSize: 'large',
     fontWeight: 900,
-    color: 'buttonText'
+    color: 'buttonText',
   },
   subContent: {
     style: {
       fontSize: 14,
       fontWeight: 900,
-      color: 'blue'
-    }
+      color: 'blue',
+    },
   },
   icon: {
     style: {
-      color: 'yellow'
-    }
-  }
+      color: 'yellow',
+    },
+  },
 };
 
 const b1resolvedRecurse: IButtonSettings = {
@@ -49,8 +49,8 @@ const b1resolvedRecurse: IButtonSettings = {
       borderColor: '#c1c1c1',
       borderWidth: 1,
       borderRadius: 2,
-      backgroundColor: 'blue'
-    }
+      backgroundColor: 'blue',
+    },
   },
   content: {
     // note that these three values will get cleared by the content element, but remerged by the base class, this
@@ -61,21 +61,21 @@ const b1resolvedRecurse: IButtonSettings = {
     style: {
       fontSize: 14,
       fontWeight: 900,
-      color: 'yellow'
-    }
+      color: 'yellow',
+    },
   },
   subContent: {
     style: {
       fontSize: 14,
       fontWeight: 900,
-      color: 'blue'
-    }
+      color: 'blue',
+    },
   },
   icon: {
     style: {
-      color: 'yellow'
-    }
-  }
+      color: 'yellow',
+    },
+  },
 };
 
 describe('Token settings unit tests', () => {
@@ -96,7 +96,7 @@ describe('Token settings unit tests', () => {
     const resolved1 = MockButton({ content: 'button1' }, b1, theme, cache, false);
     const resolved2 = MockButton({ content: 'button2' }, b1, theme, cache, false);
     expect(resolved1).toEqual(resolved2);
-    Object.getOwnPropertyNames(resolved1).forEach(key => {
+    Object.getOwnPropertyNames(resolved1).forEach((key) => {
       expect(resolved1[key]).toBe(resolved2[key]);
     });
   });
@@ -106,7 +106,7 @@ describe('Token settings unit tests', () => {
     const resolved1 = MockButton({ content: 'button1' }, b1, theme, cache, false);
     const resolved2 = MockButton({ content: 'button2', color: 'buttonText' }, b1, theme, cache, false);
     expect(resolved1).toEqual(resolved2);
-    Object.getOwnPropertyNames(resolved1).forEach(key => {
+    Object.getOwnPropertyNames(resolved1).forEach((key) => {
       expect(resolved1[key]).toBe(resolved2[key]);
     });
   });
@@ -125,7 +125,7 @@ describe('Token settings unit tests', () => {
     const resolved1 = MockButton({ content: 'button1', borderRadius: 3, color: 'purple' }, b1, theme, cache, false);
     const resolved2 = MockButton({ content: 'button2', color: 'purple', borderRadius: 3 }, b1, theme, cache, false);
     expect(resolved1).toEqual(resolved2);
-    Object.getOwnPropertyNames(resolved1).forEach(key => {
+    Object.getOwnPropertyNames(resolved1).forEach((key) => {
       expect(resolved1[key]).toBe(resolved2[key]);
     });
   });

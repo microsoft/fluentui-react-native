@@ -15,31 +15,35 @@ export const Callout = compose<ICalloutType>({
   usePrepareProps: (props: ICalloutProps, useStyling: IUseComposeStyling<ICalloutType>) => {
     const { componentRef, target, ...rest } = props;
     const calloutRef = useViewCommandFocus(componentRef);
-    const [targetNativeTag, setTargetNativeTag] = React.useState<number>(undefined);
+    const [nativeTarget, setNativeTarget] = React.useState<number | string | null>(null);
 
     React.useLayoutEffect(() => {
-      if (target?.current) {
-        setTargetNativeTag(findNodeHandle(target.current));
+      if (typeof target === 'string') {
+        // Pass string type `target` directly
+        setNativeTarget(target);
+      } else if (target?.current) {
+        // Pass the tagID for a valid ref `target`
+        setNativeTarget(findNodeHandle(target.current));
       }
     }, [target]);
 
     const slotProps = mergeSettings<ICalloutSlotProps>(useStyling(props), {
       root: {
         ref: calloutRef,
-        target: targetNativeTag,
-        ...rest
-      }
+        ...(nativeTarget && { target: nativeTarget }),
+        ...rest,
+      },
     });
 
     return { slotProps };
   },
   settings: settings,
   slots: {
-    root: RCTCallout
+    root: RCTCallout,
   },
   styles: {
-    root: [backgroundColorTokens, borderTokens]
-  }
+    root: [backgroundColorTokens, borderTokens],
+  },
 });
 
 export default Callout;

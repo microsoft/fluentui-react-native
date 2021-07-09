@@ -24,11 +24,12 @@
     "change": "beachball change",
     "check-for-changed-files": "cd scripts && yarn fluentui-scripts check-for-modified-files",
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
-    "depcheck": "lage depcheck",
+    "depcheck": "rnx-dep-check && lage depcheck",
     "lint": "lage lint",
-    "preinstall": "node ./scripts/use-yarn-please.js",
-    "prettier": "cd scripts && yarn prettier",
     "postinstall": "node ./scripts/postinstall.js",
+    "preinstall": "node ./scripts/use-yarn-please.js",
+    "prettier": "lage prettier",
+    "prettier-fix": "lage prettier-fix",
     "publish:beachball": "beachball publish --bump-deps -m\"📦 applying package updates ***NO_CI***\"",
     "test": "lage test",
     "verify-api": "lage verify-api",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@fluentui/token-pipeline": "^0.3.7",
+    "@rnx-kit/dep-check": "^1.5.8",
     "beachball": "^1.35.0",
     "lage": ">=0.17.4 <1.0.0",
     "react-dom": "^16.13.1"

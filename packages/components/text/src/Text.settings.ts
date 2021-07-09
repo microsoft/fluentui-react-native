@@ -6,21 +6,21 @@ export const settings: IComposeSettings<ITextType> = [
   {
     tokens: {
       variant: 'secondaryStandard',
-      color: 'bodyText'
+      color: 'bodyText',
     },
     root: {
       style: {
-        margin: 0
-      } as TextStyle
+        margin: 0,
+      } as TextStyle,
     },
     _overrides: {
       disabled: {
         tokens: {
-          color: 'disabledText'
-        }
-      }
+          color: 'disabledText',
+        },
+      },
     },
-    _precedence: ['disabled']
+    _precedence: ['disabled'],
   },
-  textName
+  textName,
 ];

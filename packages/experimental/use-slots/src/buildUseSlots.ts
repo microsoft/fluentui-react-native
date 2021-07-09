@@ -34,12 +34,12 @@ function internalRender<TProps>(
   result: React.FunctionComponent<TProps> | TProps,
   extraProps: TProps,
   filter: (propsName: string) => boolean,
-  children: React.ReactNode[]
+  children: React.ReactNode[],
 ): JSX.Element | null {
   let props: TProps = typeof result === 'function' ? extraProps : mergeProps(result, extraProps);
-  const propsToRemove = filter ? Object.keys(props).filter(key => !filter(key)) : undefined;
+  const propsToRemove = filter ? Object.keys(props).filter((key) => !filter(key)) : undefined;
   if (propsToRemove?.length > 0) {
-    props = mergeProps(props, (Object.assign({}, ...propsToRemove.map(prop => ({ [prop]: undefined }))) as unknown) as TProps);
+    props = mergeProps(props, (Object.assign({}, ...propsToRemove.map((prop) => ({ [prop]: undefined }))) as unknown) as TProps);
   }
   return typeof result === 'function' ? (result as Function)(props, ...children) : React.createElement(slot, props, ...children);
 }
@@ -50,12 +50,18 @@ function getStagedRender<TProps>(slot: NativeReactType | ComposableFunction<TPro
 
 function buildSlotFunctions<TSlotProps>(
   slots: UseSlotOptions<TSlotProps>['slots'],
-  filters?: UseSlotOptions<TSlotProps>['filters']
+  filters?: UseSlotOptions<TSlotProps>['filters'],
 ): CachedState<TSlotProps> {
   const info: CachedState<TSlotProps> = { slots: {}, results: {} } as CachedState<TSlotProps>;
-  Object.keys(slots).forEach(slot => {
+  Object.keys(slots).forEach((slot) => {
     info.slots[slot] = (props: TSlotProps[keyof TSlotProps], ...children: React.ReactNode[]) => {
-      return internalRender<TSlotProps[keyof TSlotProps]>(slots[slot], info.results[slot], props, (filters && filters[slot]) || undefined, children);
+      return internalRender<TSlotProps[keyof TSlotProps]>(
+        slots[slot],
+        info.results[slot],
+        props,
+        (filters && filters[slot]) || undefined,
+        children,
+      );
     };
     info.slots[slot]._canCompose = true;
   });
@@ -72,7 +78,7 @@ export function buildUseSlots<TSlotProps>(options: UseSlotOptions<TSlotProps>): 
     const slotProps: TSlotProps = typeof useStyling === 'function' ? (useStyling as Function)(...args) : ((useStyling || {}) as TSlotProps);
 
     // for each slot go through and either cache the slot props or call part one render if it is staged
-    Object.keys(slots).forEach(slotName => {
+    Object.keys(slots).forEach((slotName) => {
       const props = slotProps[slotName];
       const staged = getStagedRender(slots[slotName]);
       state.results[slotName] = staged ? staged(props) : props;

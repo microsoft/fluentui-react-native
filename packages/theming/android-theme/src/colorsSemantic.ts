@@ -50,6 +50,10 @@ export interface SemanticPalette {
 
   // HyperLink
   textHyperLink: ColorValue;
+
+  //Checkbox
+  checkboxDisabled: ColorValue;
+  checkboxBorder: ColorValue;
 }
 
 export type FluentUIAndroidPalette = AndroidBaseColorsPalette & SemanticPalette;
@@ -92,6 +96,8 @@ export function getFluentUIAndroidPalette(p: AndroidBaseColorsPalette): FluentUI
         menuItemText: p.gray900,
         listBackground: p.white,
         textHyperLink: '#D83B01',
+        checkboxDisabled: p.white,
+        checkboxBorder: '#808080',
       }
     : {
         ...p,
@@ -129,5 +135,7 @@ export function getFluentUIAndroidPalette(p: AndroidBaseColorsPalette): FluentUI
         menuItemText: p.gray100,
         listBackground: p.gray950,
         textHyperLink: '#D83B01',
+        checkboxDisabled: p.black,
+        checkboxBorder: '#808080',
       };
 }

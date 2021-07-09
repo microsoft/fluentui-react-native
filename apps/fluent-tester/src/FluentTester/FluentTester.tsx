@@ -1,5 +1,5 @@
 import { Theme } from '@fluentui-react-native/framework';
-import { Separator, StealthButton } from '@fluentui/react-native';
+import { FocusTrapZone, Separator, StealthButton } from '@fluentui/react-native';
 import { Button } from '@fluentui-react-native/experimental-button';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
@@ -204,16 +204,32 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     );
   };
 
-  return (
-    <RootView style={themedStyles.root}>
-      {enableSinglePaneView ? <MobileHeader /> : <Header />}
+  const TesterContent: React.FunctionComponent<{}> = () => {
+    return (
+      <View style={{ flex: 1 }}>
+        {enableSinglePaneView ? <MobileHeader /> : <Header />}
 
-      <HeaderSeparator />
+        <HeaderSeparator />
 
-      <View style={fluentTesterStyles.testRoot}>
-        {enableSinglePaneView ? <MobileTestList /> : <TestList />}
-        {enableSinglePaneView ? <MobileTestComponentView /> : <TestComponentView />}
+        <View style={fluentTesterStyles.testRoot}>
+          {enableSinglePaneView ? <MobileTestList /> : <TestList />}
+          {enableSinglePaneView ? <MobileTestComponentView /> : <TestComponentView />}
+        </View>
       </View>
-    </RootView>
+    );
+  };
+
+  return (
+    <View style={{ flex: 1 }}>
+      {Platform.OS === ('win32' as any) ? (
+        <FocusTrapZone style={themedStyles.root}>
+          <TesterContent />
+        </FocusTrapZone>
+      ) : (
+        <RootView style={themedStyles.root}>
+          <TesterContent />
+        </RootView>
+      )}
+    </View>
   );
 };

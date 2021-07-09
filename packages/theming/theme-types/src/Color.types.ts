@@ -440,6 +440,13 @@ export interface ControlColorTokens {
   buttonDisabledSecondaryContent: ColorValue;
   buttonHoveredSecondaryContent: ColorValue;
   buttonPressedSecondaryContent: ColorValue;
+
+  checkboxBackground: ColorValue;
+  checkboxBackgroundDisabled: ColorValue;
+  checkmarkColor: ColorValue;
+
+  personaActivityRing: ColorValue;
+  personaActivityGlow: ColorValue;
 }
 
 /**
