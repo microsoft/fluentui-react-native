@@ -130,17 +130,6 @@
       }
     },
     "NeutralForegroundInvertedSelected": { "aliasOf": "Set.NeutralForegroundInverted" },
-    "NeutralForegroundInvertedAccessible": {
-      "Fill": {
-        "Color": {
-          "Rest": { "aliasOf": "Global.Color.White" },
-          "Hover": { "aliasOf": "Global.Color.White" },
-          "Pressed": { "aliasOf": "Global.Color.White" },
-          "Disabled": { "aliasOf": "Global.Color.White" }
-        }
-      }
-    },
-    "NeutralForegroundInvertedAccessibleSelected": { "aliasOf": "Set.NeutralForegroundInvertedAccessible" },
     "BrandBackground": {
       "Fill": {
         "Color": {
