@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Tue, 06 Jul 2021 14:30:28 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.10.8",
+      "version": "0.10.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Define size of group and position of buttons for a11y",
+            "author": "krsiler@microsoft.com",
+            "commit": "b04edfe517d37864e45909daf4a96bcffca6999e",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Jun 2021 19:39:16 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.10.7",
       "version": "0.10.7",
