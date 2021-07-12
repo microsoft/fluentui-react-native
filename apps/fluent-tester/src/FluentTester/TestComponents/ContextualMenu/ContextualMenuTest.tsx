@@ -277,7 +277,7 @@ const IconContextualMenu: React.FunctionComponent<{}> = () => {
             <Text>Menu Visibility: </Text>
             {isContextualMenuVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
           </Text>
-          <Button style={{ borderWidth: 0, width: 32}} icon={{ svgSource: svgProps, width: 12, height: 12 }} onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
+          <Button style={{ borderWidth: 0 }} icon={{ svgSource: svgProps, width: 12, height: 12 }} onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
         </View>
       </View>
 
