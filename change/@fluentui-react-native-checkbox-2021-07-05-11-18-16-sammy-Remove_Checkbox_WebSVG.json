@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Removing Web SVG references for Checkbox",
-  "packageName": "@fluentui-react-native/checkbox",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-07-05T18:18:16.314Z"
-}
