@@ -1,11 +1,10 @@
-import { ColorValue, Animated } from 'react-native';
+import { ColorValue, Animated, ViewProps } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
 export const activityIndicatorName = 'ActivityIndicator';
 /**
  * Specifies the possible sizes of the ActivityIndicator
  */
-// Somehow need to convert these to numbers
 export type ActivityIndicatorSize = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
 
 export interface ActivityIndicatorTokens {
@@ -27,10 +26,11 @@ export interface ActivityIndicatorTokens {
 }
 
 export interface ActivityIndicatorSlotProps extends ActivityIndicatorProps {
-  root: Animated.AnimatedProps<SvgProps>;
+  root: ViewProps;
+  svg: Animated.AnimatedProps<SvgProps>;
 }
 
-export interface ActivityIndicatorProps extends ActivityIndicatorTokens {
+export interface ActivityIndicatorProps extends ActivityIndicatorTokens, ViewProps {
   /**
    * ActivityIndicator animating or not
    * @defaultValue 'true'

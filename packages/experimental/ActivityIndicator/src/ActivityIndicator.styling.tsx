@@ -36,7 +36,6 @@ export const stylingSettings: UseStylingOptions<ActivityIndicatorProps, Activity
         activityIndicatorColor: tokens.activityIndicatorColor,
         lineThickness: tokens.lineThickness,
         size: tokens.size,
-        // Bug: accessibilityRole does not work on iOS
         accessibilityRole: 'progressbar',
         accessible: true,
       }),

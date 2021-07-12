@@ -1,12 +1,11 @@
 /** @jsx withSlots */
 import { useRef, useEffect, useMemo } from 'react';
-import { Animated, Easing } from 'react-native';
+import { Animated, Easing, View, Platform } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import { activityIndicatorName, ActivityIndicatorProps, ActivityIndicatorType } from './ActivityIndicator.types';
 import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './ActivityIndicator.styling';
 
-// Can also just put this within the compose, would that be better?
 const getActivityIndicatorPath = (diameter: number, width: number, color: string) => {
   const start = {
     x: width / 2,
@@ -24,7 +23,8 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
   displayName: activityIndicatorName,
   ...stylingSettings,
   slots: {
-    root: AnimatedSvg,
+    root: View,
+    svg: AnimatedSvg,
   },
   render: (props: ActivityIndicatorProps, useSlots: UseSlots<ActivityIndicatorType>) => {
     const Slots = useSlots(props);
@@ -42,7 +42,7 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
         animating: props.animating != undefined ? props.animating : true,
         hidesWhenStopped: props.hidesWhenStopped != undefined ? props.hidesWhenStopped : true,
       }),
-      [],
+      [props.activityIndicatorColor, props.size, props.lineThickness, props.animating, props.hidesWhenStopped],
     );
 
     const spinAnimation = useRef(new Animated.Value(0)).current;
@@ -52,7 +52,7 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
           Animated.timing(spinAnimation, {
             toValue: 359,
             duration: 750,
-            useNativeDriver: false,
+            useNativeDriver: Platform.OS == 'ios' || Platform.OS == 'android',
             easing: Easing.linear,
           }),
         ).start();
@@ -67,27 +67,34 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
     // hiding opacity makes the screen reader on iOS and Android skip over it
     const hideOpacity = memoizedActivityIndicatorData.animating == false && memoizedActivityIndicatorData.hidesWhenStopped == true ? 0 : 1;
 
+    // Depends on size, line thickness and color after memoization so can't be in the memo itself
     const path = getActivityIndicatorPath(
       memoizedActivityIndicatorData.size,
       memoizedActivityIndicatorData.lineThickness,
       memoizedActivityIndicatorData.activityIndicatorColor as string,
     );
 
-    // props for the AnimatedSvg, which is Slots.root
-    const otherProps = {
+    // props for the AnimatedSvg, which is Slots.svg
+    const otherSvgProps = {
       width: memoizedActivityIndicatorData.size,
       height: memoizedActivityIndicatorData.size,
       style: {
         transform: [{ rotateZ: interpolateSpin }, { perspective: 10 }],
         opacity: hideOpacity,
       },
+    };
+
+    const otherRootProps = {
+      style: {
+        opacity: hideOpacity,
+      },
       accessibilityState: { busy: memoizedActivityIndicatorData.animating },
     };
     return (rest: ActivityIndicatorProps) => {
-      const { ...mergedProps } = mergeProps(props, rest);
+      const { ...mergedProps } = mergeProps(props, rest, otherRootProps);
       return (
-        <Slots.root {...mergedProps} {...otherProps}>
-          {path}
+        <Slots.root {...mergedProps}>
+          <Slots.svg {...otherSvgProps}>{path}</Slots.svg>
         </Slots.root>
       );
     };
