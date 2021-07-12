@@ -1,8 +1,8 @@
 {
-  "type": "none",
+  "type": "patch",
   "comment": "add icon button with menu example to tester",
   "packageName": "@fluentui-react-native/tester",
   "email": "lehon@microsoft.com",
-  "dependentChangeType": "none",
+  "dependentChangeType": "patch",
   "date": "2021-07-12T13:47:19.565Z"
 }
