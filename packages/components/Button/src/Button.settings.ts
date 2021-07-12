@@ -35,6 +35,7 @@ export const settings: IComposeSettings<IButtonType> = [
         flexDirection: 'row',
         alignSelf: 'flex-start',
         minHeight: 32,
+        minWidth: 32,
         justifyContent: 'center',
       },
     },
