@@ -311,7 +311,7 @@ const contextualMenuSections: TestSection[] = [
     component: nestedContextualMenu,
   },
   {
-      name: "IconButton with ContextualMenu",
+      name: 'IconButton with ContextualMenu',
       component: IconContextualMenu
   }
 ];
