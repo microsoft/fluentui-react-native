@@ -2313,10 +2313,18 @@
     "@rnx-kit/third-party-notices" "1.0.1"
     chalk "^4.1.0"
 
-"@rnx-kit/config@0.2.9", "@rnx-kit/config@^0.2.9":
+"@rnx-kit/config@0.2.9":
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.2.9.tgz#2efd25ed31b6dbeccaa24566cf890cfce88764b7"
   integrity sha512-ikJ+aZO0pogMes/m71G+rkaeYBP2n0Xeomnr6hRgg5usNDxgTT+mY5d9dlzYu5ZN/GQKduP9zCKJQMgs6SOMyQ==
+  dependencies:
+    cosmiconfig "^7.0.0"
+    semver "^7.0.0"
+
+"@rnx-kit/config@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.3.0.tgz#d685895ec82ef32f9d9eb09e3f30889dd1f5aff4"
+  integrity sha512-Iq3d828DovQr3SpDKsPwpUk7psxtIv0RWVZBK1pBHLBtOE1zXnINFQ/RlNz6/pfEBhesyxR1KysT4YrsUI/I5Q==
   dependencies:
     cosmiconfig "^7.0.0"
     semver "^7.0.0"
@@ -2329,15 +2337,16 @@
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.5.8":
-  version "1.5.8"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.5.8.tgz#569187c41176b934ce59b5fa55bd9895aa7d0e84"
-  integrity sha512-1wVgCV3aIFHSGqO2oGBnz35vqJjYCPEV5mVIXPSUU3lFse0KsTrlseV7Phl6QWJFa66YRx1XrqFkHOH4FNPOZw==
+  version "1.5.13"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.5.13.tgz#f69fd805449d8f7f863a6bb9a22690b0d04796e2"
+  integrity sha512-V4Rn4UiNeydVerIATFGfbAaGUs6Lb4yUDq7N2eCc4SFIofsaPZqD3avwLZZx/XEkY7+0mJ+MwdN1C/2YbdXhZA==
   dependencies:
-    "@rnx-kit/config" "^0.2.9"
+    "@rnx-kit/config" "^0.3.0"
     "@rnx-kit/console" "^1.0.0"
     chalk "^4.1.0"
     find-up "^5.0.0"
     jest-diff "^26.0.0"
+    pkg-dir "^5.0.0"
     semver "^7.0.0"
     workspace-tools "^0.16.2"
     yargs "^16.0.0"
@@ -13777,6 +13786,13 @@ pkg-dir@^4.2.0:
   integrity sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==
   dependencies:
     find-up "^4.0.0"
+
+pkg-dir@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/pkg-dir/-/pkg-dir-5.0.0.tgz#a02d6aebe6ba133a928f74aec20bafdfe6b8e760"
+  integrity sha512-NPE8TDbzl/3YQYY7CSS228s3g2ollTFnc+Qi3tqmqJp9Vg2ovUpixcJEo2HJScN2Ez+kEaal6y70c0ehqJBJeA==
+  dependencies:
+    find-up "^5.0.0"
 
 pkg-up@^3.1.0:
   version "3.1.0"
