@@ -1,4 +1,5 @@
-import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
+import { UseStylingOptions, buildProps, Theme } from '@fluentui-react-native/framework';
+import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import {
   activityIndicatorName,
   ActivityIndicatorProps,
@@ -23,8 +24,8 @@ export const lineThicknessSizeMap: { [key: string]: number } = {
 
 export const stylingSettings: UseStylingOptions<ActivityIndicatorProps, ActivityIndicatorSlotProps, ActivityIndicatorTokens> = {
   tokens: [
-    (t) => ({
-      activityIndicatorColor: t.host?.appearance === 'light' ? '#BDBDBD' : '#666666',
+    () => ({
+      activityIndicatorColor: '#BDBDBD',
       lineThickness: 'medium',
       size: 'medium',
     }),
@@ -32,8 +33,8 @@ export const stylingSettings: UseStylingOptions<ActivityIndicatorProps, Activity
   ],
   slotProps: {
     root: buildProps(
-      (tokens: ActivityIndicatorTokens) => ({
-        activityIndicatorColor: tokens.activityIndicatorColor,
+      (tokens: ActivityIndicatorTokens, theme: Theme) => ({
+        activityIndicatorColor: getCurrentAppearance(theme.host.appearance, 'light') === 'light' ? '#BDBDBD' : '#666666',
         lineThickness: tokens.lineThickness,
         size: tokens.size,
         accessibilityRole: 'progressbar',

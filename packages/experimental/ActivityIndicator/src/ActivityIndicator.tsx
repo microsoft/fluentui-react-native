@@ -49,13 +49,17 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
     useEffect(() => {
       if (memoizedActivityIndicatorData.animating) {
         Animated.loop(
-          Animated.timing(spinAnimation, {
-            toValue: 359,
-            duration: 750,
-            useNativeDriver: Platform.OS == 'ios' || Platform.OS == 'android',
-            easing: Easing.linear,
-          }),
+          Animated.sequence([
+            Animated.timing(spinAnimation, {
+              toValue: 359,
+              duration: 750,
+              useNativeDriver: Platform.OS == 'ios' || Platform.OS == 'android',
+              easing: Easing.linear,
+            }),
+          ]),
         ).start();
+      } else {
+        spinAnimation.stopAnimation();
       }
     });
     const interpolateSpin = spinAnimation.interpolate({
