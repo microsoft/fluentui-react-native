@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Add dark mode files",
+  "packageName": "@fluentui-react-native/theme-tokens",
+  "email": "email not defined",
+  "dependentChangeType": "patch",
+  "date": "2021-07-13T22:30:22.664Z"
+}
