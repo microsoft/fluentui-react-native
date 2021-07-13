@@ -1,13 +1,5 @@
+#import "KeyCodes.h"
 #import "RCTFocusZone.h"
-
-// from <HIToolbox/Events.h>
-enum {
-	kVK_Tab                       = 0x30,
-	kVK_LeftArrow                 = 0x7B,
-	kVK_RightArrow                = 0x7C,
-	kVK_DownArrow                 = 0x7D,
-	kVK_UpArrow                   = 0x7E
-};
 
 typedef enum {
 	FocusZoneActionNone,
@@ -19,6 +11,10 @@ typedef enum {
 	FocusZoneActionUpArrow,
 } FocusZoneAction;
 
+typedef void (^IsViewAtEndOfFocusableRange)(NSView *, BOOL *);
+
+// Maximum vertical (or horizontal) displacement for a candidate view to be
+// enumerated in the same row (or column) as the current focused view
 static const CGFloat FocusZoneBuffer = 3;
 
 @implementation RCTFocusZone
@@ -57,7 +53,7 @@ static NSView *GetFirstResponder(NSWindow *window)
 	return [responder isKindOfClass:[NSView class]] ? (NSView *)responder : nil;
 }
 
-static void EnumerateFocusableViews(NSView *root, void (^block)(NSView *, BOOL *))
+static void EnumerateFocusableViews(NSView *root, IsViewAtEndOfFocusableRange block)
 {
 	NSMutableArray<NSView *> *queue = [NSMutableArray array];
 	[queue addObject:root];
@@ -122,13 +118,26 @@ static FocusZoneAction GetActionForEvent(NSEvent *event)
 	return action;
 }
 
-- (NSView *)getNextView:(BOOL)next toFocusInRowOrColumn:(BOOL)horizontal
+static BOOL IsAdvanceWithinZoneAction(FocusZoneAction action)
 {
+	return action == FocusZoneActionRightArrow || action == FocusZoneActionDownArrow;
+}
+
+static BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action)
+{
+	return action == FocusZoneActionRightArrow || action == FocusZoneActionLeftArrow;
+}
+
+- (NSView *)nextViewToFocusForAction:(FocusZoneAction)action
+{
+	BOOL isAdvance = IsAdvanceWithinZoneAction(action);
+	BOOL isHorizontal = IsHorizontalNavigationWithinZoneAction(action);
+
 	NSView *firstResponder = GetFirstResponder([self window]);
 	NSRect firstResponderRect = [firstResponder convertRect:[firstResponder bounds] toView:self];
 
 	__block NSView *viewToFocus = nil;
-	__block CGFloat closestDistance = 1.0e+30;
+	__block CGFloat closestDistance = CGFLOAT_MAX;
 
 	EnumerateFocusableViews(self, ^(NSView *candidateView, BOOL *stop)
 	{
@@ -136,21 +145,21 @@ static FocusZoneAction GetActionForEvent(NSEvent *event)
 		NSRect candidateRect = [candidateView convertRect:[candidateView bounds] toView:self];
 		BOOL subviewRelationExists = [candidateView isDescendantOf:firstResponder] || [firstResponder isDescendantOf:candidateView];
 
-		if (horizontal)
+		if (isHorizontal)
 		{
 			if (subviewRelationExists)
 			{
 				skip = skip
-					|| (next && NSMinX(candidateRect) < NSMinX(firstResponderRect))
-					|| (!next && NSMaxX(candidateRect) > NSMaxX(firstResponderRect))
+					|| (isAdvance && NSMinX(candidateRect) < NSMinX(firstResponderRect))
+					|| (!isAdvance && NSMaxX(candidateRect) > NSMaxX(firstResponderRect))
 					|| NSMinY(candidateRect) > NSMaxY(firstResponderRect) - FocusZoneBuffer
 					|| NSMaxY(candidateRect) < NSMinY(firstResponderRect) + FocusZoneBuffer;
 			}
 			else
 			{
 				skip = skip
-					|| (next && NSMidX(candidateRect) < NSMidX(firstResponderRect))
-					|| (!next && NSMidX(candidateRect) > NSMidX(firstResponderRect))
+					|| (isAdvance && NSMidX(candidateRect) < NSMidX(firstResponderRect))
+					|| (!isAdvance && NSMidX(candidateRect) > NSMidX(firstResponderRect))
 					|| NSMinY(candidateRect) > NSMaxY(firstResponderRect) - FocusZoneBuffer
 					|| NSMaxY(candidateRect) < NSMinY(firstResponderRect) + FocusZoneBuffer;
 			}
@@ -160,16 +169,16 @@ static FocusZoneAction GetActionForEvent(NSEvent *event)
 			if (subviewRelationExists)
 			{
 				skip = skip
-					|| (next && NSMinY(candidateRect) < NSMinY(firstResponderRect))
-					|| (!next && NSMaxY(candidateRect) > NSMaxY(firstResponderRect))
+					|| (isAdvance && NSMinY(candidateRect) < NSMinY(firstResponderRect))
+					|| (!isAdvance && NSMaxY(candidateRect) > NSMaxY(firstResponderRect))
 					|| NSMaxX(candidateRect) < NSMinX(firstResponderRect) + FocusZoneBuffer
 					|| NSMinX(candidateRect) > NSMaxX(firstResponderRect) - FocusZoneBuffer;
 			}
 			else
 			{
 				skip = skip
-					|| (next && NSMidY(candidateRect) < NSMidY(firstResponderRect))
-					|| (!next && NSMidY(candidateRect) > NSMidY(firstResponderRect))
+					|| (isAdvance && NSMidY(candidateRect) < NSMidY(firstResponderRect))
+					|| (!isAdvance && NSMidY(candidateRect) > NSMidY(firstResponderRect))
 					|| NSMaxX(candidateRect) < NSMinX(firstResponderRect) + FocusZoneBuffer
 					|| NSMinX(candidateRect) > NSMaxX(firstResponderRect) - FocusZoneBuffer;
 			}
@@ -189,16 +198,18 @@ static FocusZoneAction GetActionForEvent(NSEvent *event)
 	return viewToFocus;
 }
 
-- (NSView *)getViewToFocusInNextRow:(BOOL)next
+- (NSView *)nextViewToFocusForHorizontalNavigation:(FocusZoneAction)action
 {
+	BOOL isAdvance = IsAdvanceWithinZoneAction(action);
+
 	NSView *firstResponder = GetFirstResponder([self window]);
 	NSRect firstResponderRect = [firstResponder convertRect:[firstResponder bounds] toView:self];
 
 	__block NSView *viewToFocus = nil;
-	__block CGFloat closestDistance = 1.0e+30;
+	__block CGFloat closestDistance = CGFLOAT_MAX;
 
 	NSRect selfBounds = [self bounds];
-	NSPoint targetPoint = next
+	NSPoint targetPoint = isAdvance
 		? NSMakePoint(0, NSMaxY(firstResponderRect))
 		: NSMakePoint(selfBounds.size.width, NSMinY(firstResponderRect));
 
@@ -207,8 +218,8 @@ static FocusZoneAction GetActionForEvent(NSEvent *event)
 		NSRect candidateRect = [candidateView convertRect:[candidateView bounds] toView:self];
 
 		BOOL skip = candidateView == firstResponder
-			|| (next && NSMinY(candidateRect) < NSMaxY(firstResponderRect) - FocusZoneBuffer)
-			|| (!next && NSMaxY(candidateRect) > NSMinY(firstResponderRect) + FocusZoneBuffer);
+			|| (isAdvance && NSMinY(candidateRect) < NSMaxY(firstResponderRect) - FocusZoneBuffer)
+			|| (!isAdvance && NSMaxY(candidateRect) > NSMinY(firstResponderRect) + FocusZoneBuffer);
 
 		if (!skip)
 		{
@@ -224,29 +235,33 @@ static FocusZoneAction GetActionForEvent(NSEvent *event)
 	return viewToFocus;
 }
 
-- (NSView *)getNextViewToFocus:(BOOL)next horizontal:(BOOL)horizontal
+- (NSView *)nextViewToFocusWithFallback:(FocusZoneAction)action
 {
-	NSView *viewToFocus = [self getNextView:next toFocusInRowOrColumn:horizontal];
+	NSView *viewToFocus = [self nextViewToFocusForAction:action];
 
-	if (viewToFocus == nil && horizontal)
+	if (viewToFocus == nil)
 	{
-		viewToFocus = [self getViewToFocusInNextRow:next];
-	}
-	else if (viewToFocus == nil && !horizontal)
-	{
-		viewToFocus = [self getNextViewToFocus:next horizontal:YES];
+		if (IsHorizontalNavigationWithinZoneAction(action))
+		{
+			viewToFocus = [self nextViewToFocusForHorizontalNavigation:action];
+		}
+		else
+		{
+			FocusZoneAction horizontalAction = IsAdvanceWithinZoneAction(action) ? FocusZoneActionRightArrow : FocusZoneActionLeftArrow;
+			viewToFocus = [self nextViewToFocusWithFallback:horizontalAction];
+		}
 	}
 
 	return viewToFocus;
 }
 
-- (NSView *)getNextViewToFocusOutsideZone:(BOOL)next
+- (NSView *)nextViewToFocusOutsideZone:(FocusZoneAction)action
 {
 	__block NSView *lastFocusableView = self;
 
 	[[self window] recalculateKeyViewLoop];
 
-	if (next)
+	if (action == FocusZoneActionTab)  // Advance to next zone
 	{
 		EnumerateFocusableViews(self, ^(NSView *candidateView, BOOL *stop)
 		{
@@ -287,7 +302,7 @@ static FocusZoneAction GetActionForEvent(NSEvent *event)
 	}
 	else if (action == FocusZoneActionTab || action == FocusZoneActionShiftTab)
 	{
-		viewToFocus = [self getNextViewToFocusOutsideZone:action == FocusZoneActionTab];
+		viewToFocus = [self nextViewToFocusOutsideZone:action];
 	}
 	else if ((focusZoneDirection == FocusZoneDirectionVertical
 			&& (action == FocusZoneActionRightArrow || action == FocusZoneActionLeftArrow))
@@ -299,8 +314,7 @@ static FocusZoneAction GetActionForEvent(NSEvent *event)
 	}
 	else
 	{
-		viewToFocus = [self getNextViewToFocus:action == FocusZoneActionRightArrow || action == FocusZoneActionDownArrow
-									horizontal:action == FocusZoneActionRightArrow || action == FocusZoneActionLeftArrow];
+		viewToFocus = [self nextViewToFocusWithFallback:action];
 	}
 
 	if (passthrough)

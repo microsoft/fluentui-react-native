@@ -39,6 +39,7 @@ RCT_CUSTOM_VIEW_PROPERTY(navigateAtEnd, NSString, RCTFocusZone)
 	}
 	else if ([json isEqualToString:@"NavigateWrap"] || [json isEqualToString:@"NavigateContinue"])
 	{
+		// Not yet implemented
 		[view setNavigateAtEnd:NavigateStopAtEnds];
 	}
 	else
