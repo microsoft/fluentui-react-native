@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { ContextualMenuItemProps } from '@fluentui-react-native/contextual-menu';
+import { MenuButtonItemProps } from '..';
 import { MenuButton } from '..';
 import * as renderer from 'react-test-renderer';
 
 it('ContextualMenu default props', () => {
-  const menuItems: ContextualMenuItemProps[] = [
+  const menuItems: MenuButtonItemProps[] = [
     {
       itemKey: '1',
       text: 'MenuItem 1',
@@ -15,10 +15,34 @@ it('ContextualMenu default props', () => {
     },
     {
       itemKey: '3',
-      text: 'MenuItem 3',
+      text: 'Disabled Menu Item',
       disabled: true,
     },
+    {
+      hasSubmenu: true,
+      itemKey: '4',
+      text: 'SubmenuItem',
+      submenuItems: [
+        {
+          text: 'SubmenuItem',
+          itemKey: '1',
+        },
+        {
+          itemKey: '2',
+          text: 'SubmenuItem 2',
+          disabled: true,
+        },
+        {
+          itemKey: '3',
+          text: 'SubmenuItem 3',
+        },
+      ],
+    },
+    {
+      itemKey: '5',
+      text: 'Menu Item',
+    },
   ];
-  const tree = renderer.create(<MenuButton content="Standard MenuButton" menuItems={menuItems} />).toJSON();
+  const tree = renderer.create(<MenuButton content="Press for Nested MenuButton" menuItems={menuItems} />).toJSON();
   expect(tree).toMatchSnapshot();
 });

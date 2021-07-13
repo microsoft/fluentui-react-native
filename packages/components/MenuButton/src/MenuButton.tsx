@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import React, { useRef, useState, useCallback } from 'react';
 import { Button } from '@fluentui-react-native/button';
-import { ContextualMenu, ContextualMenuItem } from '@fluentui-react-native/contextual-menu';
+import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu } from '@fluentui-react-native/contextual-menu';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
@@ -58,7 +58,6 @@ export const MenuButton = compose<MenuButtonType>({
       contextualMenuItems: {
         menuItems,
       },
-      ContextualMenuItem,
     });
 
     return { slotProps, state };
@@ -82,9 +81,23 @@ export const MenuButton = compose<MenuButtonType>({
         <Slots.button />
         {context.showContextualMenu && (
           <Slots.contextualMenu>
-            {menuItems.map((menuItem) => (
-              <ContextualMenuItem key={menuItem.itemKey} {...menuItem} />
-            ))}
+            {menuItems.map((menuItem) => {
+              const { hasSubmenu, submenu, showSubmenu, componentRef, submenuItems, ...items } = menuItem;
+              return hasSubmenu ? (
+                <Slots.contextualMenuItems>
+                  <SubmenuItem componentRef={componentRef} {...items} />
+                  {showSubmenu && (
+                    <Submenu target={componentRef} {...submenu}>
+                      {submenuItems &&
+                        submenuItems.map &&
+                        submenuItems.map((submenuItem) => <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />)}
+                    </Submenu>
+                  )}
+                </Slots.contextualMenuItems>
+              ) : (
+                <ContextualMenuItem key={items.itemKey} {...items} />
+              );
+            })}
           </Slots.contextualMenu>
         )}
       </Slots.root>
