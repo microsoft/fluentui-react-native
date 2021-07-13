@@ -186,3 +186,5 @@ jobs:
       - template: templates/apple-xcode-build-static-libs.yml
 
       - template: templates/nuget-publish-dry-run.yml
+
+      - template: templates/nuget-publish.yml
