@@ -33,7 +33,7 @@
           "Rest": { "value": "transparent" },
           "Hover": { "aliasOf": "Global.Color.Grey.22" },
           "Pressed": { "aliasOf": "Global.Color.Grey.18" },
-          "Disabled": { "aliasOf": "transparent" }
+          "Disabled": { "value": "transparent" }
         }
       }
     },
