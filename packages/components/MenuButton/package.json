@@ -1,7 +1,7 @@
 {
-  "name": "@fluentui-react-native/persona",
-  "version": "0.10.5",
-  "description": "A cross-platform Persona component using the Fluent Design System",
+  "name": "@fluentui-react-native/menu-button",
+  "version": "0.2.1",
+  "description": "A cross-platform MenuButton component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -11,9 +11,9 @@
   },
   "scripts": {
     "build": "fluentui-scripts build",
-    "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
+    "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
@@ -23,14 +23,11 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.9.4",
-    "@fluentui-react-native/adapters": ">=0.6.1 <1.0.0",
-    "@fluentui-react-native/persona-coin": ">=0.8.4 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.9.3 <1.0.0",
+    "@fluentui-react-native/button": "^0.17.7",
+    "@fluentui-react-native/contextual-menu": "^0.9.0",
     "@uifabricshared/foundation-composable": ">=0.8.2 <1.0.0",
-    "@uifabricshared/foundation-settings": ">=0.9.1 <1.0.0",
-    "@uifabricshared/foundation-tokens": ">=0.9.1 <1.0.0",
-    "@uifabricshared/theming-ramp": ">=0.14.3 <1.0.0"
+    "@uifabricshared/foundation-compose": "^1.9.4",
+    "@uifabricshared/foundation-settings": ">=0.9.1 <1.0.0"
   },
   "devDependencies": {
     "@types/react-native": "^0.63.0",
