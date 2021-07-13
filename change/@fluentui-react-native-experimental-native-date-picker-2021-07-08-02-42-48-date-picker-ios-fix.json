@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Possible fix for wrong UIViewController in Excel card view",
-  "packageName": "@fluentui-react-native/experimental-native-date-picker",
-  "email": "chripear@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-07-08T09:42:48.613Z"
-}

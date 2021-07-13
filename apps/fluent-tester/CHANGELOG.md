@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 13 Jul 2021 15:41:10 GMT and should not be manually modified.
+This log was last generated on Tue, 13 Jul 2021 17:19:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.30.2
+
+Tue, 13 Jul 2021 17:19:22 GMT
+
+### Patches
+
+- Possible fix for wrong UIViewController in Excel card view (chripear@microsoft.com)
 
 ## 0.30.1
 
