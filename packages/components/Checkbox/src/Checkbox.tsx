@@ -19,6 +19,7 @@ import {
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
 import { Icon } from '@fluentui-react-native/icon';
 import checkmarkSvg from './checkmark/checkmark';
+import { IPressableProps } from '@fluentui-react-native/pressable';
 
 export const Checkbox = compose<ICheckboxType>({
   displayName: checkboxName,
@@ -47,7 +48,7 @@ export const Checkbox = compose<ICheckboxType>({
     // Ensure focus is placed on checkbox after click
     const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleChecked);
 
-    const pressable = useAsPressable({ onPress: toggleCheckedWithFocus, ...rest });
+    const pressable = useAsPressable({ onPress: toggleCheckedWithFocus, ...(rest as IPressableProps) });
 
     const buttonRef = useViewCommandFocus(componentRef);
 

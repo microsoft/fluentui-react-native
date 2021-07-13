@@ -1,8 +1,9 @@
 import { IPersonaCoinTokens } from './PersonaCoin.types';
-import { ViewProps, ViewStyle } from 'react-native';
+import { ViewStyle } from 'react-native';
 import { calculateEffectiveSizes } from './PersonaCoin.helpers';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 import { ITheme } from '@uifabricshared/theming-ramp';
+import type { IViewProps } from '@fluentui-react-native/adapters';
 
 const nameMap: { [key: string]: string } = {
   start: 'flex-start',
@@ -12,7 +13,7 @@ const nameMap: { [key: string]: string } = {
 
 const _rootKeyProps: (keyof IPersonaCoinTokens)[] = ['coinSize', 'size', 'horizontalIconAlignment', 'verticalIconAlignment'];
 
-function _buildRootStyles(tokenProps: IPersonaCoinTokens /*, theme: ITheme */): ViewProps {
+function _buildRootStyles(tokenProps: IPersonaCoinTokens /*, theme: ITheme */): IViewProps {
   const rootStyle: ViewStyle = {
     flexDirection: 'row',
   };
@@ -28,4 +29,4 @@ function _buildRootStyles(tokenProps: IPersonaCoinTokens /*, theme: ITheme */): 
   return { style: rootStyle };
 }
 
-export const buildRootStyles = styleFunction<ViewProps, IPersonaCoinTokens, ITheme>(_buildRootStyles, _rootKeyProps);
+export const buildRootStyles = styleFunction<IViewProps, IPersonaCoinTokens, ITheme>(_buildRootStyles, _rootKeyProps);

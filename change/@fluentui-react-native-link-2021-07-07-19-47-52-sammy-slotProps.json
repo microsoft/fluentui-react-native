@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Changing ViewProps to IViewProps",
+  "packageName": "@fluentui-react-native/link",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-07-08T02:47:12.789Z"
+}

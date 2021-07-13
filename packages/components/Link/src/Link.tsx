@@ -10,11 +10,11 @@ import { foregroundColorTokens, textTokens, borderTokens } from '@fluentui-react
 import { useAsPressable, useKeyCallback, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { IViewProps } from '@fluentui-react-native/adapters';
+import { ITextProps } from '@fluentui-react-native/text';
 
-export type ILinkHooks = [IWithLinkOptions<IViewProps>, ILinkState];
+export type ILinkHooks = [IWithLinkOptions<ITextProps>, ILinkState];
 
-export function useAsLink(userProps: IWithLinkOptions<IViewProps>, ref: React.RefObject<any>): ILinkHooks {
+export function useAsLink(userProps: IWithLinkOptions<ITextProps>, ref: React.RefObject<any>): ILinkHooks {
   const { url, onPress, ...rest } = userProps;
 
   const [linkState, setLinkState] = React.useState({ visited: false });

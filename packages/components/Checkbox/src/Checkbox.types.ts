@@ -27,7 +27,7 @@ export interface ICheckboxState extends IPressableState {
   boxAtEnd?: boolean;
 }
 
-export interface ICheckboxProps extends IViewProps {
+export interface ICheckboxProps extends Omit<IViewProps, 'onPress'> {
   /**
    * An optional string for the Narrator to read. If not provided, this will be set to the Checkbox label
    */

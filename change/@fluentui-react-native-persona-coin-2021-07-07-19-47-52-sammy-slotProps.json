@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Changing ViewProps to IViewProps",
+  "packageName": "@fluentui-react-native/persona-coin",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-07-08T02:47:35.358Z"
+}
