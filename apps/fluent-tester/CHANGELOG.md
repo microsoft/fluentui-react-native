@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 13 Jul 2021 10:45:30 GMT and should not be manually modified.
+This log was last generated on Tue, 13 Jul 2021 15:41:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.30.1
+
+Tue, 13 Jul 2021 15:41:10 GMT
+
+### Patches
+
+- add icon button with menu example to tester (lehon@microsoft.com)
 
 ## 0.30.0
 

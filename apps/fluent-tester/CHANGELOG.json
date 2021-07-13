@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 13 Jul 2021 15:41:10 GMT",
+      "tag": "@fluentui-react-native/tester_v0.30.1",
+      "version": "0.30.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add icon button with menu example to tester",
+            "author": "lehon@microsoft.com",
+            "commit": "fd486c5b1bfb1ac511a446ab75a8d5ec55bc57a4",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 13 Jul 2021 10:45:30 GMT",
       "tag": "@fluentui-react-native/tester_v0.30.0",
       "version": "0.30.0",
