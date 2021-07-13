@@ -44,14 +44,6 @@ export const settings: IComposeSettings<ICheckboxType> = [
         top: -1,
       },
     },
-    checkmarkIcon: {
-      width: 8,
-      height: 7,
-      style: {
-        marginVertical: 4.5,
-        marginHorizontal: 4,
-      },
-    },
     content: {
       variant: 'bodyStandard',
       style: {

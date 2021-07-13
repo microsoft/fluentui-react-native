@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Reverting changes from previous PR that added SVG functionality to Checkmark - This is causing a serious bundling issue for all partners",
+  "packageName": "@fluentui-react-native/checkbox",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-07-13T17:10:15.160Z"
+}
