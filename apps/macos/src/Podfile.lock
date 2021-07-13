@@ -16,6 +16,8 @@ PODS:
   - FluentUI-React-Native-Button (0.6.6):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
+  - FluentUI-React-Native-FocusZone (0.5.9):
+    - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.2.7):
     - MicrosoftFluentUI/ActivityIndicator_ios (= 0.2.7)
@@ -328,6 +330,7 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec`)
   - FluentUI-React-Native-Avatar (from `../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec`)
   - FluentUI-React-Native-Button (from `../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec`)
+  - FluentUI-React-Native-FocusZone (from `../../../packages/components/FocusZone/FluentUIReactNativeFocusZone.podspec`)
   - glog (from `../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
   - RCT-Folly (from `../../../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../../../node_modules/react-native-macos/Libraries/RCTRequired`)
@@ -377,6 +380,8 @@ EXTERNAL SOURCES:
     :path: "../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec"
   FluentUI-React-Native-Button:
     :path: "../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec"
+  FluentUI-React-Native-FocusZone:
+    :path: "../../../packages/components/FocusZone/FluentUIReactNativeFocusZone.podspec"
   glog:
     :podspec: "../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec"
   RCT-Folly:
@@ -439,6 +444,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: e41705afe0a17d636081a7c077d34caf205ca13d
   FluentUI-React-Native-Avatar: 470009fedabda6b7f004a0226ea9367b8f889a3f
   FluentUI-React-Native-Button: 545650797683b791f6818d856cddf96c0b4d091a
+  FluentUI-React-Native-FocusZone: 53098102e73256132b2108b216fb73af54a9bef7
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: 6b3bfd52b232e9abc5cb228b9761a5f42869f4d3
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
@@ -469,6 +475,6 @@ SPEC CHECKSUMS:
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   Yoga: f2da5366fe2be821a64c84a2e455042eab763cf5
 
-PODFILE CHECKSUM: e24e338ba465f0628fd43a83a62e52398443e27f
+PODFILE CHECKSUM: 21ed32ac4073663284fb0038e8afb1b6e912ece3
 
 COCOAPODS: 1.10.1

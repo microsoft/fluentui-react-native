@@ -147,8 +147,8 @@ jobs:
           javaHomeOption: 'JDKVersion'
           sonarQubeRunAnalysis: false
 
-  - job: NuGetPublishDryRun
-    displayName: NuGet Publish Dry Run
+  - job: NuGetPublish
+    displayName: NuGet Publish
     pool:
       vmImage: 'macos-10.15'
       demands: ['xcode', 'sh', 'npm']
@@ -185,4 +185,4 @@ jobs:
 
       - template: templates/apple-xcode-build-static-libs.yml
 
-      - template: templates/nuget-publish-dry-run.yml
+      - template: templates/nuget-publish.yml
