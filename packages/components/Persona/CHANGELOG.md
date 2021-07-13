@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/persona
 
-This log was last generated on Fri, 18 Jun 2021 00:38:19 GMT and should not be manually modified.
+This log was last generated on Tue, 13 Jul 2021 00:09:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.5
+
+Tue, 13 Jul 2021 00:09:36 GMT
+
+### Patches
+
+- Set fontsize to undefined if the fontSize is zero (email not defined)
 
 ## 0.10.1
 
