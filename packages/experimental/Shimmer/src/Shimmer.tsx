@@ -33,7 +33,7 @@ export const Shimmer = compose<ShimmerType>({
   },
   render: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
     const Slots = useSlots(props);
-    let AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
+    const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
     const tokens = useStyling(props).root;
 
     const memoizedShimmerData = useMemo(
@@ -61,13 +61,14 @@ export const Shimmer = compose<ShimmerType>({
       ],
     );
 
-    let startValue = useShimmerAnimation(memoizedShimmerData);
+    const startValue = useShimmerAnimation(memoizedShimmerData);
 
     return (rest: ShimmerProps) => {
       const { uri, elements, ...mergedProps } = mergeProps(props, rest);
+      const rows = [];
+
       if (elements) {
-        var rows = [];
-        for (var i = 0; i < elements.length; i++) {
+        for (let i = 0; i < elements.length; i++) {
           const element = elements[i];
           if (element.type == 'rect') {
             rows.push(
@@ -86,6 +87,7 @@ export const Shimmer = compose<ShimmerType>({
           }
         }
       }
+
       return (
         <Slots.root {...mergedProps}>
           <Defs>
@@ -102,10 +104,21 @@ export const Shimmer = compose<ShimmerType>({
                 stopOpacity={uri ? '0' : '1'}
               />
             </AnimatedLinearGradient>
+            <ClipPath id="shimmerView">{rows}</ClipPath>
           </Defs>
           {uri && <Slots.image href={props.uri} />}
-          <ClipPath id="shimmerView">{rows}</ClipPath>
           <Rect x="0" y="0" width="100%" height="100%" fill="url(#gradient)" clipPath={!uri ? 'url(#shimmerView)' : null} />
+
+          {/* This seems more appropriate; width and height 100% should be handled by flex style
+
+          <Rect
+            x="0"
+            y="0"
+            width={memoizedShimmerData.containerWidth}
+            height={memoizedShimmerData.containerHeight}
+            fill="url(#gradient)"
+            clipPath={!uri ? 'url(#shimmerView)' : null}
+          /> */}
         </Slots.root>
       );
     };
