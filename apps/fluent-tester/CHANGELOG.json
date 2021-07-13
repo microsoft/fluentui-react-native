@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 13 Jul 2021 10:45:30 GMT",
+      "tag": "@fluentui-react-native/tester_v0.30.0",
+      "version": "0.30.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Added FluentUI Standard MenuButton (without Submenu items)",
+            "author": "vkozlova@microsoft.com",
+            "commit": "43202181713fff8976be0b165af710e69ffe610f",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Jun 2021 19:39:16 GMT",
       "tag": "@fluentui-react-native/tester_v0.29.0",
       "version": "0.29.0",

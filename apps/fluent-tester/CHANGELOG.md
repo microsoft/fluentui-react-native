@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 25 Jun 2021 19:39:16 GMT and should not be manually modified.
+This log was last generated on Tue, 13 Jul 2021 10:45:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.30.0
+
+Tue, 13 Jul 2021 10:45:30 GMT
+
+### Minor changes
+
+- Added FluentUI Standard MenuButton (without Submenu items) (vkozlova@microsoft.com)
 
 ## 0.29.0
 

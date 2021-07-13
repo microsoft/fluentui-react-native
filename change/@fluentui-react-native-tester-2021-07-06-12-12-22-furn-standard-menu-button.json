@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Added FluentUI Standard MenuButton (without Submenu items)",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "vkozlova@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-07-06T19:12:13.518Z"
-}
