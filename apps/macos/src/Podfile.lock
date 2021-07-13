@@ -312,7 +312,7 @@ PODS:
     - React-Core (= 0.63.36)
     - React-cxxreact (= 0.63.36)
     - React-jsi (= 0.63.36)
-  - ReactTestApp-DevSupport (0.6.3)
+  - ReactTestApp-DevSupport (0.6.9)
   - ReactTestApp-Resources (1.0.0-dev)
   - RNCPicker (1.9.11):
     - React-Core
@@ -462,7 +462,7 @@ SPEC CHECKSUMS:
   React-RCTText: b5613f3b26ce07497fbcb0f4c8496c1c4fcb3405
   React-RCTVibration: e5464e5e9dd67b4f5c6983046be2e941708343f8
   ReactCommon: 85b3897abcb25a478b26cda3154a51fb56f405d2
-  ReactTestApp-DevSupport: 9f0b81965c46840c5410ccc4e7f5a4d6cd224ece
+  ReactTestApp-DevSupport: a35b873fe37e4865e7ba75afd44ed3d3b2e208c0
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
   RNCPicker: 6780c753e9e674065db90d9c965920516402579d
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
