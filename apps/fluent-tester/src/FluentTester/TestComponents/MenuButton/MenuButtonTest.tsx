@@ -4,7 +4,7 @@ import { Text, View, Switch } from 'react-native';
 import { Separator, MenuButton, ContextualMenuItemProps, ContextualMenuProps } from '@fluentui/react-native';
 import { MENU_BUTTON_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
+import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from '../Button/test.svg';
 
 const menuButton: React.FunctionComponent<{}> = () => {

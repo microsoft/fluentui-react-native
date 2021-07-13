@@ -88,9 +88,9 @@ export const MenuButton = compose<MenuButtonType>({
                   <SubmenuItem componentRef={componentRef} {...items} />
                   {showSubmenu && (
                     <Submenu target={componentRef} {...submenu}>
-                      {submenuItems &&
-                        submenuItems.map &&
-                        submenuItems.map((submenuItem) => <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />)}
+                      {submenuItems?.map((submenuItem) => (
+                        <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />
+                      ))}
                     </Submenu>
                   )}
                 </Slots.contextualMenuItems>
