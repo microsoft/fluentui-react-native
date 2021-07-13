@@ -4,7 +4,7 @@ import { SHIMMER_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
-import Svg, { Circle, ClipPath, Defs, LinearGradient, Polygon, RadialGradient, Rect, Stop } from 'react-native-svg';
+import Svg, { Circle, ClipPath, Defs, LinearGradient, Polygon, Rect, Stop } from 'react-native-svg';
 
 const shimmer: React.FunctionComponent<{}> = () => {
   const lines: Array<ShimmerElement> = [
