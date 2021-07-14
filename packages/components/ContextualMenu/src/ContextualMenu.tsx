@@ -20,6 +20,9 @@ import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 
 export const CMContext = React.createContext<ContextualMenuContext>({
   selectedKey: null,
+  onItemClick: (/* key: string */) => {
+    return;
+  },
   onDismissMenu: () => {
     return;
   },
