@@ -15,7 +15,7 @@ export interface MenuButtonState {
 export interface MenuButtonItemProps extends ContextualMenuItemProps {
   hasSubmenu?: boolean;
   submenuItems?: ContextualMenuItemProps[];
-  submenu?: SubmenuProps;
+  submenuProps?: SubmenuProps;
   showSubmenu?: boolean;
 }
 

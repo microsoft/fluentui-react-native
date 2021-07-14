@@ -107,7 +107,7 @@ const nestedMenuButton: React.FunctionComponent<{}> = () => {
 
   const [showSubmenu, setShowSubmenu] = React.useState(false);
   const [isSubmenuVisible, setIsSubmenuVisible] = React.useState(false);
-  const [lastSubmenuMenuItemClicked, setSubmenuLastMenuItemClicked] = React.useState(null);
+  const [lastSubmenuItemClicked, setSubmenuLastItemClicked] = React.useState(null);
 
   const toggleShowSubmenu = React.useCallback(() => {
     setShowSubmenu(!showSubmenu);
@@ -124,9 +124,16 @@ const nestedMenuButton: React.FunctionComponent<{}> = () => {
 
   const onSubmenuItemClick = React.useCallback(
     (key) => {
-      setSubmenuLastMenuItemClicked(key);
+      setSubmenuLastItemClicked(key);
     },
-    [setSubmenuLastMenuItemClicked],
+    [setSubmenuLastItemClicked],
+  );
+
+  const onSecondSubmenuItemClick = React.useCallback(
+    (key) => {
+      setSubmenuLastItemClicked(key);
+    },
+    [setSubmenuLastItemClicked],
   );
 
   const menuItems = [
@@ -152,7 +159,7 @@ const nestedMenuButton: React.FunctionComponent<{}> = () => {
       icon: { svgSource: svgProps, width: 20, height: 20, color: 'red' },
       onHoverIn: toggleShowSubmenu,
       showSubmenu,
-      submenu: {
+      submenuProps: {
         onShow: onShowSubmenu,
         setShowMenu: toggleShowSubmenu,
         onDismiss: onDismissSubmenu,
@@ -178,6 +185,29 @@ const nestedMenuButton: React.FunctionComponent<{}> = () => {
     {
       itemKey: '5',
       text: 'Menu Item',
+    },
+    {
+      hasSubmenu: true,
+      itemKey: '6',
+      text: 'SubmenuItem',
+      componentRef: React.useRef(null),
+      submenuProps: {
+        onItemClick: onSubmenuItemClick,
+      },
+      submenuItems: [
+        {
+          text: 'SubmenuItem 1',
+          itemKey: '1',
+        },
+        {
+          itemKey: '2',
+          text: 'SubmenuItem 2',
+        },
+        {
+          itemKey: '3',
+          text: 'SubmenuItem 3',
+        },
+      ],
     },
   ];
 
@@ -208,9 +238,9 @@ const nestedMenuButton: React.FunctionComponent<{}> = () => {
             )}
           </Text>
           <Text>
-            <Text>Last Submenu Menu Item Clicked: </Text>
-            {lastSubmenuMenuItemClicked > 0 ? (
-              <Text style={{ color: 'blue' }}>{lastSubmenuMenuItemClicked}</Text>
+            <Text>Last Submenu Item Clicked: </Text>
+            {lastSubmenuItemClicked > 0 ? (
+              <Text style={{ color: 'blue' }}>{lastSubmenuItemClicked}</Text>
             ) : (
               <Text style={{ color: 'blue' }}>none</Text>
             )}

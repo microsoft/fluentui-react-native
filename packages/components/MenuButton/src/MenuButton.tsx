@@ -31,6 +31,36 @@ export const MenuButton = compose<MenuButtonType>({
       setShowContextualMenu(!showContextualMenu);
     }, [showContextualMenu, setShowContextualMenu]);
 
+    const menuItemsUpdated = menuItems.map((item) => {
+      if (item.hasSubmenu) {
+        const [showSubmenu, setShowSubmenu] = useState(false);
+        const [isSubmenuVisible, setIsSubmenuVisible] = React.useState(false);
+
+        const toggleShowSubmenu = React.useCallback(() => {
+          setShowSubmenu(!showSubmenu);
+          setIsSubmenuVisible(!isSubmenuVisible);
+        }, [showSubmenu, isSubmenuVisible, setShowSubmenu, setIsSubmenuVisible]);
+
+        const onShowSubmenu = React.useCallback(() => {
+          setIsSubmenuVisible(true);
+        }, [setIsSubmenuVisible]);
+
+        const onDismissSubmenu = React.useCallback(() => {
+          setShowSubmenu(false);
+        }, [setShowSubmenu]);
+        const { onHoverIn = toggleShowSubmenu, submenuProps = {}, ...restItems } = item;
+        const { onShow = onShowSubmenu, onDismiss = onDismissSubmenu, setShowMenu = toggleShowSubmenu, ...restSubmenuProps } = submenuProps;
+        const menuItemUpdated = {
+          ...restItems,
+          onHoverIn,
+          showSubmenu: showSubmenu || item.showSubmenu,
+          submenuProps: { ...restSubmenuProps, onShow, onDismiss, setShowMenu },
+        };
+        return menuItemUpdated;
+      }
+      return item;
+    });
+
     const state: MenuButtonState = {
       context: {
         showContextualMenu: !!showContextualMenu,
@@ -56,7 +86,7 @@ export const MenuButton = compose<MenuButtonType>({
         ...contextualMenu,
       },
       contextualMenuItems: {
-        menuItems,
+        menuItems: menuItemsUpdated,
       },
     });
 
@@ -74,7 +104,7 @@ export const MenuButton = compose<MenuButtonType>({
       return null;
     }
     const context = renderData.state!.context;
-    const menuItems = (renderData.slotProps!.contextualMenuItems && renderData.slotProps.contextualMenuItems.menuItems) || [];
+    const menuItems = renderData.slotProps!.contextualMenuItems?.menuItems || [];
 
     return (
       <Slots.root>
@@ -82,12 +112,13 @@ export const MenuButton = compose<MenuButtonType>({
         {context.showContextualMenu && (
           <Slots.contextualMenu>
             {menuItems.map((menuItem) => {
-              const { hasSubmenu, submenu, showSubmenu, componentRef, submenuItems, ...items } = menuItem;
+              const { hasSubmenu, submenuProps, showSubmenu, componentRef, submenuItems, ...items } = menuItem;
+
               return hasSubmenu ? (
                 <Slots.contextualMenuItems>
                   <SubmenuItem componentRef={componentRef} {...items} />
                   {showSubmenu && (
-                    <Submenu target={componentRef} {...submenu}>
+                    <Submenu target={componentRef} {...submenuProps}>
                       {submenuItems?.map((submenuItem) => (
                         <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />
                       ))}
