@@ -27,6 +27,7 @@ function buildTextStyleHelper(
 
   if (textStyle.fontSize === 0) {
     textStyle.display = 'none';
+    textStyle.fontSize = undefined;
   }
 
   return textStyle;

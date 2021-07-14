@@ -116,6 +116,15 @@ To start developing in the repository you can:
 
 After a successful yarn build, you can explore FluentUI Tester, our demo application to play with each of the controls. To run FluentUI Tester, please follow instructions in the [FluentUI Tester readme](./apps/fluent-tester/README.md).
 
+### Prettier
+
+This repo is set up to run [Prettier](https://prettier.io/). To run Prettier in fix mode on the repo, run `yarn prettier-fix` at the root of the Repo.
+
+If you are using [VSCode](https://code.visualstudio.com/) as your editor, you can configure it to run Prettier on save. Prettier is a recommended extension for the repo. You can configure it to run by:
+
+1. Installing the Prettier extension for VSCode
+2. Going to Settings > Text Editor > Formatting > Check Format On Save
+
 ## Contributing
 
 Please visit our [contribution guide](./CONTRIBUTING.md) for more information on contributing to this repo.

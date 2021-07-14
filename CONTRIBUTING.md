@@ -62,7 +62,8 @@ Most components should use the compose framework as it offers the comprehensive 
    1. `index.ts`
       - This is the file listed as `main` inside your package.json and simply exports other files.
    1. `<new-component>.tsx`
-      - This is the file that imports your native view, and composes it into a component with slots, a theme, and design tokens.
+      - This is the file that will actually define your function component, and compose it into a higher order component with slots, theming, and design tokens.
+      - Note that we need the comment `/** @jsx withSlots */` at the top of this file. An explanation can be found in the comment at `packages/experimental/use-slots/src/withSlots.tsx`
    1. `<new-component>.<types | settings | platform | blah>.tsx` (Optional)
       - Optional extra files to subdivide your code however you see fit. You can also add platform specific files as you see fit.
 
