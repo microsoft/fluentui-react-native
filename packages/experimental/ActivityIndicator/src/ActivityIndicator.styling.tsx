@@ -1,5 +1,5 @@
-import { UseStylingOptions, buildProps, Theme } from '@fluentui-react-native/framework';
-import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
+import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
+import { Appearance } from 'react-native';
 import {
   activityIndicatorName,
   ActivityIndicatorProps,
@@ -25,22 +25,31 @@ export const lineThicknessSizeMap: { [key: string]: number } = {
 export const stylingSettings: UseStylingOptions<ActivityIndicatorProps, ActivityIndicatorSlotProps, ActivityIndicatorTokens> = {
   tokens: [
     () => ({
-      activityIndicatorColor: '#BDBDBD',
+      activityIndicatorColor: Appearance.getColorScheme() === 'light' ? '#BDBDBD' : '#666666',
       lineThickness: 'medium',
       size: 'medium',
     }),
     activityIndicatorName,
   ],
+  tokensThatAreAlsoProps: 'all',
   slotProps: {
     root: buildProps(
-      (tokens: ActivityIndicatorTokens, theme: Theme) => ({
-        activityIndicatorColor: getCurrentAppearance(theme.host.appearance, 'light') === 'light' ? '#BDBDBD' : '#666666',
-        lineThickness: tokens.lineThickness,
-        size: tokens.size,
+      (tokens: ActivityIndicatorTokens) => ({
+        activityIndicatorColor: tokens.activityIndicatorColor,
+        size: diameterSizeMap[tokens.size],
+        lineThickness: tokens.lineThickness != 'medium' ? lineThicknessSizeMap[tokens.lineThickness] : lineThicknessSizeMap[tokens.size],
         accessibilityRole: 'progressbar',
         accessible: true,
+        style: { width: diameterSizeMap[tokens.size] },
       }),
       ['activityIndicatorColor', 'lineThickness', 'size'],
+    ),
+    svg: buildProps(
+      (tokens: ActivityIndicatorTokens) => ({
+        width: diameterSizeMap[tokens.size],
+        height: diameterSizeMap[tokens.size],
+      }),
+      ['size'],
     ),
   },
 };
