@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-native-date-picker",
   "entries": [
     {
+      "date": "Tue, 13 Jul 2021 17:19:22 GMT",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Possible fix for wrong UIViewController in Excel card view",
+            "author": "chripear@microsoft.com",
+            "commit": "873a29854a35defa15c2887c8ea0fdb7eeca9fa2",
+            "package": "@fluentui-react-native/experimental-native-date-picker"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Jun 2021 17:46:02 GMT",
       "tag": "@fluentui-react-native/experimental-native-date-picker_v0.2.0",
       "version": "0.2.0",

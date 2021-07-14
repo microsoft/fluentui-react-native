@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 25 Jun 2021 19:39:16 GMT and should not be manually modified.
+This log was last generated on Tue, 13 Jul 2021 17:19:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.30.2
+
+Tue, 13 Jul 2021 17:19:22 GMT
+
+### Patches
+
+- Possible fix for wrong UIViewController in Excel card view (chripear@microsoft.com)
+
+## 0.30.1
+
+Tue, 13 Jul 2021 15:41:10 GMT
+
+### Patches
+
+- add icon button with menu example to tester (lehon@microsoft.com)
+
+## 0.30.0
+
+Tue, 13 Jul 2021 10:45:30 GMT
+
+### Minor changes
+
+- Added FluentUI Standard MenuButton (without Submenu items) (vkozlova@microsoft.com)
 
 ## 0.29.0
 

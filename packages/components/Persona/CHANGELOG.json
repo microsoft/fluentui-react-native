@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/persona",
   "entries": [
     {
+      "date": "Tue, 13 Jul 2021 00:09:36 GMT",
+      "tag": "@fluentui-react-native/persona_v0.10.5",
+      "version": "0.10.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Set fontsize to undefined if the fontSize is zero",
+            "author": "email not defined",
+            "commit": "c75f7702740660406cec92afcfc87699777677b1",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 18 Jun 2021 00:38:19 GMT",
       "tag": "@fluentui-react-native/persona_v0.10.1",
       "version": "0.10.1",
