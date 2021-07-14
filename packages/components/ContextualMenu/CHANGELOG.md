@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Fri, 25 Jun 2021 19:39:16 GMT and should not be manually modified.
+This log was last generated on Wed, 14 Jul 2021 16:17:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.1
+
+Wed, 14 Jul 2021 16:17:33 GMT
+
+### Patches
+
+- revert chevron svg (lehon@microsoft.com)
 
 ## 0.9.0
 
