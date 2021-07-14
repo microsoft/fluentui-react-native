@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData, ICheckboxType, checkboxName } from './Checkbox.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
@@ -17,8 +17,6 @@ import {
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
-import { Icon } from '@fluentui-react-native/icon';
-import checkmarkSvg from './checkmark/checkmark';
 
 export const Checkbox = compose<ICheckboxType>({
   displayName: checkboxName,
@@ -90,11 +88,6 @@ export const Checkbox = compose<ICheckboxType>({
       },
       // Temporary checkmark until SVG functionality
       checkmark: { children: '✓' },
-      checkmarkIcon: {
-        svgSource: {
-          src: checkmarkSvg,
-        },
-      },
       content: { children: label },
     });
 
@@ -102,12 +95,12 @@ export const Checkbox = compose<ICheckboxType>({
   },
 
   render: (Slots: ISlots<ICheckboxSlotProps>, renderData: ICheckboxRenderData, ...children: React.ReactNode[]) => {
-    // SVG-based icons are not available on all platforms yet
-    const svgIconsEnabled = ['ios', 'macos', 'android'].includes(Platform.OS as string);
     return (
       <Slots.root>
         {renderData?.state.boxAtEnd && <Slots.content />}
-        <Slots.checkbox>{svgIconsEnabled ? <Slots.checkmarkIcon /> : <Slots.checkmark />}</Slots.checkbox>
+        <Slots.checkbox>
+          <Slots.checkmark />
+        </Slots.checkbox>
         {!renderData?.state.boxAtEnd && <Slots.content />}
         {children}
       </Slots.root>
@@ -119,7 +112,6 @@ export const Checkbox = compose<ICheckboxType>({
     root: View,
     checkbox: { slotType: View, filter: filterViewProps },
     checkmark: Text,
-    checkmarkIcon: Icon,
     content: Text,
   },
   styles: {
@@ -133,13 +125,6 @@ export const Checkbox = compose<ICheckboxType>({
       ],
     ],
     checkmark: [
-      foregroundColorTokens,
-      [
-        { source: 'checkmarkColor', lookup: getPaletteFromTheme, target: 'color' },
-        { source: 'checkmarkVisibility', target: 'opacity' },
-      ],
-    ],
-    checkmarkIcon: [
       foregroundColorTokens,
       [
         { source: 'checkmarkColor', lookup: getPaletteFromTheme, target: 'color' },

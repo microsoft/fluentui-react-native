@@ -17,9 +17,8 @@ import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens,
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useAsPressable, useKeyCallback, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
-import { Icon, SvgIconProps, IconProps} from '@fluentui-react-native/icon';
+import { Icon} from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
-import ChevronSvg from './assets/commoncontrolchevronforward.12.svg';
 
 export const SubmenuItem = compose<SubmenuItemType>({
   displayName: submenuItemName,
@@ -76,17 +75,6 @@ export const SubmenuItem = compose<SubmenuItemType>({
      */
     const onKeyUp = useKeyCallback(onItemHoverIn, ' ', 'Enter', 'ArrowRight');
 
-    const svgProps: SvgIconProps = {
-      src: ChevronSvg,
-      viewBox: '0 0 2048 2048',
-    };
-
-    const chevronProps: IconProps = {
-      svgSource: svgProps,
-      width: 12,
-      height: 12,
-    }
-
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
     // create the merged slot props
@@ -99,7 +87,6 @@ export const SubmenuItem = compose<SubmenuItemType>({
       },
       content: { children: text, testID },
       icon: createIconProps(icon),
-      chevron: createIconProps(chevronProps)
     });
 
     return { slotProps, state };
