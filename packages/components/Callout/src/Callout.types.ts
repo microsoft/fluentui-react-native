@@ -26,6 +26,8 @@ export type DirectionalHint =
   | 'bottomCenter'
   | 'bottomRightEdge';
 
+export type DismissBehaviors = 'preventDismissOnKeyDown' | 'preventDismissOnClickOutside';
+
 export interface RestoreFocusEvent {
   nativeEvent: {
     /**
@@ -59,6 +61,20 @@ export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTok
    * to the anchor information.
    */
   directionalHint?: DirectionalHint;
+
+  /**
+   * Defines variations on how the callout dismissal may be controlled.  the async eventing
+   * of React-Native makes passing some aspects of dismissal control over to JS difficult.
+   * Moreover, the native platform or host may have competing priorities with regards to transient UI
+   * that generate bi-directional lifetime management between JS (which mounts and unmounts the
+   * component) and native (which may tear down the transient UI without JS input).
+   *
+   * This property provides control over the latter issue, enabling relevant native platform
+   * interactions with transient UI to be managed from JS.
+   *
+   * These behaviors should generally be orthogonal, and therefore combinable.
+   */
+  dismissBehaviors?: DismissBehaviors[];
 
   /**
    * Defines the size of the gap between the anchor and the Callout.  Not used if

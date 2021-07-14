@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ScreenRect, Text, View, Switch, Picker } from 'react-native';
-import { Button, Callout, Separator, IFocusable, RestoreFocusEvent } from '@fluentui/react-native';
+import { Button, Callout, Separator, IFocusable, RestoreFocusEvent, Checkbox, DismissBehaviors } from '@fluentui/react-native';
 import { CALLOUT_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
@@ -16,6 +16,33 @@ const standardCallout: React.FunctionComponent<{}> = () => {
 
   const [isBeakVisible, setIsBeakVisible] = React.useState(false);
   const onIsBeakVisibleChange = React.useCallback((value) => setIsBeakVisible(value), []);
+
+  const [preventDismissOnKeyDown, setPreventDismissOnKeyDown] = React.useState(false);
+  const [preventDismissOnClickOutside, setPreventDismissOnClickOutside] = React.useState(false);
+  const [calloutDismissBehaviors, setDismissBehaviors] = React.useState<DismissBehaviors[]>();
+
+  const reEvaluateDismissBehaviors = React.useCallback(() => {
+    const dismissBehaviors: DismissBehaviors[] = [];
+    if (preventDismissOnClickOutside) {
+      dismissBehaviors.push('preventDismissOnClickOutside');
+    }
+    if (preventDismissOnKeyDown) {
+      dismissBehaviors.push('preventDismissOnKeyDown');
+    }
+    if (dismissBehaviors.length > 0) {
+      setDismissBehaviors(dismissBehaviors);
+    }
+  }, []);
+
+  const onPreventDismissOnKeyDownChange = React.useCallback((value) => {
+    setPreventDismissOnKeyDown(value);
+    reEvaluateDismissBehaviors();
+  }, []);
+
+  const onPreventDismissOnClickOutsideChange = React.useCallback((value) => {
+    setPreventDismissOnClickOutside(value);
+    reEvaluateDismissBehaviors();
+  }, []);
 
   const redTargetRef = React.useRef<View>(null);
   const blueTargetRef = React.useRef<View>(null);
@@ -90,6 +117,11 @@ const standardCallout: React.FunctionComponent<{}> = () => {
             <Switch value={isBeakVisible} onValueChange={onIsBeakVisibleChange} />
             <Text>Beak Visible</Text>
           </View>
+
+          <Text>Dismiss Behaviors</Text>
+          <Checkbox onChange={onPreventDismissOnKeyDownChange} label="Prevent Dismiss On Key Down" />
+          <Checkbox onChange={onPreventDismissOnClickOutsideChange} label="Prevent Dismiss On Click Outside" />
+
           <Picker
             prompt="Background Color"
             selectedValue={selectedBackgroundColor || colorDefault}
@@ -160,6 +192,7 @@ const standardCallout: React.FunctionComponent<{}> = () => {
             ...(selectedBorderColor && { borderColor: selectedBorderColor }),
             ...(selectedBackgroundColor && { backgroundColor: selectedBackgroundColor }),
             ...(selectedBorderWidth && { borderWidth: selectedBorderWidth }),
+            ...(calloutDismissBehaviors && { dismissBehaviors: calloutDismissBehaviors }),
           }}
         >
           <View style={{ padding: 20 }}>
