@@ -1,11 +1,10 @@
 import { TextProps, ViewProps, ImageProps } from 'react-native';
 import { IFilterMask } from './filter.types';
 import type { ITextWin32Props, IViewWin32Props } from '@office-iss/react-native-win32';
-import { IViewWindowsProps } from 'react-native-windows';
 
 // export core interface types
 export type ITextProps = TextProps & Partial<ITextWin32Props>;
-export type IViewProps = ViewProps & Partial<IViewWin32Props> & Partial<IViewWindowsProps>;
+export type IViewProps = ViewProps & IViewWin32Props;
 export type IImageProps = ImageProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
@@ -85,8 +84,6 @@ const _viewMask: IFilterMask<IViewProps> = {
   onMouseLeave: true,
   tooltip: true,
   type: true,
-  acceptsKeyboardFocus: true,
-  accessibilityPosInSet: true,
 };
 
 const _textMask: IFilterMask<ITextProps> = {
