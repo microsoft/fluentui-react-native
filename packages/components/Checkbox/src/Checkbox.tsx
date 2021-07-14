@@ -17,15 +17,7 @@ import {
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
-<<<<<<< HEAD
-import { Icon } from '@fluentui-react-native/icon';
-import checkmarkSvg from './checkmark/checkmark';
 import { IPressableProps } from '@fluentui-react-native/pressable';
-||||||| c75f7702
-import { Icon } from '@fluentui-react-native/icon';
-import checkmarkSvg from './checkmark/checkmark';
-=======
->>>>>>> upstream/master
 
 export const Checkbox = compose<ICheckboxType>({
   displayName: checkboxName,
