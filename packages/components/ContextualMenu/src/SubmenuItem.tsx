@@ -68,7 +68,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
       disabled: userProps.disabled,
       content: !!text,
       icon: !!icon,
-      submenuItemHovered: submenuItemHovered || pressable.state.hovered,
+      submenuItemHovered: submenuItemHovered,
     };
 
     const onMouseEnter = React.useCallback(
