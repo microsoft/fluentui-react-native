@@ -37,13 +37,32 @@ namespace winrt::ReactNativeExpander::implementation {
         // TODO: finish updating props when Expander.types are further defined
         nativeProps.Insert(L"expandDirection", ViewManagerPropertyType::String);
         nativeProps.Insert(L"expanded", ViewManagerPropertyType::Boolean);
-        nativeProps.Insert(L"headerRef", ViewManagerPropertyType::Number);
-        nativeProps.Insert(L"contentRef", ViewManagerPropertyType::Number);
         nativeProps.Insert(L"enabled", ViewManagerPropertyType::Boolean);
-        nativeProps.Insert(L"expanderStyle", ViewManagerPropertyType::String);
-        nativeProps.Insert(L"accentColor", ViewManagerPropertyType::String);
-        nativeProps.Insert(L"expandedHeight", ViewManagerPropertyType::Number);
-        nativeProps.Insert(L"collapsedHeight", ViewManagerPropertyType::Number);
+        nativeProps.Insert(L"width", ViewManagerPropertyType::Number);
+        nativeProps.Insert(L"contentHorizontalAlignment", ViewManagerPropertyType::String);
+        nativeProps.Insert(L"contentVerticalAlignment", ViewManagerPropertyType::String);
+        nativeProps.Insert(L"headerBackground", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"headerForeground", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"headerForegroundPointerOver", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"headerForegroundPressed", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"headerBorderBrush", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"headerBorderPointerOverBrush", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"headerBorderPressedBrush", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"headerDisabledForeground", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"headerDisabledBorderBrush", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"headerBorderThickness", ViewManagerPropertyType::Number);
+        nativeProps.Insert(L"contentBackground", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"contentBorderBrush", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"chevronBackground", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"chevronForeground", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"chevronPointerOverBackground", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"chevronPointerOverForeground", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"chevronPressedBackground", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"chevronPressedForeground", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"chevronBorderThickness", ViewManagerPropertyType::Number);
+        nativeProps.Insert(L"chevronBorderBrush", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"chevronBorderPointerOverBrush", ViewManagerPropertyType::Color);
+        nativeProps.Insert(L"chevronBorderPressedBrush", ViewManagerPropertyType::Color);
 
         return nativeProps.GetView();
     }
@@ -71,6 +90,7 @@ namespace winrt::ReactNativeExpander::implementation {
         };
     }
 
+    // IViewManagerWithChildren
     int32_t ExpanderViewManager::ReplaceChild(winrt::Windows::UI::Xaml::FrameworkElement const& parent, winrt::Windows::UI::Xaml::UIElement const& oldChild, winrt::Windows::UI::Xaml::UIElement const& newChild) noexcept {
         return 0;
     }
@@ -100,8 +120,6 @@ namespace winrt::ReactNativeExpander::implementation {
                 L"logToConsole",
                 MakeJSValueArgWriter("warn", "React Native for Windows does not yet support nesting non-FrameworkElement components under <Expander>"));
         }
-
-        return;
     }
 
     void ExpanderViewManager::RemoveAllChildren(winrt::Windows::UI::Xaml::FrameworkElement const& parent) noexcept {

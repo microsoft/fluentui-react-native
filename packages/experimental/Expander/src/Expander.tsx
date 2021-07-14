@@ -12,11 +12,6 @@ export const Expander = compose<ExpanderType>({
   slotProps: {
     root: buildProps(
       (tokens, theme) => ({
-        style: {
-          width: 500,
-          margin: 8
-        },
-        accentColor: theme.colors.accentButtonBackground,
         ...tokens,
       }),
       [],
@@ -25,13 +20,15 @@ export const Expander = compose<ExpanderType>({
   slots: { root: ExpanderComponent },
   render: (userProps: ExpanderProps, useSlots: UseSlots<ExpanderType>) => {
     const Root = useSlots(userProps).root;
-    const [expanded, setExpanded] = React.useState(userProps.expanded);
+    const [expandedState, setExpandedState] = React.useState(userProps.expanded);
     return (rest: ExpanderViewProps, ...children: React.ReactNode[]) => <Root
       style={{
-        height: expanded? userProps.expandedHeight : userProps.collapsedHeight
+        height: expandedState? userProps.expandedHeight : userProps.collapsedHeight
       }}
       onChange={function onChange (event: ExpanderChangeEvent) {
-        setExpanded(event.nativeEvent.expanded);
+        if (event.nativeEvent.expanded != null) {
+          setExpandedState(event.nativeEvent.expanded);
+        }
       }}
       {...mergeProps(userProps, rest)}>{children}</Root>;
   },

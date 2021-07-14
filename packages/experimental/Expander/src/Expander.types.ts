@@ -1,4 +1,4 @@
-import { ColorValue } from 'react-native';
+import { ColorValue, ImageURISource } from 'react-native';
 import type {SyntheticEvent} from 'react-native/Libraries/Types/CoreEventTypes';
 
 export const expanderName = 'Expander';
@@ -20,22 +20,9 @@ export interface ExpanderProps {
    */
   expanded?: boolean;
   /*
-   * TODO: reference id for the header component
-   */
-  headerRef?: number;
-  /*
-   * TODO: reference id for the content component
-   */
-  contentRef?: number;
-  /*
    * Is Expander control enabled for the user
    */
   enabled?: boolean;
-  /*
-   * Style of the expander control
-   * TODO: do we want to have styles here? If so, make an enum
-   */
-  expanderStyle?: string;
   /*
    * Height for the Expander when expanded
    */
@@ -56,13 +43,110 @@ export interface ExpanderProps {
 
 export interface ExpanderTokens {
   /*
-   * Expander background color
-   * TODO: do we want to use this value for custom styling?
+   * Width of the expander
    */
-  accentColor?: ColorValue;
+  width?: number;
+  /*
+   * Horizontal alignment of the expander's content
+   */
+  contentHorizontalAlignment?: HorizontalAlignment;
+  /*
+   * Vertical alignment of the expander's content
+   */
+  contentVerticalAlignment?: VerticalAlignment;
+  /*
+   * Header background color
+   */
+  headerBackground?: ColorValue;
+  /*
+   * Header foreground color at rest
+   */
+  headerForeground?: ColorValue;
+  /*
+   * Header foreground color on pointer over
+   */
+  headerForegroundPointerOver?: ColorValue;
+  /*
+   * Header foreground color when pressed
+   */
+  headerForegroundPressed?: ColorValue;
+  /*
+   * Header border color at rest
+   */
+  headerBorderBrush?: ColorValue;
+  /*
+   * Header border color on pointer over
+   */
+  headerBorderPointerOverBrush?: ColorValue;
+  /*
+   * Header border color when pressed
+   */
+  headerBorderPressedBrush?: ColorValue;
+  /*
+   * Header foreground color when disabled
+   */
+  headerDisabledForeground?: ColorValue;
+  /*
+   * Header border color when disabled
+   */
+  headerDisabledBorderBrush?: ColorValue;
+  /*
+   * Header border thickness
+   */
+  headerBorderThickness?: Number;
+  /*
+   * Content background color
+   */
+  contentBackground?: ColorValue;
+  /*
+   * Content border color
+   */
+  contentBorderBrush?: ColorValue;
+  /*
+   * Chevron background color at rest
+   */
+  chevronBackground?: ColorValue;
+  /*
+   * Chevron foreground color at rest
+   */
+  chevronForeground?: ColorValue;
+  /*
+   * Chevron background color on pointer over
+   */
+  chevronPointerOverBackground?: ColorValue;
+  /*
+   * Chevron foreground color on pointer over
+   */
+  chevronPointerOverForeground?: ColorValue;
+  /*
+   * Chevron background color when pressed
+   */
+  chevronPressedBackground?: ColorValue;
+  /*
+   * Chevron foreground color when pressed
+   */
+  chevronPressedForeground?: ColorValue;
+  /*
+   * Chevron border thickness
+   */
+  chevronBorderThickness?: Number;
+  /*
+   * Chevron border color at rest
+   */
+  chevronBorderBrush?: ColorValue;
+  /*
+   * Chevron border color on pointer over
+   */
+  chevronBorderPointerOverBrush?: ColorValue;
+  /*
+   * Chevron border color when pressed
+   */
+  chevronBorderPressedBrush?: ColorValue;
 }
 
 export type ExpandDirection = 'up' | 'down';
+export type VerticalAlignment = 'bottom' | 'center' | 'stretch' | 'top';
+export type HorizontalAlignment = 'center' | 'left' | 'right' | 'stretch';
 export type ExpanderViewProps = ExpanderProps & ExpanderTokens;
 
 export type ExpanderChangeEvent = SyntheticEvent<

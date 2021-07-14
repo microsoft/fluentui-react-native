@@ -36,6 +36,7 @@ namespace winrt::ReactNativeExpander::implementation {
         winrt::Microsoft::ReactNative::ConstantProviderDelegate ExportedCustomBubblingEventTypeConstants() noexcept;
         winrt::Microsoft::ReactNative::ConstantProviderDelegate ExportedCustomDirectEventTypeConstants() noexcept;
 
+        // IViewManagerWithChildren
         int32_t ReplaceChild(winrt::Windows::UI::Xaml::FrameworkElement const& parent, winrt::Windows::UI::Xaml::UIElement const& oldChild, winrt::Windows::UI::Xaml::UIElement const& newChild) noexcept;
         void AddView(winrt::Windows::UI::Xaml::FrameworkElement const& parent, winrt::Windows::UI::Xaml::UIElement const& child, int64_t index) noexcept;
         void RemoveAllChildren(winrt::Windows::UI::Xaml::FrameworkElement const& parent) noexcept;
