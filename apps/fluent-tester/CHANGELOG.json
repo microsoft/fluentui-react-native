@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 13 Jul 2021 17:19:22 GMT",
+      "tag": "@fluentui-react-native/tester_v0.30.2",
+      "version": "0.30.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Possible fix for wrong UIViewController in Excel card view",
+            "author": "chripear@microsoft.com",
+            "commit": "873a29854a35defa15c2887c8ea0fdb7eeca9fa2",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 13 Jul 2021 15:41:10 GMT",
+      "tag": "@fluentui-react-native/tester_v0.30.1",
+      "version": "0.30.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add icon button with menu example to tester",
+            "author": "lehon@microsoft.com",
+            "commit": "fd486c5b1bfb1ac511a446ab75a8d5ec55bc57a4",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 13 Jul 2021 10:45:30 GMT",
+      "tag": "@fluentui-react-native/tester_v0.30.0",
+      "version": "0.30.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Added FluentUI Standard MenuButton (without Submenu items)",
+            "author": "vkozlova@microsoft.com",
+            "commit": "43202181713fff8976be0b165af710e69ffe610f",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Jun 2021 19:39:16 GMT",
       "tag": "@fluentui-react-native/tester_v0.29.0",
       "version": "0.29.0",

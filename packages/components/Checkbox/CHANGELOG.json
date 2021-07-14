@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Tue, 13 Jul 2021 22:58:45 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.11.8",
+      "version": "0.11.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Reverting changes from previous PR that added SVG functionality to Checkmark - This is causing a serious bundling issue for all partners",
+            "author": "safreibe@microsoft.com",
+            "commit": "93c0994d4cf4a06a49d6580b3d1fd925b7652576",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 06 Jul 2021 16:17:14 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.11.7",
       "version": "0.11.7",
