@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Extract macOS FocusZone implementation from devmain",
+  "packageName": "@fluentui-react-native/focus-zone",
+  "email": "chripear@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-07-14T00:16:08.533Z"
+}
