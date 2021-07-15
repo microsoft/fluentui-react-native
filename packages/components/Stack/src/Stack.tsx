@@ -12,6 +12,15 @@ import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/toke
 import { buildStackRootStyles, buildStackInnerStyles } from './Stack.tokens';
 import { StyleProp, ViewStyle } from 'react-native';
 
+declare global {
+  /* eslint-disable-next-line @typescript-eslint/no-namespace*/
+  namespace NodeJS {
+    interface Global {
+      __jsiExecutorDescription: any;
+    }
+  }
+}
+
 function _mixinStyle(style: StyleProp<object> | undefined, mixin: object): StyleProp<object> {
   return style ? [style, mixin] : mixin;
 }
@@ -21,7 +30,12 @@ const _styleKey = 'style';
 const render = (Slots: ISlots<IStackSlotProps>, renderData: IStackRenderData, ...children: React.ReactNode[]): JSX.Element => {
   const { gap, horizontal, wrap } = renderData.state!;
 
-  if (gap && gap > 0 && children) {
+  if (
+    gap &&
+    gap > 0 &&
+    children &&
+    (!global.hasOwnProperty('__jsiExecutorDescription') || global.__jsiExecutorDescription !== 'ChakraRuntime')
+  ) {
     const extraStyle: ViewStyle = horizontal ? { marginLeft: gap } : { marginTop: gap };
     /* eslint-disable @typescript-eslint/ban-ts-ignore */
     // @ts-ignore - TODO, fix typing error
