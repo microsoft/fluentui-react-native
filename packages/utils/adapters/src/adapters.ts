@@ -4,7 +4,7 @@ import type { ITextWin32Props, IViewWin32Props } from '@office-iss/react-native-
 
 // export core interface types
 export type ITextProps = TextProps & Partial<ITextWin32Props>;
-export type IViewProps = ViewProps & IViewWin32Props;
+export type IViewProps = ViewProps & Partial<IViewWin32Props>;
 export type IImageProps = ImageProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
