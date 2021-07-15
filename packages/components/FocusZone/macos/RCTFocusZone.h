@@ -3,12 +3,12 @@
 #import <React/RCTComponent.h>
 #import <React/RCTView.h>
 
-typedef enum {
+typedef NS_ENUM(NSInteger, FocusZoneDirection) {
 	FocusZoneDirectionBidirectional,
 	FocusZoneDirectionHorizontal,
 	FocusZoneDirectionVertical,
 	FocusZoneDirectionNone
-} FocusZoneDirection;
+};
 
 typedef enum {
 	NavigateStopAtEnds,
