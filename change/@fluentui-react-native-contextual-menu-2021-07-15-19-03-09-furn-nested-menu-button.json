@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Fixed onShow method in Submenu",
+  "packageName": "@fluentui-react-native/contextual-menu",
+  "email": "v.kozlova13@gmail.com",
+  "dependentChangeType": "patch",
+  "date": "2021-07-15T16:03:09.285Z"
+}
