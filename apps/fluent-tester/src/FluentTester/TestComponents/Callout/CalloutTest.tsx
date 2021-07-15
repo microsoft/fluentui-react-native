@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ScreenRect, Text, View, Switch, Picker } from 'react-native';
-import { Button, Callout, Separator, IFocusable, RestoreFocusEvent, Checkbox, DismissBehaviors } from '@fluentui/react-native';
+import { Button, Callout, Separator, IFocusable, RestoreFocusEvent, DismissBehaviors } from '@fluentui/react-native';
 import { CALLOUT_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
@@ -19,29 +19,30 @@ const standardCallout: React.FunctionComponent<{}> = () => {
 
   const [preventDismissOnKeyDown, setPreventDismissOnKeyDown] = React.useState(false);
   const [preventDismissOnClickOutside, setPreventDismissOnClickOutside] = React.useState(false);
-  const [calloutDismissBehaviors, setDismissBehaviors] = React.useState<DismissBehaviors[]>();
-
-  const reEvaluateDismissBehaviors = React.useCallback(() => {
-    const dismissBehaviors: DismissBehaviors[] = [];
-    if (preventDismissOnClickOutside) {
-      dismissBehaviors.push('preventDismissOnClickOutside');
-    }
-    if (preventDismissOnKeyDown) {
-      dismissBehaviors.push('preventDismissOnKeyDown');
-    }
-    if (dismissBehaviors.length > 0) {
-      setDismissBehaviors(dismissBehaviors);
-    }
-  }, []);
+  const [calloutDismissBehaviors, setDismissBehaviors] = React.useState<DismissBehaviors[]>([]);
 
   const onPreventDismissOnKeyDownChange = React.useCallback((value) => {
     setPreventDismissOnKeyDown(value);
-    reEvaluateDismissBehaviors();
+    if (value) {
+      setDismissBehaviors(calloutDismissBehaviors.concat('preventDismissOnKeyDown'));
+    } else {
+      const newDismissBehaviors = calloutDismissBehaviors.filter((value) => {
+        value != 'preventDismissOnKeyDown';
+      });
+      setDismissBehaviors(newDismissBehaviors);
+    }
   }, []);
 
   const onPreventDismissOnClickOutsideChange = React.useCallback((value) => {
     setPreventDismissOnClickOutside(value);
-    reEvaluateDismissBehaviors();
+    if (value) {
+      setDismissBehaviors(calloutDismissBehaviors.concat('preventDismissOnClickOutside'));
+    } else {
+      const newDismissBehaviors = calloutDismissBehaviors.filter((value) => {
+        value != 'preventDismissOnClickOutside';
+      });
+      setDismissBehaviors(newDismissBehaviors);
+    }
   }, []);
 
   const redTargetRef = React.useRef<View>(null);
@@ -118,9 +119,15 @@ const standardCallout: React.FunctionComponent<{}> = () => {
             <Text>Beak Visible</Text>
           </View>
 
-          <Text>Dismiss Behaviors</Text>
-          <Checkbox onChange={onPreventDismissOnKeyDownChange} label="Prevent Dismiss On Key Down" />
-          <Checkbox onChange={onPreventDismissOnClickOutsideChange} label="Prevent Dismiss On Click Outside" />
+          <View style={{ flexDirection: 'row' }}>
+            <Switch value={preventDismissOnKeyDown} onValueChange={onPreventDismissOnKeyDownChange} />
+            <Text>Prevent Dismiss On Key Down</Text>
+          </View>
+
+          <View style={{ flexDirection: 'row' }}>
+            <Switch value={preventDismissOnClickOutside} onValueChange={onPreventDismissOnClickOutsideChange} />
+            <Text>Prevent Dismiss On Click Outside</Text>
+          </View>
 
           <Picker
             prompt="Background Color"
