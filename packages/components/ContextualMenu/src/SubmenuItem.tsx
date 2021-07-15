@@ -59,8 +59,8 @@ export const SubmenuItem = compose<SubmenuItemType>({
 
     const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn, delayHoverIn: 500 });
 
-    const [submenuItemHovered, setsubmenuItemHovered] = React.useState(false);
-    context.setsubmenuItemHovered = setsubmenuItemHovered;
+    const [submenuItemHovered, setSubmenuItemHovered] = React.useState(false);
+    context.setSubmenuItemHovered = setSubmenuItemHovered;
     // set up state
     const state: SubmenuItemState = {
       ...pressable.state,
@@ -73,15 +73,15 @@ export const SubmenuItem = compose<SubmenuItemType>({
 
     const onMouseEnter = React.useCallback(
       (e) => {
-        setsubmenuItemHovered(true);
+        setSubmenuItemHovered(true);
         pressable.props.onMouseEnter && pressable.props.onMouseEnter(e);
         e.stopPropagation();
       },
-      [pressable, setsubmenuItemHovered],
+      [pressable, setSubmenuItemHovered],
     );
 
     /*
-     * For SubmenuItem, menu is shown on hover.
+     * SubmenuItem launches the submenu onMouseEnter event. For keyboarding, submenu should be launched with Spacebar, Enter, or right arrow.
      */
     const onKeyUp = useKeyCallback(onMouseEnter, ' ', 'Enter', 'ArrowRight');
 

@@ -27,7 +27,7 @@ export interface ContextualMenuContext {
    */
   dismissSubmenu?: () => void;
 
-  setsubmenuItemHovered?: React.Dispatch<React.SetStateAction<boolean>>;
+  setSubmenuItemHovered?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface ContextualMenuState {
