@@ -34,16 +34,12 @@ export const MenuButton = compose<MenuButtonType>({
     const menuItemsUpdated = menuItems.map((item) => {
       if (item.hasSubmenu) {
         const [showSubmenu, setShowSubmenu] = useState(false);
-        const [isSubmenuVisible, setIsSubmenuVisible] = React.useState(false);
 
         const toggleShowSubmenu = React.useCallback(() => {
           setShowSubmenu(!showSubmenu);
-          setIsSubmenuVisible(!isSubmenuVisible);
-        }, [showSubmenu, isSubmenuVisible, setShowSubmenu, setIsSubmenuVisible]);
+        }, [showSubmenu, setShowSubmenu]);
 
-        const onShowSubmenu = React.useCallback(() => {
-          setIsSubmenuVisible(true);
-        }, [setIsSubmenuVisible]);
+        const onShowSubmenu = React.useCallback(() => {}, []);
 
         const onDismissSubmenu = React.useCallback(() => {
           setShowSubmenu(false);
@@ -53,7 +49,7 @@ export const MenuButton = compose<MenuButtonType>({
         const menuItemUpdated = {
           ...restItems,
           onHoverIn,
-          showSubmenu: showSubmenu || item.showSubmenu,
+          showSubmenu: item.showSubmenu ?? showSubmenu,
           submenuProps: { ...restSubmenuProps, onShow, onDismiss, setShowMenu },
         };
         return menuItemUpdated;
