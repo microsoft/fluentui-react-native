@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Thu, 15 Jul 2021 17:54:30 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.9.4",
+      "version": "0.9.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixed onShow method in Submenu",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "daa3c23ea3a539bcb6e2d9156daec5b34bc04c39",
+            "package": "@fluentui-react-native/contextual-menu"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 15 Jul 2021 15:40:32 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.9.3",
       "version": "0.9.3",

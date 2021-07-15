@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Thu, 15 Jul 2021 15:40:32 GMT and should not be manually modified.
+This log was last generated on Thu, 15 Jul 2021 17:54:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.4
+
+Thu, 15 Jul 2021 17:54:30 GMT
+
+### Patches
+
+- Fixed onShow method in Submenu (v.kozlova13@gmail.com)
 
 ## 0.9.3
 
