@@ -129,13 +129,6 @@ const nestedMenuButton: React.FunctionComponent<{}> = () => {
     [setSubmenuLastItemClicked],
   );
 
-  const onSecondSubmenuItemClick = React.useCallback(
-    (key) => {
-      setSubmenuLastItemClicked(key);
-    },
-    [setSubmenuLastItemClicked],
-  );
-
   const menuItems = [
     {
       itemKey: '1',
