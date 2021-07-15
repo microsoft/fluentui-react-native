@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
-import { Text, View, Switch, Picker } from 'react-native';
+import { Text, View, Switch } from 'react-native';
 import { Text as RNText, Button, ContextualMenu, ContextualMenuItem, Submenu, SubmenuItem, Separator, Checkbox } from '@fluentui/react-native';
 import { CONTEXTUALMENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
-import { DirectionalHint } from '@fluentui-react-native/callout';
 import TestSvg from '../Button/test.svg';
 
 const contextualMenu: React.FunctionComponent<{}> = () => {
@@ -133,9 +132,6 @@ const nestedContextualMenu: React.FunctionComponent<{}> = () => {
   const [focusOnContainer, setShouldFocusOnContainer] = React.useState(false);
   const toggleFocusOnContainer = React.useCallback((value) => setShouldFocusOnContainer(value), [setShouldFocusOnContainer]);
 
-  const [submenuDirectionalHint, setSubmenuDirectionalHint] = React.useState<DirectionalHint>('rightTopEdge');
-  const onSubmenuDirectionalHintChange = React.useCallback((value) => setSubmenuDirectionalHint(value), []);
-
   const toggleShowContextualMenu = React.useCallback(() => {
     setShowContextualMenu(!showContextualMenu);
     setIsContextualMenuVisible(!isContextualMenuVisible);
@@ -172,23 +168,6 @@ const nestedContextualMenu: React.FunctionComponent<{}> = () => {
     console.log('submenu item clicked');
   }, []);
 
-  const directionOptions: {key: DirectionalHint, text: string}[] = [
-    { key: 'leftTopEdge', text: 'Left Top edge' },
-    { key: 'leftCenter', text: 'Left center' },
-    { key: 'leftBottomEdge', text: 'Left Bottom edge' },
-    { key: 'topLeftEdge', text: 'Top Left edge' },
-    { key: 'topAutoEdge', text: 'Top Auto edge' },
-    { key: 'topCenter', text: 'Top center' },
-    { key: 'topRightEdge', text: 'Top Right edge' },
-    { key: 'rightTopEdge', text: 'Right Top edge' },
-    { key: 'rightCenter', text: 'Right center' },
-    { key: 'rightBottomEdge', text: 'Right Bottom edge' },
-    { key: 'bottonLeftEdge', text: 'Buttom Left edge' },
-    { key: 'bottomAutoEdge', text: 'Bottom Auto edge' },
-    { key: 'bottomCenter', text: 'Buttom center' },
-    { key: 'bottomRightEdge', text: 'Bottom Right edge' },
-  ];
-
   return (
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
@@ -202,15 +181,6 @@ const nestedContextualMenu: React.FunctionComponent<{}> = () => {
             <Text>Should Focus on Container</Text>
             <Switch value={focusOnContainer} onValueChange={toggleFocusOnContainer} />
           </View>
-          <Picker
-            prompt="Submenu Direction"
-            selectedValue={submenuDirectionalHint || 'rightTopEdge'}
-            onValueChange={(direction) => setSubmenuDirectionalHint(direction)}
-          >
-            {directionOptions.map((dir, index) => (
-              <Picker.Item label={dir.text} key={index} value={dir.key} />
-            ))}
-          </Picker>
         </View>
 
         <Separator vertical />
@@ -244,7 +214,7 @@ const nestedContextualMenu: React.FunctionComponent<{}> = () => {
           <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
           <SubmenuItem icon={{ svgSource: svgProps, width: 12, height: 12 }} text="Nested Menu" itemKey="4" onHoverIn={toggleShowSubmenu} componentRef={stdMenuItemRef} />
           {showSubmenu && (
-            <Submenu target={stdMenuItemRef} onDismiss={onDismissSubmenu} onShow={onShowSubmenu} setShowMenu={toggleShowSubmenu} directionalHint={submenuDirectionalHint}>
+            <Submenu target={stdMenuItemRef} onDismiss={onDismissSubmenu} onShow={onShowSubmenu} setShowMenu={toggleShowSubmenu}>
               <ContextualMenuItem
                 icon={{ svgSource: svgProps, width: 12, height: 12 }}
                 text="SubmenuItem svg icon"
