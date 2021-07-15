@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
-import { Text, View, Switch } from 'react-native';
-import { Button, ContextualMenu, ContextualMenuItem, Submenu, SubmenuItem, Separator } from '@fluentui/react-native';
+import { Text, View, Switch, Picker } from 'react-native';
+import { Text as RNText, Button, ContextualMenu, ContextualMenuItem, Submenu, SubmenuItem, Separator, Checkbox } from '@fluentui/react-native';
 import { CONTEXTUALMENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
+import { DirectionalHint } from '@fluentui-react-native/callout';
 import TestSvg from '../Button/test.svg';
 
 const contextualMenu: React.FunctionComponent<{}> = () => {
@@ -13,6 +14,9 @@ const contextualMenu: React.FunctionComponent<{}> = () => {
   const [showContextualMenu, setShowContextualMenu] = React.useState(false);
   const [isContextualMenuVisible, setIsContextualMenuVisible] = React.useState(false);
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
+
+  const [isBeakVisible, setIsBeakVisible] = React.useState(false);
+  const onIsBeakVisibleChange = React.useCallback((value) => setIsBeakVisible(value), []);
 
   const [focusOnMount, setShouldFocusOnMount] = React.useState(true);
   const toggleFocusOnMount = React.useCallback((value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
@@ -54,6 +58,10 @@ const contextualMenu: React.FunctionComponent<{}> = () => {
             <Text>Should Focus on Container</Text>
             <Switch value={focusOnContainer} onValueChange={toggleFocusOnContainer} />
           </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Text>Beak Visible</Text>
+            <Switch value={isBeakVisible} onValueChange={onIsBeakVisibleChange} />
+          </View>
         </View>
 
         <Separator vertical />
@@ -71,7 +79,7 @@ const contextualMenu: React.FunctionComponent<{}> = () => {
               <Text style={{ color: 'blue' }}>none</Text>
             )}
           </Text>
-          <Button content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
+          <Button componentRef={stdBtnRef} content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
         </View>
       </View>
 
@@ -85,6 +93,7 @@ const contextualMenu: React.FunctionComponent<{}> = () => {
           setShowMenu={toggleShowContextualMenu}
           shouldFocusOnMount={focusOnMount}
           shouldFocusOnContainer={focusOnContainer}
+          isBeakVisible= {isBeakVisible}
         >
           <ContextualMenuItem text="MenuItem 1" itemKey="1" />
           <ContextualMenuItem text="MenuItem 2" itemKey="2" />
@@ -124,6 +133,9 @@ const nestedContextualMenu: React.FunctionComponent<{}> = () => {
   const [focusOnContainer, setShouldFocusOnContainer] = React.useState(false);
   const toggleFocusOnContainer = React.useCallback((value) => setShouldFocusOnContainer(value), [setShouldFocusOnContainer]);
 
+  const [submenuDirectionalHint, setSubmenuDirectionalHint] = React.useState<DirectionalHint>('rightTopEdge');
+  const onSubmenuDirectionalHintChange = React.useCallback((value) => setSubmenuDirectionalHint(value), []);
+
   const toggleShowContextualMenu = React.useCallback(() => {
     setShowContextualMenu(!showContextualMenu);
     setIsContextualMenuVisible(!isContextualMenuVisible);
@@ -160,6 +172,23 @@ const nestedContextualMenu: React.FunctionComponent<{}> = () => {
     console.log('submenu item clicked');
   }, []);
 
+  const directionOptions: {key: DirectionalHint, text: string}[] = [
+    { key: 'leftTopEdge', text: 'Left Top edge' },
+    { key: 'leftCenter', text: 'Left center' },
+    { key: 'leftBottomEdge', text: 'Left Bottom edge' },
+    { key: 'topLeftEdge', text: 'Top Left edge' },
+    { key: 'topAutoEdge', text: 'Top Auto edge' },
+    { key: 'topCenter', text: 'Top center' },
+    { key: 'topRightEdge', text: 'Top Right edge' },
+    { key: 'rightTopEdge', text: 'Right Top edge' },
+    { key: 'rightCenter', text: 'Right center' },
+    { key: 'rightBottomEdge', text: 'Right Bottom edge' },
+    { key: 'bottonLeftEdge', text: 'Buttom Left edge' },
+    { key: 'bottomAutoEdge', text: 'Bottom Auto edge' },
+    { key: 'bottomCenter', text: 'Buttom center' },
+    { key: 'bottomRightEdge', text: 'Bottom Right edge' },
+  ];
+
   return (
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
@@ -173,6 +202,15 @@ const nestedContextualMenu: React.FunctionComponent<{}> = () => {
             <Text>Should Focus on Container</Text>
             <Switch value={focusOnContainer} onValueChange={toggleFocusOnContainer} />
           </View>
+          <Picker
+            prompt="Submenu Direction"
+            selectedValue={submenuDirectionalHint || 'rightTopEdge'}
+            onValueChange={(direction) => setSubmenuDirectionalHint(direction)}
+          >
+            {directionOptions.map((dir, index) => (
+              <Picker.Item label={dir.text} key={index} value={dir.key} />
+            ))}
+          </Picker>
         </View>
 
         <Separator vertical />
@@ -206,7 +244,7 @@ const nestedContextualMenu: React.FunctionComponent<{}> = () => {
           <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
           <SubmenuItem icon={{ svgSource: svgProps, width: 12, height: 12 }} text="Nested Menu" itemKey="4" onHoverIn={toggleShowSubmenu} componentRef={stdMenuItemRef} />
           {showSubmenu && (
-            <Submenu target={stdMenuItemRef} onDismiss={onDismissSubmenu} onShow={onShowSubmenu} setShowMenu={toggleShowSubmenu}>
+            <Submenu target={stdMenuItemRef} onDismiss={onDismissSubmenu} onShow={onShowSubmenu} setShowMenu={toggleShowSubmenu} directionalHint={submenuDirectionalHint}>
               <ContextualMenuItem
                 icon={{ svgSource: svgProps, width: 12, height: 12 }}
                 text="SubmenuItem svg icon"
@@ -255,6 +293,9 @@ const IconContextualMenu: React.FunctionComponent<{}> = () => {
     setIsContextualMenuVisible(false);
   }, [setShowContextualMenu]);
 
+  // custom text
+  const IndigoHeroBold = RNText.customize({ tokens: { variant: 'heroStandard', fontWeight: '100', color: '#4b0082' } });
+
   return (
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
@@ -277,7 +318,7 @@ const IconContextualMenu: React.FunctionComponent<{}> = () => {
             <Text>Menu Visibility: </Text>
             {isContextualMenuVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
           </Text>
-          <Button style={{ borderWidth: 0 }} icon={{ svgSource: svgProps, width: 12, height: 12 }} onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
+          <Button componentRef={stdBtnRef} style={{ borderWidth: 0 }} icon={{ svgSource: svgProps, width: 12, height: 12 }} onClick={toggleShowContextualMenu} />
         </View>
       </View>
 
@@ -291,8 +332,12 @@ const IconContextualMenu: React.FunctionComponent<{}> = () => {
           shouldFocusOnMount={focusOnMount}
           shouldFocusOnContainer={focusOnContainer}
         >
-          <ContextualMenuItem text="Menu item 1" itemKey="1" />
-          <ContextualMenuItem text="Menu item 2" itemKey="2" />
+          <ContextualMenuItem itemKey="1">
+            <Checkbox label="Unchecked checkbox"/>
+          </ContextualMenuItem>
+          <ContextualMenuItem itemKey="2">
+            <IndigoHeroBold>IndigoHeroBold text with checkbox</IndigoHeroBold>
+          </ContextualMenuItem>
           <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
           <ContextualMenuItem text="Menuitem 4" itemKey="4" />
         </ContextualMenu>
@@ -311,7 +356,7 @@ const contextualMenuSections: TestSection[] = [
     component: nestedContextualMenu,
   },
   {
-      name: 'IconButton with ContextualMenu',
+      name: 'IconButton with Customized ContextualMenu',
       component: IconContextualMenu
   }
 ];

@@ -56,7 +56,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       context?.setSubmenuItemHovered && context.setSubmenuItemHovered(false);
       // dismiss submenu
       if (!disabled && context?.isSubmenuOpen) {
-        context?.dismissSubmenu();
+        context?.dismissSubmenu && context.dismissSubmenu();
       }
     }, [componentRef, disabled, context]);
 
