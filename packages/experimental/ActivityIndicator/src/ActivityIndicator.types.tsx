@@ -1,4 +1,4 @@
-import { ColorValue, Animated, ViewProps } from 'react-native';
+import { Animated, ViewProps } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
 export const activityIndicatorName = 'ActivityIndicator';
@@ -12,7 +12,7 @@ export interface ActivityIndicatorTokens {
    * ActivityIndicator element color
    * @defaultValue 'BDBDBD' for light mode, '666666' for dark mode
    */
-  activityIndicatorColor?: ColorValue;
+  activityIndicatorColor?: string;
   /**
    * Line thickness of the ActivityIndicator
    * @defaultValue 'medium' or what size is set to

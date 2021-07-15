@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import { useRef, useEffect } from 'react';
-import { Animated, Easing, View, Platform } from 'react-native';
+import { Animated, Easing, View } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import { activityIndicatorName, ActivityIndicatorProps, ActivityIndicatorType } from './ActivityIndicator.types';
@@ -32,6 +32,9 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
 
     const animating = props.animating != undefined ? props.animating : true;
     const hidesWhenStopped = props.hidesWhenStopped != undefined ? props.hidesWhenStopped : true;
+    // React Native ActivityIndicator still takes up space when hidden, so to perfectly match would use opacity
+    // hiding opacity makes the screen reader on iOS and Android skip over it
+    const hideOpacity = animating == false && hidesWhenStopped == true ? 0 : 1;
 
     const spinAnimation = useRef(new Animated.Value(0)).current;
     useEffect(() => {
@@ -41,7 +44,7 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
             Animated.timing(spinAnimation, {
               toValue: 359,
               duration: 750,
-              useNativeDriver: Platform.OS == 'ios' || Platform.OS == 'android',
+              useNativeDriver: false,
               easing: Easing.linear,
             }),
           ]),
@@ -55,18 +58,14 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
       outputRange: ['0deg', '359deg'],
     });
 
-    // React Native ActivityIndicator still takes up space when hidden, so to perfectly match would use opacity
-    // hiding opacity makes the screen reader on iOS and Android skip over it
-    const hideOpacity = animating == false && hidesWhenStopped == true ? 0 : 1;
-
     const path = getActivityIndicatorPath(
       slotProps.root['size'],
       slotProps.root['lineThickness'],
       slotProps.root['activityIndicatorColor'],
     );
 
-    // props for the AnimatedSvg, which is Slots.svg
-    const otherSvgProps = {
+    // perspective is needed for animations to work on Android. See https://reactnative.dev/docs/animations#bear-in-mind
+    const animatedSvgProps = {
       style: {
         transform: [{ rotateZ: interpolateSpin }, { perspective: 10 }],
       },
@@ -82,7 +81,7 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
       const { ...mergedProps } = mergeProps(props, rest, otherRootProps);
       return (
         <Slots.root {...mergedProps}>
-          <Slots.svg {...otherSvgProps}>{path}</Slots.svg>
+          <Slots.svg {...animatedSvgProps}>{path}</Slots.svg>
         </Slots.root>
       );
     };

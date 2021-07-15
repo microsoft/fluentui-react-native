@@ -40,7 +40,10 @@ export const stylingSettings: UseStylingOptions<ActivityIndicatorProps, Activity
         lineThickness: tokens.lineThickness != 'medium' ? lineThicknessSizeMap[tokens.lineThickness] : lineThicknessSizeMap[tokens.size],
         accessibilityRole: 'progressbar',
         accessible: true,
-        style: { width: diameterSizeMap[tokens.size] },
+        style: {
+          width: diameterSizeMap[tokens.size],
+          height: diameterSizeMap[tokens.size],
+        },
       }),
       ['activityIndicatorColor', 'lineThickness', 'size'],
     ),
