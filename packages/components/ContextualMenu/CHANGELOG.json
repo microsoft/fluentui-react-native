@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Thu, 15 Jul 2021 15:40:32 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.9.3",
+      "version": "0.9.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix flickering bug on hover",
+            "author": "lehon@microsoft.com",
+            "commit": "9b88230b17c584b87a7a8414a816c7fda6da1d62",
+            "package": "@fluentui-react-native/contextual-menu"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 14 Jul 2021 16:17:33 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.9.1",
       "version": "0.9.1",
