@@ -1,3 +1,3 @@
-import globalTokens from './reactnative/tokens-global.json';
+import globalTokens from './light/reactnative/tokens-global.json';
 
 export default globalTokens;
