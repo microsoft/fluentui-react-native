@@ -39,7 +39,9 @@ export const MenuButton = compose<MenuButtonType>({
           setShowSubmenu(!showSubmenu);
         }, [showSubmenu, setShowSubmenu]);
 
-        const onShowSubmenu = React.useCallback(() => {}, []);
+        const onShowSubmenu = React.useCallback(() => {
+          return;
+        }, []);
 
         const onDismissSubmenu = React.useCallback(() => {
           setShowSubmenu(false);
