@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/framework",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "description": "Component framework used by fluentui react native controls",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -35,7 +35,7 @@
     "@fluentui-react-native/use-styling": ">=0.6.1 <1.0.0",
     "@fluentui-react-native/use-slots": ">=0.5.2 <1.0.0",
     "@fluentui-react-native/memo-cache": "^1.1.1",
-    "@fluentui-react-native/tokens": ">=0.9.3 <1.0.0"
+    "@fluentui-react-native/tokens": ">=0.9.4 <1.0.0"
   },
   "devDependencies": {
     "@types/react": "^16.9.34",

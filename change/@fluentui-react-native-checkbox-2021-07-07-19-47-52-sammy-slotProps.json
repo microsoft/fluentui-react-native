@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Omitting onPress from props",
-  "packageName": "@fluentui-react-native/checkbox",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-07-08T02:46:57.670Z"
-}
