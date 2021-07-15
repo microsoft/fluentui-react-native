@@ -39,20 +39,16 @@ export const MenuButton = compose<MenuButtonType>({
           setShowSubmenu(!showSubmenu);
         }, [showSubmenu, setShowSubmenu]);
 
-        const onShowSubmenu = React.useCallback(() => {
-          return;
-        }, []);
-
         const onDismissSubmenu = React.useCallback(() => {
           setShowSubmenu(false);
         }, [setShowSubmenu]);
         const { onHoverIn = toggleShowSubmenu, submenuProps = {}, ...restItems } = item;
-        const { onShow = onShowSubmenu, onDismiss = onDismissSubmenu, setShowMenu = toggleShowSubmenu, ...restSubmenuProps } = submenuProps;
+        const { onDismiss = onDismissSubmenu, setShowMenu = toggleShowSubmenu, ...restSubmenuProps } = submenuProps;
         const menuItemUpdated = {
           ...restItems,
           onHoverIn,
           showSubmenu: item.showSubmenu ?? showSubmenu,
-          submenuProps: { ...restSubmenuProps, onShow, onDismiss, setShowMenu },
+          submenuProps: { ...restSubmenuProps, onDismiss, setShowMenu },
         };
         return menuItemUpdated;
       }
