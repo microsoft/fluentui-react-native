@@ -28,10 +28,11 @@ const render = (Slots: ISlots<IStackSlotProps>, renderData: IStackRenderData, ..
     children = React.Children.map(children, (child: React.ReactChild, index: number) => {
       if (React.isValidElement(child) && index > 0) {
         const childProps = child.props;
-        const mixedStyle = _mixinStyle(childProps[_styleKey], extraStyle);
-        const styleProp = Object.create({});
-        Object.defineProperty(styleProp, 'style', { value: mixedStyle, configurable: true });
-        return React.cloneElement(child, styleProp);
+        const extraProps = { style: _mixinStyle(childProps[_styleKey], extraStyle) };
+        return React.cloneElement(child, {
+          ...childProps,
+          ...extraProps,
+        });
       }
       return child;
     });
