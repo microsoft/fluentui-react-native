@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Wed, 14 Jul 2021 21:28:07 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add dark mode files",
+            "author": "email not defined",
+            "commit": "001b1403ab6a1de093600e1c47faac3407180542",
+            "package": "@fluentui-react-native/theme-tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Jun 2021 18:53:56 GMT",
       "tag": "@fluentui-react-native/theme-tokens_v0.2.2",
       "version": "0.2.2",

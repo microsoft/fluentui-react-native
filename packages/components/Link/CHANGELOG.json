@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Thu, 15 Jul 2021 20:35:35 GMT",
+      "tag": "@fluentui-react-native/link_v0.12.12",
+      "version": "0.12.12",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Changing ViewProps to IViewProps",
+            "author": "safreibe@microsoft.com",
+            "commit": "ed0977f5dcb66a4cdd0a9e478b34a30be98be9e5",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Jun 2021 19:39:16 GMT",
       "tag": "@fluentui-react-native/link_v0.12.10",
       "version": "0.12.10",

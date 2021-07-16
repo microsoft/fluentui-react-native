@@ -1,0 +1,246 @@
+{
+  "body": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 20,
+    "fontSize": 14,
+    "fontWeight": "400"
+  },
+  "borderless": {
+    "strokeAlignment": "inner",
+    "strokeColorRest": "transparent",
+    "strokeColorHover": "transparent",
+    "strokeColorPressed": "transparent",
+    "strokeColorDisabled": "transparent",
+    "strokeWidth": 1
+  },
+  "brandBackground": {
+    "fillColorRest": "#106ebe",
+    "fillColorHover": "#0078d4",
+    "fillColorPressed": "#004578",
+    "fillColorDisabled": "#141414"
+  },
+  "brandBackgroundSelected": {
+    "fillColorRest": "#106ebe",
+    "fillColorHover": "#0078d4",
+    "fillColorPressed": "#004578",
+    "fillColorDisabled": "#141414"
+  },
+  "caption": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 16,
+    "fontSize": 12,
+    "fontWeight": "400"
+  },
+  "control": {
+    "cornerRadius": 4,
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 20,
+    "fontSize": 14,
+    "fontWeight": "600"
+  },
+  "display": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 92,
+    "fontSize": 68,
+    "fontWeight": "600"
+  },
+  "ghostBackground": {
+    "fillColorRest": "transparent",
+    "fillColorHover": "#f5f5f5",
+    "fillColorPressed": "#e0e0e0",
+    "fillColorDisabled": "#f0f0f0"
+  },
+  "ghostBackgroundSelected": {
+    "fillColorRest": "transparent",
+    "fillColorHover": "#f5f5f5",
+    "fillColorPressed": "#e0e0e0",
+    "fillColorDisabled": "#f0f0f0"
+  },
+  "headline": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 28,
+    "fontSize": 20,
+    "fontWeight": "600"
+  },
+  "icon": {
+    "cornerRadius": 4
+  },
+  "illustration": {
+    "cornerRadius": 8
+  },
+  "largeTitle": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 52,
+    "fontSize": 40,
+    "fontWeight": "600"
+  },
+  "neutralBackground1": {
+    "fillColorRest": "#292929",
+    "fillColorHover": "#3d3d3d",
+    "fillColorPressed": "#1f1f1f",
+    "fillColorDisabled": "#141414"
+  },
+  "neutralBackground1Selected": {
+    "fillColorRest": "#292929",
+    "fillColorHover": "#3d3d3d",
+    "fillColorPressed": "#1f1f1f",
+    "fillColorDisabled": "#141414"
+  },
+  "neutralBackground2": {
+    "fillColorRest": "#1f1f1f",
+    "fillColorHover": "#333333",
+    "fillColorPressed": "#141414",
+    "fillColorDisabled": "#141414"
+  },
+  "neutralBackground2Selected": {
+    "fillColorRest": "#1f1f1f",
+    "fillColorHover": "#333333",
+    "fillColorPressed": "#141414",
+    "fillColorDisabled": "#141414"
+  },
+  "neutralForeground1": {
+    "fillColorRest": "#ffffff",
+    "fillColorHover": "#ffffff",
+    "fillColorPressed": "#ffffff",
+    "fillColorDisabled": "#5c5c5c"
+  },
+  "neutralForeground1Selected": {
+    "fillColorRest": "#ffffff",
+    "fillColorHover": "#ffffff",
+    "fillColorPressed": "#ffffff",
+    "fillColorDisabled": "#5c5c5c"
+  },
+  "neutralForeground2Brand": {
+    "fillColorRest": "#d6d6d6",
+    "fillColorHover": "#3aa0f3",
+    "fillColorPressed": "#2899f5",
+    "fillColorDisabled": "#5c5c5c"
+  },
+  "neutralForeground2BrandSelected": {
+    "fillColorRest": "#d6d6d6",
+    "fillColorHover": "#3aa0f3",
+    "fillColorPressed": "#2899f5",
+    "fillColorDisabled": "#5c5c5c"
+  },
+  "neutralForeground2": {
+    "fillColorRest": "#d6d6d6",
+    "fillColorHover": "#ffffff",
+    "fillColorPressed": "#ffffff",
+    "fillColorDisabled": "#5c5c5c"
+  },
+  "neutralForeground2Selected": {
+    "fillColorRest": "#d6d6d6",
+    "fillColorHover": "#ffffff",
+    "fillColorPressed": "#ffffff",
+    "fillColorDisabled": "#5c5c5c"
+  },
+  "neutralForegroundInvertedAccessible": {
+    "fillColorRest": "#ffffff",
+    "fillColorHover": "#ffffff",
+    "fillColorPressed": "#ffffff",
+    "fillColorDisabled": "#ffffff"
+  },
+  "neutralForegroundInvertedAccessibleSelected": {
+    "fillColorRest": "#ffffff",
+    "fillColorHover": "#ffffff",
+    "fillColorPressed": "#ffffff",
+    "fillColorDisabled": "#ffffff"
+  },
+  "neutralForegroundInverted": {
+    "fillColorRest": "#242424",
+    "fillColorHover": "#242424",
+    "fillColorPressed": "#242424",
+    "fillColorDisabled": "#242424"
+  },
+  "neutralForegroundInvertedSelected": {
+    "fillColorRest": "#242424",
+    "fillColorHover": "#242424",
+    "fillColorPressed": "#242424",
+    "fillColorDisabled": "#242424"
+  },
+  "neutralStroke1Selected": {
+    "strokeColorRest": "#666666",
+    "strokeColorHover": "#757575",
+    "strokeColorPressed": "#6b6b6b",
+    "strokeColorDisabled": "#424242",
+    "strokeWidth": 1
+  },
+  "neutralStroke1": {
+    "strokeColorRest": "#666666",
+    "strokeColorHover": "#757575",
+    "strokeColorPressed": "#6b6b6b",
+    "strokeColorDisabled": "#424242",
+    "strokeWidth": 1
+  },
+  "neutralStroke2Selected": {
+    "strokeColorRest": "#525252",
+    "strokeColorHover": "#525252",
+    "strokeColorPressed": "#525252",
+    "strokeColorDisabled": "#424242",
+    "strokeWidth": 1
+  },
+  "neutralStroke2": {
+    "strokeColorRest": "#525252",
+    "strokeColorHover": "#525252",
+    "strokeColorPressed": "#525252",
+    "strokeColorDisabled": "#424242",
+    "strokeWidth": 1
+  },
+  "round": {
+    "cornerRadius": 9999
+  },
+  "square": {
+    "cornerRadius": 0
+  },
+  "subheadline": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 22,
+    "fontSize": 16,
+    "fontWeight": "600"
+  },
+  "subtleBackground": {
+    "fillColorRest": "transparent",
+    "fillColorHover": "#383838",
+    "fillColorPressed": "#2e2e2e",
+    "fillColorDisabled": "transparent"
+  },
+  "subtleBackgroundSelected": {
+    "fillColorRest": "transparent",
+    "fillColorHover": "#383838",
+    "fillColorPressed": "#2e2e2e",
+    "fillColorDisabled": "transparent"
+  },
+  "surface": {
+    "cornerRadius": 4
+  },
+  "title1": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 40,
+    "fontSize": 32,
+    "fontWeight": "600"
+  },
+  "title2": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 36,
+    "fontSize": 28,
+    "fontWeight": "600"
+  },
+  "title3": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 32,
+    "fontSize": 24,
+    "fontWeight": "600"
+  },
+  "transparentBackground": {
+    "fillColorRest": "transparent",
+    "fillColorHover": "transparent",
+    "fillColorPressed": "transparent",
+    "fillColorDisabled": "transparent"
+  },
+  "transparentBackgroundSelected": {
+    "fillColorRest": "transparent",
+    "fillColorHover": "transparent",
+    "fillColorPressed": "transparent",
+    "fillColorDisabled": "transparent"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@fluentui-react-native/menu-button",
+  "entries": [
+    {
+      "date": "Thu, 15 Jul 2021 17:54:30 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.2.5",
+      "version": "0.2.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added Submenu Items to MenuButton component.",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "daa3c23ea3a539bcb6e2d9156daec5b34bc04c39",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 13 Jul 2021 10:45:30 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Added FluentUI Standard MenuButton (without Submenu items)",
+            "author": "vkozlova@microsoft.com",
+            "commit": "43202181713fff8976be0b165af710e69ffe610f",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    }
+  ]
+}
