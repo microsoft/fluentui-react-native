@@ -104,11 +104,7 @@ export const MenuButton = compose<MenuButtonType>({
     const context = renderData.state!.context;
     const menuItems = renderData.slotProps!.contextualMenuItems?.menuItems || [];
 
-    return (
-      <View style={{ width: 100, height: 100 }}>
-        <NativeMenuButton />
-      </View>
-    );
+    return <NativeMenuButton style={{ width: 100, height: 100 }} />;
   },
 });
 
