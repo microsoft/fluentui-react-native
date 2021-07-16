@@ -1183,6 +1183,21 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@fluentui-react-native/framework@0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.5.2.tgz#04c911f781ad77c99bcd49685fde5eb3d9f6bceb"
+  integrity sha512-6F6IGfd9SFKr2NJ9bZWoEZQkhTR9mQZDtBl8t9uVtaPb+q1+/KXB5s7RL4ZUyMyi/BIvcRadgJnIqj7JgDYQQw==
+  dependencies:
+    "@fluentui-react-native/composition" ">=0.6.0 <1.0.0"
+    "@fluentui-react-native/default-theme" ">=0.6.0 <1.0.0"
+    "@fluentui-react-native/immutable-merge" "^1.1.0"
+    "@fluentui-react-native/memo-cache" "^1.1.0"
+    "@fluentui-react-native/merge-props" ">=0.3.0 <1.0.0"
+    "@fluentui-react-native/theme-types" ">=0.7.0 <1.0.0"
+    "@fluentui-react-native/tokens" ">=0.9.0 <1.0.0"
+    "@fluentui-react-native/use-slots" ">=0.5.1 <1.0.0"
+    "@fluentui-react-native/use-styling" ">=0.6.0 <1.0.0"
+
 "@fluentui/token-pipeline@^0.3.7":
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.7.tgz#4ac3326c1d12539c7f8abc339432b69172c27bf1"
