@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add ActivityIndicator Component Test",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "t-lindaweng@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-07-16T16:36:05.163Z"
-}

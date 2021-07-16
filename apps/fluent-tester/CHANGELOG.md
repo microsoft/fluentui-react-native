@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 15 Jul 2021 17:54:30 GMT and should not be manually modified.
+This log was last generated on Fri, 16 Jul 2021 18:25:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.31.0
+
+Fri, 16 Jul 2021 18:25:45 GMT
+
+### Minor changes
+
+- Add ActivityIndicator Component Test (t-lindaweng@microsoft.com)
 
 ## 0.30.7
 
