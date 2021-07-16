@@ -31,22 +31,7 @@ RCT_CUSTOM_VIEW_PROPERTY(focusZoneDirection, NSString, RCTFocusZone)
 	}
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(navigateAtEnd, NSString, RCTFocusZone)
-{
-	if ([json isEqualToString:@"NavigateStopAtEnds"])
-	{
-		[view setNavigateAtEnd:NavigateStopAtEnds];
-	}
-	else if ([json isEqualToString:@"NavigateWrap"] || [json isEqualToString:@"NavigateContinue"])
-	{
-		// Not yet implemented
-		[view setNavigateAtEnd:NavigateStopAtEnds];
-	}
-	else
-	{
-		[view setNavigateAtEnd:[defaultView navigateAtEnd]];
-	}
-}
+RCT_EXPORT_VIEW_PROPERTY(navigateAtEnd, NSString)
 
 - (RCTView *)view
 {

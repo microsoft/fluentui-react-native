@@ -333,4 +333,14 @@ static BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action)
 	}
 }
 
+- (void)setNavigateAtEnd:(NSString *)value
+{
+	// do nothing
+}
+
+- (NSString *)navigateAtEnd
+{
+	return @"NavigateStopAtEnds";
+}
+
 @end
