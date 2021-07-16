@@ -36,9 +36,9 @@ export const stylingSettings: UseStylingOptions<ActivityIndicatorProps, Activity
     root: buildProps(
       (tokens: ActivityIndicatorTokens) => ({
         activityIndicatorColor: tokens.activityIndicatorColor,
-        size: diameterSizeMap[tokens.size],
-        lineThickness: tokens.lineThickness != 'medium' ? lineThicknessSizeMap[tokens.lineThickness] : lineThicknessSizeMap[tokens.size],
-        accessibilityRole: 'progressbar',
+        size: tokens.size,
+        lineThickness: tokens.lineThickness != 'medium' ? tokens.lineThickness : tokens.size,
+        accessibilityLabel: 'progressbar',
         accessible: true,
         style: {
           width: diameterSizeMap[tokens.size],

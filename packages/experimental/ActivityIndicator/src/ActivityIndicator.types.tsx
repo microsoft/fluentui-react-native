@@ -26,7 +26,7 @@ export interface ActivityIndicatorTokens {
 }
 
 export interface ActivityIndicatorSlotProps {
-  root: ViewProps;
+  root: ViewProps & ActivityIndicatorTokens;
   svg: Animated.AnimatedProps<SvgProps>;
 }
 

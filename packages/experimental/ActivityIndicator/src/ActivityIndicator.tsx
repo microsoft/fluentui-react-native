@@ -4,7 +4,7 @@ import { Animated, Easing, View } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import { activityIndicatorName, ActivityIndicatorProps, ActivityIndicatorType } from './ActivityIndicator.types';
-import { stylingSettings } from './ActivityIndicator.styling';
+import { diameterSizeMap, lineThicknessSizeMap, stylingSettings } from './ActivityIndicator.styling';
 
 const getActivityIndicatorPath = (diameter: number, width: number, color: string) => {
   const start = {
@@ -59,9 +59,9 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
     });
 
     const path = getActivityIndicatorPath(
-      slotProps.root['size'],
-      slotProps.root['lineThickness'],
-      slotProps.root['activityIndicatorColor'],
+      diameterSizeMap[slotProps.root.size],
+      lineThicknessSizeMap[slotProps.root.lineThickness],
+      slotProps.root.activityIndicatorColor,
     );
 
     // perspective is needed for animations to work on Android. See https://reactnative.dev/docs/animations#bear-in-mind
