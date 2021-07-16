@@ -19,7 +19,7 @@ exports[`ContextualMenu default props 1`] = `
   }
 >
   <View
-    accessibilityLabel="Standard MenuButton"
+    accessibilityLabel="Press for Nested MenuButton"
     accessibilityRole="button"
     accessibilityState={
       Object {
@@ -69,7 +69,7 @@ exports[`ContextualMenu default props 1`] = `
           }
         }
       >
-        Standard MenuButton
+        Press for Nested MenuButton
       </Text>
     </View>
   </View>

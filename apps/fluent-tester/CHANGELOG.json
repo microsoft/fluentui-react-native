@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 15 Jul 2021 17:54:30 GMT",
+      "tag": "@fluentui-react-native/tester_v0.30.7",
+      "version": "0.30.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added Submenu Items to MenuButton component.",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "daa3c23ea3a539bcb6e2d9156daec5b34bc04c39",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 13 Jul 2021 17:19:22 GMT",
       "tag": "@fluentui-react-native/tester_v0.30.2",
       "version": "0.30.2",
