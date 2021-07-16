@@ -5,18 +5,27 @@
  * @format
  */
 
-const { getWatchFolders } = require('@uifabricshared/build-native');
+const { defaultWatchFolders, exclusionList } = require('@rnx-kit/metro-config');
 const { getDefaultConfig } = require('metro-config');
+
+const blockList = exclusionList([
+  // Exclude other test apps
+  /.*\/apps\/(?:android|macos|web|win32|windows)\/.*/,
+  // Exclude build output directory
+  /.*\/apps\/ios\/dist\/.*/,
+]);
 
 module.exports = (async () => {
   const {
     resolver: { sourceExts, assetExts },
   } = await getDefaultConfig();
   return {
-    watchFolders: getWatchFolders(),
+    watchFolders: defaultWatchFolders(__dirname),
     resolver: {
       assetExts: assetExts.filter((ext) => ext !== 'svg'),
       sourceExts: [...sourceExts, 'svg'],
+      blacklistRE: blockList,
+      blockList,
     },
     transformer: {
       babelTransformerPath: require.resolve('react-native-svg-transformer'),
