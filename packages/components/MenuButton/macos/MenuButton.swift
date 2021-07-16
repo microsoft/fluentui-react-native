@@ -10,23 +10,23 @@ import AppKit
 /// A fluent styled button, with hover effects and a corner radius.
 @objc(MSFMenuButton)
 open class MenuButton: NSPopUpButton {
-
-	public var menuItems: [NSMenuItem] {
-		didSet {
-			updateMenu()
-
-		}
-	}
-
+  
 	open override var menu: NSMenu? {
 		didSet {
 			updateMenu()
 		}
 	}
+  
+  open override var image: NSImage? {
+    get {
+      return menuButtonImage
+    }
+    set {
+      menuButtonImage = newValue
+    }
+  }
 
 	public override init(frame buttonFrame: NSRect, pullsDown flag: Bool) {
-
-		menuItems = []
 
 		super.init(frame: buttonFrame, pullsDown: flag)
 
@@ -44,8 +44,6 @@ open class MenuButton: NSPopUpButton {
 		dropDownCell.usesItemFromMenu = false
 
 		select(nil) // Don't select any menu item by default
-
-//		menu = createMenu()
 	}
 
 	@available(*, unavailable)
@@ -59,77 +57,10 @@ open class MenuButton: NSPopUpButton {
 
 	// MARK: - Public Properties
 
-	open override var image: NSImage? {
-		get {
-			return menuButtonImage
-		}
-		set {
-			menuButtonImage = newValue
-		}
-	}
 
 	// MARK: - Private Methods
 
-	private func createMenu() -> NSMenu {
-		let menu = NSMenu(title: "Test Menu")
-
-		let placeholderMenuItem = NSMenuItem()
-		placeholderMenuItem.title = "Placeholder"
-		menu.addItem(placeholderMenuItem)
-
-		let firstMenuItem = NSMenuItem()
-		firstMenuItem.title = "First"
-		menu.addItem(firstMenuItem)
-
-		let secondMenuItem = NSMenuItem()
-		secondMenuItem.title = "Second"
-		menu.addItem(secondMenuItem)
-		secondMenuItem.state = .on
-
-		let thirdMenuItem = NSMenuItem()
-		thirdMenuItem.title = "Third"
-		thirdMenuItem.image = NSImage(named: NSImage.refreshTemplateName)
-		let image = NSImage(named: NSImage.refreshTemplateName)?.image(with: .controlAccentColor)
-		thirdMenuItem.image = image
-		menu.addItem(thirdMenuItem)
-
-		let submenu = createSubMenu()
-		menu.setSubmenu(submenu, for: thirdMenuItem)
-
-		let fourthMenuItem = NSMenuItem()
-		let view = NSView()
-		view.wantsLayer = true
-		view.layer?.backgroundColor = NSColor.systemRed.cgColor
-		view.frame = NSMakeRect(0, 0, 350, 50)
-		fourthMenuItem.view = view
-		menu.addItem(fourthMenuItem)
-
-		let submenu2 = createSubMenu()
-		menu.setSubmenu(submenu2, for: fourthMenuItem)
-
-		let fifthMenuItem = NSMenuItem()
-		fifthMenuItem.title = "Fifth"
-		fifthMenuItem.image = NSImage(named: NSImage.refreshTemplateName)
-		let fifthMenuItemImage = NSImage(named: NSImage.refreshTemplateName)?.image(with: .controlAccentColor)
-		fifthMenuItem.image = fifthMenuItemImage
-		menu.addItem(fifthMenuItem)
-
-		return menu
-	}
-
-	private func createSubMenu() -> NSMenu {
-		let submenu = NSMenu(title: "Test Menu")
-
-		submenu.addItem(withTitle: "Item", action: nil, keyEquivalent: "")
-		submenu.addItem(withTitle: "Item", action: nil, keyEquivalent: "")
-		submenu.addItem(withTitle: "Item", action: nil, keyEquivalent: "")
-
-		return submenu
-	}
-
 	private func updateMenu() {
-//		menu = NSMenu()
-
 		guard let dropDownCell = cell as? NSPopUpButtonCell else {
 			preconditionFailure()
 		}
@@ -140,14 +71,10 @@ open class MenuButton: NSPopUpButton {
 		dropDownCell.usesItemFromMenu = false
 		dropDownCell.menuItem = initialItem
 
-//		menu?.addItem(initialItem)
 		menu?.insertItem(initialItem, at: 0)
-
-
-//		for menuItem in menuItems {
-//			menu?.addItem(menuItem)
-//		}
 	}
+  
+  // MARK: - Private properties
 
 	private var menuButtonImage: NSImage? {
 		didSet {
@@ -166,11 +93,7 @@ open class MenuButton: NSPopUpButton {
 			dropDownCell.menuItem = item
 		}
 	};
-
-
 }
-
-
 
 extension NSImage {
 	func image(with tintColor: NSColor) -> NSImage {

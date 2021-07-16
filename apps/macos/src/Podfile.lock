@@ -21,65 +21,67 @@ PODS:
   - FluentUI-React-Native-MenuButton (0.2.6):
     - React
   - glog (0.3.5)
-  - MicrosoftFluentUI (0.2.7):
-    - MicrosoftFluentUI/ActivityIndicator_ios (= 0.2.7)
-    - MicrosoftFluentUI/ActivityViewAnimating_ios (= 0.2.7)
-    - MicrosoftFluentUI/Appearance_mac (= 0.2.7)
-    - MicrosoftFluentUI/Avatar_ios (= 0.2.7)
-    - MicrosoftFluentUI/AvatarView_mac (= 0.2.7)
-    - MicrosoftFluentUI/BadgeField_ios (= 0.2.7)
-    - MicrosoftFluentUI/BarButtonItems_ios (= 0.2.7)
-    - MicrosoftFluentUI/Button_ios (= 0.2.7)
-    - MicrosoftFluentUI/Button_mac (= 0.2.7)
-    - MicrosoftFluentUI/Calendar_ios (= 0.2.7)
-    - MicrosoftFluentUI/Card_ios (= 0.2.7)
-    - MicrosoftFluentUI/CommandBar_ios (= 0.2.7)
-    - MicrosoftFluentUI/Core_ios (= 0.2.7)
-    - MicrosoftFluentUI/Core_mac (= 0.2.7)
-    - MicrosoftFluentUI/DatePicker_mac (= 0.2.7)
-    - MicrosoftFluentUI/DotView_ios (= 0.2.7)
-    - MicrosoftFluentUI/Drawer_ios (= 0.2.7)
-    - MicrosoftFluentUI/DynamicColor_mac (= 0.2.7)
-    - MicrosoftFluentUI/EasyTapButton_ios (= 0.2.7)
-    - MicrosoftFluentUI/HUD_ios (= 0.2.7)
-    - MicrosoftFluentUI/IndeterminateProgressBar_ios (= 0.2.7)
-    - MicrosoftFluentUI/Label_ios (= 0.2.7)
-    - MicrosoftFluentUI/Link_mac (= 0.2.7)
-    - MicrosoftFluentUI/Navigation_ios (= 0.2.7)
-    - MicrosoftFluentUI/Notification_ios (= 0.2.7)
-    - MicrosoftFluentUI/Obscurable_ios (= 0.2.7)
-    - MicrosoftFluentUI/OtherCells_ios (= 0.2.7)
-    - MicrosoftFluentUI/PeoplePicker_ios (= 0.2.7)
-    - MicrosoftFluentUI/PillButtonBar_ios (= 0.2.7)
-    - MicrosoftFluentUI/PopupMenu_ios (= 0.2.7)
-    - MicrosoftFluentUI/Presenters_ios (= 0.2.7)
-    - MicrosoftFluentUI/ResizingHandleView_ios (= 0.2.7)
-    - MicrosoftFluentUI/ScrollView_ios (= 0.2.7)
-    - MicrosoftFluentUI/SegmentedControl_ios (= 0.2.7)
-    - MicrosoftFluentUI/Separator_ios (= 0.2.7)
-    - MicrosoftFluentUI/Separator_mac (= 0.2.7)
-    - MicrosoftFluentUI/Shimmer_ios (= 0.2.7)
-    - MicrosoftFluentUI/TabBar_ios (= 0.2.7)
-    - MicrosoftFluentUI/TableView_ios (= 0.2.7)
-    - MicrosoftFluentUI/Tooltip_ios (= 0.2.7)
-    - MicrosoftFluentUI/TouchForwardingView_ios (= 0.2.7)
-    - MicrosoftFluentUI/TwoLineTitleView_ios (= 0.2.7)
-    - MicrosoftFluentUI/Utilities_ios (= 0.2.7)
-  - MicrosoftFluentUI/Appearance_mac (0.2.7)
-  - MicrosoftFluentUI/AvatarView_mac (0.2.7):
+  - MicrosoftFluentUI (0.2.8):
+    - MicrosoftFluentUI/ActivityIndicator_ios (= 0.2.8)
+    - MicrosoftFluentUI/ActivityViewAnimating_ios (= 0.2.8)
+    - MicrosoftFluentUI/Appearance_mac (= 0.2.8)
+    - MicrosoftFluentUI/Avatar_ios (= 0.2.8)
+    - MicrosoftFluentUI/AvatarView_mac (= 0.2.8)
+    - MicrosoftFluentUI/BadgeField_ios (= 0.2.8)
+    - MicrosoftFluentUI/BarButtonItems_ios (= 0.2.8)
+    - MicrosoftFluentUI/BottomCommanding_ios (= 0.2.8)
+    - MicrosoftFluentUI/BottomSheet_ios (= 0.2.8)
+    - MicrosoftFluentUI/Button_ios (= 0.2.8)
+    - MicrosoftFluentUI/Button_mac (= 0.2.8)
+    - MicrosoftFluentUI/Calendar_ios (= 0.2.8)
+    - MicrosoftFluentUI/Card_ios (= 0.2.8)
+    - MicrosoftFluentUI/CommandBar_ios (= 0.2.8)
+    - MicrosoftFluentUI/Core_ios (= 0.2.8)
+    - MicrosoftFluentUI/Core_mac (= 0.2.8)
+    - MicrosoftFluentUI/DatePicker_mac (= 0.2.8)
+    - MicrosoftFluentUI/DotView_ios (= 0.2.8)
+    - MicrosoftFluentUI/Drawer_ios (= 0.2.8)
+    - MicrosoftFluentUI/DynamicColor_mac (= 0.2.8)
+    - MicrosoftFluentUI/EasyTapButton_ios (= 0.2.8)
+    - MicrosoftFluentUI/HUD_ios (= 0.2.8)
+    - MicrosoftFluentUI/IndeterminateProgressBar_ios (= 0.2.8)
+    - MicrosoftFluentUI/Label_ios (= 0.2.8)
+    - MicrosoftFluentUI/Link_mac (= 0.2.8)
+    - MicrosoftFluentUI/Navigation_ios (= 0.2.8)
+    - MicrosoftFluentUI/Notification_ios (= 0.2.8)
+    - MicrosoftFluentUI/Obscurable_ios (= 0.2.8)
+    - MicrosoftFluentUI/OtherCells_ios (= 0.2.8)
+    - MicrosoftFluentUI/PeoplePicker_ios (= 0.2.8)
+    - MicrosoftFluentUI/PillButtonBar_ios (= 0.2.8)
+    - MicrosoftFluentUI/PopupMenu_ios (= 0.2.8)
+    - MicrosoftFluentUI/Presenters_ios (= 0.2.8)
+    - MicrosoftFluentUI/ResizingHandleView_ios (= 0.2.8)
+    - MicrosoftFluentUI/ScrollView_ios (= 0.2.8)
+    - MicrosoftFluentUI/SegmentedControl_ios (= 0.2.8)
+    - MicrosoftFluentUI/Separator_ios (= 0.2.8)
+    - MicrosoftFluentUI/Separator_mac (= 0.2.8)
+    - MicrosoftFluentUI/Shimmer_ios (= 0.2.8)
+    - MicrosoftFluentUI/TabBar_ios (= 0.2.8)
+    - MicrosoftFluentUI/TableView_ios (= 0.2.8)
+    - MicrosoftFluentUI/Tooltip_ios (= 0.2.8)
+    - MicrosoftFluentUI/TouchForwardingView_ios (= 0.2.8)
+    - MicrosoftFluentUI/TwoLineTitleView_ios (= 0.2.8)
+    - MicrosoftFluentUI/Utilities_ios (= 0.2.8)
+  - MicrosoftFluentUI/Appearance_mac (0.2.8)
+  - MicrosoftFluentUI/AvatarView_mac (0.2.8):
     - MicrosoftFluentUI/Core_mac
     - MicrosoftFluentUI/DynamicColor_mac
-  - MicrosoftFluentUI/Button_mac (0.2.7):
+  - MicrosoftFluentUI/Button_mac (0.2.8):
     - MicrosoftFluentUI/Core_mac
-  - MicrosoftFluentUI/Core_mac (0.2.7)
-  - MicrosoftFluentUI/DatePicker_mac (0.2.7):
+  - MicrosoftFluentUI/Core_mac (0.2.8)
+  - MicrosoftFluentUI/DatePicker_mac (0.2.8):
     - MicrosoftFluentUI/Appearance_mac
     - MicrosoftFluentUI/Core_mac
-  - MicrosoftFluentUI/DynamicColor_mac (0.2.7):
+  - MicrosoftFluentUI/DynamicColor_mac (0.2.8):
     - MicrosoftFluentUI/Appearance_mac
-  - MicrosoftFluentUI/Link_mac (0.2.7):
+  - MicrosoftFluentUI/Link_mac (0.2.8):
     - MicrosoftFluentUI/Core_mac
-  - MicrosoftFluentUI/Separator_mac (0.2.7):
+  - MicrosoftFluentUI/Separator_mac (0.2.8):
     - MicrosoftFluentUI/Core_mac
   - RCT-Folly (2020.01.13.00):
     - boost-for-react-native
@@ -322,7 +324,7 @@ PODS:
     - React-Core
   - RNSVG (12.1.1):
     - React
-  - SwiftLint (0.43.0)
+  - SwiftLint (0.43.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -452,7 +454,7 @@ SPEC CHECKSUMS:
   FluentUI-React-Native-FocusZone: d2bdfe1f4911f4e5fdf3493ba74d8296286f7f95
   FluentUI-React-Native-MenuButton: 4351cdae9839f528eb1ec55141a904128826f0c6
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
-  MicrosoftFluentUI: 6b3bfd52b232e9abc5cb228b9761a5f42869f4d3
+  MicrosoftFluentUI: f0f620bb76ad355ca74b3dd7b1bd2e1ae41f0152
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
   RCTRequired: f84e12b899c38552d6a29f143cd45e2457d8b291
   RCTTypeSafety: 8eeb4763b9abca903bee88705b1c9d49d1793751
@@ -478,7 +480,7 @@ SPEC CHECKSUMS:
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
   RNCPicker: 6780c753e9e674065db90d9c965920516402579d
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
-  SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
+  SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Yoga: f2da5366fe2be821a64c84a2e455042eab763cf5
 
 PODFILE CHECKSUM: 36b7c6fb3b19c51edd97ade626978c94f016faf3
