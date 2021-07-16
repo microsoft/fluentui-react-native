@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Version bump for packages to attempt to fix NPM publish pipeline",
+  "packageName": "@fluentui/react-native",
+  "email": "chripear@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-07-16T22:17:39.752Z"
+}
