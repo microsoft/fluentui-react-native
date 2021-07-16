@@ -2,6 +2,9 @@
   "name": "@fluentui-react-native/menu-button",
   "version": "0.2.6",
   "description": "A cross-platform MenuButton component using the Fluent Design System",
+  "license": "MIT",
+  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
+  "homepage": "https://github.com/microsoft/fluentui-react-native",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -38,7 +41,5 @@
   "peerDependencies": {
     "react": ">=16.13.1",
     "react-native": ">=0.63.4"
-  },
-  "author": "",
-  "license": "MIT"
+  }
 }
