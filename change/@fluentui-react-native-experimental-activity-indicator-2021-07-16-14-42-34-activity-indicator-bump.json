@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Version bump for ActivityIndicator to attempt to fix NPM publish pipeline",
+  "packageName": "@fluentui-react-native/experimental-activity-indicator",
+  "email": "chripear@microsoft.com",
+  "dependentChangeType": "patch",
+  "date": "2021-07-16T21:42:34.133Z"
+}
