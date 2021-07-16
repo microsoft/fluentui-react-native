@@ -11,7 +11,7 @@ typedef enum {
 	FocusZoneActionUpArrow,
 } FocusZoneAction;
 
-typedef void (^IsViewAtEndOfFocusableRange)(NSView *, BOOL *);
+typedef BOOL (^IsViewLeadingCandidateForNextFocus)(NSView *candidateView);
 
 // Maximum vertical (or horizontal) displacement for a candidate view to be
 // enumerated in the same row (or column) as the current focused view
@@ -51,29 +51,6 @@ static NSView *GetFirstResponder(NSWindow *window)
 	while (responder != nil && ![responder isKindOfClass:[NSView class]])
 		responder = [responder nextResponder];
 	return [responder isKindOfClass:[NSView class]] ? (NSView *)responder : nil;
-}
-
-static void EnumerateFocusableViews(NSView *root, IsViewAtEndOfFocusableRange block)
-{
-	NSMutableArray<NSView *> *queue = [NSMutableArray array];
-	[queue addObject:root];
-
-	while ([queue count] > 0)
-	{
-		NSView *view = [queue firstObject];
-		[queue removeObjectAtIndex:0];
-
-		if ([view canBecomeKeyView])
-		{
-			BOOL stop = NO;
-			block(view, &stop);
-			if (stop)
-			{
-				break;
-			}
-		}
-		[queue addObjectsFromArray:[view subviews]];
-	}
 }
 
 static FocusZoneAction GetActionForEvent(NSEvent *event)
@@ -128,6 +105,27 @@ static BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action)
 	return action == FocusZoneActionRightArrow || action == FocusZoneActionLeftArrow;
 }
 
+- (NSView *)nextViewToFocusForCondition:(IsViewLeadingCandidateForNextFocus)isLeadingCandidate
+{
+	NSView *nextViewToFocus;
+	NSMutableArray<NSView *> *queue = [NSMutableArray array];
+	[queue addObject:self];
+
+	while ([queue count] > 0)
+	{
+		NSView *candidateView = [queue firstObject];
+		[queue removeObjectAtIndex:0];
+
+		if ([candidateView canBecomeKeyView] && isLeadingCandidate(candidateView))
+		{
+			nextViewToFocus = candidateView;
+		}
+		[queue addObjectsFromArray:[candidateView subviews]];
+	}
+
+	return nextViewToFocus;
+}
+
 - (NSView *)nextViewToFocusForAction:(FocusZoneAction)action
 {
 	BOOL isAdvance = IsAdvanceWithinZoneAction(action);
@@ -136,11 +134,11 @@ static BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action)
 	NSView *firstResponder = GetFirstResponder([self window]);
 	NSRect firstResponderRect = [firstResponder convertRect:[firstResponder bounds] toView:self];
 
-	__block NSView *viewToFocus = nil;
 	__block CGFloat closestDistance = CGFLOAT_MAX;
 
-	EnumerateFocusableViews(self, ^(NSView *candidateView, BOOL *stop)
+	IsViewLeadingCandidateForNextFocus block = ^BOOL(NSView *candidateView)
 	{
+		BOOL isLeadingCandidate = NO;
 		BOOL skip = candidateView == firstResponder;
 		NSRect candidateRect = [candidateView convertRect:[candidateView bounds] toView:self];
 		BOOL subviewRelationExists = [candidateView isDescendantOf:firstResponder] || [firstResponder isDescendantOf:candidateView];
@@ -190,12 +188,14 @@ static BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action)
 			if (closestDistance > distance)
 			{
 				closestDistance = distance;
-				viewToFocus = candidateView;
+				isLeadingCandidate = YES;
 			}
 		}
-	});
 
-	return viewToFocus;
+		return isLeadingCandidate;
+	};
+
+	return [self nextViewToFocusForCondition:block];
 }
 
 - (NSView *)nextViewToFocusForHorizontalNavigation:(FocusZoneAction)action
@@ -205,7 +205,6 @@ static BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action)
 	NSView *firstResponder = GetFirstResponder([self window]);
 	NSRect firstResponderRect = [firstResponder convertRect:[firstResponder bounds] toView:self];
 
-	__block NSView *viewToFocus = nil;
 	__block CGFloat closestDistance = CGFLOAT_MAX;
 
 	NSRect selfBounds = [self bounds];
@@ -213,8 +212,9 @@ static BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action)
 		? NSMakePoint(0, NSMaxY(firstResponderRect))
 		: NSMakePoint(selfBounds.size.width, NSMinY(firstResponderRect));
 
-	EnumerateFocusableViews(self, ^(NSView *candidateView, BOOL *stop)
+	IsViewLeadingCandidateForNextFocus block = ^BOOL(NSView *candidateView)
 	{
+		BOOL isLeadingCandidate = NO;
 		NSRect candidateRect = [candidateView convertRect:[candidateView bounds] toView:self];
 
 		BOOL skip = candidateView == firstResponder
@@ -227,60 +227,62 @@ static BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action)
 			if (closestDistance > distance)
 			{
 				closestDistance = distance;
-				viewToFocus = candidateView;
+				isLeadingCandidate = YES;
 			}
 		}
-	});
 
-	return viewToFocus;
+		return isLeadingCandidate;
+	};
+
+	return [self nextViewToFocusForCondition:block];
 }
 
 - (NSView *)nextViewToFocusWithFallback:(FocusZoneAction)action
 {
-	NSView *viewToFocus = [self nextViewToFocusForAction:action];
+	NSView *nextViewToFocus = [self nextViewToFocusForAction:action];
 
-	if (viewToFocus == nil)
+	if (nextViewToFocus == nil)
 	{
 		if (IsHorizontalNavigationWithinZoneAction(action))
 		{
-			viewToFocus = [self nextViewToFocusForHorizontalNavigation:action];
+			nextViewToFocus = [self nextViewToFocusForHorizontalNavigation:action];
 		}
 		else
 		{
 			FocusZoneAction horizontalAction = IsAdvanceWithinZoneAction(action) ? FocusZoneActionRightArrow : FocusZoneActionLeftArrow;
-			viewToFocus = [self nextViewToFocusWithFallback:horizontalAction];
+			nextViewToFocus = [self nextViewToFocusWithFallback:horizontalAction];
 		}
 	}
 
-	return viewToFocus;
+	return nextViewToFocus;
 }
 
 - (NSView *)nextViewToFocusOutsideZone:(FocusZoneAction)action
 {
-	__block NSView *lastFocusableView = self;
+	NSView *nextViewToFocus;
 
 	[[self window] recalculateKeyViewLoop];
 
 	if (action == FocusZoneActionTab)  // Advance to next zone
 	{
-		EnumerateFocusableViews(self, ^(NSView *candidateView, BOOL *stop)
+		IsViewLeadingCandidateForNextFocus block = ^BOOL(NSView *candidateView)
 		{
-			lastFocusableView = candidateView;
-		});
+			return YES;
+		};
 
-		lastFocusableView = [lastFocusableView nextValidKeyView];
+		nextViewToFocus = [([self nextViewToFocusForCondition:block] ?: self) nextValidKeyView];
 	}
 	else
 	{
-		lastFocusableView = [self previousValidKeyView];
+		nextViewToFocus = [self previousValidKeyView];
 	}
 
-	if ([lastFocusableView isDescendantOf:self])
+	if ([nextViewToFocus isDescendantOf:self])
 	{
-		lastFocusableView = nil;
+		nextViewToFocus = nil;
 	}
 
-	return lastFocusableView;
+	return nextViewToFocus;
 }
 
 - (BOOL)isFlipped
