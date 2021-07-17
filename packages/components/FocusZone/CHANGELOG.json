@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/focus-zone",
   "entries": [
     {
+      "date": "Sat, 17 Jul 2021 00:39:49 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Extract macOS FocusZone implementation from devmain",
+            "author": "chripear@microsoft.com",
+            "commit": "dbda6b0c98041bd28cea1e9e243a5f1087b88953",
+            "package": "@fluentui-react-native/focus-zone"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Version bump for packages to attempt to fix NPM publish pipeline",
+            "author": "chripear@microsoft.com",
+            "commit": "c752c746c4e30dcf47f4fbb73294be0882212543",
+            "package": "@fluentui-react-native/focus-zone"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 16 Jul 2021 18:25:45 GMT",
       "tag": "@fluentui-react-native/focus-zone_v0.5.11",
       "version": "0.5.11",
