@@ -1,5 +1,5 @@
 import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { shimmerName, ShimmerProps, ShimmerSlotProps, ShimmerTokens } from './Shimmer.types.win32';
+import { shimmerName, ShimmerProps, ShimmerSlotProps, ShimmerTokens } from './reworkNativeControlShimmer.types.win32';
 export const stylingSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, ShimmerTokens> = {
   tokens: [
     (t) => ({
