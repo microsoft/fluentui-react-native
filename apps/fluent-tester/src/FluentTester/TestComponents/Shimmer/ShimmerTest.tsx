@@ -1,12 +1,16 @@
 import * as React from 'react';
 import { Shimmer, ShimmerElement } from '@fluentui-react-native/experimental-shimmer';
+import { Separator } from '@fluentui/react-native';
 import { SHIMMER_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Stack } from '@fluentui-react-native/stack';
 import { icon } from './iconImageSource';
 import { stackStyle } from '../Common/styles';
+import { Switch, Text, View } from 'react-native';
 
 const shimmer: React.FunctionComponent<{}> = () => {
+  const [useIcon, setUseIcon] = React.useState(false);
+
   const lines: Array<ShimmerElement> = [
     {
       type: 'rect',
@@ -43,7 +47,17 @@ const shimmer: React.FunctionComponent<{}> = () => {
   });
   return (
     <Stack style={stackStyle}>
-      <CustomizedShimmer uri={icon} height={200} />
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Switch
+          value={useIcon}
+          onValueChange={(value) => {
+            setUseIcon(value);
+          }}
+        />
+        <Text>Set Initial Focus</Text>
+      </View>
+      <Separator />
+      <CustomizedShimmer uri={useIcon ? icon : {}} height={200} />
       <Shimmer elements={circle} width={500} />
       <Shimmer elements={rect} width={500} />
       <Shimmer height={10} />
