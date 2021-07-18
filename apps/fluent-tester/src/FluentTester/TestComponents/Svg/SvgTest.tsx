@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Switch, Text, View } from 'react-native';
+import { Separator } from '@fluentui/react-native';
 import { Circle, Defs, G, Line, Path, Polygon, LinearGradient, RadialGradient, Rect, Stop, Svg, SvgCssUri, Use } from 'react-native-svg';
 import TestSvg from './Assets/accessible-icon-brands.svg';
 import { SVG_TESTPAGE } from './consts';
@@ -13,10 +14,25 @@ const styles = StyleSheet.create({
 });
 
 const rect: React.FunctionComponent<{}> = () => {
+  const [useColorA, setUseColorA] = React.useState(false);
+  const colorA = 'red';
+  const colorB = 'green';
   return (
-    <Svg width="50" height="50">
-      <Rect x="10" y="10" width="20" height="20" fill="red" stroke="black" />
-    </Svg>
+    <React.Fragment>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Switch
+          value={useColorA}
+          onValueChange={(value) => {
+            setUseColorA(value);
+          }}
+        />
+        <Text>Change Color</Text>
+      </View>
+      <Separator />
+      <Svg width="50" height="50">
+        <Rect x="10" y="10" width="20" height="20" fill={useColorA ? colorA : colorB} stroke="black" />
+      </Svg>
+    </React.Fragment>
   );
 };
 
