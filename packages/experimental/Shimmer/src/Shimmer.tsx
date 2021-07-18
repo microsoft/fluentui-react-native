@@ -107,9 +107,16 @@ export const Shimmer = compose<ShimmerType>({
             <ClipPath id="shimmerView">{rows}</ClipPath>
           </Defs>
           {uri && <Slots.image href={props.uri} />}
-          <Rect x="0" y="0" width="100%" height="100%" fill="url(#gradient)" clipPath={!uri ? 'url(#shimmerView)' : null} />
+          <Rect
+            x="0"
+            y="0"
+            width={memoizedShimmerData.containerWidth}
+            height={memoizedShimmerData.containerHeight}
+            fill="url(#gradient)"
+            clipPath={!uri ? 'url(#shimmerView)' : null}
+          />
 
-          {/* This seems more appropriate; width and height 100% should be handled by flex style
+          {/* This seems more appropriate; width and height 100% should be handled by flex style, no?
 
           <Rect
             x="0"
