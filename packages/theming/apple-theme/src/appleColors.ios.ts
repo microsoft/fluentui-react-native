@@ -421,5 +421,13 @@ export function paletteFromAppleColors(isDark: boolean): ThemeColorDefinition {
     buttonDisabledSecondaryContent: fluentApple.buttonTitleDisabled,
     buttonHoveredSecondaryContent: fluentApple.communicationBlue,
     buttonPressedSecondaryContent: fluentApple.communicationBlueTint20,
+
+    checkboxBackground: fluentApple.communicationBlue,
+    checkboxBackgroundDisabled: fluentApple.surfacePrimary,
+    checkboxBorderColor: fluentApple.gray600,
+    checkmarkColor: fluentApple.iconOnAccent,
+
+    personaActivityGlow: fluentApple.buttonBackground,
+    personaActivityRing: fluentApple.surfacePrimary,
   };
 }

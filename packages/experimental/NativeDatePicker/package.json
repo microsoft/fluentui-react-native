@@ -1,0 +1,37 @@
+{
+  "name": "@fluentui-react-native/experimental-native-date-picker",
+  "version": "0.2.1",
+  "description": "A Native date picker component using the Fluent Design System.  Currently only implemented on iOS.",
+  "license": "MIT",
+  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
+  "homepage": "https://github.com/microsoft/fluentui-react-native",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "just": "fluentui-scripts",
+    "clean": "fluentui-scripts clean",
+    "lint": "fluentui-scripts eslint",
+    "depcheck": "fluentui-scripts depcheck",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "verify-api": "fluentui-scripts verify-api-extractor",
+    "update-api": "fluentui-scripts update-api-extractor"
+  },
+  "devDependencies": {
+    "@types/react-native": "^0.63.0",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "react-native": "^0.63.4",
+    "react": "16.13.1"
+  },
+  "peerDependencies": {
+    "react-native": ">=0.63.4",
+    "react": "16.13.1"
+  }
+}

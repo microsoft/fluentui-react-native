@@ -8,14 +8,18 @@ import { IconProps } from '@fluentui-react-native/icon';
 export const submenuItemName = 'submenuItem';
 export type SubmenuItemTokens = ContextualMenuItemTokens;
 export type SubmenuItemProps = ContextualMenuItemProps;
-export type SubmenuItemState = ContextualMenuItemState;
+
+export interface SubmenuItemState extends ContextualMenuItemState {
+  submenuItemHovered?: boolean;
+}
 
 export interface SubmenuItemSlotProps {
   root: React.PropsWithRef<ViewProps>;
-  stack: ViewProps;
+  leftstack: ViewProps;
   icon: IconProps;
   content: ITextProps;
-  dropArrow: IconProps;
+  rightstack: ViewProps;
+  chevron: IconProps;
 }
 
 export type SubmenuItemRenderData = IRenderData<SubmenuItemSlotProps, SubmenuItemState>;

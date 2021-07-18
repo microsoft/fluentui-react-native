@@ -9,12 +9,15 @@ PODS:
     - React-Core (= 0.63.4)
     - React-jsi (= 0.63.4)
     - ReactCommon/turbomodule/core (= 0.63.4)
-  - FluentUI-React-Native-Avatar (0.9.0):
+  - FluentUI-React-Native-Avatar (0.9.5):
     - MicrosoftFluentUI (~> 0.2.2)
     - MicrosoftFluentUI (~> 0.2.6)
     - React
-  - FluentUI-React-Native-Button (0.6.0):
+  - FluentUI-React-Native-Button (0.6.7):
     - MicrosoftFluentUI (~> 0.2.2)
+    - React
+  - FluentUI-React-Native-Date-Picker (0.2.1):
+    - MicrosoftFluentUI/Calendar_ios (~> 0.2.7)
     - React
   - Folly (2020.01.13.00):
     - boost-for-react-native
@@ -336,6 +339,8 @@ PODS:
   - React-jsinspector (0.63.4)
   - react-native-menu (0.1.2):
     - React
+  - react-native-slider (3.0.3):
+    - React
   - React-RCTActionSheet (0.63.4):
     - React-Core/RCTActionSheetHeaders (= 0.63.4)
   - React-RCTAnimation (0.63.4):
@@ -396,7 +401,7 @@ PODS:
     - React-Core (= 0.63.4)
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
-  - ReactTestApp-DevSupport (0.3.13)
+  - ReactTestApp-DevSupport (0.6.3)
   - ReactTestApp-Resources (1.0.0-dev)
   - RNSVG (12.1.1):
     - React
@@ -409,6 +414,7 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../../../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - FluentUI-React-Native-Avatar (from `../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec`)
   - FluentUI-React-Native-Button (from `../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec`)
+  - FluentUI-React-Native-Date-Picker (from `../../../packages/experimental/NativeDatePicker/FluentUIReactNativeDatePicker.podspec`)
   - Folly (from `../../../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - QRCodeReader.swift
@@ -425,6 +431,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../../../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../../../node_modules/react-native/ReactCommon/jsinspector`)
   - "react-native-menu (from `../../../node_modules/@react-native-menu/menu`)"
+  - "react-native-slider (from `../../../node_modules/@react-native-community/slider`)"
   - React-RCTActionSheet (from `../../../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../../../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../../../node_modules/react-native/Libraries/Blob`)
@@ -459,6 +466,8 @@ EXTERNAL SOURCES:
     :path: "../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec"
   FluentUI-React-Native-Button:
     :path: "../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec"
+  FluentUI-React-Native-Date-Picker:
+    :path: "../../../packages/experimental/NativeDatePicker/FluentUIReactNativeDatePicker.podspec"
   Folly:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:
@@ -485,6 +494,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/ReactCommon/jsinspector"
   react-native-menu:
     :path: "../../../node_modules/@react-native-menu/menu"
+  react-native-slider:
+    :path: "../../../node_modules/@react-native-community/slider"
   React-RCTActionSheet:
     :path: "../../../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -519,8 +530,9 @@ SPEC CHECKSUMS:
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
-  FluentUI-React-Native-Avatar: 5d5bcc8bd58079d32f82c398fd032cd77d43cddc
-  FluentUI-React-Native-Button: 3576b2637ae9f2dc45db1f03f5fadd2d8431dfa2
+  FluentUI-React-Native-Avatar: f34ddd92f1ab695e1ec0f39c77f5210747ec20ad
+  FluentUI-React-Native-Button: 0d16dcc583f1309e48d65dee52cdaf5244b3ce75
+  FluentUI-React-Native-Date-Picker: d83563ff5c59d8960220ed8f92d05d5ec625ca19
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   MicrosoftFluentUI: 6b3bfd52b232e9abc5cb228b9761a5f42869f4d3
@@ -536,6 +548,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 93bd528844ad21dc07aab1c67cb10abae6df6949
   React-jsinspector: 58aef7155bc9a9683f5b60b35eccea8722a4f53a
   react-native-menu: 9fe07f72e075b250295eeae25425490cc9608951
+  react-native-slider: e99fc201cefe81270fc9d81714a7a0f5e566b168
   React-RCTActionSheet: 89a0ca9f4a06c1f93c26067af074ccdce0f40336
   React-RCTAnimation: 1bde3ecc0c104c55df246eda516e0deb03c4e49b
   React-RCTBlob: a97d378b527740cc667e03ebfa183a75231ab0f0
@@ -546,12 +559,12 @@ SPEC CHECKSUMS:
   React-RCTText: 5c51df3f08cb9dedc6e790161195d12bac06101c
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
-  ReactTestApp-DevSupport: 12d9f285a44ff0cb7962a213621f87d3e6de9288
+  ReactTestApp-DevSupport: 9f0b81965c46840c5410ccc4e7f5a4d6cd224ece
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: b7cc7feed5be0b00a6e5d7a4c4d454da5a533057
+PODFILE CHECKSUM: 31571d5ec37b56ac776b1881c6312a1cb1860de1
 
 COCOAPODS: 1.10.1

@@ -15,28 +15,37 @@ export const settings: IComposeSettings<SubmenuItemType> = [
       focusable: true,
       style: {
         display: 'flex',
-        alignItems: 'flex-start',
         flexDirection: 'row',
         alignSelf: 'flex-start',
         width: '100%',
+        justifyContent: 'space-between',
       },
     },
     content: {},
-    icon: {},
-    stack: {
+    icon: {style: { marginEnd: 5 }},
+    leftstack: {
       style: {
         display: 'flex',
-        paddingStart: 16,
-        paddingEnd: 16,
+        paddingStart: 5,
         alignItems: 'center',
         flexDirection: 'row',
         alignSelf: 'flex-start',
         minHeight: 32,
-        minWidth: 80,
-        justifyContent: 'center',
-      },
+        justifyContent: 'flex-start',
+      }
     },
-    _precedence: ['focused', 'hovered', 'pressed', 'disabled'],
+    rightstack: {
+      style: {
+        display: 'flex',
+        paddingEnd: 5,
+        alignItems: 'center',
+        flexDirection: 'row',
+        minHeight: 32,
+        width: 12,
+        justifyContent: 'flex-end',
+      }
+    },
+    _precedence: ['focused','hovered', 'pressed', 'submenuItemHovered', 'disabled'],
     _overrides: {
       disabled: {
         tokens: {
@@ -48,6 +57,12 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         tokens: {
           backgroundColor: 'menuItemBackgroundHovered',
           color: 'menuItemTextHovered',
+        },
+      },
+      submenuItemHovered: {
+        tokens: {
+          color: 'menuItemTextHovered',
+          backgroundColor: 'menuItemBackgroundHovered',
         },
       },
       focused: {
