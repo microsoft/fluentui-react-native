@@ -40,6 +40,7 @@
     "@fluentui-react-native/framework": ">=0.5.8 <1.0.0",
     "@fluentui-react-native/icon": "0.7.7",
     "@fluentui-react-native/interactive-hooks": ">=0.10.10 <1.0.0",
+    "@fluentui-react-native/native-radio-button": ">=0.0.1 <1.0.0",
     "@fluentui-react-native/stack": ">=0.5.8 <1.0.0",
     "@fluentui-react-native/theme": ">=0.5.5 <1.0.0",
     "@fluentui-react-native/theme-types": ">=0.8.0 <1.0.0",

@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { RadioButton, RadioGroup, Separator } from '@fluentui/react-native';
 import { RADIOGROUP_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { NativeRadioButton } from '@fluentui-react-native/native-radio-button';
 
 const basicRadioGroup: React.FunctionComponent<{}> = () => {
   // Client's example onChange function
@@ -27,10 +28,10 @@ const basicRadioGroup: React.FunctionComponent<{}> = () => {
   return (
     <View>
       <RadioGroup label="Uncontrolled RadioGroup" defaultSelectedKey="B" onChange={onChange}>
-        <RadioButton content="Option A" buttonKey="A" ariaLabel="Test Aria Label" />
-        <RadioButton content="Option B" buttonKey="B" />
-        <RadioButton content="Option C (disabled)" buttonKey="C" disabled={true} />
-        <RadioButton content="Option D" buttonKey="D" />
+        <NativeRadioButton title="native button"></NativeRadioButton>
+        <NativeRadioButton title="Option B" buttonKey="B" />
+        <NativeRadioButton title="Option C (disabled)" enabled={false} style={{ width: 150 }} />
+        <NativeRadioButton title="Option D" />
       </RadioGroup>
       <Separator />
       <RadioGroup label="Controlled RadioGroup" selectedKey={selectedKey} onChange={onChange2}>
