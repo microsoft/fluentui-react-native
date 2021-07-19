@@ -1,6 +1,7 @@
 // import { SvgProps, ImageProps } from 'react-native-svg';
-import { ImageURISource, ColorValue, ViewProps } from 'react-native';
-import { ImageProps } from 'react-native-svg';
+import { ColorValue, ViewProps } from 'react-native';
+import { SvgProps } from 'react-native-svg';
+import { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 
 export const shimmerName = 'Shimmer';
 
@@ -53,7 +54,7 @@ export interface ShimmerElement {
 export interface ShimmerTokens {
   /**
    * Specifies the gradient angle, value should be anywhere between -1 and 1 (units? radians?)
-   * -1 to 1 maps to 90 degrees horizontally to ≈ 120 degrees   ???????
+   * -1 to 1 maps to 90 degrees horizontally to ≈ 120 degrees
    * @defaultValue '0'
    */
   angle?: number;
@@ -74,7 +75,7 @@ export interface ShimmerTokens {
   duration?: number;
 
   /**
-   * Specifies the gradient opacity, value should be less than 1 (actually? why?)
+   * Specifies the gradient opacity
    * @defaultValue '.7'
    */
   gradientOpacity?: number;
@@ -92,38 +93,24 @@ export interface ShimmerTokens {
   shimmerTintColor?: ColorValue;
 
   /**
-   * Specifies the distance traveled from starting position.
-   * By default, the animation will animate from 0 to 30 over the course of 7000ms, since speed = distance / time, so
-   * speed ≈ 0.004 dip/ms ?? (higher the speed, faster it moves).
-   * @defaultValue '30'
-   */
-  toValue?: number;
-
-  height?: number;
-  /**
    * Width of the shimmer wave
    * @defaultValue '200'
    */
-  width?: number;
+  shimmerWidth?: number;
 }
 
 export interface ShimmerSlotProps extends ShimmerProps {
   root: ViewProps;
-  // shimmerWave: ShimmerTokens & ViewProps;
-  // clippingMask: SvgProps;
-  image: ImageProps;
+  clippingMask: SvgProps;
+  shimmerWave: ShimmerTokens;
+  shimmerWaveContainer: ShimmerTokens & ViewProps;
 }
 
-export interface ShimmerProps extends ShimmerTokens {
+export interface ShimmerProps extends ViewProps, ShimmerTokens, IBackgroundColorTokens, IBorderTokens {
   /**
    * Array of ShimmerElements representing the clipping mask
    */
   elements?: Array<ShimmerElement>;
-
-  /**
-   * Image to be used as a shimmer element
-   */
-  uri?: ImageURISource;
 }
 
 export interface ShimmerType {

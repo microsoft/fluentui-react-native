@@ -2,41 +2,44 @@ import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework'
 import { shimmerName, ShimmerProps, ShimmerSlotProps, ShimmerTokens } from './Shimmer.types.win32';
 export const stylingSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, ShimmerTokens> = {
   tokens: [
-    (t) => ({
+    () => ({
       angle: 0,
       delay: 0,
       duration: 7000,
       gradientOpacity: 0.7,
-      gradientTintColor: t.host?.appearance === 'light' ? 'white' : 'black',
-      shimmerTintColor: t.host?.appearance === 'light' ? '#E1E1E1' : '#404040',
+      gradientTintColor: 'white',
+      shimmerTintColor: '#E1E1E1',
     }),
     shimmerName,
   ],
+  tokensThatAreAlsoProps: 'all',
   slotProps: {
-    root: buildProps(
+    root: buildProps(() => ({
+      style: { flexGrow: 0 },
+      accessible: true,
+      accessibilityRole: 'progressbar',
+    })),
+    shimmerWaveContainer: buildProps(
       (tokens: ShimmerTokens) => ({
-        accessible: true,
-        accessibilityRole: 'progressbar',
-        angle: tokens.angle,
+        style: { overflow: 'hidden', flexGrow: 0 },
         delay: tokens.delay,
         duration: tokens.duration,
+      }),
+      ['delay', 'duration'],
+    ),
+    // Absolute positioning is used to overlay the clipping mask on top of the shimmer wave.
+    shimmerWave: buildProps(
+      (tokens: ShimmerTokens) => ({
+        style: { flexGrow: 0 },
+        angle: tokens.angle,
         gradientOpacity: tokens.gradientOpacity,
         gradientTintColor: tokens.gradientTintColor,
         shimmerTintColor: tokens.shimmerTintColor,
-        width: tokens.width,
       }),
-      ['angle', 'delay', 'duration', 'gradientOpacity', 'gradientTintColor', 'shimmerTintColor', 'width'],
+      ['angle', 'gradientOpacity', 'gradientTintColor', 'shimmerTintColor'],
     ),
-    image: buildProps((_tokens: ShimmerTokens) => ({
-      href: null,
+    clippingMask: buildProps(() => ({
+      style: { position: 'absolute', flexGrow: 0 },
     })),
-
-    // Absolute positioning is used to overlay the clipping mask on top of the shimmer wave.
-    // shimmerWave: buildProps((_tokens: ShimmerTokens) => ({
-    //   style: { position: 'absolute' },
-    // })),
-    // clippingMask: buildProps((_tokens: ShimmerTokens) => ({
-    //   style: { position: 'absolute' },
-    // })),
   },
 };

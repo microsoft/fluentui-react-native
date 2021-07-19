@@ -1,10 +1,9 @@
 /** @jsx withSlots */
-// import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
-// import { View } from 'react-native';
+import { View } from 'react-native';
+import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import { useMemo } from 'react';
-import Svg, { Circle, ClipPath, Defs, Image, LinearGradient, Rect, Stop } from 'react-native-svg';
-// import { Circle, ClipPath, Defs, Image, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
+import { Svg, Circle, ClipPath, Defs, LinearGradient, Rect, Stop } from 'react-native-svg';
 import { stylingSettings } from './Shimmer.styling.win32';
 import { shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types.win32';
 
@@ -27,7 +26,7 @@ import { shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types.win32';
 //   return startValue;
 // }
 
-// const RCTShimmerGradient = ensureNativeComponent('RCTShimmerGradient');
+const RCTNativeAnimatedShimmer = ensureNativeComponent('RCTNativeAnimatedShimmer');
 
 // eslint-disable-next-line no-import-assign
 const useStyling = buildUseStyling(stylingSettings);
@@ -37,11 +36,10 @@ export const Shimmer = compose<ShimmerType>({
   ...stylingSettings,
 
   slots: {
-    //root: View,
-    root: Svg,
-    //clippingMask: Svg,
-    image: Image,
-    // shimmerWave: RCTShimmerGradient,
+    root: View,
+    clippingMask: Svg,
+    shimmerWaveContainer: RCTNativeAnimatedShimmer,
+    shimmerWave: Svg,
   },
 
   render: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
@@ -51,29 +49,25 @@ export const Shimmer = compose<ShimmerType>({
       () => ({
         gradientTintColor: props.gradientTintColor ? props.gradientTintColor : tokens['gradientTintColor'],
         shimmerTintColor: props.shimmerTintColor ? props.shimmerTintColor : tokens['shimmerTintColor'],
-        containerWidth: props.width ? props.width : tokens['width'],
-        containerHeight: props.height ? props.height : tokens['height'],
-        toValue: props.toValue ? props.toValue : tokens['toValue'],
         delay: props.delay ? props.delay : tokens['delay'],
         duration: props.duration ? props.duration : tokens['duration'],
         angle: props.angle ? props.angle : tokens['angle'],
         gradientOpacity: tokens['gradientOpacity'],
+        shimmerWidth: tokens['shimmerWidth'],
       }),
       [
         props.gradientTintColor,
         props.shimmerTintColor,
-        props.width,
-        props.height,
-        props.toValue,
         props.delay,
         props.duration,
         props.angle,
         props.gradientOpacity,
+        props.shimmerWidth,
       ],
     );
 
     return (rest: ShimmerProps) => {
-      const { uri, elements, ...mergedProps } = mergeProps(props, rest);
+      const { elements, ...mergedProps } = mergeProps(props, rest);
       const rows = [];
 
       if (elements) {
@@ -89,54 +83,36 @@ export const Shimmer = compose<ShimmerType>({
                 y={element.yPos}
                 rx={element.borderRadius}
                 ry={element.borderRadius}
+                fill="#00000000"
               />,
             );
           } else if (element.type == 'circle') {
-            rows.push(<Circle key={i} r={element.height / 2} cx={element.xPos} cy={element.yPos} />);
+            rows.push(<Circle key={i} r={element.height / 2} cx={element.xPos} cy={element.yPos} fill="#00000000" />);
           }
         }
       }
 
       return (
         <Slots.root {...mergedProps}>
-          <Defs>
-            <LinearGradient id="gradient">
-              <Stop
-                offset="10%"
-                stopColor={uri ? memoizedShimmerData.gradientTintColor : memoizedShimmerData.shimmerTintColor}
-                stopOpacity={uri ? '0' : '1'}
-              />
-              <Stop offset="20%" stopColor={memoizedShimmerData.gradientTintColor} stopOpacity={memoizedShimmerData.gradientOpacity} />
-              <Stop
-                offset="30%"
-                stopColor={uri ? memoizedShimmerData.gradientTintColor : memoizedShimmerData.shimmerTintColor}
-                stopOpacity={uri ? '0' : '1'}
-              />
-            </LinearGradient>
-            <ClipPath id="shimmerView">{rows}</ClipPath>
-          </Defs>
-          {/* {uri && <Slots.image href={props.uri} />} */}
-          <Rect
-            x="0"
-            y="0"
-            width={memoizedShimmerData.containerWidth}
-            height={memoizedShimmerData.containerHeight}
-            fill="url(#gradient)"
-            clipPath={'url(#shimmerView)'}
-          />
+          <Slots.shimmerWaveContainer>
+            <Slots.shimmerWave>
+              <Defs>
+                <LinearGradient id="gradient">
+                  <Stop offset="10%" stopColor={memoizedShimmerData.shimmerTintColor} stopOpacity="1" />
+                  <Stop offset="20%" stopColor={memoizedShimmerData.gradientTintColor} stopOpacity={memoizedShimmerData.gradientOpacity} />
+                  <Stop offset="30%" stopColor={memoizedShimmerData.shimmerTintColor} stopOpacity="1" />
+                </LinearGradient>
+              </Defs>
+              <Rect x="0" y="0" width="400" height="200" fill="url(#gradient)" />
+            </Slots.shimmerWave>
+          </Slots.shimmerWaveContainer>
+          <Slots.clippingMask>
+            <Defs>
+              <ClipPath id="shimmerView">{rows}</ClipPath>
+            </Defs>
+            <Rect x="0" y="0" width="400" height="200" fill="#00000000" clipPath="url(#shimmerView)" />
+          </Slots.clippingMask>
         </Slots.root>
-
-        // <Slots.root>
-        //   <Slots.shimmerWave {...mergedProps} />
-        //   <Slots.clippingMask>
-        //     <Defs>
-        //       <ClipPath id="shimmerView">{rows}</ClipPath>
-        //     </Defs>
-
-        //     {uri && <Slots.image href={props.uri} />}
-        //     <Rect width="100%" height="100%" fill="none" clipPath={!uri ? 'url(#shimmerView)' : null} />
-        //   </Slots.clippingMask>
-        // </Slots.root>
       );
     };
   },
