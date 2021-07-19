@@ -81,6 +81,8 @@ export const RadioButton = compose<IRadioButtonType>({
         accessibilityLabel: ariaLabel ? ariaLabel : content,
         accessibilityState: { disabled: state.disabled, selected: state.selected },
         accessibilityActions: [{ name: 'Select', label: radioButtonSelectActionLabel }],
+        accessibilityPositionInSet: info.buttonKeys.findIndex((x) => x == buttonKey) + 1,
+        accessibilitySetSize: info.buttonKeys.length,
         onAccessibilityAction: onAccessibilityAction,
       },
       content: { children: content },

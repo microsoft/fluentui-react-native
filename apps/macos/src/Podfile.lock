@@ -16,6 +16,8 @@ PODS:
   - FluentUI-React-Native-Button (0.6.6):
     - MicrosoftFluentUI (= 0.0.19)
     - React
+  - FluentUI-React-Native-FocusZone (0.5.9):
+    - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.0.19):
     - MicrosoftFluentUI/ActivityIndicator_ios (= 0.0.19)
@@ -330,6 +332,7 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec`)
   - FluentUI-React-Native-Avatar (from `../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec`)
   - FluentUI-React-Native-Button (from `../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec`)
+  - FluentUI-React-Native-FocusZone (from `../../../packages/components/FocusZone/FluentUIReactNativeFocusZone.podspec`)
   - glog (from `../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
   - RCT-Folly (from `../../../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../../../node_modules/react-native-macos/Libraries/RCTRequired`)
@@ -380,6 +383,8 @@ EXTERNAL SOURCES:
     :path: "../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec"
   FluentUI-React-Native-Button:
     :path: "../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec"
+  FluentUI-React-Native-FocusZone:
+    :path: "../../../packages/components/FocusZone/FluentUIReactNativeFocusZone.podspec"
   glog:
     :podspec: "../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec"
   RCT-Folly:
@@ -440,8 +445,9 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 0a9070829baaf7af315d4b85e992f24315ee0588
   FBReactNativeSpec: e41705afe0a17d636081a7c077d34caf205ca13d
-  FluentUI-React-Native-Avatar: 84f5536a51050bf5dec172ad3534fc09d24ff116
-  FluentUI-React-Native-Button: 7625be63f6f5903c398a0cc7b34d45fdf156be25
+  FluentUI-React-Native-Avatar: 470009fedabda6b7f004a0226ea9367b8f889a3f
+  FluentUI-React-Native-Button: 545650797683b791f6818d856cddf96c0b4d091a
+  FluentUI-React-Native-FocusZone: 53098102e73256132b2108b216fb73af54a9bef7
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: 1cd5ab01ac09a35978694130710ac317bdcbaed1
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
@@ -472,6 +478,6 @@ SPEC CHECKSUMS:
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Yoga: f2da5366fe2be821a64c84a2e455042eab763cf5
 
-PODFILE CHECKSUM: c1a1b2453ff9b449a357bdc5a1a433077dda05c2
+PODFILE CHECKSUM: 21ed32ac4073663284fb0038e8afb1b6e912ece3
 
 COCOAPODS: 1.10.1

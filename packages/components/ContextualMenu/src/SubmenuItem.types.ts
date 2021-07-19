@@ -8,7 +8,10 @@ import { IconProps } from '@fluentui-react-native/icon';
 export const submenuItemName = 'submenuItem';
 export type SubmenuItemTokens = ContextualMenuItemTokens;
 export type SubmenuItemProps = ContextualMenuItemProps;
-export type SubmenuItemState = ContextualMenuItemState;
+
+export interface SubmenuItemState extends ContextualMenuItemState {
+  submenuItemHovered?: boolean;
+}
 
 export interface SubmenuItemSlotProps {
   root: React.PropsWithRef<ViewProps>;
