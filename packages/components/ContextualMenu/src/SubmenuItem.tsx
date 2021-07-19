@@ -17,7 +17,7 @@ import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens,
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useAsPressable, useKeyCallback, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
-import { Icon } from '@fluentui-react-native/icon';
+import { Icon} from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 
 export const SubmenuItem = compose<SubmenuItemType>({
@@ -38,29 +38,29 @@ export const SubmenuItem = compose<SubmenuItemType>({
     // Grabs the context information from Submenu (currently selected menuItem and client's onItemClick callback)
     const context = React.useContext(CMContext);
 
+    const cmRef = useViewCommandFocus(componentRef);
+
+    const onItemHoverIn = React.useCallback(
+      (e) => {
+        userProps.onHoverIn(e);
+      },[]);
+
     const onItemClick = React.useCallback(
       (e) => {
         if (!disabled) {
           context?.onDismissMenu();
-          onClick ? onClick() : context.onItemClick(itemKey);
+          context?.dismissSubmenu && context.dismissSubmenu();
+          onClick ? onClick() : context?.onItemClick(itemKey);
           e.stopPropagation();
         }
       },
       [context, disabled, itemKey, onClick],
     );
 
-    const cmRef = useViewCommandFocus(componentRef);
+    const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn, delayHoverIn: 500 });
 
-    const onItemHoverIn = React.useCallback(
-      (e) => {
-        componentRef.current.focus();
-        userProps.onHoverIn(e);
-      },
-      [componentRef],
-    );
-
-    const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn });
-
+    const [submenuItemHovered, setSubmenuItemHovered] = React.useState(false);
+    context.setSubmenuItemHovered = setSubmenuItemHovered;
     // set up state
     const state: SubmenuItemState = {
       ...pressable.state,
@@ -68,12 +68,22 @@ export const SubmenuItem = compose<SubmenuItemType>({
       disabled: userProps.disabled,
       content: !!text,
       icon: !!icon,
+      submenuItemHovered: submenuItemHovered,
     };
 
+    const onMouseEnter = React.useCallback(
+      (e) => {
+        setSubmenuItemHovered(true);
+        pressable.props.onMouseEnter && pressable.props.onMouseEnter(e);
+        e.stopPropagation();
+      },
+      [pressable, setSubmenuItemHovered],
+    );
+
     /*
-     * For SubmenuItem, menu is shown on hover.
+     * SubmenuItem launches the submenu onMouseEnter event. For keyboarding, submenu should be launched with Spacebar, Enter, or right arrow.
      */
-    const onKeyUp = useKeyCallback(onItemHoverIn, ' ', 'Enter', 'ArrowRight');
+    const onKeyUp = useKeyCallback(onMouseEnter, ' ', 'Enter', 'ArrowRight');
 
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
@@ -82,8 +92,9 @@ export const SubmenuItem = compose<SubmenuItemType>({
       root: {
         ...pressable.props,
         ref: cmRef,
-        onKeyUp: onKeyUp,
-        accessibilityLabel: accessibilityLabel,
+        onKeyUp,
+        onMouseEnter,
+        accessibilityLabel,
       },
       content: { children: text, testID },
       icon: createIconProps(icon),
@@ -96,25 +107,31 @@ export const SubmenuItem = compose<SubmenuItemType>({
     // We shouldn't have to specify the source prop on Slots.icon, here, but we need another drop from @uifabricshared
     return (
       <Slots.root>
-        <Slots.stack>
+        <Slots.leftstack>
           {renderData!.state.icon && <Slots.icon />}
           {renderData!.state.content && <Slots.content />}
           {children}
-        </Slots.stack>
+        </Slots.leftstack>
+        <Slots.rightstack>
+            <Slots.chevron />
+        </Slots.rightstack>
       </Slots.root>
     );
   },
   slots: {
     root: View,
-    stack: { slotType: View },
+    leftstack: { slotType: View },
     icon: { slotType: Icon as React.ComponentType<object> },
     content: Text,
+    rightstack: { slotType: View },
+    chevron: { slotType: Icon as React.ComponentType<object> }
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
-    stack: [],
+    leftstack: [],
     icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
     content: [textTokens, foregroundColorTokens],
+    rightstack: [],
   },
 });
 

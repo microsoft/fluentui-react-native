@@ -2,6 +2,111 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Fri, 16 Jul 2021 18:25:45 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.11.10",
+      "version": "0.11.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add ActivityIndicator Component Test",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "31c4b78d59d4068ebed0417cc16d9e5142141c51",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 15 Jul 2021 20:35:35 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.11.10",
+      "version": "0.11.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Omitting onPress from props",
+            "author": "safreibe@microsoft.com",
+            "commit": "ed0977f5dcb66a4cdd0a9e478b34a30be98be9e5",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 13 Jul 2021 22:58:45 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.11.8",
+      "version": "0.11.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Reverting changes from previous PR that added SVG functionality to Checkmark - This is causing a serious bundling issue for all partners",
+            "author": "safreibe@microsoft.com",
+            "commit": "93c0994d4cf4a06a49d6580b3d1fd925b7652576",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 06 Jul 2021 16:17:14 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.11.7",
+      "version": "0.11.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Removing Web SVG references for Checkbox",
+            "author": "safreibe@microsoft.com",
+            "commit": "3fb8d8f85d92199f387499ed23e69fa93b469dc1",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Jun 2021 19:39:16 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.11.6",
+      "version": "0.11.6",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add chevron to submenu",
+            "author": "lehon@microsoft.com",
+            "commit": "c02e69f9e9ac03db75d410794beaa2cd0ab644a6",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Jun 2021 00:13:47 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.11.5",
+      "version": "0.11.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixing Focus for Checkbox and fixing Folder structure",
+            "author": "safreibe@microsoft.com",
+            "commit": "25ddf9e5ba2d2790c27982cbc1fbf8dc32892a20",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 24 Jun 2021 21:55:11 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.11.4",
+      "version": "0.11.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add a README",
+            "author": "sanajmi@microsoft.com",
+            "commit": "670e6586bb07a6c407d67a21c9a0a34c12e75991",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 21 Jun 2021 11:19:28 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.11.2",
       "version": "0.11.2",

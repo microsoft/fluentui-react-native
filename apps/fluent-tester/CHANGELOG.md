@@ -1,8 +1,80 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 23 Jun 2021 17:46:02 GMT and should not be manually modified.
+This log was last generated on Sat, 17 Jul 2021 00:39:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.31.1
+
+Sat, 17 Jul 2021 00:39:49 GMT
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (chripear@microsoft.com)
+
+## 0.31.0
+
+Fri, 16 Jul 2021 18:25:45 GMT
+
+### Minor changes
+
+- Add ActivityIndicator Component Test (t-lindaweng@microsoft.com)
+
+## 0.30.7
+
+Thu, 15 Jul 2021 17:54:30 GMT
+
+### Patches
+
+- Added Submenu Items to MenuButton component. (v.kozlova13@gmail.com)
+
+## 0.30.2
+
+Tue, 13 Jul 2021 17:19:22 GMT
+
+### Patches
+
+- Possible fix for wrong UIViewController in Excel card view (chripear@microsoft.com)
+
+## 0.30.1
+
+Tue, 13 Jul 2021 15:41:10 GMT
+
+### Patches
+
+- add icon button with menu example to tester (lehon@microsoft.com)
+
+## 0.30.0
+
+Tue, 13 Jul 2021 10:45:30 GMT
+
+### Minor changes
+
+- Added FluentUI Standard MenuButton (without Submenu items) (vkozlova@microsoft.com)
+
+## 0.29.0
+
+Fri, 25 Jun 2021 19:39:16 GMT
+
+### Minor changes
+
+- Add chevron to submenu (lehon@microsoft.com)
+
+## 0.28.0
+
+Fri, 25 Jun 2021 06:21:11 GMT
+
+### Minor changes
+
+- 📦 applying package updates ***NO_CI*** (tamasane@gmail.com)
+
+## 0.27.0
+
+Wed, 23 Jun 2021 18:53:56 GMT
+
+### Minor changes
+
+- Add new PersonaCoinFluentColor prop (ruaraki@microsoft.com)
 
 ## 0.26.0
 

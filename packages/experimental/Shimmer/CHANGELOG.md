@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-This log was last generated on Fri, 18 Jun 2021 00:38:19 GMT and should not be manually modified.
+This log was last generated on Wed, 30 Jun 2021 05:42:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.5
+
+Wed, 30 Jun 2021 05:42:19 GMT
+
+### Patches
+
+- Fix bug where Shimmer didn't update with appearance changes (sanajmi@microsoft.com)
 
 ## 0.3.1
 

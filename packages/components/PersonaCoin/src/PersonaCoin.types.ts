@@ -1,5 +1,5 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import { ImageProps, ViewProps, ImageURISource, TextProps } from 'react-native';
+import { ImageProps, ViewProps, ImageURISource, TextProps, ColorValue } from 'react-native';
 import { IBackgroundColorTokens, IForegroundColorTokens } from '@fluentui-react-native/tokens';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 
@@ -60,6 +60,17 @@ export type PersonaCoinFluentColor =
 
 export type PersonaPresence = 'none' | 'offline' | 'online' | 'away' | 'dnd' | 'blocked' | 'busy';
 
+export type RingThickness = number | 'xSmall' | 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge';
+
+export interface RingConfig {
+  accent?: boolean;
+  transparent?: boolean;
+  ringColor?: ColorValue; // glow
+  ringBackgroundColor?: ColorValue; // inner/outer rings
+  ringThickness?: RingThickness;
+  innerGap?: RingThickness;
+}
+
 export interface IPersonaConfigurableProps {
   size?: PersonaSize;
 
@@ -68,6 +79,7 @@ export interface IPersonaConfigurableProps {
    * @deprecated Use coinColorFluent instead
    */
   coinColor?: PersonaCoinColor;
+  ring?: RingConfig;
   coinColorFluent?: PersonaCoinFluentColor;
 }
 
@@ -85,6 +97,8 @@ export interface IPersonaCoinSlotProps {
   initials: TextProps;
   initialsBackground: ViewProps;
   icon: ImageProps;
+  ring: ViewProps;
+  glow: ViewProps;
 }
 
 export type IconAlignment = 'start' | 'center' | 'end';
@@ -102,6 +116,8 @@ export interface IPersonaCoinTokens extends IBackgroundColorTokens, IForegroundC
 export interface IPersonaCoinState {
   personaPhotoSource: ImageURISource | undefined;
   iconSource: ImageURISource | undefined;
+  showRing: boolean;
+  transparentRing: boolean;
 }
 
 export interface IPersonaCoinType {

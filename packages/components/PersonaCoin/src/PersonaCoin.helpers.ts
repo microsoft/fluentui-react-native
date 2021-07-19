@@ -1,4 +1,11 @@
-import { PersonaSize, PersonaCoinColor, PersonaCoinFluentColor, PersonaPresence, IPersonaCoinTokens } from './PersonaCoin.types';
+import {
+  PersonaSize,
+  PersonaCoinColor,
+  PersonaCoinFluentColor,
+  PersonaPresence,
+  IPersonaCoinTokens,
+  RingThickness,
+} from './PersonaCoin.types';
 import { ImageURISource } from 'react-native';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
@@ -140,5 +147,24 @@ export function calculateEffectiveSizes(tokens: IPersonaCoinTokens): PersonaSize
       iconStrokeWidth: iconStrokeWidth || defaultIconStrokeWidth,
       initialsSize: initialsSize || defaultInitialsSize,
     };
+  }
+}
+
+export function getRingThickness(thickness: RingThickness): number {
+  switch (thickness) {
+    case 'xSmall':
+      return 1;
+    case 'small':
+      return 1;
+    case 'medium':
+      return 2;
+    case 'large':
+      return 2;
+    case 'xlarge':
+      return 2;
+    case 'xxlarge':
+      return 4;
+    default:
+      return thickness < 0 ? 4 : thickness;
   }
 }

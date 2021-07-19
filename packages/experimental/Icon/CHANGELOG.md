@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Mon, 21 Jun 2021 11:19:28 GMT and should not be manually modified.
+This log was last generated on Thu, 24 Jun 2021 21:55:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.4
+
+Thu, 24 Jun 2021 21:55:11 GMT
+
+### Patches
+
+- revert change that breaks icon on macOS (sanajmi@microsoft.com)
 
 ## 0.7.2
 

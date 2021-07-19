@@ -497,5 +497,8 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     checkboxBackgroundDisabled: fluentUIApple.brandBackgroundDisabled,
     checkboxBorderColor: fluentUIApple.gray600,
     checkmarkColor: fluentUIApple.neutralInverted,
+
+    personaActivityRing: fluentUIApple.neutralInverted,
+    personaActivityGlow: fluentUIApple.red10,
   };
 }
