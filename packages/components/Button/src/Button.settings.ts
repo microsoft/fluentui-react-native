@@ -29,13 +29,13 @@ export const settings: IComposeSettings<IButtonType> = [
     stack: {
       style: {
         display: 'flex',
-        paddingStart: 16,
-        paddingEnd: 16,
+        paddingStart: 10,
+        paddingEnd: 10,
         alignItems: 'center',
         flexDirection: 'row',
         alignSelf: 'flex-start',
         minHeight: 32,
-        minWidth: 80,
+        minWidth: 32,
         justifyContent: 'center',
       },
     },

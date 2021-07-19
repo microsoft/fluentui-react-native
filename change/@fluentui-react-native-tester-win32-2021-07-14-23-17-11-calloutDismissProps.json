@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Add dismiss behaviors and appropriate test page changes",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "ppatboyd@outlook.com",
+  "dependentChangeType": "patch",
+  "date": "2021-07-15T06:17:07.423Z"
+}

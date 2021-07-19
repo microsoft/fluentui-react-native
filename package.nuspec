@@ -41,11 +41,13 @@
     <!-- macOS debug -->
     <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Debug-macosx"/>
     <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Debug-macosx"/>
+    <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-FocusZone\libFluentUI-React-Native-FocusZone.a" target="Debug-macosx"/>
     <file src="DerivedData\Build\Products\Debug\MicrosoftFluentUI\libMicrosoftFluentUI.a" target="Debug-macosx"/>
     <file src="DerivedData\Build\Products\Debug\MicrosoftFluentUI\FluentUI.swiftmodule\**\*.*" target="Debug\FluentUI.swiftmodule" exclude="*.swiftsourceinfo"/>
     <!-- macOS ship -->
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Ship-macosx"/>
+    <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-FocusZone\libFluentUI-React-Native-FocusZone.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\MicrosoftFluentUI\libMicrosoftFluentUI.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\MicrosoftFluentUI\FluentUI.swiftmodule\**\*.*" target="Release\FluentUI.swiftmodule" exclude="*.swiftsourceinfo"/>
 

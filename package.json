@@ -14,7 +14,7 @@
   "scripts": {
     "build": "lage build",
     "build-tools": "lage build-tools",
-    "build-tokens": "transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --out ./packages/theming/theme-tokens/src --p reactnative",
+    "build-tokens": "node ./scripts/build-tokens.js",
     "buildci": "lage buildci",
     "bump-versions": "beachball bump",
     "clean-all": "node ./scripts/clean-all.js",
