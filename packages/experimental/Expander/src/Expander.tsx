@@ -6,6 +6,10 @@ import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
 const ExpanderComponent = ensureNativeComponent('MSFExpanderView');
 
+function delay(ms: number) {
+  return new Promise( resolve => setTimeout(resolve, ms) );
+}
+
 export const Expander = compose<ExpanderType>({
   displayName: expanderName,
   tokens: [{}, expanderName],
@@ -25,8 +29,12 @@ export const Expander = compose<ExpanderType>({
       style={{
         height: expandedState? userProps.expandedHeight : userProps.collapsedHeight
       }}
-      onChange={function onChange (event: ExpanderChangeEvent) {
+      onChange={async function onChange (event: ExpanderChangeEvent) {
         if (event.nativeEvent.expanded != null) {
+          event.persist();
+          if (!event.nativeEvent.expanded) {
+            await delay(250);
+          }
           setExpandedState(event.nativeEvent.expanded);
         }
       }}
