@@ -63,8 +63,25 @@ Most components should use the compose framework as it offers the comprehensive 
       - This is the file listed as `main` inside your package.json and simply exports other files.
    1. `<new-component>.tsx`
       - This is the file that imports your native view, and composes it into a component with slots, a theme, and design tokens.
-   1. `<new-component>.<types | settings | platform | blah>.tsx` (Optional)
+   1. `<new-component>.<types | styling | platform | blah>.tsx` (Optional)
       - Optional extra files to subdivide your code however you see fit. You can also add platform specific files as you see fit.
+
+### Packaging your component (or make it into an importable module)
+
+1. Delete the cache and run `yarn` to get the lib and node_module folders to auto install
+   1. From root folder: `watchman watch-del-all`
+   1. `rm -rf node_modules`
+   1. `yarn`
+   1. `yarn build`
+   1. `cd apps/ios/src`
+   1. `pod install` since there are Apple components that need to be reconnected
+   1. Restart VSCode/Editor
+   1. Close packager
+   1. Close simulator
+   1. `cd apps/ios`
+   1. `yarn ios`
+1. Add your new module as a dependency in `apps/fluent-tester/package.json`
+1. Note: Make sure that all naming is consistent: the component you are exporting, the file name you are exporting, and what you are importing
 
 ### Adding a new test for your component to the test app
 
