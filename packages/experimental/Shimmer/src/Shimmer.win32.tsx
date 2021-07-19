@@ -5,8 +5,8 @@ import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@flue
 import { useMemo } from 'react';
 import Svg, { Circle, ClipPath, Defs, Image, LinearGradient, Rect, Stop } from 'react-native-svg';
 // import { Circle, ClipPath, Defs, Image, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
-import { stylingSettings } from './reworkNativeControlShimmer.styling.win32';
-import { shimmerName, ShimmerProps, ShimmerType } from './reworkNativeControlShimmer.types.win32';
+import { stylingSettings } from './Shimmer.styling.win32';
+import { shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types.win32';
 
 // Keep as a reference for authoring the shimmer the same
 
