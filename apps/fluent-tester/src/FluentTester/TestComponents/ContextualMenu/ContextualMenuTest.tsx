@@ -264,7 +264,7 @@ const IconContextualMenu: React.FunctionComponent<{}> = () => {
   }, [setShowContextualMenu]);
 
   // custom text
-  const IndigoHeroBold = RNText.customize({ tokens: { variant: 'heroStandard', fontWeight: '100', color: '#4b0082' } });
+  const IndigoHeroBold = FURNText.customize({ tokens: { variant: 'heroStandard', fontWeight: '100', color: '#4b0082' } });
 
   return (
     <View>
