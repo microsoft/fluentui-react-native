@@ -142,6 +142,33 @@ To add a native module that wraps a FluentUI Apple control:
    1. `MSF<new-component>ViewManager.m`
       - This is an extra Objective-C file needed because Swift does not support macros and React Native requires them to map JS props to the native properties of the control. (Macros like `RCT_EXPORT_VIEW_PROPERTY` and `RCT_EXPORT_METHOD`)/
 
+## Create new native Windows components
+
+This section is specifically focused on creating new Windows components using React Native for Windows.
+
+If you are creating a new component from scratch, you have the most leeway to design your API. In general, you will probably want to expose each property from the native WinUI control as either a token or prop (or both) to JS.
+
+To add a native Windows module:
+
+1. Follow [these instructions](https://microsoft.github.io/react-native-windows/docs/0.63/native-modules-setup#creating-a-new-native-module-library-project) for creating a new C++/WinRT native windows module library. Complete all steps through the end of [Making your module ready for consumption in an app](https://microsoft.github.io/react-native-windows/docs/0.63/native-modules-setup#making-your-module-ready-for-consumption-in-an-app).
+   - When creating Views and ViewManagers for your module, Windows components such as Expander and Windows modules outside of the FluentUI React Native repository such as the [`datetimepicker`](https://github.com/react-native-datetimepicker/datetimepicker/tree/master/windows/DateTimePickerWindows) are helpful resources
+   - Note: The library should align with the version of React Native that the FluentUI React Native currently uses
+2. Follow the steps for [creating a new component](#creating-a-new-component) in FluentUI React Native.
+   - Other Windows components such as the Expander will be helpful with this step.
+3. Copy the `windows` folder from the local native component library created in Step 1 into the root of the new componenet's directory.
+4. Testing the component locally
+	  1. Follow steps for Option 1 of [testing the module](https://microsoft.github.io/react-native-windows/docs/0.63/native-modules-setup#testing-the-module-before-it-gets-published)
+	     - Be sure to run the autolinking command from the component's root directory (`npx react-native autolink-windows`)
+	  2. Check that the NuGet packages for the test application and component line up. i.e. If the component uses WinUI 2.6, the test application should as well.
+		   - Right-click on the solution within VS. Select `Manage NuGet Packages for Solution…`. Look at differences under the consolidate tab.
+		   - After this step, you may need to remove unused references for .xcsproj files
+	  3. Add your native module references within the `App.js` file.
+		   - `Import { ComponentName } from @fluentui-react-native/experimental-<component-name>;`
+	  4. Start metro via command line
+		   - Navigate to windows folder (`<path-to-fluentui-repo\fluentui-react-native\packages\experimental\<New Component Name>\windows`)
+		   - Run `yarn start`
+    5. Run application 
+  
 ## Creating a pull request
 
 Thanks for your interest in contributing to the fluentui-react-native! We welcome all contributions. Here's information on how to prepare your change for a pull request.
