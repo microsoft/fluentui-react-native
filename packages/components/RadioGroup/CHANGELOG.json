@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Sat, 17 Jul 2021 00:39:49 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.10.11",
+      "version": "0.10.11",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Version bump for packages to attempt to fix NPM publish pipeline",
+            "author": "chripear@microsoft.com",
+            "commit": "c752c746c4e30dcf47f4fbb73294be0882212543",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 16 Jul 2021 18:25:45 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.10.10",
+      "version": "0.10.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add ActivityIndicator Component Test",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "31c4b78d59d4068ebed0417cc16d9e5142141c51",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 06 Jul 2021 14:30:28 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.10.8",
       "version": "0.10.8",

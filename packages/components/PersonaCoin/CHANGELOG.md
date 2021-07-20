@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/persona-coin
 
-This log was last generated on Fri, 25 Jun 2021 06:21:11 GMT and should not be manually modified.
+This log was last generated on Thu, 15 Jul 2021 20:35:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.6
+
+Thu, 15 Jul 2021 20:35:35 GMT
+
+### Patches
+
+- Changing ViewProps to IViewProps (safreibe@microsoft.com)
 
 ## 0.8.4
 

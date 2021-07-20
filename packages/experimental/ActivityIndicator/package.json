@@ -1,0 +1,39 @@
+{
+  "name": "@fluentui-react-native/experimental-activity-indicator",
+  "version": "0.2.1",
+  "description": "A cross-platform Fluent Activity Indicator component",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "just": "fluentui-scripts",
+    "lint": "fluentui-scripts eslint",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "verify-api": "fluentui-scripts verify-api-extractor",
+    "update-api": "fluentui-scripts update-api-extractor"
+  },
+  "dependencies": {
+    "@fluentui-react-native/framework": "0.5.2",
+    "react-native-svg": "^12.1.1"
+  },
+  "devDependencies": {
+    "@types/react-native": "^0.63.0",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "react-native": "^0.63.4"
+  },
+  "peerDependencies": {
+    "react-native": ">=0.63.4",
+    "react": "16.13.1"
+  },
+  "author": "",
+  "license": "MIT"
+}

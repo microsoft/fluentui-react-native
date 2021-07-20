@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Tue, 06 Jul 2021 14:30:28 GMT and should not be manually modified.
+This log was last generated on Sat, 17 Jul 2021 00:39:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.11
+
+Sat, 17 Jul 2021 00:39:49 GMT
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (chripear@microsoft.com)
 
 ## 0.10.8
 
