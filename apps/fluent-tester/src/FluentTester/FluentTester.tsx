@@ -12,7 +12,6 @@ import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
 
 // uncomment the below lines to enable message spy
-
 import MessageQueue from 'react-native/Libraries/BatchedBridge/MessageQueue';
 MessageQueue.spy(true);
 
