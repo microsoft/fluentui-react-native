@@ -150,7 +150,7 @@ export const Shimmer = compose<ShimmerType>({
               <G id="rows">{rows}</G>
             </Defs>
             <ClipPath id="shimmerView">
-              <Use href="#rows" />
+              {rows}
               {/* <Path d="M50,0 21,90 98,35 2,35 79,90z" id="star" clipRule={getClipRule(chooseRule)} />
                 <Path fill="#EDEBEA" d="M48.855,24.292H24.117V9.439L48.855,24.292z" clipRule={getClipRule(chooseRule)} />
                 <Path fill="#EDEBEA" d="M6.84,8.939h24.73v24.733L6.864,8.939z" clipRule={getClipRule(chooseRule)} />
