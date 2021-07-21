@@ -11,6 +11,7 @@ export type NativeRadioButtonProps = {
   title?: string;
   buttonKey?: string;
   enabled?: boolean;
+  state?: boolean;
 };
 
 export type NativeRadioButtonTokens = {
