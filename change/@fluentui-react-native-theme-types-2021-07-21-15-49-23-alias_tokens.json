@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "createAliasTokens to generate alias token structure",
+  "packageName": "@fluentui-react-native/theme-types",
+  "email": "email not defined",
+  "dependentChangeType": "patch",
+  "date": "2021-07-21T22:49:17.212Z"
+}

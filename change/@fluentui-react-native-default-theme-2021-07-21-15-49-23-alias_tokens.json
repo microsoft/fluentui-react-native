@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Integrate alias tokens into theme",
+  "packageName": "@fluentui-react-native/default-theme",
+  "email": "email not defined",
+  "dependentChangeType": "patch",
+  "date": "2021-07-21T22:48:07.184Z"
+}
