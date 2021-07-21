@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Sat, 17 Jul 2021 00:39:49 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Jul 2021 21:46:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.0
+
+Wed, 21 Jul 2021 21:46:12 GMT
+
+### Minor changes
+
+- Add dismiss behaviors and appropriate test page changes (ppatboyd@outlook.com)
+- Add more features to contextualMenu test (lehon@microsoft.com)
 
 ## 0.31.1
 

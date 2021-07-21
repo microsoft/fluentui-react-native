@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 21 Jul 2021 21:46:12 GMT",
+      "tag": "@fluentui-react-native/tester_v0.32.0",
+      "version": "0.32.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add dismiss behaviors and appropriate test page changes",
+            "author": "ppatboyd@outlook.com",
+            "commit": "580752e91f944a5c194c0c5b023b4cac765f83e0",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Add more features to contextualMenu test",
+            "author": "lehon@microsoft.com",
+            "commit": "231cb2a5b18cf0e4c164f9b4e5e9f3ea93d386cf",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 17 Jul 2021 00:39:49 GMT",
       "tag": "@fluentui-react-native/tester_v0.31.1",
       "version": "0.31.1",

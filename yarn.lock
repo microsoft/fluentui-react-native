@@ -2328,10 +2328,18 @@
     "@rnx-kit/third-party-notices" "1.0.1"
     chalk "^4.1.0"
 
-"@rnx-kit/config@0.2.9", "@rnx-kit/config@^0.2.9":
+"@rnx-kit/config@0.2.9":
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.2.9.tgz#2efd25ed31b6dbeccaa24566cf890cfce88764b7"
   integrity sha512-ikJ+aZO0pogMes/m71G+rkaeYBP2n0Xeomnr6hRgg5usNDxgTT+mY5d9dlzYu5ZN/GQKduP9zCKJQMgs6SOMyQ==
+  dependencies:
+    cosmiconfig "^7.0.0"
+    semver "^7.0.0"
+
+"@rnx-kit/config@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.3.1.tgz#4d2715a5c9b171b81c5ec5dbff6d21d7406d225c"
+  integrity sha512-3YoOa7S5hoZEKBRu7+DFe8laatNNrUybOX8WpS1ikziedpNzioZPbLY4cayHQf5HIg7vLg7x/+FIWEEz0nblSw==
   dependencies:
     cosmiconfig "^7.0.0"
     semver "^7.0.0"
@@ -2344,15 +2352,16 @@
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.5.8":
-  version "1.5.8"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.5.8.tgz#569187c41176b934ce59b5fa55bd9895aa7d0e84"
-  integrity sha512-1wVgCV3aIFHSGqO2oGBnz35vqJjYCPEV5mVIXPSUU3lFse0KsTrlseV7Phl6QWJFa66YRx1XrqFkHOH4FNPOZw==
+  version "1.5.15"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.5.15.tgz#22578c731249a1903118222a3810a8051e1f338d"
+  integrity sha512-6k3+YwP8I0q3rENICFcQQDsbmNHLmjg7i1Th/UcNX1NySwI1mLhErwSoz1BnsUDp33hbuP2fmvqrppmsHLOtfA==
   dependencies:
-    "@rnx-kit/config" "^0.2.9"
+    "@rnx-kit/config" "^0.3.1"
     "@rnx-kit/console" "^1.0.0"
     chalk "^4.1.0"
     find-up "^5.0.0"
     jest-diff "^26.0.0"
+    pkg-dir "^5.0.0"
     semver "^7.0.0"
     workspace-tools "^0.16.2"
     yargs "^16.0.0"
@@ -7745,9 +7754,9 @@ eslint-plugin-prettier@3.1.2:
     prettier-linter-helpers "^1.0.0"
 
 eslint-plugin-promise@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-promise/-/eslint-plugin-promise-4.2.1.tgz#845fd8b2260ad8f82564c1222fce44ad71d9418a"
-  integrity sha512-VoM09vT7bfA7D+upt+FjeBO5eHIJQBUWki1aPvB+vbNiHS3+oGIJGIeyBtKQTME6UPXXy3vV07OL1tHd3ANuDw==
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-promise/-/eslint-plugin-promise-4.3.1.tgz#61485df2a359e03149fdafc0a68b0e030ad2ac45"
+  integrity sha512-bY2sGqyptzFBDLh/GMbAxfdJC+b0f23ME63FOE4+Jao0oZ3E1LEwFtWJX/1pGMJLiTtrSSern2CRM/g+dfc0eQ==
 
 eslint-plugin-react-hooks@^3.0.0:
   version "3.0.0"
@@ -13793,6 +13802,13 @@ pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
+pkg-dir@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/pkg-dir/-/pkg-dir-5.0.0.tgz#a02d6aebe6ba133a928f74aec20bafdfe6b8e760"
+  integrity sha512-NPE8TDbzl/3YQYY7CSS228s3g2ollTFnc+Qi3tqmqJp9Vg2ovUpixcJEo2HJScN2Ez+kEaal6y70c0ehqJBJeA==
+  dependencies:
+    find-up "^5.0.0"
+
 pkg-up@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/pkg-up/-/pkg-up-3.1.0.tgz#100ec235cc150e4fd42519412596a28512a0def5"
@@ -14452,9 +14468,9 @@ react-native-web@0.12.3, react-native-web@^0.12.3:
     react-timer-mixin "^0.13.4"
 
 react-native-windows@^0.62.1:
-  version "0.62.13"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.62.13.tgz#0908186aa77c6cd64808540124c26c802770c42a"
-  integrity sha512-zydA1hVB0LHiD3X6SDmxW7WxGXJ4tKcRaS+gRNjVRyiRjWF5h4JqV9TSd2RoviTj/QG+ZonnaJiXx55NogTu7g==
+  version "0.62.22"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.62.22.tgz#4c8c6544496199702180c9c7b4cd34492966c842"
+  integrity sha512-kYM+VczfDRNhs8vifa/D5ibSIGWDkVHZ8J2913HR8lPkz/qx5Tmnfq0IOj0KOMNN1ZDx4/I1PsTvfpxgOeIbvQ==
   dependencies:
     "@babel/runtime" "^7.8.4"
     cli-spinners "^2.2.0"

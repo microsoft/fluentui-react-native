@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/android-theme",
   "entries": [
     {
+      "date": "Wed, 21 Jul 2021 21:46:12 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.4.1",
+      "version": "0.4.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Use peer dependencies for react-native version not dependencies",
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "commit": "8f239e02e430f53565e9356cb89e1bb34803f0a7",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 25 Jun 2021 19:39:16 GMT",
       "tag": "@fluentui-react-native/android-theme_v0.4.0",
       "version": "0.4.0",
