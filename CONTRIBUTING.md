@@ -67,29 +67,15 @@ Most components should use the compose framework as it offers the comprehensive 
    1. `<new-component>.<types | settings | platform | blah>.tsx` (Optional)
       - Optional extra files to subdivide your code however you see fit. You can also add platform specific files as you see fit.
 
-### Packaging your component (or make it into an importable module)
-
-1. Delete the cache and run `yarn` to get the lib and node_module folders to auto install
-   1. From root folder: `watchman watch-del-all`
-   1. `rm -rf node_modules`
-   1. `yarn`
-   1. `yarn build`
-   1. `cd apps/ios/src`
-   1. `pod install` since there are Apple components that need to be reconnected
-   1. Restart VSCode/Editor
-   1. Close packager
-   1. Close simulator
-   1. `cd apps/ios`
-   1. `yarn ios`
-1. Add your new module as a dependency in `apps/fluent-tester/package.json`
-1. Note: Make sure that all naming is consistent: the component you are exporting, the file name you are exporting, and what you are importing
-
 ### Adding a new test for your component to the test app
 
 1. In FluentTester (our test app), we'll need to add an test component. The test components are located under `fluentui-react-native/apps/fluent-tester/src/FluentTester/TestComponents`.
-1. Make a subdirectory for your new component at this path, as well as adding an entry for your test in `Tests.tsx` and `Tests.<platform>.tsx`
+1. Make a subdirectory for your new component at this path, as well as adding an entry for your test in `testPages.tsx` and `testPages.<platform>.tsx`
 1. Create your tests in this new subdirectory. Pattern matching off an existing control's tests will greatly help.
-1. If you're component contains a native module, you will also need to add the path to your component's `podspec` (that we created earlier) in your test app's Podfile. This extra step is due to the fact that FluentTester has separate platform test apps that each share a common JS package. The react native community CLI does not support [autolinking transitive dependencies](https://github.com/react-native-community/cli/issues/1347), so we need to add it manually here.
+1. If your component contains a native module, you will also need to add the path to your component's `podspec` (that we created earlier) in your test app's Podfile. This extra step is due to the fact that FluentTester has separate platform test apps that each share a common JS package. The react native community CLI does not support [autolinking transitive dependencies](https://github.com/react-native-community/cli/issues/1347), so we need to add it manually here.
+1. Add your new module as a dependency in `apps/fluent-tester/package.json` and run `yarn && yarn build` from the root folder.
+   1. If your component has native apple code, run `pod install`.
+1. Run the test app and you should see your new test!
 
 ## Adding native code to your new component
 

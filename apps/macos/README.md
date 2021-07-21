@@ -14,7 +14,6 @@ yarn build
 ```
 
 2. Then go into `apps/macos/src` folder and run pod install to pull in the project-level Cocoapod dependencies defined in the podfile, and to generate a valid xcworkspace:
-   - M1 Macs: If you get the error: "missing compatible arch", you may need to add `alias pod='arch -x86_64 pod'` to your .bash_profile or .zprofile
 
 ```sh
 cd apps/macos/src
