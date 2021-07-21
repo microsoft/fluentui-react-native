@@ -1,5 +1,4 @@
 const fs = require('fs');
-const rimraf = require('rimraf');
 
 const defaultWaitForTimeout = 10000;
 const defaultConnectionRetryTimeout = 15000;
@@ -100,13 +99,20 @@ exports.config = {
    */
   beforeSession: function (/* config, capabilities, specs */) {
     // Delete old screenshots and create empty directory
+    const rmdirOptions = {
+      maxRetries: 3,
+      recursive: true,
+    };
+
     if (fs.existsSync('./errorShots')) {
-      rimraf.sync('./errorShots');
+      fs.renameSync('./errorShots', './errorShots-old');
+      fs.rmdirSync('./errorShots-old', rmdirOptions);
     }
     fs.mkdirSync('./errorShots');
 
     if (fs.existsSync('./allure-results')) {
-      rimraf.sync('./allure-results');
+      fs.renameSync('./allure-results', './allure-results-old');
+      fs.rmdirSync('./allure-results-old', rmdirOptions);
     }
     fs.mkdirSync('./allure-results');
   },
