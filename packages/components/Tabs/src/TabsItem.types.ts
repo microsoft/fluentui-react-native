@@ -44,7 +44,6 @@ export interface TabsItemTokens extends FontTokens, IForegroundColorTokens, IBac
 export interface TabsItemSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
   button: ViewProps;
-  innerCircle: ViewProps;
   content: ITextProps;
 }
 

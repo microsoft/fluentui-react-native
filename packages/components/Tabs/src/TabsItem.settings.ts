@@ -1,12 +1,6 @@
 import { tabsItemName, TabsItemType } from './TabsItem.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 
-const radioButtonSize = 20;
-const radioButtonRadius = radioButtonSize / 2;
-
-const radioButtonInnerCircleSize = 10;
-const radioButtonInnerCircleRadius = radioButtonInnerCircleSize / 2;
-
 export const tabsItemSelectActionLabel = 'Select a TabsItem';
 
 export const settings: IComposeSettings<TabsItemType> = [
@@ -22,39 +16,24 @@ export const settings: IComposeSettings<TabsItemType> = [
       focusable: true,
       accessibilityRole: 'tab',
       style: {
-        display: 'flex',
+        // display: 'flex',
         alignItems: 'center',
         flexDirection: 'row',
-        minHeight: 20,
-        marginTop: 0,
+        justifyContent: 'space-between',
+        // minHeight: 20,
+        marginTop: 10,
         position: 'relative',
       },
     },
     button: {
       style: {
         backgroundColor: 'transparent',
-        width: radioButtonSize,
-        height: radioButtonSize,
-        top: 0,
-        left: 0,
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderRadius: radioButtonRadius,
+        // top: 0,
+        // left: 0,
         marginTop: 4,
         marginRight: 6,
         marginBottom: 6,
         marginLeft: 6,
-      },
-    },
-    innerCircle: {
-      style: {
-        position: 'relative',
-        opacity: 0,
-        borderRadius: radioButtonInnerCircleRadius,
-        height: radioButtonInnerCircleSize,
-        width: radioButtonInnerCircleSize,
-        left: 4,
-        top: 4,
       },
     },
     content: {
@@ -68,22 +47,15 @@ export const settings: IComposeSettings<TabsItemType> = [
     _precedence: ['disabled', 'hovered', 'focused', 'selected'],
     _overrides: {
       selected: {
-        innerCircle: {
-          style: {
-            opacity: 1,
-          },
+        tokens: {
+          backgroundColor: 'buttonBackgroundPressed',
+          color: 'buttonTextPressed',
+          borderColor: 'buttonPressedBorder',
         },
       },
       focused: {
         tokens: {
           textBorderColor: 'focusBorder',
-        },
-      },
-      hovered: {
-        innerCircle: {
-          style: {
-            opacity: 0.5,
-          },
         },
       },
       disabled: {
