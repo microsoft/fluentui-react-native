@@ -1,7 +1,7 @@
 {
-  "name": "@fluentui-react-native/experimental-shimmer",
-  "version": "0.3.8",
-  "description": "A cross-platform Fluent Shimmer component",
+  "name": "@fluentui-react-native/assert-never",
+  "version": "0.1.0",
+  "description": "Util that asserts that all entries of an enum are handled in a switch case",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -13,26 +13,19 @@
     "build": "fluentui-scripts build",
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "lint": "fluentui-scripts eslint",
+    "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
     "verify-api": "fluentui-scripts verify-api-extractor",
     "update-api": "fluentui-scripts update-api-extractor",
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
-  "dependencies": {
-    "@fluentui-react-native/assert-never": ">=0.1.0 <1.0.0",
-    "@fluentui-react-native/framework": "0.5.9",
-    "@fluentui-react-native/tokens": ">=0.9.5 <1.0.0",
-    "react-native-svg": "^12.1.1"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@types/react-native": "^0.63.0",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "react-native": "^0.63.4"
-  },
-  "peerDependencies": {
-    "react-native": ">=0.63.4"
+    "@uifabricshared/eslint-config-rules": "^0.1.1"
   },
   "author": "",
   "license": "MIT"
