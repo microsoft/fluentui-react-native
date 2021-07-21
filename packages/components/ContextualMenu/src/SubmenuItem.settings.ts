@@ -45,7 +45,7 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         justifyContent: 'flex-end',
       }
     },
-    _precedence: ['focused', 'hovered', 'pressed', 'disabled'],
+    _precedence: ['focused','hovered', 'pressed', 'submenuItemHovered', 'disabled'],
     _overrides: {
       disabled: {
         tokens: {
@@ -57,6 +57,12 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         tokens: {
           backgroundColor: 'menuItemBackgroundHovered',
           color: 'menuItemTextHovered',
+        },
+      },
+      submenuItemHovered: {
+        tokens: {
+          color: 'menuItemTextHovered',
+          backgroundColor: 'menuItemBackgroundHovered',
         },
       },
       focused: {

@@ -27,13 +27,9 @@ public class DatePickerManager: NSObject {
         callback: @escaping RCTResponseSenderBlock
     ) {
         DispatchQueue.main.async {
-            // We need a UIViewController to present the actual DateTimePicker
-            // view.  With the advent of multi-window in iOS 13, we shouldn't
-            // use UIApplication.shared.keyWindow?.rootViewController, because
-            // keyWindow is deprecated.  We need to pick one of what could be
-            // multiple key windows.
-            guard let viewController = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.rootViewController else {
-                fatalError("Unable to get a UIViewController from current shared application context.")
+            // We need a UIViewController to present the actual DateTimePicker view.
+			guard let viewController = RCTPresentedViewController() else {
+                preconditionFailure("Unable to get the current UIViewController from React Native.")
             }
 
             let picker = DateTimePicker()

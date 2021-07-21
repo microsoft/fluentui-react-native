@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
-import { Button, ContextualMenu, ContextualMenuItem, Submenu, SubmenuItem, Separator } from '@fluentui/react-native';
+import { Text as FURNText, Button, ContextualMenu, ContextualMenuItem, Submenu, SubmenuItem, Separator, Checkbox } from '@fluentui/react-native';
 import { CONTEXTUALMENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
@@ -13,6 +13,9 @@ const contextualMenu: React.FunctionComponent<{}> = () => {
   const [showContextualMenu, setShowContextualMenu] = React.useState(false);
   const [isContextualMenuVisible, setIsContextualMenuVisible] = React.useState(false);
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
+
+  const [isBeakVisible, setIsBeakVisible] = React.useState(false);
+  const onIsBeakVisibleChange = React.useCallback((value) => setIsBeakVisible(value), []);
 
   const [focusOnMount, setShouldFocusOnMount] = React.useState(true);
   const toggleFocusOnMount = React.useCallback((value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
@@ -54,6 +57,10 @@ const contextualMenu: React.FunctionComponent<{}> = () => {
             <Text>Should Focus on Container</Text>
             <Switch value={focusOnContainer} onValueChange={toggleFocusOnContainer} />
           </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Text>Beak Visible</Text>
+            <Switch value={isBeakVisible} onValueChange={onIsBeakVisibleChange} />
+          </View>
         </View>
 
         <Separator vertical />
@@ -85,6 +92,7 @@ const contextualMenu: React.FunctionComponent<{}> = () => {
           setShowMenu={toggleShowContextualMenu}
           shouldFocusOnMount={focusOnMount}
           shouldFocusOnContainer={focusOnContainer}
+          isBeakVisible= {isBeakVisible}
         >
           <ContextualMenuItem text="MenuItem 1" itemKey="1" />
           <ContextualMenuItem text="MenuItem 2" itemKey="2" />
@@ -224,6 +232,89 @@ const nestedContextualMenu: React.FunctionComponent<{}> = () => {
   );
 };
 
+const IconContextualMenu: React.FunctionComponent<{}> = () => {
+  const svgProps: SvgIconProps = {
+    src: TestSvg,
+    viewBox: '0 0 500 500',
+  };
+
+  const stdBtnRef = React.useRef(null);
+
+  const [showContextualMenu, setShowContextualMenu] = React.useState(false);
+  const [isContextualMenuVisible, setIsContextualMenuVisible] = React.useState(false);
+
+  const [focusOnMount, setShouldFocusOnMount] = React.useState(true);
+  const toggleFocusOnMount = React.useCallback((value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
+
+  const [focusOnContainer, setShouldFocusOnContainer] = React.useState(false);
+  const toggleFocusOnContainer = React.useCallback((value) => setShouldFocusOnContainer(value), [setShouldFocusOnContainer]);
+
+  const toggleShowContextualMenu = React.useCallback(() => {
+    setShowContextualMenu(!showContextualMenu);
+    setIsContextualMenuVisible(!isContextualMenuVisible);
+  }, [showContextualMenu, isContextualMenuVisible, setShowContextualMenu, setIsContextualMenuVisible]);
+
+  const onShowContextualMenu = React.useCallback(() => {
+    setIsContextualMenuVisible(true);
+  }, [setIsContextualMenuVisible]);
+
+  const onDismissContextualMenu = React.useCallback(() => {
+    setShowContextualMenu(false);
+    setIsContextualMenuVisible(false);
+  }, [setShowContextualMenu]);
+
+  // custom text
+  const IndigoHeroBold = FURNText.customize({ tokens: { variant: 'heroStandard', fontWeight: '100', color: '#4b0082' } });
+
+  return (
+    <View>
+      <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
+        <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
+          <View style={{ flexDirection: 'row' }}>
+            <Text>Should Focus on Mount</Text>
+            <Switch value={focusOnMount} onValueChange={toggleFocusOnMount} />
+          </View>
+
+          <View style={{ flexDirection: 'row' }}>
+            <Text>Should Focus on Container</Text>
+            <Switch value={focusOnContainer} onValueChange={toggleFocusOnContainer} />
+          </View>
+        </View>
+
+        <Separator vertical />
+
+        <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
+          <Text>
+            <Text>Menu Visibility: </Text>
+            {isContextualMenuVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
+          </Text>
+          <Button componentRef={stdBtnRef} style={{ borderWidth: 0 }} icon={{ svgSource: svgProps, width: 12, height: 12 }} onClick={toggleShowContextualMenu} />
+        </View>
+      </View>
+
+      {showContextualMenu && (
+        <ContextualMenu
+          target={stdBtnRef}
+          onDismiss={onDismissContextualMenu}
+          onShow={onShowContextualMenu}
+          accessibilityLabel="Standard ContextualMenu"
+          setShowMenu={toggleShowContextualMenu}
+          shouldFocusOnMount={focusOnMount}
+          shouldFocusOnContainer={focusOnContainer}
+        >
+          <ContextualMenuItem itemKey="1">
+            <Checkbox label="Unchecked checkbox"/>
+          </ContextualMenuItem>
+          <ContextualMenuItem itemKey="2">
+            <IndigoHeroBold>IndigoHeroBold text with checkbox</IndigoHeroBold>
+          </ContextualMenuItem>
+          <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
+          <ContextualMenuItem text="Menuitem 4" itemKey="4" />
+        </ContextualMenu>
+      )}
+    </View>
+  );
+};
 const contextualMenuSections: TestSection[] = [
   {
     name: 'Standard ContextualMenu',
@@ -234,6 +325,10 @@ const contextualMenuSections: TestSection[] = [
     name: 'Nested ContextualMenu',
     component: nestedContextualMenu,
   },
+  {
+      name: 'IconButton with Customized ContextualMenu',
+      component: IconContextualMenu
+  }
 ];
 
 export const ContextualMenuTest: React.FunctionComponent<{}> = () => {
