@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FlatList, View, ViewStyle, StyleSheet } from 'react-native';
-import { useTheme, Theme, AliasColorTokens } from '@fluentui-react-native/theme-types';
+import { useTheme, Theme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { createAliasTokens, getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { commonTestStyles } from '../Common/styles';
@@ -55,21 +55,20 @@ const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps
 const AliasTokensSwatchList: React.FunctionComponent = () => {
   const theme = useTheme();
   const themedStyles = getThemedStyles(theme);
-  const palette = createAliasTokens(getCurrentAppearance(theme.host.appearance, 'light'));
+  const aliasColorTokens = createAliasTokens(getCurrentAppearance(theme.host.appearance, 'light'));
 
   const aggregator = React.useCallback(
     (key: string) => {
-      return { name: key + ' (' + (palette[key] as string) + ')', color: palette[key] };
+      return { name: key + ' (' + (aliasColorTokens[key] as string) + ')', color: aliasColorTokens[key] };
     },
-    [palette],
+    [aliasColorTokens],
   );
 
   const flattenArray = React.useCallback(() => {
-    const aliasTokens = palette as AliasColorTokens;
-    return Object.keys(aliasTokens).map(aggregator);
-  }, [palette, aggregator]);
+    return Object.keys(aliasColorTokens).map(aggregator);
+  }, [aliasColorTokens, aggregator]);
 
-  const paletteAsArray = React.useMemo(flattenArray, [flattenArray]);
+  const aliasTokensAsArray = React.useMemo(flattenArray, [flattenArray]);
   const renderSwatch = React.useCallback(({ item }) => {
     const { color, name } = item;
     return <ColorToken key={name} color={color} name={name} />;
@@ -78,7 +77,7 @@ const AliasTokensSwatchList: React.FunctionComponent = () => {
     <View style={[commonTestStyles.view]}>
       <Text>Alias Color Tokens from Token Pipeline</Text>
       <View style={themedStyles.stackStyle}>
-        <FlatList data={paletteAsArray} renderItem={renderSwatch} />
+        <FlatList data={aliasTokensAsArray} renderItem={renderSwatch} />
       </View>
     </View>
   );
@@ -100,7 +99,7 @@ export const TokenTest: React.FunctionComponent = () => {
     androidStatus: 'Backlog',
   };
 
-  const description = 'Lalalalala.';
+  const description = 'Alias tokens given from token pipeline. Currently values are pulled from web. Will be used to style components.';
 
   return <Test name="Token Test" description={description} sections={themeSections} status={status}></Test>;
 };
