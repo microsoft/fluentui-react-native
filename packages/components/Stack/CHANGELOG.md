@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/stack
 
-This log was last generated on Fri, 18 Jun 2021 00:38:19 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Jul 2021 21:46:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.9
+
+Wed, 21 Jul 2021 21:46:12 GMT
+
+### Patches
+
+- Fix stack child component's style props causing issues in RNW 0.63 (email not defined)
 
 ## 0.5.3
 

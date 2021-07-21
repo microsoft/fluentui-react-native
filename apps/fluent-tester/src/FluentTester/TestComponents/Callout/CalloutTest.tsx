@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ScreenRect, Text, View, Switch, Picker } from 'react-native';
-import { Button, Callout, Separator, IFocusable, RestoreFocusEvent } from '@fluentui/react-native';
+import { Button, Callout, Separator, IFocusable, RestoreFocusEvent, DismissBehaviors } from '@fluentui/react-native';
 import { CALLOUT_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
@@ -16,6 +16,34 @@ const standardCallout: React.FunctionComponent<{}> = () => {
 
   const [isBeakVisible, setIsBeakVisible] = React.useState(false);
   const onIsBeakVisibleChange = React.useCallback((value) => setIsBeakVisible(value), []);
+
+  const [preventDismissOnKeyDown, setPreventDismissOnKeyDown] = React.useState(false);
+  const [preventDismissOnClickOutside, setPreventDismissOnClickOutside] = React.useState(false);
+  const [calloutDismissBehaviors, setDismissBehaviors] = React.useState<DismissBehaviors[]>([]);
+
+  const onPreventDismissOnKeyDownChange = React.useCallback((value) => {
+    setPreventDismissOnKeyDown(value);
+    if (value) {
+      setDismissBehaviors(calloutDismissBehaviors.concat('preventDismissOnKeyDown'));
+    } else {
+      const newDismissBehaviors = calloutDismissBehaviors.filter((value) => {
+        value != 'preventDismissOnKeyDown';
+      });
+      setDismissBehaviors(newDismissBehaviors);
+    }
+  }, []);
+
+  const onPreventDismissOnClickOutsideChange = React.useCallback((value) => {
+    setPreventDismissOnClickOutside(value);
+    if (value) {
+      setDismissBehaviors(calloutDismissBehaviors.concat('preventDismissOnClickOutside'));
+    } else {
+      const newDismissBehaviors = calloutDismissBehaviors.filter((value) => {
+        value != 'preventDismissOnClickOutside';
+      });
+      setDismissBehaviors(newDismissBehaviors);
+    }
+  }, []);
 
   const redTargetRef = React.useRef<View>(null);
   const blueTargetRef = React.useRef<View>(null);
@@ -90,6 +118,17 @@ const standardCallout: React.FunctionComponent<{}> = () => {
             <Switch value={isBeakVisible} onValueChange={onIsBeakVisibleChange} />
             <Text>Beak Visible</Text>
           </View>
+
+          <View style={{ flexDirection: 'row' }}>
+            <Switch value={preventDismissOnKeyDown} onValueChange={onPreventDismissOnKeyDownChange} />
+            <Text>Prevent Dismiss On Key Down</Text>
+          </View>
+
+          <View style={{ flexDirection: 'row' }}>
+            <Switch value={preventDismissOnClickOutside} onValueChange={onPreventDismissOnClickOutsideChange} />
+            <Text>Prevent Dismiss On Click Outside</Text>
+          </View>
+
           <Picker
             prompt="Background Color"
             selectedValue={selectedBackgroundColor || colorDefault}
@@ -160,6 +199,7 @@ const standardCallout: React.FunctionComponent<{}> = () => {
             ...(selectedBorderColor && { borderColor: selectedBorderColor }),
             ...(selectedBackgroundColor && { backgroundColor: selectedBackgroundColor }),
             ...(selectedBorderWidth && { borderWidth: selectedBorderWidth }),
+            ...(calloutDismissBehaviors && { dismissBehaviors: calloutDismissBehaviors }),
           }}
         >
           <View style={{ padding: 20 }}>

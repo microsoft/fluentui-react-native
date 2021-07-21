@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Fri, 18 Jun 2021 00:38:19 GMT and should not be manually modified.
+This log was last generated on Sat, 17 Jul 2021 00:39:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.0
+
+Sat, 17 Jul 2021 00:39:49 GMT
+
+### Minor changes
+
+- Extract macOS FocusZone implementation from devmain (chripear@microsoft.com)
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (chripear@microsoft.com)
 
 ## 0.5.5
 
