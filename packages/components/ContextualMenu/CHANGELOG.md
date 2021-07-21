@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Wed, 21 Jul 2021 21:46:12 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Jul 2021 22:55:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.7
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
 
 ## 0.9.6
 
