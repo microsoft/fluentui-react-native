@@ -11,8 +11,9 @@ export const settings: IComposeSettings<TabsType> = [
       accessibilityRole: 'tablist',
       style: {
         display: 'flex',
-        alignItems: 'flex-start',
+        // alignItems: 'flex-start',
         flexDirection: 'row',
+        flexWrap: 'wrap',
       },
     },
     label: {

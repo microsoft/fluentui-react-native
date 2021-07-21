@@ -9,7 +9,7 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings, tabsItemSelectActionLabel } from './TabsItem.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
+// import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { useAsPressable, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { TabsContext } from './Tabs';
 
@@ -109,8 +109,8 @@ export const TabsItem = compose<TabsItemType>({
   },
   styles: {
     root: [],
-    button: [borderTokens],
-    content: [foregroundColorTokens, textTokens, [{ source: 'textBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }]],
+    button: [], // [borderTokens],
+    content: [], // [foregroundColorTokens, textTokens, [{ source: 'textBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }]],
   },
 });
 

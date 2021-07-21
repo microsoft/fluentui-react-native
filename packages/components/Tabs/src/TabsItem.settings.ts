@@ -16,13 +16,14 @@ export const settings: IComposeSettings<TabsItemType> = [
       focusable: true,
       accessibilityRole: 'tab',
       style: {
-        // display: 'flex',
-        alignItems: 'center',
+        display: 'flex',
+        // alignItems: 'center',
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        // minHeight: 20,
-        marginTop: 10,
-        position: 'relative',
+        flexWrap: 'wrap',
+        // justifyContent: 'space-between',
+        // // minHeight: 20,
+        // marginTop: 10,
+        // position: 'relative',
       },
     },
     button: {
@@ -46,13 +47,13 @@ export const settings: IComposeSettings<TabsItemType> = [
     },
     _precedence: ['disabled', 'hovered', 'focused', 'selected'],
     _overrides: {
-      selected: {
-        tokens: {
-          backgroundColor: 'buttonBackgroundPressed',
-          color: 'buttonTextPressed',
-          borderColor: 'buttonPressedBorder',
-        },
-      },
+      // selected: {
+      //   tokens: {
+      //     backgroundColor: 'buttonBackgroundPressed',
+      //     color: 'buttonTextPressed',
+      //     borderColor: 'buttonPressedBorder',
+      //   },
+      // },
       focused: {
         tokens: {
           textBorderColor: 'focusBorder',
