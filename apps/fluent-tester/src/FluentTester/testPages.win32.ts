@@ -17,6 +17,7 @@ import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 import { TestDescription } from './TestComponents';
 import { MenuButtonTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/MenuButton';
+import { HOMEPAGE_TABS_BUTTON, TabsTest } from './TestComponents/Tabs';
 
 export const tests: TestDescription[] = [
   {
@@ -107,6 +108,11 @@ export const tests: TestDescription[] = [
   {
     name: 'MenuButton Test',
     component: MenuButtonTest,
-    testPage: HOMEPAGE_MENU_BUTTON
-  }
+    testPage: HOMEPAGE_MENU_BUTTON,
+  },
+  {
+    name: 'Tabs Test',
+    component: TabsTest,
+    testPage: HOMEPAGE_TABS_BUTTON,
+  },
 ];
