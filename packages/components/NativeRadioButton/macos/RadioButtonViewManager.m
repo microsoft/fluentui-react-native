@@ -8,7 +8,7 @@ RCT_EXPORT_VIEW_PROPERTY(enabled, BOOL);
 RCT_EXPORT_VIEW_PROPERTY(isBordered, BOOL);
 RCT_REMAP_VIEW_PROPERTY(buttonKey, keyEquivalent, NSString)
 RCT_CUSTOM_VIEW_PROPERTY(state, BOOL, NSButton) {
-	if ([RCTConvert NSNumber:json]) {
+	if ([[RCTConvert NSNumber:json] isEqualToNumber:[NSNumber numberWithBool:YES]]) {
 		[view setState:NSControlStateValueOn];
 	}
 }
