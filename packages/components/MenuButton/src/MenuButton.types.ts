@@ -26,6 +26,7 @@ export interface MenuButtonProps extends IButtonProps {
 }
 
 export type MenuButtonSlotProps = {
+  nativeComponent?: MenuButtonProps; // Slot that represents the native component on macOS, rather than using the other slots.
   root: MenuButtonProps;
   button: IButtonProps;
   contextualMenu: React.PropsWithRef<ContextualMenuProps>;

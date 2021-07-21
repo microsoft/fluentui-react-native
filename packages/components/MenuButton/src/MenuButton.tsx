@@ -1,10 +1,25 @@
 /** @jsx withSlots */
 import React, { useRef, useState, useCallback } from 'react';
+import { Platform } from 'react-native';
 import { Button } from '@fluentui-react-native/button';
 import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu } from '@fluentui-react-native/contextual-menu';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
+import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
+
+const NativeMenuButton = ensureNativeComponent('MSFMenuButton');
+
+const slotsWin32 = {
+  root: React.Fragment,
+  button: { slotType: Button as React.ComponentType<object> },
+  contextualMenu: { slotType: ContextualMenu as React.ComponentType<object> },
+  contextualMenuItems: React.Fragment,
+};
+
+const slotsMacOS = {
+  nativeComponent: NativeMenuButton,
+};
 
 import {
   MenuButtonName,
@@ -64,6 +79,12 @@ export const MenuButton = compose<MenuButtonType>({
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
     const slotProps = mergeSettings<MenuButtonSlotProps>(styleProps, {
+      nativeComponent: {
+        style: {
+          width: 100,
+          height: 100,
+        },
+      },
       root: {},
       button: {
         content,
@@ -86,12 +107,7 @@ export const MenuButton = compose<MenuButtonType>({
 
     return { slotProps, state };
   },
-  slots: {
-    root: React.Fragment,
-    button: { slotType: Button as React.ComponentType<object> },
-    contextualMenu: { slotType: ContextualMenu as React.ComponentType<object> },
-    contextualMenuItems: React.Fragment,
-  },
+  slots: Platform.OS === 'macos' ? slotsMacOS : slotsWin32,
   styles: {},
   render: (Slots: ISlots<MenuButtonSlotProps>, renderData: MenuButtonRenderData) => {
     if (!(renderData.state && renderData.slotProps)) {
@@ -100,33 +116,39 @@ export const MenuButton = compose<MenuButtonType>({
     const context = renderData.state!.context;
     const menuItems = renderData.slotProps!.contextualMenuItems?.menuItems || [];
 
-    return (
-      <Slots.root>
-        <Slots.button />
-        {context.showContextualMenu && (
-          <Slots.contextualMenu>
-            {menuItems.map((menuItem) => {
-              const { hasSubmenu, submenuProps, showSubmenu, componentRef, submenuItems, ...items } = menuItem;
+    console.log(renderData);
 
-              return hasSubmenu ? (
-                <Slots.contextualMenuItems>
-                  <SubmenuItem componentRef={componentRef} {...items} />
-                  {showSubmenu && (
-                    <Submenu target={componentRef} {...submenuProps}>
-                      {submenuItems?.map((submenuItem) => (
-                        <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />
-                      ))}
-                    </Submenu>
-                  )}
-                </Slots.contextualMenuItems>
-              ) : (
-                <ContextualMenuItem key={items.itemKey} {...items} />
-              );
-            })}
-          </Slots.contextualMenu>
-        )}
-      </Slots.root>
-    );
+    if (Platform.OS === 'macos') {
+      return <Slots.nativeComponent />;
+    } else {
+      return (
+        <Slots.root>
+          <Slots.button />
+          {context.showContextualMenu && (
+            <Slots.contextualMenu>
+              {menuItems.map((menuItem) => {
+                const { hasSubmenu, submenuProps, showSubmenu, componentRef, submenuItems, ...items } = menuItem;
+
+                return hasSubmenu ? (
+                  <Slots.contextualMenuItems>
+                    <SubmenuItem componentRef={componentRef} {...items} />
+                    {showSubmenu && (
+                      <Submenu target={componentRef} {...submenuProps}>
+                        {submenuItems?.map((submenuItem) => (
+                          <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />
+                        ))}
+                      </Submenu>
+                    )}
+                  </Slots.contextualMenuItems>
+                ) : (
+                  <ContextualMenuItem key={items.itemKey} {...items} />
+                );
+              })}
+            </Slots.contextualMenu>
+          )}
+        </Slots.root>
+      );
+    }
   },
 });
 
