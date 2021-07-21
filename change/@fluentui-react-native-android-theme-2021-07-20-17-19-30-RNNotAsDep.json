@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Use peer dependencies for react-native version not dependencies",
-  "packageName": "@fluentui-react-native/android-theme",
-  "email": "30809111+acoates-ms@users.noreply.github.com",
-  "dependentChangeType": "patch",
-  "date": "2021-07-21T00:19:25.417Z"
-}

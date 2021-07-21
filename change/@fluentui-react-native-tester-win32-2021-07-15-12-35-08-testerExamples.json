@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add more features to contextualMenu test",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "lehon@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-07-15T19:33:48.618Z"
-}

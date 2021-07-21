@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix stack child component's style props causing issues in RNW 0.63",
-  "packageName": "@fluentui-react-native/stack",
-  "email": "email not defined",
-  "dependentChangeType": "patch",
-  "date": "2021-07-13T22:29:39.096Z"
-}
