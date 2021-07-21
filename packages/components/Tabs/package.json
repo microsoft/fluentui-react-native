@@ -1,0 +1,52 @@
+{
+  "name": "@fluentui-react-native/tabs",
+  "version": "0.1.0",
+  "description": "A cross-platform Tabs component using the Fluent Design System",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "just": "fluentui-scripts",
+    "lint": "fluentui-scripts eslint",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "verify-api": "fluentui-scripts verify-api-extractor",
+    "update-api": "fluentui-scripts update-api-extractor",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
+  },
+  "dependencies": {
+    "@fluentui-react-native/button": "^0.17.9",
+    "@fluentui-react-native/contextual-menu": "^0.9.5",
+    "@uifabricshared/foundation-compose": "^1.9.5",
+    "@uifabricshared/foundation-composable": ">=0.8.2 <1.0.0",
+    "@uifabricshared/foundation-settings": ">=0.9.1 <1.0.0",
+    "@fluentui-react-native/adapters": ">=0.6.2 <1.0.0",
+    "@fluentui-react-native/focus-zone": ">=0.6.0 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.10.10 <1.0.0",
+    "@fluentui-react-native/pressable": ">=0.6.11 <1.0.0",
+    "@fluentui-react-native/text": ">=0.9.8 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.9.4 <1.0.0"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
+    "@office-iss/react-native-win32": "^0.63.7",
+    "@types/react-native": "^0.63.0",
+    "@uifabricshared/build-native": "^0.1.1",
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "react-native": "^0.63.4"
+  },
+  "peerDependencies": {
+    "react": ">=16.13.1",
+    "react-native": ">=0.63.4"
+  },
+  "author": "",
+  "license": "MIT"
+}
