@@ -1,0 +1,8 @@
+{
+  "type": "minor",
+  "comment": "Add assert-never util",
+  "packageName": "@fluentui-react-native/assert-never",
+  "email": "email not defined",
+  "dependentChangeType": "patch",
+  "date": "2021-07-21T23:14:09.729Z"
+}
