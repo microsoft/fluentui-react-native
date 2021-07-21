@@ -33,13 +33,12 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {
-    "react-native": "^0.63.4"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/react": "^16.9.34",
     "@types/react-native": "^0.63.0",
     "react": "16.13.1",
+    "react-native": "^0.63.4",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
   },
