@@ -85,7 +85,7 @@ export function buildUseStyling<TProps, TSlotProps, TTokens, TTheme>(
   const { useTheme, getComponentInfo } = themeHelper;
   const { tokens, tokensThatAreAlsoProps: tokenProps } = options;
   const styles = refinePropsFunctions(options.slotProps || {}, tokenProps);
-  const useTokens = buildUseTokens(getComponentInfo, tokens);
+  const useTokens = buildUseTokens<TTokens, TTheme>(getComponentInfo, ...tokens);
 
   return (props: TProps, lookup?: HasLayer) => {
     // query the theme
