@@ -33,6 +33,7 @@
     "@fluentui-react-native/merge-props": ">=0.3.2 <1.0.0",
     "@fluentui-react-native/theme-types": ">=0.8.2 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.6.2 <1.0.0",
+    "@fluentui-react-native/use-slot": ">=0.1.1 <1.0.0",
     "@fluentui-react-native/use-slots": ">=0.5.3 <1.0.0",
     "@fluentui-react-native/use-tokens": ">=0.1.1 <1.0.0",
     "@fluentui-react-native/memo-cache": "^1.1.2",

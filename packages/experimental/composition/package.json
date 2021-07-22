@@ -35,6 +35,7 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui-react-native/immutable-merge": "^1.1.2",
+    "@fluentui-react-native/use-slot": ">=0.1.1 <1.0.0",
     "@fluentui-react-native/use-slots": ">=0.5.3 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.6.2 <1.0.0"
   },

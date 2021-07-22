@@ -34,9 +34,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/merge-props": ">=0.3.2 <1.0.0"
+    "@fluentui-react-native/use-slot": ">=0.1.1 <1.0.0"
   },
   "devDependencies": {
+    "@fluentui-react-native/merge-props": ">=0.3.2 <1.0.0",
     "@uifabricshared/build-native": "^0.1.1",
     "react": "16.13.1",
     "react-native": "^0.63.4"
