@@ -15,7 +15,7 @@ export const Expander = compose<ExpanderType>({
   tokens: [{}, expanderName],
   slotProps: {
     root: buildProps(
-      (tokens, theme) => ({
+      (tokens) => ({
         ...tokens,
       }),
       [],
@@ -33,7 +33,7 @@ export const Expander = compose<ExpanderType>({
         if (event.nativeEvent.expanded != null) {
           event.persist();
           if (!event.nativeEvent.expanded) {
-            await delay(250);
+            await delay(200);
           }
           setExpandedState(event.nativeEvent.expanded);
         }

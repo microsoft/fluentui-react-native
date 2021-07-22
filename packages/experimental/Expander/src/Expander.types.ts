@@ -1,4 +1,4 @@
-import { ColorValue, ImageURISource } from 'react-native';
+import { ColorValue } from 'react-native';
 import type {SyntheticEvent} from 'react-native/Libraries/Types/CoreEventTypes';
 
 export const expanderName = 'Expander';
