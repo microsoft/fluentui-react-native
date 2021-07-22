@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/persona",
-  "version": "0.10.8",
+  "version": "0.10.10",
   "description": "A cross-platform Persona component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -23,14 +23,14 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.9.6",
-    "@fluentui-react-native/adapters": ">=0.6.2 <1.0.0",
-    "@fluentui-react-native/persona-coin": ">=0.8.7 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.9.5 <1.0.0",
-    "@uifabricshared/foundation-composable": ">=0.8.2 <1.0.0",
-    "@uifabricshared/foundation-settings": ">=0.9.1 <1.0.0",
-    "@uifabricshared/foundation-tokens": ">=0.9.1 <1.0.0",
-    "@uifabricshared/theming-ramp": ">=0.14.4 <1.0.0"
+    "@uifabricshared/foundation-compose": "^1.9.7",
+    "@fluentui-react-native/adapters": ">=0.6.4 <1.0.0",
+    "@fluentui-react-native/persona-coin": ">=0.8.9 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.9.7 <1.0.0",
+    "@uifabricshared/foundation-composable": ">=0.8.3 <1.0.0",
+    "@uifabricshared/foundation-settings": ">=0.9.2 <1.0.0",
+    "@uifabricshared/foundation-tokens": ">=0.9.2 <1.0.0",
+    "@uifabricshared/theming-ramp": ">=0.14.5 <1.0.0"
   },
   "devDependencies": {
     "@types/react-native": "^0.63.0",
