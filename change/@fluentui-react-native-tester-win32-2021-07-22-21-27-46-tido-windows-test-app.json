@@ -1,8 +1,0 @@
-{
-  "type": "none",
-  "comment": "Loosen requirement on react-native version",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "4123478+tido64@users.noreply.github.com",
-  "dependentChangeType": "none",
-  "date": "2021-07-22T19:25:04.868Z"
-}

@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Correctly declare dependency on react-native",
-  "packageName": "@fluentui-react-native/adapters",
-  "email": "4123478+tido64@users.noreply.github.com",
-  "dependentChangeType": "patch",
-  "date": "2021-07-22T19:27:46.211Z"
-}

@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Moved react-native-svg to peer dependencies",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "4123478+tido64@users.noreply.github.com",
-  "dependentChangeType": "patch",
-  "date": "2021-07-22T19:24:29.319Z"
-}
