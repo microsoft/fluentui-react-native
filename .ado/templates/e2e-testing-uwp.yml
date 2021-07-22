@@ -43,7 +43,7 @@ steps:
   - script: |
       yarn windows --arch x64 --logging --no-packager --no-launch
     workingDirectory: apps\windows
-    displayName: 'run UWP app'
+    displayName: 'build UWP app'
 
   # Creates a variable that determines whether the previous build tasks succeeded.
   # Usage: We want the tasks that generate reports to run for both passing/failing E2E testing tasks. In order to do so, we need to make

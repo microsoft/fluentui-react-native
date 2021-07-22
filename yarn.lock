@@ -2404,10 +2404,10 @@
     workspace-tools "^0.16.2"
     yargs "^16.0.0"
 
-"@rnx-kit/metro-config@^1.2.1":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.2.tgz#be9f3ae35a5aa1b145eca5082b958fcb472e4abb"
-  integrity sha512-q5/j4KqbeeKyulkZqT2peD/w0sa22kPrkF+nCwmo7yJCa9oG47l7GX+1VK2z0Xm3z9mbYKlVoBpU0OWyZP6nlw==
+"@rnx-kit/metro-config@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.3.tgz#57c48546732ee74badf082756533006a0940df8a"
+  integrity sha512-d+JQcAdYOACbISNTgcXwSdwBD7dOdnuGpe1iQPJOfsPoTRezAmvAp4oI/b77BcMnWMn+0RVqedoX2lE5l8OW+g==
   dependencies:
     "@rnx-kit/babel-preset-metro-react-native" "^1.0.3"
     find-up "^5.0.0"
