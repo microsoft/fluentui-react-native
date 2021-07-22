@@ -41,19 +41,9 @@ steps:
     displayName: 'generate UWP app'
 
   - script: |
-      yarn windows --logging --arch x64
+      yarn windows --arch x64 --logging --no-packager --no-launch
     workingDirectory: apps\windows
     displayName: 'run UWP app'
-
-  - powershell: |
-      Get-Process
-    displayName: 'Get List of processes'
-
-  # Kill ReactTestApp, leave server up and running. This was the only way I could get the server continuously running
-  # as a separate process.
-  - powershell: |
-      Stop-Process -Name ReactTestApp
-    displayName: 'Kill ReactTestApp Process'
 
   # Creates a variable that determines whether the previous build tasks succeeded.
   # Usage: We want the tasks that generate reports to run for both passing/failing E2E testing tasks. In order to do so, we need to make
