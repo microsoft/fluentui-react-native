@@ -30,7 +30,7 @@ export interface MenuButtonProps extends IButtonProps {
 
 export type MenuButtonSlotProps = {
   root: MenuButtonProps;
-  button: IButtonProps;
+  button: IButtonProps & MenuButtonTokens;
   contextualMenu: React.PropsWithRef<ContextualMenuProps>;
   contextualMenuItems: Pick<MenuButtonProps, 'menuItems'>;
   contextualMenuItem: MenuButtonItemProps;
