@@ -7,6 +7,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "fluentui-scripts build",
+    "prebundle": "mkdirp dist",
     "bundle": "react-native rnx-bundle --dev false",
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
@@ -37,6 +38,7 @@
     "jest": "^24.9.0",
     "metro-config": "^0.59.0",
     "metro-react-native-babel-preset": "^0.59.0",
+    "mkdirp": "^0.5.5",
     "react-native-svg-transformer": "^0.14.3",
     "react-native-test-app": "^0.6.3",
     "react-test-renderer": "~16.13.1"
