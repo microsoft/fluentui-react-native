@@ -553,7 +553,11 @@ export class Pressability {
     if (typeof this._responderID === 'number') {
       UIManager.measure(this._responderID, this._measureCallback);
     } else {
-      this._responderID.measure(this._measureCallback);
+      const measure = (this as any)?._responderID?.measure;
+
+      if (typeof measure === 'function' && this._measureCallback) {
+        measure(this._measureCallback);
+      }
     }
   }
 
