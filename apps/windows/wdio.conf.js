@@ -97,29 +97,8 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  beforeSession: function (/* config, capabilities, specs */) {
-    if (process.env["TF_BUILD"]) {
-      return;
-    }
-
-    // Delete old screenshots and create empty directory
-    const rmdirOptions = {
-      maxRetries: 3,
-      recursive: true,
-    };
-
-    if (fs.existsSync('./errorShots')) {
-      fs.renameSync('./errorShots', './errorShots-old');
-      fs.rmdirSync('./errorShots-old', rmdirOptions);
-    }
-    fs.mkdirSync('./errorShots');
-
-    if (fs.existsSync('./allure-results')) {
-      fs.renameSync('./allure-results', './allure-results-old');
-      fs.rmdirSync('./allure-results-old', rmdirOptions);
-    }
-    fs.mkdirSync('./allure-results');
-  },
+  // beforeSession: function (/* config, capabilities, specs */) {
+  // },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
    * variables like `browser`. It is the perfect place to define custom commands.

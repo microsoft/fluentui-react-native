@@ -8,7 +8,7 @@
     "clean": "fluentui-scripts clean",
     "code-style": "fluentui-scripts code-style",
     "depcheck": "fluentui-scripts depcheck",
-    "e2etest": "rimraf reports/* && wdio",
+    "e2etest": "rimraf allure-results/* errorShots/* reports/* && wdio",
     "generate-report": "allure generate allure-results --clean && allure open",
     "just": "fluentui-scripts",
     "lint": "eslint .",
