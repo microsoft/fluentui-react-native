@@ -12,4 +12,6 @@ RCT_CUSTOM_VIEW_PROPERTY(state, BOOL, NSButton) {
 		[view setState:NSControlStateValueOn];
 	}
 }
+RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock);
+
 @end

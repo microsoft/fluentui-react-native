@@ -4,15 +4,10 @@ import Foundation
 class RadioButtonViewManager: RCTViewManager {
 	
 	override func view()->NSView! {
-		let radioButton = NSButton.init(radioButtonWithTitle: "", target: self, action: #selector(callOnChange));
-		return radioButton;
-	}
-	
-	@objc private func callOnChange() {
-
+		let radioButton = RadioButtonView()
+		return radioButton
 	}
 	override class func requiresMainQueueSetup() -> Bool {
 		return true
 	}
-
 }
