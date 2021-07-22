@@ -32,7 +32,7 @@
   "dependencies": {
     "@fluentui-react-native/tester": "^0.32.1",
     "react": "16.13.1",
-    "react-native": "^0.63.4",
+    "react-native": "^0.63.2",
     "react-native-svg": "^12.1.1"
   },
   "devDependencies": {
@@ -54,7 +54,7 @@
     "@wdio/sync": "5.20.1",
     "allure-commandline": "2.13.0",
     "appium": "1.17.1",
-    "metro-config": "^0.58.0",
+    "metro-config": "^0.59.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "~16.13.1",
@@ -63,20 +63,22 @@
     "typescript": "3.8.3",
     "webdriverio": "5.22.4"
   },
-  "peerDependencies": {
-    "react": "16.13.1",
-    "react-native": "^0.63.4"
-  },
   "jest": {
     "preset": "react-native"
   },
   "rnx-kit": {
     "reactNativeVersion": "0.63",
+    "kitType": "app",
     "bundle": {
       "targets": [
         "win32"
       ],
       "entryPath": "index.js"
-    }
+    },
+    "capabilities": [
+      "core-android",
+      "react",
+      "svg"
+    ]
   }
 }
