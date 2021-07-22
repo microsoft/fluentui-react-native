@@ -33,6 +33,7 @@ export const settings: IComposeSettings<TabsItemType> = [
           backgroundColor: 'buttonBackgroundPressed',
           color: 'buttonTextPressed',
           borderColor: 'buttonPressedBorder',
+          borderWidth: 10,
         },
       },
       focused: {

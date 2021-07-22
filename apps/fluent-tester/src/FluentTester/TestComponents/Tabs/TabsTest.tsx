@@ -16,6 +16,8 @@ const tabs: React.FunctionComponent<{}> = () => {
       <Tabs label="Tabs" onTabsClick={onTabsClick}>
         <TabsItem content="Option A" buttonKey="A" />
         <TabsItem content="Option B" buttonKey="B" />
+        <TabsItem content="Option C" buttonKey="C" />
+        <TabsItem content="Option D" buttonKey="D" />
       </Tabs>
     </Stack>
   );
