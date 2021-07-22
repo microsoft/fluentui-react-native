@@ -86,34 +86,24 @@ export const TabsItem = compose<TabsItemType>({
         accessibilityPositionInSet: info.buttonKeys.findIndex((x) => x == buttonKey) + 1,
         accessibilitySetSize: info.buttonKeys.length,
         onAccessibilityAction: onAccessibilityAction,
+        content: content,
       },
       // content: { children: content },
-      button: { content: content },
     });
 
     return { slotProps };
   },
 
   render: (Slots: ISlots<TabsItemSlotProps>, _renderData: TabsItemRenderData, ...children: React.ReactNode[]) => {
-    return (
-      <Slots.root>
-        <Slots.button></Slots.button>
-        <Slots.content />
-        {children}
-      </Slots.root>
-    );
+    return <Slots.root></Slots.root>;
   },
 
   settings,
   slots: {
-    root: View,
-    button: Button,
-    content: Text,
+    root: Button,
   },
   styles: {
-    root: [],
-    button: [borderTokens],
-    content: [foregroundColorTokens, textTokens, [{ source: 'textBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }]],
+    root: [borderTokens],
   },
 });
 
