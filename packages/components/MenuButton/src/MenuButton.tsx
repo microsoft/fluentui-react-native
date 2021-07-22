@@ -4,7 +4,7 @@ import { Platform } from 'react-native';
 import { Button } from '@fluentui-react-native/button';
 import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu } from '@fluentui-react-native/contextual-menu';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
+import { mergeSettings, slotPropsFromSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
@@ -81,7 +81,7 @@ export const MenuButton = compose<MenuButtonType>({
     const slotProps = mergeSettings<MenuButtonSlotProps>(styleProps, {
       nativeComponent: {
         style: {
-          width: 100,
+          width: 200,
           height: 100,
         },
       },
@@ -116,10 +116,14 @@ export const MenuButton = compose<MenuButtonType>({
     const context = renderData.state!.context;
     const menuItems = renderData.slotProps!.contextualMenuItems?.menuItems || [];
 
-    console.log(renderData);
-
     if (Platform.OS === 'macos') {
-      return <Slots.nativeComponent />;
+      return (
+        <Slots.nativeComponent
+          menuItems={menuItems}
+          content={renderData.slotProps!.button.content}
+          disabled={renderData.slotProps!.button.disabled}
+        />
+      );
     } else {
       return (
         <Slots.root>

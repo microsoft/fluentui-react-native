@@ -25,12 +25,18 @@ open class MenuButton: NSPopUpButton {
       menuButtonImage = newValue
     }
   }
+  
+  open override var title: String {
+    didSet {
+      updateMenu()
+    }
+  }
 
 	public override init(frame buttonFrame: NSRect, pullsDown flag: Bool) {
 
 		super.init(frame: buttonFrame, pullsDown: flag)
 
-		imagePosition = .imageOnly
+    imagePosition = .imageLeading
 		pullsDown = true
 		bezelStyle = .recessed
 		if #available(OSX 11.0, *) {
@@ -67,12 +73,23 @@ open class MenuButton: NSPopUpButton {
 		// Add en ampty imageOnly menu item for the button
 		let initialItem = NSMenuItem()
 		initialItem.image = image
-		initialItem.title = ""
+		initialItem.title = title
 		dropDownCell.usesItemFromMenu = false
 		dropDownCell.menuItem = initialItem
 
 		menu?.insertItem(initialItem, at: 0)
 	}
+  
+//  private func updateImagePosition() {
+//    let hasImage = self.image != nil;
+//    let hasTitle = !self.title.isEmpty
+//
+//    if hasImage {
+//      if hasTitle {
+//        imagePosition = .imageLeading
+//      }
+//    }
+//  }
   
   // MARK: - Private properties
 

@@ -82,12 +82,9 @@ class MenuButtonManager: RCTViewManager {
   override func view()->NSView! {
     let menuButton = MenuButton()
     
-    let image = NSImage(named: NSImage.iconViewTemplateName)!
-    image.size = CGSize(width: 15, height: 15)
-    menuButton.image = image
-    
-    let menu = createMenuFromJson(json: testJson)
-    menuButton.menu = menu
+//    let image = NSImage(named: NSImage.iconViewTemplateName)!
+//    image.size = CGSize(width: 15, height: 15)
+//    menuButton.image = image
     
     return menuButton
   }
