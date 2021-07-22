@@ -49,7 +49,7 @@ export const TabsItem = compose<TabsItemType>({
     /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
     const pressable = useAsPressable({
       ...rest,
-      onPress: changeSelectionWithFocus,
+      // onPress: changeSelectionWithFocus,
       onFocus: changeSelection,
     });
 
