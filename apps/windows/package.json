@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "build": "fluentui-scripts build",
-    "prebundle": "mkdirp dist",
     "bundle": "react-native rnx-bundle --dev false",
     "clean": "fluentui-scripts clean",
     "code-style": "fluentui-scripts code-style",
@@ -48,7 +47,6 @@
     "jest": "^24.9.0",
     "metro-config": "^0.59.0",
     "metro-react-native-babel-preset": "^0.59.0",
-    "mkdirp": "^0.5.5",
     "react-native-test-app": "^0.6.3",
     "react-test-renderer": "~16.13.1",
     "rimraf": "~3.0.2",

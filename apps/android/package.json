@@ -16,7 +16,6 @@
     "test": "fluentui-scripts jest",
     "bundle": "react-native rnx-bundle --dev false",
     "bundle-dev": "react-native rnx-bundle",
-    "prebundle": "mkdirp dist",
     "android": "react-native run-android ",
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
@@ -40,7 +39,6 @@
     "babel-jest": "^24.9.0",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.59.0",
-    "mkdirp": "^0.5.5",
     "react-native-svg-transformer": "^0.14.3",
     "react-native-test-app": "^0.6.3",
     "react-test-renderer": "~16.13.1"

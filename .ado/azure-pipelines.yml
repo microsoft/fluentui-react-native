@@ -21,14 +21,6 @@ jobs:
       - template: templates/setup-repo.yml
 
       - script: |
-          mkdir apps/android/dist
-          mkdir apps/ios/dist
-          mkdir apps/macos/dist
-          mkdir apps/win32/dist
-          mkdir apps/windows/dist
-        displayName: 'workaround for file system race condition'
-
-      - script: |
           yarn buildci
         displayName: 'yarn buildci'
 

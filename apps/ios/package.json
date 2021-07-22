@@ -14,7 +14,6 @@
     "lint": "fluentui-scripts eslint",
     "start": "react-native start",
     "test": "fluentui-scripts jest",
-    "prebundle": "mkdirp dist",
     "bundle": "react-native rnx-bundle --dev false",
     "bundle-dev": "react-native rnx-bundle",
     "ios": "react-native run-ios --scheme ReactTestApp --project-path src",
@@ -39,7 +38,6 @@
     "jest": "^24.9.0",
     "metro-config": "^0.59.0",
     "metro-react-native-babel-preset": "^0.59.0",
-    "mkdirp": "^0.5.5",
     "react-native-svg-transformer": "^0.14.3",
     "react-native-test-app": "^0.6.3",
     "react-test-renderer": "~16.13.1"
