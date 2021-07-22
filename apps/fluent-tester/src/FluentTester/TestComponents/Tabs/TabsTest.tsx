@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Alert } from 'react-native';
+// import { Alert } from 'react-native';
 import { Tabs, TabsItem } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
@@ -8,7 +8,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 
 const tabs: React.FunctionComponent<{}> = () => {
   const onChange = (key: string) => {
-    Alert.alert('Alert.', key);
+    console.log(key);
   };
 
   return (

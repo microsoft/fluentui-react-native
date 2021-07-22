@@ -3,9 +3,11 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
+import { Button } from '@fluentui-react-native/button';
+
 import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemRenderData } from './TabsItem.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { filterViewProps } from '@fluentui-react-native/adapters';
+// import { filterViewProps } from '@fluentui-react-native/adapters';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings, tabsItemSelectActionLabel } from './TabsItem.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
@@ -85,7 +87,8 @@ export const TabsItem = compose<TabsItemType>({
         accessibilitySetSize: info.buttonKeys.length,
         onAccessibilityAction: onAccessibilityAction,
       },
-      content: { children: content },
+      // content: { children: content },
+      button: { content: content },
     });
 
     return { slotProps };
@@ -104,7 +107,7 @@ export const TabsItem = compose<TabsItemType>({
   settings,
   slots: {
     root: View,
-    button: { slotType: View, filter: filterViewProps },
+    button: Button,
     content: Text,
   },
   styles: {

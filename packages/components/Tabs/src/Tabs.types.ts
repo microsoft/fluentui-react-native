@@ -4,6 +4,7 @@ import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
 import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
+import { ViewProps } from 'react-native';
 
 export const tabsName = 'Tabs';
 
@@ -69,7 +70,7 @@ export interface TabsTokens extends IForegroundColorTokens, FontTokens {}
 export interface TabsSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
   label: ITextProps;
-  container: FocusZoneProps;
+  container: ViewProps & FocusZoneProps;
 }
 
 export type TabsRenderData = IRenderData<TabsSlotProps, TabsState>;
