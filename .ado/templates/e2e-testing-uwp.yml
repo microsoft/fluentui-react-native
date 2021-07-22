@@ -36,11 +36,10 @@ steps:
     displayName: 'Install Azure Credentials Plugin for NuGet'
 
   - script: |
-      mkdir windows\target
-      mkdir windows\target\x64
-      mklink /J windows\target\x64\Release windows\x64\Release\FluentTester
+      rmdir errorShots /s /q
+      rmdir allure-results /s /q
     workingDirectory: apps\windows
-    displayName: 'Workaround RNW CLI bug'
+    displayName: 'Workaround @wdio.beforeSession not deleting files'
 
   - script: |
       yarn prewindows
