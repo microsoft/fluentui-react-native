@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { MenuButtonItemProps } from '@fluentui/react-native';
 export const testImage = require('../Button/icon_24x24.png');
 

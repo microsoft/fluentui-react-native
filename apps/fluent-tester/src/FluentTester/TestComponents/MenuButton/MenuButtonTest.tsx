@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
 import { Separator, MenuButton, ContextualMenuProps } from '@fluentui/react-native';
