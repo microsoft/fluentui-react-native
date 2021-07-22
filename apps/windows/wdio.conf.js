@@ -34,7 +34,7 @@ exports.config = {
   bail: 1,
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
-  connectionRetryCount: 10, // Maximum count of request retries to the Selenium server.
+  connectionRetryCount: 1, // Maximum count of request retries to the Selenium server.
 
   port: 4723, // default appium port
   services: ['appium'],
@@ -97,8 +97,10 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  // beforeSession: function (/* config, capabilities, specs */) {
-  // },
+  beforeSession: function (/* config, capabilities, specs */) {
+    fs.mkdirSync('./errorShots', { recursive: true });
+    fs.mkdirSync('./allure-results', { recursive: true });
+  },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
    * variables like `browser`. It is the perfect place to define custom commands.
