@@ -220,6 +220,8 @@ const customizedUIMenuButton: React.FunctionComponent<{}> = () => {
       backgroundColor: '#0095ff',
       borderWidth: 0,
       color: '#fff',
+      variant: 'heroSemibold',
+      fontFamily: 'Georgia',
     },
     contextualMenu: { backgroundColor: '#a9dbff' },
   });

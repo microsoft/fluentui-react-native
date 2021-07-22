@@ -1,12 +1,6 @@
-import {
-  ContextualMenuItemProps,
-  ContextualMenuProps,
-  SubmenuProps,
-  SubmenuTokens,
-  ContextualMenuTokens,
-  SubmenuItemTokens,
-} from '@fluentui-react-native/contextual-menu';
-import { IButtonProps, IButtonTokens } from '@fluentui-react-native/button';
+import { ContextualMenuItemProps, ContextualMenuProps, SubmenuProps } from '@fluentui-react-native/contextual-menu';
+import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import { IButtonProps } from '@fluentui-react-native/button';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const MenuButtonName = 'MenuButton';
@@ -19,7 +13,7 @@ export interface MenuButtonState {
   context: MenuButtonContext;
 }
 
-export type MenuButtonTokens = SubmenuTokens & SubmenuItemTokens & ContextualMenuTokens & IButtonTokens;
+export interface MenuButtonTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {}
 
 export interface MenuButtonItemProps extends ContextualMenuItemProps {
   hasSubmenu?: boolean;
