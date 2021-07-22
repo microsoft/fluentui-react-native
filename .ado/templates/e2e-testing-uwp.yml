@@ -36,12 +36,6 @@ steps:
     displayName: 'Install Azure Credentials Plugin for NuGet'
 
   - script: |
-      rmdir errorShots /s /q
-      rmdir allure-results /s /q
-    workingDirectory: apps\windows
-    displayName: 'Workaround @wdio.beforeSession not deleting files'
-
-  - script: |
       yarn prewindows
     workingDirectory: apps\windows
     displayName: 'generate UWP app'
