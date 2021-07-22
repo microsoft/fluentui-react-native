@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/win32-theme",
-  "version": "0.7.6",
+  "version": "0.7.8",
   "description": "Win32 office theme that works with the theming native module",
   "repository": {
     "type": "git",
@@ -34,17 +34,17 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/default-theme": ">=0.6.5 <1.0.0",
-    "@fluentui-react-native/theme-types": ">=0.8.0 <1.0.0",
-    "@fluentui-react-native/theme": ">=0.5.5 <1.0.0",
-    "react-native": "^0.63.4"
+    "@fluentui-react-native/default-theme": ">=0.6.7 <1.0.0",
+    "@fluentui-react-native/theme-types": ">=0.8.2 <1.0.0",
+    "@fluentui-react-native/theme": ">=0.5.7 <1.0.0"
   },
   "devDependencies": {
     "@types/react": "^16.9.34",
     "@types/react-native": "^0.63.0",
     "react": "16.13.1",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1"
+    "@uifabricshared/eslint-config-rules": "^0.1.1",
+    "react-native": "^0.63.4"
   },
   "peerDependencies": {
     "react": ">=16.13.1",

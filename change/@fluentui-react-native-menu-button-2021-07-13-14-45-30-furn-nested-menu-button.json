@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Added Submenu Items to MenuButton component.",
-  "packageName": "@fluentui-react-native/menu-button",
-  "email": "v.kozlova13@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-07-13T11:45:30.649Z"
-}

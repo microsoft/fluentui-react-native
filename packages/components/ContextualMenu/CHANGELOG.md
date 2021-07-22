@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Thu, 15 Jul 2021 15:40:32 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Jul 2021 22:55:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.7
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
+
+## 0.9.6
+
+Wed, 21 Jul 2021 21:46:12 GMT
+
+### Patches
+
+- Fix flickering bug on hover (lehon@microsoft.com)
+
+## 0.9.4
+
+Thu, 15 Jul 2021 17:54:30 GMT
+
+### Patches
+
+- Fixed onShow method in Submenu (v.kozlova13@gmail.com)
 
 ## 0.9.3
 

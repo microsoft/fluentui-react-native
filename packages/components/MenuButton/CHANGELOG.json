@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Fri, 16 Jul 2021 18:25:45 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.2.6",
+      "version": "0.2.6",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add ActivityIndicator Component Test",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "31c4b78d59d4068ebed0417cc16d9e5142141c51",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 15 Jul 2021 17:54:30 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.2.5",
+      "version": "0.2.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added Submenu Items to MenuButton component.",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "daa3c23ea3a539bcb6e2d9156daec5b34bc04c39",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 13 Jul 2021 10:45:30 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.2.0",
       "version": "0.2.0",
