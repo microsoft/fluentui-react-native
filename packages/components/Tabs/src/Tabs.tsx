@@ -13,7 +13,7 @@ import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
 export const TabsContext = React.createContext<ITabsContext>({
   selectedKey: null,
-  onChange: (/* key: string */) => {
+  onTabsClick: (/* key: string */) => {
     return;
   },
   updateSelectedButtonRef: (/* ref: React.RefObject<any>*/) => {
@@ -29,7 +29,7 @@ export const Tabs = compose<TabsType>({
     const { label, ariaLabel, selectedKey, defaultSelectedKey, ...rest } = userProps;
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
-    const data = useSelectedKey(selectedKey || defaultSelectedKey || null, userProps.onChange);
+    const data = useSelectedKey(selectedKey || defaultSelectedKey || null, userProps.onTabsClick);
 
     const [selectedButtonRef, setSelectedButtonRef] = React.useState(React.useRef<View>(null));
 
@@ -43,7 +43,7 @@ export const Tabs = compose<TabsType>({
     const state: TabsState = {
       context: {
         selectedKey: selectedKey ?? data.selectedKey,
-        onChange: data.onKeySelect,
+        onTabsClick: data.onKeySelect,
         updateSelectedButtonRef: onSelectButtonRef,
       },
     };
@@ -82,7 +82,7 @@ export const Tabs = compose<TabsType>({
 
     return (
       <TabsContext.Provider
-        // Passes in the selected key and a hook function to update the newly selected button and call the client's onChange callback
+        // Passes in the selected key and a hook function to update the newly selected button and call the client's onTabsClick callback
         value={renderData.state.context}
       >
         <Slots.root>

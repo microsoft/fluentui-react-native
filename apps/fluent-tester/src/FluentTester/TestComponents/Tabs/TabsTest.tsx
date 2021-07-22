@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import { Alert } from 'react-native';
+import { Alert } from 'react-native';
 import { Tabs, TabsItem } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
@@ -7,13 +7,13 @@ import { TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const tabs: React.FunctionComponent<{}> = () => {
-  const onChange = (key: string) => {
-    console.log(key);
+  const onTabsClick = (key: string) => {
+    Alert.alert('Alert.', key + ' works');
   };
 
   return (
     <Stack style={stackStyle}>
-      <Tabs label="Tabs" onChange={onChange}>
+      <Tabs label="Tabs" onTabsClick={onTabsClick}>
         <TabsItem content="Option A" buttonKey="A" />
         <TabsItem content="Option B" buttonKey="B" />
       </Tabs>

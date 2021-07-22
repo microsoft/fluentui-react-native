@@ -15,9 +15,9 @@ export interface ITabsContext {
   selectedKey: string | null;
 
   /*
-   ** Updates the selected button and calls the client’s onChange callback
+   ** Updates the selected button and calls the client’s onTabsClick callback
    */
-  onChange?: (key: string) => void;
+  onTabsClick?: (key: string) => void;
 
   /*
    ** Updates the selected button's ref to set as the default tabbable element
@@ -52,7 +52,7 @@ export interface TabsProps {
 
   /*
    ** The key of the selected option. If you provide this, you must maintain selection state by observing
-   ** onChange events and passing a new value in when changed. This overrides defaultSelectedKey
+   ** onTabsClick events and passing a new value in when changed. This overrides defaultSelectedKey
    ** and makes the RadioGroup a controlled component.
    */
   selectedKey?: string;
@@ -60,7 +60,7 @@ export interface TabsProps {
   /*
    ** Callback for receiving a notification when the choice has been changed
    */
-  onChange?: (key: string) => void;
+  onTabsClick?: (key: string) => void;
 
   testID?: string;
 }
