@@ -20,7 +20,7 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/theme-types": ">=0.8.1 <1.0.0"
+    "@fluentui-react-native/theme-types": ">=0.8.2 <1.0.0"
   },
   "devDependencies": {
     "@types/react": ">=16.9.34 < 16.14.0",
