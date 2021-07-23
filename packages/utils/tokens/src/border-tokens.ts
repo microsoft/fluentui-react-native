@@ -9,7 +9,6 @@ export interface IBorderTokens {
   borderWidth?: number;
   borderRadius?: number;
   borderStyle?: ViewStyle['borderStyle'];
-  borderBottomWidth?: ViewStyle['borderBottomWidth'];
 }
 
 export const borderTokens: IOperationSet<IBorderTokens, ITheme> = [
@@ -17,7 +16,6 @@ export const borderTokens: IOperationSet<IBorderTokens, ITheme> = [
   { source: 'borderWidth' },
   { source: 'borderRadius' },
   { source: 'borderStyle' },
-  { source: 'borderBottomWidth' },
 ];
 
-export const borderStyles = tokenBuilder<IBorderTokens>('borderColor', 'borderRadius', 'borderStyle', 'borderWidth', 'borderBottomWidth');
+export const borderStyles = tokenBuilder<IBorderTokens>('borderColor', 'borderRadius', 'borderStyle', 'borderWidth');
