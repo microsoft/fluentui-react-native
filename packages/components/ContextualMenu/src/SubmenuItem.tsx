@@ -18,7 +18,7 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useAsPressable, useKeyCallback, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { SvgXml } from 'react-native-svg';
 import { CMContext } from './ContextualMenu';
-import { Icon, } from '@fluentui-react-native/icon';
+import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 
 export const SubmenuItem = compose<SubmenuItemType>({
@@ -132,7 +132,6 @@ export const SubmenuItem = compose<SubmenuItemType>({
     content: Text,
     rightstack: { slotType: View },
     chevron: SvgXml
-
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
