@@ -1,5 +1,5 @@
 {
-  "name": "fluentui-docs",
+  "name": "@fluentui-react-native/docs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
