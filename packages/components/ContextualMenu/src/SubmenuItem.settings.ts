@@ -22,7 +22,12 @@ export const settings: IComposeSettings<SubmenuItemType> = [
       },
     },
     content: {},
-    icon: {style: { marginEnd: 5 }},
+    icon: {
+      style: {
+        marginEnd: 5,
+        color: 'menuIcon'
+      }
+    },
     leftstack: {
       style: {
         display: 'flex',
