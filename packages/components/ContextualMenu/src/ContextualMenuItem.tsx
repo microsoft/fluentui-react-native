@@ -42,7 +42,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       (e) => {
         if (!disabled) {
           context?.onDismissMenu();
-          onClick ? onClick() : context.onItemClick(itemKey);
+          onClick ? onClick() : context?.onItemClick(itemKey);
           e.stopPropagation();
         }
       },
@@ -53,9 +53,10 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
 
     const onItemHoverIn = React.useCallback(() => {
       componentRef.current.focus();
+      context?.setSubmenuItemHovered && context.setSubmenuItemHovered(false);
       // dismiss submenu
-      if (!disabled && context.isSubmenuOpen) {
-        context.dismissSubmenu();
+      if (!disabled && context?.isSubmenuOpen) {
+        context?.dismissSubmenu && context.dismissSubmenu();
       }
     }, [componentRef, disabled, context]);
 

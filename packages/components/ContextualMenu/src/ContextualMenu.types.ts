@@ -26,6 +26,8 @@ export interface ContextualMenuContext {
    ** ContextualMenuItems will call this submenu dismissal when they are hovered
    */
   dismissSubmenu?: () => void;
+
+  setSubmenuItemHovered?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface ContextualMenuState {

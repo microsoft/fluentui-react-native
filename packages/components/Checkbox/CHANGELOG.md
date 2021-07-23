@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Tue, 06 Jul 2021 16:17:14 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Jul 2021 22:55:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.12
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
+
+## 0.11.10
+
+Thu, 15 Jul 2021 20:35:35 GMT
+
+### Patches
+
+- Omitting onPress from props (safreibe@microsoft.com)
+
+## 0.11.8
+
+Tue, 13 Jul 2021 22:58:45 GMT
+
+### Patches
+
+- Reverting changes from previous PR that added SVG functionality to Checkmark - This is causing a serious bundling issue for all partners (safreibe@microsoft.com)
 
 ## 0.11.7
 

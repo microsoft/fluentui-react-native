@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContextualMenu default props 1`] = `
+<View
+  accessible={false}
+  focusable={false}
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#f3f2f1",
+      "borderColor": "#8a8886",
+      "borderRadius": 12,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "overflow": "hidden",
+    }
+  }
+>
+  <View
+    accessibilityLabel="Press for Nested MenuButton"
+    accessibilityRole="button"
+    accessibilityState={
+      Object {
+        "disabled": false,
+      }
+    }
+    accessible={true}
+    componentRef={
+      Object {
+        "current": null,
+      }
+    }
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "flex-start",
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "minHeight": 52,
+          "minWidth": 80,
+          "paddingHorizontal": 20,
+          "paddingVertical": 14,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#323130",
+            "fontFamily": "Segoe UI",
+            "fontSize": 14,
+            "fontWeight": "600",
+            "margin": 0,
+          }
+        }
+      >
+        Press for Nested MenuButton
+      </Text>
+    </View>
+  </View>
+</View>
+`;

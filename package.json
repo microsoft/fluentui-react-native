@@ -14,7 +14,7 @@
   "scripts": {
     "build": "lage build",
     "build-tools": "lage build-tools",
-    "build-tokens": "transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --out ./packages/theming/theme-tokens/src --p reactnative",
+    "build-tokens": "node ./scripts/build-tokens.js",
     "buildci": "lage buildci",
     "bump-versions": "beachball bump",
     "clean-all": "node ./scripts/clean-all.js",
@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@fluentui/token-pipeline": "^0.3.7",
-    "@rnx-kit/dep-check": "^1.5.8",
+    "@rnx-kit/dep-check": "^1.5.10",
     "beachball": "^1.35.0",
     "lage": ">=0.17.4 <1.0.0",
     "react-dom": "^16.13.1"
