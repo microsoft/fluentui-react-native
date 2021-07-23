@@ -4,7 +4,7 @@ import { Platform } from 'react-native';
 import { Button } from '@fluentui-react-native/button';
 import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu } from '@fluentui-react-native/contextual-menu';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
-import { mergeSettings, slotPropsFromSettings } from '@uifabricshared/foundation-settings';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
@@ -122,6 +122,10 @@ export const MenuButton = compose<MenuButtonType>({
           menuItems={menuItems}
           content={renderData.slotProps!.button.content}
           disabled={renderData.slotProps!.button.disabled}
+          imageSource={{
+            uri:
+              'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
+          }}
         />
       );
     } else {

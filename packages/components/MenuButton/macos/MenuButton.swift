@@ -70,26 +70,29 @@ open class MenuButton: NSPopUpButton {
 		guard let dropDownCell = cell as? NSPopUpButtonCell else {
 			preconditionFailure()
 		}
-		// Add en ampty imageOnly menu item for the button
-		let initialItem = NSMenuItem()
-		initialItem.image = image
-		initialItem.title = title
+    
+		// MenuButton needs a MenuItem set on it's cell to display the title and image properly
+		let dropdownCellItem = NSMenuItem()
+    dropdownCellItem.image = image
+    dropdownCellItem.title = title
 		dropDownCell.usesItemFromMenu = false
-		dropDownCell.menuItem = initialItem
+		dropDownCell.menuItem = dropdownCellItem
 
-		menu?.insertItem(initialItem, at: 0)
+    //Insert an initial empty item into index 0, since index 0 is never displayed
+    let initialEmptyItem = NSMenuItem()
+    initialEmptyItem.title = ""
+		menu?.insertItem(initialEmptyItem, at: 0)
 	}
   
-//  private func updateImagePosition() {
-//    let hasImage = self.image != nil;
-//    let hasTitle = !self.title.isEmpty
-//
-//    if hasImage {
-//      if hasTitle {
-//        imagePosition = .imageLeading
-//      }
-//    }
-//  }
+  private func updateFrame() {
+    guard let dropDownCell = cell as? NSPopUpButtonCell else {
+      preconditionFailure()
+    }
+    
+    let size = dropDownCell.cellSize
+    frame = NSMakeRect(0, 0, size.width, size.height)
+  }
+  
   
   // MARK: - Private properties
 
