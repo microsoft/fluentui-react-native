@@ -18,6 +18,7 @@ const menuButton: React.FunctionComponent<{}> = () => {
 
   const onItemClick = React.useCallback(
     (key) => {
+      console.log('clickity click!');
       setLastMenuItemClicked(key);
     },
     [setLastMenuItemClicked],

@@ -28,6 +28,7 @@ export interface MenuButtonProps extends IButtonProps {
 
 export type NativeComponentProps = MenuButtonProps & {
   imageSource?: ImageURISource;
+  onPress?: (key: string) => void;
 };
 
 export type MenuButtonSlotProps = {

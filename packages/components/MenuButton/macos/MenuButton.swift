@@ -11,6 +11,8 @@ import AppKit
 @objc(MSFMenuButton)
 open class MenuButton: NSPopUpButton {
   
+  @objc public var onPress: RCTBubblingEventBlock?
+  
 	open override var menu: NSMenu? {
 		didSet {
 			updateMenu()
@@ -18,11 +20,8 @@ open class MenuButton: NSPopUpButton {
 	}
   
   open override var image: NSImage? {
-    get {
-      return menuButtonImage
-    }
-    set {
-      menuButtonImage = newValue
+    didSet {
+      updateMenu()
     }
   }
   
@@ -50,6 +49,9 @@ open class MenuButton: NSPopUpButton {
 		dropDownCell.usesItemFromMenu = false
 
 		select(nil) // Don't select any menu item by default
+    
+    target = self
+    action = #selector(sendCallback)
 	}
 
 	@available(*, unavailable)
@@ -71,6 +73,14 @@ open class MenuButton: NSPopUpButton {
 			preconditionFailure()
 		}
     
+    guard let menu = menu else {
+      return
+    }
+    
+    for menuItem in menu.items {
+      menuItem.target = self
+      menuItem.action = #selector(sendCallback)
+    }
 		// MenuButton needs a MenuItem set on it's cell to display the title and image properly
 		let dropdownCellItem = NSMenuItem()
     dropdownCellItem.image = image
@@ -79,40 +89,22 @@ open class MenuButton: NSPopUpButton {
 		dropDownCell.menuItem = dropdownCellItem
 
     //Insert an initial empty item into index 0, since index 0 is never displayed
-    let initialEmptyItem = NSMenuItem()
-    initialEmptyItem.title = ""
-		menu?.insertItem(initialEmptyItem, at: 0)
+    if ((menu.item(withTag: -1)) == nil) {
+      let initialEmptyItem = NSMenuItem()
+      initialEmptyItem.tag = -1
+      initialEmptyItem.title = ""
+      menu.insertItem(initialEmptyItem, at: 0)
+    }
+
 	}
   
-  private func updateFrame() {
-    guard let dropDownCell = cell as? NSPopUpButtonCell else {
-      preconditionFailure()
+  @objc private func sendCallback() {
+    NSLog("click!")
+    if onPress != nil {
+      /// no data to send to JS
+      onPress!(nil)
     }
-    
-    let size = dropDownCell.cellSize
-    frame = NSMakeRect(0, 0, size.width, size.height)
   }
-  
-  
-  // MARK: - Private properties
-
-	private var menuButtonImage: NSImage? {
-		didSet {
-			guard let image = menuButtonImage else {
-				return
-			}
-
-			guard let dropDownCell = cell as? NSPopUpButtonCell else {
-				preconditionFailure()
-			}
-
-			let item = NSMenuItem()
-			item.image = image
-			item.title = ""
-			dropDownCell.usesItemFromMenu = false
-			dropDownCell.menuItem = item
-		}
-	};
 }
 
 extension NSImage {

@@ -18,12 +18,11 @@
 {
   NSMenuItem *menuItem = [[NSMenuItem alloc] init];
   [menuItem setTitle:[RCTConvert NSString:json[@"text"]]];
-  [menuItem setEnabled:![RCTConvert BOOL:json[@"disabled"]]];
-  
+  [menuItem setEnabled:![RCTConvert BOOL:json[@"disabled"]]];  
   return menuItem;
 }
 
-+ (NSMenu *)menu:(id)json
++ (NSMenu *)NSMenu:(id)json
 {
   NSMenu *menu = [[NSMenu alloc] init];
   [menu setAutoenablesItems:NO];
@@ -36,7 +35,7 @@
     {
       bool hasSubmenu = [RCTConvert BOOL:menuItemJson[@"hasSubmenu"]];
       if (hasSubmenu) {
-        NSMenu *submenu = [RCTConvert menu:menuItemJson[@"submenuItems"]];
+        NSMenu *submenu = [RCTConvert NSMenu:menuItemJson[@"submenuItems"]];
         [menu setSubmenu:submenu forItem:menuItem];
       }
     }
@@ -52,6 +51,8 @@
 
 
 @interface RCT_EXTERN_MODULE(MSFMenuButtonManager, RCTViewManager)
+
+RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
 
 RCT_CUSTOM_VIEW_PROPERTY(disabled, bool, NSPopUpButton)
 {
@@ -70,18 +71,7 @@ RCT_CUSTOM_VIEW_PROPERTY(imageSource, image, NSPopUpButton)
   [view setImage:image];
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(menuItems, NSMenu, NSPopUpButton)
-{
-  NSMenu *menu = [RCTConvert menu:json];
-  
-  //Insert an empty item at index 0
-  NSMenuItem *initalEmptyItem = [[NSMenuItem alloc] init];
-  [initalEmptyItem setTitle:@""];
-  [menu insertItem:initalEmptyItem atIndex:0];
-  
-  [view setMenu:menu];
-
-}
+RCT_REMAP_VIEW_PROPERTY(menuItems, menu, NSMenu)
 
 
 @end
