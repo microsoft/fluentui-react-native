@@ -20,10 +20,10 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/theme-types": ">=0.8.1 <1.0.0"
+    "@fluentui-react-native/theme-types": ">=0.8.3 <1.0.0"
   },
   "devDependencies": {
-    "@types/react": "^16.9.34",
+    "@types/react": ">=16.9.34 < 16.14.0",
     "@types/react-native": "^0.63.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",

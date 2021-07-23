@@ -17,41 +17,33 @@ steps:
     name: UwpCertificate
     inputs:
       secureFile: FluentTester_TemporaryKey.pfx
-    displayName: "Download UWP App Certificate"
+    displayName: 'Download UWP App Certificate'
 
   - powershell: |
       certutil –f –p password –importpfx $(UwpCertificate.secureFilePath)
-    displayName: "Add Certificate to Personal Store"
+    displayName: 'Add Certificate to Personal Store'
 
   - task: DownloadSecureFile@1
     name: AzureCredentials
     inputs:
-      secureFile: "installcredprovider.ps1"
-    displayName: "Download Azure Credentials Plugin for NuGet"
+      secureFile: 'installcredprovider.ps1'
+    displayName: 'Download Azure Credentials Plugin for NuGet'
 
   - task: PowerShell@2
     inputs:
       filePath: $(AzureCredentials.secureFilePath)
-      arguments: "-AddNetfx -Force"
-    displayName: "Install Azure Credentials Plugin for NuGet"
+      arguments: '-AddNetfx -Force'
+    displayName: 'Install Azure Credentials Plugin for NuGet'
 
   - script: |
-      mkdir windows\target
-      mkdir windows\target\x64
-      mklink /J windows\target\x64\Release windows\x64\Release\FluentTester
+      yarn prewindows
     workingDirectory: apps\windows
-    displayName: "Workaround RNW CLI bug"
+    displayName: 'generate UWP app'
 
   - script: |
-      yarn windows --logging --release --arch x64
+      yarn windows --arch x64 --logging --no-packager --no-launch
     workingDirectory: apps\windows
-    displayName: "run UWP app"
-
-  # Kill FluentTester, leave server up and running. This was the only way I could get the server continuously running
-  # as a separate process.
-  - powershell: |
-      Stop-Process -Name FluentTester
-    displayName: "Kill FluentTester Process"
+    displayName: 'build UWP app'
 
   # Creates a variable that determines whether the previous build tasks succeeded.
   # Usage: We want the tasks that generate reports to run for both passing/failing E2E testing tasks. In order to do so, we need to make
@@ -59,16 +51,16 @@ steps:
   # E2E testing failures. Thus, if this variable != "Success", we know the build failed, and to not run the reporting tasks.
   - task: PowerShell@2
     inputs:
-      targetType: "inline"
+      targetType: 'inline'
       script: |
         Write-Host "##vso[task.setvariable variable=task.Build.status]Success"
     condition: succeeded()
-    displayName: "Create success build variable"
+    displayName: 'Create success build variable'
 
   - script: |
       yarn e2etest
     workingDirectory: apps\windows
-    displayName: "run E2E UWP tests"
+    displayName: 'run E2E UWP tests'
     condition: succeeded()
 
   # The following condition (using task.Build.status variable) make it so the reports generate even if the E2E tasks fails,

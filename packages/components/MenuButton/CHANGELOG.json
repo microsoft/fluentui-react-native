@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Fri, 23 Jul 2021 08:20:11 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.2.10",
+      "version": "0.2.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added support of tokens to the MenuButton",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "28c44ee5b22f6de082348582c11aff86ff3a4c68",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 16 Jul 2021 18:25:45 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.2.6",
       "version": "0.2.6",

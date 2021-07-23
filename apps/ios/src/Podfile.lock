@@ -9,11 +9,11 @@ PODS:
     - React-Core (= 0.63.4)
     - React-jsi (= 0.63.4)
     - ReactCommon/turbomodule/core (= 0.63.4)
-  - FluentUI-React-Native-Avatar (0.9.5):
+  - FluentUI-React-Native-Avatar (0.9.6):
     - MicrosoftFluentUI (~> 0.2.2)
     - MicrosoftFluentUI (~> 0.2.6)
     - React
-  - FluentUI-React-Native-Button (0.6.7):
+  - FluentUI-React-Native-Button (0.6.8):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
   - FluentUI-React-Native-Date-Picker (0.2.1):
@@ -401,7 +401,7 @@ PODS:
     - React-Core (= 0.63.4)
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
-  - ReactTestApp-DevSupport (0.6.3)
+  - ReactTestApp-DevSupport (0.6.12)
   - ReactTestApp-Resources (1.0.0-dev)
   - RNSVG (12.1.1):
     - React
@@ -530,8 +530,8 @@ SPEC CHECKSUMS:
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
-  FluentUI-React-Native-Avatar: f34ddd92f1ab695e1ec0f39c77f5210747ec20ad
-  FluentUI-React-Native-Button: 0d16dcc583f1309e48d65dee52cdaf5244b3ce75
+  FluentUI-React-Native-Avatar: 63ff6d85a5ac741d5d3963457a1d717352a686d6
+  FluentUI-React-Native-Button: 9f6970b0f3461f181ae6e845c8f17af5b2f683b4
   FluentUI-React-Native-Date-Picker: d83563ff5c59d8960220ed8f92d05d5ec625ca19
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
@@ -559,7 +559,7 @@ SPEC CHECKSUMS:
   React-RCTText: 5c51df3f08cb9dedc6e790161195d12bac06101c
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
-  ReactTestApp-DevSupport: 9f0b81965c46840c5410ccc4e7f5a4d6cd224ece
+  ReactTestApp-DevSupport: 6464c326eccaa285191eb394b2b18d0663e40e10
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
