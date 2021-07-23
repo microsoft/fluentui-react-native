@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { RadioButton, RadioGroup, Separator } from '@fluentui/react-native';
 import { RADIOGROUP_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -28,10 +28,10 @@ const basicRadioGroup: React.FunctionComponent<{}> = () => {
   return (
     <View>
       <RadioGroup label="Uncontrolled RadioGroup" defaultSelectedKey="B" onChange={onChange}>
-        <NativeRadioButton title="native button"></NativeRadioButton>
-        <NativeRadioButton title="Option B" buttonKey="B" />
-        <NativeRadioButton title="Option C (disabled)" enabled={false} style={{ width: 150 }} />
-        <NativeRadioButton title="Option D" />
+        <RadioButton content="Option A" buttonKey="A" ariaLabel="Test Aria Label" />
+        <RadioButton content="Option B" buttonKey="B" />
+        <RadioButton content="Option C (disabled)" buttonKey="C" disabled={true} />
+        <RadioButton content="Option D" buttonKey="D" />
       </RadioGroup>
       <Separator />
       <RadioGroup label="Controlled RadioGroup" selectedKey={selectedKey} onChange={onChange2}>
@@ -44,20 +44,47 @@ const basicRadioGroup: React.FunctionComponent<{}> = () => {
   );
 };
 
-const radioGroupSections: TestSection[] = [
-  {
+const nativeRadioGroup: React.FunctionComponent<{}> = () => {
+  return (
+    <View>
+      <RadioGroup label="RadioGroup 1">
+        <NativeRadioButton title="Option A" onChange={() => alert('Option A pressed')} />
+        <NativeRadioButton title="Option B" buttonKey="B" state={true} />
+        <NativeRadioButton title="Option C (disabled)" enabled={false} style={{ width: 150 }} />
+        <NativeRadioButton title="Option D" />
+      </RadioGroup>
+      <Separator />
+      <RadioGroup label="RadioGroup 2">
+        <NativeRadioButton title="Option A" onChange={() => alert('Option A pressed')} />
+        <NativeRadioButton title="Option B" state={true} onChange={() => alert('Option B pressed')} />
+        <NativeRadioButton title="Option C (disabled)" enabled={false} style={{ width: 150 }} />
+        <NativeRadioButton title="Option D" />
+      </RadioGroup>
+    </View>
+  );
+};
+
+const radioGroupSections: TestSection[] = [];
+if (Platform.OS === 'macos') {
+  radioGroupSections.push({
+    name: 'Native RadioGroup',
+    testID: RADIOGROUP_TESTPAGE,
+    component: nativeRadioGroup,
+  });
+} else {
+  radioGroupSections.push({
     name: 'Basic RadioGroup Usage',
     testID: RADIOGROUP_TESTPAGE,
     component: basicRadioGroup,
-  },
-];
+  });
+}
 
 export const RadioGroupTest: React.FunctionComponent<{}> = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
+    macosStatus: 'Beta',
     androidStatus: 'Backlog',
   };
 
