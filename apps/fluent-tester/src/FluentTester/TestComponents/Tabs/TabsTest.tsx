@@ -28,9 +28,38 @@ const tabs: React.FunctionComponent<{}> = () => {
           <TabsItem headerText="Option D" buttonKey="D" />
         </Tabs>
       </View>
+
       <View>
         <Text>Buttton to limit Focus Zone</Text>
         <Button content="Outside Tabs" />
+      </View>
+    </View>
+  );
+};
+
+{
+  /* If User wants to control what gets rendered example */
+}
+const tabChangingViews: React.FunctionComponent<{}> = () => {
+  const [selectedKey, setSelectedKey] = React.useState('');
+
+  const changeView = (key: string) => {
+    setSelectedKey(key);
+  };
+
+  return (
+    <View>
+      <View style={stackStyle}>
+        <Tabs label="Tabs" onTabsClick={changeView}>
+          <TabsItem headerText="Home" buttonKey="home" />
+          <TabsItem headerText="File" buttonKey="file" />
+          <TabsItem headerText="Options" buttonKey="settings" />
+        </Tabs>
+        <View>
+          {selectedKey == 'home' && <Text>This is home</Text>}
+          {selectedKey == 'file' && <Text>This is file</Text>}
+          {selectedKey == 'settings' && <Text>This is settings</Text>}
+        </View>
       </View>
     </View>
   );
@@ -41,6 +70,10 @@ const tabsSections: TestSection[] = [
     name: 'Navigation and Alert',
     testID: TABS_TESTPAGE,
     component: tabs,
+  },
+  {
+    name: 'Navigation with Content',
+    component: tabChangingViews,
   },
 ];
 
