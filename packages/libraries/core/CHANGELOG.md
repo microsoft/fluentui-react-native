@@ -1,8 +1,24 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Tue, 13 Jul 2021 10:45:30 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Jul 2021 22:55:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.10
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
+
+## 0.24.8
+
+Sat, 17 Jul 2021 00:39:49 GMT
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (chripear@microsoft.com)
 
 ## 0.24.0
 

@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Wed, 30 Jun 2021 05:42:19 GMT and should not be manually modified.
+This log was last generated on Fri, 23 Jul 2021 17:28:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.5
+
+Fri, 23 Jul 2021 17:28:27 GMT
+
+### Patches
+
+- Fix @types/react to be less than 16.14.0 since our react version is less than 16.14 (email not defined)
+
+## 0.7.4
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
+
+## 0.7.3
+
+Wed, 21 Jul 2021 21:46:12 GMT
+
+### Patches
+
+- Use peer dependencies for react-native version not dependencies (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.7.1
 

@@ -5,6 +5,7 @@ import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu } from '@fluen
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
+import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 
 import {
   MenuButtonName,
@@ -92,7 +93,10 @@ export const MenuButton = compose<MenuButtonType>({
     contextualMenu: { slotType: ContextualMenu as React.ComponentType<object> },
     contextualMenuItems: React.Fragment,
   },
-  styles: {},
+  styles: {
+    contextualMenu: [backgroundColorTokens, borderTokens],
+    button: [backgroundColorTokens, borderTokens],
+  },
   render: (Slots: ISlots<MenuButtonSlotProps>, renderData: MenuButtonRenderData) => {
     if (!(renderData.state && renderData.slotProps)) {
       return null;
