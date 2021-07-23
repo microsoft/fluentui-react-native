@@ -3,13 +3,13 @@
 import * as React from 'react';
 import { Button } from '@fluentui-react-native/button';
 
-import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemRenderData } from './TabsItem.types';
+import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps } from './TabsItem.types'; // TabsItemRenderData
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { borderTokens } from '@fluentui-react-native/tokens';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings, tabsItemSelectActionLabel } from './TabsItem.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks'; //useOnPressWithFocus
 import { TabsContext } from './Tabs';
 
 export const TabsItem = compose<TabsItemType>({
@@ -92,7 +92,8 @@ export const TabsItem = compose<TabsItemType>({
     return { slotProps };
   },
 
-  render: (Slots: ISlots<TabsItemSlotProps>, _renderData: TabsItemRenderData, ...children: React.ReactNode[]) => {
+  render: (Slots: ISlots<TabsItemSlotProps>) => {
+    //  _renderData: TabsItemRenderData, ...children: React.ReactNode[]
     return <Slots.root></Slots.root>;
   },
 

@@ -11,7 +11,7 @@ import TestSvg from './test.svg';
 
 const tabs: React.FunctionComponent<{}> = () => {
   const onTabsClick = (key: string) => {
-    //Alert.alert('Alert.', key + ' works');
+    Alert.alert('Alert.', key + ' works');
   };
 
   const svgProps: SvgIconProps = {
@@ -21,7 +21,7 @@ const tabs: React.FunctionComponent<{}> = () => {
 
   return (
     <Stack style={stackStyle}>
-      <Tabs label="Tabs">
+      <Tabs label="Tabs" onTabsClick={onTabsClick}>
         <TabsItem icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }} headerText="Option A!" buttonKey="A" />
         <TabsItem headerText="Option B" buttonKey="B" />
         <TabsItem headerText="Option C" buttonKey="C" />
