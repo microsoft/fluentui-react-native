@@ -55,6 +55,7 @@ You can read more about this tool here:
 
 ## Troubleshooting
 
+- If you get the error: "Unable to resolve module... None of these files exist:...", close the packager and restart it by running `yarn start`. Note: you need to restart the packager when you switch to a different platform (e.g. from iOS to macOS), but once it restarts you can reload the tester apps on all running platforms at once.
 - If you want to do direct debugging via xcode, after the pod install, you can launch src/FluentTester.xcworkspace and build/run the scheme "ReactTestApp"
 - If you want to have a clean rebuild of the generated macOS project, you can do the following:
 
