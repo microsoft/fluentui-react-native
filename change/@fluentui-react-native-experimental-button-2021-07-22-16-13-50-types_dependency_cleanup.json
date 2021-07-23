@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Build fix",
-  "packageName": "@fluentui-react-native/experimental-button",
-  "email": "email not defined",
-  "dependentChangeType": "patch",
-  "date": "2021-07-22T23:13:20.324Z"
-}
