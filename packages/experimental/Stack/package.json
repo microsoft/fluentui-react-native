@@ -24,14 +24,14 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": ">=0.6.2 <1.0.0",
-    "@fluentui-react-native/framework": "0.5.8",
-    "@fluentui-react-native/tokens": ">=0.9.4 <1.0.0",
-    "@uifabricshared/theming-ramp": ">=0.14.3 <1.0.0"
+    "@fluentui-react-native/adapters": ">=0.6.4 <1.0.0",
+    "@fluentui-react-native/framework": "0.5.11",
+    "@fluentui-react-native/tokens": ">=0.9.7 <1.0.0",
+    "@uifabricshared/theming-ramp": ">=0.14.5 <1.0.0"
   },
   "devDependencies": {
     "@types/react-native": "^0.63.0",
-    "@fluentui-react-native/text": ">=0.9.8 <1.0.0",
+    "@fluentui-react-native/text": ">=0.9.11 <1.0.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "react": "16.13.1",

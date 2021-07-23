@@ -1,18 +1,6 @@
-import { getMemoCache, GetMemoValue } from '@fluentui-react-native/memo-cache';
-import { immutableMerge } from '@fluentui-react-native/immutable-merge';
+import { GetMemoValue } from '@fluentui-react-native/memo-cache';
 import { TokensThatAreAlsoProps, BuildSlotProps, refinePropsFunctions } from './buildProps';
-import { HasLayer, applyTokenLayers } from './applyTokenLayers';
-
-/** A function to generate tokens based on a theme */
-export type TokensFromTheme<TTokens, TTheme> = (theme: TTheme) => TTokens;
-
-/**
- * Types of tokens, can be:
- * - string - will lookup the name in the theme
- * - Tokens - will merge the tokens in directly
- * - Function - will run against the theme once for each unique theme encountered
- */
-export type TokenSettings<TTokens, TTheme> = string | TTokens | TokensFromTheme<TTokens, TTheme>;
+import { applyPropsToTokens, applyTokenLayers, buildUseTokens, HasLayer, TokenSettings } from '@fluentui-react-native/use-tokens';
 
 /**
  * Options used to build up a useStyling hook
@@ -62,56 +50,6 @@ export type ThemeHelper<TTheme> = {
 };
 
 /**
- * This the merges [all/some/no] props into tokens based on tokenProps being [true/[key1, key2]/false] respectively. If
- * tokens is modified it returns a new object rather than modifying the tokens object itself
- *
- * @param tokens - set of tokens that are coming from the theme
- * @param props - input props for the component
- * @param tokenProps - how to merge props into tokens. If true all props will be merged, false: no props, an array of keys will
- *                     be treated as an include mask
- */
-function promotePropsToTokens<TTokens, TProps>(tokens: TTokens, props: TProps, tokenProps?: TokensThatAreAlsoProps<TTokens>): TTokens {
-  return tokenProps && tokenProps !== 'none'
-    ? {
-        ...tokens,
-        ...(typeof tokenProps === 'object' && Array.isArray(tokenProps)
-          ? Object.assign(
-              {},
-              ...tokenProps.filter((key) => props[key as string] !== undefined).map((key) => ({ [key]: props[key as string] })),
-            )
-          : props),
-      }
-    : tokens;
-}
-
-/**
- * Tokens are defined as either:
- *   TTokens     - an object
- *   string      - a name to look up in the theme
- *   function    - a function to run against the theme to produce tokens
- *
- * This function maps any of these types into a specific TTokens object.  A string is first lookup up in the theme, returning a function
- * or object. If the type is a function this will be invoked with the theme to generate the tokens object.
- *
- * @param tokenEntry - token entry to start with
- * @param theme - theme to use for queries
- * @param getComponentInfo - helper to use to lookup the component in the theme
- */
-function mapToTokens<TTokens, TTheme>(
-  tokenEntry: TTokens | string | TokensFromTheme<TTokens, TTheme>,
-  theme: TTheme,
-  getComponentInfo: ThemeHelper<TTheme>['getComponentInfo'],
-): object {
-  if (typeof tokenEntry === 'string') {
-    tokenEntry = getComponentInfo(theme, tokenEntry);
-  }
-  if (typeof tokenEntry === 'function') {
-    tokenEntry = (tokenEntry as TokensFromTheme<TTokens, TTheme>)(theme);
-  }
-  return (tokenEntry as unknown) as object;
-}
-
-/**
  * Produce the final slot props for the styled hook
  *
  * @param styles - refined style functions or props to use for processing
@@ -144,27 +82,31 @@ export function buildUseStyling<TProps, TSlotProps, TTokens, TTheme>(
   themeHelper: ThemeHelper<TTheme>,
 ): UseStyling<TProps, TSlotProps> {
   // create a cache instance for this use styling implementation
-  const cache = getMemoCache();
   const { useTheme, getComponentInfo } = themeHelper;
   const { tokens, tokensThatAreAlsoProps: tokenProps } = options;
   const styles = refinePropsFunctions(options.slotProps || {}, tokenProps);
+  const useTokens = buildUseTokens<TTokens, TTheme>(getComponentInfo, ...tokens);
 
   return (props: TProps, lookup?: HasLayer) => {
     // query the theme
     const theme = useTheme();
 
-    // get the base styles all merged together, these will only depend on internal tokens and theme
-    const [merged, subCache] = cache(() => immutableMerge(...tokens.map((value) => mapToTokens(value, theme, getComponentInfo))), [theme]);
+    // get the merged tokens from the theme
+    let [mergedTokens, cache] = useTokens(theme);
 
     // resolve overrides as appropriate
-    const [layered, cacheBase] = options.states
-      ? applyTokenLayers(merged, options.states as string[], subCache, lookup || ((val) => props[val]))
-      : [merged, subCache];
+    if (options.states) {
+      [mergedTokens, cache] = applyTokenLayers(mergedTokens, options.states as string[], cache, lookup || ((val) => props[val]));
+    }
 
     // now resolve tokens
-    const finalTokens = promotePropsToTokens(layered, props, tokenProps);
+    if (typeof tokenProps === 'object' && Array.isArray(tokenProps)) {
+      [mergedTokens, cache] = applyPropsToTokens(props, mergedTokens, cache, tokenProps);
+    } else if (tokenProps === 'all') {
+      mergedTokens = { ...mergedTokens, ...props };
+    }
 
     // finally produce slotProps from calling the style functions on each entry
-    return resolveToSlotProps(styles, finalTokens, theme, cacheBase);
+    return resolveToSlotProps(styles, mergedTokens, theme, cache);
   };
 }

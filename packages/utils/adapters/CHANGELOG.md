@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/adapters
 
-This log was last generated on Thu, 15 Jul 2021 20:35:35 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Jul 2021 20:55:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.4
+
+Thu, 22 Jul 2021 20:55:49 GMT
+
+### Patches
+
+- Correctly declare dependency on react-native (4123478+tido64@users.noreply.github.com)
+
+## 0.6.3
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
 
 ## 0.6.2
 

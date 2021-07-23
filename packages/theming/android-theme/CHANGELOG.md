@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Fri, 25 Jun 2021 06:21:11 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Jul 2021 22:55:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.2
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
+
+## 0.4.1
+
+Wed, 21 Jul 2021 21:46:12 GMT
+
+### Patches
+
+- Use peer dependencies for react-native version not dependencies (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.4.0
 

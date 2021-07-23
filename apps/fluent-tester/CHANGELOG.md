@@ -1,8 +1,49 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 15 Jul 2021 17:54:30 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Jul 2021 20:55:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.2
+
+Thu, 22 Jul 2021 20:55:49 GMT
+
+### Patches
+
+- Moved react-native-svg to peer dependencies (4123478+tido64@users.noreply.github.com)
+
+## 0.32.1
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
+
+## 0.32.0
+
+Wed, 21 Jul 2021 21:46:12 GMT
+
+### Minor changes
+
+- Add dismiss behaviors and appropriate test page changes (ppatboyd@outlook.com)
+- Add more features to contextualMenu test (lehon@microsoft.com)
+
+## 0.31.1
+
+Sat, 17 Jul 2021 00:39:49 GMT
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (chripear@microsoft.com)
+
+## 0.31.0
+
+Fri, 16 Jul 2021 18:25:45 GMT
+
+### Minor changes
+
+- Add ActivityIndicator Component Test (t-lindaweng@microsoft.com)
 
 ## 0.30.7
 

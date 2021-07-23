@@ -53,7 +53,7 @@ export type FocusZoneDirection =
   | 'none'; /** Doesn't respond to any arrow keys. */
 
 export type NavigateAtEnd =
-  | 'NavigateStopAtEnds' /* Focus will stay on the last element in the FocusZone. Only way to navigate out is Tab */
+  | 'NavigateStopAtEnds' /* Focus will stay on the last element in the FocusZone. Only way to navigate out is Tab. For macOS, this is the only available option. */
   | 'NavigateWrap' /* Circular Navigation Functionality */
   | 'NavigateContinue'; /* At the last element of the FocusZone, focus will move to the first focusable element outside the FocusZone */
 
