@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 23 Jul 2021 08:20:11 GMT",
+      "tag": "@fluentui-react-native/tester_v0.32.3",
+      "version": "0.32.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added supporting tokens for MenuButton",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "28c44ee5b22f6de082348582c11aff86ff3a4c68",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 22 Jul 2021 20:55:49 GMT",
       "tag": "@fluentui-react-native/tester_v0.32.2",
       "version": "0.32.2",

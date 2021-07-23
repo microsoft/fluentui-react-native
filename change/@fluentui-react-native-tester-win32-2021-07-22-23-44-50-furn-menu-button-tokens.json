@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Added support of tokens to the MenuButton",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "v.kozlova13@gmail.com",
-  "dependentChangeType": "patch",
-  "date": "2021-07-22T20:42:49.216Z"
-}
