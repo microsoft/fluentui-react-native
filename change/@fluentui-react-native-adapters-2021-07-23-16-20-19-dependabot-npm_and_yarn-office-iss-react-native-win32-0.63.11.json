@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Fix build error",
+  "packageName": "@fluentui-react-native/adapters",
+  "email": "email not defined",
+  "dependentChangeType": "patch",
+  "date": "2021-07-23T23:20:19.243Z"
+}
