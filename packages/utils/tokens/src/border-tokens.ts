@@ -20,4 +20,4 @@ export const borderTokens: IOperationSet<IBorderTokens, ITheme> = [
   { source: 'borderBottomWidth' },
 ];
 
-export const borderStyles = tokenBuilder<IBorderTokens>('borderColor', 'borderRadius', 'borderStyle', 'borderWidth'); //'borderBottomWidth');
+export const borderStyles = tokenBuilder<IBorderTokens>('borderColor', 'borderRadius', 'borderStyle', 'borderWidth', 'borderBottomWidth');

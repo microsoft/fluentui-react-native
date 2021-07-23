@@ -2,7 +2,6 @@
 'use strict';
 import * as React from 'react';
 import { Button } from '@fluentui-react-native/button';
-
 import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps } from './TabsItem.types'; // TabsItemRenderData
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { borderTokens } from '@fluentui-react-native/tokens';

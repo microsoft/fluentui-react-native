@@ -7,7 +7,6 @@ import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 //import { IPressableProps } from '@fluentui-react-native/pressable';
 import { IButtonProps } from '../../Button/lib';
-import { ViewStyle } from 'react-native';
 
 export const tabsItemName = 'TabsItem';
 
@@ -46,6 +45,7 @@ export interface TabsItemTokens extends FontTokens, IForegroundColorTokens, IBac
 export interface TabsItemSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
   button: ViewProps;
+  content: ITextProps;
 }
 
 export type TabsItemRenderData = IRenderData<TabsItemSlotProps>;
