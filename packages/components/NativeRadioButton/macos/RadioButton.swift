@@ -1,10 +1,10 @@
 class RadioButton: NSButton {
 
-	@objc public var onChange:RCTBubblingEventBlock?
+	@objc public var onPress:RCTBubblingEventBlock?
 		
 	public init() {
 		super.init(frame: .zero)
-		self.action = #selector(callOnChange)
+		self.action = #selector(callOnPress)
 		self.setButtonType(NSButton.ButtonType.radio)
 		self.target = self
 	}
@@ -13,9 +13,9 @@ class RadioButton: NSButton {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	@objc public func callOnChange() {
-		if (onChange != nil){
-			onChange!(nil)
+	@objc public func callOnPress() {
+		if (onPress != nil){
+			onPress!(nil)
 		}
 	}
 	

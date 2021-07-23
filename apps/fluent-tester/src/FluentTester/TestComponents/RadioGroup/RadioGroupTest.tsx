@@ -48,15 +48,15 @@ const nativeRadioGroup: React.FunctionComponent<{}> = () => {
   return (
     <View>
       <RadioGroup label="RadioGroup 1">
-        <NativeRadioButton title="Option A" onChange={() => alert('Option A pressed')} />
+        <NativeRadioButton onPress={() => alert('Option A pressed')} />
         <NativeRadioButton title="Option B" buttonKey="B" state={true} />
         <NativeRadioButton title="Option C (disabled)" enabled={false} style={{ width: 150 }} />
         <NativeRadioButton title="Option D" />
       </RadioGroup>
       <Separator />
       <RadioGroup label="RadioGroup 2">
-        <NativeRadioButton title="Option A" onChange={() => alert('Option A pressed')} />
-        <NativeRadioButton title="Option B" state={true} onChange={() => alert('Option B pressed')} />
+        <NativeRadioButton title="Option A" onPress={() => alert('Option A pressed')} />
+        <NativeRadioButton title="Option B" state={true} onPress={() => alert('Option B pressed')} />
         <NativeRadioButton title="Option C (disabled)" enabled={false} style={{ width: 150 }} />
         <NativeRadioButton title="Option D" />
       </RadioGroup>

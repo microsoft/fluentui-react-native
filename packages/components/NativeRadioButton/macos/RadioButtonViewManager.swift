@@ -1,8 +1,8 @@
 import Foundation
 
-@objc(MSFRadioButtonViewManager)
+@objc(RadioButtonViewManager)
 class RadioButtonViewManager: RCTViewManager {
-	
+
 	override func view()->NSView! {
 		let radioButton = RadioButton()
 		return radioButton
