@@ -1,17 +1,14 @@
 /** @jsx withSlots */
 'use strict';
 import * as React from 'react';
-import { View } from 'react-native';
-import { Text } from '@fluentui-react-native/text';
 import { Button } from '@fluentui-react-native/button';
 
 import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemRenderData } from './TabsItem.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-// import { filterViewProps } from '@fluentui-react-native/adapters';
+import { borderTokens } from '@fluentui-react-native/tokens';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings, tabsItemSelectActionLabel } from './TabsItem.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { useAsPressable, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { TabsContext } from './Tabs';
 
@@ -19,7 +16,7 @@ export const TabsItem = compose<TabsItemType>({
   displayName: tabsItemName,
 
   usePrepareProps: (userProps: TabsItemProps, useStyling: IUseComposeStyling<TabsItemType>) => {
-    const { content, buttonKey, disabled, ariaLabel, componentRef = React.useRef(null), ...rest } = userProps;
+    const { headerText, icon, buttonKey, disabled, ariaLabel, componentRef = React.useRef(null), ...rest } = userProps;
 
     // Grabs the context information from RadioGroup (currently selected button and client's onTabsClick callback)
     const info = React.useContext(TabsContext);
@@ -44,12 +41,12 @@ export const TabsItem = compose<TabsItemType>({
     }, []);
 
     // Ensure focus is placed on button after click
-    const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
+    //const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
 
     /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
     const pressable = useAsPressable({
       ...rest,
-      onPress: changeSelectionWithFocus,
+      //onPress: changeSelectionWithFocus,
       onFocus: changeSelection,
     });
 
@@ -80,13 +77,14 @@ export const TabsItem = compose<TabsItemType>({
         ref: buttonRef,
         ...pressable.props,
         accessibilityRole: 'tab',
-        accessibilityLabel: ariaLabel ? ariaLabel : content,
+        accessibilityLabel: ariaLabel ? ariaLabel : headerText,
         accessibilityState: { disabled: state.disabled, selected: state.selected },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
         accessibilityPositionInSet: info.buttonKeys.findIndex((x) => x == buttonKey) + 1,
         accessibilitySetSize: info.buttonKeys.length,
         onAccessibilityAction: onAccessibilityAction,
-        content: content,
+        content: headerText,
+        icon: icon,
       },
       // content: { children: content },
     });
