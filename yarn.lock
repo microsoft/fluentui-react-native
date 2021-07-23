@@ -1183,21 +1183,6 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@fluentui-react-native/framework@0.5.2":
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.5.2.tgz#04c911f781ad77c99bcd49685fde5eb3d9f6bceb"
-  integrity sha512-6F6IGfd9SFKr2NJ9bZWoEZQkhTR9mQZDtBl8t9uVtaPb+q1+/KXB5s7RL4ZUyMyi/BIvcRadgJnIqj7JgDYQQw==
-  dependencies:
-    "@fluentui-react-native/composition" ">=0.6.0 <1.0.0"
-    "@fluentui-react-native/default-theme" ">=0.6.0 <1.0.0"
-    "@fluentui-react-native/immutable-merge" "^1.1.0"
-    "@fluentui-react-native/memo-cache" "^1.1.0"
-    "@fluentui-react-native/merge-props" ">=0.3.0 <1.0.0"
-    "@fluentui-react-native/theme-types" ">=0.7.0 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.9.0 <1.0.0"
-    "@fluentui-react-native/use-slots" ">=0.5.1 <1.0.0"
-    "@fluentui-react-native/use-styling" ">=0.6.0 <1.0.0"
-
 "@fluentui/token-pipeline@^0.3.7":
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.7.tgz#4ac3326c1d12539c7f8abc339432b69172c27bf1"
@@ -2848,7 +2833,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.9.34":
+"@types/react@*":
   version "16.9.35"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.35.tgz#a0830d172e8aadd9bd41709ba2281a3124bbd368"
   integrity sha512-q0n0SsWcGc8nDqH2GJfWQWUOmZSJhXV64CjVN5SvcNti3TdEaA3AH0D8DwNmMdzjMAC/78tB8nAZIlV8yTz+zQ==
@@ -2856,21 +2841,13 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/react@^16.13.1":
-  version "16.14.3"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.14.3.tgz#f5210f5deecf35d8794845549c93c2c3ad63aa9c"
-  integrity sha512-zPrXn03hmPYqh9DznqSFQsoRtrQ4aHgnZDO+hMGvsE/PORvDTdJCHQ6XvJV31ic+0LzF73huPFXUb++W6Kri0Q==
+"@types/react@>=16.9.34 < 16.14.0":
+  version "16.9.56"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.56.tgz#ea25847b53c5bec064933095fc366b1462e2adf0"
+  integrity sha512-gIkl4J44G/qxbuC6r2Xh+D3CGZpJ+NdWTItAPmZbR5mUS+JQ8Zvzpl0ea5qT/ZT3ZNTUcDKUVqV3xBE8wv/DyQ==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
-
-"@types/react@^16.9.0":
-  version "16.9.36"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.36.tgz#ade589ff51e2a903e34ee4669e05dbfa0c1ce849"
-  integrity sha512-mGgUb/Rk/vGx4NCvquRuSH0GHBQKb1OqpGS9cT9lFxlTLHZgkksgI60TuIxubmn7JuCb+sENHhQciqa0npm0AQ==
-  dependencies:
-    "@types/prop-types" "*"
-    csstype "^2.2.0"
 
 "@types/request@^2.48.4":
   version "2.48.4"

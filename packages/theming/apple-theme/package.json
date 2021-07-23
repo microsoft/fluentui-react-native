@@ -36,7 +36,7 @@
     "@fluentui-react-native/theming-utils": "^0.2.5"
   },
   "devDependencies": {
-    "@types/react": "^16.13.1",
+    "@types/react": ">=16.9.34 < 16.14.0",
     "@types/react-native": "^0.63.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
