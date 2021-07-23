@@ -6,25 +6,16 @@ export const tabsItemSelectActionLabel = 'Select a TabsItem';
 export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
-      borderColor: 'menuItemText',
-      color: 'menuItemText',
-      backgroundColor: 'menuItemText',
+      borderColor: 'buttonBorder',
+      color: 'red',
+      backgroundColor: 'transparent',
       textBorderColor: 'transparent',
+      borderWidth: 2,
     },
     root: {
       accessible: true,
       focusable: true,
       accessibilityRole: 'tab',
-      style: {},
-    },
-    button: {
-      style: {
-        borderColor: 'blue',
-        //borderBottomWidth: 10,
-      },
-    },
-    content: {
-      variant: 'subheaderStandard',
       style: {},
     },
     _precedence: ['disabled', 'hovered', 'focused', 'selected'],

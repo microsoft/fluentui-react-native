@@ -5,7 +5,7 @@ import { Button } from '@fluentui-react-native/button';
 
 import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps } from './TabsItem.types'; // TabsItemRenderData
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { borderTokens } from '@fluentui-react-native/tokens';
+import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens } from '@fluentui-react-native/tokens';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings, tabsItemSelectActionLabel } from './TabsItem.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
@@ -102,7 +102,7 @@ export const TabsItem = compose<TabsItemType>({
     root: Button,
   },
   styles: {
-    root: [borderTokens],
+    root: [backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens],
   },
 });
 
