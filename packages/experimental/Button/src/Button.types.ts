@@ -111,7 +111,7 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   fluid?: boolean;
 }
 
-export type ButtonState = IPressableHooks<ButtonProps & React.ElementRef<any>>;
+export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
 
 export interface ButtonSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;

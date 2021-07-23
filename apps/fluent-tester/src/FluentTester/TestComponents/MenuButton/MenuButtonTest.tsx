@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
-import { Separator, MenuButton, ContextualMenuItemProps, ContextualMenuProps } from '@fluentui/react-native';
+import { Separator, MenuButton, ContextualMenuProps } from '@fluentui/react-native';
 import { MENU_BUTTON_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from '../Button/test.svg';
+import { menuItems, testImage } from './testData';
 
 const menuButton: React.FunctionComponent<{}> = () => {
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
@@ -23,24 +24,6 @@ const menuButton: React.FunctionComponent<{}> = () => {
     },
     [setLastMenuItemClicked],
   );
-  const testImage = require('../Button/icon_24x24.png');
-
-  const menuItems: ContextualMenuItemProps[] = [
-    {
-      itemKey: '1',
-      text: 'MenuItem 1',
-      icon: testImage,
-    },
-    {
-      itemKey: '2',
-      text: 'MenuItem 2',
-    },
-    {
-      itemKey: '3',
-      text: 'MenuItem 3',
-      disabled: true,
-    },
-  ];
 
   const contextualMenuProps: ContextualMenuProps = {
     accessibilityLabel: 'MenuButton',
@@ -84,8 +67,6 @@ const menuButton: React.FunctionComponent<{}> = () => {
 };
 
 const nestedMenuButton: React.FunctionComponent<{}> = () => {
-  const testImage = require('../Button/icon_24x24.png');
-
   const svgProps: SvgIconProps = {
     src: TestSvg,
     viewBox: '0 0 500 500',
@@ -130,21 +111,8 @@ const nestedMenuButton: React.FunctionComponent<{}> = () => {
     [setSubmenuLastItemClicked],
   );
 
-  const menuItems = [
-    {
-      itemKey: '1',
-      text: 'Menu item with png Icon',
-      icon: { testImage },
-    },
-    {
-      itemKey: '2',
-      text: 'Menu item',
-    },
-    {
-      itemKey: '3',
-      text: 'Disabled Menu Item',
-      disabled: true,
-    },
+  const nestedMenuItems = [
+    ...menuItems,
     {
       hasSubmenu: true,
       itemKey: '4',
@@ -239,9 +207,35 @@ const nestedMenuButton: React.FunctionComponent<{}> = () => {
               <Text style={{ color: 'blue' }}>none</Text>
             )}
           </Text>
-          <MenuButton icon={testImage} content="Press for Nested MenuButton" menuItems={menuItems} onItemClick={onItemClick} />
+          <MenuButton icon={testImage} content="Press for Nested MenuButton" menuItems={nestedMenuItems} onItemClick={onItemClick} />
         </View>
       </View>
+    </View>
+  );
+};
+
+const customizedUIMenuButton: React.FunctionComponent<{}> = () => {
+  const StyledMenuButton = MenuButton.customize({
+    button: {
+      borderRadius: 4,
+      backgroundColor: '#0095ff',
+      borderWidth: 0,
+      color: '#fff',
+      variant: 'heroSemibold',
+      fontFamily: 'Georgia',
+    },
+    contextualMenu: { backgroundColor: '#a9dbff' },
+  });
+  return (
+    <View>
+      <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
+        <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
+          <View style={{ flexDirection: 'row' }}>
+            <Text>MenuButton with customized UI</Text>
+          </View>
+        </View>
+      </View>
+      <StyledMenuButton content="styled MenuButton" menuItems={menuItems} />
     </View>
   );
 };
@@ -255,6 +249,10 @@ const menuButtonSections: TestSection[] = [
   {
     name: 'Nested MenuButton',
     component: nestedMenuButton,
+  },
+  {
+    name: 'MenuButton with customized UI',
+    component: customizedUIMenuButton,
   },
 ];
 
