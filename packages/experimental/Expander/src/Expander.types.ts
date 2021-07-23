@@ -18,19 +18,11 @@ export interface ExpanderProps {
   /*
    * Determines if the expander is currently expanded
    */
-  expanded?: boolean;
+  isExpanded?: boolean;
   /*
    * Is Expander control enabled for the user
    */
   enabled?: boolean;
-  /*
-   * Height for the Expander when expanded
-   */
-  expandedHeight?: number;
-  /*
-   * Height for the Expander when collapsed
-   */
-  collapsedHeight?: number;
   /*
    * A callback to call on Expander collapsed event
    */
@@ -39,13 +31,29 @@ export interface ExpanderProps {
    * A callback to call on Expander expanding event
    */
   onExpanding?: () => void;
+  /*
+   * A callback to the Expander changing state (expanding or collapsing)
+   */
+  onChange?: () => void;
 }
 
 export interface ExpanderTokens {
   /*
+  * Height for the Expander when expanded
+  */
+  expandedHeight?: number;
+  /*
+    * Height for the Expander when collapsed
+    */
+  collapsedHeight?: number;
+  /*
    * Width of the expander
    */
   width?: number;
+  /*
+   *
+   */
+  height?: number;
   /*
    * Horizontal alignment of the expander's content
    */
@@ -142,7 +150,16 @@ export interface ExpanderTokens {
    * Chevron border color when pressed
    */
   chevronBorderPressedBrush?: ColorValue;
+  /*
+   * Expander states
+   */
+  expanded?: ExpanderTokens;
+  // collapsedState?: ExpanderTokens;
 }
+
+export const tokensThatAreAlsoProps: (keyof ExpanderTokens)[] = ['expandedHeight', 'collapsedHeight'];
+
+export const expanderStates: (keyof ExpanderTokens)[] = ['expanded'];
 
 export type ExpandDirection = 'up' | 'down';
 export type VerticalAlignment = 'bottom' | 'center' | 'stretch' | 'top';
@@ -157,10 +174,21 @@ export type ExpanderChangeEvent = SyntheticEvent<
   }>
 >;
 
+export interface ExpanderSlotProps {
+  root: ExpanderViewProps;
+}
+
+interface IExpanderState {
+  expanded: boolean;
+}
+
+export type ExpanderState = {
+  props: any;
+  state: IExpanderState;
+}
+
 export interface ExpanderType {
   props: ExpanderProps;
   tokens: ExpanderTokens;
-  slotProps: {
-    root: ExpanderViewProps;
-  };
+  slotProps: ExpanderSlotProps;
 }
