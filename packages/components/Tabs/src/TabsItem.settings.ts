@@ -20,6 +20,7 @@ export const settings: IComposeSettings<TabsItemType> = [
     button: {
       style: {
         borderColor: 'blue',
+        //borderBottomWidth: 10,
       },
     },
     content: {
@@ -32,8 +33,8 @@ export const settings: IComposeSettings<TabsItemType> = [
         tokens: {
           backgroundColor: 'buttonBackgroundPressed',
           color: 'buttonTextPressed',
-          borderColor: 'buttonPressedBorder',
-          borderWidth: 10,
+          borderColor: 'blue',
+          borderBottomWidth: 5,
         },
       },
       focused: {
