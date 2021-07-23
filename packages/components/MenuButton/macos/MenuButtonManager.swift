@@ -6,7 +6,7 @@ class MenuButtonManager: RCTViewManager {
     let menuButton = MenuButton()
     
 //    let image = NSImage(named: NSImage.iconViewTemplateName)!
-//    image.size = CGSize(width: 15, height: 15)
+//    image.size = CGSize(width: 16, height: 16)
 //    menuButton.image = image
     
     return menuButton
