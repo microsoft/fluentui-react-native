@@ -23,7 +23,7 @@ export const settings: IComposeSettings<TabsItemType> = [
       selected: {
         tokens: {
           backgroundColor: 'buttonBackgroundPressed',
-          color: 'buttonTextPressed',
+          color: 'blue',
           borderColor: 'blue',
         },
       },
