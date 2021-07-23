@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { Alert } from 'react-native';
-import { Tabs, TabsItem } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
+import { Alert, View } from 'react-native';
+import { Tabs, TabsItem, Button, Text } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -20,14 +19,20 @@ const tabs: React.FunctionComponent<{}> = () => {
   };
 
   return (
-    <Stack style={stackStyle}>
-      <Tabs label="Tabs" onTabsClick={onTabsClick}>
-        <TabsItem icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }} headerText="Option A!" buttonKey="A" />
-        <TabsItem headerText="Option B" buttonKey="B" />
-        <TabsItem headerText="Option C" buttonKey="C" />
-        <TabsItem headerText="Option D" buttonKey="D" />
-      </Tabs>
-    </Stack>
+    <View>
+      <View style={stackStyle}>
+        <Tabs label="Tabs" onTabsClick={onTabsClick}>
+          <TabsItem icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }} headerText="Option A!" buttonKey="A" />
+          <TabsItem headerText="Option B" buttonKey="B" />
+          <TabsItem headerText="Option C" buttonKey="C" />
+          <TabsItem headerText="Option D" buttonKey="D" />
+        </Tabs>
+      </View>
+      <View>
+        <Text>Buttton to limit Focus Zone</Text>
+        <Button content="Outside Tabs" />
+      </View>
+    </View>
   );
 };
 
