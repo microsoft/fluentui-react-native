@@ -3,7 +3,7 @@
 exports[`useSlot tests Header and caption text render as expected 1`] = `
 <View>
   <View>
-    <test>
+    <component>
       <Text
         style={
           Object {
@@ -23,8 +23,8 @@ exports[`useSlot tests Header and caption text render as expected 1`] = `
           Header text
         </Text>
       </Text>
-    </test>
-    <test>
+    </component>
+    <component>
       <Text
         style={
           Object {
@@ -44,7 +44,7 @@ exports[`useSlot tests Header and caption text render as expected 1`] = `
           Caption text
         </Text>
       </Text>
-    </test>
+    </component>
   </View>
 </View>
 `;
