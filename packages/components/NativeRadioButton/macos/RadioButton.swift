@@ -1,5 +1,3 @@
-import AppKit
-
 class RadioButton: NSButton {
 
 	@objc public var onChange:RCTBubblingEventBlock?
