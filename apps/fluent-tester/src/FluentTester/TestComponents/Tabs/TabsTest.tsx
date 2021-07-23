@@ -5,19 +5,27 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { SvgIconProps } from '@fluentui-react-native/icon';
+
+import TestSvg from './test.svg';
 
 const tabs: React.FunctionComponent<{}> = () => {
   const onTabsClick = (key: string) => {
-    Alert.alert('Alert.', key + ' works');
+    //Alert.alert('Alert.', key + ' works');
+  };
+
+  const svgProps: SvgIconProps = {
+    src: TestSvg,
+    viewBox: '0 0 500 500',
   };
 
   return (
     <Stack style={stackStyle}>
-      <Tabs label="Tabs" onTabsClick={onTabsClick}>
-        <TabsItem content="Option A" buttonKey="A" />
-        <TabsItem content="Option B" buttonKey="B" />
-        <TabsItem content="Option C" buttonKey="C" />
-        <TabsItem content="Option D" buttonKey="D" />
+      <Tabs label="Tabs">
+        <TabsItem icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }} headerText="Option A!" buttonKey="A" />
+        <TabsItem headerText="Option B" buttonKey="B" />
+        <TabsItem headerText="Option C" buttonKey="C" />
+        <TabsItem headerText="Option D" buttonKey="D" />
       </Tabs>
     </Stack>
   );
