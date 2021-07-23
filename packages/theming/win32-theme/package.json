@@ -36,7 +36,8 @@
   "dependencies": {
     "@fluentui-react-native/default-theme": ">=0.6.8 <1.0.0",
     "@fluentui-react-native/theme-types": ">=0.8.3 <1.0.0",
-    "@fluentui-react-native/theme": ">=0.5.8 <1.0.0"
+    "@fluentui-react-native/theme": ">=0.5.8 <1.0.0",
+    "@fluentui-react-native/theming-utils": ">=0.2.6 <1.0.0"
   },
   "devDependencies": {
     "@types/react": ">=16.9.34 < 16.14.0",

@@ -71,22 +71,24 @@ export const Shimmer = compose<ShimmerType>({
       if (elements) {
         for (let i = 0; i < elements.length; i++) {
           const element = elements[i];
-          if (element.type == 'rect') {
-            rows.push(
-              <Rect
-                key={i}
-                width={element.width}
-                height={element.height}
-                x={element.xPos}
-                y={element.yPos}
-                rx={element.borderRadius}
-                ry={element.borderRadius}
-              />,
-            );
-          } else if (element.type == 'circle') {
-            rows.push(<Circle key={i} r={element.height / 2} cx={element.xPos} cy={element.yPos} />);
-          } else {
-            assertNever(element.type);
+          if (element.type) {
+            if (element.type == 'rect') {
+              rows.push(
+                <Rect
+                  key={i}
+                  width={element.width}
+                  height={element.height}
+                  x={element.xPos}
+                  y={element.yPos}
+                  rx={element.borderRadius}
+                  ry={element.borderRadius}
+                />,
+              );
+            } else if (element.type == 'circle') {
+              rows.push(<Circle key={i} r={element.height / 2} cx={element.xPos} cy={element.yPos} />);
+            } else {
+              assertNever(element.type);
+            }
           }
         }
       }
