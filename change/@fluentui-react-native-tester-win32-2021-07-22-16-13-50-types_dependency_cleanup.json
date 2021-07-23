@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Fix @types/react to be less than 16.14.0 since our react version is less than 16.14",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "email not defined",
+  "dependentChangeType": "patch",
+  "date": "2021-07-22T23:13:14.868Z"
+}

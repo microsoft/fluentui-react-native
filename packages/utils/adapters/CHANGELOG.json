@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Thu, 22 Jul 2021 20:55:49 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.6.4",
+      "version": "0.6.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Correctly declare dependency on react-native",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "99e6bc11d822f843c407498f7b21068aabac10e3",
+            "package": "@fluentui-react-native/adapters"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 21 Jul 2021 22:55:40 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.6.3",
+      "version": "0.6.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "expose use-tokens in framework package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "af44164cf47abb856e567e9976043aafe414ade6",
+            "package": "@fluentui-react-native/adapters"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 15 Jul 2021 20:35:35 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.6.2",
+      "version": "0.6.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Making the default adapters a union of all the platforms",
+            "author": "safreibe@microsoft.com",
+            "commit": "ed0977f5dcb66a4cdd0a9e478b34a30be98be9e5",
+            "package": "@fluentui-react-native/adapters"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 18 Jun 2021 00:38:19 GMT",
       "tag": "@fluentui-react-native/adapters_v0.6.1",
       "version": "0.6.1",
