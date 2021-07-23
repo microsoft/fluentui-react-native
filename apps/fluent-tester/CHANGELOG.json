@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 23 Jul 2021 17:28:27 GMT",
+      "tag": "@fluentui-react-native/tester_v0.32.4",
+      "version": "0.32.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix @types/react to be less than 16.14.0 since our react version is less than 16.14",
+            "author": "email not defined",
+            "commit": "a0b780533a52c66822df9cad7fb7948d41f80b73",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Jul 2021 08:20:11 GMT",
       "tag": "@fluentui-react-native/tester_v0.32.3",
       "version": "0.32.3",

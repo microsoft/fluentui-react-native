@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Fri, 23 Jul 2021 17:28:27 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.11.11",
+      "version": "0.11.11",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix @types/react to be less than 16.14.0 since our react version is less than 16.14",
+            "author": "email not defined",
+            "commit": "a0b780533a52c66822df9cad7fb7948d41f80b73",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Jul 2021 22:55:40 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.11.10",
       "version": "0.11.10",

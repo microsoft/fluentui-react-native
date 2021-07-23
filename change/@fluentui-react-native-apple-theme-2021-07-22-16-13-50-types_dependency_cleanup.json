@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix @types/react to be less than 16.14.0 since our react version is less than 16.14",
-  "packageName": "@fluentui-react-native/apple-theme",
-  "email": "email not defined",
-  "dependentChangeType": "patch",
-  "date": "2021-07-22T23:13:36.866Z"
-}
