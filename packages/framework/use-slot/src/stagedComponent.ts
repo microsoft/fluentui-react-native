@@ -24,7 +24,7 @@ export type FinalRender<TProps> = (props: TProps, ...children: React.ReactNode[]
  * }
  */
 
-export type StagedRender<TProps> = (props: TProps) => FinalRender<TProps>;
+export type StagedRender<TProps> = (props: TProps, ...args: any[]) => FinalRender<TProps>;
 
 /**
  * A composable function may have a two stage render function as an attached property. This allows the function to work
@@ -43,11 +43,11 @@ function asArray<T>(val: T | T[]): T[] {
  * @param memo - optional flag to enable wrapping the created component in a React.memo HOC
  */
 export function stagedComponent<TProps>(staged: StagedRender<TProps>, memo?: boolean): ComposableFunction<TProps> {
-  const test = (props: React.PropsWithChildren<TProps>) => {
+  const component = (props: React.PropsWithChildren<TProps>, ...args: any[]) => {
     const { children, ...rest } = props;
-    return staged(rest as TProps)({} as React.PropsWithChildren<TProps>, ...asArray(children));
+    return staged(rest as TProps, ...args)({} as React.PropsWithChildren<TProps>, ...asArray(children));
   };
-  const stagedComponent = memo ? React.memo(test) : test;
+  const stagedComponent = memo ? React.memo(component) : component;
   Object.assign(stagedComponent, { _staged: staged });
   return stagedComponent as ComposableFunction<TProps>;
 }

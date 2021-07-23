@@ -1,10 +1,23 @@
-# @fluentui-react-native/use-slots
+# @fluentui-react-native/use-slot
 
 A pattern and framework for building layering components together in an efficient, pluggable, and customizable manner.
 
 When building libraries of components, larger and more complex components are often built out of smaller and more focused components. This is great conceptually because it allows good separation of concerns and enables better and more modular designs. The boundaries in this layering are not only defined by the definition of your component, whether it be a function or a class based component, but by `React.createElement`. The `createElement` calls are what JSX is syntactic sugar for, and provides the layering for things like hooks.
 
-The issue is that this layering adds overhead as well. When building HOCs the number of elements in the JSX tree, can be far greater than the actual number of primitives rendered in the DOM. While it is possible to render a function component by calling it directly, this has to be done with caution if that component contains hooks. The storage for hooks is effectively an array indexed from the last `createElement` call. If a `useState` call were to happen on one render pass, but be skipped in the next, all subsequent hook calls would be misaligned.
+## Looking a bit more deeply at rendering JSX
+
+When the render tree is returned via `<View>` etc, these calls are turned into calls to `React.createElement`
+
+- This creates an entry in the virtual DOM
+- This entry has benefits such as allowing render passes to be initiated at that node
+- It also effectively creates storage for hooks. Hooks are stored almost like stack frames for each component layer. This is why hooks cannot be conditional from render to render, it would cause stack misalignment.
+
+If instead a function based component is rendered via a direct function call, e.g. `return Text(textProps)` this entry will not be created.
+
+- This does not create a DOM entry, which saves overhead in the overall react tree
+- This is only safe if the component does not use hooks and is a function component (not a class based one)
+
+There are pros and cons to calling `createElement`. In most cases it is safer to do so. But with certain component patterns, particularly simple wrapping, this creates unnecessary overhead and as HOCs are built up this can become substantial. The patterns in this package attempt to alleviate this by allowing components to be authored in a way that they can be compressed safely.
 
 ## Staged Components
 
@@ -33,28 +46,35 @@ This type of function is not recognizable on its own as a component. This packag
 
 The helper will return a `React.FunctionComponent` that will forward props (without children) to the first call, then pass children to the continuation function.
 
-## Consuming staged components
+## `useSlot`
 
-Staged components could be consumed by hand. This might look something like:
+Consuming these by hand are a bit tedious. To aid in this the `useSlot` hook function is provided. Besides enabling automatic tree compression (for component types that support it), this also allows components to be authored as pluggable bits in the render tree. Usage looks something like:
 
 ```ts
-// create the BaseComponent as a staged component, this can still be rendered via <BaseComponent />
-const BaseComponent = stagedComponent(/* some implementation */);
+/** @jsx withSlots */
 
-// create a wrapper component
-const WrapperComponent = stagedComponent((props) => {
-  // grab the children, do some prop transformations, etc.
-  const { children, ...rest } = props;
-  const propsForBase = doSomethingWithProps(rest);
-  // call the first part of the function
-  const continuation = BaseComponent._staged(propsForBase);
-  // now render that component just by calling the function
-  return continuation({}, children)
-}
+const baseStyle = {
+  /* some text styling defaults set here */
+};
+
+// prop type that adds the ability to swap out the internal Text for something else
+type TextWithOverrideProps = TextProps & { override?: React.FunctionComponent<TextProps> };
+
+const StyledText = (props: React.PropsWithChildren<TextWithOverrideProps>) => {
+  // split the children from props to forward them
+  const { children, override, ...rest } = props;
+
+  // create a merged set of props. The mergeStyle utility here will avoid creating unnecessary permutations of styles
+  const mergedProps = { ...rest, style: mergeStyles(baseStyle, rest.style) };
+
+  // create a slot that can be used to render, props passed in here will be remembered in render. If override is set the slot will be changed, otherwise Text will be used
+  const InnerText = useSlot(override || Text, mergedProps);
+
+  // now just render using that slot
+  return <InnerText>{children}</InnerText>;
+};
 ```
 
-Note that in this example the `WrapperComponent` is leveraging the code of the `BaseComponent` but will not create a dedicated tree entry. Also the `WrapperComponent` itself could be implemented as a staged component.
+## `withSlots`
 
-### Consuming staged components via a `useSlots` hook
-
-TBD
+The `withSlots` helper is required to render the slots correctly. The @jsx directive in the previous example is all that is required to make this work. This provides a helper to the @jsx processing utility that will render as a function if possible, or via createElement if not.
