@@ -1,0 +1,39 @@
+# Component Name: RadioGroup
+
+## Purpose
+The goal of this RadioGroup component is to let users select one option from two or more choices. Each option is represented by one RadioButton component, and the group of RadioButton’s is represented by a RadioGroup component. A user can only select one RadioButton in a RadioGroup.
+
+## Do's:
+  - Use when there are 2-7 options, if you have enough screen space and the options are important enough to be a good use of that screen space. Otherwise, use a Checkbox or Dropdown list.
+  - Use on wizard pages to make the alternatives clear, even if a Checkbox is otherwise acceptable.
+  - List the options in a logical order, such as most likely to be selected least, simplest operation to most complex, or least risk to most. Alphabetical ordering is not recommended because it is language dependent and therefore not localizable.
+  - If none of the options is a valid choice, add another option to reflect this choice, such as “None” or “Does not apply”.
+  - Select the safest (to prevent loss of data or system access) and most secure and private option as the default. If safety and security aren’t factors, select the most likely or convenient option.
+  - Align radio buttons vertically instead of horizontally, if possible. Horizontal alignment is harder to read and localize.
+
+## Don't:
+  -	Use when the options are numbers that have fixed steps, like 10, 20, 30. Use a slider component instead.
+  -	Use if there are more than 7 options, use a Dropdown instead.
+  -	Nest with other RadioGroup or Checkboxes. If possible, keep all the options at the same level.
+
+## Sample Code:
+```jsx
+<RadioGroup label="This is a test RadioGroup" defaultSelectedKey="A">
+  <RadioButton content="Option A" buttonKey="A" />
+  <RadioButton content="Option B" buttonKey="B" />
+  <RadioButton content="Option C" buttonKey="C" disabled={true} />
+  <RadioButton content="Option D" buttonKey="D" />
+</RadioGroup>
+```
+
+## Tokens:
+RadioButton supports the following tokens:
+  1.	borderColor – This changes the border color of the RadioButton.
+  2.	backgroundColor – This changes the background color of the inner circle of the RadioButton.
+  3.	color – This changes the text color of the label associated with the RadioButton.
+  
+RadioGroup supports the following tokens:
+  1.  fontFamily - Changes the font family of the label associated with the RadioGroup.
+  2.  fontSize - Changes the font size of the label associated with the RadioGroup.
+  3.  fontWeight - Changes the font weight of the label associated with the RadioGroup.
+  4.  color - This changes the text color of the label associated with the RadioGroup.
