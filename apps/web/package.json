@@ -13,7 +13,7 @@
     "extends": "react-app"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": ">=0.32.1 <1.0.0",
+    "@fluentui-react-native/tester": ">=0.32.4 <1.0.0",
     "react": "16.13.1",
     "react-art": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -24,7 +24,7 @@
   "devDependencies": {
     "@types/jest": "^25.1.4",
     "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
+    "@types/react": ">=16.9.34 < 16.14.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-native": "^0.63.0",
     "@uifabricshared/build-native": "^0.1.1",

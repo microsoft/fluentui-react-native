@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Thu, 22 Jul 2021 20:55:49 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.6.4",
+      "version": "0.6.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Correctly declare dependency on react-native",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "99e6bc11d822f843c407498f7b21068aabac10e3",
+            "package": "@fluentui-react-native/adapters"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Jul 2021 22:55:40 GMT",
       "tag": "@fluentui-react-native/adapters_v0.6.3",
       "version": "0.6.3",

@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Fri, 23 Jul 2021 17:28:27 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.14.6",
+      "version": "0.14.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix @types/react to be less than 16.14.0 since our react version is less than 16.14",
+            "author": "email not defined",
+            "commit": "a0b780533a52c66822df9cad7fb7948d41f80b73",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Jul 2021 22:55:40 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.14.5",
       "version": "0.14.5",

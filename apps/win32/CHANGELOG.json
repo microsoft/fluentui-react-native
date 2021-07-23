@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Fri, 23 Jul 2021 17:28:27 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.11.4",
+      "version": "0.11.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix @types/react to be less than 16.14.0 since our react version is less than 16.14",
+            "author": "email not defined",
+            "commit": "a0b780533a52c66822df9cad7fb7948d41f80b73",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 23 Jul 2021 08:20:11 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.11.3",
+      "version": "0.11.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added support of tokens to the MenuButton",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "28c44ee5b22f6de082348582c11aff86ff3a4c68",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Jul 2021 20:55:49 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.11.2",
+      "version": "0.11.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "Loosen requirement on react-native version",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "99e6bc11d822f843c407498f7b21068aabac10e3",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Jul 2021 22:55:40 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.11.1",
       "version": "0.11.1",

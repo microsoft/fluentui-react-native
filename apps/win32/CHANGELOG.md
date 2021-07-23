@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Wed, 21 Jul 2021 22:55:40 GMT and should not be manually modified.
+This log was last generated on Fri, 23 Jul 2021 17:28:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.4
+
+Fri, 23 Jul 2021 17:28:27 GMT
+
+### Patches
+
+- Fix @types/react to be less than 16.14.0 since our react version is less than 16.14 (email not defined)
+
+## 0.11.3
+
+Fri, 23 Jul 2021 08:20:11 GMT
+
+### Patches
+
+- Added support of tokens to the MenuButton (v.kozlova13@gmail.com)
 
 ## 0.11.1
 
