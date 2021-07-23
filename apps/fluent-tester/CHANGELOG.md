@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 21 Jul 2021 22:55:40 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Jul 2021 20:55:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.2
+
+Thu, 22 Jul 2021 20:55:49 GMT
+
+### Patches
+
+- Moved react-native-svg to peer dependencies (4123478+tido64@users.noreply.github.com)
 
 ## 0.32.1
 
