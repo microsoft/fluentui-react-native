@@ -556,7 +556,7 @@ export class Pressability {
       const measure = (this as any)?._responderID?.measure;
 
       if (typeof measure === 'function' && this._measureCallback) {
-        measure(this._measureCallback);
+        (this as any)?._responderID?.measure(this._measureCallback);
       }
     }
   }
