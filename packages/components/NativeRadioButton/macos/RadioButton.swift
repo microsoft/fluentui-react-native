@@ -1,7 +1,7 @@
 class RadioButton: NSButton {
 
 	@objc public var onPress:RCTBubblingEventBlock?
-		
+	
 	public init() {
 		super.init(frame: .zero)
 		self.action = #selector(callOnPress)
@@ -18,7 +18,7 @@ class RadioButton: NSButton {
 			onPress!(nil)
 		}
 	}
-	
+	/// Set button state to 'on' when it becomes focused
 	override func becomeFirstResponder() -> Bool {
 		self.state = NSButton.StateValue.on
 		return super.becomeFirstResponder()

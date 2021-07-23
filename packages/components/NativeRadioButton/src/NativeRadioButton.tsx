@@ -24,6 +24,10 @@ export type NativeRadioButtonProps = {
    */
   state?: boolean;
   /**
+   * Unique identifier for each radio button.
+   */
+  buttonKey?: string;
+  /**
    * On press event block
    */
   onPress?: () => void;
