@@ -59,7 +59,7 @@ const AliasTokensSwatchList: React.FunctionComponent = () => {
 
   const aggregator = React.useCallback(
     (key: string) => {
-      return { name: key + ' (' + (aliasColorTokens[key] as string) + ')', color: aliasColorTokens[key] };
+      return { key: key + ' (' + (aliasColorTokens[key] as string) + ')', color: aliasColorTokens[key] };
     },
     [aliasColorTokens],
   );
@@ -70,8 +70,8 @@ const AliasTokensSwatchList: React.FunctionComponent = () => {
 
   const aliasTokensAsArray = React.useMemo(flattenArray, [flattenArray]);
   const renderSwatch = React.useCallback(({ item }) => {
-    const { color, name } = item;
-    return <ColorToken key={name} color={color} name={name} />;
+    const { color, key } = item;
+    return <ColorToken key={key} color={color} name={key} />;
   }, []);
   return (
     <View style={[commonTestStyles.view]}>
