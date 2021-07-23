@@ -41,7 +41,7 @@ const tabs: React.FunctionComponent<{}> = () => {
   /* If User wants to control what gets rendered example */
 }
 const tabChangingViews: React.FunctionComponent<{}> = () => {
-  const [selectedKey, setSelectedKey] = React.useState('');
+  const [selectedKey, setSelectedKey] = React.useState('home');
 
   const changeView = (key: string) => {
     setSelectedKey(key);
