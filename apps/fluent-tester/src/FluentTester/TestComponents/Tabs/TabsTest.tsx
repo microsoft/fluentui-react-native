@@ -53,7 +53,7 @@ const tabChangingViews: React.FunctionComponent<{}> = () => {
         <Tabs label="Tabs" onTabsClick={changeView}>
           <TabsItem headerText="Home" buttonKey="home" />
           <TabsItem headerText="File" buttonKey="file" />
-          <TabsItem headerText="Options" buttonKey="settings" />
+          <TabsItem headerText="Settings" buttonKey="settings" />
         </Tabs>
         <View>
           {selectedKey == 'home' && <Text>This is home</Text>}
