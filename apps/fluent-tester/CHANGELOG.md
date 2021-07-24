@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 23 Jul 2021 17:28:27 GMT and should not be manually modified.
+This log was last generated on Sat, 24 Jul 2021 00:28:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.33.0
+
+Sat, 24 Jul 2021 00:28:25 GMT
+
+### Minor changes
+
+- Add test for alias tokens (email not defined)
 
 ## 0.32.4
 

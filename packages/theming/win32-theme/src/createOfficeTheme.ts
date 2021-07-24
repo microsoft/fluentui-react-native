@@ -2,8 +2,9 @@ import { ThemeReference } from '@fluentui-react-native/theme';
 import { createDefaultTheme } from '@fluentui-react-native/default-theme';
 import { getThemingModule } from './NativeModule/getThemingModule';
 import { CxxException, PlatformDefaultsChangedArgs } from './NativeModule/officeThemingModule';
-import { OfficePalette, ThemeOptions } from '@fluentui-react-native/theme-types';
+import { OfficePalette, Theme, ThemeOptions } from '@fluentui-react-native/theme-types';
 import { createPartialOfficeTheme } from './createPartialOfficeTheme';
+import { createThemeWithAliases } from '@fluentui-react-native/theming-utils';
 
 function handlePaletteCall(palette: OfficePalette | CxxException): OfficePalette | undefined {
   const exception = palette as CxxException;
@@ -24,11 +25,17 @@ export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
   const ref = { module, emitter, themeName: module.initialHostThemeSetting || '' };
   const { paletteName } = options;
 
-  const themeRef = new ThemeReference(createDefaultTheme(options), () => {
-    const name = paletteName || '';
-    const palette = handlePaletteCall(ref.module.getPalette(name));
-    return createPartialOfficeTheme(module, ref.themeName, palette);
-  });
+  const themeRef = new ThemeReference(
+    createDefaultTheme(options),
+    () => {
+      const name = paletteName || '';
+      const palette = handlePaletteCall(ref.module.getPalette(name));
+      return createPartialOfficeTheme(module, ref.themeName, palette);
+    },
+    (theme: Theme) => {
+      return createThemeWithAliases(theme);
+    },
+  );
 
   // set up the callback for theme changes on the native side
   const onPlatformDefaultsChanged = (args: PlatformDefaultsChangedArgs) => {
