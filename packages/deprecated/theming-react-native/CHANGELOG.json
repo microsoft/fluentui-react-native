@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Sat, 24 Jul 2021 18:36:14 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.11.12",
+      "version": "0.11.12",
+      "comments": {
+        "none": [
+          {
+            "comment": "move old framework to deprecated, new framework to framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4687ff096fd25b07e0a4e782616b6b2ec0fa2d9f",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 24 Jul 2021 17:42:51 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.11.12",
       "version": "0.11.12",

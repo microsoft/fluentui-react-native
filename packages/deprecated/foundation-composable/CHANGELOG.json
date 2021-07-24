@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Sat, 24 Jul 2021 18:36:14 GMT",
+      "tag": "@uifabricshared/foundation-composable_v0.8.4",
+      "version": "0.8.4",
+      "comments": {
+        "none": [
+          {
+            "comment": "move old framework to deprecated, new framework to framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4687ff096fd25b07e0a4e782616b6b2ec0fa2d9f",
+            "package": "@uifabricshared/foundation-composable"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 24 Jul 2021 17:42:51 GMT",
       "tag": "@uifabricshared/foundation-composable_v0.8.4",
       "version": "0.8.4",
