@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/default-theme
 
-This log was last generated on Fri, 23 Jul 2021 17:28:27 GMT and should not be manually modified.
+This log was last generated on Sat, 24 Jul 2021 00:28:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Sat, 24 Jul 2021 00:28:25 GMT
+
+### Minor changes
+
+- Integrate alias tokens into theme (email not defined)
 
 ## 0.6.8
 

@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester-win32",
-  "version": "0.11.4",
+  "version": "0.11.5",
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
@@ -30,7 +30,7 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.32.4",
+    "@fluentui-react-native/tester": "^0.33.0",
     "react": "16.13.1",
     "react-native": "^0.63.2",
     "react-native-svg": "^12.1.1"
@@ -40,6 +40,7 @@
     "@office-iss/rex-win32": "0.63.28-devmain.14119.10000",
     "@react-native-community/eslint-config": "^1.1.0",
     "@rnx-kit/cli": "^0.5.27",
+    "@rnx-kit/metro-config": "^1.2.3",
     "@types/jasmine": "3.5.10",
     "@types/react": ">=16.9.34 < 16.14.0",
     "@types/react-native": "^0.63.0",
