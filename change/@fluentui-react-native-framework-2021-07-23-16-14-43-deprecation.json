@@ -1,0 +1,8 @@
+{
+  "type": "none",
+  "comment": "move old framework to deprecated, new framework to framework",
+  "packageName": "@fluentui-react-native/framework",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "none",
+  "date": "2021-07-23T23:14:38.013Z"
+}
