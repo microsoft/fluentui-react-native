@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add more aslias tokens, regenerate files",
-  "packageName": "@fluentui-react-native/theme-tokens",
-  "email": "email not defined",
-  "dependentChangeType": "patch",
-  "date": "2021-07-21T22:48:58.878Z"
-}

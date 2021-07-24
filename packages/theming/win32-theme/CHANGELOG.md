@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Fri, 23 Jul 2021 17:28:27 GMT and should not be manually modified.
+This log was last generated on Sat, 24 Jul 2021 00:28:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.10
+
+Sat, 24 Jul 2021 00:28:25 GMT
+
+### Patches
+
+- Incorporate alias tokens into Office theme (email not defined)
 
 ## 0.7.9
 

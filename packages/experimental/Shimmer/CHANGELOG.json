@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-shimmer",
   "entries": [
     {
+      "date": "Sat, 24 Jul 2021 00:28:25 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.3.12",
+      "version": "0.3.12",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Import assert-never",
+            "author": "email not defined",
+            "commit": "42553f6e66bcdc721ddeba9d0678a7167c696531",
+            "package": "@fluentui-react-native/experimental-shimmer"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Jul 2021 22:55:40 GMT",
       "tag": "@fluentui-react-native/experimental-shimmer_v0.3.9",
       "version": "0.3.9",

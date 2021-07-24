@@ -1,8 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add test for alias tokens",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "email not defined",
-  "dependentChangeType": "patch",
-  "date": "2021-07-21T22:47:11.033Z"
-}
