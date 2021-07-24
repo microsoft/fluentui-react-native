@@ -1,19 +1,29 @@
 'use strict';
 
-import { findGitRoot, normalizeToUnixPath } from 'just-repo-utils';
 import fs from 'fs';
 import path from 'path';
+import findUp from 'find-up';
 
 export function nodeModulesToRoot(): string[] {
   const results = [];
-  findGitRoot(cur => {
-    const nodeModulePath = path.join(cur, 'node_modules');
-    if (fs.existsSync(nodeModulePath)) {
-      results.push(nodeModulePath.replace(/\\/g, '/'));
+  findUp.sync((directory) => {
+    const nodeModulesPath = path.join(directory, 'node_modules');
+    if (fs.existsSync(nodeModulesPath)) {
+      results.push(nodeModulesPath.replace(/\\/g, '/'));
     }
-    return false;
+
+    const gitRoot = path.join(directory, '.git');
+    return fs.existsSync(gitRoot) ? findUp.stop : undefined;
   });
   return results;
+}
+
+/**
+ * take a path, call path.normalize, then make sure it uses forward slashes
+ * @param base - path to put into forward slashed form
+ */
+export function normalizeToUnixPath(base: string): string {
+  return path.normalize(base).replace(/\\/g, '/');
 }
 
 function queryModule(name: string, direct?: boolean): string {

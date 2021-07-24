@@ -40,6 +40,7 @@
     "@office-iss/rex-win32": "0.63.28-devmain.14119.10000",
     "@react-native-community/eslint-config": "^1.1.0",
     "@rnx-kit/cli": "^0.5.27",
+    "@rnx-kit/metro-config": "^1.2.3",
     "@types/jasmine": "3.5.10",
     "@types/react": ">=16.9.34 < 16.14.0",
     "@types/react-native": "^0.63.0",
