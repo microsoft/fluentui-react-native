@@ -102,9 +102,3 @@ open class MenuButton: NSPopUpButton {
     }
   }
 }
-
-@objc(MSFMenuButtonItem)
-extension class MenuButtonItem: NSMenuItem {
- 
-  
-}
