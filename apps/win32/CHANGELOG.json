@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Sat, 24 Jul 2021 17:42:51 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.11.5",
+      "version": "0.11.5",
+      "comments": {
+        "none": [
+          {
+            "comment": "Use @rnx-kit/metro-config",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "69c607cb934b56fdf51c7b730fd6f6b3b5135998",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Jul 2021 17:28:27 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.11.4",
       "version": "0.11.4",

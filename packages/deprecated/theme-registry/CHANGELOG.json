@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theme-registry",
   "entries": [
     {
+      "date": "Sat, 24 Jul 2021 17:42:51 GMT",
+      "tag": "@uifabricshared/theme-registry_v0.5.2",
+      "version": "0.5.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "move old framework to deprecated, new framework to framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4687ff096fd25b07e0a4e782616b6b2ec0fa2d9f",
+            "package": "@uifabricshared/theme-registry"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Jul 2021 22:55:40 GMT",
       "tag": "@uifabricshared/theme-registry_v0.5.2",
       "version": "0.5.2",

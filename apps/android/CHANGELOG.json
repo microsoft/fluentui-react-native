@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/tester-android",
+  "entries": [
+    {
+      "date": "Sat, 24 Jul 2021 17:42:51 GMT",
+      "tag": "@fluentui-react-native/tester-android_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/tester to v0.33.0",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4687ff096fd25b07e0a4e782616b6b2ec0fa2d9f",
+            "package": "@fluentui-react-native/tester-android"
+          }
+        ]
+      }
+    }
+  ]
+}
