@@ -74,7 +74,7 @@ const SwatchList: React.FunctionComponent = () => {
 
   const aggregator = React.useCallback(
     (key: string) => {
-      return { name: key + ' (' + (palette[key] as string) + ')', color: palette[key] };
+      return { key: key + ' (' + (palette[key] as string) + ')', color: palette[key] };
     },
     [palette],
   );
@@ -85,8 +85,8 @@ const SwatchList: React.FunctionComponent = () => {
 
   const paletteAsArray = React.useMemo(flattenArray, [flattenArray]);
   const renderSwatch = React.useCallback(({ item }) => {
-    const { color, name } = item;
-    return <SemanticColor key={name} color={color} name={name} />;
+    const { color, key } = item;
+    return <SemanticColor key={key} color={color} name={key} />;
   }, []);
   return (
     <View style={[commonTestStyles.view]}>

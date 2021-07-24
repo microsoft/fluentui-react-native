@@ -1,0 +1,8 @@
+{
+  "type": "patch",
+  "comment": "Import assert-never",
+  "packageName": "@fluentui-react-native/experimental-shimmer",
+  "email": "email not defined",
+  "dependentChangeType": "patch",
+  "date": "2021-07-23T00:45:33.691Z"
+}

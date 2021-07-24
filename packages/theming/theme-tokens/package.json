@@ -33,6 +33,10 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "@fluentui-react-native/theme-types": ">=0.8.0 <1.0.0",
+    "assert-never": "^1.2.1"
+  },
   "devDependencies": {
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
