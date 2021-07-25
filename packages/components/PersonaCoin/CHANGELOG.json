@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/persona-coin",
   "entries": [
     {
+      "date": "Sun, 25 Jul 2021 16:30:17 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.8.12",
+      "version": "0.8.12",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/adapters to v0.6.5",
+            "author": "email not defined",
+            "commit": "6e298f4bfda7d7cae2c1f52c942bae20ab29b641",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 24 Jul 2021 18:36:14 GMT",
       "tag": "@fluentui-react-native/persona-coin_v0.8.11",
       "version": "0.8.11",

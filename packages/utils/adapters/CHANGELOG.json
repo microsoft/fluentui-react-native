@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Sun, 25 Jul 2021 16:30:17 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.6.5",
+      "version": "0.6.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix build error",
+            "author": "email not defined",
+            "commit": "6e298f4bfda7d7cae2c1f52c942bae20ab29b641",
+            "package": "@fluentui-react-native/adapters"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 22 Jul 2021 20:55:49 GMT",
       "tag": "@fluentui-react-native/adapters_v0.6.4",
       "version": "0.6.4",
