@@ -12,6 +12,7 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessible: true,
   accessibilityActions: true,
   accessibilityAnnotation: true,
+  accessibilityControls: true,
   accessibilityDescription: true,
   accessibilityDescribedBy: true,
   accessibilityLabel: true,
@@ -71,6 +72,7 @@ const _viewMask: IFilterMask<IViewProps> = {
 const _textMask: IFilterMask<ITextProps> = {
   children: true,
   accessibilityActions: true,
+  accessibilityControls: true,
   accessibilityDescribedBy: true,
   accessibilityHint: true,
   accessibilityLabel: true,

@@ -2060,9 +2060,9 @@
     fastq "^1.6.0"
 
 "@office-iss/react-native-win32@^0.63.7":
-  version "0.63.10"
-  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.63.10.tgz#9a8ad75ede62ea3f2530a19380bcd60881e00e6c"
-  integrity sha512-m4/omSAqITtUqKbeL3EMX9ZUW+IBbQ2cF7gMEc5gf4gAQLdVlOozik7MTEurpvY8f8qr/HUrR8Nt1ggLQgN8jw==
+  version "0.63.11"
+  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.63.11.tgz#193ce7331c98a52b2a76ac0262b1b67e41a53d52"
+  integrity sha512-81T85ppX3qGY1bt+rWNU3VSz44xQu7Z12J1Ykho14ZWQQl/PlXnohS7EWiE9aWiG6D1U0Pjj+APTr3ZdVFumwA==
   dependencies:
     "@babel/runtime" "^7.8.4"
     abort-controller "^3.0.0"
