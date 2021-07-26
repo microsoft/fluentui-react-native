@@ -4,7 +4,7 @@ import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
 import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
-import { ViewProps } from 'react-native';
+import { ViewPagerAndroidOnPageSelectedEventData, ViewProps } from 'react-native';
 
 export const tabsName = 'Tabs';
 
@@ -13,6 +13,12 @@ export interface ITabsContext {
    ** The currently selected RadioButton's key
    */
   selectedKey: string | null;
+
+  /*
+   ** Index of currently selected key
+   */
+
+  getTabId?: (key: string, index: number) => void;
 
   /*
    ** Updates the selected button and calls the client’s onTabsClick callback
@@ -61,6 +67,8 @@ export interface TabsProps {
    ** Callback for receiving a notification when the choice has been changed
    */
   onTabsClick?: (key: string) => void;
+
+  getTabId?: (key: string, index: number) => void;
 
   testID?: string;
 }
