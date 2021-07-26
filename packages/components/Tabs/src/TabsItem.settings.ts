@@ -6,7 +6,7 @@ export const tabsItemSelectActionLabel = 'Select a TabsItem';
 export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
-      borderColor: 'buttonBorder',
+      borderColor: 'transparent',
       color: 'black',
       backgroundColor: 'transparent',
       textBorderColor: 'transparent',
@@ -23,8 +23,9 @@ export const settings: IComposeSettings<TabsItemType> = [
       selected: {
         tokens: {
           backgroundColor: 'buttonBackgroundPressed',
-          color: 'blue',
+          color: 'black',
           borderColor: 'blue',
+          borderWidth: 2,
         },
       },
       focused: {
