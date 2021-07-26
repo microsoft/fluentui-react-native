@@ -39,6 +39,7 @@ namespace winrt::ReactNativeExpander::implementation {
         nativeProps.Insert(L"expanded", ViewManagerPropertyType::Boolean);
         nativeProps.Insert(L"enabled", ViewManagerPropertyType::Boolean);
         nativeProps.Insert(L"width", ViewManagerPropertyType::Number);
+        nativeProps.Insert(L"height", ViewManagerPropertyType::Number);
         nativeProps.Insert(L"contentHorizontalAlignment", ViewManagerPropertyType::String);
         nativeProps.Insert(L"contentVerticalAlignment", ViewManagerPropertyType::String);
         nativeProps.Insert(L"headerBackground", ViewManagerPropertyType::Color);

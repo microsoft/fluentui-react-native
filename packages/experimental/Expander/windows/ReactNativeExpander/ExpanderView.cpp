@@ -83,11 +83,13 @@ namespace winrt::ReactNativeExpander::implementation {
             else if (propertyName == "width") {
                 if (!propertyValue.IsNull()) {
                     expander.Width(propertyValue.AsDouble());
+                    this->Width(propertyValue.AsDouble());
                 }
             }
             else if (propertyName == "height") {
                 if (!propertyValue.IsNull()) {
                     expander.Height(propertyValue.AsDouble());
+                    this->Height(propertyValue.AsDouble());
                 }
             }
             else if (propertyName == "contentHorizontalAlignment") {
