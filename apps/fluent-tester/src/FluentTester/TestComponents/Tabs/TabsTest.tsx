@@ -24,7 +24,7 @@ const tabs: React.FunctionComponent<{}> = () => {
         <Tabs label="Tabs" defaultSelectedKey="B" onTabsClick={onTabsClick}>
           <TabsItem icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }} headerText="Option A!" buttonKey="A" />
           <TabsItem headerText="Option B" buttonKey="B" />
-          <TabsItem headerText="Option C" buttonKey="C" />
+          <TabsItem headerText="Option C" buttonKey="C" disabled={true} />
           <TabsItem headerText="Option D" buttonKey="D" />
         </Tabs>
       </View>
@@ -52,7 +52,7 @@ const tabChangingViews: React.FunctionComponent<{}> = () => {
       <View style={stackStyle}>
         <Tabs label="Tabs" onTabsClick={changeView}>
           <TabsItem headerText="Home" buttonKey="home" />
-          <TabsItem headerText="File" buttonKey="file" />
+          <TabsItem headerText="File" buttonKey="file" disabled={true} />
           <TabsItem headerText="Settings" buttonKey="settings" />
         </Tabs>
         <View>
