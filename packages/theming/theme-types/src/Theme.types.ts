@@ -15,6 +15,13 @@ export interface Spacing {
   l2: string;
 }
 
+export interface Effects {
+  borderRadiusSmall: number;
+  borderRadiusMedium: number;
+  borderRadiusLarge: number;
+  borderRadiusXLarge: number;
+}
+
 /**
  * A fully specified theme.
  */
@@ -22,8 +29,9 @@ export interface Theme {
   name?: string;
   colors: ThemeColorDefinition;
   typography: Typography;
+  effects: Effects;
   components: {
-    [key: string]: object, // eslint-disable-line @typescript-eslint/ban-types
+    [key: string]: object; // eslint-disable-line @typescript-eslint/ban-types
   };
   spacing: Spacing;
   host: {

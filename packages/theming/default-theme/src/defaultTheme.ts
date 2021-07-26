@@ -1,4 +1,4 @@
-import { Theme, Typography, Spacing, FontWeightValue, FontSize, FontSizes, Variants } from '@fluentui-react-native/theme-types';
+import { Theme, Typography, Spacing, Effects, FontWeightValue, FontSize, FontSizes, Variants } from '@fluentui-react-native/theme-types';
 import { Platform } from 'react-native';
 import { getStockWebPalette, getStockWebDarkPalette } from './defaultColors';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
@@ -88,6 +88,22 @@ function _defaultTypography(): Typography {
   return defaultsDict;
 }
 
+function _defaultEffects(): Effects {
+  return Platform.OS === 'android' || Platform.OS === 'ios'
+    ? {
+        borderRadiusSmall: 2,
+        borderRadiusMedium: 4,
+        borderRadiusLarge: 8,
+        borderRadiusXLarge: 12,
+      }
+    : {
+        borderRadiusSmall: 2,
+        borderRadiusMedium: 4,
+        borderRadiusLarge: 6,
+        borderRadiusXLarge: 8,
+      };
+}
+
 export function defaultSpacing(): Spacing {
   return { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' };
 }
@@ -96,6 +112,7 @@ export const defaultFluentTheme: Theme = {
   colors: getStockWebPalette(),
   typography: _defaultTypography(),
   spacing: defaultSpacing(),
+  effects: _defaultEffects(),
   components: {},
   host: { appearance: 'light' },
 };
@@ -104,6 +121,7 @@ export const defaultFluentDarkTheme: Theme = {
   colors: getStockWebDarkPalette(),
   typography: defaultFluentTheme.typography,
   spacing: defaultFluentTheme.spacing,
+  effects: defaultFluentTheme.effects,
   components: {},
   host: { appearance: 'dark' },
 };
