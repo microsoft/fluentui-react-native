@@ -4,7 +4,7 @@ import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
 import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
-import { ViewPagerAndroidOnPageSelectedEventData, ViewProps } from 'react-native';
+import { ViewProps } from 'react-native';
 
 export const tabsName = 'Tabs';
 
