@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "add compressible utility and a snapshot test / demo to framework",
+  "packageName": "@fluentui-react-native/framework",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}
