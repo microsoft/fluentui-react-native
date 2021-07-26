@@ -17,7 +17,7 @@ export const RadioButton = compose<IRadioButtonType>({
   displayName: radioButtonName,
 
   usePrepareProps: (userProps: IRadioButtonProps, useStyling: IUseComposeStyling<IRadioButtonType>) => {
-    const { content, buttonKey, disabled, ariaLabel, componentRef = React.useRef(null), ...rest } = userProps;
+    const { content, buttonKey, disabled, ariaLabel, componentRef = React.useRef(null), ariaPosInSet, ariaSetSize, ...rest } = userProps;
 
     // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
     const info = React.useContext(RadioGroupContext);
@@ -81,8 +81,8 @@ export const RadioButton = compose<IRadioButtonType>({
         accessibilityLabel: ariaLabel ? ariaLabel : content,
         accessibilityState: { disabled: state.disabled, selected: state.selected },
         accessibilityActions: [{ name: 'Select', label: radioButtonSelectActionLabel }],
-        accessibilityPositionInSet: info.buttonKeys.findIndex((x) => x == buttonKey) + 1,
-        accessibilitySetSize: info.buttonKeys.length,
+        accessibilityPositionInSet: ariaPosInSet ? ariaPosInSet : info.buttonKeys.findIndex((x) => x == buttonKey) + 1,
+        accessibilitySetSize: ariaSetSize ? ariaSetSize : info.buttonKeys.length,
         onAccessibilityAction: onAccessibilityAction,
       },
       content: { children: content },
