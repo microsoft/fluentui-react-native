@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/component-cache": "^1.2.0",
-    "@fluentui-react-native/framework": "0.5.9"
+    "@fluentui-react-native/framework": "0.5.14"
   },
   "devDependencies": {
     "@types/react-native": "^0.63.0",
