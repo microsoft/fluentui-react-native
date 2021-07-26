@@ -40,9 +40,13 @@ const tabChangingViews: React.FunctionComponent<{}> = () => {
     setSelectedKey(key);
   };
 
+  const test = (key: string, index: number) => {
+    Alert.alert('HERE IT IS', key + index);
+  };
+
   return (
     <View style={stackStyle}>
-      <Tabs label="Tabs" onTabsClick={changeView}>
+      <Tabs label="Tabs" onTabsClick={changeView} getTabId={test}>
         <TabsItem headerText="Home" buttonKey="home" />
         <TabsItem headerText="File" buttonKey="file" disabled={true} />
         <TabsItem headerText="Settings" buttonKey="settings" />

@@ -15,6 +15,12 @@ export interface ITabsContext {
   selectedKey: string | null;
 
   /*
+   ** Index of currently selected key
+   */
+
+  getTabId?: (key: string, index: number) => void;
+
+  /*
    ** Updates the selected button and calls the client’s onTabsClick callback
    */
   onTabsClick?: (key: string) => void;
@@ -61,6 +67,8 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
    ** Callback for receiving a notification when the choice has been changed
    */
   onTabsClick?: (key: string) => void;
+
+  getTabId?: (key: string, index: number) => void;
 
   testID?: string;
 }

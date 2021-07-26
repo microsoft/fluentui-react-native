@@ -13,7 +13,11 @@ import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
 export const TabsContext = React.createContext<ITabsContext>({
   selectedKey: null,
+
   onTabsClick: (/* key: string */) => {
+    return;
+  },
+  getTabId: (/* key:string, index: number*/) => {
     return;
   },
   updateSelectedButtonRef: (/* ref: React.RefObject<any>*/) => {
@@ -26,7 +30,7 @@ export const Tabs = compose<TabsType>({
   displayName: tabsName,
 
   usePrepareProps: (userProps: TabsProps, useStyling: IUseComposeStyling<TabsType>) => {
-    const { label, ariaLabel, selectedKey, defaultSelectedKey, isCircularNavigation, ...rest } = userProps;
+    const { label, ariaLabel, selectedKey, defaultSelectedKey, getTabId, isCircularNavigation, ...rest } = userProps;
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
     const data = useSelectedKey(selectedKey || defaultSelectedKey || null, userProps.onTabsClick);
@@ -40,10 +44,18 @@ export const Tabs = compose<TabsType>({
       [setSelectedButtonRef],
     );
 
+    const onChangeTabId = React.useCallback((key: string, index: number) => {
+      if (getTabId) {
+        return getTabId(key, index);
+      }
+      return `${key}-Tab${index}`;
+    }, []);
+
     const state: TabsState = {
       context: {
         selectedKey: selectedKey ?? data.selectedKey,
         onTabsClick: data.onKeySelect,
+        getTabId: onChangeTabId,
         updateSelectedButtonRef: onSelectButtonRef,
       },
     };

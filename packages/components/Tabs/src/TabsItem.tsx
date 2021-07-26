@@ -26,6 +26,7 @@ export const TabsItem = compose<TabsItemType>({
     const changeSelection = () => {
       if (buttonKey != info.selectedKey) {
         info.onTabsClick && info.onTabsClick(buttonKey);
+        info.getTabId && info.getTabId(buttonKey, info.buttonKeys.findIndex((x) => x == buttonKey) + 1);
         info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
       }
     };
