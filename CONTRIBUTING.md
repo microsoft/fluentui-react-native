@@ -70,9 +70,12 @@ Most components should use the compose framework as it offers the comprehensive 
 ### Adding a new test for your component to the test app
 
 1. In FluentTester (our test app), we'll need to add an test component. The test components are located under `fluentui-react-native/apps/fluent-tester/src/FluentTester/TestComponents`.
-1. Make a subdirectory for your new component at this path, as well as adding an entry for your test in `Tests.tsx` and `Tests.<platform>.tsx`
+1. Make a subdirectory for your new component at this path, as well as adding an entry for your test in `testPages.tsx` and `testPages.<platform>.tsx`
 1. Create your tests in this new subdirectory. Pattern matching off an existing control's tests will greatly help.
-1. If you're component contains a native module, you will also need to add the path to your component's `podspec` (that we created earlier) in your test app's Podfile. This extra step is due to the fact that FluentTester has separate platform test apps that each share a common JS package. The react native community CLI does not support [autolinking transitive dependencies](https://github.com/react-native-community/cli/issues/1347), so we need to add it manually here.
+1. If your component contains a native module, you will also need to add the path to your component's `podspec` (that we created earlier) in your test app's Podfile. This extra step is due to the fact that FluentTester has separate platform test apps that each share a common JS package. The react native community CLI does not support [autolinking transitive dependencies](https://github.com/react-native-community/cli/issues/1347), so we need to add it manually here.
+1. Add your new module as a dependency in `apps/fluent-tester/package.json` and run `yarn && yarn build` from the root folder.
+   1. If your component has native apple code, run `pod install` from the corresponding macOS or iOS test app src folder (`apps/macos/src` or `apps/ios/src` respectively).
+1. Run the test app and you should see your new test!
 
 ## Adding native code to your new component
 

@@ -2,14 +2,14 @@
 
 import path from 'path';
 import { mergeConfigs } from './mergeConfigs';
-import { getPackageInfo } from 'just-repo-utils';
+import { getPackageInfos } from 'workspace-tools';
 import { nodeModulesToRoot, resolveModule } from '../utils/resolvePaths';
 import { ensurePlatform, PlatformValue, getRNVersion, getAllPlatforms } from '../utils/platforms';
 
 const moduleFileExtensions = ['ts', 'tsx', 'js', 'jsx', 'json'];
 
 export function configureJest(customConfig?: object): object {
-  const pkgInfo = getPackageInfo();
+  const pkgInfo = getPackageInfos(process.cwd());
   return mergeConfigs(
     {
       // run tests from the src directory rather than lib
@@ -31,7 +31,7 @@ export function configureJest(customConfig?: object): object {
       },
 
       // ignore our own packages in node_modules
-      transformIgnorePatterns: pkgInfo.names().map(pkg => '/node_modules/' + pkg),
+      transformIgnorePatterns: Object.keys(pkgInfo).map(pkg => '/node_modules/' + pkg),
 
       // testRegex for which files to consider test files
       testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$',

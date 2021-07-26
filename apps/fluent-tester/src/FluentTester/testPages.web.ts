@@ -9,6 +9,7 @@ import { HOMEPAGE_RADIOGROUP_BUTTON, RadioGroupTest } from './TestComponents/Rad
 import { HOMEPAGE_SEPARATOR_BUTTON, SeparatorTest } from './TestComponents/Separator';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
+import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 
 export const tests: TestDescription[] = [
   {
@@ -60,5 +61,10 @@ export const tests: TestDescription[] = [
     name: 'Persona Test',
     component: PersonaTest,
     testPage: HOMEPAGE_PERSONA_BUTTON,
+  },
+  {
+    name: 'Tokens Test',
+    component: TokenTest,
+    testPage: HOMEPAGE_TOKEN_BUTTON,
   },
 ];

@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Sun, 25 Jul 2021 16:30:17 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.11.6",
+      "version": "0.11.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tester to v0.33.1",
+            "author": "email not defined",
+            "commit": "6e298f4bfda7d7cae2c1f52c942bae20ab29b641",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 24 Jul 2021 18:36:14 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.11.5",
+      "version": "0.11.5",
+      "comments": {
+        "none": [
+          {
+            "comment": "Use @rnx-kit/metro-config",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "69c607cb934b56fdf51c7b730fd6f6b3b5135998",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 24 Jul 2021 17:42:51 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.11.5",
+      "version": "0.11.5",
+      "comments": {
+        "none": [
+          {
+            "comment": "Use @rnx-kit/metro-config",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "69c607cb934b56fdf51c7b730fd6f6b3b5135998",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Jul 2021 17:28:27 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.11.4",
       "version": "0.11.4",

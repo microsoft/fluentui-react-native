@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Wed, 21 Jul 2021 22:55:40 GMT and should not be manually modified.
+This log was last generated on Sat, 24 Jul 2021 00:28:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Sat, 24 Jul 2021 00:28:25 GMT
+
+### Minor changes
+
+- createAliasTokens to generate alias token structure (email not defined)
 
 ## 0.2.5
 

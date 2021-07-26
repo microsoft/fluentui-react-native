@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 23 Jul 2021 17:28:27 GMT and should not be manually modified.
+This log was last generated on Sun, 25 Jul 2021 16:30:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.33.1
+
+Sun, 25 Jul 2021 16:30:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.17.15 (email not defined)
+
+## 0.33.0
+
+Sat, 24 Jul 2021 00:28:25 GMT
+
+### Minor changes
+
+- Add test for alias tokens (email not defined)
 
 ## 0.32.4
 
