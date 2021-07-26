@@ -24,7 +24,7 @@ export type FinalRender<TProps> = (props: TProps, ...children: React.ReactNode[]
  * }
  */
 
-export type StagedRender<TProps> = (props: TProps) => FinalRender<TProps>;
+export type StagedRender<TProps> = (props: TProps, ...args: any[]) => FinalRender<TProps>;
 
 /**
  * A composable function may have a two stage render function as an attached property. This allows the function to work
