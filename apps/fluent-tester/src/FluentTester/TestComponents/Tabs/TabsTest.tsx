@@ -21,7 +21,7 @@ const tabs: React.FunctionComponent<{}> = () => {
   return (
     <View>
       <View style={stackStyle}>
-        <Tabs label="Tabs" onTabsClick={onTabsClick}>
+        <Tabs label="Tabs" defaultSelectedKey="B" onTabsClick={onTabsClick}>
           <TabsItem icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }} headerText="Option A!" buttonKey="A" />
           <TabsItem headerText="Option B" buttonKey="B" />
           <TabsItem headerText="Option C" buttonKey="C" />
