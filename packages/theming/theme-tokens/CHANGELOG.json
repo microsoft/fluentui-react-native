@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Mon, 26 Jul 2021 20:41:04 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.9.1",
+            "author": "jasonmo@microsoft.com",
+            "commit": "ad02fbbe9eaa5fbe6ec6126ccb719a1280f108a6",
+            "package": "@fluentui-react-native/theme-tokens"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 24 Jul 2021 00:28:25 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add more aslias tokens, regenerate files",
+            "author": "email not defined",
+            "commit": "42553f6e66bcdc721ddeba9d0678a7167c696531",
+            "package": "@fluentui-react-native/theme-tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Jul 2021 22:55:40 GMT",
       "tag": "@fluentui-react-native/theme-tokens_v0.2.4",
       "version": "0.2.4",

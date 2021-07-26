@@ -2,6 +2,87 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 26 Jul 2021 20:41:04 GMT",
+      "tag": "@fluentui-react-native/tester_v0.33.2",
+      "version": "0.33.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add new use-slot package, move framework to consume that package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "ad02fbbe9eaa5fbe6ec6126ccb719a1280f108a6",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Add ariaPosInSet and ariaSetSize to RadioButton",
+            "author": "krsiler@microsoft.com",
+            "commit": "9c2405ae92be63f40defff419448a600939bd162",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sun, 25 Jul 2021 16:30:17 GMT",
+      "tag": "@fluentui-react-native/tester_v0.33.1",
+      "version": "0.33.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.17.15",
+            "author": "email not defined",
+            "commit": "6e298f4bfda7d7cae2c1f52c942bae20ab29b641",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 24 Jul 2021 18:36:14 GMT",
+      "tag": "@fluentui-react-native/tester_v0.33.0",
+      "version": "0.33.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.13",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4687ff096fd25b07e0a4e782616b6b2ec0fa2d9f",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 24 Jul 2021 17:42:51 GMT",
+      "tag": "@fluentui-react-native/tester_v0.33.0",
+      "version": "0.33.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.13",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4687ff096fd25b07e0a4e782616b6b2ec0fa2d9f",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 24 Jul 2021 00:28:25 GMT",
+      "tag": "@fluentui-react-native/tester_v0.33.0",
+      "version": "0.33.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add test for alias tokens",
+            "author": "email not defined",
+            "commit": "42553f6e66bcdc721ddeba9d0678a7167c696531",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 23 Jul 2021 17:28:27 GMT",
       "tag": "@fluentui-react-native/tester_v0.32.4",
       "version": "0.32.4",

@@ -5,23 +5,27 @@
  * @format
  */
 const path = require('path');
-const blacklist = require('metro-config/src/defaults/blacklist');
-const { getWatchFolders } = require('@uifabricshared/build-native');
+const { defaultWatchFolders, exclusionList } = require('@rnx-kit/metro-config');
 const { getDefaultConfig } = require('metro-config');
+
+const blockList = exclusionList([
+  // Exclude other test apps
+  /.*\/apps\/(?:android|ios|macos|web|windows)\/.*/,
+  // Exclude build output directory
+  /.*\/apps\/win32\/dist\/.*/,
+]);
 
 module.exports = (async () => {
   const {
     resolver: { sourceExts, assetExts },
   } = await getDefaultConfig();
   return {
-    watchFolders: getWatchFolders(),
+    watchFolders: defaultWatchFolders(__dirname),
     resolver: {
       assetExts: [assetExts.filter((ext) => ext !== 'svg'), 'ttf', 'otf', 'png'],
       sourceExts: [...sourceExts, 'svg'],
-      blacklistRE: blacklist([
-        // This stops "react-native run-windows" from causing the metro server to crash if its already running
-        new RegExp(`${path.resolve(__dirname, 'windows').replace(/[/\\]/g, '/')}.*`),
-      ]),
+      blacklistRE: blockList,
+      blockList,
     },
     // Metro doesn't currently handle assets coming from hoisted packages within a monorepo.  This is the current workaround people use
     // In this case this is to ensure that the image assets that are part of logbox get loaded correctly.

@@ -3,7 +3,7 @@ import { MenuButtonItemProps } from '..';
 import { MenuButton } from '..';
 import * as renderer from 'react-test-renderer';
 
-it('ContextualMenu default props', () => {
+it('ContextualMenu default', () => {
   const menuItems: MenuButtonItemProps[] = [
     {
       itemKey: '1',
