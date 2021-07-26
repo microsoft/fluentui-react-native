@@ -48,7 +48,6 @@ export const Tabs = compose<TabsType>({
       if (getTabId) {
         return getTabId(key, index);
       }
-
       return `${key}-Tab${index}`;
     }, []);
 
