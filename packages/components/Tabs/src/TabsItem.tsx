@@ -85,6 +85,7 @@ export const TabsItem = compose<TabsItemType>({
         onAccessibilityAction: onAccessibilityAction,
         content: headerText,
         icon: icon,
+        disabled: disabled,
       },
       // content: { children: content },
     });
