@@ -12,7 +12,6 @@ function delay(ms: number) {
 export const Expander = compose<ExpanderType>({
   displayName: expanderName,
   tokens: [{}, expanderName],
-  tokensThatAreAlsoProps: 'all',
   slotProps: {
     root: buildProps(
       (tokens) => ({...tokens})

@@ -25,10 +25,10 @@ namespace winrt::ReactNativeExpander::implementation {
     void ExpanderView::RegisterEvents() {
         auto expander = (this->Content()).try_as<Microsoft::UI::Xaml::Controls::Expander>();
 
-        m_expanderCollapsedRevoker = expander.Collapsed(winrt::auto_revoke,
+        m_expanderCollapsingRevoker = expander.Collapsed(winrt::auto_revoke,
             [ref = get_weak()](auto const& sender, auto const& args) {
             if (auto self = ref.get()) {
-                self->OnCollapsed(sender, args);
+                self->OnCollapsing(sender, args);
             }
         });
         m_expanderExpandingRevoker = expander.Expanding(winrt::auto_revoke,
@@ -213,12 +213,12 @@ namespace winrt::ReactNativeExpander::implementation {
         }
     }
 
-    void ExpanderView::OnCollapsed(winrt::Windows::Foundation::IInspectable const& sender,
+    void ExpanderView::OnCollapsing(winrt::Windows::Foundation::IInspectable const& sender,
                           Microsoft::UI::Xaml::Controls::ExpanderCollapsedEventArgs const& args) {
         if (!m_updating) {
             m_reactContext.DispatchEvent(
                 *this,
-                L"topCollapsed",
+                L"topCollapsing",
                 [&](winrt::Microsoft::ReactNative::IJSValueWriter const& eventDataWriter) noexcept {});
             m_reactContext.DispatchEvent(
                 *this,

@@ -38,7 +38,7 @@ export interface ExpanderProps {
   /*
    * A callback to call on Expander collapsed event
    */
-  onCollapsed?: () => void;
+  onCollapsing?: () => void;
   /*
    * A callback to call on Expander expanding event
    */

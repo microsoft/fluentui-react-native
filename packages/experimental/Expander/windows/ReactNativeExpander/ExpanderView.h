@@ -16,11 +16,11 @@ namespace winrt::ReactNativeExpander::implementation {
         bool m_updating{ false };
         bool m_expanded{ false };
 
-        Microsoft::UI::Xaml::Controls::Expander::Collapsed_revoker m_expanderCollapsedRevoker{};
+        Microsoft::UI::Xaml::Controls::Expander::Collapsed_revoker m_expanderCollapsingRevoker{};
         Microsoft::UI::Xaml::Controls::Expander::Expanding_revoker m_expanderExpandingRevoker{};
 
         void SetResourceColor(Microsoft::ReactNative::JSValue const& value, hstring key);
-        void OnCollapsed(winrt::Windows::Foundation::IInspectable const& sender,
+        void OnCollapsing(winrt::Windows::Foundation::IInspectable const& sender,
                           Microsoft::UI::Xaml::Controls::ExpanderCollapsedEventArgs const& args);
         void OnExpanding(winrt::Windows::Foundation::IInspectable const& sender,
                           Microsoft::UI::Xaml::Controls::ExpanderExpandingEventArgs const& args);

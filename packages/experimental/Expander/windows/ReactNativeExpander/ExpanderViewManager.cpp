@@ -86,7 +86,7 @@ namespace winrt::ReactNativeExpander::implementation {
     ConstantProviderDelegate ExpanderViewManager::ExportedCustomDirectEventTypeConstants() noexcept {
         return [](winrt::IJSValueWriter const& constantWriter) {
             WriteCustomDirectEventTypeConstant(constantWriter, "onChange");
-            WriteCustomDirectEventTypeConstant(constantWriter, L"Collapsed");
+            WriteCustomDirectEventTypeConstant(constantWriter, L"Collapsing");
             WriteCustomDirectEventTypeConstant(constantWriter, L"Expanding");
         };
     }
