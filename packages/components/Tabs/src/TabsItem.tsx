@@ -4,11 +4,11 @@ import * as React from 'react';
 import { Button } from '@fluentui-react-native/button';
 import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps } from './TabsItem.types'; // TabsItemRenderData
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens } from '@fluentui-react-native/tokens';
+import { backgroundColorTokens, borderTokens, foregroundColorTokens } from '@fluentui-react-native/tokens';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings, tabsItemSelectActionLabel } from './TabsItem.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks'; //useOnPressWithFocus
+import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks'; //useOnPressWithFocus
 import { TabsContext } from './Tabs';
 
 export const TabsItem = compose<TabsItemType>({
@@ -43,11 +43,11 @@ export const TabsItem = compose<TabsItemType>({
     //const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
 
     /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
-    const pressable = useAsPressable({
-      ...rest,
-      // onPress: changeSelectionWithFocus,
-      onFocus: changeSelection,
-    });
+    // const pressable = useAsPressable({
+    //   ...rest,
+    //   // onPress: changeSelectionWithFocus,
+    //   onFocus: changeSelection,
+    // });
 
     // Used when creating accessibility properties in mergeSettings below
     const onAccessibilityAction = React.useCallback(
@@ -62,7 +62,7 @@ export const TabsItem = compose<TabsItemType>({
     );
 
     const state = {
-      ...pressable.state,
+      // ...pressable.state,
       selected: info.selectedKey === userProps.buttonKey,
       disabled: disabled || false,
     };
@@ -74,7 +74,7 @@ export const TabsItem = compose<TabsItemType>({
       root: {
         ...rest,
         ref: buttonRef,
-        ...pressable.props,
+        onFocus: changeSelection,
         accessibilityRole: 'tab',
         accessibilityLabel: ariaLabel ? ariaLabel : headerText,
         accessibilityState: { disabled: state.disabled, selected: state.selected },
@@ -101,7 +101,7 @@ export const TabsItem = compose<TabsItemType>({
     root: Button,
   },
   styles: {
-    root: [backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens],
+    root: [backgroundColorTokens, borderTokens, foregroundColorTokens],
   },
 });
 
