@@ -1,8 +1,0 @@
-{
-  "type": "patch",
-  "comment": "add new use-slot package, move framework to consume that package",
-  "packageName": "@fluentui-react-native/experimental-activity-indicator",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch",
-  "date": "2021-07-23T22:32:33.083Z"
-}

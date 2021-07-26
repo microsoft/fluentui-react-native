@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme",
   "entries": [
     {
+      "date": "Mon, 26 Jul 2021 20:41:04 GMT",
+      "tag": "@fluentui-react-native/theme_v0.5.10",
+      "version": "0.5.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add new use-slot package, move framework to consume that package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "ad02fbbe9eaa5fbe6ec6126ccb719a1280f108a6",
+            "package": "@fluentui-react-native/theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 24 Jul 2021 18:36:14 GMT",
       "tag": "@fluentui-react-native/theme_v0.5.9",
       "version": "0.5.9",

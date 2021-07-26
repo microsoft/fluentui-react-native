@@ -2645,9 +2645,9 @@
     "@types/react" "*"
 
 "@types/es6-collections@^0.5.29":
-  version "0.5.32"
-  resolved "https://registry.yarnpkg.com/@types/es6-collections/-/es6-collections-0.5.32.tgz#62edb3942849951b6025d42af9da97d7b837f31b"
-  integrity sha512-aOOGt8ivRTqSWDzrHoNorP/o/YXgVK0oA7SP3jke3W4zZDSFAbWhYWjPG0qnGq6B/QOsx76FnmC3bUFSvleOLA==
+  version "0.5.33"
+  resolved "https://registry.yarnpkg.com/@types/es6-collections/-/es6-collections-0.5.33.tgz#afc6f01173834146ff280283d50d8721a8992d79"
+  integrity sha512-3/8fPqVk5wBExaM+3iHqz1YcA1d4xTU0cw/iIM7AaROVvX1Tyc633Tn/YFAbNS4kb+DJycwat3sEJBmmhKtuvQ==
 
 "@types/es6-promise@0.0.32":
   version "0.0.32"
@@ -4861,9 +4861,9 @@ babel-plugin-jest-hoist@^24.9.0:
     "@types/babel__traverse" "^7.0.6"
 
 babel-plugin-module-resolver@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-module-resolver/-/babel-plugin-module-resolver-4.0.0.tgz#8f3a3d9d48287dc1d3b0d5595113adabd36a847f"
-  integrity sha512-3pdEq3PXALilSJ6dnC4wMWr0AZixHRM4utpdpBR9g5QG7B7JwWyukQv7a9hVxkbGFl+nQbrHDqqQOIBtTXTP/Q==
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-module-resolver/-/babel-plugin-module-resolver-4.1.0.tgz#22a4f32f7441727ec1fbf4967b863e1e3e9f33e2"
+  integrity sha512-MlX10UDheRr3lb3P0WcaIdtCSRlxdQsB1sBqL7W0raF070bGl1HQQq5K3T2vf2XAYie+ww+5AKC/WrkjRO2knA==
   dependencies:
     find-babel-config "^1.2.0"
     glob "^7.1.6"
