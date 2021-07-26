@@ -77,7 +77,7 @@
       "entryPath": "index.js"
     },
     "capabilities": [
-      "core-android",
+      "core",
       "react",
       "svg"
     ]
