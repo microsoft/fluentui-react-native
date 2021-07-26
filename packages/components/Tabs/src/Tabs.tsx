@@ -75,6 +75,9 @@ export const Tabs = compose<TabsType>({
       // @ts-ignore - TODO, fix typing error
       renderData.state.context.buttonKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
+          if (renderData.state.context.selectedKey == null) {
+            renderData.state.context.selectedKey = child.props.buttonKey;
+          }
           return child.props.buttonKey;
         }
       });
