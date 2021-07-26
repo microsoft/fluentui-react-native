@@ -121,10 +121,14 @@ export const MenuButton = compose<MenuButtonType>({
     const context = renderData.state!.context;
     const menuItems = renderData.slotProps!.contextualMenuItems?.menuItems || [];
 
+    const onPress = (event: any) => {
+      renderData.slotProps!.contextualMenu.onItemClick(event.nativeEvent.key);
+    };
+
     if (Platform.OS === 'macos') {
       return (
         <Slots.nativeComponent
-          onPress={renderData.slotProps!.contextualMenu.onItemClick}
+          onPress={onPress}
           menuItems={menuItems}
           content={renderData.slotProps!.button.content}
           disabled={renderData.slotProps!.button.disabled}

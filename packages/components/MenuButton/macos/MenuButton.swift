@@ -21,13 +21,13 @@ open class MenuButton: NSPopUpButton {
   
   open override var image: NSImage? {
     didSet {
-      updateMenu()
+      updateDropDownCell()
     }
   }
   
   open override var title: String {
     didSet {
-      updateMenu()
+      updateDropDownCell()
     }
   }
 
@@ -49,9 +49,6 @@ open class MenuButton: NSPopUpButton {
 		dropDownCell.usesItemFromMenu = false
 
 		select(nil) // Don't select any menu item by default
-    
-    target = self
-    action = #selector(sendCallback)
 	}
 
 	@available(*, unavailable)
@@ -69,62 +66,39 @@ open class MenuButton: NSPopUpButton {
 	// MARK: - Private Methods
 
 	private func updateMenu() {
-		guard let dropDownCell = cell as? NSPopUpButtonCell else {
-			preconditionFailure()
-		}
-    
     guard let menu = menu else {
       return
     }
+
+    // Insert an initial empty item into index 0, since index 0 is never displayed
+    let initialEmptyItem = NSMenuItem()
+    menu.insertItem(initialEmptyItem, at: 0)
     
-    for menuItem in menu.items {
+    for (index, menuItem) in menu.items.enumerated() {
+      menuItem.tag = index
       menuItem.target = self
       menuItem.action = #selector(sendCallback)
     }
-		// MenuButton needs a MenuItem set on it's cell to display the title and image properly
-		let dropdownCellItem = NSMenuItem()
-    dropdownCellItem.image = image
-    dropdownCellItem.title = title
-		dropDownCell.usesItemFromMenu = false
-		dropDownCell.menuItem = dropdownCellItem
-
-    //Insert an initial empty item into index 0, since index 0 is never displayed
-    if ((menu.item(withTag: -1)) == nil) {
-      let initialEmptyItem = NSMenuItem()
-      initialEmptyItem.tag = -1
-      initialEmptyItem.title = ""
-      menu.insertItem(initialEmptyItem, at: 0)
-    }
-
 	}
   
-  @objc private func sendCallback() {
+  private func updateDropDownCell() {
+    guard let dropDownCell = cell as? NSPopUpButtonCell else {
+      preconditionFailure()
+    }
+    
+    // MenuButton needs a MenuItem set on it's cell to display the title and image properly
+    let dropdownCellItem = NSMenuItem()
+    dropdownCellItem.image = image
+    dropdownCellItem.title = title
+    dropDownCell.usesItemFromMenu = false
+    dropDownCell.menuItem = dropdownCellItem
+  }
+  
+  @objc(sendCallback:)
+  private func sendCallback(sender: NSMenuItem) {
     NSLog("click!")
     if onPress != nil {
-      /// no data to send to JS
-      onPress!(nil)
+      onPress!(["key": sender.tag])
     }
   }
 }
-
-extension NSImage {
-	func image(with tintColor: NSColor) -> NSImage {
-		if self.isTemplate == false {
-			return self
-		}
-
-		let image = self.copy() as! NSImage
-		image.lockFocus()
-
-		tintColor.set()
-
-		let imageRect = NSRect(origin: .zero, size: image.size)
-		imageRect.fill(using: .sourceIn)
-
-		image.unlockFocus()
-		image.isTemplate = false
-
-		return image
-	}
-}
-

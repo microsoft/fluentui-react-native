@@ -62,14 +62,7 @@ RCT_CUSTOM_VIEW_PROPERTY(disabled, bool, NSPopUpButton)
 
 RCT_REMAP_VIEW_PROPERTY(content, title, NSString)
 
-//RCT_REMAP_VIEW_PROPERTY(imageSource, image, UIImage)
-
-RCT_CUSTOM_VIEW_PROPERTY(imageSource, image, NSPopUpButton)
-{
-  NSImage *image = [RCTConvert UIImage:json];
-  [image setSize:NSMakeSize(16, 16)];
-  [view setImage:image];
-}
+RCT_REMAP_VIEW_PROPERTY(imageSource, image, UIImage)
 
 RCT_REMAP_VIEW_PROPERTY(menuItems, menu, NSMenu)
 
