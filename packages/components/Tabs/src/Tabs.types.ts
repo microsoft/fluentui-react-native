@@ -34,7 +34,7 @@ export interface TabsState {
   context: ITabsContext;
 }
 
-export interface TabsProps {
+export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> {
   /*
    ** Descriptive label for the RadioGroup. This will be displayed as the title of the radio group to the user
    */

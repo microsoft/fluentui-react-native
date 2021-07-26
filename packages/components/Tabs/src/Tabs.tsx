@@ -26,7 +26,7 @@ export const Tabs = compose<TabsType>({
   displayName: tabsName,
 
   usePrepareProps: (userProps: TabsProps, useStyling: IUseComposeStyling<TabsType>) => {
-    const { label, ariaLabel, selectedKey, defaultSelectedKey, ...rest } = userProps;
+    const { label, ariaLabel, selectedKey, defaultSelectedKey, isCircularNavigation, ...rest } = userProps;
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
     const data = useSelectedKey(selectedKey || defaultSelectedKey || null, userProps.onTabsClick);
@@ -58,7 +58,7 @@ export const Tabs = compose<TabsType>({
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
       root: { rest, ...ariaRoles },
       label: { children: label },
-      container: { isCircularNavigation: true, defaultTabbableElement: selectedButtonRef },
+      container: { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedButtonRef },
     });
 
     return { slotProps, state };
