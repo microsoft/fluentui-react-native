@@ -31,6 +31,20 @@ export interface IRadioButtonProps extends IPressableProps {
    */
   ariaLabel?: string;
 
+  /*
+   ** Defines the current radio button's position in the radio group for accessibility purposes. It's recommended to set this value
+   ** if radio buttons are not direct children of radio group. This value is auto-generated if radio buttons are direct children of
+   ** radio group.
+   */
+  ariaPosInSet?: number;
+
+  /*
+   ** Defines the number of radio buttons in the group for accessibility purposes.It's recommended to set this value if radio
+   ** buttons are not direct children of radio group. This value is auto-generated if radio buttons are direct children of
+   ** radio group.
+   */
+  ariaSetSize?: number;
+
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
