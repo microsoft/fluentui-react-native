@@ -1,7 +1,7 @@
 import { ThemeColorDefinition } from './Color.types';
 import { OfficePalette } from './palette.types';
 import { Typography, PartialTypography } from './Typography.types';
-import { ColorValue } from 'react-native';
+import { ColorValue, ViewStyle } from 'react-native';
 
 type TwoLevelPartial<T> = {
   [K in keyof T]?: Partial<T[K]>;
@@ -20,6 +20,24 @@ export interface Effects {
   borderRadiusMedium: number;
   borderRadiusLarge: number;
   borderRadiusXLarge: number;
+
+  shadow2Ambient: ViewStyle;
+  shadow2Key: ViewStyle;
+
+  shadow4Ambient: ViewStyle;
+  shadow4Key: ViewStyle;
+
+  shadow8Ambient: ViewStyle;
+  shadow8Key: ViewStyle;
+
+  shadow16Ambient: ViewStyle;
+  shadow16Key: ViewStyle;
+
+  shadow28Ambient: ViewStyle;
+  shadow28Key: ViewStyle;
+
+  shadow64Ambient: ViewStyle;
+  shadow64Key: ViewStyle;
 }
 
 /**

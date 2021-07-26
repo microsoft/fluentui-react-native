@@ -89,19 +89,68 @@ function _defaultTypography(): Typography {
 }
 
 function _defaultEffects(): Effects {
-  return Platform.OS === 'android' || Platform.OS === 'ios'
-    ? {
-        borderRadiusSmall: 2,
-        borderRadiusMedium: 4,
-        borderRadiusLarge: 8,
-        borderRadiusXLarge: 12,
-      }
-    : {
-        borderRadiusSmall: 2,
-        borderRadiusMedium: 4,
-        borderRadiusLarge: 6,
-        borderRadiusXLarge: 8,
-      };
+  const effects =
+    Platform.OS === 'android' || Platform.OS === 'ios'
+      ? {
+          borderRadiusSmall: 2,
+          borderRadiusMedium: 4,
+          borderRadiusLarge: 8,
+          borderRadiusXLarge: 12,
+        }
+      : {
+          borderRadiusSmall: 2,
+          borderRadiusMedium: 4,
+          borderRadiusLarge: 6,
+          borderRadiusXLarge: 8,
+        };
+
+  const noOffset = { width: 0, height: 0 };
+  const nearShadowAmbient =
+    Platform.OS === 'ios' ? { shadowOffset: noOffset, shadowRadius: 1 } : { shadowOffset: noOffset, shadowRadius: 2 };
+  const farShadowAmbient =
+    Platform.OS === 'ios' ? { shadowOffset: noOffset, shadowRadius: 4 } : { shadowOffset: noOffset, shadowRadius: 8 };
+  Object.assign(
+    effects,
+    ((Platform.OS === 'ios' || Platform.OS === 'windows' || Platform.OS === ('win32' as any) || Platform.OS === 'web') && {
+      shadow2Ambient: nearShadowAmbient,
+      shadow2Key: { shadowOffset: { width: 0, height: 1 }, shadowRadius: Platform.OS === 'ios' ? 1 : 2 },
+
+      shadow4Ambient: nearShadowAmbient,
+      shadow4Key: { shadowOffset: { width: 0, height: 2 }, shadowRadius: Platform.OS === 'ios' ? 2 : 4 },
+
+      shadow8Ambient: nearShadowAmbient,
+      shadow8Key: { shadowOffset: { width: 0, height: 4 }, shadowRadius: Platform.OS === 'ios' ? 4 : 8 },
+
+      shadow16Ambient: nearShadowAmbient,
+      shadow16Key: { shadowOffset: { width: 0, height: 8 }, shadowRadius: Platform.OS === 'ios' ? 8 : 16 },
+
+      shadow28Ambient: farShadowAmbient,
+      shadow28Key: { shadowOffset: { width: 0, height: 14 }, shadowRadius: Platform.OS === 'ios' ? 14 : 28 },
+
+      shadow64Ambient: farShadowAmbient,
+      shadow64Key: { shadowOffset: { width: 0, height: 32 }, shadowRadius: Platform.OS === 'ios' ? 32 : 64 },
+    }) ||
+      ((Platform.OS === 'android' || Platform.OS === 'macos') && {
+        shadow2Ambient: undefined,
+        shadow2Key: undefined,
+
+        shadow4Ambient: undefined,
+        shadow4Key: undefined,
+
+        shadow8Ambient: undefined,
+        shadow8Key: undefined,
+
+        shadow16Ambient: undefined,
+        shadow16Key: undefined,
+
+        shadow28Ambient: undefined,
+        shadow28Key: undefined,
+
+        shadow64Ambient: undefined,
+        shadow64Key: undefined,
+      }),
+  );
+  return effects;
 }
 
 export function defaultSpacing(): Spacing {
