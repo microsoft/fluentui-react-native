@@ -1,8 +1,56 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 21 Jul 2021 21:46:12 GMT and should not be manually modified.
+This log was last generated on Sun, 25 Jul 2021 16:30:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.33.1
+
+Sun, 25 Jul 2021 16:30:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.17.15 (email not defined)
+
+## 0.33.0
+
+Sat, 24 Jul 2021 00:28:25 GMT
+
+### Minor changes
+
+- Add test for alias tokens (email not defined)
+
+## 0.32.4
+
+Fri, 23 Jul 2021 17:28:27 GMT
+
+### Patches
+
+- Fix @types/react to be less than 16.14.0 since our react version is less than 16.14 (email not defined)
+
+## 0.32.3
+
+Fri, 23 Jul 2021 08:20:11 GMT
+
+### Patches
+
+- Added supporting tokens for MenuButton (v.kozlova13@gmail.com)
+
+## 0.32.2
+
+Thu, 22 Jul 2021 20:55:49 GMT
+
+### Patches
+
+- Moved react-native-svg to peer dependencies (4123478+tido64@users.noreply.github.com)
+
+## 0.32.1
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
 
 ## 0.32.0
 

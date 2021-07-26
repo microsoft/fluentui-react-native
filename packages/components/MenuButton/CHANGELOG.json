@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Sun, 25 Jul 2021 16:30:17 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.2.13",
+      "version": "0.2.13",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.17.15",
+            "author": "email not defined",
+            "commit": "6e298f4bfda7d7cae2c1f52c942bae20ab29b641",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 24 Jul 2021 18:36:14 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.2.12",
+      "version": "0.2.12",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.17.14",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4687ff096fd25b07e0a4e782616b6b2ec0fa2d9f",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 24 Jul 2021 17:42:51 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.2.12",
+      "version": "0.2.12",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.17.14",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4687ff096fd25b07e0a4e782616b6b2ec0fa2d9f",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 23 Jul 2021 08:20:11 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.2.10",
+      "version": "0.2.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added support of tokens to the MenuButton",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "28c44ee5b22f6de082348582c11aff86ff3a4c68",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 16 Jul 2021 18:25:45 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.2.6",
       "version": "0.2.6",

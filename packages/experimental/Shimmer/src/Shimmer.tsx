@@ -5,6 +5,7 @@ import { shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import { Animated } from 'react-native';
 import { stylingSettings } from './Shimmer.styling';
+import { assertNever } from 'assert-never';
 
 export function useShimmerAnimation(memoData: any) {
   const startValue = useRef(new Animated.Value(0)).current;
@@ -70,20 +71,24 @@ export const Shimmer = compose<ShimmerType>({
       if (elements) {
         for (let i = 0; i < elements.length; i++) {
           const element = elements[i];
-          if (element.type == 'rect') {
-            rows.push(
-              <Rect
-                key={i}
-                width={element.width}
-                height={element.height}
-                x={element.xPos}
-                y={element.yPos}
-                rx={element.borderRadius}
-                ry={element.borderRadius}
-              />,
-            );
-          } else if (element.type == 'circle') {
-            rows.push(<Circle key={i} r={element.height / 2} cx={element.xPos} cy={element.yPos} />);
+          if (element.type) {
+            if (element.type == 'rect') {
+              rows.push(
+                <Rect
+                  key={i}
+                  width={element.width}
+                  height={element.height}
+                  x={element.xPos}
+                  y={element.yPos}
+                  rx={element.borderRadius}
+                  ry={element.borderRadius}
+                />,
+              );
+            } else if (element.type == 'circle') {
+              rows.push(<Circle key={i} r={element.height / 2} cx={element.xPos} cy={element.yPos} />);
+            } else {
+              assertNever(element.type);
+            }
           }
         }
       }

@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Sun, 25 Jul 2021 16:30:17 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.9.11",
+      "version": "0.9.11",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/pressable to v0.6.17",
+            "author": "email not defined",
+            "commit": "6e298f4bfda7d7cae2c1f52c942bae20ab29b641",
+            "package": "@fluentui-react-native/contextual-menu"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 24 Jul 2021 18:36:14 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.9.10",
+      "version": "0.9.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.7.12",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4687ff096fd25b07e0a4e782616b6b2ec0fa2d9f",
+            "package": "@fluentui-react-native/contextual-menu"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 24 Jul 2021 17:42:51 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.9.10",
+      "version": "0.9.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.7.12",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4687ff096fd25b07e0a4e782616b6b2ec0fa2d9f",
+            "package": "@fluentui-react-native/contextual-menu"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 21 Jul 2021 22:55:40 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.9.7",
+      "version": "0.9.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "expose use-tokens in framework package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "af44164cf47abb856e567e9976043aafe414ade6",
+            "package": "@fluentui-react-native/contextual-menu"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Jul 2021 21:46:12 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.9.6",
       "version": "0.9.6",

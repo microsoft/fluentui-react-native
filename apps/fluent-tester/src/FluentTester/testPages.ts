@@ -20,6 +20,7 @@ import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
 import { ActivityIndicatorTest, HOMEPAGE_ACTIVITYINDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
 import { MenuButtonTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/MenuButton';
+import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 
 export const tests: TestDescription[] = [
   {
@@ -125,6 +126,11 @@ export const tests: TestDescription[] = [
   {
     name: 'MenuButton Test',
     component: MenuButtonTest,
-    testPage: HOMEPAGE_MENU_BUTTON
+    testPage: HOMEPAGE_MENU_BUTTON,
+  },
+  {
+    name: 'Tokens Test',
+    component: TokenTest,
+    testPage: HOMEPAGE_TOKEN_BUTTON,
   },
 ];

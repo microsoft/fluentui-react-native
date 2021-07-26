@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/experimental-button
 
-This log was last generated on Fri, 25 Jun 2021 19:39:16 GMT and should not be manually modified.
+This log was last generated on Sun, 25 Jul 2021 16:30:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.8
+
+Sun, 25 Jul 2021 16:30:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.16 (email not defined)
+
+## 0.7.6
+
+Fri, 23 Jul 2021 17:28:27 GMT
+
+### Patches
+
+- Build fix (email not defined)
+
+## 0.7.4
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
 
 ## 0.7.0
 
