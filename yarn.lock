@@ -2371,10 +2371,10 @@
     cosmiconfig "^7.0.0"
     semver "^7.0.0"
 
-"@rnx-kit/config@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.3.1.tgz#4d2715a5c9b171b81c5ec5dbff6d21d7406d225c"
-  integrity sha512-3YoOa7S5hoZEKBRu7+DFe8laatNNrUybOX8WpS1ikziedpNzioZPbLY4cayHQf5HIg7vLg7x/+FIWEEz0nblSw==
+"@rnx-kit/config@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.3.2.tgz#7beb4123c050c184e23bdd0d16043df553bdc7f9"
+  integrity sha512-z8tOLR9YOkWSDw6AogkJdzMvhNFlLZ5AVwbMArjMJ9kJOCROhduLWzkwGGnUSEUq529FSq7gSMt6VKSha4sVCw==
   dependencies:
     cosmiconfig "^7.0.0"
     semver "^7.0.0"
@@ -2387,11 +2387,11 @@
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.5.10", "@rnx-kit/dep-check@^1.5.9":
-  version "1.5.15"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.5.15.tgz#22578c731249a1903118222a3810a8051e1f338d"
-  integrity sha512-6k3+YwP8I0q3rENICFcQQDsbmNHLmjg7i1Th/UcNX1NySwI1mLhErwSoz1BnsUDp33hbuP2fmvqrppmsHLOtfA==
+  version "1.5.16"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.5.16.tgz#926a0685c877288079e774fb10d268c45322bf1e"
+  integrity sha512-nOuy0xanEVtzuL+cCkMfCXE+NfSyktv8WtYZ/LE+XWbZoi115eq8T32NinVRS/9BWjX9Q3MjJSAPoY4333gaGg==
   dependencies:
-    "@rnx-kit/config" "^0.3.1"
+    "@rnx-kit/config" "^0.3.2"
     "@rnx-kit/console" "^1.0.0"
     chalk "^4.1.0"
     find-up "^5.0.0"
@@ -14404,10 +14404,10 @@ react-native-svg@^12.1.1:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
 
-react-native-test-app@^0.6.3:
-  version "0.6.12"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.6.12.tgz#d6e53e6280426b64bf65c013f631ae0009ba9634"
-  integrity sha512-XTjjcBa1noVR89dITWqP7A8DE6qwT4+ABMsWAi1cVDU2RH4rwsaKtrrcoiF1OL7szP/5jdzd9f32NiQRFa2Aaw==
+react-native-test-app@^0.7.0:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.7.1.tgz#b645500b4d028d284e47ce67f24f374f66681a8e"
+  integrity sha512-8atrCOP3NGPxZdE291PkBe+CXIX+NLFCERPXeGBMDg/9uDtgjwqKZAHElX2zl92c628FlVzQwImiSab3fyOJ0g==
   dependencies:
     chalk "^4.1.0"
     prompts "^2.4.0"
@@ -17596,11 +17596,13 @@ worker-farm@^1.7.0:
   dependencies:
     errno "~0.1.7"
 
-workspace-tools@^0.15.0:
-  version "0.15.1"
-  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.15.1.tgz#895d4defe1417d7f4948b6afe9d36acf3a6cd64e"
-  integrity sha512-Thp+DVHkzjMF3JWWEc6VES04FhkE6QqZL7Dyknh1bJowjbAntXp6Op8/JuH0MYrww4AgQnuvB1O5waVrmsHtBg==
+workspace-tools@^0.12.3:
+  version "0.12.3"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.12.3.tgz#71da0c7acdd65576cb7f666aca132abdbe5c3eb9"
+  integrity sha512-Toq4VI4GJw5naWxgXNU5/mmuu6PeiCRRZDkVOoeJacqQ6r0zRGWVBxE4YXQp2SADTKdC1ATwqsE+6bcJTZUmpA==
   dependencies:
+    "@pnpm/lockfile-file" "^3.0.7"
+    "@pnpm/logger" "^3.2.2"
     "@yarnpkg/lockfile" "^1.1.0"
     find-up "^4.1.0"
     find-yarn-workspace-root "^1.2.1"
@@ -17611,13 +17613,11 @@ workspace-tools@^0.15.0:
     multimatch "^4.0.0"
     read-yaml-file "^2.0.0"
 
-workspace-tools@^0.12.3:
-  version "0.12.3"
-  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.12.3.tgz#71da0c7acdd65576cb7f666aca132abdbe5c3eb9"
-  integrity sha512-Toq4VI4GJw5naWxgXNU5/mmuu6PeiCRRZDkVOoeJacqQ6r0zRGWVBxE4YXQp2SADTKdC1ATwqsE+6bcJTZUmpA==
+workspace-tools@^0.15.0:
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.15.1.tgz#895d4defe1417d7f4948b6afe9d36acf3a6cd64e"
+  integrity sha512-Thp+DVHkzjMF3JWWEc6VES04FhkE6QqZL7Dyknh1bJowjbAntXp6Op8/JuH0MYrww4AgQnuvB1O5waVrmsHtBg==
   dependencies:
-    "@pnpm/lockfile-file" "^3.0.7"
-    "@pnpm/logger" "^3.2.2"
     "@yarnpkg/lockfile" "^1.1.0"
     find-up "^4.1.0"
     find-yarn-workspace-root "^1.2.1"

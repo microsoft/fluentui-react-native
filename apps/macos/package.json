@@ -39,7 +39,7 @@
     "metro-config": "^0.59.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-native-svg-transformer": "^0.14.3",
-    "react-native-test-app": "^0.6.3",
+    "react-native-test-app": "^0.7.0",
     "react-test-renderer": "~16.13.1"
   },
   "jest": {
@@ -55,7 +55,7 @@
       "entryPath": "index.js"
     },
     "capabilities": [
-      "core-ios",
+      "core",
       "core-macos",
       "react",
       "test-app"
