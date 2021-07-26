@@ -1,7 +1,11 @@
 {
-  "name": "@fluentui-react-native/adapters",
-  "version": "0.6.5",
-  "description": "Adapters for working with react-native types",
+  "name": "@fluentui-react-native/use-slot",
+  "version": "0.1.1",
+  "description": "Hook function to use a component as a pluggable slot",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/ui-fabric-react-native"
+  },
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -11,10 +15,14 @@
   },
   "scripts": {
     "build": "fluentui-scripts build",
-    "just": "fluentui-scripts",
+    "bundle": "fluentui-scripts bundle",
     "clean": "fluentui-scripts clean",
+    "code-style": "fluentui-scripts code-style",
     "depcheck": "fluentui-scripts depcheck",
+    "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
+    "start": "fluentui-scripts dev",
+    "start-test": "fluentui-scripts jest-watch",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
     "verify-api": "fluentui-scripts verify-api-extractor",
@@ -22,19 +30,19 @@
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
-  "dependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@fluentui-react-native/merge-props": ">=0.3.2 <1.0.0"
+  },
   "devDependencies": {
-    "@types/jest": "^25.1.4",
-    "@types/react-native": "^0.63.0",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1"
+    "react": "16.13.1",
+    "react-native": "^0.63.4"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": ">=0.63.7",
-    "react-native": ">=0.63.4",
-    "react-native-web": ">=0.12.3",
-    "react-native-windows": ">=0.63.0"
-  },
-  "author": "",
-  "license": "MIT"
+    "react": ">=16.13.1",
+    "react-native": ">=0.63.4"
+  }
 }
