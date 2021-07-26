@@ -4861,9 +4861,9 @@ babel-plugin-jest-hoist@^24.9.0:
     "@types/babel__traverse" "^7.0.6"
 
 babel-plugin-module-resolver@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-module-resolver/-/babel-plugin-module-resolver-4.0.0.tgz#8f3a3d9d48287dc1d3b0d5595113adabd36a847f"
-  integrity sha512-3pdEq3PXALilSJ6dnC4wMWr0AZixHRM4utpdpBR9g5QG7B7JwWyukQv7a9hVxkbGFl+nQbrHDqqQOIBtTXTP/Q==
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-module-resolver/-/babel-plugin-module-resolver-4.1.0.tgz#22a4f32f7441727ec1fbf4967b863e1e3e9f33e2"
+  integrity sha512-MlX10UDheRr3lb3P0WcaIdtCSRlxdQsB1sBqL7W0raF070bGl1HQQq5K3T2vf2XAYie+ww+5AKC/WrkjRO2knA==
   dependencies:
     find-babel-config "^1.2.0"
     glob "^7.1.6"
@@ -17596,11 +17596,13 @@ worker-farm@^1.7.0:
   dependencies:
     errno "~0.1.7"
 
-workspace-tools@^0.15.0:
-  version "0.15.1"
-  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.15.1.tgz#895d4defe1417d7f4948b6afe9d36acf3a6cd64e"
-  integrity sha512-Thp+DVHkzjMF3JWWEc6VES04FhkE6QqZL7Dyknh1bJowjbAntXp6Op8/JuH0MYrww4AgQnuvB1O5waVrmsHtBg==
+workspace-tools@^0.12.3:
+  version "0.12.3"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.12.3.tgz#71da0c7acdd65576cb7f666aca132abdbe5c3eb9"
+  integrity sha512-Toq4VI4GJw5naWxgXNU5/mmuu6PeiCRRZDkVOoeJacqQ6r0zRGWVBxE4YXQp2SADTKdC1ATwqsE+6bcJTZUmpA==
   dependencies:
+    "@pnpm/lockfile-file" "^3.0.7"
+    "@pnpm/logger" "^3.2.2"
     "@yarnpkg/lockfile" "^1.1.0"
     find-up "^4.1.0"
     find-yarn-workspace-root "^1.2.1"
@@ -17611,13 +17613,11 @@ workspace-tools@^0.15.0:
     multimatch "^4.0.0"
     read-yaml-file "^2.0.0"
 
-workspace-tools@^0.12.3:
-  version "0.12.3"
-  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.12.3.tgz#71da0c7acdd65576cb7f666aca132abdbe5c3eb9"
-  integrity sha512-Toq4VI4GJw5naWxgXNU5/mmuu6PeiCRRZDkVOoeJacqQ6r0zRGWVBxE4YXQp2SADTKdC1ATwqsE+6bcJTZUmpA==
+workspace-tools@^0.15.0:
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.15.1.tgz#895d4defe1417d7f4948b6afe9d36acf3a6cd64e"
+  integrity sha512-Thp+DVHkzjMF3JWWEc6VES04FhkE6QqZL7Dyknh1bJowjbAntXp6Op8/JuH0MYrww4AgQnuvB1O5waVrmsHtBg==
   dependencies:
-    "@pnpm/lockfile-file" "^3.0.7"
-    "@pnpm/logger" "^3.2.2"
     "@yarnpkg/lockfile" "^1.1.0"
     find-up "^4.1.0"
     find-yarn-workspace-root "^1.2.1"
