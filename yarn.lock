@@ -2645,9 +2645,9 @@
     "@types/react" "*"
 
 "@types/es6-collections@^0.5.29":
-  version "0.5.32"
-  resolved "https://registry.yarnpkg.com/@types/es6-collections/-/es6-collections-0.5.32.tgz#62edb3942849951b6025d42af9da97d7b837f31b"
-  integrity sha512-aOOGt8ivRTqSWDzrHoNorP/o/YXgVK0oA7SP3jke3W4zZDSFAbWhYWjPG0qnGq6B/QOsx76FnmC3bUFSvleOLA==
+  version "0.5.33"
+  resolved "https://registry.yarnpkg.com/@types/es6-collections/-/es6-collections-0.5.33.tgz#afc6f01173834146ff280283d50d8721a8992d79"
+  integrity sha512-3/8fPqVk5wBExaM+3iHqz1YcA1d4xTU0cw/iIM7AaROVvX1Tyc633Tn/YFAbNS4kb+DJycwat3sEJBmmhKtuvQ==
 
 "@types/es6-promise@0.0.32":
   version "0.0.32"
