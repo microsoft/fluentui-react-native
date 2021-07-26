@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Alert, View } from 'react-native';
-import { Tabs, TabsItem, Button, Text } from '@fluentui/react-native';
+import { Tabs, TabsItem, Text, Separator } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -19,20 +19,13 @@ const tabs: React.FunctionComponent<{}> = () => {
   };
 
   return (
-    <View>
-      <View style={stackStyle}>
-        <Tabs label="Tabs" defaultSelectedKey="B" onTabsClick={onTabsClick} isCircularNavigation={true}>
-          <TabsItem icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }} headerText="Option A!" buttonKey="A" />
-          <TabsItem headerText="Option B" buttonKey="B" />
-          <TabsItem headerText="Option C" buttonKey="C" disabled={true} />
-          <TabsItem headerText="Option D" buttonKey="D" />
-        </Tabs>
-      </View>
-
-      <View>
-        <Text>Buttton to limit Focus Zone</Text>
-        <Button content="Outside Tabs" />
-      </View>
+    <View style={stackStyle}>
+      <Tabs label="Tabs" defaultSelectedKey="B" onTabsClick={onTabsClick} isCircularNavigation={true}>
+        <TabsItem icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }} headerText="Option A!" buttonKey="A" />
+        <TabsItem headerText="Option B" buttonKey="B" />
+        <TabsItem headerText="Option C" buttonKey="C" disabled={true} />
+        <TabsItem headerText="Option D" buttonKey="D" />
+      </Tabs>
     </View>
   );
 };
@@ -48,18 +41,17 @@ const tabChangingViews: React.FunctionComponent<{}> = () => {
   };
 
   return (
-    <View>
-      <View style={stackStyle}>
-        <Tabs label="Tabs" onTabsClick={changeView}>
-          <TabsItem headerText="Home" buttonKey="home" />
-          <TabsItem headerText="File" buttonKey="file" disabled={true} />
-          <TabsItem headerText="Settings" buttonKey="settings" />
-        </Tabs>
-        <View>
-          {selectedKey == 'home' && <Text>This is home</Text>}
-          {selectedKey == 'file' && <Text>This is file</Text>}
-          {selectedKey == 'settings' && <Text>This is settings</Text>}
-        </View>
+    <View style={stackStyle}>
+      <Tabs label="Tabs" onTabsClick={changeView}>
+        <TabsItem headerText="Home" buttonKey="home" />
+        <TabsItem headerText="File" buttonKey="file" disabled={true} />
+        <TabsItem headerText="Settings" buttonKey="settings" />
+      </Tabs>
+      <Separator />
+      <View>
+        {selectedKey == 'home' && <Text>This is home</Text>}
+        {selectedKey == 'file' && <Text>This is file</Text>}
+        {selectedKey == 'settings' && <Text>This is settings</Text>}
       </View>
     </View>
   );
