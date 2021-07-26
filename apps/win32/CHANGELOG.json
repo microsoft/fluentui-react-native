@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Mon, 26 Jul 2021 20:41:04 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.11.7",
+      "version": "0.11.7",
+      "comments": {
+        "none": [
+          {
+            "comment": "Use `core` capability instead of `core-android` to avoid confusion",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "0a810b08391d739f247b5b5e5094c460ebb2cb31",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "add new use-slot package, move framework to consume that package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "ad02fbbe9eaa5fbe6ec6126ccb719a1280f108a6",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sun, 25 Jul 2021 16:30:17 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.11.6",
       "version": "0.11.6",
