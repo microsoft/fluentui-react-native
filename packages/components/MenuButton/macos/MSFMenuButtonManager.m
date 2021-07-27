@@ -18,7 +18,9 @@
 {
   NSMenuItem *menuItem = [[NSMenuItem alloc] init];
   [menuItem setTitle:[RCTConvert NSString:json[@"text"]]];
-  [menuItem setEnabled:![RCTConvert BOOL:json[@"disabled"]]];  
+  [menuItem setEnabled:![RCTConvert BOOL:json[@"disabled"]]];
+  [menuItem setToolTip:[RCTConvert NSString:json[@"title"]]];
+  [menuItem setIdentifier:[RCTConvert NSString:json[@"itemKey"]]];
   return menuItem;
 }
 
@@ -26,11 +28,11 @@
 {
   NSMenu *menu = [[NSMenu alloc] init];
   [menu setAutoenablesItems:NO];
-  
+
   NSArray *menuItems = [RCTConvert NSArray:json];
   for (NSDictionary *menuItemJson in menuItems) {
     NSMenuItem *menuItem = [RCTConvert menuItem:menuItemJson];
-    
+
     if ([menuItemJson containsKey:@"hasSubmenu"])
     {
       bool hasSubmenu = [RCTConvert BOOL:menuItemJson[@"hasSubmenu"]];
@@ -39,11 +41,11 @@
         [menu setSubmenu:submenu forItem:menuItem];
       }
     }
-    
+
     [menu addItem:menuItem];
 
   }
-  
+
   return menu;
 }
 

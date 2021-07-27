@@ -109,7 +109,7 @@ export const MenuButton = compose<MenuButtonType>({
 
     return { slotProps, state };
   },
-  slots: Platform.OS === 'macos' ? slotsMacOS : slotsWin32,
+  slots: slotsMacOS,
   styles: {
     contextualMenu: [backgroundColorTokens, borderTokens],
     button: [backgroundColorTokens, borderTokens],
@@ -118,55 +118,25 @@ export const MenuButton = compose<MenuButtonType>({
     if (!(renderData.state && renderData.slotProps)) {
       return null;
     }
-    const context = renderData.state!.context;
     const menuItems = renderData.slotProps!.contextualMenuItems?.menuItems || [];
 
     const onPress = (event: any) => {
-      renderData.slotProps!.contextualMenu.onItemClick(event.nativeEvent.key);
+      if (renderData.slotProps!.contextualMenu.onItemClick != null) {
+        renderData.slotProps!.contextualMenu.onItemClick(event.nativeEvent.key);
+      }
     };
-
-    if (Platform.OS === 'macos') {
-      return (
-        <Slots.nativeComponent
-          onPress={onPress}
-          menuItems={menuItems}
-          content={renderData.slotProps!.button.content}
-          disabled={renderData.slotProps!.button.disabled}
-          imageSource={{
-            uri:
-              'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
-          }}
-        />
-      );
-    } else {
-      return (
-        <Slots.root>
-          <Slots.button />
-          {context.showContextualMenu && (
-            <Slots.contextualMenu>
-              {menuItems.map((menuItem) => {
-                const { hasSubmenu, submenuProps, showSubmenu, componentRef, submenuItems, ...items } = menuItem;
-
-                return hasSubmenu ? (
-                  <Slots.contextualMenuItems>
-                    <SubmenuItem componentRef={componentRef} {...items} />
-                    {showSubmenu && (
-                      <Submenu target={componentRef} {...submenuProps}>
-                        {submenuItems?.map((submenuItem) => (
-                          <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />
-                        ))}
-                      </Submenu>
-                    )}
-                  </Slots.contextualMenuItems>
-                ) : (
-                  <ContextualMenuItem key={items.itemKey} {...items} />
-                );
-              })}
-            </Slots.contextualMenu>
-          )}
-        </Slots.root>
-      );
-    }
+    return (
+      <Slots.nativeComponent
+        onPress={onPress}
+        menuItems={menuItems}
+        content={renderData.slotProps!.button.content}
+        disabled={renderData.slotProps!.button.disabled}
+        imageSource={{
+          uri:
+            'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
+        }}
+      />
+    );
   },
 });
 

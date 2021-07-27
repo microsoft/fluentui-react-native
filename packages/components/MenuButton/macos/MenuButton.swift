@@ -5,9 +5,6 @@
 
 import AppKit
 
-// MARK: - Button
-
-/// A fluent styled button, with hover effects and a corner radius.
 @objc(MSFMenuButton)
 open class MenuButton: NSPopUpButton {
   
@@ -60,9 +57,6 @@ open class MenuButton: NSPopUpButton {
 		self.init(frame: .zero, pullsDown: true)
 	}
 
-	// MARK: - Public Properties
-
-
 	// MARK: - Private Methods
 
 	private func updateMenu() {
@@ -96,9 +90,11 @@ open class MenuButton: NSPopUpButton {
   
   @objc(sendCallback:)
   private func sendCallback(sender: NSMenuItem) {
-    NSLog("click!")
     if onPress != nil {
-      onPress!(["key": sender.tag])
+      guard let identifier = sender.identifier else {
+        preconditionFailure("itemKey not set on Menu Item")
+      }
+      onPress!(["key": identifier])
     }
   }
 }

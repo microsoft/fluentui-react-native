@@ -34,8 +34,14 @@ export type NativeComponentProps = MenuButtonProps & {
   onPress?: (key: string) => void;
 };
 
-export type MenuButtonSlotProps = {
+export type MenuButtonSlotPropsMacOS = {
   nativeComponent?: NativeComponentProps; // Slot that represents the native component on macOS, rather than using the other slots.
+  contextualMenu: React.PropsWithRef<ContextualMenuProps>;
+  contextualMenuItems: Pick<MenuButtonProps, 'menuItems'>;
+  contextualMenuItem: MenuButtonItemProps;
+};
+
+export type MenuButtonSlotProps = {
   root: MenuButtonProps;
   button: IButtonProps & MenuButtonTokens;
   contextualMenu: React.PropsWithRef<ContextualMenuProps>;
@@ -48,6 +54,13 @@ export type MenuButtonRenderData = IRenderData<MenuButtonSlotProps, MenuButtonSt
 export interface MenuButtonType {
   props: MenuButtonProps;
   slotProps: MenuButtonSlotProps;
+  state: MenuButtonState;
+  tokens: MenuButtonTokens;
+}
+
+export interface MenuButtonTypeMacOS {
+  props: MenuButtonProps;
+  slotProps: MenuButtonSlotPropsMacOS;
   state: MenuButtonState;
   tokens: MenuButtonTokens;
 }
