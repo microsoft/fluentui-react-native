@@ -34,7 +34,7 @@ const getThemedDropdownStyles = themedStyleSheet((t: Theme) => {
 
 const PickerLabel = Text.customize({ variant: 'subheaderSemibold' });
 
-export const ThemePickers: React.FunctionComponent<{}> = () => {
+export const ThemePickers: React.FunctionComponent = () => {
   const onBrandChange = React.useCallback((newBrand: string) => {
     testerTheme.brand = newBrand as OfficeBrand;
   }, []);

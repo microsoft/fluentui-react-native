@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { IComposeOptions, IComposeReturnType, IExtractStatics, IExtractTokens, IDefineComposeSettings } from './compose.types';
 import {
   composable,

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { IProcessTheme, IThemeEventListener, IThemeRegistry, IResolveTheme } from './Registry.types';
 
 /**

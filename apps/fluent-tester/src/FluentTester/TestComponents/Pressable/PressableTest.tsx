@@ -68,7 +68,7 @@ const FocusComponent: React.FunctionComponent<ViewProps> = () => {
 
   return (
     <Stack focusable={false}>
-      <View focusable={true} {...(focusProps as any)} style={focusState.focused ? styles.focused : styles.notfocused} />
+      <View focusable={true} {...focusProps as any} style={focusState.focused ? styles.focused : styles.notfocused} />
     </Stack>
   );
 };
@@ -92,7 +92,7 @@ const PressComponent: React.FunctionComponent<ViewProps> = (props: ViewProps) =>
   );
 };
 
-const pressable: React.FunctionComponent<{}> = () => {
+const pressable: React.FunctionComponent = () => {
   const [hoverProps, hoverState] = useHoverState({});
 
   return (
@@ -103,7 +103,7 @@ const pressable: React.FunctionComponent<{}> = () => {
       </Pressable>
       <Square color="green" />
       <Stack>
-        <View {...(hoverProps as any)} style={hoverState.hovered ? styles.dottedBorder : styles.solidBorder}>
+        <View {...hoverProps as any} style={hoverState.hovered ? styles.dottedBorder : styles.solidBorder}>
           <Text>{hoverState.hovered ? 'hovered' : 'not hovered'}</Text>
         </View>
       </Stack>
@@ -130,7 +130,7 @@ const pressableSections: TestSection[] = [
   },
 ];
 
-export const PressableTest: React.FunctionComponent<{}> = () => {
+export const PressableTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',
@@ -141,5 +141,5 @@ export const PressableTest: React.FunctionComponent<{}> = () => {
 
   const description = 'No description.';
 
-  return <Test name="Pressable Test" description={description} sections={pressableSections} status={status}></Test>;
+  return <Test name="Pressable Test" description={description} sections={pressableSections} status={status} />;
 };
