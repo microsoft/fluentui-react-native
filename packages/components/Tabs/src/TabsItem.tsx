@@ -134,6 +134,7 @@ export const TabsItem = compose<TabsItemType>({
           {info.headerText && <Slots.content />}
           {children}
         </Slots.stack>
+        {info.selected && <Slots.indicator />}
       </Slots.root>
     );
   },
@@ -144,12 +145,14 @@ export const TabsItem = compose<TabsItemType>({
     stack: { slotType: View, filter: filterViewProps },
     icon: { slotType: Icon as React.ComponentType<object> },
     content: Text,
+    indicator: View,
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
     stack: [],
     icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
     content: [textTokens, foregroundColorTokens],
+    indicator: [backgroundColorTokens],
   },
 });
 

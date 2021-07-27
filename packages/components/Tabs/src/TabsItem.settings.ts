@@ -7,11 +7,7 @@ export const tabsItemSelectActionLabel = 'Select a TabsItem';
 export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
-      backgroundColor: 'buttonBackground',
       color: 'buttonText',
-      borderColor: 'buttonBorder',
-      borderWidth: 1,
-      borderRadius: 2,
     },
     root: {
       accessible: true,
@@ -19,15 +15,21 @@ export const settings: IComposeSettings<TabsItemType> = [
       accessibilityRole: 'button',
       style: {
         display: 'flex',
-        alignItems: 'flex-start',
-        flexDirection: 'row',
+        alignItems: 'center',
+        flexDirection: 'column',
         alignSelf: 'flex-start',
       },
     } as IViewProps,
     content: {
       // accessible: false,
     },
-    icon: {},
+    indicator: {
+      style: {
+        minHeight: 2,
+        minWidth: 44,
+        backgroundColor: '#185ABD',
+      },
+    },
     stack: {
       style: {
         display: 'flex',
@@ -39,27 +41,31 @@ export const settings: IComposeSettings<TabsItemType> = [
         minHeight: 32,
         minWidth: 32,
         justifyContent: 'center',
+        borderWidth: 1,
+        borderRadius: 2,
+        backgroundColor: 'buttonBackground',
+        borderColor: 'buttonBorder',
       },
     },
     _precedence: ['hovered', 'selected', 'focused', 'disabled'],
     _overrides: {
       disabled: {
         tokens: {
-          backgroundColor: 'black',
+          // backgroundColor: 'black',
           color: 'buttonTextDisabled',
           borderColor: 'buttonBorderDisabled',
         },
       },
       hovered: {
         tokens: {
-          backgroundColor: 'green',
+          // backgroundColor: 'green',
           color: 'buttonTextHovered',
           borderColor: 'buttonBorderHovered',
         },
       },
       selected: {
         tokens: {
-          backgroundColor: 'blue',
+          // backgroundColor: 'blue',
           color: 'buttonTextPressed',
           borderColor: 'buttonPressedBorder',
         },
@@ -68,7 +74,7 @@ export const settings: IComposeSettings<TabsItemType> = [
         tokens: {
           borderColor: 'buttonBorderFocused',
           color: 'buttonTextHovered',
-          backgroundColor: 'red',
+          // backgroundColor: 'red',
         },
       },
     },

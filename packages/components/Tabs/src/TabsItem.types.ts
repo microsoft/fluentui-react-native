@@ -74,6 +74,7 @@ export interface TabsItemSlotProps {
   stack: ViewProps;
   icon: IconProps;
   content: ITextProps;
+  indicator: ViewProps;
 }
 
 export type TabsItemRenderData = IRenderData<TabsItemSlotProps, TabsItemState>;
