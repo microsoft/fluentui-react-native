@@ -66,8 +66,7 @@ export const Button = compose<IButtonType>({
     root: View,
     ripple: Pressable,
     stack: { slotType: View, filter: filterViewProps },
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    icon: { slotType: Icon as React.ComponentType<object> },
+    icon: { slotType: Icon as React.ComponentType },
     content: Text,
   },
   styles: {
