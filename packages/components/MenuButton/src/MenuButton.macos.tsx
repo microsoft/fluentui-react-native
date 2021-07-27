@@ -1,26 +1,16 @@
 /** @jsx withSlots */
-import React, { useRef, useState, useCallback } from 'react';
-import { Platform } from 'react-native';
-import { Button } from '@fluentui-react-native/button';
-import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu } from '@fluentui-react-native/contextual-menu';
+import { useRef } from 'react';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
-
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
 const NativeMenuButton = ensureNativeComponent('MSFMenuButton');
 
-const slotsWin32 = {
-  root: React.Fragment,
-  button: { slotType: Button as React.ComponentType<object> },
-  contextualMenu: { slotType: ContextualMenu as React.ComponentType<object> },
-  contextualMenuItems: React.Fragment,
-};
-
 const slotsMacOS = {
-  nativeComponent: NativeMenuButton,
+  // nativeComponent: NativeMenuButton,
+  root: NativeMenuButton,
 };
 
 import {
@@ -38,72 +28,33 @@ export const MenuButton = compose<MenuButtonType>({
     const { menuItems, content, icon, disabled, onItemClick, contextualMenu } = userProps;
 
     const stdBtnRef = useRef(null);
-    const [showContextualMenu, setShowContextualMenu] = useState(false);
-
-    const onDismiss = useCallback(() => {
-      setShowContextualMenu(false);
-    }, [setShowContextualMenu]);
-
-    const toggleShowContextualMenu = useCallback(() => {
-      setShowContextualMenu(!showContextualMenu);
-    }, [showContextualMenu, setShowContextualMenu]);
-
-    const menuItemsUpdated = menuItems.map((item) => {
-      if (item.hasSubmenu) {
-        const [showSubmenu, setShowSubmenu] = useState(false);
-
-        const toggleShowSubmenu = React.useCallback(() => {
-          setShowSubmenu(!showSubmenu);
-        }, [showSubmenu, setShowSubmenu]);
-
-        const onDismissSubmenu = React.useCallback(() => {
-          setShowSubmenu(false);
-        }, [setShowSubmenu]);
-        const { onHoverIn = toggleShowSubmenu, submenuProps = {}, ...restItems } = item;
-        const { onDismiss = onDismissSubmenu, setShowMenu = toggleShowSubmenu, ...restSubmenuProps } = submenuProps;
-        const menuItemUpdated = {
-          ...restItems,
-          onHoverIn,
-          showSubmenu: item.showSubmenu ?? showSubmenu,
-          submenuProps: { ...restSubmenuProps, onDismiss, setShowMenu },
-        };
-        return menuItemUpdated;
-      }
-      return item;
-    });
 
     const state: MenuButtonState = {
-      context: {
-        showContextualMenu: !!showContextualMenu,
-      },
+      context: {},
     };
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
     const slotProps = mergeSettings<MenuButtonSlotProps>(styleProps, {
-      nativeComponent: {
+      root: {
         style: {
-          width: 200,
-          height: 100,
+          width: 160,
+          height: 32,
         },
       },
-      root: {},
       button: {
         content,
         disabled,
         icon,
         componentRef: stdBtnRef,
-        onClick: toggleShowContextualMenu,
       },
       contextualMenu: {
         onItemClick,
         target: stdBtnRef,
-        onDismiss,
-        setShowMenu: toggleShowContextualMenu,
         ...contextualMenu,
       },
       contextualMenuItems: {
-        menuItems: menuItemsUpdated,
+        menuItems: menuItems,
       },
     });
 
@@ -126,7 +77,7 @@ export const MenuButton = compose<MenuButtonType>({
       }
     };
     return (
-      <Slots.nativeComponent
+      <Slots.root
         onPress={onPress}
         menuItems={menuItems}
         content={renderData.slotProps!.button.content}

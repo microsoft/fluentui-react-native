@@ -29,21 +29,21 @@ export interface MenuButtonProps extends IButtonProps {
   contextualMenu?: ContextualMenuProps;
 }
 
-export type NativeComponentProps = MenuButtonProps & {
-  imageSource?: ImageURISource;
-  onPress?: (key: string) => void;
-};
-
-export type MenuButtonSlotPropsMacOS = {
-  nativeComponent?: NativeComponentProps; // Slot that represents the native component on macOS, rather than using the other slots.
+export type MenuButtonSlotProps = {
+  root: MenuButtonProps;
+  button: IButtonProps & MenuButtonTokens;
   contextualMenu: React.PropsWithRef<ContextualMenuProps>;
   contextualMenuItems: Pick<MenuButtonProps, 'menuItems'>;
   contextualMenuItem: MenuButtonItemProps;
 };
 
-export type MenuButtonSlotProps = {
-  root: MenuButtonProps;
-  button: IButtonProps & MenuButtonTokens;
+export type NativeComponentProps = {
+  imageSource?: ImageURISource;
+  onPress?: (key: string) => void;
+};
+
+export type MenuButtonSlotPropsMacOS = {
+  root: MenuButtonProps & NativeComponentProps; // Slot that represents the native component on macOS, rather than using the other slots.
   contextualMenu: React.PropsWithRef<ContextualMenuProps>;
   contextualMenuItems: Pick<MenuButtonProps, 'menuItems'>;
   contextualMenuItem: MenuButtonItemProps;
