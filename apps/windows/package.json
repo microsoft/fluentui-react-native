@@ -19,7 +19,7 @@
     "windows": "react-native run-windows --sln windows/FluentTester.sln"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.32.4",
+    "@fluentui-react-native/tester": "^0.33.2",
     "react": "16.13.1",
     "react-native": "^0.63.2",
     "react-native-svg": "^12.1.1",
@@ -47,7 +47,7 @@
     "jest": "^24.9.0",
     "metro-config": "^0.59.0",
     "metro-react-native-babel-preset": "^0.59.0",
-    "react-native-test-app": "^0.6.3",
+    "react-native-test-app": "^0.7.0",
     "react-test-renderer": "~16.13.1",
     "rimraf": "~3.0.2",
     "ts-node": "^8.10.1",
@@ -73,7 +73,7 @@
       "entryPath": "index.js"
     },
     "capabilities": [
-      "core-android",
+      "core",
       "core-windows",
       "react",
       "svg",

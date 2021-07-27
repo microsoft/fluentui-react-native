@@ -21,7 +21,7 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.32.4",
+    "@fluentui-react-native/tester": "^0.33.2",
     "@react-native-community/slider": "^3.0.3",
     "@react-native-picker/picker": "^1.9.11",
     "hermes-engine": "~0.5.0",
@@ -34,13 +34,14 @@
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^1.1.0",
     "@rnx-kit/cli": "^0.5.27",
+    "@rnx-kit/metro-config": "^1.2.3",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "babel-jest": "^24.9.0",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-native-svg-transformer": "^0.14.3",
-    "react-native-test-app": "^0.6.3",
+    "react-native-test-app": "^0.7.0",
     "react-test-renderer": "~16.13.1"
   },
   "jest": {
