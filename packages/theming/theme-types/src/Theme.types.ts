@@ -1,7 +1,7 @@
 import { ThemeColorDefinition } from './Color.types';
 import { OfficePalette } from './palette.types';
 import { Typography, PartialTypography } from './Typography.types';
-import { ColorValue, ViewStyle } from 'react-native';
+import { ColorValue, ViewStyle, ShadowStyleIOS } from 'react-native';
 
 type TwoLevelPartial<T> = {
   [K in keyof T]?: Partial<T[K]>;
@@ -15,29 +15,25 @@ export interface Spacing {
   l2: string;
 }
 
+export type ShadowStyle = ShadowStyleIOS & Pick<ViewStyle, 'elevation'>;
+
+export interface ShadowValue {
+  ambient?: ShadowStyle;
+  key: ShadowStyle;
+}
+
 export interface Effects {
   borderRadiusSmall: number;
   borderRadiusMedium: number;
   borderRadiusLarge: number;
   borderRadiusXLarge: number;
 
-  shadow2Ambient: ViewStyle;
-  shadow2Key: ViewStyle;
-
-  shadow4Ambient: ViewStyle;
-  shadow4Key: ViewStyle;
-
-  shadow8Ambient: ViewStyle;
-  shadow8Key: ViewStyle;
-
-  shadow16Ambient: ViewStyle;
-  shadow16Key: ViewStyle;
-
-  shadow28Ambient: ViewStyle;
-  shadow28Key: ViewStyle;
-
-  shadow64Ambient: ViewStyle;
-  shadow64Key: ViewStyle;
+  shadow2: ShadowValue;
+  shadow4: ShadowValue;
+  shadow8: ShadowValue;
+  shadow16: ShadowValue;
+  shadow28: ShadowValue;
+  shadow64: ShadowValue;
 }
 
 /**

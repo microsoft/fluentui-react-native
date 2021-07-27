@@ -65,13 +65,9 @@ const BorderEffect: React.FunctionComponent<EffectProps> = (props: EffectProps) 
 function getShadowDescription(name: string, t: Theme): string {
   return (
     'Ambient\n' +
-    JSON.stringify(t.effects[name + 'Ambient'], undefined, ' ')
-      .split('\n')
-      .join(' ') +
+    JSON.stringify(t.effects[name].ambient, undefined, ' ').split('\n').join(' ') +
     '\n\nKey\n' +
-    JSON.stringify(t.effects[name + 'Key'], undefined, ' ')
-      .split('\n')
-      .join(' ')
+    JSON.stringify(t.effects[name].key, undefined, ' ').split('\n').join(' ')
   );
 }
 
@@ -82,14 +78,14 @@ const ShadowEffect: React.FunctionComponent<EffectProps> = (props: EffectProps) 
   return (
     <View
       style={[
-        theme.effects[name + 'Key'],
+        theme.effects[name].key,
         themedStyles.effectBox,
         themedStyles.shadowColor,
         themedStyles.borderRadiusMedium,
         themedStyles.vmargin,
       ]}
     >
-      <View style={[theme.effects[name + 'Ambient'], themedStyles.shadowColor, themedStyles.borderRadiusMedium, themedStyles.padding]}>
+      <View style={[theme.effects[name].ambient, themedStyles.shadowColor, themedStyles.borderRadiusMedium, themedStyles.padding]}>
         <Text variant="subheaderStandard" style={[commonTestStyles.vmargin]}>
           {name}
         </Text>
