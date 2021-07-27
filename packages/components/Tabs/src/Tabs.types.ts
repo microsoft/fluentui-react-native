@@ -34,6 +34,8 @@ export interface ITabsContext {
    ** Array of radio button keys in the group
    */
   buttonKeys?: string[];
+
+  views?: Map<string, any> | null;
 }
 
 export interface TabsState {
@@ -79,6 +81,7 @@ export interface TabsSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
   label: ITextProps;
   container: ViewProps & FocusZoneProps;
+  tabPanel: ViewProps & FocusZoneProps;
 }
 
 export type TabsRenderData = IRenderData<TabsSlotProps, TabsState>;

@@ -67,6 +67,7 @@ export const TabsItem = compose<TabsItemType>({
         disabled: !!userProps.disabled,
         headerText: !!headerText,
         icon: !!icon,
+        key: buttonKey
       },
     };
 
@@ -127,12 +128,17 @@ export const TabsItem = compose<TabsItemType>({
 
   render: (Slots: ISlots<TabsItemSlotProps>, renderData: TabsItemRenderData, ...children: React.ReactNode[]) => {
     const info = renderData.state!.info;
+    const context = React.useContext(TabsContext);
+    
+    context.views.set(info.key, children);
+    console.log(context.views);
+    
+
     return (
       <Slots.root>
         <Slots.stack>
           {info.icon && <Slots.icon />}
           {info.headerText && <Slots.content />}
-          {children}
         </Slots.stack>
       </Slots.root>
     );
