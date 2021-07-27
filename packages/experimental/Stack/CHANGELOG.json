@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-stack",
   "entries": [
     {
+      "date": "Mon, 26 Jul 2021 20:41:04 GMT",
+      "tag": "@fluentui-react-native/experimental-stack_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/adapters to v0.6.6",
+            "author": "jasonmo@microsoft.com",
+            "commit": "ad02fbbe9eaa5fbe6ec6126ccb719a1280f108a6",
+            "package": "@fluentui-react-native/experimental-stack"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sun, 25 Jul 2021 16:30:17 GMT",
       "tag": "@fluentui-react-native/experimental-stack_v0.1.0",
       "version": "0.1.0",

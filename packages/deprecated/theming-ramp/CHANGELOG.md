@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Fri, 23 Jul 2021 17:28:27 GMT and should not be manually modified.
+This log was last generated on Mon, 26 Jul 2021 20:41:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.8
+
+Mon, 26 Jul 2021 20:41:04 GMT
+
+### Patches
+
+- add new use-slot package, move framework to consume that package (jasonmo@microsoft.com)
 
 ## 0.14.6
 

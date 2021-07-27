@@ -20,7 +20,7 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.33.1",
+    "@fluentui-react-native/tester": "^0.33.2",
     "react": "16.13.1",
     "react-native": "^0.63.2",
     "react-native-macos": "^0.63.0",
@@ -39,7 +39,7 @@
     "metro-config": "^0.59.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-native-svg-transformer": "^0.14.3",
-    "react-native-test-app": "^0.6.3",
+    "react-native-test-app": "^0.7.0",
     "react-test-renderer": "~16.13.1"
   },
   "jest": {
@@ -55,7 +55,7 @@
       "entryPath": "index.js"
     },
     "capabilities": [
-      "core-ios",
+      "core",
       "core-macos",
       "react",
       "test-app"

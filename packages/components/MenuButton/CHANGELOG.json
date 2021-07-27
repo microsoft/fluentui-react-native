@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Mon, 26 Jul 2021 20:41:04 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.2.14",
+      "version": "0.2.14",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add new use-slot package, move framework to consume that package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "ad02fbbe9eaa5fbe6ec6126ccb719a1280f108a6",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Small change in menu button snapshot name",
+            "author": "krsiler@microsoft.com",
+            "commit": "478ed6f37662973123e3ca1a1f71948f0c8add87",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sun, 25 Jul 2021 16:30:17 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.2.13",
       "version": "0.2.13",

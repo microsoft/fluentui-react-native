@@ -2599,10 +2599,10 @@
     cosmiconfig "^7.0.0"
     semver "^7.0.0"
 
-"@rnx-kit/config@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.3.1.tgz#4d2715a5c9b171b81c5ec5dbff6d21d7406d225c"
-  integrity sha512-3YoOa7S5hoZEKBRu7+DFe8laatNNrUybOX8WpS1ikziedpNzioZPbLY4cayHQf5HIg7vLg7x/+FIWEEz0nblSw==
+"@rnx-kit/config@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.3.2.tgz#7beb4123c050c184e23bdd0d16043df553bdc7f9"
+  integrity sha512-z8tOLR9YOkWSDw6AogkJdzMvhNFlLZ5AVwbMArjMJ9kJOCROhduLWzkwGGnUSEUq529FSq7gSMt6VKSha4sVCw==
   dependencies:
     cosmiconfig "^7.0.0"
     semver "^7.0.0"
@@ -2615,11 +2615,11 @@
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.5.10", "@rnx-kit/dep-check@^1.5.9":
-  version "1.5.15"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.5.15.tgz#22578c731249a1903118222a3810a8051e1f338d"
-  integrity sha512-6k3+YwP8I0q3rENICFcQQDsbmNHLmjg7i1Th/UcNX1NySwI1mLhErwSoz1BnsUDp33hbuP2fmvqrppmsHLOtfA==
+  version "1.5.16"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.5.16.tgz#926a0685c877288079e774fb10d268c45322bf1e"
+  integrity sha512-nOuy0xanEVtzuL+cCkMfCXE+NfSyktv8WtYZ/LE+XWbZoi115eq8T32NinVRS/9BWjX9Q3MjJSAPoY4333gaGg==
   dependencies:
-    "@rnx-kit/config" "^0.3.1"
+    "@rnx-kit/config" "^0.3.2"
     "@rnx-kit/console" "^1.0.0"
     chalk "^4.1.0"
     find-up "^5.0.0"
@@ -2890,9 +2890,9 @@
     "@types/react" "*"
 
 "@types/es6-collections@^0.5.29":
-  version "0.5.32"
-  resolved "https://registry.yarnpkg.com/@types/es6-collections/-/es6-collections-0.5.32.tgz#62edb3942849951b6025d42af9da97d7b837f31b"
-  integrity sha512-aOOGt8ivRTqSWDzrHoNorP/o/YXgVK0oA7SP3jke3W4zZDSFAbWhYWjPG0qnGq6B/QOsx76FnmC3bUFSvleOLA==
+  version "0.5.33"
+  resolved "https://registry.yarnpkg.com/@types/es6-collections/-/es6-collections-0.5.33.tgz#afc6f01173834146ff280283d50d8721a8992d79"
+  integrity sha512-3/8fPqVk5wBExaM+3iHqz1YcA1d4xTU0cw/iIM7AaROVvX1Tyc633Tn/YFAbNS4kb+DJycwat3sEJBmmhKtuvQ==
 
 "@types/es6-promise@0.0.32":
   version "0.0.32"
@@ -5130,9 +5130,9 @@ babel-plugin-jest-hoist@^24.9.0:
     "@types/babel__traverse" "^7.0.6"
 
 babel-plugin-module-resolver@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-module-resolver/-/babel-plugin-module-resolver-4.0.0.tgz#8f3a3d9d48287dc1d3b0d5595113adabd36a847f"
-  integrity sha512-3pdEq3PXALilSJ6dnC4wMWr0AZixHRM4utpdpBR9g5QG7B7JwWyukQv7a9hVxkbGFl+nQbrHDqqQOIBtTXTP/Q==
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-module-resolver/-/babel-plugin-module-resolver-4.1.0.tgz#22a4f32f7441727ec1fbf4967b863e1e3e9f33e2"
+  integrity sha512-MlX10UDheRr3lb3P0WcaIdtCSRlxdQsB1sBqL7W0raF070bGl1HQQq5K3T2vf2XAYie+ww+5AKC/WrkjRO2knA==
   dependencies:
     find-babel-config "^1.2.0"
     glob "^7.1.6"
@@ -15123,10 +15123,10 @@ react-native-svg@^12.1.1:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
 
-react-native-test-app@^0.6.3:
-  version "0.6.12"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.6.12.tgz#d6e53e6280426b64bf65c013f631ae0009ba9634"
-  integrity sha512-XTjjcBa1noVR89dITWqP7A8DE6qwT4+ABMsWAi1cVDU2RH4rwsaKtrrcoiF1OL7szP/5jdzd9f32NiQRFa2Aaw==
+react-native-test-app@^0.7.0:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.7.1.tgz#b645500b4d028d284e47ce67f24f374f66681a8e"
+  integrity sha512-8atrCOP3NGPxZdE291PkBe+CXIX+NLFCERPXeGBMDg/9uDtgjwqKZAHElX2zl92c628FlVzQwImiSab3fyOJ0g==
   dependencies:
     chalk "^4.1.0"
     prompts "^2.4.0"
