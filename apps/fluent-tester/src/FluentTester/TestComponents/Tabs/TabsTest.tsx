@@ -1,23 +1,63 @@
 import * as React from 'react';
-import { Alert } from 'react-native';
-import { Tabs, TabsItem } from '@fluentui/react-native';
-import { Stack } from '@fluentui-react-native/stack';
+import { Alert, View } from 'react-native';
+import { Tabs, TabsItem, Text, Separator } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { SvgIconProps } from '@fluentui-react-native/icon';
+
+import TestSvg from './test.svg';
 
 const tabs: React.FunctionComponent<{}> = () => {
-  const onChange = (key: string) => {
-    Alert.alert('Alert.', key);
+  const onTabsClick = (key: string) => {
+    Alert.alert('Alert.', key + ' works');
+  };
+
+  const svgProps: SvgIconProps = {
+    src: TestSvg,
+    viewBox: '0 0 500 500',
   };
 
   return (
-    <Stack style={stackStyle}>
-      <Tabs label="Tabs" onChange={onChange}>
-        <TabsItem content="Option A" buttonKey="A" />
-        <TabsItem content="Option B" buttonKey="B" />
+    <View style={stackStyle}>
+      <Tabs label="Tabs" defaultSelectedKey="B" onTabsClick={onTabsClick} isCircularNavigation={true}>
+        <TabsItem icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }} headerText="Option A!" buttonKey="A" />
+        <TabsItem headerText="Option B" buttonKey="B" />
+        <TabsItem headerText="Option C" buttonKey="C" disabled={true} />
+        <TabsItem headerText="Option D" buttonKey="D" />
       </Tabs>
-    </Stack>
+    </View>
+  );
+};
+
+{
+  /* If User wants to control what gets rendered example */
+}
+const tabChangingViews: React.FunctionComponent<{}> = () => {
+  const [selectedKey, setSelectedKey] = React.useState('home');
+
+  const changeView = (key: string) => {
+    setSelectedKey(key);
+  };
+
+  const test = (key: string, index: number) => {
+    Alert.alert('HERE IT IS', key + index);
+  };
+
+  return (
+    <View style={stackStyle}>
+      <Tabs label="Tabs" onTabsClick={changeView} getTabId={test}>
+        <TabsItem headerText="Home" buttonKey="home" />
+        <TabsItem headerText="File" buttonKey="file" disabled={true} />
+        <TabsItem headerText="Settings" buttonKey="settings" />
+      </Tabs>
+      <Separator />
+      <View>
+        {selectedKey == 'home' && <Text>This is home</Text>}
+        {selectedKey == 'file' && <Text>This is file</Text>}
+        {selectedKey == 'settings' && <Text>This is settings</Text>}
+      </View>
+    </View>
   );
 };
 
@@ -26,6 +66,10 @@ const tabsSections: TestSection[] = [
     name: 'Navigation and Alert',
     testID: TABS_TESTPAGE,
     component: tabs,
+  },
+  {
+    name: 'Navigation with Content',
+    component: tabChangingViews,
   },
 ];
 

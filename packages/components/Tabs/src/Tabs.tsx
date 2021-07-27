@@ -8,12 +8,16 @@ import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose'
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings } from './Tabs.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-// import { foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
+import { foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
 export const TabsContext = React.createContext<ITabsContext>({
   selectedKey: null,
-  onChange: (/* key: string */) => {
+
+  onTabsClick: (/* key: string */) => {
+    return;
+  },
+  getTabId: (/* key:string, index: number*/) => {
     return;
   },
   updateSelectedButtonRef: (/* ref: React.RefObject<any>*/) => {
@@ -26,10 +30,10 @@ export const Tabs = compose<TabsType>({
   displayName: tabsName,
 
   usePrepareProps: (userProps: TabsProps, useStyling: IUseComposeStyling<TabsType>) => {
-    const { label, ariaLabel, selectedKey, defaultSelectedKey, ...rest } = userProps;
+    const { label, ariaLabel, selectedKey, defaultSelectedKey, getTabId, isCircularNavigation, ...rest } = userProps;
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
-    const data = useSelectedKey(selectedKey || defaultSelectedKey || null, userProps.onChange);
+    const data = useSelectedKey(selectedKey || defaultSelectedKey || null, userProps.onTabsClick);
 
     const [selectedButtonRef, setSelectedButtonRef] = React.useState(React.useRef<View>(null));
 
@@ -40,10 +44,18 @@ export const Tabs = compose<TabsType>({
       [setSelectedButtonRef],
     );
 
+    const onChangeTabId = React.useCallback((key: string, index: number) => {
+      if (getTabId) {
+        return getTabId(key, index);
+      }
+      return `${key}-Tab${index}`;
+    }, []);
+
     const state: TabsState = {
       context: {
         selectedKey: selectedKey ?? data.selectedKey,
-        onChange: data.onKeySelect,
+        onTabsClick: data.onKeySelect,
+        getTabId: onChangeTabId,
         updateSelectedButtonRef: onSelectButtonRef,
       },
     };
@@ -58,7 +70,7 @@ export const Tabs = compose<TabsType>({
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
       root: { rest, ...ariaRoles },
       label: { children: label },
-      container: { isCircularNavigation: true, defaultTabbableElement: selectedButtonRef },
+      container: { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedButtonRef },
     });
 
     return { slotProps, state };
@@ -75,6 +87,9 @@ export const Tabs = compose<TabsType>({
       // @ts-ignore - TODO, fix typing error
       renderData.state.context.buttonKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
+          if (renderData.state.context.selectedKey == null) {
+            renderData.state.context.selectedKey = child.props.buttonKey;
+          }
           return child.props.buttonKey;
         }
       });
@@ -82,7 +97,7 @@ export const Tabs = compose<TabsType>({
 
     return (
       <TabsContext.Provider
-        // Passes in the selected key and a hook function to update the newly selected button and call the client's onChange callback
+        // Passes in the selected key and a hook function to update the newly selected button and call the client's onTabsClick callback
         value={renderData.state.context}
       >
         <Slots.root>
@@ -101,7 +116,7 @@ export const Tabs = compose<TabsType>({
   },
   styles: {
     root: [],
-    label: [], //[foregroundColorTokens, textTokens],
+    label: [foregroundColorTokens, textTokens],
     container: [],
   },
 });
