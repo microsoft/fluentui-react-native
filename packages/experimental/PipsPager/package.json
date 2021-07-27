@@ -26,7 +26,8 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.5.14"
+    "@fluentui-react-native/framework": "0.5.15",
+    "react-native-xaml": "^0.0.37"
   },
   "devDependencies": {
     "@types/react-native": "^0.63.0",
@@ -34,8 +35,7 @@
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "react": "16.13.1",
     "react-native": "^0.63.4",
-    "react-native-windows": "^0.64.14",
-    "react-native-xaml": "^0.0.37"
+    "react-native-windows": "^0.64.14"
   },
   "peerDependencies": {
     "react": "16.13.1",

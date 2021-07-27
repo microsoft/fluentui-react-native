@@ -1,2 +1,2 @@
-export * from './NativeButton';
-export * from './NativeButton.types';
+export * from './PipsPager';
+export * from './PipsPager.types';
