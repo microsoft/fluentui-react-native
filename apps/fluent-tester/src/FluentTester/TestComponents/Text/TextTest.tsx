@@ -19,7 +19,7 @@ const textSections: TestSection[] = [
   },
 ];
 
-export const TextTest: React.FunctionComponent<{}> = () => {
+export const TextTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Experimental',
     uwpStatus: 'Experimental',
@@ -30,5 +30,5 @@ export const TextTest: React.FunctionComponent<{}> = () => {
 
   const description = 'Text is a component for displaying text. You can use Text to standardize text across your app.';
 
-  return <Test name="Text Test" description={description} sections={textSections} status={status}></Test>;
+  return <Test name="Text Test" description={description} sections={textSections} status={status} />;
 };

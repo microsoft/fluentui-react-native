@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/persona-coin",
   "entries": [
     {
+      "date": "Tue, 27 Jul 2021 18:55:58 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.8.13",
+      "version": "0.8.13",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @uifabricshared/foundation-tokens to v0.9.2",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "07d04d166b13ff79e07a8c4cbc2e06afb1e4c3e6",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 26 Jul 2021 20:41:04 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.8.13",
+      "version": "0.8.13",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add new use-slot package, move framework to consume that package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "ad02fbbe9eaa5fbe6ec6126ccb719a1280f108a6",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sun, 25 Jul 2021 16:30:17 GMT",
       "tag": "@fluentui-react-native/persona-coin_v0.8.12",
       "version": "0.8.12",

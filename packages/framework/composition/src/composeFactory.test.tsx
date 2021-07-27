@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { withSlots } from '@fluentui-react-native/use-slots';
+import { withSlots } from '@fluentui-react-native/use-slot';
 import * as renderer from 'react-test-renderer';
 import { composeFactory, UseStyledSlots } from './composeFactory';
 import { ViewProps, View, Text, TextProps, ColorValue } from 'react-native';

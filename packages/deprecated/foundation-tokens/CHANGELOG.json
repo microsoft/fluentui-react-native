@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Tue, 27 Jul 2021 18:55:58 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.9.2",
+      "version": "0.9.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/memo-cache to v1.1.2",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "07d04d166b13ff79e07a8c4cbc2e06afb1e4c3e6",
+            "package": "@uifabricshared/foundation-tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 24 Jul 2021 18:36:14 GMT",
       "tag": "@uifabricshared/foundation-tokens_v0.9.2",
       "version": "0.9.2",

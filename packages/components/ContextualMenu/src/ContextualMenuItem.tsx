@@ -129,6 +129,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
   slots: {
     root: View,
     stack: { slotType: View },
+    // eslint-disable-next-line @typescript-eslint/ban-types
     icon: { slotType: Icon as React.ComponentType<object> },
     content: Text,
   },

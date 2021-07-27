@@ -11,7 +11,7 @@
     "e2etest": "rimraf allure-results/* errorShots/* reports/* && wdio",
     "generate-report": "allure generate allure-results --clean && allure open",
     "just": "fluentui-scripts",
-    "lint": "eslint .",
+    "lint": "fluentui-scripts lint",
     "report": "allure generate allure-results --clean",
     "start": "react-native start",
     "test": "jest",
@@ -19,7 +19,7 @@
     "windows": "react-native run-windows --sln windows/FluentTester.sln"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.33.1",
+    "@fluentui-react-native/tester": "^0.33.2",
     "react": "16.13.1",
     "react-native": "^0.63.2",
     "react-native-svg": "^12.1.1",
@@ -28,7 +28,6 @@
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
-    "@react-native-community/eslint-config": "^1.1.0",
     "@rnx-kit/cli": "^0.5.27",
     "@rnx-kit/metro-config": "^1.2.3",
     "@types/jasmine": "3.5.10",
@@ -43,11 +42,10 @@
     "allure-commandline": "2.13.0",
     "appium": "1.17.1",
     "babel-jest": "^24.9.0",
-    "eslint": "^6.5.1",
     "jest": "^24.9.0",
     "metro-config": "^0.59.0",
     "metro-react-native-babel-preset": "^0.59.0",
-    "react-native-test-app": "^0.6.3",
+    "react-native-test-app": "^0.7.0",
     "react-test-renderer": "~16.13.1",
     "rimraf": "~3.0.2",
     "ts-node": "^8.10.1",
@@ -73,7 +71,7 @@
       "entryPath": "index.js"
     },
     "capabilities": [
-      "core-android",
+      "core",
       "core-windows",
       "react",
       "svg",

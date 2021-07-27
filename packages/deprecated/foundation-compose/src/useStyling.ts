@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { ISlotProps, IComponentSettings, IOverrideLookup, IWithTokens } from '@uifabricshared/foundation-settings';
 import { getThemedSettings } from '@uifabricshared/themed-settings';
 import { ITheme, getSettings, returnAsSlotProps } from '@uifabricshared/theming-ramp';
