@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-types",
   "entries": [
     {
+      "date": "Tue, 27 Jul 2021 18:55:58 GMT",
+      "tag": "@fluentui-react-native/theme-types_v0.9.1",
+      "version": "0.9.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "ESLint fixes",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "07d04d166b13ff79e07a8c4cbc2e06afb1e4c3e6",
+            "package": "@fluentui-react-native/theme-types"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 26 Jul 2021 20:41:04 GMT",
       "tag": "@fluentui-react-native/theme-types_v0.9.1",
       "version": "0.9.1",
