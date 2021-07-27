@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Tue, 27 Jul 2021 22:17:20 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.11.14",
+      "version": "0.11.14",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add compressible utility and a snapshot test / demo to framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "1cd8611e1e88848ab66f7c0e9113c946f968260c",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 27 Jul 2021 18:55:58 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.11.13",
       "version": "0.11.13",

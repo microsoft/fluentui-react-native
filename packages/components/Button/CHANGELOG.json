@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Tue, 27 Jul 2021 22:17:20 GMT",
+      "tag": "@fluentui-react-native/button_v0.17.17",
+      "version": "0.17.17",
+      "comments": {
+        "none": [
+          {
+            "comment": "Use default type parameter to avoid banned types",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "2b9eecd05e6beaed413d185ae22bcd74e9b2cc49",
+            "package": "@fluentui-react-native/button"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "add compressible utility and a snapshot test / demo to framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "1cd8611e1e88848ab66f7c0e9113c946f968260c",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 27 Jul 2021 18:55:58 GMT",
       "tag": "@fluentui-react-native/button_v0.17.16",
       "version": "0.17.16",

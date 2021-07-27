@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/use-slot",
   "entries": [
     {
+      "date": "Tue, 27 Jul 2021 22:17:20 GMT",
+      "tag": "@fluentui-react-native/use-slot_v0.1.3",
+      "version": "0.1.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add compressible utility and a snapshot test / demo to framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "1cd8611e1e88848ab66f7c0e9113c946f968260c",
+            "package": "@fluentui-react-native/use-slot"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 27 Jul 2021 18:55:58 GMT",
       "tag": "@fluentui-react-native/use-slot_v0.1.2",
       "version": "0.1.2",
