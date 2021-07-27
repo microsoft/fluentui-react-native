@@ -7,11 +7,14 @@ export const tabsItemSelectActionLabel = 'Select a TabsItem';
 export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
-      backgroundColor: 'transparent', // used to be 'buttonBackground'
-      color: 'black',
-      borderColor: 'black',
+      backgroundColor: 'transparent',
+      color: 'buttonTextPressed',
+      borderColor: 'buttonTextPressed',
       borderWidth: 0,
       borderRadius: 0,
+      fontSize: 14,
+      fontWeight: 'normal',
+      fontFamily: 'inherit',
     },
     root: {
       accessible: true,
@@ -57,26 +60,26 @@ export const settings: IComposeSettings<TabsItemType> = [
           borderColor: 'buttonBorderHovered',
           fontWeight: 'bold',
           fontFamily: 'inherit',
-          fontSize: 13,
+          fontSize: 14,
         },
       },
       selected: {
         tokens: {
           backgroundColor: 'transparent',
           color: 'buttonTextPressed',
-          borderColor: 'buttonPressedBorder',
+          // borderColor: 'buttonBorderPressed',
           borderWidth: 0,
           fontWeight: 'bold',
           fontFamily: 'inherit',
-          fontSize: 13,
+          fontSize: 14,
         },
       },
       focused: {
         tokens: {
-          borderColor: 'black',
-          color: 'buttonTextFocused',
+          borderColor: 'buttonBorderFocused',
+          color: 'buttonTextFocused', // invalid prop?
           backgroundColor: 'transparent',
-          borderWidth: 4,
+          borderWidth: 3,
         },
       },
     },
