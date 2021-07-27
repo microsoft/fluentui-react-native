@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "add compressible utility and a snapshot test / demo to framework",
+  "packageName": "@uifabricshared/foundation-composable",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "patch"
+}
