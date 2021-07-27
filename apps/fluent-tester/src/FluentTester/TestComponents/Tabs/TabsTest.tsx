@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 import { Tabs, TabsItem, Text, Separator } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';
@@ -10,7 +10,7 @@ import TestSvg from './test.svg';
 
 const tabs: React.FunctionComponent<{}> = () => {
   const onTabsClick = (key: string) => {
-    Alert.alert('Alert.', key + ' works');
+    console.log(`onTabsClick works ${key}`);
   };
 
   const svgProps: SvgIconProps = {
@@ -36,17 +36,17 @@ const tabs: React.FunctionComponent<{}> = () => {
 const tabChangingViews: React.FunctionComponent<{}> = () => {
   const [selectedKey, setSelectedKey] = React.useState('home');
 
-  const changeView = (key: string) => {
+  const onTabsClick = (key: string) => {
     setSelectedKey(key);
   };
 
-  const test = (key: string, index: number) => {
-    Alert.alert('HERE IT IS', key + index);
+  const getTabId = (key: string, index: number) => {
+    console.log(`getTabId works ${key} ${index}`);
   };
 
   return (
     <View style={stackStyle}>
-      <Tabs label="Tabs" onTabsClick={changeView} getTabId={test}>
+      <Tabs label="Tabs" onTabsClick={onTabsClick} getTabId={getTabId}>
         <TabsItem headerText="Home" buttonKey="home" />
         <TabsItem headerText="File" buttonKey="file" disabled={true} />
         <TabsItem headerText="Settings" buttonKey="settings" />

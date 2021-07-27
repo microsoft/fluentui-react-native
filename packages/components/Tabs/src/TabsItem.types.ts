@@ -1,14 +1,40 @@
 import * as React from 'react';
-// import { ViewProps } from 'react-native';
+import { PressableProps, ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-// import { ITextProps } from '@fluentui-react-native/text';
-import { IFocusable } from '@fluentui-react-native/interactive-hooks';
-// import type { IViewWin32Props } from '@office-iss/react-native-win32';
-import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-// import { IPressableProps } from '@fluentui-react-native/pressable';
-import { IButtonProps } from '../../Button/lib';
+import type { IViewProps } from '@fluentui-react-native/adapters';
+import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
+import { ITextProps } from '@fluentui-react-native/text';
+import { IconProps } from '@fluentui-react-native/icon';
+import { IButtonProps, IButtonTokens } from '@fluentui-react-native/button';
 
 export const tabsItemName = 'TabsItem';
+
+export interface TabsItemInfo extends IPressableState {
+  /**
+   * Disables the button.
+   * @default false
+   */
+  disabled?: boolean;
+
+  /**
+   * Button icon.
+   */
+  icon?: boolean;
+
+  /**
+   * Button text.
+   */
+  headerText: boolean;
+
+  /**
+   * Indicates if TabsItem is selected.
+   */
+  selected: boolean;
+}
+
+export interface TabsItemState {
+  info: TabsItemInfo;
+}
 
 // Props for the radio button
 export interface TabsItemProps extends IButtonProps {
@@ -38,18 +64,23 @@ export interface TabsItemProps extends IButtonProps {
   componentRef?: React.RefObject<IFocusable>;
 }
 
-export interface TabsItemTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
+export interface TabsItemTokens extends IButtonTokens {
   textBorderColor?: string;
 }
 
 export interface TabsItemSlotProps {
-  root: IButtonProps;
+  root: React.PropsWithRef<IViewProps>;
+  ripple?: PressableProps; // This slot exists to enable ripple-effect in android. It does not affect other platforms.
+  stack: ViewProps;
+  icon: IconProps;
+  content: ITextProps;
 }
 
-export type TabsItemRenderData = IRenderData<TabsItemSlotProps>;
+export type TabsItemRenderData = IRenderData<TabsItemSlotProps, TabsItemState>;
 
 export interface TabsItemType {
   props: TabsItemProps;
   tokens: TabsItemTokens;
   slotProps: TabsItemSlotProps;
+  state: TabsItemState;
 }
