@@ -89,7 +89,9 @@ export const MenuButton = compose<MenuButtonType>({
   },
   slots: {
     root: React.Fragment,
+    // eslint-disable-next-line @typescript-eslint/ban-types
     button: { slotType: Button as React.ComponentType<object> },
+    // eslint-disable-next-line @typescript-eslint/ban-types
     contextualMenu: { slotType: ContextualMenu as React.ComponentType<object> },
     contextualMenuItems: React.Fragment,
   },

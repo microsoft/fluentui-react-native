@@ -4,7 +4,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 
-export const CustomizeUsage: React.FunctionComponent<{}> = () => {
+export const CustomizeUsage: React.FunctionComponent = () => {
   const RedCaptionBold = Text.customize({ tokens: { variant: 'captionStandard', fontWeight: '700', color: '#ff0000' } });
   const OrangeSecondaryBold = Text.customize({ tokens: { variant: 'secondaryStandard', fontWeight: '700', color: '#ff9900' } });
   const YellowBodyBold = Text.customize({ tokens: { variant: 'bodyStandard', fontWeight: '700', color: '#f3ce00' } });

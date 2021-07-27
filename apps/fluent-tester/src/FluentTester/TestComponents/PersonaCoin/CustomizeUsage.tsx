@@ -7,7 +7,7 @@ import { useTheme } from '@fluentui-react-native/theme-types';
 import { AlignmentPicker } from '../Common/AlignmentPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
-export const CustomizeUsage: React.FunctionComponent<{}> = () => {
+export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [coinColor, setCoinColor] = React.useState<string>();
   const [textColor, setTextColor] = React.useState<string>();
@@ -83,7 +83,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Background color"
           blurOnSubmit={true}
-          onSubmitEditing={(e) => {
+          onSubmitEditing={e => {
             setCoinColor(e.nativeEvent.text);
           }}
         />
@@ -92,7 +92,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Initials text color"
           blurOnSubmit={true}
-          onSubmitEditing={(e) => {
+          onSubmitEditing={e => {
             setTextColor(e.nativeEvent.text);
           }}
         />
@@ -101,7 +101,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Icon stroke color"
           blurOnSubmit={true}
-          onSubmitEditing={(e) => {
+          onSubmitEditing={e => {
             setIconStrokeColor(e.nativeEvent.text);
           }}
         />
@@ -110,7 +110,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Ring color"
           blurOnSubmit={true}
-          onSubmitEditing={(e) => {
+          onSubmitEditing={e => {
             setRingColor(e.nativeEvent.text);
           }}
         />
@@ -119,7 +119,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Ring background color"
           blurOnSubmit={true}
-          onSubmitEditing={(e) => {
+          onSubmitEditing={e => {
             setRingBackgroundColor(e.nativeEvent.text);
           }}
         />
