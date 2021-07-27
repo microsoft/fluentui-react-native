@@ -1,3 +1,4 @@
+import { defaultEffects } from '@fluentui-react-native/default-theme';
 import { Spacing, Theme } from '@fluentui-react-native/theme-types';
 import { fallbackApplePalette } from './appleColors.macos';
 import { fallbackAppleTypography } from './appleTypography.macos';
@@ -76,6 +77,7 @@ export function getBaseAppleThemeMacOS(): Theme {
     typography: fallbackAppleTypography(),
     spacing: appleSpacing(),
     components: appleComponents,
+    effects: defaultEffects(), // TODO: Saad, if this makes it into CR I'm counting on you to yell at me :D
     host: { appearance: 'dynamic' },
   };
 }

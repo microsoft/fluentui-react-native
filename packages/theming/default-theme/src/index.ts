@@ -1,2 +1,2 @@
-export { defaultFluentTheme, defaultFluentDarkTheme } from './defaultTheme';
+export { defaultEffects, defaultFluentTheme, defaultFluentDarkTheme } from './defaultTheme';
 export * from './createDefaultTheme';

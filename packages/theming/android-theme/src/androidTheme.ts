@@ -3,6 +3,7 @@ import { getFluentUIAndroidPalette } from './colorsSemantic';
 import { paletteFromAndroidColors } from './colorsTokens';
 import { androidTypography } from './androidTypography';
 import { getAndroidPalette } from './colorsBase';
+import { defaultEffects } from '@fluentui-react-native/default-theme';
 
 export function androidSpacing(): Spacing {
   return {
@@ -40,6 +41,7 @@ export function getAndroidTheme(appearance: 'light' | 'dark'): Theme {
     typography: androidTypography(),
     spacing: androidSpacing(),
     components: androidComponents,
+    effects: defaultEffects(), // TODO: FIX ME
     host: { appearance },
   };
 }

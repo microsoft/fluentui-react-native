@@ -88,7 +88,7 @@ function _defaultTypography(): Typography {
   return defaultsDict;
 }
 
-function _defaultEffects(): Effects {
+export function defaultEffects(): Effects {
   const effects =
     Platform.OS === 'android' || Platform.OS === 'ios'
       ? {
@@ -150,7 +150,7 @@ function _defaultEffects(): Effects {
         shadow64Key: undefined,
       }),
   );
-  return effects;
+  return effects as Effects;
 }
 
 export function defaultSpacing(): Spacing {
@@ -161,7 +161,7 @@ export const defaultFluentTheme: Theme = {
   colors: getStockWebPalette(),
   typography: _defaultTypography(),
   spacing: defaultSpacing(),
-  effects: _defaultEffects(),
+  effects: defaultEffects(),
   components: {},
   host: { appearance: 'light' },
 };

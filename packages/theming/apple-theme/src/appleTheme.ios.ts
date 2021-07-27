@@ -1,3 +1,4 @@
+import { defaultEffects } from '@fluentui-react-native/default-theme';
 import { Theme, Spacing } from '@fluentui-react-native/theme-types';
 import { paletteFromAppleColors } from './appleColors.ios';
 import { appleTypography } from './appleTypography.ios';
@@ -126,6 +127,7 @@ export const BaseAppleLightThemeIOS: Theme = {
   typography: appleTypography(),
   spacing: appleSpacing(),
   components: appleComponents,
+  effects: defaultEffects(), // TODO: Saad, if this makes it into CR I'm counting on you to yell at me :D
   host: { appearance: 'light' },
 };
 
@@ -134,5 +136,6 @@ export const BaseAppleDarkThemeIOS: Theme = {
   typography: appleTypography(),
   spacing: appleSpacing(),
   components: appleComponents,
+  effects: BaseAppleLightThemeIOS.effects,
   host: { appearance: 'dark' },
 };
