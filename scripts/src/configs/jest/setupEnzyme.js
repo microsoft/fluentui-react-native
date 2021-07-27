@@ -1,6 +1,5 @@
 // setup-tests.js
 import 'react-native';
-import 'jest-enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Enzyme from 'enzyme';
 
@@ -9,7 +8,11 @@ import Enzyme from 'enzyme';
  */
 const { JSDOM } = require('jsdom');
 
-const jsdom = new JSDOM('<!doctype html><html><body></body></html>');
+const jsdom = new JSDOM('<!doctype html><html><body></body></html>', {
+  // Fixes "SecurityError: localStorage is not available for opaque origins".
+  // See https://github.com/jsdom/jsdom/issues/2304#issuecomment-408320484
+  url: 'https://localhost',
+});
 const { window } = jsdom;
 
 function copyProps(src, target) {
