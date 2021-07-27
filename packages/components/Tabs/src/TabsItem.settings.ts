@@ -8,7 +8,7 @@ export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
       backgroundColor: 'transparent',
-      color: 'buttonTextPressed',
+      color: 'buttonText',
       borderColor: 'buttonTextPressed',
       borderWidth: 0,
       borderRadius: 0,
@@ -22,15 +22,21 @@ export const settings: IComposeSettings<TabsItemType> = [
       accessibilityRole: 'button',
       style: {
         display: 'flex',
-        alignItems: 'flex-start',
-        flexDirection: 'row',
+        alignItems: 'center',
+        flexDirection: 'column',
         alignSelf: 'flex-start',
       },
     } as IViewProps,
     content: {
       // accessible: false,
     },
-    icon: {},
+    indicator: {
+      style: {
+        minHeight: 2,
+        minWidth: 44,
+        backgroundColor: '#185ABD',
+      },
+    },
     stack: {
       style: {
         display: 'flex',
@@ -42,6 +48,10 @@ export const settings: IComposeSettings<TabsItemType> = [
         minHeight: 32,
         minWidth: 32,
         justifyContent: 'center',
+        borderWidth: 1,
+        borderRadius: 2,
+        backgroundColor: 'buttonBackground',
+        borderColor: 'buttonBorder',
       },
     },
     _precedence: ['hovered', 'selected', 'focused', 'disabled'],
