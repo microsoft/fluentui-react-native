@@ -1,11 +1,27 @@
 /** @jsx withSlots */
 import React, { useRef, useState, useCallback } from 'react';
+import { Platform } from 'react-native';
 import { Button } from '@fluentui-react-native/button';
 import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu } from '@fluentui-react-native/contextual-menu';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
+
+import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
+
+const NativeMenuButton = ensureNativeComponent('MSFMenuButton');
+
+const slotsWin32 = {
+  root: React.Fragment,
+  button: { slotType: Button as React.ComponentType<object> },
+  contextualMenu: { slotType: ContextualMenu as React.ComponentType<object> },
+  contextualMenuItems: React.Fragment,
+};
+
+const slotsMacOS = {
+  nativeComponent: NativeMenuButton,
+};
 
 import {
   MenuButtonName,
@@ -65,6 +81,12 @@ export const MenuButton = compose<MenuButtonType>({
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
     const slotProps = mergeSettings<MenuButtonSlotProps>(styleProps, {
+      nativeComponent: {
+        style: {
+          width: 200,
+          height: 100,
+        },
+      },
       root: {},
       button: {
         content,
@@ -87,12 +109,7 @@ export const MenuButton = compose<MenuButtonType>({
 
     return { slotProps, state };
   },
-  slots: {
-    root: React.Fragment,
-    button: { slotType: Button as React.ComponentType<object> },
-    contextualMenu: { slotType: ContextualMenu as React.ComponentType<object> },
-    contextualMenuItems: React.Fragment,
-  },
+  slots: Platform.OS === 'macos' ? slotsMacOS : slotsWin32,
   styles: {
     contextualMenu: [backgroundColorTokens, borderTokens],
     button: [backgroundColorTokens, borderTokens],
@@ -104,33 +121,52 @@ export const MenuButton = compose<MenuButtonType>({
     const context = renderData.state!.context;
     const menuItems = renderData.slotProps!.contextualMenuItems?.menuItems || [];
 
-    return (
-      <Slots.root>
-        <Slots.button />
-        {context.showContextualMenu && (
-          <Slots.contextualMenu>
-            {menuItems.map((menuItem) => {
-              const { hasSubmenu, submenuProps, showSubmenu, componentRef, submenuItems, ...items } = menuItem;
+    const onPress = (event: any) => {
+      renderData.slotProps!.contextualMenu.onItemClick(event.nativeEvent.key);
+    };
 
-              return hasSubmenu ? (
-                <Slots.contextualMenuItems>
-                  <SubmenuItem componentRef={componentRef} {...items} />
-                  {showSubmenu && (
-                    <Submenu target={componentRef} {...submenuProps}>
-                      {submenuItems?.map((submenuItem) => (
-                        <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />
-                      ))}
-                    </Submenu>
-                  )}
-                </Slots.contextualMenuItems>
-              ) : (
-                <ContextualMenuItem key={items.itemKey} {...items} />
-              );
-            })}
-          </Slots.contextualMenu>
-        )}
-      </Slots.root>
-    );
+    if (Platform.OS === 'macos') {
+      return (
+        <Slots.nativeComponent
+          onPress={onPress}
+          menuItems={menuItems}
+          content={renderData.slotProps!.button.content}
+          disabled={renderData.slotProps!.button.disabled}
+          imageSource={{
+            uri:
+              'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
+          }}
+        />
+      );
+    } else {
+      return (
+        <Slots.root>
+          <Slots.button />
+          {context.showContextualMenu && (
+            <Slots.contextualMenu>
+              {menuItems.map((menuItem) => {
+                const { hasSubmenu, submenuProps, showSubmenu, componentRef, submenuItems, ...items } = menuItem;
+
+                return hasSubmenu ? (
+                  <Slots.contextualMenuItems>
+                    <SubmenuItem componentRef={componentRef} {...items} />
+                    {showSubmenu && (
+                      <Submenu target={componentRef} {...submenuProps}>
+                        {submenuItems?.map((submenuItem) => (
+                          <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />
+                        ))}
+                      </Submenu>
+                    )}
+                  </Slots.contextualMenuItems>
+                ) : (
+                  <ContextualMenuItem key={items.itemKey} {...items} />
+                );
+              })}
+            </Slots.contextualMenu>
+          )}
+        </Slots.root>
+      );
+    }
   },
 });
 
