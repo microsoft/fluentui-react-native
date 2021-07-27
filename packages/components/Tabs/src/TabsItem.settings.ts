@@ -7,11 +7,11 @@ export const tabsItemSelectActionLabel = 'Select a TabsItem';
 export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
-      backgroundColor: 'buttonBackground',
-      color: 'buttonText',
-      borderColor: 'buttonBorder',
-      borderWidth: 1,
-      borderRadius: 2,
+      backgroundColor: 'transparent', // used to be 'buttonBackground'
+      color: 'black',
+      borderColor: 'black',
+      borderWidth: 0,
+      borderRadius: 0,
     },
     root: {
       accessible: true,
@@ -45,30 +45,38 @@ export const settings: IComposeSettings<TabsItemType> = [
     _overrides: {
       disabled: {
         tokens: {
-          backgroundColor: 'black',
+          backgroundColor: 'buttonBackgroundDisabled',
           color: 'buttonTextDisabled',
           borderColor: 'buttonBorderDisabled',
         },
       },
       hovered: {
         tokens: {
-          backgroundColor: 'green',
+          backgroundColor: 'transparent',
           color: 'buttonTextHovered',
           borderColor: 'buttonBorderHovered',
+          fontWeight: 'bold',
+          fontFamily: 'inherit',
+          fontSize: 13,
         },
       },
       selected: {
         tokens: {
-          backgroundColor: 'blue',
+          backgroundColor: 'transparent',
           color: 'buttonTextPressed',
           borderColor: 'buttonPressedBorder',
+          borderWidth: 0,
+          fontWeight: 'bold',
+          fontFamily: 'inherit',
+          fontSize: 13,
         },
       },
       focused: {
         tokens: {
-          borderColor: 'buttonBorderFocused',
-          color: 'buttonTextHovered',
-          backgroundColor: 'red',
+          borderColor: 'black',
+          color: 'buttonTextFocused',
+          backgroundColor: 'transparent',
+          borderWidth: 4,
         },
       },
     },
