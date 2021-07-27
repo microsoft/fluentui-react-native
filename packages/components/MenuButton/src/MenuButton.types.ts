@@ -2,7 +2,6 @@ import { ContextualMenuItemProps, ContextualMenuProps, SubmenuProps } from '@flu
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IButtonProps } from '@fluentui-react-native/button';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { ImageURISource } from 'react-native';
 
 export const MenuButtonName = 'MenuButton';
 
@@ -37,30 +36,11 @@ export type MenuButtonSlotProps = {
   contextualMenuItem: MenuButtonItemProps;
 };
 
-export type NativeComponentProps = {
-  imageSource?: ImageURISource;
-  onPress?: (key: string) => void;
-};
-
-export type MenuButtonSlotPropsMacOS = {
-  root: MenuButtonProps & NativeComponentProps; // Slot that represents the native component on macOS, rather than using the other slots.
-  contextualMenu: React.PropsWithRef<ContextualMenuProps>;
-  contextualMenuItems: Pick<MenuButtonProps, 'menuItems'>;
-  contextualMenuItem: MenuButtonItemProps;
-};
-
 export type MenuButtonRenderData = IRenderData<MenuButtonSlotProps, MenuButtonState>;
 
 export interface MenuButtonType {
   props: MenuButtonProps;
   slotProps: MenuButtonSlotProps;
-  state: MenuButtonState;
-  tokens: MenuButtonTokens;
-}
-
-export interface MenuButtonTypeMacOS {
-  props: MenuButtonProps;
-  slotProps: MenuButtonSlotPropsMacOS;
   state: MenuButtonState;
   tokens: MenuButtonTokens;
 }
