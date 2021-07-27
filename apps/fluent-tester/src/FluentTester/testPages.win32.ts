@@ -117,7 +117,7 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_TOKEN_BUTTON,
   },
   {
-    name: 'Effects Test',
+    name: 'Theme Effects Test',
     component: EffectsTest,
     testPage: HOMEPAGE_EFFECTS_BUTTON,
   },

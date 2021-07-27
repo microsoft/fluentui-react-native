@@ -11,9 +11,7 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
   return {
     effectBox: {
       width: 366,
-      height: 64,
-      padding: 12,
-      marginVertical: 4,
+      minHeight: 64,
     },
     borderBox: {
       borderColor: t.colors.neutralStroke1,
@@ -33,29 +31,75 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
     },
     shadowColor: {
       shadowColor: 'black',
-      shadowOpacity: 1,
+      backgroundColor: t.colors.background,
+    },
+    padding: {
+      padding: 12,
+      paddingHorizontal: 24,
+    },
+    vmargin: {
+      marginVertical: 12,
     },
   };
 });
 
-const _isShadowEffect = (effectName: string) => {
-  return effectName.substr(0, 6) === 'shadow';
+const isBorderEffect = (effectName: string) => {
+  return effectName.substr(0, 6) === 'border';
 };
 
-type BorderEffectProps = { name: string; value: string };
-const BorderEffect: React.FunctionComponent<BorderEffectProps> = (props: BorderEffectProps) => {
+type EffectProps = { name: string; value?: string };
+const BorderEffect: React.FunctionComponent<EffectProps> = (props: EffectProps) => {
   const theme = useTheme();
   const themedStyles = getThemedStyles(theme);
   const { name, value } = props;
   return (
-    <View style={[themedStyles.effectBox, themedStyles.borderBox, themedStyles[name]]}>
-      <Text>{name}</Text>
-      <Text>{value}</Text>
+    <View style={[themedStyles.effectBox, themedStyles.borderBox, themedStyles[name], commonTestStyles.vmargin, themedStyles.padding]}>
+      <Text variant="subheaderStandard" style={[commonTestStyles.vmargin]}>
+        {name}
+      </Text>
+      <Text style={[commonTestStyles.vmargin]}>{value}</Text>
     </View>
   );
 };
 
-const BorderEffectTest: React.FunctionComponent = (p) => {
+function getShadowDescription(name: string, t: Theme): string {
+  return (
+    'Ambient\n' +
+    JSON.stringify(t.effects[name + 'Ambient'], undefined, ' ')
+      .split('\n')
+      .join(' ') +
+    '\n\nKey\n' +
+    JSON.stringify(t.effects[name + 'Key'], undefined, ' ')
+      .split('\n')
+      .join(' ')
+  );
+}
+
+const ShadowEffect: React.FunctionComponent<EffectProps> = (props: EffectProps) => {
+  const theme = useTheme();
+  const themedStyles = getThemedStyles(theme);
+  const { name, value = getShadowDescription(name, theme) } = props;
+  return (
+    <View
+      style={[
+        theme.effects[name + 'Key'],
+        themedStyles.effectBox,
+        themedStyles.shadowColor,
+        themedStyles.borderRadiusMedium,
+        themedStyles.vmargin,
+      ]}
+    >
+      <View style={[theme.effects[name + 'Ambient'], themedStyles.shadowColor, themedStyles.borderRadiusMedium, themedStyles.padding]}>
+        <Text variant="subheaderStandard" style={[commonTestStyles.vmargin]}>
+          {name}
+        </Text>
+        <Text style={[commonTestStyles.vmargin]}>{value}</Text>
+      </View>
+    </View>
+  );
+};
+
+const BorderEffectTest: React.FunctionComponent = () => {
   const effects = useTheme().effects;
   const aggregator = React.useCallback(
     (key: string) => {
@@ -65,9 +109,7 @@ const BorderEffectTest: React.FunctionComponent = (p) => {
   );
 
   const flattenArray = React.useCallback(() => {
-    return Object.keys(effects)
-      .filter((val) => !_isShadowEffect(val))
-      .map(aggregator);
+    return Object.keys(effects).filter(isBorderEffect).map(aggregator);
   }, [effects]);
 
   const effectsAsArray = React.useMemo(flattenArray, [flattenArray]);
@@ -77,14 +119,23 @@ const BorderEffectTest: React.FunctionComponent = (p) => {
   }, []);
 
   return (
-    <View style={commonTestStyles.view}>
+    <View style={[commonTestStyles.view, getThemedStyles(useTheme()).padding]}>
       <FlatList data={effectsAsArray} renderItem={renderBorder} />
     </View>
   );
 };
 
 const ShadowEffectTest: React.FunctionComponent = () => {
-  return <View style={commonTestStyles.view}></View>;
+  return (
+    <View style={[commonTestStyles.view, getThemedStyles(useTheme()).padding]}>
+      <ShadowEffect name="shadow2" />
+      <ShadowEffect name="shadow4" />
+      <ShadowEffect name="shadow8" />
+      <ShadowEffect name="shadow16" />
+      <ShadowEffect name="shadow28" />
+      <ShadowEffect name="shadow64" />
+    </View>
+  );
 };
 
 const effectsSections: TestSection[] = [

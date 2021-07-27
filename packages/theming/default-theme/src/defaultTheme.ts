@@ -105,30 +105,28 @@ export function defaultEffects(): Effects {
         };
 
   const noOffset = { width: 0, height: 0 };
-  const nearShadowAmbient =
-    Platform.OS === 'ios' ? { shadowOffset: noOffset, shadowRadius: 1 } : { shadowOffset: noOffset, shadowRadius: 2 };
-  const farShadowAmbient =
-    Platform.OS === 'ios' ? { shadowOffset: noOffset, shadowRadius: 4 } : { shadowOffset: noOffset, shadowRadius: 8 };
+  const nearShadowAmbient = { shadowOffset: noOffset, shadowOpacity: 0.12, shadowRadius: Platform.OS === 'ios' ? 1 : 2 };
+  const farShadowAmbient = { shadowOffset: noOffset, shadowOpacity: 0.2, shadowRadius: Platform.OS === 'ios' ? 4 : 8 };
   Object.assign(
     effects,
     ((Platform.OS === 'ios' || Platform.OS === 'windows' || Platform.OS === ('win32' as any) || Platform.OS === 'web') && {
       shadow2Ambient: nearShadowAmbient,
-      shadow2Key: { shadowOffset: { width: 0, height: 1 }, shadowRadius: Platform.OS === 'ios' ? 1 : 2 },
+      shadow2Key: { shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.14, shadowRadius: Platform.OS === 'ios' ? 1 : 2 },
 
       shadow4Ambient: nearShadowAmbient,
-      shadow4Key: { shadowOffset: { width: 0, height: 2 }, shadowRadius: Platform.OS === 'ios' ? 2 : 4 },
+      shadow4Key: { shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.14, shadowRadius: Platform.OS === 'ios' ? 2 : 4 },
 
       shadow8Ambient: nearShadowAmbient,
-      shadow8Key: { shadowOffset: { width: 0, height: 4 }, shadowRadius: Platform.OS === 'ios' ? 4 : 8 },
+      shadow8Key: { shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.14, shadowRadius: Platform.OS === 'ios' ? 4 : 8 },
 
       shadow16Ambient: nearShadowAmbient,
-      shadow16Key: { shadowOffset: { width: 0, height: 8 }, shadowRadius: Platform.OS === 'ios' ? 8 : 16 },
+      shadow16Key: { shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.14, shadowRadius: Platform.OS === 'ios' ? 8 : 16 },
 
       shadow28Ambient: farShadowAmbient,
-      shadow28Key: { shadowOffset: { width: 0, height: 14 }, shadowRadius: Platform.OS === 'ios' ? 14 : 28 },
+      shadow28Key: { shadowOffset: { width: 0, height: 14 }, shadowOpacity: 0.24, shadowRadius: Platform.OS === 'ios' ? 14 : 28 },
 
       shadow64Ambient: farShadowAmbient,
-      shadow64Key: { shadowOffset: { width: 0, height: 32 }, shadowRadius: Platform.OS === 'ios' ? 32 : 64 },
+      shadow64Key: { shadowOffset: { width: 0, height: 32 }, shadowOpacity: 0.24, shadowRadius: Platform.OS === 'ios' ? 32 : 64 },
     }) ||
       ((Platform.OS === 'android' || Platform.OS === 'macos') && {
         shadow2Ambient: undefined,
