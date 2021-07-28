@@ -5,6 +5,7 @@ import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { SvgIconProps } from '@fluentui-react-native/icon';
+import { Button } from '@fluentui-react-native/button';
 
 import TestSvg from './test.svg';
 
@@ -70,6 +71,39 @@ const tabChangingViews: React.FunctionComponent<{}> = () => {
   );
 };
 
+{
+  /* If user wants to programmtically set the selectedKey to control the view */
+}
+const tabsSettingSelectedKey: React.FunctionComponent<{}> = () => {
+  const [selectedKey, setSelectedKey] = React.useState('home');
+  const [currTabItemIndex, setCurrTabItemIndex] = React.useState(0);
+  const tabItems = ['home', 'file', 'setting'];
+  
+  const goToNextTab = () => {
+    const newCurrTabItemIndex = (currTabItemIndex + 1) % 3;
+    setCurrTabItemIndex(newCurrTabItemIndex);
+    setSelectedKey(tabItems[newCurrTabItemIndex]);
+    console.log(currTabItemIndex);
+  };
+
+  return (
+    <View style={stackStyle}>
+      <Tabs label="Tabs" selectedKey={selectedKey} isCircularNavigation={true}>
+        <TabsItem headerText="Home" itemKey="home">
+          <Text>This is Home's content</Text>
+        </TabsItem>
+        <TabsItem headerText="File" itemKey="file">
+          <Text>This is Files's content</Text>
+        </TabsItem>
+        <TabsItem headerText="Setting" itemKey="setting" >
+          <Text>This is Settings's content</Text>
+        </TabsItem>
+      </Tabs>
+      <Button content="View Next Tab" onClick={goToNextTab}/>
+    </View>
+  );
+};
+
 const tabsSections: TestSection[] = [
   {
     name: 'Navigation and Alert',
@@ -80,6 +114,10 @@ const tabsSections: TestSection[] = [
     name: 'Navigation with Content',
     component: tabChangingViews,
   },
+  {
+    name: 'Override Selected Key',
+    component: tabsSettingSelectedKey
+  }
 ];
 
 export const TabsTest: React.FunctionComponent<{}> = () => {
