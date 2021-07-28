@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/button": "^0.17.17",
+    "@fluentui-react-native/component-cache": "^1.2.2",
     "@fluentui-react-native/contextual-menu": "^0.9.13",
     "@fluentui-react-native/tokens": "^0.9.12",
     "@uifabricshared/foundation-composable": ">=0.8.6 <1.0.0",
