@@ -79,7 +79,7 @@ export const RadioGroup = compose<IRadioGroupType>({
 
     // Populate the buttonKeys array
     if (children) {
-      /* eslint-disable @typescript-eslint/ban-ts-ignore */
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore - TODO, fix typing error
       renderData.state.context.buttonKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {

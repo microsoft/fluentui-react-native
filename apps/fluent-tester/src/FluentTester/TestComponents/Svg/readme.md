@@ -97,7 +97,7 @@ Here are a couple of the simplest ones:
 
 ```
 import TestSvg from './Assets/accessible-icon-brands.svg';
-const bundledSvg: React.FunctionComponent<{}> = () => {
+const bundledSvg: React.FunctionComponent = () => {
   return (
     <TestSvg width={200} height={200} color="red" />
   );
@@ -107,7 +107,7 @@ const bundledSvg: React.FunctionComponent<{}> = () => {
 ### Remote svg via uri
 
 ```
-const remoteSvg: React.FunctionComponent<{}> = () => {
+const remoteSvg: React.FunctionComponent = () => {
   return (
     <View>
       <SvgCssUri

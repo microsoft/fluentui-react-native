@@ -46,7 +46,7 @@ const allColors: WithUndefined<PersonaCoinFluentColor>[] = [
 
 const allPresences: WithUndefined<PersonaPresence>[] = [undefinedText, 'none', 'online', 'offline', 'busy', 'dnd', 'blocked', 'away'];
 
-const StyledPicker = (props) => {
+const StyledPicker = props => {
   const { prompt, selected, onChange, collection } = props;
   const theme = useTheme();
   const pickerStyles = { color: theme.colors.inputText as ColorValue, ...commonStyles.header };
@@ -59,15 +59,15 @@ const StyledPicker = (props) => {
   );
 };
 
-export const StandardUsage: React.FunctionComponent<{}> = () => {
+export const StandardUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [imageSize, setImageSize] = React.useState<WithUndefined<PersonaSize>>('size72');
   const [coinColor, setCoinColor] = React.useState<WithUndefined<PersonaCoinFluentColor>>('brass');
   const [presence, setPresence] = React.useState<WithUndefined<PersonaPresence>>('online');
 
-  const onSizeChange = React.useCallback((value) => setImageSize(value), []);
-  const onColorChange = React.useCallback((value) => setCoinColor(value), []);
-  const onPresenceChange = React.useCallback((value) => setPresence(value), []);
+  const onSizeChange = React.useCallback(value => setImageSize(value), []);
+  const onColorChange = React.useCallback(value => setCoinColor(value), []);
+  const onPresenceChange = React.useCallback(value => setPresence(value), []);
 
   const theme = useTheme();
   const textStyles = { color: theme.colors.inputText as ColorValue };

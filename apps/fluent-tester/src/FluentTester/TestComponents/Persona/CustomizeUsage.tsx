@@ -6,7 +6,7 @@ import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { Slider } from '../Common/Slider';
 
-export const CustomizeUsage: React.FunctionComponent<{}> = () => {
+export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [coinColor, setCoinColor] = React.useState<string>();
   const [textColor, setTextColor] = React.useState<string>();
@@ -64,7 +64,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Background color"
           blurOnSubmit={true}
-          onSubmitEditing={(e) => {
+          onSubmitEditing={e => {
             setCoinColor(e.nativeEvent.text);
           }}
         />
@@ -73,7 +73,7 @@ export const CustomizeUsage: React.FunctionComponent<{}> = () => {
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Initials text color"
           blurOnSubmit={true}
-          onSubmitEditing={(e) => {
+          onSubmitEditing={e => {
             setTextColor(e.nativeEvent.text);
           }}
         />

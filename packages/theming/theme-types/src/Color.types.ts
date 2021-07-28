@@ -449,12 +449,99 @@ export interface ControlColorTokens {
   personaActivityGlow: ColorValue;
 }
 
+export interface AliasColorTokens {
+  neutralForeground1: ColorValue;
+  neutralForeground2: ColorValue;
+  neutralForeground2Hover: ColorValue;
+  neutralForeground2Pressed: ColorValue;
+  neutralForeground2Brand: ColorValue;
+  neutralForeground2BrandHover: ColorValue;
+  neutralForeground2BrandPressed: ColorValue;
+  neutralForeground3: ColorValue;
+  neutralForeground3Hover: ColorValue;
+  neutralForeground3Pressed: ColorValue;
+  neutralForeground3Brand: ColorValue;
+  neutralForeground3BrandHover: ColorValue;
+  neutralForeground3BrandPressed: ColorValue;
+  neutralForeground4: ColorValue;
+  neutralForegroundDisabled: ColorValue;
+
+  brandForegroundLink: ColorValue;
+  brandForegroundLinkHover: ColorValue;
+  brandForegroundLinkPressed: ColorValue;
+  compoundBrandForeground1: ColorValue;
+  compoundBrandForeground1Hover: ColorValue;
+  compoundBrandForeground1Pressed: ColorValue;
+  brandForeground1: ColorValue;
+  brandForeground2: ColorValue;
+
+  neutralForegroundInverted: ColorValue;
+  neutralForegroundOnBrand: ColorValue;
+  neutralForegroundInvertedLink: ColorValue;
+  neutralForegroundInvertedLinkHover: ColorValue;
+  neutralForegroundInvertedLinkPressed: ColorValue;
+
+  neutralBackground1: ColorValue;
+  neutralBackground1Hover: ColorValue;
+  neutralBackground1Pressed: ColorValue;
+  neutralBackground2: ColorValue;
+  neutralBackground2Hover: ColorValue;
+  neutralBackground2Pressed: ColorValue;
+  neutralBackground3: ColorValue;
+  neutralBackground3Hover: ColorValue;
+  neutralBackground3Pressed: ColorValue;
+  neutralBackground4: ColorValue;
+  neutralBackground4Hover: ColorValue;
+  neutralBackground4Pressed: ColorValue;
+  neutralBackground5: ColorValue;
+  neutralBackground5Hover: ColorValue;
+  neutralBackground5Pressed: ColorValue;
+  neutralBackground6: ColorValue;
+  neutralBackgroundInverted: ColorValue;
+
+  subtleBackground: ColorValue;
+  subtleBackgroundHover: ColorValue;
+  subtleBackgroundPressed: ColorValue;
+
+  transparentBackground: ColorValue;
+  transparentBackgroundHover: ColorValue;
+  transparentBackgroundPressed: ColorValue;
+
+  neutralBackgroundDisabled: ColorValue;
+
+  brandBackground: ColorValue;
+  brandBackgroundHover: ColorValue;
+  brandBackgroundPressed: ColorValue;
+  compoundBrandBackground1: ColorValue;
+  compoundBrandBackground1Hover: ColorValue;
+  compoundBrandBackground1Pressed: ColorValue;
+
+  neutralStrokeAccessible: ColorValue;
+  neutralStrokeAccessibleHover: ColorValue;
+  neutralStrokeAccessiblePressed: ColorValue;
+  neutralStroke1: ColorValue;
+  neutralStroke1Hover: ColorValue;
+  neutralStroke1Pressed: ColorValue;
+  neutralStroke2: ColorValue;
+  neutralStroke3: ColorValue;
+  brandStroke1: ColorValue;
+  brandStroke2: ColorValue;
+  compoundBrandStroke1: ColorValue;
+  compoundBrandStroke1Hover: ColorValue;
+  compoundBrandStroke1Pressed: ColorValue;
+  neutralStrokeDisabled: ColorValue;
+
+  transparentStroke: ColorValue;
+  transparentStrokeInteractive: ColorValue;
+  transparentStrokeDisabled: ColorValue;
+}
+
 /**
  * A collection of named palette colors.
  *
  * Palette names describe the role of a color within the application.
  */
-export type Palette = PaletteTextColors & PaletteBackgroundColors & Partial<ControlColorTokens>;
+export type Palette = PaletteTextColors & PaletteBackgroundColors & Partial<ControlColorTokens> & Partial<AliasColorTokens>;
 
 /**
  * A partially specified color palette.

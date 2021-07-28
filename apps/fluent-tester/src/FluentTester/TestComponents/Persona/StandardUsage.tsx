@@ -36,7 +36,7 @@ function SwitchWithLabel(props: ISwitchWithLabelProps): React.ReactElement {
   );
 }
 
-export const StandardUsage: React.FunctionComponent<{}> = () => {
+export const StandardUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [showPrimary, setShowPrimary] = React.useState(true);
   const [showSecondary, setShowSecondary] = React.useState(true);
@@ -58,7 +58,7 @@ export const StandardUsage: React.FunctionComponent<{}> = () => {
           prompt="Size"
           style={commonStyles.header}
           selectedValue={imageSize || undefinedText}
-          onValueChange={(size) => setImageSize(size === undefinedText ? undefined : size)}
+          onValueChange={size => setImageSize(size === undefinedText ? undefined : size)}
         >
           {allSizes.map((size, index) => (
             <Picker.Item label={size} key={index} value={size} />

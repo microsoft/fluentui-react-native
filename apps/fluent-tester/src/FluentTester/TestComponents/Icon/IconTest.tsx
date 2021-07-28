@@ -10,7 +10,7 @@ const testImage = require('./assets/testicon.png');
 const testTtf = require('./assets/Font Awesome 5 Free-Solid-900.otf');
 import TestSvg from './assets/test.svg';
 
-const icons: React.FunctionComponent<{}> = () => {
+const icons: React.FunctionComponent = () => {
   const fontCustomFontProps: FontIconProps = {
     fontFamily: 'Font Awesome 5 Free',
     fontSrcFile: testTtf,
@@ -98,7 +98,7 @@ const iconSections: TestSection[] = [
   },
 ];
 
-export const IconTest: React.FunctionComponent<{}> = () => {
+export const IconTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Experimental',
     uwpStatus: 'Backlog',
