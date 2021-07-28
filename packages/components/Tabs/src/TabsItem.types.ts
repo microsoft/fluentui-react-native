@@ -38,7 +38,7 @@ export interface TabsItemInfo extends IPressableState {
 }
 
 export interface TabsItemState {
-  info: TabsItemInfo;
+  info: Omit<TabsItemInfo, 'headerText'>;
 }
 
 // Props for the radio button

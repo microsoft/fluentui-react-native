@@ -65,7 +65,6 @@ export const TabsItem = compose<TabsItemType>({
         ...pressable.state,
         selected: info.selectedKey === userProps.buttonKey,
         disabled: !!userProps.disabled,
-        headerText: !!headerText,
         icon: !!icon,
         key: buttonKey,
       },
@@ -136,7 +135,7 @@ export const TabsItem = compose<TabsItemType>({
       <Slots.root>
         <Slots.stack>
           {info.icon && <Slots.icon />}
-          {info.headerText && <Slots.content />}
+          <Slots.content />
         </Slots.stack>
         {info.selected && <Slots.indicator />}
       </Slots.root>
