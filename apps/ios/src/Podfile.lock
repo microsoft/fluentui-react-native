@@ -401,7 +401,7 @@ PODS:
     - React-Core (= 0.63.4)
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
-  - ReactTestApp-DevSupport (0.6.3)
+  - ReactTestApp-DevSupport (0.7.1)
   - ReactTestApp-Resources (1.0.0-dev)
   - RNSVG (12.1.1):
     - React
@@ -559,7 +559,7 @@ SPEC CHECKSUMS:
   React-RCTText: 5c51df3f08cb9dedc6e790161195d12bac06101c
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
-  ReactTestApp-DevSupport: 9f0b81965c46840c5410ccc4e7f5a4d6cd224ece
+  ReactTestApp-DevSupport: 058444bc8d4df209aabc6a5f54a73bfd9a114f94
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
