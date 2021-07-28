@@ -1,6 +1,7 @@
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { Text } from '@fluentui/react-native';
+import { Shadow, ShadowDepth } from '@fluentui-react-native/experimental-shadow';
 import * as React from 'react';
 import { FlatList, View } from 'react-native';
 import { commonTestStyles } from '../Common/styles';
@@ -71,27 +72,28 @@ function getShadowDescription(name: string, t: Theme): string {
   );
 }
 
-const ShadowEffect: React.FunctionComponent<EffectProps> = (props: EffectProps) => {
+interface ShadowEffectProps {
+  depth: ShadowDepth;
+}
+const ShadowEffect: React.FunctionComponent<ShadowEffectProps> = (props: ShadowEffectProps) => {
   const theme = useTheme();
   const themedStyles = getThemedStyles(theme);
-  const { name, value = getShadowDescription(name, theme) } = props;
+  const { depth } = props;
+  const value = getShadowDescription('shadow' + props.depth, theme);
+  const name = '<Shadow depth="' + depth + '" />';
   return (
-    <View
-      style={[
-        theme.effects[name].key,
-        themedStyles.effectBox,
-        themedStyles.shadowColor,
-        themedStyles.borderRadiusMedium,
-        themedStyles.vmargin,
-      ]}
+    <Shadow
+      depth={depth}
+      borderRadius={theme.effects.borderRadiusMedium}
+      padding={12}
+      paddingHorizontal={24}
+      style={[themedStyles.effectBox, themedStyles.vmargin]}
     >
-      <View style={[theme.effects[name].ambient, themedStyles.shadowColor, themedStyles.borderRadiusMedium, themedStyles.padding]}>
-        <Text variant="subheaderStandard" style={[commonTestStyles.vmargin]}>
-          {name}
-        </Text>
-        <Text style={[commonTestStyles.vmargin]}>{value}</Text>
-      </View>
-    </View>
+      <Text variant="subheaderStandard" style={[commonTestStyles.vmargin]}>
+        {name}
+      </Text>
+      <Text style={[commonTestStyles.vmargin]}>{value}</Text>
+    </Shadow>
   );
 };
 
@@ -124,12 +126,12 @@ const BorderEffectTest: React.FunctionComponent = () => {
 const ShadowEffectTest: React.FunctionComponent = () => {
   return (
     <View style={[commonTestStyles.view, getThemedStyles(useTheme()).padding]}>
-      <ShadowEffect name="shadow2" />
-      <ShadowEffect name="shadow4" />
-      <ShadowEffect name="shadow8" />
-      <ShadowEffect name="shadow16" />
-      <ShadowEffect name="shadow28" />
-      <ShadowEffect name="shadow64" />
+      <ShadowEffect depth="2" />
+      <ShadowEffect depth="4" />
+      <ShadowEffect depth="8" />
+      <ShadowEffect depth="16" />
+      <ShadowEffect depth="28" />
+      <ShadowEffect depth="64" />
     </View>
   );
 };
