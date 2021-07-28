@@ -4,7 +4,7 @@ import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
 import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
-import { ViewProps } from 'react-native';
+import { View, ViewProps } from 'react-native';
 
 export const tabsName = 'Tabs';
 
@@ -87,6 +87,11 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
    ** Sets whether to only render the header
    */
   headersOnly?: boolean;
+
+  /*
+   ** Sets whether to only render the header
+   */
+  componentRef?: React.RefObject<View>;
 
   testID?: string;
 }
