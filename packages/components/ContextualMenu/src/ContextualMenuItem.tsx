@@ -129,7 +129,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
   slots: {
     root: View,
     stack: { slotType: View },
-    icon: { slotType: Icon as React.ComponentType<object> },
+    icon: { slotType: Icon as React.ComponentType },
     content: Text,
   },
   styles: {

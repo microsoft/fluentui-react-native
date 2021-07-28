@@ -4,7 +4,7 @@ module.exports = {
     ['build-tools']: ['^build-tools'],
     build: ['build-tools', '^build'],
     buildci: ['build', 'test', 'depcheck', 'bundle'],
-    bundle: ['build-tools'],
+    bundle: ['build-tools', 'build'],
     clean: [],
     depcheck: ['build-tools'],
     lint: ['build-tools'],

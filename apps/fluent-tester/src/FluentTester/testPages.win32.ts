@@ -18,6 +18,7 @@ import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 import { TestDescription } from './TestComponents';
 import { MenuButtonTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/MenuButton';
 import { HOMEPAGE_TABS_BUTTON, TabsTest } from './TestComponents/Tabs';
+import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 
 export const tests: TestDescription[] = [
   {
@@ -114,5 +115,10 @@ export const tests: TestDescription[] = [
     name: 'Tabs Test',
     component: TabsTest,
     testPage: HOMEPAGE_TABS_BUTTON,
+  },
+  {
+    name: 'Tokens Test',
+    component: TokenTest,
+    testPage: HOMEPAGE_TOKEN_BUTTON,
   },
 ];

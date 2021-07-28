@@ -13,7 +13,7 @@ import { buildCoinStyle } from './Persona.tokens.coin';
 import { foregroundColorTokens } from '@fluentui-react-native/tokens';
 import { buildStackStyle } from './Persona.tokens.stack';
 
-function usePrepareForProps(props: IPersonaProps, useStyling: IUseComposeStyling<IPersonaType>): IRenderData<IPersonaSlotProps, {}> {
+function usePrepareForProps(props: IPersonaProps, useStyling: IUseComposeStyling<IPersonaType>): IRenderData<IPersonaSlotProps> {
   const {
     text,
     secondaryText,

@@ -5,7 +5,7 @@ import * as React from 'react';
 import { findNodeHandle } from 'react-native';
 import { stackStyle } from '../Common/styles';
 
-export const ButtonFocusTest: React.FunctionComponent<{}> = () => {
+export const ButtonFocusTest: React.FunctionComponent = () => {
   const [state, setState] = React.useState({
     focused: false,
   });

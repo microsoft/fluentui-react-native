@@ -7,7 +7,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { ACTIVITYINDICATOR_TESTPAGE } from './consts';
 import { View, Switch } from 'react-native';
 
-const activityIndicatorTest: React.FunctionComponent<{}> = () => {
+const activityIndicatorTest: React.FunctionComponent = () => {
   /** Customize doesn't do anything
    * Tried having tokens not be props, but didn't work
    * Not sure how to test/check where the tokens are passed through other than just looking at the final render
@@ -38,7 +38,7 @@ const activityIndicatorTest: React.FunctionComponent<{}> = () => {
   );
 };
 
-const basicActivityIndicator: React.FunctionComponent<{}> = () => {
+const basicActivityIndicator: React.FunctionComponent = () => {
   const [animating, setAnimating] = React.useState(true);
   const [hidesWhenStopped, setHidesWhenStopped] = React.useState(true);
 
@@ -74,7 +74,7 @@ const activityIndicatorSections: TestSection[] = [
   },
 ];
 
-export const ActivityIndicatorTest: React.FunctionComponent<{}> = () => {
+export const ActivityIndicatorTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Backlog',
     uwpStatus: 'Backlog',

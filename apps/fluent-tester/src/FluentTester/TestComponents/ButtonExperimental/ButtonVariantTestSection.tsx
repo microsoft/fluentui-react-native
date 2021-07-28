@@ -3,7 +3,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
 
-export const ButtonVariantTest: React.FunctionComponent<{}> = () => {
+export const ButtonVariantTest: React.FunctionComponent = () => {
   return (
     <View style={[stackStyle, commonTestStyles.view]}>
       <Button content="Default" style={commonTestStyles.vmargin} />
