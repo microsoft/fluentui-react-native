@@ -2,6 +2,111 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Tue, 27 Jul 2021 22:17:20 GMT",
+      "tag": "@fluentui/react-native_v0.24.17",
+      "version": "0.24.17",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add compressible utility and a snapshot test / demo to framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "1cd8611e1e88848ab66f7c0e9113c946f968260c",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 27 Jul 2021 18:55:58 GMT",
+      "tag": "@fluentui/react-native_v0.24.16",
+      "version": "0.24.16",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.17.16",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "07d04d166b13ff79e07a8c4cbc2e06afb1e4c3e6",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 26 Jul 2021 20:41:04 GMT",
+      "tag": "@fluentui/react-native_v0.24.16",
+      "version": "0.24.16",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add new use-slot package, move framework to consume that package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "ad02fbbe9eaa5fbe6ec6126ccb719a1280f108a6",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sun, 25 Jul 2021 16:30:17 GMT",
+      "tag": "@fluentui/react-native_v0.24.15",
+      "version": "0.24.15",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.2.13",
+            "author": "email not defined",
+            "commit": "6e298f4bfda7d7cae2c1f52c942bae20ab29b641",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 24 Jul 2021 18:36:14 GMT",
+      "tag": "@fluentui/react-native_v0.24.14",
+      "version": "0.24.14",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/separator to v0.10.11",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4687ff096fd25b07e0a4e782616b6b2ec0fa2d9f",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 24 Jul 2021 17:42:51 GMT",
+      "tag": "@fluentui/react-native_v0.24.14",
+      "version": "0.24.14",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/separator to v0.10.11",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4687ff096fd25b07e0a4e782616b6b2ec0fa2d9f",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 21 Jul 2021 22:55:40 GMT",
+      "tag": "@fluentui/react-native_v0.24.10",
+      "version": "0.24.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "expose use-tokens in framework package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "af44164cf47abb856e567e9976043aafe414ade6",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 17 Jul 2021 00:39:49 GMT",
       "tag": "@fluentui/react-native_v0.24.8",
       "version": "0.24.8",

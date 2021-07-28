@@ -7,7 +7,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
 import TestSvg from '../Button/test.svg';
 
-const contextualMenu: React.FunctionComponent<{}> = () => {
+const contextualMenu: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);
 
   const [showContextualMenu, setShowContextualMenu] = React.useState(false);
@@ -105,7 +105,7 @@ const contextualMenu: React.FunctionComponent<{}> = () => {
   );
 };
 
-const nestedContextualMenu: React.FunctionComponent<{}> = () => {
+const nestedContextualMenu: React.FunctionComponent = () => {
   const testImage = require('../Button/icon_24x24.png');
   const testTtf = require('../Button/Font Awesome 5 Free-Solid-900.otf');
 
@@ -232,7 +232,7 @@ const nestedContextualMenu: React.FunctionComponent<{}> = () => {
   );
 };
 
-const IconContextualMenu: React.FunctionComponent<{}> = () => {
+const IconContextualMenu: React.FunctionComponent = () => {
   const svgProps: SvgIconProps = {
     src: TestSvg,
     viewBox: '0 0 500 500',
@@ -331,7 +331,7 @@ const contextualMenuSections: TestSection[] = [
   }
 ];
 
-export const ContextualMenuTest: React.FunctionComponent<{}> = () => {
+export const ContextualMenuTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Experimental',
     uwpStatus: 'Backlog',

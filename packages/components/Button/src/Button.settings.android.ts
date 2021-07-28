@@ -26,7 +26,6 @@ export const settings: IComposeSettings<IButtonType> = [
       accessible: true,
       focusable: true,
       accessibilityRole: 'button',
-      // eslint-disable-next-line @typescript-eslint/camelcase
       android_ripple: {
         color: 'buttonBackgroundPressed',
       },

@@ -11,7 +11,7 @@ const icon: ImageURISource = {
     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAACTUlEQVRIib3VzYuPURQH8M8MhVIzWYghLFhQZrxL3rIYG4psyKiZbEmzUl7+BbOwpsZbWciG5B/QTMxEaCYGIxEpGoxGTYzFPeP3zOP+/Gw4dbvPc+73nHvP+Z57Lv9YplXRz8FxtKERT/C9hJmBgziKNXiEsbKj+ozzOtzEXNzBHjxEawGzE4+xD/ewMGzqasdEMwZK4F34gCMxXmNH6VADWPk3GxzAlYx+KSZiLMqsX8H+sjKXoh9V9BsxHmNLZr0+bGvKNvSUdGulFK0tfK8pYXqxtewsR8psfMEhKS3rJQ7gZcxLYr6BfjzD5bD9Wu3kjVJp9kt5HsMZjOIF1pXGMN4E5lvY9IePhrLzDrzFOSm/p3FRSscI5heimx3fTXiPxbiEU2F7Pny1Tzo/jKdYXtiwCZ9xFydC16lCcmfoTuJ2YJsK9iswFL4NoSWTstEIe2acelylTMdDNzP+RzL2LXhaH4Ac2RMZXTXJlecvnx1SFCsKiwvwSSq9Wim6Fdhyip4p8NCOd+jGdonkbonkonGO5EW4IJG8PeymkDwpDVKJ9amUaZdU18Oql2lXYCfCdkqZ/umi7Ve5aHtjbSjmZTFfl2r/Oa6qcdEmJdcqVuNjbLYhvleVMNlWMT2zwTyVljAp96U23Rv/bXhQwgyHbc0NqnXFHpUu25dZr9aFf5NmDJrKT6sUVZvUBN+qNECBHZR5cHIk10lP5RMpJbulW7mvcPJ1uCal7qbETTM2K13Qam/oHByTarxHasXlB31WRLMJr3BWIv//yk9uvpglkfrWQwAAAABJRU5ErkJggg==',
 };
 
-const nativeButton: React.FunctionComponent<{}> = () => {
+const nativeButton: React.FunctionComponent = () => {
   const CustomNativeButton = NativeButton.customize({
     accentColor: '#fca905',
   });
@@ -48,7 +48,7 @@ const nativeButtonSections: TestSection[] = [
   },
 ];
 
-export const NativeButtonTest: React.FunctionComponent<{}> = () => {
+export const NativeButtonTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'N/A',
     uwpStatus: 'N/A',

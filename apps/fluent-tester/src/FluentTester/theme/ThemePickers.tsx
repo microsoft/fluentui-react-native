@@ -52,7 +52,7 @@ export const PartPicker: React.FunctionComponent<PartPickerProps> = (props: Part
 
 const PickerLabel = Text.customize({ variant: 'bodySemibold' });
 
-export const ThemePickers: React.FunctionComponent<{}> = () => {
+export const ThemePickers: React.FunctionComponent = () => {
   const onBrandChange = React.useCallback((newBrand: string) => {
     testerTheme.brand = newBrand as OfficeBrand;
   }, []);

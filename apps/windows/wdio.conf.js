@@ -1,5 +1,4 @@
 const fs = require('fs');
-const rimraf = require('rimraf');
 
 const defaultWaitForTimeout = 10000;
 const defaultConnectionRetryTimeout = 15000;
@@ -18,7 +17,7 @@ exports.config = {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'windows',
       deviceName: 'WindowsPC',
-      app: '2a07a99c-7130-4e93-856d-880ea22dd4f4_kceynq4x5hrp4!App',
+      app: '40411fc5-8e92-4d46-b68d-b62df44b1366_7c3z4tcdk8r62!App',
     },
   ],
 
@@ -99,16 +98,8 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   beforeSession: function (/* config, capabilities, specs */) {
-    // Delete old screenshots and create empty directory
-    if (fs.existsSync('./errorShots')) {
-      rimraf.sync('./errorShots');
-    }
-    fs.mkdirSync('./errorShots');
-
-    if (fs.existsSync('./allure-results')) {
-      rimraf.sync('./allure-results');
-    }
-    fs.mkdirSync('./allure-results');
+    fs.mkdirSync('./errorShots', { recursive: true });
+    fs.mkdirSync('./allure-results', { recursive: true });
   },
   /**
    * Gets executed before test execution begins. At this point you can access to all global

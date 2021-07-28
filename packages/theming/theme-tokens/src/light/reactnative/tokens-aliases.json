@@ -1,234 +1,504 @@
 {
-  "body": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-    "fontLineHeight": 20,
-    "fontSize": 14,
-    "fontWeight": "400"
-  },
-  "borderless": {
-    "strokeAlignment": "inner",
-    "strokeColorRest": "transparent",
-    "strokeColorHover": "transparent",
-    "strokeColorPressed": "transparent",
-    "strokeColorDisabled": "transparent",
-    "strokeWidth": 1
-  },
-  "brandBackground": {
-    "fillColorRest": "#0078d4",
-    "fillColorHover": "#106ebe",
-    "fillColorPressed": "#004578",
-    "fillColorDisabled": "#f0f0f0"
-  },
-  "brandBackgroundSelected": {
-    "fillColorRest": "#0078d4",
-    "fillColorHover": "#106ebe",
-    "fillColorPressed": "#004578",
-    "fillColorDisabled": "#f0f0f0"
-  },
-  "caption": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-    "fontLineHeight": 16,
-    "fontSize": 12,
-    "fontWeight": "400"
-  },
-  "control": {
-    "cornerRadius": 4,
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-    "fontLineHeight": 20,
-    "fontSize": 14,
-    "fontWeight": "600"
-  },
-  "display": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-    "fontLineHeight": 92,
-    "fontSize": 68,
-    "fontWeight": "600"
-  },
-  "ghostBackground": {
-    "fillColorRest": "transparent",
-    "fillColorHover": "#f5f5f5",
-    "fillColorPressed": "#e0e0e0",
-    "fillColorDisabled": "#f0f0f0"
-  },
-  "ghostBackgroundSelected": {
-    "fillColorRest": "transparent",
-    "fillColorHover": "#f5f5f5",
-    "fillColorPressed": "#e0e0e0",
-    "fillColorDisabled": "#f0f0f0"
-  },
-  "headline": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-    "fontLineHeight": 28,
-    "fontSize": 20,
-    "fontWeight": "600"
-  },
-  "icon": {
-    "cornerRadius": 4
-  },
-  "illustration": {
-    "cornerRadius": 8
-  },
-  "largeTitle": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-    "fontLineHeight": 52,
-    "fontSize": 40,
-    "fontWeight": "600"
-  },
-  "neutralBackground1": {
-    "fillColorRest": "#ffffff",
-    "fillColorHover": "#f5f5f5",
-    "fillColorPressed": "#e0e0e0",
-    "fillColorDisabled": "#f0f0f0"
-  },
-  "neutralBackground1Selected": {
-    "fillColorRest": "#ffffff",
-    "fillColorHover": "#f5f5f5",
-    "fillColorPressed": "#e0e0e0",
-    "fillColorDisabled": "#f0f0f0"
-  },
-  "neutralBackground2": {
-    "fillColorRest": "#fafafa",
-    "fillColorHover": "#f0f0f0",
-    "fillColorPressed": "#dbdbdb",
-    "fillColorDisabled": "#f0f0f0"
-  },
-  "neutralBackground2Selected": {
-    "fillColorRest": "#fafafa",
-    "fillColorHover": "#f0f0f0",
-    "fillColorPressed": "#dbdbdb",
-    "fillColorDisabled": "#f0f0f0"
-  },
-  "neutralForeground1": {
-    "fillColorRest": "#242424",
-    "fillColorHover": "#242424",
-    "fillColorPressed": "#242424",
-    "fillColorDisabled": "#242424"
-  },
-  "neutralForeground1Selected": {
-    "fillColorRest": "#242424",
-    "fillColorHover": "#242424",
-    "fillColorPressed": "#242424",
-    "fillColorDisabled": "#242424"
-  },
-  "neutralForeground2Brand": {
-    "fillColorRest": "#424242",
-    "fillColorHover": "#0078d4",
-    "fillColorPressed": "#106ebe",
-    "fillColorDisabled": "#242424"
-  },
-  "neutralForeground2BrandSelected": {
-    "fillColorRest": "#424242",
-    "fillColorHover": "#0078d4",
-    "fillColorPressed": "#106ebe",
-    "fillColorDisabled": "#242424"
-  },
-  "neutralForeground2": {
-    "fillColorRest": "#424242",
-    "fillColorHover": "#242424",
-    "fillColorPressed": "#242424",
-    "fillColorDisabled": "#242424"
-  },
-  "neutralForeground2Selected": {
-    "fillColorRest": "#424242",
-    "fillColorHover": "#242424",
-    "fillColorPressed": "#242424",
-    "fillColorDisabled": "#242424"
-  },
-  "neutralForegroundInvertedAccessible": {
-    "fillColorRest": "#ffffff",
-    "fillColorHover": "#ffffff",
-    "fillColorPressed": "#ffffff",
-    "fillColorDisabled": "#ffffff"
-  },
-  "neutralForegroundInvertedAccessibleSelected": {
-    "fillColorRest": "#ffffff",
-    "fillColorHover": "#ffffff",
-    "fillColorPressed": "#ffffff",
-    "fillColorDisabled": "#ffffff"
-  },
-  "neutralForegroundInverted": {
-    "fillColorRest": "#ffffff",
-    "fillColorHover": "#ffffff",
-    "fillColorPressed": "#ffffff",
-    "fillColorDisabled": "#ffffff"
-  },
-  "neutralForegroundInvertedSelected": {
-    "fillColorRest": "#ffffff",
-    "fillColorHover": "#ffffff",
-    "fillColorPressed": "#ffffff",
-    "fillColorDisabled": "#ffffff"
-  },
-  "neutralStroke1Selected": {
-    "strokeColorRest": "#d1d1d1",
-    "strokeColorHover": "#c7c7c7",
-    "strokeColorPressed": "#b3b3b3",
-    "strokeColorDisabled": "#e0e0e0",
-    "strokeWidth": 1
-  },
-  "neutralStroke1": {
-    "strokeColorRest": "#d1d1d1",
-    "strokeColorHover": "#c7c7c7",
-    "strokeColorPressed": "#b3b3b3",
-    "strokeColorDisabled": "#e0e0e0",
-    "strokeWidth": 1
-  },
-  "neutralStroke2Selected": {
-    "strokeColorRest": "#e0e0e0",
-    "strokeColorHover": "#e0e0e0",
-    "strokeColorPressed": "#e0e0e0",
-    "strokeColorDisabled": "#e0e0e0",
-    "strokeWidth": 1
-  },
-  "neutralStroke2": {
-    "strokeColorRest": "#e0e0e0",
-    "strokeColorHover": "#e0e0e0",
-    "strokeColorPressed": "#e0e0e0",
-    "strokeColorDisabled": "#e0e0e0",
-    "strokeWidth": 1
-  },
-  "round": {
-    "cornerRadius": 9999
-  },
-  "square": {
-    "cornerRadius": 0
-  },
-  "subheadline": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-    "fontLineHeight": 22,
-    "fontSize": 16,
-    "fontWeight": "600"
-  },
-  "surface": {
-    "cornerRadius": 4
-  },
-  "title1": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-    "fontLineHeight": 40,
-    "fontSize": 32,
-    "fontWeight": "600"
-  },
-  "title2": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-    "fontLineHeight": 36,
-    "fontSize": 28,
-    "fontWeight": "600"
-  },
-  "title3": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-    "fontLineHeight": 32,
-    "fontSize": 24,
-    "fontWeight": "600"
-  },
-  "transparentBackground": {
-    "fillColorRest": "transparent",
-    "fillColorHover": "transparent",
-    "fillColorPressed": "transparent",
-    "fillColorDisabled": "transparent"
-  },
-  "transparentBackgroundSelected": {
-    "fillColorRest": "transparent",
-    "fillColorHover": "transparent",
-    "fillColorPressed": "transparent",
-    "fillColorDisabled": "transparent"
-  }
+	"body": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 20,
+		"fontSize": 14,
+		"fontWeight": "400"
+	},
+	"borderless": {
+		"strokeAlignment": "inner",
+		"strokeColorRest": "transparent",
+		"strokeColorHover": "transparent",
+		"strokeColorPressed": "transparent",
+		"strokeColorDisabled": "transparent",
+		"strokeWidth": 1
+	},
+	"brandBackground": {
+		"fillColorRest": "#0078d4",
+		"fillColorHover": "#106ebe",
+		"fillColorPressed": "#004578",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"brandBackgroundSelected": {
+		"fillColorRest": "#0078d4",
+		"fillColorHover": "#106ebe",
+		"fillColorPressed": "#004578",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"brandForeground1": {
+		"fillColorRest": "#0078d4",
+		"fillColorHover": "#0078d4",
+		"fillColorPressed": "#0078d4",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"brandForeground1Selected": {
+		"fillColorRest": "#0078d4",
+		"fillColorHover": "#0078d4",
+		"fillColorPressed": "#0078d4",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"brandForeground2": {
+		"fillColorRest": "#106ebe",
+		"fillColorHover": "#106ebe",
+		"fillColorPressed": "#106ebe",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"brandForeground2Selected": {
+		"fillColorRest": "#106ebe",
+		"fillColorHover": "#106ebe",
+		"fillColorPressed": "#106ebe",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"brandForegroundLink": {
+		"fillColorRest": "#106ebe",
+		"fillColorHover": "#005a9e",
+		"fillColorPressed": "#004578",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"brandForegroundLinkSelected": {
+		"fillColorRest": "#106ebe",
+		"fillColorHover": "#005a9e",
+		"fillColorPressed": "#004578",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"brandStroke1Selected": {
+		"strokeColorRest": "#0078d4",
+		"strokeColorHover": "#0078d4",
+		"strokeColorPressed": "#0078d4",
+		"strokeColorDisabled": "#e0e0e0",
+		"strokeWidth": 1
+	},
+	"brandStroke1": {
+		"strokeColorRest": "#0078d4",
+		"strokeColorHover": "#0078d4",
+		"strokeColorPressed": "#0078d4",
+		"strokeColorDisabled": "#e0e0e0",
+		"strokeWidth": 1
+	},
+	"brandStroke2Selected": {
+		"strokeColorRest": "#c7e0f4",
+		"strokeColorHover": "#c7e0f4",
+		"strokeColorPressed": "#c7e0f4",
+		"strokeColorDisabled": "#e0e0e0",
+		"strokeWidth": 1
+	},
+	"brandStroke2": {
+		"strokeColorRest": "#c7e0f4",
+		"strokeColorHover": "#c7e0f4",
+		"strokeColorPressed": "#c7e0f4",
+		"strokeColorDisabled": "#e0e0e0",
+		"strokeWidth": 1
+	},
+	"caption": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 16,
+		"fontSize": 12,
+		"fontWeight": "400"
+	},
+	"compoundBrandBackground1": {
+		"fillColorRest": "#0078d4",
+		"fillColorHover": "#106ebe",
+		"fillColorPressed": "#005a9e",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"compoundBrandBackground1Selected": {
+		"fillColorRest": "#0078d4",
+		"fillColorHover": "#106ebe",
+		"fillColorPressed": "#005a9e",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"compoundBrandForeground1": {
+		"fillColorRest": "#0078d4",
+		"fillColorHover": "#106ebe",
+		"fillColorPressed": "#005a9e",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"compoundBrandForeground1Selected": {
+		"fillColorRest": "#0078d4",
+		"fillColorHover": "#106ebe",
+		"fillColorPressed": "#005a9e",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"compoundBrandStroke1Selected": {
+		"strokeColorRest": "#0078d4",
+		"strokeColorHover": "#106ebe",
+		"strokeColorPressed": "#005a9e",
+		"strokeColorDisabled": "#e0e0e0",
+		"strokeWidth": 1
+	},
+	"compoundBrandStroke1": {
+		"strokeColorRest": "#0078d4",
+		"strokeColorHover": "#106ebe",
+		"strokeColorPressed": "#005a9e",
+		"strokeColorDisabled": "#e0e0e0",
+		"strokeWidth": 1
+	},
+	"control": {
+		"cornerRadius": 4,
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 20,
+		"fontSize": 14,
+		"fontWeight": "600"
+	},
+	"display": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 92,
+		"fontSize": 68,
+		"fontWeight": "600"
+	},
+	"ghostBackground": {
+		"fillColorRest": "transparent",
+		"fillColorHover": "#f5f5f5",
+		"fillColorPressed": "#e0e0e0",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"ghostBackgroundSelected": {
+		"fillColorRest": "transparent",
+		"fillColorHover": "#f5f5f5",
+		"fillColorPressed": "#e0e0e0",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"headline": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 28,
+		"fontSize": 20,
+		"fontWeight": "600"
+	},
+	"icon": {
+		"cornerRadius": 4
+	},
+	"illustration": {
+		"cornerRadius": 8
+	},
+	"largeTitle": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 52,
+		"fontSize": 40,
+		"fontWeight": "600"
+	},
+	"neutralBackground1": {
+		"fillColorRest": "#ffffff",
+		"fillColorHover": "#f5f5f5",
+		"fillColorPressed": "#e0e0e0",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"neutralBackground1Selected": {
+		"fillColorRest": "#ffffff",
+		"fillColorHover": "#f5f5f5",
+		"fillColorPressed": "#e0e0e0",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"neutralBackground2": {
+		"fillColorRest": "#fafafa",
+		"fillColorHover": "#f0f0f0",
+		"fillColorPressed": "#dbdbdb",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"neutralBackground2Selected": {
+		"fillColorRest": "#fafafa",
+		"fillColorHover": "#f0f0f0",
+		"fillColorPressed": "#dbdbdb",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"neutralBackground3": {
+		"fillColorRest": "#f5f5f5",
+		"fillColorHover": "#ebebeb",
+		"fillColorPressed": "#d6d6d6",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"neutralBackground3Selected": {
+		"fillColorRest": "#f5f5f5",
+		"fillColorHover": "#ebebeb",
+		"fillColorPressed": "#d6d6d6",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"neutralBackground4": {
+		"fillColorRest": "#f0f0f0",
+		"fillColorHover": "#fafafa",
+		"fillColorPressed": "#f5f5f5",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"neutralBackground4Selected": {
+		"fillColorRest": "#f0f0f0",
+		"fillColorHover": "#fafafa",
+		"fillColorPressed": "#f5f5f5",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"neutralBackground5": {
+		"fillColorRest": "#ebebeb",
+		"fillColorHover": "#f5f5f5",
+		"fillColorPressed": "#f0f0f0",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"neutralBackground5Selected": {
+		"fillColorRest": "#ebebeb",
+		"fillColorHover": "#f5f5f5",
+		"fillColorPressed": "#f0f0f0",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"neutralBackground6": {
+		"fillColorRest": "#e6e6e6",
+		"fillColorHover": "#e6e6e6",
+		"fillColorPressed": "#e6e6e6",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"neutralBackground6Selected": {
+		"fillColorRest": "#e6e6e6",
+		"fillColorHover": "#e6e6e6",
+		"fillColorPressed": "#e6e6e6",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"neutralBackgroundInverted": {
+		"fillColorRest": "#616161",
+		"fillColorHover": "#616161",
+		"fillColorPressed": "#616161",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"neutralBackgroundInvertedSelected": {
+		"fillColorRest": "#616161",
+		"fillColorHover": "#616161",
+		"fillColorPressed": "#616161",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"neutralForeground1": {
+		"fillColorRest": "#242424",
+		"fillColorHover": "#242424",
+		"fillColorPressed": "#242424",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralForeground1Selected": {
+		"fillColorRest": "#242424",
+		"fillColorHover": "#242424",
+		"fillColorPressed": "#242424",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralForeground2Brand": {
+		"fillColorRest": "#424242",
+		"fillColorHover": "#0078d4",
+		"fillColorPressed": "#106ebe",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralForeground2BrandSelected": {
+		"fillColorRest": "#424242",
+		"fillColorHover": "#0078d4",
+		"fillColorPressed": "#106ebe",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralForeground2": {
+		"fillColorRest": "#424242",
+		"fillColorHover": "#242424",
+		"fillColorPressed": "#242424",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralForeground2Selected": {
+		"fillColorRest": "#424242",
+		"fillColorHover": "#242424",
+		"fillColorPressed": "#242424",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralForeground3Brand": {
+		"fillColorRest": "#616161",
+		"fillColorHover": "#0078d4",
+		"fillColorPressed": "#106ebe",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralForeground3BrandSelected": {
+		"fillColorRest": "#616161",
+		"fillColorHover": "#0078d4",
+		"fillColorPressed": "#106ebe",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralForeground3": {
+		"fillColorRest": "#616161",
+		"fillColorHover": "#424242",
+		"fillColorPressed": "#424242",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralForeground3Selected": {
+		"fillColorRest": "#616161",
+		"fillColorHover": "#424242",
+		"fillColorPressed": "#424242",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralForeground4": {
+		"fillColorRest": "#707070",
+		"fillColorHover": "#707070",
+		"fillColorPressed": "#707070",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralForeground4Selected": {
+		"fillColorRest": "#707070",
+		"fillColorHover": "#707070",
+		"fillColorPressed": "#707070",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralForegroundInvertedAccessible": {
+		"fillColorRest": "#ffffff",
+		"fillColorHover": "#ffffff",
+		"fillColorPressed": "#ffffff",
+		"fillColorDisabled": "#ffffff"
+	},
+	"neutralForegroundInvertedAccessibleSelected": {
+		"fillColorRest": "#ffffff",
+		"fillColorHover": "#ffffff",
+		"fillColorPressed": "#ffffff",
+		"fillColorDisabled": "#ffffff"
+	},
+	"neutralForegroundInverted": {
+		"fillColorRest": "#ffffff",
+		"fillColorHover": "#ffffff",
+		"fillColorPressed": "#ffffff",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralForegroundInvertedLink": {
+		"fillColorRest": "#ffffff",
+		"fillColorHover": "#ffffff",
+		"fillColorPressed": "#ffffff",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralForegroundInvertedLinkSelected": {
+		"fillColorRest": "#ffffff",
+		"fillColorHover": "#ffffff",
+		"fillColorPressed": "#ffffff",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralForegroundInvertedSelected": {
+		"fillColorRest": "#ffffff",
+		"fillColorHover": "#ffffff",
+		"fillColorPressed": "#ffffff",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralForegroundOnBrand": {
+		"fillColorRest": "#ffffff",
+		"fillColorHover": "#ffffff",
+		"fillColorPressed": "#ffffff",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralForegroundOnBrandSelected": {
+		"fillColorRest": "#ffffff",
+		"fillColorHover": "#ffffff",
+		"fillColorPressed": "#ffffff",
+		"fillColorDisabled": "#bdbdbd"
+	},
+	"neutralStroke1Selected": {
+		"strokeColorRest": "#d1d1d1",
+		"strokeColorHover": "#c7c7c7",
+		"strokeColorPressed": "#b3b3b3",
+		"strokeColorDisabled": "#e0e0e0",
+		"strokeWidth": 1
+	},
+	"neutralStroke1": {
+		"strokeColorRest": "#d1d1d1",
+		"strokeColorHover": "#c7c7c7",
+		"strokeColorPressed": "#b3b3b3",
+		"strokeColorDisabled": "#e0e0e0",
+		"strokeWidth": 1
+	},
+	"neutralStroke2Selected": {
+		"strokeColorRest": "#e0e0e0",
+		"strokeColorHover": "#e0e0e0",
+		"strokeColorPressed": "#e0e0e0",
+		"strokeColorDisabled": "#e0e0e0",
+		"strokeWidth": 1
+	},
+	"neutralStroke2": {
+		"strokeColorRest": "#e0e0e0",
+		"strokeColorHover": "#e0e0e0",
+		"strokeColorPressed": "#e0e0e0",
+		"strokeColorDisabled": "#e0e0e0",
+		"strokeWidth": 1
+	},
+	"neutralStroke3Selected": {
+		"strokeColorRest": "#f0f0f0",
+		"strokeColorHover": "#f0f0f0",
+		"strokeColorPressed": "#f0f0f0",
+		"strokeColorDisabled": "#e0e0e0",
+		"strokeWidth": 1
+	},
+	"neutralStroke3": {
+		"strokeColorRest": "#f0f0f0",
+		"strokeColorHover": "#f0f0f0",
+		"strokeColorPressed": "#f0f0f0",
+		"strokeColorDisabled": "#e0e0e0",
+		"strokeWidth": 1
+	},
+	"neutralStrokeAccessibleSelected": {
+		"strokeColorRest": "#616161",
+		"strokeColorHover": "#575757",
+		"strokeColorPressed": "#4d4d4d",
+		"strokeColorDisabled": "#e0e0e0",
+		"strokeWidth": 1
+	},
+	"neutralStrokeAccessible": {
+		"strokeColorRest": "#616161",
+		"strokeColorHover": "#575757",
+		"strokeColorPressed": "#4d4d4d",
+		"strokeColorDisabled": "#e0e0e0",
+		"strokeWidth": 1
+	},
+	"round": {
+		"cornerRadius": 9999
+	},
+	"square": {
+		"cornerRadius": 0
+	},
+	"subheadline": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 22,
+		"fontSize": 16,
+		"fontWeight": "600"
+	},
+	"subtleBackground": {
+		"fillColorRest": "transparent",
+		"fillColorHover": "#f5f5f5",
+		"fillColorPressed": "#e0e0e0",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"subtleBackgroundSelected": {
+		"fillColorRest": "transparent",
+		"fillColorHover": "#f5f5f5",
+		"fillColorPressed": "#e0e0e0",
+		"fillColorDisabled": "#f0f0f0"
+	},
+	"surface": {
+		"cornerRadius": 4
+	},
+	"title1": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 40,
+		"fontSize": 32,
+		"fontWeight": "600"
+	},
+	"title2": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 36,
+		"fontSize": 28,
+		"fontWeight": "600"
+	},
+	"title3": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 32,
+		"fontSize": 24,
+		"fontWeight": "600"
+	},
+	"transparentBackground": {
+		"fillColorRest": "transparent",
+		"fillColorHover": "transparent",
+		"fillColorPressed": "transparent",
+		"fillColorDisabled": "transparent"
+	},
+	"transparentBackgroundSelected": {
+		"fillColorRest": "transparent",
+		"fillColorHover": "transparent",
+		"fillColorPressed": "transparent",
+		"fillColorDisabled": "transparent"
+	},
+	"transparentStroke": {
+		"strokeAlignment": "inner",
+		"strokeColorRest": "transparent",
+		"strokeColorHover": "transparent",
+		"strokeColorPressed": "transparent",
+		"strokeColorDisabled": "transparent",
+		"strokeWidth": 1
+	}
 }

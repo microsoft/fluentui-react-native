@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useTokens samples Sample1Text rendering with no overrides 1`] = `
+<SampleText1>
+  <Text
+    style={
+      Object {
+        "color": "black",
+        "fontFamily": "Arial",
+        "fontSize": 12,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "black",
+          "fontFamily": "Arial",
+          "fontSize": 12,
+        }
+      }
+    >
+      Sample1a
+    </Text>
+  </Text>
+</SampleText1>
+`;
+
+exports[`useTokens samples Sample1Text rendering with some custom settings in the theme 1`] = `
+<SampleText1>
+  <Text
+    style={
+      Object {
+        "color": "pink",
+        "fontFamily": "Arial",
+        "fontSize": 24,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "pink",
+          "fontFamily": "Arial",
+          "fontSize": 24,
+        }
+      }
+    >
+      Sample1b
+    </Text>
+  </Text>
+</SampleText1>
+`;
+
+exports[`useTokens samples Sample2Text rendering with defaults and a color override 1`] = `
+<View>
+  <View>
+    <SampleText2>
+      <Text
+        style={
+          Object {
+            "color": "black",
+            "fontFamily": "Arial",
+            "fontSize": 12,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Arial",
+              "fontSize": 12,
+            }
+          }
+        >
+          Sample2 with defaults
+        </Text>
+      </Text>
+    </SampleText2>
+    <SampleText2
+      color="green"
+    >
+      <Text
+        style={
+          Object {
+            "color": "green",
+            "fontFamily": "Arial",
+            "fontSize": 12,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "green",
+              "fontFamily": "Arial",
+              "fontSize": 12,
+            }
+          }
+        >
+          Sample2 with color override via prop
+        </Text>
+      </Text>
+    </SampleText2>
+  </View>
+</View>
+`;
+
+exports[`useTokens samples Sample2Text rendering with some custom settings in the theme 1`] = `
+<View>
+  <View>
+    <SampleText2>
+      <Text
+        style={
+          Object {
+            "color": "black",
+            "fontFamily": "Helvetica",
+            "fontSize": 18,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "black",
+              "fontFamily": "Helvetica",
+              "fontSize": 18,
+            }
+          }
+        >
+          Sample2 with theme overrides set
+        </Text>
+      </Text>
+    </SampleText2>
+    <SampleText2
+      color="purple"
+    >
+      <Text
+        style={
+          Object {
+            "color": "purple",
+            "fontFamily": "Helvetica",
+            "fontSize": 18,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "purple",
+              "fontFamily": "Helvetica",
+              "fontSize": 18,
+            }
+          }
+        >
+          Sample2 with theme and color prop override
+        </Text>
+      </Text>
+    </SampleText2>
+  </View>
+</View>
+`;
