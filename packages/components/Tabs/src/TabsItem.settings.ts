@@ -1,6 +1,7 @@
 import { tabsItemName, TabsItemType } from './TabsItem.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 import type { IViewProps } from '@fluentui-react-native/adapters';
+// import { Text } from '@fluentui-react-native/experimental-text';
 
 export const tabsItemSelectActionLabel = 'Select a TabsItem';
 
@@ -8,8 +9,9 @@ export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
       // backgroundColor: 'transparent',
-      color: '#616161',
       // borderColor: 'transparent',
+      // color: 'AccentDark',
+      color: '#616161',
       borderWidth: 0,
       borderRadius: 0,
       fontSize: 14,
@@ -25,6 +27,7 @@ export const settings: IComposeSettings<TabsItemType> = [
         alignItems: 'center',
         flexDirection: 'column',
         alignSelf: 'flex-start',
+        justifyContent: 'center',
       },
     } as IViewProps,
     content: {
@@ -34,19 +37,21 @@ export const settings: IComposeSettings<TabsItemType> = [
       style: {
         minHeight: 2,
         minWidth: 44,
+        // flex: 1,
         backgroundColor: '#185ABD',
-        // borderRadius: 2,
+        borderRadius: 2,
         // paddingTop: 5,
         // borderWidth: 1,
-        marginTop: 3,
+        marginBottom: 2,
       },
     },
     stack: {
       style: {
         display: 'flex',
-        paddingStart: 10,
-        paddingEnd: 10,
+        // paddingStart: 10,
+        // paddingEnd: 10,
         // paddingBottom: 50,
+        marginHorizontal: 10,
         alignItems: 'center',
         flexDirection: 'row',
         alignSelf: 'flex-start',
@@ -73,6 +78,8 @@ export const settings: IComposeSettings<TabsItemType> = [
           // backgroundColor: 'transparent',
           color: '#242424',
           // borderColor: 'buttonBorderHovered',
+          // fontWeight: 'bold',
+          // fontFamily: 'LargeSemibold',
           fontWeight: 'bold',
           fontFamily: 'Segoe UI',
           fontSize: 14,
@@ -97,16 +104,19 @@ export const settings: IComposeSettings<TabsItemType> = [
       focused: {
         tokens: {
           // borderColor: 'buttonBorderFocused',
-          color: '#242424', // invalid prop?
+          color: '#242424',
+          borderWidth: 2,
+          borderColor: '#242424',
+          borderRadius: 4,
           // backgroundColor: 'transparent',
           // borderWidth: 0,
         },
-        stack: {
-          style: {
-            borderWidth: 2,
-            borderColor: '#242424',
-          },
-        },
+        // stack: {
+        // style: {
+        // borderWidth: 2,
+        // borderColor: '#242424',
+        // },
+        // },
       },
     },
   },

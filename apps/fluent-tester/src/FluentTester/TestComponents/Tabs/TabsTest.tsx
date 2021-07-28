@@ -51,8 +51,8 @@ const tabChangingViews: React.FunctionComponent<{}> = () => {
         <TabsItem headerText="File" buttonKey="file" disabled={true} />
         <TabsItem headerText="Settings" buttonKey="settings" />
       </Tabs>
-      <Separator />
-      <View>
+      {/* <Separator /> */}
+      <View style={{ marginVertical: 1 }}>
         {selectedKey == 'home' && <Text>This is home</Text>}
         {selectedKey == 'file' && <Text>This is file</Text>}
         {selectedKey == 'settings' && <Text>This is settings</Text>}
