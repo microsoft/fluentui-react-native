@@ -32,24 +32,6 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@fluentui-react-native/button": ">=0.17.9 <1.0.0",
-    "@fluentui-react-native/callout": ">=0.15.5 <1.0.0",
-    "@fluentui-react-native/checkbox": ">=0.11.10 <1.0.0",
-    "@fluentui-react-native/contextual-menu": "0.9.5",
-    "@fluentui-react-native/focus-trap-zone": ">=0.7.11 <1.0.0",
-    "@fluentui-react-native/focus-zone": ">=0.6.0 <1.0.0",
-    "@fluentui-react-native/interactive-hooks": ">=0.10.10 <1.0.0",
-    "@fluentui-react-native/link": ">=0.12.12 <1.0.0",
-    "@fluentui-react-native/menu-button": ">=0.2.6 <1.0.0",
-    "@fluentui-react-native/persona": ">=0.10.7 <1.0.0",
-    "@fluentui-react-native/persona-coin": ">=0.8.6 <1.0.0",
-    "@fluentui-react-native/pressable": ">=0.6.11 <1.0.0",
-    "@fluentui-react-native/radio-group": ">=0.10.11 <1.0.0",
-    "@fluentui-react-native/separator": ">=0.10.6 <1.0.0",
-    "@fluentui-react-native/text": ">=0.9.8 <1.0.0",
-    "@fluentui-react-native/tabs": ">=0.1.0 <1.0.0"
-=======
     "@fluentui-react-native/button": ">=0.17.17 <1.0.0",
     "@fluentui-react-native/callout": ">=0.16.7 <1.0.0",
     "@fluentui-react-native/checkbox": ">=0.11.18 <1.0.0",
@@ -64,8 +46,8 @@
     "@fluentui-react-native/pressable": ">=0.6.19 <1.0.0",
     "@fluentui-react-native/radio-group": ">=0.10.19 <1.0.0",
     "@fluentui-react-native/separator": ">=0.10.14 <1.0.0",
-    "@fluentui-react-native/text": ">=0.9.16 <1.0.0"
->>>>>>> 8f1f77980cff8d4ee4d43768e7f3a7ef54e95179
+    "@fluentui-react-native/text": ">=0.9.16 <1.0.0",
+    "@fluentui-react-native/tabs": ">=0.1.0 <1.0.0"
   },
   "devDependencies": {
     "@types/react-native": "^0.63.0",
