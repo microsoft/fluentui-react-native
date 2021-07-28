@@ -122,4 +122,9 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_TOKEN_BUTTON,
 >>>>>>> 8f1f77980cff8d4ee4d43768e7f3a7ef54e95179
   },
+  {
+    name: 'Tokens Test',
+    component: TokenTest,
+    testPage: HOMEPAGE_TOKEN_BUTTON,
+  },
 ];

@@ -100,14 +100,13 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_ICON_BUTTON,
   },
   {
-<<<<<<< HEAD
     name: 'Tabs Test',
     component: TabsTest,
     testPage: HOMEPAGE_TABS_BUTTON,
-=======
+  },
+  {
     name: 'Tokens Test',
     component: TokenTest,
     testPage: HOMEPAGE_TOKEN_BUTTON,
->>>>>>> 8f1f77980cff8d4ee4d43768e7f3a7ef54e95179
   },
 ];
