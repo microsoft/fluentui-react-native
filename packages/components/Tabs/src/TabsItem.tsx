@@ -131,9 +131,7 @@ export const TabsItem = compose<TabsItemType>({
     const context = React.useContext(TabsContext);
     
     context.views.set(info.key, children);
-    console.log(context.views);
     
-
     return (
       <Slots.root>
         <Slots.stack>

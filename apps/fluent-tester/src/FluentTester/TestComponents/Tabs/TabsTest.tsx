@@ -50,7 +50,7 @@ const tabChangingViews: React.FunctionComponent<{}> = () => {
 
   return (
     <View style={stackStyle}>
-      <Tabs label="Tabs" onTabsClick={onTabsClick} getTabId={getTabId}>
+      <Tabs label="Tabs" onTabsClick={onTabsClick} getTabId={getTabId} headersOnly={true}>
         <TabsItem headerText="Home" buttonKey="home" />
         <TabsItem headerText="File" buttonKey="file" disabled={true} />
         <TabsItem headerText="Settings" buttonKey="settings" />

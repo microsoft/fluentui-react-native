@@ -33,7 +33,7 @@ export const Tabs = compose<TabsType>({
   displayName: tabsName,
 
   usePrepareProps: (userProps: TabsProps, useStyling: IUseComposeStyling<TabsType>) => {
-    const { label, ariaLabel, selectedKey, defaultSelectedKey, getTabId, isCircularNavigation, ...rest } = userProps;
+    const { label, ariaLabel, selectedKey, headersOnly, defaultSelectedKey, getTabId, isCircularNavigation, ...rest } = userProps;
     
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
     const data = useSelectedKey(selectedKey || defaultSelectedKey || null, userProps.onTabsClick);
@@ -65,6 +65,9 @@ export const Tabs = compose<TabsType>({
         updateSelectedButtonRef: onSelectButtonRef,
         views: map
       },
+      info:{
+        headersOnly: headersOnly ?? false
+      }
     };
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
@@ -103,10 +106,7 @@ export const Tabs = compose<TabsType>({
     }
     const context = React.useContext(TabsContext);
 
-    if(context.views){
-      console.log(context.views);
-    }
-    //console.log(context.views, context.selectedKey);
+    console.log(renderData.state.info.headersOnly);
     
     return (
       <TabsContext.Provider
@@ -119,7 +119,8 @@ export const Tabs = compose<TabsType>({
           <Slots.tabPanel>
             <TabsContext.Consumer>
             {
-              context => context.views.get(context.selectedKey)
+              
+              context => !renderData.state.info.headersOnly && context.views.get(context.selectedKey)
             }
             </TabsContext.Consumer>
           </Slots.tabPanel>

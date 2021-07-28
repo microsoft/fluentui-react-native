@@ -38,8 +38,13 @@ export interface ITabsContext {
   views?: Map<string, any> | null;
 }
 
+export interface TabsInfo{
+  headersOnly?: boolean; 
+}
+
 export interface TabsState {
   context: ITabsContext;
+  info: TabsInfo;
 }
 
 export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> {
@@ -70,7 +75,15 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
    */
   onTabsClick?: (key: string) => void;
 
+  /*
+  ** Callback for recieving the key and index when a tab is selected
+  */
   getTabId?: (key: string, index: number) => void;
+  
+  /*
+  ** Sets whether to only render the header
+  */
+  headersOnly?: boolean; 
 
   testID?: string;
 }
