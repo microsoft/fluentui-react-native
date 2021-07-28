@@ -63,7 +63,12 @@ export const Shadow = compressible<ShadowProps, ShadowTokens>((props: ShadowProp
   const Root = useSlot<ViewProps>(View, {
     ...rest,
     style: mergeStyles(
-      { backgroundColor: tokens.backgroundColor, shadowColor: tokens.color, ...borderStyles.from(tokens, theme), ...tokens.key },
+      {
+        backgroundColor: tokens.backgroundColor,
+        shadowColor: tokens.color,
+        ...borderStyles.from(tokens, theme),
+        ...tokens.key,
+      },
       style,
     ),
   });
@@ -74,6 +79,7 @@ export const Shadow = compressible<ShadowProps, ShadowTokens>((props: ShadowProp
       backgroundColor: tokens.backgroundColor,
       padding,
       paddingHorizontal,
+      flexGrow: 1,
       ...tokens.ambient,
     },
   });
