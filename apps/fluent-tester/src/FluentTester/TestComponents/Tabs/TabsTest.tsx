@@ -23,16 +23,16 @@ const tabs: React.FunctionComponent<{}> = () => {
     <View style={stackStyle}>
       <Tabs label="Tabs" defaultSelectedKey="B" onTabsClick={onTabsClick} isCircularNavigation={true}>
         <TabsItem icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }} headerText="Option A!" itemKey="A">
-          <Text>This is option A's content</Text>
+          <Text>This is option A&apos;s content</Text>
         </TabsItem>
         <TabsItem headerText="Option B" itemKey="B">
-          <Text>This is option B's content</Text>
+          <Text>This is option B&apos;s content</Text>
         </TabsItem>
         <TabsItem headerText="Option C" itemKey="C" disabled={true} >
-          <Text>This is option C's content</Text>
+          <Text>This is option C&apos;s content</Text>
         </TabsItem>
         <TabsItem headerText="Option D" itemKey="D" >
-          <Text>This is option D's content</Text>
+          <Text>This is option D&apos;s content</Text>
         </TabsItem>
       </Tabs>
     </View>
@@ -88,13 +88,13 @@ const tabsSettingSelectedKey: React.FunctionComponent<{}> = () => {
     <View style={stackStyle}>
       <Tabs label="Tabs" selectedKey={selectedKey} isCircularNavigation={true}>
         <TabsItem headerText="Home" itemKey="home">
-          <Text>This is Home's content</Text>
+          <Text>This is Home&apos;s content</Text>
         </TabsItem>
         <TabsItem headerText="File" itemKey="file">
-          <Text>This is Files's content</Text>
+          <Text>This is Files&apos;s content</Text>
         </TabsItem>
         <TabsItem headerText="Setting" itemKey="setting" >
-          <Text>This is Settings's content</Text>
+          <Text>This is Settings&apos;s content</Text>
         </TabsItem>
       </Tabs>
       <Button content="View Next Tab" onClick={goToNextTab}/>
