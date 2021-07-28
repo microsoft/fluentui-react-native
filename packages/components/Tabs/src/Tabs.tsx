@@ -104,7 +104,6 @@ export const Tabs = compose<TabsType>({
         }
       });
     }
-    const context = React.useContext(TabsContext);
 
     console.log(renderData.state.info.headersOnly);
     
