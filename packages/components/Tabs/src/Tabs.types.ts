@@ -34,7 +34,10 @@ export interface ITabsContext {
    ** Array of radio button keys in the group
    */
   buttonKeys?: string[];
-
+  
+  /*
+  ** A Map to for a TabItems corresponding view
+  */
   views?: Map<string, React.ReactNode[]> | null;
 }
 

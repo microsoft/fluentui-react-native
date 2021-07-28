@@ -104,8 +104,6 @@ export const Tabs = compose<TabsType>({
         }
       });
     }
-
-    console.log(renderData.state.info.headersOnly);
     
     return (
       <TabsContext.Provider
