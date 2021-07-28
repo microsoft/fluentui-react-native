@@ -7,14 +7,14 @@ export const tabsItemSelectActionLabel = 'Select a TabsItem';
 export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
-      backgroundColor: 'transparent',
-      color: 'buttonText',
-      borderColor: 'buttonTextPressed',
+      // backgroundColor: 'transparent',
+      color: '#616161',
+      // borderColor: 'transparent',
       borderWidth: 0,
       borderRadius: 0,
       fontSize: 14,
       fontWeight: 'normal',
-      fontFamily: 'inherit',
+      fontFamily: 'Segoe UI',
     },
     root: {
       accessible: true,
@@ -35,6 +35,10 @@ export const settings: IComposeSettings<TabsItemType> = [
         minHeight: 2,
         minWidth: 44,
         backgroundColor: '#185ABD',
+        // borderRadius: 2,
+        // paddingTop: 5,
+        // borderWidth: 1,
+        marginTop: 3,
       },
     },
     stack: {
@@ -42,16 +46,17 @@ export const settings: IComposeSettings<TabsItemType> = [
         display: 'flex',
         paddingStart: 10,
         paddingEnd: 10,
+        // paddingBottom: 50,
         alignItems: 'center',
         flexDirection: 'row',
         alignSelf: 'flex-start',
         minHeight: 32,
         minWidth: 32,
         justifyContent: 'center',
-        borderWidth: 1,
-        borderRadius: 2,
-        backgroundColor: 'buttonBackground',
-        borderColor: 'buttonBorder',
+        // borderWidth: 1,
+        // borderRadius: 2,
+        // backgroundColor: 'buttonBackground',
+        // borderColor: 'buttonBorder',
       },
     },
     _precedence: ['hovered', 'selected', 'focused', 'disabled'],
@@ -65,31 +70,42 @@ export const settings: IComposeSettings<TabsItemType> = [
       },
       hovered: {
         tokens: {
-          backgroundColor: 'transparent',
-          color: 'buttonTextHovered',
-          borderColor: 'buttonBorderHovered',
+          // backgroundColor: 'transparent',
+          color: '#242424',
+          // borderColor: 'buttonBorderHovered',
           fontWeight: 'bold',
-          fontFamily: 'inherit',
+          fontFamily: 'Segoe UI',
           fontSize: 14,
         },
       },
       selected: {
         tokens: {
-          backgroundColor: 'transparent',
-          color: 'buttonTextPressed',
+          // backgroundColor: 'transparent',
+          color: '#242424',
           // borderColor: 'buttonBorderPressed',
-          borderWidth: 0,
           fontWeight: 'bold',
-          fontFamily: 'inherit',
+          fontFamily: 'Segoe UI',
           fontSize: 14,
         },
+        // stack: {
+        //   style: {
+        //     borderWidth: 3,
+        //     borderColor: 'buttonBorderPressed',
+        //   },
+        // },
       },
       focused: {
         tokens: {
-          borderColor: 'buttonBorderFocused',
-          color: 'buttonTextFocused', // invalid prop?
-          backgroundColor: 'transparent',
-          borderWidth: 3,
+          // borderColor: 'buttonBorderFocused',
+          color: '#242424', // invalid prop?
+          // backgroundColor: 'transparent',
+          // borderWidth: 0,
+        },
+        stack: {
+          style: {
+            borderWidth: 2,
+            borderColor: '#242424',
+          },
         },
       },
     },

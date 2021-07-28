@@ -145,7 +145,7 @@ export const TabsItem = compose<TabsItemType>({
     stack: { slotType: View, filter: filterViewProps },
     icon: { slotType: Icon as React.ComponentType<object> },
     content: Text,
-    indicator: View,
+    indicator: { slotType: View, filter: filterViewProps },
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
