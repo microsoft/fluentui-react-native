@@ -35,7 +35,7 @@ export interface ITabsContext {
    */
   buttonKeys?: string[];
 
-  views?: Map<string, any> | null;
+  views?: Map<string, React.ReactNode[]> | null;
 }
 
 export interface TabsInfo{

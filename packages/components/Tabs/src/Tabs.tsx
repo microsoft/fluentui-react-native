@@ -55,7 +55,7 @@ export const Tabs = compose<TabsType>({
     }, []);
 
     // stories views to be displayed
-    const map = new Map<string, any>();
+    const map = new Map<string, React.ReactNode[]>();
 
     const state: TabsState = {
       context: {
