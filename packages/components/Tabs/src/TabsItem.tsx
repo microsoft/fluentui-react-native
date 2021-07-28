@@ -67,7 +67,7 @@ export const TabsItem = compose<TabsItemType>({
         disabled: !!userProps.disabled,
         headerText: !!headerText,
         icon: !!icon,
-        key: buttonKey
+        key: buttonKey,
       },
     };
 
@@ -131,7 +131,7 @@ export const TabsItem = compose<TabsItemType>({
     const context = React.useContext(TabsContext);
     // Sets the view that belongs to a TabItem
     context.views.set(info.key, children);
-    
+
     return (
       <Slots.root>
         <Slots.stack>

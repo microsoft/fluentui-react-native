@@ -35,7 +35,6 @@ export interface TabsItemInfo extends IPressableState {
    * Key for tabItem
    */
   key: string;
-
 }
 
 export interface TabsItemState {
