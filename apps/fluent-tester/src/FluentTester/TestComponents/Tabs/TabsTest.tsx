@@ -22,13 +22,17 @@ const tabs: React.FunctionComponent<{}> = () => {
     <View style={stackStyle}>
       <Tabs label="Tabs" defaultSelectedKey="B" onTabsClick={onTabsClick} isCircularNavigation={true}>
         <TabsItem icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }} headerText="Option A!" itemKey="A">
-          <Text>Heyooo</Text>
-          <Text>Heyooo</Text>
-          <Text>Heyooo</Text>
+          <Text>This is option A's content</Text>
         </TabsItem>
-        <TabsItem headerText="Option B" itemKey="B" />
-        <TabsItem headerText="Option C" itemKey="C" disabled={true} />
-        <TabsItem headerText="Option D" itemKey="D" />
+        <TabsItem headerText="Option B" itemKey="B">
+          <Text>This is option B's content</Text>
+        </TabsItem>
+        <TabsItem headerText="Option C" itemKey="C" disabled={true} >
+          <Text>This is option C's content</Text>
+        </TabsItem>
+        <TabsItem headerText="Option D" itemKey="D" >
+          <Text>This is option D's content</Text>
+        </TabsItem>
       </Tabs>
     </View>
   );
