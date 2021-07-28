@@ -1,16 +1,17 @@
 import * as React from 'react';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 import { Tabs, TabsItem, Text, Separator } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { SvgIconProps } from '@fluentui-react-native/icon';
+import { Button } from '@fluentui-react-native/button';
 
 import TestSvg from './test.svg';
 
 const tabs: React.FunctionComponent<{}> = () => {
   const onTabsClick = (key: string) => {
-    Alert.alert('Alert.', key + ' works');
+    console.log(`onTabsClick works ${key}`);
   };
 
   const svgProps: SvgIconProps = {
@@ -21,10 +22,18 @@ const tabs: React.FunctionComponent<{}> = () => {
   return (
     <View style={stackStyle}>
       <Tabs label="Tabs" defaultSelectedKey="B" onTabsClick={onTabsClick} isCircularNavigation={true}>
-        <TabsItem icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }} headerText="Option A!" buttonKey="A" />
-        <TabsItem headerText="Option B" buttonKey="B" />
-        <TabsItem headerText="Option C" buttonKey="C" disabled={true} />
-        <TabsItem headerText="Option D" buttonKey="D" />
+        <TabsItem icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }} headerText="Option A!" itemKey="A">
+          <Text>This is option A&apos;s content</Text>
+        </TabsItem>
+        <TabsItem headerText="Option B" itemKey="B">
+          <Text>This is option B&apos;s content</Text>
+        </TabsItem>
+        <TabsItem headerText="Option C" itemKey="C" disabled={true} >
+          <Text>This is option C&apos;s content</Text>
+        </TabsItem>
+        <TabsItem headerText="Option D" itemKey="D" >
+          <Text>This is option D&apos;s content</Text>
+        </TabsItem>
       </Tabs>
     </View>
   );
@@ -36,20 +45,20 @@ const tabs: React.FunctionComponent<{}> = () => {
 const tabChangingViews: React.FunctionComponent<{}> = () => {
   const [selectedKey, setSelectedKey] = React.useState('home');
 
-  const changeView = (key: string) => {
+  const onTabsClick = (key: string) => {
     setSelectedKey(key);
   };
 
-  const test = (key: string, index: number) => {
-    Alert.alert('HERE IT IS', key + index);
+  const getTabId = (key: string, index: number) => {
+    return `getTabId works ${key} ${index}`;
   };
 
   return (
     <View style={stackStyle}>
-      <Tabs label="Tabs" onTabsClick={changeView} getTabId={test}>
-        <TabsItem headerText="Home" buttonKey="home" />
-        <TabsItem headerText="File" buttonKey="file" disabled={true} />
-        <TabsItem headerText="Settings" buttonKey="settings" />
+      <Tabs label="Tabs" onTabsClick={onTabsClick} getTabId={getTabId} headersOnly={true}>
+        <TabsItem headerText="Home" itemKey="home" />
+        <TabsItem headerText="File" itemKey="file" disabled={true} />
+        <TabsItem headerText="Settings" itemKey="settings" />
       </Tabs>
       <Separator />
       <View>
@@ -57,6 +66,38 @@ const tabChangingViews: React.FunctionComponent<{}> = () => {
         {selectedKey == 'file' && <Text>This is file</Text>}
         {selectedKey == 'settings' && <Text>This is settings</Text>}
       </View>
+    </View>
+  );
+};
+
+{
+  /* If user wants to programmtically set the selectedKey to control the view */
+}
+const tabsSettingSelectedKey: React.FunctionComponent<{}> = () => {
+  const [selectedKey, setSelectedKey] = React.useState('home');
+  const [currTabItemIndex, setCurrTabItemIndex] = React.useState(0);
+  const tabItems = ['home', 'file', 'setting'];
+  
+  const goToNextTab = () => {
+    const newCurrTabItemIndex = (currTabItemIndex + 1) % 3;
+    setCurrTabItemIndex(newCurrTabItemIndex);
+    setSelectedKey(tabItems[newCurrTabItemIndex]);
+  };
+
+  return (
+    <View style={stackStyle}>
+      <Tabs label="Tabs" selectedKey={selectedKey} isCircularNavigation={true}>
+        <TabsItem headerText="Home" itemKey="home">
+          <Text>This is Home&apos;s content</Text>
+        </TabsItem>
+        <TabsItem headerText="File" itemKey="file">
+          <Text>This is Files&apos;s content</Text>
+        </TabsItem>
+        <TabsItem headerText="Setting" itemKey="setting" >
+          <Text>This is Settings&apos;s content</Text>
+        </TabsItem>
+      </Tabs>
+      <Button content="View Next Tab" onClick={goToNextTab}/>
     </View>
   );
 };
@@ -71,6 +112,10 @@ const tabsSections: TestSection[] = [
     name: 'Navigation with Content',
     component: tabChangingViews,
   },
+  {
+    name: 'Override Selected Key',
+    component: tabsSettingSelectedKey
+  }
 ];
 
 export const TabsTest: React.FunctionComponent<{}> = () => {
