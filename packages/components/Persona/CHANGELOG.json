@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/persona",
   "entries": [
     {
+      "date": "Tue, 27 Jul 2021 22:17:20 GMT",
+      "tag": "@fluentui-react-native/persona_v0.10.15",
+      "version": "0.10.15",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add compressible utility and a snapshot test / demo to framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "1cd8611e1e88848ab66f7c0e9113c946f968260c",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 27 Jul 2021 18:55:58 GMT",
+      "tag": "@fluentui-react-native/persona_v0.10.14",
+      "version": "0.10.14",
+      "comments": {
+        "none": [
+          {
+            "comment": "ESLint fixes",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "07d04d166b13ff79e07a8c4cbc2e06afb1e4c3e6",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 26 Jul 2021 20:41:04 GMT",
       "tag": "@fluentui-react-native/persona_v0.10.14",
       "version": "0.10.14",

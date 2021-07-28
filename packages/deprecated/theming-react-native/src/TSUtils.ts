@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /** typescript shorthand for excluding a key from an interface */
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 

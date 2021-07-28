@@ -7,7 +7,7 @@ import { stackStyle } from './Common/styles';
 export type TestSection = {
   name: string;
   testID?: string;
-  component: React.FunctionComponent<{}>;
+  component: React.FunctionComponent;
 };
 
 export type Status = 'Production' | 'Beta' | 'Experimental' | 'Backlog' | 'N/A';

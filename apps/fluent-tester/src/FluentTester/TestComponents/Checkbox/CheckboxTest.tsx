@@ -10,7 +10,7 @@ function onChangeUncontrolled(isChecked: boolean) {
   console.log(isChecked);
 }
 
-const basicCheckbox: React.FunctionComponent<{}> = () => {
+const basicCheckbox: React.FunctionComponent = () => {
   return (
     <View>
       <Checkbox label="Unchecked checkbox (undefined)" onChange={onChangeUncontrolled} />
@@ -23,7 +23,7 @@ const basicCheckbox: React.FunctionComponent<{}> = () => {
   );
 };
 
-const otherCheckbox: React.FunctionComponent<{}> = () => {
+const otherCheckbox: React.FunctionComponent = () => {
   const [isCheckedControlled1, setCheckedControlled1] = React.useState(false);
   const onChangeControlled1 = React.useCallback((checked) => {
     setCheckedControlled1(checked);
@@ -47,7 +47,7 @@ const otherCheckbox: React.FunctionComponent<{}> = () => {
   );
 };
 
-const tokenCheckbox: React.FunctionComponent<{}> = () => {
+const tokenCheckbox: React.FunctionComponent = () => {
   const CircularCheckbox = Checkbox.customize({ tokens: { borderRadius: 50 } });
 
   const CircleColorCheckbox = Checkbox.customize({
@@ -154,7 +154,7 @@ const checkboxSections: TestSection[] = [
   },
 ];
 
-export const CheckboxTest: React.FunctionComponent<{}> = () => {
+export const CheckboxTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',

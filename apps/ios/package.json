@@ -21,7 +21,7 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.33.2",
+    "@fluentui-react-native/tester": "^0.33.3",
     "@react-native-community/slider": "^3.0.3",
     "react": "16.13.1",
     "react-native": "^0.63.2",
@@ -30,7 +30,6 @@
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
-    "@react-native-community/eslint-config": "^1.1.0",
     "@rnx-kit/cli": "^0.5.27",
     "@rnx-kit/metro-config": "^1.2.3",
     "@uifabricshared/build-native": "^0.1.1",
