@@ -50,7 +50,6 @@ const tabChangingViews: React.FunctionComponent<{}> = () => {
   };
 
   const getTabId = (key: string, index: number) => {
-    console.log(`getTabId works ${key} ${index}`);
     return `getTabId works ${key} ${index}`;
   };
 
@@ -83,7 +82,6 @@ const tabsSettingSelectedKey: React.FunctionComponent<{}> = () => {
     const newCurrTabItemIndex = (currTabItemIndex + 1) % 3;
     setCurrTabItemIndex(newCurrTabItemIndex);
     setSelectedKey(tabItems[newCurrTabItemIndex]);
-    console.log(currTabItemIndex);
   };
 
   return (
