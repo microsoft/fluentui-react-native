@@ -11,18 +11,18 @@ export const tabsItemName = 'TabsItem';
 
 export interface TabsItemInfo extends IPressableState {
   /**
-   * Disables the button.
+   * Disables the TabsItem.
    * @default false
    */
   disabled?: boolean;
 
   /**
-   * Button icon.
+   * TabsItem icon.
    */
   icon?: boolean;
 
   /**
-   * Button text.
+   * TabsItem text.
    */
   headerText: boolean;
 
@@ -41,7 +41,7 @@ export interface TabsItemState {
   info: Omit<TabsItemInfo, 'headerText'>;
 }
 
-// Props for the radio button
+// Props for the tabs item
 export interface TabsItemProps extends IButtonProps {
   /*
    ** The text string for the option
@@ -51,15 +51,15 @@ export interface TabsItemProps extends IButtonProps {
   /*
    ** A unique key-identifier for each option
    */
-  buttonKey: string;
+  itemKey: string;
 
   /*
-   ** Whether or not the radio button is selectable
+   ** Whether or not the tabs item is selectable
    */
   disabled?: boolean;
 
   /*
-   ** An optional string for the Narrator to read for each RadioButton. If not provided, this will be set to the button's content
+   ** An optional string for the Narrator to read for each TabsItem. If not provided, this will be set to the tabsItem's content
    */
   ariaLabel?: string;
 

@@ -10,7 +10,7 @@ export const tabsName = 'Tabs';
 
 export interface ITabsContext {
   /*
-   ** The currently selected RadioButton's key
+   ** The currently selected TabsItem's key
    */
   selectedKey: string | null;
 
@@ -21,19 +21,19 @@ export interface ITabsContext {
   getTabId?: (key: string, index: number) => void;
 
   /*
-   ** Updates the selected button and calls the client’s onTabsClick callback
+   ** Updates the selected tabsItem and calls the client’s onTabsClick callback
    */
   onTabsClick?: (key: string) => void;
 
   /*
-   ** Updates the selected button's ref to set as the default tabbable element
+   ** Updates the selected tabsItem's ref to set as the default tabbable element
    */
-  updateSelectedButtonRef?: (ref: React.RefObject<any>) => void;
+  updateSelectedTabsItemRef?: (ref: React.RefObject<any>) => void;
 
   /*
-   ** Array of radio button keys in the group
+   ** Array of tabsItem keys in the group
    */
-  buttonKeys?: string[];
+  tabsItemKeys?: string[];
 
   /*
    ** A Map to for a TabItems corresponding view
@@ -52,24 +52,24 @@ export interface TabsState {
 
 export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> {
   /*
-   ** Descriptive label for the RadioGroup. This will be displayed as the title of the radio group to the user
+   ** Descriptive label for the Tabs. This will be displayed as the title of the Tabs to the user
    */
   label: string;
 
   /*
-   ** The key of the RadioButton that will initially be selected
+   ** The key of the TabsItem that will initially be selected
    */
   defaultSelectedKey?: string;
 
   /*
-   **  OPTIONAL: An aria label for narrator. If not provided, it will be set to the label of the radio group
+   **  OPTIONAL: An aria label for narrator. If not provided, it will be set to the label of the Tabs
    */
   ariaLabel?: string;
 
   /*
    ** The key of the selected option. If you provide this, you must maintain selection state by observing
    ** onTabsClick events and passing a new value in when changed. This overrides defaultSelectedKey
-   ** and makes the RadioGroup a controlled component.
+   ** and makes the Tabs a controlled component.
    */
   selectedKey?: string;
 
@@ -79,9 +79,10 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
   onTabsClick?: (key: string) => void;
 
   /*
-   ** Callback for recieving the key and index when a tab is selected
+   ** Callback to customize how IDs are generated for each tab header.
+   ** Useful if you're rendering content outside and need to connect aria-labelledby.
    */
-  getTabId?: (key: string, index: number) => void;
+  getTabId?: (key: string, index: number) => string;
 
   /*
    ** Sets whether to only render the header
@@ -102,7 +103,7 @@ export interface TabsSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
   label: ITextProps;
   container: ViewProps & FocusZoneProps;
-  tabPanel: ViewProps & FocusZoneProps;
+  tabPanel: ViewProps;
 }
 
 export type TabsRenderData = IRenderData<TabsSlotProps, TabsState>;

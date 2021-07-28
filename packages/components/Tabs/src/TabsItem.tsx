@@ -31,24 +31,23 @@ export const TabsItem = compose<TabsItemType>({
       componentRef = React.useRef(null),
       testID,
       onClick,
-      buttonKey,
+      itemKey,
       ...rest
     } = userProps;
 
-    // Grabs the context information from RadioGroup (currently selected button and client's onTabsClick callback)
+    // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback)
     const info = React.useContext(TabsContext);
 
-    // const onPressWithFocus = useOnPressWithFocus(componentRef, onClick);
     /* We don't want to call the user's onTabsClick multiple times on the same selection. */
     const changeSelection = () => {
-      if (buttonKey != info.selectedKey) {
-        info.onTabsClick && info.onTabsClick(buttonKey);
-        info.getTabId && info.getTabId(buttonKey, info.buttonKeys.findIndex((x) => x == buttonKey) + 1);
-        info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
+      if (itemKey != info.selectedKey) {
+        info.onTabsClick && info.onTabsClick(itemKey);
+        info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex((x) => x == itemKey) + 1);
+        info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
       }
     };
 
-    // Ensure focus is placed on button after click
+    // Ensure focus is placed on tabsItem after click
     const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
 
     const pressable = useAsPressable({
@@ -63,19 +62,19 @@ export const TabsItem = compose<TabsItemType>({
     const state: TabsItemState = {
       info: {
         ...pressable.state,
-        selected: info.selectedKey === userProps.buttonKey,
+        selected: info.selectedKey === userProps.itemKey,
         disabled: !!userProps.disabled,
         icon: !!icon,
-        key: buttonKey,
+        key: itemKey,
       },
     };
 
-    /* We use the componentRef of the currently selected button to maintain the default tabbable
-    element in a RadioGroup. Since the componentRef isn't generated until after initial render,
+    /* We use the componentRef of the currently selected tabsItem to maintain the default tabbable
+    element in Tabs. Since the componentRef isn't generated until after initial render,
     we must update it once here. */
     React.useEffect(() => {
-      if (buttonKey == info.selectedKey) {
-        info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
+      if (itemKey == info.selectedKey) {
+        info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
       }
     }, []);
 
@@ -83,13 +82,6 @@ export const TabsItem = compose<TabsItemType>({
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
     const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
-
-    /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
-    // const pressable = useAsPressable({
-    //   ...rest,
-    //   // onPress: changeSelectionWithFocus,
-    //   onFocus: changeSelection,
-    // });
 
     // Used when creating accessibility properties in mergeSettings below
     const onAccessibilityAction = React.useCallback(
@@ -100,7 +92,7 @@ export const TabsItem = compose<TabsItemType>({
             break;
         }
       },
-      [info, buttonKey],
+      [info, itemKey],
     );
 
     const slotProps = mergeSettings<TabsItemSlotProps>(styleProps, {
@@ -113,8 +105,8 @@ export const TabsItem = compose<TabsItemType>({
         accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: state.info.disabled, selected: state.info.selected },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
-        accessibilityPositionInSet: info.buttonKeys.findIndex((x) => x == buttonKey) + 1,
-        accessibilitySetSize: info.buttonKeys.length,
+        accessibilityPositionInSet: info.tabsItemKeys.findIndex((x) => x == itemKey) + 1,
+        accessibilitySetSize: info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUp,
       },

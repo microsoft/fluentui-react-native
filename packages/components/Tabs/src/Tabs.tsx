@@ -7,6 +7,7 @@ import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings } from './Tabs.settings';
+import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
@@ -20,10 +21,10 @@ export const TabsContext = React.createContext<ITabsContext>({
   getTabId: (/* key:string, index: number*/) => {
     return;
   },
-  updateSelectedButtonRef: (/* ref: React.RefObject<any>*/) => {
+  updateSelectedTabsItemRef: (/* ref: React.RefObject<any>*/) => {
     return;
   },
-  buttonKeys: [],
+  tabsItemKeys: [],
 
   views: null,
 });
@@ -44,16 +45,16 @@ export const Tabs = compose<TabsType>({
       ...rest
     } = userProps;
 
-    // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
+    // This hook updates the Selected TabsItem and calls the customer's onTabsClick function. This gets called after a TabsItem is pressed.
     const data = useSelectedKey(selectedKey || defaultSelectedKey || null, userProps.onTabsClick);
 
-    const [selectedButtonRef, setSelectedButtonRef] = React.useState(React.useRef<View>(null));
+    const [selectedTabsItemRef, setSelectedTabsItemRef] = React.useState(React.useRef<View>(null));
 
-    const onSelectButtonRef = React.useCallback(
+    const onSelectTabsItemRef = React.useCallback(
       (ref: React.RefObject<View>) => {
-        setSelectedButtonRef(ref);
+        setSelectedTabsItemRef(ref);
       },
-      [setSelectedButtonRef],
+      [setSelectedTabsItemRef],
     );
 
     const onChangeTabId = React.useCallback((key: string, index: number) => {
@@ -63,7 +64,7 @@ export const Tabs = compose<TabsType>({
       return `${key}-Tab${index}`;
     }, []);
 
-    // stories views to be displayed
+    // Stores views to be displayed
     const map = new Map<string, React.ReactNode[]>();
 
     const state: TabsState = {
@@ -71,7 +72,7 @@ export const Tabs = compose<TabsType>({
         selectedKey: selectedKey ?? data.selectedKey,
         onTabsClick: data.onKeySelect,
         getTabId: onChangeTabId,
-        updateSelectedButtonRef: onSelectButtonRef,
+        updateSelectedTabsItemRef: onSelectTabsItemRef,
         views: map,
       },
       info: {
@@ -89,7 +90,7 @@ export const Tabs = compose<TabsType>({
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
       root: { rest, ref: componentRef, ...ariaRoles },
       label: { children: label },
-      container: { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedButtonRef },
+      container: { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef },
     });
 
     return { slotProps, state };
@@ -100,11 +101,11 @@ export const Tabs = compose<TabsType>({
       return null;
     }
 
-    // Populate the buttonKeys array
+    // Populate the tabsItemKeys array
     if (children) {
       /* eslint-disable @typescript-eslint/ban-ts-ignore */
       // @ts-ignore - TODO, fix typing error
-      renderData.state.context.buttonKeys = React.Children.map(children, (child: React.ReactChild) => {
+      renderData.state.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
           if (renderData.state.context.selectedKey == null) {
             renderData.state.context.selectedKey = child.props.buttonKey;
@@ -116,7 +117,7 @@ export const Tabs = compose<TabsType>({
 
     return (
       <TabsContext.Provider
-        // Passes in the selected key and a hook function to update the newly selected button and call the client's onTabsClick callback
+        // Passes in the selected key and a hook function to update the newly selected tabsItem and call the client's onTabsClick callback
         value={renderData.state.context}
       >
         <Slots.root>
@@ -136,7 +137,7 @@ export const Tabs = compose<TabsType>({
   slots: {
     root: View,
     label: Text,
-    tabPanel: View,
+    tabPanel: { slotType: View, filter: filterViewProps },
     container: FocusZone,
   },
   styles: {
