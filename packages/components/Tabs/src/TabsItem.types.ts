@@ -30,6 +30,11 @@ export interface TabsItemInfo extends IPressableState {
    * Indicates if TabsItem is selected.
    */
   selected: boolean;
+
+  /**
+   * Key for tabItem
+   */
+  key: string;
 }
 
 export interface TabsItemState {

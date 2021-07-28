@@ -21,7 +21,11 @@ const tabs: React.FunctionComponent<{}> = () => {
   return (
     <View style={stackStyle}>
       <Tabs label="Tabs" defaultSelectedKey="B" onTabsClick={onTabsClick} isCircularNavigation={true}>
-        <TabsItem icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }} headerText="Option A!" buttonKey="A" />
+        <TabsItem icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }} headerText="Option A!" buttonKey="A">
+          <Text>Heyooo</Text>
+          <Text>Heyooo</Text>
+          <Text>Heyooo</Text>
+        </TabsItem>
         <TabsItem headerText="Option B" buttonKey="B" />
         <TabsItem headerText="Option C" buttonKey="C" disabled={true} />
         <TabsItem headerText="Option D" buttonKey="D" />
@@ -46,7 +50,7 @@ const tabChangingViews: React.FunctionComponent<{}> = () => {
 
   return (
     <View style={stackStyle}>
-      <Tabs label="Tabs" onTabsClick={onTabsClick} getTabId={getTabId}>
+      <Tabs label="Tabs" onTabsClick={onTabsClick} getTabId={getTabId} headersOnly={true}>
         <TabsItem headerText="Home" buttonKey="home" />
         <TabsItem headerText="File" buttonKey="file" disabled={true} />
         <TabsItem headerText="Settings" buttonKey="settings" />

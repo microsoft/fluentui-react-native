@@ -34,10 +34,20 @@ export interface ITabsContext {
    ** Array of radio button keys in the group
    */
   buttonKeys?: string[];
+
+  /*
+   ** A Map to for a TabItems corresponding view
+   */
+  views?: Map<string, React.ReactNode[]> | null;
+}
+
+export interface TabsInfo {
+  headersOnly?: boolean;
 }
 
 export interface TabsState {
   context: ITabsContext;
+  info: TabsInfo;
 }
 
 export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> {
@@ -68,7 +78,15 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
    */
   onTabsClick?: (key: string) => void;
 
+  /*
+   ** Callback for recieving the key and index when a tab is selected
+   */
   getTabId?: (key: string, index: number) => void;
+
+  /*
+   ** Sets whether to only render the header
+   */
+  headersOnly?: boolean;
 
   testID?: string;
 }
@@ -79,6 +97,7 @@ export interface TabsSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
   label: ITextProps;
   container: ViewProps & FocusZoneProps;
+  tabPanel: ViewProps & FocusZoneProps;
 }
 
 export type TabsRenderData = IRenderData<TabsSlotProps, TabsState>;

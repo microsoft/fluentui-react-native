@@ -24,13 +24,15 @@ export const TabsContext = React.createContext<ITabsContext>({
     return;
   },
   buttonKeys: [],
+
+  views: null,
 });
 
 export const Tabs = compose<TabsType>({
   displayName: tabsName,
 
   usePrepareProps: (userProps: TabsProps, useStyling: IUseComposeStyling<TabsType>) => {
-    const { label, ariaLabel, selectedKey, defaultSelectedKey, getTabId, isCircularNavigation, ...rest } = userProps;
+    const { label, ariaLabel, selectedKey, headersOnly, defaultSelectedKey, getTabId, isCircularNavigation, ...rest } = userProps;
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
     const data = useSelectedKey(selectedKey || defaultSelectedKey || null, userProps.onTabsClick);
@@ -51,12 +53,19 @@ export const Tabs = compose<TabsType>({
       return `${key}-Tab${index}`;
     }, []);
 
+    // stories views to be displayed
+    const map = new Map<string, React.ReactNode[]>();
+
     const state: TabsState = {
       context: {
         selectedKey: selectedKey ?? data.selectedKey,
         onTabsClick: data.onKeySelect,
         getTabId: onChangeTabId,
         updateSelectedButtonRef: onSelectButtonRef,
+        views: map,
+      },
+      info: {
+        headersOnly: headersOnly ?? false,
       },
     };
 
@@ -103,6 +112,11 @@ export const Tabs = compose<TabsType>({
         <Slots.root>
           <Slots.label />
           <Slots.container>{children}</Slots.container>
+          <Slots.tabPanel>
+            <TabsContext.Consumer>
+              {(context) => !renderData.state.info.headersOnly && context.views.get(context.selectedKey)}
+            </TabsContext.Consumer>
+          </Slots.tabPanel>
         </Slots.root>
       </TabsContext.Provider>
     );
@@ -112,6 +126,7 @@ export const Tabs = compose<TabsType>({
   slots: {
     root: View,
     label: Text,
+    tabPanel: View,
     container: FocusZone,
   },
   styles: {
