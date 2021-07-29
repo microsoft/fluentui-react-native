@@ -35,7 +35,6 @@ export const settings: IComposeSettings<TabsItemType> = [
         backgroundColor: 'transparent',
         borderRadius: 2,
         marginBottom: 2,
-        // zIndex: 2,
       },
     },
     stack: {
