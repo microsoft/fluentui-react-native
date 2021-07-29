@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Tabs, TabsItem, Text, Separator } from '@fluentui/react-native';
+import { Tabs, TabsItem, Text } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -60,8 +60,7 @@ const tabChangingViews: React.FunctionComponent<{}> = () => {
         <TabsItem headerText="File" itemKey="file" disabled={true} />
         <TabsItem headerText="Settings" itemKey="settings" />
       </Tabs>
-      <Separator />
-      <View>
+      <View style={{ marginVertical: 1 }}>
         {selectedKey == 'home' && <Text>This is home</Text>}
         {selectedKey == 'file' && <Text>This is file</Text>}
         {selectedKey == 'settings' && <Text>This is settings</Text>}

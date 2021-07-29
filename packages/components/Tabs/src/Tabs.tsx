@@ -9,7 +9,7 @@ import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings } from './Tabs.settings';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
+import { foregroundColorTokens, textTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
 export const TabsContext = React.createContext<ITabsContext>({
@@ -143,7 +143,7 @@ export const Tabs = compose<TabsType>({
   styles: {
     root: [],
     label: [foregroundColorTokens, textTokens],
-    container: [],
+    container: [backgroundColorTokens],
   },
 });
 

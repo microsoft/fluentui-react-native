@@ -129,7 +129,7 @@ export const TabsItem = compose<TabsItemType>({
           {info.icon && <Slots.icon />}
           <Slots.content />
         </Slots.stack>
-        {info.selected && <Slots.indicator />}
+        <Slots.indicator />
       </Slots.root>
     );
   },

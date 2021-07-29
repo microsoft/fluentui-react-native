@@ -21,6 +21,7 @@ export const settings: IComposeSettings<TabsType> = [
     container: {
       style: {
         flexDirection: 'row',
+        backgroundColor: '#FAFAFA',
       },
     },
   },
