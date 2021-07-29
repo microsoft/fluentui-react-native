@@ -24,7 +24,7 @@ export interface TabsItemInfo extends IPressableState {
   /**
    * TabsItem text.
    */
-  headerText: boolean;
+  headerText?: boolean;
 
   /**
    * Indicates if TabsItem is selected.
