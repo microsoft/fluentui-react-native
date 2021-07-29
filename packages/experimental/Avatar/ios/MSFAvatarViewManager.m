@@ -50,7 +50,7 @@ RCT_ENUM_CONVERTER(MSFAvatarPresence, (@{
     @"doNotDisturb": @(MSFAvatarPresenceDoNotDisturb),
     @"offline": @(MSFAvatarPresenceOffline),
     @"unknown": @(MSFAvatarPresenceUnknown),
-}), MSFPresenceNone, integerValue);
+}), MSFAvatarPresenceNone, integerValue);
 
 RCT_ENUM_CONVERTER(MSFAvatarStyle, (@{
     @"default": @(MSFAvatarStyleDefault),
