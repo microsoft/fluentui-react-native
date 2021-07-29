@@ -1,24 +1,23 @@
 import { tabsItemName, TabsItemType } from './TabsItem.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 import type { IViewProps } from '@fluentui-react-native/adapters';
-// import { Text } from '@fluentui-react-native/experimental-text';
 
 export const tabsItemSelectActionLabel = 'Select a TabsItem';
 
 export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
-      color: '#616161',
-      fontWeight: 'normal',
-      fontFamily: 'Segoe UI',
-      borderWidth: 0,
-      borderRadius: 0,
-      fontSize: 14,
+      color: 'neutralForeground3Brand',
+      variant: 'bodyStandard',
+      borderWidth: 2,
+      // borderColor: 'neutralForeground1',
+      borderColor: 'transparent',
+      borderRadius: 4,
     },
     root: {
       accessible: true,
       focusable: true,
-      accessibilityRole: 'tab',
+      accessibilityRole: 'button',
       style: {
         display: 'flex',
         alignItems: 'center',
@@ -29,17 +28,16 @@ export const settings: IComposeSettings<TabsItemType> = [
     } as IViewProps,
     indicator: {
       style: {
-        // flex: 1,
         minHeight: 2,
-        minWidth: 44,
         backgroundColor: 'transparent',
         borderRadius: 2,
         marginBottom: 2,
+        alignSelf: 'stretch',
+        marginHorizontal: 10,
       },
     },
     stack: {
       style: {
-        // backgroundColor: '#FAFAFA',
         display: 'flex',
         marginHorizontal: 10,
         alignItems: 'center',
@@ -50,55 +48,67 @@ export const settings: IComposeSettings<TabsItemType> = [
         justifyContent: 'center',
       },
     },
-    _precedence: ['hovered', 'pressed', 'selected', 'focused', 'disabled'],
+    _precedence: ['selected', 'hovered', 'focused', 'disabled', 'pressed'],
     _overrides: {
       disabled: {
         tokens: {
-          // backgroundColor: 'buttonBackgroundDisabled',
-          color: '#BDBDBD',
-          // borderColor: 'buttonBorderDisabled',
+          color: 'neutralForegroundDisabled',
         },
       },
       hovered: {
         tokens: {
-          color: '#242424',
-          // fontWeight: 'bold',
-          // fontFamily: 'Segoe UI',
-          // fontSize: 14,
+          color: 'neutralForeground2Hover',
         },
         indicator: {
           style: {
+            // backgroundColor: 'neutralStroke1',
             backgroundColor: '#D1D1D1',
           },
         },
       },
       selected: {
         tokens: {
-          color: '#242424',
-          fontWeight: 'bold',
-          fontFamily: 'Segoe UI',
-          fontSize: 14,
-        },
-      },
-      pressed: {
-        tokens: {
-          color: '#242424',
+          color: 'neutralForeground1',
+          variant: 'bodySemibold',
         },
         indicator: {
           style: {
+            // backgroundColor: 'brandStroke1',
+            backgroundColor: '#0078D4',
+          },
+        },
+        _overrides: {
+          pressed: {
+            indicator: {
+              style: {
+                // backgroundColor: 'neutralStroke1',
+                backgroundColor: '#D1D1D1',
+              },
+            },
+          },
+        },
+      },
+
+      pressed: {
+        tokens: {
+          color: 'neutralForeground2Pressed',
+        },
+        indicator: {
+          style: {
+            // backgroundColor: 'brandStroke1',
             backgroundColor: '#0078D4',
           },
         },
       },
+
       focused: {
         tokens: {
-          color: '#242424',
-          borderWidth: 2,
-          borderColor: '#242424',
-          borderRadius: 4,
+          color: 'neutralForeground1',
+          borderColor: 'neutralForeground1',
         },
         indicator: {
           style: {
+            // backgroundColor: 'brandStroke1',
             backgroundColor: '#0078D4',
           },
         },
