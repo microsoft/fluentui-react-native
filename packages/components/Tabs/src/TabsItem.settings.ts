@@ -56,7 +56,8 @@ export const settings: IComposeSettings<TabsItemType> = [
         },
         indicator: {
           style: {
-            backgroundColor: 'neutralStroke1',
+            // backgroundColor: 'neutralStroke1',
+            backgroundColor: '#D1D1D1',
           },
         },
       },
@@ -67,14 +68,16 @@ export const settings: IComposeSettings<TabsItemType> = [
         },
         indicator: {
           style: {
-            backgroundColor: 'brandStroke1',
+            // backgroundColor: 'brandStroke1',
+            backgroundColor: '#0078D4',
           },
         },
         _overrides: {
           pressed: {
             indicator: {
               style: {
-                backgroundColor: 'neutralStroke1',
+                // backgroundColor: 'neutralStroke1',
+                backgroundColor: '#D1D1D1',
               },
             },
           },
@@ -87,7 +90,8 @@ export const settings: IComposeSettings<TabsItemType> = [
         },
         indicator: {
           style: {
-            backgroundColor: 'brandStroke1',
+            // backgroundColor: 'brandStroke1',
+            backgroundColor: '#0078D4',
           },
         },
       },
@@ -101,7 +105,8 @@ export const settings: IComposeSettings<TabsItemType> = [
         },
         indicator: {
           style: {
-            backgroundColor: 'brandStroke1',
+            // backgroundColor: 'brandStroke1',
+            backgroundColor: '#0078D4',
           },
         },
       },
