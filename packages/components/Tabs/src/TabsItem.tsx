@@ -18,6 +18,7 @@ import {
   createIconProps,
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
+// import { Separator } from '@fluentui/react-native';
 
 export const TabsItem = compose<TabsItemType>({
   displayName: tabsItemName,
@@ -134,7 +135,7 @@ export const TabsItem = compose<TabsItemType>({
           {info.headerText && <Slots.content />}
           {children}
         </Slots.stack>
-        {info.selected && <Slots.indicator />}
+        <Slots.indicator />
       </Slots.root>
     );
   },

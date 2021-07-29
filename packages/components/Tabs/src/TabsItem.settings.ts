@@ -9,11 +9,11 @@ export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
       color: '#616161',
+      fontWeight: 'normal',
+      fontFamily: 'Segoe UI',
       borderWidth: 0,
       borderRadius: 0,
       fontSize: 14,
-      fontWeight: 'normal',
-      fontFamily: 'Segoe UI',
     },
     root: {
       accessible: true,
@@ -32,13 +32,15 @@ export const settings: IComposeSettings<TabsItemType> = [
         // flex: 1,
         minHeight: 2,
         minWidth: 44,
-        backgroundColor: '#185ABD',
+        backgroundColor: 'transparent',
         borderRadius: 2,
         marginBottom: 2,
+        // zIndex: 2,
       },
     },
     stack: {
       style: {
+        // backgroundColor: '#FAFAFA',
         display: 'flex',
         marginHorizontal: 10,
         alignItems: 'center',
@@ -49,21 +51,26 @@ export const settings: IComposeSettings<TabsItemType> = [
         justifyContent: 'center',
       },
     },
-    _precedence: ['hovered', 'selected', 'focused', 'disabled'],
+    _precedence: ['hovered', 'pressed', 'selected', 'focused', 'disabled'],
     _overrides: {
       disabled: {
         tokens: {
-          backgroundColor: 'buttonBackgroundDisabled',
-          color: 'buttonTextDisabled',
-          borderColor: 'buttonBorderDisabled',
+          // backgroundColor: 'buttonBackgroundDisabled',
+          color: '#BDBDBD',
+          // borderColor: 'buttonBorderDisabled',
         },
       },
       hovered: {
         tokens: {
           color: '#242424',
-          fontWeight: 'bold',
-          fontFamily: 'Segoe UI',
-          fontSize: 14,
+          // fontWeight: 'bold',
+          // fontFamily: 'Segoe UI',
+          // fontSize: 14,
+        },
+        indicator: {
+          style: {
+            backgroundColor: '#D1D1D1',
+          },
         },
       },
       selected: {
@@ -74,12 +81,27 @@ export const settings: IComposeSettings<TabsItemType> = [
           fontSize: 14,
         },
       },
+      pressed: {
+        tokens: {
+          color: '#242424',
+        },
+        indicator: {
+          style: {
+            backgroundColor: '#0078D4',
+          },
+        },
+      },
       focused: {
         tokens: {
           color: '#242424',
           borderWidth: 2,
           borderColor: '#242424',
           borderRadius: 4,
+        },
+        indicator: {
+          style: {
+            backgroundColor: '#0078D4',
+          },
         },
       },
     },
