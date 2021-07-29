@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "✨ Simple Shadow component",
+  "packageName": "@fluentui-react-native/experimental-shadow",
+  "email": "aliciakds88@gmail.com",
+  "dependentChangeType": "patch"
+}

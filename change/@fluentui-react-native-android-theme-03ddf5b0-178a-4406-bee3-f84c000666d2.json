@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "🎨 Add border and shadow effects to theme",
+  "packageName": "@fluentui-react-native/android-theme",
+  "email": "aliciakds88@gmail.com",
+  "dependentChangeType": "patch"
+}

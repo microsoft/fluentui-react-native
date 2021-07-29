@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "⚗ Theme Effect Test Page",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "aliciakds88@gmail.com",
+  "dependentChangeType": "patch"
+}
