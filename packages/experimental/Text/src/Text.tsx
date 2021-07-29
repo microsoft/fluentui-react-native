@@ -9,9 +9,16 @@ import {
   mergeProps,
   withSlots,
   Theme,
+  buildUseTokens,
+  UseTokens,
+  useTheme,
+  applyTokenLayers,
+  mergeStyles,
 } from '@fluentui-react-native/framework';
 import { Text as RNText, ColorValue } from 'react-native';
 import { filterTextProps, ITextProps } from '@fluentui-react-native/adapters';
+import { applyPropsToTokens } from '@fluentui-react-native/use-tokens';
+import React from 'react';
 
 const textName = 'Text';
 
@@ -45,12 +52,41 @@ export type TextProps<TBase = ITextProps> = TBase &
  */
 const tokensThatAreAlsoProps: (keyof TextTokens)[] = ['variant', 'color'];
 
-/** Type to use for compose */
-interface TextType {
-  props: TextProps;
-  slotProps: { root: ITextProps };
-  tokens: TextTokens;
-}
+const useTextTokens = buildUseTokens<TextTokens>(
+  (t) => ({
+    variant: 'secondaryStandard',
+    color: t.colors.bodyText,
+    disabled: {
+      color: t.colors.disabledText,
+    },
+  }),
+  textName,
+);
+
+export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTokens: UseTokens<TextTokens>) => {
+  // split out color and variant from props
+  const { color, variant, style, ...rest } = props;
+  const theme = useTheme();
+  // get the tokens from the theme
+  let [tokens, cache] = useTokens(theme);
+  // apply states like disabled if specified in props
+  [tokens, cache] = applyTokenLayers(tokens, ['disabled'], cache, (state) => props['state]']);
+  // override variant or color from props
+  [tokens, cache] = applyPropsToTokens(props, tokens, cache, ['variant', 'color']);
+  // now build the text style from tokens that can be shared between different Text instances
+  const [tokenStyle] = cache(
+    () => ({
+      margin: 0,
+      color: tokens.color,
+      ...fontStyles.from(tokens, theme),
+    }),
+    [],
+  );
+  return (extra: TextProps, children: React.ReactNode) => {
+    const mergedProps = { ...props, ...extra, style: mergeStyles(tokenStyle, props.style, extra.style) };
+    return <RNText {...props}>{children}</RNText>;
+  };
+}, useTextTokens);
 
 export const Text = compose<TextType>({
   displayName: textName,
