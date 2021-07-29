@@ -117,7 +117,7 @@ const tabsChangingViews: React.FunctionComponent = () => {
 };
 
 const tabsRenderSeparately: React.FunctionComponent = () => {
-  const [selectedKey, setSelectedKey] = React.useState('home');
+  const [selectedKey, setSelectedKey] = React.useState('rectangleRed');
 
   const onTabsClick = (key: string) => {
     setSelectedKey(key);
