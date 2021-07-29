@@ -8,9 +8,14 @@ class RadioButton: NSButton {
 			onPress!(nil)
 		}
 	}
+	
 	/// Set button state to 'on' when it becomes focused
 	override func becomeFirstResponder() -> Bool {
-		self.state = NSButton.StateValue.on
+		/// fire onChange event
+		if (state != NSButton.StateValue.on) {
+			callOnPress()
+		}
+		state = NSButton.StateValue.on
 		return super.becomeFirstResponder()
 	}
 }
