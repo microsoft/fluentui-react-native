@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/default-theme
 
-This log was last generated on Wed, 21 Jul 2021 22:55:40 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Jul 2021 22:17:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.2
+
+Tue, 27 Jul 2021 22:17:20 GMT
+
+### Patches
+
+- add compressible utility and a snapshot test / demo to framework (jasonmo@microsoft.com)
+
+## 0.7.1
+
+Mon, 26 Jul 2021 20:41:04 GMT
+
+### Patches
+
+- add new use-slot package, move framework to consume that package (jasonmo@microsoft.com)
+
+## 0.7.0
+
+Sat, 24 Jul 2021 00:28:25 GMT
+
+### Minor changes
+
+- Integrate alias tokens into theme (email not defined)
+
+## 0.6.8
+
+Fri, 23 Jul 2021 17:28:27 GMT
+
+### Patches
+
+- Fix @types/react to be less than 16.14.0 since our react version is less than 16.14 (email not defined)
 
 ## 0.6.7
 

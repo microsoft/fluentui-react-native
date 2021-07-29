@@ -7,7 +7,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { Text } from '@fluentui/react-native';
 
-const nativeDatePicker: React.FunctionComponent<{}> = () => {
+const nativeDatePicker: React.FunctionComponent = () => {
   const [startDate, setStartDate] = React.useState<Date>(new Date())
   const [endDate, setEndDate] = React.useState<Date>(null)
 
@@ -88,7 +88,7 @@ const nativeDatePicker: React.FunctionComponent<{}> = () => {
       />
 
       {/* Shows 'Date Title', 'Date Subtitle', 'Start Tab' and 'End Tab'. */}
-      <Button 
+      <Button
         content='Date range with custom titles (tabbed)'
         onClick={() => NativeDatePicker.present(
           {mode: 'dateRange', ...fixedDates, ...titles, callback: didPickDates}
@@ -124,7 +124,7 @@ const nativeDatePickerSections: TestSection[] = [
   },
 ];
 
-export const NativeDatePickerTest: React.FunctionComponent<{}> = () => {
+export const NativeDatePickerTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'N/A',
     uwpStatus: 'N/A',

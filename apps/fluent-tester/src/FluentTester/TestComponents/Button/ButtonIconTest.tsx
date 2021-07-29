@@ -12,7 +12,7 @@ const CustomizedIconButton = Button.customize({
   content: { style: { marginStart: 5 } },
 });
 
-export const ButtonIconTest: React.FunctionComponent<{}> = () => {
+export const ButtonIconTest: React.FunctionComponent = () => {
   const testImage = require('./icon_24x24.png');
 
   const svgProps: SvgIconProps = {

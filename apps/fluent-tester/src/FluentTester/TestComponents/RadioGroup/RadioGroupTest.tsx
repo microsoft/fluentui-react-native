@@ -4,7 +4,7 @@ import { RadioButton, RadioGroup, Separator } from '@fluentui/react-native';
 import { RADIOGROUP_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
-const basicRadioGroup: React.FunctionComponent<{}> = () => {
+const basicRadioGroup: React.FunctionComponent = () => {
   // Client's example onChange function
   const onChange = (key: string) => {
     console.log(key);
@@ -34,10 +34,14 @@ const basicRadioGroup: React.FunctionComponent<{}> = () => {
       </RadioGroup>
       <Separator />
       <RadioGroup label="Controlled RadioGroup" selectedKey={selectedKey} onChange={onChange2}>
-        <RadioButton content="Option A" buttonKey="A" ariaLabel="Test Aria Label" />
-        <RadioButton content="Option B" buttonKey="B" />
-        <RadioButton content="Option C" buttonKey="C" />
-        <RadioButton content="Option D" buttonKey="D" />
+        {/* View added to test ariaPosInSet and ariaSetSize properties which are not auto-generated when
+        RadioButtons are not direct children of RadioGroup. */}
+        <View>
+          <RadioButton content="Option A" buttonKey="A" ariaLabel="Test Aria Label" ariaPosInSet={1} ariaSetSize={4} />
+          <RadioButton content="Option B" buttonKey="B" ariaPosInSet={2} ariaSetSize={4} />
+          <RadioButton content="Option C" buttonKey="C" ariaPosInSet={3} ariaSetSize={4} />
+          <RadioButton content="Option D" buttonKey="D" ariaPosInSet={4} ariaSetSize={4} />
+        </View>
       </RadioGroup>
     </View>
   );
@@ -51,7 +55,7 @@ const radioGroupSections: TestSection[] = [
   },
 ];
 
-export const RadioGroupTest: React.FunctionComponent<{}> = () => {
+export const RadioGroupTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',
@@ -62,5 +66,5 @@ export const RadioGroupTest: React.FunctionComponent<{}> = () => {
 
   const description = 'No description.';
 
-  return <Test name="RadioGroup Test" description={description} sections={radioGroupSections} status={status}></Test>;
+  return <Test name="RadioGroup Test" description={description} sections={radioGroupSections} status={status} />;
 };

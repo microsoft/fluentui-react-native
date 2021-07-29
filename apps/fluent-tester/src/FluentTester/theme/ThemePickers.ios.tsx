@@ -31,7 +31,7 @@ export const themePickerStyles = themedStyleSheet((t: Theme) => {
   };
 });
 
-export const ThemePickers: React.FunctionComponent<{}> = () => {
+export const ThemePickers: React.FunctionComponent = () => {
   const themedStyles = themePickerStyles(useTheme());
 
   const onBrandChange = React.useCallback((newBrand: string) => {
@@ -42,13 +42,13 @@ export const ThemePickers: React.FunctionComponent<{}> = () => {
     testerTheme.themeName = newTheme as ThemeNames;
   }, []);
 
-  const themeMenuOptions: MenuAction[] = themeChoices.map((themeChoice) => ({
+  const themeMenuOptions: MenuAction[] = themeChoices.map(themeChoice => ({
     id: themeChoice.value,
     title: themeChoice.label,
     state: testerTheme.themeName === themeChoice.value ? 'on' : 'off',
   }));
 
-  const brandMenuOptions: MenuAction[] = brandOptions.map((brandOption) => ({
+  const brandMenuOptions: MenuAction[] = brandOptions.map(brandOption => ({
     id: brandOption.value,
     title: brandOption.label,
     state: testerTheme.brand === brandOption.value ? 'on' : 'off',

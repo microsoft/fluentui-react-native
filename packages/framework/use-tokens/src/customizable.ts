@@ -23,14 +23,14 @@ export type CustomizableComponent<TProps, TTokens, TTheme> = React.FunctionCompo
  * @returns - a function component that has a static function called customize attached. Customize will return a
  *            new component (which can also be customized)
  */
-export function customizeable<TProps, TTokens, TTheme>(
+export function customizable<TProps, TTokens, TTheme>(
   injectable: InjectableComponent<TProps, TTokens, TTheme>,
   useTokens: UseTokens<TTokens, TTheme>,
 ): CustomizableComponent<TProps, TTokens, TTheme> {
   const component = (props: TProps) => injectable(props, useTokens);
   component.customize = (...tokens: TokenSettings<TTokens, TTheme>[]) => {
     const useTokensNew = useTokens.customize(...tokens);
-    return customizeable(injectable, useTokensNew);
+    return customizable(injectable, useTokensNew);
   };
   return component;
 }

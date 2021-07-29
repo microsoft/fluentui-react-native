@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Wed, 21 Jul 2021 22:55:40 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Jul 2021 22:17:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.2
+
+Tue, 27 Jul 2021 22:17:20 GMT
+
+### Patches
+
+- add compressible utility and a snapshot test / demo to framework (jasonmo@microsoft.com)
+
+## 0.3.1
+
+Mon, 26 Jul 2021 20:41:04 GMT
+
+### Patches
+
+- add new use-slot package, move framework to consume that package (jasonmo@microsoft.com)
+
+## 0.3.0
+
+Sat, 24 Jul 2021 00:28:25 GMT
+
+### Minor changes
+
+- createAliasTokens to generate alias token structure (email not defined)
 
 ## 0.2.5
 
