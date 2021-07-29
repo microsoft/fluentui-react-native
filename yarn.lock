@@ -1147,32 +1147,37 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@fluentui-react-native/adapters@>=0.6.7 <1.0.0":
-  version "0.6.7"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/adapters/-/adapters-0.6.7.tgz#6feb72cc6d1578fa200cdb0b581efed7e233cf03"
-  integrity sha512-E3Z0zJZOwcKvQ+IwJh5Bkb4TjeP85ul/2vF51CDZr5Xi1ocq1BRp5TqPtftqJxzkEi7KLGm+N/hP6Fks+jpxaQ==
-
-"@fluentui-react-native/theme-types@>=0.9.2 <1.0.0":
-  version "0.9.2"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/theme-types/-/theme-types-0.9.2.tgz#7d24f053840fc29cee87f0d1638762e7d2a2a8ab"
-  integrity sha512-z55E1RFxGFszSusFAQoJt2stwWJUBee+ubVxqDVejYItkfCmRn3hCBYoQ4/jw+NJA8tSabj36XpSVdHOGHSTlw==
-
-"@fluentui-react-native/tokens@0.9.12":
-  version "0.9.12"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/tokens/-/tokens-0.9.12.tgz#541232f6063f923b1ae0db7b64cb30df0f245739"
-  integrity sha512-q705W9Ab/tdcx6FykUbOJBI+aFChcankhzQquOvUm6Ff92Gy6HgsK9+kI+koGEQh1ajmQcca5jeir0puYwUowQ==
+"@eslint/eslintrc@^0.4.3":
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-0.4.3.tgz#9e42981ef035beb3dd49add17acb96e8ff6f394c"
+  integrity sha512-J6KFFz5QCYUJq3pf0mjEcCJVERbzv71PUIDczuh9JkwGEzced6CO5ADLHB1rbf/+oPBtoPfMYNOpGDzCANlbXw==
   dependencies:
-    "@fluentui-react-native/adapters" ">=0.6.7 <1.0.0"
-    "@uifabricshared/foundation-tokens" ">=0.9.2 <1.0.0"
-    "@uifabricshared/theming-ramp" ">=0.14.9 <1.0.0"
+    ajv "^6.12.4"
+    debug "^4.1.1"
+    espree "^7.3.0"
+    globals "^13.9.0"
+    ignore "^4.0.6"
+    import-fresh "^3.2.1"
+    js-yaml "^3.13.1"
+    minimatch "^3.0.4"
+    strip-json-comments "^3.1.1"
 
-"@fluentui-react-native/use-tokens@0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/use-tokens/-/use-tokens-0.1.2.tgz#f64bc1a61ef6cd81eb5f4f88ae540a57425eb57f"
-  integrity sha512-141n45vSS5UV/FryiXXRAK8gsUZXK7Yert0xWGdU5Lckmf0/syeR/yxuM3aIHFYbICcpAMHvWwK8CMARXAkCYg==
+"@fluentui-react-native/framework@0.5.15":
+  version "0.5.15"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.5.15.tgz#c0efdb5204d74bb1ae3a8f5e902242b84e312ce7"
+  integrity sha512-YI3h1pQYbj8ERn0GICe6RqpTq20RS3AHJheGfSTSfq6Bb39J75G3c9pvHh6ulJiQTn5mIyDDCWEt4q3LhF04zw==
   dependencies:
+    "@fluentui-react-native/composition" ">=0.6.3 <1.0.0"
+    "@fluentui-react-native/default-theme" ">=0.7.1 <1.0.0"
     "@fluentui-react-native/immutable-merge" "^1.1.2"
     "@fluentui-react-native/memo-cache" "^1.1.2"
+    "@fluentui-react-native/merge-props" ">=0.3.2 <1.0.0"
+    "@fluentui-react-native/theme-types" ">=0.9.1 <1.0.0"
+    "@fluentui-react-native/tokens" ">=0.9.11 <1.0.0"
+    "@fluentui-react-native/use-slot" ">=0.1.2 <1.0.0"
+    "@fluentui-react-native/use-slots" ">=0.5.4 <1.0.0"
+    "@fluentui-react-native/use-styling" ">=0.6.2 <1.0.0"
+    "@fluentui-react-native/use-tokens" ">=0.1.1 <1.0.0"
 
 "@fluentui/token-pipeline@^0.3.7":
   version "0.3.7"
@@ -2956,15 +2961,6 @@
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/@uifabric/prettier-rules/-/prettier-rules-7.0.4.tgz#03082a6cc4b586104738a24892c56e0f1d3df1b6"
   integrity sha512-PK60wLAjPrG2l93r1l/VY2BmnC1la0oxIXYBuln5DOAFJcSXMea9RxoNjuqhhqZGZo6aLjO7lW070MeVOvkABQ==
-
-"@uifabricshared/theming-ramp@>=0.14.9 <1.0.0":
-  version "0.14.9"
-  resolved "https://registry.yarnpkg.com/@uifabricshared/theming-ramp/-/theming-ramp-0.14.9.tgz#c22de6ea42642018f60ea5210465a3300b46524d"
-  integrity sha512-0Yuzs3Nf2OxKHXRv+NN8a8YvLoWi9rsM1ZsfhFYmNhjRc3L30fSCuL8KJRZTyqtwtmVr/hM9Anx+3EDq6tA5Ew==
-  dependencies:
-    "@fluentui-react-native/immutable-merge" "^1.1.2"
-    "@fluentui-react-native/theme-types" ">=0.9.2 <1.0.0"
-    "@uifabricshared/foundation-settings" ">=0.9.2 <1.0.0"
 
 "@vue/compiler-core@3.1.2":
   version "3.1.2"
