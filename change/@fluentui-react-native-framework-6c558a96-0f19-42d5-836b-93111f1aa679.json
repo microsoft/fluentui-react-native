@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix type issue in compressible and export it",
-  "packageName": "@fluentui-react-native/framework",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}
