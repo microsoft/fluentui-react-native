@@ -18,7 +18,6 @@ import {
   createIconProps,
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
-// import { Separator } from '@fluentui/react-native';
 
 export const TabsItem = compose<TabsItemType>({
   displayName: tabsItemName,
