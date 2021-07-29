@@ -7,7 +7,7 @@ export const tabsItemSelectActionLabel = 'Select a TabsItem';
 export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
-      color: '#616161',
+      color: 'neutralForeground3Brand',
       variant: 'bodyStandard',
     },
     root: {
@@ -47,34 +47,34 @@ export const settings: IComposeSettings<TabsItemType> = [
     _overrides: {
       disabled: {
         tokens: {
-          color: '#BDBDBD',
+          color: 'neutralForegroundDisabled',
         },
       },
       hovered: {
         tokens: {
-          color: '#242424',
+          color: 'neutralForeground2Hover',
         },
         indicator: {
           style: {
-            backgroundColor: '#D1D1D1',
+            backgroundColor: 'neutralStroke1',
           },
         },
       },
       selected: {
         tokens: {
-          color: '#242424',
+          color: 'neutralForeground1',
           variant: 'bodySemibold',
         },
         indicator: {
           style: {
-            backgroundColor: '#0078D4',
+            backgroundColor: 'brandStroke1',
           },
         },
         _overrides: {
           pressed: {
             indicator: {
               style: {
-                backgroundColor: '#D1D1D1',
+                backgroundColor: 'neutralStroke1',
               },
             },
           },
@@ -83,25 +83,25 @@ export const settings: IComposeSettings<TabsItemType> = [
 
       pressed: {
         tokens: {
-          color: '#242424',
+          color: 'neutralForeground2Pressed',
         },
         indicator: {
           style: {
-            backgroundColor: '#0078D4',
+            backgroundColor: 'brandStroke1',
           },
         },
       },
 
       focused: {
         tokens: {
-          color: '#242424',
+          color: 'neutralForeground1',
           borderWidth: 2,
-          borderColor: '#242424',
+          borderColor: 'neutralForeground1',
           borderRadius: 4,
         },
         indicator: {
           style: {
-            backgroundColor: '#0078D4',
+            backgroundColor: 'brandStroke1',
           },
         },
       },
