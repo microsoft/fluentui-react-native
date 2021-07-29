@@ -6,7 +6,7 @@ import {
   withSlots,
   buildUseTokens,
   UseTokens,
-  useTheme,
+  useFluentTheme,
   applyTokenLayers,
   mergeStyles,
   compressible,
@@ -55,8 +55,8 @@ const useTextTokens = buildUseTokens<TextTokens>(
 
 export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTokens: UseTokens<TextTokens>) => {
   // split out color and variant from props
-  const { color, variant, style, ...rest } = props;
-  const theme = useTheme();
+  const { color, variant, style, disabled, ...rest } = props;
+  const theme = useFluentTheme();
   // get the tokens from the theme
   let [tokens, cache] = useTokens(theme);
 

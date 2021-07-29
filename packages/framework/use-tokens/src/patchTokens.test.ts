@@ -17,7 +17,7 @@ const themeTokens: Tokens = {
   cinco: true,
 };
 
-describe('applyPropsToTokens tests', () => {
+describe('patchTokens tests', () => {
   test('props get copied', () => {
     const cache = getMemoCache();
     const patchValues = { uno: 'one', quatro: 'quatro' };
@@ -43,9 +43,8 @@ describe('applyPropsToTokens tests', () => {
     const cache = getMemoCache();
     const patch1 = { uno: 'one', cinco: false };
     const patch2 = { cinco: false, uno: 'one' };
-    const [tokens1, cache1] = patchTokens(themeTokens, cache, patch1);
-    const [tokens2, cache2] = patchTokens(themeTokens, cache, patch2);
+    const [tokens1] = patchTokens(themeTokens, cache, patch1);
+    const [tokens2] = patchTokens(themeTokens, cache, patch2);
     expect(tokens1).toBe(tokens2);
-    expect(cache1).toBe(cache2);
   });
 });

@@ -7,7 +7,7 @@ export function patchTokens<TTokens>(
 ): [TTokens, GetMemoValue<TTokens>] {
   // reduce the patch values to the set of keys that are defined, and sort them to ensure consistent ordering
   const keys = Object.keys(patchValues)
-    .filter((v) => v !== undefined)
+    .filter((v) => patchValues[v] !== undefined)
     .sort();
 
   // for each key get an updated tokens collection based on key + value. Value alone isn't sufficient as the values
