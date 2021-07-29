@@ -34,7 +34,7 @@ export const Tabs = compose<TabsType>({
 
   usePrepareProps: (userProps: TabsProps, useStyling: IUseComposeStyling<TabsType>) => {
     const {
-      label,
+      label = '',
       ariaLabel,
       selectedKey,
       headersOnly,

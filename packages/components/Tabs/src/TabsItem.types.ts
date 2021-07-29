@@ -46,7 +46,7 @@ export interface TabsItemProps extends IButtonProps {
   /*
    ** The text string for the option
    */
-  headerText: string;
+  headerText?: string;
 
   /*
    ** A unique key-identifier for each option

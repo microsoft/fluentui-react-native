@@ -25,7 +25,7 @@ export const TabsItem = compose<TabsItemType>({
   usePrepareProps: (userProps: TabsItemProps, useStyling: IUseComposeStyling<TabsItemType>) => {
     const {
       icon,
-      headerText,
+      headerText = '',
       onAccessibilityTap = userProps.onClick,
       accessibilityLabel = userProps.headerText,
       componentRef = React.useRef(null),

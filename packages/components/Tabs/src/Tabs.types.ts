@@ -54,7 +54,7 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
   /*
    ** Descriptive label for the Tabs. This will be displayed as the title of the Tabs to the user
    */
-  label: string;
+  label?: string;
 
   /*
    ** The key of the TabsItem that will initially be selected
