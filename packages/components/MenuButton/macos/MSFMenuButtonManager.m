@@ -56,15 +56,15 @@
 
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
 
-RCT_CUSTOM_VIEW_PROPERTY(disabled, bool, NSPopUpButton)
-{
-  bool disabled = [RCTConvert BOOL:json];
-  [view setEnabled:!disabled];
-}
-
 RCT_REMAP_VIEW_PROPERTY(content, title, NSString)
 
-RCT_REMAP_VIEW_PROPERTY(imageSource, image, UIImage)
+RCT_EXPORT_VIEW_PROPERTY(image, UIImage)
+
+RCT_CUSTOM_VIEW_PROPERTY(disabled, bool, NSPopUpButton)
+{
+  bool disabled = ![RCTConvert BOOL:json];
+  [view setEnabled:disabled];
+}
 
 RCT_REMAP_VIEW_PROPERTY(menuItems, menu, NSMenu)
 

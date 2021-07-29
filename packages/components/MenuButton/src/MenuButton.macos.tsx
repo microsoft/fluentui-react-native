@@ -19,7 +19,7 @@ import {
 export const MenuButton = compose<MenuButtonType>({
   displayName: MenuButtonName,
   usePrepareProps: (userProps: MenuButtonProps, useStyling: IUseComposeStyling<MenuButtonType>) => {
-    const { menuItems, content, disabled, onItemClick } = userProps;
+    const { menuItems, content, icon, disabled, onItemClick } = userProps;
 
     const state: MenuButtonState = {
       context: {},
@@ -36,9 +36,10 @@ export const MenuButton = compose<MenuButtonType>({
 
     const slotProps = mergeSettings<MenuButtonSlotProps>(styleProps, {
       root: {
-        menuItems: menuItems,
         content: content,
         disabled: disabled,
+        image: icon,
+        menuItems: menuItems,
         onPress: onPress,
         style: {
           width: 160,
