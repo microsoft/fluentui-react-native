@@ -43,7 +43,7 @@ export const TabsItem = compose<TabsItemType>({
     const changeSelection = () => {
       if (itemKey != info.selectedKey) {
         info.onTabsClick && info.onTabsClick(itemKey);
-        info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex((x) => x == itemKey) + 1);
+        info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
         info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
       }
     };
@@ -109,7 +109,7 @@ export const TabsItem = compose<TabsItemType>({
         accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: state.info.disabled, selected: state.info.selected },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
-        accessibilityPositionInSet: info.tabsItemKeys.findIndex((x) => x == itemKey) + 1,
+        accessibilityPositionInSet: info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
         accessibilitySetSize: info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUp,
