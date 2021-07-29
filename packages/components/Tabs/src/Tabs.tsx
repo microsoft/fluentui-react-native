@@ -34,7 +34,7 @@ export const Tabs = compose<TabsType>({
 
   usePrepareProps: (userProps: TabsProps, useStyling: IUseComposeStyling<TabsType>) => {
     const {
-      label = '',
+      label,
       ariaLabel,
       selectedKey,
       headersOnly,
@@ -77,6 +77,7 @@ export const Tabs = compose<TabsType>({
       },
       info: {
         headersOnly: headersOnly ?? false,
+        label: !!label,
       },
     };
 
@@ -121,7 +122,7 @@ export const Tabs = compose<TabsType>({
         value={renderData.state.context}
       >
         <Slots.root>
-          <Slots.label />
+          {renderData.state.info.label && <Slots.label />}
           <Slots.container>{children}</Slots.container>
           <Slots.tabPanel>
             <TabsContext.Consumer>

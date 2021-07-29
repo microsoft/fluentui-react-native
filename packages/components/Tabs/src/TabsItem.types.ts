@@ -38,7 +38,7 @@ export interface TabsItemInfo extends IPressableState {
 }
 
 export interface TabsItemState {
-  info: Omit<TabsItemInfo, 'headerText'>;
+  info: TabsItemInfo;
 }
 
 // Props for the tabs item

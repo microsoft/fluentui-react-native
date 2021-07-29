@@ -43,6 +43,7 @@ export interface ITabsContext {
 
 export interface TabsInfo {
   headersOnly?: boolean;
+  label?: boolean,
 }
 
 export interface TabsState {

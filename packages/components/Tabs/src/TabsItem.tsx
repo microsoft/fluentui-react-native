@@ -25,7 +25,7 @@ export const TabsItem = compose<TabsItemType>({
   usePrepareProps: (userProps: TabsItemProps, useStyling: IUseComposeStyling<TabsItemType>) => {
     const {
       icon,
-      headerText = '',
+      headerText,
       onAccessibilityTap = userProps.onClick,
       accessibilityLabel = userProps.headerText,
       componentRef = React.useRef(null),
@@ -66,6 +66,7 @@ export const TabsItem = compose<TabsItemType>({
         disabled: !!userProps.disabled,
         icon: !!icon,
         key: itemKey,
+        headerText: !!headerText,
       },
     };
 
@@ -127,7 +128,7 @@ export const TabsItem = compose<TabsItemType>({
       <Slots.root>
         <Slots.stack>
           {info.icon && <Slots.icon />}
-          <Slots.content />
+          {info.headerText && <Slots.content />}
         </Slots.stack>
         <Slots.indicator />
       </Slots.root>
