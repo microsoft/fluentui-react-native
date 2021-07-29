@@ -9,6 +9,10 @@ export const settings: IComposeSettings<TabsItemType> = [
     tokens: {
       color: 'neutralForeground3Brand',
       variant: 'bodyStandard',
+      borderWidth: 2,
+      // borderColor: 'neutralForeground1',
+      borderColor: 'transparent',
+      borderRadius: 4,
     },
     root: {
       accessible: true,
@@ -29,6 +33,7 @@ export const settings: IComposeSettings<TabsItemType> = [
         borderRadius: 2,
         marginBottom: 2,
         alignSelf: 'stretch',
+        marginHorizontal: 10,
       },
     },
     stack: {
@@ -99,9 +104,7 @@ export const settings: IComposeSettings<TabsItemType> = [
       focused: {
         tokens: {
           color: 'neutralForeground1',
-          borderWidth: 2,
           borderColor: 'neutralForeground1',
-          borderRadius: 4,
         },
         indicator: {
           style: {
