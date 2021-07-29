@@ -992,7 +992,7 @@
     core-js "^2.6.5"
     regenerator-runtime "^0.13.4"
 
-"@babel/preset-env@^7.8.0":
+"@babel/preset-env@^7.0.0", "@babel/preset-env@^7.8.0":
   version "7.14.8"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.14.8.tgz#254942f5ca80ccabcfbb2a9f524c74bca574005b"
   integrity sha512-a9aOppDU93oArQ51H+B8M1vH+tayZbuBqzjOhntGetZVa+4tTu5jp+XTwqHGG2lxslqomPYVSjIxQkFwXzgnxg==
@@ -1094,7 +1094,7 @@
     "@babel/plugin-transform-react-jsx-development" "^7.12.17"
     "@babel/plugin-transform-react-pure-annotations" "^7.12.1"
 
-"@babel/preset-typescript@^7.8.0":
+"@babel/preset-typescript@^7.0.0", "@babel/preset-typescript@^7.8.0":
   version "7.14.5"
   resolved "https://registry.yarnpkg.com/@babel/preset-typescript/-/preset-typescript-7.14.5.tgz#aa98de119cf9852b79511f19e7f44a2d379bcce0"
   integrity sha512-u4zO6CdbRKbS9TypMqrlGH7sd2TAJppZwn3c/ZRLeO/wGsbddxgbPDUZVNrie3JWYLQ9vpineKlsrWFvO6Pwkw==
@@ -2458,6 +2458,15 @@
     semver "^7.0.0"
     workspace-tools "^0.16.2"
     yargs "^16.0.0"
+
+"@rnx-kit/jest-preset@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/jest-preset/-/jest-preset-0.1.0.tgz#e1863a3962e703ec31ea425e50fd8ce1242f4bae"
+  integrity sha512-6d3B7c1eHCoJ2npolnJwcKhM5lgDL7Ipx3ui8H3iTA2++D0FV7XmC7Vp+okK4ZH3H1Y7+HZvXmSM7Rw5pK668g==
+  dependencies:
+    "@babel/preset-env" "^7.0.0"
+    "@babel/preset-typescript" "^7.0.0"
+    find-up "^5.0.0"
 
 "@rnx-kit/metro-config@^1.2.3":
   version "1.2.3"
