@@ -1162,23 +1162,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fluentui-react-native/framework@0.5.15":
-  version "0.5.15"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.5.15.tgz#c0efdb5204d74bb1ae3a8f5e902242b84e312ce7"
-  integrity sha512-YI3h1pQYbj8ERn0GICe6RqpTq20RS3AHJheGfSTSfq6Bb39J75G3c9pvHh6ulJiQTn5mIyDDCWEt4q3LhF04zw==
-  dependencies:
-    "@fluentui-react-native/composition" ">=0.6.3 <1.0.0"
-    "@fluentui-react-native/default-theme" ">=0.7.1 <1.0.0"
-    "@fluentui-react-native/immutable-merge" "^1.1.2"
-    "@fluentui-react-native/memo-cache" "^1.1.2"
-    "@fluentui-react-native/merge-props" ">=0.3.2 <1.0.0"
-    "@fluentui-react-native/theme-types" ">=0.9.1 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.9.11 <1.0.0"
-    "@fluentui-react-native/use-slot" ">=0.1.2 <1.0.0"
-    "@fluentui-react-native/use-slots" ">=0.5.4 <1.0.0"
-    "@fluentui-react-native/use-styling" ">=0.6.2 <1.0.0"
-    "@fluentui-react-native/use-tokens" ">=0.1.1 <1.0.0"
-
 "@fluentui/token-pipeline@^0.3.7":
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.7.tgz#4ac3326c1d12539c7f8abc339432b69172c27bf1"

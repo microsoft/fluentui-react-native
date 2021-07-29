@@ -23,9 +23,9 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.5.15",
-    "@fluentui-react-native/tokens": "0.9.12",
-    "@fluentui-react-native/use-tokens": "0.1.2"
+    "@fluentui-react-native/framework": ">=0.5.16 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.9.12 <1.0.0",
+    "@fluentui-react-native/use-tokens": ">=0.1.2 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
