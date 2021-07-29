@@ -1,7 +1,6 @@
 import { tabsItemName, TabsItemType } from './TabsItem.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 import type { IViewProps } from '@fluentui-react-native/adapters';
-// import { Text } from '@fluentui-react-native/experimental-text';
 
 export const tabsItemSelectActionLabel = 'Select a TabsItem';
 
@@ -9,16 +8,12 @@ export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
       color: '#616161',
-      fontWeight: 'normal',
-      fontFamily: 'Segoe UI',
-      borderWidth: 0,
-      borderRadius: 0,
-      fontSize: 14,
+      variant: 'bodyStandard',
     },
     root: {
       accessible: true,
       focusable: true,
-      accessibilityRole: 'tab',
+      accessibilityRole: 'button',
       style: {
         display: 'flex',
         alignItems: 'center',
@@ -29,17 +24,15 @@ export const settings: IComposeSettings<TabsItemType> = [
     } as IViewProps,
     indicator: {
       style: {
-        // flex: 1,
         minHeight: 2,
-        minWidth: 44,
         backgroundColor: 'transparent',
         borderRadius: 2,
         marginBottom: 2,
+        alignSelf: 'stretch',
       },
     },
     stack: {
       style: {
-        // backgroundColor: '#FAFAFA',
         display: 'flex',
         marginHorizontal: 10,
         alignItems: 'center',
@@ -50,21 +43,16 @@ export const settings: IComposeSettings<TabsItemType> = [
         justifyContent: 'center',
       },
     },
-    _precedence: ['hovered', 'pressed', 'selected', 'focused', 'disabled'],
+    _precedence: ['selected', 'hovered', 'focused', 'disabled', 'pressed'],
     _overrides: {
       disabled: {
         tokens: {
-          // backgroundColor: 'buttonBackgroundDisabled',
           color: '#BDBDBD',
-          // borderColor: 'buttonBorderDisabled',
         },
       },
       hovered: {
         tokens: {
           color: '#242424',
-          // fontWeight: 'bold',
-          // fontFamily: 'Segoe UI',
-          // fontSize: 14,
         },
         indicator: {
           style: {
@@ -75,11 +63,24 @@ export const settings: IComposeSettings<TabsItemType> = [
       selected: {
         tokens: {
           color: '#242424',
-          fontWeight: 'bold',
-          fontFamily: 'Segoe UI',
-          fontSize: 14,
+          variant: 'bodySemibold',
+        },
+        indicator: {
+          style: {
+            backgroundColor: '#0078D4',
+          },
+        },
+        _overrides: {
+          pressed: {
+            indicator: {
+              style: {
+                backgroundColor: '#D1D1D1',
+              },
+            },
+          },
         },
       },
+
       pressed: {
         tokens: {
           color: '#242424',
@@ -90,6 +91,7 @@ export const settings: IComposeSettings<TabsItemType> = [
           },
         },
       },
+
       focused: {
         tokens: {
           color: '#242424',
