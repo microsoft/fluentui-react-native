@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "🐛 Export compressible from @furn/framework",
+  "packageName": "@fluentui-react-native/framework",
+  "email": "aliciakds88@gmail.com",
+  "dependentChangeType": "patch"
+}
