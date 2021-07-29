@@ -44,7 +44,7 @@ const disabledTabs: React.FunctionComponent = () => {
   );
 };
 
-const tabsIcon: React.FunctionComponent = () => {
+const tabsCountIcon: React.FunctionComponent = () => {
   const svgProps: SvgIconProps = {
     src: TestSvg,
     viewBox: '0 0 500 500',
@@ -53,13 +53,13 @@ const tabsIcon: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
       <Tabs label="Tabs">
-        <TabsItem headerText="Home" itemKey="A" icon={{ svgSource: svgProps, width: 20, height: 20 }}>
+        <TabsItem headerText="Home" itemKey="A" icon={{ svgSource: svgProps, width: 20, height: 20 }} itemCount={23}>
           <Text>Tabs #1</Text>
         </TabsItem>
-        <TabsItem itemKey="B" icon={{ svgSource: svgProps, width: 20, height: 20 }}>
+        <TabsItem itemKey="B" icon={{ svgSource: svgProps, width: 20, height: 20 }} itemCount={0}>
           <Text>Tabs #2</Text>
         </TabsItem>
-        <TabsItem headerText="Settings" itemKey="C" icon={{ svgSource: svgProps, width: 20, height: 20 }}>
+        <TabsItem itemKey="C" icon={{ svgSource: svgProps, width: 20, height: 20 }}>
           <Text>Tabs #3</Text>
         </TabsItem>
       </Tabs>
@@ -211,8 +211,8 @@ const tabsSections: TestSection[] = [
     component: disabledTabs,
   },
   {
-    name: 'Icons',
-    component: tabsIcon,
+    name: 'Count and Icon',
+    component: tabsCountIcon,
   },
   {
     name: 'Trigger onTabsClick event',
