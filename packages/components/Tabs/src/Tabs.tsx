@@ -109,9 +109,9 @@ export const Tabs = compose<TabsType>({
       renderData.state.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
           if (renderData.state.context.selectedKey == null) {
-            renderData.state.context.selectedKey = child.props.buttonKey;
+            renderData.state.context.selectedKey = child.props.itemKey;
           }
-          return child.props.buttonKey;
+          return child.props.itemKey;
         }
       });
     }
