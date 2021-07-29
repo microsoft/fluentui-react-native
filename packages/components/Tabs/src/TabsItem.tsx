@@ -25,13 +25,14 @@ export const TabsItem = compose<TabsItemType>({
   usePrepareProps: (userProps: TabsItemProps, useStyling: IUseComposeStyling<TabsItemType>) => {
     const {
       icon,
-      headerText,
+      headerText = '',
       onAccessibilityTap = userProps.onClick,
       accessibilityLabel = userProps.headerText,
       componentRef = React.useRef(null),
       testID,
       onClick,
       itemKey,
+      itemCount,
       ...rest
     } = userProps;
 
@@ -66,7 +67,7 @@ export const TabsItem = compose<TabsItemType>({
         disabled: !!userProps.disabled,
         icon: !!icon,
         key: itemKey,
-        headerText: !!headerText,
+        headerText: !!headerText || itemCount !== undefined,
       },
     };
 
@@ -96,6 +97,8 @@ export const TabsItem = compose<TabsItemType>({
       [info, itemKey],
     );
 
+    const countText = itemCount !== undefined ? ` (${itemCount})` : '';
+
     const slotProps = mergeSettings<TabsItemSlotProps>(styleProps, {
       root: {
         ...rest,
@@ -111,7 +114,7 @@ export const TabsItem = compose<TabsItemType>({
         onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUp,
       },
-      content: { children: headerText, testID: testID },
+      content: { children: headerText + countText, testID: testID },
       icon: createIconProps(icon),
     });
 
