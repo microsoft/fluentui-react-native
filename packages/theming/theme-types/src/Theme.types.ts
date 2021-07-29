@@ -22,7 +22,9 @@ export interface Theme {
   name?: string;
   colors: ThemeColorDefinition;
   typography: Typography;
-  components: { [key: string]: object };
+  components: {
+    [key: string]: object, // eslint-disable-line @typescript-eslint/ban-types
+  };
   spacing: Spacing;
   host: {
     // appearance of the theme, this corresponds to the react-native Appearance library values, though can be overwritten

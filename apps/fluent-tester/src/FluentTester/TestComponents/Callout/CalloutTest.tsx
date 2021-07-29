@@ -4,7 +4,7 @@ import { Button, Callout, Separator, IFocusable, RestoreFocusEvent, DismissBehav
 import { CALLOUT_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
-const standardCallout: React.FunctionComponent<{}> = () => {
+const standardCallout: React.FunctionComponent = () => {
   const [showStandardCallout, setShowStandardCallout] = React.useState(false);
   const [isStandardCalloutVisible, setIsStandardCalloutVisible] = React.useState(false);
 
@@ -211,7 +211,7 @@ const standardCallout: React.FunctionComponent<{}> = () => {
   );
 };
 
-const customCallout: React.FunctionComponent<{}> = () => {
+const customCallout: React.FunctionComponent = () => {
   const [showCustomizedCallout, setShowCustomizedCallout] = React.useState(false);
   const [isCustomizedCalloutVisible, setIsCustomizedCalloutVisible] = React.useState(false);
 
@@ -278,7 +278,7 @@ const calloutSections: TestSection[] = [
   },
 ];
 
-export const CalloutTest: React.FunctionComponent<{}> = () => {
+export const CalloutTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Backlog',
