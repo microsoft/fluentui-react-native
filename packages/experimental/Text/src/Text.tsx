@@ -72,7 +72,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   // apply states like disabled if specified in props
   [tokens, cache] = applyTokenLayers(tokens, ['disabled'], cache, (state) => props['state]']);
   // override variant or color from props
-  [tokens, cache] = applyPropsToTokens(props, tokens, cache, ['variant', 'color']);
+  [tokens, cache] = applyPropsToTokens({ color, variant }, tokens, cache, ['variant', 'color']);
   // now build the text style from tokens that can be shared between different Text instances
   const [tokenStyle] = cache(
     () => ({
