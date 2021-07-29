@@ -103,7 +103,7 @@ export const Tabs = compose<TabsType>({
 
     // Populate the tabsItemKeys array
     if (children) {
-      /* eslint-disable @typescript-eslint/ban-ts-ignore */
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore - TODO, fix typing error
       renderData.state.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
