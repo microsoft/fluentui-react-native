@@ -9,6 +9,6 @@ SWIFT_OPTIMIZATION_LEVEL=-Osize
 ONLY_ACTIVE_ARCH=NO
 
 // Build for distribution so that this is consumable from other versions of Xcode
-BUILD_LIBRARY_FOR_DISTRIBUTION=YES
+// BUILD_LIBRARY_FOR_DISTRIBUTION=YES
 
 SWIFT_VERSION = 5.0
