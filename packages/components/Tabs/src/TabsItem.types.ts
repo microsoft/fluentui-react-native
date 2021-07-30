@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PressableProps, ViewProps } from 'react-native';
+import { ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
@@ -80,7 +80,6 @@ export interface TabsItemTokens extends IButtonTokens {
 
 export interface TabsItemSlotProps {
   root: React.PropsWithRef<IViewProps>;
-  ripple?: PressableProps; // This slot exists to enable ripple-effect in android. It does not affect other platforms.
   stack: ViewProps;
   icon: IconProps;
   content: ITextProps;
