@@ -32,7 +32,7 @@ A `ThemeReference` is a class that creates a theme based on either another `Them
 import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
 import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
 
-// This will use the default Fluent theme from FURN as the theme.
+// This will use the built-in theme from FURN.
 const defaultTheme = new ThemeProvider(defaultFluentTheme);
 
 // Then, wrap your components in the ThemeProvder
@@ -46,7 +46,7 @@ export const App = () => {
 };
 ```
 
-For more information about customizing themes, take a look at [Custom Themes](./CustomTheme)
+For more information about customizing themes, take a look at [Custom Themes](./CustomTheme). For information about our default themes, take a look at [Default Themes](./DefaultThemes).
 
 ### Accessing theme properties
 
