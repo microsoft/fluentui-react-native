@@ -151,7 +151,7 @@ export const TabsItem = compose<TabsItemType>({
     stack: [],
     icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
     content: [textTokens, foregroundColorTokens],
-    indicator: [backgroundColorTokens],
+    indicator: [{ source: 'indicatorColor', lookup: getPaletteFromTheme, target: 'backgroundColor' }],
   },
 });
 

@@ -76,6 +76,7 @@ export interface TabsItemProps extends IButtonProps {
 
 export interface TabsItemTokens extends IButtonTokens {
   textBorderColor?: string;
+  indicatorColor?: string;
 }
 
 export interface TabsItemSlotProps {

@@ -10,9 +10,9 @@ export const settings: IComposeSettings<TabsItemType> = [
       color: 'neutralForeground3Brand',
       variant: 'bodyStandard',
       borderWidth: 2,
-      // borderColor: 'neutralForeground1',
       borderColor: 'transparent',
       borderRadius: 4,
+      indicatorColor: 'transparent',
     },
     root: {
       accessible: true,
@@ -29,7 +29,6 @@ export const settings: IComposeSettings<TabsItemType> = [
     indicator: {
       style: {
         minHeight: 2,
-        backgroundColor: 'transparent',
         borderRadius: 2,
         marginBottom: 2,
         alignSelf: 'stretch',
@@ -48,7 +47,7 @@ export const settings: IComposeSettings<TabsItemType> = [
         justifyContent: 'center',
       },
     },
-    _precedence: ['selected', 'hovered', 'focused', 'disabled', 'pressed'],
+    _precedence: ['hovered', 'selected', 'focused', 'disabled', 'pressed'],
     _overrides: {
       disabled: {
         tokens: {
@@ -58,32 +57,19 @@ export const settings: IComposeSettings<TabsItemType> = [
       hovered: {
         tokens: {
           color: 'neutralForeground2Hover',
-        },
-        indicator: {
-          style: {
-            // backgroundColor: 'neutralStroke1',
-            backgroundColor: '#D1D1D1',
-          },
+          indicatorColor: 'neutralStroke1'
         },
       },
       selected: {
         tokens: {
           color: 'neutralForeground1',
           variant: 'bodySemibold',
-        },
-        indicator: {
-          style: {
-            // backgroundColor: 'brandStroke1',
-            backgroundColor: '#0078D4',
-          },
+          indicatorColor: 'brandStroke1'
         },
         _overrides: {
           pressed: {
-            indicator: {
-              style: {
-                // backgroundColor: 'neutralStroke1',
-                backgroundColor: '#D1D1D1',
-              },
+            tokens: {
+              indicatorColor: 'neutralStroke1',
             },
           },
         },
@@ -92,12 +78,7 @@ export const settings: IComposeSettings<TabsItemType> = [
       pressed: {
         tokens: {
           color: 'neutralForeground2Pressed',
-        },
-        indicator: {
-          style: {
-            // backgroundColor: 'brandStroke1',
-            backgroundColor: '#0078D4',
-          },
+          indicatorColor: 'brandStroke1',
         },
       },
 
@@ -105,12 +86,7 @@ export const settings: IComposeSettings<TabsItemType> = [
         tokens: {
           color: 'neutralForeground1',
           borderColor: 'neutralForeground1',
-        },
-        indicator: {
-          style: {
-            // backgroundColor: 'brandStroke1',
-            backgroundColor: '#0078D4',
-          },
+          indicatorColor: 'brandStroke1',
         },
       },
     },
