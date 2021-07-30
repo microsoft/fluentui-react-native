@@ -24,19 +24,42 @@ Below are the steps outlining how to use FURN's theming system.
 
 ### ThemeProvider
 
-The available theme is defined by the ThemeProvider. It takes in a ThemeReference.
+The available theme is defined by the `ThemeProvider`. It takes in a `ThemeReference` as a value.
+
+A `ThemeReference` is a class that creates a theme based on either another `Theme` or a parent `ThemeReference`. You can learn more about `ThemeReference` [here](https://github.com/microsoft/fluentui-react-native/blob/master/packages/framework/theme/README.md).
 
 ```tsx
-import { ThemeProvider } from '@fluentui-react-native/theme';
+import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
+import { defaultFluentTheme } from '@fluentui-react-native/default-theme';
+
+// This will use the default Fluent theme from FURN as the theme.
+const defaultTheme = new ThemeProvider(defaultFluentTheme);
+
+// Then, wrap your components in the ThemeProvder
+export const App = () => {
+  return (
+    // Theme is available to all children through ThemeContext
+    <ThemeProvider theme={defaultTheme}>
+      <AppContent />
+    </ThemeProvider>
+  );
+};
 ```
+
+For more information about customizing themes, take a look at [Custom Themes](./CustomTheme)
 
 ### Accessing theme properties
 
-In a component that has a FURN theme available, you can use the `useTheme()` hook to get the current value of the theme.
+You can use the `useTheme()` hook to get the current theme inside a component.
 
 ```tsx
+import { useTheme } from '@fluentui-react-native/theme-types';
+
+export const Component = () => {
+  const theme = useTheme();
+
+  return <Text color={theme.colors.bodyText}>Hello World!</Text>;
+};
 ```
 
-### Using ThemeRegistry (Deprecated)
-
-// TODO
+The component will rerender if the theme is invalidated.
