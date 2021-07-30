@@ -26,7 +26,7 @@ Below are the steps outlining how to use FURN's theming system.
 
 The available theme is defined by the `ThemeProvider`. It takes in a `ThemeReference` as a value.
 
-A `ThemeReference` is a class that creates a theme based on either another `Theme` or a parent `ThemeReference`. You can learn more about `ThemeReference` [here](https://github.com/microsoft/fluentui-react-native/blob/master/packages/framework/theme/README.md).
+A `ThemeReference` is a class that creates a theme based on either another `Theme` or a parent `ThemeReference`. You can learn more about `ThemeReference` [here](https://github.com/microsoft/fluentui-react-native/blob/master/packages/framework/theme/README.md). We have a built in `ThemeReference` which you can access by calling `createDefaultTheme()`
 
 ```tsx
 import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
