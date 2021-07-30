@@ -1,10 +1,9 @@
-'use strict';
-
+import jestPreset from '@rnx-kit/jest-preset';
 import path from 'path';
-import { mergeConfigs } from './mergeConfigs';
 import { getPackageInfos } from 'workspace-tools';
-import { nodeModulesToRoot, resolveModule } from '../utils/resolvePaths';
-import { ensurePlatform, PlatformValue, getRNVersion, getAllPlatforms } from '../utils/platforms';
+import { mergeConfigs } from './mergeConfigs';
+import { ensurePlatform, PlatformValue } from '../utils/platforms';
+import { nodeModulesToRoot } from '../utils/resolvePaths';
 
 const moduleFileExtensions = ['ts', 'tsx', 'js', 'jsx', 'json'];
 
@@ -44,33 +43,10 @@ export function configureJest(customConfig?: object): object {
 }
 
 export function configureReactNativeJest(platform?: PlatformValue, customConfig?: object): object {
-  platform = ensurePlatform(platform, 'ios');
-  const rnPackage = getRNVersion(platform);
-  const rnPath = resolveModule(rnPackage) + '/';
-  console.log(rnPath);
-  console.log(platform);
-  console.log(require.resolve(rnPackage));
-
-  return mergeConfigs(
-    {
-      roots: ['<rootDir>/src', rnPath],
-      moduleFileExtensions,
-      transform: {
-        '^.+\\.(js|ts|tsx)?$': ['babel-jest', { cwd: __dirname, presets: ['module:metro-react-native-babel-preset'] }],
-      },
-      preset: 'react-native',
-      moduleNameMapper: {
-        '^react-native$': require.resolve(rnPackage),
-        '^react-native/(.*)': rnPath + '$1',
-      },
-      haste: {
-        defaultPlatform: platform,
-        platforms: getAllPlatforms(),
-      },
-      transformIgnorePatterns: ['node_modules/(?!(react-native)/)'],
-      verbose: false,
-      setupFilesAfterEnv: [path.join(__dirname, 'jest', 'setupEnzyme.js')],
-    },
-    customConfig,
-  );
+  return jestPreset(ensurePlatform(platform, 'ios'), {
+    roots: ['<rootDir>/src'],
+    verbose: false,
+    setupFilesAfterEnv: [path.join(__dirname, 'jest', 'setupEnzyme.js')],
+    ...customConfig,
+  });
 }
