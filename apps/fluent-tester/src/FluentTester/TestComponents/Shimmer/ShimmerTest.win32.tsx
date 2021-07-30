@@ -1,48 +1,51 @@
 import * as React from 'react';
 import { SHIMMER_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { Shimmer } from '@fluentui-react-native/experimental-shimmer';
 import { Stack } from '@fluentui-react-native/stack';
+import { shimmerBorderRadiusTests, shimmerRects, shimmerRectsAndCircle } from './ShimmerTestElementSets';
 import { stackStyle } from '../Common/styles';
 import { View } from 'react-native';
 
-import { Shimmer, ShimmerElement } from '@fluentui-react-native/experimental-shimmer';
-const shimmer: React.FunctionComponent<{}> = () => {
-  const lines: Array<ShimmerElement> = [
-    {
-      type: 'rect',
-      width: 100,
-      height: 20,
-      borderRadius: 3,
-      xPos: 90,
-      yPos: 70,
-    },
-    {
-      type: 'rect',
-      width: 150,
-      height: 20,
-      borderRadius: 3,
-      xPos: 90,
-      yPos: 42,
-    },
-    {
-      type: 'rect',
-      width: 200,
-      height: 20,
-      borderRadius: 3,
-      xPos: 90,
-      yPos: 15,
-    },
-  ];
-  const circle = lines.slice();
-  circle.push({ type: 'circle', height: 70, xPos: 20, yPos: 35 });
-  const rect = lines.slice();
-  rect.push({ type: 'rect', height: 60, width: 60, xPos: 10, yPos: 25, borderRadius: 3 });
-  rect.push({ type: 'circle', height: 70, xPos: 20, yPos: 35 });
+const RectShimmers: React.FunctionComponent<{}> = () => {
+  return (
+    <Stack style={stackStyle}>
+      <View>
+        <Shimmer elements={shimmerRects()} duration={2000} delay={1000} style={{ width: 800, height: 800 }} />
+      </View>
+    </Stack>
+  );
+};
+
+const RectCircleShimmers: React.FunctionComponent<{}> = () => {
+  return (
+    <Stack style={stackStyle}>
+      <View>
+        <Shimmer elements={shimmerRectsAndCircle()} duration={3000} style={{ width: 800, height: 800 }} />
+      </View>
+    </Stack>
+  );
+};
+
+const CustomizedShimmer: React.FunctionComponent<{}> = () => {
+  const PinkShimmer = Shimmer.customize({
+    gradientTintColor: 'pink',
+  });
 
   return (
     <Stack style={stackStyle}>
       <View>
-        <Shimmer elements={rect} duration={2000} delay={2000} width={100} height={100} />
+        <PinkShimmer elements={shimmerRectsAndCircle()} duration={1500} delay={500} style={{ width: 600, height: 600 }} />
+      </View>
+    </Stack>
+  );
+};
+
+const ShimmerBorderRadii: React.FunctionComponent<{}> = () => {
+  return (
+    <Stack style={stackStyle}>
+      <View>
+        <Shimmer elements={shimmerBorderRadiusTests()} duration={3000} style={{ width: 1000, height: 1000 }} />
       </View>
     </Stack>
   );
@@ -72,7 +75,7 @@ const shimmer: React.FunctionComponent<{}> = () => {
 //         <Svg height="400" width="400" viewBox="0 0 400 400" style={{ position: 'absolute' }}>
 //           <Defs>
 //             <ClipPath id="pat">
-//               <Path d="M50,0 21,90 98,35 2,35 79,90z" id="star" clip-rule="nonzero" />
+//               <Path d="M50,0 21,90 98,35 2,35 79,90z" id="star" clipRule="nonzero" />
 //             </ClipPath>
 //           </Defs>
 //           <Rect x="0" y="0" width="100" height="100" fill="gray" clipPath="url(#pat)" />
@@ -92,14 +95,14 @@ const linearGradient: React.FunctionComponent<{}> = () => {
         </Defs>
 
         <ClipPath id="emptyStar">
-          <Use clipPath="url(#star)" clip-rule="evenodd" />
+          <Use clipPath="url(#star)" clipRule="evenodd" />
         </ClipPath>
-        <Rect clip-path="url(#emptyStar)" width="50" height="90" fill="blue" />
+        <Rect clipPath="url(#emptyStar)" width="50" height="90" fill="blue" />
 
         <ClipPath id="filledStar">
-          <Use clipPath="url(#star)" clip-rule="nonzero" />
+          <Use clipPath="url(#star)" clipRule="nonzero" />
         </ClipPath>
-        <Rect clip-path="url(#filledStar)" width="50" height="90" x="50" fill="red" />
+        <Rect clipPath="url(#filledStar)" width="50" height="90" x="50" fill="red" />
       </Svg> */}
       <Svg height="100" width="100">
         <Defs>
@@ -144,15 +147,69 @@ const linearGradient: React.FunctionComponent<{}> = () => {
 //   );
 // };
 
+// const simplestPossible: React.FunctionComponent<{}> = () => {
+//   return (
+//     <Stack style={stackStyle}>
+//       <View style={{ width: 400, height: 400, backgroundColor: 'green' }}>
+//         <Svg width={100} height={100} viewBox="0 0 100 100">
+//           <ClipPath id="blueClip">
+//             <Circle cx="40" cy="40" r="20" clipRule="nonzero" />
+//             <Circle cx="60" cy="60" r="20" clipRule="nonzero" />
+//           </ClipPath>
+//           <ClipPath id="redClip">
+//             <Circle cx="40" cy="40" r="20" clipRule="nonzero" />
+//             <Circle cx="60" cy="60" r="20" clipRule="nonzero" />
+//           </ClipPath>
+//           <Rect clipPath="#redClip" width={50} height={80} x={30} y={10} fill="red" />
+//           <Rect clipPath="#blueClip" width={50} height={100} fill="blue" />
+//         </Svg>
+//       </View>
+//     </Stack>
+//   );
+// };
+
+/**
+ *
+const RectShimmers: React.FunctionComponent<{}> = () => {
+  const RectCircleShimmers: React.FunctionComponent<{}> = () => {
+const CustomizedShimmer: React.FunctionComponent<{}> = () => {
+const ShimmerBorderRadii: React.FunctionComponent<{}> = () => {
+ */
+
 const shimmerSections: TestSection[] = [
+  // {
+  //   name: 'Simplest. Possible.',
+  //   testID: SHIMMER_TESTPAGE,
+  //   component: simplestPossible,
+  // },
   // {
   //   name: 'specialDemo clipping',
   //   component: specialDemo,
   // },
+  // {
+  //   name: 'liblet_svg example',
+  //   testID: SHIMMER_TESTPAGE,
+  //   component: libletSvgExample,
+  // },
   {
-    name: 'Shimmer',
+    name: 'Shimmer Rects',
     testID: SHIMMER_TESTPAGE,
-    component: shimmer,
+    component: RectShimmers,
+  },
+  {
+    name: 'Shimmer Rects and Circle',
+    testID: SHIMMER_TESTPAGE,
+    component: RectCircleShimmers,
+  },
+  {
+    name: 'Customized Shimmer',
+    testID: SHIMMER_TESTPAGE,
+    component: CustomizedShimmer,
+  },
+  {
+    name: 'Border Radius Tests',
+    testID: SHIMMER_TESTPAGE,
+    component: ShimmerBorderRadii,
   },
   // {
   //   name: 'PATSTESTS',
