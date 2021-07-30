@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, ITabsContext } from './Tabs.types';
@@ -91,7 +91,7 @@ export const Tabs = compose<TabsType>({
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
       root: { rest, ref: componentRef, ...ariaRoles },
       label: { children: label },
-      container: { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef },
+      container: Platform.OS !== 'windows' ? { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef } : null,
     });
 
     return { slotProps, state };
@@ -140,7 +140,7 @@ export const Tabs = compose<TabsType>({
     root: View,
     label: Text,
     tabPanel: { slotType: View, filter: filterViewProps },
-    container: FocusZone,
+    container: Platform.OS !== 'windows' ? FocusZone : { slotType: View, filter: filterViewProps },
   },
   styles: {
     root: [],
