@@ -17,8 +17,7 @@ export interface ITabsContext {
   /*
    ** Index of currently selected key
    */
-
-  getTabId?: (key: string, index: number) => void;
+  getTabId?: (key: string, index: number) => string | null;
 
   /*
    ** Updates the selected tabsItem and calls the client’s onTabsClick callback

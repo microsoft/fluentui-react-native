@@ -19,7 +19,7 @@ export const TabsContext = React.createContext<ITabsContext>({
     return;
   },
   getTabId: (/* key:string, index: number*/) => {
-    return;
+    return null
   },
   updateSelectedTabsItemRef: (/* ref: React.RefObject<any>*/) => {
     return;
