@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ContextualMenu default props 1`] = `
+exports[`ContextualMenu default 1`] = `
 <View
   accessible={false}
   focusable={false}

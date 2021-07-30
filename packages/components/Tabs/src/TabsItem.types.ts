@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PressableProps, ViewProps } from 'react-native';
+import { ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
@@ -24,7 +24,7 @@ export interface TabsItemInfo extends IPressableState {
   /**
    * TabsItem text.
    */
-  headerText: boolean;
+  headerText?: boolean;
 
   /**
    * Indicates if TabsItem is selected.
@@ -38,15 +38,19 @@ export interface TabsItemInfo extends IPressableState {
 }
 
 export interface TabsItemState {
-  info: Omit<TabsItemInfo, 'headerText'>;
+  info: TabsItemInfo;
 }
 
-// Props for the tabs item
 export interface TabsItemProps extends IButtonProps {
   /*
    ** The text string for the option
    */
-  headerText: string;
+  headerText?: string;
+
+  /*
+   ** The text string for the TabsItem count
+   */
+  itemCount?: number;
 
   /*
    ** A unique key-identifier for each option
@@ -71,11 +75,11 @@ export interface TabsItemProps extends IButtonProps {
 
 export interface TabsItemTokens extends IButtonTokens {
   textBorderColor?: string;
+  indicatorColor?: string;
 }
 
 export interface TabsItemSlotProps {
   root: React.PropsWithRef<IViewProps>;
-  ripple?: PressableProps; // This slot exists to enable ripple-effect in android. It does not affect other platforms.
   stack: ViewProps;
   icon: IconProps;
   content: ITextProps;

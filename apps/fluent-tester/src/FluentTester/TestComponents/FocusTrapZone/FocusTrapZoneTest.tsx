@@ -52,7 +52,7 @@ const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps> = (pro
   );
 };
 
-const basicFocusTrapZone: React.FunctionComponent<{}> = () => {
+const basicFocusTrapZone: React.FunctionComponent = () => {
   const [state, setState] = React.useState({
     useTrapZone: false,
     renderTrapZone: true,
@@ -137,7 +137,7 @@ const focusTrapZoneSections: TestSection[] = [
   },
 ];
 
-export const FocusTrapTest: React.FunctionComponent<{}> = () => {
+export const FocusTrapTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Backlog',

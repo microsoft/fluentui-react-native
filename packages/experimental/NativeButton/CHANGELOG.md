@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/experimental-native-button
 
-This log was last generated on Fri, 18 Jun 2021 00:38:19 GMT and should not be manually modified.
+This log was last generated on Thu, 29 Jul 2021 17:53:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.17
+
+Thu, 29 Jul 2021 17:53:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.7.11 (jasonmo@microsoft.com)
+
+## 0.6.16
+
+Tue, 27 Jul 2021 22:17:20 GMT
+
+### Patches
+
+- add compressible utility and a snapshot test / demo to framework (jasonmo@microsoft.com)
+
+## 0.6.15
+
+Mon, 26 Jul 2021 20:41:04 GMT
+
+### Patches
+
+- add new use-slot package, move framework to consume that package (jasonmo@microsoft.com)
+
+## 0.6.14
+
+Sun, 25 Jul 2021 16:30:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.7.8 (email not defined)
+
+## 0.6.10
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
 
 ## 0.6.1
 

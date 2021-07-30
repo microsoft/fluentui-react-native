@@ -25,13 +25,14 @@ export const TabsItem = compose<TabsItemType>({
   usePrepareProps: (userProps: TabsItemProps, useStyling: IUseComposeStyling<TabsItemType>) => {
     const {
       icon,
-      headerText,
+      headerText = '',
       onAccessibilityTap = userProps.onClick,
       accessibilityLabel = userProps.headerText,
       componentRef = React.useRef(null),
       testID,
       onClick,
       itemKey,
+      itemCount,
       ...rest
     } = userProps;
 
@@ -42,7 +43,7 @@ export const TabsItem = compose<TabsItemType>({
     const changeSelection = () => {
       if (itemKey != info.selectedKey) {
         info.onTabsClick && info.onTabsClick(itemKey);
-        info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex((x) => x == itemKey) + 1);
+        info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
         info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
       }
     };
@@ -66,6 +67,7 @@ export const TabsItem = compose<TabsItemType>({
         disabled: !!userProps.disabled,
         icon: !!icon,
         key: itemKey,
+        headerText: !!headerText || itemCount !== undefined,
       },
     };
 
@@ -95,6 +97,8 @@ export const TabsItem = compose<TabsItemType>({
       [info, itemKey],
     );
 
+    const countText = itemCount !== undefined ? ` (${itemCount})` : '';
+
     const slotProps = mergeSettings<TabsItemSlotProps>(styleProps, {
       root: {
         ...rest,
@@ -105,12 +109,12 @@ export const TabsItem = compose<TabsItemType>({
         accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: state.info.disabled, selected: state.info.selected },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
-        accessibilityPositionInSet: info.tabsItemKeys.findIndex((x) => x == itemKey) + 1,
+        accessibilityPositionInSet: info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
         accessibilitySetSize: info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUp,
       },
-      content: { children: headerText, testID: testID },
+      content: { children: headerText + countText, testID: testID },
       icon: createIconProps(icon),
     });
 
@@ -127,9 +131,9 @@ export const TabsItem = compose<TabsItemType>({
       <Slots.root>
         <Slots.stack>
           {info.icon && <Slots.icon />}
-          <Slots.content />
+          {info.headerText && <Slots.content />}
         </Slots.stack>
-        {info.selected && <Slots.indicator />}
+        <Slots.indicator />
       </Slots.root>
     );
   },
@@ -138,7 +142,7 @@ export const TabsItem = compose<TabsItemType>({
   slots: {
     root: View,
     stack: { slotType: View, filter: filterViewProps },
-    icon: { slotType: Icon as React.ComponentType<object> },
+    icon: { slotType: Icon as React.ComponentType },
     content: Text,
     indicator: { slotType: View, filter: filterViewProps },
   },
@@ -147,7 +151,7 @@ export const TabsItem = compose<TabsItemType>({
     stack: [],
     icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
     content: [textTokens, foregroundColorTokens],
-    indicator: [backgroundColorTokens],
+    indicator: [{ source: 'indicatorColor', lookup: getPaletteFromTheme, target: 'backgroundColor' }],
   },
 });
 

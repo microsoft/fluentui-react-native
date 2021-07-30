@@ -22,6 +22,7 @@ declare global {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 function _mixinStyle(style: StyleProp<object> | undefined, mixin: object): StyleProp<object> {
   return style ? [style, mixin] : mixin;
 }
@@ -33,7 +34,7 @@ const render = (Slots: ISlots<IStackSlotProps>, renderData: IStackRenderData, ..
 
   if (gap && gap > 0 && children && global.__jsiExecutorDescription !== 'ChakraRuntime') {
     const extraStyle: ViewStyle = horizontal ? { marginLeft: gap } : { marginTop: gap };
-    /* eslint-disable @typescript-eslint/ban-ts-ignore */
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore - TODO, fix typing error
     children = React.Children.map(children, (child: React.ReactChild, index: number) => {
       if (React.isValidElement(child) && index > 0) {

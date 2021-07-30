@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ITextProps } from '@fluentui-react-native/text';
 import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
+import { IForegroundColorTokens, FontTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';
 import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import { View, ViewProps } from 'react-native';
 
@@ -17,8 +17,7 @@ export interface ITabsContext {
   /*
    ** Index of currently selected key
    */
-
-  getTabId?: (key: string, index: number) => void;
+  getTabId?: (key: string, index: number) => string | null;
 
   /*
    ** Updates the selected tabsItem and calls the client’s onTabsClick callback
@@ -43,6 +42,7 @@ export interface ITabsContext {
 
 export interface TabsInfo {
   headersOnly?: boolean;
+  label?: boolean,
 }
 
 export interface TabsState {
@@ -54,7 +54,7 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
   /*
    ** Descriptive label for the Tabs. This will be displayed as the title of the Tabs to the user
    */
-  label: string;
+  label?: string;
 
   /*
    ** The key of the TabsItem that will initially be selected
@@ -90,14 +90,14 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
   headersOnly?: boolean;
 
   /*
-   ** Sets whether to only render the header
+   ** A RefObject to access Tabs.
    */
   componentRef?: React.RefObject<View>;
 
   testID?: string;
 }
 
-export interface TabsTokens extends IForegroundColorTokens, FontTokens {}
+export interface TabsTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens {}
 
 export interface TabsSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;

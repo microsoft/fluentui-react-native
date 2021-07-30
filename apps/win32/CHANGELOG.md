@@ -1,8 +1,73 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Fri, 18 Jun 2021 00:38:19 GMT and should not be manually modified.
+This log was last generated on Thu, 29 Jul 2021 17:53:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.9
+
+Thu, 29 Jul 2021 17:53:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.33.4 (jasonmo@microsoft.com)
+
+## 0.11.8
+
+Tue, 27 Jul 2021 22:17:20 GMT
+
+### Patches
+
+- add compressible utility and a snapshot test / demo to framework (jasonmo@microsoft.com)
+
+## 0.11.7
+
+Mon, 26 Jul 2021 20:41:04 GMT
+
+### Patches
+
+- add new use-slot package, move framework to consume that package (jasonmo@microsoft.com)
+
+## 0.11.6
+
+Sun, 25 Jul 2021 16:30:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.33.1 (email not defined)
+
+## 0.11.4
+
+Fri, 23 Jul 2021 17:28:27 GMT
+
+### Patches
+
+- Fix @types/react to be less than 16.14.0 since our react version is less than 16.14 (email not defined)
+
+## 0.11.3
+
+Fri, 23 Jul 2021 08:20:11 GMT
+
+### Patches
+
+- Added support of tokens to the MenuButton (v.kozlova13@gmail.com)
+
+## 0.11.1
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
+
+## 0.11.0
+
+Wed, 21 Jul 2021 21:46:12 GMT
+
+### Minor changes
+
+- Add dismiss behaviors and appropriate test page changes (ppatboyd@outlook.com)
+- Add more features to contextualMenu test (lehon@microsoft.com)
 
 ## 0.10.7
 

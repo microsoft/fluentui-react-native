@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, ITabsContext } from './Tabs.types';
@@ -9,7 +9,7 @@ import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings } from './Tabs.settings';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
+import { foregroundColorTokens, textTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
 export const TabsContext = React.createContext<ITabsContext>({
@@ -19,7 +19,7 @@ export const TabsContext = React.createContext<ITabsContext>({
     return;
   },
   getTabId: (/* key:string, index: number*/) => {
-    return;
+    return null
   },
   updateSelectedTabsItemRef: (/* ref: React.RefObject<any>*/) => {
     return;
@@ -77,6 +77,7 @@ export const Tabs = compose<TabsType>({
       },
       info: {
         headersOnly: headersOnly ?? false,
+        label: !!label,
       },
     };
 
@@ -90,7 +91,7 @@ export const Tabs = compose<TabsType>({
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
       root: { rest, ref: componentRef, ...ariaRoles },
       label: { children: label },
-      container: { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef },
+      container: Platform.OS !== 'windows' ? { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef } : null,
     });
 
     return { slotProps, state };
@@ -103,14 +104,15 @@ export const Tabs = compose<TabsType>({
 
     // Populate the tabsItemKeys array
     if (children) {
-      /* eslint-disable @typescript-eslint/ban-ts-ignore */
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore - TODO, fix typing error
       renderData.state.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
-          if (renderData.state.context.selectedKey == null) {
-            renderData.state.context.selectedKey = child.props.buttonKey;
+          // Sets default selected tabItem
+          if (renderData.state.context.selectedKey == null && !child.props.disabled) {
+            renderData.state.context.selectedKey = child.props.itemKey;
           }
-          return child.props.buttonKey;
+          return child.props.itemKey;
         }
       });
     }
@@ -121,7 +123,7 @@ export const Tabs = compose<TabsType>({
         value={renderData.state.context}
       >
         <Slots.root>
-          <Slots.label />
+          {renderData.state.info.label && <Slots.label />}
           <Slots.container>{children}</Slots.container>
           <Slots.tabPanel>
             <TabsContext.Consumer>
@@ -138,12 +140,12 @@ export const Tabs = compose<TabsType>({
     root: View,
     label: Text,
     tabPanel: { slotType: View, filter: filterViewProps },
-    container: FocusZone,
+    container: Platform.OS !== 'windows' ? FocusZone : { slotType: View, filter: filterViewProps },
   },
   styles: {
     root: [],
     label: [foregroundColorTokens, textTokens],
-    container: [],
+    container: [backgroundColorTokens],
   },
 });
 

@@ -28,7 +28,7 @@ module.exports = function preset() {
   );
 
   task('depcheck', checkPublishing);
-  task('lint', eslintTask({ files: ['src/.'] }));
+  task('lint', eslintTask({ files: ['src/'] }));
   task('prettier', () => (argv().fix ? prettierTask : prettierCheckTask));
   task('cleanlib', cleanTask([libPath]));
   task('build', series('cleanlib', parallel('lint', 'ts')));

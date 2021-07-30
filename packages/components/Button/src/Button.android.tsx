@@ -66,7 +66,7 @@ export const Button = compose<IButtonType>({
     root: View,
     ripple: Pressable,
     stack: { slotType: View, filter: filterViewProps },
-    icon: { slotType: Icon as React.ComponentType<object> },
+    icon: { slotType: Icon as React.ComponentType },
     content: Text,
   },
   styles: {

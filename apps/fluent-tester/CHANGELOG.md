@@ -1,8 +1,90 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Sat, 17 Jul 2021 00:39:49 GMT and should not be manually modified.
+This log was last generated on Thu, 29 Jul 2021 17:53:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.33.4
+
+Thu, 29 Jul 2021 17:53:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.17 (jasonmo@microsoft.com)
+
+## 0.33.3
+
+Tue, 27 Jul 2021 22:17:20 GMT
+
+### Patches
+
+- add compressible utility and a snapshot test / demo to framework (jasonmo@microsoft.com)
+
+## 0.33.2
+
+Mon, 26 Jul 2021 20:41:04 GMT
+
+### Patches
+
+- add new use-slot package, move framework to consume that package (jasonmo@microsoft.com)
+- Add ariaPosInSet and ariaSetSize to RadioButton (krsiler@microsoft.com)
+
+## 0.33.1
+
+Sun, 25 Jul 2021 16:30:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.17.15 (email not defined)
+
+## 0.33.0
+
+Sat, 24 Jul 2021 00:28:25 GMT
+
+### Minor changes
+
+- Add test for alias tokens (email not defined)
+
+## 0.32.4
+
+Fri, 23 Jul 2021 17:28:27 GMT
+
+### Patches
+
+- Fix @types/react to be less than 16.14.0 since our react version is less than 16.14 (email not defined)
+
+## 0.32.3
+
+Fri, 23 Jul 2021 08:20:11 GMT
+
+### Patches
+
+- Added supporting tokens for MenuButton (v.kozlova13@gmail.com)
+
+## 0.32.2
+
+Thu, 22 Jul 2021 20:55:49 GMT
+
+### Patches
+
+- Moved react-native-svg to peer dependencies (4123478+tido64@users.noreply.github.com)
+
+## 0.32.1
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
+
+## 0.32.0
+
+Wed, 21 Jul 2021 21:46:12 GMT
+
+### Minor changes
+
+- Add dismiss behaviors and appropriate test page changes (ppatboyd@outlook.com)
+- Add more features to contextualMenu test (lehon@microsoft.com)
 
 ## 0.31.1
 

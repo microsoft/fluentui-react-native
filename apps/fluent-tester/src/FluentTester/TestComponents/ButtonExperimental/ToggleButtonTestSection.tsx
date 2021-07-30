@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const ToggleButtonTest: React.FunctionComponent<{}> = () => {
+export const ToggleButtonTest: React.FunctionComponent = () => {
   const [defaultChecked, setDefaultChecked] = React.useState(false);
   const onDefaultClicked = React.useCallback(() => setDefaultChecked(!defaultChecked), [defaultChecked, setDefaultChecked]);
   const [ghostChecked, setGhostChecked] = React.useState(false);
