@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Fri, 30 Jul 2021 19:17:43 GMT",
+      "tag": "@fluentui-react-native/icon_v0.7.17",
+      "version": "0.7.17",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Quickly fix icon bug",
+            "author": "email not defined",
+            "commit": "4433293c2e7005b042ec1fa940ce8ceec94b57bf",
+            "package": "@fluentui-react-native/icon"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Jul 2021 06:26:34 GMT",
       "tag": "@fluentui-react-native/icon_v0.7.16",
       "version": "0.7.16",
