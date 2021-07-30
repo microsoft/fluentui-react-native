@@ -1,5 +1,6 @@
 import { Palette, FabricWebPalette, ThemeColorDefinition } from '@fluentui-react-native/theme-types';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { createAliasTokens } from '@fluentui-react-native/theming-utils';
 
 /**
  * Generate a palette from a set of fabric web colors, like those output from the theme designer.
@@ -138,6 +139,7 @@ export function getStockWebPalette(): ThemeColorDefinition {
       accent: globalTokens.color.brand.primary,
       blackTranslucent40: 'rgba(0,0,0,.4)',
     }),
+    ...createAliasTokens('light'),
   };
 }
 
@@ -176,5 +178,6 @@ export function getStockWebDarkPalette(): ThemeColorDefinition {
       },
       true,
     ),
+    ...createAliasTokens('dark'),
   };
 }
