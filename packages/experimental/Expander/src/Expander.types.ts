@@ -30,11 +30,11 @@ export interface ExpanderProps {
   /*
   * Height for the Expander when expanded
   */
-  expandedHeight?: number;
+  expandedHeight: number;
   /*
     * Height for the Expander when collapsed
     */
-  collapsedHeight?: number;
+  collapsedHeight: number;
   /*
    * A callback to call on Expander collapsed event
    */
