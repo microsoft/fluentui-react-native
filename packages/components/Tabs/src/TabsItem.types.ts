@@ -41,7 +41,6 @@ export interface TabsItemState {
   info: TabsItemInfo;
 }
 
-// Props for the tabs item
 export interface TabsItemProps extends IButtonProps {
   /*
    ** The text string for the option
