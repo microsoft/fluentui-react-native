@@ -91,7 +91,7 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
   headersOnly?: boolean;
 
   /*
-   ** Sets whether to only render the header
+   ** A RefObject to access Tabs.
    */
   componentRef?: React.RefObject<View>;
 
