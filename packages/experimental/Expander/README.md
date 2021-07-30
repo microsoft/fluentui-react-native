@@ -48,49 +48,49 @@ The first child element of Expander will be assigned to the header, and the seco
 
 ### Props
 
-- [`expandDirection`](#expandDirection)
+- [`expandDirection`](#expanddirection)
 - [`expanded`](#expanded)
 - [`enabled`](#enabled)
 - [`height`](#height)
-- [`expandedHeight`](#expandedHeight)
-- [`collapsedHeight`](#collapsedHeight)
-- [`onCollapsing`](#onCollapsing)
-- [`onExpanding`](#onExpanding)
-- [`onChange`](#onChange)
+- [`expandedHeight`](#expandedheight)
+- [`collapsedHeight`](#collapsedheight)
+- [`onCollapsing`](#oncollapsing)
+- [`onExpanding`](#onexpanding)
+- [`onChange`](#onchange)
 
 ### Tokens
 
 - [`width`](#width)
-- [`contentHorizontalAlignment`](#contentHorizontalAlignment)
-- [`contentVerticalAlignment`](#contentVerticalAlignment)
-- [`headerBackground`](#headerBackground)
-- [`headerForeground`](#headerForeground)
-- [`headerForegroundPointerOver`](#headerForegroundPointerOver)
-- [`headerForegroundPressed`](#headerForegroundPressed)
-- [`headerBorderBrush`](#headerBorderBrush)
-- [`headerBorderPointerOverBrush`](#headerBorderPointerOverBrush)
-- [`headerBorderPressedBrush`](#headerBorderPressedBrush)
-- [`headerDisabledForeground`](#headerDisabledForeground)
-- [`headerDisabledBorderBrush`](#headerDisabledBorderBrush)
-- [`headerBorderThickness`](#headerBorderThickness)
-- [`contentBackground`](#contentBackground)
-- [`contentBorderBrush`](#contentBorderBrush)
-- [`chevronBackground`](#chevronBackground)
-- [`chevronForeground`](#chevronForeground)
-- [`chevronPointerOverBackground`](#chevronPointerOverBackground)
-- [`chevronPointerOverForeground`](#chevronPointerOverForeground)
-- [`chevronPressedBackground`](#chevronPressedBackground)
-- [`chevronPressedForeground`](#chevronPressedForeground)
-- [`chevronBorderThickness`](#chevronBorderThickness)
-- [`chevronBorderBrush`](#chevronBorderBrush)
-- [`chevronBorderPointerOverBrush`](#chevronBorderPointerOverBrush)
-- [`chevronBorderPressedBrush`](#chevronBorderPressedBrush)
+- [`contentHorizontalAlignment`](#contenthorizontalalignment)
+- [`contentVerticalAlignment`](#contentverticalalignment)
+- [`headerBackground`](#headerbackground)
+- [`headerForeground`](#headerforeground)
+- [`headerForegroundPointerOver`](#headerforegroundpointerover)
+- [`headerForegroundPressed`](#headerforegroundpressed)
+- [`headerBorderBrush`](#headerborderbrush)
+- [`headerBorderPointerOverBrush`](#headerborderpointeroverbrush)
+- [`headerBorderPressedBrush`](#headerborderpressedbrush)
+- [`headerDisabledForeground`](#headerdisabledforeground)
+- [`headerDisabledBorderBrush`](#headerdisabledborderbrush)
+- [`headerBorderThickness`](#headerborderthickness)
+- [`contentBackground`](#contentbackground)
+- [`contentBorderBrush`](#contentborderbrush)
+- [`chevronBackground`](#chevronbackground)
+- [`chevronForeground`](#chevronforeground)
+- [`chevronPointerOverBackground`](#chevronpointeroverbackground)
+- [`chevronPointerOverForeground`](#chevronpointeroverforeground)
+- [`chevronPressedBackground`](#chevronpressedbackground)
+- [`chevronPressedForeground`](#chevronpressedforeground)
+- [`chevronBorderThickness`](#chevronborderthickness)
+- [`chevronBorderBrush`](#chevronborderbrush)
+- [`chevronBorderPointerOverBrush`](#chevronborderpointeroverbrush)
+- [`chevronBorderPressedBrush`](#chevronborderpressedbrush)
 
 ### Important notes
 
 - `collapsedHeight` and `expandedHeight` must be set for Expander to display correctly
-- Do not set the `height` or `onChange` props. These props used to update the height of Expander, and the Expander height will not update if these props are overridden. If you need to override either of these props, you must implement the height change functionality as well.
-- Non-native components within the header will not be interactable (i.e. if there is a `Button` in the header, and you press it, the Expander will expand the `Button` functionality will not be performed). We recommend using [react-native-xaml](https://github.com/asklar/react-native-xaml) controls in the header if you would like to interact with the control and there is not a native implementation.
+- Do not set the `height` or `onChange` props. These props are used to update the height of Expander, and the Expander height will not update if these props are overridden. If you need to override either of these props, you must implement the height change functionality as well.
+- Non-native components within the header will not be interactable (i.e. if there is a `Button` in the header, and you press it, the Expander will expand, and the `Button` functionality will not be performed). We recommend using [react-native-xaml](https://github.com/asklar/react-native-xaml) controls in the header if you would like to interact with the control and there is not a native implementation.
 
 ---
 
@@ -123,7 +123,7 @@ Specifies if the Expander is expanded. Default is `false`.
 
 ### `enabled`
 
-If set to false, the Expander will be disabled, i.e. the user will not be able to make a selection.
+If set to false, the Expander will be disabled, i.e. the user will not be able to expand it.
 
 | Type    | Required |
 | ------- | -------- |
