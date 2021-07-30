@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Thu, 29 Jul 2021 17:53:12 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Jul 2021 19:17:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.17
+
+Fri, 30 Jul 2021 19:17:43 GMT
+
+### Patches
+
+- Quickly fix icon bug (email not defined)
 
 ## 0.7.16
 

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Quickly fix icon bug",
-  "packageName": "@fluentui-react-native/icon",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
