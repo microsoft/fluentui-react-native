@@ -12,11 +12,11 @@ The theming system in FURN runs on top of [the Context concept from React](https
 
 ## When to use FURN theming
 
-The FURN themes follow the Fluent design system, so if you're using the Fluent design system on to build UI on native platforms, then using a FURN theme is an easy way to achieve that goal. The theming system provides an easy way to access the values from Fluent design system.
+The FURN themes follow the Fluent design system, so if you're using the Fluent design system to build UI on native platforms, then using a FURN theme is an easy way to achieve that goal. The theming system provides an easy way to access the values from Fluent design system.
 
-If you're using FURN components, a benefit of using a theme is that FURN components are built to take advantage of it. Although we do have a built-in default theme, our components work best a theme is provided.
+If you're using FURN components, a benefit of using a theme is that FURN components are built to take advantage of it. Although we do have a built-in default theme, our components work best when a theme is provided.
 
-If you're using FURN inside of an Office host, the theme on the Windows desktop platform will also have access to palettes from Office.
+If you're using FURN inside of an Office host, the theme on the win32 platform will also have access to palettes from Office.
 
 ## Applying a FURN theme
 
