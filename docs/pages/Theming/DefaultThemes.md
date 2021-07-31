@@ -53,7 +53,7 @@ Here's how the button component looks by default on every platform:
 </ThemeProvider>
 ```
 
-![Image of default button with default theme applied in FURN](./assets/default.png)
+![Image of default button with default theme applied in FURN](./assets/default.PNG)
 
 ### Android
 
@@ -63,7 +63,7 @@ Here's how the button component looks by default on every platform:
 </ThemeProvider>
 ```
 
-![Image of default button with default Android theme applied in FURN](./assets/android.png)
+![Image of default button with default Android theme applied in FURN](./assets/android.PNG)
 
 ### iOS
 
@@ -75,7 +75,7 @@ Here's how the button component looks by default on every platform:
 </ThemeProvider>
 ```
 
-![Image of default button with default Apple theme on Mac applied in FURN](./assets/macOS.png)
+![Image of default button with default Apple theme on Mac applied in FURN](./assets/macOS.PNG)
 
 ### Win32 (Office)
 
@@ -85,4 +85,4 @@ Here's how the button component looks by default on every platform:
 </ThemeProvider>
 ```
 
-![Image of default button with Office White Colors theme applied in FURN](./assets/win32.png)
+![Image of default button with Office White Colors theme applied in FURN](./assets/win32.PNG)
