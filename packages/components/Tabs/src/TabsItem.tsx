@@ -1,11 +1,12 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
 import { Icon } from '@fluentui-react-native/icon';
 import { settings, tabsItemSelectActionLabel } from './TabsItem.settings';
+import { settingsMacOS } from './TabsItem.settings.macos';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
@@ -18,6 +19,8 @@ import {
   createIconProps,
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
+
+const platformSettings = settings;
 
 export const TabsItem = compose<TabsItemType>({
   displayName: tabsItemName,
@@ -138,7 +141,8 @@ export const TabsItem = compose<TabsItemType>({
     );
   },
 
-  settings,
+  platformSettings,
+
   slots: {
     root: View,
     stack: { slotType: View, filter: filterViewProps },
