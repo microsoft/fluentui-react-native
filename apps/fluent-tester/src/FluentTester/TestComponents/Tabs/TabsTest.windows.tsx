@@ -30,14 +30,14 @@ const tabs: React.FunctionComponent = () => {
 
   return (
     <View style={stackStyle}>
-      <Tabs label="Tabs" selectedKey={selectedKey} onTabsClick={onTabsClick}>
-        <TabsItem onKeyDown={onKeyDown} headerText="Home" itemKey="A">
+      <Tabs label="Tabs" selectedKey={selectedKey} onTabsClick={onTabsClick} onKeyDown={onKeyDown}>
+        <TabsItem onKeyDown={onKeyDown} headerText="Home" itemKey="A" focusable={false}>
           <Text>Tabs #1</Text>
         </TabsItem>
-        <TabsItem onKeyDown={onKeyDown} headerText="Files" itemKey="B">
+        <TabsItem onKeyDown={onKeyDown} headerText="Files" itemKey="B" focusable={false}>
           <Text>Tabs #2</Text>
         </TabsItem>
-        <TabsItem onKeyDown={onKeyDown} headerText="Settings" itemKey="C">
+        <TabsItem onKeyDown={onKeyDown} headerText="Settings" itemKey="C" focusable={false}>
           <Text>Tabs #3</Text>
         </TabsItem>
       </Tabs>

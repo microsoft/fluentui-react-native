@@ -10,7 +10,7 @@ import { settings } from './Tabs.settings';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
-import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+import { useSelectedKey, useAsPressable } from '@fluentui-react-native/interactive-hooks';
 
 export const TabsContext = React.createContext<ITabsContext>({
   selectedKey: null,
@@ -67,6 +67,10 @@ export const Tabs = compose<TabsType>({
     // Stores views to be displayed
     const map = new Map<string, React.ReactNode[]>();
 
+    const pressable = useAsPressable({
+      ...rest,
+    });
+
     const state: TabsState = {
       context: {
         selectedKey: selectedKey ?? data.selectedKey,
@@ -89,7 +93,7 @@ export const Tabs = compose<TabsType>({
     };
 
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
-      root: { rest, ref: componentRef, ...ariaRoles },
+      root: { rest, ref: componentRef, ...ariaRoles, ...pressable.props },
       label: { children: label },
       container: Platform.OS !== 'windows' ? { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef } : null,
     });

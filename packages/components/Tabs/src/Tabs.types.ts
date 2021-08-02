@@ -5,6 +5,7 @@ import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IForegroundColorTokens, FontTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';
 import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import { View, ViewProps } from 'react-native';
+import type { IKeyboardEvent } from '@office-iss/react-native-win32';
 
 export const tabsName = 'Tabs';
 
@@ -95,6 +96,11 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
   componentRef?: React.RefObject<View>;
 
   testID?: string;
+
+  /*
+   ** Prop to test arrowing on TabsItems.
+   */
+  onKeyDown? : (ev: IKeyboardEvent) => void;
 }
 
 export interface TabsTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens {}
