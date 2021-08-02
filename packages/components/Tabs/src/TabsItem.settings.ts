@@ -9,7 +9,7 @@ export const settings: IComposeSettings<TabsItemType> = [
     tokens: {
       color: '#616161',
       fontWeight: 'normal',
-      fontFamily: 'Segoe UI',
+      fontFamily: 'SF Pro Text',
       // borderWidth: 0,
       // borderRadius: 0,
       fontSize: 14,
@@ -76,7 +76,7 @@ export const settings: IComposeSettings<TabsItemType> = [
           // indicatorColor: 'brandStroke1'
           color: '#242424',
           fontWeight: 'bold',
-          fontFamily: 'Segoe UI',
+          fontFamily: 'SF Pro Text',
           fontSize: 14,
           indicatorColor: '#0078D4',
         },
