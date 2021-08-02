@@ -7,7 +7,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import type { IKeyboardEvent } from '@office-iss/react-native-win32';
 
 const tabs: React.FunctionComponent = () => {
-  const [selectedKey, setSelectedKey] = React.useState('home');
+  const [selectedKey, setSelectedKey] = React.useState('A');
   const [currTabItemIndex, setCurrTabItemIndex] = React.useState(0);
   const tabItems = ['A', 'B', 'C'];
 
@@ -24,9 +24,13 @@ const tabs: React.FunctionComponent = () => {
     }
   };
 
+  const onTabsClick = (key: string) => {
+    setSelectedKey(key);
+  };
+
   return (
     <View style={stackStyle}>
-      <Tabs label="Tabs" selectedKey={selectedKey} >
+      <Tabs label="Tabs" selectedKey={selectedKey} onTabsClick={onTabsClick}>
         <TabsItem onKeyDown={onKeyDown} headerText="Home" itemKey="A">
           <Text>Tabs #1</Text>
         </TabsItem>
