@@ -4,18 +4,36 @@ import { Tabs, TabsItem, Text, Button } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import type { IKeyboardEvent } from '@office-iss/react-native-win32';
 
 const tabs: React.FunctionComponent = () => {
+  const [selectedKey, setSelectedKey] = React.useState('home');
+  const [currTabItemIndex, setCurrTabItemIndex] = React.useState(0);
+  const tabItems = ['A', 'B', 'C'];
+
+  const onKeyDown = (ev: IKeyboardEvent) => {
+    if (ev.nativeEvent.key === 'ArrowRight') {
+      const newCurrTabItemIndex = (currTabItemIndex + 1) % 3;
+      setCurrTabItemIndex(newCurrTabItemIndex);
+      setSelectedKey(tabItems[newCurrTabItemIndex]);
+    }
+    if (ev.nativeEvent.key === 'ArrowLeft') {
+      const newCurrTabItemIndex = (currTabItemIndex - 1 + 3) % 3;
+      setCurrTabItemIndex(newCurrTabItemIndex);
+      setSelectedKey(tabItems[newCurrTabItemIndex]);
+    }
+  };
+
   return (
     <View style={stackStyle}>
-      <Tabs label="Tabs">
-        <TabsItem headerText="Home" itemKey="A">
+      <Tabs label="Tabs" selectedKey={selectedKey} >
+        <TabsItem onKeyDown={onKeyDown} headerText="Home" itemKey="A">
           <Text>Tabs #1</Text>
         </TabsItem>
-        <TabsItem headerText="Files" itemKey="B">
+        <TabsItem onKeyDown={onKeyDown} headerText="Files" itemKey="B">
           <Text>Tabs #2</Text>
         </TabsItem>
-        <TabsItem headerText="Settings" itemKey="C">
+        <TabsItem onKeyDown={onKeyDown} headerText="Settings" itemKey="C">
           <Text>Tabs #3</Text>
         </TabsItem>
       </Tabs>
