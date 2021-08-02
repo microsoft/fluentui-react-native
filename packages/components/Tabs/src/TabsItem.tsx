@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
@@ -51,10 +51,11 @@ export const TabsItem = compose<TabsItemType>({
     // Ensure focus is placed on tabsItem after click
     const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
 
+    console.log(Platform.OS);
     const pressable = useAsPressable({
       ...rest,
       onPress: changeSelectionWithFocus,
-      onFocus: changeSelection,
+      onFocus: Platform.OS == 'macos' ? null : changeSelection,
     });
 
     const onKeyUp = useKeyCallback(onClick, ' ', 'Enter');

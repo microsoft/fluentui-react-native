@@ -8,11 +8,11 @@ export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
       color: '#616161',
-      fontWeight: 'normal',
-      fontFamily: 'SF Pro Text',
+      // fontWeight: 'normal',
+      // fontFamily: 'SF Pro Text',
       // borderWidth: 0,
       // borderRadius: 0,
-      fontSize: 14,
+      // fontSize: 14,
       // color: 'neutralForeground3Brand',
       // variant: 'bodyStandard',
       borderWidth: 2,
@@ -75,9 +75,9 @@ export const settings: IComposeSettings<TabsItemType> = [
           // variant: 'bodySemibold',
           // indicatorColor: 'brandStroke1'
           color: '#242424',
-          fontWeight: 'bold',
-          fontFamily: 'SF Pro Text',
-          fontSize: 14,
+          // fontWeight: 'bold',
+          // fontFamily: 'SF Pro Text',
+          // fontSize: 14,
           indicatorColor: '#0078D4',
         },
         _overrides: {
