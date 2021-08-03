@@ -16,7 +16,7 @@ const personaSections: TestSection[] = [
   },
 ];
 
-export const PersonaTest: React.FunctionComponent<{}> = () => {
+export const PersonaTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',
@@ -28,5 +28,5 @@ export const PersonaTest: React.FunctionComponent<{}> = () => {
   const description =
     "Personas are used for rendering an individual's avatar and presence. Persona renders a PersonaCoin along with descriptive text components.";
 
-  return <Test name="Persona Test" description={description} sections={personaSections} status={status}></Test>;
+  return <Test name="Persona Test" description={description} sections={personaSections} status={status} />;
 };

@@ -89,8 +89,8 @@ export const MenuButton = compose<MenuButtonType>({
   },
   slots: {
     root: React.Fragment,
-    button: { slotType: Button as React.ComponentType<object> },
-    contextualMenu: { slotType: ContextualMenu as React.ComponentType<object> },
+    button: { slotType: Button as React.ComponentType },
+    contextualMenu: { slotType: ContextualMenu as React.ComponentType },
     contextualMenuItems: React.Fragment,
   },
   styles: {

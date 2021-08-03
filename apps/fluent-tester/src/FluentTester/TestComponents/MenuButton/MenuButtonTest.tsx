@@ -8,7 +8,7 @@ import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from '../Button/test.svg';
 import { menuItems, testImage } from './testData';
 
-const menuButton: React.FunctionComponent<{}> = () => {
+const menuButton: React.FunctionComponent = () => {
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
 
   const [focusOnMount, setShouldFocusOnMount] = React.useState(true);
@@ -65,7 +65,7 @@ const menuButton: React.FunctionComponent<{}> = () => {
   );
 };
 
-const nestedMenuButton: React.FunctionComponent<{}> = () => {
+const nestedMenuButton: React.FunctionComponent = () => {
   const svgProps: SvgIconProps = {
     src: TestSvg,
     viewBox: '0 0 500 500',
@@ -213,7 +213,7 @@ const nestedMenuButton: React.FunctionComponent<{}> = () => {
   );
 };
 
-const customizedUIMenuButton: React.FunctionComponent<{}> = () => {
+const customizedUIMenuButton: React.FunctionComponent = () => {
   const StyledMenuButton = MenuButton.customize({
     button: {
       borderRadius: 4,
@@ -255,7 +255,7 @@ const menuButtonSections: TestSection[] = [
   },
 ];
 
-export const MenuButtonTest: React.FunctionComponent<{}> = () => {
+export const MenuButtonTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Experimental',
     uwpStatus: 'Backlog',

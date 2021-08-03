@@ -25,7 +25,7 @@ export interface NativeColorNames {
 
 export interface OfficeThemingModule extends NativeModule {
   getPalette(palette?: string): OfficePalette | CxxException;
-  typography: object;
+  typography: object; // eslint-disable-line @typescript-eslint/ban-types
   fluentTypography: Typography;
   ramps: NativeColorRamps;
   rampNames: NativeColorNames;

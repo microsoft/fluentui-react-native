@@ -83,7 +83,7 @@ export const Button = compose<IButtonType>({
   slots: {
     root: View,
     stack: { slotType: View, filter: filterViewProps },
-    icon: { slotType: Icon as React.ComponentType<object> },
+    icon: { slotType: Icon as React.ComponentType },
     content: Text,
   },
   styles: {
