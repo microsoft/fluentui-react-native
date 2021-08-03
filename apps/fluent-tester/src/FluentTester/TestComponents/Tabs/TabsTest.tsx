@@ -44,8 +44,6 @@ const disabledTabs: React.FunctionComponent = () => {
 };
 
 const tabsCountIcon: React.FunctionComponent = () => {
-  const testImage = require('./icon_24x24.png');
-
   const svgProps: SvgIconProps = {
     src: TestSvg,
     viewBox: '0 0 500 500',
@@ -60,7 +58,7 @@ const tabsCountIcon: React.FunctionComponent = () => {
         <TabsItem itemKey="B" icon={{ svgSource: svgProps, width: 20, height: 20 }} itemCount={0}>
           <Text>Tabs #2</Text>
         </TabsItem>
-        <TabsItem itemKey="C" icon={testImage}>
+        <TabsItem itemKey="C" icon={{ svgSource: svgProps, width: 20, height: 20 }}>
           <Text>Tabs #3</Text>
         </TabsItem>
       </Tabs>
