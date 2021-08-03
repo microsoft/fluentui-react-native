@@ -91,7 +91,7 @@ export const Tabs = compose<TabsType>({
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
       root: { rest, ref: componentRef, ...ariaRoles },
       label: { children: label },
-      container: Platform.OS !== 'windows' ? { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef } : null,
+      container: Platform.OS !== 'windows' ? { isCircularNavigation: true, defaultTabbableElement: selectedTabsItemRef } : null,
     });
 
     return { slotProps, state };
