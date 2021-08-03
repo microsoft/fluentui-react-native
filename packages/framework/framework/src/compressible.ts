@@ -6,16 +6,17 @@ import { TokenSettings } from './useStyling';
 
 export function compressible<TProps, TTokens>(
   fn: StagedRender<TProps>,
-  useTokens?: UseTokens<TTokens>,
+  useTokens: UseTokens<TTokens>,
 ): CustomizableComponent<TProps, TTokens, Theme> {
-  const injectedWrapper = (props: TProps) => fn(props, useTokens);
-  const component: CustomizableComponent<TProps, TTokens, Theme> = stagedComponent(injectedWrapper);
+  type ThisComponent = CustomizableComponent<TProps, TTokens, Theme>;
 
-  if (useTokens) {
-    component.customize = (...tokens: TokenSettings<TTokens>[]) => {
-      const useTokensNew = useTokens.customize(...tokens);
-      return compressible(fn, useTokensNew);
-    };
-  }
+  const injectedWrapper = (props: TProps) => fn(props, useTokens);
+  const component = stagedComponent(injectedWrapper) as ThisComponent;
+
+  component.customize = (...tokens: TokenSettings<TTokens>[]) => {
+    const useTokensNew = useTokens.customize(...tokens);
+    return compressible(fn, useTokensNew);
+  };
+
   return component;
 }

@@ -6,5 +6,6 @@ export * from '@fluentui-react-native/use-slots';
 export * from '@fluentui-react-native/immutable-merge';
 export * from '@fluentui-react-native/theme-types';
 export * from './compose';
+export * from './compressible';
 export * from './useStyling';
 export * from './useTokens';
