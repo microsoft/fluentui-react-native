@@ -2,6 +2,74 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Fri, 30 Jul 2021 19:17:43 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.2.17",
+      "version": "0.2.17",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.17.19",
+            "author": "email not defined",
+            "commit": "4433293c2e7005b042ec1fa940ce8ceec94b57bf",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Jul 2021 06:26:34 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.2.16",
+      "version": "0.2.16",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.17.18",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "925cf4eb5fe6bfadf20208b5b3d3a4454fc5c9fa",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 29 Jul 2021 17:53:12 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.2.16",
+      "version": "0.2.16",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.17.18",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f1fb0f1e8fc3973daa7e640ec33ad4559cd00053",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 27 Jul 2021 22:17:20 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.2.15",
+      "version": "0.2.15",
+      "comments": {
+        "none": [
+          {
+            "comment": "Use default type parameter to avoid banned types",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "2b9eecd05e6beaed413d185ae22bcd74e9b2cc49",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "add compressible utility and a snapshot test / demo to framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "1cd8611e1e88848ab66f7c0e9113c946f968260c",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 27 Jul 2021 18:55:58 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.2.14",
       "version": "0.2.14",

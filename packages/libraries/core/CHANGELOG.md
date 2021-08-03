@@ -1,8 +1,32 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Mon, 26 Jul 2021 20:41:04 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Jul 2021 19:17:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.19
+
+Fri, 30 Jul 2021 19:17:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.2.17 (email not defined)
+
+## 0.24.18
+
+Thu, 29 Jul 2021 17:53:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/separator to v0.10.15 (jasonmo@microsoft.com)
+
+## 0.24.17
+
+Tue, 27 Jul 2021 22:17:20 GMT
+
+### Patches
+
+- add compressible utility and a snapshot test / demo to framework (jasonmo@microsoft.com)
 
 ## 0.24.16
 

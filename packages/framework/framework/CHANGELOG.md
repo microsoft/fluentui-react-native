@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Mon, 26 Jul 2021 20:41:04 GMT and should not be manually modified.
+This log was last generated on Thu, 29 Jul 2021 17:53:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.17
+
+Thu, 29 Jul 2021 17:53:12 GMT
+
+### Patches
+
+- fix type issue in compressible and export it (jasonmo@microsoft.com)
+
+## 0.5.16
+
+Tue, 27 Jul 2021 22:17:20 GMT
+
+### Patches
+
+- add compressible utility and a snapshot test / demo to framework (jasonmo@microsoft.com)
 
 ## 0.5.15
 

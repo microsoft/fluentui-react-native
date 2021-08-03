@@ -121,12 +121,10 @@ export const SubmenuItem = compose<SubmenuItemType>({
   slots: {
     root: View,
     leftstack: { slotType: View },
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    icon: { slotType: Icon as React.ComponentType<object> },
+    icon: { slotType: Icon as React.ComponentType },
     content: Text,
     rightstack: { slotType: View },
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    chevron: { slotType: Icon as React.ComponentType<object> }
+    chevron: { slotType: Icon as React.ComponentType }
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],

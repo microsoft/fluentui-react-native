@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Mon, 26 Jul 2021 20:41:04 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Jul 2021 19:17:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.22
+
+Fri, 30 Jul 2021 19:17:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.20 (email not defined)
+
+## 0.12.21
+
+Thu, 29 Jul 2021 17:53:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.19 (jasonmo@microsoft.com)
+
+## 0.12.20
+
+Tue, 27 Jul 2021 22:17:20 GMT
+
+### Patches
+
+- add compressible utility and a snapshot test / demo to framework (jasonmo@microsoft.com)
 
 ## 0.12.19
 

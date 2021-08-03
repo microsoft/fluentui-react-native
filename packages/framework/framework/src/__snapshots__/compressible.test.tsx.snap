@@ -1,0 +1,194 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`compressible tests Two labels, one plugging in SuperHeader instead 1`] = `
+<View>
+  <View>
+    <component
+      captionText="Normal caption"
+      headerSlot={[Function]}
+      headerText="Super Header"
+    >
+      <View>
+        <View>
+          <Text
+            style={
+              Object {
+                "color": "purple",
+                "fontSize": 24,
+                "fontWeight": "700",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "purple",
+                  "fontSize": 24,
+                  "fontWeight": "700",
+                }
+              }
+            >
+              Super Header
+            </Text>
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "gray",
+                "fontSize": 12,
+                "fontWeight": "300",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "gray",
+                  "fontSize": 12,
+                  "fontWeight": "300",
+                }
+              }
+            >
+              Normal caption
+            </Text>
+          </Text>
+        </View>
+      </View>
+    </component>
+    <component
+      captionText="Another normal caption"
+      headerText="Normal Header"
+    >
+      <View>
+        <View>
+          <Text
+            style={
+              Object {
+                "color": "blue",
+                "fontSize": 16,
+                "fontWeight": "700",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "blue",
+                  "fontSize": 16,
+                  "fontWeight": "700",
+                }
+              }
+            >
+              Normal Header
+            </Text>
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "gray",
+                "fontSize": 12,
+                "fontWeight": "300",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "gray",
+                  "fontSize": 12,
+                  "fontWeight": "300",
+                }
+              }
+            >
+              Another normal caption
+            </Text>
+          </Text>
+        </View>
+      </View>
+    </component>
+  </View>
+</View>
+`;
+
+exports[`compressible tests Two labels, one with caption and one without 1`] = `
+<View>
+  <View>
+    <component
+      headerText="Header1"
+    >
+      <Text
+        style={
+          Object {
+            "color": "blue",
+            "fontSize": 16,
+            "fontWeight": "700",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "blue",
+              "fontSize": 16,
+              "fontWeight": "700",
+            }
+          }
+        >
+          Header1
+        </Text>
+      </Text>
+    </component>
+    <component
+      captionText="Caption2"
+      headerText="Header2"
+    >
+      <View>
+        <View>
+          <Text
+            style={
+              Object {
+                "color": "blue",
+                "fontSize": 16,
+                "fontWeight": "700",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "blue",
+                  "fontSize": 16,
+                  "fontWeight": "700",
+                }
+              }
+            >
+              Header2
+            </Text>
+          </Text>
+          <Text
+            style={
+              Object {
+                "color": "gray",
+                "fontSize": 12,
+                "fontWeight": "300",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "color": "gray",
+                  "fontSize": 12,
+                  "fontWeight": "300",
+                }
+              }
+            >
+              Caption2
+            </Text>
+          </Text>
+        </View>
+      </View>
+    </component>
+  </View>
+</View>
+`;

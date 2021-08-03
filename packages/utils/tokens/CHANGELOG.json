@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Fri, 30 Jul 2021 06:26:34 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.9.12",
+      "version": "0.9.12",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/adapters to v0.6.7",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "925cf4eb5fe6bfadf20208b5b3d3a4454fc5c9fa",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 27 Jul 2021 22:17:20 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.9.12",
+      "version": "0.9.12",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add compressible utility and a snapshot test / demo to framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "1cd8611e1e88848ab66f7c0e9113c946f968260c",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 27 Jul 2021 18:55:58 GMT",
       "tag": "@fluentui-react-native/tokens_v0.9.11",
       "version": "0.9.11",
