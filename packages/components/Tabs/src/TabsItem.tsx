@@ -6,7 +6,6 @@ import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
 import { Icon } from '@fluentui-react-native/icon';
 import { settings, tabsItemSelectActionLabel } from './TabsItem.settings';
-// import { settingsMacOS } from './TabsItem.settings.macos';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
@@ -19,8 +18,6 @@ import {
   createIconProps,
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
-
-// const platformSettings = settings;
 
 export const TabsItem = compose<TabsItemType>({
   displayName: tabsItemName,
@@ -48,8 +45,6 @@ export const TabsItem = compose<TabsItemType>({
         info.onTabsClick && info.onTabsClick(itemKey);
         info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
         info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
-        componentRef?.current?.focus();
-        console.log(itemKey, componentRef)
       }
     };
 
@@ -85,7 +80,7 @@ export const TabsItem = compose<TabsItemType>({
       }
     }, []);
 
-    const buttonRef = useViewCommandFocus(componentRef);
+    const buttonRef = componentRef;
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
     const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
@@ -144,7 +139,6 @@ export const TabsItem = compose<TabsItemType>({
   },
 
   settings,
-
   slots: {
     root: View,
     stack: { slotType: View, filter: filterViewProps },

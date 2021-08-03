@@ -7,11 +7,17 @@ export const tabsItemSelectActionLabel = 'Select a TabsItem';
 export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
-      color: 'neutralForeground3Brand',
-      variant: 'bodyStandard',
+      color: '#616161',
+      // fontWeight: 'normal',
+      // fontFamily: 'SF Pro Text',
+      // borderWidth: 0,
+      // borderRadius: 0,
+      // fontSize: 14,
+      // color: 'neutralForeground3Brand',
+      // variant: 'bodyStandard',
       borderWidth: 2,
+      // borderColor: 'transparent',
       borderRadius: 4,
-      borderColor: 'transparent',
       indicatorColor: 'transparent',
     },
     root: {
@@ -51,25 +57,34 @@ export const settings: IComposeSettings<TabsItemType> = [
     _overrides: {
       disabled: {
         tokens: {
-          color: 'neutralForegroundDisabled',
+          // color: 'neutralForegroundDisabled',
+          color: '#BDBDBD',
         },
       },
       hovered: {
         tokens: {
-          color: 'neutralForeground2Hover',
-          indicatorColor: 'neutralStroke1'
+          // color: 'neutralForeground2Hover',
+          // indicatorColor: 'neutralStroke1'
+          color: '#242424',
+          indicatorColor: '#D1D1D1',
         },
       },
       selected: {
         tokens: {
-          color: 'neutralForeground1',
-          variant: 'bodySemibold',
-          indicatorColor: 'brandStroke1'
+          // color: 'neutralForeground1',
+          // variant: 'bodySemibold',
+          // indicatorColor: 'brandStroke1'
+          color: '#242424',
+          // fontWeight: 'bold',
+          // fontFamily: 'SF Pro Text',
+          // fontSize: 14,
+          indicatorColor: '#0078D4',
         },
         _overrides: {
           pressed: {
             tokens: {
-              indicatorColor: 'neutralStroke1',
+              // indicatorColor: 'neutralStroke1',
+              indicatorColor: '#D1D1D1',
             },
           },
         },
@@ -77,16 +92,21 @@ export const settings: IComposeSettings<TabsItemType> = [
 
       pressed: {
         tokens: {
-          color: 'neutralForeground2Pressed',
-          indicatorColor: 'brandStroke1',
+          // color: 'neutralForeground2Pressed',
+          // indicatorColor: 'brandStroke1',
+          color: '#242424',
+          indicatorColor: '#0078D4',
         },
       },
 
       focused: {
         tokens: {
-          color: 'neutralForeground1',
-          borderColor: 'neutralForeground1',
-          indicatorColor: 'brandStroke1',
+          // color: 'neutralForeground1',
+          // borderColor: 'neutralForeground1',
+          // indicatorColor: 'brandStroke1',
+
+          color: 'red',
+          indicatorColor: '#D1D1D1',
         },
       },
     },
