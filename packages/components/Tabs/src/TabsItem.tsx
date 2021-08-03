@@ -51,7 +51,6 @@ export const TabsItem = compose<TabsItemType>({
     // Ensure focus is placed on tabsItem after click
     const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
 
-    console.log(Platform.OS);
     const pressable = useAsPressable({
       ...rest,
       onPress: changeSelectionWithFocus,

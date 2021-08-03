@@ -53,7 +53,7 @@ export const settings: IComposeSettings<TabsItemType> = [
         justifyContent: 'center',
       },
     },
-    _precedence: ['hovered', 'selected', 'focused', 'disabled', 'pressed'],
+    _precedence: ['hovered', 'focused', 'selected', 'pressed', 'disabled'],
     _overrides: {
       disabled: {
         tokens: {
@@ -104,9 +104,9 @@ export const settings: IComposeSettings<TabsItemType> = [
           // color: 'neutralForeground1',
           // borderColor: 'neutralForeground1',
           // indicatorColor: 'brandStroke1',
-          color: '#242424',
-          borderColor: '#242424',
-          indicatorColor: '#0078D4',
+
+          color: 'red',
+          indicatorColor: '#D1D1D1',
         },
       },
     },
