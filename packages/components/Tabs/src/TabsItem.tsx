@@ -45,6 +45,8 @@ export const TabsItem = compose<TabsItemType>({
         info.onTabsClick && info.onTabsClick(itemKey);
         info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
         info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
+        componentRef?.current?.focus();
+        console.log(itemKey, componentRef)
       }
     };
 
