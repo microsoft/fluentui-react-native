@@ -11,6 +11,7 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
 import { useSelectedKey, useAsPressable } from '@fluentui-react-native/interactive-hooks';
+import type { IKeyboardEvent } from '@office-iss/react-native-win32';
 
 export const TabsContext = React.createContext<ITabsContext>({
   selectedKey: null,
@@ -27,6 +28,8 @@ export const TabsContext = React.createContext<ITabsContext>({
   tabsItemKeys: [],
 
   views: null,
+
+  focusZoneRef: null,
 });
 
 export const Tabs = compose<TabsType>({
@@ -78,6 +81,7 @@ export const Tabs = compose<TabsType>({
         getTabId: onChangeTabId,
         updateSelectedTabsItemRef: onSelectTabsItemRef,
         views: map,
+        focusZoneRef: componentRef,
       },
       info: {
         headersOnly: headersOnly ?? false,
@@ -87,6 +91,24 @@ export const Tabs = compose<TabsType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
+    const onKeyDown = (ev: IKeyboardEvent) => {
+      const length = state.context.tabsItemKeys.length;
+      const currTabItemIndex = state.context.tabsItemKeys.findIndex(x => x == state.context.selectedKey)
+      if (ev.nativeEvent.key === 'ArrowRight') {
+        console.log('ArrowR')
+        const newCurrTabItemIndex = (currTabItemIndex + 1) % length;
+        state.context.selectedKey = state.context.tabsItemKeys[newCurrTabItemIndex]
+        data.onKeySelect(state.context.selectedKey)
+      }
+      if (ev.nativeEvent.key === 'ArrowLeft') {
+        console.log('ArrowL')
+        const newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
+        state.context.selectedKey = state.context.tabsItemKeys[newCurrTabItemIndex]
+        data.onKeySelect(state.context.selectedKey)
+      }
+    };
+
+
     const ariaRoles = {
       // accessibilityRole: 'tablist',
       accessibilityLabel: ariaLabel || label,
@@ -95,7 +117,7 @@ export const Tabs = compose<TabsType>({
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
       root: { rest, ref: React.useRef(null), ...ariaRoles, ...pressable.props },
       label: { children: label },
-      container: Platform.OS !== 'windows' ? { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef } : {focusable: true, ref: componentRef},
+      container: Platform.OS !== 'windows' ? { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef } : {focusable: true, ref: componentRef, onKeyDown: onKeyDown},
     });
 
     return { slotProps, state };

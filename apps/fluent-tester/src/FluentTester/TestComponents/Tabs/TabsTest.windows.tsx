@@ -4,49 +4,18 @@ import { Tabs, TabsItem, Text, Button } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import type { IKeyboardEvent } from '@office-iss/react-native-win32';
 
 const tabs: React.FunctionComponent = () => {
-  const [selectedKey, setSelectedKey] = React.useState('A');
-  const [currTabItemIndex, setCurrTabItemIndex] = React.useState(0);
-  const tabItems = ['A', 'B', 'C'];
-  const focusZoneRef = React.useRef(null);
-
-  const onKeyDown = (ev: IKeyboardEvent) => {
-    if (ev.nativeEvent.key === 'ArrowRight') {
-      const newCurrTabItemIndex = (currTabItemIndex + 1) % 3;
-      setCurrTabItemIndex(newCurrTabItemIndex);
-      setSelectedKey(tabItems[newCurrTabItemIndex]);
-    }
-    if (ev.nativeEvent.key === 'ArrowLeft') {
-      const newCurrTabItemIndex = (currTabItemIndex - 1 + 3) % 3;
-      setCurrTabItemIndex(newCurrTabItemIndex);
-      setSelectedKey(tabItems[newCurrTabItemIndex]);
-    }
-  };
-
-  const onTabsClick = (key: string) => {
-    focusZoneRef.current.focus();
-    setSelectedKey(key);
-    if (key == 'A') {
-      setCurrTabItemIndex(0);
-    } else if (key == 'B') {
-      setCurrTabItemIndex(1);
-    } else {
-      setCurrTabItemIndex(2);
-    }
-  };
-
   return (
     <View style={stackStyle}>
-      <Tabs label="Tabs" selectedKey={selectedKey} onTabsClick={onTabsClick} onKeyDown={onKeyDown} componentRef={focusZoneRef} >
-        <TabsItem onKeyDown={onKeyDown} headerText="Home" itemKey="A">
+      <Tabs label="Tabs">
+        <TabsItem headerText="Home" itemKey="A">
           <Text>Tabs #1</Text>
         </TabsItem>
-        <TabsItem onKeyDown={onKeyDown} headerText="Files" itemKey="B">
+        <TabsItem headerText="Files" itemKey="B">
           <Text>Tabs #2</Text>
         </TabsItem>
-        <TabsItem onKeyDown={onKeyDown} headerText="Settings" itemKey="C">
+        <TabsItem headerText="Settings" itemKey="C">
           <Text>Tabs #3</Text>
         </TabsItem>
       </Tabs>
@@ -55,6 +24,7 @@ const tabs: React.FunctionComponent = () => {
 };
 
 const disabledTabs: React.FunctionComponent = () => {
+  // Currently disabled is not working
   return (
     <View style={stackStyle}>
       <Tabs label="Tabs">

@@ -36,6 +36,7 @@ export const TabsItem = compose<TabsItemType>({
     /* We don't want to call the user's onTabsClick multiple times on the same selection. */
     const changeSelection = () => {
       if (itemKey != info.selectedKey) {
+        info.focusZoneRef.current.focus();
         info.onTabsClick && info.onTabsClick(itemKey);
         info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
         info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);

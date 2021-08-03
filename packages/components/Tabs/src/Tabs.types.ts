@@ -39,6 +39,11 @@ export interface ITabsContext {
    ** A Map to for a TabItems corresponding view
    */
   views?: Map<string, React.ReactNode[]> | null;
+
+  /*
+   ** Reference to the Focus Container
+   */
+  focusZoneRef: React.RefObject<any> | null;
 }
 
 export interface TabsInfo {
