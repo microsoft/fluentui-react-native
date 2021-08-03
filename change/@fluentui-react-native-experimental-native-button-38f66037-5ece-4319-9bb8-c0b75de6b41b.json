@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "Update FluentUI Apple dependencies (#602)",
+  "comment": "Use latest official FluentUI pod",
   "packageName": "@fluentui-react-native/experimental-native-button",
   "email": "sanajmi@microsoft.com",
   "dependentChangeType": "patch"
