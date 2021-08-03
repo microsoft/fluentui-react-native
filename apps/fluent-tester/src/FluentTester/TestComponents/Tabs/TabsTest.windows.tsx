@@ -10,6 +10,10 @@ const tabs: React.FunctionComponent = () => {
   const [selectedKey, setSelectedKey] = React.useState('A');
   const [currTabItemIndex, setCurrTabItemIndex] = React.useState(0);
   const tabItems = ['A', 'B', 'C'];
+  const parentRef = React.useRef(null);
+  const aRef = React.useRef(null);
+  const bRef = React.useRef(null);
+  const cRef = React.useRef(null);
 
   const onKeyDown = (ev: IKeyboardEvent) => {
     if (ev.nativeEvent.key === 'ArrowRight') {
@@ -22,22 +26,42 @@ const tabs: React.FunctionComponent = () => {
       setCurrTabItemIndex(newCurrTabItemIndex);
       setSelectedKey(tabItems[newCurrTabItemIndex]);
     }
+    // if (selectedKey == 'A') {
+    //   aRef.current.focus();
+    // } else if (selectedKey == 'B') {
+    //   bRef.current.focus();
+    // } else {
+    //   cRef.current.focus();
+    // }
+    // parentRef.current.focus();
   };
 
   const onTabsClick = (key: string) => {
     setSelectedKey(key);
+    if (key == 'A') {
+      aRef.current.focus();
+    } else if (key == 'B') {
+      bRef.current.focus();
+    } else {
+      cRef.current.focus();
+    }
+    // parentRef.current.focus();
   };
 
   return (
     <View style={stackStyle}>
-      <Tabs label="Tabs" selectedKey={selectedKey} onTabsClick={onTabsClick} onKeyDown={onKeyDown}>
-        <TabsItem onKeyDown={onKeyDown} headerText="Home" itemKey="A" focusable={false}>
+    <View>
+      <View style={{backgroundColor: 'green', minHeight:20, minWidth:20}} focusable={true}/>
+      <View style={{backgroundColor: 'red', minHeight:20, minWidth:20}} focusable={false}/>
+    </View>
+      <Tabs label="Tabs" selectedKey={selectedKey} onTabsClick={onTabsClick} onKeyDown={onKeyDown} componentRef={parentRef}>
+        <TabsItem onKeyDown={onKeyDown} headerText="Home" itemKey="A" componentRef={aRef}>
           <Text>Tabs #1</Text>
         </TabsItem>
-        <TabsItem onKeyDown={onKeyDown} headerText="Files" itemKey="B" focusable={false}>
+        <TabsItem onKeyDown={onKeyDown} headerText="Files" itemKey="B" componentRef={bRef} >
           <Text>Tabs #2</Text>
         </TabsItem>
-        <TabsItem onKeyDown={onKeyDown} headerText="Settings" itemKey="C" focusable={false}>
+        <TabsItem onKeyDown={onKeyDown} headerText="Settings" itemKey="C" componentRef={cRef}>
           <Text>Tabs #3</Text>
         </TabsItem>
       </Tabs>

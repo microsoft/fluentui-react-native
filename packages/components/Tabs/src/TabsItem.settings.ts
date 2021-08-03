@@ -16,7 +16,7 @@ export const settings: IComposeSettings<TabsItemType> = [
     },
     root: {
       accessible: true,
-      focusable: true,
+      focusable: false,
       accessibilityRole: 'tab',
       style: {
         display: 'flex',
@@ -66,21 +66,21 @@ export const settings: IComposeSettings<TabsItemType> = [
           variant: 'bodySemibold',
           indicatorColor: 'brandStroke1'
         },
-        _overrides: {
-          pressed: {
-            tokens: {
-              indicatorColor: 'neutralStroke1',
-            },
-          },
-        },
+        // _overrides: {
+        //   pressed: {
+        //     tokens: {
+        //       indicatorColor: 'neutralStroke1',
+        //     },
+        //   },
+        // },
       },
 
-      pressed: {
-        tokens: {
-          color: 'neutralForeground2Pressed',
-          indicatorColor: 'brandStroke1',
-        },
-      },
+      // pressed: {
+      //   tokens: {
+      //     color: 'neutralForeground2Pressed',
+      //     indicatorColor: 'brandStroke1',
+      //   },
+      // },
 
       focused: {
         tokens: {
