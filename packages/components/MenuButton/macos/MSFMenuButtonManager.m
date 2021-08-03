@@ -35,7 +35,7 @@
 
     if ([menuItemJson containsKey:@"hasSubmenu"])
     {
-      bool hasSubmenu = [RCTConvert BOOL:menuItemJson[@"hasSubmenu"]];
+      BOOL hasSubmenu = [RCTConvert BOOL:menuItemJson[@"hasSubmenu"]];
       if (hasSubmenu) {
         NSMenu *submenu = [RCTConvert NSMenu:menuItemJson[@"submenuItems"]];
         [menu setSubmenu:submenu forItem:menuItem];
@@ -54,15 +54,17 @@
 
 @interface RCT_EXTERN_MODULE(MSFMenuButtonManager, RCTViewManager)
 
-RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onItemClick, RCTBubblingEventBlock)
+
+RCT_EXPORT_VIEW_PROPERTY(onSubmenuItemClick, RCTBubblingEventBlock)
 
 RCT_REMAP_VIEW_PROPERTY(content, title, NSString)
 
 RCT_EXPORT_VIEW_PROPERTY(image, UIImage)
 
-RCT_CUSTOM_VIEW_PROPERTY(disabled, bool, NSPopUpButton)
+RCT_CUSTOM_VIEW_PROPERTY(disabled, BOOL, NSPopUpButton)
 {
-  bool disabled = ![RCTConvert BOOL:json];
+  BOOL disabled = ![RCTConvert BOOL:json];
   [view setEnabled:disabled];
 }
 

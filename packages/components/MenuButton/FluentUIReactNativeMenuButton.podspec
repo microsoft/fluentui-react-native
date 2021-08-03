@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.homepage     = package['homepage']
 
   s.source           = { :git => "https://github.com/microsoft/fluentui-react-native.git", :tag => "#{s.version}" }
-  s.swift_version    = "5"
+  s.swift_version    = "5.0"
 
   s.osx.deployment_target = "10.14"
   s.osx.source_files      = "macos/*.{swift,h,m,mm}"

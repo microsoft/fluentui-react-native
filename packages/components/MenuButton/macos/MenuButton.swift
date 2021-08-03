@@ -35,7 +35,9 @@ open class MenuButton: NSPopUpButton {
     self.init(frame: .zero, pullsDown: true)
   }
 
-  @objc public var onPress: RCTBubblingEventBlock?
+  @objc public var OnItemClick: RCTBubblingEventBlock?
+
+  @objc public var OnSubmenuItemClick: RCTBubblingEventBlock?
 
   open override var menu: NSMenu? {
     didSet {
@@ -68,15 +70,23 @@ open class MenuButton: NSPopUpButton {
       return
     }
 
+    for (index, menuItem) in menu.items.enumerated() {
+      menuItem.target = self
+      menuItem.action = #selector(sendOnItemClickEvent)
+      if menuItem.hasSubmenu, let submenu = menuItem.submenu {
+        //Add actions to one level of submenu items to support the `onSubmenuItemClick` callback
+        for subMenuItem in submenu.items {
+          subMenuItem.tag = index //store the index of the "super" menuItem for lookup in the action
+          subMenuItem.target = self
+          subMenuItem.action = #selector(sendOnSubItemClickEvent)
+        }
+      }
+    }
+
     // Insert an initial empty item into index 0, since index 0 is never displayed
+    // We must do this after we assign the tags to the submenuItems to preserve index order
     let initialEmptyItem = NSMenuItem()
     menu.insertItem(initialEmptyItem, at: 0)
-
-    for (index, menuItem) in menu.items.enumerated() {
-      menuItem.tag = index
-      menuItem.target = self
-      menuItem.action = #selector(sendCallback)
-    }
   }
 
   private func updateDropDownCell() {
@@ -93,13 +103,23 @@ open class MenuButton: NSPopUpButton {
     dropDownCell.menuItem = dropdownCellItem
   }
 
-  @objc(sendCallback:)
-  private func sendCallback(sender: NSMenuItem) {
-   if onPress != nil {
+  @objc(sendOnItemClickEvent:)
+  private func sendOnItemClickEvent(sender: NSMenuItem) {
+   if OnItemClick != nil {
      guard let identifier = sender.identifier else {
        preconditionFailure("itemKey not set on Menu Item")
      }
-     onPress!(["key": identifier])
+    OnItemClick!(["key": identifier])
+   }
+  }
+
+  @objc(sendOnSubItemClickEvent:)
+  private func sendOnSubItemClickEvent(sender: NSMenuItem) {
+   if OnSubmenuItemClick != nil {
+     guard let identifier = sender.identifier else {
+       preconditionFailure("itemKey not set on Menu Item")
+     }
+    OnSubmenuItemClick!(["index": sender.tag,"key": identifier])
    }
   }
 

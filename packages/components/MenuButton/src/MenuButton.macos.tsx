@@ -25,10 +25,21 @@ export const MenuButton = compose<MenuButtonType>({
       context: {},
     };
 
-    // reroute the native component's onPress event to MenuButtons's onItemClick
-    const onPress = (event: any) => {
+    // reroute the native component's OnItemClick event to MenuButtons's onItemClick
+    const OnItemClickRerouted = (event: any) => {
       if (onItemClick != null) {
         onItemClick(event.nativeEvent.key);
+      }
+    };
+
+    // reroute the native component's onSubmenuItemClick event to each MenuButtonItem's onItemClick
+    const OnSubmenuItemClickRerouted = (event: any) => {
+      // Grab the index of the menu item that hosts the submenu to look up the correct callback
+      const menuItemIndex = event.nativeEvent.index;
+
+      const onSubmenuItemClick = menuItems[menuItemIndex].submenuProps?.onItemClick;
+      if (onSubmenuItemClick != null) {
+        onSubmenuItemClick(event.nativeEvent.key);
       }
     };
 
@@ -40,7 +51,8 @@ export const MenuButton = compose<MenuButtonType>({
         disabled: disabled,
         image: icon,
         menuItems: menuItems,
-        onPress: onPress,
+        onItemClick: OnItemClickRerouted,
+        onSubmenuItemClick: OnSubmenuItemClickRerouted,
         style: {
           width: 160,
           height: 32,
