@@ -88,14 +88,14 @@ export const Tabs = compose<TabsType>({
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
     const ariaRoles = {
-      accessibilityRole: 'tablist',
+      // accessibilityRole: 'tablist',
       accessibilityLabel: ariaLabel || label,
     };
 
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
-      root: { rest, ref: componentRef, ...ariaRoles, ...pressable.props },
+      root: { rest, ref: React.useRef(null), ...ariaRoles, ...pressable.props },
       label: { children: label },
-      container: Platform.OS !== 'windows' ? { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef } : null,
+      container: Platform.OS !== 'windows' ? { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef } : {focusable: true, ref: componentRef},
     });
 
     return { slotProps, state };
@@ -144,7 +144,7 @@ export const Tabs = compose<TabsType>({
     root: View,
     label: Text,
     tabPanel: { slotType: View, filter: filterViewProps },
-    container: Platform.OS !== 'windows' ? FocusZone : { slotType: View, filter: filterViewProps },
+    container: Platform.OS !== 'windows' ? FocusZone : View,
   },
   styles: {
     root: [],

@@ -97,7 +97,7 @@ export const TabsItem = compose<TabsItemType>({
         ...pressable.props,
         ref: componentRef,
         onAccessibilityTap: onAccessibilityTap,
-        accessibilityRole: 'tab',
+        // accessibilityRole: 'tab',
         accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: state.info.disabled, selected: state.info.selected },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
