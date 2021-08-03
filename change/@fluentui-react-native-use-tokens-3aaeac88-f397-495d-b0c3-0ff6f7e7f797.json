@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "add patchTokens utility to use-tokens package",
-  "packageName": "@fluentui-react-native/use-tokens",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}
