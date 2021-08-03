@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/pressable",
   "entries": [
     {
+      "date": "Tue, 03 Aug 2021 22:33:17 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.6.22",
+      "version": "0.6.22",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.21",
+            "author": "jasonmo@microsoft.com",
+            "commit": "317097b2f51d04d33bfc2b14b2850a2774e0acbc",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Jul 2021 19:17:43 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.6.21",
+      "version": "0.6.21",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.20",
+            "author": "email not defined",
+            "commit": "4433293c2e7005b042ec1fa940ce8ceec94b57bf",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Jul 2021 06:26:34 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.6.20",
+      "version": "0.6.20",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/adapters to v0.6.7",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "925cf4eb5fe6bfadf20208b5b3d3a4454fc5c9fa",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 29 Jul 2021 17:53:12 GMT",
       "tag": "@fluentui-react-native/pressable_v0.6.20",
       "version": "0.6.20",

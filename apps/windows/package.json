@@ -14,12 +14,12 @@
     "lint": "fluentui-scripts lint",
     "report": "allure generate allure-results --clean",
     "start": "react-native start",
-    "test": "jest",
+    "test": "fluentui-scripts jest",
     "prewindows": "install-windows-test-app --use-nuget",
     "windows": "react-native run-windows --sln windows/FluentTester.sln"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.33.4",
+    "@fluentui-react-native/tester": "^0.33.6",
     "react": "16.13.1",
     "react-native": "^0.63.2",
     "react-native-svg": "^12.1.1",
@@ -41,8 +41,6 @@
     "@wdio/sync": "5.20.1",
     "allure-commandline": "2.13.0",
     "appium": "1.17.1",
-    "babel-jest": "^24.9.0",
-    "jest": "^24.9.0",
     "metro-config": "^0.59.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-native-test-app": "^0.7.0",

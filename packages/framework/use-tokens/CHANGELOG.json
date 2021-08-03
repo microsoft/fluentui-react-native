@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/use-tokens",
   "entries": [
     {
+      "date": "Tue, 03 Aug 2021 22:33:17 GMT",
+      "tag": "@fluentui-react-native/use-tokens_v0.1.3",
+      "version": "0.1.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add patchTokens utility to use-tokens package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "317097b2f51d04d33bfc2b14b2850a2774e0acbc",
+            "package": "@fluentui-react-native/use-tokens"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Jul 2021 06:26:34 GMT",
+      "tag": "@fluentui-react-native/use-tokens_v0.1.2",
+      "version": "0.1.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bumped Jest to 27.0.6",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "925cf4eb5fe6bfadf20208b5b3d3a4454fc5c9fa",
+            "package": "@fluentui-react-native/use-tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 27 Jul 2021 22:17:20 GMT",
       "tag": "@fluentui-react-native/use-tokens_v0.1.2",
       "version": "0.1.2",

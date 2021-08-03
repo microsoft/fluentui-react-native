@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/use-styling
 
-This log was last generated on Tue, 27 Jul 2021 22:17:20 GMT and should not be manually modified.
+This log was last generated on Tue, 03 Aug 2021 22:33:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.4
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/use-tokens to v0.1.3 (jasonmo@microsoft.com)
 
 ## 0.6.3
 

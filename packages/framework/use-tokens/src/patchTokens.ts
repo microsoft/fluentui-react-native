@@ -1,5 +1,14 @@
 import { GetMemoValue } from '@fluentui-react-native/memo-cache';
 
+/**
+ * Take a set of tokens (and a memo-cache) and apply changes to those tokens from an additional set of tokens. Only keys which are
+ * not undefined will be applied and if no changes are detected the token object will be unchanged.
+ *
+ * @param tokens - base set of tokens to apply changes to, this will not be modified
+ * @param cache - cache corresponding to this set of tokens
+ * @param patchValues - new values to apply, values will be obtained via keys in the object
+ * @returns - a tuple consisting of a new tokens object and a new memo-cache
+ */
 export function patchTokens<TTokens>(
   tokens: TTokens,
   cache: GetMemoValue<TTokens>,
