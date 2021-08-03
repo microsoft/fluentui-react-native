@@ -10,7 +10,7 @@ const tabs: React.FunctionComponent = () => {
   const [selectedKey, setSelectedKey] = React.useState('A');
   const [currTabItemIndex, setCurrTabItemIndex] = React.useState(0);
   const tabItems = ['A', 'B', 'C'];
-  const parentRef = React.useRef(null);
+  const focusZoneRef = React.useRef(null);
 
   const onKeyDown = (ev: IKeyboardEvent) => {
     if (ev.nativeEvent.key === 'ArrowRight') {
@@ -26,7 +26,7 @@ const tabs: React.FunctionComponent = () => {
   };
 
   const onTabsClick = (key: string) => {
-    parentRef.current.focus();
+    focusZoneRef.current.focus();
     setSelectedKey(key);
     if (key == 'A') {
       setCurrTabItemIndex(0);
@@ -39,8 +39,7 @@ const tabs: React.FunctionComponent = () => {
 
   return (
     <View style={stackStyle}>
-
-      <Tabs label="Tabs" selectedKey={selectedKey} onTabsClick={onTabsClick} onKeyDown={onKeyDown} componentRef={parentRef} >
+      <Tabs label="Tabs" selectedKey={selectedKey} onTabsClick={onTabsClick} onKeyDown={onKeyDown} componentRef={focusZoneRef} >
         <TabsItem onKeyDown={onKeyDown} headerText="Home" itemKey="A">
           <Text>Tabs #1</Text>
         </TabsItem>
