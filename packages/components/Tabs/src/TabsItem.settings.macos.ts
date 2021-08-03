@@ -57,7 +57,7 @@ export const settings: IComposeSettings<TabsItemType> = [
       },
       hovered: {
         tokens: {
-          color: '#242424',
+          color: 'pink',
           indicatorColor: '#D1D1D1',
         },
       },
@@ -87,7 +87,7 @@ export const settings: IComposeSettings<TabsItemType> = [
 
       focused: {
         tokens: {
-          color: '#242424',
+          color: 'red',
           borderColor: '#242424',
           indicatorColor: '#0078D4',
         },
