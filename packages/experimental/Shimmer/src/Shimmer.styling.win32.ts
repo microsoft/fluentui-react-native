@@ -10,7 +10,7 @@ export const defaultShimmerTokens: TokenSettings<ShimmerTokens> = (theme: Theme)
     duration: 2000,
     gradientOpacity: 1,
     shimmerColor: theme.colors.bodyFrameDivider,
-    shimmerWaveColor: 'orange',
+    shimmerWaveColor: '#E1E1E1',
   } as ShimmerTokens);
 
 /**
