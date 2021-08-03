@@ -95,13 +95,11 @@ export const Tabs = compose<TabsType>({
       const length = state.context.tabsItemKeys.length;
       const currTabItemIndex = state.context.tabsItemKeys.findIndex(x => x == state.context.selectedKey)
       if (ev.nativeEvent.key === 'ArrowRight') {
-        console.log('ArrowR')
         const newCurrTabItemIndex = (currTabItemIndex + 1) % length;
         state.context.selectedKey = state.context.tabsItemKeys[newCurrTabItemIndex]
         data.onKeySelect(state.context.selectedKey)
       }
       if (ev.nativeEvent.key === 'ArrowLeft') {
-        console.log('ArrowL')
         const newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
         state.context.selectedKey = state.context.tabsItemKeys[newCurrTabItemIndex]
         data.onKeySelect(state.context.selectedKey)
