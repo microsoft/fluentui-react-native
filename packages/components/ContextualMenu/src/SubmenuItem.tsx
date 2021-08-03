@@ -23,6 +23,7 @@ import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 export const SubmenuItem = compose<SubmenuItemType>({
   displayName: submenuItemName,
   usePrepareProps: (userProps: SubmenuItemProps, useStyling: IUseComposeStyling<SubmenuItemType>) => {
+    const defaultComponentRef = React.useRef(null);
     const {
       disabled,
       itemKey,
@@ -31,7 +32,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
       accessibilityLabel = userProps.text,
       onClick,
       testID,
-      componentRef = React.useRef(null),
+      componentRef = defaultComponentRef,
       ...rest
     } = userProps;
 
