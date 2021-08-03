@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update FluentUI Apple dependencies (#602)",
+  "packageName": "@fluentui-react-native/experimental-native-button",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
