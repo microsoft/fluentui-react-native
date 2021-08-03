@@ -38,22 +38,20 @@ export const Shimmer = compose<ShimmerType>({
 
     const memoizedShimmerData = useMemo(
       () => ({
-        gradientTintColor: props.gradientTintColor ? props.gradientTintColor : tokens['gradientTintColor'],
-        shimmerTintColor: props.shimmerTintColor ? props.shimmerTintColor : tokens['shimmerTintColor'],
-        containerWidth: props.width ? props.width : tokens['width'],
-        containerHeight: props.height ? props.height : tokens['height'],
-        toValue: props.toValue ? props.toValue : tokens['toValue'],
+        shimmerWaveColor: props.shimmerWaveColor ? props.shimmerWaveColor : tokens['shimmerWaveColor'],
+        shimmerColor: props.shimmerColor ? props.shimmerColor : tokens['shimmerColor'],
+        containerWidth: props?.style['width'] ? props?.style['width'] : tokens['width'],
+        containerHeight: props?.style['height'] ? props?.style['height'] : tokens['height'],
         delay: props.delay ? props.delay : tokens['delay'],
         duration: props.duration ? props.duration : tokens['duration'],
         angle: props.angle ? props.angle : tokens['angle'],
         gradientOpacity: tokens['gradientOpacity'],
       }),
       [
-        props.gradientTintColor,
-        props.shimmerTintColor,
-        props.width,
-        props.height,
-        props.toValue,
+        props.shimmerWaveColor,
+        props.shimmerColor,
+        props.style,
+        props.style,
         props.delay,
         props.duration,
         props.angle,
@@ -76,14 +74,14 @@ export const Shimmer = compose<ShimmerType>({
                 key={i}
                 width={element.width}
                 height={element.height}
-                x={element.xPos}
-                y={element.yPos}
-                rx={element.borderRadius}
-                ry={element.borderRadius}
+                x={element.x}
+                y={element.y}
+                rx={element.borderRadiusX}
+                ry={element.borderRadiusY}
               />,
             );
           } else if (element.type == 'circle') {
-            rows.push(<Circle key={i} r={element.height / 2} cx={element.xPos} cy={element.yPos} />);
+            rows.push(<Circle key={i} r={element.radius} cx={element.cx} cy={element.cy} />);
           }
         }
       }
@@ -94,13 +92,13 @@ export const Shimmer = compose<ShimmerType>({
             <AnimatedLinearGradient id="gradient" x1={startValue} y1={memoizedShimmerData.angle} x2="-1" y2="-1">
               <Stop
                 offset="10%"
-                stopColor={uri ? memoizedShimmerData.gradientTintColor : memoizedShimmerData.shimmerTintColor}
+                stopColor={uri ? memoizedShimmerData.shimmerWaveColor : memoizedShimmerData.shimmerColor}
                 stopOpacity={uri ? '0' : '1'}
               />
-              <Stop offset="20%" stopColor={memoizedShimmerData.gradientTintColor} stopOpacity={memoizedShimmerData.gradientOpacity} />
+              <Stop offset="20%" stopColor={memoizedShimmerData.shimmerWaveColor} stopOpacity={memoizedShimmerData.gradientOpacity} />
               <Stop
                 offset="30%"
-                stopColor={uri ? memoizedShimmerData.gradientTintColor : memoizedShimmerData.shimmerTintColor}
+                stopColor={uri ? memoizedShimmerData.shimmerWaveColor : memoizedShimmerData.shimmerColor}
                 stopOpacity={uri ? '0' : '1'}
               />
             </AnimatedLinearGradient>
@@ -115,17 +113,6 @@ export const Shimmer = compose<ShimmerType>({
             fill="url(#gradient)"
             clipPath={!uri ? 'url(#shimmerView)' : null}
           />
-
-          {/* This seems more appropriate; width and height 100% should be handled by flex style, no?
-
-          <Rect
-            x="0"
-            y="0"
-            width={memoizedShimmerData.containerWidth}
-            height={memoizedShimmerData.containerHeight}
-            fill="url(#gradient)"
-            clipPath={!uri ? 'url(#shimmerView)' : null}
-          /> */}
         </Slots.root>
       );
     };

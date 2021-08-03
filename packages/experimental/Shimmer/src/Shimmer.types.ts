@@ -1,116 +1,147 @@
 import { SvgProps, ImageProps } from 'react-native-svg';
-import { ImageURISource, ColorValue } from 'react-native';
+import { ImageURISource, ColorValue, ViewProps } from 'react-native';
+import { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 
 export const shimmerName = 'Shimmer';
 
 /**
- * Specifies the possible type of the shimmer elements: Rect, Circle.
+ * Specifies the possible types of the shimmer elements: Rect, Circle.
  * Required when building more than one element at a time.
  */
 export type ShimmerElementType = 'rect' | 'circle';
 
 /**
- * Represents the shimmer element -- TODO: make rect and circle types
+ * Properties necessary to define a circular Shimmer element.
  */
-export interface ShimmerElement {
+export interface ShimmerCircleElement {
   /**
-   * Specifies the rect shimmer border radius; no-op for circle element
-   * @defaultValue '0'
+   * Shimmer element type.
    */
-  borderRadius?: number;
+  type: 'circle';
 
   /**
-   * Specifies the shimmer view height. For circle element type, height is divided by 2 to get the radius for Svg
-   * @defaultValue '100'
+   * Radius of the circle element.
+   * @defaultValue 12
    */
-  height?: number;
+  radius?: number;
 
   /**
-   * Type of the shimmer element
+   * Note: cx and cy should be optional properties [or removed], with relative positioning being the default [or only] positioning mechanism.
+   * Note: The behavior of element intersections is undefined.
    */
-  type: ShimmerElementType;
 
   /**
-   * Specifies the element width; no-op for circle element
-   * @defaultValue '200'
+   * The x-axis center of the circle element in the Shimmer relative to the origin [top-left, (0,0)].
+   *
+   * @defaultValue 12
+   */
+  cx?: number;
+
+  /**
+   * The y-axis center of the circle element in the Shimmer relative to the origin [top-left, (0,0)].
+   *
+   * @defaultValue 12
+   */
+  cy?: number;
+}
+
+/**
+ * Properties necessary to define a rectangular Shimmer element.
+ */
+export interface ShimmerRectElement {
+  /**
+   * Shimmer element type.
+   */
+  type: 'rect';
+
+  /**
+   * Width of the rect.
+   * @defaultValue 100%
    */
   width?: number;
 
   /**
-   * x-coordinate
-   * @defaultValue '0'
+   * Height of the rect.
+   * @defaultValue 16
    */
-  xPos?: number;
+  height?: number;
 
   /**
-   * y-coordinate
-   * @defaultValue '0'
+   * Border radius for the x-axis of a rounded rect.
+   * @defaultValue 0
    */
-  yPos?: number;
+  borderRadiusX?: number;
+
+  /**
+   * Border radius for the y-axis of a rounded rect.
+   * @defaultValue 0
+   */
+  borderRadiusY?: number;
+
+  /**
+   * Note: x and y should be optional properties [or removed], with relative positioning being the default [or only] positioning mechanism.
+   * Note: The behavior of element intersections is undefined.
+   */
+
+  /**
+   * The x-axis position of the rect element's top-left corner in the Shimmer relative to the origin [top-left, (0,0)].
+   * @defaultValue 0
+   */
+  x: number;
+
+  /**
+   * The y-axis position of the rect element's top-left corner in the Shimmer relative to the origin [top-left, (0,0)].
+   * @defaultValue 0
+   */
+  y: number;
 }
 
-export interface ShimmerTokens {
+export interface ShimmerTokens extends IBackgroundColorTokens, IBorderTokens {
   /**
-   * Specifies the gradient angle, value should be anywhere between -1 and 1 TODO: Clarify units
-   * -1 to 1 maps to 90 degrees horizontally to ≈ 120 degrees
-   * @defaultValue '0'
+   * Specifies the gradient angle; the value should be between 0 and 180 degrees
+   * @defaultValue 90
    */
   angle?: number;
 
   /**
    * Specifies the animation delay time in milliseconds
-   * @defaultValue '0'
+   * @defaultValue 0
    */
   delay?: number;
 
   /**
    * Specifies the time required to traverse the control in milliseconds
    *
-   * @defaultValue '7000'
+   * @defaultValue 2000
    */
   duration?: number;
 
-  // TODO: Clarify why the gradient default is 0.7 or why the gradient should be translucent.
-  // neither seem necessary.
   /**
-   * Specifies the gradient opacity
-   * @defaultValue '.7'
+   * Specifies the gradient opacity.
+   * @defaultValue 1
    */
   gradientOpacity?: number;
 
   /**
-   * Gradient tint color
-   * @defaultValue 'white'
+   * Color you see when the shimmer wave is not animating.
+   * @defaultValue theme.colors.bodyFrameDivider
    */
-  gradientTintColor?: ColorValue;
+  shimmerColor?: ColorValue;
+
+  shimmerBackground?: ColorValue;
 
   /**
-   * Specifies the shimmer view height. For the circle element type, height is divided by 2 to get the radius for Svg
-   * @defaultValue '100'
+   * Defines the tip color of the wave which has a linear gradient.
+   * from shimmerColor to shimmerWaveColor to shimmerColor.
+   * @defaultValue '#E1E1E1'
    */
-  height?: number;
+  shimmerWaveColor?: ColorValue;
 
   /**
-   * Shimmer element tint color; no-op for image based shimmer
-   * @defaultValue 'E1E1E1' for light mode, '404040' for dark mode
+   * Width of the Shimmer wave.
+   * @defaultValue 100%
    */
-  shimmerTintColor?: ColorValue;
-
-  // TODO: we should set speed or time. we can offer speed or time, but distance is already dictated / redundant with delay
-
-  /**
-   * Specifies the distance traveled from starting position.
-   * By default, the animation will animate from 0 to 30 over the course of 7000ms, since speed = distance / time, so
-   * speed ≈ 0.004 dip/ms ?? (higher the speed, faster it moves).
-   * @defaultValue '30'
-   */
-  toValue?: number;
-
-  /**
-   * Width of the shimmer wave
-   * @defaultValue '200'
-   */
-  width?: number;
+  shimmerWaveWidth?: number;
 }
 
 export interface ShimmerSlotProps extends ShimmerProps {
@@ -118,11 +149,11 @@ export interface ShimmerSlotProps extends ShimmerProps {
   image: ImageProps;
 }
 
-export interface ShimmerProps extends ShimmerTokens {
+export interface ShimmerProps extends ViewProps, ShimmerTokens {
   /**
-   * Array of ShimmerElement in a single view
+   * Shimmer shapes that define the masking effect of the Shimmer control.
    */
-  elements?: Array<ShimmerElement>;
+  elements?: Array<ShimmerCircleElement | ShimmerRectElement>;
 
   /**
    * Image to be used as a shimmer element

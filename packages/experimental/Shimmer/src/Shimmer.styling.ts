@@ -8,8 +8,8 @@ export const stylingSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, 
       toValue: 30,
       duration: 7000,
       delay: 0,
-      gradientTintColor: 'white', // Baseline component is the light mode color
-      shimmerTintColor: '#E1E1E1', // Baseline component is the light mode color
+      shimmerWaveColor: 'white', // Baseline component is the light mode color
+      shimmerColor: '#E1E1E1', // Baseline component is the light mode color
       width: 200,
       height: 100,
       angle: 0,
@@ -20,19 +20,16 @@ export const stylingSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, 
   slotProps: {
     root: buildProps(
       (tokens: ShimmerTokens, theme: Theme) => ({
-        toValue: tokens.toValue,
         duration: tokens.duration,
         delay: tokens.delay,
-        gradientTintColor: getCurrentAppearance(theme.host.appearance, 'light') === 'light' ? 'white' : 'black',
-        shimmerTintColor: getCurrentAppearance(theme.host.appearance, 'light') === 'light' ? '#E1E1E1' : '#404040',
-        width: tokens.width,
-        height: tokens.height,
+        shimmerWaveColor: getCurrentAppearance(theme.host.appearance, 'light') === 'light' ? 'white' : 'black',
+        shimmerColor: getCurrentAppearance(theme.host.appearance, 'light') === 'light' ? '#E1E1E1' : '#404040',
         angle: tokens.angle,
         gradientOpacity: tokens.gradientOpacity,
         accessibilityRole: 'progressbar',
         accessible: true,
       }),
-      ['gradientTintColor', 'toValue', 'duration', 'delay', 'shimmerTintColor', 'width', 'height', 'angle', 'gradientOpacity'],
+      ['shimmerWaveColor', 'duration', 'delay', 'shimmerColor', 'angle', 'gradientOpacity'],
     ),
     image: buildProps((_tokens: ShimmerTokens) => ({
       href: null,
