@@ -4,14 +4,15 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 
 export const tabsItemSelectActionLabel = 'Select a TabsItem';
 
-export const settings: IComposeSettings<TabsItemType> = [
+export const settingsMacOS: IComposeSettings<TabsItemType> = [
   {
     tokens: {
-      color: 'neutralForeground3Brand',
-      variant: 'bodyStandard',
+      color: '#616161',
+      fontWeight: 'normal',
+      fontFamily: 'SF Pro Text',
+      fontSize: 14,
       borderWidth: 2,
       borderRadius: 4,
-      borderColor: 'transparent',
       indicatorColor: 'transparent',
     },
     root: {
@@ -47,29 +48,31 @@ export const settings: IComposeSettings<TabsItemType> = [
         justifyContent: 'center',
       },
     },
-    _precedence: ['hovered', 'focused', 'selected', 'pressed', 'disabled'],
+    _precedence: ['hovered', 'selected', 'focused', 'disabled', 'pressed'],
     _overrides: {
       disabled: {
         tokens: {
-          color: 'neutralForegroundDisabled',
+          color: '#BDBDBD',
         },
       },
       hovered: {
         tokens: {
-          color: 'neutralForeground2Hover',
-          indicatorColor: 'neutralStroke1'
+          color: '#242424',
+          indicatorColor: '#D1D1D1',
         },
       },
       selected: {
         tokens: {
-          color: 'neutralForeground1',
-          variant: 'bodySemibold',
-          indicatorColor: 'brandStroke1'
+          color: '#242424',
+          fontWeight: 'bold',
+          fontFamily: 'SF Pro Text',
+          fontSize: 14,
+          indicatorColor: '#0078D4',
         },
         _overrides: {
           pressed: {
             tokens: {
-              indicatorColor: 'neutralStroke1',
+              indicatorColor: '#D1D1D1',
             },
           },
         },
@@ -77,16 +80,16 @@ export const settings: IComposeSettings<TabsItemType> = [
 
       pressed: {
         tokens: {
-          color: 'neutralForeground2Pressed',
-          indicatorColor: 'brandStroke1',
+          color: '#242424',
+          indicatorColor: '#0078D4',
         },
       },
 
       focused: {
         tokens: {
-          color: 'neutralForeground1',
-          borderColor: 'neutralForeground1',
-          indicatorColor: 'brandStroke1',
+          color: '#242424',
+          borderColor: '#242424',
+          indicatorColor: '#0078D4',
         },
       },
     },
