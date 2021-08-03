@@ -31,8 +31,5 @@ export const stylingSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, 
       }),
       ['shimmerWaveColor', 'duration', 'delay', 'shimmerColor', 'angle', 'gradientOpacity'],
     ),
-    image: buildProps((_tokens: ShimmerTokens) => ({
-      href: null,
-    })),
   },
 };

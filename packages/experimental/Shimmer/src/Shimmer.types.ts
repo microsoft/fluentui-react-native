@@ -1,5 +1,5 @@
-import { SvgProps, ImageProps } from 'react-native-svg';
-import { ImageURISource, ColorValue, ViewProps } from 'react-native';
+import { SvgProps } from 'react-native-svg';
+import { ColorValue, ViewProps } from 'react-native';
 import { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 
 export const shimmerName = 'Shimmer';
@@ -146,7 +146,6 @@ export interface ShimmerTokens extends IBackgroundColorTokens, IBorderTokens {
 
 export interface ShimmerSlotProps extends ShimmerProps {
   root: SvgProps;
-  image: ImageProps;
 }
 
 export interface ShimmerProps extends ViewProps, ShimmerTokens {
@@ -154,12 +153,6 @@ export interface ShimmerProps extends ViewProps, ShimmerTokens {
    * Shimmer shapes that define the masking effect of the Shimmer control.
    */
   elements?: Array<ShimmerCircleElement | ShimmerRectElement>;
-
-  /**
-   * Image to be used as a shimmer element
-   * @defaultValue 'null'
-   */
-  uri?: ImageURISource;
 }
 
 export interface ShimmerType {

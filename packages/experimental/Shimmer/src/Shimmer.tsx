@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import { useRef, useEffect, useMemo } from 'react';
-import { Circle, ClipPath, Defs, Image, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
+import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
 import { shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import { Animated } from 'react-native';
@@ -29,7 +29,6 @@ export const Shimmer = compose<ShimmerType>({
   ...stylingSettings,
   slots: {
     root: Svg,
-    image: Image,
   },
   render: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
     const Slots = useSlots(props);
@@ -62,7 +61,7 @@ export const Shimmer = compose<ShimmerType>({
     const startValue = useShimmerAnimation(memoizedShimmerData);
 
     return (rest: ShimmerProps) => {
-      const { uri, elements, ...mergedProps } = mergeProps(props, rest);
+      const { elements, ...mergedProps } = mergeProps(props, rest);
       const rows = [];
 
       if (elements) {
@@ -90,29 +89,13 @@ export const Shimmer = compose<ShimmerType>({
         <Slots.root {...mergedProps}>
           <Defs>
             <AnimatedLinearGradient id="gradient" x1={startValue} y1={memoizedShimmerData.angle} x2="-1" y2="-1">
-              <Stop
-                offset="10%"
-                stopColor={uri ? memoizedShimmerData.shimmerWaveColor : memoizedShimmerData.shimmerColor}
-                stopOpacity={uri ? '0' : '1'}
-              />
+              <Stop offset="10%" stopColor={memoizedShimmerData.shimmerColor} stopOpacity={1} />
               <Stop offset="20%" stopColor={memoizedShimmerData.shimmerWaveColor} stopOpacity={memoizedShimmerData.gradientOpacity} />
-              <Stop
-                offset="30%"
-                stopColor={uri ? memoizedShimmerData.shimmerWaveColor : memoizedShimmerData.shimmerColor}
-                stopOpacity={uri ? '0' : '1'}
-              />
+              <Stop offset="30%" stopColor={memoizedShimmerData.shimmerColor} stopOpacity={1} />
             </AnimatedLinearGradient>
             <ClipPath id="shimmerView">{rows}</ClipPath>
           </Defs>
-          {uri && <Slots.image href={props.uri} />}
-          <Rect
-            x="0"
-            y="0"
-            width={memoizedShimmerData.containerWidth}
-            height={memoizedShimmerData.containerHeight}
-            fill="url(#gradient)"
-            clipPath={!uri ? 'url(#shimmerView)' : null}
-          />
+          <Rect x="0" y="0" width={memoizedShimmerData.containerWidth} height={memoizedShimmerData.containerHeight} fill="url(#gradient)" />
         </Slots.root>
       );
     };
