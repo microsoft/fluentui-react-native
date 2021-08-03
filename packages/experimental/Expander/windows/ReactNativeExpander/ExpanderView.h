@@ -16,6 +16,7 @@ namespace winrt::ReactNativeExpander::implementation {
         bool m_updating{ false };
         bool m_expanded{ false };
 
+        // The Expander Collapsed event is misnamed. The event is fired when Expander begins collapsing
         Microsoft::UI::Xaml::Controls::Expander::Collapsed_revoker m_expanderCollapsingRevoker{};
         Microsoft::UI::Xaml::Controls::Expander::Expanding_revoker m_expanderExpandingRevoker{};
 

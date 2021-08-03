@@ -1,5 +1,5 @@
 import { ColorValue } from 'react-native';
-import type {SyntheticEvent} from 'react-native/Libraries/Types/CoreEventTypes';
+import type { SyntheticEvent } from 'react-native/Libraries/Types/CoreEventTypes';
 
 export const expanderName = 'Expander';
 

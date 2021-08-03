@@ -21,18 +21,21 @@ export const Expander = compose<ExpanderType>({
   render: (userProps: ExpanderProps, useSlots: UseSlots<ExpanderType>) => {
     const Root = useSlots(userProps).root;
     const [expandedState, setExpandedState] = React.useState(userProps.expanded);
-
-    return (rest: ExpanderViewProps, ...children: React.ReactNode[]) => <Root
-      height= {expandedState? userProps.expandedHeight : userProps.collapsedHeight}
-      onChange={async (event: ExpanderChangeEvent) => {
-        if (event.nativeEvent.expanded != null) {
-          event.persist();
-          if (!event.nativeEvent.expanded) {
-            await delay(175);
-          }
-          setExpandedState(event.nativeEvent.expanded);
+    const expanderHeight = expandedState? userProps.expandedHeight : userProps.collapsedHeight;
+    async function onExpanderChange(event: ExpanderChangeEvent) {
+      if (event.nativeEvent.expanded != null) {
+        event.persist();
+        if (!event.nativeEvent.expanded) {
+          await delay(175);
         }
-      }}
-      {...mergeProps(userProps, rest)}>{children}</Root>;
+        setExpandedState(event.nativeEvent.expanded);
+      }
+    }
+    return (rest: ExpanderViewProps, ...children: React.ReactNode[]) =>
+      <Root
+        height={expanderHeight}
+        onChange={onExpanderChange}
+        {...mergeProps(userProps, rest)}>{children}
+      </Root>;
   },
 });

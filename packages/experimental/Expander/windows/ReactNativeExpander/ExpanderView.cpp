@@ -16,14 +16,14 @@ namespace winrt::ReactNativeExpander::implementation {
 
     ExpanderView::ExpanderView(winrt::IReactContext const& reactContext) : m_reactContext(reactContext) {
         auto expander = Microsoft::UI::Xaml::Controls::Expander();
-        this->VerticalContentAlignment(Windows::UI::Xaml::VerticalAlignment::Top);
+        this->VerticalContentAlignment(xaml::VerticalAlignment::Top);
         this->Content(expander);
 
         RegisterEvents();
     }
 
     void ExpanderView::RegisterEvents() {
-        auto expander = (this->Content()).try_as<Microsoft::UI::Xaml::Controls::Expander>();
+        auto expander = this->Content().try_as<Microsoft::UI::Xaml::Controls::Expander>();
 
         m_expanderCollapsingRevoker = expander.Collapsed(winrt::auto_revoke,
             [ref = get_weak()](auto const& sender, auto const& args) {
@@ -42,7 +42,7 @@ namespace winrt::ReactNativeExpander::implementation {
     void ExpanderView::UpdateProperties(winrt::IJSValueReader const& reader) {
         m_updating = true;
         auto const& propertyMap = JSValueObject::ReadFrom(reader);
-        auto expander = (this->Content()).try_as<Microsoft::UI::Xaml::Controls::Expander>();
+        auto expander = this->Content().try_as<Microsoft::UI::Xaml::Controls::Expander>();
 
         for (auto const& pair : propertyMap) {
             auto const& propertyName = pair.first;
@@ -84,46 +84,56 @@ namespace winrt::ReactNativeExpander::implementation {
                 if (!propertyValue.IsNull()) {
                     expander.Width(propertyValue.AsDouble());
                     this->Width(propertyValue.AsDouble());
+                } else {
+                  expander.ClearValue(xaml::FrameworkElement::WidthProperty());
+                  this->ClearValue(xaml::FrameworkElement::WidthProperty());
                 }
             }
             else if (propertyName == "height") {
                 if (!propertyValue.IsNull()) {
                     expander.Height(propertyValue.AsDouble());
                     this->Height(propertyValue.AsDouble());
+                } else {
+                  expander.ClearValue(xaml::FrameworkElement::HeightProperty());
+                  this->ClearValue(xaml::FrameworkElement::HeightProperty());
                 }
             }
             else if (propertyName == "contentHorizontalAlignment") {
                 if (!propertyValue.IsNull()) {
                     auto alignment = propertyValue.AsString();
                     if (alignment == "center") {
-                        expander.HorizontalContentAlignment(Windows::UI::Xaml::HorizontalAlignment::Center);
+                        expander.HorizontalContentAlignment(xaml::HorizontalAlignment::Center);
                     }
                     else if (alignment == "left") {
-                        expander.HorizontalContentAlignment(Windows::UI::Xaml::HorizontalAlignment::Left);
+                        expander.HorizontalContentAlignment(xaml::HorizontalAlignment::Left);
                     }
                     else if (alignment == "right") {
-                        expander.HorizontalContentAlignment(Windows::UI::Xaml::HorizontalAlignment::Right);
+                        expander.HorizontalContentAlignment(xaml::HorizontalAlignment::Right);
                     }
                     else if (alignment == "stretch") {
-                        expander.HorizontalContentAlignment(Windows::UI::Xaml::HorizontalAlignment::Stretch);
+                        expander.HorizontalContentAlignment(xaml::HorizontalAlignment::Stretch);
                     }
+                } else {
+                    expander.ClearValue(xaml::Controls::Control::HorizontalContentAlignmentProperty());
                 }
             }
             else if (propertyName == "contentVerticalAlignment") {
                 if (!propertyValue.IsNull()) {
                     auto alignment = propertyValue.AsString();
                     if (alignment == "bottom") {
-                        expander.VerticalContentAlignment(Windows::UI::Xaml::VerticalAlignment::Bottom);
+                        expander.VerticalContentAlignment(xaml::VerticalAlignment::Bottom);
                     }
                     else if (alignment == "center") {
-                        expander.VerticalContentAlignment(Windows::UI::Xaml::VerticalAlignment::Center);
+                        expander.VerticalContentAlignment(xaml::VerticalAlignment::Center);
                     }
                     else if (alignment == "stretch") {
-                        expander.VerticalContentAlignment(Windows::UI::Xaml::VerticalAlignment::Stretch);
+                        expander.VerticalContentAlignment(xaml::VerticalAlignment::Stretch);
                     }
                     else if (alignment == "top") {
-                        expander.VerticalContentAlignment(Windows::UI::Xaml::VerticalAlignment::Top);
+                        expander.VerticalContentAlignment(xaml::VerticalAlignment::Top);
                     }
+                } else {
+                  expander.ClearValue(xaml::Controls::Control::VerticalContentAlignmentProperty());
                 }
             }
             else if (propertyName == "headerBackground") {
@@ -133,10 +143,12 @@ namespace winrt::ReactNativeExpander::implementation {
                 this->SetResourceColor(propertyValue, L"ExpanderHeaderForeground");
             }
             else if (propertyName == "headerBorderThickness") {
+                auto resDict = expander.Resources();
                 if (!propertyValue.IsNull()) {
-                    auto resDict = expander.Resources();
-                    Windows::UI::Xaml::Thickness thickness = Windows::UI::Xaml::ThicknessHelper::FromUniformLength(propertyValue.AsDouble());
+                    auto thickness = xaml::ThicknessHelper::FromUniformLength(propertyValue.AsDouble());
                     resDict.Insert(winrt::box_value(L"ExpanderHeaderBorderThickness"), winrt::box_value(thickness));
+                } else {
+                    resDict.Remove(winrt::box_value(L"ExpanderHeaderBorderThickness"));
                 }
             }
             else if (propertyName == "headerForegroundPointerOver") {
@@ -185,10 +197,12 @@ namespace winrt::ReactNativeExpander::implementation {
                 this->SetResourceColor(propertyValue, L"ExpanderChevronPressedForeground");
             }
             else if (propertyName == "chevronBorderThickness") {
+                auto resDict = expander.Resources();
                 if (!propertyValue.IsNull()) {
-                    auto resDict = expander.Resources();
-                    Windows::UI::Xaml::Thickness thickness = Windows::UI::Xaml::ThicknessHelper::FromUniformLength(propertyValue.AsDouble());
+                    auto thickness = xaml::ThicknessHelper::FromUniformLength(propertyValue.AsDouble());
                     resDict.Insert(winrt::box_value(L"ExpanderChevronBorderThickness"), winrt::box_value(thickness));
+                } else {
+                    resDict.Remove(winrt::box_value(L"ExpanderChevronBorderThickness"));
                 }
             }
             else if (propertyName == "chevronBorderBrush") {
@@ -205,11 +219,14 @@ namespace winrt::ReactNativeExpander::implementation {
     }
 
     void ExpanderView::SetResourceColor(Microsoft::ReactNative::JSValue const& value, hstring key) {
-        if (!value.IsNull()) {
-            auto expander = (this->Content()).try_as<Microsoft::UI::Xaml::Controls::Expander>();
-            auto color = value.To<winrt::Brush>();
+        if (auto expander = this->Content().try_as<Microsoft::UI::Xaml::Controls::Expander>()) {
             auto resDict = expander.Resources();
-            resDict.Insert(winrt::box_value(key), color);
+            if (!value.IsNull()) {
+                auto color = value.To<winrt::Brush>();
+                resDict.Insert(winrt::box_value(key), color);
+            } else {
+                resDict.Remove(winrt::box_value(key));
+            }
         }
     }
 

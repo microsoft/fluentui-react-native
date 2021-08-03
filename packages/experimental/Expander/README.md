@@ -89,8 +89,8 @@ The first child element of Expander will be assigned to the header, and the seco
 ### Important notes
 
 - `collapsedHeight` and `expandedHeight` must be set for Expander to display correctly
-- Do not set the `height` or `onChange` props. These props used to update the height of Expander, and the Expander height will not update if these props are overridden. If you need to override either of these props, you must implement the height change functionality as well.
-- Non-native components within the header will not be interactable (i.e. if there is a `Button` in the header, and you press it, the Expander will expand the `Button` functionality will not be performed). We recommend using [react-native-xaml](https://github.com/asklar/react-native-xaml) controls in the header if you would like to interact with the control and there is not a native implementation.
+- Do not set the `height` or `onChange` props. These props used to update the height of Expander, and the Expander height will not update if these props are overridden. If you need to override either of these props, you must add code to change the height of the Expander when it collapses or expands.
+- Non-native components within the header will not be interactable (i.e. if there is a `Button` in the header, and you press it, the Expander will expand the `Button` functionality will not be performed). We recommend using [react-native-xaml](https://github.com/asklar/react-native-xaml) controls in the header if you would like an interactive control that does not have a native implementation.
 
 ---
 
@@ -235,7 +235,7 @@ Sets the vertical alignment of the Expander's content.
 
 ### `headerBackground`
 
-Header background color. Input value should be hexadecimal string.
+Header background color. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -245,7 +245,7 @@ Header background color. Input value should be hexadecimal string.
 
 ### `headerForeground`
 
-Header foreground color at rest. Input value should be hexadecimal string.
+Header foreground color at rest. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -255,7 +255,7 @@ Header foreground color at rest. Input value should be hexadecimal string.
 
 ### `headerForegroundPointerOver`
 
-Header foreground color on pointer over. Input value should be hexadecimal string.
+Header foreground color on pointer over. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -265,7 +265,7 @@ Header foreground color on pointer over. Input value should be hexadecimal strin
 
 ### `headerForegroundPressed`
 
-Header foreground color when pressed. Input value should be hexadecimal string.
+Header foreground color when pressed. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -275,7 +275,7 @@ Header foreground color when pressed. Input value should be hexadecimal string.
 
 ### `headerBorderBrush`
 
-Header border color at rest. Input value should be hexadecimal string.
+Header border color at rest. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -285,7 +285,7 @@ Header border color at rest. Input value should be hexadecimal string.
 
 ### `headerBorderPointerOverBrush`
 
-Header border color on pointer over. Input value should be hexadecimal string.
+Header border color on pointer over. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -295,7 +295,7 @@ Header border color on pointer over. Input value should be hexadecimal string.
 
 ### `headerBorderPressedBrush`
 
-Header border color when pressed. Input value should be hexadecimal string.
+Header border color when pressed. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -305,7 +305,7 @@ Header border color when pressed. Input value should be hexadecimal string.
 
 ### `headerDisabledForeground`
 
-Header foreground color when disabled. Input value should be hexadecimal string.
+Header foreground color when disabled. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -315,7 +315,7 @@ Header foreground color when disabled. Input value should be hexadecimal string.
 
 ### `headerDisabledBorderBrush`
 
-Header border color when disabled. Input value should be hexadecimal string.
+Header border color when disabled. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -335,7 +335,7 @@ Header border thickness.
 
 ### `contentBackground`
 
-Content background color. Input value should be hexadecimal string.
+Content background color. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -345,7 +345,7 @@ Content background color. Input value should be hexadecimal string.
 
 ### `contentBorderBrush`
 
-Content border color. Input value should be hexadecimal string.
+Content border color. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -355,7 +355,7 @@ Content border color. Input value should be hexadecimal string.
 
 ### `chevronBackground`
 
-Chevron background color at rest. Input value should be hexadecimal string.
+Chevron background color at rest. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -365,7 +365,7 @@ Chevron background color at rest. Input value should be hexadecimal string.
 
 ### `chevronForeground`
 
-Chevron foreground color at rest. Input value should be hexadecimal string.
+Chevron foreground color at rest. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -375,7 +375,7 @@ Chevron foreground color at rest. Input value should be hexadecimal string.
 
 ### `chevronPointerOverBackground`
 
-Chevron background color on pointer over. Input value should be hexadecimal string.
+Chevron background color on pointer over. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -385,7 +385,7 @@ Chevron background color on pointer over. Input value should be hexadecimal stri
 
 ### `chevronPointerOverForeground`
 
-Chevron foreground color on pointer over. Input value should be hexadecimal string.
+Chevron foreground color on pointer over. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -395,7 +395,7 @@ Chevron foreground color on pointer over. Input value should be hexadecimal stri
 
 ### `chevronPressedBackground`
 
-Chevron background color when pressed. Input value should be hexadecimal string.
+Chevron background color when pressed. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -405,7 +405,7 @@ Chevron background color when pressed. Input value should be hexadecimal string.
 
 ### `chevronPressedForeground`
 
-Chevron foreground color when pressed. Input value should be hexadecimal string.
+Chevron foreground color when pressed. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -425,7 +425,7 @@ Chevron border thickness.
 
 ### `chevronBorderBrush`
 
-Chevron border color at rest. Input value should be hexadecimal string.
+Chevron border color at rest. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -435,7 +435,7 @@ Chevron border color at rest. Input value should be hexadecimal string.
 
 ### `chevronBorderPointerOverBrush`
 
-Chevron border color on pointer over. Input value should be hexadecimal string.
+Chevron border color on pointer over. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
@@ -445,7 +445,7 @@ Chevron border color on pointer over. Input value should be hexadecimal string.
 
 ### `chevronBorderPressedBrush`
 
-Chevron border color when pressed. Input value should be hexadecimal string.
+Chevron border color when pressed. Input value should be hexadecimal string or a [predefined color name](https://docs.microsoft.com/en-us/windows/winui/api/microsoft.ui.colors?view=winui-3.0) string.
 
 | Type   | Required |
 | ------ | -------- |
