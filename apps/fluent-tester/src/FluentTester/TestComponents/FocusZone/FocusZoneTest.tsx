@@ -7,7 +7,7 @@ import { focusZoneTestStyles, stackStyleFocusZone } from './styles';
 import { commonTestStyles } from '../Common/styles';
 import { Stack } from '@fluentui-react-native/stack';
 
-const directionalFocusZone: React.FunctionComponent<{}> = () => {
+const directionalFocusZone: React.FunctionComponent = () => {
   return (
     <View>
       <Button content="Outside FocusZone" />
@@ -55,7 +55,7 @@ const directionalFocusZone: React.FunctionComponent<{}> = () => {
   );
 };
 
-const commonUsageFocusZone: React.FunctionComponent<{}> = () => {
+const commonUsageFocusZone: React.FunctionComponent = () => {
   return (
     <View>
       <Button content="Outside FocusZone" />
@@ -79,7 +79,7 @@ const commonUsageFocusZone: React.FunctionComponent<{}> = () => {
   );
 };
 
-const navigation2DFocusZone: React.FunctionComponent<{}> = () => {
+const navigation2DFocusZone: React.FunctionComponent = () => {
   const buttonRef = React.useRef<View>(null);
 
   return (
@@ -131,7 +131,7 @@ function SwitchWithLabel(props: ISwitchWithLabelProps): React.ReactElement {
 
 const focusZoneDirectionStrings = ['Bidirectional', 'Horizontal', 'Vertical', 'None'];
 
-const customizableFocusZone: React.FunctionComponent<{}> = () => {
+const customizableFocusZone: React.FunctionComponent = () => {
   const [is2DNav, set2dNav] = React.useState(false);
   const [isDisabled, setDisabled] = React.useState(false);
   const [isCircularNav, setIsCircularNav] = React.useState(false);
@@ -227,7 +227,7 @@ const focusZoneSections: TestSection[] = [
   },
 ];
 
-export const FocusZoneTest: React.FunctionComponent<{}> = () => {
+export const FocusZoneTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',

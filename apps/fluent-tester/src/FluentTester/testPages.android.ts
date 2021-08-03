@@ -16,6 +16,7 @@ import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 import { ActivityIndicatorTest, HOMEPAGE_ACTIVITYINDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
+import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 
 export const tests: TestDescription[] = [
   {
@@ -102,5 +103,10 @@ export const tests: TestDescription[] = [
     name: 'Icon Test',
     component: IconTest,
     testPage: HOMEPAGE_ICON_BUTTON,
+  },
+  {
+    name: 'Tokens Test',
+    component: TokenTest,
+    testPage: HOMEPAGE_TOKEN_BUTTON,
   },
 ];

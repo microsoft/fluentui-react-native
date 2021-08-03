@@ -16,7 +16,7 @@ const buttonSections: TestSection[] = [
   },
 ];
 
-export const ButtonTest: React.FunctionComponent<{}> = () => {
+export const ButtonTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',

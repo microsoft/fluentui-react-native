@@ -41,6 +41,7 @@ export interface ComponentMethods<Props> {
 /**
  * temporary port of changes that are in flight for the react and react-native types definition
  */
+// eslint-disable-next-line @typescript-eslint/ban-types
 export type AbstractComponent<Config extends {}, Instance = unknown> =
   // Either a function component that has a specific return type:
   | (React.FunctionComponent<Config> & ((props: React.PropsWithChildren<Config>, context?: any) => Instance))
@@ -60,6 +61,7 @@ export type NativeMethods = {
     onSuccess: MeasureLayoutOnSuccessCallback,
     onFail?: () => void,
   ): void;
+  // eslint-disable-next-line @typescript-eslint/ban-types
   setNativeProps(nativeProps: object): void;
 };
 
