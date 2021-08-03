@@ -15,7 +15,6 @@ import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemR
 import {
   useAsPressable,
   useKeyCallback,
-  useViewCommandFocus,
   createIconProps,
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
@@ -83,7 +82,7 @@ export const TabsItem = compose<TabsItemType>({
       }
     }, []);
 
-    const buttonRef = useViewCommandFocus(componentRef);
+    const buttonRef = componentRef;
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
     const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);

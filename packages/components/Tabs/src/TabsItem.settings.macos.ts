@@ -4,13 +4,13 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 
 export const tabsItemSelectActionLabel = 'Select a TabsItem';
 
-export const settingsMacOS: IComposeSettings<TabsItemType> = [
+export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
       color: '#616161',
-      fontWeight: 'normal',
-      fontFamily: 'SF Pro Text',
-      fontSize: 14,
+      // fontWeight: 'normal',
+      // fontFamily: 'SF Pro Text',
+      // fontSize: 14,
       borderWidth: 2,
       borderRadius: 4,
       indicatorColor: 'transparent',
@@ -64,9 +64,9 @@ export const settingsMacOS: IComposeSettings<TabsItemType> = [
       selected: {
         tokens: {
           color: '#242424',
-          fontWeight: 'bold',
-          fontFamily: 'SF Pro Text',
-          fontSize: 14,
+          // fontWeight: 'bold',
+          // fontFamily: 'SF Pro Text',
+          // fontSize: 14,
           indicatorColor: '#0078D4',
         },
         _overrides: {
