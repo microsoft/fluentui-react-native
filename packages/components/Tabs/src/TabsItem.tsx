@@ -1,12 +1,12 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View, Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
 import { Icon } from '@fluentui-react-native/icon';
 import { settings, tabsItemSelectActionLabel } from './TabsItem.settings';
-import { settingsMacOS } from './TabsItem.settings.macos';
+// import { settingsMacOS } from './TabsItem.settings.macos';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
@@ -20,7 +20,7 @@ import {
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
 
-const platformSettings = settings;
+// const platformSettings = settings;
 
 export const TabsItem = compose<TabsItemType>({
   displayName: tabsItemName,
@@ -57,7 +57,7 @@ export const TabsItem = compose<TabsItemType>({
     const pressable = useAsPressable({
       ...rest,
       onPress: changeSelectionWithFocus,
-      onFocus: changeSelection,
+      onFocus: Platform.OS == 'macos' ? null : changeSelection,
     });
 
     const onKeyUp = useKeyCallback(onClick, ' ', 'Enter');
@@ -141,7 +141,7 @@ export const TabsItem = compose<TabsItemType>({
     );
   },
 
-  platformSettings,
+  settings,
 
   slots: {
     root: View,

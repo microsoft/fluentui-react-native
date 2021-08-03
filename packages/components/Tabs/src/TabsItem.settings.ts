@@ -47,7 +47,7 @@ export const settings: IComposeSettings<TabsItemType> = [
         justifyContent: 'center',
       },
     },
-    _precedence: ['hovered', 'selected', 'focused', 'disabled', 'pressed'],
+    _precedence: ['hovered', 'focused', 'selected', 'pressed', 'disabled'],
     _overrides: {
       disabled: {
         tokens: {
