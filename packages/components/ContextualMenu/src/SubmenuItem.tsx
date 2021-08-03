@@ -99,7 +99,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
       },
       content: { children: text, testID },
       icon: createIconProps(icon),
-      chevron:{}
+      chevron: {}
     });
 
     return { slotProps, state };
