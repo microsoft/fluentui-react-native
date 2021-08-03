@@ -9,16 +9,16 @@ PODS:
     - React-Core (= 0.63.37)
     - React-jsi (= 0.63.37)
     - ReactCommon/turbomodule/core (= 0.63.37)
-  - FluentUI-React-Native-Avatar (0.9.14):
+  - FluentUI-React-Native-Avatar (0.9.15):
     - MicrosoftFluentUI (~> 0.2.2)
     - MicrosoftFluentUI (~> 0.2.6)
     - React
-  - FluentUI-React-Native-Button (0.6.16):
+  - FluentUI-React-Native-Button (0.6.18):
     - MicrosoftFluentUI (~> 0.2.2)
     - React
-  - FluentUI-React-Native-FocusZone (0.6.8):
+  - FluentUI-React-Native-FocusZone (0.6.10):
     - React
-  - FluentUI-React-Native-MenuButton (0.2.15):
+  - FluentUI-React-Native-MenuButton (0.2.17):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.2.8):
@@ -449,10 +449,10 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 9d69690b3a1ca272ca0c0cee76ffcb6cf36d77af
   FBReactNativeSpec: 8b671febd2393669947b56e8d8f53a54185dd0b7
-  FluentUI-React-Native-Avatar: 7dd785b4410681d8496e8111ef0c29d9cc0165e5
-  FluentUI-React-Native-Button: a97bb75baa0e5856dd9b7d739fd9d88856ce35ad
-  FluentUI-React-Native-FocusZone: 612294bb1087577ce964ee8b70e5c2eac222ac23
-  FluentUI-React-Native-MenuButton: 63509072d966f587d437834c660e146030e77b76
+  FluentUI-React-Native-Avatar: a7275761d6214cc87f76d5d7cdb3fc72d8eb808a
+  FluentUI-React-Native-Button: eacc1e98bb859eb81dade960f2fe2c9e42247a35
+  FluentUI-React-Native-FocusZone: 97591670a320d6d5a0bfe4667f4d55a661403685
+  FluentUI-React-Native-MenuButton: 150192069c3b6666bb3659283884cb33a8e7a878
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: f0f620bb76ad355ca74b3dd7b1bd2e1ae41f0152
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
@@ -485,4 +485,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 36b7c6fb3b19c51edd97ade626978c94f016faf3
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.2

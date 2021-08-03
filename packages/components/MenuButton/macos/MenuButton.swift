@@ -50,7 +50,7 @@ open class MenuButton: NSPopUpButton {
       return menuButtonImage
     }
     set {
-      // We must set the image on the dropdown cell rather than the button,
+      // We must set the image on the dropdown cell rather than the button.
       // If we set the image on Button itself, no image is displayed.
       menuButtonImage = newValue
       updateDropDownCell()
@@ -73,7 +73,7 @@ open class MenuButton: NSPopUpButton {
     for (index, menuItem) in menu.items.enumerated() {
       menuItem.target = self
       menuItem.action = #selector(sendOnItemClickEvent)
-      if menuItem.hasSubmenu, let submenu = menuItem.submenu {
+      if let submenu = menuItem.submenu {
         //Add actions to one level of submenu items to support the `onSubmenuItemClick` callback
         for subMenuItem in submenu.items {
           subMenuItem.tag = index //store the index of the "super" menuItem for lookup in the action
@@ -83,8 +83,8 @@ open class MenuButton: NSPopUpButton {
       }
     }
 
-    // Insert an initial empty item into index 0, since index 0 is never displayed
-    // We must do this after we assign the tags to the submenuItems to preserve index order
+    // Insert an initial empty item into index 0, since index 0 is never displayed.
+    // We must do this after we assign the tags to the submenuItems to preserve index order.
     let initialEmptyItem = NSMenuItem()
     menu.insertItem(initialEmptyItem, at: 0)
   }
@@ -94,7 +94,7 @@ open class MenuButton: NSPopUpButton {
       preconditionFailure()
     }
 
-    // MenuButton needs a MenuItem set on it's cell to display the title and image properly
+    // MenuButton needs a MenuItem set on its cell to display the title and image properly
     let dropdownCellItem = NSMenuItem()
     dropdownCellItem.image = image
     dropdownCellItem.title = title

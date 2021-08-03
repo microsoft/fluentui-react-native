@@ -33,7 +33,7 @@
   for (NSDictionary *menuItemJson in menuItems) {
     NSMenuItem *menuItem = [RCTConvert menuItem:menuItemJson];
 
-    if ([menuItemJson containsKey:@"hasSubmenu"])
+    if ([menuItemJson objectForKey:@"hasSubmenu"])
     {
       BOOL hasSubmenu = [RCTConvert BOOL:menuItemJson[@"hasSubmenu"]];
       if (hasSubmenu) {
