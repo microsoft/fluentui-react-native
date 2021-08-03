@@ -1,17 +1,6 @@
 #import <React/RCTComponent.h>
 #import <React/RCTViewManager.h>
 
-@implementation NSDictionary (MSFMenuButtonAdditions)
-
-- (BOOL)containsKey: (NSString *)key {
-     BOOL retVal = 0;
-     NSArray *allKeys = [self allKeys];
-     retVal = [allKeys containsObject:key];
-     return retVal;
-}
-
-@end
-
 @implementation RCTConvert (MSFMenuButtonAdditions)
 
 + (NSMenuItem *)menuItem:(id)json
