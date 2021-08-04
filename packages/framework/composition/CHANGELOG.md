@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/composition
 
-This log was last generated on Wed, 04 Aug 2021 06:26:25 GMT and should not be manually modified.
+This log was last generated on Wed, 04 Aug 2021 16:54:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.7
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/use-styling to v0.6.6 (jasonmo@microsoft.com)
 
 ## 0.6.6
 

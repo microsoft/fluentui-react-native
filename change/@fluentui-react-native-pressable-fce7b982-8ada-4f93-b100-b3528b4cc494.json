@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "move experimental Text to be written as compressible",
-  "packageName": "@fluentui-react-native/pressable",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

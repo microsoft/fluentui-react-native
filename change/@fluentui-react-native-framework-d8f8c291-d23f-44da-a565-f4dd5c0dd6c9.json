@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "add patchTokens helper to make conversion easier",
-  "packageName": "@fluentui-react-native/framework",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}
