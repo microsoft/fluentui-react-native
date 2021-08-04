@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Tue, 03 Aug 2021 23:48:50 GMT",
+      "tag": "@fluentui/react-native_v0.24.21",
+      "version": "0.24.21",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/separator to v0.10.17",
+            "author": "jasonmo@microsoft.com",
+            "commit": "69771570b94318ba208eb327d1edf15b5db0ec49",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 03 Aug 2021 22:33:17 GMT",
       "tag": "@fluentui/react-native_v0.24.20",
       "version": "0.24.20",

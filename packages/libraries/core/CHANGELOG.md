@@ -1,8 +1,16 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Tue, 03 Aug 2021 22:33:17 GMT and should not be manually modified.
+This log was last generated on Tue, 03 Aug 2021 23:48:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.21
+
+Tue, 03 Aug 2021 23:48:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/separator to v0.10.17 (jasonmo@microsoft.com)
 
 ## 0.24.20
 
