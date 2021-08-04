@@ -1,10 +1,3 @@
-//
-//  MSFAvatarStorage.m
-//  FluentUI-React-Native-Avatar
-//
-//  Created by Saad Najmi on 5/11/21.
-//
-
 #import <Foundation/Foundation.h>
 #import "MSFAvatarStorage.h"
 

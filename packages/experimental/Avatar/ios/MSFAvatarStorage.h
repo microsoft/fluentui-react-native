@@ -1,10 +1,3 @@
-//
-//  MSFAvatarStorage.h
-//  Pods
-//
-//  Created by Saad Najmi on 5/11/21.
-//
-
 #ifndef MSFAvatarStorage_h
 #define MSFAvatarStorage_h
 

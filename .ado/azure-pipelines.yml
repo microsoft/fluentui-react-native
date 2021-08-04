@@ -146,7 +146,7 @@ jobs:
           publishJUnitResults: false
           javaHomeOption: 'JDKVersion'
           sonarQubeRunAnalysis: false
-  # Uncomment this job to test changes to changes to the NuGet package
+  # Uncomment this job to test changes to the NuGet package
   # We keep it commented out by default because this job is much longer than the other PR jobs
   # - job: NuGetPublish
   #   displayName: NuGet Publish

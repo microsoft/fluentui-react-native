@@ -26,8 +26,6 @@ RCT_REMAP_VIEW_PROPERTY(name, __custom__, type)  \
 RCT_REMAP_VIEW_PROPERTY(name, __custom__, type)  \
 - (void)set_##name:(id)json forView:(UIView *)view withDefaultView:(UIView *)defaultView RCT_DYNAMIC
 
-
-
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation RCTConvert (MSFAvatarAdditions)
@@ -98,7 +96,6 @@ RCT_EXPORT_CUSTOM_SWIFTUI_PROPERTY(customBorderImageSource, UIImage, MSFAvatar)
     UIImage *customBorderImage = [RCTConvert UIImage:json];
     [[viewWrapper state] setImageBasedRingColor:customBorderImage];
 }
-
 
 @end
 
