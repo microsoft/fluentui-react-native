@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 30 Jul 2021 19:17:43 GMT and should not be manually modified.
+This log was last generated on Wed, 04 Aug 2021 00:59:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.33.8
+
+Wed, 04 Aug 2021 00:59:42 GMT
+
+### Patches
+
+- Add MenuButton for macOS (sanajmi@microsoft.com)
+
+## 0.33.7
+
+Tue, 03 Aug 2021 23:48:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.19 (jasonmo@microsoft.com)
+
+## 0.33.6
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.18 (jasonmo@microsoft.com)
 
 ## 0.33.5
 

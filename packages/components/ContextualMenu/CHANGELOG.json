@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Tue, 03 Aug 2021 23:48:50 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.9.17",
+      "version": "0.9.17",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.7.19",
+            "author": "jasonmo@microsoft.com",
+            "commit": "69771570b94318ba208eb327d1edf15b5db0ec49",
+            "package": "@fluentui-react-native/contextual-menu"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 03 Aug 2021 22:33:17 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.9.16",
+      "version": "0.9.16",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.7.18",
+            "author": "jasonmo@microsoft.com",
+            "commit": "317097b2f51d04d33bfc2b14b2850a2774e0acbc",
+            "package": "@fluentui-react-native/contextual-menu"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Jul 2021 19:17:43 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.9.15",
       "version": "0.9.15",

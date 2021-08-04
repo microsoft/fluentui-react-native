@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/framework",
   "entries": [
     {
+      "date": "Tue, 03 Aug 2021 23:48:50 GMT",
+      "tag": "@fluentui-react-native/framework_v0.5.19",
+      "version": "0.5.19",
+      "comments": {
+        "patch": [
+          {
+            "comment": "create useFluentTheme helper",
+            "author": "jasonmo@microsoft.com",
+            "commit": "69771570b94318ba208eb327d1edf15b5db0ec49",
+            "package": "@fluentui-react-native/framework"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 03 Aug 2021 22:33:17 GMT",
+      "tag": "@fluentui-react-native/framework_v0.5.18",
+      "version": "0.5.18",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/use-tokens to v0.1.3",
+            "author": "jasonmo@microsoft.com",
+            "commit": "317097b2f51d04d33bfc2b14b2850a2774e0acbc",
+            "package": "@fluentui-react-native/framework"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Jul 2021 06:26:34 GMT",
       "tag": "@fluentui-react-native/framework_v0.5.17",
       "version": "0.5.17",
