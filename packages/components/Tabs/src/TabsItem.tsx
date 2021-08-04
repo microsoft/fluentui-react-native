@@ -4,14 +4,14 @@ import { View } from 'react-native';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
-import { Icon } from '@fluentui-react-native/icon';
+// import { Icon } from '@fluentui-react-native/icon';
 import { settings, tabsItemSelectActionLabel } from './TabsItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { TabsContext } from './Tabs';
 import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemRenderData, TabsItemState } from './TabsItem.types';
-import { useAsPressable, useKeyCallback, createIconProps, useOnPressWithFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyCallback, useOnPressWithFocus } from '@fluentui-react-native/interactive-hooks'; // createIconProps
 
 export const TabsItem = compose<TabsItemType>({
   displayName: tabsItemName,
@@ -109,7 +109,7 @@ export const TabsItem = compose<TabsItemType>({
         onKeyUp: onKeyUp,
       },
       content: { children: headerText + countText, testID: testID },
-      icon: createIconProps(icon),
+      // icon: createIconProps(icon),
     });
 
     return { slotProps, state };
@@ -124,7 +124,7 @@ export const TabsItem = compose<TabsItemType>({
     return (
       <Slots.root>
         <Slots.stack>
-          {info.icon && <Slots.icon />}
+          {/* {info.icon && <Slots.icon />} */}
           {info.headerText && <Slots.content />}
         </Slots.stack>
         <Slots.indicator />
@@ -136,14 +136,14 @@ export const TabsItem = compose<TabsItemType>({
   slots: {
     root: View,
     stack: { slotType: View, filter: filterViewProps },
-    icon: { slotType: Icon as React.ComponentType },
+    // icon: { slotType: Icon as React.ComponentType },
     content: Text,
     indicator: { slotType: View, filter: filterViewProps },
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
     stack: [],
-    icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
+    // icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
     content: [textTokens, foregroundColorTokens],
     indicator: [{ source: 'indicatorColor', lookup: getPaletteFromTheme, target: 'backgroundColor' }],
   },

@@ -27,7 +27,7 @@ export const TabsContext = React.createContext<ITabsContext>({
   },
   tabsItemKeys: [],
 
-  disabledKeys: [],
+  enabledKeys: [],
 
   views: null,
 
@@ -95,27 +95,23 @@ export const Tabs = compose<TabsType>({
 
     const onKeyDown = (ev: IKeyboardEvent) => {
       if (ev.nativeEvent.key === 'ArrowRight' || ev.nativeEvent.key === 'ArrowLeft') {
-        const length = state.context.tabsItemKeys.length;
-        const currTabItemIndex = state.context.tabsItemKeys.findIndex(x => x == state.context.selectedKey)
+        const length = state.context.enabledKeys.length;
+        const currTabItemIndex = state.context.enabledKeys.findIndex(x => x == state.context.selectedKey)
         let newCurrTabItemIndex;
         if (ev.nativeEvent.key === 'ArrowRight') {
           if (!(!isCircularNavigation && currTabItemIndex + 1 == length)) {
             newCurrTabItemIndex = (currTabItemIndex + 1) % length;
-            state.context.selectedKey = state.context.tabsItemKeys[newCurrTabItemIndex];
+            state.context.selectedKey = state.context.enabledKeys[newCurrTabItemIndex];
             data.onKeySelect(state.context.selectedKey);
           }
         }
         if (ev.nativeEvent.key === 'ArrowLeft') {
           if (!(!isCircularNavigation && currTabItemIndex == 0)) {
             newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
-            state.context.selectedKey = state.context.tabsItemKeys[newCurrTabItemIndex];
+            state.context.selectedKey = state.context.enabledKeys[newCurrTabItemIndex];
             data.onKeySelect(state.context.selectedKey);
           }
         }
-        console.log(state.context.tabsItemKeys);
-        console.log(state.context.disabledKeys);
-        console.log(newCurrTabItemIndex);
-        console.log(!!state.context.disabledKeys[newCurrTabItemIndex]);
       }
     };
 
@@ -154,9 +150,11 @@ export const Tabs = compose<TabsType>({
       });
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore - TODO, fix typing error
-      renderData.state.context.disabledKeys = React.Children.map(children, (child: React.ReactChild) => {
+      renderData.state.context.enabledKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
-          return child.props.disabled ?? false;
+          if (!child.props.disabled) {
+            return child.props.itemKey;
+          }
         }
       });
     }

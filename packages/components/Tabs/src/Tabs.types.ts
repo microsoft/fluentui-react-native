@@ -36,9 +36,9 @@ export interface ITabsContext {
   tabsItemKeys?: string[];
 
   /*
-   ** Array of disabled keys in the group
+   ** Array of enabled keys in the group
    */
-  disabledKeys?: boolean[];
+   enabledKeys?: string[];
 
   /*
    ** A Map to for a TabItems corresponding view
