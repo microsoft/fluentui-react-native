@@ -15,7 +15,6 @@ export function createBrandedThemeWithAlias(theme: Theme): Theme {
 }
 
 function overrideBrandAliasTokensWithOffice(theme: Theme): Partial<AliasColorTokens> {
-  console.log(theme.host.colors.AppPrimary);
   return {
     neutralForeground2BrandHover: theme.host.colors.AppPrimary,
     neutralForeground2BrandPressed: theme.host.colors.AppShade10,
