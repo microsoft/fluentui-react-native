@@ -35,14 +35,14 @@ export interface ShimmerCircleElement {
    *
    * @defaultValue 12
    */
-  cx?: number;
+  cx: number;
 
   /**
    * The y-axis center of the circle element in the Shimmer relative to the origin [top-left, (0,0)].
    *
    * @defaultValue 12
    */
-  cy?: number;
+  cy: number;
 }
 
 /**
