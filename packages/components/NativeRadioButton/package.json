@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/component-cache": "^1.2.1",
+    "@uifabricshared/foundation-composable": ">=0.8.6 <1.0.0",
     "@fluentui-react-native/framework": "0.5.4"
   },
   "devDependencies": {
