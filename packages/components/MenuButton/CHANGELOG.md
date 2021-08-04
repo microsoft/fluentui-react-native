@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Tue, 03 Aug 2021 23:48:50 GMT and should not be manually modified.
+This log was last generated on Wed, 04 Aug 2021 00:59:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Wed, 04 Aug 2021 00:59:42 GMT
+
+### Minor changes
+
+- Add MenuButton for macOS (sanajmi@microsoft.com)
 
 ## 0.2.19
 

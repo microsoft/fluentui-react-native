@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-android",
   "entries": [
     {
+      "date": "Wed, 04 Aug 2021 00:59:42 GMT",
+      "tag": "@fluentui-react-native/tester-android_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tester to v0.33.8",
+            "author": "sanajmi@microsoft.com",
+            "commit": "b3ba12a5678b2aad94fbc0ecf6fa67bb8b3779a5",
+            "package": "@fluentui-react-native/tester-android"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 03 Aug 2021 23:48:50 GMT",
       "tag": "@fluentui-react-native/tester-android_v0.0.1",
       "version": "0.0.1",

@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Wed, 04 Aug 2021 00:59:42 GMT",
+      "tag": "@fluentui/react-native_v0.24.22",
+      "version": "0.24.22",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.3.0",
+            "author": "sanajmi@microsoft.com",
+            "commit": "b3ba12a5678b2aad94fbc0ecf6fa67bb8b3779a5",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 03 Aug 2021 23:48:50 GMT",
       "tag": "@fluentui/react-native_v0.24.21",
       "version": "0.24.21",

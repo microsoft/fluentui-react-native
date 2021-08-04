@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add MenuButton for macOS",
-  "packageName": "@fluentui-react-native/menu-button",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
