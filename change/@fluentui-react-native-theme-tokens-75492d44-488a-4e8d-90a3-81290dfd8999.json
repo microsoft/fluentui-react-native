@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Clean up output from token pipeline",
+  "packageName": "@fluentui-react-native/theme-tokens",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
