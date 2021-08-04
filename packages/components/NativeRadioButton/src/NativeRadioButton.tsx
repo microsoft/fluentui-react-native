@@ -1,7 +1,8 @@
 /** @jsx withSlots */
 import { ViewProps } from 'react-native';
-import { compose, buildProps, mergeProps, UseSlots, withSlots, LayoutTokens } from '@fluentui-react-native/framework';
+import { compose, buildProps, mergeProps, UseSlots, LayoutTokens } from '@fluentui-react-native/framework';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
+import { withSlots } from '@uifabricshared/foundation-composable';
 
 const nativeRadioButtonName = 'NativeRadioButton';
 
