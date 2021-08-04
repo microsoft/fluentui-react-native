@@ -21,12 +21,13 @@ import { Icon } from '@fluentui-react-native/icon';
 export const Button = compose<IButtonType>({
   displayName: buttonName,
   usePrepareProps: (userProps: IButtonProps, useStyling: IUseComposeStyling<IButtonType>) => {
+    const defaultComponentRef = React.useRef(null);
     const {
       icon,
       content,
       onAccessibilityTap = userProps.onClick,
       accessibilityLabel = userProps.content,
-      componentRef = React.useRef(null),
+      componentRef = defaultComponentRef,
       testID,
       onClick,
       ...rest

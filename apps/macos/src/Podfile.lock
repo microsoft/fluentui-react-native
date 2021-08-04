@@ -320,7 +320,7 @@ PODS:
     - React-Core
   - RNSVG (12.1.1):
     - React
-  - SwiftLint (0.43.0)
+  - SwiftLint (0.43.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -331,6 +331,8 @@ DEPENDENCIES:
   - FluentUI-React-Native-Avatar (from `../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec`)
   - FluentUI-React-Native-Button (from `../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec`)
   - FluentUI-React-Native-FocusZone (from `../../../packages/components/FocusZone/FluentUIReactNativeFocusZone.podspec`)
+  - FluentUI-React-Native-MenuButton (from `../../../packages/components/MenuButton/FluentUIReactNativeMenuButton.podspec`)
+  - FluentUI-React-Native-Radio-Button (from `../../../packages/components/NativeRadioButton/FluentUIReactNativeRadioButton.podspec`)
   - glog (from `../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
   - RCT-Folly (from `../../../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../../../node_modules/react-native-macos/Libraries/RCTRequired`)
@@ -382,6 +384,10 @@ EXTERNAL SOURCES:
     :path: "../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec"
   FluentUI-React-Native-FocusZone:
     :path: "../../../packages/components/FocusZone/FluentUIReactNativeFocusZone.podspec"
+  FluentUI-React-Native-MenuButton:
+    :path: "../../../packages/components/MenuButton/FluentUIReactNativeMenuButton.podspec"
+  FluentUI-React-Native-Radio-Button:
+    :path: "../../../packages/components/NativeRadioButton/FluentUIReactNativeRadioButton.podspec"
   glog:
     :podspec: "../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec"
   RCT-Folly:
@@ -475,6 +481,6 @@ SPEC CHECKSUMS:
   SwiftLint: 0c645fdc6feed3e390c1701ab3cc669f88b42752
   Yoga: 77d9987384e26b4aaf3e7a01808838cc2d4304f2
 
-PODFILE CHECKSUM: a71337fd6df579c22ae17c48d85b9f981ac8c11e
+PODFILE CHECKSUM: a565a7201486be653ad507db21ec3696e5a4b0b1
 
 COCOAPODS: 1.10.1

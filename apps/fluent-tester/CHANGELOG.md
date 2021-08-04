@@ -1,8 +1,97 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 27 Jul 2021 22:17:20 GMT and should not be manually modified.
+This log was last generated on Wed, 04 Aug 2021 18:11:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.34.2
+
+Wed, 04 Aug 2021 18:11:46 GMT
+
+### Patches
+
+- Bump @fluentui/react-native to v0.24.25 (lehon@microsoft.com)
+
+## 0.34.1
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- move experimental Text to be written as compressible (jasonmo@microsoft.com)
+
+## 0.34.0
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Minor changes
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui/react-native to v0.24.23 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/button to v0.18.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/stack to v0.5.17 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/icon to v0.8.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-button to v0.8.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-native-button to v0.7.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-text to v0.6.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/android-theme to v0.4.7 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/apple-theme to v0.7.9 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/native-radio-button to v0.1.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/default-theme to v0.7.3 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.3.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.3.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-shimmer to v0.4.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/framework to v0.5.20 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.23 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/theme to v0.5.12 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-types to v0.9.3 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/themed-stylesheet to v1.2.3 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/theming-utils to v0.3.3 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/win32-theme to v0.7.13 (67026167+chiuam@users.noreply.github.com)
+
+## 0.33.8
+
+Wed, 04 Aug 2021 00:59:42 GMT
+
+### Patches
+
+- Add MenuButton for macOS (sanajmi@microsoft.com)
+
+## 0.33.7
+
+Tue, 03 Aug 2021 23:48:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.19 (jasonmo@microsoft.com)
+
+## 0.33.6
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.18 (jasonmo@microsoft.com)
+
+## 0.33.5
+
+Fri, 30 Jul 2021 19:17:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.7.17 (email not defined)
+
+## 0.33.4
+
+Thu, 29 Jul 2021 17:53:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.17 (jasonmo@microsoft.com)
 
 ## 0.33.3
 

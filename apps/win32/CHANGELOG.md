@@ -1,8 +1,76 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Tue, 27 Jul 2021 22:17:20 GMT and should not be manually modified.
+This log was last generated on Wed, 04 Aug 2021 18:11:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.2
+
+Wed, 04 Aug 2021 18:11:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.34.2 (lehon@microsoft.com)
+
+## 0.12.1
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- move experimental Text to be written as compressible (jasonmo@microsoft.com)
+
+## 0.12.0
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Minor changes
+
+- radio group on macos (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.34.0 (67026167+chiuam@users.noreply.github.com)
+
+## 0.11.13
+
+Wed, 04 Aug 2021 00:59:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.33.8 (sanajmi@microsoft.com)
+
+## 0.11.12
+
+Tue, 03 Aug 2021 23:48:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.33.7 (jasonmo@microsoft.com)
+
+## 0.11.11
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.33.6 (jasonmo@microsoft.com)
+
+## 0.11.10
+
+Fri, 30 Jul 2021 19:17:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.33.5 (email not defined)
+
+## 0.11.9
+
+Thu, 29 Jul 2021 17:53:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.33.4 (jasonmo@microsoft.com)
 
 ## 0.11.8
 

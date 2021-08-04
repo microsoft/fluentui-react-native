@@ -1,8 +1,72 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Tue, 27 Jul 2021 22:17:20 GMT and should not be manually modified.
+This log was last generated on Wed, 04 Aug 2021 18:11:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.25
+
+Wed, 04 Aug 2021 18:11:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.4.2 (lehon@microsoft.com)
+
+## 0.24.24
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- move experimental Text to be written as compressible (jasonmo@microsoft.com)
+
+## 0.24.23
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Patches
+
+- add comment back (67026167+chiuam@users.noreply.github.com)
+
+## 0.24.22
+
+Wed, 04 Aug 2021 00:59:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.3.0 (sanajmi@microsoft.com)
+
+## 0.24.21
+
+Tue, 03 Aug 2021 23:48:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/separator to v0.10.17 (jasonmo@microsoft.com)
+
+## 0.24.20
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/separator to v0.10.16 (jasonmo@microsoft.com)
+
+## 0.24.19
+
+Fri, 30 Jul 2021 19:17:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.2.17 (email not defined)
+
+## 0.24.18
+
+Thu, 29 Jul 2021 17:53:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/separator to v0.10.15 (jasonmo@microsoft.com)
 
 ## 0.24.17
 
