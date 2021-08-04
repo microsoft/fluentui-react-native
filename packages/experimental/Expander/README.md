@@ -56,7 +56,6 @@ The first child element of Expander will be assigned to the header, and the seco
 - [`collapsedHeight`](#collapsedheight)
 - [`onCollapsing`](#oncollapsing)
 - [`onExpanding`](#onexpanding)
-- [`onChange`](#onchange)
 
 ### Tokens
 
@@ -88,8 +87,7 @@ The first child element of Expander will be assigned to the header, and the seco
 
 ### Important notes
 
-- `collapsedHeight` and `expandedHeight` must be set for Expander to display correctly
-- Do not set the `height` or `onChange` props. These props are used to update the height of Expander, and the Expander height will not update if these props are overridden. If you need to override either of these props, you must add code to change the height of the Expander when it collapses or expands.
+- `collapsedHeight` and `expandedHeight` must be set for Expander to display correctly. There is no need to set the `height` prop.
 - Non-native components within the header will not be interactable (i.e. if there is a `Button` in the header, and you press it, the Expander will expand, and the `Button` functionality will not be performed). We recommend using [react-native-xaml](https://github.com/asklar/react-native-xaml) controls in the header if you would like an interactive control that does not have a native implementation.
 
 ---
@@ -174,16 +172,6 @@ Callback for when the Expander begins to collapse.
 ### `onExpanding`
 
 Callback for when the Expander begins to expand.
-
-| Type     | Required |
-| -------- | -------- |
-| function | No       |
-
----
-
-### `onChange`
-
-Callback for when the Expander either expands or collapses. In order to maintain expand/collapse functionality, do not set this value. Instead, use `onCollapsing` and `onExpanding`.
 
 | Type     | Required |
 | -------- | -------- |

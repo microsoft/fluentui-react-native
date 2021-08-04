@@ -5,13 +5,14 @@
 
 namespace winrt::ReactNativeExpander::implementation {
 
-    class ExpanderViewManager : public winrt::implements<
-        ExpanderViewManager,
-        winrt::Microsoft::ReactNative::IViewManager,
-        winrt::Microsoft::ReactNative::IViewManagerWithReactContext,
-        winrt::Microsoft::ReactNative::IViewManagerWithNativeProperties,
-        winrt::Microsoft::ReactNative::IViewManagerWithExportedEventTypeConstants,
-        winrt::Microsoft::ReactNative::IViewManagerWithChildren> {
+class ExpanderViewManager : public winrt::implements<
+    ExpanderViewManager,
+    winrt::Microsoft::ReactNative::IViewManager,
+    winrt::Microsoft::ReactNative::IViewManagerWithReactContext,
+    winrt::Microsoft::ReactNative::IViewManagerWithNativeProperties,
+    winrt::Microsoft::ReactNative::IViewManagerWithExportedEventTypeConstants,
+    winrt::Microsoft::ReactNative::IViewManagerWithChildren> {
+
     public:
         ExpanderViewManager();
 
@@ -37,12 +38,12 @@ namespace winrt::ReactNativeExpander::implementation {
         winrt::Microsoft::ReactNative::ConstantProviderDelegate ExportedCustomDirectEventTypeConstants() noexcept;
 
         // IViewManagerWithChildren
-        int32_t ReplaceChild(winrt::Windows::UI::Xaml::FrameworkElement const& parent, winrt::Windows::UI::Xaml::UIElement const& oldChild, winrt::Windows::UI::Xaml::UIElement const& newChild) noexcept;
+        void ReplaceChild(winrt::Windows::UI::Xaml::FrameworkElement const& parent, winrt::Windows::UI::Xaml::UIElement const& oldChild, winrt::Windows::UI::Xaml::UIElement const& newChild) noexcept;
         void AddView(winrt::Windows::UI::Xaml::FrameworkElement const& parent, winrt::Windows::UI::Xaml::UIElement const& child, int64_t index) noexcept;
         void RemoveAllChildren(winrt::Windows::UI::Xaml::FrameworkElement const& parent) noexcept;
         void RemoveChildAt(winrt::Windows::UI::Xaml::FrameworkElement const& parent, int64_t index) noexcept;
 
     private:
         winrt::Microsoft::ReactNative::IReactContext m_reactContext{ nullptr };
-    };
+};
 }

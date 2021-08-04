@@ -1,5 +1,4 @@
 import { ColorValue } from 'react-native';
-import type { SyntheticEvent } from 'react-native/Libraries/Types/CoreEventTypes';
 
 export const expanderName = 'Expander';
 
@@ -43,10 +42,6 @@ export interface ExpanderProps {
    * A callback to call on Expander expanding event
    */
   onExpanding?: () => void;
-  /*
-   * A callback to the Expander changing state (expanding or collapsing)
-   */
-  onChange?: (event: any) => void;
 }
 
 export interface ExpanderTokens {
@@ -156,14 +151,6 @@ export type ExpandDirection = 'up' | 'down';
 export type VerticalAlignment = 'bottom' | 'center' | 'stretch' | 'top';
 export type HorizontalAlignment = 'center' | 'left' | 'right' | 'stretch';
 export type ExpanderViewProps = ExpanderProps & ExpanderTokens;
-
-export type ExpanderChangeEvent = SyntheticEvent<
-  Readonly <{
-    nativeEvent: {
-      expanded: boolean
-    },
-  }>
->;
 
 export interface ExpanderType {
   props: ExpanderProps;

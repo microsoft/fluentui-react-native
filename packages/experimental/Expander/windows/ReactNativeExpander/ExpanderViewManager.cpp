@@ -34,7 +34,6 @@ namespace winrt::ReactNativeExpander::implementation {
     IMapView<hstring, ViewManagerPropertyType> ExpanderViewManager::NativeProps() noexcept {
         auto nativeProps = winrt::single_threaded_map<hstring, ViewManagerPropertyType>();
 
-        // TODO: finish updating props when Expander.types are further defined
         nativeProps.Insert(L"expandDirection", ViewManagerPropertyType::String);
         nativeProps.Insert(L"expanded", ViewManagerPropertyType::Boolean);
         nativeProps.Insert(L"enabled", ViewManagerPropertyType::Boolean);
@@ -71,10 +70,10 @@ namespace winrt::ReactNativeExpander::implementation {
     void ExpanderViewManager::UpdateProperties(xaml::FrameworkElement const& view,
         IJSValueReader const& propertyMapReader) noexcept {
         if (auto expanderView = view.try_as<ExpanderView>()) {
-           expanderView->UpdateProperties(propertyMapReader);
+            expanderView->UpdateProperties(propertyMapReader);
         }
         else {
-           OutputDebugStringW(L"Type deduction for ExpanderView failed.");
+            OutputDebugStringW(L"Type deduction for ExpanderView failed.");
         }
     }
 
@@ -85,49 +84,65 @@ namespace winrt::ReactNativeExpander::implementation {
 
     ConstantProviderDelegate ExpanderViewManager::ExportedCustomDirectEventTypeConstants() noexcept {
         return [](winrt::IJSValueWriter const& constantWriter) {
-            WriteCustomDirectEventTypeConstant(constantWriter, "onChange");
             WriteCustomDirectEventTypeConstant(constantWriter, L"Collapsing");
             WriteCustomDirectEventTypeConstant(constantWriter, L"Expanding");
         };
     }
 
     // IViewManagerWithChildren
-    int32_t ExpanderViewManager::ReplaceChild(winrt::Windows::UI::Xaml::FrameworkElement const& parent, winrt::Windows::UI::Xaml::UIElement const& oldChild, winrt::Windows::UI::Xaml::UIElement const& newChild) noexcept {
-        return 0;
+    void ExpanderViewManager::ReplaceChild(winrt::Windows::UI::Xaml::FrameworkElement const& parent, winrt::Windows::UI::Xaml::UIElement const& oldChild, winrt::Windows::UI::Xaml::UIElement const& newChild) noexcept {
+        // This implementation is not complete; still need to test/tweak
+        // auto expander = parent.as<xaml::Controls::ContentPresenter>().Content().as<Microsoft::UI::Xaml::Controls::Expander>();
+
+        // if (oldChild == expander.Header()) {
+        //     expander.ClearValue(Microsoft::UI::Xaml::Controls::Expander::HeaderProperty());
+        //     expander.Header(newChild);
+        // }
+        // else if (oldChild == expander.Content()) {
+        //     expander.ClearValue(xaml::Controls::ContentControl::ContentProperty());
+        //     expander.Content(newChild);
+        // }
     }
 
     void ExpanderViewManager::AddView(winrt::Windows::UI::Xaml::FrameworkElement const& parent, winrt::Windows::UI::Xaml::UIElement const& child, int64_t index) noexcept {
-        auto contentPresenter = parent.try_as<winrt::Windows::UI::Xaml::Controls::ContentPresenter>();
-        auto expanderWrapper = contentPresenter.Content();
-        auto expander = expanderWrapper.try_as<Microsoft::UI::Xaml::Controls::Expander>();
-
-        if (auto content = child.try_as<winrt::Windows::UI::Xaml::FrameworkElement>()) {
-            if (index == 0) {
-                expander.Header(content);
-            }
-            else if (index == 1) {
-                expander.Content(content);
+        auto expander = parent.as<xaml::Controls::ContentPresenter>().Content().as<Microsoft::UI::Xaml::Controls::Expander>();
+        if (index == 0) {
+            if (auto newContent = expander.GetValue(Microsoft::UI::Xaml::Controls::Expander::HeaderProperty())) {
+                expander.Header(child);
+                expander.Content(newContent);
             }
             else {
-                m_reactContext.CallJSFunction(
-                    L"RCTLog",
-                    L"logToConsole",
-                    MakeJSValueArgWriter("warn", "React Native for Windows does not yet support nesting more than two components under <Expander>.\nThe first component will be the Expander header, and the second will be the Expander content."));
+                expander.Header(child);
             }
+        }
+        else if (index == 1) {
+            expander.Content(child);
         }
         else {
             m_reactContext.CallJSFunction(
                 L"RCTLog",
                 L"logToConsole",
-                MakeJSValueArgWriter("warn", "React Native for Windows does not yet support nesting non-FrameworkElement components under <Expander>"));
+                MakeJSValueArgWriter("warn", "React Native for Windows does not support nesting more than two components under <Expander>.\nThe first component will be the Expander header, and the second will be the Expander content."));
         }
     }
 
     void ExpanderViewManager::RemoveAllChildren(winrt::Windows::UI::Xaml::FrameworkElement const& parent) noexcept {
-        return;
+        auto expander = parent.as<xaml::Controls::ContentPresenter>().Content().as<Microsoft::UI::Xaml::Controls::Expander>();
+        expander.ClearValue(xaml::Controls::ContentControl::ContentProperty());
+        expander.ClearValue(Microsoft::UI::Xaml::Controls::Expander::HeaderProperty());
     }
 
     void ExpanderViewManager::RemoveChildAt(winrt::Windows::UI::Xaml::FrameworkElement const& parent, int64_t index) noexcept {
-        return;
+        auto expander = parent.as<xaml::Controls::ContentPresenter>().Content().as<Microsoft::UI::Xaml::Controls::Expander>();
+        if (index == 0) {
+            expander.ClearValue(Microsoft::UI::Xaml::Controls::Expander::HeaderProperty());
+            if (auto newHeader = expander.GetValue(xaml::Controls::ContentControl::ContentProperty())) {
+                expander.ClearValue(xaml::Controls::ContentControl::ContentProperty());
+                expander.Header(newHeader);
+            }
+        }
+        else if (index == 1) {
+            expander.ClearValue(xaml::Controls::ContentControl::ContentProperty());
+        }
     }
 }

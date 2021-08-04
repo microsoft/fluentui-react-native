@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { expanderName, ExpanderType, ExpanderProps, ExpanderViewProps, ExpanderChangeEvent } from './Expander.types';
+import { expanderName, ExpanderType, ExpanderProps, ExpanderViewProps } from './Expander.types';
 import { compose, mergeProps, withSlots, UseSlots, buildProps } from '@fluentui-react-native/framework';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
@@ -22,20 +22,29 @@ export const Expander = compose<ExpanderType>({
     const Root = useSlots(userProps).root;
     const [expandedState, setExpandedState] = React.useState(userProps.expanded);
     const expanderHeight = expandedState? userProps.expandedHeight : userProps.collapsedHeight;
-    async function onExpanderChange(event: ExpanderChangeEvent) {
-      if (event.nativeEvent.expanded != null) {
-        event.persist();
-        if (!event.nativeEvent.expanded) {
-          await delay(175);
-        }
-        setExpandedState(event.nativeEvent.expanded);
+
+    const _onCollapsing = async () => {
+      if (userProps.onCollapsing !== undefined) {
+        userProps.onCollapsing();
+      }
+      // Need to delay the height change so that the animation runs
+      await delay(175);
+      setExpandedState(false);
+    }
+
+    const _onExpanding = () => {
+      setExpandedState(true);
+      if (userProps.onExpanding !== undefined) {
+        userProps.onExpanding();
       }
     }
+
     return (rest: ExpanderViewProps, ...children: React.ReactNode[]) =>
       <Root
+        {...mergeProps(userProps, rest)}
         height={expanderHeight}
-        onChange={onExpanderChange}
-        {...mergeProps(userProps, rest)}>{children}
+        onCollapsing={_onCollapsing}
+        onExpanding={_onExpanding}>{children}
       </Root>;
   },
 });
