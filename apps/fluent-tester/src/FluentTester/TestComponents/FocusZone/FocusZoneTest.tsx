@@ -80,29 +80,37 @@ const commonUsageFocusZone: React.FunctionComponent = () => {
 };
 
 const navigation2DFocusZone: React.FunctionComponent = () => {
-  const buttonRef = React.useRef<View>(null);
+  const buttonRefs = [];
+  const onClicks = [];
+  const [defaultTabbableElementIndex, setDefaultTabbableElementIndex] = React.useState<number>(5);
+
+  for (let i = 0; i <= 9; i++) {
+    buttonRefs.push(i == 0 ? undefined : React.useRef<View>(null));
+    onClicks.push(React.useCallback(() => { setDefaultTabbableElementIndex(i); }, [setDefaultTabbableElementIndex]));
+  }
 
   return (
     <View>
       <View>
         <Button content="Outside FocusZone" />
+        <Button content="Clear default tabble element" onClick={onClicks[0]} />
       </View>
-      <FocusZone use2DNavigation={true} defaultTabbableElement={buttonRef} isCircularNavigation={true}>
+      <FocusZone use2DNavigation={true} defaultTabbableElement={buttonRefs[defaultTabbableElementIndex]} isCircularNavigation={true}>
         <View style={focusZoneTestStyles.focusZoneContainer}>
           <View style={focusZoneTestStyles.focusZoneViewStyle}>
-            <Button content="#1" style={focusZoneTestStyles.focusZoneButton} />
-            <Button content="#2" style={focusZoneTestStyles.focusZoneButton} />
-            <Button content="#3" style={focusZoneTestStyles.focusZoneButton} />
+            <Button content="#1" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[1]} onClick={onClicks[1]} />
+            <Button content="#2" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[2]} onClick={onClicks[2]} />
+            <Button content="#3" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[3]} onClick={onClicks[3]} />
           </View>
           <View style={focusZoneTestStyles.focusZoneViewStyle}>
-            <Button content="#4" style={focusZoneTestStyles.focusZoneButton} />
-            <Button content="#5" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRef} />
-            <Button content="#6" style={focusZoneTestStyles.focusZoneButton} />
+            <Button content="#4" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[4]} onClick={onClicks[4]} />
+            <Button content="#5" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[5]} onClick={onClicks[5]} />
+            <Button content="#6" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[6]} onClick={onClicks[6]} />
           </View>
           <View style={focusZoneTestStyles.focusZoneViewStyle}>
-            <Button content="#7" style={focusZoneTestStyles.focusZoneButton} />
-            <Button content="#8" style={focusZoneTestStyles.focusZoneButton} />
-            <Button content="#9" style={focusZoneTestStyles.focusZoneButton} />
+            <Button content="#7" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[7]} onClick={onClicks[7]} />
+            <Button content="#8" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[8]} onClick={onClicks[8]} />
+            <Button content="#9" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[9]} onClick={onClicks[9]} />
           </View>
         </View>
       </FocusZone>
