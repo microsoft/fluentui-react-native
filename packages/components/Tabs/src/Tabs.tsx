@@ -86,7 +86,7 @@ export const Tabs = compose<TabsType>({
 
     const ariaRoles = {
       accessibilityRole: 'tablist',
-      accessibilityLabel: ariaLabel || label,
+      accessibilityLabel: ariaLabel || label || 'tabslist',
     };
 
     // Makes tabs store its width, this is helpful for making decisions about overflow
@@ -95,7 +95,7 @@ export const Tabs = compose<TabsType>({
     }
 
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
-      root: { rest, ref: componentRef, ...ariaRoles, onLayout: (event)=>{updateLayoutWidth(event.nativeEvent.layout)}},
+      root: { rest, accessible: true, ref: componentRef, ...ariaRoles, onLayout: (event)=>{updateLayoutWidth(event.nativeEvent.layout)}},
       label: { children: label },
       container: Platform.OS !== 'windows' ? { isCircularNavigation: true, defaultTabbableElement: selectedTabsItemRef } : null,
     });

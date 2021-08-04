@@ -77,7 +77,7 @@ export const TabsItem = compose<TabsItemType>({
       }
     }, []);
 
-    const buttonRef = componentRef;
+    // const buttonRef = componentRef;
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
     const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
@@ -100,7 +100,8 @@ export const TabsItem = compose<TabsItemType>({
       root: {
         ...rest,
         ...pressable.props,
-        ref: buttonRef,
+        accessible: true,
+        ref: componentRef,
         onAccessibilityTap: onAccessibilityTap,
         accessibilityRole: 'tab',
         accessibilityLabel: accessibilityLabel,
