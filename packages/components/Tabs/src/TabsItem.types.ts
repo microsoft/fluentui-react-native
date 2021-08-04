@@ -11,12 +11,6 @@ export const tabsItemName = 'TabsItem';
 
 export interface TabsItemInfo extends IPressableState {
   /**
-   * Disables the TabsItem.
-   * @default false
-   */
-  disabled?: boolean;
-
-  /**
    * TabsItem icon.
    */
   icon?: boolean;
