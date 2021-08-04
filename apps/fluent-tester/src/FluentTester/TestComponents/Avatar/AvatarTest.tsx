@@ -43,7 +43,7 @@ export const BasicAvatar: React.FunctionComponent = () => {
   );
 };
 
-export const CustomizeColors: React.FunctionComponent<{}> = () => {
+export const CustomizeColors: React.FunctionComponent = () => {
   const [showCustomRingColor, setShowCustomRingColor] = React.useState(false);
   const [showCustomForeground, setShowCustomForeground] = React.useState(false);
   const [showCustomBackground, setShowCustomBackground] = React.useState(false);
@@ -91,7 +91,7 @@ export const CustomizeColors: React.FunctionComponent<{}> = () => {
   );
 };
 
-const AvatarSizeRamp: React.FunctionComponent<{}> = () => {
+const AvatarSizeRamp: React.FunctionComponent = () => {
   const allSizes: Size[] = ['xSmall', 'small', 'medium', 'large', 'xLarge', 'xxLarge'];
 
   return (
