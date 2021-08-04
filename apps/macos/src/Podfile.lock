@@ -316,7 +316,7 @@ PODS:
     - React-Core (= 0.63.36)
     - React-cxxreact (= 0.63.36)
     - React-jsi (= 0.63.36)
-  - ReactTestApp-DevSupport (0.6.3)
+  - ReactTestApp-DevSupport (0.6.12)
   - ReactTestApp-Resources (1.0.0-dev)
   - RNCPicker (1.9.11):
     - React-Core
@@ -474,13 +474,14 @@ SPEC CHECKSUMS:
   React-RCTText: b5613f3b26ce07497fbcb0f4c8496c1c4fcb3405
   React-RCTVibration: e5464e5e9dd67b4f5c6983046be2e941708343f8
   ReactCommon: 85b3897abcb25a478b26cda3154a51fb56f405d2
-  ReactTestApp-DevSupport: 9f0b81965c46840c5410ccc4e7f5a4d6cd224ece
+  ReactTestApp-DevSupport: 6464c326eccaa285191eb394b2b18d0663e40e10
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
   RNCPicker: 6780c753e9e674065db90d9c965920516402579d
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Yoga: f2da5366fe2be821a64c84a2e455042eab763cf5
 
-PODFILE CHECKSUM: e70ce6d1a8a1c64c18f6215721e9c3a7150accf2
+PODFILE CHECKSUM: a71337fd6df579c22ae17c48d85b9f981ac8c11e
+
 
 COCOAPODS: 1.10.1
