@@ -52,7 +52,7 @@ const nativeRadioGroup: React.FunctionComponent<{}> = () => {
   return (
     <View>
       <RadioGroup label="RadioGroup 1">
-        <NativeRadioButton title="Option A" isSelected={true} onPress={() => alert('Option A pressed')} buttonKey="A" />
+        <NativeRadioButton title="Option A" selected={true} onPress={() => alert('Option A pressed')} buttonKey="A" />
         <NativeRadioButton title="Option B" buttonKey="B" />
         <NativeRadioButton title="Option C (disabled)" enabled={false} style={{ width: 150 }} buttonKey="C" />
         <NativeRadioButton title="Option D" buttonKey="D" />
@@ -60,7 +60,7 @@ const nativeRadioGroup: React.FunctionComponent<{}> = () => {
       <Separator />
       <RadioGroup label="RadioGroup 2">
         <NativeRadioButton title="Option A" buttonKey="A" />
-        <NativeRadioButton title="Option B" isSelected={true} onPress={() => alert('Option B pressed')} buttonKey="B" />
+        <NativeRadioButton title="Option B" selected={true} onPress={() => alert('Option B pressed')} buttonKey="B" />
         <NativeRadioButton title="Option C (disabled)" enabled={false} style={{ width: 150 }} buttonKey="C" />
         <NativeRadioButton title="Option D" buttonKey="D" />
       </RadioGroup>

@@ -6,9 +6,11 @@
 RCT_EXPORT_VIEW_PROPERTY(title, NSString);
 RCT_EXPORT_VIEW_PROPERTY(enabled, BOOL);
 RCT_REMAP_VIEW_PROPERTY(buttonKey, keyEquivalent, NSString)
-RCT_CUSTOM_VIEW_PROPERTY(isSelected, BOOL, NSButton) {
+RCT_CUSTOM_VIEW_PROPERTY(selected, BOOL, NSButton) {
 	if ([[RCTConvert NSNumber:json] isEqualToNumber:[NSNumber numberWithBool:YES]]) {
 		[view setState:NSControlStateValueOn];
+	} else {
+		[view setState:NSControlStateValueOff];
 	}
 }
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock);

@@ -10,7 +10,7 @@ const NativeRadioButtonView = ensureNativeComponent('RadioButtonView');
 
 export type NativeRadioButtonProps = {
   /**
-   * Radio button title, default title is set to "Button".
+   * Radio button title.
    */
   title?: string;
   /**
@@ -20,7 +20,7 @@ export type NativeRadioButtonProps = {
   /**
    * Whether the radio button is selected or not, false by default.
    */
-  isSelected?: boolean;
+  selected?: boolean;
   /**
    * Unique identifier for each radio button.
    */
@@ -52,10 +52,11 @@ export const NativeRadioButton = compose<NativeRadioButtonType>({
   ],
   slots: { root: NativeRadioButtonView },
   slotProps: {
-    root: buildProps((tokens) => ({
+    root: buildProps(tokens => ({
       style: {
-        marginLeft: 4, // Fluent design on macOS
-        marginTop: 4, // Fluent design on macOS
+        // Fluent controls are designed to snap to a 4 px grid
+        marginLeft: 4,
+        marginTop: 4,
         minWidth: tokens.minWidth,
         minHeight: tokens.minHeight,
       },
