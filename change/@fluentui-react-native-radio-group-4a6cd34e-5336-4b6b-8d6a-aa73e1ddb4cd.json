@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix usage of conditional hooks",
+  "packageName": "@fluentui-react-native/radio-group",
+  "email": "nakambo@microsoft.com",
+  "dependentChangeType": "patch"
+}
