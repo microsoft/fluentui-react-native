@@ -1,8 +1,42 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Fri, 30 Jul 2021 19:17:43 GMT and should not be manually modified.
+This log was last generated on Wed, 04 Aug 2021 06:26:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.0
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Minor changes
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.6.8 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/text to v0.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @uifabricshared/foundation-compose to v1.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @uifabricshared/foundation-settings to v0.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @uifabricshared/foundation-composable to v0.9.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.23 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/tokens to v0.9.13 (67026167+chiuam@users.noreply.github.com)
+
+## 0.12.24
+
+Tue, 03 Aug 2021 23:48:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.22 (jasonmo@microsoft.com)
+
+## 0.12.23
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.21 (jasonmo@microsoft.com)
 
 ## 0.12.22
 

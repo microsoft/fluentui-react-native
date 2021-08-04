@@ -2,6 +2,47 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Wed, 04 Aug 2021 06:26:25 GMT",
+      "tag": "@fluentui-react-native/text_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "radio group on macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/text"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/adapters to v0.6.8",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/text"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.0",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/text"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/test-tools to v0.1.1",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/text"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.13",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/text"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Jul 2021 06:26:34 GMT",
       "tag": "@fluentui-react-native/text_v0.9.16",
       "version": "0.9.16",

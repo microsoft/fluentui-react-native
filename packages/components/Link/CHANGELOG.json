@@ -2,6 +2,95 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Wed, 04 Aug 2021 06:26:25 GMT",
+      "tag": "@fluentui-react-native/link_v0.13.0",
+      "version": "0.13.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "radio group on macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/link"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/adapters to v0.6.8",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/link"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/text to v0.10.0",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/link"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.0",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/link"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-settings to v0.10.0",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/link"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-composable to v0.9.0",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/link"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.23",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/link"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.13",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 03 Aug 2021 23:48:50 GMT",
+      "tag": "@fluentui-react-native/link_v0.12.24",
+      "version": "0.12.24",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.22",
+            "author": "jasonmo@microsoft.com",
+            "commit": "69771570b94318ba208eb327d1edf15b5db0ec49",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 03 Aug 2021 22:33:17 GMT",
+      "tag": "@fluentui-react-native/link_v0.12.23",
+      "version": "0.12.23",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.21",
+            "author": "jasonmo@microsoft.com",
+            "commit": "317097b2f51d04d33bfc2b14b2850a2774e0acbc",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Jul 2021 19:17:43 GMT",
       "tag": "@fluentui-react-native/link_v0.12.22",
       "version": "0.12.22",

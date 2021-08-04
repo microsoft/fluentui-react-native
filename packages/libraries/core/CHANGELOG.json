@@ -2,6 +2,66 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Wed, 04 Aug 2021 06:26:25 GMT",
+      "tag": "@fluentui/react-native_v0.24.23",
+      "version": "0.24.23",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add comment back",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 Aug 2021 00:59:42 GMT",
+      "tag": "@fluentui/react-native_v0.24.22",
+      "version": "0.24.22",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.3.0",
+            "author": "sanajmi@microsoft.com",
+            "commit": "b3ba12a5678b2aad94fbc0ecf6fa67bb8b3779a5",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 03 Aug 2021 23:48:50 GMT",
+      "tag": "@fluentui/react-native_v0.24.21",
+      "version": "0.24.21",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/separator to v0.10.17",
+            "author": "jasonmo@microsoft.com",
+            "commit": "69771570b94318ba208eb327d1edf15b5db0ec49",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 03 Aug 2021 22:33:17 GMT",
+      "tag": "@fluentui/react-native_v0.24.20",
+      "version": "0.24.20",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/separator to v0.10.16",
+            "author": "jasonmo@microsoft.com",
+            "commit": "317097b2f51d04d33bfc2b14b2850a2774e0acbc",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Jul 2021 19:17:43 GMT",
       "tag": "@fluentui/react-native_v0.24.19",
       "version": "0.24.19",
