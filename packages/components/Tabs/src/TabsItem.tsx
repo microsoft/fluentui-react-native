@@ -11,13 +11,7 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { TabsContext } from './Tabs';
 import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemRenderData, TabsItemState } from './TabsItem.types';
-import {
-  useAsPressable,
-  useKeyCallback,
-  useViewCommandFocus,
-  createIconProps,
-  useOnPressWithFocus,
-} from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyCallback, createIconProps, useOnPressWithFocus } from '@fluentui-react-native/interactive-hooks';
 
 export const TabsItem = compose<TabsItemType>({
   displayName: tabsItemName,
@@ -45,6 +39,7 @@ export const TabsItem = compose<TabsItemType>({
         info.onTabsClick && info.onTabsClick(itemKey);
         info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
         info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
+        console.log('ref');
       }
     };
 

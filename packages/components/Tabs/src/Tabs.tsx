@@ -74,6 +74,7 @@ export const Tabs = compose<TabsType>({
         getTabId: onChangeTabId,
         updateSelectedTabsItemRef: onSelectTabsItemRef,
         views: map,
+        width: 0
       },
       info: {
         headersOnly: headersOnly ?? false,
@@ -88,8 +89,13 @@ export const Tabs = compose<TabsType>({
       accessibilityLabel: ariaLabel || label,
     };
 
+    // Makes tabs store its width, this is helpful for making decisions about overflow
+    const updateLayoutWidth = (viewLayout) => {
+      state.context.width = viewLayout.width;
+    }
+
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
-      root: { rest, ref: componentRef, ...ariaRoles },
+      root: { rest, ref: componentRef, ...ariaRoles, onLayout: (event)=>{updateLayoutWidth(event.nativeEvent.layout)}},
       label: { children: label },
       container: Platform.OS !== 'windows' ? { isCircularNavigation: true, defaultTabbableElement: selectedTabsItemRef } : null,
     });
