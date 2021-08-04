@@ -36,6 +36,11 @@ export interface ITabsContext {
   tabsItemKeys?: string[];
 
   /*
+   ** Array of disabled keys in the group
+   */
+  disabledKeys?: boolean[];
+
+  /*
    ** A Map to for a TabItems corresponding view
    */
   views?: Map<string, React.ReactNode[]> | null;

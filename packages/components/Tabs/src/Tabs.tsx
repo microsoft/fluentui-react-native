@@ -27,6 +27,8 @@ export const TabsContext = React.createContext<ITabsContext>({
   },
   tabsItemKeys: [],
 
+  disabledKeys: [],
+
   views: null,
 
   focusZoneRef: null,
@@ -44,7 +46,7 @@ export const Tabs = compose<TabsType>({
       defaultSelectedKey,
       getTabId,
       componentRef = React.useRef(null),
-      isCircularNavigation,
+      isCircularNavigation = false,
       ...rest
     } = userProps;
 
@@ -92,17 +94,28 @@ export const Tabs = compose<TabsType>({
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
     const onKeyDown = (ev: IKeyboardEvent) => {
-      const length = state.context.tabsItemKeys.length;
-      const currTabItemIndex = state.context.tabsItemKeys.findIndex(x => x == state.context.selectedKey)
-      if (ev.nativeEvent.key === 'ArrowRight') {
-        const newCurrTabItemIndex = (currTabItemIndex + 1) % length;
-        state.context.selectedKey = state.context.tabsItemKeys[newCurrTabItemIndex]
-        data.onKeySelect(state.context.selectedKey)
-      }
-      if (ev.nativeEvent.key === 'ArrowLeft') {
-        const newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
-        state.context.selectedKey = state.context.tabsItemKeys[newCurrTabItemIndex]
-        data.onKeySelect(state.context.selectedKey)
+      if (ev.nativeEvent.key === 'ArrowRight' || ev.nativeEvent.key === 'ArrowLeft') {
+        const length = state.context.tabsItemKeys.length;
+        const currTabItemIndex = state.context.tabsItemKeys.findIndex(x => x == state.context.selectedKey)
+        let newCurrTabItemIndex;
+        if (ev.nativeEvent.key === 'ArrowRight') {
+          if (!(!isCircularNavigation && currTabItemIndex + 1 == length)) {
+            newCurrTabItemIndex = (currTabItemIndex + 1) % length;
+            state.context.selectedKey = state.context.tabsItemKeys[newCurrTabItemIndex];
+            data.onKeySelect(state.context.selectedKey);
+          }
+        }
+        if (ev.nativeEvent.key === 'ArrowLeft') {
+          if (!(!isCircularNavigation && currTabItemIndex == 0)) {
+            newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
+            state.context.selectedKey = state.context.tabsItemKeys[newCurrTabItemIndex];
+            data.onKeySelect(state.context.selectedKey);
+          }
+        }
+        console.log(state.context.tabsItemKeys);
+        console.log(state.context.disabledKeys);
+        console.log(newCurrTabItemIndex);
+        console.log(!!state.context.disabledKeys[newCurrTabItemIndex]);
       }
     };
 
@@ -137,6 +150,13 @@ export const Tabs = compose<TabsType>({
             renderData.state.context.selectedKey = child.props.itemKey;
           }
           return child.props.itemKey;
+        }
+      });
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore - TODO, fix typing error
+      renderData.state.context.disabledKeys = React.Children.map(children, (child: React.ReactChild) => {
+        if (React.isValidElement(child)) {
+          return child.props.disabled ?? false;
         }
       });
     }
