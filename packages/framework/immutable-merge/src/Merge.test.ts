@@ -133,7 +133,7 @@ const singleWithChanges = {
 
 const _colorKey = 'color';
 
-const changeMeHandler = (...objs: (object | undefined)[]) => {
+const changeMeHandler = (...objs: (Record<string, unknown> | undefined)[]) => {
   // written always assuming only one entry
   if (objs.length === 1) {
     const firstObj = objs[0]!;

@@ -5,7 +5,7 @@ import { Text } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 import type { IKeyboardEvent, IHandledKeyboardEvent } from '@office-iss/react-native-win32';
 
-export const PressableUsage: React.FunctionComponent<{}> = () => {
+export const PressableUsage: React.FunctionComponent = () => {
   const _onPress = (): void => {
     Linking.openURL('https://www.microsoft.com');
   };

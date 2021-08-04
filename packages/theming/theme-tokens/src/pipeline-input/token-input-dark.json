@@ -4,76 +4,17 @@
     "FluentUITokensVersion": 0
   },
   "Set": {
-    "Borderless": {
-      "Stroke": {
-        "Color": {
-          "Rest": { "value": "transparent" },
-          "Hover": { "value": "transparent" },
-          "Pressed": { "value": "transparent" },
-          "Disabled": { "value": "transparent" }
-        },
-        "Width": { "aliasOf": "Global.Stroke.Width.Thin" },
-        "Alignment": { "value": "inner" }
-      }
-    },
-    "TransparentBackground": {
-      "Fill": {
-        "Color": {
-          "Rest": { "value": "transparent" },
-          "Hover": { "value": "transparent" },
-          "Pressed": { "value": "transparent" },
-          "Disabled": { "value": "transparent" }
-        }
-      }
-    },
-    "TransparentBackgroundSelected": { "aliasOf": "Set.TransparentBackground" },
-    "SubtleBackground": {
-      "Fill": {
-        "Color": {
-          "Rest": { "value": "transparent" },
-          "Hover": { "aliasOf": "Global.Color.Grey.22" },
-          "Pressed": { "aliasOf": "Global.Color.Grey.18" },
-          "Disabled": { "value": "transparent" }
-        }
-      }
-    },
-    "SubtleBackgroundSelected": { "aliasOf": "Set.SubtleBackground" },
-
     "NeutralForeground1": {
       "Fill": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.100" },
-          "Hover": { "aliasOf": "Global.Color.Grey.100" },
-          "Pressed": { "aliasOf": "Global.Color.Grey.100" },
+          "Rest": { "aliasOf": "Global.Color.White" },
+          "Hover": { "aliasOf": "Global.Color.White" },
+          "Pressed": { "aliasOf": "Global.Color.White" },
           "Disabled": { "aliasOf": "Global.Color.Grey.36" }
         }
       }
     },
     "NeutralForeground1Selected": { "aliasOf": "Set.NeutralForeground1" },
-    "NeutralBackground1": {
-      "Fill": {
-        "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.16" },
-          "Hover": { "aliasOf": "Global.Color.Grey.24" },
-          "Pressed": { "aliasOf": "Global.Color.Grey.12" },
-          "Disabled": { "aliasOf": "Global.Color.Grey.8" }
-        }
-      }
-    },
-    "NeutralBackground1Selected": { "aliasOf": "Set.NeutralBackground1" },
-    "NeutralStroke1": {
-      "Stroke": {
-        "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.40" },
-          "Hover": { "aliasOf": "Global.Color.Grey.46" },
-          "Pressed": { "aliasOf": "Global.Color.Grey.42" },
-          "Disabled": { "aliasOf": "Global.Color.Grey.26" }
-        },
-        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
-      }
-    },
-    "NeutralStroke1Selected": { "aliasOf": "Set.NeutralStroke1" },
-
     "NeutralForeground2": {
       "Fill": {
         "Color": {
@@ -88,7 +29,7 @@
     "NeutralForeground2Brand": {
       "Fill": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.84" },
+          "Rest": { "aliasOf": "Global.Color.Grey.26" },
           "Hover": { "aliasOf": "Global.Color.Brand.Tint.20" },
           "Pressed": { "aliasOf": "Global.Color.Brand.Tint.10" },
           "Disabled": { "aliasOf": "Global.Color.Grey.36" }
@@ -96,6 +37,130 @@
       }
     },
     "NeutralForeground2BrandSelected": { "aliasOf": "Set.NeutralForeground2Brand" },
+    "NeutralForeground3": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.68" },
+          "Hover": { "aliasOf": "Global.Color.Grey.84" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.84" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.36" }
+        }
+      }
+    },
+    "NeutralForeground3Selected": { "aliasOf": "Set.NeutralForeground3" },
+    "NeutralForeground3Brand": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.68" },
+          "Hover": { "aliasOf": "Global.Color.Brand.Tint.20" },
+          "Pressed": { "aliasOf": "Global.Color.Brand.Tint.10" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.36" }
+        }
+      }
+    },
+    "NeutralForeground3BrandSelected": { "aliasOf": "Set.NeutralForeground3Brand" },
+    "NeutralForeground4": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.60" },
+          "Hover": { "aliasOf": "Global.Color.Grey.60" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.60" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.36" }
+        }
+      }
+    },
+    "NeutralForeground4Selected": { "aliasOf": "Set.NeutralForeground4" },
+
+    "BrandForegroundLink": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Brand.Tint.10" },
+          "Hover": { "aliasOf": "Global.Color.Brand.Tint.30" },
+          "Pressed": { "aliasOf": "Global.Color.Brand.Tint.20" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.36" }
+        }
+      }
+    },
+    "BrandForegroundLinkSelected": { "aliasOf": "Set.BrandForegroundLink" },
+    "CompoundBrandForeground1": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Brand.Tint.10" },
+          "Hover": { "aliasOf": "Global.Color.Brand.Tint.20" },
+          "Pressed": { "aliasOf": "Global.Color.Brand.Primary" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.36" }
+        }
+      }
+    },
+    "CompoundBrandForeground1Selected": { "aliasOf": "Set.CompoundBrandForeground1" },
+    "BrandForeground1": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Brand.Tint.20" },
+          "Hover": { "aliasOf": "Global.Color.Brand.Tint.20" },
+          "Pressed": { "aliasOf": "Global.Color.Brand.Tint.20" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.36" }
+        }
+      }
+    },
+    "BrandForeground1Selected": { "aliasOf": "Set.BrandForeground1" },
+    "BrandForeground2": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Brand.Tint.30" },
+          "Hover": { "aliasOf": "Global.Color.Brand.Tint.30" },
+          "Pressed": { "aliasOf": "Global.Color.Brand.Tint.30" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.36" }
+        }
+      }
+    },
+    "BrandForeground2Selected": { "aliasOf": "Set.BrandForeground2" },
+
+    "NeutralForegroundInverted": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.14" },
+          "Hover": { "aliasOf": "Global.Color.Grey.14" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.14" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.36" }
+        }
+      }
+    },
+    "NeutralForegroundInvertedSelected": { "aliasOf": "Set.NeutralForegroundInverted" },
+    "NeutralForegroundOnBrand": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.White" },
+          "Hover": { "aliasOf": "Global.Color.White" },
+          "Pressed": { "aliasOf": "Global.Color.White" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.36" }
+        }
+      }
+    },
+    "NeutralForegroundOnBrandSelected": { "aliasOf": "Set.NeutralForegroundOnBrand" },
+    "NeutralForegroundInvertedLink": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.White" },
+          "Hover": { "aliasOf": "Global.Color.White" },
+          "Pressed": { "aliasOf": "Global.Color.White" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.36" }
+        }
+      }
+    },
+    "NeutralForegroundInvertedLinkSelected": { "aliasOf": "Set.NeutralForegroundInvertedLink" },
+
+    "NeutralBackground1": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.16" },
+          "Hover": { "aliasOf": "Global.Color.Grey.24" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.12" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.8" }
+        }
+      }
+    },
+    "NeutralBackground1Selected": { "aliasOf": "Set.NeutralBackground1" },
     "NeutralBackground2": {
       "Fill": {
         "Color": {
@@ -107,6 +172,130 @@
       }
     },
     "NeutralBackground2Selected": { "aliasOf": "Set.NeutralBackground2" },
+    "NeutralBackground3": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.8" },
+          "Hover": { "aliasOf": "Global.Color.Grey.16" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.4" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.8" }
+        }
+      }
+    },
+    "NeutralBackground3Selected": { "aliasOf": "Set.NeutralBackground3" },
+    "NeutralBackground4": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.4" },
+          "Hover": { "aliasOf": "Global.Color.Grey.12" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.0" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.8" }
+        }
+      }
+    },
+    "NeutralBackground4Selected": { "aliasOf": "Set.NeutralBackground4" },
+    "NeutralBackground5": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.0" },
+          "Hover": { "aliasOf": "Global.Color.Grey.8" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.2" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.8" }
+        }
+      }
+    },
+    "NeutralBackground5Selected": { "aliasOf": "Set.NeutralBackground5" },
+    "NeutralBackground6": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.20" },
+          "Hover": { "aliasOf": "Global.Color.Grey.20" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.20" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.8" }
+        }
+      }
+    },
+    "NeutralBackground6Selected": { "aliasOf": "Set.NeutralBackground6" },
+    "NeutralBackgroundInverted": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.White" },
+          "Hover": { "aliasOf": "Global.Color.White" },
+          "Pressed": { "aliasOf": "Global.Color.White" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.8" }
+        }
+      }
+    },
+    "NeutralBackgroundInvertedSelected": { "aliasOf": "Set.NeutralBackgroundInverted" },
+    "SubtleBackground": {
+      "Fill": {
+        "Color": {
+          "Rest": { "value": "transparent" },
+          "Hover": { "aliasOf": "Global.Color.Grey.22" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.18" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.8" }
+        }
+      }
+    },
+    "SubtleBackgroundSelected": { "aliasOf": "Set.SubtleBackground" },
+    "TransparentBackground": {
+      "Fill": {
+        "Color": {
+          "Rest": { "value": "transparent" },
+          "Hover": { "value": "transparent" },
+          "Pressed": { "value": "transparent" },
+          "Disabled": { "value": "transparent" }
+        }
+      }
+    },
+    "TransparentBackgroundSelected": { "aliasOf": "Set.TransparentBackground" },
+    "BrandBackground": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Brand.Shade.10" },
+          "Hover": { "aliasOf": "Global.Color.Brand.Primary" },
+          "Pressed": { "aliasOf": "Global.Color.Brand.Shade.40" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.94" }
+        }
+      }
+    },
+    "BrandBackgroundSelected": { "aliasOf": "Set.BrandBackground" },
+    "CompoundBrandBackground1": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Brand.Tint.10" },
+          "Hover": { "aliasOf": "Global.Color.Brand.Tint.20" },
+          "Pressed": { "aliasOf": "Global.Color.Brand.Primary" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.94" }
+        }
+      }
+    },
+    "CompoundBrandBackground1Selected": { "aliasOf": "Set.CompoundBrandBackground1" },
+
+    "NeutralStrokeAccessible": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.68" },
+          "Hover": { "aliasOf": "Global.Color.Grey.74" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.70" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.26" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
+      }
+    },
+    "NeutralStrokeAccessibleSelected": { "aliasOf": "Set.NeutralStrokeAccessible" },
+    "NeutralStroke1": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.40" },
+          "Hover": { "aliasOf": "Global.Color.Grey.46" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.42" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.26" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
+      }
+    },
+    "NeutralStroke1Selected": { "aliasOf": "Set.NeutralStroke1" },
     "NeutralStroke2": {
       "Stroke": {
         "Color": {
@@ -119,27 +308,65 @@
       }
     },
     "NeutralStroke2Selected": { "aliasOf": "Set.NeutralStroke2" },
-    "NeutralForegroundInverted": {
-      "Fill": {
+    "NeutralStroke3": {
+      "Stroke": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.14" },
-          "Hover": { "aliasOf": "Global.Color.Grey.14" },
-          "Pressed": { "aliasOf": "Global.Color.Grey.14" },
-          "Disabled": { "aliasOf": "Global.Color.Grey.14" }
-        }
+          "Rest": { "aliasOf": "Global.Color.Grey.24" },
+          "Hover": { "aliasOf": "Global.Color.Grey.24" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.24" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.26" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
       }
     },
-    "NeutralForegroundInvertedSelected": { "aliasOf": "Set.NeutralForegroundInverted" },
-    "BrandBackground": {
-      "Fill": {
+    "NeutralStroke3Selected": { "aliasOf": "Set.NeutralStroke3" },
+    "BrandStroke1": {
+      "Stroke": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.Brand.Shade.10" },
-          "Hover": { "aliasOf": "Global.Color.Brand.Primary" },
-          "Pressed": { "aliasOf": "Global.Color.Brand.Shade.40" },
-          "Disabled": { "aliasOf": "Global.Color.Grey.8" }
-        }
+          "Rest": { "aliasOf": "Global.Color.Brand.Tint.10" },
+          "Hover": { "aliasOf": "Global.Color.Brand.Tint.10" },
+          "Pressed": { "aliasOf": "Global.Color.Brand.Tint.10" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.26" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
       }
     },
-    "BrandBackgroundSelected": { "aliasOf": "Set.BrandBackground" }
+    "BrandStroke1Selected": { "aliasOf": "Set.BrandStroke1" },
+    "BrandStroke2": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Brand.Shade.30" },
+          "Hover": { "aliasOf": "Global.Color.Brand.Shade.30" },
+          "Pressed": { "aliasOf": "Global.Color.Brand.Shade.30" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.26" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
+      }
+    },
+    "BrandStroke2Selected": { "aliasOf": "Set.BrandStroke2" },
+    "CompoundBrandStroke1": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Brand.Tint.10" },
+          "Hover": { "aliasOf": "Global.Color.Brand.Tint.20" },
+          "Pressed": { "aliasOf": "Global.Color.Brand.Primary" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.26" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
+      }
+    },
+    "CompoundBrandStroke1Selected": { "aliasOf": "Set.CompoundBrandStroke1" },
+    "TransparentStroke": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "value": "transparent" },
+          "Hover": { "value": "transparent" },
+          "Pressed": { "value": "transparent" },
+          "Disabled": { "value": "transparent" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" },
+        "Alignment": { "value": "inner" }
+      }
+    }
   }
 }
