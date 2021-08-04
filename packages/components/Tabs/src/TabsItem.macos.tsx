@@ -111,6 +111,7 @@ export const TabsItem = compose<TabsItemType>({
         accessibilitySetSize: info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUp,
+        focusable: !state.info.disabled
       },
       content: { children: headerText + countText, testID: testID },
       icon: createIconProps(icon),

@@ -32,7 +32,7 @@ const disabledTabs: React.FunctionComponent = () => {
         <TabsItem headerText="Home" itemKey="A">
           <Text>Tabs #1</Text>
         </TabsItem>
-        <TabsItem headerText="Files" itemKey="B" disabled={true}>
+        <TabsItem headerText="Files" itemKey="B" disabled={true} focusable={true}>
           <Text>Tabs #2</Text>
         </TabsItem>
         <TabsItem headerText="Settings" itemKey="C">
