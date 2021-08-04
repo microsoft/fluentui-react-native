@@ -1,3 +1,5 @@
+<!-- Present as a reference for the path generation algorithm used by Shimmer.win32 -->
+
 <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" version="1.1" >
 
 	<path d="M 100 80  h 240 a 0 0 0 0 1 0 0 v 120 a 0 0 0 0 1 0 0 h -240 a 0 0 0 0 1 0 0 v -120 a 0 0 0 0 1 0 0 Z"

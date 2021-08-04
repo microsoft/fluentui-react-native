@@ -1,13 +1,20 @@
-// import { SvgProps, ImageProps } from 'react-native-svg';
 import { ViewProps } from 'react-native';
-import { SvgProps } from 'react-native-svg';
 import { ShimmerProps, ShimmerTokens } from './Shimmer.types';
+
+export interface ClippingMaskProps extends ShimmerTokens {
+  /**
+   * Extra parameter necessary to provide the mask effect generated from the provided ShimmerElements.
+   *
+   * @defaultValue null
+   */
+  clipPath?: string;
+}
 
 export interface ShimmerSlotProps extends ShimmerProps {
   root: ViewProps;
-  clippingMask: ShimmerTokens & SvgProps;
+  clippingMask: ClippingMaskProps;
   shimmerWave: ShimmerTokens;
-  shimmerWaveContainer: ShimmerTokens & ViewProps;
+  shimmerWaveContainer: ShimmerTokens;
 }
 
 export interface ShimmerType {

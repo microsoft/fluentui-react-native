@@ -1,6 +1,6 @@
 import { SvgProps } from 'react-native-svg';
 import { ColorValue, ViewProps } from 'react-native';
-import { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import { IBackgroundColorTokens } from '@fluentui-react-native/tokens';
 
 export const shimmerName = 'Shimmer';
 
@@ -96,10 +96,10 @@ export interface ShimmerRectElement {
   y: number;
 }
 
-export interface ShimmerTokens extends IBackgroundColorTokens, IBorderTokens {
+export interface ShimmerTokens extends IBackgroundColorTokens {
   /**
-   * Specifies the gradient angle; the value should be between 0 and 180 degrees
-   * @defaultValue 90
+   * Specifies the Shimmer effect angle in degrees (produced by a gradient)
+   * @defaultValue 0
    */
   angle?: number;
 
@@ -128,8 +128,6 @@ export interface ShimmerTokens extends IBackgroundColorTokens, IBorderTokens {
    */
   shimmerColor?: ColorValue;
 
-  shimmerBackground?: ColorValue;
-
   /**
    * Defines the tip color of the wave which has a linear gradient.
    * from shimmerColor to shimmerWaveColor to shimmerColor.
@@ -139,9 +137,9 @@ export interface ShimmerTokens extends IBackgroundColorTokens, IBorderTokens {
 
   /**
    * Width of the Shimmer wave.
-   * @defaultValue 100%
+   * @defaultValue '100%' of the 'width' property
    */
-  shimmerWaveWidth?: number;
+  shimmerWaveWidth?: number | string;
 }
 
 export interface ShimmerSlotProps extends ShimmerProps {

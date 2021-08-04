@@ -29,7 +29,7 @@ const CustomizedShimmer: React.FunctionComponent<{}> = () => {
 
   return (
     <Stack style={stackStyle}>
-      <PinkShimmer elements={shimmerRectsAndCircle()} duration={1500} delay={500} style={{ width: 300, height: 100 }} />
+      <PinkShimmer elements={shimmerRectsAndCircle()} duration={1500} delay={500} style={{ height: 100, maxWidth: '50%' }} />
     </Stack>
   );
 };

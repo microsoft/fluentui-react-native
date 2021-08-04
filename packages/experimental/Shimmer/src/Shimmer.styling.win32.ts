@@ -5,12 +5,13 @@ import { ShimmerSlotProps } from './Shimmer.types.win32';
 export const defaultShimmerTokens: TokenSettings<ShimmerTokens> = (theme: Theme) =>
   ({
     angle: 0,
-    shimmerBackground: theme.colors.background,
+    backgroundColor: theme.colors.background,
     delay: 500,
     duration: 2000,
     gradientOpacity: 1,
     shimmerColor: theme.colors.bodyFrameDivider,
     shimmerWaveColor: '#E1E1E1',
+    shimmerWaveWidth: '100%',
   } as ShimmerTokens);
 
 /**
@@ -20,13 +21,11 @@ export const styleSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, Sh
   tokens: [defaultShimmerTokens, shimmerName],
   slotProps: {
     root: buildProps(() => ({
-      style: { flexGrow: 0 },
       accessible: true,
       accessibilityRole: 'progressbar',
     })),
     shimmerWaveContainer: buildProps(
       (tokens: ShimmerTokens) => ({
-        style: { overflow: 'hidden', flexGrow: 0 },
         delay: tokens.delay,
         duration: tokens.duration,
         shimmerColor: tokens.shimmerColor,
@@ -36,22 +35,23 @@ export const styleSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, Sh
 
     shimmerWave: buildProps(
       (tokens: ShimmerTokens) => ({
-        style: { flexGrow: 0 },
         angle: tokens.angle,
         gradientOpacity: tokens.gradientOpacity,
         shimmerColor: tokens.shimmerColor,
         shimmerWaveColor: tokens.shimmerWaveColor,
+        shimmerWaveWidth: tokens.shimmerWaveWidth,
       }),
-      ['angle', 'gradientOpacity', 'shimmerColor', 'shimmerWaveColor'],
+      ['angle', 'gradientOpacity', 'shimmerColor', 'shimmerWaveColor', 'shimmerWaveWidth'],
     ),
 
-    /** Absolute positioning is used to overlay the clipping mask on top of the shimmer wave. */
+    /**
+     * Absolute positioning is used to overlay the clipping mask on top of the shimmer wave.
+     */
     clippingMask: buildProps(
       (tokens: ShimmerTokens) => ({
-        style: { position: 'absolute', flexGrow: 0 },
-        shimmerBackground: tokens.shimmerBackground,
+        backgroundColor: tokens.backgroundColor,
       }),
-      ['shimmerBackground'],
+      ['backgroundColor'],
     ),
   },
 };
