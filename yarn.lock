@@ -1181,21 +1181,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fluentui-react-native/framework@0.5.4":
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.5.4.tgz#6bd6017f131afed4526d1caf000ef37bc58834ff"
-  integrity sha512-RFjpt/ta+fG6E0RX/3iZfToR5VZ0T9Bl9TJPKDkSBA/Us/eulbyHSf188WLWg4Kh6Gxn4jbubIxYEkIm7m4isg==
-  dependencies:
-    "@fluentui-react-native/composition" ">=0.6.1 <1.0.0"
-    "@fluentui-react-native/default-theme" ">=0.6.2 <1.0.0"
-    "@fluentui-react-native/immutable-merge" "^1.1.1"
-    "@fluentui-react-native/memo-cache" "^1.1.1"
-    "@fluentui-react-native/merge-props" ">=0.3.1 <1.0.0"
-    "@fluentui-react-native/theme-types" ">=0.7.2 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.9.2 <1.0.0"
-    "@fluentui-react-native/use-slots" ">=0.5.2 <1.0.0"
-    "@fluentui-react-native/use-styling" ">=0.6.1 <1.0.0"
-
 "@fluentui/token-pipeline@^0.3.7":
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.7.tgz#4ac3326c1d12539c7f8abc339432b69172c27bf1"
@@ -15947,9 +15932,9 @@ tar-stream@^2.0.0, tar-stream@^2.1.0, tar-stream@^2.1.2:
     readable-stream "^3.1.1"
 
 tar@^4.4.8:
-  version "4.4.13"
-  resolved "https://registry.yarnpkg.com/tar/-/tar-4.4.13.tgz#43b364bc52888d555298637b10d60790254ab525"
-  integrity sha512-w2VwSrBoHa5BsSyH+KxEqeQBAllHhccyMFVHtGtdMpF4W7IRWfZjFiQceJPChOeTsSDVUpER2T8FA93pr0L+QA==
+  version "4.4.15"
+  resolved "https://registry.yarnpkg.com/tar/-/tar-4.4.15.tgz#3caced4f39ebd46ddda4d6203d48493a919697f8"
+  integrity sha512-ItbufpujXkry7bHH9NpQyTXPbJ72iTlXgkBAYsAjDXk3Ds8t/3NfO5P4xZGy7u+sYuQUbimgzswX4uQIEeNVOA==
   dependencies:
     chownr "^1.1.1"
     fs-minipass "^1.2.5"
