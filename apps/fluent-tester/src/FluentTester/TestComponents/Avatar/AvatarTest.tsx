@@ -8,7 +8,7 @@ import { testImageSource, rainbowGradientSource } from './testImageSources';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { Switch, View } from 'react-native';
 
-export const BasicAvatar: React.FunctionComponent<{}> = () => {
+export const BasicAvatar: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [showPresence, setShowPresence] = React.useState(false);
   const [showRing, setShowRing] = React.useState(false);
