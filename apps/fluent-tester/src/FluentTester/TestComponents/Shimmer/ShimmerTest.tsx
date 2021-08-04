@@ -65,7 +65,7 @@ const shimmerSections: TestSection[] = [
   },
 ];
 
-export const ShimmerTest: React.FunctionComponent<{}> = () => {
+export const ShimmerTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Backlog',
     uwpStatus: 'Backlog',
@@ -77,5 +77,5 @@ export const ShimmerTest: React.FunctionComponent<{}> = () => {
   const description =
     'Shimmer is a temporary animation placeholder for when a service call takes time to return data but the rest of the UI should continue rendering.';
 
-  return <Test name="Shimmer Test" description={description} sections={shimmerSections} status={status}></Test>;
+  return <Test name="Shimmer Test" description={description} sections={shimmerSections} status={status} />;
 };

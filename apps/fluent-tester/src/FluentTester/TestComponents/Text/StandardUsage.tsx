@@ -5,7 +5,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { TEXT_TESTPAGE } from './consts';
 
-export const StandardUsage: React.FunctionComponent<{}> = () => {
+export const StandardUsage: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle} gap={5}>

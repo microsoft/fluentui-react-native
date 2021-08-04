@@ -23,6 +23,7 @@ export const Checkbox = compose<ICheckboxType>({
   displayName: checkboxName,
 
   usePrepareProps: (userProps: ICheckboxProps, useStyling: IUseComposeStyling<ICheckboxType>) => {
+    const defaultComponentRef = React.useRef(null);
     const {
       ariaLabel,
       checked,
@@ -31,7 +32,7 @@ export const Checkbox = compose<ICheckboxType>({
       disabled,
       label,
       onChange,
-      componentRef = React.useRef(null),
+      componentRef = defaultComponentRef,
       ...rest
     } = userProps;
 

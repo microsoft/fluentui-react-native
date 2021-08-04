@@ -19,6 +19,11 @@ module.exports = {
     'no-undef': 'off',
     'no-prototype-builtins': 'off',
     'react/display-name': 'off',
-    'react/prop-types': 0,
+    'react/prop-types': 'off',
+  },
+  settings: {
+    react: {
+      version: "detect",
+    },
   },
 };

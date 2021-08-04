@@ -15,6 +15,8 @@ import { HOMEPAGE_SEPARATOR_BUTTON, SeparatorTest } from './TestComponents/Separ
 import { HOMEPAGE_SVG_BUTTON, SvgTest } from './TestComponents/Svg';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
+import { HOMEPAGE_MENU_BUTTON, MenuButtonTest } from './TestComponents/MenuButton';
+import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 
 export const tests: TestDescription[] = [
   {
@@ -41,6 +43,11 @@ export const tests: TestDescription[] = [
     name: 'Link Test',
     component: LinkTest,
     testPage: HOMEPAGE_LINK_BUTTON,
+  },
+  {
+    name: 'MenuButton Test',
+    component: MenuButtonTest,
+    testPage: HOMEPAGE_MENU_BUTTON,
   },
   {
     name: 'Native Button Test',
@@ -96,5 +103,10 @@ export const tests: TestDescription[] = [
     name: 'Icon Test',
     component: IconTest,
     testPage: HOMEPAGE_ICON_BUTTON,
+  },
+  {
+    name: 'Tokens Test',
+    component: TokenTest,
+    testPage: HOMEPAGE_TOKEN_BUTTON,
   },
 ];

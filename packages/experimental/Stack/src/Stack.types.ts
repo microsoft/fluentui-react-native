@@ -91,7 +91,8 @@ export interface StackTokenProps {
   wrap?: boolean;
 
   /**
-   * Gap between items, multiplied by theme gap spacing
+   * Gap between items, multiplied by theme gap spacing.
+   * Does not work while running Chakra for reasons specific to that engine (refer to https://github.com/microsoft/fluentui-react-native/issues/767)
    */
   gap?: number;
 }
