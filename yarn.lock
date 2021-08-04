@@ -1181,21 +1181,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fluentui-react-native/framework@0.5.4":
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.5.4.tgz#6bd6017f131afed4526d1caf000ef37bc58834ff"
-  integrity sha512-RFjpt/ta+fG6E0RX/3iZfToR5VZ0T9Bl9TJPKDkSBA/Us/eulbyHSf188WLWg4Kh6Gxn4jbubIxYEkIm7m4isg==
-  dependencies:
-    "@fluentui-react-native/composition" ">=0.6.1 <1.0.0"
-    "@fluentui-react-native/default-theme" ">=0.6.2 <1.0.0"
-    "@fluentui-react-native/immutable-merge" "^1.1.1"
-    "@fluentui-react-native/memo-cache" "^1.1.1"
-    "@fluentui-react-native/merge-props" ">=0.3.1 <1.0.0"
-    "@fluentui-react-native/theme-types" ">=0.7.2 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.9.2 <1.0.0"
-    "@fluentui-react-native/use-slots" ">=0.5.2 <1.0.0"
-    "@fluentui-react-native/use-styling" ">=0.6.1 <1.0.0"
-
 "@fluentui/token-pipeline@^0.3.7":
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.7.tgz#4ac3326c1d12539c7f8abc339432b69172c27bf1"
@@ -2467,9 +2452,9 @@
     yargs "^16.0.0"
 
 "@rnx-kit/jest-preset@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/jest-preset/-/jest-preset-0.1.0.tgz#e1863a3962e703ec31ea425e50fd8ce1242f4bae"
-  integrity sha512-6d3B7c1eHCoJ2npolnJwcKhM5lgDL7Ipx3ui8H3iTA2++D0FV7XmC7Vp+okK4ZH3H1Y7+HZvXmSM7Rw5pK668g==
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/jest-preset/-/jest-preset-0.1.1.tgz#b45863659ce4f6c75d3c0d5ed5b5b784d3b7caa2"
+  integrity sha512-WHGlsBZOZv1nOw5SchVz+rAzOsJ2xu6DNonowxQvDFG8bMEc45vc3dtM5dsnxk20v54yeiRmhX838/xiu0fF3w==
   dependencies:
     "@babel/preset-env" "^7.0.0"
     "@babel/preset-typescript" "^7.0.0"
@@ -2816,11 +2801,6 @@
   version "7.0.8"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.8.tgz#edf1bf1dbf4e04413ca8e5b17b3b7d7d54b59818"
   integrity sha512-YSBPTLTVm2e2OoQIDYx8HaeWJ5tTToLH67kXR7zYNGupXMEHa2++G8k+DczX2cFVgalypqtyZIcU19AFcmOpmg==
-
-"@types/json5@^0.0.29":
-  version "0.0.29"
-  resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
-  integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
 "@types/keyv@*":
   version "3.1.1"
@@ -11012,10 +10992,10 @@ json5@^1.0.1:
   dependencies:
     minimist "^1.2.0"
 
-json5@^2.1.2, json5@^2.1.3:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/json5/-/json5-2.1.3.tgz#c9b0f7fa9233bfe5807fe66fcf3a5617ed597d43"
-  integrity sha512-KXPvOm8K9IJKFM0bmdn8QXh7udDh1g/giieX0NLCaMnb4hEiVFqnop2ImTXCc5e0/oHz3LTqmHGtExn5hfMkOA==
+json5@^2.1.2, json5@^2.1.3, json5@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.0.tgz#2dfefe720c6ba525d9ebd909950f0515316c89a3"
+  integrity sha512-f+8cldu7X/y7RAJurMEJmdoKXGB/X550w2Nr3tTbezL6RwEE/iMcm+tZnXeoZtKuOq6ft8+CqzEkrIgx1fPoQA==
   dependencies:
     minimist "^1.2.5"
 
@@ -16273,12 +16253,11 @@ ts-node@^8.10.1:
     yn "3.1.1"
 
 tsconfig-paths@^3.9.0:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.9.0.tgz#098547a6c4448807e8fcb8eae081064ee9a3c90b"
-  integrity sha512-dRcuzokWhajtZWkQsDVKbWyY+jgcLC5sqJhg2PSgf4ZkH2aHPvaOY8YWGhmjb68b5qqTfasSsDO9k7RUiEmZAw==
+  version "3.10.1"
+  resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.10.1.tgz#79ae67a68c15289fdf5c51cb74f397522d795ed7"
+  integrity sha512-rETidPDgCpltxF7MjBZlAFPUHv5aHH2MymyPvh+vEyWAED4Eb/WeMbsnD/JDr4OKPOA1TssDHgIcpTN5Kh0p6Q==
   dependencies:
-    "@types/json5" "^0.0.29"
-    json5 "^1.0.1"
+    json5 "^2.2.0"
     minimist "^1.2.0"
     strip-bom "^3.0.0"
 
