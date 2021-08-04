@@ -5,7 +5,7 @@ class RadioButtonViewManager: RCTViewManager {
 
 	override func view()->NSView! {
 		let radioButton = RadioButton.init(radioButtonWithTitle: "", target: nil, action: nil)
-		radioButton.action = #selector(radioButton.callOnPress)
+		radioButton.action = #selector(radioButton.sendCallback)
 		radioButton.target = radioButton
 		return radioButton
 	}

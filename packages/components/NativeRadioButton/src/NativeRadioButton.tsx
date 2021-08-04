@@ -17,12 +17,9 @@ export type NativeRadioButtonProps = {
    */
   enabled?: boolean;
   /**
-   * Current state of the radio button. There are two states:
-   * true -> On
-   * false -> Off
-   * false by default.
+   * Whether the radio button is selected or not, false by default.
    */
-  state?: boolean;
+  isSelected?: boolean;
   /**
    * Unique identifier for each radio button.
    */
@@ -56,10 +53,10 @@ export const NativeRadioButton = compose<NativeRadioButtonType>({
   slotProps: {
     root: buildProps((tokens) => ({
       style: {
-        marginLeft: 3,
-        marginTop: 3,
-        width: tokens.minWidth,
-        height: tokens.minHeight,
+        marginLeft: 4, // Fluent design on macOS
+        marginTop: 4, // Fluent design on macOS
+        minWidth: tokens.minWidth,
+        minHeight: tokens.minHeight,
       },
     })),
   },
