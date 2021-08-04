@@ -14,7 +14,6 @@ import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
 export const TabsContext = React.createContext<ITabsContext>({
   selectedKey: null,
-
   onTabsClick: (/* key: string */) => {
     return;
   },
@@ -25,7 +24,6 @@ export const TabsContext = React.createContext<ITabsContext>({
     return;
   },
   tabsItemKeys: [],
-
   views: null,
 });
 
