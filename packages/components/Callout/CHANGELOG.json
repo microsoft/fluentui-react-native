@@ -2,6 +2,59 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Wed, 04 Aug 2021 06:26:25 GMT",
+      "tag": "@fluentui-react-native/callout_v0.17.0",
+      "version": "0.17.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "radio group on macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/callout"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/component-cache to v1.2.3",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/callout"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.0",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/callout"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-settings to v0.10.0",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/callout"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-composable to v0.9.0",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/callout"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.23",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/callout"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.13",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 03 Aug 2021 23:48:50 GMT",
       "tag": "@fluentui-react-native/callout_v0.16.11",
       "version": "0.16.11",

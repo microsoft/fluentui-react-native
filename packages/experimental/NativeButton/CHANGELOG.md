@@ -1,8 +1,22 @@
 # Change Log - @fluentui-react-native/experimental-native-button
 
-This log was last generated on Tue, 03 Aug 2021 23:48:50 GMT and should not be manually modified.
+This log was last generated on Wed, 04 Aug 2021 06:26:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Minor changes
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/component-cache to v1.2.3 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/framework to v0.5.20 (67026167+chiuam@users.noreply.github.com)
 
 ## 0.6.20
 

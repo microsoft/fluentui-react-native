@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Wed, 04 Aug 2021 00:59:42 GMT and should not be manually modified.
+This log was last generated on Wed, 04 Aug 2021 06:26:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.0
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Minor changes
+
+- radio group on macos (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.34.0 (67026167+chiuam@users.noreply.github.com)
 
 ## 0.11.13
 

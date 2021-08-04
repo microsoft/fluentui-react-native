@@ -1,1 +1,40 @@
-
+{
+  "name": "@fluentui-react-native/native-radio-button",
+  "entries": [
+    {
+      "date": "Wed, 04 Aug 2021 06:26:25 GMT",
+      "tag": "@fluentui-react-native/native-radio-button_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "radio group on macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/native-radio-button"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/component-cache to v1.2.3",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/native-radio-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.20",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/native-radio-button"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-composable to v0.9.0",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/native-radio-button"
+          }
+        ]
+      }
+    }
+  ]
+}

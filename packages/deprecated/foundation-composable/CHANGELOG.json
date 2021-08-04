@@ -2,6 +2,35 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Wed, 04 Aug 2021 06:26:25 GMT",
+      "tag": "@uifabricshared/foundation-composable_v0.9.0",
+      "version": "0.9.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "radio group on macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@uifabricshared/foundation-composable"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @uifabricshared/foundation-settings to v0.10.0",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@uifabricshared/foundation-composable"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/merge-props to v0.3.3",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@uifabricshared/foundation-composable"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Jul 2021 06:26:34 GMT",
       "tag": "@uifabricshared/foundation-composable_v0.8.6",
       "version": "0.8.6",

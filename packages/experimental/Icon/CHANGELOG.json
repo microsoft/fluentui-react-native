@@ -2,6 +2,65 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Wed, 04 Aug 2021 06:26:25 GMT",
+      "tag": "@fluentui-react-native/icon_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "radio group on macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/icon"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/text to v0.10.0",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/default-theme to v0.7.3",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.0",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.20",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.9.3",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.3.3",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.13",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/icon"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 03 Aug 2021 23:48:50 GMT",
       "tag": "@fluentui-react-native/icon_v0.7.19",
       "version": "0.7.19",

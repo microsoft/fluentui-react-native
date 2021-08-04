@@ -1,8 +1,16 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Wed, 04 Aug 2021 00:59:42 GMT and should not be manually modified.
+This log was last generated on Wed, 04 Aug 2021 06:26:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.23
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Patches
+
+- add comment back (67026167+chiuam@users.noreply.github.com)
 
 ## 0.24.22
 

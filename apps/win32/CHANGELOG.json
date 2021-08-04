@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Wed, 04 Aug 2021 06:26:25 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "radio group on macos",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tester to v0.34.0",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 Aug 2021 00:59:42 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.11.13",
       "version": "0.11.13",
