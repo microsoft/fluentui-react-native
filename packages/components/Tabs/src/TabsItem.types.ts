@@ -48,7 +48,7 @@ export interface TabsItemProps extends IButtonProps {
   headerText?: string;
 
   /*
-   ** The text string for the TabsItem count
+   ** The number for the TabsItem count
    */
   itemCount?: number;
 
