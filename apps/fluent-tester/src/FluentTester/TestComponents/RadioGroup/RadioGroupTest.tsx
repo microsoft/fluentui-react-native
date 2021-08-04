@@ -57,6 +57,8 @@ const nativeRadioGroup: React.FunctionComponent = () => {
       </RadioGroup>
       <Separator />
       <RadioGroup label="RadioGroup 2">
+        {/* View added to test ariaPosInSet and ariaSetSize properties which are not auto-generated when
+        RadioButtons are not direct children of RadioGroup. */}
         <NativeRadioButton title="Option A" buttonKey="A" />
         <NativeRadioButton title="Option B" selected={true} onPress={() => alert('Option B pressed')} buttonKey="B" />
         <NativeRadioButton title="Option C (disabled)" enabled={false} style={{ width: 150 }} buttonKey="C" />
