@@ -1181,21 +1181,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fluentui-react-native/framework@0.5.4":
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.5.4.tgz#6bd6017f131afed4526d1caf000ef37bc58834ff"
-  integrity sha512-RFjpt/ta+fG6E0RX/3iZfToR5VZ0T9Bl9TJPKDkSBA/Us/eulbyHSf188WLWg4Kh6Gxn4jbubIxYEkIm7m4isg==
-  dependencies:
-    "@fluentui-react-native/composition" ">=0.6.1 <1.0.0"
-    "@fluentui-react-native/default-theme" ">=0.6.2 <1.0.0"
-    "@fluentui-react-native/immutable-merge" "^1.1.1"
-    "@fluentui-react-native/memo-cache" "^1.1.1"
-    "@fluentui-react-native/merge-props" ">=0.3.1 <1.0.0"
-    "@fluentui-react-native/theme-types" ">=0.7.2 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.9.2 <1.0.0"
-    "@fluentui-react-native/use-slots" ">=0.5.2 <1.0.0"
-    "@fluentui-react-native/use-styling" ">=0.6.1 <1.0.0"
-
 "@fluentui/token-pipeline@^0.3.7":
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.7.tgz#4ac3326c1d12539c7f8abc339432b69172c27bf1"
@@ -2376,9 +2361,9 @@
   integrity sha512-3jgCWoZY31s/cjtTCAbGN0VqapwM7WiGZonb5KSkRT6egkwR1QAWBxe8Pe216u6R5EY/AGC8Z4Bf9wASYpz/1A==
 
 "@react-native-picker/picker@^1.9.11":
-  version "1.9.11"
-  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.9.11.tgz#490c752417c17d687e2941659b3c0bff9cb79b83"
-  integrity sha512-E7whvvMIl9Ln1sxgug7OAEVWQ69n82iV0d2OWWp5VV52+RW3azKh1IFm4rxdW5/oByMfl7FFL0eHNelGgY4BMQ==
+  version "1.16.4"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.16.4.tgz#85712375dbf0a38e8c20ee1b2d71253c0a1cd520"
+  integrity sha512-V/8XNlTU3QJ/mdY+mCQnuCCZJfIOpgfSnfFDinftWDi66mGuf6tRd+sfCOeKqjug38sdJm9CeNry/66W0EYodw==
 
 "@react-native-windows/cli@0.63.12":
   version "0.63.12"
