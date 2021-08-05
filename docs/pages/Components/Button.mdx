@@ -1,0 +1,20 @@
+# Button Documentation
+
+## Example
+
+```
+import * as React from 'react';
+import { Button, View } from '@fluentui/react-native';
+
+export const ButtonExample: React.FunctionComponent<{}> = props => {
+  return (
+    <View>
+      <Button content="Save" onClick={_alertClicked} />
+    </View>
+  );
+};
+
+function _alertClicked(): void {
+  alert('Clicked');
+}
+```
