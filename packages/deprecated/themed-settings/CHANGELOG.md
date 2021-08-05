@@ -1,8 +1,21 @@
 # Change Log - @uifabricshared/themed-settings
 
-This log was last generated on Wed, 21 Jul 2021 22:55:40 GMT and should not be manually modified.
+This log was last generated on Wed, 04 Aug 2021 06:26:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Minor changes
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @uifabricshared/foundation-settings to v0.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/memo-cache to v1.1.3 (67026167+chiuam@users.noreply.github.com)
 
 ## 0.6.2
 

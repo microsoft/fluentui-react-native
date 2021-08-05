@@ -14,26 +14,6 @@ const _rnVersions: { [key in PlatformValue]: string } = {
   windows: 'react-native-windows'
 };
 
-export function getRNVersion(platform?: PlatformValue): string {
-  return (platform && _rnVersions[platform]) || _rnVersions.default;
-}
-
-export function getAllRNVersions(): string[] {
-  return Object.keys(_rnVersions)
-    .map(ver => _rnVersions[ver])
-    .filter(pkg => {
-      try {
-        return require.resolve(pkg);
-      } catch {
-        return false;
-      }
-    });
-}
-
-export function getAllPlatforms(): string[] {
-  return Object.keys(_rnVersions).filter(plat => plat !== _defaultPlatform);
-}
-
 export function findPlatformFromArgv(toSet?: PlatformValue): PlatformValue | undefined {
   for (let index = 0; index < process.argv.length; index++) {
     if (process.argv[index] === '--platform') {
@@ -58,8 +38,4 @@ export function ensurePlatform(platform?: PlatformValue, defaultOverride?: Platf
     process.argv.push('--platform', platform);
   }
   return platform || defaultOverride || _defaultPlatform;
-}
-
-export function findReactNativePackage(): string {
-  return getRNVersion(findPlatform());
 }

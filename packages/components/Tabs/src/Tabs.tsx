@@ -14,7 +14,6 @@ import type { IKeyboardEvent } from '@office-iss/react-native-win32';
 
 export const TabsContext = React.createContext<ITabsContext>({
   selectedKey: null,
-
   onTabsClick: (/* key: string */) => {
     return;
   },

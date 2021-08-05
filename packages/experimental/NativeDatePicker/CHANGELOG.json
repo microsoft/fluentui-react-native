@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-native-date-picker",
   "entries": [
     {
+      "date": "Wed, 04 Aug 2021 06:26:25 GMT",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "radio group on macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/experimental-native-date-picker"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Jul 2021 22:55:40 GMT",
       "tag": "@fluentui-react-native/experimental-native-date-picker_v0.2.2",
       "version": "0.2.2",
