@@ -7,8 +7,9 @@ export const tabsItemSelectActionLabel = 'Select a TabsItem';
 export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
-      color: 'neutralForeground3Brand',
-      variant: 'headerStandard',
+      color: '#000000',
+      variant: 'heroStandard',
+      fontSize: 20,
       borderWidth: 2,
       borderColor: 'transparent',
       borderRadius: 4,
@@ -45,51 +46,35 @@ export const settings: IComposeSettings<TabsItemType> = [
         minHeight: 32,
         minWidth: 32,
         justifyContent: 'center',
+        opacity: 0.6,
       },
     },
-    // _precedence: ['hovered', 'selected', 'focused', 'disabled', 'pressed'],
-    _precedence: ['hovered', 'selected', 'disabled'],
+    _precedence: ['selected', 'hovered', 'disabled'],
     _overrides: {
       disabled: {
-        tokens: {
-          color: 'neutralForegroundDisabled',
+        stack: {
+          style:{
+            opacity: 0.2,
+          },
         },
       },
       hovered: {
-        tokens: {
-          color: 'neutralForeground2Hover',
-          // indicatorColor: 'neutralStroke1'
+        stack: {
+          style:{
+            opacity: 0.8,
+          },
         },
       },
       selected: {
         tokens: {
-          color: 'neutralForeground1',
-          // variant: 'bodySemibold',
           indicatorColor: 'brandStroke1',
         },
-        // _overrides: {
-        //   pressed: {
-        //     tokens: {
-        //       indicatorColor: 'neutralStroke1',
-        //     },
-        //   },
-        // },
+        stack: {
+          style:{
+            opacity: 1,
+          },
+        },
       },
-
-      // pressed: {
-      //   tokens: {
-      //     color: 'neutralForeground2Pressed',
-      //     indicatorColor: 'brandStroke1',
-      //   },
-      // },
-
-      // focused: {
-      //   tokens: {
-      //     color: 'neutralForeground1',
-      //     borderColor: 'neutralForeground1',
-      //     indicatorColor: 'brandStroke1',
-      //   },
-      // },
     },
   },
   tabsItemName,

@@ -12,6 +12,17 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 //   },
 // });
 
+// const content1 = styled.Text`
+//   font-family: 'Arial';
+// `;
+
+// const CustomizedText = Text.customize({
+//   style: {
+//     color: 'red',
+//     fontSize: '20',
+//   },
+// });
+
 const tabs: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>

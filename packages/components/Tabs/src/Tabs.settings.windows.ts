@@ -5,7 +5,9 @@ export const settings: IComposeSettings<TabsType> = [
   {
     tokens: {
       color: 'menuItemText',
-      variant: 'subheaderSemibold',
+      variant: 'bodySemibold',
+      fontWeight: 'bold',
+      fontSize: 14,
     },
     root: {
       accessible: true,
@@ -15,18 +17,13 @@ export const settings: IComposeSettings<TabsType> = [
       },
     },
     label: {
-      style: {
-        // marginLeft: 10,
-        // fontFamily: 'inherit',
-        // fontSize: 16,
-        // fontWeight: '600',
-        // variant: 'subheaderSemibold',
-      },
+      style: {},
     },
     container: {
       style: {
         flexDirection: 'row',
         marginLeft: -14,
+        marginTop: 6,
       },
     },
   },
