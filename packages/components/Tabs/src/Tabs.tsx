@@ -117,7 +117,7 @@ export const Tabs = compose<TabsType>({
 
 
     const ariaRoles = {
-      // accessibilityRole: 'tablist',
+      // accessibilityRole: 'tablist', // Add role when RN is at >= 0.64
       accessibilityLabel: ariaLabel || label,
     };
 
