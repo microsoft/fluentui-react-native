@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Tabs, TabsItem, Text, Button } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';
@@ -7,10 +7,12 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
 
+const label = Platform.OS === 'windows' ? 'TABS' : 'Tabs';
+
 const tabs: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
-      <Tabs label="Tabs">
+      <Tabs label={label}>
         <TabsItem headerText="Home" itemKey="A">
           <Text>Tabs #1</Text>
         </TabsItem>
@@ -28,7 +30,7 @@ const tabs: React.FunctionComponent = () => {
 const disabledTabs: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
-      <Tabs label="Tabs">
+      <Tabs label={label}>
         <TabsItem headerText="Home" itemKey="A">
           <Text>Tabs #1</Text>
         </TabsItem>
@@ -51,7 +53,7 @@ const tabsCountIcon: React.FunctionComponent = () => {
 
   return (
     <View style={stackStyle}>
-      <Tabs label="Tabs">
+      <Tabs label={label}>
         <TabsItem headerText="Home" itemKey="A" icon={{ svgSource: svgProps, width: 20, height: 20, style: { margin: 5 } }} itemCount={23}>
           <Text>Tabs #1</Text>
         </TabsItem>
@@ -76,7 +78,7 @@ const onTabsClickEvent: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
       <Text>Last onTabsClick from: {selectedKey}</Text>
-      <Tabs label="Tabs" onTabsClick={onTabsClick} selectedKey={selectedKey}>
+      <Tabs label={label} onTabsClick={onTabsClick} selectedKey={selectedKey}>
         <TabsItem headerText="Home" itemKey="home_key">
           <Text>Tabs #1</Text>
         </TabsItem>
@@ -101,7 +103,7 @@ const tabsChangingViews: React.FunctionComponent = () => {
 
   return (
     <View style={stackStyle}>
-      <Tabs label="Tabs" onTabsClick={onTabsClick} headersOnly={true} selectedKey={selectedKey}>
+      <Tabs label={label} onTabsClick={onTabsClick} headersOnly={true} selectedKey={selectedKey}>
         <TabsItem headerText="Home" itemKey="home" />
         <TabsItem headerText="File" itemKey="file" />
         <TabsItem headerText="Settings" itemKey="settings" />
@@ -131,7 +133,7 @@ const tabsRenderSeparately: React.FunctionComponent = () => {
           backgroundColor: selectedKey === 'rectangleGreen' ? 'green' : 'red',
         }}
       />
-      <Tabs label="Tabs" onTabsClick={onTabsClick} headersOnly={true} selectedKey={selectedKey}>
+      <Tabs label={label} onTabsClick={onTabsClick} headersOnly={true} selectedKey={selectedKey}>
         <TabsItem headerText="Rectangle Red" itemKey="rectangleRed" />
         <TabsItem headerText="Square Red" itemKey="squareRed" />
         <TabsItem headerText="Rectangle Green" itemKey="rectangleGreen" />
@@ -154,7 +156,7 @@ const tabsSettingSelectedKey: React.FunctionComponent = () => {
 
   return (
     <View style={stackStyle}>
-      <Tabs label="Tabs" selectedKey={selectedKey} isCircularNavigation={true}>
+      <Tabs label={label} selectedKey={selectedKey} isCircularNavigation={true}>
         <TabsItem headerText="Home" itemKey="home">
           <Text>Tabs #1</Text>
         </TabsItem>
@@ -210,10 +212,6 @@ const tabsSections: TestSection[] = [
     component: disabledTabs,
   },
   {
-    name: 'Count and Icon',
-    component: tabsCountIcon,
-  },
-  {
     name: 'Trigger onTabsClick event',
     component: onTabsClickEvent,
   },
@@ -235,10 +233,17 @@ const tabsSections: TestSection[] = [
   },
 ];
 
+if (Platform.OS !== 'windows') {
+  tabsSections.push({
+    name: 'Count and Icon',
+    component: tabsCountIcon,
+  });
+}
+
 export const TabsTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Experimental',
-    uwpStatus: 'Backlog',
+    uwpStatus: 'Experimental',
     iosStatus: 'Backlog',
     macosStatus: 'Backlog',
     androidStatus: 'Backlog',
