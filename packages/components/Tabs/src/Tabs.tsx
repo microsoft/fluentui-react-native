@@ -7,7 +7,6 @@ import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings } from './Tabs.settings';
-import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
 import { useSelectedKey, useAsPressable } from '@fluentui-react-native/interactive-hooks';
@@ -26,11 +25,8 @@ export const TabsContext = React.createContext<ITabsContext>({
     return;
   },
   tabsItemKeys: [],
-
   enabledKeys: [],
-
   views: null,
-
   focusZoneRef: null,
 });
 
@@ -115,9 +111,8 @@ export const Tabs = compose<TabsType>({
       }
     };
 
-
     const ariaRoles = {
-      // accessibilityRole: 'tablist', // Add role when RN is at >= 0.64
+      accessibilityRole: Platform.OS !== 'windows' ? 'tablist' : null, // Add windows role when RN is at >= 0.64
       accessibilityLabel: ariaLabel || label,
     };
 
@@ -148,15 +143,17 @@ export const Tabs = compose<TabsType>({
           return child.props.itemKey;
         }
       });
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore - TODO, fix typing error
-      renderData.state.context.enabledKeys = React.Children.map(children, (child: React.ReactChild) => {
-        if (React.isValidElement(child)) {
-          if (!child.props.disabled) {
-            return child.props.itemKey;
+      if (Platform.OS === 'windows') {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore - TODO, fix typing error
+        renderData.state.context.enabledKeys = React.Children.map(children, (child: React.ReactChild) => {
+          if (React.isValidElement(child)) {
+            if (!child.props.disabled) {
+              return child.props.itemKey;
+            }
           }
-        }
-      });
+        });
+      }
     }
 
     return (
@@ -181,7 +178,7 @@ export const Tabs = compose<TabsType>({
   slots: {
     root: View,
     label: Text,
-    tabPanel: { slotType: View, filter: filterViewProps },
+    tabPanel: View,
     container: Platform.OS !== 'windows' ? FocusZone : View,
   },
   styles: {

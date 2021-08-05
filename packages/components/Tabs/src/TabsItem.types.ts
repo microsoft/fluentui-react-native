@@ -11,12 +11,6 @@ export const tabsItemName = 'TabsItem';
 
 export interface TabsItemInfo extends IPressableState {
   /**
-   * Disables the TabsItem.
-   * @default false
-   */
-  disabled?: boolean;
-
-  /**
    * TabsItem icon.
    */
   icon?: boolean;
@@ -48,7 +42,7 @@ export interface TabsItemProps extends IButtonProps {
   headerText?: string;
 
   /*
-   ** The text string for the TabsItem count
+   ** The number for the TabsItem count
    */
   itemCount?: number;
 
@@ -66,6 +60,16 @@ export interface TabsItemProps extends IButtonProps {
    ** An optional string for the Narrator to read for each TabsItem. If not provided, this will be set to the tabsItem's content
    */
   ariaLabel?: string;
+
+  /*
+  ** Overrides the position of the tabItem that the Narrator reads out.
+  */
+  ariaPosInSet?: number;
+
+  /*
+  ** Overrides the size of the tabItem that the Narrator reads out.
+  */
+  ariaSetSize?: number;
 
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.

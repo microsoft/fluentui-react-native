@@ -1,17 +1,22 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
-// import { Icon } from '@fluentui-react-native/icon';
+import { Icon } from '@fluentui-react-native/icon';
 import { settings, tabsItemSelectActionLabel } from './TabsItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { TabsContext } from './Tabs';
 import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemRenderData, TabsItemState } from './TabsItem.types';
-import { useAsPressable, useKeyCallback, useOnPressWithFocus } from '@fluentui-react-native/interactive-hooks'; // createIconProps
+import {
+  useAsPressable,
+  useKeyCallback,
+  createIconProps,
+  useOnPressWithFocus,
+} from '@fluentui-react-native/interactive-hooks';
 
 export const TabsItem = compose<TabsItemType>({
   displayName: tabsItemName,
@@ -27,6 +32,8 @@ export const TabsItem = compose<TabsItemType>({
       onClick,
       itemKey,
       itemCount,
+      ariaPosInSet,
+      ariaSetSize,
       ...rest
     } = userProps;
 
@@ -35,9 +42,10 @@ export const TabsItem = compose<TabsItemType>({
 
     /* We don't want to call the user's onTabsClick multiple times on the same selection. */
     const changeSelection = () => {
-      info.focusZoneRef.current.focus();
-      if (itemKey != info.selectedKey) {
+      if (Platform.OS === 'windows') {
         info.focusZoneRef.current.focus();
+      }
+      if (itemKey != info.selectedKey) {
         info.onTabsClick && info.onTabsClick(itemKey);
         info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
         info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
@@ -60,7 +68,6 @@ export const TabsItem = compose<TabsItemType>({
       info: {
         ...pressable.state,
         selected: info.selectedKey === userProps.itemKey,
-        disabled: !!userProps.disabled,
         icon: !!icon,
         key: itemKey,
         headerText: !!headerText || itemCount !== undefined,
@@ -99,17 +106,17 @@ export const TabsItem = compose<TabsItemType>({
         ...pressable.props,
         ref: componentRef,
         onAccessibilityTap: onAccessibilityTap,
-        // accessibilityRole: 'tab', // Add role when RN is at >= 0.64
+        accessibilityRole: Platform.OS !== 'windows' ? 'tab' : null, // Add windows role when RN is at >= 0.64
         accessibilityLabel: accessibilityLabel,
-        accessibilityState: { disabled: state.info.disabled, selected: state.info.selected },
+        accessibilityState: { disabled: userProps.disabled, selected: info.selectedKey === userProps.itemKey },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
-        accessibilityPositionInSet: info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
-        accessibilitySetSize: info.tabsItemKeys.length,
+        accessibilityPositionInSet: ariaPosInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
+        accessibilitySetSize: ariaSetSize ?? info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUp,
       },
       content: { children: headerText + countText, testID: testID },
-      // icon: createIconProps(icon),
+      icon: Platform.OS !== 'windows' ? createIconProps(icon) : null,
     });
 
     return { slotProps, state };
@@ -124,7 +131,7 @@ export const TabsItem = compose<TabsItemType>({
     return (
       <Slots.root>
         <Slots.stack>
-          {/* {info.icon && <Slots.icon />} */}
+          {Platform.OS !== 'windows' && info.icon && <Slots.icon />}
           {info.headerText && <Slots.content />}
         </Slots.stack>
         <Slots.indicator />
@@ -136,14 +143,14 @@ export const TabsItem = compose<TabsItemType>({
   slots: {
     root: View,
     stack: { slotType: View, filter: filterViewProps },
-    // icon: { slotType: Icon as React.ComponentType },
+    icon: Platform.OS !== 'windows' ? { slotType: Icon as React.ComponentType } : React.Fragment,
     content: Text,
     indicator: { slotType: View, filter: filterViewProps },
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
     stack: [],
-    // icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
+    icon: Platform.OS !== 'windows' ? [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }] : null,
     content: [textTokens, foregroundColorTokens],
     indicator: [{ source: 'indicatorColor', lookup: getPaletteFromTheme, target: 'backgroundColor' }],
   },

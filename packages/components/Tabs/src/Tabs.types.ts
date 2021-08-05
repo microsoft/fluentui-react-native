@@ -5,7 +5,6 @@ import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IForegroundColorTokens, FontTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';
 import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import { View, ViewProps } from 'react-native';
-import type { IKeyboardEvent } from '@office-iss/react-native-win32';
 
 export const tabsName = 'Tabs';
 
@@ -38,7 +37,7 @@ export interface ITabsContext {
   /*
    ** Array of enabled keys in the group
    */
-   enabledKeys?: string[];
+  enabledKeys?: string[];
 
   /*
    ** A Map to for a TabItems corresponding view
@@ -73,14 +72,14 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
   defaultSelectedKey?: string;
 
   /*
-   **  OPTIONAL: An aria label for narrator. If not provided, it will be set to the label of the Tabs
+   ** An aria label for narrator. If not provided, it will be set to the label of the Tabs
    */
   ariaLabel?: string;
 
   /*
    ** The key of the selected option. If you provide this, you must maintain selection state by observing
    ** onTabsClick events and passing a new value in when changed. This overrides defaultSelectedKey
-   ** and makes the Tabs a controlled component.
+   ** and makes the Tabs a controlled component. This prop is mutually exclusive to defaultSelectedKey.
    */
   selectedKey?: string;
 
@@ -106,11 +105,6 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
   componentRef?: React.RefObject<View>;
 
   testID?: string;
-
-  /*
-   ** Prop to test arrowing on TabsItems.
-   */
-  onKeyDown? : (ev: IKeyboardEvent) => void;
 }
 
 export interface TabsTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens {}
