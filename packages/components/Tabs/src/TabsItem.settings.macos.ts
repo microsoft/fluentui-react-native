@@ -9,8 +9,10 @@ export const settings: IComposeSettings<TabsItemType> = [
     tokens: {
       color: '#616161',
       // fontWeight: 'normal',
-      // fontFamily: 'SF Pro Text',
-      // fontSize: 14,
+      // fontFamily: 'Arial',
+      // fontSize: 14
+      variant: 'bodyStandard',
+      fontSize: 13,
       borderWidth: 2,
       borderRadius: 4,
       indicatorColor: 'transparent',
@@ -59,7 +61,7 @@ export const settings: IComposeSettings<TabsItemType> = [
       hovered: {
         tokens: {
           color: 'pink',
-          indicatorColor: '#D1D1D1',
+          indicatorColor: 'controlAccentColor',
         },
       },
       selected: {
@@ -68,12 +70,12 @@ export const settings: IComposeSettings<TabsItemType> = [
           // fontWeight: 'bold',
           // fontFamily: 'SF Pro Text',
           // fontSize: 14,
-          indicatorColor: '#0078D4',
+          indicatorColor: 'controlAccentColor',
         },
         _overrides: {
           pressed: {
             tokens: {
-              indicatorColor: '#D1D1D1',
+              indicatorColor: 'controlAccentColor',
             },
           },
         },

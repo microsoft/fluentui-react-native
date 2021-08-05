@@ -11,13 +11,13 @@ export const settings: IComposeSettings<TabsType> = [
       accessibilityRole: 'tablist',
       style: {},
     },
-    label: {
-      style: {
-        fontFamily: 'inherit',
-        fontSize: 16,
-        fontWeight: '600',
-      },
-    },
+    // label: {
+    //   style: {
+    //     fontFamily: 'inherit',
+    //     fontSize: 16,
+    //     fontWeight: '600',
+    //   },
+    // },
     container: {
       style: {
         flexDirection: 'row',
