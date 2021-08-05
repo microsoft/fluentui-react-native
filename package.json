@@ -35,7 +35,7 @@
     "update-api": "lage update-api"
   },
   "devDependencies": {
-    "@fluentui/token-pipeline": "^0.3.8",
+    "@fluentui/token-pipeline": "^0.3.7",
     "@rnx-kit/dep-check": "^1.5.10",
     "beachball": "^1.35.0",
     "lage": ">=0.17.4 <1.0.0",
