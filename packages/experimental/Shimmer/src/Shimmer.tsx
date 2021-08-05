@@ -12,7 +12,7 @@ export function useShimmerAnimation(memoData: any) {
     Animated.loop(
       Animated.sequence([
         Animated.timing(startValue, {
-          toValue: memoData.toValue,
+          toValue: 30,
           duration: memoData.duration,
           delay: memoData.delay,
           useNativeDriver: false,
@@ -39,23 +39,14 @@ export const Shimmer = compose<ShimmerType>({
       () => ({
         shimmerWaveColor: props.shimmerWaveColor ? props.shimmerWaveColor : tokens['shimmerWaveColor'],
         shimmerColor: props.shimmerColor ? props.shimmerColor : tokens['shimmerColor'],
-        containerWidth: props?.style['width'] ? props?.style['width'] : tokens['width'],
-        containerHeight: props?.style['height'] ? props?.style['height'] : tokens['height'],
+        containerWidth: props?.style['width'] ? props?.style['width'] : '100%',
+        containerHeight: props?.style['height'] ? props?.style['height'] : '100%',
         delay: props.delay ? props.delay : tokens['delay'],
         duration: props.duration ? props.duration : tokens['duration'],
         angle: props.angle ? props.angle : tokens['angle'],
         gradientOpacity: tokens['gradientOpacity'],
       }),
-      [
-        props.shimmerWaveColor,
-        props.shimmerColor,
-        props.style,
-        props.style,
-        props.delay,
-        props.duration,
-        props.angle,
-        props.gradientOpacity,
-      ],
+      [props.shimmerWaveColor, props.shimmerColor, props.style, props.delay, props.duration, props.angle, props.gradientOpacity],
     );
 
     const startValue = useShimmerAnimation(memoizedShimmerData);
@@ -95,7 +86,14 @@ export const Shimmer = compose<ShimmerType>({
             </AnimatedLinearGradient>
             <ClipPath id="shimmerView">{rows}</ClipPath>
           </Defs>
-          <Rect x="0" y="0" width={memoizedShimmerData.containerWidth} height={memoizedShimmerData.containerHeight} fill="url(#gradient)" />
+          <Rect
+            x="0"
+            y="0"
+            width={memoizedShimmerData.containerWidth}
+            height={memoizedShimmerData.containerHeight}
+            fill="url(#gradient)"
+            clipPath="url(#shimmerView)"
+          />
         </Slots.root>
       );
     };
