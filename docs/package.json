@@ -1,0 +1,16 @@
+{
+  "name": "@fluentui-react-native/docs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next",
+    "start": "next start",
+    "build": "next build && echo"
+  },
+  "dependencies": {
+    "@mdx-js/loader": "^1.5.5",
+    "@mdx-js/mdx": "^1.5.5",
+    "@next/mdx": "^9.2.1",
+    "next": "^9.2.1"
+  }
+}
