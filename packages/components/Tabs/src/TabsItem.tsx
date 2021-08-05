@@ -99,7 +99,7 @@ export const TabsItem = compose<TabsItemType>({
         ...pressable.props,
         ref: componentRef,
         onAccessibilityTap: onAccessibilityTap,
-        // accessibilityRole: 'tab',
+        // accessibilityRole: 'tab', // Add role when RN is at >= 0.64
         accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: state.info.disabled, selected: state.info.selected },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],

@@ -17,7 +17,7 @@ export const settings: IComposeSettings<TabsItemType> = [
     root: {
       accessible: true,
       focusable: false,
-      // accessibilityRole: 'tab',
+      // accessibilityRole: 'tab', // Add role when RN is at >= 0.64
       style: {
         display: 'flex',
         alignItems: 'center',
