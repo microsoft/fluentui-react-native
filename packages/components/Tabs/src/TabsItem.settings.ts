@@ -32,7 +32,7 @@ export const settings: IComposeSettings<TabsItemType> = [
         borderRadius: 2,
         marginBottom: 2,
         alignSelf: 'stretch',
-        marginHorizontal: 12,
+        marginHorizontal: 10,
       },
     },
     stack: {
