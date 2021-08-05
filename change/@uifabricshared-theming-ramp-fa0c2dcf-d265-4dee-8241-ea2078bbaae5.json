@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Remove api-extractor related files",
+  "packageName": "@uifabricshared/theming-ramp",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "none"
+}
