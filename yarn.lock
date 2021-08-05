@@ -1181,10 +1181,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fluentui/token-pipeline@^0.3.7":
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.7.tgz#4ac3326c1d12539c7f8abc339432b69172c27bf1"
-  integrity sha512-HGuxm3o+FxSIRii6jjNXdlnRh8wSm91NUsBFiFdgnrIzEwn9ZcYi3UDXK65vzHCfueG9F2N0NJc2PF0/GlCsNQ==
+"@fluentui/token-pipeline@^0.3.8":
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.8.tgz#600babe93508ed2915848b1c3c4eac2b65afcc07"
+  integrity sha512-+AlWjF92EI3q56OCFkxz+GiySB0MTLt1XP1ilhtopVF2MaAhwjhOi4rPuoJ7rdPcoE42M98S0/AvHiQ+xOLZuQ==
   dependencies:
     args "^5.0.1"
     esm "^3.2.25"
