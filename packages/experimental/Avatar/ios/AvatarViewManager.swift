@@ -20,6 +20,8 @@ class AvatarViewManager: RCTViewManager {
 		return true
 	}
 
+	// We export the sizes to pass to React Native as a hardcoded height/width for the component.
+	// In the future, these sizes should come from the token pipeline.
 	override func constantsToExport() -> [AnyHashable : Any]! {
 		return [
 			"sizes" : [
