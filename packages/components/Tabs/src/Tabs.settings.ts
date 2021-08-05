@@ -5,22 +5,28 @@ export const settings: IComposeSettings<TabsType> = [
   {
     tokens: {
       color: 'menuItemText',
+      variant: 'subheaderSemibold',
     },
     root: {
       accessible: true,
       // accessibilityRole: 'tablist',
-      style: {},
+      style: {
+        marginLeft: 10,
+      },
     },
     label: {
       style: {
-        fontFamily: 'inherit',
-        fontSize: 16,
-        fontWeight: '600',
+        // marginLeft: 10,
+        // fontFamily: 'inherit',
+        // fontSize: 16,
+        // fontWeight: '600',
+        // variant: 'subheaderSemibold',
       },
     },
     container: {
       style: {
         flexDirection: 'row',
+        marginLeft: -10,
       },
     },
   },
