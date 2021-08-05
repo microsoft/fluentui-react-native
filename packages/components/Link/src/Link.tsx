@@ -54,7 +54,8 @@ export const Link = compose<ILinkType>({
   displayName: linkName,
   settings,
   usePrepareProps: (userProps: ILinkProps, useStyling: IUseComposeStyling<ILinkType>): ILinkRenderData => {
-    const { content, onAccessibilityTap, componentRef = React.useRef(null), ...rest } = userProps;
+    const defaultComponentRef = React.useRef(null);
+    const { content, onAccessibilityTap, componentRef = defaultComponentRef, ...rest } = userProps;
 
     const [linkProps, linkState] = useAsLink(rest, componentRef);
     const onAccTap = onAccessibilityTap ? onAccessibilityTap : linkProps.onPress;

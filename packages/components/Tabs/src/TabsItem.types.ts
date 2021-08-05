@@ -11,12 +11,6 @@ export const tabsItemName = 'TabsItem';
 
 export interface TabsItemInfo extends IPressableState {
   /**
-   * Disables the TabsItem.
-   * @default false
-   */
-  disabled?: boolean;
-
-  /**
    * TabsItem icon.
    */
   icon?: boolean;
@@ -41,7 +35,6 @@ export interface TabsItemState {
   info: TabsItemInfo;
 }
 
-// Props for the tabs item
 export interface TabsItemProps extends IButtonProps {
   /*
    ** The text string for the option
@@ -49,7 +42,7 @@ export interface TabsItemProps extends IButtonProps {
   headerText?: string;
 
   /*
-   ** The text string for the TabsItem count
+   ** The number for the TabsItem count
    */
   itemCount?: number;
 

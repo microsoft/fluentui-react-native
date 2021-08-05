@@ -62,14 +62,14 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
   defaultSelectedKey?: string;
 
   /*
-   **  OPTIONAL: An aria label for narrator. If not provided, it will be set to the label of the Tabs
+   ** An aria label for narrator. If not provided, it will be set to the label of the Tabs
    */
   ariaLabel?: string;
 
   /*
    ** The key of the selected option. If you provide this, you must maintain selection state by observing
    ** onTabsClick events and passing a new value in when changed. This overrides defaultSelectedKey
-   ** and makes the Tabs a controlled component.
+   ** and makes the Tabs a controlled component. This prop is mutually exclusive to defaultSelectedKey.
    */
   selectedKey?: string;
 

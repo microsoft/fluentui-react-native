@@ -64,7 +64,6 @@ export const TabsItem = compose<TabsItemType>({
       info: {
         ...pressable.state,
         selected: info.selectedKey === userProps.itemKey,
-        disabled: !!userProps.disabled,
         icon: !!icon,
         key: itemKey,
         headerText: !!headerText || itemCount !== undefined,
@@ -107,7 +106,7 @@ export const TabsItem = compose<TabsItemType>({
         onAccessibilityTap: onAccessibilityTap,
         accessibilityRole: 'tab',
         accessibilityLabel: accessibilityLabel,
-        accessibilityState: { disabled: state.info.disabled, selected: state.info.selected },
+        accessibilityState: { disabled: userProps.disabled, selected: info.selectedKey === userProps.itemKey },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
         accessibilityPositionInSet: info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
         accessibilitySetSize: info.tabsItemKeys.length,
