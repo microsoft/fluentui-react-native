@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fixed broken link",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "dake.3601@gmail.com",
+  "dependentChangeType": "patch"
+}
