@@ -8,7 +8,7 @@ export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
       color: 'neutralForeground3Brand',
-      variant: 'bodyStandard',
+      variant: 'headerStandard',
       borderWidth: 2,
       borderColor: 'transparent',
       borderRadius: 4,
@@ -16,8 +16,8 @@ export const settings: IComposeSettings<TabsItemType> = [
     },
     root: {
       accessible: true,
-      focusable: true,
-      accessibilityRole: 'tab',
+      focusable: false,
+      // accessibilityRole: 'tab', // Add role when RN is at >= 0.64
       style: {
         display: 'flex',
         alignItems: 'center',
@@ -47,7 +47,8 @@ export const settings: IComposeSettings<TabsItemType> = [
         justifyContent: 'center',
       },
     },
-    _precedence: ['hovered', 'selected', 'focused', 'disabled', 'pressed'],
+    // _precedence: ['hovered', 'selected', 'focused', 'disabled', 'pressed'],
+    _precedence: ['hovered', 'selected', 'disabled'],
     _overrides: {
       disabled: {
         tokens: {
@@ -57,38 +58,38 @@ export const settings: IComposeSettings<TabsItemType> = [
       hovered: {
         tokens: {
           color: 'neutralForeground2Hover',
-          indicatorColor: 'neutralStroke1'
+          // indicatorColor: 'neutralStroke1'
         },
       },
       selected: {
         tokens: {
           color: 'neutralForeground1',
-          variant: 'bodySemibold',
-          indicatorColor: 'brandStroke1'
-        },
-        _overrides: {
-          pressed: {
-            tokens: {
-              indicatorColor: 'neutralStroke1',
-            },
-          },
-        },
-      },
-
-      pressed: {
-        tokens: {
-          color: 'neutralForeground2Pressed',
+          // variant: 'bodySemibold',
           indicatorColor: 'brandStroke1',
         },
+        // _overrides: {
+        //   pressed: {
+        //     tokens: {
+        //       indicatorColor: 'neutralStroke1',
+        //     },
+        //   },
+        // },
       },
 
-      focused: {
-        tokens: {
-          color: 'neutralForeground1',
-          borderColor: 'neutralForeground1',
-          indicatorColor: 'brandStroke1',
-        },
-      },
+      // pressed: {
+      //   tokens: {
+      //     color: 'neutralForeground2Pressed',
+      //     indicatorColor: 'brandStroke1',
+      //   },
+      // },
+
+      // focused: {
+      //   tokens: {
+      //     color: 'neutralForeground1',
+      //     borderColor: 'neutralForeground1',
+      //     indicatorColor: 'brandStroke1',
+      //   },
+      // },
     },
   },
   tabsItemName,
