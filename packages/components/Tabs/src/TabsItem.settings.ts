@@ -57,13 +57,13 @@ export const settings: IComposeSettings<TabsItemType> = [
       hovered: {
         tokens: {
           color: 'neutralForeground2Hover',
-          indicatorColor: 'neutralStroke1'
+          // indicatorColor: 'neutralStroke1'
         },
       },
       selected: {
         tokens: {
           color: 'neutralForeground1',
-          variant: 'bodySemibold',
+          // variant: 'bodySemibold',
           indicatorColor: 'brandStroke1'
         },
         // _overrides: {
