@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Win32 Shimmer control and unifying changes for commonJS Shimmer",
+  "packageName": "@fluentui-react-native/experimental-shimmer",
+  "email": "patboyd@microsoft.com",
+  "dependentChangeType": "patch"
+}
