@@ -394,11 +394,11 @@
       "100": "#ffffff"
     },
     "hc": {
+      "disabled": "#000000",
       "buttonFace": "#000000",
       "buttonText": "#000000",
       "canvas": "#000000",
       "canvasText": "#000000",
-      "disabled": "#000000",
       "highlight": "#000000",
       "highlightText": "#000000",
       "hyperlink": "#000000"
