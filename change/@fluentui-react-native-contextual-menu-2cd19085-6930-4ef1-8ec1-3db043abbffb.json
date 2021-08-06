@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix usage of conditional hooks",
-  "packageName": "@fluentui-react-native/contextual-menu",
-  "email": "nakambo@microsoft.com",
-  "dependentChangeType": "patch"
-}

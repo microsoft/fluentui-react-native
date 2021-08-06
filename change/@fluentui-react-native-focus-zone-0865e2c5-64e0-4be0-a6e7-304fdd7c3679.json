@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fixing empty default tabbable",
-  "packageName": "@fluentui-react-native/focus-zone",
-  "email": "nakambo@microsoft.com",
-  "dependentChangeType": "patch"
-}
