@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Wed, 04 Aug 2021 16:54:20 GMT and should not be manually modified.
+This log was last generated on Fri, 06 Aug 2021 00:36:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.0
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Minor changes
+
+- Update Avatar to use latest SwiftUI Implementation from FluentUI Apple (sanajmi@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.22 (ruaraki@microsoft.com)
 
 ## 0.10.1
 

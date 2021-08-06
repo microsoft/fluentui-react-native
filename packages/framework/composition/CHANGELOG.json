@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/composition",
   "entries": [
     {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@fluentui-react-native/composition_v0.6.7",
+      "version": "0.6.7",
+      "comments": {
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/composition"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 Aug 2021 16:54:20 GMT",
       "tag": "@fluentui-react-native/composition_v0.6.7",
       "version": "0.6.7",

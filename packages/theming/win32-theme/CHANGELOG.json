@@ -2,6 +2,56 @@
   "name": "@fluentui-react-native/win32-theme",
   "entries": [
     {
+      "date": "Fri, 06 Aug 2021 20:26:18 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Initial implementation of brand alias tokens",
+            "author": "ruaraki@microsoft.com",
+            "commit": "cbb8fdadc55bd53da5e1335ff69d8e379df32d2d",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.7.14",
+      "version": "0.7.14",
+      "comments": {
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/win32-theme"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.9.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/win32-theme"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.3.4",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/default-theme to v0.7.4",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 Aug 2021 06:26:25 GMT",
       "tag": "@fluentui-react-native/win32-theme_v0.7.13",
       "version": "0.7.13",

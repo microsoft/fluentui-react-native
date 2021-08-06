@@ -2,6 +2,35 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.3.4",
+      "version": "0.3.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Revert \"Add shadow tokens\" #856",
+            "author": "sanajmi@microsoft.com",
+            "commit": "f3fb2a4a61ce3a6adc55ee16cdc43ee2b0179cef",
+            "package": "@fluentui-react-native/theme-tokens"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/theme-tokens"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.9.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/theme-tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 Aug 2021 06:26:25 GMT",
       "tag": "@fluentui-react-native/theme-tokens_v0.3.3",
       "version": "0.3.3",

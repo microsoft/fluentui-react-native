@@ -2,6 +2,65 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@fluentui-react-native/icon_v0.8.2",
+      "version": "0.8.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/default-theme to v0.7.4",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.22",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.9.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.3.4",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.13",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/icon"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/text to v0.10.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/icon"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 Aug 2021 16:54:20 GMT",
       "tag": "@fluentui-react-native/icon_v0.8.1",
       "version": "0.8.1",

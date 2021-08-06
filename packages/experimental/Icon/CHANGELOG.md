@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Wed, 04 Aug 2021 16:54:20 GMT and should not be manually modified.
+This log was last generated on Fri, 06 Aug 2021 00:36:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.2
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.1 (ruaraki@microsoft.com)
 
 ## 0.8.1
 

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Use latest official FluentUI pod",
-  "packageName": "@fluentui-react-native/experimental-native-button",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
