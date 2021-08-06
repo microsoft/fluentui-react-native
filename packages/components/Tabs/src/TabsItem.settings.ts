@@ -86,7 +86,6 @@ export const settings: IComposeSettings<TabsItemType> = [
         tokens: {
           color: 'neutralForeground1',
           borderColor: 'neutralForeground1',
-          indicatorColor: 'brandStroke1',
         },
       },
     },

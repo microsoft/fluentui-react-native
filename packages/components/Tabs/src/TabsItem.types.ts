@@ -62,14 +62,16 @@ export interface TabsItemProps extends IButtonProps {
   ariaLabel?: string;
 
   /*
-  ** Overrides the position of the tabItem that the Narrator reads out.
-  */
-  ariaPosInSet?: number;
+   ** Defines the current tabs item's position in tabs for accessibility purposes. It's recommended to set this value if
+   ** tabs item are not direct children of tabs. This value is auto-generated if tabs item are direct children of tabs.
+   */
+   ariaPosInSet?: number;
 
-  /*
-  ** Overrides the size of the tabItem that the Narrator reads out.
-  */
-  ariaSetSize?: number;
+   /*
+    ** Defines the number of tabs items in the group for accessibility purposes. It's recommended to set this value if tabs
+    ** items are not direct children of tabs. This value is auto-generated if tabs items are direct children of tabs.
+    */
+   ariaSetSize?: number;
 
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
