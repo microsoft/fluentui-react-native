@@ -4,6 +4,7 @@ import { getThemingModule } from './NativeModule/getThemingModule';
 import { CxxException, PlatformDefaultsChangedArgs } from './NativeModule/officeThemingModule';
 import { OfficePalette, Theme, ThemeOptions } from '@fluentui-react-native/theme-types';
 import { createPartialOfficeTheme } from './createPartialOfficeTheme';
+import { createBrandedThemeWithAlias } from './createBrandedThemeWithAlias';
 import { createThemeWithAliases } from '@fluentui-react-native/theming-utils';
 
 function handlePaletteCall(palette: OfficePalette | CxxException): OfficePalette | undefined {
@@ -34,6 +35,9 @@ export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
     },
     (theme: Theme) => {
       return createThemeWithAliases(theme);
+    },
+    (theme: Theme) => {
+      return createBrandedThemeWithAlias(theme);
     },
   );
 

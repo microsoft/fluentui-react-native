@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Fri, 06 Aug 2021 00:36:02 GMT and should not be manually modified.
+This log was last generated on Fri, 06 Aug 2021 20:26:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.0
+
+Fri, 06 Aug 2021 20:26:18 GMT
+
+### Minor changes
+
+- Initial implementation of brand alias tokens (ruaraki@microsoft.com)
 
 ## 0.7.14
 
