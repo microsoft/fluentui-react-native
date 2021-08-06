@@ -64,7 +64,7 @@ const brandColors: BrandRamps = {
 
 export const brandOptions = Object.keys(brandColors).map((brand) => ({ label: brand, value: brand }));
 
-export const applyBrand = (currentBrand: string) => {
+export const applyBrand = (currentBrand: string): { [key: string]: any } => {
   const ramp = brandColors[currentBrand];
   return ramp
     ? {

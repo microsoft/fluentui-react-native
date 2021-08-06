@@ -6,7 +6,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { shimmerBorderRadiusTests, shimmerRectsAndRect, shimmerRectsAndCircle } from './ShimmerTestElementSets';
 
-const RectShimmers: React.FunctionComponent<{}> = () => {
+const RectShimmers: React.FunctionComponent<Record<string, never>> = () => {
   return (
     <Stack style={stackStyle}>
       <Shimmer elements={shimmerRectsAndRect()} duration={2000} delay={1000} style={{ width: 300, height: 100 }} />
@@ -14,7 +14,7 @@ const RectShimmers: React.FunctionComponent<{}> = () => {
   );
 };
 
-const RectCircleShimmers: React.FunctionComponent<{}> = () => {
+const RectCircleShimmers: React.FunctionComponent<Record<string, never>> = () => {
   return (
     <Stack style={stackStyle}>
       <Shimmer elements={shimmerRectsAndCircle()} duration={3000} style={{ width: 300, height: 100 }} />
@@ -22,7 +22,7 @@ const RectCircleShimmers: React.FunctionComponent<{}> = () => {
   );
 };
 
-const CustomizedShimmer: React.FunctionComponent<{}> = () => {
+const CustomizedShimmer: React.FunctionComponent<Record<string, never>> = () => {
   const PinkShimmer = Shimmer.customize({
     shimmerWaveColor: 'pink',
   });
@@ -34,7 +34,7 @@ const CustomizedShimmer: React.FunctionComponent<{}> = () => {
   );
 };
 
-const ShimmerBorderRadii: React.FunctionComponent<{}> = () => {
+const ShimmerBorderRadii: React.FunctionComponent<Record<string, never>> = () => {
   return (
     <Stack style={stackStyle}>
       <Shimmer elements={shimmerBorderRadiusTests()} duration={3000} style={{ width: 800, height: 400 }} />
