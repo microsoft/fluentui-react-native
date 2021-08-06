@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/stack",
   "entries": [
     {
+      "date": "Fri, 06 Aug 2021 23:18:21 GMT",
+      "tag": "@fluentui-react-native/stack_v0.5.19",
+      "version": "0.5.19",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "a8ae5b0cadbfb7ff6224b35a15995dd2def2ae45",
+            "package": "@fluentui-react-native/stack"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 06 Aug 2021 00:36:02 GMT",
       "tag": "@fluentui-react-native/stack_v0.5.18",
       "version": "0.5.18",

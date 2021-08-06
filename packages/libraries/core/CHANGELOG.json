@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Fri, 06 Aug 2021 23:18:21 GMT",
+      "tag": "@fluentui/react-native_v0.24.27",
+      "version": "0.24.27",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/persona to v0.11.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "a8ae5b0cadbfb7ff6224b35a15995dd2def2ae45",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 06 Aug 2021 00:36:02 GMT",
       "tag": "@fluentui/react-native_v0.24.26",
       "version": "0.24.26",

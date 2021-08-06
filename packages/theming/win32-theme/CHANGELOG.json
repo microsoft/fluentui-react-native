@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/win32-theme",
   "entries": [
     {
+      "date": "Fri, 06 Aug 2021 23:18:21 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.8.1",
+      "version": "0.8.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/default-theme to v0.7.5",
+            "author": "ruaraki@microsoft.com",
+            "commit": "a8ae5b0cadbfb7ff6224b35a15995dd2def2ae45",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 06 Aug 2021 20:26:18 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Initial implementation of brand alias tokens",
+            "author": "ruaraki@microsoft.com",
+            "commit": "cbb8fdadc55bd53da5e1335ff69d8e379df32d2d",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 06 Aug 2021 00:36:02 GMT",
       "tag": "@fluentui-react-native/win32-theme_v0.7.14",
       "version": "0.7.14",
