@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/experimental-native-date-picker",
   "entries": [
     {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Use latest official FluentUI pod",
+            "author": "sanajmi@microsoft.com",
+            "commit": "8fc964aec272d1c75e418f1ef1cb678d9a3c453d",
+            "package": "@fluentui-react-native/experimental-native-date-picker"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/experimental-native-date-picker"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 Aug 2021 06:26:25 GMT",
       "tag": "@fluentui-react-native/experimental-native-date-picker_v0.3.0",
       "version": "0.3.0",

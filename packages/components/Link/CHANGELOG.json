@@ -2,6 +2,71 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@fluentui-react-native/link_v0.13.2",
+      "version": "0.13.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/link"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/text to v0.10.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/link"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/link"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.25",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/link"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.13",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/link"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-composable to v0.9.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/link"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-settings to v0.10.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/link"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/adapters to v0.6.8",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/link"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Fix usage of conditional hooks",
+            "author": "nakambo@microsoft.com",
+            "commit": "f8d82fbbe4045fef3fa2f987ebd473ba4dbbd257",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 Aug 2021 16:54:20 GMT",
       "tag": "@fluentui-react-native/link_v0.13.1",
       "version": "0.13.1",
