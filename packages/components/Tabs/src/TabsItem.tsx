@@ -33,6 +33,8 @@ export const TabsItem = compose<TabsItemType>({
       onClick,
       itemKey,
       itemCount,
+      ariaPosInSet,
+      ariaSetSize,
       ...rest
     } = userProps;
 
@@ -108,8 +110,8 @@ export const TabsItem = compose<TabsItemType>({
         accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: userProps.disabled, selected: info.selectedKey === userProps.itemKey },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
-        accessibilityPositionInSet: info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
-        accessibilitySetSize: info.tabsItemKeys.length,
+        accessibilityPositionInSet: ariaPosInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
+        accessibilitySetSize: ariaSetSize ?? info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUp,
       },
