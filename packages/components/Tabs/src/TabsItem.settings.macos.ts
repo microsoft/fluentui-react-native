@@ -8,13 +8,8 @@ export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
       color: '#616161',
-      // fontWeight: 'normal',
-      // fontFamily: 'Arial',
-      // fontSize: 14
-      variant: 'bodyStandard',
+      variant: 'subheaderStandard',
       fontSize: 13,
-      borderWidth: 2,
-      borderRadius: 4,
       indicatorColor: 'transparent',
     },
     root: {
@@ -50,27 +45,38 @@ export const settings: IComposeSettings<TabsItemType> = [
         justifyContent: 'center',
       },
     },
-    _precedence: ['hovered', 'selected', 'focused', 'pressed', 'disabled'],
+    _precedence: ['selected', 'hovered', 'disabled'],
     _overrides: {
       disabled: {
         tokens: {
           color: '#BDBDBD',
-          indicatorColor: 'transparent'
+          indicatorColor: 'transparent',
+          fontWeight: 'normal',
         },
       },
       hovered: {
         tokens: {
           color: 'pink',
-          indicatorColor: 'labelColor',
+          fontWeight: 'bold',
         },
       },
       selected: {
         tokens: {
           color: '#242424',
-          // fontWeight: 'bold',
-          // fontFamily: 'SF Pro Text',
-          // fontSize: 14,
-          indicatorColor: 'labelColor',
+          indicatorColor: 'blue',
+          fontWeight: 'bold',
+        },
+        _overrides: {
+          hovered: {
+            indicator: {
+              style:{
+                marginHorizontal: -1,
+              },
+            },
+            tokens: {
+              color: "242424",
+            },
+          },
         },
       },
     },
