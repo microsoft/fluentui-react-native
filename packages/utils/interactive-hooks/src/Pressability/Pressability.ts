@@ -147,98 +147,98 @@ const getTouchFromPressEvent = (event: PressEvent) => {
 };
 
 /**
-* Pressability implements press handling capabilities.
-*
-* =========================== Pressability Tutorial ===========================
-*
-* The `Pressability` class helps you create press interactions by analyzing the
-* geometry of elements and observing when another responder (e.g. ScrollView)
-* has stolen the touch lock. It offers hooks for your component to provide
-* interaction feedback to the user:
-*
-* - When a press has activated (e.g. highlight an element)
-* - When a press has deactivated (e.g. un-highlight an element)
-* - When a press sould trigger an action, meaning it activated and deactivated
-*   while within the geometry of the element without the lock being stolen.
-*
-* A high quality interaction isn't as simple as you might think. There should
-* be a slight delay before activation. Moving your finger beyond an element's
-* bounds should trigger deactivation, but moving the same finger back within an
-* element's bounds should trigger reactivation.
-*
-* In order to use `Pressability`, do the following:
-*
-* 1. Instantiate `Pressability` and store it on your component's state.
-*
-*    state = {
-*      pressability: new Pressability({
-*        // ...
-*      }),
-*    };
-*
-* 2. Choose the rendered component who should collect the press events. On that
-*    element, spread `pressability.getEventHandlers()` into its props.
-*
-*    return (
-*      <View {...this.state.pressability.getEventHandlers()} />
-*    );
-*
-* 3. Reset `Pressability` when your component unmounts.
-*
-*    componentWillUnmount() {
-*      this.state.pressability.reset();
-*    }
-*
-* ==================== Pressability Implementation Details ====================
-*
-* `Pressability` only assumes that there exists a `HitRect` node. The `PressRect`
-* is an abstract box that is extended beyond the `HitRect`.
-*
-* # Geometry
-*
-*  ┌────────────────────────┐
-*  │  ┌──────────────────┐  │ - Presses start anywhere within `HitRect`, which
-*  │  │  ┌────────────┐  │  │   is expanded via the prop `hitSlop`.
-*  │  │  │ VisualRect │  │  │
-*  │  │  └────────────┘  │  │ - When pressed down for sufficient amount of time
-*  │  │    HitRect       │  │   before letting up, `VisualRect` activates for
-*  │  └──────────────────┘  │   as long as the press stays within `PressRect`.
-*  │       PressRect    o   │
-*  └────────────────────│───┘
-*          Out Region   └────── `PressRect`, which is expanded via the prop
-*                               `pressRectOffset`, allows presses to move
-*                               beyond `HitRect` while maintaining activation
-*                               and being eligible for a "press".
-*
-* # State Machine
-*
-* ┌───────────────┐ ◀──── RESPONDER_RELEASE
-* │ NOT_RESPONDER │
-* └───┬───────────┘ ◀──── RESPONDER_TERMINATED
-*     │
-*     │ RESPONDER_GRANT (HitRect)
-*     │
-*     ▼
-* ┌─────────────────────┐          ┌───────────────────┐              ┌───────────────────┐
-* │ RESPONDER_INACTIVE_ │  DELAY   │ RESPONDER_ACTIVE_ │  T + DELAY   │ RESPONDER_ACTIVE_ │
-* │ PRESS_IN            ├────────▶ │ PRESS_IN          ├────────────▶ │ LONG_PRESS_IN     │
-* └─┬───────────────────┘          └─┬─────────────────┘              └─┬─────────────────┘
-*   │           ▲                    │           ▲                      │           ▲
-*   │LEAVE_     │                    │LEAVE_     │                      │LEAVE_     │
-*   │PRESS_RECT │ENTER_              │PRESS_RECT │ENTER_                │PRESS_RECT │ENTER_
-*   │           │PRESS_RECT          │           │PRESS_RECT            │           │PRESS_RECT
-*   ▼           │                    ▼           │                      ▼           │
-* ┌─────────────┴───────┐          ┌─────────────┴─────┐              ┌─────────────┴─────┐
-* │ RESPONDER_INACTIVE_ │  DELAY   │ RESPONDER_ACTIVE_ │              │ RESPONDER_ACTIVE_ │
-* │ PRESS_OUT           ├────────▶ │ PRESS_OUT         │              │ LONG_PRESS_OUT    │
-* └─────────────────────┘          └───────────────────┘              └───────────────────┘
-*
-* T + DELAY => LONG_PRESS_DELAY + DELAY
-*
-* Not drawn are the side effects of each transition. The most important side
-* effect is the invocation of `onPress` and `onLongPress` that occur when a
-* responder is release while in the "press in" states.
-*/
+ * Pressability implements press handling capabilities.
+ *
+ * =========================== Pressability Tutorial ===========================
+ *
+ * The `Pressability` class helps you create press interactions by analyzing the
+ * geometry of elements and observing when another responder (e.g. ScrollView)
+ * has stolen the touch lock. It offers hooks for your component to provide
+ * interaction feedback to the user:
+ *
+ * - When a press has activated (e.g. highlight an element)
+ * - When a press has deactivated (e.g. un-highlight an element)
+ * - When a press sould trigger an action, meaning it activated and deactivated
+ *   while within the geometry of the element without the lock being stolen.
+ *
+ * A high quality interaction isn't as simple as you might think. There should
+ * be a slight delay before activation. Moving your finger beyond an element's
+ * bounds should trigger deactivation, but moving the same finger back within an
+ * element's bounds should trigger reactivation.
+ *
+ * In order to use `Pressability`, do the following:
+ *
+ * 1. Instantiate `Pressability` and store it on your component's state.
+ *
+ *    state = {
+ *      pressability: new Pressability({
+ *        // ...
+ *      }),
+ *    };
+ *
+ * 2. Choose the rendered component who should collect the press events. On that
+ *    element, spread `pressability.getEventHandlers()` into its props.
+ *
+ *    return (
+ *      <View {...this.state.pressability.getEventHandlers()} />
+ *    );
+ *
+ * 3. Reset `Pressability` when your component unmounts.
+ *
+ *    componentWillUnmount() {
+ *      this.state.pressability.reset();
+ *    }
+ *
+ * ==================== Pressability Implementation Details ====================
+ *
+ * `Pressability` only assumes that there exists a `HitRect` node. The `PressRect`
+ * is an abstract box that is extended beyond the `HitRect`.
+ *
+ * # Geometry
+ *
+ *  ┌────────────────────────┐
+ *  │  ┌──────────────────┐  │ - Presses start anywhere within `HitRect`, which
+ *  │  │  ┌────────────┐  │  │   is expanded via the prop `hitSlop`.
+ *  │  │  │ VisualRect │  │  │
+ *  │  │  └────────────┘  │  │ - When pressed down for sufficient amount of time
+ *  │  │    HitRect       │  │   before letting up, `VisualRect` activates for
+ *  │  └──────────────────┘  │   as long as the press stays within `PressRect`.
+ *  │       PressRect    o   │
+ *  └────────────────────│───┘
+ *          Out Region   └────── `PressRect`, which is expanded via the prop
+ *                               `pressRectOffset`, allows presses to move
+ *                               beyond `HitRect` while maintaining activation
+ *                               and being eligible for a "press".
+ *
+ * # State Machine
+ *
+ * ┌───────────────┐ ◀──── RESPONDER_RELEASE
+ * │ NOT_RESPONDER │
+ * └───┬───────────┘ ◀──── RESPONDER_TERMINATED
+ *     │
+ *     │ RESPONDER_GRANT (HitRect)
+ *     │
+ *     ▼
+ * ┌─────────────────────┐          ┌───────────────────┐              ┌───────────────────┐
+ * │ RESPONDER_INACTIVE_ │  DELAY   │ RESPONDER_ACTIVE_ │  T + DELAY   │ RESPONDER_ACTIVE_ │
+ * │ PRESS_IN            ├────────▶ │ PRESS_IN          ├────────────▶ │ LONG_PRESS_IN     │
+ * └─┬───────────────────┘          └─┬─────────────────┘              └─┬─────────────────┘
+ *   │           ▲                    │           ▲                      │           ▲
+ *   │LEAVE_     │                    │LEAVE_     │                      │LEAVE_     │
+ *   │PRESS_RECT │ENTER_              │PRESS_RECT │ENTER_                │PRESS_RECT │ENTER_
+ *   │           │PRESS_RECT          │           │PRESS_RECT            │           │PRESS_RECT
+ *   ▼           │                    ▼           │                      ▼           │
+ * ┌─────────────┴───────┐          ┌─────────────┴─────┐              ┌─────────────┴─────┐
+ * │ RESPONDER_INACTIVE_ │  DELAY   │ RESPONDER_ACTIVE_ │              │ RESPONDER_ACTIVE_ │
+ * │ PRESS_OUT           ├────────▶ │ PRESS_OUT         │              │ LONG_PRESS_OUT    │
+ * └─────────────────────┘          └───────────────────┘              └───────────────────┘
+ *
+ * T + DELAY => LONG_PRESS_DELAY + DELAY
+ *
+ * Not drawn are the side effects of each transition. The most important side
+ * effect is the invocation of `onPress` and `onLongPress` that occur when a
+ * responder is release while in the "press in" states.
+ */
 export class Pressability {
   private _config: PressabilityConfig;
   private _eventHandlers: PressabilityEventHandlers = null;
@@ -265,8 +265,8 @@ export class Pressability {
   }
 
   /**
-  * Resets any pending timers. This should be called on unmount.
-  */
+   * Resets any pending timers. This should be called on unmount.
+   */
   public reset(): void {
     this._cancelHoverInDelayTimeout();
     this._cancelHoverOutDelayTimeout();
@@ -276,8 +276,8 @@ export class Pressability {
   }
 
   /**
-  * Returns a set of props to spread into the interactive element.
-  */
+   * Returns a set of props to spread into the interactive element.
+   */
   public getEventHandlers(): PressabilityEventHandlers {
     if (this._eventHandlers == null) {
       this._eventHandlers = this._createEventHandlers();
@@ -439,9 +439,9 @@ export class Pressability {
   }
 
   /**
-  * Receives a state machine signal, performs side effects of the transition
-  * and stores the new state. Validates the transition as well.
-  */
+   * Receives a state machine signal, performs side effects of the transition
+   * and stores the new state. Validates the transition as well.
+   */
   private _receiveSignal(signal: TouchSignal, event: PressEvent): void {
     const prevState = this._touchState;
     const nextState: TouchState = Transitions[prevState][signal];
@@ -462,9 +462,9 @@ export class Pressability {
   }
 
   /**
-  * Performs a transition between touchable states and identify any activations
-  * or deactivations (and callback invocations).
-  */
+   * Performs a transition between touchable states and identify any activations
+   * or deactivations (and callback invocations).
+   */
   private _performTransitionSideEffects(prevState: TouchState, nextState: TouchState, signal: TouchSignal, event): void {
     if (isTerminalSignal(signal)) {
       this._touchActivatePosition = null;
