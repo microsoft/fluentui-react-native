@@ -14,7 +14,6 @@ import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemR
 import {
   useAsPressable,
   useKeyCallback,
-  useViewCommandFocus,
   createIconProps,
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
