@@ -5,6 +5,7 @@ import { shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import { Animated } from 'react-native';
 import { stylingSettings } from './Shimmer.styling';
+import assertNever from 'assert-never';
 
 export function useShimmerAnimation(memoData: any) {
   const startValue = useRef(new Animated.Value(0)).current;
@@ -72,6 +73,8 @@ export const Shimmer = compose<ShimmerType>({
             );
           } else if (element.type == 'circle') {
             rows.push(<Circle key={i} r={element.radius} cx={element.cx} cy={element.cy} />);
+          } else {
+            assertNever(element);
           }
         }
       }

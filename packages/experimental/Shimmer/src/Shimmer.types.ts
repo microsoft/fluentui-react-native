@@ -5,12 +5,6 @@ import { IBackgroundColorTokens } from '@fluentui-react-native/tokens';
 export const shimmerName = 'Shimmer';
 
 /**
- * Specifies the possible types of the shimmer elements: Rect, Circle.
- * Required when building more than one element at a time.
- */
-export type ShimmerElementType = 'rect' | 'circle';
-
-/**
  * Properties necessary to define a circular Shimmer element.
  */
 export interface ShimmerCircleElement {
@@ -32,15 +26,11 @@ export interface ShimmerCircleElement {
 
   /**
    * The x-axis center of the circle element in the Shimmer relative to the origin [top-left, (0,0)].
-   *
-   * @defaultValue 12
    */
   cx: number;
 
   /**
    * The y-axis center of the circle element in the Shimmer relative to the origin [top-left, (0,0)].
-   *
-   * @defaultValue 12
    */
   cy: number;
 }
@@ -85,13 +75,11 @@ export interface ShimmerRectElement {
 
   /**
    * The x-axis position of the rect element's top-left corner in the Shimmer relative to the origin [top-left, (0,0)].
-   * @defaultValue 0
    */
   x: number;
 
   /**
    * The y-axis position of the rect element's top-left corner in the Shimmer relative to the origin [top-left, (0,0)].
-   * @defaultValue 0
    */
   y: number;
 }

@@ -8,6 +8,7 @@ import { ClippingMaskProps, ShimmerType } from './Shimmer.types.win32';
 import { RCTNativeAnimatedShimmer } from './consts.win32';
 import { convertRectToSvgPath, convertCircleToSvgPath } from './SvgShapeToPath';
 import { withSlots } from '@fluentui-react-native/framework';
+import { assertNever } from 'assert-never';
 
 /** Absolute positioning is used to overlay the clipping mask on top of the shimmer wave. */
 const clippingMask: React.FunctionComponent<ClippingMaskProps> = (props: ClippingMaskProps) => {
@@ -81,9 +82,13 @@ export const Shimmer = compose<ShimmerType>({
       if (elements) {
         for (let i = 0; i < elements.length; i++) {
           const element = elements[i];
-          clipPathsAsMask = clipPathsAsMask.concat(
-            element.type === 'circle' ? convertCircleToSvgPath(element) : convertRectToSvgPath(element),
-          );
+          if (element.type == 'circle') {
+            clipPathsAsMask = clipPathsAsMask.concat(convertCircleToSvgPath(element));
+          } else if (element.type == 'rect') {
+            clipPathsAsMask = clipPathsAsMask.concat(convertRectToSvgPath(element));
+          } else {
+            assertNever(element);
+          }
         }
       }
 
