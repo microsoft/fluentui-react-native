@@ -45,38 +45,35 @@ export const settings: IComposeSettings<TabsItemType> = [
         justifyContent: 'center',
       },
     },
-    _precedence: ['selected', 'hovered', 'disabled'],
+    _precedence: ['hovered', 'selected', 'disabled'],
     _overrides: {
       disabled: {
         tokens: {
-          color: '#BDBDBD',
+          color: 'buttonTextDisabled',
           indicatorColor: 'transparent',
           fontWeight: 'normal',
         },
       },
       hovered: {
         tokens: {
-          color: 'pink',
-          fontWeight: 'bold',
-        },
-      },
-      selected: {
-        tokens: {
-          color: '#242424',
-          indicatorColor: 'blue',
+          color: 'buttonTextHovered',
           fontWeight: 'bold',
         },
         _overrides: {
-          hovered: {
+          selected: {
             indicator: {
               style:{
                 marginHorizontal: -1,
               },
             },
-            tokens: {
-              color: "242424",
-            },
           },
+        },
+      },
+      selected: {
+        tokens: {
+          color: 'buttonTextPressed',
+          indicatorColor: 'accentButtonBackground',
+          fontWeight: 'bold',
         },
       },
     },

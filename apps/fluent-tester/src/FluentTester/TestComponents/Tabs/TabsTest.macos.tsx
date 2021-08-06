@@ -124,6 +124,12 @@ const tabsRenderSeparately: React.FunctionComponent = () => {
 
   return (
     <View style={stackStyle}>
+
+      <Tabs onTabsClick={onTabsClick} headersOnly={true} selectedKey={selectedKey}>
+        <TabsItem headerText="Rectangle Red" itemKey="rectangleRed" />
+        <TabsItem headerText="Square Red" itemKey="squareRed" />
+        <TabsItem headerText="Rectangle Green" itemKey="rectangleGreen" />
+      </Tabs>
       <View
         style={{
           width: 100,
@@ -131,11 +137,6 @@ const tabsRenderSeparately: React.FunctionComponent = () => {
           backgroundColor: selectedKey === 'rectangleGreen' ? 'green' : 'red',
         }}
       />
-      <Tabs onTabsClick={onTabsClick} headersOnly={true} selectedKey={selectedKey}>
-        <TabsItem headerText="Rectangle Red" itemKey="rectangleRed" />
-        <TabsItem headerText="Square Red" itemKey="squareRed" />
-        <TabsItem headerText="Rectangle Green" itemKey="rectangleGreen" />
-      </Tabs>
     </View>
   );
 };
