@@ -1,4 +1,3 @@
-import { ActivityIndicatorTest, HOMEPAGE_ACTIVITYINDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
@@ -22,11 +21,6 @@ import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 import { TestDescription } from './TestComponents';
 
 export const tests: TestDescription[] = [
-  {
-    name: 'ActivityIndicator Test',
-    component: ActivityIndicatorTest,
-    testPage: HOMEPAGE_ACTIVITYINDICATOR_BUTTON,
-  },
   {
     name: 'Button Test',
     component: ButtonTest,

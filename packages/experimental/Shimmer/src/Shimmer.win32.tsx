@@ -3,16 +3,14 @@ import { compose, mergeProps, UseSlots } from '@fluentui-react-native/framework'
 import { View } from 'react-native';
 import { ClipPath, Defs, LinearGradient, Path, Rect, Stop, Svg } from 'react-native-svg';
 import { styleSettings } from './Shimmer.styling.win32';
-import { shimmerName, ShimmerProps } from './Shimmer.types';
-import { ShimmerType } from './Shimmer.types.win32';
+import { shimmerName, ShimmerProps, ShimmerTokens } from './Shimmer.types';
+import { ClippingMaskProps, ShimmerType } from './Shimmer.types.win32';
 import { RCTNativeAnimatedShimmer } from './consts.win32';
 import { convertRectToSvgPath, convertCircleToSvgPath } from './SvgShapeToPath';
 import { withSlots } from '@fluentui-react-native/framework';
 
 /** Absolute positioning is used to overlay the clipping mask on top of the shimmer wave. */
-const clippingMask: React.FunctionComponent<ShimmerType['slotProps']['clippingMask']> = (
-  props: ShimmerType['slotProps']['clippingMask'],
-) => {
+const clippingMask: React.FunctionComponent<ClippingMaskProps> = (props: ClippingMaskProps) => {
   return (
     <Svg style={{ position: 'absolute' }} width="100%" height="100%">
       <Defs>
@@ -26,7 +24,7 @@ const clippingMask: React.FunctionComponent<ShimmerType['slotProps']['clippingMa
   );
 };
 
-const wave: React.FunctionComponent<ShimmerType['slotProps']['shimmerWave']> = (props: ShimmerType['slotProps']['shimmerWave']) => {
+const wave: React.FunctionComponent<ShimmerTokens> = (props: ShimmerTokens) => {
   const shimmerColor: any = props.shimmerColor;
   const shimmerWaveColor: any = props.shimmerWaveColor;
 
@@ -42,9 +40,7 @@ const wave: React.FunctionComponent<ShimmerType['slotProps']['shimmerWave']> = (
   );
 };
 
-const waveContainer: React.FunctionComponent<ShimmerType['slotProps']['shimmerWaveContainer']> = (
-  props: ShimmerType['slotProps']['shimmerWaveContainer'],
-) => {
+const waveContainer: React.FunctionComponent<ShimmerTokens> = (props: ShimmerTokens) => {
   return <RCTNativeAnimatedShimmer {...{ ...props, style: { backgroundColor: props.shimmerColor, overflow: 'hidden' } }} />;
 };
 
