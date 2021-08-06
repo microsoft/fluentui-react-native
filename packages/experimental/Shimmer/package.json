@@ -14,8 +14,6 @@
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
     "update-snapshots": "fluentui-scripts jest -u",
-    "verify-api": "fluentui-scripts verify-api-extractor",
-    "update-api": "fluentui-scripts update-api-extractor",
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },

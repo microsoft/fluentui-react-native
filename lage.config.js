@@ -10,8 +10,6 @@ module.exports = {
     lint: ['build-tools'],
     prettier: ['build-tools'],
     ['prettier-fix']: ['build-tools'],
-    ['verify-api']: [],
-    ['update-api']: [],
     test: ['build-tools', 'lint', 'build'],
   },
 };
