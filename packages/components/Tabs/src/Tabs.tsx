@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, ITabsContext } from './Tabs.types';
@@ -74,7 +74,7 @@ export const Tabs = compose<TabsType>({
       },
       info: {
         headersOnly: headersOnly ?? false,
-        label: !!label,
+        label: !!label && Platform.OS === 'windows',
       },
     };
 
