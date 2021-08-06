@@ -2,6 +2,47 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.12.1",
+      "version": "0.12.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@uifabricshared/theming-react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.7.14",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@uifabricshared/theming-react-native"
+          },
+          {
+            "comment": "Bump @uifabricshared/theme-registry to v0.6.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@uifabricshared/theming-react-native"
+          },
+          {
+            "comment": "Bump @uifabricshared/theming-ramp to v0.15.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/default-theme to v0.7.4",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 Aug 2021 06:26:25 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.12.0",
       "version": "0.12.0",

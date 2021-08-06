@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Remove api-extractor related files",
-  "packageName": "@uifabricshared/foundation-composable",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}

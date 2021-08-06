@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Remove api-extractor related files",
-  "packageName": "@uifabricshared/theme-registry",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}

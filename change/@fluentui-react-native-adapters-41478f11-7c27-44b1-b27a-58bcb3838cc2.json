@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Remove api-extractor related files",
-  "packageName": "@fluentui-react-native/adapters",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}
