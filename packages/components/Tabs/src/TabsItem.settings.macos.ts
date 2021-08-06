@@ -7,7 +7,7 @@ export const tabsItemSelectActionLabel = 'Select a TabsItem';
 export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
-      color: '#616161',
+      color: 'bodyText',
       variant: 'subheaderStandard',
       fontSize: 13,
       indicatorColor: 'transparent',
