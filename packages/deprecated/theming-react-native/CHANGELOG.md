@@ -1,8 +1,31 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Tue, 27 Jul 2021 22:17:20 GMT and should not be manually modified.
+This log was last generated on Fri, 06 Aug 2021 00:36:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.1
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.4 (ruaraki@microsoft.com)
+
+## 0.12.0
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Minor changes
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.3 (67026167+chiuam@users.noreply.github.com)
+- Bump @uifabricshared/theming-ramp to v0.15.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @uifabricshared/theme-registry to v0.6.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/win32-theme to v0.7.13 (67026167+chiuam@users.noreply.github.com)
 
 ## 0.11.14
 

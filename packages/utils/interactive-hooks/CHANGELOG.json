@@ -2,6 +2,119 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.10.25",
+      "version": "0.10.25",
+      "comments": {
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 Aug 2021 16:54:20 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.10.24",
+      "version": "0.10.24",
+      "comments": {
+        "patch": [
+          {
+            "comment": "move experimental Text to be written as compressible",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4136f64930de10457a984863998c4a553b0b0efc",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 Aug 2021 06:26:25 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.10.23",
+      "version": "0.10.23",
+      "comments": {
+        "patch": [
+          {
+            "comment": "radio group on macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 03 Aug 2021 23:48:50 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.10.22",
+      "version": "0.10.22",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.7.19",
+            "author": "jasonmo@microsoft.com",
+            "commit": "69771570b94318ba208eb327d1edf15b5db0ec49",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 03 Aug 2021 22:33:17 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.10.21",
+      "version": "0.10.21",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.7.18",
+            "author": "jasonmo@microsoft.com",
+            "commit": "317097b2f51d04d33bfc2b14b2850a2774e0acbc",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Jul 2021 19:17:43 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.10.20",
+      "version": "0.10.20",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.7.17",
+            "author": "email not defined",
+            "commit": "4433293c2e7005b042ec1fa940ce8ceec94b57bf",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Jul 2021 06:26:34 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.10.19",
+      "version": "0.10.19",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.7.16",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "925cf4eb5fe6bfadf20208b5b3d3a4454fc5c9fa",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 29 Jul 2021 17:53:12 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.10.19",
       "version": "0.10.19",
