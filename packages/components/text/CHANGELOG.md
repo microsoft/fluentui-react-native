@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Wed, 04 Aug 2021 06:26:25 GMT and should not be manually modified.
+This log was last generated on Fri, 06 Aug 2021 00:36:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.1
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.1 (ruaraki@microsoft.com)
 
 ## 0.10.0
 

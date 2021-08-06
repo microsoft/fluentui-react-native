@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.10.25",
+      "version": "0.10.25",
+      "comments": {
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 Aug 2021 16:54:20 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.10.24",
       "version": "0.10.24",
