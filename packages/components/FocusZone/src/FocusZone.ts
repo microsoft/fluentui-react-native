@@ -20,6 +20,8 @@ export const FocusZone = composable<FocusZoneType>({
     React.useLayoutEffect(() => {
       if (defaultTabbableElement?.current) {
         setTargetNativeTag(findNodeHandle(defaultTabbableElement.current));
+      } else {
+        setTargetNativeTag(undefined);
       }
     }, [defaultTabbableElement]);
 

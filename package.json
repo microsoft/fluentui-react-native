@@ -30,9 +30,7 @@
     "prettier": "lage prettier",
     "prettier-fix": "lage prettier-fix",
     "publish:beachball": "beachball publish --bump-deps -m\"📦 applying package updates ***NO_CI***\"",
-    "test": "lage test",
-    "verify-api": "lage verify-api",
-    "update-api": "lage update-api"
+    "test": "lage test"
   },
   "devDependencies": {
     "@fluentui/token-pipeline": "^0.3.7",

@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/focus-trap-zone
 
-This log was last generated on Fri, 30 Jul 2021 19:17:43 GMT and should not be manually modified.
+This log was last generated on Fri, 06 Aug 2021 00:36:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.26
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.25 (ruaraki@microsoft.com)
+
+## 0.7.25
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- move experimental Text to be written as compressible (jasonmo@microsoft.com)
+
+## 0.7.24
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.6.8 (67026167+chiuam@users.noreply.github.com)
+
+## 0.7.23
+
+Tue, 03 Aug 2021 23:48:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.22 (jasonmo@microsoft.com)
+
+## 0.7.22
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.21 (jasonmo@microsoft.com)
 
 ## 0.7.21
 

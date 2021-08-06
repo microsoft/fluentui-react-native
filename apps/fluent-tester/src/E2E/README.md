@@ -13,7 +13,7 @@
 
 ### UWP Additional Prerequisites
 
-- [UWP Prerequisites](https://github.com/microsoft/fluentui-react-native/blob/master/apps/windows/readme.md)
+- [UWP Prerequisites](https://github.com/microsoft/fluentui-react-native/blob/master/apps/windows/README.md)
 
 ## E2E Project Structure
 

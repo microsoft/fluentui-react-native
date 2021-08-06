@@ -1,17 +1,20 @@
 /** @jsx withSlots */
 import {
-  compose,
   FontTokens,
   FontVariantTokens,
-  UseSlots,
-  buildProps,
   fontStyles,
-  mergeProps,
   withSlots,
-  Theme,
+  buildUseTokens,
+  UseTokens,
+  useFluentTheme,
+  applyTokenLayers,
+  mergeStyles,
+  compressible,
+  patchTokens,
 } from '@fluentui-react-native/framework';
 import { Text as RNText, ColorValue } from 'react-native';
-import { filterTextProps, ITextProps } from '@fluentui-react-native/adapters';
+import { ITextProps } from '@fluentui-react-native/adapters';
+import React from 'react';
 
 const textName = 'Text';
 
@@ -39,56 +42,45 @@ export type TextProps<TBase = ITextProps> = TBase &
     disabled?: boolean;
   };
 
-/**
- * These are the tokens which are also present in props. If specified in props this will override the values
- * from tokens.
- */
-const tokensThatAreAlsoProps: (keyof TextTokens)[] = ['variant', 'color'];
+const useTextTokens = buildUseTokens<TextTokens>(
+  (t) => ({
+    variant: 'secondaryStandard',
+    color: t.colors.bodyText,
+    disabled: {
+      color: t.colors.disabledText,
+    },
+  }),
+  textName,
+);
 
-/** Type to use for compose */
-interface TextType {
-  props: TextProps;
-  slotProps: { root: ITextProps };
-  tokens: TextTokens;
-}
+export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTokens: UseTokens<TextTokens>) => {
+  // split out color and variant from props
+  const { color, variant, style, disabled, ...rest } = props;
+  const theme = useFluentTheme();
+  // get the tokens from the theme
+  let [tokens, cache] = useTokens(theme);
 
-export const Text = compose<TextType>({
-  displayName: textName,
-  /** Settings for the use-styling hook */
-  tokens: [
-    (t) => ({
-      variant: 'secondaryStandard',
-      color: t.colors.bodyText,
-      disabled: {
-        color: t.colors.disabledText,
-      },
+  // apply states like disabled if specified in props
+  [tokens, cache] = applyTokenLayers(tokens, ['disabled'], cache, (state) => props[state]);
+  // override variant or color from props
+  [tokens, cache] = patchTokens(tokens, cache, { color, variant });
+
+  // now build the text style from tokens that can be shared between different Text instances
+  const [tokenStyle] = cache(
+    () => ({
+      margin: 0,
+      color: tokens.color,
+      ...fontStyles.from(tokens, theme),
     }),
-    textName,
-  ],
-  states: ['disabled'],
-  tokensThatAreAlsoProps,
-  slotProps: {
-    root: buildProps<ITextProps, TextTokens>(
-      (tokens: TextTokens, theme: Theme) => ({
-        style: {
-          margin: 0,
-          color: tokens.color,
-          ...fontStyles.from(tokens, theme),
-        },
-      }),
-      ['color', ...fontStyles.keys],
-    ),
-  },
-  /** Settings for the useSlots that will be passed on */
-  slots: { root: RNText },
-  filters: { root: filterTextProps },
-  /** render function for the component */
-  render: (props: TextProps, useSlots: UseSlots<TextType>) => {
-    // stage one, execute any hooks, styling lookups to build the styled slot
-    const Root = useSlots(props).root;
-    // return a function used to complete the render
-    return (rest: TextProps, children: React.ReactNode) => <Root {...mergeProps(props, rest)}>{children}</Root>;
-  },
-});
+    [],
+  );
+
+  // return a continuation function that allows this text to be compressed
+  return (extra: TextProps, children: React.ReactNode) => {
+    const mergedProps = { ...rest, ...extra, style: mergeStyles(tokenStyle, props.style, extra.style) };
+    return <RNText {...mergedProps}>{children}</RNText>;
+  };
+}, useTextTokens);
+Text.displayName = textName;
 
 export default Text;
