@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "enable usePressableState with stock Pressable component",
+  "packageName": "@fluentui-react-native/merge-props",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "none"
+}

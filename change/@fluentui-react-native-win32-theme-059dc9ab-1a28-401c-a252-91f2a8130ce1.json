@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "enable usePressableState with stock Pressable component",
+  "packageName": "@fluentui-react-native/win32-theme",
+  "email": "jasonmo@microsoft.com",
+  "dependentChangeType": "none"
+}
