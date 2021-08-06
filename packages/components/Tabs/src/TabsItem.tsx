@@ -81,8 +81,6 @@ export const TabsItem = compose<TabsItemType>({
       }
     }, []);
 
-    const buttonRef = useViewCommandFocus(componentRef);
-
     // Grab the styling information from the userProps, referencing the state as well as the props.
     const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
 
@@ -104,7 +102,7 @@ export const TabsItem = compose<TabsItemType>({
       root: {
         ...rest,
         ...pressable.props,
-        ref: buttonRef,
+        ref: componentRef,
         onAccessibilityTap: onAccessibilityTap,
         accessibilityRole: 'tab',
         accessibilityLabel: accessibilityLabel,
