@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/experimental-activity-indicator",
   "entries": [
     {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@fluentui-react-native/experimental-activity-indicator_v0.3.2",
+      "version": "0.3.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/experimental-activity-indicator"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.22",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/experimental-activity-indicator"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 Aug 2021 16:54:20 GMT",
       "tag": "@fluentui-react-native/experimental-activity-indicator_v0.3.1",
       "version": "0.3.1",

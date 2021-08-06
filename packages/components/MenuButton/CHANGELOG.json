@@ -2,6 +2,65 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.4.3",
+      "version": "0.4.3",
+      "comments": {
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.18.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.10.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.13",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-composable to v0.9.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-settings to v0.10.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/component-cache to v1.2.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 Aug 2021 18:11:46 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.4.2",
       "version": "0.4.2",

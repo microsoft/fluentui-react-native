@@ -82,7 +82,7 @@ export const Tabs = compose<TabsType>({
       },
       info: {
         headersOnly: headersOnly ?? false,
-        label: !!label,
+        label: !!label && Platform.OS === 'windows',
       },
     };
 

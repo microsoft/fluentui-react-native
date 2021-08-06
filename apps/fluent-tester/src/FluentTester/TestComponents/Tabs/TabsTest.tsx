@@ -7,12 +7,10 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
 
-const label = Platform.OS === 'windows' ? 'TABS' : 'Tabs';
-
 const tabs: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
-      <Tabs label={label}>
+      <Tabs label="TABS">
         <TabsItem headerText="Home" itemKey="A">
           <Text>Tabs #1</Text>
         </TabsItem>
@@ -30,7 +28,7 @@ const tabs: React.FunctionComponent = () => {
 const disabledTabs: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
-      <Tabs label={label}>
+      <Tabs label="TABS">
         <TabsItem headerText="Home" itemKey="A">
           <Text>Tabs #1</Text>
         </TabsItem>
@@ -53,7 +51,7 @@ const tabsCountIcon: React.FunctionComponent = () => {
 
   return (
     <View style={stackStyle}>
-      <Tabs label={label}>
+      <Tabs label="TABS">
         <TabsItem headerText="Home" itemKey="A" icon={{ svgSource: svgProps, width: 20, height: 20, style: { margin: 5 } }} itemCount={23}>
           <Text>Tabs #1</Text>
         </TabsItem>
@@ -78,7 +76,7 @@ const onTabsClickEvent: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
       <Text>Last onTabsClick from: {selectedKey}</Text>
-      <Tabs label={label} onTabsClick={onTabsClick} selectedKey={selectedKey}>
+      <Tabs label="TABS" onTabsClick={onTabsClick} selectedKey={selectedKey}>
         <TabsItem headerText="Home" itemKey="home_key">
           <Text>Tabs #1</Text>
         </TabsItem>
@@ -103,7 +101,7 @@ const tabsChangingViews: React.FunctionComponent = () => {
 
   return (
     <View style={stackStyle}>
-      <Tabs label={label} onTabsClick={onTabsClick} headersOnly={true} selectedKey={selectedKey}>
+      <Tabs label="TABS" onTabsClick={onTabsClick} headersOnly={true} selectedKey={selectedKey}>
         <TabsItem headerText="Home" itemKey="home" />
         <TabsItem headerText="File" itemKey="file" />
         <TabsItem headerText="Settings" itemKey="settings" />
@@ -133,7 +131,7 @@ const tabsRenderSeparately: React.FunctionComponent = () => {
           backgroundColor: selectedKey === 'rectangleGreen' ? 'green' : 'red',
         }}
       />
-      <Tabs label={label} onTabsClick={onTabsClick} headersOnly={true} selectedKey={selectedKey}>
+      <Tabs label="TABS" onTabsClick={onTabsClick} headersOnly={true} selectedKey={selectedKey}>
         <TabsItem headerText="Rectangle Red" itemKey="rectangleRed" />
         <TabsItem headerText="Square Red" itemKey="squareRed" />
         <TabsItem headerText="Rectangle Green" itemKey="rectangleGreen" />
@@ -156,7 +154,7 @@ const tabsSettingSelectedKey: React.FunctionComponent = () => {
 
   return (
     <View style={stackStyle}>
-      <Tabs label={label} selectedKey={selectedKey} isCircularNavigation={true}>
+      <Tabs label="TABS" selectedKey={selectedKey} isCircularNavigation={true}>
         <TabsItem headerText="Home" itemKey="home">
           <Text>Tabs #1</Text>
         </TabsItem>
