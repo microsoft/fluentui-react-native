@@ -1,3 +1,5 @@
+import { PartialTheme } from '@fluentui-react-native/theme-types';
+
 export type OfficeBrand = 'Default' | 'Office' | 'Word' | 'Excel' | 'Powerpoint' | 'Outlook';
 type BrandRampKey = 'App1' | 'App2' | 'App3' | 'App4' | 'App5' | 'App6' | 'App7' | 'App8';
 type BrandRamps = { [K in OfficeBrand]: { [J in BrandRampKey]: string } };
@@ -64,7 +66,7 @@ const brandColors: BrandRamps = {
 
 export const brandOptions = Object.keys(brandColors).map((brand) => ({ label: brand, value: brand }));
 
-export const applyBrand = (currentBrand: string): { [key: string]: any } => {
+export const applyBrand = (currentBrand: string): PartialTheme => {
   const ramp = brandColors[currentBrand];
   return ramp
     ? {

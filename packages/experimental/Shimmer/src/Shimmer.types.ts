@@ -1,5 +1,5 @@
 import { SvgProps } from 'react-native-svg';
-import { ColorValue, ViewProps } from 'react-native';
+import { ViewProps } from 'react-native';
 import { IBackgroundColorTokens } from '@fluentui-react-native/tokens';
 
 export const shimmerName = 'Shimmer';
@@ -21,7 +21,7 @@ export interface ShimmerCircleElement {
 
   /**
    * Note: cx and cy should be optional properties [or removed], with relative positioning being the default [or only] positioning mechanism.
-   * Note: The behavior of element intersections is undefined.
+   * Note: The behavior of element intersections is undefined.  https://www.github.com/Microsoft/fluentui-react-native Issue #866
    */
 
   /**
@@ -70,7 +70,7 @@ export interface ShimmerRectElement {
 
   /**
    * Note: x and y should be optional properties [or removed], with relative positioning being the default [or only] positioning mechanism.
-   * Note: The behavior of element intersections is undefined.
+   * Note: The behavior of element intersections is undefined.  https://www.github.com/Microsoft/fluentui-react-native Issue #866
    */
 
   /**
@@ -83,6 +83,8 @@ export interface ShimmerRectElement {
    */
   y: number;
 }
+
+export type ShimmerElementTypes = ShimmerCircleElement | ShimmerRectElement;
 
 export interface ShimmerTokens extends IBackgroundColorTokens {
   /**
@@ -105,23 +107,35 @@ export interface ShimmerTokens extends IBackgroundColorTokens {
   duration?: number;
 
   /**
-   * Specifies the gradient opacity.
+   * Specifies the opacity of the shimmer color.
    * @defaultValue 1
    */
-  gradientOpacity?: number;
+  shimmerColorOpacity?: number;
+
+  /**
+   * Specifies the opacity of the wave color.
+   * @defaultValue 1
+   */
+  shimmerWaveColorOpacity?: number;
 
   /**
    * Color you see when the shimmer wave is not animating.
+   *
+   * Note: Needs to be changed to ColorValue. https://www.github.com/Microsoft/fluentui-react-native Issue #866
+   *
    * @defaultValue theme.colors.bodyFrameDivider
    */
-  shimmerColor?: ColorValue;
+  shimmerColor?: string | number;
 
   /**
    * Defines the tip color of the wave which has a linear gradient.
    * from shimmerColor to shimmerWaveColor to shimmerColor.
+   *
+   * Note: Needs to be changed to ColorValue. https://www.github.com/Microsoft/fluentui-react-native Issue #866
+   *
    * @defaultValue '#E1E1E1'
    */
-  shimmerWaveColor?: ColorValue;
+  shimmerWaveColor?: string | number;
 
   /**
    * Width of the Shimmer wave.
@@ -138,7 +152,7 @@ export interface ShimmerProps extends ViewProps, ShimmerTokens {
   /**
    * Shimmer shapes that define the masking effect of the Shimmer control.
    */
-  elements?: Array<ShimmerCircleElement | ShimmerRectElement>;
+  elements?: Array<ShimmerElementTypes>;
 }
 
 export interface ShimmerType {

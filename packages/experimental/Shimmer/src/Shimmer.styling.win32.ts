@@ -8,22 +8,24 @@ export const defaultShimmerTokens: TokenSettings<ShimmerTokens> = (theme: Theme)
     backgroundColor: theme.colors.background,
     delay: 500,
     duration: 2000,
-    gradientOpacity: 1,
     shimmerColor: theme.colors.bodyFrameDivider,
+    shimmerColorOpacity: 1,
     shimmerWaveColor: '#E1E1E1',
+    shimmerWaveColorOpacity: 1,
     shimmerWaveWidth: '100%',
   } as ShimmerTokens);
 
 /**
  * tell the styling hook how to build up the tokens
  */
-export const styleSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, ShimmerTokens> = {
+export const stylingSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, ShimmerTokens> = {
   tokens: [defaultShimmerTokens, shimmerName],
   slotProps: {
     root: buildProps(() => ({
-      accessible: true,
       accessibilityRole: 'progressbar',
+      accessible: true,
     })),
+
     shimmerWaveContainer: buildProps(
       (tokens: ShimmerTokens) => ({
         delay: tokens.delay,
@@ -36,17 +38,13 @@ export const styleSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, Sh
     shimmerWave: buildProps(
       (tokens: ShimmerTokens) => ({
         angle: tokens.angle,
-        gradientOpacity: tokens.gradientOpacity,
         shimmerColor: tokens.shimmerColor,
         shimmerWaveColor: tokens.shimmerWaveColor,
         shimmerWaveWidth: tokens.shimmerWaveWidth,
       }),
-      ['angle', 'gradientOpacity', 'shimmerColor', 'shimmerWaveColor', 'shimmerWaveWidth'],
+      ['angle', 'shimmerColor', 'shimmerWaveColor', 'shimmerWaveWidth'],
     ),
 
-    /**
-     * Absolute positioning is used to overlay the clipping mask on top of the shimmer wave.
-     */
     clippingMask: buildProps(
       (tokens: ShimmerTokens) => ({
         backgroundColor: tokens.backgroundColor,

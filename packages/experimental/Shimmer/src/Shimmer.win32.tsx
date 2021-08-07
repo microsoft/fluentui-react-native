@@ -1,19 +1,22 @@
 /** @jsx withSlots */
 import { compose, mergeProps, UseSlots } from '@fluentui-react-native/framework';
 import { View } from 'react-native';
-import { ClipPath, Defs, LinearGradient, Path, Rect, Stop, Svg } from 'react-native-svg';
-import { styleSettings } from './Shimmer.styling.win32';
-import { shimmerName, ShimmerProps, ShimmerTokens } from './Shimmer.types';
+import { ClipPath, Defs, LinearGradient, Path, Rect, Stop, Svg, SvgProps } from 'react-native-svg';
+import { stylingSettings } from './Shimmer.styling.win32';
+import { ShimmerElementTypes, shimmerName, ShimmerProps, ShimmerTokens } from './Shimmer.types';
 import { ClippingMaskProps, ShimmerType } from './Shimmer.types.win32';
 import { RCTNativeAnimatedShimmer } from './consts.win32';
 import { convertRectToSvgPath, convertCircleToSvgPath } from './SvgShapeToPath';
 import { withSlots } from '@fluentui-react-native/framework';
 import { assertNever } from 'assert-never';
 
-/** Absolute positioning is used to overlay the clipping mask on top of the shimmer wave. */
 const clippingMask: React.FunctionComponent<ClippingMaskProps> = (props: ClippingMaskProps) => {
+  /**
+   * Absolute positioning is used to overlay the clipping mask on top of the shimmer wave.
+   */
+  const svgProps: SvgProps = { style: { position: 'absolute' }, width: '100%', height: '100%' };
   return (
-    <Svg style={{ position: 'absolute' }} width="100%" height="100%">
+    <Svg {...svgProps}>
       <Defs>
         <ClipPath id="shimmerCuts">
           <Path d={props.clipPath} clipRule="evenodd" />
@@ -26,17 +29,16 @@ const clippingMask: React.FunctionComponent<ClippingMaskProps> = (props: Clippin
 };
 
 const wave: React.FunctionComponent<ShimmerTokens> = (props: ShimmerTokens) => {
-  const shimmerColor: any = props.shimmerColor;
-  const shimmerWaveColor: any = props.shimmerWaveColor;
+  const { shimmerColor, shimmerColorOpacity, shimmerWaveColor, shimmerWaveColorOpacity, ...rest } = props;
 
   return (
-    <Svg {...props} width="100%" height="100%">
+    <Svg {...rest} width="100%" height="100%">
       <LinearGradient id="gradient">
-        <Stop stopColor={shimmerColor} />
-        <Stop offset="20%" stopColor={shimmerWaveColor} />
-        <Stop offset="40%" stopColor={shimmerColor} />
+        <Stop stopColor={shimmerColor} stopOpacity={shimmerColorOpacity} />
+        <Stop offset="20%" stopColor={shimmerWaveColor} stopOpacity={shimmerWaveColorOpacity} />
+        <Stop offset="40%" stopColor={shimmerColor} stopOpacity={shimmerColorOpacity} />
       </LinearGradient>
-      <Rect width={props.shimmerWaveWidth} height="100%" fill="url(#gradient)" fillOpacity={props.gradientOpacity} />
+      <Rect width={props.shimmerWaveWidth} height="100%" fill="url(#gradient)" />
     </Svg>
   );
 };
@@ -47,7 +49,7 @@ const waveContainer: React.FunctionComponent<ShimmerTokens> = (props: ShimmerTok
 
 export const Shimmer = compose<ShimmerType>({
   displayName: shimmerName,
-  ...styleSettings,
+  ...stylingSettings,
 
   slots: {
     root: View,
@@ -80,8 +82,7 @@ export const Shimmer = compose<ShimmerType>({
        */
 
       if (elements) {
-        for (let i = 0; i < elements.length; i++) {
-          const element = elements[i];
+        elements.forEach((element: ShimmerElementTypes) => {
           if (element.type == 'circle') {
             clipPathsAsMask = clipPathsAsMask.concat(convertCircleToSvgPath(element));
           } else if (element.type == 'rect') {
@@ -89,15 +90,17 @@ export const Shimmer = compose<ShimmerType>({
           } else {
             assertNever(element);
           }
-        }
+        });
       }
+
+      const mergedClipPath = clipPathsAsMask.join(' ');
 
       return (
         <Slots.root {...mergedProps}>
           <Slots.shimmerWaveContainer>
             <Slots.shimmerWave />
           </Slots.shimmerWaveContainer>
-          <Slots.clippingMask clipPath={clipPathsAsMask.join(' ')} />
+          <Slots.clippingMask clipPath={mergedClipPath} />
         </Slots.root>
       );
     };

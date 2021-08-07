@@ -28,8 +28,6 @@ function convertRoundedRectToSvgPath(
   width: number,
   height: number,
 ): string {
-  console.log('Rect parameters provided: x: %f y: %f rx:%f ry:%f width:%f height:%f', x, y, borderRadiusX, borderRadiusY, width, height);
-
   // Reduce borderRadii to maximum usable size.
   if (borderRadiusX * 2 > width) {
     borderRadiusX = width / 2;

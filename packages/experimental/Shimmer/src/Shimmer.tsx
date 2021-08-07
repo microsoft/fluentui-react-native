@@ -38,16 +38,26 @@ export const Shimmer = compose<ShimmerType>({
 
     const memoizedShimmerData = useMemo(
       () => ({
-        shimmerWaveColor: props.shimmerWaveColor ? props.shimmerWaveColor : tokens['shimmerWaveColor'],
-        shimmerColor: props.shimmerColor ? props.shimmerColor : tokens['shimmerColor'],
+        angle: props.angle ? props.angle : tokens['angle'],
         containerWidth: props?.style['width'] ? props?.style['width'] : '100%',
         containerHeight: props?.style['height'] ? props?.style['height'] : '100%',
         delay: props.delay ? props.delay : tokens['delay'],
         duration: props.duration ? props.duration : tokens['duration'],
-        angle: props.angle ? props.angle : tokens['angle'],
-        gradientOpacity: tokens['gradientOpacity'],
+        shimmerColor: props.shimmerColor ? props.shimmerColor : tokens['shimmerColor'],
+        shimmerColorOpacity: tokens['shimmerColorOpacity'],
+        shimmerWaveColor: props.shimmerWaveColor ? props.shimmerWaveColor : tokens['shimmerWaveColor'],
+        shimmerWaveColorOpacity: tokens['shimmerWaveColorOpacity'],
       }),
-      [props.shimmerWaveColor, props.shimmerColor, props.style, props.delay, props.duration, props.angle, props.gradientOpacity],
+      [
+        props.angle,
+        props.delay,
+        props.duration,
+        props.shimmerColor,
+        props.shimmerColorOpacity,
+        props.shimmerWaveColor,
+        props.shimmerWaveColorOpacity,
+        props.style,
+      ],
     );
 
     const startValue = useShimmerAnimation(memoizedShimmerData);
@@ -83,9 +93,13 @@ export const Shimmer = compose<ShimmerType>({
         <Slots.root {...mergedProps}>
           <Defs>
             <AnimatedLinearGradient id="gradient" x1={startValue} y1={memoizedShimmerData.angle} x2="-1" y2="-1">
-              <Stop offset="10%" stopColor={memoizedShimmerData.shimmerColor} stopOpacity={1} />
-              <Stop offset="20%" stopColor={memoizedShimmerData.shimmerWaveColor} stopOpacity={memoizedShimmerData.gradientOpacity} />
-              <Stop offset="30%" stopColor={memoizedShimmerData.shimmerColor} stopOpacity={1} />
+              <Stop offset="10%" stopColor={memoizedShimmerData.shimmerColor} stopOpacity={memoizedShimmerData.shimmerColorOpacity} />
+              <Stop
+                offset="20%"
+                stopColor={memoizedShimmerData.shimmerWaveColor}
+                stopOpacity={memoizedShimmerData.shimmerWaveColorOpacity}
+              />
+              <Stop offset="30%" stopColor={memoizedShimmerData.shimmerColor} stopOpacity={memoizedShimmerData.shimmerColorOpacity} />
             </AnimatedLinearGradient>
             <ClipPath id="shimmerView">{rows}</ClipPath>
           </Defs>
