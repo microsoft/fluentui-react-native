@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "enable usePressableState with stock Pressable component",
-  "packageName": "@uifabricshared/theming-react-native",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "none"
-}

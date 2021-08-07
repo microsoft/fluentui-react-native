@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "enable usePressableState with stock Pressable component",
-  "packageName": "@fluentui-react-native/radio-group",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -2,6 +2,59 @@
   "name": "@fluentui-react-native/experimental-button",
   "entries": [
     {
+      "date": "Sat, 07 Aug 2021 00:40:04 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.8.4",
+      "version": "0.8.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "enable usePressableState with stock Pressable component",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/experimental-button"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.27",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/experimental-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.24",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/experimental-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.6.4",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/experimental-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.14",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/experimental-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/use-styling to v0.6.7",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/experimental-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/test-tools to v0.1.1",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/experimental-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 06 Aug 2021 23:18:21 GMT",
       "tag": "@fluentui-react-native/experimental-button_v0.8.3",
       "version": "0.8.3",

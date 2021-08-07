@@ -2,6 +2,65 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Sat, 07 Aug 2021 00:40:04 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.4.5",
+      "version": "0.4.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "enable usePressableState with stock Pressable component",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/component-cache to v1.2.3",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.10.5",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.3",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.18.4",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-settings to v0.10.1",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-composable to v0.9.1",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.14",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 06 Aug 2021 23:18:21 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.4.4",
       "version": "0.4.4",
