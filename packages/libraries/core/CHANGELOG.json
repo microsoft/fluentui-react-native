@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Sat, 07 Aug 2021 02:50:29 GMT",
+      "tag": "@fluentui/react-native_v0.24.29",
+      "version": "0.24.29",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Win32 Shimmer control and unifying changes for commonJS Shimmer",
+            "author": "patboyd@microsoft.com",
+            "commit": "7fd5345a6a73c03499d90e9c737d47cc5fe55d09",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 07 Aug 2021 00:40:04 GMT",
       "tag": "@fluentui/react-native_v0.24.28",
       "version": "0.24.28",

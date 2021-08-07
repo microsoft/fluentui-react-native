@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Merge branch 'master' of https://github.com/microsoft/fluentui-react-native into win32Shimmer",
-  "packageName": "@fluentui-react-native/experimental-text",
-  "email": "patboyd@microsoft.com",
-  "dependentChangeType": "patch"
-}
