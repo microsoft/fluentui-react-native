@@ -27,6 +27,8 @@ export const TabsItem = compose<TabsItemType>({
       onClick,
       itemKey,
       itemCount,
+      ariaPosInSet,
+      ariaSetSize,
       ...rest
     } = userProps;
 
@@ -39,7 +41,6 @@ export const TabsItem = compose<TabsItemType>({
         info.onTabsClick && info.onTabsClick(itemKey);
         info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
         info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
-        console.log('ref');
       }
     };
 
@@ -59,7 +60,6 @@ export const TabsItem = compose<TabsItemType>({
       info: {
         ...pressable.state,
         selected: info.selectedKey === userProps.itemKey,
-        disabled: !!userProps.disabled,
         icon: !!icon,
         key: itemKey,
         headerText: !!headerText || itemCount !== undefined,
@@ -74,8 +74,6 @@ export const TabsItem = compose<TabsItemType>({
         info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
       }
     }, []);
-
-    const buttonRef = componentRef;
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
     const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
@@ -98,16 +96,17 @@ export const TabsItem = compose<TabsItemType>({
       root: {
         ...rest,
         ...pressable.props,
-        ref: buttonRef,
+        ref: componentRef,
         onAccessibilityTap: onAccessibilityTap,
         accessibilityRole: 'tab',
         accessibilityLabel: accessibilityLabel,
-        accessibilityState: { disabled: state.info.disabled, selected: state.info.selected },
+        accessibilityState: { disabled: userProps.disabled, selected: info.selectedKey === userProps.itemKey },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
-        accessibilityPositionInSet: info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
-        accessibilitySetSize: info.tabsItemKeys.length,
+        accessibilityPositionInSet: ariaPosInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
+        accessibilitySetSize: ariaSetSize ?? info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUp,
+        focusable: Platform.OS=='macos' ? !userProps.disabled : null,
       },
       content: { children: headerText + countText, testID: testID },
       icon: createIconProps(icon),

@@ -5,7 +5,6 @@ exports[`Tabs FocusZone props 1`] = `
   accessibilityRole="tablist"
   accessible={true}
   rest={Object {}}
-  style={Object {}}
 >
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
@@ -29,7 +28,7 @@ exports[`Tabs FocusZone props 1`] = `
       accessibilitySetSize={3}
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": undefined,
           "selected": false,
         }
       }
@@ -101,7 +100,7 @@ exports[`Tabs FocusZone props 1`] = `
       accessibilitySetSize={3}
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": undefined,
           "selected": true,
         }
       }
@@ -173,7 +172,7 @@ exports[`Tabs FocusZone props 1`] = `
       accessibilitySetSize={3}
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": undefined,
           "selected": false,
         }
       }
@@ -241,7 +240,6 @@ exports[`Tabs default props 1`] = `
   accessibilityRole="tablist"
   accessible={true}
   rest={Object {}}
-  style={Object {}}
 >
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
@@ -265,7 +263,7 @@ exports[`Tabs default props 1`] = `
       accessibilitySetSize={3}
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": undefined,
           "selected": true,
         }
       }
@@ -337,7 +335,7 @@ exports[`Tabs default props 1`] = `
       accessibilitySetSize={3}
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": undefined,
           "selected": false,
         }
       }
@@ -409,7 +407,7 @@ exports[`Tabs default props 1`] = `
       accessibilitySetSize={3}
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": undefined,
           "selected": false,
         }
       }
@@ -477,7 +475,6 @@ exports[`Tabs disabled 1`] = `
   accessibilityRole="tablist"
   accessible={true}
   rest={Object {}}
-  style={Object {}}
 >
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
@@ -647,7 +644,7 @@ exports[`Tabs disabled 1`] = `
       accessibilitySetSize={3}
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": undefined,
           "selected": true,
         }
       }
@@ -715,7 +712,6 @@ exports[`Tabs header text and count 1`] = `
   accessibilityRole="tablist"
   accessible={true}
   rest={Object {}}
-  style={Object {}}
 >
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
@@ -740,7 +736,7 @@ exports[`Tabs header text and count 1`] = `
       accessibilitySetSize={3}
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": undefined,
           "selected": true,
         }
       }
@@ -827,7 +823,7 @@ exports[`Tabs header text and count 1`] = `
       accessibilitySetSize={3}
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": undefined,
           "selected": false,
         }
       }
@@ -914,7 +910,7 @@ exports[`Tabs header text and count 1`] = `
       accessibilitySetSize={3}
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": undefined,
           "selected": false,
         }
       }
@@ -996,7 +992,6 @@ exports[`Tabs headers only 1`] = `
   accessibilityRole="tablist"
   accessible={true}
   rest={Object {}}
-  style={Object {}}
 >
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
@@ -1020,7 +1015,7 @@ exports[`Tabs headers only 1`] = `
       accessibilitySetSize={3}
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": undefined,
           "selected": true,
         }
       }
@@ -1092,7 +1087,7 @@ exports[`Tabs headers only 1`] = `
       accessibilitySetSize={3}
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": undefined,
           "selected": false,
         }
       }
@@ -1164,7 +1159,7 @@ exports[`Tabs headers only 1`] = `
       accessibilitySetSize={3}
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": undefined,
           "selected": false,
         }
       }
@@ -1233,21 +1228,7 @@ exports[`Tabs props 1`] = `
   accessibilityRole="tablist"
   accessible={true}
   rest={Object {}}
-  style={Object {}}
 >
-  <Text
-    style={
-      Object {
-        "color": "#323130",
-        "fontFamily": "inherit",
-        "fontSize": 16,
-        "fontWeight": "600",
-        "margin": 0,
-      }
-    }
-  >
-    Tabs
-  </Text>
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
     style={
@@ -1359,7 +1340,7 @@ exports[`Tabs props 1`] = `
       accessibilitySetSize={3}
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": undefined,
           "selected": true,
         }
       }
@@ -1446,7 +1427,7 @@ exports[`Tabs props 1`] = `
       accessibilitySetSize={3}
       accessibilityState={
         Object {
-          "disabled": false,
+          "disabled": undefined,
           "selected": false,
         }
       }
