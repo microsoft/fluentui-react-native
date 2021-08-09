@@ -361,17 +361,6 @@
         }
       }
     },
-    "TransparentBackgroundSelected": { "aliasOf": "Set.TransparentBackground" },
-    "GhostBackground": {
-      "Fill": {
-        "Color": {
-          "Rest": { "value": "transparent" },
-          "Hover": { "aliasOf": "Global.Color.Grey.96" },
-          "Pressed": { "aliasOf": "Global.Color.Grey.88" },
-          "Disabled": { "aliasOf": "Global.Color.Grey.94" }
-        }
-      }
-    },
-    "GhostBackgroundSelected": { "aliasOf": "Set.GhostBackground" }
+    "TransparentBackgroundSelected": { "aliasOf": "Set.TransparentBackground" }
   }
 }

@@ -19,10 +19,22 @@
     "fillColorPressed": "#004578",
     "fillColorDisabled": "#f0f0f0"
   },
+  "brandBackground2": {
+    "fillColorRest": "#eff6fc",
+    "fillColorHover": "#eff6fc",
+    "fillColorPressed": "#eff6fc",
+    "fillColorDisabled": "#f0f0f0"
+  },
   "brandBackgroundSelected": {
+    "fillColorRest": "#005a9e",
+    "fillColorHover": "#005a9e",
+    "fillColorPressed": "#005a9e",
+    "fillColorDisabled": "#f0f0f0"
+  },
+  "brandBackgroundStatic": {
     "fillColorRest": "#0078d4",
-    "fillColorHover": "#106ebe",
-    "fillColorPressed": "#004578",
+    "fillColorHover": "#0078d4",
+    "fillColorPressed": "#0078d4",
     "fillColorDisabled": "#f0f0f0"
   },
   "brandForeground1": {
@@ -31,19 +43,7 @@
     "fillColorPressed": "#0078d4",
     "fillColorDisabled": "#bdbdbd"
   },
-  "brandForeground1Selected": {
-    "fillColorRest": "#0078d4",
-    "fillColorHover": "#0078d4",
-    "fillColorPressed": "#0078d4",
-    "fillColorDisabled": "#bdbdbd"
-  },
   "brandForeground2": {
-    "fillColorRest": "#106ebe",
-    "fillColorHover": "#106ebe",
-    "fillColorPressed": "#106ebe",
-    "fillColorDisabled": "#bdbdbd"
-  },
-  "brandForeground2Selected": {
     "fillColorRest": "#106ebe",
     "fillColorHover": "#106ebe",
     "fillColorPressed": "#106ebe",
@@ -57,8 +57,8 @@
   },
   "brandForegroundLinkSelected": {
     "fillColorRest": "#106ebe",
-    "fillColorHover": "#005a9e",
-    "fillColorPressed": "#004578",
+    "fillColorHover": "#106ebe",
+    "fillColorPressed": "#106ebe",
     "fillColorDisabled": "#bdbdbd"
   },
   "brandStroke1": {
@@ -68,21 +68,7 @@
     "strokeColorDisabled": "#e0e0e0",
     "strokeWidth": 1
   },
-  "brandStroke1Selected": {
-    "strokeColorRest": "#0078d4",
-    "strokeColorHover": "#0078d4",
-    "strokeColorPressed": "#0078d4",
-    "strokeColorDisabled": "#e0e0e0",
-    "strokeWidth": 1
-  },
   "brandStroke2": {
-    "strokeColorRest": "#c7e0f4",
-    "strokeColorHover": "#c7e0f4",
-    "strokeColorPressed": "#c7e0f4",
-    "strokeColorDisabled": "#e0e0e0",
-    "strokeWidth": 1
-  },
-  "brandStroke2Selected": {
     "strokeColorRest": "#c7e0f4",
     "strokeColorHover": "#c7e0f4",
     "strokeColorPressed": "#c7e0f4",
@@ -101,32 +87,13 @@
     "fillColorPressed": "#005a9e",
     "fillColorDisabled": "#f0f0f0"
   },
-  "compoundBrandBackground1Selected": {
-    "fillColorRest": "#0078d4",
-    "fillColorHover": "#106ebe",
-    "fillColorPressed": "#005a9e",
-    "fillColorDisabled": "#f0f0f0"
-  },
   "compoundBrandForeground1": {
     "fillColorRest": "#0078d4",
     "fillColorHover": "#106ebe",
     "fillColorPressed": "#005a9e",
     "fillColorDisabled": "#bdbdbd"
   },
-  "compoundBrandForeground1Selected": {
-    "fillColorRest": "#0078d4",
-    "fillColorHover": "#106ebe",
-    "fillColorPressed": "#005a9e",
-    "fillColorDisabled": "#bdbdbd"
-  },
   "compoundBrandStroke1": {
-    "strokeColorRest": "#0078d4",
-    "strokeColorHover": "#106ebe",
-    "strokeColorPressed": "#005a9e",
-    "strokeColorDisabled": "#e0e0e0",
-    "strokeWidth": 1
-  },
-  "compoundBrandStroke1Selected": {
     "strokeColorRest": "#0078d4",
     "strokeColorHover": "#106ebe",
     "strokeColorPressed": "#005a9e",
@@ -145,18 +112,6 @@
     "fontLineHeight": 92,
     "fontSize": 68,
     "fontWeight": "600"
-  },
-  "ghostBackground": {
-    "fillColorRest": "transparent",
-    "fillColorHover": "#f5f5f5",
-    "fillColorPressed": "#e0e0e0",
-    "fillColorDisabled": "#f0f0f0"
-  },
-  "ghostBackgroundSelected": {
-    "fillColorRest": "transparent",
-    "fillColorHover": "#f5f5f5",
-    "fillColorPressed": "#e0e0e0",
-    "fillColorDisabled": "#f0f0f0"
   },
   "headline": {
     "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
@@ -183,9 +138,9 @@
     "fillColorDisabled": "#f0f0f0"
   },
   "neutralBackground1Selected": {
-    "fillColorRest": "#ffffff",
-    "fillColorHover": "#f5f5f5",
-    "fillColorPressed": "#e0e0e0",
+    "fillColorRest": "#ebebeb",
+    "fillColorHover": "#ebebeb",
+    "fillColorPressed": "#ebebeb",
     "fillColorDisabled": "#f0f0f0"
   },
   "neutralBackground2": {
@@ -195,9 +150,9 @@
     "fillColorDisabled": "#f0f0f0"
   },
   "neutralBackground2Selected": {
-    "fillColorRest": "#fafafa",
-    "fillColorHover": "#f0f0f0",
-    "fillColorPressed": "#dbdbdb",
+    "fillColorRest": "#e6e6e6",
+    "fillColorHover": "#e6e6e6",
+    "fillColorPressed": "#e6e6e6",
     "fillColorDisabled": "#f0f0f0"
   },
   "neutralBackground3": {
@@ -207,9 +162,9 @@
     "fillColorDisabled": "#f0f0f0"
   },
   "neutralBackground3Selected": {
-    "fillColorRest": "#f5f5f5",
-    "fillColorHover": "#ebebeb",
-    "fillColorPressed": "#d6d6d6",
+    "fillColorRest": "#e0e0e0",
+    "fillColorHover": "#e0e0e0",
+    "fillColorPressed": "#e0e0e0",
     "fillColorDisabled": "#f0f0f0"
   },
   "neutralBackground4": {
@@ -219,9 +174,9 @@
     "fillColorDisabled": "#f0f0f0"
   },
   "neutralBackground4Selected": {
-    "fillColorRest": "#f0f0f0",
-    "fillColorHover": "#fafafa",
-    "fillColorPressed": "#f5f5f5",
+    "fillColorRest": "#ffffff",
+    "fillColorHover": "#ffffff",
+    "fillColorPressed": "#ffffff",
     "fillColorDisabled": "#f0f0f0"
   },
   "neutralBackground5": {
@@ -231,18 +186,12 @@
     "fillColorDisabled": "#f0f0f0"
   },
   "neutralBackground5Selected": {
-    "fillColorRest": "#ebebeb",
-    "fillColorHover": "#f5f5f5",
-    "fillColorPressed": "#f0f0f0",
+    "fillColorRest": "#fafafa",
+    "fillColorHover": "#fafafa",
+    "fillColorPressed": "#fafafa",
     "fillColorDisabled": "#f0f0f0"
   },
   "neutralBackground6": {
-    "fillColorRest": "#e6e6e6",
-    "fillColorHover": "#e6e6e6",
-    "fillColorPressed": "#e6e6e6",
-    "fillColorDisabled": "#f0f0f0"
-  },
-  "neutralBackground6Selected": {
     "fillColorRest": "#e6e6e6",
     "fillColorHover": "#e6e6e6",
     "fillColorPressed": "#e6e6e6",
@@ -254,19 +203,7 @@
     "fillColorPressed": "#616161",
     "fillColorDisabled": "#f0f0f0"
   },
-  "neutralBackgroundInvertedSelected": {
-    "fillColorRest": "#616161",
-    "fillColorHover": "#616161",
-    "fillColorPressed": "#616161",
-    "fillColorDisabled": "#f0f0f0"
-  },
   "neutralForeground1": {
-    "fillColorRest": "#242424",
-    "fillColorHover": "#242424",
-    "fillColorPressed": "#242424",
-    "fillColorDisabled": "#bdbdbd"
-  },
-  "neutralForeground1Selected": {
     "fillColorRest": "#242424",
     "fillColorHover": "#242424",
     "fillColorPressed": "#242424",
@@ -285,13 +222,13 @@
     "fillColorDisabled": "#bdbdbd"
   },
   "neutralForeground2BrandSelected": {
-    "fillColorRest": "#424242",
+    "fillColorRest": "#0078d4",
     "fillColorHover": "#0078d4",
-    "fillColorPressed": "#106ebe",
+    "fillColorPressed": "#0078d4",
     "fillColorDisabled": "#bdbdbd"
   },
   "neutralForeground2Selected": {
-    "fillColorRest": "#424242",
+    "fillColorRest": "#242424",
     "fillColorHover": "#242424",
     "fillColorPressed": "#242424",
     "fillColorDisabled": "#bdbdbd"
@@ -309,24 +246,18 @@
     "fillColorDisabled": "#bdbdbd"
   },
   "neutralForeground3BrandSelected": {
-    "fillColorRest": "#616161",
+    "fillColorRest": "#0078d4",
     "fillColorHover": "#0078d4",
-    "fillColorPressed": "#106ebe",
+    "fillColorPressed": "#0078d4",
     "fillColorDisabled": "#bdbdbd"
   },
   "neutralForeground3Selected": {
-    "fillColorRest": "#616161",
+    "fillColorRest": "#424242",
     "fillColorHover": "#424242",
     "fillColorPressed": "#424242",
     "fillColorDisabled": "#bdbdbd"
   },
   "neutralForeground4": {
-    "fillColorRest": "#707070",
-    "fillColorHover": "#707070",
-    "fillColorPressed": "#707070",
-    "fillColorDisabled": "#bdbdbd"
-  },
-  "neutralForeground4Selected": {
     "fillColorRest": "#707070",
     "fillColorHover": "#707070",
     "fillColorPressed": "#707070",
@@ -350,23 +281,21 @@
     "fillColorPressed": "#ffffff",
     "fillColorDisabled": "#bdbdbd"
   },
-  "neutralForegroundInvertedSelected": {
-    "fillColorRest": "#ffffff",
-    "fillColorHover": "#ffffff",
-    "fillColorPressed": "#ffffff",
-    "fillColorDisabled": "#bdbdbd"
-  },
   "neutralForegroundOnBrand": {
     "fillColorRest": "#ffffff",
     "fillColorHover": "#ffffff",
     "fillColorPressed": "#ffffff",
     "fillColorDisabled": "#bdbdbd"
   },
-  "neutralForegroundOnBrandSelected": {
-    "fillColorRest": "#ffffff",
-    "fillColorHover": "#ffffff",
-    "fillColorPressed": "#ffffff",
-    "fillColorDisabled": "#bdbdbd"
+  "neutralStencil1": {
+    "fillColorRest": "#e6e6e6",
+    "fillColorHover": "#e6e6e6",
+    "fillColorPressed": "#e6e6e6"
+  },
+  "neutralStencil2": {
+    "fillColorRest": "#fafafa",
+    "fillColorHover": "#fafafa",
+    "fillColorPressed": "#fafafa"
   },
   "neutralStroke1": {
     "strokeColorRest": "#d1d1d1",
@@ -376,9 +305,9 @@
     "strokeWidth": 1
   },
   "neutralStroke1Selected": {
-    "strokeColorRest": "#d1d1d1",
-    "strokeColorHover": "#c7c7c7",
-    "strokeColorPressed": "#b3b3b3",
+    "strokeColorRest": "#bdbdbd",
+    "strokeColorHover": "#bdbdbd",
+    "strokeColorPressed": "#bdbdbd",
     "strokeColorDisabled": "#e0e0e0",
     "strokeWidth": 1
   },
@@ -389,21 +318,7 @@
     "strokeColorDisabled": "#e0e0e0",
     "strokeWidth": 1
   },
-  "neutralStroke2Selected": {
-    "strokeColorRest": "#e0e0e0",
-    "strokeColorHover": "#e0e0e0",
-    "strokeColorPressed": "#e0e0e0",
-    "strokeColorDisabled": "#e0e0e0",
-    "strokeWidth": 1
-  },
   "neutralStroke3": {
-    "strokeColorRest": "#f0f0f0",
-    "strokeColorHover": "#f0f0f0",
-    "strokeColorPressed": "#f0f0f0",
-    "strokeColorDisabled": "#e0e0e0",
-    "strokeWidth": 1
-  },
-  "neutralStroke3Selected": {
     "strokeColorRest": "#f0f0f0",
     "strokeColorHover": "#f0f0f0",
     "strokeColorPressed": "#f0f0f0",
@@ -418,9 +333,9 @@
     "strokeWidth": 1
   },
   "neutralStrokeAccessibleSelected": {
-    "strokeColorRest": "#616161",
-    "strokeColorHover": "#575757",
-    "strokeColorPressed": "#4d4d4d",
+    "strokeColorRest": "#0078d4",
+    "strokeColorHover": "#0078d4",
+    "strokeColorPressed": "#0078d4",
     "strokeColorDisabled": "#e0e0e0",
     "strokeWidth": 1
   },
@@ -429,6 +344,20 @@
   },
   "square": {
     "cornerRadius": 0
+  },
+  "strokeFocus1": {
+    "strokeColorRest": "#ffffff",
+    "strokeColorHover": "#ffffff",
+    "strokeColorPressed": "#ffffff",
+    "strokeColorDisabled": "#e0e0e0",
+    "strokeWidth": 1
+  },
+  "strokeFocus2": {
+    "strokeColorRest": "#000000",
+    "strokeColorHover": "#000000",
+    "strokeColorPressed": "#000000",
+    "strokeColorDisabled": "#e0e0e0",
+    "strokeWidth": 1
   },
   "subheadline": {
     "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
@@ -443,9 +372,9 @@
     "fillColorDisabled": "#f0f0f0"
   },
   "subtleBackgroundSelected": {
-    "fillColorRest": "transparent",
-    "fillColorHover": "#f5f5f5",
-    "fillColorPressed": "#e0e0e0",
+    "fillColorRest": "#ebebeb",
+    "fillColorHover": "#ebebeb",
+    "fillColorPressed": "#ebebeb",
     "fillColorDisabled": "#f0f0f0"
   },
   "surface": {
