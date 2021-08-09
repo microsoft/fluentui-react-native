@@ -1,16 +1,12 @@
-import { Theme, AliasColorTokens } from '@fluentui-react-native/theme-types';
+import { Theme, PartialTheme, AliasColorTokens } from '@fluentui-react-native/theme-types';
 
-export function createBrandedThemeWithAlias(theme: Theme): Theme {
+export function createBrandedThemeWithAlias(theme: Theme): PartialTheme {
   if (!theme.host.colors) {
-    return theme;
+    return {};
   }
 
   return {
-    ...theme,
-    colors: {
-      ...theme.colors,
-      ...overrideBrandAliasTokensWithOffice(theme),
-    },
+    colors: overrideBrandAliasTokensWithOffice(theme),
   };
 }
 
