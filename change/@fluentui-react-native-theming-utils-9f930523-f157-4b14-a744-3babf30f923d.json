@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Clean up code a little",
-  "packageName": "@fluentui-react-native/theming-utils",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

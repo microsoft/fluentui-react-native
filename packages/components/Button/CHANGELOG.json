@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Mon, 09 Aug 2021 22:49:01 GMT",
+      "tag": "@fluentui-react-native/button_v0.18.6",
+      "version": "0.18.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.6",
+            "author": "ruaraki@microsoft.com",
+            "commit": "c5b7e91e087c4f9c3fead8c52bdf20f5c86e9824",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 09 Aug 2021 19:16:08 GMT",
       "tag": "@fluentui-react-native/button_v0.18.5",
       "version": "0.18.5",
