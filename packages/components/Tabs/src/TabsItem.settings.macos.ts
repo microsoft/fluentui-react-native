@@ -1,3 +1,8 @@
+/*
+Disclaimer: these styles do not follow a specific figma design, but are
+meant to be placeholders until new designs are developed
+*/
+
 import { tabsItemName, TabsItemType } from './TabsItem.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 import type { IViewProps } from '@fluentui-react-native/adapters';
