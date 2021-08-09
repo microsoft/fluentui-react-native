@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Fri, 06 Aug 2021 00:36:02 GMT and should not be manually modified.
+This log was last generated on Sat, 07 Aug 2021 00:40:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.12
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.6 (jasonmo@microsoft.com)
+
+## 0.7.11
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.5 (ruaraki@microsoft.com)
 
 ## 0.7.10
 

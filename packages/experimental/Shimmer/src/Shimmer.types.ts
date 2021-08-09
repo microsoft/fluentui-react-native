@@ -1,114 +1,158 @@
-import { SvgProps, ImageProps } from 'react-native-svg';
-import { ImageURISource, ColorValue } from 'react-native';
+import { SvgProps } from 'react-native-svg';
+import { ViewProps } from 'react-native';
+import { IBackgroundColorTokens } from '@fluentui-react-native/tokens';
 
 export const shimmerName = 'Shimmer';
+
 /**
- * Specifies the possible type of the shimmer elements: Rect, Circle.
- * Required when building more than one element at a time.
+ * Properties necessary to define a circular Shimmer element.
  */
-export type ShimmerElementType = 'rect' | 'circle';
-/**
- * Represents the shimmer element
- */
-export interface ShimmerElement {
+export interface ShimmerCircleElement {
   /**
-   * Type of the shimmer element
+   * Shimmer element type.
    */
-  type?: ShimmerElementType;
+  type: 'circle';
+
   /**
-   * Specifies the element width, non-op for circle element
-   * @defaultValue '200'
+   * Radius of the circle element.
+   * @defaultValue 12
    */
-  width?: number;
+  radius?: number;
+
   /**
-   * Specifies the shimmer view height. For circle element type, height is divided by 2 to get the radius for Svg
-   * @defaultValue '100'
+   * Note: cx and cy should be optional properties [or removed], with relative positioning being the default [or only] positioning mechanism.
+   * Note: The behavior of element intersections is undefined.  https://www.github.com/Microsoft/fluentui-react-native Issue #866
    */
-  height?: number;
+
   /**
-   * Specifies the rect shimmer border radius, non-op for circle element
-   * @defaultValue '0'
+   * The x-axis center of the circle element in the Shimmer relative to the origin [top-left, (0,0)].
    */
-  borderRadius?: number;
+  cx: number;
+
   /**
-   * x-coordinate
-   * @defaultValue '0'
+   * The y-axis center of the circle element in the Shimmer relative to the origin [top-left, (0,0)].
    */
-  xPos?: number;
-  /**
-   * y-coordinate
-   * @defaultValue '0'
-   */
-  yPos?: number;
+  cy: number;
 }
 
-export interface ShimmerTokens {
+/**
+ * Properties necessary to define a rectangular Shimmer element.
+ */
+export interface ShimmerRectElement {
   /**
-   * Specifies the distance traveled from starting position.
-   * By default, the animation will animate from 0 to 30 over the course of 7000ms, since speed = distance / time, so
-   * speed ≈ 0.004 (higher the speed, faster it moves).
-   * @defaultValue '30'
+   * Shimmer element type.
    */
-  toValue?: number;
+  type: 'rect';
+
   /**
-   * Specifies the time required to travel a given distance in milliseconds
-   *
-   * @defaultValue '7000'
-   */
-  duration?: number;
-  /**
-   * Specifies the animation delay time in milliseconds
-   * @defaultValue '0'
-   */
-  delay?: number;
-  /**
-   * Gradient tint color
-   * @defaultValue 'white'
-   */
-  gradientTintColor?: ColorValue;
-  /**
-   * Shimmer element tint color, no-op for image based shimmer
-   * @defaultValue 'E1E1E1' for light mode, '404040' for dark mode
-   */
-  shimmerTintColor?: ColorValue;
-  /**
-   * Width of the shimmer view
-   * @defaultValue '200'
+   * Width of the rect.
+   * @defaultValue 100%
    */
   width?: number;
+
   /**
-   * Height of the shimmer view
-   * @defaultValue '100'
+   * Height of the rect.
+   * @defaultValue 16
    */
   height?: number;
+
   /**
-   * Specifies the gradient angle, value should be anywhere between -1 and 1
-   * -1 to 1 maps to 90 degrees horizontally to ≈ 120 degrees
-   * @defaultValue '0'
+   * Border radius for the x-axis of a rounded rect.
+   * @defaultValue 0
+   */
+  borderRadiusX?: number;
+
+  /**
+   * Border radius for the y-axis of a rounded rect.
+   * @defaultValue 0
+   */
+  borderRadiusY?: number;
+
+  /**
+   * Note: x and y should be optional properties [or removed], with relative positioning being the default [or only] positioning mechanism.
+   * Note: The behavior of element intersections is undefined.  https://www.github.com/Microsoft/fluentui-react-native Issue #866
+   */
+
+  /**
+   * The x-axis position of the rect element's top-left corner in the Shimmer relative to the origin [top-left, (0,0)].
+   */
+  x: number;
+
+  /**
+   * The y-axis position of the rect element's top-left corner in the Shimmer relative to the origin [top-left, (0,0)].
+   */
+  y: number;
+}
+
+export type ShimmerElementTypes = ShimmerCircleElement | ShimmerRectElement;
+
+export interface ShimmerTokens extends IBackgroundColorTokens {
+  /**
+   * Specifies the Shimmer effect angle in degrees (produced by a gradient)
+   * @defaultValue 0
    */
   angle?: number;
+
   /**
-   * Specifies the gradient opacity, value should be less than 1
-   * @defaultValue '.7'
+   * Specifies the animation delay time in milliseconds
+   * @defaultValue 0
    */
-  gradientOpacity?: number;
+  delay?: number;
+
+  /**
+   * Specifies the time required to traverse the control in milliseconds
+   *
+   * @defaultValue 2000
+   */
+  duration?: number;
+
+  /**
+   * Specifies the opacity of the shimmer color.
+   * @defaultValue 1
+   */
+  shimmerColorOpacity?: number;
+
+  /**
+   * Specifies the opacity of the wave color.
+   * @defaultValue 1
+   */
+  shimmerWaveColorOpacity?: number;
+
+  /**
+   * Color you see when the shimmer wave is not animating.
+   *
+   * Note: Needs to be changed to ColorValue. https://www.github.com/Microsoft/fluentui-react-native Issue #866
+   *
+   * @defaultValue theme.colors.bodyFrameDivider
+   */
+  shimmerColor?: string | number;
+
+  /**
+   * Defines the tip color of the wave which has a linear gradient.
+   * from shimmerColor to shimmerWaveColor to shimmerColor.
+   *
+   * Note: Needs to be changed to ColorValue. https://www.github.com/Microsoft/fluentui-react-native Issue #866
+   *
+   * @defaultValue '#E1E1E1'
+   */
+  shimmerWaveColor?: string | number;
+
+  /**
+   * Width of the Shimmer wave.
+   * @defaultValue '100%' of the 'width' property
+   */
+  shimmerWaveWidth?: number | string;
 }
 
 export interface ShimmerSlotProps extends ShimmerProps {
   root: SvgProps;
-  image: ImageProps;
 }
 
-export interface ShimmerProps extends ShimmerTokens {
+export interface ShimmerProps extends ViewProps, ShimmerTokens {
   /**
-   * Image to be used as a shimmer element
-   * @defaultValue 'null'
+   * Shimmer shapes that define the masking effect of the Shimmer control.
    */
-  uri?: ImageURISource;
-  /**
-   * Array of ShimmerElement in a single view
-   */
-  elements?: Array<ShimmerElement>;
+  elements?: Array<ShimmerElementTypes>;
 }
 
 export interface ShimmerType {

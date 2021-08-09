@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 06 Aug 2021 00:36:02 GMT and should not be manually modified.
+This log was last generated on Sat, 07 Aug 2021 02:50:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.35.0
+
+Sat, 07 Aug 2021 02:50:29 GMT
+
+### Minor changes
+
+- Win32 Shimmer control and unifying changes for commonJS Shimmer (patboyd@microsoft.com)
+
+### Patches
+
+- Bump @fluentui/react-native to v0.24.29 (patboyd@microsoft.com)
+- Bump @fluentui-react-native/experimental-shimmer to v0.5.0 (patboyd@microsoft.com)
+- Bump @fluentui-react-native/experimental-text to v0.6.5 (patboyd@microsoft.com)
+- Bump @fluentui-react-native/experimental-button to v0.8.5 (patboyd@microsoft.com)
+- Bump @fluentui-react-native/experimental-native-button to v0.7.5 (patboyd@microsoft.com)
+
+## 0.34.6
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.34.5
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui/react-native to v0.24.27 (ruaraki@microsoft.com)
+
+## 0.34.4
+
+Fri, 06 Aug 2021 20:26:18 GMT
+
+### Patches
+
+- Update test code with brand changes (ruaraki@microsoft.com)
 
 ## 0.34.3
 
