@@ -34,6 +34,7 @@ export const Tabs = compose<TabsType>({
   displayName: tabsName,
 
   usePrepareProps: (userProps: TabsProps, useStyling: IUseComposeStyling<TabsType>) => {
+    const focusZoneRef = React.useRef(null);
     const {
       label,
       ariaLabel,
@@ -79,7 +80,7 @@ export const Tabs = compose<TabsType>({
         getTabId: onChangeTabId,
         updateSelectedTabsItemRef: onSelectTabsItemRef,
         views: map,
-        focusZoneRef: componentRef,
+        focusZoneRef: focusZoneRef,
       },
       info: {
         headersOnly: headersOnly ?? false,
@@ -117,9 +118,9 @@ export const Tabs = compose<TabsType>({
     };
 
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
-      root: { rest, ref: React.useRef(null), ...ariaRoles, ...pressable.props },
+      root: { rest, ref: componentRef, ...ariaRoles, ...pressable.props },
       label: { children: label },
-      container: Platform.OS !== 'windows' ? { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef } : {focusable: true, ref: componentRef, onKeyDown: onKeyDown},
+      container: Platform.OS !== 'windows' ? { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef } : {focusable: true, ref: focusZoneRef, onKeyDown: onKeyDown},
     });
 
     return { slotProps, state };
@@ -179,7 +180,7 @@ export const Tabs = compose<TabsType>({
     root: View,
     label: Text,
     tabPanel: { slotType: View, filter: filterViewProps },
-    container: Platform.OS !== 'windows' ? FocusZone : { slotType: View, filter: filterViewProps },
+    container: Platform.OS !== 'windows' ? FocusZone : View,
   },
   styles: {
     root: [],
