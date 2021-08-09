@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "enable usePressableState with stock Pressable component",
-  "packageName": "@uifabricshared/foundation-compose",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "patch"
-}

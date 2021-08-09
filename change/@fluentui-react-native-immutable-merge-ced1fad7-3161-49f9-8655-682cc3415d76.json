@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "enable usePressableState with stock Pressable component",
-  "packageName": "@fluentui-react-native/immutable-merge",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "none"
-}

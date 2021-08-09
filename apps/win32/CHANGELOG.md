@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Fri, 06 Aug 2021 23:18:21 GMT and should not be manually modified.
+This log was last generated on Sat, 07 Aug 2021 02:50:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.6
+
+Sat, 07 Aug 2021 02:50:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.0 (patboyd@microsoft.com)
+
+## 0.12.5
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
 
 ## 0.12.4
 
