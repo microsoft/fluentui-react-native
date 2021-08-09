@@ -107,7 +107,7 @@ export const TabsItem = compose<TabsItemType>({
         ref: componentRef,
         onAccessibilityTap: onAccessibilityTap,
         accessibilityRole: Platform.OS !== 'windows' ? 'tab' : null, // Add windows role when RN is at >= 0.64
-        accessibilityLabel: accessibilityLabel,
+        accessibilityLabel: accessibilityLabel, // For windows, set to read children when RN is at >= 0.64
         accessibilityState: { disabled: userProps.disabled, selected: info.selectedKey === userProps.itemKey },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
         accessibilityPositionInSet: ariaPosInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
