@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { PressableProps, Platform } from 'react-native';
+import { PressableFocusProps, PressableHoverProps, PressablePressProps } from './Pressability/Pressability.types';
 import {
   IPressableHooks,
   IWithPressableOptions,
@@ -6,17 +8,18 @@ import {
   IHoverState,
   IFocusState,
   IWithPressableEvents,
+  IPressableState,
+  PressablePropsExtended,
 } from './useAsPressable.types';
 import { usePressability } from './usePressability';
 
 /**
  * hover specific state and callback helper
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
-function useHoverHelper<T extends object>(props: IWithPressableOptions<T>): [IWithPressableOptions<object>, IHoverState] {
+function useHoverHelper(props: PressableHoverProps): [PressableHoverProps, IHoverState] {
   const [hoverState, setHoverState] = React.useState({ hovered: false });
   const onHoverIn = React.useCallback(
-    (e) => {
+    e => {
       setHoverState({ hovered: true });
       if (props.onHoverIn) {
         props.onHoverIn(e);
@@ -26,7 +29,7 @@ function useHoverHelper<T extends object>(props: IWithPressableOptions<T>): [IWi
   );
 
   const onHoverOut = React.useCallback(
-    (e) => {
+    e => {
       setHoverState({ hovered: false });
       if (props.onHoverOut) {
         props.onHoverOut(e);
@@ -40,11 +43,10 @@ function useHoverHelper<T extends object>(props: IWithPressableOptions<T>): [IWi
 /**
  * focus specific state and callback helper
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
-function useFocusHelper<T extends object>(props: IWithPressableOptions<T>): [IWithPressableOptions<object>, IFocusState] {
+function useFocusHelper(props: PressableFocusProps): [PressableFocusProps, IFocusState] {
   const [focusState, setFocusState] = React.useState({ focused: false });
   const onFocus = React.useCallback(
-    (e) => {
+    e => {
       setFocusState({ focused: true });
       if (props.onFocus) {
         props.onFocus(e);
@@ -54,7 +56,7 @@ function useFocusHelper<T extends object>(props: IWithPressableOptions<T>): [IWi
   );
 
   const onBlur = React.useCallback(
-    (e) => {
+    e => {
       setFocusState({ focused: false });
       if (props.onBlur) {
         props.onBlur(e);
@@ -68,12 +70,11 @@ function useFocusHelper<T extends object>(props: IWithPressableOptions<T>): [IWi
 /**
  * press specific state and callback helper
  */
-// eslint-disable-next-line @typescript-eslint/ban-types
-function usePressHelper<T extends object>(props: IWithPressableOptions<T>): [IWithPressableOptions<object>, IPressState] {
+function usePressHelper(props: PressablePressProps): [PressablePressProps, IPressState] {
   const [pressState, setPressState] = React.useState({ pressed: false });
 
   const onPressIn = React.useCallback(
-    (e) => {
+    e => {
       setPressState({ pressed: true });
       if (props.onPressIn) {
         props.onPressIn(e);
@@ -83,7 +84,7 @@ function usePressHelper<T extends object>(props: IWithPressableOptions<T>): [IWi
   );
 
   const onPressOut = React.useCallback(
-    (e) => {
+    e => {
       setPressState({ pressed: false });
       if (props.onPressOut) {
         props.onPressOut(e);
@@ -145,4 +146,22 @@ export function usePressState<T extends object>(props: IWithPressableOptions<T>)
 export function useHoverState<T extends object>(props: IWithPressableOptions<T>): [IWithPressableEvents<T>, IHoverState] {
   const [hoverProps, hoverState] = useHoverHelper(props);
   return [{ ...props, ...usePressability({ ...props, ...hoverProps }) }, hoverState];
+}
+
+/**
+ * This routine hooks the props to pass to a Pressable component to obtain the current state of the Pressable as well as generating
+ * state change updates when those props change. This allows a parent component to control the render of the whole component rather than having
+ * to split the code between a child function or style function.
+ *
+ * @param props - props to pass to a Pressable component
+ * @returns - modified props to pass into the Pressable as well as the current state with regards to hover, focus, and press
+ */
+export function usePressableState(props: PressablePropsExtended): { props: PressableProps; state: IPressableState } {
+  const { onPressIn, onPressOut, onHoverIn, onHoverOut, onFocus, onBlur, ...rest } = props;
+  const [focusProps, focusState] = useFocusHelper({ onFocus, onBlur });
+  const [pressProps, pressState] = usePressHelper({ onPressIn, onPressOut });
+  const platformSupportsHover = Platform.OS !== 'android' && Platform.OS !== 'ios';
+  const [hoverProps, hoverState] = platformSupportsHover ? useHoverHelper({ onHoverIn, onHoverOut }) : [{}, {}];
+
+  return { props: { ...rest, ...focusProps, ...pressProps, ...hoverProps }, state: { ...focusState, ...pressState, ...hoverState } };
 }

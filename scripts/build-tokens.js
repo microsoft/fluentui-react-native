@@ -19,18 +19,31 @@ async function run() {
     process.exit(1);
   }
 
+  console.log('Generating global tokens...');
+  child_process.execSync(
+    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --out ./packages/theming/theme-tokens/src/global --p reactnative',
+  );
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/global/reactnative/tokens-aliases.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/global/reactnative/tokens-controls.json'));
+
   console.log('Generating light mode tokens...');
   child_process.execSync(
     'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-light.json --out ./packages/theming/theme-tokens/src/light --p reactnative',
   );
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/light/reactnative/tokens-global.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/light/reactnative/tokens-controls.json'));
+
   console.log('Generating dark mode tokens...');
   child_process.execSync(
     'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-dark.json --out ./packages/theming/theme-tokens/src/dark --p reactnative',
   );
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/dark/reactnative/tokens-global.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/dark/reactnative/tokens-controls.json'));
+
   console.log('Done!');
 }
 
-run().catch(ex => {
+run().catch((ex) => {
   console.error('Caught error:');
   console.error(ex);
   process.exit(1);

@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Fri, 06 Aug 2021 00:36:02 GMT and should not be manually modified.
+This log was last generated on Mon, 09 Aug 2021 22:49:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.6
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.29 (ruaraki@microsoft.com)
+
+## 0.12.5
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.4 (ruaraki@microsoft.com)
+
+## 0.12.4
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.12.3
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.2 (ruaraki@microsoft.com)
 
 ## 0.12.2
 
