@@ -8,6 +8,7 @@ import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose'
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings } from './Tabs.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
+import { filterViewProps } from '@fluentui-react-native/adapters';
 import { foregroundColorTokens, textTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
@@ -136,7 +137,7 @@ export const Tabs = compose<TabsType>({
   slots: {
     root: View,
     label: Text,
-    tabPanel: View,
+    tabPanel: { slotType: View, filter: filterViewProps },
     container: FocusZone,
   },
   styles: {
