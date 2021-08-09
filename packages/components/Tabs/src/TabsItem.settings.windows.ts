@@ -1,13 +1,21 @@
 import { tabsItemName, TabsItemType } from './TabsItem.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 import type { IViewProps } from '@fluentui-react-native/adapters';
+// import { useTheme } from '@fluentui-react-native/theme-types';
 
-export const tabsItemSelectActionLabel = 'Select a TabsItem';
+// export const tabsItemSelectActionLabel = 'Select a TabsItem';
+// const theme = useTheme();
+// if (theme.host.appearance === 'light') {
+//   const col = '#000000';
+// }
+// else if (theme.host.appearance === 'dark') {
+//   const col = '#ffffff';
+// }
 
 export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
-      color: '#000000',
+      color: 'buttonText',
       variant: 'heroStandard',
       fontSize: 20,
       borderWidth: 2,
