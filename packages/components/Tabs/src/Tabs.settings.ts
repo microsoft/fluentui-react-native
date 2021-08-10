@@ -12,7 +12,6 @@ export const settings: IComposeSettings<TabsType> = [
     },
     label: {
       style: {
-        fontFamily: 'inherit',
         fontSize: 16,
         fontWeight: '600',
       },
