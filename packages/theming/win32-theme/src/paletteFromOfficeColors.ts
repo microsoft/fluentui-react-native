@@ -174,11 +174,6 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     buttonCheckedHoveredBackground: p.BkgCtlHover,
     buttonCheckedHoveredContent: p.TextCtlHover,
 
-    // brandCheckedBackground: p.Bkg,
-    // brandCheckedContent: ,
-    // brandCheckedHoveredBackground: ,
-    // brandCheckedHoveredContent: ,
-
     ghostCheckedBackground: p.BkgSelected,
     ghostCheckedContent: p.TextSelected,
     ghostCheckedHoveredBackground: p.BkgHover,
@@ -189,14 +184,5 @@ export function paletteFromOfficeColors(p: OfficePalette): Palette {
     ghostFocusedSecondaryContent: p.TextSecondaryHover,
     ghostHoveredSecondaryContent: p.TextSecondaryHover,
     ghostPressedSecondaryContent: p.TextSecondaryPressed,
-
-    // brandSecondaryContent: ,
-    // brandFocusedSecondaryContent: ,
-    // brandHoveredSecondaryContent: ,
-    // brandPressedSecondaryContent: ,
-
-    // buttonDisabledSecondaryContent: p,
-    // buttonHoveredSecondaryContent: ,
-    // buttonPressedSecondaryContent: ,
   };
 }
