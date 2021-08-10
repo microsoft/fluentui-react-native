@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/persona
 
-This log was last generated on Wed, 04 Aug 2021 06:26:25 GMT and should not be manually modified.
+This log was last generated on Mon, 09 Aug 2021 22:49:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.5
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.5 (ruaraki@microsoft.com)
+
+## 0.11.4
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/persona-coin to v0.9.4 (ruaraki@microsoft.com)
+
+## 0.11.3
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.11.2
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/persona-coin to v0.9.2 (ruaraki@microsoft.com)
+
+## 0.11.1
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/persona-coin to v0.9.1 (ruaraki@microsoft.com)
 
 ## 0.11.0
 

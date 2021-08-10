@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/use-slots",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "description": "Hook function to return styled slots",
   "repository": {
     "type": "git",
@@ -25,8 +25,6 @@
     "start-test": "fluentui-scripts jest-watch",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
-    "verify-api": "fluentui-scripts verify-api-extractor",
-    "update-api": "fluentui-scripts update-api-extractor",
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
@@ -34,7 +32,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/use-slot": ">=0.1.4 <1.0.0"
+    "@fluentui-react-native/use-slot": ">=0.1.5 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/merge-props": ">=0.3.3 <1.0.0",

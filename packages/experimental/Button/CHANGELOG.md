@@ -1,8 +1,56 @@
 # Change Log - @fluentui-react-native/experimental-button
 
-This log was last generated on Wed, 04 Aug 2021 16:54:20 GMT and should not be manually modified.
+This log was last generated on Mon, 09 Aug 2021 22:49:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.7
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.29 (ruaraki@microsoft.com)
+
+## 0.8.6
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.28 (ruaraki@microsoft.com)
+
+## 0.8.5
+
+Sat, 07 Aug 2021 02:50:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.6.5 (patboyd@microsoft.com)
+
+## 0.8.4
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.8.3
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.26 (ruaraki@microsoft.com)
+
+## 0.8.2
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Fix usage of conditional hooks (nakambo@microsoft.com)
 
 ## 0.8.1
 

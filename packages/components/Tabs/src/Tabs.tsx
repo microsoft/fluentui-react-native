@@ -1,17 +1,18 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
-import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, ITabsContext } from './Tabs.types';
+import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, TabsContextData } from './Tabs.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings } from './Tabs.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
+import { filterViewProps } from '@fluentui-react-native/adapters';
 import { foregroundColorTokens, textTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
-export const TabsContext = React.createContext<ITabsContext>({
+export const TabsContext = React.createContext<TabsContextData>({
   selectedKey: null,
   onTabsClick: (/* key: string */) => {
     return;
@@ -32,7 +33,7 @@ export const Tabs = compose<TabsType>({
   usePrepareProps: (userProps: TabsProps, useStyling: IUseComposeStyling<TabsType>) => {
     const {
       label,
-      ariaLabel,
+      accessibilityLabel = userProps.label,
       selectedKey,
       headersOnly,
       defaultSelectedKey,
@@ -74,21 +75,17 @@ export const Tabs = compose<TabsType>({
       },
       info: {
         headersOnly: headersOnly ?? false,
-        label: !!label,
+        label: !!label && Platform.OS === 'windows',
       },
     };
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
-    const ariaRoles = {
-      accessibilityRole: 'tablist',
-      accessibilityLabel: ariaLabel || label,
-    };
-
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
-      root: { rest, ref: componentRef, ...ariaRoles },
+      root: { rest, ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist'},
       label: { children: label },
       container: { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef },
+      stack: {style: {flexDirection:'row'}}
     });
 
     return { slotProps, state };
@@ -121,7 +118,11 @@ export const Tabs = compose<TabsType>({
       >
         <Slots.root>
           {renderData.state.info.label && <Slots.label />}
-          <Slots.container>{children}</Slots.container>
+          <Slots.container>
+            <Slots.stack>
+              {children}
+            </Slots.stack>
+          </Slots.container>
           <Slots.tabPanel>
             <TabsContext.Consumer>
               {(context) => !renderData.state.info.headersOnly && context.views.get(context.selectedKey)}
@@ -136,13 +137,14 @@ export const Tabs = compose<TabsType>({
   slots: {
     root: View,
     label: Text,
-    tabPanel: View,
     container: FocusZone,
+    stack: { slotType: View, filter: filterViewProps },
+    tabPanel: { slotType: View, filter: filterViewProps },
   },
   styles: {
     root: [],
     label: [foregroundColorTokens, textTokens],
-    container: [backgroundColorTokens],
+    stack: [backgroundColorTokens],
   },
 });
 

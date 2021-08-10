@@ -2,6 +2,50 @@
   "name": "@uifabricshared/foundation-settings",
   "entries": [
     {
+      "date": "Sat, 07 Aug 2021 00:40:04 GMT",
+      "tag": "@uifabricshared/foundation-settings_v0.10.1",
+      "version": "0.10.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "enable usePressableState with stock Pressable component",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@uifabricshared/foundation-settings"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/immutable-merge to v1.1.3",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@uifabricshared/foundation-settings"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/merge-props to v0.3.3",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@uifabricshared/foundation-settings"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@uifabricshared/foundation-settings_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@uifabricshared/foundation-settings"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 Aug 2021 06:26:25 GMT",
       "tag": "@uifabricshared/foundation-settings_v0.10.0",
       "version": "0.10.0",

@@ -14,7 +14,6 @@ import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemR
 import {
   useAsPressable,
   useKeyCallback,
-  useViewCommandFocus,
   createIconProps,
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
@@ -33,6 +32,8 @@ export const TabsItem = compose<TabsItemType>({
       onClick,
       itemKey,
       itemCount,
+      accessibilityPosInSet,
+      accessibilitySetSize,
       ...rest
     } = userProps;
 
@@ -79,8 +80,6 @@ export const TabsItem = compose<TabsItemType>({
       }
     }, []);
 
-    const buttonRef = useViewCommandFocus(componentRef);
-
     // Grab the styling information from the userProps, referencing the state as well as the props.
     const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
 
@@ -102,14 +101,14 @@ export const TabsItem = compose<TabsItemType>({
       root: {
         ...rest,
         ...pressable.props,
-        ref: buttonRef,
+        ref: componentRef,
         onAccessibilityTap: onAccessibilityTap,
         accessibilityRole: 'tab',
         accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: userProps.disabled, selected: info.selectedKey === userProps.itemKey },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
-        accessibilityPositionInSet: info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
-        accessibilitySetSize: info.tabsItemKeys.length,
+        accessibilityPositionInSet: accessibilityPosInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
+        accessibilitySetSize: accessibilitySetSize ?? info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUp,
       },

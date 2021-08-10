@@ -2,6 +2,62 @@
   "name": "@fluentui-react-native/composition",
   "entries": [
     {
+      "date": "Sat, 07 Aug 2021 00:40:04 GMT",
+      "tag": "@fluentui-react-native/composition_v0.6.8",
+      "version": "0.6.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "enable usePressableState with stock Pressable component",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/composition"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/immutable-merge to v1.1.3",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/composition"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/use-styling to v0.6.7",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/composition"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/use-slot to v0.1.5",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/composition"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/use-slots to v0.5.7",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/composition"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@fluentui-react-native/composition_v0.6.7",
+      "version": "0.6.7",
+      "comments": {
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/composition"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 Aug 2021 16:54:20 GMT",
       "tag": "@fluentui-react-native/composition_v0.6.7",
       "version": "0.6.7",
