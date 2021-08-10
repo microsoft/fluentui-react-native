@@ -9,14 +9,14 @@ PODS:
     - React-Core (= 0.63.4)
     - React-jsi (= 0.63.4)
     - ReactCommon/turbomodule/core (= 0.63.4)
-  - FluentUI-React-Native-Avatar (0.11.0):
+  - FluentUI-React-Native-Avatar (0.11.4):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
-  - FluentUI-React-Native-Button (0.7.2):
+  - FluentUI-React-Native-Button (0.7.7):
     - MicrosoftFluentUI (= 0.3.0)
     - React
-  - FluentUI-React-Native-Date-Picker (0.3.1):
+  - FluentUI-React-Native-Date-Picker (0.3.2):
     - MicrosoftFluentUI (= 0.3.0)
     - React
   - Folly (2020.01.13.00):
@@ -544,9 +544,9 @@ SPEC CHECKSUMS:
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
-  FluentUI-React-Native-Avatar: 0e1f87d352d35e2f8c6814125f4b17616703afda
-  FluentUI-React-Native-Button: b6e99755754b0d1daf1512e48a4fe3322925b833
-  FluentUI-React-Native-Date-Picker: 692348dea7a2f67e9b83b4fcabd166a0cea5a123
+  FluentUI-React-Native-Avatar: ce909e9bb562c48fc250f85c7bf0df68027e73f4
+  FluentUI-React-Native-Button: 56b68311a0fad790494e29753cca4d8e35f77bf5
+  FluentUI-React-Native-Date-Picker: 0fc0fb8bc77c997ee033551b904886da56ccf1ee
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
