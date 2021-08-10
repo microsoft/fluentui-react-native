@@ -33,7 +33,7 @@ export const Tabs = compose<TabsType>({
   usePrepareProps: (userProps: TabsProps, useStyling: IUseComposeStyling<TabsType>) => {
     const {
       label,
-      ariaLabel,
+      accessibilityLabel = userProps.label,
       selectedKey,
       headersOnly,
       defaultSelectedKey,
@@ -81,13 +81,8 @@ export const Tabs = compose<TabsType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
-    const ariaRoles = {
-      accessibilityRole: 'tablist',
-      accessibilityLabel: ariaLabel || label,
-    };
-
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
-      root: { rest, ref: componentRef, ...ariaRoles },
+      root: { rest, ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist'},
       label: { children: label },
       container: { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef },
     });

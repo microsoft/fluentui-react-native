@@ -62,9 +62,9 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
   defaultSelectedKey?: string;
 
   /*
-   ** An aria label for narrator. If not provided, it will be set to the label of the Tabs
+   ** An accessibility label for narrator. If not provided, it will be set to the label of the Tabs
    */
-  ariaLabel?: string;
+   accessibilityLabel?: string;
 
   /*
    ** The key of the selected option. If you provide this, you must maintain selection state by observing
@@ -80,7 +80,7 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
 
   /*
    ** Callback to customize how IDs are generated for each tab header.
-   ** Useful if you're rendering content outside and need to connect aria-labelledby.
+   ** Useful if you're rendering content outside and need to connect accessibility-labelledby.
    */
   getTabId?: (key: string, index: number) => string;
 

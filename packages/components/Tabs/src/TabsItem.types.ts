@@ -57,21 +57,16 @@ export interface TabsItemProps extends IButtonProps {
   disabled?: boolean;
 
   /*
-   ** An optional string for the Narrator to read for each TabsItem. If not provided, this will be set to the tabsItem's content
-   */
-  ariaLabel?: string;
-
-  /*
    ** Defines the current tabs item's position in tabs for accessibility purposes. It's recommended to set this value if
    ** tabs item are not direct children of tabs. This value is auto-generated if tabs item are direct children of tabs.
    */
-   ariaPosInSet?: number;
+   accessibilityPosInSet?: number;
 
    /*
     ** Defines the number of tabs items in the group for accessibility purposes. It's recommended to set this value if tabs
     ** items are not direct children of tabs. This value is auto-generated if tabs items are direct children of tabs.
     */
-   ariaSetSize?: number;
+    accessibilitySetSize?: number;
 
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
