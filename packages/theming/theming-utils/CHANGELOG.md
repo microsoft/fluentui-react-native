@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Fri, 06 Aug 2021 00:36:02 GMT and should not be manually modified.
+This log was last generated on Mon, 09 Aug 2021 22:49:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.8
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Clean up code a little (ruaraki@microsoft.com)
+
+## 0.3.7
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.4.0 (ruaraki@microsoft.com)
+
+## 0.3.6
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.3.5
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.3.5 (ruaraki@microsoft.com)
 
 ## 0.3.4
 

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
-import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, ITabsContext } from './Tabs.types';
+import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, TabsContextData } from './Tabs.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings } from './Tabs.settings';
@@ -13,7 +13,7 @@ import { foregroundColorTokens, textTokens, backgroundColorTokens } from '@fluen
 import { useSelectedKey, useAsPressable } from '@fluentui-react-native/interactive-hooks';
 import type { IKeyboardEvent } from '@office-iss/react-native-win32';
 
-export const TabsContext = React.createContext<ITabsContext>({
+export const TabsContext = React.createContext<TabsContextData>({
   selectedKey: null,
   onTabsClick: (/* key: string */) => {
     return;
@@ -37,7 +37,7 @@ export const Tabs = compose<TabsType>({
     const focusZoneRef = React.useRef(null);
     const {
       label,
-      ariaLabel,
+      accessibilityLabel = userProps.label,
       selectedKey,
       headersOnly,
       defaultSelectedKey,
@@ -112,15 +112,11 @@ export const Tabs = compose<TabsType>({
       }
     };
 
-    const ariaRoles = {
-      accessibilityRole: Platform.OS !== 'windows' ? 'tablist' : null, // Add windows role when RN is at >= 0.64
-      accessibilityLabel: ariaLabel || label,
-    };
-
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
-      root: { rest, ref: componentRef, ...ariaRoles, ...pressable.props },
+      root: { rest, ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: Platform.OS !== 'windows' ? 'tablist' : null, ...pressable.props}, // Add windows role when RN is at >= 0.64
       label: { children: label },
-      container: Platform.OS !== 'windows' ? { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef } : {focusable: true, ref: focusZoneRef, onKeyDown: onKeyDown},
+      container: Platform.OS !== 'windows' ? { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef } : null,
+      stack: Platform.OS !== 'windows' ? {style: {flexDirection:'row'}} : {style: {flexDirection:'row'}, focusable: true, ref: focusZoneRef, onKeyDown: onKeyDown}
     });
 
     return { slotProps, state };
@@ -164,7 +160,11 @@ export const Tabs = compose<TabsType>({
       >
         <Slots.root>
           {renderData.state.info.label && <Slots.label />}
-          <Slots.container>{children}</Slots.container>
+          <Slots.container>
+            <Slots.stack>
+              {children}
+            </Slots.stack>
+          </Slots.container>
           <Slots.tabPanel>
             <TabsContext.Consumer>
               {(context) => !renderData.state.info.headersOnly && context.views.get(context.selectedKey)}
@@ -179,13 +179,14 @@ export const Tabs = compose<TabsType>({
   slots: {
     root: View,
     label: Text,
+    container: Platform.OS !== 'windows' ? FocusZone : React.Fragment,
+    stack: View,
     tabPanel: { slotType: View, filter: filterViewProps },
-    container: Platform.OS !== 'windows' ? FocusZone : View,
   },
   styles: {
     root: [],
     label: [foregroundColorTokens, textTokens],
-    container: [backgroundColorTokens],
+    stack: [backgroundColorTokens],
   },
 });
 

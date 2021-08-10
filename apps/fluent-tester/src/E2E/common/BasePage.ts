@@ -10,7 +10,7 @@ export class BasePage {
   }
 
   // Waits for page to be loaded. Timeout could differ depending on usage.
-  waitForPageDisplayed(timeout?: number) {
+  waitForPageDisplayed(timeout?: number): void {
     browser.waitUntil(
       () => {
         return this.isPageLoaded();
@@ -22,12 +22,12 @@ export class BasePage {
   }
 
   // Actual element on page
-  get _testPage() {
+  get _testPage(): WebdriverIO.Element {
     return By(DUMMY_CHAR);
   }
 
   // Title of page
-  get _pageName() {
+  get _pageName(): string {
     return DUMMY_CHAR;
   }
 
