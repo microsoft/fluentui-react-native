@@ -10,6 +10,12 @@ export const settings: IComposeSettings<TabsType> = [
       accessible: true,
       accessibilityRole: 'tablist',
     },
+    label: {
+      style: {
+        fontSize: 16,
+        fontWeight: '600',
+      },
+    },
     stack: {
       style: {
         flexDirection: 'row',
