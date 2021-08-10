@@ -16,9 +16,6 @@ export const settings: IComposeSettings<TabsType> = [
         marginLeft: 10,
       },
     },
-    label: {
-      style: {},
-    },
     stack: {
       style: {
         flexDirection: 'row',
