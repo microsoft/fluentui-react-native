@@ -76,7 +76,7 @@ export const settings: IComposeSettings<TabsItemType> = [
       },
       selected: {
         tokens: {
-          color: 'buttonTextPressed',
+          color: 'buttonTextHovered',
           indicatorColor: 'accentButtonBackground',
           fontWeight: 'bold',
         },
