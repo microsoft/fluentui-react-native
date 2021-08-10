@@ -144,7 +144,7 @@ export const Tabs = compose<TabsType>({
   styles: {
     root: [],
     label: [foregroundColorTokens, textTokens],
-    container: [backgroundColorTokens],
+    stack: [backgroundColorTokens],
   },
 });
 
