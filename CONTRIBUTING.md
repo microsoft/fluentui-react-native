@@ -167,7 +167,7 @@ To add a native Windows module:
    3. Add your native module references within the `App.js` file.
       - `Import { ComponentName } from @fluentui-react-native/experimental-<component-name>;`
    4. Start metro via command line
-      - Navigate to windows folder (`<path-to-fluentui-repo\fluentui-react-native\packages\experimental\<New Component Name>\windows`)
+      - Navigate to windows folder (`\packages\experimental\<New Component Name>\windows`)
       - Run `yarn start`
    5. Run application 
   
