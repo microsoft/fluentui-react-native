@@ -269,24 +269,17 @@ const customCallout: React.FunctionComponent = () => {
 
 const scrollviewCallout: React.FunctionComponent = () => {
   const [showStandardCallout, setShowStandardCallout] = React.useState(false);
-  const [isStandardCalloutVisible, setIsStandardCalloutVisible] = React.useState(false);
 
   const redTargetRef = React.useRef<View>(null);
   const toggleShowStandardCallout = React.useCallback(() => {
     setShowStandardCallout(!showStandardCallout);
-    setIsStandardCalloutVisible(false);
-  }, [showStandardCallout, setIsStandardCalloutVisible, setShowStandardCallout]);
-
-  const onShowStandardCallout = React.useCallback(() => {
-    setIsStandardCalloutVisible(true);
-  }, [setIsStandardCalloutVisible]);
+  }, [showStandardCallout, setShowStandardCallout]);
 
   const onDismissStandardCallout = React.useCallback(() => {
-    setIsStandardCalloutVisible(false);
     setShowStandardCallout(false);
-  }, [setIsStandardCalloutVisible, setShowStandardCallout]);
+  }, [setShowStandardCallout]);
 
-  const [scrollviewContents, setScrollviewContents] = React.useState([1, 2, 3, 4, 5, 6, 7, 8]);
+  const [scrollviewContents, setScrollviewContents] = React.useState([1, 2, 3]);
 
   const removeButton = React.useCallback(() => {
     const tempArray = scrollviewContents;
@@ -295,7 +288,7 @@ const scrollviewCallout: React.FunctionComponent = () => {
   }, [setScrollviewContents, scrollviewContents]);
 
   const addButton = React.useCallback(() => {
-    setScrollviewContents(arr => [...arr, 9]);
+    setScrollviewContents(arr => [...arr, 1]);
   }, [setScrollviewContents, scrollviewContents]);
 
   return (
@@ -303,10 +296,6 @@ const scrollviewCallout: React.FunctionComponent = () => {
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
         <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
           <Button content="Press for Callout" onClick={toggleShowStandardCallout} />
-          <Text>
-            <Text>Visibility: </Text>
-            {isStandardCalloutVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
-          </Text>
         </View>
 
         <Separator vertical />
@@ -323,7 +312,6 @@ const scrollviewCallout: React.FunctionComponent = () => {
           {...{
             target: redTargetRef,
             onDismiss: onDismissStandardCallout,
-            onShow: onShowStandardCallout,
             accessibilityLabel: 'ScrollView Callout',
           }}
         >
