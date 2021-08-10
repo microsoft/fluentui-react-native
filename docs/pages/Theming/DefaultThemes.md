@@ -75,7 +75,7 @@ Here's how the button component looks by default on every platform:
 
 ![Image of default button with default Apple theme on iOS applied in FURN](./assets/iOS.PNG)
 
-### Mac
+### MacOS
 
 ```tsx
 <ThemeProvider theme={createAppleTheme()}>
