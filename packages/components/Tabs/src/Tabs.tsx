@@ -85,7 +85,6 @@ export const Tabs = compose<TabsType>({
       root: { rest, ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist'},
       label: { children: label },
       container: { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef },
-      stack: {style: {flexDirection:'row'}}
     });
 
     return { slotProps, state };
