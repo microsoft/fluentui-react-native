@@ -8,7 +8,7 @@ import { View, ViewProps } from 'react-native';
 
 export const tabsName = 'Tabs';
 
-export interface ITabsContext {
+export interface TabsContextData {
   /*
    ** The currently selected TabsItem's key
    */
@@ -46,7 +46,7 @@ export interface TabsInfo {
 }
 
 export interface TabsState {
-  context: ITabsContext;
+  context: TabsContextData;
   info: TabsInfo;
 }
 

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
-import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, ITabsContext } from './Tabs.types';
+import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, TabsContextData } from './Tabs.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings } from './Tabs.settings';
@@ -12,7 +12,7 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { foregroundColorTokens, textTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
-export const TabsContext = React.createContext<ITabsContext>({
+export const TabsContext = React.createContext<TabsContextData>({
   selectedKey: null,
   onTabsClick: (/* key: string */) => {
     return;
