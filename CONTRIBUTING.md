@@ -165,7 +165,7 @@ To add a native Windows module:
       - Right-click on the solution within VS. Select `Manage NuGet Packages for Solution…`. Look at differences under the consolidate tab.
       - After this step, you may need to remove unused references for .xcsproj files
    3. Add your native module references within the `App.js` file.
-      - `Import { ComponentName } from @fluentui-react-native/experimental-<component-name>;`
+      - `Import { NewComponent } from @fluentui-react-native/experimental-<new-component>;`
    4. Start metro via command line
       - Navigate to windows folder (`packages\experimental\<new-component>\windows`)
       - Run `yarn start`
