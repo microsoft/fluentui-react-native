@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Fri, 06 Aug 2021 00:36:02 GMT and should not be manually modified.
+This log was last generated on Mon, 09 Aug 2021 22:49:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.29
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.6 (ruaraki@microsoft.com)
+
+## 0.10.28
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.5 (ruaraki@microsoft.com)
+
+## 0.10.27
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.10.26
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.3 (ruaraki@microsoft.com)
 
 ## 0.10.25
 

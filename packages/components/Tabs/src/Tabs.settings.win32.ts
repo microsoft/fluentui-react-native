@@ -17,11 +17,6 @@ export const settings: IComposeSettings<TabsType> = [
         fontWeight: '600',
       },
     },
-    container: {
-      style: {
-        flexDirection: 'row',
-      },
-    },
   },
   tabsName,
 ];

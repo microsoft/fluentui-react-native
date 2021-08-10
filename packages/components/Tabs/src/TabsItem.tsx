@@ -11,7 +11,12 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { TabsContext } from './Tabs';
 import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemRenderData, TabsItemState } from './TabsItem.types';
-import { useAsPressable, useKeyCallback, createIconProps, useOnPressWithFocus } from '@fluentui-react-native/interactive-hooks';
+import {
+  useAsPressable,
+  useKeyCallback,
+  createIconProps,
+  useOnPressWithFocus,
+} from '@fluentui-react-native/interactive-hooks';
 
 export const TabsItem = compose<TabsItemType>({
   displayName: tabsItemName,
@@ -27,8 +32,8 @@ export const TabsItem = compose<TabsItemType>({
       onClick,
       itemKey,
       itemCount,
-      ariaPosInSet,
-      ariaSetSize,
+      accessibilityPosInSet,
+      accessibilitySetSize,
       ...rest
     } = userProps;
 
@@ -102,8 +107,8 @@ export const TabsItem = compose<TabsItemType>({
         accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: userProps.disabled, selected: info.selectedKey === userProps.itemKey },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
-        accessibilityPositionInSet: ariaPosInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
-        accessibilitySetSize: ariaSetSize ?? info.tabsItemKeys.length,
+        accessibilityPositionInSet: accessibilityPosInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
+        accessibilitySetSize: accessibilitySetSize ?? info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUp,
         focusable: Platform.OS=='macos' ? !userProps.disabled : null,

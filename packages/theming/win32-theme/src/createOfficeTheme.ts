@@ -4,7 +4,9 @@ import { getThemingModule } from './NativeModule/getThemingModule';
 import { CxxException, PlatformDefaultsChangedArgs } from './NativeModule/officeThemingModule';
 import { OfficePalette, Theme, ThemeOptions } from '@fluentui-react-native/theme-types';
 import { createPartialOfficeTheme } from './createPartialOfficeTheme';
-import { createThemeWithAliases } from '@fluentui-react-native/theming-utils';
+import { createBrandedThemeWithAlias } from './createBrandedThemeWithAlias';
+import { createAliasTokens, getCurrentAppearance } from '@fluentui-react-native/theming-utils';
+import { createAliasesFromPalette } from './createAliasesFromPalette';
 
 function handlePaletteCall(palette: OfficePalette | CxxException): OfficePalette | undefined {
   const exception = palette as CxxException;
@@ -33,7 +35,17 @@ export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
       return createPartialOfficeTheme(module, ref.themeName, palette);
     },
     (theme: Theme) => {
-      return createThemeWithAliases(theme);
+      return { colors: { ...createAliasTokens(getCurrentAppearance(theme.host.appearance, 'light')) } };
+    },
+    (theme: Theme) => {
+      return createBrandedThemeWithAlias(theme);
+    },
+    (theme: Theme) => {
+      if (!theme.host.palette) {
+        return {};
+      }
+
+      return { colors: createAliasesFromPalette(theme.host.palette) };
     },
   );
 

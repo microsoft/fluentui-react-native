@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Sat, 07 Aug 2021 00:40:04 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.15.0",
+      "version": "0.15.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "enable usePressableState with stock Pressable component",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 06 Aug 2021 00:36:02 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.15.0",
       "version": "0.15.0",
