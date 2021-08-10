@@ -59,7 +59,7 @@
     <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Debug-macosx"/>
     <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Button\FluentUI_React_Native_Button.swiftmodule\**\*.*" target="Debug\FluentUI_React_Native_Button.swiftmodule" exclude="*.swiftsourceinfo"/>
     <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-FocusZone\libFluentUI-React-Native-FocusZone.a" target="Debug-macosx"/>
-    <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-FocusZone\FluentUI_React_Native_FocusZone.swiftmodule\**\*.*" target="Debug\FluentUI_React_Native_FocusZone.swiftmodule" exclude="*.swiftsourceinfo"/>
+    <!-- <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-FocusZone\FluentUI_React_Native_FocusZone.swiftmodule\**\*.*" target="Debug\FluentUI_React_Native_FocusZone.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-MenuButton\libFluentUI-React-Native-MenuButton.a" target="Debug-macosx"/>
     <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-MenuButton\FluentUI_React_Native_MenuButton.swiftmodule\**\*.*" target="Debug\FluentUI_React_Native_MenuButton.swiftmodule" exclude="*.swiftsourceinfo"/>
     <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Radio-Button\libFluentUI-React-Native-Radio-Button.a" target="Debug-macosx"/>
@@ -73,7 +73,7 @@
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Button\FluentUI_React_Native_Button.swiftmodule\**\*.*" target="Ship\FluentUI_React_Native_Button.swiftmodule" exclude="*.swiftsourceinfo"/>
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-FocusZone\libFluentUI-React-Native-FocusZone.a" target="Ship-macosx"/>
-    <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-FocusZone\FluentUI_React_Native_FocusZone.swiftmodule\**\*.*" target="Ship\FluentUI_React_Native_FocusZone.swiftmodule" exclude="*.swiftsourceinfo"/>
+    <!-- <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-FocusZone\FluentUI_React_Native_FocusZone.swiftmodule\**\*.*" target="Ship\FluentUI_React_Native_FocusZone.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-MenuButton\libFluentUI-React-Native-MenuButton.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-MenuButton\FluentUI_React_Native_MenuButton.swiftmodule\**\*.*" target="Ship\FluentUI_React_Native_MenuButton.swiftmodule" exclude="*.swiftsourceinfo"/>
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Radio-Button\libFluentUI-React-Native-Radio-Button.a" target="Ship-macosx"/>
