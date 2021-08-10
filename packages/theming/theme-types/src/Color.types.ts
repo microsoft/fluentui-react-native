@@ -525,10 +525,10 @@ export interface AliasColorTokens {
   neutralStencil1: ColorValue;
   neutralStencil2: ColorValue;
 
-  brandBackground: ColorValue;
-  brandBackgroundHover: ColorValue;
-  brandBackgroundPressed: ColorValue;
-  brandBackgroundSelected: ColorValue;
+  brandBackground1: ColorValue; // Avoid name clash with control tokens
+  brandBackground1Hover: ColorValue;
+  brandBackground1Pressed: ColorValue;
+  brandBackground1Selected: ColorValue;
   compoundBrandBackground1: ColorValue;
   compoundBrandBackground1Hover: ColorValue;
   compoundBrandBackground1Pressed: ColorValue;
