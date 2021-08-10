@@ -91,25 +91,23 @@ namespace winrt::ReactNativeExpander::implementation {
 
     // IViewManagerWithChildren
     void ExpanderViewManager::ReplaceChild(winrt::Windows::UI::Xaml::FrameworkElement const& parent, winrt::Windows::UI::Xaml::UIElement const& oldChild, winrt::Windows::UI::Xaml::UIElement const& newChild) noexcept {
-        // This implementation is not complete; still need to test/tweak
-        // auto expander = parent.as<xaml::Controls::ContentPresenter>().Content().as<Microsoft::UI::Xaml::Controls::Expander>();
-
-        // if (oldChild == expander.Header()) {
-        //     expander.ClearValue(Microsoft::UI::Xaml::Controls::Expander::HeaderProperty());
-        //     expander.Header(newChild);
-        // }
-        // else if (oldChild == expander.Content()) {
-        //     expander.ClearValue(xaml::Controls::ContentControl::ContentProperty());
-        //     expander.Content(newChild);
-        // }
+         auto expander = parent.as<xaml::Controls::ContentPresenter>().Content().as<Microsoft::UI::Xaml::Controls::Expander>();
+         if (oldChild == expander.Header()) {
+             expander.ClearValue(Microsoft::UI::Xaml::Controls::Expander::HeaderProperty());
+             expander.Header(newChild);
+         }
+         else if (oldChild == expander.Content()) {
+             expander.ClearValue(xaml::Controls::ContentControl::ContentProperty());
+             expander.Content(newChild);
+         }
     }
 
     void ExpanderViewManager::AddView(winrt::Windows::UI::Xaml::FrameworkElement const& parent, winrt::Windows::UI::Xaml::UIElement const& child, int64_t index) noexcept {
         auto expander = parent.as<xaml::Controls::ContentPresenter>().Content().as<Microsoft::UI::Xaml::Controls::Expander>();
         if (index == 0) {
-            if (auto newContent = expander.GetValue(Microsoft::UI::Xaml::Controls::Expander::HeaderProperty())) {
+            if (auto currentHeader = expander.GetValue(Microsoft::UI::Xaml::Controls::Expander::HeaderProperty())) {
                 expander.Header(child);
-                expander.Content(newContent);
+                expander.Content(currentHeader);
             }
             else {
                 expander.Header(child);
@@ -136,9 +134,9 @@ namespace winrt::ReactNativeExpander::implementation {
         auto expander = parent.as<xaml::Controls::ContentPresenter>().Content().as<Microsoft::UI::Xaml::Controls::Expander>();
         if (index == 0) {
             expander.ClearValue(Microsoft::UI::Xaml::Controls::Expander::HeaderProperty());
-            if (auto newHeader = expander.GetValue(xaml::Controls::ContentControl::ContentProperty())) {
+            if (auto currentContent = expander.GetValue(xaml::Controls::ContentControl::ContentProperty())) {
                 expander.ClearValue(xaml::Controls::ContentControl::ContentProperty());
-                expander.Header(newHeader);
+                expander.Header(currentContent);
             }
         }
         else if (index == 1) {

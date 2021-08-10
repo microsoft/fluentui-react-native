@@ -1,3 +1,6 @@
+// Native styling was not rendered properly when the ExpanderView inherits directly from the Expander control
+// Inheriting from a ContentPresenter and assigning an Expander to the content renders correctly
+
 namespace ReactNativeExpander{
 
     [default_interface]
