@@ -85,6 +85,7 @@ export const Tabs = compose<TabsType>({
       root: { rest, ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist'},
       label: { children: label },
       container: { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef },
+      stack : {style: {flexDirection:'row'}}
     });
 
     return { slotProps, state };
@@ -117,7 +118,11 @@ export const Tabs = compose<TabsType>({
       >
         <Slots.root>
           {renderData.state.info.label && <Slots.label />}
-          <Slots.container>{children}</Slots.container>
+          <Slots.container>
+            <Slots.stack>
+              {children}
+            </Slots.stack>
+          </Slots.container>
           <Slots.tabPanel>
             <TabsContext.Consumer>
               {(context) => !renderData.state.info.headersOnly && context.views.get(context.selectedKey)}
@@ -132,8 +137,9 @@ export const Tabs = compose<TabsType>({
   slots: {
     root: View,
     label: Text,
-    tabPanel: { slotType: View, filter: filterViewProps },
     container: FocusZone,
+    stack: { slotType: View, filter: filterViewProps },
+    tabPanel: { slotType: View, filter: filterViewProps },
   },
   styles: {
     root: [],

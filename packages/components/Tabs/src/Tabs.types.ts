@@ -64,7 +64,7 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
   /*
    ** An accessibility label for narrator. If not provided, it will be set to the label of the Tabs
    */
-   accessibilityLabel?: string;
+  accessibilityLabel?: string;
 
   /*
    ** The key of the selected option. If you provide this, you must maintain selection state by observing
@@ -102,7 +102,8 @@ export interface TabsTokens extends IForegroundColorTokens, FontTokens, IBackgro
 export interface TabsSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
   label: ITextProps;
-  container: ViewProps & FocusZoneProps;
+  container: FocusZoneProps;
+  stack: ViewProps
   tabPanel: ViewProps;
 }
 
