@@ -1,8 +1,30 @@
 # Change Log - @uifabricshared/foundation-tokens
 
-This log was last generated on Wed, 21 Jul 2021 22:55:40 GMT and should not be manually modified.
+This log was last generated on Sat, 07 Aug 2021 00:40:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.1
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.10.0
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Minor changes
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @uifabricshared/foundation-settings to v0.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/memo-cache to v1.1.3 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/merge-props to v0.3.3 (67026167+chiuam@users.noreply.github.com)
 
 ## 0.9.2
 

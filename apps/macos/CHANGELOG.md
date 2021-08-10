@@ -1,8 +1,72 @@
 # Change Log - @fluentui-react-native/tester-macos
 
-This log was last generated on Wed, 04 Aug 2021 00:59:42 GMT and should not be manually modified.
+This log was last generated on Mon, 09 Aug 2021 22:49:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.0.1
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.2 (ruaraki@microsoft.com)
+
+## 0.0.1
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.1 (ruaraki@microsoft.com)
+
+## 0.0.1
+
+Sat, 07 Aug 2021 02:50:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.0 (patboyd@microsoft.com)
+
+## 0.0.1
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.34.5 (ruaraki@microsoft.com)
+
+## 0.0.1
+
+Fri, 06 Aug 2021 20:26:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.34.4 (ruaraki@microsoft.com)
+
+## 0.0.1
+
+Wed, 04 Aug 2021 18:11:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.34.2 (lehon@microsoft.com)
+
+## 0.0.1
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.34.1 (jasonmo@microsoft.com)
+
+## 0.0.1
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.34.0 (67026167+chiuam@users.noreply.github.com)
 
 ## 0.0.1
 

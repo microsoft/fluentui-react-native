@@ -1,8 +1,64 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Tue, 03 Aug 2021 23:48:50 GMT and should not be manually modified.
+This log was last generated on Mon, 09 Aug 2021 22:49:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.26
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.8 (ruaraki@microsoft.com)
+
+## 0.5.25
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.7 (ruaraki@microsoft.com)
+
+## 0.5.24
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.5.23
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.5 (ruaraki@microsoft.com)
+
+## 0.5.22
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.4 (ruaraki@microsoft.com)
+
+## 0.5.21
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- add patchTokens helper to make conversion easier (jasonmo@microsoft.com)
+
+## 0.5.20
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Patches
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
 
 ## 0.5.19
 

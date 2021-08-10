@@ -1,8 +1,84 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Wed, 04 Aug 2021 00:59:42 GMT and should not be manually modified.
+This log was last generated on Mon, 09 Aug 2021 22:49:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.8
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.2 (ruaraki@microsoft.com)
+
+## 0.12.7
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.1 (ruaraki@microsoft.com)
+
+## 0.12.6
+
+Sat, 07 Aug 2021 02:50:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.0 (patboyd@microsoft.com)
+
+## 0.12.5
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.12.4
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.34.5 (ruaraki@microsoft.com)
+
+## 0.12.3
+
+Fri, 06 Aug 2021 20:26:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.34.4 (ruaraki@microsoft.com)
+
+## 0.12.2
+
+Wed, 04 Aug 2021 18:11:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.34.2 (lehon@microsoft.com)
+
+## 0.12.1
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- move experimental Text to be written as compressible (jasonmo@microsoft.com)
+
+## 0.12.0
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Minor changes
+
+- radio group on macos (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.34.0 (67026167+chiuam@users.noreply.github.com)
 
 ## 0.11.13
 

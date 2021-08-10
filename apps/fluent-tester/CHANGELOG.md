@@ -1,8 +1,123 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 04 Aug 2021 00:59:42 GMT and should not be manually modified.
+This log was last generated on Mon, 09 Aug 2021 22:49:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.35.2
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theming-utils to v0.3.8 (ruaraki@microsoft.com)
+
+## 0.35.1
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui/react-native to v0.24.30 (ruaraki@microsoft.com)
+
+## 0.35.0
+
+Sat, 07 Aug 2021 02:50:29 GMT
+
+### Minor changes
+
+- Win32 Shimmer control and unifying changes for commonJS Shimmer (patboyd@microsoft.com)
+
+### Patches
+
+- Bump @fluentui/react-native to v0.24.29 (patboyd@microsoft.com)
+- Bump @fluentui-react-native/experimental-shimmer to v0.5.0 (patboyd@microsoft.com)
+- Bump @fluentui-react-native/experimental-text to v0.6.5 (patboyd@microsoft.com)
+- Bump @fluentui-react-native/experimental-button to v0.8.5 (patboyd@microsoft.com)
+- Bump @fluentui-react-native/experimental-native-button to v0.7.5 (patboyd@microsoft.com)
+
+## 0.34.6
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.34.5
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui/react-native to v0.24.27 (ruaraki@microsoft.com)
+
+## 0.34.4
+
+Fri, 06 Aug 2021 20:26:18 GMT
+
+### Patches
+
+- Update test code with brand changes (ruaraki@microsoft.com)
+
+## 0.34.3
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Fixed broken link (dake.3601@gmail.com)
+- Add actions for changing default tabbable (nakambo@microsoft.com)
+- Update Avatar tests (sanajmi@microsoft.com)
+
+## 0.34.2
+
+Wed, 04 Aug 2021 18:11:46 GMT
+
+### Patches
+
+- Bump @fluentui/react-native to v0.24.25 (lehon@microsoft.com)
+
+## 0.34.1
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- move experimental Text to be written as compressible (jasonmo@microsoft.com)
+
+## 0.34.0
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Minor changes
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui/react-native to v0.24.23 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/button to v0.18.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/stack to v0.5.17 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/icon to v0.8.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-button to v0.8.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-native-button to v0.7.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-text to v0.6.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/android-theme to v0.4.7 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/apple-theme to v0.7.9 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/native-radio-button to v0.1.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/default-theme to v0.7.3 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.3.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.3.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-shimmer to v0.4.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/framework to v0.5.20 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.23 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/theme to v0.5.12 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-types to v0.9.3 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/themed-stylesheet to v1.2.3 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/theming-utils to v0.3.3 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/win32-theme to v0.7.13 (67026167+chiuam@users.noreply.github.com)
 
 ## 0.33.8
 

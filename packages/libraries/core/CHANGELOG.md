@@ -1,8 +1,80 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Wed, 04 Aug 2021 00:59:42 GMT and should not be manually modified.
+This log was last generated on Mon, 09 Aug 2021 22:49:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.31
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.4.7 (ruaraki@microsoft.com)
+
+## 0.24.30
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/persona to v0.11.4 (ruaraki@microsoft.com)
+
+## 0.24.29
+
+Sat, 07 Aug 2021 02:50:29 GMT
+
+### Patches
+
+- Win32 Shimmer control and unifying changes for commonJS Shimmer (patboyd@microsoft.com)
+
+## 0.24.28
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.24.27
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/persona to v0.11.2 (ruaraki@microsoft.com)
+
+## 0.24.26
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.13.2 (ruaraki@microsoft.com)
+
+## 0.24.25
+
+Wed, 04 Aug 2021 18:11:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.4.2 (lehon@microsoft.com)
+
+## 0.24.24
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- move experimental Text to be written as compressible (jasonmo@microsoft.com)
+
+## 0.24.23
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Patches
+
+- add comment back (67026167+chiuam@users.noreply.github.com)
 
 ## 0.24.22
 
