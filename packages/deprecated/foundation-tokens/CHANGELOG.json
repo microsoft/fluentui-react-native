@@ -2,6 +2,41 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Sat, 07 Aug 2021 00:40:04 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.10.1",
+      "version": "0.10.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "enable usePressableState with stock Pressable component",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@uifabricshared/foundation-tokens"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Bump @uifabricshared/foundation-settings to v0.10.1",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@uifabricshared/foundation-tokens"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/memo-cache to v1.1.3",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@uifabricshared/foundation-tokens"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/merge-props to v0.3.3",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@uifabricshared/foundation-tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 06 Aug 2021 00:36:02 GMT",
       "tag": "@uifabricshared/foundation-tokens_v0.10.0",
       "version": "0.10.0",

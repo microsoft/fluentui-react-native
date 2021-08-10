@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/merge-props",
   "entries": [
     {
+      "date": "Sat, 07 Aug 2021 00:40:04 GMT",
+      "tag": "@fluentui-react-native/merge-props_v0.3.3",
+      "version": "0.3.3",
+      "comments": {
+        "none": [
+          {
+            "comment": "enable usePressableState with stock Pressable component",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/merge-props"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 06 Aug 2021 00:36:02 GMT",
       "tag": "@fluentui-react-native/merge-props_v0.3.3",
       "version": "0.3.3",

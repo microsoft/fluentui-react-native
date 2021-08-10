@@ -1,8 +1,40 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Fri, 06 Aug 2021 00:36:02 GMT and should not be manually modified.
+This log was last generated on Mon, 09 Aug 2021 22:49:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.10.5
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.8 (ruaraki@microsoft.com)
+
+## 1.10.4
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.7 (ruaraki@microsoft.com)
+
+## 1.10.3
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 1.10.2
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.5 (ruaraki@microsoft.com)
 
 ## 1.10.1
 

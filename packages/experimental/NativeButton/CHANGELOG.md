@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/experimental-native-button
 
-This log was last generated on Fri, 06 Aug 2021 00:36:02 GMT and should not be manually modified.
+This log was last generated on Mon, 09 Aug 2021 22:49:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.7
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.7 (ruaraki@microsoft.com)
+
+## 0.7.6
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.6 (ruaraki@microsoft.com)
+
+## 0.7.5
+
+Sat, 07 Aug 2021 02:50:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.5 (patboyd@microsoft.com)
+
+## 0.7.4
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.7.3
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.3 (ruaraki@microsoft.com)
 
 ## 0.7.2
 

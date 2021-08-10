@@ -1,0 +1,73 @@
+<!-- Present as a reference for the path generation algorithm used by Shimmer.win32 -->
+
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" version="1.1" >
+
+	<path d="M 100 80  h 240 a 0 0 0 0 1 0 0 v 120 a 0 0 0 0 1 0 0 h -240 a 0 0 0 0 1 0 0 v -120 a 0 0 0 0 1 0 0 Z"
+		style="stroke:black; fill:yellow; stroke-width:1" />
+
+ 	<text x="120" y="100" fill="black" font-size="12">Generating a normal rectangle:</text>
+ 	<text x="120" y="120" fill="black" font-size="12">convertRoundedRectToPath(</text>
+ 	<text x="130" y="140" fill="black" font-size="12">100, 80, 0, 0, 240, 120</text>
+ 	<text x="130" y="160" fill="black" font-size="12">);</text>
+
+	<line x1="100" y1="80" x2="100" y2="320" stroke="red" stroke-dasharray="4" />
+	<line x1="100" y1="80" x2="840" y2="80" stroke="red" stroke-dasharray="4" />
+	<line x1="100" y1="200" x2="840" y2="200" stroke="red" stroke-dasharray="4" />
+	<line x1="340" y1="80" x2="340" y2="320" stroke="red" stroke-dasharray="4" />
+
+	<path d="M 400 80  h 140 a 50 30 0 0 1 50 30 v 60 a -50 30 0 0 1 -50 30 h -140 a -50 -30 0 0 1 -50 -30 v -60 a 50 -30 0 0 1 50 -30 Z"
+		style="stroke:black; fill:yellow; stroke-width:1" />
+
+	<ellipse cx="400" cy="110" rx="50" ry="30" fill="none" stroke="red" stroke-width="1" />
+
+ 	<text x="380" y="100" fill="black" font-size="12">Generating a ellipse-cornered rectangle:</text>
+ 	<text x="380" y="120" fill="black" font-size="12">convertRoundedRectToPath(</text>
+ 	<text x="390" y="140" fill="black" font-size="12">350, 80, 50, 30, 240, 120</text>
+ 	<text x="390" y="160" fill="black" font-size="12">);</text>
+
+	<line x1="350" y1="80" x2="350" y2="320" stroke="red" stroke-dasharray="4" />
+	<line x1="590" y1="80" x2="590" y2="320" stroke="red" stroke-dasharray="4" />
+
+	<path d="M 640 80  h 160 a 40 40 0 0 1 40 40 v 40 a -40 40 0 0 1 -40 40 h -160 a -40 -40 0 0 1 -40 -40 v -40 a 40 -40 0 0 1 40 -40 Z"
+		style="stroke:black; fill:yellow; stroke-width:1" />
+
+	<circle cx="640" cy="120" r="40" fill="none" stroke="red" stroke-width="1" />
+
+ 	<text x="615" y="100" fill="black" font-size="12">Generating a circle-cornered rectangle:</text>
+ 	<text x="615" y="120" fill="black" font-size="12">convertRoundedRectToPath(</text>
+ 	<text x="625" y="140" fill="black" font-size="12">600, 80, 40, 40, 240, 120</text>
+ 	<text x="625" y="160" fill="black" font-size="12">);</text>
+
+	<line x1="600" y1="80" x2="600" y2="320" stroke="red" stroke-dasharray="4" />
+	<line x1="840" y1="80" x2="840" y2="320" stroke="red" stroke-dasharray="4" />
+
+	<path d="M 150 200  h 140 a 50 30 0 0 1 50 30 v 60 a -50 30 0 0 1 -50 30 h -140 a -50 -30 0 0 1 -50 -30 v -60 a 50 -30 0 0 1 50 -30 Z"
+		style="stroke:black; fill:yellow; stroke-width:1" />
+
+ 	<text x="120" y="220" fill="black" font-size="12">Generating a ellipse-cornered rectangle:</text>
+ 	<text x="120" y="240" fill="black" font-size="12">convertRoundedRectToPath(</text>
+ 	<text x="130" y="260" fill="black" font-size="12">100, 200, 50, 30, 240, 120</text>
+ 	<text x="130" y="280" fill="black" font-size="12">);</text>
+
+	<line x1="100" y1="320" x2=" 840" y2="320" stroke="red" stroke-dasharray="4" />
+
+	<path d="M 390 200  h 160 a 40 40 0 0 1 40 40 v 40 a -40 40 0 0 1 -40 40 h -160 a -40 -40 0 0 1 -40 -40 v -40 a 40 -40 0 0 1 40 -40 Z"
+		style="stroke:black; fill:yellow; stroke-width:1" />
+
+ 	<text x="380" y="220" fill="black" font-size="12">Generating a circle-cornered rectangle:</text>
+ 	<text x="380" y="240" fill="black" font-size="12">convertRoundedRectToPath(</text>
+ 	<text x="390" y="260" fill="black" font-size="12">350, 200, 0, 0, 240, 120</text>
+ 	<text x="390" y="280" fill="black" font-size="12">);</text>
+
+
+	<path d="M 660 200  h 0 a 60 60 0 0 1 60 60 v 0 a -60  60 0 0 1 -60 60 h -0 a -60 -60 0 0 1 -60 -60 v -0 a 60 -60 0 0 1 60 -60 Z"
+		style="stroke:black; fill:yellow; stroke-width:1" />
+	<path d="M 780 200  h 0 a 60 60 0 0 1 60 60 v 0 a -60  60 0 0 1 -60 60 h -0 a -60 -60 0 0 1 -60 -60 v -0 a 60 -60 0 0 1 60 -60 Z"
+		style="stroke:black; fill:yellow; stroke-width:1" />
+
+ 	<text x="650" y="220" fill="black" font-size="12">Generating circles:</text>
+ 	<text x="650" y="240" fill="black" font-size="12">convertRoundedRectToPath(</text>
+ 	<text x="660" y="260" fill="black" font-size="12">600, 200, 60, 60, 120, 120</text>
+ 	<text x="660" y="280" fill="black" font-size="12">720, 200, 60, 60, 120, 120</text>
+ 	<text x="660" y="300" fill="black" font-size="12">);</text>
+</svg>
