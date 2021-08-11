@@ -9,18 +9,18 @@ PODS:
     - React-Core (= 0.63.37)
     - React-jsi (= 0.63.37)
     - ReactCommon/turbomodule/core (= 0.63.37)
-  - FluentUI-React-Native-Avatar (0.11.4):
+  - FluentUI-React-Native-Avatar (0.11.5):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
-  - FluentUI-React-Native-Button (0.7.7):
+  - FluentUI-React-Native-Button (0.7.8):
     - MicrosoftFluentUI (= 0.3.0)
     - React
-  - FluentUI-React-Native-FocusZone (0.7.6):
+  - FluentUI-React-Native-FocusZone (0.7.7):
     - React
-  - FluentUI-React-Native-MenuButton (0.4.7):
+  - FluentUI-React-Native-MenuButton (0.4.8):
     - React
-  - FluentUI-React-Native-Radio-Button (0.1.6):
+  - FluentUI-React-Native-Radio-Button (0.1.7):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.3.0):

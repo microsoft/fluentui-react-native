@@ -4,7 +4,7 @@
 
 This guide assumes you:
 
-- Have read through the [React Native Docs](https://reactnative.dev/docs/). In particular:
+- Have read through the [React Native Docs](https://reactnative.dev/docs/getting-started). In particular:
   - Understand classes vs function components (we use the latter) and [hooks](https://reactjs.org/docs/hooks-intro.html). Here's a good [video](https://www.youtube.com/watch?v=dpw9EHDh2bM) that explains function components and hooks for traditional OOP developers.
   - Understand [Native Modules](https://reactnative.dev/docs/native-modules-ios).
 - Have a local fork of FluentUI React Native and have run the test app.
@@ -15,7 +15,7 @@ There are some specific quirks to this repository that one should be familiar wi
 
 ### Old framework vs new framework (Compose V2)
 
-There's [documentation](https://github.com/microsoft/fluentui-react-native/tree/master/packages/components) for how to author a control, specifically with the two frameworks [foundation-compose](https://github.com/microsoft/fluentui-react-native/tree/master/packages/framework/foundation-compose) and [foundation-composable](https://github.com/microsoft/fluentui-react-native/tree/master/packages/framework/foundation-composable). Since that documentation was written, we have written a new component framework (PR's [here](https://github.com/microsoft/fluentui-react-native/pull/335) and [here](https://github.com/microsoft/fluentui-react-native/pull/400)) at `packages/experimental/framework` that is simpler/easier to use, and is the new preferred way to create components. Components that use this new framework are located at `packages/experimental` and are copies of the controls located at `packages/components` which still uses the old frameworks. Any new components should use the new framework. The old documentation is still good to read, specifically for using foundation-compose, as a lot of it applies to the new component.
+There's [documentation](https://github.com/microsoft/fluentui-react-native/tree/master/packages/components) for how to author a control, specifically with the two frameworks [foundation-compose](https://github.com/microsoft/fluentui-react-native/tree/master/packages/deprecated/foundation-compose) and [foundation-composable](https://github.com/microsoft/fluentui-react-native/tree/master/packages/deprecated/foundation-composable). Since that documentation was written, we have written a new component framework (PR's [here](https://github.com/microsoft/fluentui-react-native/pull/335) and [here](https://github.com/microsoft/fluentui-react-native/pull/400)) at `packages/experimental/framework` that is simpler/easier to use, and is the new preferred way to create components. Components that use this new framework are located at `packages/experimental` and are copies of the controls located at `packages/components` which still uses the old frameworks. Any new components should use the new framework. The old documentation is still good to read, specifically for using foundation-compose, as a lot of it applies to the new component.
 
 There are two directories where components exist, the normal `packages/components` and `packages/experimental`. In general, the `experimental` directory is where components and frameworks we are iterating on get placed.
 
@@ -31,7 +31,7 @@ One caveat is that if a component simply wraps a single native component, then i
 
 ### Tokens
 
-FluentUI React Native (and eventually all of FluentUI) uses the design token system to handle styling / customization. There's extended [documentation](https://github.com/microsoft/fluentui-react-native/blob/master/packages/framework/foundation-tokens/README.md) about this in the repo, but here is a simple overview.
+FluentUI React Native (and eventually all of FluentUI) uses the design token system to handle styling / customization. There's extended [documentation](https://github.com/microsoft/fluentui-react-native/blob/master/packages/deprecated/foundation-tokens/README.md) about this in the repo, but here is a simple overview.
 
 **Tokens** are things you set at design time, via theme, or via customizing the control. An example might be "brandColor", where each app has it's own color token it sets on all if its controls.
 
@@ -44,7 +44,7 @@ Tokens help us achieve simpler customization for complex higher order components
 
 This section covers creating and adding a new component package to FluentUI React Native's monorepo. If you are instead working on an existing component and adding a native module, skip to the next two sections.
 
-Most components should use the compose framework as it offers the comprehensive set of patterns like tokens and slots, but if you're creating a simple component that doesn't require those patterns, there's a lighter pattern called [stagedComponent](https://github.com/microsoft/fluentui-react-native/blob/master/packages/experimental/use-slots/src/stagedComponent.ts). The stagedComponent pattern splits up the render function into two stages. Stage 1 handles building props and hook calls (best to separate the hook calls from the render tree since they rely on call order). Stage 2 returns the actual element tree, any conditional branching should happen here (Icon is a good example of using stagedCompoenent).
+Most components should use the compose framework as it offers the comprehensive set of patterns like tokens and slots, but if you're creating a simple component that doesn't require those patterns, there's a lighter pattern called [stagedComponent](https://github.com/microsoft/fluentui-react-native/blob/master/packages/framework/use-slot/src/stagedComponent.ts). The stagedComponent pattern splits up the render function into two stages. Stage 1 handles building props and hook calls (best to separate the hook calls from the render tree since they rely on call order). Stage 2 returns the actual element tree, any conditional branching should happen here (Icon is a good example of using stagedCompoenent).
 
 1. Create a new directory in of these two locations, depending on your component:
 
