@@ -454,21 +454,26 @@ export interface AliasColorTokens {
   neutralForeground2: ColorValue;
   neutralForeground2Hover: ColorValue;
   neutralForeground2Pressed: ColorValue;
+  neutralForeground2Selected: ColorValue;
   neutralForeground2Brand: ColorValue;
   neutralForeground2BrandHover: ColorValue;
   neutralForeground2BrandPressed: ColorValue;
+  neutralForeground2BrandSelected: ColorValue;
   neutralForeground3: ColorValue;
   neutralForeground3Hover: ColorValue;
   neutralForeground3Pressed: ColorValue;
+  neutralForeground3Selected: ColorValue;
   neutralForeground3Brand: ColorValue;
   neutralForeground3BrandHover: ColorValue;
   neutralForeground3BrandPressed: ColorValue;
+  neutralForeground3BrandSelected: ColorValue;
   neutralForeground4: ColorValue;
   neutralForegroundDisabled: ColorValue;
 
   brandForegroundLink: ColorValue;
   brandForegroundLinkHover: ColorValue;
   brandForegroundLinkPressed: ColorValue;
+  brandForegroundLinkSelected: ColorValue;
   compoundBrandForeground1: ColorValue;
   compoundBrandForeground1Hover: ColorValue;
   compoundBrandForeground1Pressed: ColorValue;
@@ -480,48 +485,65 @@ export interface AliasColorTokens {
   neutralForegroundInvertedLink: ColorValue;
   neutralForegroundInvertedLinkHover: ColorValue;
   neutralForegroundInvertedLinkPressed: ColorValue;
+  neutralForegroundInvertedLinkSelected: ColorValue;
 
   neutralBackground1: ColorValue;
   neutralBackground1Hover: ColorValue;
   neutralBackground1Pressed: ColorValue;
+  neutralBackground1Selected: ColorValue;
   neutralBackground2: ColorValue;
   neutralBackground2Hover: ColorValue;
   neutralBackground2Pressed: ColorValue;
+  neutralBackground2Selected: ColorValue;
   neutralBackground3: ColorValue;
   neutralBackground3Hover: ColorValue;
   neutralBackground3Pressed: ColorValue;
+  neutralBackground3Selected: ColorValue;
   neutralBackground4: ColorValue;
   neutralBackground4Hover: ColorValue;
   neutralBackground4Pressed: ColorValue;
+  neutralBackground4Selected: ColorValue;
   neutralBackground5: ColorValue;
   neutralBackground5Hover: ColorValue;
   neutralBackground5Pressed: ColorValue;
+  neutralBackground5Selected: ColorValue;
   neutralBackground6: ColorValue;
   neutralBackgroundInverted: ColorValue;
 
   subtleBackground: ColorValue;
   subtleBackgroundHover: ColorValue;
   subtleBackgroundPressed: ColorValue;
+  subtleBackgroundSelected: ColorValue;
 
   transparentBackground: ColorValue;
   transparentBackgroundHover: ColorValue;
   transparentBackgroundPressed: ColorValue;
+  transparentBackgroundSelected: ColorValue;
 
   neutralBackgroundDisabled: ColorValue;
+
+  neutralStencil1: ColorValue;
+  neutralStencil2: ColorValue;
 
   brandBackground: ColorValue;
   brandBackgroundHover: ColorValue;
   brandBackgroundPressed: ColorValue;
+  brandBackgroundSelected: ColorValue;
   compoundBrandBackground1: ColorValue;
   compoundBrandBackground1Hover: ColorValue;
   compoundBrandBackground1Pressed: ColorValue;
 
+  brandBackgroundStatic: ColorValue;
+  brandBackground2: ColorValue;
+
   neutralStrokeAccessible: ColorValue;
   neutralStrokeAccessibleHover: ColorValue;
   neutralStrokeAccessiblePressed: ColorValue;
+  neutralStrokeAccessibleSelected: ColorValue;
   neutralStroke1: ColorValue;
   neutralStroke1Hover: ColorValue;
   neutralStroke1Pressed: ColorValue;
+  neutralStroke1Selected: ColorValue;
   neutralStroke2: ColorValue;
   neutralStroke3: ColorValue;
   brandStroke1: ColorValue;
@@ -534,6 +556,9 @@ export interface AliasColorTokens {
   transparentStroke: ColorValue;
   transparentStrokeInteractive: ColorValue;
   transparentStrokeDisabled: ColorValue;
+
+  strokeFocus1: ColorValue;
+  strokeFocus2: ColorValue;
 }
 
 /**

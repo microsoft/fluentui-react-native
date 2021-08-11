@@ -6,8 +6,9 @@ export function createAliasesFromPalette(palette: OfficePalette): Partial<AliasC
     neutralForeground2: palette.TextSecondary,
     neutralForeground2Hover: palette.TextSecondaryHover,
     neutralForeground2Pressed: palette.TextSecondaryPressed,
-    neutralForegroundDisabled: palette.TextDisabled,
+    neutralForeground2Selected: palette.TextSecondarySelected,
     neutralForeground4: palette.TextCtlSubtlePlaceholder,
+    neutralForegroundDisabled: palette.TextDisabled,
 
     compoundBrandForeground1: palette.TextEmphasis,
     compoundBrandForeground1Hover: palette.TextEmphasisHover,
@@ -21,10 +22,11 @@ export function createAliasesFromPalette(palette: OfficePalette): Partial<AliasC
     neutralBackground1: palette.Bkg,
     neutralBackground1Hover: palette.BkgHover,
     neutralBackground1Pressed: palette.BkgPressed,
+    neutralBackground1Selected: palette.BkgSelected,
     neutralBackground2: palette.BkgHeader,
     neutralBackground2Hover: palette.BkgSubtle,
+    neutralBackground3: palette.BkgSubtle,
     neutralBackgroundInverted: palette.BkgSelectionHighlight,
-
     neutralBackgroundDisabled: palette.BkgCtlDisabled,
 
     brandBackground: palette.BkgCtlEmphasis,
@@ -38,9 +40,12 @@ export function createAliasesFromPalette(palette: OfficePalette): Partial<AliasC
     neutralStroke1Hover: palette.StrokeSelectedHover,
     neutralStroke1Pressed: palette.StrokeOverPressed,
     neutralStroke2: palette.SliderBuffer,
+    brandStroke1: palette.AccentEmphasis,
     compoundBrandStroke1: palette.StrokeToggleSwitchOn,
     compoundBrandStroke1Hover: palette.StrokeToggleSwitchOnHover,
     compoundBrandStroke1Pressed: palette.StrokeToggleSwitchOnPressed,
     neutralStrokeDisabled: palette.StrokeCtlDisabled,
+
+    strokeFocus2: palette.StrokeKeyboard,
   };
 }
