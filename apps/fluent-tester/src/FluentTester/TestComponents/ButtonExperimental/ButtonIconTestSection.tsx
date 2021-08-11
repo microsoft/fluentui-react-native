@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { Button } from '@fluentui-react-native/experimental-button';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
