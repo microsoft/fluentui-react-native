@@ -29,8 +29,9 @@ export const TabsContext = React.createContext<TabsContextData>({
 
 export const Tabs = compose<TabsType>({
   displayName: tabsName,
-
   usePrepareProps: (userProps: TabsProps, useStyling: IUseComposeStyling<TabsType>) => {
+    const defaultComponentRef = React.useRef(null);
+    
     const {
       label,
       accessibilityLabel = userProps.label,
@@ -38,7 +39,7 @@ export const Tabs = compose<TabsType>({
       headersOnly,
       defaultSelectedKey,
       getTabId,
-      componentRef = React.useRef(null),
+      componentRef = defaultComponentRef,
       isCircularNavigation,
       ...rest
     } = userProps;
