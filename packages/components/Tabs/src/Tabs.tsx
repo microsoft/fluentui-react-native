@@ -31,7 +31,6 @@ export const Tabs = compose<TabsType>({
   displayName: tabsName,
   usePrepareProps: (userProps: TabsProps, useStyling: IUseComposeStyling<TabsType>) => {
     const defaultComponentRef = React.useRef(null);
-    
     const {
       label,
       accessibilityLabel = userProps.label,
