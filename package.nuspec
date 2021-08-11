@@ -9,82 +9,58 @@
     <repository type="git" url="$repoUri$" commit="$commitId$"/>
   </metadata>
   <files>
-    <!-- iOS Headers-->
-    <!-- <file src="DerivedData\Build\Products\Release-iphoneos\MicrosoftFluentUI\Swift Compatibility Header\FluentUI-Swift.h" target="include\ios\FluentUI"/> -->
-    <!-- macOS Headers-->
-    <!-- <file src="DerivedData\Build\Products\Release\MicrosoftFluentUI\Swift Compatibility Header\FluentUI-Swift.h" target="include\macos\FluentUI"/> -->
-    <!-- iOS device debug -->
-
     <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Debug-iphoneos"/>
-    <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Avatar\FluentUI_React_Native_Avatar.swiftmodule\**\*.*" target="Debug-iphoneos\FluentUI_React_Native_Avatar.swiftmodule" exclude="*.swiftsourceinfo"/>
+    <!-- <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Avatar\FluentUI_React_Native_Avatar.swiftmodule\**\*.*" target="Debug-iphoneos\FluentUI_React_Native_Avatar.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Debug-iphoneos"/>
-    <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Button\FluentUI_React_Native_Button.swiftmodule\**\*.*" target="Debug-iphoneos\FluentUI_React_Native_Button.swiftmodule" exclude="*.swiftsourceinfo"/>
+    <!-- <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Button\FluentUI_React_Native_Button.swiftmodule\**\*.*" target="Debug-iphoneos\FluentUI_React_Native_Button.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Date-Picker\libFluentUI-React-Native-Date-Picker.a" target="Debug-iphoneos"/>
-    <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Date-Picker\FluentUI_React_Native_Date_Picker.swiftmodule\**\*.*" target="Debug-iphoneos\FluentUI_React_Native_Date_Picker.swiftmodule" exclude="*.swiftsourceinfo"/>
-    <!-- <file src="DerivedData\Build\Products\Debug-iphoneos\MicrosoftFluentUI\libMicrosoftFluentUI.a" target="Debug-iphoneos"/> -->
-    <!-- <file src="DerivedData\Build\Products\Debug-iphoneos\MicrosoftFluentUI\FluentUI.swiftmodule\**\*.*" target="Debug-iphoneos\FluentUI.swiftmodule" exclude="*.swiftsourceinfo"/> -->
+    <!-- <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Date-Picker\FluentUI_React_Native_Date_Picker.swiftmodule\**\*.*" target="Debug-iphoneos\FluentUI_React_Native_Date_Picker.swiftmodule" exclude="*.swiftsourceinfo"/> -->
 
     <!-- iOS device ship -->
     <file src="DerivedData\Build\Products\Release-iphoneos\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Ship-iphoneos"/>
-    <file src="DerivedData\Build\Products\Release-iphoneos\FluentUI-React-Native-Avatar\FluentUI_React_Native_Avatar.swiftmodule\**\*.*" target="Ship-iphoneos\FluentUI_React_Native_Avatar.swiftmodule" exclude="*.swiftsourceinfo"/>
+    <!-- <file src="DerivedData\Build\Products\Release-iphoneos\FluentUI-React-Native-Avatar\FluentUI_React_Native_Avatar.swiftmodule\**\*.*" target="Ship-iphoneos\FluentUI_React_Native_Avatar.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Release-iphoneos\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Ship-iphoneos"/>
-    <file src="DerivedData\Build\Products\Release-iphoneos\FluentUI-React-Native-Button\FluentUI_React_Native_Button.swiftmodule\**\*.*" target="Ship-iphoneos\FluentUI_React_Native_Button.swiftmodule" exclude="*.swiftsourceinfo"/>
+    <!-- <file src="DerivedData\Build\Products\Release-iphoneos\FluentUI-React-Native-Button\FluentUI_React_Native_Button.swiftmodule\**\*.*" target="Ship-iphoneos\FluentUI_React_Native_Button.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Release-iphoneos\FluentUI-React-Native-Date-Picker\libFluentUI-React-Native-Date-Picker.a" target="Ship-iphoneos"/>
-    <file src="DerivedData\Build\Products\Release-iphoneos\FluentUI-React-Native-Date-Picker\FluentUI_React_Native_Date_Picker.swiftmodule\**\*.*" target="Ship-iphoneos\FluentUI_React_Native_Date_Picker.swiftmodule" exclude="*.swiftsourceinfo"/>
-    <!-- <file src="DerivedData\Build\Products\Release-iphoneos\MicrosoftFluentUI\libMicrosoftFluentUI.a" target="Ship-iphoneos"/> -->
-    <!-- <file src="DerivedData\Build\Products\Release-iphoneos\MicrosoftFluentUI\FluentUI.swiftmodule\**\*.*" target="Ship-iphoneos\FluentUI.swiftmodule" exclude="*.swiftsourceinfo"/> -->
+    <!-- <file src="DerivedData\Build\Products\Release-iphoneos\FluentUI-React-Native-Date-Picker\FluentUI_React_Native_Date_Picker.swiftmodule\**\*.*" target="Ship-iphoneos\FluentUI_React_Native_Date_Picker.swiftmodule" exclude="*.swiftsourceinfo"/> -->
+
     <!-- iOS simulator debug -->
     <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Debug-iphoneos"/>
-    <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Avatar\FluentUI_React_Native_Avatar.swiftmodule\**\*.*" target="Debug-iphoneos\FluentUI_React_Native_Avatar.swiftmodule" exclude="*.swiftsourceinfo"/>
+    <!-- <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Avatar\FluentUI_React_Native_Avatar.swiftmodule\**\*.*" target="Debug-iphoneos\FluentUI_React_Native_Avatar.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Debug-iphoneos"/>
-    <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Button\FluentUI_React_Native_Button.swiftmodule\**\*.*" target="Debug-iphoneos\FluentUI_React_Native_Button.swiftmodule" exclude="*.swiftsourceinfo"/>
+    <!-- <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Button\FluentUI_React_Native_Button.swiftmodule\**\*.*" target="Debug-iphoneos\FluentUI_React_Native_Button.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Date-Picker\libFluentUI-React-Native-Date-Picker.a" target="Debug-iphoneos"/>
-    <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Date-Picker\FluentUI_React_Native_Date_Picker.swiftmodule\**\*.*" target="Debug-iphoneos\FluentUI_React_Native_Date_Picker.swiftmodule" exclude="*.swiftsourceinfo"/>
-    <!-- <file src="DerivedData\Build\Products\Debug-iphonesimulator\MicrosoftFluentUI\libMicrosoftFluentUI.a" target="Debug-iphonesimulator"/> -->
-    <!-- <file src="DerivedData\Build\Products\Debug-iphonesimulator\MicrosoftFluentUI\FluentUI.swiftmodule\**\*.*" target="Debug-iphonesimulator\FluentUI.swiftmodule" exclude="*.swiftsourceinfo"/> -->
+    <!-- <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Date-Picker\FluentUI_React_Native_Date_Picker.swiftmodule\**\*.*" target="Debug-iphoneos\FluentUI_React_Native_Date_Picker.swiftmodule" exclude="*.swiftsourceinfo"/> -->
 
     <!-- iOS simulator ship -->
     <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Ship-iphonesimulator"/>
-    <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Avatar\FluentUI_React_Native_Avatar.swiftmodule\**\*.*" target="Ship-iphonesimulator\FluentUI_React_Native_Avatar.swiftmodule" exclude="*.swiftsourceinfo"/>
+    <!-- <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Avatar\FluentUI_React_Native_Avatar.swiftmodule\**\*.*" target="Ship-iphonesimulator\FluentUI_React_Native_Avatar.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Ship-iphonesimulator"/>
-    <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Button\FluentUI_React_Native_Button.swiftmodule\**\*.*" target="Ship-iphonesimulator\FluentUI_React_Native_Button.swiftmodule" exclude="*.swiftsourceinfo"/>
+    <!-- <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Button\FluentUI_React_Native_Button.swiftmodule\**\*.*" target="Ship-iphonesimulator\FluentUI_React_Native_Button.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Date-Picker\libFluentUI-React-Native-Date-Picker.a" target="Ship-iphonesimulator"/>
-    <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Date-Picker\FluentUI_React_Native_Date_Picker.swiftmodule\**\*.*" target="Ship-iphonesimulator\FluentUI_React_Native_Date_Picker.swiftmodule" exclude="*.swiftsourceinfo"/>
-    <!-- <file src="DerivedData\Build\Products\Release-iphonesimulator\MicrosoftFluentUI\libMicrosoftFluentUI.a" target="Ship-iphonesimulator"/> -->
-    <!-- <file src="DerivedData\Build\Products\Release-iphonesimulator\MicrosoftFluentUI\FluentUI.swiftmodule\**\*.*" target="Ship-iphonesimulator\FluentUI.swiftmodule" exclude="*.swiftsourceinfo"/> -->
+    <!-- <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Date-Picker\FluentUI_React_Native_Date_Picker.swiftmodule\**\*.*" target="Ship-iphonesimulator\FluentUI_React_Native_Date_Picker.swiftmodule" exclude="*.swiftsourceinfo"/> -->
 
     <!-- macOS debug -->
     <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Debug-macosx"/>
-    <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Avatar\FluentUI_React_Native_Avatar.swiftmodule\**\*.*" target="Debug\FluentUI_React_Native_Avatar.swiftmodule" exclude="*.swiftsourceinfo"/>
+    <!-- <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Avatar\FluentUI_React_Native_Avatar.swiftmodule\**\*.*" target="Debug\FluentUI_React_Native_Avatar.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Debug-macosx"/>
-    <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Button\FluentUI_React_Native_Button.swiftmodule\**\*.*" target="Debug\FluentUI_React_Native_Button.swiftmodule" exclude="*.swiftsourceinfo"/>
+    <!-- <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Button\FluentUI_React_Native_Button.swiftmodule\**\*.*" target="Debug\FluentUI_React_Native_Button.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-FocusZone\libFluentUI-React-Native-FocusZone.a" target="Debug-macosx"/>
-    <!-- <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-FocusZone\FluentUI_React_Native_FocusZone.swiftmodule\**\*.*" target="Debug\FluentUI_React_Native_FocusZone.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-MenuButton\libFluentUI-React-Native-MenuButton.a" target="Debug-macosx"/>
-    <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-MenuButton\FluentUI_React_Native_MenuButton.swiftmodule\**\*.*" target="Debug\FluentUI_React_Native_MenuButton.swiftmodule" exclude="*.swiftsourceinfo"/>
+    <!-- <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-MenuButton\FluentUI_React_Native_MenuButton.swiftmodule\**\*.*" target="Debug\FluentUI_React_Native_MenuButton.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Radio-Button\libFluentUI-React-Native-Radio-Button.a" target="Debug-macosx"/>
-    <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Radio-Button\FluentUI_React_Native_Radio_Button.swiftmodule\**\*.*" target="Debug\FluentUI_React_Native_Radio_Button.swiftmodule" exclude="*.swiftsourceinfo"/>
-    <!-- <file src="DerivedData\Build\Products\Debug\MicrosoftFluentUI\libMicrosoftFluentUI.a" target="Debug-macosx"/> -->
-    <!-- <file src="DerivedData\Build\Products\Debug\MicrosoftFluentUI\FluentUI.swiftmodule\**\*.*" target="Debug\FluentUI.swiftmodule" exclude="*.swiftsourceinfo"/> -->
+    <!-- <file src="DerivedData\Build\Products\Debug\FluentUI-React-Native-Radio-Button\FluentUI_React_Native_Radio_Button.swiftmodule\**\*.*" target="Debug\FluentUI_React_Native_Radio_Button.swiftmodule" exclude="*.swiftsourceinfo"/> -->
 
     <!-- macOS ship -->
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Ship-macosx"/>
-    <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Avatar\FluentUI_React_Native_Avatar.swiftmodule\**\*.*" target="Ship\FluentUI_React_Native_Avatar.swiftmodule" exclude="*.swiftsourceinfo"/>
+    <!-- <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Avatar\FluentUI_React_Native_Avatar.swiftmodule\**\*.*" target="Ship\FluentUI_React_Native_Avatar.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Ship-macosx"/>
-    <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Button\FluentUI_React_Native_Button.swiftmodule\**\*.*" target="Ship\FluentUI_React_Native_Button.swiftmodule" exclude="*.swiftsourceinfo"/>
+    <!-- <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Button\FluentUI_React_Native_Button.swiftmodule\**\*.*" target="Ship\FluentUI_React_Native_Button.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-FocusZone\libFluentUI-React-Native-FocusZone.a" target="Ship-macosx"/>
-    <!-- <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-FocusZone\FluentUI_React_Native_FocusZone.swiftmodule\**\*.*" target="Ship\FluentUI_React_Native_FocusZone.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-MenuButton\libFluentUI-React-Native-MenuButton.a" target="Ship-macosx"/>
-    <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-MenuButton\FluentUI_React_Native_MenuButton.swiftmodule\**\*.*" target="Ship\FluentUI_React_Native_MenuButton.swiftmodule" exclude="*.swiftsourceinfo"/>
+    <!-- <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-MenuButton\FluentUI_React_Native_MenuButton.swiftmodule\**\*.*" target="Ship\FluentUI_React_Native_MenuButton.swiftmodule" exclude="*.swiftsourceinfo"/> -->
     <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Radio-Button\libFluentUI-React-Native-Radio-Button.a" target="Ship-macosx"/>
-    <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Radio-Button\FluentUI_React_Native_Radio_Button.swiftmodule\**\*.*" target="Ship\FluentUI_React_Native_Radio_Button.swiftmodule" exclude="*.swiftsourceinfo"/>
-    <!-- <file src="DerivedData\Build\Products\Release\MicrosoftFluentUI\libMicrosoftFluentUI.a" target="Ship-macosx"/> -->
-    <!-- <file src="DerivedData\Build\Products\Release\MicrosoftFluentUI\FluentUI.swiftmodule\**\*.*" target="Release\FluentUI.swiftmodule" exclude="*.swiftsourceinfo"/> -->
+    <!-- <file src="DerivedData\Build\Products\Release\FluentUI-React-Native-Radio-Button\FluentUI_React_Native_Radio_Button.swiftmodule\**\*.*" target="Ship\FluentUI_React_Native_Radio_Button.swiftmodule" exclude="*.swiftsourceinfo"/> -->
 
-    <!-- iOS Release jsbundle -->
-    <file src="apps\ios\dist\index.ios.jsbundle" />
-
-    <!-- macOS Release jsbundle -->
-    <file src="apps\macos\dist\index.macos.jsbundle" />
   </files>
 </package>
