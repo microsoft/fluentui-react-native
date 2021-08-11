@@ -2,7 +2,7 @@ import { Theme } from '@fluentui-react-native/framework';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { ButtonTokens } from '.';
 
-export const buttonStates: (keyof ButtonTokens)[] = ['fluid', 'primary', 'ghost', 'hovered', 'focused', 'pressed', 'disabled'];
+export const buttonStates: (keyof ButtonTokens)[] = ['fab', 'fluid', 'primary', 'ghost', 'hovered', 'focused', 'pressed', 'disabled'];
 
 export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) =>
   ({
@@ -16,6 +16,48 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
     borderRadius: 2,
     fluid: {
       width: '100%',
+    },
+    fab: {
+      borderRadius: 100, // big number for always rounded corners
+      shadowColor: '#000000',
+      shadowOffset: {
+        width: 0,
+        height: 4,
+      },
+      shadowRadius: 8,
+      shadowOpacity: 0.14,
+      // For large size
+      minHeight: 56,
+      minWidth: 56,
+      // coloring same as primary
+      backgroundColor: t.colors.brandBackground,
+      color: t.colors.brandContent,
+      borderColor: t.colors.brandBorder,
+      iconColor: t.colors.brandIcon,
+      disabled: {
+        backgroundColor: t.colors.brandDisabledBackground,
+        color: t.colors.brandDisabledContent,
+        borderColor: t.colors.brandDisabledBorder,
+        iconColor: t.colors.brandDisabledIcon,
+      },
+      hovered: {
+        backgroundColor: t.colors.brandHoveredBackground,
+        color: t.colors.brandHoveredContent,
+        borderColor: t.colors.brandHoveredBorder,
+        iconColor: t.colors.brandHoveredIcon,
+      },
+      pressed: {
+        backgroundColor: t.colors.brandPressedBackground,
+        color: t.colors.brandPressedContent,
+        borderColor: t.colors.brandPressedBorder,
+        iconColor: t.colors.brandPressedIcon,
+      },
+      focused: {
+        backgroundColor: t.colors.brandFocusedBackground,
+        color: t.colors.brandFocusedContent,
+        borderColor: t.colors.brandFocusedBorder,
+        iconColor: t.colors.brandFocusedIcon,
+      },
     },
     disabled: {
       backgroundColor: t.colors.buttonDisabledBackground,
