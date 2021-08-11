@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, TabsContextData } from './Tabs.types';
@@ -75,7 +75,7 @@ export const Tabs = compose<TabsType>({
       },
       info: {
         headersOnly: headersOnly ?? false,
-        label: !!label && Platform.OS === 'windows',
+        label: !!label,
       },
     };
 
@@ -85,7 +85,6 @@ export const Tabs = compose<TabsType>({
       root: { rest, ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist'},
       label: { children: label },
       container: { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef },
-      stack: {style: {flexDirection:'row'}}
     });
 
     return { slotProps, state };
