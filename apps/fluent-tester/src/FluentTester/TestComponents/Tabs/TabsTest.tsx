@@ -122,16 +122,23 @@ const tabsRenderSeparately: React.FunctionComponent = () => {
     setSelectedKey(key);
   };
 
+  const getTabId = (key: string) => {
+    return `ShapeColorPivot_${key}`;
+  };
+
   return (
     <View style={stackStyle}>
       <View
+        accessible={true}
+        focusable={true}
+        accessibilityLabel={getTabId(selectedKey)}
         style={{
           width: 100,
           height: selectedKey === 'squareRed' ? 100 : 200,
           backgroundColor: selectedKey === 'rectangleGreen' ? 'green' : 'red',
         }}
       />
-      <Tabs label="TABS" onTabsClick={onTabsClick} headersOnly={true} selectedKey={selectedKey}>
+      <Tabs label="TABS" onTabsClick={onTabsClick} getTabId={getTabId} headersOnly={true} selectedKey={selectedKey}>
         <TabsItem headerText="Rectangle Red" itemKey="rectangleRed" />
         <TabsItem headerText="Square Red" itemKey="squareRed" />
         <TabsItem headerText="Rectangle Green" itemKey="rectangleGreen" />

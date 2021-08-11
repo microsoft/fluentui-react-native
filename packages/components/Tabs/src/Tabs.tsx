@@ -61,7 +61,7 @@ export const Tabs = compose<TabsType>({
         return getTabId(key, index);
       }
       return `${key}-Tab${index}`;
-    }, []);
+    }, [getTabId]);
 
     // Stores views to be displayed
     const map = new Map<string, React.ReactNode[]>();
