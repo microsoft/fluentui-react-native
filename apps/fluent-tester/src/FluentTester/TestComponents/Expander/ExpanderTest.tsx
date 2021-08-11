@@ -58,8 +58,7 @@ const expanderTest: React.FunctionComponent = () => {
         <Text>Content that you should not see</Text>
       </Expander>
       <Text>Multiple components in header and content</Text>
-      <Expander collapsedHeight={64} expandedHeight={150} contentHorizontalAlignment="stretch"
-                headerDisabledForeground="#f22727" headerDisabledBorderBrush="#27f238">
+      <Expander collapsedHeight={64} expandedHeight={150}>
         <View style={{flexDirection: "row", width: 200, height: 62}}>
           <View style={{alignSelf:"center"}}>
             <Text>Line one</Text>
@@ -75,7 +74,7 @@ const expanderTest: React.FunctionComponent = () => {
         </View>
       </Expander>
       <Text>Customized Expander</Text>
-      <CustomizedExpander>
+      <CustomizedExpander collapsedHeight={50} expandedHeight={100}>
         <Text>Text in the header</Text>
         <Text>Text in the content</Text>
       </CustomizedExpander>

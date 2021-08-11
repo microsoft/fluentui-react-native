@@ -24,7 +24,7 @@ export const Expander = compose<ExpanderType>({
     const expanderHeight = expandedState? userProps.expandedHeight : userProps.collapsedHeight;
 
     const _onCollapsing = async () => {
-      userProps.onCollapsing && userProps.onCollapsing();
+      userProps.onCollapsing?.();
       // Need to delay the height change so that the animation runs
       await delay(175);
       setExpandedState(false);
@@ -32,7 +32,7 @@ export const Expander = compose<ExpanderType>({
 
     const _onExpanding = () => {
       setExpandedState(true);
-      userProps.onExpanding && userProps.onExpanding();
+      userProps.onExpanding?.();
     }
 
     return (rest: ExpanderViewProps, ...children: React.ReactNode[]) =>
