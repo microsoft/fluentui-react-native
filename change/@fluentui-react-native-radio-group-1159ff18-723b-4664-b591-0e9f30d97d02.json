@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Remove font family declaration for RadioGroup",
-  "packageName": "@fluentui-react-native/radio-group",
-  "email": "chripear@microsoft.com",
-  "dependentChangeType": "patch"
-}
