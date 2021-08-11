@@ -26,7 +26,7 @@
     "@fluentui-react-native/adapters": ">=0.6.8 <1.0.0",
     "@fluentui-react-native/button": "^0.18.2",
     "@fluentui-react-native/focus-zone": ">=0.6.0 <1.0.0",
-    "@fluentui-react-native/icon": "0.8.5",
+    "@fluentui-react-native/icon": "0.8.7",
     "@fluentui-react-native/interactive-hooks": ">=0.10.24 <1.0.0",
     "@fluentui-react-native/text": ">=0.10.0 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.9.13 <1.0.0",

@@ -1244,6 +1244,19 @@ exports[`Tabs props 1`] = `
   accessible={true}
   rest={Object {}}
 >
+  <Text
+    style={
+      Object {
+        "color": "#323130",
+        "fontFamily": "Segoe UI",
+        "fontSize": 16,
+        "fontWeight": "600",
+        "margin": 0,
+      }
+    }
+  >
+    Tabs
+  </Text>
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
   >
