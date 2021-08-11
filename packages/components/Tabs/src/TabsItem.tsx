@@ -23,12 +23,13 @@ export const TabsItem = compose<TabsItemType>({
   displayName: tabsItemName,
 
   usePrepareProps: (userProps: TabsItemProps, useStyling: IUseComposeStyling<TabsItemType>) => {
+    const defaultComponentRef = React.useRef(null);
     const {
       icon,
       headerText = '',
       onAccessibilityTap = userProps.onClick,
       accessibilityLabel = userProps.headerText,
-      componentRef = React.useRef(null),
+      componentRef = defaultComponentRef,
       testID,
       onClick,
       itemKey,
