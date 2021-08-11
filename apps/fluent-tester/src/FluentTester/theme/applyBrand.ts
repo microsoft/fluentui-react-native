@@ -120,7 +120,7 @@ const brandColors: BrandRamps = {
   },
 };
 
-export const brandOptions = Object.keys(brandColors).map((brand) => ({ label: brand, value: brand }));
+export const brandOptions = Object.keys(brandColors).map(brand => ({ label: brand, value: brand }));
 
 export const applyBrand = (currentBrand: string): PartialTheme => {
   const ramp = brandColors[currentBrand];
@@ -150,14 +150,14 @@ export const applyBrand = (currentBrand: string): PartialTheme => {
           buttonFocusedBorder: ramp.App2,
           buttonPressedBackground: ramp.App2,
           buttonPressedBorder: ramp.App5,
-          brandBackground: ramp.App6,
-          brandBorder: ramp.App7,
-          brandHoveredBackground: ramp.App7,
-          brandHoveredBorder: ramp.App6,
-          brandFocusedBackground: ramp.App7,
-          brandFocusedBorder: ramp.App7,
-          brandPressedBackground: ramp.App8,
-          brandPressedBorder: ramp.App7,
+          brandedBackground: ramp.App6,
+          brandedBorder: ramp.App7,
+          brandedHoveredBackground: ramp.App7,
+          brandedHoveredBorder: ramp.App6,
+          brandedFocusedBackground: ramp.App7,
+          brandedFocusedBorder: ramp.App7,
+          brandedPressedBackground: ramp.App8,
+          brandedPressedBorder: ramp.App7,
           buttonCheckedHoveredBackground: ramp.App1,
           neutralForeground2BrandHover: ramp.AppPrimary,
           neutralForeground2BrandPressed: ramp.AppShade10,
@@ -174,10 +174,10 @@ export const applyBrand = (currentBrand: string): PartialTheme => {
           compoundBrandForeground1Pressed: ramp.AppShade20,
           brandForeground1: ramp.AppPrimary,
           brandForeground2: ramp.AppShade10,
-          brandBackground1: ramp.AppPrimary,
-          brandBackground1Hover: ramp.AppShade10,
-          brandBackground1Pressed: ramp.AppShade30,
-          brandBackground1Selected: ramp.AppShade20,
+          brandBackground: ramp.AppPrimary,
+          brandBackgroundHover: ramp.AppShade10,
+          brandBackgroundPressed: ramp.AppShade30,
+          brandBackgroundSelected: ramp.AppShade20,
           compoundBrandBackground1: ramp.AppPrimary,
           compoundBrandBackground1Hover: ramp.AppShade10,
           compoundBrandBackground1Pressed: ramp.AppShade20,
