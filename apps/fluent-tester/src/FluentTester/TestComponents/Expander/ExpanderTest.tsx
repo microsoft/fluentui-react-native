@@ -10,6 +10,7 @@ import { View, Switch } from 'react-native';
 const expanderTest: React.FunctionComponent = () => {
   /** This test page has not yet been tested and does not currently build because
    * the react-native-test-app does not yet support WinUI 2.6
+   * Filed issue in react-native-test-app: https://github.com/microsoft/react-native-test-app/issues/444
    */
   const CustomizedExpander = Expander.customize({
     headerBackground: '#9c9c9c',
