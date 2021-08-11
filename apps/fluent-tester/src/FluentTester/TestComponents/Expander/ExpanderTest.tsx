@@ -12,41 +12,41 @@ const expanderTest: React.FunctionComponent = () => {
    * the react-native-test-app does not yet support WinUI 2.6
    */
   const CustomizedExpander = Expander.customize({
-    headerBackground: "#9c9c9c",
-    headerForeground: "#ffffff",
-    contentBackground:"#c3c3c3",
-    chevronBackground: "#ff7f7f",
-    chevronForeground: "#ffffff",
-    chevronPointerOverBackground: "#b5ffb2",
-    chevronPointerOverForeground: "#bfbdbd",
-    chevronPressedBackground: "#ffb2f4",
-    chevronPressedForeground: "#912a2a",
-    headerForegroundPointerOver: "#27f238",
-    headerForegroundPressed: "#f227eb",
-    headerBorderBrush: "#f22727",
-    headerBorderPointerOverBrush: "#27f238",
-    headerBorderPressedBrush: "#f227eb",
-    contentBorderBrush: "#f227eb",
+    headerBackground: '#9c9c9c',
+    headerForeground: '#ffffff',
+    contentBackground:'#c3c3c3',
+    chevronBackground: '#ff7f7f',
+    chevronForeground: '#ffffff',
+    chevronPointerOverBackground: '#b5ffb2',
+    chevronPointerOverForeground: '#bfbdbd',
+    chevronPressedBackground: '#ffb2f4',
+    chevronPressedForeground: '#912a2a',
+    headerForegroundPointerOver: '#27f238',
+    headerForegroundPressed: '#f227eb',
+    headerBorderBrush: '#f22727',
+    headerBorderPointerOverBrush: '#27f238',
+    headerBorderPressedBrush: '#f227eb',
+    contentBorderBrush: '#f227eb',
     headerBorderThickness: 2,
-    chevronBorderBrush: "#f22727",
-    chevronBorderPointerOverBrush: "#27f238",
-    chevronBorderPressedBrush: "#f227eb",
+    chevronBorderBrush: '#f22727',
+    chevronBorderPointerOverBrush: '#27f238',
+    chevronBorderPressedBrush: '#f227eb',
     chevronBorderThickness: 2
   });
 
   const [switchValue, setSwitchValue] = React.useState(false);
-  const [expanderText, setExpanderText] = React.useState("Initial state");
+  const [expanderText, setExpanderText] = React.useState('Initial state');
   const onExpanding = () => {
-    setExpanderText("Expanding event changed title");
+    setExpanderText('Expanding event changed title');
   }
   const onCollapsing = () => {
-    setExpanderText("Collapsing event changed title");
+    setExpanderText('Collapsing event changed title');
   }
 
   return (
     <Stack style={stackStyle}>
-      <Text>expanded=true, expandDirection="up", and event functionality</Text>
-      <Expander collapsedHeight={50} expandedHeight={100} expanded={true} expandDirection="up"
+      <Text>expanded=true, expandDirection=up, and event functionality</Text>
+      <Expander collapsedHeight={50} expandedHeight={100} expanded={true} expandDirection='up'
         onCollapsing={onExpanding}
         onExpanding={onCollapsing}>
         <Text>{expanderText}</Text>
@@ -59,12 +59,12 @@ const expanderTest: React.FunctionComponent = () => {
       </Expander>
       <Text>Multiple components in header and content</Text>
       <Expander collapsedHeight={64} expandedHeight={150}>
-        <View style={{flexDirection: "row", width: 200, height: 62}}>
-          <View style={{alignSelf:"center"}}>
+        <View style={{flexDirection: 'row', width: 200, height: 62}}>
+          <View style={{alignSelf:'center'}}>
             <Text>Line one</Text>
             <Text>Line two</Text>
           </View>
-          <Switch style={{marginLeft:"auto", marginTop:12}}
+          <Switch style={{marginLeft:'auto', marginTop:12}}
               value={switchValue}
               onValueChange={setSwitchValue} />
         </View>
@@ -120,5 +120,5 @@ export const ExpanderTest: React.FunctionComponent = () => {
   const description =
     'Expander is a content control that displays components in the header and content. The control has an expanded and collapsed size. Expander is a native control implemented with WinUI 2.6 Expander.';
 
-  return <Test name="Expander Test" description={description} sections={expanderSections} status={status}></Test>;
+  return <Test name='Expander Test' description={description} sections={expanderSections} status={status}></Test>;
 };
