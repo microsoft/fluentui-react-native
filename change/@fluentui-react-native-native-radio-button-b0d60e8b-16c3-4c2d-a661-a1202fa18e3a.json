@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Remove becomeFirstResponder override",
-  "packageName": "@fluentui-react-native/native-radio-button",
-  "email": "chripear@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/native-radio-button",
   "entries": [
     {
+      "date": "Wed, 11 Aug 2021 18:38:07 GMT",
+      "tag": "@fluentui-react-native/native-radio-button_v0.1.8",
+      "version": "0.1.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Remove becomeFirstResponder override",
+            "author": "chripear@microsoft.com",
+            "commit": "2e7e319cddf9e250855d5ffb31d9c06908a4ea2e",
+            "package": "@fluentui-react-native/native-radio-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 10 Aug 2021 21:12:30 GMT",
       "tag": "@fluentui-react-native/native-radio-button_v0.1.7",
       "version": "0.1.7",
