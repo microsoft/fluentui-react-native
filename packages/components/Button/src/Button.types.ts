@@ -7,6 +7,7 @@ import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderToke
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { IconProps } from '@fluentui-react-native/icon';
+import { XmlProps } from 'react-native-svg';
 
 export const buttonName = 'Button';
 
@@ -27,6 +28,10 @@ export interface IButtonInfo extends IPressableState {
    * Button text.
    */
   content?: boolean;
+  /**
+   * Adds "chevron" is button is Dropdown.
+   */
+   dropdown?: boolean;
 }
 
 /*
@@ -85,6 +90,7 @@ export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBack
    * Source URL or name of the icon to show on the Button.
    */
   icon?: IconSourcesType;
+
 }
 
 export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
@@ -108,6 +114,7 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
 
   testID?: string;
   tooltip?: string;
+  dropdown?: boolean;
 }
 
 export interface IButtonSlotProps {
@@ -116,6 +123,7 @@ export interface IButtonSlotProps {
   stack: ViewProps;
   icon: IconProps;
   content: ITextProps;
+  chevron: XmlProps;
 }
 
 export type IButtonRenderData = IRenderData<IButtonSlotProps, IButtonState>;

@@ -12,13 +12,13 @@ const menuButton: React.FunctionComponent = () => {
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
 
   const [focusOnMount, setShouldFocusOnMount] = React.useState(true);
-  const toggleFocusOnMount = React.useCallback((value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
+  const toggleFocusOnMount = React.useCallback(value => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
 
   const [focusOnContainer, setShouldFocusOnContainer] = React.useState(false);
-  const toggleFocusOnContainer = React.useCallback((value) => setShouldFocusOnContainer(value), [setShouldFocusOnContainer]);
+  const toggleFocusOnContainer = React.useCallback(value => setShouldFocusOnContainer(value), [setShouldFocusOnContainer]);
 
   const onItemClick = React.useCallback(
-    (key) => {
+    key => {
       setLastMenuItemClicked(key);
     },
     [setLastMenuItemClicked],
@@ -57,8 +57,26 @@ const menuButton: React.FunctionComponent = () => {
             )}
           </Text>
           <MenuButton content="Standard MenuButton" menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps} />
+          <Text>MenuButton with icon</Text>
+          <MenuButton
+            icon={testImage}
+            content="Primary MenuButton"
+            menuItems={menuItems}
+            onItemClick={onItemClick}
+            contextualMenu={contextualMenuProps}
+          />
           <Text>Disabled MenuButton</Text>
           <MenuButton disabled content="Disabled MenuButton" menuItems={menuItems} />
+          <Text>Primary MenuButton</Text>
+          <MenuButton
+            primary
+            content="Primary MenuButton"
+            menuItems={menuItems}
+            onItemClick={onItemClick}
+            contextualMenu={contextualMenuProps}
+          />
+          <Text>Primary Disabled MenuButton</Text>
+          <MenuButton primary disabled content="Disabled Primary MenuButton" menuItems={menuItems} />
         </View>
       </View>
     </View>
@@ -74,13 +92,13 @@ const nestedMenuButton: React.FunctionComponent = () => {
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
 
   const [focusOnMount, setShouldFocusOnMount] = React.useState(true);
-  const toggleFocusOnMount = React.useCallback((value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
+  const toggleFocusOnMount = React.useCallback(value => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
 
   const [focusOnContainer, setShouldFocusOnContainer] = React.useState(false);
-  const toggleFocusOnContainer = React.useCallback((value) => setShouldFocusOnContainer(value), [setShouldFocusOnContainer]);
+  const toggleFocusOnContainer = React.useCallback(value => setShouldFocusOnContainer(value), [setShouldFocusOnContainer]);
 
   const onItemClick = React.useCallback(
-    (key) => {
+    key => {
       setLastMenuItemClicked(key);
     },
     [setLastMenuItemClicked],
@@ -104,7 +122,7 @@ const nestedMenuButton: React.FunctionComponent = () => {
   }, [setShowSubmenu]);
 
   const onSubmenuItemClick = React.useCallback(
-    (key) => {
+    key => {
       setSubmenuLastItemClicked(key);
     },
     [setSubmenuLastItemClicked],
@@ -267,5 +285,5 @@ export const MenuButtonTest: React.FunctionComponent = () => {
   const description =
     'MenuButton is a component which contains ContextualMenu and Button components. This control combines and simplifies the API for customers.\nClicking on MenuButton opens ContextualMenu. It can have Submenu. But selection checks and a beak are not implemented.';
 
-  return <Test name="MenuButton Test" description={description} sections={menuButtonSections} status={status}></Test>;
+  return <Test name="MenuButton Test" description={description} sections={menuButtonSections} status={status} />;
 };
