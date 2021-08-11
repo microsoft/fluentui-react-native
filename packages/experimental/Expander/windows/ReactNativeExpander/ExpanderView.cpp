@@ -148,6 +148,7 @@ namespace winrt::ReactNativeExpander::implementation {
                     } else {
                         resDict.Remove(winrt::box_value(L"ExpanderHeaderBorderThickness"));
                     }
+                    m_updateResDict = true;
                 }
                 else if (propertyName == "headerForegroundPointerOver") {
                     this->SetResourceColor(L"ExpanderHeaderForegroundPointerOver", propertyValue);
@@ -202,6 +203,7 @@ namespace winrt::ReactNativeExpander::implementation {
                     } else {
                         resDict.Remove(winrt::box_value(L"ExpanderChevronBorderThickness"));
                     }
+                    m_updateResDict = true;
                 }
                 else if (propertyName == "chevronBorderBrush") {
                     this->SetResourceColor(L"ExpanderChevronBorderBrush", propertyValue);
@@ -212,6 +214,17 @@ namespace winrt::ReactNativeExpander::implementation {
                 else if (propertyName == "chevronBorderPressedBrush") {
                     this->SetResourceColor(L"ExpanderChevronBorderPressedBrush", propertyValue);
                 }
+            }
+            if (m_updateResDict) {
+                auto currTheme = expander.ActualTheme();
+                if (currTheme == xaml::ElementTheme::Dark) {
+                    expander.RequestedTheme(xaml::ElementTheme::Light);
+                }
+                else {
+                    expander.RequestedTheme(xaml::ElementTheme::Dark);
+                }
+                expander.RequestedTheme(currTheme);
+                m_updateResDict = false;
             }
         }
         m_updating = false;
@@ -226,6 +239,7 @@ namespace winrt::ReactNativeExpander::implementation {
             } else {
                 resDict.Remove(winrt::box_value(key));
             }
+            m_updateResDict = true;
         }
     }
 

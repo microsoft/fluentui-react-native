@@ -14,6 +14,7 @@ public:
 private:
     Microsoft::ReactNative::IReactContext m_reactContext{ nullptr };
     bool m_updating{ false };
+    bool m_updateResDict{ false };
 
     // The Expander Collapsed event is misnamed. The event is fired when Expander begins collapsing
     Microsoft::UI::Xaml::Controls::Expander::Collapsed_revoker m_expanderCollapsingRevoker{};

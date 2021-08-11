@@ -33,6 +33,7 @@
     "@fluentui-react-native/experimental-activity-indicator": ">=0.3.5 <1.0.0",
     "@fluentui-react-native/experimental-avatar": ">=0.11.4 <1.0.0",
     "@fluentui-react-native/experimental-button": "0.8.7",
+    "@fluentui-react-native/experimental-expander": "0.1.0",
     "@fluentui-react-native/experimental-native-button": ">=0.7.7 <1.0.0",
     "@fluentui-react-native/experimental-native-date-picker": ">=0.3.2 <1.0.0",
     "@fluentui-react-native/experimental-shimmer": "0.5.2",
