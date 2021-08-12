@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-web",
   "entries": [
     {
+      "date": "Thu, 12 Aug 2021 17:23:44 GMT",
+      "tag": "@fluentui-react-native/tester-web_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tester to v0.35.6",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui-react-native/tester-web"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 11 Aug 2021 18:38:07 GMT",
       "tag": "@fluentui-react-native/tester-web_v0.1.0",
       "version": "0.1.0",

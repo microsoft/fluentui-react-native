@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 11 Aug 2021 18:38:07 GMT and should not be manually modified.
+This log was last generated on Thu, 12 Aug 2021 17:23:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.35.6
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Patch up the tester (ruaraki@microsoft.com)
 
 ## 0.35.5
 
