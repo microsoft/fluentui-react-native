@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 import { Button } from '@fluentui-react-native/experimental-button';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
@@ -13,6 +12,7 @@ export const ButtonIconTest: React.FunctionComponent = () => {
     fontSize: 32,
   };
 
+  /* eslint-disable @typescript-eslint/no-var-requires */
   const testImage = require('./icon_24x24.png');
 
   const svgProps: SvgIconProps = {

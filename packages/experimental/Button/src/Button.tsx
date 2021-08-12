@@ -26,7 +26,7 @@ export const Button = compose<ButtonType>({
     return (final: ButtonProps, ...children: React.ReactNode[]) => {
       const { icon, content, ...mergedProps } = mergeProps(button.props, final);
       const marginBetween = {
-        marginLeft: (icon && content) ? 10 : 0,
+        marginLeft: icon && content ? 10 : 0,
       };
       return (
         <Slots.root {...mergedProps}>
