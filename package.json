@@ -37,6 +37,7 @@
     "@rnx-kit/dep-check": "^1.5.10",
     "beachball": "^1.35.0",
     "lage": ">=0.17.4 <1.0.0",
+    "markdown-link-check": "^3.8.7",
     "react-dom": "^16.13.1"
   },
   "workspaces": {
