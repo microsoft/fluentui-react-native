@@ -1,8 +1,21 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Tue, 10 Aug 2021 21:12:30 GMT and should not be manually modified.
+This log was last generated on Thu, 12 Aug 2021 17:23:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.0
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Minor changes
+
+- rename an alias token to avoid name clash (ruaraki@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.11.0 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.5.1 (ruaraki@microsoft.com)
 
 ## 0.4.0
 

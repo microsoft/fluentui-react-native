@@ -1,8 +1,24 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Tue, 10 Aug 2021 21:12:30 GMT and should not be manually modified.
+This log was last generated on Thu, 12 Aug 2021 17:23:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.34
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.4.9 (ruaraki@microsoft.com)
+
+## 0.24.33
+
+Wed, 11 Aug 2021 04:24:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/radio-group to v0.11.8 (chripear@microsoft.com)
 
 ## 0.24.32
 

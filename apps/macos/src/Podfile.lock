@@ -9,18 +9,18 @@ PODS:
     - React-Core (= 0.63.37)
     - React-jsi (= 0.63.37)
     - ReactCommon/turbomodule/core (= 0.63.37)
-  - FluentUI-React-Native-Avatar (0.10.0):
+  - FluentUI-React-Native-Avatar (0.11.5):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
-  - FluentUI-React-Native-Button (0.7.0):
+  - FluentUI-React-Native-Button (0.7.8):
     - MicrosoftFluentUI (= 0.3.0)
     - React
-  - FluentUI-React-Native-FocusZone (0.7.0):
+  - FluentUI-React-Native-FocusZone (0.7.7):
     - React
-  - FluentUI-React-Native-MenuButton (0.4.0):
+  - FluentUI-React-Native-MenuButton (0.4.8):
     - React
-  - FluentUI-React-Native-Radio-Button (0.1.0):
+  - FluentUI-React-Native-Radio-Button (0.1.7):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.3.0):
@@ -323,7 +323,7 @@ PODS:
     - React-jsi (= 0.63.37)
   - ReactTestApp-DevSupport (0.7.1)
   - ReactTestApp-Resources (1.0.0-dev)
-  - RNCPicker (1.9.11):
+  - RNCPicker (1.16.5):
     - React-Core
   - RNSVG (12.1.1):
     - React
@@ -455,11 +455,11 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 9d69690b3a1ca272ca0c0cee76ffcb6cf36d77af
   FBReactNativeSpec: 8b671febd2393669947b56e8d8f53a54185dd0b7
-  FluentUI-React-Native-Avatar: 31247ae8749a8bf05fd48437aea77f35321bfe96
-  FluentUI-React-Native-Button: b1911f8f5db5692df23bef433d25339882e085d6
-  FluentUI-React-Native-FocusZone: d70e954d982143a4853fa8b478f3bb9a6f9e01e2
-  FluentUI-React-Native-MenuButton: ea25a0a503d5ad9d37c4d375194aaf2cf6d244a5
-  FluentUI-React-Native-Radio-Button: 4fdb9809695eddb3c3873438b24b425849af2f9a
+  FluentUI-React-Native-Avatar: 392687de00cf659f62f5ba07e9f22beca1fffbe3
+  FluentUI-React-Native-Button: 57d5e25d7859519da1ccb3e7d0dd48bbefa654b6
+  FluentUI-React-Native-FocusZone: 0f1de3a8b0dc2033e137531020348c40ca7a0579
+  FluentUI-React-Native-MenuButton: 69652d1c04c6d37a88530a6933d9a7ae57abb262
+  FluentUI-React-Native-Radio-Button: 3554093bae66ee9b9ca4e5d202ec09b4a99f1f45
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
@@ -485,11 +485,11 @@ SPEC CHECKSUMS:
   ReactCommon: 014dd1ff02eab367fa6676b7b408d1a08893a98d
   ReactTestApp-DevSupport: 058444bc8d4df209aabc6a5f54a73bfd9a114f94
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
-  RNCPicker: 6780c753e9e674065db90d9c965920516402579d
+  RNCPicker: 28e41a58b79cd82cc639391bb99ca1b2489a3ea9
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Yoga: 77d9987384e26b4aaf3e7a01808838cc2d4304f2
 
-PODFILE CHECKSUM: 2046a896c33859de9cbaf61940ce536ea7c2107e
+PODFILE CHECKSUM: 15eda06aaa95b3f7091a3051b06322d719f25ff3
 
 COCOAPODS: 1.10.2

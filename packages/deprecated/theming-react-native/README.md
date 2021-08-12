@@ -112,7 +112,7 @@ You can read more about the [ThemeRegistry here](../theme-registry/README.md).
 
 ### Create a Themed Stylesheet
 
-The `themed-stylesheet` package allows you to author View/Text/Image Style objects similar to `StyleSheet.create(...);`. You can learn more at the [themed-stylesheet's README](../themed-stylesheet/README.md)
+The `themed-stylesheet` package allows you to author View/Text/Image Style objects similar to `StyleSheet.create(...);`. You can learn more at the [themed-stylesheet's README](../../framework/themed-stylesheet/README.md)
 
 ```tsx
 // styles.ts

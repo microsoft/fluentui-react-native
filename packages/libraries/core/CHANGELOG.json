@@ -2,6 +2,36 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Thu, 12 Aug 2021 17:23:44 GMT",
+      "tag": "@fluentui/react-native_v0.24.34",
+      "version": "0.24.34",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.4.9",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 11 Aug 2021 04:24:12 GMT",
+      "tag": "@fluentui/react-native_v0.24.33",
+      "version": "0.24.33",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/radio-group to v0.11.8",
+            "author": "chripear@microsoft.com",
+            "commit": "13978a33db07fe6ae4f5409e5680788063bb1b7f",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 10 Aug 2021 21:12:30 GMT",
       "tag": "@fluentui/react-native_v0.24.32",
       "version": "0.24.32",
