@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix icons in experimental button and add fab",
+  "packageName": "@fluentui-react-native/menu-button",
+  "email": "t-lindaweng@microsoft.com",
+  "dependentChangeType": "patch"
+}
