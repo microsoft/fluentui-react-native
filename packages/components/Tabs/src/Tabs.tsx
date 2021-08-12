@@ -29,6 +29,7 @@ export const TabsContext = React.createContext<TabsContextData>({
 
 export const Tabs = compose<TabsType>({
   displayName: tabsName,
+
   usePrepareProps: (userProps: TabsProps, useStyling: IUseComposeStyling<TabsType>) => {
     const defaultComponentRef = React.useRef(null);
     const {
@@ -60,7 +61,7 @@ export const Tabs = compose<TabsType>({
         return getTabId(key, index);
       }
       return `${key}-Tab${index}`;
-    }, []);
+    }, [getTabId]);
 
     // Stores views to be displayed
     const map = new Map<string, React.ReactNode[]>();
