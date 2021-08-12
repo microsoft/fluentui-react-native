@@ -13,7 +13,7 @@ import { TabsContext } from './Tabs';
 import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemRenderData, TabsItemState } from './TabsItem.types';
 import {
   useAsPressable,
-  useKeyCallback,
+  // useKeyCallback,
   useViewCommandFocus,
   createIconProps,
   useOnPressWithFocus,
@@ -27,11 +27,11 @@ export const TabsItem = compose<TabsItemType>({
     const {
       icon,
       headerText = '',
-      onAccessibilityTap = userProps.onClick,
+      // onAccessibilityTap = userProps.onClick,
       accessibilityLabel = userProps.headerText,
       componentRef = defaultComponentRef,
       testID,
-      onClick,
+      // onClick,
       itemKey,
       itemCount,
       accessibilityPosInSet,
@@ -60,7 +60,7 @@ export const TabsItem = compose<TabsItemType>({
       onFocus: changeSelection,
     });
 
-    const onKeyUp = useKeyCallback(onClick, ' ', 'Enter');
+    // const onKeyUp = useKeyCallback(changeSelection, ' ', 'Enter');
 
     // set up state
     const state: TabsItemState = {
@@ -106,7 +106,7 @@ export const TabsItem = compose<TabsItemType>({
         ...rest,
         ...pressable.props,
         ref: buttonRef,
-        onAccessibilityTap: onAccessibilityTap,
+        // onAccessibilityTap: onAccessibilityTap,
         accessibilityRole: 'tab',
         accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: userProps.disabled, selected: info.selectedKey === userProps.itemKey },
@@ -114,7 +114,7 @@ export const TabsItem = compose<TabsItemType>({
         accessibilityPositionInSet: accessibilityPosInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
         accessibilitySetSize: accessibilitySetSize ?? info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
-        onKeyUp: onKeyUp,
+        // onKeyUp: onKeyUp,
       },
       content: { children: headerText + countText, testID: testID },
       icon: createIconProps(icon),

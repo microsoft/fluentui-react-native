@@ -5,7 +5,8 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { ITextProps } from '@fluentui-react-native/text';
 import { IconProps } from '@fluentui-react-native/icon';
-import { IButtonProps, IButtonTokens } from '@fluentui-react-native/button';
+import { FontTokens, IBackgroundColorTokens, IBorderTokens, IForegroundColorTokens } from '../../../utils/tokens/lib';
+import { IPressableProps } from '../../Pressable/lib';
 
 export const tabsItemName = 'TabsItem';
 
@@ -35,7 +36,7 @@ export interface TabsItemState {
   info: TabsItemInfo;
 }
 
-export interface TabsItemProps extends IButtonProps {
+export interface TabsItemProps extends IPressableProps {
   /*
    ** The text string for the option
    */
@@ -68,16 +69,44 @@ export interface TabsItemProps extends IButtonProps {
     */
   accessibilitySetSize?: number;
 
+  accessibilityLabel?: string;
+
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
+
+  icon?: IconSourcesType;
 }
 
-export interface TabsItemTokens extends IButtonTokens {
-  textBorderColor?: string;
+type IconSourcesType = number | string | IconProps;
+
+export interface TabsItemTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens, IBorderTokens {
   indicatorColor?: string;
+  iconColor?: string;
+  /**
+   * Source URL or name of the icon to show on the TabsItem.
+   */
+   icon?: IconSourcesType;
 }
+
+// export interface TabsItemProps extends Omit<IPressableProps, 'onPress'> {
+//   /**
+//    * Source URL or name of the icon to show on the TabsItem.
+//    */
+//   icon?: IconSourcesType;
+//   /**
+//    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
+//    */
+//   componentRef?: React.RefObject<IFocusable>;
+//   /**
+//    * A callback to call on button click event
+//    */
+//   onClick?: () => void;
+
+//   testID?: string;
+//   tooltip?: string;
+// }
 
 export interface TabsItemSlotProps {
   root: React.PropsWithRef<IViewProps>;
