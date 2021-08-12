@@ -103,6 +103,119 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     link: p.themePrimary,
     linkHovered: p.themeDarker,
     linkPressed: p.themeDark,
+
+    // Control Color Tokens
+    defaultBackground: p.neutralLighter,
+    defaultBorder: p.neutralSecondaryAlt,
+    defaultContent: isInverted ? p.black : p.neutralPrimary,
+    defaultIcon: isInverted ? p.black : p.neutralPrimary,
+
+    defaultHoveredBackground: p.neutralLight,
+    defaultHoveredBorder: 'transparent',
+    defaultHoveredContent: isInverted ? p.neutralPrimary : p.neutralDark,
+    defaultHoveredIcon: isInverted ? p.neutralPrimary : p.neutralDark,
+
+    defaultFocusedBackground: p.neutralLight,
+    defaultFocusedBorder: p.neutralSecondaryAlt,
+    defaultFocusedContent: isInverted ? p.neutralPrimary : p.neutralDark,
+    defaultFocusedIcon: isInverted ? p.neutralPrimary : p.neutralDark,
+
+    defaultPressedBackground: p.neutralLight,
+    defaultPressedBorder: 'transparent',
+    defaultPressedContent: p.neutralDark,
+    defaultPressedIcon: p.neutralDark,
+
+    defaultDisabledBackground: p.neutralLighter,
+    defaultDisabledBorder: p.neutralLighter,
+    defaultDisabledContent: p.neutralTertiary,
+    defaultDisabledIcon: p.neutralTertiary,
+
+    ghostBackground: p.white,
+    ghostBorder: p.white,
+    ghostContent: p.neutralPrimary,
+    ghostIcon: p.neutralPrimary,
+
+    ghostHoveredBackground: p.neutralLighter,
+    ghostHoveredBorder: p.neutralLighter,
+    ghostHoveredContent: p.neutralDark,
+    ghostHoveredIcon: p.neutralDark,
+
+    ghostFocusedBackground: p.neutralLighter,
+    ghostFocusedBorder: p.neutralSecondaryAlt,
+    ghostFocusedContent: p.neutralDark,
+    ghostFocusedIcon: p.neutralDark,
+
+    ghostPressedBackground: p.neutralLight,
+    ghostPressedBorder: p.neutralLight,
+    ghostPressedContent: 'transparent',
+    ghostPressedIcon: 'transparent',
+
+    ghostDisabledBackground: p.white,
+    ghostDisabledBorder: p.white,
+    ghostDisabledContent: p.neutralTertiary,
+    ghostDisabledIcon: p.neutralTertiary,
+
+    brandedBackground: p.themePrimary,
+    brandedBorder: 'transparent',
+    brandedContent: p.white,
+    brandedIcon: p.white,
+
+    brandedHoveredBackground: p.themeDarkAlt,
+    brandedHoveredBorder: 'transparent',
+    brandedHoveredContent: p.white,
+    brandedHoveredIcon: p.white,
+
+    brandedFocusedBackground: p.themeDarkAlt,
+    brandedFocusedBorder: 'transparent',
+    brandedFocusedContent: p.white,
+    brandedFocusedIcon: p.white,
+
+    brandedPressedBackground: p.themeDark,
+    brandedPressedBorder: 'transparent',
+    brandedPressedContent: p.white,
+    brandedPressedIcon: p.white,
+
+    brandedDisabledBackground: p.neutralLighter,
+    brandedDisabledBorder: 'transparent',
+    brandedDisabledContent: p.neutralQuaternary,
+    brandedDisabledIcon: p.neutralQuaternary,
+
+    defaultCheckedBackground: p.neutralTertiaryAlt,
+    defaultCheckedContent: p.neutralDark,
+    defaultCheckedHoveredBackground: p.neutralLight,
+    defaultCheckedHoveredContent: isInverted ? p.neutralPrimary : p.neutralDark,
+
+    brandCheckedBackground: 'transparent',
+    brandCheckedContent: 'transparent',
+    brandCheckedHoveredBackground: 'transparent',
+    brandCheckedHoveredContent: 'transparent',
+
+    ghostCheckedBackground: p.neutralLight,
+    ghostCheckedContent: p.black,
+    ghostCheckedHoveredBackground: p.neutralLighter,
+    ghostCheckedHoveredContent: p.neutralDark,
+    ghostCheckedHoveredBorder: 'transparent',
+
+    ghostSecondaryContent: p.neutralSecondary,
+    ghostFocusedSecondaryContent: 'transparent',
+    ghostHoveredSecondaryContent: 'transparent',
+    ghostPressedSecondaryContent: 'transparent',
+
+    brandedSecondaryContent: 'transparent',
+    brandedFocusedSecondaryContent: 'transparent',
+    brandedHoveredSecondaryContent: 'transparent',
+    brandedPressedSecondaryContent: 'transparent',
+
+    defaultDisabledSecondaryContent: 'transparent',
+    defaultHoveredSecondaryContent: 'transparent',
+    defaultPressedSecondaryContent: 'transparent',
+
+    checkboxBackground: 'transparent',
+    checkboxBackgroundDisabled: 'transparent',
+    checkmarkColor: 'transparent',
+
+    personaActivityRing: 'transparent',
+    personaActivityGlow: 'transparent',
   };
 }
 
