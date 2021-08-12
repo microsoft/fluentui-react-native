@@ -20,13 +20,13 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
     },
     fab: {
       borderRadius: 100, // big number for always rounded corners
-      shadowColor: globalTokens.shadow[8][1].color,
+      shadowColor: globalTokens.shadow[8][1].color.substr(0, 7),
       shadowOffset: {
         width: globalTokens.shadow[8][1].x,
         height: globalTokens.shadow[8][1].y,
       },
       shadowRadius: globalTokens.shadow[8][1].blur,
-      // shadowOpacity: Number('0x' + globalTokens.shadow[8][1].color.substr(7, 2)) / 255.0,
+      shadowOpacity: Number('0x' + globalTokens.shadow[8][1].color.substr(7, 2)) / 255.0,
       elevation: 8,
       // For large size
       minHeight: 56,
