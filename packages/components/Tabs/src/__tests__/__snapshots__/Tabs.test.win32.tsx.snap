@@ -1298,16 +1298,8 @@ exports[`Tabs props 1`] = `
   onStartShouldSetResponder={[Function]}
   rest={Object {}}
 >
-  <Text
-    style={
-      Object {
-        "color": "#323130",
-        "fontFamily": "Segoe UI",
-        "fontSize": 16,
-        "fontWeight": "600",
-        "margin": 0,
-      }
-    }
+  <RCTFocusZone
+    navigateAtEnd="NavigateStopAtEnds"
   >
     Tabs
   </Text>

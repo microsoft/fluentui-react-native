@@ -116,7 +116,7 @@ export const Tabs = compose<TabsType>({
       root: { rest, ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: Platform.OS !== 'windows' ? 'tablist' : null, ...pressable.props}, // Add windows role when RN is at >= 0.64
       label: { children: label },
       container: Platform.OS !== 'windows' ? { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef } : null,
-      stack: Platform.OS !== 'windows' ? {style: {flexDirection:'row'}} : {style: {flexDirection:'row'}, focusable: true, ref: focusZoneRef, onKeyDown: onKeyDown}
+      stack: Platform.OS !== 'windows' ? null : {focusable: true, ref: focusZoneRef, onKeyDown: onKeyDown}
     });
 
     return { slotProps, state };
