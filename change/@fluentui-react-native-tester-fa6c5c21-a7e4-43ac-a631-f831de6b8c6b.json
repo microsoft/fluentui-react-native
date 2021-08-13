@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add Expander component test",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "amdingler694@gmail.com",
-  "dependentChangeType": "patch"
-}
