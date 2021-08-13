@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Fri, 13 Aug 2021 16:12:26 GMT",
+      "tag": "@fluentui-react-native/link_v0.13.9",
+      "version": "0.13.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix icons in experimental button and add fab",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "8946966df6ddc0ef1c0b43e576a4124c678d7c89",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 12 Aug 2021 17:23:44 GMT",
+      "tag": "@fluentui-react-native/link_v0.13.8",
+      "version": "0.13.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.7",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 10 Aug 2021 21:12:30 GMT",
       "tag": "@fluentui-react-native/link_v0.13.7",
       "version": "0.13.7",

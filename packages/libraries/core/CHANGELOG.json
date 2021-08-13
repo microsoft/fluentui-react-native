@@ -2,6 +2,51 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Fri, 13 Aug 2021 16:12:26 GMT",
+      "tag": "@fluentui/react-native_v0.24.36",
+      "version": "0.24.36",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix icons in experimental button and add fab",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "8946966df6ddc0ef1c0b43e576a4124c678d7c89",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 13 Aug 2021 09:05:57 GMT",
+      "tag": "@fluentui/react-native_v0.24.35",
+      "version": "0.24.35",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/radio-group to v0.11.10",
+            "author": "sanajmi@microsoft.com",
+            "commit": "183bcbe111614b4baf896ec73f4985d988dd46f7",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 12 Aug 2021 17:23:44 GMT",
+      "tag": "@fluentui/react-native_v0.24.34",
+      "version": "0.24.34",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.4.9",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 11 Aug 2021 04:24:12 GMT",
       "tag": "@fluentui/react-native_v0.24.33",
       "version": "0.24.33",
