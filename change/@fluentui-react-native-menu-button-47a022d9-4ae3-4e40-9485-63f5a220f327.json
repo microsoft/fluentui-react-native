@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update apple native code and build flags",
+  "packageName": "@fluentui-react-native/menu-button",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
