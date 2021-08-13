@@ -12,10 +12,6 @@ export const settings: IComposeSettings<TabsType> = [
     },
     label: {
       variant: 'subheaderSemibold',
-      // style: {
-      //   fontSize: 16,
-      //   fontWeight: '600',
-      // },
     },
     stack: {
       style: {
