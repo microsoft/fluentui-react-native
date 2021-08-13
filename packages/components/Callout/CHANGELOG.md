@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Mon, 09 Aug 2021 22:49:01 GMT and should not be manually modified.
+This log was last generated on Tue, 10 Aug 2021 21:12:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.7
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.6 (ruaraki@microsoft.com)
 
 ## 0.17.6
 

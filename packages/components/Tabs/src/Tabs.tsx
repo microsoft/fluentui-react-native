@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { View, Platform } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, TabsContextData } from './Tabs.types';
@@ -64,7 +64,7 @@ export const Tabs = compose<TabsType>({
         return getTabId(key, index);
       }
       return `${key}-Tab${index}`;
-    }, []);
+    }, [getTabId]);
 
     // Stores views to be displayed
     const map = new Map<string, React.ReactNode[]>();
@@ -84,7 +84,7 @@ export const Tabs = compose<TabsType>({
       },
       info: {
         headersOnly: headersOnly ?? false,
-        label: !!label && Platform.OS === 'windows',
+        label: !!label,
       },
     };
 
