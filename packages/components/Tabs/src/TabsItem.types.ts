@@ -5,8 +5,8 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { ITextProps } from '@fluentui-react-native/text';
 import { IconProps } from '@fluentui-react-native/icon';
-import { FontTokens, IBackgroundColorTokens, IBorderTokens, IForegroundColorTokens } from '../../../utils/tokens/lib';
-import { IPressableProps } from '../../Pressable/lib';
+import { FontTokens, IBackgroundColorTokens, IBorderTokens, IForegroundColorTokens } from '@fluentui-react-native/tokens';
+import { IPressableProps } from '@fluentui-react-native/pressable';
 
 export const tabsItemName = 'TabsItem';
 
@@ -83,6 +83,8 @@ export interface TabsItemProps extends IPressableProps {
    * Source URL or name of the icon to show on the TabsItem.
    */
   icon?: IconSourcesType;
+
+  testID?: string;
 }
 
 type IconSourcesType = number | string | IconProps;
@@ -102,6 +104,21 @@ export interface TabsItemTokens extends IForegroundColorTokens, FontTokens, IBac
    * Source URL or name of the icon to show on the TabsItem.
    */
    icon?: IconSourcesType;
+
+   /**
+   * Text to show on the TabsItem.
+   */
+  headerText?: string;
+
+  /**
+   * The amount of padding between the border and the headerText.
+   */
+   headerTextPadding?: number | string;
+
+   /**
+    * The amount of padding between the border and the headerText when the TabsItem has focus.
+    */
+   headerTextPaddingFocused?: number | string;
 }
 
 
