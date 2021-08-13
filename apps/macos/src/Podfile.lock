@@ -20,7 +20,7 @@ PODS:
     - React
   - FluentUI-React-Native-MenuButton (0.4.8):
     - React
-  - FluentUI-React-Native-Radio-Button (0.1.7):
+  - FluentUI-React-Native-Radio-Button (0.1.8):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.3.0):
@@ -455,11 +455,11 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 9d69690b3a1ca272ca0c0cee76ffcb6cf36d77af
   FBReactNativeSpec: 8b671febd2393669947b56e8d8f53a54185dd0b7
-  FluentUI-React-Native-Avatar: ce909e9bb562c48fc250f85c7bf0df68027e73f4
-  FluentUI-React-Native-Button: 56b68311a0fad790494e29753cca4d8e35f77bf5
-  FluentUI-React-Native-FocusZone: 110b1383ebfa4576ad5e276fc7afd4ebc9826c1e
-  FluentUI-React-Native-MenuButton: 296a5cf0f969a535dd24ef3b55199f4cb69db4e5
-  FluentUI-React-Native-Radio-Button: afa5eac50acc1e3a2af43b16bd137f88127fc09a
+  FluentUI-React-Native-Avatar: e1cc9599f5373101bcbcabee6346c2698f48673e
+  FluentUI-React-Native-Button: 3af0c7b06be6118a4ccd385c6eaaf3d74ea5be46
+  FluentUI-React-Native-FocusZone: 0f1de3a8b0dc2033e137531020348c40ca7a0579
+  FluentUI-React-Native-MenuButton: 69652d1c04c6d37a88530a6933d9a7ae57abb262
+  FluentUI-React-Native-Radio-Button: d8c10c60cfc4ed90b8328043d12019ed1ab0863c
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa

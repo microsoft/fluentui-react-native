@@ -9,6 +9,7 @@
     <repository type="git" url="$repoUri$" commit="$commitId$"/>
   </metadata>
   <files>
+    <!-- iOS device debug -->
     <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Debug-iphoneos"/>
     <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Debug-iphoneos"/>
     <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Date-Picker\libFluentUI-React-Native-Date-Picker.a" target="Debug-iphoneos"/>
@@ -19,9 +20,9 @@
     <file src="DerivedData\Build\Products\Release-iphoneos\FluentUI-React-Native-Date-Picker\libFluentUI-React-Native-Date-Picker.a" target="Ship-iphoneos"/>
 
     <!-- iOS simulator debug -->
-    <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Debug-iphoneos"/>
-    <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Debug-iphoneos"/>
-    <file src="DerivedData\Build\Products\Debug-iphoneos\FluentUI-React-Native-Date-Picker\libFluentUI-React-Native-Date-Picker.a" target="Debug-iphoneos"/>
+    <file src="DerivedData\Build\Products\Debug-iphonesimulator\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Debug-iphonesimulator"/>
+    <file src="DerivedData\Build\Products\Debug-iphonesimulator\FluentUI-React-Native-Button\libFluentUI-React-Native-Button.a" target="Debug-iphonesimulator"/>
+    <file src="DerivedData\Build\Products\Debug-iphonesimulator\FluentUI-React-Native-Date-Picker\libFluentUI-React-Native-Date-Picker.a" target="Debug-iphonesimulator"/>
 
     <!-- iOS simulator ship -->
     <file src="DerivedData\Build\Products\Release-iphonesimulator\FluentUI-React-Native-Avatar\libFluentUI-React-Native-Avatar.a" target="Ship-iphonesimulator"/>
