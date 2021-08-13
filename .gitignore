@@ -18,6 +18,8 @@ pids
 # Xcode
 *.xcuserstate
 **/.DS_Store
+**/DerivedData/*
+
 
 # CocoaPods
 **/Pods/*

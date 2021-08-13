@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Thu, 12 Aug 2021 21:11:52 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.12.8",
+      "version": "0.12.8",
+      "comments": {
+        "none": [
+          {
+            "comment": "Updating repo links",
+            "author": "dake.3601@gmail.com",
+            "commit": "42c85c7df13e56b84a32d37a4fe0b40e8abae2d5",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 12 Aug 2021 17:23:44 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.12.8",
       "version": "0.12.8",
