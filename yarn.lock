@@ -1210,6 +1210,23 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fluentui-react-native/framework@0.5.15":
+  version "0.5.15"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.5.15.tgz#c0efdb5204d74bb1ae3a8f5e902242b84e312ce7"
+  integrity sha512-YI3h1pQYbj8ERn0GICe6RqpTq20RS3AHJheGfSTSfq6Bb39J75G3c9pvHh6ulJiQTn5mIyDDCWEt4q3LhF04zw==
+  dependencies:
+    "@fluentui-react-native/composition" ">=0.6.3 <1.0.0"
+    "@fluentui-react-native/default-theme" ">=0.7.1 <1.0.0"
+    "@fluentui-react-native/immutable-merge" "^1.1.2"
+    "@fluentui-react-native/memo-cache" "^1.1.2"
+    "@fluentui-react-native/merge-props" ">=0.3.2 <1.0.0"
+    "@fluentui-react-native/theme-types" ">=0.9.1 <1.0.0"
+    "@fluentui-react-native/tokens" ">=0.9.11 <1.0.0"
+    "@fluentui-react-native/use-slot" ">=0.1.2 <1.0.0"
+    "@fluentui-react-native/use-slots" ">=0.5.4 <1.0.0"
+    "@fluentui-react-native/use-styling" ">=0.6.2 <1.0.0"
+    "@fluentui-react-native/use-tokens" ">=0.1.1 <1.0.0"
+
 "@fluentui-react-native/framework@0.5.27":
   version "0.5.27"
   resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.5.27.tgz#55da72bc107f5e2ac8d3533984da6ec064a2a372"
@@ -2459,28 +2476,28 @@
     cosmiconfig "^7.0.0"
     semver "^7.0.0"
 
-"@rnx-kit/config@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.3.2.tgz#7beb4123c050c184e23bdd0d16043df553bdc7f9"
-  integrity sha512-z8tOLR9YOkWSDw6AogkJdzMvhNFlLZ5AVwbMArjMJ9kJOCROhduLWzkwGGnUSEUq529FSq7gSMt6VKSha4sVCw==
+"@rnx-kit/config@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.4.0.tgz#dd4261cc9e630ca41df0fd68eac3120b5e575a37"
+  integrity sha512-uBb08LpDJHC+L7yWD6ldmuvnod0NlTG5/pey0f+3ZzbUXGX6xo7Ih7NFhMFJniJyn5WHvdqUiXq7XKdnzKCSfQ==
   dependencies:
     cosmiconfig "^7.0.0"
     semver "^7.0.0"
 
-"@rnx-kit/console@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/console/-/console-1.0.0.tgz#3c6aa85f0988f464d807a366de0685a372d4f184"
-  integrity sha512-OVKtLApy66GWz//WKjWKoGpF/C2QZuscPY0IbYj2SY/ZzNfNAa4QK2RRTlr3gmLzDKNBARFhd7ypnYps2lYigA==
+"@rnx-kit/console@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/console/-/console-1.0.2.tgz#8c2cf5c5b374260664236fb32b18f69afbb6094b"
+  integrity sha512-REIisL+e5jVnXtKRmW6YXe6sIJ+uoJvcvP5oE1k7GH2cwsMk6uRb/DfvLyu+yZ2lsMoWY+dBo9fxM+hWm5GvQA==
   dependencies:
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.5.10", "@rnx-kit/dep-check@^1.5.9":
-  version "1.5.16"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.5.16.tgz#926a0685c877288079e774fb10d268c45322bf1e"
-  integrity sha512-nOuy0xanEVtzuL+cCkMfCXE+NfSyktv8WtYZ/LE+XWbZoi115eq8T32NinVRS/9BWjX9Q3MjJSAPoY4333gaGg==
+  version "1.5.21"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.5.21.tgz#8e2c2f7ce91df0d36d8f6e110664c2ce4dbc15d5"
+  integrity sha512-av792Xabp9NT4hU26j2MSljxx7X5myc2lheurqL0TqkQBIoUcxtTiquOPds8ry2ZInSwpp7Z0za7JudTFZmpEw==
   dependencies:
-    "@rnx-kit/config" "^0.3.2"
-    "@rnx-kit/console" "^1.0.0"
+    "@rnx-kit/config" "^0.4.0"
+    "@rnx-kit/console" "^1.0.2"
     chalk "^4.1.0"
     find-up "^5.0.0"
     jest-diff "^26.0.0"
