@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/native-radio-button",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "A radio button component using the native macOS design.",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
