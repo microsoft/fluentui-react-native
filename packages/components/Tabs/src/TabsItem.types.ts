@@ -69,6 +69,9 @@ export interface TabsItemProps extends IPressableProps {
     */
   accessibilitySetSize?: number;
 
+  /*
+   ** An accessibility label for narrator.
+   */
   accessibilityLabel?: string;
 
   /**
@@ -76,37 +79,31 @@ export interface TabsItemProps extends IPressableProps {
    */
   componentRef?: React.RefObject<IFocusable>;
 
+  /**
+   * Source URL or name of the icon to show on the TabsItem.
+   */
   icon?: IconSourcesType;
 }
 
 type IconSourcesType = number | string | IconProps;
 
 export interface TabsItemTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens, IBorderTokens {
+  /**
+   * The indicator color.
+   */
   indicatorColor?: string;
+
+  /**
+   * The icon color.
+   */
   iconColor?: string;
+
   /**
    * Source URL or name of the icon to show on the TabsItem.
    */
    icon?: IconSourcesType;
 }
 
-// export interface TabsItemProps extends Omit<IPressableProps, 'onPress'> {
-//   /**
-//    * Source URL or name of the icon to show on the TabsItem.
-//    */
-//   icon?: IconSourcesType;
-//   /**
-//    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
-//    */
-//   componentRef?: React.RefObject<IFocusable>;
-//   /**
-//    * A callback to call on button click event
-//    */
-//   onClick?: () => void;
-
-//   testID?: string;
-//   tooltip?: string;
-// }
 
 export interface TabsItemSlotProps {
   root: React.PropsWithRef<IViewProps>;
