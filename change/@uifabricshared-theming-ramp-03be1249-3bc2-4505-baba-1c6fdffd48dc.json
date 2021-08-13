@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix icons in experimental button and add fab",
-  "packageName": "@uifabricshared/theming-ramp",
-  "email": "t-lindaweng@microsoft.com",
-  "dependentChangeType": "patch"
-}

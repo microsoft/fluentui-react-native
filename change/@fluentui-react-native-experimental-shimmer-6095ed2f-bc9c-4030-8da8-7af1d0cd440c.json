@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix icons in experimental button and add fab",
-  "packageName": "@fluentui-react-native/experimental-shimmer",
-  "email": "t-lindaweng@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Fri, 13 Aug 2021 14:54:33 GMT and should not be manually modified.
+This log was last generated on Fri, 13 Aug 2021 16:12:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.15
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
 
 ## 0.12.14
 
