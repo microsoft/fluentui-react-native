@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/experimental-expander",
+  "entries": [
+    {
+      "date": "Fri, 13 Aug 2021 14:54:33 GMT",
+      "tag": "@fluentui-react-native/experimental-expander_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add native Expander component",
+            "author": "amdingler694@gmail.com",
+            "commit": "364c4b60f9f6706a4b85d915b3d335fda99f56c2",
+            "package": "@fluentui-react-native/experimental-expander"
+          }
+        ]
+      }
+    }
+  ]
+}

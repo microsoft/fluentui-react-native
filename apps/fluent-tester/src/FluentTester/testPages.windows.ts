@@ -11,6 +11,7 @@ import { HOMEPAGE_SEPARATOR_BUTTON, SeparatorTest } from './TestComponents/Separ
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
+import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
 
 export const tests = [
   {
@@ -65,5 +66,10 @@ export const tests = [
     name: 'Tokens Test',
     component: TokenTest,
     testPage: HOMEPAGE_TOKEN_BUTTON,
+  },
+  {
+    name: 'Expander Test',
+    component: ExpanderTest,
+    testPage: HOMEPAGE_EXPANDER_BUTTON,
   },
 ];

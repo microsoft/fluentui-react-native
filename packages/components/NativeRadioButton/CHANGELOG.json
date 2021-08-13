@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/native-radio-button",
   "entries": [
     {
+      "date": "Fri, 13 Aug 2021 09:05:57 GMT",
+      "tag": "@fluentui-react-native/native-radio-button_v0.1.10",
+      "version": "0.1.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update apple native code and build flags",
+            "author": "sanajmi@microsoft.com",
+            "commit": "183bcbe111614b4baf896ec73f4985d988dd46f7",
+            "package": "@fluentui-react-native/native-radio-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 12 Aug 2021 17:23:44 GMT",
       "tag": "@fluentui-react-native/native-radio-button_v0.1.9",
       "version": "0.1.9",

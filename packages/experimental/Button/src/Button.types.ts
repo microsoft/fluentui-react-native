@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { ViewProps, ImageProps, ViewStyle, ColorValue } from 'react-native';
+import { ViewProps, ViewStyle, ColorValue } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
-import { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import { FontTokens, IBorderTokens, IShadowTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import type { IViewWin32Props } from '@office-iss/react-native-win32';
+import { IconProps } from '@fluentui-react-native/icon';
 
 export const buttonName = 'Button';
+type IconSourcesType = number | string | IconProps;
 
-export interface ButtonTokens extends FontTokens, IBorderTokens {
+export interface ButtonTokens extends FontTokens, IBorderTokens, IShadowTokens {
   /**
    * Background color for the button
    */
@@ -61,7 +63,7 @@ export interface ButtonTokens extends FontTokens, IBorderTokens {
   /**
    * Source URL or name of the icon to show on the Button.
    */
-  icon?: string;
+  icon?: IconSourcesType;
 
   width?: ViewStyle['width'];
   minHeight?: ViewStyle['minHeight'];
@@ -77,6 +79,7 @@ export interface ButtonTokens extends FontTokens, IBorderTokens {
   primary?: ButtonTokens;
   ghost?: ButtonTokens;
   fluid?: ButtonTokens;
+  fab?: ButtonTokens;
 }
 
 export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
@@ -88,7 +91,7 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   /*
    * Source URL or name of the icon to show on the Button.
    */
-  icon?: string;
+  icon?: IconSourcesType;
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
@@ -109,13 +112,16 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
 
   /** A button can fill the width of its container. */
   fluid?: boolean;
+
+  /** A floating action button  */
+  fab?: boolean;
 }
 
 export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
 
 export interface ButtonSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
-  icon: ImageProps;
+  icon: IconProps;
   content: TextProps;
 }
 
