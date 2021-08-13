@@ -46,7 +46,7 @@ export const App = () => {
 };
 ```
 
-For more information about customizing themes, take a look at [Custom Themes](./CustomTheme). For information about our default themes, take a look at [Default Themes](./DefaultThemes).
+For more information about customizing themes, take a look at [Custom Themes](./CustomTheme.md). For information about our default themes, take a look at [Default Themes](./DefaultThemes.md).
 
 ### Accessing theme properties
 

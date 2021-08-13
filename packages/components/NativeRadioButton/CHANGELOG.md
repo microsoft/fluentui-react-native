@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/native-radio-button
 
-This log was last generated on Tue, 10 Aug 2021 21:12:30 GMT and should not be manually modified.
+This log was last generated on Fri, 13 Aug 2021 09:05:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.10
+
+Fri, 13 Aug 2021 09:05:57 GMT
+
+### Patches
+
+- Update apple native code and build flags (sanajmi@microsoft.com)
+
+## 0.1.9
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.28 (ruaraki@microsoft.com)
+
+## 0.1.8
+
+Wed, 11 Aug 2021 18:38:07 GMT
+
+### Patches
+
+- Remove becomeFirstResponder override (chripear@microsoft.com)
 
 ## 0.1.7
 

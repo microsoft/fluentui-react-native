@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/native-radio-button",
   "entries": [
     {
+      "date": "Fri, 13 Aug 2021 09:05:57 GMT",
+      "tag": "@fluentui-react-native/native-radio-button_v0.1.10",
+      "version": "0.1.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update apple native code and build flags",
+            "author": "sanajmi@microsoft.com",
+            "commit": "183bcbe111614b4baf896ec73f4985d988dd46f7",
+            "package": "@fluentui-react-native/native-radio-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 12 Aug 2021 17:23:44 GMT",
+      "tag": "@fluentui-react-native/native-radio-button_v0.1.9",
+      "version": "0.1.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.28",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui-react-native/native-radio-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 11 Aug 2021 18:38:07 GMT",
+      "tag": "@fluentui-react-native/native-radio-button_v0.1.8",
+      "version": "0.1.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Remove becomeFirstResponder override",
+            "author": "chripear@microsoft.com",
+            "commit": "2e7e319cddf9e250855d5ffb31d9c06908a4ea2e",
+            "package": "@fluentui-react-native/native-radio-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 10 Aug 2021 21:12:30 GMT",
       "tag": "@fluentui-react-native/native-radio-button_v0.1.7",
       "version": "0.1.7",

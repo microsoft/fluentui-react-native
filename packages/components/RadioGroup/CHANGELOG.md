@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Wed, 11 Aug 2021 04:24:12 GMT and should not be manually modified.
+This log was last generated on Fri, 13 Aug 2021 09:05:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.10
+
+Fri, 13 Aug 2021 09:05:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.7.9 (sanajmi@microsoft.com)
+
+## 0.11.9
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.7 (ruaraki@microsoft.com)
 
 ## 0.11.8
 

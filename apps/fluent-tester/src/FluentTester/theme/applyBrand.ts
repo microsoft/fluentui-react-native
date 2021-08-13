@@ -120,7 +120,7 @@ const brandColors: BrandRamps = {
   },
 };
 
-export const brandOptions = Object.keys(brandColors).map((brand) => ({ label: brand, value: brand }));
+export const brandOptions = Object.keys(brandColors).map(brand => ({ label: brand, value: brand }));
 
 export const applyBrand = (currentBrand: string): PartialTheme => {
   const ramp = brandColors[currentBrand];
@@ -128,12 +128,15 @@ export const applyBrand = (currentBrand: string): PartialTheme => {
     ? {
         colors: {
           successBackground: ramp.App6,
+          inputBorderHovered: ramp.App3,
+          inputBackgroundCheckedHovered: ramp.App1,
+          inputFocusBorderAlt: ramp.App4,
           buttonBackgroundHovered: ramp.App1,
           buttonBackgroundPressed: ramp.App2,
           buttonBorderFocused: ramp.App2,
           primaryButtonBackground: ramp.App6,
-          primaryButtonBackgroundHovered: ramp.App4,
-          primaryButtonBackgroundPressed: ramp.App7,
+          primaryButtonBackgroundHovered: ramp.App7,
+          primaryButtonBackgroundPressed: ramp.App8,
           primaryButtonBorder: ramp.App7,
           primaryButtonBorderFocused: ramp.App7,
           accentButtonBackground: ramp.App6,
@@ -141,6 +144,21 @@ export const applyBrand = (currentBrand: string): PartialTheme => {
           link: ramp.App6,
           linkHovered: ramp.App7,
           linkPressed: ramp.App8,
+          buttonHoveredBackground: ramp.App1,
+          buttonHoveredBorder: ramp.App2,
+          buttonFocusedBackground: ramp.App1,
+          buttonFocusedBorder: ramp.App2,
+          buttonPressedBackground: ramp.App2,
+          buttonPressedBorder: ramp.App5,
+          brandedBackground: ramp.App6,
+          brandedBorder: ramp.App7,
+          brandedHoveredBackground: ramp.App7,
+          brandedHoveredBorder: ramp.App6,
+          brandedFocusedBackground: ramp.App7,
+          brandedFocusedBorder: ramp.App7,
+          brandedPressedBackground: ramp.App8,
+          brandedPressedBorder: ramp.App7,
+          buttonCheckedHoveredBackground: ramp.App1,
           neutralForeground2BrandHover: ramp.AppPrimary,
           neutralForeground2BrandPressed: ramp.AppShade10,
           neutralForeground2BrandSelected: ramp.AppPrimary,
