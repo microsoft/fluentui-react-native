@@ -63,10 +63,10 @@ export interface TabsItemProps extends IPressableProps {
    */
   accessibilityPosInSet?: number;
 
-   /*
-    ** Defines the number of tabs items in the group for accessibility purposes. It's recommended to set this value if tabs
-    ** items are not direct children of tabs. This value is auto-generated if tabs items are direct children of tabs.
-    */
+  /*
+   ** Defines the number of tabs items in the group for accessibility purposes. It's recommended to set this value if tabs
+   ** items are not direct children of tabs. This value is auto-generated if tabs items are direct children of tabs.
+   */
   accessibilitySetSize?: number;
 
   /*
@@ -103,7 +103,7 @@ export interface TabsItemTokens extends IForegroundColorTokens, FontTokens, IBac
   /**
    * Source URL or name of the icon to show on the TabsItem.
    */
-   icon?: IconSourcesType;
+  icon?: IconSourcesType;
 
    /**
    * Text to show on the TabsItem.
@@ -113,12 +113,12 @@ export interface TabsItemTokens extends IForegroundColorTokens, FontTokens, IBac
   /**
    * The amount of padding between the border and the headerText.
    */
-   headerTextPadding?: number | string;
+  headerTextPadding?: number | string;
 
-   /**
-    * The amount of padding between the border and the headerText when the TabsItem has focus.
-    */
-   headerTextPaddingFocused?: number | string;
+  /**
+   * The amount of padding between the border and the headerText when the TabsItem has focus.
+   */
+  headerTextPaddingFocused?: number | string;
 }
 
 
