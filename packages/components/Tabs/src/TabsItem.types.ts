@@ -105,7 +105,7 @@ export interface TabsItemTokens extends IForegroundColorTokens, FontTokens, IBac
    */
   icon?: IconSourcesType;
 
-   /**
+  /**
    * Text to show on the TabsItem.
    */
   headerText?: string;
