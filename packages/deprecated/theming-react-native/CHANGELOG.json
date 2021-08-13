@@ -2,6 +2,51 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Fri, 13 Aug 2021 16:12:26 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.12.9",
+      "version": "0.12.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix icons in experimental button and add fab",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "8946966df6ddc0ef1c0b43e576a4124c678d7c89",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 12 Aug 2021 21:11:52 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.12.8",
+      "version": "0.12.8",
+      "comments": {
+        "none": [
+          {
+            "comment": "Updating repo links",
+            "author": "dake.3601@gmail.com",
+            "commit": "42c85c7df13e56b84a32d37a4fe0b40e8abae2d5",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 12 Aug 2021 17:23:44 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.12.8",
+      "version": "0.12.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @uifabricshared/theming-ramp to v0.15.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 10 Aug 2021 21:12:30 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.12.7",
       "version": "0.12.7",
