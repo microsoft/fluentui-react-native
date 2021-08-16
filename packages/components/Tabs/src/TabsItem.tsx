@@ -39,7 +39,9 @@ export const TabsItem = compose<TabsItemType>({
     // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback)
     const info = React.useContext(TabsContext);
 
-    /* We don't want to call the user's onTabsClick multiple times on the same selection. */
+    /* There's a bug where the user callback is being called multiple times on one click.
+    We check that there is an actual change in selection before forwarding the message to the user callback
+    so that they aren't notified more than once for each click. */
     const changeSelection = () => {
       if (itemKey != info.selectedKey) {
         info.onTabsClick && info.onTabsClick(itemKey);
