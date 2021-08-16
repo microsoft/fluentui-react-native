@@ -6,6 +6,7 @@ import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose'
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
+import chevronIconSvg from './chevron.svg';
 
 import {
   MenuButtonName,
@@ -63,6 +64,14 @@ export const MenuButton = compose<MenuButtonType>({
       },
     };
 
+    const chevronIconProps = {
+      svgSource: {
+        src: chevronIconSvg,
+      },
+      width: 12,
+      height: 16,
+    };
+
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
     const buttonProps = {
       content,
@@ -70,7 +79,8 @@ export const MenuButton = compose<MenuButtonType>({
       icon,
       componentRef: stdBtnRef,
       onClick: toggleShowContextualMenu,
-      dropdown: true
+      dropdown: true,
+      trailingIcon: chevronIconProps
     };
 
     const slotProps = mergeSettings<MenuButtonSlotProps>(styleProps, {
@@ -112,7 +122,7 @@ export const MenuButton = compose<MenuButtonType>({
     return (
       <Slots.root>
         {
-          context.primary?
+          context.primary ?
           <Slots.primaryButton /> : <Slots.button />
         }
         {context.showContextualMenu && (

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { Button } from '@fluentui/react-native';
+import { Button, Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
@@ -38,6 +38,14 @@ export const ButtonIconTest: React.FunctionComponent = () => {
           <CustomizedIconButton
             icon={{ svgSource: svgProps, width: 20, height: 20 }}
             content="Button with Customized Icon"
+            tooltip="button tooltip"
+          />
+        ) : null}
+        <Text>Right Button icon</Text>
+        {svgIconsEnabled ? (
+          <CustomizedIconButton
+            trailingIcon={{ svgSource: svgProps, width: 20, height: 20 }}
+            content="Button with Right Icon"
             tooltip="button tooltip"
           />
         ) : null}

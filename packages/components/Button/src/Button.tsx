@@ -9,7 +9,7 @@ import { settings } from './Button.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { SvgXml } from 'react-native-svg';
+
 import {
   useAsPressable,
   useKeyCallback,
@@ -25,6 +25,7 @@ export const Button = compose<IButtonType>({
     const defaultComponentRef = React.useRef(null);
     const {
       icon,
+      trailingIcon,
       content,
       onAccessibilityTap = userProps.onClick,
       accessibilityLabel = userProps.content,
@@ -46,7 +47,7 @@ export const Button = compose<IButtonType>({
         disabled: !!userProps.disabled,
         content: !!content,
         icon: !!icon,
-        dropdown: !!userProps.dropdown,
+        trailingIcon: !!userProps.trailingIcon,
       },
     };
 
@@ -66,7 +67,7 @@ export const Button = compose<IButtonType>({
       },
       content: { children: content, testID: testID },
       icon: createIconProps(icon),
-      chevron: {},
+      trailingIcon: createIconProps(trailingIcon),
     });
 
     return { slotProps, state };
@@ -74,17 +75,14 @@ export const Button = compose<IButtonType>({
   settings,
   render: (Slots: ISlots<IButtonSlotProps>, renderData: IButtonRenderData, ...children: React.ReactNode[]) => {
     const info = renderData.state!.info;
-    const xml = `
-    <svg width="11" height="6" viewBox="0 0 11 6">
-      <path fill='currentColor' d="M0.646447 0.646447C0.841709 0.451184 1.15829 0.451184 1.35355 0.646447L5.5 4.79289L9.64645 0.646447C9.84171 0.451185 10.1583 0.451185 10.3536 0.646447C10.5488 0.841709 10.5488 1.15829 10.3536 1.35355L5.85355 5.85355C5.65829 6.04882 5.34171 6.04882 5.14645 5.85355L0.646447 1.35355C0.451184 1.15829 0.451184 0.841709 0.646447 0.646447Z" />
-    </svg>`;
+
     return (
       <Slots.root>
         <Slots.stack>
           {info.icon && <Slots.icon />}
           {info.content && <Slots.content />}
           {children}
-          {info.dropdown && <Slots.chevron xml={xml} />}
+          {info.trailingIcon && <Slots.trailingIcon />}
         </Slots.stack>
       </Slots.root>
     );
@@ -94,13 +92,14 @@ export const Button = compose<IButtonType>({
     stack: { slotType: View, filter: filterViewProps },
     icon: { slotType: Icon as React.ComponentType },
     content: Text,
-    chevron: SvgXml,
+    trailingIcon: { slotType: Icon as React.ComponentType },
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
     stack: [],
     icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
     content: [textTokens, foregroundColorTokens],
+    trailingIcon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
   },
 });
 

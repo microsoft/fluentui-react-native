@@ -32,6 +32,7 @@ exports[`ContextualMenu default 1`] = `
         "current": null,
       }
     }
+    dropdown={true}
     focusable={true}
     onBlur={[Function]}
     onClick={[Function]}
@@ -42,6 +43,13 @@ exports[`ContextualMenu default 1`] = `
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
+    trailingIcon={
+      Object {
+        "height": 16,
+        "svgSource": Object {},
+        "width": 16,
+      }
+    }
   >
     <View
       style={

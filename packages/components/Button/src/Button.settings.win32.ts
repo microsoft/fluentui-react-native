@@ -5,9 +5,9 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 export const settings: IComposeSettings<IButtonType> = [
   {
     tokens: {
-      backgroundColor: 'buttonBackground',
-      color: 'buttonText',
-      borderColor: 'buttonBorder',
+      backgroundColor: 'neutralBackground1',
+      color: 'neutralForeground1',
+      borderColor: 'neutralStroke1',
       borderWidth: 1,
       borderRadius: 4,
     },
@@ -22,12 +22,29 @@ export const settings: IComposeSettings<IButtonType> = [
         alignSelf: 'flex-start',
       },
     } as IViewProps,
-    icon: {},
+    trailingIcon: {
+      color: 'neutralForeground1',
+      style: {
+        marginStart: 2
+      }
+    },
+    icon: {
+      color: 'neutralForeground1',
+      style: {
+        marginEnd: 2
+      }
+    },
+    content: {
+      style: {
+        marginStart: 2,
+        marginEnd: 2
+      }
+    },
     stack: {
       style: {
         display: 'flex',
-        paddingStart: 8,
-        paddingEnd: 8,
+        paddingStart: 6,
+        paddingEnd: 6,
         alignItems: 'center',
         flexDirection: 'row',
         alignSelf: 'flex-start',
@@ -40,30 +57,30 @@ export const settings: IComposeSettings<IButtonType> = [
     _overrides: {
       disabled: {
         tokens: {
-          backgroundColor: 'buttonBackgroundDisabled',
-          color: 'buttonTextDisabled',
-          borderColor: 'buttonBorderDisabled',
+          backgroundColor: 'neutralBackgroundDisabled',
+          color: 'neutralForegroundDisabled',
+          borderColor: 'neutralStrokeDisabled',
         },
       },
       hovered: {
         tokens: {
-          backgroundColor: 'buttonBackgroundHovered',
-          color: 'buttonTextHovered',
-          borderColor: 'buttonBorderHovered',
+          backgroundColor: 'neutralBackground1Hover',
+          color: 'neutralForeground1',
+          borderColor: 'neutralStroke1',
         },
       },
       pressed: {
         tokens: {
-          backgroundColor: 'buttonBackgroundPressed',
-          color: 'buttonTextPressed',
-          borderColor: 'buttonPressedBorder',
+          backgroundColor: 'neutralBackground1Pressed',
+          color: 'neutralForeground1',
+          borderColor: 'neutralStroke1',
         },
       },
       focused: {
         tokens: {
-          borderColor: 'buttonBorderFocused',
-          color: 'buttonTextHovered',
-          backgroundColor: 'buttonBackgroundHovered',
+          backgroundColor: 'neutralBackground1Hover',
+          color: 'neutralForeground1',
+          borderColor: 'strokeFocus2',
         },
       },
     },

@@ -30,6 +30,11 @@ const menuButton: React.FunctionComponent = () => {
     shouldFocusOnContainer: focusOnContainer,
   };
 
+  const svgProps: SvgIconProps = {
+    src: TestSvg,
+    viewBox: '0 0 500 500',
+  };
+
   return (
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
@@ -56,27 +61,62 @@ const menuButton: React.FunctionComponent = () => {
               <Text style={{ color: 'blue' }}>none</Text>
             )}
           </Text>
-          <MenuButton content="Standard MenuButton" menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps} />
-          <Text>MenuButton with icon</Text>
-          <MenuButton
-            icon={testImage}
-            content="Primary MenuButton"
-            menuItems={menuItems}
-            onItemClick={onItemClick}
-            contextualMenu={contextualMenuProps}
-          />
-          <Text>Disabled MenuButton</Text>
-          <MenuButton disabled content="Disabled MenuButton" menuItems={menuItems} />
-          <Text>Primary MenuButton</Text>
-          <MenuButton
-            primary
-            content="Primary MenuButton"
-            menuItems={menuItems}
-            onItemClick={onItemClick}
-            contextualMenu={contextualMenuProps}
-          />
-          <Text>Primary Disabled MenuButton</Text>
-          <MenuButton primary disabled content="Disabled Primary MenuButton" menuItems={menuItems} />
+          <View style={{ flexDirection: 'row', paddingHorizontal: 5 }}>
+            <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
+              <MenuButton
+                content="Standard MenuButton"
+                menuItems={menuItems}
+                onItemClick={onItemClick}
+                contextualMenu={contextualMenuProps}
+              />
+              <Text>MenuButton with icon</Text>
+              <MenuButton
+                icon={{ svgSource: svgProps, width: 12, height: 12 }}
+                content="MenuButton"
+                menuItems={menuItems}
+                onItemClick={onItemClick}
+                contextualMenu={contextualMenuProps}
+              />
+              <Text>MenuButton with only icon</Text>
+              <MenuButton
+                icon={{ svgSource: svgProps, width: 12, height: 12 }}
+                menuItems={menuItems}
+                onItemClick={onItemClick}
+                contextualMenu={contextualMenuProps}
+              />
+              <Text>Disabled MenuButton</Text>
+              <MenuButton disabled content="Disabled MenuButton" menuItems={menuItems} />
+            </View>
+            <Separator vertical />
+            <View style={{ flexDirection: 'column', paddingHorizontal: 12 }}>
+              <MenuButton
+                primary
+                content="Primary MenuButton"
+                menuItems={menuItems}
+                onItemClick={onItemClick}
+                contextualMenu={contextualMenuProps}
+              />
+              <Text>Primary MenuButton with icon</Text>
+              <MenuButton
+                primary
+                icon={{ svgSource: svgProps, width: 12, height: 12 }}
+                content="Primary MenuButton"
+                menuItems={menuItems}
+                onItemClick={onItemClick}
+                contextualMenu={contextualMenuProps}
+              />
+              <Text>Primary MenuButton with only icon</Text>
+              <MenuButton
+                primary
+                icon={{ svgSource: svgProps, width: 12, height: 12 }}
+                menuItems={menuItems}
+                onItemClick={onItemClick}
+                contextualMenu={contextualMenuProps}
+              />
+              <Text>Primary Disabled MenuButton</Text>
+              <MenuButton primary disabled content="Disabled Primary MenuButton" menuItems={menuItems} />
+            </View>
+          </View>
         </View>
       </View>
     </View>
@@ -190,6 +230,14 @@ const nestedMenuButton: React.FunctionComponent = () => {
     },
   ];
 
+  const rasterImageProps = {
+    rasterImageSource: {
+      src: testImage,
+    },
+    width: 12,
+    height: 12,
+  };
+
   return (
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
@@ -224,7 +272,7 @@ const nestedMenuButton: React.FunctionComponent = () => {
               <Text style={{ color: 'blue' }}>none</Text>
             )}
           </Text>
-          <MenuButton icon={testImage} content="Press for Nested MenuButton" menuItems={nestedMenuItems} onItemClick={onItemClick} />
+          <MenuButton icon={rasterImageProps} content="Press for Nested MenuButton" menuItems={nestedMenuItems} onItemClick={onItemClick} />
         </View>
       </View>
     </View>
