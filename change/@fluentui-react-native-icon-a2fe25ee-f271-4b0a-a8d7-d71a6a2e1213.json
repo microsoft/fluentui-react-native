@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fixed icon color for SVG",
+  "packageName": "@fluentui-react-native/icon",
+  "email": "v.kozlova13@gmail.com",
+  "dependentChangeType": "patch"
+}
