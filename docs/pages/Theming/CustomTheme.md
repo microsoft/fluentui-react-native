@@ -39,13 +39,17 @@ For example, if you want to change the settings on the [Button component](https:
 ```ts
 components: {
   Button: {
-    backgroundColor: 'primaryButtonBackground', // Different semantic color
-    color: 'neutralBackground1', // Alias token
+    tokens: {
+      backgroundColor: 'primaryButtonBackground', // Different semantic color
+      color: 'neutralBackground1', // Alias token
+    },
     _overrides:{
-      hovered: {
-        backgroundColor: theme.host.colors['AppShade10'], // Get brand color from host
-        color: theme.host.colors['Gray96'], // Get gray from host
-        borderColor: theme.host.palette.Bkg, // Get entry from palette from host
+      tokens:{
+        hovered: {
+          backgroundColor: theme.host.colors['AppShade10'], // Get brand color from host
+          color: theme.host.colors['Gray96'], // Get gray from host
+          borderColor: theme.host.palette.Bkg, // Get entry from palette from host
+        },
       },
     }
   },
