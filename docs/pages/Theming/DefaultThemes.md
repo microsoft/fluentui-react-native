@@ -14,11 +14,16 @@ On win32, we allow for better integration with an Office host.
 
 ## Integration with Office
 
-On win32, the we allow for integration with Office theming via an `OfficeThemingModule`. Office has a native module which provides information about the queried palette based on the current Office theme. FURN uses the information to populate `theme.colors`, but the palette is available as well under `theme.host.palette`.
+On win32, we allow for integration with Office theming via an `OfficeThemingModule`. Office has a native module which provides information about the queried palette based on the current Office theme. FURN uses the information to populate `theme.colors`, but the palette is available as well under `theme.host.palette`.
 
 You can create a theme using information from Office by calling `createOfficeTheme()`. By default, we use the `WhiteColors` palette. You can also ask for a specific palette's values by passing in a `paletteName` as part of the `ThemeOptions` passed into `createOfficeTheme()`:
 
 ```tsx
+import { ThemeProvider } from '@fluentui-react-native/theme';
+import { createOfficeTheme } from '@fluentui-react-native/win32-theme';
+import { useFluentTheme } from '@fluentui-react-native/framework';
+import { Text } from 'react-native';
+
 const AppWithOfficeTheme = () => {
   return (
     // Populate the theme with colors from PaletteName palette in Office.
@@ -29,7 +34,7 @@ const AppWithOfficeTheme = () => {
 };
 
 const AppContent = () => {
-  const officeTheme = useTheme();
+  const officeTheme = useFluentTheme();
   return (
     <>
       // bodyText property value of theme is determined by palette
@@ -41,6 +46,8 @@ const AppContent = () => {
 };
 ```
 
+You can take a look at how the palette is used to populate theme colors [here](https://github.com/microsoft/fluentui-react-native/blob/master/packages/theming/win32-theme/src/paletteFromOfficeColors.ts) and [here](https://github.com/microsoft/fluentui-react-native/blob/master/packages/theming/win32-theme/src/createAliasesFromPalette.ts).
+
 ## Example
 
 Here's how the button component looks by default on every platform:
@@ -48,9 +55,12 @@ Here's how the button component looks by default on every platform:
 ### Default (Web / Windows)
 
 ```tsx
+import { ThemeProvider } from '@fluentui-react-native/theme';
+import { createDefaultTheme } from '@fluentui-react-native/default-theme';
+
 <ThemeProvider theme={createDefaultTheme()}>
   <Button content={'Default Button'} />
-</ThemeProvider>
+</ThemeProvider>;
 ```
 
 ![Image of default button with default theme applied in FURN](./assets/default.png)
@@ -58,9 +68,12 @@ Here's how the button component looks by default on every platform:
 ### Android
 
 ```tsx
+import { ThemeProvider } from '@fluentui-react-native/theme';
+import { createAndroidTheme } from '@fluentui-react-native/android-theme';
+
 <ThemeProvider theme={createAndroidTheme()}>
   <Button content={'Button'} />
-</ThemeProvider>
+</ThemeProvider>;
 ```
 
 ![Image of default button with default Android theme applied in FURN](./assets/android.png)
@@ -68,9 +81,12 @@ Here's how the button component looks by default on every platform:
 ### iOS
 
 ```tsx
+import { ThemeProvider } from '@fluentui-react-native/theme';
+import { createAppleTheme } from '@fluentui-react-native/apple-theme';
+
 <ThemeProvider theme={createAppleTheme()}>
   <Button content={'Button'} />
-</ThemeProvider>
+</ThemeProvider>;
 ```
 
 ![Image of default button with default Apple theme on iOS applied in FURN](./assets/iOS.png)
@@ -78,9 +94,12 @@ Here's how the button component looks by default on every platform:
 ### MacOS
 
 ```tsx
+import { ThemeProvider } from '@fluentui-react-native/theme';
+import { createAppleTheme } from '@fluentui-react-native/apple-theme';
+
 <ThemeProvider theme={createAppleTheme()}>
   <Button content={'Button'} />
-</ThemeProvider>
+</ThemeProvider>;
 ```
 
 ![Image of default button with default Apple theme on Mac applied in FURN](./assets/macOS.png)
@@ -88,9 +107,12 @@ Here's how the button component looks by default on every platform:
 ### Win32 (Office)
 
 ```tsx
+import { ThemeProvider } from '@fluentui-react-native/theme';
+import { createOfficeTheme } from '@fluentui-react-native/win32-theme';
+
 <ThemeProvider theme={createOfficeTheme()}>
   <Button content={'Default Button'} />
-</ThemeProvider>
+</ThemeProvider>;
 ```
 
 ![Image of default button with Office White Colors theme applied in FURN](./assets/win32.png)
