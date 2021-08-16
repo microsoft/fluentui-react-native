@@ -28,7 +28,7 @@ export interface IButtonInfo extends IPressableState {
    */
   content?: boolean;
   /**
-   * Right Button icon.
+   * Trailing icon.
    */
    trailingIcon?: boolean;
 }
