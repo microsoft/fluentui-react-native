@@ -111,7 +111,7 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     defaultIcon: isInverted ? p.black : p.neutralPrimary,
 
     defaultHoveredBackground: p.neutralLight,
-    defaultHoveredBorder: 'transparent',
+    defaultHoveredBorder: p.neutralSecondaryAlt,
     defaultHoveredContent: isInverted ? p.neutralPrimary : p.neutralDark,
     defaultHoveredIcon: isInverted ? p.neutralPrimary : p.neutralDark,
 
@@ -121,7 +121,7 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     defaultFocusedIcon: isInverted ? p.neutralPrimary : p.neutralDark,
 
     defaultPressedBackground: p.neutralLight,
-    defaultPressedBorder: 'transparent',
+    defaultPressedBorder: p.neutralSecondaryAlt,
     defaultPressedContent: p.neutralDark,
     defaultPressedIcon: p.neutralDark,
 
@@ -147,8 +147,8 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
 
     ghostPressedBackground: p.neutralLight,
     ghostPressedBorder: p.neutralLight,
-    ghostPressedContent: 'transparent',
-    ghostPressedIcon: 'transparent',
+    ghostPressedContent: p.neutralDark,
+    ghostPressedIcon: p.neutralDark,
 
     ghostDisabledBackground: p.white,
     ghostDisabledBorder: p.white,
@@ -156,27 +156,27 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     ghostDisabledIcon: p.neutralTertiary,
 
     brandedBackground: p.themePrimary,
-    brandedBorder: 'transparent',
+    brandedBorder:  p.themeDark,
     brandedContent: p.white,
     brandedIcon: p.white,
 
     brandedHoveredBackground: p.themeDarkAlt,
-    brandedHoveredBorder: 'transparent',
+    brandedHoveredBorder: p.themeDarker,
     brandedHoveredContent: p.white,
     brandedHoveredIcon: p.white,
 
     brandedFocusedBackground: p.themeDarkAlt,
-    brandedFocusedBorder: 'transparent',
+    brandedFocusedBorder: p.themeDarker,
     brandedFocusedContent: p.white,
     brandedFocusedIcon: p.white,
 
     brandedPressedBackground: p.themeDark,
-    brandedPressedBorder: 'transparent',
+    brandedPressedBorder: p.themeDarker,
     brandedPressedContent: p.white,
     brandedPressedIcon: p.white,
 
     brandedDisabledBackground: p.neutralLighter,
-    brandedDisabledBorder: 'transparent',
+    brandedDisabledBorder: p.neutralLighter,
     brandedDisabledContent: p.neutralQuaternary,
     brandedDisabledIcon: p.neutralQuaternary,
 
@@ -185,16 +185,16 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     defaultCheckedHoveredBackground: p.neutralLight,
     defaultCheckedHoveredContent: isInverted ? p.neutralPrimary : p.neutralDark,
 
-    brandCheckedBackground: 'transparent',
-    brandCheckedContent: 'transparent',
-    brandCheckedHoveredBackground: 'transparent',
-    brandCheckedHoveredContent: 'transparent',
+    brandedCheckedBackground: 'transparent',
+    brandedCheckedContent: 'transparent',
+    brandedCheckedHoveredBackground: 'transparent',
+    brandedCheckedHoveredContent: 'transparent',
 
     ghostCheckedBackground: p.neutralLight,
     ghostCheckedContent: p.black,
     ghostCheckedHoveredBackground: p.neutralLighter,
     ghostCheckedHoveredContent: p.neutralDark,
-    ghostCheckedHoveredBorder: 'transparent',
+    ghostCheckedHoveredBorder: p.neutralDark,
 
     ghostSecondaryContent: p.neutralSecondary,
     ghostFocusedSecondaryContent: 'transparent',
