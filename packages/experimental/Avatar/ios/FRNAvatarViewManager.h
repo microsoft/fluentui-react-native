@@ -1,3 +1,3 @@
 #import <React/RCTViewManager.h>
 
-#import "MSFAvatarStorage.h"
+#import "FRNAvatarStorage.h"

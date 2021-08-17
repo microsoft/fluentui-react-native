@@ -5,7 +5,7 @@ import { Button } from '@fluentui-react-native/experimental-button';
 import { compose, mergeProps, withSlots, UseSlots, buildProps } from '@fluentui-react-native/framework';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
-const NativeButtonComponent = ensureNativeComponent('MSFButtonView');
+const NativeButtonComponent = ensureNativeComponent('FRNButtonView');
 
 export const NativeButton = compose<NativeButtonType>({
   displayName: nativeButtonName,

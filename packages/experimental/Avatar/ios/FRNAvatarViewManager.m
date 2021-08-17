@@ -1,6 +1,6 @@
 #import <React/RCTViewManager.h>
 
-#import "MSFAvatarStorage.h"
+#import "FRNAvatarStorage.h"
 
 @import FluentUI;
 
@@ -28,7 +28,7 @@ RCT_REMAP_VIEW_PROPERTY(name, __custom__, type)  \
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation RCTConvert (MSFAvatarAdditions)
+@implementation RCTConvert (FRNAvatarAdditions)
 
 RCT_ENUM_CONVERTER(MSFAvatarSize, (@{
     @"xSmall": @(MSFAvatarSizeXsmall),
@@ -61,7 +61,7 @@ RCT_ENUM_CONVERTER(MSFAvatarStyle, (@{
 
 @end
 
-@interface RCT_EXTERN_MODULE(MSFAvatarViewManager, RCTViewManager)
+@interface RCT_EXTERN_MODULE(FRNAvatarViewManager, RCTViewManager)
 
 RCT_EXPORT_SWIFTUI_PROPERTY(primaryText, NSString, MSFAvatar)
 

@@ -9,18 +9,16 @@ PODS:
     - React-Core (= 0.63.37)
     - React-jsi (= 0.63.37)
     - ReactCommon/turbomodule/core (= 0.63.37)
-  - FluentUI-React-Native-Avatar (0.11.5):
+  - FRNAvatar (0.11.8):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
-  - FluentUI-React-Native-Button (0.7.8):
+  - FRNButton (0.7.11):
     - MicrosoftFluentUI (= 0.3.0)
     - React
-  - FluentUI-React-Native-FocusZone (0.7.7):
+  - FRNMenuButton (0.4.11):
     - React
-  - FluentUI-React-Native-MenuButton (0.4.8):
-    - React
-  - FluentUI-React-Native-Radio-Button (0.1.8):
+  - FRNRadioButton (0.1.11):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.3.0):
@@ -95,6 +93,8 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
+  - RCTFocusZone (0.7.10):
+    - React
   - RCTRequired (0.63.37)
   - RCTTypeSafety (0.63.37):
     - FBLazyVector (= 0.63.37)
@@ -323,7 +323,7 @@ PODS:
     - React-jsi (= 0.63.37)
   - ReactTestApp-DevSupport (0.7.1)
   - ReactTestApp-Resources (1.0.0-dev)
-  - RNCPicker (1.16.5):
+  - RNCPicker (1.9.11):
     - React-Core
   - RNSVG (12.1.1):
     - React
@@ -335,13 +335,13 @@ DEPENDENCIES:
   - DoubleConversion (from `../../../node_modules/react-native-macos/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../../../node_modules/react-native-macos/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec`)
-  - FluentUI-React-Native-Avatar (from `../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec`)
-  - FluentUI-React-Native-Button (from `../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec`)
-  - FluentUI-React-Native-FocusZone (from `../../../packages/components/FocusZone/FluentUIReactNativeFocusZone.podspec`)
-  - FluentUI-React-Native-MenuButton (from `../../../packages/components/MenuButton/FluentUIReactNativeMenuButton.podspec`)
-  - FluentUI-React-Native-Radio-Button (from `../../../packages/components/NativeRadioButton/FluentUIReactNativeRadioButton.podspec`)
+  - FRNAvatar (from `../../../packages/experimental/Avatar/FRNAvatar.podspec`)
+  - FRNButton (from `../../../packages/experimental/NativeButton/FRNButton.podspec`)
+  - FRNMenuButton (from `../../../packages/components/MenuButton/FRNMenuButton.podspec`)
+  - FRNRadioButton (from `../../../packages/components/NativeRadioButton/FRNRadioButton.podspec`)
   - glog (from `../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
   - RCT-Folly (from `../../../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
+  - RCTFocusZone (from `../../../packages/components/FocusZone/RCTFocusZone.podspec`)
   - RCTRequired (from `../../../node_modules/react-native-macos/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../../../node_modules/react-native-macos/Libraries/TypeSafety`)
   - React (from `../../../node_modules/react-native-macos/`)
@@ -385,20 +385,20 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-macos/Libraries/FBLazyVector"
   FBReactNativeSpec:
     :path: "../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec"
-  FluentUI-React-Native-Avatar:
-    :path: "../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec"
-  FluentUI-React-Native-Button:
-    :path: "../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec"
-  FluentUI-React-Native-FocusZone:
-    :path: "../../../packages/components/FocusZone/FluentUIReactNativeFocusZone.podspec"
-  FluentUI-React-Native-MenuButton:
-    :path: "../../../packages/components/MenuButton/FluentUIReactNativeMenuButton.podspec"
-  FluentUI-React-Native-Radio-Button:
-    :path: "../../../packages/components/NativeRadioButton/FluentUIReactNativeRadioButton.podspec"
+  FRNAvatar:
+    :path: "../../../packages/experimental/Avatar/FRNAvatar.podspec"
+  FRNButton:
+    :path: "../../../packages/experimental/NativeButton/FRNButton.podspec"
+  FRNMenuButton:
+    :path: "../../../packages/components/MenuButton/FRNMenuButton.podspec"
+  FRNRadioButton:
+    :path: "../../../packages/components/NativeRadioButton/FRNRadioButton.podspec"
   glog:
     :podspec: "../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec"
   RCT-Folly:
     :podspec: "../../../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec"
+  RCTFocusZone:
+    :path: "../../../packages/components/FocusZone/RCTFocusZone.podspec"
   RCTRequired:
     :path: "../../../node_modules/react-native-macos/Libraries/RCTRequired"
   RCTTypeSafety:
@@ -455,14 +455,14 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 9d69690b3a1ca272ca0c0cee76ffcb6cf36d77af
   FBReactNativeSpec: 8b671febd2393669947b56e8d8f53a54185dd0b7
-  FluentUI-React-Native-Avatar: ef9db2fa59e38f856a37d6463ce392458dc05654
-  FluentUI-React-Native-Button: ebf53b24d557ac0d54e942be3901aa4839bc6dd0
-  FluentUI-React-Native-FocusZone: 8290b9e1c0978a674cf01551b89d26a688055955
-  FluentUI-React-Native-MenuButton: eb174258d46dc2619439be0734e9a0a36943adb4
-  FluentUI-React-Native-Radio-Button: a56648ee6f8a47ce2474aca19d5fb5171f2a0183
+  FRNAvatar: b2477748ea17a77744a7dec855a73b2c84f22771
+  FRNButton: aec4eca5f1a963042cdb472bf04881f39191934d
+  FRNMenuButton: fdbc0ca942ff55d8127373e36a3791bede248c77
+  FRNRadioButton: 5fdc2e6f98250fe3e595bad5e919fe7d953711be
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
+  RCTFocusZone: 34c83a64bed384d4e025a65eae0eaa1be0ee55f5
   RCTRequired: 34869e88152b553afc0c7bde31b7b95f626ae367
   RCTTypeSafety: a7e07dddefa291537fa86c996b19bbbeda9db88e
   React: 4b1d4533300d5ffecadd5966efad43aae87d0dcb
@@ -485,11 +485,11 @@ SPEC CHECKSUMS:
   ReactCommon: 014dd1ff02eab367fa6676b7b408d1a08893a98d
   ReactTestApp-DevSupport: 058444bc8d4df209aabc6a5f54a73bfd9a114f94
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
-  RNCPicker: 28e41a58b79cd82cc639391bb99ca1b2489a3ea9
+  RNCPicker: 6780c753e9e674065db90d9c965920516402579d
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Yoga: 77d9987384e26b4aaf3e7a01808838cc2d4304f2
 
-PODFILE CHECKSUM: 15eda06aaa95b3f7091a3051b06322d719f25ff3
+PODFILE CHECKSUM: 53626981ab7ada684169fcd58047cf38bc63db19
 
 COCOAPODS: 1.10.2
