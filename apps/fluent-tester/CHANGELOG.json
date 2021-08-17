@@ -2,6 +2,59 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 13 Aug 2021 16:12:26 GMT",
+      "tag": "@fluentui-react-native/tester_v0.35.9",
+      "version": "0.35.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix icons in experimental button and add fab",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "8946966df6ddc0ef1c0b43e576a4124c678d7c89",
+            "package": "@fluentui-react-native/tester"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/stack to v0.5.25",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "8946966df6ddc0ef1c0b43e576a4124c678d7c89",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 13 Aug 2021 14:54:33 GMT",
+      "tag": "@fluentui-react-native/tester_v0.35.8",
+      "version": "0.35.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add Expander component test",
+            "author": "amdingler694@gmail.com",
+            "commit": "364c4b60f9f6706a4b85d915b3d335fda99f56c2",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 13 Aug 2021 09:05:57 GMT",
+      "tag": "@fluentui-react-native/tester_v0.35.7",
+      "version": "0.35.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update apple native code and build flags",
+            "author": "sanajmi@microsoft.com",
+            "commit": "183bcbe111614b4baf896ec73f4985d988dd46f7",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 12 Aug 2021 17:23:44 GMT",
       "tag": "@fluentui-react-native/tester_v0.35.6",
       "version": "0.35.6",

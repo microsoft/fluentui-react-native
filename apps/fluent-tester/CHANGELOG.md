@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 12 Aug 2021 17:23:44 GMT and should not be manually modified.
+This log was last generated on Fri, 13 Aug 2021 16:12:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.35.9
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.35.8
+
+Fri, 13 Aug 2021 14:54:33 GMT
+
+### Patches
+
+- Add Expander component test (amdingler694@gmail.com)
+
+## 0.35.7
+
+Fri, 13 Aug 2021 09:05:57 GMT
+
+### Patches
+
+- Update apple native code and build flags (sanajmi@microsoft.com)
 
 ## 0.35.6
 
