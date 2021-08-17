@@ -154,7 +154,7 @@ const tabsRenderSeparately: React.FunctionComponent = () => {
 };
 
 const tabsSettingSelectedKey: React.FunctionComponent = () => {
-  // If user wants to programmatically set the selectedKey to control the view
+  // If user wants to programmatically set the tab's selectedKey with a button
   const [selectedKey, setSelectedKey] = React.useState('home');
   const [currTabItemIndex, setCurrTabItemIndex] = React.useState(0);
   const tabItems = ['home', 'file', 'setting'];
