@@ -1,2 +1,2 @@
-export * from './ButtonTest';
+export * from './TabsExperimentalTest';
 export * from './consts';

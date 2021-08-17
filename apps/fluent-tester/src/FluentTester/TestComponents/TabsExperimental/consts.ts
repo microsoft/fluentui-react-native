@@ -1,2 +1,2 @@
-export const HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL = 'Homepage_Button_ButtonExperimental'; // Button on the homepage that navigates to the selected test page
-export const ExperimentalButtonTestPageId = 'ButtonExperimental_TestPage'; // A component on each specific test page.
+export const HOMEPAGE_TABS_BUTTONEXPERIMENTAL = 'Homepage_Tabs_Button';
+export const TABS_TESTPAGE = 'Tabs_TestPage';
