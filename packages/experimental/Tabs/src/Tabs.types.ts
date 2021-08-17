@@ -98,11 +98,11 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
 
 export interface TabsInfo {
   headersOnly?: boolean;
-  label?: boolean,
+  label?: boolean;
 }
 
 export interface TabsState {
-  props: TabsProps,
+  props: TabsProps;
   context?: TabsContextData;
   info: TabsInfo;
 }
@@ -110,7 +110,7 @@ export interface TabsSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
   label: TextProps;
   container: FocusZoneProps;
-  stack: ViewProps
+  stack: ViewProps;
   tabPanel: ViewProps;
 }
 

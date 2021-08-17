@@ -3,7 +3,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { tabsName, TabsType, TabsProps, TabsContextData } from './Tabs.types';
 import { Text } from '@fluentui-react-native/experimental-text';
-import { stylingSettings } from './TabsItem.styling';
+import { stylingSettings } from './Tabs.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 
@@ -32,8 +32,8 @@ export const Tabs = compose<TabsType>({
     root: View,
     label: Text,
     container: FocusZone,
-    stack: { slotType: View, filter: filterViewProps },
-    tabPanel: { slotType: View, filter: filterViewProps },
+    stack: View,
+    tabPanel: View,
   },
   render: (userProps: TabsProps, useSlots: UseSlots<TabsType>) => {
     const tabs = useTabs(userProps);
@@ -66,7 +66,7 @@ export const Tabs = compose<TabsType>({
           <Slots.root {...mergedProps}>
             {tabs.info.label && <Slots.label>{label}</Slots.label>}
             <Slots.container>
-              <Slots.stack>{children && children}</Slots.stack>
+              <Slots.stack>{children}</Slots.stack>
             </Slots.container>
             <Slots.tabPanel>
               <TabsContext.Consumer>{context => tabs.info.headersOnly && context.views.get(context.selectedKey)}</TabsContext.Consumer>
