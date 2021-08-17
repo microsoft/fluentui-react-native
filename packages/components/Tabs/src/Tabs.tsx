@@ -113,11 +113,20 @@ export const Tabs = compose<TabsType>({
       }
     };
 
+    if (Platform.OS == 'windows') {
+      const windowsSlotProps = mergeSettings<TabsSlotProps>(styleProps, {
+        root: { rest, ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: null, ...pressable.props}, // Add windows role when RN is at >= 0.64
+        label: { children: label },
+        stack: {focusable: true, ref: focusZoneRef, onKeyDown: onKeyDown}
+      });
+
+      return { windowsSlotProps, state };
+    }
+
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
-      root: { rest, ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: Platform.OS !== 'windows' ? 'tablist' : null, ...pressable.props}, // Add windows role when RN is at >= 0.64
+      root: { rest, ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist'},
       label: { children: label },
-      container: Platform.OS !== 'windows' ? { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef } : null,
-      stack: Platform.OS !== 'windows' ? null : {focusable: true, ref: focusZoneRef, onKeyDown: onKeyDown}
+      container:{ isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef },
     });
 
     return { slotProps, state };
