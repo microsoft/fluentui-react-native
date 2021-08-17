@@ -269,15 +269,16 @@ const customCallout: React.FunctionComponent = () => {
 
 const scrollviewCallout: React.FunctionComponent = () => {
   const [showStandardCallout, setShowStandardCallout] = React.useState(false);
+  const [isStandardCalloutVisible, setIsStandardCalloutVisible] = React.useState(false);
 
   const redTargetRef = React.useRef<View>(null);
+  const blueTargetRef = React.useRef<View>(null);
+  const greenTargetRef = React.useRef<View>(null);
+  const [anchorRef, setAnchorRef] = React.useState(redTargetRef);
+
   const toggleShowStandardCallout = React.useCallback(() => {
     setShowStandardCallout(!showStandardCallout);
   }, [showStandardCallout, setShowStandardCallout]);
-
-  const onDismissStandardCallout = React.useCallback(() => {
-    setShowStandardCallout(false);
-  }, [setShowStandardCallout]);
 
   const [scrollviewContents, setScrollviewContents] = React.useState([1, 2, 3]);
 
@@ -291,17 +292,39 @@ const scrollviewCallout: React.FunctionComponent = () => {
     setScrollviewContents(arr => [...arr, 1]);
   }, [setScrollviewContents, scrollviewContents]);
 
+  const toggleCalloutRef = React.useCallback(() => {
+    // Cycle the target ref between the RGB target views
+    setAnchorRef(anchorRef === redTargetRef ? greenTargetRef : anchorRef === greenTargetRef ? blueTargetRef : redTargetRef);
+  }, [anchorRef, setAnchorRef]);
+
+  const onShowStandardCallout = React.useCallback(() => {
+    setIsStandardCalloutVisible(true);
+  }, [setIsStandardCalloutVisible]);
+
+  const onDismissStandardCallout = React.useCallback(() => {
+    setIsStandardCalloutVisible(false);
+    setShowStandardCallout(false);
+  }, [setIsStandardCalloutVisible, setShowStandardCallout]);
+
   return (
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
         <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
           <Button content="Press for Callout" onClick={toggleShowStandardCallout} />
+          <Text>
+            <Text>Visibility: </Text>
+            {isStandardCalloutVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
+          </Text>
         </View>
 
         <Separator vertical />
 
         <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
+          <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
           <View ref={redTargetRef} style={{ height: 20, width: 20, backgroundColor: 'red', padding: 5 }} />
+          <View ref={greenTargetRef} style={{ height: 20, width: 20, backgroundColor: 'green', padding: 5 }} />
+          <View ref={blueTargetRef} style={{ height: 20, width: 20, backgroundColor: 'blue', padding: 5 }} />
+        </View>
         </View>
       </View>
 
@@ -310,13 +333,15 @@ const scrollviewCallout: React.FunctionComponent = () => {
       {showStandardCallout && (
         <Callout
           {...{
-            target: redTargetRef,
+            target: anchorRef,
             onDismiss: onDismissStandardCallout,
             accessibilityLabel: 'ScrollView Callout',
+            onShow: onShowStandardCallout,
           }}
         >
           <View style={fluentTesterStyles.testList}>
             <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} showsVerticalScrollIndicator={true}>
+              <StealthButton content="click to change anchor" onClick={toggleCalloutRef} />
               <StealthButton content="Click to add a button" style={fluentTesterStyles.testListItem} onClick={addButton} />
               <StealthButton content="Click to remove a button" style={fluentTesterStyles.testListItem} onClick={removeButton} />
               {scrollviewContents.map((value) => {
