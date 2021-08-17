@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "MSF -> FRN for most objective C prefixes",
-  "packageName": "@fluentui-react-native/menu-button",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

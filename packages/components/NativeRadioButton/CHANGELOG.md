@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/native-radio-button
 
-This log was last generated on Fri, 13 Aug 2021 16:12:26 GMT and should not be manually modified.
+This log was last generated on Tue, 17 Aug 2021 20:02:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.12
+
+Tue, 17 Aug 2021 20:02:00 GMT
+
+### Patches
+
+- MSF -> FRN for most objective C prefixes (sanajmi@microsoft.com)
 
 ## 0.1.11
 
