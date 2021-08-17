@@ -118,11 +118,11 @@ import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
 import { createDefaultTheme } from '@fluentui-react-native/default-theme';
 
 const theme = new ThemeReference(createDefaultTheme(),
-  () => { return {{colors: {buttonBackground: 'red'}}}}, // overrides the buttonBackground color token, all other colors are kept in tact
+  () => { return {{ colors: { buttonBackground: 'red' }}}}, // overrides the buttonBackground color token, all other colors are kept in tact
   (theme) => {
     return {
-      {colors: {neutralBackground1: theme.colors.buttonBackground}}, // use information from theme to fill out other fields
-      {spacing: s1: '10px'}
+      { colors: { neutralBackground1: theme.colors.buttonBackground }}, // This is now red, because theme has previous recipe applied
+      { spacing: s1: '10px' }
     }},
   // other recipes
 );
