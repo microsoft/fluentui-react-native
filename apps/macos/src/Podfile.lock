@@ -18,7 +18,7 @@ PODS:
     - React
   - FRNMenuButton (0.4.11):
     - React
-  - FRNRadio-Button (0.1.11):
+  - FRNRadioButton (0.1.11):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.3.0):
@@ -338,7 +338,7 @@ DEPENDENCIES:
   - FRNAvatar (from `../../../packages/experimental/Avatar/FRNAvatar.podspec`)
   - FRNButton (from `../../../packages/experimental/NativeButton/FRNButton.podspec`)
   - FRNMenuButton (from `../../../packages/components/MenuButton/FRNMenuButton.podspec`)
-  - FRNRadio-Button (from `../../../packages/components/NativeRadioButton/FRNRadioButton.podspec`)
+  - FRNRadioButton (from `../../../packages/components/NativeRadioButton/FRNRadioButton.podspec`)
   - glog (from `../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
   - RCT-Folly (from `../../../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
   - RCTFocusZone (from `../../../packages/components/FocusZone/RCTFocusZone.podspec`)
@@ -391,7 +391,7 @@ EXTERNAL SOURCES:
     :path: "../../../packages/experimental/NativeButton/FRNButton.podspec"
   FRNMenuButton:
     :path: "../../../packages/components/MenuButton/FRNMenuButton.podspec"
-  FRNRadio-Button:
+  FRNRadioButton:
     :path: "../../../packages/components/NativeRadioButton/FRNRadioButton.podspec"
   glog:
     :podspec: "../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec"
@@ -458,7 +458,7 @@ SPEC CHECKSUMS:
   FRNAvatar: b2477748ea17a77744a7dec855a73b2c84f22771
   FRNButton: aec4eca5f1a963042cdb472bf04881f39191934d
   FRNMenuButton: fdbc0ca942ff55d8127373e36a3791bede248c77
-  FRNRadio-Button: 000006fcbc93c1be22e1962573c974a648a9a9d6
+  FRNRadioButton: 5fdc2e6f98250fe3e595bad5e919fe7d953711be
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
@@ -490,6 +490,6 @@ SPEC CHECKSUMS:
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Yoga: 77d9987384e26b4aaf3e7a01808838cc2d4304f2
 
-PODFILE CHECKSUM: 37dda8abd4c84943e427a46849ba60e694be51ec
+PODFILE CHECKSUM: 53626981ab7ada684169fcd58047cf38bc63db19
 
 COCOAPODS: 1.10.2
