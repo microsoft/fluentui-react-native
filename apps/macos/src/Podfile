@@ -24,11 +24,11 @@ use_test_app! do |target|
   target.app do
     platform :osx, '10.14'
 
-    pod 'FluentUI-ReactNative-Avatar', :path => '../../../packages/experimental/Avatar/FRNAvatar.podspec'
-    pod 'FluentUI-ReactNative-Button', :path => '../../../packages/experimental/NativeButton/FRNButton.podspec'
-    pod 'FluentUI-ReactNative-FocusZone', :path => '../../../packages/components/FocusZone/RCTFocusZone.podspec'
-    pod 'FluentUI-ReactNative-MenuButton', :path => '../../../packages/components/MenuButton/FRNMenuButton.podspec'
-    pod 'FluentUI-ReactNative-Radio-Button', :path => '../../../packages/components/NativeRadioButton/FRNRadioButton.podspec'
+    pod 'FRNAvatar', :path => '../../../packages/experimental/Avatar/FRNAvatar.podspec'
+    pod 'FRNButton', :path => '../../../packages/experimental/NativeButton/FRNButton.podspec'
+    pod 'FRNMenuButton', :path => '../../../packages/components/MenuButton/FRNMenuButton.podspec'
+    pod 'FRNRadio-Button', :path => '../../../packages/components/NativeRadioButton/FRNRadioButton.podspec'
+    pod 'RCTFocusZone', :path => '../../../packages/components/FocusZone/RCTFocusZone.podspec'
     pod 'RNCPicker', :path => '../../../node_modules/@react-native-picker/picker'
     pod 'RNSVG', :path => '../../../node_modules/react-native-svg'
 

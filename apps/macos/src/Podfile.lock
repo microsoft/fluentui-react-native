@@ -9,18 +9,16 @@ PODS:
     - React-Core (= 0.63.37)
     - React-jsi (= 0.63.37)
     - ReactCommon/turbomodule/core (= 0.63.37)
-  - FluentUI-ReactNative-Avatar (0.11.8):
+  - FRNAvatar (0.11.8):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
-  - FluentUI-ReactNative-Button (0.7.11):
+  - FRNButton (0.7.11):
     - MicrosoftFluentUI (= 0.3.0)
     - React
-  - FluentUI-ReactNative-FocusZone (0.7.10):
+  - FRNMenuButton (0.4.11):
     - React
-  - FluentUI-ReactNative-MenuButton (0.4.11):
-    - React
-  - FluentUI-ReactNative-Radio-Button (0.1.11):
+  - FRNRadio-Button (0.1.11):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.3.0):
@@ -95,6 +93,8 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
+  - RCTFocusZone (0.7.10):
+    - React
   - RCTRequired (0.63.37)
   - RCTTypeSafety (0.63.37):
     - FBLazyVector (= 0.63.37)
@@ -335,13 +335,13 @@ DEPENDENCIES:
   - DoubleConversion (from `../../../node_modules/react-native-macos/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../../../node_modules/react-native-macos/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec`)
-  - FluentUI-ReactNative-Avatar (from `../../../packages/experimental/Avatar/FRNAvatar.podspec`)
-  - FluentUI-ReactNative-Button (from `../../../packages/experimental/NativeButton/FRNButton.podspec`)
-  - FluentUI-ReactNative-FocusZone (from `../../../packages/components/FocusZone/RCTFocusZone.podspec`)
-  - FluentUI-ReactNative-MenuButton (from `../../../packages/components/MenuButton/FRNMenuButton.podspec`)
-  - FluentUI-ReactNative-Radio-Button (from `../../../packages/components/NativeRadioButton/FRNRadioButton.podspec`)
+  - FRNAvatar (from `../../../packages/experimental/Avatar/FRNAvatar.podspec`)
+  - FRNButton (from `../../../packages/experimental/NativeButton/FRNButton.podspec`)
+  - FRNMenuButton (from `../../../packages/components/MenuButton/FRNMenuButton.podspec`)
+  - FRNRadio-Button (from `../../../packages/components/NativeRadioButton/FRNRadioButton.podspec`)
   - glog (from `../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
   - RCT-Folly (from `../../../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec`)
+  - RCTFocusZone (from `../../../packages/components/FocusZone/RCTFocusZone.podspec`)
   - RCTRequired (from `../../../node_modules/react-native-macos/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../../../node_modules/react-native-macos/Libraries/TypeSafety`)
   - React (from `../../../node_modules/react-native-macos/`)
@@ -385,20 +385,20 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-macos/Libraries/FBLazyVector"
   FBReactNativeSpec:
     :path: "../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec"
-  FluentUI-ReactNative-Avatar:
+  FRNAvatar:
     :path: "../../../packages/experimental/Avatar/FRNAvatar.podspec"
-  FluentUI-ReactNative-Button:
+  FRNButton:
     :path: "../../../packages/experimental/NativeButton/FRNButton.podspec"
-  FluentUI-ReactNative-FocusZone:
-    :path: "../../../packages/components/FocusZone/RCTFocusZone.podspec"
-  FluentUI-ReactNative-MenuButton:
+  FRNMenuButton:
     :path: "../../../packages/components/MenuButton/FRNMenuButton.podspec"
-  FluentUI-ReactNative-Radio-Button:
+  FRNRadio-Button:
     :path: "../../../packages/components/NativeRadioButton/FRNRadioButton.podspec"
   glog:
     :podspec: "../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec"
   RCT-Folly:
     :podspec: "../../../node_modules/react-native-macos/third-party-podspecs/RCT-Folly.podspec"
+  RCTFocusZone:
+    :path: "../../../packages/components/FocusZone/RCTFocusZone.podspec"
   RCTRequired:
     :path: "../../../node_modules/react-native-macos/Libraries/RCTRequired"
   RCTTypeSafety:
@@ -455,14 +455,14 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 9d69690b3a1ca272ca0c0cee76ffcb6cf36d77af
   FBReactNativeSpec: 8b671febd2393669947b56e8d8f53a54185dd0b7
-  FluentUI-ReactNative-Avatar: 57427f234f26681df0e5c0b49540d846542f8a5b
-  FluentUI-ReactNative-Button: f0dbe541cf0a0adc5a454d6522f345259021a6a2
-  FluentUI-ReactNative-FocusZone: 89de65651d69c7917ae117beac55aaf509001e83
-  FluentUI-ReactNative-MenuButton: 0ebe3960d69bb5ba98de07c896e2f92ba49ed73c
-  FluentUI-ReactNative-Radio-Button: 52f0333ba0808dc65ddfd9ea9a13eca4a2ec1410
+  FRNAvatar: b2477748ea17a77744a7dec855a73b2c84f22771
+  FRNButton: aec4eca5f1a963042cdb472bf04881f39191934d
+  FRNMenuButton: fdbc0ca942ff55d8127373e36a3791bede248c77
+  FRNRadio-Button: 000006fcbc93c1be22e1962573c974a648a9a9d6
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
+  RCTFocusZone: 34c83a64bed384d4e025a65eae0eaa1be0ee55f5
   RCTRequired: 34869e88152b553afc0c7bde31b7b95f626ae367
   RCTTypeSafety: a7e07dddefa291537fa86c996b19bbbeda9db88e
   React: 4b1d4533300d5ffecadd5966efad43aae87d0dcb
@@ -490,6 +490,6 @@ SPEC CHECKSUMS:
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Yoga: 77d9987384e26b4aaf3e7a01808838cc2d4304f2
 
-PODFILE CHECKSUM: c7306d441040871900c8ba0a207392cb44c33ba4
+PODFILE CHECKSUM: 37dda8abd4c84943e427a46849ba60e694be51ec
 
 COCOAPODS: 1.10.2
