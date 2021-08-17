@@ -49,16 +49,22 @@ const tabsCountIcon: React.FunctionComponent = () => {
     viewBox: '0 0 500 500',
   };
 
+  const svgExample = {
+    svgSource: svgProps,
+    width: 20,
+    height: 20,
+  };
+
   return (
     <View style={stackStyle}>
       <Tabs label="Tabs">
-        <TabsItem headerText="Home" itemKey="A" icon={{ svgSource: svgProps, width: 20, height: 20, style: { margin: 5 } }} itemCount={23}>
+        <TabsItem headerText="Home" itemKey="A" icon={svgExample} itemCount={23}>
           <Text>Tabs #1</Text>
         </TabsItem>
-        <TabsItem itemKey="B" icon={{ svgSource: svgProps, width: 20, height: 20 }} itemCount={0}>
+        <TabsItem itemKey="B" icon={svgExample} itemCount={0}>
           <Text>Tabs #2</Text>
         </TabsItem>
-        <TabsItem itemKey="C" icon={{ svgSource: svgProps, width: 20, height: 20 }}>
+        <TabsItem itemKey="C" icon={svgExample}>
           <Text>Tabs #3</Text>
         </TabsItem>
       </Tabs>
