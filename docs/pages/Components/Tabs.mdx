@@ -1,0 +1,58 @@
+# Tabs
+
+## Purpose
+
+The Tabs control and related tabs pattern are used for navigating frequently accessed, distinct content categories. Tabs allow for navigation between two or more content views and relies on text headers to articulate the different sections of content.
+Selecting a tab item header navigates to that header's section content.
+
+## Do's:
+
+- Use on content-heavy views that require a significant amount of scrolling to access the various sections.
+- Be concise on the navigation labels, ideally one or two words rather than a phrase.
+- Make sure all the children of the Tabs component are of type TabItem.
+
+## Don't:
+
+- Use when the options are numbers that have fixed steps, like 10, 20, 30. Use a slider component instead.
+- Use if there are more than 7 options, use a Dropdown instead.
+- Nest with other RadioGroup or Checkboxes. If possible, keep all the options at the same level.
+- Use on Views which don’t scroll.
+- Use the Tabs to access a different global view.
+- Use the Tabs to access hidden content.
+- Pass any children of type other than TabItem to the Tabs component.
+
+## Sample Code:
+
+```jsx
+<Tabs>
+  <TabsItem headerText="Home" itemKey="A">
+    <Text>Tabs #1</Text>
+  </TabsItem>
+  <TabsItem headerText="Files" itemKey="B">
+    <Text>Tabs #2</Text>
+  </TabsItem>
+  <TabsItem headerText="Settings" itemKey="C">
+    <Text>Tabs #3</Text>
+  </TabsItem>
+</Tabs>
+```
+
+## Tokens:
+
+Tabs supports the following tokens:
+
+1.  variant – This sets the styling of Tabs to a specific configuration.
+2.  color – This changes the text color of the label associated with Tabs.
+3.  fontWeight – Changes the font weight of the label associated with Tabs.
+4.  fontSize – Changes the font size of the label associated with Tabs.
+
+TabsItem supports the following tokens:
+
+1.  variant – This sets the styling of the TabsItem to a specific configuration.
+2.  color – This changes the text color of the header associated with the TabsItem.
+3.  fontWeight – Changes the font weight of the header associated with the TabsItem.
+4.  fontSize – Changes the font size of the header associated with the TabsItem.
+5.  borderWidth – This changes the border width of the TabsItem.
+6.  borderColor – This changes the border color of the TabsItem.
+7.  borderRadius – This changes the border radius of the TabsItem.
+8.  indicatorColor – This changes the color of the TabsItem's selected indicator.
