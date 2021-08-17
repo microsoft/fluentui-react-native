@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Adding callout+Scrollview to callout test page",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
