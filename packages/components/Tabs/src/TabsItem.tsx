@@ -67,7 +67,7 @@ export const TabsItem = compose<TabsItemType>({
       info: {
         ...pressable.state,
         selected: info.selectedKey === userProps.itemKey,
-        icon: !!icon && Platform.OS !== 'windows', // Icons on backlog for windows
+        icon: !!icon && Platform.OS !== 'windows', // Icons are on backlog for windows
         key: itemKey,
         headerText: !!headerText || itemCount !== undefined,
       },
