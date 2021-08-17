@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/persona
 
-This log was last generated on Mon, 09 Aug 2021 19:16:08 GMT and should not be manually modified.
+This log was last generated on Fri, 13 Aug 2021 16:12:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.8
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.11.7
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.7 (ruaraki@microsoft.com)
+
+## 0.11.6
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/persona-coin to v0.9.6 (ruaraki@microsoft.com)
+
+## 0.11.5
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.5 (ruaraki@microsoft.com)
 
 ## 0.11.4
 

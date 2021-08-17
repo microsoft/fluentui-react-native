@@ -1,8 +1,56 @@
 # Change Log - @fluentui-react-native/experimental-native-button
 
-This log was last generated on Mon, 09 Aug 2021 19:16:08 GMT and should not be manually modified.
+This log was last generated on Tue, 17 Aug 2021 20:02:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.12
+
+Tue, 17 Aug 2021 20:02:00 GMT
+
+### Patches
+
+- MSF -> FRN for most objective C prefixes (sanajmi@microsoft.com)
+
+## 0.7.11
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.7.10
+
+Fri, 13 Aug 2021 09:05:57 GMT
+
+### Patches
+
+- Update apple native code and build flags (sanajmi@microsoft.com)
+
+## 0.7.9
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.9 (ruaraki@microsoft.com)
+
+## 0.7.8
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.8 (ruaraki@microsoft.com)
+
+## 0.7.7
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.7 (ruaraki@microsoft.com)
 
 ## 0.7.6
 

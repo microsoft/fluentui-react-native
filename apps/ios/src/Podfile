@@ -24,9 +24,9 @@ use_test_app! do |target|
   target.app do
     platform :ios, '13.0'
 
-    pod 'FluentUI-React-Native-Avatar', :path => '../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec'
-    pod 'FluentUI-React-Native-Button', :path => '../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec'
-    pod 'FluentUI-React-Native-Date-Picker', :path => '../../../packages/experimental/NativeDatePicker/FluentUIReactNativeDatePicker.podspec'
+    pod 'FRNAvatar', :path => '../../../packages/experimental/Avatar/FRNAvatar.podspec'
+    pod 'FRNButton', :path => '../../../packages/experimental/NativeButton/FRNButton.podspec'
+    pod 'FRNDatePicker', :path => '../../../packages/experimental/NativeDatePicker/FRNDatePicker.podspec'
     pod 'react-native-menu', :path => '../../../node_modules/@react-native-menu/menu'
     pod 'RNSVG', :path => '../../../node_modules/react-native-svg'
     pod 'react-native-slider', :path => '../../../node_modules/@react-native-community/slider'

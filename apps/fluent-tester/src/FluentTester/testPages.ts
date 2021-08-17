@@ -21,6 +21,7 @@ import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestCompon
 import { ActivityIndicatorTest, HOMEPAGE_ACTIVITYINDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
 import { MenuButtonTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/MenuButton';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
+import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
 
 export const tests: TestDescription[] = [
   {
@@ -132,5 +133,10 @@ export const tests: TestDescription[] = [
     name: 'Tokens Test',
     component: TokenTest,
     testPage: HOMEPAGE_TOKEN_BUTTON,
+  },
+  {
+    name: 'Expander Test',
+    component: ExpanderTest,
+    testPage: HOMEPAGE_EXPANDER_BUTTON,
   },
 ];

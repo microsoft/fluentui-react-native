@@ -1,8 +1,59 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Mon, 09 Aug 2021 19:16:08 GMT and should not be manually modified.
+This log was last generated on Fri, 13 Aug 2021 16:12:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.1
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.11.0
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Minor changes
+
+- rename an alias token to avoid name clash (ruaraki@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.11.0 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme to v0.5.14 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.7.10 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theming-utils to v0.5.0 (ruaraki@microsoft.com)
+
+## 0.10.0
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Minor changes
+
+- Add missing tokens (ruaraki@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.9 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theming-utils to v0.4.0 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.10.0 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme to v0.5.13 (ruaraki@microsoft.com)
+
+## 0.9.0
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Minor changes
+
+- Map palette to alias tokens (ruaraki@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/theming-utils to v0.3.8 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.7.8 (ruaraki@microsoft.com)
 
 ## 0.8.3
 
