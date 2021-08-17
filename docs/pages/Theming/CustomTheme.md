@@ -114,9 +114,23 @@ We have a concept of `ThemeRecipes` which allow for layering of partial theme ob
 You can extend one of our default themes by creating a `ThemeReference` using the default theme as the base theme, and then your customization as a `ThemeRecipe`:
 
 ```ts
+import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
+import { createDefaultTheme } from '@fluentui-react-native/default-theme';
+
 const theme = new ThemeReference(createDefaultTheme(),
-  (theme) => { return {{colors: {buttonBackground: 'red'}}}} // overrides the buttonBackground color token, all other colors are kept in tact
+  () => { return {{colors: {buttonBackground: 'red'}}}}, // overrides the buttonBackground color token, all other colors are kept in tact
+  (theme) => {
+    return {
+      {colors: {neutralBackground1: theme.colors.buttonBackground}}, // use information from theme to fill out other fields
+      {spacing: s1: '10px'}
+    }},
+  // other recipes
 );
+
+// Use created theme reference in ThemeProvider
+<ThemeProvider theme={theme}>
+  <App />
+</ThemeProvider>
 ```
 
 A good example from our repo is [the Office theme](https://github.com/microsoft/fluentui-react-native/blob/master/packages/theming/win32-theme/src/createOfficeTheme.ts).
