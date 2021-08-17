@@ -141,17 +141,15 @@ export const Tabs = compose<TabsType>({
           return child.props.itemKey;
         }
       });
-      if (Platform.OS === 'windows') {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore - TODO, fix typing error
-        renderData.state.context.enabledKeys = React.Children.map(children, (child: React.ReactChild) => {
-          if (React.isValidElement(child)) {
-            if (!child.props.disabled) {
-              return child.props.itemKey;
-            }
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore - TODO, fix typing error
+      renderData.state.context.enabledKeys = React.Children.map(children, (child: React.ReactChild) => {
+        if (React.isValidElement(child)) {
+          if (!child.props.disabled) {
+            return child.props.itemKey;
           }
-        });
-      }
+        }
+      });
     }
 
     return (

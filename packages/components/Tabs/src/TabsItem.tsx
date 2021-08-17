@@ -149,7 +149,7 @@ export const TabsItem = compose<TabsItemType>({
   styles: {
     root: [backgroundColorTokens, borderTokens],
     stack: [],
-    icon: Platform.OS !== 'windows' ? [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }] : null,
+    icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
     content: [textTokens, foregroundColorTokens],
     indicator: [{ source: 'indicatorColor', lookup: getPaletteFromTheme, target: 'backgroundColor' }],
   },
