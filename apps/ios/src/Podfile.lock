@@ -9,14 +9,14 @@ PODS:
     - React-Core (= 0.63.4)
     - React-jsi (= 0.63.4)
     - ReactCommon/turbomodule/core (= 0.63.4)
-  - FluentUI-React-Native-Avatar (0.11.6):
+  - FluentUI-ReactNative-Avatar (0.11.8):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
-  - FluentUI-React-Native-Button (0.7.9):
+  - FluentUI-ReactNative-Button (0.7.11):
     - MicrosoftFluentUI (= 0.3.0)
     - React
-  - FluentUI-React-Native-Date-Picker (0.3.2):
+  - FluentUI-ReactNative-Date-Picker (0.3.3):
     - MicrosoftFluentUI (= 0.3.0)
     - React
   - Folly (2020.01.13.00):
@@ -426,9 +426,9 @@ DEPENDENCIES:
   - DoubleConversion (from `../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../../../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native/Libraries/FBReactNativeSpec`)
-  - FluentUI-React-Native-Avatar (from `../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec`)
-  - FluentUI-React-Native-Button (from `../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec`)
-  - FluentUI-React-Native-Date-Picker (from `../../../packages/experimental/NativeDatePicker/FluentUIReactNativeDatePicker.podspec`)
+  - FluentUI-ReactNative-Avatar (from `../../../packages/experimental/Avatar/FRNAvatar.podspec`)
+  - FluentUI-ReactNative-Button (from `../../../packages/experimental/NativeButton/FRNButton.podspec`)
+  - FluentUI-ReactNative-Date-Picker (from `../../../packages/experimental/NativeDatePicker/FRNDatePicker.podspec`)
   - Folly (from `../../../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - QRCodeReader.swift
@@ -476,12 +476,12 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/Libraries/FBLazyVector"
   FBReactNativeSpec:
     :path: "../../../node_modules/react-native/Libraries/FBReactNativeSpec"
-  FluentUI-React-Native-Avatar:
-    :path: "../../../packages/experimental/Avatar/FluentUIReactNativeAvatar.podspec"
-  FluentUI-React-Native-Button:
-    :path: "../../../packages/experimental/NativeButton/FluentUIReactNativeButton.podspec"
-  FluentUI-React-Native-Date-Picker:
-    :path: "../../../packages/experimental/NativeDatePicker/FluentUIReactNativeDatePicker.podspec"
+  FluentUI-ReactNative-Avatar:
+    :path: "../../../packages/experimental/Avatar/FRNAvatar.podspec"
+  FluentUI-ReactNative-Button:
+    :path: "../../../packages/experimental/NativeButton/FRNButton.podspec"
+  FluentUI-ReactNative-Date-Picker:
+    :path: "../../../packages/experimental/NativeDatePicker/FRNDatePicker.podspec"
   Folly:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:
@@ -544,9 +544,9 @@ SPEC CHECKSUMS:
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
-  FluentUI-React-Native-Avatar: 0b3a0c223c23b0e969044e7e655f18df456619c1
-  FluentUI-React-Native-Button: 2884887e9f2f2ff0f74321ea4200f469b22c2600
-  FluentUI-React-Native-Date-Picker: e860bff4bf7c6bc69447e36382d836cd70c5500e
+  FluentUI-ReactNative-Avatar: 57427f234f26681df0e5c0b49540d846542f8a5b
+  FluentUI-ReactNative-Button: f0dbe541cf0a0adc5a454d6522f345259021a6a2
+  FluentUI-ReactNative-Date-Picker: f8212ad5404f078437dbf42b8e051324262ae7e8
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
@@ -579,6 +579,6 @@ SPEC CHECKSUMS:
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: 31571d5ec37b56ac776b1881c6312a1cb1860de1
+PODFILE CHECKSUM: bb129074df214989cb15b25dc484463ba277cfab
 
 COCOAPODS: 1.10.2

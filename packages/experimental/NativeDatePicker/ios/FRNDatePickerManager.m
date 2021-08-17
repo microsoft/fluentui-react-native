@@ -5,7 +5,7 @@
 
 @import FluentUI;
 
-static NSDictionary<NSString *, NSDictionary<NSString *, NSNumber *> *> *MSFDatePickerGetEnumMaps() {
+static NSDictionary<NSString *, NSDictionary<NSString *, NSNumber *> *> *FRNDatePickerGetEnumMaps() {
     return @{
         @"MSFDateTimePickerMode": @{
                 @"date": @(MSFDateTimePickerModeDate),
@@ -24,7 +24,7 @@ static NSDictionary<NSString *, NSDictionary<NSString *, NSNumber *> *> *MSFDate
     };
 }
 
-@implementation RCTConvert (MSFDatePickerAdditions)
+@implementation RCTConvert (FRNDatePickerAdditions)
 
 RCT_ENUM_CONVERTER(MSFDateTimePickerMode,
                    MSFDatePickerGetEnumMaps()[@"MSFDateTimePickerMode"],
@@ -41,11 +41,11 @@ RCT_ENUM_CONVERTER(MSFDateTimePickerDateRangePresentation,
 
 @end
 
-@interface RCT_EXTERN_MODULE(MSFDatePickerManager, NSObject)
+@interface RCT_EXTERN_MODULE(FRNDatePickerManager, NSObject)
 
 - (NSDictionary *)constantsToExport
 {
-    return MSFDatePickerGetEnumMaps();
+    return FRNDatePickerGetEnumMaps();
 }
 
 RCT_EXTERN_METHOD(presentWithMode:(MSFDateTimePickerMode)mode

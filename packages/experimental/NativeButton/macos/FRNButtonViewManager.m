@@ -4,7 +4,7 @@
 
 @import FluentUI;
 
-@implementation RCTConvert (MSFButtonAdditions)
+@implementation RCTConvert (FRNButtonAdditions)
 RCT_ENUM_CONVERTER(MSFButtonStyle, (@{
 	@"primary": @(MSFButtonStylePrimary),
 	@"secondary": @(MSFButtonStyleSecondary),
@@ -14,7 +14,7 @@ RCT_ENUM_CONVERTER(MSFButtonStyle, (@{
 
 @end
 
-@interface RCT_EXTERN_MODULE(MSFButtonViewManager, RCTViewManager)
+@interface RCT_EXTERN_MODULE(FRNButtonViewManager, RCTViewManager)
 
 RCT_EXPORT_VIEW_PROPERTY(title, NSString);
 RCT_EXPORT_VIEW_PROPERTY(image, UIImage);

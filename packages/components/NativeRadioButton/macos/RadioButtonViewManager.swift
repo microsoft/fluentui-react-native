@@ -1,6 +1,6 @@
 import Foundation
 
-@objc(RadioButtonViewManager)
+@objc(FRNRadioButtonViewManager)
 class RadioButtonViewManager: RCTViewManager {
 
 	override func view()->NSView! {
@@ -9,7 +9,7 @@ class RadioButtonViewManager: RCTViewManager {
 		radioButton.target = radioButton
 		return radioButton
 	}
-	
+
 	override class func requiresMainQueueSetup() -> Bool {
 		return true
 	}

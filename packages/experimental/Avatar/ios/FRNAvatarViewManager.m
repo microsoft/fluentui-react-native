@@ -28,7 +28,7 @@ RCT_REMAP_VIEW_PROPERTY(name, __custom__, type)  \
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation RCTConvert (MSFAvatarAdditions)
+@implementation RCTConvert (FRNAvatarAdditions)
 
 RCT_ENUM_CONVERTER(MSFAvatarSize, (@{
     @"xSmall": @(MSFAvatarSizeXsmall),

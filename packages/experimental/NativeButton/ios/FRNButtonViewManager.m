@@ -4,7 +4,7 @@
 
 @import FluentUI;
 
-@implementation RCTConvert (MSFButtonAdditions)
+@implementation RCTConvert (FRNButtonAdditions)
 RCT_ENUM_CONVERTER(MSFButtonStyle, (@{
   @"primary": @(MSFButtonStylePrimaryFilled),
   @"secondary": @(MSFButtonStyleSecondaryOutline),
@@ -14,7 +14,7 @@ RCT_ENUM_CONVERTER(MSFButtonStyle, (@{
 
 @end
 
-@interface RCT_EXTERN_MODULE(MSFButtonViewManager, RCTViewManager)
+@interface RCT_EXTERN_MODULE(FRNButtonViewManager, RCTViewManager)
 
 RCT_EXPORT_VIEW_PROPERTY(image, UIImage);
 RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock);
