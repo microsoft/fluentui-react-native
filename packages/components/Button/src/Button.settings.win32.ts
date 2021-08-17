@@ -22,14 +22,12 @@ export const settings: IComposeSettings<IButtonType> = [
         alignSelf: 'flex-start',
       },
     } as IViewProps,
-    trailingIcon: {
-      color: 'neutralForeground1',
+    endIcon: {
       style: {
         marginStart: 2
       }
     },
     icon: {
-      color: 'neutralForeground1',
       style: {
         marginEnd: 2
       }

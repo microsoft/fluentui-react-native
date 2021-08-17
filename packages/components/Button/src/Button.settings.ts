@@ -22,12 +22,27 @@ export const settings: IComposeSettings<IButtonType> = [
         alignSelf: 'flex-start',
       },
     } as IViewProps,
-    icon: {},
+    endIcon: {
+      style: {
+        marginStart: 2
+      }
+    },
+    icon: {
+      style: {
+        marginEnd: 2
+      }
+    },
+    content: {
+      style: {
+        marginStart: 2,
+        marginEnd: 2
+      }
+    },
     stack: {
       style: {
         display: 'flex',
-        paddingStart: 8,
-        paddingEnd: 8,
+        paddingStart: 6,
+        paddingEnd: 6,
         alignItems: 'center',
         flexDirection: 'row',
         alignSelf: 'flex-start',

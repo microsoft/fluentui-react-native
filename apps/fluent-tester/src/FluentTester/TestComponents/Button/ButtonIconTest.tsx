@@ -44,7 +44,7 @@ export const ButtonIconTest: React.FunctionComponent = () => {
         <Text>Right Button icon</Text>
         {svgIconsEnabled ? (
           <CustomizedIconButton
-            trailingIcon={{ svgSource: svgProps, width: 20, height: 20 }}
+            endIcon={{ svgSource: svgProps, width: 20, height: 20 }}
             content="Button with Right Icon"
             tooltip="button tooltip"
           />

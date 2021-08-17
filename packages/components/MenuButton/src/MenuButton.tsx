@@ -60,7 +60,6 @@ export const MenuButton = compose<MenuButtonType>({
     const state: MenuButtonState = {
       context: {
         showContextualMenu: !!showContextualMenu,
-        primary: !!primary
       },
     };
 
@@ -80,11 +79,13 @@ export const MenuButton = compose<MenuButtonType>({
       componentRef: stdBtnRef,
       onClick: toggleShowContextualMenu,
       dropdown: true,
-      trailingIcon: chevronIconProps
+      endIcon: chevronIconProps
     };
 
     const slotProps = mergeSettings<MenuButtonSlotProps>(styleProps, {
-      root: {},
+      root: {
+        primary: !!primary
+      },
       button: buttonProps,
       primaryButton: buttonProps,
       contextualMenu: {
@@ -118,11 +119,12 @@ export const MenuButton = compose<MenuButtonType>({
     }
     const context = renderData.state!.context;
     const menuItems = renderData.slotProps!.contextualMenuItems?.menuItems || [];
+    const primary = renderData.slotProps!.root?.primary;
 
     return (
       <Slots.root>
         {
-          context.primary ?
+          primary ?
           <Slots.primaryButton /> : <Slots.button />
         }
         {context.showContextualMenu && (

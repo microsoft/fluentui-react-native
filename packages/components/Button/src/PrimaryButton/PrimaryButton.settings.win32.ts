@@ -9,7 +9,7 @@ export const settings: IComposeSettings<IButtonType> = [
       borderColor: 'brandBackground',
     },
     // TODO: neutralForegroundInverted is not working for icon color.
-    trailingIcon: {
+    endIcon: {
       color: '#fff',
     },
     icon: {

@@ -28,9 +28,9 @@ export interface IButtonInfo extends IPressableState {
    */
   content?: boolean;
   /**
-   * Trailing icon.
+   * End icon.
    */
-   trailingIcon?: boolean;
+   endIcon?: boolean;
 }
 
 /*
@@ -89,7 +89,7 @@ export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBack
    * Source URL or name of the icon to show on the Button.
    */
   icon?: IconSourcesType;
-  trailingIcon?: IconSourcesType;
+  endIcon?: IconSourcesType;
 }
 
 export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
@@ -113,7 +113,7 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
 
   testID?: string;
   tooltip?: string;
-  trailingIcon?: IconSourcesType;
+  endIcon?: IconSourcesType;
 }
 
 export interface IButtonSlotProps {
@@ -122,7 +122,7 @@ export interface IButtonSlotProps {
   stack: ViewProps;
   icon: IconProps;
   content: ITextProps;
-  trailingIcon: IconProps;
+  endIcon: IconProps;
 }
 
 export type IButtonRenderData = IRenderData<IButtonSlotProps, IButtonState>;

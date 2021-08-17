@@ -25,7 +25,7 @@ export const Button = compose<IButtonType>({
     const defaultComponentRef = React.useRef(null);
     const {
       icon,
-      trailingIcon,
+      endIcon,
       content,
       onAccessibilityTap = userProps.onClick,
       accessibilityLabel = userProps.content,
@@ -47,7 +47,7 @@ export const Button = compose<IButtonType>({
         disabled: !!userProps.disabled,
         content: !!content,
         icon: !!icon,
-        trailingIcon: !!userProps.trailingIcon,
+        endIcon: !!userProps.endIcon,
       },
     };
 
@@ -67,7 +67,7 @@ export const Button = compose<IButtonType>({
       },
       content: { children: content, testID: testID },
       icon: createIconProps(icon),
-      trailingIcon: createIconProps(trailingIcon),
+      endIcon: createIconProps(endIcon),
     });
 
     return { slotProps, state };
@@ -82,7 +82,7 @@ export const Button = compose<IButtonType>({
           {info.icon && <Slots.icon />}
           {info.content && <Slots.content />}
           {children}
-          {info.trailingIcon && <Slots.trailingIcon />}
+          {info.endIcon && <Slots.endIcon />}
         </Slots.stack>
       </Slots.root>
     );
@@ -92,14 +92,14 @@ export const Button = compose<IButtonType>({
     stack: { slotType: View, filter: filterViewProps },
     icon: { slotType: Icon as React.ComponentType },
     content: Text,
-    trailingIcon: { slotType: Icon as React.ComponentType },
+    endIcon: { slotType: Icon as React.ComponentType },
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
     stack: [],
     icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
     content: [textTokens, foregroundColorTokens],
-    trailingIcon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
+    endIcon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
   },
 });
 
