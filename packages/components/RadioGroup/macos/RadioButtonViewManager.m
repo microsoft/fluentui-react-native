@@ -3,8 +3,10 @@
 
 @interface RCT_EXTERN_MODULE(RadioButtonViewManager, RCTViewManager)
 
-RCT_EXPORT_VIEW_PROPERTY(title, NSString);
-RCT_EXPORT_VIEW_PROPERTY(enabled, BOOL);
+RCT_REMAP_VIEW_PROPERTY(content, title, NSString);
+RCT_CUSTOM_VIEW_PROPERTY(disabled, BOOL, NSButton) {
+  [view setEnabled:![RCTConvert BOOL:json]];
+}
 RCT_REMAP_VIEW_PROPERTY(buttonKey, keyEquivalent, NSString)
 RCT_CUSTOM_VIEW_PROPERTY(selected, BOOL, NSButton) {
 	if ([[RCTConvert NSNumber:json] isEqualToNumber:[NSNumber numberWithBool:YES]]) {

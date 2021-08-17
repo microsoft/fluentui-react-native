@@ -7,7 +7,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 const basicRadioGroup: React.FunctionComponent = () => {
   // Client's example onChange function
   const onChange = (key: string) => {
-    alert(key);
+    console.log(key);
   };
 
   const [selectedKey, setSelectedKey] = React.useState('C');
@@ -29,7 +29,7 @@ const basicRadioGroup: React.FunctionComponent = () => {
       <RadioGroup label="Uncontrolled RadioGroup" defaultSelectedKey="B" onChange={onChange}>
         <RadioButton content="Option A" buttonKey="A" ariaLabel="Test Aria Label" />
         <RadioButton content="Option B" buttonKey="B" />
-        <RadioButton content="Option C (disabled)" buttonKey="C" disabled={true} style={{ width: 150 }} />
+        <RadioButton content="Option C (disabled)" buttonKey="C" disabled={true} />
         <RadioButton content="Option D" buttonKey="D" />
       </RadioGroup>
       <Separator />

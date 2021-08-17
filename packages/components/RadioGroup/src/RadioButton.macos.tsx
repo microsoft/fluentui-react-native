@@ -1,69 +1,53 @@
 /** @jsx withSlots */
-import { ViewProps } from 'react-native';
-import { compose, buildProps, mergeProps, UseSlots, LayoutTokens } from '@fluentui-react-native/framework';
+import * as React from 'react';
+import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
+import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
-import { withSlots } from '@uifabricshared/foundation-composable';
-
-const nativeRadioButtonName = 'NativeRadioButton';
+import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
+import { RadioGroupContext } from './RadioGroup';
+import { radioButtonName, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonType } from './RadioButton.types';
 
 const NativeRadioButtonView = ensureNativeComponent('RadioButtonView');
 
-export type NativeRadioButtonProps = {
-  /**
-   * Radio button title.
-   */
-  title?: string;
-  /**
-   * Whether the radio button is selectable or not, true by default.
-   */
-  enabled?: boolean;
-  /**
-   * Whether the radio button is selected or not, false by default.
-   */
-  selected?: boolean;
-  /**
-   * Unique identifier for each radio button.
-   */
-  buttonKey?: string;
-  /**
-   * On press event block
-   */
-  onPress?: () => void;
-};
+export const RadioButton = compose<IRadioButtonType>({
+  displayName: radioButtonName,
+  usePrepareProps: (userProps: IRadioButtonProps, useStyling: IUseComposeStyling<IRadioButtonType>) => {
+    const { content, buttonKey, disabled } = userProps;
+    const info = React.useContext(RadioGroupContext);
+    // Reroute the native component's onPress event to RadioGroup's onChange
+    const onPressRerouted = () => {
+      info.onChange && info.onChange(buttonKey);
+    };
 
-export type NativeRadioButtonTokens = LayoutTokens;
-
-export type NativeRadioButtonViewProps = NativeRadioButtonProps & NativeRadioButtonTokens & ViewProps;
-
-interface NativeRadioButtonType {
-  props: NativeRadioButtonViewProps;
-  slotProps: { root: NativeRadioButtonViewProps };
-  tokens: NativeRadioButtonTokens;
-}
-
-export const NativeRadioButton = compose<NativeRadioButtonType>({
-  displayName: nativeRadioButtonName,
-  tokens: [
-    {
-      minWidth: 100,
-      minHeight: 20,
-    },
-    nativeRadioButtonName,
-  ],
-  slots: { root: NativeRadioButtonView },
-  slotProps: {
-    root: buildProps(tokens => ({
-      style: {
-        // Fluent controls are designed to snap to a 4 px grid
-        marginLeft: 4,
-        marginTop: 4,
-        minWidth: tokens.minWidth,
-        minHeight: tokens.minHeight,
+    const styleProps = useStyling(userProps);
+    const slotProps = mergeSettings<IRadioButtonSlotProps>(styleProps, {
+      root: {
+        buttonKey: buttonKey,
+        content: content,
+        disabled: disabled,
+        onPress: onPressRerouted,
+        selected: info.selectedKey === buttonKey,
+        style: {
+          // Fluent controls are designed to snap to a 4 px grid
+          marginLeft: 4,
+          marginTop: 4,
+          width: 150,
+          height: 20,
+        },
       },
-    })),
+    });
+
+    return { slotProps };
   },
-  render: (props: NativeRadioButtonViewProps, useSlots: UseSlots<NativeRadioButtonType>) => {
-    const Root = useSlots(props).root;
-    return (rest: NativeRadioButtonViewProps) => <Root {...mergeProps(props, rest)} />;
+  slots: {
+    root: NativeRadioButtonView,
+  },
+  styles: {
+    root: [],
+  },
+  render: (Slots: ISlots<IRadioButtonSlotProps>) => {
+    return <Slots.root />;
   },
 });
+
+export default RadioButton;
