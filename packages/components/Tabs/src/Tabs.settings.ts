@@ -11,10 +11,7 @@ export const settings: IComposeSettings<TabsType> = [
       accessibilityRole: 'tablist',
     },
     label: {
-      style: {
-        fontSize: 16,
-        fontWeight: '600',
-      },
+      variant: 'subheaderSemibold',
     },
     stack: {
       style: {

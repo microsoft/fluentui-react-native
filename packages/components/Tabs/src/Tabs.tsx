@@ -35,6 +35,7 @@ export const Tabs = compose<TabsType>({
 
   usePrepareProps: (userProps: TabsProps, useStyling: IUseComposeStyling<TabsType>) => {
     const focusZoneRef = React.useRef(null);
+    const defaultComponentRef = React.useRef(null);
     const {
       label,
       accessibilityLabel = userProps.label,
@@ -42,8 +43,8 @@ export const Tabs = compose<TabsType>({
       headersOnly,
       defaultSelectedKey,
       getTabId,
-      componentRef = React.useRef(null),
-      isCircularNavigation = false,
+      componentRef = defaultComponentRef,
+      isCircularNavigation,
       ...rest
     } = userProps;
 
@@ -64,7 +65,7 @@ export const Tabs = compose<TabsType>({
         return getTabId(key, index);
       }
       return `${key}-Tab${index}`;
-    }, []);
+    }, [getTabId]);
 
     // Stores views to be displayed
     const map = new Map<string, React.ReactNode[]>();
@@ -180,7 +181,7 @@ export const Tabs = compose<TabsType>({
     root: View,
     label: Text,
     container: Platform.OS !== 'windows' ? FocusZone : React.Fragment,
-    stack: View,
+    stack: { slotType: View, filter: filterViewProps },
     tabPanel: { slotType: View, filter: filterViewProps },
   },
   styles: {
