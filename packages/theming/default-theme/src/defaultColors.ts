@@ -156,7 +156,7 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     ghostDisabledIcon: p.neutralTertiary,
 
     brandedBackground: p.themePrimary,
-    brandedBorder:  p.themeDark,
+    brandedBorder: p.themeDark,
     brandedContent: p.white,
     brandedIcon: p.white,
 
@@ -186,7 +186,7 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     defaultCheckedHoveredContent: isInverted ? p.neutralPrimary : p.neutralDark,
 
     brandedCheckedBackground: 'transparent',
-    brandedCheckedContent: 'transparent',
+    brandedCheckedContent: p.white,
     brandedCheckedHoveredBackground: 'transparent',
     brandedCheckedHoveredContent: 'transparent',
 
@@ -197,25 +197,18 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     ghostCheckedHoveredBorder: p.neutralDark,
 
     ghostSecondaryContent: p.neutralSecondary,
-    ghostFocusedSecondaryContent: 'transparent',
-    ghostHoveredSecondaryContent: 'transparent',
-    ghostPressedSecondaryContent: 'transparent',
+    ghostFocusedSecondaryContent: p.neutralSecondary,
+    ghostHoveredSecondaryContent: p.neutralSecondary,
+    ghostPressedSecondaryContent: p.neutralSecondary,
 
-    brandedSecondaryContent: 'transparent',
-    brandedFocusedSecondaryContent: 'transparent',
-    brandedHoveredSecondaryContent: 'transparent',
-    brandedPressedSecondaryContent: 'transparent',
+    brandedSecondaryContent: p.neutralLighterAlt,
+    brandedFocusedSecondaryContent: p.neutralLighterAlt,
+    brandedHoveredSecondaryContent: p.neutralLighterAlt,
+    brandedPressedSecondaryContent: p.neutralLighterAlt,
 
     defaultDisabledSecondaryContent: 'transparent',
     defaultHoveredSecondaryContent: 'transparent',
     defaultPressedSecondaryContent: 'transparent',
-
-    checkboxBackground: 'transparent',
-    checkboxBackgroundDisabled: 'transparent',
-    checkmarkColor: 'transparent',
-
-    personaActivityRing: 'transparent',
-    personaActivityGlow: 'transparent',
   };
 }
 
