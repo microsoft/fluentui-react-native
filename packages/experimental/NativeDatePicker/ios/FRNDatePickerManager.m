@@ -27,15 +27,15 @@ static NSDictionary<NSString *, NSDictionary<NSString *, NSNumber *> *> *FRNDate
 @implementation RCTConvert (FRNDatePickerAdditions)
 
 RCT_ENUM_CONVERTER(MSFDateTimePickerMode,
-                   MSFDatePickerGetEnumMaps()[@"MSFDateTimePickerMode"],
+				   FRNDatePickerGetEnumMaps()[@"MSFDateTimePickerMode"],
                    MSFDateTimePickerModeDate,
                    integerValue)
 RCT_ENUM_CONVERTER(MSFDateTimePickerDatePickerType,
-                   MSFDatePickerGetEnumMaps()[@"MSFDateTimePickerDatePickerType"],
+				   FRNDatePickerGetEnumMaps()[@"MSFDateTimePickerDatePickerType"],
                    MSFDateTimePickerDatePickerTypeCalendar,
                    integerValue)
 RCT_ENUM_CONVERTER(MSFDateTimePickerDateRangePresentation,
-                   MSFDatePickerGetEnumMaps()[@"MSFDateTimePickerDateRangePresentation"],
+				   FRNDatePickerGetEnumMaps()[@"MSFDateTimePickerDateRangePresentation"],
                    MSFDateTimePickerDateRangePresentationPaged,
                    integerValue)
 

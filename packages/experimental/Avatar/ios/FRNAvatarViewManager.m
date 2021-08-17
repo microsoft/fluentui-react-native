@@ -1,6 +1,6 @@
 #import <React/RCTViewManager.h>
 
-#import "MSFAvatarStorage.h"
+#import "FRNAvatarStorage.h"
 
 @import FluentUI;
 
@@ -61,7 +61,7 @@ RCT_ENUM_CONVERTER(MSFAvatarStyle, (@{
 
 @end
 
-@interface RCT_EXTERN_MODULE(MSFAvatarViewManager, RCTViewManager)
+@interface RCT_EXTERN_MODULE(FRNAvatarViewManager, RCTViewManager)
 
 RCT_EXPORT_SWIFTUI_PROPERTY(primaryText, NSString, MSFAvatar)
 
