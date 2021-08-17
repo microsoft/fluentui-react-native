@@ -63,3 +63,5 @@ export const Component = () => {
 ```
 
 The component will rerender if the theme is invalidated.
+
+If you'd prefer to put the component's styles into a `StyleSheet` instead of accessing the `theme` directly, you can use [themed `StyleSheets`](./ThemedStylesheet.md)
