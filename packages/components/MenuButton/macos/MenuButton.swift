@@ -5,7 +5,7 @@
 
 import AppKit
 
-@objc(MSFMenuButton)
+@objc(FRNMenuButton)
 open class MenuButton: NSPopUpButton {
 
   public override init(frame buttonFrame: NSRect, pullsDown flag: Bool) {

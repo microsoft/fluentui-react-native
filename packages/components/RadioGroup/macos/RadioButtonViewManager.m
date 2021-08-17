@@ -1,7 +1,7 @@
 #import <React/RCTComponent.h>
 #import <React/RCTViewManager.h>
 
-@interface RCT_EXTERN_MODULE(RadioButtonViewManager, RCTViewManager)
+@interface RCT_EXTERN_MODULE(FRNRadioButtonViewManager, RCTViewManager)
 
 RCT_REMAP_VIEW_PROPERTY(content, title, NSString);
 RCT_CUSTOM_VIEW_PROPERTY(disabled, BOOL, NSButton) {

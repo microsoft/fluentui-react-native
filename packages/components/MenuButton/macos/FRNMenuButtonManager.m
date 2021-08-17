@@ -1,7 +1,7 @@
 #import <React/RCTComponent.h>
 #import <React/RCTViewManager.h>
 
-@implementation RCTConvert (MSFMenuButtonAdditions)
+@implementation RCTConvert (FRNMenuButtonAdditions)
 
 + (NSMenuItem *)menuItem:(id)json
 {
@@ -41,7 +41,7 @@
 @end
 
 
-@interface RCT_EXTERN_MODULE(MSFMenuButtonManager, RCTViewManager)
+@interface RCT_EXTERN_MODULE(FRNMenuButtonManager, RCTViewManager)
 
 RCT_EXPORT_VIEW_PROPERTY(onItemClick, RCTBubblingEventBlock)
 

@@ -5,6 +5,7 @@ import { compose, mergeProps, withSlots, UseSlots, buildProps } from '@fluentui-
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
 const ExpanderComponent = ensureNativeComponent('MSFExpanderView');
+
 function delay(ms: number) {
   return new Promise( resolve => setTimeout(resolve, ms) );
 }

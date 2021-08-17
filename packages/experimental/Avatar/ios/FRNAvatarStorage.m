@@ -1,9 +1,9 @@
 #import <Foundation/Foundation.h>
-#import "MSFAvatarStorage.h"
+#import "FRNAvatarStorage.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@implementation MSFAvatar (MSFAvatarViewManagerAdditons)
+@implementation MSFAvatar (FRNAvatarViewManagerAdditons)
 
 static NSMutableDictionary *s_sharedInstance;
 

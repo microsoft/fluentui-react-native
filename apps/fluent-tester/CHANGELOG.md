@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 13 Aug 2021 16:12:26 GMT and should not be manually modified.
+This log was last generated on Tue, 17 Aug 2021 20:02:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.36.0
+
+Tue, 17 Aug 2021 20:02:00 GMT
+
+### Minor changes
+
+- Implemented Tabs Control (dake.3601@gmail.com)
+
+### Patches
+
+- Bump @fluentui/react-native to v0.25.0 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.11.9 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-expander to v0.2.2 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-native-button to v0.7.12 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.3.4 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/native-radio-button to v0.1.12 (sanajmi@microsoft.com)
 
 ## 0.35.9
 
