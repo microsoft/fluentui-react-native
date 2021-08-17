@@ -114,13 +114,13 @@ export const Tabs = compose<TabsType>({
     };
 
     if (Platform.OS == 'windows') {
-      const windowsSlotProps = mergeSettings<TabsSlotProps>(styleProps, {
+      const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
         root: { rest, ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: null, ...pressable.props}, // Add windows role when RN is at >= 0.64
         label: { children: label },
-        stack: {focusable: true, ref: focusZoneRef, onKeyDown: onKeyDown}
+        stack: {focusable: true, ref: focusZoneRef, onKeyDown: onKeyDown},
       });
 
-      return { windowsSlotProps, state };
+      return { slotProps, state };
     }
 
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
