@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Tabs, TabsItem, Text, Button } from '@fluentui/react-native';
+import { Text, Button } from '@fluentui/react-native';
+import { Tabs, TabsItem } from '@fluentui-react-native/experimental-tabs';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -10,7 +11,7 @@ import TestSvg from './test.svg';
 const tabs: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
-      <Tabs label="Tabs">
+      {/* <Tabs label="Tabs">
         <TabsItem headerText="Home" itemKey="A">
           <Text>Tabs #1</Text>
         </TabsItem>
@@ -20,7 +21,9 @@ const tabs: React.FunctionComponent = () => {
         <TabsItem headerText="Settings" itemKey="C">
           <Text>Tabs #3</Text>
         </TabsItem>
-      </Tabs>
+      </Tabs> */}
+      <Tabs label="Tabs" />
+      <TabsItem headerText="Home" />
     </View>
   );
 };
@@ -212,34 +215,34 @@ const tabsSections: TestSection[] = [
     testID: TABS_TESTPAGE,
     component: tabs,
   },
-  {
-    name: 'Tabs with disabled',
-    component: disabledTabs,
-  },
-  {
-    name: 'Count and Icon',
-    component: tabsCountIcon,
-  },
-  {
-    name: 'Trigger onTabsClick event',
-    component: onTabsClickEvent,
-  },
-  {
-    name: 'User Custom Render',
-    component: tabsChangingViews,
-  },
-  {
-    name: 'Render Content Separately',
-    component: tabsRenderSeparately,
-  },
-  {
-    name: 'Override Selected Key',
-    component: tabsSettingSelectedKey,
-  },
-  {
-    name: 'More Flexibility',
-    component: tabsWithFlexibility,
-  },
+  // {
+  //   name: 'Tabs with disabled',
+  //   component: disabledTabs,
+  // },
+  // {
+  //   name: 'Count and Icon',
+  //   component: tabsCountIcon,
+  // },
+  // {
+  //   name: 'Trigger onTabsClick event',
+  //   component: onTabsClickEvent,
+  // },
+  // {
+  //   name: 'User Custom Render',
+  //   component: tabsChangingViews,
+  // },
+  // {
+  //   name: 'Render Content Separately',
+  //   component: tabsRenderSeparately,
+  // },
+  // {
+  //   name: 'Override Selected Key',
+  //   component: tabsSettingSelectedKey,
+  // },
+  // {
+  //   name: 'More Flexibility',
+  //   component: tabsWithFlexibility,
+  // },
 ];
 
 export const TabsExperimentalTest: React.FunctionComponent = () => {

@@ -6,7 +6,7 @@ import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-re
 import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IconProps } from '@fluentui-react-native/icon';
 
-export const tabsItemName = 'TabItem';
+export const tabsItemName = 'TabsItem';
 type IconSourcesType = number | string | IconProps;
 
 export interface TabsItemTokens extends FontTokens, IBorderTokens, IShadowTokens {

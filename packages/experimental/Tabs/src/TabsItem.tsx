@@ -18,22 +18,22 @@ export const TabsItem = compose<TabItemType>({
     content: Text,
   },
   render: (userProps: TabsItemProps, useSlots: UseSlots<TabItemType>) => {
-    const button = useTabsItem(userProps);
+    const tabsItem = useTabsItem(userProps);
     const iconProps = createIconProps(userProps.icon);
     // grab the styled slots
-    const Slots = useSlots(userProps, layer => button.state[layer] || userProps[layer]);
+    const Slots = useSlots(userProps, layer => tabsItem.state[layer] || userProps[layer]);
     // now return the handler for finishing render
     return (final: TabsItemProps, ...children: React.ReactNode[]) => {
-      const { icon, content, ...mergedProps } = mergeProps(button.props, final);
+      const { icon, headerText, ...mergedProps } = mergeProps(tabsItem.props, final);
       const marginBetween = {
-        marginLeft: icon && content ? 10 : 0,
+        marginLeft: icon && headerText ? 10 : 0,
       };
       return (
         <Slots.root {...mergedProps}>
           {icon && <Slots.icon {...iconProps} />}
-          {content && (
+          {headerText && (
             <Slots.content key="content" style={marginBetween}>
-              {content}
+              {headerText}
             </Slots.content>
           )}
           {children}
