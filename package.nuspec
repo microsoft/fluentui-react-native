@@ -33,14 +33,14 @@
     <file src="DerivedData\Build\Products\Debug\FRNAvatar\libFRNAvatar.a" target="Debug-macosx"/>
     <file src="DerivedData\Build\Products\Debug\FRNButton\libFRNButton.a" target="Debug-macosx"/>
     <file src="DerivedData\Build\Products\Debug\FRNMenuButton\libFRNMenuButton.a" target="Debug-macosx"/>
-    <file src="DerivedData\Build\Products\Debug\FRNRadio-Button\libFRNRadioButton.a" target="Debug-macosx"/>
+    <file src="DerivedData\Build\Products\Debug\FRNRadioButton\libFRNRadioButton.a" target="Debug-macosx"/>
     <file src="DerivedData\Build\Products\Debug\RCTFocusZone\libRCTFocusZone.a" target="Debug-macosx"/>
 
     <!-- macOS ship -->
     <file src="DerivedData\Build\Products\Release\FRNAvatar\libFRNAvatar.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\FRNButton\libFRNButton.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\FRNMenuButton\libFRNMenuButton.a" target="Ship-macosx"/>
-    <file src="DerivedData\Build\Products\Release\FRNRadio-Button\libFRNRadioButton.a" target="Ship-macosx"/>
+    <file src="DerivedData\Build\Products\Release\FRNRadioButton\libFRNRadioButton.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\RCTFocusZone\libRCTFocusZone.a" target="Ship-macosx"/>
 
   </files>
