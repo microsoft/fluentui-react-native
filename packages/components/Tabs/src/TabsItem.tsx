@@ -142,7 +142,7 @@ export const TabsItem = compose<TabsItemType>({
   slots: {
     root: View,
     stack: { slotType: View, filter: filterViewProps },
-    icon: Platform.OS !== 'windows' ? { slotType: Icon as React.ComponentType } : React.Fragment,
+    icon: { slotType: Icon as React.ComponentType },
     content: Text,
     indicator: { slotType: View, filter: filterViewProps },
   },
