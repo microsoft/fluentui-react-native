@@ -181,7 +181,7 @@ export const Tabs = compose<TabsType>({
     root: View,
     label: Text,
     container: Platform.OS !== 'windows' ? FocusZone : React.Fragment,
-    stack: { slotType: View, filter: filterViewProps },
+    stack: View,
     tabPanel: { slotType: View, filter: filterViewProps },
   },
   styles: {
