@@ -16,7 +16,10 @@ export const RadioButton = compose<IRadioButtonType>({
     const info = React.useContext(RadioGroupContext);
     // Reroute the native component's onPress event to RadioGroup's onChange
     const onPressRerouted = () => {
-      info.onChange && info.onChange(buttonKey);
+      // Prevent calls to RadioGroup's onChange on the currently selected button
+      if (buttonKey != info.selectedKey) {
+        info.onChange && info.onChange(buttonKey);
+      }
     };
 
     const styleProps = useStyling(userProps);
