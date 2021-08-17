@@ -416,10 +416,10 @@ export interface ControlColorTokens {
   defaultCheckedHoveredBackground: ColorValue;
   defaultCheckedHoveredContent: ColorValue;
 
-  brandCheckedBackground: ColorValue;
-  brandCheckedContent: ColorValue;
-  brandCheckedHoveredBackground: ColorValue;
-  brandCheckedHoveredContent: ColorValue;
+  brandedCheckedBackground: ColorValue;
+  brandedCheckedContent: ColorValue;
+  brandedCheckedHoveredBackground: ColorValue;
+  brandedCheckedHoveredContent: ColorValue;
 
   ghostCheckedBackground: ColorValue;
   ghostCheckedContent: ColorValue;

@@ -185,10 +185,10 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     defaultCheckedHoveredBackground: p.neutralLight,
     defaultCheckedHoveredContent: isInverted ? p.neutralPrimary : p.neutralDark,
 
-    brandedCheckedBackground: 'transparent',
-    brandedCheckedContent: p.white,
-    brandedCheckedHoveredBackground: 'transparent',
-    brandedCheckedHoveredContent: 'transparent',
+    brandedCheckedBackground: p.neutralTertiaryAlt,
+    brandedCheckedContent: p.neutralDark,
+    brandedCheckedHoveredBackground: p.neutralLight,
+    brandedCheckedHoveredContent: isInverted ? p.neutralPrimary : p.neutralDark,
 
     ghostCheckedBackground: p.neutralLight,
     ghostCheckedContent: p.black,
@@ -206,9 +206,9 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     brandedHoveredSecondaryContent: p.neutralLighterAlt,
     brandedPressedSecondaryContent: p.neutralLighterAlt,
 
-    defaultDisabledSecondaryContent: 'transparent',
-    defaultHoveredSecondaryContent: 'transparent',
-    defaultPressedSecondaryContent: 'transparent',
+    defaultDisabledSecondaryContent: p.neutralTertiary,
+    defaultHoveredSecondaryContent: p.neutralTertiary,
+    defaultPressedSecondaryContent: p.neutralTertiary,
   };
 }
 
