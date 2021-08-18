@@ -57,6 +57,7 @@ function renderSvg(iconProps: IconProps) {
 
   // react-native-svg is still on 0.61, and their color prop doesn't handle ColorValue
   // If a color for the icon is not supplied, fall back to white or black depending on appearance
+  // Tracked by issue #728
   const iconColor = downgradeColor(color);
 
   if (svgIconProps.src) {
