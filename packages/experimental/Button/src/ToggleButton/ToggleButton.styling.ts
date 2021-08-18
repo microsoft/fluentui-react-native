@@ -6,26 +6,25 @@ import { buttonStates, defaultButtonTokens } from '../ButtonTokens';
 export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonSlotProps, ToggleButtonTokens> = {
   tokens: [
     defaultButtonTokens,
-    (t: Theme) =>
-      ({
-        checked: {
-          color: t.colors.buttonCheckedContent,
-          backgroundColor: t.colors.buttonCheckedBackground,
+    (t: Theme): ToggleButtonTokens => ({
+      checked: {
+        color: t.colors.defaultCheckedContent,
+        backgroundColor: t.colors.defaultCheckedBackground,
+        hovered: {
+          color: t.colors.defaultCheckedHoveredContent,
+          backgroundColor: t.colors.defaultCheckedHoveredBackground,
+        },
+        ghost: {
+          color: t.colors.ghostCheckedContent,
+          backgroundColor: t.colors.ghostCheckedBackground,
           hovered: {
-            color: t.colors.buttonCheckedHoveredContent,
-            backgroundColor: t.colors.buttonCheckedHoveredBackground,
-          },
-          ghost: {
-            color: t.colors.ghostCheckedContent,
-            backgroundColor: t.colors.ghostCheckedBackground,
-            hovered: {
-              color: t.colors.ghostCheckedHoveredContent,
-              backgroundColor: t.colors.ghostCheckedHoveredBackground,
-              borderColor: t.colors.ghostCheckedHoveredBorder,
-            },
+            color: t.colors.ghostCheckedHoveredContent,
+            backgroundColor: t.colors.ghostCheckedHoveredBackground,
+            borderColor: t.colors.ghostCheckedHoveredBorder,
           },
         },
-      } as ToggleButtonTokens),
+      },
+    }),
     toggleButtonName,
   ],
   states: ['checked', ...buttonStates],
