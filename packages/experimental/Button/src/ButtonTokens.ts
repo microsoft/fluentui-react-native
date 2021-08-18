@@ -24,10 +24,10 @@ const shadowStyleFromGlobalToken = (shadowToken: number) => {
 
 export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) =>
   ({
-    backgroundColor: t.colors.defaultBackground,
-    color: t.colors.defaultText,
-    borderColor: t.colors.defaultBorder,
-    iconColor: t.colors.defaultIcon,
+    backgroundColor: t.colors.buttonBackground,
+    color: t.colors.buttonText,
+    borderColor: t.colors.buttonBorder,
+    iconColor: t.colors.buttonIcon,
     minHeight: 32,
     minWidth: 80,
     borderWidth: 1,
