@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Wed, 18 Aug 2021 20:17:46 GMT",
+      "tag": "@fluentui-react-native/icon_v0.8.10",
+      "version": "0.8.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix iconColor not applying for svg icons",
+            "author": "ruaraki@microsoft.com",
+            "commit": "9359dd854f286cb1c9f5b8cc74e895ad8538f3c0",
+            "package": "@fluentui-react-native/icon"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 13 Aug 2021 16:12:26 GMT",
       "tag": "@fluentui-react-native/icon_v0.8.9",
       "version": "0.8.9",
