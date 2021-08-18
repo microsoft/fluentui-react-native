@@ -7,7 +7,7 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
       backgroundColor: 'menuBackground',
       color: 'menuItemText',
       borderColor: 'transparent',
-      borderWidth: 1,
+      borderWidth: 2,
     },
     root: {
       accessible: true,
