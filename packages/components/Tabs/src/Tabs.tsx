@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, TabsContextData } from './Tabs.types';

@@ -91,8 +91,4 @@ export const settings: IComposeSettings<TabsItemType> = [
     },
   },
   tabsItemName,
-<<<<<<< HEAD
 ];
-=======
-];
->>>>>>> 620772316eb0db36c9a2879ccd6ee2795abf52de
