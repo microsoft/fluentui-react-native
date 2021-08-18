@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix iconColor not applying for svg icons",
-  "packageName": "@fluentui-react-native/icon",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

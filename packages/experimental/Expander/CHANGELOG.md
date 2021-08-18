@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-expander
 
-This log was last generated on Tue, 17 Aug 2021 20:02:00 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Aug 2021 20:17:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.3
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Remove MSF prefix from component name (sanajmi@microsoft.com)
 
 ## 0.2.2
 

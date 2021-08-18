@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Wed, 18 Aug 2021 20:17:46 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "fix for radio group on macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "eae3b80724f357040f5a6d724bdf0fe14ac6d5f5",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 17 Aug 2021 20:02:00 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.11.9",
       "version": "0.11.9",

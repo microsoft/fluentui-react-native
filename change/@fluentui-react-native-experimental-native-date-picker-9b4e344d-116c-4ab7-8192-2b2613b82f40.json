@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix typo preventing native module constants from loading",
-  "packageName": "@fluentui-react-native/experimental-native-date-picker",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
