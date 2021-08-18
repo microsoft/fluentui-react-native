@@ -7,7 +7,7 @@ import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { RadioGroupContext } from './RadioGroup';
 import { radioButtonName, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonType } from './RadioButton.types';
 
-const NativeRadioButtonView = ensureNativeComponent('RadioButtonView');
+const NativeRadioButtonView = ensureNativeComponent('FRNRadioButtonView');
 
 export const RadioButton = compose<IRadioButtonType>({
   displayName: radioButtonName,
@@ -23,13 +23,14 @@ export const RadioButton = compose<IRadioButtonType>({
     };
 
     const styleProps = useStyling(userProps);
+    const isSelected = info.selectedKey === buttonKey;
     const slotProps = mergeSettings<IRadioButtonSlotProps>(styleProps, {
       root: {
         buttonKey: buttonKey,
         content: content,
         disabled: disabled,
         onPress: onPressRerouted,
-        selected: info.selectedKey === buttonKey,
+        selected: isSelected,
         style: {
           // Fluent controls are designed to snap to a 4 px grid
           marginLeft: 4,
