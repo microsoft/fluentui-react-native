@@ -1,6 +1,6 @@
 import FluentUI
 
-@objc(MSFDatePickerManager)
+@objc(FRNDatePickerManager)
 public class DatePickerManager: NSObject {
     var lastDelegate: DatePickerDelegate?
 

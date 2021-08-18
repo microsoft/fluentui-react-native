@@ -31,6 +31,7 @@ export const Tabs = compose<TabsType>({
   displayName: tabsName,
 
   usePrepareProps: (userProps: TabsProps, useStyling: IUseComposeStyling<TabsType>) => {
+    const defaultComponentRef = React.useRef(null);
     const {
       label,
       accessibilityLabel = userProps.label,
@@ -38,7 +39,7 @@ export const Tabs = compose<TabsType>({
       headersOnly,
       defaultSelectedKey,
       getTabId,
-      componentRef = React.useRef(null),
+      componentRef = defaultComponentRef,
       isCircularNavigation,
       ...rest
     } = userProps;
@@ -60,7 +61,7 @@ export const Tabs = compose<TabsType>({
         return getTabId(key, index);
       }
       return `${key}-Tab${index}`;
-    }, []);
+    }, [getTabId]);
 
     // Stores views to be displayed
     const map = new Map<string, React.ReactNode[]>();
@@ -72,26 +73,19 @@ export const Tabs = compose<TabsType>({
         getTabId: onChangeTabId,
         updateSelectedTabsItemRef: onSelectTabsItemRef,
         views: map,
-        width: 0
       },
       info: {
         headersOnly: headersOnly ?? false,
-        label: !!label && Platform.OS === 'windows',
+        label: !!label,
       },
     };
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
-    // Makes tabs store its width, this is helpful for making decisions about overflow
-    const updateLayoutWidth = (viewLayout) => {
-      state.context.width = viewLayout.width;
-    }
-
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
-      root: { rest, ref: componentRef, accessibilityLabel, accessibilityRole: 'tablist', onLayout: (event)=>{updateLayoutWidth(event.nativeEvent.layout)}},
+      root: { rest, ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist'},
       label: { children: label },
-      container: Platform.OS !== 'windows' ? { isCircularNavigation: true, defaultTabbableElement: selectedTabsItemRef } : null,
-      // stack: {style: {flexDirection: 'row'}},
+      container: { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef },
     });
 
     return { slotProps, state };

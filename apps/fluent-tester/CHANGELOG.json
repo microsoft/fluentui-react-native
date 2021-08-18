@@ -2,6 +2,119 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 13 Aug 2021 16:12:26 GMT",
+      "tag": "@fluentui-react-native/tester_v0.35.9",
+      "version": "0.35.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix icons in experimental button and add fab",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "8946966df6ddc0ef1c0b43e576a4124c678d7c89",
+            "package": "@fluentui-react-native/tester"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/stack to v0.5.25",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "8946966df6ddc0ef1c0b43e576a4124c678d7c89",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 13 Aug 2021 14:54:33 GMT",
+      "tag": "@fluentui-react-native/tester_v0.35.8",
+      "version": "0.35.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add Expander component test",
+            "author": "amdingler694@gmail.com",
+            "commit": "364c4b60f9f6706a4b85d915b3d335fda99f56c2",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 13 Aug 2021 09:05:57 GMT",
+      "tag": "@fluentui-react-native/tester_v0.35.7",
+      "version": "0.35.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update apple native code and build flags",
+            "author": "sanajmi@microsoft.com",
+            "commit": "183bcbe111614b4baf896ec73f4985d988dd46f7",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 12 Aug 2021 17:23:44 GMT",
+      "tag": "@fluentui-react-native/tester_v0.35.6",
+      "version": "0.35.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Patch up the tester",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 11 Aug 2021 18:38:07 GMT",
+      "tag": "@fluentui-react-native/tester_v0.35.5",
+      "version": "0.35.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/native-radio-button to v0.1.8",
+            "author": "chripear@microsoft.com",
+            "commit": "2e7e319cddf9e250855d5ffb31d9c06908a4ea2e",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 11 Aug 2021 04:24:12 GMT",
+      "tag": "@fluentui-react-native/tester_v0.35.4",
+      "version": "0.35.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui/react-native to v0.24.33",
+            "author": "chripear@microsoft.com",
+            "commit": "13978a33db07fe6ae4f5409e5680788063bb1b7f",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 10 Aug 2021 21:12:30 GMT",
+      "tag": "@fluentui-react-native/tester_v0.35.3",
+      "version": "0.35.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Patch tester",
+            "author": "ruaraki@microsoft.com",
+            "commit": "ce49f33c08add7892191cf840d2fdcccfd0a16bb",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 09 Aug 2021 22:49:01 GMT",
       "tag": "@fluentui-react-native/tester_v0.35.2",
       "version": "0.35.2",

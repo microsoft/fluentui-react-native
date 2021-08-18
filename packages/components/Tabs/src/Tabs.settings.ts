@@ -5,24 +5,17 @@ export const settings: IComposeSettings<TabsType> = [
   {
     tokens: {
       color: 'menuItemText',
-      variant: 'bodySemibold',
-      fontWeight: 'bold',
-      fontSize: 14,
     },
     root: {
       accessible: true,
-      // accessibilityRole: 'tablist', // Add role when RN is at >= 0.64
-      style: {
-        marginLeft: 10,
-      },
+      accessibilityRole: 'tablist',
     },
     label: {
-      style: {},
+      variant: 'subheaderSemibold',
     },
     stack: {
       style: {
-        marginLeft: -14,
-        marginTop: 6,
+        flexDirection: 'row',
       },
     },
   },

@@ -10,7 +10,7 @@ import TestSvg from './test.svg';
 const tabs: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
-      <Tabs label="TABS">
+      <Tabs label="Tabs">
         <TabsItem headerText="Home" itemKey="A">
           <Text>Tabs #1</Text>
         </TabsItem>
@@ -28,7 +28,7 @@ const tabs: React.FunctionComponent = () => {
 const disabledTabs: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
-      <Tabs label="TABS">
+      <Tabs label="Tabs">
         <TabsItem headerText="Home" itemKey="A">
           <Text>Tabs #1</Text>
         </TabsItem>
@@ -51,7 +51,7 @@ const tabsCountIcon: React.FunctionComponent = () => {
 
   return (
     <View style={stackStyle}>
-      <Tabs label="TABS">
+      <Tabs label="Tabs">
         <TabsItem headerText="Home" itemKey="A" icon={{ svgSource: svgProps, width: 20, height: 20, style: { margin: 5 } }} itemCount={23}>
           <Text>Tabs #1</Text>
         </TabsItem>
@@ -76,7 +76,7 @@ const onTabsClickEvent: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
       <Text>Last onTabsClick from: {selectedKey}</Text>
-      <Tabs label="TABS" onTabsClick={onTabsClick} selectedKey={selectedKey}>
+      <Tabs label="Tabs" onTabsClick={onTabsClick} selectedKey={selectedKey}>
         <TabsItem headerText="Home" itemKey="home_key">
           <Text>Tabs #1</Text>
         </TabsItem>
@@ -101,7 +101,7 @@ const tabsChangingViews: React.FunctionComponent = () => {
 
   return (
     <View style={stackStyle}>
-      <Tabs label="TABS" onTabsClick={onTabsClick} headersOnly={true} selectedKey={selectedKey}>
+      <Tabs label="Tabs" onTabsClick={onTabsClick} headersOnly={true} selectedKey={selectedKey}>
         <TabsItem headerText="Home" itemKey="home" />
         <TabsItem headerText="File" itemKey="file" />
         <TabsItem headerText="Settings" itemKey="settings" />
@@ -122,16 +122,23 @@ const tabsRenderSeparately: React.FunctionComponent = () => {
     setSelectedKey(key);
   };
 
+  const getTabId = (key: string) => {
+    return `ShapeColorPivot_${key}`;
+  };
+
   return (
     <View style={stackStyle}>
       <View
+        accessible={true}
+        focusable={true}
+        accessibilityLabel={getTabId(selectedKey)}
         style={{
           width: 100,
           height: selectedKey === 'squareRed' ? 100 : 200,
           backgroundColor: selectedKey === 'rectangleGreen' ? 'green' : 'red',
         }}
       />
-      <Tabs label="TABS" onTabsClick={onTabsClick} headersOnly={true} selectedKey={selectedKey}>
+      <Tabs label="Tabs" onTabsClick={onTabsClick} getTabId={getTabId} headersOnly={true} selectedKey={selectedKey}>
         <TabsItem headerText="Rectangle Red" itemKey="rectangleRed" />
         <TabsItem headerText="Square Red" itemKey="squareRed" />
         <TabsItem headerText="Rectangle Green" itemKey="rectangleGreen" />
@@ -154,7 +161,7 @@ const tabsSettingSelectedKey: React.FunctionComponent = () => {
 
   return (
     <View style={stackStyle}>
-      <Tabs label="TABS" selectedKey={selectedKey} isCircularNavigation={true}>
+      <Tabs label="Tabs" selectedKey={selectedKey} isCircularNavigation={true}>
         <TabsItem headerText="Home" itemKey="home">
           <Text>Tabs #1</Text>
         </TabsItem>

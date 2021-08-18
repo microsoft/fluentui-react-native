@@ -3,7 +3,7 @@
 
 @import FluentUI;
 
-@interface RCT_EXTERN_MODULE(MSFAvatarViewManager, RCTViewManager)
+@interface RCT_EXTERN_MODULE(FRNAvatarViewManager, RCTViewManager)
 
 RCT_REMAP_VIEW_PROPERTY(primaryText, contactName, NSString)
 

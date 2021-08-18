@@ -38,8 +38,6 @@ export interface TabsContextData {
    ** A Map to for a TabItems corresponding view
    */
   views?: Map<string, React.ReactNode[]> | null;
-
-  width?: number;
 }
 
 export interface TabsInfo {

@@ -13,7 +13,7 @@ import { TabsContext } from './Tabs';
 import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemRenderData, TabsItemState } from './TabsItem.types';
 import {
   useAsPressable,
-  useKeyCallback,
+  useViewCommandFocus,
   createIconProps,
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
@@ -22,14 +22,13 @@ export const TabsItem = compose<TabsItemType>({
   displayName: tabsItemName,
 
   usePrepareProps: (userProps: TabsItemProps, useStyling: IUseComposeStyling<TabsItemType>) => {
+    const defaultComponentRef = React.useRef(null);
     const {
       icon,
       headerText = '',
-      onAccessibilityTap = userProps.onClick,
       accessibilityLabel = userProps.headerText,
-      componentRef = React.useRef(null),
+      componentRef = defaultComponentRef,
       testID,
-      onClick,
       itemKey,
       itemCount,
       accessibilityPosInSet,
@@ -40,7 +39,9 @@ export const TabsItem = compose<TabsItemType>({
     // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback)
     const info = React.useContext(TabsContext);
 
-    /* We don't want to call the user's onTabsClick multiple times on the same selection. */
+    /* There's a bug where the user callback is being called multiple times on one click.
+    We check that there is an actual change in selection before forwarding the message to the user callback
+    so that they aren't notified more than once for each click. */
     const changeSelection = () => {
       if (itemKey != info.selectedKey) {
         info.onTabsClick && info.onTabsClick(itemKey);
@@ -58,8 +59,6 @@ export const TabsItem = compose<TabsItemType>({
       onFocus: Platform.OS == 'macos' ? null : changeSelection,
     });
 
-    const onKeyUp = useKeyCallback(onClick, ' ', 'Enter');
-
     // set up state
     const state: TabsItemState = {
       info: {
@@ -70,6 +69,8 @@ export const TabsItem = compose<TabsItemType>({
         headerText: !!headerText || itemCount !== undefined,
       },
     };
+
+    const buttonRef = Platform.OS !== 'macos' ?  useViewCommandFocus(componentRef) : componentRef;
 
     /* We use the componentRef of the currently selected tabsItem to maintain the default tabbable
     element in Tabs. Since the componentRef isn't generated until after initial render,
@@ -101,8 +102,7 @@ export const TabsItem = compose<TabsItemType>({
       root: {
         ...rest,
         ...pressable.props,
-        ref: componentRef,
-        onAccessibilityTap: onAccessibilityTap,
+        ref: buttonRef,
         accessibilityRole: 'tab',
         accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: userProps.disabled, selected: info.selectedKey === userProps.itemKey },
@@ -110,8 +110,7 @@ export const TabsItem = compose<TabsItemType>({
         accessibilityPositionInSet: accessibilityPosInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
         accessibilitySetSize: accessibilitySetSize ?? info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
-        onKeyUp: onKeyUp,
-        focusable: Platform.OS=='macos' ? !userProps.disabled : null,
+        focusable: Platform.OS=='macos' ? !userProps.disabled : userProps.focusable,
       },
       content: { children: headerText + countText, testID: testID },
       icon: createIconProps(icon),

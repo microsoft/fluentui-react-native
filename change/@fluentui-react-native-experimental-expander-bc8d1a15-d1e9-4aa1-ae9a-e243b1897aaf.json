@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "trigger an empty change to fix our publish pipeline",
+  "packageName": "@fluentui-react-native/experimental-expander",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
