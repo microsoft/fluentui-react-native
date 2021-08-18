@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Rename tokens to avoid name clash, initial token re-population",
-  "packageName": "@fluentui-react-native/apple-theme",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
