@@ -2,6 +2,255 @@
   "name": "@fluentui-react-native/experimental-text",
   "entries": [
     {
+      "date": "Fri, 13 Aug 2021 16:12:26 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.6.10",
+      "version": "0.6.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix icons in experimental button and add fab",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "8946966df6ddc0ef1c0b43e576a4124c678d7c89",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 12 Aug 2021 17:23:44 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.6.9",
+      "version": "0.6.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.28",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 10 Aug 2021 21:12:30 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.6.8",
+      "version": "0.6.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.27",
+            "author": "ruaraki@microsoft.com",
+            "commit": "ce49f33c08add7892191cf840d2fdcccfd0a16bb",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 09 Aug 2021 22:49:01 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.6.7",
+      "version": "0.6.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.26",
+            "author": "ruaraki@microsoft.com",
+            "commit": "c5b7e91e087c4f9c3fead8c52bdf20f5c86e9824",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 09 Aug 2021 19:16:08 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.6.6",
+      "version": "0.6.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.25",
+            "author": "ruaraki@microsoft.com",
+            "commit": "18e08c6879e7d56088ed62ab090fea979a2c31f9",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 07 Aug 2021 02:50:29 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.6.5",
+      "version": "0.6.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Merge branch 'master' of https://github.com/microsoft/fluentui-react-native into win32Shimmer",
+            "author": "patboyd@microsoft.com",
+            "commit": "7fd5345a6a73c03499d90e9c737d47cc5fe55d09",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 07 Aug 2021 00:40:04 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.6.4",
+      "version": "0.6.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "enable usePressableState with stock Pressable component",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.24",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/experimental-text"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/test-tools to v0.1.1",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 06 Aug 2021 23:18:21 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.6.3",
+      "version": "0.6.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.23",
+            "author": "ruaraki@microsoft.com",
+            "commit": "a8ae5b0cadbfb7ff6224b35a15995dd2def2ae45",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.6.2",
+      "version": "0.6.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/experimental-text"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/test-tools to v0.1.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/experimental-text"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/adapters to v0.6.8",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.22",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 Aug 2021 16:54:20 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "move experimental Text to be written as compressible",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4136f64930de10457a984863998c4a553b0b0efc",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 Aug 2021 06:26:25 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "radio group on macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/adapters to v0.6.8",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/experimental-text"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.20",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/experimental-text"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/test-tools to v0.1.1",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 03 Aug 2021 23:48:50 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.5.17",
+      "version": "0.5.17",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.19",
+            "author": "jasonmo@microsoft.com",
+            "commit": "69771570b94318ba208eb327d1edf15b5db0ec49",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 03 Aug 2021 22:33:17 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.5.16",
+      "version": "0.5.16",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.18",
+            "author": "jasonmo@microsoft.com",
+            "commit": "317097b2f51d04d33bfc2b14b2850a2774e0acbc",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Jul 2021 06:26:34 GMT",
       "tag": "@fluentui-react-native/experimental-text_v0.5.15",
       "version": "0.5.15",

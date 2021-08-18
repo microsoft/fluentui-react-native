@@ -2,6 +2,203 @@
   "name": "@fluentui-react-native/theming-utils",
   "entries": [
     {
+      "date": "Fri, 13 Aug 2021 16:12:26 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.5.1",
+      "version": "0.5.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix icons in experimental button and add fab",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "8946966df6ddc0ef1c0b43e576a4124c678d7c89",
+            "package": "@fluentui-react-native/theming-utils"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 12 Aug 2021 17:23:44 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "rename an alias token to avoid name clash",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui-react-native/theming-utils"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.11.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui-react-native/theming-utils"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.5.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui-react-native/theming-utils"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 10 Aug 2021 21:12:30 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add missing tokens",
+            "author": "ruaraki@microsoft.com",
+            "commit": "ce49f33c08add7892191cf840d2fdcccfd0a16bb",
+            "package": "@fluentui-react-native/theming-utils"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.5.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "ce49f33c08add7892191cf840d2fdcccfd0a16bb",
+            "package": "@fluentui-react-native/theming-utils"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.10.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "ce49f33c08add7892191cf840d2fdcccfd0a16bb",
+            "package": "@fluentui-react-native/theming-utils"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 09 Aug 2021 22:49:01 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.3.8",
+      "version": "0.3.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Clean up code a little",
+            "author": "ruaraki@microsoft.com",
+            "commit": "c5b7e91e087c4f9c3fead8c52bdf20f5c86e9824",
+            "package": "@fluentui-react-native/theming-utils"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 09 Aug 2021 19:16:08 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.3.7",
+      "version": "0.3.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.4.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "18e08c6879e7d56088ed62ab090fea979a2c31f9",
+            "package": "@fluentui-react-native/theming-utils"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 07 Aug 2021 00:40:04 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.3.6",
+      "version": "0.3.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "enable usePressableState with stock Pressable component",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/theming-utils"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/memo-cache to v1.1.3",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/theming-utils"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.3.6",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/theming-utils"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.9.3",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/theming-utils"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 06 Aug 2021 23:18:21 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.3.5",
+      "version": "0.3.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.3.5",
+            "author": "ruaraki@microsoft.com",
+            "commit": "a8ae5b0cadbfb7ff6224b35a15995dd2def2ae45",
+            "package": "@fluentui-react-native/theming-utils"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.3.4",
+      "version": "0.3.4",
+      "comments": {
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/theming-utils"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.9.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/theming-utils"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.3.4",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/theming-utils"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 Aug 2021 06:26:25 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.3.3",
+      "version": "0.3.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "radio group on macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/theming-utils"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Jul 2021 06:26:34 GMT",
       "tag": "@fluentui-react-native/theming-utils_v0.3.2",
       "version": "0.3.2",

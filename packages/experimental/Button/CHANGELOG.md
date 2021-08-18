@@ -1,8 +1,130 @@
 # Change Log - @fluentui-react-native/experimental-button
 
-This log was last generated on Fri, 30 Jul 2021 19:17:43 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Aug 2021 20:17:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.11
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.10 (ruaraki@microsoft.com)
+
+## 0.8.10
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.8.9
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Rename tokens (ruaraki@microsoft.com)
+
+## 0.8.8
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.30 (ruaraki@microsoft.com)
+
+## 0.8.7
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.29 (ruaraki@microsoft.com)
+
+## 0.8.6
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.28 (ruaraki@microsoft.com)
+
+## 0.8.5
+
+Sat, 07 Aug 2021 02:50:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.6.5 (patboyd@microsoft.com)
+
+## 0.8.4
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.8.3
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.26 (ruaraki@microsoft.com)
+
+## 0.8.2
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Fix usage of conditional hooks (nakambo@microsoft.com)
+
+## 0.8.1
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- move experimental Text to be written as compressible (jasonmo@microsoft.com)
+
+## 0.8.0
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Minor changes
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.6.8 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-text to v0.6.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/framework to v0.5.20 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.23 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/test-tools to v0.1.1 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/tokens to v0.9.13 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/use-styling to v0.6.5 (67026167+chiuam@users.noreply.github.com)
+
+## 0.7.14
+
+Tue, 03 Aug 2021 23:48:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.19 (jasonmo@microsoft.com)
+
+## 0.7.13
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.18 (jasonmo@microsoft.com)
 
 ## 0.7.12
 

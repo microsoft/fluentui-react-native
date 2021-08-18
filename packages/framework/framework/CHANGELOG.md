@@ -1,8 +1,104 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Thu, 29 Jul 2021 17:53:12 GMT and should not be manually modified.
+This log was last generated on Fri, 13 Aug 2021 16:12:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.29
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.5.28
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.9.16 (ruaraki@microsoft.com)
+
+## 0.5.27
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.9 (ruaraki@microsoft.com)
+
+## 0.5.26
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.8 (ruaraki@microsoft.com)
+
+## 0.5.25
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.7 (ruaraki@microsoft.com)
+
+## 0.5.24
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.5.23
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.5 (ruaraki@microsoft.com)
+
+## 0.5.22
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.4 (ruaraki@microsoft.com)
+
+## 0.5.21
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- add patchTokens helper to make conversion easier (jasonmo@microsoft.com)
+
+## 0.5.20
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Patches
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.5.19
+
+Tue, 03 Aug 2021 23:48:50 GMT
+
+### Patches
+
+- create useFluentTheme helper (jasonmo@microsoft.com)
+
+## 0.5.18
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/use-tokens to v0.1.3 (jasonmo@microsoft.com)
 
 ## 0.5.17
 

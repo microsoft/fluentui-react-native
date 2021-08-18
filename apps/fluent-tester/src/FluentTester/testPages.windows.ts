@@ -10,7 +10,9 @@ import { HOMEPAGE_RADIOGROUP_BUTTON, RadioGroupTest } from './TestComponents/Rad
 import { HOMEPAGE_SEPARATOR_BUTTON, SeparatorTest } from './TestComponents/Separator';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
+import { HOMEPAGE_TABS_BUTTON, TabsTest } from './TestComponents/Tabs';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
+import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
 
 export const tests = [
   {
@@ -62,8 +64,18 @@ export const tests = [
     testPage: HOMEPAGE_CHECKBOX_BUTTON,
   },
   {
+    name: 'Tabs Test',
+    component: TabsTest,
+    testPage: HOMEPAGE_TABS_BUTTON,
+  },
+  {
     name: 'Tokens Test',
     component: TokenTest,
     testPage: HOMEPAGE_TOKEN_BUTTON,
+  },
+  {
+    name: 'Expander Test',
+    component: ExpanderTest,
+    testPage: HOMEPAGE_EXPANDER_BUTTON,
   },
 ];

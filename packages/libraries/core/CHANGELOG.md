@@ -1,8 +1,167 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Fri, 30 Jul 2021 19:17:43 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Aug 2021 20:17:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.25.1
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.4.13 (ruaraki@microsoft.com)
+
+## 0.25.0
+
+Tue, 17 Aug 2021 20:02:00 GMT
+
+### Minor changes
+
+- Implemented Tabs Control (dake.3601@gmail.com)
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.7.11 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/radio-group to v0.11.12 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/tabs to v0.2.0 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/menu-button to v0.4.12 (sanajmi@microsoft.com)
+
+## 0.24.36
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.24.35
+
+Fri, 13 Aug 2021 09:05:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/radio-group to v0.11.10 (sanajmi@microsoft.com)
+
+## 0.24.34
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.4.9 (ruaraki@microsoft.com)
+
+## 0.24.33
+
+Wed, 11 Aug 2021 04:24:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/radio-group to v0.11.8 (chripear@microsoft.com)
+
+## 0.24.32
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/persona to v0.11.6 (ruaraki@microsoft.com)
+
+## 0.24.31
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.4.7 (ruaraki@microsoft.com)
+
+## 0.24.30
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/persona to v0.11.4 (ruaraki@microsoft.com)
+
+## 0.24.29
+
+Sat, 07 Aug 2021 02:50:29 GMT
+
+### Patches
+
+- Win32 Shimmer control and unifying changes for commonJS Shimmer (patboyd@microsoft.com)
+
+## 0.24.28
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.24.27
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/persona to v0.11.2 (ruaraki@microsoft.com)
+
+## 0.24.26
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/link to v0.13.2 (ruaraki@microsoft.com)
+
+## 0.24.25
+
+Wed, 04 Aug 2021 18:11:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.4.2 (lehon@microsoft.com)
+
+## 0.24.24
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- move experimental Text to be written as compressible (jasonmo@microsoft.com)
+
+## 0.24.23
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Patches
+
+- add comment back (67026167+chiuam@users.noreply.github.com)
+
+## 0.24.22
+
+Wed, 04 Aug 2021 00:59:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.3.0 (sanajmi@microsoft.com)
+
+## 0.24.21
+
+Tue, 03 Aug 2021 23:48:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/separator to v0.10.17 (jasonmo@microsoft.com)
+
+## 0.24.20
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/separator to v0.10.16 (jasonmo@microsoft.com)
 
 ## 0.24.19
 

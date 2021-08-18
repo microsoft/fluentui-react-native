@@ -1,8 +1,132 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Fri, 30 Jul 2021 19:17:43 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Aug 2021 20:17:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.11
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.10 (ruaraki@microsoft.com)
+
+## 0.10.10
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.10.9
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.17.8 (ruaraki@microsoft.com)
+
+## 0.10.8
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.17.7 (ruaraki@microsoft.com)
+
+## 0.10.7
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.6 (ruaraki@microsoft.com)
+
+## 0.10.6
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.17.5 (ruaraki@microsoft.com)
+
+## 0.10.5
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.10.4
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.17.3 (ruaraki@microsoft.com)
+
+## 0.10.3
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Fix usage of conditional hooks (nakambo@microsoft.com)
+
+## 0.10.2
+
+Wed, 04 Aug 2021 18:11:46 GMT
+
+### Patches
+
+- Add submenu chevron inline (lehon@microsoft.com)
+
+## 0.10.1
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- move experimental Text to be written as compressible (jasonmo@microsoft.com)
+
+## 0.10.0
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Minor changes
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.7.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/text to v0.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/icon to v0.8.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/callout to v0.17.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @uifabricshared/foundation-compose to v1.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @uifabricshared/foundation-settings to v0.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @uifabricshared/foundation-composable to v0.9.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.23 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/tokens to v0.9.13 (67026167+chiuam@users.noreply.github.com)
+
+## 0.9.17
+
+Tue, 03 Aug 2021 23:48:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.7.19 (jasonmo@microsoft.com)
+
+## 0.9.16
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.7.18 (jasonmo@microsoft.com)
 
 ## 0.9.15
 

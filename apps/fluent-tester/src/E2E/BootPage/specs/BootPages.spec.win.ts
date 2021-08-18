@@ -13,6 +13,7 @@ import RadioGroupTestPage from '../../RadioGroup/pages/RadioGroupTestPage.win';
 import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
 import SvgTestPage from '../../Svg/pages/SvgTestPage.win';
 import TextTestPage from '../../Text/pages/TextTestPage.win';
+import TabsTestPage from '../../Tabs/pages/TabsTestPage.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
 import BootTestPage from '../pages/BootTestPage.win';
 
@@ -20,14 +21,14 @@ const BOOT_APP_TIMEOUT = 60000;
 const PAGE_TIMEOUT = 3000;
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Open the app', function () {
+describe('Open the app', function() {
   it('Boot app', () => {
     BootTestPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     expect(BootTestPage.isPageLoaded()).toBeTruthy();
   });
 });
 
-describe('Click on each test page and check if it renders', function () {
+describe('Click on each test page and check if it renders', function() {
   it('Button Test Page', () => {
     BootTestPage.clickAndGoToButtonPage();
     ButtonTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
@@ -116,6 +117,12 @@ describe('Click on each test page and check if it renders', function () {
     BootTestPage.clickAndGoToTextPage();
     TextTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(TextTestPage.isPageLoaded()).toBeTruthy();
+  });
+
+  it('Tabs Test Page', () => {
+    BootTestPage.clickAndGoToTabsPage();
+    TabsTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+    expect(TabsTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Theme Test Page', () => {

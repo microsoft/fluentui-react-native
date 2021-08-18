@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/composition
 
-This log was last generated on Tue, 27 Jul 2021 22:17:20 GMT and should not be manually modified.
+This log was last generated on Sat, 07 Aug 2021 00:40:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.8
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.6.7
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/use-styling to v0.6.6 (jasonmo@microsoft.com)
+
+## 0.6.6
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Patches
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.6.5
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/use-styling to v0.6.4 (jasonmo@microsoft.com)
 
 ## 0.6.4
 

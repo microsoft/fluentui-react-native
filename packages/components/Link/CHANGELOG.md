@@ -1,8 +1,122 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Fri, 30 Jul 2021 19:17:43 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Aug 2021 20:17:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.10
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.33 (ruaraki@microsoft.com)
+
+## 0.13.9
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.13.8
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.7 (ruaraki@microsoft.com)
+
+## 0.13.7
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.6 (ruaraki@microsoft.com)
+
+## 0.13.6
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.29 (ruaraki@microsoft.com)
+
+## 0.13.5
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.4 (ruaraki@microsoft.com)
+
+## 0.13.4
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.13.3
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.2 (ruaraki@microsoft.com)
+
+## 0.13.2
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Fix usage of conditional hooks (nakambo@microsoft.com)
+
+## 0.13.1
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- move experimental Text to be written as compressible (jasonmo@microsoft.com)
+
+## 0.13.0
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Minor changes
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.6.8 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/text to v0.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @uifabricshared/foundation-compose to v1.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @uifabricshared/foundation-settings to v0.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @uifabricshared/foundation-composable to v0.9.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.23 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/tokens to v0.9.13 (67026167+chiuam@users.noreply.github.com)
+
+## 0.12.24
+
+Tue, 03 Aug 2021 23:48:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.22 (jasonmo@microsoft.com)
+
+## 0.12.23
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.21 (jasonmo@microsoft.com)
 
 ## 0.12.22
 

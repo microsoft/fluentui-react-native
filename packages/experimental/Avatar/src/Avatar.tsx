@@ -1,26 +1,42 @@
 /** @jsx withSlots */
 import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
-import { Image, ImageURISource, NativeModules, ViewProps, ColorValue } from 'react-native';
+import { ImageURISource, NativeModules, ViewProps, ColorValue } from 'react-native';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
-import { useMemo } from 'react';
 
 const avatarName = 'Avatar';
 
-const NativeAvatarView = ensureNativeComponent('MSFAvatarView');
+const NativeAvatarView = ensureNativeComponent('FRNAvatarView');
 
 export type Size = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge' | 'xxLarge';
 
-export type AvatarStyle = 'circle' | 'square';
+export type AvatarStyle = 'default' | 'accent' | 'group' | 'outlined' | 'outlinedPrimary' | 'overflow';
 
-export type Presence = 'none' | 'available' | 'away' | 'doNotDisturb' | 'outOfOffice' | 'offline' | 'unknown' | 'unknown' | 'blocked';
+export type Presence = 'none' | 'available' | 'away' | 'blocked' | 'doNotDisturb' | 'offline' | 'unknown';
 
 interface ExportedConstants {
   sizes: { [key in Size]: number };
 }
 
-const ExportedNativeConstants: ExportedConstants = NativeModules.MSFAvatarViewManager;
+const ExportedNativeConstants: ExportedConstants = NativeModules.FRNAvatarViewManager;
 
-export type AvatarData = {
+export type AvatarTokens = {
+  /**
+   * Supported Avatar sizes
+   */
+  size?: Size;
+
+  /**
+   * Supported Avatar styles
+   */
+  avatarStyle?: AvatarStyle;
+};
+
+export type AvatarProps = AvatarTokens & {
+  /**
+   * The image to be displayed
+   */
+  imageSource?: ImageURISource;
+
   /**
    * The primary text to create initials with (e.g. a name)
    */
@@ -32,101 +48,55 @@ export type AvatarData = {
   secondaryText?: string;
 
   /**
-   * The image to be displayed
+   * A custom color for the ring around the Avatar
    */
-  imageSource?: ImageURISource;
+  ringColor?: ColorValue;
 
   /**
-   * The color that represents this avatar.
-   * This color will override the initials view's background color.
-   * If the avatar view is configured to display a border, this will be the border's color.
-   * The colored border will not be displayed if a custom border image is provided.
+   * A custom color for the avatar initials when no image is shown
    */
-  color?: ColorValue;
+  foregroundColor?: ColorValue;
 
   /**
-   * Image to be used as border around the avatar. It will be used as a pattern image color,
-   * but It will be scaled to fit the avatar size. If set, the hasBorder initializer value will be ignored,
-   * since it's assumed that the client intends to have a custom border.
-   */
-  customBorderImageSource?: ImageURISource;
-
-  /**
-   * The avatar view's presence state.
-   * The presence state is only shown when the style is set to AvatarStyle.circle.
-   */
-  presence?: Presence;
-};
-
-export type otherAvatarProps = {
-  /**
-   * Supported Avatar sizes
-   */
-  size?: Size;
-
-  /**
-   * Background Color of initials
+   * A custom color for the avatar background when no image is shown
    */
   backgroundColor?: ColorValue;
 
   /**
-   * Image to be used as border around the avatar. It will be used as a pattern image color,
-   * but It will be scaled to fit the avatar size. If set, the hasBorder initializer value will be ignored,
-   * since it's assumed that the client intends to have a custom border.
+   * The avatar view's presence state.
+   */
+  presence?: Presence;
+
+  /**
+   * A boolean inidicating whether the ring is visible
+   */
+  isRingVisible?: boolean;
+
+  /**
+   * A boolean indicating whether the Inner Ring Gap is transparent
+   */
+  isTransparent?: boolean;
+
+  /**
+   * A boolean indicating out of office status
+   */
+  isOutOfOffice?: boolean;
+
+  /**
+   * A boolean indicating whether the gap between the avatar and ring is visible.
+   */
+  hasRingInnerGap?: boolean;
+
+  /**
+   * An image to be shown as the backdrop of the ring, rather then a solid color.
+   * Takes precendence over `ringColor`
    */
   customBorderImageSource?: ImageURISource;
-
-  /**
-   * Shape of the AvatarView
-   * Circle is used to represent people
-   * Square is used to represent organizations or teams
-   */
-  avatarStyle?: AvatarStyle;
-
-  /**
-   * The color of the border of the avatar view
-   */
-  borderColor?: ColorValue;
-
-  /**
-   * When true, the presence status border is opaque. Otherwise, it is transparent.
-   */
-  usesOpaquePresenceBorder?: boolean;
-
-  /**
-   * Used when avatarView doesn't have image or can't generate initials string
-   */
-  preferredFallBackImageStyle?: string;
-
-  /**
-   * Set to true to enable the iPadOS pointer interactions on the avatar view, false by default.
-   */
-  hasPointerInteractionIOS?: boolean;
-
-  /**
-   * Set to true to not have inside gap between content of the avatarView to its border
-   */
-  hideInsideGapForBorder?: boolean;
 };
 
-export type AvatarTokens = {
-  /**
-   * Supported Avatar sizes
-   */
-  size?: Size;
-};
+const tokensThatAreAlsoProps: (keyof AvatarTokens)[] = ['size', 'avatarStyle'];
 
-const tokensThatAreAlsoProps: (keyof AvatarTokens)[] = ['size'];
-
-// The Javascript API is a flat list for all the props we can set on our component
-export type AvatarProps = ViewProps & otherAvatarProps & AvatarData;
-
-// The Native component API has a sub object that we flattened out in AvatarProps
-export type NativeAvatarViewProps = ViewProps &
-  otherAvatarProps & {
-    avatarData?: AvatarData;
-  };
-
+export type NativeAvatarViewProps = ViewProps & AvatarProps;
 interface AvatarType {
   props: AvatarProps;
   slotProps: { root: NativeAvatarViewProps };
@@ -138,6 +108,7 @@ export const Avatar = compose<AvatarType>({
   tokens: [
     {
       size: 'small',
+      avatarStyle: 'default',
     },
     avatarName,
   ],
@@ -145,7 +116,7 @@ export const Avatar = compose<AvatarType>({
   slots: { root: NativeAvatarView },
   slotProps: {
     root: buildProps<NativeAvatarViewProps, AvatarTokens>(
-      (tokens) => ({
+      tokens => ({
         size: tokens.size,
         style: {
           height: ExportedNativeConstants.sizes[tokens.size],
@@ -158,18 +129,6 @@ export const Avatar = compose<AvatarType>({
   render: (props: AvatarProps, useSlots: UseSlots<AvatarType>) => {
     const Root = useSlots(props).root;
 
-    const memoizedAvatarData: AvatarData = useMemo(
-      () => ({
-        primaryText: props.primaryText,
-        secondaryText: props.secondaryText,
-        image: Image.resolveAssetSource(props.imageSource),
-        color: props.color,
-        customBorderImage: Image.resolveAssetSource(props.customBorderImageSource),
-        presence: props.presence,
-      }),
-      [props.primaryText, props.secondaryText, props.imageSource, props.color, props.customBorderImageSource, props.presence],
-    );
-
-    return (rest: AvatarProps) => <Root {...mergeProps(props, rest)} avatarData={memoizedAvatarData} />;
+    return (rest: AvatarProps) => <Root {...mergeProps(props, rest)} />;
   },
 });

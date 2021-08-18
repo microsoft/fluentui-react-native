@@ -34,8 +34,6 @@ const basicRadioGroup: React.FunctionComponent = () => {
       </RadioGroup>
       <Separator />
       <RadioGroup label="Controlled RadioGroup" selectedKey={selectedKey} onChange={onChange2}>
-        {/* View added to test ariaPosInSet and ariaSetSize properties which are not auto-generated when
-        RadioButtons are not direct children of RadioGroup. */}
         <View>
           <RadioButton content="Option A" buttonKey="A" ariaLabel="Test Aria Label" ariaPosInSet={1} ariaSetSize={4} />
           <RadioButton content="Option B" buttonKey="B" ariaPosInSet={2} ariaSetSize={4} />
@@ -60,7 +58,7 @@ export const RadioGroupTest: React.FunctionComponent = () => {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
+    macosStatus: 'Beta',
     androidStatus: 'Backlog',
   };
 

@@ -2,6 +2,501 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Wed, 18 Aug 2021 20:17:46 GMT",
+      "tag": "@fluentui/react-native_v0.25.1",
+      "version": "0.25.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.4.13",
+            "author": "ruaraki@microsoft.com",
+            "commit": "9359dd854f286cb1c9f5b8cc74e895ad8538f3c0",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 17 Aug 2021 20:02:00 GMT",
+      "tag": "@fluentui/react-native_v0.25.0",
+      "version": "0.25.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Implemented Tabs Control",
+            "author": "dake.3601@gmail.com",
+            "commit": "a22d4f8df2699f777049b529b071a21c672b399d",
+            "package": "@fluentui/react-native"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.7.11",
+            "author": "sanajmi@microsoft.com",
+            "commit": "2b95227026008b40cea7c2e5640874a8df392e17",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/radio-group to v0.11.12",
+            "author": "sanajmi@microsoft.com",
+            "commit": "2b95227026008b40cea7c2e5640874a8df392e17",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tabs to v0.2.0",
+            "author": "dake.3601@gmail.com",
+            "commit": "a22d4f8df2699f777049b529b071a21c672b399d",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.4.12",
+            "author": "sanajmi@microsoft.com",
+            "commit": "2b95227026008b40cea7c2e5640874a8df392e17",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 13 Aug 2021 16:12:26 GMT",
+      "tag": "@fluentui/react-native_v0.24.36",
+      "version": "0.24.36",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix icons in experimental button and add fab",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "8946966df6ddc0ef1c0b43e576a4124c678d7c89",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 13 Aug 2021 09:05:57 GMT",
+      "tag": "@fluentui/react-native_v0.24.35",
+      "version": "0.24.35",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/radio-group to v0.11.10",
+            "author": "sanajmi@microsoft.com",
+            "commit": "183bcbe111614b4baf896ec73f4985d988dd46f7",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 12 Aug 2021 17:23:44 GMT",
+      "tag": "@fluentui/react-native_v0.24.34",
+      "version": "0.24.34",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.4.9",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 11 Aug 2021 04:24:12 GMT",
+      "tag": "@fluentui/react-native_v0.24.33",
+      "version": "0.24.33",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/radio-group to v0.11.8",
+            "author": "chripear@microsoft.com",
+            "commit": "13978a33db07fe6ae4f5409e5680788063bb1b7f",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 10 Aug 2021 21:12:30 GMT",
+      "tag": "@fluentui/react-native_v0.24.32",
+      "version": "0.24.32",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/persona to v0.11.6",
+            "author": "ruaraki@microsoft.com",
+            "commit": "ce49f33c08add7892191cf840d2fdcccfd0a16bb",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 09 Aug 2021 22:49:01 GMT",
+      "tag": "@fluentui/react-native_v0.24.31",
+      "version": "0.24.31",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.4.7",
+            "author": "ruaraki@microsoft.com",
+            "commit": "c5b7e91e087c4f9c3fead8c52bdf20f5c86e9824",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 09 Aug 2021 19:16:08 GMT",
+      "tag": "@fluentui/react-native_v0.24.30",
+      "version": "0.24.30",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/persona to v0.11.4",
+            "author": "ruaraki@microsoft.com",
+            "commit": "18e08c6879e7d56088ed62ab090fea979a2c31f9",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 07 Aug 2021 02:50:29 GMT",
+      "tag": "@fluentui/react-native_v0.24.29",
+      "version": "0.24.29",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Win32 Shimmer control and unifying changes for commonJS Shimmer",
+            "author": "patboyd@microsoft.com",
+            "commit": "7fd5345a6a73c03499d90e9c737d47cc5fe55d09",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 07 Aug 2021 00:40:04 GMT",
+      "tag": "@fluentui/react-native_v0.24.28",
+      "version": "0.24.28",
+      "comments": {
+        "patch": [
+          {
+            "comment": "enable usePressableState with stock Pressable component",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui/react-native"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/callout to v0.17.4",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.10.5",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.4.5",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/focus-trap-zone to v0.7.28",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.7.4",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/radio-group to v0.11.4",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.18.4",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/checkbox to v0.12.4",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/link to v0.13.4",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/persona to v0.11.3",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/persona-coin to v0.9.3",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/text to v0.10.3",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.27",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/pressable to v0.7.4",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/separator to v0.10.22",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 06 Aug 2021 23:18:21 GMT",
+      "tag": "@fluentui/react-native_v0.24.27",
+      "version": "0.24.27",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/persona to v0.11.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "a8ae5b0cadbfb7ff6224b35a15995dd2def2ae45",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@fluentui/react-native_v0.24.26",
+      "version": "0.24.26",
+      "comments": {
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.4.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/persona to v0.11.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/persona-coin to v0.9.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/pressable to v0.7.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.18.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/checkbox to v0.12.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.10.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/radio-group to v0.11.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/separator to v0.10.20",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/text to v0.10.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.25",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/callout to v0.17.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/focus-trap-zone to v0.7.26",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.7.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui/react-native"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/link to v0.13.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 Aug 2021 18:11:46 GMT",
+      "tag": "@fluentui/react-native_v0.24.25",
+      "version": "0.24.25",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.4.2",
+            "author": "lehon@microsoft.com",
+            "commit": "74f259f3fc16ac12cc201d4a2ec3f0ed6720fd6d",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 Aug 2021 16:54:20 GMT",
+      "tag": "@fluentui/react-native_v0.24.24",
+      "version": "0.24.24",
+      "comments": {
+        "patch": [
+          {
+            "comment": "move experimental Text to be written as compressible",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4136f64930de10457a984863998c4a553b0b0efc",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 Aug 2021 06:26:25 GMT",
+      "tag": "@fluentui/react-native_v0.24.23",
+      "version": "0.24.23",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add comment back",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 Aug 2021 00:59:42 GMT",
+      "tag": "@fluentui/react-native_v0.24.22",
+      "version": "0.24.22",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.3.0",
+            "author": "sanajmi@microsoft.com",
+            "commit": "b3ba12a5678b2aad94fbc0ecf6fa67bb8b3779a5",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 03 Aug 2021 23:48:50 GMT",
+      "tag": "@fluentui/react-native_v0.24.21",
+      "version": "0.24.21",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/separator to v0.10.17",
+            "author": "jasonmo@microsoft.com",
+            "commit": "69771570b94318ba208eb327d1edf15b5db0ec49",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 03 Aug 2021 22:33:17 GMT",
+      "tag": "@fluentui/react-native_v0.24.20",
+      "version": "0.24.20",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/separator to v0.10.16",
+            "author": "jasonmo@microsoft.com",
+            "commit": "317097b2f51d04d33bfc2b14b2850a2774e0acbc",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Jul 2021 19:17:43 GMT",
       "tag": "@fluentui/react-native_v0.24.19",
       "version": "0.24.19",

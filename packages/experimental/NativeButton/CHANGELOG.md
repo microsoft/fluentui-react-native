@@ -1,8 +1,142 @@
 # Change Log - @fluentui-react-native/experimental-native-button
 
-This log was last generated on Fri, 30 Jul 2021 19:17:43 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Aug 2021 20:17:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.13
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.11 (ruaraki@microsoft.com)
+
+## 0.7.12
+
+Tue, 17 Aug 2021 20:02:00 GMT
+
+### Patches
+
+- MSF -> FRN for most objective C prefixes (sanajmi@microsoft.com)
+
+## 0.7.11
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.7.10
+
+Fri, 13 Aug 2021 09:05:57 GMT
+
+### Patches
+
+- Update apple native code and build flags (sanajmi@microsoft.com)
+
+## 0.7.9
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.9 (ruaraki@microsoft.com)
+
+## 0.7.8
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.8 (ruaraki@microsoft.com)
+
+## 0.7.7
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.7 (ruaraki@microsoft.com)
+
+## 0.7.6
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.6 (ruaraki@microsoft.com)
+
+## 0.7.5
+
+Sat, 07 Aug 2021 02:50:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.5 (patboyd@microsoft.com)
+
+## 0.7.4
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.7.3
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.3 (ruaraki@microsoft.com)
+
+## 0.7.2
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Use latest official FluentUI pod (sanajmi@microsoft.com)
+
+## 0.7.1
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- move experimental Text to be written as compressible (jasonmo@microsoft.com)
+
+## 0.7.0
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Minor changes
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/component-cache to v1.2.3 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/framework to v0.5.20 (67026167+chiuam@users.noreply.github.com)
+
+## 0.6.20
+
+Tue, 03 Aug 2021 23:48:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.7.14 (jasonmo@microsoft.com)
+
+## 0.6.19
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.7.13 (jasonmo@microsoft.com)
 
 ## 0.6.18
 

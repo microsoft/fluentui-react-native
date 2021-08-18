@@ -23,6 +23,7 @@ import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 export const ContextualMenuItem = compose<ContextualMenuItemType>({
   displayName: contextualMenuItemName,
   usePrepareProps: (userProps: ContextualMenuItemProps, useStyling: IUseComposeStyling<ContextualMenuItemType>) => {
+    const defaultComponentRef = React.useRef(null);
     const {
       disabled,
       itemKey,
@@ -31,7 +32,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       accessibilityLabel = userProps.text,
       onClick,
       testID,
-      componentRef = React.useRef(null),
+      componentRef = defaultComponentRef,
       ...rest
     } = userProps;
 

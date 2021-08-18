@@ -2,6 +2,65 @@
   "name": "@fluentui-react-native/use-slots",
   "entries": [
     {
+      "date": "Sat, 07 Aug 2021 00:40:04 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.5.7",
+      "version": "0.5.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "enable usePressableState with stock Pressable component",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/merge-props to v0.3.3",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/use-slots"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/use-slot to v0.1.5",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.5.6",
+      "version": "0.5.6",
+      "comments": {
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 Aug 2021 06:26:25 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.5.6",
+      "version": "0.5.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "radio group on macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Jul 2021 06:26:34 GMT",
       "tag": "@fluentui-react-native/use-slots_v0.5.5",
       "version": "0.5.5",
