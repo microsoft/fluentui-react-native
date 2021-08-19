@@ -5,8 +5,6 @@ import { tabsName, TabsType, TabsProps, TabsContextData } from './Tabs.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './Tabs.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
-import { filterViewProps } from '@fluentui-react-native/adapters';
-
 import { useTabs } from './useTabs';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 
