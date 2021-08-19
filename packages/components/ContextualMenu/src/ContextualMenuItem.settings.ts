@@ -7,7 +7,7 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
       backgroundColor: 'menuBackground',
       color: 'menuItemText',
       borderColor: 'transparent',
-      borderWidth: 1,
+      borderWidth: 2,
     },
     root: {
       accessible: true,
@@ -46,28 +46,26 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
       },
       pressed: {
         tokens: {
-          backgroundColor: 'menuItemBackgroundHovered',
+          backgroundColor: 'menuItemBackgroundPressed',
           color: 'menuItemTextHovered',
+        },
+      },
+      hovered: {
+        tokens: {
+          color: 'menuItemTextHovered',
+          backgroundColor: 'menuItemBackgroundHovered',
         },
       },
       focused: {
         tokens: {
           color: 'menuItemTextHovered',
           backgroundColor: 'menuItemBackgroundHovered',
+          borderColor: 'focusBorder'
         },
         _overrides: {
-          disabled: {
-            tokens: {
-              borderColor: 'focusBorder',
-            },
-          },
           hovered: {
-            _overrides: {
-              disabled: {
-                tokens: {
-                  borderColor: 'transparent',
-                },
-              },
+            tokens: {
+              borderColor: 'transparent'
             },
           },
         },

@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/tabs",
   "entries": [
     {
+      "date": "Thu, 19 Aug 2021 18:31:21 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.19",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5849d234f12ab30c929e0b8ab256a2fc7523cbe9",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 18 Aug 2021 23:00:57 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.9",
+            "author": "ruaraki@microsoft.com",
+            "commit": "345d1de930ff42359260da7f1e68a16059f4d763",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 18 Aug 2021 20:17:46 GMT",
       "tag": "@fluentui-react-native/tabs_v0.2.1",
       "version": "0.2.1",

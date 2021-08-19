@@ -2,6 +2,36 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Thu, 19 Aug 2021 18:31:21 GMT",
+      "tag": "@fluentui/react-native_v0.25.3",
+      "version": "0.25.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.4.15",
+            "author": "email not defined",
+            "commit": "cc3dbda71fb804c98cf548a68064fce2580364d5",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 18 Aug 2021 23:00:57 GMT",
+      "tag": "@fluentui/react-native_v0.25.2",
+      "version": "0.25.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.4.14",
+            "author": "ruaraki@microsoft.com",
+            "commit": "345d1de930ff42359260da7f1e68a16059f4d763",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 18 Aug 2021 20:17:46 GMT",
       "tag": "@fluentui/react-native_v0.25.1",
       "version": "0.25.1",
