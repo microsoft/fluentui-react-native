@@ -1,10 +1,10 @@
 import { tabsItemName, TabsItemTokens, TabsItemSlotProps, TabsItemProps } from './TabsItem.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, layoutStyles, fontStyles, shadowStyles, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { tabsItemStates, defaultTabsItemTokens } from './TabsItemTokens';
 
 export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps, TabsItemTokens> = {
-  tokens: [defaultTabsItemTokens, tabsItemName],
+  tokens: [{ source: 'indicatorColor', lookup: getPaletteFromTheme, target: 'backgroundColor' }, defaultTabsItemTokens, tabsItemName],
   states: tabsItemStates,
   slotProps: {
     root: buildProps(
@@ -12,13 +12,9 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
         style: {
           display: 'flex',
           alignItems: 'center',
-          flexDirection: 'row',
+          flexDirection: 'column',
           alignSelf: 'flex-start',
           justifyContent: 'center',
-          width: tokens.width,
-          paddingStart: 16,
-          paddingEnd: 16,
-          backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
           ...shadowStyles.from(tokens, theme),
@@ -42,6 +38,35 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
         },
       }),
       ['iconColor'],
+    ),
+    stack: buildProps(
+      (tokens: TabsItemTokens) => ({
+        style: {
+          display: 'flex',
+          marginHorizontal: 10,
+          alignItems: 'center',
+          flexDirection: 'row',
+          alignSelf: 'flex-start',
+          minHeight: 32,
+          minWidth: 32,
+          justifyContent: 'center',
+        },
+      }),
+      ['iconColor'],
+    ),
+    indicator: buildProps(
+      (tokens: TabsItemTokens, theme: Theme) => ({
+        style: {
+          minHeight: 2,
+          borderRadius: 2,
+          marginBottom: 2,
+          alignSelf: 'stretch',
+          marginHorizontal: 10,
+          // backgroundColor: 'red',
+          backgroundColor: tokens.indicatorColor,
+        },
+      }),
+      [...layoutStyles.keys],
     ),
   },
 };

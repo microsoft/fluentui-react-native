@@ -10,6 +10,7 @@ import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { TabsContext } from './Tabs';
+import { getPaletteFromTheme } from '@fluentui-react-native/tokens';
 
 export const TabsItem = compose<TabItemType>({
   displayName: tabsItemName,
