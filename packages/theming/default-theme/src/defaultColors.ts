@@ -103,6 +103,112 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     link: p.themePrimary,
     linkHovered: p.themeDarker,
     linkPressed: p.themeDark,
+
+    // Control Color Tokens
+    defaultBackground: p.neutralLighter,
+    defaultBorder: p.neutralSecondaryAlt,
+    defaultContent: isInverted ? p.black : p.neutralPrimary,
+    defaultIcon: isInverted ? p.black : p.neutralPrimary,
+
+    defaultHoveredBackground: p.neutralLight,
+    defaultHoveredBorder: p.neutralSecondaryAlt,
+    defaultHoveredContent: isInverted ? p.neutralPrimary : p.neutralDark,
+    defaultHoveredIcon: isInverted ? p.neutralPrimary : p.neutralDark,
+
+    defaultFocusedBackground: p.neutralLight,
+    defaultFocusedBorder: p.neutralSecondaryAlt,
+    defaultFocusedContent: isInverted ? p.neutralPrimary : p.neutralDark,
+    defaultFocusedIcon: isInverted ? p.neutralPrimary : p.neutralDark,
+
+    defaultPressedBackground: p.neutralLight,
+    defaultPressedBorder: p.neutralSecondaryAlt,
+    defaultPressedContent: p.neutralDark,
+    defaultPressedIcon: p.neutralDark,
+
+    defaultDisabledBackground: p.neutralLighter,
+    defaultDisabledBorder: p.neutralLighter,
+    defaultDisabledContent: p.neutralTertiary,
+    defaultDisabledIcon: p.neutralTertiary,
+
+    ghostBackground: p.white,
+    ghostBorder: p.white,
+    ghostContent: p.neutralPrimary,
+    ghostIcon: p.neutralPrimary,
+
+    ghostHoveredBackground: p.neutralLighter,
+    ghostHoveredBorder: p.neutralLighter,
+    ghostHoveredContent: p.neutralDark,
+    ghostHoveredIcon: p.neutralDark,
+
+    ghostFocusedBackground: p.neutralLighter,
+    ghostFocusedBorder: p.neutralSecondaryAlt,
+    ghostFocusedContent: p.neutralDark,
+    ghostFocusedIcon: p.neutralDark,
+
+    ghostPressedBackground: p.neutralLight,
+    ghostPressedBorder: p.neutralLight,
+    ghostPressedContent: p.neutralDark,
+    ghostPressedIcon: p.neutralDark,
+
+    ghostDisabledBackground: p.white,
+    ghostDisabledBorder: p.white,
+    ghostDisabledContent: p.neutralTertiary,
+    ghostDisabledIcon: p.neutralTertiary,
+
+    brandedBackground: p.themePrimary,
+    brandedBorder: p.themeDark,
+    brandedContent: p.white,
+    brandedIcon: p.white,
+
+    brandedHoveredBackground: p.themeDarkAlt,
+    brandedHoveredBorder: p.themeDarker,
+    brandedHoveredContent: p.white,
+    brandedHoveredIcon: p.white,
+
+    brandedFocusedBackground: p.themeDarkAlt,
+    brandedFocusedBorder: p.themeDarker,
+    brandedFocusedContent: p.white,
+    brandedFocusedIcon: p.white,
+
+    brandedPressedBackground: p.themeDark,
+    brandedPressedBorder: p.themeDarker,
+    brandedPressedContent: p.white,
+    brandedPressedIcon: p.white,
+
+    brandedDisabledBackground: p.neutralLighter,
+    brandedDisabledBorder: p.neutralLighter,
+    brandedDisabledContent: p.neutralQuaternary,
+    brandedDisabledIcon: p.neutralQuaternary,
+
+    defaultCheckedBackground: p.neutralTertiaryAlt,
+    defaultCheckedContent: p.neutralDark,
+    defaultCheckedHoveredBackground: p.neutralLight,
+    defaultCheckedHoveredContent: isInverted ? p.neutralPrimary : p.neutralDark,
+
+    brandedCheckedBackground: p.neutralTertiaryAlt,
+    brandedCheckedContent: p.neutralDark,
+    brandedCheckedHoveredBackground: p.neutralLight,
+    brandedCheckedHoveredContent: isInverted ? p.neutralPrimary : p.neutralDark,
+
+    ghostCheckedBackground: p.neutralLight,
+    ghostCheckedContent: p.black,
+    ghostCheckedHoveredBackground: p.neutralLighter,
+    ghostCheckedHoveredContent: p.neutralDark,
+    ghostCheckedHoveredBorder: p.neutralDark,
+
+    ghostSecondaryContent: p.neutralSecondary,
+    ghostFocusedSecondaryContent: p.neutralSecondary,
+    ghostHoveredSecondaryContent: p.neutralSecondary,
+    ghostPressedSecondaryContent: p.neutralSecondary,
+
+    brandedSecondaryContent: p.neutralLighterAlt,
+    brandedFocusedSecondaryContent: p.neutralLighterAlt,
+    brandedHoveredSecondaryContent: p.neutralLighterAlt,
+    brandedPressedSecondaryContent: p.neutralLighterAlt,
+
+    defaultDisabledSecondaryContent: p.neutralTertiary,
+    defaultHoveredSecondaryContent: p.neutralTertiary,
+    defaultPressedSecondaryContent: p.neutralTertiary,
   };
 }
 
