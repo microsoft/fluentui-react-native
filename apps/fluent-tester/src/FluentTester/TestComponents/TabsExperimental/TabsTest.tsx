@@ -11,7 +11,7 @@ import TestSvg from './test.svg';
 const tabs: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
-      {/* <Tabs label="Tabs">
+      <Tabs label="Tabs">
         <TabsItem headerText="Home" itemKey="A">
           <Text>Tabs #1</Text>
         </TabsItem>
@@ -21,9 +21,6 @@ const tabs: React.FunctionComponent = () => {
         <TabsItem headerText="Settings" itemKey="C">
           <Text>Tabs #3</Text>
         </TabsItem>
-      </Tabs> */}
-      <Tabs label="Tabs">
-        <TabsItem headerText="Home" />
       </Tabs>
     </View>
   );
