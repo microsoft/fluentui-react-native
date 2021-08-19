@@ -17,6 +17,7 @@ import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 import { HOMEPAGE_MENU_BUTTON, MenuButtonTest } from './TestComponents/MenuButton';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
+import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 
 export const tests: TestDescription[] = [
   {
@@ -63,6 +64,11 @@ export const tests: TestDescription[] = [
     name: 'Text Test',
     component: TextTest,
     testPage: HOMEPAGE_TEXT_BUTTON,
+  },
+  {
+    name: 'Experimental Text Test',
+    component: TextExperimentalTest,
+    testPage: HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON,
   },
   {
     name: 'Shimmer Test',

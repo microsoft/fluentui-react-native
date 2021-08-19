@@ -17,6 +17,7 @@ import { HOMEPAGE_TABS_BUTTON } from '../../../FluentTester/TestComponents/Tabs/
 import { HOMEPAGE_THEME_BUTTON } from '../../../FluentTester/TestComponents/Theme/consts';
 import { BASE_TESTPAGE } from '../../../FluentTester/TestComponents/Common/consts';
 import { By, BasePage } from '../../common/BasePage';
+import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from 'src/FluentTester/TestComponents/TextExperimental';
 
 class BootTestPage extends BasePage {
   clickAndGoToButtonPage() {
@@ -77,6 +78,10 @@ class BootTestPage extends BasePage {
 
   clickAndGoToTextPage() {
     this.textPage.click();
+  }
+
+  clickAndGoToTextExperimentalPage() {
+    this.textExperimentalPage.click();
   }
 
   clickAndGoToTabsPage() {
@@ -153,6 +158,10 @@ class BootTestPage extends BasePage {
 
   private get textPage() {
     return By(HOMEPAGE_TEXT_BUTTON);
+  }
+
+  private get textExperimentalPage() {
+    return By(HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON);
   }
 
   private get tabsPage() {
