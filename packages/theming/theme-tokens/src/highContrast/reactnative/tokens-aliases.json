@@ -1,0 +1,421 @@
+{
+  "body": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 20,
+    "fontSize": 14,
+    "fontWeight": "400"
+  },
+  "borderless": {
+    "strokeAlignment": "inner",
+    "strokeColorRest": "transparent",
+    "strokeColorHover": "transparent",
+    "strokeColorPressed": "transparent",
+    "strokeColorDisabled": "transparent",
+    "strokeWidth": 1
+  },
+  "brandBackground": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "brandBackground2": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "brandBackgroundSelected": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "brandBackgroundStatic": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "brandForeground1": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "brandForeground2": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "brandForegroundLink": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "brandForegroundLinkSelected": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "brandStroke1": {
+    "strokeColorRest": "#000000",
+    "strokeColorHover": "#000000",
+    "strokeColorPressed": "#000000",
+    "strokeColorDisabled": "#000000",
+    "strokeWidth": 1
+  },
+  "brandStroke2": {
+    "strokeColorRest": "#000000",
+    "strokeColorHover": "#000000",
+    "strokeColorPressed": "#000000",
+    "strokeColorDisabled": "#000000",
+    "strokeWidth": 1
+  },
+  "caption": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 16,
+    "fontSize": 12,
+    "fontWeight": "400"
+  },
+  "compoundBrandBackground1": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "compoundBrandForeground1": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "compoundBrandStroke1": {
+    "strokeColorRest": "#000000",
+    "strokeColorHover": "#000000",
+    "strokeColorPressed": "#000000",
+    "strokeColorDisabled": "#000000",
+    "strokeWidth": 1
+  },
+  "control": {
+    "cornerRadius": 4,
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 20,
+    "fontSize": 14,
+    "fontWeight": "600"
+  },
+  "display": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 92,
+    "fontSize": 68,
+    "fontWeight": "600"
+  },
+  "headline": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 28,
+    "fontSize": 20,
+    "fontWeight": "600"
+  },
+  "icon": {
+    "cornerRadius": 4
+  },
+  "illustration": {
+    "cornerRadius": 8
+  },
+  "largeTitle": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 52,
+    "fontSize": 40,
+    "fontWeight": "600"
+  },
+  "neutralBackground1": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralBackground1Selected": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralBackground2": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralBackground2Selected": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralBackground3": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralBackground3Selected": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralBackground4": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralBackground4Selected": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralBackground5": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralBackground5Selected": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralBackground6": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralBackgroundInverted": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralForeground1": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralForeground2": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralForeground2Brand": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralForeground2BrandSelected": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralForeground2Selected": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralForeground3": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralForeground3Brand": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralForeground3BrandSelected": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralForeground3Selected": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralForeground4": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralForegroundInverted": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralForegroundInvertedLink": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralForegroundInvertedLinkSelected": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralForegroundOnBrand": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "neutralStencil1": {
+    "fillColorRest": "#141414",
+    "fillColorHover": "#141414",
+    "fillColorPressed": "#141414"
+  },
+  "neutralStencil2": {
+    "fillColorRest": "#858585",
+    "fillColorHover": "#858585",
+    "fillColorPressed": "#858585"
+  },
+  "neutralStroke1": {
+    "strokeColorRest": "#000000",
+    "strokeColorHover": "#000000",
+    "strokeColorPressed": "#000000",
+    "strokeColorDisabled": "#000000",
+    "strokeWidth": 1
+  },
+  "neutralStroke1Selected": {
+    "strokeColorRest": "#000000",
+    "strokeColorHover": "#000000",
+    "strokeColorPressed": "#000000",
+    "strokeColorDisabled": "#000000",
+    "strokeWidth": 1
+  },
+  "neutralStroke2": {
+    "strokeColorRest": "#000000",
+    "strokeColorHover": "#000000",
+    "strokeColorPressed": "#000000",
+    "strokeColorDisabled": "#000000",
+    "strokeWidth": 1
+  },
+  "neutralStroke3": {
+    "strokeColorRest": "#000000",
+    "strokeColorHover": "#000000",
+    "strokeColorPressed": "#000000",
+    "strokeColorDisabled": "#000000",
+    "strokeWidth": 1
+  },
+  "neutralStrokeAccessible": {
+    "strokeColorRest": "#000000",
+    "strokeColorHover": "#000000",
+    "strokeColorPressed": "#000000",
+    "strokeColorDisabled": "#000000",
+    "strokeWidth": 1
+  },
+  "neutralStrokeAccessibleSelected": {
+    "strokeColorRest": "#000000",
+    "strokeColorHover": "#000000",
+    "strokeColorPressed": "#000000",
+    "strokeColorDisabled": "#000000",
+    "strokeWidth": 1
+  },
+  "round": {
+    "cornerRadius": 9999
+  },
+  "square": {
+    "cornerRadius": 0
+  },
+  "strokeFocus1": {
+    "strokeColorRest": "#000000",
+    "strokeColorHover": "#000000",
+    "strokeColorPressed": "#000000",
+    "strokeColorDisabled": "#000000",
+    "strokeWidth": 1
+  },
+  "strokeFocus2": {
+    "strokeColorRest": "#000000",
+    "strokeColorHover": "#000000",
+    "strokeColorPressed": "#000000",
+    "strokeColorDisabled": "#000000",
+    "strokeWidth": 1
+  },
+  "subheadline": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 22,
+    "fontSize": 16,
+    "fontWeight": "600"
+  },
+  "subtleBackground": {
+    "fillColorRest": "transparent",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "subtleBackgroundSelected": {
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorDisabled": "#000000"
+  },
+  "surface": {
+    "cornerRadius": 4
+  },
+  "title1": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 40,
+    "fontSize": 32,
+    "fontWeight": "600"
+  },
+  "title2": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 36,
+    "fontSize": 28,
+    "fontWeight": "600"
+  },
+  "title3": {
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontLineHeight": 32,
+    "fontSize": 24,
+    "fontWeight": "600"
+  },
+  "transparentBackground": {
+    "fillColorRest": "transparent",
+    "fillColorHover": "transparent",
+    "fillColorPressed": "transparent",
+    "fillColorDisabled": "transparent"
+  },
+  "transparentBackgroundSelected": {
+    "fillColorRest": "transparent",
+    "fillColorHover": "transparent",
+    "fillColorPressed": "transparent",
+    "fillColorDisabled": "transparent"
+  },
+  "transparentStroke": {
+    "strokeAlignment": "inner",
+    "strokeColorRest": "#000000",
+    "strokeColorHover": "#000000",
+    "strokeColorPressed": "#000000",
+    "strokeColorDisabled": "#000000",
+    "strokeWidth": 1
+  }
+}
