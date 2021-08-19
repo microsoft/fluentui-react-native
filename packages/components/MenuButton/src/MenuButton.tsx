@@ -70,6 +70,14 @@ export const MenuButton = compose<MenuButtonType>({
       },
     };
 
+    const chevronIconProps = {
+      svgSource: {
+        src: primary? getChevronIcon.bind(null, '#ffffff') : getChevronIcon,
+      },
+      width: 12,
+      height: 16,
+    };
+
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
     const buttonProps = {
       content,
@@ -77,7 +85,7 @@ export const MenuButton = compose<MenuButtonType>({
       icon,
       componentRef: stdBtnRef,
       onClick: toggleShowContextualMenu,
-      dropdown: true,
+      endIcon: chevronIconProps,
     };
 
     const slotProps = mergeSettings<MenuButtonSlotProps>(styleProps, {
@@ -123,12 +131,7 @@ export const MenuButton = compose<MenuButtonType>({
       <Slots.root>
         {
           primary ?
-          <Slots.primaryButton>
-            {getChevronIcon('#fff')}
-          </Slots.primaryButton> :
-          <Slots.button>
-            {getChevronIcon()}
-          </Slots.button>
+          <Slots.primaryButton /> : <Slots.button />
         }
         {context.showContextualMenu && (
           <Slots.contextualMenu>

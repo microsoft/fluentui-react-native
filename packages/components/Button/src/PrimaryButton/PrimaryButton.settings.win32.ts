@@ -8,12 +8,12 @@ export const settings: IComposeSettings<IButtonType> = [
       color: 'neutralForegroundInverted',
       borderColor: 'brandBackground',
     },
-    // TODO: neutralForegroundInverted is not working for icon color.
+    // TODO - #728: neutralForegroundInverted is not working for icon color.
     endIcon: {
-      color: '#fff',
+      color: '#ffffff',
     },
     icon: {
-      color: '#fff',
+      color: '#ffffff',
     },
     _overrides: {
       disabled: {
