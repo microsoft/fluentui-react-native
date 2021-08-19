@@ -23,7 +23,7 @@ the `ThemeReference` would have:
 
 ```ts
 import { ThemeReference } from '@fluentui-react-native/theme';
-import { Theme, PartialTheme } from '@fluentui-react-native/theme-types';
+import { Theme, PartialTheme } from '@fluentui-react-native/framework';
 
 const themeRef = new ThemeReference(
   baseTheme,
@@ -80,5 +80,5 @@ import { useTheme } from @uifabricshared/theming-react-native;
 to
 
 ```ts
-import { useTheme } from @fluentui-react-native/theme-types;
+import { useTheme } from @fluentui-react-native/framework;
 ```
