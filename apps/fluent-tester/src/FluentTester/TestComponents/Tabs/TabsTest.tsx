@@ -96,7 +96,7 @@ const onTabsClickEvent: React.FunctionComponent = () => {
 
 const tabsChangingViews: React.FunctionComponent = () => {
   // If user wants to control what gets rendered example.
-  const [selectedKey, setSelectedKey] = React.useState('home');
+  const [selectedKey, setSelectedKey] = React.useState('Tabs #1');
 
   const onTabsClick = (key: string) => {
     setSelectedKey(key);
