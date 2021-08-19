@@ -17,7 +17,7 @@ import { HOMEPAGE_TABS_BUTTON } from '../../../FluentTester/TestComponents/Tabs/
 import { HOMEPAGE_THEME_BUTTON } from '../../../FluentTester/TestComponents/Theme/consts';
 import { BASE_TESTPAGE } from '../../../FluentTester/TestComponents/Common/consts';
 import { By, BasePage } from '../../common/BasePage';
-import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from 'src/FluentTester/TestComponents/TextExperimental';
+import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from '../../../FluentTester/TestComponents/TextExperimental';
 
 class BootTestPage extends BasePage {
   clickAndGoToButtonPage() {
