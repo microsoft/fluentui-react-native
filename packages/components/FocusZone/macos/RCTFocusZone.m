@@ -95,14 +95,29 @@ static FocusZoneAction GetActionForEvent(NSEvent *event)
 	return action;
 }
 
-static BOOL IsAdvanceWithinZoneAction(FocusZoneAction action)
+static inline BOOL IsAdvanceWithinZoneAction(FocusZoneAction action)
 {
 	return action == FocusZoneActionRightArrow || action == FocusZoneActionDownArrow;
 }
 
-static BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action)
+static inline BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action)
 {
 	return action == FocusZoneActionRightArrow || action == FocusZoneActionLeftArrow;
+}
+
+static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
+{
+  NSView *candidateView = view;
+  NSView *topLevelView = [[view window] contentView];
+  while (candidateView != nil && candidateView != topLevelView)
+  {
+    if ([candidateView isKindOfClass:[RCTFocusZone class]])
+    {
+      return (RCTFocusZone *)candidateView;
+    }
+    candidateView = [candidateView superview];
+  }
+  return nil;
 }
 
 - (NSView *)nextViewToFocusForCondition:(IsViewLeadingCandidateForNextFocus)isLeadingCandidate
@@ -272,7 +287,7 @@ static BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action)
 
 		nextViewToFocus = [([self nextViewToFocusForCondition:block] ?: self) nextValidKeyView];
 	}
-	else
+	else  // action == FocusZoneActionShiftTab per the conditional in keyDown
 	{
 		nextViewToFocus = [self previousValidKeyView];
 	}
@@ -280,6 +295,21 @@ static BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action)
 	if ([nextViewToFocus isDescendantOf:self])
 	{
 		nextViewToFocus = nil;
+	}
+	else
+	{
+		// If the next view is in a FocusZone, check whether we should
+		// prioritize a selected button within the zone.
+		RCTFocusZone *nextFocusZone = GetFocusZoneAncestor(nextViewToFocus);
+		if ([nextFocusZone preferSelectedTabbableElement])
+		{
+			IsViewLeadingCandidateForNextFocus selectedBlock = ^BOOL(NSView *candidateView)
+			{
+				return [candidateView isKindOfClass:[NSButton class]] && [(NSButton *)candidateView state] != NSControlStateValueOff;
+			};
+
+			nextViewToFocus = [nextFocusZone nextViewToFocusForCondition:selectedBlock] ?: nextViewToFocus;
+		}
 	}
 
 	return nextViewToFocus;
