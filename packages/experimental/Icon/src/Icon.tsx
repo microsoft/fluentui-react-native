@@ -63,13 +63,13 @@ function renderSvg(iconProps: IconProps) {
   if (svgIconProps.src) {
     return (
       <View style={style}>
-        <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconColor as Color} />
+        <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconColor} />
       </View>
     );
   } else if (svgIconProps.uri) {
     return (
       <View style={style}>
-        <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconColor as Color} />
+        <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconColor} />
       </View>
     );
   } else {
