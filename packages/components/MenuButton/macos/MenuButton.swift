@@ -13,11 +13,7 @@ open class MenuButton: NSPopUpButton {
     super.init(frame: buttonFrame, pullsDown: flag)
 
     imagePosition = .imageLeading
-    bezelStyle = .recessed
-	
-	if #available(OSX 11.0, *) {
-	  controlSize = .large
-	}
+    bezelStyle = .regularSquare
 
     guard let dropDownCell = cell as? NSPopUpButtonCell else {
       preconditionFailure()
