@@ -110,7 +110,7 @@ export const TabsItem = compose<TabsItemType>({
         accessibilityPositionInSet: accessibilityPosInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
         accessibilitySetSize: accessibilitySetSize ?? info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
-        focusable: Platform.OS=='macos' ? !userProps.disabled : userProps.focusable,
+        focusable: Platform.OS=='macos' ? !userProps.disabled : userProps.focusable ?? true,
       },
       content: { children: headerText + countText, testID: testID },
       icon: createIconProps(icon),
