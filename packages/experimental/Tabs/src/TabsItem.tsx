@@ -30,20 +30,22 @@ export const TabsItem = compose<TabItemType>({
     // now return the handler for finishing render
     return (final: TabsItemProps, ...children: React.ReactNode[]) => {
       const context = React.useContext(TabsContext);
-      const { icon, headerText, itemKey, itemCount, testID, ...mergedProps } = mergeProps(tabsItem.props, final);
-      console.log(itemCount);
-      const countText = itemCount !== undefined ? ` (${itemCount})` : '';
-      // Sets the view that belongs to a TabItem
-      // console.log(itemKey, children);
+      const { icon, itemKey, itemCount, headerText, testID, ...mergedProps } = mergeProps(tabsItem.props, final);
+
+      let containerText = headerText;
+      if (itemCount !== undefined) {
+        containerText += `(${itemCount})`;
+      }
+      const renderContent = !!headerText || itemCount !== undefined;
       context.views.set(itemKey, children);
 
       return (
         <Slots.root {...mergedProps}>
           <Slots.stack>
             {icon && <Slots.icon {...iconProps} />}
-            {headerText && (
+            {renderContent && (
               <Slots.content key="content" testID={testID}>
-                {headerText + countText}
+                {containerText}
               </Slots.content>
             )}
           </Slots.stack>
