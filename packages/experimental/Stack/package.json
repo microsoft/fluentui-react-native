@@ -24,8 +24,7 @@
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.6.9 <1.0.0",
     "@fluentui-react-native/framework": "0.5.30",
-    "@fluentui-react-native/tokens": ">=0.9.18 <1.0.0",
-    "@uifabricshared/theming-ramp": ">=0.15.4 <1.0.0"
+    "@fluentui-react-native/tokens": ">=0.9.18 <1.0.0"
   },
   "devDependencies": {
     "@types/react-native": "^0.63.0",

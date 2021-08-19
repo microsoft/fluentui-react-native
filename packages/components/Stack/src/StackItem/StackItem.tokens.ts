@@ -1,6 +1,6 @@
 import { IStackItemTokens } from './StackItem.types';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
-import { ITheme } from '@uifabricshared/theming-ramp';
+import { Theme } from '@fluentui-react-native/framework';
 import { ViewStyle, ViewProps } from 'react-native';
 
 const alignMap: { [key: string]: ViewStyle['alignSelf'] } = {
@@ -24,4 +24,4 @@ export function _processor(tokenProps: IStackItemTokens): ViewProps {
   };
 }
 
-export const stackItemTokenProcessor = styleFunction<ViewProps, IStackItemTokens, ITheme>(_processor, _keyProps);
+export const stackItemTokenProcessor = styleFunction<ViewProps, IStackItemTokens, Theme>(_processor, _keyProps);

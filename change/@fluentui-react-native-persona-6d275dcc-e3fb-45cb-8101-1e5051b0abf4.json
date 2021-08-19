@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Change one",
+  "packageName": "@fluentui-react-native/persona",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}

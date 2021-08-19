@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Finish move",
+  "packageName": "@fluentui-react-native/tokens",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
