@@ -44,28 +44,28 @@ const disabledTabs: React.FunctionComponent = () => {
   );
 };
 
-// const tabsCountIcon: React.FunctionComponent = () => {
-//   const svgProps: SvgIconProps = {
-//     src: TestSvg,
-//     viewBox: '0 0 500 500',
-//   };
+const tabsCountIcon: React.FunctionComponent = () => {
+  const svgProps: SvgIconProps = {
+    src: TestSvg,
+    viewBox: '0 0 500 500',
+  };
 
-//   return (
-//     <View style={stackStyle}>
-//       <Tabs label="Tabs">
-//         <TabsItem headerText="Home" itemKey="A" icon={{ svgSource: svgProps, width: 20, height: 20, style: { margin: 5 } }} itemCount={23}>
-//           <Text>Tabs #1</Text>
-//         </TabsItem>
-//         <TabsItem itemKey="B" icon={{ svgSource: svgProps, width: 20, height: 20 }} itemCount={0}>
-//           <Text>Tabs #2</Text>
-//         </TabsItem>
-//         <TabsItem itemKey="C" icon={{ svgSource: svgProps, width: 20, height: 20 }}>
-//           <Text>Tabs #3</Text>
-//         </TabsItem>
-//       </Tabs>
-//     </View>
-//   );
-// };
+  return (
+    <View style={stackStyle}>
+      <Tabs label="Tabs">
+        <TabsItem headerText="Home" itemKey="A" icon={{ svgSource: svgProps, width: 20, height: 20, style: { margin: 5 } }} itemCount={23}>
+          <Text>Tabs #1</Text>
+        </TabsItem>
+        <TabsItem itemKey="B" icon={{ svgSource: svgProps, width: 20, height: 20 }} itemCount={0}>
+          <Text>Tabs #2</Text>
+        </TabsItem>
+        <TabsItem itemKey="C" icon={{ svgSource: svgProps, width: 20, height: 20 }}>
+          <Text>Tabs #3</Text>
+        </TabsItem>
+      </Tabs>
+    </View>
+  );
+};
 
 const onTabsClickEvent: React.FunctionComponent = () => {
   const [selectedKey, setSelectedKey] = React.useState('home_key');
@@ -217,10 +217,10 @@ const tabsSections: TestSection[] = [
     name: 'Tabs with disabled',
     component: disabledTabs,
   },
-  // {
-  //   name: 'Count and Icon',
-  //   component: tabsCountIcon,
-  // },
+  {
+    name: 'Count and Icon',
+    component: tabsCountIcon,
+  },
   {
     name: 'Trigger onTabsClick event',
     component: onTabsClickEvent,

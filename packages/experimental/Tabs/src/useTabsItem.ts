@@ -47,6 +47,7 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
       focusable: true,
       ref: useViewCommandFocus(componentRef),
       itemKey: props.itemKey,
+      icon: props.icon,
       onKeyUp: onKeyUp,
     },
     state: {
