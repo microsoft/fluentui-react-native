@@ -41,7 +41,7 @@ export const Tabs = compose<TabsType>({
     const Slots = useSlots(userProps);
     // now return the handler for finishing render
     return (final: TabsProps, ...children: React.ReactNode[]) => {
-      const { label, defaultTabbableElement, ...mergedProps } = mergeProps(tabs.props, final);
+      const { label, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(tabs.props, final);
 
       // Populate the tabsItemKeys array
       if (children) {
@@ -66,7 +66,7 @@ export const Tabs = compose<TabsType>({
         >
           <Slots.root {...mergedProps}>
             {tabs.info.label && <Slots.label>{label}</Slots.label>}
-            <Slots.container defaultTabbableElement={defaultTabbableElement}>
+            <Slots.container defaultTabbableElement={defaultTabbableElement} isCircularNavigation={isCircularNavigation}>
               <Slots.stack>{children}</Slots.stack>
             </Slots.container>
             <Slots.tabPanel>
