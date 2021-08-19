@@ -13,7 +13,11 @@ open class MenuButton: NSPopUpButton {
     super.init(frame: buttonFrame, pullsDown: flag)
 
     imagePosition = .imageLeading
-    bezelStyle = .regularSquare
+    bezelStyle = .recessed
+	
+	if #available(OSX 11.0, *) {
+	  controlSize = .large
+	}
 
     guard let dropDownCell = cell as? NSPopUpButtonCell else {
       preconditionFailure()
@@ -93,7 +97,7 @@ open class MenuButton: NSPopUpButton {
     // MenuButton needs a MenuItem set on its cell to display the title and image properly
     let dropdownCellItem = NSMenuItem()
     dropdownCellItem.image = image
-    dropdownCellItem.title = ""
+    dropdownCellItem.title = title
     dropDownCell.usesItemFromMenu = false
 
     dropDownCell.menuItem = dropdownCellItem
