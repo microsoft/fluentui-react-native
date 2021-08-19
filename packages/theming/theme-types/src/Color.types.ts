@@ -336,30 +336,30 @@ export interface PaletteBackgroundColors {
 }
 
 export interface ControlColorTokens {
-  buttonBackground: ColorValue;
-  buttonBorder: ColorValue;
-  buttonContent: ColorValue;
-  buttonIcon: ColorValue;
+  defaultBackground: ColorValue;
+  defaultBorder: ColorValue;
+  defaultContent: ColorValue;
+  defaultIcon: ColorValue;
 
-  buttonHoveredBackground: ColorValue;
-  buttonHoveredBorder: ColorValue;
-  buttonHoveredContent: ColorValue;
-  buttonHoveredIcon: ColorValue;
+  defaultHoveredBackground: ColorValue;
+  defaultHoveredBorder: ColorValue;
+  defaultHoveredContent: ColorValue;
+  defaultHoveredIcon: ColorValue;
 
-  buttonFocusedBackground: ColorValue;
-  buttonFocusedBorder: ColorValue;
-  buttonFocusedContent: ColorValue;
-  buttonFocusedIcon: ColorValue;
+  defaultFocusedBackground: ColorValue;
+  defaultFocusedBorder: ColorValue;
+  defaultFocusedContent: ColorValue;
+  defaultFocusedIcon: ColorValue;
 
-  buttonPressedBackground: ColorValue;
-  buttonPressedBorder: ColorValue;
-  buttonPressedContent: ColorValue;
-  buttonPressedIcon: ColorValue;
+  defaultPressedBackground: ColorValue;
+  defaultPressedBorder: ColorValue;
+  defaultPressedContent: ColorValue;
+  defaultPressedIcon: ColorValue;
 
-  buttonDisabledBackground: ColorValue;
-  buttonDisabledBorder: ColorValue;
-  buttonDisabledContent: ColorValue;
-  buttonDisabledIcon: ColorValue;
+  defaultDisabledBackground: ColorValue;
+  defaultDisabledBorder: ColorValue;
+  defaultDisabledContent: ColorValue;
+  defaultDisabledIcon: ColorValue;
 
   ghostBackground: ColorValue;
   ghostBorder: ColorValue;
@@ -386,40 +386,40 @@ export interface ControlColorTokens {
   ghostDisabledContent: ColorValue;
   ghostDisabledIcon: ColorValue;
 
-  brandBackground: ColorValue;
-  brandBorder: ColorValue;
-  brandContent: ColorValue;
-  brandIcon: ColorValue;
+  brandedBackground: ColorValue;
+  brandedBorder: ColorValue;
+  brandedContent: ColorValue;
+  brandedIcon: ColorValue;
 
-  brandHoveredBackground: ColorValue;
-  brandHoveredBorder: ColorValue;
-  brandHoveredContent: ColorValue;
-  brandHoveredIcon: ColorValue;
+  brandedHoveredBackground: ColorValue;
+  brandedHoveredBorder: ColorValue;
+  brandedHoveredContent: ColorValue;
+  brandedHoveredIcon: ColorValue;
 
-  brandFocusedBackground: ColorValue;
-  brandFocusedBorder: ColorValue;
-  brandFocusedContent: ColorValue;
-  brandFocusedIcon: ColorValue;
+  brandedFocusedBackground: ColorValue;
+  brandedFocusedBorder: ColorValue;
+  brandedFocusedContent: ColorValue;
+  brandedFocusedIcon: ColorValue;
 
-  brandPressedBackground: ColorValue;
-  brandPressedBorder: ColorValue;
-  brandPressedContent: ColorValue;
-  brandPressedIcon: ColorValue;
+  brandedPressedBackground: ColorValue;
+  brandedPressedBorder: ColorValue;
+  brandedPressedContent: ColorValue;
+  brandedPressedIcon: ColorValue;
 
-  brandDisabledBackground: ColorValue;
-  brandDisabledBorder: ColorValue;
-  brandDisabledContent: ColorValue;
-  brandDisabledIcon: ColorValue;
+  brandedDisabledBackground: ColorValue;
+  brandedDisabledBorder: ColorValue;
+  brandedDisabledContent: ColorValue;
+  brandedDisabledIcon: ColorValue;
 
-  buttonCheckedBackground: ColorValue;
-  buttonCheckedContent: ColorValue;
-  buttonCheckedHoveredBackground: ColorValue;
-  buttonCheckedHoveredContent: ColorValue;
+  defaultCheckedBackground: ColorValue;
+  defaultCheckedContent: ColorValue;
+  defaultCheckedHoveredBackground: ColorValue;
+  defaultCheckedHoveredContent: ColorValue;
 
-  brandCheckedBackground: ColorValue;
-  brandCheckedContent: ColorValue;
-  brandCheckedHoveredBackground: ColorValue;
-  brandCheckedHoveredContent: ColorValue;
+  brandedCheckedBackground: ColorValue;
+  brandedCheckedContent: ColorValue;
+  brandedCheckedHoveredBackground: ColorValue;
+  brandedCheckedHoveredContent: ColorValue;
 
   ghostCheckedBackground: ColorValue;
   ghostCheckedContent: ColorValue;
@@ -432,14 +432,14 @@ export interface ControlColorTokens {
   ghostHoveredSecondaryContent: ColorValue;
   ghostPressedSecondaryContent: ColorValue;
 
-  brandSecondaryContent: ColorValue;
-  brandFocusedSecondaryContent: ColorValue;
-  brandHoveredSecondaryContent: ColorValue;
-  brandPressedSecondaryContent: ColorValue;
+  brandedSecondaryContent: ColorValue;
+  brandedFocusedSecondaryContent: ColorValue;
+  brandedHoveredSecondaryContent: ColorValue;
+  brandedPressedSecondaryContent: ColorValue;
 
-  buttonDisabledSecondaryContent: ColorValue;
-  buttonHoveredSecondaryContent: ColorValue;
-  buttonPressedSecondaryContent: ColorValue;
+  defaultDisabledSecondaryContent: ColorValue;
+  defaultHoveredSecondaryContent: ColorValue;
+  defaultPressedSecondaryContent: ColorValue;
 
   checkboxBackground: ColorValue;
   checkboxBackgroundDisabled: ColorValue;
@@ -454,21 +454,26 @@ export interface AliasColorTokens {
   neutralForeground2: ColorValue;
   neutralForeground2Hover: ColorValue;
   neutralForeground2Pressed: ColorValue;
+  neutralForeground2Selected: ColorValue;
   neutralForeground2Brand: ColorValue;
   neutralForeground2BrandHover: ColorValue;
   neutralForeground2BrandPressed: ColorValue;
+  neutralForeground2BrandSelected: ColorValue;
   neutralForeground3: ColorValue;
   neutralForeground3Hover: ColorValue;
   neutralForeground3Pressed: ColorValue;
+  neutralForeground3Selected: ColorValue;
   neutralForeground3Brand: ColorValue;
   neutralForeground3BrandHover: ColorValue;
   neutralForeground3BrandPressed: ColorValue;
+  neutralForeground3BrandSelected: ColorValue;
   neutralForeground4: ColorValue;
   neutralForegroundDisabled: ColorValue;
 
   brandForegroundLink: ColorValue;
   brandForegroundLinkHover: ColorValue;
   brandForegroundLinkPressed: ColorValue;
+  brandForegroundLinkSelected: ColorValue;
   compoundBrandForeground1: ColorValue;
   compoundBrandForeground1Hover: ColorValue;
   compoundBrandForeground1Pressed: ColorValue;
@@ -480,48 +485,65 @@ export interface AliasColorTokens {
   neutralForegroundInvertedLink: ColorValue;
   neutralForegroundInvertedLinkHover: ColorValue;
   neutralForegroundInvertedLinkPressed: ColorValue;
+  neutralForegroundInvertedLinkSelected: ColorValue;
 
   neutralBackground1: ColorValue;
   neutralBackground1Hover: ColorValue;
   neutralBackground1Pressed: ColorValue;
+  neutralBackground1Selected: ColorValue;
   neutralBackground2: ColorValue;
   neutralBackground2Hover: ColorValue;
   neutralBackground2Pressed: ColorValue;
+  neutralBackground2Selected: ColorValue;
   neutralBackground3: ColorValue;
   neutralBackground3Hover: ColorValue;
   neutralBackground3Pressed: ColorValue;
+  neutralBackground3Selected: ColorValue;
   neutralBackground4: ColorValue;
   neutralBackground4Hover: ColorValue;
   neutralBackground4Pressed: ColorValue;
+  neutralBackground4Selected: ColorValue;
   neutralBackground5: ColorValue;
   neutralBackground5Hover: ColorValue;
   neutralBackground5Pressed: ColorValue;
+  neutralBackground5Selected: ColorValue;
   neutralBackground6: ColorValue;
   neutralBackgroundInverted: ColorValue;
 
   subtleBackground: ColorValue;
   subtleBackgroundHover: ColorValue;
   subtleBackgroundPressed: ColorValue;
+  subtleBackgroundSelected: ColorValue;
 
   transparentBackground: ColorValue;
   transparentBackgroundHover: ColorValue;
   transparentBackgroundPressed: ColorValue;
+  transparentBackgroundSelected: ColorValue;
 
   neutralBackgroundDisabled: ColorValue;
+
+  neutralStencil1: ColorValue;
+  neutralStencil2: ColorValue;
 
   brandBackground: ColorValue;
   brandBackgroundHover: ColorValue;
   brandBackgroundPressed: ColorValue;
+  brandBackgroundSelected: ColorValue;
   compoundBrandBackground1: ColorValue;
   compoundBrandBackground1Hover: ColorValue;
   compoundBrandBackground1Pressed: ColorValue;
 
+  brandBackgroundStatic: ColorValue;
+  brandBackground2: ColorValue;
+
   neutralStrokeAccessible: ColorValue;
   neutralStrokeAccessibleHover: ColorValue;
   neutralStrokeAccessiblePressed: ColorValue;
+  neutralStrokeAccessibleSelected: ColorValue;
   neutralStroke1: ColorValue;
   neutralStroke1Hover: ColorValue;
   neutralStroke1Pressed: ColorValue;
+  neutralStroke1Selected: ColorValue;
   neutralStroke2: ColorValue;
   neutralStroke3: ColorValue;
   brandStroke1: ColorValue;
@@ -534,6 +556,9 @@ export interface AliasColorTokens {
   transparentStroke: ColorValue;
   transparentStrokeInteractive: ColorValue;
   transparentStrokeDisabled: ColorValue;
+
+  strokeFocus1: ColorValue;
+  strokeFocus2: ColorValue;
 }
 
 /**

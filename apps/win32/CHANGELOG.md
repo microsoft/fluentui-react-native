@@ -1,8 +1,88 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Mon, 09 Aug 2021 22:49:01 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Aug 2021 23:00:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.18
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.37.1 (ruaraki@microsoft.com)
+
+## 0.12.17
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.37.0 (67026167+chiuam@users.noreply.github.com)
+
+## 0.12.16
+
+Tue, 17 Aug 2021 20:02:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.36.0 (dake.3601@gmail.com)
+
+## 0.12.15
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.12.14
+
+Fri, 13 Aug 2021 14:54:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.8 (amdingler694@gmail.com)
+
+## 0.12.13
+
+Fri, 13 Aug 2021 09:05:57 GMT
+
+### Patches
+
+- Update apple native code and build flags (sanajmi@microsoft.com)
+
+## 0.12.12
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.6 (ruaraki@microsoft.com)
+
+## 0.12.11
+
+Wed, 11 Aug 2021 18:38:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.5 (chripear@microsoft.com)
+
+## 0.12.10
+
+Wed, 11 Aug 2021 04:24:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.4 (chripear@microsoft.com)
+
+## 0.12.9
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.3 (ruaraki@microsoft.com)
 
 ## 0.12.8
 

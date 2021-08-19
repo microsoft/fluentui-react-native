@@ -2,6 +2,133 @@
   "name": "@fluentui-react-native/win32-theme",
   "entries": [
     {
+      "date": "Wed, 18 Aug 2021 23:00:57 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.11.3",
+      "version": "0.11.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Rename tokens to avoid name clash, initial token re-population",
+            "author": "ruaraki@microsoft.com",
+            "commit": "345d1de930ff42359260da7f1e68a16059f4d763",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 18 Aug 2021 20:17:46 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.11.2",
+      "version": "0.11.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix entries",
+            "author": "ruaraki@microsoft.com",
+            "commit": "05bf06331b12432314223844391f422f2151547a",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 13 Aug 2021 16:12:26 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.11.1",
+      "version": "0.11.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix icons in experimental button and add fab",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "8946966df6ddc0ef1c0b43e576a4124c678d7c89",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 12 Aug 2021 17:23:44 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "rename an alias token to avoid name clash",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.11.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui-react-native/win32-theme"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme to v0.5.14",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui-react-native/win32-theme"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/default-theme to v0.7.10",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui-react-native/win32-theme"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.5.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 10 Aug 2021 21:12:30 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add missing tokens",
+            "author": "ruaraki@microsoft.com",
+            "commit": "ce49f33c08add7892191cf840d2fdcccfd0a16bb",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/default-theme to v0.7.9",
+            "author": "ruaraki@microsoft.com",
+            "commit": "ce49f33c08add7892191cf840d2fdcccfd0a16bb",
+            "package": "@fluentui-react-native/win32-theme"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.4.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "ce49f33c08add7892191cf840d2fdcccfd0a16bb",
+            "package": "@fluentui-react-native/win32-theme"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.10.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "ce49f33c08add7892191cf840d2fdcccfd0a16bb",
+            "package": "@fluentui-react-native/win32-theme"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme to v0.5.13",
+            "author": "ruaraki@microsoft.com",
+            "commit": "ce49f33c08add7892191cf840d2fdcccfd0a16bb",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 09 Aug 2021 22:49:01 GMT",
       "tag": "@fluentui-react-native/win32-theme_v0.9.0",
       "version": "0.9.0",

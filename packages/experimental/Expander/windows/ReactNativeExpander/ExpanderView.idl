@@ -1,0 +1,12 @@
+// Native styling was not rendered properly when the ExpanderView inherits directly from the Expander control
+// Inheriting from a ContentPresenter and assigning an Expander to the content renders correctly
+
+namespace ReactNativeExpander{
+
+    [default_interface]
+    runtimeclass ExpanderView : Windows.UI.Xaml.Controls.ContentPresenter {
+        ExpanderView(Microsoft.ReactNative.IReactContext context);
+        void UpdateProperties(Microsoft.ReactNative.IJSValueReader reader);
+    };
+
+}

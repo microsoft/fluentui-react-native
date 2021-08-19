@@ -13,3 +13,4 @@ export * from '@fluentui-react-native/separator';
 export * from '@fluentui-react-native/text';
 export * from '@fluentui-react-native/interactive-hooks';
 export * from '@fluentui-react-native/menu-button';
+export * from '@fluentui-react-native/tabs';

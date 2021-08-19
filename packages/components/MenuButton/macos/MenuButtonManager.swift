@@ -1,6 +1,6 @@
 import Foundation
 
-@objc(MSFMenuButtonManager)
+@objc(FRNMenuButtonManager)
 class MenuButtonManager: RCTViewManager {
   override func view()->NSView! {
     return MenuButton()

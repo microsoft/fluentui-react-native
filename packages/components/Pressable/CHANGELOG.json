@@ -2,6 +2,81 @@
   "name": "@fluentui-react-native/pressable",
   "entries": [
     {
+      "date": "Wed, 18 Aug 2021 23:00:57 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.7.11",
+      "version": "0.7.11",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.34",
+            "author": "ruaraki@microsoft.com",
+            "commit": "345d1de930ff42359260da7f1e68a16059f4d763",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 18 Aug 2021 20:17:46 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.7.10",
+      "version": "0.7.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.33",
+            "author": "ruaraki@microsoft.com",
+            "commit": "9359dd854f286cb1c9f5b8cc74e895ad8538f3c0",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 13 Aug 2021 16:12:26 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.7.9",
+      "version": "0.7.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix icons in experimental button and add fab",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "8946966df6ddc0ef1c0b43e576a4124c678d7c89",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 12 Aug 2021 17:23:44 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.7.8",
+      "version": "0.7.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.31",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 10 Aug 2021 21:12:30 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.7.7",
+      "version": "0.7.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.30",
+            "author": "ruaraki@microsoft.com",
+            "commit": "ce49f33c08add7892191cf840d2fdcccfd0a16bb",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 09 Aug 2021 22:49:01 GMT",
       "tag": "@fluentui-react-native/pressable_v0.7.6",
       "version": "0.7.6",

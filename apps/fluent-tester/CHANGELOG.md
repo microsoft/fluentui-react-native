@@ -1,8 +1,110 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 09 Aug 2021 22:49:01 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Aug 2021 23:00:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.37.1
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Rename tokens to avoid name clash, initial token re-population (ruaraki@microsoft.com)
+
+## 0.37.0
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Minor changes
+
+- fix for radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-avatar to v0.12.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-expander to v0.2.3 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.3.5 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.8.10 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/button to v0.18.10 (ruaraki@microsoft.com)
+- Bump @fluentui/react-native to v0.25.1 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-button to v0.8.11 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-native-button to v0.7.13 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.33 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/win32-theme to v0.11.2 (ruaraki@microsoft.com)
+
+## 0.36.0
+
+Tue, 17 Aug 2021 20:02:00 GMT
+
+### Minor changes
+
+- Implemented Tabs Control (dake.3601@gmail.com)
+
+### Patches
+
+- Bump @fluentui/react-native to v0.25.0 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.11.9 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-expander to v0.2.2 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-native-button to v0.7.12 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.3.4 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/native-radio-button to v0.1.12 (sanajmi@microsoft.com)
+
+## 0.35.9
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.35.8
+
+Fri, 13 Aug 2021 14:54:33 GMT
+
+### Patches
+
+- Add Expander component test (amdingler694@gmail.com)
+
+## 0.35.7
+
+Fri, 13 Aug 2021 09:05:57 GMT
+
+### Patches
+
+- Update apple native code and build flags (sanajmi@microsoft.com)
+
+## 0.35.6
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Patch up the tester (ruaraki@microsoft.com)
+
+## 0.35.5
+
+Wed, 11 Aug 2021 18:38:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/native-radio-button to v0.1.8 (chripear@microsoft.com)
+
+## 0.35.4
+
+Wed, 11 Aug 2021 04:24:12 GMT
+
+### Patches
+
+- Bump @fluentui/react-native to v0.24.33 (chripear@microsoft.com)
+
+## 0.35.3
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Patches
+
+- Patch tester (ruaraki@microsoft.com)
 
 ## 0.35.2
 

@@ -82,13 +82,13 @@ Since the FluentUI React Native controls are cross-platform, but represented by 
 
 Our FluentUI framework documentation is found in this repository alongside the implementation.
 
-- [Theming Overview](./packages/framework/theming-react-native/README.md)
+- [Theming Overview](./packages/deprecated/theming-react-native/README.md)
 - [StyleSheets](./packages/framework/themed-stylesheet/README.md)
-- [Customizing Theme Settings](./packages/framework/themed-settings/README.md)
-- [Theme Registry](./packages/framework/theme-registry/README.md)
-- [Tokens](./packages/framework/foundation-tokens/README.md)
-- [Settings and Slots](./packages/framework/foundation-settings/README.md)
-- [Compose](./packages/framework/foundation-compose/README.md) and [Composable](./packages/framework/foundation-composable/README.md)
+- [Customizing Theme Settings](./packages/deprecated/themed-settings/README.md)
+- [Theme Registry](./packages/deprecated/theme-registry/README.md)
+- [Tokens](./packages/deprecated/foundation-tokens/README.md)
+- [Settings and Slots](./packages/deprecated/foundation-settings/README.md)
+- [Compose](./packages/deprecated/foundation-compose/README.md) and [Composable](./packages/deprecated/foundation-composable/README.md)
 
 ## Developing in the repo
 
