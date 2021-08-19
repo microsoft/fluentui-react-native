@@ -30,11 +30,9 @@ export const TabsItem = compose<TabItemType>({
     // now return the handler for finishing render
     return (final: TabsItemProps, ...children: React.ReactNode[]) => {
       const context = React.useContext(TabsContext);
-      const { icon, headerText, itemKey, ...mergedProps } = mergeProps(tabsItem.props, final);
-      const marginBetween = {
-        marginLeft: icon && headerText ? 10 : 0,
-      };
-
+      const { icon, headerText, itemKey, itemCount, testID, ...mergedProps } = mergeProps(tabsItem.props, final);
+      console.log(itemCount);
+      const countText = itemCount !== undefined ? ` (${itemCount})` : '';
       // Sets the view that belongs to a TabItem
       // console.log(itemKey, children);
       context.views.set(itemKey, children);
@@ -44,8 +42,8 @@ export const TabsItem = compose<TabItemType>({
           <Slots.stack>
             {icon && <Slots.icon {...iconProps} />}
             {headerText && (
-              <Slots.content key="content" style={marginBetween}>
-                {headerText}
+              <Slots.content key="content" testID={testID}>
+                {headerText + countText}
               </Slots.content>
             )}
           </Slots.stack>
