@@ -1,18 +1,18 @@
 import Foundation
 import FluentUI
 
-@objc(MSFAvatarViewManager)
+@objc(FRNAvatarViewManager)
 class AvatarViewManager: RCTViewManager {
-	
+
 	override func view()->UIView! {
 		let viewWrapper = MSFAvatar()
         let view = viewWrapper.view
-        
+
         // Store the key value pair for lookup when we set props
         let storage = MSFAvatar.storage()
         let key = NSValue(nonretainedObject: view)
         storage[key] = viewWrapper
-        
+
 		return view
 	}
 

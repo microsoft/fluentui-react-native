@@ -1,8 +1,55 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Thu, 12 Aug 2021 17:23:44 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Aug 2021 23:00:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.25.2
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.4.14 (ruaraki@microsoft.com)
+
+## 0.25.1
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.4.13 (ruaraki@microsoft.com)
+
+## 0.25.0
+
+Tue, 17 Aug 2021 20:02:00 GMT
+
+### Minor changes
+
+- Implemented Tabs Control (dake.3601@gmail.com)
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.7.11 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/radio-group to v0.11.12 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/tabs to v0.2.0 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/menu-button to v0.4.12 (sanajmi@microsoft.com)
+
+## 0.24.36
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.24.35
+
+Fri, 13 Aug 2021 09:05:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/radio-group to v0.11.10 (sanajmi@microsoft.com)
 
 ## 0.24.34
 

@@ -2,6 +2,204 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 18 Aug 2021 23:00:57 GMT",
+      "tag": "@fluentui-react-native/tester_v0.37.1",
+      "version": "0.37.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Rename tokens to avoid name clash, initial token re-population",
+            "author": "ruaraki@microsoft.com",
+            "commit": "345d1de930ff42359260da7f1e68a16059f4d763",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 18 Aug 2021 20:17:46 GMT",
+      "tag": "@fluentui-react-native/tester_v0.37.0",
+      "version": "0.37.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "fix for radio group on macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "eae3b80724f357040f5a6d724bdf0fe14ac6d5f5",
+            "package": "@fluentui-react-native/tester"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.12.0",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "eae3b80724f357040f5a6d724bdf0fe14ac6d5f5",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-expander to v0.2.3",
+            "author": "sanajmi@microsoft.com",
+            "commit": "f2d5a32458fa81b38e4512923aafa92da7416b86",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-native-date-picker to v0.3.5",
+            "author": "sanajmi@microsoft.com",
+            "commit": "0e92453fd1dee8fd3e370c27ffb8c48e1dec143b",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.10",
+            "author": "ruaraki@microsoft.com",
+            "commit": "9359dd854f286cb1c9f5b8cc74e895ad8538f3c0",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.18.10",
+            "author": "ruaraki@microsoft.com",
+            "commit": "9359dd854f286cb1c9f5b8cc74e895ad8538f3c0",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui/react-native to v0.25.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "9359dd854f286cb1c9f5b8cc74e895ad8538f3c0",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.8.11",
+            "author": "ruaraki@microsoft.com",
+            "commit": "9359dd854f286cb1c9f5b8cc74e895ad8538f3c0",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-native-button to v0.7.13",
+            "author": "ruaraki@microsoft.com",
+            "commit": "9359dd854f286cb1c9f5b8cc74e895ad8538f3c0",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.33",
+            "author": "ruaraki@microsoft.com",
+            "commit": "9359dd854f286cb1c9f5b8cc74e895ad8538f3c0",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.11.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "05bf06331b12432314223844391f422f2151547a",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 17 Aug 2021 20:02:00 GMT",
+      "tag": "@fluentui-react-native/tester_v0.36.0",
+      "version": "0.36.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Implemented Tabs Control",
+            "author": "dake.3601@gmail.com",
+            "commit": "a22d4f8df2699f777049b529b071a21c672b399d",
+            "package": "@fluentui-react-native/tester"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui/react-native to v0.25.0",
+            "author": "dake.3601@gmail.com",
+            "commit": "a22d4f8df2699f777049b529b071a21c672b399d",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.11.9",
+            "author": "sanajmi@microsoft.com",
+            "commit": "2b95227026008b40cea7c2e5640874a8df392e17",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-expander to v0.2.2",
+            "author": "sanajmi@microsoft.com",
+            "commit": "620772316eb0db36c9a2879ccd6ee2795abf52de",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-native-button to v0.7.12",
+            "author": "sanajmi@microsoft.com",
+            "commit": "2b95227026008b40cea7c2e5640874a8df392e17",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-native-date-picker to v0.3.4",
+            "author": "sanajmi@microsoft.com",
+            "commit": "2b95227026008b40cea7c2e5640874a8df392e17",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/native-radio-button to v0.1.12",
+            "author": "sanajmi@microsoft.com",
+            "commit": "2b95227026008b40cea7c2e5640874a8df392e17",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 13 Aug 2021 16:12:26 GMT",
+      "tag": "@fluentui-react-native/tester_v0.35.9",
+      "version": "0.35.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix icons in experimental button and add fab",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "8946966df6ddc0ef1c0b43e576a4124c678d7c89",
+            "package": "@fluentui-react-native/tester"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/stack to v0.5.25",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "8946966df6ddc0ef1c0b43e576a4124c678d7c89",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 13 Aug 2021 14:54:33 GMT",
+      "tag": "@fluentui-react-native/tester_v0.35.8",
+      "version": "0.35.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add Expander component test",
+            "author": "amdingler694@gmail.com",
+            "commit": "364c4b60f9f6706a4b85d915b3d335fda99f56c2",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 13 Aug 2021 09:05:57 GMT",
+      "tag": "@fluentui-react-native/tester_v0.35.7",
+      "version": "0.35.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update apple native code and build flags",
+            "author": "sanajmi@microsoft.com",
+            "commit": "183bcbe111614b4baf896ec73f4985d988dd46f7",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 12 Aug 2021 17:23:44 GMT",
       "tag": "@fluentui-react-native/tester_v0.35.6",
       "version": "0.35.6",

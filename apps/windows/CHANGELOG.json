@@ -2,6 +2,96 @@
   "name": "@fluentui-react-native/tester-windows",
   "entries": [
     {
+      "date": "Wed, 18 Aug 2021 23:00:57 GMT",
+      "tag": "@fluentui-react-native/tester-windows_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tester to v0.37.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "345d1de930ff42359260da7f1e68a16059f4d763",
+            "package": "@fluentui-react-native/tester-windows"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 18 Aug 2021 20:17:46 GMT",
+      "tag": "@fluentui-react-native/tester-windows_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tester to v0.37.0",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "eae3b80724f357040f5a6d724bdf0fe14ac6d5f5",
+            "package": "@fluentui-react-native/tester-windows"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 17 Aug 2021 20:02:00 GMT",
+      "tag": "@fluentui-react-native/tester-windows_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tester to v0.36.0",
+            "author": "dake.3601@gmail.com",
+            "commit": "a22d4f8df2699f777049b529b071a21c672b399d",
+            "package": "@fluentui-react-native/tester-windows"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 13 Aug 2021 16:12:26 GMT",
+      "tag": "@fluentui-react-native/tester-windows_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/tester to v0.35.9",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "8946966df6ddc0ef1c0b43e576a4124c678d7c89",
+            "package": "@fluentui-react-native/tester-windows"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 13 Aug 2021 14:54:33 GMT",
+      "tag": "@fluentui-react-native/tester-windows_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tester to v0.35.8",
+            "author": "amdingler694@gmail.com",
+            "commit": "364c4b60f9f6706a4b85d915b3d335fda99f56c2",
+            "package": "@fluentui-react-native/tester-windows"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 13 Aug 2021 09:05:57 GMT",
+      "tag": "@fluentui-react-native/tester-windows_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tester to v0.35.7",
+            "author": "sanajmi@microsoft.com",
+            "commit": "183bcbe111614b4baf896ec73f4985d988dd46f7",
+            "package": "@fluentui-react-native/tester-windows"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 12 Aug 2021 17:23:44 GMT",
       "tag": "@fluentui-react-native/tester-windows_v0.0.1",
       "version": "0.0.1",

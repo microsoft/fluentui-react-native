@@ -1,8 +1,32 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Thu, 12 Aug 2021 17:23:44 GMT and should not be manually modified.
+This log was last generated on Wed, 18 Aug 2021 23:00:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.11
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.12 (ruaraki@microsoft.com)
+
+## 0.12.10
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/win32-theme to v0.11.2 (ruaraki@microsoft.com)
+
+## 0.12.9
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
 
 ## 0.12.8
 
