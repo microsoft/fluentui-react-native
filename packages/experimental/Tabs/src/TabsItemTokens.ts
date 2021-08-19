@@ -8,7 +8,7 @@ export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: T
   ({
     backgroundColor: 'green',
     color: t.colors.buttonText,
-    // borderColor: 'red',
+    borderColor: 'transparent',
     iconColor: t.colors.buttonIcon,
     indicatorColor: 'transparent',
     minHeight: 32,
@@ -19,14 +19,16 @@ export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: T
     disabled: {
       backgroundColor: t.colors.buttonDisabledBackground,
       color: t.colors.buttonDisabledContent,
-      borderColor: t.colors.buttonDisabledBorder,
+      borderColor: 'transparent',
       iconColor: t.colors.buttonDisabledIcon,
+      indicatorColor: 'transparent',
     },
     hovered: {
       backgroundColor: t.colors.buttonHoveredBackground,
       color: t.colors.buttonHoveredContent,
       borderColor: t.colors.buttonHoveredBorder,
       iconColor: t.colors.buttonHoveredIcon,
+      indicatorColor: 'lightgray',
     },
     pressed: {
       // backgroundColor: 'blue',

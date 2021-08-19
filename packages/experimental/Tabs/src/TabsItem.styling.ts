@@ -62,11 +62,10 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
           marginBottom: 2,
           alignSelf: 'stretch',
           marginHorizontal: 10,
-          // backgroundColor: 'red',
           backgroundColor: tokens.indicatorColor,
         },
       }),
-      [...layoutStyles.keys],
+      [],
     ),
   },
 };
