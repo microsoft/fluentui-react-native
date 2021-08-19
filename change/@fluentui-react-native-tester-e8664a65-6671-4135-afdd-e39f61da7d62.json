@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Deprecate aria- prefix properties",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
