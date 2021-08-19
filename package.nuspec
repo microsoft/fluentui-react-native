@@ -10,38 +10,38 @@
   </metadata>
   <files>
     <!-- iOS device debug -->
-    <file src="DerivedData\Build\Products\Debug-iphoneos\FRNAvatar\**.*" target="Debug-iphoneos"/>
-    <file src="DerivedData\Build\Products\Debug-iphoneos\FRNButton\**.*" target="Debug-iphoneos"/>
-    <file src="DerivedData\Build\Products\Debug-iphoneos\FRNDatePicker\**.*" target="Debug-iphoneos"/>
+    <file src="DerivedData\Build\Products\Debug-iphoneos\FRNAvatar\**.*" target="Debug-iphoneos" exclude="*.swiftsourceinfo"/>
+    <file src="DerivedData\Build\Products\Debug-iphoneos\FRNButton\**.*" target="Debug-iphoneos" exclude="*.swiftsourceinfo"/>
+    <file src="DerivedData\Build\Products\Debug-iphoneos\FRNDatePicker\**.*" target="Debug-iphoneos" exclude="*.swiftsourceinfo"/>
 
     <!-- iOS device ship -->
-    <file src="DerivedData\Build\Products\Release-iphoneos\FRNAvatar\**.*" target="Ship-iphoneos"/>
-    <file src="DerivedData\Build\Products\Release-iphoneos\FRNButton\**.*" target="Ship-iphoneos"/>
-    <file src="DerivedData\Build\Products\Release-iphoneos\FRNDatePicker\**.*" target="Ship-iphoneos"/>
+    <file src="DerivedData\Build\Products\Release-iphoneos\FRNAvatar\**.*" target="Ship-iphoneos" exclude="*.swiftsourceinfo"/>
+    <file src="DerivedData\Build\Products\Release-iphoneos\FRNButton\**.*" target="Ship-iphoneos" exclude="*.swiftsourceinfo"/>
+    <file src="DerivedData\Build\Products\Release-iphoneos\FRNDatePicker\**.*" target="Ship-iphoneos" exclude="*.swiftsourceinfo"/>
 
     <!-- iOS simulator debug -->
-    <file src="DerivedData\Build\Products\Debug-iphonesimulator\FRNAvatar\**.*" target="Debug-iphonesimulator"/>
-    <file src="DerivedData\Build\Products\Debug-iphonesimulator\FRNButton\**.*" target="Debug-iphonesimulator"/>
-    <file src="DerivedData\Build\Products\Debug-iphonesimulator\FRNDatePicker\**.*" target="Debug-iphonesimulator"/>
+    <file src="DerivedData\Build\Products\Debug-iphonesimulator\FRNAvatar\**.*" target="Debug-iphonesimulator" exclude="*.swiftsourceinfo"/>
+    <file src="DerivedData\Build\Products\Debug-iphonesimulator\FRNButton\**.*" target="Debug-iphonesimulator" exclude="*.swiftsourceinfo"/>
+    <file src="DerivedData\Build\Products\Debug-iphonesimulator\FRNDatePicker\**.*" target="Debug-iphonesimulator" exclude="*.swiftsourceinfo"/>
 
     <!-- iOS simulator ship -->
-    <file src="DerivedData\Build\Products\Release-iphonesimulator\FRNAvatar\**.*" target="Ship-iphonesimulator"/>
-    <file src="DerivedData\Build\Products\Release-iphonesimulator\FRNButton\**.*" target="Ship-iphonesimulator"/>
-    <file src="DerivedData\Build\Products\Release-iphonesimulator\FRNDatePicker\**.*" target="Ship-iphonesimulator"/>
+    <file src="DerivedData\Build\Products\Release-iphonesimulator\FRNAvatar\**.*" target="Ship-iphonesimulator" exclude="*.swiftsourceinfo"/>
+    <file src="DerivedData\Build\Products\Release-iphonesimulator\FRNButton\**.*" target="Ship-iphonesimulator" exclude="*.swiftsourceinfo"/>
+    <file src="DerivedData\Build\Products\Release-iphonesimulator\FRNDatePicker\**.*" target="Ship-iphonesimulator" exclude="*.swiftsourceinfo"/>
 
     <!-- macOS debug -->
-    <file src="DerivedData\Build\Products\Debug\FRNAvatar\**.*" target="Debug-macosx"/>
-    <file src="DerivedData\Build\Products\Debug\FRNButton\**.*" target="Debug-macosx"/>
-    <file src="DerivedData\Build\Products\Debug\FRNMenuButton\**.*" target="Debug-macosx"/>
-    <file src="DerivedData\Build\Products\Debug\FRNRadioButton\**.*" target="Debug-macosx"/>
-    <file src="DerivedData\Build\Products\Debug\RCTFocusZone\**.*" target="Debug-macosx"/>
+    <file src="DerivedData\Build\Products\Debug\FRNAvatar\**.*" target="Debug-macosx" exclude="*.swiftsourceinfo"/>
+    <file src="DerivedData\Build\Products\Debug\FRNButton\**.*" target="Debug-macosx" exclude="*.swiftsourceinfo"/>
+    <file src="DerivedData\Build\Products\Debug\FRNMenuButton\**.*" target="Debug-macosx" exclude="*.swiftsourceinfo"/>
+    <file src="DerivedData\Build\Products\Debug\FRNRadioButton\**.*" target="Debug-macosx" exclude="*.swiftsourceinfo"/>
+    <file src="DerivedData\Build\Products\Debug\RCTFocusZone\**.*" target="Debug-macosx" exclude="*.swiftsourceinfo"/>
 
     <!-- macOS ship -->
-    <file src="DerivedData\Build\Products\Release\FRNAvatar\**.*" target="Ship-macosx"/>
-    <file src="DerivedData\Build\Products\Release\FRNButton\**.*" target="Ship-macosx"/>
-    <file src="DerivedData\Build\Products\Release\FRNMenuButton\**.*" target="Ship-macosx"/>
-    <file src="DerivedData\Build\Products\Release\FRNRadioButton\**.*" target="Ship-macosx"/>
-    <file src="DerivedData\Build\Products\Release\RCTFocusZone\**.*" target="Ship-macosx"/>
+    <file src="DerivedData\Build\Products\Release\FRNAvatar\**.*" target="Ship-macosx" exclude="*.swiftsourceinfo"/>
+    <file src="DerivedData\Build\Products\Release\FRNButton\**.*" target="Ship-macosx" exclude="*.swiftsourceinfo"/>
+    <file src="DerivedData\Build\Products\Release\FRNMenuButton\**.*" target="Ship-macosx" exclude="*.swiftsourceinfo"/>
+    <file src="DerivedData\Build\Products\Release\FRNRadioButton\**.*" target="Ship-macosx" exclude="*.swiftsourceinfo"/>
+    <file src="DerivedData\Build\Products\Release\RCTFocusZone\**.*" target="Ship-macosx" exclude="*.swiftsourceinfo"/>
 
   </files>
 </package>
