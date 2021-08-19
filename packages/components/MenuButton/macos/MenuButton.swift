@@ -15,12 +15,8 @@ open class MenuButton: NSPopUpButton {
     imagePosition = .imageLeading
     bezelStyle = .regularSquare
 
-    guard let dropDownCell = cell as? NSPopUpButtonCell else {
-      preconditionFailure()
-    }
-    dropDownCell.imagePosition = .imageLeading
-    dropDownCell.arrowPosition = .arrowAtBottom
-  }
+	updateDropDownCell()
+}
 
   @available(*, unavailable)
   required public init?(coder decoder: NSCoder) {
@@ -86,9 +82,12 @@ open class MenuButton: NSPopUpButton {
   }
 
   private func updateDropDownCell() {
-    guard let dropDownCell = cell as? NSPopUpButtonCell else {
-      preconditionFailure()
-    }
+	guard let dropDownCell = cell as? NSPopUpButtonCell else {
+	  preconditionFailure()
+	}
+	
+	dropDownCell.imagePosition = .imageLeading
+	dropDownCell.arrowPosition = .arrowAtBottom
 
     // MenuButton needs a MenuItem set on its cell to display the title and image properly
     let dropdownCellItem = NSMenuItem()
