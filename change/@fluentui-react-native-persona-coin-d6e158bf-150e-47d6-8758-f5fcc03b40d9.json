@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Change PersonaCoin",
+  "packageName": "@fluentui-react-native/persona-coin",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
