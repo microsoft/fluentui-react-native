@@ -47,7 +47,7 @@ RCT_EXPORT_VIEW_PROPERTY(onItemClick, RCTBubblingEventBlock)
 
 RCT_EXPORT_VIEW_PROPERTY(onSubmenuItemClick, RCTBubblingEventBlock)
 
-RCT_REMAP_VIEW_PROPERTY(content, title, NSString)
+//RCT_REMAP_VIEW_PROPERTY(content, title, NSString)
 
 RCT_EXPORT_VIEW_PROPERTY(image, UIImage)
 
