@@ -163,6 +163,8 @@ export type TabsItemState = IPressableHooks<TabsItemProps & React.ComponentProps
 export interface TabsItemSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
   icon: IconProps;
+  stack: ViewProps;
+  indicator: ViewProps;
   content: TextProps;
 }
 

@@ -24,9 +24,9 @@ const shadowStyleFromGlobalToken = (shadowToken: number) => {
 
 export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: Theme) =>
   ({
-    backgroundColor: t.colors.buttonBackground,
+    backgroundColor: 'transparent',
     color: t.colors.buttonText,
-    borderColor: t.colors.buttonBorder,
+    borderColor: 'transparent',
     iconColor: t.colors.buttonIcon,
     minHeight: 32,
     minWidth: 80,

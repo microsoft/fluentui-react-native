@@ -8,6 +8,7 @@ import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native
 import { useTabsItem } from './useTabsItem';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { filterViewProps } from '@fluentui-react-native/adapters';
 import { TabsContext } from './Tabs';
 
 export const TabsItem = compose<TabItemType>({
@@ -15,7 +16,9 @@ export const TabsItem = compose<TabItemType>({
   ...stylingSettings,
   slots: {
     root: View,
+    stack: View,
     icon: Icon,
+    indicator: View,
     content: Text,
   },
   render: (userProps: TabsItemProps, useSlots: UseSlots<TabItemType>) => {
@@ -37,12 +40,15 @@ export const TabsItem = compose<TabItemType>({
 
       return (
         <Slots.root {...mergedProps}>
-          {icon && <Slots.icon {...iconProps} />}
-          {headerText && (
-            <Slots.content key="content" style={marginBetween}>
-              {headerText}
-            </Slots.content>
-          )}
+          <Slots.stack>
+            {icon && <Slots.icon {...iconProps} />}
+            {headerText && (
+              <Slots.content key="content" style={marginBetween}>
+                {headerText}
+              </Slots.content>
+            )}
+          </Slots.stack>
+          <Slots.indicator />
         </Slots.root>
       );
     };
