@@ -1,7 +1,7 @@
 import { ViewStyle } from 'react-native';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 import { IPersonaTokens } from './Persona.types';
-import { ITheme } from '@uifabricshared/theming-ramp';
+import { Theme } from '@fluentui-react-native/framework';
 import { getHorizontalGap } from './Persona.helpers';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 
@@ -19,4 +19,4 @@ function _buildStackStyle(tokenProps: IPersonaTokens): IViewProps {
   return { style: stackStyle };
 }
 
-export const buildStackStyle = styleFunction<IViewProps, IPersonaTokens, ITheme>(_buildStackStyle, _stackKeyProps);
+export const buildStackStyle = styleFunction<IViewProps, IPersonaTokens, Theme>(_buildStackStyle, _stackKeyProps);
