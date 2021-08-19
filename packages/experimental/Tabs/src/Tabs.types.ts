@@ -92,6 +92,8 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
 
   ref?: React.RefObject<View>;
 
+  defaultTabbableElement?: any;
+
   testID?: string;
 }
 

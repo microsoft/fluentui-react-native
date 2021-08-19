@@ -41,6 +41,7 @@ export const useTabs = (props: TabsProps): TabsState => {
       accessibilityRole: 'tablist',
       focusable: true,
       ref: componentRef,
+      defaultTabbableElement: selectedTabsItemRef,
     },
     context:{
       selectedKey: selectedKey ?? data.selectedKey,

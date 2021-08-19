@@ -8,6 +8,7 @@ import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native
 import { useTabsItem } from './useTabsItem';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { TabsContext } from './Tabs';
 
 export const TabsItem = compose<TabItemType>({
   displayName: tabsItemName,
@@ -24,10 +25,15 @@ export const TabsItem = compose<TabItemType>({
     const Slots = useSlots(userProps, layer => tabsItem.state[layer] || userProps[layer]);
     // now return the handler for finishing render
     return (final: TabsItemProps, ...children: React.ReactNode[]) => {
-      const { icon, headerText, ...mergedProps } = mergeProps(tabsItem.props, final);
+      const context = React.useContext(TabsContext);
+      const { icon, headerText, itemKey, ...mergedProps } = mergeProps(tabsItem.props, final);
       const marginBetween = {
         marginLeft: icon && headerText ? 10 : 0,
       };
+
+      // Sets the view that belongs to a TabItem
+      context.views.set(itemKey, children);
+
       return (
         <Slots.root {...mergedProps}>
           {icon && <Slots.icon {...iconProps} />}
@@ -36,7 +42,6 @@ export const TabsItem = compose<TabItemType>({
               {headerText}
             </Slots.content>
           )}
-          {children}
         </Slots.root>
       );
     };

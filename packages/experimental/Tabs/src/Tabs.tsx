@@ -65,7 +65,7 @@ export const Tabs = compose<TabsType>({
         >
           <Slots.root {...mergedProps}>
             {tabs.info.label && <Slots.label>{label}</Slots.label>}
-            <Slots.container>
+            <Slots.container defaultTabbableElement={tabs.props.defaultTabbableElement}>
               <Slots.stack>{children}</Slots.stack>
             </Slots.container>
             <Slots.tabPanel>
