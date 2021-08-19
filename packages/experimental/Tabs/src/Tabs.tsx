@@ -41,7 +41,7 @@ export const Tabs = compose<TabsType>({
     const Slots = useSlots(userProps);
     // now return the handler for finishing render
     return (final: TabsProps, ...children: React.ReactNode[]) => {
-      const { label, ...mergedProps } = mergeProps(tabs.props, final);
+      const { label, defaultTabbableElement, ...mergedProps } = mergeProps(tabs.props, final);
 
       // Populate the tabsItemKeys array
       if (children) {
@@ -57,6 +57,7 @@ export const Tabs = compose<TabsType>({
           }
         });
       }
+      console.log(tabs.context.tabsItemKeys);
 
       return (
         <TabsContext.Provider
@@ -65,11 +66,13 @@ export const Tabs = compose<TabsType>({
         >
           <Slots.root {...mergedProps}>
             {tabs.info.label && <Slots.label>{label}</Slots.label>}
-            <Slots.container defaultTabbableElement={tabs.props.defaultTabbableElement}>
+            <Slots.container defaultTabbableElement={defaultTabbableElement}>
               <Slots.stack>{children}</Slots.stack>
             </Slots.container>
             <Slots.tabPanel>
-              <TabsContext.Consumer>{context => tabs.info.headersOnly && context.views.get(context.selectedKey)}</TabsContext.Consumer>
+              <TabsContext.Consumer>
+                {context => !tabs.info.headersOnly && <View>{context.views.get(context.selectedKey)}</View>}
+              </TabsContext.Consumer>
             </Slots.tabPanel>
           </Slots.root>
         </TabsContext.Provider>

@@ -15,7 +15,6 @@ export const useTabsItem = (props: TabsItemProps): TabsItemState => {
       info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
       info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
     }
-    console.log('pressy');
   };
 
   const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
@@ -46,6 +45,7 @@ export const useTabsItem = (props: TabsItemProps): TabsItemState => {
       accessibilityLabel: props.accessibilityLabel || props.headerText,
       focusable: true,
       ref: useViewCommandFocus(componentRef),
+      itemKey: props.itemKey,
       onKeyUp: onKeyUp,
     },
     state: pressable.state,

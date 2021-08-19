@@ -11,11 +11,6 @@ export const stylingSettings: UseStylingOptions<TabsTokens, TabsSlotProps, TabsP
       (tokens: TabsTokens, theme: Theme) => ({
         style: {
           display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'row',
-          alignSelf: 'flex-start',
-          paddingStart: 16,
-          paddingEnd: 16,
           // ...borderStyles.from(tokens, theme),
           // ...layoutStyles.from(tokens, theme),
           // ...shadowStyles.from(tokens, theme),

@@ -32,6 +32,7 @@ export const TabsItem = compose<TabItemType>({
       };
 
       // Sets the view that belongs to a TabItem
+      // console.log(itemKey, children);
       context.views.set(itemKey, children);
 
       return (
