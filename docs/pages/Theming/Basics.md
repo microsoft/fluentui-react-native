@@ -53,7 +53,7 @@ For more information about customizing themes, take a look at [Custom Themes](./
 You can use the `useTheme()` hook to get the current theme inside a component.
 
 ```tsx
-import { useTheme } from '@fluentui-react-native/theme-types';
+import { useTheme } from '@fluentui-react-native/framework';
 
 export const Component = () => {
   const theme = useTheme();
