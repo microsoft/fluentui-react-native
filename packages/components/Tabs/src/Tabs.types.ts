@@ -15,7 +15,7 @@ export interface TabsContextData {
   selectedKey: string | null;
 
   /*
-   ** Index of currently selected key
+   ** Returns the index of the currently selected key
    */
   getTabId?: (key: string, index: number) => string | null;
 
