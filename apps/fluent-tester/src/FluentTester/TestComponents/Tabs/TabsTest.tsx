@@ -44,13 +44,11 @@ const disabledTabs: React.FunctionComponent = () => {
 };
 
 const tabsCountIcon: React.FunctionComponent = () => {
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
-  };
-
   const svgExample = {
-    svgSource: svgProps,
+    svgSource: {
+      src: TestSvg,
+      viewBox: '0 0 500 500',
+    },
     width: 20,
     height: 20,
   };
