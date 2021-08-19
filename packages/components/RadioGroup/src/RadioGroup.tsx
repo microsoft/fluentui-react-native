@@ -66,7 +66,7 @@ export const RadioGroup = compose<IRadioGroupType>({
     const slotProps = mergeSettings<IRadioGroupSlotProps>(styleProps, {
       root: { rest, ...ariaRoles },
       label: { children: label },
-      container: { isCircularNavigation: true, defaultTabbableElement: selectedButtonRef },
+      container: { isCircularNavigation: true, defaultTabbableElement: selectedButtonRef, preferSelectedTabbableElement: true },
     });
 
     return { slotProps, state };
