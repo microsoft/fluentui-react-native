@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ViewProps, ViewStyle, ColorValue } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens, IShadowTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, IPressableHooks, IWithPressableEvents, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IconProps } from '@fluentui-react-native/icon';
 
@@ -90,10 +90,7 @@ export interface TabsItemTokens extends FontTokens, IBorderTokens, IShadowTokens
    focused?: TabsItemTokens;
    pressed?: TabsItemTokens;
    disabled?: TabsItemTokens;
-   primary?: TabsItemTokens;
-   ghost?: TabsItemTokens;
-   fluid?: TabsItemTokens;
-   fab?: TabsItemTokens;
+   selected?: TabsItemTokens;
 }
 
 export interface TabsItemProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
@@ -145,20 +142,18 @@ export interface TabsItemProps extends Omit<IWithPressableOptions<ViewProps>, 'o
 
   testID?: string;
 
-  /** A button can emphasize that it represents the primary action. */
-  primary?: boolean;
-
-  /** A button can blend into its background to become less emphasized. */
-  ghost?: boolean;
-
-  /** A button can fill the width of its container. */
-  fluid?: boolean;
-
-  /** A floating action button  */
-  fab?: boolean;
 }
 
-export type TabsItemState = IPressableHooks<TabsItemProps & React.ComponentPropsWithRef<any>>;
+// export type TabsItemState = IPressableHooks<TabsItemProps & React.ComponentPropsWithRef<any>>;
+
+export interface TabsItemState extends IPressableState{
+  selected ?: boolean;
+}
+
+export interface TabsItemInfo {
+  props: IWithPressableEvents<TabsItemProps & React.ComponentPropsWithRef<any>>;
+  state: TabsItemState;
+}
 
 export interface TabsItemSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;

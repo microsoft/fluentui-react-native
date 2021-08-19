@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { useAsPressable, useKeyCallback, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { TabsItemProps, TabsItemState } from './TabsItem.types';
+import { TabsItemProps, TabsItemInfo } from './TabsItem.types';
 import { TabsContext } from './Tabs';
 
-export const useTabsItem = (props: TabsItemProps): TabsItemState => {
+export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
   const { componentRef = defaultComponentRef, itemKey, ...rest } = props;
+  // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback)
   const info = React.useContext(TabsContext);
 
   const changeSelection = () => {
@@ -48,6 +49,9 @@ export const useTabsItem = (props: TabsItemProps): TabsItemState => {
       itemKey: props.itemKey,
       onKeyUp: onKeyUp,
     },
-    state: pressable.state,
+    state: {
+      ...pressable.state,
+      selected: props.itemKey === info.selectedKey,
+    },
   };
 };

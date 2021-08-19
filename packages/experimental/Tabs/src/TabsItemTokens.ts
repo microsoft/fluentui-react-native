@@ -2,7 +2,7 @@ import { Theme } from '@fluentui-react-native/framework';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { TabsItemTokens } from '.';
 
-export const tabsItemStates: (keyof TabsItemTokens)[] = ['hovered', 'focused', 'pressed', 'disabled'];
+export const tabsItemStates: (keyof TabsItemTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'selected'];
 
 export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: Theme) =>
   ({
@@ -41,6 +41,13 @@ export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: T
       // backgroundColor: 'blue',
       color: t.colors.buttonFocusedContent,
       borderColor: t.colors.buttonFocusedBorder,
+      icon: t.colors.buttonFocusedIcon,
+      indicatorColor: 'blue',
+    },
+    selected: {
+      // backgroundColor: 'blue',
+      color: t.colors.buttonFocusedContent,
+      borderColor: 'transparent',
       icon: t.colors.buttonFocusedIcon,
       indicatorColor: 'blue',
     },
