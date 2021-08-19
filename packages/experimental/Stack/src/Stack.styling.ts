@@ -1,7 +1,7 @@
 import { Alignment, StackSlotProps, StackTokens, StackProps, stackName, StackTokenProps } from './Stack.types';
 import { parseGap, parsePadding } from './StackUtils';
 import { ViewStyle, ViewProps } from 'react-native';
-import { ITheme } from '@uifabricshared/theming-ramp';
+import { Theme } from '@fluentui-react-native/framework';
 import { UseStylingOptions, buildProps, GetMemoValue } from '@fluentui-react-native/framework';
 import { borderStyles } from '@fluentui-react-native/tokens';
 
@@ -40,7 +40,7 @@ const tokensThatAreAlsoProps: (keyof StackTokenProps)[] = [
 
 const nowrapProps: ViewProps = {};
 
-const buildInnerProps = (tokenProps: StackTokens, theme: ITheme, cache: GetMemoValue<ViewProps>) => {
+const buildInnerProps = (tokenProps: StackTokens, theme: Theme, cache: GetMemoValue<ViewProps>) => {
   // if wrapping is disabled just return a fixed empty object without doing any additional work
   if (!tokenProps.wrap) {
     return nowrapProps;
@@ -81,7 +81,7 @@ const buildInnerProps = (tokenProps: StackTokens, theme: ITheme, cache: GetMemoV
 };
 
 const buildRootProps = buildProps<ViewProps, StackTokens>(
-  (tokenProps: StackTokens, theme: ITheme) => {
+  (tokenProps: StackTokens, theme: Theme) => {
     const { grow, horizontal, horizontalAlign, verticalAlign, maxHeight, maxWidth, padding, wrap, reversed, verticalFill } = tokenProps;
 
     const rootStyle: ViewStyle = {
