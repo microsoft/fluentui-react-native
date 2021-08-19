@@ -36,6 +36,7 @@ export const TabsItem = compose<TabItemType>({
       if (itemCount !== undefined) {
         containerText += `(${itemCount})`;
       }
+
       const renderContent = !!headerText || itemCount !== undefined;
       context.views.set(itemKey, children);
 

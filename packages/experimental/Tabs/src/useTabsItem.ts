@@ -44,7 +44,7 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
       accessibilityRole: 'tab',
       onAccessibilityTap: props.onAccessibilityTap,
       accessibilityLabel: props.accessibilityLabel || props.headerText,
-      focusable: true,
+      focusable: !props.disabled,
       headerText: props.headerText ?? '',
       itemCount: props.itemCount,
       ref: useViewCommandFocus(componentRef),
