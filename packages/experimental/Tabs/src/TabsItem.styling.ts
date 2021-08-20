@@ -4,7 +4,7 @@ import { borderStyles, layoutStyles, fontStyles, shadowStyles, getPaletteFromThe
 import { tabsItemStates, defaultTabsItemTokens } from './TabsItemTokens';
 
 export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps, TabsItemTokens> = {
-  tokens: [{ source: 'indicatorColor', lookup: getPaletteFromTheme, target: 'backgroundColor' }, defaultTabsItemTokens, tabsItemName],
+  tokens: [defaultTabsItemTokens, tabsItemName],
   states: tabsItemStates,
   slotProps: {
     root: buildProps(
@@ -55,7 +55,7 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
           justifyContent: 'center',
         },
       }),
-      ['iconColor'],
+      ['iconColor', 'indicatorColor'],
     ),
     indicator: buildProps(
       (tokens: TabsItemTokens, theme: Theme) => ({
@@ -68,7 +68,7 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
           backgroundColor: tokens.indicatorColor,
         },
       }),
-      [],
+      ['indicatorColor'],
     ),
   },
 };

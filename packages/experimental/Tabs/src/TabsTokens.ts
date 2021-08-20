@@ -3,7 +3,7 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { TabsTokens } from '.';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
-export const defaultTabsItemTokens: TokenSettings<TabsTokens, Theme> = (t: Theme) =>
+export const defaultTabsTokens: TokenSettings<TabsTokens, Theme> = (t: Theme) =>
   ({
     backgroundColor: t.colors.buttonBackground,
     color: t.colors.buttonText,
