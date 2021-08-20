@@ -42,6 +42,7 @@ export const useTabs = (props: TabsProps): TabsState => {
       focusable: true,
       ref: componentRef,
       defaultTabbableElement: selectedTabsItemRef,
+      isCircularNavigation: props.isCircularNavigation ?? true,
     },
     context:{
       selectedKey: selectedKey ?? data.selectedKey,

@@ -5,8 +5,6 @@ import { tabsName, TabsType, TabsProps, TabsContextData } from './Tabs.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './Tabs.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
-import { filterViewProps } from '@fluentui-react-native/adapters';
-
 import { useTabs } from './useTabs';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 
@@ -41,7 +39,7 @@ export const Tabs = compose<TabsType>({
     const Slots = useSlots(userProps);
     // now return the handler for finishing render
     return (final: TabsProps, ...children: React.ReactNode[]) => {
-      const { label, defaultTabbableElement, ...mergedProps } = mergeProps(tabs.props, final);
+      const { label, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(tabs.props, final);
 
       // Populate the tabsItemKeys array
       if (children) {
@@ -66,7 +64,7 @@ export const Tabs = compose<TabsType>({
         >
           <Slots.root {...mergedProps}>
             {tabs.info.label && <Slots.label>{label}</Slots.label>}
-            <Slots.container defaultTabbableElement={defaultTabbableElement}>
+            <Slots.container defaultTabbableElement={defaultTabbableElement} isCircularNavigation={isCircularNavigation}>
               <Slots.stack>{children}</Slots.stack>
             </Slots.container>
             <Slots.tabPanel>

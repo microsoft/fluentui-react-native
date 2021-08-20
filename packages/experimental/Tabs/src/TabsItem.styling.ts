@@ -26,9 +26,6 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
       (tokens: TabsItemTokens, theme: Theme) => ({
         style: {
           color: tokens.color,
-          // flexDirection: 'row',
-          // alignItems: 'center',
-          // alignSelf: 'flex-start',
           ...fontStyles.from(tokens, theme),
         },
       }),
