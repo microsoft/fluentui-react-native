@@ -1,7 +1,7 @@
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 import { ImageProps } from 'react-native';
 import { IPersonaCoinTokens } from './PersonaCoin.types';
-import { ITheme } from '@uifabricshared/theming-ramp';
+import { Theme } from '@fluentui-react-native/framework';
 import { calculateEffectiveSizes } from './PersonaCoin.helpers';
 
 const _photoKeyProps: (keyof IPersonaCoinTokens)[] = ['coinSize', 'size'];
@@ -20,4 +20,4 @@ function _buildPhotoStyles(tokenProps: IPersonaCoinTokens /*, theme: ITheme */):
   };
 }
 
-export const buildPhotoStyles = styleFunction<ImageProps, IPersonaCoinTokens, ITheme>(_buildPhotoStyles, _photoKeyProps);
+export const buildPhotoStyles = styleFunction<ImageProps, IPersonaCoinTokens, Theme>(_buildPhotoStyles, _photoKeyProps);

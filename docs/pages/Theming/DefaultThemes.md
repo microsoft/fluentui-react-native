@@ -21,7 +21,7 @@ You can create a theme using information from Office by calling `createOfficeThe
 ```tsx
 import { ThemeProvider } from '@fluentui-react-native/theme';
 import { createOfficeTheme } from '@fluentui-react-native/win32-theme';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import { useTheme } from '@fluentui-react-native/framework';
 import { Text } from 'react-native';
 
 const AppWithOfficeTheme = () => {
