@@ -7,12 +7,12 @@ import { ButtonTokens } from '../Button.types';
 export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundButtonSlotProps, CompoundButtonTokens> = {
   tokens: [
     defaultButtonTokens,
-    (t: Theme) => ({
-      minHeight: 72,
-      secondaryContentFont: {
-        variant: 'secondaryStandard',
-      },
-      ghost: {
+    (t: Theme): ButtonTokens =>
+      ({
+        minHeight: 72,
+        secondaryContentFont: {
+          variant: 'secondaryStandard',
+        },
         secondaryContentColor: t.colors.ghostSecondaryContent,
         hovered: {
           secondaryContentColor: t.colors.ghostHoveredSecondaryContent,
@@ -23,8 +23,31 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
         pressed: {
           secondaryContentColor: t.colors.ghostPressedSecondaryContent,
         },
-      } as ButtonTokens,
-    }),
+        primary: {
+          secondaryContentColor: t.colors.ghostSecondaryContent,
+          hovered: {
+            secondaryContentColor: t.colors.ghostHoveredSecondaryContent,
+          },
+          focused: {
+            secondaryContentColor: t.colors.ghostFocusedSecondaryContent,
+          },
+          pressed: {
+            secondaryContentColor: t.colors.ghostPressedSecondaryContent,
+          },
+        },
+        ghost: {
+          secondaryContentColor: t.colors.ghostSecondaryContent,
+          hovered: {
+            secondaryContentColor: t.colors.ghostHoveredSecondaryContent,
+          },
+          focused: {
+            secondaryContentColor: t.colors.ghostFocusedSecondaryContent,
+          },
+          pressed: {
+            secondaryContentColor: t.colors.ghostPressedSecondaryContent,
+          },
+        },
+      } as ButtonTokens),
     compoundButtonName,
   ],
   states: buttonStates,
