@@ -25,10 +25,8 @@ export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: T
     },
     hovered: {
       backgroundColor: t.colors.buttonHoveredBackground,
-      color: t.colors.buttonHoveredContent,
-      borderColor: t.colors.buttonHoveredBorder,
       iconColor: t.colors.buttonHoveredIcon,
-      indicatorColor: 'lightgray',
+      indicatorColor: t.colors.neutralStroke1,
     },
     pressed: {
       // backgroundColor: 'blue',
@@ -38,17 +36,19 @@ export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: T
       indicatorColor: 'blue',
     },
     focused: {
-      // backgroundColor: 'blue',
       color: t.colors.buttonFocusedContent,
-      borderColor: t.colors.buttonFocusedBorder,
+      borderColor: 'black',
       icon: t.colors.buttonFocusedIcon,
-      // indicatorColor: 'red',
+      borderSize: 10,
     },
     selected: {
       // backgroundColor: 'blue',
       color: t.colors.buttonFocusedContent,
-      borderColor: 'transparent',
       icon: t.colors.buttonFocusedIcon,
-      indicatorColor: 'blue',
+      borderColor: 'black',
+      borderWidth: 2,
+      borderRadius: 4,
+      iconColor: t.colors.buttonDisabledIcon,
+      indicatorColor: t.colors.brandStroke1,
     },
   } as TabsItemTokens);
