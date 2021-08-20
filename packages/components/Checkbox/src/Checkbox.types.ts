@@ -31,7 +31,7 @@ export interface ICheckboxProps extends Omit<IViewProps, 'onPress'> {
    * An string for screen readers to read. If not provided, this will be set to the Checkbox label
    * @deprecated Use accessibilityLabel instead.
    */
-   ariaLabel?: string;
+  ariaLabel?: string;
 
   /**
    * Checked state. Mutually exclusive to “defaultChecked”. Use this if you control the checked state at a higher level
