@@ -18,7 +18,7 @@ export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: T
 
     disabled: {
       backgroundColor: t.colors.buttonDisabledBackground,
-      color: t.colors.buttonDisabledContent,
+      color: t.colors.neutralForegroundDisabled,
       borderColor: 'transparent',
       iconColor: t.colors.buttonDisabledIcon,
       indicatorColor: 'transparent',
