@@ -6,6 +6,7 @@ import PersonaCoinTestPage from '../../PersonaCoin/pages/PersonaCoinTestPage.win
 import PressableTestPage from '../../Pressable/pages/PressableTestPage.win';
 import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
 import TextTestPage from '../../Text/pages/TextTestPage.win';
+import TextExperimentalTestPage from '../../TextExperimental/pages/TextExperimentalTestPage.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
 import BootTestPage from '../pages/BootTestPage.win';
 
@@ -68,6 +69,12 @@ describe('Click on each test page and check if it renders', function () {
     BootTestPage.clickAndGoToTextPage();
     TextTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(TextTestPage.isPageLoaded()).toBeTruthy();
+  });
+
+  it('Experimental Text Test Page', () => {
+    BootTestPage.clickAndGoToTextPage();
+    TextExperimentalTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+    expect(TextExperimentalTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Theme Test Page', () => {
