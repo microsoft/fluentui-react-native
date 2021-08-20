@@ -70,7 +70,7 @@ export const TabsItem = compose<TabsItemType>({
       },
     };
 
-    const buttonRef = Platform.OS !== 'macos' ?  useViewCommandFocus(componentRef) : componentRef;
+    const buttonRef = useViewCommandFocus(componentRef);
 
     /* We use the componentRef of the currently selected tabsItem to maintain the default tabbable
     element in Tabs. Since the componentRef isn't generated until after initial render,
