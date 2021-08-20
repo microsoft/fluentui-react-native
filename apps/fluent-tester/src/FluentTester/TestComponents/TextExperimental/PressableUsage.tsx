@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Alert, Linking, View } from 'react-native';
 import { Stack } from '@fluentui-react-native/stack';
-import { Text } from '@fluentui/react-native';
+import { Text } from '@fluentui-react-native/experimental-text';
 import { stackStyle } from '../Common/styles';
 import type { IKeyboardEvent, IHandledKeyboardEvent } from '@office-iss/react-native-win32';
 
