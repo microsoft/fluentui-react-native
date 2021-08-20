@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Thu, 19 Aug 2021 18:31:21 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.9.19",
+      "version": "0.9.19",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Finish move",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5849d234f12ab30c929e0b8ab256a2fc7523cbe9",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 18 Aug 2021 23:00:57 GMT",
       "tag": "@fluentui-react-native/tokens_v0.9.18",
       "version": "0.9.18",

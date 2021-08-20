@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/persona",
   "entries": [
     {
+      "date": "Thu, 19 Aug 2021 18:31:21 GMT",
+      "tag": "@fluentui-react-native/persona_v0.11.10",
+      "version": "0.11.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Change one",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5849d234f12ab30c929e0b8ab256a2fc7523cbe9",
+            "package": "@fluentui-react-native/persona"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 18 Aug 2021 23:00:57 GMT",
       "tag": "@fluentui-react-native/persona_v0.11.9",
       "version": "0.11.9",

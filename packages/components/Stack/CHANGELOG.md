@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/stack
 
-This log was last generated on Wed, 18 Aug 2021 23:00:57 GMT and should not be manually modified.
+This log was last generated on Thu, 19 Aug 2021 18:31:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.27
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Change Stack (ruaraki@microsoft.com)
 
 ## 0.5.26
 

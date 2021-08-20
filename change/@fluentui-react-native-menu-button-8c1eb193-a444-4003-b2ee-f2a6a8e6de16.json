@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix bug where the defualt content of the macOS MEnuButton was not empty",
+  "packageName": "@fluentui-react-native/menu-button",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
