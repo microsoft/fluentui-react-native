@@ -1,6 +1,6 @@
 import { tabsItemName, TabsItemTokens, TabsItemSlotProps, TabsItemProps } from './TabsItem.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles, fontStyles, shadowStyles, getPaletteFromTheme } from '@fluentui-react-native/tokens';
+import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { tabsItemStates, defaultTabsItemTokens } from './TabsItemTokens';
 
 export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps, TabsItemTokens> = {
@@ -16,11 +16,9 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
           alignSelf: 'flex-start',
           justifyContent: 'center',
           ...borderStyles.from(tokens, theme),
-          ...layoutStyles.from(tokens, theme),
-          ...shadowStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
+      [...borderStyles.keys],
     ),
     content: buildProps(
       (tokens: TabsItemTokens, theme: Theme) => ({
