@@ -3,7 +3,7 @@ import { ScreenRect, Text, View, Switch, Picker, ScrollView } from 'react-native
 import { Button, Callout, Separator, IFocusable, RestoreFocusEvent, DismissBehaviors, StealthButton } from '@fluentui/react-native';
 import { CALLOUT_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { fluentTesterStyles } from './../Common/styles';
+import { fluentTesterStyles } from '../Common/styles';
 
 const standardCallout: React.FunctionComponent = () => {
   const [showStandardCallout, setShowStandardCallout] = React.useState(false);
@@ -101,6 +101,19 @@ const standardCallout: React.FunctionComponent = () => {
 
   const [selectedBorderWidth, setSelectedBorderWidth] = React.useState<number | undefined>(undefined);
 
+  const [showScrollViewCallout, setShowScrollViewCalout] = React.useState(false);
+  const [scrollviewContents, setScrollviewContents] = React.useState([1, 2, 3]);
+
+  const removeButton = React.useCallback(() => {
+    const tempArray = scrollviewContents;
+    tempArray.pop();
+    setScrollviewContents([...tempArray]);
+  }, [setScrollviewContents, scrollviewContents]);
+
+  const addButton = React.useCallback(() => {
+    setScrollviewContents(arr => [...arr, 1]);
+  }, [setScrollviewContents, scrollviewContents]);
+
   return (
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
@@ -128,6 +141,11 @@ const standardCallout: React.FunctionComponent = () => {
           <View style={{ flexDirection: 'row' }}>
             <Switch value={preventDismissOnClickOutside} onValueChange={onPreventDismissOnClickOutsideChange} />
             <Text>Prevent Dismiss On Click Outside</Text>
+          </View>
+
+          <View style={{ flexDirection: 'row' }}>
+            <Switch value={showScrollViewCallout} onValueChange={setShowScrollViewCalout} />
+            <Text>Enable ScrollView Callout</Text>
           </View>
 
           <Picker
@@ -201,11 +219,29 @@ const standardCallout: React.FunctionComponent = () => {
             ...(selectedBackgroundColor && { backgroundColor: selectedBackgroundColor }),
             ...(selectedBorderWidth && { borderWidth: selectedBorderWidth }),
             ...(calloutDismissBehaviors && { dismissBehaviors: calloutDismissBehaviors }),
-          }}
-        >
-          <View style={{ padding: 20 }}>
-            <Button content="click to change anchor" onClick={toggleCalloutRef} />
-          </View>
+          }}>
+          {showScrollViewCallout ?
+            <View style={fluentTesterStyles.scrollViewContainer}>
+              <ScrollView contentContainerStyle={fluentTesterStyles.scrollViewStyle} horizontal={true} showsHorizontalScrollIndicator={true}>
+                <StealthButton content="click to change anchor" onClick={toggleCalloutRef} />
+                <StealthButton content="Click to add a button" style={fluentTesterStyles.testListItem} onClick={addButton} />
+                <StealthButton content="Click to remove a button" style={fluentTesterStyles.testListItem} onClick={removeButton} />
+                {scrollviewContents.map((value) => {
+                  return (
+                    <StealthButton
+                      key={value}
+                      content="Button"
+                      style={fluentTesterStyles.testListItem}
+                    />
+                  )
+                })}
+              </ScrollView>
+            </View>
+          : //else
+            <View style={{ padding: 20 }}>
+              <Button content="click to change anchor" onClick={toggleCalloutRef} />
+            </View>
+          }
         </Callout>
       )}
     </View>
@@ -267,100 +303,6 @@ const customCallout: React.FunctionComponent = () => {
   );
 };
 
-const scrollviewCallout: React.FunctionComponent = () => {
-  const [showStandardCallout, setShowStandardCallout] = React.useState(false);
-  const [isStandardCalloutVisible, setIsStandardCalloutVisible] = React.useState(false);
-
-  const redTargetRef = React.useRef<View>(null);
-  const blueTargetRef = React.useRef<View>(null);
-  const greenTargetRef = React.useRef<View>(null);
-  const [anchorRef, setAnchorRef] = React.useState(redTargetRef);
-
-  const toggleShowStandardCallout = React.useCallback(() => {
-    setShowStandardCallout(!showStandardCallout);
-  }, [showStandardCallout, setShowStandardCallout]);
-
-  const [scrollviewContents, setScrollviewContents] = React.useState([1, 2, 3]);
-
-  const removeButton = React.useCallback(() => {
-    const tempArray = scrollviewContents;
-    tempArray.pop();
-    setScrollviewContents([...tempArray]);
-  }, [setScrollviewContents, scrollviewContents]);
-
-  const addButton = React.useCallback(() => {
-    setScrollviewContents(arr => [...arr, 1]);
-  }, [setScrollviewContents, scrollviewContents]);
-
-  const toggleCalloutRef = React.useCallback(() => {
-    // Cycle the target ref between the RGB target views
-    setAnchorRef(anchorRef === redTargetRef ? greenTargetRef : anchorRef === greenTargetRef ? blueTargetRef : redTargetRef);
-  }, [anchorRef, setAnchorRef]);
-
-  const onShowStandardCallout = React.useCallback(() => {
-    setIsStandardCalloutVisible(true);
-  }, [setIsStandardCalloutVisible]);
-
-  const onDismissStandardCallout = React.useCallback(() => {
-    setIsStandardCalloutVisible(false);
-    setShowStandardCallout(false);
-  }, [setIsStandardCalloutVisible, setShowStandardCallout]);
-
-  return (
-    <View>
-      <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
-        <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
-          <Button content="Press for Callout" onClick={toggleShowStandardCallout} />
-          <Text>
-            <Text>Visibility: </Text>
-            {isStandardCalloutVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
-          </Text>
-        </View>
-
-        <Separator vertical />
-
-        <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
-          <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
-          <View ref={redTargetRef} style={{ height: 20, width: 20, backgroundColor: 'red', padding: 5 }} />
-          <View ref={greenTargetRef} style={{ height: 20, width: 20, backgroundColor: 'green', padding: 5 }} />
-          <View ref={blueTargetRef} style={{ height: 20, width: 20, backgroundColor: 'blue', padding: 5 }} />
-        </View>
-        </View>
-      </View>
-
-      <Separator />
-
-      {showStandardCallout && (
-        <Callout
-          {...{
-            target: anchorRef,
-            onDismiss: onDismissStandardCallout,
-            accessibilityLabel: 'ScrollView Callout',
-            onShow: onShowStandardCallout,
-          }}
-        >
-          <View style={fluentTesterStyles.testList}>
-            <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} showsVerticalScrollIndicator={true}>
-              <StealthButton content="click to change anchor" onClick={toggleCalloutRef} />
-              <StealthButton content="Click to add a button" style={fluentTesterStyles.testListItem} onClick={addButton} />
-              <StealthButton content="Click to remove a button" style={fluentTesterStyles.testListItem} onClick={removeButton} />
-              {scrollviewContents.map((value) => {
-                return (
-                  <StealthButton
-                    key={value}
-                    content="Button"
-                    style={fluentTesterStyles.testListItem}
-                  />
-                )
-              })}
-            </ScrollView>
-          </View>
-        </Callout>
-      )}
-    </View>
-  );
-};
-
 const calloutSections: TestSection[] = [
   {
     name: 'Standard Usage',
@@ -370,10 +312,6 @@ const calloutSections: TestSection[] = [
   {
     name: 'Customized Usage',
     component: customCallout,
-  },
-  {
-    name: 'ScrollView Usage',
-    component: scrollviewCallout
   }
 ];
 

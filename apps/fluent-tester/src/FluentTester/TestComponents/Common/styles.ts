@@ -87,6 +87,21 @@ export const fluentTesterStyles = StyleSheet.create({
     alignItems: 'stretch',
   },
 
+  scrollViewStyle: {
+    //flexDirection: 'row',
+    //alignItems: 'stretch',
+    // height: 200,
+    // width: 200,
+  },
+
+  scrollViewContainer: {
+    height: 200,
+    width: 200,
+    flexShrink: 0,
+    flexGrow: 0,
+    flexDirection: 'row',
+  },
+
   testListItem: {
     width: 150,
   },
