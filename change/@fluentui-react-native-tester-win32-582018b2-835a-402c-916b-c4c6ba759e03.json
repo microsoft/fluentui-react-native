@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Bump rex-win32 package",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "patboyd@microsoft.com",
+  "dependentChangeType": "none"
+}
