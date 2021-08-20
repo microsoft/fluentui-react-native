@@ -107,3 +107,11 @@ export const defaultFluentDarkTheme: Theme = {
   components: {},
   host: { appearance: 'dark' },
 };
+
+export const defaultFluentHighConstrastTheme: Theme = {
+  colors: getStockWebDarkPalette(),
+  typography: defaultFluentTheme.typography,
+  spacing: defaultFluentTheme.spacing,
+  components: {},
+  host: { appearance: 'highContrast' },
+};

@@ -287,3 +287,9 @@ export function getStockWebDarkPalette(): ThemeColorDefinition {
     ...createAliasTokens('dark'),
   };
 }
+
+export function getStockWebHCPalette(): ThemeColorDefinition {
+  return {
+    ...createAliasTokens('highContrast'),
+  };
+}

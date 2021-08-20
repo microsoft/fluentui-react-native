@@ -16,10 +16,13 @@ const baseTheme = Platform.select({
   default: createDefaultTheme(themeOptions),
 });
 
+const supportsHC = Platform.OS !== 'ios' && Platform.OS !== 'android' && Platform.OS !== 'macos';
+
 export const lightnessOptions = [
   { label: 'Auto', value: 'dynamic' },
   { label: 'Light', value: 'light' },
   { label: 'Dark', value: 'dark' },
+  supportsHC && { label: 'High Contrast', value: 'highContrast' },
 ];
 
 export class TesterThemeReference extends ThemeReference {
@@ -30,11 +33,7 @@ export class TesterThemeReference extends ThemeReference {
   private baseTheme: ThemeReference;
 
   constructor() {
-    super(
-      baseTheme,
-      (parent) => applyTheme(parent, this._themeName),
-      () => applyBrand(this._brand),
-    );
+    super(baseTheme, parent => applyTheme(parent, this._themeName, this.options.appearance), () => applyBrand(this._brand));
     this.baseTheme = baseTheme;
     this.options = themeOptions;
   }
