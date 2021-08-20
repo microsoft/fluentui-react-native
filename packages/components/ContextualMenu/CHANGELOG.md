@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Fri, 13 Aug 2021 16:12:26 GMT and should not be manually modified.
+This log was last generated on Thu, 19 Aug 2021 18:31:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.13
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- add focusBorder to menuItems (email not defined)
+
+## 0.10.12
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.17.11 (ruaraki@microsoft.com)
+
+## 0.10.11
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.10 (ruaraki@microsoft.com)
 
 ## 0.10.10
 

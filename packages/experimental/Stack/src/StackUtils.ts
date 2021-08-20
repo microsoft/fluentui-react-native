@@ -1,4 +1,4 @@
-import { ITheme } from '@uifabricshared/theming-ramp';
+import { Theme } from '@fluentui-react-native/framework';
 
 /**
  * Functions used by Stack components to simplify style-related computations
@@ -8,7 +8,7 @@ import { ITheme } from '@uifabricshared/theming-ramp';
 const _spacingKey = 'spacing';
 
 // Helper function that converts a themed spacing key (if given) to the corresponding themed spacing value.
-const _getThemedSpacing = (space: string, theme: ITheme): string => {
+const _getThemedSpacing = (space: string, theme: Theme): string => {
   const spacing = theme[_spacingKey];
   if (spacing && typeof spacing === 'object') {
     if (spacing.hasOwnProperty(space)) {
@@ -43,7 +43,7 @@ export interface IParseGapResult {
  * Returns the separate numerical value of the padding (e.g. 10)
  *  and the CSS unit (e.g. "px").
  */
-export function parseGap(gap: number | string | undefined, theme: ITheme): IParseGapResult {
+export function parseGap(gap: number | string | undefined, theme: Theme): IParseGapResult {
   const result: IParseGapResult = {
     rowGap: { value: 0, unit: 'px' },
     columnGap: { value: 0, unit: 'px' },
@@ -73,7 +73,7 @@ export function parseGap(gap: number | string | undefined, theme: ITheme): IPars
  *  (e.g. "s1 m", "10px l1 20px l2", etc.).
  * Returns a CSS-style padding.
  */
-export function parsePadding(padding: number | string | undefined, theme: ITheme): number | string | undefined {
+export function parsePadding(padding: number | string | undefined, theme: Theme): number | string | undefined {
   if (padding === undefined || typeof padding === 'number' || padding === '') {
     return padding;
   }

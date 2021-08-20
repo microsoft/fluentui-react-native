@@ -1,7 +1,7 @@
 import { Alignment, IStackTokens } from './Stack.types';
 import { parseGap, parsePadding } from './StackUtils';
 import { ViewStyle, ViewProps } from 'react-native';
-import { ITheme } from '@uifabricshared/theming-ramp';
+import { Theme } from '@fluentui-react-native/framework';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 
 const nameMap: { [key: string]: Alignment } = {
@@ -32,7 +32,7 @@ const _innerKeyProps: (keyof IStackTokens)[] = [
   'padding',
 ];
 
-function _buildInnerStyles(tokenProps: IStackTokens, theme: ITheme): ViewProps {
+function _buildInnerStyles(tokenProps: IStackTokens, theme: Theme): ViewProps {
   const { horizontal, wrap, horizontalAlign, verticalAlign, padding } = tokenProps;
 
   let innerStyle: ViewStyle | undefined = undefined;
@@ -62,9 +62,9 @@ function _buildInnerStyles(tokenProps: IStackTokens, theme: ITheme): ViewProps {
   return { style: innerStyle };
 }
 
-export const buildStackInnerStyles = styleFunction<ViewProps, IStackTokens, ITheme>(_buildInnerStyles, _innerKeyProps);
+export const buildStackInnerStyles = styleFunction<ViewProps, IStackTokens, Theme>(_buildInnerStyles, _innerKeyProps);
 
-function _buildRootStyles(tokenProps: IStackTokens, theme: ITheme): ViewProps {
+function _buildRootStyles(tokenProps: IStackTokens, theme: Theme): ViewProps {
   const { grow, horizontal, horizontalAlign, verticalAlign, maxHeight, maxWidth, padding, wrap } = tokenProps;
   // const childrenGap = tokenProps.childrenGap || tokenProps.gap;
   // const { rowGap, columnGap } = parseGap(childrenGap, theme);
@@ -103,4 +103,4 @@ const _keyProps: (keyof IStackTokens)[] = [
   'padding',
 ];
 
-export const buildStackRootStyles = styleFunction<ViewProps, IStackTokens, ITheme>(_buildRootStyles, _keyProps);
+export const buildStackRootStyles = styleFunction<ViewProps, IStackTokens, Theme>(_buildRootStyles, _keyProps);

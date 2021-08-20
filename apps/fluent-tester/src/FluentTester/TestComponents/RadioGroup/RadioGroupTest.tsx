@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import { RadioButton, RadioGroup, Separator } from '@fluentui/react-native';
 import { RADIOGROUP_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { NativeRadioButton } from '@fluentui-react-native/native-radio-button';
 
 const basicRadioGroup: React.FunctionComponent = () => {
   // Client's example onChange function
@@ -46,42 +45,13 @@ const basicRadioGroup: React.FunctionComponent = () => {
   );
 };
 
-const nativeRadioGroup: React.FunctionComponent = () => {
-  return (
-    <View>
-      <RadioGroup label="RadioGroup 1">
-        <NativeRadioButton title="Option A" selected={true} onPress={() => alert('Option A pressed')} buttonKey="A" />
-        <NativeRadioButton title="Option B" buttonKey="B" />
-        <NativeRadioButton title="Option C (disabled)" enabled={false} style={{ width: 150 }} buttonKey="C" />
-        <NativeRadioButton title="Option D" buttonKey="D" />
-      </RadioGroup>
-      <Separator />
-      <RadioGroup label="RadioGroup 2">
-        {/* View added to test ariaPosInSet and ariaSetSize properties which are not auto-generated when
-        RadioButtons are not direct children of RadioGroup. */}
-        <NativeRadioButton title="Option A" buttonKey="A" />
-        <NativeRadioButton title="Option B" selected={true} onPress={() => alert('Option B pressed')} buttonKey="B" />
-        <NativeRadioButton title="Option C (disabled)" enabled={false} style={{ width: 150 }} buttonKey="C" />
-        <NativeRadioButton title="Option D" buttonKey="D" />
-      </RadioGroup>
-    </View>
-  );
-};
-
-const radioGroupSections: TestSection[] = [];
-if (Platform.OS === 'macos') {
-  radioGroupSections.push({
-    name: 'Native RadioGroup',
-    testID: RADIOGROUP_TESTPAGE,
-    component: nativeRadioGroup,
-  });
-} else {
-  radioGroupSections.push({
+const radioGroupSections: TestSection[] = [
+  {
     name: 'Basic RadioGroup Usage',
     testID: RADIOGROUP_TESTPAGE,
     component: basicRadioGroup,
-  });
-}
+  },
+];
 
 export const RadioGroupTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {

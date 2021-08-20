@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Tue, 17 Aug 2021 20:02:00 GMT and should not be manually modified.
+This log was last generated on Thu, 19 Aug 2021 18:31:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.2
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.31 (ruaraki@microsoft.com)
+
+## 0.12.1
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.30 (ruaraki@microsoft.com)
+
+## 0.12.0
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Minor changes
+
+- fix for radio group on macOS (67026167+chiuam@users.noreply.github.com)
 
 ## 0.11.9
 

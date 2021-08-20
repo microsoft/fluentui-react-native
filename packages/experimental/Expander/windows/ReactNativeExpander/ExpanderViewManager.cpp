@@ -14,7 +14,7 @@ namespace winrt::ReactNativeExpander::implementation {
 
     // IViewManager
     winrt::hstring ExpanderViewManager::Name() noexcept {
-        return L"MSFExpanderView";
+        return L"ExpanderView";
     }
 
     xaml::FrameworkElement ExpanderViewManager::CreateView() noexcept {
