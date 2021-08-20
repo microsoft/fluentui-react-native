@@ -2402,12 +2402,11 @@
   dependencies:
     applicationinsights "^1.8.8"
 
-"@rnx-kit/babel-preset-metro-react-native@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/babel-preset-metro-react-native/-/babel-preset-metro-react-native-1.0.3.tgz#3c4a4d49f0362f1d1044a8f27669a589d6a5189e"
-  integrity sha512-Fn9+lfIMXPw1gRgISOL+u5MVjkRkKUYUfcJ1/gFWCrq7lddztRw4oS4P9t82zPIukNr7Ik+aXAtN3V9Fh+GB/A==
+"@rnx-kit/babel-preset-metro-react-native@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/babel-preset-metro-react-native/-/babel-preset-metro-react-native-1.0.4.tgz#31c40bc4f165069634848161d26531fd241be15b"
+  integrity sha512-S/FD/R9llAEdjt/VeUSFqt1l8SLleRp4fctEk/HTJ35C/P5W5Mbihu+nAMq8myxDJ1OaDzqnGeLu01Lb+iAUvQ==
   dependencies:
-    "@babel/core" "^7.0.0"
     babel-plugin-const-enum "^1.0.0"
 
 "@rnx-kit/cli@^0.5.27":
@@ -2469,11 +2468,11 @@
     find-up "^5.0.0"
 
 "@rnx-kit/metro-config@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.3.tgz#57c48546732ee74badf082756533006a0940df8a"
-  integrity sha512-d+JQcAdYOACbISNTgcXwSdwBD7dOdnuGpe1iQPJOfsPoTRezAmvAp4oI/b77BcMnWMn+0RVqedoX2lE5l8OW+g==
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.5.tgz#60e0cdd50fd3d4bbadf7e65c1e1c2de9e912cde4"
+  integrity sha512-SxW8fDysNfa35wCKoAxaffg4+af5ahbG3pfCvysNXSUuYI2VIcIFtYf7gplsQDSFo8qbd4T1RwSmyGf3T0d/Kw==
   dependencies:
-    "@rnx-kit/babel-preset-metro-react-native" "^1.0.3"
+    "@rnx-kit/babel-preset-metro-react-native" "^1.0.4"
     find-up "^5.0.0"
     workspace-tools "^0.16.2"
 
