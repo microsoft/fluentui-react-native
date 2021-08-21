@@ -2,7 +2,7 @@ import { Theme } from '@fluentui-react-native/framework';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { TabsItemTokens } from '.';
 
-export const tabsItemStates: (keyof TabsItemTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'selected'];
+export const tabsItemStates: (keyof TabsItemTokens)[] = ['hovered', 'selected', 'focused', 'disabled', 'pressed'];
 
 export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: Theme) =>
   ({
@@ -33,22 +33,22 @@ export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: T
       color: t.colors.buttonPressedContent,
       borderColor: t.colors.buttonPressedBorder,
       iconColor: t.colors.buttonPressedIcon,
-      indicatorColor: 'blue',
+      indicatorColor: t.colors.brandStroke1,
     },
     focused: {
       color: t.colors.buttonFocusedContent,
       borderColor: 'black',
       icon: t.colors.buttonFocusedIcon,
-      borderSize: 10,
-    },
-    selected: {
-      // backgroundColor: 'blue',
-      color: t.colors.buttonFocusedContent,
-      icon: t.colors.buttonFocusedIcon,
-      borderColor: 'black',
       borderWidth: 2,
       borderRadius: 4,
-      iconColor: t.colors.buttonDisabledIcon,
       indicatorColor: t.colors.brandStroke1,
+    },
+    selected: {
+      color: t.colors.buttonFocusedContent,
+      icon: t.colors.buttonFocusedIcon,
+      indicatorColor: t.colors.brandStroke1,
+      borderColor: 'transparent',
+      variant: 'bodySemibold',
+      iconColor: t.colors.buttonDisabledIcon,
     },
   } as TabsItemTokens);
