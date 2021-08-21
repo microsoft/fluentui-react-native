@@ -26,14 +26,14 @@
       },
       "Grey": { "generate": { "type": "lightness0to100by2", "value": "grey" } },
       "HC": {
-        "Canvas": { "value": "PlatformColor(Window)" },
-        "CanvasText": { "value": "PlatformColor(WindowText)" },
-        "Hyperlink": { "value": "PlatformColor(Hotlight)" },
-        "Disabled": { "value": "PlatformColor(GrayText)" },
-        "Highlight": { "value": "PlatformColor(Highlight)" },
-        "HighlightText": { "value": "PlatformColor(HighlightText)" },
-        "ButtonFace": { "value": "PlatformColor(ButtonFace)" },
-        "ButtonText": { "value": "PlatformColor(ButtonText)" }
+        "Canvas": { "value": "Canvas" },
+        "CanvasText": { "value": "CanvasText" },
+        "Hyperlink": { "value": "LinkText" },
+        "Disabled": { "value": "GrayText" },
+        "Highlight": { "value": "Highlight" },
+        "HighlightText": { "value": "HighlightText" },
+        "ButtonFace": { "value": "ButtonFace" },
+        "ButtonText": { "value": "ButtonText" }
       },
       "DarkRed": { "generate": { "type": "fluentsharedcolors", "value": "#750b1c" } },
       "Burgundy": { "generate": { "type": "fluentsharedcolors", "value": "#a4262c" } },

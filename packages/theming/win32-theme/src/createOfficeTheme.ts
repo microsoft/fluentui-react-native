@@ -38,7 +38,10 @@ export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
       return { colors: { ...createAliasTokens(getCurrentAppearance(theme.host.appearance, 'light')) } };
     },
     (theme: Theme) => {
-      return createBrandedThemeWithAlias(theme);
+      console.log(ref.themeName);
+      if (ref.themeName !== 'HighContrast') return createBrandedThemeWithAlias(theme);
+
+      return {};
     },
     (theme: Theme) => {
       if (!theme.host.palette) {
