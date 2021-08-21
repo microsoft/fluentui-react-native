@@ -4,11 +4,11 @@ import { fontStyles } from '@fluentui-react-native/tokens';
 
 import { defaultTabsTokens } from './TabsTokens';
 
-export const stylingSettings: UseStylingOptions<TabsTokens, TabsSlotProps, TabsProps> = {
+export const stylingSettings: UseStylingOptions<TabsProps, TabsSlotProps, TabsTokens> = {
   tokens: [defaultTabsTokens, tabsName],
   slotProps: {
     root: buildProps(
-      (tokens: TabsTokens, theme: Theme) => ({
+      () => ({
         style: {
           display: 'flex',
         },
@@ -24,7 +24,7 @@ export const stylingSettings: UseStylingOptions<TabsTokens, TabsSlotProps, TabsP
       [...fontStyles.keys],
     ),
     stack: buildProps(
-      (tokens: TabsTokens, theme: Theme) => ({
+      () => ({
         style: {
           display: 'flex',
           alignItems: 'center',

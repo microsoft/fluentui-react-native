@@ -1,6 +1,6 @@
 import { tabsItemName, TabsItemTokens, TabsItemSlotProps, TabsItemProps } from './TabsItem.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles, fontStyles, shadowStyles, getPaletteFromTheme } from '@fluentui-react-native/tokens';
+import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-react-native/tokens';
 import { tabsItemStates, defaultTabsItemTokens } from './TabsItemTokens';
 
 export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps, TabsItemTokens> = {
@@ -40,7 +40,7 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
       ['iconColor'],
     ),
     stack: buildProps(
-      (tokens: TabsItemTokens) => ({
+      () => ({
         style: {
           display: 'flex',
           marginHorizontal: 10,
@@ -55,7 +55,7 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
       ['iconColor', 'indicatorColor'],
     ),
     indicator: buildProps(
-      (tokens: TabsItemTokens, theme: Theme) => ({
+      (tokens: TabsItemTokens) => ({
         style: {
           minHeight: 2,
           borderRadius: 2,

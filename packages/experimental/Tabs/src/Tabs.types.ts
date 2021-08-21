@@ -39,7 +39,10 @@ export interface TabsContextData {
   views?: Map<string, React.ReactNode[]> | null;
 }
 
-export interface TabsTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens {}
+export interface TabsTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens {
+  label?: string,
+
+}
 
 
 export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> {
@@ -56,10 +59,6 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
   accessible?: boolean;
   accessibilityRole?: string;
   focusable?: boolean;
-  /*
-   ** An accessibility label for narrator. If not provided, it will be set to the label of the Tabs
-   */
-  accessibilityLabel?: string;
 
   /*
    ** The key of the selected option. If you provide this, you must maintain selection state by observing
@@ -105,8 +104,10 @@ export interface TabsInfo {
 
 export interface TabsState {
   props: TabsProps;
-  context?: TabsContextData;
-  info: TabsInfo;
+  state: {
+    context?: TabsContextData;
+    info: TabsInfo;
+  }
 }
 export interface TabsSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
