@@ -289,7 +289,6 @@ export function getStockWebDarkPalette(): ThemeColorDefinition {
 }
 
 export function getStockWebHCPalette(): ThemeColorDefinition {
-  console.log('boop');
   return {
     background: '#000000',
     bodyStandoutBackground: '#000000',
