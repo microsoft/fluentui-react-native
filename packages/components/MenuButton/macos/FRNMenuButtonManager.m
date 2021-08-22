@@ -10,7 +10,7 @@
   [menuItem setImage:[RCTConvert UIImage:json[@"image"]]];
   [menuItem setEnabled:[RCTConvert BOOL:json[@"enabled"]]];
   [menuItem setToolTip:[RCTConvert NSString:json[@"tooltip"]]];
-  [menuItem setIdentifier:[RCTConvert NSString:json[@"itemKey"]]];
+  [menuItem setIdentifier:[RCTConvert NSString:json[@"identifier"]]];
   return menuItem;
 }
 
