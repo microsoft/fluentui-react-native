@@ -3,12 +3,13 @@
 
 @implementation RCTConvert (FRNMenuButtonAdditions)
 
-+ (NSMenuItem *)menuItem:(id)json
++ (NSMenuItem *)NSMenuItem:(id)json
 {
   NSMenuItem *menuItem = [[NSMenuItem alloc] init];
-  [menuItem setTitle:[RCTConvert NSString:json[@"text"]]];
-  [menuItem setEnabled:![RCTConvert BOOL:json[@"disabled"]]];
-  [menuItem setToolTip:[RCTConvert NSString:json[@"title"]]];
+  [menuItem setTitle:[RCTConvert NSString:json[@"title"]]];
+  [menuItem setImage:[RCTConvert UIImage:json[@"image"]]];
+  [menuItem setEnabled:[RCTConvert BOOL:json[@"enabled"]]];
+  [menuItem setToolTip:[RCTConvert NSString:json[@"tooltip"]]];
   [menuItem setIdentifier:[RCTConvert NSString:json[@"itemKey"]]];
   return menuItem;
 }
@@ -20,21 +21,19 @@
 
   NSArray *menuItems = [RCTConvert NSArray:json];
   for (NSDictionary *menuItemJson in menuItems) {
-    NSMenuItem *menuItem = [RCTConvert menuItem:menuItemJson];
+    NSMenuItem *menuItem = [RCTConvert NSMenuItem:menuItemJson];
 
+    // Recursively parse and assign the submenu to the menu item
     if ([menuItemJson objectForKey:@"hasSubmenu"])
     {
       BOOL hasSubmenu = [RCTConvert BOOL:menuItemJson[@"hasSubmenu"]];
       if (hasSubmenu) {
-        NSMenu *submenu = [RCTConvert NSMenu:menuItemJson[@"submenuItems"]];
+        NSMenu *submenu = [RCTConvert NSMenu:menuItemJson[@"submenu"]];
         [menu setSubmenu:submenu forItem:menuItem];
       }
     }
-
     [menu addItem:menuItem];
-
   }
-
   return menu;
 }
 
@@ -43,21 +42,16 @@
 
 @interface RCT_EXTERN_MODULE(FRNMenuButtonManager, RCTViewManager)
 
-RCT_EXPORT_VIEW_PROPERTY(onItemClick, RCTBubblingEventBlock)
-
-RCT_EXPORT_VIEW_PROPERTY(onSubmenuItemClick, RCTBubblingEventBlock)
-
 RCT_REMAP_VIEW_PROPERTY(content, title, NSString)
 
 RCT_EXPORT_VIEW_PROPERTY(image, UIImage)
 
-RCT_CUSTOM_VIEW_PROPERTY(disabled, BOOL, NSPopUpButton)
-{
-  BOOL disabled = ![RCTConvert BOOL:json];
-  [view setEnabled:disabled];
-}
+RCT_EXPORT_VIEW_PROPERTY(enabled, BOOL)
 
-RCT_REMAP_VIEW_PROPERTY(menuItems, menu, NSMenu)
+RCT_EXPORT_VIEW_PROPERTY(menu, NSMenu)
 
+RCT_EXPORT_VIEW_PROPERTY(onItemClick, RCTBubblingEventBlock)
+
+RCT_EXPORT_VIEW_PROPERTY(onSubmenuItemClick, RCTBubblingEventBlock)
 
 @end
