@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { Separator, MenuButton, ContextualMenuProps } from '@fluentui/react-native';
-import { SvgIconProps } from '@fluentui-react-native/icon';
-import TestSvg from '../Button/test.svg';
 import { Text, View, Switch } from 'react-native';
-import { menuItems } from './testData';
+import { menuItems, iconProps } from './testData';
 
 export const StandardMenuButton: React.FunctionComponent = () => {
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
@@ -25,11 +23,6 @@ export const StandardMenuButton: React.FunctionComponent = () => {
     accessibilityLabel: 'MenuButton',
     shouldFocusOnMount: focusOnMount,
     shouldFocusOnContainer: focusOnContainer,
-  };
-
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
   };
 
   return (
@@ -68,19 +61,14 @@ export const StandardMenuButton: React.FunctionComponent = () => {
               />
               <Text>MenuButton with icon</Text>
               <MenuButton
-                icon={{ svgSource: svgProps, width: 12, height: 12 }}
+                icon={iconProps}
                 content="MenuButton"
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
               />
               <Text>MenuButton with only icon</Text>
-              <MenuButton
-                icon={{ svgSource: svgProps, width: 12, height: 12 }}
-                menuItems={menuItems}
-                onItemClick={onItemClick}
-                contextualMenu={contextualMenuProps}
-              />
+              <MenuButton icon={iconProps} menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps} />
               <Text>Disabled MenuButton</Text>
               <MenuButton disabled content="Disabled MenuButton" menuItems={menuItems} />
             </View>
@@ -96,20 +84,14 @@ export const StandardMenuButton: React.FunctionComponent = () => {
               <Text>Primary MenuButton with icon</Text>
               <MenuButton
                 primary
-                icon={{ svgSource: svgProps, width: 12, height: 12 }}
+                icon={iconProps}
                 content="Primary MenuButton"
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
               />
               <Text>Primary MenuButton with only icon</Text>
-              <MenuButton
-                primary
-                icon={{ svgSource: svgProps, width: 12, height: 12 }}
-                menuItems={menuItems}
-                onItemClick={onItemClick}
-                contextualMenu={contextualMenuProps}
-              />
+              <MenuButton primary icon={iconProps} menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps} />
               <Text>Primary Disabled MenuButton</Text>
               <MenuButton primary disabled content="Disabled Primary MenuButton" menuItems={menuItems} />
             </View>

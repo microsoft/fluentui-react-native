@@ -22,33 +22,16 @@ export const ButtonIconTest: React.FunctionComponent = () => {
 
   // SVG-based icons are not available on all platforms yet
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
+  const iconProps = { svgSource: svgProps, width: 20, height: 20 };
 
   return (
     <View>
       <Stack style={stackStyle}>
         <Button icon={testImage} content="Button with png Icon" tooltip="button tooltip" />
-        {svgIconsEnabled ? (
-          <Button
-            icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }}
-            content="Button with svg Icon"
-            tooltip="button tooltip"
-          />
-        ) : null}
-        {svgIconsEnabled ? (
-          <CustomizedIconButton
-            icon={{ svgSource: svgProps, width: 20, height: 20 }}
-            content="Button with Customized Icon"
-            tooltip="button tooltip"
-          />
-        ) : null}
+        {svgIconsEnabled ? <Button icon={{ ...iconProps, color: 'red' }} content="Button with svg Icon" tooltip="button tooltip" /> : null}
+        {svgIconsEnabled ? <CustomizedIconButton icon={iconProps} content="Button with Customized Icon" tooltip="button tooltip" /> : null}
         <Text>End Button icon</Text>
-        {svgIconsEnabled ? (
-          <CustomizedIconButton
-            endIcon={{ svgSource: svgProps, width: 20, height: 20 }}
-            content="Button with Right Icon"
-            tooltip="button tooltip"
-          />
-        ) : null}
+        {svgIconsEnabled ? <CustomizedIconButton endIcon={iconProps} content="Button with Right Icon" tooltip="button tooltip" /> : null}
       </Stack>
     </View>
   );

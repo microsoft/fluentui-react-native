@@ -1,6 +1,13 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { MenuButtonItemProps } from '@fluentui/react-native';
+import { SvgIconProps } from '@fluentui-react-native/icon';
 export const testImage = require('../Button/icon_24x24.png');
+import TestSvg from '../Button/test.svg';
+
+const svgProps: SvgIconProps = {
+  src: TestSvg,
+  viewBox: '0 0 500 500',
+};
 
 export const menuItems: MenuButtonItemProps[] = [
   {
@@ -18,3 +25,5 @@ export const menuItems: MenuButtonItemProps[] = [
     disabled: true,
   },
 ];
+
+export const iconProps = { svgSource: svgProps, width: 12, height: 12 };

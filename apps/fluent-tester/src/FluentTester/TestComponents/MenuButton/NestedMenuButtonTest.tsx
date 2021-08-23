@@ -1,16 +1,9 @@
 import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
 import { Separator, MenuButton } from '@fluentui/react-native';
-import { SvgIconProps } from '@fluentui-react-native/icon';
-import TestSvg from '../Button/test.svg';
-import { menuItems, testImage } from './testData';
+import { menuItems, testImage, iconProps } from './testData';
 
 export const NestedMenuButton: React.FunctionComponent = () => {
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
-  };
-
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
 
   const [focusOnMount, setShouldFocusOnMount] = React.useState(true);
@@ -57,7 +50,7 @@ export const NestedMenuButton: React.FunctionComponent = () => {
       itemKey: '4',
       text: 'SubmenuItem svg icon',
       componentRef: React.useRef(null),
-      icon: { svgSource: svgProps, width: 20, height: 20 },
+      icon: iconProps,
       onHoverIn: toggleShowSubmenu,
       showSubmenu,
       submenuProps: {
@@ -68,7 +61,7 @@ export const NestedMenuButton: React.FunctionComponent = () => {
       },
       submenuItems: [
         {
-          icon: { svgSource: svgProps, width: 20, height: 20 },
+          icon: iconProps,
           text: 'SubmenuItem svg icon',
           itemKey: '1',
         },
