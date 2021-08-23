@@ -30,7 +30,8 @@
     "@fluentui-react-native/tokens": "^0.9.19",
     "@uifabricshared/foundation-composable": ">=0.9.1 <1.0.0",
     "@uifabricshared/foundation-compose": "^1.10.9",
-    "@uifabricshared/foundation-settings": ">=0.10.1 <1.0.0"
+    "@uifabricshared/foundation-settings": ">=0.10.1 <1.0.0",
+    "react-native-svg": "^12.1.1"
   },
   "devDependencies": {
     "@types/react-native": "^0.63.0",
