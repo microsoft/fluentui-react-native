@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Thu, 19 Aug 2021 18:31:21 GMT and should not be manually modified.
+This log was last generated on Mon, 23 Aug 2021 23:35:47 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.36
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Add macOS implementation of useViewCommandFocus (sanajmi@microsoft.com)
 
 ## 0.10.35
 

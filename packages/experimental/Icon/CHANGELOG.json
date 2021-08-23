@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Mon, 23 Aug 2021 23:35:47 GMT",
+      "tag": "@fluentui-react-native/icon_v0.8.13",
+      "version": "0.8.13",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixed icon color for SVG",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "1f405d0b15fde31eb650b1d9bb5109dcc500440e",
+            "package": "@fluentui-react-native/icon"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 19 Aug 2021 18:31:21 GMT",
       "tag": "@fluentui-react-native/icon_v0.8.12",
       "version": "0.8.12",

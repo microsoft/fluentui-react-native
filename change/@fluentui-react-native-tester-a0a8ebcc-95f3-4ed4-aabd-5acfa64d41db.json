@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "react-native-windows to 0.64",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "dake.3601@gmail.com",
-  "dependentChangeType": "patch"
-}

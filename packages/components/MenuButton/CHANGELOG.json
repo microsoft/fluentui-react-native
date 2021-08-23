@@ -2,6 +2,53 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Mon, 23 Aug 2021 23:35:47 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix bug where the defualt content of the macOS MEnuButton was not empty",
+            "author": "sanajmi@microsoft.com",
+            "commit": "096dfebec6c2135a6256008be23642e68396fb36",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Change the macOS MenuButton style",
+            "author": "sanajmi@microsoft.com",
+            "commit": "afbf14b867e89ab777543f6dc581fe4435a6da6e",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.19.0",
+            "author": "sanajmi@microsoft.com",
+            "commit": "c4ee008b284d3e339cc19a6640c8e570d443d1cb",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.10.14",
+            "author": "dake.3601@gmail.com",
+            "commit": "84a24da6bdddd85adad1f5824e7af3d1804b1c1c",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.20",
+            "author": "dake.3601@gmail.com",
+            "commit": "84a24da6bdddd85adad1f5824e7af3d1804b1c1c",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Changed styling for the Button. Added new exampled to MenuButton",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "1f405d0b15fde31eb650b1d9bb5109dcc500440e",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 19 Aug 2021 18:31:21 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.4.15",
       "version": "0.4.15",

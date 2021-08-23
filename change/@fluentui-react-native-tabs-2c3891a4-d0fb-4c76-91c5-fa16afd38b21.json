@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Deprecate aria- prefix properties",
-  "packageName": "@fluentui-react-native/tabs",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}
