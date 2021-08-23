@@ -39,7 +39,7 @@ export const Tabs = compose<TabsType>({
     const Slots = useSlots(userProps, layer => tabs.state[layer] || userProps[layer]);
     // now return the handler for finishing render
     return (final: TabsProps, ...children: React.ReactNode[]) => {
-      const { label, defaultTabbableElement, isCircularNavigation } = mergeProps(tabs.props, final); // ...mergedProps
+      const { label, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(tabs.props, final); // ...mergedProps
 
       // Populate the tabsItemKeys array
       if (children) {
@@ -62,8 +62,7 @@ export const Tabs = compose<TabsType>({
           // Passes in the selected key and a hook function to update the newly selected tabsItem and call the client's onTabsClick callback
           value={tabs.state.context}
         >
-          <Slots.root //{...mergedProps}
-          >
+          <Slots.root {...mergedProps}>
             {tabs.state.info.label && <Slots.label>{label}</Slots.label>}
             <Slots.container defaultTabbableElement={defaultTabbableElement} isCircularNavigation={isCircularNavigation}>
               <Slots.stack>{children}</Slots.stack>

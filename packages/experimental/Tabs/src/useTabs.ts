@@ -38,10 +38,9 @@ export const useTabs = (props: TabsProps): TabsState => {
       ...props,
       accessible: true,
       accessibilityRole: 'tablist',
-      focusable: true,
       ref: componentRef,
       defaultTabbableElement: selectedTabsItemRef,
-      isCircularNavigation: props.isCircularNavigation ?? true,
+      isCircularNavigation: props.isCircularNavigation ?? false,
     },
     state: {
       context:{

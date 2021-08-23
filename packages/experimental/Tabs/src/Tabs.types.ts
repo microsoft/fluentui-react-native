@@ -45,7 +45,7 @@ export interface TabsTokens extends IForegroundColorTokens, FontTokens, IBackgro
 }
 
 
-export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> {
+export interface TabsProps extends  Pick<FocusZoneProps, 'isCircularNavigation'>, Pick<ViewProps, 'accessibilityRole'> {
   /*
    ** Descriptive label for the Tabs. This will be displayed as the title of the Tabs to the user
    */
@@ -57,7 +57,7 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
   defaultSelectedKey?: string;
 
   accessible?: boolean;
-  accessibilityRole?: string;
+
   focusable?: boolean;
 
   /*
