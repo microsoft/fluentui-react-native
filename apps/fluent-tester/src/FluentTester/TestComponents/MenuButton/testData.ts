@@ -13,7 +13,7 @@ export const menuItems: MenuButtonItemProps[] = [
   {
     itemKey: '1',
     text: 'MenuItem 1',
-    icon: testImage,
+    startIcon: testImage,
   },
   {
     itemKey: '2',

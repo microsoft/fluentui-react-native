@@ -30,7 +30,7 @@ const getChevronIcon = (color: string = defaultIconColor) => {
 export const MenuButton = compose<MenuButtonType>({
   displayName: MenuButtonName,
   usePrepareProps: (userProps: MenuButtonProps, useStyling: IUseComposeStyling<MenuButtonType>) => {
-    const { menuItems, content, icon, disabled, onItemClick, contextualMenu, primary } = userProps;
+    const { menuItems, content, startIcon, disabled, onItemClick, contextualMenu, primary } = userProps;
 
     const stdBtnRef = useRef(null);
     const [showContextualMenu, setShowContextualMenu] = useState(false);
@@ -85,7 +85,7 @@ export const MenuButton = compose<MenuButtonType>({
     const buttonProps = {
       content,
       disabled,
-      icon,
+      startIcon,
       componentRef: stdBtnRef,
       onClick: toggleShowContextualMenu,
       endIcon: chevronIconProps,

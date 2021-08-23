@@ -51,7 +51,7 @@ export const NestedMenuButton: React.FunctionComponent = () => {
       itemKey: '4',
       text: 'SubmenuItem svg icon',
       componentRef: React.useRef(null),
-      icon: iconProps,
+      startIcon: iconProps,
       onHoverIn: toggleShowSubmenu,
       showSubmenu,
       submenuProps: {
@@ -62,7 +62,7 @@ export const NestedMenuButton: React.FunctionComponent = () => {
       },
       submenuItems: [
         {
-          icon: iconProps,
+          startIcon: iconProps,
           text: 'SubmenuItem svg icon',
           itemKey: '1',
         },
@@ -140,7 +140,12 @@ export const NestedMenuButton: React.FunctionComponent = () => {
             <Text>Last Submenu Item Clicked: </Text>
             {lastSubmenuItemClicked > 0 ? <Text style={textColor}>{lastSubmenuItemClicked}</Text> : <Text style={textColor}>none</Text>}
           </Text>
-          <MenuButton icon={rasterImageProps} content="Press for Nested MenuButton" menuItems={nestedMenuItems} onItemClick={onItemClick} />
+          <MenuButton
+            startIcon={rasterImageProps}
+            content="Press for Nested MenuButton"
+            menuItems={nestedMenuItems}
+            onItemClick={onItemClick}
+          />
         </View>
       </View>
     </View>

@@ -19,9 +19,9 @@ export interface IButtonInfo extends IPressableState {
   disabled?: boolean;
 
   /**
-   * Button icon.
+   * Button start icon.
    */
-  icon?: boolean;
+  startIcon?: boolean;
 
   /**
    * Button text.
@@ -88,7 +88,7 @@ export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBack
   /**
    * Source URL or name of the icon to show on the Button.
    */
-  icon?: IconSourcesType;
+  startIcon?: IconSourcesType;
   endIcon?: IconSourcesType;
 }
 
@@ -99,9 +99,9 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
   content?: string;
 
   /**
-   * Source URL or name of the icon to show on the Button.
+   * Source URL or name of the start icon to show on the Button.
    */
-  icon?: IconSourcesType;
+  startIcon?: IconSourcesType;
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
@@ -120,7 +120,7 @@ export interface IButtonSlotProps {
   root: React.PropsWithRef<IViewProps>;
   ripple?: PressableProps; // This slot exists to enable ripple-effect in android. It does not affect other platforms.
   stack: ViewProps;
-  icon: IconProps;
+  startIcon: IconProps;
   content: ITextProps;
   endIcon: IconProps;
 }
