@@ -6,22 +6,22 @@ export const tabsItemStates: (keyof TabsItemTokens)[] = ['hovered', 'selected', 
 
 export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: Theme) =>
   ({
-    backgroundColor: 'green',
+    backgroundColor: 'transparent',
     color: t.colors.neutralForeground3Brand,
     borderColor: 'transparent',
     iconColor: t.colors.buttonIcon,
-    indicatorColor: 'transparent',
+    indicatorColor: t.colors.transparent,
     minHeight: 32,
     minWidth: 80,
-    borderWidth: 1,
-    borderRadius: 2,
+    borderWidth: 2,
+    borderRadius: 4,
 
     disabled: {
       backgroundColor: t.colors.buttonDisabledBackground,
       color: t.colors.neutralForegroundDisabled,
       borderColor: 'transparent',
       iconColor: t.colors.buttonDisabledIcon,
-      indicatorColor: 'transparent',
+      indicatorColor: t.colors.transparent,
     },
     hovered: {
       backgroundColor: t.colors.neutralForeground2Hover,
@@ -29,9 +29,8 @@ export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: T
       indicatorColor: t.colors.neutralStroke1,
     },
     pressed: {
-      // backgroundColor: 'blue',
       color: t.colors.neutralForeground2Pressed,
-      borderColor: t.colors.buttonPressedBorder,
+      borderColor: 'transparent',
       iconColor: t.colors.buttonPressedIcon,
       indicatorColor: t.colors.brandStroke1,
     },
