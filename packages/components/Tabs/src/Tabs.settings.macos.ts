@@ -12,7 +12,7 @@ export const settings: IComposeSettings<TabsType> = [
     root: {
       accessible: true,
       style: {
-        marginLeft: 7,
+        marginLeft: 4,
       },
     },
     label: {

@@ -13,8 +13,8 @@ export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
       color: 'bodyText',
-      variant: 'subheaderStandard',
-      fontSize: 13,
+      variant: 'bodyStandard',
+      // fontSize: 13,
       indicatorColor: 'transparent',
     },
     root: {
