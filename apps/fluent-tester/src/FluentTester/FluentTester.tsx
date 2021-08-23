@@ -87,12 +87,11 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     const theme = useTheme();
 
     return (
-      <View style={fluentTesterStyles.header}>
+      <View style={fluentTesterStyles.header} testID={BASE_TESTPAGE}>
         <Text
           style={[fluentTesterStyles.testHeader]}
           variant="heroLargeSemibold"
           color={theme.host.palette?.TextEmphasis}
-          testID={BASE_TESTPAGE}
         >
           ⚛ FluentUI Tests
         </Text>
@@ -106,12 +105,11 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     const theme = useTheme();
 
     return (
-      <View style={mobileStyles.header}>
+      <View style={mobileStyles.header} testID={BASE_TESTPAGE}>
         <Text
           style={[fluentTesterStyles.testHeader]}
           variant="heroLargeSemibold"
           color={theme.host.palette?.TextEmphasis}
-          testID={BASE_TESTPAGE}
         >
           ⚛ FluentUI Tests
         </Text>
