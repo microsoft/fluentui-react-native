@@ -1,3 +1,8 @@
+/*
+Disclaimer: these styles do not follow a specific figma design, but are
+meant to be placeholders until new designs are developed
+*/
+
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 import { TabsType, tabsName } from './Tabs.types';
 
@@ -20,7 +25,7 @@ export const settings: IComposeSettings<TabsType> = [
     },
     stack: {
       style: {
-        marginLeft: -11,
+        // marginLeft: -10,
         marginTop: 6,
         flexDirection: 'row',
       },

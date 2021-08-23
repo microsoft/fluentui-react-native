@@ -14,7 +14,6 @@ export const settings: IComposeSettings<TabsItemType> = [
     tokens: {
       color: 'bodyText',
       variant: 'bodyStandard',
-      // fontSize: 13,
       indicatorColor: 'transparent',
     },
     root: {
