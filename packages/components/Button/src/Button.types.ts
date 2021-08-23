@@ -27,6 +27,10 @@ export interface IButtonInfo extends IPressableState {
    * Button text.
    */
   content?: boolean;
+  /**
+   * End icon.
+   */
+   endIcon?: boolean;
 }
 
 /*
@@ -85,6 +89,7 @@ export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBack
    * Source URL or name of the icon to show on the Button.
    */
   icon?: IconSourcesType;
+  endIcon?: IconSourcesType;
 }
 
 export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
@@ -108,6 +113,7 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
 
   testID?: string;
   tooltip?: string;
+  endIcon?: IconSourcesType;
 }
 
 export interface IButtonSlotProps {
@@ -116,6 +122,7 @@ export interface IButtonSlotProps {
   stack: ViewProps;
   icon: IconProps;
   content: ITextProps;
+  endIcon: IconProps;
 }
 
 export type IButtonRenderData = IRenderData<IButtonSlotProps, IButtonState>;
