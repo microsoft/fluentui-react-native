@@ -6,7 +6,7 @@ import { TabsProps, TabsState } from './Tabs.types';
 export const useTabs = (props: TabsProps): TabsState => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
-  const { componentRef = defaultComponentRef, selectedKey, getTabId, onTabsClick, defaultSelectedKey, ...rest } = props;
+  const { componentRef = defaultComponentRef, selectedKey, getTabId, onTabsClick, defaultSelectedKey } = props;
   // const onClickWithFocus = useOnPressWithFocus(componentRef, onSelect);
 
   // const pressable = useAsPressable({ ...rest, onPress: onClickWithFocus });
@@ -37,23 +37,23 @@ export const useTabs = (props: TabsProps): TabsState => {
     props: {
       ...props,
       accessible: true,
-      accessibilityLabel: props.accessibilityLabel,
       accessibilityRole: 'tablist',
-      focusable: true,
       ref: componentRef,
       defaultTabbableElement: selectedTabsItemRef,
-      isCircularNavigation: props.isCircularNavigation ?? true,
+      isCircularNavigation: props.isCircularNavigation ?? false,
     },
-    context:{
-      selectedKey: selectedKey ?? data.selectedKey,
-      onTabsClick: data.onKeySelect,
-      getTabId: onChangeTabId,
-      updateSelectedTabsItemRef: onSelectTabsItemRef,
-      views: map,
-    },
-    info: {
-      headersOnly: props.headersOnly,
-      label: props.headersOnly,
+    state: {
+      context:{
+        selectedKey: selectedKey ?? data.selectedKey,
+        onTabsClick: data.onKeySelect,
+        getTabId: onChangeTabId,
+        updateSelectedTabsItemRef: onSelectTabsItemRef,
+        views: map,
+      },
+      info: {
+        headersOnly: props.headersOnly,
+        label: props.headersOnly,
+      },
     },
   };
 };

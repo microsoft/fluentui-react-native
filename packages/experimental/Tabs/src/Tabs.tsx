@@ -36,40 +36,40 @@ export const Tabs = compose<TabsType>({
   render: (userProps: TabsProps, useSlots: UseSlots<TabsType>) => {
     const tabs = useTabs(userProps);
     // grab the styled slots
-    const Slots = useSlots(userProps);
+    const Slots = useSlots(userProps, layer => tabs.state[layer] || userProps[layer]);
     // now return the handler for finishing render
     return (final: TabsProps, ...children: React.ReactNode[]) => {
-      const { label, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(tabs.props, final);
+      const { label, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(tabs.props, final); // ...mergedProps
 
       // Populate the tabsItemKeys array
       if (children) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore - TODO, fix typing error
-        tabs.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
+        tabs.state.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
           if (React.isValidElement(child)) {
             // Sets default selected tabItem
-            if (tabs.context.selectedKey == null && !child.props.disabled) {
-              tabs.context.selectedKey = child.props.itemKey;
+            if (tabs.state.context.selectedKey == null && !child.props.disabled) {
+              tabs.state.context.selectedKey = child.props.itemKey;
             }
             return child.props.itemKey;
           }
         });
       }
-      console.log(tabs.context.tabsItemKeys);
+      console.log(tabs.state.context.tabsItemKeys);
 
       return (
         <TabsContext.Provider
           // Passes in the selected key and a hook function to update the newly selected tabsItem and call the client's onTabsClick callback
-          value={tabs.context}
+          value={tabs.state.context}
         >
           <Slots.root {...mergedProps}>
-            {tabs.info.label && <Slots.label>{label}</Slots.label>}
+            {tabs.state.info.label && <Slots.label>{label}</Slots.label>}
             <Slots.container defaultTabbableElement={defaultTabbableElement} isCircularNavigation={isCircularNavigation}>
               <Slots.stack>{children}</Slots.stack>
             </Slots.container>
             <Slots.tabPanel>
               <TabsContext.Consumer>
-                {context => !tabs.info.headersOnly && <View>{context.views.get(context.selectedKey)}</View>}
+                {context => !tabs.state.info.headersOnly && <View>{context.views.get(context.selectedKey)}</View>}
               </TabsContext.Consumer>
             </Slots.tabPanel>
           </Slots.root>

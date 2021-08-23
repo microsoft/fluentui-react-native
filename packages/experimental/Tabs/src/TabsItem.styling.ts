@@ -38,7 +38,7 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
       ['iconColor'],
     ),
     stack: buildProps(
-      (tokens: TabsItemTokens) => ({
+      () => ({
         style: {
           display: 'flex',
           marginHorizontal: 10,
@@ -53,7 +53,7 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
       ['iconColor', 'indicatorColor'],
     ),
     indicator: buildProps(
-      (tokens: TabsItemTokens, theme: Theme) => ({
+      (tokens: TabsItemTokens) => ({
         style: {
           minHeight: 2,
           borderRadius: 2,
