@@ -40,8 +40,7 @@ export const MenuButton = compose<MenuButtonType>({
       if (!icon) {
         return null;
       }
-      // Only support PNG's for the macOS MenuButton image, because
-      // React Native only supports raster images natively via Native Modules.
+      // GH #931, only PNG images are supported on the macOS MenuButton
       const iconProps = createIconProps(icon);
       const imageSource = Image.resolveAssetSource(iconProps?.rasterImageSource?.src);
       return imageSource;

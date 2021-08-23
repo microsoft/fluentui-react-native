@@ -4,10 +4,9 @@ import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens, IShadowTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import type { IViewWin32Props } from '@office-iss/react-native-win32';
-import { IconProps } from '@fluentui-react-native/icon';
+import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 
 export const buttonName = 'Button';
-type IconSourcesType = number | string | IconProps;
 
 export interface ButtonTokens extends FontTokens, IBorderTokens, IShadowTokens {
   /**

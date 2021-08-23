@@ -6,7 +6,7 @@ import { IPressableProps } from '@fluentui-react-native/pressable';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import { IconProps } from '@fluentui-react-native/icon';
+import { IconProps , IconSourcesType} from '@fluentui-react-native/icon';
 
 export const buttonName = 'Button';
 
@@ -41,8 +41,6 @@ export interface IButtonInfo extends IPressableState {
 export interface IButtonState {
   info: IButtonInfo;
 }
-
-type IconSourcesType = number | string | IconProps;
 
 export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
   /**
