@@ -1,6 +1,6 @@
 import { tabsName, TabsTokens, TabsSlotProps, TabsProps } from './Tabs.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { fontStyles } from '@fluentui-react-native/tokens';
+import { fontStyles, foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
 
 import { defaultTabsTokens } from './TabsTokens';
 
@@ -18,7 +18,6 @@ export const stylingSettings: UseStylingOptions<TabsProps, TabsSlotProps, TabsTo
     label: buildProps(
       (tokens: TabsTokens, theme: Theme) => ({
         style: {
-          color: 'black',
           ...fontStyles.from(tokens, theme),
         },
       }),
