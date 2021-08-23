@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Export IconSourcesType",
+  "packageName": "@fluentui-react-native/icon",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
