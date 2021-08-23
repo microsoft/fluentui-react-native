@@ -222,19 +222,21 @@ const standardCallout: React.FunctionComponent = () => {
           }}>
           {showScrollViewCallout ?
             <View style={fluentTesterStyles.scrollViewContainer}>
-              <ScrollView contentContainerStyle={fluentTesterStyles.scrollViewStyle} horizontal={true} showsHorizontalScrollIndicator={true}>
-                <StealthButton content="click to change anchor" onClick={toggleCalloutRef} />
-                <StealthButton content="Click to add a button" style={fluentTesterStyles.testListItem} onClick={addButton} />
-                <StealthButton content="Click to remove a button" style={fluentTesterStyles.testListItem} onClick={removeButton} />
-                {scrollviewContents.map((value) => {
-                  return (
-                    <StealthButton
-                      key={value}
-                      content="Button"
-                      style={fluentTesterStyles.testListItem}
-                    />
-                  )
-                })}
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={true}>
+                <ScrollView contentContainerStyle={fluentTesterStyles.scrollViewStyle} showsVerticalScrollIndicator={true}>
+                  <StealthButton content="click to change anchor" onClick={toggleCalloutRef} />
+                  <StealthButton content="Click to add a button" style={fluentTesterStyles.testListItem} onClick={addButton} />
+                  <StealthButton content="Click to remove a button" style={fluentTesterStyles.testListItem} onClick={removeButton} />
+                  {scrollviewContents.map((value) => {
+                    return (
+                      <StealthButton
+                        key={value}
+                        content="Button"
+                        style={fluentTesterStyles.testListItem}
+                      />
+                    )
+                  })}
+                </ScrollView>
               </ScrollView>
             </View>
           : //else
