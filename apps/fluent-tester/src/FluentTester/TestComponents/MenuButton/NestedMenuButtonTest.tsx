@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
 import { Separator, MenuButton } from '@fluentui/react-native';
 import { menuItems, testImage, iconProps } from './testData';
+import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonTestStyles';
 
 export const NestedMenuButton: React.FunctionComponent = () => {
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
@@ -115,14 +116,14 @@ export const NestedMenuButton: React.FunctionComponent = () => {
 
   return (
     <View>
-      <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
-        <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
-          <View style={{ flexDirection: 'row' }}>
+      <View style={viewWrapperStyle}>
+        <View style={columnStyle}>
+          <View style={rowStyle}>
             <Text>Should Focus on Mount</Text>
             <Switch value={focusOnMount} onValueChange={toggleFocusOnMount} />
           </View>
 
-          <View style={{ flexDirection: 'row' }}>
+          <View style={rowStyle}>
             <Text>Should Focus on Container</Text>
             <Switch value={focusOnContainer} onValueChange={toggleFocusOnContainer} />
           </View>
@@ -130,22 +131,14 @@ export const NestedMenuButton: React.FunctionComponent = () => {
 
         <Separator vertical />
 
-        <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
+        <View style={columnStyle}>
           <Text>
             <Text>Last Menu Item Clicked: </Text>
-            {lastMenuItemClicked > 0 ? (
-              <Text style={{ color: 'blue' }}>{lastMenuItemClicked}</Text>
-            ) : (
-              <Text style={{ color: 'blue' }}>none</Text>
-            )}
+            {lastMenuItemClicked > 0 ? <Text style={textColor}>{lastMenuItemClicked}</Text> : <Text style={textColor}>none</Text>}
           </Text>
           <Text>
             <Text>Last Submenu Item Clicked: </Text>
-            {lastSubmenuItemClicked > 0 ? (
-              <Text style={{ color: 'blue' }}>{lastSubmenuItemClicked}</Text>
-            ) : (
-              <Text style={{ color: 'blue' }}>none</Text>
-            )}
+            {lastSubmenuItemClicked > 0 ? <Text style={textColor}>{lastSubmenuItemClicked}</Text> : <Text style={textColor}>none</Text>}
           </Text>
           <MenuButton icon={rasterImageProps} content="Press for Nested MenuButton" menuItems={nestedMenuItems} onItemClick={onItemClick} />
         </View>

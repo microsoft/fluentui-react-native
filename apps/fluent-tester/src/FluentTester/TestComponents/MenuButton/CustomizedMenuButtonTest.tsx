@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { MenuButton } from '@fluentui/react-native';
 import { menuItems } from './testData';
+import { viewWrapperStyle, columnStyle, rowStyle } from './MenuButtonTestStyles';
 
 export const CustomizedMenuButton: React.FunctionComponent = () => {
   const StyledMenuButton = MenuButton.customize({
@@ -17,9 +18,9 @@ export const CustomizedMenuButton: React.FunctionComponent = () => {
   });
   return (
     <View>
-      <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
-        <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
-          <View style={{ flexDirection: 'row' }}>
+      <View style={viewWrapperStyle}>
+        <View style={columnStyle}>
+          <View style={rowStyle}>
             <Text>MenuButton with customized UI</Text>
           </View>
         </View>

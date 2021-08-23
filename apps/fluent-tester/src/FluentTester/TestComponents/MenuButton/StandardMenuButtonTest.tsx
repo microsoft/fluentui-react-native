@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Separator, MenuButton, ContextualMenuProps } from '@fluentui/react-native';
 import { Text, View, Switch } from 'react-native';
 import { menuItems, iconProps } from './testData';
+import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonTestStyles';
 
 export const StandardMenuButton: React.FunctionComponent = () => {
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
@@ -27,14 +28,14 @@ export const StandardMenuButton: React.FunctionComponent = () => {
 
   return (
     <View>
-      <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
-        <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
-          <View style={{ flexDirection: 'row' }}>
+      <View style={viewWrapperStyle}>
+        <View style={columnStyle}>
+          <View style={rowStyle}>
             <Text>Should Focus on Mount</Text>
             <Switch value={focusOnMount} onValueChange={toggleFocusOnMount} />
           </View>
 
-          <View style={{ flexDirection: 'row' }}>
+          <View style={rowStyle}>
             <Text>Should Focus on Container</Text>
             <Switch value={focusOnContainer} onValueChange={toggleFocusOnContainer} />
           </View>
@@ -42,17 +43,13 @@ export const StandardMenuButton: React.FunctionComponent = () => {
 
         <Separator vertical />
 
-        <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
+        <View style={columnStyle}>
           <Text>
             <Text>Last Menu Item Clicked: </Text>
-            {lastMenuItemClicked > 0 ? (
-              <Text style={{ color: 'blue' }}>{lastMenuItemClicked}</Text>
-            ) : (
-              <Text style={{ color: 'blue' }}>none</Text>
-            )}
+            {lastMenuItemClicked > 0 ? <Text style={textColor}>{lastMenuItemClicked}</Text> : <Text style={textColor}>none</Text>}
           </Text>
-          <View style={{ flexDirection: 'row', paddingHorizontal: 5 }}>
-            <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
+          <View style={{ ...rowStyle, paddingHorizontal: 5 }}>
+            <View style={columnStyle}>
               <MenuButton
                 content="Standard MenuButton"
                 menuItems={menuItems}
@@ -73,7 +70,7 @@ export const StandardMenuButton: React.FunctionComponent = () => {
               <MenuButton disabled content="Disabled MenuButton" menuItems={menuItems} />
             </View>
             <Separator vertical />
-            <View style={{ flexDirection: 'column', paddingHorizontal: 12 }}>
+            <View style={columnStyle}>
               <MenuButton
                 primary
                 content="Primary MenuButton"
