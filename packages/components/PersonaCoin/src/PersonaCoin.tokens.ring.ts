@@ -1,12 +1,12 @@
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 import { ViewProps } from 'react-native';
 import { IPersonaCoinTokens } from './PersonaCoin.types';
-import { ITheme } from '@uifabricshared/theming-ramp';
+import { Theme } from '@fluentui-react-native/framework';
 import { getRingThickness, calculateEffectiveSizes } from './PersonaCoin.helpers';
 
 const _ringProps: (keyof IPersonaCoinTokens)[] = ['coinSize', 'size', 'ring'];
 
-function _buildRingStyles(tokenProps: IPersonaCoinTokens, theme: ITheme): ViewProps {
+function _buildRingStyles(tokenProps: IPersonaCoinTokens, theme: Theme): ViewProps {
   const { physicalSize } = calculateEffectiveSizes(tokenProps);
   const { ring } = tokenProps;
 
@@ -33,7 +33,7 @@ function _buildRingStyles(tokenProps: IPersonaCoinTokens, theme: ITheme): ViewPr
   };
 }
 
-function _buildGlowStyles(tokenProps: IPersonaCoinTokens, theme: ITheme): ViewProps {
+function _buildGlowStyles(tokenProps: IPersonaCoinTokens, theme: Theme): ViewProps {
   const { physicalSize } = calculateEffectiveSizes(tokenProps);
   const { ring } = tokenProps;
 
@@ -60,5 +60,5 @@ function _buildGlowStyles(tokenProps: IPersonaCoinTokens, theme: ITheme): ViewPr
   };
 }
 
-export const buildRingStyles = styleFunction<ViewProps, IPersonaCoinTokens, ITheme>(_buildRingStyles, _ringProps);
-export const buildGlowStyles = styleFunction<ViewProps, IPersonaCoinTokens, ITheme>(_buildGlowStyles, _ringProps);
+export const buildRingStyles = styleFunction<ViewProps, IPersonaCoinTokens, Theme>(_buildRingStyles, _ringProps);
+export const buildGlowStyles = styleFunction<ViewProps, IPersonaCoinTokens, Theme>(_buildGlowStyles, _ringProps);

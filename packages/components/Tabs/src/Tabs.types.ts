@@ -72,7 +72,7 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
   defaultSelectedKey?: string;
 
   /*
-   ** An accessibility label for narrator. If not provided, it will be set to the label of the Tabs
+   ** An accessibility label for screen readers. If not provided, it will be set to the label of the Tabs.
    */
   accessibilityLabel?: string;
 

@@ -31,7 +31,7 @@ export const TabsItem = compose<TabsItemType>({
       testID,
       itemKey,
       itemCount,
-      accessibilityPosInSet,
+      accessibilityPositionInSet,
       accessibilitySetSize,
       ...rest
     } = userProps;
@@ -110,7 +110,7 @@ export const TabsItem = compose<TabsItemType>({
         accessibilityLabel: accessibilityLabel, // For windows, set to read children when RN is at >= 0.64
         accessibilityState: { disabled: userProps.disabled, selected: info.selectedKey === userProps.itemKey },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
-        accessibilityPositionInSet: accessibilityPosInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
+        accessibilityPositionInSet: accessibilityPositionInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
         accessibilitySetSize: accessibilitySetSize ?? info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
       },

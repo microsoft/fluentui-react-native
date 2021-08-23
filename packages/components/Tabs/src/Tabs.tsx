@@ -124,7 +124,7 @@ export const Tabs = compose<TabsType>({
     }
 
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
-      root: { rest, ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist'},
+      root: { ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist', ...rest },
       label: { children: label },
       container:{ isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef },
     });
