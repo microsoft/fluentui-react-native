@@ -1,6 +1,6 @@
 import { tabsName, TabsTokens, TabsSlotProps, TabsProps } from './Tabs.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { fontStyles, foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
+import { fontStyles } from '@fluentui-react-native/tokens';
 
 import { defaultTabsTokens } from './TabsTokens';
 
