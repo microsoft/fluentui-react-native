@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Renamed icon to start icon",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "v.kozlova13@gmail.com",
+  "dependentChangeType": "patch"
+}
