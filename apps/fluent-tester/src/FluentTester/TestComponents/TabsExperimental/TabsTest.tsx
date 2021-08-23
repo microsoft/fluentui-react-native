@@ -11,7 +11,7 @@ import TestSvg from './test.svg';
 const tabs: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
-      <Tabs label="Tabs">
+      <Tabs label="Tabs" headersOnly={true}>
         <TabsItem headerText="Home" itemKey="A">
           <Text>Tabs #1</Text>
         </TabsItem>

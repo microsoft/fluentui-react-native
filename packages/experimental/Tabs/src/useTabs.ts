@@ -51,8 +51,8 @@ export const useTabs = (props: TabsProps): TabsState => {
         views: map,
       },
       info: {
-        headersOnly: props.headersOnly,
-        label: props.headersOnly,
+        headersOnly: props.headersOnly ?? false,
+        label: !!props.label,
       },
     },
   };

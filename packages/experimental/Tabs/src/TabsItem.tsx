@@ -36,7 +36,7 @@ export const TabsItem = compose<TabItemType>({
       }
 
       const renderContent = !!headerText || itemCount !== undefined;
-      context.views.set(itemKey, children);
+      context?.views?.set(itemKey, children);
 
       return (
         <Slots.root {...mergedProps}>

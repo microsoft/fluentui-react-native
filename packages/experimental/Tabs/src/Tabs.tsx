@@ -68,9 +68,11 @@ export const Tabs = compose<TabsType>({
               <Slots.stack>{children}</Slots.stack>
             </Slots.container>
             <Slots.tabPanel>
-              <TabsContext.Consumer>
-                {context => !tabs.state.info.headersOnly && <View>{context.views.get(context.selectedKey)}</View>}
-              </TabsContext.Consumer>
+              {
+                <TabsContext.Consumer>
+                  {context => !tabs?.state?.info?.headersOnly && <View>{context.views.get(context.selectedKey)}</View>}
+                </TabsContext.Consumer>
+              }
             </Slots.tabPanel>
           </Slots.root>
         </TabsContext.Provider>

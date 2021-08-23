@@ -18,6 +18,7 @@ export const stylingSettings: UseStylingOptions<TabsProps, TabsSlotProps, TabsTo
     label: buildProps(
       (tokens: TabsTokens, theme: Theme) => ({
         style: {
+          color: 'black',
           ...fontStyles.from(tokens, theme),
         },
       }),
