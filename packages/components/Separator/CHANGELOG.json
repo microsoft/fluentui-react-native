@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/separator",
   "entries": [
     {
+      "date": "Mon, 23 Aug 2021 23:35:47 GMT",
+      "tag": "@fluentui-react-native/separator_v0.10.30",
+      "version": "0.10.30",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.32",
+            "author": "dake.3601@gmail.com",
+            "commit": "84a24da6bdddd85adad1f5824e7af3d1804b1c1c",
+            "package": "@fluentui-react-native/separator"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 19 Aug 2021 18:31:21 GMT",
+      "tag": "@fluentui-react-native/separator_v0.10.29",
+      "version": "0.10.29",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.31",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5849d234f12ab30c929e0b8ab256a2fc7523cbe9",
+            "package": "@fluentui-react-native/separator"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 18 Aug 2021 23:00:57 GMT",
       "tag": "@fluentui-react-native/separator_v0.10.28",
       "version": "0.10.28",
