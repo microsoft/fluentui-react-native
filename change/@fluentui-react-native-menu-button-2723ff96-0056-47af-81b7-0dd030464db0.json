@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Support menuButton images and custom styles on macOS",
+  "packageName": "@fluentui-react-native/menu-button",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
