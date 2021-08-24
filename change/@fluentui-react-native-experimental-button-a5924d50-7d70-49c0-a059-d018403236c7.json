@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Use exported IconSourcesType from Icon package",
-  "packageName": "@fluentui-react-native/experimental-button",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

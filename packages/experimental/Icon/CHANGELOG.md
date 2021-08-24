@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Mon, 23 Aug 2021 23:35:47 GMT and should not be manually modified.
+This log was last generated on Tue, 24 Aug 2021 18:08:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.14
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Export IconSourcesType (sanajmi@microsoft.com)
 
 ## 0.8.13
 
