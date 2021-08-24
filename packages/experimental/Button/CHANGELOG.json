@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/experimental-button",
   "entries": [
     {
+      "date": "Tue, 24 Aug 2021 18:08:30 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.8.15",
+      "version": "0.8.15",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Use exported IconSourcesType from Icon package",
+            "author": "sanajmi@microsoft.com",
+            "commit": "a2124be0bdd820a4f38ae7017bd48e7ca3373300",
+            "package": "@fluentui-react-native/experimental-button"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.6.13",
+            "author": "jasonmo@microsoft.com",
+            "commit": "828ebc8340efcbbb842affd2a03f4b73c4f1afa3",
+            "package": "@fluentui-react-native/experimental-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 23 Aug 2021 23:35:47 GMT",
       "tag": "@fluentui-react-native/experimental-button_v0.8.14",
       "version": "0.8.14",

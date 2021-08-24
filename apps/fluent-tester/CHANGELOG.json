@@ -2,6 +2,53 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 24 Aug 2021 18:08:30 GMT",
+      "tag": "@fluentui-react-native/tester_v0.38.1",
+      "version": "0.38.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Use exported IconSourcesType from Icon package",
+            "author": "sanajmi@microsoft.com",
+            "commit": "a2124be0bdd820a4f38ae7017bd48e7ca3373300",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "add experimental text test page",
+            "author": "jasonmo@microsoft.com",
+            "commit": "828ebc8340efcbbb842affd2a03f4b73c4f1afa3",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "move testid to fix text",
+            "author": "ruaraki@microsoft.com",
+            "commit": "87ec3a5c190f64f47a112447c4437c05cd8307a5",
+            "package": "@fluentui-react-native/tester"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.8.15",
+            "author": "jasonmo@microsoft.com",
+            "commit": "828ebc8340efcbbb842affd2a03f4b73c4f1afa3",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.6.13",
+            "author": "jasonmo@microsoft.com",
+            "commit": "828ebc8340efcbbb842affd2a03f4b73c4f1afa3",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-native-button to v0.7.17",
+            "author": "jasonmo@microsoft.com",
+            "commit": "828ebc8340efcbbb842affd2a03f4b73c4f1afa3",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 23 Aug 2021 23:35:47 GMT",
       "tag": "@fluentui-react-native/tester_v0.38.0",
       "version": "0.38.0",

@@ -85,7 +85,7 @@ open class MenuButton: NSPopUpButton {
 	guard let dropDownCell = cell as? NSPopUpButtonCell else {
 	  preconditionFailure()
 	}
-	
+
 	dropDownCell.imagePosition = .imageLeading
 	dropDownCell.arrowPosition = .arrowAtBottom
 

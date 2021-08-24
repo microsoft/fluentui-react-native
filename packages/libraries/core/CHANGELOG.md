@@ -1,8 +1,16 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Mon, 23 Aug 2021 23:35:47 GMT and should not be manually modified.
+This log was last generated on Tue, 24 Aug 2021 18:08:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.25.5
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.19.1 (sanajmi@microsoft.com)
 
 ## 0.25.4
 
