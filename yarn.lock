@@ -1286,20 +1286,6 @@
     "@fluentui-react-native/use-styling" ">=0.6.7 <1.0.0"
     "@fluentui-react-native/use-tokens" ">=0.1.5 <1.0.0"
 
-"@fluentui-react-native/icon@0.8.9":
-  version "0.8.9"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/icon/-/icon-0.8.9.tgz#fc00e7002c5d001b4102cc0b832c5f83c857c08f"
-  integrity sha512-Y0tA3I+ALtxqHOlQI876ArlJWlGBLdG0VA/LGVV5IdooepvJlF1AW466SStyqZyVZRe1CfFA0MS7ik1NTJr7nA==
-  dependencies:
-    "@fluentui-react-native/default-theme" ">=0.7.11 <1.0.0"
-    "@fluentui-react-native/framework" "0.5.29"
-    "@fluentui-react-native/text" "^0.10.8"
-    "@fluentui-react-native/theme-types" ">=0.11.1 <1.0.0"
-    "@fluentui-react-native/theming-utils" ">=0.5.1 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.9.17 <1.0.0"
-    "@uifabricshared/foundation-compose" "^1.10.8"
-    react-native-svg "^12.1.1"
-
 "@fluentui/token-pipeline@^0.3.9":
   version "0.3.9"
   resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.9.tgz#7db1c8c3b2242ba4bbd9a172b7ae8bfb1f22e138"

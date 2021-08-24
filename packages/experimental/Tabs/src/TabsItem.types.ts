@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ViewProps, ViewStyle, ColorValue } from 'react-native';
-import { TextProps } from '@fluentui-react-native/text';
+import { ITextProps } from '@fluentui-react-native/text';
 import { FontTokens, IBorderTokens, IShadowTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IWithPressableEvents, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import type { IViewWin32Props } from '@office-iss/react-native-win32';
@@ -160,7 +160,7 @@ export interface TabsItemSlotProps {
   icon: IconProps;
   stack: ViewProps;
   indicator: ViewProps;
-  content: TextProps;
+  content: ITextProps;
 }
 
 export interface TabItemType {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, ViewProps } from 'react-native';
-import { TextProps } from '@fluentui-react-native/text';
+import { ITextProps } from '@fluentui-react-native/text';
 import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IShadowTokens } from '@fluentui-react-native/tokens';
 import type { IViewWin32Props } from '@office-iss/react-native-win32';
@@ -111,7 +111,7 @@ export interface TabsState {
 }
 export interface TabsSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
-  label: TextProps;
+  label: ITextProps;
   container: FocusZoneProps;
   stack: ViewProps;
   tabPanel: ViewProps;
