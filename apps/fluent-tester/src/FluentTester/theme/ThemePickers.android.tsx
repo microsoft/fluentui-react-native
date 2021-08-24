@@ -66,7 +66,7 @@ export const ThemePickers: React.FunctionComponent = () => {
         <Picker
           selectedValue={initial}
           onValueChange={onValueChange}
-          dropdownIconColor={processColor(theme.colors.buttonIcon)}
+          dropdownIconColor={theme.colors.defaultIcon as ReturnType<typeof processColor>}
           {...dropdownProps}
         >
           {options.map((entry: DropdownEntry, index: number) => (
