@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { tabsName, TabsType, TabsProps, TabsContextData } from './Tabs.types';
-import { Text } from '@fluentui-react-native/experimental-text';
+import { Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Tabs.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useTabs } from './useTabs';
@@ -63,7 +63,7 @@ export const Tabs = compose<TabsType>({
           value={tabs.state.context}
         >
           <Slots.root {...mergedProps}>
-            {tabs.state.info.label && <Slots.label>{label}</Slots.label>}
+            {tabs?.state?.info?.label && <Slots.label>{label}</Slots.label>}
             <Slots.container defaultTabbableElement={defaultTabbableElement} isCircularNavigation={isCircularNavigation}>
               <Slots.stack>{children}</Slots.stack>
             </Slots.container>
