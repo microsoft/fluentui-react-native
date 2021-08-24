@@ -32,6 +32,15 @@ exports[`ContextualMenu default 1`] = `
         "current": null,
       }
     }
+    endIcon={
+      Object {
+        "height": 16,
+        "svgSource": Object {
+          "src": [Function],
+        },
+        "width": 12,
+      }
+    }
     focusable={true}
     onBlur={[Function]}
     onClick={[Function]}

@@ -29,7 +29,7 @@ The available theme is defined by the `ThemeProvider`. It takes in a `ThemeRefer
 A `ThemeReference` is a class that creates a theme based on either another `Theme` or a parent `ThemeReference`. You can learn more about `ThemeReference` [here](https://github.com/microsoft/fluentui-react-native/blob/master/packages/framework/theme/README.md). We have a built in `ThemeReference` which you can access by calling `createDefaultTheme()`
 
 ```tsx
-import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
+import { ThemeProvider } from '@fluentui-react-native/theme';
 import { createDefaultTheme } from '@fluentui-react-native/default-theme';
 
 // This will use the built-in theme from FURN.
@@ -53,7 +53,7 @@ For more information about customizing themes, take a look at [Custom Themes](./
 You can use the `useTheme()` hook to get the current theme inside a component.
 
 ```tsx
-import { useTheme } from '@fluentui-react-native/theme-types';
+import { useTheme } from '@fluentui-react-native/framework';
 
 export const Component = () => {
   const theme = useTheme();
@@ -63,3 +63,5 @@ export const Component = () => {
 ```
 
 The component will rerender if the theme is invalidated.
+
+If you'd prefer to put the component's styles into a `StyleSheet` instead of accessing the `theme` directly, you can use [themed `StyleSheets`](./ThemedStylesheet.md)

@@ -71,4 +71,17 @@ describe('Text component tests', () => {
       </Text>
     ));
   });
+
+  it('Text variants render correctly with style', () => {
+    const style = {
+      marginBottom: 8,
+      marginTop: 4,
+    };
+    const tree = renderer.create(
+      <Text variant="heroLargeSemibold" color="blue" style={style}>
+        Header Text
+      </Text>,
+    );
+    expect(tree).toMatchSnapshot();
+  });
 });

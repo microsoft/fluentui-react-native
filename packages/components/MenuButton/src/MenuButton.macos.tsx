@@ -5,7 +5,7 @@ import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
-const NativeMenuButton = ensureNativeComponent('MSFMenuButton');
+const NativeMenuButton = ensureNativeComponent('FRNMenuButton');
 
 import {
   MenuButtonName,

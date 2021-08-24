@@ -1,11 +1,13 @@
 /** @jsx withSlots */
 import React, { useRef, useState, useCallback } from 'react';
-import { Button } from '@fluentui-react-native/button';
+import { PrimaryButton, Button } from '@fluentui-react-native/button';
 import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu } from '@fluentui-react-native/contextual-menu';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
+import { Svg, Path } from 'react-native-svg';
+import {defaultIconColor, primaryIconColor} from './MenuButton.style'
 
 import {
   MenuButtonName,
@@ -16,10 +18,19 @@ import {
   MenuButtonState,
 } from './MenuButton.types';
 
+// It's not imported as *.svg because of bundling issues.
+// If it's imported as *.svg, those who use the component would need to configure their bundler
+const getChevronIcon = (color: string = defaultIconColor) => {
+  const chevronPath = `M0.646447 0.646447C0.841709 0.451184 1.15829 0.451184 1.35355 0.646447L5.5 4.79289L9.64645 0.646447C9.84171 0.451185 10.1583 0.451185 10.3536 0.646447C10.5488 0.841709 10.5488 1.15829 10.3536 1.35355L5.85355 5.85355C5.65829 6.04882 5.34171 6.04882 5.14645 5.85355L0.646447 1.35355C0.451184 1.15829 0.451184 0.841709 0.646447 0.646447Z`;
+  return (<Svg width="12" height="16" viewBox="0 0 11 6">
+            <Path d={chevronPath} fill={color} />
+          </Svg>)
+}
+
 export const MenuButton = compose<MenuButtonType>({
   displayName: MenuButtonName,
   usePrepareProps: (userProps: MenuButtonProps, useStyling: IUseComposeStyling<MenuButtonType>) => {
-    const { menuItems, content, icon, disabled, onItemClick, contextualMenu } = userProps;
+    const { menuItems, content, icon, disabled, onItemClick, contextualMenu, primary } = userProps;
 
     const stdBtnRef = useRef(null);
     const [showContextualMenu, setShowContextualMenu] = useState(false);
@@ -62,17 +73,30 @@ export const MenuButton = compose<MenuButtonType>({
       },
     };
 
+    const chevronIconProps = {
+      svgSource: {
+        src: primary? getChevronIcon.bind(null, primaryIconColor) : getChevronIcon,
+      },
+      width: 12,
+      height: 16,
+    };
+
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
+    const buttonProps = {
+      content,
+      disabled,
+      icon,
+      componentRef: stdBtnRef,
+      onClick: toggleShowContextualMenu,
+      endIcon: chevronIconProps,
+    };
 
     const slotProps = mergeSettings<MenuButtonSlotProps>(styleProps, {
-      root: {},
-      button: {
-        content,
-        disabled,
-        icon,
-        componentRef: stdBtnRef,
-        onClick: toggleShowContextualMenu,
+      root: {
+        primary: !!primary
       },
+      button: buttonProps,
+      primaryButton: buttonProps,
       contextualMenu: {
         onItemClick,
         target: stdBtnRef,
@@ -90,6 +114,7 @@ export const MenuButton = compose<MenuButtonType>({
   slots: {
     root: React.Fragment,
     button: { slotType: Button as React.ComponentType },
+    primaryButton: { slotType: PrimaryButton as React.ComponentType },
     contextualMenu: { slotType: ContextualMenu as React.ComponentType },
     contextualMenuItems: React.Fragment,
   },
@@ -103,10 +128,14 @@ export const MenuButton = compose<MenuButtonType>({
     }
     const context = renderData.state!.context;
     const menuItems = renderData.slotProps!.contextualMenuItems?.menuItems || [];
+    const primary = renderData.slotProps!.root?.primary;
 
     return (
       <Slots.root>
-        <Slots.button />
+        {
+          primary ?
+          <Slots.primaryButton /> : <Slots.button />
+        }
         {context.showContextualMenu && (
           <Slots.contextualMenu>
             {menuItems.map((menuItem) => {

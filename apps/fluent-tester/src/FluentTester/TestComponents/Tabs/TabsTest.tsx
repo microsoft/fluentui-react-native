@@ -68,33 +68,15 @@ const tabsCountIcon: React.FunctionComponent = () => {
 
 const onTabsClickEvent: React.FunctionComponent = () => {
   const [selectedKey, setSelectedKey] = React.useState('home_key');
-  const [selectedKey2, setSelectedKey2] = React.useState('home_key');
 
   const onTabsClick = (key: string) => {
     setSelectedKey(key);
-  };
-
-  const onTabs2Click = (key: string) => {
-    setSelectedKey2(key);
   };
 
   return (
     <View style={stackStyle}>
       <Text>Last onTabsClick from: {selectedKey}</Text>
       <Tabs label="Tabs" onTabsClick={onTabsClick} selectedKey={selectedKey}>
-        <TabsItem headerText="Home" itemKey="home_key">
-          <Text>Tabs #1</Text>
-        </TabsItem>
-        <TabsItem headerText="Files" itemKey="files_key">
-          <Text>Tabs #2</Text>
-        </TabsItem>
-        <TabsItem headerText="Settings" itemKey="settings_key">
-          <Text>Tabs #3</Text>
-        </TabsItem>
-      </Tabs>
-
-      <Text>Last onTabsClick from: {selectedKey2}</Text>
-      <Tabs label="Tabs" onTabsClick={onTabs2Click} selectedKey={selectedKey2}>
         <TabsItem headerText="Home" itemKey="home_key">
           <Text>Tabs #1</Text>
         </TabsItem>

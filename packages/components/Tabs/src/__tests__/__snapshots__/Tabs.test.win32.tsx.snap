@@ -4,7 +4,6 @@ exports[`Tabs FocusZone props 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
-  rest={Object {}}
 >
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
@@ -239,7 +238,10 @@ exports[`Tabs default props 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
+<<<<<<< HEAD
   rest={Object {}}
+=======
+>>>>>>> 87ec3a5c190f64f47a112447c4437c05cd8307a5
 >
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
@@ -474,7 +476,10 @@ exports[`Tabs disabled 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
+<<<<<<< HEAD
   rest={Object {}}
+=======
+>>>>>>> 87ec3a5c190f64f47a112447c4437c05cd8307a5
 >
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
@@ -711,7 +716,10 @@ exports[`Tabs header text and count 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
+<<<<<<< HEAD
   rest={Object {}}
+=======
+>>>>>>> 87ec3a5c190f64f47a112447c4437c05cd8307a5
 >
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
@@ -991,7 +999,10 @@ exports[`Tabs headers only 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
+<<<<<<< HEAD
   rest={Object {}}
+=======
+>>>>>>> 87ec3a5c190f64f47a112447c4437c05cd8307a5
 >
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
@@ -1227,7 +1238,10 @@ exports[`Tabs props 1`] = `
   accessibilityLabel="Tabs"
   accessibilityRole="tablist"
   accessible={true}
+<<<<<<< HEAD
   rest={Object {}}
+=======
+>>>>>>> 87ec3a5c190f64f47a112447c4437c05cd8307a5
 >
   <Text
     style={

@@ -2,7 +2,7 @@ import { IPersonaCoinTokens } from './PersonaCoin.types';
 import { ViewStyle } from 'react-native';
 import { calculateEffectiveSizes } from './PersonaCoin.helpers';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
-import { ITheme } from '@uifabricshared/theming-ramp';
+import { Theme } from '@fluentui-react-native/framework';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 
 const nameMap: { [key: string]: string } = {
@@ -29,4 +29,4 @@ function _buildRootStyles(tokenProps: IPersonaCoinTokens /*, theme: ITheme */): 
   return { style: rootStyle };
 }
 
-export const buildRootStyles = styleFunction<IViewProps, IPersonaCoinTokens, ITheme>(_buildRootStyles, _rootKeyProps);
+export const buildRootStyles = styleFunction<IViewProps, IPersonaCoinTokens, Theme>(_buildRootStyles, _rootKeyProps);

@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Fri, 13 Aug 2021 16:12:26 GMT and should not be manually modified.
+This log was last generated on Mon, 23 Aug 2021 23:35:47 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.0
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Minor changes
+
+- Deprecate aria- prefix properties (krsiler@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.0 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/pressable to v0.7.13 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/text to v0.10.11 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/tokens to v0.9.20 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.36 (sanajmi@microsoft.com)
+
+## 0.12.12
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.9.19 (ruaraki@microsoft.com)
+
+## 0.12.11
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.9 (ruaraki@microsoft.com)
+
+## 0.12.10
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.33 (ruaraki@microsoft.com)
 
 ## 0.12.9
 

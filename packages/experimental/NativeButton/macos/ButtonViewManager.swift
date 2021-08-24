@@ -1,9 +1,9 @@
 import Foundation
 import FluentUI
 
-@objc(MSFButtonViewManager)
+@objc(FRNButtonViewManager)
 class ButtonViewManager: RCTViewManager {
-	
+
 	override func view() -> NSView! {
 	let button = ButtonWrapper()
 	return button

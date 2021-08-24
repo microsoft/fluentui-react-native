@@ -92,10 +92,11 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
           style={[fluentTesterStyles.testHeader]}
           variant="heroLargeSemibold"
           color={theme.host.palette?.TextEmphasis}
-          testID={BASE_TESTPAGE}
         >
           ⚛ FluentUI Tests
         </Text>
+        {/* Workaround for testID prop on text component affecting text size */}
+        <Text testID={BASE_TESTPAGE}> </Text>
         <ThemePickers />
       </View>
     );
