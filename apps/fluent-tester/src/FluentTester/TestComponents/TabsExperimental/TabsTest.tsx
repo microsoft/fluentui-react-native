@@ -254,5 +254,5 @@ export const TabsExperimentalTest: React.FunctionComponent = () => {
 
   const description = 'With Tabs, users can navigate to another view.';
 
-  return <Test name="Tabs Experimental Test" description={description} sections={tabsSections} status={status} />;
+  return <Test name="Experimental Tabs Test" description={description} sections={tabsSections} status={status} />;
 };
