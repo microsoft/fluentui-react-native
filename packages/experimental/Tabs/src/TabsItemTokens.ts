@@ -11,6 +11,7 @@ export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: T
     borderColor: 'transparent',
     iconColor: t.colors.buttonIcon,
     indicatorColor: t.colors.transparent,
+    variant: 'bodyStandard',
     minHeight: 32,
     minWidth: 80,
     borderWidth: 2,
@@ -41,7 +42,7 @@ export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: T
       icon: t.colors.buttonFocusedIcon,
       borderWidth: 2,
       borderRadius: 4,
-      indicatorColor: t.colors.brandStroke1,
+      indicatorColor: 'transparent',
     },
     selected: {
       color: t.colors.neutralForeground1,

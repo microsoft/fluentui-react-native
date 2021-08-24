@@ -32,7 +32,7 @@ export const TabsItem = compose<TabItemType>({
 
       let containerText = headerText;
       if (itemCount !== undefined) {
-        containerText += `(${itemCount})`;
+        containerText += ` (${itemCount})`;
       }
 
       const renderContent = !!headerText || itemCount !== undefined;
