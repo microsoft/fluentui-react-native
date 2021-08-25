@@ -1269,20 +1269,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fluentui-react-native/icon@0.8.13":
-  version "0.8.13"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/icon/-/icon-0.8.13.tgz#d0ec0270e24c36be5f55ac63dee5fffe0a8a2107"
-  integrity sha512-j9Mx7lGqfeW+2lWQ5nptNB5sMevgjuA+yiGexBW/K7wnaLOwrnun2muikTeIwxRmVEj4PBWxhTQid+gK++9ceA==
-  dependencies:
-    "@fluentui-react-native/default-theme" ">=0.7.12 <1.0.0"
-    "@fluentui-react-native/framework" "0.5.32"
-    "@fluentui-react-native/text" "^0.10.11"
-    "@fluentui-react-native/theme-types" ">=0.11.2 <1.0.0"
-    "@fluentui-react-native/theming-utils" ">=0.5.2 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.9.20 <1.0.0"
-    "@uifabricshared/foundation-compose" "^1.10.9"
-    react-native-svg "^12.1.1"
-
 "@fluentui/token-pipeline@^0.3.9":
   version "0.3.9"
   resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.9.tgz#7db1c8c3b2242ba4bbd9a172b7ae8bfb1f22e138"
