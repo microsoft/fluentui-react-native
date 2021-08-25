@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Thu, 19 Aug 2021 18:31:21 GMT and should not be manually modified.
+This log was last generated on Tue, 24 Aug 2021 18:08:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.1
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Support menuButton images and custom styles on macOS (sanajmi@microsoft.com)
+
+## 0.5.0
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Minor changes
+
+- Changed styling for the Button. Added new exampled to MenuButton (v.kozlova13@gmail.com)
+
+### Patches
+
+- Fix bug where the defualt content of the macOS MEnuButton was not empty (sanajmi@microsoft.com)
+- Change the macOS MenuButton style (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/button to v0.19.0 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/contextual-menu to v0.10.14 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/tokens to v0.9.20 (dake.3601@gmail.com)
 
 ## 0.4.15
 

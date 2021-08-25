@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Changed styling for the Button. Added new exampled to MenuButton",
-  "packageName": "@fluentui-react-native/menu-button",
-  "email": "v.kozlova13@gmail.com",
-  "dependentChangeType": "patch"
-}

@@ -1,8 +1,33 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Thu, 19 Aug 2021 18:31:21 GMT and should not be manually modified.
+This log was last generated on Tue, 24 Aug 2021 18:08:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.1
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.7.16 (sanajmi@microsoft.com)
+
+## 0.13.0
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Minor changes
+
+- Deprecate aria- prefix properties (krsiler@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.0 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/pressable to v0.7.13 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/text to v0.10.11 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/tokens to v0.9.20 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.36 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.7.15 (sanajmi@microsoft.com)
 
 ## 0.12.2
 

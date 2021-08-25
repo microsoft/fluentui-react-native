@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Tue, 24 Aug 2021 18:08:30 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.10.37",
+      "version": "0.10.37",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add return type to createIconProps",
+            "author": "sanajmi@microsoft.com",
+            "commit": "a2124be0bdd820a4f38ae7017bd48e7ca3373300",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 23 Aug 2021 23:35:47 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.10.36",
+      "version": "0.10.36",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add macOS implementation of useViewCommandFocus",
+            "author": "sanajmi@microsoft.com",
+            "commit": "c4ee008b284d3e339cc19a6640c8e570d443d1cb",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 19 Aug 2021 18:31:21 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.10.35",
       "version": "0.10.35",
