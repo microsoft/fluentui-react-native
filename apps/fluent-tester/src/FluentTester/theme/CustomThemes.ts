@@ -16,7 +16,12 @@ const baseTheme = Platform.select({
   default: createDefaultTheme(themeOptions),
 });
 
-const supportsHC = Platform.OS !== 'ios' && Platform.OS !== 'android' && Platform.OS !== 'macos';
+const supportsHC: boolean = Platform.select({
+  android: false,
+  ios: false,
+  macos: false,
+  default: true,
+});
 
 export const lightnessOptions = [
   { label: 'Auto', value: 'dynamic' },
