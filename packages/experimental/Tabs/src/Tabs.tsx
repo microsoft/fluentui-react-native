@@ -55,7 +55,6 @@ export const Tabs = compose<TabsType>({
           }
         });
       }
-      console.log(tabs.state.context.tabsItemKeys);
 
       return (
         <TabsContext.Provider
