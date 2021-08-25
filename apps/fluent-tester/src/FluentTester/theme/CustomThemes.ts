@@ -9,6 +9,7 @@ import { ThemeOptions } from '@fluentui-react-native/theme-types';
 
 const themeOptions: ThemeOptions = { paletteName: 'TaskPane', appearance: 'dynamic' };
 
+// Default applies to win32
 const baseTheme = Platform.select({
   android: createAndroidTheme(themeOptions),
   ios: createAppleTheme(),
