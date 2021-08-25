@@ -27,9 +27,13 @@ export const ButtonIconTest: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle}>
-        <Button icon={testImage} content="Button with png Icon" tooltip="button tooltip" />
-        {svgIconsEnabled ? <Button icon={{ ...iconProps, color: 'red' }} content="Button with svg Icon" tooltip="button tooltip" /> : null}
-        {svgIconsEnabled ? <CustomizedIconButton icon={iconProps} content="Button with Customized Icon" tooltip="button tooltip" /> : null}
+        <Button startIcon={testImage} content="Button with png Icon" tooltip="button tooltip" />
+        {svgIconsEnabled ? (
+          <Button startIcon={{ ...iconProps, color: 'red' }} content="Button with svg Icon" tooltip="button tooltip" />
+        ) : null}
+        {svgIconsEnabled ? (
+          <CustomizedIconButton startIcon={iconProps} content="Button with Customized Icon" tooltip="button tooltip" />
+        ) : null}
         <Text>End Button icon</Text>
         {svgIconsEnabled ? <CustomizedIconButton endIcon={iconProps} content="Button with Right Icon" tooltip="button tooltip" /> : null}
       </Stack>

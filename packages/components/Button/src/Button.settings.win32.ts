@@ -27,7 +27,7 @@ export const settings: IComposeSettings<IButtonType> = [
         marginStart: 2
       }
     },
-    icon: {
+    startIcon: {
       style: {
         marginEnd: 2
       }
