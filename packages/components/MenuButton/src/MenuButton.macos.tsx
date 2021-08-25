@@ -46,7 +46,7 @@ export const MenuButton = compose<MenuButtonType>({
       return imageSource;
     }
 
-    const imageSource = extractResolvedImageSourceFromIcon(icon);
+    const imageSource = extractResolvedImageSourceFromIcon(startIcon);
 
     // reroute the native component's OnItemClick event to MenuButtons's onItemClick
     const OnItemClickRerouted = (event: any) => {
