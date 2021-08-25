@@ -51,7 +51,7 @@ export const NestedMenuButton: React.FunctionComponent = () => {
       itemKey: '4',
       text: 'SubmenuItem svg icon',
       componentRef: React.useRef(null),
-      startIcon: iconProps,
+      icon: iconProps,
       onHoverIn: toggleShowSubmenu,
       showSubmenu,
       submenuProps: {
@@ -62,7 +62,7 @@ export const NestedMenuButton: React.FunctionComponent = () => {
       },
       submenuItems: [
         {
-          startIcon: iconProps,
+          icon: iconProps,
           text: 'SubmenuItem svg icon',
           itemKey: '1',
         },
