@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, PickerPropsAndroid, processColor } from 'react-native';
+import { View, PickerPropsAndroid } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { lightnessOptions, testerTheme } from './CustomThemes';
 import { themeChoices, ThemeNames } from './applyTheme';
@@ -63,12 +63,7 @@ export const ThemePickers: React.FunctionComponent = () => {
     const { initial, onValueChange, options } = props;
     return (
       <View style={themedPickerStyles.dropdownBorder}>
-        <Picker
-          selectedValue={initial}
-          onValueChange={onValueChange}
-          dropdownIconColor={theme.colors.defaultIcon as ReturnType<typeof processColor>}
-          {...dropdownProps}
-        >
+        <Picker selectedValue={initial} onValueChange={onValueChange} dropdownIconColor={theme.colors.defaultIcon} {...dropdownProps}>
           {options.map((entry: DropdownEntry, index: number) => (
             <Picker.Item label={entry.label} value={entry.value} key={`entry${index}`} />
           ))}
