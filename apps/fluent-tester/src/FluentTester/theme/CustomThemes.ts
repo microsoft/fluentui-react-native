@@ -17,7 +17,7 @@ const baseTheme = Platform.select({
   default: createDefaultTheme(themeOptions),
 });
 
-const supportsHC: boolean = Platform.select({
+const supportsHighContrastTokens: boolean = Platform.select({
   android: false,
   ios: false,
   macos: false,
@@ -28,7 +28,7 @@ export const lightnessOptions = [
   { label: 'Auto', value: 'dynamic' },
   { label: 'Light', value: 'light' },
   { label: 'Dark', value: 'dark' },
-  supportsHC && { label: 'High Contrast', value: 'highContrast' },
+  supportsHighContrastTokens && { label: 'High Contrast', value: 'highContrast' },
 ];
 
 export class TesterThemeReference extends ThemeReference {
