@@ -71,6 +71,7 @@ export const Button = compose<IButtonType>({
     stack: { slotType: View, filter: filterViewProps },
     startIcon: { slotType: Icon as React.ComponentType },
     content: Text,
+    endIcon: { slotType: Icon as React.ComponentType },
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
