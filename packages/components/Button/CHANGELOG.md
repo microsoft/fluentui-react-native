@@ -1,8 +1,22 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Tue, 24 Aug 2021 18:08:30 GMT and should not be manually modified.
+This log was last generated on Wed, 25 Aug 2021 21:36:58 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.0
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Minor changes
+
+- Renamed icon to start icon (v.kozlova13@gmail.com)
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.15 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.38 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/pressable to v0.7.15 (sanajmi@microsoft.com)
 
 ## 0.19.1
 

@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Tue, 24 Aug 2021 18:08:30 GMT and should not be manually modified.
+This log was last generated on Wed, 25 Aug 2021 21:36:58 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.0
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Minor changes
+
+- Renamed icon to start icon (v.kozlova13@gmail.com)
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.20.0 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.8.15 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/contextual-menu to v0.10.16 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.38 (sanajmi@microsoft.com)
 
 ## 0.5.1
 
