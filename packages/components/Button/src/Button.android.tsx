@@ -15,7 +15,7 @@ import { Icon } from '@fluentui-react-native/icon';
 export const Button = compose<IButtonType>({
   displayName: buttonName,
   usePrepareProps: (userProps: IButtonProps, useStyling: IUseComposeStyling<IButtonType>) => {
-    const { startIcon, endIcon, content, accessibilityLabel = userProps.content, testID, onClick, ...rest } = userProps;
+    const { icon, startIcon, endIcon, content, accessibilityLabel = userProps.content, testID, onClick, ...rest } = userProps;
     // attach the pressable state handlers
     const pressable = useAsPressable({ ...rest, onPress: onClick });
     // set up state
@@ -24,7 +24,7 @@ export const Button = compose<IButtonType>({
         ...pressable.state,
         disabled: !!userProps.disabled,
         content: !!content,
-        startIcon: !!startIcon,
+        startIcon: !!startIcon || !!icon,
         endIcon: !!endIcon,
       },
     };
@@ -43,7 +43,7 @@ export const Button = compose<IButtonType>({
         focusable: !state.info.disabled,
       },
       content: { children: content, testID: testID },
-      startIcon: createIconProps(startIcon),
+      startIcon: createIconProps(startIcon || icon),
       endIcon: createIconProps(endIcon),
     });
 
@@ -78,6 +78,7 @@ export const Button = compose<IButtonType>({
     stack: [],
     startIcon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
     content: [textTokens, foregroundColorTokens],
+    endIcon: [],
   },
 });
 

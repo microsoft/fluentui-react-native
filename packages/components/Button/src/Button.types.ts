@@ -100,8 +100,9 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
 
   /**
    * Source URL or name of the start icon to show on the Button.
+   * @deprecated Use startIcon instead.
    */
-  startIcon?: IconSourcesType;
+  icon?: IconSourcesType;
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
@@ -113,6 +114,7 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
 
   testID?: string;
   tooltip?: string;
+  startIcon?: IconSourcesType;
   endIcon?: IconSourcesType;
 }
 

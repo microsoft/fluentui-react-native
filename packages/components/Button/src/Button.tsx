@@ -24,6 +24,7 @@ export const Button = compose<IButtonType>({
   usePrepareProps: (userProps: IButtonProps, useStyling: IUseComposeStyling<IButtonType>) => {
     const defaultComponentRef = React.useRef(null);
     const {
+      icon,
       startIcon,
       endIcon,
       content,
@@ -46,7 +47,7 @@ export const Button = compose<IButtonType>({
         ...pressable.state,
         disabled: !!userProps.disabled,
         content: !!content,
-        startIcon: !!startIcon,
+        startIcon: !!startIcon || !!icon,
         endIcon: !!endIcon,
       },
     };
@@ -66,7 +67,7 @@ export const Button = compose<IButtonType>({
         onKeyUp: onKeyUp,
       },
       content: { children: content, testID: testID },
-      startIcon: createIconProps(startIcon),
+      startIcon: createIconProps(startIcon || icon),
       endIcon: createIconProps(endIcon),
     });
 
