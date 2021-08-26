@@ -6,6 +6,7 @@ import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
 const ExpanderComponent = ensureNativeComponent('ExpanderView');
 
+
 function delay(ms: number) {
   return new Promise( resolve => setTimeout(resolve, ms) );
 }
