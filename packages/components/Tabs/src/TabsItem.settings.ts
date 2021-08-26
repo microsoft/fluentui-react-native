@@ -7,7 +7,7 @@ export const tabsItemSelectActionLabel = 'Select a TabsItem';
 export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
-      color: 'neutralForeground3Brand',
+      color: 'neutralStrokeAccessible',
       variant: 'bodyStandard',
       borderWidth: 2,
       borderColor: 'transparent',
@@ -56,7 +56,7 @@ export const settings: IComposeSettings<TabsItemType> = [
       },
       hovered: {
         tokens: {
-          color: 'neutralForeground2Hover',
+          color: 'neutralForeground1',
           indicatorColor: 'neutralStroke1'
         },
       },
@@ -77,7 +77,7 @@ export const settings: IComposeSettings<TabsItemType> = [
 
       pressed: {
         tokens: {
-          color: 'neutralForeground2Pressed',
+          color: 'neutralForeground1',
           indicatorColor: 'brandStroke1',
         },
       },
