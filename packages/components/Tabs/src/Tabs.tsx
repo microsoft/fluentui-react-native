@@ -115,7 +115,7 @@ export const Tabs = compose<TabsType>({
 
     if (Platform.OS == 'windows') {
       const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
-        root: { rest, ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist', ...pressable.props},
+        root: { ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist', ...pressable.props, ...rest},
         label: { children: label },
         stack: { focusable: true, ref: focusZoneRef, onKeyDown: onKeyDown},
       });
