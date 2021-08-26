@@ -2551,10 +2551,15 @@
   resolved "https://registry.yarnpkg.com/@react-native-menu/menu/-/menu-0.1.2.tgz#2a3a9c8c3d142649b89a5c710eafa8ec3f0d7596"
   integrity sha512-3jgCWoZY31s/cjtTCAbGN0VqapwM7WiGZonb5KSkRT6egkwR1QAWBxe8Pe216u6R5EY/AGC8Z4Bf9wASYpz/1A==
 
+"@react-native-picker/picker@^1.16.7":
+  version "1.16.7"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.16.7.tgz#2c943572efcd21c218ee03f23ba1475544b24cf1"
+  integrity sha512-/QJxL4JniloFvdPDufQTiMQQbpucCQ0w7wvGhZQt0x3KVxvI1f/vzDO+669r/1yipcFZbSLcYIiQSMSpZtkqiQ==
+
 "@react-native-picker/picker@^1.9.11":
-  version "1.16.5"
-  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.16.5.tgz#f55f22bb8fcaec412170e8a1ac1c7b11818919e5"
-  integrity sha512-IYfMXdUsfQe4RBLJPZq6GoPkr2otOTZqej/gU93x+oIjrR+UCcCb0fsqmXHT8qX29E+0cEQZd/4bWnzbICHNrg==
+  version "1.16.6"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.16.6.tgz#6af7e69e4bf2b70ca713392c467c9e52477a6289"
+  integrity sha512-Vc/SRqKp/TWG6dcmKAbvTknS35L9/qhfinGkDzpOeephxiTOdUwKw8G0KEwuwvJyE0KwgglH5AeNHNS+4uYR8w==
 
 "@react-native-windows/cli@0.63.12":
   version "0.63.12"
