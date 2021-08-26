@@ -12,7 +12,7 @@ export const settings: IComposeSettings<IButtonType> = [
     endIcon: {
       color: '#ffffff',
     },
-    icon: {
+    startIcon: {
       color: '#ffffff',
     },
     _overrides: {
