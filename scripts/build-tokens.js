@@ -54,6 +54,13 @@ async function run() {
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/colorful/reactnative/tokens-global.json'));
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/colorful/reactnative/tokens-controls.json'));
 
+  console.log('Generating dark gray mode tokens...');
+  child_process.execSync(
+    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand.win32.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-darkgray.json --out ./packages/theming/theme-tokens/src/darkGray --p reactnative',
+  );
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/darkGray/reactnative/tokens-global.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/darkGray/reactnative/tokens-controls.json'));
+
   console.log('Generating black mode tokens...');
   child_process.execSync(
     'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand.win32.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-dark.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-black.json --out ./packages/theming/theme-tokens/src/black --p reactnative',
