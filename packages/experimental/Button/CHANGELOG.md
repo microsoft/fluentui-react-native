@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-button
 
-This log was last generated on Thu, 26 Aug 2021 04:48:40 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.18
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Fix styling on compound experimental button (ruaraki@microsoft.com)
 
 ## 0.8.17
 

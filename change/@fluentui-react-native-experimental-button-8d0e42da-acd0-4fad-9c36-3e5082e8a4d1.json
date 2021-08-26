@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix styling on compound experimental button",
-  "packageName": "@fluentui-react-native/experimental-button",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
