@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix text truncation for radio button",
-  "packageName": "@fluentui-react-native/experimental-native-date-picker",
-  "email": "67026167+chiuam@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

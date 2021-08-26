@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "empty exapnder change to trigger change file",
-  "packageName": "@fluentui-react-native/experimental-expander",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
