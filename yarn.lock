@@ -2677,12 +2677,13 @@
     cosmiconfig "^7.0.0"
     semver "^7.0.0"
 
-"@rnx-kit/config@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.4.0.tgz#dd4261cc9e630ca41df0fd68eac3120b5e575a37"
-  integrity sha512-uBb08LpDJHC+L7yWD6ldmuvnod0NlTG5/pey0f+3ZzbUXGX6xo7Ih7NFhMFJniJyn5WHvdqUiXq7XKdnzKCSfQ==
+"@rnx-kit/config@^0.4.3":
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.4.3.tgz#e7ef8c22ea2c8158e95539dac2da69ccd1eac32c"
+  integrity sha512-grsnSa9ok7LeUU6Z/jraX4GxZex4TIhytxxF3+9v87quBswRaswrFs8rRGH3nbaeIB4Q/pklBl4rvgvi1bcNyw==
   dependencies:
     cosmiconfig "^7.0.0"
+    lodash "^4.17.21"
     semver "^7.0.0"
 
 "@rnx-kit/console@^1.0.2":
@@ -2693,16 +2694,17 @@
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.5.10", "@rnx-kit/dep-check@^1.5.9":
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.7.1.tgz#bb262767a209b47889117f6289d4fc9348533bad"
-  integrity sha512-ovMWiRqukH51HbseUznmRC+Ce+linY8OwoMPkCl8twMnaWEq5toCmieeWc6heGrajGh2atzU3u8a5gTvUDHQJw==
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.7.4.tgz#dafde8b85f87098567c3479578480f9dd11033d1"
+  integrity sha512-ndZRujF4d+4CKbOl5631gmm6HkpWmGpZTsKcKcUV4jkq5qpAgg3YDxirYQnzReSit9msokXM75PNU3fPqjdRvw==
   dependencies:
-    "@rnx-kit/config" "^0.4.0"
+    "@rnx-kit/config" "^0.4.3"
     "@rnx-kit/console" "^1.0.2"
+    "@rnx-kit/tools-language" "^1.1.0"
+    "@rnx-kit/tools-node" "^1.1.0"
     chalk "^4.1.0"
-    find-up "^5.0.0"
     jest-diff "^26.0.0"
-    pkg-dir "^5.0.0"
+    lodash "^4.17.21"
     prompts "^2.4.0"
     semver "^7.0.0"
     workspace-tools "^0.16.2"
@@ -12043,7 +12045,7 @@ lodash.zip@^4.2.0:
   resolved "https://registry.yarnpkg.com/lodash.zip/-/lodash.zip-4.2.0.tgz#ec6662e4896408ed4ab6c542a3990b72cc080020"
   integrity sha1-7GZi5IlkCO1KtsVCo5kLcswIACA=
 
-lodash@4.17.21, lodash@^4.0.0, lodash@^4.13.1, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.17.9, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.6.1, lodash@^4.7.0, lodash@~4.17.12:
+lodash@4.17.21, lodash@^4.0.0, lodash@^4.13.1, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.17.9, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.6.1, lodash@^4.7.0, lodash@~4.17.12:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
