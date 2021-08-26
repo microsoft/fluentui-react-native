@@ -91,7 +91,7 @@ export const MenuButton = compose<MenuButtonType>({
     }
 
     // Default style if none from user props
-    const rootStyleProp = style ? style : {
+    const rootStyleProp = style ?? {
       width: 160,
       height: 32,
     }
