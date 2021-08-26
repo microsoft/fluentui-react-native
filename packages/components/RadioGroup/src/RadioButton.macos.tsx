@@ -35,8 +35,8 @@ export const RadioButton = compose<IRadioButtonType>({
           // Fluent controls are designed to snap to a 4 px grid
           marginLeft: 4,
           marginTop: 4,
-          width: 150,
-          height: 20,
+          minWidth: 20,
+          minHeight: 20,
         },
       },
     });
