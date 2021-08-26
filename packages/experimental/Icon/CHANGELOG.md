@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Wed, 18 Aug 2021 23:00:57 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 04:48:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.16
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.8.15
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- Support tinting PNG icons (sanajmi@microsoft.com)
+
+## 0.8.14
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Export IconSourcesType (sanajmi@microsoft.com)
+
+## 0.8.13
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Fixed icon color for SVG (v.kozlova13@gmail.com)
+
+## 0.8.12
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.10 (ruaraki@microsoft.com)
 
 ## 0.8.11
 
