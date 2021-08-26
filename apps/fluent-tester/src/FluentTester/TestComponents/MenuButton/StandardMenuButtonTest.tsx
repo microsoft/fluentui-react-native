@@ -71,13 +71,7 @@ export const StandardMenuButton: React.FunctionComponent = () => {
                 contextualMenu={contextualMenuProps}
               />
               <Text>MenuButton with only icon</Text>
-              <MenuButton
-                startIcon={iconToShow}
-                menuItems={menuItems}
-                onItemClick={onItemClick}
-                contextualMenu={contextualMenuProps}
-                style={Platform.OS === 'macos' ? { height: 32, width: 54 } : undefined} // GH #931, macOS needs a custom height/width to layout properly
-              />
+              <MenuButton startIcon={iconToShow} menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps} />
               <Text>Disabled MenuButton</Text>
               <MenuButton disabled content="Disabled MenuButton" menuItems={menuItems} />
             </View>
@@ -106,7 +100,6 @@ export const StandardMenuButton: React.FunctionComponent = () => {
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
-                style={Platform.OS === 'macos' ? { height: 32, width: 54 } : undefined} // GH #931, macOS needs a custom height/width to layout properly
               />
               <Text>Primary Disabled MenuButton</Text>
               <MenuButton primary disabled content="Disabled Primary MenuButton" menuItems={menuItems} />
