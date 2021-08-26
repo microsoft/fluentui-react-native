@@ -2647,12 +2647,11 @@
   resolved "https://registry.yarnpkg.com/@react-native/polyfills/-/polyfills-1.0.0.tgz#05bb0031533598f9458cf65a502b8df0eecae780"
   integrity sha512-0jbp4RxjYopTsIdLl+/Fy2TiwVYHy4mgeu07DG4b/LyM0OS/+lPP5c9sbnt/AMlnF6qz2JRZpPpGw1eMNS6A4w==
 
-"@rnx-kit/babel-preset-metro-react-native@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/babel-preset-metro-react-native/-/babel-preset-metro-react-native-1.0.3.tgz#3c4a4d49f0362f1d1044a8f27669a589d6a5189e"
-  integrity sha512-Fn9+lfIMXPw1gRgISOL+u5MVjkRkKUYUfcJ1/gFWCrq7lddztRw4oS4P9t82zPIukNr7Ik+aXAtN3V9Fh+GB/A==
+"@rnx-kit/babel-preset-metro-react-native@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/babel-preset-metro-react-native/-/babel-preset-metro-react-native-1.0.4.tgz#31c40bc4f165069634848161d26531fd241be15b"
+  integrity sha512-S/FD/R9llAEdjt/VeUSFqt1l8SLleRp4fctEk/HTJ35C/P5W5Mbihu+nAMq8myxDJ1OaDzqnGeLu01Lb+iAUvQ==
   dependencies:
-    "@babel/core" "^7.0.0"
     babel-plugin-const-enum "^1.0.0"
 
 "@rnx-kit/cli@^0.5.27":
@@ -2714,12 +2713,12 @@
     find-up "^5.0.0"
 
 "@rnx-kit/metro-config@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.3.tgz#57c48546732ee74badf082756533006a0940df8a"
-  integrity sha512-d+JQcAdYOACbISNTgcXwSdwBD7dOdnuGpe1iQPJOfsPoTRezAmvAp4oI/b77BcMnWMn+0RVqedoX2lE5l8OW+g==
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.8.tgz#8f761177267563f9019c0ad6399795d4af611975"
+  integrity sha512-3ViCq08RQYrEFjYgLI7Ctgs806/uTgglj5rTIGlhF1iZXktvxoPzUZ/hauDEz0NB3EgEJd8ak1zI79YMQVgCDA==
   dependencies:
-    "@rnx-kit/babel-preset-metro-react-native" "^1.0.3"
-    find-up "^5.0.0"
+    "@rnx-kit/babel-preset-metro-react-native" "^1.0.4"
+    "@rnx-kit/tools-node" "^1.1.0"
     workspace-tools "^0.16.2"
 
 "@rnx-kit/third-party-notices@1.0.1":
@@ -2730,6 +2729,21 @@
     browserify-licenses "^1.4.7-1"
     chalk "^4.1.1"
     yargs "^16.2.0"
+
+"@rnx-kit/tools-language@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-language/-/tools-language-1.1.0.tgz#4c9b8bf6f31dd3e1bb099d7f90a8813b33cd2b46"
+  integrity sha512-poKL6FG1uDwqa08OvQU8LS3CSIAlU+kTfQh2Nybzj60gNT5q9S0xotMNTxTtnMDdhX+xfntLI8JbLq5vXH7OrA==
+
+"@rnx-kit/tools-node@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-node/-/tools-node-1.1.0.tgz#39898f3de458e5d73d6e07eeab4a32ea76375b5f"
+  integrity sha512-+aOCW7MYBxGU4+Tw21np7u9Jw3i1zw9HwKL27j35+kStcFZqCXuUZX+nww/mAzR3msWyUptk1DKmA+Q/UjGd4w==
+  dependencies:
+    "@rnx-kit/tools-language" "^1.1.0"
+    find-up "^5.0.0"
+    pkg-dir "^5.0.0"
+    pkg-up "^3.1.0"
 
 "@rushstack/node-core-library@3.35.2":
   version "3.35.2"
@@ -14304,6 +14318,13 @@ pkg-dir@^5.0.0:
   integrity sha512-NPE8TDbzl/3YQYY7CSS228s3g2ollTFnc+Qi3tqmqJp9Vg2ovUpixcJEo2HJScN2Ez+kEaal6y70c0ehqJBJeA==
   dependencies:
     find-up "^5.0.0"
+
+pkg-up@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/pkg-up/-/pkg-up-3.1.0.tgz#100ec235cc150e4fd42519412596a28512a0def5"
+  integrity sha512-nDywThFk1i4BQK4twPQ6TA4RT8bDY96yeuCVBWL3ePARCiEKDRSrNGbFIgUJpLp+XeIR65v8ra7WuJOFUBtkMA==
+  dependencies:
+    find-up "^3.0.0"
 
 please-upgrade-node@^3.2.0:
   version "3.2.0"
