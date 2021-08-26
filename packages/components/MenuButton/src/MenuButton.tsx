@@ -30,7 +30,7 @@ const getChevronIcon = (color: string = defaultIconColor) => {
 export const MenuButton = compose<MenuButtonType>({
   displayName: MenuButtonName,
   usePrepareProps: (userProps: MenuButtonProps, useStyling: IUseComposeStyling<MenuButtonType>) => {
-    const { menuItems, content, icon, disabled, onItemClick, contextualMenu, primary } = userProps;
+    const { menuItems, content, startIcon, disabled, onItemClick, contextualMenu, primary } = userProps;
 
     const stdBtnRef = useRef(null);
     const [showContextualMenu, setShowContextualMenu] = useState(false);
@@ -70,6 +70,7 @@ export const MenuButton = compose<MenuButtonType>({
     const state: MenuButtonState = {
       context: {
         showContextualMenu: !!showContextualMenu,
+        primary: !!primary
       },
     };
 
@@ -85,16 +86,14 @@ export const MenuButton = compose<MenuButtonType>({
     const buttonProps = {
       content,
       disabled,
-      icon,
+      startIcon,
       componentRef: stdBtnRef,
       onClick: toggleShowContextualMenu,
       endIcon: chevronIconProps,
     };
 
     const slotProps = mergeSettings<MenuButtonSlotProps>(styleProps, {
-      root: {
-        primary: !!primary
-      },
+      root: {},
       button: buttonProps,
       primaryButton: buttonProps,
       contextualMenu: {
@@ -128,12 +127,11 @@ export const MenuButton = compose<MenuButtonType>({
     }
     const context = renderData.state!.context;
     const menuItems = renderData.slotProps!.contextualMenuItems?.menuItems || [];
-    const primary = renderData.slotProps!.root?.primary;
 
     return (
       <Slots.root>
         {
-          primary ?
+          context.primary ?
           <Slots.primaryButton /> : <Slots.button />
         }
         {context.showContextualMenu && (

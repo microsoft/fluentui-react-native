@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Separator, MenuButton, ContextualMenuProps } from '@fluentui/react-native';
-import { Text, View, Switch } from 'react-native';
-import { menuItems, iconProps } from './testData';
+import { Text, View, Switch, Platform } from 'react-native';
+import { menuItems, iconProps, testImage } from './testData';
 import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonTestStyles';
+import { IconSourcesType } from '@fluentui-react-native/icon';
 
 export const StandardMenuButton: React.FunctionComponent = () => {
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
@@ -25,6 +26,11 @@ export const StandardMenuButton: React.FunctionComponent = () => {
     shouldFocusOnMount: focusOnMount,
     shouldFocusOnContainer: focusOnContainer,
   };
+
+  const iconToShow: IconSourcesType = Platform.select({
+    macos: testImage, //GH #931, macOS MenuButton only supports showing PNG icons
+    default: iconProps,
+  });
 
   return (
     <View>
@@ -58,14 +64,20 @@ export const StandardMenuButton: React.FunctionComponent = () => {
               />
               <Text>MenuButton with icon</Text>
               <MenuButton
-                icon={iconProps}
+                startIcon={iconToShow}
                 content="MenuButton"
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
               />
               <Text>MenuButton with only icon</Text>
-              <MenuButton icon={iconProps} menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps} />
+              <MenuButton
+                startIcon={iconToShow}
+                menuItems={menuItems}
+                onItemClick={onItemClick}
+                contextualMenu={contextualMenuProps}
+                style={Platform.OS === 'macos' ? { height: 32, width: 54 } : undefined} // GH #931, macOS needs a custom height/width to layout properly
+              />
               <Text>Disabled MenuButton</Text>
               <MenuButton disabled content="Disabled MenuButton" menuItems={menuItems} />
             </View>
@@ -81,14 +93,21 @@ export const StandardMenuButton: React.FunctionComponent = () => {
               <Text>Primary MenuButton with icon</Text>
               <MenuButton
                 primary
-                icon={iconProps}
+                startIcon={iconToShow}
                 content="Primary MenuButton"
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
               />
               <Text>Primary MenuButton with only icon</Text>
-              <MenuButton primary icon={iconProps} menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps} />
+              <MenuButton
+                primary
+                startIcon={iconToShow}
+                menuItems={menuItems}
+                onItemClick={onItemClick}
+                contextualMenu={contextualMenuProps}
+                style={Platform.OS === 'macos' ? { height: 32, width: 54 } : undefined} // GH #931, macOS needs a custom height/width to layout properly
+              />
               <Text>Primary Disabled MenuButton</Text>
               <MenuButton primary disabled content="Disabled Primary MenuButton" menuItems={menuItems} />
             </View>
