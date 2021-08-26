@@ -1251,10 +1251,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fluentui/token-pipeline@^0.3.9":
-  version "0.3.9"
-  resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.9.tgz#7db1c8c3b2242ba4bbd9a172b7ae8bfb1f22e138"
-  integrity sha512-8rS5M+8H1+f4HG0wFu3Dd9Nj+RyBylXKq/B5slta5rwMrssJbmdusgtAuP1GpqfNITrsUA1k2u+HH4rggr6qVw==
+"@fluentui/token-pipeline@^0.3.11":
+  version "0.3.11"
+  resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.11.tgz#79552e3a2ef66f2535ebd5e5a99f87ae3c65556c"
+  integrity sha512-pZSCmUTa/B2fgkAWuL2m3ST6+0M/8B4TjhqU8j30NjyMyGgYb1t6eke+ZYnbKJxIG7CwrpHg3dwNdKZ/DBCn1w==
   dependencies:
     args "^5.0.1"
     esm "^3.2.25"
