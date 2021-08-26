@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "add experimental text test page",
-  "packageName": "@fluentui-react-native/experimental-text",
-  "email": "jasonmo@microsoft.com",
-  "dependentChangeType": "none"
-}

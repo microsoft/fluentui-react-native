@@ -2,6 +2,57 @@
   "name": "@fluentui-react-native/experimental-expander",
   "entries": [
     {
+      "date": "Thu, 26 Aug 2021 04:48:40 GMT",
+      "tag": "@fluentui-react-native/experimental-expander_v0.2.9",
+      "version": "0.2.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix text truncation for radio button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "b8c866644b2c5b64530990e59153424b0d6f5dcc",
+            "package": "@fluentui-react-native/experimental-expander"
+          },
+          {
+            "comment": "empty exapnder change to trigger change file",
+            "author": "sanajmi@microsoft.com",
+            "commit": "4f1243adde480dde87622242a0f2efae0333545f",
+            "package": "@fluentui-react-native/experimental-expander"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 Aug 2021 21:36:58 GMT",
+      "tag": "@fluentui-react-native/experimental-expander_v0.2.8",
+      "version": "0.2.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "empty exapnder change to trigger change file",
+            "author": "sanajmi@microsoft.com",
+            "commit": "8f45901b85042f5f8d09f106608cb8f77ee260a8",
+            "package": "@fluentui-react-native/experimental-expander"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 24 Aug 2021 18:08:30 GMT",
+      "tag": "@fluentui-react-native/experimental-expander_v0.2.7",
+      "version": "0.2.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "empty exapnder change to trigger change file",
+            "author": "sanajmi@microsoft.com",
+            "commit": "a2124be0bdd820a4f38ae7017bd48e7ca3373300",
+            "package": "@fluentui-react-native/experimental-expander"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 23 Aug 2021 23:35:47 GMT",
       "tag": "@fluentui-react-native/experimental-expander_v0.2.6",
       "version": "0.2.6",

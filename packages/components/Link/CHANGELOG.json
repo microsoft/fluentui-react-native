@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Thu, 26 Aug 2021 04:48:40 GMT",
+      "tag": "@fluentui-react-native/link_v0.13.16",
+      "version": "0.13.16",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix text truncation for radio button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "b8c866644b2c5b64530990e59153424b0d6f5dcc",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 Aug 2021 21:36:58 GMT",
+      "tag": "@fluentui-react-native/link_v0.13.15",
+      "version": "0.13.15",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.38",
+            "author": "sanajmi@microsoft.com",
+            "commit": "8f45901b85042f5f8d09f106608cb8f77ee260a8",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 24 Aug 2021 18:08:30 GMT",
+      "tag": "@fluentui-react-native/link_v0.13.14",
+      "version": "0.13.14",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.37",
+            "author": "sanajmi@microsoft.com",
+            "commit": "a2124be0bdd820a4f38ae7017bd48e7ca3373300",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 23 Aug 2021 23:35:47 GMT",
       "tag": "@fluentui-react-native/link_v0.13.13",
       "version": "0.13.13",

@@ -1,8 +1,44 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 23 Aug 2021 23:35:47 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 04:48:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.39.1
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- Bump @fluentui/react-native to v0.25.7 (67026167+chiuam@users.noreply.github.com)
+
+## 0.39.0
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Minor changes
+
+- Renamed icon to start icon (v.kozlova13@gmail.com)
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.20.0 (sanajmi@microsoft.com)
+- Bump @fluentui/react-native to v0.25.6 (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/experimental-expander to v0.2.8 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.8.15 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-button to v0.8.16 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-native-button to v0.7.18 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.38 (sanajmi@microsoft.com)
+
+## 0.38.1
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Use exported IconSourcesType from Icon package (sanajmi@microsoft.com)
+- add experimental text test page (jasonmo@microsoft.com)
+- move testid to fix text (ruaraki@microsoft.com)
 
 ## 0.38.0
 

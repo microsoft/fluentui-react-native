@@ -1,7 +1,7 @@
 {
   "type": "patch",
-  "comment": "add experimental text test page",
+  "comment": "Update picker again",
   "packageName": "@fluentui-react-native/tester",
-  "email": "jasonmo@microsoft.com",
+  "email": "ruaraki@microsoft.com",
   "dependentChangeType": "patch"
 }
