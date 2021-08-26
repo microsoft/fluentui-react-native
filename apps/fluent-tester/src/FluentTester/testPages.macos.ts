@@ -3,6 +3,7 @@ import { AvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
+import { HOMEPAGE_FOCUSZONE_BUTTON, FocusZoneTest } from './TestComponents/FocusZone';
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
 import { NativeButtonTest, HOMEPAGE_NATIVEBUTTON_BUTTON } from './TestComponents/NativeButton';
@@ -34,6 +35,11 @@ export const tests: TestDescription[] = [
     name: 'Experimental Button',
     component: ExperimentalButtonTest,
     testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
+  },
+  {
+    name: 'FocusZone Test',
+    component: FocusZoneTest,
+    testPage: HOMEPAGE_FOCUSZONE_BUTTON,
   },
   {
     name: 'Pressable Test',
