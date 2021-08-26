@@ -33,7 +33,7 @@ export const settings: IComposeSettings<IButtonType> = [
     content: {
       variant: 'bodySemibold',
     },
-    icon: {
+    startIcon: {
       style: {
         marginEnd: 10,
       },

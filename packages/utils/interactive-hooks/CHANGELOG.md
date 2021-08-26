@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Tue, 24 Aug 2021 18:08:30 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 04:48:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.39
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.10.38
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.15 (sanajmi@microsoft.com)
 
 ## 0.10.37
 

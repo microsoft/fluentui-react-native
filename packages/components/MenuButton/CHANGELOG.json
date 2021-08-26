@@ -2,6 +2,62 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Thu, 26 Aug 2021 04:48:40 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix text truncation for radio button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "b8c866644b2c5b64530990e59153424b0d6f5dcc",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 Aug 2021 21:36:58 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Renamed icon to start icon",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "55682eac694e7cbbf3396ffd14292fe1dddc8fa5",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.20.0",
+            "author": "sanajmi@microsoft.com",
+            "commit": "8f45901b85042f5f8d09f106608cb8f77ee260a8",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.15",
+            "author": "sanajmi@microsoft.com",
+            "commit": "8f45901b85042f5f8d09f106608cb8f77ee260a8",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.10.16",
+            "author": "sanajmi@microsoft.com",
+            "commit": "8f45901b85042f5f8d09f106608cb8f77ee260a8",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.38",
+            "author": "sanajmi@microsoft.com",
+            "commit": "8f45901b85042f5f8d09f106608cb8f77ee260a8",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 24 Aug 2021 18:08:30 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.5.1",
       "version": "0.5.1",

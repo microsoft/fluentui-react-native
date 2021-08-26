@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fixed bug: Using keyboard for PrimaryButton causes freeze of the Tester",
+  "packageName": "@fluentui-react-native/menu-button",
+  "email": "v.kozlova13@gmail.com",
+  "dependentChangeType": "patch"
+}
