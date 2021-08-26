@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix incorrectly mapped token in Apple theme",
+  "packageName": "@fluentui-react-native/apple-theme",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
