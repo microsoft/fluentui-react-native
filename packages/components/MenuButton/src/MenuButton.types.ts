@@ -7,6 +7,7 @@ export const MenuButtonName = 'MenuButton';
 
 export interface MenuButtonContext {
   showContextualMenu?: boolean;
+  primary?: boolean;
 }
 
 export interface MenuButtonState {
@@ -26,11 +27,13 @@ export interface MenuButtonProps extends IButtonProps {
   menuItems?: MenuButtonItemProps[];
   onItemClick?: (key: string) => void;
   contextualMenu?: ContextualMenuProps;
+  primary?: boolean;
 }
 
 export type MenuButtonSlotProps = {
   root: MenuButtonProps;
   button: IButtonProps & MenuButtonTokens;
+  primaryButton: IButtonProps & MenuButtonTokens;
   contextualMenu: React.PropsWithRef<ContextualMenuProps>;
   contextualMenuItems: Pick<MenuButtonProps, 'menuItems'>;
   contextualMenuItem: MenuButtonItemProps;

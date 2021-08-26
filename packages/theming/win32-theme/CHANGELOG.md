@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Fri, 13 Aug 2021 16:12:26 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 04:48:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.4
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.11.3
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Rename tokens to avoid name clash, initial token re-population (ruaraki@microsoft.com)
+
+## 0.11.2
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Fix entries (ruaraki@microsoft.com)
 
 ## 0.11.1
 

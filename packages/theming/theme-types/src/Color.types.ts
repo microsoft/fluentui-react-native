@@ -336,30 +336,30 @@ export interface PaletteBackgroundColors {
 }
 
 export interface ControlColorTokens {
-  buttonBackground: ColorValue;
-  buttonBorder: ColorValue;
-  buttonContent: ColorValue;
-  buttonIcon: ColorValue;
+  defaultBackground: ColorValue;
+  defaultBorder: ColorValue;
+  defaultContent: ColorValue;
+  defaultIcon: ColorValue;
 
-  buttonHoveredBackground: ColorValue;
-  buttonHoveredBorder: ColorValue;
-  buttonHoveredContent: ColorValue;
-  buttonHoveredIcon: ColorValue;
+  defaultHoveredBackground: ColorValue;
+  defaultHoveredBorder: ColorValue;
+  defaultHoveredContent: ColorValue;
+  defaultHoveredIcon: ColorValue;
 
-  buttonFocusedBackground: ColorValue;
-  buttonFocusedBorder: ColorValue;
-  buttonFocusedContent: ColorValue;
-  buttonFocusedIcon: ColorValue;
+  defaultFocusedBackground: ColorValue;
+  defaultFocusedBorder: ColorValue;
+  defaultFocusedContent: ColorValue;
+  defaultFocusedIcon: ColorValue;
 
-  buttonPressedBackground: ColorValue;
-  buttonPressedBorder: ColorValue;
-  buttonPressedContent: ColorValue;
-  buttonPressedIcon: ColorValue;
+  defaultPressedBackground: ColorValue;
+  defaultPressedBorder: ColorValue;
+  defaultPressedContent: ColorValue;
+  defaultPressedIcon: ColorValue;
 
-  buttonDisabledBackground: ColorValue;
-  buttonDisabledBorder: ColorValue;
-  buttonDisabledContent: ColorValue;
-  buttonDisabledIcon: ColorValue;
+  defaultDisabledBackground: ColorValue;
+  defaultDisabledBorder: ColorValue;
+  defaultDisabledContent: ColorValue;
+  defaultDisabledIcon: ColorValue;
 
   ghostBackground: ColorValue;
   ghostBorder: ColorValue;
@@ -411,15 +411,15 @@ export interface ControlColorTokens {
   brandedDisabledContent: ColorValue;
   brandedDisabledIcon: ColorValue;
 
-  buttonCheckedBackground: ColorValue;
-  buttonCheckedContent: ColorValue;
-  buttonCheckedHoveredBackground: ColorValue;
-  buttonCheckedHoveredContent: ColorValue;
+  defaultCheckedBackground: ColorValue;
+  defaultCheckedContent: ColorValue;
+  defaultCheckedHoveredBackground: ColorValue;
+  defaultCheckedHoveredContent: ColorValue;
 
-  brandCheckedBackground: ColorValue;
-  brandCheckedContent: ColorValue;
-  brandCheckedHoveredBackground: ColorValue;
-  brandCheckedHoveredContent: ColorValue;
+  brandedCheckedBackground: ColorValue;
+  brandedCheckedContent: ColorValue;
+  brandedCheckedHoveredBackground: ColorValue;
+  brandedCheckedHoveredContent: ColorValue;
 
   ghostCheckedBackground: ColorValue;
   ghostCheckedContent: ColorValue;
@@ -432,14 +432,14 @@ export interface ControlColorTokens {
   ghostHoveredSecondaryContent: ColorValue;
   ghostPressedSecondaryContent: ColorValue;
 
-  brandSecondaryContent: ColorValue;
-  brandFocusedSecondaryContent: ColorValue;
-  brandHoveredSecondaryContent: ColorValue;
-  brandPressedSecondaryContent: ColorValue;
+  brandedSecondaryContent: ColorValue;
+  brandedFocusedSecondaryContent: ColorValue;
+  brandedHoveredSecondaryContent: ColorValue;
+  brandedPressedSecondaryContent: ColorValue;
 
-  buttonDisabledSecondaryContent: ColorValue;
-  buttonHoveredSecondaryContent: ColorValue;
-  buttonPressedSecondaryContent: ColorValue;
+  defaultDisabledSecondaryContent: ColorValue;
+  defaultHoveredSecondaryContent: ColorValue;
+  defaultPressedSecondaryContent: ColorValue;
 
   checkboxBackground: ColorValue;
   checkboxBackgroundDisabled: ColorValue;
