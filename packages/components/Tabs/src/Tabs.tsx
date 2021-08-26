@@ -97,14 +97,14 @@ export const Tabs = compose<TabsType>({
         const currTabItemIndex = state.context.enabledKeys.findIndex(x => x == state.context.selectedKey)
         let newCurrTabItemIndex;
         if (ev.nativeEvent.key === 'ArrowRight') {
-          if (!(!isCircularNavigation && currTabItemIndex + 1 == length)) {
+          if (isCircularNavigation || !(currTabItemIndex + 1 == length)) {
             newCurrTabItemIndex = (currTabItemIndex + 1) % length;
             state.context.selectedKey = state.context.enabledKeys[newCurrTabItemIndex];
             data.onKeySelect(state.context.selectedKey);
           }
         }
         if (ev.nativeEvent.key === 'ArrowLeft') {
-          if (!(!isCircularNavigation && currTabItemIndex == 0)) {
+          if (isCircularNavigation || !(currTabItemIndex == 0)) {
             newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
             state.context.selectedKey = state.context.enabledKeys[newCurrTabItemIndex];
             data.onKeySelect(state.context.selectedKey);
