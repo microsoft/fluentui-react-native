@@ -2,6 +2,160 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Fri, 27 Aug 2021 15:48:49 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.6.3",
+      "version": "0.6.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.20.3",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "c729be7f7435205ba0bf60dd001e42b70ab39d93",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 21:02:08 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.6.2",
+      "version": "0.6.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "macOS MenuButton uses intrinsicContentSize",
+            "author": "sanajmi@microsoft.com",
+            "commit": "b486e8ca036656cf124c6e9c703f8f420ee17405",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Fixed bug: Using keyboard for PrimaryButton causes freeze of the Tester",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "e016b4b57a1ce6630661515123f7fa5edb036061",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 04:48:40 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix text truncation for radio button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "b8c866644b2c5b64530990e59153424b0d6f5dcc",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 Aug 2021 21:36:58 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Renamed icon to start icon",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "55682eac694e7cbbf3396ffd14292fe1dddc8fa5",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.20.0",
+            "author": "sanajmi@microsoft.com",
+            "commit": "8f45901b85042f5f8d09f106608cb8f77ee260a8",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.15",
+            "author": "sanajmi@microsoft.com",
+            "commit": "8f45901b85042f5f8d09f106608cb8f77ee260a8",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.10.16",
+            "author": "sanajmi@microsoft.com",
+            "commit": "8f45901b85042f5f8d09f106608cb8f77ee260a8",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.38",
+            "author": "sanajmi@microsoft.com",
+            "commit": "8f45901b85042f5f8d09f106608cb8f77ee260a8",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 24 Aug 2021 18:08:30 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.5.1",
+      "version": "0.5.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Support menuButton images and custom styles on macOS",
+            "author": "sanajmi@microsoft.com",
+            "commit": "a2124be0bdd820a4f38ae7017bd48e7ca3373300",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 23 Aug 2021 23:35:47 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix bug where the defualt content of the macOS MEnuButton was not empty",
+            "author": "sanajmi@microsoft.com",
+            "commit": "096dfebec6c2135a6256008be23642e68396fb36",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Change the macOS MenuButton style",
+            "author": "sanajmi@microsoft.com",
+            "commit": "afbf14b867e89ab777543f6dc581fe4435a6da6e",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.19.0",
+            "author": "sanajmi@microsoft.com",
+            "commit": "c4ee008b284d3e339cc19a6640c8e570d443d1cb",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.10.14",
+            "author": "dake.3601@gmail.com",
+            "commit": "84a24da6bdddd85adad1f5824e7af3d1804b1c1c",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.20",
+            "author": "dake.3601@gmail.com",
+            "commit": "84a24da6bdddd85adad1f5824e7af3d1804b1c1c",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Changed styling for the Button. Added new exampled to MenuButton",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "1f405d0b15fde31eb650b1d9bb5109dcc500440e",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 19 Aug 2021 18:31:21 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.4.15",
       "version": "0.4.15",

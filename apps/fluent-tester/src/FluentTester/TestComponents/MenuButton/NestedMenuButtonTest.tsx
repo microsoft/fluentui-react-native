@@ -140,7 +140,12 @@ export const NestedMenuButton: React.FunctionComponent = () => {
             <Text>Last Submenu Item Clicked: </Text>
             {lastSubmenuItemClicked > 0 ? <Text style={textColor}>{lastSubmenuItemClicked}</Text> : <Text style={textColor}>none</Text>}
           </Text>
-          <MenuButton icon={rasterImageProps} content="Press for Nested MenuButton" menuItems={nestedMenuItems} onItemClick={onItemClick} />
+          <MenuButton
+            startIcon={rasterImageProps}
+            content="Press for Nested MenuButton"
+            menuItems={nestedMenuItems}
+            onItemClick={onItemClick}
+          />
         </View>
       </View>
     </View>

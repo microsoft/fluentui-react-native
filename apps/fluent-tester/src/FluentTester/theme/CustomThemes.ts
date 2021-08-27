@@ -9,6 +9,7 @@ import { ThemeOptions } from '@fluentui-react-native/theme-types';
 
 const themeOptions: ThemeOptions = { paletteName: 'TaskPane', appearance: 'dynamic' };
 
+// Default applies to win32
 const baseTheme = Platform.select({
   android: createAndroidTheme(themeOptions),
   ios: createAppleTheme(),
@@ -16,10 +17,18 @@ const baseTheme = Platform.select({
   default: createDefaultTheme(themeOptions),
 });
 
+const supportsHighContrastTokens: boolean = Platform.select({
+  android: false,
+  ios: false,
+  macos: false,
+  default: true,
+});
+
 export const lightnessOptions = [
   { label: 'Auto', value: 'dynamic' },
   { label: 'Light', value: 'light' },
   { label: 'Dark', value: 'dark' },
+  supportsHighContrastTokens && { label: 'High Contrast', value: 'highContrast' },
 ];
 
 export class TesterThemeReference extends ThemeReference {
@@ -30,11 +39,7 @@ export class TesterThemeReference extends ThemeReference {
   private baseTheme: ThemeReference;
 
   constructor() {
-    super(
-      baseTheme,
-      (parent) => applyTheme(parent, this._themeName),
-      () => applyBrand(this._brand),
-    );
+    super(baseTheme, parent => applyTheme(parent, this._themeName, this.options.appearance), () => applyBrand(this._brand));
     this.baseTheme = baseTheme;
     this.options = themeOptions;
   }

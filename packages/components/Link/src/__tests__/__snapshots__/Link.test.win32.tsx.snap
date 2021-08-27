@@ -22,8 +22,6 @@ exports[`Link all props 1`] = `
     Object {
       "alignItems": "flex-start",
       "display": "flex",
-      "margin": 0,
-      "textDecorationLine": "underline",
     }
   }
   url="https://www.bing.com"
@@ -32,13 +30,15 @@ exports[`Link all props 1`] = `
     style={
       Object {
         "borderColor": "transparent",
-        "borderStyle": "dotted",
-        "borderWidth": 1,
+        "borderRadius": 4,
+        "borderStyle": "solid",
+        "borderWidth": 2,
         "color": "#0078d4",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
+        "textAlign": "center",
         "textDecorationLine": "underline",
       }
     }
@@ -70,8 +70,6 @@ exports[`Link with child 1`] = `
     Object {
       "alignItems": "flex-start",
       "display": "flex",
-      "margin": 0,
-      "textDecorationLine": "underline",
     }
   }
   url="https://www.bing.com"
@@ -80,13 +78,15 @@ exports[`Link with child 1`] = `
     style={
       Object {
         "borderColor": "transparent",
-        "borderStyle": "dotted",
-        "borderWidth": 1,
+        "borderRadius": 4,
+        "borderStyle": "solid",
+        "borderWidth": 2,
         "color": "#0078d4",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
+        "textAlign": "center",
         "textDecorationLine": "underline",
       }
     }

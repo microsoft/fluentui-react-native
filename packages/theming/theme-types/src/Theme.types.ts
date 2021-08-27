@@ -3,9 +3,7 @@ import { OfficePalette } from './palette.types';
 import { Typography, PartialTypography } from './Typography.types';
 import { ColorValue } from 'react-native';
 
-type TwoLevelPartial<T> = {
-  [K in keyof T]?: Partial<T[K]>;
-};
+type TwoLevelPartial<T> = { [K in keyof T]?: Partial<T[K]> };
 
 export interface Spacing {
   s2: string;
@@ -23,13 +21,13 @@ export interface Theme {
   colors: ThemeColorDefinition;
   typography: Typography;
   components: {
-    [key: string]: object, // eslint-disable-line @typescript-eslint/ban-types
+    [key: string]: object; // eslint-disable-line @typescript-eslint/ban-types
   };
   spacing: Spacing;
   host: {
     // appearance of the theme, this corresponds to the react-native Appearance library values, though can be overwritten
     // dynamic refers to a theme that handles it's own appearance switching, such as one that uses the PlatformColor API
-    appearance: 'light' | 'dark' | 'dynamic';
+    appearance: AppearanceOptions | 'dynamic';
 
     // Office palette, if running in Office with the native module connected in the theme
     palette?: OfficePalette;
@@ -46,7 +44,7 @@ export type PartialTheme = Omit<TwoLevelPartial<Theme>, 'typography' | 'host'> &
   host?: TwoLevelPartial<Theme['host']>;
 };
 
-export type AppearanceOptions = 'light' | 'dark';
+export type AppearanceOptions = 'light' | 'dark' | 'highContrast';
 
 export interface ThemeOptions {
   /**
