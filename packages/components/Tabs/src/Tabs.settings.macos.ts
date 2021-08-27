@@ -20,9 +20,6 @@ export const settings: IComposeSettings<TabsType> = [
         marginLeft: 4,
       },
     },
-    label: {
-      style: {},
-    },
     stack: {
       style: {
         marginTop: 6,
