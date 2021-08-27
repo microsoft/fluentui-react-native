@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Change comment format in Expander types",
-  "packageName": "@fluentui-react-native/experimental-expander",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "none"
-}

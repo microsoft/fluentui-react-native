@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Fix comment format in Tabs and TabsItem types",
-  "packageName": "@fluentui-react-native/tabs",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "none"
-}
