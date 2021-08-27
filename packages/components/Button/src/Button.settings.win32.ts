@@ -27,7 +27,7 @@ export const settings: IComposeSettings<IButtonType> = [
         marginStart: 2
       }
     },
-    icon: {
+    startIcon: {
       style: {
         marginEnd: 2
       }
@@ -79,6 +79,7 @@ export const settings: IComposeSettings<IButtonType> = [
           backgroundColor: 'neutralBackground1Hover',
           color: 'neutralForeground1',
           borderColor: 'strokeFocus2',
+          borderWidth: 2,
         },
       },
     },

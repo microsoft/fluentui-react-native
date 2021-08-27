@@ -12,7 +12,7 @@ export const settings: IComposeSettings<IButtonType> = [
     endIcon: {
       color: '#ffffff',
     },
-    icon: {
+    startIcon: {
       color: '#ffffff',
     },
     _overrides: {
@@ -40,7 +40,7 @@ export const settings: IComposeSettings<IButtonType> = [
       focused: {
         tokens: {
           backgroundColor: 'brandBackgroundHover',
-          borderColor: 'neutralForegroundInverted',
+          borderColor: 'strokeFocus2',
           color: 'neutralForegroundInvertedHover',
         },
       },

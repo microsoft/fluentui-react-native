@@ -7,6 +7,7 @@ export const MenuButtonName = 'MenuButton';
 
 export interface MenuButtonContext {
   showContextualMenu?: boolean;
+  primary?: boolean;
 }
 
 export interface MenuButtonState {

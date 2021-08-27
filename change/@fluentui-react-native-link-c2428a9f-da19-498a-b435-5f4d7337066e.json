@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Update styling for link to match redlines",
+  "packageName": "@fluentui-react-native/link",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
