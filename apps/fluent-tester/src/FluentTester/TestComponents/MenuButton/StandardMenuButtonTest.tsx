@@ -64,20 +64,14 @@ export const StandardMenuButton: React.FunctionComponent = () => {
               />
               <Text>MenuButton with icon</Text>
               <MenuButton
-                icon={iconToShow}
+                startIcon={iconToShow}
                 content="MenuButton"
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
               />
               <Text>MenuButton with only icon</Text>
-              <MenuButton
-                icon={iconToShow}
-                menuItems={menuItems}
-                onItemClick={onItemClick}
-                contextualMenu={contextualMenuProps}
-                style={Platform.OS === 'macos' ? { height: 32, width: 54 } : undefined} // GH #931, macOS needs a custom height/width to layout properly
-              />
+              <MenuButton startIcon={iconToShow} menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps} />
               <Text>Disabled MenuButton</Text>
               <MenuButton disabled content="Disabled MenuButton" menuItems={menuItems} />
             </View>
@@ -93,7 +87,7 @@ export const StandardMenuButton: React.FunctionComponent = () => {
               <Text>Primary MenuButton with icon</Text>
               <MenuButton
                 primary
-                icon={iconToShow}
+                startIcon={iconToShow}
                 content="Primary MenuButton"
                 menuItems={menuItems}
                 onItemClick={onItemClick}
@@ -102,11 +96,10 @@ export const StandardMenuButton: React.FunctionComponent = () => {
               <Text>Primary MenuButton with only icon</Text>
               <MenuButton
                 primary
-                icon={iconToShow}
+                startIcon={iconToShow}
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
-                style={Platform.OS === 'macos' ? { height: 32, width: 54 } : undefined} // GH #931, macOS needs a custom height/width to layout properly
               />
               <Text>Primary Disabled MenuButton</Text>
               <MenuButton primary disabled content="Disabled Primary MenuButton" menuItems={menuItems} />

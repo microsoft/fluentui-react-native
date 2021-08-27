@@ -1,8 +1,33 @@
 # Change Log - @fluentui-react-native/experimental-expander
 
-This log was last generated on Tue, 24 Aug 2021 18:08:30 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.10
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.34 (ruaraki@microsoft.com)
+
+## 0.2.9
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+- empty exapnder change to trigger change file (sanajmi@microsoft.com)
+
+## 0.2.8
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- empty exapnder change to trigger change file (sanajmi@microsoft.com)
 
 ## 0.2.7
 

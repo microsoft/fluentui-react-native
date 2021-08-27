@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/experimental-button
 
-This log was last generated on Tue, 24 Aug 2021 18:08:30 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.18
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Fix styling on compound experimental button (ruaraki@microsoft.com)
+
+## 0.8.17
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.8.16
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.15 (sanajmi@microsoft.com)
 
 ## 0.8.15
 

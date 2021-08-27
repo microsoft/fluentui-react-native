@@ -8,8 +8,9 @@ export const settings: IComposeSettings<ILinkType> = [
       variant: 'secondaryStandard',
       color: 'link',
       borderColor: 'transparent',
-      borderStyle: 'dotted',
-      borderWidth: 1,
+      borderStyle: 'solid',
+      borderWidth: 2,
+      borderRadius: 4,
     },
     root: {
       accessible: true,
@@ -17,8 +18,6 @@ export const settings: IComposeSettings<ILinkType> = [
       ...{ cursor: 'pointer' },
       accessibilityRole: 'link',
       style: {
-        margin: 0,
-        textDecorationLine: 'underline',
         display: 'flex',
         alignItems: 'flex-start',
       } as IViewProps['style'],
@@ -26,6 +25,7 @@ export const settings: IComposeSettings<ILinkType> = [
     content: {
       style: {
         textDecorationLine: 'underline',
+        textAlign: 'center',
       },
     },
     _precedence: ['visited', 'hovered', 'focused', 'pressed', 'disabled'],
@@ -52,7 +52,7 @@ export const settings: IComposeSettings<ILinkType> = [
       },
       focused: {
         tokens: {
-          borderColor: 'focusBorder',
+          borderColor: 'strokeFocus2',
         },
       },
     },
