@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/experimental-native-date-picker
 
-This log was last generated on Fri, 13 Aug 2021 09:05:57 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 04:48:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.6
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.3.5
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Fix typo preventing native module constants from loading (sanajmi@microsoft.com)
+
+## 0.3.4
+
+Tue, 17 Aug 2021 20:02:00 GMT
+
+### Patches
+
+- MSF -> FRN for most objective C prefixes (sanajmi@microsoft.com)
 
 ## 0.3.3
 

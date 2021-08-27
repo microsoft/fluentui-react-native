@@ -9,7 +9,7 @@ export const settings: IComposeSettings<IButtonType> = [
       color: 'buttonText',
       borderColor: 'buttonBorder',
       borderWidth: 1,
-      borderRadius: 2,
+      borderRadius: 4,
     },
     root: {
       accessible: true,
@@ -22,19 +22,31 @@ export const settings: IComposeSettings<IButtonType> = [
         alignSelf: 'flex-start',
       },
     } as IViewProps,
-    content: {
-      // accessible: false,
+    endIcon: {
+      style: {
+        marginStart: 2
+      }
     },
-    icon: {},
+    startIcon: {
+      style: {
+        marginEnd: 2
+      }
+    },
+    content: {
+      style: {
+        marginStart: 2,
+        marginEnd: 2
+      }
+    },
     stack: {
       style: {
         display: 'flex',
-        paddingStart: 10,
-        paddingEnd: 10,
+        paddingStart: 6,
+        paddingEnd: 6,
         alignItems: 'center',
         flexDirection: 'row',
         alignSelf: 'flex-start',
-        minHeight: 32,
+        minHeight: 24,
         minWidth: 32,
         justifyContent: 'center',
       },

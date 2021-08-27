@@ -1,8 +1,64 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Fri, 13 Aug 2021 16:12:26 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 04:48:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.22
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.12.21
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.39.0 (v.kozlova13@gmail.com)
+
+## 0.12.20
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.38.0 (dake.3601@gmail.com)
+
+## 0.12.19
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.37.2 (email not defined)
+
+## 0.12.18
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.37.1 (ruaraki@microsoft.com)
+
+## 0.12.17
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.37.0 (67026167+chiuam@users.noreply.github.com)
+
+## 0.12.16
+
+Tue, 17 Aug 2021 20:02:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.36.0 (dake.3601@gmail.com)
 
 ## 0.12.15
 

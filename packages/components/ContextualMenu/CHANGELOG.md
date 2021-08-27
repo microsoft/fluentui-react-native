@@ -1,8 +1,64 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Fri, 13 Aug 2021 16:12:26 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 04:48:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.17
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.10.16
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.15 (sanajmi@microsoft.com)
+
+## 0.10.15
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.14 (sanajmi@microsoft.com)
+
+## 0.10.14
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.7.13 (dake.3601@gmail.com)
+
+## 0.10.13
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- add focusBorder to menuItems (email not defined)
+
+## 0.10.12
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.17.11 (ruaraki@microsoft.com)
+
+## 0.10.11
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.10 (ruaraki@microsoft.com)
 
 ## 0.10.10
 

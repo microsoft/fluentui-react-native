@@ -9,7 +9,7 @@ Defining a themed `StyleSheet` is similar to creating a RN `StyleSheet`, but it 
 ```ts
 // Component.styles.ts
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
-import { Theme } from '@fluentui-react-native/theme-types';
+import { Theme } from '@fluentui-react-native/framework';
 
 export const getThemedStyles = themedStyleSheet((theme: Theme) => {
   return {
@@ -28,7 +28,7 @@ You can use a themed `StyleSheet` as you would an RN `StyleSheet` that's generat
 ```ts
 // Component.ts
 import { getThemedStyles } from './Component.styles.ts';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import { useTheme } from '@fluentui-react-native/framework';
 
 export const Component = () => {
   const styles = getThemedStyles(useTheme());
