@@ -35,7 +35,7 @@ export interface TabsContextData {
   tabsItemKeys?: string[];
 
   /*
-   ** A Map to for a TabItems corresponding view
+   ** A Map to store the corresponding view of each TabsItem
    */
   views?: Map<string, React.ReactNode[]> | null;
 }
