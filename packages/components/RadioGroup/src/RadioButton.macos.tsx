@@ -29,7 +29,7 @@ export const RadioButton = compose<IRadioButtonType>({
     element in a RadioGroup. Since the componentRef isn't generated until after initial render,
     we must update it once here. */
     React.useEffect(() => {
-      if (buttonKey == info.selectedKey) {
+      if (buttonKey === info.selectedKey) {
         info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
       }
     }, []);
