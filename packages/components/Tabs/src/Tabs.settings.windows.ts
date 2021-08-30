@@ -11,7 +11,7 @@ export const settings: IComposeSettings<TabsType> = [
     },
     root: {
       accessible: true,
-      // accessibilityRole: 'tablist', // Add role when RN is at >= 0.64
+      accessibilityRole: 'tablist',
       style: {
         // marginLeft: 10,
       },

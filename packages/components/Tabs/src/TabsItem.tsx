@@ -13,7 +13,7 @@ import { TabsContext } from './Tabs';
 import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemRenderData, TabsItemState } from './TabsItem.types';
 import {
   useAsPressable,
-  // useViewCommandFocus,
+  useViewCommandFocus,
   createIconProps,
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
@@ -31,7 +31,7 @@ export const TabsItem = compose<TabsItemType>({
       testID,
       itemKey,
       itemCount,
-      accessibilityPosInSet,
+      accessibilityPositionInSet,
       accessibilitySetSize,
       ...rest
     } = userProps;
@@ -39,7 +39,9 @@ export const TabsItem = compose<TabsItemType>({
     // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback)
     const info = React.useContext(TabsContext);
 
-    /* We don't want to call the user's onTabsClick multiple times on the same selection. */
+    /* There's a bug where the user callback is being called multiple times on one click.
+    We check that there is an actual change in selection before forwarding the message to the user callback
+    so that they aren't notified more than once for each click. */
     const changeSelection = () => {
       if (Platform.OS === 'windows') {
         info.focusZoneRef.current.focus();
@@ -65,13 +67,13 @@ export const TabsItem = compose<TabsItemType>({
       info: {
         ...pressable.state,
         selected: info.selectedKey === userProps.itemKey,
-        icon: !!icon,
+        icon: !!icon && Platform.OS !== 'windows', // Icons are on backlog for windows
         key: itemKey,
         headerText: !!headerText || itemCount !== undefined,
       },
     };
 
-    // const buttonRef = useViewCommandFocus(componentRef);
+    const buttonRef = useViewCommandFocus(componentRef);
 
     /* We use the componentRef of the currently selected tabsItem to maintain the default tabbable
     element in Tabs. Since the componentRef isn't generated until after initial render,
@@ -103,18 +105,17 @@ export const TabsItem = compose<TabsItemType>({
       root: {
         ...rest,
         ...pressable.props,
-        ref: componentRef,
-        // onAccessibilityTap: onAccessibilityTap,
-        accessibilityRole: Platform.OS !== 'windows' ? 'tab' : null, // Add windows role when RN is at >= 0.64
-        accessibilityLabel: accessibilityLabel, // For windows, set to read children when RN is at >= 0.64
+        ref: buttonRef,
+        accessibilityRole: 'tab',
+        accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: userProps.disabled, selected: info.selectedKey === userProps.itemKey },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
-        accessibilityPositionInSet: accessibilityPosInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
+        accessibilityPositionInSet: accessibilityPositionInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
         accessibilitySetSize: accessibilitySetSize ?? info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
       },
       content: { children: headerText + countText, testID: testID },
-      icon: Platform.OS !== 'windows' ? createIconProps(icon) : null,
+      icon: createIconProps(icon),
     });
 
     return { slotProps, state };
@@ -129,7 +130,7 @@ export const TabsItem = compose<TabsItemType>({
     return (
       <Slots.root>
         <Slots.stack>
-          {Platform.OS !== 'windows' && info.icon && <Slots.icon />}
+          {info.icon && <Slots.icon />}
           {info.headerText && <Slots.content />}
         </Slots.stack>
         <Slots.indicator />
@@ -141,14 +142,14 @@ export const TabsItem = compose<TabsItemType>({
   slots: {
     root: View,
     stack: { slotType: View, filter: filterViewProps },
-    icon: Platform.OS !== 'windows' ? { slotType: Icon as React.ComponentType } : React.Fragment,
+    icon: { slotType: Icon as React.ComponentType },
     content: Text,
     indicator: { slotType: View, filter: filterViewProps },
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
     stack: [],
-    icon: Platform.OS !== 'windows' ? [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }] : null,
+    icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
     content: [textTokens, foregroundColorTokens],
     indicator: [{ source: 'indicatorColor', lookup: getPaletteFromTheme, target: 'backgroundColor' }],
   },

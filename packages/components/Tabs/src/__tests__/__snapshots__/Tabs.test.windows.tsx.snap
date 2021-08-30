@@ -4,16 +4,6 @@ exports[`Tabs FocusZone props 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  rest={Object {}}
 >
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
@@ -49,7 +39,6 @@ exports[`Tabs FocusZone props 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -121,7 +110,6 @@ exports[`Tabs FocusZone props 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -193,7 +181,6 @@ exports[`Tabs FocusZone props 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -251,16 +238,6 @@ exports[`Tabs default props 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  rest={Object {}}
 >
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
@@ -296,7 +273,6 @@ exports[`Tabs default props 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -368,7 +344,6 @@ exports[`Tabs default props 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -440,7 +415,6 @@ exports[`Tabs default props 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -498,16 +472,6 @@ exports[`Tabs disabled 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  rest={Object {}}
 >
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
@@ -544,7 +508,6 @@ exports[`Tabs disabled 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -617,7 +580,6 @@ exports[`Tabs disabled 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -689,7 +651,6 @@ exports[`Tabs disabled 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -747,16 +708,6 @@ exports[`Tabs header text and count 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  rest={Object {}}
 >
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
@@ -793,7 +744,6 @@ exports[`Tabs header text and count 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -880,7 +830,6 @@ exports[`Tabs header text and count 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -967,7 +916,6 @@ exports[`Tabs header text and count 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -1039,16 +987,6 @@ exports[`Tabs headers only 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  rest={Object {}}
 >
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
@@ -1084,7 +1022,6 @@ exports[`Tabs headers only 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -1156,7 +1093,6 @@ exports[`Tabs headers only 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -1228,7 +1164,6 @@ exports[`Tabs headers only 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -1287,17 +1222,20 @@ exports[`Tabs props 1`] = `
   accessibilityLabel="Tabs"
   accessibilityRole="tablist"
   accessible={true}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
-  rest={Object {}}
 >
+  <Text
+    style={
+      Object {
+        "color": "#323130",
+        "fontFamily": "Segoe UI",
+        "fontSize": 16,
+        "fontWeight": "600",
+        "margin": 0,
+      }
+    }
+  >
+    Tabs
+  </Text>
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
   >
@@ -1334,7 +1272,6 @@ exports[`Tabs props 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -1421,7 +1358,6 @@ exports[`Tabs props 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -1508,7 +1444,6 @@ exports[`Tabs props 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyUp={[Function]}
         onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}

@@ -1,8 +1,119 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Wed, 11 Aug 2021 04:24:12 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.4
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- don't override reactSetFrame (sanajmi@microsoft.com)
+
+## 0.13.3
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.13.2
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.7.17 (sanajmi@microsoft.com)
+
+## 0.13.1
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.7.16 (sanajmi@microsoft.com)
+
+## 0.13.0
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Minor changes
+
+- Deprecate aria- prefix properties (krsiler@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.0 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/pressable to v0.7.13 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/text to v0.10.11 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/tokens to v0.9.20 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.36 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.7.15 (sanajmi@microsoft.com)
+
+## 0.12.2
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.9.19 (ruaraki@microsoft.com)
+
+## 0.12.1
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.9 (ruaraki@microsoft.com)
+
+## 0.12.0
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Minor changes
+
+- fix for radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.33 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.7.12 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/pressable to v0.7.10 (ruaraki@microsoft.com)
+
+## 0.11.12
+
+Tue, 17 Aug 2021 20:02:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.7.11 (sanajmi@microsoft.com)
+
+## 0.11.11
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.11.10
+
+Fri, 13 Aug 2021 09:05:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.7.9 (sanajmi@microsoft.com)
+
+## 0.11.9
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.7 (ruaraki@microsoft.com)
 
 ## 0.11.8
 

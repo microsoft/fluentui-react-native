@@ -11,7 +11,6 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { foregroundColorTokens, textTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
 import { useSelectedKey, useAsPressable } from '@fluentui-react-native/interactive-hooks';
-import type { IKeyboardEvent } from '@office-iss/react-native-win32';
 
 export const TabsContext = React.createContext<TabsContextData>({
   selectedKey: null,
@@ -35,6 +34,7 @@ export const Tabs = compose<TabsType>({
 
   usePrepareProps: (userProps: TabsProps, useStyling: IUseComposeStyling<TabsType>) => {
     const focusZoneRef = React.useRef(null);
+    const defaultComponentRef = React.useRef(null);
     const {
       label,
       accessibilityLabel = userProps.label,
@@ -42,8 +42,8 @@ export const Tabs = compose<TabsType>({
       headersOnly,
       defaultSelectedKey,
       getTabId,
-      componentRef = React.useRef(null),
-      isCircularNavigation = false,
+      componentRef = defaultComponentRef,
+      isCircularNavigation,
       ...rest
     } = userProps;
 
@@ -90,20 +90,20 @@ export const Tabs = compose<TabsType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
-    const onKeyDown = (ev: IKeyboardEvent) => {
+    const onKeyDown = (ev: any) => {
       if (ev.nativeEvent.key === 'ArrowRight' || ev.nativeEvent.key === 'ArrowLeft') {
         const length = state.context.enabledKeys.length;
         const currTabItemIndex = state.context.enabledKeys.findIndex(x => x == state.context.selectedKey)
         let newCurrTabItemIndex;
         if (ev.nativeEvent.key === 'ArrowRight') {
-          if (!(!isCircularNavigation && currTabItemIndex + 1 == length)) {
+          if (isCircularNavigation || !(currTabItemIndex + 1 == length)) {
             newCurrTabItemIndex = (currTabItemIndex + 1) % length;
             state.context.selectedKey = state.context.enabledKeys[newCurrTabItemIndex];
             data.onKeySelect(state.context.selectedKey);
           }
         }
         if (ev.nativeEvent.key === 'ArrowLeft') {
-          if (!(!isCircularNavigation && currTabItemIndex == 0)) {
+          if (isCircularNavigation || !(currTabItemIndex == 0)) {
             newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
             state.context.selectedKey = state.context.enabledKeys[newCurrTabItemIndex];
             data.onKeySelect(state.context.selectedKey);
@@ -112,11 +112,20 @@ export const Tabs = compose<TabsType>({
       }
     };
 
+    if (Platform.OS == 'windows') {
+      const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
+        root: { ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist', ...pressable.props, ...rest},
+        label: { children: label },
+        stack: { focusable: true, ref: focusZoneRef, onKeyDown: onKeyDown},
+      });
+
+      return { slotProps, state };
+    }
+
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
-      root: { rest, ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: Platform.OS !== 'windows' ? 'tablist' : null, ...pressable.props}, // Add windows role when RN is at >= 0.64
+      root: { ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist', ...rest },
       label: { children: label },
-      container: Platform.OS !== 'windows' ? { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef } : null,
-      stack: Platform.OS !== 'windows' ? null : {focusable: true, ref: focusZoneRef, onKeyDown: onKeyDown}
+      container:{ isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef },
     });
 
     return { slotProps, state };
@@ -140,17 +149,15 @@ export const Tabs = compose<TabsType>({
           return child.props.itemKey;
         }
       });
-      if (Platform.OS === 'windows') {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore - TODO, fix typing error
-        renderData.state.context.enabledKeys = React.Children.map(children, (child: React.ReactChild) => {
-          if (React.isValidElement(child)) {
-            if (!child.props.disabled) {
-              return child.props.itemKey;
-            }
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore - TODO, fix typing error
+      renderData.state.context.enabledKeys = React.Children.map(children, (child: React.ReactChild) => {
+        if (React.isValidElement(child)) {
+          if (!child.props.disabled) {
+            return child.props.itemKey;
           }
-        });
-      }
+        }
+      });
     }
 
     return (

@@ -1,7 +1,7 @@
 import Foundation
 import FluentUI
 
-@objc(MSFAvatarViewManager)
+@objc(FRNAvatarViewManager)
 class AvatarViewManager: RCTViewManager {
 	override func view()->NSView! {
 		let avatarView = AvatarView(avatarSize: 72)

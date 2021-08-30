@@ -44,6 +44,7 @@ exports[`Button component tests Button default 1`] = `
         "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
+        "marginLeft": 0,
       }
     }
   >

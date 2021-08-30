@@ -1,8 +1,104 @@
 # Change Log - @fluentui-react-native/experimental-native-button
 
-This log was last generated on Tue, 10 Aug 2021 21:12:30 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.20
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.34 (ruaraki@microsoft.com)
+
+## 0.7.19
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.7.18
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.16 (sanajmi@microsoft.com)
+
+## 0.7.17
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.15 (jasonmo@microsoft.com)
+
+## 0.7.16
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.14 (dake.3601@gmail.com)
+
+## 0.7.15
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.13 (ruaraki@microsoft.com)
+
+## 0.7.14
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.30 (ruaraki@microsoft.com)
+
+## 0.7.13
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.11 (ruaraki@microsoft.com)
+
+## 0.7.12
+
+Tue, 17 Aug 2021 20:02:00 GMT
+
+### Patches
+
+- MSF -> FRN for most objective C prefixes (sanajmi@microsoft.com)
+
+## 0.7.11
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.7.10
+
+Fri, 13 Aug 2021 09:05:57 GMT
+
+### Patches
+
+- Update apple native code and build flags (sanajmi@microsoft.com)
+
+## 0.7.9
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.8.9 (ruaraki@microsoft.com)
 
 ## 0.7.8
 

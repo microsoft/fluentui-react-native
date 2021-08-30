@@ -1,8 +1,112 @@
 # Change Log - @fluentui-react-native/tester-windows
 
-This log was last generated on Wed, 11 Aug 2021 04:24:12 GMT and should not be manually modified.
+This log was last generated on Fri, 27 Aug 2021 15:48:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.0.1
+
+Fri, 27 Aug 2021 15:48:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.40.1 (krsiler@microsoft.com)
+
+## 0.0.1
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.40.0 (ruaraki@microsoft.com)
+
+## 0.0.1
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.39.1 (67026167+chiuam@users.noreply.github.com)
+
+## 0.0.1
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.39.0 (v.kozlova13@gmail.com)
+
+## 0.0.1
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.38.0 (dake.3601@gmail.com)
+
+## 0.0.1
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.37.2 (email not defined)
+
+## 0.0.1
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.37.1 (ruaraki@microsoft.com)
+
+## 0.0.1
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.37.0 (67026167+chiuam@users.noreply.github.com)
+
+## 0.0.1
+
+Tue, 17 Aug 2021 20:02:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.36.0 (dake.3601@gmail.com)
+
+## 0.0.1
+
+Fri, 13 Aug 2021 14:54:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.8 (amdingler694@gmail.com)
+
+## 0.0.1
+
+Fri, 13 Aug 2021 09:05:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.7 (sanajmi@microsoft.com)
+
+## 0.0.1
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.6 (ruaraki@microsoft.com)
+
+## 0.0.1
+
+Wed, 11 Aug 2021 18:38:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.5 (chripear@microsoft.com)
 
 ## 0.0.1
 

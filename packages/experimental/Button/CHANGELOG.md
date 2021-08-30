@@ -1,8 +1,88 @@
 # Change Log - @fluentui-react-native/experimental-button
 
-This log was last generated on Tue, 10 Aug 2021 21:12:30 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.18
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Fix styling on compound experimental button (ruaraki@microsoft.com)
+
+## 0.8.17
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.8.16
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.15 (sanajmi@microsoft.com)
+
+## 0.8.15
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Use exported IconSourcesType from Icon package (sanajmi@microsoft.com)
+
+## 0.8.14
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.6.13 (dake.3601@gmail.com)
+
+## 0.8.13
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.12 (ruaraki@microsoft.com)
+
+## 0.8.12
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Rename tokens to avoid name clash, initial token re-population (ruaraki@microsoft.com)
+
+## 0.8.11
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.10 (ruaraki@microsoft.com)
+
+## 0.8.10
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.8.9
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Rename tokens (ruaraki@microsoft.com)
 
 ## 0.8.8
 

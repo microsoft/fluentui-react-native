@@ -12,6 +12,8 @@ import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 import { HOMEPAGE_TABS_BUTTON, TabsTest } from './TestComponents/Tabs';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
+import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
+import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 
 export const tests = [
   {
@@ -41,6 +43,11 @@ export const tests = [
     testPage: HOMEPAGE_SEPARATOR_BUTTON,
   },
   { name: 'Text Test', component: TextTest, testPage: HOMEPAGE_TEXT_BUTTON },
+  {
+    name: 'Experimental Text Test',
+    component: TextExperimentalTest,
+    testPage: HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON,
+  },
   { name: 'Theme Test', component: ThemeTest, testPage: HOMEPAGE_THEME_BUTTON },
   {
     name: 'PersonaCoin Test',
@@ -71,5 +78,10 @@ export const tests = [
     name: 'Tokens Test',
     component: TokenTest,
     testPage: HOMEPAGE_TOKEN_BUTTON,
+  },
+  {
+    name: 'Expander Test',
+    component: ExpanderTest,
+    testPage: HOMEPAGE_EXPANDER_BUTTON,
   },
 ];

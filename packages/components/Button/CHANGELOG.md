@@ -1,8 +1,111 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Tue, 10 Aug 2021 21:12:30 GMT and should not be manually modified.
+This log was last generated on Fri, 27 Aug 2021 15:48:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.3
+
+Fri, 27 Aug 2021 15:48:49 GMT
+
+### Patches
+
+- Fixed bug: Luminosity ratio for boundary of focused button with respect to background is 1.2:1 which is less than 3:1 (v.kozlova13@gmail.com)
+
+## 0.20.2
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.2 (ruaraki@microsoft.com)
+
+## 0.20.1
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.20.0
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Minor changes
+
+- Renamed icon to start icon (v.kozlova13@gmail.com)
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.15 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.38 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/pressable to v0.7.15 (sanajmi@microsoft.com)
+
+## 0.19.1
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Use exported IconSourcesType from Icon package (sanajmi@microsoft.com)
+
+## 0.19.0
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Minor changes
+
+- Changed styling for the Button. Added new exampled to MenuButton (v.kozlova13@gmail.com)
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.0 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/pressable to v0.7.13 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/text to v0.10.11 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/tokens to v0.9.20 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/icon to v0.8.13 (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.36 (sanajmi@microsoft.com)
+
+## 0.18.12
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.9.19 (ruaraki@microsoft.com)
+
+## 0.18.11
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.9 (ruaraki@microsoft.com)
+
+## 0.18.10
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.10 (ruaraki@microsoft.com)
+
+## 0.18.9
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.18.8
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.7 (ruaraki@microsoft.com)
 
 ## 0.18.7
 
