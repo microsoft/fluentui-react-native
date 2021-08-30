@@ -49,7 +49,9 @@ static NSView *GetFirstResponder(NSWindow *window)
 {
 	NSResponder *responder = [window firstResponder];
 	while (responder != nil && ![responder isKindOfClass:[NSView class]])
+	{
 		responder = [responder nextResponder];
+	}
 	return [responder isKindOfClass:[NSView class]] ? (NSView *)responder : nil;
 }
 
@@ -120,6 +122,18 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 	return nil;
 }
 
+
+- (BOOL)acceptsFirstResponder
+{
+	// Accept firstResponder on FocusZone itself in order to reassign it to defaultTabbableElement.
+	return YES;
+}
+
+- (BOOL)becomeFirstResponder
+{
+	return [[self window] makeFirstResponder:_defaultTabbableElement ?: [self nextValidKeyView]];
+}
+
 - (NSView *)nextViewToFocusForCondition:(IsViewLeadingCandidateForNextFocus)isLeadingCandidate
 {
 	NSView *nextViewToFocus;
@@ -131,7 +145,7 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 		NSView *candidateView = [queue firstObject];
 		[queue removeObjectAtIndex:0];
 
-		if ([candidateView canBecomeKeyView] && isLeadingCandidate(candidateView))
+		if ([candidateView isNotEqualTo:self] && [candidateView canBecomeKeyView] && isLeadingCandidate(candidateView))
 		{
 			nextViewToFocus = candidateView;
 		}
@@ -296,9 +310,10 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 	{
 		nextViewToFocus = nil;
 	}
-	else
+	else if (action == FocusZoneActionShiftTab)
 	{
-		// If the next view is in a FocusZone, focus the default tabbable element.
+		// If the previous view is in a FocusZone, focus the default tabbable element.
+		// (For FocusZoneActionTab, this is handled by becomeFirstResponder.)
 		RCTFocusZone *nextFocusZone = GetFocusZoneAncestor(nextViewToFocus);
 		NSView *element = [nextFocusZone defaultTabbableElement];
 		if (element != nil)
