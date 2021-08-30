@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ViewProps, ViewStyle, ColorValue } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
-import { FontTokens, IBorderTokens, IShadowTokens } from '@fluentui-react-native/tokens';
+import { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IWithPressableEvents, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IconProps } from '@fluentui-react-native/icon';
@@ -93,7 +93,7 @@ export interface TabsItemTokens extends FontTokens, IBorderTokens {
    selected?: TabsItemTokens;
 }
 
-export interface TabsItemProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface TabsItemProps extends Omit<IWithPressableOptions<IViewWin32Props>, 'onPress'>   {
   /**
    * The text string for the option
    */
@@ -113,18 +113,6 @@ export interface TabsItemProps extends Omit<IWithPressableOptions<ViewProps>, 'o
     * Whether or not the tabs item is selectable
     */
    disabled?: boolean;
-
-   /**
-    * Defines the current tabs item's position in tabs for accessibility purposes. It's recommended to set this value if
-    * tabs item are not direct children of tabs. This value is auto-generated if tabs item are direct children of tabs.
-    */
-   accessibilityPosInSet?: number;
-
-   /**
-    * Defines the number of tabs items in the group for accessibility purposes. It's recommended to set this value if tabs
-    * items are not direct children of tabs. This value is auto-generated if tabs items are direct children of tabs.
-    */
-   accessibilitySetSize?: number;
 
    /**
     * An accessibility label for narrator.
