@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tabs
 
-This log was last generated on Thu, 26 Aug 2021 04:48:40 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.4
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.7.17 (ruaraki@microsoft.com)
 
 ## 0.3.3
 

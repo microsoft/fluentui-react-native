@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Text, Button } from '@fluentui/react-native';
+import { Text } from '@fluentui-react-native/experimental-text';
+import { Button } from '@fluentui-react-native/experimental-button';
 import { Tabs, TabsItem } from '@fluentui-react-native/experimental-tabs';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';

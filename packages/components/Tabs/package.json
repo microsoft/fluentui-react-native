@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tabs",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "A cross-platform Tabs component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -23,15 +23,15 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": ">=0.7.1 <1.0.0",
-    "@fluentui-react-native/focus-zone": ">=0.7.18 <1.0.0",
-    "@fluentui-react-native/icon": "0.8.16",
-    "@fluentui-react-native/interactive-hooks": ">=0.10.39 <1.0.0",
-    "@fluentui-react-native/pressable": ">=0.7.16 <1.0.0",
-    "@fluentui-react-native/text": ">=0.10.12 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.9.21 <1.0.0",
+    "@fluentui-react-native/adapters": ">=0.7.2 <1.0.0",
+    "@fluentui-react-native/focus-zone": ">=0.7.19 <1.0.0",
+    "@fluentui-react-native/icon": "0.8.17",
+    "@fluentui-react-native/interactive-hooks": ">=0.10.40 <1.0.0",
+    "@fluentui-react-native/pressable": ">=0.7.17 <1.0.0",
+    "@fluentui-react-native/text": ">=0.10.13 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.9.22 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.9.0 <1.0.0",
-    "@uifabricshared/foundation-compose": "^1.10.10",
+    "@uifabricshared/foundation-compose": "^1.10.11",
     "@uifabricshared/foundation-settings": ">=0.10.0 <1.0.0"
   },
   "devDependencies": {

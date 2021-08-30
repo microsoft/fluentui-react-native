@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Remove macOS style override for MenuButton",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

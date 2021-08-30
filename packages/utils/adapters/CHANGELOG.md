@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/adapters
 
-This log was last generated on Thu, 26 Aug 2021 04:48:40 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.2
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Fix build (ruaraki@microsoft.com)
 
 ## 0.7.1
 

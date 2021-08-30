@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/framework",
   "entries": [
     {
+      "date": "Thu, 26 Aug 2021 21:02:08 GMT",
+      "tag": "@fluentui-react-native/framework_v0.5.34",
+      "version": "0.5.34",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.22",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/framework"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 26 Aug 2021 04:48:40 GMT",
       "tag": "@fluentui-react-native/framework_v0.5.33",
       "version": "0.5.33",

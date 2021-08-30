@@ -4,6 +4,7 @@ import { Text } from '@fluentui-react-native/experimental-text';
 import { lightnessOptions, testerTheme } from './CustomThemes';
 import { themeChoices, ThemeNames } from './applyTheme';
 import { brandOptions, OfficeBrand } from './applyBrand';
+import { ThemeOptions } from '@fluentui-react-native/theme-types';
 
 export const themePickerStyles = StyleSheet.create({
   pickerRoot: {
@@ -62,7 +63,7 @@ export const ThemePickers: React.FunctionComponent = () => {
   }, []);
 
   const onAppearanceChange = React.useCallback((newAppearance: string) => {
-    testerTheme.appearance = newAppearance as 'light' | 'dark' | 'dynamic';
+    testerTheme.appearance = newAppearance as ThemeOptions['appearance'];
   }, []);
 
   return (
