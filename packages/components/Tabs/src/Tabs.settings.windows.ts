@@ -13,14 +13,19 @@ export const settings: IComposeSettings<TabsType> = [
       accessible: true,
       // accessibilityRole: 'tablist', // Add role when RN is at >= 0.64
       style: {
-        marginLeft: 10,
+        // marginLeft: 10,
       },
     },
     stack: {
       style: {
         flexDirection: 'row',
-        marginLeft: -14,
+        // marginLeft: -14,
         marginTop: 6,
+      },
+    },
+    label: {
+      style: {
+        marginLeft: 10,
       },
     },
   },
