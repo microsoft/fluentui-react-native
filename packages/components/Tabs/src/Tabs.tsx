@@ -11,7 +11,6 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { foregroundColorTokens, textTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
 import { useSelectedKey, useAsPressable } from '@fluentui-react-native/interactive-hooks';
-import type { IKeyboardEvent } from '@office-iss/react-native-win32';
 
 export const TabsContext = React.createContext<TabsContextData>({
   selectedKey: null,
@@ -91,7 +90,7 @@ export const Tabs = compose<TabsType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
-    const onKeyDown = (ev: IKeyboardEvent) => {
+    const onKeyDown = (ev: any) => {
       if (ev.nativeEvent.key === 'ArrowRight' || ev.nativeEvent.key === 'ArrowLeft') {
         const length = state.context.enabledKeys.length;
         const currTabItemIndex = state.context.enabledKeys.findIndex(x => x == state.context.selectedKey)
