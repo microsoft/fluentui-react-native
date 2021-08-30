@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-activity-indicator
 
-This log was last generated on Thu, 26 Aug 2021 04:48:40 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.13
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.34 (ruaraki@microsoft.com)
 
 ## 0.3.12
 

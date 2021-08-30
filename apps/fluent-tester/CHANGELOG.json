@@ -2,6 +2,190 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 27 Aug 2021 15:48:49 GMT",
+      "tag": "@fluentui-react-native/tester_v0.40.1",
+      "version": "0.40.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.20.3",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "c729be7f7435205ba0bf60dd001e42b70ab39d93",
+            "package": "@fluentui-react-native/tester"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/experimental-expander to v0.2.10",
+            "author": "krsiler@microsoft.com",
+            "commit": "0dc74db1f3f96263bf9bba5495421de121cfb04e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui/react-native to v0.25.9",
+            "author": "krsiler@microsoft.com",
+            "commit": "0dc74db1f3f96263bf9bba5495421de121cfb04e",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 21:02:08 GMT",
+      "tag": "@fluentui-react-native/tester_v0.40.0",
+      "version": "0.40.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Remove macOS style override for MenuButton",
+            "author": "sanajmi@microsoft.com",
+            "commit": "b486e8ca036656cf124c6e9c703f8f420ee17405",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Fix some things to get the tester to show well",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Update picker again",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e0742bb4a5bfbedbcbf6bac1581f44c6f4655456",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.20.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui/react-native to v0.25.8",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/stack to v0.5.30",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.17",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.40",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.6.15",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-shimmer to v0.5.10",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.34",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.3.13",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.12.5",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-expander to v0.2.10",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-native-button to v0.7.20",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/android-theme to v0.4.13",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/default-theme to v0.8.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/apple-theme to v0.7.20",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.12.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.8.18",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.6.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.12.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme to v0.5.18",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tester"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Add FocusZone Test to testPages.macos.ts",
+            "author": "chripear@microsoft.com",
+            "commit": "0990c05e4db2b39189229dd5a3a4a1f4b1e65473",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 26 Aug 2021 04:48:40 GMT",
       "tag": "@fluentui-react-native/tester_v0.39.1",
       "version": "0.39.1",

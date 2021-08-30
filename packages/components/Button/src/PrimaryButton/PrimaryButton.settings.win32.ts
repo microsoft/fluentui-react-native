@@ -40,7 +40,7 @@ export const settings: IComposeSettings<IButtonType> = [
       focused: {
         tokens: {
           backgroundColor: 'brandBackgroundHover',
-          borderColor: 'neutralForegroundInverted',
+          borderColor: 'strokeFocus2',
           color: 'neutralForegroundInvertedHover',
         },
       },

@@ -37,23 +37,23 @@ export interface TabsItemState {
 }
 
 export interface TabsItemProps extends IPressableProps {
-  /*
-   ** The text string for the option
+  /**
+   * The text string for the option
    */
   headerText?: string;
 
-  /*
-   ** The number for the TabsItem count
+  /**
+   * The number for the TabsItem count
    */
   itemCount?: number;
 
-  /*
-   ** A unique key-identifier for each option
+  /**
+   * A unique key-identifier for each option
    */
   itemKey: string;
 
-  /*
-   ** Whether or not the tabs item is selectable
+  /**
+   * Whether or not the tabs item is selectable
    */
   disabled?: boolean;
 

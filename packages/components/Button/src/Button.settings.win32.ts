@@ -79,6 +79,7 @@ export const settings: IComposeSettings<IButtonType> = [
           backgroundColor: 'neutralBackground1Hover',
           color: 'neutralForeground1',
           borderColor: 'strokeFocus2',
+          borderWidth: 2,
         },
       },
     },

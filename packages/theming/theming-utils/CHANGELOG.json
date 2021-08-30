@@ -2,6 +2,35 @@
   "name": "@fluentui-react-native/theming-utils",
   "entries": [
     {
+      "date": "Thu, 26 Aug 2021 21:02:08 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add HC plumbing",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/theming-utils"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.6.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/theming-utils"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.12.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/theming-utils"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 26 Aug 2021 04:48:40 GMT",
       "tag": "@fluentui-react-native/theming-utils_v0.5.3",
       "version": "0.5.3",

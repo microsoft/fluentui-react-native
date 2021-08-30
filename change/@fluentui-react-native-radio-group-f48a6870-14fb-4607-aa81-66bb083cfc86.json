@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "don't override reactSetFrame",
-  "packageName": "@fluentui-react-native/radio-group",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Thu, 26 Aug 2021 04:48:40 GMT and should not be manually modified.
+This log was last generated on Fri, 27 Aug 2021 15:48:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.3
+
+Fri, 27 Aug 2021 15:48:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.20.3 (v.kozlova13@gmail.com)
+
+## 0.6.2
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- macOS MenuButton uses intrinsicContentSize (sanajmi@microsoft.com)
+- Fixed bug: Using keyboard for PrimaryButton causes freeze of the Tester (v.kozlova13@gmail.com)
 
 ## 0.6.1
 

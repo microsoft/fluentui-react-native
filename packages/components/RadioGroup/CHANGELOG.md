@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Thu, 26 Aug 2021 04:48:40 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.4
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- don't override reactSetFrame (sanajmi@microsoft.com)
 
 ## 0.13.3
 

@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/experimental-expander",
   "entries": [
     {
+      "date": "Fri, 27 Aug 2021 15:48:49 GMT",
+      "tag": "@fluentui-react-native/experimental-expander_v0.2.10",
+      "version": "0.2.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "Change comment format in Expander types",
+            "author": "krsiler@microsoft.com",
+            "commit": "0dc74db1f3f96263bf9bba5495421de121cfb04e",
+            "package": "@fluentui-react-native/experimental-expander"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 21:02:08 GMT",
+      "tag": "@fluentui-react-native/experimental-expander_v0.2.10",
+      "version": "0.2.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.34",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/experimental-expander"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 26 Aug 2021 04:48:40 GMT",
       "tag": "@fluentui-react-native/experimental-expander_v0.2.9",
       "version": "0.2.9",
