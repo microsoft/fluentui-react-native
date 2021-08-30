@@ -10,8 +10,11 @@ import { SvgUri } from 'react-native-svg';
 const rasterImageStyleCache = getMemoCache<ImageStyle>();
 
 function renderRasterImage(iconProps: IconProps) {
-  const { width, height } = iconProps;
-  const style = mergeStyles(iconProps.style, rasterImageStyleCache({ width: width, height: height }, [width, height])[0]);
+  const { width, height, color } = iconProps;
+  const style = mergeStyles(
+    iconProps.style,
+    rasterImageStyleCache({ width: width, height: height, tintColor: color }, [width, height, color])[0],
+  );
 
   return <Image source={iconProps.rasterImageSource.src} style={style} />;
 }

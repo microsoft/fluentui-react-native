@@ -6,7 +6,7 @@
 import AppKit
 
 @objc(FRNMenuButton)
-open class MenuButton: NSPopUpButton {
+class MenuButton: NSPopUpButton {
 
   public override init(frame buttonFrame: NSRect, pullsDown flag: Bool) {
 
@@ -15,12 +15,8 @@ open class MenuButton: NSPopUpButton {
     imagePosition = .imageLeading
     bezelStyle = .regularSquare
 
-    guard let dropDownCell = cell as? NSPopUpButtonCell else {
-      preconditionFailure()
-    }
-    dropDownCell.imagePosition = .imageLeading
-    dropDownCell.arrowPosition = .arrowAtBottom
-  }
+    updateDropDownCell()
+}
 
   @available(*, unavailable)
   required public init?(coder decoder: NSCoder) {
@@ -29,6 +25,7 @@ open class MenuButton: NSPopUpButton {
 
   @objc public convenience init() {
     self.init(frame: .zero, pullsDown: true)
+    translatesAutoresizingMaskIntoConstraints = false
   }
 
   @objc public var OnItemClick: RCTBubblingEventBlock?
@@ -86,9 +83,12 @@ open class MenuButton: NSPopUpButton {
   }
 
   private func updateDropDownCell() {
-    guard let dropDownCell = cell as? NSPopUpButtonCell else {
-      preconditionFailure()
-    }
+	guard let dropDownCell = cell as? NSPopUpButtonCell else {
+	  preconditionFailure()
+	}
+
+	dropDownCell.imagePosition = .imageLeading
+	dropDownCell.arrowPosition = .arrowAtBottom
 
     // MenuButton needs a MenuItem set on its cell to display the title and image properly
     let dropdownCellItem = NSMenuItem()

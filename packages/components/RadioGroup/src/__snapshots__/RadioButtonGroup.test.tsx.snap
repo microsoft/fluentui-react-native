@@ -5,7 +5,6 @@ exports[`RadioButton component tests RadioButton default 1`] = `
   accessibilityLabel="Uncontrolled RadioGroup"
   accessibilityRole="radiogroup"
   accessible={true}
-  rest={Object {}}
   style={
     Object {
       "alignItems": "flex-start",
@@ -230,7 +229,6 @@ exports[`RadioButton component tests RadioButton not direct child of radio group
   accessibilityLabel="Uncontrolled RadioGroup"
   accessibilityRole="radiogroup"
   accessible={true}
-  rest={Object {}}
   style={
     Object {
       "alignItems": "flex-start",
