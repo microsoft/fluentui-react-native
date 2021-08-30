@@ -1239,11 +1239,6 @@ exports[`Tabs props 1`] = `
   <RCTFocusZone
     navigateAtEnd="NavigateStopAtEnds"
   >
-    Tabs
-  </Text>
-  <RCTFocusZone
-    navigateAtEnd="NavigateStopAtEnds"
-  >
     <View
       style={
         Object {
