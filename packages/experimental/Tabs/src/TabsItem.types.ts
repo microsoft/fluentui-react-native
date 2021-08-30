@@ -9,7 +9,7 @@ import { IconProps } from '@fluentui-react-native/icon';
 export const tabsItemName = 'TabsItem';
 type IconSourcesType = number | string | IconProps;
 
-export interface TabsItemTokens extends FontTokens, IBorderTokens, IShadowTokens {
+export interface TabsItemTokens extends FontTokens, IBorderTokens {
   /**
    * The indicator color.
    */
