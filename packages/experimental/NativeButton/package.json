@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-native-button",
-  "version": "0.7.19",
+  "version": "0.7.20",
   "description": "A cross-platform Native button component using the Fluent Design System. Currently only implemented on iOS and macOS",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -25,8 +25,8 @@
   },
   "dependencies": {
     "@fluentui-react-native/component-cache": "^1.2.3",
-    "@fluentui-react-native/experimental-button": "0.8.17",
-    "@fluentui-react-native/framework": "0.5.33"
+    "@fluentui-react-native/experimental-button": "0.8.18",
+    "@fluentui-react-native/framework": "0.5.34"
   },
   "devDependencies": {
     "@types/react-native": "^0.63.0",

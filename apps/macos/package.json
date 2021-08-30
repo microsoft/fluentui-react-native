@@ -20,7 +20,7 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.39.1",
+    "@fluentui-react-native/tester": "^0.40.1",
     "react": "16.13.1",
     "react-native": "^0.63.2",
     "react-native-macos": "^0.63.0",

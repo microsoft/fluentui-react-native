@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/tabs",
   "entries": [
     {
+      "date": "Fri, 27 Aug 2021 15:48:49 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.3.4",
+      "version": "0.3.4",
+      "comments": {
+        "none": [
+          {
+            "comment": "Fix comment format in Tabs and TabsItem types",
+            "author": "krsiler@microsoft.com",
+            "commit": "0dc74db1f3f96263bf9bba5495421de121cfb04e",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 21:02:08 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.3.4",
+      "version": "0.3.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/pressable to v0.7.17",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 26 Aug 2021 04:48:40 GMT",
       "tag": "@fluentui-react-native/tabs_v0.3.3",
       "version": "0.3.3",

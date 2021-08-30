@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Thu, 26 Aug 2021 21:02:08 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.13.4",
+      "version": "0.13.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "don't override reactSetFrame",
+            "author": "sanajmi@microsoft.com",
+            "commit": "b486e8ca036656cf124c6e9c703f8f420ee17405",
+            "package": "@fluentui-react-native/radio-group"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 26 Aug 2021 04:48:40 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.13.3",
       "version": "0.13.3",

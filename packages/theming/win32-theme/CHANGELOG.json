@@ -2,6 +2,47 @@
   "name": "@fluentui-react-native/win32-theme",
   "entries": [
     {
+      "date": "Thu, 26 Aug 2021 21:02:08 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add HC plumbing",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/default-theme to v0.8.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/win32-theme"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.6.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/win32-theme"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.12.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/win32-theme"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme to v0.5.18",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/win32-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 26 Aug 2021 04:48:40 GMT",
       "tag": "@fluentui-react-native/win32-theme_v0.11.4",
       "version": "0.11.4",

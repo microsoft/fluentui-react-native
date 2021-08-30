@@ -1251,10 +1251,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fluentui/token-pipeline@^0.3.9":
-  version "0.3.9"
-  resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.9.tgz#7db1c8c3b2242ba4bbd9a172b7ae8bfb1f22e138"
-  integrity sha512-8rS5M+8H1+f4HG0wFu3Dd9Nj+RyBylXKq/B5slta5rwMrssJbmdusgtAuP1GpqfNITrsUA1k2u+HH4rggr6qVw==
+"@fluentui/token-pipeline@^0.3.11":
+  version "0.3.11"
+  resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.11.tgz#79552e3a2ef66f2535ebd5e5a99f87ae3c65556c"
+  integrity sha512-pZSCmUTa/B2fgkAWuL2m3ST6+0M/8B4TjhqU8j30NjyMyGgYb1t6eke+ZYnbKJxIG7CwrpHg3dwNdKZ/DBCn1w==
   dependencies:
     args "^5.0.1"
     esm "^3.2.25"
@@ -2551,10 +2551,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-menu/menu/-/menu-0.1.2.tgz#2a3a9c8c3d142649b89a5c710eafa8ec3f0d7596"
   integrity sha512-3jgCWoZY31s/cjtTCAbGN0VqapwM7WiGZonb5KSkRT6egkwR1QAWBxe8Pe216u6R5EY/AGC8Z4Bf9wASYpz/1A==
 
-"@react-native-picker/picker@^1.9.11":
-  version "1.16.5"
-  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.16.5.tgz#f55f22bb8fcaec412170e8a1ac1c7b11818919e5"
-  integrity sha512-IYfMXdUsfQe4RBLJPZq6GoPkr2otOTZqej/gU93x+oIjrR+UCcCb0fsqmXHT8qX29E+0cEQZd/4bWnzbICHNrg==
+"@react-native-picker/picker@^1.16.7":
+  version "1.16.7"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.16.7.tgz#2c943572efcd21c218ee03f23ba1475544b24cf1"
+  integrity sha512-/QJxL4JniloFvdPDufQTiMQQbpucCQ0w7wvGhZQt0x3KVxvI1f/vzDO+669r/1yipcFZbSLcYIiQSMSpZtkqiQ==
 
 "@react-native-windows/cli@0.63.12":
   version "0.63.12"
@@ -3130,9 +3130,9 @@
     "@types/react" "^16"
 
 "@types/react-native@^0.63.0":
-  version "0.63.52"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.52.tgz#449beb4a413ec0f2c172cbf676a95f5b0952adf4"
-  integrity sha512-sBXvvtJaIUSXQLDh9NZitx1KHkKUdBLZy34lFKJaIXtpHIh5OEbBXeyUTFBtFwjk/RD0tneAtUqsdhheZRzAzw==
+  version "0.63.53"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.53.tgz#776dc1b05d649cb41b05fdff06e41ab9066538ca"
+  integrity sha512-hfUYHlfuy436viNct5uYNh2y40iWl1+iWhAQ18vzoKtyeW4WLNyccZf6OfkJdkqkHyH+bgvHLhbmnocpnQeKXg==
   dependencies:
     "@types/react" "*"
 

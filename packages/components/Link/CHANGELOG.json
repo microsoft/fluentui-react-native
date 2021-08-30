@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Fri, 27 Aug 2021 15:48:49 GMT",
+      "tag": "@fluentui-react-native/link_v0.14.0",
+      "version": "0.14.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update styling for link to match redlines",
+            "author": "krsiler@microsoft.com",
+            "commit": "a3ae628a1b81cbbcb2fb61d1cc793e56d1e71073",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 21:02:08 GMT",
+      "tag": "@fluentui-react-native/link_v0.13.17",
+      "version": "0.13.17",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/adapters to v0.7.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/link"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 26 Aug 2021 04:48:40 GMT",
       "tag": "@fluentui-react-native/link_v0.13.16",
       "version": "0.13.16",

@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/menu-button",
-  "version": "0.6.1",
+  "version": "0.6.3",
   "description": "A cross-platform MenuButton component using the Fluent Design System",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -24,14 +24,14 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/button": "^0.20.1",
+    "@fluentui-react-native/button": "^0.20.3",
     "@fluentui-react-native/component-cache": "^1.2.3",
-    "@fluentui-react-native/contextual-menu": "^0.10.17",
-    "@fluentui-react-native/icon": "^0.8.16",
-    "@fluentui-react-native/interactive-hooks": "^0.10.39",
-    "@fluentui-react-native/tokens": "^0.9.21",
+    "@fluentui-react-native/contextual-menu": "^0.10.18",
+    "@fluentui-react-native/icon": "^0.8.17",
+    "@fluentui-react-native/interactive-hooks": "^0.10.40",
+    "@fluentui-react-native/tokens": "^0.9.22",
     "@uifabricshared/foundation-composable": ">=0.9.1 <1.0.0",
-    "@uifabricshared/foundation-compose": "^1.10.10",
+    "@uifabricshared/foundation-compose": "^1.10.11",
     "@uifabricshared/foundation-settings": ">=0.10.1 <1.0.0",
     "react-native-svg": "^12.1.1"
   },
