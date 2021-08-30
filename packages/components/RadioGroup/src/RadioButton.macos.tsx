@@ -16,7 +16,6 @@ export const RadioButton = compose<IRadioButtonType>({
     const defaultComponentRef = React.useRef(null);
     const { content, buttonKey, disabled, componentRef = defaultComponentRef } = userProps;
     const info = React.useContext(RadioGroupContext);
-    const buttonRef = useViewCommandFocus(componentRef);
 
     // Reroute the native component's onPress event to RadioGroup's onChange
     const onPressRerouted = () => {
@@ -40,7 +39,7 @@ export const RadioButton = compose<IRadioButtonType>({
     const isSelected = info.selectedKey === buttonKey;
     const slotProps = mergeSettings<IRadioButtonSlotProps>(styleProps, {
       root: {
-        ref: buttonRef,
+        ref: componentRef,
         buttonKey: buttonKey,
         content: content,
         disabled: disabled,
