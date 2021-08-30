@@ -6,7 +6,6 @@ import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { RadioGroupContext } from './RadioGroup';
 import { radioButtonName, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonType } from './RadioButton.types';
-import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 
 const NativeRadioButtonView = ensureNativeComponent('FRNRadioButtonView');
 
