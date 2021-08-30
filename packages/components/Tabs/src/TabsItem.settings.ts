@@ -59,6 +59,15 @@ export const settings: IComposeSettings<TabsItemType> = [
           color: 'neutralForeground1',
           indicatorColor: 'neutralStroke1'
         },
+        _overrides: {
+          selected: {
+            indicator: {
+              style:{
+                marginHorizontal: 0,
+              },
+            },
+          },
+        },
       },
       selected: {
         tokens: {
