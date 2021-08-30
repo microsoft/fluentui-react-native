@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { tabsItemName, TabItemType, TabsItemProps } from './TabsItem.types';
-import { Text } from '@fluentui-react-native/text';
+import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './TabsItem.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useTabsItem } from './useTabsItem';
