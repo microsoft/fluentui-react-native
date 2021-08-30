@@ -42,7 +42,7 @@ export interface TabsTokens extends IForegroundColorTokens, FontTokens, IBackgro
   label?: string;
 }
 
-export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'>, Pick<ViewProps, 'accessibilityRole'> {
+export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'>, ViewProps {
   /**
    * Descriptive label for the Tabs. This will be displayed as the title of the Tabs to the user
    */
@@ -52,10 +52,6 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'>,
    * The key of the TabsItem that will initially be selected
    */
   defaultSelectedKey?: string;
-
-  accessible?: boolean;
-
-  focusable?: boolean;
 
   /**
    * The key of the selected option. If you provide this, you must maintain selection state by observing
