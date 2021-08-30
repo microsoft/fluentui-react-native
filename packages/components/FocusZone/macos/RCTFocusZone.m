@@ -107,17 +107,17 @@ static inline BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action
 
 static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 {
-  NSView *candidateView = view;
-  NSView *topLevelView = [[view window] contentView];
-  while (candidateView != nil && candidateView != topLevelView)
-  {
-    if ([candidateView isKindOfClass:[RCTFocusZone class]])
-    {
-      return (RCTFocusZone *)candidateView;
-    }
-    candidateView = [candidateView superview];
-  }
-  return nil;
+	NSView *candidateView = view;
+	NSView *topLevelView = [[view window] contentView];
+	while (candidateView != nil && candidateView != topLevelView)
+	{
+		if ([candidateView isKindOfClass:[RCTFocusZone class]])
+		{
+			return (RCTFocusZone *)candidateView;
+		}
+		candidateView = [candidateView superview];
+	}
+	return nil;
 }
 
 - (NSView *)nextViewToFocusForCondition:(IsViewLeadingCandidateForNextFocus)isLeadingCandidate
@@ -298,17 +298,12 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 	}
 	else
 	{
-		// If the next view is in a FocusZone, check whether we should
-		// prioritize a selected button within the zone.
+		// If the next view is in a FocusZone, focus the default tabbable element.
 		RCTFocusZone *nextFocusZone = GetFocusZoneAncestor(nextViewToFocus);
-		if ([nextFocusZone preferSelectedTabbableElement])
+		NSView *element = [nextFocusZone defaultTabbableElement];
+		if (element != nil)
 		{
-			IsViewLeadingCandidateForNextFocus selectedBlock = ^BOOL(NSView *candidateView)
-			{
-				return [candidateView isKindOfClass:[NSButton class]] && [(NSButton *)candidateView state] != NSControlStateValueOff;
-			};
-
-			nextViewToFocus = [nextFocusZone nextViewToFocusForCondition:selectedBlock] ?: nextViewToFocus;
+			nextViewToFocus = element;
 		}
 	}
 

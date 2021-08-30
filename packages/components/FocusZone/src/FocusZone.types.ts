@@ -37,12 +37,6 @@ export interface FocusZoneProps {
   use2DNavigation?: boolean;
 
   /**
-   *Specifies that when tabbing into the FocusZone, we should highlight a selected item.  For
-   example, we prefer to focus the selected button in a RadioGroup.
-   */
-  preferSelectedTabbableElement?: boolean;
-
-  /**
    * Callback called when “focus” event triggered in FocusZone
    */
   onFocus?: (e?: any) => void;

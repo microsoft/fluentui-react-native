@@ -6,26 +6,41 @@ import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { RadioGroupContext } from './RadioGroup';
 import { radioButtonName, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonType } from './RadioButton.types';
+import { useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 
 const NativeRadioButtonView = ensureNativeComponent('FRNRadioButtonView');
 
 export const RadioButton = compose<IRadioButtonType>({
   displayName: radioButtonName,
   usePrepareProps: (userProps: IRadioButtonProps, useStyling: IUseComposeStyling<IRadioButtonType>) => {
-    const { content, buttonKey, disabled } = userProps;
+    const defaultComponentRef = React.useRef(null);
+    const { content, buttonKey, disabled, componentRef = defaultComponentRef } = userProps;
     const info = React.useContext(RadioGroupContext);
+    const buttonRef = useViewCommandFocus(componentRef);
+
     // Reroute the native component's onPress event to RadioGroup's onChange
     const onPressRerouted = () => {
       // Prevent calls to RadioGroup's onChange on the currently selected button
       if (buttonKey != info.selectedKey) {
         info.onChange && info.onChange(buttonKey);
+        info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
       }
     };
+
+    /* We use the componentRef of the currently selected button to maintain the default tabbable
+    element in a RadioGroup. Since the componentRef isn't generated until after initial render,
+    we must update it once here. */
+    React.useEffect(() => {
+      if (buttonKey == info.selectedKey) {
+        info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
+      }
+    }, []);
 
     const styleProps = useStyling(userProps);
     const isSelected = info.selectedKey === buttonKey;
     const slotProps = mergeSettings<IRadioButtonSlotProps>(styleProps, {
       root: {
+        ref: buttonRef,
         buttonKey: buttonKey,
         content: content,
         disabled: disabled,

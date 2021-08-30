@@ -61,7 +61,7 @@ export const RadioGroup = compose<IRadioGroupType>({
     const slotProps = mergeSettings<IRadioGroupSlotProps>(styleProps, {
       root: { accessibilityLabel: accessibilityLabel ?? ariaLabel ?? label, accessibilityRole: 'radiogroup', ...rest },
       label: { children: label },
-      container: { isCircularNavigation: true, defaultTabbableElement: selectedButtonRef, preferSelectedTabbableElement: true },
+      container: { isCircularNavigation: true, defaultTabbableElement: selectedButtonRef },
     });
 
     return { slotProps, state };
