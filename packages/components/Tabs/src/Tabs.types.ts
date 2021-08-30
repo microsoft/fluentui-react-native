@@ -34,18 +34,18 @@ export interface TabsContextData {
    */
   tabsItemKeys?: string[];
 
-  /*
-   ** Array of enabled keys in the group
+  /**
+   * Array of enabled keys in the group
    */
   enabledKeys?: string[];
 
   /**
-   * A Map to for a TabItems corresponding view
+   * A Map to store the corresponding view of each TabsItem
    */
   views?: Map<string, React.ReactNode[]> | null;
 
-  /*
-   ** Reference to the Focus Container
+  /**
+   * Reference to the Focus Container
    */
   focusZoneRef: React.RefObject<any> | null;
 }

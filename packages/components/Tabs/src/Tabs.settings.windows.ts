@@ -12,14 +12,10 @@ export const settings: IComposeSettings<TabsType> = [
     root: {
       accessible: true,
       accessibilityRole: 'tablist',
-      style: {
-        // marginLeft: 10,
-      },
     },
     stack: {
       style: {
         flexDirection: 'row',
-        // marginLeft: -14,
         marginTop: 6,
       },
     },
