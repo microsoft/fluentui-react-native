@@ -1,8 +1,104 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Fri, 13 Aug 2021 16:12:26 GMT and should not be manually modified.
+This log was last generated on Fri, 27 Aug 2021 15:48:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.3
+
+Fri, 27 Aug 2021 15:48:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.20.3 (v.kozlova13@gmail.com)
+
+## 0.6.2
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- macOS MenuButton uses intrinsicContentSize (sanajmi@microsoft.com)
+- Fixed bug: Using keyboard for PrimaryButton causes freeze of the Tester (v.kozlova13@gmail.com)
+
+## 0.6.1
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.6.0
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Minor changes
+
+- Renamed icon to start icon (v.kozlova13@gmail.com)
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.20.0 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.8.15 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/contextual-menu to v0.10.16 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.38 (sanajmi@microsoft.com)
+
+## 0.5.1
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Support menuButton images and custom styles on macOS (sanajmi@microsoft.com)
+
+## 0.5.0
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Minor changes
+
+- Changed styling for the Button. Added new exampled to MenuButton (v.kozlova13@gmail.com)
+
+### Patches
+
+- Fix bug where the defualt content of the macOS MEnuButton was not empty (sanajmi@microsoft.com)
+- Change the macOS MenuButton style (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/button to v0.19.0 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/contextual-menu to v0.10.14 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/tokens to v0.9.20 (dake.3601@gmail.com)
+
+## 0.4.15
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.10.13 (email not defined)
+
+## 0.4.14
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.18.11 (ruaraki@microsoft.com)
+
+## 0.4.13
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.18.10 (ruaraki@microsoft.com)
+
+## 0.4.12
+
+Tue, 17 Aug 2021 20:02:00 GMT
+
+### Patches
+
+- MSF -> FRN for most objective C prefixes (sanajmi@microsoft.com)
 
 ## 0.4.11
 

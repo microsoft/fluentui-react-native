@@ -34,7 +34,7 @@ export const RadioGroup = compose<IRadioGroupType>({
   displayName: radioGroupName,
 
   usePrepareProps: (userProps: IRadioGroupProps, useStyling: IUseComposeStyling<IRadioGroupType>) => {
-    const { label, ariaLabel, selectedKey, defaultSelectedKey, ...rest } = userProps;
+    const { label, ariaLabel, accessibilityLabel, selectedKey, defaultSelectedKey, ...rest } = userProps;
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
     const data = useSelectedKey(selectedKey || defaultSelectedKey || null, userProps.onChange);
@@ -58,13 +58,8 @@ export const RadioGroup = compose<IRadioGroupType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
-    const ariaRoles = {
-      accessibilityRole: 'radiogroup',
-      accessibilityLabel: ariaLabel || label,
-    };
-
     const slotProps = mergeSettings<IRadioGroupSlotProps>(styleProps, {
-      root: { rest, ...ariaRoles },
+      root: { accessibilityLabel: accessibilityLabel ?? ariaLabel ?? label, accessibilityRole: 'radiogroup', ...rest },
       label: { children: label },
       container: { isCircularNavigation: true, defaultTabbableElement: selectedButtonRef },
     });

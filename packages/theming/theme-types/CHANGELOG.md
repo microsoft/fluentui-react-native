@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Fri, 13 Aug 2021 16:12:26 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.0
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Minor changes
+
+- Add HC plumbing (ruaraki@microsoft.com)
+
+## 0.11.3
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.11.2
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Rename tokens to avoid name clash, initial token re-population (ruaraki@microsoft.com)
 
 ## 0.11.1
 

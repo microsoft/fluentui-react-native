@@ -4,7 +4,8 @@ import { expanderName, ExpanderType, ExpanderProps, ExpanderViewProps } from './
 import { compose, mergeProps, withSlots, UseSlots, buildProps } from '@fluentui-react-native/framework';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
-const ExpanderComponent = ensureNativeComponent('MSFExpanderView');
+const ExpanderComponent = ensureNativeComponent('ExpanderView');
+
 function delay(ms: number) {
   return new Promise( resolve => setTimeout(resolve, ms) );
 }
