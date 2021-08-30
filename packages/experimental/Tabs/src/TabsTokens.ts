@@ -8,9 +8,4 @@ export const defaultTabsTokens: TokenSettings<TabsTokens, Theme> = (t: Theme) =>
     color: t.colors.buttonText,
     borderColor: t.colors.buttonBorder,
     iconColor: t.colors.iconColor,
-    variant: 'subheaderSemibold',
-    minHeight: 32,
-    minWidth: 80,
-    borderWidth: 1,
-    borderRadius: 2,
   } as TabsTokens);

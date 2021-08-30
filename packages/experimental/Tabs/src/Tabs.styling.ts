@@ -11,12 +11,15 @@ export const stylingSettings: UseStylingOptions<TabsProps, TabsSlotProps, TabsTo
       () => ({
         style: {
           display: 'flex',
+          minHeight: 32,
+          minWidth: 80,
         },
       }),
       [],
     ),
     label: buildProps(
       (tokens: TabsTokens, theme: Theme) => ({
+        variant: 'subheaderSemibold',
         style: {
           ...fontStyles.from(tokens, theme),
         },
