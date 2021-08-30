@@ -3,7 +3,6 @@ import { View, ViewProps } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';
-import type { IViewWin32Props } from '@office-iss/react-native-win32';
 
 export const tabsName = 'Tabs';
 
@@ -40,11 +39,10 @@ export interface TabsContextData {
 }
 
 export interface TabsTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens {
-  label?: string,
+  label?: string;
 }
 
-
-export interface TabsProps extends  Pick<FocusZoneProps, 'isCircularNavigation'>, Pick<ViewProps, 'accessibilityRole'> {
+export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'>, Pick<ViewProps, 'accessibilityRole'> {
   /**
    * Descriptive label for the Tabs. This will be displayed as the title of the Tabs to the user
    */
@@ -82,7 +80,6 @@ export interface TabsProps extends  Pick<FocusZoneProps, 'isCircularNavigation'>
    */
   headersOnly?: boolean;
 
-
   /**
    * A RefObject to access Tabs.
    */
@@ -92,7 +89,6 @@ export interface TabsProps extends  Pick<FocusZoneProps, 'isCircularNavigation'>
 
   testID?: string;
 }
-
 
 export interface TabsInfo {
   headersOnly?: boolean;
@@ -104,10 +100,10 @@ export interface TabsState {
   state: {
     context?: TabsContextData;
     info: TabsInfo;
-  }
+  };
 }
 export interface TabsSlotProps {
-  root: React.PropsWithRef<IViewWin32Props>;
+  root: React.PropsWithRef<ViewProps>;
   label: TextProps;
   container: FocusZoneProps;
   stack: ViewProps;
