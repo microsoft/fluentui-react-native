@@ -26,11 +26,11 @@ const basicRadioGroup: React.FunctionComponent = () => {
 
   return (
     <View>
-      <RadioGroup label="Uncontrolled RadioGroup" defaultSelectedKey="B" onChange={onChange}>
-        <RadioButton content="Option A" buttonKey="A" accessibilityLabel="Test Accessibility Label" />
-        <RadioButton content="Option B" buttonKey="B" />
-        <RadioButton content="Option C (disabled)" buttonKey="C" disabled={true} />
-        <RadioButton content="Option D" buttonKey="D" />
+      <RadioGroup label="Uncontrolled RadioGroup" defaultSelectedKey="X" onChange={onChange}>
+        <RadioButton content="Option W" buttonKey="W" accessibilityLabel="Test Accessibility Label" />
+        <RadioButton content="Option X" buttonKey="X" />
+        <RadioButton content="Option Y (disabled)" buttonKey="C" disabled={true} />
+        <RadioButton content="Option Z" buttonKey="Z" />
       </RadioGroup>
       <Separator />
       <RadioGroup label="Controlled RadioGroup" selectedKey={selectedKey} onChange={onChange2}>
