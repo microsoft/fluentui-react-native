@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Add logic to pick a selected button when tabbing to a FocusZone",
-  "packageName": "@fluentui-react-native/separator",
-  "email": "chripear@microsoft.com",
-  "dependentChangeType": "none"
-}
