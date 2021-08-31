@@ -180,9 +180,9 @@ const tabsSettingSelectedKey: React.FunctionComponent = () => {
 const tabsShowHideItem: React.FunctionComponent = () => {
   const [showFirstItem, setshowFirstItem] = React.useState(true);
 
-  const toggleShowFirstItem = () => {
+  const toggleShowFirstItem = React.useCallback(() => {
     setshowFirstItem(!showFirstItem);
-  };
+  }, [showFirstItem]);
 
   return (
     <View style={stackStyle}>
