@@ -40,9 +40,9 @@ export const TabsItem = compose<TabsItemType>({
     const info = React.useContext(TabsContext);
 
     const changeSelection = () => {
-        info.onTabsClick && info.onTabsClick(itemKey);
-        info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
-        info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
+      info.onTabsClick && info.onTabsClick(itemKey);
+      info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
+      info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
     };
 
     // Ensure focus is placed on tabsItem after click
