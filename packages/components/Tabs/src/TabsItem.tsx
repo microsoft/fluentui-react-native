@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
@@ -31,7 +31,7 @@ export const TabsItem = compose<TabsItemType>({
       testID,
       itemKey,
       itemCount,
-      accessibilityPosInSet,
+      accessibilityPositionInSet,
       accessibilitySetSize,
       ...rest
     } = userProps;
@@ -70,7 +70,7 @@ export const TabsItem = compose<TabsItemType>({
       },
     };
 
-    const buttonRef = useViewCommandFocus(componentRef);
+    const buttonRef = Platform.OS === 'macos' ? componentRef : useViewCommandFocus(componentRef);
 
     /* We use the componentRef of the currently selected tabsItem to maintain the default tabbable
     element in Tabs. Since the componentRef isn't generated until after initial render,
@@ -107,9 +107,10 @@ export const TabsItem = compose<TabsItemType>({
         accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: userProps.disabled, selected: info.selectedKey === userProps.itemKey },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
-        accessibilityPositionInSet: accessibilityPosInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
+        accessibilityPositionInSet: accessibilityPositionInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
         accessibilitySetSize: accessibilitySetSize ?? info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
+        focusable: Platform.OS === 'macos' ? !userProps.disabled : userProps.focusable ?? true,
       },
       content: { children: headerText + countText, testID: testID },
       icon: createIconProps(icon),

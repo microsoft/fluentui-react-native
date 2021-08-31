@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "tabs control for macos",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "sriyaaluru@gmail.com",
+  "dependentChangeType": "patch"
+}

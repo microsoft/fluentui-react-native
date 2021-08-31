@@ -138,7 +138,7 @@ To add a native module that wraps a FluentUI Apple control:
    - We specify `MicrosoftFluentUI` as dependency, which ensures the source code for FluentUI Apple is pulled in while compiling this component. Consider using a subspec (i.e `MicrosoftFluentUI/Avatar_ios`) if possible.
 1. Create the `ios/` and `macos/` subdirectories (whichever platforms you need) in your components directory
 1. Inside each new directory you just created, you will have at a minimum of 3 files (2 if you skip Swift and only use objective c)
-   1. `MSF<new-component>ViewManager.h / m`
+   1. `FRN<new-component>ViewManager.h / m`
       - This is the Objective-C file needed because Swift does not support macros and React Native requires them to map JS props to the native properties of the control. (Macros like `RCT_EXPORT_VIEW_PROPERTY` and `RCT_EXPORT_METHOD`). The .h file should at the minumum import `<React/RCTViewManager.h>`
    1. `<new-component>ViewManager.swift`
       - This Swift file imports FluentUI Apple, and creates a subclass of RCTViewManager to instantiate and return your FluentUI Apple control. Objective-C methods like `requiresMainQueueSetup` and `constantsToExport` can be overridden here. It's important to note that in order for properties and methods to be available to React Native, they must add the `@objc` decorator to it's declaration.
@@ -167,8 +167,8 @@ To add a native Windows module:
    4. Start metro via command line
       - Navigate to windows folder (`packages\experimental\<new-component>\windows`)
       - Run `yarn start`
-   5. Run application 
-  
+   5. Run application
+
 ## Creating a pull request
 
 Thanks for your interest in contributing to the fluentui-react-native! We welcome all contributions. Here's information on how to prepare your change for a pull request.

@@ -1,16 +1,15 @@
 import { ThemeReference } from '@fluentui-react-native/theme';
 import { getAndroidTheme } from './androidTheme';
 import { Appearance } from 'react-native';
-import { Theme } from '@fluentui-react-native/theme-types';
-
-export interface ThemeOptions {
-  appearance?: 'light' | 'dark' | 'dynamic';
-  paletteName?: string;
-}
+import { Theme, ThemeOptions } from '@fluentui-react-native/theme-types';
 
 export function createAndroidTheme(options: ThemeOptions = {}): ThemeReference {
   const themeRef = new ThemeReference({} as Theme, () => {
-    const current = options.appearance == 'dynamic' ? (Appearance && Appearance.getColorScheme()) || 'light' : options.appearance;
+    // Stub out HC on Android
+    const current =
+      options.appearance == 'dynamic' || options.appearance == 'highContrast'
+        ? (Appearance && Appearance.getColorScheme()) || 'light'
+        : options.appearance;
     return getAndroidTheme(current);
   });
 

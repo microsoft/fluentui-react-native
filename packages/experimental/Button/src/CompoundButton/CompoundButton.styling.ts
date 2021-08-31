@@ -7,24 +7,47 @@ import { ButtonTokens } from '../Button.types';
 export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundButtonSlotProps, CompoundButtonTokens> = {
   tokens: [
     defaultButtonTokens,
-    (t: Theme) => ({
-      minHeight: 72,
-      secondaryContentFont: {
-        variant: 'secondaryStandard',
-      },
-      ghost: {
-        secondaryContentColor: t.colors.ghostSecondaryContent,
+    (t: Theme): ButtonTokens =>
+      ({
+        minHeight: 72,
+        secondaryContentFont: {
+          variant: 'secondaryStandard',
+        },
+        secondaryContentColor: t.colors.defaultSecondaryContent,
         hovered: {
-          secondaryContentColor: t.colors.ghostHoveredSecondaryContent,
+          secondaryContentColor: t.colors.defaultHoveredSecondaryContent,
         },
         focused: {
-          secondaryContentColor: t.colors.ghostFocusedSecondaryContent,
+          secondaryContentColor: t.colors.defaultFocusedSecondaryContent,
         },
         pressed: {
-          secondaryContentColor: t.colors.ghostPressedSecondaryContent,
+          secondaryContentColor: t.colors.defaultPressedSecondaryContent,
         },
-      } as ButtonTokens,
-    }),
+        primary: {
+          secondaryContentColor: t.colors.brandedSecondaryContent,
+          hovered: {
+            secondaryContentColor: t.colors.brandedHoveredSecondaryContent,
+          },
+          focused: {
+            secondaryContentColor: t.colors.brandedFocusedSecondaryContent,
+          },
+          pressed: {
+            secondaryContentColor: t.colors.brandedPressedSecondaryContent,
+          },
+        },
+        ghost: {
+          secondaryContentColor: t.colors.ghostSecondaryContent,
+          hovered: {
+            secondaryContentColor: t.colors.ghostHoveredSecondaryContent,
+          },
+          focused: {
+            secondaryContentColor: t.colors.ghostFocusedSecondaryContent,
+          },
+          pressed: {
+            secondaryContentColor: t.colors.ghostPressedSecondaryContent,
+          },
+        },
+      } as ButtonTokens),
     compoundButtonName,
   ],
   states: buttonStates,
