@@ -69,9 +69,6 @@ export const Tabs = compose<TabsType>({
     // Stores views to be displayed
     const map = new Map<string, React.ReactNode[]>();
 
-    const pressable = useAsPressable({
-      ...rest,
-    });
 
     const state: TabsState = {
       context: {
@@ -92,6 +89,10 @@ export const Tabs = compose<TabsType>({
 
 
     if (Platform.OS == 'windows') {
+      const pressable = useAsPressable({
+        ...rest,
+      });
+
       const onKeyDown = (ev: any) => {
         if (ev.nativeEvent.key === 'ArrowRight' || ev.nativeEvent.key === 'ArrowLeft') {
           const length = state.context.enabledKeys.length;
@@ -114,13 +115,13 @@ export const Tabs = compose<TabsType>({
         }
       };
 
-      const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
+      const windowsSlotProps = mergeSettings<TabsSlotProps>(styleProps, {
         root: { ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist', ...pressable.props, ...rest},
         label: { children: label },
         stack: { focusable: true, ref: focusZoneRef, onKeyDown: onKeyDown},
       });
 
-      return { slotProps, state };
+      return { windowsSlotProps, state };
     }
 
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
