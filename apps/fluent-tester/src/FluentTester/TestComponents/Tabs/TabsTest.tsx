@@ -250,7 +250,7 @@ export const TabsTest: React.FunctionComponent = () => {
     win32Status: 'Experimental',
     uwpStatus: 'Experimental',
     iosStatus: 'Backlog',
-    macosStatus: 'Backlog',
+    macosStatus: 'Experimental',
     androidStatus: 'Backlog',
   };
 

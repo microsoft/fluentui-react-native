@@ -73,7 +73,7 @@ export const TabsItem = compose<TabsItemType>({
       },
     };
 
-    const buttonRef = useViewCommandFocus(componentRef);
+    const buttonRef = Platform.OS === 'macos' ? componentRef : useViewCommandFocus(componentRef);
 
     /* We use the componentRef of the currently selected tabsItem to maintain the default tabbable
     element in Tabs. Since the componentRef isn't generated until after initial render,
@@ -113,6 +113,7 @@ export const TabsItem = compose<TabsItemType>({
         accessibilityPositionInSet: accessibilityPositionInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
         accessibilitySetSize: accessibilitySetSize ?? info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
+        focusable: Platform.OS === 'macos' ? !userProps.disabled : userProps.focusable ?? true,
       },
       content: { children: headerText + countText, testID: testID },
       icon: createIconProps(icon),
