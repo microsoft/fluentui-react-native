@@ -122,16 +122,15 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 	return nil;
 }
 
-
 - (BOOL)acceptsFirstResponder
 {
 	// Accept firstResponder on FocusZone itself in order to reassign it to defaultTabbableElement.
-	return YES;
+	return !_disabled;
 }
 
 - (BOOL)becomeFirstResponder
 {
-	return [[self window] makeFirstResponder:_defaultTabbableElement ?: [self nextValidKeyView]];
+	return !_disabled && [[self window] makeFirstResponder:_defaultTabbableElement ?: [self nextValidKeyView]];
 }
 
 - (NSView *)nextViewToFocusForCondition:(IsViewLeadingCandidateForNextFocus)isLeadingCandidate
