@@ -21,7 +21,7 @@ export const settings: IComposeSettings<TabsType> = [
     },
     label: {
       style: {
-        marginLeft: 10,
+        marginStart: 10,
       },
     },
   },
