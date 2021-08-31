@@ -12,11 +12,6 @@ export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: T
     iconColor: t.colors.buttonIcon,
     indicatorColor: t.colors.transparent,
     variant: 'bodyStandard',
-    minHeight: 32,
-    minWidth: 80,
-    borderWidth: 2,
-    borderRadius: 4,
-
     disabled: {
       backgroundColor: t.colors.buttonDisabledBackground,
       color: t.colors.neutralForegroundDisabled,
