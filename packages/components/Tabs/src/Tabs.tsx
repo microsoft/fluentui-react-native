@@ -90,29 +90,30 @@ export const Tabs = compose<TabsType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
-    const onKeyDown = (ev: any) => {
-      if (ev.nativeEvent.key === 'ArrowRight' || ev.nativeEvent.key === 'ArrowLeft') {
-        const length = state.context.enabledKeys.length;
-        const currTabItemIndex = state.context.enabledKeys.findIndex(x => x == state.context.selectedKey)
-        let newCurrTabItemIndex;
-        if (ev.nativeEvent.key === 'ArrowRight') {
-          if (isCircularNavigation || !(currTabItemIndex + 1 == length)) {
-            newCurrTabItemIndex = (currTabItemIndex + 1) % length;
-            state.context.selectedKey = state.context.enabledKeys[newCurrTabItemIndex];
-            data.onKeySelect(state.context.selectedKey);
-          }
-        }
-        if (ev.nativeEvent.key === 'ArrowLeft') {
-          if (isCircularNavigation || !(currTabItemIndex == 0)) {
-            newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
-            state.context.selectedKey = state.context.enabledKeys[newCurrTabItemIndex];
-            data.onKeySelect(state.context.selectedKey);
-          }
-        }
-      }
-    };
 
     if (Platform.OS == 'windows') {
+      const onKeyDown = (ev: any) => {
+        if (ev.nativeEvent.key === 'ArrowRight' || ev.nativeEvent.key === 'ArrowLeft') {
+          const length = state.context.enabledKeys.length;
+          const currTabItemIndex = state.context.enabledKeys.findIndex(x => x == state.context.selectedKey)
+          let newCurrTabItemIndex;
+          if (ev.nativeEvent.key === 'ArrowRight') {
+            if (isCircularNavigation || !(currTabItemIndex + 1 == length)) {
+              newCurrTabItemIndex = (currTabItemIndex + 1) % length;
+              state.context.selectedKey = state.context.enabledKeys[newCurrTabItemIndex];
+              data.onKeySelect(state.context.selectedKey);
+            }
+          }
+          if (ev.nativeEvent.key === 'ArrowLeft') {
+            if (isCircularNavigation || !(currTabItemIndex == 0)) {
+              newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
+              state.context.selectedKey = state.context.enabledKeys[newCurrTabItemIndex];
+              data.onKeySelect(state.context.selectedKey);
+            }
+          }
+        }
+      };
+
       const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
         root: { ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist', ...pressable.props, ...rest},
         label: { children: label },
