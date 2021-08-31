@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Implemented Tabs Control",
-  "packageName": "@fluentui/react-native",
-  "email": "dake.3601@gmail.com",
-  "dependentChangeType": "patch"
-}
