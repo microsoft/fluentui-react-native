@@ -114,11 +114,6 @@ export interface TabsItemProps extends Omit<IWithPressableOptions<IViewWin32Prop
     */
    disabled?: boolean;
 
-   /**
-    * An accessibility label for narrator.
-    */
-   accessibilityLabel?: string;
-
   /**
    * Source URL or name of the icon to show on the Button.
    */
