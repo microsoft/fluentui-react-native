@@ -114,7 +114,7 @@ export const Tabs = compose<TabsType>({
           }
         }
       };
-      /* Extra props are needed because FocusZone is not implemented on windows, GH 964.
+      /* Extra props are needed because FocusZone is not implemented on windows, GH #964.
       The ref focusZoneRef is used to set focus on Tabs when selecting a TabsItem and onKeyDown manages keyboarding */
       const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
         root: { ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist', ...pressable.props, ...rest},
@@ -189,7 +189,7 @@ export const Tabs = compose<TabsType>({
   slots: {
     root: View,
     label: Text,
-    container: Platform.OS !== 'windows' ? FocusZone : React.Fragment, // FocusZone not implemented on windows, GH 964.
+    container: Platform.OS !== 'windows' ? FocusZone : React.Fragment, // FocusZone not implemented on windows, GH #964.
     stack: View,
     tabPanel: { slotType: View, filter: filterViewProps },
   },

@@ -45,7 +45,7 @@ export interface TabsContextData {
   views?: Map<string, React.ReactNode[]> | null;
 
   /**
-   * Reference to the Focus Container as there is no FocusZone on windows, GH 964.
+   * Reference to the Focus Container as there is no FocusZone on windows, GH #964.
    */
   focusZoneRef: React.RefObject<any> | null;
 }
