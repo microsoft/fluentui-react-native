@@ -115,13 +115,13 @@ export const Tabs = compose<TabsType>({
         }
       };
 
-      const windowsSlotProps = mergeSettings<TabsSlotProps>(styleProps, {
+      const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
         root: { ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist', ...pressable.props, ...rest},
         label: { children: label },
         stack: { focusable: true, ref: focusZoneRef, onKeyDown: onKeyDown},
       });
 
-      return { windowsSlotProps, state };
+      return { slotProps, state };
     }
 
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
