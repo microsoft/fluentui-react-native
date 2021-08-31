@@ -4,7 +4,7 @@ import { IRenderData } from '@uifabricshared/foundation-composable';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { ITextProps } from '@fluentui-react-native/text';
-import { IconProps } from '@fluentui-react-native/icon';
+import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import { FontTokens, IBackgroundColorTokens, IBorderTokens, IForegroundColorTokens } from '@fluentui-react-native/tokens';
 import { IPressableProps } from '@fluentui-react-native/pressable';
 
@@ -69,8 +69,6 @@ export interface TabsItemProps extends IPressableProps {
 
   testID?: string;
 }
-
-type IconSourcesType = number | string | IconProps;
 
 export interface TabsItemTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens, IBorderTokens {
   /**
