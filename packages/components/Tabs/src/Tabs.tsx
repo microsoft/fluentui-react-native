@@ -69,7 +69,6 @@ export const Tabs = compose<TabsType>({
     // Stores views to be displayed
     const map = new Map<string, React.ReactNode[]>();
 
-
     const state: TabsState = {
       context: {
         selectedKey: selectedKey ?? data.selectedKey,
@@ -86,7 +85,6 @@ export const Tabs = compose<TabsType>({
     };
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
-
 
     if (Platform.OS == 'windows') {
       const pressable = useAsPressable({
@@ -114,6 +112,7 @@ export const Tabs = compose<TabsType>({
           }
         }
       };
+
       /* GH #964, Extra props are needed because FocusZone is not implemented on windows.
       The ref focusZoneRef is used to set focus on Tabs when selecting a TabsItem and onKeyDown manages keyboarding */
       const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
