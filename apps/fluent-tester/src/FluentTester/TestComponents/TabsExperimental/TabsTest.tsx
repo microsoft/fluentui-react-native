@@ -77,7 +77,7 @@ const onTabsClickEvent: React.FunctionComponent = () => {
 
   return (
     <View style={stackStyle}>
-      <Text>Last onTabsClick from: {selectedKey}</Text>
+      <Text>{'Last onTabsClick from:' + selectedKey}</Text>
       <Tabs label="Tabs" onTabsClick={onTabsClick} selectedKey={selectedKey}>
         <TabsItem headerText="Home" itemKey="home_key">
           <Text>Tabs #1</Text>
