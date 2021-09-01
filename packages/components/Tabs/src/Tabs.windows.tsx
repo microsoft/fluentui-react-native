@@ -23,7 +23,6 @@ export const TabsContext = React.createContext<TabsContextData>({
     return;
   },
   tabsItemKeys: [],
-  enabledKeys: [],
   views: null,
   focusZoneRef: null,
 });
@@ -91,20 +90,20 @@ export const Tabs = compose<TabsType>({
 
     const onKeyDown = (ev: any) => {
       if (ev.nativeEvent.key === 'ArrowRight' || ev.nativeEvent.key === 'ArrowLeft') {
-        const length = state.context.enabledKeys.length;
-        const currTabItemIndex = state.context.enabledKeys.findIndex(x => x == state.context.selectedKey)
+        const length = state.info.enabledKeys.length;
+        const currTabItemIndex = state.info.enabledKeys.findIndex(x => x == state.context.selectedKey)
         let newCurrTabItemIndex;
         if (ev.nativeEvent.key === 'ArrowRight') {
           if (isCircularNavigation || !(currTabItemIndex + 1 == length)) {
             newCurrTabItemIndex = (currTabItemIndex + 1) % length;
-            state.context.selectedKey = state.context.enabledKeys[newCurrTabItemIndex];
+            state.context.selectedKey = state.info.enabledKeys[newCurrTabItemIndex];
             data.onKeySelect(state.context.selectedKey);
           }
         }
         else {
           if (isCircularNavigation || !(currTabItemIndex == 0)) {
             newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
-            state.context.selectedKey = state.context.enabledKeys[newCurrTabItemIndex];
+            state.context.selectedKey = state.info.enabledKeys[newCurrTabItemIndex];
             data.onKeySelect(state.context.selectedKey);
           }
         }
@@ -142,7 +141,7 @@ export const Tabs = compose<TabsType>({
       });
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore - TODO, fix typing error
-      renderData.state.context.enabledKeys = React.Children.map(children, (child: React.ReactChild) => {
+      renderData.state.info.enabledKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
           if (!child.props.disabled) {
             return child.props.itemKey;

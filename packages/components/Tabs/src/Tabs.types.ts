@@ -35,11 +35,6 @@ export interface TabsContextData {
   tabsItemKeys?: string[];
 
   /**
-   * Array of enabled keys in the group
-   */
-  enabledKeys?: string[];
-
-  /**
    * A Map to store the corresponding view of each TabsItem
    */
   views?: Map<string, React.ReactNode[]> | null;
@@ -53,6 +48,10 @@ export interface TabsContextData {
 export interface TabsInfo {
   headersOnly?: boolean;
   label?: boolean,
+  /**
+   * Array of enabled keys in the group
+   */
+  enabledKeys?: string[];
 }
 
 export interface TabsState {
