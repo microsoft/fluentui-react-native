@@ -103,7 +103,7 @@ export const Tabs = compose<TabsType>({
               data.onKeySelect(state.context.selectedKey);
             }
           }
-          if (ev.nativeEvent.key === 'ArrowLeft') {
+          else {
             if (isCircularNavigation || !(currTabItemIndex == 0)) {
               newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
               state.context.selectedKey = state.context.enabledKeys[newCurrTabItemIndex];
