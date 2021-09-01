@@ -10,32 +10,32 @@ export const tabsName = 'Tabs';
 
 export interface TabsContextData {
   /**
-   * The currently selected TabsItem's key
+   * The currently selected TabsItem's key.
    */
   selectedKey: string | null;
 
   /**
-   * Index of currently selected key
+   * Returns the index of the currently selected key.
    */
   getTabId?: (key: string, index: number) => string | null;
 
   /**
-   * Updates the selected tabsItem and calls the client’s onTabsClick callback
+   * Updates the selected tabsItem and calls the client’s onTabsClick callback.
    */
   onTabsClick?: (key: string) => void;
 
   /**
-   * Updates the selected tabsItem's ref to set as the default tabbable element
+   * Updates the selected tabsItem's ref to set as the default tabbable element.
    */
   updateSelectedTabsItemRef?: (ref: React.RefObject<any>) => void;
 
   /**
-   * Array of tabsItem keys in the group
+   * Array of tabsItem keys in the group.
    */
   tabsItemKeys?: string[];
 
   /**
-   * A Map to for a TabItems corresponding view
+   * A Map to store the corresponding view of each TabsItem.
    */
   views?: Map<string, React.ReactNode[]> | null;
 }
@@ -52,12 +52,12 @@ export interface TabsState {
 
 export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> {
   /**
-   * Descriptive label for the Tabs. This will be displayed as the title of the Tabs to the user
+   * Descriptive label for the Tabs. This will be displayed as the title of the Tabs to the user.
    */
   label?: string;
 
   /**
-   * The key of the TabsItem that will initially be selected
+   * The key of the TabsItem that will initially be selected.
    */
   defaultSelectedKey?: string;
 
@@ -74,7 +74,7 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
   selectedKey?: string;
 
   /**
-   * Callback for receiving a notification when the choice has been changed
+   * Callback for receiving a notification when the choice has been changed.
    */
   onTabsClick?: (key: string) => void;
 
@@ -85,7 +85,7 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
   getTabId?: (key: string, index: number) => string;
 
   /**
-   * Sets whether to only render the header
+   * Sets whether to only render the header.
    */
   headersOnly?: boolean;
 

@@ -1,3 +1,8 @@
+/*
+Disclaimer: these styles do not follow a specific figma design, but are
+meant to be placeholders until new designs are developed
+*/
+
 import { tabsItemName, TabsItemType } from './TabsItem.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 import type { IViewProps } from '@fluentui-react-native/adapters';
@@ -7,11 +12,8 @@ export const tabsItemSelectActionLabel = 'Select a TabsItem';
 export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
-      color: 'neutralStrokeAccessible',
+      color: 'bodyText',
       variant: 'bodyStandard',
-      borderWidth: 2,
-      borderColor: 'transparent',
-      borderRadius: 4,
       indicatorColor: 'transparent',
     },
     root: {
@@ -47,17 +49,18 @@ export const settings: IComposeSettings<TabsItemType> = [
         justifyContent: 'center',
       },
     },
-    _precedence: ['hovered', 'selected', 'focused', 'disabled', 'pressed'],
+    _precedence: ['hovered', 'selected', 'disabled'],
     _overrides: {
       disabled: {
         tokens: {
-          color: 'neutralForegroundDisabled',
+          color: 'buttonTextDisabled',
+          indicatorColor: 'transparent',
+          fontWeight: 'normal',
         },
       },
       hovered: {
         tokens: {
-          color: 'neutralForeground1',
-          indicatorColor: 'neutralStroke1'
+          fontWeight: 'bold',
         },
         _overrides: {
           selected: {
@@ -71,30 +74,8 @@ export const settings: IComposeSettings<TabsItemType> = [
       },
       selected: {
         tokens: {
-          color: 'neutralForeground1',
-          variant: 'bodySemibold',
-          indicatorColor: 'brandStroke1'
-        },
-        _overrides: {
-          pressed: {
-            tokens: {
-              indicatorColor: 'neutralStroke1',
-            },
-          },
-        },
-      },
-
-      pressed: {
-        tokens: {
-          color: 'neutralForeground1',
-          indicatorColor: 'brandStroke1',
-        },
-      },
-
-      focused: {
-        tokens: {
-          color: 'neutralForeground1',
-          borderColor: 'neutralForeground1',
+          indicatorColor: 'accentButtonBackground',
+          fontWeight: 'bold',
         },
       },
     },
