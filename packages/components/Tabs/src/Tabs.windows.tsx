@@ -2,17 +2,17 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
-import { FocusZone } from '@fluentui-react-native/focus-zone';
-import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, TabsContextData } from './Tabs.types';
+import { tabsName, TabsType, TabsProps, TabsSlotProps, TabsRenderData } from './Tabs.types';
+import { WinTabsContextData, TabsState } from './Tabs.types.windows';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings } from './Tabs.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { foregroundColorTokens, textTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
-import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+import { useSelectedKey, useAsPressable } from '@fluentui-react-native/interactive-hooks';
 
-export const TabsContext = React.createContext<TabsContextData>({
+export const TabsContext = React.createContext<WinTabsContextData>({
   selectedKey: null,
   onTabsClick: (/* key: string */) => {
     return;
@@ -24,6 +24,7 @@ export const TabsContext = React.createContext<TabsContextData>({
     return;
   },
   tabsItemKeys: [],
+  enabledKeys: [],
   views: null,
   focusZoneRef: null,
 });
@@ -32,6 +33,7 @@ export const Tabs = compose<TabsType>({
   displayName: tabsName,
 
   usePrepareProps: (userProps: TabsProps, useStyling: IUseComposeStyling<TabsType>) => {
+    const focusZoneRef = React.useRef(null);
     const defaultComponentRef = React.useRef(null);
     const {
       label,
@@ -48,7 +50,7 @@ export const Tabs = compose<TabsType>({
     // This hook updates the Selected TabsItem and calls the customer's onTabsClick function. This gets called after a TabsItem is pressed.
     const data = useSelectedKey(selectedKey || defaultSelectedKey || null, userProps.onTabsClick);
 
-    const [selectedTabsItemRef, setSelectedTabsItemRef] = React.useState(React.useRef<View>(null));
+    const [, setSelectedTabsItemRef] = React.useState(React.useRef<View>(null));
 
     const onSelectTabsItemRef = React.useCallback(
       (ref: React.RefObject<View>) => {
@@ -74,7 +76,7 @@ export const Tabs = compose<TabsType>({
         getTabId: onChangeTabId,
         updateSelectedTabsItemRef: onSelectTabsItemRef,
         views: map,
-        focusZoneRef: null,
+        focusZoneRef: focusZoneRef,
       },
       info: {
         headersOnly: headersOnly ?? false,
@@ -84,10 +86,38 @@ export const Tabs = compose<TabsType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
+    const pressable = useAsPressable({
+      ...rest,
+    });
+
+    const onKeyDown = (ev: any) => {
+      if (ev.nativeEvent.key === 'ArrowRight' || ev.nativeEvent.key === 'ArrowLeft') {
+        const length = state.context.enabledKeys.length;
+        const currTabItemIndex = state.context.enabledKeys.findIndex(x => x == state.context.selectedKey)
+        let newCurrTabItemIndex;
+        if (ev.nativeEvent.key === 'ArrowRight') {
+          if (isCircularNavigation || !(currTabItemIndex + 1 == length)) {
+            newCurrTabItemIndex = (currTabItemIndex + 1) % length;
+            state.context.selectedKey = state.context.enabledKeys[newCurrTabItemIndex];
+            data.onKeySelect(state.context.selectedKey);
+          }
+        }
+        else {
+          if (isCircularNavigation || !(currTabItemIndex == 0)) {
+            newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
+            state.context.selectedKey = state.context.enabledKeys[newCurrTabItemIndex];
+            data.onKeySelect(state.context.selectedKey);
+          }
+        }
+      }
+    };
+
+    /* GH #964, Extra props are needed because FocusZone is not implemented on windows.
+    The ref focusZoneRef is used to set focus on Tabs when selecting a TabsItem and onKeyDown manages keyboarding */
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
-      root: { ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist', ...rest },
+      root: { ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist', ...pressable.props, ...rest},
       label: { children: label },
-      container: { isCircularNavigation: isCircularNavigation, defaultTabbableElement: selectedTabsItemRef },
+      stack: { focusable: true, ref: focusZoneRef, onKeyDown: onKeyDown},
     });
 
     return { slotProps, state };
@@ -111,6 +141,15 @@ export const Tabs = compose<TabsType>({
           return child.props.itemKey;
         }
       });
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore - TODO, fix typing error
+      renderData.state.context.enabledKeys = React.Children.map(children, (child: React.ReactChild) => {
+        if (React.isValidElement(child)) {
+          if (!child.props.disabled) {
+            return child.props.itemKey;
+          }
+        }
+      });
     }
 
     return (
@@ -120,11 +159,9 @@ export const Tabs = compose<TabsType>({
       >
         <Slots.root>
           {renderData.state.info.label && <Slots.label />}
-          <Slots.container>
             <Slots.stack>
               {children}
             </Slots.stack>
-          </Slots.container>
           <Slots.tabPanel>
             <TabsContext.Consumer>
               {(context) => !renderData.state.info.headersOnly && context.views.get(context.selectedKey)}
@@ -139,8 +176,7 @@ export const Tabs = compose<TabsType>({
   slots: {
     root: View,
     label: Text,
-    container: FocusZone,
-    stack: { slotType: View, filter: filterViewProps },
+    stack: View,
     tabPanel: { slotType: View, filter: filterViewProps },
   },
   styles: {
