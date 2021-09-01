@@ -111,12 +111,10 @@ export const Tabs = compose<TabsType>({
         }
       });
 
-      // Sets default selected tabItem
-      enabledKeys.forEach((child: string) => {
-        if (!enabledKeys.includes(renderData.state.context.selectedKey)) {
-          renderData.state.context.selectedKey = child;
-        }
-      });
+      // Sets default selected tabsItem
+      if (!enabledKeys.includes(renderData.state.context.selectedKey)) {
+        renderData.state.context.selectedKey = enabledKeys[0] ?? null;
+      }
     }
 
     return (
