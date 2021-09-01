@@ -1,7 +1,8 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { tabsItemName, TabItemType, TabsItemProps } from './TabsItem.types.win32';
+import { TabItemType, TabsItemProps } from './TabsItem.types.win32';
+import { tabsItemName } from './TabsItem.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './TabsItem.styling.win32';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
