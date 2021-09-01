@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { useAsPressable, useKeyCallback, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { TabsItemProps, TabsItemInfo } from './TabsItem.types';
+import { TabsItemProps, TabsItemInfo } from './TabsItem.types.win32';
 import { TabsContext } from './Tabs';
 
 export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
-  const { accessibilityLabel, headerText, componentRef = defaultComponentRef, itemKey, disabled, itemCount, icon, ...rest } = props;
+  const { accessibilityPositionInSet, accessibilitySetSize, accessibilityLabel, headerText, componentRef = defaultComponentRef, itemKey, disabled, itemCount, icon, ...rest } = props;
   // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback)
   const info = React.useContext(TabsContext);
   const tabsItemSelectActionLabel = 'Select a TabsItem';
@@ -61,6 +61,8 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
       headerText: headerText ?? '',
       accessibilityState: { disabled: disabled, selected: info.selectedKey === itemKey },
       accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
+      accessibilityPositionInSet: accessibilityPositionInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
+      accessibilitySetSize: accessibilitySetSize ?? info.tabsItemKeys.length,
       onAccessibilityAction: onAccessibilityAction,
       itemCount: itemCount,
       ref: useViewCommandFocus(componentRef),
