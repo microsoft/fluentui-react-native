@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FlatList, View, ViewStyle, StyleSheet } from 'react-native';
+import { FlatList, View, ViewStyle, StyleSheet, ColorValue } from 'react-native';
 import { useTheme, Theme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { commonTestStyles } from '../Common/styles';
@@ -51,17 +51,17 @@ const Panel: React.FunctionComponent = () => {
   );
 };
 
-const getSwatchColorStyle = (color: string): ViewStyle => {
-  styles[color] = styles[color] || { backgroundColor: color };
-  return styles[color];
+const getSwatchColorStyle = (name: string, color: ColorValue): ViewStyle => {
+  styles[name] = styles[name] || { backgroundColor: color };
+  return styles[name];
 };
 
-type SemanticColorProps = { color: string; name: string };
+type SemanticColorProps = { color: ColorValue; name: string };
 const SemanticColor: React.FunctionComponent<SemanticColorProps> = (p: SemanticColorProps) => {
   const themedStyles = getThemedStyles(useTheme());
   return (
     <View style={styles.swatchItem}>
-      <View style={[getSwatchColorStyle(p.color), themedStyles.swatch]} />
+      <View style={[getSwatchColorStyle(p.name, p.color), themedStyles.swatch]} />
       <Text>{p.name}</Text>
     </View>
   );
@@ -80,7 +80,9 @@ const SwatchList: React.FunctionComponent = () => {
   );
 
   const flattenArray = React.useCallback(() => {
-    return Object.keys(palette).sort().map(aggregator);
+    return Object.keys(palette)
+      .sort()
+      .map(aggregator);
   }, [palette, aggregator]);
 
   const paletteAsArray = React.useMemo(flattenArray, [flattenArray]);
@@ -121,5 +123,5 @@ export const ThemeTest: React.FunctionComponent = () => {
   const description =
     'The entire color palette of the controls is themeable. We provide a set of sensible defaults, but you can override all colors individually.';
 
-  return <Test name="Theme Test" description={description} sections={themeSections} status={status}></Test>;
+  return <Test name="Theme Test" description={description} sections={themeSections} status={status} />;
 };

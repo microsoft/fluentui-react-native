@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Thu, 26 Aug 2021 04:48:40 GMT and should not be manually modified.
+This log was last generated on Fri, 27 Aug 2021 15:48:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.0
+
+Fri, 27 Aug 2021 15:48:49 GMT
+
+### Minor changes
+
+- Update styling for link to match redlines (krsiler@microsoft.com)
+
+## 0.13.17
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.2 (ruaraki@microsoft.com)
 
 ## 0.13.16
 

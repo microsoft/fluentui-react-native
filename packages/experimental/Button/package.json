@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-button",
-  "version": "0.8.17",
+  "version": "0.8.18",
   "description": "A cross-platform Button component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -21,13 +21,13 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.5.33",
-    "@fluentui-react-native/interactive-hooks": ">=0.10.39 <1.0.0",
-    "@fluentui-react-native/experimental-text": ">=0.6.14 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.9.21 <1.0.0",
+    "@fluentui-react-native/framework": "0.5.34",
+    "@fluentui-react-native/interactive-hooks": ">=0.10.40 <1.0.0",
+    "@fluentui-react-native/experimental-text": ">=0.6.15 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.9.22 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.6.7 <1.0.0",
-    "@fluentui-react-native/icon": "0.8.16",
-    "@fluentui-react-native/theme-tokens": ">=0.5.4 <1.0.0"
+    "@fluentui-react-native/icon": "0.8.17",
+    "@fluentui-react-native/theme-tokens": ">=0.6.0 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",

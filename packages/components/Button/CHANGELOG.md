@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Thu, 26 Aug 2021 04:48:40 GMT and should not be manually modified.
+This log was last generated on Fri, 27 Aug 2021 15:48:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.3
+
+Fri, 27 Aug 2021 15:48:49 GMT
+
+### Patches
+
+- Fixed bug: Luminosity ratio for boundary of focused button with respect to background is 1.2:1 which is less than 3:1 (v.kozlova13@gmail.com)
+
+## 0.20.2
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.2 (ruaraki@microsoft.com)
 
 ## 0.20.1
 

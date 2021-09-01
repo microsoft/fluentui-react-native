@@ -22,13 +22,13 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": ">=0.7.1 <1.0.0",
-    "@fluentui-react-native/framework": "0.5.33",
-    "@fluentui-react-native/tokens": ">=0.9.21 <1.0.0"
+    "@fluentui-react-native/adapters": ">=0.7.2 <1.0.0",
+    "@fluentui-react-native/framework": "0.5.34",
+    "@fluentui-react-native/tokens": ">=0.9.22 <1.0.0"
   },
   "devDependencies": {
     "@types/react-native": "^0.63.0",
-    "@fluentui-react-native/text": ">=0.10.12 <1.0.0",
+    "@fluentui-react-native/text": ">=0.10.13 <1.0.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "react": "16.13.1",
