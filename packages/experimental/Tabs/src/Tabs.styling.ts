@@ -29,10 +29,7 @@ export const stylingSettings: UseStylingOptions<TabsProps, TabsSlotProps, TabsTo
     stack: buildProps(
       () => ({
         style: {
-          display: 'flex',
-          alignItems: 'center',
           flexDirection: 'row',
-          alignSelf: 'flex-start',
         },
       }),
       [],

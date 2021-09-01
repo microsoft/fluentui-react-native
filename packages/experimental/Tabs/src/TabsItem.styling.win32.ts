@@ -16,7 +16,7 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
           alignSelf: 'flex-start',
           justifyContent: 'center',
           minHeight: 32,
-          minWidth: 80,
+          minWidth: 32,
           borderWidth: 2,
           borderRadius: 4,
           ...borderStyles.from(tokens, theme),
