@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "improved comments and styling",
-  "packageName": "@fluentui-react-native/tabs",
-  "email": "sriyaaluru@gmail.com",
-  "dependentChangeType": "patch"
-}
