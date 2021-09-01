@@ -6,8 +6,6 @@ export const tabsItemStates: (keyof TabsItemTokens)[] = ['hovered', 'selected', 
 
 export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: Theme) =>
   ({
-    minHeight: 32,
-    minWidth: 80,
     backgroundColor: 'transparent',
     color: t.colors.neutralForeground3Brand,
     borderColor: 'transparent',
