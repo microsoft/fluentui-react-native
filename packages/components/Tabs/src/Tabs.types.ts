@@ -47,7 +47,7 @@ export interface TabsContextData {
   /**
    * GH #964, Reference to the Focus Container as there is no FocusZone on windows.
    */
-  focusZoneRef: React.RefObject<any> | null;
+  focusZoneRef?: React.RefObject<any> | null;
 }
 
 export interface TabsInfo {

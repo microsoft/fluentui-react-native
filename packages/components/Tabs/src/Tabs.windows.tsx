@@ -2,8 +2,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
-import { tabsName, TabsType, TabsProps, TabsSlotProps, TabsRenderData } from './Tabs.types';
-import { WinTabsContextData, TabsState } from './Tabs.types.windows';
+import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, TabsContextData } from './Tabs.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings } from './Tabs.settings';
@@ -12,7 +11,7 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { foregroundColorTokens, textTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
 import { useSelectedKey, useAsPressable } from '@fluentui-react-native/interactive-hooks';
 
-export const TabsContext = React.createContext<WinTabsContextData>({
+export const TabsContext = React.createContext<TabsContextData>({
   selectedKey: null,
   onTabsClick: (/* key: string */) => {
     return;

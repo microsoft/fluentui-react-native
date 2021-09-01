@@ -25,7 +25,6 @@ export const TabsContext = React.createContext<TabsContextData>({
   },
   tabsItemKeys: [],
   views: null,
-  focusZoneRef: null,
 });
 
 export const Tabs = compose<TabsType>({
@@ -74,7 +73,6 @@ export const Tabs = compose<TabsType>({
         getTabId: onChangeTabId,
         updateSelectedTabsItemRef: onSelectTabsItemRef,
         views: map,
-        focusZoneRef: null,
       },
       info: {
         headersOnly: headersOnly ?? false,
