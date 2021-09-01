@@ -44,7 +44,8 @@ export const Tabs = compose<TabsType>({
       ...rest
     } = userProps;
 
-    // This hook updates the Selected TabsItem and calls the customer's onTabsClick function. This gets called after a TabsItem is pressed.
+    /* The useSelectedKey hook is called after a TabsItem is pressed to update the Tab and TabsItem
+    selected property and call the Tab and TabsItem onTabsClick callback. */
     const data = useSelectedKey(selectedKey || defaultSelectedKey || null, userProps.onTabsClick);
 
     const [selectedTabsItemRef, setSelectedTabsItemRef] = React.useState(React.useRef<View>(null));
@@ -63,7 +64,7 @@ export const Tabs = compose<TabsType>({
       return `${key}-Tab${index}`;
     }, [getTabId]);
 
-    // Stores views to be displayed
+    // Stores views to be displayed.
     const map = new Map<string, React.ReactNode[]>();
 
     const state: TabsState = {
@@ -92,17 +93,17 @@ export const Tabs = compose<TabsType>({
   },
 
   render: (Slots: ISlots<TabsSlotProps>, renderData: TabsRenderData, ...children: React.ReactNode[]) => {
-    if (renderData.state == undefined) {
+    if (!renderData.state) {
       return null;
     }
 
-    // Populate the tabsItemKeys array
+    // Populate the tabsItemKeys array.
     if (children) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore - TODO, fix typing error
       renderData.state.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
-          // Sets default selected tabItem
+          // Sets default selected tabItem.
           if (renderData.state.context.selectedKey == null && !child.props.disabled) {
             renderData.state.context.selectedKey = child.props.itemKey;
           }
@@ -113,7 +114,7 @@ export const Tabs = compose<TabsType>({
 
     return (
       <TabsContext.Provider
-        // Passes in the selected key and a hook function to update the newly selected tabsItem and call the client's onTabsClick callback
+        // Passes in the selected key and a hook function to update the newly selected tabsItem and call the client's onTabsClick callback.
         value={renderData.state.context}
       >
         <Slots.root>
