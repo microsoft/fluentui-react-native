@@ -2,6 +2,7 @@ import { TestDescription } from './TestComponents';
 import { AvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
+import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL } from './TestComponents/CheckboxExperimental';
 import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
@@ -93,6 +94,11 @@ export const tests: TestDescription[] = [
     name: 'Checkbox Test',
     component: CheckboxTest,
     testPage: HOMEPAGE_CHECKBOX_BUTTON,
+  },
+  {
+    name: 'Experimental Checkbox',
+    component: ExperimentalCheckboxTest,
+    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
   },
   {
     name: 'Svg Test',

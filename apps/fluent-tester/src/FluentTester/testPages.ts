@@ -22,6 +22,7 @@ import { ActivityIndicatorTest, HOMEPAGE_ACTIVITYINDICATOR_BUTTON } from './Test
 import { MenuButtonTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/MenuButton';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
+import { HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
 
 export const tests: TestDescription[] = [
   {
@@ -98,6 +99,11 @@ export const tests: TestDescription[] = [
     name: 'Checkbox Test',
     component: CheckboxTest,
     testPage: HOMEPAGE_CHECKBOX_BUTTON,
+  },
+  {
+    name: 'Experimental Checkbox',
+    component: ExperimentalCheckboxTest,
+    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
   },
   {
     name: 'Svg Test',

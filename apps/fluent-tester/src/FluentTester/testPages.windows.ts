@@ -1,6 +1,7 @@
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
+import { HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from './TestComponents/Persona';
@@ -62,6 +63,11 @@ export const tests = [
     name: 'Checkbox Test',
     component: CheckboxTest,
     testPage: HOMEPAGE_CHECKBOX_BUTTON,
+  },
+  {
+    name: 'Experimental Checkbox',
+    component: ExperimentalCheckboxTest,
+    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
   },
   {
     name: 'Tabs Test',

@@ -20,6 +20,7 @@ import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 import { HOMEPAGE_TABS_BUTTON, TabsTest } from './TestComponents/Tabs';
 import { TestDescription } from './TestComponents';
+import { HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
 
 export const tests: TestDescription[] = [
   {
@@ -36,6 +37,11 @@ export const tests: TestDescription[] = [
     name: 'Checkbox Test',
     component: CheckboxTest,
     testPage: HOMEPAGE_CHECKBOX_BUTTON,
+  },
+  {
+    name: 'Experimental Checkbox',
+    component: ExperimentalCheckboxTest,
+    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
   },
   {
     name: 'ContextualMenu Test',
