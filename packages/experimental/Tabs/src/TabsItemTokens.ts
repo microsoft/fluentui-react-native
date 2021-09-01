@@ -10,14 +10,14 @@ export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: T
     color: t.colors.neutralForeground3Brand,
     borderColor: 'transparent',
     iconColor: t.colors.buttonIcon,
-    indicatorColor: t.colors.transparent,
+    indicatorColor: 'transparent',
     variant: 'bodyStandard',
     disabled: {
       backgroundColor: t.colors.buttonDisabledBackground,
       color: t.colors.neutralForegroundDisabled,
       borderColor: 'transparent',
       iconColor: t.colors.buttonDisabledIcon,
-      indicatorColor: t.colors.transparent,
+      indicatorColor: 'transparent',
     },
     hovered: {
       backgroundColor: t.colors.neutralForeground2Hover,
