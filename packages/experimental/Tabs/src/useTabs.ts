@@ -38,7 +38,7 @@ export const useTabs = (props: TabsProps): TabsState => {
       ...props,
       accessible: true,
       accessibilityRole: 'tablist',
-      ref: componentRef,
+      componentRef: componentRef,
       defaultTabbableElement: selectedTabsItemRef,
       isCircularNavigation: props.isCircularNavigation ?? false,
     },
