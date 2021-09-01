@@ -4,7 +4,6 @@ import { Tabs, TabsItem, Text, Button } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
 
 const tabs: React.FunctionComponent = () => {
