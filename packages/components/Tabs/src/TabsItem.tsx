@@ -59,7 +59,7 @@ export const TabsItem = compose<TabsItemType>({
       onFocus: changeSelection,
     });
 
-    // Set up state.
+    // Sets up state.
     const state: TabsItemState = {
       info: {
         ...pressable.state,
