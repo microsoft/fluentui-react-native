@@ -48,15 +48,6 @@ export const Tabs = compose<TabsType>({
     // This hook updates the Selected TabsItem and calls the customer's onTabsClick function. This gets called after a TabsItem is pressed.
     const data = useSelectedKey(selectedKey || defaultSelectedKey || null, userProps.onTabsClick);
 
-    const [, setSelectedTabsItemRef] = React.useState(React.useRef<View>(null));
-
-    const onSelectTabsItemRef = React.useCallback(
-      (ref: React.RefObject<View>) => {
-        setSelectedTabsItemRef(ref);
-      },
-      [setSelectedTabsItemRef],
-    );
-
     const onChangeTabId = React.useCallback((key: string, index: number) => {
       if (getTabId) {
         return getTabId(key, index);
@@ -72,7 +63,6 @@ export const Tabs = compose<TabsType>({
         selectedKey: selectedKey ?? data.selectedKey,
         onTabsClick: data.onKeySelect,
         getTabId: onChangeTabId,
-        updateSelectedTabsItemRef: onSelectTabsItemRef,
         views: map,
         focusZoneRef: focusZoneRef,
       },

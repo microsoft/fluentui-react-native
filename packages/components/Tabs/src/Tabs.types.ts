@@ -27,7 +27,7 @@ export interface TabsContextData {
   /**
    * Updates the selected tabsItem's ref to set as the default tabbable element
    */
-  updateSelectedTabsItemRef?: (ref: React.RefObject<any>) => void;
+  updateSelectedTabsItemRef?: (ref: React.RefObject<any>) => void | null;
 
   /**
    * Array of tabsItem keys in the group
