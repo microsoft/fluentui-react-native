@@ -56,7 +56,7 @@ export const Tabs = compose<TabsType>({
       [setSelectedTabsItemRef],
     );
 
-    const onChangeTabId = React.useCallback((key: string, index: number) => {
+    const findTabId = React.useCallback((key: string, index: number) => {
       if (getTabId) {
         return getTabId(key, index);
       }
@@ -70,7 +70,7 @@ export const Tabs = compose<TabsType>({
       context: {
         selectedKey: selectedKey ?? data.selectedKey,
         onTabsClick: data.onKeySelect,
-        getTabId: onChangeTabId,
+        getTabId: findTabId,
         updateSelectedTabsItemRef: onSelectTabsItemRef,
         views: map,
       },
