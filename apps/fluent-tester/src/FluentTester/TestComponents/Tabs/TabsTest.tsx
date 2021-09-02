@@ -124,7 +124,7 @@ const tabsRenderSeparately: React.FunctionComponent = () => {
   };
 
   const getTabId = (key: string) => {
-    return `ShapeColorPivot_${key}`;
+    return `ShapeColorTabs_${key}`;
   };
 
   return (
