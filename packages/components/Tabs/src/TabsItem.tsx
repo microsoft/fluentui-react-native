@@ -43,7 +43,7 @@ export const TabsItem = compose<TabsItemType>({
     });
 
     const changeSelection = React.useCallback(() => {
-      componentRef.current.focus();
+      componentRef?.current?.focus();
     }, [componentRef]);
 
     const changeSelectionWithFocus = React.useCallback(() => {
