@@ -147,4 +147,5 @@ export interface TabItemType {
   props: TabsItemProps;
   tokens: TabsItemTokens;
   slotProps: TabsItemSlotProps;
+  state: TabsItemState;
 }
