@@ -44,7 +44,7 @@ export const TabsItem = compose<TabsItemType>({
     so that they aren't notified more than once for each click. */
     const changeSelection = () => {
       if (Platform.OS === 'windows') {
-        info.focusZoneRef.current.focus();
+        info.focusZoneRef.current.focus(); // GH #964, FocusZone not implemented on windows.
       }
       if (itemKey != info.selectedKey) {
         info.onTabsClick && info.onTabsClick(itemKey);
