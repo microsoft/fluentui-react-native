@@ -214,7 +214,7 @@ const tabsSections: TestSection[] = [
     component: tabs,
   },
   {
-    name: 'Tabs with disabled',
+    name: 'Tabs with Disabled',
     component: disabledTabs,
   },
   {
