@@ -23,9 +23,9 @@ export const TabsItem = compose<TabItemType>({
   render: (userProps: TabsItemProps, useSlots: UseSlots<TabItemType>) => {
     const tabsItem = useTabsItem(userProps);
     const iconProps = createIconProps(userProps.icon);
-    // grab the styled slots
+    // Grab the styled slots.
     const Slots = useSlots(userProps, layer => tabsItem.state[layer] || userProps[layer]);
-    // now return the handler for finishing render
+    // Return the handler to finish render.
     return (final: TabsItemProps, ...children: React.ReactNode[]) => {
       const context = React.useContext(TabsContext);
       const { icon, itemKey, itemCount, headerText, testID, ...mergedProps } = mergeProps(tabsItem.props, final);

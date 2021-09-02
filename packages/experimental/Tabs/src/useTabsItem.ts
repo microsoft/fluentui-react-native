@@ -4,10 +4,10 @@ import { TabsItemProps, TabsItemInfo } from './TabsItem.types';
 import { TabsContext } from './Tabs';
 
 export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
-  // attach the pressable state handlers
+  // Attach the pressable state handlers.
   const defaultComponentRef = React.useRef(null);
   const { accessibilityLabel, headerText, componentRef = defaultComponentRef, itemKey, disabled, itemCount, icon, ...rest } = props;
-  // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback)
+  // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback).
   const info = React.useContext(TabsContext);
   const tabsItemSelectActionLabel = 'Select a TabsItem';
 
@@ -29,7 +29,7 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
 
   const onKeyUp = useKeyCallback(changeSelection, ' ', 'Enter');
 
-  // Used when creating accessibility properties in mergeSettings below
+  // Used when creating accessibility properties in mergeSettings below.
   const onAccessibilityAction = React.useCallback(
     (event: { nativeEvent: { actionName: any } }) => {
       switch (event.nativeEvent.actionName) {
@@ -42,8 +42,8 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
   );
 
   /* We use the componentRef of the currently selected tabsItem to maintain the default tabbable
-    element in Tabs. Since the componentRef isn't generated until after initial render,
-    we must update it once here. */
+  element in Tabs. Since the componentRef isn't generated until after initial render,
+  we must update it once here. */
   React.useEffect(() => {
     if (itemKey == info.selectedKey) {
       info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);

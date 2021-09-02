@@ -35,19 +35,19 @@ export const Tabs = compose<TabsType>({
   },
   render: (userProps: TabsProps, useSlots: UseSlots<TabsType>) => {
     const tabs = useTabs(userProps);
-    // grab the styled slots
+    // Grab the styled slots.
     const Slots = useSlots(userProps, layer => tabs.state[layer] || userProps[layer]);
-    // now return the handler for finishing render
+    // Return the handler to finish render.
     return (final: TabsProps, ...children: React.ReactNode[]) => {
-      const { label, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(tabs.props, final); // ...mergedProps
+      const { label, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(tabs.props, final);
 
-      // Populate the tabsItemKeys array
+      // Populate the tabsItemKeys array.
       if (children) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore - TODO, fix typing error
         tabs.state.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
           if (React.isValidElement(child)) {
-            // Sets default selected tabItem
+            // Sets default selected tabItem.
             if (tabs.state.context.selectedKey == null && !child.props.disabled) {
               tabs.state.context.selectedKey = child.props.itemKey;
             }
@@ -58,7 +58,7 @@ export const Tabs = compose<TabsType>({
 
       return (
         <TabsContext.Provider
-          // Passes in the selected key and a hook function to update the newly selected tabsItem and call the client's onTabsClick callback
+          // Passes in the selected key and a hook function to update the newly selected tabsItem and call the client's onTabsClick callback.
           value={tabs.state.context}
         >
           <Slots.root {...mergedProps}>
@@ -67,11 +67,9 @@ export const Tabs = compose<TabsType>({
               <Slots.stack>{children}</Slots.stack>
             </Slots.container>
             <Slots.tabPanel>
-              {
                 <TabsContext.Consumer>
                   {context => !tabs?.state?.info?.headersOnly && <View>{context.views.get(context.selectedKey)}</View>}
                 </TabsContext.Consumer>
-              }
             </Slots.tabPanel>
           </Slots.root>
         </TabsContext.Provider>
