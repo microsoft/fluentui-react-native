@@ -1,97 +1,12 @@
 import * as React from 'react';
-import { ViewProps, ViewStyle, ColorValue } from 'react-native';
+import { ViewProps} from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
-import { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, IWithPressableEvents, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, IWithPressableOptions, IWithPressableEvents } from '@fluentui-react-native/interactive-hooks';
 import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IconProps } from '@fluentui-react-native/icon';
+import { TabsItemTokens, TabsItemState } from './TabsItem.types';
 
-export const tabsItemName = 'TabsItem';
 type IconSourcesType = number | string | IconProps;
-
-export interface TabsItemTokens extends FontTokens, IBorderTokens {
-  /**
-   * The indicator color.
-   */
-   indicatorColor?: string;
-
-   /**
-    * The icon color.
-    */
-   iconColor?: string;
-
-   /**
-    * Source URL or name of the icon to show on the TabsItem.
-    */
-   icon?: IconSourcesType;
-
-   /**
-    * Text to show on the TabsItem.
-    */
-   headerText?: string;
-
-   /**
-    * The amount of padding between the border and the headerText.
-    */
-   headerTextPadding?: number | string;
-
-   /**
-    * The amount of padding between the border and the headerText when the TabsItem has focus.
-    */
-   headerTextPaddingFocused?: number | string;
-  /**
-   * Background color for the button
-   */
-   backgroundColor?: ColorValue;
-
-   /**
-    * Foreground color for the text and/or icon of the button
-    */
-   color?: ColorValue;
-
-   /**
-    * The amount of padding between the border and the contents.
-    */
-   contentPadding?: number | string;
-
-   /**
-    * The amount of padding between the border and the contents when the Button has focus.
-    */
-   contentPaddingFocused?: number | string;
-
-   /**
-    * The icon color when hovering over the Button.
-    */
-   iconColorHovered?: ColorValue;
-
-   /**
-    * The icon color when the Button is being pressed.
-    */
-   iconColorPressed?: ColorValue;
-
-   /**
-    * The size of the icon.
-    */
-   iconSize?: number | string;
-
-   /**
-    * The weight of the lines used when drawing the icon.
-    */
-   iconWeight?: number;
-
-   width?: ViewStyle['width'];
-   minHeight?: ViewStyle['minHeight'];
-   minWidth?: ViewStyle['minWidth'];
-
-   /**
-    * States that can be applied to a button
-    */
-   hovered?: TabsItemTokens;
-   focused?: TabsItemTokens;
-   pressed?: TabsItemTokens;
-   disabled?: TabsItemTokens;
-   selected?: TabsItemTokens;
-}
 
 export interface TabsItemProps extends Omit<IWithPressableOptions<IViewWin32Props>, 'onPress'>   {
   /**
@@ -126,10 +41,6 @@ export interface TabsItemProps extends Omit<IWithPressableOptions<IViewWin32Prop
 
   testID?: string;
 
-}
-
-export interface TabsItemState extends IPressableState{
-  selected ?: boolean;
 }
 
 export interface TabsItemInfo {

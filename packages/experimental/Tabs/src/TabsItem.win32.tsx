@@ -1,7 +1,8 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { tabsItemName, TabItemType, TabsItemProps } from './TabsItem.types.win32';
+import { TabItemType, TabsItemProps } from './TabsItem.types.win32';
+import { tabsItemName } from './TabsItem.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './TabsItem.styling.win32';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
@@ -23,9 +24,9 @@ export const TabsItem = compose<TabItemType>({
   render: (userProps: TabsItemProps, useSlots: UseSlots<TabItemType>) => {
     const tabsItem = useTabsItem(userProps);
     const iconProps = createIconProps(userProps.icon);
-    // grab the styled slots
+    // Grab the styled slots.
     const Slots = useSlots(userProps, layer => tabsItem.state[layer] || userProps[layer]);
-    // now return the handler for finishing render
+    // Return the handler to finish render.
     return (final: TabsItemProps, ...children: React.ReactNode[]) => {
       const context = React.useContext(TabsContext);
       const { icon, itemKey, itemCount, headerText, testID, ...mergedProps } = mergeProps(tabsItem.props, final);
