@@ -49,7 +49,9 @@ static NSView *GetFirstResponder(NSWindow *window)
 {
 	NSResponder *responder = [window firstResponder];
 	while (responder != nil && ![responder isKindOfClass:[NSView class]])
+	{
 		responder = [responder nextResponder];
+	}
 	return [responder isKindOfClass:[NSView class]] ? (NSView *)responder : nil;
 }
 
@@ -95,14 +97,40 @@ static FocusZoneAction GetActionForEvent(NSEvent *event)
 	return action;
 }
 
-static BOOL IsAdvanceWithinZoneAction(FocusZoneAction action)
+static inline BOOL IsAdvanceWithinZoneAction(FocusZoneAction action)
 {
 	return action == FocusZoneActionRightArrow || action == FocusZoneActionDownArrow;
 }
 
-static BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action)
+static inline BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action)
 {
 	return action == FocusZoneActionRightArrow || action == FocusZoneActionLeftArrow;
+}
+
+static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
+{
+	NSView *candidateView = view;
+	NSView *topLevelView = [[view window] contentView];
+	while (candidateView != nil && candidateView != topLevelView)
+	{
+		if ([candidateView isKindOfClass:[RCTFocusZone class]])
+		{
+			return (RCTFocusZone *)candidateView;
+		}
+		candidateView = [candidateView superview];
+	}
+	return nil;
+}
+
+- (BOOL)acceptsFirstResponder
+{
+	// Accept firstResponder on FocusZone itself in order to reassign it to defaultTabbableElement.
+	return !_disabled;
+}
+
+- (BOOL)becomeFirstResponder
+{
+	return !_disabled && [[self window] makeFirstResponder:_defaultTabbableElement ?: [self nextValidKeyView]];
 }
 
 - (NSView *)nextViewToFocusForCondition:(IsViewLeadingCandidateForNextFocus)isLeadingCandidate
@@ -116,7 +144,7 @@ static BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action)
 		NSView *candidateView = [queue firstObject];
 		[queue removeObjectAtIndex:0];
 
-		if ([candidateView canBecomeKeyView] && isLeadingCandidate(candidateView))
+		if ([candidateView isNotEqualTo:self] && [candidateView canBecomeKeyView] && isLeadingCandidate(candidateView))
 		{
 			nextViewToFocus = candidateView;
 		}
@@ -272,7 +300,7 @@ static BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action)
 
 		nextViewToFocus = [([self nextViewToFocusForCondition:block] ?: self) nextValidKeyView];
 	}
-	else
+	else  // action == FocusZoneActionShiftTab per the conditional in keyDown
 	{
 		nextViewToFocus = [self previousValidKeyView];
 	}
@@ -280,6 +308,17 @@ static BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action)
 	if ([nextViewToFocus isDescendantOf:self])
 	{
 		nextViewToFocus = nil;
+	}
+	else if (action == FocusZoneActionShiftTab)
+	{
+		// If the previous view is in a FocusZone, focus the default tabbable element.
+		// (For FocusZoneActionTab, this is handled by becomeFirstResponder.)
+		RCTFocusZone *nextFocusZone = GetFocusZoneAncestor(nextViewToFocus);
+		NSView *element = [nextFocusZone defaultTabbableElement];
+		if (element != nil)
+		{
+			nextViewToFocus = element;
+		}
 	}
 
 	return nextViewToFocus;
