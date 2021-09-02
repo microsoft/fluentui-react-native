@@ -92,7 +92,7 @@ const onTabsClickEvent: React.FunctionComponent = () => {
 };
 
 const tabsChangingViews: React.FunctionComponent = () => {
-  // If User wants to control what gets rendered example
+  // If user wants to control what gets rendered example.
   const [selectedKey, setSelectedKey] = React.useState('home');
 
   const onTabsClick = (key: string) => {
@@ -148,7 +148,7 @@ const tabsRenderSeparately: React.FunctionComponent = () => {
 };
 
 const tabsSettingSelectedKey: React.FunctionComponent = () => {
-  // If user wants to programmatically set the selectedKey to control the view
+  // If user wants to programmatically set the selectedKey to control the view.
   const [selectedKey, setSelectedKey] = React.useState('home');
   const [currTabItemIndex, setCurrTabItemIndex] = React.useState(0);
   const tabItems = ['home', 'file', 'setting'];
