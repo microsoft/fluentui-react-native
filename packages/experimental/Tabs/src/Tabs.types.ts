@@ -38,9 +38,7 @@ export interface TabsContextData {
   views?: Map<string, React.ReactNode[]> | null;
 }
 
-export interface TabsTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens {
-  label?: string;
-}
+export interface TabsTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens {}
 
 export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'>, ViewProps {
   /**
