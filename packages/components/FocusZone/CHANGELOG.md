@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
+This log was last generated on Tue, 31 Aug 2021 18:48:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.20
+
+Tue, 31 Aug 2021 18:48:34 GMT
+
+### Patches
+
+- Add logic to pick a selected button when tabbing to a FocusZone (chripear@microsoft.com)
 
 ## 0.7.19
 

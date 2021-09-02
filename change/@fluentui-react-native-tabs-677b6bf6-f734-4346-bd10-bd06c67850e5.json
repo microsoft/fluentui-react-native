@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "tabs control for macos",
-  "packageName": "@fluentui-react-native/tabs",
-  "email": "sriyaaluru@gmail.com",
-  "dependentChangeType": "patch"
-}
