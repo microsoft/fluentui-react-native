@@ -202,7 +202,7 @@ const tabsShowHideItem: React.FunctionComponent = () => {
           <Text>Tabs #3</Text>
         </TabsItem>
       </Tabs>
-      <Button content={`${showFirstItem ? 'Hide' : 'Show'} First Pivot Item`} onClick={toggleShowFirstItem} />
+      <Button content={`${showFirstItem ? 'Hide' : 'Show'} First Tabs Item`} onClick={toggleShowFirstItem} />
     </View>
   );
 };
@@ -267,7 +267,7 @@ const tabsSections: TestSection[] = [
     component: tabsSettingSelectedKey,
   },
   {
-    name: 'Show/Hide pivot item',
+    name: 'Show/Hide Tabs item',
     component: tabsShowHideItem,
   },
   {
