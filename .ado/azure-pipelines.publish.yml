@@ -41,7 +41,7 @@ jobs:
   - job: NuGetPublish
     displayName: NuGet Publish
     pool:
-      vmImage: 'macos-10.15'
+      vmImage: 'macos-11'
       demands: ['xcode', 'sh', 'npm']
     timeoutInMinutes: 90 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them

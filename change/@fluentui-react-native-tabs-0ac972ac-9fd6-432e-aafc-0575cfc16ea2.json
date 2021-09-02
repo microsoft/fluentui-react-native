@@ -1,6 +1,6 @@
 {
-  "type": "minor",
-  "comment": "tabs control for macos",
+  "type": "patch",
+  "comment": "fixed comments, styling, and made props const",
   "packageName": "@fluentui-react-native/tabs",
   "email": "sriyaaluru@gmail.com",
   "dependentChangeType": "patch"
