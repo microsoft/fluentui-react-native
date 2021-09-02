@@ -57,7 +57,7 @@ export interface TabsItemSlotProps {
 }
 
 export interface TabItemType {
-  props: IWithPressableEvents<TabsItemProps & React.ComponentPropsWithRef<any>>;;
+  props: IWithPressableEvents<TabsItemProps & React.ComponentPropsWithRef<any>>;
   tokens: TabsItemTokens;
   slotProps: TabsItemSlotProps;
   state: TabsItemState;
