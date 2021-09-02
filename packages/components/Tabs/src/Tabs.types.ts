@@ -41,6 +41,7 @@ export interface TabsContextData {
 
   /**
    * GH #964, Reference to the Focus Container as there is no FocusZone on windows.
+   * Windows-Specific Prop.
    */
   focusZoneRef?: React.RefObject<any> | null;
 }
@@ -50,6 +51,7 @@ export interface TabsInfo {
   label?: boolean,
   /**
    * Array of enabled keys in the group
+   * Windows-Specific Prop.
    */
   enabledKeys?: string[];
 }
