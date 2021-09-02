@@ -112,7 +112,7 @@ export const Tabs = compose<TabsType>({
   },
 
   render: (Slots: ISlots<TabsSlotProps>, renderData: TabsRenderData, ...children: React.ReactNode[]) => {
-    if (renderData.state == undefined) {
+    if (!renderData.state) {
       return null;
     }
 
