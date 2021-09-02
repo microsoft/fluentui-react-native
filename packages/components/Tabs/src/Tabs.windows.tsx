@@ -143,10 +143,10 @@ export const Tabs = compose<TabsType>({
     return (
       <TabsContext.Provider
         // Passes in the selected key and a hook function to update the newly selected tabsItem and call the client's onTabsClick callback
-        value={renderData.state.context}
+        value={renderData.state?.context}
       >
         <Slots.root>
-          {renderData.state.info.label && <Slots.label />}
+          {renderData.state?.info?.label && <Slots.label />}
             <Slots.stack>
               {children}
             </Slots.stack>
