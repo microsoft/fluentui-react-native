@@ -1,18 +1,15 @@
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
-import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from './TestComponents/Persona';
 import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from './TestComponents/PersonaCoin';
 import { HOMEPAGE_PRESSABLE_BUTTON, PressableTest } from './TestComponents/Pressable';
-import { HOMEPAGE_RADIOGROUP_BUTTON, RadioGroupTest } from './TestComponents/RadioGroup';
 import { HOMEPAGE_SEPARATOR_BUTTON, SeparatorTest } from './TestComponents/Separator';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 import { HOMEPAGE_TABS_BUTTON, TabsTest } from './TestComponents/Tabs';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
-import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 
 export const tests = [
@@ -25,11 +22,6 @@ export const tests = [
     name: 'Callout Test',
     component: CalloutTest,
     testPage: HOMEPAGE_CALLOUT_BUTTON,
-  },
-  {
-    name: 'ContextualMenu Test',
-    component: ContextualMenuTest,
-    testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON,
   },
   {
     name: 'Pressable Test',
@@ -55,11 +47,6 @@ export const tests = [
     testPage: HOMEPAGE_PERSONACOIN_BUTTON,
   },
   {
-    name: 'RadioGroup Test',
-    component: RadioGroupTest,
-    testPage: HOMEPAGE_RADIOGROUP_BUTTON,
-  },
-  {
     name: 'Persona Test',
     component: PersonaTest,
     testPage: HOMEPAGE_PERSONA_BUTTON,
@@ -78,10 +65,5 @@ export const tests = [
     name: 'Tokens Test',
     component: TokenTest,
     testPage: HOMEPAGE_TOKEN_BUTTON,
-  },
-  {
-    name: 'Expander Test',
-    component: ExpanderTest,
-    testPage: HOMEPAGE_EXPANDER_BUTTON,
   },
 ];
