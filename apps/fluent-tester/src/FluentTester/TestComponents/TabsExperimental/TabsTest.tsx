@@ -164,11 +164,11 @@ const tabsSettingSelectedKey: React.FunctionComponent = () => {
   const [currTabItemIndex, setCurrTabItemIndex] = React.useState(0);
   const tabItems = ['home', 'file', 'setting'];
 
-  const goToNextTab = () => {
+  const goToNextTab = React.useCallback(() => {
     const newCurrTabItemIndex = (currTabItemIndex + 1) % 3;
     setCurrTabItemIndex(newCurrTabItemIndex);
     setSelectedKey(tabItems[newCurrTabItemIndex]);
-  };
+  }, [currTabItemIndex]);
 
   return (
     <View style={stackStyle}>
@@ -191,9 +191,9 @@ const tabsSettingSelectedKey: React.FunctionComponent = () => {
 const tabsWithFlexibility: React.FunctionComponent = () => {
   const [selectedKey, setSelectedKey] = React.useState('home');
 
-  const goHomeTab = () => {
+  const goHomeTab = React.useCallback(() => {
     setSelectedKey('home');
-  };
+  }, [setSelectedKey]);
 
   const onTabsClick = React.useCallback(
     (key: string) => {
