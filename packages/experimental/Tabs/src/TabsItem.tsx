@@ -34,7 +34,7 @@ export const TabsItem = compose<TabItemType>({
       const { icon, itemKey, itemCount, headerText, testID, ...mergedProps } = mergeProps(tabsItem.props, final);
 
       let containerText = headerText;
-      if (itemCount) {
+      if (itemCount !== undefined) {
         containerText += ` (${itemCount})`;
       }
 
