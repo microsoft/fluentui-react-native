@@ -72,7 +72,7 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     transparentBackgroundPressed: pipelineOutput.transparentBackground.fillColorPressed,
     transparentBackgroundSelected: pipelineOutput.transparentBackgroundSelected.fillColorRest,
 
-    neutralBackgroundDisabled: pipelineOutput.neutralBackground1.fillColorRest,
+    neutralBackgroundDisabled: pipelineOutput.neutralBackground1.fillColorDisabled,
 
     neutralStencil1: pipelineOutput.neutralStencil1.fillColorRest,
     neutralStencil2: pipelineOutput.neutralStencil2.fillColorRest,

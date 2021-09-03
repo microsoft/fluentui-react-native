@@ -37,7 +37,7 @@
     "NeutralForeground2Brand": {
       "Fill": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.26" },
+          "Rest": { "aliasOf": "Global.Color.Grey.84" },
           "Hover": { "aliasOf": "Global.Color.Brand.Tint.20" },
           "Pressed": { "aliasOf": "Global.Color.Brand.Tint.10" },
           "Disabled": { "aliasOf": "Global.Color.Grey.36" }
