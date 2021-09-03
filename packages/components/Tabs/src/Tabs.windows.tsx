@@ -120,10 +120,6 @@ export const Tabs = compose<TabsType>({
       // @ts-ignore - TODO, fix typing error
       renderData.state.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
-          // Sets default selected tabItem
-          if (renderData.state.context.selectedKey == null && !child.props.disabled) {
-            renderData.state.context.selectedKey = child.props.itemKey;
-          }
           return child.props.itemKey;
         }
       });
@@ -136,6 +132,12 @@ export const Tabs = compose<TabsType>({
           }
         }
       });
+
+      /* Sets the default selected TabsItem if a TabsItem is hidden.
+      The default selected Tabsitem is the first enabled TabsItem. */
+      if (!renderData.state.info.enabledKeys.includes(renderData.state.context.selectedKey)) {
+        renderData.state.context.selectedKey = renderData.state.info.enabledKeys[0] ?? null;
+      }
     }
 
     return (
