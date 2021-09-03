@@ -19,7 +19,6 @@ export const stylingSettings: UseStylingOptions<TabsProps, TabsSlotProps, TabsTo
     ),
     label: buildProps(
       (tokens: TabsTokens, theme: Theme) => ({
-        variant: 'subheaderSemibold',
         style: {
           ...fontStyles.from(tokens, theme),
         },
