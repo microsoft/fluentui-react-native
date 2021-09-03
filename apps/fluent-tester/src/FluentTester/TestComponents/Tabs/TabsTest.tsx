@@ -178,6 +178,35 @@ const tabsSettingSelectedKey: React.FunctionComponent = () => {
   );
 };
 
+const tabsShowHideItem: React.FunctionComponent = () => {
+  const [showFirstItem, setshowFirstItem] = React.useState(true);
+
+  const toggleShowFirstItem = React.useCallback(() => {
+    setshowFirstItem(!showFirstItem);
+  }, [showFirstItem]);
+
+  return (
+    <View style={stackStyle}>
+      <Tabs label="Tabs">
+        {showFirstItem && (
+          <TabsItem headerText="Home" itemKey="home">
+            <Text>Click the button below to show/hide this tabs item.</Text>
+            <Text>The selected item will not change when the number of tabs items changes.</Text>
+            <Text>If the selected item was removed, the new first item will be selected.</Text>
+          </TabsItem>
+        )}
+        <TabsItem headerText="File" itemKey="file">
+          <Text>Tabs #2</Text>
+        </TabsItem>
+        <TabsItem headerText="Setting" itemKey="setting">
+          <Text>Tabs #3</Text>
+        </TabsItem>
+      </Tabs>
+      <Button content={`${showFirstItem ? 'Hide' : 'Show'} First Tabs Item`} onClick={toggleShowFirstItem} />
+    </View>
+  );
+};
+
 const tabsWithFlexibility: React.FunctionComponent = () => {
   const [selectedKey, setSelectedKey] = React.useState('home');
 
@@ -236,6 +265,10 @@ const tabsSections: TestSection[] = [
   {
     name: 'Override Selected Key',
     component: tabsSettingSelectedKey,
+  },
+  {
+    name: 'Show/Hide Tabs item',
+    component: tabsShowHideItem,
   },
   {
     name: 'More Flexibility',

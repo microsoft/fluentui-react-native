@@ -99,17 +99,24 @@ export const Tabs = compose<TabsType>({
 
     // Populate the tabsItemKeys array.
     if (children) {
+      const enabledKeys = []
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore - TODO, fix typing error
+      // Generates array of keys and enabled keys.
       renderData.state.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
-          // Sets default selected tabItem.
-          if (renderData.state.context.selectedKey == null && !child.props.disabled) {
-            renderData.state.context.selectedKey = child.props.itemKey;
+          if (!child.props.disabled) {
+            enabledKeys.push(child.props.itemKey);
           }
           return child.props.itemKey;
         }
       });
+
+      /* Sets the default selected TabsItem if a TabsItem is hidden.
+      The default selected Tabsitem is the first enabled TabsItem. */
+      if (!enabledKeys.includes(renderData.state.context.selectedKey)) {
+        renderData.state.context.selectedKey = enabledKeys[0] ?? null;
+      }
     }
 
     return (
