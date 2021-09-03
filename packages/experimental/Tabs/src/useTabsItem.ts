@@ -9,7 +9,6 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
   const { accessibilityLabel, headerText, componentRef = defaultComponentRef, itemKey, disabled, itemCount, icon, ...rest } = props;
   // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback).
   const info = React.useContext(TabsContext);
-  const tabsItemSelectActionLabel = 'Select a TabsItem';
 
   const changeSelection = () => {
     if (itemKey != info.selectedKey) {
@@ -60,7 +59,6 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
       focusable: !disabled ?? true,
       headerText: headerText ?? '',
       accessibilityState: { disabled: disabled, selected: info.selectedKey === itemKey },
-      accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
       onAccessibilityAction: onAccessibilityAction,
       itemCount: itemCount,
       ref: useViewCommandFocus(componentRef),
