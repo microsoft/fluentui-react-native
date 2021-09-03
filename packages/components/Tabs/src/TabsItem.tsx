@@ -53,7 +53,7 @@ export const TabsItem = compose<TabsItemType>({
         info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
         info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
       }
-    }, [focusState, setFocusState, componentRef, info]);
+    }, [focusState, setFocusState, componentRef, info, itemKey]);
 
     const removeFocus = React.useCallback(() => {
       setFocusState({ focused: false });
