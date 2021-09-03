@@ -48,16 +48,16 @@ export const TabsItem = compose<TabsItemType>({
 
     const changeSelectionWithFocus = React.useCallback(() => {
       setFocusState({ focused: true });
-      if (componentRef.current && !focusState.focused) {
+      if (!focusState.focused) {
         info.onTabsClick && info.onTabsClick(itemKey);
         info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
         info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
       }
-    }, [focusState, setFocusState]);
+    }, [focusState, setFocusState, componentRef, info]);
 
     const removeFocus = React.useCallback(() => {
       setFocusState({ focused: false });
-    }, [focusState, setFocusState]);
+    }, [setFocusState]);
 
     const pressable = useAsPressable({
       ...rest,
