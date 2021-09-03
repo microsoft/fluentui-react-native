@@ -10,6 +10,7 @@ export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: T
     borderColor: 'transparent',
     indicatorColor: 'transparent',
     variant: 'bodyStandard',
+    marginHorizontal: 10,
     disabled: {
       color: t.colors.neutralForegroundDisabled,
       borderColor: 'transparent',
@@ -18,6 +19,9 @@ export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: T
     hovered: {
       color: t.colors.neutralForeground1,
       indicatorColor: t.colors.neutralStroke1,
+      selected: {
+        marginHorizontal: 0,
+      },
     },
     pressed: {
       color: t.colors.neutralForeground2Pressed,

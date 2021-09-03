@@ -15,6 +15,11 @@ export interface TabsItemTokens extends FontTokens, IBorderTokens {
   indicatorColor?: string;
 
   /**
+   * The indicator marginHorizontal value.
+   */
+  marginHorizontal?: number;
+
+  /**
    * The icon color.
    */
   iconColor?: string;
