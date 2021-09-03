@@ -3,6 +3,7 @@ import { FlatList, View, ViewStyle, StyleSheet, ColorValue } from 'react-native'
 import { useTheme, Theme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { createAliasTokens, getCurrentAppearance } from '@fluentui-react-native/theming-utils';
+import { createOfficeAliasTokens, getThemingModule } from '@fluentui-react-native/win32-theme';
 import { commonTestStyles } from '../Common/styles';
 import { Text } from '@fluentui/react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -55,7 +56,15 @@ const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps
 const AliasTokensSwatchList: React.FunctionComponent = () => {
   const theme = useTheme();
   const themedStyles = getThemedStyles(theme);
-  const aliasColorTokens = createAliasTokens(getCurrentAppearance(theme.host.appearance, 'light'));
+  const isOfficeTheme =
+    theme.name === 'White' ||
+    theme.name === 'Colorful' ||
+    theme.name === 'DarkGray' ||
+    theme.name === 'Black' ||
+    theme.name === 'HighContrast';
+  const aliasColorTokens = isOfficeTheme
+    ? createOfficeAliasTokens(theme.name)
+    : createAliasTokens(getCurrentAppearance(theme.host.appearance, 'light'));
 
   const aggregator = React.useCallback(
     (key: string) => {
