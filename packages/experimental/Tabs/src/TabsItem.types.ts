@@ -4,7 +4,7 @@ import { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IWithPressableEvents, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import { ITextProps } from '@fluentui-react-native/text';
+import { TextProps } from '@fluentui-react-native/experimental-text';
 
 export const tabsItemName = 'TabsItem';
 
@@ -145,7 +145,7 @@ export interface TabsItemSlotProps {
   icon: IconProps;
   stack: IViewProps;
   indicator: IViewProps;
-  content: ITextProps;
+  content: TextProps;
 }
 
 export interface TabItemType {

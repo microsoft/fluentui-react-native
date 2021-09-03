@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { ITextProps } from '@fluentui-react-native/text';
+import { TextProps } from '@fluentui-react-native/experimental-text';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';
@@ -97,7 +97,7 @@ export interface TabsState {
 }
 export interface TabsSlotProps {
   root: React.PropsWithRef<IViewProps>;
-  label: ITextProps;
+  label: TextProps;
   container: FocusZoneProps;
   stack: IViewProps;
   tabPanel: IViewProps;
