@@ -1,5 +1,7 @@
 #import "RCTFocusZone.h"
 #import "RCTFocusZoneManager.h"
+#import <React/RCTConvert.h>
+#import <React/RCTUIManager.h>
 
 @implementation RCTFocusZoneManager
 
@@ -32,6 +34,14 @@ RCT_CUSTOM_VIEW_PROPERTY(focusZoneDirection, NSString, RCTFocusZone)
 }
 
 RCT_EXPORT_VIEW_PROPERTY(navigateAtEnd, NSString)
+
+RCT_CUSTOM_VIEW_PROPERTY(defaultTabbableElement, NSNumber, RCTFocusZone)
+{
+	NSNumber *tag = [RCTConvert NSNumber:json];
+	RCTUIManager *manager = [[self bridge] uiManager];
+	NSView *element = [manager viewForReactTag:tag];
+	[view setDefaultTabbableElement:element];
+}
 
 - (RCTView *)view
 {

@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
@@ -31,12 +31,12 @@ export const TabsItem = compose<TabsItemType>({
       testID,
       itemKey,
       itemCount,
-      accessibilityPosInSet,
+      accessibilityPositionInSet,
       accessibilitySetSize,
       ...rest
     } = userProps;
 
-    // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback)
+    // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback).
     const info = React.useContext(TabsContext);
 
     /* There's a bug where the user callback is being called multiple times on one click.
@@ -50,7 +50,7 @@ export const TabsItem = compose<TabsItemType>({
       }
     };
 
-    // Ensure focus is placed on tabsItem after click
+    // Ensure focus is placed on tabsItem after click.
     const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
 
     const pressable = useAsPressable({
@@ -59,7 +59,7 @@ export const TabsItem = compose<TabsItemType>({
       onFocus: changeSelection,
     });
 
-    // set up state
+    // Set up state.
     const state: TabsItemState = {
       info: {
         ...pressable.state,
@@ -70,7 +70,7 @@ export const TabsItem = compose<TabsItemType>({
       },
     };
 
-    const buttonRef = useViewCommandFocus(componentRef);
+    const buttonRef = Platform.OS === 'macos' ? componentRef : useViewCommandFocus(componentRef);
 
     /* We use the componentRef of the currently selected tabsItem to maintain the default tabbable
     element in Tabs. Since the componentRef isn't generated until after initial render,
@@ -84,7 +84,7 @@ export const TabsItem = compose<TabsItemType>({
     // Grab the styling information from the userProps, referencing the state as well as the props.
     const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
 
-    // Used when creating accessibility properties in mergeSettings below
+    // Used when creating accessibility properties in mergeSettings below.
     const onAccessibilityAction = React.useCallback(
       (event: { nativeEvent: { actionName: any } }) => {
         switch (event.nativeEvent.actionName) {
@@ -107,9 +107,10 @@ export const TabsItem = compose<TabsItemType>({
         accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: userProps.disabled, selected: info.selectedKey === userProps.itemKey },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
-        accessibilityPositionInSet: accessibilityPosInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
+        accessibilityPositionInSet: accessibilityPositionInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
         accessibilitySetSize: accessibilitySetSize ?? info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
+        focusable: Platform.OS === 'macos' ? !userProps.disabled : userProps.focusable ?? true,
       },
       content: { children: headerText + countText, testID: testID },
       icon: createIconProps(icon),
@@ -121,7 +122,7 @@ export const TabsItem = compose<TabsItemType>({
   render: (Slots: ISlots<TabsItemSlotProps>, renderData: TabsItemRenderData, ...children: React.ReactNode[]) => {
     const info = renderData.state!.info;
     const context = React.useContext(TabsContext);
-    // Sets the view that belongs to a TabItem
+    // Sets the view that belongs to a TabItem.
     context.views.set(info.key, children);
 
     return (

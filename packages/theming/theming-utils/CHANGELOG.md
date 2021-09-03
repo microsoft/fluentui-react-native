@@ -1,8 +1,29 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Wed, 18 Aug 2021 23:00:57 GMT and should not be manually modified.
+This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.0
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Minor changes
+
+- Add HC plumbing (ruaraki@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.6.0 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.12.0 (ruaraki@microsoft.com)
+
+## 0.5.3
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
 
 ## 0.5.2
 

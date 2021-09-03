@@ -2,6 +2,181 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Tue, 31 Aug 2021 18:48:34 GMT",
+      "tag": "@fluentui/react-native_v0.25.10",
+      "version": "0.25.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add logic to pick a selected button when tabbing to a FocusZone",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.7.20",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.40",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/radio-group to v0.13.5",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/link to v0.14.0",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/persona-coin to v0.9.13",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/persona to v0.11.13",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/pressable to v0.7.17",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/separator to v0.10.32",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui/react-native"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/text to v0.10.13",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui/react-native"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tabs to v0.4.0",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 27 Aug 2021 15:48:49 GMT",
+      "tag": "@fluentui/react-native_v0.25.9",
+      "version": "0.25.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.6.3",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "c729be7f7435205ba0bf60dd001e42b70ab39d93",
+            "package": "@fluentui/react-native"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/tabs to v0.3.4",
+            "author": "krsiler@microsoft.com",
+            "commit": "0dc74db1f3f96263bf9bba5495421de121cfb04e",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 21:02:08 GMT",
+      "tag": "@fluentui/react-native_v0.25.8",
+      "version": "0.25.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.20.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 04:48:40 GMT",
+      "tag": "@fluentui/react-native_v0.25.7",
+      "version": "0.25.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix text truncation for radio button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "b8c866644b2c5b64530990e59153424b0d6f5dcc",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 Aug 2021 21:36:58 GMT",
+      "tag": "@fluentui/react-native_v0.25.6",
+      "version": "0.25.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.6.0",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "55682eac694e7cbbf3396ffd14292fe1dddc8fa5",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 24 Aug 2021 18:08:30 GMT",
+      "tag": "@fluentui/react-native_v0.25.5",
+      "version": "0.25.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.19.1",
+            "author": "sanajmi@microsoft.com",
+            "commit": "a2124be0bdd820a4f38ae7017bd48e7ca3373300",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 23 Aug 2021 23:35:47 GMT",
+      "tag": "@fluentui/react-native_v0.25.4",
+      "version": "0.25.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.5.0",
+            "author": "dake.3601@gmail.com",
+            "commit": "84a24da6bdddd85adad1f5824e7af3d1804b1c1c",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 19 Aug 2021 18:31:21 GMT",
       "tag": "@fluentui/react-native_v0.25.3",
       "version": "0.25.3",

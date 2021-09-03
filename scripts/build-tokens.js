@@ -40,6 +40,12 @@ async function run() {
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/dark/reactnative/tokens-global.json'));
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/dark/reactnative/tokens-controls.json'));
 
+  console.log('Generating high contrast mode tokens...');
+  child_process.execSync(
+    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-highContrast.json --out ./packages/theming/theme-tokens/src/highContrast --p reactnative',
+  );
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/highContrast/reactnative/tokens-global.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/highContrast/reactnative/tokens-controls.json'));
   console.log('Done!');
 }
 

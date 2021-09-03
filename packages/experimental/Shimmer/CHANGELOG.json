@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/experimental-shimmer",
   "entries": [
     {
+      "date": "Tue, 31 Aug 2021 18:48:34 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.5.10",
+      "version": "0.5.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add logic to pick a selected button when tabbing to a FocusZone",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui-react-native/experimental-shimmer"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 21:02:08 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.5.10",
+      "version": "0.5.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.22",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/experimental-shimmer"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 04:48:40 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.5.9",
+      "version": "0.5.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix text truncation for radio button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "b8c866644b2c5b64530990e59153424b0d6f5dcc",
+            "package": "@fluentui-react-native/experimental-shimmer"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 23 Aug 2021 23:35:47 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.5.8",
+      "version": "0.5.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.20",
+            "author": "dake.3601@gmail.com",
+            "commit": "84a24da6bdddd85adad1f5824e7af3d1804b1c1c",
+            "package": "@fluentui-react-native/experimental-shimmer"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 19 Aug 2021 18:31:21 GMT",
       "tag": "@fluentui-react-native/experimental-shimmer_v0.5.7",
       "version": "0.5.7",

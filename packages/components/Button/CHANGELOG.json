@@ -2,6 +2,169 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Tue, 31 Aug 2021 18:48:34 GMT",
+      "tag": "@fluentui-react-native/button_v0.20.3",
+      "version": "0.20.3",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add logic to pick a selected button when tabbing to a FocusZone",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 27 Aug 2021 15:48:49 GMT",
+      "tag": "@fluentui-react-native/button_v0.20.3",
+      "version": "0.20.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixed bug: Luminosity ratio for boundary of focused button with respect to background is 1.2:1 which is less than 3:1",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "c729be7f7435205ba0bf60dd001e42b70ab39d93",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 21:02:08 GMT",
+      "tag": "@fluentui-react-native/button_v0.20.2",
+      "version": "0.20.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/adapters to v0.7.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 04:48:40 GMT",
+      "tag": "@fluentui-react-native/button_v0.20.1",
+      "version": "0.20.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix text truncation for radio button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "b8c866644b2c5b64530990e59153424b0d6f5dcc",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 Aug 2021 21:36:58 GMT",
+      "tag": "@fluentui-react-native/button_v0.20.0",
+      "version": "0.20.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Renamed icon to start icon",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "55682eac694e7cbbf3396ffd14292fe1dddc8fa5",
+            "package": "@fluentui-react-native/button"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.15",
+            "author": "sanajmi@microsoft.com",
+            "commit": "8f45901b85042f5f8d09f106608cb8f77ee260a8",
+            "package": "@fluentui-react-native/button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.38",
+            "author": "sanajmi@microsoft.com",
+            "commit": "8f45901b85042f5f8d09f106608cb8f77ee260a8",
+            "package": "@fluentui-react-native/button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/pressable to v0.7.15",
+            "author": "sanajmi@microsoft.com",
+            "commit": "8f45901b85042f5f8d09f106608cb8f77ee260a8",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 24 Aug 2021 18:08:30 GMT",
+      "tag": "@fluentui-react-native/button_v0.19.1",
+      "version": "0.19.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Use exported IconSourcesType from Icon package",
+            "author": "sanajmi@microsoft.com",
+            "commit": "a2124be0bdd820a4f38ae7017bd48e7ca3373300",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 23 Aug 2021 23:35:47 GMT",
+      "tag": "@fluentui-react-native/button_v0.19.0",
+      "version": "0.19.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Changed styling for the Button. Added new exampled to MenuButton",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "1f405d0b15fde31eb650b1d9bb5109dcc500440e",
+            "package": "@fluentui-react-native/button"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/adapters to v0.7.0",
+            "author": "dake.3601@gmail.com",
+            "commit": "84a24da6bdddd85adad1f5824e7af3d1804b1c1c",
+            "package": "@fluentui-react-native/button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/pressable to v0.7.13",
+            "author": "dake.3601@gmail.com",
+            "commit": "84a24da6bdddd85adad1f5824e7af3d1804b1c1c",
+            "package": "@fluentui-react-native/button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/text to v0.10.11",
+            "author": "dake.3601@gmail.com",
+            "commit": "84a24da6bdddd85adad1f5824e7af3d1804b1c1c",
+            "package": "@fluentui-react-native/button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.20",
+            "author": "dake.3601@gmail.com",
+            "commit": "84a24da6bdddd85adad1f5824e7af3d1804b1c1c",
+            "package": "@fluentui-react-native/button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.13",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "1f405d0b15fde31eb650b1d9bb5109dcc500440e",
+            "package": "@fluentui-react-native/button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.36",
+            "author": "sanajmi@microsoft.com",
+            "commit": "c4ee008b284d3e339cc19a6640c8e570d443d1cb",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 19 Aug 2021 18:31:21 GMT",
       "tag": "@fluentui-react-native/button_v0.18.12",
       "version": "0.18.12",

@@ -28,19 +28,20 @@ export interface ICheckboxState extends IPressableState {
 
 export interface ICheckboxProps extends Omit<IViewProps, 'onPress'> {
   /**
-   * An optional string for the Narrator to read. If not provided, this will be set to the Checkbox label
+   * An string for screen readers to read. If not provided, this will be set to the Checkbox label
+   * @deprecated Use accessibilityLabel instead.
    */
   ariaLabel?: string;
 
   /**
-   ** Checked state. Mutually exclusive to “defaultChecked”. Use this if you control the checked state at a higher level
-   ** and plan to pass in the correct value based on handling onChange events and re-rendering.
+   * Checked state. Mutually exclusive to “defaultChecked”. Use this if you control the checked state at a higher level
+   * and plan to pass in the correct value based on handling onChange events and re-rendering.
    */
   checked?: boolean;
 
   /**
-   ** Default checked state. Mutually exclusive to ‘checked’. Use this if you want an uncontrolled component, and
-   ** want the Checkbox instance to maintain its own state.
+   * Default checked state. Mutually exclusive to ‘checked’. Use this if you want an uncontrolled component, and
+   * want the Checkbox instance to maintain its own state.
    */
   defaultChecked?: boolean;
 
