@@ -48,7 +48,7 @@ export const Tabs = compose<TabsType>({
         tabs.state.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
           if (React.isValidElement(child)) {
             // Sets default selected tabItem.
-            if (tabs.state.context.selectedKey == null && !child.props.disabled) {
+            if (tabs.state?.context.selectedKey == null && !child.props.disabled) {
               tabs.state.context.selectedKey = child.props.itemKey;
             }
             return child.props.itemKey;
