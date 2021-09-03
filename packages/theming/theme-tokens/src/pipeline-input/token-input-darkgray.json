@@ -77,7 +77,7 @@
     "NeutralForeground3Brand": {
       "Fill": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.68" },
+          "Rest": { "aliasOf": "Global.Color.Grey.80" },
           "Hover": { "aliasOf": "Global.Color.Brand.Tint.40" },
           "Pressed": { "aliasOf": "Global.Color.Brand.Tint.10" },
           "Disabled": { "aliasOf": "Global.Color.Grey.40" }
