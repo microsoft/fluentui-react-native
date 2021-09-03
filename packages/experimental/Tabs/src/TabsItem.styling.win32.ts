@@ -55,7 +55,7 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
           justifyContent: 'center',
         },
       }),
-      ['iconColor', 'indicatorColor'],
+      [],
     ),
     indicator: buildProps(
       (tokens: TabsItemTokens) => ({
