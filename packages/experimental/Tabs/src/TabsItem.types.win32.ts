@@ -5,8 +5,7 @@ import { IFocusable, IWithPressableOptions, IWithPressableEvents } from '@fluent
 import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IconProps } from '@fluentui-react-native/icon';
 import { TabsItemTokens, TabsItemState } from './TabsItem.types';
-
-type IconSourcesType = number | string | IconProps;
+import { IconSourcesType } from '@fluentui-react-native/icon';
 
 export interface TabsItemProps extends Omit<IWithPressableOptions<IViewWin32Props>, 'onPress'>   {
   /**
