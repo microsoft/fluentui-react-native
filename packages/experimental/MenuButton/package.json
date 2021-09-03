@@ -26,6 +26,7 @@
     "@fluentui-react-native/framework": "0.5.34",
     "@fluentui-react-native/icon": "0.8.17",
     "@fluentui-react-native/tokens": ">=0.9.22 <1.0.0",
+    "jest-svg-transformer": "^1.0.0",
     "react-native-svg": "^12.1.1"
   },
   "devDependencies": {
