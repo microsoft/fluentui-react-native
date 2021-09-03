@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
@@ -38,32 +38,16 @@ export const TabsItem = compose<TabsItemType>({
     // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback).
     const info = React.useContext(TabsContext);
 
-    const [focusState, setFocusState] = React.useState({
-      focused: false,
-    });
-
     const changeSelection = React.useCallback(() => {
-      componentRef?.current?.focus();
-    }, [componentRef]);
-
-    const changeSelectionWithFocus = React.useCallback(() => {
-      setFocusState({ focused: true });
-      if (!focusState.focused) {
-        info.onTabsClick && info.onTabsClick(itemKey);
-        info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
-        info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
-      }
-    }, [focusState, setFocusState, componentRef, info, itemKey]);
-
-    const removeFocus = React.useCallback(() => {
-      setFocusState({ focused: false });
-    }, [setFocusState]);
+      info.focusZoneRef.current.focus(); // GH #964, FocusZone not implemented on windows.
+      info.onTabsClick && info.onTabsClick(itemKey);
+      info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
+      info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
+    }, [componentRef, info, itemKey]);
 
     const pressable = useAsPressable({
       ...rest,
       onPress: changeSelection,
-      onFocus: changeSelectionWithFocus,
-      onBlur: removeFocus,
     });
 
     // Set up state.
@@ -71,13 +55,13 @@ export const TabsItem = compose<TabsItemType>({
       info: {
         ...pressable.state,
         selected: info.selectedKey === userProps.itemKey,
-        icon: !!icon,
+        icon: false, // GH #935, Icons are on backlog for windows.
         key: itemKey,
         headerText: !!headerText || itemCount !== undefined,
       },
     };
 
-    const buttonRef = Platform.OS === 'macos' ? componentRef : useViewCommandFocus(componentRef);
+    const buttonRef = useViewCommandFocus(componentRef);
 
     /* We use the componentRef of the currently selected tabsItem to maintain the default tabbable
     element in Tabs. Since the componentRef isn't generated until after initial render,
@@ -117,7 +101,7 @@ export const TabsItem = compose<TabsItemType>({
         accessibilityPositionInSet: accessibilityPositionInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
         accessibilitySetSize: accessibilitySetSize ?? info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
-        focusable: Platform.select({default: true, macos: !userProps.disabled}),
+        focusable: false,
       },
       content: { children: headerText + countText, testID: testID },
       icon: createIconProps(icon),

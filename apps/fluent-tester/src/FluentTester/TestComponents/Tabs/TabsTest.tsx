@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Tabs, TabsItem, Text, Button } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';
@@ -247,10 +247,6 @@ const tabsSections: TestSection[] = [
     component: disabledTabs,
   },
   {
-    name: 'Count and Icon',
-    component: tabsCountIcon,
-  },
-  {
     name: 'Trigger onTabsClick event',
     component: onTabsClickEvent,
   },
@@ -276,10 +272,17 @@ const tabsSections: TestSection[] = [
   },
 ];
 
+if (Platform.OS !== 'windows') {
+  tabsSections.push({
+    name: 'Count and Icon',
+    component: tabsCountIcon,
+  });
+}
+
 export const TabsTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Experimental',
-    uwpStatus: 'Backlog',
+    uwpStatus: 'Experimental',
     iosStatus: 'Backlog',
     macosStatus: 'Experimental',
     androidStatus: 'Backlog',
