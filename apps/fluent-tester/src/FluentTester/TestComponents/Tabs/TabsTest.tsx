@@ -4,7 +4,6 @@ import { Tabs, TabsItem, Text, Button } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
 
 const tabs: React.FunctionComponent = () => {
@@ -44,21 +43,25 @@ const disabledTabs: React.FunctionComponent = () => {
 };
 
 const tabsCountIcon: React.FunctionComponent = () => {
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
+  const svgExample = {
+    svgSource: {
+      src: TestSvg,
+      viewBox: '0 0 500 500',
+    },
+    width: 20,
+    height: 20,
   };
 
   return (
     <View style={stackStyle}>
       <Tabs label="Tabs">
-        <TabsItem headerText="Home" itemKey="A" icon={{ svgSource: svgProps, width: 20, height: 20, style: { margin: 5 } }} itemCount={23}>
+        <TabsItem headerText="Home" itemKey="A" icon={svgExample} itemCount={23}>
           <Text>Tabs #1</Text>
         </TabsItem>
-        <TabsItem itemKey="B" icon={{ svgSource: svgProps, width: 20, height: 20 }} itemCount={0}>
+        <TabsItem itemKey="B" icon={svgExample} itemCount={0}>
           <Text>Tabs #2</Text>
         </TabsItem>
-        <TabsItem itemKey="C" icon={{ svgSource: svgProps, width: 20, height: 20 }}>
+        <TabsItem itemKey="C" icon={svgExample}>
           <Text>Tabs #3</Text>
         </TabsItem>
       </Tabs>
@@ -92,8 +95,8 @@ const onTabsClickEvent: React.FunctionComponent = () => {
 };
 
 const tabsChangingViews: React.FunctionComponent = () => {
-  // If User wants to control what gets rendered example
-  const [selectedKey, setSelectedKey] = React.useState('home');
+  // If user wants to control what gets rendered example.
+  const [selectedKey, setSelectedKey] = React.useState('Tabs #1');
 
   const onTabsClick = (key: string) => {
     setSelectedKey(key);
@@ -102,14 +105,12 @@ const tabsChangingViews: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
       <Tabs label="Tabs" onTabsClick={onTabsClick} headersOnly={true} selectedKey={selectedKey}>
-        <TabsItem headerText="Home" itemKey="home" />
-        <TabsItem headerText="File" itemKey="file" />
-        <TabsItem headerText="Settings" itemKey="settings" />
+        <TabsItem headerText="Home" itemKey="Tabs #1" />
+        <TabsItem headerText="File" itemKey="Tabs #2" />
+        <TabsItem headerText="Settings" itemKey="Tabs #3" />
       </Tabs>
       <View style={{ marginVertical: 1 }}>
-        {selectedKey == 'home' && <Text>Tabs #1</Text>}
-        {selectedKey == 'file' && <Text>Tabs #2</Text>}
-        {selectedKey == 'settings' && <Text>Tabs #3</Text>}
+        <Text>{selectedKey}</Text>
       </View>
     </View>
   );
@@ -123,7 +124,7 @@ const tabsRenderSeparately: React.FunctionComponent = () => {
   };
 
   const getTabId = (key: string) => {
-    return `ShapeColorPivot_${key}`;
+    return `ShapeColorTabs_${key}`;
   };
 
   return (
@@ -148,7 +149,7 @@ const tabsRenderSeparately: React.FunctionComponent = () => {
 };
 
 const tabsSettingSelectedKey: React.FunctionComponent = () => {
-  // If user wants to programmatically set the selectedKey to control the view
+  // If user wants to programmatically set the tab's selectedKey with a button example.
   const [selectedKey, setSelectedKey] = React.useState('home');
   const [currTabItemIndex, setCurrTabItemIndex] = React.useState(0);
   const tabItems = ['home', 'file', 'setting'];

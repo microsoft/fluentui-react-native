@@ -1,6 +1,6 @@
 {
-  "type": "minor",
-  "comment": "tabs control for macos",
+  "type": "patch",
+  "comment": "changed name of one line from pivot to tabs",
   "packageName": "@fluentui-react-native/tester",
   "email": "sriyaaluru@gmail.com",
   "dependentChangeType": "patch"
