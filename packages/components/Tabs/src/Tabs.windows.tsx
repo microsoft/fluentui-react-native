@@ -74,9 +74,7 @@ export const Tabs = compose<TabsType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
-    const pressable = useAsPressable({
-      ...rest,
-    });
+    const pressable = useAsPressable({ ...rest });
 
     const onKeyDown = (ev: any) => {
       if (ev.nativeEvent.key === 'ArrowRight' || ev.nativeEvent.key === 'ArrowLeft') {
