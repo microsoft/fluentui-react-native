@@ -59,6 +59,7 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
       focusable: !disabled ?? true,
       headerText: headerText ?? '',
       accessibilityState: { disabled: disabled, selected: info.selectedKey === itemKey },
+      accessibilityActions: [{ name: 'Select'}],
       onAccessibilityAction: onAccessibilityAction,
       itemCount: itemCount,
       ref: useViewCommandFocus(componentRef),
