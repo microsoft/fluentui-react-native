@@ -32,7 +32,6 @@ exports[`Tabs FocusZone props 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -69,7 +68,7 @@ exports[`Tabs FocusZone props 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
@@ -104,7 +103,6 @@ exports[`Tabs FocusZone props 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -141,7 +139,7 @@ exports[`Tabs FocusZone props 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
@@ -176,7 +174,6 @@ exports[`Tabs FocusZone props 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -213,7 +210,7 @@ exports[`Tabs FocusZone props 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
@@ -283,7 +280,6 @@ exports[`Tabs default props 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -320,7 +316,7 @@ exports[`Tabs default props 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
@@ -355,7 +351,6 @@ exports[`Tabs default props 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -392,7 +387,7 @@ exports[`Tabs default props 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
@@ -427,7 +422,6 @@ exports[`Tabs default props 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -464,7 +458,7 @@ exports[`Tabs default props 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
@@ -534,7 +528,6 @@ exports[`Tabs disabled 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -571,7 +564,7 @@ exports[`Tabs disabled 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
@@ -606,7 +599,6 @@ exports[`Tabs disabled 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -643,7 +635,7 @@ exports[`Tabs disabled 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
@@ -678,7 +670,6 @@ exports[`Tabs disabled 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -715,7 +706,7 @@ exports[`Tabs disabled 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
@@ -785,7 +776,6 @@ exports[`Tabs header text and count 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -823,7 +813,7 @@ exports[`Tabs header text and count 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
@@ -872,7 +862,6 @@ exports[`Tabs header text and count 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -910,7 +899,7 @@ exports[`Tabs header text and count 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
@@ -959,7 +948,6 @@ exports[`Tabs header text and count 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -997,7 +985,7 @@ exports[`Tabs header text and count 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
@@ -1082,7 +1070,6 @@ exports[`Tabs headers only 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -1119,7 +1106,7 @@ exports[`Tabs headers only 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
@@ -1154,7 +1141,6 @@ exports[`Tabs headers only 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -1191,7 +1177,7 @@ exports[`Tabs headers only 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
@@ -1226,7 +1212,6 @@ exports[`Tabs headers only 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -1263,7 +1248,7 @@ exports[`Tabs headers only 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
@@ -1346,7 +1331,6 @@ exports[`Tabs props 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -1384,7 +1368,7 @@ exports[`Tabs props 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
@@ -1433,7 +1417,6 @@ exports[`Tabs props 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -1471,7 +1454,7 @@ exports[`Tabs props 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
@@ -1520,7 +1503,6 @@ exports[`Tabs props 1`] = `
         accessibilityActions={
           Array [
             Object {
-              "label": "Select a TabsItem",
               "name": "Select",
             },
           ]
@@ -1558,7 +1540,7 @@ exports[`Tabs props 1`] = `
             "flexDirection": "column",
             "justifyContent": "center",
             "minHeight": 32,
-            "minWidth": 80,
+            "minWidth": 32,
           }
         }
       >
