@@ -3,7 +3,7 @@ import { FlatList, View, ViewStyle, StyleSheet, ColorValue } from 'react-native'
 import { useTheme, Theme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { createAliasTokens, getCurrentAppearance } from '@fluentui-react-native/theming-utils';
-import { createOfficeAliasTokens, getThemingModule } from '@fluentui-react-native/win32-theme';
+import { createOfficeAliasTokens } from '@fluentui-react-native/win32-theme';
 import { commonTestStyles } from '../Common/styles';
 import { Text } from '@fluentui/react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
