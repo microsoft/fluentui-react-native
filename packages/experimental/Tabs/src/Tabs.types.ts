@@ -40,16 +40,11 @@ export interface TabsContextData {
 
 export interface TabsTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens {}
 
-export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'>, ViewProps {
+export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation' | 'defaultSelectedKey'>, ViewProps {
   /**
    * Descriptive label for the Tabs. This will be displayed as the title of the Tabs to the user
    */
   label?: string;
-
-  /**
-   * The key of the TabsItem that will initially be selected
-   */
-  defaultSelectedKey?: string;
 
   /**
    * The key of the selected option. If you provide this, you must maintain selection state by observing
