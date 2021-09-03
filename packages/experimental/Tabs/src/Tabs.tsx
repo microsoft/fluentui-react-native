@@ -37,7 +37,7 @@ export const Tabs = compose<TabsType>({
 
     const tabs = useTabs(userProps);
 
-    if(!tabs.state) return;
+    if(!tabs.state) return null;
 
     // Grab the styled slots.
     const Slots = useSlots(userProps, layer => tabs.state[layer] || userProps[layer]);

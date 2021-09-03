@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { View, ViewProps } from 'react-native';
-import { TextProps } from '@fluentui-react-native/experimental-text';
+import { View } from 'react-native';
+import { ITextProps } from '@fluentui-react-native/text';
+import type { IViewProps } from '@fluentui-react-native/adapters';
 import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';
 
@@ -40,7 +41,7 @@ export interface TabsContextData {
 
 export interface TabsTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens {}
 
-export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation' | 'defaultTabbableElement'>, ViewProps {
+export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation' | 'defaultTabbableElement'>, IViewProps {
   /**
    * Descriptive label for the Tabs. This will be displayed as the title of the Tabs to the user
    */
@@ -95,11 +96,11 @@ export interface TabsState {
   };
 }
 export interface TabsSlotProps {
-  root: React.PropsWithRef<ViewProps>;
-  label: TextProps;
+  root: React.PropsWithRef<IViewProps>;
+  label: ITextProps;
   container: FocusZoneProps;
-  stack: ViewProps;
-  tabPanel: ViewProps;
+  stack: IViewProps;
+  tabPanel: IViewProps;
 }
 
 export interface TabsType {

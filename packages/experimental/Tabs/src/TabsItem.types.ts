@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { ViewProps, ViewStyle, ColorValue } from 'react-native';
-import { TextProps } from '@fluentui-react-native/experimental-text';
+import { ViewStyle, ColorValue } from 'react-native';
 import { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IWithPressableEvents, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
+import type { IViewProps } from '@fluentui-react-native/adapters';
+import { ITextProps } from '@fluentui-react-native/text';
 
 export const tabsItemName = 'TabsItem';
 
@@ -96,7 +97,7 @@ export interface TabsItemTokens extends FontTokens, IBorderTokens {
   selected?: TabsItemTokens;
 }
 
-export interface TabsItemProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface TabsItemProps extends Omit<IWithPressableOptions<IViewProps>, 'onPress'> {
   /**
    * The text string for the option
    */
@@ -140,11 +141,11 @@ export interface TabsItemInfo {
 }
 
 export interface TabsItemSlotProps {
-  root: React.PropsWithRef<ViewProps>;
+  root: React.PropsWithRef<IViewProps>;
   icon: IconProps;
-  stack: ViewProps;
-  indicator: ViewProps;
-  content: TextProps;
+  stack: IViewProps;
+  indicator: IViewProps;
+  content: ITextProps;
 }
 
 export interface TabItemType {

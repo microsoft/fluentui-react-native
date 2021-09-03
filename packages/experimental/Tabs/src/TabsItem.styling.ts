@@ -1,4 +1,4 @@
-import { tabsItemName, TabsItemTokens, TabsItemSlotProps, TabsItemProps } from './TabsItem.types';
+import { tabsItemName, TabsItemSlotProps, TabsItemTokens, TabsItemProps } from './TabsItem.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { tabsItemStates, defaultTabsItemTokens } from './TabsItemTokens';
@@ -16,7 +16,7 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
           alignSelf: 'flex-start',
           justifyContent: 'center',
           minHeight: 32,
-          minWidth: 80,
+          minWidth: 32,
           borderWidth: 2,
           borderRadius: 4,
           ...borderStyles.from(tokens, theme),
@@ -63,11 +63,11 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
           borderRadius: 2,
           marginBottom: 2,
           alignSelf: 'stretch',
-          marginHorizontal: 10,
+          marginHorizontal: tokens.indicatorMarginHorizontal,
           backgroundColor: tokens.indicatorColor,
         },
       }),
-      ['indicatorColor'],
+      ['indicatorColor', 'indicatorMarginHorizontal'],
     ),
   },
 };
