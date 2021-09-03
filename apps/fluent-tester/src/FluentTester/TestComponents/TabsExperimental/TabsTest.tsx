@@ -71,9 +71,12 @@ const tabsCountIcon: React.FunctionComponent = () => {
 const onTabsClickEvent: React.FunctionComponent = () => {
   const [selectedKey, setSelectedKey] = React.useState('home_key');
 
-  const onTabsClick = (key: string) => {
-    setSelectedKey(key);
-  };
+  const onTabsClick = React.useCallback(
+    (key: string) => {
+      setSelectedKey(key);
+    },
+    [setSelectedKey],
+  );
 
   return (
     <View style={stackStyle}>
@@ -97,9 +100,12 @@ const tabsChangingViews: React.FunctionComponent = () => {
   // If User wants to control what gets rendered example
   const [selectedKey, setSelectedKey] = React.useState('home');
 
-  const onTabsClick = (key: string) => {
-    setSelectedKey(key);
-  };
+  const onTabsClick = React.useCallback(
+    (key: string) => {
+      setSelectedKey(key);
+    },
+    [setSelectedKey],
+  );
 
   return (
     <View style={stackStyle}>
@@ -120,9 +126,12 @@ const tabsChangingViews: React.FunctionComponent = () => {
 const tabsRenderSeparately: React.FunctionComponent = () => {
   const [selectedKey, setSelectedKey] = React.useState('rectangleRed');
 
-  const onTabsClick = (key: string) => {
-    setSelectedKey(key);
-  };
+  const onTabsClick = React.useCallback(
+    (key: string) => {
+      setSelectedKey(key);
+    },
+    [setSelectedKey],
+  );
 
   const getTabId = (key: string) => {
     return `ShapeColorPivot_${key}`;
@@ -186,9 +195,12 @@ const tabsWithFlexibility: React.FunctionComponent = () => {
     setSelectedKey('home');
   };
 
-  const onTabsClick = (key: string) => {
-    setSelectedKey(key);
-  };
+  const onTabsClick = React.useCallback(
+    (key: string) => {
+      setSelectedKey(key);
+    },
+    [setSelectedKey],
+  );
 
   return (
     <View style={stackStyle}>
