@@ -39,7 +39,6 @@ export interface TabsItemProps extends Omit<IWithPressableOptions<IViewWin32Prop
   componentRef?: React.RefObject<IFocusable>;
 
   testID?: string;
-
 }
 
 export interface TabsItemInfo {
