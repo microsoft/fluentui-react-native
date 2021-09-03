@@ -3,8 +3,7 @@ import { ViewProps, ViewStyle, ColorValue } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IWithPressableEvents, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
-import { IconProps } from '@fluentui-react-native/icon';
-import { IconSourcesType } from '@fluentui-react-native/icon';
+import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 
 export const tabsItemName = 'TabsItem';
 

@@ -3,9 +3,8 @@ import { ViewProps} from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { IFocusable, IWithPressableOptions, IWithPressableEvents } from '@fluentui-react-native/interactive-hooks';
 import type { IViewWin32Props } from '@office-iss/react-native-win32';
-import { IconProps } from '@fluentui-react-native/icon';
 import { TabsItemTokens, TabsItemState } from './TabsItem.types';
-import { IconSourcesType } from '@fluentui-react-native/icon';
+import { IconSourcesType, IconProps } from '@fluentui-react-native/icon';
 
 export interface TabsItemProps extends Omit<IWithPressableOptions<IViewWin32Props>, 'onPress'>   {
   /**
