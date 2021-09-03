@@ -15,7 +15,6 @@ import {
   useAsPressable,
   useViewCommandFocus,
   createIconProps,
-  useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
 
 export const TabsItem = compose<TabsItemType>({
@@ -39,24 +38,32 @@ export const TabsItem = compose<TabsItemType>({
     // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback).
     const info = React.useContext(TabsContext);
 
-    /* There's a bug where the user callback is being called multiple times on one click.
-    We check that there is an actual change in selection before forwarding the message to the user callback
-    so that they aren't notified more than once for each click. */
-    const changeSelection = () => {
-      if (itemKey != info.selectedKey) {
+    const [focusState, setFocusState] = React.useState({
+      focused: false,
+    });
+
+    const changeSelection = React.useCallback(() => {
+      componentRef?.current?.focus();
+    }, [componentRef]);
+
+    const changeSelectionWithFocus = React.useCallback(() => {
+      setFocusState({ focused: true });
+      if (!focusState.focused) {
         info.onTabsClick && info.onTabsClick(itemKey);
         info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
         info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
       }
-    };
+    }, [focusState, setFocusState, componentRef, info, itemKey]);
 
-    // Ensure focus is placed on tabsItem after click.
-    const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
+    const removeFocus = React.useCallback(() => {
+      setFocusState({ focused: false });
+    }, [setFocusState]);
 
     const pressable = useAsPressable({
       ...rest,
-      onPress: changeSelectionWithFocus,
-      onFocus: changeSelection,
+      onPress: changeSelection,
+      onFocus: changeSelectionWithFocus,
+      onBlur: removeFocus,
     });
 
     // Set up state.
