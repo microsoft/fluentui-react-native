@@ -34,9 +34,14 @@ export const Tabs = compose<TabsType>({
     tabPanel: View,
   },
   render: (userProps: TabsProps, useSlots: UseSlots<TabsType>) => {
+
     const tabs = useTabs(userProps);
+
+    if(!tabs.state) return;
+
     // Grab the styled slots.
     const Slots = useSlots(userProps, layer => tabs.state[layer] || userProps[layer]);
+
     // Return the handler to finish render.
     return (final: TabsProps, ...children: React.ReactNode[]) => {
       const { label, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(tabs.props, final);
