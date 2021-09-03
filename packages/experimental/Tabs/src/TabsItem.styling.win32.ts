@@ -64,11 +64,11 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
           borderRadius: 2,
           marginBottom: 2,
           alignSelf: 'stretch',
-          marginHorizontal: tokens.marginHorizontal,
+          marginHorizontal: tokens.indicatorMarginHorizontal,
           backgroundColor: tokens.indicatorColor,
         },
       }),
-      ['indicatorColor'],
+      ['indicatorColor', 'indicatorMarginHorizontal'],
     ),
   },
 };
