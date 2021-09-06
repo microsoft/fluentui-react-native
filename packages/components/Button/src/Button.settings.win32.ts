@@ -46,7 +46,7 @@ export const settings: IComposeSettings<IButtonType> = [
         alignItems: 'center',
         flexDirection: 'row',
         alignSelf: 'flex-start',
-        minHeight: 24,
+        height: 24,
         minWidth: 32,
         justifyContent: 'center',
       },
@@ -81,6 +81,11 @@ export const settings: IComposeSettings<IButtonType> = [
           borderColor: 'strokeFocus2',
           borderWidth: 2,
         },
+        stack: {
+          style: {
+            height: 22
+          }
+        }
       },
     },
   },
