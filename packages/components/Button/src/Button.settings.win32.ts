@@ -82,6 +82,7 @@ export const settings: IComposeSettings<IButtonType> = [
           borderWidth: 2,
         },
         stack: {
+          // TODO - #984: temp solution to remove extra space for the focused button
           style: {
             height: 22
           }
