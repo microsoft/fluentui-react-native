@@ -2,7 +2,7 @@ steps:
   - checkout: self
     persistCredentials: true
 
-  - template: templates/setup-repo-min-build.yml
+  - template: setup-repo-min-build.yml
 
   # Clean Derived Data
   - script: |
@@ -14,7 +14,7 @@ steps:
     displayName: 'Install CocoaPods Environment'
 
   # Select proper Xcode version
-  - template: templates/apple-xcode-select.yml
+  - template: apple-xcode-select.yml
 
   # Pod Install iOS
   - bash: |
