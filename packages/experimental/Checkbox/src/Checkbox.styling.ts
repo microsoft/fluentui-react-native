@@ -8,7 +8,7 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
   states: checkboxStates,
   slotProps: {
     root: buildProps(
-      (tokens: CheckboxTokens, theme: Theme) => ({
+      (tokens: CheckboxTokens) => ({
         style: {
           display: 'flex',
           alignItems: 'center',
@@ -17,10 +17,9 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
           marginTop: 0,
           position: 'relative',
           backgroundColor: tokens.backgroundColor,
-          ...borderStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', ...borderStyles.keys],
+      ['backgroundColor'],
     ),
     content: buildProps(
       (tokens: CheckboxTokens, theme: Theme) => ({
@@ -33,7 +32,7 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
           ...fontStyles.from(tokens, theme),
         },
       }),
-      ['color', 'textBorderColor', ...fontStyles.keys, ...borderStyles.keys],
+      ['color', 'textBorderColor', ...fontStyles.keys],
     ),
     checkbox: buildProps(
       (tokens: CheckboxTokens, theme: Theme) => ({

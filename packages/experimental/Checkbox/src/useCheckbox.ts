@@ -6,7 +6,7 @@ import {
   useViewCommandFocus,
   useAsToggle,
 } from '@fluentui-react-native/interactive-hooks';
-import { CheckboxProps, CheckboxInfo, checkboxSelectActionLabel, CheckboxState } from './Checkbox.types';
+import { CheckboxProps, CheckboxInfo, CheckboxState } from './Checkbox.types';
 import { IPressableProps } from '@fluentui-react-native/pressable';
 
 export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
@@ -22,6 +22,12 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
     componentRef = defaultComponentRef,
     ...rest } = props;
 
+  // Warns defaultChecked and checked being mutually exclusive.
+  if (defaultChecked != undefined && checked != undefined) {
+    console.warn('defaultChecked and checked are mutually exclusive to one another. Use one or the other.');
+  }
+
+  // Re-usable hook for toggle components.
   const [isChecked, toggleChecked] = useAsToggle(defaultChecked, checked, onChange);
 
   // Ensure focus is placed on checkbox after click
@@ -44,7 +50,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
   const onAccessibilityAction = React.useCallback(
     (event: { nativeEvent: { actionName: any } }) => {
       switch (event.nativeEvent.actionName) {
-        case 'Toggle':
+        case 'Select':
           toggleChecked();
           break;
       }
@@ -54,7 +60,6 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
 
   return {
     props: {
-      ...rest,
       ref: buttonRef,
       ...pressable.props,
       accessible: true,
@@ -62,10 +67,10 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
       accessibilityRole: 'checkbox',
       accessibilityLabel: accessibilityLabel ?? label,
       accessibilityState: { disabled: state.disabled, checked: state.checked },
-      accessibilityActions: [{ name: 'Toggle', label: checkboxSelectActionLabel }],
+      accessibilityActions: [{ name: 'Select' }],
       onAccessibilityAction: onAccessibilityAction,
       onKeyUp: onKeyUpSpace,
-      label: label,
+      ...props,
     },
     state: {
       ...pressable.state,

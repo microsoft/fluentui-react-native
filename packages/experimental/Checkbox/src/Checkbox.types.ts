@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { ColorValue } from 'react-native';
 import { FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, IWithPressableEvents, IPressableState } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import type { ITextProps, IViewProps } from '@fluentui-react-native/adapters';
 
 export const checkboxName = 'Checkbox';
-export const checkboxSelectActionLabel = 'Toggle the Checkbox';
 
 export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
   checkboxBackgroundColor?: ColorValue;
@@ -13,6 +12,7 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
   checkmarkColor?: ColorValue;
   checkmarkVisibility?: number;
   textBorderColor?: ColorValue;
+  checkboxBorderRadius?: number;
 
   /**
    * States that can be applied to a checkbox

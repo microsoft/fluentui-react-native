@@ -31,5 +31,14 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     },
     checked: {
       checkmarkVisibility: 1,
+      checkmarkColor: t.colors.menuItemTextHovered,
+    },
+    boxAtEnd: {
+      checkbox: {
+        style: {
+          marginStart: 4,
+          marginEnd: 0,
+        },
+      },
     },
   } as CheckboxTokens);
