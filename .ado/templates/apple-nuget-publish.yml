@@ -1,5 +1,21 @@
-# Build the FluentUI React Native Test App in different configurations
 steps:
+  - checkout: self
+    persistCredentials: true
+
+  - template: templates/setup-repo-min-build.yml
+
+  # Clean Derived Data
+  - script: |
+      rm -rf $(Build.Repository.LocalPath)/DerivedData
+    displayName: 'Clean DerivedData'
+
+  - script: |
+      sudo gem install cocoapods
+    displayName: 'Install CocoaPods Environment'
+
+  # Select proper Xcode version
+  - template: templates/apple-xcode-select.yml
+
   # Pod Install iOS
   - bash: |
       echo "pod install --project-directory=src"
@@ -43,3 +59,24 @@ steps:
       xcode_scheme: 'FluentTester'
       xcode_configuration: 'Release'
       xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides_ios_device.xcconfig'
+
+  # generate the sanitizedBuildNumber environment variable
+  - bash: '.ado/scripts/generate_build_number.sh'
+    displayName: 'Generate Build Number'
+
+  # pack the nuspec
+  - task: NuGetCommand@2
+    displayName: 'NuGet pack'
+    inputs:
+      command: pack
+      packagesToPack: 'package.nuspec'
+      buildProperties: buildNumber=$(sanitizedBuildNumber);commitId=$(Build.SourceVersion);repoUri=$(Build.Repository.Uri)
+
+  # push the package package
+  - task: NuGetCommand@2
+    displayName: 'NuGet push'
+    inputs:
+      command: push
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.ReactNative.*.nupkg'
+      nuGetFeedType: external
+      publishFeedCredentials: Office

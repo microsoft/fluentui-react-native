@@ -47,23 +47,4 @@ jobs:
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
     steps:
-      - checkout: self
-        persistCredentials: true
-
-      - template: templates/setup-repo-min-build.yml
-
-      # Clean Derived Data
-      - script: |
-          rm -rf $(Build.Repository.LocalPath)/DerivedData
-        displayName: 'Clean DerivedData'
-
-      - script: |
-          sudo gem install cocoapods
-        displayName: 'Install CocoaPods Environment'
-
-      # Select proper Xcode version
-      - template: templates/apple-xcode-select.yml
-
-      - template: templates/apple-xcode-build-static-libs.yml
-
-      - template: templates/nuget-publish.yml
+      - template: templates/apple-nuget-publish.yml
