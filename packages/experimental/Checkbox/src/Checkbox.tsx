@@ -33,7 +33,7 @@ export const Checkbox = compose<CheckboxType>({
         <Slots.root {...mergedProps}>
           {Checkbox.state.boxAtEnd && <Slots.content key="content">{label}</Slots.content>}
           <Slots.checkbox>
-            <Slots.checkmark>✓</Slots.checkmark>
+            <Slots.checkmark key="checkmark">✓</Slots.checkmark>
           </Slots.checkbox>
           {!Checkbox.state.boxAtEnd && <Slots.content key="content">{label}</Slots.content>}
           {children}

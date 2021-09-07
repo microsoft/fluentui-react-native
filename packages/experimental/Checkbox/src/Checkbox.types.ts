@@ -13,6 +13,8 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
   checkmarkVisibility?: number;
   textBorderColor?: ColorValue;
   checkboxBorderRadius?: number;
+  checkboxMarginStart?: number;
+  checkboxMarginEnd?: number;
 
   /**
    * States that can be applied to a checkbox
@@ -89,7 +91,7 @@ export interface CheckboxState extends IPressableState {
 }
 
 export interface CheckboxInfo {
-  props: React.PropsWithRef<CheckboxProps>;
+  props: CheckboxProps & React.ComponentPropsWithRef<any>;
   state: CheckboxState;
 }
 

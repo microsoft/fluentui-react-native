@@ -41,13 +41,14 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
           borderWidth: 1,
           minHeight: 14,
           minWidth: 14,
-          marginEnd: 4,
+          marginEnd: tokens.checkboxMarginEnd,
+          marginStart: tokens.checkboxMarginStart,
           backgroundColor: tokens.checkboxBackgroundColor,
           borderColor: tokens.checkboxBorderColor,
           ...borderStyles.from(tokens, theme),
         },
       }),
-      ['checkboxBackgroundColor', 'checkboxBorderColor', ...borderStyles.keys],
+      ['checkboxBackgroundColor', 'checkboxBorderColor', 'checkboxMarginStart', 'checkboxMarginEnd', ...borderStyles.keys],
     ),
     checkmark: buildProps(
       (tokens: CheckboxTokens) => ({

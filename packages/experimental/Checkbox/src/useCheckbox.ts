@@ -50,7 +50,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
   const onAccessibilityAction = React.useCallback(
     (event: { nativeEvent: { actionName: any } }) => {
       switch (event.nativeEvent.actionName) {
-        case 'Select':
+        case 'Toggle':
           toggleChecked();
           break;
       }
@@ -67,7 +67,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
       accessibilityRole: 'checkbox',
       accessibilityLabel: accessibilityLabel ?? label,
       accessibilityState: { disabled: state.disabled, checked: state.checked },
-      accessibilityActions: [{ name: 'Select' }],
+      accessibilityActions: [{ name: 'Toggle' }],
       onAccessibilityAction: onAccessibilityAction,
       onKeyUp: onKeyUpSpace,
       ...props,
