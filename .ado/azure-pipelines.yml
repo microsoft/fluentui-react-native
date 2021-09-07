@@ -158,7 +158,9 @@ jobs:
     steps:
       - checkout: self
         persistCredentials: true
+
       - template: templates/setup-repo-min-build.yml
+
       # Clean Derived Data
       - script: |
           rm -rf $(Build.Repository.LocalPath)/DerivedData
@@ -166,15 +168,10 @@ jobs:
       - script: |
           sudo gem install cocoapods
         displayName: 'Install CocoaPods Environment'
-      - script: |
-          yarn bundle ios
-        workingDirectory: $(Build.Repository.LocalPath)/apps/ios
-        displayName: 'yarn bundle iOS'
-      - script: |
-          yarn bundle macos
-        workingDirectory: $(Build.Repository.LocalPath)/apps/macos
-        displayName: 'yarn bundle macOS'
+
       # Select proper Xcode version
       - template: templates/apple-xcode-select.yml
+
       - template: templates/apple-xcode-build-static-libs.yml
+
       - template: templates/nuget-publish.yml

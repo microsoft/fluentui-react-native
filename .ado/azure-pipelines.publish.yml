@@ -61,16 +61,6 @@ jobs:
           sudo gem install cocoapods
         displayName: 'Install CocoaPods Environment'
 
-      - script: |
-          yarn bundle ios
-        workingDirectory: $(Build.Repository.LocalPath)/apps/ios
-        displayName: 'yarn bundle iOS'
-
-      - script: |
-          yarn bundle macos
-        workingDirectory: $(Build.Repository.LocalPath)/apps/macos
-        displayName: 'yarn bundle macOS'
-
       # Select proper Xcode version
       - template: templates/apple-xcode-select.yml
 
