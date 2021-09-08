@@ -9,11 +9,12 @@ import {
 import { CheckboxProps, CheckboxInfo, CheckboxState } from './Checkbox.types';
 import { IPressableProps } from '@fluentui-react-native/pressable';
 
-/** Re-usable hook for FURN Checkbox.
- * This hook configures checkbox props and state for FURN checkbox.
+/**
+ * Re-usable hook for FURN Checkbox.
+ * This hook configures checkbox props and state for FURN Checkbox.
  *
- * PROPS: CheckboxProps - list of props for FURN Checkbox
- * RETURNS: CheckboxInfo - configured props and state for FURN checkbox
+ * @param props user props sent to FURN Checkbox
+ * @returns configured props and state for FURN Checkbox
  */
 export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
   const defaultComponentRef = React.useRef(null);
