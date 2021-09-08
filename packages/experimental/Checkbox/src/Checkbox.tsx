@@ -24,11 +24,6 @@ export const Checkbox = compose<CheckboxType>({
     return (final: CheckboxProps, ...children: React.ReactNode[]) => {
       const { label, ...mergedProps } = mergeProps(Checkbox.props, final);
 
-      // const boxAtEndStyle = {
-      //   marginStart: 4,
-      //   marginEnd: 0,
-      // };
-
       return (
         <Slots.root {...mergedProps}>
           {Checkbox.state.boxAtEnd && <Slots.content key="content">{label}</Slots.content>}
