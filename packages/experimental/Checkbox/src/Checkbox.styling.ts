@@ -39,8 +39,8 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
         style: {
           borderStyle: 'solid',
           borderWidth: 1,
-          minHeight: 14,
-          minWidth: 14,
+          minHeight: 16,
+          minWidth: 16,
           marginEnd: tokens.checkboxMarginEnd,
           marginStart: tokens.checkboxMarginStart,
           backgroundColor: tokens.checkboxBackgroundColor,
