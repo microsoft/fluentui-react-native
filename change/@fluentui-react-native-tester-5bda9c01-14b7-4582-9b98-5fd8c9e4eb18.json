@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Moved tabs to the experimental framework.",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "nkhalil942@gmail.com",
+  "dependentChangeType": "patch"
+}
