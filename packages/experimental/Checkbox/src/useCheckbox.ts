@@ -9,8 +9,13 @@ import {
 import { CheckboxProps, CheckboxInfo, CheckboxState } from './Checkbox.types';
 import { IPressableProps } from '@fluentui-react-native/pressable';
 
+/** Re-usable hook for FURN Checkbox.
+ * This hook configures checkbox props and state for FURN checkbox.
+ *
+ * PROPS: CheckboxProps - list of props for FURN Checkbox
+ * RETURNS: CheckboxInfo - configured props and state for FURN checkbox
+ */
 export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
-  // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
   const { accessibilityLabel,
     checked,
@@ -33,6 +38,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
   // Ensure focus is placed on checkbox after click
   const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleChecked);
 
+  // attach the pressable state handlers
   const pressable = useAsPressable({ onPress: toggleCheckedWithFocus, ...(rest as IPressableProps) });
 
   const buttonRef = useViewCommandFocus(componentRef);
