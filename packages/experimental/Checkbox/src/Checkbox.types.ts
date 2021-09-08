@@ -66,8 +66,6 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    */
   onChange?: (isChecked: boolean) => void;
 
-  testID?: string;
-
   /**
    * Provides a tooltip while hovering over Checkbox component
    */
