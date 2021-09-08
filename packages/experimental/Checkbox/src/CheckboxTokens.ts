@@ -10,6 +10,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     color: t.colors.menuItemText,
     checkboxBackgroundColor: t.colors.menuBackground,
     textBorderColor: 'transparent',
+    checkmarkColor: t.colors.menuItemTextHovered,
     variant: 'bodyStandard',
     checkmarkVisibility: 0,
     checkboxMarginStart: 0,
@@ -22,19 +23,16 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     },
     hovered: {
       checkboxBackgroundColor: t.colors.menuItemBackgroundHovered,
-      checkmarkColor: t.colors.menuItemTextHovered,
     },
     focused: {
       checkboxBackgroundColor: t.colors.menuItemBackgroundHovered,
       textBorderColor: t.colors.focusBorder,
-      checkmarkColor: t.colors.menuItemTextHovered,
     },
     pressed: {
       checkboxBackgroundColor: t.colors.menuItemBackgroundPressed,
     },
     checked: {
       checkmarkVisibility: 1,
-      checkmarkColor: t.colors.menuItemTextHovered,
     },
     boxAtEnd: {
       checkboxMarginStart: 4,
