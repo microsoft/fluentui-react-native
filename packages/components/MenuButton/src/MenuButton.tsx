@@ -6,7 +6,8 @@ import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose'
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
-import chevronIconSvg from './chevron.svg';
+import { Svg, Path } from 'react-native-svg';
+import {defaultIconColor, primaryIconColor} from './MenuButton.style'
 
 import {
   MenuButtonName,
@@ -64,14 +65,6 @@ export const MenuButton = compose<MenuButtonType>({
       },
     };
 
-    const chevronIconProps = {
-      svgSource: {
-        src: chevronIconSvg
-      },
-      width: 12,
-      height: 16,
-    };
-
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
     const buttonProps = {
       content,
@@ -79,7 +72,6 @@ export const MenuButton = compose<MenuButtonType>({
       startIcon,
       componentRef: stdBtnRef,
       onClick: toggleShowContextualMenu,
-      endIcon: chevronIconProps,
     };
 
     const slotProps = mergeSettings<MenuButtonSlotProps>(styleProps, {
@@ -96,6 +88,12 @@ export const MenuButton = compose<MenuButtonType>({
       contextualMenuItems: {
         menuItems: menuItemsUpdated,
       },
+      svg: {
+        width: '12',
+        height: '16',
+        viewBox: '0 0 11 6',
+        color: primary ? primaryIconColor : defaultIconColor
+      }
     });
 
     return { slotProps, state };
@@ -106,6 +104,7 @@ export const MenuButton = compose<MenuButtonType>({
     primaryButton: { slotType: PrimaryButton as React.ComponentType },
     contextualMenu: { slotType: ContextualMenu as React.ComponentType },
     contextualMenuItems: React.Fragment,
+    svg: Svg
   },
   styles: {
     contextualMenu: [backgroundColorTokens, borderTokens],
@@ -118,11 +117,27 @@ export const MenuButton = compose<MenuButtonType>({
     const context = renderData.state!.context;
     const menuItems = renderData.slotProps!.contextualMenuItems?.menuItems || [];
 
+    const chevronIcon = () => {
+      const chevronPath = `M0.646447 0.646447C0.841709 0.451184 1.15829 0.451184 1.35355 0.646447L5.5 4.79289L9.64645 0.646447C9.84171 0.451185 10.1583 0.451185 10.3536 0.646447C10.5488 0.841709 10.5488 1.15829 10.3536 1.35355L5.85355 5.85355C5.65829 6.04882 5.34171 6.04882 5.14645 5.85355L0.646447 1.35355C0.451184 1.15829 0.451184 0.841709 0.646447 0.646447Z`;
+      return (
+        <Slots.svg>
+          <Path
+            fill="currentColor"
+            d={chevronPath}
+          />
+        </Slots.svg>
+      )
+    }
     return (
       <Slots.root>
         {
           context.primary ?
-          <Slots.primaryButton /> : <Slots.button />
+          <Slots.primaryButton>
+            {chevronIcon()}
+          </Slots.primaryButton>
+          : <Slots.button>
+            {chevronIcon()}
+          </Slots.button>
         }
         {context.showContextualMenu && (
           <Slots.contextualMenu>
