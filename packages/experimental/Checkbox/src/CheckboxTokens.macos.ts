@@ -10,19 +10,19 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     textBorderColor: 'transparent',
     checkboxBorderColor: t.colors.checkboxBorderColor,
     checkmarkColor: t.colors.checkmarkColor,
-    checkmarkVisibility: 0,
+    checkmarkOpacity: 0,
     variant: 'bodyStandard',
     checkboxMarginStart: 0,
     checkboxMarginEnd: 5,
     color: t.colors.menuItemText,
     disabled: {
       checkboxBackgroundColor: t.colors.checkboxBackgroundDisabled,
-      checkboxVisibility: 0.38,
+      checkboxOpacity: 0.38,
     },
     checked: {
       checkboxBorderColor: t.colors.checkboxBackground,
       checkboxBackgroundColor: t.colors.checkboxBackground,
-      checkmarkVisibility: 1,
+      checkmarkOpacity: 1,
     },
     boxAtEnd: {
       checkboxMarginStart: 4,

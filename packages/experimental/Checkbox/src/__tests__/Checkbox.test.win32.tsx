@@ -30,7 +30,7 @@ describe('Checkbox component tests', () => {
       checkboxMarginEnd: 10,
       checkboxMarginStart: 8,
       checkmarkColor: 'pink',
-      checkmarkVisibility: 0.7,
+      checkmarkOpacity: 0.7,
       textBorderColor: 'green',
       backgroundColor: 'purple',
       color: 'yellow',

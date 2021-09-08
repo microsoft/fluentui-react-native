@@ -60,10 +60,10 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
           textAlignVertical: 'center',
           top: -1,
           color: tokens.checkmarkColor,
-          opacity: tokens.checkmarkVisibility,
+          opacity: tokens.checkmarkOpacity,
         },
       }),
-      ['checkmarkColor', 'checkmarkVisibility'],
+      ['checkmarkColor', 'checkmarkOpacity'],
     ),
   },
 };

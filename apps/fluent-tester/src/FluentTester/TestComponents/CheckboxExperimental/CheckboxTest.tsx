@@ -74,7 +74,7 @@ const tokenCheckbox: React.FunctionComponent = () => {
       checkmarkColor: 'white',
     },
     hovered: {
-      checkmarkVisibility: 1,
+      checkmarkOpacity: 1,
     },
   });
 
