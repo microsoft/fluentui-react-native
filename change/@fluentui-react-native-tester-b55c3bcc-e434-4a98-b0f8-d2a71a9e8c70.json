@@ -1,7 +1,7 @@
 {
   "type": "minor",
-  "comment": "Deprecate aria- prefix properties",
+  "comment": "Dynamic TabsItem",
   "packageName": "@fluentui-react-native/tester",
-  "email": "krsiler@microsoft.com",
+  "email": "dake.3601@gmail.com",
   "dependentChangeType": "patch"
 }

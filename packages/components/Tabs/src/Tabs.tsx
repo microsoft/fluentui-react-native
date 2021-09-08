@@ -44,7 +44,8 @@ export const Tabs = compose<TabsType>({
       ...rest
     } = userProps;
 
-    // This hook updates the Selected TabsItem and calls the customer's onTabsClick function. This gets called after a TabsItem is pressed.
+    /* The useSelectedKey hook is called after a TabsItem is pressed to update the Tab and TabsItem
+    selected property and call the Tab and TabsItem onTabsClick callback. */
     const data = useSelectedKey(selectedKey || defaultSelectedKey || null, userProps.onTabsClick);
 
     const [selectedTabsItemRef, setSelectedTabsItemRef] = React.useState(React.useRef<View>(null));
@@ -56,21 +57,21 @@ export const Tabs = compose<TabsType>({
       [setSelectedTabsItemRef],
     );
 
-    const onChangeTabId = React.useCallback((key: string, index: number) => {
+    const findTabId = React.useCallback((key: string, index: number) => {
       if (getTabId) {
         return getTabId(key, index);
       }
       return `${key}-Tab${index}`;
     }, [getTabId]);
 
-    // Stores views to be displayed
+    // Stores views to be displayed.
     const map = new Map<string, React.ReactNode[]>();
 
     const state: TabsState = {
       context: {
         selectedKey: selectedKey ?? data.selectedKey,
         onTabsClick: data.onKeySelect,
-        getTabId: onChangeTabId,
+        getTabId: findTabId,
         updateSelectedTabsItemRef: onSelectTabsItemRef,
         views: map,
       },
@@ -92,32 +93,39 @@ export const Tabs = compose<TabsType>({
   },
 
   render: (Slots: ISlots<TabsSlotProps>, renderData: TabsRenderData, ...children: React.ReactNode[]) => {
-    if (renderData.state == undefined) {
+    if (!renderData.state) {
       return null;
     }
 
-    // Populate the tabsItemKeys array
+    // Populate the tabsItemKeys array.
     if (children) {
+      const enabledKeys = []
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore - TODO, fix typing error
+      // Generates array of keys and enabled keys.
       renderData.state.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
-          // Sets default selected tabItem
-          if (renderData.state.context.selectedKey == null && !child.props.disabled) {
-            renderData.state.context.selectedKey = child.props.itemKey;
+          if (!child.props.disabled) {
+            enabledKeys.push(child.props.itemKey);
           }
           return child.props.itemKey;
         }
       });
+
+      /* Sets the default selected TabsItem if a TabsItem is hidden.
+      The default selected Tabsitem is the first enabled TabsItem. */
+      if (!enabledKeys.includes(renderData.state.context.selectedKey)) {
+        renderData.state.context.selectedKey = enabledKeys[0] ?? null;
+      }
     }
 
     return (
       <TabsContext.Provider
-        // Passes in the selected key and a hook function to update the newly selected tabsItem and call the client's onTabsClick callback
-        value={renderData.state.context}
+        // Passes in the selected key and a hook function to update the newly selected tabsItem and call the client's onTabsClick callback.
+        value={renderData.state?.context}
       >
         <Slots.root>
-          {renderData.state.info.label && <Slots.label />}
+          {renderData.state?.info?.label && <Slots.label />}
           <Slots.container>
             <Slots.stack>
               {children}

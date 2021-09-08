@@ -2,7 +2,7 @@ import { Image } from 'react-native';
 import { RasterImageIconProps, IconProps } from '@fluentui-react-native/icon';
 
 // this hook creates icon props from given source
-export function createIconProps(src: number | string | IconProps) {
+export function createIconProps(src: number | string | IconProps): IconProps {
   if (src === undefined) return null;
 
   if (typeof src === 'number') {

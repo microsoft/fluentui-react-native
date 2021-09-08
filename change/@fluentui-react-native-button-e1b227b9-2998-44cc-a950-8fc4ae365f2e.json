@@ -1,6 +1,6 @@
 {
-  "type": "minor",
-  "comment": "Changed styling for the Button. Added new exampled to MenuButton",
+  "type": "patch",
+  "comment": "Updated color for Primary button according to the design",
   "packageName": "@fluentui-react-native/button",
   "email": "v.kozlova13@gmail.com",
   "dependentChangeType": "patch"

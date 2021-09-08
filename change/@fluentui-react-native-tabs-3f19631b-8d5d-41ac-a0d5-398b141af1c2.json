@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Dynamic TabsItem",
+  "packageName": "@fluentui-react-native/tabs",
+  "email": "dake.3601@gmail.com",
+  "dependentChangeType": "patch"
+}

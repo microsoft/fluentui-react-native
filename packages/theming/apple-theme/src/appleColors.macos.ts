@@ -365,7 +365,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
 
     menuBackground: 'transparent',
     menuDivider: applePlatform.separatorColor,
-    menuIcon: applePlatform.textColor,
+    menuIcon: neutralForeground3, //GH:728 Icon doesn't support PlatformColor
     menuHeader: applePlatform.headerTextColor,
     menuItemBackgroundHovered: 'transparent',
     menuItemBackgroundPressed: applePlatform.selectedContentBackgroundColor,
