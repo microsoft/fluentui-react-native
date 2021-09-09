@@ -11,7 +11,7 @@ function createAliasTokensWorker(mode: AppearanceOptions): AliasColorTokens {
     neutralForeground2Pressed: aliasTokens.neutralForeground2.fillColorPressed,
     neutralForeground2Selected: aliasTokens.neutralForeground2.fillColorSelected,
     neutralForeground2BrandHover: aliasTokens.neutralForeground2.fillColorBrandHover,
-    neutralForeground2BrandPressed: aliasTokens.neutralForeground2B.fillColorBrandPressed,
+    neutralForeground2BrandPressed: aliasTokens.neutralForeground2.fillColorBrandPressed,
     neutralForeground2BrandSelected: aliasTokens.neutralForeground2.fillColorBrandSelected,
     neutralForeground3: aliasTokens.neutralForeground3.fillColorRest,
     neutralForeground3Hover: aliasTokens.neutralForeground3.fillColorHover,
