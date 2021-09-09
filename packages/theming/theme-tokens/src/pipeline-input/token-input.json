@@ -357,10 +357,9 @@
           "Rest": { "value": "transparent" },
           "Hover": { "value": "transparent" },
           "Pressed": { "value": "transparent" },
-          "Disabled": { "value": "transparent" }
+          "Selected": { "value": "transparent" }
         }
       }
-    },
-    "TransparentBackgroundSelected": { "aliasOf": "Set.TransparentBackground" }
+    }
   }
 }
