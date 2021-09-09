@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 09 Sep 2021 20:03:01 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Sep 2021 22:12:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.42.1
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Integrate Office alias tokens into Tokens test (ruaraki@microsoft.com)
 
 ## 0.42.0
 
