@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Updated color for Primary button according to the design",
-  "packageName": "@fluentui-react-native/button",
-  "email": "v.kozlova13@gmail.com",
-  "dependentChangeType": "patch"
-}

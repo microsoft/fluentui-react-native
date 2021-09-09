@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Reshape input",
-  "packageName": "@fluentui-react-native/theme-types",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Thu, 09 Sep 2021 20:03:01 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.15.7",
+      "version": "0.15.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.12.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 26 Aug 2021 21:02:08 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.15.6",
       "version": "0.15.6",

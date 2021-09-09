@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Sep 2021 20:03:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.6
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.35 (ruaraki@microsoft.com)
 
 ## 0.12.5
 
