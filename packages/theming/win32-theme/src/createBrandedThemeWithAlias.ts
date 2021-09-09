@@ -1,32 +1,34 @@
 import { Theme, PartialTheme, AliasColorTokens } from '@fluentui-react-native/theme-types';
 
-export function createBrandedThemeWithAlias(theme: Theme): PartialTheme {
-  if (!theme.host.colors) {
+export function createBrandedThemeWithAlias(themeName: string, theme: Theme): PartialTheme {
+  if (themeName === 'HighContrast' || !theme.host.colors) {
     return {};
   }
 
   return {
-    colors: overrideBrandAliasTokensWithOffice(theme),
+    colors: overrideBrandAliasTokensWithOffice(themeName, theme),
   };
 }
 
-function overrideBrandAliasTokensWithOffice(theme: Theme): Partial<AliasColorTokens> {
+function overrideBrandAliasTokensWithOffice(themeName: string, theme: Theme): Partial<AliasColorTokens> {
+  const isWhiteOrColorfulTheme = themeName === 'White' || themeName === 'Colorful';
+
   return {
-    neutralForeground2BrandHover: theme.host.colors.AppPrimary,
-    neutralForeground2BrandPressed: theme.host.colors.AppShade10,
-    neutralForeground2BrandSelected: theme.host.colors.AppPrimary,
-    neutralForeground3BrandHover: theme.host.colors.AppPrimary,
-    neutralForeground3BrandPressed: theme.host.colors.AppShade10,
-    neutralForeground3BrandSelected: theme.host.colors.AppPrimary,
-    brandForegroundLink: theme.host.colors.AppShade10,
-    brandForegroundLinkHover: theme.host.colors.AppShade20,
-    brandForegroundLinkPressed: theme.host.colors.AppShade30,
-    brandForegroundLinkSelected: theme.host.colors.AppShade10,
-    compoundBrandForeground1: theme.host.colors.AppPrimary,
-    compoundBrandForeground1Hover: theme.host.colors.AppShade10,
-    compoundBrandForeground1Pressed: theme.host.colors.AppShade20,
-    brandForeground1: theme.host.colors.AppPrimary,
-    brandForeground2: theme.host.colors.AppShade10,
+    neutralForeground2BrandHover: isWhiteOrColorfulTheme ? theme.host.colors.AppShade10 : theme.host.colors.AppTint40,
+    neutralForeground2BrandPressed: isWhiteOrColorfulTheme ? theme.host.colors.AppShade30 : theme.host.colors.AppTint10,
+    neutralForeground2BrandSelected: isWhiteOrColorfulTheme ? theme.host.colors.AppShade20 : theme.host.colors.AppTint40,
+    neutralForeground3BrandHover: isWhiteOrColorfulTheme ? theme.host.colors.AppShade10 : theme.host.colors.AppTint40,
+    neutralForeground3BrandPressed: isWhiteOrColorfulTheme ? theme.host.colors.AppShade30 : theme.host.colors.AppTint10,
+    neutralForeground3BrandSelected: isWhiteOrColorfulTheme ? theme.host.colors.AppShade20 : theme.host.colors.AppTint40,
+    brandForegroundLink: isWhiteOrColorfulTheme ? theme.host.colors.AppPrimary : theme.host.colors.AppTint30,
+    brandForegroundLinkHover: isWhiteOrColorfulTheme ? theme.host.colors.AppShade10 : theme.host.colors.AppTint40,
+    brandForegroundLinkPressed: isWhiteOrColorfulTheme ? theme.host.colors.AppShade30 : theme.host.colors.AppTint10,
+    brandForegroundLinkSelected: isWhiteOrColorfulTheme ? theme.host.colors.AppShade20 : theme.host.colors.AppTint40,
+    compoundBrandForeground1: isWhiteOrColorfulTheme ? theme.host.colors.AppPrimary : theme.host.colors.AppTint30,
+    compoundBrandForeground1Hover: isWhiteOrColorfulTheme ? theme.host.colors.AppShade10 : theme.host.colors.AppTint40,
+    compoundBrandForeground1Pressed: isWhiteOrColorfulTheme ? theme.host.colors.AppShade30 : theme.host.colors.AppTint10,
+    brandForeground1: isWhiteOrColorfulTheme ? theme.host.colors.AppPrimary : theme.host.colors.AppTint30,
+    brandForeground2: isWhiteOrColorfulTheme ? theme.host.colors.AppShade10 : theme.host.colors.AppTint40,
     brandBackground: theme.host.colors.AppPrimary,
     brandBackgroundHover: theme.host.colors.AppShade10,
     brandBackgroundPressed: theme.host.colors.AppShade30,
