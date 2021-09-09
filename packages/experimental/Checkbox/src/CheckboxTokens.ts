@@ -12,6 +12,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     textBorderColor: 'transparent',
     checkmarkColor: t.colors.menuItemTextHovered,
     variant: 'bodyStandard',
+    checkmarkOpacity: 0,
     checkboxMarginStart: 0,
     checkboxMarginEnd: 4,
     disabled: {
@@ -29,6 +30,9 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     },
     pressed: {
       checkboxBackgroundColor: t.colors.menuItemBackgroundPressed,
+    },
+    checked: {
+      checkmarkOpacity: 1,
     },
     boxAtEnd: {
       checkboxMarginStart: 4,
