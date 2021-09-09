@@ -17,62 +17,32 @@
     "fillColorRest": "#185abd",
     "fillColorHover": "#1651aa",
     "fillColorPressed": "#0e336a",
-    "fillColorDisabled": "#383838"
+    "fillColorSelected": "#13458f"
   },
   "brandBackground2": {
-    "fillColorRest": "#d2e0f4",
-    "fillColorHover": "#d2e0f4",
-    "fillColorPressed": "#d2e0f4",
-    "fillColorDisabled": "#383838"
-  },
-  "brandBackgroundSelected": {
-    "fillColorRest": "#13458f",
-    "fillColorHover": "#13458f",
-    "fillColorPressed": "#13458f",
-    "fillColorDisabled": "#383838"
+    "fillColorRest": "#d2e0f4"
   },
   "brandBackgroundStatic": {
-    "fillColorRest": "#185abd",
-    "fillColorHover": "#185abd",
-    "fillColorPressed": "#185abd",
-    "fillColorDisabled": "#383838"
+    "fillColorRest": "#185abd"
   },
   "brandForeground1": {
-    "fillColorRest": "#aec6eb",
-    "fillColorHover": "#aec6eb",
-    "fillColorPressed": "#aec6eb",
-    "fillColorDisabled": "#666666"
+    "fillColorRest": "#aec6eb"
   },
   "brandForeground2": {
-    "fillColorRest": "#d2e0f4",
-    "fillColorHover": "#d2e0f4",
-    "fillColorPressed": "#d2e0f4",
-    "fillColorDisabled": "#666666"
+    "fillColorRest": "#d2e0f4"
   },
   "brandForegroundLink": {
     "fillColorRest": "#aec6eb",
     "fillColorHover": "#d2e0f4",
     "fillColorPressed": "#2e6ac5",
-    "fillColorDisabled": "#666666"
-  },
-  "brandForegroundLinkSelected": {
-    "fillColorRest": "#d2e0f4",
-    "fillColorHover": "#d2e0f4",
-    "fillColorPressed": "#d2e0f4",
-    "fillColorDisabled": "#666666"
+    "fillColorSelected": "#d2e0f4"
   },
   "brandStroke1": {
     "strokeColorRest": "#185abd",
-    "strokeColorHover": "#185abd",
-    "strokeColorPressed": "#185abd",
-    "strokeColorDisabled": "#474747",
     "strokeWidth": 1
   },
   "brandStroke2": {
     "strokeColorRest": "#6794d7",
-    "strokeColorHover": "#6794d7",
-    "strokeColorPressed": "#6794d7",
-    "strokeColorDisabled": "#474747",
     "strokeWidth": 1
   },
   "caption": {
@@ -84,20 +54,17 @@
   "compoundBrandBackground1": {
     "fillColorRest": "#185abd",
     "fillColorHover": "#1651aa",
-    "fillColorPressed": "#0e336a",
-    "fillColorDisabled": "#383838"
+    "fillColorPressed": "#0e336a"
   },
   "compoundBrandForeground1": {
     "fillColorRest": "#aec6eb",
     "fillColorHover": "#d2e0f4",
-    "fillColorPressed": "#2e6ac5",
-    "fillColorDisabled": "#666666"
+    "fillColorPressed": "#2e6ac5"
   },
   "compoundBrandStroke1": {
     "strokeColorRest": "#185abd",
     "strokeColorHover": "#1651aa",
     "strokeColorPressed": "#0e336a",
-    "strokeColorDisabled": "#474747",
     "strokeWidth": 1
   },
   "control": {
@@ -135,208 +102,110 @@
     "fillColorRest": "#4d4d4d",
     "fillColorHover": "#5c5c5c",
     "fillColorPressed": "#424242",
-    "fillColorDisabled": "#383838"
-  },
-  "neutralBackground1Selected": {
-    "fillColorRest": "#575757",
-    "fillColorHover": "#575757",
-    "fillColorPressed": "#575757",
-    "fillColorDisabled": "#383838"
+    "fillColorSelected": "#575757"
   },
   "neutralBackground2": {
     "fillColorRest": "#424242",
     "fillColorHover": "#525252",
     "fillColorPressed": "#383838",
-    "fillColorDisabled": "#383838"
-  },
-  "neutralBackground2Selected": {
-    "fillColorRest": "#4d4d4d",
-    "fillColorHover": "#4d4d4d",
-    "fillColorPressed": "#4d4d4d",
-    "fillColorDisabled": "#383838"
+    "fillColorSelected": "#4d4d4d"
   },
   "neutralBackground3": {
     "fillColorRest": "#383838",
     "fillColorHover": "#474747",
     "fillColorPressed": "#2e2e2e",
-    "fillColorDisabled": "#383838"
-  },
-  "neutralBackground3Selected": {
-    "fillColorRest": "#424242",
-    "fillColorHover": "#424242",
-    "fillColorPressed": "#424242",
-    "fillColorDisabled": "#383838"
+    "fillColorSelected": "#424242"
   },
   "neutralBackground4": {
     "fillColorRest": "#2e2e2e",
     "fillColorHover": "#3d3d3d",
     "fillColorPressed": "#242424",
-    "fillColorDisabled": "#383838"
-  },
-  "neutralBackground4Selected": {
-    "fillColorRest": "#383838",
-    "fillColorHover": "#383838",
-    "fillColorPressed": "#383838",
-    "fillColorDisabled": "#383838"
+    "fillColorSelected": "#383838"
   },
   "neutralBackground5": {
     "fillColorRest": "#242424",
     "fillColorHover": "#333333",
     "fillColorPressed": "#1a1a1a",
-    "fillColorDisabled": "#383838"
-  },
-  "neutralBackground5Selected": {
-    "fillColorRest": "#2e2e2e",
-    "fillColorHover": "#2e2e2e",
-    "fillColorPressed": "#2e2e2e",
-    "fillColorDisabled": "#383838"
+    "fillColorSelected": "#2e2e2e"
   },
   "neutralBackground6": {
-    "fillColorRest": "#1a1a1a",
-    "fillColorHover": "#1a1a1a",
-    "fillColorPressed": "#1a1a1a",
-    "fillColorDisabled": "#383838"
+    "fillColorRest": "#1a1a1a"
+  },
+  "neutralBackgroundDisabled": {
+    "fillColorRest": "#383838"
   },
   "neutralBackgroundInverted": {
-    "fillColorRest": "#ffffff",
-    "fillColorHover": "#ffffff",
-    "fillColorPressed": "#ffffff",
-    "fillColorDisabled": "#383838"
+    "fillColorRest": "#ffffff"
   },
   "neutralForeground1": {
-    "fillColorRest": "#ffffff",
-    "fillColorHover": "#ffffff",
-    "fillColorPressed": "#ffffff",
-    "fillColorDisabled": "#666666"
+    "fillColorRest": "#ffffff"
   },
   "neutralForeground2": {
     "fillColorRest": "#e6e6e6",
     "fillColorHover": "#ffffff",
     "fillColorPressed": "#ffffff",
-    "fillColorDisabled": "#666666"
-  },
-  "neutralForeground2Brand": {
-    "fillColorRest": "#e6e6e6",
-    "fillColorHover": "#d2e0f4",
-    "fillColorPressed": "#2e6ac5",
-    "fillColorDisabled": "#666666"
-  },
-  "neutralForeground2BrandSelected": {
-    "fillColorRest": "#d2e0f4",
-    "fillColorHover": "#d2e0f4",
-    "fillColorPressed": "#d2e0f4",
-    "fillColorDisabled": "#666666"
-  },
-  "neutralForeground2Selected": {
-    "fillColorRest": "#ffffff",
-    "fillColorHover": "#ffffff",
-    "fillColorPressed": "#ffffff",
-    "fillColorDisabled": "#666666"
+    "fillColorBrandHover": "#d2e0f4",
+    "fillColorBrandPressed": "#2e6ac5",
+    "fillColorBrandSelected": "#d2e0f4",
+    "fillColorSelected": "#ffffff"
   },
   "neutralForeground3": {
     "fillColorRest": "#cccccc",
     "fillColorHover": "#e6e6e6",
     "fillColorPressed": "#e6e6e6",
-    "fillColorDisabled": "#666666"
-  },
-  "neutralForeground3Brand": {
-    "fillColorRest": "#adadad",
-    "fillColorHover": "#d2e0f4",
-    "fillColorPressed": "#2e6ac5",
-    "fillColorDisabled": "#666666"
-  },
-  "neutralForeground3BrandSelected": {
-    "fillColorRest": "#d2e0f4",
-    "fillColorHover": "#d2e0f4",
-    "fillColorPressed": "#d2e0f4",
-    "fillColorDisabled": "#666666"
-  },
-  "neutralForeground3Selected": {
-    "fillColorRest": "#e6e6e6",
-    "fillColorHover": "#e6e6e6",
-    "fillColorPressed": "#e6e6e6",
-    "fillColorDisabled": "#666666"
+    "fillColorBrandHover": "#d2e0f4",
+    "fillColorBrandPressed": "#2e6ac5",
+    "fillColorBrandSelected": "#d2e0f4",
+    "fillColorSelected": "#e6e6e6"
   },
   "neutralForeground4": {
-    "fillColorRest": "#c2c2c2",
-    "fillColorHover": "#c2c2c2",
-    "fillColorPressed": "#c2c2c2",
-    "fillColorDisabled": "#666666"
+    "fillColorRest": "#c2c2c2"
+  },
+  "neutralForegroundDisabled": {
+    "fillColorRest": "#666666"
   },
   "neutralForegroundInverted": {
-    "fillColorRest": "#000000",
-    "fillColorHover": "#000000",
-    "fillColorPressed": "#000000",
-    "fillColorDisabled": "#666666"
+    "fillColorRest": "#000000"
   },
   "neutralForegroundInvertedLink": {
     "fillColorRest": "#4d4d4d",
     "fillColorHover": "#4d4d4d",
     "fillColorPressed": "#4d4d4d",
-    "fillColorDisabled": "#666666"
-  },
-  "neutralForegroundInvertedLinkSelected": {
-    "fillColorRest": "#4d4d4d",
-    "fillColorHover": "#4d4d4d",
-    "fillColorPressed": "#4d4d4d",
-    "fillColorDisabled": "#666666"
+    "fillColorSelected": "#4d4d4d"
   },
   "neutralForegroundOnBrand": {
-    "fillColorRest": "#ffffff",
-    "fillColorHover": "#ffffff",
-    "fillColorPressed": "#ffffff",
-    "fillColorDisabled": "#666666"
+    "fillColorRest": "#ffffff"
   },
   "neutralStencil1": {
-    "fillColorRest": "#1a1a1a",
-    "fillColorHover": "#1a1a1a",
-    "fillColorPressed": "#1a1a1a"
+    "fillColorRest": "#1a1a1a"
   },
   "neutralStencil2": {
-    "fillColorRest": "#424242",
-    "fillColorHover": "#424242",
-    "fillColorPressed": "#424242"
+    "fillColorRest": "#424242"
   },
   "neutralStroke1": {
     "strokeColorRest": "#8a8a8a",
     "strokeColorHover": "#999999",
     "strokeColorPressed": "#8f8f8f",
-    "strokeColorDisabled": "#474747",
-    "strokeWidth": 1
-  },
-  "neutralStroke1Selected": {
-    "strokeColorRest": "#949494",
-    "strokeColorHover": "#949494",
-    "strokeColorPressed": "#949494",
-    "strokeColorDisabled": "#474747",
+    "strokeColorSelected": "#949494",
     "strokeWidth": 1
   },
   "neutralStroke2": {
     "strokeColorRest": "#757575",
-    "strokeColorHover": "#757575",
-    "strokeColorPressed": "#757575",
-    "strokeColorDisabled": "#474747",
     "strokeWidth": 1
   },
   "neutralStroke3": {
     "strokeColorRest": "#616161",
-    "strokeColorHover": "#616161",
-    "strokeColorPressed": "#616161",
-    "strokeColorDisabled": "#474747",
     "strokeWidth": 1
   },
   "neutralStrokeAccessible": {
     "strokeColorRest": "#a8a8a8",
     "strokeColorHover": "#b8b8b8",
     "strokeColorPressed": "#adadad",
-    "strokeColorDisabled": "#474747",
+    "strokeColorSelected": "#185abd",
     "strokeWidth": 1
   },
-  "neutralStrokeAccessibleSelected": {
-    "strokeColorRest": "#185abd",
-    "strokeColorHover": "#185abd",
-    "strokeColorPressed": "#185abd",
-    "strokeColorDisabled": "#474747",
+  "neutralStrokeDisabled": {
+    "strokeColorRest": "#474747",
     "strokeWidth": 1
   },
   "round": {
@@ -347,16 +216,10 @@
   },
   "strokeFocus1": {
     "strokeColorRest": "#000000",
-    "strokeColorHover": "#000000",
-    "strokeColorPressed": "#000000",
-    "strokeColorDisabled": "#474747",
     "strokeWidth": 1
   },
   "strokeFocus2": {
     "strokeColorRest": "#ffffff",
-    "strokeColorHover": "#ffffff",
-    "strokeColorPressed": "#ffffff",
-    "strokeColorDisabled": "#474747",
     "strokeWidth": 1
   },
   "subheadline": {
@@ -369,13 +232,7 @@
     "fillColorRest": "transparent",
     "fillColorHover": "#5c5c5c",
     "fillColorPressed": "#424242",
-    "fillColorDisabled": "#383838"
-  },
-  "subtleBackgroundSelected": {
-    "fillColorRest": "#575757",
-    "fillColorHover": "#575757",
-    "fillColorPressed": "#575757",
-    "fillColorDisabled": "#383838"
+    "fillColorSelected": "#575757"
   },
   "surface": {
     "cornerRadius": 4
@@ -402,13 +259,7 @@
     "fillColorRest": "transparent",
     "fillColorHover": "transparent",
     "fillColorPressed": "transparent",
-    "fillColorDisabled": "transparent"
-  },
-  "transparentBackgroundSelected": {
-    "fillColorRest": "transparent",
-    "fillColorHover": "transparent",
-    "fillColorPressed": "transparent",
-    "fillColorDisabled": "transparent"
+    "fillColorSelected": "transparent"
   },
   "transparentStroke": {
     "strokeAlignment": "inner",
