@@ -73,8 +73,8 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
         "borderWidth": 1,
         "marginEnd": 0,
         "marginStart": 4,
-        "minHeight": 14,
-        "minWidth": 14,
+        "minHeight": 16,
+        "minWidth": 16,
       }
     }
   >
@@ -155,8 +155,8 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
         "borderWidth": 1,
         "marginEnd": 10,
         "marginStart": 8,
-        "minHeight": 14,
-        "minWidth": 14,
+        "minHeight": 16,
+        "minWidth": 16,
       }
     }
   >
@@ -254,8 +254,8 @@ exports[`Checkbox component tests Checkbox default 1`] = `
         "borderWidth": 1,
         "marginEnd": 4,
         "marginStart": 0,
-        "minHeight": 14,
-        "minWidth": 14,
+        "minHeight": 16,
+        "minWidth": 16,
       }
     }
   >
