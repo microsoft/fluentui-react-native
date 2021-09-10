@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Fri, 10 Sep 2021 18:16:59 GMT and should not be manually modified.
+This log was last generated on Fri, 10 Sep 2021 21:30:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.2
+
+Fri, 10 Sep 2021 21:30:12 GMT
+
+### Patches
+
+- Allow theming module to be implemented as a turbomanager (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.13.1
 

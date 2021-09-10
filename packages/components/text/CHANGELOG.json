@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Fri, 10 Sep 2021 21:30:12 GMT",
+      "tag": "@fluentui-react-native/text_v0.10.16",
+      "version": "0.10.16",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.23",
+            "author": "ruaraki@microsoft.com",
+            "commit": "7ac71c6add6f05230c649dad60b5f7442f08cbb3",
+            "package": "@fluentui-react-native/text"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 10 Sep 2021 18:16:59 GMT",
       "tag": "@fluentui-react-native/text_v0.10.16",
       "version": "0.10.16",

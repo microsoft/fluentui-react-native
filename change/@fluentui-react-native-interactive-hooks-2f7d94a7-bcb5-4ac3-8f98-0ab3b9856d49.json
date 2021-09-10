@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Use UIManager from react-native instead of from NativeModules",
-  "packageName": "@fluentui-react-native/interactive-hooks",
-  "email": "30809111+acoates-ms@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

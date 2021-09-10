@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Run the prettier",
-  "packageName": "@uifabricshared/foundation-settings",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}

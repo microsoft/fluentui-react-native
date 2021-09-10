@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/framework": "0.5.37",
-    "@fluentui-react-native/interactive-hooks": ">=0.10.43 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.10.44 <1.0.0",
     "@fluentui-react-native/focus-zone": ">=0.7.23 <1.0.0",
     "@fluentui-react-native/experimental-text": ">=0.6.18 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.9.23 <1.0.0",

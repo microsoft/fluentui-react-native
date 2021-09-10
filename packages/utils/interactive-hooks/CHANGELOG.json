@@ -2,6 +2,35 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Fri, 10 Sep 2021 21:30:12 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.10.44",
+      "version": "0.10.44",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Use UIManager from react-native instead of from NativeModules",
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "commit": "f0da49282afb62c03dfa49b050f65222425ada13",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Run the prettier",
+            "author": "ruaraki@microsoft.com",
+            "commit": "7ac71c6add6f05230c649dad60b5f7442f08cbb3",
+            "package": "@fluentui-react-native/interactive-hooks"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.20",
+            "author": "ruaraki@microsoft.com",
+            "commit": "7ac71c6add6f05230c649dad60b5f7442f08cbb3",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 10 Sep 2021 18:16:59 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.10.43",
       "version": "0.10.43",

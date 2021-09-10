@@ -24,7 +24,7 @@
     "@uifabricshared/foundation-compose": "^1.10.14",
     "@fluentui-react-native/callout": ">=0.17.20 <1.0.0",
     "@fluentui-react-native/icon": "0.8.20",
-    "@fluentui-react-native/interactive-hooks": ">=0.10.43 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.10.44 <1.0.0",
     "@fluentui-react-native/text": ">=0.10.16 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.9.23 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.9.1 <1.0.0",

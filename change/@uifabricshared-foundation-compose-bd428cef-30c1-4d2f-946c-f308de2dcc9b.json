@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Run the prettier",
-  "packageName": "@uifabricshared/foundation-compose",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}

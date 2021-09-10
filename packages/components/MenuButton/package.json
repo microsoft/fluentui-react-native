@@ -28,7 +28,7 @@
     "@fluentui-react-native/component-cache": "^1.2.3",
     "@fluentui-react-native/contextual-menu": "^0.10.21",
     "@fluentui-react-native/icon": "^0.8.20",
-    "@fluentui-react-native/interactive-hooks": "^0.10.43",
+    "@fluentui-react-native/interactive-hooks": "^0.10.44",
     "@fluentui-react-native/tokens": "^0.9.23",
     "@uifabricshared/foundation-composable": ">=0.9.1 <1.0.0",
     "@uifabricshared/foundation-compose": "^1.10.14",

@@ -25,7 +25,7 @@
     "@fluentui-react-native/adapters": ">=0.7.2 <1.0.0",
     "@fluentui-react-native/component-cache": "^1.2.3",
     "@fluentui-react-native/focus-zone": ">=0.7.23 <1.0.0",
-    "@fluentui-react-native/interactive-hooks": ">=0.10.43 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.10.44 <1.0.0",
     "@fluentui-react-native/pressable": ">=0.7.20 <1.0.0",
     "@fluentui-react-native/text": ">=0.10.16 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.9.23 <1.0.0",

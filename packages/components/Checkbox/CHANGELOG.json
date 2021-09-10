@@ -2,6 +2,26 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Fri, 10 Sep 2021 21:30:12 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.13.7",
+      "version": "0.13.7",
+      "comments": {
+        "none": [
+          {
+            "comment": "Run the prettier",
+            "author": "ruaraki@microsoft.com",
+            "commit": "7ac71c6add6f05230c649dad60b5f7442f08cbb3",
+            "package": "@fluentui-react-native/checkbox"
+          },
+          {
+            "author": "krsiler@microsoft.com",
+            "commit": "2f15d570a23ec7b71cc9d3db60ffc7db3e72766c",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 10 Sep 2021 18:16:59 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.13.7",
       "version": "0.13.7",

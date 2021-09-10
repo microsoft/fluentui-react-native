@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/pressable",
   "entries": [
     {
+      "date": "Fri, 10 Sep 2021 21:30:12 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.7.20",
+      "version": "0.7.20",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.44",
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "commit": "f0da49282afb62c03dfa49b050f65222425ada13",
+            "package": "@fluentui-react-native/pressable"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 10 Sep 2021 18:16:59 GMT",
       "tag": "@fluentui-react-native/pressable_v0.7.20",
       "version": "0.7.20",
