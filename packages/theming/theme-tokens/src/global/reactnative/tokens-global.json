@@ -284,6 +284,21 @@
       "tint50": "#c2e7e7",
       "tint60": "#eff9f9"
     },
+    "excel": {
+      "primary": "#107c41",
+      "shade10": "#0f703b",
+      "shade20": "#0c5f32",
+      "shade30": "#0a5325",
+      "shade40": "#094624",
+      "shade50": "#052912",
+      "shade60": "#03160a",
+      "tint10": "#10893c",
+      "tint20": "#1f954a",
+      "tint30": "#60bd82",
+      "tint40": "#55b17e",
+      "tint50": "#a0d8b9",
+      "tint60": "#caead8"
+    },
     "forest": {
       "primary": "#498205",
       "shade10": "#427505",
@@ -559,6 +574,36 @@
     },
     "neutralShadowAmbient": "#0000001f",
     "neutralShadowKey": "#00000024",
+    "office": {
+      "primary": "#d83b01",
+      "shade10": "#c33400",
+      "shade20": "#a52c00",
+      "shade30": "#99482b",
+      "shade40": "#792000",
+      "shade50": "#4d2415",
+      "shade60": "#29130b",
+      "tint10": "#fe7948",
+      "tint20": "#ff865a",
+      "tint30": "#ff9973",
+      "tint40": "#e8825d",
+      "tint50": "#f4beaa",
+      "tint60": "#f9dcd1"
+    },
+    "oneNote": {
+      "primary": "#7719aa",
+      "shade10": "#6c179a",
+      "shade20": "#5b1382",
+      "shade30": "#430e60",
+      "shade40": "#430e60",
+      "shade50": "#430e60",
+      "shade60": "#430e60",
+      "tint10": "#862eb5",
+      "tint20": "#a864cd",
+      "tint30": "#d1abe6",
+      "tint40": "#e6d1f2",
+      "tint50": "#e6d1f2",
+      "tint60": "#e6d1f2"
+    },
     "orange": {
       "primary": "#f7630c",
       "shade10": "#de590b",
@@ -586,6 +631,21 @@
       "tint40": "#d7caea",
       "tint50": "#e9e2f4",
       "tint60": "#f9f8fc"
+    },
+    "outlook": {
+      "primary": "#0078d4",
+      "shade10": "#106ebe",
+      "shade20": "#005a9e",
+      "shade30": "#004c87",
+      "shade40": "#004578",
+      "shade50": "#043862",
+      "shade60": "#092c47",
+      "tint10": "#2899f5",
+      "tint20": "#3aa0f3",
+      "tint30": "#6cb8f6",
+      "tint40": "#c7e0f4",
+      "tint50": "#deecf9",
+      "tint60": "#eff6fc"
     },
     "peach": {
       "primary": "#ff8c00",
@@ -642,6 +702,21 @@
       "tint40": "#d696c0",
       "tint50": "#e9c4dc",
       "tint60": "#faf0f6"
+    },
+    "powerPoint": {
+      "primary": "#c43e1c",
+      "shade10": "#b13719",
+      "shade20": "#952f15",
+      "shade30": "#79310a",
+      "shade40": "#6e220f",
+      "shade50": "#3c1805",
+      "shade60": "#200d03",
+      "tint10": "#ca5010",
+      "tint20": "#cf6024",
+      "tint30": "#e1966d",
+      "tint40": "#dc816a",
+      "tint50": "#edbcb0",
+      "tint60": "#f6dbd4"
     },
     "pumpkin": {
       "primary": "#ca5010",
@@ -756,6 +831,21 @@
       "tint60": "#f0fafa"
     },
     "white": "#ffffff",
+    "word": {
+      "primary": "#185abd",
+      "shade10": "#1651aa",
+      "shade20": "#13458f",
+      "shade30": "#19428a",
+      "shade40": "#0e336a",
+      "shade50": "#0c2145",
+      "shade60": "#071225",
+      "tint10": "#296fe6",
+      "tint20": "#3d7ce8",
+      "tint30": "#82abf1",
+      "tint40": "#6794d7",
+      "tint50": "#aec6eb",
+      "tint60": "#d2e0f4"
+    },
     "yellow": {
       "primary": "#fde300",
       "shade10": "#e4cc00",

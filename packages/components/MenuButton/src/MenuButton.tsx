@@ -6,7 +6,8 @@ import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose'
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
-import chevronIconSvg from './chevron.svg';
+import { Svg, Path } from 'react-native-svg';
+import { defaultIconColor, primaryIconColor } from './MenuButton.style';
 
 import {
   MenuButtonName,
@@ -33,7 +34,7 @@ export const MenuButton = compose<MenuButtonType>({
       setShowContextualMenu(!showContextualMenu);
     }, [showContextualMenu, setShowContextualMenu]);
 
-    const menuItemsUpdated = menuItems.map((item) => {
+    const menuItemsUpdated = menuItems.map(item => {
       if (item.hasSubmenu) {
         const [showSubmenu, setShowSubmenu] = useState(false);
 
@@ -49,7 +50,7 @@ export const MenuButton = compose<MenuButtonType>({
         const menuItemUpdated = {
           ...restItems,
           onHoverIn,
-          showSubmenu: item.showSubmenu ?? showSubmenu,
+          showSubmenu: item.showSubmenu ? showSubmenu : undefined,
           submenuProps: { ...restSubmenuProps, onDismiss, setShowMenu },
         };
         return menuItemUpdated;
@@ -60,16 +61,8 @@ export const MenuButton = compose<MenuButtonType>({
     const state: MenuButtonState = {
       context: {
         showContextualMenu: !!showContextualMenu,
-        primary: !!primary
+        primary: !!primary,
       },
-    };
-
-    const chevronIconProps = {
-      svgSource: {
-        src: chevronIconSvg
-      },
-      width: 12,
-      height: 16,
     };
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
@@ -79,7 +72,6 @@ export const MenuButton = compose<MenuButtonType>({
       startIcon,
       componentRef: stdBtnRef,
       onClick: toggleShowContextualMenu,
-      endIcon: chevronIconProps,
     };
 
     const slotProps = mergeSettings<MenuButtonSlotProps>(styleProps, {
@@ -96,6 +88,12 @@ export const MenuButton = compose<MenuButtonType>({
       contextualMenuItems: {
         menuItems: menuItemsUpdated,
       },
+      chevronSvg: {
+        width: '12',
+        height: '16',
+        viewBox: '0 0 11 6',
+        color: primary ? primaryIconColor : defaultIconColor,
+      },
     });
 
     return { slotProps, state };
@@ -106,6 +104,7 @@ export const MenuButton = compose<MenuButtonType>({
     primaryButton: { slotType: PrimaryButton as React.ComponentType },
     contextualMenu: { slotType: ContextualMenu as React.ComponentType },
     contextualMenuItems: React.Fragment,
+    chevronSvg: Svg,
   },
   styles: {
     contextualMenu: [backgroundColorTokens, borderTokens],
@@ -116,25 +115,30 @@ export const MenuButton = compose<MenuButtonType>({
       return null;
     }
     const context = renderData.state!.context;
-    const menuItems = renderData.slotProps!.contextualMenuItems?.menuItems || [];
+    const menuItems = renderData.slotProps!.contextualMenuItems ? renderData.slotProps!.contextualMenuItems.menuItems : [];
 
+    const chevronIcon = () => {
+      const chevronPath = `M0.646447 0.646447C0.841709 0.451184 1.15829 0.451184 1.35355 0.646447L5.5 4.79289L9.64645 0.646447C9.84171 0.451185 10.1583 0.451185 10.3536 0.646447C10.5488 0.841709 10.5488 1.15829 10.3536 1.35355L5.85355 5.85355C5.65829 6.04882 5.34171 6.04882 5.14645 5.85355L0.646447 1.35355C0.451184 1.15829 0.451184 0.841709 0.646447 0.646447Z`;
+      return (
+        <Slots.chevronSvg>
+          <Path fill="currentColor" d={chevronPath} />
+        </Slots.chevronSvg>
+      );
+    };
     return (
       <Slots.root>
-        {
-          context.primary ?
-          <Slots.primaryButton /> : <Slots.button />
-        }
+        {context.primary ? <Slots.primaryButton>{chevronIcon()}</Slots.primaryButton> : <Slots.button>{chevronIcon()}</Slots.button>}
         {context.showContextualMenu && (
           <Slots.contextualMenu>
-            {menuItems.map((menuItem) => {
+            {menuItems.map(menuItem => {
               const { hasSubmenu, submenuProps, showSubmenu, componentRef, submenuItems, ...items } = menuItem;
 
-              return hasSubmenu ? (
+              return hasSubmenu && submenuItems ? (
                 <Slots.contextualMenuItems>
                   <SubmenuItem componentRef={componentRef} {...items} />
                   {showSubmenu && (
                     <Submenu target={componentRef} {...submenuProps}>
-                      {submenuItems?.map((submenuItem) => (
+                      {submenuItems.map(submenuItem => (
                         <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />
                       ))}
                     </Submenu>

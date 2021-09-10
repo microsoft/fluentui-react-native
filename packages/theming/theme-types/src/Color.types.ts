@@ -455,7 +455,6 @@ export interface AliasColorTokens {
   neutralForeground2Hover: ColorValue;
   neutralForeground2Pressed: ColorValue;
   neutralForeground2Selected: ColorValue;
-  neutralForeground2Brand: ColorValue;
   neutralForeground2BrandHover: ColorValue;
   neutralForeground2BrandPressed: ColorValue;
   neutralForeground2BrandSelected: ColorValue;
@@ -463,7 +462,6 @@ export interface AliasColorTokens {
   neutralForeground3Hover: ColorValue;
   neutralForeground3Pressed: ColorValue;
   neutralForeground3Selected: ColorValue;
-  neutralForeground3Brand: ColorValue;
   neutralForeground3BrandHover: ColorValue;
   neutralForeground3BrandPressed: ColorValue;
   neutralForeground3BrandSelected: ColorValue;

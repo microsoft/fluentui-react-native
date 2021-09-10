@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Thu, 09 Sep 2021 20:03:01 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.9.23",
+      "version": "0.9.23",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @uifabricshared/theming-ramp to v0.15.7",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 31 Aug 2021 18:48:34 GMT",
       "tag": "@fluentui-react-native/tokens_v0.9.22",
       "version": "0.9.22",

@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Fri, 27 Aug 2021 15:48:49 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Sep 2021 22:12:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.5
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.13 (ruaraki@microsoft.com)
+
+## 0.20.4
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Updated color for Primary button according to the design (v.kozlova13@gmail.com)
 
 ## 0.20.3
 

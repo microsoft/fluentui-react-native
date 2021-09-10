@@ -1,46 +1,71 @@
 import { Theme, PartialTheme, AliasColorTokens } from '@fluentui-react-native/theme-types';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { ColorValue } from 'react-native';
 
-export function createBrandedThemeWithAlias(theme: Theme): PartialTheme {
-  if (!theme.host.colors) {
+export function createBrandedThemeWithAlias(themeName: string, theme: Theme): PartialTheme {
+  if (themeName === 'HighContrast' || !theme.host.colors) {
     return {};
   }
 
   return {
-    colors: overrideBrandAliasTokensWithOffice(theme),
+    colors: getCurrentBrandAliasTokens(themeName, theme.host.colors.AppPrimary),
   };
 }
 
-function overrideBrandAliasTokensWithOffice(theme: Theme): Partial<AliasColorTokens> {
+export function getCurrentBrandAliasTokens(themeName: string, appPrimary: ColorValue): Partial<AliasColorTokens> {
+  const appColors = getAppColors(appPrimary);
+  const isWhiteOrColorfulTheme = themeName === 'White' || themeName === 'Colorful';
+
   return {
-    neutralForeground2BrandHover: theme.host.colors.AppPrimary,
-    neutralForeground2BrandPressed: theme.host.colors.AppShade10,
-    neutralForeground2BrandSelected: theme.host.colors.AppPrimary,
-    neutralForeground3BrandHover: theme.host.colors.AppPrimary,
-    neutralForeground3BrandPressed: theme.host.colors.AppShade10,
-    neutralForeground3BrandSelected: theme.host.colors.AppPrimary,
-    brandForegroundLink: theme.host.colors.AppShade10,
-    brandForegroundLinkHover: theme.host.colors.AppShade20,
-    brandForegroundLinkPressed: theme.host.colors.AppShade30,
-    brandForegroundLinkSelected: theme.host.colors.AppShade10,
-    compoundBrandForeground1: theme.host.colors.AppPrimary,
-    compoundBrandForeground1Hover: theme.host.colors.AppShade10,
-    compoundBrandForeground1Pressed: theme.host.colors.AppShade20,
-    brandForeground1: theme.host.colors.AppPrimary,
-    brandForeground2: theme.host.colors.AppShade10,
-    brandBackground: theme.host.colors.AppPrimary,
-    brandBackgroundHover: theme.host.colors.AppShade10,
-    brandBackgroundPressed: theme.host.colors.AppShade30,
-    brandBackgroundSelected: theme.host.colors.AppShade20,
-    compoundBrandBackground1: theme.host.colors.AppPrimary,
-    compoundBrandBackground1Hover: theme.host.colors.AppShade10,
-    compoundBrandBackground1Pressed: theme.host.colors.AppShade20,
-    brandBackgroundStatic: theme.host.colors.AppPrimary,
-    brandBackground2: theme.host.colors.AppTint40,
-    neutralStrokeAccessibleSelected: theme.host.colors.AppPrimary,
-    brandStroke1: theme.host.colors.AppPrimary,
-    brandStroke2: theme.host.colors.AppTint40,
-    compoundBrandStroke1: theme.host.colors.AppPrimary,
-    compoundBrandStroke1Hover: theme.host.colors.AppShade10,
-    compoundBrandStroke1Pressed: theme.host.colors.AppShade20,
+    neutralForeground2BrandHover: isWhiteOrColorfulTheme ? appColors.shade10 : appColors.tint40,
+    neutralForeground2BrandPressed: isWhiteOrColorfulTheme ? appColors.shade30 : appColors.tint10,
+    neutralForeground2BrandSelected: isWhiteOrColorfulTheme ? appColors.shade20 : appColors.tint40,
+    neutralForeground3BrandHover: isWhiteOrColorfulTheme ? appColors.shade10 : appColors.tint40,
+    neutralForeground3BrandPressed: isWhiteOrColorfulTheme ? appColors.shade30 : appColors.tint10,
+    neutralForeground3BrandSelected: isWhiteOrColorfulTheme ? appColors.shade20 : appColors.tint40,
+    brandForegroundLink: isWhiteOrColorfulTheme ? appColors.primary : appColors.tint30,
+    brandForegroundLinkHover: isWhiteOrColorfulTheme ? appColors.shade10 : appColors.tint40,
+    brandForegroundLinkPressed: isWhiteOrColorfulTheme ? appColors.shade30 : appColors.tint10,
+    brandForegroundLinkSelected: isWhiteOrColorfulTheme ? appColors.shade20 : appColors.tint40,
+    compoundBrandForeground1: isWhiteOrColorfulTheme ? appColors.primary : appColors.tint30,
+    compoundBrandForeground1Hover: isWhiteOrColorfulTheme ? appColors.shade10 : appColors.tint40,
+    compoundBrandForeground1Pressed: isWhiteOrColorfulTheme ? appColors.shade30 : appColors.tint10,
+    brandForeground1: isWhiteOrColorfulTheme ? appColors.primary : appColors.tint30,
+    brandForeground2: isWhiteOrColorfulTheme ? appColors.shade10 : appColors.tint40,
+    brandBackground: appColors.primary,
+    brandBackgroundHover: appColors.shade10,
+    brandBackgroundPressed: appColors.shade30,
+    brandBackgroundSelected: appColors.shade20,
+    compoundBrandBackground1: appColors.primary,
+    compoundBrandBackground1Hover: appColors.shade10,
+    compoundBrandBackground1Pressed: appColors.shade20,
+    brandBackgroundStatic: appColors.primary,
+    brandBackground2: appColors.tint40,
+    neutralStrokeAccessibleSelected: appColors.primary,
+    brandStroke1: appColors.primary,
+    brandStroke2: appColors.tint40,
+    compoundBrandStroke1: appColors.primary,
+    compoundBrandStroke1Hover: appColors.shade10,
+    compoundBrandStroke1Pressed: appColors.shade20,
   };
+}
+
+function getAppColors(primaryColor: ColorValue) {
+  if (typeof primaryColor === 'string') {
+    if (primaryColor.toLowerCase() === '#185abd') {
+      return globalTokens.color.word;
+    } else if (primaryColor.toLowerCase() === '#107c41') {
+      return globalTokens.color.excel;
+    } else if (primaryColor.toLowerCase() === '#d83b01') {
+      return globalTokens.color.office;
+    } else if (primaryColor.toLowerCase() === '#80397b') {
+      return globalTokens.color.oneNote;
+    } else if (primaryColor.toLowerCase() === '#0078d4') {
+      return globalTokens.color.outlook;
+    } else if (primaryColor.toLowerCase() === '#c43e1c') {
+      return globalTokens.color.powerPoint;
+    }
+  }
+
+  return globalTokens.color.brand;
 }

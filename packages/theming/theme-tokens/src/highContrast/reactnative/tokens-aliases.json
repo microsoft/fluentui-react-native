@@ -17,62 +17,32 @@
     "fillColorRest": "PlatformColor(ButtonFace)",
     "fillColorHover": "PlatformColor(Highlight)",
     "fillColorPressed": "PlatformColor(Highlight)",
-    "fillColorDisabled": "PlatformColor(Window)"
+    "fillColorSelected": "PlatformColor(Highlight)"
   },
   "brandBackground2": {
-    "fillColorRest": "PlatformColor(ButtonFace)",
-    "fillColorHover": "PlatformColor(ButtonFace)",
-    "fillColorPressed": "PlatformColor(ButtonFace)",
-    "fillColorDisabled": "PlatformColor(Window)"
-  },
-  "brandBackgroundSelected": {
-    "fillColorRest": "PlatformColor(Highlight)",
-    "fillColorHover": "PlatformColor(Highlight)",
-    "fillColorPressed": "PlatformColor(Highlight)",
-    "fillColorDisabled": "PlatformColor(Window)"
+    "fillColorRest": "PlatformColor(ButtonFace)"
   },
   "brandBackgroundStatic": {
-    "fillColorRest": "PlatformColor(Window)",
-    "fillColorHover": "PlatformColor(Window)",
-    "fillColorPressed": "PlatformColor(Window)",
-    "fillColorDisabled": "PlatformColor(Window)"
+    "fillColorRest": "PlatformColor(Window)"
   },
   "brandForeground1": {
-    "fillColorRest": "PlatformColor(WindowText)",
-    "fillColorHover": "PlatformColor(WindowText)",
-    "fillColorPressed": "PlatformColor(WindowText)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
+    "fillColorRest": "PlatformColor(WindowText)"
   },
   "brandForeground2": {
-    "fillColorRest": "PlatformColor(ButtonText)",
-    "fillColorHover": "PlatformColor(ButtonText)",
-    "fillColorPressed": "PlatformColor(ButtonText)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
+    "fillColorRest": "PlatformColor(ButtonText)"
   },
   "brandForegroundLink": {
     "fillColorRest": "PlatformColor(Hotlight)",
     "fillColorHover": "PlatformColor(Hotlight)",
     "fillColorPressed": "PlatformColor(Hotlight)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
-  },
-  "brandForegroundLinkSelected": {
-    "fillColorRest": "PlatformColor(Hotlight)",
-    "fillColorHover": "PlatformColor(Hotlight)",
-    "fillColorPressed": "PlatformColor(Hotlight)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
+    "fillColorSelected": "PlatformColor(Hotlight)"
   },
   "brandStroke1": {
     "strokeColorRest": "PlatformColor(WindowText)",
-    "strokeColorHover": "PlatformColor(WindowText)",
-    "strokeColorPressed": "PlatformColor(WindowText)",
-    "strokeColorDisabled": "PlatformColor(GrayText)",
     "strokeWidth": 1
   },
   "brandStroke2": {
     "strokeColorRest": "PlatformColor(Window)",
-    "strokeColorHover": "PlatformColor(Window)",
-    "strokeColorPressed": "PlatformColor(Window)",
-    "strokeColorDisabled": "PlatformColor(GrayText)",
     "strokeWidth": 1
   },
   "caption": {
@@ -84,20 +54,17 @@
   "compoundBrandBackground1": {
     "fillColorRest": "PlatformColor(Highlight)",
     "fillColorHover": "PlatformColor(Highlight)",
-    "fillColorPressed": "PlatformColor(Highlight)",
-    "fillColorDisabled": "PlatformColor(Window)"
+    "fillColorPressed": "PlatformColor(Highlight)"
   },
   "compoundBrandForeground1": {
     "fillColorRest": "PlatformColor(Highlight)",
     "fillColorHover": "PlatformColor(Highlight)",
-    "fillColorPressed": "PlatformColor(Highlight)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
+    "fillColorPressed": "PlatformColor(Highlight)"
   },
   "compoundBrandStroke1": {
     "strokeColorRest": "PlatformColor(Window)",
     "strokeColorHover": "PlatformColor(Highlight)",
     "strokeColorPressed": "PlatformColor(Highlight)",
-    "strokeColorDisabled": "PlatformColor(GrayText)",
     "strokeWidth": 1
   },
   "control": {
@@ -135,208 +102,110 @@
     "fillColorRest": "PlatformColor(Window)",
     "fillColorHover": "PlatformColor(Highlight)",
     "fillColorPressed": "PlatformColor(Highlight)",
-    "fillColorDisabled": "PlatformColor(Window)"
-  },
-  "neutralBackground1Selected": {
-    "fillColorRest": "PlatformColor(Highlight)",
-    "fillColorHover": "PlatformColor(Highlight)",
-    "fillColorPressed": "PlatformColor(Highlight)",
-    "fillColorDisabled": "PlatformColor(Window)"
+    "fillColorSelected": "PlatformColor(Highlight)"
   },
   "neutralBackground2": {
     "fillColorRest": "PlatformColor(Window)",
     "fillColorHover": "PlatformColor(Highlight)",
     "fillColorPressed": "PlatformColor(Highlight)",
-    "fillColorDisabled": "PlatformColor(Window)"
-  },
-  "neutralBackground2Selected": {
-    "fillColorRest": "PlatformColor(Highlight)",
-    "fillColorHover": "PlatformColor(Highlight)",
-    "fillColorPressed": "PlatformColor(Highlight)",
-    "fillColorDisabled": "PlatformColor(Window)"
+    "fillColorSelected": "PlatformColor(Highlight)"
   },
   "neutralBackground3": {
     "fillColorRest": "PlatformColor(Window)",
     "fillColorHover": "PlatformColor(Highlight)",
     "fillColorPressed": "PlatformColor(Highlight)",
-    "fillColorDisabled": "PlatformColor(Window)"
-  },
-  "neutralBackground3Selected": {
-    "fillColorRest": "PlatformColor(Highlight)",
-    "fillColorHover": "PlatformColor(Highlight)",
-    "fillColorPressed": "PlatformColor(Highlight)",
-    "fillColorDisabled": "PlatformColor(Window)"
+    "fillColorSelected": "PlatformColor(Highlight)"
   },
   "neutralBackground4": {
     "fillColorRest": "PlatformColor(Window)",
     "fillColorHover": "PlatformColor(Highlight)",
     "fillColorPressed": "PlatformColor(Highlight)",
-    "fillColorDisabled": "PlatformColor(Window)"
-  },
-  "neutralBackground4Selected": {
-    "fillColorRest": "PlatformColor(Highlight)",
-    "fillColorHover": "PlatformColor(Highlight)",
-    "fillColorPressed": "PlatformColor(Highlight)",
-    "fillColorDisabled": "PlatformColor(Window)"
+    "fillColorSelected": "PlatformColor(Highlight)"
   },
   "neutralBackground5": {
     "fillColorRest": "PlatformColor(Window)",
     "fillColorHover": "PlatformColor(Highlight)",
     "fillColorPressed": "PlatformColor(Highlight)",
-    "fillColorDisabled": "PlatformColor(Window)"
-  },
-  "neutralBackground5Selected": {
-    "fillColorRest": "PlatformColor(Highlight)",
-    "fillColorHover": "PlatformColor(Highlight)",
-    "fillColorPressed": "PlatformColor(Highlight)",
-    "fillColorDisabled": "PlatformColor(Window)"
+    "fillColorSelected": "PlatformColor(Highlight)"
   },
   "neutralBackground6": {
-    "fillColorRest": "PlatformColor(Window)",
-    "fillColorHover": "PlatformColor(Window)",
-    "fillColorPressed": "PlatformColor(Window)",
-    "fillColorDisabled": "PlatformColor(Window)"
+    "fillColorRest": "PlatformColor(Window)"
+  },
+  "neutralBackgroundDisabled": {
+    "fillColorSelected": "PlatformColor(Window)"
   },
   "neutralBackgroundInverted": {
-    "fillColorRest": "PlatformColor(WindowText)",
-    "fillColorHover": "PlatformColor(WindowText)",
-    "fillColorPressed": "PlatformColor(WindowText)",
-    "fillColorDisabled": "PlatformColor(Window)"
+    "fillColorRest": "PlatformColor(WindowText)"
   },
   "neutralForeground1": {
-    "fillColorRest": "PlatformColor(WindowText)",
-    "fillColorHover": "PlatformColor(WindowText)",
-    "fillColorPressed": "PlatformColor(WindowText)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
+    "fillColorRest": "PlatformColor(WindowText)"
   },
   "neutralForeground2": {
     "fillColorRest": "PlatformColor(WindowText)",
     "fillColorHover": "PlatformColor(HighlightText)",
     "fillColorPressed": "PlatformColor(HighlightText)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
-  },
-  "neutralForeground2Brand": {
-    "fillColorRest": "PlatformColor(WindowText)",
-    "fillColorHover": "PlatformColor(HighlightText)",
-    "fillColorPressed": "PlatformColor(HighlightText)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
-  },
-  "neutralForeground2BrandSelected": {
-    "fillColorRest": "PlatformColor(HighlightText)",
-    "fillColorHover": "PlatformColor(HighlightText)",
-    "fillColorPressed": "PlatformColor(HighlightText)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
-  },
-  "neutralForeground2Selected": {
-    "fillColorRest": "PlatformColor(HighlightText)",
-    "fillColorHover": "PlatformColor(HighlightText)",
-    "fillColorPressed": "PlatformColor(HighlightText)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
+    "fillColorBrandHover": "PlatformColor(HighlightText)",
+    "fillColorBrandPressed": "PlatformColor(HighlightText)",
+    "fillColorBrandSelected": "PlatformColor(HighlightText)",
+    "fillColorSelected": "PlatformColor(HighlightText)"
   },
   "neutralForeground3": {
     "fillColorRest": "PlatformColor(WindowText)",
     "fillColorHover": "PlatformColor(HighlightText)",
     "fillColorPressed": "PlatformColor(HighlightText)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
-  },
-  "neutralForeground3Brand": {
-    "fillColorRest": "PlatformColor(WindowText)",
-    "fillColorHover": "PlatformColor(HighlightText)",
-    "fillColorPressed": "PlatformColor(HighlightText)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
-  },
-  "neutralForeground3BrandSelected": {
-    "fillColorRest": "PlatformColor(HighlightText)",
-    "fillColorHover": "PlatformColor(HighlightText)",
-    "fillColorPressed": "PlatformColor(HighlightText)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
-  },
-  "neutralForeground3Selected": {
-    "fillColorRest": "PlatformColor(HighlightText)",
-    "fillColorHover": "PlatformColor(HighlightText)",
-    "fillColorPressed": "PlatformColor(HighlightText)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
+    "fillColorBrandHover": "PlatformColor(HighlightText)",
+    "fillColorBrandPressed": "PlatformColor(HighlightText)",
+    "fillColorBrandSelected": "PlatformColor(HighlightText)",
+    "fillColorSelected": "PlatformColor(HighlightText)"
   },
   "neutralForeground4": {
-    "fillColorRest": "PlatformColor(WindowText)",
-    "fillColorHover": "PlatformColor(WindowText)",
-    "fillColorPressed": "PlatformColor(WindowText)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
+    "fillColorRest": "PlatformColor(WindowText)"
+  },
+  "neutralForegroundDisabled": {
+    "fillColorRest": "PlatformColor(GrayText)"
   },
   "neutralForegroundInverted": {
-    "fillColorRest": "PlatformColor(Window)",
-    "fillColorHover": "PlatformColor(Window)",
-    "fillColorPressed": "PlatformColor(Window)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
+    "fillColorRest": "PlatformColor(Window)"
   },
   "neutralForegroundInvertedLink": {
     "fillColorRest": "PlatformColor(Hotlight)",
     "fillColorHover": "PlatformColor(Hotlight)",
     "fillColorPressed": "PlatformColor(Hotlight)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
-  },
-  "neutralForegroundInvertedLinkSelected": {
-    "fillColorRest": "PlatformColor(Hotlight)",
-    "fillColorHover": "PlatformColor(Hotlight)",
-    "fillColorPressed": "PlatformColor(Hotlight)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
+    "fillColorSelected": "PlatformColor(Hotlight)"
   },
   "neutralForegroundOnBrand": {
-    "fillColorRest": "PlatformColor(Window)",
-    "fillColorHover": "PlatformColor(Window)",
-    "fillColorPressed": "PlatformColor(Window)",
-    "fillColorDisabled": "PlatformColor(GrayText)"
+    "fillColorRest": "PlatformColor(Window)"
   },
   "neutralStencil1": {
-    "fillColorRest": "#141414",
-    "fillColorHover": "#141414",
-    "fillColorPressed": "#141414"
+    "fillColorRest": "#141414"
   },
   "neutralStencil2": {
-    "fillColorRest": "#858585",
-    "fillColorHover": "#858585",
-    "fillColorPressed": "#858585"
+    "fillColorRest": "#858585"
   },
   "neutralStroke1": {
     "strokeColorRest": "PlatformColor(WindowText)",
     "strokeColorHover": "PlatformColor(Highlight)",
     "strokeColorPressed": "PlatformColor(Highlight)",
-    "strokeColorDisabled": "PlatformColor(GrayText)",
-    "strokeWidth": 1
-  },
-  "neutralStroke1Selected": {
-    "strokeColorRest": "PlatformColor(Highlight)",
-    "strokeColorHover": "PlatformColor(Highlight)",
-    "strokeColorPressed": "PlatformColor(Highlight)",
-    "strokeColorDisabled": "PlatformColor(GrayText)",
+    "strokeColorSelected": "PlatformColor(Highlight)",
     "strokeWidth": 1
   },
   "neutralStroke2": {
     "strokeColorRest": "PlatformColor(WindowText)",
-    "strokeColorHover": "PlatformColor(WindowText)",
-    "strokeColorPressed": "PlatformColor(WindowText)",
-    "strokeColorDisabled": "PlatformColor(GrayText)",
     "strokeWidth": 1
   },
   "neutralStroke3": {
     "strokeColorRest": "PlatformColor(WindowText)",
-    "strokeColorHover": "PlatformColor(WindowText)",
-    "strokeColorPressed": "PlatformColor(WindowText)",
-    "strokeColorDisabled": "PlatformColor(GrayText)",
     "strokeWidth": 1
   },
   "neutralStrokeAccessible": {
     "strokeColorRest": "PlatformColor(WindowText)",
     "strokeColorHover": "PlatformColor(Highlight)",
     "strokeColorPressed": "PlatformColor(Highlight)",
-    "strokeColorDisabled": "PlatformColor(GrayText)",
+    "strokeColorSelected": "PlatformColor(Highlight)",
     "strokeWidth": 1
   },
-  "neutralStrokeAccessibleSelected": {
-    "strokeColorRest": "PlatformColor(Highlight)",
-    "strokeColorHover": "PlatformColor(Highlight)",
-    "strokeColorPressed": "PlatformColor(Highlight)",
-    "strokeColorDisabled": "PlatformColor(GrayText)",
+  "neutralStrokeDisabled": {
+    "strokeColorRest": "PlatformColor(GrayText)",
     "strokeWidth": 1
   },
   "round": {
@@ -347,16 +216,10 @@
   },
   "strokeFocus1": {
     "strokeColorRest": "PlatformColor(Window)",
-    "strokeColorHover": "PlatformColor(Window)",
-    "strokeColorPressed": "PlatformColor(Window)",
-    "strokeColorDisabled": "PlatformColor(GrayText)",
     "strokeWidth": 1
   },
   "strokeFocus2": {
     "strokeColorRest": "PlatformColor(Highlight)",
-    "strokeColorHover": "PlatformColor(Highlight)",
-    "strokeColorPressed": "PlatformColor(Highlight)",
-    "strokeColorDisabled": "PlatformColor(GrayText)",
     "strokeWidth": 1
   },
   "subheadline": {
@@ -369,13 +232,7 @@
     "fillColorRest": "transparent",
     "fillColorHover": "PlatformColor(Highlight)",
     "fillColorPressed": "PlatformColor(Highlight)",
-    "fillColorDisabled": "PlatformColor(Window)"
-  },
-  "subtleBackgroundSelected": {
-    "fillColorRest": "PlatformColor(Highlight)",
-    "fillColorHover": "PlatformColor(Highlight)",
-    "fillColorPressed": "PlatformColor(Highlight)",
-    "fillColorDisabled": "PlatformColor(Window)"
+    "fillColorSelected": "PlatformColor(Highlight)"
   },
   "surface": {
     "cornerRadius": 4
@@ -402,13 +259,7 @@
     "fillColorRest": "transparent",
     "fillColorHover": "transparent",
     "fillColorPressed": "transparent",
-    "fillColorDisabled": "transparent"
-  },
-  "transparentBackgroundSelected": {
-    "fillColorRest": "transparent",
-    "fillColorHover": "transparent",
-    "fillColorPressed": "transparent",
-    "fillColorDisabled": "transparent"
+    "fillColorSelected": "transparent"
   },
   "transparentStroke": {
     "strokeAlignment": "inner",

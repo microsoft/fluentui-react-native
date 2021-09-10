@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Moved tabs to the experimental framework.",
-  "packageName": "@fluentui-react-native/experimental-tabs",
-  "email": "nkhalil942@gmail.com",
-  "dependentChangeType": "patch"
-}

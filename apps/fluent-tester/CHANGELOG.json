@@ -2,6 +2,200 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 09 Sep 2021 22:12:19 GMT",
+      "tag": "@fluentui-react-native/tester_v0.42.1",
+      "version": "0.42.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Integrate Office alias tokens into Tokens test",
+            "author": "ruaraki@microsoft.com",
+            "commit": "6a82ccdd6a0cf0226f59e1f81ec34a0eb7e3d912",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Sep 2021 20:03:01 GMT",
+      "tag": "@fluentui-react-native/tester_v0.42.0",
+      "version": "0.42.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fixed comments, styling, and made props const",
+            "author": "sriyaaluru@gmail.com",
+            "commit": "bf44a8a21e66204a7bc51cee049f541995fc5062",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Removed non-working components from the tester app",
+            "author": "dake.3601@gmail.com",
+            "commit": "44257683508f0b7707e1ae6b55aac2925a64093c",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Fix Font error in Text iOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "b1f4274e7afbcd2d676fcea275e0ebb8acf7e58a",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "changed name of one line from pivot to tabs",
+            "author": "sriyaaluru@gmail.com",
+            "commit": "67d1a2274a47db1d58e6f6c521a6698114ca1969",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.20.4",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "fa4f73e282367762f3efc2c5bac08e9b5da56c52",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui/react-native to v0.25.11",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "fa4f73e282367762f3efc2c5bac08e9b5da56c52",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-tabs to v0.2.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.8.19",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-native-button to v0.7.21",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/default-theme to v0.8.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/stack to v0.5.31",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.18",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.41",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.35",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.3.14",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.12.6",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-expander to v0.2.11",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-shimmer to v0.5.11",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.6.16",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/apple-theme to v0.7.21",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.12.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.12.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme to v0.5.19",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/android-theme to v0.4.14",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.6.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tester"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Moved tabs to the experimental framework.",
+            "author": "nkhalil942@gmail.com",
+            "commit": "e8463d8d7e278c20c747425ab32c27bf5d857929",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Tabs Control for Windows",
+            "author": "dake.3601@gmail.com",
+            "commit": "ebfa19c9cf5c864b3c381865dbac212c2a77a0a5",
+            "package": "@fluentui-react-native/tester"
+          },
+          {
+            "comment": "Dynamic TabsItem",
+            "author": "dake.3601@gmail.com",
+            "commit": "e25d70f89e7477fcbb7cec29d1eaf45ac450ca21",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 31 Aug 2021 18:48:34 GMT",
       "tag": "@fluentui-react-native/tester_v0.41.0",
       "version": "0.41.0",
