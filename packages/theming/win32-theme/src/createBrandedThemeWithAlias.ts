@@ -8,12 +8,12 @@ export function createBrandedThemeWithAlias(themeName: string, theme: Theme): Pa
   }
 
   return {
-    colors: overrideBrandAliasTokensWithOffice(themeName, theme),
+    colors: getCurrentBrandAliasTokens(themeName, theme.host.colors.AppPrimary),
   };
 }
 
-function overrideBrandAliasTokensWithOffice(themeName: string, theme: Theme): Partial<AliasColorTokens> {
-  const appColors = getAppColors(theme.host.colors.AppPrimary);
+export function getCurrentBrandAliasTokens(themeName: string, appPrimary: ColorValue): Partial<AliasColorTokens> {
+  const appColors = getAppColors(appPrimary);
   const isWhiteOrColorfulTheme = themeName === 'White' || themeName === 'Colorful';
 
   return {
@@ -51,18 +51,20 @@ function overrideBrandAliasTokensWithOffice(themeName: string, theme: Theme): Pa
 }
 
 function getAppColors(primaryColor: ColorValue) {
-  if (primaryColor === '#185abd') {
-    return globalTokens.color.word;
-  } else if (primaryColor === '#107c41') {
-    return globalTokens.color.excel;
-  } else if (primaryColor === '#d83b01') {
-    return globalTokens.color.office;
-  } else if (primaryColor === '#80397b') {
-    return globalTokens.color.oneNote;
-  } else if (primaryColor === '#0078d4') {
-    return globalTokens.color.outlook;
-  } else if (primaryColor === '#c43e1c') {
-    return globalTokens.color.powerPoint;
+  if (typeof primaryColor === 'string') {
+    if (primaryColor.toLowerCase() === '#185abd') {
+      return globalTokens.color.word;
+    } else if (primaryColor.toLowerCase() === '#107c41') {
+      return globalTokens.color.excel;
+    } else if (primaryColor.toLowerCase() === '#d83b01') {
+      return globalTokens.color.office;
+    } else if (primaryColor.toLowerCase() === '#80397b') {
+      return globalTokens.color.oneNote;
+    } else if (primaryColor.toLowerCase() === '#0078d4') {
+      return globalTokens.color.outlook;
+    } else if (primaryColor.toLowerCase() === '#c43e1c') {
+      return globalTokens.color.powerPoint;
+    }
   }
 
   return globalTokens.color.brand;
