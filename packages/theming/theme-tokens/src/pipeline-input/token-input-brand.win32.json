@@ -5,20 +5,6 @@
   },
   "Global": {
     "Color": {
-      "Access": {
-        "Shade": {
-          "30": { "value": "#63121b" },
-          "20": { "value": "#861825" },
-          "10": { "value": "#9e1d2c" }
-        },
-        "Primary": { "value": "#af2031" },
-        "Tint": {
-          "10": { "value": "#b93443" },
-          "20": { "value": "#d06975" },
-          "30": { "value": "#e7b0b5" },
-          "40": { "value": "#f2d3d6" }
-        }
-      },
       "Brand": {
         "Shade": {
           "30": { "value": "#0e336a" },
@@ -103,18 +89,18 @@
           "40": { "value": "#f6dbd4" }
         }
       },
-      "Publisher": {
+      "Word": {
         "Shade": {
-          "30": { "value": "#02494c" },
-          "20": { "value": "#026367" },
-          "10": { "value": "#02767a" }
+          "30": { "value": "#0e336a" },
+          "20": { "value": "#13458f" },
+          "10": { "value": "#1651aa" }
         },
-        "Primary": { "value": "#038387" },
+        "Primary": { "value": "#185abd" },
         "Tint": {
-          "10": { "value": "#159196" },
-          "20": { "value": "#4bb4b7" },
-          "30": { "value": "#9bd9db" },
-          "40": { "value": "#c7ebec" }
+          "10": { "value": "#2e6ac5" },
+          "20": { "value": "#6794d7" },
+          "30": { "value": "#aec6eb" },
+          "40": { "value": "#d2e0f4" }
         }
       }
     }
