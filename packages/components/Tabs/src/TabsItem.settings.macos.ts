@@ -65,7 +65,7 @@ export const settings: IComposeSettings<TabsItemType> = [
         _overrides: {
           selected: {
             indicator: {
-              style:{
+              style: {
                 marginHorizontal: 0,
               },
             },

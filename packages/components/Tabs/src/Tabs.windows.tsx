@@ -17,7 +17,7 @@ export const TabsContext = React.createContext<TabsContextData>({
     return;
   },
   getTabId: (/* key:string, index: number*/) => {
-    return null
+    return null;
   },
   updateSelectedTabsItemRef: (/* ref: React.RefObject<any>*/) => {
     return;
@@ -48,12 +48,15 @@ export const Tabs = compose<TabsType>({
     // This hook updates the Selected TabsItem and calls the customer's onTabsClick function. This gets called after a TabsItem is pressed.
     const data = useSelectedKey(selectedKey || defaultSelectedKey || null, userProps.onTabsClick);
 
-    const findTabId = React.useCallback((key: string, index: number) => {
-      if (getTabId) {
-        return getTabId(key, index);
-      }
-      return `${key}-Tab${index}`;
-    }, [getTabId]);
+    const findTabId = React.useCallback(
+      (key: string, index: number) => {
+        if (getTabId) {
+          return getTabId(key, index);
+        }
+        return `${key}-Tab${index}`;
+      },
+      [getTabId],
+    );
 
     // Stores views to be displayed
     const map = new Map<string, React.ReactNode[]>();
@@ -79,7 +82,7 @@ export const Tabs = compose<TabsType>({
     const onKeyDown = (ev: any) => {
       if (ev.nativeEvent.key === 'ArrowRight' || ev.nativeEvent.key === 'ArrowLeft') {
         const length = state.info.enabledKeys.length;
-        const currTabItemIndex = state.info.enabledKeys.findIndex(x => x == state.context.selectedKey)
+        const currTabItemIndex = state.info.enabledKeys.findIndex((x) => x == state.context.selectedKey);
         let newCurrTabItemIndex;
         if (ev.nativeEvent.key === 'ArrowRight') {
           if (isCircularNavigation || !(currTabItemIndex + 1 == length)) {
@@ -87,8 +90,7 @@ export const Tabs = compose<TabsType>({
             state.context.selectedKey = state.info.enabledKeys[newCurrTabItemIndex];
             data.onKeySelect(state.context.selectedKey);
           }
-        }
-        else {
+        } else {
           if (isCircularNavigation || !(currTabItemIndex == 0)) {
             newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
             state.context.selectedKey = state.info.enabledKeys[newCurrTabItemIndex];
@@ -101,9 +103,9 @@ export const Tabs = compose<TabsType>({
     /* GH #964, Extra props are needed because FocusZone is not implemented on windows.
     The ref focusZoneRef is used to set focus on Tabs when selecting a TabsItem and onKeyDown manages keyboarding */
     const slotProps = mergeSettings<TabsSlotProps>(styleProps, {
-      root: { ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist', ...pressable.props, ...rest},
+      root: { ref: componentRef, accessibilityLabel: accessibilityLabel, accessibilityRole: 'tablist', ...pressable.props, ...rest },
       label: { children: label },
-      stack: { focusable: true, ref: focusZoneRef, onKeyDown: onKeyDown},
+      stack: { focusable: true, ref: focusZoneRef, onKeyDown: onKeyDown },
     });
 
     return { slotProps, state };
@@ -147,9 +149,7 @@ export const Tabs = compose<TabsType>({
       >
         <Slots.root>
           {renderData.state?.info?.label && <Slots.label />}
-            <Slots.stack>
-              {children}
-            </Slots.stack>
+          <Slots.stack>{children}</Slots.stack>
           <Slots.tabPanel>
             <TabsContext.Consumer>
               {(context) => !renderData.state.info.headersOnly && context.views.get(context.selectedKey)}
