@@ -38,7 +38,7 @@ export type MenuButtonSlotProps = {
   contextualMenu: React.PropsWithRef<ContextualMenuProps>;
   contextualMenuItems: Pick<MenuButtonProps, 'menuItems'>;
   contextualMenuItem: MenuButtonItemProps;
-  svg: SvgProps;
+  chevronSvg: SvgProps;
 };
 
 export type MenuButtonRenderData = IRenderData<MenuButtonSlotProps, MenuButtonState>;
