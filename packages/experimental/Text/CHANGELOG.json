@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-text",
   "entries": [
     {
+      "date": "Fri, 10 Sep 2021 18:16:59 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.6.18",
+      "version": "0.6.18",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.37",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5f282af0873151b9f7a8eb75369619af42d092d4",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Sep 2021 22:12:19 GMT",
       "tag": "@fluentui-react-native/experimental-text_v0.6.17",
       "version": "0.6.17",

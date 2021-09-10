@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/framework",
   "entries": [
     {
+      "date": "Fri, 10 Sep 2021 18:16:59 GMT",
+      "tag": "@fluentui-react-native/framework_v0.5.37",
+      "version": "0.5.37",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/default-theme to v0.8.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5f282af0873151b9f7a8eb75369619af42d092d4",
+            "package": "@fluentui-react-native/framework"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Sep 2021 22:12:19 GMT",
       "tag": "@fluentui-react-native/framework_v0.5.36",
       "version": "0.5.36",

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fixed bug with bundling and Tester freeze for primary button.",
-  "packageName": "@fluentui-react-native/menu-button",
-  "email": "v.kozlova13@gmail.com",
-  "dependentChangeType": "patch"
-}

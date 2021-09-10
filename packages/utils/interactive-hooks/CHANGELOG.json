@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Fri, 10 Sep 2021 18:16:59 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.10.43",
+      "version": "0.10.43",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.20",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5f282af0873151b9f7a8eb75369619af42d092d4",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 09 Sep 2021 22:12:19 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.10.42",
       "version": "0.10.42",
