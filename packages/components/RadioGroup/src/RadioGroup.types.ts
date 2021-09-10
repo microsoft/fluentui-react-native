@@ -53,7 +53,7 @@ export interface IRadioGroupProps {
   /*
    ** An accessibility label for screen readers. If not provided, it will be set to the label of the radio group.
    */
-   accessibilityLabel?: string;
+  accessibilityLabel?: string;
 
   /**
    * The key of the selected option. If you provide this, you must maintain selection state by observing

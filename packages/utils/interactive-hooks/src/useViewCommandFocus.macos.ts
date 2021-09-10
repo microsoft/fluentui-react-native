@@ -22,7 +22,7 @@ export function useViewCommandFocus(
 
   const _setNativeRef = setAndForwardRef({
     getForwardedRef: () => forwardedRef,
-    setLocalRef: localRef => {
+    setLocalRef: (localRef) => {
       focusRef.current = localRef;
 
       /**

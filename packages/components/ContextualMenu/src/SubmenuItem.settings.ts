@@ -25,8 +25,8 @@ export const settings: IComposeSettings<SubmenuItemType> = [
     icon: {
       style: {
         marginEnd: 5,
-        color: 'menuIcon'
-      }
+        color: 'menuIcon',
+      },
     },
     leftstack: {
       style: {
@@ -37,7 +37,7 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         alignSelf: 'flex-start',
         minHeight: 32,
         justifyContent: 'flex-start',
-      }
+      },
     },
     rightstack: {
       style: {
@@ -48,9 +48,9 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         minHeight: 32,
         width: 12,
         justifyContent: 'flex-end',
-      }
+      },
     },
-    _precedence: ['focused','hovered', 'pressed', 'submenuItemHovered', 'disabled'],
+    _precedence: ['focused', 'hovered', 'pressed', 'submenuItemHovered', 'disabled'],
     _overrides: {
       disabled: {
         tokens: {
@@ -74,12 +74,12 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         tokens: {
           color: 'menuItemTextHovered',
           backgroundColor: 'menuItemBackgroundHovered',
-          borderColor: 'focusBorder'
+          borderColor: 'focusBorder',
         },
         _overrides: {
           hovered: {
             tokens: {
-              borderColor: 'transparent'
+              borderColor: 'transparent',
             },
           },
         },

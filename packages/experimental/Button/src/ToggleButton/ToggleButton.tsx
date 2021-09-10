@@ -30,7 +30,7 @@ export const ToggleButton = compose<ToggleButtonType>({
     const button = useButton({ onClick: toggle, ...rest });
 
     // grab the styled slots
-    const Slots = useSlots(userProps, layer => (layer === 'checked' && checkedValue) || button.state[layer] || userProps[layer]);
+    const Slots = useSlots(userProps, (layer) => (layer === 'checked' && checkedValue) || button.state[layer] || userProps[layer]);
 
     // now return the handler for finishing render
     return (final: ToggleButtonProps, ...children: React.ReactNode[]) => {

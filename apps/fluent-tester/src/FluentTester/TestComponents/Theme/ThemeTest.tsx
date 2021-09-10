@@ -80,9 +80,7 @@ const SwatchList: React.FunctionComponent = () => {
   );
 
   const flattenArray = React.useCallback(() => {
-    return Object.keys(palette)
-      .sort()
-      .map(aggregator);
+    return Object.keys(palette).sort().map(aggregator);
   }, [palette, aggregator]);
 
   const paletteAsArray = React.useMemo(flattenArray, [flattenArray]);
