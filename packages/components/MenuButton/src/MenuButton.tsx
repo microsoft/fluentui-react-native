@@ -88,7 +88,7 @@ export const MenuButton = compose<MenuButtonType>({
       contextualMenuItems: {
         menuItems: menuItemsUpdated,
       },
-      svg: {
+      chevronSvg: {
         width: '12',
         height: '16',
         viewBox: '0 0 11 6',
