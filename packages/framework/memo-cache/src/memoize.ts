@@ -13,5 +13,5 @@ export function memoize<T extends Function>(fn: T): T {
     return cache(() => fn(...(args || [])), args)[0];
   };
   // now return that closure strongly typed as the function.
-  return (closure as unknown) as T;
+  return closure as unknown as T;
 }

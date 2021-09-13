@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
+This log was last generated on Fri, 10 Sep 2021 18:16:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.3
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.14 (ruaraki@microsoft.com)
+
+## 0.14.2
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.13 (ruaraki@microsoft.com)
+
+## 0.14.1
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.12 (ruaraki@microsoft.com)
+
+## 0.14.0
+
+Fri, 27 Aug 2021 15:48:49 GMT
+
+### Minor changes
+
+- Update styling for link to match redlines (krsiler@microsoft.com)
 
 ## 0.13.17
 

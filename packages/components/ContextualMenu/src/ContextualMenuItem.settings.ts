@@ -22,7 +22,7 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
       },
     },
     content: {},
-    icon: {style: { marginEnd: 5 }},
+    icon: { style: { marginEnd: 5 } },
     stack: {
       style: {
         display: 'flex',
@@ -33,8 +33,8 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
         alignSelf: 'flex-start',
         minHeight: 32,
         minWidth: 80,
-        justifyContent: 'flex-start'
-      }
+        justifyContent: 'flex-start',
+      },
     },
     _precedence: ['focused', 'hovered', 'pressed', 'disabled'],
     _overrides: {
@@ -60,12 +60,12 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
         tokens: {
           color: 'menuItemTextHovered',
           backgroundColor: 'menuItemBackgroundHovered',
-          borderColor: 'focusBorder'
+          borderColor: 'focusBorder',
         },
         _overrides: {
           hovered: {
             tokens: {
-              borderColor: 'transparent'
+              borderColor: 'transparent',
             },
           },
         },

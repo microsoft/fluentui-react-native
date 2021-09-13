@@ -1,8 +1,57 @@
 # Change Log - @fluentui-react-native/tabs
 
-This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
+This log was last generated on Fri, 10 Sep 2021 18:16:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.2
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.14 (ruaraki@microsoft.com)
+
+## 0.5.1
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.13 (ruaraki@microsoft.com)
+
+## 0.5.0
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Minor changes
+
+- Tabs Control for Windows (dake.3601@gmail.com)
+- Dynamic TabsItem (dake.3601@gmail.com)
+
+### Patches
+
+- fixed comments, styling, and made props const (sriyaaluru@gmail.com)
+- Bump @uifabricshared/foundation-compose to v1.10.12 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/text to v0.10.14 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.8.18 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.41 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.7.21 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/pressable to v0.7.18 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/tokens to v0.9.23 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/test-tools to v0.1.1 (ruaraki@microsoft.com)
+
+## 0.4.0
+
+Tue, 31 Aug 2021 18:48:34 GMT
+
+### Minor changes
+
+- tabs control for macos (sriyaaluru@gmail.com)
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.7.20 (chripear@microsoft.com)
 
 ## 0.3.4
 

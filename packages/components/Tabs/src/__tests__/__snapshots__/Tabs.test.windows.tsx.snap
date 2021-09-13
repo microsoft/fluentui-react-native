@@ -1,0 +1,1512 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tabs FocusZone props 1`] = `
+<View
+  accessibilityRole="tablist"
+  accessible={true}
+>
+  <RCTFocusZone
+    navigateAtEnd="NavigateStopAtEnds"
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityPositionInSet={1}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+            "selected": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "transparent",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityPositionInSet={2}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+            "selected": true,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "#0078d4",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityPositionInSet={3}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+            "selected": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "transparent",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+    </View>
+  </RCTFocusZone>
+  <View />
+</View>
+`;
+
+exports[`Tabs default props 1`] = `
+<View
+  accessibilityRole="tablist"
+  accessible={true}
+>
+  <RCTFocusZone
+    navigateAtEnd="NavigateStopAtEnds"
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityPositionInSet={1}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+            "selected": true,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "#0078d4",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityPositionInSet={2}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+            "selected": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "transparent",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityPositionInSet={3}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+            "selected": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "transparent",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+    </View>
+  </RCTFocusZone>
+  <View />
+</View>
+`;
+
+exports[`Tabs disabled 1`] = `
+<View
+  accessibilityRole="tablist"
+  accessible={true}
+>
+  <RCTFocusZone
+    navigateAtEnd="NavigateStopAtEnds"
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityPositionInSet={1}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": true,
+            "selected": false,
+          }
+        }
+        accessible={true}
+        disabled={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "transparent",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityPositionInSet={2}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": true,
+            "selected": false,
+          }
+        }
+        accessible={true}
+        disabled={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "transparent",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityPositionInSet={3}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+            "selected": true,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "#0078d4",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+    </View>
+  </RCTFocusZone>
+  <View />
+</View>
+`;
+
+exports[`Tabs header text and count 1`] = `
+<View
+  accessibilityRole="tablist"
+  accessible={true}
+>
+  <RCTFocusZone
+    navigateAtEnd="NavigateStopAtEnds"
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityLabel="TabsItem"
+        accessibilityPositionInSet={1}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+            "selected": true,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#242424",
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "600",
+                "margin": 0,
+              }
+            }
+          >
+            TabsItem (1)
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "#0078d4",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityLabel="TabsItem"
+        accessibilityPositionInSet={2}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+            "selected": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "margin": 0,
+              }
+            }
+          >
+            TabsItem (0)
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "transparent",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityLabel="TabsItem"
+        accessibilityPositionInSet={3}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+            "selected": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "margin": 0,
+              }
+            }
+          >
+            TabsItem (100)
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "transparent",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+    </View>
+  </RCTFocusZone>
+  <View />
+</View>
+`;
+
+exports[`Tabs headers only 1`] = `
+<View
+  accessibilityRole="tablist"
+  accessible={true}
+>
+  <RCTFocusZone
+    navigateAtEnd="NavigateStopAtEnds"
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityPositionInSet={1}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+            "selected": true,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "#0078d4",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityPositionInSet={2}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+            "selected": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "transparent",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityPositionInSet={3}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+            "selected": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "transparent",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+    </View>
+  </RCTFocusZone>
+  <View />
+</View>
+`;
+
+exports[`Tabs props 1`] = `
+<View
+  accessibilityLabel="Tabs"
+  accessibilityRole="tablist"
+  accessible={true}
+>
+  <Text
+    style={
+      Object {
+        "color": "#323130",
+        "fontFamily": "Segoe UI",
+        "fontSize": 16,
+        "fontWeight": "600",
+        "margin": 0,
+      }
+    }
+  >
+    Tabs
+  </Text>
+  <RCTFocusZone
+    navigateAtEnd="NavigateStopAtEnds"
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+        }
+      }
+    >
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityLabel="TabsItem"
+        accessibilityPositionInSet={1}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": true,
+            "selected": false,
+          }
+        }
+        accessible={true}
+        disabled={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#bdbdbd",
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "margin": 0,
+              }
+            }
+          >
+            TabsItem (1)
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "transparent",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityLabel="TabsItem"
+        accessibilityPositionInSet={2}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+            "selected": true,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#242424",
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "600",
+                "margin": 0,
+              }
+            }
+          >
+            TabsItem (0)
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "#0078d4",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a TabsItem",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityLabel="TabsItem"
+        accessibilityPositionInSet={3}
+        accessibilityRole="tab"
+        accessibilitySetSize={3}
+        accessibilityState={
+          Object {
+            "disabled": undefined,
+            "selected": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderWidth": 2,
+            "display": "flex",
+            "flexDirection": "column",
+            "justifyContent": "center",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "alignSelf": "flex-start",
+              "display": "flex",
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "marginHorizontal": 10,
+              "minHeight": 32,
+              "minWidth": 32,
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "#616161",
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "margin": 0,
+              }
+            }
+          >
+            TabsItem (100)
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "backgroundColor": "transparent",
+              "borderRadius": 2,
+              "marginBottom": 2,
+              "marginHorizontal": 10,
+              "minHeight": 2,
+            }
+          }
+        />
+      </View>
+    </View>
+  </RCTFocusZone>
+  <View />
+</View>
+`;

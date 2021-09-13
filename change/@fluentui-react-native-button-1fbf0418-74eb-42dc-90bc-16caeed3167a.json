@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fixed bug: Luminosity ratio for boundary of focused button with respect to background is 1.2:1 which is less than 3:1",
-  "packageName": "@fluentui-react-native/button",
-  "email": "v.kozlova13@gmail.com",
-  "dependentChangeType": "patch"
-}

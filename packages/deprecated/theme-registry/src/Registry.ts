@@ -186,7 +186,7 @@ export function createThemeRegistry<T extends object, TPartial extends object>(
     [_defaultEntryName]: { parentEntryName: _platformEntryName },
   };
   const listeners: IThemeEventListener[] = [];
-  const resolver: IResolveTheme<object, object> = (baseResolver as unknown) as IResolveTheme<object, object>;
+  const resolver: IResolveTheme<object, object> = baseResolver as unknown as IResolveTheme<object, object>;
 
   return {
     getTheme: (name?: string) => {
