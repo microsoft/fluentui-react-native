@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Fri, 10 Sep 2021 21:30:12 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.6.6",
+      "version": "0.6.6",
+      "comments": {
+        "none": [
+          {
+            "comment": "Run the prettier",
+            "author": "ruaraki@microsoft.com",
+            "commit": "7ac71c6add6f05230c649dad60b5f7442f08cbb3",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 10 Sep 2021 18:16:59 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.6.6",
+      "version": "0.6.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixed bug with bundling and Tester freeze for primary button.",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "b187394d33d559aff773b0364062e6c84fe45850",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Sep 2021 22:12:19 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.6.5",
+      "version": "0.6.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.20.5",
+            "author": "ruaraki@microsoft.com",
+            "commit": "6a82ccdd6a0cf0226f59e1f81ec34a0eb7e3d912",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Sep 2021 20:03:01 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.6.4",
+      "version": "0.6.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/button to v0.20.4",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "fa4f73e282367762f3efc2c5bac08e9b5da56c52",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 31 Aug 2021 18:48:34 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.6.3",
       "version": "0.6.3",

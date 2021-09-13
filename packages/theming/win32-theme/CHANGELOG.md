@@ -1,8 +1,46 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
+This log was last generated on Fri, 10 Sep 2021 21:30:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.2
+
+Fri, 10 Sep 2021 21:30:12 GMT
+
+### Patches
+
+- Allow theming module to be implemented as a turbomanager (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.13.1
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Branding should pull from pipeline (ruaraki@microsoft.com)
+
+## 0.13.0
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Minor changes
+
+- Integrate updated themes (ruaraki@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.7.0 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.8.2 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theming-utils to v0.7.0 (ruaraki@microsoft.com)
+
+## 0.12.1
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.8.1 (ruaraki@microsoft.com)
 
 ## 0.12.0
 

@@ -19,7 +19,7 @@ export interface IComposeType<
   TSlotProps extends ISlotProps = ISlotProps<TProps>,
   TState extends object = object,
   TTokens extends object = object,
-  TStatics extends object = object
+  TStatics extends object = object,
 > extends IComposableType<TProps, TSlotProps, TState> {
   /**
    * Any statics to attach to the component
@@ -96,8 +96,9 @@ export interface IComposeOptions<
   TSlotProps extends ISlotProps = ISlotProps<TProps>,
   TTokens extends object = object,
   TState extends object = object,
-  TStatics extends object = object
-> extends IComposableDefinition<TProps, TSlotProps, TState>, IStylingSettings<TSlotProps, TTokens> {
+  TStatics extends object = object,
+> extends IComposableDefinition<TProps, TSlotProps, TState>,
+    IStylingSettings<TSlotProps, TTokens> {
   /**
    * Add an additional option to use styling to allow for injecting override lookup functions
    */
@@ -122,7 +123,7 @@ export type IComposeReturnType<
   TSlotProps extends ISlotProps,
   TTokens extends object,
   TState extends object = object,
-  TStatics extends object = object
+  TStatics extends object = object,
 > = React.FunctionComponent<TProps> &
   TStatics & {
     /**

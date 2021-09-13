@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/experimental-expander",
   "entries": [
     {
+      "date": "Fri, 10 Sep 2021 21:30:12 GMT",
+      "tag": "@fluentui-react-native/experimental-expander_v0.2.13",
+      "version": "0.2.13",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.37",
+            "author": "ruaraki@microsoft.com",
+            "commit": "7ac71c6add6f05230c649dad60b5f7442f08cbb3",
+            "package": "@fluentui-react-native/experimental-expander"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 10 Sep 2021 18:16:59 GMT",
+      "tag": "@fluentui-react-native/experimental-expander_v0.2.13",
+      "version": "0.2.13",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.37",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5f282af0873151b9f7a8eb75369619af42d092d4",
+            "package": "@fluentui-react-native/experimental-expander"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Sep 2021 22:12:19 GMT",
+      "tag": "@fluentui-react-native/experimental-expander_v0.2.12",
+      "version": "0.2.12",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.36",
+            "author": "ruaraki@microsoft.com",
+            "commit": "6a82ccdd6a0cf0226f59e1f81ec34a0eb7e3d912",
+            "package": "@fluentui-react-native/experimental-expander"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Sep 2021 20:03:01 GMT",
+      "tag": "@fluentui-react-native/experimental-expander_v0.2.11",
+      "version": "0.2.11",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.35",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/experimental-expander"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 31 Aug 2021 18:48:34 GMT",
       "tag": "@fluentui-react-native/experimental-expander_v0.2.10",
       "version": "0.2.10",

@@ -14,7 +14,7 @@ export type IComponentSettings<TSlotProps extends ISlotProps = ISlotProps> = IPa
 };
 
 export type IComponentSettingsCollection<
-  TSettings extends IWithTokens<IComponentSettings, object> = IWithTokens<IComponentSettings, object>
+  TSettings extends IWithTokens<IComponentSettings, object> = IWithTokens<IComponentSettings, object>,
 > = {
   [key: string]: TSettings;
 };

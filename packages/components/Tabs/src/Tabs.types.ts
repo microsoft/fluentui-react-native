@@ -27,7 +27,7 @@ export interface TabsContextData {
   /**
    * Updates the selected tabsItem's ref to set as the default tabbable element.
    */
-  updateSelectedTabsItemRef?: (ref: React.RefObject<any>) => void;
+  updateSelectedTabsItemRef?: (ref: React.RefObject<any>) => void | null;
 
   /**
    * Array of tabsItem keys in the group.
@@ -38,11 +38,22 @@ export interface TabsContextData {
    * A Map to store the corresponding view of each TabsItem.
    */
   views?: Map<string, React.ReactNode[]> | null;
+
+  /**
+   * GH #964, Reference to the Focus Container as there is no FocusZone on windows.
+   * Windows-Specific Prop.
+   */
+  focusZoneRef?: React.RefObject<any> | null;
 }
 
 export interface TabsInfo {
   headersOnly?: boolean;
-  label?: boolean,
+  label?: boolean;
+  /**
+   * Array of enabled keys in the group
+   * Windows-Specific Prop.
+   */
+  enabledKeys?: string[];
 }
 
 export interface TabsState {
@@ -103,7 +114,7 @@ export interface TabsSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
   label: ITextProps;
   container: FocusZoneProps;
-  stack: ViewProps
+  stack: ViewProps;
   tabPanel: ViewProps;
 }
 

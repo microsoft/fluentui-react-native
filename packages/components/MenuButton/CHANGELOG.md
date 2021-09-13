@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Fri, 27 Aug 2021 15:48:49 GMT and should not be manually modified.
+This log was last generated on Fri, 10 Sep 2021 18:16:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.6
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Fixed bug with bundling and Tester freeze for primary button. (v.kozlova13@gmail.com)
+
+## 0.6.5
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.20.5 (ruaraki@microsoft.com)
+
+## 0.6.4
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.20.4 (v.kozlova13@gmail.com)
 
 ## 0.6.3
 

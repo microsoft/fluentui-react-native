@@ -18,7 +18,7 @@ export const TabsContext = React.createContext<TabsContextData>({
     return;
   },
   getTabId: (/* key:string, index: number*/) => {
-    return null
+    return null;
   },
   updateSelectedTabsItemRef: (/* ref: React.RefObject<any>*/) => {
     return;
@@ -57,12 +57,15 @@ export const Tabs = compose<TabsType>({
       [setSelectedTabsItemRef],
     );
 
-    const onChangeTabId = React.useCallback((key: string, index: number) => {
-      if (getTabId) {
-        return getTabId(key, index);
-      }
-      return `${key}-Tab${index}`;
-    }, [getTabId]);
+    const findTabId = React.useCallback(
+      (key: string, index: number) => {
+        if (getTabId) {
+          return getTabId(key, index);
+        }
+        return `${key}-Tab${index}`;
+      },
+      [getTabId],
+    );
 
     // Stores views to be displayed.
     const map = new Map<string, React.ReactNode[]>();
@@ -71,7 +74,7 @@ export const Tabs = compose<TabsType>({
       context: {
         selectedKey: selectedKey ?? data.selectedKey,
         onTabsClick: data.onKeySelect,
-        getTabId: onChangeTabId,
+        getTabId: findTabId,
         updateSelectedTabsItemRef: onSelectTabsItemRef,
         views: map,
       },
@@ -99,30 +102,35 @@ export const Tabs = compose<TabsType>({
 
     // Populate the tabsItemKeys array.
     if (children) {
+      const enabledKeys = [];
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore - TODO, fix typing error
+      // Generates array of keys and enabled keys.
       renderData.state.context.tabsItemKeys = React.Children.map(children, (child: React.ReactChild) => {
         if (React.isValidElement(child)) {
-          // Sets default selected tabItem.
-          if (renderData.state.context.selectedKey == null && !child.props.disabled) {
-            renderData.state.context.selectedKey = child.props.itemKey;
+          if (!child.props.disabled) {
+            enabledKeys.push(child.props.itemKey);
           }
           return child.props.itemKey;
         }
       });
+
+      /* Sets the default selected TabsItem if a TabsItem is hidden.
+      The default selected Tabsitem is the first enabled TabsItem. */
+      if (!enabledKeys.includes(renderData.state.context.selectedKey)) {
+        renderData.state.context.selectedKey = enabledKeys[0] ?? null;
+      }
     }
 
     return (
       <TabsContext.Provider
         // Passes in the selected key and a hook function to update the newly selected tabsItem and call the client's onTabsClick callback.
-        value={renderData.state.context}
+        value={renderData.state?.context}
       >
         <Slots.root>
-          {renderData.state.info.label && <Slots.label />}
+          {renderData.state?.info?.label && <Slots.label />}
           <Slots.container>
-            <Slots.stack>
-              {children}
-            </Slots.stack>
+            <Slots.stack>{children}</Slots.stack>
           </Slots.container>
           <Slots.tabPanel>
             <TabsContext.Consumer>
