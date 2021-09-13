@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add check for undefined",
+  "packageName": "@fluentui-react-native/theming-utils",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
