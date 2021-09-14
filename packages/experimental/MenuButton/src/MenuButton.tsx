@@ -51,6 +51,28 @@ export const MenuButton = compose<MenuButtonType>({
       ...contextualMenu,
     };
 
+    const menuItemsUpdated = menuItems?.map((item) => {
+      if (item.hasSubmenu) {
+        const [showSubmenu, setShowSubmenu] = useState(false);
+        const toggleShowSubmenu = useCallback(() => {
+          setShowSubmenu(!showSubmenu);
+        }, [showSubmenu, setShowSubmenu]);
+        const onDismissSubmenu = useCallback(() => {
+          setShowSubmenu(false);
+        }, [setShowSubmenu]);
+        const { onHoverIn = toggleShowSubmenu, submenuProps = {}, ...restItems } = item;
+        const { onDismiss = onDismissSubmenu, setShowMenu = toggleShowSubmenu, ...restSubmenuProps } = submenuProps;
+        const menuItemUpdated = {
+          ...restItems,
+          onHoverIn,
+          showSubmenu: item.showSubmenu ?? showSubmenu,
+          submenuProps: { ...restSubmenuProps, onDismiss, setShowMenu },
+        };
+        return menuItemUpdated;
+      }
+      return item;
+    });
+
     const Slots = useSlots(props);
 
     return () => {
@@ -65,7 +87,7 @@ export const MenuButton = compose<MenuButtonType>({
           <Button {...buttonProps}>
             <Slots.chevronIcon xml={chevronXml} />
           </Button>
-          {showContextualMenu && renderContextualMenu(contextualMenuProps, menuItems)}
+          {showContextualMenu && renderContextualMenu(contextualMenuProps, menuItemsUpdated)}
         </Slots.root>
       );
     };
