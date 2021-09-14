@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Mon, 13 Sep 2021 23:22:43 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.12.17",
+      "version": "0.12.17",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/default-theme to v0.8.4",
+            "author": "ruaraki@microsoft.com",
+            "commit": "a7179bb7cc1b8d1da09a0a11831b7b1712b8b720",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 10 Sep 2021 21:30:12 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.12.16",
       "version": "0.12.16",
