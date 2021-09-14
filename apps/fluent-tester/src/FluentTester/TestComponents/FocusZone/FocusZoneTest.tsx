@@ -86,7 +86,11 @@ const navigation2DFocusZone: React.FunctionComponent = () => {
 
   for (let i = 0; i <= 9; i++) {
     buttonRefs.push(i == 0 ? undefined : React.useRef<View>(null));
-    onClicks.push(React.useCallback(() => { setDefaultTabbableElementIndex(i); }, [setDefaultTabbableElementIndex]));
+    onClicks.push(
+      React.useCallback(() => {
+        setDefaultTabbableElementIndex(i);
+      }, [setDefaultTabbableElementIndex]),
+    );
   }
 
   return (

@@ -26,19 +26,25 @@ const basicRadioGroup: React.FunctionComponent = () => {
 
   return (
     <View>
-      <RadioGroup label="Uncontrolled RadioGroup" defaultSelectedKey="B" onChange={onChange}>
-        <RadioButton content="Option A" buttonKey="A" ariaLabel="Test Aria Label" />
-        <RadioButton content="Option B" buttonKey="B" />
-        <RadioButton content="Option C (disabled)" buttonKey="C" disabled={true} />
-        <RadioButton content="Option D" buttonKey="D" />
+      <RadioGroup label="Uncontrolled RadioGroup" defaultSelectedKey="X" onChange={onChange}>
+        <RadioButton content="Option W" buttonKey="W" accessibilityLabel="Test Accessibility Label" />
+        <RadioButton content="Option X" buttonKey="X" />
+        <RadioButton content="Option Y (disabled)" buttonKey="C" disabled={true} />
+        <RadioButton content="Option Z" buttonKey="Z" />
       </RadioGroup>
       <Separator />
       <RadioGroup label="Controlled RadioGroup" selectedKey={selectedKey} onChange={onChange2}>
         <View>
-          <RadioButton content="Option A" buttonKey="A" ariaLabel="Test Aria Label" ariaPosInSet={1} ariaSetSize={4} />
-          <RadioButton content="Option B" buttonKey="B" ariaPosInSet={2} ariaSetSize={4} />
-          <RadioButton content="Option C" buttonKey="C" ariaPosInSet={3} ariaSetSize={4} />
-          <RadioButton content="Option D" buttonKey="D" ariaPosInSet={4} ariaSetSize={4} />
+          <RadioButton
+            content="Option A"
+            buttonKey="A"
+            accessibilityLabel="Test Accessibility Label"
+            accessibilityPositionInSet={1}
+            accessibilitySetSize={4}
+          />
+          <RadioButton content="Option B" buttonKey="B" accessibilityPositionInSet={2} accessibilitySetSize={4} />
+          <RadioButton content="Option C" buttonKey="C" accessibilityPositionInSet={3} accessibilitySetSize={4} />
+          <RadioButton content="Option D" buttonKey="D" accessibilityPositionInSet={4} accessibilitySetSize={4} />
         </View>
       </RadioGroup>
     </View>

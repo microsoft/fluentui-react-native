@@ -18,14 +18,14 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
-  - FRNAvatar (0.11.9):
+  - FRNAvatar (0.12.5):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
-  - FRNButton (0.7.12):
+  - FRNButton (0.7.20):
     - MicrosoftFluentUI (= 0.3.0)
     - React
-  - FRNDatePicker (0.3.4):
+  - FRNDatePicker (0.3.6):
     - MicrosoftFluentUI (= 0.3.0)
     - React
   - glog (0.3.5)
@@ -415,7 +415,7 @@ PODS:
     - React-Core (= 0.63.4)
     - React-cxxreact (= 0.63.4)
     - React-jsi (= 0.63.4)
-  - ReactTestApp-DevSupport (0.7.1)
+  - ReactTestApp-DevSupport (0.7.5)
   - ReactTestApp-Resources (1.0.0-dev)
   - RNSVG (12.1.1):
     - React
@@ -545,9 +545,9 @@ SPEC CHECKSUMS:
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
-  FRNAvatar: b4a793a07f33294c990bef410a12191ccbe508fc
-  FRNButton: 34aec89b4aad59842203630cbdc470a38743f5b7
-  FRNDatePicker: 1bbfe4bc57507ac69c73d4ddcce0e0d77e493802
+  FRNAvatar: f631c488ceadbf4a3f885bb10275104b1041da82
+  FRNButton: 525525958d2c3083e5c2a213e8d4c78e4d1169cc
+  FRNDatePicker: 28086c1c8092614414b4f8b7b3675f3b2a8c9cfc
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
   QRCodeReader.swift: 373a389fe9a22d513c879a32a6f647c58f4ef572
@@ -573,7 +573,7 @@ SPEC CHECKSUMS:
   React-RCTText: 5c51df3f08cb9dedc6e790161195d12bac06101c
   React-RCTVibration: ae4f914cfe8de7d4de95ae1ea6cc8f6315d73d9d
   ReactCommon: 73d79c7039f473b76db6ff7c6b159c478acbbb3b
-  ReactTestApp-DevSupport: 058444bc8d4df209aabc6a5f54a73bfd9a114f94
+  ReactTestApp-DevSupport: 84ab1181efc86b93291e97746b58de70016c5340
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52

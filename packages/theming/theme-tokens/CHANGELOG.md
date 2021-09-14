@@ -1,8 +1,52 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
-This log was last generated on Wed, 18 Aug 2021 23:00:57 GMT and should not be manually modified.
+This log was last generated on Fri, 10 Sep 2021 18:16:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.1
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Add web versions (ruaraki@microsoft.com)
+
+## 0.7.0
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Minor changes
+
+- Integrate updated themes (ruaraki@microsoft.com)
+
+## 0.6.1
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Reshape input (ruaraki@microsoft.com)
+
+## 0.6.0
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Minor changes
+
+- Add input for HC (ruaraki@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.12.0 (ruaraki@microsoft.com)
+
+## 0.5.4
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
 
 ## 0.5.3
 

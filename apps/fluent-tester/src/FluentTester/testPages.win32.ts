@@ -19,7 +19,10 @@ import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 import { HOMEPAGE_TABS_BUTTON, TabsTest } from './TestComponents/Tabs';
+import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON, TabsExperimentalTest } from './TestComponents/TabsExperimental';
+import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 import { TestDescription } from './TestComponents';
+import { HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
 
 export const tests: TestDescription[] = [
   {
@@ -36,6 +39,11 @@ export const tests: TestDescription[] = [
     name: 'Checkbox Test',
     component: CheckboxTest,
     testPage: HOMEPAGE_CHECKBOX_BUTTON,
+  },
+  {
+    name: 'Experimental Checkbox',
+    component: ExperimentalCheckboxTest,
+    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
   },
   {
     name: 'ContextualMenu Test',
@@ -113,6 +121,11 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_TEXT_BUTTON,
   },
   {
+    name: 'Experimental Text Test',
+    component: TextExperimentalTest,
+    testPage: HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON,
+  },
+  {
     name: 'Theme Test',
     component: ThemeTest,
     testPage: HOMEPAGE_THEME_BUTTON,
@@ -121,6 +134,11 @@ export const tests: TestDescription[] = [
     name: 'Tabs Test',
     component: TabsTest,
     testPage: HOMEPAGE_TABS_BUTTON,
+  },
+  {
+    name: 'Tabs Experimental Test',
+    component: TabsExperimentalTest,
+    testPage: HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
   },
   {
     name: 'Tokens Test',

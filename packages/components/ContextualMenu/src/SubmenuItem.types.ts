@@ -23,7 +23,6 @@ export interface SubmenuItemSlotProps {
   content: ITextProps;
   rightstack: ViewProps;
   chevron: XmlProps;
-
 }
 
 export type SubmenuItemRenderData = IRenderData<SubmenuItemSlotProps, SubmenuItemState>;

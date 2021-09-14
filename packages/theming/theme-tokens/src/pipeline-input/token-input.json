@@ -89,7 +89,121 @@
       "NeutralShadowAmbient": { "value": "rgba(0,0,0,0.12)" },
       "NeutralShadowKey": { "value": "rgba(0,0,0,0.14)" },
       "BrandShadowAmbient": { "value": "rgba(0,0,0,0.30)" },
-      "BrandShadowKey": { "value": "rgba(0,0,0,0.25)" }
+      "BrandShadowKey": { "value": "rgba(0,0,0,0.25)" },
+      "Excel": {
+        "Shade": {
+          "60": { "value": "#03160a" },
+          "50": { "value": "#052912" },
+          "40": { "value": "#094624" },
+          "30": { "value": "#0a5325" },
+          "20": { "value": "#0c5f32" },
+          "10": { "value": "#0f703b" }
+        },
+        "Primary": { "value": "#107c41" },
+        "Tint": {
+          "10": { "value": "#10893c" },
+          "20": { "value": "#1f954a" },
+          "30": { "value": "#60bd82" },
+          "40": { "value": "#55b17e" },
+          "50": { "value": "#a0d8b9" },
+          "60": { "value": "#caead8" }
+        }
+      },
+      "Office": {
+        "Shade": {
+          "60": { "value": "#29130b" },
+          "50": { "value": "#4d2415" },
+          "40": { "value": "#792000" },
+          "30": { "value": "#99482b" },
+          "20": { "value": "#a52c00" },
+          "10": { "value": "#c33400" }
+        },
+        "Primary": { "value": "#d83b01" },
+        "Tint": {
+          "10": { "value": "#fe7948" },
+          "20": { "value": "#ff865a" },
+          "30": { "value": "#ff9973" },
+          "40": { "value": "#e8825d" },
+          "50": { "value": "#f4beaa" },
+          "60": { "value": "#f9dcd1" }
+        }
+      },
+      "OneNote": {
+        "Shade": {
+          "60": { "value": "#430e60" },
+          "50": { "value": "#430e60" },
+          "40": { "value": "#430e60" },
+          "30": { "value": "#430e60" },
+          "20": { "value": "#5b1382" },
+          "10": { "value": "#6c179a" }
+        },
+        "Primary": { "value": "#7719aa" },
+        "Tint": {
+          "10": { "value": "#862eb5" },
+          "20": { "value": "#a864cd" },
+          "30": { "value": "#d1abe6" },
+          "40": { "value": "#e6d1f2" },
+          "50": { "value": "#e6d1f2" },
+          "60": { "value": "#e6d1f2" }
+        }
+      },
+      "Outlook": {
+        "Shade": {
+          "60": { "value": "#092c47" },
+          "50": { "value": "#043862" },
+          "40": { "value": "#004578" },
+          "30": { "value": "#004c87" },
+          "20": { "value": "#005a9e" },
+          "10": { "value": "#106ebe" }
+        },
+        "Primary": { "value": "#0078d4" },
+        "Tint": {
+          "10": { "value": "#2899f5" },
+          "20": { "value": "#3aa0f3" },
+          "30": { "value": "#6cb8f6" },
+          "40": { "value": "#c7e0f4" },
+          "50": { "value": "#deecf9" },
+          "60": { "value": "#eff6fc" }
+        }
+      },
+      "PowerPoint": {
+        "Shade": {
+          "60": { "value": "#200d03" },
+          "50": { "value": "#3c1805" },
+          "40": { "value": "#6e220f" },
+          "30": { "value": "#79310a" },
+          "20": { "value": "#952f15" },
+          "10": { "value": "#b13719" }
+        },
+        "Primary": { "value": "#c43e1c" },
+        "Tint": {
+          "10": { "value": "#ca5010" },
+          "20": { "value": "#cf6024" },
+          "30": { "value": "#e1966d" },
+          "40": { "value": "#dc816a" },
+          "50": { "value": "#edbcb0" },
+          "60": { "value": "#f6dbd4" }
+        }
+      },
+      "Word": {
+        "Shade": {
+          "60": { "value": "#071225" },
+          "50": { "value": "#0c2145" },
+          "40": { "value": "#0e336a" },
+          "30": { "value": "#19428a" },
+          "20": { "value": "#13458f" },
+          "10": { "value": "#1651aa" }
+        },
+        "Primary": { "value": "#185abd" },
+        "Tint": {
+          "10": { "value": "#296fe6" },
+          "20": { "value": "#3d7ce8" },
+          "30": { "value": "#82abf1" },
+          "40": { "value": "#6794d7" },
+          "50": { "value": "#aec6eb" },
+          "60": { "value": "#d2e0f4" }
+        }
+      }
     },
     "Stroke": {
       "Width": {
@@ -357,10 +471,9 @@
           "Rest": { "value": "transparent" },
           "Hover": { "value": "transparent" },
           "Pressed": { "value": "transparent" },
-          "Disabled": { "value": "transparent" }
+          "Selected": { "value": "transparent" }
         }
       }
-    },
-    "TransparentBackgroundSelected": { "aliasOf": "Set.TransparentBackground" }
+    }
   }
 }

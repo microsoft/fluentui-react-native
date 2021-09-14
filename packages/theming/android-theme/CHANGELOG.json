@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/android-theme",
   "entries": [
     {
+      "date": "Fri, 10 Sep 2021 21:30:12 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.4.14",
+      "version": "0.4.14",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/theme to v0.5.19",
+            "author": "ruaraki@microsoft.com",
+            "commit": "7ac71c6add6f05230c649dad60b5f7442f08cbb3",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Sep 2021 20:03:01 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.4.14",
+      "version": "0.4.14",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/theme to v0.5.19",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 21:02:08 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.4.13",
+      "version": "0.4.13",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add HC plumbing",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 04:48:40 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.4.12",
+      "version": "0.4.12",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix text truncation for radio button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "b8c866644b2c5b64530990e59153424b0d6f5dcc",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 18 Aug 2021 23:00:57 GMT",
       "tag": "@fluentui-react-native/android-theme_v0.4.11",
       "version": "0.4.11",

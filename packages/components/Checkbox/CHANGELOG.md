@@ -1,8 +1,88 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Thu, 19 Aug 2021 18:31:21 GMT and should not be manually modified.
+This log was last generated on Mon, 13 Sep 2021 23:22:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.8
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.45 (ruaraki@microsoft.com)
+
+## 0.13.7
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.14 (ruaraki@microsoft.com)
+
+## 0.13.6
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.13 (ruaraki@microsoft.com)
+
+## 0.13.5
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.12 (ruaraki@microsoft.com)
+
+## 0.13.4
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.2 (ruaraki@microsoft.com)
+
+## 0.13.3
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.13.2
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.38 (sanajmi@microsoft.com)
+
+## 0.13.1
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.37 (sanajmi@microsoft.com)
+
+## 0.13.0
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Minor changes
+
+- Deprecate aria- prefix properties (krsiler@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.0 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/pressable to v0.7.13 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/text to v0.10.11 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/tokens to v0.9.20 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.36 (sanajmi@microsoft.com)
 
 ## 0.12.12
 

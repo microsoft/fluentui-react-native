@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Thu, 19 Aug 2021 18:31:21 GMT and should not be manually modified.
+This log was last generated on Thu, 09 Sep 2021 20:03:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.23
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @uifabricshared/theming-ramp to v0.15.7 (ruaraki@microsoft.com)
+
+## 0.9.22
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.2 (ruaraki@microsoft.com)
+
+## 0.9.21
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.9.20
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.0 (dake.3601@gmail.com)
 
 ## 0.9.19
 

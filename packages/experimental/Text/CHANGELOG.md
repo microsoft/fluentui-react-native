@@ -1,8 +1,64 @@
 # Change Log - @fluentui-react-native/experimental-text
 
-This log was last generated on Thu, 19 Aug 2021 18:31:21 GMT and should not be manually modified.
+This log was last generated on Mon, 13 Sep 2021 23:22:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.19
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.38 (ruaraki@microsoft.com)
+
+## 0.6.18
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.37 (ruaraki@microsoft.com)
+
+## 0.6.17
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.36 (ruaraki@microsoft.com)
+
+## 0.6.16
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.35 (ruaraki@microsoft.com)
+
+## 0.6.15
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.2 (ruaraki@microsoft.com)
+
+## 0.6.14
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.1 (67026167+chiuam@users.noreply.github.com)
+
+## 0.6.13
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.0 (dake.3601@gmail.com)
 
 ## 0.6.12
 
