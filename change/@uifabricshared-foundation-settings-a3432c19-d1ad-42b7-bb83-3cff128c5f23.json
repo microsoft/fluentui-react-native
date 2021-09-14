@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Revert \"Bump Prettier and run it (#997)\"",
+  "packageName": "@uifabricshared/foundation-settings",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "none"
+}
