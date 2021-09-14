@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Revert \"Bump Prettier and run it (#997)\"",
-  "packageName": "@fluentui-react-native/experimental-native-date-picker",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}

@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Revert \"Bump Prettier and run it (#997)\"",
-  "packageName": "@uifabricshared/theme-registry",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}

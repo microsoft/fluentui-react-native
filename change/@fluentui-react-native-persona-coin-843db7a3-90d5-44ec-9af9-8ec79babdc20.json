@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Revert \"Bump Prettier and run it (#997)\"",
-  "packageName": "@fluentui-react-native/persona-coin",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}

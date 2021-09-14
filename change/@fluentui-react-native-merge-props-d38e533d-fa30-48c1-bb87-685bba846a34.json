@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Revert \"Bump Prettier and run it (#997)\"",
-  "packageName": "@fluentui-react-native/merge-props",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}
