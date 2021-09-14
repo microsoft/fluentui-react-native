@@ -88,7 +88,7 @@ function useUpdateRenderData<TProps, TSlotProps, TState>(
     const { usePrepareProps, useStyling } = info.composable;
     info.renderData = usePrepareProps(props, useStyling) || {};
   } else {
-    info.renderData = { slotProps: { root: props } as unknown as TSlotProps };
+    info.renderData = { slotProps: ({ root: props } as unknown) as TSlotProps };
   }
 
   // now traverse to children if needed

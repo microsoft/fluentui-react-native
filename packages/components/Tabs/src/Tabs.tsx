@@ -18,7 +18,7 @@ export const TabsContext = React.createContext<TabsContextData>({
     return;
   },
   getTabId: (/* key:string, index: number*/) => {
-    return null;
+    return null
   },
   updateSelectedTabsItemRef: (/* ref: React.RefObject<any>*/) => {
     return;
@@ -57,15 +57,12 @@ export const Tabs = compose<TabsType>({
       [setSelectedTabsItemRef],
     );
 
-    const findTabId = React.useCallback(
-      (key: string, index: number) => {
-        if (getTabId) {
-          return getTabId(key, index);
-        }
-        return `${key}-Tab${index}`;
-      },
-      [getTabId],
-    );
+    const findTabId = React.useCallback((key: string, index: number) => {
+      if (getTabId) {
+        return getTabId(key, index);
+      }
+      return `${key}-Tab${index}`;
+    }, [getTabId]);
 
     // Stores views to be displayed.
     const map = new Map<string, React.ReactNode[]>();
@@ -102,7 +99,7 @@ export const Tabs = compose<TabsType>({
 
     // Populate the tabsItemKeys array.
     if (children) {
-      const enabledKeys = [];
+      const enabledKeys = []
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore - TODO, fix typing error
       // Generates array of keys and enabled keys.
@@ -130,7 +127,9 @@ export const Tabs = compose<TabsType>({
         <Slots.root>
           {renderData.state?.info?.label && <Slots.label />}
           <Slots.container>
-            <Slots.stack>{children}</Slots.stack>
+            <Slots.stack>
+              {children}
+            </Slots.stack>
           </Slots.container>
           <Slots.tabPanel>
             <TabsContext.Consumer>

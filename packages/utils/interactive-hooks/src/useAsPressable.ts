@@ -19,7 +19,7 @@ import { usePressability } from './usePressability';
 function useHoverHelper(props: PressableHoverProps): [PressableHoverProps, IHoverState] {
   const [hoverState, setHoverState] = React.useState({ hovered: false });
   const onHoverIn = React.useCallback(
-    (e) => {
+    e => {
       setHoverState({ hovered: true });
       if (props.onHoverIn) {
         props.onHoverIn(e);
@@ -29,7 +29,7 @@ function useHoverHelper(props: PressableHoverProps): [PressableHoverProps, IHove
   );
 
   const onHoverOut = React.useCallback(
-    (e) => {
+    e => {
       setHoverState({ hovered: false });
       if (props.onHoverOut) {
         props.onHoverOut(e);
@@ -46,7 +46,7 @@ function useHoverHelper(props: PressableHoverProps): [PressableHoverProps, IHove
 function useFocusHelper(props: PressableFocusProps): [PressableFocusProps, IFocusState] {
   const [focusState, setFocusState] = React.useState({ focused: false });
   const onFocus = React.useCallback(
-    (e) => {
+    e => {
       setFocusState({ focused: true });
       if (props.onFocus) {
         props.onFocus(e);
@@ -56,7 +56,7 @@ function useFocusHelper(props: PressableFocusProps): [PressableFocusProps, IFocu
   );
 
   const onBlur = React.useCallback(
-    (e) => {
+    e => {
       setFocusState({ focused: false });
       if (props.onBlur) {
         props.onBlur(e);
@@ -74,7 +74,7 @@ function usePressHelper(props: PressablePressProps): [PressablePressProps, IPres
   const [pressState, setPressState] = React.useState({ pressed: false });
 
   const onPressIn = React.useCallback(
-    (e) => {
+    e => {
       setPressState({ pressed: true });
       if (props.onPressIn) {
         props.onPressIn(e);
@@ -84,7 +84,7 @@ function usePressHelper(props: PressablePressProps): [PressablePressProps, IPres
   );
 
   const onPressOut = React.useCallback(
-    (e) => {
+    e => {
       setPressState({ pressed: false });
       if (props.onPressOut) {
         props.onPressOut(e);
