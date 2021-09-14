@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Changed chevron icon to SVGXML in MenuButton",
+  "packageName": "@fluentui-react-native/menu-button",
+  "email": "v.kozlova13@gmail.com",
+  "dependentChangeType": "patch"
+}
