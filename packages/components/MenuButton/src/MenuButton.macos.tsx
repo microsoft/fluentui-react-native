@@ -22,13 +22,13 @@ const NativeMenuButton = ensureNativeComponent('FRNMenuButton');
 // Represents the props available on a native NSMenuItem
 // https://developer.apple.com/documentation/appkit/nsmenuitem
 type NativeMenuItem = {
-  title: string;
-  image: ImageResolvedAssetSource;
-  enabled: boolean;
-  tooltip: string;
-  identifier: string;
-  hasSubmenu: boolean;
-  submenu: NativeMenuItem[];
+  title: string,
+  image: ImageResolvedAssetSource,
+  enabled: boolean,
+  tooltip: string,
+  identifier: string,
+  hasSubmenu: boolean,
+  submenu: NativeMenuItem[],
 };
 
 export const MenuButton = compose<MenuButtonType>({
@@ -70,30 +70,31 @@ export const MenuButton = compose<MenuButtonType>({
     function transformMenuItems(menuItems: MenuButtonItemProps[]): NativeMenuItem[] {
       const nativeMenuItems: NativeMenuItem[] = [];
       menuItems.forEach((item) => {
+
         const imageSource = extractResolvedImageSourceFromIcon(item.icon);
 
         // Recursively parse submenus
-        const submenu = item.hasSubmenu ? transformMenuItems(item.submenuItems) : null;
+        const submenu = (item.hasSubmenu) ? transformMenuItems(item.submenuItems) : null;
 
         const transformedItem: NativeMenuItem = {
           title: item.text,
-          ...(imageSource && { image: imageSource }), // Only pass in the prop if defined
+          ...(imageSource) && {image: imageSource}, // Only pass in the prop if defined
           enabled: !item.disabled,
           tooltip: item.title,
           identifier: item.itemKey,
           hasSubmenu: item.hasSubmenu,
           submenu: submenu,
         };
-        nativeMenuItems.push(transformedItem);
+        nativeMenuItems.push(transformedItem)
       });
-      return nativeMenuItems;
+      return nativeMenuItems
     }
 
     // Default style if none from user props
     const rootStyleProp = style ?? {
       width: 160,
       height: 32,
-    };
+    }
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
@@ -101,7 +102,7 @@ export const MenuButton = compose<MenuButtonType>({
       root: {
         content: content,
         enabled: !disabled,
-        ...(imageSource && { image: imageSource }), // Only pass in the prop if defined
+        ...(imageSource) && {image: imageSource}, // Only pass in the prop if defined
         menu: transformMenuItems(menuItems),
         onItemClick: OnItemClickRerouted,
         onSubmenuItemClick: OnSubmenuItemClickRerouted,
