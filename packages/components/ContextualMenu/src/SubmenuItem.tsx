@@ -42,9 +42,10 @@ export const SubmenuItem = compose<SubmenuItemType>({
 
     const cmRef = useViewCommandFocus(componentRef);
 
-    const onItemHoverIn = React.useCallback((e) => {
-      userProps.onHoverIn(e);
-    }, []);
+    const onItemHoverIn = React.useCallback(
+      (e) => {
+        userProps.onHoverIn(e);
+      },[]);
 
     const onItemClick = React.useCallback(
       (e) => {
@@ -99,7 +100,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
       },
       content: { children: text, testID },
       icon: createIconProps(icon),
-      chevron: {},
+      chevron: {}
     });
 
     return { slotProps, state };
@@ -120,7 +121,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
           {children}
         </Slots.leftstack>
         <Slots.rightstack>
-          <Slots.chevron xml={xml} />
+          <Slots.chevron xml={xml}/>
         </Slots.rightstack>
       </Slots.root>
     );
@@ -131,7 +132,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
     icon: { slotType: Icon as React.ComponentType },
     content: Text,
     rightstack: { slotType: View },
-    chevron: SvgXml,
+    chevron: SvgXml
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],

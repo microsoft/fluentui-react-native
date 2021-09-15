@@ -13,7 +13,7 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
   const changeSelection = () => {
     if (itemKey != info.selectedKey) {
       info.onTabsClick && info.onTabsClick(itemKey);
-      info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex((x) => x == itemKey) + 1);
+      info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
       info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
     }
   };
@@ -49,6 +49,7 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
     }
   }, []);
 
+
   return {
     props: {
       ...pressable.props,
@@ -58,7 +59,7 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
       focusable: !disabled ?? true,
       headerText: headerText ?? '',
       accessibilityState: { disabled: disabled, selected: info.selectedKey === itemKey },
-      accessibilityActions: [{ name: 'Select' }],
+      accessibilityActions: [{ name: 'Select'}],
       onAccessibilityAction: onAccessibilityAction,
       itemCount: itemCount,
       ref: useViewCommandFocus(componentRef),
