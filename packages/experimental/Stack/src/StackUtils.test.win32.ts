@@ -3,9 +3,9 @@ import { Theme } from '@fluentui-react-native/framework';
 
 describe('StackUtils', () => {
   describe('parseGap', () => {
-    const theme = {
+    const theme = ({
       spacing: { m: '16em' },
-    } as unknown as Theme;
+    } as unknown) as Theme;
 
     it('returns a default value when given undefined', () => {
       expect(parseGap(undefined, theme)).toEqual({ rowGap: { value: 0, unit: 'px' }, columnGap: { value: 0, unit: 'px' } });
@@ -64,7 +64,7 @@ describe('StackUtils', () => {
   });
 
   describe('parsePadding', () => {
-    const theme = {
+    const theme = ({
       spacing: {
         s2: '5px',
         s1: '10px',
@@ -72,7 +72,7 @@ describe('StackUtils', () => {
         l1: '20px',
         l2: '25px',
       },
-    } as unknown as Theme;
+    } as unknown) as Theme;
 
     it('returns its argument when given undefined, a number, or an empty string', () => {
       expect(parsePadding(undefined, theme)).toEqual(undefined);

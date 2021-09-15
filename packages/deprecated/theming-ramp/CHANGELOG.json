@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Tue, 14 Sep 2021 19:31:04 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.15.7",
+      "version": "0.15.7",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @uifabricshared/foundation-settings to v0.10.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "c3eefc2cd6e8e23d64ca72460586f33120edc336",
+            "package": "@uifabricshared/theming-ramp"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 10 Sep 2021 21:30:12 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.15.7",
       "version": "0.15.7",

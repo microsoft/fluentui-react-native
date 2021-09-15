@@ -25,7 +25,7 @@ function _getComponentOptions<
   TSlotProps extends ISlotProps,
   TTokens extends object,
   TState extends object,
-  TStatics extends object,
+  TStatics extends object
 >(
   inputComponent: Partial<IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics>>,
   base?: IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics>,

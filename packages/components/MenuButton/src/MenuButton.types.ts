@@ -2,7 +2,7 @@ import { ContextualMenuItemProps, ContextualMenuProps, SubmenuProps } from '@flu
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IButtonProps } from '@fluentui-react-native/button';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { SvgProps } from 'react-native-svg';
+import { XmlProps } from 'react-native-svg';
 
 export const MenuButtonName = 'MenuButton';
 
@@ -38,7 +38,7 @@ export type MenuButtonSlotProps = {
   contextualMenu: React.PropsWithRef<ContextualMenuProps>;
   contextualMenuItems: Pick<MenuButtonProps, 'menuItems'>;
   contextualMenuItem: MenuButtonItemProps;
-  chevronSvg: SvgProps;
+  chevronSvg: XmlProps;
 };
 
 export type MenuButtonRenderData = IRenderData<MenuButtonSlotProps, MenuButtonState>;

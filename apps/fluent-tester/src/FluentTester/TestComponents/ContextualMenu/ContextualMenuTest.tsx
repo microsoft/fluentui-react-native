@@ -1,16 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
-import {
-  Text as FURNText,
-  Button,
-  ContextualMenu,
-  ContextualMenuItem,
-  Submenu,
-  SubmenuItem,
-  Separator,
-  Checkbox,
-} from '@fluentui/react-native';
+import { Text as FURNText, Button, ContextualMenu, ContextualMenuItem, Submenu, SubmenuItem, Separator, Checkbox } from '@fluentui/react-native';
 import { CONTEXTUALMENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
@@ -101,7 +92,7 @@ const contextualMenu: React.FunctionComponent = () => {
           setShowMenu={toggleShowContextualMenu}
           shouldFocusOnMount={focusOnMount}
           shouldFocusOnContainer={focusOnContainer}
-          isBeakVisible={isBeakVisible}
+          isBeakVisible= {isBeakVisible}
         >
           <ContextualMenuItem text="MenuItem 1" itemKey="1" />
           <ContextualMenuItem text="MenuItem 2" itemKey="2" />
@@ -221,13 +212,7 @@ const nestedContextualMenu: React.FunctionComponent = () => {
           <ContextualMenuItem icon={testImage} text="Menu item with png Icon" itemKey="1" />
           <ContextualMenuItem icon={{ fontSource: fontProps, color: 'blue' }} text="Menu item with font icon" itemKey="2" />
           <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
-          <SubmenuItem
-            icon={{ svgSource: svgProps, width: 12, height: 12 }}
-            text="Nested Menu"
-            itemKey="4"
-            onHoverIn={toggleShowSubmenu}
-            componentRef={stdMenuItemRef}
-          />
+          <SubmenuItem icon={{ svgSource: svgProps, width: 12, height: 12 }} text="Nested Menu" itemKey="4" onHoverIn={toggleShowSubmenu} componentRef={stdMenuItemRef} />
           {showSubmenu && (
             <Submenu target={stdMenuItemRef} onDismiss={onDismissSubmenu} onShow={onShowSubmenu} setShowMenu={toggleShowSubmenu}>
               <ContextualMenuItem
@@ -303,12 +288,7 @@ const IconContextualMenu: React.FunctionComponent = () => {
             <Text>Menu Visibility: </Text>
             {isContextualMenuVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
           </Text>
-          <Button
-            componentRef={stdBtnRef}
-            style={{ borderWidth: 0 }}
-            icon={{ svgSource: svgProps, width: 12, height: 12 }}
-            onClick={toggleShowContextualMenu}
-          />
+          <Button componentRef={stdBtnRef} style={{ borderWidth: 0 }} icon={{ svgSource: svgProps, width: 12, height: 12 }} onClick={toggleShowContextualMenu} />
         </View>
       </View>
 
@@ -323,7 +303,7 @@ const IconContextualMenu: React.FunctionComponent = () => {
           shouldFocusOnContainer={focusOnContainer}
         >
           <ContextualMenuItem itemKey="1">
-            <Checkbox label="Unchecked checkbox" />
+            <Checkbox label="Unchecked checkbox"/>
           </ContextualMenuItem>
           <ContextualMenuItem itemKey="2">
             <IndigoHeroBold>IndigoHeroBold text with checkbox</IndigoHeroBold>
@@ -346,9 +326,9 @@ const contextualMenuSections: TestSection[] = [
     component: nestedContextualMenu,
   },
   {
-    name: 'IconButton with Customized ContextualMenu',
-    component: IconContextualMenu,
-  },
+      name: 'IconButton with Customized ContextualMenu',
+      component: IconContextualMenu
+  }
 ];
 
 export const ContextualMenuTest: React.FunctionComponent = () => {

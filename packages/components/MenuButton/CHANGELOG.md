@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Fri, 10 Sep 2021 18:16:59 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Sep 2021 19:31:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.8
+
+Tue, 14 Sep 2021 19:31:04 GMT
+
+### Patches
+
+- Changed chevron icon to SVGXML in MenuButton (v.kozlova13@gmail.com)
+
+## 0.6.7
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.20.7 (ruaraki@microsoft.com)
 
 ## 0.6.6
 

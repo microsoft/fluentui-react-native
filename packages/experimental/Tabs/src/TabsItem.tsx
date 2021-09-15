@@ -23,11 +23,11 @@ export const TabsItem = compose<TabItemType>({
   render: (userProps: TabsItemProps, useSlots: UseSlots<TabItemType>) => {
     const tabsItem = useTabsItem(userProps);
 
-    if (!tabsItem.state) return null;
+    if(!tabsItem.state) return null;
 
     const iconProps = createIconProps(userProps.icon);
     // Grab the styled slots.
-    const Slots = useSlots(userProps, (layer) => tabsItem.state[layer] || userProps[layer]);
+    const Slots = useSlots(userProps, layer => tabsItem.state[layer] || userProps[layer]);
     // Return the handler to finish render.
     return (final: TabsItemProps, ...children: React.ReactNode[]) => {
       const context = React.useContext(TabsContext);

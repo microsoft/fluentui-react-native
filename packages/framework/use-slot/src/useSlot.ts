@@ -48,7 +48,7 @@ export function useSlot<TProps>(
       // if we have a filter specified, run it creating a prop collection of { [key]: undefined } which will end up deleting the values via mergeStyles
       const propsToRemove = filter ? Object.keys(props).filter((key) => !filter(key)) : undefined;
       if (propsToRemove?.length > 0) {
-        props = mergeProps(props, Object.assign({}, ...propsToRemove.map((prop) => ({ [prop]: undefined }))) as unknown as TProps);
+        props = mergeProps(props, (Object.assign({}, ...propsToRemove.map((prop) => ({ [prop]: undefined }))) as unknown) as TProps);
       }
 
       // now if result was a function then call it directly, if not go through the standard React.createElement process
