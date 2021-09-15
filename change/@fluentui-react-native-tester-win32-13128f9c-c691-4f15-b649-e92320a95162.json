@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Added experimental MenuButton",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "v.kozlova13@gmail.com",
+  "dependentChangeType": "patch"
+}

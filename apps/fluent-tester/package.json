@@ -37,6 +37,7 @@
     "@fluentui-react-native/experimental-native-button": ">=0.7.24 <1.0.0",
     "@fluentui-react-native/experimental-native-date-picker": ">=0.3.6 <1.0.0",
     "@fluentui-react-native/experimental-expander": "0.2.14",
+    "@fluentui-react-native/experimental-menu-button": ">=0.0.1 <1.0.0",
     "@fluentui-react-native/experimental-shimmer": "0.5.14",
     "@fluentui-react-native/experimental-tabs": "0.2.3",
     "@fluentui-react-native/experimental-text": ">=0.6.19 <1.0.0",
