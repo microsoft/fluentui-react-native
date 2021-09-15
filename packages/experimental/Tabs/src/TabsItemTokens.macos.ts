@@ -1,4 +1,4 @@
-import { TabsItemTokens } from '.';
+import { TabsItemTokens } from './TabsItem.types';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { Theme } from '@fluentui-react-native/framework';
 
@@ -7,9 +7,9 @@ export const tabsItemStates: (keyof TabsItemTokens)[] = ['hovered', 'selected', 
 export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: Theme) =>
   ({
     color: t.colors.bodyText,
-    borderColor: 'transparent',
-    indicatorColor: 'transparent',
     variant: 'bodyStandard',
+    indicatorColor: 'transparent',
+    borderColor: 'transparent',
     indicatorMarginHorizontal: 10,
     iconColor: t.colors.buttonIcon,
     disabled: {
