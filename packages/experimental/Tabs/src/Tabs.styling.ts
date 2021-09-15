@@ -20,18 +20,20 @@ export const stylingSettings: UseStylingOptions<TabsProps, TabsSlotProps, TabsTo
     label: buildProps(
       (tokens: TabsTokens, theme: Theme) => ({
         style: {
+          color: tokens.color,
           ...fontStyles.from(tokens, theme),
         },
       }),
-      [...fontStyles.keys],
+      ['color', ...fontStyles.keys],
     ),
     stack: buildProps(
-      () => ({
+      (tokens: TabsTokens) => ({
         style: {
           flexDirection: 'row',
+          backgroundColor: tokens.backgroundColor,
         },
       }),
-      [],
+      ['backgroundColor'],
     ),
   },
 };
