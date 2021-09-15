@@ -49,6 +49,8 @@ export const settings: IComposeSettings<IButtonType> = [
         minHeight: 24,
         minWidth: 32,
         justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: 'transparent'
       },
     },
     _precedence: ['hovered', 'focused', 'pressed', 'disabled'],
@@ -78,9 +80,14 @@ export const settings: IComposeSettings<IButtonType> = [
         tokens: {
           backgroundColor: 'neutralBackground1Hover',
           color: 'neutralForeground1',
-          borderColor: 'strokeFocus2',
-          borderWidth: 2,
+          borderColor: 'strokeFocus2'
         },
+        stack: {
+          style: {
+            borderColor: '#000',
+            borderWidth: 1
+          }
+        }
       },
     },
   },
