@@ -13,7 +13,7 @@ export type RequireObject<T> = T extends object ? T : never;
 export interface IComposableType<
   TProps extends object,
   TSlotProps extends ISlotProps = ISlotProps<TProps>,
-  TState extends object = object,
+  TState extends object = object
 > {
   /** component props, exposed as the public interface of the component */
   props: TProps;

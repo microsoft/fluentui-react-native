@@ -102,6 +102,7 @@ export interface TabsItemTokens extends IForegroundColorTokens, FontTokens, IBac
   headerTextPaddingFocused?: number | string;
 }
 
+
 export interface TabsItemSlotProps {
   root: React.PropsWithRef<IViewProps>;
   stack: ViewProps;

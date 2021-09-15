@@ -25,7 +25,7 @@ export interface IRadioButtonProps extends IPressableProps {
    */
   disabled?: boolean;
 
-  /**
+   /**
    * An optional string for the Narrator to read for each RadioButton. If not provided, this will be set to the button's content.
    * @deprecated Use accessibilityLabel instead.
    */

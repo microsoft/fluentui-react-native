@@ -11,7 +11,11 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { TabsContext } from './Tabs';
 import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemRenderData, TabsItemState } from './TabsItem.types';
-import { useAsPressable, useViewCommandFocus, createIconProps } from '@fluentui-react-native/interactive-hooks';
+import {
+  useAsPressable,
+  useViewCommandFocus,
+  createIconProps,
+} from '@fluentui-react-native/interactive-hooks';
 
 export const TabsItem = compose<TabsItemType>({
   displayName: tabsItemName,
@@ -37,7 +41,7 @@ export const TabsItem = compose<TabsItemType>({
     const changeSelection = React.useCallback(() => {
       info.focusZoneRef.current.focus(); // GH #964, FocusZone not implemented on windows.
       info.onTabsClick && info.onTabsClick(itemKey);
-      info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex((x) => x == itemKey) + 1);
+      info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
       info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
     }, [componentRef, info, itemKey]);
 
@@ -94,7 +98,7 @@ export const TabsItem = compose<TabsItemType>({
         accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: userProps.disabled, selected: info.selectedKey === userProps.itemKey },
         accessibilityActions: [{ name: 'Select', label: tabsItemSelectActionLabel }],
-        accessibilityPositionInSet: accessibilityPositionInSet ?? info.tabsItemKeys.findIndex((x) => x == itemKey) + 1,
+        accessibilityPositionInSet: accessibilityPositionInSet ?? info.tabsItemKeys.findIndex(x => x == itemKey) + 1,
         accessibilitySetSize: accessibilitySetSize ?? info.tabsItemKeys.length,
         onAccessibilityAction: onAccessibilityAction,
         focusable: false,
