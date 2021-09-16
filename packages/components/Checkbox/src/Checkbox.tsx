@@ -30,7 +30,6 @@ export const Checkbox = compose<ICheckboxType>({
       checked,
       defaultChecked,
       boxSide,
-      disabled,
       label,
       onChange,
       componentRef = defaultComponentRef,
@@ -57,7 +56,7 @@ export const Checkbox = compose<ICheckboxType>({
 
     const state: ICheckboxState = {
       ...pressable.state,
-      disabled: !!disabled,
+      disabled: !!userProps.disabled,
       checked: isChecked,
       boxAtEnd: boxSide == undefined || boxSide == 'start' ? false : true,
     };
