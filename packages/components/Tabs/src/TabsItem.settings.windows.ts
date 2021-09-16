@@ -51,14 +51,14 @@ export const settings: IComposeSettings<TabsItemType> = [
     _overrides: {
       disabled: {
         stack: {
-          style: {
+          style:{
             opacity: 0.2,
           },
         },
       },
       hovered: {
         stack: {
-          style: {
+          style:{
             opacity: 0.8,
           },
         },
@@ -68,7 +68,7 @@ export const settings: IComposeSettings<TabsItemType> = [
           indicatorColor: 'brandStroke1',
         },
         stack: {
-          style: {
+          style:{
             opacity: 1,
           },
         },

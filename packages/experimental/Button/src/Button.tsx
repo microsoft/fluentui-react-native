@@ -21,7 +21,7 @@ export const Button = compose<ButtonType>({
     const button = useButton(userProps);
     const iconProps = createIconProps(userProps.icon);
     // grab the styled slots
-    const Slots = useSlots(userProps, (layer) => button.state[layer] || userProps[layer]);
+    const Slots = useSlots(userProps, layer => button.state[layer] || userProps[layer]);
     // now return the handler for finishing render
     return (final: ButtonProps, ...children: React.ReactNode[]) => {
       const { icon, content, ...mergedProps } = mergeProps(button.props, final);

@@ -56,7 +56,7 @@ function mapToTokens<TTokens, TTheme>(
   if (typeof tokenEntry === 'function') {
     tokenEntry = (tokenEntry as TokensFromTheme<TTokens, TTheme>)(theme);
   }
-  return tokenEntry as unknown as object;
+  return (tokenEntry as unknown) as object;
 }
 
 /**

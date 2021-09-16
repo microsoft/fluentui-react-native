@@ -106,9 +106,9 @@ function _getCachedPropsForSlot<TProps, TTokens, TTheme>(
   const { tokens, tokenKeys, deltas } = tokenProps;
   return getMemoValue(() => {
     let newProps: TProps = mergeProps<any>(
-      props as unknown as object,
+      (props as unknown) as object,
       slotName === 'root' ? tokenKeys : undefined,
-      _processSlotEntries(tokens, theme, mappings) as unknown as object,
+      (_processSlotEntries(tokens, theme, mappings) as unknown) as object,
       _processStyleFunctions(mappings.functions, tokens, theme),
     );
     if (finalizer) {
