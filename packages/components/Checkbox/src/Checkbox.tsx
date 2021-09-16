@@ -87,6 +87,7 @@ export const Checkbox = compose<ICheckboxType>({
         accessibilityActions: [{ name: 'Toggle', label: checkboxSelectActionLabel }],
         onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUpSpace,
+        focusable: !state.disabled,
       },
       // Temporary checkmark until SVG functionality
       checkmark: { children: '✓' },
