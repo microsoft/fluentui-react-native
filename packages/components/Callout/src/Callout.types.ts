@@ -163,11 +163,12 @@ export interface ICalloutProps extends ICalloutTokens {
   target?: React.RefObject<React.Component> | string;
 
   /*
-   * If true, the Callout will not takeover Keyboard focus on a click. This is useful, for example, if the Callout
+   * This defaults to false. Determines if Callout should take keyboard focus on a click.
+   * If false, the Callout will not takeover Keyboard focus on a click. This is useful, for example, if the Callout
    * contains a PeoplePicker control (typing '@' in a Textbox). In the case of selecting a contact, we want
    * keyboard focus to remain in the Textbox, even if you click on the callout.
    */
-  calloutRejectsFocus?: boolean;
+  shouldTakeKeyboardFocusOnClick?: boolean;
 }
 
 export type ICalloutSlotProps = {
