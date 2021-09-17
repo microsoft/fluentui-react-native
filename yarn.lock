@@ -1314,6 +1314,23 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fluentui-react-native/framework@0.5.34":
+  version "0.5.34"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.5.34.tgz#e21340b2e62cb56f539a407f6584db136eaca371"
+  integrity sha512-+y0gqToO1i8QEZuqUPOxZ0Rj6dcoNIVsGrOdOvUUgvWWXEtmIYNdY7D5xJE/OyKvy6fKb8GRoSC+YozWLSW1Sg==
+  dependencies:
+    "@fluentui-react-native/composition" ">=0.6.8 <1.0.0"
+    "@fluentui-react-native/default-theme" ">=0.8.0 <1.0.0"
+    "@fluentui-react-native/immutable-merge" "^1.1.3"
+    "@fluentui-react-native/memo-cache" "^1.1.3"
+    "@fluentui-react-native/merge-props" ">=0.3.3 <1.0.0"
+    "@fluentui-react-native/theme-types" ">=0.12.0 <1.0.0"
+    "@fluentui-react-native/tokens" ">=0.9.22 <1.0.0"
+    "@fluentui-react-native/use-slot" ">=0.1.5 <1.0.0"
+    "@fluentui-react-native/use-slots" ">=0.5.7 <1.0.0"
+    "@fluentui-react-native/use-styling" ">=0.6.7 <1.0.0"
+    "@fluentui-react-native/use-tokens" ">=0.1.5 <1.0.0"
+
 "@fluentui/token-pipeline@^0.3.11":
   version "0.3.11"
   resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.11.tgz#79552e3a2ef66f2535ebd5e5a99f87ae3c65556c"
@@ -8114,13 +8131,14 @@ eslint-plugin-jest@^24.4.0:
     "@typescript-eslint/experimental-utils" "^4.0.1"
 
 eslint-plugin-react@^7.24.0:
-  version "7.24.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.24.0.tgz#eadedfa351a6f36b490aa17f4fa9b14e842b9eb4"
-  integrity sha512-KJJIx2SYx7PBx3ONe/mEeMz4YE0Lcr7feJTCMyyKb/341NcjuAgim3Acgan89GfPv7nxXK2+0slu0CWXYM4x+Q==
+  version "7.25.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.25.2.tgz#d567a217d306b76dd110561f28074e2328ae38f8"
+  integrity sha512-elx4585wgmryanJK4C5IoSKQyVZ+e7H0t2JOOtJNBql0cuercvSShvRReuLBbfx8687yW5yv+UL7pXwMsd6adQ==
   dependencies:
     array-includes "^3.1.3"
     array.prototype.flatmap "^1.2.4"
     doctrine "^2.1.0"
+    estraverse "^5.2.0"
     has "^1.0.3"
     jsx-ast-utils "^2.4.1 || ^3.0.0"
     minimatch "^3.0.4"
