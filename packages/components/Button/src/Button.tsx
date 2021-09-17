@@ -79,18 +79,21 @@ export const Button = compose<IButtonType>({
 
     return (
       <Slots.root>
-        <Slots.stack>
-          {info.startIcon && <Slots.startIcon />}
-          {info.content && <Slots.content />}
-          {children}
-          {info.endIcon && <Slots.endIcon />}
-        </Slots.stack>
+        <Slots.borderWrapper>
+          <Slots.stack>
+            {info.startIcon && <Slots.startIcon />}
+            {info.content && <Slots.content />}
+            {children}
+            {info.endIcon && <Slots.endIcon />}
+          </Slots.stack>
+        </Slots.borderWrapper>
       </Slots.root>
     );
   },
   slots: {
     root: View,
     stack: { slotType: View, filter: filterViewProps },
+    borderWrapper: { slotType: View, filter: filterViewProps },
     startIcon: { slotType: Icon as React.ComponentType },
     content: Text,
     endIcon: { slotType: Icon as React.ComponentType },
@@ -98,6 +101,7 @@ export const Button = compose<IButtonType>({
   styles: {
     root: [backgroundColorTokens, borderTokens],
     stack: [],
+    borderWrapper: [{ source: 'wrapperBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }],
     startIcon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
     content: [textTokens, foregroundColorTokens],
     endIcon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
