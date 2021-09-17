@@ -13,9 +13,6 @@ export const settings: IComposeSettings<ICheckboxType> = [
       textBorderColor: 'transparent',
     },
     root: {
-      accessible: true,
-      focusable: true,
-      accessibilityRole: 'checkbox',
       style: {
         display: 'flex',
         alignItems: 'center',

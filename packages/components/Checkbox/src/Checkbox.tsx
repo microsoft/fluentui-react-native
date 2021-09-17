@@ -25,7 +25,9 @@ export const Checkbox = compose<ICheckboxType>({
   usePrepareProps: (userProps: ICheckboxProps, useStyling: IUseComposeStyling<ICheckboxType>) => {
     const defaultComponentRef = React.useRef(null);
     const {
+      accessible,
       accessibilityLabel,
+      accessibilityRole,
       ariaLabel,
       checked,
       defaultChecked,
@@ -81,13 +83,14 @@ export const Checkbox = compose<ICheckboxType>({
         rest,
         ref: buttonRef,
         ...pressable.props,
-        accessibilityRole: 'checkbox',
+        accessible: accessible ?? true,
+        accessibilityRole: accessibilityRole ?? 'checkbox',
         accessibilityLabel: accessibilityLabel ?? ariaLabel ?? label,
         accessibilityState: { disabled: state.disabled, checked: state.checked },
         accessibilityActions: [{ name: 'Toggle', label: checkboxSelectActionLabel }],
         onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUpSpace,
-        focusable: !state.disabled,
+        focusable: !state.disabled
       },
       // Temporary checkmark until SVG functionality
       checkmark: { children: '✓' },
