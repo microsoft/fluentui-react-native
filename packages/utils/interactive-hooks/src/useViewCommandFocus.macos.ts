@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { findNodeHandle, NativeModules, View } from 'react-native';
+import { findNodeHandle, UIManager, View } from 'react-native';
 
 const setAndForwardRef = require('./setAndForwardRef');
 
@@ -22,7 +22,7 @@ export function useViewCommandFocus(
 
   const _setNativeRef = setAndForwardRef({
     getForwardedRef: () => forwardedRef,
-    setLocalRef: localRef => {
+    setLocalRef: (localRef) => {
       focusRef.current = localRef;
 
       /**
@@ -30,11 +30,7 @@ export function useViewCommandFocus(
        */
       if (localRef) {
         localRef.focus = () => {
-          NativeModules.UIManager.dispatchViewManagerCommand(
-            findNodeHandle(localRef),
-            NativeModules.UIManager.getViewManagerConfig('RCTView').Commands.focus,
-            null,
-          );
+          UIManager.dispatchViewManagerCommand(findNodeHandle(localRef), UIManager.getViewManagerConfig('RCTView').Commands.focus, null);
         };
       }
     },

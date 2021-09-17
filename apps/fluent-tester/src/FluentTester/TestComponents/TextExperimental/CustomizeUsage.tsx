@@ -53,8 +53,13 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   const Wingdings = Text.customize({ variant: 'captionStandard', fontFamily: 'Wingdings' });
 
   // Examples of supported Android fonts.
+  const Casual = Text.customize({ variant: 'heroStandard', fontFamily: 'casual' });
+  const Cursive = Text.customize({ variant: 'heroStandard', fontFamily: 'cursive' });
+  // Examples of iOS fonts.
+  const Papyrus = Text.customize({ variant: 'heroLargeStandard', fontFamily: 'Papyrus' });
+  const Helvetica = Text.customize({ variant: 'heroLargeStandard', fontFamily: 'Helvetica' });
+  // Fonts supported on Android and iOS
   const Arial = Text.customize({ variant: 'heroLargeStandard', fontFamily: 'arial' });
-  const ComingSoon = Text.customize({ variant: 'heroStandard', fontFamily: 'casual' });
 
   const CustomFontStack = () => {
     return (
@@ -72,7 +77,20 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     return (
       <Stack style={stackStyle} gap={5}>
         <Arial>Arial</Arial>
-        <ComingSoon>ComingSoon</ComingSoon>
+        <Casual>Casual</Casual>
+        <Cursive>Cursive</Cursive>
+        <CourierNew>Courier New</CourierNew>
+        <Georgia>Georgia</Georgia>
+        <TimesNewRoman>TimesNewRoman</TimesNewRoman>
+      </Stack>
+    );
+  };
+  const CustomFontStackiOS = () => {
+    return (
+      <Stack style={stackStyle} gap={5}>
+        <Arial>Arial</Arial>
+        <Papyrus>Papyrus</Papyrus>
+        <Helvetica>Helvetica</Helvetica>
         <CourierNew>Courier New</CourierNew>
         <Georgia>Georgia</Georgia>
         <TimesNewRoman>TimesNewRoman</TimesNewRoman>
@@ -80,15 +98,27 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     );
   };
 
-  return Platform.OS == 'android' ? (
-    <View>
-      <CustomUsageStack />
-      <CustomFontStackAndroid />
-    </View>
-  ) : (
-    <View>
-      <CustomUsageStack />
-      <CustomFontStack />
-    </View>
-  );
+  switch (Platform.OS) {
+    case 'android':
+      return (
+        <View>
+          <CustomUsageStack />
+          <CustomFontStackAndroid />
+        </View>
+      );
+    case 'ios':
+      return (
+        <View>
+          <CustomUsageStack />
+          <CustomFontStackiOS />
+        </View>
+      );
+    default:
+      return (
+        <View>
+          <CustomUsageStack />
+          <CustomFontStack />
+        </View>
+      );
+  }
 };

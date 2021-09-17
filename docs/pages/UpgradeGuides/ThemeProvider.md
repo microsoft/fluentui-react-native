@@ -71,14 +71,14 @@ const App = () => {
 
 ## Accessing the theme in components
 
-The new ThemeProvider uses the same context as the old one, so accessing the theme still uses the same `useTheme()` hook - no functional change is needed to access the theme with the new `ThemeProvider`. The only change you'll want to make is to import `useTheme()` from the newer package:
+The new ThemeProvider uses the same context as the old one, so accessing the theme still uses the same `useFluentTheme()` hook - no functional change is needed to access the theme with the new `ThemeProvider`. The only change you'll want to make is to import `useFluentTheme()` from the newer package:
 
 ```ts
-import { useTheme } from @uifabricshared/theming-react-native;
+import { useFluentTheme } from @uifabricshared/theming-react-native;
 ```
 
 to
 
 ```ts
-import { useTheme } from @fluentui-react-native/framework;
+import { useFluentTheme } from @fluentui-react-native/framework;
 ```

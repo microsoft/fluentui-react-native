@@ -1,8 +1,90 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 31 Aug 2021 18:48:34 GMT and should not be manually modified.
+This log was last generated on Tue, 14 Sep 2021 19:31:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.43.2
+
+Tue, 14 Sep 2021 19:31:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/stack to v0.5.34 (ruaraki@microsoft.com)
+
+## 0.43.1
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theming-utils to v0.7.2 (ruaraki@microsoft.com)
+
+## 0.43.0
+
+Fri, 10 Sep 2021 21:30:12 GMT
+
+### Minor changes
+
+- Add Experimental Checkbox to FURN (krsiler@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-checkbox to v0.2.0 (ruaraki@microsoft.com)
+
+## 0.42.2
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- fix tester (ruaraki@microsoft.com)
+
+## 0.42.1
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Integrate Office alias tokens into Tokens test (ruaraki@microsoft.com)
+
+## 0.42.0
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Minor changes
+
+- Moved tabs to the experimental framework. (nkhalil942@gmail.com)
+- Tabs Control for Windows (dake.3601@gmail.com)
+- Dynamic TabsItem (dake.3601@gmail.com)
+
+### Patches
+
+- fixed comments, styling, and made props const (sriyaaluru@gmail.com)
+- Removed non-working components from the tester app (dake.3601@gmail.com)
+- Fix Font error in Text iOS (67026167+chiuam@users.noreply.github.com)
+- changed name of one line from pivot to tabs (sriyaaluru@gmail.com)
+- Bump @fluentui-react-native/button to v0.20.4 (v.kozlova13@gmail.com)
+- Bump @fluentui/react-native to v0.25.11 (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/experimental-tabs to v0.2.0 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-button to v0.8.19 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-native-button to v0.7.21 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.8.1 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/stack to v0.5.31 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.8.18 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.41 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.5.35 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.3.14 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.12.6 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-expander to v0.2.11 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-shimmer to v0.5.11 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-text to v0.6.16 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/apple-theme to v0.7.21 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/win32-theme to v0.12.1 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.12.1 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme to v0.5.19 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/android-theme to v0.4.14 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theming-utils to v0.6.1 (ruaraki@microsoft.com)
 
 ## 0.41.0
 

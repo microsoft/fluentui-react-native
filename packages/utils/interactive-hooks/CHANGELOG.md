@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
+This log was last generated on Mon, 13 Sep 2021 23:22:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.45
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.21 (ruaraki@microsoft.com)
+
+## 0.10.44
+
+Fri, 10 Sep 2021 21:30:12 GMT
+
+### Patches
+
+- Use UIManager from react-native instead of from NativeModules (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.10.43
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.20 (ruaraki@microsoft.com)
+
+## 0.10.42
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.19 (ruaraki@microsoft.com)
+
+## 0.10.41
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.18 (ruaraki@microsoft.com)
 
 ## 0.10.40
 

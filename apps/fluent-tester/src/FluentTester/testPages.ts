@@ -22,7 +22,9 @@ import { ActivityIndicatorTest, HOMEPAGE_ACTIVITYINDICATOR_BUTTON } from './Test
 import { MenuButtonTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/MenuButton';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
+import { HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
+import { ExperimentalMenuButtonTest, HOMEPAGE_MENU_BUTTON_EXPERIMENTAL } from './TestComponents/MenuButtonExperimental';
 
 export const tests: TestDescription[] = [
   {
@@ -106,6 +108,11 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_CHECKBOX_BUTTON,
   },
   {
+    name: 'Experimental Checkbox',
+    component: ExperimentalCheckboxTest,
+    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
+  },
+  {
     name: 'Svg Test',
     component: SvgTest,
     testPage: HOMEPAGE_SVG_BUTTON,
@@ -144,5 +151,10 @@ export const tests: TestDescription[] = [
     name: 'Expander Test',
     component: ExpanderTest,
     testPage: HOMEPAGE_EXPANDER_BUTTON,
+  },
+  {
+    name: 'Experimental MenuButton Test',
+    component: ExperimentalMenuButtonTest,
+    testPage: HOMEPAGE_MENU_BUTTON_EXPERIMENTAL,
   },
 ];
