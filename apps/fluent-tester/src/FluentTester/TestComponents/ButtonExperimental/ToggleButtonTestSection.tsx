@@ -30,7 +30,7 @@ export const ToggleButtonTest: React.FunctionComponent = () => {
       {/* <ToggleButton primary content="Primary Toggle" /> */}
       <View style={styles.row}>
         <ToggleButton subtle onClick={onGhostClicked} checked={subtleChecked} content="Subtle Toggle" style={commonTestStyles.vmargin} />
-        <Checkbox checked={subtleChecked} label="Ghost Toggle is Checked" style={[commonTestStyles.vmargin, styles.hmargin]} />
+        <Checkbox checked={subtleChecked} label="Subtle Toggle is Checked" style={[commonTestStyles.vmargin, styles.hmargin]} />
       </View>
       <ToggleButton subtle checked content="Checked Subtle Toggle" style={commonTestStyles.vmargin} />
       <ToggleButton subtle checked={false} content="Unchecked Subtle Toggle" style={commonTestStyles.vmargin} />
