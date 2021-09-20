@@ -36,7 +36,7 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
             secondaryContentColor: t.colors.neutralForegroundOnBrand,
           },
         },
-        ghost: {
+        subtle: {
           secondaryContentColor: t.colors.neutralForeground2,
           hovered: {
             secondaryContentColor: t.colors.neutralForeground2Hover,

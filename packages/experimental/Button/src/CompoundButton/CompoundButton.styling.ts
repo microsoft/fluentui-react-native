@@ -36,7 +36,7 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
             secondaryContentColor: t.colors.brandedPressedSecondaryContent,
           },
         },
-        ghost: {
+        subtle: {
           secondaryContentColor: t.colors.ghostSecondaryContent,
           hovered: {
             secondaryContentColor: t.colors.ghostHoveredSecondaryContent,

@@ -119,7 +119,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
         <View style={fluentTesterStyles.header}>
           {/* on iOS, display a back Button */}
           <Button
-            ghost
+            subtle
             content="‹ Back"
             style={{ alignSelf: 'flex-start', display: Platform.OS === 'ios' ? 'flex' : 'none' }}
             onClick={onBackPress}

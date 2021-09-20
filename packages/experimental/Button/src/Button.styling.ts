@@ -3,7 +3,7 @@ import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/fra
 import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-react-native/tokens';
 import { defaultButtonTokens } from './ButtonTokens';
 
-export const buttonStates: (keyof ButtonTokens)[] = ['fab', 'fluid', 'primary', 'ghost', 'hovered', 'focused', 'pressed', 'disabled'];
+export const buttonStates: (keyof ButtonTokens)[] = ['fab', 'fluid', 'primary', 'subtle', 'hovered', 'focused', 'pressed', 'disabled'];
 
 export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, ButtonTokens> = {
   tokens: [defaultButtonTokens, buttonName],

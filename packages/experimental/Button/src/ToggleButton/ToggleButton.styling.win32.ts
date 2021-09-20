@@ -15,7 +15,7 @@ export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonS
           color: t.colors.neutralForeground1,
           backgroundColor: t.colors.neutralBackground1Hover,
         },
-        ghost: {
+        subtle: {
           color: t.colors.neutralForeground1,
           backgroundColor: t.colors.neutralBackground1Selected,
           hovered: {

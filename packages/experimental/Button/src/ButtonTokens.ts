@@ -106,7 +106,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
         iconColor: t.colors.brandedFocusedIcon,
       },
     },
-    ghost: {
+    subtle: {
       backgroundColor: t.colors.ghostBackground,
       color: t.colors.ghostContent,
       borderColor: t.colors.ghostBorder,
