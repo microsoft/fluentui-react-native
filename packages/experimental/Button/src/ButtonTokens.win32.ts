@@ -130,7 +130,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
         iconColor: t.colors.neutralForeground2BrandPressed,
       },
       focused: {
-        backgroundColor: t.colors.subtleBackground,
+        backgroundColor: t.colors.subtleBackgroundHover,
         color: t.colors.neutralForeground1,
         borderColor: t.colors.strokeFocus2,
         iconColor: t.colors.neutralForeground2,
