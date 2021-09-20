@@ -30,12 +30,12 @@ const basicCheckbox: React.FunctionComponent = () => {
 
 const otherCheckbox: React.FunctionComponent = () => {
   const [isCheckedControlled1, setCheckedControlled1] = React.useState(false);
-  const onChangeControlled1 = React.useCallback(checked => {
+  const onChangeControlled1 = React.useCallback((checked) => {
     setCheckedControlled1(checked);
   }, []);
 
   const [isCheckedControlled2, setCheckedControlled2] = React.useState(true);
-  const onChangeControlled2 = React.useCallback(checked => {
+  const onChangeControlled2 = React.useCallback((checked) => {
     setCheckedControlled2(checked);
   }, []);
 
@@ -113,7 +113,7 @@ const tokenCheckbox: React.FunctionComponent = () => {
         style={[commonStyles.textBox, textBoxBorderStyle]}
         placeholder="Background color"
         blurOnSubmit={true}
-        onSubmitEditing={e => {
+        onSubmitEditing={(e) => {
           setCheckboxColor(e.nativeEvent.text);
         }}
       />
@@ -122,7 +122,7 @@ const tokenCheckbox: React.FunctionComponent = () => {
         style={[commonStyles.textBox, textBoxBorderStyle]}
         placeholder="Checkmark color"
         blurOnSubmit={true}
-        onSubmitEditing={e => {
+        onSubmitEditing={(e) => {
           setCheckmarkColor(e.nativeEvent.text);
         }}
       />

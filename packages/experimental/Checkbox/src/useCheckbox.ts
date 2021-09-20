@@ -18,7 +18,8 @@ import { IPressableProps } from '@fluentui-react-native/pressable';
  */
 export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
   const defaultComponentRef = React.useRef(null);
-  const { accessibilityLabel,
+  const {
+    accessibilityLabel,
     checked,
     defaultChecked,
     boxSide,
@@ -26,7 +27,8 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
     label,
     onChange,
     componentRef = defaultComponentRef,
-    ...rest } = props;
+    ...rest
+  } = props;
 
   // Warns defaultChecked and checked being mutually exclusive.
   if (defaultChecked != undefined && checked != undefined) {
@@ -81,7 +83,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
     },
     state: {
       ...pressable.state,
-      ...state
+      ...state,
     },
   };
 };
