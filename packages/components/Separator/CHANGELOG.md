@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/separator
 
-This log was last generated on Thu, 26 Aug 2021 21:02:08 GMT and should not be manually modified.
+This log was last generated on Mon, 13 Sep 2021 23:22:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.36
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.38 (ruaraki@microsoft.com)
+
+## 0.10.35
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.37 (ruaraki@microsoft.com)
+
+## 0.10.34
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.36 (ruaraki@microsoft.com)
+
+## 0.10.33
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.35 (ruaraki@microsoft.com)
 
 ## 0.10.32
 
