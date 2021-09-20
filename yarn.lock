@@ -1316,8 +1316,8 @@
 
 "@fluentui-react-native/framework@0.5.34":
   version "0.5.34"
-  resolved "https://pkgs.dev.azure.com/office/_packaging/Office/npm/registry/@fluentui-react-native/framework/-/framework-0.5.34.tgz#e21340b2e62cb56f539a407f6584db136eaca371"
-  integrity sha1-4hNAsuYstW9TmkB/ZYTbE26so3E=
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.5.34.tgz#e21340b2e62cb56f539a407f6584db136eaca371"
+  integrity sha512-+y0gqToO1i8QEZuqUPOxZ0Rj6dcoNIVsGrOdOvUUgvWWXEtmIYNdY7D5xJE/OyKvy6fKb8GRoSC+YozWLSW1Sg==
   dependencies:
     "@fluentui-react-native/composition" ">=0.6.8 <1.0.0"
     "@fluentui-react-native/default-theme" ">=0.8.0 <1.0.0"
@@ -14528,8 +14528,8 @@ prelude-ls@~1.1.2:
 
 prettier@^2.4.1:
   version "2.4.1"
-  resolved "https://pkgs.dev.azure.com/office/_packaging/Office/npm/registry/prettier/-/prettier-2.4.1.tgz#671e11c89c14a4cfc876ce564106c4a6726c9f5c"
-  integrity sha1-Zx4RyJwUpM/Ids5WQQbEpnJsn1w=
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.4.1.tgz#671e11c89c14a4cfc876ce564106c4a6726c9f5c"
+  integrity sha512-9fbDAXSBcc6Bs1mZrDYb3XKzDLm4EXXL9sC1LqKP5rZkT6KRr/rf9amVUcODVXgguK/isJz0d0hP72WeaKWsvA==
 
 pretty-error@^2.1.1:
   version "2.1.1"
