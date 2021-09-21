@@ -34,13 +34,12 @@ export const Tabs = compose<TabsType>({
     tabPanel: View,
   },
   render: (userProps: TabsProps, useSlots: UseSlots<TabsType>) => {
-
     const tabs = useTabs(userProps);
 
-    if(!tabs.state) return null;
+    if (!tabs.state) return null;
 
     // Grab the styled slots.
-    const Slots = useSlots(userProps, layer => tabs.state[layer] || userProps[layer]);
+    const Slots = useSlots(userProps, (layer) => tabs.state[layer] || userProps[layer]);
 
     // Return the handler to finish render.
     return (final: TabsProps, ...children: React.ReactNode[]) => {
@@ -72,9 +71,9 @@ export const Tabs = compose<TabsType>({
               <Slots.stack>{children}</Slots.stack>
             </Slots.container>
             <Slots.tabPanel>
-                <TabsContext.Consumer>
-                  {context => !tabs?.state?.info?.headersOnly && <View>{context.views.get(context.selectedKey)}</View>}
-                </TabsContext.Consumer>
+              <TabsContext.Consumer>
+                {(context) => !tabs?.state?.info?.headersOnly && <View>{context.views.get(context.selectedKey)}</View>}
+              </TabsContext.Consumer>
             </Slots.tabPanel>
           </Slots.root>
         </TabsContext.Provider>

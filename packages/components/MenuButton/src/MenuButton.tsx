@@ -34,7 +34,7 @@ export const MenuButton = compose<MenuButtonType>({
       setShowContextualMenu(!showContextualMenu);
     }, [showContextualMenu, setShowContextualMenu]);
 
-    const menuItemsUpdated = menuItems.map(item => {
+    const menuItemsUpdated = menuItems.map((item) => {
       if (item.hasSubmenu) {
         const [showSubmenu, setShowSubmenu] = useState(false);
 
@@ -130,7 +130,7 @@ export const MenuButton = compose<MenuButtonType>({
         )}
         {context.showContextualMenu && (
           <Slots.contextualMenu>
-            {menuItems.map(menuItem => {
+            {menuItems.map((menuItem) => {
               const { hasSubmenu, submenuProps, showSubmenu, componentRef, submenuItems, ...items } = menuItem;
 
               return hasSubmenu && submenuItems ? (
@@ -138,7 +138,7 @@ export const MenuButton = compose<MenuButtonType>({
                   <SubmenuItem componentRef={componentRef} {...items} />
                   {showSubmenu && (
                     <Submenu target={componentRef} {...submenuProps}>
-                      {submenuItems.map(submenuItem => (
+                      {submenuItems.map((submenuItem) => (
                         <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />
                       ))}
                     </Submenu>

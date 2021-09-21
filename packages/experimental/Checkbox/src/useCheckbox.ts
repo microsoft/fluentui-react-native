@@ -28,7 +28,8 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
     label,
     onChange,
     componentRef = defaultComponentRef,
-    ...rest } = props;
+    ...rest
+  } = props;
 
   // Warns defaultChecked and checked being mutually exclusive.
   if (defaultChecked != undefined && checked != undefined) {
@@ -83,7 +84,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
     },
     state: {
       ...pressable.state,
-      ...state
+      ...state,
     },
   };
 };

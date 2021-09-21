@@ -116,7 +116,7 @@ export const Avatar = compose<AvatarType>({
   slots: { root: NativeAvatarView },
   slotProps: {
     root: buildProps<NativeAvatarViewProps, AvatarTokens>(
-      tokens => ({
+      (tokens) => ({
         size: tokens.size,
         style: {
           height: ExportedNativeConstants.sizes[tokens.size],

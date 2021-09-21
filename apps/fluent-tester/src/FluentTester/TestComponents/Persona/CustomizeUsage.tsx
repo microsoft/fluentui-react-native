@@ -64,7 +64,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Background color"
           blurOnSubmit={true}
-          onSubmitEditing={e => {
+          onSubmitEditing={(e) => {
             setCoinColor(e.nativeEvent.text);
           }}
         />
@@ -73,7 +73,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Initials text color"
           blurOnSubmit={true}
-          onSubmitEditing={e => {
+          onSubmitEditing={(e) => {
             setTextColor(e.nativeEvent.text);
           }}
         />
