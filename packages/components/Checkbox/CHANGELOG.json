@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Tue, 21 Sep 2021 16:32:12 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.13.9",
+      "version": "0.13.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix disabled behavior on FURN Android Checkbox",
+            "author": "email not defined",
+            "commit": "a62f51b909018d12b69547fb9665708fea2cfc89",
+            "package": "@fluentui-react-native/checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Sep 2021 19:31:04 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.13.8",
       "version": "0.13.8",

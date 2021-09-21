@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "adding an adapter for macOS",
-  "packageName": "@fluentui-react-native/icon",
-  "email": "67026167+chiuam@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

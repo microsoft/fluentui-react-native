@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Tue, 21 Sep 2021 16:32:12 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.10.23",
+      "version": "0.10.23",
+      "comments": {
+        "patch": [
+          {
+            "comment": "adding an adapter for macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "2d8e314d1cbdbccbd87251fbe125b14b1014486e",
+            "package": "@fluentui-react-native/contextual-menu"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Sep 2021 19:31:04 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.10.22",
       "version": "0.10.22",

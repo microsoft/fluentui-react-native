@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Tue, 21 Sep 2021 16:32:12 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.6.9",
+      "version": "0.6.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added experimental MenuButton",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "02f787bbaac83699c024e92577773114874f3be1",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Sep 2021 19:31:04 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.6.8",
       "version": "0.6.8",

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Bumping rex",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}

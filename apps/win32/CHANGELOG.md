@@ -1,8 +1,21 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Tue, 14 Sep 2021 19:31:04 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Sep 2021 16:32:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.0
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Minor changes
+
+- Added experimental MenuButton (v.kozlova13@gmail.com)
+
+### Patches
+
+- Bumping rex (safreibe@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.43.3 (v.kozlova13@gmail.com)
 
 ## 0.12.31
 
