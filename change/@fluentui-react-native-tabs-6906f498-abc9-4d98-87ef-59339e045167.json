@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Run prettier",
-  "packageName": "@fluentui-react-native/tabs",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}

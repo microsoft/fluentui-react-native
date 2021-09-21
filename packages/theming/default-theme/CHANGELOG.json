@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/default-theme",
   "entries": [
     {
+      "date": "Tue, 21 Sep 2021 19:08:16 GMT",
+      "tag": "@fluentui-react-native/default-theme_v0.8.5",
+      "version": "0.8.5",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.7.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e52c9b3d031599af4f43c261cb0a0327bc68a5ab",
+            "package": "@fluentui-react-native/default-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Sep 2021 16:32:12 GMT",
       "tag": "@fluentui-react-native/default-theme_v0.8.5",
       "version": "0.8.5",

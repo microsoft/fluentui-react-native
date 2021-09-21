@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/framework",
   "entries": [
     {
+      "date": "Tue, 21 Sep 2021 19:08:16 GMT",
+      "tag": "@fluentui-react-native/framework_v0.5.39",
+      "version": "0.5.39",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/memo-cache to v1.1.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e52c9b3d031599af4f43c261cb0a0327bc68a5ab",
+            "package": "@fluentui-react-native/framework"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Sep 2021 16:32:12 GMT",
       "tag": "@fluentui-react-native/framework_v0.5.39",
       "version": "0.5.39",

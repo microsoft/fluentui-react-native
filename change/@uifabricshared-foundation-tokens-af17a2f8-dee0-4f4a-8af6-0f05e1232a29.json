@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Run prettier",
-  "packageName": "@uifabricshared/foundation-tokens",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}
