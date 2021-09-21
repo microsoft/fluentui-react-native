@@ -46,7 +46,7 @@ export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonS
           ...borderStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', ...borderStyles.keys],
+      ['backgroundColor', 'width', ...borderStyles.keys],
     ),
     content: buildProps(
       (tokens: ToggleButtonTokens, theme: Theme) => ({
