@@ -14,38 +14,38 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
         secondaryContentFont: {
           variant: 'secondaryStandard',
         },
-        secondaryContentColor: t.colors.defaultSecondaryContent,
+        secondaryContentColor: t.colors.neutralForeground2,
         hovered: {
-          secondaryContentColor: t.colors.defaultHoveredSecondaryContent,
+          secondaryContentColor: t.colors.neutralForeground2Hover,
         },
         focused: {
-          secondaryContentColor: t.colors.defaultFocusedSecondaryContent,
+          secondaryContentColor: t.colors.neutralForeground2Hover,
         },
         pressed: {
-          secondaryContentColor: t.colors.defaultPressedSecondaryContent,
+          secondaryContentColor: t.colors.neutralForeground2Pressed,
         },
         primary: {
-          secondaryContentColor: t.colors.brandedSecondaryContent,
+          secondaryContentColor: t.colors.neutralForegroundOnBrand,
           hovered: {
-            secondaryContentColor: t.colors.brandedHoveredSecondaryContent,
+            secondaryContentColor: t.colors.neutralForegroundOnBrand,
           },
           focused: {
-            secondaryContentColor: t.colors.brandedFocusedSecondaryContent,
+            secondaryContentColor: t.colors.neutralForegroundOnBrand,
           },
           pressed: {
-            secondaryContentColor: t.colors.brandedPressedSecondaryContent,
+            secondaryContentColor: t.colors.neutralForegroundOnBrand,
           },
         },
         subtle: {
-          secondaryContentColor: t.colors.ghostSecondaryContent,
+          secondaryContentColor: t.colors.neutralForeground2,
           hovered: {
-            secondaryContentColor: t.colors.ghostHoveredSecondaryContent,
+            secondaryContentColor: t.colors.neutralForeground2Hover,
           },
           focused: {
-            secondaryContentColor: t.colors.ghostFocusedSecondaryContent,
+            secondaryContentColor: t.colors.neutralForeground2Hover,
           },
           pressed: {
-            secondaryContentColor: t.colors.ghostPressedSecondaryContent,
+            secondaryContentColor: t.colors.neutralForeground2Pressed,
           },
         },
       } as ButtonTokens),

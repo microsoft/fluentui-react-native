@@ -9,19 +9,19 @@ export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonS
     defaultButtonTokens,
     (t: Theme): ToggleButtonTokens => ({
       checked: {
-        color: t.colors.defaultCheckedContent,
-        backgroundColor: t.colors.defaultCheckedBackground,
+        color: t.colors.neutralForeground1,
+        backgroundColor: t.colors.neutralBackground1Selected,
         hovered: {
-          color: t.colors.defaultCheckedHoveredContent,
-          backgroundColor: t.colors.defaultCheckedHoveredBackground,
+          color: t.colors.neutralForeground1,
+          backgroundColor: t.colors.neutralBackground1Hover,
         },
         subtle: {
-          color: t.colors.ghostCheckedContent,
-          backgroundColor: t.colors.ghostCheckedBackground,
+          color: t.colors.neutralForeground1,
+          backgroundColor: t.colors.neutralBackground1Selected,
           hovered: {
-            color: t.colors.ghostCheckedHoveredContent,
-            backgroundColor: t.colors.ghostCheckedHoveredBackground,
-            borderColor: t.colors.ghostCheckedHoveredBorder,
+            color: t.colors.neutralForeground1,
+            backgroundColor: t.colors.neutralBackground1Hover,
+            borderColor: t.colors.neutralStroke1,
           },
         },
       },
