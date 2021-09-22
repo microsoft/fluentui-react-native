@@ -9,19 +9,8 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
     color: t.colors.buttonText,
     borderColor: t.colors.buttonBorder,
     iconColor: t.colors.buttonIcon,
-    minHeight: 32,
-    minWidth: 80,
-    borderWidth: 1,
-    borderRadius: 2,
-    fluid: {
-      width: '100%',
-    },
     fab: {
-      borderRadius: 100, // big number for always rounded corners
       ...shadowStyleFromGlobalToken(8),
-      // For large size
-      minHeight: 56,
-      minWidth: 56,
       // coloring same as primary
       backgroundColor: t.colors.brandedBackground,
       color: t.colors.brandedContent,

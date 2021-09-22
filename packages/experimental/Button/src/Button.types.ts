@@ -7,6 +7,7 @@ import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 
 export const buttonName = 'Button';
+export type ButtonSize = 'small' | 'medium' | 'large';
 
 export interface ButtonTokens extends FontTokens, IBorderTokens, IShadowTokens {
   /**
@@ -79,6 +80,9 @@ export interface ButtonTokens extends FontTokens, IBorderTokens, IShadowTokens {
   subtle?: ButtonTokens;
   fluid?: ButtonTokens;
   fab?: ButtonTokens;
+  small?: ButtonTokens;
+  medium?: ButtonTokens;
+  large?: ButtonTokens;
 }
 
 export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
@@ -91,10 +95,12 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
    * Source URL or name of the icon to show on the Button.
    */
   icon?: IconSourcesType;
+
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
+
   /**
    * A callback to call on button click event
    */
@@ -114,6 +120,9 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
 
   /** A floating action button  */
   fab?: boolean;
+
+  /** Sets style of button to a preset size style  */
+  size?: ButtonSize
 }
 
 export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
