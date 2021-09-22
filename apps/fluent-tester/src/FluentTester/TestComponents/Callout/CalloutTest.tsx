@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ScreenRect, Text, View, Switch, Picker } from 'react-native';
 import { Button, Callout, Separator, IFocusable, RestoreFocusEvent, DismissBehaviors } from '@fluentui/react-native';
-import { CALLOUT_TESTPAGE } from './consts';
+//import { CALLOUT_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const standardCallout: React.FunctionComponent = () => {
@@ -269,7 +269,7 @@ const customCallout: React.FunctionComponent = () => {
 const calloutSections: TestSection[] = [
   {
     name: 'Standard Usage',
-    testID: CALLOUT_TESTPAGE,
+    testID: 'test',
     component: standardCallout,
   },
   {
