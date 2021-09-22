@@ -1314,23 +1314,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fluentui-react-native/framework@0.5.34":
-  version "0.5.34"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.5.34.tgz#e21340b2e62cb56f539a407f6584db136eaca371"
-  integrity sha512-+y0gqToO1i8QEZuqUPOxZ0Rj6dcoNIVsGrOdOvUUgvWWXEtmIYNdY7D5xJE/OyKvy6fKb8GRoSC+YozWLSW1Sg==
-  dependencies:
-    "@fluentui-react-native/composition" ">=0.6.8 <1.0.0"
-    "@fluentui-react-native/default-theme" ">=0.8.0 <1.0.0"
-    "@fluentui-react-native/immutable-merge" "^1.1.3"
-    "@fluentui-react-native/memo-cache" "^1.1.3"
-    "@fluentui-react-native/merge-props" ">=0.3.3 <1.0.0"
-    "@fluentui-react-native/theme-types" ">=0.12.0 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.9.22 <1.0.0"
-    "@fluentui-react-native/use-slot" ">=0.1.5 <1.0.0"
-    "@fluentui-react-native/use-slots" ">=0.5.7 <1.0.0"
-    "@fluentui-react-native/use-styling" ">=0.6.7 <1.0.0"
-    "@fluentui-react-native/use-tokens" ">=0.1.5 <1.0.0"
-
 "@fluentui/token-pipeline@^0.3.11":
   version "0.3.11"
   resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.11.tgz#79552e3a2ef66f2535ebd5e5a99f87ae3c65556c"
@@ -2727,10 +2710,10 @@
   resolved "https://registry.yarnpkg.com/@react-native/polyfills/-/polyfills-1.0.0.tgz#05bb0031533598f9458cf65a502b8df0eecae780"
   integrity sha512-0jbp4RxjYopTsIdLl+/Fy2TiwVYHy4mgeu07DG4b/LyM0OS/+lPP5c9sbnt/AMlnF6qz2JRZpPpGw1eMNS6A4w==
 
-"@rnx-kit/babel-preset-metro-react-native@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/babel-preset-metro-react-native/-/babel-preset-metro-react-native-1.0.4.tgz#31c40bc4f165069634848161d26531fd241be15b"
-  integrity sha512-S/FD/R9llAEdjt/VeUSFqt1l8SLleRp4fctEk/HTJ35C/P5W5Mbihu+nAMq8myxDJ1OaDzqnGeLu01Lb+iAUvQ==
+"@rnx-kit/babel-preset-metro-react-native@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/babel-preset-metro-react-native/-/babel-preset-metro-react-native-1.0.7.tgz#a71ec02ba2d5e146286f81b30aecfe1f4ade41f7"
+  integrity sha512-gd1Vmg+2PV/KOJyJ10ZuSc20+7nw/gEgVCeAtN6kiRn00g2QkyurELeCchZ3/KtvT3hyHygsfqeJKROdOrohvw==
   dependencies:
     babel-plugin-const-enum "^1.0.0"
 
@@ -2797,12 +2780,12 @@
     find-up "^5.0.0"
 
 "@rnx-kit/metro-config@^1.2.3":
-  version "1.2.8"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.8.tgz#8f761177267563f9019c0ad6399795d4af611975"
-  integrity sha512-3ViCq08RQYrEFjYgLI7Ctgs806/uTgglj5rTIGlhF1iZXktvxoPzUZ/hauDEz0NB3EgEJd8ak1zI79YMQVgCDA==
+  version "1.2.16"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.16.tgz#b1483baffcf90c7d75747c22a88506d370d73c9c"
+  integrity sha512-RawCNgsnXoupoQ69CZp09ujiECHeEiQUj9B6BAMrwPHkEJgF9UQnjzRDebm220BXt5u/9aMOQzrZVU85np2Ahw==
   dependencies:
-    "@rnx-kit/babel-preset-metro-react-native" "^1.0.4"
-    "@rnx-kit/tools-node" "^1.1.0"
+    "@rnx-kit/babel-preset-metro-react-native" "^1.0.7"
+    "@rnx-kit/tools-node" "^1.1.3"
     workspace-tools "^0.16.2"
 
 "@rnx-kit/third-party-notices@1.0.1":
@@ -2819,7 +2802,7 @@
   resolved "https://registry.yarnpkg.com/@rnx-kit/tools-language/-/tools-language-1.1.1.tgz#b86066f08dca239fc2ee95de72ee7c9ae6057d5e"
   integrity sha512-XAF70YyhTIm/6StM9YbSaVi83MiCS+JoiifNNHem1DL+teaMoy0Vdtc7Btq55bVJIH2HgH7ozlmqXhE+LiGSCw==
 
-"@rnx-kit/tools-node@^1.1.0", "@rnx-kit/tools-node@^1.1.3":
+"@rnx-kit/tools-node@^1.1.3":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@rnx-kit/tools-node/-/tools-node-1.1.3.tgz#6edf8456dd59e79b2610af9406d58529a2f3befa"
   integrity sha512-1tMpTL0qSgyz9l+488MtHYD1CdZ0FGgo+oZ7xGb+f8r1i6cNFbgdlcoVxC/VkeqSVeYSQW1nW3er2v3vUh4nmw==
