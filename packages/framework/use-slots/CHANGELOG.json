@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/use-slots",
   "entries": [
     {
+      "date": "Tue, 21 Sep 2021 19:08:16 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.5.7",
+      "version": "0.5.7",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/merge-props to v0.3.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e52c9b3d031599af4f43c261cb0a0327bc68a5ab",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Sep 2021 19:31:04 GMT",
       "tag": "@fluentui-react-native/use-slots_v0.5.7",
       "version": "0.5.7",

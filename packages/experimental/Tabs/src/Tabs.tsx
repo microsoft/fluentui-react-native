@@ -37,10 +37,10 @@ export const Tabs = compose<TabsType>({
     // configure props and state for tabs based on user props
     const tabs = useTabs(userProps);
 
-    if(!tabs.state) return null;
+    if (!tabs.state) return null;
 
     // Grab the styled slots.
-    const Slots = useSlots(userProps, layer => tabs.state[layer] || userProps[layer]);
+    const Slots = useSlots(userProps, (layer) => tabs.state[layer] || userProps[layer]);
 
     // Return the handler to finish render.
     return (final: TabsProps, ...children: React.ReactNode[]) => {

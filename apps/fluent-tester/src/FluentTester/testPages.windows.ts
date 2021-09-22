@@ -14,6 +14,7 @@ import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON, TabsExperimentalTest } from './TestC
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
+import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
 
 export const tests = [
   {
@@ -25,6 +26,11 @@ export const tests = [
     name: 'Callout Test',
     component: CalloutTest,
     testPage: HOMEPAGE_CALLOUT_BUTTON,
+  },
+  {
+    name: 'Experimental Button',
+    component: ExperimentalButtonTest,
+    testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
   },
   {
     name: 'Pressable Test',

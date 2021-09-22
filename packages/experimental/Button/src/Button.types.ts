@@ -76,7 +76,7 @@ export interface ButtonTokens extends FontTokens, IBorderTokens, IShadowTokens {
   pressed?: ButtonTokens;
   disabled?: ButtonTokens;
   primary?: ButtonTokens;
-  ghost?: ButtonTokens;
+  subtle?: ButtonTokens;
   fluid?: ButtonTokens;
   fab?: ButtonTokens;
 }
@@ -107,7 +107,7 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   primary?: boolean;
 
   /** A button can blend into its background to become less emphasized. */
-  ghost?: boolean;
+  subtle?: boolean;
 
   /** A button can fill the width of its container. */
   fluid?: boolean;

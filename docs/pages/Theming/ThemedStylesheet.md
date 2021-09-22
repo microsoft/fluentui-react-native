@@ -28,10 +28,10 @@ You can use a themed `StyleSheet` as you would an RN `StyleSheet` that's generat
 ```ts
 // Component.ts
 import { getThemedStyles } from './Component.styles.ts';
-import { useTheme } from '@fluentui-react-native/framework';
+import { useFluentTheme } from '@fluentui-react-native/framework';
 
 export const Component = () => {
-  const styles = getThemedStyles(useTheme());
+  const styles = getThemedStyles(useFluentTheme());
 
   return (
     <View style={styles.root}>
