@@ -8,7 +8,7 @@ import { useTheme } from '@fluentui-react-native/theme-types';
 
 type WithUndefined<T> = T | typeof undefinedText;
 
-const StyledSlider = props => {
+const StyledSlider = (props) => {
   const { title, min, max, initial, onChange, current, step } = props;
   const theme = useTheme();
   return (
@@ -27,7 +27,7 @@ const StyledSlider = props => {
   );
 };
 
-const StyledTextInput = props => {
+const StyledTextInput = (props) => {
   const theme = useTheme();
   const textInputStyles = [
     commonStyles.textBox,
@@ -36,7 +36,7 @@ const StyledTextInput = props => {
   return <TextInput style={textInputStyles} placeholderTextColor={theme.colors.disabledBodyText} blurOnSubmit={true} {...props} />;
 };
 
-const StyledSwitch = props => {
+const StyledSwitch = (props) => {
   const { title, value, onChange } = props;
   const theme = useTheme();
   return (
@@ -129,14 +129,14 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         <View style={{ flexDirection: 'row' }}>
           <StyledTextInput
             placeholder="Ring glow color"
-            onSubmitEditing={e => {
+            onSubmitEditing={(e) => {
               setRingColor(e.nativeEvent.text);
             }}
           />
 
           <StyledTextInput
             placeholder="Ring background color"
-            onSubmitEditing={e => {
+            onSubmitEditing={(e) => {
               setRingBackgroundColor(e.nativeEvent.text);
             }}
           />
@@ -145,14 +145,14 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         <View style={{ flexDirection: 'row' }}>
           <StyledTextInput
             placeholder="Background color"
-            onSubmitEditing={e => {
+            onSubmitEditing={(e) => {
               setCoinColor(e.nativeEvent.text);
             }}
           />
 
           <StyledTextInput
             placeholder="Initials text color"
-            onSubmitEditing={e => {
+            onSubmitEditing={(e) => {
               setTextColor(e.nativeEvent.text);
             }}
           />

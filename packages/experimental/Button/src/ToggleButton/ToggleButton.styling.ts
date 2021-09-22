@@ -1,7 +1,8 @@
 import { toggleButtonName, ToggleButtonTokens, ToggleButtonSlotProps, ToggleButtonProps } from './ToggleButton.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
-import { buttonStates, defaultButtonTokens } from '../ButtonTokens';
+import { defaultButtonTokens } from '../ButtonTokens';
+import { buttonStates } from '../Button.styling';
 
 export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonSlotProps, ToggleButtonTokens> = {
   tokens: [
@@ -14,7 +15,7 @@ export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonS
           color: t.colors.defaultCheckedHoveredContent,
           backgroundColor: t.colors.defaultCheckedHoveredBackground,
         },
-        ghost: {
+        subtle: {
           color: t.colors.ghostCheckedContent,
           backgroundColor: t.colors.ghostCheckedBackground,
           hovered: {
@@ -46,7 +47,7 @@ export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonS
           ...borderStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', ...borderStyles.keys],
+      ['backgroundColor', 'width', ...borderStyles.keys],
     ),
     content: buildProps(
       (tokens: ToggleButtonTokens, theme: Theme) => ({

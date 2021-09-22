@@ -121,7 +121,7 @@ const brandColors: BrandRamps = {
   },
 };
 
-export const brandOptions = Object.keys(brandColors).map(brand => ({ label: brand, value: brand }));
+export const brandOptions = Object.keys(brandColors).map((brand) => ({ label: brand, value: brand }));
 
 export const applyBrand = (themeName: string, currentBrand: string): PartialTheme => {
   const ramp = brandColors[currentBrand];

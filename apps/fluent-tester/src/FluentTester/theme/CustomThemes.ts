@@ -41,7 +41,7 @@ export class TesterThemeReference extends ThemeReference {
   constructor() {
     super(
       baseTheme,
-      parent => applyTheme(parent, this._themeName, this.options.appearance),
+      (parent) => applyTheme(parent, this._themeName, this.options.appearance),
       () => applyBrand(this._themeName, this._brand),
     );
     this.baseTheme = baseTheme;
