@@ -59,6 +59,7 @@ jobs:
       vmImage: 'windows-2019'
     timeoutInMinutes: 60
     cancelTimeoutInMinutes: 5
+    continueOnError: true
 
     steps:
       - checkout: self
