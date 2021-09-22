@@ -25,12 +25,13 @@ export const Checkbox = compose<ICheckboxType>({
   usePrepareProps: (userProps: ICheckboxProps, useStyling: IUseComposeStyling<ICheckboxType>) => {
     const defaultComponentRef = React.useRef(null);
     const {
+      accessible,
       accessibilityLabel,
+      accessibilityRole,
       ariaLabel,
       checked,
       defaultChecked,
       boxSide,
-      disabled,
       label,
       onChange,
       componentRef = defaultComponentRef,
@@ -57,7 +58,7 @@ export const Checkbox = compose<ICheckboxType>({
 
     const state: ICheckboxState = {
       ...pressable.state,
-      disabled: !!disabled,
+      disabled: !!userProps.disabled,
       checked: isChecked,
       boxAtEnd: boxSide == undefined || boxSide == 'start' ? false : true,
     };
@@ -82,10 +83,12 @@ export const Checkbox = compose<ICheckboxType>({
         rest,
         ref: buttonRef,
         ...pressable.props,
-        accessibilityRole: 'checkbox',
+        accessible: accessible ?? true,
+        accessibilityRole: accessibilityRole ?? 'checkbox',
         accessibilityLabel: accessibilityLabel ?? ariaLabel ?? label,
         accessibilityState: { disabled: state.disabled, checked: state.checked },
         accessibilityActions: [{ name: 'Toggle', label: checkboxSelectActionLabel }],
+        focusable: !state.disabled,
         onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUpSpace,
       },

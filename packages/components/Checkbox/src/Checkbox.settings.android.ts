@@ -13,9 +13,6 @@ export const settings: IComposeSettings<ICheckboxType> = [
       checkmarkVisibility: 0,
     },
     root: {
-      accessible: true,
-      focusable: true,
-      accessibilityRole: 'checkbox',
       style: {
         display: 'flex',
         alignItems: 'center',
