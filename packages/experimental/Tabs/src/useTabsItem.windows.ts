@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useAsPressable, useKeyCallback, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { TabsItemProps, TabsItemInfo } from './TabsItem.types';
+import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { TabsItemProps, TabsItemInfo, TabsItemState } from './TabsItem.types';
 import { TabsContext } from './Tabs';
 
 /**
@@ -12,27 +12,26 @@ import { TabsContext } from './Tabs';
  */
 export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
   const defaultComponentRef = React.useRef(null);
-  const { accessibilityLabel, headerText, componentRef = defaultComponentRef, itemKey, disabled, itemCount, icon, ...rest } = props;
+  const { accessibilityLabel, headerText, componentRef = defaultComponentRef, itemKey, disabled, itemCount, ...rest } = props;
   // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback).
   const info = React.useContext(TabsContext);
 
-  const changeSelection = () => {
-    if (itemKey != info.selectedKey) {
-      info.onTabsClick && info.onTabsClick(itemKey);
-      info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
-      info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
-    }
-  };
-
-  const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
+  const changeSelection = React.useCallback(() => {
+    info.focusZoneRef?.current?.focus(); // GH #964, FocusZone not implemented on windows.
+    info.onTabsClick && info.onTabsClick(itemKey);
+    info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
+    info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
+  }, [componentRef, info, itemKey]);
 
   const pressable = useAsPressable({
     ...rest,
-    onPress: changeSelectionWithFocus,
-    onFocus: changeSelection,
+    onPress: changeSelection,
   });
 
-  const onKeyUp = useKeyCallback(changeSelection, ' ', 'Enter');
+  const state: TabsItemState = {
+    ...pressable.state,
+    selected: info.selectedKey === itemKey,
+  };
 
   // Used when creating accessibility properties in mergeSettings below.
   const onAccessibilityAction = React.useCallback(
@@ -55,27 +54,24 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
     }
   }, []);
 
-
   return {
     props: {
+      ...rest,
       ...pressable.props,
       accessible: true,
+      ref: useViewCommandFocus(componentRef),
       accessibilityRole: 'tab',
       accessibilityLabel: accessibilityLabel || headerText,
-      focusable: !disabled ?? true,
+      focusable: false,
       headerText: headerText ?? '',
       accessibilityState: { disabled: disabled, selected: info.selectedKey === itemKey },
       accessibilityActions: [{ name: 'Select'}],
       onAccessibilityAction: onAccessibilityAction,
       itemCount: itemCount,
-      ref: useViewCommandFocus(componentRef),
       itemKey: itemKey,
-      icon: icon,
-      onKeyUp: onKeyUp,
     },
     state: {
-      ...pressable.state,
-      selected: itemKey === info.selectedKey,
+      ...state
     },
   };
 };

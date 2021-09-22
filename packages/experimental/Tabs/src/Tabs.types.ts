@@ -37,6 +37,12 @@ export interface TabsContextData {
    * A Map to for a TabItems corresponding view
    */
   views?: Map<string, React.ReactNode[]> | null;
+
+  /**
+   * Reference to the Focus Container as there is no FocusZone on windows.
+   * GH #964
+   */
+   focusZoneRef?: React.RefObject<any> | null;
 }
 
 export interface TabsTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens {}
@@ -83,22 +89,25 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation' |
   testID?: string;
 }
 
-export interface TabsInfo {
+export interface TabsState {
+  context?: TabsContextData;
   headersOnly?: boolean;
   label?: boolean;
-}
 
-export interface TabsState {
+  /**
+   * Array of enabled keys in the group
+   * Windows-Specific Prop.
+   */
+   enabledKeys?: string[];
+}
+export interface TabsInfo {
   props: TabsProps;
-  state: {
-    context?: TabsContextData;
-    info: TabsInfo;
-  };
+  state: TabsState;
 }
 export interface TabsSlotProps {
   root: React.PropsWithRef<IViewProps>;
   label: TextProps;
-  container: FocusZoneProps;
+  container?: FocusZoneProps;
   stack: IViewProps;
   tabPanel: IViewProps;
 }

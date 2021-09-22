@@ -14,6 +14,8 @@ export interface TabsItemTokens extends FontTokens, IBorderTokens {
    */
   indicatorColor?: string;
 
+  tabsItemOpacity?: number;
+
   /**
    * The indicator marginHorizontal value.
    */
