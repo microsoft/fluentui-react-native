@@ -1,8 +1,35 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Mon, 13 Sep 2021 23:22:43 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Sep 2021 16:32:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.26.0
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Minor changes
+
+- Added experimental MenuButton (v.kozlova13@gmail.com)
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.20.8 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/callout to v0.17.22 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/checkbox to v0.13.9 (email not defined)
+- Bump @fluentui-react-native/contextual-menu to v0.10.23 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/focus-trap-zone to v0.7.46 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/focus-zone to v0.7.25 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.46 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/link to v0.14.5 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/menu-button to v0.6.9 (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/persona to v0.11.18 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/persona-coin to v0.9.18 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/pressable to v0.7.22 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/radio-group to v0.13.10 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/separator to v0.10.37 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/tabs to v0.5.4 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/text to v0.10.18 (67026167+chiuam@users.noreply.github.com)
 
 ## 0.25.14
 

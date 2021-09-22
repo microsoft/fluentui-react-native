@@ -20,5 +20,5 @@ function filterAsObject(targets: any[]): object[] {
  * @param props - props to merge together
  */
 export function mergeProps<TProps>(...props: (TProps | undefined)[]): TProps {
-  return (immutableMergeCore(mergePropsOptions, ...filterAsObject(props)) as unknown) as TProps;
+  return immutableMergeCore(mergePropsOptions, ...filterAsObject(props)) as unknown as TProps;
 }

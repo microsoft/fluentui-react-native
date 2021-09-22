@@ -9,13 +9,13 @@ export const StandardMenuButton: React.FunctionComponent = () => {
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
 
   const [focusOnMount, setShouldFocusOnMount] = React.useState(true);
-  const toggleFocusOnMount = React.useCallback(value => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
+  const toggleFocusOnMount = React.useCallback((value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
 
   const [focusOnContainer, setShouldFocusOnContainer] = React.useState(false);
-  const toggleFocusOnContainer = React.useCallback(value => setShouldFocusOnContainer(value), [setShouldFocusOnContainer]);
+  const toggleFocusOnContainer = React.useCallback((value) => setShouldFocusOnContainer(value), [setShouldFocusOnContainer]);
 
   const onItemClick = React.useCallback(
-    key => {
+    (key) => {
       setLastMenuItemClicked(key);
     },
     [setLastMenuItemClicked],

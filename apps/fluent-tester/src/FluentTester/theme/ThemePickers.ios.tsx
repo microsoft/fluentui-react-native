@@ -42,13 +42,13 @@ export const ThemePickers: React.FunctionComponent = () => {
     testerTheme.themeName = newTheme as ThemeNames;
   }, []);
 
-  const themeMenuOptions: MenuAction[] = themeChoices.map(themeChoice => ({
+  const themeMenuOptions: MenuAction[] = themeChoices.map((themeChoice) => ({
     id: themeChoice.value,
     title: themeChoice.label,
     state: testerTheme.themeName === themeChoice.value ? 'on' : 'off',
   }));
 
-  const brandMenuOptions: MenuAction[] = brandOptions.map(brandOption => ({
+  const brandMenuOptions: MenuAction[] = brandOptions.map((brandOption) => ({
     id: brandOption.value,
     title: brandOption.label,
     state: testerTheme.brand === brandOption.value ? 'on' : 'off',
@@ -63,7 +63,7 @@ export const ThemePickers: React.FunctionComponent = () => {
         }}
         actions={themeMenuOptions}
       >
-        <Button ghost content="Theme" />
+        <Button subtle content="Theme" />
       </MenuView>
       <MenuView
         title="Brand"
@@ -72,7 +72,7 @@ export const ThemePickers: React.FunctionComponent = () => {
         }}
         actions={brandMenuOptions}
       >
-        <Button ghost content="Brand" />
+        <Button subtle content="Brand" />
       </MenuView>
     </View>
   );

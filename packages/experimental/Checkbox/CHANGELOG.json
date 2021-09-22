@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/experimental-checkbox",
   "entries": [
     {
+      "date": "Tue, 21 Sep 2021 19:08:16 GMT",
+      "tag": "@fluentui-react-native/experimental-checkbox_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "Run prettier",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e52c9b3d031599af4f43c261cb0a0327bc68a5ab",
+            "package": "@fluentui-react-native/experimental-checkbox"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Sep 2021 16:32:12 GMT",
+      "tag": "@fluentui-react-native/experimental-checkbox_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix disabled behavior on FURN Android Checkbox",
+            "author": "email not defined",
+            "commit": "a62f51b909018d12b69547fb9665708fea2cfc89",
+            "package": "@fluentui-react-native/experimental-checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Sep 2021 19:31:04 GMT",
       "tag": "@fluentui-react-native/experimental-checkbox_v0.2.1",
       "version": "0.2.1",

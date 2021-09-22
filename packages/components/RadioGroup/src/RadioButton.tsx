@@ -18,7 +18,19 @@ export const RadioButton = compose<IRadioButtonType>({
 
   usePrepareProps: (userProps: IRadioButtonProps, useStyling: IUseComposeStyling<IRadioButtonType>) => {
     const defaultComponentRef = React.useRef(null);
-    const { content, buttonKey, disabled, accessibilityLabel, ariaLabel, componentRef = defaultComponentRef, accessibilityPositionInSet, ariaPosInSet, accessibilitySetSize, ariaSetSize, ...rest } = userProps;
+    const {
+      content,
+      buttonKey,
+      disabled,
+      accessibilityLabel,
+      ariaLabel,
+      componentRef = defaultComponentRef,
+      accessibilityPositionInSet,
+      ariaPosInSet,
+      accessibilitySetSize,
+      ariaSetSize,
+      ...rest
+    } = userProps;
 
     // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
     const info = React.useContext(RadioGroupContext);
