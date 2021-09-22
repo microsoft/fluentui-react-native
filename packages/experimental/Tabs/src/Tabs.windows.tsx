@@ -41,30 +41,30 @@ export const Tabs = compose<TabsType>({
     // Grab the styled slots.
     const Slots = useSlots(userProps, layer => tabs.state[layer] || userProps[layer]);
 
-    // const onKeyDown = (ev: any) => {
-    //   if (ev.nativeEvent.key === 'ArrowRight' || ev.nativeEvent.key === 'ArrowLeft') {
-    //     const length = tabs.state.enabledKeys.length;
-    //     const currTabItemIndex = tabs.state.enabledKeys.findIndex(x => x == tabs.state.context.selectedKey)
-    //     let newCurrTabItemIndex;
-    //     if (ev.nativeEvent.key === 'ArrowRight') {
-    //       if (tabs.props.isCircularNavigation || !(currTabItemIndex + 1 == length)) {
-    //         newCurrTabItemIndex = (currTabItemIndex + 1) % length;
-    //         tabs.state.context.selectedKey = tabs.state.enabledKeys[newCurrTabItemIndex];
-    //         tabs.state.context.onTabsClick(tabs.state.context.selectedKey);
-    //       }
-    //     }
-    //     else {
-    //       if (tabs.props.isCircularNavigation || !(currTabItemIndex == 0)) {
-    //         newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
-    //         tabs.state.context.selectedKey = tabs.state.enabledKeys[newCurrTabItemIndex];
-    //         tabs.state.context.onTabsClick(tabs.state.context.selectedKey);
-    //       }
-    //     }
-    //   }
-    // };
+    const onKeyDown = (ev: any) => {
+      if (ev.nativeEvent.key === 'ArrowRight' || ev.nativeEvent.key === 'ArrowLeft') {
+        const length = tabs.state.enabledKeys.length;
+        const currTabItemIndex = tabs.state.enabledKeys.findIndex(x => x == tabs.state.context.selectedKey)
+        let newCurrTabItemIndex;
+        if (ev.nativeEvent.key === 'ArrowRight') {
+          if (tabs.props.isCircularNavigation || !(currTabItemIndex + 1 == length)) {
+            newCurrTabItemIndex = (currTabItemIndex + 1) % length;
+            tabs.state.context.selectedKey = tabs.state.enabledKeys[newCurrTabItemIndex];
+            tabs.state.context.onTabsClick(tabs.state.context.selectedKey);
+          }
+        }
+        else {
+          if (tabs.props.isCircularNavigation || !(currTabItemIndex == 0)) {
+            newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
+            tabs.state.context.selectedKey = tabs.state.enabledKeys[newCurrTabItemIndex];
+            tabs.state.context.onTabsClick(tabs.state.context.selectedKey);
+          }
+        }
+      }
+    };
 
     const stackProps = {
-      focusable: true, ref: tabs.state.context.focusZoneRef, onKeyDown: tabs.props.onKeyDown
+      focusable: true, ref: tabs.state.context.focusZoneRef, onKeyDown: onKeyDown
     };
 
     // Return the handler to finish render.

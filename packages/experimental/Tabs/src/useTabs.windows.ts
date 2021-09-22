@@ -37,27 +37,6 @@ export const useTabs = (props: TabsProps): TabsInfo => {
     label: !!label,
   };
 
-  const onKeyDown = (ev: any) => {
-    if (ev.nativeEvent.key === 'ArrowRight' || ev.nativeEvent.key === 'ArrowLeft') {
-      const length = state.enabledKeys.length;
-      const currTabItemIndex = state.enabledKeys.findIndex(x => x == state.context.selectedKey)
-      let newCurrTabItemIndex;
-      if (ev.nativeEvent.key === 'ArrowRight') {
-        if (props.isCircularNavigation || !(currTabItemIndex + 1 == length)) {
-          newCurrTabItemIndex = (currTabItemIndex + 1) % length;
-          state.context.selectedKey = state.enabledKeys[newCurrTabItemIndex];
-          state.context.onTabsClick(state.context.selectedKey);
-        }
-      }
-      else {
-        if (props.isCircularNavigation || !(currTabItemIndex == 0)) {
-          newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
-          state.context.selectedKey = state.enabledKeys[newCurrTabItemIndex];
-          state.context.onTabsClick(state.context.selectedKey);
-        }
-      }
-    }
-  };
 
   return {
     props: {
@@ -66,7 +45,6 @@ export const useTabs = (props: TabsProps): TabsInfo => {
       accessibilityRole: 'tablist',
       componentRef: componentRef,
       isCircularNavigation: isCircularNavigation ?? false,
-      onKeyDown: onKeyDown,
     },
     state: {
       ...state
