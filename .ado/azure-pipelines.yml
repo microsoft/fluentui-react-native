@@ -39,7 +39,6 @@ jobs:
       vmImage: 'windows-2019'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
-    continueOnError: true
 
     # The "displayName" of all steps that execute a command within our repo (such as 'yarn build') start lowercase to make it
     # easier to differentiate in-repo scripts from environmental setup. This makes it easier to understand CI pipeline results.
@@ -60,7 +59,6 @@ jobs:
       vmImage: 'windows-2019'
     timeoutInMinutes: 60
     cancelTimeoutInMinutes: 5
-    continueOnError: true
 
     steps:
       - checkout: self
