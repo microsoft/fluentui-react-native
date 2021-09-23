@@ -4,11 +4,11 @@ import { TabsItemProps, TabsItemInfo, TabsItemState } from './TabsItem.types';
 import { TabsContext } from './Tabs';
 
 /**
- * Re-usable hook for FURN TabsItem.
- * This hook configures tabs item props and state for FURN TabsItem.
+ * Re-usable hook for TabsItem.
+ * This hook configures tabs item props and state for TabsItem.
  *
- * @param props user props sent to FURN TabsItem
- * @returns configured props and state for FURN TabsItem
+ * @param props user props sent to TabsItem
+ * @returns configured props and state for TabsItem
  */
 export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
   const defaultComponentRef = React.useRef(null);

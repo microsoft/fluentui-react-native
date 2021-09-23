@@ -3,11 +3,11 @@ import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 import { TabsProps, TabsState, TabsInfo } from './Tabs.types';
 
 /**
- * Re-usable hook for FURN Tabs.
- * This hook configures tabs props and state for FURN Tabs.
+ * Re-usable hook for Tabs.
+ * This hook configures tabs props and state for Tabs.
  *
- * @param props user props sent to FURN Tabs
- * @returns configured props and state for FURN Tabs
+ * @param props user props sent to Tabs
+ * @returns configured props and state for Tabs
  */
 export const useTabs = (props: TabsProps): TabsInfo => {
   const defaultComponentRef = React.useRef(null);
