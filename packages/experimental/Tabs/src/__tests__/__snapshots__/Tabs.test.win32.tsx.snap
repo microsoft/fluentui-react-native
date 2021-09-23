@@ -24,6 +24,7 @@ exports[`Tabs FocusZone props 1`] = `
     <View
       style={
         Object {
+          "backgroundColor": undefined,
           "flexDirection": "row",
         }
       }
@@ -272,6 +273,7 @@ exports[`Tabs default props 1`] = `
     <View
       style={
         Object {
+          "backgroundColor": undefined,
           "flexDirection": "row",
         }
       }
@@ -520,6 +522,7 @@ exports[`Tabs disabled 1`] = `
     <View
       style={
         Object {
+          "backgroundColor": undefined,
           "flexDirection": "row",
         }
       }
@@ -768,6 +771,7 @@ exports[`Tabs header text and count 1`] = `
     <View
       style={
         Object {
+          "backgroundColor": undefined,
           "flexDirection": "row",
         }
       }
@@ -1062,6 +1066,7 @@ exports[`Tabs headers only 1`] = `
     <View
       style={
         Object {
+          "backgroundColor": undefined,
           "flexDirection": "row",
         }
       }
@@ -1323,6 +1328,7 @@ exports[`Tabs props 1`] = `
     <View
       style={
         Object {
+          "backgroundColor": undefined,
           "flexDirection": "row",
         }
       }
