@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Testing CI pipeline to continueOnError",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "none"
-}
