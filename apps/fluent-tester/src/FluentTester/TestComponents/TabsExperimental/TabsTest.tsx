@@ -259,7 +259,7 @@ if (Platform.OS !== 'windows') {
   });
 }
 
-export const TabsExperimentalTest: React.FunctionComponent = () => {
+export const ExperimentalTabsTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Experimental',
     uwpStatus: 'Experimental',
