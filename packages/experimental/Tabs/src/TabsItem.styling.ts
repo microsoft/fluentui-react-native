@@ -42,7 +42,7 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
       ['iconColor'],
     ),
     stack: buildProps(
-      () => ({
+      (tokens: TabsItemTokens) => ({
         style: {
           display: 'flex',
           marginHorizontal: 10,
@@ -52,9 +52,10 @@ export const stylingSettings: UseStylingOptions<TabsItemProps, TabsItemSlotProps
           minHeight: 32,
           minWidth: 32,
           justifyContent: 'center',
+          opacity: tokens.tabsItemOpacity,
         },
       }),
-      [],
+      ['tabsItemOpacity'],
     ),
     indicator: buildProps(
       (tokens: TabsItemTokens) => ({
