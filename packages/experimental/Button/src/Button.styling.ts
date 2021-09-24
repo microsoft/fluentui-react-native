@@ -46,7 +46,10 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
       (tokens: ButtonTokens, theme: Theme) => ({
         style: {
           color: tokens.color,
-          marginLeft: tokens.spacingIconContent,
+          marginLeft: tokens.spacingIconContent ?? 1,
+          marginRight: -1,
+          marginBottom: 1,
+          marginTop: -1,
           ...fontStyles.from(tokens, theme),
         },
       }),
@@ -56,7 +59,6 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
       (tokens: ButtonTokens) => ({
         style: {
           tintColor: tokens.iconColor,
-          margin: 2,
         },
         height: tokens.iconSize,
         width: tokens.iconSize,

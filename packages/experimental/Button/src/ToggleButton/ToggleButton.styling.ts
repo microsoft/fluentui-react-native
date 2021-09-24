@@ -30,7 +30,10 @@ export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonS
       (tokens: ToggleButtonTokens, theme: Theme) => ({
         style: {
           color: tokens.color,
-          marginLeft: tokens.spacingIconContent,
+          marginLeft: tokens.spacingIconContent ?? 1,
+          marginRight: -1,
+          marginBottom: 1,
+          marginTop: -1,
           ...fontStyles.from(tokens, theme),
         },
       }),
@@ -40,7 +43,6 @@ export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonS
       (tokens: ToggleButtonTokens) => ({
         style: {
           tintColor: tokens.iconColor,
-          margin: 2,
         },
         height: tokens.iconSize,
         width: tokens.iconSize,

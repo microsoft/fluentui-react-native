@@ -6,13 +6,16 @@ export const defaultToggleButtonColorTokens: TokenSettings<ToggleButtonTokens, T
   checked: {
     color: t.colors.neutralForeground1,
     backgroundColor: t.colors.neutralBackground1Selected,
+    borderColor: t.colors.neutralStroke1,
     hovered: {
       color: t.colors.neutralForeground1,
       backgroundColor: t.colors.neutralBackground1Hover,
+      borderColor: t.colors.neutralStroke1,
     },
     subtle: {
       color: t.colors.neutralForeground1,
       backgroundColor: t.colors.neutralBackground1Selected,
+      borderColor: t.colors.neutralBackground1Selected,
       hovered: {
         color: t.colors.neutralForeground1,
         backgroundColor: t.colors.neutralBackground1Hover,

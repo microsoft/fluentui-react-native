@@ -35,7 +35,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       },
     },
     small: {
-      padding: globalTokens.spacing.xxs - 1,
+      padding: globalTokens.spacing.xs - 1,
       borderWidth: globalTokens.stroke.width.thin,
       borderRadius: globalTokens.corner.radius.small,
       iconSize: 16,

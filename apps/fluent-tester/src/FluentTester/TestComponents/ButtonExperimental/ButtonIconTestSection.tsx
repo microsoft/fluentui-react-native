@@ -9,7 +9,7 @@ export const ButtonIconTest: React.FunctionComponent = () => {
   const fontBuiltInProps = {
     fontFamily: 'Arial',
     codepoint: 0x2663,
-    fontSize: 16,
+    fontSize: 24,
   };
 
   /* eslint-disable @typescript-eslint/no-var-requires */
