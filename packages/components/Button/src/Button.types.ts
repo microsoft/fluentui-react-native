@@ -88,6 +88,7 @@ export interface IButtonTokens extends FontTokens, IForegroundColorTokens, IBack
    */
   startIcon?: IconSourcesType;
   endIcon?: IconSourcesType;
+  wrapperBorderColor?: ColorValue;
 }
 
 export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
@@ -120,6 +121,7 @@ export interface IButtonSlotProps {
   root: React.PropsWithRef<IViewProps>;
   ripple?: PressableProps; // This slot exists to enable ripple-effect in android. It does not affect other platforms.
   stack: ViewProps;
+  borderWrapper: ViewProps;
   startIcon: IconProps;
   content: ITextProps;
   endIcon: IconProps;
