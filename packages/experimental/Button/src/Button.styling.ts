@@ -1,8 +1,9 @@
-import { buttonName, ButtonTokens, ButtonSlotProps, ButtonProps } from './Button.types';
+import { buttonName, ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize } from './Button.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-react-native/tokens';
 import { defaultButtonTokens } from './ButtonTokens';
 import { defaultButtonColorTokens } from './ButtonColorTokens';
+import { Platform } from 'react-native';
 
 export const buttonStates: (keyof ButtonTokens)[] = [
   'fab',
@@ -55,6 +56,7 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
       (tokens: ButtonTokens) => ({
         style: {
           tintColor: tokens.iconColor,
+          margin: 2,
         },
         height: tokens.iconSize,
         width: tokens.iconSize,
@@ -62,4 +64,14 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
       ['iconColor', 'iconSize'],
     ),
   },
+};
+
+export const getDefaultSize = (): ButtonSize => {
+  if (Platform.OS === 'windows') {
+    return 'medium';
+  } else if ((Platform.OS as any) === 'win32') {
+    return 'small';
+  }
+
+  return 'medium';
 };

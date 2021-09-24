@@ -9,6 +9,7 @@ import { useButton } from '../useButton';
 import { useAsToggle } from '@fluentui-react-native/interactive-hooks';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { buttonLookup } from '../Button';
 
 export const ToggleButton = compose<ToggleButtonType>({
   displayName: toggleButtonName,
@@ -30,7 +31,7 @@ export const ToggleButton = compose<ToggleButtonType>({
     const button = useButton({ onClick: toggle, ...rest });
 
     // grab the styled slots
-    const Slots = useSlots(userProps, (layer) => (layer === 'checked' && checkedValue) || button.state[layer] || userProps[layer]);
+    const Slots = useSlots(userProps, layer => (layer === 'checked' && checkedValue) || buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
     return (final: ToggleButtonProps, ...children: React.ReactNode[]) => {

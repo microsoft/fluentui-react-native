@@ -3,10 +3,6 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { CompoundButtonTokens } from './CompoundButton.types';
 
 export const defaultCompoundButtonColorTokens: TokenSettings<CompoundButtonTokens, Theme> = (t: Theme): CompoundButtonTokens => ({
-  minHeight: 72,
-  secondaryContentFont: {
-    variant: 'secondaryStandard',
-  },
   secondaryContentColor: t.colors.defaultSecondaryContent,
   hovered: {
     secondaryContentColor: t.colors.defaultHoveredSecondaryContent,

@@ -5,9 +5,16 @@ import { defaultButtonColorTokens } from '../ButtonColorTokens';
 import { buttonStates } from '../Button.styling';
 import { defaultButtonTokens } from '../ButtonTokens';
 import { defaultCompoundButtonColorTokens } from './CompoundButtonColorTokens';
+import { defaultCompoundButtonTokens } from './CompoundButtonTokens';
 
 export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundButtonSlotProps, CompoundButtonTokens> = {
-  tokens: [defaultButtonTokens, defaultButtonColorTokens, defaultCompoundButtonColorTokens, compoundButtonName],
+  tokens: [
+    defaultButtonTokens,
+    defaultButtonColorTokens,
+    defaultCompoundButtonTokens,
+    defaultCompoundButtonColorTokens,
+    compoundButtonName,
+  ],
   states: buttonStates,
   slotProps: {
     root: buildProps(
@@ -18,8 +25,6 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
           flexDirection: 'row',
           alignSelf: 'flex-start',
           justifyContent: 'center',
-          paddingStart: 16,
-          paddingEnd: 16,
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
