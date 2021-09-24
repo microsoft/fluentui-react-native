@@ -1,12 +1,12 @@
 import { toggleButtonName, ToggleButtonTokens, ToggleButtonSlotProps, ToggleButtonProps } from './ToggleButton.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
-import { defaultButtonTokens } from '../ButtonTokens';
+import { defaultButtonColorTokens } from '../ButtonColorTokens';
 import { buttonStates } from '../Button.styling';
 
 export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonSlotProps, ToggleButtonTokens> = {
   tokens: [
-    defaultButtonTokens,
+    defaultButtonColorTokens,
     (t: Theme): ToggleButtonTokens => ({
       checked: {
         color: t.colors.neutralForeground1,
@@ -38,10 +38,7 @@ export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonS
           flexDirection: 'row',
           alignSelf: 'flex-start',
           justifyContent: 'center',
-          minHeight: 24,
           width: tokens.width,
-          paddingStart: 16,
-          paddingEnd: 16,
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
         },

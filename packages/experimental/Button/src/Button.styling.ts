@@ -1,8 +1,8 @@
 import { buttonName, ButtonTokens, ButtonSlotProps, ButtonProps } from './Button.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-react-native/tokens';
-import { defaultButtonSpacingTokens } from './ButtonSpacingTokens';
 import { defaultButtonTokens } from './ButtonTokens';
+import { defaultButtonColorTokens } from './ButtonColorTokens';
 
 export const buttonStates: (keyof ButtonTokens)[] = [
   'fab',
@@ -21,7 +21,7 @@ export const buttonStates: (keyof ButtonTokens)[] = [
 ];
 
 export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, ButtonTokens> = {
-  tokens: [defaultButtonSpacingTokens, defaultButtonTokens, buttonName],
+  tokens: [defaultButtonTokens, defaultButtonColorTokens, buttonName],
   states: buttonStates,
   slotProps: {
     root: buildProps(

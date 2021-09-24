@@ -3,7 +3,7 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { ButtonTokens } from './Button.types';
 import { shadowStyleFromGlobalToken } from './shadowStyle';
 
-export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) =>
+export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) =>
   ({
     backgroundColor: t.colors.neutralBackground1,
     color: t.colors.neutralForeground1,

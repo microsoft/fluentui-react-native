@@ -1,13 +1,13 @@
 import { compoundButtonName, CompoundButtonTokens, CompoundButtonSlotProps, CompoundButtonProps } from './CompoundButton.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
-import { defaultButtonTokens } from '../ButtonTokens';
+import { defaultButtonColorTokens } from '../ButtonColorTokens';
 import { ButtonTokens } from '../Button.types';
 import { buttonStates } from '../Button.styling';
 
 export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundButtonSlotProps, CompoundButtonTokens> = {
   tokens: [
-    defaultButtonTokens,
+    defaultButtonColorTokens,
     (t: Theme): ButtonTokens =>
       ({
         minHeight: 72,
