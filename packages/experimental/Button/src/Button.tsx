@@ -21,24 +21,24 @@ export const Button = compose<ButtonType>({
     const button = useButton(userProps);
     const iconProps = createIconProps(userProps.icon);
     // grab the styled slots
-    const Slots = useSlots(userProps, layer => {
-      console.log(layer);
-      return button.state[layer] || userProps[layer] || layer === userProps['size'] || layer === getDefaultSize();
-    });
+    const Slots = useSlots(
+      userProps,
+      layer =>
+        button.state[layer] ||
+        userProps[layer] ||
+        layer === userProps['size'] ||
+        (!userProps.fab && layer === getDefaultSize()) ||
+        (layer === 'hasContent' && userProps.content) ||
+        (layer === 'hasIcon' && userProps.icon),
+    );
+
     // now return the handler for finishing render
     return (final: ButtonProps, ...children: React.ReactNode[]) => {
       const { icon, content, ...mergedProps } = mergeProps(button.props, final);
-      const marginBetween = {
-        marginLeft: icon && content ? 10 : 0,
-      };
       return (
         <Slots.root {...mergedProps}>
           {icon && <Slots.icon {...iconProps} />}
-          {content && (
-            <Slots.content key="content" style={marginBetween}>
-              {content}
-            </Slots.content>
-          )}
+          {content && <Slots.content key="content">{content}</Slots.content>}
           {children}
         </Slots.root>
       );

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ViewProps, ViewStyle, ColorValue } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
-import { FontTokens, IBorderTokens, IShadowTokens } from '@fluentui-react-native/tokens';
+import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
@@ -9,27 +9,7 @@ import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 export const buttonName = 'Button';
 export type ButtonSize = 'small' | 'medium' | 'large';
 
-export interface ButtonTokens extends FontTokens, IBorderTokens, IShadowTokens {
-  /**
-   * Background color for the button
-   */
-  backgroundColor?: ColorValue;
-
-  /**
-   * Foreground color for the text and/or icon of the button
-   */
-  color?: ColorValue;
-
-  /**
-   * The amount of padding between the border and the contents.
-   */
-  contentPadding?: number | string;
-
-  /**
-   * The amount of padding between the border and the contents when the Button has focus.
-   */
-  contentPaddingFocused?: number | string;
-
+export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
   /**
    * The icon color.
    */
@@ -48,7 +28,7 @@ export interface ButtonTokens extends FontTokens, IBorderTokens, IShadowTokens {
   /**
    * The size of the icon.
    */
-  iconSize?: number | string;
+  iconSize?: number;
 
   /**
    * The weight of the lines used when drawing the icon.
@@ -56,18 +36,14 @@ export interface ButtonTokens extends FontTokens, IBorderTokens, IShadowTokens {
   iconWeight?: number;
 
   /**
-   * Text to show on the Button.
+   * The width of the button.
    */
-  content?: string;
+  width?: ViewStyle['width'];
 
   /**
-   * Source URL or name of the icon to show on the Button.
+   * The amount of spacing between an icon and the content, in pixels
    */
-  icon?: IconSourcesType;
-
-  width?: ViewStyle['width'];
-  minHeight?: ViewStyle['minHeight'];
-  minWidth?: ViewStyle['minWidth'];
+  spacingIconContent?: number;
 
   /**
    * States that can be applied to a button
@@ -83,6 +59,8 @@ export interface ButtonTokens extends FontTokens, IBorderTokens, IShadowTokens {
   small?: ButtonTokens;
   medium?: ButtonTokens;
   large?: ButtonTokens;
+  hasContent?: ButtonTokens;
+  hasIcon?: ButtonTokens;
 }
 
 export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {

@@ -9,21 +9,38 @@ export const defaultButtonSpacingTokens: TokenSettings<ButtonTokens, Theme> = ()
       width: '100%',
     },
     fab: {
-      borderRadius: 100, // big number for always rounded corners
+      borderRadius: globalTokens.corner.radius.circle, // big number for always rounded corners
       // For large size
       minHeight: 56,
       minWidth: 56,
+      padding: globalTokens.spacing.l,
     },
     medium: {
-      minHeight: 32,
-      minWidth: 96,
+      padding: globalTokens.spacing.sNudge - 1,
       borderWidth: globalTokens.stroke.width.thin,
       borderRadius: globalTokens.corner.radius.medium,
+      iconSize: 20,
+      hasContent: {
+        minWidth: 96,
+        paddingHorizontal: globalTokens.spacing.l - 1,
+        variant: 'bodySemibold',
+        hasIcon: {
+          spacingIconContent: globalTokens.spacing.sNudge,
+        },
+      },
     },
     small: {
-      minHeight: 24,
-      minWidth: 64,
+      padding: globalTokens.spacing.xxs - 1,
       borderWidth: globalTokens.stroke.width.thin,
       borderRadius: globalTokens.corner.radius.small,
+      iconSize: 20,
+      hasContent: {
+        minWidth: 64,
+        paddingHorizontal: globalTokens.spacing.m - 1,
+        variant: 'secondaryStandard',
+        hasIcon: {
+          spacingIconContent: globalTokens.spacing.xs,
+        },
+      },
     },
   } as ButtonTokens);

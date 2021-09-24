@@ -16,6 +16,8 @@ export const buttonStates: (keyof ButtonTokens)[] = [
   'small',
   'medium',
   'large',
+  'hasContent',
+  'hasIcon',
 ];
 
 export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, ButtonTokens> = {
@@ -30,8 +32,6 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
           flexDirection: 'row',
           alignSelf: 'flex-start',
           justifyContent: 'center',
-          paddingStart: 16,
-          paddingEnd: 16,
           width: tokens.width,
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
@@ -45,18 +45,21 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
       (tokens: ButtonTokens, theme: Theme) => ({
         style: {
           color: tokens.color,
+          marginLeft: tokens.spacingIconContent,
           ...fontStyles.from(tokens, theme),
         },
       }),
-      ['color', ...fontStyles.keys],
+      ['color', 'spacingIconContent', ...fontStyles.keys],
     ),
     icon: buildProps(
       (tokens: ButtonTokens) => ({
         style: {
           tintColor: tokens.iconColor,
         },
+        height: tokens.iconSize,
+        width: tokens.iconSize,
       }),
-      ['iconColor'],
+      ['iconColor', 'iconSize'],
     ),
   },
 };

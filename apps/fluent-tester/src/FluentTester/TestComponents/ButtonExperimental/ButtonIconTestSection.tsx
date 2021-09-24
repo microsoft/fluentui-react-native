@@ -23,6 +23,7 @@ export const ButtonIconTest: React.FunctionComponent = () => {
 
   return (
     <View style={[stackStyle, commonTestStyles.view]}>
+      {svgIconsEnabled ? <Button icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin} /> : null}
       <Button
         icon={{ fontSource: fontBuiltInProps, width: 100, height: 100, color: '#060' }}
         content="Font icon"
