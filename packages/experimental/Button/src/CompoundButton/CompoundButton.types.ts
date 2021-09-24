@@ -8,6 +8,19 @@ export const compoundButtonName = 'CompoundButton';
 export interface CompoundButtonTokens extends ButtonTokens {
   secondaryContentFont?: FontTokens;
   secondaryContentColor?: ColorValue;
+
+  /**
+   * States that can be applied to a button
+   */
+  hovered?: CompoundButtonTokens;
+  focused?: CompoundButtonTokens;
+  pressed?: CompoundButtonTokens;
+  disabled?: CompoundButtonTokens;
+  primary?: CompoundButtonTokens;
+  subtle?: CompoundButtonTokens;
+  small?: CompoundButtonTokens;
+  medium?: CompoundButtonTokens;
+  large?: CompoundButtonTokens;
 }
 
 export interface CompoundButtonProps extends ButtonProps {
