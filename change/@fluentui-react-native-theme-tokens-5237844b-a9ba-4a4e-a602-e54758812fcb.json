@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Fix font for UWP",
+  "packageName": "@fluentui-react-native/theme-tokens",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
