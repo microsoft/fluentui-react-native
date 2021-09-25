@@ -55,7 +55,6 @@ export const ContextualMenu = compose<ContextualMenuType>({
 
     const slotProps = mergeSettings<ContextualMenuSlotProps>(styleProps, {
       root: {
-        showMenu: setShowMenu,
         ...rest,
       },
     });
@@ -76,9 +75,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
     }
     return (
       <CMContext.Provider value={renderData.state.context}>
-        <Slots.root>
-          {children}
-        </Slots.root>
+        <Slots.root>{children}</Slots.root>
       </CMContext.Provider>
     );
   },
