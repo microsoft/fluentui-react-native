@@ -21,6 +21,7 @@ export interface CompoundButtonTokens extends ButtonTokens {
   small?: CompoundButtonTokens;
   medium?: CompoundButtonTokens;
   large?: CompoundButtonTokens;
+  hasContent?: CompoundButtonTokens;
 }
 
 export interface CompoundButtonProps extends ButtonProps {

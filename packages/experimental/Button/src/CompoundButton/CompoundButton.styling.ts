@@ -41,6 +41,10 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
     content: buildProps(
       (tokens: CompoundButtonTokens, theme: Theme) => ({
         style: {
+          marginLeft: 1,
+          marginRight: -1,
+          marginBottom: 1,
+          marginTop: -1,
           color: tokens.color,
           ...fontStyles.from(tokens, theme),
         },
@@ -50,6 +54,10 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
     secondaryContent: buildProps(
       (tokens: CompoundButtonTokens, theme: Theme) => ({
         style: {
+          marginLeft: 1,
+          marginRight: -1,
+          marginBottom: 1,
+          marginTop: -1,
           color: tokens.secondaryContentColor,
           ...fontStyles.from(tokens.secondaryContentFont, theme),
         },
