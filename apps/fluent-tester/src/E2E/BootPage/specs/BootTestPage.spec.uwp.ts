@@ -11,18 +11,18 @@ import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
 import BootTestPage from '../pages/BootTestPage.win';
 
 const BOOT_APP_TIMEOUT = 60000;
-const PAGE_TIMEOUT = 3000;
+const PAGE_TIMEOUT = 6000;
 
 // Before testing begins, allow up to 60 seconds for bundle to load
 // (WebDriverIO)
-describe('Open the app', function () {
+describe('Open the app', function() {
   it('Boot app', () => {
     BootTestPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     expect(BootTestPage.isPageLoaded()).toBeTruthy();
   });
 });
 
-describe('Click on each test page and check if it renders', function () {
+describe('Click on each test page and check if it renders', function() {
   it('Button Test Page', () => {
     BootTestPage.clickAndGoToButtonPage();
     ButtonTestPage.waitForPageDisplayed(PAGE_TIMEOUT);

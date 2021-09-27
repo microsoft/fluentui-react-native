@@ -10,6 +10,7 @@ export const settings: IComposeSettings<IButtonType> = [
       borderColor: 'neutralStroke1',
       borderWidth: 1,
       borderRadius: 4,
+      wrapperBorderColor: 'transparent'
     },
     root: {
       accessible: true,
@@ -22,6 +23,13 @@ export const settings: IComposeSettings<IButtonType> = [
         alignSelf: 'flex-start',
       },
     } as IViewProps,
+    borderWrapper: {
+      style: {
+        display: 'flex',
+        flexGrow: 1,
+        borderWidth: 1,
+      }
+    },
     endIcon: {
       style: {
         marginStart: 2,
@@ -79,7 +87,7 @@ export const settings: IComposeSettings<IButtonType> = [
           backgroundColor: 'neutralBackground1Hover',
           color: 'neutralForeground1',
           borderColor: 'strokeFocus2',
-          borderWidth: 2,
+          wrapperBorderColor: 'strokeFocus2',
         },
       },
     },
