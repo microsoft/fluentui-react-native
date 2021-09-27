@@ -18,11 +18,11 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
-  - FRNAvatar (0.12.5):
+  - FRNAvatar (0.12.10):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
-  - FRNButton (0.7.20):
+  - FRNButton (0.7.25):
     - MicrosoftFluentUI (= 0.3.0)
     - React
   - FRNDatePicker (0.3.6):
@@ -545,8 +545,8 @@ SPEC CHECKSUMS:
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
-  FRNAvatar: f631c488ceadbf4a3f885bb10275104b1041da82
-  FRNButton: 525525958d2c3083e5c2a213e8d4c78e4d1169cc
+  FRNAvatar: 1551b00659007c0f94c8ae4341f4b7dbdb2a151a
+  FRNButton: 501d90fc83e4e3efa36ada3fc32494d1df631a5b
   FRNDatePicker: 28086c1c8092614414b4f8b7b3675f3b2a8c9cfc
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69

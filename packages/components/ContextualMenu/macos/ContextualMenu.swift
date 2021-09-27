@@ -7,22 +7,40 @@
 
 	@objc(FRNContextualMenu)
 	class ContextualMenu: RCTView {
-
-		@objc public weak var bridge: RCTBridge?
-
-//		override func viewDidMoveToWindow() {
-//			if (reactSuperview() != nil) {
-//				showContextualMenu()
+		
+//		override var frame: NSRect
+//		{
+//			get {
+//				return .zero
+//			}
+//			set {
+//				//no op
 //			}
 //		}
+		
+		@objc public var targetViewTag: NSNumber = 0 {
+			didSet {
+				print(targetViewTag)
+				targetView = bridge?.uiManager.view(forReactTag: targetViewTag)
+				
+			}
+		}
+		
+		@objc public weak var bridge: RCTBridge?
+
+		override func viewDidMoveToWindow() {
+			if (reactSuperview() != nil) {
+				showContextualMenu()
+			}
+		}
 		
 		override func draw(_ dirtyRect: NSRect) {
 			showContextualMenu()
 		}
 		
 		private init() {
-			
 			super.init(frame: .zero)
+//			translatesAutoresizingMaskIntoConstraints = false
 		}
 
 		required init?(coder: NSCoder) {
@@ -58,6 +76,10 @@
 			super.reactSetFrame(.zero)
 			self.frame = .zero
 		}
+		
+		// MARK: - Private variables
+
+		private var targetView: NSView?
 
 		// MARK: - Private Methods
 
@@ -119,11 +141,13 @@
 		
 		private func showContextualMenu() {
 			createTestMenu()
-//			if let menu = menu {
-//				NSMenu.popUpContextMenu(menu, with: NSEvent(), for: self)
-//			}
+
 			DispatchQueue.main.async {
-				self.menu?.popUp(positioning: nil, at: NSPoint(x: 0, y: 0), in: self)
+				let view = self.targetView ?? self
+				self.menu?.popUp(positioning: nil, at: NSPoint(x: 0, y: view.frame.height), in: view)
+				//			if let menu = menu {
+				//				NSMenu.popUpContextMenu(menu, with: NSEvent(), for: self)
+				//			}
 			}
 		}
 		

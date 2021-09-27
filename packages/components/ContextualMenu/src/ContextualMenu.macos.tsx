@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { findNodeHandle, View } from 'react-native';
 import {
   contextualMenuName,
   ContextualMenuProps,
@@ -33,7 +33,7 @@ export const CMContext = React.createContext<ContextualMenuContext>({
 export const ContextualMenu = compose<ContextualMenuType>({
   displayName: contextualMenuName,
   usePrepareProps: (userProps: ContextualMenuProps, useStyling: IUseComposeStyling<ContextualMenuType>) => {
-    const { setShowMenu, ...rest } = userProps;
+    const { setShowMenu, target, ...rest } = userProps;
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
     const data = useSelectedKey(null, userProps.onItemClick);
@@ -56,6 +56,10 @@ export const ContextualMenu = compose<ContextualMenuType>({
     const slotProps = mergeSettings<ContextualMenuSlotProps>(styleProps, {
       root: {
         ...rest,
+        targetViewTag: findNodeHandle((target as React.RefObject<View>).current),
+        style: {
+          display: 'none', // The view should take up no space, as it's just a proxy to fire the NSMenu
+        },
       },
     });
 
