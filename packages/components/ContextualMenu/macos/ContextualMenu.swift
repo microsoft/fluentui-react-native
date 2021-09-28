@@ -8,48 +8,12 @@
 	@objc(FRNContextualMenu)
 	class ContextualMenu: RCTView {
 		
-//		override var frame: NSRect
-//		{
-//			get {
-//				return .zero
-//			}
-//			set {
-//				//no op
-//			}
-//		}
-		
-		@objc public var targetViewTag: NSNumber = 0 {
-			didSet {
-				print(targetViewTag)
-				targetView = bridge?.uiManager.view(forReactTag: targetViewTag)
-				
-			}
-		}
-		
 		@objc public weak var bridge: RCTBridge?
-
-		override func viewDidMoveToWindow() {
-			if (reactSuperview() != nil) {
-				showContextualMenu()
+		
+		@objc public var targetViewTag: NSNumber? {
+			didSet {
+				targetView = bridge?.uiManager.view(forReactTag: targetViewTag)
 			}
-		}
-		
-		override func draw(_ dirtyRect: NSRect) {
-			showContextualMenu()
-		}
-		
-		private init() {
-			super.init(frame: .zero)
-//			translatesAutoresizingMaskIntoConstraints = false
-		}
-
-		required init?(coder: NSCoder) {
-			preconditionFailure()
-		}
-		
-		convenience init(bridge: RCTBridge) {
-			self.init()
-			self.bridge = bridge
 		}
 
 		@objc public var OnItemClick: RCTBubblingEventBlock?
@@ -62,24 +26,28 @@
 			}
 		}
 
-		// MARK: RCTComponent Overrides
-		
-		override func insertReactSubview(_ subview: NSView!, at atIndex: Int) {
-			// Do not want to call super (despite NS_REQUIRES_SUPER on base class) since this will cause the ContextualMenu's children to appear within the main component.
-			// Instead we want to add the react subviews to the proxy callout view which is in its own ContextualMenu.
-			proxyView.insertReactSubview(subview, at: atIndex)
-			proxyView.insertSubview(subview, at: atIndex)
+		private init() {
+			super.init(frame: .zero)
+		}
 
+		required init?(coder: NSCoder) {
+			preconditionFailure()
 		}
 		
-		override func reactSetFrame(_ frame: CGRect) {
-			super.reactSetFrame(.zero)
-			self.frame = .zero
+		convenience init(bridge: RCTBridge) {
+			self.init()
+			self.bridge = bridge
 		}
 		
-		// MARK: - Private variables
-
-		private var targetView: NSView?
+		override func viewDidMoveToWindow() {
+			if (reactSuperview() != nil) {
+				showContextualMenu()
+			}
+		}
+		
+//		override func addSubview(_ view: NSView) {
+//			super.addSubview(view)
+//		}
 
 		// MARK: - Private Methods
 
@@ -100,11 +68,6 @@
 					}
 				}
 			}
-
-			// Insert an initial empty item into index 0, since index 0 is never displayed.
-			// We must do this after we assign the tags to the submenuItems to preserve index order.
-			let initialEmptyItem = NSMenuItem()
-			menu.insertItem(initialEmptyItem, at: 0)
 		}
 
 		@objc(sendOnItemClickEvent:)
@@ -128,14 +91,22 @@
 		}
 		
 		private func createTestMenu() {
+			let testmenu = NSMenu(title: "Hello World")
 			// Construct menu
 			let menuItem1 = NSMenuItem(title: "Item 1", action: nil, keyEquivalent: "")
 			let menuItem2 = NSMenuItem(title: "Item 2", action: nil, keyEquivalent: "")
 			let menuItem3 = NSMenuItem(title: "Item 3", action: nil, keyEquivalent: "")
-			let testmenu = NSMenu(title: "Hello World")
 			testmenu.addItem(menuItem1)
 			testmenu.addItem(menuItem2)
 			testmenu.addItem(menuItem3)
+			
+			for view in subviews {
+				let menuItem = NSMenuItem()
+//				menuItem.view = NSButton(checkboxWithTitle: "Hello", target: nil, action: nil)
+				menuItem.view = view
+				menuItem.view?.frame = NSMakeRect(0, 0, 100, 20)
+				testmenu.addItem(menuItem)
+			}
 			menu = testmenu
 		}
 		
@@ -145,13 +116,10 @@
 			DispatchQueue.main.async {
 				let view = self.targetView ?? self
 				self.menu?.popUp(positioning: nil, at: NSPoint(x: 0, y: view.frame.height), in: view)
-				//			if let menu = menu {
-				//				NSMenu.popUpContextMenu(menu, with: NSEvent(), for: self)
-				//			}
 			}
 		}
 		
-		//MARK: - Private Variables
-		
-		private var proxyView: RCTView = RCTView()
+		// MARK: - Private variables
+
+		private var targetView: NSView?
 	}
