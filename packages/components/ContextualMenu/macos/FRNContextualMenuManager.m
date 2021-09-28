@@ -48,6 +48,8 @@ RCT_EXPORT_VIEW_PROPERTY(menu, NSMenu)
 
 RCT_EXPORT_VIEW_PROPERTY(onItemClick, RCTBubblingEventBlock)
 
+RCT_EXPORT_VIEW_PROPERTY(onShow, RCTBubblingEventBlock)
+
 RCT_EXPORT_VIEW_PROPERTY(onDismiss, RCTBubblingEventBlock)
 
 @end

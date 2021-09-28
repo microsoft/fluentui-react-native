@@ -18,6 +18,8 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 
 	@objc public var onItemClick: RCTBubblingEventBlock?
 
+	@objc public var onShow: RCTBubblingEventBlock?
+	
 	@objc public var onDismiss: RCTBubblingEventBlock?
 
 	open override var menu: NSMenu? {
@@ -40,16 +42,29 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 		self.bridge = bridge
 	}
 	
-	override func viewDidMoveToWindow() {
-		if (reactSuperview() != nil) {
-			showContextualMenu()
-		}
+//	override func viewDidMoveToWindow() {
+//		if (reactSuperview() != nil) {
+//			showContextualMenu()
+//		}
+//	}
+	
+	// MARK: - RCTComponent
+	
+	override func insertReactSubview(_ subview: NSView!, at atIndex: Int) {
+		super.insertReactSubview(subview, at: atIndex)
+		NSLog("Inserting Subview!")
+	}
+	
+	override func didUpdateReactSubviews() {
+		super.didUpdateReactSubviews()
+		NSLog(String(reactSubviews().count))
+		showContextualMenu()
 	}
 	
 	// MARK: - NSMenuDelegate
 	
 	func menuDidClose(_ menu: NSMenu) {
-		sendOnDismissMenuEvent()
+		sendOnDismissEvent()
 	}
 
 	// MARK: - Private Methods
@@ -75,9 +90,14 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 		}
 	}
 
-	@objc(sendOnDismissMenuEvent)
-	private func sendOnDismissMenuEvent() {
+	@objc(sendOnDismissEvent)
+	private func sendOnDismissEvent() {
 		onDismiss?([:])
+	}
+	
+	@objc(sendOnShowEvent)
+	private func sendOnShowEvent() {
+		onShow?([:])
 	}
 	
 	private func createTestMenu() {
@@ -90,12 +110,15 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 		testmenu.addItem(menuItem1)
 		testmenu.addItem(menuItem2)
 		testmenu.addItem(menuItem3)
+		let menuItem4 = NSMenuItem()
+		menuItem4.view = NSButton(checkboxWithTitle: "Hello", target: nil, action: nil)
+		testmenu.addItem(menuItem4)
 		
-		for view in subviews {
+		for view in reactSubviews() {
+
 			let menuItem = NSMenuItem()
-//			menuItem.view = NSButton(checkboxWithTitle: "Hello", target: nil, action: nil)
 			menuItem.view = view
-			menuItem.view?.frame = NSMakeRect(0, 0, 100, 20)
+			menuItem.view?.frame = NSMakeRect(0, 0, 150, 15)
 			testmenu.addItem(menuItem)
 		}
 		menu = testmenu
@@ -103,7 +126,14 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 	
 	private func showContextualMenu() {
 		createTestMenu()
-
+		updateMenu()
+		
+		for view in reactSubviews() {
+			NSLog(NSStringFromCGRect(view.frame))
+		}
+		
+		// Popping up an NSMenu is a blocking event, so let's be sure the onShow callback is processed first
+		sendOnShowEvent()
 		DispatchQueue.main.async {
 			let view = self.targetView ?? self
 			self.menu?.popUp(positioning: nil, at: NSPoint(x: 0, y: view.frame.height), in: view)
