@@ -11,6 +11,7 @@ import { TabsProps, TabsState, TabsInfo } from './Tabs.types';
  */
 export const useTabs = (props: TabsProps): TabsInfo => {
   const defaultComponentRef = React.useRef(null);
+  const focusZoneRef = React.useRef(null);
   const { componentRef = defaultComponentRef, selectedKey, getTabId, onTabsClick, defaultSelectedKey, isCircularNavigation, headersOnly, label } = props;
 
   const data = useSelectedKey(selectedKey || defaultSelectedKey || null, onTabsClick);
@@ -31,7 +32,7 @@ export const useTabs = (props: TabsProps): TabsInfo => {
       onTabsClick: data.onKeySelect,
       getTabId: findTabId,
       views: map,
-      focusZoneRef: null,
+      focusZoneRef: focusZoneRef,
     },
     headersOnly: headersOnly ?? false,
     label: !!label,
