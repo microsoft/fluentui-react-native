@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Delete NativeButton",
-  "packageName": "@uifabricshared/theming-ramp",
-  "email": "67026167+chiuam@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

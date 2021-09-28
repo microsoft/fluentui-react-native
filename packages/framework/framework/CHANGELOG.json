@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/framework",
   "entries": [
     {
+      "date": "Tue, 28 Sep 2021 21:08:25 GMT",
+      "tag": "@fluentui-react-native/framework_v0.5.40",
+      "version": "0.5.40",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Delete NativeButton",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "335503904094894a91e53c6de328bf13e13bcc1c",
+            "package": "@fluentui-react-native/framework"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Sep 2021 19:08:16 GMT",
       "tag": "@fluentui-react-native/framework_v0.5.39",
       "version": "0.5.39",

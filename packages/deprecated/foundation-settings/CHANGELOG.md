@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/foundation-settings
 
-This log was last generated on Sat, 07 Aug 2021 00:40:04 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.2
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
 
 ## 0.10.1
 

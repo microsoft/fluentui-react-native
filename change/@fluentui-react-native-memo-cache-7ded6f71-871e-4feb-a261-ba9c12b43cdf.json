@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Delete NativeButton",
-  "packageName": "@fluentui-react-native/memo-cache",
-  "email": "67026167+chiuam@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

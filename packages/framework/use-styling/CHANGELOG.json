@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/use-styling",
   "entries": [
     {
+      "date": "Tue, 28 Sep 2021 21:08:25 GMT",
+      "tag": "@fluentui-react-native/use-styling_v0.6.8",
+      "version": "0.6.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/memo-cache to v1.1.4",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "335503904094894a91e53c6de328bf13e13bcc1c",
+            "package": "@fluentui-react-native/use-styling"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Sep 2021 19:08:16 GMT",
       "tag": "@fluentui-react-native/use-styling_v0.6.7",
       "version": "0.6.7",

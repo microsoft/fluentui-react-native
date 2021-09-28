@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-native-date-picker
 
-This log was last generated on Thu, 26 Aug 2021 04:48:40 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.7
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
 
 ## 0.3.6
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Tue, 28 Sep 2021 21:08:25 GMT",
+      "tag": "@fluentui-react-native/button_v0.20.9",
+      "version": "0.20.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixed \"Height of the Button and Link components increases with adding borderWidth\"",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "3cdd1228e8cf462d1064e32b61bf596b85b010ae",
+            "package": "@fluentui-react-native/button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Sep 2021 19:08:16 GMT",
       "tag": "@fluentui-react-native/button_v0.20.8",
       "version": "0.20.8",
