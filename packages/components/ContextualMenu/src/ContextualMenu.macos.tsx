@@ -33,15 +33,15 @@ export const CMContext = React.createContext<ContextualMenuContext>({
 export const ContextualMenu = compose<ContextualMenuType>({
   displayName: contextualMenuName,
   usePrepareProps: (userProps: ContextualMenuProps, useStyling: IUseComposeStyling<ContextualMenuType>) => {
-    const { setShowMenu, target, ...rest } = userProps;
+    const { setShowMenu, target, onItemClick, onDismiss, ...rest } = userProps;
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
     const data = useSelectedKey(null, userProps.onItemClick);
 
     const dismissCallback = React.useCallback(() => {
-      userProps.onDismiss();
+      onDismiss();
       setShowMenu(false);
-    }, [setShowMenu, userProps.onDismiss]);
+    }, [setShowMenu, onDismiss]);
 
     const state: ContextualMenuState = {
       context: {
@@ -51,15 +51,24 @@ export const ContextualMenu = compose<ContextualMenuType>({
       },
     };
 
+    // reroute the native component's OnItemClick event to Menu's onItemClick
+    const OnItemClickRerouted = (event: any) => {
+      if (onItemClick != null) {
+        onItemClick(event.nativeEvent.key);
+      }
+    };
+
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
     const slotProps = mergeSettings<ContextualMenuSlotProps>(styleProps, {
       root: {
-        ...rest,
         targetViewTag: findNodeHandle((target as React.RefObject<View>).current),
+        onItemClick: OnItemClickRerouted,
+        onDismiss: dismissCallback,
         style: {
           display: 'none', // The view should take up no space, as it's just a proxy to fire the NSMenu
         },
+        ...rest,
       },
     });
 
