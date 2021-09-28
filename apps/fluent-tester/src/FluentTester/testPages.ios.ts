@@ -6,7 +6,6 @@ import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL } from
 import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
-import { NativeButtonTest, HOMEPAGE_NATIVEBUTTON_BUTTON } from './TestComponents/NativeButton';
 import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from './TestComponents/Persona';
 import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from './TestComponents/PersonaCoin';
@@ -36,11 +35,6 @@ export const tests: TestDescription[] = [
     name: 'Button Test',
     component: ButtonTest,
     testPage: HOMEPAGE_BUTTON_BUTTON,
-  },
-  {
-    name: 'Native Button Test',
-    component: NativeButtonTest,
-    testPage: HOMEPAGE_NATIVEBUTTON_BUTTON,
   },
   {
     name: 'Native Date Picker',
