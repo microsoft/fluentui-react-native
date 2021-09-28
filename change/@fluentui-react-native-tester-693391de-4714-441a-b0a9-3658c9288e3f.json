@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add Tabs Experimental for macOS + windows",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
