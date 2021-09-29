@@ -47,6 +47,13 @@ export type BuildSlotProps<TSlotProps, TTokens, TTheme, TOuterProps> = {
   [K in keyof TSlotProps]?: RefinableBuildPropsBase<TSlotProps[K], TTokens, TTheme, TOuterProps> | TSlotProps[K]
 };
 
+/**
+ * Caches and returns the function based on the current keys.
+ *
+ * @param fn Function which does the work of producing props for the tokens, theme, and props provided
+ * @param keys Set of input values the function is dependent on
+ * @returns Cached function
+ */
 function cacheStyleClosure<TProps, TTokens, TTheme, TOuterProps>(
   fn: (tokens: TTokens, theme: TTheme, props: TOuterProps) => TProps,
   keys?: (keyof TTokens | keyof TOuterProps)[],
@@ -66,7 +73,8 @@ function cacheStyleClosure<TProps, TTokens, TTheme, TOuterProps>(
 
 /**
  * Reduce keys to the set that are also part of the mask.
- * @param keys - which token properties are used by this style, this determines the keys to use for caching
+ *
+ * @param keys - which token and prop properties are used by this style, this determines the keys to use for caching
  * @param mask - the set of tokens that are also props
  * @returns An array of keys that are part of the mask to be used as a caching key
  */
@@ -80,8 +88,8 @@ function refineKeys<TTokens, TOuterProps = unknown>(
 /**
  * Standard wrapper for a function that provides props for a component based on tokens and theme.
  *
- * @param fn - function which does the work of producing props for the tokens and theme provided
- * @param keys - which token properties are used by this style, this determines the keys to use for caching
+ * @param fn - function which does the work of producing props for the tokens, theme, and props provided
+ * @param keys - which token and prop properties are used by this style, this determines the keys to use for caching
  */
 export function buildProps<TProps, TTokens, TTheme, TOuterProps = unknown>(
   fn: (tokens: TTokens, theme: TTheme, props?: TOuterProps) => TProps,

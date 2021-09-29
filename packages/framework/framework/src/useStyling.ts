@@ -17,12 +17,6 @@ import { themeHelper } from './themeHelper';
 
 export type BuildProps<TProps, TTokens, TOuterProps = unknown> = BuildPropsBase<TProps, TTokens, Theme, TOuterProps>;
 
-/**
- * Test
- * @param fn
- * @param keys
- * @returns
- */
 export function buildProps<TProps, TTokens, TOuterProps = unknown>(
   fn: (tokens: TTokens, theme: Theme, props?: TOuterProps) => TProps,
   keys?: (keyof TTokens | keyof TOuterProps)[],
