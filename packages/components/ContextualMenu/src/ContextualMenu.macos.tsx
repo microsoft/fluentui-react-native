@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { findNodeHandle, View } from 'react-native';
+import { findNodeHandle, ImageResolvedAssetSource, Image, View } from 'react-native';
 import {
   contextualMenuName,
   ContextualMenuProps,
@@ -12,13 +12,36 @@ import {
 } from './ContextualMenu.types';
 import { settings } from './ContextualMenu.settings';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
-import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+import { createIconProps, useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
+import { IconProps } from '@fluentui-react-native/icon';
 
 const NativeContextualMenu = ensureNativeComponent('FRNContextualMenu');
+
+// Represents the props available on a native NSMenuItem
+// https://developer.apple.com/documentation/appkit/nsmenuitem
+type NativeMenuItem = {
+  title: string;
+  image: ImageResolvedAssetSource;
+  enabled: boolean;
+  tooltip: string;
+  identifier: string;
+  hasSubmenu: boolean;
+  submenu: NativeMenuItem[];
+};
+
+function extractResolvedImageSourceFromIcon(icon?: number | string | IconProps): ImageResolvedAssetSource {
+  if (!icon) {
+    return null;
+  }
+  // GH #931, only PNG images are supported on the macOS MenuButton
+  const iconProps = createIconProps(icon);
+  const imageSource = Image.resolveAssetSource(iconProps?.rasterImageSource?.src);
+  return imageSource;
+}
 
 export const CMContext = React.createContext<ContextualMenuContext>({
   selectedKey: null,
@@ -86,9 +109,26 @@ export const ContextualMenu = compose<ContextualMenuType>({
     if (renderData.state == undefined) {
       return null;
     }
+
+    const menu: NativeMenuItem[] = React.Children.map(children, (child) => {
+      if (React.isValidElement(child)) {
+        const imageSource = child.props.icon ? extractResolvedImageSourceFromIcon(child.props.icon) : null;
+
+        return {
+          title: child.props.text,
+          ...(imageSource && { image: imageSource }), // Only pass in the prop if defined
+          enabled: !child.props.disabled,
+          tooltip: child.props.tooltip,
+          identifier: child.props.itemKey,
+          hasSubmenu: child.props.hasSubmenu,
+          submenu: null,
+        };
+      }
+    });
+
     return (
       <CMContext.Provider value={renderData.state.context}>
-        <Slots.root>{children}</Slots.root>
+        <Slots.root menu={menu}>{children}</Slots.root>
       </CMContext.Provider>
     );
   },
