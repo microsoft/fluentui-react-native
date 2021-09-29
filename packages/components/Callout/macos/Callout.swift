@@ -91,6 +91,8 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
     override func reactSetFrame(_ frame: CGRect) {
       super.reactSetFrame(frame)
       updateCalloutFrameToTargetFrame()
+		self.frame = .zero
+
     }
 
     /// We never want this view to be visible, its a placeholder for the react component hierarchy.
