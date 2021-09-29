@@ -15,13 +15,19 @@ import {
 import { Theme } from '@fluentui-react-native/theme-types';
 import { themeHelper } from './themeHelper';
 
-export type BuildProps<TProps, TTokens> = BuildPropsBase<TProps, TTokens, Theme>;
+export type BuildProps<TProps, TTokens, TOuterProps = unknown> = BuildPropsBase<TProps, TTokens, Theme, TOuterProps>;
 
-export function buildProps<TProps, TTokens>(
-  fn: (tokens: TTokens, theme: Theme) => TProps,
+/**
+ * Test
+ * @param fn
+ * @param keys
+ * @returns
+ */
+export function buildProps<TProps, TTokens, TOuterProps = unknown>(
+  fn: (tokens: TTokens, theme: Theme, props?: TOuterProps) => TProps,
   keys?: (keyof TTokens)[],
-): BuildProps<TProps, TTokens> {
-  return buildPropsBase<TProps, TTokens, Theme>(fn, keys);
+): BuildProps<TProps, TTokens, TOuterProps> {
+  return buildPropsBase<TProps, TTokens, Theme, TOuterProps>(fn, keys);
 }
 
 export type TokensFromTheme<TTokens> = TokensFromThemeBase<TTokens, Theme>;

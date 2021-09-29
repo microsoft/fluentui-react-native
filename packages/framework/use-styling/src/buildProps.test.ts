@@ -21,11 +21,11 @@ describe('props function tests', () => {
   test('basic build props function caches as expected', () => {
     const cache = getMemoCache();
     const styleFn = buildProps(munge, ['a', 'b']);
-    const p1 = styleFn({ a: 'a', b: 'b', c: 'c' }, theme, cache);
-    expect(styleFn({ a: 'a', b: 'b', c: 'foo' }, theme, cache)).toBe(p1);
-    const p2 = styleFn({ a: 'b', b: 'b' }, theme, cache);
+    const p1 = styleFn({ a: 'a', b: 'b', c: 'c' }, theme, undefined, cache);
+    expect(styleFn({ a: 'a', b: 'b', c: 'foo' }, theme, undefined, cache)).toBe(p1);
+    const p2 = styleFn({ a: 'b', b: 'b' }, theme, undefined, cache);
     expect(p2).not.toBe(p1);
-    expect(styleFn({ a: 'b', b: 'b', c: 'bar' }, theme, cache)).toBe(p2);
+    expect(styleFn({ a: 'b', b: 'b', c: 'bar' }, theme, undefined, cache)).toBe(p2);
   });
 
   test('build props function refinement works with explicit keys', () => {
@@ -35,12 +35,12 @@ describe('props function tests', () => {
     const t1 = { a: 'a', b: 'b', c: 'c', d: 'd' };
     const t2 = { a: 'a', b: 'b', c: 'foo', d: 'bar' };
 
-    const p1 = styleFn(t1, theme, cache);
-    const p2 = styleFn(t2, theme, cache);
+    const p1 = styleFn(t1, theme, undefined, cache);
+    const p2 = styleFn(t2, theme, undefined, cache);
     expect(p2).not.toBe(p1);
 
-    const rp1 = refinedFn(t1, theme, cache);
-    const rp2 = refinedFn(t2, theme, cache);
+    const rp1 = refinedFn(t1, theme, undefined, cache);
+    const rp2 = refinedFn(t2, theme, undefined, cache);
     expect(rp2).toBe(rp1);
   });
 });
