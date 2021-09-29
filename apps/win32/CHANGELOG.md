@@ -1,8 +1,386 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Fri, 18 Jun 2021 00:38:19 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.1
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
+
+## 0.13.0
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Minor changes
+
+- Added experimental MenuButton (v.kozlova13@gmail.com)
+
+### Patches
+
+- Bumping rex (safreibe@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.43.3 (v.kozlova13@gmail.com)
+
+## 0.12.31
+
+Tue, 14 Sep 2021 19:31:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.43.2 (ruaraki@microsoft.com)
+
+## 0.12.30
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.43.1 (ruaraki@microsoft.com)
+
+## 0.12.29
+
+Fri, 10 Sep 2021 21:30:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.43.0 (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.12.28
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.42.2 (ruaraki@microsoft.com)
+
+## 0.12.27
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.42.1 (ruaraki@microsoft.com)
+
+## 0.12.26
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.42.0 (v.kozlova13@gmail.com)
+
+## 0.12.25
+
+Tue, 31 Aug 2021 18:48:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.41.0 (chripear@microsoft.com)
+
+## 0.12.24
+
+Fri, 27 Aug 2021 15:48:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.40.1 (krsiler@microsoft.com)
+
+## 0.12.23
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.40.0 (ruaraki@microsoft.com)
+
+## 0.12.22
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.12.21
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.39.0 (v.kozlova13@gmail.com)
+
+## 0.12.20
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.38.0 (dake.3601@gmail.com)
+
+## 0.12.19
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.37.2 (email not defined)
+
+## 0.12.18
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.37.1 (ruaraki@microsoft.com)
+
+## 0.12.17
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.37.0 (67026167+chiuam@users.noreply.github.com)
+
+## 0.12.16
+
+Tue, 17 Aug 2021 20:02:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.36.0 (dake.3601@gmail.com)
+
+## 0.12.15
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.12.14
+
+Fri, 13 Aug 2021 14:54:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.8 (amdingler694@gmail.com)
+
+## 0.12.13
+
+Fri, 13 Aug 2021 09:05:57 GMT
+
+### Patches
+
+- Update apple native code and build flags (sanajmi@microsoft.com)
+
+## 0.12.12
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.6 (ruaraki@microsoft.com)
+
+## 0.12.11
+
+Wed, 11 Aug 2021 18:38:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.5 (chripear@microsoft.com)
+
+## 0.12.10
+
+Wed, 11 Aug 2021 04:24:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.4 (chripear@microsoft.com)
+
+## 0.12.9
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.3 (ruaraki@microsoft.com)
+
+## 0.12.8
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.2 (ruaraki@microsoft.com)
+
+## 0.12.7
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.1 (ruaraki@microsoft.com)
+
+## 0.12.6
+
+Sat, 07 Aug 2021 02:50:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.35.0 (patboyd@microsoft.com)
+
+## 0.12.5
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.12.4
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.34.5 (ruaraki@microsoft.com)
+
+## 0.12.3
+
+Fri, 06 Aug 2021 20:26:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.34.4 (ruaraki@microsoft.com)
+
+## 0.12.2
+
+Wed, 04 Aug 2021 18:11:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.34.2 (lehon@microsoft.com)
+
+## 0.12.1
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- move experimental Text to be written as compressible (jasonmo@microsoft.com)
+
+## 0.12.0
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Minor changes
+
+- radio group on macos (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.34.0 (67026167+chiuam@users.noreply.github.com)
+
+## 0.11.13
+
+Wed, 04 Aug 2021 00:59:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.33.8 (sanajmi@microsoft.com)
+
+## 0.11.12
+
+Tue, 03 Aug 2021 23:48:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.33.7 (jasonmo@microsoft.com)
+
+## 0.11.11
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.33.6 (jasonmo@microsoft.com)
+
+## 0.11.10
+
+Fri, 30 Jul 2021 19:17:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.33.5 (email not defined)
+
+## 0.11.9
+
+Thu, 29 Jul 2021 17:53:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.33.4 (jasonmo@microsoft.com)
+
+## 0.11.8
+
+Tue, 27 Jul 2021 22:17:20 GMT
+
+### Patches
+
+- add compressible utility and a snapshot test / demo to framework (jasonmo@microsoft.com)
+
+## 0.11.7
+
+Mon, 26 Jul 2021 20:41:04 GMT
+
+### Patches
+
+- add new use-slot package, move framework to consume that package (jasonmo@microsoft.com)
+
+## 0.11.6
+
+Sun, 25 Jul 2021 16:30:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.33.1 (email not defined)
+
+## 0.11.4
+
+Fri, 23 Jul 2021 17:28:27 GMT
+
+### Patches
+
+- Fix @types/react to be less than 16.14.0 since our react version is less than 16.14 (email not defined)
+
+## 0.11.3
+
+Fri, 23 Jul 2021 08:20:11 GMT
+
+### Patches
+
+- Added support of tokens to the MenuButton (v.kozlova13@gmail.com)
+
+## 0.11.1
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
+
+## 0.11.0
+
+Wed, 21 Jul 2021 21:46:12 GMT
+
+### Minor changes
+
+- Add dismiss behaviors and appropriate test page changes (ppatboyd@outlook.com)
+- Add more features to contextualMenu test (lehon@microsoft.com)
 
 ## 0.10.7
 

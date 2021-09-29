@@ -4,7 +4,7 @@
 
 This guide assumes you:
 
-- Have read through the [React Native Docs](https://reactnative.dev/docs/). In particular:
+- Have read through the [React Native Docs](https://reactnative.dev/docs/getting-started). In particular:
   - Understand classes vs function components (we use the latter) and [hooks](https://reactjs.org/docs/hooks-intro.html). Here's a good [video](https://www.youtube.com/watch?v=dpw9EHDh2bM) that explains function components and hooks for traditional OOP developers.
   - Understand [Native Modules](https://reactnative.dev/docs/native-modules-ios).
 - Have a local fork of FluentUI React Native and have run the test app.
@@ -15,7 +15,7 @@ There are some specific quirks to this repository that one should be familiar wi
 
 ### Old framework vs new framework (Compose V2)
 
-There's [documentation](https://github.com/microsoft/fluentui-react-native/tree/master/packages/components) for how to author a control, specifically with the two frameworks [foundation-compose](https://github.com/microsoft/fluentui-react-native/tree/master/packages/framework/foundation-compose) and [foundation-composable](https://github.com/microsoft/fluentui-react-native/tree/master/packages/framework/foundation-composable). Since that documentation was written, we have written a new component framework (PR's [here](https://github.com/microsoft/fluentui-react-native/pull/335) and [here](https://github.com/microsoft/fluentui-react-native/pull/400)) at `packages/experimental/framework` that is simpler/easier to use, and is the new preferred way to create components. Components that use this new framework are located at `packages/experimental` and are copies of the controls located at `packages/components` which still uses the old frameworks. Any new components should use the new framework. The old documentation is still good to read, specifically for using foundation-compose, as a lot of it applies to the new component.
+There's [documentation](https://github.com/microsoft/fluentui-react-native/tree/master/packages/components) for how to author a control, specifically with the two frameworks [foundation-compose](https://github.com/microsoft/fluentui-react-native/tree/master/packages/deprecated/foundation-compose) and [foundation-composable](https://github.com/microsoft/fluentui-react-native/tree/master/packages/deprecated/foundation-composable). Since that documentation was written, we have written a new component framework (PR's [here](https://github.com/microsoft/fluentui-react-native/pull/335) and [here](https://github.com/microsoft/fluentui-react-native/pull/400)) at `packages/experimental/framework` that is simpler/easier to use, and is the new preferred way to create components. Components that use this new framework are located at `packages/experimental` and are copies of the controls located at `packages/components` which still uses the old frameworks. Any new components should use the new framework. The old documentation is still good to read, specifically for using foundation-compose, as a lot of it applies to the new component.
 
 There are two directories where components exist, the normal `packages/components` and `packages/experimental`. In general, the `experimental` directory is where components and frameworks we are iterating on get placed.
 
@@ -31,7 +31,7 @@ One caveat is that if a component simply wraps a single native component, then i
 
 ### Tokens
 
-FluentUI React Native (and eventually all of FluentUI) uses the design token system to handle styling / customization. There's extended [documentation](https://github.com/microsoft/fluentui-react-native/blob/master/packages/framework/foundation-tokens/README.md) about this in the repo, but here is a simple overview.
+FluentUI React Native (and eventually all of FluentUI) uses the design token system to handle styling / customization. There's extended [documentation](https://github.com/microsoft/fluentui-react-native/blob/master/packages/deprecated/foundation-tokens/README.md) about this in the repo, but here is a simple overview.
 
 **Tokens** are things you set at design time, via theme, or via customizing the control. An example might be "brandColor", where each app has it's own color token it sets on all if its controls.
 
@@ -44,7 +44,7 @@ Tokens help us achieve simpler customization for complex higher order components
 
 This section covers creating and adding a new component package to FluentUI React Native's monorepo. If you are instead working on an existing component and adding a native module, skip to the next two sections.
 
-Most components should use the compose framework as it offers the comprehensive set of patterns like tokens and slots, but if you're creating a simple component that doesn't require those patterns, there's a lighter pattern called [stagedComponent](https://github.com/microsoft/fluentui-react-native/blob/master/packages/experimental/use-slots/src/stagedComponent.ts). The stagedComponent pattern splits up the render function into two stages. Stage 1 handles building props and hook calls (best to separate the hook calls from the render tree since they rely on call order). Stage 2 returns the actual element tree, any conditional branching should happen here (Icon is a good example of using stagedCompoenent).
+Most components should use the compose framework as it offers the comprehensive set of patterns like tokens and slots, but if you're creating a simple component that doesn't require those patterns, there's a lighter pattern called [stagedComponent](https://github.com/microsoft/fluentui-react-native/blob/master/packages/framework/use-slot/src/stagedComponent.ts). The stagedComponent pattern splits up the render function into two stages. Stage 1 handles building props and hook calls (best to separate the hook calls from the render tree since they rely on call order). Stage 2 returns the actual element tree, any conditional branching should happen here (Icon is a good example of using stagedCompoenent).
 
 1. Create a new directory in of these two locations, depending on your component:
 
@@ -70,9 +70,12 @@ Most components should use the compose framework as it offers the comprehensive 
 ### Adding a new test for your component to the test app
 
 1. In FluentTester (our test app), we'll need to add an test component. The test components are located under `fluentui-react-native/apps/fluent-tester/src/FluentTester/TestComponents`.
-1. Make a subdirectory for your new component at this path, as well as adding an entry for your test in `Tests.tsx` and `Tests.<platform>.tsx`
+1. Make a subdirectory for your new component at this path, as well as adding an entry for your test in `testPages.tsx` and `testPages.<platform>.tsx`
 1. Create your tests in this new subdirectory. Pattern matching off an existing control's tests will greatly help.
-1. If you're component contains a native module, you will also need to add the path to your component's `podspec` (that we created earlier) in your test app's Podfile. This extra step is due to the fact that FluentTester has separate platform test apps that each share a common JS package. The react native community CLI does not support [autolinking transitive dependencies](https://github.com/react-native-community/cli/issues/1347), so we need to add it manually here.
+1. If your component contains a native module, you will also need to add the path to your component's `podspec` (that we created earlier) in your test app's Podfile. This extra step is due to the fact that FluentTester has separate platform test apps that each share a common JS package. The react native community CLI does not support [autolinking transitive dependencies](https://github.com/react-native-community/cli/issues/1347), so we need to add it manually here.
+1. Add your new module as a dependency in `apps/fluent-tester/package.json` and run `yarn && yarn build` from the root folder.
+   1. If your component has native apple code, run `pod install` from the corresponding macOS or iOS test app src folder (`apps/macos/src` or `apps/ios/src` respectively).
+1. Run the test app and you should see your new test!
 
 ## Adding native code to your new component
 
@@ -135,12 +138,36 @@ To add a native module that wraps a FluentUI Apple control:
    - We specify `MicrosoftFluentUI` as dependency, which ensures the source code for FluentUI Apple is pulled in while compiling this component. Consider using a subspec (i.e `MicrosoftFluentUI/Avatar_ios`) if possible.
 1. Create the `ios/` and `macos/` subdirectories (whichever platforms you need) in your components directory
 1. Inside each new directory you just created, you will have at a minimum of 3 files (2 if you skip Swift and only use objective c)
-   1. `<new-component>-Bridging-Header.h`
-      - This file allows your swift files to import/read React Native objective C headers. At a minimum, we need `<React/RCTViewManager.h>`
+   1. `FRN<new-component>ViewManager.h / m`
+      - This is the Objective-C file needed because Swift does not support macros and React Native requires them to map JS props to the native properties of the control. (Macros like `RCT_EXPORT_VIEW_PROPERTY` and `RCT_EXPORT_METHOD`). The .h file should at the minumum import `<React/RCTViewManager.h>`
    1. `<new-component>ViewManager.swift`
       - This Swift file imports FluentUI Apple, and creates a subclass of RCTViewManager to instantiate and return your FluentUI Apple control. Objective-C methods like `requiresMainQueueSetup` and `constantsToExport` can be overridden here. It's important to note that in order for properties and methods to be available to React Native, they must add the `@objc` decorator to it's declaration.
-   1. `MSF<new-component>ViewManager.m`
-      - This is an extra Objective-C file needed because Swift does not support macros and React Native requires them to map JS props to the native properties of the control. (Macros like `RCT_EXPORT_VIEW_PROPERTY` and `RCT_EXPORT_METHOD`)/
+
+## Create new native Windows components
+
+This section is specifically focused on creating new Windows components using React Native for Windows.
+
+If you are creating a new component from scratch, you have the most leeway to design your API. In general, you will probably want to expose each property from the native WinUI control as either a token or prop (or both) to JS.
+
+To add a native Windows module:
+
+1. Follow [these instructions](https://microsoft.github.io/react-native-windows/docs/native-modules-setup#creating-a-new-native-module-library-project) for creating a new C++/WinRT native windows module library. Complete all steps through the end of [Making your module ready for consumption in an app](https://microsoft.github.io/react-native-windows/docs/native-modules-setup#making-your-module-ready-for-consumption-in-an-app).
+   - When creating Views and ViewManagers for your module, Windows components such as Expander and Windows modules outside of the FluentUI React Native repository such as the [`datetimepicker`](https://github.com/react-native-datetimepicker/datetimepicker/tree/master/windows/DateTimePickerWindows) are helpful resources
+2. Follow the steps for [creating a new component](#creating-a-new-component) in FluentUI React Native.
+   - Other Windows components such as the Expander will be helpful with this step.
+3. Copy the `windows` folder from the local native component library created in Step 1 into the root of the new componenet's directory.
+4. Testing the component locally
+   1. Follow steps for Option 1 of [testing the module](https://microsoft.github.io/react-native-windows/docs/native-modules-setup#testing-the-module-before-it-gets-published)
+      - Be sure to run the autolinking command from the component's root directory (`npx react-native autolink-windows`)
+   2. Check that the NuGet packages for the test application and component line up. i.e. If the component uses WinUI 2.6, the test application should as well.
+      - Right-click on the solution within VS. Select `Manage NuGet Packages for Solution…`. Look at differences under the consolidate tab.
+      - After this step, you may need to remove unused references for .xcsproj files
+   3. Add your native module references within the `App.js` file.
+      - `Import { NewComponent } from @fluentui-react-native/experimental-<new-component>;`
+   4. Start metro via command line
+      - Navigate to windows folder (`packages\experimental\<new-component>\windows`)
+      - Run `yarn start`
+   5. Run application
 
 ## Creating a pull request
 

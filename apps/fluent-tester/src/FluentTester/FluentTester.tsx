@@ -12,10 +12,10 @@ import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
 
 // uncomment the below lines to enable message spy
-/*
+/**
 import MessageQueue from 'react-native/Libraries/BatchedBridge/MessageQueue';
 MessageQueue.spy(true);
-*/
+ */
 
 const EmptyComponent: React.FunctionComponent = () => {
   return <RNText style={fluentTesterStyles.noTest}>Select a component from the left.</RNText>;
@@ -83,26 +83,23 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     default: View,
   });
 
-  const Header: React.FunctionComponent<{}> = () => {
+  const Header: React.FunctionComponent = () => {
     const theme = useTheme();
 
     return (
       <View style={fluentTesterStyles.header}>
-        <Text
-          style={[fluentTesterStyles.testHeader]}
-          variant="heroLargeSemibold"
-          color={theme.host.palette?.TextEmphasis}
-          testID={BASE_TESTPAGE}
-        >
+        <Text style={[fluentTesterStyles.testHeader]} variant="heroLargeSemibold" color={theme.host.palette?.TextEmphasis}>
           ⚛ FluentUI Tests
         </Text>
+        {/* Workaround for testID prop on text component affecting text size */}
+        <Text testID={BASE_TESTPAGE}> </Text>
         <ThemePickers />
       </View>
     );
   };
 
   // iOS needs a software back button, which is shown on a newline along with the ThemePickers
-  const MobileHeader: React.FunctionComponent<{}> = () => {
+  const MobileHeader: React.FunctionComponent = () => {
     const theme = useTheme();
 
     return (
@@ -118,7 +115,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
         <View style={fluentTesterStyles.header}>
           {/* on iOS, display a back Button */}
           <Button
-            ghost
+            subtle
             content="‹ Back"
             style={{ alignSelf: 'flex-start', display: Platform.OS === 'ios' ? 'flex' : 'none' }}
             onClick={onBackPress}
@@ -133,7 +130,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const isTestListVisible = !enableSinglePaneView || (enableSinglePaneView && onTestListView);
   const isTestSectionVisible = !enableSinglePaneView || (enableSinglePaneView && !onTestListView);
 
-  const TestList: React.FunctionComponent<{}> = () => {
+  const TestList: React.FunctionComponent = () => {
     return (
       <View style={fluentTesterStyles.testList}>
         <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
@@ -156,7 +153,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     );
   };
 
-  const MobileTestList: React.FunctionComponent<{}> = () => {
+  const MobileTestList: React.FunctionComponent = () => {
     return (
       <View style={{ ...mobileStyles.testList, display: isTestListVisible ? 'flex' : 'none' }}>
         <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
@@ -186,7 +183,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     );
   };
 
-  const TestComponentView: React.FunctionComponent<{}> = () => {
+  const TestComponentView: React.FunctionComponent = () => {
     return (
       <ScrollView style={fluentTesterStyles.testSection}>
         <TestComponent />
@@ -194,7 +191,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     );
   };
 
-  const MobileTestComponentView: React.FunctionComponent<{}> = () => {
+  const MobileTestComponentView: React.FunctionComponent = () => {
     return (
       <View style={{ ...mobileStyles.testSection, display: isTestSectionVisible ? 'flex' : 'none' }}>
         <ScrollView>
@@ -204,7 +201,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     );
   };
 
-  const TesterContent: React.FunctionComponent<{}> = () => {
+  const TesterContent: React.FunctionComponent = () => {
     return (
       <View style={{ flex: 1 }}>
         {enableSinglePaneView ? <MobileHeader /> : <Header />}

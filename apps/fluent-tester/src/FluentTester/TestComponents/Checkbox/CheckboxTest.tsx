@@ -10,12 +10,17 @@ function onChangeUncontrolled(isChecked: boolean) {
   console.log(isChecked);
 }
 
-const basicCheckbox: React.FunctionComponent<{}> = () => {
+const basicCheckbox: React.FunctionComponent = () => {
   return (
     <View>
       <Checkbox label="Unchecked checkbox (undefined)" onChange={onChangeUncontrolled} />
       <Checkbox label="Unchecked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked={false} />
-      <Checkbox label="Checked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked={true} ariaLabel="Hello there" />
+      <Checkbox
+        label="Checked checkbox (uncontrolled)"
+        onChange={onChangeUncontrolled}
+        defaultChecked={true}
+        accessibilityLabel="Hello there"
+      />
       <Checkbox label="Disabled checkbox" onChange={onChangeUncontrolled} defaultChecked={false} disabled={true} />
       <Checkbox label="Disabled checked checkbox" onChange={onChangeUncontrolled} defaultChecked={true} disabled={true} />
       <Checkbox label="Checkbox will display a tooltip" onChange={onChangeUncontrolled} tooltip="This is a tooltip" />
@@ -23,7 +28,7 @@ const basicCheckbox: React.FunctionComponent<{}> = () => {
   );
 };
 
-const otherCheckbox: React.FunctionComponent<{}> = () => {
+const otherCheckbox: React.FunctionComponent = () => {
   const [isCheckedControlled1, setCheckedControlled1] = React.useState(false);
   const onChangeControlled1 = React.useCallback((checked) => {
     setCheckedControlled1(checked);
@@ -47,7 +52,7 @@ const otherCheckbox: React.FunctionComponent<{}> = () => {
   );
 };
 
-const tokenCheckbox: React.FunctionComponent<{}> = () => {
+const tokenCheckbox: React.FunctionComponent = () => {
   const CircularCheckbox = Checkbox.customize({ tokens: { borderRadius: 50 } });
 
   const CircleColorCheckbox = Checkbox.customize({
@@ -154,7 +159,7 @@ const checkboxSections: TestSection[] = [
   },
 ];
 
-export const CheckboxTest: React.FunctionComponent<{}> = () => {
+export const CheckboxTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',
@@ -166,5 +171,5 @@ export const CheckboxTest: React.FunctionComponent<{}> = () => {
   const description =
     'Checkboxes give people a way to select one or more items from a group, or switch between two mutually exclusive options (checked or unchecked, on or off).';
 
-  return <Test name="Checkbox Test" description={description} sections={checkboxSections} status={status}></Test>;
+  return <Test name="Checkbox Test" description={description} sections={checkboxSections} status={status} />;
 };

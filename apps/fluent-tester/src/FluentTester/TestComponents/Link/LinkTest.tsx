@@ -6,7 +6,7 @@ import { stackStyle } from '../Common/styles';
 import { LINK_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
-const links: React.FunctionComponent<{}> = () => {
+const links: React.FunctionComponent = () => {
   const doPress = (): void => {
     Alert.alert('Alert.', 'You have been alerted.');
   };
@@ -27,7 +27,7 @@ const linkSections: TestSection[] = [
   },
 ];
 
-export const LinkTest: React.FunctionComponent<{}> = () => {
+export const LinkTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',

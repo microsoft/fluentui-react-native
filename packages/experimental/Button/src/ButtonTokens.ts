@@ -1,8 +1,7 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
-import { ButtonTokens } from '.';
-
-export const buttonStates: (keyof ButtonTokens)[] = ['fluid', 'primary', 'ghost', 'hovered', 'focused', 'pressed', 'disabled'];
+import { ButtonTokens } from './Button.types';
+import { shadowStyleFromGlobalToken } from './shadowStyle';
 
 export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) =>
   ({
@@ -17,61 +16,97 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
     fluid: {
       width: '100%',
     },
-    disabled: {
-      backgroundColor: t.colors.buttonDisabledBackground,
-      color: t.colors.buttonDisabledContent,
-      borderColor: t.colors.buttonDisabledBorder,
-      iconColor: t.colors.buttonDisabledIcon,
-    },
-    hovered: {
-      backgroundColor: t.colors.buttonHoveredBackground,
-      color: t.colors.buttonHoveredContent,
-      borderColor: t.colors.buttonHoveredBorder,
-      iconColor: t.colors.buttonHoveredIcon,
-    },
-    pressed: {
-      backgroundColor: t.colors.buttonPressedBackground,
-      color: t.colors.buttonPressedContent,
-      borderColor: t.colors.buttonPressedBorder,
-      iconColor: t.colors.buttonPressedIcon,
-    },
-    focused: {
-      backgroundColor: t.colors.buttonFocusedBackground,
-      color: t.colors.buttonFocusedContent,
-      borderColor: t.colors.buttonFocusedBorder,
-      icon: t.colors.buttonFocusedIcon,
-    },
-    primary: {
-      backgroundColor: t.colors.brandBackground,
-      color: t.colors.brandContent,
-      borderColor: t.colors.brandBorder,
-      iconColor: t.colors.brandIcon,
+    fab: {
+      borderRadius: 100, // big number for always rounded corners
+      ...shadowStyleFromGlobalToken(8),
+      // For large size
+      minHeight: 56,
+      minWidth: 56,
+      // coloring same as primary
+      backgroundColor: t.colors.brandedBackground,
+      color: t.colors.brandedContent,
+      borderColor: t.colors.brandedBorder,
+      iconColor: t.colors.brandedIcon,
       disabled: {
-        backgroundColor: t.colors.brandDisabledBackground,
-        color: t.colors.brandDisabledContent,
-        borderColor: t.colors.brandDisabledBorder,
-        iconColor: t.colors.brandDisabledIcon,
+        backgroundColor: t.colors.brandedDisabledBackground,
+        color: t.colors.brandedDisabledContent,
+        borderColor: t.colors.brandedDisabledBorder,
+        iconColor: t.colors.brandedDisabledIcon,
       },
       hovered: {
-        backgroundColor: t.colors.brandHoveredBackground,
-        color: t.colors.brandHoveredContent,
-        borderColor: t.colors.brandHoveredBorder,
-        iconColor: t.colors.brandHoveredIcon,
+        backgroundColor: t.colors.brandedHoveredBackground,
+        color: t.colors.brandedHoveredContent,
+        borderColor: t.colors.brandedHoveredBorder,
+        iconColor: t.colors.brandedHoveredIcon,
       },
       pressed: {
-        backgroundColor: t.colors.brandPressedBackground,
-        color: t.colors.brandPressedContent,
-        borderColor: t.colors.brandPressedBorder,
-        iconColor: t.colors.brandPressedIcon,
+        backgroundColor: t.colors.brandedPressedBackground,
+        color: t.colors.brandedPressedContent,
+        borderColor: t.colors.brandedPressedBorder,
+        iconColor: t.colors.brandedPressedIcon,
       },
       focused: {
-        backgroundColor: t.colors.brandFocusedBackground,
-        color: t.colors.brandFocusedContent,
-        borderColor: t.colors.brandFocusedBorder,
-        iconColor: t.colors.brandFocusedIcon,
+        backgroundColor: t.colors.brandedFocusedBackground,
+        color: t.colors.brandedFocusedContent,
+        borderColor: t.colors.brandedFocusedBorder,
+        iconColor: t.colors.brandedFocusedIcon,
       },
     },
-    ghost: {
+    disabled: {
+      backgroundColor: t.colors.defaultDisabledBackground,
+      color: t.colors.defaultDisabledContent,
+      borderColor: t.colors.defaultDisabledBorder,
+      iconColor: t.colors.defaultDisabledIcon,
+    },
+    hovered: {
+      backgroundColor: t.colors.defaultHoveredBackground,
+      color: t.colors.defaultHoveredContent,
+      borderColor: t.colors.defaultHoveredBorder,
+      iconColor: t.colors.defaultHoveredIcon,
+    },
+    pressed: {
+      backgroundColor: t.colors.defaultPressedBackground,
+      color: t.colors.defaultPressedContent,
+      borderColor: t.colors.defaultPressedBorder,
+      iconColor: t.colors.defaultPressedIcon,
+    },
+    focused: {
+      backgroundColor: t.colors.defaultFocusedBackground,
+      color: t.colors.defaultFocusedContent,
+      borderColor: t.colors.defaultFocusedBorder,
+      icon: t.colors.defaultFocusedIcon,
+    },
+    primary: {
+      backgroundColor: t.colors.brandedBackground,
+      color: t.colors.brandedContent,
+      borderColor: t.colors.brandedBorder,
+      iconColor: t.colors.brandedIcon,
+      disabled: {
+        backgroundColor: t.colors.brandedDisabledBackground,
+        color: t.colors.brandedDisabledContent,
+        borderColor: t.colors.brandedDisabledBorder,
+        iconColor: t.colors.brandedDisabledIcon,
+      },
+      hovered: {
+        backgroundColor: t.colors.brandedHoveredBackground,
+        color: t.colors.brandedHoveredContent,
+        borderColor: t.colors.brandedHoveredBorder,
+        iconColor: t.colors.brandedHoveredIcon,
+      },
+      pressed: {
+        backgroundColor: t.colors.brandedPressedBackground,
+        color: t.colors.brandedPressedContent,
+        borderColor: t.colors.brandedPressedBorder,
+        iconColor: t.colors.brandedPressedIcon,
+      },
+      focused: {
+        backgroundColor: t.colors.brandedFocusedBackground,
+        color: t.colors.brandedFocusedContent,
+        borderColor: t.colors.brandedFocusedBorder,
+        iconColor: t.colors.brandedFocusedIcon,
+      },
+    },
+    subtle: {
       backgroundColor: t.colors.ghostBackground,
       color: t.colors.ghostContent,
       borderColor: t.colors.ghostBorder,

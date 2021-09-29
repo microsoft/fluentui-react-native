@@ -15,7 +15,7 @@ import { Icon } from '@fluentui-react-native/icon';
 export const Button = compose<IButtonType>({
   displayName: buttonName,
   usePrepareProps: (userProps: IButtonProps, useStyling: IUseComposeStyling<IButtonType>) => {
-    const { icon, content, accessibilityLabel = userProps.content, testID, onClick, ...rest } = userProps;
+    const { icon, startIcon, endIcon, content, accessibilityLabel = userProps.content, testID, onClick, ...rest } = userProps;
     // attach the pressable state handlers
     const pressable = useAsPressable({ ...rest, onPress: onClick });
     // set up state
@@ -24,7 +24,8 @@ export const Button = compose<IButtonType>({
         ...pressable.state,
         disabled: !!userProps.disabled,
         content: !!content,
-        icon: !!icon,
+        startIcon: !!startIcon || !!icon,
+        endIcon: !!endIcon,
       },
     };
 
@@ -42,7 +43,8 @@ export const Button = compose<IButtonType>({
         focusable: !state.info.disabled,
       },
       content: { children: content, testID: testID },
-      icon: createIconProps(icon),
+      startIcon: createIconProps(startIcon || icon),
+      endIcon: createIconProps(endIcon),
     });
 
     return { slotProps, state };
@@ -54,9 +56,10 @@ export const Button = compose<IButtonType>({
       <Slots.root>
         <Slots.ripple>
           <Slots.stack>
-            {info.icon && <Slots.icon />}
+            {info.startIcon && <Slots.startIcon />}
             {info.content && <Slots.content />}
             {children}
+            {info.endIcon && <Slots.endIcon />}
           </Slots.stack>
         </Slots.ripple>
       </Slots.root>
@@ -66,15 +69,17 @@ export const Button = compose<IButtonType>({
     root: View,
     ripple: Pressable,
     stack: { slotType: View, filter: filterViewProps },
-    icon: { slotType: Icon as React.ComponentType<object> },
+    startIcon: { slotType: Icon as React.ComponentType },
     content: Text,
+    endIcon: { slotType: Icon as React.ComponentType },
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
     ripple: [],
     stack: [],
-    icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
+    startIcon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
     content: [textTokens, foregroundColorTokens],
+    endIcon: [],
   },
 });
 

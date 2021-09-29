@@ -382,7 +382,7 @@ export class Pressability {
         return cancelable || true;
       },
 
-      onClick: (event: PressEvent): void => {
+      onClick: (event): void => {
         const { onPress } = this._config;
         if (onPress != null) {
           onPress(event);
@@ -465,7 +465,7 @@ export class Pressability {
    * Performs a transition between touchable states and identify any activations
    * or deactivations (and callback invocations).
    */
-  private _performTransitionSideEffects(prevState: TouchState, nextState: TouchState, signal: TouchSignal, event: PressEvent): void {
+  private _performTransitionSideEffects(prevState: TouchState, nextState: TouchState, signal: TouchSignal, event): void {
     if (isTerminalSignal(signal)) {
       this._touchActivatePosition = null;
       this._cancelLongPressDelayTimeout();
@@ -519,7 +519,7 @@ export class Pressability {
     this._cancelPressDelayTimeout();
   }
 
-  private _activate(event: PressEvent): void {
+  private _activate(event): void {
     const { onPressIn } = this._config;
     const touch = getTouchFromPressEvent(event);
     this._touchActivatePosition = {
@@ -531,7 +531,7 @@ export class Pressability {
     }
   }
 
-  private _deactivate(event: PressEvent): void {
+  private _deactivate(event): void {
     const { onPressOut } = this._config;
     if (onPressOut != null) {
       const delayPressOut = normalizeDelay(this._config.delayPressOut);
@@ -553,7 +553,11 @@ export class Pressability {
     if (typeof this._responderID === 'number') {
       UIManager.measure(this._responderID, this._measureCallback);
     } else {
-      this._responderID.measure(this._measureCallback);
+      const measure = (this as any)?._responderID?.measure;
+
+      if (typeof measure === 'function' && this._measureCallback) {
+        (this as any)?._responderID?.measure(this._measureCallback);
+      }
     }
   }
 

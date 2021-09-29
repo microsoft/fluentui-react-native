@@ -12,6 +12,17 @@ import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/toke
 import { buildStackRootStyles, buildStackInnerStyles } from './Stack.tokens';
 import { StyleProp, ViewStyle } from 'react-native';
 
+// Needed for TS to understand that __jsiExecutorDescription exists.
+declare global {
+  /* eslint-disable-next-line @typescript-eslint/no-namespace*/
+  namespace NodeJS {
+    interface Global {
+      __jsiExecutorDescription: any;
+    }
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/ban-types
 function _mixinStyle(style: StyleProp<object> | undefined, mixin: object): StyleProp<object> {
   return style ? [style, mixin] : mixin;
 }
@@ -21,9 +32,9 @@ const _styleKey = 'style';
 const render = (Slots: ISlots<IStackSlotProps>, renderData: IStackRenderData, ...children: React.ReactNode[]): JSX.Element => {
   const { gap, horizontal, wrap } = renderData.state!;
 
-  if (gap && gap > 0 && children) {
+  if (gap && gap > 0 && children && global.__jsiExecutorDescription !== 'ChakraRuntime') {
     const extraStyle: ViewStyle = horizontal ? { marginLeft: gap } : { marginTop: gap };
-    /* eslint-disable @typescript-eslint/ban-ts-ignore */
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore - TODO, fix typing error
     children = React.Children.map(children, (child: React.ReactChild, index: number) => {
       if (React.isValidElement(child) && index > 0) {

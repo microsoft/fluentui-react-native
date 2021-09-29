@@ -1,8 +1,274 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Thu, 24 Jun 2021 21:55:11 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.23
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
+
+## 0.8.22
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Patches
+
+- adding an adapter for macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.8.21
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theming-utils to v0.7.2 (ruaraki@microsoft.com)
+
+## 0.8.20
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.16 (ruaraki@microsoft.com)
+
+## 0.8.19
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.15 (ruaraki@microsoft.com)
+
+## 0.8.18
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.14 (ruaraki@microsoft.com)
+
+## 0.8.17
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.13 (ruaraki@microsoft.com)
+
+## 0.8.16
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.8.15
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- Support tinting PNG icons (sanajmi@microsoft.com)
+
+## 0.8.14
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Export IconSourcesType (sanajmi@microsoft.com)
+
+## 0.8.13
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Fixed icon color for SVG (v.kozlova13@gmail.com)
+
+## 0.8.12
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.10 (ruaraki@microsoft.com)
+
+## 0.8.11
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.9 (ruaraki@microsoft.com)
+
+## 0.8.10
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Fix iconColor not applying for svg icons (ruaraki@microsoft.com)
+
+## 0.8.9
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.8.8
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.7 (ruaraki@microsoft.com)
+
+## 0.8.7
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.6 (ruaraki@microsoft.com)
+
+## 0.8.6
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theming-utils to v0.3.8 (ruaraki@microsoft.com)
+
+## 0.8.5
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.4 (ruaraki@microsoft.com)
+
+## 0.8.4
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.8.3
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.2 (ruaraki@microsoft.com)
+
+## 0.8.2
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.1 (ruaraki@microsoft.com)
+
+## 0.8.1
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- move experimental Text to be written as compressible (jasonmo@microsoft.com)
+
+## 0.8.0
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Minor changes
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/default-theme to v0.7.3 (67026167+chiuam@users.noreply.github.com)
+- Bump @uifabricshared/foundation-compose to v1.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/framework to v0.5.20 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-types to v0.9.3 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/theming-utils to v0.3.3 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/tokens to v0.9.13 (67026167+chiuam@users.noreply.github.com)
+
+## 0.7.19
+
+Tue, 03 Aug 2021 23:48:50 GMT
+
+### Patches
+
+- create useFluentTheme helper (jasonmo@microsoft.com)
+
+## 0.7.18
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.18 (jasonmo@microsoft.com)
+
+## 0.7.17
+
+Fri, 30 Jul 2021 19:17:43 GMT
+
+### Patches
+
+- Quickly fix icon bug (email not defined)
+
+## 0.7.16
+
+Thu, 29 Jul 2021 17:53:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.17 (jasonmo@microsoft.com)
+
+## 0.7.15
+
+Tue, 27 Jul 2021 22:17:20 GMT
+
+### Patches
+
+- add compressible utility and a snapshot test / demo to framework (jasonmo@microsoft.com)
+
+## 0.7.14
+
+Mon, 26 Jul 2021 20:41:04 GMT
+
+### Patches
+
+- add new use-slot package, move framework to consume that package (jasonmo@microsoft.com)
+
+## 0.7.13
+
+Sun, 25 Jul 2021 16:30:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.9.14 (email not defined)
+
+## 0.7.9
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
 
 ## 0.7.4
 

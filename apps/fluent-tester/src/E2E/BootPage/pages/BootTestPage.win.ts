@@ -13,6 +13,7 @@ import { HOMEPAGE_RADIOGROUP_BUTTON } from '../../../FluentTester/TestComponents
 import { HOMEPAGE_SEPARATOR_BUTTON } from '../../../FluentTester/TestComponents/Separator/consts';
 import { HOMEPAGE_SVG_BUTTON } from '../../../FluentTester/TestComponents/Svg/consts';
 import { HOMEPAGE_TEXT_BUTTON } from '../../../FluentTester/TestComponents/Text/consts';
+import { HOMEPAGE_TABS_BUTTON } from '../../../FluentTester/TestComponents/Tabs/consts';
 import { HOMEPAGE_THEME_BUTTON } from '../../../FluentTester/TestComponents/Theme/consts';
 import { BASE_TESTPAGE } from '../../../FluentTester/TestComponents/Common/consts';
 import { By, BasePage } from '../../common/BasePage';
@@ -76,6 +77,10 @@ class BootTestPage extends BasePage {
 
   clickAndGoToTextPage() {
     this.textPage.click();
+  }
+
+  clickAndGoToTabsPage() {
+    this.tabsPage.click();
   }
 
   clickAndGoToThemePage() {
@@ -148,6 +153,10 @@ class BootTestPage extends BasePage {
 
   private get textPage() {
     return By(HOMEPAGE_TEXT_BUTTON);
+  }
+
+  private get tabsPage() {
+    return By(HOMEPAGE_TABS_BUTTON);
   }
 
   private get themePage() {
