@@ -66,7 +66,6 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 	// MARK: - NSMenuDelegate
 
 	// TODO: These seem to be blocked by the menu lifecycle
-
 //	func menuWillOpen(_ menu: NSMenu) {
 //		sendOnShowEvent()
 //	}
@@ -74,6 +73,15 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 //	func menuDidClose(_ menu: NSMenu) {
 //		sendOnDismissEvent()
 //	}
+	
+	func numberOfItems(in menu: NSMenu) -> Int {
+		return reactSubviews().count
+	}
+	
+	func menu(_ menu: NSMenu, update item: NSMenuItem, at index: Int, shouldCancel: Bool) -> Bool {
+		item.view = reactSubviews()[index]
+		return shouldCancel
+	}
 
 	// MARK: - Private Methods
 
@@ -108,42 +116,20 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 		onShow?([:])
 	}
 
-	private func createTestMenu() {
-		let testmenu = NSMenu(title: "Hello World")
-		testmenu.delegate = self
-		// Construct menu
-		let menuItem1 = NSMenuItem(title: "Item 1", action: nil, keyEquivalent: "")
-		let menuItem2 = NSMenuItem(title: "Item 2", action: nil, keyEquivalent: "")
-		let menuItem3 = NSMenuItem(title: "Item 3", action: nil, keyEquivalent: "")
-		testmenu.addItem(menuItem1)
-		testmenu.addItem(menuItem2)
-		testmenu.addItem(menuItem3)
-		let menuItem4 = NSMenuItem()
-		menuItem4.view = NSButton(checkboxWithTitle: "Hello", target: nil, action: nil)
-		testmenu.addItem(menuItem4)
-
-		for view in reactSubviews() {
-			let menuItem = NSMenuItem()
-			menuItem.view = view
-			menuItem.view?.frame = NSMakeRect(0, 0, 150, 15)
-			testmenu.addItem(menuItem)
-		}
-		menu = testmenu
-	}
 
 	private func showContextualMenu() {
-//		createTestMenu()
 		updateMenu()
 
 		for view in reactSubviews() {
 			NSLog(NSStringFromCGRect(view.frame))
 		}
 
-		// Popping up an NSMenu is a blocking event, so let's be sure the onShow callback is processed first
+		// Popping up an NSMenu is a blocking event, so let's be sure the onShow/onDismiss events are processed correctly
 		sendOnShowEvent()
 		DispatchQueue.main.async {
 			let view = self.targetView ?? self
 			self.menu?.popUp(positioning: nil, at: NSPoint(x: 0, y: view.frame.height), in: view)
+			
 			self.sendOnDismissEvent()
 		}
 	}
