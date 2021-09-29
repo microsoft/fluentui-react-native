@@ -25,7 +25,7 @@ export type BuildProps<TProps, TTokens, TOuterProps = unknown> = BuildPropsBase<
  */
 export function buildProps<TProps, TTokens, TOuterProps = unknown>(
   fn: (tokens: TTokens, theme: Theme, props?: TOuterProps) => TProps,
-  keys?: (keyof TTokens)[],
+  keys?: (keyof TTokens | keyof TOuterProps)[],
 ): BuildProps<TProps, TTokens, TOuterProps> {
   return buildPropsBase<TProps, TTokens, Theme, TOuterProps>(fn, keys);
 }

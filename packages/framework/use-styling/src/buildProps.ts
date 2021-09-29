@@ -49,13 +49,31 @@ export type BuildSlotProps<TSlotProps, TTokens, TTheme, TOuterProps> = {
 
 function cacheStyleClosure<TProps, TTokens, TTheme, TOuterProps>(
   fn: (tokens: TTokens, theme: TTheme, props: TOuterProps) => TProps,
-  keys?: (keyof TTokens)[],
+  keys?: (keyof TTokens | keyof TOuterProps)[],
 ): RefinableBuildPropsBase<TProps, TTokens, TTheme, TOuterProps> {
   return (tokens: TTokens, theme: TTheme, props: TOuterProps, cache: GetMemoValue<TProps>) =>
-    cache(() => fn(tokens, theme, props), (keys || []).map(key => tokens[key]))[0];
+    cache(
+      () => fn(tokens, theme, props),
+      (keys || []).map(key => {
+        if (Object.keys(tokens).includes(key as string)) {
+          return tokens[key as keyof TTokens];
+        } else {
+          return props[key as keyof TOuterProps];
+        }
+      }),
+    )[0];
 }
 
-function refineKeys<TTokens>(keys: (keyof TTokens)[], mask?: TokensThatAreAlsoProps<TTokens>): (keyof TTokens)[] {
+/**
+ * Reduce keys to the set that are also part of the mask.
+ * @param keys - which token properties are used by this style, this determines the keys to use for caching
+ * @param mask - the set of tokens that are also props
+ * @returns An array of keys that are part of the mask to be used as a caching key
+ */
+function refineKeys<TTokens, TOuterProps = unknown>(
+  keys: (keyof TTokens | keyof TOuterProps)[],
+  mask?: TokensThatAreAlsoProps<TTokens>,
+): (keyof TTokens | keyof TOuterProps)[] {
   return typeof mask === 'object' && Array.isArray(mask) ? keys.filter(key => mask.findIndex(val => val === key) !== -1) : mask ? keys : [];
 }
 
@@ -67,7 +85,7 @@ function refineKeys<TTokens>(keys: (keyof TTokens)[], mask?: TokensThatAreAlsoPr
  */
 export function buildProps<TProps, TTokens, TTheme, TOuterProps = unknown>(
   fn: (tokens: TTokens, theme: TTheme, props?: TOuterProps) => TProps,
-  keys?: (keyof TTokens)[],
+  keys?: (keyof TTokens | keyof TOuterProps)[],
 ): RefinableBuildPropsBase<TProps, TTokens, TTheme, TOuterProps> {
   // wrap the provided function in the standard caching layer, basing it upon the provided keys
   const result = cacheStyleClosure(fn, keys);
@@ -76,7 +94,7 @@ export function buildProps<TProps, TTokens, TTheme, TOuterProps = unknown>(
   result.refine =
     keys && keys.length > 0
       ? (mask?: TokensThatAreAlsoProps<TTokens>) => {
-          return cacheStyleClosure(fn, refineKeys(keys, mask));
+          return cacheStyleClosure(fn, refineKeys<TTokens, TOuterProps>(keys, mask));
         }
       : undefined;
 
