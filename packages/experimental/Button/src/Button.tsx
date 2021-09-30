@@ -7,9 +7,9 @@ import { stylingSettings, getDefaultSize } from './Button.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from './useButton';
 import { Icon } from '@fluentui-react-native/icon';
-import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
 
-export const buttonLookup = (layer: string, state: ButtonState, userProps: ButtonProps): boolean => {
+export const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonProps): boolean => {
   return (
     state[layer] ||
     userProps[layer] ||
