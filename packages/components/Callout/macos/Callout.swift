@@ -1,6 +1,5 @@
 import Foundation
 import AppKit
-import React
 
 @objc(RCTCalloutView)
 class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
@@ -27,7 +26,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		// The proxy view is a React view that will be hosted in a seperate window.
 		// The child react views added to this view will actually be added to the proxy view.
 		calloutProxyView = RCTView()
-		
+
         super.init(frame: .zero)
     }
 
@@ -153,8 +152,8 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
             calloutProxyView.frame = calloutRect
 
             calloutWindowRootViewController?.view.frame = calloutRect
-			
-			bridge.uiManager.setSize(.zero, for: self)
+
+//			bridge.uiManager.setSize(.zero, for: self)
         }
     }
 
