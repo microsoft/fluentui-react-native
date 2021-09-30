@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/persona-coin",
   "entries": [
     {
+      "date": "Tue, 28 Sep 2021 21:08:25 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.9.19",
+      "version": "0.9.19",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Delete NativeButton",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "335503904094894a91e53c6de328bf13e13bcc1c",
+            "package": "@fluentui-react-native/persona-coin"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Sep 2021 19:08:16 GMT",
       "tag": "@fluentui-react-native/persona-coin_v0.9.18",
       "version": "0.9.18",

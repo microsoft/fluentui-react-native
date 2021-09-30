@@ -11,17 +11,14 @@
   <files>
     <!-- iOS device ship -->
     <file src="DerivedData\Build\Products\Release-iphoneos\FRNAvatar\libFRNAvatar.a" target="Ship-iphoneos"/>
-    <file src="DerivedData\Build\Products\Release-iphoneos\FRNButton\libFRNButton.a" target="Ship-iphoneos"/>
     <file src="DerivedData\Build\Products\Release-iphoneos\FRNDatePicker\libFRNDatePicker.a" target="Ship-iphoneos"/>
 
     <!-- iOS simulator ship -->
     <file src="DerivedData\Build\Products\Release-iphonesimulator\FRNAvatar\libFRNAvatar.a" target="Ship-iphonesimulator"/>
-    <file src="DerivedData\Build\Products\Release-iphonesimulator\FRNButton\libFRNButton.a" target="Ship-iphonesimulator"/>
     <file src="DerivedData\Build\Products\Release-iphonesimulator\FRNDatePicker\libFRNDatePicker.a" target="Ship-iphonesimulator"/>
 
     <!-- macOS ship -->
     <file src="DerivedData\Build\Products\Release\FRNAvatar\libFRNAvatar.a" target="Ship-macosx"/>
-    <file src="DerivedData\Build\Products\Release\FRNButton\libFRNButton.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\FRNMenuButton\libFRNMenuButton.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\FRNRadioButton\libFRNRadioButton.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\RCTFocusZone\libRCTFocusZone.a" target="Ship-macosx"/>

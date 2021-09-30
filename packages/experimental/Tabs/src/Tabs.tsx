@@ -34,6 +34,7 @@ export const Tabs = compose<TabsType>({
     tabPanel: View,
   },
   render: (userProps: TabsProps, useSlots: UseSlots<TabsType>) => {
+    // configure props and state for tabs based on user props
     const tabs = useTabs(userProps);
 
     if (!tabs.state) return null;
@@ -66,14 +67,14 @@ export const Tabs = compose<TabsType>({
           value={tabs.state.context}
         >
           <Slots.root {...mergedProps}>
-            {tabs?.state?.info?.label && <Slots.label key="label">{label}</Slots.label>}
+            {tabs?.state?.label && <Slots.label key="label">{label}</Slots.label>}
             <Slots.container defaultTabbableElement={defaultTabbableElement} isCircularNavigation={isCircularNavigation}>
               <Slots.stack>{children}</Slots.stack>
             </Slots.container>
             <Slots.tabPanel>
-              <TabsContext.Consumer>
-                {(context) => !tabs?.state?.info?.headersOnly && <View>{context.views.get(context.selectedKey)}</View>}
-              </TabsContext.Consumer>
+                <TabsContext.Consumer>
+                  {context => !tabs?.state?.headersOnly && <View>{context.views.get(context.selectedKey)}</View>}
+                </TabsContext.Consumer>
             </Slots.tabPanel>
           </Slots.root>
         </TabsContext.Provider>

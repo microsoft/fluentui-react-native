@@ -10,6 +10,8 @@ export const defaultTabsItemTokens: TokenSettings<TabsItemTokens, Theme> = (t: T
     borderColor: 'transparent',
     indicatorColor: 'transparent',
     variant: 'bodyStandard',
+    borderWidth: 2,
+    borderRadius: 4,
     indicatorMarginHorizontal: 10,
     disabled: {
       color: t.colors.neutralForegroundDisabled,
