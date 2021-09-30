@@ -30,6 +30,7 @@ steps:
     workingDirectory: apps/win32
     displayName: "run E2E Win32 tests"
     condition: succeeded()
+    continueOnError: true
 
   - template: e2e-publish-artifacts.yml
     parameters:

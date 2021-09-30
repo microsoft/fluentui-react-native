@@ -56,5 +56,5 @@ export function processTokens<TSlotProps extends ISlotProps, TTokens extends obj
   });
 
   // return the cache entry
-  return (resolvedSlotProps as unknown) as ISlotProps;
+  return resolvedSlotProps as unknown as ISlotProps;
 }

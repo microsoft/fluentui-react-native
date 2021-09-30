@@ -1,4 +1,5 @@
 import { PartialTheme } from '@fluentui-react-native/theme-types';
+import { getCurrentBrandAliasTokens } from '@fluentui-react-native/win32-theme';
 
 export type OfficeBrand = 'Default' | 'Office' | 'Word' | 'Excel' | 'Powerpoint' | 'Outlook';
 type BrandRampKey =
@@ -120,9 +121,9 @@ const brandColors: BrandRamps = {
   },
 };
 
-export const brandOptions = Object.keys(brandColors).map(brand => ({ label: brand, value: brand }));
+export const brandOptions = Object.keys(brandColors).map((brand) => ({ label: brand, value: brand }));
 
-export const applyBrand = (currentBrand: string): PartialTheme => {
+export const applyBrand = (themeName: string, currentBrand: string): PartialTheme => {
   const ramp = brandColors[currentBrand];
   return ramp
     ? {
@@ -144,12 +145,12 @@ export const applyBrand = (currentBrand: string): PartialTheme => {
           link: ramp.App6,
           linkHovered: ramp.App7,
           linkPressed: ramp.App8,
-          buttonHoveredBackground: ramp.App1,
-          buttonHoveredBorder: ramp.App2,
-          buttonFocusedBackground: ramp.App1,
-          buttonFocusedBorder: ramp.App2,
-          buttonPressedBackground: ramp.App2,
-          buttonPressedBorder: ramp.App5,
+          defaultHoveredBackground: ramp.App1,
+          defaultHoveredBorder: ramp.App2,
+          defaultFocusedBackground: ramp.App1,
+          defaultFocusedBorder: ramp.App2,
+          defaultPressedBackground: ramp.App2,
+          defaultPressedBorder: ramp.App5,
           brandedBackground: ramp.App6,
           brandedBorder: ramp.App7,
           brandedHoveredBackground: ramp.App7,
@@ -158,37 +159,8 @@ export const applyBrand = (currentBrand: string): PartialTheme => {
           brandedFocusedBorder: ramp.App7,
           brandedPressedBackground: ramp.App8,
           brandedPressedBorder: ramp.App7,
-          buttonCheckedHoveredBackground: ramp.App1,
-          neutralForeground2BrandHover: ramp.AppPrimary,
-          neutralForeground2BrandPressed: ramp.AppShade10,
-          neutralForeground2BrandSelected: ramp.AppPrimary,
-          neutralForeground3BrandHover: ramp.AppPrimary,
-          neutralForeground3BrandPressed: ramp.AppShade10,
-          neutralForeground3BrandSelected: ramp.AppPrimary,
-          brandForegroundLink: ramp.AppShade10,
-          brandForegroundLinkHover: ramp.AppShade20,
-          brandForegroundLinkPressed: ramp.AppShade30,
-          brandForegroundLinkSelected: ramp.AppShade10,
-          compoundBrandForeground1: ramp.AppPrimary,
-          compoundBrandForeground1Hover: ramp.AppShade10,
-          compoundBrandForeground1Pressed: ramp.AppShade20,
-          brandForeground1: ramp.AppPrimary,
-          brandForeground2: ramp.AppShade10,
-          brandBackground: ramp.AppPrimary,
-          brandBackgroundHover: ramp.AppShade10,
-          brandBackgroundPressed: ramp.AppShade30,
-          brandBackgroundSelected: ramp.AppShade20,
-          compoundBrandBackground1: ramp.AppPrimary,
-          compoundBrandBackground1Hover: ramp.AppShade10,
-          compoundBrandBackground1Pressed: ramp.AppShade20,
-          brandBackgroundStatic: ramp.AppPrimary,
-          brandBackground2: ramp.AppTint40,
-          neutralStrokeAccessibleSelected: ramp.AppPrimary,
-          brandStroke1: ramp.AppPrimary,
-          brandStroke2: ramp.AppTint40,
-          compoundBrandStroke1: ramp.AppPrimary,
-          compoundBrandStroke1Hover: ramp.AppShade10,
-          compoundBrandStroke1Pressed: ramp.AppShade20,
+          defaultCheckedHoveredBackground: ramp.App1,
+          ...getCurrentBrandAliasTokens(themeName, ramp.AppPrimary),
         },
       }
     : {};

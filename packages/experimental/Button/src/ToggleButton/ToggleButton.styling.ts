@@ -1,31 +1,31 @@
 import { toggleButtonName, ToggleButtonTokens, ToggleButtonSlotProps, ToggleButtonProps } from './ToggleButton.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
-import { buttonStates, defaultButtonTokens } from '../ButtonTokens';
+import { defaultButtonTokens } from '../ButtonTokens';
+import { buttonStates } from '../Button.styling';
 
 export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonSlotProps, ToggleButtonTokens> = {
   tokens: [
     defaultButtonTokens,
-    (t: Theme) =>
-      ({
-        checked: {
-          color: t.colors.buttonCheckedContent,
-          backgroundColor: t.colors.buttonCheckedBackground,
+    (t: Theme): ToggleButtonTokens => ({
+      checked: {
+        color: t.colors.defaultCheckedContent,
+        backgroundColor: t.colors.defaultCheckedBackground,
+        hovered: {
+          color: t.colors.defaultCheckedHoveredContent,
+          backgroundColor: t.colors.defaultCheckedHoveredBackground,
+        },
+        subtle: {
+          color: t.colors.ghostCheckedContent,
+          backgroundColor: t.colors.ghostCheckedBackground,
           hovered: {
-            color: t.colors.buttonCheckedHoveredContent,
-            backgroundColor: t.colors.buttonCheckedHoveredBackground,
-          },
-          ghost: {
-            color: t.colors.ghostCheckedContent,
-            backgroundColor: t.colors.ghostCheckedBackground,
-            hovered: {
-              color: t.colors.ghostCheckedHoveredContent,
-              backgroundColor: t.colors.ghostCheckedHoveredBackground,
-              borderColor: t.colors.ghostCheckedHoveredBorder,
-            },
+            color: t.colors.ghostCheckedHoveredContent,
+            backgroundColor: t.colors.ghostCheckedHoveredBackground,
+            borderColor: t.colors.ghostCheckedHoveredBorder,
           },
         },
-      } as ToggleButtonTokens),
+      },
+    }),
     toggleButtonName,
   ],
   states: ['checked', ...buttonStates],
@@ -47,7 +47,7 @@ export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonS
           ...borderStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', ...borderStyles.keys],
+      ['backgroundColor', 'width', ...borderStyles.keys],
     ),
     content: buildProps(
       (tokens: ToggleButtonTokens, theme: Theme) => ({

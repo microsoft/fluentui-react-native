@@ -1,8 +1,178 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Fri, 13 Aug 2021 09:05:57 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.26.1
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
+
+## 0.26.0
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Minor changes
+
+- Added experimental MenuButton (v.kozlova13@gmail.com)
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.20.8 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/callout to v0.17.22 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/checkbox to v0.13.9 (email not defined)
+- Bump @fluentui-react-native/contextual-menu to v0.10.23 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/focus-trap-zone to v0.7.46 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/focus-zone to v0.7.25 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.46 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/link to v0.14.5 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/menu-button to v0.6.9 (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/persona to v0.11.18 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/persona-coin to v0.9.18 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/pressable to v0.7.22 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/radio-group to v0.13.10 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/separator to v0.10.37 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/tabs to v0.5.4 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/text to v0.10.18 (67026167+chiuam@users.noreply.github.com)
+
+## 0.25.14
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.6.7 (ruaraki@microsoft.com)
+
+## 0.25.13
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.6.6 (v.kozlova13@gmail.com)
+
+## 0.25.12
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/persona to v0.11.15 (ruaraki@microsoft.com)
+
+## 0.25.11
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.6.4 (v.kozlova13@gmail.com)
+
+## 0.25.10
+
+Tue, 31 Aug 2021 18:48:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tabs to v0.4.0 (chripear@microsoft.com)
+
+## 0.25.9
+
+Fri, 27 Aug 2021 15:48:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.6.3 (v.kozlova13@gmail.com)
+
+## 0.25.8
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.20.2 (ruaraki@microsoft.com)
+
+## 0.25.7
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.25.6
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.6.0 (v.kozlova13@gmail.com)
+
+## 0.25.5
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.19.1 (sanajmi@microsoft.com)
+
+## 0.25.4
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.5.0 (dake.3601@gmail.com)
+
+## 0.25.3
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.4.15 (email not defined)
+
+## 0.25.2
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.4.14 (ruaraki@microsoft.com)
+
+## 0.25.1
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu-button to v0.4.13 (ruaraki@microsoft.com)
+
+## 0.25.0
+
+Tue, 17 Aug 2021 20:02:00 GMT
+
+### Minor changes
+
+- Implemented Tabs Control (dake.3601@gmail.com)
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.7.11 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/radio-group to v0.11.12 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/tabs to v0.2.0 (dake.3601@gmail.com)
+- Bump @fluentui-react-native/menu-button to v0.4.12 (sanajmi@microsoft.com)
+
+## 0.24.36
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
 
 ## 0.24.35
 

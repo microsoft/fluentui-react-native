@@ -1,26 +1,7 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
-import { ButtonTokens } from '.';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
-
-export const buttonStates: (keyof ButtonTokens)[] = ['fab', 'fluid', 'primary', 'ghost', 'hovered', 'focused', 'pressed', 'disabled'];
-
-const shadowStyleFromGlobalToken = (shadowToken: number) => {
-  // Grab the second shadow from the global token, as we only support displaying one shadow
-  const shadow = globalTokens.shadow[shadowToken][1];
-  return {
-    // iOS Shadow props
-    shadowColor: shadow.color.substr(0, 7), // split out the color
-    shadowOpacity: Number('0x' + shadow.color.substr(7, 2)) / 255.0, // split out the opacity
-    shadowRadius: shadow.blur,
-    shadowOffset: {
-      width: shadow.x,
-      height: shadow.y,
-    },
-    // Android shadow props
-    elevation: shadowToken,
-  };
-};
+import { ButtonTokens } from './Button.types';
+import { shadowStyleFromGlobalToken } from './shadowStyle';
 
 export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) =>
   ({
@@ -72,28 +53,28 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
       },
     },
     disabled: {
-      backgroundColor: t.colors.buttonDisabledBackground,
-      color: t.colors.buttonDisabledContent,
-      borderColor: t.colors.buttonDisabledBorder,
-      iconColor: t.colors.buttonDisabledIcon,
+      backgroundColor: t.colors.defaultDisabledBackground,
+      color: t.colors.defaultDisabledContent,
+      borderColor: t.colors.defaultDisabledBorder,
+      iconColor: t.colors.defaultDisabledIcon,
     },
     hovered: {
-      backgroundColor: t.colors.buttonHoveredBackground,
-      color: t.colors.buttonHoveredContent,
-      borderColor: t.colors.buttonHoveredBorder,
-      iconColor: t.colors.buttonHoveredIcon,
+      backgroundColor: t.colors.defaultHoveredBackground,
+      color: t.colors.defaultHoveredContent,
+      borderColor: t.colors.defaultHoveredBorder,
+      iconColor: t.colors.defaultHoveredIcon,
     },
     pressed: {
-      backgroundColor: t.colors.buttonPressedBackground,
-      color: t.colors.buttonPressedContent,
-      borderColor: t.colors.buttonPressedBorder,
-      iconColor: t.colors.buttonPressedIcon,
+      backgroundColor: t.colors.defaultPressedBackground,
+      color: t.colors.defaultPressedContent,
+      borderColor: t.colors.defaultPressedBorder,
+      iconColor: t.colors.defaultPressedIcon,
     },
     focused: {
-      backgroundColor: t.colors.buttonFocusedBackground,
-      color: t.colors.buttonFocusedContent,
-      borderColor: t.colors.buttonFocusedBorder,
-      icon: t.colors.buttonFocusedIcon,
+      backgroundColor: t.colors.defaultFocusedBackground,
+      color: t.colors.defaultFocusedContent,
+      borderColor: t.colors.defaultFocusedBorder,
+      icon: t.colors.defaultFocusedIcon,
     },
     primary: {
       backgroundColor: t.colors.brandedBackground,
@@ -125,7 +106,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
         iconColor: t.colors.brandedFocusedIcon,
       },
     },
-    ghost: {
+    subtle: {
       backgroundColor: t.colors.ghostBackground,
       color: t.colors.ghostContent,
       borderColor: t.colors.ghostBorder,

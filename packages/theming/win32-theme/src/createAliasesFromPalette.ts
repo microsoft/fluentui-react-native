@@ -15,9 +15,10 @@ export function createAliasesFromPalette(palette: OfficePalette): Partial<AliasC
     compoundBrandForeground1Pressed: palette.TextEmphasisPressed,
 
     neutralForegroundInverted: palette.TextCtlSubtleSelectionHighlight,
-    neutralForegroundInvertedLink: palette.TextCtlEmphasis,
-    neutralForegroundInvertedLinkHover: palette.TextCtlEmphasisHover,
-    neutralForegroundInvertedLinkPressed: palette.TextCtlEmphasisPressed,
+    neutralForegroundOnBrand: palette.TextCtlEmphasis,
+    neutralForegroundInvertedLink: palette.BkgToggleSwitchOff,
+    neutralForegroundInvertedLinkHover: palette.BkgToggleSwitchOffHover,
+    neutralForegroundInvertedLinkPressed: palette.BkgToggleSwitchOffPressed,
 
     neutralBackground1: palette.Bkg,
     neutralBackground1Hover: palette.BkgHover,
@@ -28,6 +29,8 @@ export function createAliasesFromPalette(palette: OfficePalette): Partial<AliasC
     neutralBackground3: palette.BkgSubtle,
     neutralBackgroundInverted: palette.BkgSelectionHighlight,
     neutralBackgroundDisabled: palette.BkgCtlDisabled,
+
+    neutralStencil1: palette.SliderBuffer,
 
     brandBackground: palette.BkgCtlEmphasis,
     brandBackgroundHover: palette.BkgCtlEmphasisHover,

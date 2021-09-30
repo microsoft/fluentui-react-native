@@ -1,8 +1,104 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Thu, 12 Aug 2021 17:23:44 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.19
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
+
+## 0.10.18
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Patches
+
+- adding an adapter for macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.10.17
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.15 (ruaraki@microsoft.com)
+
+## 0.10.16
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.14 (ruaraki@microsoft.com)
+
+## 0.10.15
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.13 (ruaraki@microsoft.com)
+
+## 0.10.14
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.12 (ruaraki@microsoft.com)
+
+## 0.10.13
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.2 (ruaraki@microsoft.com)
+
+## 0.10.12
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.10.11
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.0 (dake.3601@gmail.com)
+
+## 0.10.10
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.9.19 (ruaraki@microsoft.com)
+
+## 0.10.9
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.9 (ruaraki@microsoft.com)
+
+## 0.10.8
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
 
 ## 0.10.7
 

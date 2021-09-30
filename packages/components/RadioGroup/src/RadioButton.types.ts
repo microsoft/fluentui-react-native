@@ -9,39 +9,41 @@ import { IPressableProps } from '@fluentui-react-native/pressable';
 
 export const radioButtonName = 'RadioButton';
 
-// Props for the radio button
 export interface IRadioButtonProps extends IPressableProps {
-  /*
-   ** The text string for the option
+  /**
+   * The text string for the option
    */
   content: string;
 
-  /*
-   ** A unique key-identifier for each option
+  /**
+   * A unique key-identifier for each option
    */
   buttonKey: string;
 
-  /*
-   ** Whether or not the radio button is selectable
+  /**
+   * Whether or not the radio button is selectable
    */
   disabled?: boolean;
 
-  /*
-   ** An optional string for the Narrator to read for each RadioButton. If not provided, this will be set to the button's content
+  /**
+   * An optional string for the Narrator to read for each RadioButton. If not provided, this will be set to the button's content.
+   * @deprecated Use accessibilityLabel instead.
    */
   ariaLabel?: string;
 
-  /*
-   ** Defines the current radio button's position in the radio group for accessibility purposes. It's recommended to set this value
-   ** if radio buttons are not direct children of radio group. This value is auto-generated if radio buttons are direct children of
-   ** radio group.
+  /**
+   * Defines the current radio button's position in the radio group for accessibility purposes. It's recommended to set this value
+   * if radio buttons are not direct children of radio group. This value is auto-generated if radio buttons are direct children of
+   * radio group.
+   * @deprecated Use accessibilityPositionInSet instead.
    */
   ariaPosInSet?: number;
 
-  /*
-   ** Defines the number of radio buttons in the group for accessibility purposes.It's recommended to set this value if radio
-   ** buttons are not direct children of radio group. This value is auto-generated if radio buttons are direct children of
-   ** radio group.
+  /**
+   * Defines the number of radio buttons in the group for accessibility purposes.It's recommended to set this value if radio
+   * buttons are not direct children of radio group. This value is auto-generated if radio buttons are direct children of
+   * radio group.
+   * @deprecated Use accessibilitySetSize instead.
    */
   ariaSetSize?: number;
 

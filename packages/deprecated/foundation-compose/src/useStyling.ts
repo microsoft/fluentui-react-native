@@ -58,7 +58,7 @@ function useStylingCore<TProps, TSlotProps extends ISlotProps, TTokens extends o
   // finish by processing the tokens and turning IComponentSettings into ISlotProps (this removes things like _overrides)
   return returnAsSlotProps(
     processTokens<TSlotProps, TTokens, ITheme>(
-      (props as unknown) as TTokens,
+      props as unknown as TTokens,
       theme,
       settings as any,
       options.resolvedTokens,
@@ -79,7 +79,7 @@ export function initializeStyling<
   TSlotProps extends ISlotProps,
   TTokens extends object,
   TState extends object,
-  TStatics extends object
+  TStatics extends object,
 >(options: IComposeOptions<TProps, TSlotProps, TTokens, TState, TStatics>): IDefineUseComposeStyling<TProps, TSlotProps, TTokens> {
   // process the tokens and get them ready to render
   const { styles, slots } = options;

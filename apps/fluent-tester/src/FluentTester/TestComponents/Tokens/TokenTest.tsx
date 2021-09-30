@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { FlatList, View, ViewStyle, StyleSheet } from 'react-native';
+import { FlatList, View, ViewStyle, StyleSheet, ColorValue } from 'react-native';
 import { useTheme, Theme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { createAliasTokens, getCurrentAppearance } from '@fluentui-react-native/theming-utils';
+import { createOfficeAliasTokens } from '@fluentui-react-native/win32-theme';
 import { commonTestStyles } from '../Common/styles';
 import { Text } from '@fluentui/react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -36,17 +37,17 @@ const styles = StyleSheet.create({
   },
 });
 
-const getSwatchColorStyle = (color: string): ViewStyle => {
-  styles[color] = styles[color] || { backgroundColor: color };
-  return styles[color];
+const getSwatchColorStyle = (name: string, color: ColorValue): ViewStyle => {
+  styles[name] = styles[name] || { backgroundColor: color };
+  return styles[name];
 };
 
-type ColorTokenProps = { color: string; name: string };
+type ColorTokenProps = { color: ColorValue; name: string };
 const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps) => {
   const themedStyles = getThemedStyles(useTheme());
   return (
     <View style={styles.swatchItem}>
-      <View style={[getSwatchColorStyle(p.color), themedStyles.swatch]} />
+      <View style={[getSwatchColorStyle(p.name, p.color), themedStyles.swatch]} />
       <Text>{p.name}</Text>
     </View>
   );
@@ -55,7 +56,15 @@ const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps
 const AliasTokensSwatchList: React.FunctionComponent = () => {
   const theme = useTheme();
   const themedStyles = getThemedStyles(theme);
-  const aliasColorTokens = createAliasTokens(getCurrentAppearance(theme.host.appearance, 'light'));
+  const isOfficeTheme =
+    theme.name === 'White' ||
+    theme.name === 'Colorful' ||
+    theme.name === 'DarkGray' ||
+    theme.name === 'Black' ||
+    theme.name === 'HighContrast';
+  const aliasColorTokens = isOfficeTheme
+    ? createOfficeAliasTokens(theme.name)
+    : createAliasTokens(getCurrentAppearance(theme.host.appearance, 'light'));
 
   const aggregator = React.useCallback(
     (key: string) => {
@@ -101,5 +110,5 @@ export const TokenTest: React.FunctionComponent = () => {
 
   const description = 'Alias tokens given from token pipeline. Currently values are pulled from web. Will be used to style components.';
 
-  return <Test name="Token Test" description={description} sections={themeSections} status={status}></Test>;
+  return <Test name="Token Test" description={description} sections={themeSections} status={status} />;
 };

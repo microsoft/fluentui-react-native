@@ -2,10 +2,11 @@ import { TestDescription } from './TestComponents';
 import { AvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
+import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL } from './TestComponents/CheckboxExperimental';
 import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
+import { HOMEPAGE_FOCUSZONE_BUTTON, FocusZoneTest } from './TestComponents/FocusZone';
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
-import { NativeButtonTest, HOMEPAGE_NATIVEBUTTON_BUTTON } from './TestComponents/NativeButton';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from './TestComponents/Persona';
 import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from './TestComponents/PersonaCoin';
 import { HOMEPAGE_PRESSABLE_BUTTON, PressableTest } from './TestComponents/Pressable';
@@ -17,6 +18,9 @@ import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 import { HOMEPAGE_MENU_BUTTON, MenuButtonTest } from './TestComponents/MenuButton';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
+import { HOMEPAGE_TABS_BUTTON, TabsTest } from './TestComponents/Tabs';
+import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON, ExperimentalTabsTest } from './TestComponents/TabsExperimental';
+import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 
 export const tests: TestDescription[] = [
   {
@@ -35,6 +39,11 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
   },
   {
+    name: 'FocusZone Test',
+    component: FocusZoneTest,
+    testPage: HOMEPAGE_FOCUSZONE_BUTTON,
+  },
+  {
     name: 'Pressable Test',
     component: PressableTest,
     testPage: HOMEPAGE_PRESSABLE_BUTTON,
@@ -50,11 +59,6 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_MENU_BUTTON,
   },
   {
-    name: 'Native Button Test',
-    component: NativeButtonTest,
-    testPage: HOMEPAGE_NATIVEBUTTON_BUTTON,
-  },
-  {
     name: 'Separator Test',
     component: SeparatorTest,
     testPage: HOMEPAGE_SEPARATOR_BUTTON,
@@ -63,6 +67,11 @@ export const tests: TestDescription[] = [
     name: 'Text Test',
     component: TextTest,
     testPage: HOMEPAGE_TEXT_BUTTON,
+  },
+  {
+    name: 'Experimental Text Test',
+    component: TextExperimentalTest,
+    testPage: HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON,
   },
   {
     name: 'Shimmer Test',
@@ -95,6 +104,11 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_CHECKBOX_BUTTON,
   },
   {
+    name: 'Experimental Checkbox',
+    component: ExperimentalCheckboxTest,
+    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
+  },
+  {
     name: 'Svg Test',
     component: SvgTest,
     testPage: HOMEPAGE_SVG_BUTTON,
@@ -103,6 +117,16 @@ export const tests: TestDescription[] = [
     name: 'Icon Test',
     component: IconTest,
     testPage: HOMEPAGE_ICON_BUTTON,
+  },
+  {
+    name: 'Tabs Test',
+    component: TabsTest,
+    testPage: HOMEPAGE_TABS_BUTTON,
+  },
+  {
+    name: 'Experimental Tabs Test',
+    component: ExperimentalTabsTest,
+    testPage: HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
   },
   {
     name: 'Tokens Test',

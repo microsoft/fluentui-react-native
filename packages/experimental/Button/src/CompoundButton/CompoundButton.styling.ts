@@ -1,30 +1,54 @@
 import { compoundButtonName, CompoundButtonTokens, CompoundButtonSlotProps, CompoundButtonProps } from './CompoundButton.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
-import { buttonStates, defaultButtonTokens } from '../ButtonTokens';
+import { defaultButtonTokens } from '../ButtonTokens';
 import { ButtonTokens } from '../Button.types';
+import { buttonStates } from '../Button.styling';
 
 export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundButtonSlotProps, CompoundButtonTokens> = {
   tokens: [
     defaultButtonTokens,
-    (t: Theme) => ({
-      minHeight: 72,
-      secondaryContentFont: {
-        variant: 'secondaryStandard',
-      },
-      ghost: {
-        secondaryContentColor: t.colors.ghostSecondaryContent,
+    (t: Theme): ButtonTokens =>
+      ({
+        minHeight: 72,
+        secondaryContentFont: {
+          variant: 'secondaryStandard',
+        },
+        secondaryContentColor: t.colors.defaultSecondaryContent,
         hovered: {
-          secondaryContentColor: t.colors.ghostHoveredSecondaryContent,
+          secondaryContentColor: t.colors.defaultHoveredSecondaryContent,
         },
         focused: {
-          secondaryContentColor: t.colors.ghostFocusedSecondaryContent,
+          secondaryContentColor: t.colors.defaultFocusedSecondaryContent,
         },
         pressed: {
-          secondaryContentColor: t.colors.ghostPressedSecondaryContent,
+          secondaryContentColor: t.colors.defaultPressedSecondaryContent,
         },
-      } as ButtonTokens,
-    }),
+        primary: {
+          secondaryContentColor: t.colors.brandedSecondaryContent,
+          hovered: {
+            secondaryContentColor: t.colors.brandedHoveredSecondaryContent,
+          },
+          focused: {
+            secondaryContentColor: t.colors.brandedFocusedSecondaryContent,
+          },
+          pressed: {
+            secondaryContentColor: t.colors.brandedPressedSecondaryContent,
+          },
+        },
+        subtle: {
+          secondaryContentColor: t.colors.ghostSecondaryContent,
+          hovered: {
+            secondaryContentColor: t.colors.ghostHoveredSecondaryContent,
+          },
+          focused: {
+            secondaryContentColor: t.colors.ghostFocusedSecondaryContent,
+          },
+          pressed: {
+            secondaryContentColor: t.colors.ghostPressedSecondaryContent,
+          },
+        },
+      } as ButtonTokens),
     compoundButtonName,
   ],
   states: buttonStates,

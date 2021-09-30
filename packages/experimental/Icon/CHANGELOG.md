@@ -1,8 +1,128 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Thu, 12 Aug 2021 17:23:44 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.23
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
+
+## 0.8.22
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Patches
+
+- adding an adapter for macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.8.21
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theming-utils to v0.7.2 (ruaraki@microsoft.com)
+
+## 0.8.20
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.16 (ruaraki@microsoft.com)
+
+## 0.8.19
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.15 (ruaraki@microsoft.com)
+
+## 0.8.18
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.14 (ruaraki@microsoft.com)
+
+## 0.8.17
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.13 (ruaraki@microsoft.com)
+
+## 0.8.16
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.8.15
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- Support tinting PNG icons (sanajmi@microsoft.com)
+
+## 0.8.14
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Export IconSourcesType (sanajmi@microsoft.com)
+
+## 0.8.13
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Fixed icon color for SVG (v.kozlova13@gmail.com)
+
+## 0.8.12
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.10 (ruaraki@microsoft.com)
+
+## 0.8.11
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.9 (ruaraki@microsoft.com)
+
+## 0.8.10
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Fix iconColor not applying for svg icons (ruaraki@microsoft.com)
+
+## 0.8.9
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
 
 ## 0.8.8
 

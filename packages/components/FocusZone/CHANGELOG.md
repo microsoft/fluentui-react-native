@@ -1,8 +1,144 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Fri, 13 Aug 2021 09:05:57 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.26
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
+
+## 0.7.25
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Patches
+
+- adding an adapter for macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.7.24
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.45 (ruaraki@microsoft.com)
+
+## 0.7.23
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.43 (ruaraki@microsoft.com)
+
+## 0.7.22
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.42 (ruaraki@microsoft.com)
+
+## 0.7.21
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.41 (ruaraki@microsoft.com)
+
+## 0.7.20
+
+Tue, 31 Aug 2021 18:48:34 GMT
+
+### Patches
+
+- Add logic to pick a selected button when tabbing to a FocusZone (chripear@microsoft.com)
+
+## 0.7.19
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.40 (ruaraki@microsoft.com)
+
+## 0.7.18
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.7.17
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.38 (sanajmi@microsoft.com)
+
+## 0.7.16
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.37 (sanajmi@microsoft.com)
+
+## 0.7.15
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.36 (sanajmi@microsoft.com)
+
+## 0.7.14
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.35 (ruaraki@microsoft.com)
+
+## 0.7.13
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.34 (ruaraki@microsoft.com)
+
+## 0.7.12
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.33 (ruaraki@microsoft.com)
+
+## 0.7.11
+
+Tue, 17 Aug 2021 20:02:00 GMT
+
+### Patches
+
+- MSF -> FRN for most objective C prefixes (sanajmi@microsoft.com)
+
+## 0.7.10
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
 
 ## 0.7.9
 

@@ -5,7 +5,7 @@ import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
 const avatarName = 'Avatar';
 
-const NativeAvatarView = ensureNativeComponent('MSFAvatarView');
+const NativeAvatarView = ensureNativeComponent('FRNAvatarView');
 
 export type Size = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge' | 'xxLarge';
 
@@ -17,7 +17,7 @@ interface ExportedConstants {
   sizes: { [key in Size]: number };
 }
 
-const ExportedNativeConstants: ExportedConstants = NativeModules.MSFAvatarViewManager;
+const ExportedNativeConstants: ExportedConstants = NativeModules.FRNAvatarViewManager;
 
 export type AvatarTokens = {
   /**

@@ -1,8 +1,104 @@
 # Change Log - @fluentui-react-native/experimental-text
 
-This log was last generated on Thu, 12 Aug 2021 17:23:44 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.21
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
+
+## 0.6.20
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Patches
+
+- adding an adapter for macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.6.19
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.38 (ruaraki@microsoft.com)
+
+## 0.6.18
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.37 (ruaraki@microsoft.com)
+
+## 0.6.17
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.36 (ruaraki@microsoft.com)
+
+## 0.6.16
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.35 (ruaraki@microsoft.com)
+
+## 0.6.15
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.2 (ruaraki@microsoft.com)
+
+## 0.6.14
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.1 (67026167+chiuam@users.noreply.github.com)
+
+## 0.6.13
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.0 (dake.3601@gmail.com)
+
+## 0.6.12
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.31 (ruaraki@microsoft.com)
+
+## 0.6.11
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.5.30 (ruaraki@microsoft.com)
+
+## 0.6.10
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
 
 ## 0.6.9
 

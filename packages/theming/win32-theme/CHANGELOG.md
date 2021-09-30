@@ -1,8 +1,117 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Thu, 12 Aug 2021 17:23:44 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.5
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
+
+## 0.13.4
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Patches
+
+- adding an adapter for macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.13.3
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.8.4 (ruaraki@microsoft.com)
+
+## 0.13.2
+
+Fri, 10 Sep 2021 21:30:12 GMT
+
+### Patches
+
+- Allow theming module to be implemented as a turbomanager (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.13.1
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Branding should pull from pipeline (ruaraki@microsoft.com)
+
+## 0.13.0
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Minor changes
+
+- Integrate updated themes (ruaraki@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.7.0 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.8.2 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theming-utils to v0.7.0 (ruaraki@microsoft.com)
+
+## 0.12.1
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.8.1 (ruaraki@microsoft.com)
+
+## 0.12.0
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Minor changes
+
+- Add HC plumbing (ruaraki@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.8.0 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theming-utils to v0.6.0 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.12.0 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme to v0.5.18 (ruaraki@microsoft.com)
+
+## 0.11.4
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.11.3
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Rename tokens to avoid name clash, initial token re-population (ruaraki@microsoft.com)
+
+## 0.11.2
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Fix entries (ruaraki@microsoft.com)
+
+## 0.11.1
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
 
 ## 0.11.0
 

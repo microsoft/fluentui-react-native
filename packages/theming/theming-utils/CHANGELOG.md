@@ -1,8 +1,97 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Thu, 12 Aug 2021 17:23:44 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.4
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
+
+## 0.7.3
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Patches
+
+- adding an adapter for macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.7.2
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Add check for undefined (ruaraki@microsoft.com)
+
+## 0.7.1
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.7.1 (ruaraki@microsoft.com)
+
+## 0.7.0
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Minor changes
+
+- Integrate updated themes (ruaraki@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.7.0 (ruaraki@microsoft.com)
+
+## 0.6.1
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Reshape input (ruaraki@microsoft.com)
+
+## 0.6.0
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Minor changes
+
+- Add HC plumbing (ruaraki@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.6.0 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.12.0 (ruaraki@microsoft.com)
+
+## 0.5.3
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.5.2
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.5.3 (ruaraki@microsoft.com)
+
+## 0.5.1
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
 
 ## 0.5.0
 
