@@ -1,5 +1,6 @@
 import Foundation
 import AppKit
+import React
 
 @objc(RCTCalloutView)
 class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
@@ -16,13 +17,17 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
         }
     }
 
-    @objc public var onDismiss: RCTDirectEventBlock?
+    @objc public var onDismiss: RCTBubblingEventBlock?
 
     public weak var bridge: RCTBridge?
 
     // MARK: Initialization
 
     private init() {
+		// The proxy view is a React view that will be hosted in a seperate window.
+		// The child react views added to this view will actually be added to the proxy view.
+		calloutProxyView = RCTView()
+		
         super.init(frame: .zero)
     }
 
@@ -34,9 +39,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
         self.init()
         self.bridge = bridge
 
-        // The proxy view is a React view that will be hosted in a seperate window.
-        // The child react views added to this view will actually be added to the proxy view.
-        calloutProxyView = RCTView()
+
         calloutProxyTouchHandler = RCTTouchHandler(bridge: bridge)
 
         // The callout window root view will contain the proxy react view.
@@ -55,38 +58,31 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
                 window.setIsVisible(true)
                 window.backgroundColor = .windowBackgroundColor
             }
-            if let touchHandler = calloutProxyTouchHandler, let proxyView = calloutProxyView {
-                proxyView.addGestureRecognizer(touchHandler)
-                let rootView = windowRootViewController.view
-                rootView.addSubview(proxyView)
+            if let touchHandler = calloutProxyTouchHandler {
+                calloutProxyView.addGestureRecognizer(touchHandler)
+                windowRootViewController.view = calloutProxyView
             }
         }
     }
 
     // MARK: RCTComponent Overrides
 
-    override func insertReactSubview(_ subview: NSView!, at atIndex: Int) {
-        // Do not want to call super (despite NS_REQUIRES_SUPER on base class) since this will cause the Callout's children to appear within the main component.
-        // Instead we want to add the react subviews to the proxy callout view which is in its own callout window.
-        if let proxyView = calloutProxyView {
-            proxyView.insertReactSubview(subview, at: atIndex)
-            proxyView.insertSubview(subview, at: atIndex)
-        }
+	override func insertReactSubview(_ subview: NSView!, at atIndex: Int) {
+		// Do not want to call super (despite NS_REQUIRES_SUPER on base class) since this will cause the Callout's children to appear within the main component.
+		// Instead we want to add the react subviews to the proxy callout view which is in its own callout window.
+		calloutProxyView.insertReactSubview(subview, at: atIndex)
+		calloutProxyView.insertSubview(subview, at: atIndex)
+	}
 
-    }
+	override func removeFromSuperview() {
 
-    override func removeFromSuperview() {
-
-        if let proxyView = calloutProxyView {
-            for subview in proxyView.subviews {
-                subview.removeFromSuperview()
-            }
-            calloutProxyTouchHandler = nil
-            calloutProxyView = nil
-            calloutWindowRootViewController = nil
-        }
-        super.removeFromSuperview()
-    }
+		for subview in calloutProxyView.subviews {
+			subview.removeFromSuperview()
+		}
+		calloutProxyTouchHandler = nil
+		calloutWindowRootViewController = nil
+		super.removeFromSuperview()
+	}
 
     override func reactSetFrame(_ frame: CGRect) {
       super.reactSetFrame(frame)
@@ -154,9 +150,11 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
             calloutWindow?.setFrame(calloutRect, display: true)
             calloutRect.origin.x = 0
             calloutRect.origin.y = 0
-            calloutProxyView?.frame = calloutRect
+            calloutProxyView.frame = calloutRect
 
             calloutWindowRootViewController?.view.frame = calloutRect
+			
+			bridge.uiManager.setSize(.zero, for: self)
         }
     }
 
@@ -218,7 +216,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
     private var calloutWindow: CalloutWindow?
     private var calloutWindowRootViewController: NSViewController?
-    private var calloutProxyView: RCTView?
+    private var calloutProxyView: RCTView
     private var calloutProxyTouchHandler: RCTTouchHandler?
     // Internally track that the callout never shrinks in size when it's laying out
     private var maxCalloutHeight: NSInteger?

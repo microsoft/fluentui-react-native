@@ -1,4 +1,5 @@
 import { Spacing, Theme } from '@fluentui-react-native/theme-types';
+import { PlatformColor } from 'react-native';
 import { fallbackApplePalette } from './appleColors.macos';
 import { fallbackAppleTypography } from './appleTypography.macos';
 
@@ -67,6 +68,32 @@ export const appleComponents = {
     },
     // This disables other available states like: hovered, focused, pressed.
     _precedence: ['disabled', 'boxAtEnd', 'checked'],
+  },
+  Callout: {
+    tokens: {
+      borderRadius: 5,
+    },
+  },
+  ContextualMenuItem: {
+    root: {
+      style: {
+        borderRadius: 5,
+      },
+    },
+    stack: {
+      style: {
+        minHeight: 0,
+        minWidth: 0,
+      },
+    },
+    _overrides: {
+      hovered: {
+        tokens: {
+          color: 'white',
+          backgroundColor: PlatformColor('controlAccentColor'),
+        },
+      },
+    },
   },
 };
 
