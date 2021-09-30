@@ -162,7 +162,7 @@ jobs:
       - template: templates/setup-repo.yml
 
       - script: |
-          find . -name \*.md -not -name CHANGELOG.md -not -path '*/\node_modules/*' -print0 | xargs -0 -n1 yarn test-links -c `pwd`/.ado/config.json
+          find . -name \*.md -not -name CHANGELOG.md -not -path '*/\node_modules/*' -print0 | xargs -0 -n1 yarn test-links -c `pwd`/.ado/markdown-link-check-config.json
         displayName: 'testing links'
   # Uncomment this job to test changes to the NuGet package
   # We keep it commented out by default because this job is much longer than the other PR jobs
