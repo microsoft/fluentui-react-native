@@ -24,7 +24,7 @@ Building cross platform JS experiences within Office and other SDX Host apps usi
 
 ### Compose vs Composable
 
-You have to choose an appropriate framework package to build a component. We have two packages: [foudation-compose](https://github.com/microsoft/fluentui-react-native/tree/master/packages/framework/foundation-compose) and [foundation-composable](https://github.com/microsoft/fluentui-react-native/tree/master/packages/framework/foundation-composable).
+You have to choose an appropriate framework package to build a component. We have two packages: [foudation-compose](https://github.com/microsoft/fluentui-react-native/tree/master/packages/deprecated/foundation-compose) and [foundation-composable](https://github.com/microsoft/fluentui-react-native/tree/master/packages/deprecated/foundation-composable).
 
 **Compose**'s primary purpose is the injection of our idea of what the useStyling implementation should be into the composable pattern. So, any component that wants to utilize our Theming and Styling system should use the Compose framework.
 
@@ -109,7 +109,7 @@ export interface IButtonType {
 
 Settings are collections of props and styles for the parts of a component. They allow for inheritance and the ability to specify overrides for certain states.
 
-[Button.settings](https://github.com/microsoft/fluentui-react-native/blob/master/packages/components/Button/src/Button.settings.ts) defines settings for each of its slots as wells as its tokens and their overrides for each state. How precedence and overrides work are explained in the [Theme Settings](https://github.com/microsoft/fluentui-react-native/tree/master/packages/framework/foundation-settings#_overrides-and-_precedence) page.
+[Button.settings](https://github.com/microsoft/fluentui-react-native/blob/master/packages/components/Button/src/Button.settings.ts) defines settings for each of its slots as wells as its tokens and their overrides for each state. How precedence and overrides work are explained in the [Theme Settings](https://github.com/microsoft/fluentui-react-native/tree/master/packages/deprecated/foundation-settings#_overrides-and-_precedence) page.
 
 Button's root slot has accessibility props that need default values to fall back to when they aren't specified by its users. These default values are set in settings as well.
 
@@ -169,7 +169,7 @@ export const settings: IComposeSettings<IButtonType> = [
 
 #### Putting it all together
 
-Lastly, Button imports and uses the compose framework to build the final function component. A compose component will have the following parameters. Each parameter is explained in detail in the [Parameters](https://github.com/microsoft/fluentui-react-native/blob/2c8fcfa9cd098752bc45f5482664937a8472a05c/packages/framework/foundation-composable/README.md#parameters) section under foundation-composable.
+Lastly, Button imports and uses the compose framework to build the final function component. A compose component will have the following parameters. Each parameter is explained in detail in the [Parameters](https://github.com/microsoft/fluentui-react-native/tree/master/packages/deprecated/foundation-composable/README.md#parameters) section under foundation-composable.
 
 - displayName
 - usePrepareProps
@@ -206,7 +206,7 @@ export const Button = compose<IButtonType>({
 
 ### Using the Composable Framework
 
-How to write a component using the composable framework is documented in the following locations: [Getting Started - Writing a simple component](https://github.com/microsoft/fluentui-react-native/blob/master/packages/framework/foundation-composable/docs/GuideSimple.md) and [Getting Started - Writing a Complex Component](https://github.com/microsoft/fluentui-react-native/blob/master/packages/framework/foundation-composable/docs/GuideHOC.md).
+How to write a component using the composable framework is documented in the following locations: [Getting Started - Writing a simple component](https://github.com/microsoft/fluentui-react-native/blob/master/packages/deprecated/foundation-composable/docs/GuideSimple.md) and [Getting Started - Writing a Complex Component](https://github.com/microsoft/fluentui-react-native/blob/master/packages/deprecated/foundation-composable/docs/GuideHOC.md).
 
 ## Jest Snapshot Testing for FluentUI
 
