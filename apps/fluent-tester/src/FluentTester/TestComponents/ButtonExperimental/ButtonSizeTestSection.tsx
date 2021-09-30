@@ -14,9 +14,13 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
 
   return (
     <View style={[stackStyle, commonTestStyles.view]}>
-      {svgIconsEnabled ? <Button size="small" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin} /> : null}
-      {svgIconsEnabled ? <Button size="medium" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin} /> : null}
-      {svgIconsEnabled ? <Button size="large" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin} /> : null}
+      {svgIconsEnabled && (
+        <>
+          <Button size="small" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin} />
+          <Button size="medium" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin} />
+          <Button size="large" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin} />
+        </>
+      )}
       <Button size="small" content="Small" style={commonTestStyles.vmargin} />
       <Button size="medium" content="Medium" style={commonTestStyles.vmargin} />
       <Button size="large" content="Large" style={commonTestStyles.vmargin} />

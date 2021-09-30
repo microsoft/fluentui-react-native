@@ -23,8 +23,6 @@ export const ButtonIconTest: React.FunctionComponent = () => {
 
   return (
     <View style={[stackStyle, commonTestStyles.view]}>
-      {svgIconsEnabled ? <Button icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin} /> : null}
-      {svgIconsEnabled ? <Button primary icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin} /> : null}
       <Button
         icon={{ fontSource: { ...fontBuiltInProps, fontSize: 32 }, color: '#060' }}
         content="Font icon"
@@ -32,10 +30,12 @@ export const ButtonIconTest: React.FunctionComponent = () => {
       />
       <Button icon={{ fontSource: fontBuiltInProps }} content="Font icon" style={commonTestStyles.vmargin} />
       <Button primary icon={{ fontSource: fontBuiltInProps }} content="Font icon" style={commonTestStyles.vmargin} />
-      {svgIconsEnabled ? (
-        <Button primary icon={{ svgSource: svgProps, color: 'red' }} content="SVG" style={commonTestStyles.vmargin} />
-      ) : null}
-      {svgIconsEnabled ? <Button icon={{ svgSource: svgProps }} content="SVG" style={commonTestStyles.vmargin} /> : null}
+      {svgIconsEnabled && (
+        <>
+          <Button primary icon={{ svgSource: svgProps, color: 'red' }} content="SVG" style={commonTestStyles.vmargin} />
+          <Button icon={{ svgSource: svgProps }} content="SVG" style={commonTestStyles.vmargin} />
+        </>
+      )}
       <Button primary icon={testImage} content="PNG" style={commonTestStyles.vmargin} />
       <Button icon={testImage} content="PNG" style={commonTestStyles.vmargin} />
     </View>
