@@ -1,7 +1,7 @@
 import { TABS_TESTPAGE } from '../../../FluentTester/TestComponents/TabsExperimental/consts';
 import { BasePage, By } from '../../common/BasePage';
 
-class TabsExperimentalTestPage extends BasePage {
+class ExperimentalTabsTestPage extends BasePage {
   get _testPage() {
     return By(TABS_TESTPAGE);
   }
@@ -11,4 +11,4 @@ class TabsExperimentalTestPage extends BasePage {
   }
 }
 
-export default new TabsExperimentalTestPage();
+export default new ExperimentalTabsTestPage();

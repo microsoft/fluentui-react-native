@@ -24,6 +24,7 @@ exports[`Tabs FocusZone props 1`] = `
     <View
       style={
         Object {
+          "backgroundColor": undefined,
           "flexDirection": "row",
         }
       }
@@ -67,8 +68,6 @@ exports[`Tabs FocusZone props 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -83,6 +82,7 @@ exports[`Tabs FocusZone props 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         />
@@ -138,8 +138,6 @@ exports[`Tabs FocusZone props 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -154,6 +152,7 @@ exports[`Tabs FocusZone props 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         />
@@ -209,8 +208,6 @@ exports[`Tabs FocusZone props 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -225,6 +222,7 @@ exports[`Tabs FocusZone props 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         />
@@ -272,6 +270,7 @@ exports[`Tabs default props 1`] = `
     <View
       style={
         Object {
+          "backgroundColor": undefined,
           "flexDirection": "row",
         }
       }
@@ -315,8 +314,6 @@ exports[`Tabs default props 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -331,6 +328,7 @@ exports[`Tabs default props 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         />
@@ -386,8 +384,6 @@ exports[`Tabs default props 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -402,6 +398,7 @@ exports[`Tabs default props 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         />
@@ -457,8 +454,6 @@ exports[`Tabs default props 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -473,6 +468,7 @@ exports[`Tabs default props 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         />
@@ -520,6 +516,7 @@ exports[`Tabs disabled 1`] = `
     <View
       style={
         Object {
+          "backgroundColor": undefined,
           "flexDirection": "row",
         }
       }
@@ -563,8 +560,6 @@ exports[`Tabs disabled 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -579,6 +574,7 @@ exports[`Tabs disabled 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         />
@@ -634,8 +630,6 @@ exports[`Tabs disabled 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -650,6 +644,7 @@ exports[`Tabs disabled 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         />
@@ -705,8 +700,6 @@ exports[`Tabs disabled 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -721,6 +714,7 @@ exports[`Tabs disabled 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         />
@@ -768,6 +762,7 @@ exports[`Tabs header text and count 1`] = `
     <View
       style={
         Object {
+          "backgroundColor": undefined,
           "flexDirection": "row",
         }
       }
@@ -812,8 +807,6 @@ exports[`Tabs header text and count 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -828,6 +821,7 @@ exports[`Tabs header text and count 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         >
@@ -898,8 +892,6 @@ exports[`Tabs header text and count 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -914,6 +906,7 @@ exports[`Tabs header text and count 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         >
@@ -984,8 +977,6 @@ exports[`Tabs header text and count 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -1000,6 +991,7 @@ exports[`Tabs header text and count 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         >
@@ -1062,6 +1054,7 @@ exports[`Tabs headers only 1`] = `
     <View
       style={
         Object {
+          "backgroundColor": undefined,
           "flexDirection": "row",
         }
       }
@@ -1105,8 +1098,6 @@ exports[`Tabs headers only 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -1121,6 +1112,7 @@ exports[`Tabs headers only 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         />
@@ -1176,8 +1168,6 @@ exports[`Tabs headers only 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -1192,6 +1182,7 @@ exports[`Tabs headers only 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         />
@@ -1247,8 +1238,6 @@ exports[`Tabs headers only 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -1263,6 +1252,7 @@ exports[`Tabs headers only 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         />
@@ -1323,6 +1313,7 @@ exports[`Tabs props 1`] = `
     <View
       style={
         Object {
+          "backgroundColor": undefined,
           "flexDirection": "row",
         }
       }
@@ -1367,8 +1358,6 @@ exports[`Tabs props 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -1383,6 +1372,7 @@ exports[`Tabs props 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         >
@@ -1453,8 +1443,6 @@ exports[`Tabs props 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -1469,6 +1457,7 @@ exports[`Tabs props 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         >
@@ -1539,8 +1528,6 @@ exports[`Tabs props 1`] = `
             "display": "flex",
             "flexDirection": "column",
             "justifyContent": "center",
-            "minHeight": 32,
-            "minWidth": 32,
           }
         }
       >
@@ -1555,6 +1542,7 @@ exports[`Tabs props 1`] = `
               "marginHorizontal": 10,
               "minHeight": 32,
               "minWidth": 32,
+              "opacity": undefined,
             }
           }
         >
