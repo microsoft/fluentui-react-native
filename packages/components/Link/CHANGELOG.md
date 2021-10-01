@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Oct 2021 17:52:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.7
+
+Fri, 01 Oct 2021 17:52:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.48 (ruaraki@microsoft.com)
 
 ## 0.14.6
 

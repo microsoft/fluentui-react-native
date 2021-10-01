@@ -2,6 +2,35 @@
   "name": "@fluentui-react-native/framework",
   "entries": [
     {
+      "date": "Fri, 01 Oct 2021 17:52:17 GMT",
+      "tag": "@fluentui-react-native/framework_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add props to build props",
+            "author": "ruaraki@microsoft.com",
+            "commit": "cb59746a9358af9ae32ea386aad1cfaa1922605d",
+            "package": "@fluentui-react-native/framework"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/use-styling to v0.7.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "cb59746a9358af9ae32ea386aad1cfaa1922605d",
+            "package": "@fluentui-react-native/framework"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/composition to v0.6.10",
+            "author": "ruaraki@microsoft.com",
+            "commit": "cb59746a9358af9ae32ea386aad1cfaa1922605d",
+            "package": "@fluentui-react-native/framework"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 28 Sep 2021 21:08:25 GMT",
       "tag": "@fluentui-react-native/framework_v0.5.40",
       "version": "0.5.40",
