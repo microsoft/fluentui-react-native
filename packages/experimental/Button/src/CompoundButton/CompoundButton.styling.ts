@@ -6,6 +6,12 @@ import { buttonStates } from '../Button.styling';
 import { defaultButtonTokens } from '../ButtonTokens';
 import { defaultCompoundButtonColorTokens } from './CompoundButtonColorTokens';
 import { defaultCompoundButtonTokens } from './CompoundButtonTokens';
+import {
+  getTextMarginLeftAdjustment,
+  getTextMarginRightAdjustment,
+  getTextMarginTopAdjustment,
+  getTextMarginBottomAdjustment,
+} from '@fluentui-react-native/styling-utils';
 
 export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundButtonSlotProps, CompoundButtonTokens> = {
   tokens: [
@@ -41,10 +47,10 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
     content: buildProps(
       (tokens: CompoundButtonTokens, theme: Theme) => ({
         style: {
-          marginLeft: 1,
-          marginRight: -1,
-          marginBottom: 1,
-          marginTop: -1,
+          marginLeft: getTextMarginLeftAdjustment(),
+          marginRight: getTextMarginRightAdjustment(),
+          marginBottom: getTextMarginBottomAdjustment(),
+          marginTop: getTextMarginTopAdjustment(),
           color: tokens.color,
           ...fontStyles.from(tokens, theme),
         },
@@ -54,10 +60,10 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
     secondaryContent: buildProps(
       (tokens: CompoundButtonTokens, theme: Theme) => ({
         style: {
-          marginLeft: 1,
-          marginRight: -1,
-          marginBottom: 1,
-          marginTop: -1,
+          marginLeft: getTextMarginLeftAdjustment(),
+          marginRight: getTextMarginRightAdjustment(),
+          marginBottom: getTextMarginBottomAdjustment(),
+          marginTop: getTextMarginTopAdjustment(),
           color: tokens.secondaryContentColor,
           ...fontStyles.from(tokens.secondaryContentFont, theme),
         },
