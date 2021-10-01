@@ -1,19 +1,14 @@
 import { ContextualMenuItemProps, ContextualMenuProps, SubmenuProps } from '@fluentui-react-native/contextual-menu';
-import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { ButtonProps } from '@fluentui-react-native/experimental-button';
+import { ButtonProps, ButtonTokens } from '@fluentui-react-native/experimental-button';
 import { SvgProps, XmlProps } from 'react-native-svg';
 
 export const menuButtonName = 'MenuButton';
 
-export interface MenuButtonContext {
+export interface MenuButtonState {
   showContextualMenu?: boolean;
 }
 
-export interface MenuButtonState {
-  context: MenuButtonContext;
-}
-
-export interface MenuButtonTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {}
+export interface MenuButtonTokens extends ButtonTokens {}
 
 export interface MenuButtonItemProps extends ContextualMenuItemProps {
   hasSubmenu?: boolean;
@@ -30,8 +25,14 @@ export interface MenuButtonProps extends ButtonProps {
 
 export type MenuButtonSlotProps = {
   root: MenuButtonProps;
+  button: ButtonProps;
   chevronIcon: SvgProps | XmlProps;
 };
+
+export interface MenuButtonInfo {
+  props: MenuButtonProps;
+  state: MenuButtonState;
+}
 
 export interface MenuButtonType {
   props: MenuButtonProps;

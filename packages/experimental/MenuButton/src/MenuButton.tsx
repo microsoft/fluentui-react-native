@@ -1,10 +1,11 @@
 /** @jsx withSlots */
-import React, { useRef, useState, useCallback } from 'react';
+import React from 'react';
 import { Button } from '@fluentui-react-native/experimental-button';
-import { compose, UseSlots, withSlots } from '@fluentui-react-native/framework';
+import { compose, UseSlots, withSlots, mergeProps } from '@fluentui-react-native/framework';
 import { stylingSettings } from './MenuButton.styling';
 import { renderContextualMenu } from './renderContextualMenu';
 import { SvgXml } from 'react-native-svg';
+import { useMenuButton } from './useMenuButton';
 
 import { menuButtonName, MenuButtonProps, MenuButtonType } from './MenuButton.types';
 
@@ -17,65 +18,15 @@ export const MenuButton = compose<MenuButtonType>({
   slots: {
     root: React.Fragment,
     chevronIcon: SvgXml,
+    button: Button,
   },
-  slotProps: {
-    root: {},
-  },
-  render: (props: MenuButtonProps, useSlots: UseSlots<MenuButtonType>) => {
-    const { menuItems, content, icon, disabled, onItemClick, contextualMenu, primary, style } = props;
+  render: (userProps: MenuButtonProps, useSlots: UseSlots<MenuButtonType>) => {
+    const MenuButton = useMenuButton(userProps);
 
-    const stdBtnRef = useRef(null);
-    const [showContextualMenu, setShowContextualMenu] = useState(false);
-    const onDismiss = useCallback(() => {
-      setShowContextualMenu(false);
-    }, [setShowContextualMenu]);
-    const toggleShowContextualMenu = useCallback(() => {
-      setShowContextualMenu(!showContextualMenu);
-    }, [showContextualMenu, setShowContextualMenu]);
+    const Slots = useSlots(MenuButton.props, layer => MenuButton.state[layer] || MenuButton.props[layer]);
 
-    const buttonProps = {
-      content,
-      disabled,
-      primary,
-      icon,
-      style,
-      componentRef: stdBtnRef,
-      onClick: toggleShowContextualMenu,
-    };
-
-    const contextualMenuProps = {
-      onItemClick,
-      target: stdBtnRef,
-      onDismiss,
-      setShowMenu: toggleShowContextualMenu,
-      ...contextualMenu,
-    };
-
-    const menuItemsUpdated = menuItems?.map((item) => {
-      if (item.hasSubmenu) {
-        const [showSubmenu, setShowSubmenu] = useState(false);
-        const toggleShowSubmenu = useCallback(() => {
-          setShowSubmenu(!showSubmenu);
-        }, [showSubmenu, setShowSubmenu]);
-        const onDismissSubmenu = useCallback(() => {
-          setShowSubmenu(false);
-        }, [setShowSubmenu]);
-        const { onHoverIn = toggleShowSubmenu, submenuProps = {}, ...restItems } = item;
-        const { onDismiss = onDismissSubmenu, setShowMenu = toggleShowSubmenu, ...restSubmenuProps } = submenuProps;
-        const menuItemUpdated = {
-          ...restItems,
-          onHoverIn,
-          showSubmenu: item.showSubmenu ?? showSubmenu,
-          submenuProps: { ...restSubmenuProps, onDismiss, setShowMenu },
-        };
-        return menuItemUpdated;
-      }
-      return item;
-    });
-
-    const Slots = useSlots(props);
-
-    return () => {
+    return (final: MenuButtonProps) => {
+      const { primary, contextualMenu, menuItems, ...mergedProps } = mergeProps(MenuButton.props, final);
       const chevronColor = primary ? primaryIconColor : defaultIconColor;
       const chevronXml = `
           <svg width="12" height="16" viewBox="0 0 11 6" color=${chevronColor}>
@@ -84,10 +35,10 @@ export const MenuButton = compose<MenuButtonType>({
 
       return (
         <Slots.root>
-          <Button {...buttonProps}>
+          <Slots.button {...mergedProps} primary={primary}>
             <Slots.chevronIcon xml={chevronXml} />
-          </Button>
-          {showContextualMenu && renderContextualMenu(contextualMenuProps, menuItemsUpdated)}
+          </Slots.button>
+          {MenuButton.state.showContextualMenu && renderContextualMenu(contextualMenu, menuItems)}
         </Slots.root>
       );
     };

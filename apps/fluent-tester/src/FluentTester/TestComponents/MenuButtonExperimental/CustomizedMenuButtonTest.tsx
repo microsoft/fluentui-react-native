@@ -1,31 +1,54 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import { MenuButton } from '@fluentui/react-native';
-import { menuItems } from './testData';
-import { viewWrapperStyle, columnStyle, rowStyle } from './MenuButtonTestStyles';
+import { MenuButton } from '@fluentui-react-native/experimental-menu-button';
+import { Text, View, Platform } from 'react-native';
+import { menuItems, iconProps, testImage } from './testData';
+import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonTestStyles';
+import { IconSourcesType } from '@fluentui-react-native/icon';
 
 export const CustomizedMenuButton: React.FunctionComponent = () => {
-  const StyledMenuButton = MenuButton.customize({
-    button: {
-      borderRadius: 4,
-      backgroundColor: '#0095ff',
-      borderWidth: 0,
-      color: '#fff',
-      variant: 'heroSemibold',
-      fontFamily: 'Georgia',
+  const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
+
+  const onItemClick = React.useCallback(
+    key => {
+      setLastMenuItemClicked(key);
     },
-    contextualMenu: { backgroundColor: '#a9dbff' },
+    [setLastMenuItemClicked],
+  );
+
+  const iconToShow: IconSourcesType = Platform.select({
+    macos: testImage, //GH #931, macOS MenuButton only supports showing PNG icons
+    default: iconProps,
+  });
+
+  const StyledMenuButton = MenuButton.customize({
+    backgroundColor: 'red',
+    borderRadius: 10,
+    color: '#fff', //not working
+    borderWidth: 4,
+    borderColor: '#000',
+    fontFamily: 'Georgia', //not working
+    variant: 'heroSemibold',
+    iconColor: '#fff',
+    primary: {
+      backgroundColor: 'yellow',
+      color: '#000',
+    },
   });
   return (
     <View>
       <View style={viewWrapperStyle}>
         <View style={columnStyle}>
+          <Text>
+            <Text>Last Menu Item Clicked: </Text>
+            {lastMenuItemClicked > 0 ? <Text style={textColor}>{lastMenuItemClicked}</Text> : <Text style={textColor}>none</Text>}
+          </Text>
           <View style={rowStyle}>
             <Text>MenuButton with customized UI</Text>
           </View>
         </View>
       </View>
-      <StyledMenuButton content="styled MenuButton" menuItems={menuItems} />
+      <StyledMenuButton content="styled MenuButton" menuItems={menuItems} onItemClick={onItemClick} icon={iconToShow} />
+      <StyledMenuButton content="primary MenuButton" menuItems={menuItems} onItemClick={onItemClick} icon={iconToShow} primary />
     </View>
   );
 };
