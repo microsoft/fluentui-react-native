@@ -4,6 +4,12 @@ import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-
 import { defaultButtonTokens } from './ButtonTokens';
 import { defaultButtonColorTokens } from './ButtonColorTokens';
 import { Platform } from 'react-native';
+import {
+  getTextMarginLeftAdjustment,
+  getTextMarginRightAdjustment,
+  getTextMarginTopAdjustment,
+  getTextMarginBottomAdjustment,
+} from '@fluentui-react-native/styling-utils';
 
 export const buttonStates: (keyof ButtonTokens)[] = [
   'fab',
@@ -46,10 +52,10 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
       (tokens: ButtonTokens, theme: Theme) => ({
         style: {
           color: tokens.color,
-          marginLeft: tokens.spacingIconContent ?? 1,
-          marginRight: -1,
-          marginBottom: 1,
-          marginTop: -1,
+          marginLeft: tokens.spacingIconContent ?? getTextMarginLeftAdjustment(),
+          marginRight: getTextMarginRightAdjustment(),
+          marginBottom: getTextMarginBottomAdjustment(),
+          marginTop: getTextMarginTopAdjustment(),
           ...fontStyles.from(tokens, theme),
         },
       }),
