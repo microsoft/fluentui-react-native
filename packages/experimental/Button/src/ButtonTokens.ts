@@ -21,13 +21,13 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       },
     },
     medium: {
-      padding: globalTokens.spacing.sNudge - 1,
+      padding: globalTokens.spacing.sNudge - globalTokens.stroke.width.thin,
       borderWidth: globalTokens.stroke.width.thin,
       borderRadius: globalTokens.corner.radius.medium,
       iconSize: 16,
       hasContent: {
         minWidth: 96,
-        paddingHorizontal: globalTokens.spacing.l - 1,
+        paddingHorizontal: globalTokens.spacing.l - globalTokens.stroke.width.thin,
         variant: 'bodySemibold',
         hasIcon: {
           spacingIconContent: globalTokens.spacing.sNudge,
@@ -35,13 +35,13 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       },
     },
     small: {
-      padding: globalTokens.spacing.xs - 1,
+      padding: globalTokens.spacing.xs - globalTokens.stroke.width.thin,
       borderWidth: globalTokens.stroke.width.thin,
       borderRadius: globalTokens.corner.radius.medium,
       iconSize: 16,
       hasContent: {
         minWidth: 64,
-        paddingHorizontal: globalTokens.spacing.m - 1,
+        paddingHorizontal: globalTokens.spacing.m - globalTokens.stroke.width.thin,
         variant: 'secondaryStandard',
         hasIcon: {
           spacingIconContent: globalTokens.spacing.xs,
@@ -49,13 +49,13 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       },
     },
     large: {
-      padding: globalTokens.spacing.s - 1,
+      padding: globalTokens.spacing.s - globalTokens.stroke.width.thin,
       borderWidth: globalTokens.stroke.width.thin,
       borderRadius: globalTokens.corner.radius.medium,
       iconSize: 20,
       hasContent: {
         minWidth: 96,
-        paddingHorizontal: globalTokens.spacing.l - 1,
+        paddingHorizontal: globalTokens.spacing.l - globalTokens.stroke.width.thin,
         variant: 'subheaderSemibold',
         hasIcon: {
           spacingIconContent: globalTokens.spacing.sNudge,
