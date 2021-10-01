@@ -26,7 +26,7 @@
   "dependencies": {
     "@fluentui-react-native/callout": ">=0.17.22 <1.0.0",
     "@fluentui-react-native/component-cache": "^1.2.3",
-    "@fluentui-react-native/icon": "0.8.22",
+    "@fluentui-react-native/icon": "0.8.23",
     "@fluentui-react-native/interactive-hooks": ">=0.10.46 <1.0.0",
     "@fluentui-react-native/text": ">=0.10.18 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.9.24 <1.0.0",
