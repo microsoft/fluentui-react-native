@@ -5,12 +5,7 @@ import { defaultButtonColorTokens } from '../ButtonColorTokens';
 import { buttonStates } from '../Button.styling';
 import { defaultToggleButtonColorTokens } from './ToggleButtonColorTokens';
 import { defaultButtonTokens } from '../ButtonTokens';
-import {
-  getTextMarginLeftAdjustment,
-  getTextMarginRightAdjustment,
-  getTextMarginTopAdjustment,
-  getTextMarginBottomAdjustment,
-} from '@fluentui-react-native/styling-utils';
+import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
 
 export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonSlotProps, ToggleButtonTokens> = {
   tokens: [defaultButtonTokens, defaultButtonColorTokens, defaultToggleButtonColorTokens, toggleButtonName],
@@ -36,10 +31,8 @@ export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonS
       (tokens: ToggleButtonTokens, theme: Theme) => ({
         style: {
           color: tokens.color,
-          marginLeft: tokens.spacingIconContent ?? getTextMarginLeftAdjustment(),
-          marginRight: getTextMarginRightAdjustment(),
-          marginBottom: getTextMarginBottomAdjustment(),
-          marginTop: getTextMarginTopAdjustment(),
+          ...getTextMarginAdjustment(),
+          ...(tokens.spacingIconContent && { marginLeft: tokens.spacingIconContent }),
           ...fontStyles.from(tokens, theme),
         },
       }),
