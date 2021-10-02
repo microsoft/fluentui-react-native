@@ -89,7 +89,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
         onItemClick: OnItemClickRerouted,
         onDismiss: dismissCallback,
         style: {
-          display: 'none', // The view should take up no space, as it's just a proxy to fire the NSMenu
+          // display: 'none', // The view should take up no space, as it's just a proxy to fire the NSMenu
         },
         ...rest,
       },
@@ -128,7 +128,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
 
     return (
       <CMContext.Provider value={renderData.state.context}>
-        <Slots.root menu={menu}>{children}</Slots.root>
+        <Slots.root>{children}</Slots.root>
       </CMContext.Provider>
     );
   },

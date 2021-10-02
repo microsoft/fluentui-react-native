@@ -48,21 +48,13 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 	}
 
 	// MARK: - RCTComponent
-	
-	override func reactSetFrame(_ frame: CGRect) {
-		super.reactSetFrame(frame)
-		NSLog(NSStringFromCGRect(frame))
-		// Seems to not get called
-	}
-
-	override func insertReactSubview(_ subview: NSView!, at atIndex: Int) {
-		super.insertReactSubview(subview, at: atIndex)
-		// Adding menu items here means they have zero frame
-	}
 
 	override func didUpdateReactSubviews() {
-		super.didUpdateReactSubviews()
-		// They still have zero frame if I call showContextualMenu
+		for view in reactSubviews() {
+			let menuItem = NSMenuItem()
+			menuItem.view = view
+			menu?.addItem(menuItem)
+		}
 	}
 
 	// MARK: - NSMenuDelegate
@@ -123,16 +115,6 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 
 	private func showContextualMenu() {
 		updateMenu()
-
-		// Tried adding subviews as menu items here, but they were either blank or had zero frame
-		NSLog("Number of Subviews: " + String(subviews.count))
-		for view in reactSubviews() {
-			NSLog(NSStringFromCGRect(view.frame))
-			view.frame = NSMakeRect(0, 0, 100, 20)
-			let menuItem = NSMenuItem()
-			menuItem.view = view
-			menu?.addItem(menuItem)
-		}
 
 		// Popping up an NSMenu is a blocking event, so let's be sure the onShow/onDismiss events are processed correctly
 		sendOnShowEvent()
