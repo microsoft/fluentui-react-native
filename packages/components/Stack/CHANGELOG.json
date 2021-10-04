@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/stack",
   "entries": [
     {
+      "date": "Fri, 01 Oct 2021 17:52:17 GMT",
+      "tag": "@fluentui-react-native/stack_v0.5.37",
+      "version": "0.5.37",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.6.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "cb59746a9358af9ae32ea386aad1cfaa1922605d",
+            "package": "@fluentui-react-native/stack"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 28 Sep 2021 21:08:25 GMT",
+      "tag": "@fluentui-react-native/stack_v0.5.36",
+      "version": "0.5.36",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Delete NativeButton",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "335503904094894a91e53c6de328bf13e13bcc1c",
+            "package": "@fluentui-react-native/stack"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Sep 2021 19:08:16 GMT",
       "tag": "@fluentui-react-native/stack_v0.5.35",
       "version": "0.5.35",

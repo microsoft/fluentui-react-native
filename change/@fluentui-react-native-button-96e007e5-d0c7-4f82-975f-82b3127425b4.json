@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fixed \"Height of the Button and Link components increases with adding borderWidth\"",
-  "packageName": "@fluentui-react-native/button",
-  "email": "v.kozlova13@gmail.com",
-  "dependentChangeType": "patch"
-}

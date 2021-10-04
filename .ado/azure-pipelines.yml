@@ -146,7 +146,26 @@ jobs:
           publishJUnitResults: false
           javaHomeOption: 'JDKVersion'
           sonarQubeRunAnalysis: false
-  # Uncomment this job to test changes to the NuGet package.
+
+  # Dedicated task to make sure link on repo are functional.
+  - job: TestLinks
+    displayName: Test repo links
+    pool:
+      vmImage: 'ubuntu-latest'
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+
+    steps:
+      - checkout: self
+        persistCredentials: true
+
+      - template: templates/setup-repo.yml
+
+      - script: |
+          find . -name \*.md -not -name CHANGELOG.md -not -path '*/\node_modules/*' -print0 | xargs -0 -n1 yarn test-links -c `pwd`/.ado/markdown-link-check-config.json
+        displayName: 'testing links'
+  # Uncomment this job to test changes to the NuGet package
+  # We keep it commented out by default because this job is much longer than the other PR jobs
   # - job: NuGetPublish
   #   displayName: NuGet Publish
   #   pool:

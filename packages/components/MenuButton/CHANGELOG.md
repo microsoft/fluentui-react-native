@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Tue, 21 Sep 2021 16:32:12 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Oct 2021 17:52:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.11
+
+Fri, 01 Oct 2021 17:52:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.20.10 (ruaraki@microsoft.com)
+
+## 0.6.10
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
 
 ## 0.6.9
 

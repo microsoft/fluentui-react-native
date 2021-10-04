@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/test-tools",
   "entries": [
     {
+      "date": "Tue, 28 Sep 2021 21:08:25 GMT",
+      "tag": "@fluentui-react-native/test-tools_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.12.3",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "335503904094894a91e53c6de328bf13e13bcc1c",
+            "package": "@fluentui-react-native/test-tools"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Sep 2021 16:32:12 GMT",
       "tag": "@fluentui-react-native/test-tools_v0.1.1",
       "version": "0.1.1",

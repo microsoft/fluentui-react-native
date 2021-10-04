@@ -7,7 +7,6 @@ import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './Te
 import { HOMEPAGE_FOCUSZONE_BUTTON, FocusZoneTest } from './TestComponents/FocusZone';
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
-import { NativeButtonTest, HOMEPAGE_NATIVEBUTTON_BUTTON } from './TestComponents/NativeButton';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from './TestComponents/Persona';
 import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from './TestComponents/PersonaCoin';
 import { HOMEPAGE_PRESSABLE_BUTTON, PressableTest } from './TestComponents/Pressable';
@@ -20,6 +19,7 @@ import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 import { HOMEPAGE_MENU_BUTTON, MenuButtonTest } from './TestComponents/MenuButton';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { HOMEPAGE_TABS_BUTTON, TabsTest } from './TestComponents/Tabs';
+import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON, ExperimentalTabsTest } from './TestComponents/TabsExperimental';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 
 export const tests: TestDescription[] = [
@@ -57,11 +57,6 @@ export const tests: TestDescription[] = [
     name: 'MenuButton Test',
     component: MenuButtonTest,
     testPage: HOMEPAGE_MENU_BUTTON,
-  },
-  {
-    name: 'Native Button Test',
-    component: NativeButtonTest,
-    testPage: HOMEPAGE_NATIVEBUTTON_BUTTON,
   },
   {
     name: 'Separator Test',
@@ -127,6 +122,11 @@ export const tests: TestDescription[] = [
     name: 'Tabs Test',
     component: TabsTest,
     testPage: HOMEPAGE_TABS_BUTTON,
+  },
+  {
+    name: 'Experimental Tabs Test',
+    component: ExperimentalTabsTest,
+    testPage: HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
   },
   {
     name: 'Tokens Test',
