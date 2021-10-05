@@ -9,15 +9,15 @@ PODS:
     - React-Core (= 0.63.38)
     - React-jsi (= 0.63.38)
     - ReactCommon/turbomodule/core (= 0.63.38)
-  - FRNAvatar (0.12.11):
+  - FRNAvatar (0.12.12):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
-  - FRNContextualMenu (0.10.24):
+  - FRNContextualMenu (0.10.25):
     - React
-  - FRNMenuButton (0.6.10):
+  - FRNMenuButton (0.6.11):
     - React
-  - FRNRadioButton (0.13.11):
+  - FRNRadioButton (0.13.12):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.3.0):
@@ -92,7 +92,7 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
-  - RCTFocusZone (0.7.26):
+  - RCTFocusZone (0.7.27):
     - React
   - RCTRequired (0.63.38)
   - RCTTypeSafety (0.63.38):
@@ -454,14 +454,14 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 6f26a5d3b481c40c520b319ab2919994ab28e51d
   FBReactNativeSpec: a364112f45d4c007ab0a375296bd2b5bc171cd72
-  FRNAvatar: e4941d3152af687d194de5b6ea157234a5e33d8a
-  FRNContextualMenu: eb913b7ad33c32e9f1bd4cd03e58ef2c29149ef1
-  FRNMenuButton: 7ce4772362c9096a8212232450e4b5e0392556fd
-  FRNRadioButton: 84b1c8405974f0617b3077b471c31a1915494f8c
+  FRNAvatar: 2687926489d4e58fd8f68b0cb4297ce1c179e742
+  FRNContextualMenu: 7c6e31d6a43ff87f0c02e38cdb8230cb9675cb5b
+  FRNMenuButton: d586b0020fac8dd5860c132030bf5db65f6e3184
+  FRNRadioButton: 8dd7bdc2d360b6747c04bec836bff26ebeeafdf3
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
-  RCTFocusZone: 58fb73df3752f35a0f1f7d9a9a4a0d7cb542686c
+  RCTFocusZone: 337ea97ab5015b5d3e82778329d985afb2c1f449
   RCTRequired: 2d4cfa605a65bdd56802eaa8fdbc3310f7136edf
   RCTTypeSafety: 4b3cf5ccb0859341fcb2521ae5d9623582b327e3
   React: dbb7cca926a22af3437d1b584fb25dd539827834
@@ -491,4 +491,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 6e2db922d30ab862cb52f64186e186a709c798b1
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.0
