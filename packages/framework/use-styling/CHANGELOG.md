@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/use-styling
 
-This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
+This log was last generated on Fri, 01 Oct 2021 17:52:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Fri, 01 Oct 2021 17:52:17 GMT
+
+### Minor changes
+
+- Add props to build props (ruaraki@microsoft.com)
 
 ## 0.6.8
 

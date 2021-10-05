@@ -23,7 +23,7 @@ const NativeContextualMenu = ensureNativeComponent('FRNContextualMenu');
 
 // Represents the props available on a native NSMenuItem
 // https://developer.apple.com/documentation/appkit/nsmenuitem
-type NativeMenuItem = {
+export type NativeMenuItem = {
   title: string;
   image: ImageResolvedAssetSource;
   enabled: boolean;
@@ -33,7 +33,7 @@ type NativeMenuItem = {
   submenu: NativeMenuItem[];
 };
 
-function extractResolvedImageSourceFromIcon(icon?: number | string | IconProps): ImageResolvedAssetSource {
+export function extractResolvedImageSourceFromIcon(icon?: number | string | IconProps): ImageResolvedAssetSource {
   if (!icon) {
     return null;
   }
@@ -110,21 +110,21 @@ export const ContextualMenu = compose<ContextualMenuType>({
       return null;
     }
 
-    const menu: NativeMenuItem[] = React.Children.map(children, (child) => {
-      if (React.isValidElement(child)) {
-        const imageSource = child.props.icon ? extractResolvedImageSourceFromIcon(child.props.icon) : null;
+    // const menu: NativeMenuItem[] = React.Children.map(children, (child) => {
+    //   if (React.isValidElement(child)) {
+    //     const imageSource = child.props.icon ? extractResolvedImageSourceFromIcon(child.props.icon) : null;
 
-        return {
-          title: child.props.text,
-          ...(imageSource && { image: imageSource }), // Only pass in the prop if defined
-          enabled: !child.props.disabled,
-          tooltip: child.props.tooltip,
-          identifier: child.props.itemKey,
-          hasSubmenu: child.props.hasSubmenu,
-          submenu: null,
-        };
-      }
-    });
+    //     return {
+    //       title: child.props.text,
+    //       ...(imageSource && { image: imageSource }), // Only pass in the prop if defined
+    //       enabled: !child.props.disabled,
+    //       tooltip: child.props.tooltip,
+    //       identifier: child.props.itemKey,
+    //       hasSubmenu: child.props.hasSubmenu,
+    //       submenu: null,
+    //     };
+    //   }
+    // });
 
     return (
       <CMContext.Provider value={renderData.state.context}>
