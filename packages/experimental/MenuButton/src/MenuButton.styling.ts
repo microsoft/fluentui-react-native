@@ -9,7 +9,7 @@ export const stylingSettings: UseStylingOptions<MenuButtonProps, MenuButtonSlotP
   slotProps: {
     button: buildProps(
       (tokens: MenuButtonTokens, theme: Theme, props: MenuButtonProps) => {
-        const { onClick, primary, componentRef } = props;
+        const { onClick, primary, componentRef, icon, tooltip } = props;
         return {
           style: {
             backgroundColor: tokens.backgroundColor,
@@ -23,9 +23,24 @@ export const stylingSettings: UseStylingOptions<MenuButtonProps, MenuButtonSlotP
           onClick,
           primary,
           componentRef,
+          icon,
+          tooltip,
         };
       },
-      ['backgroundColor', 'color', 'iconColor', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys, ...fontStyles.keys],
+      [
+        'backgroundColor',
+        'color',
+        'iconColor',
+        ...borderStyles.keys,
+        ...layoutStyles.keys,
+        ...shadowStyles.keys,
+        ...fontStyles.keys,
+        'onClick',
+        'primary',
+        'componentRef',
+        'icon',
+        'tooltip',
+      ],
     ),
   },
 };

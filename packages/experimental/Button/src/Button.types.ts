@@ -114,6 +114,11 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
 
   /** A floating action button  */
   fab?: boolean;
+
+  /**
+   * Foreground color for the text and/or icon of the button
+   */
+  color?: ColorValue;
 }
 
 export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;

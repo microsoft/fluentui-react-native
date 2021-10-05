@@ -47,7 +47,13 @@ export const CustomizedMenuButton: React.FunctionComponent = () => {
           </View>
         </View>
       </View>
-      <StyledMenuButton content="styled MenuButton" menuItems={menuItems} onItemClick={onItemClick} icon={iconToShow} />
+      <StyledMenuButton
+        content="styled MenuButton"
+        menuItems={menuItems}
+        onItemClick={onItemClick}
+        icon={iconToShow}
+        tooltip="This is tooltip"
+      />
       <StyledMenuButton content="primary MenuButton" menuItems={menuItems} onItemClick={onItemClick} icon={iconToShow} primary />
     </View>
   );
