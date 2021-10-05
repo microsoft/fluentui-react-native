@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-const defaultWaitForTimeout = 10000;
-const defaultConnectionRetryTimeout = 15000;
+const defaultWaitForTimeout = 20000;
+const defaultConnectionRetryTimeout = 20000;
 const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
@@ -34,7 +34,7 @@ exports.config = {
   bail: 1,
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
-  connectionRetryCount: 1, // Maximum count of request retries to the Selenium server.
+  connectionRetryCount: 3, // Maximum count of request retries to the Selenium server.
 
   port: 4723, // default appium port
   services: ['appium'],
@@ -49,6 +49,10 @@ exports.config = {
   jasmineNodeOpts: {
     defaultTimeoutInterval: jasmineDefaultTimeout,
   },
+
+  // The number of times to retry the entire specfile when it fails as a whole.
+  // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
+  specFileRetries: 3,
 
   reporters: [
     'spec',
@@ -98,8 +102,8 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   beforeSession: function (/* config, capabilities, specs */) {
-    fs.mkdirSync('./errorShots', { recursive: true });
-    fs.mkdirSync('./allure-results', { recursive: true });
+    fs.mkdirSync('./errorShots', {recursive: true});
+    fs.mkdirSync('./allure-results', {recursive: true});
   },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
