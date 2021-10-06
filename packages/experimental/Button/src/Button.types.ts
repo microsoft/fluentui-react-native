@@ -119,6 +119,11 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
    * Foreground color for the text and/or icon of the button
    */
   color?: ColorValue;
+
+  /**
+   * A font variant value.
+   */
+  variant?: string;
 }
 
 export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;

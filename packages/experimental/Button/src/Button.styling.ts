@@ -8,6 +8,7 @@ export const buttonStates: (keyof ButtonTokens)[] = ['fab', 'fluid', 'primary', 
 export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, ButtonTokens> = {
   tokens: [defaultButtonTokens, buttonName],
   states: buttonStates,
+  tokensThatAreAlsoProps: ['color', 'variant'],
   slotProps: {
     root: buildProps(
       (tokens: ButtonTokens, theme: Theme) => ({
@@ -29,10 +30,11 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
       ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
     ),
     content: buildProps(
-      (tokens: ButtonTokens, theme: Theme) => ({
+      (tokens: ButtonTokens, theme: Theme, props: ButtonProps) => ({
         style: {
-          color: tokens.color,
+          color: props.color || tokens.color,
           ...fontStyles.from(tokens, theme),
+          variant: props.variant || tokens.variant,
         },
       }),
       ['color', ...fontStyles.keys],

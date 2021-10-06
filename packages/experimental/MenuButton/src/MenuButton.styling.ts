@@ -6,6 +6,7 @@ import { defaultButtonTokens, buttonStates } from '@fluentui-react-native/experi
 export const stylingSettings: UseStylingOptions<MenuButtonProps, MenuButtonSlotProps, MenuButtonTokens> = {
   tokens: [menuButtonName, defaultButtonTokens],
   states: buttonStates,
+  tokensThatAreAlsoProps: ['color', 'variant'],
   slotProps: {
     button: buildProps(
       (tokens: MenuButtonTokens, theme: Theme, props: MenuButtonProps) => {
@@ -13,13 +14,13 @@ export const stylingSettings: UseStylingOptions<MenuButtonProps, MenuButtonSlotP
         return {
           style: {
             backgroundColor: tokens.backgroundColor,
-            color: tokens.color,
-            iconColor: tokens.iconColor,
             ...borderStyles.from(tokens, theme),
             ...layoutStyles.from(tokens, theme),
             ...shadowStyles.from(tokens, theme),
             ...fontStyles.from(tokens, theme),
           },
+          color: tokens.color,
+          variant: tokens.variant,
           onClick,
           primary,
           componentRef,

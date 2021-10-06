@@ -17,21 +17,21 @@ export const CustomizedMenuButton: React.FunctionComponent = () => {
 
   const iconToShow: IconSourcesType = Platform.select({
     macos: testImage, //GH #931, macOS MenuButton only supports showing PNG icons
-    default: iconProps,
+    default: { ...iconProps, color: '#fff' },
   });
 
   const StyledMenuButton = MenuButton.customize({
     backgroundColor: 'red',
     borderRadius: 10,
-    color: '#fff', //not working
+    color: '#fff',
     borderWidth: 4,
     borderColor: '#000',
-    fontFamily: 'Georgia', //not working
     variant: 'heroSemibold',
     iconColor: '#fff',
     primary: {
       backgroundColor: 'yellow',
       color: '#000',
+      iconColor: '#000',
     },
   });
   return (

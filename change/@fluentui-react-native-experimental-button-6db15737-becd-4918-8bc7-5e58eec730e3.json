@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Made possible to customize fonts from outside",
+  "packageName": "@fluentui-react-native/experimental-button",
+  "email": "v.kozlova13@gmail.com",
+  "dependentChangeType": "patch"
+}
