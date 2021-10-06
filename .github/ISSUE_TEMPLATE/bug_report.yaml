@@ -11,6 +11,10 @@ body:
         - Search: https://github.com/microsoft/fluentui-react-native/search?type=Issues
 
         Note that if you do not provide enough information to reproduce the issue, we may not be able to take action on your report.
+  - type: markdown
+    attributes:
+      value: |
+        # Environment Information
   - type: input
     validations:
       required: true
@@ -52,7 +56,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Priorities and help requested
+        # Priorities and help requested
   - type: checkboxes
     attributes:
       options:
