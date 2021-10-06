@@ -66,6 +66,7 @@ body:
       value: |
         New Component Checklist
   - type: checkboxes
+    id: Checklist_General
     attributes:
       label: General
       options:
@@ -75,6 +76,7 @@ body:
         - label: Internationalization and Right-to-left Layouts
         - label: Ready for Contribution
   - type: checkboxes
+    id: Checklist_iOS
     attributes:
       label: iOS
       options:
@@ -87,6 +89,7 @@ body:
         - label: UI tests
         - label: Other (please specify)
   - type: checkboxes
+    id: Checklist_macOS
     attributes:
       label: macOS
       options:
@@ -98,16 +101,19 @@ body:
         - label: UI tests
         - label: Other (please specify)
   - type: checkboxes
+    id: Checklist_Windows
     attributes:
       label: Windows
       options:
         - label: Other (please specify)
   - type: checkboxes
+    id: Checklist_Win32
     attributes:
       label: Win32
       options:
         - label: Other (please specify)
   - type: checkboxes
+    id: Checklist_Android
     attributes:
       label: Android
       options:

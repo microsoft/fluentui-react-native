@@ -52,7 +52,7 @@ body:
     attributes:
       label: Are you willing to submit a PR to fix?
       options:
-        - label: Yes
+        - label: 'I am willing to submit a PR with a fix'
   - type: dropdown
     attributes:
       label: Requested priority
