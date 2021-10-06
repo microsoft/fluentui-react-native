@@ -13,7 +13,7 @@ import RadioGroupTestPage from '../../RadioGroup/pages/RadioGroupTestPage.win';
 import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
 import SvgTestPage from '../../Svg/pages/SvgTestPage.win';
 import TextTestPage from '../../Text/pages/TextTestPage.win';
-import TabsTestPage from '../../Tabs/pages/TabsTestPage.win';
+//import TabsTestPage from '../../Tabs/pages/TabsTestPage.win';
 import ExperimentalTabsTestPage from '../../TabsExperimental/pages/ExperimentalTabsTestPage.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
 import BootTestPage from '../pages/BootTestPage.win';
@@ -120,11 +120,11 @@ describe('Click on each test page and check if it renders', function () {
     expect(SvgTestPage.isPageLoaded()).toBeTruthy();
   });
 
-  it('Tabs Test Page', () => {
-    BootTestPage.clickAndGoToTabsPage();
-    TabsTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
-    expect(TabsTestPage.isPageLoaded()).toBeTruthy();
-  });
+  // it('Tabs Test Page', () => {
+  //   BootTestPage.clickAndGoToTabsPage();
+  //   TabsTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+  //   expect(TabsTestPage.isPageLoaded()).toBeTruthy();
+  // });
 
   it('Text Test Page', () => {
     BootTestPage.clickAndGoToTextPage();
