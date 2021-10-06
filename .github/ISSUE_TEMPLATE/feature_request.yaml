@@ -1,4 +1,4 @@
-name: Feature request 2
+name: Feature request
 description: Do you have Feature or improvement for Fluent UI React Native? Let us know.
 title: Describe the request
 labels: []
@@ -13,6 +13,8 @@ body:
         - label: windows
         - label: android
   - type: textarea
+    validations:
+      required: true
     attributes:
       label: Describe the feature that you would like added
   - type: textarea

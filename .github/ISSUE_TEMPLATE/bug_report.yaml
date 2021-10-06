@@ -1,4 +1,4 @@
-name: Bug report 2
+name: Bug report
 description: Found a bug in Fluent UI React Native? Please let us know.
 title: Describe the problem
 labels: []
@@ -9,6 +9,7 @@ body:
         Thanks for contacting us! We're here to help.
         Before you report an issue, check if it's been reported before:
         - Search: https://github.com/microsoft/fluentui-react-native/search?type=Issues
+
         Note that if you do not provide enough information to reproduce the issue, we may not be able to take action on your report.
   - type: input
     validations:
@@ -48,11 +49,14 @@ body:
   - type: textarea
     attributes:
       label: Expected behavior
+  - type: markdown
+    attributes:
+      value: |
+        Priorities and help requested
   - type: checkboxes
     attributes:
-      label: Are you willing to submit a PR to fix?
       options:
-        - label: 'I am willing to submit a PR with a fix'
+        - label: 'I am willing to submit a PR to fix'
   - type: dropdown
     attributes:
       label: Requested priority

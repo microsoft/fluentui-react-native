@@ -1,4 +1,4 @@
-name: New Component 2
+name: New Component
 description: Interested in contributing a new component to Fluent UI React Native? This template includes necessary information to get started, and steps to completion
 title: Component description
 labels: []
@@ -10,8 +10,10 @@ body:
   - type: markdown
     attributes:
       value: |
-        Component details
+        # Component details
   - type: textarea
+    validations:
+      required: true
     attributes:
       label: Description
   - type: textarea
@@ -33,12 +35,12 @@ body:
   - type: markdown
     attributes:
       value: |
-        Component composition
+        # Component composition
   - type: textarea
     attributes:
       label: Imports/Dependencies
       description: |
-        What dependencies will your component be using
+        What dependencies will your component be using?
   - type: textarea
     attributes:
       label: Proposed Public API
@@ -56,7 +58,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Component code
+        # Component code
   - type: textarea
     attributes:
       label: Example code
@@ -64,7 +66,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        New Component Checklist
+        # New Component Checklist
   - type: checkboxes
     id: Checklist_General
     attributes:
@@ -87,7 +89,7 @@ body:
         - label: Voiceover
         - label: Unit tests
         - label: UI tests
-        - label: Other (please specify)
+        - label: Other (please specify below)
   - type: checkboxes
     id: Checklist_macOS
     attributes:
@@ -99,22 +101,25 @@ body:
         - label: Voiceover
         - label: Unit tests
         - label: UI tests
-        - label: Other (please specify)
+        - label: Other (please specify below)
   - type: checkboxes
     id: Checklist_Windows
     attributes:
       label: Windows
       options:
-        - label: Other (please specify)
+        - label: Other (please specify below)
   - type: checkboxes
     id: Checklist_Win32
     attributes:
       label: Win32
       options:
-        - label: Other (please specify)
+        - label: Other (please specify below)
   - type: checkboxes
     id: Checklist_Android
     attributes:
       label: Android
       options:
-        - label: Other (please specify)
+        - label: Other (please specify below)
+  - type: textarea
+    attributes:
+      label: Other details
