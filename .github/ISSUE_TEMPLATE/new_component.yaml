@@ -1,0 +1,114 @@
+name: New Component 2
+description: Interested in contributing a new component to Fluent UI React Native? This template includes necessary information to get started, and steps to completion
+title: Component description
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for new components or new component variants
+  - type: markdown
+    attributes:
+      value: |
+        Component details
+  - type: textarea
+    attributes:
+      label: Description
+  - type: textarea
+    attributes:
+      label: Which product teams/scenarios need this control
+      description: |
+        The more teams/scenarios that would use this control the better chance it will get prioritized
+  - type: textarea
+    attributes:
+      label: Design assets
+      description: |
+        Please provide links to redlines or screenshots of intended component design
+        Are you internal to Microsoft and your design isn't yet public? Please reach out to us internally via the Fluent UI Community.
+  - type: textarea
+    attributes:
+      label: Component ownership
+      description: |
+        Are there one or more people who can help maintain this component over time? Who will address bugs?
+  - type: markdown
+    attributes:
+      value: |
+        Component composition
+  - type: textarea
+    attributes:
+      label: Imports/Dependencies
+      description: |
+        What dependencies will your component be using
+  - type: textarea
+    attributes:
+      label: Proposed Public API
+      description: |
+        Define the proposed public API for this control
+  - type: checkboxes
+    attributes:
+      label: Intended Platforms
+      options:
+        - label: iOS
+        - label: macOS
+        - label: win32
+        - label: windows
+        - label: android
+  - type: markdown
+    attributes:
+      value: |
+        Component code
+  - type: textarea
+    attributes:
+      label: Example code
+      render: markdown
+  - type: markdown
+    attributes:
+      value: |
+        New Component Checklist
+  - type: checkboxes
+    attributes:
+      label: General
+      options:
+        - label: Automated Tests
+        - label: Documentation and examples
+        - label: Keyboard Accessibility
+        - label: Internationalization and Right-to-left Layouts
+        - label: Ready for Contribution
+  - type: checkboxes
+    attributes:
+      label: iOS
+      options:
+        - label: Light and Dark Appearance
+        - label: Size classes and window sizes (iPhone vs iPad, notched devices, multitasking, different window sizes, etc)
+        - label: Increase Contrast Support
+        - label: Different resolutions (1x, 2x, 3x)
+        - label: Voiceover
+        - label: Unit tests
+        - label: UI tests
+        - label: Other (please specify)
+  - type: checkboxes
+    attributes:
+      label: macOS
+      options:
+        - label: Light and Dark Appearance
+        - label: Window sizes
+        - label: Different resolutions (1x, 2x, 3x)
+        - label: Voiceover
+        - label: Unit tests
+        - label: UI tests
+        - label: Other (please specify)
+  - type: checkboxes
+    attributes:
+      label: Windows
+      options:
+        - label: Other (please specify)
+  - type: checkboxes
+    attributes:
+      label: Win32
+      options:
+        - label: Other (please specify)
+  - type: checkboxes
+    attributes:
+      label: Android
+      options:
+        - label: Other (please specify)
