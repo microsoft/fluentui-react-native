@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "remap some tokens away from text/placeholdertext to label/secondarylabel",
+  "packageName": "@fluentui-react-native/apple-theme",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
