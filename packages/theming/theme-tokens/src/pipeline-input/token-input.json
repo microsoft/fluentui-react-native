@@ -223,10 +223,18 @@
         "Circle": { "value": 9999, "platform": { "winui": { "value": 18 } } }
       }
     },
-    "Padding": {
-      "400": {
-        "value": [7, 15, 7, 15]
-      }
+    "Spacing": {
+      "None": { "value": 0 },
+      "XXS": { "value": 2 },
+      "XS": { "value": 4 },
+      "SNudge": { "value": 6 },
+      "S": { "value": 8 },
+      "MNudge": { "value": 10 },
+      "M": { "value": 12 },
+      "L": { "value": 16 },
+      "XL": { "value": 20 },
+      "XXL": { "value": 24 },
+      "XXXL": { "value": 32 }
     },
     "Font": {
       "Family": {
@@ -359,6 +367,14 @@
         "LineHeight": { "aliasOf": "Global.Font.LineHeight.300" }
       }
     },
+    "BodyStrong": {
+      "Font": {
+        "Family": { "aliasOf": "Global.Font.Family.Default" },
+        "Size": { "aliasOf": "Global.Font.Size.300" },
+        "Weight": { "aliasOf": "Global.Font.Weight.Semibold" },
+        "LineHeight": { "aliasOf": "Global.Font.LineHeight.300" }
+      }
+    },
     "Subheadline": {
       "Font": {
         "Family": { "aliasOf": "Global.Font.Family.Default" },
@@ -413,43 +429,6 @@
         "Size": { "aliasOf": "Global.Font.Size.1000" },
         "Weight": { "aliasOf": "Global.Font.Weight.Semibold" },
         "LineHeight": { "aliasOf": "Global.Font.LineHeight.1000" }
-      }
-    },
-
-    "Square": {
-      "Corner": {
-        "Radius": { "aliasOf": "Global.Corner.Radius.None" }
-      }
-    },
-    "Icon": {
-      "Corner": {
-        "Radius": { "aliasOf": "Global.Corner.Radius.Medium" }
-      }
-    },
-    "Control": {
-      "Corner": {
-        "Radius": { "aliasOf": "Global.Corner.Radius.Medium" }
-      },
-      "Font": {
-        "Family": { "aliasOf": "Global.Font.Family.Default" },
-        "Size": { "aliasOf": "Global.Font.Size.300" },
-        "Weight": { "aliasOf": "Global.Font.Weight.Semibold" },
-        "LineHeight": { "aliasOf": "Global.Font.LineHeight.300" }
-      }
-    },
-    "Surface": {
-      "Corner": {
-        "Radius": { "aliasOf": "Global.Corner.Radius.Medium" }
-      }
-    },
-    "Illustration": {
-      "Corner": {
-        "Radius": { "aliasOf": "Global.Corner.Radius.ExtraLarge" }
-      }
-    },
-    "Round": {
-      "Corner": {
-        "Radius": { "aliasOf": "Global.Corner.Radius.Circle" }
       }
     },
 

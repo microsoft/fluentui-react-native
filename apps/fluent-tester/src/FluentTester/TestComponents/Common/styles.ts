@@ -88,7 +88,9 @@ export const fluentTesterStyles = StyleSheet.create({
   },
 
   testListItem: {
-    width: 150,
+    width: '100%',
+    borderRadius: 0,
+    justifyContent: 'flex-start',
   },
 
   testSection: {
