@@ -14,7 +14,7 @@ import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
 import SvgTestPage from '../../Svg/pages/SvgTestPage.win';
 import TextTestPage from '../../Text/pages/TextTestPage.win';
 import TabsTestPage from '../../Tabs/pages/TabsTestPage.win';
-import TabsExperimentalTestPage from '../../TabsExperimental/pages/TabsTestPage.win';
+import ExperimentalTabsTestPage from '../../TabsExperimental/pages/ExperimentalTabsTestPage.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
 import BootTestPage from '../pages/BootTestPage.win';
 
@@ -22,14 +22,14 @@ const BOOT_APP_TIMEOUT = 60000;
 const PAGE_TIMEOUT = 6000;
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Open the app', function() {
+describe('Open the app', function () {
   it('Boot app', () => {
     BootTestPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     expect(BootTestPage.isPageLoaded()).toBeTruthy();
   });
 });
 
-describe('Click on each test page and check if it renders', function() {
+describe('Click on each test page and check if it renders', function () {
   it('Button Test Page', () => {
     BootTestPage.clickAndGoToButtonPage();
     ButtonTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
@@ -52,6 +52,12 @@ describe('Click on each test page and check if it renders', function() {
     BootTestPage.clickAndGoToContextualMenuPage();
     ContextualMenuTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(ContextualMenuTestPage.isPageLoaded()).toBeTruthy();
+  });
+
+  it('Experimental Tabs Test Page', () => {
+    BootTestPage.clickAndGoToExperimentalTabsPage();
+    ExperimentalTabsTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+    expect(ExperimentalTabsTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('FocusTrapZone Test Page', () => {
@@ -114,22 +120,16 @@ describe('Click on each test page and check if it renders', function() {
     expect(SvgTestPage.isPageLoaded()).toBeTruthy();
   });
 
-  it('Text Test Page', () => {
-    BootTestPage.clickAndGoToTextPage();
-    TextTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
-    expect(TextTestPage.isPageLoaded()).toBeTruthy();
-  });
-
   it('Tabs Test Page', () => {
     BootTestPage.clickAndGoToTabsPage();
     TabsTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(TabsTestPage.isPageLoaded()).toBeTruthy();
   });
 
-  it('Tabs Experimental Test Page', () => {
-    BootTestPage.clickAndGoToTabsPage();
-    TabsExperimentalTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
-    expect(TabsExperimentalTestPage.isPageLoaded()).toBeTruthy();
+  it('Text Test Page', () => {
+    BootTestPage.clickAndGoToTextPage();
+    TextTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+    expect(TextTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Theme Test Page', () => {

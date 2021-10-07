@@ -18,14 +18,11 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
-  - FRNAvatar (0.12.5):
+  - FRNAvatar (0.12.12):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
-  - FRNButton (0.7.20):
-    - MicrosoftFluentUI (= 0.3.0)
-    - React
-  - FRNDatePicker (0.3.6):
+  - FRNDatePicker (0.3.7):
     - MicrosoftFluentUI (= 0.3.0)
     - React
   - glog (0.3.5)
@@ -428,7 +425,6 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../../../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Folly (from `../../../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - FRNAvatar (from `../../../packages/experimental/Avatar/FRNAvatar.podspec`)
-  - FRNButton (from `../../../packages/experimental/NativeButton/FRNButton.podspec`)
   - FRNDatePicker (from `../../../packages/experimental/NativeDatePicker/FRNDatePicker.podspec`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - QRCodeReader.swift
@@ -480,8 +476,6 @@ EXTERNAL SOURCES:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/Folly.podspec"
   FRNAvatar:
     :path: "../../../packages/experimental/Avatar/FRNAvatar.podspec"
-  FRNButton:
-    :path: "../../../packages/experimental/NativeButton/FRNButton.podspec"
   FRNDatePicker:
     :path: "../../../packages/experimental/NativeDatePicker/FRNDatePicker.podspec"
   glog:
@@ -545,9 +539,8 @@ SPEC CHECKSUMS:
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
-  FRNAvatar: f631c488ceadbf4a3f885bb10275104b1041da82
-  FRNButton: 525525958d2c3083e5c2a213e8d4c78e4d1169cc
-  FRNDatePicker: 28086c1c8092614414b4f8b7b3675f3b2a8c9cfc
+  FRNAvatar: 2687926489d4e58fd8f68b0cb4297ce1c179e742
+  FRNDatePicker: 3b0ee573936065b2de86ec61ab5f6407ba8163c8
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
   QRCodeReader.swift: 373a389fe9a22d513c879a32a6f647c58f4ef572
@@ -579,6 +572,6 @@ SPEC CHECKSUMS:
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
 
-PODFILE CHECKSUM: bcebab1599979f3beb71af26698524d24cb9f19e
+PODFILE CHECKSUM: 61f64d2e918386255ef0609310cb922b5e1c51b3
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.0

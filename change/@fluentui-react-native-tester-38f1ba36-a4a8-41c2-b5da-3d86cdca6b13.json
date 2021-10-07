@@ -1,6 +1,6 @@
 {
-  "type": "minor",
-  "comment": "Moving continueOnError to be specific to the E2E testing task",
+  "type": "patch",
+  "comment": "Fixing the Experimental Tabs integration for E2E Testing",
   "packageName": "@fluentui-react-native/tester",
   "email": "safreibe@microsoft.com",
   "dependentChangeType": "patch"
