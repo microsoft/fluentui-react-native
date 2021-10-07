@@ -1,2 +1,2 @@
-export const HOMEPAGE_EXPERIMENTAL_TABS_BUTTON = 'Homepage_Tabs_Button_Experimental';
-export const TABS_TESTPAGE = 'Tabs_TestPage';
+export const HOMEPAGE_EXPERIMENTAL_TABS_BUTTON = 'HOMEPAGE_EXPERIMENTAL_TABS_BUTTON';
+export const EXPERIMENTAL_TABS_TESTPAGE = 'Experimental_Tabs_TestPage';
