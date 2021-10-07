@@ -5,6 +5,10 @@
   "main": "lib-commonjs/index.js",
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
   "scripts": {
     "build": "fluentui-scripts build",
     "just": "fluentui-scripts",
