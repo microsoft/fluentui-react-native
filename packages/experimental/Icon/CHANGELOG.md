@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Fri, 01 Oct 2021 17:52:17 GMT and should not be manually modified.
+This log was last generated on Thu, 07 Oct 2021 20:59:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.25
+
+Thu, 07 Oct 2021 20:59:20 GMT
+
+### Patches
+
+- Fix bug where codepoint was passed as style prop (sanajmi@microsoft.com)
 
 ## 0.8.24
 
