@@ -6,7 +6,7 @@
 import AppKit
 
 @objc(FRNContextualMenu)
-class ContextualMenu: RCTView, NSMenuDelegate {
+class ContextualMenu: NSView, NSMenuDelegate {
 
 	@objc public weak var bridge: RCTBridge?
 
@@ -28,6 +28,12 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 		}
 	}
 
+  override var frame: NSRect {
+    didSet {
+      NSLog("SAAD Frame Set")
+    }
+  }
+
 	private init() {
 		super.init(frame: .zero)
 		menu = NSMenu()
@@ -42,19 +48,29 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 		self.init()
 		self.bridge = bridge
 	}
-	
+
 	override func viewWillDraw() {
 		showContextualMenu()
 	}
 
+  // MARK: - RCTView
+
+  override func reactSetFrame(_ frame: CGRect) {
+    self.frame = .zero
+  }
+
 	// MARK: - RCTComponent
 
 	override func didUpdateReactSubviews() {
+    // Add children to heirarchy
 		for view in reactSubviews() {
 			let menuItem = NSMenuItem()
-			menuItem.view = view
+      menuItem.view = view
 			menu?.addItem(menuItem)
 		}
+
+
+
 	}
 
 	// MARK: - NSMenuDelegate
@@ -67,9 +83,9 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 //	func menuDidClose(_ menu: NSMenu) {
 //		sendOnDismissEvent()
 //	}
-	
+
 	// TODO: Investigate these methods
-	
+
 //	func numberOfItems(in menu: NSMenu) -> Int {
 //		return reactSubviews().count
 //	}
@@ -85,7 +101,7 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 		guard let menu = menu else {
 			return
 		}
-		
+
 		for menuItem in menu.items {
 			menuItem.target = self
 			menuItem.action = #selector(sendOnItemClickEvent)
@@ -118,11 +134,11 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 
 		// Popping up an NSMenu is a blocking event, so let's be sure the onShow/onDismiss events are processed correctly
 		sendOnShowEvent()
-		
+
 		DispatchQueue.main.async {
 			let view = self.targetView ?? self
 			self.menu?.popUp(positioning: nil, at: NSPoint(x: 0, y: view.frame.height), in: view)
-			
+
 			self.sendOnDismissEvent()
 		}
 	}
@@ -131,5 +147,3 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 
 	private var targetView: NSView?
 }
-
-

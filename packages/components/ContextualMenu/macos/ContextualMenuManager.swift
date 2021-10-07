@@ -10,4 +10,8 @@ class ContextualMenuManager: RCTViewManager {
 	override func view()->NSView! {
 		return ContextualMenu(bridge: bridge)
 	}
+  
+//  override func shadowView() -> RCTShadowView! {
+//    return ContextualMenuShadowView()
+//  }
 }
