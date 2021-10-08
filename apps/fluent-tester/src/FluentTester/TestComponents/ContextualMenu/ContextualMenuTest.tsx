@@ -343,41 +343,10 @@ const IconContextualMenu: React.FunctionComponent = () => {
   );
 };
 
-const dialog: React.FunctionComponent = () => {
-  const [visible, setVisible] = React.useState(false);
-
-  const showDialog = () => setVisible(true);
-
-  const hideDialog = () => setVisible(false);
-
-  return (
-    <Provider>
-      <View>
-        <Button onClick={showDialog} content={'show dialog'}></Button>
-        <Portal>
-          <Dialog visible={visible} onDismiss={hideDialog}>
-            <Dialog.Content>
-              <Paragraph>This is simple dialog</Paragraph>
-            </Dialog.Content>
-            <Dialog.Actions>
-              <Button onClick={hideDialog} content={'done'}></Button>
-            </Dialog.Actions>
-          </Dialog>
-        </Portal>
-      </View>
-    </Provider>
-  );
-};
-
 const contextualMenuSections: TestSection[] = [
   {
-    name: 'Dialog',
-    testID: CONTEXTUALMENU_TESTPAGE,
-    component: dialog,
-  },
-  {
     name: 'Standard ContextualMenu',
-    testID: DIALOG_TESTPAGE,
+    testID: CONTEXTUALMENU_TESTPAGE,
     component: contextualMenu,
   },
   {
