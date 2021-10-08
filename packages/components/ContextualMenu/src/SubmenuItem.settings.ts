@@ -15,9 +15,9 @@ export const settings: IComposeSettings<SubmenuItemType> = [
       focusable: true,
       style: {
         display: 'flex',
+        flex: 1,
         flexDirection: 'row',
         alignSelf: 'flex-start',
-        width: '100%',
         justifyContent: 'space-between',
       },
     },
@@ -31,6 +31,7 @@ export const settings: IComposeSettings<SubmenuItemType> = [
     leftstack: {
       style: {
         display: 'flex',
+        flex: 1,
         paddingStart: 5,
         alignItems: 'center',
         flexDirection: 'row',
@@ -42,6 +43,7 @@ export const settings: IComposeSettings<SubmenuItemType> = [
     rightstack: {
       style: {
         display: 'flex',
+        flex: 1,
         paddingEnd: 5,
         alignItems: 'center',
         flexDirection: 'row',
