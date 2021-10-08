@@ -60,18 +60,33 @@ class ContextualMenu: NSView, NSMenuDelegate {
   }
 
 	// MARK: - RCTComponent
+  
+  override func insertReactSubview(_ subview: NSView!, at atIndex: Int) {
+    let menuItem = NSMenuItem()
+    menuItem.view = subview
+    menu?.insertItem(menuItem, at: atIndex)
+  }
+  
+  override func didUpdateReactSubviews() {
+    if let menu = menu {
+      for menuItem in menu.items {
+        if let view = menuItem.view {
+          view.translatesAutoresizingMaskIntoConstraints = true
+          let intrinsicSize = view.intrinsicContentSize
+          let intrinsicFrame = NSMakeRect(0, 0, intrinsicSize.width, intrinsicSize.height)
+          view.frame = intrinsicFrame
+        }
+      }
+    }
+  }
 
-	override func didUpdateReactSubviews() {
-    // Add children to heirarchy
-		for view in reactSubviews() {
-			let menuItem = NSMenuItem()
-      menuItem.view = view
-			menu?.addItem(menuItem)
-		}
-
-
-
-	}
+//	override func didUpdateReactSubviews() {
+//		for view in reactSubviews() {
+//			let menuItem = NSMenuItem()
+//      menuItem.view = view
+//			menu?.addItem(menuItem)
+//		}
+//	}
 
 	// MARK: - NSMenuDelegate
 

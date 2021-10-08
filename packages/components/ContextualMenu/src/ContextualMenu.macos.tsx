@@ -89,8 +89,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
         onItemClick: OnItemClickRerouted,
         onDismiss: dismissCallback,
         style: {
-          // position: 'absolute  ',
-          // display: 'none', // The view should take up no space, as it's just a proxy to fire the NSMenu
+          position: 'absolute', // The view should not participate in layout
         },
         ...rest,
       },
