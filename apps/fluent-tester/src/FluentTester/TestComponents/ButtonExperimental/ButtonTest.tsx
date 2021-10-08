@@ -4,6 +4,7 @@ import { ToggleButtonTest } from './ToggleButtonTestSection';
 import { ExperimentalButtonTestPageId } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { ButtonIconTest } from './ButtonIconTestSection';
+import { ButtonSizeTest } from './ButtonSizeTestSection';
 
 const buttonSections: TestSection[] = [
   {
@@ -18,6 +19,10 @@ const buttonSections: TestSection[] = [
   {
     name: 'Toggle Button',
     component: ToggleButtonTest,
+  },
+  {
+    name: 'Sizes',
+    component: ButtonSizeTest,
   },
 ];
 

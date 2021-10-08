@@ -8,6 +8,7 @@ import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native
 import { useButton } from '../useButton';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { buttonLookup } from '../Button';
 
 export const CompoundButton = compose<CompoundButtonType>({
   displayName: compoundButtonName,
@@ -24,7 +25,7 @@ export const CompoundButton = compose<CompoundButtonType>({
     const iconProps = createIconProps(userProps.icon);
 
     // grab the styled slots
-    const Slots = useSlots(userProps, (layer) => button.state[layer] || userProps[layer]);
+    const Slots = useSlots(userProps, layer => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
     return (final: CompoundButtonProps, ...children: React.ReactNode[]) => {

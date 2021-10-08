@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix bug where codepoint was passed as style prop",
-  "packageName": "@fluentui-react-native/icon",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

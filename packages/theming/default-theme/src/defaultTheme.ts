@@ -20,7 +20,7 @@ function _defaultTypography(): Typography {
     },
     families: {
       primary: 'Segoe UI',
-      secondary: 'System',
+      secondary: 'Segoe UI',
       cursive: 'System',
       monospace: 'System',
       sansSerif: 'System',

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Thu, 07 Oct 2021 20:59:20 GMT",
+      "tag": "@fluentui-react-native/icon_v0.8.25",
+      "version": "0.8.25",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix bug where codepoint was passed as style prop",
+            "author": "sanajmi@microsoft.com",
+            "commit": "bb1b9b253dfb41551a0f5cc845b20ac4fceb466e",
+            "package": "@fluentui-react-native/icon"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Oct 2021 17:52:17 GMT",
       "tag": "@fluentui-react-native/icon_v0.8.24",
       "version": "0.8.24",

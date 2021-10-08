@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/styling-utils",
+  "entries": [
+    {
+      "date": "Thu, 07 Oct 2021 20:59:20 GMT",
+      "tag": "@fluentui-react-native/styling-utils_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "New styling utils package",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f759f09649d7fd9b8ea8ada78677f5cb65519f6e",
+            "package": "@fluentui-react-native/styling-utils"
+          }
+        ]
+      }
+    }
+  ]
+}
