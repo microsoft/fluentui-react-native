@@ -219,7 +219,7 @@ const nestedContextualMenu: React.FunctionComponent = () => {
           shouldFocusOnContainer={focusOnContainer}
         >
           <ContextualMenuItem icon={testImage} text="Menu item with png Icon" itemKey="1" />
-          {/* <ContextualMenuItem icon={{ fontSource: fontProps, color: 'blue' }} text="Menu item with font icon" itemKey="2" /> */}
+          <ContextualMenuItem icon={{ fontSource: fontProps, color: 'blue' }} text="Menu item with font icon" itemKey="2" />
           <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
           <SubmenuItem
             icon={{ svgSource: svgProps, width: 12, height: 12 }}
