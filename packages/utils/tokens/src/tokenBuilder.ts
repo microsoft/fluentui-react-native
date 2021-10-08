@@ -1,8 +1,8 @@
-import { ITheme } from '@uifabricshared/theming-ramp';
+import { Theme } from '@fluentui-react-native/theme-types';
 import { ViewStyle, TextStyle, ImageStyle } from 'react-native';
 
 export type TokenBuilder<TTokens> = {
-  from: (tokens: TTokens, theme: ITheme) => ViewStyle | TextStyle | ImageStyle;
+  from: (tokens: TTokens, theme: Theme) => ViewStyle | TextStyle | ImageStyle;
   keys: (keyof TTokens)[];
 };
 

@@ -85,7 +85,125 @@
       "Anchor": { "generate": { "type": "fluentsharedcolors", "value": "#394146" } },
       "Charcoal": { "generate": { "type": "fluentsharedcolors", "value": "#393939" } },
       "White": { "value": "#ffffff" },
-      "Black": { "value": "#000000" }
+      "Black": { "value": "#000000" },
+      "NeutralShadowAmbient": { "value": "rgba(0,0,0,0.12)" },
+      "NeutralShadowKey": { "value": "rgba(0,0,0,0.14)" },
+      "BrandShadowAmbient": { "value": "rgba(0,0,0,0.30)" },
+      "BrandShadowKey": { "value": "rgba(0,0,0,0.25)" },
+      "Excel": {
+        "Shade": {
+          "60": { "value": "#03160a" },
+          "50": { "value": "#052912" },
+          "40": { "value": "#094624" },
+          "30": { "value": "#0a5325" },
+          "20": { "value": "#0c5f32" },
+          "10": { "value": "#0f703b" }
+        },
+        "Primary": { "value": "#107c41" },
+        "Tint": {
+          "10": { "value": "#10893c" },
+          "20": { "value": "#1f954a" },
+          "30": { "value": "#60bd82" },
+          "40": { "value": "#55b17e" },
+          "50": { "value": "#a0d8b9" },
+          "60": { "value": "#caead8" }
+        }
+      },
+      "Office": {
+        "Shade": {
+          "60": { "value": "#29130b" },
+          "50": { "value": "#4d2415" },
+          "40": { "value": "#792000" },
+          "30": { "value": "#99482b" },
+          "20": { "value": "#a52c00" },
+          "10": { "value": "#c33400" }
+        },
+        "Primary": { "value": "#d83b01" },
+        "Tint": {
+          "10": { "value": "#fe7948" },
+          "20": { "value": "#ff865a" },
+          "30": { "value": "#ff9973" },
+          "40": { "value": "#e8825d" },
+          "50": { "value": "#f4beaa" },
+          "60": { "value": "#f9dcd1" }
+        }
+      },
+      "OneNote": {
+        "Shade": {
+          "60": { "value": "#430e60" },
+          "50": { "value": "#430e60" },
+          "40": { "value": "#430e60" },
+          "30": { "value": "#430e60" },
+          "20": { "value": "#5b1382" },
+          "10": { "value": "#6c179a" }
+        },
+        "Primary": { "value": "#7719aa" },
+        "Tint": {
+          "10": { "value": "#862eb5" },
+          "20": { "value": "#a864cd" },
+          "30": { "value": "#d1abe6" },
+          "40": { "value": "#e6d1f2" },
+          "50": { "value": "#e6d1f2" },
+          "60": { "value": "#e6d1f2" }
+        }
+      },
+      "Outlook": {
+        "Shade": {
+          "60": { "value": "#092c47" },
+          "50": { "value": "#043862" },
+          "40": { "value": "#004578" },
+          "30": { "value": "#004c87" },
+          "20": { "value": "#005a9e" },
+          "10": { "value": "#106ebe" }
+        },
+        "Primary": { "value": "#0078d4" },
+        "Tint": {
+          "10": { "value": "#2899f5" },
+          "20": { "value": "#3aa0f3" },
+          "30": { "value": "#6cb8f6" },
+          "40": { "value": "#c7e0f4" },
+          "50": { "value": "#deecf9" },
+          "60": { "value": "#eff6fc" }
+        }
+      },
+      "PowerPoint": {
+        "Shade": {
+          "60": { "value": "#200d03" },
+          "50": { "value": "#3c1805" },
+          "40": { "value": "#6e220f" },
+          "30": { "value": "#79310a" },
+          "20": { "value": "#952f15" },
+          "10": { "value": "#b13719" }
+        },
+        "Primary": { "value": "#c43e1c" },
+        "Tint": {
+          "10": { "value": "#ca5010" },
+          "20": { "value": "#cf6024" },
+          "30": { "value": "#e1966d" },
+          "40": { "value": "#dc816a" },
+          "50": { "value": "#edbcb0" },
+          "60": { "value": "#f6dbd4" }
+        }
+      },
+      "Word": {
+        "Shade": {
+          "60": { "value": "#071225" },
+          "50": { "value": "#0c2145" },
+          "40": { "value": "#0e336a" },
+          "30": { "value": "#19428a" },
+          "20": { "value": "#13458f" },
+          "10": { "value": "#1651aa" }
+        },
+        "Primary": { "value": "#185abd" },
+        "Tint": {
+          "10": { "value": "#296fe6" },
+          "20": { "value": "#3d7ce8" },
+          "30": { "value": "#82abf1" },
+          "40": { "value": "#6794d7" },
+          "50": { "value": "#aec6eb" },
+          "60": { "value": "#d2e0f4" }
+        }
+      }
     },
     "Stroke": {
       "Width": {
@@ -105,10 +223,18 @@
         "Circle": { "value": 9999, "platform": { "winui": { "value": 18 } } }
       }
     },
-    "Padding": {
-      "400": {
-        "value": [7, 15, 7, 15]
-      }
+    "Spacing": {
+      "None": { "value": 0 },
+      "XXS": { "value": 2 },
+      "XS": { "value": 4 },
+      "SNudge": { "value": 6 },
+      "S": { "value": 8 },
+      "MNudge": { "value": 10 },
+      "M": { "value": 12 },
+      "L": { "value": 16 },
+      "XL": { "value": 20 },
+      "XXL": { "value": 24 },
+      "XXXL": { "value": 32 }
     },
     "Font": {
       "Family": {
@@ -146,6 +272,82 @@
         "Semibold": { "value": 600 },
         "Bold": { "value": 700 }
       }
+    },
+    "Shadow": {
+      "2": {
+        "value": [
+          { "x": 0, "y": 0, "blur": 2, "color": { "aliasOf": "Global.Color.NeutralShadowAmbient" } },
+          { "x": 0, "y": 1, "blur": 2, "color": { "aliasOf": "Global.Color.NeutralShadowKey" } }
+        ]
+      },
+      "4": {
+        "value": [
+          { "x": 0, "y": 0, "blur": 2, "color": { "aliasOf": "Global.Color.NeutralShadowAmbient" } },
+          { "x": 0, "y": 2, "blur": 4, "color": { "aliasOf": "Global.Color.NeutralShadowKey" } }
+        ]
+      },
+      "8": {
+        "value": [
+          { "x": 0, "y": 0, "blur": 2, "color": { "aliasOf": "Global.Color.NeutralShadowAmbient" } },
+          { "x": 0, "y": 4, "blur": 8, "color": { "aliasOf": "Global.Color.NeutralShadowKey" } }
+        ]
+      },
+      "16": {
+        "value": [
+          { "x": 0, "y": 0, "blur": 2, "color": { "aliasOf": "Global.Color.NeutralShadowAmbient" } },
+          { "x": 0, "y": 8, "blur": 16, "color": { "aliasOf": "Global.Color.NeutralShadowKey" } }
+        ]
+      },
+      "28": {
+        "value": [
+          { "x": 0, "y": 0, "blur": 8, "color": { "aliasOf": "Global.Color.NeutralShadowAmbient" } },
+          { "x": 0, "y": 14, "blur": 28, "color": { "aliasOf": "Global.Color.NeutralShadowKey" } }
+        ]
+      },
+      "64": {
+        "value": [
+          { "x": 0, "y": 0, "blur": 8, "color": { "aliasOf": "Global.Color.NeutralShadowAmbient" } },
+          { "x": 0, "y": 32, "blur": 64, "color": { "aliasOf": "Global.Color.NeutralShadowKey" } }
+        ]
+      },
+      "Brand": {
+        "2": {
+          "value": [
+            { "x": 0, "y": 0, "blur": 2, "color": { "aliasOf": "Global.Color.BrandShadowAmbient" } },
+            { "x": 0, "y": 1, "blur": 2, "color": { "aliasOf": "Global.Color.BrandShadowKey" } }
+          ]
+        },
+        "4": {
+          "value": [
+            { "x": 0, "y": 0, "blur": 2, "color": { "aliasOf": "Global.Color.BrandShadowAmbient" } },
+            { "x": 0, "y": 2, "blur": 4, "color": { "aliasOf": "Global.Color.BrandShadowKey" } }
+          ]
+        },
+        "8": {
+          "value": [
+            { "x": 0, "y": 0, "blur": 2, "color": { "aliasOf": "Global.Color.BrandShadowAmbient" } },
+            { "x": 0, "y": 4, "blur": 8, "color": { "aliasOf": "Global.Color.BrandShadowKey" } }
+          ]
+        },
+        "16": {
+          "value": [
+            { "x": 0, "y": 0, "blur": 2, "color": { "aliasOf": "Global.Color.BrandShadowAmbient" } },
+            { "x": 0, "y": 8, "blur": 16, "color": { "aliasOf": "Global.Color.BrandShadowKey" } }
+          ]
+        },
+        "28": {
+          "value": [
+            { "x": 0, "y": 0, "blur": 8, "color": { "aliasOf": "Global.Color.BrandShadowAmbient" } },
+            { "x": 0, "y": 14, "blur": 28, "color": { "aliasOf": "Global.Color.BrandShadowKey" } }
+          ]
+        },
+        "64": {
+          "value": [
+            { "x": 0, "y": 0, "blur": 8, "color": { "aliasOf": "Global.Color.BrandShadowAmbient" } },
+            { "x": 0, "y": 32, "blur": 64, "color": { "aliasOf": "Global.Color.BrandShadowKey" } }
+          ]
+        }
+      }
     }
   },
   "Set": {
@@ -162,6 +364,14 @@
         "Family": { "aliasOf": "Global.Font.Family.Default" },
         "Size": { "aliasOf": "Global.Font.Size.300" },
         "Weight": { "aliasOf": "Global.Font.Weight.Regular" },
+        "LineHeight": { "aliasOf": "Global.Font.LineHeight.300" }
+      }
+    },
+    "BodyStrong": {
+      "Font": {
+        "Family": { "aliasOf": "Global.Font.Family.Default" },
+        "Size": { "aliasOf": "Global.Font.Size.300" },
+        "Weight": { "aliasOf": "Global.Font.Weight.Semibold" },
         "LineHeight": { "aliasOf": "Global.Font.LineHeight.300" }
       }
     },
@@ -222,43 +432,6 @@
       }
     },
 
-    "Square": {
-      "Corner": {
-        "Radius": { "aliasOf": "Global.Corner.Radius.None" }
-      }
-    },
-    "Icon": {
-      "Corner": {
-        "Radius": { "aliasOf": "Global.Corner.Radius.Medium" }
-      }
-    },
-    "Control": {
-      "Corner": {
-        "Radius": { "aliasOf": "Global.Corner.Radius.Medium" }
-      },
-      "Font": {
-        "Family": { "aliasOf": "Global.Font.Family.Default" },
-        "Size": { "aliasOf": "Global.Font.Size.300" },
-        "Weight": { "aliasOf": "Global.Font.Weight.Semibold" },
-        "LineHeight": { "aliasOf": "Global.Font.LineHeight.300" }
-      }
-    },
-    "Surface": {
-      "Corner": {
-        "Radius": { "aliasOf": "Global.Corner.Radius.Medium" }
-      }
-    },
-    "Illustration": {
-      "Corner": {
-        "Radius": { "aliasOf": "Global.Corner.Radius.ExtraLarge" }
-      }
-    },
-    "Round": {
-      "Corner": {
-        "Radius": { "aliasOf": "Global.Corner.Radius.Circle" }
-      }
-    },
-
     "Borderless": {
       "Stroke": {
         "Color": {
@@ -277,135 +450,9 @@
           "Rest": { "value": "transparent" },
           "Hover": { "value": "transparent" },
           "Pressed": { "value": "transparent" },
-          "Disabled": { "value": "transparent" }
+          "Selected": { "value": "transparent" }
         }
       }
-    },
-    "TransparentBackgroundSelected": { "aliasOf": "Set.TransparentBackground" },
-    "GhostBackground": {
-      "Fill": {
-        "Color": {
-          "Rest": { "value": "transparent" },
-          "Hover": { "aliasOf": "Global.Color.Grey.96" },
-          "Pressed": { "aliasOf": "Global.Color.Grey.88" },
-          "Disabled": { "aliasOf": "Global.Color.Grey.94" }
-        }
-      }
-    },
-    "GhostBackgroundSelected": { "aliasOf": "Set.GhostBackground" },
-
-    "NeutralForeground1": {
-      "Fill": {
-        "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.14" },
-          "Hover": { "aliasOf": "Global.Color.Grey.14" },
-          "Pressed": { "aliasOf": "Global.Color.Grey.14" },
-          "Disabled": { "aliasOf": "Global.Color.Grey.14" }
-        }
-      }
-    },
-    "NeutralForeground1Selected": { "aliasOf": "Set.NeutralForeground1" },
-    "NeutralBackground1": {
-      "Fill": {
-        "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.100" },
-          "Hover": { "aliasOf": "Global.Color.Grey.96" },
-          "Pressed": { "aliasOf": "Global.Color.Grey.88" },
-          "Disabled": { "aliasOf": "Global.Color.Grey.94" }
-        }
-      }
-    },
-    "NeutralBackground1Selected": { "aliasOf": "Set.NeutralBackground1" },
-    "NeutralStroke1": {
-      "Stroke": {
-        "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.82" },
-          "Hover": { "aliasOf": "Global.Color.Grey.78" },
-          "Pressed": { "aliasOf": "Global.Color.Grey.70" },
-          "Disabled": { "aliasOf": "Global.Color.Grey.88" }
-        },
-        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
-      }
-    },
-    "NeutralStroke1Selected": { "aliasOf": "Set.NeutralStroke1" },
-
-    "NeutralForeground2": {
-      "Fill": {
-        "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.26" },
-          "Hover": { "aliasOf": "Global.Color.Grey.14" },
-          "Pressed": { "aliasOf": "Global.Color.Grey.14" },
-          "Disabled": { "aliasOf": "Global.Color.Grey.14" }
-        }
-      }
-    },
-    "NeutralForeground2Selected": { "aliasOf": "Set.NeutralForeground2" },
-    "NeutralForeground2Brand": {
-      "Fill": {
-        "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.26" },
-          "Hover": { "aliasOf": "Global.Color.Brand.Primary" },
-          "Pressed": { "aliasOf": "Global.Color.Brand.Shade.10" },
-          "Disabled": { "aliasOf": "Global.Color.Grey.14" }
-        }
-      }
-    },
-    "NeutralForeground2BrandSelected": { "aliasOf": "Set.NeutralForeground2Brand" },
-    "NeutralBackground2": {
-      "Fill": {
-        "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.98" },
-          "Hover": { "aliasOf": "Global.Color.Grey.94" },
-          "Pressed": { "aliasOf": "Global.Color.Grey.86" },
-          "Disabled": { "aliasOf": "Global.Color.Grey.94" }
-        }
-      }
-    },
-    "NeutralBackground2Selected": { "aliasOf": "Set.NeutralBackground2" },
-    "NeutralStroke2": {
-      "Stroke": {
-        "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.88" },
-          "Hover": { "aliasOf": "Global.Color.Grey.88" },
-          "Pressed": { "aliasOf": "Global.Color.Grey.88" },
-          "Disabled": { "aliasOf": "Global.Color.Grey.88" }
-        },
-        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
-      }
-    },
-    "NeutralStroke2Selected": { "aliasOf": "Set.NeutralStroke2" },
-    "NeutralForegroundInverted": {
-      "Fill": {
-        "Color": {
-          "Rest": { "aliasOf": "Global.Color.White" },
-          "Hover": { "aliasOf": "Global.Color.White" },
-          "Pressed": { "aliasOf": "Global.Color.White" },
-          "Disabled": { "aliasOf": "Global.Color.White" }
-        }
-      }
-    },
-    "NeutralForegroundInvertedSelected": { "aliasOf": "Set.NeutralForegroundInverted" },
-    "NeutralForegroundInvertedAccessible": {
-      "Fill": {
-        "Color": {
-          "Rest": { "aliasOf": "Global.Color.White" },
-          "Hover": { "aliasOf": "Global.Color.White" },
-          "Pressed": { "aliasOf": "Global.Color.White" },
-          "Disabled": { "aliasOf": "Global.Color.White" }
-        }
-      }
-    },
-    "NeutralForegroundInvertedAccessibleSelected": { "aliasOf": "Set.NeutralForegroundInvertedAccessible" },
-    "BrandBackground": {
-      "Fill": {
-        "Color": {
-          "Rest": { "aliasOf": "Global.Color.Brand.Primary" },
-          "Hover": { "aliasOf": "Global.Color.Brand.Shade.10" },
-          "Pressed": { "aliasOf": "Global.Color.Brand.Shade.40" },
-          "Disabled": { "aliasOf": "Global.Color.Grey.94" }
-        }
-      }
-    },
-    "BrandBackgroundSelected": { "aliasOf": "Set.BrandBackground" }
+    }
   }
 }

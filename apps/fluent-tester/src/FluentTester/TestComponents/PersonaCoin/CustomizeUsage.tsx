@@ -7,7 +7,7 @@ import { useTheme } from '@fluentui-react-native/theme-types';
 import { AlignmentPicker } from '../Common/AlignmentPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
-export const CustomizeUsage: React.FunctionComponent<{}> = () => {
+export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [coinColor, setCoinColor] = React.useState<string>();
   const [textColor, setTextColor] = React.useState<string>();

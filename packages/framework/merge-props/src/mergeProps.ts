@@ -10,6 +10,7 @@ const mergePropsOptions: MergeOptions = {
 };
 
 /** take an any array and turn it into an array of objects */
+// eslint-disable-next-line @typescript-eslint/ban-types
 function filterAsObject(targets: any[]): object[] {
   return targets.filter((t) => typeof t === 'object');
 }
@@ -19,5 +20,5 @@ function filterAsObject(targets: any[]): object[] {
  * @param props - props to merge together
  */
 export function mergeProps<TProps>(...props: (TProps | undefined)[]): TProps {
-  return (immutableMergeCore(mergePropsOptions, ...filterAsObject(props)) as unknown) as TProps;
+  return immutableMergeCore(mergePropsOptions, ...filterAsObject(props)) as unknown as TProps;
 }

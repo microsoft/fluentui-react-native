@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Switch, Text, View } from 'react-native';
+import { Separator } from '@fluentui/react-native';
 import { Circle, Defs, G, Line, Path, Polygon, LinearGradient, RadialGradient, Rect, Stop, Svg, SvgCssUri, Use } from 'react-native-svg';
 import TestSvg from './Assets/accessible-icon-brands.svg';
 import { SVG_TESTPAGE } from './consts';
@@ -12,15 +13,30 @@ const styles = StyleSheet.create({
   },
 });
 
-const rect: React.FunctionComponent<{}> = () => {
+const rect: React.FunctionComponent = () => {
+  const [useColorA, setUseColorA] = React.useState(false);
+  const colorA = 'red';
+  const colorB = 'green';
   return (
-    <Svg width="50" height="50">
-      <Rect x="10" y="10" width="20" height="20" fill="red" stroke="black" />
-    </Svg>
+    <React.Fragment>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Switch
+          value={useColorA}
+          onValueChange={(value) => {
+            setUseColorA(value);
+          }}
+        />
+        <Text>Change Color</Text>
+      </View>
+      <Separator />
+      <Svg width="50" height="50">
+        <Rect x="10" y="10" width="20" height="20" fill={useColorA ? colorA : colorB} stroke="black" />
+      </Svg>
+    </React.Fragment>
   );
 };
 
-const circle: React.FunctionComponent<{}> = () => {
+const circle: React.FunctionComponent = () => {
   return (
     <Svg width="50" height="50">
       <Circle cx="25" cy="25" r="20" fill="red" stroke="black" />
@@ -28,7 +44,7 @@ const circle: React.FunctionComponent<{}> = () => {
   );
 };
 
-const line: React.FunctionComponent<{}> = () => {
+const line: React.FunctionComponent = () => {
   return (
     <Svg width="50" height="50">
       <Line x1="10" y1="10" x2="20" y2="20" fill="red" stroke="black" />
@@ -36,7 +52,7 @@ const line: React.FunctionComponent<{}> = () => {
   );
 };
 
-const path: React.FunctionComponent<{}> = () => {
+const path: React.FunctionComponent = () => {
   return (
     <Svg width="100" height="100">
       <Path d="M 0 0 A 10 10 0 0,1 0 100" fill="magenta" stroke="purple" id="path" />
@@ -44,7 +60,7 @@ const path: React.FunctionComponent<{}> = () => {
   );
 };
 
-const polygon: React.FunctionComponent<{}> = () => {
+const polygon: React.FunctionComponent = () => {
   return (
     <Svg height="100" width="100">
       <Polygon points="40,5 70,80 25,95" fill="lime" stroke="purple" strokeWidth="1" />
@@ -52,7 +68,7 @@ const polygon: React.FunctionComponent<{}> = () => {
   );
 };
 
-const linearGradient: React.FunctionComponent<{}> = () => {
+const linearGradient: React.FunctionComponent = () => {
   return (
     <Svg height="100" width="100" style={{ backgroundColor: 'black' }} viewBox="0 0 10 10" color="yellow">
       <Defs>
@@ -66,7 +82,7 @@ const linearGradient: React.FunctionComponent<{}> = () => {
   );
 };
 
-const radialGradient: React.FunctionComponent<{}> = () => {
+const radialGradient: React.FunctionComponent = () => {
   return (
     <Svg height="100" width="100" style={{ backgroundColor: 'black' }} viewBox="0 0 10 10" color="yellow">
       <Defs>
@@ -80,7 +96,7 @@ const radialGradient: React.FunctionComponent<{}> = () => {
   );
 };
 
-const rectCircle: React.FunctionComponent<{}> = () => {
+const rectCircle: React.FunctionComponent = () => {
   return (
     <Svg height="200" width="200">
       <Defs>
@@ -97,11 +113,11 @@ const rectCircle: React.FunctionComponent<{}> = () => {
   );
 };
 
-const bundledSvg: React.FunctionComponent<{}> = () => {
+const bundledSvg: React.FunctionComponent = () => {
   return <TestSvg width={200} height={200} color="red" />;
 };
 
-const remoteSvg: React.FunctionComponent<{}> = () => {
+const remoteSvg: React.FunctionComponent = () => {
   return (
     <View>
       <SvgCssUri
@@ -168,7 +184,7 @@ const svgSections: TestSection[] = [
   },
 ];
 
-export const SvgTest: React.FunctionComponent<{}> = () => {
+export const SvgTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Backlog',
@@ -179,5 +195,5 @@ export const SvgTest: React.FunctionComponent<{}> = () => {
 
   const description = 'No description.';
 
-  return <Test name="Svg Test" description={description} sections={svgSections} status={status}></Test>;
+  return <Test name="Svg Test" description={description} sections={svgSections} status={status} />;
 };

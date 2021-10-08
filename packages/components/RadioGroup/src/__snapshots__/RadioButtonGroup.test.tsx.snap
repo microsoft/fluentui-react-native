@@ -5,7 +5,6 @@ exports[`RadioButton component tests RadioButton default 1`] = `
   accessibilityLabel="Uncontrolled RadioGroup"
   accessibilityRole="radiogroup"
   accessible={true}
-  rest={Object {}}
   style={
     Object {
       "alignItems": "flex-start",
@@ -18,7 +17,7 @@ exports[`RadioButton component tests RadioButton default 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "inherit",
+        "fontFamily": "Segoe UI",
         "fontSize": 16,
         "fontWeight": "600",
         "margin": 0,
@@ -219,6 +218,231 @@ exports[`RadioButton component tests RadioButton default 1`] = `
       >
         RadioButton2
       </Text>
+    </View>
+  </RCTFocusZone>
+</View>
+`;
+
+exports[`RadioButton component tests RadioButton not direct child of radio group 1`] = `
+<View
+  accessibilityLabel="Uncontrolled RadioGroup"
+  accessibilityRole="radiogroup"
+  accessible={true}
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "display": "flex",
+      "flexDirection": "column",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#323130",
+        "fontFamily": "Segoe UI",
+        "fontSize": 16,
+        "fontWeight": "600",
+        "margin": 0,
+      }
+    }
+  >
+    Uncontrolled RadioGroup
+  </Text>
+  <RCTFocusZone
+    navigateAtEnd="NavigateWrap"
+  >
+    <View>
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a RadioButton",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityLabel="RadioButton1"
+        accessibilityPositionInSet={1}
+        accessibilityRole="radio"
+        accessibilitySetSize={2}
+        accessibilityState={
+          Object {
+            "disabled": false,
+            "selected": false,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+            "flexDirection": "row",
+            "marginTop": 0,
+            "minHeight": 20,
+            "position": "relative",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#323130",
+              "borderRadius": 10,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "height": 20,
+              "left": 0,
+              "marginBottom": 6,
+              "marginLeft": 6,
+              "marginRight": 6,
+              "marginTop": 4,
+              "top": 0,
+              "width": 20,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "backgroundColor": "#323130",
+                "borderRadius": 5,
+                "height": 10,
+                "left": 4,
+                "opacity": 0,
+                "position": "relative",
+                "top": 4,
+                "width": 10,
+              }
+            }
+          />
+        </View>
+        <Text
+          style={
+            Object {
+              "borderColor": "transparent",
+              "borderStyle": "solid",
+              "borderWidth": 2,
+              "color": "#323130",
+              "fontFamily": "Segoe UI",
+              "fontSize": 16,
+              "fontWeight": "400",
+              "margin": 0,
+              "marginTop": 2,
+            }
+          }
+        >
+          RadioButton1
+        </Text>
+      </View>
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "label": "Select a RadioButton",
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityLabel="RadioButton2"
+        accessibilityPositionInSet={2}
+        accessibilityRole="radio"
+        accessibilitySetSize={2}
+        accessibilityState={
+          Object {
+            "disabled": false,
+            "selected": true,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+            "flexDirection": "row",
+            "marginTop": 0,
+            "minHeight": 20,
+            "position": "relative",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#323130",
+              "borderRadius": 10,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "height": 20,
+              "left": 0,
+              "marginBottom": 6,
+              "marginLeft": 6,
+              "marginRight": 6,
+              "marginTop": 4,
+              "top": 0,
+              "width": 20,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "backgroundColor": "#323130",
+                "borderRadius": 5,
+                "height": 10,
+                "left": 4,
+                "opacity": 1,
+                "position": "relative",
+                "top": 4,
+                "width": 10,
+              }
+            }
+          />
+        </View>
+        <Text
+          style={
+            Object {
+              "borderColor": "transparent",
+              "borderStyle": "solid",
+              "borderWidth": 2,
+              "color": "#323130",
+              "fontFamily": "Segoe UI",
+              "fontSize": 16,
+              "fontWeight": "400",
+              "margin": 0,
+              "marginTop": 2,
+            }
+          }
+        >
+          RadioButton2
+        </Text>
+      </View>
     </View>
   </RCTFocusZone>
 </View>

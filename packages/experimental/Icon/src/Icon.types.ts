@@ -13,7 +13,6 @@ export interface SvgIconProps {
   uri?: string;
   src?: React.FC<SvgProps>;
   viewBox?: string;
-  color?: string;
 }
 
 export interface RasterImageIconProps {
@@ -29,3 +28,5 @@ export interface IconProps extends AccessibilityProps {
   height?: number;
   color?: ColorValue;
 }
+
+export type IconSourcesType = number | string | IconProps;

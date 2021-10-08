@@ -59,7 +59,7 @@ const StyledPicker = (props) => {
   );
 };
 
-export const StandardUsage: React.FunctionComponent<{}> = () => {
+export const StandardUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [imageSize, setImageSize] = React.useState<WithUndefined<PersonaSize>>('size72');
   const [coinColor, setCoinColor] = React.useState<WithUndefined<PersonaCoinFluentColor>>('brass');

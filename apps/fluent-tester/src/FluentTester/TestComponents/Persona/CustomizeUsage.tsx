@@ -6,7 +6,7 @@ import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { Slider } from '../Common/Slider';
 
-export const CustomizeUsage: React.FunctionComponent<{}> = () => {
+export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [coinColor, setCoinColor] = React.useState<string>();
   const [textColor, setTextColor] = React.useState<string>();

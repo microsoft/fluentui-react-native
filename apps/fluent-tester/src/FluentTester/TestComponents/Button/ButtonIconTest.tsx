@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { Button } from '@fluentui/react-native';
+import { Button, Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
@@ -12,7 +12,7 @@ const CustomizedIconButton = Button.customize({
   content: { style: { marginStart: 5 } },
 });
 
-export const ButtonIconTest: React.FunctionComponent<{}> = () => {
+export const ButtonIconTest: React.FunctionComponent = () => {
   const testImage = require('./icon_24x24.png');
 
   const svgProps: SvgIconProps = {
@@ -22,25 +22,20 @@ export const ButtonIconTest: React.FunctionComponent<{}> = () => {
 
   // SVG-based icons are not available on all platforms yet
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
+  const iconProps = { svgSource: svgProps, width: 20, height: 20 };
 
   return (
     <View>
       <Stack style={stackStyle}>
-        <Button icon={testImage} content="Button with png Icon" tooltip="button tooltip" />
+        <Button startIcon={testImage} content="Button with png Icon" tooltip="button tooltip" />
         {svgIconsEnabled ? (
-          <Button
-            icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }}
-            content="Button with svg Icon"
-            tooltip="button tooltip"
-          />
+          <Button startIcon={{ ...iconProps, color: 'red' }} content="Button with svg Icon" tooltip="button tooltip" />
         ) : null}
         {svgIconsEnabled ? (
-          <CustomizedIconButton
-            icon={{ svgSource: svgProps, width: 20, height: 20 }}
-            content="Button with Customized Icon"
-            tooltip="button tooltip"
-          />
+          <CustomizedIconButton startIcon={iconProps} content="Button with Customized Icon" tooltip="button tooltip" />
         ) : null}
+        <Text>End Button icon</Text>
+        {svgIconsEnabled ? <CustomizedIconButton endIcon={iconProps} content="Button with Right Icon" tooltip="button tooltip" /> : null}
       </Stack>
     </View>
   );

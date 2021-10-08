@@ -47,3 +47,21 @@ exports[`Text component tests Text default 1`] = `
   Text default
 </Text>
 `;
+
+exports[`Text component tests Text variants render correctly with style 1`] = `
+<Text
+  style={
+    Object {
+      "color": "blue",
+      "fontFamily": "Segoe UI",
+      "fontSize": 42,
+      "fontWeight": "600",
+      "margin": 0,
+      "marginBottom": 8,
+      "marginTop": 4,
+    }
+  }
+>
+  Header Text
+</Text>
+`;

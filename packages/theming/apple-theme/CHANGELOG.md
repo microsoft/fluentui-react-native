@@ -1,8 +1,201 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Wed, 30 Jun 2021 05:42:19 GMT and should not be manually modified.
+This log was last generated on Thu, 07 Oct 2021 20:59:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.27
+
+Thu, 07 Oct 2021 20:59:20 GMT
+
+### Patches
+
+- remap some tokens away from text/placeholdertext to label/secondarylabel (sanajmi@microsoft.com)
+
+## 0.7.26
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
+
+## 0.7.25
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Patches
+
+- adding an adapter for macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.7.24
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theming-utils to v0.7.2 (ruaraki@microsoft.com)
+
+## 0.7.23
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.8.3 (ruaraki@microsoft.com)
+
+## 0.7.22
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.8.2 (ruaraki@microsoft.com)
+
+## 0.7.21
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.8.1 (ruaraki@microsoft.com)
+
+## 0.7.20
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.8.0 (ruaraki@microsoft.com)
+
+## 0.7.19
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+- Fix incorrectly mapped token in Apple theme (sanajmi@microsoft.com)
+
+## 0.7.18
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Rename tokens to avoid name clash, initial token re-population (ruaraki@microsoft.com)
+
+## 0.7.17
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.7.16
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Rename tokens (ruaraki@microsoft.com)
+
+## 0.7.15
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.9 (ruaraki@microsoft.com)
+
+## 0.7.14
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theming-utils to v0.3.8 (ruaraki@microsoft.com)
+
+## 0.7.13
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.7 (ruaraki@microsoft.com)
+
+## 0.7.12
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.6 (jasonmo@microsoft.com)
+
+## 0.7.11
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.5 (ruaraki@microsoft.com)
+
+## 0.7.10
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.7.4 (ruaraki@microsoft.com)
+
+## 0.7.9
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Patches
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.7.8
+
+Tue, 27 Jul 2021 22:17:20 GMT
+
+### Patches
+
+- add compressible utility and a snapshot test / demo to framework (jasonmo@microsoft.com)
+
+## 0.7.7
+
+Mon, 26 Jul 2021 20:41:04 GMT
+
+### Patches
+
+- add new use-slot package, move framework to consume that package (jasonmo@microsoft.com)
+
+## 0.7.5
+
+Fri, 23 Jul 2021 17:28:27 GMT
+
+### Patches
+
+- Fix @types/react to be less than 16.14.0 since our react version is less than 16.14 (email not defined)
+
+## 0.7.4
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
+
+## 0.7.3
+
+Wed, 21 Jul 2021 21:46:12 GMT
+
+### Patches
+
+- Use peer dependencies for react-native version not dependencies (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.7.1
 

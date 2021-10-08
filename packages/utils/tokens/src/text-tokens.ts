@@ -1,23 +1,23 @@
 import { TextStyle } from 'react-native';
 import { ITextProps } from '@fluentui-react-native/adapters';
-import { ITheme, ITypography } from '@uifabricshared/theming-ramp';
+import { Theme, Typography } from '@fluentui-react-native/theme-types';
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 import { TokenBuilder } from './tokenBuilder';
 
 export interface FontVariantTokens {
-  variant?: keyof ITypography['variants'];
+  variant?: keyof Typography['variants'];
 }
 
 export interface FontStyleTokens {
-  fontFamily?: keyof ITypography['families'] | TextStyle['fontFamily'];
-  fontSize?: keyof ITypography['sizes'] | TextStyle['fontSize'];
-  fontWeight?: keyof ITypography['weights'] | TextStyle['fontWeight'];
+  fontFamily?: keyof Typography['families'] | TextStyle['fontFamily'];
+  fontSize?: keyof Typography['sizes'] | TextStyle['fontSize'];
+  fontWeight?: keyof Typography['weights'] | TextStyle['fontWeight'];
 }
 
 export type FontTokens = FontStyleTokens & FontVariantTokens;
 
 export const fontStyles: TokenBuilder<FontTokens> = {
-  from: ({ fontFamily, fontSize, fontWeight, variant }: FontTokens, { typography }: ITheme) => {
+  from: ({ fontFamily, fontSize, fontWeight, variant }: FontTokens, { typography }: Theme) => {
     const { families, sizes, weights, variants } = typography;
     if (fontFamily || fontSize || fontWeight || variant) {
       return {
@@ -32,10 +32,10 @@ export const fontStyles: TokenBuilder<FontTokens> = {
   keys: ['fontFamily', 'fontSize', 'fontWeight', 'variant'],
 };
 
-function _buildTextStyles(tokens: FontTokens, theme: ITheme): ITextProps {
+function _buildTextStyles(tokens: FontTokens, theme: Theme): ITextProps {
   return {
     style: fontStyles.from(tokens, theme),
   };
 }
 
-export const textTokens = styleFunction<ITextProps, FontTokens, ITheme>(_buildTextStyles, fontStyles.keys);
+export const textTokens = styleFunction<ITextProps, FontTokens, Theme>(_buildTextStyles, fontStyles.keys);

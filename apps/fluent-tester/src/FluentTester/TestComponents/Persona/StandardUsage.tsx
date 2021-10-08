@@ -36,7 +36,7 @@ function SwitchWithLabel(props: ISwitchWithLabelProps): React.ReactElement {
   );
 }
 
-export const StandardUsage: React.FunctionComponent<{}> = () => {
+export const StandardUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [showPrimary, setShowPrimary] = React.useState(true);
   const [showSecondary, setShowSecondary] = React.useState(true);

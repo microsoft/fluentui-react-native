@@ -13,11 +13,13 @@ import RadioGroupTestPage from '../../RadioGroup/pages/RadioGroupTestPage.win';
 import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
 import SvgTestPage from '../../Svg/pages/SvgTestPage.win';
 import TextTestPage from '../../Text/pages/TextTestPage.win';
+import TabsTestPage from '../../Tabs/pages/TabsTestPage.win';
+import ExperimentalTabsTestPage from '../../TabsExperimental/pages/ExperimentalTabsTestPage.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
 import BootTestPage from '../pages/BootTestPage.win';
 
 const BOOT_APP_TIMEOUT = 60000;
-const PAGE_TIMEOUT = 3000;
+const PAGE_TIMEOUT = 6000;
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Open the app', function () {
@@ -50,6 +52,12 @@ describe('Click on each test page and check if it renders', function () {
     BootTestPage.clickAndGoToContextualMenuPage();
     ContextualMenuTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(ContextualMenuTestPage.isPageLoaded()).toBeTruthy();
+  });
+
+  it('Experimental Tabs Test Page', () => {
+    BootTestPage.clickAndGoToExperimentalTabsPage();
+    ExperimentalTabsTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+    expect(ExperimentalTabsTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('FocusTrapZone Test Page', () => {
@@ -110,6 +118,12 @@ describe('Click on each test page and check if it renders', function () {
     BootTestPage.clickAndGoToSvgPage();
     SvgTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(SvgTestPage.isPageLoaded()).toBeTruthy();
+  });
+
+  it('Tabs Test Page', () => {
+    BootTestPage.clickAndGoToTabsPage();
+    TabsTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+    expect(TabsTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Text Test Page', () => {

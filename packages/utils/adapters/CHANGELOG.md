@@ -1,8 +1,104 @@
 # Change Log - @fluentui-react-native/adapters
 
-This log was last generated on Thu, 15 Jul 2021 20:35:35 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.4
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
+
+## 0.7.3
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Patches
+
+- adding an adapter for macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.7.2
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Fix build (ruaraki@microsoft.com)
+
+## 0.7.1
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.7.0
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Minor changes
+
+- react-native-windows to 0.64 (dake.3601@gmail.com)
+
+## 0.6.9
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.6.8
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Patches
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.6.7
+
+Tue, 27 Jul 2021 22:17:20 GMT
+
+### Patches
+
+- add compressible utility and a snapshot test / demo to framework (jasonmo@microsoft.com)
+
+## 0.6.6
+
+Mon, 26 Jul 2021 20:41:04 GMT
+
+### Patches
+
+- add new use-slot package, move framework to consume that package (jasonmo@microsoft.com)
+
+## 0.6.5
+
+Sun, 25 Jul 2021 16:30:17 GMT
+
+### Patches
+
+- Fix build error (email not defined)
+
+## 0.6.4
+
+Thu, 22 Jul 2021 20:55:49 GMT
+
+### Patches
+
+- Correctly declare dependency on react-native (4123478+tido64@users.noreply.github.com)
+
+## 0.6.3
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
 
 ## 0.6.2
 
