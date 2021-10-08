@@ -15,8 +15,6 @@ import { CONTEXTUALMENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
 import TestSvg from '../Button/test.svg';
-import { DIALOG_TESTPAGE } from '.';
-import { Dialog, Paragraph, Portal, Provider } from 'react-native-paper';
 
 const contextualMenu: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);
