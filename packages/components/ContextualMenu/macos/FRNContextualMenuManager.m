@@ -3,7 +3,7 @@
 
 @interface RCT_EXTERN_MODULE(FRNContextualMenuManager, RCTViewManager)
 
-RCT_EXPORT_VIEW_PROPERTY(targetViewTag, NSNumber)
+RCT_EXPORT_VIEW_PROPERTY(target, NSNumber)
 
 RCT_EXPORT_VIEW_PROPERTY(onItemClick, RCTBubblingEventBlock)
 

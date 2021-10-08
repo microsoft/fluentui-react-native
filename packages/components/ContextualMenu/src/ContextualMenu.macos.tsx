@@ -85,7 +85,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
 
     const slotProps = mergeSettings<ContextualMenuSlotProps>(styleProps, {
       root: {
-        targetViewTag: findNodeHandle((target as React.RefObject<View>).current),
+        target: findNodeHandle((target as React.RefObject<View>).current),
         onItemClick: OnItemClickRerouted,
         onDismiss: dismissCallback,
         style: {

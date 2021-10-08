@@ -10,11 +10,7 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 
 	@objc public weak var bridge: RCTBridge?
 
-	@objc public var targetViewTag: NSNumber? {
-		didSet {
-			targetView = bridge?.uiManager.view(forReactTag: targetViewTag)
-		}
-	}
+	@objc public var target: NSNumber?
 
 	@objc public var onItemClick: RCTBubblingEventBlock?
 
@@ -62,7 +58,12 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 	}
 
 	func menu(_ menu: NSMenu, update item: NSMenuItem, at index: Int, shouldCancel: Bool) -> Bool {
-		item.view = reactSubviews()[index]
+		let reactView: NSView = reactSubviews()[index]
+		
+		let viewTouchHandler = RCTTouchHandler(bridge: bridge)
+		viewTouchHandler?.attach(to: reactView as? RCTUIView)
+		
+		item.view = reactView
 		item.target = self
 		item.action = #selector(sendOnItemClickEvent)
 		return !shouldCancel
@@ -91,13 +92,9 @@ class ContextualMenu: RCTView, NSMenuDelegate {
 	}
 
 	private func showContextualMenu() {
-		let view = targetView ?? self
+		let targetView = bridge?.uiManager.view(forReactTag: target) ?? self
 		DispatchQueue.main.async {
-			self.menu?.popUp(positioning: nil, at: NSPoint(x: 0, y: view.frame.height), in: self.targetView)
+			self.menu?.popUp(positioning: nil, at: NSPoint(x: 0, y: targetView.frame.height), in: targetView)
 		}
 	}
-
-	// MARK: - Private variables
-
-	private var targetView: NSView?
 }
