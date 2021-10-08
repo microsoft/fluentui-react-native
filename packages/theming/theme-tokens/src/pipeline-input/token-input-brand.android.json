@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/fluentui-token-pipeline/main/docs/token.schema.json",
+  "Meta": {
+    "FluentUITokensVersion": 0
+  },
+  "Global": {
+    "Color": {
+      "Brand": {
+        "Shade": {
+          "30": { "value": "#004578" },
+          "20": { "value": "#005A9E" },
+          "10": { "value": "#106EBE" }
+        },
+        "Primary": { "value": "#0078D4" },
+        "Tint": {
+          "10": { "value": "#2B88D8" },
+          "20": { "value": "#C7E0F4" },
+          "30": { "value": "#DEECF9" },
+          "40": { "value": "#EFF6FC" }
+        }
+      }
+    }
+  }
+}

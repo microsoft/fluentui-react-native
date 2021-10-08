@@ -1,0 +1,159 @@
+{
+	"body": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 20,
+		"fontSize": 14,
+		"fontWeight": "400"
+	},
+	"borderless": {
+		"strokeAlignment": "inner",
+		"strokeColorRest": "transparent",
+		"strokeColorHover": "transparent",
+		"strokeColorPressed": "transparent",
+		"strokeColorDisabled": "transparent",
+		"strokeWidth": 1
+	},
+	"brandBackground": {
+		"fillColorRest": "#185abd",
+		"fillColorHover": "#1651aa",
+		"fillColorPressed": "#0e336a",
+		"fillColorDisabled": "#e0e0e0",
+		"fillColorSelected": "#13458f"
+	},
+	"brandForeground": {
+		"fillColorRest": "#185abd",
+		"fillColorHover": "#1651aa",
+		"fillColorPressed": "#0e336a",
+		"fillColorDisabled": "#bdbdbd",
+		"fillColorSelected": "#13458f"
+	},
+	"brandStroke": {
+		"strokeColorRest": "#185abd",
+		"strokeColorHover": "#1651aa",
+		"strokeColorPressed": "#0e336a",
+		"strokeColorDisabled": "#e0e0e0",
+		"strokeColorSelected": "#13458f"
+	},
+	"caption": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 16,
+		"fontSize": 12,
+		"fontWeight": "400"
+	},
+	"control": {
+		"cornerRadius": 4,
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 20,
+		"fontSize": 14,
+		"fontWeight": "600"
+	},
+	"display": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 92,
+		"fontSize": 68,
+		"fontWeight": "600"
+	},
+	"headline": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 28,
+		"fontSize": 20,
+		"fontWeight": "600"
+	},
+	"icon": {
+		"cornerRadius": 4
+	},
+	"illustration": {
+		"cornerRadius": 8
+	},
+	"largeTitle": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 52,
+		"fontSize": 40,
+		"fontWeight": "600"
+	},
+	"neutralBackground1": {
+		"fillColorRest": "#ffffff",
+		"fillColorPressed": "#ebebeb"
+	},
+	"neutralBackground2": {
+		"fillColorRest": "#fafafa"
+	},
+	"neutralBackground3": {
+		"fillColorRest": "#f5f5f5"
+	},
+	"neutralBackground4": {
+		"fillColorRest": "#f0f0f0"
+	},
+	"neutralBackground5": {
+		"fillColorRest": "#ebebeb"
+	},
+	"neutralBackgroundDisabled": {
+		"fillColorRest": "#e0e0e0"
+	},
+	"neutralForeground1": {
+		"fillColorRest": "#242424"
+	},
+	"neutralForeground2": {
+		"fillColorRest": "#424242"
+	},
+	"neutralForeground3": {
+		"fillColorRest": "#616161"
+	},
+	"neutralForeground4": {
+		"fillColorRest": "#808080"
+	},
+	"neutralForegroundDisabled": {
+		"fillColorRest": "#bdbdbd"
+	},
+	"neutralForegroundInverted": {
+		"fillColorRest": "#ffffff"
+	},
+	"neutralStroke1": {
+		"strokeColorRest": "#f0f0f0"
+	},
+	"neutralStroke2": {
+		"strokeColorRest": "#e0e0e0"
+	},
+	"neutralStroke3": {
+		"strokeColorRest": "#d1d1d1"
+	},
+	"round": {
+		"cornerRadius": 9999
+	},
+	"square": {
+		"cornerRadius": 0
+	},
+	"subheadline": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 22,
+		"fontSize": 16,
+		"fontWeight": "600"
+	},
+	"surface": {
+		"cornerRadius": 4
+	},
+	"title1": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 40,
+		"fontSize": 32,
+		"fontWeight": "600"
+	},
+	"title2": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 36,
+		"fontSize": 28,
+		"fontWeight": "600"
+	},
+	"title3": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 32,
+		"fontSize": 24,
+		"fontWeight": "600"
+	},
+	"transparentBackground": {
+		"fillColorRest": "transparent",
+		"fillColorHover": "transparent",
+		"fillColorPressed": "transparent",
+		"fillColorSelected": "transparent"
+	}
+}
