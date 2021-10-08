@@ -1,5 +1,6 @@
 {
   "type": "patch",
+  "comment": "Fix caching",
   "packageName": "@fluentui-react-native/experimental-text",
   "email": "ruaraki@microsoft.com",
   "dependentChangeType": "patch"
