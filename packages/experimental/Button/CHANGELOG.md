@@ -1,8 +1,26 @@
 # Change Log - @fluentui-react-native/experimental-button
 
-This log was last generated on Fri, 01 Oct 2021 17:52:17 GMT and should not be manually modified.
+This log was last generated on Thu, 07 Oct 2021 20:59:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.0
+
+Thu, 07 Oct 2021 20:59:20 GMT
+
+### Minor changes
+
+- Add styling changes (ruaraki@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.1 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-text to v0.6.23 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.8.25 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.49 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/styling-utils to v0.2.0 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.8.0 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/tokens to v0.10.0 (ruaraki@microsoft.com)
 
 ## 0.8.25
 

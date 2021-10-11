@@ -72,7 +72,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
       color: tokens.color,
       ...fontStyles.from(tokens, theme),
     }),
-    [],
+    ['color', ...fontStyles.keys],
   );
 
   // return a continuation function that allows this text to be compressed
