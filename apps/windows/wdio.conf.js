@@ -98,8 +98,8 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   beforeSession: function (/* config, capabilities, specs */) {
-    fs.mkdirSync('./errorShots', { recursive: true });
-    fs.mkdirSync('./allure-results', { recursive: true });
+    fs.mkdirSync('./errorShots', {recursive: true});
+    fs.mkdirSync('./allure-results', {recursive: true});
   },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
@@ -147,9 +147,12 @@ exports.config = {
    */
   afterTest: function (test /*, context*/) {
     // if test passed, ignore, else take and save screenshot.
-    if (test.passed) {
-      return;
-    }
+    /* UPDATE: I want to take screenshots after every test to help gauge certain CI failures.
+     * I will re-enable this once I am able to determine what's causing some CI failures
+     */
+    // if (test.passed) {
+    //   return;
+    // }
 
     // get current test title and clean it, to use it as file name
     const fileName = encodeURIComponent(test.title.replace(/\s+/g, '-'));
