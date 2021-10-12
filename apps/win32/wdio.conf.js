@@ -6,8 +6,8 @@ const appPath = path.resolve(path.dirname(require.resolve('@office-iss/rex-win32
 const appArgs = 'basePath ' + path.resolve('dist') + ' plugin defaultplugin bundle index.win32 component FluentTester';
 const appDir = path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js'));
 
-const defaultWaitForTimeout = 10000;
-const defaultConnectionRetryTimeout = 15000;
+const defaultWaitForTimeout = 20000;
+const defaultConnectionRetryTimeout = 20000;
 const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
@@ -42,7 +42,7 @@ exports.config = {
   bail: 1,
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
-  connectionRetryCount: 1, // Maximum count of request retries to the Selenium server.
+  connectionRetryCount: 3, // Maximum count of request retries to the Selenium server.
 
   port: 4723, // default appium port
   services: ['appium'],
@@ -57,6 +57,10 @@ exports.config = {
   jasmineNodeOpts: {
     defaultTimeoutInterval: jasmineDefaultTimeout,
   },
+
+  // The number of times to retry the entire specfile when it fails as a whole.
+  // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
+  specFileRetries: 3,
 
   reporters: [
     'spec',
@@ -163,9 +167,12 @@ exports.config = {
    */
   afterTest: function (test) {
     // if test passed, ignore, else take and save screenshot.
-    if (test.passed) {
-      return;
-    }
+    /* UPDATE: I want to take screenshots after every test to help gauge certain CI failures.
+     * I will re-enable this once I am able to determine what's causing some CI failures
+     */
+    // if (test.passed) {
+    //   return;
+    // }
 
     // get current test title and clean it, to use it as file name
     const fileName = encodeURIComponent(test.title.replace(/\s+/g, '-'));
