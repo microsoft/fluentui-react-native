@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PressableProps, Platform } from 'react-native';
+import { PressableProps } from 'react-native';
 import { PressableFocusProps, PressableHoverProps, PressablePressProps } from './Pressability/Pressability.types';
 import {
   IPressableHooks,
