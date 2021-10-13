@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Updated WDIO and testing CI for scrolling pattern",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
