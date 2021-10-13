@@ -1,4 +1,4 @@
-import { FOCUSTRAPZONE_TESTPAGE } from '../../../FluentTester/TestComponents/FocusTrapZone/consts';
+import { FOCUSTRAPZONE_TESTPAGE, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../../FluentTester/TestComponents/FocusTrapZone/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class FocusTrapZonePage extends BasePage {
@@ -8,6 +8,10 @@ class FocusTrapZonePage extends BasePage {
 
   get _pageName() {
     return FOCUSTRAPZONE_TESTPAGE;
+  }
+
+  get _pageButton() {
+    return By(HOMEPAGE_FOCUSTRAPZONE_BUTTON);
   }
 }
 

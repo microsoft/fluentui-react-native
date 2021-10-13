@@ -1,4 +1,4 @@
-import { RADIOGROUP_TESTPAGE } from '../../../FluentTester/TestComponents/RadioGroup/consts';
+import { RADIOGROUP_TESTPAGE, HOMEPAGE_RADIOGROUP_BUTTON } from '../../../FluentTester/TestComponents/RadioGroup/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class RadioGroupPage extends BasePage {
@@ -8,6 +8,10 @@ class RadioGroupPage extends BasePage {
 
   get _pageName() {
     return RADIOGROUP_TESTPAGE;
+  }
+
+  get _pageButton() {
+    return By(HOMEPAGE_RADIOGROUP_BUTTON);
   }
 }
 

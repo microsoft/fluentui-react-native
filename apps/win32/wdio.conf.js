@@ -56,6 +56,7 @@ exports.config = {
   framework: 'jasmine',
   jasmineNodeOpts: {
     defaultTimeoutInterval: jasmineDefaultTimeout,
+    requires: ['ts-node/register'],
   },
 
   // The number of times to retry the entire specfile when it fails as a whole.
@@ -129,7 +130,6 @@ exports.config = {
    */
   before: function () {
     // not needed for Cucumber
-    require('ts-node').register({ files: true });
     browser.maximizeWindow();
   },
   /**
