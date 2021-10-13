@@ -140,7 +140,23 @@ describe('Click on each test page and check if it renders', function () {
   // });
 
   it('Theme Test Page', () => {
+    browser.saveScreenshot('./errorShots/beforeScroll1.png');
     driver.touchScroll(0, -75, $('~Homepage_Link_Button').elementId);
+    browser.saveScreenshot('./errorShots/afterScroll1.png');
+    driver.touchScroll(0, 75, $('~Homepage_Link_Button').elementId);
+    browser.saveScreenshot('./errorShots/afterScroll2.png');
+    ThemeTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
+    BootTestPage.clickAndGoToThemePage();
+    ThemeTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+    expect(ThemeTestPage.isPageLoaded()).toBeTruthy();
+  });
+
+  it('Scrolling Test Page', () => {
+    browser.saveScreenshot('./errorShots/beforeScroll2.png');
+    driver.touchScroll(0, -50, $('~Homepage_Link_Button').elementId);
+    browser.saveScreenshot('./errorShots/afterScroll3.png');
+    driver.touchScroll(0, 50, $('~Homepage_Link_Button').elementId);
+    browser.saveScreenshot('./errorShots/afterScroll3.png');
     ThemeTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
     BootTestPage.clickAndGoToThemePage();
     ThemeTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
