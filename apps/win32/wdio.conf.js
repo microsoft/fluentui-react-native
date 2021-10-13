@@ -163,7 +163,7 @@ exports.config = {
     // }
 
     // get current test title and clean it, to use it as file name
-    const fileName = encodeURIComponent(test.title.replace(/\s+/g, '-'));
+    const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));
 
     // build file path
     const filePath = './errorShots/' + fileName + '.png';
