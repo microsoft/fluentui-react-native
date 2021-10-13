@@ -49,8 +49,7 @@
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
     "typescript": "3.8.3",
-    "webdriverio": "6.2.0",
-    "wdio-video-reporter": "3.1.0"
+    "webdriverio": "6.2.0"
   },
   "workspaces": {
     "nohoist": [
