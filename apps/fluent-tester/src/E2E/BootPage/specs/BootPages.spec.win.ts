@@ -140,7 +140,7 @@ describe('Click on each test page and check if it renders', function () {
   // });
 
   it('Theme Test Page', () => {
-    ThemeTestPage.scrollToButton();
+    driver.touchScroll(0, -20, $('~SCROLLVIEW_TEST_ID').elementId);
     ThemeTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
     BootTestPage.clickAndGoToThemePage();
     ThemeTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
