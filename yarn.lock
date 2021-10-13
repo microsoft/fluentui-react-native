@@ -3935,7 +3935,7 @@
     allure-js-commons "^1.3.2"
     strip-ansi "^6.0.0"
 
-"@wdio/appium-service@6.2.0", "@wdio/appium-service@6.4.0":
+"@wdio/appium-service@6.4.0":
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/@wdio/appium-service/-/appium-service-6.4.0.tgz#461319071f40d9622da3b262ab19ebb800d94970"
   integrity sha512-Aik7O/6Dc0klISyTNuA/2Kluwm6qoK//5sCEjmqC1NbeURO+agaL1fGp0eK9TfEBvud+NhduH0pqbfYAmvfDUQ==
@@ -4169,7 +4169,7 @@
     webdriver "6.2.0"
     webdriverio "6.2.0"
 
-"@wdio/spec-reporter@6.2.0":
+"@wdio/spec-reporter@6.4.0":
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/@wdio/spec-reporter/-/spec-reporter-6.4.0.tgz#df848a0fe567c3a9238b88deb646d2b2ecdc7f53"
   integrity sha512-nY7tr6nRDkJEsT0Yv/ZJVaDT2KjtQqd/X+X7cFHEMvy13NguOOdC/+WQyilR+JrT5JSJZySRDdu0gm7A8DSVGA==
