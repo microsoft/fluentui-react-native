@@ -54,15 +54,7 @@ exports.config = {
   // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
   specFileRetries: 3,
 
-  reporters: [
-    'spec',
-    [
-      'allure',
-      {
-        outputDir: 'allure-results',
-      },
-    ],
-  ],
+  reporters: ['spec'],
 
   /*
    ** ===================
@@ -103,7 +95,6 @@ exports.config = {
    */
   beforeSession: function (/* config, capabilities, specs */) {
     fs.mkdirSync('./errorShots', {recursive: true});
-    fs.mkdirSync('./allure-results', {recursive: true});
   },
   /**
    * Gets executed before test execution begins. At this point you can access to all global

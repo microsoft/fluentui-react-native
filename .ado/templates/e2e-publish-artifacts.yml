@@ -32,11 +32,6 @@ steps:
     displayName: "Copy tree dump report logs"
     condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'))
 
-  - powershell: |
-      Move-Item -Path $(Build.SourcesDirectory)\apps\${{parameters.platform}}\allure-report -Destination $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
-    displayName: "Copy allure report"
-    condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'))
-
   # Publish FluentTesterDump
   - task: PublishBuildArtifacts@1
     inputs:

@@ -56,22 +56,14 @@ exports.config = {
   framework: 'jasmine',
   jasmineNodeOpts: {
     defaultTimeoutInterval: jasmineDefaultTimeout,
-    requires: ['ts-node/register'],
+    //requires: ['ts-node/register'],
   },
 
   // The number of times to retry the entire specfile when it fails as a whole.
   // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
   specFileRetries: 3,
 
-  reporters: [
-    'spec',
-    [
-      'allure',
-      {
-        outputDir: 'allure-results',
-      },
-    ],
-  ],
+  reporters: ['spec'],
 
   /*
    ** ===================
@@ -116,11 +108,6 @@ exports.config = {
       rimraf.sync('./errorShots');
     }
     fs.mkdirSync('./errorShots');
-
-    if (fs.existsSync('./allure-results')) {
-      rimraf.sync('./allure-results');
-    }
-    fs.mkdirSync('./allure-results');
   },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
@@ -130,6 +117,7 @@ exports.config = {
    */
   before: function () {
     // not needed for Cucumber
+    require('ts-node').register({ files: true });
     browser.maximizeWindow();
   },
   /**
