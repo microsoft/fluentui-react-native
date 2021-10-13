@@ -139,16 +139,20 @@ describe('Click on each test page and check if it renders', function () {
   //   expect(TextTestPage.isPageLoaded()).toBeTruthy();
   // });
 
-  // it('Theme Test Page', () => {
-  //   BootTestPage.clickAndGoToThemePage();
-  //   ThemeTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
-  //   expect(ThemeTestPage.isPageLoaded()).toBeTruthy();
-  // });
-
-  it('Testing isDisplayed() directly in Spec', () => {
-    const themeButtonElement = $('~Homepage_Theme_Button');
-    expect(themeButtonElement.isDisplayed()).toBeFalsy();
+  it('Theme Test Page', () => {
+    ThemeTestPage.scrollToButton();
+    ThemeTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
+    BootTestPage.clickAndGoToThemePage();
+    ThemeTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+    expect(ThemeTestPage.isPageLoaded()).toBeTruthy();
   });
+
+  // it('Testing isDisplayed() directly in Spec', () => {
+  //   ThemeTestPage.scrollToButton();
+  //   ThemeTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
+  //   // const themeButtonElement = $('~Homepage_Theme_Button');
+  //   // expect(themeButtonElement.isDisplayed()).toBeFalsy();
+  // });
 
   it('Testing isDisplayed() through the BasePage', () => {
     expect(ThemeTestPage.isButtonInView()).toBeFalsy();
