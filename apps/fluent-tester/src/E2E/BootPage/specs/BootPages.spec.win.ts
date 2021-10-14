@@ -130,9 +130,9 @@ describe('Click on each test page and check if it renders', function () {
 
   it('Svg Test Page', () => {
     if (!SvgTestPage.isButtonInView()) {
-      browser.saveScreenshot('svgBefore.png');
+      browser.saveScreenshot('./errorShots/svgBefore.png');
       SvgTestPage.scrollToComponentButton();
-      browser.saveScreenshot('svgAfter.png');
+      browser.saveScreenshot('./errorShots/svgAfter.png');
     }
     BootTestPage.clickAndGoToSvgPage();
     SvgTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
@@ -141,9 +141,9 @@ describe('Click on each test page and check if it renders', function () {
 
   it('Tabs Test Page', () => {
     if (!TabsTestPage.isButtonInView()) {
-      browser.saveScreenshot('tabsBefore.png');
+      browser.saveScreenshot('./errorShots/tabsBefore.png');
       TabsTestPage.scrollToComponentButton();
-      browser.saveScreenshot('tabsAfter.png');
+      browser.saveScreenshot('./errorShots/tabsAfter.png');
     }
     BootTestPage.clickAndGoToTabsPage();
     TabsTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
@@ -152,9 +152,9 @@ describe('Click on each test page and check if it renders', function () {
 
   it('Text Test Page', () => {
     if (!TextTestPage.isButtonInView()) {
-      browser.saveScreenshot('textBefore.png');
+      browser.saveScreenshot('./errorShots/textBefore.png');
       TextTestPage.scrollToComponentButton();
-      browser.saveScreenshot('textAfter.png');
+      browser.saveScreenshot('./errorShots/textAfter.png');
     }
     BootTestPage.clickAndGoToTextPage();
     TextTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
@@ -163,9 +163,9 @@ describe('Click on each test page and check if it renders', function () {
 
   it('Theme Test Page', () => {
     if (!ThemeTestPage.isButtonInView()) {
-      browser.saveScreenshot('themeBefore.png');
+      browser.saveScreenshot('./errorShots/themeBefore.png');
       ThemeTestPage.scrollToComponentButton();
-      browser.saveScreenshot('themeAfter.png');
+      browser.saveScreenshot('./errorShots/themeAfter.png');
     }
     BootTestPage.clickAndGoToThemePage();
     ThemeTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
