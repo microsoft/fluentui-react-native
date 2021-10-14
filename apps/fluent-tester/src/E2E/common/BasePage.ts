@@ -15,7 +15,7 @@ export class BasePage {
 
   scrollToButton(): void {
     while (!this.isButtonInView()) {
-      driver.touchScroll(0, -20, $('~SCROLLVIEW_TEST_ID').elementId);
+      driver.touchScroll(0, -75, $('~SCROLLVIEW_TEST_ID').elementId);
     }
   }
 
