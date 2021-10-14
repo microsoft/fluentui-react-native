@@ -15,8 +15,7 @@ steps:
   # Copy appium log to FluentTesterDump
   - task: CopyFiles@2
     inputs:
-      sourceFolder: $(Build.SourcesDirectory)\apps\${{parameters.platform}}\appium\reports\
-      contents: "*"
+      sourceFolder: $(Build.SourcesDirectory)\apps\${{parameters.platform}}\appium\reports
       targetFolder: $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
     displayName: "Copy tree dump report logs"
     condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'))
