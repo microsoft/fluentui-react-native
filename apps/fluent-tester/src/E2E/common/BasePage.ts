@@ -1,4 +1,5 @@
 const DUMMY_CHAR = '';
+const SCROLL_THROUGH_COMPONENTS_COORDINATES = { x: -0, y: -75 };
 
 export function By(testId: string): WebdriverIO.Element {
   return $('~' + testId);
@@ -13,9 +14,11 @@ export class BasePage {
     return this._pageButton.isDisplayed();
   }
 
-  scrollToButton(): void {
+  // Scrolls to the component button in the list of components.
+  scrollToComponentButton(): void {
     while (!this.isButtonInView()) {
-      driver.touchScroll(0, -75, $('~SCROLLVIEW_TEST_ID').elementId);
+      const scrollViewElement = $('~SCROLLVIEW_TEST_ID');
+      driver.touchScroll(SCROLL_THROUGH_COMPONENTS_COORDINATES.x, SCROLL_THROUGH_COMPONENTS_COORDINATES.y, scrollViewElement.elementId);
     }
   }
 
