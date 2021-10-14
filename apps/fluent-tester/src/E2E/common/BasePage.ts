@@ -15,11 +15,19 @@ export class BasePage {
   }
 
   // Scrolls to the component button in the list of components.
+  // scrollToComponentButton(): void {
+  //   while (!this.isButtonInView()) {
+  //     const scrollViewElement = $('~SCROLLVIEW_TEST_ID');
+  //     driver.touchScroll(SCROLL_THROUGH_COMPONENTS_COORDINATES.x, SCROLL_THROUGH_COMPONENTS_COORDINATES.y, scrollViewElement.elementId);
+  //   }
+  // }
+
+  // Scrolls to the component button in the list of components.
   scrollToComponentButton(): void {
-    while (!this.isButtonInView()) {
-      const scrollViewElement = $('~SCROLLVIEW_TEST_ID');
-      driver.touchScroll(SCROLL_THROUGH_COMPONENTS_COORDINATES.x, SCROLL_THROUGH_COMPONENTS_COORDINATES.y, scrollViewElement.elementId);
-    }
+    //while (!this.isButtonInView()) {
+    const scrollViewElement = $('~SCROLLVIEW_TEST_ID');
+    driver.touchScroll(SCROLL_THROUGH_COMPONENTS_COORDINATES.x, SCROLL_THROUGH_COMPONENTS_COORDINATES.y, scrollViewElement.elementId);
+    //}
   }
 
   // Waits for page to be loaded. Timeout could differ depending on usage.
