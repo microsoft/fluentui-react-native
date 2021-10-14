@@ -12,6 +12,15 @@ steps:
     displayName: "Copy tree dump screenshots"
     condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'))
 
+  # Copy appium log to FluentTesterDump
+  - task: CopyFiles@2
+    inputs:
+      sourceFolder: $(Build.SourcesDirectory)\apps\${{parameters.platform}}\appium\reports\
+      contents: "*"
+      targetFolder: $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
+    displayName: "Copy tree dump report logs"
+    condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'))
+
   # Publish FluentTesterDump
   - task: PublishBuildArtifacts@1
     inputs:

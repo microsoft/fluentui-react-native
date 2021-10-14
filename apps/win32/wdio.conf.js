@@ -47,7 +47,7 @@ exports.config = {
   port: 4723, // default appium port
   services: ['appium'],
   appium: {
-    logPath: './reports/',
+    logPath: './appium/reports/',
     args: {
       port: '4723',
     },
