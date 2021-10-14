@@ -132,10 +132,10 @@ export function usePressState<T extends object>(props: IWithPressableOptions<T>)
  */
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function useHoverState<T extends object>(props: IWithPressableOptions<T>): [IWithPressableEvents<T>, IHoverState] {
-  const [hoverProps, hoverState] = useHoverHelper(props);
   // https://github.com/facebook/react-native/issues/32406
-  // Pressability exposes onHoverIn & onHoverOut, while useHoverHelper returns onMouseEnter & onMouseLeave.
+  // Pressability takes in onHoverIn & onHoverOut, while useHoverHelper returns onMouseEnter & onMouseLeave.
   // Lets be sure to pass these props properly into usePressability.
+  const [hoverProps, hoverState] = useHoverHelper(props);
   const { onMouseEnter, onMouseLeave, ...restHoverProps } = hoverProps;
   return [{ ...props, ...usePressability({ ...props, onHoverIn: onMouseEnter, onHoverOut: onMouseLeave, ...restHoverProps }) }, hoverState];
 }
