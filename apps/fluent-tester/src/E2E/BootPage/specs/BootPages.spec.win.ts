@@ -176,6 +176,7 @@ describe('Click on each test page and check if it renders', function () {
       browser.saveScreenshot('./errorShots/themeAfter.png');
     }
     BootTestPage.clickAndGoToThemePage();
+    browser.saveScreenshot('./errorShots/themeAfterPress.png');
     ThemeTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(ThemeTestPage.isPageLoaded()).toBeTruthy();
   });
