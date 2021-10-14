@@ -85,6 +85,7 @@ class BootTestPage extends BasePage {
   }
 
   clickAndGoToThemePage() {
+    browser.saveScreenshot('./errorShots/themeBeforePress.png');
     this.themePage.click();
   }
 
