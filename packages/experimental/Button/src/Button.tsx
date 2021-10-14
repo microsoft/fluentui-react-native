@@ -1,12 +1,12 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
 import { buttonName, ButtonType, ButtonProps } from './Button.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings, getDefaultSize } from './Button.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from './useButton';
 import { Icon } from '@fluentui-react-native/icon';
+import { Pressable } from '@fluentui-react-native/pressable';
 import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
 
 /**
@@ -31,7 +31,7 @@ export const Button = compose<ButtonType>({
   displayName: buttonName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
     icon: Icon,
     content: Text,
   },
