@@ -24,10 +24,12 @@ export class BasePage {
 
   // Scrolls to the component button in the list of components.
   scrollToComponentButton(): void {
-    //while (!this.isButtonInView()) {
-    const scrollViewElement = $('~SCROLLVIEW_TEST_ID');
-    driver.touchScroll(0, -40, scrollViewElement.elementId);
-    //}
+    if (!this.isButtonInView()) {
+      browser.saveScreenshot('./errorShots/themeBefore.png');
+      const scrollViewElement = $('~SCROLLVIEW_TEST_ID');
+      driver.touchScroll(0, -40, scrollViewElement.elementId);
+      browser.saveScreenshot('./errorShots/themeAfter.png');
+    }
   }
 
   // Waits for page to be loaded. Timeout could differ depending on usage.

@@ -170,14 +170,17 @@ describe('Click on each test page and check if it renders', function () {
   });
 
   it('Theme Test Page', () => {
-    if (!ThemeTestPage.isButtonInView()) {
-      browser.saveScreenshot('./errorShots/themeBefore.png');
-      ThemeTestPage.scrollToComponentButton();
-      browser.saveScreenshot('./errorShots/themeAfter.png');
-    }
+    browser.saveScreenshot('./errorShots/themeBefore.png');
+    ThemeTestPage.scrollToComponentButton();
+    // if (!ThemeTestPage.isButtonInView()) {
+    //   browser.saveScreenshot('./errorShots/themeBefore.png');
+    //   ThemeTestPage.scrollToComponentButton();
+    //   browser.saveScreenshot('./errorShots/themeAfter.png');
+    // }
+    ThemeTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
     BootTestPage.clickAndGoToThemePage();
-    browser.saveScreenshot('./errorShots/themeAfterPress.png');
     ThemeTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+    browser.saveScreenshot('./errorShots/themeAfterPress.png');
     expect(ThemeTestPage.isPageLoaded()).toBeTruthy();
   });
 });
