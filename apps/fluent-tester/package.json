@@ -71,7 +71,7 @@
     "metro-react-native-babel-preset": "^0.59.0",
     "react": "16.13.1",
     "react-native": "^0.63.2",
-    "react-native-macos": "^0.63.0",
+    "react-native-macos": "^0.63.41",
     "react-native-svg": "^12.1.1",
     "react-native-svg-transformer": "^0.14.3",
     "react-native-windows": "^0.64.0",
@@ -86,7 +86,7 @@
     "@office-iss/react-native-win32": "^0.63.7",
     "react": "16.13.1",
     "react-native": "^0.63.2",
-    "react-native-macos": "^0.63.0",
+    "react-native-macos": "^0.63.41",
     "react-native-svg": "^12.1.1",
     "react-native-windows": "^0.64.0"
   },
