@@ -129,7 +129,7 @@ export const Slider: React.FunctionComponent<ISliderProps> = (props: ISliderProp
         <Track style={styles.track} />
         {trackLength.current > 0 && (
           <Pressable
-            renderStyle={(state) => onThumbRenderStyle(state, thumbLocation)}
+            style={(state) => onThumbRenderStyle(state, thumbLocation)}
             onStartShouldSetResponder={() => trackLength.current > 0}
             onResponderStart={(e) => {
               startTouchPosition.current = e.nativeEvent.pageX;

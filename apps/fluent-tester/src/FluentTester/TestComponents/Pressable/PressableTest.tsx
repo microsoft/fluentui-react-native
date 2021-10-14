@@ -96,9 +96,9 @@ const pressable: React.FunctionComponent = () => {
   const [hoverProps, hoverState] = useHoverState({});
 
   return (
-    <Stack horizontal gap={5}>
+    <Stack>
       <Square color="blue" />
-      <Pressable renderStyle={renderStyle}>
+      <Pressable style={renderStyle}>
         <Square />
       </Pressable>
       <Square color="green" />
