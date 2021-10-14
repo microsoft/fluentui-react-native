@@ -85,17 +85,12 @@ class BootTestPage extends BasePage {
   }
 
   clickAndGoToThemePage() {
-    browser.saveScreenshot('./errorShots/themeBeforePress.png');
     this.themePage.click();
   }
 
   clickAndGoToExperimentalTabsPage() {
     this.experimentalTabsPage.click();
   }
-
-  // moveToButtonPage() {
-  //   this.buttonPage.moveTo(50, -50);
-  // }
 
   scrollToThemePage() {
     this.themePage.scrollIntoView(true);

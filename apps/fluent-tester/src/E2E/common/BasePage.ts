@@ -1,5 +1,5 @@
 const DUMMY_CHAR = '';
-//const SCROLL_THROUGH_COMPONENTS_COORDINATES = { x: -0, y: -75 };
+const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -40 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
 export function By(testId: string): WebdriverIO.Element {
   return $('~' + testId);
@@ -15,20 +15,10 @@ export class BasePage {
   }
 
   // Scrolls to the component button in the list of components.
-  // scrollToComponentButton(): void {
-  //   while (!this.isButtonInView()) {
-  //     const scrollViewElement = $('~SCROLLVIEW_TEST_ID');
-  //     driver.touchScroll(SCROLL_THROUGH_COMPONENTS_COORDINATES.x, SCROLL_THROUGH_COMPONENTS_COORDINATES.y, scrollViewElement.elementId);
-  //   }
-  // }
-
-  // Scrolls to the component button in the list of components.
   scrollToComponentButton(): void {
     if (!this.isButtonInView()) {
-      browser.saveScreenshot('./errorShots/themeBefore.png');
       const scrollViewElement = $('~SCROLLVIEW_TEST_ID');
-      driver.touchScroll(0, -40, scrollViewElement.elementId);
-      browser.saveScreenshot('./errorShots/themeAfter.png');
+      driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, scrollViewElement.elementId);
     }
   }
 
