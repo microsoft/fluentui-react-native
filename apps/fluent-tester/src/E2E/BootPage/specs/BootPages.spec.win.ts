@@ -8,9 +8,9 @@
 // import LinkTestPage from '../../Link/pages/LinkTestPage.win';
 // import PersonaTestPage from '../../Persona/pages/PersonaTestPage.win';
 // import PersonaCoinTestPage from '../../PersonaCoin/pages/PersonaCoinTestPage.win';
-// import PressableTestPage from '../../Pressable/pages/PressableTestPage.win';
-// import RadioGroupTestPage from '../../RadioGroup/pages/RadioGroupTestPage.win';
-// import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
+import PressableTestPage from '../../Pressable/pages/PressableTestPage.win';
+import RadioGroupTestPage from '../../RadioGroup/pages/RadioGroupTestPage.win';
+//import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
 import SvgTestPage from '../../Svg/pages/SvgTestPage.win';
 import TextTestPage from '../../Text/pages/TextTestPage.win';
 import TabsTestPage from '../../Tabs/pages/TabsTestPage.win';
@@ -107,19 +107,27 @@ describe('Click on each test page and check if it renders', function () {
   //   expect(PersonaCoinTestPage.isPageLoaded()).toBeTruthy();
   // });
 
-  // it('Pressable Test Page', () => {
-  //   PressableTestPage.scrollToComponentButton();
-  //   BootTestPage.clickAndGoToPressablePage();
-  //   PressableTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
-  //   expect(PressableTestPage.isPageLoaded()).toBeTruthy();
-  // });
+  it('Pressable Test Page', () => {
+    if (!PressableTestPage.isButtonInView()) {
+      browser.saveScreenshot('./errorShots/pressableBefore.png');
+      PressableTestPage.scrollToComponentButton();
+      browser.saveScreenshot('./errorShots/pressableAfter.png');
+    }
+    BootTestPage.clickAndGoToPressablePage();
+    PressableTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+    expect(PressableTestPage.isPageLoaded()).toBeTruthy();
+  });
 
-  // it('RadioGroup Test Page', () => {
-  //   RadioGroupTestPage.scrollToComponentButton();
-  //   BootTestPage.clickAndGoToRadioGroupPage();
-  //   RadioGroupTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
-  //   expect(RadioGroupTestPage.isPageLoaded()).toBeTruthy();
-  // });
+  it('RadioGroup Test Page', () => {
+    if (!RadioGroupTestPage.isButtonInView()) {
+      browser.saveScreenshot('./errorShots/radioGroupBefore.png');
+      RadioGroupTestPage.scrollToComponentButton();
+      browser.saveScreenshot('./errorShots/radioGroupAfter.png');
+    }
+    BootTestPage.clickAndGoToRadioGroupPage();
+    RadioGroupTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+    expect(RadioGroupTestPage.isPageLoaded()).toBeTruthy();
+  });
 
   // it('Separator Test Page', () => {
   //   SeparatorTestPage.scrollToComponentButton();
