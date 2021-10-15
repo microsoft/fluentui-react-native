@@ -395,6 +395,9 @@ export class Pressability {
         ? null
         : {
             onMouseEnter: (event: MouseEvent): void => {
+              if (this._config.onMouseEnter) {
+                this._config.onMouseEnter(event);
+              }
               if (isHoverEnabled()) {
                 this._isHovered = true;
                 this._cancelHoverOutDelayTimeout();
@@ -413,6 +416,9 @@ export class Pressability {
             },
 
             onMouseLeave: (event: MouseEvent): void => {
+              if (this._config.onMouseLeave) {
+                this._config.onMouseLeave(event);
+              }
               if (this._isHovered) {
                 this._isHovered = false;
                 this._cancelHoverInDelayTimeout();

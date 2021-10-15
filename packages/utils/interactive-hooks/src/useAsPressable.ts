@@ -132,12 +132,8 @@ export function usePressState<T extends object>(props: IWithPressableOptions<T>)
  */
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function useHoverState<T extends object>(props: IWithPressableOptions<T>): [IWithPressableEvents<T>, IHoverState] {
-  // https://github.com/facebook/react-native/issues/32406
-  // Pressability takes in onHoverIn & onHoverOut, while useHoverHelper returns onMouseEnter & onMouseLeave.
-  // Lets be sure to pass these props properly into usePressability.
   const [hoverProps, hoverState] = useHoverHelper(props);
-  const { onMouseEnter, onMouseLeave, ...restHoverProps } = hoverProps;
-  return [{ ...props, ...usePressability({ ...props, onHoverIn: onMouseEnter, onHoverOut: onMouseLeave, ...restHoverProps }) }, hoverState];
+  return [{ ...props, ...usePressability({ ...props, ...hoverProps }) }, hoverState];
 }
 
 /**
@@ -152,17 +148,7 @@ export function useAsPressable<T extends object>(props: IWithPressableOptions<T>
   const [hoverProps, hoverState] = useHoverHelper(props);
   const [focusProps, focusState] = useFocusHelper(props);
   const [pressProps, pressState] = usePressHelper(props);
-
-  // https://github.com/facebook/react-native/issues/32406
-  // Convert onMouseEnter & onMouseLeave back into onHoverIn & onHoverOut before passing into usePressability
-  const pressabilityProps = usePressability({
-    onHoverIn: hoverProps.onMouseEnter,
-    onHoverOut: hoverProps.onMouseLeave,
-    ...focusProps,
-    ...pressProps,
-    ...props,
-  });
-
+  const pressabilityProps = usePressability({ ...hoverProps, ...focusProps, ...pressProps, ...props });
   return {
     props: { ...props, ...pressabilityProps },
     state: { ...hoverState, ...focusState, ...pressState },

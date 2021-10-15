@@ -63,7 +63,8 @@ export type PressableHoverEventProps = {
 export type PressabilityConfig = Readonly<
   PressablePressProps &
     PressableFocusProps &
-    PressableHoverProps & {
+    PressableHoverProps &
+    PressableHoverEventProps & {
       /**
        * Whether a press gesture can be interrupted by a parent gesture such as a
        * scroll event. Defaults to true.
