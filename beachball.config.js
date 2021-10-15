@@ -18,26 +18,15 @@ module.exports = {
     groups: [
       {
         masterPackageName: '@fluentui/react-native',
-        include: [
-          '@fluentui-react-native/button',
-          '@fluentui-react-native/callout',
-          '@fluentui-react-native/checkbox',
-          '@fluentui-react-native/contextual-menu',
-          '@fluentui-react-native/focus-trap-zone',
-          '@fluentui-react-native/focus-zone',
-          '@fluentui-react-native/link',
-          '@fluentui-react-native/persona',
-          '@fluentui-react-native/persona-coin',
-          '@fluentui-react-native/pressable',
-          '@fluentui-react-native/radio-group',
-          '@fluentui-react-native/separator',
-          '@fluentui-react-native/text',
-          '@fluentui-react-native/interactive-hooks',
-          '@fluentui-react-native/menu-button',
-          '@fluentui-react-native/tabs',
-        ],
+        include: getPackagesToInclude(),
         changelogPath: path.resolve('packages/libraries/core/'),
       },
     ],
   },
 };
+
+function getPackagesToInclude() {
+  const content = fs.readFileSync(path.resolve('packages/libraries/core/src/index.ts'), 'utf8');
+  const matches = Array.from(content.matchAll(new RegExp("'(@.*)'", 'g')), (m) => m[1]);
+  return matches;
+}

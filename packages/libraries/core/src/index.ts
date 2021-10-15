@@ -1,6 +1,3 @@
-// Please make sure to update beachball config to include new package if you add to this list
-// so that changelogs are generated properly
-
 export * from '@fluentui-react-native/button';
 export * from '@fluentui-react-native/callout';
 export * from '@fluentui-react-native/checkbox';
