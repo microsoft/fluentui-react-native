@@ -152,8 +152,15 @@ export function useAsPressable<T extends object>(props: IWithPressableOptions<T>
   const [hoverProps, hoverState] = useHoverHelper(props);
   const [focusProps, focusState] = useFocusHelper(props);
   const [pressProps, pressState] = usePressHelper(props);
-  const pressabilityProps = usePressability({ ...props, ...hoverProps, ...focusProps, ...pressProps });
 
+  // https://github.com/facebook/react-native/issues/32406
+  // Convert onMouseEnter & onMouseLeave back into onHoverIn & onHoverOut before passing into usePressability
+  const pressabilityProps = usePressability({
+    onHoverIn: hoverProps.onMouseEnter,
+    onHoverOut: hoverProps.onMouseLeave,
+    ...focusProps,
+    ...pressProps,
+  });
   return {
     props: { ...props, ...pressabilityProps },
     state: { ...hoverState, ...focusState, ...pressState },
