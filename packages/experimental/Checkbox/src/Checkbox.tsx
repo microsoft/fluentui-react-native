@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { checkboxName, CheckboxType, CheckboxProps } from './Checkbox.types';
+import { Pressable } from '@fluentui-react-native/pressable';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './Checkbox.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
@@ -11,7 +12,7 @@ export const Checkbox = compose<CheckboxType>({
   displayName: checkboxName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
     checkbox: View,
     checkmark: Text,
     content: Text,

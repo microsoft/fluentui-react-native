@@ -11,13 +11,13 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import {
   useAsToggle,
-  useAsPressable,
+  usePressableState,
   useViewCommandFocus,
   useKeyCallback,
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
-import { IPressableProps } from '@fluentui-react-native/pressable';
+import { Pressable, IPressableProps } from '@fluentui-react-native/pressable';
 
 export const Checkbox = compose<ICheckboxType>({
   displayName: checkboxName,
@@ -49,7 +49,7 @@ export const Checkbox = compose<ICheckboxType>({
     // Ensure focus is placed on checkbox after click
     const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleChecked);
 
-    const pressable = useAsPressable({ onPress: toggleCheckedWithFocus, ...(rest as IPressableProps) });
+    const pressable = usePressableState({ onPress: toggleCheckedWithFocus, ...(rest as IPressableProps) });
 
     const buttonRef = useViewCommandFocus(componentRef);
 
@@ -115,7 +115,7 @@ export const Checkbox = compose<ICheckboxType>({
 
   settings,
   slots: {
-    root: View,
+    root: Pressable,
     checkbox: { slotType: View, filter: filterViewProps },
     checkmark: Text,
     content: Text,

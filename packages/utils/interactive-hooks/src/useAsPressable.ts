@@ -21,9 +21,9 @@ function useHoverHelper(props: PressableHoverProps): [PressableHoverEventProps, 
 
   // https://github.com/facebook/react-native/issues/32406
   // Pressability exposes onHoverIn & onHoverOut, and converts them into onMouseEnter/onMouseLeave event handlers
-  // passed into an inner <View> component. However,Pressable does not expose onHoverIn/onHoverOut as props. Our
+  // passed into an inner <View> component. However, Pressable does not expose onHoverIn/onHoverOut as props. Our
   // desktop ports do expose onMouseEnter & onMouseLeave as event handlers on View though. As a workaround, let's
-  // have our public API take in onHoverIn & onHoverOut as props, but pass them as onMouseEnter/onMouseLeave
+  // have our public API take in onHoverIn & onHoverOut as props, but pass them into Pressable as onMouseEnter & onMouseLeave
 
   const onMouseEnter = React.useCallback(
     (e) => {
@@ -152,7 +152,15 @@ export function useAsPressable<T extends object>(props: IWithPressableOptions<T>
   const [hoverProps, hoverState] = useHoverHelper(props);
   const [focusProps, focusState] = useFocusHelper(props);
   const [pressProps, pressState] = usePressHelper(props);
-  const pressabilityProps = usePressability({ ...props, ...hoverProps, ...focusProps, ...pressProps });
+
+  // https://github.com/facebook/react-native/issues/32406
+  // Convert onMouseEnter & onMouseLeave back into onHoverIn & onHoverOut before passing into usePressability
+  const pressabilityProps = usePressability({
+    onHoverIn: hoverProps.onMouseEnter,
+    onHoverOut: hoverProps.onMouseLeave,
+    ...focusProps,
+    ...pressProps,
+  });
 
   return {
     props: { ...props, ...pressabilityProps },

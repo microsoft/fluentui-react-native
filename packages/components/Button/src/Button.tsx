@@ -1,6 +1,7 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
+import { Pressable } from '@fluentui-react-native/pressable';
 import { IButtonSlotProps, IButtonState, IButtonProps, IButtonRenderData, buttonName, IButtonType } from './Button.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
@@ -11,11 +12,11 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 
 import {
-  useAsPressable,
   useKeyCallback,
   useViewCommandFocus,
   createIconProps,
   useOnPressWithFocus,
+  usePressableState,
 } from '@fluentui-react-native/interactive-hooks';
 import { Icon } from '@fluentui-react-native/icon';
 
@@ -39,7 +40,7 @@ export const Button = compose<IButtonType>({
     // Ensure focus is placed on button after click
     const onPressWithFocus = useOnPressWithFocus(componentRef, onClick);
     // attach the pressable state handlers
-    const pressable = useAsPressable({ ...rest, onPress: onPressWithFocus });
+    const pressable = usePressableState({ ...rest, onPress: onPressWithFocus });
     const onKeyUp = useKeyCallback(onClick, ' ', 'Enter');
     // set up state
     const state: IButtonState = {
@@ -91,7 +92,7 @@ export const Button = compose<IButtonType>({
     );
   },
   slots: {
-    root: View,
+    root: Pressable,
     stack: { slotType: View, filter: filterViewProps },
     borderWrapper: { slotType: View, filter: filterViewProps },
     startIcon: { slotType: Icon as React.ComponentType },

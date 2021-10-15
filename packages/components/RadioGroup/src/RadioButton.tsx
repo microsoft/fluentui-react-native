@@ -2,6 +2,7 @@
 'use strict';
 import * as React from 'react';
 import { View } from 'react-native';
+import { Pressable } from '@fluentui-react-native/pressable';
 import { Text } from '@fluentui-react-native/text';
 import { radioButtonName, IRadioButtonType, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonRenderData } from './RadioButton.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
@@ -10,7 +11,7 @@ import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { settings, radioButtonSelectActionLabel } from './RadioButton.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
-import { useAsPressable, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { RadioGroupContext } from './RadioGroup';
 
 export const RadioButton = compose<IRadioButtonType>({
@@ -58,7 +59,7 @@ export const RadioButton = compose<IRadioButtonType>({
     const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
 
     /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
-    const pressable = useAsPressable({
+    const pressable = usePressableState({
       ...rest,
       onPress: changeSelectionWithFocus,
       onFocus: changeSelection,
@@ -118,7 +119,7 @@ export const RadioButton = compose<IRadioButtonType>({
 
   settings,
   slots: {
-    root: View,
+    root: Pressable,
     button: { slotType: View, filter: filterViewProps },
     innerCircle: { slotType: View, filter: filterViewProps },
     content: Text,
