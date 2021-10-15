@@ -3,9 +3,9 @@ import { ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
-import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IPressableProps } from '@fluentui-react-native/pressable';
+import { IViewProps } from '@fluentui-react-native/adapters';
 
 export const radioButtonName = 'RadioButton';
 
@@ -58,7 +58,7 @@ export interface IRadioButtonTokens extends FontTokens, IForegroundColorTokens, 
 }
 
 export interface IRadioButtonSlotProps {
-  root: React.PropsWithRef<IViewWin32Props>;
+  root: React.PropsWithRef<IViewProps>;
   button: ViewProps;
   innerCircle: ViewProps;
   content: ITextProps;

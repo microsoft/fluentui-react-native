@@ -181,6 +181,5 @@ export function usePressableState(props: PressablePropsExtended): { props: Press
   const [hoverProps, hoverState] = useHoverHelper({ onHoverIn, onHoverOut });
   const [focusProps, focusState] = useFocusHelper({ onFocus, onBlur });
   const [pressProps, pressState] = usePressHelper({ onPressIn, onPressOut });
-
   return { props: { ...hoverProps, ...focusProps, ...pressProps, ...rest }, state: { ...hoverState, ...focusState, ...pressState } };
 }
