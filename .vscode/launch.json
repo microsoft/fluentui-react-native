@@ -5,6 +5,36 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Attach to packager (Android)",
+      "request": "attach",
+      "type": "reactnative",
+      "cwd": "${workspaceFolder}/apps/android"
+    },
+    {
+      "name": "Attach to packager (iOS)",
+      "request": "attach",
+      "type": "reactnative",
+      "cwd": "${workspaceFolder}/apps/ios"
+    },
+    {
+      "name": "Attach to packager (macOS)",
+      "request": "attach",
+      "type": "reactnative",
+      "cwd": "${workspaceFolder}/apps/macos"
+    },
+    {
+      "name": "Attach to packager (windows)",
+      "request": "attach",
+      "type": "reactnative",
+      "cwd": "${workspaceFolder}/apps/windows"
+    },
+    {
+      "name": "Attach to packager (win32)",
+      "request": "attach",
+      "type": "reactnative",
+      "cwd": "${workspaceFolder}/apps/win32"
+    },
+    {
       "name": "Debug test",
       "type": "node",
       "request": "launch",
@@ -33,14 +63,6 @@
       "console": "integratedTerminal",
       "sourceMaps": true,
       "outFiles": []
-    },
-    {
-      "name": "Debug Fabric Tester",
-      "type": "node",
-      "request": "attach",
-      "protocol": "inspector",
-      "port": 9229,
-      "sourceMaps": true
     }
   ]
 }
