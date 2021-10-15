@@ -140,14 +140,11 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  afterTest: function (test /*, context*/) {
+  afterTest: function (test, context, results) {
     // if test passed, ignore, else take and save screenshot.
-    /* UPDATE: I want to take screenshots after every test to help gauge certain CI failures.
-     * I will re-enable this once I am able to determine what's causing some CI failures
-     */
-    // if (test.passed) {
-    //   return;
-    // }
+    if (results.passed) {
+      return;
+    }
 
     // get current test title and clean it, to use it as file name
     const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));

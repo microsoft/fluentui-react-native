@@ -152,9 +152,9 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  afterTest: function (test) {
+  afterTest: function (test, context, results) {
     // if test passed, ignore, else take and save screenshot.
-    if (test.passed) {
+    if (results.passed) {
       return;
     }
 
