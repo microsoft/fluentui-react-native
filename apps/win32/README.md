@@ -78,7 +78,7 @@ yarn run-win32-web
 ## Debug `FluentUI Tester` app with web debugging in VS Code
 
 1. Launch your test app + packager as you normally would
-2. Go the debug menu in VS Code and run the "Attach to Packager (Android)" configuration
+2. Go the debug menu in VS Code and run the "Attach to Packager (Win32)" configuration
 3. Open the developer menu in your test app, and click debug
 4. You now should be able to set breakpoints and step through your code directly in VS Code.
 

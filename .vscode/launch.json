@@ -23,13 +23,13 @@
       "cwd": "${workspaceFolder}/apps/macos"
     },
     {
-      "name": "Attach to packager (windows)",
+      "name": "Attach to packager (Windows)",
       "request": "attach",
       "type": "reactnative",
       "cwd": "${workspaceFolder}/apps/windows"
     },
     {
-      "name": "Attach to packager (win32)",
+      "name": "Attach to packager (Win32)",
       "request": "attach",
       "type": "reactnative",
       "cwd": "${workspaceFolder}/apps/win32"
