@@ -31,7 +31,7 @@ yarn macos
 
 ## Debugging
 
-You can debug native code in Android Studio. To debug javascript code, you can either use standard web debugging, or you can use [React Native Tools](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native) to debug directly in VS Code. The steps are as follows:
+You can debug native code in Xcode. To debug javascript code, you can either use standard web debugging, or you can use [React Native Tools](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native) to debug directly in VS Code. The steps are as follows:
 
 1. Launch your test app + packager as you normally would
 2. Go the debug menu in VS Code and run the "Attach to Packager (macOS)" configuration
