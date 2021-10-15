@@ -3,25 +3,14 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { ButtonTokens } from './Button.types';
 import { shadowStyleFromGlobalToken } from './shadowStyle';
 
-export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) =>
+export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) =>
   ({
     backgroundColor: t.colors.neutralBackground1,
     color: t.colors.neutralForeground1,
     borderColor: t.colors.neutralStroke1,
     iconColor: t.colors.neutralForeground1,
-    minHeight: 32,
-    minWidth: 80,
-    borderWidth: 1,
-    borderRadius: 2,
-    fluid: {
-      width: '100%',
-    },
     fab: {
-      borderRadius: 100, // big number for always rounded corners
       ...shadowStyleFromGlobalToken(8),
-      // For large size
-      minHeight: 56,
-      minWidth: 56,
       // coloring same as primary
       backgroundColor: t.colors.brandBackground,
       color: t.colors.neutralForegroundOnBrand,
@@ -61,13 +50,13 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
     hovered: {
       backgroundColor: t.colors.neutralBackground1Hover,
       color: t.colors.neutralForeground1,
-      borderColor: t.colors.neutralStroke1Hover,
+      borderColor: t.colors.neutralStroke1,
       iconColor: t.colors.neutralForeground1,
     },
     pressed: {
       backgroundColor: t.colors.neutralBackground1Pressed,
       color: t.colors.neutralForeground1,
-      borderColor: t.colors.neutralStroke1Pressed,
+      borderColor: t.colors.neutralStroke1,
       iconColor: t.colors.neutralForeground1,
     },
     focused: {
@@ -130,7 +119,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
         iconColor: t.colors.neutralForeground2BrandPressed,
       },
       focused: {
-        backgroundColor: t.colors.subtleBackground,
+        backgroundColor: t.colors.subtleBackgroundHover,
         color: t.colors.neutralForeground1,
         borderColor: t.colors.strokeFocus2,
         iconColor: t.colors.neutralForeground2,

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Thu, 07 Oct 2021 20:59:20 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.7.27",
+      "version": "0.7.27",
+      "comments": {
+        "patch": [
+          {
+            "comment": "remap some tokens away from text/placeholdertext to label/secondarylabel",
+            "author": "sanajmi@microsoft.com",
+            "commit": "dcb3ebd78c8aca123d9b7b2b5a135a371742cfc7",
+            "package": "@fluentui-react-native/apple-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 28 Sep 2021 21:08:25 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.7.26",
       "version": "0.7.26",

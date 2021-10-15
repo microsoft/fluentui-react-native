@@ -9,7 +9,7 @@ export const ButtonIconTest: React.FunctionComponent = () => {
   const fontBuiltInProps = {
     fontFamily: 'Arial',
     codepoint: 0x2663,
-    fontSize: 32,
+    fontSize: 24,
   };
 
   /* eslint-disable @typescript-eslint/no-var-requires */
@@ -24,28 +24,18 @@ export const ButtonIconTest: React.FunctionComponent = () => {
   return (
     <View style={[stackStyle, commonTestStyles.view]}>
       <Button
-        icon={{ fontSource: fontBuiltInProps, width: 100, height: 100, color: '#060' }}
+        icon={{ fontSource: { ...fontBuiltInProps, fontSize: 32 }, color: '#060' }}
         content="Font icon"
         style={commonTestStyles.vmargin}
       />
-      <Button icon={{ fontSource: fontBuiltInProps, width: 100, height: 100 }} content="Font icon" style={commonTestStyles.vmargin} />
-      <Button
-        primary
-        icon={{ fontSource: fontBuiltInProps, width: 100, height: 100 }}
-        content="Font icon"
-        style={commonTestStyles.vmargin}
-      />
-      {svgIconsEnabled ? (
-        <Button
-          primary
-          icon={{ svgSource: svgProps, width: 20, height: 20, color: 'red' }}
-          content="SVG"
-          style={commonTestStyles.vmargin}
-        />
-      ) : null}
-      {svgIconsEnabled ? (
-        <Button icon={{ svgSource: svgProps, width: 20, height: 20 }} content="SVG" style={commonTestStyles.vmargin} />
-      ) : null}
+      <Button icon={{ fontSource: fontBuiltInProps }} content="Font icon" style={commonTestStyles.vmargin} />
+      <Button primary icon={{ fontSource: fontBuiltInProps }} content="Font icon" style={commonTestStyles.vmargin} />
+      {svgIconsEnabled && (
+        <>
+          <Button primary icon={{ svgSource: svgProps, color: 'red' }} content="SVG" style={commonTestStyles.vmargin} />
+          <Button icon={{ svgSource: svgProps }} content="SVG" style={commonTestStyles.vmargin} />
+        </>
+      )}
       <Button primary icon={testImage} content="PNG" style={commonTestStyles.vmargin} />
       <Button icon={testImage} content="PNG" style={commonTestStyles.vmargin} />
     </View>

@@ -19,7 +19,7 @@ import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
 import BootTestPage from '../pages/BootTestPage.win';
 
 const BOOT_APP_TIMEOUT = 60000;
-const PAGE_TIMEOUT = 6000;
+const PAGE_TIMEOUT = 15000;
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Open the app', function () {
@@ -84,6 +84,12 @@ describe('Click on each test page and check if it renders', function () {
     expect(LinkTestPage.isPageLoaded()).toBeTruthy();
   });
 
+  it('Tabs Test Page', () => {
+    BootTestPage.clickAndGoToTabsPage();
+    TabsTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+    expect(TabsTestPage.isPageLoaded()).toBeTruthy();
+  });
+
   it('Persona Test Page', () => {
     BootTestPage.clickAndGoToPersonaPage();
     PersonaTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
@@ -118,12 +124,6 @@ describe('Click on each test page and check if it renders', function () {
     BootTestPage.clickAndGoToSvgPage();
     SvgTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
     expect(SvgTestPage.isPageLoaded()).toBeTruthy();
-  });
-
-  it('Tabs Test Page', () => {
-    BootTestPage.clickAndGoToTabsPage();
-    TabsTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
-    expect(TabsTestPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Text Test Page', () => {

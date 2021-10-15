@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 01 Oct 2021 17:52:17 GMT and should not be manually modified.
+This log was last generated on Thu, 07 Oct 2021 20:59:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.44.2
+
+Thu, 07 Oct 2021 20:59:20 GMT
+
+### Patches
+
+- Fixing the Experimental Tabs integration for E2E Testing (safreibe@microsoft.com)
+- Slight adjustment, add new test section (ruaraki@microsoft.com)
 
 ## 0.44.1
 
