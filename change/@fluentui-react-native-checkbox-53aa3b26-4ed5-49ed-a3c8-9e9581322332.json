@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Switch Button, Checkbox, and Radiobutton to use Pressable",
+  "packageName": "@fluentui-react-native/checkbox",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
