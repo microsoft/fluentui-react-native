@@ -1,6 +1,7 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
+import { Pressable } from '@fluentui-react-native/pressable';
 import { CompoundButtonProps, compoundButtonName, CompoundButtonType } from './CompoundButton.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './CompoundButton.styling';
@@ -14,7 +15,7 @@ export const CompoundButton = compose<CompoundButtonType>({
   displayName: compoundButtonName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
     icon: Icon,
     content: Text,
     secondaryContent: Text,
@@ -25,7 +26,7 @@ export const CompoundButton = compose<CompoundButtonType>({
     const iconProps = createIconProps(userProps.icon);
 
     // grab the styled slots
-    const Slots = useSlots(userProps, layer => buttonLookup(layer, button.state, userProps));
+    const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
     return (final: CompoundButtonProps, ...children: React.ReactNode[]) => {

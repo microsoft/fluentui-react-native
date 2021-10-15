@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Pressable } from '@fluentui-react-native/pressable';
 import { ToggleButtonProps, toggleButtonName, ToggleButtonType } from './ToggleButton.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './ToggleButton.styling';
@@ -15,7 +15,7 @@ export const ToggleButton = compose<ToggleButtonType>({
   displayName: toggleButtonName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
     icon: Icon,
     content: Text,
   },
@@ -31,7 +31,7 @@ export const ToggleButton = compose<ToggleButtonType>({
     const button = useButton({ onClick: toggle, ...rest });
 
     // grab the styled slots
-    const Slots = useSlots(userProps, layer => (layer === 'checked' && checkedValue) || buttonLookup(layer, button.state, userProps));
+    const Slots = useSlots(userProps, (layer) => (layer === 'checked' && checkedValue) || buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
     return (final: ToggleButtonProps, ...children: React.ReactNode[]) => {
