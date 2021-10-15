@@ -47,7 +47,7 @@ exports.config = {
   port: 4723, // default appium port
   services: ['appium'],
   appium: {
-    logPath: './appium/reports/',
+    logPath: './reports/',
     args: {
       port: '4723',
     },
@@ -56,7 +56,6 @@ exports.config = {
   framework: 'jasmine',
   jasmineNodeOpts: {
     defaultTimeoutInterval: jasmineDefaultTimeout,
-    //requires: ['ts-node/register'],
   },
 
   // The number of times to retry the entire specfile when it fails as a whole.
@@ -155,12 +154,9 @@ exports.config = {
    */
   afterTest: function (test) {
     // if test passed, ignore, else take and save screenshot.
-    /* UPDATE: I want to take screenshots after every test to help gauge certain CI failures.
-     * I will re-enable this once I am able to determine what's causing some CI failures
-     */
-    // if (test.passed) {
-    //   return;
-    // }
+    if (test.passed) {
+      return;
+    }
 
     // get current test title and clean it, to use it as file name
     const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));
