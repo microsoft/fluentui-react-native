@@ -24,6 +24,11 @@ describe('Open the app', function () {
 
 describe('Click on each test page and check if it renders', function () {
   it('Button Test Page', () => {
+    /* Scroll to component test page button in scrollview if not already visible*/
+    ButtonTestPage.scrollToComponentButton();
+    ButtonTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
+
+    /* Click on component button to navigate to test page */
     BootTestPage.clickAndGoToButtonPage();
     ButtonTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
@@ -31,6 +36,8 @@ describe('Click on each test page and check if it renders', function () {
   });
 
   it('Callout Test Page', () => {
+    CalloutTestPage.scrollToComponentButton();
+    CalloutTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
     BootTestPage.clickAndGoToCalloutPage();
     CalloutTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
@@ -38,6 +45,8 @@ describe('Click on each test page and check if it renders', function () {
   });
 
   it('Checkbox Test Page', () => {
+    CheckboxTestPage.scrollToComponentButton();
+    CheckboxTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
     BootTestPage.clickAndGoToCheckboxPage();
     CheckboxTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
@@ -45,6 +54,8 @@ describe('Click on each test page and check if it renders', function () {
   });
 
   it('Link Test Page', () => {
+    LinkTestPage.scrollToComponentButton();
+    LinkTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
     BootTestPage.clickAndGoToLinkPage();
     LinkTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
@@ -52,6 +63,8 @@ describe('Click on each test page and check if it renders', function () {
   });
 
   it('PersonaCoin Test Page', () => {
+    PersonaCoinTestPage.scrollToComponentButton();
+    PersonaCoinTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
     BootTestPage.clickAndGoToPersonaCoinPage();
     PersonaCoinTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
@@ -59,6 +72,8 @@ describe('Click on each test page and check if it renders', function () {
   });
 
   it('Pressable Test Page', () => {
+    PressableTestPage.scrollToComponentButton();
+    PressableTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
     BootTestPage.clickAndGoToPressablePage();
     PressableTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
@@ -66,27 +81,35 @@ describe('Click on each test page and check if it renders', function () {
   });
 
   it('Separator Test Page', () => {
+    SeparatorTestPage.scrollToComponentButton();
+    SeparatorTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
     BootTestPage.clickAndGoToSeparatorPage();
     SeparatorTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(SeparatorTestPage.isPageLoaded()).toBeTruthy();
   });
 
-  it('Text Test Page', () => {
-    BootTestPage.clickAndGoToTextPage();
-    TextTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
-
-    expect(TextTestPage.isPageLoaded()).toBeTruthy();
-  });
-
   it('Tabs Test Page', () => {
+    TabsTestPage.scrollToComponentButton();
+    TabsTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
     BootTestPage.clickAndGoToTabsPage();
     TabsTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(TabsTestPage.isPageLoaded()).toBeTruthy();
   });
 
+  it('Text Test Page', () => {
+    TextTestPage.scrollToComponentButton();
+    TextTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
+    BootTestPage.clickAndGoToTextPage();
+    TextTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+
+    expect(TextTestPage.isPageLoaded()).toBeTruthy();
+  });
+
   it('Theme Test Page', () => {
+    ThemeTestPage.scrollToComponentButton();
+    ThemeTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
     BootTestPage.clickAndGoToThemePage();
     ThemeTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 

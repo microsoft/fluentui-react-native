@@ -30,7 +30,7 @@ export class BasePage {
       },
       {
         timeout: timeout ?? this.waitForPageTimeout,
-        timeoutMsg: this._pageName + ' did not render correctly. Please see /errorShots of the first failed test for more information.',
+        timeoutMsg: this._pageName + ' did not render correctly. Please see /errorShots for more information.',
         interval: 1000,
       },
     );
@@ -43,7 +43,7 @@ export class BasePage {
       },
       {
         timeout: timeout ?? this.waitForPageTimeout,
-        timeoutMsg: this._pageName + ' did not render correctly. Please see /errorShots of the first failed test for more information.',
+        timeoutMsg: 'Could not find the button to navigate to ' + this._pageName + '. Please see /errorShots for more information.',
         interval: 1000,
       },
     );

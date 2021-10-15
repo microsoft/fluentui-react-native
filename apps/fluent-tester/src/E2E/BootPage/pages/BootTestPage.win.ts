@@ -92,14 +92,6 @@ class BootTestPage extends BasePage {
     this.experimentalTabsPage.click();
   }
 
-  scrollToThemePage() {
-    this.themePage.scrollIntoView(true);
-  }
-
-  scrollToSvgPage() {
-    this.svgPage.scrollIntoView(true);
-  }
-
   /*
    ** Returns the StealthButton element on the left-hand column that navigates to each page
    */
