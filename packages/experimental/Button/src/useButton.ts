@@ -7,13 +7,7 @@ export const useButton = (props: ButtonProps): ButtonState => {
   const defaultComponentRef = React.useRef(null);
   const { onClick, componentRef = defaultComponentRef, ...rest } = props;
   const onClickWithFocus = useOnPressWithFocus(componentRef, onClick);
-
-  const doTheThing = () => {
-    console.log('hit!');
-    onClickWithFocus();
-  };
-
-  const pressable = usePressableState({ ...rest, onPress: doTheThing });
+  const pressable = usePressableState({ ...rest, onPress: onClickWithFocus });
   const onKeyUp = useKeyCallback(onClick, ' ', 'Enter');
 
   return {
