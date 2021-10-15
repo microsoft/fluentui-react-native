@@ -160,6 +160,7 @@ export function useAsPressable<T extends object>(props: IWithPressableOptions<T>
     onHoverOut: hoverProps.onMouseLeave,
     ...focusProps,
     ...pressProps,
+    ...props,
   });
   return {
     props: { ...props, ...pressabilityProps },
