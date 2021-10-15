@@ -7,16 +7,13 @@ exports[`ToggleButton default 1`] = `
   focusable={true}
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
-  onClick={[Function]}
   onFocus={[Function]}
   onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
   onPress={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
     Object {
       "alignItems": "center",
