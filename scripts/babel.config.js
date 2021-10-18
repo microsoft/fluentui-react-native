@@ -5,7 +5,7 @@ module.exports = {
     '@babel/preset-typescript',
     'module:metro-react-native-babel-preset',
     [
-      '@babel/plugin-proposal-private-methods',
+      'module:@babel/plugin-proposal-private-methods',
       {
         loose: true,
       },
