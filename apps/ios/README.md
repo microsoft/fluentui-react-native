@@ -53,6 +53,15 @@ will ensure that all relevant packages are bumped correctly.
 You can read more about this tool here:
 [`@rnx-kit/dep-check` design document](https://github.com/microsoft/rnx-kit/blob/main/packages/dep-check/DESIGN.md)
 
+## Debugging
+
+You can debug native code in Xcode. To debug javascript code, you can either use standard web debugging, or you can use [React Native Tools](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native) to debug directly in VS Code. The steps are as follows:
+
+1. Launch your test app + packager as you normally would
+2. Go the debug menu in VS Code and run the "Attach to Packager (iOS)" configuration
+3. Open the developer menu in your test app, and click debug
+4. You now should be able to set breakpoints and step through your code directly in VS Code.
+
 ## Troubleshooting
 
 - The first time you yarn ios, you receive an error and have to run "FluentTester.xcworkspace" directly from Xcode. The workspace can be found in the apps/ios/src folder. After running the workspace the first time from Xcode, you will be able to `yarn ios` from the CLI.
