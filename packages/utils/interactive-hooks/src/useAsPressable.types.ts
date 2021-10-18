@@ -1,5 +1,11 @@
 import { PressableProps } from 'react-native';
-import { PressabilityConfig, PressabilityEventHandlers, PressableFocusProps, PressableHoverProps } from './Pressability/Pressability.types';
+import {
+  PressabilityConfig,
+  PressabilityEventHandlers,
+  PressableFocusProps,
+  PressableHoverEventProps,
+  PressableHoverProps,
+} from './Pressability/Pressability.types';
 
 export type IPressState = {
   pressed?: boolean;
@@ -41,4 +47,5 @@ export type IPressableHooks<T extends object> = {
  */
 export type PressablePropsExtended = Exclude<PressableProps, 'onHoverIn' | 'onHoverOut' | 'onFocus' | 'onBlur'> &
   PressableHoverProps &
+  PressableHoverEventProps &
   PressableFocusProps;

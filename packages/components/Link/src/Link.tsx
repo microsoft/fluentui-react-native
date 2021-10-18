@@ -1,20 +1,21 @@
 /** @jsx withSlots */
 import * as React from 'react';
 
-import { Linking, View } from 'react-native';
+import { Linking } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { ILinkProps, ILinkSlotProps, ILinkState, ILinkRenderData, IWithLinkOptions, linkName, ILinkType } from './Link.types';
+import { ILinkProps, ILinkSlotProps, ILinkState, ILinkRenderData, linkName, ILinkType } from './Link.types';
 import { settings } from './Link.settings';
 import { foregroundColorTokens, textTokens, borderTokens } from '@fluentui-react-native/tokens';
-import { useAsPressable, useKeyCallback, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useKeyCallback, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { IViewProps } from '@fluentui-react-native/adapters';
+import { Pressable } from '@fluentui-react-native/pressable';
+import { usePressableState } from '@fluentui-react-native/interactive-hooks';
 
-export type ILinkHooks = [IWithLinkOptions<IViewProps>, ILinkState];
+export type ILinkHooks = [ILinkProps, ILinkState];
 
-export function useAsLink(userProps: IWithLinkOptions<IViewProps>, ref: React.RefObject<any>): ILinkHooks {
+export function useAsLink(userProps: ILinkProps, ref: React.RefObject<any>): ILinkHooks {
   const { url, onPress, ...rest } = userProps;
 
   const [linkState, setLinkState] = React.useState({ visited: false });
@@ -33,7 +34,7 @@ export function useAsLink(userProps: IWithLinkOptions<IViewProps>, ref: React.Re
   // Ensure focus is placed on link after click
   const linkOnPressWithFocus = useOnPressWithFocus(ref, linkOnPress);
 
-  const pressable = useAsPressable({ onPress: linkOnPressWithFocus, ...rest });
+  const pressable = usePressableState({ onPress: linkOnPressWithFocus, ...rest });
   const onKeyUp = useKeyCallback(linkOnPress, ' ', 'Enter');
 
   const newState = {
@@ -88,7 +89,7 @@ export const Link = compose<ILinkType>({
     );
   },
   slots: {
-    root: View,
+    root: Pressable,
     content: Text,
   },
   styles: {

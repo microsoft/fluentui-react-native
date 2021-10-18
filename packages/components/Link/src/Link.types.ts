@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IForegroundColorTokens, FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { ITextProps } from '@fluentui-react-native/text';
+import { IPressableProps } from '@fluentui-react-native/pressable';
 import { IFocusable, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 
 export const linkName = 'RNFLink';
@@ -45,7 +45,7 @@ export interface ILinkOptions {
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type IWithLinkOptions<T extends object> = ILinkOptions & IWithPressableOptions<T>;
 
-export interface ILinkProps extends IWithLinkOptions<ITextProps> {
+export interface ILinkProps extends IWithLinkOptions<IPressableProps> {
   /**
    * The visible text of the link that the user sees.
    * @default undefined
@@ -58,7 +58,7 @@ export interface ILinkProps extends IWithLinkOptions<ITextProps> {
 }
 
 export type ILinkSlotProps = {
-  root: React.PropsWithRef<ViewProps>;
+  root: React.PropsWithRef<IPressableProps>;
   content: ITextProps;
 };
 

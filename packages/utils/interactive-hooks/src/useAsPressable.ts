@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { PressableProps } from 'react-native';
 import { PressableFocusProps, PressableHoverProps, PressableHoverEventProps, PressablePressProps } from './Pressability/Pressability.types';
 import {
   IPressableHooks,
@@ -163,7 +162,7 @@ export function useAsPressable<T extends object>(props: IWithPressableOptions<T>
  * @param props - props to pass to a Pressable component
  * @returns - modified props to pass into the Pressable as well as the current state with regards to hover, focus, and press
  */
-export function usePressableState(props: PressablePropsExtended): { props: PressableProps; state: IPressableState } {
+export function usePressableState(props: PressablePropsExtended): { props: PressablePropsExtended; state: IPressableState } {
   const { onPressIn, onPressOut, onHoverIn, onHoverOut, onFocus, onBlur, ...rest } = props;
   const [hoverProps, hoverState] = useHoverHelper({ onHoverIn, onHoverOut });
   const [focusProps, focusState] = useFocusHelper({ onFocus, onBlur });
