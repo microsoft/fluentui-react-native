@@ -4,5 +4,11 @@ module.exports = {
     '@babel/preset-react',
     '@babel/preset-typescript',
     'module:metro-react-native-babel-preset',
+    [
+      '@babel/plugin-proposal-private-methods',
+      {
+        loose: true,
+      },
+    ],
   ],
 };
