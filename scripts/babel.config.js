@@ -5,5 +5,5 @@ module.exports = {
     '@babel/preset-typescript',
     'module:metro-react-native-babel-preset',
   ],
-  plugins: ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+  plugins: [['@babel/plugin-proposal-private-property-in-object', { loose: true }]],
 };
