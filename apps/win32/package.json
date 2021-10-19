@@ -33,7 +33,8 @@
     "@fluentui-react-native/tester": "^0.44.2",
     "react": "16.13.1",
     "react-native": "^0.63.2",
-    "react-native-svg": "^12.1.1"
+    "react-native-svg": "^12.1.1",
+    "tslib": "^1.13.0"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "^0.63.7",

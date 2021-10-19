@@ -21,7 +21,8 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "invariant": "^2.2.0"
+    "invariant": "^2.2.0",
+    "tslib": "^1.13.0"
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "^0.63.7",
