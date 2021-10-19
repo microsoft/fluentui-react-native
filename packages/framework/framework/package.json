@@ -35,7 +35,8 @@
     "@fluentui-react-native/use-slots": ">=0.5.8 <1.0.0",
     "@fluentui-react-native/use-tokens": ">=0.1.6 <1.0.0",
     "@fluentui-react-native/memo-cache": "^1.1.4",
-    "@fluentui-react-native/tokens": ">=0.10.0 <1.0.0"
+    "@fluentui-react-native/tokens": ">=0.10.0 <1.0.0",
+    "tslib": "^1.13.0"
   },
   "devDependencies": {
     "@types/react": ">=16.9.34 < 16.14.0",
