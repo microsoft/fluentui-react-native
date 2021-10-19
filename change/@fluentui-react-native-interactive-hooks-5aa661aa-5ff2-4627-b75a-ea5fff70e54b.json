@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Support onPress/onLongPress in usePressableState",
-  "packageName": "@fluentui-react-native/interactive-hooks",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

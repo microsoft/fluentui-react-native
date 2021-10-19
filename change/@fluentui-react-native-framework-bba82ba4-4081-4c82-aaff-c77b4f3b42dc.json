@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Revert \"Add props to buildProps (#1039)\"",
+  "packageName": "@fluentui-react-native/framework",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
