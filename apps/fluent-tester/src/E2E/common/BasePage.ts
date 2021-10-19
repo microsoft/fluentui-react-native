@@ -28,14 +28,11 @@ export class BasePage {
       () => {
         return this.isPageLoaded();
       },
-      timeout ?? this.waitForPageTimeout,
-      this._pageName + ' did not render correctly. Please see /errorShots of the first failed test for more information.',
-      1000,
-      // {
-      //   timeout: timeout ?? this.waitForPageTimeout,
-      //   timeoutMsg: this._pageName + ' did not render correctly. Please see /errorShots for more information.',
-      //   interval: 1000,
-      // },
+      {
+        timeout: timeout ?? this.waitForPageTimeout,
+        timeoutMsg: this._pageName + ' did not render correctly. Please see /errorShots for more information.',
+        interval: 1000,
+      },
     );
   }
 
@@ -44,14 +41,11 @@ export class BasePage {
       () => {
         return this.isButtonInView();
       },
-      timeout ?? this.waitForPageTimeout,
-      this._pageName + ' did not render correctly. Please see /errorShots of the first failed test for more information.',
-      1000,
-      // {
-      //   timeout: timeout ?? this.waitForPageTimeout,
-      //   timeoutMsg: 'Could not find the button to navigate to ' + this._pageName + '. Please see /errorShots for more information.',
-      //   interval: 1000,
-      // },
+      {
+        timeout: timeout ?? this.waitForPageTimeout,
+        timeoutMsg: 'Could not find the button to navigate to ' + this._pageName + '. Please see /errorShots for more information.',
+        interval: 1000,
+      },
     );
   }
 
