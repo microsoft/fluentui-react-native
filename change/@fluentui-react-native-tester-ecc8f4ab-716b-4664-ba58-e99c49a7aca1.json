@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Change the minimum react-native-macos dependency to 0.63.41 to pull in bug fixes",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
