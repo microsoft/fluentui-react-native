@@ -2,6 +2,29 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Tue, 19 Oct 2021 20:23:36 GMT",
+      "tag": "@fluentui/react-native_v0.26.4",
+      "version": "0.26.4",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add to beachball config so that changelog includes individual changes that influence larger package",
+            "author": "ruaraki@microsoft.com",
+            "commit": "3aa29a935fba5dbd2af3c7f6ded262aa0811c003",
+            "package": "@fluentui/react-native"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/menu-button to v0.6.13",
+            "author": "ruaraki@microsoft.com",
+            "commit": "a8209c3a6f52871eef88035c2dba2ef2b5ee83e7",
+            "package": "@fluentui/react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 07 Oct 2021 20:59:20 GMT",
       "tag": "@fluentui/react-native_v0.26.3",
       "version": "0.26.3",
