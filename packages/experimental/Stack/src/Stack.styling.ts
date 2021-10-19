@@ -40,7 +40,7 @@ const tokensThatAreAlsoProps: (keyof StackTokenProps)[] = [
 
 const nowrapProps: ViewProps = {};
 
-const buildInnerProps = (tokenProps: StackTokens, theme: Theme, _props: unknown, cache: GetMemoValue<ViewProps>) => {
+const buildInnerProps = (tokenProps: StackTokens, theme: Theme, cache: GetMemoValue<ViewProps>) => {
   // if wrapping is disabled just return a fixed empty object without doing any additional work
   if (!tokenProps.wrap) {
     return nowrapProps;

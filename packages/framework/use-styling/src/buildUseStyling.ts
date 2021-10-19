@@ -20,7 +20,7 @@ export type UseStylingOptions<TProps, TSlotProps, TTokens, TTheme> = {
   /**
    * Functions which build up the props for each slot
    */
-  slotProps?: BuildSlotProps<TSlotProps, TTokens, TTheme, TProps>;
+  slotProps?: BuildSlotProps<TSlotProps, TTokens, TTheme>;
 
   /**
    * Which props should be considered to be tokens.
@@ -55,20 +55,18 @@ export type ThemeHelper<TTheme> = {
  * @param styles - refined style functions or props to use for processing
  * @param tokens - token inputs for the style functions
  * @param theme - theme to resolve against
- * @param props - props from outer component
  * @param cache - cache to use for the base of slot caching
  */
-function resolveToSlotProps<TSlotProps, TTokens, TTheme, TProps>(
-  styles: BuildSlotProps<TSlotProps, TTokens, TTheme, TProps>,
+function resolveToSlotProps<TSlotProps, TTokens, TTheme>(
+  styles: BuildSlotProps<TSlotProps, TTokens, TTheme>,
   tokens: TTokens,
   theme: TTheme,
-  props: TProps,
   cache: GetMemoValue<TTokens>,
 ): TSlotProps {
   const slotProps = {};
-  Object.keys(styles).forEach(key => {
+  Object.keys(styles).forEach((key) => {
     const style = styles[key];
-    slotProps[key] = typeof style === 'function' ? style(tokens, theme, props, cache(null, [key])[1]) : style;
+    slotProps[key] = typeof style === 'function' ? style(tokens, theme, cache(null, [key])[1]) : style;
   });
   return slotProps as TSlotProps;
 }
@@ -98,7 +96,7 @@ export function buildUseStyling<TProps, TSlotProps, TTokens, TTheme>(
 
     // resolve overrides as appropriate
     if (options.states) {
-      [mergedTokens, cache] = applyTokenLayers(mergedTokens, options.states as string[], cache, lookup || (val => props[val]));
+      [mergedTokens, cache] = applyTokenLayers(mergedTokens, options.states as string[], cache, lookup || ((val) => props[val]));
     }
 
     // now resolve tokens
@@ -109,6 +107,6 @@ export function buildUseStyling<TProps, TSlotProps, TTokens, TTheme>(
     }
 
     // finally produce slotProps from calling the style functions on each entry
-    return resolveToSlotProps(styles, mergedTokens, theme, props, cache);
+    return resolveToSlotProps(styles, mergedTokens, theme, cache);
   };
 }
