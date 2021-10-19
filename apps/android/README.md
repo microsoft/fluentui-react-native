@@ -66,6 +66,15 @@ will ensure that all relevant packages are bumped correctly.
 You can read more about this tool here:
 [`@rnx-kit/dep-check` design document](https://github.com/microsoft/rnx-kit/blob/main/packages/dep-check/DESIGN.md)
 
+## Debugging
+
+You can debug native code in Android Studio. To debug javascript code, you can either use standard web debugging, or you can use [React Native Tools](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native) to debug directly in VS Code. The steps are as follows:
+
+1. Launch your test app + packager as you normally would
+2. Go the debug menu in VS Code and run the "Attach to Packager (Android)" configuration
+3. Open the developer menu in your test app, and click debug
+4. You now should be able to set breakpoints and step through your code directly in VS Code.
+
 ## Troubleshooting
 
 - The first time you run your project, you may get errors about missing SDKs. Android Studio usually provides quick options to resolve these issues, but you can also go to Tools->SDK Manager to manually install or update SDK platforms or tools for your project.
