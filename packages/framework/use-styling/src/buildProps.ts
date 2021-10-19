@@ -18,59 +18,83 @@ export type TokensThatAreAlsoProps<TTokens> = (keyof TTokens)[] | 'all' | 'none'
  * The provided
  * cache will be scoped to the theme, slot, and tokens that are coming out of the theme.
  */
-export type BuildPropsBase<TProps, TTokens, TTheme> = (tokens: TTokens, theme: TTheme, cache: GetMemoValue<any>) => Partial<TProps>;
+export type BuildPropsBase<TProps, TTokens, TTheme, TOuterProps> = (
+  tokens: TTokens,
+  theme: TTheme,
+  props: TOuterProps,
+  cache: GetMemoValue<any>,
+) => Partial<TProps>;
 
 /**
  * A refine function allows style functions to be updated based on tokens that are also props. Only those tokens that are also
  * props need to be considered as a key for caching
  */
-export type RefineFunctionBase<TProps, TTokens, TTheme> = (
+export type RefineFunctionBase<TProps, TTokens, TTheme, TOuterProps> = (
   mask?: TokensThatAreAlsoProps<TTokens>,
-) => BuildPropsBase<TProps, TTokens, TTheme>;
+) => BuildPropsBase<TProps, TTokens, TTheme, TOuterProps>;
 
 /**
  * Signature for a style function which can be optionally refined by the styling hook if prop masks are provided
  */
-export type RefinableBuildPropsBase<TProps, TTokens, TTheme> = BuildPropsBase<TProps, TTokens, TTheme> & {
-  refine?: RefineFunctionBase<TProps, TTokens, TTheme>;
+export type RefinableBuildPropsBase<TProps, TTokens, TTheme, TOuterProps> = BuildPropsBase<TProps, TTokens, TTheme, TOuterProps> & {
+  refine?: RefineFunctionBase<TProps, TTokens, TTheme, TOuterProps>;
 };
 
 /**
  * Style functions can be plain functions, refinable functions, or just raw props
  */
-export type BuildSlotProps<TSlotProps, TTokens, TTheme> = {
-  [K in keyof TSlotProps]?: RefinableBuildPropsBase<TSlotProps[K], TTokens, TTheme> | TSlotProps[K];
+export type BuildSlotProps<TSlotProps, TTokens, TTheme, TOuterProps> = {
+  [K in keyof TSlotProps]?: RefinableBuildPropsBase<TSlotProps[K], TTokens, TTheme, TOuterProps> | TSlotProps[K]
 };
 
-function cacheStyleClosure<TProps, TTokens, TTheme>(
-  fn: (tokens: TTokens, theme: TTheme) => TProps,
-  keys?: (keyof TTokens)[],
-): RefinableBuildPropsBase<TProps, TTokens, TTheme> {
-  return (tokens: TTokens, theme: TTheme, cache: GetMemoValue<TProps>) =>
+/**
+ * Caches and returns the function based on the current keys.
+ *
+ * @param fn Function which does the work of producing props for the tokens, theme, and props provided
+ * @param keys Set of input values the function is dependent on
+ * @returns Cached function
+ */
+function cacheStyleClosure<TProps, TTokens, TTheme, TOuterProps>(
+  fn: (tokens: TTokens, theme: TTheme, props: TOuterProps) => TProps,
+  keys?: (keyof TTokens | keyof TOuterProps)[],
+): RefinableBuildPropsBase<TProps, TTokens, TTheme, TOuterProps> {
+  return (tokens: TTokens, theme: TTheme, props: TOuterProps, cache: GetMemoValue<TProps>) =>
     cache(
-      () => fn(tokens, theme),
-      (keys || []).map((key) => tokens[key]),
+      () => fn(tokens, theme, props),
+      (keys || []).map(key => {
+        if (Object.keys(tokens).includes(key as string)) {
+          return tokens[key as keyof TTokens];
+        } else {
+          return props[key as keyof TOuterProps];
+        }
+      }),
     )[0];
 }
 
-function refineKeys<TTokens>(keys: (keyof TTokens)[], mask?: TokensThatAreAlsoProps<TTokens>): (keyof TTokens)[] {
-  return typeof mask === 'object' && Array.isArray(mask)
-    ? keys.filter((key) => mask.findIndex((val) => val === key) !== -1)
-    : mask
-    ? keys
-    : [];
+/**
+ * Reduce keys to the set that are also part of the mask.
+ *
+ * @param keys - which token and prop properties are used by this style, this determines the keys to use for caching
+ * @param mask - the set of tokens that are also props
+ * @returns An array of keys that are part of the mask to be used as a caching key
+ */
+function refineKeys<TTokens, TOuterProps = unknown>(
+  keys: (keyof TTokens | keyof TOuterProps)[],
+  mask?: TokensThatAreAlsoProps<TTokens>,
+): (keyof TTokens | keyof TOuterProps)[] {
+  return typeof mask === 'object' && Array.isArray(mask) ? keys.filter(key => mask.findIndex(val => val === key) !== -1) : mask ? keys : [];
 }
 
 /**
  * Standard wrapper for a function that provides props for a component based on tokens and theme.
  *
- * @param fn - function which does the work of producing props for the tokens and theme provided
- * @param keys - which token properties are used by this style, this determines the keys to use for caching
+ * @param fn - function which does the work of producing props for the tokens, theme, and props provided
+ * @param keys - which token and prop properties are used by this style, this determines the keys to use for caching
  */
-export function buildProps<TProps, TTokens, TTheme>(
-  fn: (tokens: TTokens, theme: TTheme) => TProps,
-  keys?: (keyof TTokens)[],
-): RefinableBuildPropsBase<TProps, TTokens, TTheme> {
+export function buildProps<TProps, TTokens, TTheme, TOuterProps = unknown>(
+  fn: (tokens: TTokens, theme: TTheme, props?: TOuterProps) => TProps,
+  keys?: (keyof TTokens | keyof TOuterProps)[],
+): RefinableBuildPropsBase<TProps, TTokens, TTheme, TOuterProps> {
   // wrap the provided function in the standard caching layer, basing it upon the provided keys
   const result = cacheStyleClosure(fn, keys);
 
@@ -78,7 +102,7 @@ export function buildProps<TProps, TTokens, TTheme>(
   result.refine =
     keys && keys.length > 0
       ? (mask?: TokensThatAreAlsoProps<TTokens>) => {
-          return cacheStyleClosure(fn, refineKeys(keys, mask));
+          return cacheStyleClosure(fn, refineKeys<TTokens, TOuterProps>(keys, mask));
         }
       : undefined;
 
@@ -92,14 +116,15 @@ export function buildProps<TProps, TTokens, TTheme>(
  * @param fn - function or props to potentially refine
  * @param mask - prop mask to use for refinement
  */
-export function refinePropsFunctions<TSlotProps, TTokens, TTheme>(
-  styles: BuildSlotProps<TSlotProps, TTokens, TTheme>,
+export function refinePropsFunctions<TSlotProps, TTokens, TTheme, TOuterProps>(
+  styles: BuildSlotProps<TSlotProps, TTokens, TTheme, TOuterProps>,
   mask: TokensThatAreAlsoProps<TTokens>,
-): BuildSlotProps<TSlotProps, TTokens, TTheme> {
+): BuildSlotProps<TSlotProps, TTokens, TTheme, TOuterProps> {
   const result = {};
-  Object.keys(styles).forEach((key) => {
+  Object.keys(styles).forEach(key => {
     const refine =
-      typeof styles[key] === 'function' && (styles[key] as RefinableBuildPropsBase<TSlotProps[keyof TSlotProps], TTokens, TTheme>).refine;
+      typeof styles[key] === 'function' &&
+      (styles[key] as RefinableBuildPropsBase<TSlotProps[keyof TSlotProps], TTokens, TTheme, TOuterProps>).refine;
     result[key] = refine ? refine(mask) : styles[key];
   });
   return result;

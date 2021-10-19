@@ -3,8 +3,14 @@ import { useAsPressable, useKeyCallback, useOnPressWithFocus, useViewCommandFocu
 import { TabsItemProps, TabsItemInfo } from './TabsItem.types';
 import { TabsContext } from './Tabs';
 
+/**
+ * Re-usable hook for TabsItem.
+ * This hook configures tabs item props and state for TabsItem.
+ *
+ * @param props user props sent to TabsItem
+ * @returns configured props and state for TabsItem
+ */
 export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
-  // Attach the pressable state handlers.
   const defaultComponentRef = React.useRef(null);
   const { accessibilityLabel, headerText, componentRef = defaultComponentRef, itemKey, disabled, itemCount, icon, ...rest } = props;
   // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback).
@@ -13,7 +19,7 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
   const changeSelection = () => {
     if (itemKey != info.selectedKey) {
       info.onTabsClick && info.onTabsClick(itemKey);
-      info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
+      info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex((x) => x == itemKey) + 1);
       info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
     }
   };
@@ -49,7 +55,6 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
     }
   }, []);
 
-
   return {
     props: {
       ...pressable.props,
@@ -59,7 +64,7 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
       focusable: !disabled ?? true,
       headerText: headerText ?? '',
       accessibilityState: { disabled: disabled, selected: info.selectedKey === itemKey },
-      accessibilityActions: [{ name: 'Select'}],
+      accessibilityActions: [{ name: 'Select' }],
       onAccessibilityAction: onAccessibilityAction,
       itemCount: itemCount,
       ref: useViewCommandFocus(componentRef),

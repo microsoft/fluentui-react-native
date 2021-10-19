@@ -24,19 +24,19 @@ export const settings: IComposeSettings<IButtonType> = [
     } as IViewProps,
     endIcon: {
       style: {
-        marginStart: 2
-      }
+        marginStart: 2,
+      },
     },
     startIcon: {
       style: {
-        marginEnd: 2
-      }
+        marginEnd: 2,
+      },
     },
     content: {
       style: {
         marginStart: 2,
-        marginEnd: 2
-      }
+        marginEnd: 2,
+      },
     },
     stack: {
       style: {

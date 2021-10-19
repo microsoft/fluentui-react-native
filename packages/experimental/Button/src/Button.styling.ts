@@ -1,10 +1,29 @@
-import { buttonName, ButtonTokens, ButtonSlotProps, ButtonProps } from './Button.types';
+import { buttonName, ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize } from './Button.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-react-native/tokens';
-import { buttonStates, defaultButtonTokens } from './ButtonTokens';
+import { defaultButtonTokens } from './ButtonTokens';
+import { defaultButtonColorTokens } from './ButtonColorTokens';
+import { Platform } from 'react-native';
+import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
+
+export const buttonStates: (keyof ButtonTokens)[] = [
+  'fab',
+  'fluid',
+  'primary',
+  'subtle',
+  'hovered',
+  'focused',
+  'pressed',
+  'disabled',
+  'small',
+  'medium',
+  'large',
+  'hasContent',
+  'hasIcon',
+];
 
 export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, ButtonTokens> = {
-  tokens: [defaultButtonTokens, buttonName],
+  tokens: [defaultButtonTokens, defaultButtonColorTokens, buttonName],
   states: buttonStates,
   slotProps: {
     root: buildProps(
@@ -16,8 +35,6 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
           alignSelf: 'flex-start',
           justifyContent: 'center',
           width: tokens.width,
-          paddingStart: 16,
-          paddingEnd: 16,
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
@@ -30,18 +47,32 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
       (tokens: ButtonTokens, theme: Theme) => ({
         style: {
           color: tokens.color,
+          ...getTextMarginAdjustment(),
+          ...(tokens.spacingIconContent && { marginLeft: tokens.spacingIconContent }),
           ...fontStyles.from(tokens, theme),
         },
       }),
-      ['color', ...fontStyles.keys],
+      ['color', 'spacingIconContent', ...fontStyles.keys],
     ),
     icon: buildProps(
       (tokens: ButtonTokens) => ({
         style: {
           tintColor: tokens.iconColor,
         },
+        height: tokens.iconSize,
+        width: tokens.iconSize,
       }),
-      ['iconColor'],
+      ['iconColor', 'iconSize'],
     ),
   },
+};
+
+export const getDefaultSize = (): ButtonSize => {
+  if (Platform.OS === 'windows') {
+    return 'medium';
+  } else if ((Platform.OS as any) === 'win32') {
+    return 'small';
+  }
+
+  return 'medium';
 };

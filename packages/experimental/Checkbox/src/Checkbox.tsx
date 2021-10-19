@@ -20,7 +20,7 @@ export const Checkbox = compose<CheckboxType>({
     // configure props and state for checkbox based on user props
     const Checkbox = useCheckbox(userProps);
     // grab the styled slots
-    const Slots = useSlots(userProps, layer => Checkbox.state[layer] || userProps[layer]);
+    const Slots = useSlots(userProps, (layer) => Checkbox.state[layer] || userProps[layer]);
     // now return the handler for finishing render
     return (final: CheckboxProps, ...children: React.ReactNode[]) => {
       const { label, ...mergedProps } = mergeProps(Checkbox.props, final);

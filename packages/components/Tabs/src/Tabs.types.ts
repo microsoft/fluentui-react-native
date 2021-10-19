@@ -48,7 +48,7 @@ export interface TabsContextData {
 
 export interface TabsInfo {
   headersOnly?: boolean;
-  label?: boolean,
+  label?: boolean;
   /**
    * Array of enabled keys in the group
    * Windows-Specific Prop.
@@ -114,7 +114,7 @@ export interface TabsSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
   label: ITextProps;
   container: FocusZoneProps;
-  stack: ViewProps
+  stack: ViewProps;
   tabPanel: ViewProps;
 }
 

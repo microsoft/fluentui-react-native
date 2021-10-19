@@ -1,10 +1,16 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
-import { TabsProps, TabsState } from './Tabs.types';
+import { TabsProps, TabsState, TabsInfo } from './Tabs.types';
 
-export const useTabs = (props: TabsProps): TabsState => {
-  // Attach the pressable state handlers.
+/**
+ * Re-usable hook for Tabs.
+ * This hook configures tabs props and state for Tabs.
+ *
+ * @param props user props sent to Tabs
+ * @returns configured props and state for Tabs
+ */
+export const useTabs = (props: TabsProps): TabsInfo => {
   const defaultComponentRef = React.useRef(null);
   const { componentRef = defaultComponentRef, selectedKey, getTabId, onTabsClick, defaultSelectedKey } = props;
 
@@ -20,7 +26,7 @@ export const useTabs = (props: TabsProps): TabsState => {
     [setSelectedTabsItemRef],
   );
 
-  const onChangeTabId = React.useCallback((key: string, index: number) => {
+  const findTabId = React.useCallback((key: string, index: number) => {
     if (getTabId) {
       return getTabId(key, index);
     }
@@ -29,6 +35,18 @@ export const useTabs = (props: TabsProps): TabsState => {
 
   // Stores views to be displayed.
   const map = new Map<string, React.ReactNode[]>();
+
+  const state: TabsState = {
+    context:{
+      selectedKey: selectedKey ?? data.selectedKey,
+      onTabsClick: data.onKeySelect,
+      getTabId: findTabId,
+      updateSelectedTabsItemRef: onSelectTabsItemRef,
+      views: map,
+    },
+    headersOnly: props.headersOnly ?? false,
+    label: !!props.label,
+  };
 
   return {
     props: {
@@ -40,17 +58,7 @@ export const useTabs = (props: TabsProps): TabsState => {
       isCircularNavigation: props.isCircularNavigation ?? false,
     },
     state: {
-      context:{
-        selectedKey: selectedKey ?? data.selectedKey,
-        onTabsClick: data.onKeySelect,
-        getTabId: onChangeTabId,
-        updateSelectedTabsItemRef: onSelectTabsItemRef,
-        views: map,
-      },
-      info: {
-        headersOnly: props.headersOnly ?? false,
-        label: !!props.label,
-      },
+      ...state
     },
   };
 };

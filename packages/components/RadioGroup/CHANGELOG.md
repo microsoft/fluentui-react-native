@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Mon, 13 Sep 2021 23:22:43 GMT and should not be manually modified.
+This log was last generated on Thu, 07 Oct 2021 20:59:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.13
+
+Thu, 07 Oct 2021 20:59:20 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.18 (ruaraki@microsoft.com)
+
+## 0.13.12
+
+Fri, 01 Oct 2021 17:52:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.7.27 (ruaraki@microsoft.com)
+
+## 0.13.11
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
+
+## 0.13.10
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Patches
+
+- adding an adapter for macOS (67026167+chiuam@users.noreply.github.com)
 
 ## 0.13.9
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IconProps, SvgIconProps, FontIconProps } from './Icon.types';
-import { Image, ImageStyle, Platform, View, ColorValue } from 'react-native';
+import { Image, ImageStyle, Platform, View, ColorValue, TextStyle } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
 import { stagedComponent, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
@@ -34,18 +34,17 @@ const fontStyleMemoCache = getMemoCache();
 function renderFontIcon(iconProps: IconProps) {
   const fontSource: FontIconProps = iconProps.fontSource;
 
-  const style = fontStyleMemoCache(
+  const style: TextStyle = fontStyleMemoCache(
     {
       fontSrcFile: fontSource.fontSrcFile,
       fontFamily:
         fontSource.fontSrcFile != undefined
           ? fontFamilyFromFontSrcFile(fontSource.fontSrcFile, fontSource.fontFamily)
           : fontSource.fontFamily,
-      codepoint: fontSource.codepoint,
       fontSize: fontSource.fontSize,
       color: iconProps.color,
     },
-    [iconProps.color, fontSource.fontSrcFile, fontSource.fontFamily, fontSource.codepoint, fontSource.codepoint],
+    [iconProps.color, fontSource.fontSrcFile, fontSource.fontFamily],
   )[0];
 
   const char = String.fromCharCode(fontSource.codepoint);

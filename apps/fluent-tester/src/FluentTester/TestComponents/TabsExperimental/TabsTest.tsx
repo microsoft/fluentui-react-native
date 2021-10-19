@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { Button } from '@fluentui-react-native/experimental-button';
 import { Tabs, TabsItem } from '@fluentui-react-native/experimental-tabs';
 import { stackStyle } from '../Common/styles';
-import { TABS_TESTPAGE } from './consts';
+import { EXPERIMENTAL_TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
@@ -80,7 +80,7 @@ const onTabsClickEvent: React.FunctionComponent = () => {
 
   return (
     <View style={stackStyle}>
-      <Text>{'Last onTabsClick from:' + selectedKey}</Text>
+      <Text>{'Last onTabsClick from: ' + selectedKey}</Text>
       <Tabs label="Tabs" onTabsClick={onTabsClick} selectedKey={selectedKey}>
         <TabsItem headerText="Home" itemKey="home_key">
           <Text>Tabs #1</Text>
@@ -223,16 +223,12 @@ const tabsWithFlexibility: React.FunctionComponent = () => {
 const tabsSections: TestSection[] = [
   {
     name: 'Default Tabs',
-    testID: TABS_TESTPAGE,
+    testID: EXPERIMENTAL_TABS_TESTPAGE,
     component: tabs,
   },
   {
     name: 'Tabs with disabled',
     component: disabledTabs,
-  },
-  {
-    name: 'Count and Icon',
-    component: tabsCountIcon,
   },
   {
     name: 'Trigger onTabsClick event',
@@ -256,12 +252,19 @@ const tabsSections: TestSection[] = [
   },
 ];
 
-export const TabsExperimentalTest: React.FunctionComponent = () => {
+if (Platform.OS !== 'windows') {
+  tabsSections.push({
+    name: 'Count and Icon',
+    component: tabsCountIcon,
+  });
+}
+
+export const ExperimentalTabsTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Experimental',
-    uwpStatus: 'Backlog',
+    uwpStatus: 'Experimental',
     iosStatus: 'Backlog',
-    macosStatus: 'Backlog',
+    macosStatus: 'Experimental',
     androidStatus: 'Backlog',
   };
 

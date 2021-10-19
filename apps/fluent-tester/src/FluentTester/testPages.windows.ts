@@ -10,9 +10,11 @@ import { HOMEPAGE_SEPARATOR_BUTTON, SeparatorTest } from './TestComponents/Separ
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 import { HOMEPAGE_TABS_BUTTON, TabsTest } from './TestComponents/Tabs';
+import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON, ExperimentalTabsTest } from './TestComponents/TabsExperimental';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
+import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
 
 export const tests = [
   {
@@ -24,6 +26,11 @@ export const tests = [
     name: 'Callout Test',
     component: CalloutTest,
     testPage: HOMEPAGE_CALLOUT_BUTTON,
+  },
+  {
+    name: 'Experimental Button',
+    component: ExperimentalButtonTest,
+    testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
   },
   {
     name: 'Pressable Test',
@@ -67,6 +74,11 @@ export const tests = [
     name: 'Tabs Test',
     component: TabsTest,
     testPage: HOMEPAGE_TABS_BUTTON,
+  },
+  {
+    name: 'Experimental Tabs Test',
+    component: ExperimentalTabsTest,
+    testPage: HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
   },
   {
     name: 'Tokens Test',

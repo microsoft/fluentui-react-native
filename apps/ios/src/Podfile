@@ -25,7 +25,6 @@ use_test_app! do |target|
     platform :ios, '13.0'
 
     pod 'FRNAvatar', :path => '../../../packages/experimental/Avatar/FRNAvatar.podspec'
-    pod 'FRNButton', :path => '../../../packages/experimental/NativeButton/FRNButton.podspec'
     pod 'FRNDatePicker', :path => '../../../packages/experimental/NativeDatePicker/FRNDatePicker.podspec'
     pod 'react-native-menu', :path => '../../../node_modules/@react-native-menu/menu'
     pod 'RNSVG', :path => '../../../node_modules/react-native-svg'

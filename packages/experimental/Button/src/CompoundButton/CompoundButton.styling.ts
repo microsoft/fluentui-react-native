@@ -1,53 +1,19 @@
 import { compoundButtonName, CompoundButtonTokens, CompoundButtonSlotProps, CompoundButtonProps } from './CompoundButton.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
-import { buttonStates, defaultButtonTokens } from '../ButtonTokens';
-import { ButtonTokens } from '../Button.types';
+import { defaultButtonColorTokens } from '../ButtonColorTokens';
+import { buttonStates } from '../Button.styling';
+import { defaultButtonTokens } from '../ButtonTokens';
+import { defaultCompoundButtonColorTokens } from './CompoundButtonColorTokens';
+import { defaultCompoundButtonTokens } from './CompoundButtonTokens';
+import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
 
 export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundButtonSlotProps, CompoundButtonTokens> = {
   tokens: [
     defaultButtonTokens,
-    (t: Theme): ButtonTokens =>
-      ({
-        minHeight: 72,
-        secondaryContentFont: {
-          variant: 'secondaryStandard',
-        },
-        secondaryContentColor: t.colors.defaultSecondaryContent,
-        hovered: {
-          secondaryContentColor: t.colors.defaultHoveredSecondaryContent,
-        },
-        focused: {
-          secondaryContentColor: t.colors.defaultFocusedSecondaryContent,
-        },
-        pressed: {
-          secondaryContentColor: t.colors.defaultPressedSecondaryContent,
-        },
-        primary: {
-          secondaryContentColor: t.colors.brandedSecondaryContent,
-          hovered: {
-            secondaryContentColor: t.colors.brandedHoveredSecondaryContent,
-          },
-          focused: {
-            secondaryContentColor: t.colors.brandedFocusedSecondaryContent,
-          },
-          pressed: {
-            secondaryContentColor: t.colors.brandedPressedSecondaryContent,
-          },
-        },
-        ghost: {
-          secondaryContentColor: t.colors.ghostSecondaryContent,
-          hovered: {
-            secondaryContentColor: t.colors.ghostHoveredSecondaryContent,
-          },
-          focused: {
-            secondaryContentColor: t.colors.ghostFocusedSecondaryContent,
-          },
-          pressed: {
-            secondaryContentColor: t.colors.ghostPressedSecondaryContent,
-          },
-        },
-      } as ButtonTokens),
+    defaultButtonColorTokens,
+    defaultCompoundButtonTokens,
+    defaultCompoundButtonColorTokens,
     compoundButtonName,
   ],
   states: buttonStates,
@@ -60,8 +26,6 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
           flexDirection: 'row',
           alignSelf: 'flex-start',
           justifyContent: 'center',
-          paddingStart: 16,
-          paddingEnd: 16,
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
@@ -78,6 +42,7 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
     content: buildProps(
       (tokens: CompoundButtonTokens, theme: Theme) => ({
         style: {
+          ...getTextMarginAdjustment(),
           color: tokens.color,
           ...fontStyles.from(tokens, theme),
         },
@@ -87,6 +52,7 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
     secondaryContent: buildProps(
       (tokens: CompoundButtonTokens, theme: Theme) => ({
         style: {
+          ...getTextMarginAdjustment(),
           color: tokens.secondaryContentColor,
           ...fontStyles.from(tokens.secondaryContentFont, theme),
         },

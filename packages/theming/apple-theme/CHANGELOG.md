@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Mon, 13 Sep 2021 23:22:43 GMT and should not be manually modified.
+This log was last generated on Thu, 07 Oct 2021 20:59:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.27
+
+Thu, 07 Oct 2021 20:59:20 GMT
+
+### Patches
+
+- remap some tokens away from text/placeholdertext to label/secondarylabel (sanajmi@microsoft.com)
+
+## 0.7.26
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
+
+## 0.7.25
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Patches
+
+- adding an adapter for macOS (67026167+chiuam@users.noreply.github.com)
 
 ## 0.7.24
 
