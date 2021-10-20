@@ -25,7 +25,6 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory":"apps/android"
   },
-
   "dependencies": {
     "@fluentui-react-native/tester": "^0.45.1",
     "@react-native-community/slider": "^3.0.3",
