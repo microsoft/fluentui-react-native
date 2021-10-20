@@ -1,4 +1,4 @@
-import { CONTEXTUALMENU_TESTPAGE } from '../../../FluentTester/TestComponents/ContextualMenu/consts';
+import { CONTEXTUALMENU_TESTPAGE, HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../../../FluentTester/TestComponents/ContextualMenu/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class ContextualMenuPage extends BasePage {
@@ -8,6 +8,10 @@ class ContextualMenuPage extends BasePage {
 
   get _pageName() {
     return CONTEXTUALMENU_TESTPAGE;
+  }
+
+  get _pageButton() {
+    return By(HOMEPAGE_CONTEXTUALMENU_BUTTON);
   }
 }
 

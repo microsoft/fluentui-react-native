@@ -133,7 +133,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const TestList: React.FunctionComponent = () => {
     return (
       <View style={fluentTesterStyles.testList}>
-        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
+        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} testID="SCROLLVIEW_TEST_ID">
           {sortedTestComponents.map((description, index) => {
             return (
               <Button

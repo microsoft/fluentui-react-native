@@ -62,15 +62,7 @@ exports.config = {
   // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
   specFileRetries: 3,
 
-  reporters: [
-    'spec',
-    [
-      'allure',
-      {
-        outputDir: 'allure-results',
-      },
-    ],
-  ],
+  reporters: ['spec'],
 
   /*
    ** ===================
@@ -115,11 +107,6 @@ exports.config = {
       rimraf.sync('./errorShots');
     }
     fs.mkdirSync('./errorShots');
-
-    if (fs.existsSync('./allure-results')) {
-      rimraf.sync('./allure-results');
-    }
-    fs.mkdirSync('./allure-results');
   },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
@@ -165,17 +152,15 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  afterTest: function (test) {
-    // if test passed, ignore, else take and save screenshot.
-    /* UPDATE: I want to take screenshots after every test to help gauge certain CI failures.
-     * I will re-enable this once I am able to determine what's causing some CI failures
-     */
-    // if (test.passed) {
-    //   return;
-    // }
+  afterTest: function (test, context, results) {
+    // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
+    // it may be useful to have a screenshot of the app on load.
+    if (results.passed) {
+      return;
+    }
 
     // get current test title and clean it, to use it as file name
-    const fileName = encodeURIComponent(test.title.replace(/\s+/g, '-'));
+    const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));
 
     // build file path
     const filePath = './errorShots/' + fileName + '.png';
