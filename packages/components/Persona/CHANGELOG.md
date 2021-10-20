@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/persona
 
-This log was last generated on Tue, 19 Oct 2021 20:23:36 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Oct 2021 03:46:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.23
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.3 (ruaraki@microsoft.com)
 
 ## 0.11.22
 
