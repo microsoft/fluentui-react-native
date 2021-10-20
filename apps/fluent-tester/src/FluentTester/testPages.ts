@@ -25,6 +25,7 @@ import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expande
 import { HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 import { ExperimentalMenuButtonTest, HOMEPAGE_MENU_BUTTON_EXPERIMENTAL } from './TestComponents/MenuButtonExperimental';
+import { HOMEPAGE_LAYOUT, LayoutTest } from './TestComponents/Layout';
 
 export const tests: TestDescription[] = [
   {
@@ -156,5 +157,10 @@ export const tests: TestDescription[] = [
     name: 'Experimental MenuButton Test',
     component: ExperimentalMenuButtonTest,
     testPage: HOMEPAGE_MENU_BUTTON_EXPERIMENTAL,
+  },
+  {
+    name: 'Layout Test',
+    component: LayoutTest,
+    testPage: HOMEPAGE_LAYOUT,
   },
 ];
