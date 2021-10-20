@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Revert \"Add props to buildProps (#1039)\"",
-  "packageName": "@fluentui-react-native/use-styling",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
