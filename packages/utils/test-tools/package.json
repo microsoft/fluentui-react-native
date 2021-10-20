@@ -6,6 +6,11 @@
   "module": "lib/index.js",
   "typings": "lib/index.d.ts",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory":"packages/utils/test-tools"
+  },
   "scripts": {
     "build": "fluentui-scripts build",
     "just": "fluentui-scripts",
