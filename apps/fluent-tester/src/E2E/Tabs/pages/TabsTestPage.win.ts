@@ -1,4 +1,4 @@
-import { TABS_TESTPAGE } from '../../../FluentTester/TestComponents/Tabs/consts';
+import { TABS_TESTPAGE, HOMEPAGE_TABS_BUTTON } from '../../../FluentTester/TestComponents/Tabs/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class TabsTestPage extends BasePage {
@@ -8,6 +8,10 @@ class TabsTestPage extends BasePage {
 
   get _pageName() {
     return TABS_TESTPAGE;
+  }
+
+  get _pageButton() {
+    return By(HOMEPAGE_TABS_BUTTON);
   }
 }
 
