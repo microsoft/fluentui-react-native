@@ -54,17 +54,14 @@ The goal of this RadioGroup component is to let users select one option from two
 | accessibilityLabel         | string                        |               | An accessibility label for screen readers. If not provided, it will be set to the label of the radio button's content.                                                                                                                                                                                       |
 | componentRef               | `React.RefObject<IFocusable>` |               | A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.                                                                                                                                                                                       |
 
-## Tokens:
+## RadioGroup Tokens
 
-RadioButton supports the following tokens:
+`interface IRadioGroupTokens extends IForegroundColorTokens, FontTokens {}`
 
-1. borderColor – This changes the border color of the RadioButton.
-2. backgroundColor – This changes the background color of the inner circle of the RadioButton.
-3. color – This changes the text color of the label associated with the RadioButton.
+## RadioButton Tokens
 
-RadioGroup supports the following tokens:
+`interface IRadioButtonTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {}`
 
-1.  fontFamily - Changes the font family of the label associated with the RadioGroup.
-2.  fontSize - Changes the font size of the label associated with the RadioGroup.
-3.  fontWeight - Changes the font weight of the label associated with the RadioGroup.
-4.  color - This changes the text color of the label associated with the RadioGroup.
+| Prop            | Type   | Default Value | Description              |
+| --------------- | ------ | ------------- | ------------------------ |
+| textBorderColor | string |               | Specifies the text color |
