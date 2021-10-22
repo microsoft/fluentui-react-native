@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Add viewBox information to the Shimmer SVGs for high DPI support and rework the clipping mask workaround to be the same size as the viewBox",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "patboyd@microsoft.com",
+  "dependentChangeType": "none"
+}
