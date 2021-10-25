@@ -5,15 +5,15 @@ import AppKit
 class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	@objc public var target: NSNumber? {
-			didSet {
-					updateCalloutFrameToTargetFrame() // SAAD Addition
-			}
+		didSet {
+			updateCalloutFrameToTargetFrame() // SAAD Addition
+		}
 	}
 
-	public var anchorRect: CGRect? {
-			didSet {
-					updateCalloutFrameToTargetFrame() // SAAD Addition
-			}
+	@objc public var anchorRect: CGRect? {
+		didSet {
+			updateCalloutFrameToTargetFrame() // SAAD Addition
+		}
 	}
 
 	@objc public var onDismiss: RCTBubblingEventBlock?
@@ -30,7 +30,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	}
 
 	required init?(coder: NSCoder) {
-			preconditionFailure()
+		preconditionFailure()
 	}
 
 	convenience init(bridge: RCTBridge) {
@@ -50,15 +50,15 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			// The window is responsible for hit testing and dismissing the callout if taps happen outside of the callout root view.
 			calloutWindow = CalloutWindow(contentViewController: windowRootViewController)
 			if let window = calloutWindow {
-					window.windowLifeCycleDelegate = self
-					window.styleMask = .borderless
-					window.level = .statusBar //.floating?? TODO
-					window.setIsVisible(true)
-					window.backgroundColor = .windowBackgroundColor
+				window.windowLifeCycleDelegate = self
+				window.styleMask = .borderless
+				window.level = .statusBar //.floating?? TODO
+				window.setIsVisible(true)
+				window.backgroundColor = .windowBackgroundColor
 			}
 			if let touchHandler = calloutProxyTouchHandler {
-					calloutProxyView.addGestureRecognizer(touchHandler)
-					windowRootViewController.view = calloutProxyView
+				calloutProxyView.addGestureRecognizer(touchHandler)
+				windowRootViewController.view = calloutProxyView
 			}
 		}
 	}
@@ -81,38 +81,37 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		super.removeFromSuperview()
 	}
 
-		override func reactSetFrame(_ frame: CGRect) {
-			super.reactSetFrame(frame)
-			updateCalloutFrameToTargetFrame()
-			self.frame = .zero
-		}
+	override func reactSetFrame(_ frame: CGRect) {
+		super.reactSetFrame(frame)
+		updateCalloutFrameToTargetFrame()
+		self.frame = .zero
+	}
 
-		// MARK: WindowLifeCycleDelegate
+	// MARK: WindowLifeCycleDelegate
 
-		func didDetectHitOutsideCallout(calloutWindow: CalloutWindow) {
-			 dismissCallout()
-		}
+	func didDetectHitOutsideCallout(calloutWindow: CalloutWindow) {
+		 dismissCallout()
+	}
 
-		func applicationDidResignActiveForCalloutWindow(calloutWindow: CalloutWindow) {
-			 dismissCallout()
-		}
+	func applicationDidResignActiveForCalloutWindow(calloutWindow: CalloutWindow) {
+		 dismissCallout()
+	}
 
 	// MARK: Private methods
 
 	private func dismissCallout() {
 			if let onDismiss = onDismiss {
-					guard let reactTag = reactTag else {
-							preconditionFailure("React Tag missing")
-					}
-					let event: [AnyHashable: Any] = ["target": reactTag]
-					onDismiss(event)
+				guard let reactTag = reactTag else {
+						preconditionFailure("React Tag missing")
+				}
+				let event: [AnyHashable: Any] = ["target": reactTag]
+				onDismiss(event)
 			}
 			calloutWindow?.close() // SAAD Addition
 
 	}
 
 	private func updateCalloutFrameToTargetFrame() {
-		
 		guard let bridge = bridge else {
 			return
 		}
@@ -120,18 +119,18 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		var targetFrameInWindowCoordinates: CGRect = .zero
 
 		if let targetView = bridge.uiManager.view(forReactTag: target) {
-				let targetFrameInWindow = targetView.convert(targetView.frame, to: nil)
-				if let window = targetView.window {
-						targetFrameInWindowCoordinates = window.convertToScreen(targetFrameInWindow)
+			let targetFrameInWindow = targetView.convert(targetView.frame, to: nil)
+			if let window = targetView.window {
+				targetFrameInWindowCoordinates = window.convertToScreen(targetFrameInWindow)
 
-				}
+			}
 		}
 
 		// if the optional anchorRect is supplied, offset the target frame by the anchorRect
 		if let anchorRect = anchorRect, (!anchorRect.equalTo(.zero))  {
-				targetFrameInWindowCoordinates.origin.x += anchorRect.origin.x
-				targetFrameInWindowCoordinates.origin.y += anchorRect.origin.y
-				targetFrameInWindowCoordinates.size = anchorRect.size
+			targetFrameInWindowCoordinates.origin.x += anchorRect.origin.x
+			targetFrameInWindowCoordinates.origin.y += anchorRect.origin.y
+			targetFrameInWindowCoordinates.size = anchorRect.size
 		}
 
 		var calloutRect = bestRectRelativeToTargetFrame(targetRect: targetFrameInWindowCoordinates)
@@ -144,57 +143,55 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	}
 
 	private func bestRectRelativeToTargetFrame(targetRect:CGRect) -> CGRect {
-			let calloutFrame = frame
-			maxCalloutHeight = max(maxCalloutHeight, NSInteger(calloutFrame.size.height))
-			maxCalloutWidth = max(maxCalloutWidth, NSInteger(calloutFrame.size.width))
-			let maxHeight = CGFloat(maxCalloutHeight)
-			let maxWidth = CGFloat(maxCalloutWidth)
+		let calloutFrame = frame
+		maxCalloutHeight = max(maxCalloutHeight, NSInteger(calloutFrame.size.height))
+		maxCalloutWidth = max(maxCalloutWidth, NSInteger(calloutFrame.size.width))
+		let maxHeight = CGFloat(maxCalloutHeight)
+		let maxWidth = CGFloat(maxCalloutWidth)
 
-			// Use the screen the anchor view is on, not necessarily the main screen
-			// TODO: VSO#2339406, don't use mainScreen. Mirror CUIMenuWindow
-			guard let screenFrame = NSScreen.main?.visibleFrame else {
-					preconditionFailure("No Screen Available")
+		// Use the screen the anchor view is on, not necessarily the main screen
+		// TODO: VSO#2339406, don't use mainScreen. Mirror CUIMenuWindow
+		guard let screenFrame = NSScreen.main?.visibleFrame else {
+			preconditionFailure("No Screen Available")
+		}
+
+		var rect = CGRect(origin: CGPoint(x: targetRect.origin.x, y: targetRect.origin.y), size: CGSize(width: maxWidth, height: maxHeight))
+
+		// 1. If space below, callout is below
+		if (rect.origin.y + maxHeight + targetRect.size.height < screenFrame.size.height) {
+			rect.origin.y -= maxHeight
+			// TODO RCTAssert not available for some reason
+			precondition(rect.origin.y >= 0, "Callout currently extends off the lower end of the screen.")
+		}
+		// 2. Else if space above, callout is above
+		else if (rect.origin.y > maxHeight) {
+			rect.origin.y -= maxHeight;
+		}
+		// 3. Else callout is resized to fit wherever there is more space
+		else {
+			let menuBarHeight = NSApplication.shared.mainMenu?.menuBarHeight ?? 0
+			let heightAboveTarget = screenFrame.size.height - targetRect.origin.y - targetRect.size.height - menuBarHeight
+			let heightBelowTarget = targetRect.origin.y
+			if (heightAboveTarget > heightBelowTarget) {
+				// Take up as much space as available above
+				rect.origin.y += targetRect.size.height;
+				rect.size.height = rect.origin.y - menuBarHeight;
+			} else {
+				// Take up as much space as available below
+				rect.size.height = rect.origin.y;
+				rect.origin.y = NSStatusBar.system.thickness
 			}
+		}
 
-			var rect = CGRect(origin: CGPoint(x: targetRect.origin.x, y: targetRect.origin.y), size: CGSize(width: maxWidth, height: maxHeight))
+		// HORIZONTAL ALIGNMENT
+		if (rect.origin.x < 0) {
+				rect.origin.x = 0;
+		}
+		if (rect.origin.x + rect.size.width >= screenFrame.size.width) {
+				rect.origin.x -= (rect.origin.x + rect.size.width - screenFrame.size.width);
+		}
 
-			// 1. If space below, callout is below
-			if (rect.origin.y + maxHeight + targetRect.size.height < screenFrame.size.height) {
-					rect.origin.y -= maxHeight
-					// TODO RCTAssert not available for some reason
-//            precondition(rect.origin.y >= 0, "Callout currently extends off the lower end of the screen.")
-			}
-			// 2. Else if space above, callout is above
-			else if (rect.origin.y > maxHeight) {
-					rect.origin.y -= maxHeight;
-			}
-			// 3. Else callout is resized to fit wherever there is more space
-			else {
-					let menuBarHeight = NSApplication.shared.mainMenu?.menuBarHeight ?? 0
-					let heightAboveTarget = screenFrame.size.height - targetRect.origin.y - targetRect.size.height - menuBarHeight
-					let heightBelowTarget = targetRect.origin.y
-					if (heightAboveTarget > heightBelowTarget) {
-							// Take up as much space as available above
-							rect.origin.y += targetRect.size.height;
-							rect.size.height = rect.origin.y - menuBarHeight;
-					} else {
-							// Take up as much space as available below
-							rect.size.height = rect.origin.y;
-							rect.origin.y = NSStatusBar.system.thickness
-					}
-			}
-
-			// HORIZONTAL ALIGNMENT
-			if (rect.origin.x < 0) {
-					rect.origin.x = 0;
-			}
-			if (rect.origin.x + rect.size.width >= screenFrame.size.width) {
-					rect.origin.x -= (rect.origin.x + rect.size.width - screenFrame.size.width);
-			}
-
-			return rect
-
-
+		return rect
 	}
 
 	// MARK: Private variables
