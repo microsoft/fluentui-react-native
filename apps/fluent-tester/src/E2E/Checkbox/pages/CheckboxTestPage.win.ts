@@ -1,4 +1,4 @@
-import { CHECKBOX_TESTPAGE } from '../../../FluentTester/TestComponents/Checkbox/consts';
+import { CHECKBOX_TESTPAGE, HOMEPAGE_CHECKBOX_BUTTON } from '../../../FluentTester/TestComponents/Checkbox/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class CheckboxTestPage extends BasePage {
@@ -8,6 +8,10 @@ class CheckboxTestPage extends BasePage {
 
   get _pageName() {
     return CHECKBOX_TESTPAGE;
+  }
+
+  get _pageButton() {
+    return By(HOMEPAGE_CHECKBOX_BUTTON);
   }
 }
 

@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/experimental-text",
   "entries": [
     {
+      "date": "Wed, 20 Oct 2021 03:46:25 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.6.25",
+      "version": "0.6.25",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.6.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "273f5addbeb5abeaec0b517e5416f52d8878152f",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 Oct 2021 20:23:36 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.6.24",
+      "version": "0.6.24",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix caching",
+            "author": "ruaraki@microsoft.com",
+            "commit": "9db7aa8e93bf15738c4a6acefef611bcad47b63a",
+            "package": "@fluentui-react-native/experimental-text"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 07 Oct 2021 20:59:20 GMT",
       "tag": "@fluentui-react-native/experimental-text_v0.6.23",
       "version": "0.6.23",

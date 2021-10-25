@@ -1,4 +1,4 @@
-import { CALLOUT_TESTPAGE } from '../../../FluentTester/TestComponents/Callout/consts';
+import { CALLOUT_TESTPAGE, HOMEPAGE_CALLOUT_BUTTON } from '../../../FluentTester/TestComponents/Callout/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class CalloutTestPage extends BasePage {
@@ -8,6 +8,10 @@ class CalloutTestPage extends BasePage {
 
   get _pageName() {
     return CALLOUT_TESTPAGE;
+  }
+
+  get _pageButton() {
+    return By(HOMEPAGE_CALLOUT_BUTTON);
   }
 }
 

@@ -2,6 +2,50 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Wed, 20 Oct 2021 03:46:25 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.14.1",
+      "version": "0.14.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tester to v0.45.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "273f5addbeb5abeaec0b517e5416f52d8878152f",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 Oct 2021 20:23:36 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.14.0",
+      "version": "0.14.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add VS Code debugging configurations",
+            "author": "sanajmi@microsoft.com",
+            "commit": "1a8a1c134dee7b0f6aeb9b72fc994bcecb7d3b83",
+            "package": "@fluentui-react-native/tester-win32"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tester to v0.45.0",
+            "author": "safreibe@microsoft.com",
+            "commit": "629d3e924715cfb6303f7342b88f70d1ecd89151",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Increasing timeouts and number of retry attempts for failed E2E runs. This will reduce the risk of intermittent failures engineers will see in our CI pipeline, because usually it corrects itself after the first failed attempt (if it is indeed a false-negative)",
+            "author": "safreibe@microsoft.com",
+            "commit": "629d3e924715cfb6303f7342b88f70d1ecd89151",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 07 Oct 2021 20:59:20 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.13.3",
       "version": "0.13.3",

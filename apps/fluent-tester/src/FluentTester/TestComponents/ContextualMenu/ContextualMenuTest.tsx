@@ -342,6 +342,7 @@ const IconContextualMenu: React.FunctionComponent = () => {
     </View>
   );
 };
+
 const contextualMenuSections: TestSection[] = [
   {
     name: 'Standard ContextualMenu',

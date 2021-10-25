@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Thu, 07 Oct 2021 20:59:20 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Oct 2021 03:46:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.27
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.51 (ruaraki@microsoft.com)
+
+## 0.17.26
+
+Tue, 19 Oct 2021 20:23:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.10.1 (ruaraki@microsoft.com)
 
 ## 0.17.25
 

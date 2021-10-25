@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix a regression in useHoverState",
-  "packageName": "@fluentui-react-native/interactive-hooks",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

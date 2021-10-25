@@ -5,6 +5,7 @@ import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
 import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL } from './TestComponents/CheckboxExperimental';
+import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
 import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
 import { HOMEPAGE_FOCUSZONE_BUTTON, FocusZoneTest } from './TestComponents/FocusZone';
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
@@ -49,6 +50,21 @@ export const tests: TestDescription[] = [
     name: 'Experimental Button',
     component: ExperimentalButtonTest,
     testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
+  },
+  {
+    name: 'Checkbox Test',
+    component: CheckboxTest,
+    testPage: HOMEPAGE_CHECKBOX_BUTTON,
+  },
+  {
+    name: 'Experimental Checkbox',
+    component: ExperimentalCheckboxTest,
+    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
+  },
+  {
+    name: 'ContextualMenu Test',
+    component: ContextualMenuTest,
+    testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON,
   },
   {
     name: 'FocusZone Test',
@@ -110,16 +126,7 @@ export const tests: TestDescription[] = [
     component: PersonaTest,
     testPage: HOMEPAGE_PERSONA_BUTTON,
   },
-  {
-    name: 'Checkbox Test',
-    component: CheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_BUTTON,
-  },
-  {
-    name: 'Experimental Checkbox',
-    component: ExperimentalCheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
-  },
+
   {
     name: 'Svg Test',
     component: SvgTest,
