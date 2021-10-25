@@ -10,7 +10,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 	}
 
-	@objc public var anchorRect: CGRect? {
+	@objc public var anchorRect: CGRect {
 		didSet {
 			updateCalloutFrameToTargetFrame() // SAAD Addition
 		}
@@ -26,6 +26,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		// The proxy view is a React view that will be hosted in a seperate window.
 		// The child react views added to this view will actually be added to the proxy view.
 		calloutProxyView = RCTView()
+		anchorRect = .zero
 		super.init(frame: .zero)
 	}
 
@@ -100,46 +101,47 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	// MARK: Private methods
 
 	private func dismissCallout() {
-			if let onDismiss = onDismiss {
-				guard let reactTag = reactTag else {
-						preconditionFailure("React Tag missing")
-				}
-				let event: [AnyHashable: Any] = ["target": reactTag]
-				onDismiss(event)
+		if let onDismiss = onDismiss {
+			guard let reactTag = reactTag else {
+				preconditionFailure("React Tag missing")
 			}
-			calloutWindow?.close() // SAAD Addition
+			let event: [AnyHashable: Any] = ["target": reactTag]
+			onDismiss(event)
+		}
+		calloutWindow?.close() // SAAD Addition
 
 	}
 
+	// Updates the Callout frame in the CalloutWindow to the correct screen coordinates
 	private func updateCalloutFrameToTargetFrame() {
 		guard let bridge = bridge else {
 			return
 		}
 
-		var targetFrameInWindowCoordinates: CGRect = .zero
-
-		if let targetView = bridge.uiManager.view(forReactTag: target) {
-			let targetFrameInWindow = targetView.convert(targetView.frame, to: nil)
-			if let window = targetView.window {
-				targetFrameInWindowCoordinates = window.convertToScreen(targetFrameInWindow)
-
+		var targetFrameInWindow: CGRect = .zero
+		
+		if (!anchorRect.equalTo(.zero))  {
+			targetFrameInWindow = convert(anchorRect, to: nil)
+		} else {
+			guard let targetView = bridge.uiManager.view(forReactTag: target) else {
+				// Nowhere to put the Callout,
+				preconditionFailure("Neither anchorRect nor target were provided to position the Callout")
 			}
+			targetFrameInWindow = targetView.convert(targetView.frame, to: nil)
+		}
+		
+		if let window = window {
+			let targetFrameInWindowCoordinates = window.convertToScreen(targetFrameInWindow)
+			
+			var calloutRect = bestRectRelativeToTargetFrame(targetRect: targetFrameInWindowCoordinates)
+			calloutWindow?.setFrame(calloutRect, display: true)
+			calloutRect.origin.x = 0
+			calloutRect.origin.y = 0
+			calloutProxyView.frame = calloutRect
+
+			calloutWindowRootViewController?.view.frame = calloutRect
 		}
 
-		// if the optional anchorRect is supplied, offset the target frame by the anchorRect
-		if let anchorRect = anchorRect, (!anchorRect.equalTo(.zero))  {
-			targetFrameInWindowCoordinates.origin.x += anchorRect.origin.x
-			targetFrameInWindowCoordinates.origin.y += anchorRect.origin.y
-			targetFrameInWindowCoordinates.size = anchorRect.size
-		}
-
-		var calloutRect = bestRectRelativeToTargetFrame(targetRect: targetFrameInWindowCoordinates)
-		calloutWindow?.setFrame(calloutRect, display: true)
-		calloutRect.origin.x = 0
-		calloutRect.origin.y = 0
-		calloutProxyView.frame = calloutRect
-
-		calloutWindowRootViewController?.view.frame = calloutRect
 	}
 
 	private func bestRectRelativeToTargetFrame(targetRect:CGRect) -> CGRect {

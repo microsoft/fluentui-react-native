@@ -4,7 +4,7 @@
 
 RCT_EXPORT_VIEW_PROPERTY(target, NSNumber)
 
-RCT_REMAP_VIEW_PROPERTY(anchorRect, anchorPosition, CGRect)
+RCT_EXPORT_VIEW_PROPERTY(anchorRect, CGRect)
 
 RCT_EXPORT_VIEW_PROPERTY(onDismiss, RCTBubblingEventBlock)
 
