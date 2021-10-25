@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/android-theme",
   "entries": [
     {
+      "date": "Mon, 25 Oct 2021 19:24:43 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.4.17",
+      "version": "0.4.17",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/theme to v0.5.22",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f6578742d6c957cf7e346db82f89171f80bedc3b",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 28 Sep 2021 21:08:25 GMT",
       "tag": "@fluentui-react-native/android-theme_v0.4.16",
       "version": "0.4.16",

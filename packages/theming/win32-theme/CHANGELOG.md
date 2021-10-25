@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Wed, 20 Oct 2021 03:46:25 GMT and should not be manually modified.
+This log was last generated on Mon, 25 Oct 2021 19:24:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.8
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Use tslib where spreadArray is used (ruaraki@microsoft.com)
 
 ## 0.13.7
 

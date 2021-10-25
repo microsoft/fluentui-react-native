@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/immutable-merge
 
-This log was last generated on Wed, 04 Aug 2021 06:26:25 GMT and should not be manually modified.
+This log was last generated on Mon, 25 Oct 2021 19:24:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.4
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Use tslib where spreadArray is used (ruaraki@microsoft.com)
 
 ## 1.1.3
 

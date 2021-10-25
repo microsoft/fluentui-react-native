@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/focus-trap-zone
 
-This log was last generated on Wed, 20 Oct 2021 03:46:25 GMT and should not be manually modified.
+This log was last generated on Mon, 25 Oct 2021 19:24:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.52
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-settings to v0.10.3 (ruaraki@microsoft.com)
 
 ## 0.7.51
 

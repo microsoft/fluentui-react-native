@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/focus-zone",
   "entries": [
     {
+      "date": "Mon, 25 Oct 2021 19:24:43 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.7.31",
+      "version": "0.7.31",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @uifabricshared/foundation-settings to v0.10.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f6578742d6c957cf7e346db82f89171f80bedc3b",
+            "package": "@fluentui-react-native/focus-zone"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 Oct 2021 03:46:25 GMT",
       "tag": "@fluentui-react-native/focus-zone_v0.7.30",
       "version": "0.7.30",

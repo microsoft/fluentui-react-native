@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/stack",
   "entries": [
     {
+      "date": "Mon, 25 Oct 2021 19:24:43 GMT",
+      "tag": "@fluentui-react-native/stack_v0.5.41",
+      "version": "0.5.41",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.10.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f6578742d6c957cf7e346db82f89171f80bedc3b",
+            "package": "@fluentui-react-native/stack"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 Oct 2021 03:46:25 GMT",
       "tag": "@fluentui-react-native/stack_v0.5.40",
       "version": "0.5.40",

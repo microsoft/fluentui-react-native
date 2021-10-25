@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theming-ramp",
-  "version": "0.15.9",
+  "version": "0.15.10",
   "description": "Theming Library",
   "repository": {
     "type": "git",
@@ -32,8 +32,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": ">=0.10.2 <1.0.0",
-    "@fluentui-react-native/immutable-merge": "^1.1.3",
+    "@uifabricshared/foundation-settings": ">=0.10.3 <1.0.0",
+    "@fluentui-react-native/immutable-merge": "^1.1.4",
     "@fluentui-react-native/theme-types": ">=0.12.3 <1.0.0"
   },
   "devDependencies": {

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix dependency",
-  "packageName": "@fluentui-react-native/framework",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
