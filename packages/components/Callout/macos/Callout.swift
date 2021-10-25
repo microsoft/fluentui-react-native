@@ -16,6 +16,8 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 	}
 
+	@objc public var onShow: RCTBubblingEventBlock?
+
 	@objc public var onDismiss: RCTBubblingEventBlock?
 
 	public weak var bridge: RCTBridge?

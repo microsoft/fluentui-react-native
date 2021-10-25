@@ -4,7 +4,10 @@
 
 RCT_EXPORT_VIEW_PROPERTY(target, NSNumber)
 
-RCT_EXPORT_VIEW_PROPERTY(anchorRect, CGRect)
+// TODO: Support anchorRect (arbritrary rect on Raect Root View)
+//RCT_EXPORT_VIEW_PROPERTY(anchorRect, CGRect)
+
+RCT_EXPORT_VIEW_PROPERTY(onShow, RCTBubblingEventBlock)
 
 RCT_EXPORT_VIEW_PROPERTY(onDismiss, RCTBubblingEventBlock)
 
