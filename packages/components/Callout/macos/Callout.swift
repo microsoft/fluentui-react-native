@@ -10,12 +10,6 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 	}
 
-	@objc public var anchorRect: CGRect {
-		didSet {
-			updateCalloutFrameToTargetFrame() // SAAD Addition
-		}
-	}
-
 	@objc public var onShow: RCTBubblingEventBlock?
 
 	@objc public var onDismiss: RCTBubblingEventBlock?
@@ -28,7 +22,6 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		// The proxy view is a React view that will be hosted in a seperate window.
 		// The child react views added to this view will actually be added to the proxy view.
 		calloutProxyView = RCTView()
-		anchorRect = .zero
 		super.init(frame: .zero)
 	}
 
@@ -122,15 +115,11 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 		var targetFrameInWindow: CGRect = .zero
 		
-		if (!anchorRect.equalTo(.zero))  {
-			targetFrameInWindow = convert(anchorRect, to: nil)
-		} else {
-			guard let targetView = bridge.uiManager.view(forReactTag: target) else {
-				// Nowhere to put the Callout,
-				preconditionFailure("Neither anchorRect nor target were provided to position the Callout")
-			}
-			targetFrameInWindow = targetView.convert(targetView.frame, to: nil)
+		guard let targetView = bridge.uiManager.view(forReactTag: target) else {
+			// Nowhere to put the Callout,
+			preconditionFailure("Neither anchorRect nor target were provided to position the Callout")
 		}
+		targetFrameInWindow = targetView.convert(targetView.frame, to: nil)
 		
 		if let window = window {
 			let targetFrameInWindowCoordinates = window.convertToScreen(targetFrameInWindow)
@@ -189,10 +178,10 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 		// HORIZONTAL ALIGNMENT
 		if (rect.origin.x < 0) {
-				rect.origin.x = 0;
+			rect.origin.x = 0;
 		}
 		if (rect.origin.x + rect.size.width >= screenFrame.size.width) {
-				rect.origin.x -= (rect.origin.x + rect.size.width - screenFrame.size.width);
+			rect.origin.x -= (rect.origin.x + rect.size.width - screenFrame.size.width);
 		}
 
 		return rect

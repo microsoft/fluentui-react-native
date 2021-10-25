@@ -61,11 +61,6 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
   },
   {
-    name: 'ContextualMenu Test',
-    component: ContextualMenuTest,
-    testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON,
-  },
-  {
     name: 'FocusZone Test',
     component: FocusZoneTest,
     testPage: HOMEPAGE_FOCUSZONE_BUTTON,
