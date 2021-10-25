@@ -141,19 +141,19 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 			calloutWindowRootViewController?.view.frame = calloutRect
 		}
-
 	}
 
+	// Positions the Callout relative to the target frame, adjusting if we are on a screen edge
+	// I.E: If the Callout spills over the bottom edge of the screen, reposition it upwards so the bottom edge matches the screen bottom edge, and
+	// If the Callout spills over the right (trailing) edge of the screen, flip it so it somes off the leading edge of the anchor
 	private func bestRectRelativeToTargetFrame(targetRect:CGRect) -> CGRect {
 		let calloutFrame = frame
 		maxCalloutHeight = max(maxCalloutHeight, NSInteger(calloutFrame.size.height))
 		maxCalloutWidth = max(maxCalloutWidth, NSInteger(calloutFrame.size.width))
 		let maxHeight = CGFloat(maxCalloutHeight)
 		let maxWidth = CGFloat(maxCalloutWidth)
-
-		// Use the screen the anchor view is on, not necessarily the main screen
-		// TODO: VSO#2339406, don't use mainScreen. Mirror CUIMenuWindow
-		guard let screenFrame = NSScreen.main?.visibleFrame else {
+		
+		guard let screenFrame = window?.screen?.visibleFrame ?? NSScreen.main?.visibleFrame else {
 			preconditionFailure("No Screen Available")
 		}
 
@@ -195,6 +195,8 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 		return rect
 	}
+	
+
 
 	// MARK: Private variables
 
