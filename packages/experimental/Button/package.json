@@ -28,7 +28,8 @@
     "@fluentui-react-native/use-styling": ">=0.7.1 <1.0.0",
     "@fluentui-react-native/icon": "0.8.27",
     "@fluentui-react-native/theme-tokens": ">=0.9.0 <1.0.0",
-    "@fluentui-react-native/styling-utils": ">=0.2.0 <1.0.0"
+    "@fluentui-react-native/styling-utils": ">=0.2.0 <1.0.0",
+    "tslib": "^1.13.0"
   },
   "devDependencies": {
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",

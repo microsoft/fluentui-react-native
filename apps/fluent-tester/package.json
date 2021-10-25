@@ -52,7 +52,8 @@
     "@fluentui/react-native": ">=0.26.5 <1.0.0",
     "@react-native-community/slider": "^3.0.3",
     "@react-native-menu/menu": "^0.1.2",
-    "@react-native-picker/picker": "^1.16.7"
+    "@react-native-picker/picker": "^1.16.7",
+    "tslib": "^1.13.0"
   },
   "devDependencies": {
     "@rnx-kit/cli": "^0.5.27",

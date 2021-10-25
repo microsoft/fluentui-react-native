@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Use tslib where spreadArray is used",
+  "packageName": "@fluentui-react-native/interactive-hooks",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}

@@ -31,6 +31,9 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "tslib": "^1.13.0"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.0",
     "@types/node": "^10.3.5",
