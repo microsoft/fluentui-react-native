@@ -12,12 +12,12 @@ export const buttonStates: (keyof ButtonTokens)[] = [
   'primary',
   'subtle',
   'hovered',
-  'focused',
   'pressed',
   'disabled',
   'small',
   'medium',
   'large',
+  'focused',
   'hasContent',
   'hasIcon',
 ];

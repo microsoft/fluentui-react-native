@@ -13,6 +13,12 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
       variant: 'bodyStandard',
       secondaryContentFont: { variant: 'secondaryStandard' },
     },
+    focused: {
+      padding: globalTokens.spacing.s - globalTokens.stroke.width.thick,
+      hasContent: {
+        paddingHorizontal: globalTokens.spacing.s - globalTokens.stroke.width.thick,
+      },
+    },
   },
   medium: {
     padding: globalTokens.spacing.m - globalTokens.stroke.width.thin,
@@ -21,6 +27,12 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
       minWidth: 96,
       variant: 'bodySemibold',
       secondaryContentFont: { variant: 'secondaryStandard' },
+    },
+    focused: {
+      padding: globalTokens.spacing.m - globalTokens.stroke.width.thick,
+      hasContent: {
+        paddingHorizontal: globalTokens.spacing.m - globalTokens.stroke.width.thick,
+      },
     },
   },
   large: {

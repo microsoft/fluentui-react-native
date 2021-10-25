@@ -33,6 +33,13 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
           spacingIconContent: globalTokens.spacing.sNudge,
         },
       },
+      focused: {
+        padding: globalTokens.spacing.sNudge - globalTokens.stroke.width.thick,
+        borderWidth: globalTokens.stroke.width.thick,
+        hasContent: {
+          paddingHorizontal: globalTokens.spacing.l - globalTokens.stroke.width.thick,
+        },
+      },
     },
     small: {
       padding: globalTokens.spacing.xs - globalTokens.stroke.width.thin,
@@ -45,6 +52,13 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         variant: 'secondaryStandard',
         hasIcon: {
           spacingIconContent: globalTokens.spacing.xs,
+        },
+      },
+      focused: {
+        padding: globalTokens.spacing.xs - globalTokens.stroke.width.thick,
+        borderWidth: globalTokens.stroke.width.thick,
+        hasContent: {
+          paddingHorizontal: globalTokens.spacing.m - globalTokens.stroke.width.thick,
         },
       },
     },
