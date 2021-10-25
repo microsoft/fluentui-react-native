@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Transferring E2E Improvements to this branch. Other branch had weird CI errors",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}

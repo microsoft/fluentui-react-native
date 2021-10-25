@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Add to beachball config so that changelog includes individual changes that influence larger package",
-  "packageName": "@fluentui/react-native",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}
