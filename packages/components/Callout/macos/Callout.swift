@@ -6,7 +6,17 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	@objc public var target: NSNumber? {
 		didSet {
-			updateCalloutFrameToTargetFrame() // SAAD Addition
+			guard let targetView = bridge?.uiManager.view(forReactTag: target) else {
+				preconditionFailure("Invalid target react tag")
+			}
+			anchorView = targetView
+			updateCalloutFrameToAnchor()
+		}
+	}
+	
+	@objc public var anchorRect: NSRect = .zero {
+		didSet {
+			updateCalloutFrameToAnchor()
 		}
 	}
 
@@ -19,9 +29,6 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	// MARK: Initialization
 
 	private init() {
-		// The proxy view is a React view that will be hosted in a seperate window.
-		// The child react views added to this view will actually be added to the proxy view.
-		calloutProxyView = RCTView()
 		super.init(frame: .zero)
 	}
 
@@ -32,55 +39,28 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	convenience init(bridge: RCTBridge) {
 		self.init()
 		self.bridge = bridge
+	}
 
-
-		calloutProxyTouchHandler = RCTTouchHandler(bridge: bridge)
-
-		// The callout window root view will contain the proxy react view.
-		// It will be offset within the window to align with the callout target rect
-		// The callout window root view controller manages device rotation callbacks.
-		calloutWindowRootViewController = CalloutWindowRootViewController()
-
-		if let windowRootViewController = calloutWindowRootViewController {
-			// The callout window hosts the callout root view which hosts the proxy view.
-			// The window is responsible for hit testing and dismissing the callout if taps happen outside of the callout root view.
-			calloutWindow = CalloutWindow(contentViewController: windowRootViewController)
-			if let window = calloutWindow {
-				window.windowLifeCycleDelegate = self
-				window.styleMask = .borderless
-				window.level = .statusBar //.floating?? TODO
-				window.setIsVisible(true)
-				window.backgroundColor = .windowBackgroundColor
-			}
-			if let touchHandler = calloutProxyTouchHandler {
-				calloutProxyView.addGestureRecognizer(touchHandler)
-				windowRootViewController.view = calloutProxyView
-			}
+	override func viewDidMoveToWindow() {
+		guard window != nil else {
+			return
 		}
+		showCallout()
 	}
 
 	// MARK: RCTComponent Overrides
-
+	
 	override func insertReactSubview(_ subview: NSView!, at atIndex: Int) {
-		// Do not want to call super (despite NS_REQUIRES_SUPER on base class) since this will cause the Callout's children to appear within the main component.
-		// Instead we want to add the react subviews to the proxy callout view which is in its own callout window.
-		calloutProxyView.insertReactSubview(subview, at: atIndex)
-		calloutProxyView.insertSubview(subview, at: atIndex)
+		proxyView.insertReactSubview(subview, at: atIndex)
 	}
 
-	override func removeFromSuperview() {
-		for subview in calloutProxyView.subviews {
-			subview.removeFromSuperview()
-		}
-		calloutProxyTouchHandler = nil
-		calloutWindowRootViewController = nil
-		super.removeFromSuperview()
+	override func didUpdateReactSubviews() {
+		proxyView.didUpdateReactSubviews()
 	}
 
 	override func reactSetFrame(_ frame: CGRect) {
-		super.reactSetFrame(frame)
-		updateCalloutFrameToTargetFrame()
-		self.frame = .zero
+		proxyView.reactSetFrame(frame)
+		updateCalloutFrameToAnchor()
 	}
 
 	// MARK: WindowLifeCycleDelegate
@@ -95,55 +75,73 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	// MARK: Private methods
 
-	private func dismissCallout() {
-		if let onDismiss = onDismiss {
-			guard let reactTag = reactTag else {
-				preconditionFailure("React Tag missing")
-			}
-			let event: [AnyHashable: Any] = ["target": reactTag]
-			onDismiss(event)
-		}
-		calloutWindow?.close() // SAAD Addition
+	private func showCallout() {
+		// Create Window and put proxy view inside it
+		// Convert Anchor view frame to screen rect
+		// Reposition the rect as needed to accomodate for edges
+		// show window
+		// call onShow()
 
+		updateCalloutFrameToAnchor()
+		calloutWindow.display()
+		didShowCallout()
+	
 	}
 
-	// Updates the Callout frame in the CalloutWindow to the correct screen coordinates
-	private func updateCalloutFrameToTargetFrame() {
-		guard let bridge = bridge else {
+	private func dismissCallout() {
+		calloutWindow.close()
+		didDismissCallout()
+	}
+
+	/// Sets the frame of the Callout Window (in screen coordinates to be off of the Anchor on the preferred edge
+	private func updateCalloutFrameToAnchor() {
+		guard window != nil else {
 			return
 		}
-
-		var targetFrameInWindow: CGRect = .zero
 		
-		guard let targetView = bridge.uiManager.view(forReactTag: target) else {
-			// Nowhere to put the Callout,
-			preconditionFailure("Neither anchorRect nor target were provided to position the Callout")
+		// Prefer using anchorRect over anchorView if set
+		if (!anchorRect.equalTo(.zero)) {
+			//TODO
 		}
-		targetFrameInWindow = targetView.convert(targetView.frame, to: nil)
+		let anchorScreenRect = calculateAnchorScreenRect()
+		let calloutScreenRect = bestRectRelativeToTargetFrame(targetRect: anchorScreenRect)
 		
-		if let window = window {
-			let targetFrameInWindowCoordinates = window.convertToScreen(targetFrameInWindow)
-			
-			var calloutRect = bestRectRelativeToTargetFrame(targetRect: targetFrameInWindowCoordinates)
-			calloutWindow?.setFrame(calloutRect, display: true)
-			calloutRect.origin.x = 0
-			calloutRect.origin.y = 0
-			calloutProxyView.frame = calloutRect
+		calloutWindow.setFrame(calloutScreenRect, display: false)
+		// TODO: Why do we need to do this?
+		let proxyViewFrame = NSMakeRect(0, 0, calloutScreenRect.size.width, calloutScreenRect.size.height)
+		proxyView.frame = proxyViewFrame
+	}
 
-			calloutWindowRootViewController?.view.frame = calloutRect
+	// Calculates the NSRect of the anchorView in the coordinate space of the current screen
+	private func calculateAnchorScreenRect() -> NSRect {
+		guard let anchorView = anchorView else {
+			preconditionFailure("No anchor view provided to position the Callout")
 		}
+		
+		guard let window = window  else {
+			preconditionFailure("No Window found")
+		}
+
+		let anchorBoundsInWindow = anchorView.convert(anchorView.bounds, to: nil)
+		let anchorFrameInScreenCoordinates = window.convertToScreen(anchorBoundsInWindow)
+		
+		return anchorFrameInScreenCoordinates
 	}
 
 	// Positions the Callout relative to the target frame, adjusting if we are on a screen edge
 	// I.E: If the Callout spills over the bottom edge of the screen, reposition it upwards so the bottom edge matches the screen bottom edge, and
 	// If the Callout spills over the right (trailing) edge of the screen, flip it so it somes off the leading edge of the anchor
 	private func bestRectRelativeToTargetFrame(targetRect:CGRect) -> CGRect {
-		let calloutFrame = frame
+		
+		var maxCalloutHeight = 0
+		var maxCalloutWidth = 0
+		
+		let calloutFrame = proxyView.frame
 		maxCalloutHeight = max(maxCalloutHeight, NSInteger(calloutFrame.size.height))
 		maxCalloutWidth = max(maxCalloutWidth, NSInteger(calloutFrame.size.width))
 		let maxHeight = CGFloat(maxCalloutHeight)
 		let maxWidth = CGFloat(maxCalloutWidth)
-		
+
 		guard let screenFrame = window?.screen?.visibleFrame ?? NSScreen.main?.visibleFrame else {
 			preconditionFailure("No Screen Available")
 		}
@@ -187,15 +185,41 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		return rect
 	}
 	
-
+	private func didShowCallout() {
+		onShow?([:])
+	}
+	
+	private func didDismissCallout() {
+		if let onDismiss = onDismiss {
+			guard let reactTag = reactTag else {
+				preconditionFailure("React Tag missing")
+			}
+			let event: [AnyHashable: Any] = ["target": reactTag]
+			onDismiss(event)
+		}
+	}
 
 	// MARK: Private variables
 
-	private var calloutWindow: CalloutWindow?
-	private var calloutWindowRootViewController: NSViewController?
-	private var calloutProxyView: RCTView
-	private var calloutProxyTouchHandler: RCTTouchHandler?
-	// Internally track that the callout never shrinks in size when it's laying out
-	private var maxCalloutHeight: NSInteger = 0
-	private var maxCalloutWidth: NSInteger = 0
+	private var anchorView: NSView?
+	
+	private var proxyView: RCTView = RCTView()
+	
+	private lazy var calloutWindow: CalloutWindow = {
+		let calloutWindowController = CalloutWindowRootViewController()
+		let window = CalloutWindow(contentViewController: calloutWindowController)
+		window.windowLifeCycleDelegate = self
+		window.styleMask = .borderless
+		window.level = .popUpMenu
+		window.setIsVisible(true)
+		window.backgroundColor = .windowBackgroundColor
+		
+		guard let touchHandler = RCTTouchHandler(bridge: bridge) else {
+			preconditionFailure("Callout could not create RCTTouchHandler")
+		}
+		touchHandler.attach(to: proxyView)
+		window.contentView = proxyView
+		
+		return window
+	}()
 }

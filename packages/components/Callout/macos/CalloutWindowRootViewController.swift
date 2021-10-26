@@ -18,14 +18,6 @@ class CalloutWindowRootViewController: NSViewController {
 	}
 	
 	override func loadView() {
-		view = CalloutContentView()
-	}
-}
-
-class CalloutContentView: NSView {
-	override var allowsVibrancy: Bool {
-		get {
-			return true
-		}
+		view = NSView()
 	}
 }
