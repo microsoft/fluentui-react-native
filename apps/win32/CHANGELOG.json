@@ -2,6 +2,35 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Mon, 25 Oct 2021 19:24:43 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.15.0",
+      "version": "0.15.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Transferring E2E Improvements to this branch. Other branch had weird CI errors",
+            "author": "safreibe@microsoft.com",
+            "commit": "d4016c370ef0b87a7754ffb7af1026387c5da869",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Use tslib where spreadArray is used",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f6578742d6c957cf7e346db82f89171f80bedc3b",
+            "package": "@fluentui-react-native/tester-win32"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tester to v0.46.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f6578742d6c957cf7e346db82f89171f80bedc3b",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 Oct 2021 03:46:25 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.14.1",
       "version": "0.14.1",
