@@ -23,11 +23,6 @@
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/components/MenuButton"
-  },
   "dependencies": {
     "@fluentui-react-native/button": "^0.20.14",
     "@fluentui-react-native/component-cache": "^1.2.3",
