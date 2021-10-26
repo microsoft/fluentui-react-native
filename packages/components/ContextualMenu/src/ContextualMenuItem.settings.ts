@@ -18,7 +18,7 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
         alignItems: 'flex-start',
         flexDirection: 'row',
         alignSelf: 'flex-start',
-        // width: '100%',
+        width: '100%',
       },
     },
     content: {},
