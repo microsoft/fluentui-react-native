@@ -14,7 +14,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 	}
 	
-	@objc public var anchorRect: NSRect = .zero {
+	@objc public var anchorRect: NSRect = .null {
 		didSet {
 			updateCalloutFrameToAnchor()
 		}
@@ -99,27 +99,49 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			return
 		}
 		
-		// Prefer using anchorRect over anchorView if set
-		if (!anchorRect.equalTo(.zero)) {
-			//TODO
+		var calloutScreenRect: NSRect = .null
+		if (!anchorRect.equalTo(.null)) {
+			let anchorScreenRect = calculateAnchorRectScreenRect()
+			calloutScreenRect = bestRectRelativeToTargetFrame(targetRect: anchorScreenRect)
+		} else {
+			let anchorScreenRect = calculateAnchorViewScreenRect()
+			calloutScreenRect = bestRectRelativeToTargetFrame(targetRect: anchorScreenRect)
 		}
-		let anchorScreenRect = calculateAnchorScreenRect()
-		let calloutScreenRect = bestRectRelativeToTargetFrame(targetRect: anchorScreenRect)
 		
 		calloutWindow.setFrame(calloutScreenRect, display: false)
 		// TODO: Why do we need to do this?
 		let proxyViewFrame = NSMakeRect(0, 0, calloutScreenRect.size.width, calloutScreenRect.size.height)
 		proxyView.frame = proxyViewFrame
 	}
+	
+	private func calculateAnchorRectScreenRect() -> NSRect {
+		guard let window = window  else {
+			preconditionFailure("No window found")
+		}
+		
+		var rootView: NSView = self
+		while (!rootView.isReactRootView()) {
+			rootView = rootView.reactSuperview()
+		}
+		let rootViewBoundsInWindow = rootView.convert(rootView.bounds, to: nil)
+		let rootViewRectInScreenCoordinates = window.convertToScreen(rootViewBoundsInWindow)
+		let anchorRectInScreenCoordinates = NSMakeRect(
+			rootViewRectInScreenCoordinates.origin.x + self.anchorRect.origin.x,
+			rootViewRectInScreenCoordinates.origin.y + self.anchorRect.origin.y,
+			self.anchorRect.size.width,
+			self.anchorRect.size.height
+		)
+		return anchorRectInScreenCoordinates
+	}
 
 	// Calculates the NSRect of the anchorView in the coordinate space of the current screen
-	private func calculateAnchorScreenRect() -> NSRect {
+	private func calculateAnchorViewScreenRect() -> NSRect {
 		guard let anchorView = anchorView else {
 			preconditionFailure("No anchor view provided to position the Callout")
 		}
 		
 		guard let window = window  else {
-			preconditionFailure("No Window found")
+			preconditionFailure("No window found")
 		}
 
 		let anchorBoundsInWindow = anchorView.convert(anchorView.bounds, to: nil)
