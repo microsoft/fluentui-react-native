@@ -13,7 +13,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			updateCalloutFrameToAnchor()
 		}
 	}
-	
+
 	@objc public var anchorRect: NSRect = .null {
 		didSet {
 			updateCalloutFrameToAnchor()
@@ -49,7 +49,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	}
 
 	// MARK: RCTComponent Overrides
-	
+
 	override func insertReactSubview(_ subview: NSView!, at atIndex: Int) {
 		proxyView.insertReactSubview(subview, at: atIndex)
 	}
@@ -85,7 +85,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		updateCalloutFrameToAnchor()
 		calloutWindow.display()
 		didShowCallout()
-	
+
 	}
 
 	private func dismissCallout() {
@@ -98,28 +98,21 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		guard window != nil else {
 			return
 		}
-		
-		var calloutScreenRect: NSRect = .null
-		if (!anchorRect.equalTo(.null)) {
-			let anchorScreenRect = calculateAnchorRectScreenRect()
-			calloutScreenRect = bestRectRelativeToTargetFrame(targetRect: anchorScreenRect)
-		} else {
-			let anchorScreenRect = calculateAnchorViewScreenRect()
-			calloutScreenRect = bestRectRelativeToTargetFrame(targetRect: anchorScreenRect)
-		}
-		
+
+		// Prefer anchorRect over anchorView if available
+		let anchorScreenRect = anchorRect.equalTo(.null) ? calculateAnchorViewScreenRect() : calculateAnchorRectScreenRect()
+		let calloutScreenRect = bestRectRelativeToTargetFrame(targetRect: anchorScreenRect)
+//		let calloutScreenRect = adjustCalloutRectToScreen(anchorScreenRect: anchorScreenRect)
+
 		calloutWindow.setFrame(calloutScreenRect, display: false)
-		// TODO: Why do we need to do this?
-		let proxyViewFrame = NSMakeRect(0, 0, calloutScreenRect.size.width, calloutScreenRect.size.height)
-		proxyView.frame = proxyViewFrame
 	}
-	
+
 	/// Calculates the NSRect of the Anchor Rect in screen coordinates
 	private func calculateAnchorRectScreenRect() -> NSRect {
 		guard let window = window  else {
 			preconditionFailure("No window found")
 		}
-		
+
 		var rootView: NSView = self
 		while (!rootView.isReactRootView()) {
 			rootView = rootView.reactSuperview()
@@ -140,25 +133,53 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		guard let anchorView = anchorView else {
 			preconditionFailure("No anchor view provided to position the Callout")
 		}
-		
+
 		guard let window = window  else {
 			preconditionFailure("No window found")
 		}
 
 		let anchorBoundsInWindow = anchorView.convert(anchorView.bounds, to: nil)
 		let anchorFrameInScreenCoordinates = window.convertToScreen(anchorBoundsInWindow)
-		
+
 		return anchorFrameInScreenCoordinates
 	}
+
+// TODO: replace bestRectRelativeToTargetFrame with this method.
+//	private func adjustCalloutRectToScreen(anchorScreenRect: NSRect) -> NSRect {
+//
+//		// Reposition the menu if it doesn't fit on screen (we don't resize yet)
+//		guard let screenFrame = window?.screen?.visibleFrame ?? NSScreen.main?.visibleFrame else {
+//			preconditionFailure("No Screen Available")
+//		}
+//
+//		var calloutFrame = proxyView.convert(proxyView.frame, to: nil)
+//
+//		if (!NSContainsRect(screenFrame, calloutFrame)) {
+//			// If we go off the right edge, we may need to flip to presenting leftward from the leftEdge of presentationRect
+//			if (NSMaxX(calloutFrame) > NSMaxX(screenFrame)) {
+//				let maxXEdgeSpace = NSMaxX(screenFrame) - NSMaxX(anchorScreenRect);
+//				let minXEdgeSpace = NSMinX(anchorScreenRect) - NSMinX(screenFrame);
+//				if (minXEdgeSpace > maxXEdgeSpace) {
+//					calloutFrame.origin.x = NSMinX(anchorScreenRect) - NSWidth(calloutFrame);
+//				}
+//			}
+//
+//			// If we go off the bottom of the screen, just slide up until we fit
+//			if (NSMinY(calloutFrame) < NSMinY(screenFrame)) {
+//				calloutFrame.origin.y = NSMinY(screenFrame);
+//			}
+//		}
+//
+//		return calloutFrame
+//	}
 
 	// Positions the Callout relative to the target frame, adjusting if we are on a screen edge
 	// I.E: If the Callout spills over the bottom edge of the screen, reposition it upwards so the bottom edge matches the screen bottom edge, and
 	// If the Callout spills over the right (trailing) edge of the screen, flip it so it somes off the leading edge of the anchor
 	private func bestRectRelativeToTargetFrame(targetRect:CGRect) -> CGRect {
-		
 		var maxCalloutHeight = 0
 		var maxCalloutWidth = 0
-		
+
 		let calloutFrame = proxyView.frame
 		maxCalloutHeight = max(maxCalloutHeight, NSInteger(calloutFrame.size.height))
 		maxCalloutWidth = max(maxCalloutWidth, NSInteger(calloutFrame.size.width))
@@ -207,11 +228,11 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 		return rect
 	}
-	
+
 	private func didShowCallout() {
 		onShow?([:])
 	}
-	
+
 	private func didDismissCallout() {
 		if let onDismiss = onDismiss {
 			guard let reactTag = reactTag else {
@@ -225,9 +246,9 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	// MARK: Private variables
 
 	private var anchorView: NSView?
-	
+
 	private var proxyView: RCTView = RCTView()
-	
+
 	private lazy var calloutWindow: CalloutWindow = {
 		let calloutWindowController = CalloutWindowRootViewController()
 		let window = CalloutWindow(contentViewController: calloutWindowController)
@@ -236,13 +257,13 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		window.level = .popUpMenu
 		window.setIsVisible(true)
 		window.backgroundColor = .windowBackgroundColor
-		
+
 		guard let touchHandler = RCTTouchHandler(bridge: bridge) else {
 			preconditionFailure("Callout could not create RCTTouchHandler")
 		}
 		touchHandler.attach(to: proxyView)
 		window.contentView = proxyView
-		
+
 		return window
 	}()
 }
