@@ -114,6 +114,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		proxyView.frame = proxyViewFrame
 	}
 	
+	/// Calculates the NSRect of the Anchor Rect in screen coordinates
 	private func calculateAnchorRectScreenRect() -> NSRect {
 		guard let window = window  else {
 			preconditionFailure("No window found")
@@ -134,7 +135,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		return anchorRectInScreenCoordinates
 	}
 
-	// Calculates the NSRect of the anchorView in the coordinate space of the current screen
+	/// Calculates the NSRect of the anchorView in the coordinate space of the current screen
 	private func calculateAnchorViewScreenRect() -> NSRect {
 		guard let anchorView = anchorView else {
 			preconditionFailure("No anchor view provided to position the Callout")
