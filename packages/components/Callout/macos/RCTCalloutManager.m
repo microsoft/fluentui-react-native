@@ -13,6 +13,24 @@
 	return NSMakeRect(x, y, width, height);
 }
 
+// Collapse the directional hint options to the 4 NSRectEdge options
+RCT_ENUM_CONVERTER(NSRectEdge, (@{
+	@"leftTopEdge": @(NSRectEdgeMinX),
+	@"leftCenter": @(NSRectEdgeMinX),
+	@"leftBottomEdge": @(NSRectEdgeMinX),
+	@"topLeftEdge": @(NSRectEdgeMaxY),
+	@"topAutoEdge": @(NSRectEdgeMaxY),
+	@"topCenter": @(NSRectEdgeMaxY),
+	@"topRightEdge": @(NSRectEdgeMaxY),
+	@"rightTopEdge": @(NSRectEdgeMaxX),
+	@"rightCenter": @(NSRectEdgeMaxX),
+	@"rightBottomEdge": @(NSRectEdgeMaxX),
+	@"bottonLeftEdge": @(NSRectEdgeMinY),
+	@"bottomAutoEdge": @(NSRectEdgeMinY),
+	@"bottomCenter": @(NSRectEdgeMinY),
+	@"bottomRightEdge": @(NSRectEdgeMinY),
+}), NSRectEdgeMaxY, integerValue);
+
 @end
 
 @interface RCT_EXTERN_MODULE(RCTCalloutManager, RCTViewManager)
@@ -20,6 +38,8 @@
 RCT_EXPORT_VIEW_PROPERTY(target, NSNumber)
 
 RCT_EXPORT_VIEW_PROPERTY(anchorRect, screenRect)
+
+RCT_EXPORT_VIEW_PROPERTY(directionalHint, NSRectEdge)
 
 RCT_EXPORT_VIEW_PROPERTY(onShow, RCTBubblingEventBlock)
 

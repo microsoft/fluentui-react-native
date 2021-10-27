@@ -20,7 +20,11 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 	}
 	
-	@objc public var directionalHint: NSRectEdge = .minY
+	@objc public var directionalHint: NSRectEdge = .maxY {
+		didSet {
+			updateCalloutFrameToAnchor()
+		}
+	}
 
 	@objc public var onShow: RCTBubblingEventBlock?
 
@@ -114,19 +118,28 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		guard let window = window  else {
 			preconditionFailure("No window found")
 		}
+		
+		guard let screenFrame = window.screen?.visibleFrame ?? NSScreen.main?.visibleFrame else {
+			preconditionFailure("No Screen Available")
+		}
 
+		// The anchor Rect is given in the coordinate space of the root view.
+		// Find the Root view to convert to screen coordinates
 		var rootView: NSView = self
 		while (!rootView.isReactRootView()) {
 			rootView = rootView.reactSuperview()
 		}
 		let rootViewBoundsInWindow = rootView.convert(rootView.bounds, to: nil)
 		let rootViewRectInScreenCoordinates = window.convertToScreen(rootViewBoundsInWindow)
-		let anchorRectInScreenCoordinates = NSMakeRect(
-			rootViewRectInScreenCoordinates.origin.x + self.anchorRect.origin.x,
-			rootViewRectInScreenCoordinates.origin.y + self.anchorRect.origin.y,
-			self.anchorRect.size.width,
-			self.anchorRect.size.height
+		
+		// macOS uses a flipped Y coordinate (I.E: (0,0) is on the bottom left of the screen), however
+		// React Native assumes a standard Y coordinate. Let's flip the Y coordinate of our rect
+		let anchorScreenRectOrigin = NSPoint(
+			x: rootViewRectInScreenCoordinates.origin.x + self.anchorRect.origin.x,
+			y: screenFrame.height - (rootViewRectInScreenCoordinates.origin.y + self.anchorRect.origin.y)
 		)
+		let anchorRectInScreenCoordinates = NSRect(origin: anchorScreenRectOrigin, size: anchorRect.size)
+		
 		return anchorRectInScreenCoordinates
 	}
 
@@ -155,6 +168,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 		let calloutFrame = proxyView.frame
 		
+		// Find our preferred origin based on the directional hint
 		let calloutOrigin: NSPoint = {
 			var origin = NSPoint()
 
@@ -188,7 +202,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		
 		var calloutScreenRect = NSRect(origin: calloutOrigin, size: calloutFrame.size)
 		
-		// Reposition the menu if it doesn't fit on screen
+		// Reposition the callout if it doesn't fit on screen
 		if (!NSContainsRect(screenFrame, calloutScreenRect)) {
 			switch(directionalHint) {
 			case .minX:
