@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Mon, 25 Oct 2021 19:24:43 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.12.22",
+      "version": "0.12.22",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.13.8",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f6578742d6c957cf7e346db82f89171f80bedc3b",
+            "package": "@uifabricshared/theming-react-native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 Oct 2021 03:46:25 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.12.21",
       "version": "0.12.21",

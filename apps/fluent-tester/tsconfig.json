@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "importHelpers": true,
     "outDir": "lib",
     "paths": {
       "*": ["*", "*.win32", "./*"],
