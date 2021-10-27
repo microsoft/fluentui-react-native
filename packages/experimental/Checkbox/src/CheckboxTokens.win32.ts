@@ -6,11 +6,11 @@ export const checkboxStates: (keyof CheckboxTokens)[] = ['boxAtEnd', 'hovered', 
 
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
-    checkboxBorderColor: t.colors.menuItemText,
-    color: t.colors.menuItemText,
-    checkboxBackgroundColor: t.colors.menuBackground,
+    checkboxBorderColor: t.colors.neutralStrokeAccessible,
+    color: t.colors.neutralForeground1,
+    checkboxBackgroundColor: t.colors.neutralBackground1,
     textBorderColor: 'transparent',
-    checkmarkColor: t.colors.menuItemTextHovered,
+    checkmarkColor: t.colors.neutralForeground4,
     variant: 'bodyStandard',
     checkmarkOpacity: 0,
     checkboxMarginStart: 0,
@@ -19,23 +19,38 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     borderWidth: 1,
     borderRadius: 2,
     disabled: {
-      checkboxBorderColor: t.colors.buttonBorderDisabled,
-      color: t.colors.disabledBodyText,
-      checkboxBackgroundColor: t.colors.background,
+      checkboxBorderColor: t.colors.neutralStrokeDisabled,
+      color: t.colors.neutralForegroundDisabled,
+      checkboxBackgroundColor: t.colors.neutralBackgroundDisabled,
       checkmarkColor: t.colors.neutralForegroundDisabled,
     },
     hovered: {
-      checkboxBackgroundColor: t.colors.menuItemBackgroundHovered,
+      checkboxBackgroundColor: t.colors.neutralBackground1,
+      checkboxBorderColor: t.colors.neutralStrokeAccessibleHover,
+      checkmarkOpacity: 1,
+      checked: {
+        checkboxBackgroundColor: t.colors.brandBackgroundHover,
+        checkboxBorderColor: t.colors.brandBackgroundHover,
+      },
     },
     focused: {
-      checkboxBackgroundColor: t.colors.menuItemBackgroundHovered,
-      textBorderColor: t.colors.focusBorder,
+      textBorderColor: t.colors.strokeFocus2,
     },
     pressed: {
-      checkboxBackgroundColor: t.colors.menuItemBackgroundPressed,
+      checkboxBackgroundColor: t.colors.neutralBackground1,
+      checkboxBorderColor: t.colors.neutralStrokeAccessiblePressed,
+      checkmarkColor: t.colors.neutralForeground1,
+      checked: {
+        checkboxBackgroundColor: t.colors.brandBackgroundPressed,
+        checkboxBorderColor: t.colors.brandBackgroundPressed,
+      },
     },
     checked: {
+      checkboxBackgroundColor: t.colors.brandBackground,
+      checkboxBorderColor: t.colors.brandBackground,
       checkmarkOpacity: 1,
+      checkmarkColor: t.colors.neutralForegroundOnBrand,
+      borderRadius: 4,
     },
     boxAtEnd: {
       checkboxMarginStart: 4,
