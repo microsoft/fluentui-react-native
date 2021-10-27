@@ -3,7 +3,8 @@
 @implementation RCTConvert (RCTCalloutAdditions)
 
 // RCTConvert does not properly convert a JS screenRect into a native CGRect/NSRect,
-// due to the mismatch of x/y and screenX/screenY. Let's do it manually
+// due to the mismatch of x/y and screenX/screenY. Let's do it manually.
+// Note this does not take into account that macOS uses a flipped Y axis.
 + (NSRect)screenRect:(id)json
 {
 	CGFloat x = [RCTConvert CGFloat:json[@"screenX"]];
