@@ -253,7 +253,8 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		let calloutWindowController = CalloutWindowRootViewController()
 		let window = CalloutWindow(contentViewController: calloutWindowController)
 		window.windowLifeCycleDelegate = self
-		window.styleMask = .borderless
+		window.isReleasedWhenClosed = true
+		window.styleMask = [.fullSizeContentView]
 		window.level = .popUpMenu
 		window.setIsVisible(true)
 		window.backgroundColor = .windowBackgroundColor
