@@ -19,6 +19,8 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			updateCalloutFrameToAnchor()
 		}
 	}
+	
+	@objc public var directionalHint: NSRectEdge = .minY
 
 	@objc public var onShow: RCTBubblingEventBlock?
 
@@ -101,8 +103,8 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 		// Prefer anchorRect over anchorView if available
 		let anchorScreenRect = anchorRect.equalTo(.null) ? calculateAnchorViewScreenRect() : calculateAnchorRectScreenRect()
-		let calloutScreenRect = bestRectRelativeToTargetFrame(targetRect: anchorScreenRect)
-//		let calloutScreenRect = adjustCalloutRectToScreen(anchorScreenRect: anchorScreenRect)
+//		let calloutScreenRect = bestRectRelativeToTargetFrame(targetRect: anchorScreenRect)
+		let calloutScreenRect = bestCalloutRect(relativeTo: anchorScreenRect)
 
 		calloutWindow.setFrame(calloutScreenRect, display: false)
 	}
@@ -144,63 +146,143 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		return anchorFrameInScreenCoordinates
 	}
 
-// TODO: replace bestRectRelativeToTargetFrame with this method.
-//	private func adjustCalloutRectToScreen(anchorScreenRect: NSRect) -> NSRect {
-//
-//		// Reposition the menu if it doesn't fit on screen (we don't resize yet)
-//		guard let screenFrame = window?.screen?.visibleFrame ?? NSScreen.main?.visibleFrame else {
-//			preconditionFailure("No Screen Available")
-//		}
-//
-//		var calloutFrame = proxyView.convert(proxyView.frame, to: nil)
-//
-//		if (!NSContainsRect(screenFrame, calloutFrame)) {
-//			// If we go off the right edge, we may need to flip to presenting leftward from the leftEdge of presentationRect
-//			if (NSMaxX(calloutFrame) > NSMaxX(screenFrame)) {
-//				let maxXEdgeSpace = NSMaxX(screenFrame) - NSMaxX(anchorScreenRect);
-//				let minXEdgeSpace = NSMinX(anchorScreenRect) - NSMinX(screenFrame);
-//				if (minXEdgeSpace > maxXEdgeSpace) {
-//					calloutFrame.origin.x = NSMinX(anchorScreenRect) - NSWidth(calloutFrame);
-//				}
-//			}
-//
-//			// If we go off the bottom of the screen, just slide up until we fit
-//			if (NSMinY(calloutFrame) < NSMinY(screenFrame)) {
-//				calloutFrame.origin.y = NSMinY(screenFrame);
-//			}
-//		}
-//
-//		return calloutFrame
-//	}
-
-	// Positions the Callout relative to the target frame, adjusting if we are on a screen edge
-	// I.E: If the Callout spills over the bottom edge of the screen, reposition it upwards so the bottom edge matches the screen bottom edge, and
-	// If the Callout spills over the right (trailing) edge of the screen, flip it so it somes off the leading edge of the anchor
-	private func bestRectRelativeToTargetFrame(targetRect:CGRect) -> CGRect {
-		var maxCalloutHeight = 0
-		var maxCalloutWidth = 0
-
-		let calloutFrame = proxyView.frame
-		maxCalloutHeight = max(maxCalloutHeight, NSInteger(calloutFrame.size.height))
-		maxCalloutWidth = max(maxCalloutWidth, NSInteger(calloutFrame.size.width))
-		let maxHeight = CGFloat(maxCalloutHeight)
-		let maxWidth = CGFloat(maxCalloutWidth)
+	// TODO: replace bestRectRelativeToTargetFrame with this method.
+	private func bestCalloutRect(relativeTo anchorScreenRect: NSRect) -> NSRect {
 
 		guard let screenFrame = window?.screen?.visibleFrame ?? NSScreen.main?.visibleFrame else {
 			preconditionFailure("No Screen Available")
 		}
 
-		var rect = CGRect(origin: CGPoint(x: targetRect.origin.x, y: targetRect.origin.y), size: CGSize(width: maxWidth, height: maxHeight))
+		let calloutFrame = proxyView.frame
+		
+		let calloutOrigin: NSPoint = {
+			var origin = NSPoint()
+
+			switch(directionalHint) {
+			case .minX:
+				origin.x = NSMinX(anchorScreenRect) - calloutFrame.size.width
+				origin.y = NSMaxY(anchorScreenRect) - calloutFrame.size.height
+				break
+			case .minY:
+				// TODO is this right?
+				origin.x = NSMinX(anchorScreenRect)
+				origin.y = NSMaxY(anchorScreenRect)
+			case .maxX:
+				origin.x = NSMaxX(anchorScreenRect)
+				origin.y = NSMaxY(anchorScreenRect) - calloutFrame.size.height
+				break
+			case .maxY:
+				// When in RTL mode, align the right edges of the menu and flyout anchor
+				if (NSApp.userInterfaceLayoutDirection == .rightToLeft) {
+					origin.x = NSMaxX(anchorScreenRect) - calloutFrame.size.width
+				} else {
+					origin.x = NSMinX(anchorScreenRect);
+				}
+				origin.y = NSMinY(anchorScreenRect) - calloutFrame.size.height
+				break
+			@unknown default:
+				preconditionFailure("Unknown directional hint")
+			}
+			return origin
+		}()
+		
+		var calloutScreenRect = NSRect(origin: calloutOrigin, size: calloutFrame.size)
+		
+		// Reposition the menu if it doesn't fit on screen
+		if (!NSContainsRect(screenFrame, calloutScreenRect)) {
+			switch(directionalHint) {
+			case .minX:
+				// If we go off the left edge, we may need to flip to presenting rightward from the rightEdge of anchorScreenRect
+				if (NSMinX(calloutScreenRect) < NSMinX(screenFrame)) {
+					let maxXEdgeSpace = NSMaxX(screenFrame) - NSMaxX(anchorScreenRect)
+					let minXEdgeSpace = NSMinX(anchorScreenRect) - NSMinX(screenFrame)
+					if (maxXEdgeSpace > minXEdgeSpace) {
+						calloutScreenRect.origin.x = NSMaxX(anchorScreenRect);
+					}
+				}
+				// If we go off the bottom of the screen, just slide up until we fit
+				if (NSMinY(calloutScreenRect) < NSMinY(screenFrame)) {
+					calloutScreenRect.origin.y = NSMinY(screenFrame)
+				}
+				break
+			case .minY:
+				// If we go off the top of the screen, check if there's more room on screen below the anchorScreenRect.
+				if (NSMaxY(calloutScreenRect) > NSMaxY(screenFrame)) {
+					let maxYEdgeSpace = NSMaxY(screenFrame) - NSMaxY(anchorScreenRect)
+					let minYEdgeSpace = NSMinY(anchorScreenRect) - NSMinY(screenFrame)
+					
+					// Flip to presenting below anchorScreenRect
+					if (minYEdgeSpace > maxYEdgeSpace) {
+						calloutScreenRect.origin.y = NSMinY(anchorScreenRect) - NSHeight(calloutScreenRect)
+					}
+				}
+				// If we go off the right edge, just slide to the left until we fit
+				if (NSMaxX(calloutScreenRect) > NSMaxX(screenFrame)) {
+					calloutScreenRect.origin.x = NSMaxY(screenFrame) - NSWidth(calloutScreenRect)
+				}
+			case .maxX:
+				// If we go off the right edge, we may need to flip to presenting leftward from the leftEdge of anchorScreenRect
+				if (NSMaxX(calloutScreenRect) > NSMaxX(screenFrame)) {
+					let maxXEdgeSpace = NSMaxX(screenFrame) - NSMaxX(anchorScreenRect)
+					let minXEdgeSpace = NSMinX(anchorScreenRect) - NSMinX(screenFrame)
+					if (minXEdgeSpace > maxXEdgeSpace) {
+						calloutScreenRect.origin.x = NSMinX(anchorScreenRect) - NSWidth(calloutScreenRect)
+					}
+				}
+				// If we go off the bottom of the screen, just slide up until we fit
+				if (NSMinY(calloutScreenRect) < NSMinY(screenFrame)) {
+					calloutScreenRect.origin.y = NSMinY(screenFrame);
+				}
+				break
+			case .maxY:
+				// If we go off the bottom of the screen, check if there's more room on screen above the anchorScreenRect.
+				if (NSMinY(calloutScreenRect) < NSMinY(screenFrame)) {
+					let maxYEdgeSpace = NSMaxY(screenFrame) - NSMaxY(anchorScreenRect)
+					let minYEdgeSpace = NSMinY(anchorScreenRect) - NSMinY(screenFrame)
+					
+					// Flip to presenting above anchorScreenRect
+					if (minYEdgeSpace > maxYEdgeSpace) {
+						calloutScreenRect.origin.y = NSMaxY(anchorScreenRect)
+					}
+				}
+				// If we go off the right edge, just slide to the left until we fit
+				if (NSMaxX(calloutScreenRect) > NSMaxX(screenFrame)) {
+					calloutScreenRect.origin.x = NSMaxY(screenFrame) - NSWidth(calloutScreenRect)
+				}
+			@unknown default:
+				preconditionFailure("Unknown directional hint")
+			}
+		}
+		return calloutScreenRect
+	}
+
+	// Positions the Callout relative to the target frame, adjusting if we are on a screen edge
+	// I.E: If the Callout spills over the bottom edge of the screen, reposition it upwards so the bottom edge matches the screen bottom edge, and
+	// If the Callout spills over the right (trailing) edge of the screen, flip it so it somes off the leading edge of the anchor
+	private func bestRectRelativeToTargetFrame(targetRect:CGRect) -> CGRect {
+		let calloutFrame = proxyView.frame
+
+		guard let screenFrame = window?.screen?.visibleFrame ?? NSScreen.main?.visibleFrame else {
+			preconditionFailure("No Screen Available")
+		}
+
+		// Assume we are showing the callout below the target rect
+		var rect = NSMakeRect(
+			targetRect.origin.x,
+			targetRect.origin.y,
+			calloutFrame.size.width,
+			calloutFrame.size.height
+		)
 
 		// 1. If space below, callout is below
-		if (rect.origin.y + maxHeight + targetRect.size.height < screenFrame.size.height) {
-			rect.origin.y -= maxHeight
+		if (rect.origin.y + calloutFrame.size.height + targetRect.size.height < screenFrame.size.height) {
+			rect.origin.y -= calloutFrame.size.height
 			// TODO RCTAssert not available for some reason
 			precondition(rect.origin.y >= 0, "Callout currently extends off the lower end of the screen.")
 		}
 		// 2. Else if space above, callout is above
-		else if (rect.origin.y > maxHeight) {
-			rect.origin.y -= maxHeight;
+		else if (rect.origin.y > calloutFrame.size.height) {
+			rect.origin.y -= calloutFrame.size.height;
 		}
 		// 3. Else callout is resized to fit wherever there is more space
 		else {
