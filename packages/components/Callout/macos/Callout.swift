@@ -32,8 +32,6 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	public weak var bridge: RCTBridge?
 
-	// MARK: Initialization
-
 	private init() {
 		super.init(frame: .zero)
 	}
@@ -48,15 +46,29 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	}
 
 	override func viewDidMoveToWindow() {
-		guard window != nil else {
-			return
+		super.viewDidMoveToWindow()
+		if (window != nil) {
+			showCallout()
+		} else {
+			dismissCallout()
 		}
-		showCallout()
 	}
+	
 
 	// MARK: RCTComponent Overrides
 
 	override func insertReactSubview(_ subview: NSView!, at atIndex: Int) {
+		/*
+		  If we attach a touch handler to the proxy view directly, the touch coordinates
+		  are incorrect and the wrong subview recieves the touch event, most likely
+		  because macOS screen coordinates have a flipped Y axis. The workaround is to
+		  attach a separate touch handler to each subview
+		 */
+		guard let touchHandler = RCTTouchHandler(bridge: bridge) else {
+			preconditionFailure("Callout could not create RCTTouchHandler")
+		}
+		touchHandler.attach(to: subview as? RCTUIView)
+		
 		proxyView.insertReactSubview(subview, at: atIndex)
 	}
 
@@ -82,16 +94,9 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	// MARK: Private methods
 
 	private func showCallout() {
-		// Create Window and put proxy view inside it
-		// Convert Anchor view frame to screen rect
-		// Reposition the rect as needed to accomodate for edges
-		// show window
-		// call onShow()
-
 		updateCalloutFrameToAnchor()
 		calloutWindow.display()
 		didShowCallout()
-
 	}
 
 	private func dismissCallout() {
@@ -107,7 +112,6 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 		// Prefer anchorRect over anchorView if available
 		let anchorScreenRect = anchorRect.equalTo(.null) ? calculateAnchorViewScreenRect() : calculateAnchorRectScreenRect()
-//		let calloutScreenRect = bestRectRelativeToTargetFrame(targetRect: anchorScreenRect)
 		let calloutScreenRect = bestCalloutRect(relativeTo: anchorScreenRect)
 
 		calloutWindow.setFrame(calloutScreenRect, display: false)
@@ -120,11 +124,11 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 		
 		guard let screenFrame = window.screen?.visibleFrame ?? NSScreen.main?.visibleFrame else {
-			preconditionFailure("No Screen Available")
+			preconditionFailure("No screen Available")
 		}
 
 		// The anchor Rect is given in the coordinate space of the root view.
-		// Find the Root view to convert to screen coordinates
+		// Find the root view to convert to screen coordinates
 		var rootView: NSView = self
 		while (!rootView.isReactRootView()) {
 			rootView = rootView.reactSuperview()
@@ -132,8 +136,8 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		let rootViewBoundsInWindow = rootView.convert(rootView.bounds, to: nil)
 		let rootViewRectInScreenCoordinates = window.convertToScreen(rootViewBoundsInWindow)
 		
-		// macOS uses a flipped Y coordinate (I.E: (0,0) is on the bottom left of the screen), however
-		// React Native assumes a standard Y coordinate. Let's flip the Y coordinate of our rect
+		// macOS uses a flipped Y coordinate (I.E: (0,0) is on the bottom left of the screen). However,
+		// React Native assumes a standard Y coordinate. Let's flip the Y coordinate of our rect to match
 		let anchorScreenRectOrigin = NSPoint(
 			x: rootViewRectInScreenCoordinates.origin.x + self.anchorRect.origin.x,
 			y: screenFrame.height - (rootViewRectInScreenCoordinates.origin.y + self.anchorRect.origin.y)
@@ -159,7 +163,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		return anchorFrameInScreenCoordinates
 	}
 
-	// TODO: replace bestRectRelativeToTargetFrame with this method.
+	/// Calculates the rect in screen coordinates the callout should be positioned in relative to the anchor rect, adjusting if we are close to a screen edge
 	private func bestCalloutRect(relativeTo anchorScreenRect: NSRect) -> NSRect {
 
 		guard let screenFrame = window?.screen?.visibleFrame ?? NSScreen.main?.visibleFrame else {
@@ -270,61 +274,6 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		return calloutScreenRect
 	}
 
-	// Positions the Callout relative to the target frame, adjusting if we are on a screen edge
-	// I.E: If the Callout spills over the bottom edge of the screen, reposition it upwards so the bottom edge matches the screen bottom edge, and
-	// If the Callout spills over the right (trailing) edge of the screen, flip it so it somes off the leading edge of the anchor
-	private func bestRectRelativeToTargetFrame(targetRect:CGRect) -> CGRect {
-		let calloutFrame = proxyView.frame
-
-		guard let screenFrame = window?.screen?.visibleFrame ?? NSScreen.main?.visibleFrame else {
-			preconditionFailure("No Screen Available")
-		}
-
-		// Assume we are showing the callout below the target rect
-		var rect = NSMakeRect(
-			targetRect.origin.x,
-			targetRect.origin.y,
-			calloutFrame.size.width,
-			calloutFrame.size.height
-		)
-
-		// 1. If space below, callout is below
-		if (rect.origin.y + calloutFrame.size.height + targetRect.size.height < screenFrame.size.height) {
-			rect.origin.y -= calloutFrame.size.height
-			// TODO RCTAssert not available for some reason
-			precondition(rect.origin.y >= 0, "Callout currently extends off the lower end of the screen.")
-		}
-		// 2. Else if space above, callout is above
-		else if (rect.origin.y > calloutFrame.size.height) {
-			rect.origin.y -= calloutFrame.size.height;
-		}
-		// 3. Else callout is resized to fit wherever there is more space
-		else {
-			let menuBarHeight = NSApplication.shared.mainMenu?.menuBarHeight ?? 0
-			let heightAboveTarget = screenFrame.size.height - targetRect.origin.y - targetRect.size.height - menuBarHeight
-			let heightBelowTarget = targetRect.origin.y
-			if (heightAboveTarget > heightBelowTarget) {
-				// Take up as much space as available above
-				rect.origin.y += targetRect.size.height;
-				rect.size.height = rect.origin.y - menuBarHeight;
-			} else {
-				// Take up as much space as available below
-				rect.size.height = rect.origin.y;
-				rect.origin.y = NSStatusBar.system.thickness
-			}
-		}
-
-		// HORIZONTAL ALIGNMENT
-		if (rect.origin.x < 0) {
-			rect.origin.x = 0;
-		}
-		if (rect.origin.x + rect.size.width >= screenFrame.size.width) {
-			rect.origin.x -= (rect.origin.x + rect.size.width - screenFrame.size.width);
-		}
-
-		return rect
-	}
-
 	private func didShowCallout() {
 		onShow?([:])
 	}
@@ -354,11 +303,6 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		window.level = .popUpMenu
 		window.setIsVisible(true)
 		window.backgroundColor = .windowBackgroundColor
-
-		guard let touchHandler = RCTTouchHandler(bridge: bridge) else {
-			preconditionFailure("Callout could not create RCTTouchHandler")
-		}
-		touchHandler.attach(to: proxyView)
 		window.contentView = proxyView
 
 		return window
