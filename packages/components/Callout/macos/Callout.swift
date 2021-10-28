@@ -259,13 +259,13 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 					let minYEdgeSpace = NSMinY(anchorScreenRect) - NSMinY(screenFrame)
 					
 					// Flip to presenting above anchorScreenRect
-					if (minYEdgeSpace > maxYEdgeSpace) {
+					if (maxYEdgeSpace > minYEdgeSpace) {
 						calloutScreenRect.origin.y = NSMaxY(anchorScreenRect)
 					}
 				}
 				// If we go off the right edge, just slide to the left until we fit
 				if (NSMaxX(calloutScreenRect) > NSMaxX(screenFrame)) {
-					calloutScreenRect.origin.x = NSMaxY(screenFrame) - NSWidth(calloutScreenRect)
+					calloutScreenRect.origin.x = NSMaxX(screenFrame) - NSWidth(calloutScreenRect)
 				}
 			@unknown default:
 				preconditionFailure("Unknown directional hint")
