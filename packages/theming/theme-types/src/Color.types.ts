@@ -483,6 +483,9 @@ export interface AliasColorTokens {
 
   neutralForegroundInverted: ColorValue;
   neutralForegroundOnBrand: ColorValue;
+  neutralForegroundOnBrandHover: ColorValue;
+  neutralForegroundOnBrandPressed: ColorValue;
+  neutralForegroundOnBrandSelected: ColorValue;
   neutralForegroundInvertedLink: ColorValue;
   neutralForegroundInvertedLinkHover: ColorValue;
   neutralForegroundInvertedLinkPressed: ColorValue;

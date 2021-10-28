@@ -35,6 +35,9 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
 
     neutralForegroundInverted: pipelineOutput.neutralForegroundInverted.fillColorRest,
     neutralForegroundOnBrand: pipelineOutput.neutralForegroundOnBrand.fillColorRest,
+    neutralForegroundOnBrandHover: pipelineOutput.neutralForegroundOnBrand.fillColorHover,
+    neutralForegroundOnBrandPressed: pipelineOutput.neutralForegroundOnBrand.fillColorPressed,
+    neutralForegroundOnBrandSelected: pipelineOutput.neutralForegroundOnBrand.fillColorSelected,
     neutralForegroundInvertedLink: pipelineOutput.neutralForegroundInvertedLink.fillColorRest,
     neutralForegroundInvertedLinkHover: pipelineOutput.neutralForegroundInvertedLink.fillColorHover,
     neutralForegroundInvertedLinkPressed: pipelineOutput.neutralForegroundInvertedLink.fillColorPressed,
