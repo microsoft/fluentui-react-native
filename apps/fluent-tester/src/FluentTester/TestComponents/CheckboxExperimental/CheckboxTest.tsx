@@ -3,11 +3,12 @@ import { ExperimentalCheckboxTestPageId } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { useTheme } from '@fluentui-react-native/theme-types';
-import { View, TextInput, TextStyle } from 'react-native';
+import { View, TextInput, TextStyle, Platform } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
-function onChangeUncontrolled(isChecked: boolean) {
-  console.log(isChecked);
+function onChangeUncontrolled(isChecked: any) {
+  const platIsChecked = Platform.OS === 'macos' ? isChecked.nativeEvent.isChecked : isChecked;
+  console.log(platIsChecked);
 }
 
 const basicCheckbox: React.FunctionComponent = () => {
@@ -41,12 +42,12 @@ const otherCheckbox: React.FunctionComponent = () => {
 
   return (
     <View>
-      <Checkbox label="This is a controlled Checkbox" onChange={onChangeControlled1} checked={isCheckedControlled1} />
+      <Checkbox label="This is a controlled Checkbox" onChange={onChangeControlled1} checked={isCheckedControlled1 === true} />
       <Checkbox
         label="Checkbox rendered with boxSide 'end' (controlled)"
         onChange={onChangeControlled2}
         boxSide="end"
-        checked={isCheckedControlled2}
+        checked={isCheckedControlled2 === true}
       />
     </View>
   );

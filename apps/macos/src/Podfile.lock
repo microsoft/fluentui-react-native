@@ -4,18 +4,20 @@ PODS:
   - FBLazyVector (0.63.41)
   - FBReactNativeSpec (0.63.41):
     - RCT-Folly (= 2020.01.13.00)
-    - RCTRequired (= 0.63.41)
-    - RCTTypeSafety (= 0.63.41)
-    - React-Core (= 0.63.41)
-    - React-jsi (= 0.63.41)
-    - ReactCommon/turbomodule/core (= 0.63.41)
-  - FRNAvatar (0.12.13):
+    - RCTRequired (= 0.63.37)
+    - RCTTypeSafety (= 0.63.37)
+    - React-Core (= 0.63.37)
+    - React-jsi (= 0.63.37)
+    - ReactCommon/turbomodule/core (= 0.63.37)
+  - FRNAvatar (0.12.11):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
-  - FRNMenuButton (0.6.12):
+  - FRNCheckbox (0.2.3):
     - React
-  - FRNRadioButton (0.13.13):
+  - FRNMenuButton (0.6.10):
+    - React
+  - FRNRadioButton (0.13.11):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.3.0):
@@ -333,6 +335,7 @@ DEPENDENCIES:
   - FBLazyVector (from `../../../node_modules/react-native-macos/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec`)
   - FRNAvatar (from `../../../packages/experimental/Avatar/FRNAvatar.podspec`)
+  - FRNCheckbox (from `../../../packages/experimental/Checkbox/FRNCheckbox.podspec`)
   - FRNMenuButton (from `../../../packages/components/MenuButton/FRNMenuButton.podspec`)
   - FRNRadioButton (from `../../../packages/components/RadioGroup/FRNRadioButton.podspec`)
   - glog (from `../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
@@ -383,6 +386,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec"
   FRNAvatar:
     :path: "../../../packages/experimental/Avatar/FRNAvatar.podspec"
+  FRNCheckbox:
+    :path: "../../../packages/experimental/Checkbox/FRNCheckbox.podspec"
   FRNMenuButton:
     :path: "../../../packages/components/MenuButton/FRNMenuButton.podspec"
   FRNRadioButton:
@@ -447,35 +452,36 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost-for-react-native: dabda8622e76020607c2ae1e65cc0cda8b61479d
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
-  FBLazyVector: 9dde2e0340ba783233dba7c6b77e65889047fbb3
-  FBReactNativeSpec: 6088d5ab01851853cc3fc5384d3f5edf7c898e54
-  FRNAvatar: 5cc3ae1c20c21e52716bbc1988a0a911c1eb786a
-  FRNMenuButton: 150b19d51e0907f22367c08cf404b432ce077460
-  FRNRadioButton: 32eb776d4c82243caf49647821817c82b3993139
+  FBLazyVector: 9d69690b3a1ca272ca0c0cee76ffcb6cf36d77af
+  FBReactNativeSpec: 8b671febd2393669947b56e8d8f53a54185dd0b7
+  FRNAvatar: e4941d3152af687d194de5b6ea157234a5e33d8a
+  FRNCheckbox: 148699a1b4fb2e1ef19bfcd21b62433cdf4c31ec
+  FRNMenuButton: 7ce4772362c9096a8212232450e4b5e0392556fd
+  FRNRadioButton: 84b1c8405974f0617b3077b471c31a1915494f8c
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
-  RCTFocusZone: f80572941b6d5a3f43c6d404b29bb8503d9ecaaa
-  RCTRequired: 64eedb6cf5f0ae7d4c3925e0b9a87747d0391735
-  RCTTypeSafety: a8ce68a3ce4aa22cd6a9cbf09607ad2b016b51d5
-  React: a8f98b76204f8a85b22311e8fe145b7bbe5b80e5
-  React-callinvoker: 523751195c41602db85fa2889e44a6afae271e3a
-  React-Core: b0b37e0216951b0706bdcec7b7fb9400d8167433
-  React-CoreModules: 3e81ecb9ea29b3a4eba630fad23d42747bb28c4c
-  React-cxxreact: 745b1fb1cfc8133c5ab52177172128fba3bc7411
-  React-jsi: 5d60daef9bfdfb1f2b7d69281643a113c99844d3
-  React-jsiexecutor: 235cf6a0975b88e7c3c56f1862e5ec3512993e47
-  React-jsinspector: d067ff9e6a75ffc7472ca71007ba47cdfcc8cc1c
-  React-RCTActionSheet: 5d6d53371715660224937186559d0d3019b79621
-  React-RCTAnimation: eb2094b698230b3750722074419baebfb40dba06
-  React-RCTBlob: 03d37739783ed896197505ad6268efcb3ffe4643
-  React-RCTImage: 0fe6e8aa7b8d986b464d176da8998ea2ddd91690
-  React-RCTLinking: f07a3e0e6c0be023c0bb9eac06825a06cc7485f3
-  React-RCTNetwork: 8f1d5d7bf12d75fd5505c3beb0f868a77843f148
-  React-RCTSettings: cfb0fea9d8d9397290c8b32c980e753a0f2312a3
-  React-RCTText: e6457242755b1dd6fa444264361db8a9a8d0a56a
-  React-RCTVibration: d7cbf797347b9505acc4573a7308292755655050
-  ReactCommon: 6d21cc720730a31a9b63a67f751d991e56def287
+  RCTFocusZone: 58fb73df3752f35a0f1f7d9a9a4a0d7cb542686c
+  RCTRequired: 34869e88152b553afc0c7bde31b7b95f626ae367
+  RCTTypeSafety: a7e07dddefa291537fa86c996b19bbbeda9db88e
+  React: 4b1d4533300d5ffecadd5966efad43aae87d0dcb
+  React-callinvoker: f6cc4222b47cfbea310047e92fec23d454029595
+  React-Core: bf15e114c68922342fa1c77a7582458086931f50
+  React-CoreModules: 00bbdffe53f364828dcf56c0c8ed58502a67757a
+  React-cxxreact: a6ae61aee087fb51956642ec9e45f0f5cc50e488
+  React-jsi: 95337001f7c137cb7aa17b39a05b654b54ddcccb
+  React-jsiexecutor: 6dcf6fb045190e13ab29d5a3eed010aaecd934be
+  React-jsinspector: df2c5f97e26ffc68bea06c4aae11e4ce09e53e3e
+  React-RCTActionSheet: faf3d96046a0fa2b40c3c1bd0c36be860b42f2a1
+  React-RCTAnimation: 7e62b31253f45c752f7593cff24a8845557b4d13
+  React-RCTBlob: 8a1c648f7887d850972233f742589e67d52357bb
+  React-RCTImage: d40614e39fc3186a0b406ceb13fd1903880dec96
+  React-RCTLinking: a0906eb0f0169f881a0637cbb9999fb4881ee200
+  React-RCTNetwork: b1baf2d42aa5dc7157c57c7cc7ca548b9eeadaee
+  React-RCTSettings: a21555584a097f61277b9ed97c00091da9beaa61
+  React-RCTText: 2f9504b1157ccce317774eb3ca935a923ddc95d7
+  React-RCTVibration: db89493e2520ad419eeb59e40059e246d9e71607
+  ReactCommon: 014dd1ff02eab367fa6676b7b408d1a08893a98d
   ReactTestApp-DevSupport: 84ab1181efc86b93291e97746b58de70016c5340
   ReactTestApp-Resources: 5950ae44720217c6778ff03fb1d906c8fb3ce483
   RNCPicker: 0991c56da7815c0cf946d6f63cf920b25296e5f6
@@ -483,6 +489,6 @@ SPEC CHECKSUMS:
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Yoga: 6a194db2cebcae86e56caf702b8c659f5c0da133
 
-PODFILE CHECKSUM: 46f3269bae3054aad680d2884e21a267ff647aa4
+PODFILE CHECKSUM: b54fe60c3ce918d2e858b86629d2094398e73914
 
 COCOAPODS: 1.11.2
