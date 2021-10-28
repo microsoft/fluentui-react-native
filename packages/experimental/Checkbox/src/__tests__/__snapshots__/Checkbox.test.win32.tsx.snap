@@ -69,6 +69,7 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
       Object {
         "backgroundColor": "#ffffff",
         "borderColor": "#f3f2f1",
+        "borderRadius": 2,
         "borderStyle": "solid",
         "borderWidth": 1,
         "marginEnd": 0,
@@ -151,6 +152,7 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
       Object {
         "backgroundColor": "blue",
         "borderColor": "red",
+        "borderRadius": 2,
         "borderStyle": "solid",
         "borderWidth": 1,
         "marginEnd": 10,
@@ -250,6 +252,7 @@ exports[`Checkbox component tests Checkbox default 1`] = `
       Object {
         "backgroundColor": "#ffffff",
         "borderColor": "#323130",
+        "borderRadius": 2,
         "borderStyle": "solid",
         "borderWidth": 1,
         "marginEnd": 4,
