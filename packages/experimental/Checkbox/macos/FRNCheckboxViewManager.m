@@ -15,6 +15,5 @@ RCT_CUSTOM_VIEW_PROPERTY(checked, BOOL, NSButton) {
 	}
 }
 RCT_REMAP_VIEW_PROPERTY(onChange, onPress, RCTBubblingEventBlock);
-RCT_CUSTOM_VIEW_PROPERTY(tooltip, NSString, NSButton) {
-  [view setToolTip:[RCTConvert NSString:json]];
-}@end
+RCT_REMAP_VIEW_PROPERTY(tooltip, toolTip, NSString)
+@end
