@@ -7,7 +7,10 @@
     "NeutralForeground1": {
       "Fill": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.HC.CanvasText" }
+          "Rest": { "aliasOf": "Global.Color.HC.CanvasText" },
+          "Hover": { "aliasOf": "Global.Color.HC.HighlightText" },
+          "Pressed": { "aliasOf": "Global.Color.HC.HighlightText" },
+          "Selected": { "aliasOf": "Global.Color.HC.HighlightText" }
         }
       }
     },

@@ -7,7 +7,10 @@
     "NeutralForeground1": {
       "Fill": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.White" }
+          "Rest": { "aliasOf": "Global.Color.White" },
+          "Hover": { "aliasOf": "Global.Color.White" },
+          "Pressed": { "aliasOf": "Global.Color.White" },
+          "Selected": { "aliasOf": "Global.Color.White" }
         }
       }
     },
