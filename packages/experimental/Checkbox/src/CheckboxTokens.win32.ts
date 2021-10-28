@@ -11,14 +11,15 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     color: t.colors.neutralForeground1,
     checkboxBackgroundColor: t.colors.neutralBackground1,
     textBorderColor: 'transparent',
+    rootBorderColor: 'transparent',
     checkmarkColor: t.colors.neutralForeground4,
     variant: 'bodyStandard',
     checkmarkOpacity: 0,
-    checkboxMarginStart: 0,
     checkboxMarginEnd: 4,
     borderStyle: 'solid',
     borderWidth: globalTokens.stroke.width.thin,
     borderRadius: globalTokens.corner.radius.small,
+    marginLeft: 0,
     disabled: {
       checkboxBorderColor: t.colors.neutralStrokeDisabled,
       color: t.colors.neutralForegroundDisabled,
@@ -34,7 +35,8 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       },
     },
     focused: {
-      textBorderColor: t.colors.strokeFocus2,
+      rootBorderColor: t.colors.strokeFocus2,
+      marginLeft: 1,
     },
     pressed: {
       checkboxBackgroundColor: t.colors.neutralBackground1,
@@ -56,7 +58,6 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       },
     },
     boxAtEnd: {
-      checkboxMarginStart: 4,
       checkboxMarginEnd: 0,
     },
   } as CheckboxTokens);
