@@ -9,7 +9,7 @@ RCT_CUSTOM_VIEW_PROPERTY(disabled, BOOL, NSButton) {
 }
 RCT_REMAP_VIEW_PROPERTY(checked, state, NSControlStateValue);
 RCT_REMAP_VIEW_PROPERTY(defaultChecked, state, NSControlStateValue);
-RCT_REMAP_VIEW_PROPERTY(onChange, onPress, RCTBubblingEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onPress, RCTBubblingEventBlock);
 RCT_REMAP_VIEW_PROPERTY(tooltip, toolTip, NSString)
 @end
 @implementation RCTConvert (FRNCheckboxAdditions)

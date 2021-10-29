@@ -2,14 +2,18 @@
 import { checkboxName, CheckboxTokens, CheckboxProps, CheckboxState } from './Checkbox.types';
 import { compose, mergeProps, withSlots, UseSlots, buildProps } from '@fluentui-react-native/framework';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
-import { ViewProps } from 'react-native';
+import { IViewProps } from '@fluentui-react-native/adapters';
 
 const NativeCheckboxView = ensureNativeComponent('FRNCheckboxView');
 
-export interface CheckboxTypeMacOS {
+interface CheckboxSlotPropsMacOS {
+  root: React.PropsWithRef<IViewProps> & { onPress: (e: any) => void };
+}
+
+interface CheckboxTypeMacOS {
   props: CheckboxProps;
   tokens: CheckboxTokens;
-  slotProps: { root: ViewProps };
+  slotProps: CheckboxSlotPropsMacOS;
   state: CheckboxState;
 }
 
@@ -26,8 +30,17 @@ export const Checkbox = compose<CheckboxTypeMacOS>({
     })),
   },
   render: (props: CheckboxProps, useSlots: UseSlots<CheckboxTypeMacOS>) => {
+    const { onChange, ...restOfUserProps } = props;
+    const onPress = (e: any) => {
+      if (onChange != null) {
+        onChange(e.nativeEvent.isChecked);
+      }
+    };
+    const rootProps = { ...restOfUserProps };
     const Root = useSlots(props).root;
-    return (rest: CheckboxProps) => <Root {...mergeProps(props, rest)} />;
+    return (rest: CheckboxProps) => {
+      return <Root {...mergeProps(rootProps, rest)} onPress={onPress} />;
+    };
   },
 });
 export default Checkbox;

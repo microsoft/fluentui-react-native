@@ -3,12 +3,11 @@ import { ExperimentalCheckboxTestPageId } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { useTheme } from '@fluentui-react-native/theme-types';
-import { View, TextInput, TextStyle, Platform } from 'react-native';
+import { View, TextInput, TextStyle } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
-function onChangeUncontrolled(isChecked: any) {
-  const platIsChecked = Platform.OS === 'macos' ? isChecked.nativeEvent.isChecked : isChecked;
-  console.log(platIsChecked);
+function onChangeUncontrolled(isChecked: boolean) {
+  console.log(isChecked);
 }
 
 const basicCheckbox: React.FunctionComponent = () => {
