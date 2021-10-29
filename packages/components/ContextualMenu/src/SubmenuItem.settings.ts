@@ -17,6 +17,7 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         display: 'flex',
         flex: 1,
         flexDirection: 'row',
+        width: '100%',
         alignSelf: 'flex-start',
         justifyContent: 'space-between',
       },
