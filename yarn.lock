@@ -2642,9 +2642,9 @@
     eslint-plugin-react "^7.26.0"
 
 "@rnx-kit/jest-preset@^0.1.0":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/jest-preset/-/jest-preset-0.1.1.tgz#b45863659ce4f6c75d3c0d5ed5b5b784d3b7caa2"
-  integrity sha512-WHGlsBZOZv1nOw5SchVz+rAzOsJ2xu6DNonowxQvDFG8bMEc45vc3dtM5dsnxk20v54yeiRmhX838/xiu0fF3w==
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/jest-preset/-/jest-preset-0.1.4.tgz#4371ba7b97a70950df8db917806f2b2ad43cdabb"
+  integrity sha512-cz+9G0u16E8JUyYJsE4Ar9YPQAX30zwywBAGd4glCF/b/eEArpdR92m+FIfZR+4wD73pAayTAkLc133BsJ7cpw==
   dependencies:
     "@babel/preset-env" "^7.0.0"
     "@babel/preset-typescript" "^7.0.0"
