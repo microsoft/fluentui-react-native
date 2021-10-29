@@ -19,6 +19,7 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
           borderColor: tokens.rootBorderColor,
           borderRadius: globalTokens.corner.radius.medium,
           borderWidth: globalTokens.stroke.width.thick,
+          marginBottom: globalTokens.spacing.s,
         },
       }),
       ['backgroundColor', 'borderColor', 'borderRadius'],
@@ -52,12 +53,10 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
     checkmark: buildProps(
       (tokens: CheckboxTokens) => ({
         style: {
-          aspectRatio: 1,
-          position: 'relative',
-          fontSize: 10,
-          textAlign: 'center',
-          textAlignVertical: 'center',
-          top: -1,
+          width: 11,
+          height: 8,
+          top: 3,
+          left: 1,
           color: tokens.checkmarkColor,
           opacity: tokens.checkmarkOpacity,
         },

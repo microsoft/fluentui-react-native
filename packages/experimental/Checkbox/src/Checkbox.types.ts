@@ -3,6 +3,7 @@ import { ColorValue } from 'react-native';
 import { FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import type { ITextProps, IViewProps } from '@fluentui-react-native/adapters';
+import { SvgProps } from 'react-native-svg';
 
 export const checkboxName = 'Checkbox';
 
@@ -99,7 +100,7 @@ export interface CheckboxInfo {
 export interface CheckboxSlotProps {
   root: React.PropsWithRef<IViewProps>;
   checkbox: IViewProps;
-  checkmark?: ITextProps;
+  checkmark?: SvgProps;
   content: ITextProps;
 }
 
