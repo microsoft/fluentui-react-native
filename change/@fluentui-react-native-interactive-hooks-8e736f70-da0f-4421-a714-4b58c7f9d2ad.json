@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "revert changes in useAsPressable",
+  "packageName": "@fluentui-react-native/interactive-hooks",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}

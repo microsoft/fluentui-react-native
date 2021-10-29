@@ -23,6 +23,7 @@
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.7.5 <1.0.0",
     "@fluentui-react-native/experimental-text": ">=0.6.26 <1.0.0",
+    "@fluentui-react-native/component-cache": "^1.2.3",
     "@fluentui-react-native/framework": "0.6.4",
     "@fluentui-react-native/interactive-hooks": ">=0.10.52 <1.0.0",
     "@fluentui-react-native/pressable": ">=0.7.28 <1.0.0",
