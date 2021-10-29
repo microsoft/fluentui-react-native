@@ -67,7 +67,7 @@ const shimmerSections: TestSection[] = [
 
 export const ShimmerTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Backlog',
+    win32Status: 'Beta',
     uwpStatus: 'Backlog',
     iosStatus: 'Beta',
     macosStatus: 'Backlog',

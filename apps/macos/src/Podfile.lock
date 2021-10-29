@@ -15,6 +15,8 @@ PODS:
     - React
   - FRNCallout (0.17.28):
     - React
+  - FRNCheckbox (0.2.8):
+    - React
   - FRNMenuButton (0.6.15):
     - React
   - FRNRadioButton (0.13.16):
@@ -336,6 +338,7 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../../../node_modules/react-native-macos/Libraries/FBReactNativeSpec`)
   - FRNAvatar (from `../../../packages/experimental/Avatar/FRNAvatar.podspec`)
   - FRNCallout (from `../../../packages/components/Callout/FRNCallout.podspec`)
+  - FRNCheckbox (from `../../../packages/experimental/Checkbox/FRNCheckbox.podspec`)
   - FRNMenuButton (from `../../../packages/components/MenuButton/FRNMenuButton.podspec`)
   - FRNRadioButton (from `../../../packages/components/RadioGroup/FRNRadioButton.podspec`)
   - glog (from `../../../node_modules/react-native-macos/third-party-podspecs/glog.podspec`)
@@ -388,6 +391,8 @@ EXTERNAL SOURCES:
     :path: "../../../packages/experimental/Avatar/FRNAvatar.podspec"
   FRNCallout:
     :path: "../../../packages/components/Callout/FRNCallout.podspec"
+  FRNCheckbox:
+    :path: "../../../packages/experimental/Checkbox/FRNCheckbox.podspec"
   FRNMenuButton:
     :path: "../../../packages/components/MenuButton/FRNMenuButton.podspec"
   FRNRadioButton:
@@ -456,6 +461,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 6088d5ab01851853cc3fc5384d3f5edf7c898e54
   FRNAvatar: 0a882f889ab15c18320d23eb8928defb271c6bb7
   FRNCallout: 367e5cb7ed73b3b6d3aed107c3243a24f5187b0a
+  FRNCheckbox: ebe46ef9b42b147b29c964090f050191ff4a8bfe
   FRNMenuButton: cac2099d2ab79eaa882d4fcbc09dc625d81124d3
   FRNRadioButton: 53dcd1d4e56c8be451a10aaf3348e206aa75c2ef
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
@@ -489,6 +495,6 @@ SPEC CHECKSUMS:
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Yoga: 6a194db2cebcae86e56caf702b8c659f5c0da133
 
-PODFILE CHECKSUM: dac46dd82abd56eeb0c46fccf3eefa77a16dd07d
+PODFILE CHECKSUM: af0f113e908b05f6bdf16aee336bceb3613a72cf
 
 COCOAPODS: 1.11.2
