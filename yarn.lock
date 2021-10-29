@@ -2631,6 +2631,16 @@
     workspace-tools "^0.16.2"
     yargs "^16.0.0"
 
+"@rnx-kit/eslint-plugin@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/eslint-plugin/-/eslint-plugin-0.1.2.tgz#b12091d1fbc33059b9c67c3c7c81865898a9a0c1"
+  integrity sha512-I75cGKKz/7mf6bqNGUaFzFcSlvlJTko753aMo+fXpnIJn8SK2fMegJm96UZ/t0vUlGctA0/QrQRt9A+9uLYTeA==
+  dependencies:
+    "@typescript-eslint/eslint-plugin" "^5.0.0"
+    "@typescript-eslint/parser" "^5.0.0"
+    eslint-plugin-jest "^25.0.0"
+    eslint-plugin-react "^7.26.0"
+
 "@rnx-kit/jest-preset@^0.1.0":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@rnx-kit/jest-preset/-/jest-preset-0.1.1.tgz#b45863659ce4f6c75d3c0d5ed5b5b784d3b7caa2"
