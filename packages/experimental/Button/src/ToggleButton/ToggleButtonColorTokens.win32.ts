@@ -8,7 +8,7 @@ export const defaultToggleButtonColorTokens: TokenSettings<ToggleButtonTokens, T
     backgroundColor: t.colors.neutralBackground1Selected,
     borderColor: t.colors.neutralStroke1,
     hovered: {
-      color: t.colors.neutralForeground1,
+      color: t.colors.neutralForeground1Hover,
       backgroundColor: t.colors.neutralBackground1Hover,
       borderColor: t.colors.neutralStroke1,
     },
@@ -17,7 +17,7 @@ export const defaultToggleButtonColorTokens: TokenSettings<ToggleButtonTokens, T
       backgroundColor: t.colors.neutralBackground1Selected,
       borderColor: t.colors.neutralBackground1Selected,
       hovered: {
-        color: t.colors.neutralForeground1,
+        color: t.colors.neutralForeground1Hover,
         backgroundColor: t.colors.neutralBackground1Hover,
         borderColor: t.colors.neutralStroke1,
       },
