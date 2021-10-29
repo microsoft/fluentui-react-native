@@ -69,11 +69,6 @@ export const appleComponents = {
     // This disables other available states like: hovered, focused, pressed.
     _precedence: ['disabled', 'boxAtEnd', 'checked'],
   },
-  Callout: {
-    tokens: {
-      borderRadius: 5,
-    },
-  },
   ContextualMenuItem: {
     root: {
       style: {

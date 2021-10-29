@@ -19,7 +19,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			updateCalloutFrameToAnchor()
 		}
 	}
-	
+
 	@objc public var directionalHint: NSRectEdge = .maxY {
 		didSet {
 			updateCalloutFrameToAnchor()
@@ -53,7 +53,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			dismissCallout()
 		}
 	}
-	
+
 
 	// MARK: RCTComponent Overrides
 
@@ -68,7 +68,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			preconditionFailure("Callout could not create RCTTouchHandler")
 		}
 		touchHandler.attach(to: subview as? RCTUIView)
-		
+
 		proxyView.insertReactSubview(subview, at: atIndex)
 	}
 
@@ -122,7 +122,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		guard let window = window  else {
 			preconditionFailure("No window found")
 		}
-		
+
 		guard let screenFrame = window.screen?.visibleFrame ?? NSScreen.main?.visibleFrame else {
 			preconditionFailure("No screen Available")
 		}
@@ -135,7 +135,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 		let rootViewBoundsInWindow = rootView.convert(rootView.bounds, to: nil)
 		let rootViewRectInScreenCoordinates = window.convertToScreen(rootViewBoundsInWindow)
-		
+
 		// macOS uses a flipped Y coordinate (I.E: (0,0) is on the bottom left of the screen). However,
 		// React Native assumes a standard Y coordinate. Let's flip the Y coordinate of our rect to match
 		let anchorScreenRectOrigin = NSPoint(
@@ -143,7 +143,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			y: screenFrame.height - (rootViewRectInScreenCoordinates.origin.y + self.anchorRect.origin.y)
 		)
 		let anchorRectInScreenCoordinates = NSRect(origin: anchorScreenRectOrigin, size: anchorRect.size)
-		
+
 		return anchorRectInScreenCoordinates
 	}
 
@@ -171,7 +171,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 
 		let calloutFrame = proxyView.frame
-		
+
 		// Find our preferred origin based on the directional hint
 		let calloutOrigin: NSPoint = {
 			var origin = NSPoint()
@@ -182,7 +182,6 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 				origin.y = NSMaxY(anchorScreenRect) - calloutFrame.size.height
 				break
 			case .minY:
-				// TODO is this right?
 				origin.x = NSMinX(anchorScreenRect)
 				origin.y = NSMaxY(anchorScreenRect)
 			case .maxX:
@@ -203,9 +202,9 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			}
 			return origin
 		}()
-		
+
 		var calloutScreenRect = NSRect(origin: calloutOrigin, size: calloutFrame.size)
-		
+
 		// Reposition the callout if it doesn't fit on screen
 		if (!NSContainsRect(screenFrame, calloutScreenRect)) {
 			switch(directionalHint) {
@@ -228,7 +227,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 				if (NSMaxY(calloutScreenRect) > NSMaxY(screenFrame)) {
 					let maxYEdgeSpace = NSMaxY(screenFrame) - NSMaxY(anchorScreenRect)
 					let minYEdgeSpace = NSMinY(anchorScreenRect) - NSMinY(screenFrame)
-					
+
 					// Flip to presenting below anchorScreenRect
 					if (minYEdgeSpace > maxYEdgeSpace) {
 						calloutScreenRect.origin.y = NSMinY(anchorScreenRect) - NSHeight(calloutScreenRect)
@@ -257,7 +256,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 				if (NSMinY(calloutScreenRect) < NSMinY(screenFrame)) {
 					let maxYEdgeSpace = NSMaxY(screenFrame) - NSMaxY(anchorScreenRect)
 					let minYEdgeSpace = NSMinY(anchorScreenRect) - NSMinY(screenFrame)
-					
+
 					// Flip to presenting above anchorScreenRect
 					if (maxYEdgeSpace > minYEdgeSpace) {
 						calloutScreenRect.origin.y = NSMaxY(anchorScreenRect)
