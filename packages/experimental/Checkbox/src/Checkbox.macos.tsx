@@ -20,7 +20,7 @@ export const Checkbox = compose<CheckboxType>({
   render: (props: CheckboxProps, useSlots: UseSlots<CheckboxType>) => {
     const Root = useSlots(props).root;
     return (rest: CheckboxProps) => {
-      return <Root onChange {...mergeProps(props, rest)} />;
+      return <Root {...mergeProps(props, rest)} />;
     };
   },
 });
