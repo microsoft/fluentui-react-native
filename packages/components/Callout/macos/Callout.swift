@@ -180,14 +180,12 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			case .minX:
 				origin.x = NSMinX(anchorScreenRect) - calloutFrame.size.width
 				origin.y = NSMaxY(anchorScreenRect) - calloutFrame.size.height
-				break
 			case .minY:
 				origin.x = NSMinX(anchorScreenRect)
 				origin.y = NSMaxY(anchorScreenRect)
 			case .maxX:
 				origin.x = NSMaxX(anchorScreenRect)
 				origin.y = NSMaxY(anchorScreenRect) - calloutFrame.size.height
-				break
 			case .maxY:
 				// When in RTL mode, align the right edges of the menu and flyout anchor
 				if (NSApp.userInterfaceLayoutDirection == .rightToLeft) {
@@ -196,7 +194,6 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 					origin.x = NSMinX(anchorScreenRect);
 				}
 				origin.y = NSMinY(anchorScreenRect) - calloutFrame.size.height
-				break
 			@unknown default:
 				preconditionFailure("Unknown directional hint")
 			}
@@ -221,7 +218,6 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 				if (NSMinY(calloutScreenRect) < NSMinY(screenFrame)) {
 					calloutScreenRect.origin.y = NSMinY(screenFrame)
 				}
-				break
 			case .minY:
 				// If we go off the top of the screen, check if there's more room on screen below the anchorScreenRect.
 				if (NSMaxY(calloutScreenRect) > NSMaxY(screenFrame)) {
@@ -250,7 +246,6 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 				if (NSMinY(calloutScreenRect) < NSMinY(screenFrame)) {
 					calloutScreenRect.origin.y = NSMinY(screenFrame);
 				}
-				break
 			case .maxY:
 				// If we go off the bottom of the screen, check if there's more room on screen above the anchorScreenRect.
 				if (NSMinY(calloutScreenRect) < NSMinY(screenFrame)) {
