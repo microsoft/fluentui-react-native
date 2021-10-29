@@ -2596,32 +2596,32 @@
     cosmiconfig "^7.0.0"
     semver "^7.0.0"
 
-"@rnx-kit/config@^0.4.7":
-  version "0.4.7"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.4.7.tgz#a6147aca5a93ebd5db8e7911556438cdf83b79db"
-  integrity sha512-bvO/oAD4i1aLKR/Sl9QucHwYbd9rnQnTM1JhgHO4pfiSD4eNm09ccEQKfF94HkiAYa8IBM67qb7RG+deFuoRRw==
+"@rnx-kit/config@^0.4.11":
+  version "0.4.11"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.4.11.tgz#e9705fcad083b751baabd2f06c05a6f8d25e29f9"
+  integrity sha512-m2li71P5lKptG8Q8671r2ZCcGR/Av69zx/g+h+RWkBAkn+S02JsIvgYaVefLVUd3MunMr5MVmZN7dQmi7aBQYA==
   dependencies:
-    "@rnx-kit/console" "^1.0.2"
+    "@rnx-kit/console" "^1.0.3"
     cosmiconfig "^7.0.0"
     lodash "^4.17.21"
     semver "^7.0.0"
 
-"@rnx-kit/console@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/console/-/console-1.0.2.tgz#8c2cf5c5b374260664236fb32b18f69afbb6094b"
-  integrity sha512-REIisL+e5jVnXtKRmW6YXe6sIJ+uoJvcvP5oE1k7GH2cwsMk6uRb/DfvLyu+yZ2lsMoWY+dBo9fxM+hWm5GvQA==
+"@rnx-kit/console@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/console/-/console-1.0.3.tgz#9c097d20a32099a8fdeefc8c656f3e34ed132902"
+  integrity sha512-kmuhKicipVPhCUqDGHw+4vYxiCCqUrZHQVq9tzvjdcWJOj4PRuheZkBgg9DvtZyTJMJj3M23KO7STOcRO+dgBQ==
   dependencies:
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.5.10", "@rnx-kit/dep-check@^1.5.9":
-  version "1.7.9"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.7.9.tgz#8a0de52b96a145a7c25f7a3a8f5501695da280c9"
-  integrity sha512-DdOwFmRnLi+9oioyXKSrG5pVmhn/5aE7GBRByo2UMvop+BiE8zosI+4M2/TO3khY8YQBC4KqNqTJ1HNxNEepaQ==
+  version "1.8.9"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.8.9.tgz#7cb44d4224a5945d4ebf1894f26a128f535fd4ab"
+  integrity sha512-soAY2S9up1VrZwwyWBglKSjaVvZJZmIuB75DOEeqR8EIQ9tQYb5woX9ra/mjhWagEjDzHsUVaD5g7ubI291Osw==
   dependencies:
-    "@rnx-kit/config" "^0.4.7"
-    "@rnx-kit/console" "^1.0.2"
-    "@rnx-kit/tools-language" "^1.1.1"
-    "@rnx-kit/tools-node" "^1.1.3"
+    "@rnx-kit/config" "^0.4.11"
+    "@rnx-kit/console" "^1.0.3"
+    "@rnx-kit/tools-language" "^1.1.2"
+    "@rnx-kit/tools-node" "^1.1.4"
     chalk "^4.1.0"
     detect-indent "^6.0.0"
     jest-diff "^26.0.0"
@@ -2658,17 +2658,17 @@
     chalk "^4.1.1"
     yargs "^16.2.0"
 
-"@rnx-kit/tools-language@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-language/-/tools-language-1.1.1.tgz#b86066f08dca239fc2ee95de72ee7c9ae6057d5e"
-  integrity sha512-XAF70YyhTIm/6StM9YbSaVi83MiCS+JoiifNNHem1DL+teaMoy0Vdtc7Btq55bVJIH2HgH7ozlmqXhE+LiGSCw==
+"@rnx-kit/tools-language@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-language/-/tools-language-1.1.2.tgz#f414e4c0739d965a9ba25574698af967cb5d3ac9"
+  integrity sha512-qPEWfkmcLgqjLVdB00kXgQI1Lx+pxx7nuHr7I4jMfwDayG63xaGvvR55VwX9oTrYm21kH/SrWu66znkdUW16MA==
 
-"@rnx-kit/tools-node@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-node/-/tools-node-1.1.3.tgz#6edf8456dd59e79b2610af9406d58529a2f3befa"
-  integrity sha512-1tMpTL0qSgyz9l+488MtHYD1CdZ0FGgo+oZ7xGb+f8r1i6cNFbgdlcoVxC/VkeqSVeYSQW1nW3er2v3vUh4nmw==
+"@rnx-kit/tools-node@^1.1.3", "@rnx-kit/tools-node@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-node/-/tools-node-1.1.4.tgz#82d8afc1a757ccab1beb4ef25a129eef1fb53159"
+  integrity sha512-TDhSUW+g9UYnKBnf5AQXsEMTGW71gszmwJb/jC2LMP1oPxJDBGZ8nzUCleAatLlVC7PR0V9VqvYYX2TZJEuXxQ==
   dependencies:
-    "@rnx-kit/tools-language" "^1.1.1"
+    "@rnx-kit/tools-language" "^1.1.2"
     find-up "^5.0.0"
     pkg-dir "^5.0.0"
     pkg-up "^3.1.0"
@@ -18066,9 +18066,9 @@ webpack-merge@^4.2.1:
     lodash "^4.17.15"
 
 webpack-notifier@^1.6.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/webpack-notifier/-/webpack-notifier-1.13.0.tgz#24e43d00ee47032f047373ca291b2d1f543ec12d"
-  integrity sha512-QLk6l/TZKGhyN6Hd1zobaiYno7S9YPX3wH86+YOSufHes77SegGhnGdj+4vrLDFK5A4ZKoQD5GRXXFnM0h0N8A==
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/webpack-notifier/-/webpack-notifier-1.14.1.tgz#c7fc6769262c06ac186ed45c32be7b7025f3dc7a"
+  integrity sha512-OVOoiOyKHS3z9pN1nLdPY2Pf/R3wiBsN0KiPc3K6ApwMBfHbyUomQc2Mr0naeKxfqXyCBPHfQuqpL9yoL0rgkA==
   dependencies:
     node-notifier "^9.0.0"
     strip-ansi "^6.0.0"
