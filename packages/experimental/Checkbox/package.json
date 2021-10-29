@@ -21,13 +21,14 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
+    "@fluentui-react-native/adapters": ">=0.7.5 <1.0.0",
+    "@fluentui-react-native/experimental-text": ">=0.6.26 <1.0.0",
     "@fluentui-react-native/framework": "0.6.4",
     "@fluentui-react-native/interactive-hooks": ">=0.10.52 <1.0.0",
-    "@fluentui-react-native/experimental-text": ">=0.6.26 <1.0.0",
+    "@fluentui-react-native/pressable": ">=0.7.28 <1.0.0",
+    "@fluentui-react-native/theme-tokens": "^0.9.0",
     "@fluentui-react-native/tokens": ">=0.10.2 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.7.2 <1.0.0",
-    "@fluentui-react-native/adapters": ">=0.7.5 <1.0.0",
-    "@fluentui-react-native/pressable": ">=0.7.28 <1.0.0",
     "tslib": "^1.13.0"
   },
   "devDependencies": {
