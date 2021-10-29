@@ -69,54 +69,6 @@ export const appleComponents = {
     // This disables other available states like: hovered, focused, pressed.
     _precedence: ['disabled', 'boxAtEnd', 'checked'],
   },
-  ContextualMenuItem: {
-    root: {
-      style: {
-        borderRadius: 5,
-      },
-    },
-    stack: {
-      style: {
-        minHeight: 0,
-        minWidth: 0,
-      },
-    },
-    _overrides: {
-      hovered: {
-        tokens: {
-          color: 'white',
-          backgroundColor: PlatformColor('controlAccentColor'),
-        },
-      },
-    },
-  },
-  submenuItem: {
-    root: {
-      style: {
-        borderRadius: 5,
-      },
-    },
-    leftstack: {
-      style: {
-        minHeight: 0,
-        minWidth: 0,
-      },
-    },
-    rightstack: {
-      style: {
-        minHeight: 0,
-        minWidth: 0,
-      },
-    },
-    _overrides: {
-      hovered: {
-        tokens: {
-          color: 'white',
-          backgroundColor: PlatformColor('controlAccentColor'),
-        },
-      },
-    },
-  },
 };
 
 export function getBaseAppleThemeMacOS(): Theme {

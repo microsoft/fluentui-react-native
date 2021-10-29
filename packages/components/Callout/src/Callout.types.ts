@@ -3,6 +3,7 @@ import { ScreenRect, ViewStyle } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
+import { IViewProps } from '@fluentui-react-native/adapters';
 
 export const calloutName = 'Callout';
 
@@ -98,21 +99,11 @@ export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTok
   minPadding?: number;
 }
 
-export interface ICalloutProps extends ICalloutTokens {
-  /*
-   * Used by screen readers to inform the user about the control.
-   */
-  accessibilityLabel?: string;
-
+export interface ICalloutProps extends IViewProps, ICalloutTokens {
   /*
    * A string that should be announced when the callout is shown.
    */
   accessibilityOnShowAnnouncement?: string;
-
-  /*
-   * Used by screen readers to inform the user about the purpose of the control.
-   */
-  accessibilityRole?: string;
 
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.

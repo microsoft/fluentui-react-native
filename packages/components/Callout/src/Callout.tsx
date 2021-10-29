@@ -32,9 +32,6 @@ export const Callout = compose<ICalloutType>({
         ref: calloutRef,
         ...(nativeTarget && { target: nativeTarget }),
         ...rest,
-        style: {
-          position: 'absolute',
-        },
       },
     });
 
