@@ -2596,32 +2596,32 @@
     cosmiconfig "^7.0.0"
     semver "^7.0.0"
 
-"@rnx-kit/config@^0.4.7":
-  version "0.4.7"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.4.7.tgz#a6147aca5a93ebd5db8e7911556438cdf83b79db"
-  integrity sha512-bvO/oAD4i1aLKR/Sl9QucHwYbd9rnQnTM1JhgHO4pfiSD4eNm09ccEQKfF94HkiAYa8IBM67qb7RG+deFuoRRw==
+"@rnx-kit/config@^0.4.13":
+  version "0.4.13"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.4.13.tgz#3408d780cd39b03ae2ef22b626ae466e222a1732"
+  integrity sha512-LMhynDinr7uKUlK15aA0pWuxwl/tyHf/VNTWO0ED0VCpnT5M1Ij/xCPBOeBf/luHz0s/wUxp/Kxl3JesS7lXJA==
   dependencies:
-    "@rnx-kit/console" "^1.0.2"
+    "@rnx-kit/console" "^1.0.5"
     cosmiconfig "^7.0.0"
     lodash "^4.17.21"
     semver "^7.0.0"
 
-"@rnx-kit/console@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/console/-/console-1.0.2.tgz#8c2cf5c5b374260664236fb32b18f69afbb6094b"
-  integrity sha512-REIisL+e5jVnXtKRmW6YXe6sIJ+uoJvcvP5oE1k7GH2cwsMk6uRb/DfvLyu+yZ2lsMoWY+dBo9fxM+hWm5GvQA==
+"@rnx-kit/console@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/console/-/console-1.0.5.tgz#82cf77aed4062361c036202e7daa6d6b14362676"
+  integrity sha512-cJ8tLQg7RWBlh+mH3qvb+WlitO+HeXtPqNQYyVZOEH4FslWnfovNEASWbbbn9RcTzAVnUSBZRhroEtaYRHkeow==
   dependencies:
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.5.10", "@rnx-kit/dep-check@^1.5.9":
-  version "1.7.9"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.7.9.tgz#8a0de52b96a145a7c25f7a3a8f5501695da280c9"
-  integrity sha512-DdOwFmRnLi+9oioyXKSrG5pVmhn/5aE7GBRByo2UMvop+BiE8zosI+4M2/TO3khY8YQBC4KqNqTJ1HNxNEepaQ==
+  version "1.8.11"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.8.11.tgz#207e6cf5d02450dc5c31294315bb3f94f085c5d1"
+  integrity sha512-bYk9dIwnPqChde5hFXY7bsoeNd4/jiv7TyzEyyMVm14+ChANjGdJGNmuFcgT+jDMn9NC562Vu63MlggHSjXicQ==
   dependencies:
-    "@rnx-kit/config" "^0.4.7"
-    "@rnx-kit/console" "^1.0.2"
-    "@rnx-kit/tools-language" "^1.1.1"
-    "@rnx-kit/tools-node" "^1.1.3"
+    "@rnx-kit/config" "^0.4.13"
+    "@rnx-kit/console" "^1.0.5"
+    "@rnx-kit/tools-language" "^1.1.4"
+    "@rnx-kit/tools-node" "^1.1.6"
     chalk "^4.1.0"
     detect-indent "^6.0.0"
     jest-diff "^26.0.0"
@@ -2658,17 +2658,17 @@
     chalk "^4.1.1"
     yargs "^16.2.0"
 
-"@rnx-kit/tools-language@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-language/-/tools-language-1.1.1.tgz#b86066f08dca239fc2ee95de72ee7c9ae6057d5e"
-  integrity sha512-XAF70YyhTIm/6StM9YbSaVi83MiCS+JoiifNNHem1DL+teaMoy0Vdtc7Btq55bVJIH2HgH7ozlmqXhE+LiGSCw==
+"@rnx-kit/tools-language@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-language/-/tools-language-1.1.4.tgz#d33d05adcf3a8efad452e51212e84288d8da412c"
+  integrity sha512-Ki7c92zYGUgDmJvhK3AonH45AP6obKwSphR5DSsXlTyjReMV0T2Y5aQ25kJvM49kmT7CTMihBdeB1NiDi4iesQ==
 
-"@rnx-kit/tools-node@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-node/-/tools-node-1.1.3.tgz#6edf8456dd59e79b2610af9406d58529a2f3befa"
-  integrity sha512-1tMpTL0qSgyz9l+488MtHYD1CdZ0FGgo+oZ7xGb+f8r1i6cNFbgdlcoVxC/VkeqSVeYSQW1nW3er2v3vUh4nmw==
+"@rnx-kit/tools-node@^1.1.3", "@rnx-kit/tools-node@^1.1.6":
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-node/-/tools-node-1.1.6.tgz#c0694eb0b5e77308fb7313b7014a8bedb64678a1"
+  integrity sha512-3ove2Iwls7VPvZYYWXJW4C1JtMnun+104VP6gfFqnoVCPbHIhbahw75oyhIwtdUeRXX6dmTYXBSKyfsX/WNVlA==
   dependencies:
-    "@rnx-kit/tools-language" "^1.1.1"
+    "@rnx-kit/tools-language" "^1.1.4"
     find-up "^5.0.0"
     pkg-dir "^5.0.0"
     pkg-up "^3.1.0"
