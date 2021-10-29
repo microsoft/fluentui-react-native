@@ -1,5 +1,4 @@
 import { Spacing, Theme } from '@fluentui-react-native/theme-types';
-import { PlatformColor } from 'react-native';
 import { fallbackApplePalette } from './appleColors.macos';
 import { fallbackAppleTypography } from './appleTypography.macos';
 
