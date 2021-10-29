@@ -29,15 +29,10 @@ class CalloutWindow: NSWindow {
 			return event
 		})
 	}
-	
-	deinit {
-		NotificationCenter.default.removeObserver(self)
-	}
-	
-	
+
 	@objc func appDidChangeActive(notification: NSNotification) {
 		windowLifeCycleDelegate?.applicationDidResignActiveForCalloutWindow(calloutWindow: self)
 	}
-	
+
 	private var mouseEventMonitor: Any?
 }

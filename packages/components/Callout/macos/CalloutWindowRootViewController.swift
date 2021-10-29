@@ -5,12 +5,12 @@ class CalloutWindowRootViewController: NSViewController {
 
 	@available(*, unavailable)
 	required init(NibName: NSString?, bundle: Bundle?) {
-			preconditionFailure()
+		preconditionFailure()
 	}
 	
 	@available(*, unavailable)
 	required init?(coder: NSCoder) {
-			preconditionFailure()
+		preconditionFailure()
 	}
 	
 	init() {
