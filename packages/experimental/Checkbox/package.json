@@ -21,6 +21,7 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
+    "@fluentui-react-native/component-cache": "^1.2.3",
     "@fluentui-react-native/framework": "0.6.4",
     "@fluentui-react-native/interactive-hooks": ">=0.10.52 <1.0.0",
     "@fluentui-react-native/experimental-text": ">=0.6.26 <1.0.0",
