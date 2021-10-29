@@ -61,7 +61,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       }
     }, [componentRef, disabled, context]);
 
-    const pressable = useAsPressable({ ...rest, onPress: onItemClick, onMouseEnter: onItemHoverIn });
+    const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn });
 
     const onKeyUp = useKeyCallback(onItemClick, ' ', 'Enter');
 
