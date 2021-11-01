@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Checkbox macOS",
-  "packageName": "@fluentui-react-native/apple-theme",
-  "email": "67026167+chiuam@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

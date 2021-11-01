@@ -2,6 +2,65 @@
   "name": "@fluentui-react-native/experimental-checkbox",
   "entries": [
     {
+      "date": "Mon, 01 Nov 2021 18:53:37 GMT",
+      "tag": "@fluentui-react-native/experimental-checkbox_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Checkbox redesign",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "2c37c6e4a43d743216c7d232e9de56b298d4a725",
+            "package": "@fluentui-react-native/experimental-checkbox"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.53",
+            "author": "sanajmi@microsoft.com",
+            "commit": "18757ce3c755d20f37bf436b7e99d3caee320c3b",
+            "package": "@fluentui-react-native/experimental-checkbox"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/pressable to v0.7.29",
+            "author": "sanajmi@microsoft.com",
+            "commit": "18757ce3c755d20f37bf436b7e99d3caee320c3b",
+            "package": "@fluentui-react-native/experimental-checkbox"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.9.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f05bda9db60753eb07b2688526ed158d690b8b63",
+            "package": "@fluentui-react-native/experimental-checkbox"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.6.5",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f05bda9db60753eb07b2688526ed158d690b8b63",
+            "package": "@fluentui-react-native/experimental-checkbox"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.6.27",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f05bda9db60753eb07b2688526ed158d690b8b63",
+            "package": "@fluentui-react-native/experimental-checkbox"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.10.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f05bda9db60753eb07b2688526ed158d690b8b63",
+            "package": "@fluentui-react-native/experimental-checkbox"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Checkbox macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "9be422a16cd348c356b30fb3ba20163863b0113c",
+            "package": "@fluentui-react-native/experimental-checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 25 Oct 2021 19:24:43 GMT",
       "tag": "@fluentui-react-native/experimental-checkbox_v0.2.8",
       "version": "0.2.8",

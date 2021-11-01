@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Pipe changes through theme system",
-  "packageName": "@fluentui-react-native/theming-utils",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
