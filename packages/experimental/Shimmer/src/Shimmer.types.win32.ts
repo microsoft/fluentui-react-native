@@ -8,13 +8,29 @@ export interface ClippingMaskProps extends ShimmerTokens {
    * @defaultValue null
    */
   clipPath?: string;
+
+  /**
+   * The height and width of the viewBox are internal props used by the SVG to size themselves and
+   * set up their viewBox to establish coordinate space for DPI scaling purposes.
+   */
+  viewBoxHeight: number;
+  viewBoxWidth: number;
+}
+
+export interface ShimmerWaveProps extends ShimmerTokens {
+  /**
+   * The height and width of the viewBox are internal props used by the SVG to size themselves and
+   * set up their viewBox to establish coordinate space for DPI scaling purposes.
+   */
+  viewBoxHeight: number;
+  viewBoxWidth: number;
 }
 
 export interface ShimmerSlotProps extends ShimmerProps {
   root: ViewProps;
   clippingMask: ClippingMaskProps;
-  shimmerWave: ShimmerTokens;
-  shimmerWaveContainer: ShimmerTokens;
+  shimmerWave: ShimmerWaveProps;
+  shimmerWaveContainer: ShimmerWaveProps;
 }
 
 export interface ShimmerType {

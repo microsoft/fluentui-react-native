@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-stack
 
-This log was last generated on Mon, 25 Oct 2021 19:24:43 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Nov 2021 18:53:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.0
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.10.24 (ruaraki@microsoft.com)
 
 ## 0.1.0
 
