@@ -3,6 +3,11 @@
 exports[`ToggleButton default 1`] = `
 <View
   accessibilityRole="button"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
   accessible={true}
   focusable={true}
   onAccessibilityTap={[Function]}
