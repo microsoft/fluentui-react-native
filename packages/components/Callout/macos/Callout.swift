@@ -289,15 +289,37 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	private var proxyView: RCTView = RCTView()
 
 	private lazy var calloutWindow: CalloutWindow = {
-		let calloutWindowController = CalloutWindowRootViewController()
-		let window = CalloutWindow(contentViewController: calloutWindowController)
+		let window = CalloutWindow()
 		window.windowLifeCycleDelegate = self
 		window.isReleasedWhenClosed = true
+
 		window.styleMask = [.fullSizeContentView]
 		window.level = .popUpMenu
+		window.backgroundColor = .clear
+		window.isMovableByWindowBackground = false
+		
+		let visualEffect = NSVisualEffectView()
+		visualEffect.translatesAutoresizingMaskIntoConstraints = false
+		visualEffect.material = .menu
+		visualEffect.state = .active
+		visualEffect.wantsLayer = true
+		visualEffect.layer?.cornerRadius = 5.0
+
+
+		guard let contentView = window.contentView else {
+			preconditionFailure("Callout window has no content view")
+		}
+		
+		contentView.addSubview(visualEffect)
+		NSLayoutConstraint.activate([
+			visualEffect.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+			visualEffect.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+			visualEffect.topAnchor.constraint(equalTo: contentView.topAnchor),
+			visualEffect.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+		])
+
+		contentView.addSubview(proxyView)
 		window.setIsVisible(true)
-		window.backgroundColor = .windowBackgroundColor
-		window.contentView = proxyView
 
 		return window
 	}()
