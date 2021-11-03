@@ -4,6 +4,11 @@ exports[`CompoundButton default 1`] = `
 <View
   accessibilityLabel="Default Button"
   accessibilityRole="button"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
   accessible={true}
   focusable={true}
   onBlur={[Function]}

@@ -1,7 +1,7 @@
-import { submenuItemName, SubmenuItemType } from './SubmenuItem.types';
+import { contextualMenuItemName, ContextualMenuItemType } from './ContextualMenuItem.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 
-export const settings: IComposeSettings<SubmenuItemType> = [
+export const settings: IComposeSettings<ContextualMenuItemType> = [
   {
     tokens: {
       backgroundColor: 'menuBackground',
@@ -15,45 +15,28 @@ export const settings: IComposeSettings<SubmenuItemType> = [
       focusable: true,
       style: {
         display: 'flex',
-        flex: 1,
+        alignItems: 'flex-start',
         flexDirection: 'row',
         alignSelf: 'flex-start',
         width: '100%',
-        justifyContent: 'space-between',
+        borderRadius: 5,
       },
     },
     content: {},
-    icon: {
-      style: {
-        marginEnd: 5,
-        color: 'menuIcon',
-      },
-    },
-    leftstack: {
+    icon: { style: { marginEnd: 5 } },
+    stack: {
       style: {
         display: 'flex',
-        flex: 1,
         paddingStart: 5,
-        alignItems: 'center',
-        flexDirection: 'row',
-        alignSelf: 'flex-start',
-        minHeight: 32,
-        justifyContent: 'flex-start',
-      },
-    },
-    rightstack: {
-      style: {
-        display: 'flex',
-        flex: 1,
         paddingEnd: 5,
         alignItems: 'center',
         flexDirection: 'row',
-        minHeight: 32,
-        width: 12,
-        justifyContent: 'flex-end',
+        alignSelf: 'flex-start',
+
+        justifyContent: 'flex-start',
       },
     },
-    _precedence: ['focused', 'hovered', 'pressed', 'submenuItemHovered', 'disabled'],
+    _precedence: ['focused', 'hovered', 'pressed', 'disabled'],
     _overrides: {
       disabled: {
         tokens: {
@@ -67,7 +50,7 @@ export const settings: IComposeSettings<SubmenuItemType> = [
           color: 'menuItemTextHovered',
         },
       },
-      submenuItemHovered: {
+      hovered: {
         tokens: {
           color: 'menuItemTextHovered',
           backgroundColor: 'menuItemBackgroundHovered',
@@ -89,5 +72,5 @@ export const settings: IComposeSettings<SubmenuItemType> = [
       },
     },
   },
-  submenuItemName,
+  contextualMenuItemName,
 ];
