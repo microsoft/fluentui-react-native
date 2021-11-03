@@ -297,19 +297,18 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		window.level = .popUpMenu
 		window.backgroundColor = .clear
 		window.isMovableByWindowBackground = false
-		
+	
 		let visualEffect = NSVisualEffectView()
 		visualEffect.translatesAutoresizingMaskIntoConstraints = false
 		visualEffect.material = .menu
 		visualEffect.state = .active
 		visualEffect.wantsLayer = true
-		visualEffect.layer?.cornerRadius = 5.0
-
+		visualEffect.layer?.cornerRadius = calloutWindowCornerRadius
 
 		guard let contentView = window.contentView else {
 			preconditionFailure("Callout window has no content view")
 		}
-		
+	
 		contentView.addSubview(visualEffect)
 		NSLayoutConstraint.activate([
 			visualEffect.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -324,3 +323,5 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		return window
 	}()
 }
+
+private var calloutWindowCornerRadius: CGFloat = 5.0
