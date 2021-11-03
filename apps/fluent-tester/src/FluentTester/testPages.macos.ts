@@ -1,7 +1,9 @@
 import { TestDescription } from './TestComponents';
 import { AvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
+import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
+import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
 import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL } from './TestComponents/CheckboxExperimental';
 import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
 import { HOMEPAGE_FOCUSZONE_BUTTON, FocusZoneTest } from './TestComponents/FocusZone';
@@ -21,6 +23,7 @@ import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { HOMEPAGE_TABS_BUTTON, TabsTest } from './TestComponents/Tabs';
 import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON, ExperimentalTabsTest } from './TestComponents/TabsExperimental';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
+import { ExperimentalMenuButtonTest, HOMEPAGE_MENU_BUTTON_EXPERIMENTAL } from './TestComponents/MenuButtonExperimental';
 
 export const tests: TestDescription[] = [
   {
@@ -34,9 +37,44 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_BUTTON_BUTTON,
   },
   {
+    name: 'Callout Test',
+    component: CalloutTest,
+    testPage: HOMEPAGE_CALLOUT_BUTTON,
+  },
+  {
+    name: 'Checkbox Test',
+    component: CheckboxTest,
+    testPage: HOMEPAGE_CHECKBOX_BUTTON,
+  },
+  {
+    name: 'ContextualMenu Test',
+    component: ContextualMenuTest,
+    testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON,
+  },
+  {
     name: 'Experimental Button',
     component: ExperimentalButtonTest,
     testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
+  },
+  {
+    name: 'Experimental Checkbox',
+    component: ExperimentalCheckboxTest,
+    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
+  },
+  {
+    name: 'Experimental MenuButton Test',
+    component: ExperimentalMenuButtonTest,
+    testPage: HOMEPAGE_MENU_BUTTON_EXPERIMENTAL,
+  },
+  {
+    name: 'Experimental Tabs Test',
+    component: ExperimentalTabsTest,
+    testPage: HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
+  },
+  {
+    name: 'Experimental Text Test',
+    component: TextExperimentalTest,
+    testPage: HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON,
   },
   {
     name: 'FocusZone Test',
@@ -44,9 +82,9 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_FOCUSZONE_BUTTON,
   },
   {
-    name: 'Pressable Test',
-    component: PressableTest,
-    testPage: HOMEPAGE_PRESSABLE_BUTTON,
+    name: 'Icon Test',
+    component: IconTest,
+    testPage: HOMEPAGE_ICON_BUTTON,
   },
   {
     name: 'Link Test',
@@ -59,29 +97,9 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_MENU_BUTTON,
   },
   {
-    name: 'Separator Test',
-    component: SeparatorTest,
-    testPage: HOMEPAGE_SEPARATOR_BUTTON,
-  },
-  {
-    name: 'Text Test',
-    component: TextTest,
-    testPage: HOMEPAGE_TEXT_BUTTON,
-  },
-  {
-    name: 'Experimental Text Test',
-    component: TextExperimentalTest,
-    testPage: HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON,
-  },
-  {
-    name: 'Shimmer Test',
-    component: ShimmerTest,
-    testPage: HOMEPAGE_SHIMMER_BUTTON,
-  },
-  {
-    name: 'Theme Test',
-    component: ThemeTest,
-    testPage: HOMEPAGE_THEME_BUTTON,
+    name: 'Persona Test',
+    component: PersonaTest,
+    testPage: HOMEPAGE_PERSONA_BUTTON,
   },
   {
     name: 'PersonaCoin Test',
@@ -89,24 +107,24 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_PERSONACOIN_BUTTON,
   },
   {
+    name: 'Pressable Test',
+    component: PressableTest,
+    testPage: HOMEPAGE_PRESSABLE_BUTTON,
+  },
+  {
     name: 'RadioGroup Test',
     component: RadioGroupTest,
     testPage: HOMEPAGE_RADIOGROUP_BUTTON,
   },
   {
-    name: 'Persona Test',
-    component: PersonaTest,
-    testPage: HOMEPAGE_PERSONA_BUTTON,
+    name: 'Separator Test',
+    component: SeparatorTest,
+    testPage: HOMEPAGE_SEPARATOR_BUTTON,
   },
   {
-    name: 'Checkbox Test',
-    component: CheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_BUTTON,
-  },
-  {
-    name: 'Experimental Checkbox',
-    component: ExperimentalCheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
+    name: 'Shimmer Test',
+    component: ShimmerTest,
+    testPage: HOMEPAGE_SHIMMER_BUTTON,
   },
   {
     name: 'Svg Test',
@@ -114,19 +132,19 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_SVG_BUTTON,
   },
   {
-    name: 'Icon Test',
-    component: IconTest,
-    testPage: HOMEPAGE_ICON_BUTTON,
-  },
-  {
     name: 'Tabs Test',
     component: TabsTest,
     testPage: HOMEPAGE_TABS_BUTTON,
   },
   {
-    name: 'Experimental Tabs Test',
-    component: ExperimentalTabsTest,
-    testPage: HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
+    name: 'Text Test',
+    component: TextTest,
+    testPage: HOMEPAGE_TEXT_BUTTON,
+  },
+  {
+    name: 'Theme Test',
+    component: ThemeTest,
+    testPage: HOMEPAGE_THEME_BUTTON,
   },
   {
     name: 'Tokens Test',

@@ -28,9 +28,9 @@ class MenuButton: NSPopUpButton {
     translatesAutoresizingMaskIntoConstraints = false
   }
 
-  @objc public var OnItemClick: RCTBubblingEventBlock?
+  @objc public var onItemClick: RCTBubblingEventBlock?
 
-  @objc public var OnSubmenuItemClick: RCTBubblingEventBlock?
+  @objc public var onSubmenuItemClick: RCTBubblingEventBlock?
 
   open override var menu: NSMenu? {
     didSet {
@@ -101,21 +101,21 @@ class MenuButton: NSPopUpButton {
 
   @objc(sendOnItemClickEvent:)
   private func sendOnItemClickEvent(sender: NSMenuItem) {
-   if OnItemClick != nil {
+   if onItemClick != nil {
      guard let identifier = sender.identifier else {
        preconditionFailure("itemKey not set on Menu Item")
      }
-    OnItemClick!(["key": identifier])
+    onItemClick!(["key": identifier])
    }
   }
 
   @objc(sendOnSubItemClickEvent:)
   private func sendOnSubItemClickEvent(sender: NSMenuItem) {
-   if OnSubmenuItemClick != nil {
+   if onSubmenuItemClick != nil {
      guard let identifier = sender.identifier else {
        preconditionFailure("itemKey not set on Menu Item")
      }
-    OnSubmenuItemClick!(["index": sender.tag,"key": identifier])
+    onSubmenuItemClick!(["index": sender.tag,"key": identifier])
    }
   }
 
