@@ -24,13 +24,13 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.10.21",
     "@fluentui-react-native/callout": ">=0.17.29 <1.0.0",
     "@fluentui-react-native/icon": "0.8.29",
     "@fluentui-react-native/interactive-hooks": ">=0.10.53 <1.0.0",
     "@fluentui-react-native/text": ">=0.10.24 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.10.3 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.9.3 <1.0.0",
+    "@uifabricshared/foundation-compose": "^1.10.21",
     "@uifabricshared/foundation-settings": ">=0.10.3 <1.0.0"
   },
   "devDependencies": {
