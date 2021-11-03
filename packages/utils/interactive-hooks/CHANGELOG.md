@@ -1,8 +1,43 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Thu, 07 Oct 2021 20:59:20 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Nov 2021 18:53:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.53
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- revert changes in useAsPressable (sanajmi@microsoft.com)
+
+## 0.10.52
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Use tslib where spreadArray is used (ruaraki@microsoft.com)
+
+## 0.10.51
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.27 (ruaraki@microsoft.com)
+
+## 0.10.50
+
+Tue, 19 Oct 2021 20:23:36 GMT
+
+### Patches
+
+- Fix a regression in useHoverState (sanajmi@microsoft.com)
+- fix setting state with onPress/onLongPress (sanajmi@microsoft.com)
+- Support onPress/onLongPress in usePressableState (sanajmi@microsoft.com)
+- Fix regression in useAsPressable (sanajmi@microsoft.com)
 
 ## 0.10.49
 

@@ -1,4 +1,4 @@
-import { PRESSABLE_TESTPAGE } from '../../../FluentTester/TestComponents/Pressable/consts';
+import { PRESSABLE_TESTPAGE, HOMEPAGE_PRESSABLE_BUTTON } from '../../../FluentTester/TestComponents/Pressable/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 class PressableTestPage extends BasePage {
@@ -8,6 +8,10 @@ class PressableTestPage extends BasePage {
 
   get _pageName() {
     return PRESSABLE_TESTPAGE;
+  }
+
+  get _pageButton() {
+    return By(HOMEPAGE_PRESSABLE_BUTTON);
   }
 }
 

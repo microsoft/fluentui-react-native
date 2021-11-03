@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/persona-coin
 
-This log was last generated on Thu, 07 Oct 2021 20:59:20 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Nov 2021 18:53:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.25
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.9.1 (ruaraki@microsoft.com)
+
+## 0.9.24
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.10.2 (ruaraki@microsoft.com)
+
+## 0.9.23
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.3 (ruaraki@microsoft.com)
+
+## 0.9.22
+
+Tue, 19 Oct 2021 20:23:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.5 (ruaraki@microsoft.com)
 
 ## 0.9.21
 

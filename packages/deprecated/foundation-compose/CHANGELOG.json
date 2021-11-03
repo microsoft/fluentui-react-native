@@ -2,6 +2,51 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Mon, 01 Nov 2021 18:53:37 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.10.21",
+      "version": "1.10.21",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/default-theme to v0.8.10",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f05bda9db60753eb07b2688526ed158d690b8b63",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 25 Oct 2021 19:24:43 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.10.20",
+      "version": "1.10.20",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/immutable-merge to v1.1.4",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f6578742d6c957cf7e346db82f89171f80bedc3b",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 Oct 2021 03:46:25 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.10.19",
+      "version": "1.10.19",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/default-theme to v0.8.8",
+            "author": "email not defined",
+            "commit": "62bde9d13c18c2f1bbcfcaf39987eae481a1e788",
+            "package": "@uifabricshared/foundation-compose"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 07 Oct 2021 20:59:20 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.10.18",
       "version": "1.10.18",

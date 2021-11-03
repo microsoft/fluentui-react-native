@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/theme-registry
 
-This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
+This log was last generated on Mon, 25 Oct 2021 19:24:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.2
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/immutable-merge to v1.1.4 (ruaraki@microsoft.com)
 
 ## 0.6.1
 

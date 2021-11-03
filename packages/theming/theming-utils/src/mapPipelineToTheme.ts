@@ -3,6 +3,9 @@ import { AliasColorTokens } from '@fluentui-react-native/theme-types';
 export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
   return {
     neutralForeground1: pipelineOutput.neutralForeground1.fillColorRest,
+    neutralForeground1Hover: pipelineOutput.neutralForeground1.fillColorHover,
+    neutralForeground1Pressed: pipelineOutput.neutralForeground1.fillColorPressed,
+    neutralForeground1Selected: pipelineOutput.neutralForeground1.fillColorSelected,
     neutralForeground2: pipelineOutput.neutralForeground2.fillColorRest,
     neutralForeground2Hover: pipelineOutput.neutralForeground2.fillColorHover,
     neutralForeground2Pressed: pipelineOutput.neutralForeground2.fillColorPressed,
@@ -32,6 +35,9 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
 
     neutralForegroundInverted: pipelineOutput.neutralForegroundInverted.fillColorRest,
     neutralForegroundOnBrand: pipelineOutput.neutralForegroundOnBrand.fillColorRest,
+    neutralForegroundOnBrandHover: pipelineOutput.neutralForegroundOnBrand.fillColorHover,
+    neutralForegroundOnBrandPressed: pipelineOutput.neutralForegroundOnBrand.fillColorPressed,
+    neutralForegroundOnBrandSelected: pipelineOutput.neutralForegroundOnBrand.fillColorSelected,
     neutralForegroundInvertedLink: pipelineOutput.neutralForegroundInvertedLink.fillColorRest,
     neutralForegroundInvertedLinkHover: pipelineOutput.neutralForegroundInvertedLink.fillColorHover,
     neutralForegroundInvertedLinkPressed: pipelineOutput.neutralForegroundInvertedLink.fillColorPressed,

@@ -41,12 +41,12 @@ const otherCheckbox: React.FunctionComponent = () => {
 
   return (
     <View>
-      <Checkbox label="This is a controlled Checkbox" onChange={onChangeControlled1} checked={isCheckedControlled1} />
+      <Checkbox label="This is a controlled Checkbox" onChange={onChangeControlled1} checked={Boolean(isCheckedControlled1)} />
       <Checkbox
         label="Checkbox rendered with boxSide 'end' (controlled)"
         onChange={onChangeControlled2}
         boxSide="end"
-        checked={isCheckedControlled2}
+        checked={Boolean(isCheckedControlled2)}
       />
     </View>
   );

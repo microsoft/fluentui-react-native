@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
-This log was last generated on Thu, 07 Oct 2021 20:59:20 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Nov 2021 18:53:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.1
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Pipe changes through theme system (ruaraki@microsoft.com)
+
+## 0.9.0
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Minor changes
+
+- add global and alias tokens for Android (email not defined)
 
 ## 0.8.0
 

@@ -14,11 +14,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
+    "@rnx-kit/eslint-plugin": "^0.1.2",
     "eslint": "^8.0.0",
-    "eslint-plugin-jest": "^25.0.0",
-    "eslint-plugin-react": "^7.26.0"
+    "eslint-plugin-jest": "^25.0.0"
   },
   "beachball": {
     "shouldPublish": false,

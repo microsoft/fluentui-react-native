@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theme-registry",
   "entries": [
     {
+      "date": "Mon, 25 Oct 2021 19:24:43 GMT",
+      "tag": "@uifabricshared/theme-registry_v0.6.2",
+      "version": "0.6.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/immutable-merge to v1.1.4",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f6578742d6c957cf7e346db82f89171f80bedc3b",
+            "package": "@uifabricshared/theme-registry"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 28 Sep 2021 21:08:25 GMT",
       "tag": "@uifabricshared/theme-registry_v0.6.1",
       "version": "0.6.1",

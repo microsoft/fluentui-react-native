@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Thu, 07 Oct 2021 20:59:20 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Nov 2021 18:53:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.3
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Bump @uifabricshared/theming-ramp to v0.15.11 (ruaraki@microsoft.com)
+
+## 0.10.2
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Use tslib where spreadArray is used (ruaraki@microsoft.com)
+
+## 0.10.1
+
+Tue, 19 Oct 2021 20:23:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.5 (ruaraki@microsoft.com)
 
 ## 0.10.0
 

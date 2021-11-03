@@ -15,6 +15,9 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     checkmarkOpacity: 0,
     checkboxMarginStart: 0,
     checkboxMarginEnd: 4,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderRadius: 2,
     disabled: {
       checkboxBorderColor: t.colors.buttonBorderDisabled,
       color: t.colors.disabledBodyText,

@@ -1,8 +1,24 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Nov 2021 18:53:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.11
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.12.4 (ruaraki@microsoft.com)
+
+## 0.15.10
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-settings to v0.10.3 (ruaraki@microsoft.com)
 
 ## 0.15.9
 

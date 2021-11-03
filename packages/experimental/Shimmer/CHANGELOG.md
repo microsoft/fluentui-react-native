@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-This log was last generated on Thu, 07 Oct 2021 20:59:20 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Nov 2021 18:53:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.22
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Add viewBox information to the Shimmer SVGs for high DPI support and rework the clipping mask workaround to be the same size as the viewBox (patboyd@microsoft.com)
+
+## 0.5.21
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.10.2 (ruaraki@microsoft.com)
+
+## 0.5.20
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.3 (ruaraki@microsoft.com)
+
+## 0.5.19
+
+Tue, 19 Oct 2021 20:23:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.10.1 (ruaraki@microsoft.com)
 
 ## 0.5.18
 

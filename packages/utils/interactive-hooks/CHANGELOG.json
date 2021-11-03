@@ -2,6 +2,84 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Mon, 01 Nov 2021 18:53:37 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.10.53",
+      "version": "0.10.53",
+      "comments": {
+        "patch": [
+          {
+            "comment": "revert changes in useAsPressable",
+            "author": "sanajmi@microsoft.com",
+            "commit": "18757ce3c755d20f37bf436b7e99d3caee320c3b",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 25 Oct 2021 19:24:43 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.10.52",
+      "version": "0.10.52",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Use tslib where spreadArray is used",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f6578742d6c957cf7e346db82f89171f80bedc3b",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 Oct 2021 03:46:25 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.10.51",
+      "version": "0.10.51",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.27",
+            "author": "ruaraki@microsoft.com",
+            "commit": "273f5addbeb5abeaec0b517e5416f52d8878152f",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 Oct 2021 20:23:36 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.10.50",
+      "version": "0.10.50",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix a regression in useHoverState",
+            "author": "sanajmi@microsoft.com",
+            "commit": "5c3b06e040e98e8c5ea9b8115ce0968bee91da50",
+            "package": "@fluentui-react-native/interactive-hooks"
+          },
+          {
+            "comment": "fix setting state with onPress/onLongPress",
+            "author": "sanajmi@microsoft.com",
+            "commit": "027fbdcaa014857c57eec219eebecea47d054442",
+            "package": "@fluentui-react-native/interactive-hooks"
+          },
+          {
+            "comment": "Support onPress/onLongPress in usePressableState",
+            "author": "sanajmi@microsoft.com",
+            "commit": "85339542c4575df454e280e3b9b88e50244375b5",
+            "package": "@fluentui-react-native/interactive-hooks"
+          },
+          {
+            "comment": "Fix regression in useAsPressable",
+            "author": "sanajmi@microsoft.com",
+            "commit": "f0c4458d4b3cbb1ddc36c6e92a1c507a2ab7fd1f",
+            "package": "@fluentui-react-native/interactive-hooks"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 07 Oct 2021 20:59:20 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.10.49",
       "version": "0.10.49",

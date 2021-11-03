@@ -1,8 +1,50 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
-This log was last generated on Thu, 07 Oct 2021 20:59:20 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Nov 2021 18:53:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Minor changes
+
+- Checkbox macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Checkbox redesign (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.53 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/pressable to v0.7.29 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.9.1 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.6.5 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-text to v0.6.27 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/tokens to v0.10.3 (ruaraki@microsoft.com)
+
+## 0.2.8
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Use tslib where spreadArray is used (ruaraki@microsoft.com)
+
+## 0.2.7
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.3 (ruaraki@microsoft.com)
+
+## 0.2.6
+
+Tue, 19 Oct 2021 20:23:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.7.26 (ruaraki@microsoft.com)
 
 ## 0.2.5
 

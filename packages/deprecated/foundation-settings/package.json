@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-settings",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "description": "Settings and style definitions and helpers",
   "repository": {
     "type": "git",
@@ -32,8 +32,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/immutable-merge": "^1.1.3",
-    "@fluentui-react-native/merge-props": ">=0.3.4 <1.0.0"
+    "@fluentui-react-native/immutable-merge": "^1.1.4",
+    "@fluentui-react-native/merge-props": ">=0.3.5 <1.0.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.0",

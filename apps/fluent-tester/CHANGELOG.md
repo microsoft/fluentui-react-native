@@ -1,8 +1,112 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 07 Oct 2021 20:59:20 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Nov 2021 18:53:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.47.0
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Minor changes
+
+- Checkbox macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Checkbox redesign (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/apple-theme to v0.8.0 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-button to v0.9.4 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.0.9 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-checkbox to v0.3.0 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-shimmer to v0.5.22 (patboyd@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.53 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/button to v0.20.15 (sanajmi@microsoft.com)
+- Bump @fluentui/react-native to v0.26.7 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-tabs to v0.3.6 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.8.10 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/stack to v0.5.42 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.8.29 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.6.5 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.3.25 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.12.17 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-expander to v0.2.22 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-text to v0.6.27 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/win32-theme to v0.13.9 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.12.4 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme to v0.5.23 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/android-theme to v0.4.18 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theming-utils to v0.7.8 (ruaraki@microsoft.com)
+
+## 0.46.0
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Minor changes
+
+- Transferring E2E Improvements to this branch. Other branch had weird CI errors (safreibe@microsoft.com)
+- Adding callout+Scrollview to callout test page (safreibe@microsoft.com)
+
+### Patches
+
+- Use tslib where spreadArray is used (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/button to v0.20.14 (ruaraki@microsoft.com)
+- Bump @fluentui/react-native to v0.26.6 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.0.8 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/stack to v0.5.41 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.8.28 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-shimmer to v0.5.21 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/win32-theme to v0.13.8 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-button to v0.9.3 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-checkbox to v0.2.8 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-tabs to v0.3.5 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-text to v0.6.26 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.6.4 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.3.24 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.12.16 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-expander to v0.2.21 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme to v0.5.22 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/android-theme to v0.4.17 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/apple-theme to v0.7.29 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.8.9 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.52 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/themed-stylesheet to v1.2.5 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theming-utils to v0.7.7 (ruaraki@microsoft.com)
+
+## 0.45.1
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.3 (ruaraki@microsoft.com)
+
+## 0.45.0
+
+Tue, 19 Oct 2021 20:23:36 GMT
+
+### Minor changes
+
+- Increasing timeouts and number of retry attempts for failed E2E runs. This will reduce the risk of intermittent failures engineers will see in our CI pipeline, because usually it corrects itself after the first failed attempt (if it is indeed a false-negative) (safreibe@microsoft.com)
+
+### Patches
+
+- Change the minimum react-native-macos dependency to 0.63.41 to pull in bug fixes (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/button to v0.20.12 (ruaraki@microsoft.com)
+- Bump @fluentui/react-native to v0.26.4 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.0.6 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-checkbox to v0.2.6 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/stack to v0.5.39 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.8.26 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-button to v0.9.1 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-tabs to v0.3.3 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-shimmer to v0.5.19 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.6.2 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.3.22 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.12.14 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-expander to v0.2.19 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-text to v0.6.24 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.50 (sanajmi@microsoft.com)
 
 ## 0.44.2
 

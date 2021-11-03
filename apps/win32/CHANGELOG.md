@@ -1,8 +1,50 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Thu, 07 Oct 2021 20:59:20 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Nov 2021 18:53:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.1
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Checkbox redesign (v.kozlova13@gmail.com)
+
+## 0.15.0
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Minor changes
+
+- Transferring E2E Improvements to this branch. Other branch had weird CI errors (safreibe@microsoft.com)
+
+### Patches
+
+- Use tslib where spreadArray is used (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.46.0 (ruaraki@microsoft.com)
+
+## 0.14.1
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.45.1 (ruaraki@microsoft.com)
+
+## 0.14.0
+
+Tue, 19 Oct 2021 20:23:36 GMT
+
+### Minor changes
+
+- Increasing timeouts and number of retry attempts for failed E2E runs. This will reduce the risk of intermittent failures engineers will see in our CI pipeline, because usually it corrects itself after the first failed attempt (if it is indeed a false-negative) (safreibe@microsoft.com)
+
+### Patches
+
+- Add VS Code debugging configurations (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.45.0 (safreibe@microsoft.com)
 
 ## 0.13.3
 

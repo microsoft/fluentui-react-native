@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/use-styling
 
-This log was last generated on Fri, 01 Oct 2021 17:52:17 GMT and should not be manually modified.
+This log was last generated on Mon, 25 Oct 2021 19:24:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.2
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Use tslib where spreadArray is used (ruaraki@microsoft.com)
+
+## 0.7.1
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Revert "Add props to buildProps (#1039)" (ruaraki@microsoft.com)
 
 ## 0.7.0
 
