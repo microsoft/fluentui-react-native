@@ -7,7 +7,10 @@
     "NeutralForeground1": {
       "Fill": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.HC.CanvasText" }
+          "Rest": { "aliasOf": "Global.Color.HC.CanvasText" },
+          "Hover": { "aliasOf": "Global.Color.HC.HighlightText" },
+          "Pressed": { "aliasOf": "Global.Color.HC.HighlightText" },
+          "Selected": { "aliasOf": "Global.Color.HC.HighlightText" }
         }
       }
     },
@@ -96,7 +99,10 @@
     "NeutralForegroundOnBrand": {
       "Fill": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.HC.Canvas" }
+          "Rest": { "aliasOf": "Global.Color.HC.ButtonText" },
+          "Hover": { "aliasOf": "Global.Color.HC.HighlightText" },
+          "Pressed": { "aliasOf": "Global.Color.HC.HighlightText" },
+          "Selected": { "aliasOf": "Global.Color.HC.HighlightText" }
         }
       }
     },

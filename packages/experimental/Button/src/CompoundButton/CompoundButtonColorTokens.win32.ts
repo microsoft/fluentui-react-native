@@ -16,13 +16,13 @@ export const defaultCompoundButtonColorTokens: TokenSettings<CompoundButtonToken
   primary: {
     secondaryContentColor: t.colors.neutralForegroundOnBrand,
     hovered: {
-      secondaryContentColor: t.colors.neutralForegroundOnBrand,
+      secondaryContentColor: t.colors.neutralForegroundOnBrandHover,
     },
     focused: {
-      secondaryContentColor: t.colors.neutralForegroundOnBrand,
+      secondaryContentColor: t.colors.neutralForegroundOnBrandHover,
     },
     pressed: {
-      secondaryContentColor: t.colors.neutralForegroundOnBrand,
+      secondaryContentColor: t.colors.neutralForegroundOnBrandPressed,
     },
   },
   subtle: {

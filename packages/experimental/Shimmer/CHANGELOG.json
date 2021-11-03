@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-shimmer",
   "entries": [
     {
+      "date": "Mon, 01 Nov 2021 18:53:37 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.5.22",
+      "version": "0.5.22",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add viewBox information to the Shimmer SVGs for high DPI support and rework the clipping mask workaround to be the same size as the viewBox",
+            "author": "patboyd@microsoft.com",
+            "commit": "d6654bb172740f72c68cad9e5e1a96059f076f8a",
+            "package": "@fluentui-react-native/experimental-shimmer"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 25 Oct 2021 19:24:43 GMT",
       "tag": "@fluentui-react-native/experimental-shimmer_v0.5.21",
       "version": "0.5.21",

@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Mon, 25 Oct 2021 19:24:43 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Nov 2021 18:53:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.0
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Minor changes
+
+- Checkbox macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.8.10 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.12.4 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme to v0.5.23 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theming-utils to v0.7.8 (ruaraki@microsoft.com)
 
 ## 0.7.29
 
