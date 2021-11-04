@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 
   s.pod_target_xcconfig = { 'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES', 'OTHER_SWIFT_FLAGS' => '-gline-tables-only' }
 
-  s.osx.deployment_target = "10.14"
+  s.osx.deployment_target = "10.15"
   s.osx.source_files      = "macos/*.{swift,h,m,mm}"
 
   s.dependency 'React'
