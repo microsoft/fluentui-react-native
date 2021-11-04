@@ -1,7 +1,7 @@
 import Foundation
 import AppKit
 
-@objc(RCTCalloutView)
+@objc(FRHCalloutView)
 class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	@objc public var target: NSNumber? {
@@ -297,7 +297,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		window.level = .popUpMenu
 		window.backgroundColor = .clear
 		window.isMovableByWindowBackground = false
-	
+
 		let visualEffect = NSVisualEffectView()
 		visualEffect.translatesAutoresizingMaskIntoConstraints = false
 		visualEffect.material = .menu
@@ -308,7 +308,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		guard let contentView = window.contentView else {
 			preconditionFailure("Callout window has no content view")
 		}
-	
+
 		contentView.addSubview(visualEffect)
 		NSLayoutConstraint.activate([
 			visualEffect.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
