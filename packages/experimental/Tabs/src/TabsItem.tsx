@@ -31,7 +31,7 @@ export const TabsItem = compose<TabItemType>({
     // Return the handler to finish render.
     return (final: TabsItemProps, ...children: React.ReactNode[]) => {
       const context = React.useContext(TabsContext);
-      const { icon, itemKey, itemCount, headerText, testID, ...mergedProps } = mergeProps(tabsItem.props, final);
+      const { icon, itemKey, itemCount, headerText, ...mergedProps } = mergeProps(tabsItem.props, final);
 
       let containerText = headerText;
       if (itemCount !== undefined) {
@@ -45,11 +45,7 @@ export const TabsItem = compose<TabItemType>({
         <Slots.root {...mergedProps}>
           <Slots.stack>
             {icon && <Slots.icon {...iconProps} />}
-            {renderContent && (
-              <Slots.content key="content" testID={testID}>
-                {containerText}
-              </Slots.content>
-            )}
+            {renderContent && <Slots.content key="content">{containerText}</Slots.content>}
           </Slots.stack>
           <Slots.indicator />
         </Slots.root>

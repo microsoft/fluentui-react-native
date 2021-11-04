@@ -1,12 +1,12 @@
-import ButtonTestPage from '../../Button/pages/ButtonTestPage.win';
-import CalloutTestPage from '../../Callout/pages/CalloutTestPage.win';
-import CheckboxTestPage from '../../Checkbox/pages/CheckboxTestPage.win';
-import LinkTestPage from '../../Link/pages/LinkTestPage.win';
+import ButtonTestPage from '../../Button/pages/ButtonPageObject';
+import CalloutTestPage from '../../Callout/pages/CalloutPageObject.win';
+import CheckboxTestPage from '../../Checkbox/pages/CheckboxPageObject';
+import LinkPageObject from '../../Link/pages/LinkPageObject';
 import PersonaCoinTestPage from '../../PersonaCoin/pages/PersonaCoinTestPage.win';
 import PressableTestPage from '../../Pressable/pages/PressableTestPage.win';
 import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
-import TextTestPage from '../../Text/pages/TextTestPage.win';
-import TabsTestPage from '../../Tabs/pages/TabsTestPage.win';
+import TextTestPage from '../../Text/pages/TextPageObject.win';
+import TabsTestPage from '../../Tabs/pages/TabsPageObject.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
 import NavigateAppPage from '../../common/NavigateAppPage';
 
@@ -55,12 +55,12 @@ describe('Click on each test page and check if it renders', function () {
   });
 
   it('Link Test Page', () => {
-    LinkTestPage.scrollToComponentButton();
-    LinkTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
+    LinkPageObject.scrollToComponentButton();
+    LinkPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
     NavigateAppPage.clickAndGoToLinkPage();
-    LinkTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
+    LinkPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(LinkTestPage.isPageLoaded()).toBeTruthy();
+    expect(LinkPageObject.isPageLoaded()).toBeTruthy();
   });
 
   it('PersonaCoin Test Page', () => {
