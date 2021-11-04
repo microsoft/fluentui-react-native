@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Adding accessibilityLabel integration with experimental MenuButton also",
+  "packageName": "@fluentui-react-native/experimental-menu-button",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
