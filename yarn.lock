@@ -2632,9 +2632,9 @@
     yargs "^16.0.0"
 
 "@rnx-kit/eslint-plugin@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/eslint-plugin/-/eslint-plugin-0.2.0.tgz#5fea2b0b84a5a102d6df060fd2aa476e35b0e02e"
-  integrity sha512-Wzux72b+DHOoG+mcgsWCW1iSiSraLgtrChjz6Lqj4DN50amWdI7ij0uQmKq0+mDXOtKR0EM5n4Qcwbum1kYp5A==
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/eslint-plugin/-/eslint-plugin-0.2.1.tgz#db5f37021ea411aaf5d0a64c530358a61c2cf453"
+  integrity sha512-fbkZZHVwAX3dCTkIz4CnX7ZeVpTl6aWm2mheJuZmMnQWF5qNytOVGeRXC9LT5M9omUEN0trB21mrQjED2egQBg==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.0.0"
     "@typescript-eslint/parser" "^5.0.0"
