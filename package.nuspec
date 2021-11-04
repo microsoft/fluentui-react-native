@@ -19,7 +19,7 @@
 
     <!-- macOS ship -->
     <file src="DerivedData\Build\Products\Release\FRNAvatar\libFRNAvatar.a" target="Ship-macosx"/>
-    <file src="DerivedData\Build\Products\Release\FRNMenuButton\libFRNCallout.a" target="Ship-macosx"/>
+    <file src="DerivedData\Build\Products\Release\FRNCallout\libFRNCallout.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\FRNCheckbox\libFRNCheckbox.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\FRNMenuButton\libFRNMenuButton.a" target="Ship-macosx"/>
     <file src="DerivedData\Build\Products\Release\FRNRadioButton\libFRNRadioButton.a" target="Ship-macosx"/>

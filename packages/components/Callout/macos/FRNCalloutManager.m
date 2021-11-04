@@ -1,6 +1,6 @@
-#import <RCTCalloutManager.h>
+#import <FRNCalloutManager.h>
 
-@implementation RCTConvert (RCTCalloutAdditions)
+@implementation RCTConvert (FRNCalloutAdditions)
 
 // RCTConvert does not properly convert a JS screenRect into a native CGRect/NSRect,
 // due to the mismatch of x/y and screenX/screenY. Let's do it manually.
@@ -34,7 +34,7 @@ RCT_ENUM_CONVERTER(NSRectEdge, (@{
 
 @end
 
-@interface RCT_EXTERN_MODULE(RCTCalloutManager, RCTViewManager)
+@interface RCT_EXTERN_MODULE(FRNCalloutManager, RCTViewManager)
 
 RCT_EXPORT_VIEW_PROPERTY(target, NSNumber)
 

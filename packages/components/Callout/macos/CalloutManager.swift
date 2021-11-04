@@ -1,6 +1,6 @@
 import Foundation
 
-@objc(RCTCalloutManager)
+@objc(FRNCalloutManager)
 class CalloutManager: RCTViewManager {
 	override func view()->NSView! {
 		return CalloutView(bridge: bridge)
