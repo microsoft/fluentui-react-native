@@ -1,7 +1,15 @@
-import { BUTTON_TESTPAGE, HOMEPAGE_BUTTON_BUTTON } from '../../../FluentTester/TestComponents/Button/consts';
+import {
+  BUTTON_TESTPAGE,
+  BUTTON_TEST_COMPONENT,
+  BUTTON_NO_A11Y_LABEL_COMPONENT,
+  HOMEPAGE_BUTTON_BUTTON,
+} from '../../../FluentTester/TestComponents/Button/consts';
 import { BasePage, By } from '../../common/BasePage';
 
-class ButtonTestPage extends BasePage {
+class ButtonPageObject extends BasePage {
+  /*****************************************/
+  /**************** Getters ****************/
+  /*****************************************/
   get _testPage() {
     return By(BUTTON_TESTPAGE);
   }
@@ -10,9 +18,17 @@ class ButtonTestPage extends BasePage {
     return BUTTON_TESTPAGE;
   }
 
+  get _primaryComponent() {
+    return By(BUTTON_TEST_COMPONENT);
+  }
+
+  get _secondaryComponent() {
+    return By(BUTTON_NO_A11Y_LABEL_COMPONENT);
+  }
+
   get _pageButton() {
     return By(HOMEPAGE_BUTTON_BUTTON);
   }
 }
 
-export default new ButtonTestPage();
+export default new ButtonPageObject();

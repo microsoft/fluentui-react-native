@@ -8,7 +8,7 @@ import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
 import TextTestPage from '../../Text/pages/TextTestPage.win';
 import TabsTestPage from '../../Tabs/pages/TabsTestPage.win';
 import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
-import BootTestPage from '../pages/BootTestPage.win';
+import NavigateAppPage from '../../common/NavigateAppPage';
 
 const BOOT_APP_TIMEOUT = 60000;
 const PAGE_TIMEOUT = 15000;
@@ -17,9 +17,9 @@ const PAGE_TIMEOUT = 15000;
 // (WebDriverIO)
 describe('Open the app', function () {
   it('Boot app', () => {
-    BootTestPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
+    NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     browser.saveScreenshot('./errorShots/onBoot.png'); // Take a screenshot of the app for testing purposes
-    expect(BootTestPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
   });
 });
 
@@ -30,7 +30,7 @@ describe('Click on each test page and check if it renders', function () {
     ButtonTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    BootTestPage.clickAndGoToButtonPage();
+    NavigateAppPage.clickAndGoToButtonPage();
     ButtonTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ButtonTestPage.isPageLoaded()).toBeTruthy();
@@ -39,7 +39,7 @@ describe('Click on each test page and check if it renders', function () {
   it('Callout Test Page', () => {
     CalloutTestPage.scrollToComponentButton();
     CalloutTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
-    BootTestPage.clickAndGoToCalloutPage();
+    NavigateAppPage.clickAndGoToCalloutPage();
     CalloutTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(CalloutTestPage.isPageLoaded()).toBeTruthy();
@@ -48,7 +48,7 @@ describe('Click on each test page and check if it renders', function () {
   it('Checkbox Test Page', () => {
     CheckboxTestPage.scrollToComponentButton();
     CheckboxTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
-    BootTestPage.clickAndGoToCheckboxPage();
+    NavigateAppPage.clickAndGoToCheckboxPage();
     CheckboxTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(CheckboxTestPage.isPageLoaded()).toBeTruthy();
@@ -57,7 +57,7 @@ describe('Click on each test page and check if it renders', function () {
   it('Link Test Page', () => {
     LinkTestPage.scrollToComponentButton();
     LinkTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
-    BootTestPage.clickAndGoToLinkPage();
+    NavigateAppPage.clickAndGoToLinkPage();
     LinkTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(LinkTestPage.isPageLoaded()).toBeTruthy();
@@ -66,7 +66,7 @@ describe('Click on each test page and check if it renders', function () {
   it('PersonaCoin Test Page', () => {
     PersonaCoinTestPage.scrollToComponentButton();
     PersonaCoinTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
-    BootTestPage.clickAndGoToPersonaCoinPage();
+    NavigateAppPage.clickAndGoToPersonaCoinPage();
     PersonaCoinTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(PersonaCoinTestPage.isPageLoaded()).toBeTruthy();
@@ -75,7 +75,7 @@ describe('Click on each test page and check if it renders', function () {
   it('Pressable Test Page', () => {
     PressableTestPage.scrollToComponentButton();
     PressableTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
-    BootTestPage.clickAndGoToPressablePage();
+    NavigateAppPage.clickAndGoToPressablePage();
     PressableTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(PressableTestPage.isPageLoaded()).toBeTruthy();
@@ -84,7 +84,7 @@ describe('Click on each test page and check if it renders', function () {
   it('Separator Test Page', () => {
     SeparatorTestPage.scrollToComponentButton();
     SeparatorTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
-    BootTestPage.clickAndGoToSeparatorPage();
+    NavigateAppPage.clickAndGoToSeparatorPage();
     SeparatorTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(SeparatorTestPage.isPageLoaded()).toBeTruthy();
@@ -93,7 +93,7 @@ describe('Click on each test page and check if it renders', function () {
   it('Tabs Test Page', () => {
     TabsTestPage.scrollToComponentButton();
     TabsTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
-    BootTestPage.clickAndGoToTabsPage();
+    NavigateAppPage.clickAndGoToTabsPage();
     TabsTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(TabsTestPage.isPageLoaded()).toBeTruthy();
@@ -102,7 +102,7 @@ describe('Click on each test page and check if it renders', function () {
   it('Text Test Page', () => {
     TextTestPage.scrollToComponentButton();
     TextTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
-    BootTestPage.clickAndGoToTextPage();
+    NavigateAppPage.clickAndGoToTextPage();
     TextTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(TextTestPage.isPageLoaded()).toBeTruthy();
@@ -111,7 +111,7 @@ describe('Click on each test page and check if it renders', function () {
   it('Theme Test Page', () => {
     ThemeTestPage.scrollToComponentButton();
     ThemeTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
-    BootTestPage.clickAndGoToThemePage();
+    NavigateAppPage.clickAndGoToThemePage();
     ThemeTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ThemeTestPage.isPageLoaded()).toBeTruthy();

@@ -90,7 +90,7 @@ Spec documents should be put in apps/fluent-tester/src/E2E/\_ _ComponentToBeTest
 ```
 describe('Click on each test page and check if it renders', function() {
   it('Checkbox Test Page', () => {
-    BootTestPage.clickAndGoToCheckboxPage();
+    NavigateAppPage.clickAndGoToCheckboxPage();
     expect(CheckboxTestPage.isPageLoaded()).toBeTruthy();
   });
 });
