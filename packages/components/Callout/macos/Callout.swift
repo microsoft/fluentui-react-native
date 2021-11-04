@@ -1,7 +1,7 @@
 import Foundation
 import AppKit
 
-@objc(NCalloutView)
+@objc(FRNCalloutView)
 class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	@objc public var target: NSNumber? {
