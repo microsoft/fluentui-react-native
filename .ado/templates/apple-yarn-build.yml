@@ -16,4 +16,3 @@ steps:
     displayName: 'yarn ${{ parameters.relative_directory }}'
     env:
       platform_directory: ${{ parameters.relative_directory }}
-cd ..
