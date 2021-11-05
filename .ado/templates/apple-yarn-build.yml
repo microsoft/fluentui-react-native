@@ -11,8 +11,9 @@ steps:
 
   - bash: |
       echo "yarn ${{ parameters.relative_directory }}"
-      yarn ${{ parameters.relative_directory }}
+      yarn ${{ parameters.relative_directory }} --verbose
     workingDirectory: apps/${{ parameters.relative_directory }}
     displayName: 'yarn ${{ parameters.relative_directory }}'
     env:
       platform_directory: ${{ parameters.relative_directory }}
+cd ..
