@@ -10,8 +10,14 @@ steps:
     displayName: 'pod install'
 
   - bash: |
+      echo "Pre boot simulator"
+      open /Applications/Xcode_13.1.app/Contents/Developer/Applications/Simulator.app/
+    workingDirectory: apps/${{ parameters.relative_directory }}
+    displayName: 'Boot simulator'
+
+  - bash: |
       echo "yarn ${{ parameters.relative_directory }}"
-      yarn ${{ parameters.relative_directory }} --verbose
+      yarn ${{ parameters.relative_directory }}
     workingDirectory: apps/${{ parameters.relative_directory }}
     displayName: 'yarn ${{ parameters.relative_directory }}'
     env:
