@@ -18,7 +18,7 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
-  - FRNAvatar (0.12.12):
+  - FRNAvatar (0.12.17):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
@@ -539,7 +539,7 @@ SPEC CHECKSUMS:
   FBLazyVector: 3bb422f41b18121b71783a905c10e58606f7dc3e
   FBReactNativeSpec: f2c97f2529dd79c083355182cc158c9f98f4bd6e
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
-  FRNAvatar: 2687926489d4e58fd8f68b0cb4297ce1c179e742
+  FRNAvatar: aae0394c67f2cc2863652c35ea97e27ca9d8e6db
   FRNDatePicker: 3b0ee573936065b2de86ec61ab5f6407ba8163c8
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
@@ -574,4 +574,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 61f64d2e918386255ef0609310cb922b5e1c51b3
 
-COCOAPODS: 1.11.0
+COCOAPODS: 1.11.2
