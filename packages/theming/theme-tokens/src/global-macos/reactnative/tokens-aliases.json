@@ -1,0 +1,76 @@
+{
+	"body": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 20,
+		"fontSize": 14,
+		"fontWeight": "400"
+	},
+	"bodyStrong": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 20,
+		"fontSize": 14,
+		"fontWeight": "600"
+	},
+	"borderless": {
+		"strokeAlignment": "inner",
+		"strokeColorRest": "transparent",
+		"strokeColorHover": "transparent",
+		"strokeColorPressed": "transparent",
+		"strokeColorDisabled": "transparent",
+		"strokeWidth": 1
+	},
+	"caption": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 16,
+		"fontSize": 12,
+		"fontWeight": "400"
+	},
+	"display": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 92,
+		"fontSize": 68,
+		"fontWeight": "600"
+	},
+	"headline": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 28,
+		"fontSize": 20,
+		"fontWeight": "600"
+	},
+	"largeTitle": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 52,
+		"fontSize": 40,
+		"fontWeight": "600"
+	},
+	"subheadline": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 22,
+		"fontSize": 16,
+		"fontWeight": "600"
+	},
+	"title1": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 40,
+		"fontSize": 32,
+		"fontWeight": "600"
+	},
+	"title2": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 36,
+		"fontSize": 28,
+		"fontWeight": "600"
+	},
+	"title3": {
+		"fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+		"fontLineHeight": 32,
+		"fontSize": 24,
+		"fontWeight": "600"
+	},
+	"transparentBackground": {
+		"fillColorRest": "transparent",
+		"fillColorHover": "transparent",
+		"fillColorPressed": "transparent",
+		"fillColorSelected": "transparent"
+	}
+}
