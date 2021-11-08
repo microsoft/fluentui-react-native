@@ -10,6 +10,13 @@ steps:
     displayName: 'pod install'
 
   - bash: |
+      echo "Pre boot simulator"
+      UDID=$(xcrun simctl create test-iphone com.apple.CoreSimulator.SimDeviceType.iPhone-12 iOS15)
+      xcrun simctl boot $UDID
+    workingDirectory: apps/${{ parameters.relative_directory }}
+    displayName: 'Boot simulator'
+
+  - bash: |
       echo "yarn ${{ parameters.relative_directory }}"
       yarn ${{ parameters.relative_directory }}
     workingDirectory: apps/${{ parameters.relative_directory }}

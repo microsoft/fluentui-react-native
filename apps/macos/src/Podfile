@@ -22,7 +22,7 @@ fi
 use_flipper!(false)
 use_test_app! do |target|
   target.app do
-    platform :osx, '10.14'
+    platform :osx, '10.15'
     pod 'FRNAvatar', :path => '../../../packages/experimental/Avatar/FRNAvatar.podspec'
     pod 'FRNCallout', :path => '../../../packages/components/Callout/FRNCallout.podspec'
     pod 'FRNCheckbox', :path => '../../../packages/experimental/Checkbox/FRNCheckbox.podspec'
