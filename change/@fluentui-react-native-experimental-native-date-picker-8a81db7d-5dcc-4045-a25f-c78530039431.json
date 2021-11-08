@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Bump macOS minimum version to 10.15",
-  "packageName": "@fluentui-react-native/experimental-native-date-picker",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

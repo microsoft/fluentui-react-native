@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 08 Nov 2021 20:52:15 GMT",
+      "tag": "@fluentui-react-native/tester_v0.47.1",
+      "version": "0.47.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added macOS Callout and ContextualMenu tests",
+            "author": "sanajmi@microsoft.com",
+            "commit": "ae20d8c84bb0f87703d2fa4d16b54abbea4c5b90",
+            "package": "@fluentui-react-native/tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Nov 2021 18:53:37 GMT",
       "tag": "@fluentui-react-native/tester_v0.47.0",
       "version": "0.47.0",

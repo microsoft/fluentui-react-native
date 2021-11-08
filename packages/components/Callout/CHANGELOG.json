@@ -2,6 +2,35 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Mon, 08 Nov 2021 20:52:15 GMT",
+      "tag": "@fluentui-react-native/callout_v0.18.0",
+      "version": "0.18.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump macOS minimum version to 10.15",
+            "author": "sanajmi@microsoft.com",
+            "commit": "f6e7e6523713e641227f91113728da3d9816ef22",
+            "package": "@fluentui-react-native/callout"
+          },
+          {
+            "comment": "Use \"FRN\" prefix over \"RCT\" for macOS Callout native code",
+            "author": "sanajmi@microsoft.com",
+            "commit": "10d9d09b2af1bf71ff4253cc17e536dd6d8bfae1",
+            "package": "@fluentui-react-native/callout"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Added macOS support",
+            "author": "sanajmi@microsoft.com",
+            "commit": "ae20d8c84bb0f87703d2fa4d16b54abbea4c5b90",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Nov 2021 18:53:37 GMT",
       "tag": "@fluentui-react-native/callout_v0.17.29",
       "version": "0.17.29",

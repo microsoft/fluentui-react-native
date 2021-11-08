@@ -1,6 +1,6 @@
 {
   "name": "@fluentui/react-native",
-  "version": "0.26.7",
+  "version": "0.26.8",
   "description": "A react-native component library that implements the Fluent Design System.",
   "repository": {
     "type": "git",
@@ -31,20 +31,20 @@
   },
   "dependencies": {
     "@fluentui-react-native/button": ">=0.20.15 <1.0.0",
-    "@fluentui-react-native/callout": ">=0.17.29 <1.0.0",
+    "@fluentui-react-native/callout": ">=0.18.0 <1.0.0",
     "@fluentui-react-native/checkbox": ">=0.13.16 <1.0.0",
-    "@fluentui-react-native/contextual-menu": "0.10.30",
+    "@fluentui-react-native/contextual-menu": "0.11.0",
     "@fluentui-react-native/focus-trap-zone": ">=0.7.53 <1.0.0",
-    "@fluentui-react-native/focus-zone": ">=0.7.32 <1.0.0",
+    "@fluentui-react-native/focus-zone": ">=0.7.33 <1.0.0",
     "@fluentui-react-native/interactive-hooks": ">=0.10.53 <1.0.0",
     "@fluentui-react-native/link": ">=0.14.12 <1.0.0",
-    "@fluentui-react-native/menu-button": ">=0.6.16 <1.0.0",
+    "@fluentui-react-native/menu-button": ">=0.6.17 <1.0.0",
     "@fluentui-react-native/persona": ">=0.11.25 <1.0.0",
     "@fluentui-react-native/persona-coin": ">=0.9.25 <1.0.0",
     "@fluentui-react-native/pressable": ">=0.7.29 <1.0.0",
-    "@fluentui-react-native/radio-group": ">=0.13.17 <1.0.0",
+    "@fluentui-react-native/radio-group": ">=0.13.18 <1.0.0",
     "@fluentui-react-native/separator": ">=0.10.44 <1.0.0",
-    "@fluentui-react-native/tabs": ">=0.5.11 <1.0.0",
+    "@fluentui-react-native/tabs": ">=0.5.12 <1.0.0",
     "@fluentui-react-native/text": ">=0.10.24 <1.0.0"
   },
   "devDependencies": {

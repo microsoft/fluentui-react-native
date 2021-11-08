@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Use \"FRN\" prefix over \"RCT\" for macOS Callout native code",
-  "packageName": "@fluentui-react-native/callout",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

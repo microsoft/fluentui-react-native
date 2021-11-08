@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-expander",
   "entries": [
     {
+      "date": "Mon, 08 Nov 2021 20:52:15 GMT",
+      "tag": "@fluentui-react-native/experimental-expander_v0.2.23",
+      "version": "0.2.23",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Format page",
+            "author": "sanajmi@microsoft.com",
+            "commit": "3c3a62be8b2236671b33f75dc302a3a062eaba28",
+            "package": "@fluentui-react-native/experimental-expander"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Nov 2021 18:53:37 GMT",
       "tag": "@fluentui-react-native/experimental-expander_v0.2.22",
       "version": "0.2.22",
