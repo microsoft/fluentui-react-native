@@ -2854,32 +2854,32 @@
     cosmiconfig "^7.0.0"
     semver "^7.0.0"
 
-"@rnx-kit/config@^0.4.13":
-  version "0.4.13"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.4.13.tgz#3408d780cd39b03ae2ef22b626ae466e222a1732"
-  integrity sha512-LMhynDinr7uKUlK15aA0pWuxwl/tyHf/VNTWO0ED0VCpnT5M1Ij/xCPBOeBf/luHz0s/wUxp/Kxl3JesS7lXJA==
+"@rnx-kit/config@^0.4.19":
+  version "0.4.19"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.4.19.tgz#7c82bd1fa465ebad3ab4882f340ff12688d9ce90"
+  integrity sha512-vSBT22G7fvL4QrBIwh+e/k106jJUT6+4DZGQmV3+t08dy/fTC2lKs+KTamM+/4mp7/OuNmuVHVWtvElM0uoRgQ==
   dependencies:
-    "@rnx-kit/console" "^1.0.5"
+    "@rnx-kit/console" "^1.0.9"
     cosmiconfig "^7.0.0"
     lodash "^4.17.21"
     semver "^7.0.0"
 
-"@rnx-kit/console@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/console/-/console-1.0.5.tgz#82cf77aed4062361c036202e7daa6d6b14362676"
-  integrity sha512-cJ8tLQg7RWBlh+mH3qvb+WlitO+HeXtPqNQYyVZOEH4FslWnfovNEASWbbbn9RcTzAVnUSBZRhroEtaYRHkeow==
+"@rnx-kit/console@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/console/-/console-1.0.9.tgz#da71f3cc34dec5dd06584e9e68ff601828af06d1"
+  integrity sha512-yZJoxH0HoxtVUEkWppcyYPHR7Km0U6RDiQ0f1Z7uWhHLvQ6dk6/do0T60+aVOWZbpBR6eOEoqWW3ViK4qTl2Xg==
   dependencies:
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.5.10", "@rnx-kit/dep-check@^1.5.9":
-  version "1.8.12"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.8.12.tgz#f14e50528c500fa4a6fce68aaea8fff1d17f32f6"
-  integrity sha512-CUGGaBWVyfXOIBOeeiHDmNsjChGJ4h4iFFxABy2hBsPvb3Y1jFDuWJAD5z3hD9eFF2SO4EbuoBr78Dcnry+4lg==
+  version "1.8.18"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.8.18.tgz#07b9228fcd389b83906156f6cbb8a3e553e62a96"
+  integrity sha512-Hr1GhVlSCHsDzcX+0U8PgcpmLw/EjGT9te/JGCxVC0xXjtwyH12YN4OpDLPD9NNXseAStmPTEF4iCX7GeOUVSQ==
   dependencies:
-    "@rnx-kit/config" "^0.4.13"
-    "@rnx-kit/console" "^1.0.5"
-    "@rnx-kit/tools-language" "^1.1.4"
-    "@rnx-kit/tools-node" "^1.1.6"
+    "@rnx-kit/config" "^0.4.19"
+    "@rnx-kit/console" "^1.0.9"
+    "@rnx-kit/tools-language" "^1.2.4"
+    "@rnx-kit/tools-node" "^1.2.4"
     chalk "^4.1.0"
     detect-indent "^6.0.0"
     jest-diff "^26.0.0"
@@ -2926,17 +2926,12 @@
     chalk "^4.1.1"
     yargs "^16.2.0"
 
-"@rnx-kit/tools-language@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-language/-/tools-language-1.1.4.tgz#d33d05adcf3a8efad452e51212e84288d8da412c"
-  integrity sha512-Ki7c92zYGUgDmJvhK3AonH45AP6obKwSphR5DSsXlTyjReMV0T2Y5aQ25kJvM49kmT7CTMihBdeB1NiDi4iesQ==
-
 "@rnx-kit/tools-language@^1.2.4":
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/@rnx-kit/tools-language/-/tools-language-1.2.4.tgz#b559ea3012efc6768baac3611b086ac59911194a"
   integrity sha512-ddRWTzAnjRpiDBUT8LSXEfZTy5J7f8YMprhz4luk8dGajDEjttFhVPpSZYbqFIkFbj5rkBGCAFL0iejuh/tRQg==
 
-"@rnx-kit/tools-node@^1.1.6", "@rnx-kit/tools-node@^1.2.4":
+"@rnx-kit/tools-node@^1.2.4":
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/@rnx-kit/tools-node/-/tools-node-1.2.4.tgz#620e2e51d9c58bb60ad78953d09918287b30378c"
   integrity sha512-hxpHP9n8L0sBGbbWK27+WCtYEZ5DInF9VElUazxCu1wi15hlU62RX82KY4b4KjTHP1l5Tne/Hcz5Kj3ENY7SXw==
@@ -3336,9 +3331,9 @@
     "@types/react" "^16"
 
 "@types/react-native@^0.63.0":
-  version "0.63.54"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.54.tgz#9e09a5f819952df75855d27d6f43f94ededf46cd"
-  integrity sha512-KJE3KQZJ7L5XtAcNvWnfMDmRMCSkhPnc5dlhgYV6NHSwRUU2WaIOd6FVRKoWMm0Z9qpmC3GIjn/BQHs2lNeGzw==
+  version "0.63.56"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.56.tgz#015b0fd93f16f01cc5fb1d402b5b60568366a469"
+  integrity sha512-QEGWwmK8z1oDtwXQ3otN/H+1MMmuChigvpgjzbW4JFr0jf9y5ArXplB9qnpJK/90ABcPxu2xY/+08WGEcOq5Gw==
   dependencies:
     "@types/react" "*"
 
