@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
-import { Text, View, Switch } from 'react-native';
+import { Text, View, Switch, Platform } from 'react-native';
 import {
   Text as FURNText,
   Button,
@@ -118,12 +118,19 @@ const nestedContextualMenu: React.FunctionComponent = () => {
   const testImage = require('../Button/icon_24x24.png');
   const testTtf = require('../Button/Font Awesome 5 Free-Solid-900.otf');
 
-  const fontProps: FontIconProps = {
-    fontFamily: `Font Awesome 5 Free`,
-    fontSrcFile: testTtf,
-    codepoint: 0xf083,
-    fontSize: 16,
-  };
+  const fontProps: FontIconProps = Platform.select({
+    macos: {
+      fontFamily: 'Arial',
+      codepoint: 0x2663,
+      fontSize: 32,
+    },
+    default: {
+      fontFamily: `Font Awesome 5 Free`,
+      fontSrcFile: testTtf,
+      codepoint: 0xf083,
+      fontSize: 32,
+    },
+  });
 
   const svgProps: SvgIconProps = {
     src: TestSvg,
@@ -335,6 +342,7 @@ const IconContextualMenu: React.FunctionComponent = () => {
     </View>
   );
 };
+
 const contextualMenuSections: TestSection[] = [
   {
     name: 'Standard ContextualMenu',

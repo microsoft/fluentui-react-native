@@ -3,7 +3,7 @@ require 'json'
 package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 
 Pod::Spec.new do |s|
-  s.name         = 'FRNRadioButton'
+  s.name         = 'FRNCallout'
   s.version      = package['version']
   s.summary      = package['description']
   s.license      = package['license']
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 
   s.pod_target_xcconfig = { 'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES', 'OTHER_SWIFT_FLAGS' => '-gline-tables-only' }
 
-  s.osx.deployment_target = "10.14"
+  s.osx.deployment_target = "10.15"
   s.osx.source_files      = "macos/*.{swift,h,m}"
 
   s.dependency 'React'

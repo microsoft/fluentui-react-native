@@ -46,7 +46,7 @@ export function getAppleSemanticPalette(): AppleSemanticPalette {
 
     windowBackgroundColor: PlatformColor('windowBackgroundColor'),
     windowFrameTextColor: PlatformColor('windowFrameTextColor'),
-    underPageBackgroundColor: PlatformColor(' underPageBackgroundColor'),
+    underPageBackgroundColor: PlatformColor('underPageBackgroundColor'),
 
     findHighlightColor: PlatformColor('findHighlightColor'),
     highlightColor: PlatformColor('highlightColor'),
@@ -367,10 +367,10 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     menuDivider: applePlatform.separatorColor,
     menuIcon: neutralForeground3, //GH:728 Icon doesn't support PlatformColor
     menuHeader: applePlatform.headerTextColor,
-    menuItemBackgroundHovered: 'transparent',
-    menuItemBackgroundPressed: applePlatform.selectedContentBackgroundColor,
+    menuItemBackgroundHovered: applePlatform.controlAccentColor,
+    menuItemBackgroundPressed: ColorWithSystemEffectMacOS(applePlatform.controlAccentColor, 'pressed'),
     menuItemText: applePlatform.labelColor,
-    menuItemTextHovered: applePlatform.labelColor,
+    menuItemTextHovered: 'white',
 
     listBackground: 'transparent',
     listText: applePlatform.labelColor,

@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Mon, 08 Nov 2021 20:52:15 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.6.17",
+      "version": "0.6.17",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Adding accessibilityLabel integration for MenuButton",
+            "author": "safreibe@microsoft.com",
+            "commit": "5c2806d73cca55e363fdc58a95e04594b4f9a9e9",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "Bump macOS minimum version to 10.15",
+            "author": "sanajmi@microsoft.com",
+            "commit": "f6e7e6523713e641227f91113728da3d9816ef22",
+            "package": "@fluentui-react-native/menu-button"
+          },
+          {
+            "comment": "fixing capitalization in some of the native code for macOS",
+            "author": "sanajmi@microsoft.com",
+            "commit": "ae20d8c84bb0f87703d2fa4d16b54abbea4c5b90",
+            "package": "@fluentui-react-native/menu-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Nov 2021 18:53:37 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.6.16",
       "version": "0.6.16",

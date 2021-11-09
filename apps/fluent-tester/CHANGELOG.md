@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 01 Nov 2021 18:53:37 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Nov 2021 20:52:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.47.1
+
+Mon, 08 Nov 2021 20:52:15 GMT
+
+### Patches
+
+- Added macOS Callout and ContextualMenu tests (sanajmi@microsoft.com)
 
 ## 0.47.0
 
