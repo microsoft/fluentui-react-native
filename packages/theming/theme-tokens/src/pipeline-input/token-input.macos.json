@@ -1,0 +1,115 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/fluentui-token-pipeline/main/docs/token.schema.json",
+  "Meta": {
+    "FluentUITokensVersion": 0
+  },
+  "Global": {
+    "Color": {
+      "Brand": {
+        "Shade": {
+          "30": { "value": "#0e336a" },
+          "20": { "value": "#13458f" },
+          "10": { "value": "#1651aa" }
+        },
+        "Primary": { "value": "#185abd" },
+        "Tint": {
+          "10": { "value": "#2e6ac5" },
+          "20": { "value": "#6794d7" },
+          "30": { "value": "#aec6eb" },
+          "40": { "value": "#d2e0f4" }
+        }
+      },
+      "Excel": {
+        "Shade": {
+          "30": { "value": "#094624" },
+          "20": { "value": "#0c5f32" },
+          "10": { "value": "#0f703b" }
+        },
+        "Primary": { "value": "#107c41" },
+        "Tint": {
+          "10": { "value": "#218d51" },
+          "20": { "value": "#55b17e" },
+          "30": { "value": "#a0d8b9" },
+          "40": { "value": "#caead8" }
+        }
+      },
+      "Office": {
+        "Shade": {
+          "30": { "value": "#792000" },
+          "20": { "value": "#a52c00" },
+          "10": { "value": "#c33400" }
+        },
+        "Primary": { "value": "#d83b01" },
+        "Tint": {
+          "10": { "value": "#dd4f1b" },
+          "20": { "value": "#e8825d" },
+          "30": { "value": "#f4beaa" },
+          "40": { "value": "#f9dcd1" }
+        }
+      },
+      "OneNote": {
+        "Shade": {
+          "30": { "value": "#3c1a3a" },
+          "20": { "value": "#52254f" },
+          "10": { "value": "#6c2f68" }
+        },
+        "Primary": { "value": "#80397b" },
+        "Tint": {
+          "10": { "value": "#9e5499" },
+          "20": { "value": "#d4a9d1" },
+          "30": { "value": "#e0bfde" },
+          "40": { "value": "#f0daee" }
+        }
+      },
+      "Outlook": {
+        "Shade": {
+          "30": { "value": "#135995" },
+          "20": { "value": "#1664a7" },
+          "10": { "value": "#106ebe" }
+        },
+        "Primary": { "value": "#0078d4" },
+        "Tint": {
+          "10": { "value": "#2488d8" },
+          "20": { "value": "#69afe5" },
+          "30": { "value": "#b3d6f2" },
+          "40": { "value": "#cce3f5" }
+        }
+      },
+      "PowerPoint": {
+        "Shade": {
+          "30": { "value": "#6e220f" },
+          "20": { "value": "#952f15" },
+          "10": { "value": "#b13719" }
+        },
+        "Primary": { "value": "#c43e1c" },
+        "Tint": {
+          "10": { "value": "#cb5031" },
+          "20": { "value": "#dc816a" },
+          "30": { "value": "#edbcb0" },
+          "40": { "value": "#f6dbd4" }
+        }
+      },
+      "Word": {
+        "Shade": {
+          "30": { "value": "#0e336a" },
+          "20": { "value": "#13458f" },
+          "10": { "value": "#1651aa" }
+        },
+        "Primary": { "value": "#185abd" },
+        "Tint": {
+          "10": { "value": "#2e6ac5" },
+          "20": { "value": "#6794d7" },
+          "30": { "value": "#aec6eb" },
+          "40": { "value": "#d2e0f4" }
+        }
+      }
+    },
+    "Font": {
+      "Family": {
+        "Default": { "value": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"" },
+        "Monospace": { "value": "\"Courier New\"" },
+        "Numeric": { "value": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"" }
+      }
+    }
+  }
+}
