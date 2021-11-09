@@ -3,6 +3,15 @@
   "Meta": {
     "FluentUITokensVersion": 0
   },
+  "Global": {
+    "Font": {
+      "Family": {
+        "Default": { "value": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"" },
+        "Monospace": { "value": "\"Courier New\"" },
+        "Numeric": { "value": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"" }
+      }
+    }
+  },
   "Set": {
     "NeutralForeground2": {
       "Fill": {
