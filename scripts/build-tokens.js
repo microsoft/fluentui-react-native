@@ -35,21 +35,21 @@ async function run() {
 
   console.log('Generating macOS global tokens...');
   child_process.execSync(
-    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand.macos.json --out ./packages/theming/theme-tokens/src/global-macos --p reactnative',
+    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.macos.json --out ./packages/theming/theme-tokens/src/global-macos --p reactnative',
   );
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/global-macos/reactnative/tokens-aliases.json'));
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/global-macos/reactnative/tokens-controls.json'));
 
   console.log('Generating macOS light mode tokens...');
   child_process.execSync(
-    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand.macos.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-light.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-light.macos.json --out ./packages/theming/theme-tokens/src/light-macos --p reactnative',
+    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.macos.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-light.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-light.macos.json --out ./packages/theming/theme-tokens/src/light-macos --p reactnative',
   );
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/colorful/reactnative/tokens-global.json'));
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/colorful/reactnative/tokens-controls.json'));
 
   console.log('Generating macOS dark mode tokens...');
   child_process.execSync(
-    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand.macos.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-dark.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-dark.macos.json --out ./packages/theming/theme-tokens/src/dark-macos --p reactnative',
+    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.macos.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-dark.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-dark.macos.json --out ./packages/theming/theme-tokens/src/dark-macos --p reactnative',
   );
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/colorful/reactnative/tokens-global.json'));
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/colorful/reactnative/tokens-controls.json'));

@@ -873,9 +873,9 @@
 	},
 	"font": {
 		"family": {
-			"default": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
-			"monospace": "Consolas, \"Courier New\", monospace",
-			"numeric": "\"Bahnschrift\", \"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif"
+			"default": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
+			"monospace": "\"Courier New\"",
+			"numeric": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\""
 		},
 		"lineHeight": {
 			"100": 14,
