@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-checkbox",
   "entries": [
     {
+      "date": "Tue, 09 Nov 2021 23:04:33 GMT",
+      "tag": "@fluentui-react-native/experimental-checkbox_v0.3.2",
+      "version": "0.3.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.9.2",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "8baa72ed4ec06f90a51cf757e1924e946f76a537",
+            "package": "@fluentui-react-native/experimental-checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 08 Nov 2021 20:52:15 GMT",
       "tag": "@fluentui-react-native/experimental-checkbox_v0.3.1",
       "version": "0.3.1",

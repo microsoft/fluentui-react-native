@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/theming-utils",
-  "version": "0.7.8",
+  "version": "0.7.9",
   "description": "Utils for dealing with theming",
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/memo-cache": "^1.1.5",
-    "@fluentui-react-native/theme-tokens": ">=0.9.1 <1.0.0",
+    "@fluentui-react-native/theme-tokens": ">=0.9.2 <1.0.0",
     "@fluentui-react-native/theme-types": ">=0.12.4 <1.0.0"
   },
   "devDependencies": {

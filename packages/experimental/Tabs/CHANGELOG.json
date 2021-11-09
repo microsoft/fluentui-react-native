@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-tabs",
   "entries": [
     {
+      "date": "Tue, 09 Nov 2021 23:04:33 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.3.8",
+      "version": "0.3.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.30",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "8baa72ed4ec06f90a51cf757e1924e946f76a537",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 08 Nov 2021 20:52:15 GMT",
       "tag": "@fluentui-react-native/experimental-tabs_v0.3.7",
       "version": "0.3.7",

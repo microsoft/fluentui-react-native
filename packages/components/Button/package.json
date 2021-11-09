@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/button",
-  "version": "0.20.15",
+  "version": "0.20.16",
   "description": "A cross-platform Button component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -21,12 +21,12 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.10.21",
+    "@uifabricshared/foundation-compose": "^1.10.22",
     "@fluentui-react-native/adapters": ">=0.7.5 <1.0.0",
-    "@fluentui-react-native/icon": "0.8.29",
-    "@fluentui-react-native/interactive-hooks": ">=0.10.53 <1.0.0",
-    "@fluentui-react-native/pressable": ">=0.7.29 <1.0.0",
-    "@fluentui-react-native/text": ">=0.10.24 <1.0.0",
+    "@fluentui-react-native/icon": "0.8.30",
+    "@fluentui-react-native/interactive-hooks": ">=0.10.54 <1.0.0",
+    "@fluentui-react-native/pressable": ">=0.7.30 <1.0.0",
+    "@fluentui-react-native/text": ">=0.10.25 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.10.3 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.9.3 <1.0.0",
     "@uifabricshared/foundation-settings": ">=0.10.3 <1.0.0"
