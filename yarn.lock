@@ -2810,10 +2810,10 @@
   resolved "https://registry.yarnpkg.com/@react-native/polyfills/-/polyfills-1.0.0.tgz#05bb0031533598f9458cf65a502b8df0eecae780"
   integrity sha512-0jbp4RxjYopTsIdLl+/Fy2TiwVYHy4mgeu07DG4b/LyM0OS/+lPP5c9sbnt/AMlnF6qz2JRZpPpGw1eMNS6A4w==
 
-"@rnx-kit/babel-preset-metro-react-native@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/babel-preset-metro-react-native/-/babel-preset-metro-react-native-1.0.7.tgz#a71ec02ba2d5e146286f81b30aecfe1f4ade41f7"
-  integrity sha512-gd1Vmg+2PV/KOJyJ10ZuSc20+7nw/gEgVCeAtN6kiRn00g2QkyurELeCchZ3/KtvT3hyHygsfqeJKROdOrohvw==
+"@rnx-kit/babel-preset-metro-react-native@^1.0.15":
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/babel-preset-metro-react-native/-/babel-preset-metro-react-native-1.0.15.tgz#c4cf5959b890be0ee46490f436a93b511ee224f9"
+  integrity sha512-e/+J3GThuiOvoC9ur5MdVyuzW4QVhlpv+YLoiLOMXq0w45B9G2HasyJbQ1Ms96ZKSoV5yRHj8EmNv8pc7daTgA==
   dependencies:
     babel-plugin-const-enum "^1.0.0"
 
@@ -2890,12 +2890,12 @@
     find-up "^5.0.0"
 
 "@rnx-kit/metro-config@^1.2.3":
-  version "1.2.16"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.16.tgz#b1483baffcf90c7d75747c22a88506d370d73c9c"
-  integrity sha512-RawCNgsnXoupoQ69CZp09ujiECHeEiQUj9B6BAMrwPHkEJgF9UQnjzRDebm220BXt5u/9aMOQzrZVU85np2Ahw==
+  version "1.2.24"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.24.tgz#49b8f800edaa8a4927377262cac147df755a7abb"
+  integrity sha512-18SEADsK6hAwhQmaiH8wobSEjxRd5mvLcocsa9CKEcpdKV/WGN1ItMGXUTyy8WOBUeCI5cOA6nV/ZenpmjjSdQ==
   dependencies:
-    "@rnx-kit/babel-preset-metro-react-native" "^1.0.7"
-    "@rnx-kit/tools-node" "^1.1.3"
+    "@rnx-kit/babel-preset-metro-react-native" "^1.0.15"
+    "@rnx-kit/tools-node" "^1.2.4"
     workspace-tools "^0.16.2"
 
 "@rnx-kit/third-party-notices@1.0.1":
@@ -2912,12 +2912,17 @@
   resolved "https://registry.yarnpkg.com/@rnx-kit/tools-language/-/tools-language-1.1.4.tgz#d33d05adcf3a8efad452e51212e84288d8da412c"
   integrity sha512-Ki7c92zYGUgDmJvhK3AonH45AP6obKwSphR5DSsXlTyjReMV0T2Y5aQ25kJvM49kmT7CTMihBdeB1NiDi4iesQ==
 
-"@rnx-kit/tools-node@^1.1.3", "@rnx-kit/tools-node@^1.1.6":
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-node/-/tools-node-1.1.6.tgz#c0694eb0b5e77308fb7313b7014a8bedb64678a1"
-  integrity sha512-3ove2Iwls7VPvZYYWXJW4C1JtMnun+104VP6gfFqnoVCPbHIhbahw75oyhIwtdUeRXX6dmTYXBSKyfsX/WNVlA==
+"@rnx-kit/tools-language@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-language/-/tools-language-1.2.4.tgz#b559ea3012efc6768baac3611b086ac59911194a"
+  integrity sha512-ddRWTzAnjRpiDBUT8LSXEfZTy5J7f8YMprhz4luk8dGajDEjttFhVPpSZYbqFIkFbj5rkBGCAFL0iejuh/tRQg==
+
+"@rnx-kit/tools-node@^1.1.6", "@rnx-kit/tools-node@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-node/-/tools-node-1.2.4.tgz#620e2e51d9c58bb60ad78953d09918287b30378c"
+  integrity sha512-hxpHP9n8L0sBGbbWK27+WCtYEZ5DInF9VElUazxCu1wi15hlU62RX82KY4b4KjTHP1l5Tne/Hcz5Kj3ENY7SXw==
   dependencies:
-    "@rnx-kit/tools-language" "^1.1.4"
+    "@rnx-kit/tools-language" "^1.2.4"
     find-up "^5.0.0"
     pkg-dir "^5.0.0"
     pkg-up "^3.1.0"
@@ -15453,9 +15458,9 @@ react-native-svg@^12.1.1:
     css-tree "^1.0.0-alpha.39"
 
 react-native-test-app@^0.7.0:
-  version "0.7.5"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.7.5.tgz#c0c8eacb9fc068761a8c075e8fda322f3440fed9"
-  integrity sha512-cEUIsZ1KhU8inhZiU2k2Fi6CZnSa1KpYw12kwMPXK9ulsUIHkW//7fn4Jyp0VE49la9WjiyX8/Z8w5tfe5Liww==
+  version "0.7.10"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.7.10.tgz#6a4625eb399bca53f507e9179b14730ef69aeb93"
+  integrity sha512-xUEP0zDGG+VSe684OusBFqlTEc/Ao6WyTcKFxFD9zFHxwoV+85P6AHqwYx/5NXFv8r1gFaFYvAfLSgwur/Y7zg==
   dependencies:
     chalk "^4.1.0"
     prompts "^2.4.0"
