@@ -40,6 +40,13 @@ async function run() {
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/global-macos/reactnative/tokens-aliases.json'));
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/global-macos/reactnative/tokens-controls.json'));
 
+  console.log('Generating macOS light mode tokens...');
+  child_process.execSync(
+    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand.macos.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-light.json --n ./packages/theming/theme-tokens/src/pipeline-input/token-input-light.macos.json --out ./packages/theming/theme-tokens/src/light-macos --p reactnative',
+  );
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/light/reactnative/tokens-global.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/light/reactnative/tokens-controls.json'));
+
   console.log('Generating android global tokens...');
   child_process.execSync(
     'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand.android.json --out ./packages/theming/theme-tokens/src/global-android --p reactnative',
