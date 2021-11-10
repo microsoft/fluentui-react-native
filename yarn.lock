@@ -3064,9 +3064,9 @@
   integrity sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
 
 "@types/enzyme@^3.10.5":
-  version "3.10.9"
-  resolved "https://registry.yarnpkg.com/@types/enzyme/-/enzyme-3.10.9.tgz#b2d7c7429a37d994c156b6f361e83f271a60c8aa"
-  integrity sha512-dx5UvcWe2Vtye6S9Hw2rFB7Ul9uMXOAje2FAbXvVYieQDNle9qPAo7DfvFMSztZ9NFiD3dVZ4JsRYGTrSLynJg==
+  version "3.10.10"
+  resolved "https://registry.yarnpkg.com/@types/enzyme/-/enzyme-3.10.10.tgz#3a44cc66571432ab9e1773a831af3742beb39275"
+  integrity sha512-/D4wFhiEjUDfPu+j5FVK0g/jf7rqeEIpNfAI+kyxzLpw5CKO0drnW3W5NC38alIjsWgnyQ8pbuPF5+UD+vhVyg==
   dependencies:
     "@types/cheerio" "*"
     "@types/react" "*"
@@ -3229,9 +3229,9 @@
     "@types/react" "^16"
 
 "@types/react-native@^0.63.0":
-  version "0.63.56"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.56.tgz#015b0fd93f16f01cc5fb1d402b5b60568366a469"
-  integrity sha512-QEGWwmK8z1oDtwXQ3otN/H+1MMmuChigvpgjzbW4JFr0jf9y5ArXplB9qnpJK/90ABcPxu2xY/+08WGEcOq5Gw==
+  version "0.63.57"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.57.tgz#b908373257ceaebe3e3daaebc9efcae68b006822"
+  integrity sha512-FD4do3uthGHddy9e2HVsitMPRfR2wgm2C6k0KAiWaeKhEuiX+5rvtmAdH+0LkqzcDYIGRemEgbQl6iN/9CsZ1A==
   dependencies:
     "@types/react" "*"
 
