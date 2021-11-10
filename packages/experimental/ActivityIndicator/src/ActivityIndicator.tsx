@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import { useRef, useEffect } from 'react';
-import { Animated, Easing, View } from 'react-native';
+import { Animated, Easing, Platform, View } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import { activityIndicatorName, ActivityIndicatorProps, ActivityIndicatorType } from './ActivityIndicator.types';
@@ -36,6 +36,22 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
     // hiding opacity makes the screen reader on iOS and Android skip over it
     const hideOpacity = animating == false && hidesWhenStopped == true ? 0 : 1;
 
+    /**
+     * https://github.com/facebook/react-native/pull/29585
+     * React Native needs this fix to allow native driven animations to loop,
+     * which is only available in React Native 0.66+, and React Native macOS 0.62+
+     */
+    const shouldUseNativeDriver = () => {
+      const nativeVersion = Platform.constants.reactNativeVersion;
+      if (Platform.OS === 'macos' && nativeVersion.minor >= 62) {
+        return true;
+      } else if (nativeVersion.minor >= 66) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
     const spinAnimation = useRef(new Animated.Value(0)).current;
     useEffect(() => {
       if (animating) {
@@ -44,7 +60,7 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
             Animated.timing(spinAnimation, {
               toValue: 359,
               duration: 750,
-              useNativeDriver: true,
+              useNativeDriver: shouldUseNativeDriver(),
               easing: Easing.linear,
             }),
           ]),

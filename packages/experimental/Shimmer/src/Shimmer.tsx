@@ -3,11 +3,27 @@ import { useRef, useEffect, useMemo } from 'react';
 import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
 import { shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
-import { Animated } from 'react-native';
+import { Animated, Platform } from 'react-native';
 import { stylingSettings } from './Shimmer.styling';
 import assertNever from 'assert-never';
 
 export function useShimmerAnimation(memoData: any) {
+  const shouldUseNativeDriver = () => {
+    /**
+     * https://github.com/facebook/react-native/pull/29585
+     * In order for native driven animations to loop, React Native needs this fix,
+     * which is only available in React Native 0.66+, and React Native macOS 0.62+
+     */
+    const nativeVersion = Platform.constants.reactNativeVersion;
+    if (Platform.OS === 'macos' && nativeVersion.minor >= 62) {
+      return true;
+    } else if (nativeVersion.minor >= 66) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const startValue = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     Animated.loop(
@@ -16,7 +32,7 @@ export function useShimmerAnimation(memoData: any) {
           toValue: 30,
           duration: memoData.duration,
           delay: memoData.delay,
-          useNativeDriver: true,
+          useNativeDriver: shouldUseNativeDriver(),
         }),
       ]),
     ).start();
