@@ -41,6 +41,11 @@ export interface ActivityIndicatorProps extends ActivityIndicatorTokens, ViewPro
    * @defaultValue 'true'
    */
   hidesWhenStopped?: boolean;
+
+  /**
+   * overrides the useNativeDriver prop on the component's animation
+   */
+  useNativeDriver?: boolean;
 }
 
 export interface ActivityIndicatorType {

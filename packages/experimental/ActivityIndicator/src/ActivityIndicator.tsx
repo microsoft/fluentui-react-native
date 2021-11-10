@@ -36,12 +36,16 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
     // hiding opacity makes the screen reader on iOS and Android skip over it
     const hideOpacity = animating == false && hidesWhenStopped == true ? 0 : 1;
 
-    /**
-     * https://github.com/facebook/react-native/pull/29585
-     * React Native needs this fix to allow native driven animations to loop,
-     * which is only available in React Native 0.66+, and React Native macOS 0.62+
-     */
-    const shouldUseNativeDriver = () => {
+    const useNativeDriver: boolean = (() => {
+      // Allow the user to override the default setting if needed
+      if (props.useNativeDriver !== undefined) {
+        return props.useNativeDriver;
+      }
+      /**
+       * https://github.com/facebook/react-native/pull/29585
+       * In order for native driven animations to loop, React Native needs this fix,
+       * which is only available in React Native 0.66+, and React Native macOS 0.62+
+       */
       const nativeVersion = Platform.constants.reactNativeVersion;
       if (Platform.OS === 'macos' && nativeVersion.minor >= 62) {
         return true;
@@ -50,7 +54,7 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
       } else {
         return false;
       }
-    };
+    })();
 
     const spinAnimation = useRef(new Animated.Value(0)).current;
     useEffect(() => {
@@ -60,7 +64,7 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
             Animated.timing(spinAnimation, {
               toValue: 359,
               duration: 750,
-              useNativeDriver: shouldUseNativeDriver(),
+              useNativeDriver: useNativeDriver,
               easing: Easing.linear,
             }),
           ]),

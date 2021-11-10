@@ -7,23 +7,7 @@ import { Animated, Platform } from 'react-native';
 import { stylingSettings } from './Shimmer.styling';
 import assertNever from 'assert-never';
 
-export function useShimmerAnimation(memoData: any) {
-  const shouldUseNativeDriver = () => {
-    /**
-     * https://github.com/facebook/react-native/pull/29585
-     * In order for native driven animations to loop, React Native needs this fix,
-     * which is only available in React Native 0.66+, and React Native macOS 0.62+
-     */
-    const nativeVersion = Platform.constants.reactNativeVersion;
-    if (Platform.OS === 'macos' && nativeVersion.minor >= 62) {
-      return true;
-    } else if (nativeVersion.minor >= 66) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
+export function useShimmerAnimation(memoData: ShimmerProps) {
   const startValue = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     Animated.loop(
@@ -32,7 +16,7 @@ export function useShimmerAnimation(memoData: any) {
           toValue: 30,
           duration: memoData.duration,
           delay: memoData.delay,
-          useNativeDriver: shouldUseNativeDriver(),
+          useNativeDriver: memoData.useNativeDriver,
         }),
       ]),
     ).start();
@@ -52,6 +36,26 @@ export const Shimmer = compose<ShimmerType>({
     const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
     const tokens = useStyling(props).root;
 
+    const useNativeDriver: boolean = (() => {
+      // Allow the user to override the default setting if needed
+      if (props.useNativeDriver !== undefined) {
+        return props.useNativeDriver;
+      }
+      /**
+       * https://github.com/facebook/react-native/pull/29585
+       * In order for native driven animations to loop, React Native needs this fix,
+       * which is only available in React Native 0.66+, and React Native macOS 0.62+
+       */
+      const nativeVersion = Platform.constants.reactNativeVersion;
+      if (Platform.OS === 'macos' && nativeVersion.minor >= 62) {
+        return true;
+      } else if (nativeVersion.minor >= 66) {
+        return true;
+      } else {
+        return false;
+      }
+    })();
+
     const memoizedShimmerData = useMemo(
       () => ({
         angle: props.angle ? props.angle : tokens['angle'],
@@ -63,6 +67,7 @@ export const Shimmer = compose<ShimmerType>({
         shimmerColorOpacity: tokens['shimmerColorOpacity'],
         shimmerWaveColor: props.shimmerWaveColor ? props.shimmerWaveColor : tokens['shimmerWaveColor'],
         shimmerWaveColorOpacity: tokens['shimmerWaveColorOpacity'],
+        useNativeDriver: useNativeDriver,
       }),
       [
         props.angle,
@@ -73,6 +78,7 @@ export const Shimmer = compose<ShimmerType>({
         props.shimmerWaveColor,
         props.shimmerWaveColorOpacity,
         props.style,
+        props.useNativeDriver,
       ],
     );
 

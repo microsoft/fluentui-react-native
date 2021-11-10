@@ -142,6 +142,11 @@ export interface ShimmerTokens extends IBackgroundColorTokens {
    * @defaultValue '100%' of the 'width' property
    */
   shimmerWaveWidth?: number | string;
+
+  /**
+   * overrides the useNativeDriver prop on the component's animation
+   */
+  useNativeDriver?: boolean;
 }
 
 export interface ShimmerSlotProps extends ShimmerProps {
