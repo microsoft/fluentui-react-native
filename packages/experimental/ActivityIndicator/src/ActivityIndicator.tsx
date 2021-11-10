@@ -44,7 +44,7 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
             Animated.timing(spinAnimation, {
               toValue: 359,
               duration: 750,
-              useNativeDriver: false,
+              useNativeDriver: true,
               easing: Easing.linear,
             }),
           ]),

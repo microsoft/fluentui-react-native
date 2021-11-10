@@ -16,7 +16,7 @@ export function useShimmerAnimation(memoData: any) {
           toValue: 30,
           duration: memoData.duration,
           delay: memoData.delay,
-          useNativeDriver: false,
+          useNativeDriver: true,
         }),
       ]),
     ).start();
