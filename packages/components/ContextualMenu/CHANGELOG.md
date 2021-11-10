@@ -1,8 +1,28 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Mon, 01 Nov 2021 18:53:37 GMT and should not be manually modified.
+This log was last generated on Tue, 09 Nov 2021 23:04:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.1
+
+Tue, 09 Nov 2021 23:04:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.18.1 (67026167+chiuam@users.noreply.github.com)
+
+## 0.11.0
+
+Mon, 08 Nov 2021 20:52:15 GMT
+
+### Minor changes
+
+- Beta macOS support (sanajmi@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.18.0 (sanajmi@microsoft.com)
 
 ## 0.10.30
 
