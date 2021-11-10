@@ -45,9 +45,11 @@ export const ActivityIndicator = compose<ActivityIndicatorType>({
        * https://github.com/facebook/react-native/pull/29585
        * In order for native driven animations to loop, React Native needs this fix,
        * which is only available in React Native 0.66+, and React Native macOS 0.62+
+       * FluentUI React Native only supports RN 0.63+ at the time of writing, so let's
+       * scope our check to that minimum.
        */
       const nativeVersion = Platform.constants.reactNativeVersion;
-      if (Platform.OS === 'macos' && nativeVersion.minor >= 62) {
+      if (Platform.OS === 'macos' && nativeVersion.minor >= 63) {
         return true;
       } else if (nativeVersion.minor >= 66) {
         return true;
