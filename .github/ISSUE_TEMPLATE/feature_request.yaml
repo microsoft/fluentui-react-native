@@ -1,0 +1,28 @@
+name: Feature request
+description: Do you have Feature or improvement for Fluent UI React Native? Let us know.
+title: Describe the request
+labels: []
+body:
+  - type: checkboxes
+    attributes:
+      label: Platform
+      options:
+        - label: iOS
+        - label: macOS
+        - label: win32
+        - label: windows
+        - label: android
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Describe the feature that you would like added
+  - type: textarea
+    attributes:
+      label: What component or utility would this be added to
+  - type: textarea
+    attributes:
+      label: Have you discussed this feature with our team, and if so, who
+  - type: textarea
+    attributes:
+      label: Additional context/screenshots
