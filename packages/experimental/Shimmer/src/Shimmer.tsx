@@ -46,10 +46,9 @@ export const Shimmer = compose<ShimmerType>({
 
     /**
      * https://github.com/facebook/react-native/pull/29585
-     * In order for native driven animations to loop, React Native needs this fix.
+     * For Animated.loop() to work with the native driver, React Native needs this fix.
      * It's only available in React Native 0.66+, and React Native macOS 0.62+
      * To workaround this, let's just rerun the loop everytime the animation finishes
-     * to emulate Animated.loop()
      */
     const shimmerAnimation = useCallback(() => {
       Animated.sequence([
