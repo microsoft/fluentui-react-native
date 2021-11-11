@@ -31,10 +31,10 @@
     "@uifabricshared/foundation-settings": ">=0.10.3 <1.0.0"
   },
   "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@office-iss/react-native-win32": "^0.63.7",
     "@types/react-native": "^0.63.0",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1",
     "react-native": "^0.63.4"
   },
   "peerDependencies": {
