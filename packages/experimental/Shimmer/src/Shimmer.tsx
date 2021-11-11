@@ -1,39 +1,11 @@
 /** @jsx withSlots */
-import { useRef, useEffect, useMemo } from 'react';
+import { useRef, useEffect, useMemo, useCallback } from 'react';
 import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
 import { shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import { Animated } from 'react-native';
 import { stylingSettings } from './Shimmer.styling';
 import assertNever from 'assert-never';
-
-function useShimmerAnimation(memoData: ShimmerProps) {
-  const startValue = useRef(new Animated.Value(0)).current;
-  useEffect(() => {
-    /**
-     * https://github.com/facebook/react-native/pull/29585
-     * In order for native driven animations to loop, React Native needs this fix,
-     * which is only available in React Native 0.66+, and React Native macOS 0.62+
-     * To workaround this, let's just rerun the loop everytime the animation finishes
-     * to emulate Animated.loop()
-     */
-    const shimmerAnimation = () => {
-      Animated.sequence([
-        Animated.timing(startValue, {
-          toValue: 30,
-          duration: memoData.duration,
-          delay: memoData.delay,
-          useNativeDriver: true,
-        }),
-      ]).start(() => {
-        startValue.setValue(0);
-        shimmerAnimation();
-      });
-    };
-    shimmerAnimation();
-  });
-  return startValue;
-}
 
 const useStyling = buildUseStyling(stylingSettings);
 export const Shimmer = compose<ShimmerType>({
@@ -70,7 +42,32 @@ export const Shimmer = compose<ShimmerType>({
       ],
     );
 
-    const startValue = useShimmerAnimation(memoizedShimmerData);
+    const startValue = useRef(new Animated.Value(0)).current;
+
+    /**
+     * https://github.com/facebook/react-native/pull/29585
+     * In order for native driven animations to loop, React Native needs this fix.
+     * It's only available in React Native 0.66+, and React Native macOS 0.62+
+     * To workaround this, let's just rerun the loop everytime the animation finishes
+     * to emulate Animated.loop()
+     */
+    const shimmerAnimation = useCallback(() => {
+      Animated.sequence([
+        Animated.timing(startValue, {
+          toValue: 30,
+          duration: memoizedShimmerData.duration,
+          delay: memoizedShimmerData.delay,
+          useNativeDriver: true,
+        }),
+      ]).start(() => {
+        startValue.setValue(0);
+        shimmerAnimation();
+      });
+    }, [memoizedShimmerData.duration, memoizedShimmerData.delay]);
+
+    useEffect(() => {
+      shimmerAnimation();
+    });
 
     return (rest: ShimmerProps) => {
       const { elements, ...mergedProps } = mergeProps(props, rest);
