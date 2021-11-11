@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/stack",
   "entries": [
     {
+      "date": "Thu, 11 Nov 2021 23:17:41 GMT",
+      "tag": "@fluentui-react-native/stack_v0.5.43",
+      "version": "0.5.43",
+      "comments": {
+        "none": [
+          {
+            "comment": "Rename uifabricshared/eslint-config-rules to fluentui-react-native/eslint-config-rules",
+            "author": "ruaraki@microsoft.com",
+            "commit": "110fba2a1721a914501404f6040f07656307549e",
+            "package": "@fluentui-react-native/stack"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 09 Nov 2021 23:04:33 GMT",
       "tag": "@fluentui-react-native/stack_v0.5.43",
       "version": "0.5.43",

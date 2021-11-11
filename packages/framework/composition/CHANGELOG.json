@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/composition",
   "entries": [
     {
+      "date": "Thu, 11 Nov 2021 23:17:41 GMT",
+      "tag": "@fluentui-react-native/composition_v0.6.12",
+      "version": "0.6.12",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/immutable-merge to v1.1.4",
+            "author": "ruaraki@microsoft.com",
+            "commit": "110fba2a1721a914501404f6040f07656307549e",
+            "package": "@fluentui-react-native/composition"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 25 Oct 2021 19:24:43 GMT",
       "tag": "@fluentui-react-native/composition_v0.6.12",
       "version": "0.6.12",

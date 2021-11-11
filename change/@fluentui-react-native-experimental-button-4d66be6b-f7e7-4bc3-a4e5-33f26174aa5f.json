@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Rename uifabricshared/eslint-config-rules to fluentui-react-native/eslint-config-rules",
-  "packageName": "@fluentui-react-native/experimental-button",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}
