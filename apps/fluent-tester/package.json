@@ -56,12 +56,12 @@
     "tslib": "^1.13.0"
   },
   "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@rnx-kit/cli": "^0.5.27",
     "@types/jasmine": "3.5.10",
     "@types/react": ">=16.9.34 < 16.14.0",
     "@types/react-native": "^0.63.0",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1",
     "@wdio/appium-service": "5.18.2",
     "@wdio/cli": "5.23.0",
     "@wdio/jasmine-framework": "5.18.6",
