@@ -2751,16 +2751,6 @@
     cosmiconfig "^7.0.0"
     semver "^7.0.0"
 
-"@rnx-kit/config@^0.4.19":
-  version "0.4.19"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.4.19.tgz#7c82bd1fa465ebad3ab4882f340ff12688d9ce90"
-  integrity sha512-vSBT22G7fvL4QrBIwh+e/k106jJUT6+4DZGQmV3+t08dy/fTC2lKs+KTamM+/4mp7/OuNmuVHVWtvElM0uoRgQ==
-  dependencies:
-    "@rnx-kit/console" "^1.0.9"
-    cosmiconfig "^7.0.0"
-    lodash "^4.17.21"
-    semver "^7.0.0"
-
 "@rnx-kit/console@^1.0.9":
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/@rnx-kit/console/-/console-1.0.9.tgz#da71f3cc34dec5dd06584e9e68ff601828af06d1"
@@ -2769,22 +2759,13 @@
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.5.10", "@rnx-kit/dep-check@^1.5.9":
-  version "1.8.18"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.8.18.tgz#07b9228fcd389b83906156f6cbb8a3e553e62a96"
-  integrity sha512-Hr1GhVlSCHsDzcX+0U8PgcpmLw/EjGT9te/JGCxVC0xXjtwyH12YN4OpDLPD9NNXseAStmPTEF4iCX7GeOUVSQ==
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.9.0.tgz#0ae254f61c1fe9c9014be000a2871190e77a929f"
+  integrity sha512-jM+19TZ2VlCL9fbvbJ2mA5GKLXpR4sS5+SgQNIIveCvV1NxmauM7pzmwOVO/YJAZzWwsF/msW821aG+zoeugYQ==
   dependencies:
-    "@rnx-kit/config" "^0.4.19"
     "@rnx-kit/console" "^1.0.9"
     "@rnx-kit/tools-language" "^1.2.4"
     "@rnx-kit/tools-node" "^1.2.4"
-    chalk "^4.1.0"
-    detect-indent "^6.0.0"
-    jest-diff "^26.0.0"
-    lodash "^4.17.21"
-    prompts "^2.4.0"
-    semver "^7.0.0"
-    workspace-tools "^0.16.2"
-    yargs "^16.0.0"
 
 "@rnx-kit/eslint-plugin@^0.2.0":
   version "0.2.4"
@@ -2798,9 +2779,9 @@
     eslint-plugin-react "^7.26.0"
 
 "@rnx-kit/jest-preset@^0.1.0":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/jest-preset/-/jest-preset-0.1.4.tgz#4371ba7b97a70950df8db917806f2b2ad43cdabb"
-  integrity sha512-cz+9G0u16E8JUyYJsE4Ar9YPQAX30zwywBAGd4glCF/b/eEArpdR92m+FIfZR+4wD73pAayTAkLc133BsJ7cpw==
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/jest-preset/-/jest-preset-0.1.7.tgz#3fa41fb3cf02412521faa71f4b23ca63b27d3e68"
+  integrity sha512-Frxy8iPqhYOnDfS96C8aweBw+iSmn6rTEeDW6TMLdZYNc8GkuXuqLDUpp5MxOSzEB1gFP1OfWuZZ1Dzi82G33w==
   dependencies:
     "@babel/preset-env" "^7.0.0"
     "@babel/preset-typescript" "^7.0.0"
@@ -7514,11 +7495,6 @@ detect-file@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/detect-file/-/detect-file-1.0.0.tgz#f0d66d03672a825cb1b73bdb3fe62310c8e552b7"
   integrity sha1-8NZtA2cqglyxtzvbP+YjEMjlUrc=
-
-detect-indent@^6.0.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-6.1.0.tgz#592485ebbbf6b3b1ab2be175c8393d04ca0d57e6"
-  integrity sha512-reYkTUJAZb9gUuZ2RvVCNhVHdg62RHnJ7WJl8ftMi4diZ6NWlciOzQN88pUhSELEwflJht4oQDv0F0BMlwaYtA==
 
 detect-libc@^1.0.3:
   version "1.0.3"
