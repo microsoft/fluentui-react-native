@@ -15327,9 +15327,9 @@ react-native-codegen@^0.0.6:
     nullthrows "^1.1.1"
 
 react-native-macos@^0.63.41:
-  version "0.63.41"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.63.41.tgz#c52a611e2358836974769d613fb72c934b01b087"
-  integrity sha512-B+N/4E9//xkcLz2wi4bX1YIw0qRaEXzO47kdpby9qsIdA4SZ0/38+FZ3FOGs+QxWHT3WxlSvvb87piLxmavVJA==
+  version "0.63.43"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.63.43.tgz#718784479c0022d17a2653e1bd6927cccf19cf16"
+  integrity sha512-OUITQxVyhMcnGrPnQFuBPZMugvfj1UOmiWnXiZ5jb3KwrGxIxie4ZXUdGFrkbEtvGmIbef+Wy043iroVvA/Tnw==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@react-native-community/cli" "^4.10.0"
