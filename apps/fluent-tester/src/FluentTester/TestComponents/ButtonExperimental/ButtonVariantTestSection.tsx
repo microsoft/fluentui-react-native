@@ -14,14 +14,14 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
   return (
     <View style={[stackStyle, commonTestStyles.view]}>
       <Button content="Default" style={commonTestStyles.vmargin} />
-      <Button primary content="Primary" style={commonTestStyles.vmargin} />
-      <Button subtle content="Subtle" style={commonTestStyles.vmargin} />
+      <Button appearance="primary" content="Primary" style={commonTestStyles.vmargin} />
+      <Button appearance="subtle" content="Subtle" style={commonTestStyles.vmargin} />
       <Button fluid content="Fluid" style={commonTestStyles.vmargin} />
-      <Button primary fluid content="Fluid Primary" style={commonTestStyles.vmargin} />
-      <Button subtle fluid content="Fluid Subtle" style={commonTestStyles.vmargin} />
+      <Button appearance="primary" fluid content="Fluid Primary" style={commonTestStyles.vmargin} />
+      <Button appearance="subtle" fluid content="Fluid Subtle" style={commonTestStyles.vmargin} />
       <CompoundButton content="Default" secondaryContent="Compound" style={commonTestStyles.vmargin} />
-      <CompoundButton primary content="Primary" secondaryContent="Compound" style={commonTestStyles.vmargin} />
-      <CompoundButton subtle content="Subtle" secondaryContent="Compound" style={commonTestStyles.vmargin} />
+      <CompoundButton appearance="primary" content="Primary" secondaryContent="Compound" style={commonTestStyles.vmargin} />
+      <CompoundButton appearance="subtle" content="Subtle" secondaryContent="Compound" style={commonTestStyles.vmargin} />
       {Platform.OS !== 'windows' && (
         <>
           <Button fab icon={{ svgSource: svgProps, width: 20, height: 20 }} style={commonTestStyles.vmargin} />

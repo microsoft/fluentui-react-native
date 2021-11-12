@@ -21,6 +21,7 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
   return (
     state[layer] ||
     userProps[layer] ||
+    layer === userProps['appearance'] ||
     (!userProps.fab && (layer === userProps['size'] || (!userProps['size'] && layer === getDefaultSize()))) ||
     (layer === 'hasContent' && userProps.content) ||
     (layer === 'hasIcon' && userProps.icon)
