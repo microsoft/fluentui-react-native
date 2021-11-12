@@ -54,7 +54,7 @@ export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   disabled?: ButtonTokens;
   primary?: ButtonTokens;
   subtle?: ButtonTokens;
-  fluid?: ButtonTokens;
+  block?: ButtonTokens;
   fab?: ButtonTokens;
   small?: ButtonTokens;
   medium?: ButtonTokens;
@@ -94,13 +94,13 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   subtle?: boolean;
 
   /** A button can fill the width of its container. */
-  fluid?: boolean;
+  block?: boolean;
 
   /** A floating action button  */
   fab?: boolean;
 
   /** Sets style of button to a preset size style  */
-  size?: ButtonSize
+  size?: ButtonSize;
 }
 
 export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
