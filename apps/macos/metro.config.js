@@ -4,15 +4,17 @@
  */
 
 const path = require('path');
-const blacklist = require('metro-config/src/defaults/blacklist');
-const { getWatchFolders } = require('@uifabricshared/build-native');
-const { getDefaultConfig } = require('metro-config');
+const exclusionList = require('metro-config/src/defaults/exclusionList');
+const {getWatchFolders} = require('@uifabricshared/build-native');
+const {getDefaultConfig} = require('metro-config');
 
-const rnmPath = path.dirname(require.resolve('react-native-macos/package.json'));
+const rnmPath = path.dirname(
+  require.resolve('react-native-macos/package.json'),
+);
 
 module.exports = (async () => {
   const {
-    resolver: { sourceExts, assetExts },
+    resolver: {sourceExts, assetExts},
   } = await getDefaultConfig();
   return {
     watchFolders: getWatchFolders(),
@@ -23,7 +25,7 @@ module.exports = (async () => {
         'react-native': rnmPath,
       },
       platforms: ['macos', 'ios'],
-      blacklistRE: blacklist([/node_modules\/react-native\/.*/]),
+      blacklistRE: exclusionList([/node_modules\/react-native\/.*/]),
     },
     transformer: {
       babelTransformerPath: require.resolve('react-native-svg-transformer'),

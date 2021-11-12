@@ -23,21 +23,21 @@
   "dependencies": {
     "@fluentui-react-native/tester": "^0.30.4",
     "@react-native-community/slider": "^3.0.3",
-    "react": "16.13.1",
-    "react-native": "^0.63.2",
+    "react": "17.0.1",
+    "react-native": "^0.64.3",
     "react-native-svg": "^12.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.2",
-    "@babel/runtime": "^7.6.2",
+    "@babel/core": "^7.8.0",
+    "@babel/runtime": "^7.8.0",
     "@react-native-community/eslint-config": "^1.1.0",
     "@rnx-kit/cli": "^0.5.27",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "babel-jest": "^24.9.0",
     "jest": "^24.9.0",
-    "metro-config": "^0.58.0",
-    "metro-react-native-babel-preset": "^0.59.0",
+    "metro-config": "^0.66.2",
+    "metro-react-native-babel-preset": "^0.66.2",
     "react-native-svg-transformer": "^0.14.3",
     "react-native-test-app": "^0.6.3",
     "react-test-renderer": "~16.13.1"
@@ -46,8 +46,15 @@
     "preset": "react-native"
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.63",
+    "reactNativeVersion": "0.64",
     "kitType": "app",
+    "detectCyclicDependencies": {
+      "throwOnError": true
+    },
+    "detectDuplicateDependencies": {
+      "throwOnError": true
+    },
+    "typescriptValidation": true,
     "bundle": {
       "targets": [
         "ios"

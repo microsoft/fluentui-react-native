@@ -69,7 +69,9 @@ export function configureReactNativeJest(platform?: PlatformValue, customConfig?
         // hasteImplModulePath: rnPath + 'jest/hasteImpl.js',
         providesModuleNodeModules: [rnPackage],
       },
-      transformIgnorePatterns: ['node_modules/(?!(react-native)/)'],
+      transformIgnorePatterns: [
+        'node_modules/(?!((jest-)?react-native|@react-native(-community)?|@office-iss/react-native-win32|react-native-windows|react-native-macos)/)',
+      ],
       verbose: false,
       setupFilesAfterEnv: [path.join(__dirname, './jest/setupEnzyme.js')],
     },

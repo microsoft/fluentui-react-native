@@ -56,7 +56,7 @@
     "@rnx-kit/cli": "^0.5.27",
     "@types/jasmine": "3.5.10",
     "@types/react": "^16.9.34",
-    "@types/react-native": "^0.63.0",
+    "@types/react-native": "^0.64.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "@wdio/appium-service": "5.18.2",
@@ -66,11 +66,11 @@
     "@wdio/spec-reporter": "5.22.4",
     "@wdio/sync": "5.20.1",
     "appium": "1.17.1",
-    "metro-react-native-babel-preset": "^0.59.0",
-    "react": "16.13.1",
-    "react-native": "^0.63.4",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "react": "17.0.1",
+    "react-native": "^0.64.3",
     "react-native-svg-transformer": "^0.14.3",
-    "react-native-windows": "^0.62.1",
+    "react-native-windows": "^0.64.3",
     "react-test-renderer": "~16.13.1",
     "rnpm-plugin-windows": "^0.5.1-0",
     "ts-node": "^8.10.1",
@@ -79,8 +79,8 @@
     "webdriverio": "5.22.4"
   },
   "peerDependencies": {
-    "react": "16.13.1",
-    "react-native": "^0.63.4"
+    "react": "17.0.1",
+    "react-native": "^0.64.3"
   },
   "jest": {
     "preset": "react-native"

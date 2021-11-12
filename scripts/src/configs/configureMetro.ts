@@ -5,9 +5,9 @@ import path from 'path';
 import { resolveModule, resolveFile } from '../utils/resolvePaths';
 import { getRNVersion, getAllPlatforms, getAllReactNativePaths, PlatformValue, findPlatformFromArgv } from '../utils/platforms';
 import { getPackageInfo, findGitRoot } from 'just-repo-utils';
-import blacklist from 'metro-config/src/defaults/blacklist';
 import { mergeConfigs } from './mergeConfigs';
-import { getDefaultConfig } from 'metro-config';
+import getDefaultConfig from 'metro-config/src/defaults';
+import exclusionList from 'metro-config/src/defaults/exclusionList';
 
 function prepareRegex(blacklistPath): RegExp {
   return new RegExp(`${blacklistPath.replace(/[/\\\\]/g, '\\/')}.*`);
@@ -20,7 +20,7 @@ function prepareRegex(blacklistPath): RegExp {
 function getBlacklistRE(rnPath: string): RegExp {
   // get all react native package types in this repo (visible from this location)
   const thisLocation = rnPath + '/';
-  return blacklist([
+  return exclusionList([
     ...getAllReactNativePaths()
       .filter(loc => loc !== thisLocation)
       .map(p => prepareRegex(p)),

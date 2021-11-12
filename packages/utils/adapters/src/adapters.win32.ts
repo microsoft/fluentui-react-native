@@ -152,6 +152,7 @@ const _imageMask: IFilterMask<IImageProps> = {
   width: true,
   height: true,
   fadeDuration: true,
+  nativeID: true,
 };
 
 export function filterViewProps(propName: string): boolean {

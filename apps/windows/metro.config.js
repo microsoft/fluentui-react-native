@@ -5,13 +5,13 @@
  * @format
  */
 const path = require('path');
-const blacklist = require('metro-config/src/defaults/blacklist');
+const exclusionList = require('metro-config/src/defaults/exclusionList');
 const {getWatchFolders} = require('@uifabricshared/build-native');
 
 module.exports = {
   watchFolders: getWatchFolders(),
   resolver: {
-    blacklistRE: blacklist([
+    blacklistRE: exclusionList([
       // This stops "react-native run-windows" from causing the metro server to crash if its already running
       new RegExp(
         `${path.resolve(__dirname, 'windows').replace(/[/\\]/g, '/')}.*`,

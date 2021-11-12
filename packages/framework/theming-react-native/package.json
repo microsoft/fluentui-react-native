@@ -37,15 +37,15 @@
   },
   "devDependencies": {
     "@types/jest": "^25.1.4",
-    "@types/react": "^16.9.34",
-    "react": "16.13.1",
-    "react-native": "^0.63.4",
+    "@types/react": "^17.0.2",
+    "react": "17.0.1",
+    "react-native": "^0.64.3",
     "typescript": "3.8.3",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1"
   },
   "peerDependencies": {
-    "react": ">=16.13.1",
-    "react-native": ">=0.63.4"
+    "react": ">=17.0.1",
+    "react-native": ">=0.64.3"
   }
 }

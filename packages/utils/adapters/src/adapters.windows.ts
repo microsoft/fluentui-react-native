@@ -10,7 +10,6 @@ export type IImageProps = ImageProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
   children: true,
-  acceptsKeyboardFocus: true,
   accessible: true,
   accessibilityActions: true,
   accessibilityElementsHidden: true,
@@ -110,6 +109,8 @@ const _textMask: IFilterMask<ITextProps> = {
   textBreakStrategy: true,
   onTextLayout: true,
   dataDetectorType: true,
+  // eslint-disable-next-line @typescript-eslint/camelcase
+  android_hyphenationFrequency: true,
 };
 
 const _imageMask: IFilterMask<IImageProps> = {
@@ -155,6 +156,7 @@ const _imageMask: IFilterMask<IImageProps> = {
   width: true,
   height: true,
   fadeDuration: true,
+  nativeID: true,
 };
 
 export function filterViewProps(propName: string): boolean {

@@ -5,7 +5,7 @@
  * @format
  */
 const path = require('path');
-const blacklist = require('metro-config/src/defaults/blacklist');
+const exclusionList = require('metro-config/src/defaults/exclusionList');
 const { getWatchFolders } = require('@uifabricshared/build-native');
 const { getDefaultConfig } = require('metro-config');
 
@@ -18,7 +18,7 @@ module.exports = (async () => {
     resolver: {
       assetExts: [assetExts.filter((ext) => ext !== 'svg'), 'ttf', 'otf', 'png'],
       sourceExts: [...sourceExts, 'svg'],
-      blacklistRE: blacklist([
+      blacklistRE: exclusionList([
         // This stops "react-native run-windows" from causing the metro server to crash if its already running
         new RegExp(`${path.resolve(__dirname, 'windows').replace(/[/\\]/g, '/')}.*`),
       ]),

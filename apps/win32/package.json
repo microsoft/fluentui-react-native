@@ -30,8 +30,8 @@
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.30.4",
-    "react": "16.13.1",
-    "react-native": "^0.63.4",
+    "react": "17.0.1",
+    "react-native": "^0.64.3",
     "react-native-svg": "^12.1.1"
   },
   "devDependencies": {
@@ -41,7 +41,7 @@
     "@rnx-kit/cli": "^0.5.27",
     "@types/jasmine": "3.5.10",
     "@types/react": "^16.9.34",
-    "@types/react-native": "^0.63.0",
+    "@types/react-native": "^0.64.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@uifabricshared/eslint-config-rules": "^0.1.1",
     "@wdio/allure-reporter": "5.22.4",
@@ -53,8 +53,8 @@
     "@wdio/sync": "5.20.1",
     "allure-commandline": "2.13.0",
     "appium": "1.17.1",
-    "metro-config": "^0.58.0",
-    "metro-react-native-babel-preset": "^0.59.0",
+    "metro-config": "^0.66.2",
+    "metro-react-native-babel-preset": "^0.66.2",
     "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "~16.13.1",
     "ts-node": "^8.10.1",
@@ -63,14 +63,21 @@
     "webdriverio": "5.22.4"
   },
   "peerDependencies": {
-    "react": "16.13.1",
-    "react-native": "^0.63.4"
+    "react": "17.0.1",
+    "react-native": "^0.64.3"
   },
   "jest": {
     "preset": "react-native"
   },
   "rnx-kit": {
-    "reactNativeVersion": "0.63",
+    "reactNativeVersion": "0.64",
+    "detectCyclicDependencies": {
+      "throwOnError": true
+    },
+    "detectDuplicateDependencies": {
+      "throwOnError": true
+    },
+    "typescriptValidation": true,
     "bundle": {
       "targets": [
         "win32"

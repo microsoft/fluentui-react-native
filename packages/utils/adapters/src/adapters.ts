@@ -115,6 +115,8 @@ const _textMask: IFilterMask<ITextProps> = {
   onBlurCapture: true,
   onFocus: true,
   onFocusCapture: true,
+  // eslint-disable-next-line @typescript-eslint/camelcase
+  android_hyphenationFrequency: true,
 };
 
 const _imageMask: IFilterMask<IImageProps> = {
@@ -160,6 +162,7 @@ const _imageMask: IFilterMask<IImageProps> = {
   width: true,
   height: true,
   fadeDuration: true,
+  nativeID: true,
 };
 
 export function filterViewProps(propName: string): boolean {
