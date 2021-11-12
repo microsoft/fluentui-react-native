@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/android-theme",
   "entries": [
     {
+      "date": "Thu, 11 Nov 2021 23:17:41 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.4.18",
+      "version": "0.4.18",
+      "comments": {
+        "none": [
+          {
+            "comment": "Rename uifabricshared/eslint-config-rules to fluentui-react-native/eslint-config-rules",
+            "author": "ruaraki@microsoft.com",
+            "commit": "110fba2a1721a914501404f6040f07656307549e",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Nov 2021 18:53:37 GMT",
       "tag": "@fluentui-react-native/android-theme_v0.4.18",
       "version": "0.4.18",

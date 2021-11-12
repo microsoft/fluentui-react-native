@@ -34,13 +34,13 @@
     "@uifabricshared/theming-ramp": ">=0.15.11 <1.0.0"
   },
   "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@types/jest": "^26.0.0",
     "@types/react": ">=16.9.34 < 16.14.0",
+    "@uifabricshared/build-native": "^0.1.1",
     "react": "16.13.1",
     "react-native": "^0.63.4",
-    "typescript": "3.8.3",
-    "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1"
+    "typescript": "3.8.3"
   },
   "peerDependencies": {
     "react": ">=16.13.1",

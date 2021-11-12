@@ -1,6 +1,7 @@
 module.exports = {
   extends: ['plugin:@rnx-kit/recommended'],
   rules: {
+    '@rnx-kit/no-export-all': ['error', { expand: "external-only" }],
     '@typescript-eslint/consistent-type-assertions': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
