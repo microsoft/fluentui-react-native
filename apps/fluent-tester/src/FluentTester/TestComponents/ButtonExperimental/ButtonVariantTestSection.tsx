@@ -19,6 +19,9 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
       <Button block content="Block" style={commonTestStyles.vmargin} />
       <Button appearance="primary" block content="Block Primary" style={commonTestStyles.vmargin} />
       <Button appearance="subtle" block content="Block Subtle" style={commonTestStyles.vmargin} />
+      <CompoundButton content="Default" secondaryContent="Compound" style={commonTestStyles.vmargin} />
+      <CompoundButton appearance="primary" content="Primary" secondaryContent="Compound" style={commonTestStyles.vmargin} />
+      <CompoundButton appearance="subtle" content="Subtle" secondaryContent="Compound" style={commonTestStyles.vmargin} />
       {Platform.OS !== 'windows' && (
         <>
           <Button fab icon={{ svgSource: svgProps, width: 20, height: 20 }} style={commonTestStyles.vmargin} />
