@@ -5,8 +5,7 @@ import { ButtonCoreTokens } from '../Button.types';
 
 export const defaultFabButtonTokens: TokenSettings<ButtonCoreTokens, Theme> = () =>
   ({
-    borderRadius: globalTokens.corner.radius.circle, // big number for always rounded corners
-    // For large size
+    borderRadius: globalTokens.corner.radius.circle,
     minHeight: 56,
     minWidth: 56,
     padding: globalTokens.spacing.l,
