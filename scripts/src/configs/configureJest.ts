@@ -43,42 +43,6 @@ export function configureJest(customConfig?: object): object {
 }
 
 export function configureReactNativeJest(platform?: PlatformValue, customConfig?: object): object {
-  //
-  //  TODO: REVIEW: remove this once the incoming code works; keeping it for reference purposes for now
-  //
-  // platform = ensurePlatform(platform, 'ios');
-  // const rnPackage = getRNVersion(platform);
-  // const rnPath = resolveModule(rnPackage) + '/';
-  // console.log(rnPath);
-  // console.log(platform);
-  // console.log(require.resolve(rnPackage));
-
-  // return mergeConfigs(
-  //   {
-  //     roots: ['<rootDir>/src', rnPath],
-  //     moduleFileExtensions,
-  //     transform: {
-  //       '^.+\\.(js|ts|tsx)?$': ['babel-jest', { cwd: __dirname, presets: ['module:metro-react-native-babel-preset'] }],
-  //     },
-  //     preset: 'react-native',
-  //     moduleNameMapper: {
-  //       '^react-native$': require.resolve(rnPackage),
-  //       '^react-native/(.*)': rnPath + '$1',
-  //     },
-  //     haste: {
-  //       defaultPlatform: platform,
-  //       platforms: getAllPlatforms(),
-  //       // hasteImplModulePath: rnPath + 'jest/hasteImpl.js',
-  //       providesModuleNodeModules: [rnPackage],
-  //     },
-  //     transformIgnorePatterns: [
-  //       'node_modules/(?!((jest-)?react-native|@react-native(-community)?|@office-iss/react-native-win32|react-native-windows|react-native-macos)/)',
-  //     ],
-  //     verbose: false,
-  //     setupFilesAfterEnv: [path.join(__dirname, './jest/setupEnzyme.js')],
-  //   },
-  //   customConfig,
-  // );
   return jestPreset(ensurePlatform(platform, 'ios'), {
     roots: ['<rootDir>/src'],
     verbose: false,
