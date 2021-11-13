@@ -34,6 +34,7 @@
     "test-links": "markdown-link-check"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.0",
     "@babel/preset-env": "^7.8.0",
     "@babel/preset-react": "^7.8.0",
     "@babel/preset-typescript": "^7.8.0",
