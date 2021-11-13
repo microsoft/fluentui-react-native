@@ -33,7 +33,6 @@
     "@babel/core": "^7.8.0",
     "@babel/runtime": "^7.8.0",
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@react-native-community/eslint-config": "^1.1.0",
     "@rnx-kit/cli": "^0.5.27",
     "@rnx-kit/metro-config": "^1.2.3",
     "@uifabricshared/build-native": "^0.1.1",
