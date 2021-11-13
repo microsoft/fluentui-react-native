@@ -142,7 +142,6 @@ const _textMask: IFilterMask<ITextProps> = {
   onBlurCapture: true,
   onFocus: true,
   onFocusCapture: true,
-  // eslint-disable-next-line @typescript-eslint/camelcase
   android_hyphenationFrequency: true,
 };
 

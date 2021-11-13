@@ -109,7 +109,6 @@ const _textMask: IFilterMask<ITextProps> = {
   textBreakStrategy: true,
   onTextLayout: true,
   dataDetectorType: true,
-  // eslint-disable-next-line @typescript-eslint/camelcase
   android_hyphenationFrequency: true,
 };
 

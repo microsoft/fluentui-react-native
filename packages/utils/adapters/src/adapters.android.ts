@@ -88,7 +88,6 @@ const _textMask: IFilterMask<ITextProps> = {
   maxFontSizeMultiplier: true,
   onTextLayout: true,
   dataDetectorType: true,
-  // eslint-disable-next-line @typescript-eslint/camelcase
   android_hyphenationFrequency: true,
 };
 
