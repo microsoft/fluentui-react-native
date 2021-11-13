@@ -1,4 +1,4 @@
-import { Button, CompoundButton } from '@fluentui-react-native/experimental-button';
+import { Button, CompoundButton, FabButton } from '@fluentui-react-native/experimental-button';
 import * as React from 'react';
 import { View, Platform } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
@@ -24,8 +24,8 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
       <CompoundButton appearance="subtle" content="Subtle" secondaryContent="Compound" style={commonTestStyles.vmargin} />
       {Platform.OS !== 'windows' && (
         <>
-          <Button fab icon={{ svgSource: svgProps, width: 20, height: 20 }} style={commonTestStyles.vmargin} />
-          <Button fab icon={{ svgSource: svgProps, width: 20, height: 20 }} content="FAB" style={commonTestStyles.vmargin} />
+          <FabButton icon={{ svgSource: svgProps, width: 20, height: 20 }} style={commonTestStyles.vmargin} />
+          <FabButton icon={{ svgSource: svgProps, width: 20, height: 20 }} content="FAB" style={commonTestStyles.vmargin} />
         </>
       )}
     </View>

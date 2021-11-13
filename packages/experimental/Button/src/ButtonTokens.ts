@@ -8,18 +8,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
     block: {
       width: '100%',
     },
-    fab: {
-      borderRadius: globalTokens.corner.radius.circle, // big number for always rounded corners
-      // For large size
-      minHeight: 56,
-      minWidth: 56,
-      padding: globalTokens.spacing.l,
-      hasContent: {
-        hasIcon: {
-          spacingIconContent: globalTokens.spacing.mNudge,
-        },
-      },
-    },
     medium: {
       padding: globalTokens.spacing.sNudge - globalTokens.stroke.width.thin,
       borderWidth: globalTokens.stroke.width.thin,
