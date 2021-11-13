@@ -26,6 +26,8 @@ export interface ContextualMenuContext {
    ** ContextualMenuItems will call this submenu dismissal when they are hovered
    */
   dismissSubmenu?: () => void;
+
+  setSubmenuItemHovered?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface ContextualMenuState {
@@ -37,7 +39,7 @@ export type ContextualMenuTokens = ICalloutTokens;
  * Properties and Tokens for FluentUI React Native ContextualMenu
  */
 
-export interface ContextualMenuProps extends Omit<ICalloutProps, 'setInitialFocus'> {
+export interface ContextualMenuProps extends ViewProps, Omit<ICalloutProps, 'setInitialFocus'> {
   /*
    * Whether to set initial focus on the contextual menu container, as opposed to the first menu item.
    */

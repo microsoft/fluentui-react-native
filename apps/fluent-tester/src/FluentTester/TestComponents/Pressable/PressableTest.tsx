@@ -92,7 +92,7 @@ const PressComponent: React.FunctionComponent<ViewProps> = (props: ViewProps) =>
   );
 };
 
-const pressable: React.FunctionComponent<{}> = () => {
+const pressable: React.FunctionComponent = () => {
   const [hoverProps, hoverState] = useHoverState({});
 
   return (
@@ -130,7 +130,7 @@ const pressableSections: TestSection[] = [
   },
 ];
 
-export const PressableTest: React.FunctionComponent<{}> = () => {
+export const PressableTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',
@@ -141,5 +141,5 @@ export const PressableTest: React.FunctionComponent<{}> = () => {
 
   const description = 'No description.';
 
-  return <Test name="Pressable Test" description={description} sections={pressableSections} status={status}></Test>;
+  return <Test name="Pressable Test" description={description} sections={pressableSections} status={status} />;
 };

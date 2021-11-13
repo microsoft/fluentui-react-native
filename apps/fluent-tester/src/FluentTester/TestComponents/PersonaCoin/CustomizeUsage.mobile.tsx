@@ -47,7 +47,7 @@ const StyledSwitch = (props) => {
   );
 };
 
-export const CustomizeUsage: React.FunctionComponent<{}> = () => {
+export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [showRings, setShowRings] = React.useState(true);
   const [showPresence, setShowPresence] = React.useState(true);

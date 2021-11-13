@@ -1,15 +1,17 @@
 import { TextProps, ViewProps, ImageProps } from 'react-native';
 import { IFilterMask } from './filter.types';
-import type { ITextWin32Props } from '@office-iss/react-native-win32';
+import type { ITextWin32Props, IViewWin32Props } from '@office-iss/react-native-win32';
 
 // export core interface types
 export type ITextProps = TextProps & Partial<ITextWin32Props>;
-export type IViewProps = ViewProps;
+export type IViewProps = ViewProps & Partial<IViewWin32Props>;
 export type IImageProps = ImageProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
   children: true,
   accessible: true,
+  accessibilityControls: true,
+  accessibilityItemType: true,
   accessibilityLabel: true,
   accessibilityRole: true,
   accessibilityState: true,
@@ -61,14 +63,39 @@ const _viewMask: IFilterMask<IViewProps> = {
   tvParallaxShiftDistanceY: true,
   tvParallaxTiltAngle: true,
   focusable: true,
+  accessibilityAnnotation: true,
+  accessibilityDescription: true,
+  accessibilityDescribedBy: true,
+  accessibilityLabeledBy: true,
+  accessibilityLevel: true,
+  accessibilityPositionInSet: true,
+  accessibilitySetSize: true,
+  animationClass: true,
+  cursor: true,
+  keyDownEvents: true,
+  keyUpEvents: true,
+  onBlur: true,
+  onBlurCapture: true,
+  onFocus: true,
+  onFocusCapture: true,
+  onKeyDown: true,
+  onKeyDownCapture: true,
+  onKeyUp: true,
+  onKeyUpCapture: true,
+  onMouseEnter: true,
+  onMouseLeave: true,
+  tooltip: true,
+  type: true,
 };
 
 const _textMask: IFilterMask<ITextProps> = {
   children: true,
   accessibilityActions: true,
+  accessibilityControls: true,
   accessibilityElementsHidden: true,
   accessibilityHint: true,
   accessibilityIgnoresInvertColors: true,
+  accessibilityItemType: true,
   accessibilityLabel: true,
   accessibilityLiveRegion: true,
   accessibilityRole: true,

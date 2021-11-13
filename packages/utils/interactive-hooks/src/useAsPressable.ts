@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { PressableProps } from 'react-native';
+import { PressableFocusProps, PressableHoverProps, PressablePressProps } from './Pressability/Pressability.types';
 import {
   IPressableHooks,
   IWithPressableOptions,
@@ -6,14 +8,17 @@ import {
   IHoverState,
   IFocusState,
   IWithPressableEvents,
+  IPressableState,
+  PressablePropsExtended,
 } from './useAsPressable.types';
 import { usePressability } from './usePressability';
 
 /**
  * hover specific state and callback helper
  */
-function useHoverHelper<T extends object>(props: IWithPressableOptions<T>): [IWithPressableOptions<object>, IHoverState] {
+function useHoverHelper(props: PressableHoverProps): [PressableHoverProps, IHoverState] {
   const [hoverState, setHoverState] = React.useState({ hovered: false });
+
   const onHoverIn = React.useCallback(
     (e) => {
       setHoverState({ hovered: true });
@@ -39,7 +44,7 @@ function useHoverHelper<T extends object>(props: IWithPressableOptions<T>): [IWi
 /**
  * focus specific state and callback helper
  */
-function useFocusHelper<T extends object>(props: IWithPressableOptions<T>): [IWithPressableOptions<object>, IFocusState] {
+function useFocusHelper(props: PressableFocusProps): [PressableFocusProps, IFocusState] {
   const [focusState, setFocusState] = React.useState({ focused: false });
   const onFocus = React.useCallback(
     (e) => {
@@ -66,7 +71,7 @@ function useFocusHelper<T extends object>(props: IWithPressableOptions<T>): [IWi
 /**
  * press specific state and callback helper
  */
-function usePressHelper<T extends object>(props: IWithPressableOptions<T>): [IWithPressableOptions<object>, IPressState] {
+function usePressHelper(props: PressablePressProps): [PressablePressProps, IPressState] {
   const [pressState, setPressState] = React.useState({ pressed: false });
 
   const onPressIn = React.useCallback(
@@ -88,26 +93,8 @@ function usePressHelper<T extends object>(props: IWithPressableOptions<T>): [IWi
     },
     [setPressState, props.onPressOut],
   );
+
   return [{ onPressIn, onPressOut }, pressState];
-}
-
-/**
- * useAsPressable wraps the usePressability hook that will be available in RN 0.63 and beyond.  Once this library is on a recent enough
- * version of react-native this implementation can switch to using the official version.
- *
- * The useAsPressable hook adds a simple state change function for listening to hover, press, and focus events on the base pressability implementation
- * @param props - input props for the component, mixed in with pressable and pressability options
- */
-export function useAsPressable<T extends object>(props: IWithPressableOptions<T>): IPressableHooks<T> {
-  const [hoverProps, hoverState] = useHoverHelper(props);
-  const [focusProps, focusState] = useFocusHelper(props);
-  const [pressProps, pressState] = usePressHelper(props);
-  const pressabilityProps = usePressability({ ...props, ...hoverProps, ...focusProps, ...pressProps });
-
-  return {
-    props: { ...props, ...pressabilityProps },
-    state: { ...hoverState, ...pressState, ...focusState },
-  };
 }
 
 /**
@@ -115,6 +102,7 @@ export function useAsPressable<T extends object>(props: IWithPressableOptions<T>
  * as each of these calls will create a new instance of the Pressability class.
  * @param props - input props for the component
  */
+// eslint-disable-next-line @typescript-eslint/ban-types
 export function useFocusState<T extends object>(props: IWithPressableOptions<T>): [IWithPressableEvents<T>, IFocusState] {
   const [focusProps, focusState] = useFocusHelper(props);
   return [{ ...props, ...usePressability({ ...props, ...focusProps }) }, focusState];
@@ -125,6 +113,7 @@ export function useFocusState<T extends object>(props: IWithPressableOptions<T>)
  * as each of these calls will create a new instance of the Pressability class.
  * @param props - input props for the component
  */
+// eslint-disable-next-line @typescript-eslint/ban-types
 export function usePressState<T extends object>(props: IWithPressableOptions<T>): [IWithPressableEvents<T>, IPressState] {
   const [pressProps, pressState] = usePressHelper(props);
   return [{ ...props, ...usePressability({ ...props, ...pressProps }) }, pressState];
@@ -135,7 +124,45 @@ export function usePressState<T extends object>(props: IWithPressableOptions<T>)
  * as each of these calls will create a new instance of the Pressability class.
  * @param props - input props for the component
  */
+// eslint-disable-next-line @typescript-eslint/ban-types
 export function useHoverState<T extends object>(props: IWithPressableOptions<T>): [IWithPressableEvents<T>, IHoverState] {
   const [hoverProps, hoverState] = useHoverHelper(props);
   return [{ ...props, ...usePressability({ ...props, ...hoverProps }) }, hoverState];
+}
+
+/**
+ * useAsPressable wraps the usePressability hook that will be available in RN 0.63 and beyond.  Once this library is on a recent enough
+ * version of react-native this implementation can switch to using the official version.
+ *
+ * The useAsPressable hook adds a simple state change function for listening to hover, press, and focus events on the base pressability implementation
+ * @param props - input props for the component, mixed in with pressable and pressability options
+ */
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function useAsPressable<T extends object>(props: IWithPressableOptions<T>): IPressableHooks<T> {
+  const [hoverProps, hoverState] = useHoverHelper(props);
+  const [focusProps, focusState] = useFocusHelper(props);
+  const [pressProps, pressState] = usePressHelper(props);
+  const pressabilityProps = usePressability({ ...props, ...hoverProps, ...focusProps, ...pressProps });
+
+  return {
+    props: { ...props, ...pressabilityProps },
+    state: { ...hoverState, ...focusState, ...pressState },
+  };
+}
+
+/**
+ * This routine hooks the props to pass to a Pressable component to obtain the current state of the Pressable as well as generating
+ * state change updates when those props change. This allows a parent component to control the render of the whole component rather than having
+ * to split the code between a child function or style function.
+ *
+ * @param props - props to pass to a Pressable component
+ * @returns - modified props to pass into the Pressable as well as the current state with regards to hover, focus, and press
+ */
+export function usePressableState(props: PressablePropsExtended): { props: PressableProps; state: IPressableState } {
+  const { onPressIn, onPressOut, onHoverIn, onHoverOut, onFocus, onBlur, ...rest } = props;
+  const [hoverProps, hoverState] = useHoverHelper({ onHoverIn, onHoverOut });
+  const [focusProps, focusState] = useFocusHelper({ onFocus, onBlur });
+  const [pressProps, pressState] = usePressHelper({ onPressIn, onPressOut });
+
+  return { props: { ...hoverProps, ...focusProps, ...pressProps, ...rest }, state: { ...hoverState, ...focusState, ...pressState } };
 }

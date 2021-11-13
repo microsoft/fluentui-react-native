@@ -1,7 +1,7 @@
 import { styleFunction } from '@uifabricshared/foundation-tokens';
 import { ViewProps } from 'react-native';
 import { IPersonaCoinTokens } from './PersonaCoin.types';
-import { ITheme } from '@uifabricshared/theming-ramp';
+import { Theme } from '@fluentui-react-native/framework';
 import { convertCoinColor, convertCoinColorFluent, calculateEffectiveSizes } from './PersonaCoin.helpers';
 
 const _initialsBackgroundKeyProps: (keyof IPersonaCoinTokens)[] = ['coinSize', 'size', 'coinColor', 'coinColorFluent', 'backgroundColor'];
@@ -31,7 +31,7 @@ function _buildInitialsBackgroundStyles(tokenProps: IPersonaCoinTokens /*, theme
   };
 }
 
-export const buildInitialsBackgroundStyles = styleFunction<ViewProps, IPersonaCoinTokens, ITheme>(
+export const buildInitialsBackgroundStyles = styleFunction<ViewProps, IPersonaCoinTokens, Theme>(
   _buildInitialsBackgroundStyles,
   _initialsBackgroundKeyProps,
 );

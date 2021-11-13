@@ -1,18 +1,20 @@
 import * as React from 'react';
 import { IconProps, SvgIconProps, FontIconProps } from './Icon.types';
-import { Image, ImageStyle, Platform, View } from 'react-native';
+import { Image, ImageStyle, Platform, View, ColorValue, TextStyle } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
-import { mergeStyles } from '@fluentui-react-native/framework';
+import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
 import { stagedComponent, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
-import { useTheme } from '@fluentui-react-native/theme-types';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { SvgUri } from 'react-native-svg';
 
 const rasterImageStyleCache = getMemoCache<ImageStyle>();
 
 function renderRasterImage(iconProps: IconProps) {
-  const { width, height } = iconProps;
-  const style = mergeStyles(iconProps.style, rasterImageStyleCache({ width: width, height: height }, [width, height])[0]);
+  const { width, height, color } = iconProps;
+  const style = mergeStyles(
+    iconProps.style,
+    rasterImageStyleCache({ width: width, height: height, tintColor: color }, [width, height, color])[0],
+  );
 
   return <Image source={iconProps.rasterImageSource.src} style={style} />;
 }
@@ -32,18 +34,17 @@ const fontStyleMemoCache = getMemoCache();
 function renderFontIcon(iconProps: IconProps) {
   const fontSource: FontIconProps = iconProps.fontSource;
 
-  const style = fontStyleMemoCache(
+  const style: TextStyle = fontStyleMemoCache(
     {
       fontSrcFile: fontSource.fontSrcFile,
       fontFamily:
         fontSource.fontSrcFile != undefined
           ? fontFamilyFromFontSrcFile(fontSource.fontSrcFile, fontSource.fontFamily)
           : fontSource.fontFamily,
-      codepoint: fontSource.codepoint,
       fontSize: fontSource.fontSize,
       color: iconProps.color,
     },
-    [iconProps.color, fontSource.fontSrcFile, fontSource.fontFamily, fontSource.codepoint, fontSource.codepoint],
+    [iconProps.color, fontSource.fontSrcFile, fontSource.fontFamily],
   )[0];
 
   const char = String.fromCharCode(fontSource.codepoint);
@@ -52,18 +53,14 @@ function renderFontIcon(iconProps: IconProps) {
 
 function renderSvg(iconProps: IconProps) {
   const svgIconProps: SvgIconProps = iconProps.svgSource;
-  const { width, height } = iconProps;
+  const { width, height, color } = iconProps;
   const viewBox = iconProps.svgSource.viewBox;
-  const style = mergeStyles(iconProps.style, rasterImageStyleCache({ width: width, height: height }, [width, height])[0]);
+  const style = mergeStyles(iconProps.style, rasterImageStyleCache({ width, height }, [width, height])[0]);
 
   // react-native-svg is still on 0.61, and their color prop doesn't handle ColorValue
   // If a color for the icon is not supplied, fall back to white or black depending on appearance
-  const theme = useTheme();
-  const iconColor = svgIconProps.color
-    ? svgIconProps.color
-    : getCurrentAppearance(theme.host.appearance, 'light') === 'dark'
-    ? '#FFFFFF'
-    : '#000000';
+  // Tracked by issue #728
+  const iconColor = downgradeColor(color);
 
   if (svgIconProps.src) {
     return (
@@ -83,7 +80,7 @@ function renderSvg(iconProps: IconProps) {
 }
 
 export const Icon = stagedComponent((props: IconProps) => {
-  const theme = useTheme();
+  const theme = useFluentTheme();
 
   return (rest: IconProps) => {
     const color = props.color || theme.colors.buttonText;
@@ -107,3 +104,11 @@ export const Icon = stagedComponent((props: IconProps) => {
 });
 
 export default Icon;
+
+function downgradeColor(color: ColorValue): string {
+  if (typeof color === 'string') {
+    return color as string;
+  }
+
+  return getCurrentAppearance(useFluentTheme().host.appearance, 'light') === 'dark' ? '#FFFFFF' : '#000000';
+}

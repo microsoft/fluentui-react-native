@@ -1,8 +1,376 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Wed, 14 Jul 2021 16:17:33 GMT and should not be manually modified.
+This log was last generated on Tue, 09 Nov 2021 23:04:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.1
+
+Tue, 09 Nov 2021 23:04:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.18.1 (67026167+chiuam@users.noreply.github.com)
+
+## 0.11.0
+
+Mon, 08 Nov 2021 20:52:15 GMT
+
+### Minor changes
+
+- Beta macOS support (sanajmi@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.18.0 (sanajmi@microsoft.com)
+
+## 0.10.30
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.17.29 (sanajmi@microsoft.com)
+
+## 0.10.29
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.17.28 (ruaraki@microsoft.com)
+
+## 0.10.28
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.27 (ruaraki@microsoft.com)
+
+## 0.10.27
+
+Tue, 19 Oct 2021 20:23:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.7.26 (ruaraki@microsoft.com)
+
+## 0.10.26
+
+Thu, 07 Oct 2021 20:59:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.17.25 (ruaraki@microsoft.com)
+
+## 0.10.25
+
+Fri, 01 Oct 2021 17:52:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.24 (ruaraki@microsoft.com)
+
+## 0.10.24
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
+
+## 0.10.23
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Patches
+
+- adding an adapter for macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.10.22
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.21 (ruaraki@microsoft.com)
+
+## 0.10.21
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.17.20 (ruaraki@microsoft.com)
+
+## 0.10.20
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.17.19 (ruaraki@microsoft.com)
+
+## 0.10.19
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.17.18 (ruaraki@microsoft.com)
+
+## 0.10.18
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.7.17 (ruaraki@microsoft.com)
+
+## 0.10.17
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.10.16
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.15 (sanajmi@microsoft.com)
+
+## 0.10.15
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.14 (sanajmi@microsoft.com)
+
+## 0.10.14
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.7.13 (dake.3601@gmail.com)
+
+## 0.10.13
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- add focusBorder to menuItems (email not defined)
+
+## 0.10.12
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.17.11 (ruaraki@microsoft.com)
+
+## 0.10.11
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.10 (ruaraki@microsoft.com)
+
+## 0.10.10
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.10.9
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.17.8 (ruaraki@microsoft.com)
+
+## 0.10.8
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.17.7 (ruaraki@microsoft.com)
+
+## 0.10.7
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.6 (ruaraki@microsoft.com)
+
+## 0.10.6
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.17.5 (ruaraki@microsoft.com)
+
+## 0.10.5
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.10.4
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.17.3 (ruaraki@microsoft.com)
+
+## 0.10.3
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Fix usage of conditional hooks (nakambo@microsoft.com)
+
+## 0.10.2
+
+Wed, 04 Aug 2021 18:11:46 GMT
+
+### Patches
+
+- Add submenu chevron inline (lehon@microsoft.com)
+
+## 0.10.1
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- move experimental Text to be written as compressible (jasonmo@microsoft.com)
+
+## 0.10.0
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Minor changes
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.7.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/text to v0.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/icon to v0.8.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/callout to v0.17.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @uifabricshared/foundation-compose to v1.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @uifabricshared/foundation-settings to v0.10.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @uifabricshared/foundation-composable to v0.9.0 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.10.23 (67026167+chiuam@users.noreply.github.com)
+- Bump @fluentui-react-native/tokens to v0.9.13 (67026167+chiuam@users.noreply.github.com)
+
+## 0.9.17
+
+Tue, 03 Aug 2021 23:48:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.7.19 (jasonmo@microsoft.com)
+
+## 0.9.16
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.7.18 (jasonmo@microsoft.com)
+
+## 0.9.15
+
+Fri, 30 Jul 2021 19:17:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.7.17 (email not defined)
+
+## 0.9.14
+
+Thu, 29 Jul 2021 17:53:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.7.16 (jasonmo@microsoft.com)
+
+## 0.9.13
+
+Tue, 27 Jul 2021 22:17:20 GMT
+
+### Patches
+
+- add compressible utility and a snapshot test / demo to framework (jasonmo@microsoft.com)
+
+## 0.9.12
+
+Mon, 26 Jul 2021 20:41:04 GMT
+
+### Patches
+
+- add new use-slot package, move framework to consume that package (jasonmo@microsoft.com)
+
+## 0.9.11
+
+Sun, 25 Jul 2021 16:30:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.6.17 (email not defined)
+
+## 0.9.7
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
+
+## 0.9.6
+
+Wed, 21 Jul 2021 21:46:12 GMT
+
+### Patches
+
+- Fix flickering bug on hover (lehon@microsoft.com)
+
+## 0.9.4
+
+Thu, 15 Jul 2021 17:54:30 GMT
+
+### Patches
+
+- Fixed onShow method in Submenu (v.kozlova13@gmail.com)
+
+## 0.9.3
+
+Thu, 15 Jul 2021 15:40:32 GMT
+
+### Patches
+
+- Fix flickering bug on hover (lehon@microsoft.com)
 
 ## 0.9.1
 

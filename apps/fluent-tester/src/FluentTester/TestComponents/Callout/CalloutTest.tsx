@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { ScreenRect, Text, View, Switch, Picker } from 'react-native';
-import { Button, Callout, Separator, IFocusable, RestoreFocusEvent } from '@fluentui/react-native';
+import { ScreenRect, Text, View, Switch, Picker, ScrollView } from 'react-native';
+import { Button, Callout, Separator, IFocusable, RestoreFocusEvent, DismissBehaviors, StealthButton } from '@fluentui/react-native';
 import { CALLOUT_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { fluentTesterStyles } from '../Common/styles';
 
-const standardCallout: React.FunctionComponent<{}> = () => {
+const standardCallout: React.FunctionComponent = () => {
   const [showStandardCallout, setShowStandardCallout] = React.useState(false);
   const [isStandardCalloutVisible, setIsStandardCalloutVisible] = React.useState(false);
 
@@ -16,6 +17,34 @@ const standardCallout: React.FunctionComponent<{}> = () => {
 
   const [isBeakVisible, setIsBeakVisible] = React.useState(false);
   const onIsBeakVisibleChange = React.useCallback((value) => setIsBeakVisible(value), []);
+
+  const [preventDismissOnKeyDown, setPreventDismissOnKeyDown] = React.useState(false);
+  const [preventDismissOnClickOutside, setPreventDismissOnClickOutside] = React.useState(false);
+  const [calloutDismissBehaviors, setDismissBehaviors] = React.useState<DismissBehaviors[]>([]);
+
+  const onPreventDismissOnKeyDownChange = React.useCallback((value) => {
+    setPreventDismissOnKeyDown(value);
+    if (value) {
+      setDismissBehaviors(calloutDismissBehaviors.concat('preventDismissOnKeyDown'));
+    } else {
+      const newDismissBehaviors = calloutDismissBehaviors.filter((value) => {
+        value != 'preventDismissOnKeyDown';
+      });
+      setDismissBehaviors(newDismissBehaviors);
+    }
+  }, []);
+
+  const onPreventDismissOnClickOutsideChange = React.useCallback((value) => {
+    setPreventDismissOnClickOutside(value);
+    if (value) {
+      setDismissBehaviors(calloutDismissBehaviors.concat('preventDismissOnClickOutside'));
+    } else {
+      const newDismissBehaviors = calloutDismissBehaviors.filter((value) => {
+        value != 'preventDismissOnClickOutside';
+      });
+      setDismissBehaviors(newDismissBehaviors);
+    }
+  }, []);
 
   const redTargetRef = React.useRef<View>(null);
   const blueTargetRef = React.useRef<View>(null);
@@ -72,6 +101,19 @@ const standardCallout: React.FunctionComponent<{}> = () => {
 
   const [selectedBorderWidth, setSelectedBorderWidth] = React.useState<number | undefined>(undefined);
 
+  const [showScrollViewCallout, setShowScrollViewCalout] = React.useState(false);
+  const [scrollviewContents, setScrollviewContents] = React.useState([1, 2, 3]);
+
+  const removeButton = React.useCallback(() => {
+    const tempArray = scrollviewContents;
+    tempArray.pop();
+    setScrollviewContents([...tempArray]);
+  }, [setScrollviewContents, scrollviewContents]);
+
+  const addButton = React.useCallback(() => {
+    setScrollviewContents(arr => [...arr, 1]);
+  }, [setScrollviewContents, scrollviewContents]);
+
   return (
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
@@ -90,6 +132,22 @@ const standardCallout: React.FunctionComponent<{}> = () => {
             <Switch value={isBeakVisible} onValueChange={onIsBeakVisibleChange} />
             <Text>Beak Visible</Text>
           </View>
+
+          <View style={{ flexDirection: 'row' }}>
+            <Switch value={preventDismissOnKeyDown} onValueChange={onPreventDismissOnKeyDownChange} />
+            <Text>Prevent Dismiss On Key Down</Text>
+          </View>
+
+          <View style={{ flexDirection: 'row' }}>
+            <Switch value={preventDismissOnClickOutside} onValueChange={onPreventDismissOnClickOutsideChange} />
+            <Text>Prevent Dismiss On Click Outside</Text>
+          </View>
+
+          <View style={{ flexDirection: 'row' }}>
+            <Switch value={showScrollViewCallout} onValueChange={setShowScrollViewCalout} />
+            <Text>Enable ScrollView Callout</Text>
+          </View>
+
           <Picker
             prompt="Background Color"
             selectedValue={selectedBackgroundColor || colorDefault}
@@ -160,18 +218,37 @@ const standardCallout: React.FunctionComponent<{}> = () => {
             ...(selectedBorderColor && { borderColor: selectedBorderColor }),
             ...(selectedBackgroundColor && { backgroundColor: selectedBackgroundColor }),
             ...(selectedBorderWidth && { borderWidth: selectedBorderWidth }),
-          }}
-        >
-          <View style={{ padding: 20 }}>
-            <Button content="click to change anchor" onClick={toggleCalloutRef} />
-          </View>
+            ...(calloutDismissBehaviors && { dismissBehaviors: calloutDismissBehaviors }),
+          }}>
+          {showScrollViewCallout ?
+            <View style={fluentTesterStyles.scrollViewContainer}>
+              <ScrollView contentContainerStyle={fluentTesterStyles.scrollViewStyle} showsVerticalScrollIndicator={true}>
+                <StealthButton content="click to change anchor" onClick={toggleCalloutRef} />
+                <StealthButton content="Click to add a button" style={fluentTesterStyles.testListItem} onClick={addButton} />
+                <StealthButton content="Click to remove a button" style={fluentTesterStyles.testListItem} onClick={removeButton} />
+                  {scrollviewContents.map((value) => {
+                    return (
+                      <StealthButton
+                        key={value}
+                        content="Button"
+                        style={fluentTesterStyles.testListItem}
+                      />
+                    )
+                  })}
+              </ScrollView>
+            </View>
+          : //else
+            <View style={{ padding: 20 }}>
+              <Button content="click to change anchor" onClick={toggleCalloutRef} />
+            </View>
+          }
         </Callout>
       )}
     </View>
   );
 };
 
-const customCallout: React.FunctionComponent<{}> = () => {
+const customCallout: React.FunctionComponent = () => {
   const [showCustomizedCallout, setShowCustomizedCallout] = React.useState(false);
   const [isCustomizedCalloutVisible, setIsCustomizedCalloutVisible] = React.useState(false);
 
@@ -235,10 +312,10 @@ const calloutSections: TestSection[] = [
   {
     name: 'Customized Usage',
     component: customCallout,
-  },
+  }
 ];
 
-export const CalloutTest: React.FunctionComponent<{}> = () => {
+export const CalloutTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Backlog',

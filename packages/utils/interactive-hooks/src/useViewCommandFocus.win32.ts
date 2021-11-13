@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { findNodeHandle, NativeModules } from 'react-native';
+import { findNodeHandle, UIManager } from 'react-native';
 import { IViewWin32 } from '@office-iss/react-native-win32';
 
 const setAndForwardRef = require('./setAndForwardRef');
@@ -31,11 +31,7 @@ export function useViewCommandFocus(
        */
       if (localRef) {
         localRef.focus = () => {
-          NativeModules.UIManager.dispatchViewManagerCommand(
-            findNodeHandle(localRef),
-            NativeModules.UIManager.getViewManagerConfig('RCTView').Commands.focus,
-            null,
-          );
+          UIManager.dispatchViewManagerCommand(findNodeHandle(localRef), UIManager.getViewManagerConfig('RCTView').Commands.focus, null);
         };
       }
     },

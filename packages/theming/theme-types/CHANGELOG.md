@@ -1,8 +1,144 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Fri, 25 Jun 2021 06:21:11 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Nov 2021 18:53:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.4
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Pipe changes through theme system (ruaraki@microsoft.com)
+
+## 0.12.3
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
+
+## 0.12.2
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Patches
+
+- adding an adapter for macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.12.1
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Reshape input (ruaraki@microsoft.com)
+
+## 0.12.0
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Minor changes
+
+- Add HC plumbing (ruaraki@microsoft.com)
+
+## 0.11.3
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.11.2
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Rename tokens to avoid name clash, initial token re-population (ruaraki@microsoft.com)
+
+## 0.11.1
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.11.0
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Minor changes
+
+- rename an alias token to avoid name clash (ruaraki@microsoft.com)
+
+## 0.10.0
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Minor changes
+
+- Add missing tokens (ruaraki@microsoft.com)
+
+## 0.9.3
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Patches
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.9.2
+
+Tue, 27 Jul 2021 22:17:20 GMT
+
+### Patches
+
+- add compressible utility and a snapshot test / demo to framework (jasonmo@microsoft.com)
+
+## 0.9.1
+
+Mon, 26 Jul 2021 20:41:04 GMT
+
+### Patches
+
+- add new use-slot package, move framework to consume that package (jasonmo@microsoft.com)
+
+## 0.9.0
+
+Sat, 24 Jul 2021 00:28:25 GMT
+
+### Minor changes
+
+- createAliasTokens to generate alias token structure (email not defined)
+
+## 0.8.3
+
+Fri, 23 Jul 2021 17:28:27 GMT
+
+### Patches
+
+- Fix @types/react to be less than 16.14.0 since our react version is less than 16.14 (email not defined)
+
+## 0.8.2
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
+
+## 0.8.1
+
+Wed, 21 Jul 2021 21:46:12 GMT
+
+### Patches
+
+- Use peer dependencies for react-native version not dependencies (30809111+acoates-ms@users.noreply.github.com)
 
 ## 0.8.0
 

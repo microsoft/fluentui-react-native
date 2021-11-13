@@ -1,0 +1,396 @@
+{
+  "name": "@fluentui-react-native/experimental-tabs",
+  "entries": [
+    {
+      "date": "Fri, 12 Nov 2021 16:07:20 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.3.8",
+      "version": "0.3.8",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.30",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "25673699e6c6c064b41f1246c2c995baa67a74ad",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Nov 2021 23:17:41 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.3.8",
+      "version": "0.3.8",
+      "comments": {
+        "none": [
+          {
+            "comment": "Rename uifabricshared/eslint-config-rules to fluentui-react-native/eslint-config-rules",
+            "author": "ruaraki@microsoft.com",
+            "commit": "110fba2a1721a914501404f6040f07656307549e",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 09 Nov 2021 23:04:33 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.3.8",
+      "version": "0.3.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.30",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "8baa72ed4ec06f90a51cf757e1924e946f76a537",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 08 Nov 2021 20:52:15 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.3.7",
+      "version": "0.3.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.7.33",
+            "author": "sanajmi@microsoft.com",
+            "commit": "f6e7e6523713e641227f91113728da3d9816ef22",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 01 Nov 2021 18:53:37 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.3.6",
+      "version": "0.3.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.7.32",
+            "author": "sanajmi@microsoft.com",
+            "commit": "18757ce3c755d20f37bf436b7e99d3caee320c3b",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 25 Oct 2021 19:24:43 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.3.5",
+      "version": "0.3.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Use tslib where spreadArray is used",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f6578742d6c957cf7e346db82f89171f80bedc3b",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 Oct 2021 03:46:25 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.3.4",
+      "version": "0.3.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.27",
+            "author": "ruaraki@microsoft.com",
+            "commit": "273f5addbeb5abeaec0b517e5416f52d8878152f",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 Oct 2021 20:23:36 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.3.3",
+      "version": "0.3.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.26",
+            "author": "ruaraki@microsoft.com",
+            "commit": "a8209c3a6f52871eef88035c2dba2ef2b5ee83e7",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 07 Oct 2021 20:59:20 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.3.2",
+      "version": "0.3.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.6.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f759f09649d7fd9b8ea8ada78677f5cb65519f6e",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Oct 2021 17:52:17 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.24",
+            "author": "ruaraki@microsoft.com",
+            "commit": "cb59746a9358af9ae32ea386aad1cfaa1922605d",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 28 Sep 2021 21:08:25 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Delete NativeButton",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "335503904094894a91e53c6de328bf13e13bcc1c",
+            "package": "@fluentui-react-native/experimental-tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/adapters to v0.7.4",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "335503904094894a91e53c6de328bf13e13bcc1c",
+            "package": "@fluentui-react-native/experimental-tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.6.21",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "335503904094894a91e53c6de328bf13e13bcc1c",
+            "package": "@fluentui-react-native/experimental-tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.7.26",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "335503904094894a91e53c6de328bf13e13bcc1c",
+            "package": "@fluentui-react-native/experimental-tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.40",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "335503904094894a91e53c6de328bf13e13bcc1c",
+            "package": "@fluentui-react-native/experimental-tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.23",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "335503904094894a91e53c6de328bf13e13bcc1c",
+            "package": "@fluentui-react-native/experimental-tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.47",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "335503904094894a91e53c6de328bf13e13bcc1c",
+            "package": "@fluentui-react-native/experimental-tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/use-styling to v0.6.8",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "335503904094894a91e53c6de328bf13e13bcc1c",
+            "package": "@fluentui-react-native/experimental-tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/test-tools to v0.1.1",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "335503904094894a91e53c6de328bf13e13bcc1c",
+            "package": "@fluentui-react-native/experimental-tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.25",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "335503904094894a91e53c6de328bf13e13bcc1c",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Add Tabs Experimental for macOS + windows",
+            "author": "krsiler@microsoft.com",
+            "commit": "42901053a71794724ea916aa1a651a8a0df09fe3",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Sep 2021 19:08:16 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.2.4",
+      "version": "0.2.4",
+      "comments": {
+        "none": [
+          {
+            "comment": "Run prettier",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e52c9b3d031599af4f43c261cb0a0327bc68a5ab",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Sep 2021 16:32:12 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.2.4",
+      "version": "0.2.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "adding an adapter for macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "2d8e314d1cbdbccbd87251fbe125b14b1014486e",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 14 Sep 2021 19:31:04 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Bump Prettier and run it (#997)\"",
+            "author": "ruaraki@microsoft.com",
+            "commit": "c3eefc2cd6e8e23d64ca72460586f33120edc336",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 13 Sep 2021 23:22:43 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.21",
+            "author": "ruaraki@microsoft.com",
+            "commit": "a7179bb7cc1b8d1da09a0a11831b7b1712b8b720",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 10 Sep 2021 21:30:12 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "Run the prettier",
+            "author": "ruaraki@microsoft.com",
+            "commit": "7ac71c6add6f05230c649dad60b5f7442f08cbb3",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 10 Sep 2021 18:16:59 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.20",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5f282af0873151b9f7a8eb75369619af42d092d4",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Sep 2021 22:12:19 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.19",
+            "author": "ruaraki@microsoft.com",
+            "commit": "6a82ccdd6a0cf0226f59e1f81ec34a0eb7e3d912",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Sep 2021 20:03:01 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Moved tabs to the experimental framework.",
+            "author": "nkhalil942@gmail.com",
+            "commit": "e8463d8d7e278c20c747425ab32c27bf5d857929",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.18",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/experimental-tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.41",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/experimental-tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.7.21",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/experimental-tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.35",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/experimental-tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.6.16",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/experimental-tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.23",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/experimental-tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/test-tools to v0.1.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/experimental-tabs"
+          }
+        ]
+      }
+    }
+  ]
+}

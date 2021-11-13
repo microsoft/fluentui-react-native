@@ -1,2 +1,13 @@
+// For publish builds, only provide line tables for symbolizing crashes
+CLANG_DEBUG_INFORMATION_LEVEL=line-tables-only
+// The following build setting caused build errors, so it is commented out and placed in every podspec instead
+// OTHER_SWIFT_FLAGS=-gline-tables-only
+
+// Optimize for size in publish builds
+SWIFT_OPTIMIZATION_LEVEL=-Osize
+
 // Build for all architectures, not just the active one
 ONLY_ACTIVE_ARCH=NO
+
+// Specify the exact Swift version used for reproducibility
+SWIFT_VERSION = 5.0

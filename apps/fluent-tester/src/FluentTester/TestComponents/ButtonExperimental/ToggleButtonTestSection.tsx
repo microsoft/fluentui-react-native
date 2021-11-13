@@ -13,11 +13,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export const ToggleButtonTest: React.FunctionComponent<{}> = () => {
+export const ToggleButtonTest: React.FunctionComponent = () => {
   const [defaultChecked, setDefaultChecked] = React.useState(false);
   const onDefaultClicked = React.useCallback(() => setDefaultChecked(!defaultChecked), [defaultChecked, setDefaultChecked]);
-  const [ghostChecked, setGhostChecked] = React.useState(false);
-  const onGhostClicked = React.useCallback(() => setGhostChecked(!ghostChecked), [ghostChecked, setGhostChecked]);
+  const [subtleChecked, setSubtleChecked] = React.useState(false);
+  const onGhostClicked = React.useCallback(() => setSubtleChecked(!subtleChecked), [subtleChecked, setSubtleChecked]);
 
   return (
     <View style={[stackStyle, commonTestStyles.view]}>
@@ -29,11 +29,17 @@ export const ToggleButtonTest: React.FunctionComponent<{}> = () => {
       <ToggleButton checked={false} content="Unchecked Default Toggle" style={commonTestStyles.vmargin} />
       {/* <ToggleButton primary content="Primary Toggle" /> */}
       <View style={styles.row}>
-        <ToggleButton ghost onClick={onGhostClicked} checked={ghostChecked} content="Ghost Toggle" style={commonTestStyles.vmargin} />
-        <Checkbox checked={ghostChecked} label="Ghost Toggle is Checked" style={[commonTestStyles.vmargin, styles.hmargin]} />
+        <ToggleButton
+          appearance="subtle"
+          onClick={onGhostClicked}
+          checked={subtleChecked}
+          content="Subtle Toggle"
+          style={commonTestStyles.vmargin}
+        />
+        <Checkbox checked={subtleChecked} label="Subtle Toggle is Checked" style={[commonTestStyles.vmargin, styles.hmargin]} />
       </View>
-      <ToggleButton ghost checked content="Checked Ghost Toggle" style={commonTestStyles.vmargin} />
-      <ToggleButton ghost checked={false} content="Unchecked Ghost Toggle" style={commonTestStyles.vmargin} />
+      <ToggleButton appearance="subtle" checked content="Checked Subtle Toggle" style={commonTestStyles.vmargin} />
+      <ToggleButton appearance="subtle" checked={false} content="Unchecked Subtle Toggle" style={commonTestStyles.vmargin} />
     </View>
   );
 };

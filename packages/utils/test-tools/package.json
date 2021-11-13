@@ -14,19 +14,17 @@
     "lint": "fluentui-scripts eslint",
     "test": "fluentui-scripts jest",
     "update-snapshots": "fluentui-scripts jest -u",
-    "verify-api": "fluentui-scripts verify-api-extractor",
-    "update-api": "fluentui-scripts update-api-extractor",
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/theme-types": ">=0.8.0 <1.0.0"
+    "@fluentui-react-native/theme-types": ">=0.12.4 <1.0.0"
   },
   "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@types/react": "^17.0.2",
     "@types/react-native": "^0.64.0",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1",
     "react": "17.0.1",
     "react-native": "^0.64.3"
   },

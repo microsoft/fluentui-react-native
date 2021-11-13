@@ -1,8 +1,7 @@
 const fs = require('fs');
-const rimraf = require('rimraf');
 
-const defaultWaitForTimeout = 10000;
-const defaultConnectionRetryTimeout = 15000;
+const defaultWaitForTimeout = 20000;
+const defaultConnectionRetryTimeout = 20000;
 const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
@@ -18,7 +17,7 @@ exports.config = {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'windows',
       deviceName: 'WindowsPC',
-      app: '2a07a99c-7130-4e93-856d-880ea22dd4f4_kceynq4x5hrp4!App',
+      app: '40411fc5-8e92-4d46-b68d-b62df44b1366_7c3z4tcdk8r62!App',
     },
   ],
 
@@ -35,7 +34,7 @@ exports.config = {
   bail: 1,
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
-  connectionRetryCount: 1, // Maximum count of request retries to the Selenium server.
+  connectionRetryCount: 3, // Maximum count of request retries to the Selenium server.
 
   port: 4723, // default appium port
   services: ['appium'],
@@ -51,15 +50,11 @@ exports.config = {
     defaultTimeoutInterval: jasmineDefaultTimeout,
   },
 
-  reporters: [
-    'spec',
-    [
-      'allure',
-      {
-        outputDir: 'allure-results',
-      },
-    ],
-  ],
+  // The number of times to retry the entire specfile when it fails as a whole.
+  // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
+  specFileRetries: 3,
+
+  reporters: ['spec'],
 
   /*
    ** ===================
@@ -99,16 +94,7 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   beforeSession: function (/* config, capabilities, specs */) {
-    // Delete old screenshots and create empty directory
-    if (fs.existsSync('./errorShots')) {
-      rimraf.sync('./errorShots');
-    }
-    fs.mkdirSync('./errorShots');
-
-    if (fs.existsSync('./allure-results')) {
-      rimraf.sync('./allure-results');
-    }
-    fs.mkdirSync('./allure-results');
+    fs.mkdirSync('./errorShots', {recursive: true});
   },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
@@ -154,14 +140,14 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  afterTest: function (test /*, context*/) {
+  afterTest: function (test, context, results) {
     // if test passed, ignore, else take and save screenshot.
-    if (test.passed) {
+    if (results.passed) {
       return;
     }
 
     // get current test title and clean it, to use it as file name
-    const fileName = encodeURIComponent(test.title.replace(/\s+/g, '-'));
+    const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));
 
     // build file path
     const filePath = './errorShots/' + fileName + '.png';

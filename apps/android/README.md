@@ -23,6 +23,25 @@ yarn build
 yarn android
 ```
 
+## Using an Apple Silicon Mac (As of July 2021)
+
+- The virtual devices in the AVD Manager with arm64 images still have some bugs. To get the current best emulator, download it from Github: [version 3](https://github.com/google/android-emulator-m1-preview).
+
+- Since the emulator is an emulator, you need open it manually first. Then open Android Studio from `/apps/android/src`, choose 'emulator-5554' as the device and run the app.
+- To connect to metro run the following and reload the app:
+
+```sh
+adb reverse tcp:8081 tcp:8081
+yarn start
+```
+
+- APKs: The emulator is running on arm64 so any APKs that need to be installed need to be for arm64. Here is a [link](https://www.apkmirror.com/apk/google-inc/android-accessibility-suite/android-accessibility-suite-9-1-0-358315219-release/android-accessibility-suite-9-1-0-358315219-android-apk-download/) to the accessibility APK which includes TalkBack (voiceover)
+  - The ADB location is not automatically detected on the emulator so you need to manually set it.
+    1.  Go to expanded settings (three dots on the side) -> settings
+    2.  Turn off "Use detected ADB location"
+    3.  Click the folder and find the location of adb (~/Library/Android/sdk/platform-tools/adb). You will need to show hidden folders (Shift + CMD + .) to see Library
+  - Once ADB location is set, drag and drop the downloaded APK into the emulator to install it onto the emulator
+
 ## Dependencies
 
 Dependencies are managed by
@@ -47,9 +66,24 @@ will ensure that all relevant packages are bumped correctly.
 You can read more about this tool here:
 [`@rnx-kit/dep-check` design document](https://github.com/microsoft/rnx-kit/blob/main/packages/dep-check/DESIGN.md)
 
+## Debugging
+
+You can debug native code in Android Studio. To debug javascript code, you can either use standard web debugging, or you can use [React Native Tools](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native) to debug directly in VS Code. The steps are as follows:
+
+1. Launch your test app + packager as you normally would
+2. Go the debug menu in VS Code and run the "Attach to Packager (Android)" configuration
+3. Open the developer menu in your test app, and click debug
+4. You now should be able to set breakpoints and step through your code directly in VS Code.
+
 ## Troubleshooting
 
 - The first time you run your project, you may get errors about missing SDKs. Android Studio usually provides quick options to resolve these issues, but you can also go to Tools->SDK Manager to manually install or update SDK platforms or tools for your project.
+
+- If you get the error "command not found: adb", add the following to .bash_profile or .zprofile
+
+```sh
+export PATH=~/Library/Android/sdk/platform-tools:$PATH
+```
 
 - If you would like to debug in Android Studio, you can do the following to open the project there:
 

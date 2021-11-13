@@ -1,0 +1,615 @@
+{
+  "name": "@fluentui-react-native/tabs",
+  "entries": [
+    {
+      "date": "Fri, 12 Nov 2021 16:07:20 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.13",
+      "version": "0.5.13",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.30",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "25673699e6c6c064b41f1246c2c995baa67a74ad",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Nov 2021 23:17:41 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.13",
+      "version": "0.5.13",
+      "comments": {
+        "none": [
+          {
+            "comment": "Rename uifabricshared/eslint-config-rules to fluentui-react-native/eslint-config-rules",
+            "author": "ruaraki@microsoft.com",
+            "commit": "110fba2a1721a914501404f6040f07656307549e",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 09 Nov 2021 23:04:33 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.13",
+      "version": "0.5.13",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.22",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "8baa72ed4ec06f90a51cf757e1924e946f76a537",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 08 Nov 2021 20:52:15 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.12",
+      "version": "0.5.12",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.7.33",
+            "author": "sanajmi@microsoft.com",
+            "commit": "f6e7e6523713e641227f91113728da3d9816ef22",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 01 Nov 2021 18:53:37 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.11",
+      "version": "0.5.11",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.7.32",
+            "author": "sanajmi@microsoft.com",
+            "commit": "18757ce3c755d20f37bf436b7e99d3caee320c3b",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 25 Oct 2021 19:24:43 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.10",
+      "version": "0.5.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.10.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f6578742d6c957cf7e346db82f89171f80bedc3b",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 Oct 2021 03:46:25 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.9",
+      "version": "0.5.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.27",
+            "author": "ruaraki@microsoft.com",
+            "commit": "273f5addbeb5abeaec0b517e5416f52d8878152f",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 Oct 2021 20:23:36 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.8",
+      "version": "0.5.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/pressable to v0.7.26",
+            "author": "ruaraki@microsoft.com",
+            "commit": "a8209c3a6f52871eef88035c2dba2ef2b5ee83e7",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 07 Oct 2021 20:59:20 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.7",
+      "version": "0.5.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.18",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f759f09649d7fd9b8ea8ada78677f5cb65519f6e",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Oct 2021 17:52:17 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.6",
+      "version": "0.5.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.24",
+            "author": "ruaraki@microsoft.com",
+            "commit": "cb59746a9358af9ae32ea386aad1cfaa1922605d",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 28 Sep 2021 21:08:25 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.5",
+      "version": "0.5.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Delete NativeButton",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "335503904094894a91e53c6de328bf13e13bcc1c",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Sep 2021 19:08:16 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.4",
+      "version": "0.5.4",
+      "comments": {
+        "none": [
+          {
+            "comment": "Run prettier",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e52c9b3d031599af4f43c261cb0a0327bc68a5ab",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Sep 2021 16:32:12 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.4",
+      "version": "0.5.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "adding an adapter for macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "2d8e314d1cbdbccbd87251fbe125b14b1014486e",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 14 Sep 2021 19:31:04 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.3",
+      "version": "0.5.3",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Bump Prettier and run it (#997)\"",
+            "author": "ruaraki@microsoft.com",
+            "commit": "c3eefc2cd6e8e23d64ca72460586f33120edc336",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 13 Sep 2021 23:22:43 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.3",
+      "version": "0.5.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.21",
+            "author": "ruaraki@microsoft.com",
+            "commit": "a7179bb7cc1b8d1da09a0a11831b7b1712b8b720",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 10 Sep 2021 21:30:12 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.2",
+      "version": "0.5.2",
+      "comments": {
+        "none": [
+          {
+            "comment": "Run the prettier",
+            "author": "ruaraki@microsoft.com",
+            "commit": "7ac71c6add6f05230c649dad60b5f7442f08cbb3",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 10 Sep 2021 18:16:59 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.2",
+      "version": "0.5.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.14",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5f282af0873151b9f7a8eb75369619af42d092d4",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Sep 2021 22:12:19 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.1",
+      "version": "0.5.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.13",
+            "author": "ruaraki@microsoft.com",
+            "commit": "6a82ccdd6a0cf0226f59e1f81ec34a0eb7e3d912",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Sep 2021 20:03:01 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fixed comments, styling, and made props const",
+            "author": "sriyaaluru@gmail.com",
+            "commit": "bf44a8a21e66204a7bc51cee049f541995fc5062",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.12",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/text to v0.10.14",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.18",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.41",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.7.21",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/pressable to v0.7.18",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.23",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/test-tools to v0.1.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Tabs Control for Windows",
+            "author": "dake.3601@gmail.com",
+            "commit": "ebfa19c9cf5c864b3c381865dbac212c2a77a0a5",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Dynamic TabsItem",
+            "author": "dake.3601@gmail.com",
+            "commit": "e25d70f89e7477fcbb7cec29d1eaf45ac450ca21",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 31 Aug 2021 18:48:34 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add logic to pick a selected button when tabbing to a FocusZone",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.17",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.40",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/pressable to v0.7.17",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/text to v0.10.13",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.22",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "tabs control for macos",
+            "author": "sriyaaluru@gmail.com",
+            "commit": "06b45bf72d5a5b9129a0b07677114c821a483713",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.7.20",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 27 Aug 2021 15:48:49 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.3.4",
+      "version": "0.3.4",
+      "comments": {
+        "none": [
+          {
+            "comment": "Fix comment format in Tabs and TabsItem types",
+            "author": "krsiler@microsoft.com",
+            "commit": "0dc74db1f3f96263bf9bba5495421de121cfb04e",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 21:02:08 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.3.4",
+      "version": "0.3.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/pressable to v0.7.17",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 04:48:40 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.3.3",
+      "version": "0.3.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix text truncation for radio button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "b8c866644b2c5b64530990e59153424b0d6f5dcc",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 Aug 2021 21:36:58 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.3.2",
+      "version": "0.3.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.15",
+            "author": "sanajmi@microsoft.com",
+            "commit": "8f45901b85042f5f8d09f106608cb8f77ee260a8",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 24 Aug 2021 18:08:30 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Use exported IconSourcesType from Icon package",
+            "author": "sanajmi@microsoft.com",
+            "commit": "a2124be0bdd820a4f38ae7017bd48e7ca3373300",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 23 Aug 2021 23:35:47 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Deprecate aria- prefix properties",
+            "author": "krsiler@microsoft.com",
+            "commit": "2f478475a0cf511eaa281dd600411ed2b7b7e75f",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/adapters to v0.7.0",
+            "author": "dake.3601@gmail.com",
+            "commit": "84a24da6bdddd85adad1f5824e7af3d1804b1c1c",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/pressable to v0.7.13",
+            "author": "dake.3601@gmail.com",
+            "commit": "84a24da6bdddd85adad1f5824e7af3d1804b1c1c",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/text to v0.10.11",
+            "author": "dake.3601@gmail.com",
+            "commit": "84a24da6bdddd85adad1f5824e7af3d1804b1c1c",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.20",
+            "author": "dake.3601@gmail.com",
+            "commit": "84a24da6bdddd85adad1f5824e7af3d1804b1c1c",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.13",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "1f405d0b15fde31eb650b1d9bb5109dcc500440e",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.36",
+            "author": "sanajmi@microsoft.com",
+            "commit": "c4ee008b284d3e339cc19a6640c8e570d443d1cb",
+            "package": "@fluentui-react-native/tabs"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.7.15",
+            "author": "sanajmi@microsoft.com",
+            "commit": "c4ee008b284d3e339cc19a6640c8e570d443d1cb",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 19 Aug 2021 18:31:21 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.9.19",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5849d234f12ab30c929e0b8ab256a2fc7523cbe9",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 18 Aug 2021 23:00:57 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.9",
+            "author": "ruaraki@microsoft.com",
+            "commit": "345d1de930ff42359260da7f1e68a16059f4d763",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 18 Aug 2021 20:17:46 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.8.10",
+            "author": "ruaraki@microsoft.com",
+            "commit": "9359dd854f286cb1c9f5b8cc74e895ad8538f3c0",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 17 Aug 2021 20:02:00 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Implemented Tabs Control",
+            "author": "dake.3601@gmail.com",
+            "commit": "a22d4f8df2699f777049b529b071a21c672b399d",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.7.11",
+            "author": "sanajmi@microsoft.com",
+            "commit": "2b95227026008b40cea7c2e5640874a8df392e17",
+            "package": "@fluentui-react-native/tabs"
+          }
+        ]
+      }
+    }
+  ]
+}

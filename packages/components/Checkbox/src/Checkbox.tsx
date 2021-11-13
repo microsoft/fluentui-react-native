@@ -17,20 +17,24 @@ import {
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
+import { IPressableProps } from '@fluentui-react-native/pressable';
 
 export const Checkbox = compose<ICheckboxType>({
   displayName: checkboxName,
 
   usePrepareProps: (userProps: ICheckboxProps, useStyling: IUseComposeStyling<ICheckboxType>) => {
+    const defaultComponentRef = React.useRef(null);
     const {
+      accessible,
+      accessibilityLabel,
+      accessibilityRole,
       ariaLabel,
       checked,
       defaultChecked,
       boxSide,
-      disabled,
       label,
       onChange,
-      componentRef = React.useRef(null),
+      componentRef = defaultComponentRef,
       ...rest
     } = userProps;
 
@@ -45,7 +49,7 @@ export const Checkbox = compose<ICheckboxType>({
     // Ensure focus is placed on checkbox after click
     const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleChecked);
 
-    const pressable = useAsPressable({ onPress: toggleCheckedWithFocus, ...rest });
+    const pressable = useAsPressable({ onPress: toggleCheckedWithFocus, ...(rest as IPressableProps) });
 
     const buttonRef = useViewCommandFocus(componentRef);
 
@@ -54,7 +58,7 @@ export const Checkbox = compose<ICheckboxType>({
 
     const state: ICheckboxState = {
       ...pressable.state,
-      disabled: !!disabled,
+      disabled: !!userProps.disabled,
       checked: isChecked,
       boxAtEnd: boxSide == undefined || boxSide == 'start' ? false : true,
     };
@@ -79,10 +83,12 @@ export const Checkbox = compose<ICheckboxType>({
         rest,
         ref: buttonRef,
         ...pressable.props,
-        accessibilityRole: 'checkbox',
-        accessibilityLabel: ariaLabel || label,
+        accessible: accessible ?? true,
+        accessibilityRole: accessibilityRole ?? 'checkbox',
+        accessibilityLabel: accessibilityLabel ?? ariaLabel ?? label,
         accessibilityState: { disabled: state.disabled, checked: state.checked },
         accessibilityActions: [{ name: 'Toggle', label: checkboxSelectActionLabel }],
+        focusable: !state.disabled,
         onAccessibilityAction: onAccessibilityAction,
         onKeyUp: onKeyUpSpace,
       },

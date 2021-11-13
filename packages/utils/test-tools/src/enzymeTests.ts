@@ -9,6 +9,7 @@ export interface PropTreeFilter {
 
 export type PropTreeSnapshot = {
   name: string;
+  // eslint-disable-next-line @typescript-eslint/ban-types
   props: object;
   children: PropTreeSnapshot[];
 };

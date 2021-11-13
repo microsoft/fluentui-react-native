@@ -29,6 +29,15 @@ cd ..
 yarn macos
 ```
 
+## Debugging
+
+You can debug native code in Xcode. To debug javascript code, you can either use standard web debugging, or you can use [React Native Tools](https://marketplace.visualstudio.com/items?itemName=msjsdiag.vscode-react-native) to debug directly in VS Code. The steps are as follows:
+
+1. Launch your test app + packager as you normally would
+2. Go the debug menu in VS Code and run the "Attach to Packager (macOS)" configuration
+3. Open the developer menu in your test app, and click debug
+4. You now should be able to set breakpoints and step through your code directly in VS Code.
+
 ## Dependencies
 
 Dependencies are managed by
@@ -55,6 +64,7 @@ You can read more about this tool here:
 
 ## Troubleshooting
 
+- If you get the error: "Unable to resolve module... None of these files exist:...", close the packager and restart it by running `yarn start`. Note: you need to restart the packager when you switch to a different platform (e.g. from iOS to macOS), but once it restarts you can reload the tester apps on all running platforms at once.
 - If you want to do direct debugging via xcode, after the pod install, you can launch src/FluentTester.xcworkspace and build/run the scheme "ReactTestApp"
 - If you want to have a clean rebuild of the generated macOS project, you can do the following:
 

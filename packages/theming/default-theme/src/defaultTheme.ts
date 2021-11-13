@@ -1,6 +1,6 @@
 import { Theme, Typography, Spacing, FontWeightValue, FontSize, FontSizes, Variants } from '@fluentui-react-native/theme-types';
 import { Platform } from 'react-native';
-import { getStockWebPalette, getStockWebDarkPalette } from './defaultColors';
+import { getStockWebPalette, getStockWebDarkPalette, getStockWebHCPalette } from './defaultColors';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 function _defaultTypography(): Typography {
@@ -20,7 +20,7 @@ function _defaultTypography(): Typography {
     },
     families: {
       primary: 'Segoe UI',
-      secondary: 'System',
+      secondary: 'Segoe UI',
       cursive: 'System',
       monospace: 'System',
       sansSerif: 'System',
@@ -106,4 +106,12 @@ export const defaultFluentDarkTheme: Theme = {
   spacing: defaultFluentTheme.spacing,
   components: {},
   host: { appearance: 'dark' },
+};
+
+export const defaultFluentHighConstrastTheme: Theme = {
+  colors: getStockWebHCPalette(),
+  typography: defaultFluentTheme.typography,
+  spacing: defaultFluentTheme.spacing,
+  components: {},
+  host: { appearance: 'highContrast' },
 };

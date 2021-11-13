@@ -7,7 +7,7 @@ import { stackStyle } from './Common/styles';
 export type TestSection = {
   name: string;
   testID?: string;
-  component: React.FunctionComponent<{}>;
+  component: React.FunctionComponent;
 };
 
 export type Status = 'Production' | 'Beta' | 'Experimental' | 'Backlog' | 'N/A';
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
 // mobile platform check to not render status components.
 const isMobile = Platform.OS == 'android' || (Platform.OS == 'ios' && !Platform.isPad);
 
-export const Test = (props: TestProps) => {
+export const Test = (props: TestProps): React.ReactElement<Record<string, never>> => {
   return (
     <View>
       <Text style={[styles.name]} variant="heroSemibold">

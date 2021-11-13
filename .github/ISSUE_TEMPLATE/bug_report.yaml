@@ -1,0 +1,75 @@
+name: Bug report
+description: Found a bug in Fluent UI React Native? Please let us know.
+title: Describe the problem
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contacting us! We're here to help.
+        Before you report an issue, check if it's been reported before:
+        - Search: https://github.com/microsoft/fluentui-react-native/search?type=Issues
+
+        Note that if you do not provide enough information to reproduce the issue, we may not be able to take action on your report.
+  - type: markdown
+    attributes:
+      value: |
+        # Priorities and help requested
+  - type: checkboxes
+    attributes:
+      options:
+        - label: 'I am willing to submit a PR to fix'
+  - type: dropdown
+    attributes:
+      label: Requested priority
+      options:
+        - 'Blocking'
+        - 'High'
+        - 'Normal'
+        - 'Low'
+  - type: textarea
+    attributes:
+      label: Products/applications affected
+      description: if applicable
+  - type: markdown
+    attributes:
+      value: |
+        # Environment Information
+  - type: input
+    validations:
+      required: true
+    attributes:
+      label: Package version(s)
+      description: |
+        fill this out, include which package manager you're using
+  - type: input
+    attributes:
+      label: OS version(s)
+      description: |
+        fill this out if relevant
+  - type: checkboxes
+    attributes:
+      label: Platform
+      options:
+        - label: iOS
+        - label: macOS
+        - label: win32
+        - label: windows
+        - label: android
+  - type: input
+    attributes:
+      label: Xcode version
+      description: |
+        Provide if on the iOS or macOS platform
+  - type: textarea
+    validations:
+      required: true
+    attributes:
+      label: Please provide a reproduction of the bug
+      description: Providing an isolated reproduction of the bug makes it much easier for us to help you. A reproduction in the demo application is preferred.
+  - type: textarea
+    attributes:
+      label: Actual behavior
+  - type: textarea
+    attributes:
+      label: Expected behavior

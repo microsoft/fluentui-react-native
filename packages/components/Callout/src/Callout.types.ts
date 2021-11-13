@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { ScreenRect, ViewStyle } from 'react-native';
+import { ScreenRect, ViewProps, ViewStyle } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
-
 export const calloutName = 'Callout';
 
 /**
@@ -25,6 +24,8 @@ export type DirectionalHint =
   | 'bottomAutoEdge'
   | 'bottomCenter'
   | 'bottomRightEdge';
+
+export type DismissBehaviors = 'preventDismissOnKeyDown' | 'preventDismissOnClickOutside';
 
 export interface RestoreFocusEvent {
   nativeEvent: {
@@ -61,6 +62,20 @@ export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTok
   directionalHint?: DirectionalHint;
 
   /**
+   * Defines variations on how the callout dismissal may be controlled.  the async eventing
+   * of React-Native makes passing some aspects of dismissal control over to JS difficult.
+   * Moreover, the native platform or host may have competing priorities with regards to transient UI
+   * that generate bi-directional lifetime management between JS (which mounts and unmounts the
+   * component) and native (which may tear down the transient UI without JS input).
+   *
+   * This property provides control over the latter issue, enabling relevant native platform
+   * interactions with transient UI to be managed from JS.
+   *
+   * These behaviors should generally be orthogonal, and therefore combinable.
+   */
+  dismissBehaviors?: DismissBehaviors[];
+
+  /**
    * Defines the size of the gap between the anchor and the Callout.  Not used if
    * no anchor information is provided.
    */
@@ -82,21 +97,11 @@ export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTok
   minPadding?: number;
 }
 
-export interface ICalloutProps extends ICalloutTokens {
-  /*
-   * Used by screen readers to inform the user about the control.
-   */
-  accessibilityLabel?: string;
-
+export interface ICalloutProps extends ViewProps, ICalloutTokens {
   /*
    * A string that should be announced when the callout is shown.
    */
   accessibilityOnShowAnnouncement?: string;
-
-  /*
-   * Used by screen readers to inform the user about the purpose of the control.
-   */
-  accessibilityRole?: string;
 
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.

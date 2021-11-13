@@ -23,7 +23,7 @@ export const Submenu = compose<SubmenuType>({
     const data = useSelectedKey(null, userProps.onItemClick);
 
     const onShow = React.useCallback(() => {
-      userProps?.onShow();
+      userProps?.onShow && userProps.onShow();
       context.isSubmenuOpen = true;
     }, [context]);
     const onDismiss = React.useCallback(() => {

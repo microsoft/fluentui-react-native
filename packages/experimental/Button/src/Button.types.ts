@@ -1,33 +1,16 @@
 import * as React from 'react';
-import { ViewProps, ImageProps, ViewStyle, ColorValue } from 'react-native';
+import { ViewProps, ViewStyle, ColorValue } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
-import { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import type { IViewWin32Props } from '@office-iss/react-native-win32';
+import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 
 export const buttonName = 'Button';
+export type ButtonSize = 'small' | 'medium' | 'large';
+export type ButtonAppearance = 'primary' | 'outline' | 'subtle' | 'transparent';
 
-export interface ButtonTokens extends FontTokens, IBorderTokens {
-  /**
-   * Background color for the button
-   */
-  backgroundColor?: ColorValue;
-
-  /**
-   * Foreground color for the text and/or icon of the button
-   */
-  color?: ColorValue;
-
-  /**
-   * The amount of padding between the border and the contents.
-   */
-  contentPadding?: number | string;
-
-  /**
-   * The amount of padding between the border and the contents when the Button has focus.
-   */
-  contentPaddingFocused?: number | string;
-
+export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
   /**
    * The icon color.
    */
@@ -46,7 +29,7 @@ export interface ButtonTokens extends FontTokens, IBorderTokens {
   /**
    * The size of the icon.
    */
-  iconSize?: number | string;
+  iconSize?: number;
 
   /**
    * The weight of the lines used when drawing the icon.
@@ -54,18 +37,14 @@ export interface ButtonTokens extends FontTokens, IBorderTokens {
   iconWeight?: number;
 
   /**
-   * Text to show on the Button.
+   * The width of the button.
    */
-  content?: string;
+  width?: ViewStyle['width'];
 
   /**
-   * Source URL or name of the icon to show on the Button.
+   * The amount of spacing between an icon and the content, in pixels
    */
-  icon?: string;
-
-  width?: ViewStyle['width'];
-  minHeight?: ViewStyle['minHeight'];
-  minWidth?: ViewStyle['minWidth'];
+  spacingIconContent?: number;
 
   /**
    * States that can be applied to a button
@@ -75,11 +54,25 @@ export interface ButtonTokens extends FontTokens, IBorderTokens {
   pressed?: ButtonTokens;
   disabled?: ButtonTokens;
   primary?: ButtonTokens;
-  ghost?: ButtonTokens;
+  subtle?: ButtonTokens;
   fluid?: ButtonTokens;
+  fab?: ButtonTokens;
+  small?: ButtonTokens;
+  medium?: ButtonTokens;
+  large?: ButtonTokens;
+  hasContent?: ButtonTokens;
+  hasIcon?: ButtonTokens;
 }
 
 export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+  /**
+   * A button can have its content and borders styled for greater emphasis or to be subtle.
+   * - 'primary': Emphasizes the button as a primary action.
+   * - 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
+   * - 'transparent': NYI. Removes background and border styling.
+   */
+  appearance?: ButtonAppearance;
+
   /*
    * Text to show on the Button.
    */
@@ -88,11 +81,13 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   /*
    * Source URL or name of the icon to show on the Button.
    */
-  icon?: string;
+  icon?: IconSourcesType;
+
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
+
   /**
    * A callback to call on button click event
    */
@@ -101,21 +96,21 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   testID?: string;
   tooltip?: string;
 
-  /** A button can emphasize that it represents the primary action. */
-  primary?: boolean;
-
-  /** A button can blend into its background to become less emphasized. */
-  ghost?: boolean;
-
   /** A button can fill the width of its container. */
   fluid?: boolean;
+
+  /** A floating action button  */
+  fab?: boolean;
+
+  /** Sets style of button to a preset size style  */
+  size?: ButtonSize;
 }
 
-export type ButtonState = IPressableHooks<ButtonProps & React.ElementRef<any>>;
+export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
 
 export interface ButtonSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
-  icon: ImageProps;
+  icon: IconProps;
   content: TextProps;
 }
 

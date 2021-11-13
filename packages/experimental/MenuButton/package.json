@@ -1,0 +1,43 @@
+{
+  "name": "@fluentui-react-native/experimental-menu-button",
+  "version": "0.0.11",
+  "description": "A cross-platform MenuButton component using the Fluent Design System",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "just": "fluentui-scripts",
+    "lint": "fluentui-scripts eslint",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
+  },
+  "dependencies": {
+    "@fluentui-react-native/contextual-menu": "^0.11.1",
+    "@fluentui-react-native/experimental-button": "^0.9.6",
+    "@fluentui-react-native/framework": "0.6.6",
+    "@fluentui-react-native/tokens": ">=0.10.3 <1.0.0",
+    "react-native-svg": "^12.1.1"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@types/react-native": "^0.63.0",
+    "@uifabricshared/build-native": "^0.1.1",
+    "react": "16.13.1",
+    "react-native": "^0.63.4"
+  },
+  "peerDependencies": {
+    "react": ">=16.13.1",
+    "react-native": ">=0.63.4"
+  },
+  "author": "",
+  "license": "MIT"
+}

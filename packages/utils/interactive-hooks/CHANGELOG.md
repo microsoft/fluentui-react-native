@@ -1,8 +1,339 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Fri, 18 Jun 2021 00:38:19 GMT and should not be manually modified.
+This log was last generated on Tue, 09 Nov 2021 23:04:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.54
+
+Tue, 09 Nov 2021 23:04:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.30 (67026167+chiuam@users.noreply.github.com)
+
+## 0.10.53
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- revert changes in useAsPressable (sanajmi@microsoft.com)
+
+## 0.10.52
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Use tslib where spreadArray is used (ruaraki@microsoft.com)
+
+## 0.10.51
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.27 (ruaraki@microsoft.com)
+
+## 0.10.50
+
+Tue, 19 Oct 2021 20:23:36 GMT
+
+### Patches
+
+- Fix a regression in useHoverState (sanajmi@microsoft.com)
+- fix setting state with onPress/onLongPress (sanajmi@microsoft.com)
+- Support onPress/onLongPress in usePressableState (sanajmi@microsoft.com)
+- Fix regression in useAsPressable (sanajmi@microsoft.com)
+
+## 0.10.49
+
+Thu, 07 Oct 2021 20:59:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.25 (sanajmi@microsoft.com)
+
+## 0.10.48
+
+Fri, 01 Oct 2021 17:52:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.24 (ruaraki@microsoft.com)
+
+## 0.10.47
+
+Tue, 28 Sep 2021 21:08:25 GMT
+
+### Patches
+
+- Delete NativeButton (67026167+chiuam@users.noreply.github.com)
+
+## 0.10.46
+
+Tue, 21 Sep 2021 16:32:12 GMT
+
+### Patches
+
+- adding an adapter for macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.10.45
+
+Mon, 13 Sep 2021 23:22:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.21 (ruaraki@microsoft.com)
+
+## 0.10.44
+
+Fri, 10 Sep 2021 21:30:12 GMT
+
+### Patches
+
+- Use UIManager from react-native instead of from NativeModules (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.10.43
+
+Fri, 10 Sep 2021 18:16:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.20 (ruaraki@microsoft.com)
+
+## 0.10.42
+
+Thu, 09 Sep 2021 22:12:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.19 (ruaraki@microsoft.com)
+
+## 0.10.41
+
+Thu, 09 Sep 2021 20:03:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.18 (ruaraki@microsoft.com)
+
+## 0.10.40
+
+Thu, 26 Aug 2021 21:02:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.17 (ruaraki@microsoft.com)
+
+## 0.10.39
+
+Thu, 26 Aug 2021 04:48:40 GMT
+
+### Patches
+
+- fix text truncation for radio button (67026167+chiuam@users.noreply.github.com)
+
+## 0.10.38
+
+Wed, 25 Aug 2021 21:36:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.15 (sanajmi@microsoft.com)
+
+## 0.10.37
+
+Tue, 24 Aug 2021 18:08:30 GMT
+
+### Patches
+
+- Add return type to createIconProps (sanajmi@microsoft.com)
+
+## 0.10.36
+
+Mon, 23 Aug 2021 23:35:47 GMT
+
+### Patches
+
+- Add macOS implementation of useViewCommandFocus (sanajmi@microsoft.com)
+
+## 0.10.35
+
+Thu, 19 Aug 2021 18:31:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.12 (ruaraki@microsoft.com)
+
+## 0.10.34
+
+Wed, 18 Aug 2021 23:00:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.11 (ruaraki@microsoft.com)
+
+## 0.10.33
+
+Wed, 18 Aug 2021 20:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.10 (ruaraki@microsoft.com)
+
+## 0.10.32
+
+Fri, 13 Aug 2021 16:12:26 GMT
+
+### Patches
+
+- Fix icons in experimental button and add fab (t-lindaweng@microsoft.com)
+
+## 0.10.31
+
+Thu, 12 Aug 2021 17:23:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.8 (ruaraki@microsoft.com)
+
+## 0.10.30
+
+Tue, 10 Aug 2021 21:12:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.7 (ruaraki@microsoft.com)
+
+## 0.10.29
+
+Mon, 09 Aug 2021 22:49:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.6 (ruaraki@microsoft.com)
+
+## 0.10.28
+
+Mon, 09 Aug 2021 19:16:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.5 (ruaraki@microsoft.com)
+
+## 0.10.27
+
+Sat, 07 Aug 2021 00:40:04 GMT
+
+### Patches
+
+- enable usePressableState with stock Pressable component (jasonmo@microsoft.com)
+
+## 0.10.26
+
+Fri, 06 Aug 2021 23:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.3 (ruaraki@microsoft.com)
+
+## 0.10.25
+
+Fri, 06 Aug 2021 00:36:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.2 (ruaraki@microsoft.com)
+
+## 0.10.24
+
+Wed, 04 Aug 2021 16:54:20 GMT
+
+### Patches
+
+- move experimental Text to be written as compressible (jasonmo@microsoft.com)
+
+## 0.10.23
+
+Wed, 04 Aug 2021 06:26:25 GMT
+
+### Patches
+
+- radio group on macOS (67026167+chiuam@users.noreply.github.com)
+
+## 0.10.22
+
+Tue, 03 Aug 2021 23:48:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.7.19 (jasonmo@microsoft.com)
+
+## 0.10.21
+
+Tue, 03 Aug 2021 22:33:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.7.18 (jasonmo@microsoft.com)
+
+## 0.10.20
+
+Fri, 30 Jul 2021 19:17:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.7.17 (email not defined)
+
+## 0.10.19
+
+Thu, 29 Jul 2021 17:53:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.7.16 (jasonmo@microsoft.com)
+
+## 0.10.18
+
+Tue, 27 Jul 2021 22:17:20 GMT
+
+### Patches
+
+- add compressible utility and a snapshot test / demo to framework (jasonmo@microsoft.com)
+
+## 0.10.17
+
+Mon, 26 Jul 2021 20:41:04 GMT
+
+### Patches
+
+- add new use-slot package, move framework to consume that package (jasonmo@microsoft.com)
+
+## 0.10.16
+
+Sun, 25 Jul 2021 16:30:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.7.13 (email not defined)
+
+## 0.10.14
+
+Fri, 23 Jul 2021 17:28:27 GMT
+
+### Patches
+
+- Build fix (email not defined)
+
+## 0.10.12
+
+Wed, 21 Jul 2021 22:55:40 GMT
+
+### Patches
+
+- expose use-tokens in framework package (jasonmo@microsoft.com)
 
 ## 0.10.4
 

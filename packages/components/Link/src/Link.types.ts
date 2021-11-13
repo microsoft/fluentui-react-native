@@ -42,6 +42,7 @@ export interface ILinkOptions {
   url?: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export type IWithLinkOptions<T extends object> = ILinkOptions & IWithPressableOptions<T>;
 
 export interface ILinkProps extends IWithLinkOptions<ITextProps> {
