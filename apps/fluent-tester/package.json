@@ -59,7 +59,7 @@
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@rnx-kit/cli": "^0.5.27",
     "@types/jasmine": "3.5.10",
-    "@types/react": "^16.9.34",
+    "@types/react": "^17.0.2",
     "@types/react-native": "^0.64.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@wdio/appium-service": "5.18.2",

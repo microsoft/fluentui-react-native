@@ -16,7 +16,7 @@ const blockList = exclusionList([
 
 module.exports = (async () => {
   const {
-    resolver: {sourceExts, assetExts},
+    resolver: { sourceExts, assetExts },
   } = await getDefaultConfig();
   return {
     watchFolders: defaultWatchFolders(__dirname),
