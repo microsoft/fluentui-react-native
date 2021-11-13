@@ -1,9 +1,9 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { fabButtonName, FabButtonType } from './FabButton.types';
+import { fabName, FABType } from './FAB.types';
 import { Text } from '@fluentui-react-native/experimental-text';
-import { stylingSettings } from './FabButton.styling';
+import { stylingSettings } from './FAB.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from '../useButton';
 import { Icon } from '@fluentui-react-native/icon';
@@ -22,15 +22,15 @@ const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonCo
   return state[layer] || userProps[layer] || (layer === 'hasContent' && userProps.content) || (layer === 'hasIcon' && userProps.icon);
 };
 
-export const FabButton = compose<FabButtonType>({
-  displayName: fabButtonName,
+export const FabButton = compose<FABType>({
+  displayName: fabName,
   ...stylingSettings,
   slots: {
     root: View,
     icon: Icon,
     content: Text,
   },
-  render: (userProps: ButtonCoreProps, useSlots: UseSlots<FabButtonType>) => {
+  render: (userProps: ButtonCoreProps, useSlots: UseSlots<FABType>) => {
     const { icon, content, onClick, ...rest } = userProps;
     const iconProps = createIconProps(userProps.icon);
 
