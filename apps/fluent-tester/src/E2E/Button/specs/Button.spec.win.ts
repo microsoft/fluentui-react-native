@@ -8,7 +8,6 @@ import { BUTTON_ACCESSIBILITY_LABEL, BUTTON_TEST_COMPONENT_LABEL } from '../../.
 describe('Button Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    browser.saveScreenshot('./errorShots/onBoot2.png'); // Take a screenshot of the app on load. Helpful to have a screenshot
     expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
   });
 

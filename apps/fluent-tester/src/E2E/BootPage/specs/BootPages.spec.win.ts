@@ -15,9 +15,8 @@ const PAGE_TIMEOUT = 15000;
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Open the app', function () {
-  it('Boot app', () => {
+  it('Initial App Boot', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    browser.saveScreenshot('./errorShots/onBoot.png'); // Take a screenshot of the app for testing purposes
     expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
   });
 });
