@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fixing capitalization in some of the native code for macOS",
-  "packageName": "@fluentui-react-native/menu-button",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

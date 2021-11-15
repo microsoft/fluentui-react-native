@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Change button props to add appearance",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
