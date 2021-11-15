@@ -26,19 +26,19 @@ describe('Button Testing Initialization', function () {
 });
 
 describe('Button Accessibility Testing', () => {
-  it('Validate accessibilityRole is correct', () => {
+  it('Button - Validate accessibilityRole is correct', () => {
     ButtonPageObject.scrollToTestElement();
     ButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
     expect(ButtonPageObject.getAccessibilityRole()).toEqual(BUTTON_A11Y_ROLE);
   });
 
-  it('Set accessibilityLabel', () => {
+  it('Button - Set accessibilityLabel', () => {
     ButtonPageObject.scrollToTestElement();
     ButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
     expect(ButtonPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(BUTTON_ACCESSIBILITY_LABEL);
   });
 
-  it('Do not set accessibilityLabel -> Default to Button label', () => {
+  it('Button - Do not set accessibilityLabel -> Default to Button label', () => {
     ButtonPageObject.scrollToTestElement();
     ButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
     expect(ButtonPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(BUTTON_TEST_COMPONENT_LABEL);

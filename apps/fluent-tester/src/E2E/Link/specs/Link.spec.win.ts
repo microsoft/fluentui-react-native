@@ -25,13 +25,13 @@ describe('Link Testing Initialization', function () {
 });
 
 describe('Link Accessibility Testing', () => {
-  it('Validate accessibilityRole is correct', () => {
+  it('Link - Validate accessibilityRole is correct', () => {
     LinkPageObject.scrollToTestElement();
     LinkPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
     expect(LinkPageObject.getAccessibilityRole()).toEqual(LINK_A11Y_ROLE);
   });
 
-  it('Set accessibilityLabel', () => {
+  it('Link - Set accessibilityLabel', () => {
     LinkPageObject.scrollToTestElement();
     LinkPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
     expect(LinkPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(LINK_ACCESSIBILITY_LABEL);

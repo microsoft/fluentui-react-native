@@ -23,7 +23,7 @@ describe('Text Testing Initialization', function () {
 });
 
 describe('Text Accessibility Testing', () => {
-  it('Validate accessibilityRole is correct', () => {
+  it('Text - Validate accessibilityRole is correct', () => {
     TextPageObject.scrollToTestElement();
     TextPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
     expect(TextPageObject.getAccessibilityRole()).toEqual(TEXT_A11Y_ROLE);

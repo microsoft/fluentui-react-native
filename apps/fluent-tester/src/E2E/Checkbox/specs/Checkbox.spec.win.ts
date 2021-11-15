@@ -24,19 +24,19 @@ describe('Checkbox Testing Initialization', () => {
 });
 
 describe('Checkbox Accessibility Testing', () => {
-  it('Validate accessibilityRole is correct', () => {
+  it('Checkbox - Validate accessibilityRole is correct', () => {
     CheckboxPageObject.scrollToTestElement();
     CheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
     expect(CheckboxPageObject.getAccessibilityRole()).toEqual(CHECKBOX_A11Y_ROLE);
   });
 
-  it('Set accessibilityLabel', () => {
+  it('Checkbox - Set accessibilityLabel', () => {
     CheckboxPageObject.scrollToTestElement();
     CheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
     expect(CheckboxPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(CHECKBOX_ACCESSIBILITY_LABEL);
   });
 
-  it('Do not set accessibilityLabel -> Default to Checkbox label', () => {
+  it('Checkbox - Do not set accessibilityLabel -> Default to Checkbox label', () => {
     CheckboxPageObject.scrollToTestElement();
     CheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
     expect(CheckboxPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(CHECKBOX_TEST_COMPONENT_LABEL);
