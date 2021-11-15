@@ -14812,15 +14812,16 @@ react-native-svg@^12.1.1:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
 
-react-native-test-app@^0.7.0:
-  version "0.7.10"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.7.10.tgz#6a4625eb399bca53f507e9179b14730ef69aeb93"
-  integrity sha512-xUEP0zDGG+VSe684OusBFqlTEc/Ao6WyTcKFxFD9zFHxwoV+85P6AHqwYx/5NXFv8r1gFaFYvAfLSgwur/Y7zg==
+react-native-test-app@^0.9.12:
+  version "0.9.12"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.9.12.tgz#4bc1411c6733bebc8418b6d0817864259c7a95ef"
+  integrity sha512-2lEQkza1E4kw7VSMx6qOkN4O99SMLVAAycpv1v9uE8lNmKyklAMwgvUovuG2eNOVyaPEeoR+oGbbNIH6TcW1DA==
   dependencies:
     chalk "^4.1.0"
     prompts "^2.4.0"
     rimraf "^3.0.0"
     semver "^7.3.5"
+    uuid "^8.3.2"
     yargs "^16.0.0"
 
 react-native-web@0.17.5, react-native-web@^0.17.5:
@@ -17480,7 +17481,7 @@ uuid@^3.0.0, uuid@^3.0.1, uuid@^3.3.2:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
-uuid@^8.0.0, uuid@^8.1.0, uuid@^8.3.0, uuid@^8.3.1:
+uuid@^8.0.0, uuid@^8.1.0, uuid@^8.3.0, uuid@^8.3.1, uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
