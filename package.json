@@ -57,6 +57,8 @@
   },
   "resolutions": {
     "@office-iss/react-native-win32": "^0.64.8",
+    "@react-native-community/cli": "^5.0.1",
+    "@react-native-community/cli-platform-ios": "^5.0.2",
     "metro": "^0.66.2",
     "metro-babel-register": "^0.66.2",
     "metro-babel-transformer": "^0.66.2",

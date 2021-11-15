@@ -18,7 +18,7 @@
     "just-scripts": ">=0.36.1"
   },
   "devDependencies": {
-    "@react-native-community/cli": "^6.1.0",
+    "@react-native-community/cli": "^5.0.1",
     "@rnx-kit/jest-preset": "^0.1.0",
     "@types/enzyme": "^3.10.5",
     "@types/es6-collections": "^0.5.29",
