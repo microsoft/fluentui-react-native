@@ -1,5 +1,5 @@
 const DUMMY_CHAR = '';
-export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -40 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
+export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
 export function By(testId: string): WebdriverIO.Element {
   return $('~' + testId);
