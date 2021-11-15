@@ -59,7 +59,7 @@ const isMobile = Platform.OS == 'android' || (Platform.OS == 'ios' && !Platform.
 
 export const Test = (props: TestProps): React.ReactElement<Record<string, never>> => {
   return (
-    <View>
+    <View testID="ScrollViewAreaForComponents">
       <Text style={[styles.name]} variant="heroSemibold">
         {props.name}
       </Text>
