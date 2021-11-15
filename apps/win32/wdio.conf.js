@@ -155,7 +155,7 @@ exports.config = {
   afterTest: function (test, context, results) {
     // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
     // it may be useful to have a screenshot of the app on load.
-    if (results.description == 'Initial App Boot') {
+    if (test.title == 'Initial App Boot') {
       browser.saveScreenshot('./errorShots/onBoot.png');
     } else if (results.passed) {
       return;
@@ -211,7 +211,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function (exitCode, config, capabilities, results) {
+  onComplete: function (/* exitCode, config, capabilities, results */) {
     console.log('<<< TESTING FINISHED >>>');
   },
   /**
