@@ -1,4 +1,4 @@
-/* Accessibility Role Constants - https://microsoft.github.io/windows-docs-rs/doc/bindings/Windows/Win32/UI/Accessibility/ */
+/* Accessibility Role Constants - https://microsoft.github.io/windows-docs-rs/doc/windows/Win32/UI/Accessibility/index.html */
 export const BUTTON_A11Y_ROLE = 'ControlType.Button';
 export const CALLOUT_A11Y_ROLE = 'ControlType.Group';
 export const CHECKBOX_A11Y_ROLE = 'ControlType.CheckBox';
