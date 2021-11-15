@@ -101,7 +101,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  beforeSession: function (config, capabilities, specs) {
+  beforeSession: function (/* config, capabilities, specs */) {
     // Delete old screenshots and create empty directory
     if (fs.existsSync('./errorShots')) {
       rimraf.sync('./errorShots');
