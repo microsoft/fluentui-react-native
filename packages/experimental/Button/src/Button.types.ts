@@ -8,6 +8,7 @@ import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 
 export const buttonName = 'Button';
 export type ButtonSize = 'small' | 'medium' | 'large';
+export type ButtonAppearance = 'primary' | 'outline' | 'subtle' | 'transparent';
 
 export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
   /**
@@ -54,7 +55,7 @@ export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   disabled?: ButtonTokens;
   primary?: ButtonTokens;
   subtle?: ButtonTokens;
-  fluid?: ButtonTokens;
+  block?: ButtonTokens;
   fab?: ButtonTokens;
   small?: ButtonTokens;
   medium?: ButtonTokens;
@@ -64,6 +65,14 @@ export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, I
 }
 
 export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+  /**
+   * A button can have its content and borders styled for greater emphasis or to be subtle.
+   * - 'primary': Emphasizes the button as a primary action.
+   * - 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
+   * - 'transparent': NYI. Removes background and border styling.
+   */
+  appearance?: ButtonAppearance;
+
   /*
    * Text to show on the Button.
    */
@@ -87,20 +96,14 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   testID?: string;
   tooltip?: string;
 
-  /** A button can emphasize that it represents the primary action. */
-  primary?: boolean;
-
-  /** A button can blend into its background to become less emphasized. */
-  subtle?: boolean;
-
   /** A button can fill the width of its container. */
-  fluid?: boolean;
+  block?: boolean;
 
   /** A floating action button  */
   fab?: boolean;
 
   /** Sets style of button to a preset size style  */
-  size?: ButtonSize
+  size?: ButtonSize;
 }
 
 export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;

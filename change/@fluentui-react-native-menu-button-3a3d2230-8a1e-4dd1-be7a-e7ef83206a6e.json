@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Adding accessibilityLabel integration for MenuButton",
-  "packageName": "@fluentui-react-native/menu-button",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}

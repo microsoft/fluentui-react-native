@@ -63,7 +63,7 @@ export const ThemePickers: React.FunctionComponent = () => {
         }}
         actions={themeMenuOptions}
       >
-        <Button subtle content="Theme" />
+        <Button appearance="subtle" content="Theme" />
       </MenuView>
       <MenuView
         title="Brand"
@@ -72,7 +72,7 @@ export const ThemePickers: React.FunctionComponent = () => {
         }}
         actions={brandMenuOptions}
       >
-        <Button subtle content="Brand" />
+        <Button appearance="subtle" content="Brand" />
       </MenuView>
     </View>
   );
