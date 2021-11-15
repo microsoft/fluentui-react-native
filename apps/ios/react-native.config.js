@@ -15,22 +15,10 @@
  */
 'use strict';
 
+const path = require('path');
+
 module.exports = {
   project: {
-    android: {
-      sourceDir: 'android',
-      manifestPath: path.relative(
-        path.join(__dirname, 'android'),
-        path.join(
-          path.dirname(require.resolve('react-native-test-app/package.json')),
-          'android',
-          'app',
-          'src',
-          'main',
-          'AndroidManifest.xml',
-        ),
-      ),
-    },
     ios: {
       project: (() => {
         const {
