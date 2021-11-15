@@ -21,8 +21,8 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "devDependencies": {
-    "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1"
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@uifabricshared/build-native": "^0.1.1"
   },
   "peerDependencies": {
     "react": "^16.13.1",

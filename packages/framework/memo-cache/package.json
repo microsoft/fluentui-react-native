@@ -32,10 +32,10 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@types/jest": "^26.0.0",
     "@types/node": "^10.3.5",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1",
     "tslib": "^1.13.0"
   }
 }

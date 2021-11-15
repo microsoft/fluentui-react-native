@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 09 Nov 2021 23:04:33 GMT and should not be manually modified.
+This log was last generated on Fri, 12 Nov 2021 16:07:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.47.3
+
+Fri, 12 Nov 2021 16:07:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.3.27 (4123478+tido64@users.noreply.github.com)
 
 ## 0.47.2
 

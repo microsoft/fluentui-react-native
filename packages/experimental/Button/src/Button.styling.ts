@@ -8,7 +8,7 @@ import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
 
 export const buttonStates: (keyof ButtonTokens)[] = [
   'fab',
-  'fluid',
+  'block',
   'primary',
   'subtle',
   'hovered',

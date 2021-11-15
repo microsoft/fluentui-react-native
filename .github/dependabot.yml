@@ -7,5 +7,4 @@ updates:
       time: '13:00'
     labels:
       - 'Type: Dependencies'
-    version_requirement_updates: off
     versioning-strategy: lockfile-only
