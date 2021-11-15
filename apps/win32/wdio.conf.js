@@ -58,7 +58,7 @@ exports.config = {
     defaultTimeoutInterval: jasmineDefaultTimeout,
   },
 
-  // The number of times to retry the entire specfile when it fails as a whole.
+  // The number of times to retry the entire spec file when it fails as a whole.
   // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
   specFileRetries: 3,
 
