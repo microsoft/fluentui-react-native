@@ -30,7 +30,6 @@ The `Button` component has several apparance variants depending on where it's be
 - The default `Button` is rendered with its default styling indicating a trigger for an action.
 - appearance="primary": The `Button` is styled to emphasize that it represents the primary action.
 - appearance="subtle": The `Button` is styled to blend into its background to become less emphasized.
-- appearance="transparent": The `Button` is styled such that it has no background or border styling and is just emphasized through its content styling.
 
 ### Icon
 
@@ -85,7 +84,7 @@ export type ButtonProps = Omit<IWithPressableOptions<ViewProps>, 'onPress'> & {
   //  * Loader slot that, if specified, renders a `loader` before the `icon` and `children` while the `loading` flag
   //  * is set to `true`.
   //  */
-  // loader?: ShorthandPropsCompat<React.HTMLAttributes<HTMLSpanElement>>;
+  loader?: TBD;
 
   /**
    * A button can fill the width of its container.
@@ -110,7 +109,7 @@ export type ButtonProps = Omit<IWithPressableOptions<ViewProps>, 'onPress'> & {
   //  * be interacted with.
   //  * @default false
   //  */
-  // loading?: boolean;
+  loading?: boolean;
 
   /**
    * A button can be rounded, circular, or square.
@@ -185,6 +184,6 @@ The same behavior as above translated for touch events. This means that there is
 
 ### Expected behavior
 
-- Should default to render a native `button` element unless something else has been specified for the `root` slot, in which case `role="button"` should be added to it.
-- Should mix in the native props expected for the `button` native element.
+- Should default to adding `role="button"` to the root slot.
+- Should mix in the accessibility props expected for a `button` component.
 - Should be keyboard tabbable and focusable.
