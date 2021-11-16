@@ -8,14 +8,6 @@ steps:
       Start-Process msiexec -ArgumentList "/quiet","/i","$(Agent.TempDirectory)\WinAppDriver.msi" -Verb runAs -Wait
     displayName: Replace WinAppDriver 1.2.1 with WinAppDriver 1.1
 
-  # - task: PowerShell@2
-  #   inputs:
-  #     targetType: "inline"
-  #     script: |
-  #       New-Item -Path '$(Build.SourcesDirectory)\apps\${{parameters.platform}}\errorShots' -ItemType Directory
-  #   condition: succeeded()
-  #   displayName: "Create errorShots Directory for Error Screenshots"
-
   - script: |
       yarn bundle
     workingDirectory: apps/win32
