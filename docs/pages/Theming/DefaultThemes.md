@@ -16,7 +16,7 @@ On win32, we allow for better integration with an Office host.
 
 On win32, we allow for integration with Office theming via an `OfficeThemingModule`. Office has a native module which provides information about the queried palette based on the current Office theme. FURN uses the information to populate `theme.colors`, but the palette is available as well under `theme.host.palette`.
 
-You can create a theme using information from Office by calling `createOfficeTheme()`. By default, we use the `WhiteColors` palette. You can also ask for a specific palette's values by passing in a `paletteName` as part of the `ThemeOptions` passed into `createOfficeTheme()`:
+You can create a theme using information from Office by calling `createOfficeTheme()`. By default, we use the `Menus_FluentSV` palette. You can also ask for a specific palette's values by passing in a `paletteName` as part of the `ThemeOptions` passed into `createOfficeTheme()`:
 
 ```tsx
 import { ThemeProvider } from '@fluentui-react-native/theme';

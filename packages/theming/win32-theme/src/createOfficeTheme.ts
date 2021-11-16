@@ -30,7 +30,7 @@ export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
   const themeRef = new ThemeReference(
     createDefaultTheme(options),
     () => {
-      const name = paletteName || '';
+      const name = paletteName || 'Menus_FluentSV';
       const palette = handlePaletteCall(ref.module.getPalette(name));
       return createPartialOfficeTheme(module, ref.themeName, palette);
     },

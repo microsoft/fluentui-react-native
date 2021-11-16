@@ -55,7 +55,7 @@ const themingModule = getThemingModule()[0];
 export function applyTheme(parent: Theme, name: ThemeNames, appearance: ThemeOptions['appearance']): PartialTheme {
   switch (name) {
     case 'Office':
-      return themingModule ? createOfficeTheme({ appearance, paletteName: 'WhiteColors' }).theme : {};
+      return themingModule ? createOfficeTheme({ appearance, paletteName: 'Menus_FluentSV' }).theme : {};
     case 'Caterpillar':
       return applyCaterpillarTheme(parent);
     default:
