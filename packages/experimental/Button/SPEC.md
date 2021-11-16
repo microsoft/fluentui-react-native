@@ -65,66 +65,65 @@ The `Button` component can be loading if it's waiting for another action to occu
 ### Props
 
 ```ts
-export type ButtonProps = ComponentPropsCompat &
-  React.ButtonHTMLAttributes<HTMLElement> & {
-    /**
-     * A button can have its content and borders styled for greater emphasis or to be subtle.
-     * - 'primary': Emphasizes the button as a primary action.
-     * - 'outline': Removes background styling.
-     * - 'subtle': Minimzes emphasis to blend into the background until hovered or focused.
-     * - 'transparent': Removes background and border styling.
-     */
-    appearance?: 'primary' | 'outline' | 'subtle' | 'transparent';
+export type ButtonProps = Omit<IWithPressableOptions<ViewProps>, 'onPress'> & {
+  /**
+   * A button can have its content and borders styled for greater emphasis or to be subtle.
+   * - 'primary': Emphasizes the button as a primary action.
+   * - 'outline': Removes background styling.
+   * - 'subtle': Minimzes emphasis to blend into the background until hovered or focused.
+   * - 'transparent': Removes background and border styling.
+   */
+  appearance?: 'primary' | 'outline' | 'subtle' | 'transparent';
 
-    /**
-     * Icon slot that, if specified, renders an icon either before or after the `children` as specified by the
-     * `iconPosition` prop.
-     */
-    icon?: ShorthandPropsCompat<React.HTMLAttributes<HTMLElement>>;
+  /**
+   * Icon slot that, if specified, renders an icon either before or after the `children` as specified by the
+   * `iconPosition` prop.
+   */
+  icon?: IconSourcesType;
 
-    // /**
-    //  * Loader slot that, if specified, renders a `loader` before the `icon` and `children` while the `loading` flag
-    //  * is set to `true`.
-    //  */
-    // loader?: ShorthandPropsCompat<React.HTMLAttributes<HTMLSpanElement>>;
+  // /**
+  //  * Loader slot that, if specified, renders a `loader` before the `icon` and `children` while the `loading` flag
+  //  * is set to `true`.
+  //  */
+  // loader?: ShorthandPropsCompat<React.HTMLAttributes<HTMLSpanElement>>;
 
-    /**
-     * A button can fill the width of its container.
-     * @default false
-     */
-    block?: boolean;
+  /**
+   * A button can fill the width of its container.
+   * @default false
+   */
+  block?: boolean;
 
-    /**
-     * A button can show that it cannot be interacted with.
-     * @default false
-     */
-    disabled?: boolean;
+  /**
+   * A button can show that it cannot be interacted with.
+   * @default false
+   */
+  disabled?: boolean;
 
-    /**
-     * A button can format its icon to appear before or after its content.
-     * @default 'before'
-     */
-    iconPosition?: 'before' | 'after';
+  /**
+   * A button can format its icon to appear before or after its content.
+   * @default 'before'
+   */
+  iconPosition?: 'before' | 'after';
 
-    // /**
-    //  * A button can show a loading indicator if it is waiting for another action to happen before allowing itself to
-    //  * be interacted with.
-    //  * @default false
-    //  */
-    // loading?: boolean;
+  // /**
+  //  * A button can show a loading indicator if it is waiting for another action to happen before allowing itself to
+  //  * be interacted with.
+  //  * @default false
+  //  */
+  // loading?: boolean;
 
-    /**
-     * A button can be rounded, circular, or square.
-     * @default 'rounded'
-     */
-    shape?: 'rounded' | 'circular' | 'square';
+  /**
+   * A button can be rounded, circular, or square.
+   * @default 'rounded'
+   */
+  shape?: 'rounded' | 'circular' | 'square';
 
-    /**
-     * A button supports different sizes.
-     * @default 'medium'
-     */
-    size?: 'small' | 'medium' | 'large';
-  };
+  /**
+   * A button supports different sizes.
+   * @default 'medium'
+   */
+  size?: 'small' | 'medium' | 'large';
+};
 ```
 
 ### Styling Tokens
