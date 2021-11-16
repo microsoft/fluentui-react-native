@@ -4,28 +4,22 @@ parameters:
   buildArtifacts:
 
 steps:
+  - script: |
+      dir
+    workingDirectory: apps/win32/errorShots
+    displayName: "Looking at Win32 /errorShots"
+
+  - script: |
+      dir
+    workingDirectory: apps/win32/reports
+    displayName: "Looking at Win32 /reports"
+
   # Copy Appium reports to FluentTesterDump
   - task: CopyFiles@2
     inputs:
       sourceFolder: $(Build.SourcesDirectory)\apps\${{parameters.platform}}\reports\
       targetFolder: $(Build.StagingDirectory)\E2E_${{parameters.applicationType}}_Dump
     displayName: "Copy Reports"
-    condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'))
-
-  # Copy Appium reports to FluentTesterDump
-  - task: CopyFiles@2
-    inputs:
-      sourceFolder: $(Build.SourcesDirectory)\apps\${{parameters.platform}}\reports
-      targetFolder: $(Build.StagingDirectory)\E2E_${{parameters.applicationType}}_Dump
-    displayName: "Copy tree dump screenshots"
-    condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'))
-
-  # Copy Appium reports to FluentTesterDump
-  - task: CopyFiles@2
-    inputs:
-      sourceFolder: $(Build.SourcesDirectory)\apps\${{parameters.platform}}\reports
-      targetFolder: $(Build.StagingDirectory)\E2E_${{parameters.applicationType}}_Dump
-    displayName: "Copy tree dump screenshots"
     condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'))
 
   # Copy errorShots to FluentTesterDump

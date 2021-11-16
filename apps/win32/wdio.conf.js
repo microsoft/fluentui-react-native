@@ -102,11 +102,7 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   beforeSession: function (/* config, capabilities, specs */) {
-    // Delete old screenshots and create empty directory
-    if (fs.existsSync('./errorShots')) {
-      rimraf.sync('./errorShots');
-    }
-    fs.mkdirSync('./errorShots');
+    fs.mkdirSync('./errorShots', { recursive: true });
   },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
