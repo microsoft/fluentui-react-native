@@ -65,8 +65,9 @@ export const Button = compose<IButtonType>({
         accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: state.info.disabled },
         onKeyUp: onKeyUp,
+        testID,
       },
-      content: { children: content, testID: testID },
+      content: { children: content },
       startIcon: createIconProps(startIcon || icon),
       endIcon: createIconProps(endIcon),
     });
