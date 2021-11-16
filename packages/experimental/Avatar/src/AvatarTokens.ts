@@ -3,17 +3,6 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { AvatarTokens } from '.';
 import { convertCoinColorFluent } from './Avatar.helpers';
 
-export const AvatarStates: (keyof AvatarTokens)[] = [
-  'avatarSize',
-  'iconSize',
-  'iconStrokeWidth',
-  'iconStrokeColor',
-  'initialsSize',
-  'horizontalIconAlignment',
-  'verticalIconAlignment',
-  'backgroundColor',
-];
-
 export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = () =>
   ({
     horizontalIconAlignment: 'end',

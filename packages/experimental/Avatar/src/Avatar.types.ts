@@ -78,7 +78,7 @@ export interface AvatarTokens extends IBackgroundColorTokens, IForegroundColorTo
   initialsSize?: number;
   horizontalIconAlignment?: IconAlignment;
   verticalIconAlignment?: IconAlignment;
-  backgroundColor?: ColorValue;
+  physicalSize?: number;
 }
 
 export interface AvatarState {

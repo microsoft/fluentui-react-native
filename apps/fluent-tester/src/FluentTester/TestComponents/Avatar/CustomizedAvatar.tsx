@@ -86,7 +86,6 @@ export const CustomizeUsage: React.FunctionComponent = () => {
             setCoinColor(e.nativeEvent.text);
           }}
         />
-        {/*
         <TextInput
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Initials text color"
@@ -94,8 +93,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           onSubmitEditing={(e) => {
             setTextColor(e.nativeEvent.text);
           }}
-        /> */}
-
+        />
         <TextInput
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Icon stroke color"
