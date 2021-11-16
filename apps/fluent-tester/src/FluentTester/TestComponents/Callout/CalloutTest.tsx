@@ -3,6 +3,7 @@ import { ScreenRect, Text, View, Switch, Picker, ScrollView } from 'react-native
 import { Button, Callout, Separator, IFocusable, RestoreFocusEvent, DismissBehaviors, StealthButton } from '@fluentui/react-native';
 import { CALLOUT_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { E2ECalloutTest } from './CalloutE2ETest';
 import { fluentTesterStyles } from '../Common/styles';
 
 const standardCallout: React.FunctionComponent = () => {
@@ -111,7 +112,7 @@ const standardCallout: React.FunctionComponent = () => {
   }, [setScrollviewContents, scrollviewContents]);
 
   const addButton = React.useCallback(() => {
-    setScrollviewContents(arr => [...arr, 1]);
+    setScrollviewContents((arr) => [...arr, 1]);
   }, [setScrollviewContents, scrollviewContents]);
 
   return (
@@ -219,29 +220,25 @@ const standardCallout: React.FunctionComponent = () => {
             ...(selectedBackgroundColor && { backgroundColor: selectedBackgroundColor }),
             ...(selectedBorderWidth && { borderWidth: selectedBorderWidth }),
             ...(calloutDismissBehaviors && { dismissBehaviors: calloutDismissBehaviors }),
-          }}>
-          {showScrollViewCallout ?
+          }}
+        >
+          {showScrollViewCallout ? (
             <View style={fluentTesterStyles.scrollViewContainer}>
               <ScrollView contentContainerStyle={fluentTesterStyles.scrollViewStyle} showsVerticalScrollIndicator={true}>
                 <StealthButton content="click to change anchor" onClick={toggleCalloutRef} />
                 <StealthButton content="Click to add a button" style={fluentTesterStyles.testListItem} onClick={addButton} />
                 <StealthButton content="Click to remove a button" style={fluentTesterStyles.testListItem} onClick={removeButton} />
-                  {scrollviewContents.map((value) => {
-                    return (
-                      <StealthButton
-                        key={value}
-                        content="Button"
-                        style={fluentTesterStyles.testListItem}
-                      />
-                    )
-                  })}
+                {scrollviewContents.map((value) => {
+                  return <StealthButton key={value} content="Button" style={fluentTesterStyles.testListItem} />;
+                })}
               </ScrollView>
             </View>
-          : //else
+          ) : (
+            //else
             <View style={{ padding: 20 }}>
               <Button content="click to change anchor" onClick={toggleCalloutRef} />
             </View>
-          }
+          )}
         </Callout>
       )}
     </View>
@@ -312,7 +309,11 @@ const calloutSections: TestSection[] = [
   {
     name: 'Customized Usage',
     component: customCallout,
-  }
+  },
+  {
+    name: 'E2E Testing Callout',
+    component: E2ECalloutTest,
+  },
 ];
 
 export const CalloutTest: React.FunctionComponent = () => {

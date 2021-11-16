@@ -1,25 +1,25 @@
-import { HOMEPAGE_CHECKBOX_BUTTON } from '../../../FluentTester/TestComponents/Checkbox/consts';
-import { HOMEPAGE_BUTTON_BUTTON } from '../../../FluentTester/TestComponents/Button/consts';
-import { HOMEPAGE_CALLOUT_BUTTON } from '../../../FluentTester/TestComponents/Callout/consts';
-import { HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../../../FluentTester/TestComponents/ContextualMenu/consts';
-import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON } from '../../../FluentTester/TestComponents/TabsExperimental/consts';
-import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../../FluentTester/TestComponents/FocusTrapZone/consts';
-import { HOMEPAGE_FOCUSZONE_BUTTON } from '../../../FluentTester/TestComponents/FocusZone/consts';
-import { HOMEPAGE_ICON_BUTTON } from '../../../FluentTester/TestComponents/Icon/consts';
-import { HOMEPAGE_LINK_BUTTON } from '../../../FluentTester/TestComponents/Link/consts';
-import { HOMEPAGE_PERSONA_BUTTON } from '../../../FluentTester/TestComponents/Persona/consts';
-import { HOMEPAGE_PERSONACOIN_BUTTON } from '../../../FluentTester/TestComponents/PersonaCoin/consts';
-import { HOMEPAGE_PRESSABLE_BUTTON } from '../../../FluentTester/TestComponents/Pressable/consts';
-import { HOMEPAGE_RADIOGROUP_BUTTON } from '../../../FluentTester/TestComponents/RadioGroup/consts';
-import { HOMEPAGE_SEPARATOR_BUTTON } from '../../../FluentTester/TestComponents/Separator/consts';
-import { HOMEPAGE_SVG_BUTTON } from '../../../FluentTester/TestComponents/Svg/consts';
-import { HOMEPAGE_TEXT_BUTTON } from '../../../FluentTester/TestComponents/Text/consts';
-import { HOMEPAGE_TABS_BUTTON } from '../../../FluentTester/TestComponents/Tabs/consts';
-import { HOMEPAGE_THEME_BUTTON } from '../../../FluentTester/TestComponents/Theme/consts';
-import { BASE_TESTPAGE } from '../../../FluentTester/TestComponents/Common/consts';
-import { By, BasePage } from '../../common/BasePage';
+import { HOMEPAGE_CHECKBOX_BUTTON } from '../../FluentTester/TestComponents/Checkbox/consts';
+import { HOMEPAGE_BUTTON_BUTTON } from '../../FluentTester/TestComponents/Button/consts';
+import { HOMEPAGE_CALLOUT_BUTTON } from '../../FluentTester/TestComponents/Callout/consts';
+import { HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../../FluentTester/TestComponents/ContextualMenu/consts';
+import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON } from '../../FluentTester/TestComponents/TabsExperimental/consts';
+import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../FluentTester/TestComponents/FocusTrapZone/consts';
+import { HOMEPAGE_FOCUSZONE_BUTTON } from '../../FluentTester/TestComponents/FocusZone/consts';
+import { HOMEPAGE_ICON_BUTTON } from '../../FluentTester/TestComponents/Icon/consts';
+import { HOMEPAGE_LINK_BUTTON } from '../../FluentTester/TestComponents/Link/consts';
+import { HOMEPAGE_PERSONA_BUTTON } from '../../FluentTester/TestComponents/Persona/consts';
+import { HOMEPAGE_PERSONACOIN_BUTTON } from '../../FluentTester/TestComponents/PersonaCoin/consts';
+import { HOMEPAGE_PRESSABLE_BUTTON } from '../../FluentTester/TestComponents/Pressable/consts';
+import { HOMEPAGE_RADIOGROUP_BUTTON } from '../../FluentTester/TestComponents/RadioGroup/consts';
+import { HOMEPAGE_SEPARATOR_BUTTON } from '../../FluentTester/TestComponents/Separator/consts';
+import { HOMEPAGE_SVG_BUTTON } from '../../FluentTester/TestComponents/Svg/consts';
+import { HOMEPAGE_TEXT_BUTTON } from '../../FluentTester/TestComponents/Text/consts';
+import { HOMEPAGE_TABS_BUTTON } from '../../FluentTester/TestComponents/Tabs/consts';
+import { HOMEPAGE_THEME_BUTTON } from '../../FluentTester/TestComponents/Theme/consts';
+import { BASE_TESTPAGE } from '../../FluentTester/TestComponents/Common/consts';
+import { By, BasePage } from './BasePage';
 
-class BootTestPage extends BasePage {
+class NavigateAppPage extends BasePage {
   clickAndGoToButtonPage() {
     this.buttonPage.click();
   }
@@ -173,4 +173,4 @@ class BootTestPage extends BasePage {
   }
 }
 
-export default new BootTestPage();
+export default new NavigateAppPage();
