@@ -15,6 +15,7 @@ import { CONTEXTUALMENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
 import TestSvg from '../Button/test.svg';
+import { E2EContextualMenuTest } from './E2EContextualMenuTest';
 
 const contextualMenu: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);
@@ -356,6 +357,10 @@ const contextualMenuSections: TestSection[] = [
   {
     name: 'IconButton with Customized ContextualMenu',
     component: IconContextualMenu,
+  },
+  {
+    name: 'ContextualMenu E2E Test',
+    component: E2EContextualMenuTest,
   },
 ];
 

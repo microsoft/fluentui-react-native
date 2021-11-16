@@ -32,8 +32,8 @@ class NavigateAppPage extends BasePage {
     this.checkboxPage.click();
   }
 
-  clickAndGoToContextualMenuPage() {
-    this.contextualMenuPage.click();
+  clickAndGoToContextualMenuPageObject() {
+    this.ContextualMenuPageObject.click();
   }
 
   clickAndGoToFocusTrapZonePage() {
@@ -112,7 +112,7 @@ class NavigateAppPage extends BasePage {
     return By(HOMEPAGE_CHECKBOX_BUTTON);
   }
 
-  private get contextualMenuPage() {
+  private get ContextualMenuPageObject() {
     return By(HOMEPAGE_CONTEXTUALMENU_BUTTON);
   }
 

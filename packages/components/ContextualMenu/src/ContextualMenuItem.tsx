@@ -107,8 +107,9 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         onMouseEnter: onMouseEnter,
         onMouseLeave: onMouseLeave,
         accessibilityLabel: accessibilityLabel,
+        ...rest,
       },
-      content: { children: text, testID },
+      content: { children: text },
       icon: createIconProps(icon),
     });
 

@@ -32,7 +32,6 @@ export const SubmenuItem = compose<SubmenuItemType>({
       text,
       accessibilityLabel = userProps.text,
       onClick,
-      testID,
       componentRef = defaultComponentRef,
       ...rest
     } = userProps;
@@ -96,8 +95,9 @@ export const SubmenuItem = compose<SubmenuItemType>({
         onKeyUp,
         onMouseEnter,
         accessibilityLabel,
+        ...rest,
       },
-      content: { children: text, testID },
+      content: { children: text },
       icon: createIconProps(icon),
       chevron: {},
     });

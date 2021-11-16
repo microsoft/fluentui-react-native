@@ -25,7 +25,7 @@ describe('Click on each test page and check if it renders', function () {
   it('ContextualMenu Test Page', () => {
     ContextualMenuTestPage.scrollToComponentButton();
     ContextualMenuTestPage.waitForButtonDisplayed(PAGE_TIMEOUT);
-    NavigateAppPage.clickAndGoToContextualMenuPage();
+    NavigateAppPage.clickAndGoToContextualMenuPageObject();
     ContextualMenuTestPage.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ContextualMenuTestPage.isPageLoaded()).toBeTruthy();
