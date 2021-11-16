@@ -98,7 +98,7 @@ export class BasePage {
     );
   }
 
-  /* Scrolls to the primary UI test element until it is displayed. */
+  /* Scrolls to the primary UI test element until it is displayed. It uses the ScrollView that encapsulates each test page. */
   scrollToTestElement(): void {
     while (!this._primaryComponent.isDisplayed()) {
       driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, $('~ScrollViewAreaForComponents').elementId);
