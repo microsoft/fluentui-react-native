@@ -6,6 +6,7 @@ import { TouchableHighlight, TouchableHighlightProps, View, ViewProps } from 're
 import { stackStyle } from '../Common/styles';
 import { FOCUSTRAPZONE_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { E2EFocusTrapZoneTest } from './FocusTrapZoneE2ETest';
 
 const trapZoneStyle: IFocusTrapZoneProps['style'] = {
   padding: 10,
@@ -40,7 +41,7 @@ interface IComponentTwiddlerProps {
   onPress?: TouchableHighlightProps['onPress'];
 }
 
-const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps> = (props: IComponentTwiddlerProps) => {
+export const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps> = (props: IComponentTwiddlerProps) => {
   const [focusProps, focusState] = useFocusState({});
 
   return (
@@ -134,6 +135,10 @@ const focusTrapZoneSections: TestSection[] = [
     name: 'Basic FocusTrapZone Usage',
     testID: FOCUSTRAPZONE_TESTPAGE,
     component: basicFocusTrapZone,
+  },
+  {
+    name: 'FocusTrapZone for Automated E2E Testing',
+    component: E2EFocusTrapZoneTest,
   },
 ];
 

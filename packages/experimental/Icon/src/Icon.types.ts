@@ -27,6 +27,7 @@ export interface IconProps extends AccessibilityProps {
   width?: number;
   height?: number;
   color?: ColorValue;
+  testID?: string;
 }
 
 export type IconSourcesType = number | string | IconProps;

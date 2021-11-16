@@ -3,6 +3,7 @@ import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';
 import { PERSONA_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { E2ETestingPersona } from './PersonaE2ETest';
 
 const personaSections: TestSection[] = [
   {
@@ -13,6 +14,10 @@ const personaSections: TestSection[] = [
   {
     name: 'Customize Usage',
     component: CustomizeUsage,
+  },
+  {
+    name: 'E2E Testing Persona',
+    component: E2ETestingPersona,
   },
 ];
 

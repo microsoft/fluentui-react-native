@@ -1,5 +1,5 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import ContextualMenuPageObjectObject from '../pages/ContextualMenuPageObjectObject.win';
+import ContextualMenuPageObjectObject from '../pages/ContextualMenuPageObject.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -17,7 +17,7 @@ describe('ContextualMenu Functional Tests', () => {
     ContextualMenuPageObjectObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    NavigateAppPage.clickAndGoToContextualMenuPageObject();
+    NavigateAppPage.clickAndGoToContextualMenuPage();
     ContextualMenuPageObjectObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ContextualMenuPageObjectObject.isPageLoaded()).toBeTruthy();
