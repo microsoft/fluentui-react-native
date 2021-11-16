@@ -55,7 +55,7 @@ export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   disabled?: ButtonTokens;
   primary?: ButtonTokens;
   subtle?: ButtonTokens;
-  fluid?: ButtonTokens;
+  block?: ButtonTokens;
   fab?: ButtonTokens;
   small?: ButtonTokens;
   medium?: ButtonTokens;
@@ -97,7 +97,7 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   tooltip?: string;
 
   /** A button can fill the width of its container. */
-  fluid?: boolean;
+  block?: boolean;
 
   /** A floating action button  */
   fab?: boolean;

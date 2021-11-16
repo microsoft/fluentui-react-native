@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';
 import { PressableUsage } from './PressableUsage';
+import { E2ETextTest } from './TextE2ETest';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const textSections: TestSection[] = [
@@ -16,6 +17,10 @@ const textSections: TestSection[] = [
   {
     name: 'Pressable Usage',
     component: PressableUsage,
+  },
+  {
+    name: 'E2E Text Tests',
+    component: E2ETextTest,
   },
 ];
 

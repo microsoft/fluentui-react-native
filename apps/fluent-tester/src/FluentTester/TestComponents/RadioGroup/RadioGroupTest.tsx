@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { RadioButton, RadioGroup, Separator } from '@fluentui/react-native';
 import { RADIOGROUP_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { E2ERadioGroupTest } from './RadioGroupE2ETest';
 
 const basicRadioGroup: React.FunctionComponent = () => {
   // Client's example onChange function
@@ -56,6 +57,10 @@ const radioGroupSections: TestSection[] = [
     name: 'Basic RadioGroup Usage',
     testID: RADIOGROUP_TESTPAGE,
     component: basicRadioGroup,
+  },
+  {
+    name: 'RadioGroup for E2E Testing',
+    component: E2ERadioGroupTest,
   },
 ];
 

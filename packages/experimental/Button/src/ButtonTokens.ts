@@ -5,7 +5,7 @@ import { ButtonTokens } from './Button.types';
 
 export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
   ({
-    fluid: {
+    block: {
       width: '100%',
     },
     fab: {
