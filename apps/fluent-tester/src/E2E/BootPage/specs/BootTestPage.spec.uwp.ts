@@ -18,7 +18,6 @@ const PAGE_TIMEOUT = 15000;
 describe('Open the app', function () {
   it('Boot app', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    browser.saveScreenshot('./errorShots/onBoot.png'); // Take a screenshot of the app for testing purposes
     expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
   });
 });
