@@ -4,16 +4,6 @@ parameters:
   buildArtifacts:
 
 steps:
-  - script: |
-      dir
-    workingDirectory: apps/win32/errorShots
-    displayName: "Looking at Win32 /errorShots"
-
-  - script: |
-      dir
-    workingDirectory: apps/win32/reports
-    displayName: "Looking at Win32 /reports"
-
   # Copy Appium reports to FluentTesterDump
   - task: CopyFiles@2
     inputs:
