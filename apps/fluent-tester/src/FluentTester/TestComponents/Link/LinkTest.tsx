@@ -5,6 +5,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { LINK_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { LinkE2ETest } from './E2ELinkTest';
 
 const links: React.FunctionComponent = () => {
   const doPress = (): void => {
@@ -24,6 +25,10 @@ const linkSections: TestSection[] = [
     name: 'Navigation and Alert',
     testID: LINK_TESTPAGE,
     component: links,
+  },
+  {
+    name: 'Link E2E Test',
+    component: LinkE2ETest,
   },
 ];
 
