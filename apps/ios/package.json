@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.47.3",
-    "@react-native-community/slider": "^3.0.3",
+    "@react-native-community/slider": "^4.1.12",
     "react": "17.0.1",
     "react-native": "^0.64.3",
     "react-native-svg": "^12.1.1"

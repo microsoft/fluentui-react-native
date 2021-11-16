@@ -368,8 +368,8 @@ PODS:
   - React-jsinspector (0.64.3)
   - react-native-menu (0.1.2):
     - React
-  - react-native-slider (3.0.3):
-    - React
+  - react-native-slider (4.1.12):
+    - React-Core
   - React-perflogger (0.64.3)
   - React-RCTActionSheet (0.64.3):
     - React-Core/RCTActionSheetHeaders (= 0.64.3)
@@ -585,7 +585,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: df6abc9fafbecb8e5b7a5fbc5e6d4bd017d594d5
   React-jsinspector: 34e23860273a23695342f58eed3ffd3ba10c31e0
   react-native-menu: 9fe07f72e075b250295eeae25425490cc9608951
-  react-native-slider: e99fc201cefe81270fc9d81714a7a0f5e566b168
+  react-native-slider: 6e9b86e76cce4b9e35b3403193a6432ed07e0c81
   React-perflogger: cc76a4254d19640f1d8ad1c66fdee800414b805c
   React-RCTActionSheet: 7448f049318d8d7e8a9a1ebb742ada721757eea8
   React-RCTAnimation: fb9b3fa1a4a9f5e6ab01b3368693ce69860ba76a
@@ -604,6 +604,6 @@ SPEC CHECKSUMS:
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Yoga: e6ecf3fa25af9d4c87e94ad7d5d292eedef49749
 
-PODFILE CHECKSUM: 61f64d2e918386255ef0609310cb922b5e1c51b3
+PODFILE CHECKSUM: 4f2fe3ddb3dc182faf8c0ba4b90cf51ae50cdb94
 
 COCOAPODS: 1.11.2

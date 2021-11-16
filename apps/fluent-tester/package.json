@@ -50,7 +50,7 @@
     "@fluentui-react-native/theming-utils": ">=0.7.9 <1.0.0",
     "@fluentui-react-native/win32-theme": ">=0.13.10 <1.0.0",
     "@fluentui/react-native": ">=0.26.9 <1.0.0",
-    "@react-native-community/slider": "^3.0.3",
+    "@react-native-community/slider": "^4.1.12",
     "@react-native-menu/menu": "^0.1.2",
     "@react-native-picker/picker": "^1.16.7",
     "tslib": "^1.13.0"
