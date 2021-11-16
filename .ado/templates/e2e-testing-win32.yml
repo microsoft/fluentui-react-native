@@ -40,6 +40,12 @@ steps:
     condition: succeeded()
     continueOnError: true
 
+
+  - script: |
+      dir
+    workingDirectory: apps/win32
+    displayName: "Looking at directory"
+
   - template: e2e-publish-artifacts.yml
     parameters:
       applicationType: win32
