@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add fallback palette and update test palette",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}

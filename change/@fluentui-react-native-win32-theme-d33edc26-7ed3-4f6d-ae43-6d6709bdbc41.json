@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add fallback palette and update test palette",
+  "packageName": "@fluentui-react-native/win32-theme",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
