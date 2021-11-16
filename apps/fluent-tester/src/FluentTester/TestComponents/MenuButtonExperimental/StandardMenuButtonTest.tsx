@@ -79,7 +79,7 @@ export const StandardMenuButton: React.FunctionComponent = () => {
             <Separator vertical />
             <View style={columnStyle}>
               <MenuButton
-                primary
+                appearance="primary"
                 content="Primary MenuButton"
                 menuItems={menuItems}
                 onItemClick={onItemClick}
@@ -87,7 +87,7 @@ export const StandardMenuButton: React.FunctionComponent = () => {
               />
               <Text>Primary MenuButton with icon</Text>
               <MenuButton
-                primary
+                appearance="primary"
                 icon={iconToShow}
                 content="Primary MenuButton"
                 menuItems={menuItems}
@@ -95,9 +95,15 @@ export const StandardMenuButton: React.FunctionComponent = () => {
                 contextualMenu={contextualMenuProps}
               />
               <Text>Primary MenuButton with only icon</Text>
-              <MenuButton primary icon={iconToShow} menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps} />
+              <MenuButton
+                appearance="primary"
+                icon={iconToShow}
+                menuItems={menuItems}
+                onItemClick={onItemClick}
+                contextualMenu={contextualMenuProps}
+              />
               <Text>Primary Disabled MenuButton</Text>
-              <MenuButton primary disabled content="Disabled Primary MenuButton" menuItems={menuItems} />
+              <MenuButton appearance="primary" disabled content="Disabled Primary MenuButton" menuItems={menuItems} />
             </View>
           </View>
         </View>

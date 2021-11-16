@@ -29,14 +29,14 @@ export const ButtonIconTest: React.FunctionComponent = () => {
         style={commonTestStyles.vmargin}
       />
       <Button icon={{ fontSource: fontBuiltInProps }} content="Font icon" style={commonTestStyles.vmargin} />
-      <Button primary icon={{ fontSource: fontBuiltInProps }} content="Font icon" style={commonTestStyles.vmargin} />
+      <Button appearance="primary" icon={{ fontSource: fontBuiltInProps }} content="Font icon" style={commonTestStyles.vmargin} />
       {svgIconsEnabled && (
         <>
-          <Button primary icon={{ svgSource: svgProps, color: 'red' }} content="SVG" style={commonTestStyles.vmargin} />
+          <Button appearance="primary" icon={{ svgSource: svgProps, color: 'red' }} content="SVG" style={commonTestStyles.vmargin} />
           <Button icon={{ svgSource: svgProps }} content="SVG" style={commonTestStyles.vmargin} />
         </>
       )}
-      <Button primary icon={testImage} content="PNG" style={commonTestStyles.vmargin} />
+      <Button appearance="primary" icon={testImage} content="PNG" style={commonTestStyles.vmargin} />
       <Button icon={testImage} content="PNG" style={commonTestStyles.vmargin} />
     </View>
   );
