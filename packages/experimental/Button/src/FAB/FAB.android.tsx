@@ -22,7 +22,7 @@ const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonCo
   return state[layer] || userProps[layer] || (layer === 'hasContent' && userProps.content) || (layer === 'hasIcon' && userProps.icon);
 };
 
-export const FabButton = compose<FABType>({
+export const FAB = compose<FABType>({
   displayName: fabName,
   ...stylingSettings,
   slots: {
@@ -54,4 +54,4 @@ export const FabButton = compose<FABType>({
   },
 });
 
-export default FabButton;
+export default FAB;

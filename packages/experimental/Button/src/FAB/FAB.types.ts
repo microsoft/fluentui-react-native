@@ -1,6 +1,6 @@
 import { ButtonSlotProps, ButtonCoreTokens, ButtonCoreProps } from '../Button.types';
 
-export const fabName = 'FabButton';
+export const fabName = 'FAB';
 
 export interface FABType {
   props: ButtonCoreProps;
