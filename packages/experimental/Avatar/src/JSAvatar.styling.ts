@@ -1,8 +1,8 @@
-import { avatarName, AvatarTokens, AvatarSlotProps, AvatarProps } from './Avatar.types';
+import { JSAvatarName, JSAvatarTokens, AvatarSlotProps, JSAvatarProps } from './JSAvatar.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { defaultAvatarTokens } from './AvatarTokens';
+import { defaultJSAvatarTokens } from './JSAvatarTokens';
 import { ViewStyle } from 'react-native';
-import { calculateEffectiveSizes, convertCoinColorFluent, getRingThickness } from './Avatar.helpers';
+import { calculateEffectiveSizes, convertCoinColorFluent, getRingThickness } from './JSAvatar.helpers';
 
 const nameMap: { [key: string]: string } = {
   start: 'flex-start',
@@ -10,11 +10,11 @@ const nameMap: { [key: string]: string } = {
   end: 'flex-end',
 };
 
-export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, AvatarTokens> = {
-  tokens: [defaultAvatarTokens, avatarName],
+export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, JSAvatarTokens> = {
+  tokens: [defaultJSAvatarTokens, JSAvatarName],
   slotProps: {
     root: buildProps(
-      (tokens: AvatarTokens) => {
+      (tokens: JSAvatarTokens) => {
         const { physicalSize } = calculateEffectiveSizes(tokens);
         const { horizontalIconAlignment, verticalIconAlignment } = tokens;
         return {
@@ -32,7 +32,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
       ['horizontalIconAlignment', 'verticalIconAlignment'],
     ),
     initials: buildProps(
-      (tokens: AvatarTokens) => {
+      (tokens: JSAvatarTokens) => {
         const { initialsSize } = calculateEffectiveSizes(tokens);
         return {
           style: {
@@ -43,7 +43,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
       ['initialsSize'],
     ),
     initialsBackground: buildProps(
-      (tokens: AvatarTokens) => {
+      (tokens: JSAvatarTokens) => {
         const { physicalSize } = calculateEffectiveSizes(tokens);
         const { backgroundColor, coinColorFluent } = tokens;
         let effectiveBackgroundColor = backgroundColor;
@@ -66,7 +66,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
       ['coinColorFluent', 'backgroundColor', 'physicalSize'],
     ),
     photo: buildProps(
-      (tokens: AvatarTokens) => {
+      (tokens: JSAvatarTokens) => {
         const { physicalSize } = calculateEffectiveSizes(tokens);
 
         return {
@@ -80,7 +80,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
       ['physicalSize'],
     ),
     icon: buildProps(
-      (tokens: AvatarTokens, theme: Theme) => {
+      (tokens: JSAvatarTokens, theme: Theme) => {
         const { iconSize, iconStrokeWidth } = calculateEffectiveSizes(tokens);
         const iconSizeAdjusted = iconSize + iconStrokeWidth * 2;
         const iconStrokeColor = tokens.iconStrokeColor || theme.colors.background;
@@ -100,7 +100,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
       ['iconSize', 'iconStrokeWidth', 'iconStrokeColor'],
     ),
     ring: buildProps(
-      (tokens: AvatarTokens, theme: Theme) => {
+      (tokens: JSAvatarTokens, theme: Theme) => {
         const { physicalSize } = calculateEffectiveSizes(tokens);
         const { ring } = tokens;
 
@@ -128,7 +128,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
       ['physicalSize', 'ring', 'physicalSize'],
     ),
     glow: buildProps(
-      (tokens: AvatarTokens, theme: Theme) => {
+      (tokens: JSAvatarTokens, theme: Theme) => {
         const { physicalSize } = calculateEffectiveSizes(tokens);
         const { ring } = tokens;
 

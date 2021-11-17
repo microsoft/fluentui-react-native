@@ -1,4 +1,4 @@
-import { AvatarSize, AvatarColor, AvatarPresence, AvatarTokens, RingThickness } from './Avatar.types';
+import { AvatarSize, AvatarColor, AvatarPresence, JSAvatarTokens, RingThickness } from './JSAvatar.types';
 import { ImageURISource } from 'react-native';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
@@ -84,7 +84,7 @@ export function convertCoinColorFluent(coinColor: AvatarColor): string {
   return colorTableFluent[coinColor];
 }
 
-export function calculateEffectiveSizes(tokens: AvatarTokens): AvatarSizeConfig {
+export function calculateEffectiveSizes(tokens: JSAvatarTokens): AvatarSizeConfig {
   const { size, avatarSize, iconSize, iconStrokeWidth, initialsSize } = tokens;
 
   if (size) {

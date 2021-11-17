@@ -1,5 +1,5 @@
-import { AvatarProps, AvatarInfo, AvatarState } from './Avatar.types';
-import { getPresenceIconSource } from './Avatar.helpers';
+import { JSAvatarProps, AvatarInfo, JSAvatarState } from './JSAvatar.types';
+import { getPresenceIconSource } from './JSAvatar.helpers';
 
 /**
  * Re-usable hook for FURN Avatar.
@@ -8,7 +8,7 @@ import { getPresenceIconSource } from './Avatar.helpers';
  * @param props user props sent to FURN Avatar
  * @returns configured props and state for FURN Avatar
  */
-export const useAvatar = (props: AvatarProps): AvatarInfo => {
+export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
   const { imageUrl, imageDescription, initials, presence, isOutOfOffice, ring, ...rest } = props;
 
   const personaPhotoSource =
@@ -22,7 +22,7 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
   const showRing = !!ring;
   const transparentRing = !!ring?.transparent;
 
-  const state: AvatarState = {
+  const state: JSAvatarState = {
     iconSource,
     personaPhotoSource,
     showRing,
