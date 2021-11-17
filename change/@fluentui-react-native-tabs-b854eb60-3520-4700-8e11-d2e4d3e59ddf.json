@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Adding E2E Testing Improvements",
+  "packageName": "@fluentui-react-native/tabs",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
