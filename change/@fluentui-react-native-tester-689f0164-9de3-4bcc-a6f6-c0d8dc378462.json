@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix Avatar not working on iOS",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
