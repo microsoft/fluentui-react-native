@@ -1,21 +1,4 @@
-parameters:
-  # latest gradlew use this NDK version, which is not avaialble with any recent agents in azure
-  - name: ndkVersion
-    type: string
-    default: '21.0.6113669'
 steps:
-  - uses: actions/setup-java@v2
-    with:
-      distribution: 'temurin'
-      java-version: '11'
-
-  - task: Bash@3
-    displayName: 'NDK Download'
-    inputs:
-      targetType: 'inline'
-      # install a compatible version of NDK for gradle
-      script: echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --install 'ndk;${{ parameters.ndkVersion }}'
-
   - task: Bash@3
     displayName: 'Android Emulator Setup'
     inputs:
