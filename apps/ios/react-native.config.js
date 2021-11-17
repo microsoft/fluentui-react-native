@@ -15,10 +15,31 @@
  */
 'use strict';
 
+const path = require('path');
+
 module.exports = {
   project: {
     ios: {
-      project: 'src/FluentTester.xcworkspace',
+      project: (() => {
+        const {
+          packageSatisfiesVersionRange,
+        } = require('react-native-test-app/scripts/configure');
+        if (
+          packageSatisfiesVersionRange(
+            '@react-native-community/cli-platform-ios',
+            '<5.0.2',
+          )
+        ) {
+          // Prior to @react-native-community/cli-platform-ios v5.0.0,
+          // `project` was only used to infer `sourceDir` and `podfile`.
+          return 'ios/ReactTestApp-Dummy.xcodeproj';
+        }
+
+        // `sourceDir` and `podfile` detection was fixed in
+        // @react-native-community/cli-platform-ios v5.0.2 (see
+        // https://github.com/react-native-community/cli/pull/1444).
+        return 'node_modules/.generated/ios/ReactTestApp.xcodeproj';
+      })(),
     },
   },
 };

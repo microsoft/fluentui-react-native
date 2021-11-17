@@ -43,10 +43,10 @@
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "react": "16.13.1"
+    "react": "17.0.1"
   },
   "peerDependencies": {
-    "react": ">=16.13.1"
+    "react": ">=17.0.1"
   },
   "depcheck": {
     "ignoreMatches": [

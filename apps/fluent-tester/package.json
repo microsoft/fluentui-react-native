@@ -50,7 +50,7 @@
     "@fluentui-react-native/theming-utils": ">=0.7.9 <1.0.0",
     "@fluentui-react-native/win32-theme": ">=0.13.10 <1.0.0",
     "@fluentui/react-native": ">=0.26.9 <1.0.0",
-    "@react-native-community/slider": "^3.0.3",
+    "@react-native-community/slider": "^4.1.12",
     "@react-native-menu/menu": "^0.1.2",
     "@react-native-picker/picker": "^1.16.7",
     "tslib": "^1.13.0"
@@ -59,8 +59,8 @@
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@rnx-kit/cli": "^0.5.27",
     "@types/jasmine": "3.5.10",
-    "@types/react": ">=16.9.34 < 16.14.0",
-    "@types/react-native": "^0.63.0",
+    "@types/react": "^17.0.2",
+    "@types/react-native": "^0.64.0",
     "@uifabricshared/build-native": "^0.1.1",
     "@wdio/appium-service": "5.18.2",
     "@wdio/cli": "5.23.0",
@@ -69,14 +69,14 @@
     "@wdio/spec-reporter": "5.22.4",
     "@wdio/sync": "5.20.1",
     "appium": "1.17.1",
-    "metro-react-native-babel-preset": "^0.59.0",
-    "react": "16.13.1",
-    "react-native": "^0.63.2",
-    "react-native-macos": "^0.63.41",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "react": "17.0.1",
+    "react-native": "^0.64.3",
+    "react-native-macos": "^0.64.6",
     "react-native-svg": "^12.1.1",
     "react-native-svg-transformer": "^0.14.3",
-    "react-native-windows": "^0.64.0",
-    "react-test-renderer": "~16.13.1",
+    "react-native-windows": "^0.64.3",
+    "react-test-renderer": "17.0.1",
     "rnpm-plugin-windows": "^0.5.1-0",
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
@@ -84,12 +84,12 @@
     "webdriverio": "5.22.4"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.63.7",
-    "react": "16.13.1",
-    "react-native": "^0.63.2",
-    "react-native-macos": "^0.63.41",
+    "@office-iss/react-native-win32": "^0.64.8",
+    "react": "17.0.1",
+    "react-native": "^0.64.3",
+    "react-native-macos": "^0.64.6",
     "react-native-svg": "^12.1.1",
-    "react-native-windows": "^0.64.0"
+    "react-native-windows": "^0.64.3"
   },
   "jest": {
     "preset": "react-native"
