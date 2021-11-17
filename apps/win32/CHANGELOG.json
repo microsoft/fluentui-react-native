@@ -2,6 +2,35 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Wed, 17 Nov 2021 19:28:07 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.16.0",
+      "version": "0.16.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Adding E2E Testing pages for each component",
+            "author": "safreibe@microsoft.com",
+            "commit": "a8220e74a609bd04581fce9377c590fdacce604b",
+            "package": "@fluentui-react-native/tester-win32"
+          },
+          {
+            "comment": "Update to react-native 0.64",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tester to v0.48.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/tester-win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Nov 2021 16:07:20 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.15.4",
       "version": "0.15.4",

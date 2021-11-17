@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Moved Avatar (PersonaCoin) to framework v2.",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "v.kozlova13@gmail.com",
-  "dependentChangeType": "patch"
-}
