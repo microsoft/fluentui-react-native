@@ -3,7 +3,6 @@ import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';
 import { PERSONACOIN_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { E2ETestingPersonaCoin } from './E2ETestingPersonaCoin';
 
 const personaCoinSections: TestSection[] = [
   {
@@ -14,10 +13,6 @@ const personaCoinSections: TestSection[] = [
   {
     name: 'Customize Usage',
     component: CustomizeUsage,
-  },
-  {
-    name: 'E2E Testing PersonaCoin',
-    component: E2ETestingPersonaCoin,
   },
 ];
 
