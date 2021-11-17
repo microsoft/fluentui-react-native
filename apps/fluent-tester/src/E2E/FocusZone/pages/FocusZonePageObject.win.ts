@@ -6,7 +6,7 @@ import {
 import { BasePage, By } from '../../common/BasePage';
 
 class FocusZonePageObject extends BasePage {
-  // OVERRIDE: We use isExisting() here instead of isDisplayed() because FocusTrapZone does not have any UI to it, it's simply
+  // OVERRIDE: We use isExisting() here instead of isDisplayed() because FocusZone does not have any UI to it, it's simply
   // a wrapper that adds keyboard focus functionality
   waitForPrimaryElementDisplayed(timeout?: number): void {
     const errorMsg = 'The FocusZone UI Element did not load correctly. Please see logs.';
