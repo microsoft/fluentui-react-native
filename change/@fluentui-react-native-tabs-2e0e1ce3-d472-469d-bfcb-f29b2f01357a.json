@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Update to react-native 0.64",
-  "packageName": "@fluentui-react-native/tabs",
-  "email": "afoxman@microsoft.com",
-  "dependentChangeType": "patch"
-}
