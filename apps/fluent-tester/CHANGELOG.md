@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Nov 2021 21:07:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.48.1
+
+Wed, 17 Nov 2021 21:07:06 GMT
+
+### Patches
+
+- Fix Avatar not working on iOS (sanajmi@microsoft.com)
 
 ## 0.48.0
 
