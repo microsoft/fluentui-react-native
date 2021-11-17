@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Avatar, IconAlignment, AvatarTokens } from '@fluentui-react-native/experimental-avatar';
+import { JSAvatar, IconAlignment, JSAvatarTokens } from '@fluentui-react-native/experimental-avatar';
 import { Switch, View, Text, TextInput, TextStyle } from 'react-native';
 import { Slider } from '../Common/Slider';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
@@ -29,7 +29,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     borderColor: theme.colors.inputBorder,
   };
 
-  const tokens: AvatarTokens = {};
+  const tokens: JSAvatarTokens = {};
   if (coinColor) {
     tokens.backgroundColor = coinColor;
   }
@@ -58,7 +58,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     tokens.avatarSize = physicalSize;
   }
 
-  const CustomizedAvatar = Avatar.customize(tokens);
+  const CustomizedAvatar = JSAvatar.customize(tokens);
 
   return (
     <View style={commonStyles.root}>
