@@ -38,10 +38,10 @@
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@uifabricshared/build-native": "^0.1.1",
-    "react-native": "^0.63.4"
+    "react-native": "^0.64.3"
   },
   "peerDependencies": {
-    "react": "^16.13.1",
-    "react-native": "^0.63.4"
+    "react": "17.0.1",
+    "react-native": "^0.64.3"
   }
 }
