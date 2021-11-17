@@ -5,4 +5,4 @@ export const FOCUSTRAPZONE_TESTPAGE = 'FocusTrapZone_TestPage';
 export const FOCUSTRAPZONE_TEST_COMPONENT = 'FocusTrapZone_Test_Component'; // A component on each specific test page
 
 /* E2E Testing FocusTrapZone 2 */
-export const FOCUSTRAPZONE_NO_A11Y_LABEL_COMPONENT = 'FocusTrapZone_No_A11y_label_Component';
+export const FOCUSTRAPZONE_SECOND_TEST_COMPONENT = 'FocusTrapZone_Second_Test_Component';
