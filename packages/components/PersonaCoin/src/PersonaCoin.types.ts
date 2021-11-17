@@ -89,6 +89,7 @@ export interface IPersonaCoinProps extends IViewProps, IPersonaConfigurableProps
   initials?: string;
   presence?: PersonaPresence;
   isOutOfOffice?: boolean;
+  testID?: string;
 }
 
 export interface IPersonaCoinSlotProps {

@@ -90,7 +90,6 @@ export const E2ETestingPersona: React.FunctionComponent = () => {
         imageUrl={showImage ? rajeshImageUrl : undefined}
         imageDescription="Profile photo of Rajesh Jha"
         presence={'away'}
-        testID={PERSONA_TEST_COMPONENT}
       />
     </View>
   );
