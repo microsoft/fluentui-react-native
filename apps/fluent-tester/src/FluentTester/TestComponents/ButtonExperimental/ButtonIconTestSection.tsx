@@ -4,6 +4,7 @@ import { Platform, View } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
+import { NativeModules } from 'react-native'
 
 export const ButtonIconTest: React.FunctionComponent = () => {
   const fontBuiltInProps = {
@@ -11,6 +12,8 @@ export const ButtonIconTest: React.FunctionComponent = () => {
     codepoint: 0x2663,
     fontSize: 24,
   };
+
+  console.log(NativeModules.DrawerModule);
 
   /* eslint-disable @typescript-eslint/no-var-requires */
   const testImage = require('./icon_24x24.png');
