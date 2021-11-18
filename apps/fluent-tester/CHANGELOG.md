@@ -1,8 +1,55 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 12 Nov 2021 16:07:20 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Nov 2021 21:07:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.48.1
+
+Wed, 17 Nov 2021 21:07:06 GMT
+
+### Patches
+
+- Fix Avatar not working on iOS (sanajmi@microsoft.com)
+
+## 0.48.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Adding E2E Testing Pages for each Component (safreibe@microsoft.com)
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Change button props to add appearance (ruaraki@microsoft.com)
+- Moved Avatar (PersonaCoin) to framework v2. (v.kozlova13@gmail.com)
+- Rename fluid to block (ruaraki@microsoft.com)
+- Bump @fluentui/react-native to v0.27.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/button to v0.21.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.1.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/stack to v0.6.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.9.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/experimental-button to v0.10.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/experimental-tabs to v0.4.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.11.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.13.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/experimental-text to v0.7.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.4.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/experimental-expander to v0.3.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/android-theme to v0.5.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/apple-theme to v0.9.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.9.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/win32-theme to v0.14.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.4.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/theme to v0.6.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/theming-utils to v0.8.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.13.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/themed-stylesheet to v1.3.0 (afoxman@microsoft.com)
 
 ## 0.47.3
 

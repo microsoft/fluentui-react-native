@@ -132,6 +132,7 @@ const _imageMask: IFilterMask<IImageProps> = {
   defaultSource: true,
   blurRadius: true,
   capInsets: true,
+  nativeID: true,
 };
 
 export function filterViewProps(propName: string): boolean {

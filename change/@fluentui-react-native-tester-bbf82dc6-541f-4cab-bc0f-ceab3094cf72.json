@@ -1,7 +1,7 @@
 {
   "type": "minor",
-  "comment": "Adding E2E Testing Pages for each Component",
+  "comment": "Stub button for non-mobile platforms",
   "packageName": "@fluentui-react-native/tester",
-  "email": "safreibe@microsoft.com",
+  "email": "ruaraki@microsoft.com",
   "dependentChangeType": "patch"
 }

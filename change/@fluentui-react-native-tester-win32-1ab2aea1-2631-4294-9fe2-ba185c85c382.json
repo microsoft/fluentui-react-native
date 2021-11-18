@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Adding E2E Testing pages for each component",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}

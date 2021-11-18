@@ -2,6 +2,53 @@
   "name": "@fluentui-react-native/experimental-menu-button",
   "entries": [
     {
+      "date": "Wed, 17 Nov 2021 19:28:07 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update to react-native 0.64",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-menu-button"
+          },
+          {
+            "comment": "Change button props to add appearance",
+            "author": "ruaraki@microsoft.com",
+            "commit": "dc0b4baf06b511d31cc5c7a2fa8cd6a8e0900d3a",
+            "package": "@fluentui-react-native/experimental-menu-button"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.12.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.10.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-menu-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.7.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-menu-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Nov 2021 16:07:20 GMT",
       "tag": "@fluentui-react-native/experimental-menu-button_v0.0.11",
       "version": "0.0.11",

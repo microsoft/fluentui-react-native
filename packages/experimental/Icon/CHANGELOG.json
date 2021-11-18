@@ -2,6 +2,65 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Wed, 17 Nov 2021 19:28:07 GMT",
+      "tag": "@fluentui-react-native/icon_v0.9.0",
+      "version": "0.9.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update to react-native 0.64",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/icon"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/text to v0.11.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.7.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/default-theme to v0.9.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.11.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.8.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/icon"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.13.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/icon"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Nov 2021 16:07:20 GMT",
       "tag": "@fluentui-react-native/icon_v0.8.30",
       "version": "0.8.30",
