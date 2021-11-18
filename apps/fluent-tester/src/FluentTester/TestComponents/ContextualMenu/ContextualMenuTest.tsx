@@ -108,6 +108,26 @@ const contextualMenu: React.FunctionComponent = () => {
           <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
           <ContextualMenuItem text="MenuItem 4" itemKey="4" />
           <ContextualMenuItem text="MenuItem 5" itemKey="5" />
+          <ContextualMenuItem text="MenuItem 1" itemKey="1" />
+          <ContextualMenuItem text="MenuItem 2" itemKey="2" />
+          <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
+          <ContextualMenuItem text="MenuItem 4" itemKey="4" />
+          <ContextualMenuItem text="MenuItem 5" itemKey="5" />
+          <ContextualMenuItem text="MenuItem 1" itemKey="1" />
+          <ContextualMenuItem text="MenuItem 2" itemKey="2" />
+          <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
+          <ContextualMenuItem text="MenuItem 4" itemKey="4" />
+          <ContextualMenuItem text="MenuItem 5" itemKey="5" />
+          <ContextualMenuItem text="MenuItem 1" itemKey="1" />
+          <ContextualMenuItem text="MenuItem 2" itemKey="2" />
+          <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
+          <ContextualMenuItem text="MenuItem 4" itemKey="4" />
+          <ContextualMenuItem text="MenuItem 5" itemKey="5" />
+          <ContextualMenuItem text="MenuItem 1" itemKey="1" />
+          <ContextualMenuItem text="MenuItem 2" itemKey="2" />
+          <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
+          <ContextualMenuItem text="MenuItem 4" itemKey="4" />
+          <ContextualMenuItem text="MenuItem 5" itemKey="5" />
         </ContextualMenu>
       )}
     </View>

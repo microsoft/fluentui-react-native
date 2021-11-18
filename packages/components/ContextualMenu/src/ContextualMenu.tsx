@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import {
   contextualMenuName,
   ContextualMenuProps,
@@ -83,10 +83,18 @@ export const ContextualMenu = compose<ContextualMenuType>({
     if (renderData.state == undefined) {
       return null;
     }
+
     return (
       <CMContext.Provider value={renderData.state.context}>
         <Slots.root>
-          <Slots.container>{children}</Slots.container>
+            <Slots.container style={{
+              //maxHeight: 170,
+              minWidth: 100,
+            }}>
+              <ScrollView style={{maxHeight: 250}}contentContainerStyle={{ flexDirection: 'column', alignItems: 'stretch'}} showsVerticalScrollIndicator={true}>
+              {children}
+              </ScrollView>
+            </Slots.container>
         </Slots.root>
       </CMContext.Provider>
     );
