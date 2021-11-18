@@ -3,6 +3,7 @@ import { ScreenRect, Text, View, Switch, Picker, ScrollView } from 'react-native
 import { Button, Callout, Separator, IFocusable, RestoreFocusEvent, DismissBehaviors, StealthButton } from '@fluentui/react-native';
 import { CALLOUT_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { E2ECalloutTest } from './CalloutE2ETest';
 import { fluentTesterStyles } from '../Common/styles';
 
 const standardCallout: React.FunctionComponent = () => {
@@ -96,10 +97,10 @@ const standardCallout: React.FunctionComponent = () => {
   const [selectedBackgroundColor, setSelectedBackgroundColor] = React.useState<string | undefined>(undefined);
   const [selectedBorderColor, setSelectedBorderColor] = React.useState<string | undefined>(undefined);
 
-  const borderWidthDefault: string = 'default (1)';
-  const borderWidthSelections: (number | string)[] = ['default (1)', 2, 4, 10];
+  const borderWidthDefault: string = '1';
+  const borderWidthSelections: string[] = ['1', '2', '4', '10'];
 
-  const [selectedBorderWidth, setSelectedBorderWidth] = React.useState<number | undefined>(undefined);
+  const [selectedBorderWidth, setSelectedBorderWidth] = React.useState<string | undefined>(undefined);
 
   const [showScrollViewCallout, setShowScrollViewCalout] = React.useState(false);
   const [scrollviewContents, setScrollviewContents] = React.useState([1, 2, 3]);
@@ -111,7 +112,7 @@ const standardCallout: React.FunctionComponent = () => {
   }, [setScrollviewContents, scrollviewContents]);
 
   const addButton = React.useCallback(() => {
-    setScrollviewContents(arr => [...arr, 1]);
+    setScrollviewContents((arr) => [...arr, 1]);
   }, [setScrollviewContents, scrollviewContents]);
 
   return (
@@ -174,7 +175,7 @@ const standardCallout: React.FunctionComponent = () => {
             onValueChange={(width) => setSelectedBorderWidth(width === borderWidthDefault ? undefined : width)}
           >
             {borderWidthSelections.map((width, index) => (
-              <Picker.Item label={width.toString()} key={index} value={width} />
+              <Picker.Item label={width} key={index} value={width} />
             ))}
           </Picker>
         </View>
@@ -217,31 +218,27 @@ const standardCallout: React.FunctionComponent = () => {
             isBeakVisible: isBeakVisible,
             ...(selectedBorderColor && { borderColor: selectedBorderColor }),
             ...(selectedBackgroundColor && { backgroundColor: selectedBackgroundColor }),
-            ...(selectedBorderWidth && { borderWidth: selectedBorderWidth }),
+            ...(selectedBorderWidth && { borderWidth: parseInt(selectedBorderWidth) }),
             ...(calloutDismissBehaviors && { dismissBehaviors: calloutDismissBehaviors }),
-          }}>
-          {showScrollViewCallout ?
+          }}
+        >
+          {showScrollViewCallout ? (
             <View style={fluentTesterStyles.scrollViewContainer}>
               <ScrollView contentContainerStyle={fluentTesterStyles.scrollViewStyle} showsVerticalScrollIndicator={true}>
                 <StealthButton content="click to change anchor" onClick={toggleCalloutRef} />
                 <StealthButton content="Click to add a button" style={fluentTesterStyles.testListItem} onClick={addButton} />
                 <StealthButton content="Click to remove a button" style={fluentTesterStyles.testListItem} onClick={removeButton} />
-                  {scrollviewContents.map((value) => {
-                    return (
-                      <StealthButton
-                        key={value}
-                        content="Button"
-                        style={fluentTesterStyles.testListItem}
-                      />
-                    )
-                  })}
+                {scrollviewContents.map((value) => {
+                  return <StealthButton key={value} content="Button" style={fluentTesterStyles.testListItem} />;
+                })}
               </ScrollView>
             </View>
-          : //else
+          ) : (
+            //else
             <View style={{ padding: 20 }}>
               <Button content="click to change anchor" onClick={toggleCalloutRef} />
             </View>
-          }
+          )}
         </Callout>
       )}
     </View>
@@ -312,7 +309,11 @@ const calloutSections: TestSection[] = [
   {
     name: 'Customized Usage',
     component: customCallout,
-  }
+  },
+  {
+    name: 'E2E Testing Callout',
+    component: E2ECalloutTest,
+  },
 ];
 
 export const CalloutTest: React.FunctionComponent = () => {
