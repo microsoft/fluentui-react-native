@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-types",
   "entries": [
     {
+      "date": "Wed, 17 Nov 2021 19:28:07 GMT",
+      "tag": "@fluentui-react-native/theme-types_v0.13.0",
+      "version": "0.13.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update to react-native 0.64",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/theme-types"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Nov 2021 23:17:41 GMT",
       "tag": "@fluentui-react-native/theme-types_v0.12.4",
       "version": "0.12.4",

@@ -8,6 +8,7 @@ import { EXPERIMENTAL_TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
+import { E2ETestExperimentalTabs } from './TabsExperimentalE2ETest';
 
 const tabs: React.FunctionComponent = () => {
   return (
@@ -249,6 +250,10 @@ const tabsSections: TestSection[] = [
   {
     name: 'More Flexibility',
     component: tabsWithFlexibility,
+  },
+  {
+    name: 'E2E Testing Experimental Tabs',
+    component: E2ETestExperimentalTabs,
   },
 ];
 

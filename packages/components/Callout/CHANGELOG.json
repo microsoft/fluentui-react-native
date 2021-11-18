@@ -2,6 +2,59 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Wed, 17 Nov 2021 19:28:07 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.0",
+      "version": "0.19.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update to react-native 0.64",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/callout"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/callout"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/callout"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/component-cache to v1.3.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/callout"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.11.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/callout"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-composable to v0.10.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/callout"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-settings to v0.11.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Nov 2021 16:07:20 GMT",
       "tag": "@fluentui-react-native/callout_v0.18.1",
       "version": "0.18.1",

@@ -17,7 +17,7 @@ exports.config = {
     /* 'path/to/excluded/files' */
   ],
 
-  maxInstances: 1,
+  maxInstances: 30,
   capabilities: [
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
@@ -39,7 +39,7 @@ exports.config = {
   logLevel: 'info', // Level of logging verbosity: trace | debug | info | warn | error | silent
 
   // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
-  bail: 1,
+  bail: 0,
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
   connectionRetryCount: 3, // Maximum count of request retries to the Selenium server.
@@ -58,7 +58,7 @@ exports.config = {
     defaultTimeoutInterval: jasmineDefaultTimeout,
   },
 
-  // The number of times to retry the entire specfile when it fails as a whole.
+  // The number of times to retry the entire spec file when it fails as a whole.
   // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
   specFileRetries: 3,
 
@@ -101,12 +101,8 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  beforeSession: function (config, capabilities, specs) {
-    // Delete old screenshots and create empty directory
-    if (fs.existsSync('./errorShots')) {
-      rimraf.sync('./errorShots');
-    }
-    fs.mkdirSync('./errorShots');
+  beforeSession: function (/* config, capabilities, specs */) {
+    fs.mkdirSync('./errorShots', { recursive: true });
   },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
@@ -209,7 +205,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function (exitCode, config, capabilities, results) {
+  onComplete: function (/* exitCode, config, capabilities, results */) {
     console.log('<<< TESTING FINISHED >>>');
   },
   /**

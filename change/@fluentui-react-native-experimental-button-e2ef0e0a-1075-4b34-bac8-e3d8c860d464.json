@@ -1,6 +1,6 @@
 {
   "type": "minor",
-  "comment": "Change button props to add appearance",
+  "comment": "Initial commit for FabButton",
   "packageName": "@fluentui-react-native/experimental-button",
   "email": "ruaraki@microsoft.com",
   "dependentChangeType": "patch"
