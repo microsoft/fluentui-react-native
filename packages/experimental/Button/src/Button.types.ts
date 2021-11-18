@@ -8,7 +8,7 @@ import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 
 export const buttonName = 'Button';
 export type ButtonSize = 'small' | 'medium' | 'large';
-export type ButtonAppearance = 'primary' | 'outline' | 'subtle' | 'transparent';
+export type ButtonAppearance = 'primary' | 'subtle';
 
 export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
   /**
@@ -99,7 +99,6 @@ export interface ButtonProps extends ButtonCoreProps {
    * A button can have its content and borders styled for greater emphasis or to be subtle.
    * - 'primary': Emphasizes the button as a primary action.
    * - 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
-   * - 'transparent': NYI. Removes background and border styling.
    */
   appearance?: ButtonAppearance;
   /** A button can fill the width of its container. */
