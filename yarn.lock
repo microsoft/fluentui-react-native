@@ -2203,9 +2203,9 @@
     fastq "^1.6.0"
 
 "@office-iss/react-native-win32@^0.64.8":
-  version "0.64.8"
-  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.64.8.tgz#0ad8f344bcb82c863bc9400d884bcb9faa63ccb6"
-  integrity sha512-G+UL8i/q7bvxN9zuUVQVvfJK8GtAjKWy6HGv2//0piZNw7GZSrBDvIHny5xQNnqTUBrZB0cD4Xgh6iEDOXFj5g==
+  version "0.64.9"
+  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.64.9.tgz#6cfdcb3a0c51e5d8aa275ee3e4f5ae33dcbcae8a"
+  integrity sha512-xlMmO2EnhBTrTt06Q2H71XJvM4r/3/4BE8QjVdaXxDv0BKoxTMXOo2ANx+kZLCsKxaZYxsA+l6kckeEDV4leVQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^26.5.0"
@@ -18075,26 +18075,14 @@ ws@^5.2.2:
   dependencies:
     async-limiter "~1.0.0"
 
-ws@^6.0.0, ws@^6.2.1:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-6.2.1.tgz#442fdf0a47ed64f59b6a5d8ff130f4748ed524fb"
-  integrity sha512-GIyAXC2cB7LjvpgMt9EKS2ldqr0MTrORaleiOno6TweZ6r3TKtoFQWay/2PceJ3RuBasOHzXNn5Lrw1X0bEjqA==
-  dependencies:
-    async-limiter "~1.0.0"
-
-ws@^6.1.4:
+ws@^6.0.0, ws@^6.1.4, ws@^6.2.1:
   version "6.2.2"
   resolved "https://registry.yarnpkg.com/ws/-/ws-6.2.2.tgz#dd5cdbd57a9979916097652d78f1cc5faea0c32e"
   integrity sha512-zmhltoSR8u1cnDsD43TX59mzoMZsLKqUweyYBAIvTngR3shc0W6aOZylZmq/7hqyVxPdi+5Ud2QInblgyE72fw==
   dependencies:
     async-limiter "~1.0.0"
 
-ws@^7, ws@^7.0.0, ws@^7.2.3:
-  version "7.5.3"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.3.tgz#160835b63c7d97bfab418fc1b8a9fced2ac01a74"
-  integrity sha512-kQ/dHIzuLrS6Je9+uv81ueZomEwH0qVYstcAQ4/Z93K8zeko9gtAbttJWzoC5ukqXY1PpoouV3+VSOqEAFt5wg==
-
-ws@^7.4.6:
+ws@^7, ws@^7.0.0, ws@^7.2.3, ws@^7.4.6:
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.5.tgz#8b4bc4af518cfabd0473ae4f99144287b33eb881"
   integrity sha512-BAkMFcAzl8as1G/hArkxOxq3G7pjUqQ3gzYbLL0/5zNkph70e+lCoxBGnm6AW1+/aiNeV4fnKqZ8m4GZewmH2w==
