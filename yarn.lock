@@ -14708,9 +14708,9 @@ react-native-web@0.17.5, react-native-web@^0.17.5:
     prop-types "^15.6.0"
 
 react-native-windows@^0.64.3:
-  version "0.64.25"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.64.25.tgz#7c9a4132f941bab2d6579751e8224f6d966d328c"
-  integrity sha512-s6Qe2VoMsYPwy2A2vcKyWDCEsJ2SC7lbnI6eQTRpRNnTS3SCAkceB2RMJpt6bNL+CK80JYLat7G8hfNQt/ZClw==
+  version "0.64.26"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.64.26.tgz#f6c3940edef9054cbcc21cd8b987bb59ec1e9f43"
+  integrity sha512-5wSti+qpWkoYNxBAaJY0oR88g2r06T/O6OL1JiNhwMb9ZYz3JuWzpwz6ft2AKBc+RHHFMVZxzXwShzxgfjYLdg==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^26.5.0"
@@ -18071,26 +18071,14 @@ ws@^5.2.2:
   dependencies:
     async-limiter "~1.0.0"
 
-ws@^6.0.0, ws@^6.2.1:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-6.2.1.tgz#442fdf0a47ed64f59b6a5d8ff130f4748ed524fb"
-  integrity sha512-GIyAXC2cB7LjvpgMt9EKS2ldqr0MTrORaleiOno6TweZ6r3TKtoFQWay/2PceJ3RuBasOHzXNn5Lrw1X0bEjqA==
-  dependencies:
-    async-limiter "~1.0.0"
-
-ws@^6.1.4:
+ws@^6.0.0, ws@^6.1.4, ws@^6.2.1:
   version "6.2.2"
   resolved "https://registry.yarnpkg.com/ws/-/ws-6.2.2.tgz#dd5cdbd57a9979916097652d78f1cc5faea0c32e"
   integrity sha512-zmhltoSR8u1cnDsD43TX59mzoMZsLKqUweyYBAIvTngR3shc0W6aOZylZmq/7hqyVxPdi+5Ud2QInblgyE72fw==
   dependencies:
     async-limiter "~1.0.0"
 
-ws@^7, ws@^7.0.0, ws@^7.2.3:
-  version "7.5.3"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.3.tgz#160835b63c7d97bfab418fc1b8a9fced2ac01a74"
-  integrity sha512-kQ/dHIzuLrS6Je9+uv81ueZomEwH0qVYstcAQ4/Z93K8zeko9gtAbttJWzoC5ukqXY1PpoouV3+VSOqEAFt5wg==
-
-ws@^7.4.6:
+ws@^7, ws@^7.0.0, ws@^7.2.3, ws@^7.4.6:
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.5.tgz#8b4bc4af518cfabd0473ae4f99144287b33eb881"
   integrity sha512-BAkMFcAzl8as1G/hArkxOxq3G7pjUqQ3gzYbLL0/5zNkph70e+lCoxBGnm6AW1+/aiNeV4fnKqZ8m4GZewmH2w==
